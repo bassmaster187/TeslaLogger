@@ -63,7 +63,7 @@ if (isset($id) && strlen($id) > 0)
         'http' => [
                 'method' => 'POST',
                 'user_agent' => 'PHP',
-                'header'  => "Content-type: application/x-www-form-urlencoded\r\nContent-Length: ".strlen($JSON)."\r\n",
+                'header'  => "Content-type: application/x-www-form-urlencoded\r\nContent-Length: ".strlen($csvtext)."\r\n",
                 'content' => $csvtext
         ]    
         ]));
@@ -79,7 +79,7 @@ else
                 'http' => [
                         'method' => 'POST',
                         'user_agent' => 'PHP',
-                        'header'  => "Content-type: application/x-www-form-urlencoded\r\nContent-Length: ".strlen($JSON)."\r\n",
+                        'header'  => "Content-type: application/x-www-form-urlencoded\r\nContent-Length: ".strlen($csvtext)."\r\n",
                         'content' => $csvtext
                 ]    
                 ]));

@@ -147,7 +147,10 @@ namespace TeslaLogger
             
             if (fsw == null)
             {
-                fsw = new FileSystemWatcher(FileManager.GetExecutingPath(), "*.csv");
+                var path = FileManager.GetExecutingPath();
+                path = path.Replace("Debug/net8.0/", "");
+
+                fsw = new FileSystemWatcher(path, "*.csv");
                 FSWCounter++;
                 if (FSWCounter > 1) 
                 {
