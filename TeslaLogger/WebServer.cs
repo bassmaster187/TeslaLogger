@@ -199,8 +199,16 @@ namespace TeslaLogger
                 }
 
                 var url = request.Url;
-
-                if (url.Segments.Length == 3)
+                if (url.Segments.Length == 2)
+                {
+                    switch (url.Segments[1])
+                    {
+                        case "backup":
+                            Backup(response);
+                            return;
+                    }
+                }
+                else if (url.Segments.Length == 3)
                 {
                     switch (url.Segments[1])
                     {
@@ -418,6 +426,13 @@ namespace TeslaLogger
                 ex.ToExceptionless().FirstCarUserID().Submit();
                 Logfile.Log($"WebServer Exception Localpath: {localpath}\r\n" + ex.ToString());
             }
+        }
+
+        private void Backup(HttpListenerResponse response)
+        {
+            Logfile.Log("Start Backup");
+            string ret = Tools.ExecMono("/bin/bash", "/etc/teslalogger/backup.sh");
+            WriteString(response, ret);
         }
 
         private void Taillogfile(HttpListenerResponse response, Uri url)

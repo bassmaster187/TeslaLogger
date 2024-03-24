@@ -1,7 +1,7 @@
 <?php
 $installed = "?";
 
-copy("/etc/teslalogger/changelog.md", "/tmp/changelog.md");
+copy("/tmp/changelog.md", "/tmp/changelog_last.md");
 
 header("Location: index.php");
 ?>

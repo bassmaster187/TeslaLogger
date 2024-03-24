@@ -450,7 +450,7 @@ function ShowInfo()
 		$("#PositiveButton").click(function(){window.location.href='https://github.com/bassmaster187/TeslaLogger/blob/master/docker_setup.md#docker-update--upgrade';});
 		$("#NegativeButton").hide();
 	<?php
-	} else if (isDocker() && !DatasourceUpdated())
+	} else if (isDocker() && !DatasourceUpdated() && !isDockerNET8())
 	{?>
 		$("#InfoText").html("<h1>Please update datasource.yaml file. Check: <a href='https://github.com/bassmaster187/TeslaLogger/blob/master/docker_setup.md#docker-update--upgrade'>LINK</a></h1>");
 		$(".HeaderT").show();
@@ -458,7 +458,7 @@ function ShowInfo()
 		$("#NegativeButton").hide();
 	<?php
 	}
-	else if (!files_are_equal("/etc/teslalogger/changelog.md","/tmp/changelog.md"))
+	else if (!files_are_equal("/tmp/changelog_last.md","/tmp/changelog.md"))
 	{?>
 		$.get("changelog_plain.php").success(function(data){
 			$("#InfoText").html(data);

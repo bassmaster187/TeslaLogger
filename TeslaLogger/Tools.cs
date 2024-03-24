@@ -831,7 +831,7 @@ namespace TeslaLogger
 
             try
             {
-                if (!Tools.IsMono())
+                if (!Tools.IsMono() && !Tools.IsDocker())
                 {
                     return "";
                 }

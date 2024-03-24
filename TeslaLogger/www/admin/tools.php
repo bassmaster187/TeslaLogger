@@ -11,6 +11,12 @@ function isDocker()
     return file_exists($dockerfile);
 }
 
+function isDockerNET8()
+{
+    $dockerfile = "/var/tmp/dockernet8";
+    return file_exists($dockerfile);
+}
+
 function GetFileFromTeslaloggerAndWriteToTMP($filename)
 {
     $url = GetTeslaloggerURL("getfile/$filename");
