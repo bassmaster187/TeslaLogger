@@ -1,4 +1,5 @@
 <?PHP
+require_once("tools.php");
 $Text = $_POST["Text"];
 $lat = $_POST["lat"];
 $lng = $_POST["lng"];
@@ -21,7 +22,7 @@ $fp = null;
 if (isset($id) && strlen($id) > 0)
 {
         $date = date("ymdhis");
-        copy($file, "/tmp/geofence-private-$date.csv");
+        copy($filename, "/tmp/geofence-private-$date.csv");
 
         $fp = fopen($filename, "r+");
         while ($line = fgets($fp)) {
