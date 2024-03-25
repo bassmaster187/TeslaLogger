@@ -378,6 +378,7 @@ namespace TeslaLogger
 
                             default:
                                 Log("Main loop default reached with state: " + GetCurrentState().ToString());
+                                Thread.Sleep(30000);
                                 break;
                         }
 
