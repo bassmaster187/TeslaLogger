@@ -1879,7 +1879,7 @@ WHERE
                     FileInfo fileInfo = new FileInfo(path);
                     HttpResponseMessage response = await httpClient.GetAsync(uri).ConfigureAwait(true);
                     _ = response.EnsureSuccessStatusCode();
-                    using (Stream responseContentStream = await response.Content.ReadAsStreamAsync().ConfigureAwait(true))
+                    using (Stream responseContentStream = response.Content.ReadAsStreamAsync().Result)
                     {
                         using (FileStream outputFileStream = File.Create(fileInfo.FullName))
                         {
