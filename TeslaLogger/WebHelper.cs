@@ -777,10 +777,13 @@ namespace TeslaLogger
                         dynamic jsonResult = JsonConvert.DeserializeObject(result);
                         if (jsonResult.ContainsKey("expires_in"))
                         {
-                            Tools.DebugLog("access token expires: " + DateTime.Now.AddSeconds((int)(jsonResult["expires_in"])));
+                            Log("access token expires: " + DateTime.Now.AddSeconds((int)(jsonResult["expires_in"])));
                             CacheItemPolicy policy = new CacheItemPolicy();
                             policy.AbsoluteExpiration = DateTime.Now.AddSeconds((int)(jsonResult["expires_in"])).AddMinutes(-5);
-                            policy.RemovedCallback = new CacheEntryRemovedCallback((CacheEntryRemovedArguments _) => { Tools.DebugLog($"#{car.CarInDB}: access token will expire in 5 minutes"); GetToken(); });
+                            policy.RemovedCallback = new CacheEntryRemovedCallback((CacheEntryRemovedArguments _) => { 
+                                Log($"Access token will expire in 5 minutes"); 
+                                GetToken(); 
+                            });
                             _ = MemoryCache.Default.Add("RefreshToken_" + car.CarInDB, policy, policy);
                         }
                         string access_token = jsonResult["access_token"];
