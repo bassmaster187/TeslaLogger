@@ -1502,9 +1502,9 @@ namespace TeslaLogger
                     // copy to logs dir with timestamp
                     ExecMono("/bin/cp", nohup + " " + targetFile);
                     // gzip copied file
-                    ExecMono("bin/gzip", targetFile);
+                    ExecMono("/bin/gzip", targetFile);
                     // empty nohup.out
-                    ExecMono("bin/echo", " > " + nohup);
+                    ExecMono("/bin/echo", " > " + nohup);
                     // cleanup old logfile backups
                     // old means older than 90 days
                     DirectoryInfo di = new DirectoryInfo(LogDir);
