@@ -1,3 +1,9 @@
+# Version 1.57.11
+- Rollback code to 1.57.9
+
+# Version 1.57.10
+- Show virtual key and access type in settings / cars
+
 # Version 1.57.9
 - New Wallbox supported: cFos
 - New Wallbox supported: EVCC
