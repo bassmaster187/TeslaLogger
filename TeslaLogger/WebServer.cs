@@ -2179,7 +2179,7 @@ DROP TABLE chargingstate_bak";
         private static void Debug_TeslaLoggerMessages(HttpListenerRequest request, HttpListenerResponse response)
         {
             response.AddHeader("Content-Type", "text/html; charset=utf-8");
-            WriteString(response, "<html><head></head><body><table border=\"1\">" + string.Concat(Tools.debugBuffer.Select(a => string.Format(Tools.ciEnUS, "<tr><td>{0}&nbsp;{1}</td></tr>", a.Item1, a.Item2))) + "</table></body></html>");
+            WriteString(response, "<html><head></head><body><table border=\"1\">" + string.Concat(Tools.debugBuffer.Select(a => string.Format(Tools.ciEnUS, "<tr><td>{0}&nbsp;{1}</td></tr>", a.Item1, a.Item2))) + "</table></body></html>", true);
         }
 
         private static void Admin_passwortinfo(HttpListenerRequest request, HttpListenerResponse response)
@@ -3107,13 +3107,13 @@ FROM
             WriteString(response, responseString);
         }
 
-        private static void WriteString(HttpListenerResponse response, string responseString)
+        private static void WriteString(HttpListenerResponse response, string responseString, bool asHtml=false)
         {
             response.ContentEncoding = Encoding.UTF8;
             byte[] buffer = Encoding.UTF8.GetBytes(responseString);
             // Get a response stream and write the response to it.
             response.ContentLength64 = buffer.Length;
-            response.ContentType = "text/plain; charset=utf-8";
+            response.ContentType = $"text/{(asHtml?"html":"plain")}; charset=utf-8";
             Stream output = response.OutputStream;
             if (output != null && output.CanWrite)
             {
