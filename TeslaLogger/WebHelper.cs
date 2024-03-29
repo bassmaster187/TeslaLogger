@@ -646,8 +646,11 @@ namespace TeslaLogger
             try
             {
                 var c = GethttpclientTeslaAPI(true); // dispose old client and create a new Client with new token.
-                _ = IsOnline(true).Result; // get new Tesla_Streamingtoken;
-                                           // restart streaming thread with new token
+                lock (isOnlineLock)
+                {
+                    _ = IsOnline(true).Result; // get new Tesla_Streamingtoken;
+                                               // restart streaming thread with new token
+                }
                 RestartStreamThreadWithTask();
             }
             catch (Exception ex)
@@ -2284,30 +2287,61 @@ namespace TeslaLogger
                 DateTime start = DateTime.UtcNow;
 
                 if (c != null && accountid > 0)
+                { 
                     resultContent = c as String;
+                }
                 else
                 {
-
-                    HttpClient client = GethttpclientTeslaAPI();
-                    string adresse = "https://owner-api.teslamotors.com/api/1/products?orders=true";
-
-                    if (car.oldAPIchinaCar)
-                        adresse = "https://owner-api.vn.cloud.tesla.cn/api/1/products?orders=true";
+                    string adresse;
 
                     if (car.FleetAPI)
+                    {
                         adresse = apiaddress + "api/1/vehicles";
+                        //adresse = new Uri(new Uri(apiaddress), "api/1/vehicles");
+                    }
+                    else
+                    {
+                        //var adresse = new Uri("https://owner-api.teslamotors.com/api/1/products?orders=true");
+                        adresse = "https://owner-api.teslamotors.com/api/1/products?orders=true";
+                        if (car.oldAPIchinaCar)
+                        {
+                            //adresse = new Uri("https://owner-api.vn.cloud.tesla.cn/api/1/products?orders=true");
+                            adresse = "https://owner-api.vn.cloud.tesla.cn/api/1/products?orders=true";
+                        }
+                    }
 
-                    result = await client.GetAsync(adresse);
+                    // Moved down to minimize risk of retrieving old instance that will be disposed in another thread during Token update
+                    // before getAsync() is called.
+                    // It looks like this leads to incorrect behavior in .NET 4.x
+                    HttpClient client = GethttpclientTeslaAPI();
+                    var getTask = client.GetAsync(adresse);
+                    // Wait for 2 minutes
+                    if (getTask.Wait(120000))
+                    {
+                        result = getTask.Result;
 
-                    if (returnOnUnauthorized && result?.StatusCode == HttpStatusCode.Unauthorized)
-                        return "NULL";
+                        if (returnOnUnauthorized && result?.StatusCode == HttpStatusCode.Unauthorized)
+                            return "NULL";
 
-                    if (LoginRetry(result))
-                        return "NULL";
+                        if (LoginRetry(result))
+                            return "NULL";
 
 
-                    resultContent = await result.Content.ReadAsStringAsync();
-                    // resultContent = Tools.ConvertBase64toString("");
+                        var readContentTask = result.Content.ReadAsStringAsync();
+                        if (readContentTask.Wait(120000))
+                        {
+                            resultContent = readContentTask.Result;
+                            // resultContent = Tools.ConvertBase64toString("");
+                        }
+                        else
+                        {
+                            Log("isOnline() -> reading HTTP response body timed out");
+                        }
+                    }
+                    else
+                    {
+                        Log("isOnline() -> retrieve products/vehicles timed out");
+                    }
                 }
 
 
