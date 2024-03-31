@@ -645,9 +645,9 @@ namespace TeslaLogger
 
             try
             {
-                var c = GethttpclientTeslaAPI(true); // dispose old client and create a new Client with new token.
                 lock (isOnlineLock)
                 {
+                    var c = GethttpclientTeslaAPI(true); // dispose old client and create a new Client with new token.
                     _ = IsOnline(true).Result; // get new Tesla_Streamingtoken;
                                                // restart streaming thread with new token
                 }
