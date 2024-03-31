@@ -779,11 +779,15 @@ namespace TeslaLogger
                             Log("access token expires: " + DateTime.Now.AddSeconds((int)(jsonResult["expires_in"])));
                             CacheItemPolicy policy = new CacheItemPolicy();
                             policy.AbsoluteExpiration = DateTime.Now.AddSeconds((int)(jsonResult["expires_in"])).AddMinutes(-5);
-                            policy.RemovedCallback = new CacheEntryRemovedCallback((CacheEntryRemovedArguments _) => {
+                            policy.RemovedCallback = new CacheEntryRemovedCallback((CacheEntryRemovedArguments _) =>
+                            {
                                 Tools.DebugLog($"#{car.CarInDB}: access token will expire in 5 minutes");
                                 UpdateTeslaTokenFromRefreshToken();
                             });
                             _ = MemoryCache.Default.Add("RefreshToken_" + car.CarInDB, policy, policy);
+                            GethttpclientTeslaAPI(false, jsonResult["access_token"]);
+                            GethttpclientTeslaNearbyChargingSites(false, jsonResult["access_token"]);
+                            GethttpclientgetChargingHistoryV2(false, jsonResult["access_token"]);
                         }
                         string access_token = jsonResult["access_token"];
 
@@ -1789,7 +1793,7 @@ namespace TeslaLogger
             return false;
         }
 
-        HttpClient GethttpclientTeslaAPI(bool forceNewClient = false)
+        HttpClient GethttpclientTeslaAPI(bool forceNewClient = false, string teslaToken = "")
         {
             lock (httpClientLock)
             {
@@ -1814,11 +1818,17 @@ namespace TeslaLogger
                     }
                 }
 
+                if (teslaToken.Length > 0)
+                {
+                    httpclientTeslaAPI.DefaultRequestHeaders.Remove("Authorization");
+                    httpclientTeslaAPI.DefaultRequestHeaders.Add("Authorization", "Bearer " + teslaToken);
+                }
+
                 return httpclientTeslaAPI;
             }
         }
 
-        HttpClient GethttpclientTeslaNearbyChargingSites(bool forceNewClient = false)
+        HttpClient GethttpclientTeslaNearbyChargingSites(bool forceNewClient = false, string teslaToken = "")
         {
             lock (httpClientLock)
             {
@@ -1850,11 +1860,17 @@ namespace TeslaLogger
                     }
                 }
 
+                if (teslaToken.Length > 0)
+                {
+                    httpclientTeslaChargingSites.DefaultRequestHeaders.Remove("Authorization");
+                    httpclientTeslaChargingSites.DefaultRequestHeaders.Add("Authorization", "Bearer " + teslaToken);
+                }
+
                 return httpclientTeslaChargingSites;
             }
         }
 
-        HttpClient GethttpclientgetChargingHistoryV2(bool forceNewClient = false)
+        HttpClient GethttpclientgetChargingHistoryV2(bool forceNewClient = false, string teslaToken = "")
         {
             lock (httpClientLock)
             {
@@ -1879,6 +1895,12 @@ namespace TeslaLogger
                     httpclientgetChargingHistoryV2.DefaultRequestHeaders.Add("Accept", "*/*");
                     httpclientgetChargingHistoryV2.Timeout = TimeSpan.FromSeconds(120);
                     httpclientgetChargingHistoryV2Token = Tesla_token;
+                }
+
+                if (teslaToken.Length > 0)
+                {
+                    httpclientgetChargingHistoryV2.DefaultRequestHeaders.Remove("Authorization");
+                    httpclientgetChargingHistoryV2.DefaultRequestHeaders.Add("Authorization", "Bearer " + teslaToken);
                 }
 
                 return httpclientgetChargingHistoryV2;
