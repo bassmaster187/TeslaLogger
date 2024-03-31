@@ -4803,7 +4803,7 @@ DESC", con))
                 string adresse = apiaddress + "api/1/vehicles/" + Tesla_id + "/" + cmd;
 
                 DateTime start = DateTime.UtcNow;
-                Tools.DebugLog($"GetCommand request: {adresse}");
+                Tools.DebugLog($"GetCommand #{car.CarInDB} request: {adresse}");
                 HttpResponseMessage result = client.GetAsync(new Uri(adresse)).Result;
 
                 if (result.IsSuccessStatusCode)
