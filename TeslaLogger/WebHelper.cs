@@ -785,9 +785,9 @@ namespace TeslaLogger
                                 UpdateTeslaTokenFromRefreshToken();
                             });
                             _ = MemoryCache.Default.Add("RefreshToken_" + car.CarInDB, policy, policy);
-                            GethttpclientTeslaAPI(false, jsonResult["access_token"]);
-                            GethttpclientTeslaNearbyChargingSites(false, jsonResult["access_token"]);
-                            GethttpclientgetChargingHistoryV2(false, jsonResult["access_token"]);
+                            GethttpclientTeslaAPI(false, jsonResult["access_token"].ToString());
+                            GethttpclientTeslaNearbyChargingSites(false, jsonResult["access_token"].ToString());
+                            GethttpclientgetChargingHistoryV2(false, jsonResult["access_token"].ToString());
                         }
                         string access_token = jsonResult["access_token"];
 
