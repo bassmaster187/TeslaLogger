@@ -3178,7 +3178,7 @@ FROM
             WriteString(response, "");
         }
 
-        private static void Admin_UpdateElevation(HttpListenerRequest request, HttpListenerResponse response)
+        private static void Admin_UpdateElevation(HttpListenerRequest _, HttpListenerResponse response)
         {
             int from = 1;
             int to = 1;
@@ -3192,7 +3192,7 @@ FROM
                         MySqlDataReader dr = SQLTracer.TraceDR(cmd);
                         if (dr.Read() && dr[0] != DBNull.Value)
                         {
-                            _ = int.TryParse(dr[0].ToString(), out to);
+                            int.TryParse(dr[0].ToString(), out to);
                         }
                         con.Close();
                     }
