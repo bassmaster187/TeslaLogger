@@ -52,7 +52,7 @@ namespace TeslaLogger
         }
 
         private double lastOdometerKM; // defaults to 0;
-        internal string Tesla_token = "";
+        private string tesla_token = "";
         internal string Tesla_id = "";
         internal string Tesla_vehicle_id = "";
         internal string Tesla_Streamingtoken = "";
@@ -99,10 +99,10 @@ namespace TeslaLogger
         internal HttpClient httpClientForAuthentification;
         internal static HttpClient httpClientABRP; // defaults to null;
         internal HttpClient httpClientSuCBingo; // defaults to null;
-        internal HttpClient httpclientTeslaAPI; // defaults to null;
-        internal HttpClient httpclientTeslaChargingSites; // defaults to null;
-        internal HttpClient httpclientgetChargingHistoryV2; // defaults to null;
-        internal static object httpClientLock = new object();
+        private HttpClient httpClientTeslaAPI; // defaults to null;
+        private HttpClient httpClientTeslaChargingSites; // defaults to null;
+        private HttpClient httpClientGetChargingHistoryV2; // defaults to null;
+        private static object httpClientLock = new object();
 
         DateTime lastRefreshToken = DateTime.MinValue;
 
@@ -115,9 +115,9 @@ namespace TeslaLogger
                 httpClientForAuthentification.Dispose();
                 httpClientABRP.Dispose();
                 httpClientSuCBingo.Dispose();
-                httpclientTeslaAPI.Dispose();
-                httpclientTeslaChargingSites.Dispose();
-                httpclientgetChargingHistoryV2.Dispose();
+                httpClientTeslaAPI.Dispose();
+                httpClientTeslaChargingSites.Dispose();
+                httpClientGetChargingHistoryV2.Dispose();
             }
             // Free native resources.
         }
@@ -643,10 +643,6 @@ namespace TeslaLogger
 
             try
             {
-                // update Clients with new token.
-                _ = GethttpclientTeslaAPI(true);
-                _ = GethttpclientTeslaNearbyChargingSites(true);
-                _ = GethttpclientgetChargingHistoryV2(true);
                 _ = IsOnline(true).Result; // get new Tesla_Streamingtoken;
                                            // restart streaming thread with new token
                 RestartStreamThreadWithTask();
@@ -1791,83 +1787,62 @@ namespace TeslaLogger
             return false;
         }
 
-        HttpClient GethttpclientTeslaAPI(bool forceNewClient = false)
+        HttpClient GethttpclientTeslaAPI()
         {
             lock (httpClientLock)
             {
-                if (forceNewClient && httpclientTeslaAPI != null)
-                {
-                    httpclientTeslaAPI.DefaultRequestHeaders.Remove("Authorization");
-                    httpclientTeslaAPI.DefaultRequestHeaders.Add("Authorization", "Bearer " + Tesla_token);
-                }
-
-                if (httpclientTeslaAPI == null)
+                if (httpClientTeslaAPI == null)
                 {
                     if (String.IsNullOrEmpty(Tesla_token) || Tesla_token == "NULL")
                     {
                         car.Log("ERROR: Create HTTP Client with wrong Tesla Token!");
                     }
 
-                    httpclientTeslaAPI = new HttpClient();
+                    httpClientTeslaAPI = new HttpClient();
                     {
-                        httpclientTeslaAPI.DefaultRequestHeaders.Add("x-tesla-user-agent", "TeslaApp/3.4.4-350/fad4a582e/android/8.1.0");
-                        httpclientTeslaAPI.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (Linux; Android 8.1.0; Pixel XL Build/OPM4.171019.021.D1; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/68.0.3440.91 Mobile Safari/537.36");
-                        httpclientTeslaAPI.DefaultRequestHeaders.Add("Authorization", "Bearer " + Tesla_token);
-                        httpclientTeslaAPI.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
-                        httpclientTeslaAPI.Timeout = TimeSpan.FromSeconds(11);
+                        httpClientTeslaAPI.DefaultRequestHeaders.Add("x-tesla-user-agent", "TeslaApp/3.4.4-350/fad4a582e/android/8.1.0");
+                        httpClientTeslaAPI.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (Linux; Android 8.1.0; Pixel XL Build/OPM4.171019.021.D1; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/68.0.3440.91 Mobile Safari/537.36");
+                        httpClientTeslaAPI.DefaultRequestHeaders.Add("Authorization", "Bearer " + Tesla_token);
+                        httpClientTeslaAPI.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+                        httpClientTeslaAPI.Timeout = TimeSpan.FromSeconds(11);
                     }
                 }
-
-                return httpclientTeslaAPI;
+                return httpClientTeslaAPI;
             }
         }
 
-        HttpClient GethttpclientTeslaNearbyChargingSites(bool forceNewClient = false)
+        HttpClient GethttpclientTeslaNearbyChargingSites()
         {
             lock (httpClientLock)
             {
-                if (forceNewClient && httpclientTeslaChargingSites != null)
+                if (httpClientTeslaChargingSites == null)
                 {
-                    httpclientTeslaChargingSites.DefaultRequestHeaders.Remove("Authorization");
-                    httpclientTeslaChargingSites.DefaultRequestHeaders.Add("Authorization", "Bearer " + Tesla_token);
-                }
-
-                if (httpclientTeslaChargingSites == null)
-                {
-                    httpclientTeslaChargingSites = new HttpClient();
+                    httpClientTeslaChargingSites = new HttpClient();
                     {
                         // https://github.com/ev-map/EVMap/blob/master/app/src/main/java/net/vonforst/evmap/api/availability/TeslaAvailabilityDetector.kt#L444
-                        httpclientTeslaChargingSites.DefaultRequestHeaders.Add("x-tesla-user-agent", "TeslaApp/4.19.5-1667/3a5d531cc3/android/27");
-                        httpclientTeslaChargingSites.DefaultRequestHeaders.Add("User-Agent", "okhttp/4.9.2");
-                        httpclientTeslaChargingSites.DefaultRequestHeaders.Add("Authorization", "Bearer " + Tesla_token);
-                        httpclientTeslaChargingSites.DefaultRequestHeaders.Add("Accept", "*/*");
-                        httpclientTeslaChargingSites.Timeout = TimeSpan.FromSeconds(11);
+                        httpClientTeslaChargingSites.DefaultRequestHeaders.Add("x-tesla-user-agent", "TeslaApp/4.19.5-1667/3a5d531cc3/android/27");
+                        httpClientTeslaChargingSites.DefaultRequestHeaders.Add("User-Agent", "okhttp/4.9.2");
+                        httpClientTeslaChargingSites.DefaultRequestHeaders.Add("Authorization", "Bearer " + Tesla_token);
+                        httpClientTeslaChargingSites.DefaultRequestHeaders.Add("Accept", "*/*");
+                        httpClientTeslaChargingSites.Timeout = TimeSpan.FromSeconds(11);
                     }
                 }
-
-                return httpclientTeslaChargingSites;
+                return httpClientTeslaChargingSites;
             }
         }
 
-        HttpClient GethttpclientgetChargingHistoryV2(bool forceNewClient = false)
+        HttpClient GethttpclientgetChargingHistoryV2()
         {
             lock (httpClientLock)
             {
-                if (forceNewClient && httpclientgetChargingHistoryV2 != null)
+                if (httpClientGetChargingHistoryV2 == null)
                 {
-                    httpclientgetChargingHistoryV2.DefaultRequestHeaders.Remove("Authorization");
-                    httpclientgetChargingHistoryV2.DefaultRequestHeaders.Add("Authorization", "Bearer " + Tesla_token);
+                    httpClientGetChargingHistoryV2 = new HttpClient();
+                    httpClientGetChargingHistoryV2.DefaultRequestHeaders.Add("User-Agent", "curl/8.4.0");
+                    httpClientGetChargingHistoryV2.DefaultRequestHeaders.Add("Accept", "*/*");
+                    httpClientGetChargingHistoryV2.Timeout = TimeSpan.FromSeconds(120);
                 }
-
-                if (httpclientgetChargingHistoryV2 == null)
-                {
-                    httpclientgetChargingHistoryV2 = new HttpClient();
-                    httpclientgetChargingHistoryV2.DefaultRequestHeaders.Add("User-Agent", "curl/8.4.0");
-                    httpclientgetChargingHistoryV2.DefaultRequestHeaders.Add("Accept", "*/*");
-                    httpclientgetChargingHistoryV2.Timeout = TimeSpan.FromSeconds(120);
-                }
-
-                return httpclientgetChargingHistoryV2;
+                return httpClientGetChargingHistoryV2;
             }
         }
 
@@ -2097,7 +2072,7 @@ namespace TeslaLogger
 
                         if (LoginRetry(result))
                         {
-                            client = GethttpclientTeslaAPI(true);
+                            client = GethttpclientTeslaAPI();
 
                             DoGetVehiclesRequest(out resultContent, client, adresse, out resultTask, out result);
 
@@ -5358,6 +5333,36 @@ DESC", con))
                 {
                     _drivingOrChargingByStream = value;
                     car.Log("DrivingOrChargingByStream: " + _drivingOrChargingByStream.ToString());
+                }
+            }
+        }
+
+        internal string Tesla_token
+        {
+            get => tesla_token;
+            set
+            {
+                lock (httpClientLock)
+                {
+                    tesla_token = value;
+                    if (!string.IsNullOrEmpty(value))
+                    {
+                        if (httpClientTeslaAPI != null)
+                        {
+                            httpClientTeslaAPI.DefaultRequestHeaders.Remove("Authorization");
+                            httpClientTeslaAPI.DefaultRequestHeaders.Add("Authorization", "Bearer " + value);
+                        }
+                        if (httpClientGetChargingHistoryV2 != null)
+                        {
+                            httpClientGetChargingHistoryV2.DefaultRequestHeaders.Remove("Authorization");
+                            httpClientGetChargingHistoryV2.DefaultRequestHeaders.Add("Authorization", "Bearer " + value);
+                        }
+                        if (httpClientTeslaChargingSites != null)
+                        {
+                            httpClientTeslaChargingSites.DefaultRequestHeaders.Remove("Authorization");
+                            httpClientTeslaChargingSites.DefaultRequestHeaders.Add("Authorization", "Bearer " + value);
+                        }
+                    }
                 }
             }
         }
