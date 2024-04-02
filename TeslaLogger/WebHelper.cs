@@ -670,7 +670,7 @@ namespace TeslaLogger
                 */
 
 
-                var response = GethttpclientTeslaAPI().GetAsync(new Uri("https://teslalogger.de:4444/api/1/users/region")).Result;
+                var response = GetHttpClientTeslaAPI().GetAsync(new Uri("https://teslalogger.de:4444/api/1/users/region")).Result;
                 string result = response.Content.ReadAsStringAsync().Result;
                 if (response.IsSuccessStatusCode)
                 {
@@ -779,9 +779,12 @@ namespace TeslaLogger
                             policy.RemovedCallback = new CacheEntryRemovedCallback((CacheEntryRemovedArguments _) =>
                             {
                                 Tools.DebugLog($"#{car.CarInDB}: access token will expire in 5 minutes");
-                                UpdateTeslaTokenFromRefreshToken();
+                                lock (httpClientLock)
+                                {
+                                    UpdateTeslaTokenFromRefreshToken();
+                                }
                             });
-                            _ = MemoryCache.Default.Add("RefreshToken_" + car.CarInDB, policy, policy);
+                            _ = MemoryCache.Default.Add("RefreshToken_" + car.CarInDB+ $"_{Environment.TickCount}", policy, policy);
                         }
                         string access_token = jsonResult["access_token"];
 
@@ -1787,7 +1790,7 @@ namespace TeslaLogger
             return false;
         }
 
-        HttpClient GethttpclientTeslaAPI()
+        HttpClient GetHttpClientTeslaAPI()
         {
             lock (httpClientLock)
             {
@@ -2036,7 +2039,7 @@ namespace TeslaLogger
                 }
                 else
                 {
-                    HttpClient client = GethttpclientTeslaAPI();
+                    HttpClient client = GetHttpClientTeslaAPI();
                     string adresse = "https://owner-api.teslamotors.com/api/1/products?orders=true";
 
                     if (car.FleetAPI)
@@ -2072,7 +2075,7 @@ namespace TeslaLogger
 
                         if (LoginRetry(result))
                         {
-                            client = GethttpclientTeslaAPI();
+                            client = GetHttpClientTeslaAPI();
 
                             DoGetVehiclesRequest(out resultContent, client, adresse, out resultTask, out result);
 
@@ -2257,7 +2260,7 @@ namespace TeslaLogger
                 else
                 {
 
-                    HttpClient client = GethttpclientTeslaAPI();
+                    HttpClient client = GetHttpClientTeslaAPI();
                     string adresse = "https://owner-api.teslamotors.com/api/1/products?orders=true";
 
                     if (car.oldAPIchinaCar)
@@ -4737,7 +4740,7 @@ DESC", con))
                 }
 
                 string cacheKeyNotFound = "HttpNotFoundCounter_" + cmd + "_" + cacheGUID;
-                HttpClient client = GethttpclientTeslaAPI();
+                HttpClient client = GetHttpClientTeslaAPI();
 
                 string adresse = apiaddress + "api/1/vehicles/" + Tesla_id + "/" + cmd;
 
@@ -4979,7 +4982,7 @@ DESC", con))
             string resultContent = "";
             try
             {
-                HttpClient client = GethttpclientTeslaAPI();
+                HttpClient client = GetHttpClientTeslaAPI();
 
                 string url = apiaddress + "api/1/vehicles/" + Tesla_id + "/" + cmd;
 
@@ -5563,7 +5566,7 @@ DESC", con))
                 {
                     Tools.SetThreadEnUS();
 
-                    var response = GethttpclientTeslaAPI().PostAsync(new Uri("https://teslalogger.de:4444/api/1/vehicles/fleet_status"), content).Result;
+                    var response = GetHttpClientTeslaAPI().PostAsync(new Uri("https://teslalogger.de:4444/api/1/vehicles/fleet_status"), content).Result;
                     string result = response.Content.ReadAsStringAsync().Result;
                     if (response.IsSuccessStatusCode)
                     {
