@@ -774,17 +774,17 @@ namespace TeslaLogger
                         if (jsonResult.ContainsKey("expires_in"))
                         {
                             Log("access token expires: " + DateTime.Now.AddSeconds((int)(jsonResult["expires_in"])));
-                            CacheItemPolicy policy = new CacheItemPolicy();
-                            policy.AbsoluteExpiration = DateTime.Now.AddSeconds((int)(jsonResult["expires_in"])).AddMinutes(-5);
-                            policy.RemovedCallback = new CacheEntryRemovedCallback((CacheEntryRemovedArguments _) =>
-                            {
-                                Tools.DebugLog($"#{car.CarInDB}: access token will expire in 5 minutes");
-                                lock (httpClientLock)
-                                {
-                                    UpdateTeslaTokenFromRefreshToken();
-                                }
-                            });
-                            _ = MemoryCache.Default.Add("RefreshToken_" + car.CarInDB+ $"_{Environment.TickCount}", policy, policy);
+                            //CacheItemPolicy policy = new CacheItemPolicy();
+                            //policy.AbsoluteExpiration = DateTime.Now.AddSeconds((int)(jsonResult["expires_in"])).AddMinutes(-5);
+                            //policy.RemovedCallback = new CacheEntryRemovedCallback((CacheEntryRemovedArguments _) =>
+                            //{
+                            //    Tools.DebugLog($"#{car.CarInDB}: access token will expire in 5 minutes");
+                            //    lock (httpClientLock)
+                            //    {
+                            //        UpdateTeslaTokenFromRefreshToken();
+                            //    }
+                            //});
+                            //_ = MemoryCache.Default.Add("RefreshToken_" + car.CarInDB+ $"_{Environment.TickCount}", policy, policy);
                         }
                         string access_token = jsonResult["access_token"];
 
