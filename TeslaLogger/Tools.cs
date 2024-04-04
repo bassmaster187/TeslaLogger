@@ -1504,7 +1504,7 @@ namespace TeslaLogger
                     // gzip copied file
                     ExecMono("/bin/gzip", targetFile);
                     // empty nohup.out
-                    ExecMono("/bin/echo", " > " + nohup);
+                    ExecMono("/bin/sh", $"-c '/bin/echo > {nohup}'");
                     // cleanup old logfile backups
                     // old means older than 90 days
                     DirectoryInfo di = new DirectoryInfo(LogDir);
