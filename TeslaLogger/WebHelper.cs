@@ -4935,30 +4935,31 @@ DESC", con))
             try
             {
                 HttpClient client = GethttpclientgetChargingHistoryV2();
-
-                HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, $"{apiaddress}api/1/dx/charging/history?pageNo={pageNumber}");
-                Tools.DebugLog($"GetChargingHistoryV2 request: {request.RequestUri}");
-                request.Headers.Add("Authorization", "Bearer " + Tesla_token);
-                request.Method = HttpMethod.Get;
-                // xxx request.Content = new StringContent("");
-                if (apiaddress.StartsWith("https://") && apiaddress.EndsWith("/"))
+                using (var request = new HttpRequestMessage(HttpMethod.Get, new Uri($"{apiaddress}api/1/dx/charging/history?pageNo={pageNumber}")))
                 {
-                    request.Headers.Host = apiaddress.Replace("https://", "").Replace("/", "");
-                }
-                // request.Content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+                    Tools.DebugLog($"GetChargingHistoryV2 request: {request.RequestUri}");
+                    request.Headers.Add("Authorization", "Bearer " + Tesla_token);
+                    request.Method = HttpMethod.Get;
+                    // xxx request.Content = new StringContent("");
+                    if (apiaddress.StartsWith("https://") && apiaddress.EndsWith("/"))
+                    {
+                        request.Headers.Host = apiaddress.Replace("https://", "").Replace("/", "");
+                    }
+                    // request.Content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
 
-                DateTime start = DateTime.UtcNow;
-                HttpResponseMessage result = await client.SendAsync(request);
-                resultContent = await result.Content.ReadAsStringAsync();
-                DBHelper.AddMothershipDataToDB("GetChargingHistoryV2", start, (int)result.StatusCode);
+                    DateTime start = DateTime.UtcNow;
+                    HttpResponseMessage result = await client.SendAsync(request);
+                    resultContent = await result.Content.ReadAsStringAsync();
+                    DBHelper.AddMothershipDataToDB("GetChargingHistoryV2", start, (int)result.StatusCode);
 
-                if (!result.IsSuccessStatusCode)
-                {
-                    car.webhelper.getChargingHistoryV2Fail++;
-                    throw new Exception("GetChargingHistoryV2: " + result.StatusCode.ToString() + " CarState: " + car.GetCurrentState().ToString() + " (OK: " + car.webhelper.getChargingHistoryV2OK + " - Fail: " + car.webhelper.getChargingHistoryV2Fail + ")");
+                    if (!result.IsSuccessStatusCode)
+                    {
+                        car.webhelper.getChargingHistoryV2Fail++;
+                        throw new Exception("GetChargingHistoryV2: " + result.StatusCode.ToString() + " CarState: " + car.GetCurrentState().ToString() + " (OK: " + car.webhelper.getChargingHistoryV2OK + " - Fail: " + car.webhelper.getChargingHistoryV2Fail + ")");
+                    }
+                    getChargingHistoryV2OK++;
+                    return resultContent;
                 }
-                getChargingHistoryV2OK++;
-                return resultContent;
             }
             catch (Exception ex)
             {
