@@ -1,4 +1,4 @@
-﻿using System;
+﻿    using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -615,7 +615,6 @@ namespace TeslaLogger
 
                 if (t > 0)
                 {
-                    Tools.DebugLog($"HandleState_Drive Sleep:{t}ms");
                     Thread.Sleep(t); // alle 5 sek eine positionsmeldung
                 }
 
