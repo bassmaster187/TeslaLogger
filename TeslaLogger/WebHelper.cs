@@ -2271,6 +2271,7 @@ namespace TeslaLogger
                     using (var request = new HttpRequestMessage(HttpMethod.Get, new Uri(adresse)))
                     {
                         request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", Tesla_token);
+                        Tools.DebugLog($"IsOnline #{car.CarInDB} request: {adresse}");
                         result = await httpClientTeslaAPI.SendAsync(request);
 
                         if (returnOnUnauthorized && result?.StatusCode == HttpStatusCode.Unauthorized)
