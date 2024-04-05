@@ -1877,9 +1877,9 @@ WHERE
                         File.Decrypt(path);
                     }
                     FileInfo fileInfo = new FileInfo(path);
-                    HttpResponseMessage response = await httpClient.GetAsync(uri).ConfigureAwait(true);
+                    HttpResponseMessage response = await httpClient.GetAsync(uri).ConfigureAwait(false);
                     _ = response.EnsureSuccessStatusCode();
-                    using (Stream responseContentStream = response.Content.ReadAsStreamAsync().Result)
+                    using (Stream responseContentStream = await response.Content.ReadAsStreamAsync().ConfigureAwait(false))
                     {
                         using (FileStream outputFileStream = File.Create(fileInfo.FullName))
                         {
