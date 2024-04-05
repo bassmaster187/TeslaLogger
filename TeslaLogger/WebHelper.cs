@@ -4750,10 +4750,10 @@ DESC", con))
                 string adresse = apiaddress + "api/1/vehicles/" + Tesla_id + "/" + cmd;
 
                 DateTime start = DateTime.UtcNow;
-                Tools.DebugLog($"GetCommand #{car.CarInDB} request: {adresse}");
                 using (var request = new HttpRequestMessage(HttpMethod.Get, new Uri(adresse)))
                 {
                     request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", Tesla_token);
+                    Tools.DebugLog($"GetCommand #{car.CarInDB} request: {adresse}");
                     HttpResponseMessage result = await httpClientTeslaAPI.SendAsync(request);
 
                     if (result.IsSuccessStatusCode)
