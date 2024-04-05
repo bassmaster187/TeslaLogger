@@ -659,17 +659,9 @@ namespace TeslaLogger
             try
             {
                 if (!car.FleetAPI)
+                {
                     return "";
-
-                /*
-                var state = car.GetCurrentState();
-                
-                if (!(state == Car.TeslaState.Charge
-                    || state == Car.TeslaState.Drive
-                    || state == Car.TeslaState.Online))
-                    return "";
-                */
-
+                }
 
                 var response = GetHttpClientTeslaAPI().GetAsync(new Uri("https://teslalogger.de:4444/api/1/users/region")).Result;
                 string result = response.Content.ReadAsStringAsync().Result;
@@ -1791,28 +1783,28 @@ namespace TeslaLogger
             return false;
         }
 
+        [MethodImpl(MethodImplOptions.Synchronized)]
         HttpClient GetHttpClientTeslaAPI()
         {
-            lock (httpClientLock)
+            if (httpClientTeslaAPI == null)
             {
-                if (httpClientTeslaAPI == null)
+                if (String.IsNullOrEmpty(Tesla_token) || Tesla_token == "NULL")
                 {
-                    if (String.IsNullOrEmpty(Tesla_token) || Tesla_token == "NULL")
-                    {
-                        car.Log("ERROR: Create HTTP Client with wrong Tesla Token!");
-                    }
-
-                    httpClientTeslaAPI = new HttpClient();
-                    {
-                        httpClientTeslaAPI.DefaultRequestHeaders.Add("x-tesla-user-agent", "TeslaApp/3.4.4-350/fad4a582e/android/8.1.0");
-                        httpClientTeslaAPI.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (Linux; Android 8.1.0; Pixel XL Build/OPM4.171019.021.D1; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/68.0.3440.91 Mobile Safari/537.36");
-                        httpClientTeslaAPI.DefaultRequestHeaders.Add("Authorization", "Bearer " + Tesla_token);
-                        httpClientTeslaAPI.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
-                        httpClientTeslaAPI.Timeout = TimeSpan.FromSeconds(11);
-                    }
+                    car.Log("ERROR: Create HTTP Client with wrong Tesla Token!");
                 }
-                return httpClientTeslaAPI;
+
+                httpClientTeslaAPI = new HttpClient();
+                {
+                    httpClientTeslaAPI.DefaultRequestHeaders.Add("x-tesla-user-agent", "TeslaApp/3.4.4-350/fad4a582e/android/8.1.0");
+                    httpClientTeslaAPI.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (Linux; Android 8.1.0; Pixel XL Build/OPM4.171019.021.D1; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/68.0.3440.91 Mobile Safari/537.36");
+                    // do not set auth headers in DefaultRequestHeaders
+                    // https://makolyte.com/csharp-how-to-make-concurrent-requests-with-httpclient/#Only_use_DefaultRequestHeaders_for_headers_that_dont_change
+                    // httpClientTeslaAPI.DefaultRequestHeaders.Add("Authorization", "Bearer " + Tesla_token);
+                    httpClientTeslaAPI.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                    httpClientTeslaAPI.Timeout = TimeSpan.FromSeconds(11);
+                }
             }
+            return httpClientTeslaAPI;
         }
 
         HttpClient GethttpclientTeslaNearbyChargingSites()
@@ -4741,86 +4733,90 @@ DESC", con))
                 }
 
                 string cacheKeyNotFound = "HttpNotFoundCounter_" + cmd + "_" + cacheGUID;
-                HttpClient client = GetHttpClientTeslaAPI();
+                HttpClient httpClientTeslaAPI = GetHttpClientTeslaAPI();
 
                 string adresse = apiaddress + "api/1/vehicles/" + Tesla_id + "/" + cmd;
 
                 DateTime start = DateTime.UtcNow;
                 Tools.DebugLog($"GetCommand #{car.CarInDB} request: {adresse}");
-                HttpResponseMessage result = client.GetAsync(new Uri(adresse)).Result;
-
-                if (result.IsSuccessStatusCode)
+                using (var request = new HttpRequestMessage(HttpMethod.Get, new Uri(adresse)))
                 {
-                    MemoryCache.Default.Remove(cacheKeyNotFound);
+                    request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", Tesla_token);
+                    HttpResponseMessage result = await httpClientTeslaAPI.SendAsync(request);
 
-                    resultContent = await result.Content.ReadAsStringAsync();
-                    //Tools.DebugLog($"GetCommand request: {adresse} result: {new Tools.JsonFormatter(resultContent).Format()}");
+                    if (result.IsSuccessStatusCode)
+                    {
+                        MemoryCache.Default.Remove(cacheKeyNotFound);
 
-                    if (cmd.Contains("vehicle_data") && noMemcache == false)
-                    {
-                        MemoryCache.Default.Add(cacheKey, resultContent, DateTime.Now.AddSeconds(4));
-                    }
+                        resultContent = await result.Content.ReadAsStringAsync();
+                        //Tools.DebugLog($"GetCommand request: {adresse} result: {new Tools.JsonFormatter(resultContent).Format()}");
 
-                    DBHelper.AddMothershipDataToDB("GetCommand(" + cmd + ")", start, (int)result.StatusCode);
-                    _ = car.GetTeslaAPIState().ParseAPI(resultContent, cmd);
-                    if (TeslaAPI_Commands.ContainsKey(cmd))
-                    {
-                        TeslaAPI_Commands.TryGetValue(cmd, out string old_value);
-                        TeslaAPI_Commands.TryUpdate(cmd, resultContent, old_value);
+                        if (cmd.Contains("vehicle_data") && noMemcache == false)
+                        {
+                            MemoryCache.Default.Add(cacheKey, resultContent, DateTime.Now.AddSeconds(4));
+                        }
+
+                        DBHelper.AddMothershipDataToDB("GetCommand(" + cmd + ")", start, (int)result.StatusCode);
+                        _ = car.GetTeslaAPIState().ParseAPI(resultContent, cmd);
+                        if (TeslaAPI_Commands.ContainsKey(cmd))
+                        {
+                            TeslaAPI_Commands.TryGetValue(cmd, out string old_value);
+                            TeslaAPI_Commands.TryUpdate(cmd, resultContent, old_value);
+                        }
+                        else
+                        {
+                            TeslaAPI_Commands.TryAdd(cmd, resultContent);
+                        }
+                        return resultContent;
                     }
-                    else
+                    DBHelper.AddMothershipDataToDB("GetCommand(" + cmd + ")", double.Parse("-1." + (int)result.StatusCode, Tools.ciEnUS), (int)result.StatusCode);
+                    if (result.StatusCode == HttpStatusCode.Unauthorized)
                     {
-                        TeslaAPI_Commands.TryAdd(cmd, resultContent);
+                        LoginRetry(result);
                     }
-                    return resultContent;
-                }
-                DBHelper.AddMothershipDataToDB("GetCommand(" + cmd + ")", double.Parse("-1." + (int)result.StatusCode, Tools.ciEnUS), (int)result.StatusCode);
-                if (result.StatusCode == HttpStatusCode.Unauthorized)
-                {
-                    LoginRetry(result);
-                }
-                else if (result.StatusCode == HttpStatusCode.MethodNotAllowed)
-                {
-                    if (car.IsInService())
+                    else if (result.StatusCode == HttpStatusCode.MethodNotAllowed)
                     {
-                        return INSERVICE;
+                        if (car.IsInService())
+                        {
+                            return INSERVICE;
+                        }
+                        else
+                        {
+                            Log("Result.Statuscode: " + (int)result.StatusCode + " (" + result.StatusCode.ToString() + ") cmd: " + cmd);
+                        }
+                    }
+                    else if (result.StatusCode == HttpStatusCode.RequestTimeout)
+                    {
+                        Log("Result.Statuscode: " + (int)result.StatusCode + " (" + result.StatusCode.ToString() + ") cmd: " + cmd);
+                        Thread.Sleep(1000);
+                    }
+                    else if (result.StatusCode == HttpStatusCode.NotFound)
+                    {
+                        int HttpNotFoundCounter = (int)(MemoryCache.Default.Get(cacheKeyNotFound) ?? 0);
+                        HttpNotFoundCounter++;
+                        MemoryCache.Default.Set(cacheKeyNotFound, HttpNotFoundCounter, DateTime.Now.AddMinutes(10));
+
+                        Log("Result.Statuscode: " + (int)result.StatusCode + " (" + result.StatusCode.ToString() + ") cmd: " + cmd + " Retry: " + HttpNotFoundCounter);
+
+                        Thread.Sleep(1000);
+
+                        if (HttpNotFoundCounter > 5)
+                        {
+                            car.CreateExeptionlessLog("WebHelper", $"404 Error ({cmd}) -> Restart Car Thread", Exceptionless.Logging.LogLevel.Warn).Submit();
+                            car.Restart("404 Error", 0);
+                        }
+                    }
+                    else if ((int)result.StatusCode == 429) // TooManyRequests
+                    {
+                        int sleep = random.Next(12000) + 27000;
+
+                        Log("Result.Statuscode: " + (int)result.StatusCode + " (" + result.StatusCode.ToString() + ") cmd: " + cmd + " Sleep: " + sleep + "ms");
+                        Thread.Sleep(sleep);
                     }
                     else
                     {
                         Log("Result.Statuscode: " + (int)result.StatusCode + " (" + result.StatusCode.ToString() + ") cmd: " + cmd);
                     }
-                }
-                else if (result.StatusCode == HttpStatusCode.RequestTimeout)
-                {
-                    Log("Result.Statuscode: " + (int)result.StatusCode + " (" + result.StatusCode.ToString() + ") cmd: " + cmd);
-                    Thread.Sleep(1000);
-                }
-                else if (result.StatusCode == HttpStatusCode.NotFound)
-                {
-                    int HttpNotFoundCounter = (int)(MemoryCache.Default.Get(cacheKeyNotFound) ?? 0);
-                    HttpNotFoundCounter++;
-                    MemoryCache.Default.Set(cacheKeyNotFound, HttpNotFoundCounter, DateTime.Now.AddMinutes(10));
-
-                    Log("Result.Statuscode: " + (int)result.StatusCode + " (" + result.StatusCode.ToString() + ") cmd: " + cmd + " Retry: " + HttpNotFoundCounter);
-
-                    Thread.Sleep(1000);
-
-                    if (HttpNotFoundCounter > 5)
-                    {
-                        car.CreateExeptionlessLog("WebHelper", $"404 Error ({cmd}) -> Restart Car Thread", Exceptionless.Logging.LogLevel.Warn).Submit();
-                        car.Restart("404 Error", 0);
-                    }
-                }
-                else if ((int)result.StatusCode == 429) // TooManyRequests
-                {
-                    int sleep = random.Next(12000) + 27000;
-
-                    Log("Result.Statuscode: " + (int)result.StatusCode + " (" + result.StatusCode.ToString() + ") cmd: " + cmd + " Sleep: " + sleep + "ms");
-                    Thread.Sleep(sleep);
-                }
-                else
-                {
-                    Log("Result.Statuscode: " + (int)result.StatusCode + " (" + result.StatusCode.ToString() + ") cmd: " + cmd);
                 }
             }
             catch (TaskCanceledException)
