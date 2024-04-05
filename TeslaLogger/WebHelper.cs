@@ -4934,12 +4934,11 @@ DESC", con))
             string resultContent = "";
             try
             {
-                HttpClient client = GethttpclientgetChargingHistoryV2();
+                HttpClient httpclientgetChargingHistoryV2 = GethttpclientgetChargingHistoryV2();
                 using (var request = new HttpRequestMessage(HttpMethod.Get, new Uri($"{apiaddress}api/1/dx/charging/history?pageNo={pageNumber}")))
                 {
                     Tools.DebugLog($"GetChargingHistoryV2 request: {request.RequestUri}");
                     request.Headers.Add("Authorization", "Bearer " + Tesla_token);
-                    request.Method = HttpMethod.Get;
                     // xxx request.Content = new StringContent("");
                     if (apiaddress.StartsWith("https://") && apiaddress.EndsWith("/"))
                     {
@@ -4948,7 +4947,7 @@ DESC", con))
                     // request.Content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
 
                     DateTime start = DateTime.UtcNow;
-                    HttpResponseMessage result = await client.SendAsync(request);
+                    HttpResponseMessage result = await httpclientgetChargingHistoryV2.SendAsync(request);
                     resultContent = await result.Content.ReadAsStringAsync();
                     DBHelper.AddMothershipDataToDB("GetChargingHistoryV2", start, (int)result.StatusCode);
 
