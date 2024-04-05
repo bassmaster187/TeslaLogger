@@ -265,7 +265,7 @@ namespace TeslaLogger
             try
             {
                 debugBuffer.Enqueue(new Tuple<DateTime, string>(DateTime.Now, msg));
-                while (debugBuffer.Count > 500)
+                while (debugBuffer.Count > 1000)
                 {
                     _ = debugBuffer.Dequeue();
                 }
