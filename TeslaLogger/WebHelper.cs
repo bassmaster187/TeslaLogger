@@ -666,6 +666,7 @@ namespace TeslaLogger
                 HttpClient httpClientTeslaAPI = GetHttpClientTeslaAPI();
                 using (var request = new HttpRequestMessage(HttpMethod.Get, new Uri("https://teslalogger.de:4444/api/1/users/region"))) {
                     request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", Tesla_token);
+                    Tools.DebugLog($"GetRegion #{car.CarInDB} request: {request.RequestUri}");
                     HttpResponseMessage response = httpClientTeslaAPI.SendAsync(request).Result;
                     string result = response.Content.ReadAsStringAsync().Result;
                     if (response.IsSuccessStatusCode)
@@ -682,14 +683,15 @@ namespace TeslaLogger
                         if (fleeturl.StartsWith("https:", StringComparison.InvariantCultureIgnoreCase))
                         {
                             if (!fleeturl.EndsWith("/"))
+                            {
                                 fleeturl += "/";
+                            }
 
                             car.FleetApiAddress = fleeturl;
                             car.Log("FleetApiAddress: " + fleeturl);
                             car.DbHelper.UpdateCarColumn("fleetAPIaddress", fleeturl);
                             return fleeturl;
                         }
-
 
                         car.CreateExeptionlessLog("GetRegion", "no url", LogLevel.Fatal).AddObject(result, "ResultContent").Submit();
                         return "";
@@ -2202,6 +2204,7 @@ namespace TeslaLogger
             using (var request = new HttpRequestMessage(HttpMethod.Get, new Uri(adresse)))
             {
                 request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", Tesla_token);
+                Tools.DebugLog($"DoGetVehiclesRequest #{car.CarInDB} request: {request.RequestUri}");
                 resultTask = client.SendAsync(request);
                 result = resultTask.Result;
                 resultContent = result.Content.ReadAsStringAsync().Result;
@@ -4935,7 +4938,7 @@ DESC", con))
                 HttpClient httpclientgetChargingHistoryV2 = GethttpclientgetChargingHistoryV2();
                 using (var request = new HttpRequestMessage(HttpMethod.Get, new Uri($"{apiaddress}api/1/dx/charging/history?pageNo={pageNumber}")))
                 {
-                    Tools.DebugLog($"GetChargingHistoryV2 request: {request.RequestUri}");
+                    Tools.DebugLog($"GetChargingHistoryV2 #{car.CarInDB} request: {request.RequestUri}");
                     request.Headers.Add("Authorization", "Bearer " + Tesla_token);
                     // xxx request.Content = new StringContent("");
                     if (apiaddress.StartsWith("https://") && apiaddress.EndsWith("/"))
@@ -5563,6 +5566,7 @@ DESC", con))
                     {
                         request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", Tesla_token);
                         request.Content = content;
+                        Tools.DebugLog($"CheckVirtualKey #{car.CarInDB} request: {request.RequestUri}");
                         var httpResponse = GetHttpClientTeslaAPI().SendAsync(request).Result;
                         string result = httpResponse.Content.ReadAsStringAsync().Result;
                         if (httpResponse.IsSuccessStatusCode)
