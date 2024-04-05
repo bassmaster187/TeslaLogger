@@ -17,6 +17,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Reflection;
 using System.Runtime.Caching;
+using System.Runtime.CompilerServices;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -5342,31 +5343,12 @@ DESC", con))
 
         internal string Tesla_token
         {
+            [MethodImpl(MethodImplOptions.Synchronized)]
             get => tesla_token;
+            [MethodImpl(MethodImplOptions.Synchronized)]
             set
             {
-                lock (httpClientLock)
-                {
-                    tesla_token = value;
-                    if (!string.IsNullOrEmpty(value))
-                    {
-                        if (httpClientTeslaAPI != null)
-                        {
-                            httpClientTeslaAPI.DefaultRequestHeaders.Remove("Authorization");
-                            httpClientTeslaAPI.DefaultRequestHeaders.Add("Authorization", "Bearer " + value);
-                        }
-                        if (httpClientGetChargingHistoryV2 != null)
-                        {
-                            httpClientGetChargingHistoryV2.DefaultRequestHeaders.Remove("Authorization");
-                            httpClientGetChargingHistoryV2.DefaultRequestHeaders.Add("Authorization", "Bearer " + value);
-                        }
-                        if (httpClientTeslaChargingSites != null)
-                        {
-                            httpClientTeslaChargingSites.DefaultRequestHeaders.Remove("Authorization");
-                            httpClientTeslaChargingSites.DefaultRequestHeaders.Add("Authorization", "Bearer " + value);
-                        }
-                    }
-                }
+                tesla_token = value;
             }
         }
 
