@@ -5005,67 +5005,61 @@ DESC", con))
                     // Maybe we neet to use the fleet telemetry server in future. Now it seems to work fine.
                 }
 
-                StringContent queryString = null;
-                try
+                DateTime start = DateTime.UtcNow;
+                using (HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, new Uri(url)))
                 {
-                    queryString = data != null ? new StringContent(data) : null;
-
-                    if (_json && data != null)
+                    request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", Tesla_token);
+                    if (_json)
                     {
-                        queryString?.Dispose();
-                        queryString = new StringContent(data, Encoding.UTF8, "application/json");
+                        request.Content = new StringContent(data);
                     }
-
-                    DateTime start = DateTime.UtcNow;
-                    using (var request = new HttpRequestMessage(HttpMethod.Get, new Uri(url)))
+                    else
                     {
-                        request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", Tesla_token);
-                        HttpResponseMessage result = await httpClientTeslaAPI.PostAsync(url, data != null ? queryString : null);
-                        resultContent = await result.Content.ReadAsStringAsync();
-                        DBHelper.AddMothershipDataToDB("PostCommand(" + cmd + ")", start, (int)result.StatusCode);
-                        int position = cmd.LastIndexOf('/');
-                        if (position > -1)
+                        request.Content = new StringContent("{}");
+                    }
+                    request.Content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+                    HttpResponseMessage result = await httpClientTeslaAPI.SendAsync(request);
+                    resultContent = await result.Content.ReadAsStringAsync();
+                    DBHelper.AddMothershipDataToDB("PostCommand(" + cmd + ")", start, (int)result.StatusCode);
+                    int position = cmd.LastIndexOf('/');
+                    if (position > -1)
+                    {
+                        string command = cmd.Substring(position + 1);
+                        if (TeslaAPI_Commands.ContainsKey(command))
                         {
-                            string command = cmd.Substring(position + 1);
-                            if (TeslaAPI_Commands.ContainsKey(command))
-                            {
-                                TeslaAPI_Commands.TryGetValue(command, out string drive_state);
-                                TeslaAPI_Commands.TryUpdate(command, resultContent, drive_state);
-                            }
-                            else
-                            {
-                                TeslaAPI_Commands.TryAdd(command, resultContent);
-                            }
+                            TeslaAPI_Commands.TryGetValue(command, out string drive_state);
+                            TeslaAPI_Commands.TryUpdate(command, resultContent, drive_state);
+                        }
+                        else
+                        {
+                            TeslaAPI_Commands.TryAdd(command, resultContent);
                         }
                     }
-
-                    car.Log("Response: " + resultContent);
-
-                    if (resultContent != null)
-                    {
-                        if (resultContent.Contains("vehicle rejected request: your public key has not been paired with the vehicle"))
-                        {
-                            car.DbHelper.UpdateCarColumn("needVirtualKey", "1");
-                            car.CreateExeptionlessLog("NeedVirtualKey", "", Exceptionless.Logging.LogLevel.Warn).Submit();
-                        }
-                        else if (resultContent.Contains("Tesla Vehicle Command Protocol required"))
-                        {
-                            car.DbHelper.UpdateCarColumn("needFleetAPI", "1");
-                            car.CreateExeptionlessLog("NeedFleetAPI", "", Exceptionless.Logging.LogLevel.Warn).Submit();
-                        }
-                        else if (resultContent.Contains("Unauthorized missing scopes"))
-                        {
-                            car.DbHelper.UpdateCarColumn("needCommandPermission", "1");
-                            car.CreateExeptionlessLog("NeedCommandPermission", "", Exceptionless.Logging.LogLevel.Warn).Submit();
-                        }
-                    }
-
-                    return resultContent;
                 }
-                finally
+
+                car.Log("Response: " + resultContent);
+
+                if (resultContent != null)
                 {
-                    queryString?.Dispose();
+                    if (resultContent.Contains("vehicle rejected request: your public key has not been paired with the vehicle"))
+                    {
+                        car.DbHelper.UpdateCarColumn("needVirtualKey", "1");
+                        car.CreateExeptionlessLog("NeedVirtualKey", "", Exceptionless.Logging.LogLevel.Warn).Submit();
+                    }
+                    else if (resultContent.Contains("Tesla Vehicle Command Protocol required"))
+                    {
+                        car.DbHelper.UpdateCarColumn("needFleetAPI", "1");
+                        car.CreateExeptionlessLog("NeedFleetAPI", "", Exceptionless.Logging.LogLevel.Warn).Submit();
+                    }
+                    else if (resultContent.Contains("Unauthorized missing scopes"))
+                    {
+                        car.DbHelper.UpdateCarColumn("needCommandPermission", "1");
+                        car.CreateExeptionlessLog("NeedCommandPermission", "", Exceptionless.Logging.LogLevel.Warn).Submit();
+                    }
                 }
+
+                return resultContent;
+
             }
             catch (Exception ex)
             {
