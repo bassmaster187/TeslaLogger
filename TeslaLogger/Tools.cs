@@ -265,7 +265,7 @@ namespace TeslaLogger
             try
             {
                 debugBuffer.Enqueue(new Tuple<DateTime, string>(DateTime.Now, msg));
-                while (debugBuffer.Count > 500)
+                while (debugBuffer.Count > 1000)
                 {
                     _ = debugBuffer.Dequeue();
                 }
@@ -1877,9 +1877,9 @@ WHERE
                         File.Decrypt(path);
                     }
                     FileInfo fileInfo = new FileInfo(path);
-                    HttpResponseMessage response = await httpClient.GetAsync(uri).ConfigureAwait(true);
+                    HttpResponseMessage response = await httpClient.GetAsync(uri).ConfigureAwait(false);
                     _ = response.EnsureSuccessStatusCode();
-                    using (Stream responseContentStream = await response.Content.ReadAsStreamAsync().ConfigureAwait(true))
+                    using (Stream responseContentStream = await response.Content.ReadAsStreamAsync().ConfigureAwait(false))
                     {
                         using (FileStream outputFileStream = File.Create(fileInfo.FullName))
                         {

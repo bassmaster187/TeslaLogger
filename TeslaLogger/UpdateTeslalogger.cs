@@ -712,7 +712,8 @@ PRIMARY KEY(id)
                 Logfile.Log("CREATE TABLE mothershipcommands (id int NOT NULL AUTO_INCREMENT, command varchar(50) NOT NULL, PRIMARY KEY(id))");
                 DBHelper.ExecuteSQLQuery("CREATE TABLE mothershipcommands (id int NOT NULL AUTO_INCREMENT, command varchar(50) NOT NULL, PRIMARY KEY(id))");
                 Logfile.Log("CREATE TABLE OK");
-            } 
+            }
+            DBHelper.ExecuteSQLQuery("ALTER TABLE mothershipcommands MODIFY COLUMN command varchar(1024) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL;");
         }
 
         private static void CheckDBSchema_mothership()
@@ -1390,7 +1391,7 @@ PRIMARY KEY(id)
                     for (int x = 1; x < 10; x++)
                     {
                         Logfile.Log("git clone: try " + x);
-                        Tools.ExecMono("git", "clone --progress https://github.com/bassmaster187/TeslaLogger /etc/teslalogger/git/", true, true);
+                        Tools.ExecMono("git", "clone --depth=1 --progress https://github.com/bassmaster187/TeslaLogger /etc/teslalogger/git/", true, true);
 
                         if (Directory.Exists("/etc/teslalogger/git/TeslaLogger/GrafanaPlugins"))
                         {
