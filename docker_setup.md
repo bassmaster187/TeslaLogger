@@ -22,8 +22,8 @@ git clone https://github.com/bassmaster187/TeslaLogger
 2. fire up docker containers. Make sure, you got the latest docker & docker compose version. Many repositories comes with very old versions!
 ```
 cd TeslaLogger
-docker compose build
-docker compose up -d
+docker-compose build
+docker-compose up -d
 ```
 
 after a minute or two, everything should be ready. **On some slow machines or NAS, that could take more than 10 Minutes. I even heard about 30 Minutes.** Especially the database may take longer, so don't give up, if Teslalogger can't connect to the DB at the first startup. 
