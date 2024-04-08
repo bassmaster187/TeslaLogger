@@ -9,8 +9,6 @@ using MySql.Data.MySqlClient;
 using Exceptionless;
 using Newtonsoft.Json;
 using System.Runtime.Caching;
-using System.Linq;
-using Microsoft.VisualBasic.Logging;
 
 namespace TeslaLogger
 {
@@ -43,7 +41,7 @@ namespace TeslaLogger
                 {
                     if (Tools.UseNearbySuCService())
                         Work();
-                    
+
                     // sleep 5 Minutes
                     Thread.Sleep(300000);
                 }
@@ -65,8 +63,39 @@ namespace TeslaLogger
                 //if (car.IsInService())
                 //    continue;
 
-                if (car.FleetAPI) // FleetAPI doesn't support nearby Superchargers
+                if (car.FleetAPI)
+                {
+                    if ((car.GetCurrentState() == Car.TeslaState.Charge
+                   || car.GetCurrentState() == Car.TeslaState.Drive
+                   || car.GetCurrentState() == Car.TeslaState.Online)
+                   && car.CurrentJSON.current_falling_asleep == false)
+                    {
+                        string result = string.Empty;
+                        try
+                        {
+                            result = car.webhelper.GetCommand("nearby_charging_sites?detail=true", true).Result;
+                            if (result.Equals("NULL"))
+                            {
+                                continue;
+                            }
+                            AddSuperchargerStateFleetAPI(result, send);
+                            if (send.Count > 0)
+                            {
+                                ShareSuc(send, false, out _, out _);
+                            }
+                            send.Clear();
+                        }
+                        catch (Exception ex)
+                        {
+                            car.CreateExceptionlessClient(ex).AddObject(result, "ResultContent").Submit();
+                            Tools.DebugLog($"NearbySuCService.Work: result {new Tools.JsonFormatter(result).Format()}");
+                            Tools.DebugLog("NearbySuCService.Work: Exception", ex);
+                        }
+                    }
                     continue;
+                }
+
+                // classic API pre-FleetAPI
 
                 if ((car.GetCurrentState() == Car.TeslaState.Charge
                     || car.GetCurrentState() == Car.TeslaState.Drive
@@ -90,12 +119,13 @@ namespace TeslaLogger
                                 lat = car.CurrentJSON.GetLatitude();
                                 lng = car.CurrentJSON.GetLongitude();
                             }
-                            else if (stage == 1) {
+                            else if (stage == 1)
+                            {
                                 lat = requestlat;
                                 lng = requestlng;
                             }
 
-                            if (lat == 0 ||lng == 0)
+                            if (lat == 0 || lng == 0)
                             {
                                 continue;
                             }
@@ -172,7 +202,7 @@ namespace TeslaLogger
                                                 {
                                                     try
                                                     {
-                                                        AddSuperchargerState(suc, send, result, stage == 0);
+                                                        AddSuperchargerStatePreFleetAPI(suc, send, result, stage == 0);
                                                     }
                                                     catch (Exception ex)
                                                     {
@@ -209,7 +239,7 @@ namespace TeslaLogger
                                     }
 
                                     if (send.Count > 0)
-                                        ShareSuc(send, stage==0, out requestlat, out requestlng);
+                                        ShareSuc(send, stage == 0, out requestlat, out requestlng);
 
                                     send.Clear();
                                 }
@@ -224,6 +254,67 @@ namespace TeslaLogger
                         car.CreateExceptionlessClient(ex).AddObject(result, "ResultContent").Submit();
                         Tools.DebugLog($"NearbySuCService.Work: result {new Tools.JsonFormatter(result).Format()}");
                         Tools.DebugLog("NearbySuCService.Work: Exception", ex);
+                    }
+                }
+            }
+        }
+
+        private static void AddSuperchargerStateFleetAPI(string result, ArrayList send)
+        {
+            dynamic jsonResult = JsonConvert.DeserializeObject(result);
+            if (jsonResult.ContainsKey("response"))
+            {
+                dynamic response = jsonResult["response"];
+                if (response.ContainsKey("superchargers"))
+                {
+                    foreach (dynamic suc in response["superchargers"])
+                    {
+                        //Tools.DebugLog(new Tools.JsonFormatter(suc.ToString()).Format());
+                        if (suc.ContainsKey("available_stalls")
+                            && suc.ContainsKey("total_stalls")
+                            && suc.ContainsKey("name")
+                            && suc.ContainsKey("location")
+                            && suc["location"].ContainsKey("lat")
+                            && suc["location"].ContainsKey("long")
+                            )
+                        {
+                            string name = suc["name"].ToString();
+                            name = name.Replace("Tesla Supercharger", "").Trim();
+                            bool SuCfound = GetSuperchargerByName(name, out int sucID);
+                            double lat = suc["location"]["lat"];
+                            double lng = suc["location"]["long"];
+                            if (!SuCfound)
+                            {
+                                // add new entry to supercharger list in DB
+                                sucID = AddNewSupercharger(name, lat, lng);
+                            }
+                            if (int.TryParse(suc["available_stalls"].ToString(), out int available_stalls))
+                            {
+                                if (int.TryParse(suc["total_stalls"].ToString(), out int total_stalls))
+                                {
+                                    {
+                                        Tools.DebugLog($"SuC: <{name}> <{available_stalls}> <{total_stalls}>");
+                                        if (total_stalls > 0)
+                                        {
+                                            InsertIntoDB(sucID, available_stalls, total_stalls);
+                                            if (!ContainsSupercharger(send, name))
+                                            {
+                                                Dictionary<string, object> sendKV = new Dictionary<string, object>();
+                                                send.Add(sendKV);
+                                                sendKV.Add("n", name);
+                                                sendKV.Add("lat", lat);
+                                                sendKV.Add("lng", lng);
+                                                sendKV.Add("ts", DateTime.UtcNow.ToString("s", Tools.ciEnUS));
+                                                sendKV.Add("a", available_stalls);
+                                                sendKV.Add("t", total_stalls);
+                                                sendKV.Add("kw", 0);
+                                                sendKV.Add("m", "");
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -248,20 +339,22 @@ namespace TeslaLogger
                         if (nextsuc)
                             suffix = "?nextsuc=1";
 
-                        HttpResponseMessage result = client.PostAsync(new Uri("http://teslalogger.de/share_supercharger2.php"+ suffix), content).Result;
+                        HttpResponseMessage result = client.PostAsync(new Uri("http://teslalogger.de/share_supercharger2.php" + suffix), content).Result;
                         string r = result.Content.ReadAsStringAsync().Result;
                         DBHelper.AddMothershipDataToDB("teslalogger.de/share_supercharger.php", start, (int)result.StatusCode);
 
                         Tools.DebugLog("ShareSuc: " + Environment.NewLine + r);
 
                         string[] ret = r.Split('\n');
-                        if (ret.Length > 0) { 
+                        if (ret.Length > 0)
+                        {
                             if (ret[0].StartsWith("NEXTSUC:"))
                             {
                                 string csv = ret[0].Trim();
                                 csv = csv.Substring(csv.IndexOf(":") + 1);
                                 var c = csv.Split(',');
-                                if (c.Length > 1) { 
+                                if (c.Length > 1)
+                                {
                                     requestlat = Convert.ToDouble(c[0], Tools.ciEnUS);
                                     requestlng = Convert.ToDouble(c[1], Tools.ciEnUS);
                                 }
@@ -277,8 +370,10 @@ namespace TeslaLogger
             }
         }
 
-        private static void AddSuperchargerState(Newtonsoft.Json.Linq.JObject suc, ArrayList send, string resultContent, bool insertdb)
+        private static void AddSuperchargerStatePreFleetAPI(Newtonsoft.Json.Linq.JObject suc, ArrayList send, string resultContent, bool insertdb)
         {
+            string name = suc["localizedSiteName"]["value"].ToString();
+            name = name.Replace("Tesla Supercharger", "").Trim();
             /* suc:
              {
     "activeOutages":
@@ -324,10 +419,7 @@ namespace TeslaLogger
 } 
              */
             //Tools.DebugLog(new Tools.JsonFormatter(suc.ToString()).Format());
-            int sucID = int.MinValue;
-            string name = suc["localizedSiteName"]["value"].ToString();
-            name = name.Replace("Tesla Supercharger", "").Trim();
-            bool SuCfound = GetSuperchargerByName(name, out sucID);
+            bool SuCfound = GetSuperchargerByName(name, out int sucID);
             dynamic location = suc["centroid"];
             double lat = location["latitude"];
             double lng = location["longitude"];
@@ -336,7 +428,7 @@ namespace TeslaLogger
             string siteType = suc["siteType"].ToString();
             if (siteType != "SITE_TYPE_SUPERCHARGER")
             {
-                Tools.DebugLog("siteType: " + name +" :" + siteType);
+                Tools.DebugLog("siteType: " + name + " :" + siteType);
             }
 
             string accessType = suc["accessType"].ToString();
@@ -429,33 +521,7 @@ namespace TeslaLogger
 
                                 if (insertdb)
                                 {
-                                    using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
-                                    {
-                                        con.Open();
-                                        // find internal ID of supercharger by name
-                                        using (MySqlCommand cmd = new MySqlCommand(@"
-INSERT
-    superchargerstate(
-        nameid,
-        ts,
-        available_stalls,
-        total_stalls
-    )
-VALUES(
-    @nameid,
-    @ts,
-    @available_stalls,
-    @total_stalls
-)", con))
-                                        {
-                                            cmd.Parameters.AddWithValue("@nameid", sucID);
-                                            cmd.Parameters.AddWithValue("@ts", DateTime.Now);
-                                            cmd.Parameters.AddWithValue("@available_stalls", available_stalls);
-                                            cmd.Parameters.AddWithValue("@total_stalls", total_stalls);
-                                            _ = SQLTracer.TraceNQ(cmd, out _);
-                                        }
-                                        con.Close();
-                                    }
+                                    InsertIntoDB(sucID, available_stalls, total_stalls);
                                 }
                             }
                         }
@@ -469,6 +535,37 @@ VALUES(
                 {
                     Logfile.Log("Supercharger " + name + " doesn't contain availableStalls.value or totalStalls.value");
                 }
+            }
+        }
+
+        private static void InsertIntoDB(int sucID, int available_stalls, int total_stalls)
+        {
+            using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+            {
+                con.Open();
+                // find internal ID of supercharger by name
+                using (MySqlCommand cmd = new MySqlCommand(@"
+INSERT
+    superchargerstate(
+        nameid,
+        ts,
+        available_stalls,
+        total_stalls
+    )
+VALUES(
+    @nameid,
+    @ts,
+    @available_stalls,
+    @total_stalls
+)", con))
+                {
+                    cmd.Parameters.AddWithValue("@nameid", sucID);
+                    cmd.Parameters.AddWithValue("@ts", DateTime.Now);
+                    cmd.Parameters.AddWithValue("@available_stalls", available_stalls);
+                    cmd.Parameters.AddWithValue("@total_stalls", total_stalls);
+                    _ = SQLTracer.TraceNQ(cmd, out _);
+                }
+                con.Close();
             }
         }
 
