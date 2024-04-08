@@ -637,16 +637,18 @@ namespace TeslaLogger
         void SetNewAccessToken(string access_token)
         {
             Tesla_token = access_token;
-            car.Tesla_Token = access_token;
             car.Tesla_Token_Expire = DateTime.Now;
             car.LoginRetryCounter = 0;
             car.DbHelper.UpdateTeslaToken();
 
             try
             {
-                _ = IsOnline(true).Result; // get new Tesla_Streamingtoken;
-                                           // restart streaming thread with new token
-                RestartStreamThreadWithTask();
+                lock (WebHelper.isOnlineLock)
+                {
+                    _ = IsOnline(true).Result; // get new Tesla_Streamingtoken;
+                                               // restart streaming thread with new token
+                    RestartStreamThreadWithTask();
+                }
             }
             catch (Exception ex)
             {
@@ -5355,6 +5357,7 @@ DESC", con))
             set
             {
                 tesla_token = value;
+                car.Tesla_Token = value;
             }
         }
 
