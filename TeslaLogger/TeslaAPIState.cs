@@ -479,6 +479,7 @@ namespace TeslaLogger
                     return ParseVehicles(JSON);
                 case "vehicle_data?endpoints=location_data":
                 case "vehicle_data?endpoints=location_data&let_sleep=true":
+                    Tools.DebugLog(JSON);
                     // ignore
                     break;
                 case "nearby_charging_sites?detail=true":

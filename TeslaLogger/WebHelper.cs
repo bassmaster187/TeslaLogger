@@ -643,12 +643,9 @@ namespace TeslaLogger
 
             try
             {
-                lock (WebHelper.isOnlineLock)
-                {
-                    _ = IsOnline(true).Result; // get new Tesla_Streamingtoken;
-                                               // restart streaming thread with new token
-                    RestartStreamThreadWithTask();
-                }
+                _ = IsOnline(true).Result; // get new Tesla_Streamingtoken;
+                                           // restart streaming thread with new token
+                RestartStreamThreadWithTask();
             }
             catch (Exception ex)
             {
@@ -778,7 +775,7 @@ namespace TeslaLogger
                             policy.AbsoluteExpiration = DateTime.Now.AddSeconds((int)(jsonResult["expires_in"])).AddMinutes(-5);
                             policy.RemovedCallback = new CacheEntryRemovedCallback((CacheEntryRemovedArguments _) =>
                             {
-                                Tools.DebugLog($"#{car.CarInDB}: access token will expire in 5 minutes");
+                                Tools.DebugLog($"#{car.CarInDB}: access token will expire in 5 minutes - refresh it now!");
                                 UpdateTeslaTokenFromRefreshToken();
                             });
                             _ = MemoryCache.Default.Add("RefreshToken_" + car.CarInDB+ $"_{Environment.TickCount}", policy, policy);
@@ -2229,9 +2226,6 @@ namespace TeslaLogger
         }
 
         private int unknownStateCounter; // defaults to 0;
-#pragma warning disable CA2211 // Nicht konstante Felder dürfen nicht sichtbar sein
-        public static object isOnlineLock = new object();
-#pragma warning restore CA2211 // Nicht konstante Felder dürfen nicht sichtbar sein
 
         public async Task<string> IsOnline(bool returnOnUnauthorized = false)
         {
