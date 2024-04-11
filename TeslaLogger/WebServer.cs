@@ -2284,8 +2284,8 @@ DROP TABLE chargingstate_bak";
                     c = Car.GetCarByID(CarID);
 
                     c.webhelper.lastUpdateEfficiency = DateTime.Now.AddDays(-1);
-                    string s = c.webhelper.Wakeup().Result;
-                    string io = c.webhelper.IsOnline().Result;
+                    string s = c.webhelper.Wakeup();
+                    string io = c.webhelper.IsOnline();
 
                     c.webhelper.UpdateEfficiency();
 
@@ -2377,7 +2377,7 @@ DROP TABLE chargingstate_bak";
                     if (dumpJSON)
                     {
                         // get /vehicles at session start
-                        _ = car.webhelper.IsOnline().Result;
+                        _ = car.webhelper.IsOnline();
                     }
                 }
             }
@@ -2432,10 +2432,10 @@ DROP TABLE chargingstate_bak";
                 switch (command)
                 {
                     case "auto_conditioning_start":
-                        responseText = car.webhelper.PostCommand("command/auto_conditioning_start", null).Result;
+                        responseText = car.webhelper.PostCommand("command/auto_conditioning_start", null);
                         break;
                     case "auto_conditioning_stop":
-                        responseText = car.webhelper.PostCommand("command/auto_conditioning_stop", null).Result;
+                        responseText = car.webhelper.PostCommand("command/auto_conditioning_stop", null);
                         break;
                     case "auto_conditioning_start_stop":
                         if (request.QueryString.Count == 1)
@@ -2443,29 +2443,29 @@ DROP TABLE chargingstate_bak";
                             string var = string.Concat(request.QueryString.GetValues(0)).ToLower();
                             if (var == "1" || var == "true" || var == "on")
                             {
-                                responseText = car.webhelper.PostCommand("command/auto_conditioning_start", null).Result;
+                                responseText = car.webhelper.PostCommand("command/auto_conditioning_start", null);
                             }
                             else
                             {
-                                responseText = car.webhelper.PostCommand("command/auto_conditioning_stop", null).Result;
+                                responseText = car.webhelper.PostCommand("command/auto_conditioning_stop", null);
                             }
                         }
                         break;
                     case "auto_conditioning_toggle":
                         if (car.CurrentJSON.current_is_preconditioning)
                         {
-                            responseText = car.webhelper.PostCommand("command/auto_conditioning_stop", null).Result;
+                            responseText = car.webhelper.PostCommand("command/auto_conditioning_stop", null);
                         }
                         else
                         {
-                            responseText = car.webhelper.PostCommand("command/auto_conditioning_start", null).Result;
+                            responseText = car.webhelper.PostCommand("command/auto_conditioning_start", null);
                         }
                         break;
                     case "sentry_mode_on":
-                        responseText = car.webhelper.PostCommand("command/set_sentry_mode", "{\"on\":true}", true).Result;
+                        responseText = car.webhelper.PostCommand("command/set_sentry_mode", "{\"on\":true}", true);
                         break;
                     case "sentry_mode_off":
-                        responseText = car.webhelper.PostCommand("command/set_sentry_mode", "{\"on\":false}", true).Result;
+                        responseText = car.webhelper.PostCommand("command/set_sentry_mode", "{\"on\":false}", true);
                         break;
                     case "sentry_mode_on_off":
                         if (request.QueryString.Count == 1)
@@ -2473,26 +2473,26 @@ DROP TABLE chargingstate_bak";
                             string var = string.Concat(request.QueryString.GetValues(0)).ToLower();
                             if (var == "1" || var == "true" || var == "on")
                             {
-                                responseText = car.webhelper.PostCommand("command/set_sentry_mode", "{\"on\":true}", true).Result;
+                                responseText = car.webhelper.PostCommand("command/set_sentry_mode", "{\"on\":true}", true);
                             }
                             else
                             {
-                                responseText = car.webhelper.PostCommand("command/set_sentry_mode", "{\"on\":false}", true).Result;
+                                responseText = car.webhelper.PostCommand("command/set_sentry_mode", "{\"on\":false}", true);
                             }
                         }
                         break;
                     case "sentry_mode_toggle":
                         if (car.webhelper.is_sentry_mode)
                         {
-                            responseText = car.webhelper.PostCommand("command/set_sentry_mode", "{\"on\":false}", true).Result;
+                            responseText = car.webhelper.PostCommand("command/set_sentry_mode", "{\"on\":false}", true);
                         }
                         else
                         {
-                            responseText = car.webhelper.PostCommand("command/set_sentry_mode", "{\"on\":true}", true).Result;
+                            responseText = car.webhelper.PostCommand("command/set_sentry_mode", "{\"on\":true}", true);
                         }
                         break;
                     case "wake_up":
-                        responseText = car.webhelper.Wakeup().Result;
+                        responseText = car.webhelper.Wakeup();
                         break;
                     case "set_charge_limit":
                         if (request.QueryString.Count == 1 && int.TryParse(string.Concat(request.QueryString.GetValues(0)), out int newChargeLimit))
@@ -2503,14 +2503,14 @@ DROP TABLE chargingstate_bak";
                                 car.Log($"SetChargeLimit to {newChargeLimit} at '{addr.name}' ...");
                                 car.LastSetChargeLimitAddressName = addr.name;
                             }
-                            responseText = car.webhelper.PostCommand("command/set_charge_limit", "{\"percent\":" + newChargeLimit + "}", true).Result;
+                            responseText = car.webhelper.PostCommand("command/set_charge_limit", "{\"percent\":" + newChargeLimit + "}", true);
                         }
                         break;
                     case "charge_start":
-                        responseText = car.webhelper.PostCommand("command/charge_start", null).Result;
+                        responseText = car.webhelper.PostCommand("command/charge_start", null);
                         break;
                     case "charge_stop":
-                        responseText = car.webhelper.PostCommand("command/charge_stop", null).Result;
+                        responseText = car.webhelper.PostCommand("command/charge_stop", null);
                         break;
                     case "charge_start_stop":
                         if (request.QueryString.Count == 1)
@@ -2518,11 +2518,11 @@ DROP TABLE chargingstate_bak";
                             string var = string.Concat(request.QueryString.GetValues(0)).ToLower();
                             if (var == "1" || var == "true" || var == "on")
                             {
-                                responseText = car.webhelper.PostCommand("command/charge_start", null).Result;
+                                responseText = car.webhelper.PostCommand("command/charge_start", null);
                             }
                             else
                             {
-                                responseText = car.webhelper.PostCommand("command/charge_stop", null).Result;
+                                responseText = car.webhelper.PostCommand("command/charge_stop", null);
                             }
                         }
                         break;
@@ -2535,7 +2535,7 @@ DROP TABLE chargingstate_bak";
                                 car.Log($"SetChargingAmps to {newChargingAmps} at '{addr.name}' ...");
                                 car.LastSetChargingAmpsAddressName = addr.name;
                             }
-                            responseText = car.webhelper.PostCommand("command/set_charging_amps", "{\"charging_amps\":" + newChargingAmps + "}", true).Result;
+                            responseText = car.webhelper.PostCommand("command/set_charging_amps", "{\"charging_amps\":" + newChargingAmps + "}", true);
                         }
                         break;
                     default:

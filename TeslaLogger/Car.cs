@@ -449,7 +449,7 @@ namespace TeslaLogger
                 }
 
                 DbHelper.GetEconomy_Wh_km(webhelper);
-                _ = webhelper.IsOnline().Result;
+                _ = webhelper.IsOnline();
                 Log("Streamingtoken: " + Tools.ObfuscateString(webhelper.Tesla_Streamingtoken));
 
                 if (DbHelper.GetMaxPosid(false) == 0)
@@ -554,7 +554,7 @@ namespace TeslaLogger
 
                         if (webhelper.DeleteWakeupFile())
                         {
-                            string wakeup = webhelper.Wakeup().Result;
+                            string wakeup = webhelper.Wakeup();
                         }
 
                         KeepSleeping = false;
@@ -569,7 +569,7 @@ namespace TeslaLogger
                         {
                             if (webhelper.DeleteWakeupFile())
                             {
-                                string wakeup = webhelper.Wakeup().Result;
+                                string wakeup = webhelper.Wakeup();
                             }
 
                             KeepSleeping = false;
@@ -678,7 +678,7 @@ namespace TeslaLogger
         private void HandleState_Sleep()
         {
             string res = "";
-            res = webhelper.IsOnline().Result;
+            res = webhelper.IsOnline();
 
             if (res == "online")
             {
@@ -807,7 +807,7 @@ namespace TeslaLogger
                     {
                         // Log("API not suspended!");
                         Thread.Sleep(30000);
-                        string res = webhelper.IsOnline().Result;
+                        string res = webhelper.IsOnline();
                         if (res == "asleep")
                         {
                             SetCurrentState(TeslaState.Start);
@@ -870,7 +870,7 @@ namespace TeslaLogger
                                         {
                                             Log("ScanMyTesla prevents car to get sleep. Speed: " + CurrentJSON.SMTSpeed);
                                             lastCarUsed = DateTime.Now;
-                                            string wakeup = webhelper.Wakeup().Result;
+                                            string wakeup = webhelper.Wakeup();
                                             doSleep = false;
                                             break;
                                         }
@@ -880,7 +880,7 @@ namespace TeslaLogger
                                             Log("Wakeupfile prevents car to get sleep");
                                             lastCarUsed = DateTime.Now;
                                             webhelper.DeleteWakeupFile();
-                                            string wakeup = webhelper.Wakeup().Result;
+                                            string wakeup = webhelper.Wakeup();
                                             doSleep = false;
                                             break;
                                         }
@@ -1017,7 +1017,7 @@ namespace TeslaLogger
                 SendException2Exceptionless(ex);
             }
 
-            string res = webhelper.IsOnline().Result;
+            string res = webhelper.IsOnline();
 
             lastCarUsed = DateTime.Now;
             if (res == "online")
@@ -1050,7 +1050,7 @@ namespace TeslaLogger
                 while (true)
                 {
                     Thread.Sleep(30000);
-                    string res2 = webhelper.IsOnline().Result;
+                    string res2 = webhelper.IsOnline();
 
                     if (res2 != "offline")
                     {
@@ -1062,7 +1062,7 @@ namespace TeslaLogger
                     {
                         if (webhelper.DeleteWakeupFile())
                         {
-                            string wakeup = webhelper.Wakeup().Result;
+                            string wakeup = webhelper.Wakeup();
                             lastCarUsed = DateTime.Now;
                         }
 
@@ -1308,7 +1308,7 @@ namespace TeslaLogger
                 _ = Task.Factory.StartNew(() =>
                 {
                     Log("OpenChargePort ...");
-                    string result = webhelper.PostCommand("command/charge_port_door_open", null).Result;
+                    string result = webhelper.PostCommand("command/charge_port_door_open", null);
                     Log("charge_port_door_open(): " + result);
                 }, CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
             }
@@ -1323,7 +1323,7 @@ namespace TeslaLogger
                 _ = Task.Factory.StartNew(() =>
                 {
                     Log("EnableSentryMode ...");
-                    string result = webhelper.PostCommand("command/set_sentry_mode", "{\"on\":true}", true).Result;
+                    string result = webhelper.PostCommand("command/set_sentry_mode", "{\"on\":true}", true);
                     Log("set_sentry_mode(): " + result);
                 }, CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
             }
@@ -1338,7 +1338,7 @@ namespace TeslaLogger
                 _ = Task.Factory.StartNew(() =>
                 {
                     Log("DisableSentryMode ...");
-                    string result = webhelper.PostCommand("command/set_sentry_mode", "{\"on\":false}", true).Result;
+                    string result = webhelper.PostCommand("command/set_sentry_mode", "{\"on\":false}", true);
                     Log("set_sentry_mode(): " + result);
                 }, CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
             }
@@ -1353,7 +1353,7 @@ namespace TeslaLogger
                 _ = Task.Factory.StartNew(() =>
                 {
                     Log("ClimateOff ...");
-                    string result = webhelper.PostCommand("command/auto_conditioning_stop", null).Result;
+                    string result = webhelper.PostCommand("command/auto_conditioning_stop", null);
                     Log("auto_conditioning_stop(): " + result);
                 }, CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
             }
@@ -1372,7 +1372,7 @@ namespace TeslaLogger
                         _ = Task.Factory.StartNew(() =>
                         {
                             Log($"SetChargeLimit to {chargelimit} at '{_addr.name}' ...");
-                            string result = webhelper.PostCommand("command/set_charge_limit", "{\"percent\":" + chargelimit + "}", true).Result;
+                            string result = webhelper.PostCommand("command/set_charge_limit", "{\"percent\":" + chargelimit + "}", true);
                             Log("set_charge_limit(): " + result);
                             LastSetChargeLimitAddressName = _addr.name;
                         }, CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
@@ -1399,7 +1399,7 @@ namespace TeslaLogger
                           else // set chargelimit or fallback if teslaAPIState.GetInt fails
                           {
                               Log($"OnChargeComplete set charge limit to {chargelimit} at '{_addr.name}' ...");
-                              string result = webhelper.PostCommand("command/set_charge_limit", "{\"percent\":" + chargelimit + "}", true).Result;
+                              string result = webhelper.PostCommand("command/set_charge_limit", "{\"percent\":" + chargelimit + "}", true);
                               Log("set_charge_limit(): " + result);
                               // reset LastSetChargeLimitAddressName so that +scl can set the charge limit again
                               LastSetChargeLimitAddressName = string.Empty;

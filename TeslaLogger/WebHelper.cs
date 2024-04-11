@@ -643,7 +643,7 @@ namespace TeslaLogger
 
             try
             {
-                _ = IsOnline(true).Result; // get new Tesla_Streamingtoken;
+                _ = IsOnline(true); // get new Tesla_Streamingtoken;
                                            // restart streaming thread with new token
                 RestartStreamThreadWithTask();
             }
@@ -2231,19 +2231,19 @@ namespace TeslaLogger
 
         private int unknownStateCounter; // defaults to 0;
 
-        public async Task<string> IsOnline(bool returnOnUnauthorized = false)
+        public string IsOnline(bool returnOnUnauthorized = false)
         {
             string resultContent = "";
             try
             {
-                Tools.DebugLog("IsOnline 1");
+                Tools.DebugLog($"IsOnline #{car.CarInDB} 1");
                 int accountid = 0;
                 lock (vehicles2Account)
                 {
-                    Tools.DebugLog("IsOnline 2");
+                    Tools.DebugLog($"IsOnline #{car.CarInDB} 2");
                     if (vehicles2Account.TryGetValue(car.Vin, out Account account))
                     {
-                        Tools.DebugLog("IsOnline 3");
+                        Tools.DebugLog($"IsOnline #{car.CarInDB} 3");
                         accountid = account.id;
                     }
                 }
@@ -2251,20 +2251,20 @@ namespace TeslaLogger
                 string cacheKey = accountid + "_vehicles";
 
                 HttpResponseMessage result = null;
-                Tools.DebugLog("IsOnline 4");
+                Tools.DebugLog($"IsOnline #{car.CarInDB} 4");
                 object cachedValue = MemoryCache.Default.Get(cacheKey);
                 DateTime start = DateTime.UtcNow;
 
                 if (cachedValue != null && accountid > 0)
                 {
-                    Tools.DebugLog("IsOnline 5");
+                    Tools.DebugLog($"IsOnline #{car.CarInDB} 5");
                     resultContent = cachedValue as String;
                 }
                 else
                 {
-                    Tools.DebugLog("IsOnline 6");
+                    Tools.DebugLog($"IsOnline #{car.CarInDB} 6");
                     HttpClient httpClientTeslaAPI = GetHttpClientTeslaAPI();
-                    Tools.DebugLog("IsOnline 7");
+                    Tools.DebugLog($"IsOnline #{car.CarInDB} 7");
                     string adresse = "https://owner-api.teslamotors.com/api/1/products?orders=true";
 
                     if (car.oldAPIchinaCar)
@@ -2275,15 +2275,15 @@ namespace TeslaLogger
                     {
                         adresse = apiaddress + "api/1/vehicles";
                     }
-                    Tools.DebugLog("IsOnline 8");
+                    Tools.DebugLog($"IsOnline #{car.CarInDB} 8");
                     using (var request = new HttpRequestMessage(HttpMethod.Get, new Uri(adresse)))
                     {
-                        Tools.DebugLog("IsOnline 9");
+                        Tools.DebugLog($"IsOnline #{car.CarInDB} 9");
                         request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", Tesla_token);
                         Tools.DebugLog($"IsOnline #{car.CarInDB} request: {adresse}");
-                        Tools.DebugLog("IsOnline 10");
-                        result = await httpClientTeslaAPI.SendAsync(request);
-                        Tools.DebugLog("IsOnline 11");
+                        Tools.DebugLog($"IsOnline #{car.CarInDB} 10");
+                        result = httpClientTeslaAPI.SendAsync(request).Result;
+                        Tools.DebugLog($"IsOnline #{car.CarInDB} 11");
                         if (returnOnUnauthorized && result?.StatusCode == HttpStatusCode.Unauthorized)
                         {
                             return "NULL";
@@ -2293,9 +2293,9 @@ namespace TeslaLogger
                         {
                             return "NULL";
                         }
-                        Tools.DebugLog("IsOnline 12");
-                        resultContent = await result.Content.ReadAsStringAsync();
-                        Tools.DebugLog("IsOnline 13");
+                        Tools.DebugLog($"IsOnline #{car.CarInDB} 12");
+                        resultContent = result.Content.ReadAsStringAsync().Result;
+                        Tools.DebugLog($"IsOnline #{car.CarInDB} 13");
                     }
                 }
 
@@ -2336,9 +2336,9 @@ namespace TeslaLogger
                     Thread.Sleep(sleep);
                     return "NULL";
                 }
-                Tools.DebugLog("IsOnline 14");
+                Tools.DebugLog($"IsOnline #{car.CarInDB} 14");
                 _ = car.GetTeslaAPIState().ParseAPI(resultContent, "vehicles");
-                Tools.DebugLog("IsOnline 15");
+                Tools.DebugLog($"IsOnline #{car.CarInDB} 15");
                 if (result != null && cachedValue == null)
                 {
                     if (result.IsSuccessStatusCode)
@@ -2360,9 +2360,9 @@ namespace TeslaLogger
                 {
                     TeslaAPI_Commands.TryAdd("vehicles", resultContent);
                 }
-                Tools.DebugLog("IsOnline 16");
+                Tools.DebugLog($"IsOnline #{car.CarInDB} 16");
                 dynamic jsonResult = JsonConvert.DeserializeObject(resultContent);
-                Tools.DebugLog("IsOnline 17");
+                Tools.DebugLog($"IsOnline #{car.CarInDB} 17");
                 JArray response = jsonResult["response"];
 
 
@@ -2375,9 +2375,9 @@ namespace TeslaLogger
 
                     return "NULL";
                 }
-                Tools.DebugLog("IsOnline 18");
+                Tools.DebugLog($"IsOnline #{car.CarInDB} 18");
                 dynamic r4 = SearchCarDictionary(response);
-                Tools.DebugLog("IsOnline 19");
+                Tools.DebugLog($"IsOnline #{car.CarInDB} 19");
                 if (r4 == null)
                 {
                     Log("Vin not found in Response!");
@@ -2393,29 +2393,29 @@ namespace TeslaLogger
                     {
                         if (access_type == "OWNER")
                         {
-                            Tools.DebugLog("IsOnline 20");
+                            Tools.DebugLog($"IsOnline #{car.CarInDB} 20");
                             InsertVehicles2AccountFromVehiclesResponse(resultContent);
                             if (accountid == 0)
                             {
                                 lock (vehicles2Account)
                                 {
-                                    Tools.DebugLog("IsOnline 21");
+                                    Tools.DebugLog($"IsOnline #{car.CarInDB} 21");
                                     if (vehicles2Account.TryGetValue(car.Vin, out Account account))
                                     {
-                                        Tools.DebugLog("IsOnline 22");
+                                        Tools.DebugLog($"IsOnline #{car.CarInDB} 22");
                                         accountid = account.id;
                                     }
                                 }
 
                                 cacheKey = accountid + "_vehicles";
                             }
-                            Tools.DebugLog("IsOnline 23");
+                            Tools.DebugLog($"IsOnline #{car.CarInDB} 23");
                             MemoryCache.Default.Add(cacheKey, resultContent, DateTime.Now.AddSeconds(20));
-                            Tools.DebugLog("IsOnline 24");
+                            Tools.DebugLog($"IsOnline #{car.CarInDB} 24");
                         }
                         else
                         {
-                            Tools.DebugLog("IsOnline 25");
+                            Tools.DebugLog($"IsOnline #{car.CarInDB} 25");
                             System.Diagnostics.Debug.WriteLine("access_type: " + access_type);
                         }
                     }
@@ -2424,14 +2424,14 @@ namespace TeslaLogger
                 {
                     SubmitExceptionlessClientWithResultContent(ex, resultContent);
                 }
-                Tools.DebugLog("IsOnline 26");
+                Tools.DebugLog($"IsOnline #{car.CarInDB} 26");
                 string state = r4["state"].ToString();
-                Tools.DebugLog("IsOnline 27");
+                Tools.DebugLog($"IsOnline #{car.CarInDB} 27");
                 string temp_Tesla_Streamingtoken = r4["tokens"][0].ToString();
-                Tools.DebugLog("IsOnline 28");
+                Tools.DebugLog($"IsOnline #{car.CarInDB} 28");
                 if (temp_Tesla_Streamingtoken != Tesla_Streamingtoken)
                 {
-                    Tools.DebugLog("IsOnline 29");
+                    Tools.DebugLog($"IsOnline #{car.CarInDB} 29");
                     Tesla_Streamingtoken = temp_Tesla_Streamingtoken;
                     //Log("Streamingtoken changed (IsOnline): " + Tools.ObfuscateString(Tesla_Streamingtoken));
 
@@ -2468,24 +2468,24 @@ namespace TeslaLogger
                     car.Performance = oc.Contains("PBT85") || oc.Contains("PX01") || oc.Contains("P85D") || oc.Contains("PX6D") || oc.Contains("X024") | oc.Contains("PBT8") | oc.Contains("PF01");
 
                     */
-                    Tools.DebugLog("IsOnline 30");
+                    Tools.DebugLog($"IsOnline #{car.CarInDB} 30");
                     if (state == "asleep")
                     {
                         return state;
                     }
                     else if (state == "unknown")
                     {
-                        Tools.DebugLog("IsOnline 31");
+                        Tools.DebugLog($"IsOnline #{car.CarInDB} 31");
                         Log("unknown state " + unknownStateCounter);
 
                         ExceptionWriter(new Exception("unknown state"), resultContent);
-                        Tools.DebugLog("IsOnline 32");
+                        Tools.DebugLog($"IsOnline #{car.CarInDB} 32");
                         car.CreateExeptionlessLog("IsOnline", "unknown state", Exceptionless.Logging.LogLevel.Warn).AddObject(resultContent, "resultContent").Submit();
 
                         if (unknownStateCounter == 0)
                         {
-                            Tools.DebugLog("IsOnline 33");
-                            string r = Wakeup().Result;
+                            Tools.DebugLog($"IsOnline #{car.CarInDB} 33");
+                            string r = Wakeup();
                             Log("WakupResult: " + r);
                         }
                         else
@@ -2513,7 +2513,7 @@ namespace TeslaLogger
                         {
                             return state;
                         }
-                        Tools.DebugLog("IsOnline 34");
+                        Tools.DebugLog($"IsOnline #{car.CarInDB} 34");
                         CheckVehicleConfig();
                     }
                 }
@@ -2530,7 +2530,7 @@ namespace TeslaLogger
                         ExceptionWriter(ex, resultContent);
                     }
                 }
-                Tools.DebugLog("IsOnline 35");
+                Tools.DebugLog($"IsOnline #{car.CarInDB} 35");
                 return state;
 
             }
@@ -2547,7 +2547,7 @@ namespace TeslaLogger
                     ExceptionWriter(ex, resultContent);
                 }
             }
-            Tools.DebugLog("IsOnline 36");
+            Tools.DebugLog($"IsOnline #{car.CarInDB} 36");
             return "NULL";
         }
 
@@ -4992,7 +4992,7 @@ DESC", con))
             return "{}";
         }
 
-        public async Task<string> PostCommand(string cmd, string data, bool _json = false)
+        public string PostCommand(string cmd, string data, bool _json = false)
         {
             bool proxyServer = car.UseCommandProxyServer();
 
@@ -5037,8 +5037,8 @@ DESC", con))
                         request.Content = new StringContent("{}");
                     }
                     request.Content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
-                    HttpResponseMessage result = await httpClientTeslaAPI.SendAsync(request);
-                    resultContent = await result.Content.ReadAsStringAsync();
+                    HttpResponseMessage result = httpClientTeslaAPI.SendAsync(request).Result;
+                    resultContent = result.Content.ReadAsStringAsync().Result;
                     DBHelper.AddMothershipDataToDB("PostCommand(" + cmd + ")", start, (int)result.StatusCode);
                     int position = cmd.LastIndexOf('/');
                     if (position > -1)
@@ -5089,9 +5089,9 @@ DESC", con))
             return "NULL";
         }
 
-        public async Task<string> Wakeup()
+        public string Wakeup()
         {
-            return await PostCommand("wake_up", "");
+            return PostCommand("wake_up", "");
         }
 
 
