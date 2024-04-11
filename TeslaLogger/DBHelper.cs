@@ -7031,7 +7031,7 @@ WHERE
                 {
                     con.Open();
                     using (MySqlCommand cmd = new MySqlCommand(
-@"sSELECT 
+@"SELECT 
     T1.date AS startdate,
     T1.state AS startstate,
     T2.date AS enddate,
