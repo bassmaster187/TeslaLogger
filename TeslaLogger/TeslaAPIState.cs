@@ -446,28 +446,43 @@ namespace TeslaLogger
             }
             switch (source)
             {
-                /*
-                case "charge_state":
-                    return ParseChargeState(JSON);
-                case "climate_state":
-                    return ParseClimateState(JSON);
-                case "drive_state":
-                    return ParseDriveState(JSON);
-                case "vehicle_config":
-                    return ParseVehicleConfig(JSON);
-                case "vehicle_state":
-                    return ParseVehicleState(JSON);
-                */
+                case "vehicle_data?endpoints=vehicle_config":
+                case "vehicle_data?endpoints=vehicle_config&let_sleep=true":
+                    ParseVehicleConfig(JSON);
+                    break;
+                case "vehicle_data?endpoints=charge_state":
+                case "vehicle_data?endpoints=charge_state&let_sleep=true":
+                    ParseChargeState(JSON);
+                    break;
+                case "vehicle_data?endpoints=vehicle_state":
+                case "vehicle_data?endpoints=vehicle_state&let_sleep=true":
+                    ParseVehicleState(JSON);
+                    break;
+                case "vehicle_data?endpoints=climate_state":
+                case "vehicle_data?endpoints=climate_state&let_sleep=true":
+                    ParseClimateState(JSON);
+                    break;
+                case "vehicle_data?endpoints=drive_state":
+                case "vehicle_data?endpoints=drive_state%3Blocation_data":
+                case "vehicle_data?endpoints=drive_state&let_sleep=true":
+                case "vehicle_data?endpoints=drive_state%3Blocation_data&let_sleep=true":
+                    ParseDriveState(JSON);
+                    break;
                 case "vehicle_data":
                     ParseChargeState(JSON);
+                    ParseVehicleConfig(JSON);
                     ParseClimateState(JSON);
                     ParseDriveState(JSON);
-                    ParseVehicleConfig(JSON);
                     ParseVehicleState(JSON);
                     break;
                 case "vehicles":
                     return ParseVehicles(JSON);
                 case "vehicle_data?endpoints=location_data":
+                case "vehicle_data?endpoints=location_data&let_sleep=true":
+                    // ignore
+                    break;
+                case "nearby_charging_sites?detail=true":
+                    // ignore
                     break;
                 default:
                     Logfile.Log($"ParseAPI: unknown source {source}");

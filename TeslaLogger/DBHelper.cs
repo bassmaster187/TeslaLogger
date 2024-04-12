@@ -7030,18 +7030,29 @@ WHERE
                 using (MySqlConnection con = new MySqlConnection(DBConnectionstring + ";Allow User Variables=True"))
                 {
                     con.Open();
-                    using (MySqlCommand cmd = new MySqlCommand(@"select T1.date as startdate, T1.state as startstate, T2.date as enddate, T2.state as endstate
-                    from 
-                    (select (@rowid1:=@rowid1 + 1) T1rid, carid, date, state from cruisestate
-                          where carid=@carid and date between @start and @end order by date
-                        ) as T1
-                        join 
-                        (select (@rowid2:=@rowid2 + 1) T2rid, date, state, carid from  cruisestate
-                          where carid=@carid and date between @start and @end order by date
-                        ) as T2 on T1rid + 1 = T2rid 
-
-                        JOIN (SELECT @rowid1:=0) a
-                        JOIN (SELECT @rowid2:=0) b", con))
+                    using (MySqlCommand cmd = new MySqlCommand(
+@"SELECT 
+    T1.date AS startdate,
+    T1.state AS startstate,
+    T2.date AS enddate,
+    T2.state AS endstate
+FROM
+    (SELECT 
+        (@rowid1:=@rowid1 + 1) T1rid, carid, date, state
+    FROM
+        cruisestate
+    JOIN (SELECT @rowid1:=0) a) T1
+        LEFT JOIN
+    (SELECT 
+        (@rowid2:=@rowid2 + 1) T2rid, date, state, carid
+    FROM
+        cruisestate
+    JOIN (SELECT @rowid2:=0) b) T2 ON T1.T1rid + 1 = T2.T2rid
+WHERE
+    T1.carid = @carid
+        AND T1.date BETWEEN @start AND @end
+        AND T2.date BETWEEN @start AND @end
+ORDER BY startdate", con))
                     {
                         cmd.Parameters.AddWithValue("@carid", carid);
                         cmd.Parameters.AddWithValue("@start", start.ToString("yyyy-MM-dd HH:mm:ss", Tools.ciEnUS));

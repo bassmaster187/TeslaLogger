@@ -207,8 +207,8 @@ namespace TeslaLogger
             autoDiscovery["locked"] = new Dictionary<string, string>();
             autoDiscovery["locked"]["type"] = "binary_sensor";
             autoDiscovery["locked"]["name"] = "Locked";
-            autoDiscovery["locked"]["pl_on"] = "true";
-            autoDiscovery["locked"]["pl_off"] = "false";
+            autoDiscovery["locked"]["pl_on"] = "false";
+            autoDiscovery["locked"]["pl_off"] = "true";
             autoDiscovery["locked"]["class"] = "lock";
 
             autoDiscovery["open_windows"] = new Dictionary<string, string>();
@@ -315,7 +315,7 @@ namespace TeslaLogger
             autoDiscovery["charge_current_request"]["name"] = "Charge current";
             autoDiscovery["charge_current_request"]["cmd_topic"] = "set_charging_amps";
             autoDiscovery["charge_current_request"]["class"] = "current";
-            autoDiscovery["charge_current_request"]["min"] = "1";
+            autoDiscovery["charge_current_request"]["min"] = "0";
             autoDiscovery["charge_current_request"]["max"] = "32";
             autoDiscovery["charge_current_request"]["step"] = "1";
 
