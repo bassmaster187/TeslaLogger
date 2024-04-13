@@ -106,6 +106,7 @@ namespace TeslaLogger
         private static object httpClientLock = new object();
 
         DateTime lastRefreshToken = DateTime.MinValue;
+        DateTime nextTeslaTokenFromRefreshToken = DateTime.MaxValue;
 
         protected virtual void Dispose(bool disposing)
         {
@@ -772,7 +773,10 @@ namespace TeslaLogger
                         dynamic jsonResult = JsonConvert.DeserializeObject(result);
                         if (jsonResult.ContainsKey("expires_in"))
                         {
-                            Log("access token expires: " + DateTime.Now.AddSeconds((int)(jsonResult["expires_in"])));
+                            nextTeslaTokenFromRefreshToken = DateTime.UtcNow.AddMinutes(60); //DateTime.UtcNow.AddSeconds((int)(jsonResult["expires_in"]));
+                            Log("access token expires: " + nextTeslaTokenFromRefreshToken.ToLocalTime());
+
+                            /*
                             CacheItemPolicy policy = new CacheItemPolicy();
                             policy.AbsoluteExpiration = DateTime.Now.AddSeconds((int)(jsonResult["expires_in"])).AddMinutes(-5);
                             policy.RemovedCallback = new CacheEntryRemovedCallback((CacheEntryRemovedArguments _) =>
@@ -781,6 +785,7 @@ namespace TeslaLogger
                                 UpdateTeslaTokenFromRefreshToken();
                             });
                             _ = MemoryCache.Default.Add("RefreshToken_" + car.CarInDB+ $"_{Environment.TickCount}", policy, policy);
+                            */
                         }
                         string access_token = jsonResult["access_token"];
 
@@ -2260,6 +2265,12 @@ namespace TeslaLogger
                 }
                 else
                 {
+                    if (nextTeslaTokenFromRefreshToken < DateTime.UtcNow)
+                    {
+                        nextTeslaTokenFromRefreshToken = DateTime.UtcNow.AddMinutes(5);
+                        UpdateTeslaTokenFromRefreshToken();
+                    }
+
 
                     HttpClient httpClientTeslaAPI = GetHttpClientTeslaAPI();
                     string adresse = "https://owner-api.teslamotors.com/api/1/products?orders=true";
@@ -4759,6 +4770,7 @@ DESC", con))
 
                     if (result.IsSuccessStatusCode)
                     {
+                        startRequestTimeout = null;
                         MemoryCache.Default.Remove(cacheKeyNotFound);
 
                         resultContent = await result.Content.ReadAsStringAsync();
@@ -4800,6 +4812,9 @@ DESC", con))
                     }
                     else if (result.StatusCode == HttpStatusCode.RequestTimeout)
                     {
+                        if (startRequestTimeout == null)
+                            startRequestTimeout = DateTime.UtcNow;
+
                         Log("Result.Statuscode: " + (int)result.StatusCode + " (" + result.StatusCode.ToString() + ") cmd: " + cmd);
                         Thread.Sleep(1000);
                     }
@@ -5152,6 +5167,7 @@ DESC", con))
 
         private DateTime lastTaskerWakeupfile = DateTime.Today;
         private volatile bool stopStreaming; // defaults to false;
+        public DateTime? startRequestTimeout = null;
 
         public bool TaskerWakeupfile(bool force = false)
         {
