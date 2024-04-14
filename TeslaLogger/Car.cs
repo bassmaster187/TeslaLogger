@@ -813,9 +813,27 @@ namespace TeslaLogger
                             SetCurrentState(TeslaState.Start);
                             lastCarUsed = DateTime.Now;
                         }
+
+                        var srt = webhelper.startRequestTimeout;
+                        if (srt != null && srt.Value.AddMinutes(5) < DateTime.UtcNow)
+                        {
+                            Log("Car is sleeping because of 408");
+                            SetCurrentState(TeslaState.Sleep);
+                            lastCarUsed = DateTime.Now;
+                            DbHelper.StartState("asleep");
+                        }
                     }
                     else
                     {
+                        var srt = webhelper.startRequestTimeout;
+                        if (srt != null && srt.Value.AddMinutes(5) < DateTime.UtcNow)
+                        {
+                            Log("Car is sleeping because of 408");
+                            SetCurrentState(TeslaState.Sleep);
+                            lastCarUsed = DateTime.Now;
+                            DbHelper.StartState("asleep");
+                        }
+
                         // wenn er 15 min online war und nicht geladen oder gefahren ist, dann muss man ihn die möglichkeit geben offline zu gehen
                         TimeSpan ts = DateTime.Now - lastCarUsed;
                         if (ts.TotalMinutes > Program.KeepOnlineMinAfterUsage)
