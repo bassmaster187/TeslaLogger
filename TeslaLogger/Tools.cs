@@ -13,11 +13,11 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Web;
 
 using MySql.Data.MySqlClient;
 using Exceptionless;
 using Newtonsoft.Json;
+using System.Collections.Concurrent;
 
 namespace TeslaLogger
 {
@@ -52,7 +52,7 @@ namespace TeslaLogger
 
         public enum UpdateType { all, stable, none };
 
-        internal static Queue<Tuple<DateTime, string>> debugBuffer = new Queue<Tuple<DateTime, string>>();
+        internal static ConcurrentQueue<Tuple<DateTime, string>> debugBuffer = new ConcurrentQueue<Tuple<DateTime, string>>();
 
         public static void SetThreadEnUS()
         {
@@ -267,7 +267,7 @@ namespace TeslaLogger
                 debugBuffer.Enqueue(new Tuple<DateTime, string>(DateTime.Now, msg));
                 while (debugBuffer.Count > 1000)
                 {
-                    _ = debugBuffer.Dequeue();
+                    _ = debugBuffer.TryDequeue(out _);
                 }
             }
             // ignore failed inserts
