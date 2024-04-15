@@ -166,6 +166,7 @@ Supercharger-V3 DE-Berlin Parkhaus Gleisdreieck, 52.501800,13.373985
 Supercharger DE-Bernau am Chiemsee, 47.81445, 12.36792
 Supercharger DE-Bersteland, 51.949066, 13.787906
 Supercharger DE-Bispingen, 53.104326, 9.981842
+Supercharger-V3 DE-Bispingen-Behringen, 53.0998617, 9.9791921, 75
 Supercharger-V3 DE-Bissendorf,52.238354,8.162975
 Supercharger DE-Blankenfelde-Mahlow, 52.3089548, 13.444767
 Supercharger-V3 DE-Blankenfelde-Mahlow, 52.308865, 13.443957, 25
@@ -389,7 +390,7 @@ Supercharger-V3 DK-Maribo, 54.779188, 11.477063, 40
 Supercharger DK-Middelfart, 55.511311, 9.765029
 Supercharger DK-Nørre Alslev, 54.899872, 11.896921
 Supercharger-V3 DK-Nykøbing Mors, 56.788618, 8.828769
-Supercharger-V3 DK-Odense, 55.384464, 10.427848
+Supercharger-V3 DK-Odense, 55.3857359, 10.4270555, 75
 Supercharger DK-Randers, 56.433685, 10.055412
 Supercharger DK-Rødekro, 55.067331, 9.361081, 20
 Supercharger DK-Rødekro, 55.068085, 9.360869, 20
@@ -908,7 +909,7 @@ Supercharger SE-Gäddede, 64.5065, 14.1435
 Supercharger SE-Gävle, 60.648513, 17.120583
 Supercharger-V3 SE-Gothenburg South, 57.6519635, 11.9512471
 Supercharger-V3 SE-Haninge, 59.1810494, 18.16069
-Supercharger-V3 SE-Helsingborg, 56.091, 12.76455
+Supercharger-V3 SE-Helsingborg, 56.091, 12.76455, 125
 Supercharger-V3 SE-Hogstorp, 58.393909, 11.757387
 Supercharger SE-Hudiksvall, 61.714854, 17.042692
 Supercharger SE-Jung, 58.328002, 13.132237

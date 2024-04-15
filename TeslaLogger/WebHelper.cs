@@ -771,7 +771,15 @@ namespace TeslaLogger
                         dynamic jsonResult = JsonConvert.DeserializeObject(result);
                         if (jsonResult.ContainsKey("expires_in"))
                         {
-                            nextTeslaTokenFromRefreshToken = DateTime.UtcNow.AddMinutes(60); //DateTime.UtcNow.AddSeconds((int)(jsonResult["expires_in"]));
+                            var t = DateTime.UtcNow.AddSeconds((int)(jsonResult["expires_in"])).AddHours(-2);
+                            if (t > DateTime.UtcNow.AddHours(1))
+                                nextTeslaTokenFromRefreshToken = t;
+                            else
+                            {
+                                t = DateTime.UtcNow.AddSeconds((int)(jsonResult["expires_in"]));
+                                nextTeslaTokenFromRefreshToken = t;
+                            }
+
                             Log("access token expires: " + nextTeslaTokenFromRefreshToken.ToLocalTime());
 
                             /*
