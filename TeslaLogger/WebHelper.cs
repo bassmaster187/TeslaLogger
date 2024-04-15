@@ -776,7 +776,10 @@ namespace TeslaLogger
                             if (t > DateTime.UtcNow.AddHours(1))
                                 nextTeslaTokenFromRefreshToken = t;
                             else
+                            {
                                 t = DateTime.UtcNow.AddSeconds((int)(jsonResult["expires_in"]));
+                                nextTeslaTokenFromRefreshToken = t;
+                            }
 
                             Log("access token expires: " + nextTeslaTokenFromRefreshToken.ToLocalTime());
 
