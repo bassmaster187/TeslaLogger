@@ -353,7 +353,7 @@ namespace TeslaLogger
                         if (line.Contains("PRETTY_NAME"))
                         {
                             var a = line.Split('=');
-                            return a[1].Replace("\"","");
+                            return a[1].Replace("\"", "");
                         }
                     }
                 }
@@ -362,7 +362,8 @@ namespace TeslaLogger
                     return "-";
                 }
             }
-            catch (Exception ex){
+            catch (Exception ex)
+            {
                 Logfile.Log(ex.ToString());
             }
 
@@ -489,7 +490,7 @@ namespace TeslaLogger
                 switch (vin[6])
                 {
                     case 'E':
-                        if(MIC)
+                        if (MIC)
                             battery = "NMC";
                         else
                             if (vin[7] == 'S') battery = "LFP"; //Y SR MIG BYD
