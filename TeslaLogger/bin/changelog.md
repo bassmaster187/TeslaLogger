@@ -1,3 +1,6 @@
+# Version 1.57.12
+- Bugfixes
+
 # Version 1.57.11
 - Rollback code to 1.57.9
 
