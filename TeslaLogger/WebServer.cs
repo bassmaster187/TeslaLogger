@@ -2260,7 +2260,7 @@ DROP TABLE chargingstate_bak";
         private static void Debug_TeslaLoggerMessages(HttpListenerRequest request, HttpListenerResponse response)
         {
             response.AddHeader("Content-Type", "text/html; charset=utf-8");
-            WriteString(response, "<html><head></head><body><table border=\"1\">" + string.Concat(Tools.debugBuffer.Select(a => string.Format(Tools.ciEnUS, "<tr><td>{0}&nbsp;{1}</td></tr>", a.Item1, a.Item2))) + "</table></body></html>", true);
+            WriteString(response, "<html><head></head><body><table border=\"1\">" + string.Concat(Tools.debugBuffer.Select(a => string.Format(Tools.ciEnUS, "<tr><td>{0}&nbsp;{1}</td></tr>", a.Item1, HttpUtility.HtmlEncode(a.Item2)))) + "</table></body></html>", true);
         }
 
         private static void Admin_passwortinfo(HttpListenerRequest request, HttpListenerResponse response)

@@ -825,7 +825,7 @@ namespace TeslaLogger
                         }
 
                         var srt = webhelper.startRequestTimeout;
-                        if (srt != null && srt.Value.AddMinutes(5) < DateTime.UtcNow)
+                        if (srt != null && srt.Value.AddMinutes(15) < DateTime.UtcNow)
                         {
                             Log("Car is sleeping because of 408");
                             SetCurrentState(TeslaState.Sleep);
@@ -836,7 +836,7 @@ namespace TeslaLogger
                     else
                     {
                         var srt = webhelper.startRequestTimeout;
-                        if (srt != null && srt.Value.AddMinutes(5) < DateTime.UtcNow)
+                        if (srt != null && srt.Value.AddMinutes(15) < DateTime.UtcNow)
                         {
                             Log("Car is sleeping because of 408");
                             SetCurrentState(TeslaState.Sleep);
