@@ -712,8 +712,7 @@ WHERE
                             }
                             else
                             {
-                                response.AddHeader("Content-Type", "application/json; charset=utf-8");
-                                WriteString(response, "{\"response\":{ \"value\":\"" + state[TeslaAPIState.Key.Value].ToString() + "\", \"timestamp\":" + state[TeslaAPIState.Key.Timestamp] + "} }");
+                                WriteString(response, "{\"response\":{ \"value\":\"" + state[TeslaAPIState.Key.Value].ToString() + "\", \"timestamp\":" + state[TeslaAPIState.Key.Timestamp] + "} }", "application/json; charset=utf-8");
                                 return;
                             }
                         }
@@ -886,7 +885,7 @@ WHERE
         </ul>
     </body>
 </html>");
-            WriteString(response, html.ToString());
+            WriteString(response, html.ToString(), "text/html");
         }
 
         private static void Admin_RestoreChargingCostsFromBackup2(HttpListenerRequest request, HttpListenerResponse response)
@@ -932,7 +931,7 @@ WHERE
                 WriteString(response, errorText);
                 return;
             }
-            WriteString(response, html.ToString());
+            WriteString(response, html.ToString(), "text/html");
         }
 
         private static void RestoreChargingCostsFromBackupCompare(HttpListenerResponse response, ref string errorText, StringBuilder html)
@@ -1366,7 +1365,7 @@ DROP TABLE chargingstate_bak";
 
                 var json = JsonConvert.SerializeObject(tokens);
 
-                WriteString(response, json);
+                WriteString(response, json, "application/json");
             }
             catch (Exception ex)
             {
@@ -1381,7 +1380,7 @@ DROP TABLE chargingstate_bak";
 
                 var json = JsonConvert.SerializeObject(error);
 
-                WriteString(response, json);
+                WriteString(response, json, "application/json");
 
                 ex.ToExceptionless().FirstCarUserID().MarkAsCritical().Submit();
             }
@@ -1408,6 +1407,7 @@ DROP TABLE chargingstate_bak";
         private static void Admin_GetCarsFromAccount(HttpListenerRequest request, HttpListenerResponse response, bool fleetAPI)
         {
             string responseString = "";
+            string contentType = null;
 
             try
             {
@@ -1460,6 +1460,7 @@ DROP TABLE chargingstate_bak";
                 }
 
                 responseString = JsonConvert.SerializeObject(o);
+                contentType = "application/json";
 
             }
             catch (UnauthorizedAccessException)
@@ -1473,7 +1474,7 @@ DROP TABLE chargingstate_bak";
                 Logfile.Log(ex.ToString());
             }
 
-            WriteString(response, responseString);
+            WriteString(response, responseString, contentType);
         }
 
         private static void Restart(HttpListenerRequest request, HttpListenerResponse response)
@@ -1527,7 +1528,7 @@ DROP TABLE chargingstate_bak";
 
                     string ret = JsonConvert.SerializeObject(obj);
 
-                    WriteString(response, ret);
+                    WriteString(response, ret, "application/json");
                 }
                 else if (Tools.IsPropertyExist(r, "save"))
                 {
@@ -1560,7 +1561,7 @@ DROP TABLE chargingstate_bak";
                     };
 
                     string ret = JsonConvert.SerializeObject(obj);
-                    WriteString(response, ret);
+                    WriteString(response, ret, "application/json");
                 }
             }
             catch (Exception ex)
@@ -1680,8 +1681,7 @@ DROP TABLE chargingstate_bak";
                     };
 
                     string json = JsonConvert.SerializeObject(t);
-                    response.AddHeader("Content-Type", "application/json; charset=utf-8");
-                    WriteString(response, json);
+                    WriteString(response, json, "application/json");
                     return;
                 }
             }
@@ -1741,8 +1741,7 @@ DROP TABLE chargingstate_bak";
                     };
 
                     string json = JsonConvert.SerializeObject(t);
-                    response.AddHeader("Content-Type", "application/json; charset=utf-8");
-                    WriteString(response, json);
+                    WriteString(response, json, "application/json");
                     return;
                 }
             }
@@ -1818,8 +1817,7 @@ DROP TABLE chargingstate_bak";
             if (m.Success)
             {
                 KVS.Get("MQTTSettings", out string json);
-                response.AddHeader("Content-Type", "application/json; charset=utf-8");
-                WriteString(response, json);
+                WriteString(response, json, "application/json");
                 return;
             }
             WriteString(response, "");
@@ -1991,7 +1989,7 @@ DROP TABLE chargingstate_bak";
                         System.Threading.Thread.Sleep(250);
                     }
 
-                    WriteString(response, car.Captcha);
+                    WriteString(response, car.Captcha, "image/svq+xml");
                     return;
                 }
             }
@@ -2217,7 +2215,7 @@ DROP TABLE chargingstate_bak";
                     response.AddHeader("Content-Type", "application/gpx+xml; charset=utf-8");
                     response.AddHeader("Content-Disposition", "inline; filename=\"trip.gpx\"");
                     Tools.DebugLog("GPX:" + Environment.NewLine + GPX.ToString());
-                    WriteString(response, GPX.ToString());
+                    WriteString(response, GPX.ToString(), "application/gpx+xml");
                 }
                 else
                 {
@@ -2259,8 +2257,20 @@ DROP TABLE chargingstate_bak";
 
         private static void Debug_TeslaLoggerMessages(HttpListenerRequest request, HttpListenerResponse response)
         {
-            response.AddHeader("Content-Type", "text/html; charset=utf-8");
-            WriteString(response, "<html><head></head><body><table border=\"1\">" + string.Concat(Tools.debugBuffer.Select(a => string.Format(Tools.ciEnUS, "<tr><td>{0}&nbsp;{1}</td></tr>", a.Item1, HttpUtility.HtmlEncode(a.Item2)))) + "</table></body></html>", true);
+            string temp = "<html><head></head><body><table border=\"1\">";
+
+            string filter = request.QueryString["filter"];
+
+            if (!String.IsNullOrEmpty(filter))
+                temp += string.Concat(Tools.debugBuffer.Where(w => w.Item2.IndexOf(filter, StringComparison.OrdinalIgnoreCase) >= 0)
+                    .Select(a => string.Format(Tools.ciEnUS, "<tr><td>{0}&nbsp;{1}</td></tr>", a.Item1, HttpUtility.HtmlEncode(a.Item2)))
+                    );
+            else
+                temp += string.Concat(Tools.debugBuffer.Select(a => string.Format(Tools.ciEnUS, "<tr><td>{0}&nbsp;{1}</td></tr>", a.Item1, HttpUtility.HtmlEncode(a.Item2))));
+
+            temp += "</table></body></html>";
+
+            WriteString(response, temp, "text/html; charset=utf-8");
         }
 
         private static void Admin_passwortinfo(HttpListenerRequest request, HttpListenerResponse response)
@@ -2309,7 +2319,7 @@ DROP TABLE chargingstate_bak";
                 {
                     if (CurrentJSON.jsonStringHolder.TryGetValue(CarID, out string json))
                     {
-                        WriteString(response, json);
+                        WriteString(response, json, "application/json");
                     }
                     else
                     {
@@ -2899,8 +2909,7 @@ FROM
                             }
                             else
                             {
-                                response.AddHeader("Content-Type", "application/json; charset=utf-8");
-                                WriteString(response, "{\"response\":{ \"value\":\"" + state[TeslaAPIState.Key.Value].ToString() + "\", \"timestamp\":" + state[TeslaAPIState.Key.Timestamp] + "} }");
+                                WriteString(response, "{\"response\":{ \"value\":\"" + state[TeslaAPIState.Key.Value].ToString() + "\", \"timestamp\":" + state[TeslaAPIState.Key.Timestamp] + "} }", "application/json; charset=utf-8");
                                 return;
                             }
                         }
@@ -2962,12 +2971,11 @@ FROM
                         )
                     )
                 );
-                response.AddHeader("Content-Type", "text/html; charset=utf-8");
-                WriteString(response, "<html><head></head><body><table border=\"1\">" + string.Concat(geofence) + string.Concat(geofenceprivate) + "</table></body></html>");
+                WriteString(response, "<html><head></head><body><table border=\"1\">" + string.Concat(geofence) + string.Concat(geofenceprivate) + "</table></body></html>", "text/html; charset=utf-8");
             }
             else
             {
-                WriteString(response, "{\"response\":{\"reason\":\"\", \"result\":true}}");
+                WriteString(response, "{\"response\":{\"reason\":\"\", \"result\":true}}", "application/json");
             }
             WebHelper.UpdateAllPOIAddresses();
             Logfile.Log("Admin: ReloadGeofence done");
@@ -3026,7 +3034,7 @@ FROM
             },*/
 
             IEnumerable<string> trs = values.Select(a => string.Format("<tr><td>{0}</td><td>{1}</td></tr>", a.Key, a.Value));
-            WriteString(response, "<html><head></head><body><table>" + string.Concat(trs) + "</table></body></html>");
+            WriteString(response, "<html><head></head><body><table>" + string.Concat(trs) + "</table></body></html>", "text/html; charset=utf-8");
         }
 
         private static void Debug_TeslaAPI(HttpListenerRequest request, HttpListenerResponse response)
@@ -3034,15 +3042,21 @@ FROM
             Match m = Regex.Match(request.Url.LocalPath, @"/debug/TeslaAPI/([0-9]+)/(.+)");
             if (m.Success && m.Groups.Count == 3 && m.Groups[1].Captures.Count == 1 && m.Groups[2].Captures.Count == 1)
             {
-                string value = m.Groups[2].Captures[0].ToString();
+                var value = m.Groups[2].Captures[0].ToString();
                 _ = int.TryParse(m.Groups[1].Captures[0].ToString(), out int CarID);
                 if (value.Length > 0 && CarID > 0)
                 {
-                    Car car = Car.GetCarByID(CarID);
-                    if (car != null && car.GetWebHelper().TeslaAPI_Commands.TryGetValue(value, out string TeslaAPIJSON))
+                    var car = Car.GetCarByID(CarID);
+                    if (car == null)
                     {
-                        response.AddHeader("Content-Type", "application/json; charset=utf-8");
-                        WriteString(response, TeslaAPIJSON);
+                        WriteString(response, $"Car not found");
+                        return;
+                    }
+                    var wh = car.GetWebHelper();
+                    if (wh.TeslaAPI_Commands.TryGetValue(value, out var TeslaAPIJSON) ||
+                        wh.TeslaAPI_Commands.TryGetValue(value+request.Url.Query, out TeslaAPIJSON))
+                    {
+                        WriteString(response, TeslaAPIJSON, "application/json; charset=utf-8");
                     }
                     else
                     {
@@ -3151,7 +3165,7 @@ FROM
 
             Logfile.Log("JSON: " + responseString);
 
-            WriteString(response, responseString);
+            WriteString(response, responseString, "application/json");
         }
 
         private static void Admin_GetAllCars(HttpListenerRequest request, HttpListenerResponse response)
@@ -3185,17 +3199,29 @@ FROM
                 Logfile.Log(ex.ToString());
             }
 
-            WriteString(response, responseString);
+            WriteString(response, responseString, "application/json");
         }
 
-        private static void WriteString(HttpListenerResponse response, string responseString, bool asHtml=false)
+        private static void WriteString(HttpListenerResponse response, string responseString, string contentType=null)
         {
             response.ContentEncoding = Encoding.UTF8;
-            byte[] buffer = Encoding.UTF8.GetBytes(responseString);
+            var buffer = Encoding.UTF8.GetBytes(responseString);
             // Get a response stream and write the response to it.
             response.ContentLength64 = buffer.Length;
-            response.ContentType = $"text/{(asHtml?"html":"plain")}; charset=utf-8";
-            Stream output = response.OutputStream;
+            if (string.IsNullOrEmpty(contentType))
+            {
+                response.ContentType = "text/plain; charset=utf-8";
+            }
+            else if (contentType.Contains("charset"))
+            {
+                response.ContentType = contentType;
+            }
+            else
+            {
+                response.ContentType = $"{contentType.TrimEnd(new[] {';'})}; charset=utf-8";
+            }
+
+            var output = response.OutputStream;
             if (output != null && output.CanWrite)
             {
                 output.Write(buffer, 0, buffer.Length);
@@ -3249,8 +3275,7 @@ FROM
                             specialflags.Add(flag.Key.ToString(), flag.Value);
                         }
                         data.Add("SpecialFlags", specialflags);
-                        response.AddHeader("Content-Type", "application/json; charset=utf-8");
-                        WriteString(response, JsonConvert.SerializeObject(data));
+                        WriteString(response, JsonConvert.SerializeObject(data), "application/json; charset=utf-8");
                         return;
                     }
                 }
@@ -3396,7 +3421,7 @@ function checkform() {
             html.Append(@"
     </body>
 </html>");
-            WriteString(response, html.ToString());
+            WriteString(response, html.ToString(), "text/html");
         }
     }
 }

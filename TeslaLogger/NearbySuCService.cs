@@ -10,6 +10,10 @@ using Exceptionless;
 using Newtonsoft.Json;
 using System.Runtime.Caching;
 using System.Linq;
+using Newtonsoft.Json.Linq;
+using System.Net.Http.Headers;
+using System.Net;
+using Microsoft.VisualBasic.Logging;
 
 namespace TeslaLogger
 {
@@ -41,7 +45,10 @@ namespace TeslaLogger
                 while (true)
                 {
                     if (Tools.UseNearbySuCService())
+                    {
                         Work();
+                        GetNextSuperchargerToCalculate();
+                    }
 
                     // sleep 5 Minutes
                     Thread.Sleep(300000);
@@ -623,6 +630,156 @@ VALUES(
             }
             sucID = int.MinValue;
             return false;
+        }
+
+        void GetNextSuperchargerToCalculate()
+        {
+            try
+            {
+                if (Car.Allcars.Count > 0)
+                {
+                    Car c = Car.Allcars[0];
+                    HttpClient client = c.webhelper.httpclient_teslalogger_de;
+
+                    HttpResponseMessage result = client.GetAsync("https://teslalogger.de:8089/GetNextSuperchargerToCalculate").Result;
+                    var resultContent = result.Content.ReadAsStringAsync().Result;
+
+                    if (int.TryParse(resultContent, out int trid))
+                    {
+                        GetGuestAvailability(c, trid);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ex.ToExceptionless().FirstCarUserID().Submit();
+                Tools.DebugLog("GetNextSuperchargerToCalculate: Exception", ex);
+            }
+        }
+
+        Available GetGuestAvailability(Car c, int trid)
+        {
+            Available a = new Available();
+
+            string content = "{\"variables\":{\"identifier\":{\"siteId\":{\"id\":$SITEID$,\"siteType\":\"SITE_TYPE_SUPERCHARGER\"}},\"experience\":\"GUEST\",\"deviceLocale\":\"de-DE\"},\"operationName\":\"getGuestChargingSiteDetails\",\"query\":\"\\n    query getGuestChargingSiteDetails($identifier: ChargingSiteIdentifierInput!, $deviceLocale: String!, $experience: ChargingExperienceEnum!) {\\n  site(\\n    identifier: $identifier\\n    deviceLocale: $deviceLocale\\n    experience: $experience\\n  ) {\\n    activeOutages\\n    address {\\n      countryCode\\n    }\\n    chargers {\\n      id\\n      label\\n    }\\n    chargersAvailable {\\n      chargerDetails {\\n        id\\n        availability\\n      }\\n    }\\n    holdAmount {\\n      holdAmount\\n      currencyCode\\n    }\\n    maxPowerKw\\n    name\\n    programType\\n    publicStallCount\\n    id\\n    pricing(experience: $experience) {\\n      userRates {\\n        activePricebook {\\n          charging {\\n            uom\\n            rates\\n            buckets {\\n              start\\n              end\\n            }\\n            bucketUom\\n            currencyCode\\n            programType\\n            vehicleMakeType\\n            touRates {\\n              enabled\\n              activeRatesByTime {\\n                startTime\\n                endTime\\n                rates\\n              }\\n            }\\n          }\\n          parking {\\n            uom\\n            rates\\n            buckets {\\n              start\\n              end\\n            }\\n            bucketUom\\n            currencyCode\\n            programType\\n            vehicleMakeType\\n            touRates {\\n              enabled\\n              activeRatesByTime {\\n                startTime\\n                endTime\\n                rates\\n              }\\n            }\\n          }\\n          congestion {\\n            uom\\n            rates\\n            buckets {\\n              start\\n              end\\n            }\\n            bucketUom\\n            currencyCode\\n            programType\\n            vehicleMakeType\\n            touRates {\\n              enabled\\n              activeRatesByTime {\\n                startTime\\n                endTime\\n                rates\\n              }\\n            }\\n          }\\n        }\\n      }\\n    }\\n  }\\n}\\n    \"}";
+            content = content.Replace("$SITEID$", trid.ToString());
+
+            var client = TeslaGuestHttpClient();
+
+            using (var request = new HttpRequestMessage())
+            {
+                using (var scontent = new StringContent(content, Encoding.UTF8, "application/json"))
+                {
+                    var result = client.PostAsync("https://www.tesla.com/de_DE/charging/guest/api/graphql?operationName=getGuestChargingSiteDetails", scontent).Result;
+                    string r = result.Content.ReadAsStringAsync().Result;
+
+                    dynamic j = JsonConvert.DeserializeObject(r);
+                    dynamic site = j["data"]["site"];
+                    JArray chargers = site["chargers"];
+                    JArray chargerDetails = site["chargersAvailable"]["chargerDetails"];
+
+                    string name = site["name"];
+
+                    a.total = chargers.Count;
+
+                    foreach (dynamic charger in chargers)
+                    {
+                        string id = charger["id"];
+                        string label = charger["label"];
+
+                        foreach (dynamic item in chargerDetails)
+                        {
+                            if (item["id"] == id)
+                            {
+                                string availability = item["availability"];
+                                // System.Diagnostics.Debug.WriteLine($"Label: {label} availability: {availability}");
+
+                                if (availability == "CHARGER_AVAILABILITY_AVAILABLE")
+                                    a.available++;
+                                else if (availability == "CHARGER_AVAILABILITY_OCCUPIED")
+                                    a.occupied++;
+                                else if (availability == "CHARGER_AVAILABILITY_DOWN")
+                                    a.down++;
+                                else if (availability == "CHARGER_AVAILABILITY_UNKNOWN")
+                                    a.unknown++;
+                                else
+                                    a.unhandled++;
+
+                                break;
+                            }
+                        }
+                    }
+
+                    if (!string.IsNullOrEmpty(name))
+                    {
+                        Tools.DebugLog($"Guest SuC: <{name}> <{a.available}> <{a.total}>");
+
+                        ArrayList send = new ArrayList();
+                        Dictionary<string, object> sendKV = new Dictionary<string, object>();
+                        send.Add(sendKV);
+                        sendKV.Add("n", name);
+                        // sendKV.Add("lat", lat);
+                        // sendKV.Add("lng", lng);
+                        sendKV.Add("ts", DateTime.UtcNow.ToString("s", Tools.ciEnUS));
+                        sendKV.Add("a", a.available);
+                        sendKV.Add("t", a.total);
+                        sendKV.Add("kw", 0);
+                        sendKV.Add("m", "");
+                        ShareSuc(send, false, out _, out _);
+                    }
+                }
+            }
+
+            return a;
+        }
+
+        public class Available
+        {
+            public int available = 0;
+            public int occupied = 0;
+            public int unhandled = 0;
+            public int total = 0;
+            public int down = 0;
+            public int unknown = 0;
+        }
+
+        static HttpClient _teslaGuestHttpClient;
+        static HttpClient TeslaGuestHttpClient()
+        {
+            if (_teslaGuestHttpClient == null)
+            {
+                var ch = new HttpClientHandler
+                {
+                    CookieContainer = new CookieContainer(),
+                    AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate,
+                    AllowAutoRedirect = false,
+                    UseCookies = true
+                };
+
+                var client = new HttpClient(ch)
+                {
+                    BaseAddress = new Uri("https://www.tesla.com"),
+                    DefaultRequestHeaders =
+                {
+                    ConnectionClose = false,
+                    Accept = { new MediaTypeWithQualityHeaderValue("application/json") },
+                    }
+                };
+
+                client.DefaultRequestHeaders.Add("accept", "application/json; charset=UTF-8");
+                client.DefaultRequestHeaders.Add("accept-language", "de-DE,de;q=0.9,en-US;q=0.8,en;q=0.7,es-ES;q=0.6,es;q=0.5,zh-CN;q=0.4,zh;q=0.3,fr;q=0.2");
+                client.DefaultRequestHeaders.Add("cache-control", "no-cache");
+                client.DefaultRequestHeaders.Add("pragma", "no-cache");
+                client.DefaultRequestHeaders.Add("upgrade-insecure-requests", "1");
+                client.DefaultRequestHeaders.Add("user-agent", "okhttp/4.9.2");
+                client.DefaultRequestHeaders.Add("x-tesla-user-agent", "TeslaApp/4.19.5-1667/3a5d531cc3/android/27");
+
+                client.Timeout = TimeSpan.FromSeconds(20);
+
+                _teslaGuestHttpClient = client;
+            }
+
+            return _teslaGuestHttpClient;
         }
     }
 }
