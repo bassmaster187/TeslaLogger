@@ -312,7 +312,7 @@ namespace TeslaLogger
             
             autoDiscovery["charge_current_request"] = new Dictionary<string, string>();
             autoDiscovery["charge_current_request"]["type"] = "number";
-            autoDiscovery["charge_current_request"]["name"] = "Charge current";
+            autoDiscovery["charge_current_request"]["name"] = "Charge current request";
             autoDiscovery["charge_current_request"]["cmd_topic"] = "set_charging_amps";
             autoDiscovery["charge_current_request"]["class"] = "current";
             autoDiscovery["charge_current_request"]["min"] = "0";
