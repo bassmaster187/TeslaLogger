@@ -2176,11 +2176,20 @@ DROP TABLE chargingstate_bak";
 
         private static void Debug_TeslaLoggerMessages(HttpListenerRequest request, HttpListenerResponse response)
         {
-            WriteString(response,
-                "<html><head></head><body><table border=\"1\">" + 
-                    string.Concat(Tools.debugBuffer.Select(a => string.Format(Tools.ciEnUS, "<tr><td>{0}&nbsp;{1}</td></tr>", a.Item1, HttpUtility.HtmlEncode(a.Item2)))) +
-                    "</table></body></html>",
-                "text/html; charset=utf-8");
+            string temp = "<html><head></head><body><table border=\"1\">";
+
+            string filter = request.QueryString["filter"];
+
+            if (!String.IsNullOrEmpty(filter))
+                temp += string.Concat(Tools.debugBuffer.Where(w => w.Item2.IndexOf(filter, StringComparison.OrdinalIgnoreCase) >= 0)
+                    .Select(a => string.Format(Tools.ciEnUS, "<tr><td>{0}&nbsp;{1}</td></tr>", a.Item1, HttpUtility.HtmlEncode(a.Item2)))
+                    );
+            else
+                temp += string.Concat(Tools.debugBuffer.Select(a => string.Format(Tools.ciEnUS, "<tr><td>{0}&nbsp;{1}</td></tr>", a.Item1, HttpUtility.HtmlEncode(a.Item2))));
+
+            temp += "</table></body></html>";
+
+            WriteString(response, temp, "text/html; charset=utf-8");
         }
 
         private static void Admin_passwortinfo(HttpListenerRequest request, HttpListenerResponse response)
