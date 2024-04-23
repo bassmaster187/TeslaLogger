@@ -2402,16 +2402,17 @@ PRIMARY KEY(id)
             return "";
         }
 
-        private static void CopyLanguageFileToTimelinePanel(string language)
+        public const string TimeLinePanelLanguagePath = "/var/lib/grafana/plugins/teslalogger-timeline-panel/dist/language.txt";
+        public static void CopyLanguageFileToTimelinePanel(string language)
         {
             try
             {
                 string languageFilepath = GetLanguageFilepath(language);
                 if (File.Exists(languageFilepath))
                 {
-                    string dst = "/var/lib/grafana/plugins/teslalogger-timeline-panel/dist/language.txt";
-                    Logfile.Log("Copy " + languageFilepath + " to " + dst);
-                    File.Copy(languageFilepath, dst, true);
+                    
+                    Logfile.Log("Copy " + languageFilepath + " to " + TimeLinePanelLanguagePath);
+                    File.Copy(languageFilepath, TimeLinePanelLanguagePath, true);
                 }
             }
             catch (Exception ex)
@@ -2421,17 +2422,20 @@ PRIMARY KEY(id)
             }
         }
 
-        private static void CopySettingsToTimelinePanel()
+        public const string TimeLinePanelSettingsPath = "/var/lib/grafana/plugins/teslalogger-timeline-panel/dist/settings.json";
+        public static void CopySettingsToTimelinePanel()
         {
             try
             {
                 string settingsFilepath = "/etc/teslalogger/settings.json";
                 if (File.Exists(settingsFilepath))
                 {
-                    string dst = "/var/lib/grafana/plugins/teslalogger-timeline-panel/dist/settings.json";
-                    Logfile.Log("Copy " + settingsFilepath + " to " + dst);
-                    File.Copy(settingsFilepath, dst, true);
+                    Logfile.Log("Copy " + settingsFilepath + " to " + TimeLinePanelSettingsPath);
+                    File.Copy(settingsFilepath, TimeLinePanelSettingsPath, true);
                 }
+                else
+                    Logfile.Log("Copy: " + settingsFilepath + " NOT FOUND!!!");
+
             }
             catch (Exception ex)
             {
