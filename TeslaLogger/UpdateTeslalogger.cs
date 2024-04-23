@@ -1819,9 +1819,6 @@ PRIMARY KEY(id)
                         AllowUnsignedPlugins("/etc/grafana/grafana.ini", true);
                     }
 
-                    if (Tools.IsDockerNET8())
-                        Tools.CopyFilesRecursively(new DirectoryInfo("/etc/teslalogger/git/TeslaLogger/GrafanaPlugins"), new DirectoryInfo("/var/lib/grafana/plugins"));
-
                     UpdateGrafanaVersion();
 
                     // TODO Logfile.Log(" Wh/TR km: " + wh.car.Wh_TR);

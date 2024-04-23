@@ -481,6 +481,13 @@ namespace TeslaLogger
                 {
                     Logfile.Log("Docker: NO!");
                 }
+
+                if (Tools.IsDockerNET8())
+                {
+                    Logfile.Log("Docker NET8: YES!");
+                    
+                    Tools.CopyFilesRecursively(new DirectoryInfo("/etc/teslalogger/git/TeslaLogger/GrafanaPlugins"), new DirectoryInfo("/var/lib/grafana/plugins"));
+                }
             }
             catch (Exception ex)
             {
