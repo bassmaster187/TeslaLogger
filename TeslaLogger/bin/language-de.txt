@@ -151,12 +151,12 @@ Do you want to delete?=Wollen Sie das Fahrzeug löschen?
 Please enter the access token!=Bitte das Access Token eintragen!
 Please enter the refresh token!=Bitte das Refresh Token eintragen!
 Check Logfile!=Bitte die Logdatei prüfen!
-Do you really want to delete this vehicle?="Wollen Sie das Fahrzeug wirklich löschen?"
+Do you really want to delete this vehicle?="Dieses Fahrzeug löschen?"
 Check Logfile in one minute!=Bitte die Logdatei in einer Minute prüfen!
 Unauthorized=Nicht autorisiert
-This isn't a valid URL!="Dies ist kein gültige URL!"
+This isn't a valid URL!="Ungültige URL!"
 This isn't an auth link by Tesla!=Dies ist ein Autorisierungslink von Tesla!
-The URL doesn't contain the expected format!="Die URL enthält nicht das erwartete Format!"
+The URL doesn't contain the expected format!="Die URL ist nicht im erwartete Format!"
 
 #password_fleet.php
 PF_LOGOUT=Melden Sie sich von Ihrem Tesla-Konto ab, wenn Sie bereits eingeloggt sind
@@ -445,3 +445,119 @@ Stromstärke [A]="aktuelle Stromstärke [A]"
 
 #Vampir Drain Monatsstatistik.json
 Vampir Drain Monatsstatistik="Standby Energieverlust Monatsstatistik"
+Pilot [A]="Pilot [A]"
+Fahrzeug="Fahrzeug"
+Standby="Energiesparmodus"
+
+#Verbrauch.json
+Verbrauch="Verbrauch"
+Außentemperatur [°C]="Außentemperatur [°C]"
+max km/h="Max. km/h"
+Temperatur="Temperatur"
+Ø km/h="Ø kph"
+
+#Alle Verbräuche - ScanMyTesla.json
+Alle Verbräuche - ScanMyTesla="Alle Verbräuche - ScanMyTesla"
+Zellspannungen 01-20 - ScanMyTesla="Zellspannungen 01-20 - ScanMyTesla"
+Zellspannungen 21-40 - ScanMyTesla="Zellspannungen 21-40 - ScanMyTesla"
+Nur verfügbar mit ScanMyTesla="Nur verfügbar mit ScanMyTesla"
+Reichweite="Reichweite"
+Leistung [PS]="Leistung [PS]"
+
+#Verbrauchsstatistik.json
+Verbrauchsstatistik="Verbrauchsstatistik"
+Eur Verlust="Eur Verlust"
+Ø mph="Ø mph"
+
+#Trip Top Destinations.json
+Trip Top Ziele="Trip Top Ziele"
+Löschen="Löschen"
+PF_HERE="Hier"
+Strecke [mi]="Fahrstrecke [mi]"
+Wirkungsgrad="Wirkungsgrad"
+Speichern="Speichern"
+Zellspannungen 41-60 - ScanMyTesla="Zellspannungen 41-60 - ScanMyTesla"
+Ja="Ja"
+Kosten pro Ladung="Kosten pro Ladung"
+Höhe [m]="Höhe [m]"
+Innentemperatur [°F]="Innentemperatur [°F]"
+Zeitspanne Stunden="Zeitspanne Stunden"
+Ziel Adresse="Zieladresse"
+Ø °F="Ø °F"
+Zelltemperatur [°C]="Zelltemperatur [°C]"
+Kosten Blockiergebühr="Kosten Blockiergebühr"
+
+#Vampir Drain.json
+Vampir Drain="Vampir Drain"
+Standby Stunden="Standby Stunden"
+TR km Verlust="TR km Verlust"
+Altitude [m]="Höhe [m]"
+Innentemperatur [°C]="Innentemperatur [°C]"
+Verbraucht kWh="Verbrauchte kWh"
+max mph="Max. mph"
+Ø Verbraucht kWh="Ø Verbrauch kWh"
+
+#Trip Monatsstatistik.json
+Datum="Datum"
+Ladesäule="Ladesäule"
+Kosten pro Minute="Kosten pro min"
+Summe="Gesamt"
+Verbraucht="Verbraucht"
+TR mi Verlust="TR mi Verlust"
+kWh Verlust="kWh Verlust"
+TR mi Verlust pro Stunde="TR mi Verlust pro Stunde"
+mi Stand="Kilometerstand [mi]"
+
+#Trip.json
+Trip="Fahrt"
+Ø °C="Ø °C"
+min kW="min kW"
+Ø Verbrauch kWh/100km="Ø Verbrauch kWh/100km"
+Zelltemperatur [°F]="Zelltemperatur [°F]"
+Trip Monatsstatistik="Trip Monatsstatistik"
+Zellspannungen="Zellspannungen"
+
+#Status.json
+Current Status="Aktueller Status"
+Geschwindigkeit [mph]="Geschwindigkeit [mph]"
+Schlafen="Schlafen"
+Angefordert [A]="Angefordert [A]"
+Start Adresse="Start Adresse"
+Ø PS="Ø PS"
+Währung="Währung"
+TR km Verlust pro Stunde="TR km Verlust pro Stunde"
+Außentemperatur [°F]="Außentemperatur [°F]"
+max kW="Max kW"
+Letzte Fahrt="Letzte Fahrt"
+Strecke [km]="Fahrstrecke [km]"
+Jahr/Monat="Jahr/Monat"
+Daten anonym teilen="Daten anonym teilen"
+Kosten pro kWh="Kosten pro kWh"
+kWh laut Zähler / Rechnung="kWh laut Zähler / Rechnung"
+Anzahl Trips="Anzahl Fahrten"
+
+#Visited.json
+Visited="Besuchte Standorte"
+Ø Verbrauch [kWh]="Ø Verbrauch kWh"
+Zelltemperatur="Zelltemperatur"
+Geschwindigkeit [km/h]="Geschwindigkeit [mph]"
+Ø Verbrauch kWh="Ø Verbrauch kWh"
+Ø Dauer Min="Ø Zeit Min"
+Fahrzeit [h]="Fahrzeit [h]"
+Zellspannungen 61-80 - ScanMyTesla="Zellspannungen 61-80 - ScanMyTesla"
+Zellspannung="Zellspannung"
+Einschlafen="Einschlafen"
+Ladekosten="Ladekosten"
+Außentemperatur="Außentemperatur"
+Ende="Ende"
+Dauer Min="Dauer Min"
+max PS="Max. PS"
+Verbrauch [kWh]="Verbraucht kWh"
+Zellspannungen 81-99 - ScanMyTesla="Zellspannungen 81-99 - ScanMyTesla"
+Nein="Nein"
+Laden fertig="Vollständig geladen"
+min PS="Min. PS"
+Ø kW="Ø kW"
+
+#journeys.php
+Ladezeit [h]="Ladezeit [h]"
