@@ -11,7 +11,8 @@ RUN apt-get update && \
  apt-get autoremove -y && \
  rm -rf /var/lib/apt/lists/* && \
  echo "export TERM=xterm" >> /root/.bashrc  && \
- echo "DOCKER" >> /tmp/teslalogger-DOCKER
+ echo "DOCKER" >> /tmp/teslalogger-DOCKER && \
+ echo "DOCKER" >> /tmp/teslalogger-dockernet8
 
 RUN mkdir -p /etc/teslalogger
 RUN mkdir -p /etc/teslalogger/sqlschema

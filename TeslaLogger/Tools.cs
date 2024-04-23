@@ -1207,6 +1207,27 @@ namespace TeslaLogger
             return false;
         }
 
+        public static bool IsDockerNET8()
+        {
+            try
+            {
+                string filename = "/tmp/teslalogger-dockernet8";
+
+                if (File.Exists(filename))
+                {
+                    return true;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                ex.ToExceptionless().FirstCarUserID().Submit();
+                Logfile.ExceptionWriter(ex, "IsDockerNET8");
+            }
+
+            return false;
+        }
+
         public static bool IsShareData()
         {
             try
