@@ -8,6 +8,7 @@
 *** for contributors-url, forks-url, etc. This is an optional, concise syntax you may use.
 *** https://www.markdownguide.org/basic-syntax/#reference-style-links
 -->
+
 [![Contributors][contributors-shield]][contributors-url] [![Forks][forks-shield]][forks-url] [![Stargazers][stars-shield]][stars-url] [![Issues][issues-shield]][issues-url]
 
 [![.NET Core Desktop](https://github.com/bassmaster187/TeslaLogger/actions/workflows/dotnet-desktop.yml/badge.svg)](https://github.com/bassmaster187/TeslaLogger/actions/workflows/dotnet-desktop.yml)
