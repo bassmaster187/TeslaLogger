@@ -452,18 +452,34 @@ namespace TeslaLogger
         {
             try
             {
+                string newFilePath = FileManager.GetFilePath(TLFilename.SettingsFilename);
+
+                if (!File.Exists(newFilePath))
+                {
+                    string oldFilePath = "/etc/teslalogger/settings.json";
+
+                    if (File.Exists(oldFilePath))
+                    {
+                        File.Move(oldFilePath, newFilePath);
+                        Logfile.Log("settings.json moved to :" + newFilePath);
+                    }
+                    else
+                    {
+                        var p = Path.GetDirectoryName(newFilePath);
+                        if (!Directory.Exists(p))
+                            Directory.CreateDirectory(p);
+
+                        Logfile.Log("Creating empty settings.json " + newFilePath);
+                        File.AppendAllText(newFilePath, GetDefaultConfigFileContent());
+                        UpdateTeslalogger.Chmod(newFilePath, 666);
+                    }
+                }
+
                 if (Tools.IsDocker())
                 {
                     Logfile.Log("Docker: YES!");
 
                     ExceptionlessClient.Default.Configuration.DefaultData.Add("Docker", true);
-
-                    if (!File.Exists("/etc/teslalogger/settings.json"))
-                    {
-                        Logfile.Log("Creating empty settings.json");
-                        File.AppendAllText("/etc/teslalogger/settings.json", GetDefaultConfigFileContent());
-                        UpdateTeslalogger.Chmod("/etc/teslalogger/settings.json", 666);
-                    }
 
                     if (!Directory.Exists("/etc/teslalogger/backup"))
                     {

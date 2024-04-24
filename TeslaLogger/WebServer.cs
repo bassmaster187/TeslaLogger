@@ -560,7 +560,12 @@ namespace TeslaLogger
                 File.Delete(p);
 
             string data = GetDataFromRequestInputStream(request);
-                
+
+            var pd = Path.GetDirectoryName(p);
+            if (!Directory.Exists(pd))
+                Directory.CreateDirectory(pd);
+
+
             File.WriteAllText(p, data);
             WriteString(response, "ok");
             return;

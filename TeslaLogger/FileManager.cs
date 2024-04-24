@@ -56,7 +56,11 @@ namespace TeslaLogger
             if (filename == TLFilename.SettingsFilename)
             {
                 var p = GetExecutingPath();
-                p = p.Replace("Debug/net8.0/", "");
+                p = p.Replace("Debug/net8.0/", "data/");
+                p = p.Replace("Debug\\net8.0\\", "data\\");
+
+                p = p.Replace("bin/data/", "data/");
+                p = p.Replace("bin\\data\\", "data\\");
 
                 return Path.Combine(p, Filenames[filename]);
             }
