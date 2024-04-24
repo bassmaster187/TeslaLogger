@@ -29,7 +29,7 @@ Maximalreichweite [km]=Max Bereik [km]
 Maximalreichweite [mi]=Max Bereik [mi]
 km Stand [km]=Kilometerteller [km]
 mi Stand [mi]=Kilometerteller [mi]
-Odometer [mi]=
+Odometer [mi]="kilometerteller"
 Max. Reichweite (Monatsmittel) [km]=Max Bereik (maandelijks gem.) [km]
 Max. Reichweite (Monatsmittel) [mi]=Max Rage (maandelijks gem.) [mi]
 
