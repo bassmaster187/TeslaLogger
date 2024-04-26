@@ -349,6 +349,7 @@ kWh laut Zähler / Rechnung=kWh according to meter / invoice
 Wirkungsgrad=Efficiency
 
 #Timeline Plugin.json
+Dauer=Duration
 Parking=Parking
 Driving=Driving
 Missing=Missing
