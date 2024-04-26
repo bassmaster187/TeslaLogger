@@ -146,7 +146,7 @@ Car Version=车辆版本
 Last Trip=上一次行程
 Duration=时长
 Distance=距离
-Max km/h=最大速度（公里每小时）
+Max km/h="最大速度（公里每小时）"
 PS=PS
 Current Pos=当前位置
 Last Update=上一次更新
@@ -172,7 +172,7 @@ Cell Imbalance=Cell Imbalance
 Software Update=软件更新
 min=min
 Consumption=消费量
-Ø Consumption=Ø 消费量
+Ø Consumption="Ø 消费量"
 Wh/km=Wh/km
 Please update to latest docker-compose.yml file. Check: {LINK}=请更新到最新的docker-compose.yml文件。检查：{LINK}
 
