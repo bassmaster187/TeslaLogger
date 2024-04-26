@@ -140,7 +140,7 @@ OK=OK
 Email="E-Mail"
 Car="Fahrzeug"
 Free Supercharging=Kostenloses Supercharging
-Reconnect=Reconnect
+Reconnect="Erneut verbinden"
 ID=ID
 Model=Modell
 VIN=VIN
@@ -225,7 +225,7 @@ Total=Summe
 
 #adminpanelpassword.php
 Admin Panel Credentials=Anmeldedaten für das Admin-Panel
-Teslalogger Tesla Credentials=Teslalogger Tesla Credentials
+Teslalogger Tesla Credentials="Teslalogger Tesla Zugangsdaten"
 Passwords do not match!=Passwörter stimmen nicht überein!
 Do you want to delete your password?=Möchten Sie Ihr Passwort löschen?
 Set password for Teslalogger's admin panel=Legen Sie das Passwort für das Admin-Panel von Teslalogger fest
@@ -342,7 +342,7 @@ Backup=Datensicherung
 Restore=Wiederherstellung
 Geofence=Geofence
 Abetterrouteplanner=Abetteroutenplaner
-Wakeup Teslalogger=Wakeup Teslalogger
+Wakeup Teslalogger="Teslalogger aufwecken"
 Suspend Teslalogger="Teslalogger pausieren"
 km Stand="km-Stand"
 
