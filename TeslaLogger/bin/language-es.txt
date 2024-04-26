@@ -3,7 +3,7 @@ Delete=Borrar
 Save=Guardar
 Settings="Ajustes"
 Setup="Configurar"
-Enabled="Activado"
+Enabled="encendido"
 kWh=kWh
 
 #Akku Trips.json
@@ -138,7 +138,7 @@ Online=Online
 Visited=Visitado
 
 #index.php
-Car Info="Información del coche"
+Car Info="Información del vehículo"
 Status=Estado
 Typical Range=Autonomía típica
 Odometer=Odómetro
@@ -202,7 +202,7 @@ Abetterrouteplanner=Planificador de rutas
 #password.php
 Teslalogger Tesla Credentials=Teslalogger Credenciales Tesla
 Please enter your Tesla account credentials=Por favor, introduce tus credenciales de Tesla
-Email="Email"
+Email="Correo electrónico"
 Password=Contraseña
 Repeat Password=Repite Contraseña
 Speichern=Guardar
@@ -236,7 +236,7 @@ BA_Paste="Pegue la URL resultante en la casilla y haga clic en el botón "_QQ_"O
 Get Tokens=Obtener fichas
 Access Token=Ficha de acceso
 Refresh Token=Actualizar ficha
-Car="Coche"
+Car="Vehículo"
 Free Supercharging=Supercarga gratuita
 Reconnect=Vuelva a conectar
 Please choose your vehicle=Elija su vehículo
@@ -244,7 +244,7 @@ Model=Modelo
 VIN=VIN
 Free SUC=SUC gratuito
 Edit=Editar
-New car="Coche nuevo"
+New car="Vehículo nuevo"
 
 #settings.php
 Credentials=Credenciales
@@ -256,15 +256,15 @@ URL Admin Panel=URL Panel Admin
 All=Todas
 Stable=Estable
 None=Ninguna
-Enable="Activar"
+Enable="Encender"
 Celsius=Celsius
 Fahrenheit=Fahrenheit
 URL Grafana=URL Grafana
 Teslalogger HTTP Port=Puerto HTTP Teslalogger
 Zoom Level=Nivel de Zoom
 ScanMyTesla integration=Integración ScanMyTesla
-Main Car="Coche Principal"
-Car Name="Nombre del Coche"
+Main Car="Vehículo principal"
+Car Name="Nombre del vehículo"
 ScanMyTesla last received=ScanMyTesla última recepción
 Tasker Token=Token Tasker
 Tasker URL=URL Tasker
@@ -323,8 +323,8 @@ ABRPTitle=Enlace Abetterouteplanner
 TextABRP=Puede configurar un enlace de Teslalogger a Abetterouteplanner para evitar dar sus credenciales de Tesla a un tercero. Otro beneficio es minimizar la posibilidad de evitar que el auto se quede dormido si más de un servicio está usando sus credenciales.
 ABRP1=Crear una cuenta Abetterouteplanner
 ABRP2=Ir a Configuración
-ABRP3="Elige tu coche"
-ABRP4="Guarda tu coche en tu cuenta"
+ABRP3="Elige tu vehículo"
+ABRP4="Guarda tu vehículo en tu cuenta"
 ABRP5="Pon un nombre a tu vehículo"
 ABRP6=Haga clic en "Enlace genérico" para obtener un token ABRP
 ABRP7=Copie el token y haga clic en "Listo"
@@ -362,11 +362,11 @@ Vehicle kWh=Vehículo kWh
 
 #mqtt.php
 MQTTSettings="Ajustes MQTT"
-MQTTSettingsInfo="MQTT Host es obligatorio. Todos los demás ajustes son opcionales"
+MQTTSettingsInfo="MQTT Host es obligatorio. Todos los demás ajustes son opcionales."
 TopicStructure="Estructura del tema:"
 MQTT1="Todos los valores en un JSON (si está activado): "_QQ_"teslalogger/json/CAR_VIN/currentjson"_QQ_""
 MQTT2="Todos los valores como subtemas (si están activados): "_QQ_"teslalogger/cars/CAR_VIN/ideal_battery_range_km"_QQ_""
-MQTT3="teslalogger"_QQ_" is parametrizable in field "_QQ_"Topic"
+MQTT3=""_QQ_"Teslalogger"_QQ_" es parametrizable en el campo "_QQ_"Tema"_QQ_""
 MQTT4=""_QQ_"CAR_VIN"_QQ_" es el VIN de tu coche"
 MQTT5=""_QQ_"ideal_battery_range_km"_QQ_"son temas individuales"
 ADDescription=AutoDiscovery:
