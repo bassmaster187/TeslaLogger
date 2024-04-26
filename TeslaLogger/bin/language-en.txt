@@ -156,7 +156,7 @@ Car Version=Car Version
 Last Trip=Last Trip
 Duration=Duration
 Distance=Distance
-Max km/h=Max km/h
+Max km/h="Max kph"
 PS=PS
 Current Pos=Current Pos
 Last Update=Last Update
@@ -183,7 +183,7 @@ Max Discharge=Max Discharge
 Cell Imbalance=Cell Imbalance
 Software Update=Software Update
 Consumption=Consumption
-Ø Consumption=Ø Consumption
+Ø Consumption="Avg Consumption"
 Please update to latest docker-compose.yml file. Check: {LINK}=Please update to latest docker-compose.yml file. Check: {LINK}
 
 #menu.php

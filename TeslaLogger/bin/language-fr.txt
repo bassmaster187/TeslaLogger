@@ -152,7 +152,7 @@ Car Version=Version logiciel
 Last Trip=Dernier trajet
 Duration=Durée
 Distance=Distance
-Max km/h=Max km/h
+Max km/h="Max km/h"
 PS=PS
 Current Pos=Position actuelle
 Last Update=Dernière mise à jour
@@ -175,7 +175,7 @@ Max Discharge=Max Discharge
 Cell Imbalance=Déséquilibre cellulaire
 Software Update=Mise à jour du logiciel
 Consumption=Consommation
-Ø Consumption=Ø Consommation
+Ø Consumption="Ø Consommation"
 min=min
 kWh=kWh
 Wh/km=Wh/km
@@ -511,6 +511,7 @@ Restore Database=Restaurer la base de données
 TextRestore1=Veillez à sauvegarder votre Teslalogger avant de restaurer les bases de données. Déplacez votre dossier de sauvegarde de \\RASPBERRY\teslalogger\backup sur votre disque dur !
 TextRestore2=Le processus de restauration peut durer jusqu'à 10 minutes !
 TextRestore3=N'interrompez pas le processus de restauration de quelque manière que ce soit ! Ne rechargez pas la page ! Ne fermez pas cette page !
+
 
 
 
