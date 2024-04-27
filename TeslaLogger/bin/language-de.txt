@@ -8,6 +8,7 @@ StreamingPosHelp=<h1>Position von StreamingAPI</h1>aktiviert Positions-DB-Eintr�
 
 #Timeline Plugin.json
 Parking=Parken
+Dauer=Dauer
 Driving=Fahren
 Charging=Laden
 Missing=Fehlen
@@ -36,7 +37,7 @@ Last Trip=Letzte Fahrt
 Last Update=Letztes Update
 Max Charge=Max. Ladung
 Max Discharge=Max. Entladung
-Max km/h=Max. km/h
+Max km/h="Max. km/h"
 No=Nein
 Odometer=Kilometerstand
 Resume Teslalogger=Teslalogger starten
@@ -45,7 +46,7 @@ Start=Start
 TextSuspendTeslalogger=Teslalogger wurde angehalten! Daten werden nicht geloggt!
 Typical Range=Reichweite
 Yes=Ja
-Ø Consumption=Ø Verbrauch
+Ø Consumption="Ø Verbrauch"
 mi=mi
 min=min
 kWh=kWh
@@ -140,7 +141,7 @@ OK=OK
 Email="E-Mail"
 Car="Fahrzeug"
 Free Supercharging=Kostenloses Supercharging
-Reconnect=Reconnect
+Reconnect="Erneut verbinden"
 ID=ID
 Model=Modell
 VIN=VIN
@@ -179,7 +180,7 @@ Dashboard=Dashboard
 #geoadd.php
 Charger=Ladesäule
 Copy Charging Costs=Ladekosten kopieren
-Count=Count
+Count="Anzahl"
 D → P=D → P
 D/R → P=D/R → P
 Description=Beschreibung
@@ -225,7 +226,7 @@ Total=Summe
 
 #adminpanelpassword.php
 Admin Panel Credentials=Anmeldedaten für das Admin-Panel
-Teslalogger Tesla Credentials=Teslalogger Tesla Credentials
+Teslalogger Tesla Credentials="Teslalogger Tesla Zugangsdaten"
 Passwords do not match!=Passwörter stimmen nicht überein!
 Do you want to delete your password?=Möchten Sie Ihr Passwort löschen?
 Set password for Teslalogger's admin panel=Legen Sie das Passwort für das Admin-Panel von Teslalogger fest
@@ -249,12 +250,12 @@ Host=Host
 Param=Param
 Test=Test
 Version=Version
-Utility kWh=Utility kWh
+Utility kWh="Energieversorger kWh"
 Vehicle kWh=kWh Fahrzeug
 
 #mqtt.php
 MQTTSettings=MQTT Einstellungen
-MQTTSettingsInfo="MQTT Host ist erforderlich. Alle anderen Einstellungen sind optional"
+MQTTSettingsInfo="MQTT Host ist erforderlich. Alle anderen Einstellungen sind optional."
 TopicStructure=Topics sind im folgenden Format:
 MQTT1="Alle Werte in einem JSON (wenn aktiviert): "_QQ_"teslalogger/json/CAR_VIN/currentjson"_QQ_""
 MQTT2="Alle Werte als Singletopics (wenn aktiviert): "_QQ_"teslalogger/cars/CAR_VIN/ideal_battery_range_km"_QQ_""
@@ -342,8 +343,8 @@ Backup=Datensicherung
 Restore=Wiederherstellung
 Geofence=Geofence
 Abetterrouteplanner=Abetteroutenplaner
-Wakeup Teslalogger=Wakeup Teslalogger
-Suspend Teslalogger=Suspend Teslalogger
+Wakeup Teslalogger="Teslalogger aufwecken"
+Suspend Teslalogger="Teslalogger pausieren"
 km Stand="km-Stand"
 
 #ovms.php
@@ -540,7 +541,7 @@ Anzahl Trips="Anzahl Fahrten"
 Visited="Besuchte Standorte"
 Ø Verbrauch [kWh]="Ø Verbrauch kWh"
 Zelltemperatur="Zelltemperatur"
-Geschwindigkeit [km/h]="Geschwindigkeit [mph]"
+Geschwindigkeit [km/h]="Geschwindigkeit [km/h]"
 Ø Verbrauch kWh="Ø Verbrauch kWh"
 Ø Dauer Min="Ø Zeit Min"
 Fahrzeit [h]="Fahrzeit [h]"
