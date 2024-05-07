@@ -325,6 +325,8 @@ namespace TeslaLogger
 
         private static void InitStage2()
         {
+            TestEncryption();
+
             KeepOnlineMinAfterUsage = Tools.GetSettingsInt("KeepOnlineMinAfterUsage", ApplicationSettings.Default.KeepOnlineMinAfterUsage);
             SuspendAPIMinutes = Tools.GetSettingsInt("SuspendAPIMinutes", ApplicationSettings.Default.SuspendAPIMinutes);
 
@@ -412,14 +414,15 @@ namespace TeslaLogger
             }
 
             Logfile.Log("OS: " + Tools.GetOsRelease());
-
-            TestEncryption();
         }
 
         static void TestEncryption()
         {
             try
             {
+                var path = FileManager.GetFilePath(TLFilename.EncryptionFilename);
+                Logfile.Log($"Path of encryption.txt: {path}");
+
                 var body = "jfsdoifjhoiwejgfüp9034eu7trfß90834ugf0ß9834uejpf90guj43pü09tgfuj45p90t8ugjedlkfgjd";
                 var pass = StringCipher.GetPassPhrase();
                 var encrypted = StringCipher.Encrypt(body);
@@ -477,6 +480,10 @@ namespace TeslaLogger
 
                 if (!File.Exists(newFilePath))
                 {
+                    var p = Path.GetDirectoryName(newFilePath);
+                    if (!Directory.Exists(p))
+                        Directory.CreateDirectory(p);
+
                     string oldFilePath = "/etc/teslalogger/settings.json";
 
                     if (File.Exists(oldFilePath))
@@ -486,10 +493,6 @@ namespace TeslaLogger
                     }
                     else
                     {
-                        var p = Path.GetDirectoryName(newFilePath);
-                        if (!Directory.Exists(p))
-                            Directory.CreateDirectory(p);
-
                         Logfile.Log("Creating empty settings.json " + newFilePath);
                         File.AppendAllText(newFilePath, GetDefaultConfigFileContent());
                         UpdateTeslalogger.Chmod(newFilePath, 666);

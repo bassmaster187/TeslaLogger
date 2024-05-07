@@ -19,7 +19,8 @@ namespace TeslaLogger
         NewCredentialsFilename,
         TeslaLoggerExeConfigFilename,
         GeocodeCache,
-        GeofenceRacingFilename
+        GeofenceRacingFilename,
+        EncryptionFilename
     }
 
     /// <summary>
@@ -48,12 +49,13 @@ namespace TeslaLogger
                 { TLFilename.GeofenceRacingFilename,    "geofence-racing.csv"},
                 { TLFilename.NewCredentialsFilename,    "new_credentials.json"},
                 { TLFilename.TeslaLoggerExeConfigFilename,"TeslaLogger.exe.config"},
-                { TLFilename.GeocodeCache,              "GeocodeCache.xml"}
+                { TLFilename.GeocodeCache,              "GeocodeCache.xml"},
+                { TLFilename.EncryptionFilename,        "encryption.txt"}
             };
 
         internal static string GetFilePath(TLFilename filename)
         {
-            if (filename == TLFilename.SettingsFilename)
+            if (filename == TLFilename.SettingsFilename || filename == TLFilename.EncryptionFilename)
             {
                 var p = GetExecutingPath();
                 p = p.Replace("Debug/net8.0/", "data/");

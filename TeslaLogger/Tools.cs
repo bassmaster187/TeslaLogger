@@ -2205,7 +2205,7 @@ WHERE
         {
             try
             {
-                var path = "encryption.txt";
+                var path = FileManager.GetFilePath(TLFilename.EncryptionFilename);
 
                 if (!File.Exists(path))
                 {
