@@ -411,7 +411,26 @@ namespace TeslaLogger
 
             Logfile.Log("OS: " + Tools.GetOsRelease());
 
-            StringCipher.GetPassPhrase();
+            TestEncryption();
+        }
+
+        static void TestEncryption()
+        {
+            try
+            {
+                var body = "jfsdoifjhoiwejgfüp9034eu7trfß90834ugf0ß9834uejpf90guj43pü09tgfuj45p90t8ugjedlkfgjd";
+                var pass = StringCipher.GetPassPhrase();
+                var encrypted = StringCipher.Encrypt(body);
+                var decrypted = StringCipher.Decrypt(encrypted);
+                if (body != decrypted)
+                    Logfile.Log("Encryption doesn't work!!!");
+
+            }
+            catch (Exception ex)
+            {
+                ex.ToExceptionless().Submit();
+                Logfile.Log(ex.ToString());
+            }
         }
 
         private static void InitConnectToDB()
