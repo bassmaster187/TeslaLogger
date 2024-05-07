@@ -8,6 +8,7 @@ StreamingPosHelp=<h1>Position von StreamingAPI</h1>aktiviert Positions-DB-Eintr√
 
 #Timeline Plugin.json
 Parking=Parken
+Dauer=Dauer
 Driving=Fahren
 Charging=Laden
 Missing=Fehlen

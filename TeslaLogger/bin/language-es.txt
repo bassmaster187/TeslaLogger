@@ -146,7 +146,7 @@ Car Version=Versión del coche
 Last Trip=Último Viaje
 Duration=Duración
 Distance=Distancia
-Max km/h="Km/h máximos"
+Max km/h="Máx km/h"
 PS=Cv
 Current Pos=Pos. Actual
 Last Update=Última actualización
@@ -172,7 +172,7 @@ Max Discharge=Descarga máxima
 Cell Imbalance=Desequilibrio celular
 Software Update=Actualización de software
 Consumption=Consumo
-Ø Consumption="Ø Consumo"
+Ø Consumption="Consumo promedio"
 Please update to latest docker-compose.yml file. Check: {LINK}=Por favor, actualice a la última docker-compose.yml archivo. Compruébelo: {LINK}
 
 #menu.php
@@ -216,17 +216,17 @@ Unauthorized=Sin autorización
 This isn't a valid URL!="URL no válida."
 This isn't an auth link by Tesla!=¡Esto no es un enlace auth por Tesla!
 The URL doesn't contain the expected format!="¡La URL no tiene el formato esperado!"
-TeslaAuthApps="Puede utilizar las siguientes aplicaciones para obtener un token de acceso y un token de actualización del servidor Tesla:"
+TeslaAuthApps="Obtenga un token de acceso y actualización con estas aplicaciones:"
 BA_Browser=En el {navegador} local (recomendado)
 BA_Read=Por favor, lea todos los pasos antes de continuar:
 BA_Logon="Haga clic en el siguiente enlace titulado <b>Inicio de sesión de Tesla</b> que abrirá una nueva pestaña/ventana para la página de inicio de sesión de autenticación de Tesla"
 BA_Auth="Inicie sesión con sus credenciales de Tesla y MFA si es necesario (Tesla los recordará si ha utilizado el enlace anteriormente)"
 BA_NotFound=Aparecerá el mensaje "Página no encontrada". Esto es normal.
-BA_URL="Copie la URL resultante de esa página web en el siguiente formulario. Dentro de la URL hay un código temporal que podemos utilizar para generar tokens. Lo extraeremos del enlace."
+BA_URL="Pegue la URL de la página web a continuación. Los tokens se generarán a partir de un código temporal que contenga."
 BA_Invalid=Estos enlaces normalmente sólo funcionan una vez, por lo que si aparece un mensaje de error "Concesión no válida" o de otro tipo en nuestro sitio web, es posible que tenga que empezar de nuevo con el enlace Tesla Logon, que debería producir un nuevo enlace.
 BA_Logoff="Si quieres utilizar una cuenta diferente, tienes que desconectarte manualmente {¡aquí!}"
 BA_GetToken="A continuación, se obtienen los tokens para su cuenta Tesla."
-BA_SelectCar="Seleccione el coche que desea utilizar para Teslalogger."
+BA_SelectCar="Seleccione el coche que desea utilizar con Teslalogger."
 BA_Step1=Paso 1:
 BA_Step2=Paso 2:
 BA_Step3=Paso 3:
@@ -509,7 +509,7 @@ Löschen="Borrar"
 BA_FLEETAPI="Tesla Fleet API (recomendada)"
 
 #password_fleet.php
-PF_LOGOUT="Salga de su cuenta de Tesla si ya ha iniciado sesión"
+PF_LOGOUT="Salga de su cuenta Tesla si ya ha iniciado sesión"
 PF_LOGIN="Ir a la página de autenticación de Tesla y permitir Teslalogger para acceder a sus datos"
 PF_LINK="ENLACE"
 PF_HELP="Vídeo de ayuda"
@@ -549,3 +549,6 @@ startedAt="Iniciar"
 endedAt="Finalizar"
 Häufigkeit="Frecuencia"
 Fehler="Alertas"
+
+#Timeline Plugin.json
+Dauer="Duración"

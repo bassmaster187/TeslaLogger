@@ -412,6 +412,8 @@ namespace TeslaLogger
             }
 
             Logfile.Log("OS: " + Tools.GetOsRelease());
+
+            StringCipher.GetPassPhrase();
         }
 
         private static void InitConnectToDB()
