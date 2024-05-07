@@ -325,6 +325,8 @@ namespace TeslaLogger
 
         private static void InitStage2()
         {
+            TestEncryption();
+
             KeepOnlineMinAfterUsage = Tools.GetSettingsInt("KeepOnlineMinAfterUsage", ApplicationSettings.Default.KeepOnlineMinAfterUsage);
             SuspendAPIMinutes = Tools.GetSettingsInt("SuspendAPIMinutes", ApplicationSettings.Default.SuspendAPIMinutes);
 
@@ -410,8 +412,6 @@ namespace TeslaLogger
             }
 
             Logfile.Log("OS: " + Tools.GetOsRelease());
-
-            TestEncryption();
         }
 
         static void TestEncryption()
