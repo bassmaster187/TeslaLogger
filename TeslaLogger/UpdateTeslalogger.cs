@@ -2428,6 +2428,9 @@ PRIMARY KEY(id)
             try
             {
                 string settingsFilepath = "/etc/teslalogger/settings.json";
+                if (Tools.IsDockerNET8())
+                    settingsFilepath = "/etc/teslalogger/data/settings.json";
+
                 if (File.Exists(settingsFilepath))
                 {
                     Logfile.Log("Copy " + settingsFilepath + " to " + TimeLinePanelSettingsPath);
