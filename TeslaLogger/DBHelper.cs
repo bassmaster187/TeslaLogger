@@ -4718,6 +4718,13 @@ WHERE
 
             double powerkW = Convert.ToDouble(charger_power, Tools.ciEnUS);
 
+            int power = Convert.ToInt32(charger_power, Tools.ciEnUS);
+            int voltage = int.Parse(charger_voltage, Tools.ciEnUS);
+            int actual_current = Convert.ToInt32(charger_actual_current, Tools.ciEnUS);
+            int requested_current = Convert.ToInt32(charge_current_request, Tools.ciEnUS);
+            int phases_calculated = CalculatePhases(power, voltage, actual_current, requested_current);
+            int power_calculated = CalculatePower(voltage, phases_calculated, actual_current, requested_current);
+
             // default waitbetween2pointsdb
             double waitbetween2pointsdb = 1000.0 / powerkW;
             // if charging started less than 5 minutes ago, insert one charging data point every ~60 seconds
@@ -4765,10 +4772,12 @@ INSERT
         battery_level,
         charge_energy_added,
         charger_power,
+        charger_power_calc_w,
         ideal_battery_range_km,
         battery_range_km,
         charger_voltage,
         charger_phases,
+        charger_phases_calc,
         charger_actual_current,
         outside_temp,
         charger_pilot_current,
@@ -4781,10 +4790,12 @@ VALUES(
     @battery_level,
     @charge_energy_added,
     @charger_power,
+    @charger_power_calc_w,
     @ideal_battery_range_km,
     @battery_range_km,
     @charger_voltage,
     @charger_phases,
+    @charger_phases_calc,
     @charger_actual_current,
     @outside_temp,
     @charger_pilot_current,
@@ -4797,10 +4808,12 @@ VALUES(
                         cmd.Parameters.AddWithValue("@battery_level", battery_level);
                         cmd.Parameters.AddWithValue("@charge_energy_added", charge_energy_added);
                         cmd.Parameters.AddWithValue("@charger_power", charger_power);
+                        cmd.Parameters.AddWithValue("@charger_power_calc_w", power_calculated);
                         cmd.Parameters.AddWithValue("@ideal_battery_range_km", kmIdeal_Battery_Range);
                         cmd.Parameters.AddWithValue("@battery_range_km", kmBattery_Range);
-                        cmd.Parameters.AddWithValue("@charger_voltage", int.Parse(charger_voltage, Tools.ciEnUS));
+                        cmd.Parameters.AddWithValue("@charger_voltage", voltage);
                         cmd.Parameters.AddWithValue("@charger_phases", charger_phases);
+                        cmd.Parameters.AddWithValue("@charger_phases_calc", phases_calculated);
                         cmd.Parameters.AddWithValue("@charger_actual_current", charger_actual_current);
                         cmd.Parameters.AddWithValue("@battery_heater", car.CurrentJSON.current_battery_heater ? 1 : 0);
 
@@ -4843,7 +4856,6 @@ VALUES(
                 }
 
                 car.CurrentJSON.current_charge_energy_added = Convert.ToDouble(charge_energy_added, Tools.ciEnUS);
-                car.CurrentJSON.current_charger_power = Convert.ToInt32(charger_power, Tools.ciEnUS);
                 if (kmIdeal_Battery_Range >= 0)
                 {
                     car.CurrentJSON.current_ideal_battery_range_km = kmIdeal_Battery_Range;
@@ -4853,11 +4865,13 @@ VALUES(
                 {
                     car.CurrentJSON.current_battery_range_km = kmBattery_Range;
                 }
-
-                car.CurrentJSON.current_charger_voltage = int.Parse(charger_voltage, Tools.ciEnUS);
+                car.CurrentJSON.current_charger_power = power;
+                car.CurrentJSON.current_charger_voltage = voltage;
+                car.CurrentJSON.current_charger_actual_current = actual_current;
+                car.CurrentJSON.current_charge_current_request = requested_current;
                 car.CurrentJSON.current_charger_phases = Convert.ToInt32(charger_phases, Tools.ciEnUS);
-                car.CurrentJSON.current_charger_actual_current = Convert.ToInt32(charger_actual_current, Tools.ciEnUS);
-                car.CurrentJSON.current_charge_current_request = Convert.ToInt32(charge_current_request, Tools.ciEnUS);
+                car.CurrentJSON.current_charger_phases_calc = phases_calculated;
+                car.CurrentJSON.current_charger_power_calc_w = power_calculated;
                 car.CurrentJSON.CreateCurrentJSON();
             }
             catch (Exception ex)
@@ -4865,6 +4879,37 @@ VALUES(
                 car.CreateExceptionlessClient(ex).Submit();
                 car.Log(ex.ToString());
             }
+        }
+
+        public static int CalculatePhases(int power, int voltage, int actualCurrent, int requestedCurrent)
+        {
+            int current = actualCurrent;
+            if (actualCurrent > requestedCurrent && requestedCurrent < 5)
+                current = requestedCurrent;
+            
+            if (power <= 0 || voltage <= 0 || current <= 0 )
+                return 0;
+
+            int phases = Convert.ToInt32(Math.Truncate((power * 1000.0 + 500) / voltage / current));
+            
+            if (phases > 3)
+                return 3;
+
+            if (phases < 1)
+                return 1;
+            
+            return phases;
+        }
+
+        public static int CalculatePower(int voltage, int phases, int actualCurrent, int requestedCurrent)
+        {
+            if (voltage < 0 || phases < 1 || actualCurrent < 1 || requestedCurrent < 1)
+                return 0;
+            
+            if (actualCurrent > requestedCurrent && requestedCurrent < 5)
+                return phases * voltage * requestedCurrent;
+            
+            return phases * voltage * actualCurrent;
         }
 
         public static DateTime UnixToDateTime(long t)
