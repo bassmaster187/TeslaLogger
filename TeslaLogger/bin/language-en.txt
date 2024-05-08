@@ -148,7 +148,7 @@ Verbrauchsstatistik=Consumption Statistics
 Visited=Visited
 
 #index.php
-Car Info=Car Info
+Car Info="Vehicle Info"
 Status=Status
 Typical Range=Typical Range
 Odometer=Odometer
@@ -156,7 +156,7 @@ Car Version=Car Version
 Last Trip=Last Trip
 Duration=Duration
 Distance=Distance
-Max km/h=Max km/h
+Max km/h="Max kph"
 PS=PS
 Current Pos=Current Pos
 Last Update=Last Update
@@ -183,7 +183,7 @@ Max Discharge=Max Discharge
 Cell Imbalance=Cell Imbalance
 Software Update=Software Update
 Consumption=Consumption
-Ø Consumption=Ø Consumption
+Ø Consumption="Avg Consumption"
 Please update to latest docker-compose.yml file. Check: {LINK}=Please update to latest docker-compose.yml file. Check: {LINK}
 
 #menu.php
@@ -214,7 +214,7 @@ Abetterrouteplanner=Abetterrouteplanner
 #password.php
 Teslalogger Tesla Credentials=Teslalogger Tesla Credentials
 Please enter your Tesla account credentials=Please enter your Tesla account credentials
-Email=Email
+Email="E-mail"
 Password=Password
 Repeat Password=Repeat Password
 Löschen=Erase
@@ -231,25 +231,25 @@ This isn't an auth link by Tesla!=This isn't an auth link by Tesla!
 The URL doesn't contain the expected format!="The URL is not in the expected format!"
 Access Token=Access Token
 Refresh Token=Refresh Token
-Car=Car
+Car="Vehicle"
 Free Supercharging=Free Supercharging
 Reconnect=Reconnect
 Model=Model
 VIN=VIN
 Free SUC=Free SUC
 Edit=Edit
-New car=New car
-TeslaAuthApps=You can use following apps to get an access token & refresh token from Tesla server:
+New car="New vehicle"
+TeslaAuthApps="Get an access- and refresh token with these apps:"
 BA_Browser=In local {browser}
 BA_Read=Please read all the steps before continuing:
 BA_Logon=Click on the link below titled <b>Tesla Logon</b> which will open a new tab/window for the Tesla Authentication logon page
 BA_Auth=Log on using your Tesla credentials and MFA if required (Tesla will remember these if you have used the link before)
 BA_NotFound=This will appear to result in a "Page Not Found". This is normal.
-BA_URL=Copy the resulting URL of that webpage into the form below. Within the URL is a one time, temporary code that we can use to generate tokens. We will extract this for you from the link.
+BA_URL="Paste the URL of the webpage below. Tokens will be generated from a temporary code in it."
 BA_Invalid=These links typically only work once, so if an "Invalid Grant" or other error message appears on our website you may need to start again with the Tesla Logon link which should produce a new link.
 BA_Logoff=If you want to use a different account, you have to manually log off {here!}
 BA_GetToken="Thereafter, tokens are fetched for your Tesla account."
-BA_SelectCar=Select the car you want to use for Teslalogger.
+BA_SelectCar="Select the car you want to use with Teslalogger."
 BA_Step1=Step 1:
 BA_Step2=Step 2:
 BA_Step3=Step 3:
@@ -260,7 +260,7 @@ BA_FLEETAPI=Tesla Fleet API (recommended)
 Get Tokens=Get Tokens
 
 #password_fleet.php
-PF_LOGOUT=Log out from your Tesla Account if you are already logged in
+PF_LOGOUT="Log out from your Tesla account if logged in already"
 PF_LOGIN=Go to the Tesla authentication page and allow Teslalogger to access your data
 PF_LINK=LINK
 PF_HELP=Help video
@@ -280,15 +280,15 @@ URL Admin Panel=Admin Panel URL
 All=All
 Stable=Stable
 None=None
-Enable=Enable
+Enable="Turn on"
 Celsius=Celsius
 Fahrenheit=Fahrenheit
 URL Grafana=Grafana URL
 Teslalogger HTTP Port=Teslalogger HTTP Port
 Zoom Level=Zoom Level
 ScanMyTesla integration=ScanMyTesla integration
-Main Car=Main Car
-Car Name=Car Name
+Main Car="Main Vehicle"
+Car Name="Vehicle Name"
 ScanMyTesla last received=ScanMyTesla last received
 Tasker Token=Tasker Token
 Tasker URL=Tasker URL
@@ -349,6 +349,7 @@ kWh laut Zähler / Rechnung=kWh according to meter / invoice
 Wirkungsgrad=Efficiency
 
 #Timeline Plugin.json
+Dauer=Duration
 Parking=Parking
 Driving=Driving
 Missing=Missing
@@ -406,8 +407,8 @@ ABRPTitle=Abetterrouteplanner Link
 TextABRP=You can setup a link from Teslalogger to Abetterrouteplanner to avoid giving your Tesla credentials to a 3rd Party. Another benefit is to minimize the possibility to prevent the car from going to sleep if more than one service is using your credentials.
 ABRP1=Create an Abetterrouteplanner account
 ABRP2=Go to Settings
-ABRP3=Choose your car
-ABRP4=Save your car to your account
+ABRP3="Choose your vehicle"
+ABRP4="Save vehicle to your account"
 ABRP5="Give your vehicle a name"
 ABRP6=Click on "Link Generic" to get a ABRP token
 ABRP7=Copy the token and click "Done"
@@ -415,7 +416,7 @@ ABRP8=Insert the token in Teslalogger
 ABRP9=Check if the Teslalogger is connected
 ABRPYT=Check YouTube tutorial for live demo
 ABRPToken=Abetterrouteplanner Token
-Enabled=Enabled
+Enabled="Turned on"
 
 #wallbox.php
 Wallbox=Wallbox
@@ -431,11 +432,11 @@ Vehicle kWh=Vehicle kWh
 
 #mqtt.php
 MQTTSettings=MQTT settings
-MQTTSettingsInfo=MQTT Host is mandatory. All other settings are optional
+MQTTSettingsInfo="MQTT Host is mandatory. All other settings are optional."
 TopicStructure=Topic structure:
 MQTT1="All values in one JSON (if turned on): "_QQ_"teslalogger/json/CAR_VIN/currentjson"_QQ_""
-MQTT2=All values as subtopics (if activated): "teslalogger/cars/CAR_VIN/ideal_battery_range_km"
-MQTT3="teslalogger" is parametrizable in field "Topic"
+MQTT2="All values as subtopics (if turned on): "_QQ_"teslalogger/cars/CAR_VIN/ideal_battery_range_km"_QQ_""
+MQTT3=""_QQ_"Teslalogger"_QQ_" is parametrizable in the field "_QQ_"Topic"_QQ_""
 MQTT4="CAR_VIN" is VIN of your car
 MQTT5="ideal_battery_range_km" are single topics
 ADDescription=AutoDiscovery:

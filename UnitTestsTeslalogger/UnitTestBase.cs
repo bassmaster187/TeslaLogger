@@ -11,6 +11,7 @@ using System.Web;
 
 using Newtonsoft.Json;
 using System.Data;
+using System.Security.Cryptography;
 
 namespace UnitTestsTeslalogger
 {
@@ -1070,6 +1071,36 @@ namespace UnitTestsTeslalogger
 
             t.GetString("software_update.version", out string version);
             Assert.AreEqual("2022.4.5.3", version);
+        }
+
+        [TestMethod]
+        public void TestEncryption()
+        {
+            var body = "hfsdohfoiHZIOUzhhr9083urhf983u4z098ZH)(/z0ß98zhgo8/ZT9ßp8uzh)PO(/Z noifjn398ru039euoiH)(Pzru9p83u4rjoifhnejj09f8u3094rj3f9843ur09ujoi";
+            var pass = "27dbeab3-1574-4bad-a7b5-d7dadb0de2d1";
+            var wrongPass = "hjiodgfodfgj";
+
+            string encrypted = StringCipher.Encrypt(body, pass);
+            string decrypted = StringCipher.Decrypt(encrypted, pass);   
+
+            Assert.AreEqual(body , decrypted);
+            Assert.AreNotEqual(body, encrypted);
+
+            var expectedExceptionCatched = false;
+
+            try
+            {
+                string decryptedWrong = StringCipher.Decrypt(encrypted, wrongPass);
+                Assert.Fail("Should throw an exception");
+            }
+            catch (CryptographicException ex)
+            {
+                expectedExceptionCatched = true;
+                System.Diagnostics.Debug.WriteLine("Expected CryptographicException catched");
+            }
+
+            if (!expectedExceptionCatched)
+                Assert.Fail("Expected CryptographicException not thrown");
         }
 
         /*

@@ -3,7 +3,7 @@ Delete=Borrar
 Save=Guardar
 Settings="Ajustes"
 Setup="Configurar"
-Enabled=Activado
+Enabled="encendido"
 kWh=kWh
 
 #Akku Trips.json
@@ -138,7 +138,7 @@ Online=Online
 Visited=Visitado
 
 #index.php
-Car Info=Información del coche
+Car Info="Información del vehículo"
 Status=Estado
 Typical Range=Autonomía típica
 Odometer=Odómetro
@@ -146,7 +146,7 @@ Car Version=Versión del coche
 Last Trip=Último Viaje
 Duration=Duración
 Distance=Distancia
-Max km/h=Km/h máximos
+Max km/h="Máx km/h"
 PS=Cv
 Current Pos=Pos. Actual
 Last Update=Última actualización
@@ -172,7 +172,7 @@ Max Discharge=Descarga máxima
 Cell Imbalance=Desequilibrio celular
 Software Update=Actualización de software
 Consumption=Consumo
-Ø Consumption=Ø Consumo
+Ø Consumption="Consumo promedio"
 Please update to latest docker-compose.yml file. Check: {LINK}=Por favor, actualice a la última docker-compose.yml archivo. Compruébelo: {LINK}
 
 #menu.php
@@ -202,7 +202,7 @@ Abetterrouteplanner=Planificador de rutas
 #password.php
 Teslalogger Tesla Credentials=Teslalogger Credenciales Tesla
 Please enter your Tesla account credentials=Por favor, introduce tus credenciales de Tesla
-Email=Email
+Email="Correo electrónico"
 Password=Contraseña
 Repeat Password=Repite Contraseña
 Speichern=Guardar
@@ -216,17 +216,17 @@ Unauthorized=Sin autorización
 This isn't a valid URL!="URL no válida."
 This isn't an auth link by Tesla!=¡Esto no es un enlace auth por Tesla!
 The URL doesn't contain the expected format!="¡La URL no tiene el formato esperado!"
-TeslaAuthApps=Puede utilizar las siguientes aplicaciones para obtener un token de acceso y un token de actualización del servidor Tesla:
+TeslaAuthApps="Obtenga un token de acceso y actualización con estas aplicaciones:"
 BA_Browser=En el {navegador} local (recomendado)
 BA_Read=Por favor, lea todos los pasos antes de continuar:
 BA_Logon="Haga clic en el siguiente enlace titulado <b>Inicio de sesión de Tesla</b> que abrirá una nueva pestaña/ventana para la página de inicio de sesión de autenticación de Tesla"
 BA_Auth="Inicie sesión con sus credenciales de Tesla y MFA si es necesario (Tesla los recordará si ha utilizado el enlace anteriormente)"
 BA_NotFound=Aparecerá el mensaje "Página no encontrada". Esto es normal.
-BA_URL=Copie la URL resultante de esa página web en el siguiente formulario. Dentro de la URL hay un código temporal que podemos utilizar para generar tokens. Lo extraeremos del enlace.
+BA_URL="Pegue la URL de la página web a continuación. Los tokens se generarán a partir de un código temporal que contenga."
 BA_Invalid=Estos enlaces normalmente sólo funcionan una vez, por lo que si aparece un mensaje de error "Concesión no válida" o de otro tipo en nuestro sitio web, es posible que tenga que empezar de nuevo con el enlace Tesla Logon, que debería producir un nuevo enlace.
 BA_Logoff="Si quieres utilizar una cuenta diferente, tienes que desconectarte manualmente {¡aquí!}"
 BA_GetToken="A continuación, se obtienen los tokens para su cuenta Tesla."
-BA_SelectCar=Seleccione el coche que desea utilizar para Teslalogger.
+BA_SelectCar="Seleccione el coche que desea utilizar con Teslalogger."
 BA_Step1=Paso 1:
 BA_Step2=Paso 2:
 BA_Step3=Paso 3:
@@ -236,7 +236,7 @@ BA_Paste="Pegue la URL resultante en la casilla y haga clic en el botón "_QQ_"O
 Get Tokens=Obtener fichas
 Access Token=Ficha de acceso
 Refresh Token=Actualizar ficha
-Car=Coche
+Car="Vehículo"
 Free Supercharging=Supercarga gratuita
 Reconnect=Vuelva a conectar
 Please choose your vehicle=Elija su vehículo
@@ -244,7 +244,7 @@ Model=Modelo
 VIN=VIN
 Free SUC=SUC gratuito
 Edit=Editar
-New car=Coche nuevo
+New car="Vehículo nuevo"
 
 #settings.php
 Credentials=Credenciales
@@ -256,15 +256,15 @@ URL Admin Panel=URL Panel Admin
 All=Todas
 Stable=Estable
 None=Ninguna
-Enable=Activar
+Enable="Encender"
 Celsius=Celsius
 Fahrenheit=Fahrenheit
 URL Grafana=URL Grafana
 Teslalogger HTTP Port=Puerto HTTP Teslalogger
 Zoom Level=Nivel de Zoom
 ScanMyTesla integration=Integración ScanMyTesla
-Main Car=Coche Principal
-Car Name=Nombre del Coche
+Main Car="Vehículo principal"
+Car Name="Nombre del vehículo"
 ScanMyTesla last received=ScanMyTesla última recepción
 Tasker Token=Token Tasker
 Tasker URL=URL Tasker
@@ -323,8 +323,8 @@ ABRPTitle=Enlace Abetterouteplanner
 TextABRP=Puede configurar un enlace de Teslalogger a Abetterouteplanner para evitar dar sus credenciales de Tesla a un tercero. Otro beneficio es minimizar la posibilidad de evitar que el auto se quede dormido si más de un servicio está usando sus credenciales.
 ABRP1=Crear una cuenta Abetterouteplanner
 ABRP2=Ir a Configuración
-ABRP3=Elige tu coche
-ABRP4=Guarda tu coche en tu cuenta
+ABRP3="Elige tu vehículo"
+ABRP4="Guarda tu vehículo en tu cuenta"
 ABRP5="Pon un nombre a tu vehículo"
 ABRP6=Haga clic en "Enlace genérico" para obtener un token ABRP
 ABRP7=Copie el token y haga clic en "Listo"
@@ -362,11 +362,11 @@ Vehicle kWh=Vehículo kWh
 
 #mqtt.php
 MQTTSettings="Ajustes MQTT"
-MQTTSettingsInfo="MQTT Host es obligatorio. Todos los demás ajustes son opcionales"
+MQTTSettingsInfo="MQTT Host es obligatorio. Todos los demás ajustes son opcionales."
 TopicStructure="Estructura del tema:"
 MQTT1="Todos los valores en un JSON (si está activado): "_QQ_"teslalogger/json/CAR_VIN/currentjson"_QQ_""
 MQTT2="Todos los valores como subtemas (si están activados): "_QQ_"teslalogger/cars/CAR_VIN/ideal_battery_range_km"_QQ_""
-MQTT3="teslalogger" is parametrizable in field "Topic"
+MQTT3=""_QQ_"Teslalogger"_QQ_" es parametrizable en el campo "_QQ_"Tema"_QQ_""
 MQTT4=""_QQ_"CAR_VIN"_QQ_" es el VIN de tu coche"
 MQTT5=""_QQ_"ideal_battery_range_km"_QQ_"son temas individuales"
 ADDescription=AutoDiscovery:
@@ -509,7 +509,7 @@ Löschen="Borrar"
 BA_FLEETAPI="Tesla Fleet API (recomendada)"
 
 #password_fleet.php
-PF_LOGOUT="Salga de su cuenta de Tesla si ya ha iniciado sesión"
+PF_LOGOUT="Salga de su cuenta Tesla si ya ha iniciado sesión"
 PF_LOGIN="Ir a la página de autenticación de Tesla y permitir Teslalogger para acceder a sus datos"
 PF_LINK="ENLACE"
 PF_HELP="Vídeo de ayuda"
@@ -549,3 +549,6 @@ startedAt="Iniciar"
 endedAt="Finalizar"
 Häufigkeit="Frecuencia"
 Fehler="Alertas"
+
+#Timeline Plugin.json
+Dauer="Duración"

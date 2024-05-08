@@ -637,8 +637,8 @@ namespace TeslaLogger
 
         void SetNewAccessToken(string access_token)
         {
-            Tesla_token = access_token;
-            car.Tesla_Token = access_token;
+            Tesla_token = StringCipher.Decrypt(access_token);
+            car.Tesla_Token = StringCipher.Decrypt(access_token);
             car.Tesla_Token_Expire = DateTime.Now;
             car.LoginRetryCounter = 0;
             car.DbHelper.UpdateTeslaToken();
@@ -5378,7 +5378,7 @@ DESC", con))
             [MethodImpl(MethodImplOptions.Synchronized)]
             set
             {
-                tesla_token = value;
+                tesla_token = StringCipher.Decrypt(value);
             }
         }
 

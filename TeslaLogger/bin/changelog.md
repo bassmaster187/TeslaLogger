@@ -1,5 +1,5 @@
-# Version 1.57.12
-- Bugfixes
+# Version 1.57.13
+- Use Guest NearbySuCService to complete Supercharger usage map
 
 # Version 1.57.11
 - Rollback code to 1.57.9
