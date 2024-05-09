@@ -222,6 +222,15 @@ CREATE TABLE teslacharging (
                     DBHelper.ExecuteSQLQuery(sql);
                     Logfile.Log("CREATE TABLE teslacharging OK");
                 }
+                // save invoice as PDF and remember file path
+                if (!DBHelper.ColumnExists("teslacharging", "invoicePDF"))
+                {
+                    Logfile.Log("ALTER TABLE teslacharging ADD Column invoicePDF");
+                    UpdateTeslalogger.AssertAlterDB();
+                    DBHelper.ExecuteSQLQuery(@"ALTER TABLE `teslacharging` 
+                    ADD COLUMN `invoicePDF` VARCHAR(512) NULL DEFAULT NULL", 600);
+                }
+
             }
             catch (Exception ex)
             {
