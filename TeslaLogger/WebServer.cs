@@ -2630,8 +2630,9 @@ DROP TABLE chargingstate_bak";
                     string password = r["password"];
                     bool freesuc = r["freesuc"];
 
-                    string access_token = r["access_token"];
-                    string refresh_token = r["refresh_token"];
+                    string access_token = StringCipher.Encrypt(r["access_token"].ToString());
+                    string refresh_token = StringCipher.Encrypt(r["refresh_token"].ToString());
+
                     bool FleetAPI = false;
 
                     if (r["fleetAPI"] != null)

@@ -397,7 +397,11 @@ WHERE
                         if (dr.Read())
                         {
                             string refresh_token = dr[0].ToString();
+                            refresh_token = StringCipher.Decrypt(refresh_token);
+
                             tesla_token = dr[1].ToString();
+                            tesla_token = StringCipher.Decrypt(tesla_token);
+
                             return refresh_token;
                         }
                     }
@@ -1536,13 +1540,18 @@ HAVING
                 }
 
                 car.Log("UpdateTeslaToken");
+
+                string token = car.webhelper.Tesla_token;
+
+                token = StringCipher.Encrypt(token);
+
                 using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
                 {
                     con.Open();
                     using (MySqlCommand cmd = new MySqlCommand("update cars set tesla_token = @tesla_token, tesla_token_expire=@tesla_token_expire where id=@id", con))
                     {
                         cmd.Parameters.AddWithValue("@id", car.CarInDB);
-                        cmd.Parameters.AddWithValue("@tesla_token", car.webhelper.Tesla_token);
+                        cmd.Parameters.AddWithValue("@tesla_token", token);
                         cmd.Parameters.AddWithValue("@tesla_token_expire", DateTime.Now);
                         int done = SQLTracer.TraceNQ(cmd, out _);
 
@@ -1652,6 +1661,8 @@ HAVING
                     return;
                 }
 
+                refresh_token = StringCipher.Encrypt(refresh_token);
+
                 car.Log("UpdateRefreshToken");
                 using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
                 {
@@ -1672,8 +1683,6 @@ HAVING
                 car.Log(ex.ToString());
             }
         }
-
-
 
         internal void UpdateCarColumn(string column, string value)
         {

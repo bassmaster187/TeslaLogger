@@ -239,7 +239,7 @@ namespace TeslaLogger
                     this.TeslaPasswort = TeslaPasswort;
                     this.CarInAccount = CarInAccount;
                     this.CarInDB = CarInDB;
-                    this.Tesla_Token = TeslaToken;
+                    this.Tesla_Token = StringCipher.Decrypt(TeslaToken);
                     this.Tesla_Token_Expire = TeslaTokenExpire;
                     this.ModelName = ModelName;
                     this.CarType = cartype;
