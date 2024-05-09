@@ -81,7 +81,7 @@ INSERT IGNORE INTO teslacharging SET
                             Regex rgx = new Regex("[^a-zA-Z-]");
                             siteLocationName = rgx.Replace(siteLocationName, "_");
                         }
-                        string invoicePDF = Path.Combine(invoiceDir, $"{DateTime.UtcNow:yyyy-MM-dd--HH-mm}--{siteLocationName}--{sessionId}.pdf");
+                        string invoicePDF = Path.Combine(invoiceDir, $"{chargeStartDateTime.ToString("yyyy-MM-dd--HH-mm", Tools.ciEnUS)}--{siteLocationName}--{sessionId}.pdf");
                         // if file does not exist yet ...
                         if (!File.Exists(invoicePDF))
                         {
