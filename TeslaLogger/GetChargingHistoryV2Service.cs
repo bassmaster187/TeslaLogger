@@ -93,6 +93,10 @@ INSERT IGNORE INTO teslacharging SET
                                 File.WriteAllBytes(invoicePDF, PDF);
                                 car.Log($"InvoicePDF: {PDF.Length} bytes written to {invoicePDF}");
                             }
+                            else
+                            {
+                                car.Log($"InvoicePDF: contentId {invoice["contentId"].ToString()} has zero bytes");
+                            }
                         }
                     }
                 }
