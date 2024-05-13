@@ -5000,7 +5000,7 @@ DESC", con))
             byte[] PDF = null;
             try
             {
-                HttpClient httpclientgetChargingHistoryV2 = GethttpclientgetChargingHistoryV2();
+                HttpClient httpclientgetChargingHistoryIonvoicePDF = GethttpclientgetChargingHistoryV2();
                 using (var request = new HttpRequestMessage(HttpMethod.Get, new Uri($"{apiaddress}api/1/dx/charging/invoice/{contentId}")))
                 {
                     Tools.DebugLog($"GetChargingHistoryInvoicePDF #{car.CarInDB} request: {request.RequestUri}");
@@ -5013,13 +5013,13 @@ DESC", con))
                     // request.Content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
 
                     DateTime start = DateTime.UtcNow;
-                    HttpResponseMessage result = await httpclientgetChargingHistoryV2.SendAsync(request);
+                    HttpResponseMessage result = await httpclientgetChargingHistoryIonvoicePDF.SendAsync(request);
                     PDF = await result.Content.ReadAsByteArrayAsync();
                     DBHelper.AddMothershipDataToDB("GetChargingHistoryInvoicePDF", start, (int)result.StatusCode);
 
                     if (!result.IsSuccessStatusCode)
                     {
-                        throw new Exception("GetChargingHistoryV2: " + result.StatusCode.ToString() + " CarState: " + car.GetCurrentState().ToString() + " (OK: " + car.webhelper.getChargingHistoryV2OK + " - Fail: " + car.webhelper.getChargingHistoryV2Fail + ")");
+                        throw new Exception("GetChargingHistoryInvoicePDF: " + result.StatusCode.ToString() + " CarState: " + car.GetCurrentState().ToString() + " (OK: " + car.webhelper.getChargingHistoryV2OK + " - Fail: " + car.webhelper.getChargingHistoryV2Fail + ")");
                     }
                     return PDF;
                 }
