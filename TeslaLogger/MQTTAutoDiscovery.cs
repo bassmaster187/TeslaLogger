@@ -61,6 +61,12 @@ namespace TeslaLogger
             autoDiscovery["charger_actual_current"]["unit"] = "A";
             autoDiscovery["charger_actual_current"]["class"] = "current";
 
+            autoDiscovery["charger_actual_current_calc"] = new Dictionary<string, string>();
+            autoDiscovery["charger_actual_current_calc"]["type"] = "sensor";
+            autoDiscovery["charger_actual_current_calc"]["name"] = "Charge current calculated";
+            autoDiscovery["charger_actual_current_calc"]["unit"] = "A";
+            autoDiscovery["charger_actual_current_calc"]["class"] = "current";
+
             autoDiscovery["charge_energy_added"] = new Dictionary<string, string>();
             autoDiscovery["charge_energy_added"]["type"] = "sensor";
             autoDiscovery["charge_energy_added"]["name"] = "Energy added";

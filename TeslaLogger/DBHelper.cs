@@ -1842,6 +1842,9 @@ HAVING
             car.CurrentJSON.current_charger_actual_current = 0;
             car.CurrentJSON.current_charge_current_request = 0;
             car.CurrentJSON.current_charge_rate_km = 0;
+            car.CurrentJSON.current_charger_actual_current_calc = 0;
+            car.CurrentJSON.current_charger_phases_calc = 0;
+            car.CurrentJSON.current_charger_power_calc_w = 0;
 
             UpdateMaxChargerPower();
 
@@ -4731,8 +4734,9 @@ WHERE
             int voltage = int.Parse(charger_voltage, Tools.ciEnUS);
             int actual_current = Convert.ToInt32(charger_actual_current, Tools.ciEnUS);
             int requested_current = Convert.ToInt32(charge_current_request, Tools.ciEnUS);
-            int phases_calculated = CalculatePhases(power, voltage, actual_current, requested_current);
-            int power_calculated = CalculatePower(voltage, phases_calculated, actual_current, requested_current);
+            int current_calculated = CalculateCurrent(actual_current, requested_current);
+            int phases_calculated = CalculatePhases(power, voltage, current_calculated);
+            int power_calculated = CalculatePower(voltage, phases_calculated, current_calculated);
 
             // default waitbetween2pointsdb
             double waitbetween2pointsdb = 1000.0 / powerkW;
@@ -4788,6 +4792,7 @@ INSERT
         charger_phases,
         charger_phases_calc,
         charger_actual_current,
+        charger_actual_current_calc,
         outside_temp,
         charger_pilot_current,
         charge_current_request,
@@ -4806,6 +4811,7 @@ VALUES(
     @charger_phases,
     @charger_phases_calc,
     @charger_actual_current,
+    @charger_actual_current_calc,
     @outside_temp,
     @charger_pilot_current,
     @charge_current_request,
@@ -4824,6 +4830,7 @@ VALUES(
                         cmd.Parameters.AddWithValue("@charger_phases", charger_phases);
                         cmd.Parameters.AddWithValue("@charger_phases_calc", phases_calculated);
                         cmd.Parameters.AddWithValue("@charger_actual_current", charger_actual_current);
+                        cmd.Parameters.AddWithValue("@charger_actual_current_calc", current_calculated);
                         cmd.Parameters.AddWithValue("@battery_heater", car.CurrentJSON.current_battery_heater ? 1 : 0);
 
                         if (charger_pilot_current != null && int.TryParse(charger_pilot_current, out int i))
@@ -4879,6 +4886,7 @@ VALUES(
                 car.CurrentJSON.current_charger_actual_current = actual_current;
                 car.CurrentJSON.current_charge_current_request = requested_current;
                 car.CurrentJSON.current_charger_phases = Convert.ToInt32(charger_phases, Tools.ciEnUS);
+                car.CurrentJSON.current_charger_actual_current_calc = current_calculated;
                 car.CurrentJSON.current_charger_phases_calc = phases_calculated;
                 car.CurrentJSON.current_charger_power_calc_w = power_calculated;
                 car.CurrentJSON.CreateCurrentJSON();
@@ -4890,12 +4898,19 @@ VALUES(
             }
         }
 
-        public static int CalculatePhases(int power, int voltage, int actualCurrent, int requestedCurrent)
+        public static int CalculateCurrent(int actualCurrent, int requestedCurrent)
         {
-            int current = actualCurrent;
-            if (actualCurrent > requestedCurrent && requestedCurrent < 5)
-                current = requestedCurrent;
-            
+            if (actualCurrent < 1 || requestedCurrent < 1)
+                return 0;
+
+            if (actualCurrent > requestedCurrent && requestedCurrent < 6)
+                return requestedCurrent;
+
+            return actualCurrent;
+        }
+
+        public static int CalculatePhases(int power, int voltage, int current)
+        {
             if (power <= 0 || voltage <= 0 || current <= 0 )
                 return 0;
 
@@ -4909,16 +4924,13 @@ VALUES(
             
             return phases;
         }
-
-        public static int CalculatePower(int voltage, int phases, int actualCurrent, int requestedCurrent)
+        
+        public static int CalculatePower(int voltage, int phases, int current)
         {
-            if (voltage < 0 || phases < 1 || actualCurrent < 1 || requestedCurrent < 1)
+            if (voltage < 0 || phases < 1 || current < 1)
                 return 0;
-            
-            if (actualCurrent > requestedCurrent && requestedCurrent < 5)
-                return phases * voltage * requestedCurrent;
-            
-            return phases * voltage * actualCurrent;
+                       
+            return phases * voltage * current;
         }
 
         public static DateTime UnixToDateTime(long t)

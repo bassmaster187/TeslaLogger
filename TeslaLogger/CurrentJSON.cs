@@ -31,6 +31,7 @@ namespace TeslaLogger
         public int current_charger_phases; // defaults to 0
         public int current_charger_phases_calc; // defaults to 0
         public int current_charger_actual_current; // defaults to 0
+        public int current_charger_actual_current_calc; // defaults to 0
         public int current_charge_current_request; // defaults to 0
         public double current_charge_energy_added; // defaults to 0
         public int current_charger_power; // defaults to 0
@@ -205,6 +206,7 @@ namespace TeslaLogger
                    { "charger_phases", current_charger_phases},
                    { "charger_phases_calc", current_charger_phases_calc},
                    { "charger_actual_current", current_charger_actual_current},
+                   { "charger_actual_current_calc", current_charger_actual_current_calc},
                    { "charge_current_request", current_charge_current_request},
                    { "charge_energy_added", current_charge_energy_added},
                    { "charger_power", current_charger_power},
