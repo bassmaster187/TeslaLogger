@@ -27,7 +27,7 @@ using System.Runtime.CompilerServices;
 //      Hauptversion
 //      Nebenversion
 //      Buildnummer
-//      Revision
+//      Revision 
 //
 // Sie können alle Werte angeben oder Standardwerte für die Build- und Revisionsnummern verwenden,
 // übernehmen, indem Sie "*" eingeben:

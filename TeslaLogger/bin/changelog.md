@@ -1,3 +1,6 @@
+# Version 1.57.14
+- Tesla access token and refresh token are stored encryted
+
 # Version 1.57.13
 - Use Guest NearbySuCService to complete Supercharger usage map
 
