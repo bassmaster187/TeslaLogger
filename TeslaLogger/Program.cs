@@ -374,6 +374,7 @@ namespace TeslaLogger
         private static void InitStage1()
         {
             Tools.SetThreadEnUS();
+            UpdateTeslalogger.Chmod("encryption.txt", 600, false);
             UpdateTeslalogger.Chmod("nohup.out", 666, false);
             UpdateTeslalogger.Chmod("backup.sh", 777, false);
             UpdateTeslalogger.Chmod("TeslaLogger.exe", 755, false);
