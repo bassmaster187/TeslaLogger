@@ -12,6 +12,7 @@ using System.IO.Compression;
 using Exceptionless;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using System.Diagnostics;
 
 namespace TeslaLogger
 {
@@ -1429,29 +1430,39 @@ PRIMARY KEY(id)
 
                 Tools.CopyFilesRecursively(new DirectoryInfo("/etc/teslalogger/git/TeslaLogger/bin"), new DirectoryInfo("/etc/teslalogger"), "TeslaLogger.exe");
 
-                try
+                if (System.Diagnostics.Process.GetCurrentProcess().ProcessName.Equals("TeslaLogger"))
                 {
-                    Tools.CopyFile("/etc/teslalogger/git/TeslaLogger/bin/TeslaLogger.exe", "/etc/teslalogger/TeslaLogger.exe");
+                    try
+                    {
+                        Tools.CopyFile("/etc/teslalogger/git/TeslaLogger/bin/TeslaLogger.exe", "/etc/teslalogger/TLUpdate.exe");
+                        foreach (Car car in Car.Allcars)
+                        {
+                            car.CurrentJSON.ToKVS();
+                        }
+                        ExceptionlessClient.Default.CreateLog("Install", "Update finished!").FirstCarUserID().Submit();
+                        await ExceptionlessClient.Default.ProcessQueueAsync();
+                        using (Process process = new Process
+                        {
+                            StartInfo = new ProcessStartInfo
+                            {
+                                FileName = "/etc/teslalogger/TLUpdate.exe",
+                                UseShellExecute = false,
+                                RedirectStandardOutput = true,
+                                CreateNoWindow = true
+                            }
+                        })
+                        {
+                            process.Start();
+                            process.WaitForExit();
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        ex.ToExceptionless().FirstCarUserID().Submit();
+                        Logfile.Log(ex.ToString());
+                    }
                 }
-                catch (Exception ex)
-                {
-                    ex.ToExceptionless().FirstCarUserID().Submit();
-                    Logfile.Log(ex.ToString());
-                }
 
-                ExceptionlessClient.Default.CreateLog("Install", "Update finished!").FirstCarUserID().Submit();
-                ExceptionlessClient.Default.ProcessQueueAsync();
-
-                Logfile.Log("End update");
-
-                Logfile.Log("Rebooting");
-
-                foreach (Car car in Car.Allcars)
-                {
-                    car.CurrentJSON.ToKVS();
-                }
-
-                Tools.ExecMono("reboot", "");
             }
         }
 

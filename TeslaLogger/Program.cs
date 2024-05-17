@@ -29,8 +29,31 @@ namespace TeslaLogger
         private static WebServer webServer;
         private static bool OVMSStarted; // defaults to false;
 
-        private static void Main(string[] args)
+        private static void Main(string[] _)
         {
+            // TLUpdate.exe main
+            if (System.Diagnostics.Process.GetCurrentProcess().ProcessName.Equals("TLUpdate"))
+            {
+                try
+                {
+                    Tools.ExecMono("pkill", "TeslaLogger.exe");
+
+                    Tools.CopyFile("/etc/teslalogger/git/TeslaLogger/bin/TeslaLogger.exe", "/etc/teslalogger/TeslaLogger.exe");
+
+                    Logfile.Log("End update");
+
+                    Logfile.Log("Rebooting");
+
+                    Tools.ExecMono("reboot", "");
+                }
+                catch (Exception ex)
+                {
+                    ex.ToExceptionless().FirstCarUserID().Submit();
+                    Logfile.Log(ex.ToString());
+                }
+            }
+
+            // TeslaLogger.exe main
             try
             {
                 try
@@ -374,7 +397,6 @@ namespace TeslaLogger
         private static void InitStage1()
         {
             Tools.SetThreadEnUS();
-            UpdateTeslalogger.Chmod("encryption.txt", 600, false);
             UpdateTeslalogger.Chmod("nohup.out", 666, false);
             UpdateTeslalogger.Chmod("backup.sh", 777, false);
             UpdateTeslalogger.Chmod("TeslaLogger.exe", 755, false);
