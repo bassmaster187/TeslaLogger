@@ -27,12 +27,12 @@ using System.Runtime.CompilerServices;
 //      Hauptversion
 //      Nebenversion
 //      Buildnummer
-//      Revision
+//      Revision 
 //
 // Sie können alle Werte angeben oder Standardwerte für die Build- und Revisionsnummern verwenden,
 // übernehmen, indem Sie "*" eingeben:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.57.13.0")]
-[assembly: AssemblyFileVersion("1.57.13.0")]
+[assembly: AssemblyVersion("1.58.0.0")]
+[assembly: AssemblyFileVersion("1.58.0.0")]
 
 [assembly: InternalsVisibleTo("UnitTestsTeslalogger")]
