@@ -1430,6 +1430,7 @@ PRIMARY KEY(id)
 
                 Tools.CopyFilesRecursively(new DirectoryInfo("/etc/teslalogger/git/TeslaLogger/bin"), new DirectoryInfo("/etc/teslalogger"), "TeslaLogger.exe");
 
+                // running in TeslaLogger.exe, prepare update in separate process
                 if (System.Diagnostics.Process.GetCurrentProcess().ProcessName.Equals("TeslaLogger"))
                 {
                     try
@@ -1452,6 +1453,7 @@ PRIMARY KEY(id)
                             }
                         })
                         {
+                            Logfile.Log(" *** starting TLUpdate.exe now ***");
                             process.Start();
                             process.WaitForExit();
                         }

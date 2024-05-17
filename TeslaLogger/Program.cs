@@ -34,6 +34,7 @@ namespace TeslaLogger
             // TLUpdate.exe main
             if (System.Diagnostics.Process.GetCurrentProcess().ProcessName.Equals("TLUpdate"))
             {
+                Logfile.Log(" *** TLUpdate MAIN ***");
                 try
                 {
                     Tools.ExecMono("pkill", "TeslaLogger.exe");
