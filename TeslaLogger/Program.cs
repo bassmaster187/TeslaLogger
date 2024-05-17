@@ -39,6 +39,8 @@ namespace TeslaLogger
                 {
                     Tools.ExecMono("pkill", "TeslaLogger.exe");
 
+                    Tools.CopyFilesRecursively(new DirectoryInfo("/etc/teslalogger/git/TeslaLogger/bin"), new DirectoryInfo("/etc/teslalogger"), "TeslaLogger.exe");
+
                     Tools.CopyFile("/etc/teslalogger/git/TeslaLogger/bin/TeslaLogger.exe", "/etc/teslalogger/TeslaLogger.exe");
 
                     Logfile.Log("End update");
