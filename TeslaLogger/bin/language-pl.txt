@@ -1,60 +1,60 @@
 ﻿#Akku Trips.json
-Akku Trips=
-Start Trip=
-End Trip=
-Time=
-StartSOC=
-EndSOC=
-SOC diff=
-Start km=
-End km=
-Start mi=
-End mi=
-kmDiff=
-Max Range=
-Ø Verbrauch=
-Tage=
-Save=
+Akku Trips="Użycie baterii (w czasie jazdy)"
+Start Trip="Początek trasy"
+End Trip="Koniec trasy"
+Time="Data"
+StartSOC="SOC początkowy"
+EndSOC="SOC końcowy"
+SOC diff="SOC różnica"
+Start km="Początek km"
+End km="Koniec km"
+Start mi="Początek mi"
+End mi="Koniec mi"
+kmDiff="Różnica km"
+Max Range="Maksymalny zasięg"
+Ø Verbrauch="Średnie zużycie"
+Tage="Dni"
+Save="Zapisz"
 
 #Degradation.json
-Degradation=
-Maximalreichweite [km]=
-Maximalreichweite [mi]=
-km Stand [km]=
-mi Stand [mi]=
-Odometer [mi]=
-Max. Reichweite (Monatsmittel) [km]=
-Max. Reichweite (Monatsmittel) [mi]=
+Degradation="Degradacja"
+Maximalreichweite [km]="Maksymalny zasięg [km]"
+Maximalreichweite [mi]="Maksymalny zasięg [mi]"
+km Stand [km]="Dystans [km]"
+mi Stand [mi]="Przebieg [mi]"
+Odometer [mi]="Przebieg [mi]"
+Max. Reichweite (Monatsmittel) [km]="Zasięg maksymalny (średnia miesięczna) [km]"
+Max. Reichweite (Monatsmittel) [mi]="Zasięg maksymalny (średnia miesięczna) [mi]"
 
 #Ladehistorie.json
-Ladehistorie=
-Startdatum=
-Enddatum=
-geladen kWh=
-km Stand=
-Adresse=
+Ladehistorie="Historia ładowania"
+Startdatum="Data startu"
+Enddatum="Data końca"
+geladen kWh="Naładowano kWh"
+km Stand="Przebieg"
+Adresse="Adres"
 TR km Start=
 TR km Ende=
-SOC Ende=
+SOC Ende="SOC końcowe"
 100% TR=
-Minuten=
+Minuten="Minuty"
 TR mi Start=
 TR mi Ende=
-ØkW=
+ØkW="Średnio kW"
 
 #Ladestatistik.json
-Ladestatistik=
-Letzte Ladung=
-Ort=
-Ø geladen kWh=
-Ladezeit h=
-Ø SOC=
-Max SOC=
-Anzahl Ladungen=
+Ladestatistik="Statystyki ładowania"
+Letzte Ladung="Ostatnie ładowanie"
+Ort="Adres"
+Ø geladen kWh="Średnie ładowanie kWh"
+Ladezeit h="Czas ładowania h"
+Ø SOC="SOC średnio"
+Max SOC="SOC maksymalne"
+Anzahl Ladungen="Ilość ładowań"
 Anzahl=
-Geladen=
-Ladezeit=
-Anz. Ladungen=
+Geladen="Naładowano"
+Ladezeit="Czas ładowania"
+Anz. Ladungen="Ilość"
 Ladehub=
 PV=
 
@@ -116,7 +116,7 @@ Letzte Fahrt=
 Ø Verbrauch kWh/100km=
 Ø Verbraucht kWh=
 Anzahl Trips=
-Anzahl=
+Anzahl="Ilość"
 Fahrzeug=
 
 #Vampir Drain.json
