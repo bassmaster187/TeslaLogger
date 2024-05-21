@@ -988,6 +988,27 @@ PRIMARY KEY(id)
                 DBHelper.ExecuteSQLQuery("ALTER TABLE charging ADD COLUMN battery_range_km DOUBLE NULL", 600);
             }
 
+            if (!DBHelper.ColumnExists("charging", "charger_actual_current_calc"))
+            {
+                Logfile.Log("ALTER TABLE charging ADD COLUMN charger_actual_current_calc INT NULL");
+                AssertAlterDB();
+                DBHelper.ExecuteSQLQuery("ALTER TABLE charging ADD COLUMN charger_actual_current_calc INT NULL");
+            }
+
+            if (!DBHelper.ColumnExists("charging", "charger_phases_calc"))
+            {
+                Logfile.Log("ALTER TABLE charging ADD COLUMN charger_phases_calc TINYINT(1) NULL");
+                AssertAlterDB();
+                DBHelper.ExecuteSQLQuery("ALTER TABLE charging ADD COLUMN charger_phases_calc TINYINT(1) NULL");
+            }
+
+            if (!DBHelper.ColumnExists("charging", "charger_power_calc_w"))
+            {
+                Logfile.Log("ALTER TABLE charging ADD COLUMN charger_power_calc_w INT NULL");
+                AssertAlterDB();
+                DBHelper.ExecuteSQLQuery("ALTER TABLE charging ADD COLUMN charger_power_calc_w INT NULL");
+            }
+
             InsertCarID_Column("charging"); 
         }
 
