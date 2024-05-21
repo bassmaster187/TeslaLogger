@@ -544,3 +544,13 @@ Zelltemperatur="Celletemperatur"
 #journeys.php
 Ladezeit [h]="Ladetid [h]"
 Nur verfügbar mit ScanMyTesla="Kun tilgjengelig med ScanMyTesla"
+
+#Timeline Plugin.json
+Dauer="Varighet"
+endedAt="Slutt"
+Häufigkeit="Frekvens"
+Fehler="Varsler"
+startedAt="Start"
+
+#Vehicle Alerts
+Fahrzeug Fehler="Kjøretøyvarsler"
