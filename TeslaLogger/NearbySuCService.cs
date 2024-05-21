@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 using System.Threading;
-
 using MySql.Data.MySqlClient;
 using Exceptionless;
 using Newtonsoft.Json;
@@ -12,7 +11,6 @@ using System.Runtime.Caching;
 using Newtonsoft.Json.Linq;
 using System.Net.Http.Headers;
 using System.Net;
-using Microsoft.VisualBasic.Logging;
 
 namespace TeslaLogger
 {

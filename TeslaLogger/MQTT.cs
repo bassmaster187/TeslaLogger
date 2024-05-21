@@ -1,17 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Net;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Text.RegularExpressions;
-
 using Exceptionless;
 using Newtonsoft.Json;
 using uPLibrary.Networking.M2Mqtt.Messages;
 using uPLibrary.Networking.M2Mqtt;
-using System.Net.Sockets;
 
 namespace TeslaLogger
 {

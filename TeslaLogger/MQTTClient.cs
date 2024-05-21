@@ -1,6 +1,5 @@
 ﻿using System;
 using Exceptionless;
-using Exceptionless;
 using Newtonsoft.Json;
 
 namespace TeslaLogger

@@ -1,6 +1,4 @@
-﻿using Exceptionless.Utility;
-using Newtonsoft.Json;
-using Org.BouncyCastle.Asn1.X509;
+﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Net.WebSockets;
@@ -9,10 +7,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Linq;
 using MySql.Data.MySqlClient;
-using System.Configuration;
 using System.Reflection;
-using System.IO;
-using System.Runtime.ConstrainedExecution;
 
 namespace TeslaLogger
 {
