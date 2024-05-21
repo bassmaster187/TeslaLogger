@@ -51,7 +51,7 @@ namespace UnitTestsTeslalogger
         public void SulzbacherStr()
         {
             string temp = WebHelper.ReverseGecocodingAsync(c, 48.96092, 9.43113, true).Result;
-            Assert.AreEqual("71522 Backnang, Sulzbacher Straße 176", temp);
+            Assert.AreEqual("71522 Backnang, Sulzbacher Straße", temp);
             Assert.AreEqual("de", c.CurrentJSON.current_country_code);
             Assert.AreEqual("BW", c.CurrentJSON.current_state);
         }
