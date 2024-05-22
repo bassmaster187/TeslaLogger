@@ -929,7 +929,7 @@ namespace TeslaLogger
                                         // check if car is already asleep/offline and we can break the loop
                                         string online = webhelper.IsOnline().Result;
                                         Tools.DebugLog($"IsOnline():{online} x:{x}");
-                                        if (online.Equals("offline") || online.Equals("asleep"))
+                                        if (online != null && (online.Equals("offline") || online.Equals("asleep")))
                                         {
                                             Log($"Car is {online} now");
                                             Log("Restart communication with Tesla Server! 3");
