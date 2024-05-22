@@ -999,7 +999,7 @@ PRIMARY KEY(id)
             {
                 Logfile.Log("ALTER TABLE charging ADD COLUMN charger_phases_calc TINYINT(1) NULL");
                 AssertAlterDB();
-                DBHelper.ExecuteSQLQuery("ALTER TABLE charging ADD COLUMN charger_phases_calc TINYINT(1) NULL");
+                DBHelper.ExecuteSQLQuery("ALTER TABLE charging ADD COLUMN charger_phases_calc TINYINT(1) NULL", 600);
             }
 
             if (!DBHelper.ColumnExists("charging", "charger_power_calc_w"))
