@@ -31,31 +31,6 @@ namespace TeslaLogger
 
         private static void Main(string[] _)
         {
-            // TLUpdate.exe main
-            if (System.Diagnostics.Process.GetCurrentProcess().ProcessName.Equals("TLUpdate"))
-            {
-                Console.WriteLine(" *** TLUpdate MAIN ***");
-                try
-                {
-                    // do not kill Tools.ExecMono("pkill", "TeslaLogger.exe");
-
-                    Tools.CopyFilesRecursively(new DirectoryInfo("/etc/teslalogger/git/TeslaLogger/bin"), new DirectoryInfo("/etc/teslalogger"), "TeslaLogger.exe");
-
-                    Tools.CopyFile("/etc/teslalogger/git/TeslaLogger/bin/TeslaLogger.exe", "/etc/teslalogger/TeslaLogger.exe");
-
-                    Console.WriteLine("End update");
-
-                    Console.WriteLine("Rebooting");
-
-                    Tools.ExecMono("reboot", "");
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex.ToString());
-                }
-            }
-
-            // TeslaLogger.exe main
             try
             {
                 try

@@ -1453,7 +1453,7 @@ PRIMARY KEY(id)
                 {
                     try
                     {
-                        Tools.CopyFile("/etc/teslalogger/git/TeslaLogger/bin/TeslaLogger.exe", "/etc/teslalogger/TLUpdate.exe");
+                        Tools.CopyFile("/etc/teslalogger/git/TeslaLogger/bin/TLUpdate.exe", "/etc/teslalogger/TLUpdate.exe");
                         foreach (Car car in Car.Allcars)
                         {
                             car.CurrentJSON.ToKVS();
