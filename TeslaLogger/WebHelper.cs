@@ -5019,6 +5019,7 @@ DESC", con))
 
                     if (!result.IsSuccessStatusCode)
                     {
+                        PDF = null;
                         throw new Exception("GetChargingHistoryInvoicePDF: " + result.StatusCode.ToString() + " CarState: " + car.GetCurrentState().ToString() + " (OK: " + car.webhelper.getChargingHistoryV2OK + " - Fail: " + car.webhelper.getChargingHistoryV2Fail + ")");
                     }
                     return PDF;
