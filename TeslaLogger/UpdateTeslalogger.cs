@@ -1006,7 +1006,7 @@ PRIMARY KEY(id)
             {
                 Logfile.Log("ALTER TABLE charging ADD COLUMN charger_power_calc_w INT NULL");
                 AssertAlterDB();
-                DBHelper.ExecuteSQLQuery("ALTER TABLE charging ADD COLUMN charger_power_calc_w INT NULL");
+                DBHelper.ExecuteSQLQuery("ALTER TABLE charging ADD COLUMN charger_power_calc_w INT NULL", 600);
             }
 
             InsertCarID_Column("charging"); 
