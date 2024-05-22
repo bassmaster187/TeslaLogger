@@ -59,6 +59,9 @@ if(file_exists($filename))
 		if (count($a) == 1)
 			continue;
 
+		if (empty($a[1]))
+			continue;
+
 		$tmp = $a[1];
 
 		if ($tmp[0] == '"' && $tmp[strlen($tmp)-1] == '"')

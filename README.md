@@ -107,6 +107,13 @@ You can import your Teslamate data [here](Teslamate-Import/README.md).
 
 You can setup a link from Teslalogger to Abetterrouteplanner to avoid giving your Tesla credentials to a 3rd Party. Another benefit is to minimize the possibility to prevent the car from going to sleep if more than one service is using your credentials. [YouTube](https://www.youtube.com/watch?v=00s7Y8Iv2iw)
 
+## Translations
+You can use our [Weblate page](https://hosted.weblate.org/engage/teslalogger/) to help translate Teslalogger into new languages.
+
+<a href="https://hosted.weblate.org/engage/teslalogger/">
+<img src="https://hosted.weblate.org/widget/teslalogger/teslalogger/open-graph.png" width="500" alt="Translation status" />
+</a>
+
 ## Donations
 
 [![Paypal Donate](https://img.shields.io/badge/Donate-PayPal-ff69b4.svg)](http://paypal.me/ChristianPogea)

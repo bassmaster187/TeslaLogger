@@ -4992,8 +4992,43 @@ DESC", con))
 
                 car.Log(ex.Message);
             }
-
             return "{}";
+        }
+
+        public async Task<byte[]> GetChargingHistoryInvoicePDF(string contentId)
+        {
+            byte[] PDF = null;
+            try
+            {
+                HttpClient httpclientgetChargingHistoryIonvoicePDF = GethttpclientgetChargingHistoryV2();
+                using (var request = new HttpRequestMessage(HttpMethod.Get, new Uri($"{apiaddress}api/1/dx/charging/invoice/{contentId}")))
+                {
+                    Tools.DebugLog($"GetChargingHistoryInvoicePDF #{car.CarInDB} request: {request.RequestUri}");
+                    request.Headers.Add("Authorization", "Bearer " + Tesla_token);
+                    // xxx request.Content = new StringContent("");
+                    if (apiaddress.StartsWith("https://") && apiaddress.EndsWith("/"))
+                    {
+                        request.Headers.Host = apiaddress.Replace("https://", "").Replace("/", "");
+                    }
+                    // request.Content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+
+                    DateTime start = DateTime.UtcNow;
+                    HttpResponseMessage result = await httpclientgetChargingHistoryIonvoicePDF.SendAsync(request);
+                    PDF = await result.Content.ReadAsByteArrayAsync();
+                    DBHelper.AddMothershipDataToDB("GetChargingHistoryInvoicePDF", start, (int)result.StatusCode);
+
+                    if (!result.IsSuccessStatusCode)
+                    {
+                        throw new Exception("GetChargingHistoryInvoicePDF: " + result.StatusCode.ToString() + " CarState: " + car.GetCurrentState().ToString() + " (OK: " + car.webhelper.getChargingHistoryV2OK + " - Fail: " + car.webhelper.getChargingHistoryV2Fail + ")");
+                    }
+                    return PDF;
+                }
+            }
+            catch (Exception ex)
+            {
+                car.Log(ex.Message);
+            }
+            return PDF;
         }
 
         public async Task<string> PostCommand(string cmd, string data, bool _json = false)
