@@ -1473,6 +1473,10 @@ PRIMARY KEY(id)
                         {
                             Logfile.Log(" *** starting TLUpdate.exe now ***");
                             process.Start();
+                            while (!process.StandardOutput.EndOfStream)
+                            {
+                                Logfile.Log(process.StandardOutput.ReadLine());
+                            }
                             process.WaitForExit();
                         }
                     }
