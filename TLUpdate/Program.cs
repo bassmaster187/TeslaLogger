@@ -16,15 +16,15 @@ namespace TLUpdate
 
                 Console.WriteLine("End update");
 
-                if (Tools.IsMono())
-                {
-                    Console.WriteLine("Rebooting ...");
-                    Tools.ExecMono("reboot", "");
-                }
-                else
+                if (Tools.IsDocker())
                 {
                     Console.WriteLine("Restarting ...");
                     Environment.Exit(0);
+                }
+                else
+                {
+                    Console.WriteLine("Rebooting ...");
+                    Tools.ExecMono("reboot", "");
                 }
             }
             catch (Exception ex)

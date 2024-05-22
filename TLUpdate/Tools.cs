@@ -153,6 +153,24 @@ namespace TLUpdate
             }
             return "NULL";
         }
+
+        public static bool IsDocker()
+        {
+            try
+            {
+                string filename = "/tmp/teslalogger-DOCKER";
+                if (File.Exists(filename))
+                {
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Exception " + ex.Message);
+            }
+
+            return false;
+        }
     }
 }
 
