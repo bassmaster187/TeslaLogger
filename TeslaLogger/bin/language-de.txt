@@ -116,7 +116,7 @@ Please choose your vehicle=Bitte wählen Sie Ihr Fahrzeug aus
 Bitte Tesla Account Zugangsdaten eingeben=Bitte Tesla Account Zugangsdaten eingeben
 Please enter your Tesla account credentials=Bitte geben Sie Ihre Tesla-Zugangsdaten ein
 Please select a vehicle=Bitte wählen Sie ein Fahrzeug aus
-TeslaAuthApps="Du kannst folgende Apps verwenden, um ein Access Token & Refresh Token vom Tesla-Server zu generieren:"
+TeslaAuthApps="Generiere ein Access- und Refresh-Token mit diesen Apps:"
 BA_Browser=Im lokalen {Browser}
 BA_Read=Bitte lesen Sie alle Schritte, bevor Sie fortfahren:
 BA_Logon=Klicken Sie auf den unten stehenden <b>Tesla Logon</b> Link, der einen neuen Tab für die Tesla-Anmeldeseite öffnet
@@ -156,8 +156,8 @@ Do you really want to delete this vehicle?="Dieses Fahrzeug löschen?"
 Check Logfile in one minute!=Bitte die Logdatei in einer Minute prüfen!
 Unauthorized=Nicht autorisiert
 This isn't a valid URL!="Ungültige URL!"
-This isn't an auth link by Tesla!=Dies ist ein Autorisierungslink von Tesla!
-The URL doesn't contain the expected format!="Die URL ist nicht im erwartete Format!"
+This isn't an auth link by Tesla!="Dies ist kein Autorisierungslink von Tesla!"
+The URL doesn't contain the expected format!="Die URL ist nicht im erwarteten Format!"
 
 #password_fleet.php
 PF_LOGOUT="Melden Sie sich von Ihrem Tesla-Konto ab, wenn Sie bereits eingeloggt sind"
