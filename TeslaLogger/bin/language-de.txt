@@ -21,7 +21,7 @@ Last Driven=Letzte Fahrt  * * *
 
 #index.php
 Battery Heater=Batterie-Heizung
-Car Info="Fahrzeuginformationen"
+Car Info="Fahrzeug-Info"
 Car Version=Fahrzeug-Version
 Cell Imbalance=Zellen-Imbalance
 Cell Temp=Zelltemperatur
@@ -37,7 +37,7 @@ Last Trip=Letzte Fahrt
 Last Update=Letztes Update
 Max Charge=Max. Ladung
 Max Discharge=Max. Entladung
-Max km/h="Max. km/h"
+Max km/h="Max km/h"
 No=Nein
 Odometer=Kilometerstand
 Resume Teslalogger=Teslalogger starten
@@ -330,9 +330,9 @@ Restart=Neustart
 Dashboards=Dashboards
 Fleet Statistic=Flottenstatistik
 My Degradation=Meine Degradation
-My Charging AVG=Meine Aufladungen AVG
-Fleet Degradation AVG=Flotten-Degradation AVG
-Fleet Charging AVG=Flottenaufladung AVG
+My Charging AVG="Ø meiner Aufladungen"
+Fleet Degradation AVG="Ø Flotten-Degradation"
+Fleet Charging AVG="Ø Flottenaufladung"
 Fleet Charging MAX (Firmware)=Flottenladestation MAX (Firmware)
 Fleet Charging Locations=Flotten-Ladestationen
 Fleet Fast Charging Map=Flotten-Schnellladekarte
@@ -362,7 +362,7 @@ TextRestore2=Der Wiederherstellungsprozess kann bis zu 10 Minuten dauern!
 TextRestore3=Unterbrechen Sie den Wiederherstellungsprozess in keiner Weise! Laden Sie die Seite nicht neu! Schließen Sie diese Seite nicht!
 
 #dashboard.php
-Sleeping="Schlafen"
+Sleeping="Schläft"
 Start Trip="Fahrtbeginn"
 End Trip="Fahrtende"
 Start km="Start km"
@@ -521,7 +521,7 @@ Zellspannungen="Zellspannungen"
 #Status.json
 Current Status="Aktueller Status"
 Geschwindigkeit [mph]="Geschwindigkeit [mph]"
-Schlafen="Schlafen"
+Schlafen="Schläft"
 Angefordert [A]="Angefordert [A]"
 Start Adresse="Start Adresse"
 Ø PS="Ø PS"
@@ -538,7 +538,7 @@ kWh laut Zähler / Rechnung="kWh laut Zähler / Rechnung"
 Anzahl Trips="Anzahl Fahrten"
 
 #Visited.json
-Visited="Besuchte Standorte"
+Visited="Besuchte Orte"
 Ø Verbrauch [kWh]="Ø Verbrauch kWh"
 Zelltemperatur="Zelltemperatur"
 Geschwindigkeit [km/h]="Geschwindigkeit [km/h]"
