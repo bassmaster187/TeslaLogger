@@ -21,7 +21,7 @@ namespace TeslaLogger
         private static MQTT _Mqtt;
 
         private string clientid;
-        private string host = "localhost";
+        private string host;
         private int port = 1883;
         private string topic = "teslalogger";
         private bool singletopics;
@@ -67,6 +67,11 @@ namespace TeslaLogger
                     if (r["mqtt_host"] > 0)
                     {
                         host = r["mqtt_host"];
+                    }
+                    else
+                    {
+                        Logfile.Log("MQTT: No host setting -> MQTT disabled! Check settings and reboot");
+                        return;
                     }
                     if (r["mqtt_port"] > 0)
                     {
@@ -400,6 +405,11 @@ namespace TeslaLogger
                 foreach (dynamic car in cars)
                 {
                     int id = car["id"];
+                    if(Car.GetCarByID(id).GetCurrentState() == Car.TeslaState.Inactive)
+                    {
+                        continue; //skip inactive cars
+                    }
+
                     string vin = car["vin"];
                     string display_name = car["display_name"];
 
