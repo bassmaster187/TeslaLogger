@@ -3,7 +3,7 @@ Delete=Supprimer
 Save=Sauvegarder
 Settings=Réglages
 Setup=Installation
-Enabled=Activé
+Enabled="Activé"
 
 #Akku Trips.json
 Akku Trips=Consommation de la batterie (conduite)
@@ -144,7 +144,7 @@ Verbrauchsstatistik=Stastistiques de consommation
 Visited=Lieux
 
 #index.php
-Car Info=Information sur la voiture
+Car Info="Information sur la voiture"
 Status=Status
 Typical Range=Autonomie typique
 Odometer=Odomètre
@@ -152,7 +152,7 @@ Car Version=Version logiciel
 Last Trip=Dernier trajet
 Duration=Durée
 Distance=Distance
-Max km/h=Max km/h
+Max km/h="Max km/h"
 PS=PS
 Current Pos=Position actuelle
 Last Update=Dernière mise à jour
@@ -175,7 +175,7 @@ Max Discharge=Max Discharge
 Cell Imbalance=Déséquilibre cellulaire
 Software Update=Mise à jour du logiciel
 Consumption=Consommation
-Ø Consumption=Ø Consommation
+Ø Consumption="Ø Consommation"
 min=min
 kWh=kWh
 Wh/km=Wh/km
@@ -210,7 +210,7 @@ Abetterrouteplanner=Planificateur d'itinéraire
 Set password for Teslalogger's admin panel=Définir un mot de passe pour l'administrateur Teslalogger
 Teslalogger Tesla Credentials=Identifiants Tesla
 Please enter your Tesla account credentials=Veuillez saisir les informations d'identification de votre compte Tesla
-Email=Email
+Email="Email"
 Password=Mot de passe
 Repeat Password=Répéter le mot de passe
 Löschen=Effacer
@@ -230,11 +230,11 @@ BA_Read=Veuillez lire toutes les étapes avant de continuer :
 BA_Logon=Cliquez sur le lien ci-dessous intitulé <b>Connexion Tesla</b> qui ouvrira un nouvel onglet/fenêtre pour la page de connexion de l'authentification Tesla.
 BA_Auth=Connectez-vous en utilisant vos identifiants Tesla et votre MFA si nécessaire (Tesla s'en souviendra si vous avez déjà utilisé le lien).
 BA_NotFound=Il en résultera apparemment une "page non trouvée". C'est normal.
-BA_URL=Copiez l'URL de cette page web dans le formulaire ci-dessous. L'URL contient un code unique et temporaire que nous pouvons utiliser pour générer des jetons. Nous l'extrairons pour vous du lien.
+BA_URL="Copiez l'URL de cette page web dans le formulaire ci-dessous. L'URL contient un code unique et temporaire que nous pouvons utiliser pour générer des jetons. Nous l'extrairons pour vous du lien."
 BA_Invalid=Ces liens ne fonctionnent généralement qu'une seule fois. Si un message "Invalid Grant" ou un autre message d'erreur apparaît sur notre site web, vous devrez peut-être recommencer avec le lien Tesla Logon, ce qui devrait produire un nouveau lien.
 BA_Logoff=Si vous souhaitez utiliser un autre compte, vous devez vous déconnecter manuellement {ici!}.
 BA_GetToken="Nous obtiendrons alors les jetons pour votre compte Tesla."
-BA_SelectCar=Sélectionnez la voiture que vous souhaitez utiliser pour le Teslalogger.
+BA_SelectCar="Sélectionnez la voiture que vous souhaitez utiliser pour le Teslalogger."
 BA_Step1=Étape 1 :
 BA_Step2=Étape 2 :
 BA_Step3=Étape 3 :
@@ -244,14 +244,14 @@ BA_Paste="Collez l'URL obtenue dans la boîte et cliquez sur le bouton "_QQ_"Obt
 Get Tokens=Obtenir des jetons
 Access Token=Jeton d'accès
 Refresh Token=Jeton de rafraîchissement
-Car=Voiture
+Car="Voiture"
 Free Supercharging=Supercharge gratuite
 Reconnect=Se reconnecter
 Model=Modèle
 VIN=VIN
 Free SUC=Gratuité de la CUS
 Edit=Editer
-New car=Voiture neuve
+New car="Voiture neuve"
 
 #settings.php
 MyTesla=Voiture Tesla
@@ -273,15 +273,15 @@ URL Admin Panel=URL panneau d'administration
 All=Tous
 Stable=Stable
 None=Refuser
-Enable=Autoriser
+Enable="Autoriser"
 Celsius=Celsius
 Fahrenheit=Fahrenheit
 URL Grafana=URL Grafana
 Teslalogger HTTP Port=Port HTTP Teslalogger
 Zoom Level=Niveau de zoom
 ScanMyTesla integration=Intégrer ScanMyTesla
-Main Car=Voiture principale
-Car Name=Nom de la voiture
+Main Car="Voiture principale"
+Car Name="Nom de la voiture"
 ScanMyTesla last received=ScanMyTesla reçu pour la dernière fois
 Tasker Token=Clé Tasker
 Tasker URL=URL Tasker
@@ -330,7 +330,7 @@ Missing=Perdue
 Verbraucht=Consommation
 Position by StreamingAPI=Position par StreamingAPI
 StreamingPosHelp=<h1>Position par StreamingAPI</h1>Utilise StreamingAPI pour sauvegarder la position de la voiture dans la base de données Teslalogger. Selon la réception de la voiture, cela signifie jusqu'à 5 positions par seconde(comparé à une position toutes les cinq secondes en mode normal). Cela augmentera beaucoup la taille de votre base de données, augmentera l'usure de la carte SD et entraînera d'énormes sauvegardes.
-TeslaAuthApps=Vous pouvez utiliser les applications suivantes pour obtenir un accès et une actualisation du serveur Tesla:
+TeslaAuthApps="Vous pouvez utiliser les applications suivantes pour obtenir un accès et une actualisation du serveur Tesla:"
 
 #Status.json
 Current Status=Status actuel
@@ -345,8 +345,8 @@ ABRPTitle=Un meilleur lien planificateur d'itinéraire
 TextABRP=Vous pouvez configurer un lien de Teslalogger vers Abetterrouteplanner pour éviter de donner vos informations d'identification Tesla à un tiers. Un autre avantage est de minimiser le nombre de réveil de la voiture si plus d'un service utilise vos informations d'identification.
 ABRP1=Créer un compte Abetterrouteplanner
 ABRP2=Aller aux paramètres
-ABRP3=Choisissez votre voiture
-ABRP4=Enregistrer votre voiture sur votre compte
+ABRP3="Choisissez votre voiture"
+ABRP4="Enregistrer votre voiture sur votre compte"
 ABRP5="Donnez un nom à votre voiture"
 ABRP6=Cliquez sur "Lien générique" pour obtenir un jeton ABRP
 ABRP7=Copiez le jeton et cliquez sur "Terminé"
@@ -384,11 +384,11 @@ Vehicle kWh=Vehicle kWh
 
 #mqtt.php
 MQTTSettings=MQTT settings
-MQTTSettingsInfo=MQTT Host is mandatory. All other settings are optional
+MQTTSettingsInfo="MQTT Host is mandatory. All other settings are optional"
 TopicStructure=Topic structure:
 MQTT1="All values in one JSON (if activated): "_QQ_"teslalogger/json/CAR_VIN/currentjson"_QQ_""
-MQTT2=All values as subtopics (if activated): "teslalogger/cars/CAR_VIN/ideal_battery_range_km"
-MQTT3="teslalogger" is parametrizable in field "Topic"
+MQTT2="All values as subtopics (if activated): "_QQ_"teslalogger/cars/CAR_VIN/ideal_battery_range_km"_QQ_""
+MQTT3="teslalogger"_QQ_" is parametrizable in field "_QQ_"Topic"
 MQTT4="CAR_VIN" is VIN of your car
 MQTT5="ideal_battery_range_km" are single topics
 ADDescription=AutoDiscovery:
@@ -511,5 +511,7 @@ Restore Database=Restaurer la base de données
 TextRestore1=Veillez à sauvegarder votre Teslalogger avant de restaurer les bases de données. Déplacez votre dossier de sauvegarde de \\RASPBERRY\teslalogger\backup sur votre disque dur !
 TextRestore2=Le processus de restauration peut durer jusqu'à 10 minutes !
 TextRestore3=N'interrompez pas le processus de restauration de quelque manière que ce soit ! Ne rechargez pas la page ! Ne fermez pas cette page !
+
+
 
 

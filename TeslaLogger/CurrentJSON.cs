@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Runtime.Caching;
 
 namespace TeslaLogger
 {
@@ -31,6 +32,7 @@ namespace TeslaLogger
         public int current_charger_phases; // defaults to 0
         public int current_charger_phases_calc; // defaults to 0
         public int current_charger_actual_current; // defaults to 0
+        public int current_charger_actual_current_calc; // defaults to 0
         public int current_charge_current_request; // defaults to 0
         public int current_charger_pilot_current; // defaults to 0
         public double current_charge_energy_added; // defaults to 0
@@ -223,6 +225,7 @@ namespace TeslaLogger
                    { "charger_phases", current_charger_phases},
                    { "charger_phases_calc", current_charger_phases_calc},
                    { "charger_actual_current", current_charger_actual_current},
+                   { "charger_actual_current_calc", current_charger_actual_current_calc},
                    { "charge_current_request", current_charge_current_request},
                    { "charger_pilot_current", current_charger_pilot_current},
                    { "charge_energy_added", current_charge_energy_added},
@@ -333,6 +336,19 @@ namespace TeslaLogger
         public void SetLongitude(double lng)
         {
             longitude = lng;
+        }
+
+        internal void ToKVS()
+        {
+            KVS.InsertOrUpdate($"currentJSON_{car.CarInDB}", jsonStringHolder[car.CarInDB]);
+        }
+
+        internal void FromKVS()
+        {
+            if (KVS.Get($"currentJSON_{car.CarInDB}", out string cJSON) == KVS.SUCCESS)
+            {
+                jsonStringHolder[car.CarInDB] = cJSON;
+            }
         }
     }
 }

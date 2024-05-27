@@ -43,6 +43,12 @@ namespace TeslaLogger
             autoDiscovery["charger_power"]["unit"] = "kW";
             autoDiscovery["charger_power"]["class"] = "power";
 
+            autoDiscovery["charger_power_calc_w"] = new Dictionary<string, string>();
+            autoDiscovery["charger_power_calc_w"]["type"] = "sensor";
+            autoDiscovery["charger_power_calc_w"]["name"] = "Charge power calculated";
+            autoDiscovery["charger_power_calc_w"]["unit"] = "W";
+            autoDiscovery["charger_power_calc_w"]["class"] = "power";
+
             autoDiscovery["charger_voltage"] = new Dictionary<string, string>();
             autoDiscovery["charger_voltage"]["type"] = "sensor";
             autoDiscovery["charger_voltage"]["name"] = "Charge voltage";
@@ -55,6 +61,12 @@ namespace TeslaLogger
             autoDiscovery["charger_actual_current"]["unit"] = "A";
             autoDiscovery["charger_actual_current"]["class"] = "current";
 
+            autoDiscovery["charger_actual_current_calc"] = new Dictionary<string, string>();
+            autoDiscovery["charger_actual_current_calc"]["type"] = "sensor";
+            autoDiscovery["charger_actual_current_calc"]["name"] = "Charge current calculated";
+            autoDiscovery["charger_actual_current_calc"]["unit"] = "A";
+            autoDiscovery["charger_actual_current_calc"]["class"] = "current";
+
             autoDiscovery["charge_energy_added"] = new Dictionary<string, string>();
             autoDiscovery["charge_energy_added"]["type"] = "sensor";
             autoDiscovery["charge_energy_added"]["name"] = "Energy added";
@@ -66,6 +78,11 @@ namespace TeslaLogger
             autoDiscovery["charger_phases"]["name"] = "Charge phases";
             autoDiscovery["charger_phases"]["icon"] = "mdi:lightning-bolt";
 
+            autoDiscovery["charger_phases_calc"] = new Dictionary<string, string>();
+            autoDiscovery["charger_phases_calc"]["type"] = "sensor";
+            autoDiscovery["charger_phases_calc"]["name"] = "Charge phases calculated";
+            autoDiscovery["charger_phases_calc"]["icon"] = "mdi:lightning-bolt";
+            
             autoDiscovery["charge_rate_km"] = new Dictionary<string, string>();
             autoDiscovery["charge_rate_km"]["type"] = "sensor";
             autoDiscovery["charge_rate_km"]["name"] = "Charge rate";
@@ -207,8 +224,8 @@ namespace TeslaLogger
             autoDiscovery["locked"] = new Dictionary<string, string>();
             autoDiscovery["locked"]["type"] = "binary_sensor";
             autoDiscovery["locked"]["name"] = "Locked";
-            autoDiscovery["locked"]["pl_on"] = "true";
-            autoDiscovery["locked"]["pl_off"] = "false";
+            autoDiscovery["locked"]["pl_on"] = "false";
+            autoDiscovery["locked"]["pl_off"] = "true";
             autoDiscovery["locked"]["class"] = "lock";
 
             autoDiscovery["open_windows"] = new Dictionary<string, string>();
@@ -306,16 +323,18 @@ namespace TeslaLogger
             autoDiscovery["charge_limit_soc"]["name"] = "Charge limit SoC";
             autoDiscovery["charge_limit_soc"]["cmd_topic"] = "set_charge_limit";
             autoDiscovery["charge_limit_soc"]["class"] = "battery";
+            autoDiscovery["charge_limit_soc"]["unit"] = "%";
             autoDiscovery["charge_limit_soc"]["min"] = "50";
             autoDiscovery["charge_limit_soc"]["max"] = "100";
             autoDiscovery["charge_limit_soc"]["step"] = "1";
             
             autoDiscovery["charge_current_request"] = new Dictionary<string, string>();
             autoDiscovery["charge_current_request"]["type"] = "number";
-            autoDiscovery["charge_current_request"]["name"] = "Charge current";
+            autoDiscovery["charge_current_request"]["name"] = "Charge current request";
             autoDiscovery["charge_current_request"]["cmd_topic"] = "set_charging_amps";
             autoDiscovery["charge_current_request"]["class"] = "current";
-            autoDiscovery["charge_current_request"]["min"] = "1";
+            autoDiscovery["charge_current_request"]["unit"] = "A";
+            autoDiscovery["charge_current_request"]["min"] = "0";
             autoDiscovery["charge_current_request"]["max"] = "32";
             autoDiscovery["charge_current_request"]["step"] = "1";
 

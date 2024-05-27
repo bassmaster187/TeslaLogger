@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Text.RegularExpressions;
 using System.Threading;
 using Exceptionless;
-using Exceptionless.Models;
 using MySql.Data.MySqlClient;
-using MySqlX.XDevAPI;
-using MySqlX.XDevAPI.Common;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -13,7 +12,7 @@ namespace TeslaLogger
 {
     internal class SuCSession
     {
-        internal SuCSession(dynamic jsonSession)
+            internal SuCSession(dynamic jsonSession, Car car)
         {
             string VIN;
             string sessionId;
@@ -61,12 +60,53 @@ INSERT IGNORE INTO teslacharging SET
                     _ = SQLTracer.TraceNQ(cmd, out _);
                 }
             }
+            // download invoice PDFs
+            if (jsonSession.ContainsKey("invoices"))
+            {
+                foreach (dynamic invoice in jsonSession["invoices"])
+                {
+                    if (invoice.ContainsKey("contentId"))
+                    {
+                        // check if output directory exists, otherwise create
+                        string invoiceDir = Path.Combine(Logfile.GetExecutingPath(), "tesla_invoices");
+                        if (!Directory.Exists(invoiceDir))
+                        {
+                            Directory.CreateDirectory(invoiceDir);
+                        }
+                        // output file name
+                        if (siteLocationName.Contains(","))
+                        {
+                            string[] tokens = siteLocationName.Split(',');
+                            siteLocationName = tokens[0];
+                            Regex rgx = new Regex("[^a-zA-Z-]");
+                            siteLocationName = rgx.Replace(siteLocationName, "_");
+                        }
+                        string invoicePDF = Path.Combine(invoiceDir, $"{chargeStartDateTime.ToString("yyyy-MM-dd--HH-mm", Tools.ciEnUS)}--{siteLocationName}--{sessionId}.pdf");
+                        // if file does not exist yet ...
+                        if (!File.Exists(invoicePDF))
+                        {
+                            // ... download file
+                            byte[] PDF = car.webhelper.GetChargingHistoryInvoicePDF(invoice["contentId"].ToString()).Result;
+                            if (PDF != null && PDF.Length > 0)
+                            {
+                                // save file to file system
+                                File.WriteAllBytes(invoicePDF, PDF);
+                                car.Log($"InvoicePDF: {PDF.Length} bytes written to {invoicePDF}");
+                            }
+                            else
+                            {
+                                car.Log($"InvoicePDF: contentId {invoice["contentId"].ToString()} has zero bytes");
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 
     internal static class GetChargingHistoryV2Service
     {
-        private static bool ParseJSON(string sjson)
+        private static bool ParseJSON(string sjson, Car car)
         {
             bool nextpage = false;
             dynamic json = JsonConvert.DeserializeObject(sjson);
@@ -90,7 +130,7 @@ INSERT IGNORE INTO teslacharging SET
                             {
                                 try
                                 {
-                                    _ = new SuCSession(session);
+                                    _ = new SuCSession(session, car);
                                 }
                                 catch (Exception ex)
                                 {
@@ -116,65 +156,65 @@ INSERT IGNORE INTO teslacharging SET
 
         internal static void LoadAll(Car car)
         {
-            Tools.DebugLog($"GetChargingHistoryV2Service.LoadAll car #{car.CarInDB}");
+            Tools.DebugLog($"GetChargingHistoryV2Service.LoadAll(#{car.CarInDB})");
             int resultPage = 1;
             string result = car.webhelper.GetChargingHistoryV2(resultPage).Result;
             if (result == null || result == "{}" || string.IsNullOrEmpty(result))
             {
-                Tools.DebugLog("GetChargingHistoryV2Service: result == null");
+                Tools.DebugLog($"GetChargingHistoryV2Service.LoadAll(#{car.CarInDB}): result == null");
                 return;
             }
             if (result.Contains("Retry later"))
             {
-                Tools.DebugLog("GetChargingHistoryV2Service: Retry later");
+                Tools.DebugLog($"GetChargingHistoryV2Service.LoadAll(#{car.CarInDB}): Retry later");
                 return;
             }
             else if (result.Contains("vehicle unavailable"))
             {
-                Tools.DebugLog("GetChargingHistoryV2Service: vehicle unavailable");
+                Tools.DebugLog($"GetChargingHistoryV2Service.LoadAll(#{car.CarInDB}): vehicle unavailable");
                 return;
             }
             else if (result.Contains("502 Bad Gateway"))
             {
-                Tools.DebugLog("GetChargingHistoryV2Service: 502 Bad Gateway");
+                Tools.DebugLog($"GetChargingHistoryV2Service.LoadAll(#{car.CarInDB}): 502 Bad Gateway");
                 return;
             }
-            Tools.DebugLog($"GetChargingHistoryV2Service GetChargingHistoryV2 result length: {result.Length}");
+            Tools.DebugLog($"GetChargingHistoryV2Service GetChargingHistoryV2.LoadAll(#{car.CarInDB}) result length: {result.Length}");
 
-            while (result != null && ParseJSON(result))
+            while (result != null && ParseJSON(result, car))
             {
                 resultPage++;
                 Thread.Sleep(2500); // wait a bit
-                Tools.DebugLog($"GetChargingHistoryV2Service.LoadAll #{car.CarInDB} resultpage {resultPage}");
+                Tools.DebugLog($"GetChargingHistoryV2Service.LoadAll(#{car.CarInDB}) resultpage {resultPage}");
                 result = car.webhelper.GetChargingHistoryV2(resultPage).Result;
             }
         }
 
         internal static void LoadLatest(Car car)
         {
-            Tools.DebugLog($"GetChargingHistoryV2Service.LoadLatest car #{car.CarInDB}");
+            Tools.DebugLog($"GetChargingHistoryV2Service.LoadLatest(#{car.CarInDB})");
             string result = car.webhelper.GetChargingHistoryV2(1).Result;
             if (result == null || result == "{}" || string.IsNullOrEmpty(result))
             {
-                Tools.DebugLog("GetChargingHistoryV2Service: result == null");
+                Tools.DebugLog($"GetChargingHistoryV2Service.LoadLatest(#{car.CarInDB}): result == null");
                 return;
             }
             if (result.Contains("Retry later"))
             {
-                Tools.DebugLog("GetChargingHistoryV2Service: Retry later");
+                Tools.DebugLog($"GetChargingHistoryV2Service.LoadLatest(#{car.CarInDB}): Retry later");
                 return;
             }
             else if (result.Contains("vehicle unavailable"))
             {
-                Tools.DebugLog("GetChargingHistoryV2Service: vehicle unavailable");
+                Tools.DebugLog($"GetChargingHistoryV2Service.LoadLatest(#{car.CarInDB}): vehicle unavailable");
                 return;
             }
             else if (result.Contains("502 Bad Gateway"))
             {
-                Tools.DebugLog("GetChargingHistoryV2Service: 502 Bad Gateway");
+                Tools.DebugLog($"GetChargingHistoryV2Service.LoadLatest(#{car.CarInDB}): 502 Bad Gateway");
                 return;
             }
-            _ = ParseJSON(result);
+            _ = ParseJSON(result, car);
         }
 
         internal static void CheckSchema()
@@ -290,11 +330,11 @@ LIMIT 1
 
         internal static int SyncAll(Car car)
         {
-            Tools.DebugLog($"GetChargingHistoryV2Service SyncAll({car.CarInDB}) start");
+            Tools.DebugLog($"GetChargingHistoryV2Service SyncAll(#{car.CarInDB}) start");
             int updatedChargingStates = 0;
             foreach (int chargingstateid in car.DbHelper.GetSuCChargingStatesWithEmptySessionId())
             {
-                Tools.DebugLog($"GetChargingHistoryV2Service.SyncAll({car.CarInDB}) <{chargingstateid}>");
+                Tools.DebugLog($"GetChargingHistoryV2Service.SyncAll(#{car.CarInDB}) <{chargingstateid}>");
                 if (DBHelper.GetStartValuesFromChargingState(chargingstateid, out DateTime startDate, out int startdID, out int _, out string posName, out object _, out object _))
                 {
                     if (GetTeslaChargingSessionByDate(car, startDate, out string sessionId, out string siteLocationName, out DateTime chargeStartDateTime, out string VIN, out string json))
@@ -309,20 +349,20 @@ LIMIT 1
                         }
                         else if (!car.Vin.Equals(VIN))
                         {
-                            Tools.DebugLog($"GetChargingHistoryV2Service.SyncAll({car.CarInDB}) {sessionId} VIN does not match car:{car.Vin} session:{VIN}");
+                            Tools.DebugLog($"GetChargingHistoryV2Service.SyncAll(#{car.CarInDB}) {sessionId} VIN does not match car:{car.Vin} session:{VIN}");
                         }
                         else
                         {
-                            Tools.DebugLog($"GetChargingHistoryV2Service.SyncAll({car.CarInDB}) no SuC session found for <{chargingstateid}> <{posName}>");
+                            Tools.DebugLog($"GetChargingHistoryV2Service.SyncAll(#{car.CarInDB}) no SuC session found for <{chargingstateid}> <{posName}>");
                         }
                     }
                 }
                 else
                 {
-                    Tools.DebugLog($"GetChargingHistoryV2Service.SyncAll({car.CarInDB}) GetStartValuesFromChargingState false for {chargingstateid}");
+                    Tools.DebugLog($"GetChargingHistoryV2Service.SyncAll(#{car.CarInDB}) GetStartValuesFromChargingState false for {chargingstateid}");
                 }
             }
-            Tools.DebugLog("GetChargingHistoryV2Service.SyncAll({car.CarInDB}) finished");
+            Tools.DebugLog($"GetChargingHistoryV2Service.SyncAll(#{car.CarInDB}) finished");
             return updatedChargingStates;
         }
 

@@ -9,7 +9,6 @@ using System.Threading.Tasks;
 
 namespace TeslaLogger
 {
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Globalization", "CA1303:Literale nicht als lokalisierte Parameter übergeben", Justification = "<Pending>")]
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1031:Keine allgemeinen Ausnahmetypen abfangen", Justification = "<Pending>")]
     internal class Program
     {
@@ -222,6 +221,13 @@ namespace TeslaLogger
                 if (r["fleetAPI"] != DBNull.Value && Convert.ToInt32(r["fleetAPI"]) == 1)
                     fleetAPI = true;
 
+                bool virtualKey = false;
+                if (r["virtualkey"] != DBNull.Value && Convert.ToInt32(r["virtualkey"]) == 1)
+                    virtualKey = true;
+
+                string access_type = "";
+                if (r["access_type"] != DBNull.Value)
+                    access_type = r["access_type"].ToString();
 
 #pragma warning disable CA2000 // Objekte verwerfen, bevor Bereich verloren geht
                 Car car = new Car(id, Name, Password, carid, tesla_token, tesla_token_expire, Model_Name, car_type, car_special_type, car_trim_badging, display_name, vin, tasker_hash, wh_tr, fleetAPI, oldCarState, wheel_type, charge_point);
@@ -321,8 +327,10 @@ namespace TeslaLogger
 
         private static void InitStage2()
         {
-            KeepOnlineMinAfterUsage = Tools.GetSettingsInt("KeepOnlineMinAfterUsage", 5);
-            SuspendAPIMinutes = Tools.GetSettingsInt("SuspendAPIMinutes", 30);
+            TestEncryption();
+
+            KeepOnlineMinAfterUsage = Tools.GetSettingsInt("KeepOnlineMinAfterUsage", ApplicationSettings.Default.KeepOnlineMinAfterUsage);
+            SuspendAPIMinutes = Tools.GetSettingsInt("SuspendAPIMinutes", ApplicationSettings.Default.SuspendAPIMinutes);
 
             Logfile.Log("Current Culture: " + Thread.CurrentThread.CurrentCulture.ToString());
             Logfile.Log("Mono Runtime: " + Tools.GetMonoRuntimeVersion());
@@ -368,6 +376,7 @@ namespace TeslaLogger
         private static void InitStage1()
         {
             Tools.SetThreadEnUS();
+            UpdateTeslalogger.Chmod("encryption.txt", 600, false);
             UpdateTeslalogger.Chmod("nohup.out", 666, false);
             UpdateTeslalogger.Chmod("backup.sh", 777, false);
             UpdateTeslalogger.Chmod("TeslaLogger.exe", 755, false);
@@ -406,6 +415,25 @@ namespace TeslaLogger
             }
 
             Logfile.Log("OS: " + Tools.GetOsRelease());
+        }
+
+        static void TestEncryption()
+        {
+            try
+            {
+                var body = "jfsdoifjhoiwejgfüp9034eu7trfß90834ugf0ß9834uejpf90guj43pü09tgfuj45p90t8ugjedlkfgjd";
+                var pass = StringCipher.GetPassPhrase();
+                var encrypted = StringCipher.Encrypt(body);
+                var decrypted = StringCipher.Decrypt(encrypted);
+                if (body != decrypted)
+                    Logfile.Log("Encryption doesn't work!!!");
+
+            }
+            catch (Exception ex)
+            {
+                ex.ToExceptionless().Submit();
+                Logfile.Log(ex.ToString());
+            }
         }
 
         private static void InitConnectToDB()

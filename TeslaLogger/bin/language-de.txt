@@ -3,11 +3,12 @@ Delete=Löschen
 Save=Speichern
 Settings=Einstellungen
 Setup=Einrichtung
-Enabled=Aktiviert
+Enabled="Aktiviert"
 StreamingPosHelp=<h1>Position von StreamingAPI</h1>aktiviert Positions-DB-Einträge von der Streaming-API - je nach Empfang des Fahrzeugs bedeutet dies bis zu 5 Positionen pro Sekunde (im Vergleich zu einer Position alle fünf Sekunden im normalen Modus), was die Größe der Datenbank stark erhöht, den Verschleiß der SD-Karte erhöht und zu großen Backups führt
 
 #Timeline Plugin.json
 Parking=Parken
+Dauer=Dauer
 Driving=Fahren
 Charging=Laden
 Missing=Fehlen
@@ -20,7 +21,7 @@ Last Driven=Letzte Fahrt  * * *
 
 #index.php
 Battery Heater=Batterie-Heizung
-Car Info=Fahrzeuginformationen
+Car Info="Fahrzeug-Info"
 Car Version=Fahrzeug-Version
 Cell Imbalance=Zellen-Imbalance
 Cell Temp=Zelltemperatur
@@ -36,7 +37,7 @@ Last Trip=Letzte Fahrt
 Last Update=Letztes Update
 Max Charge=Max. Ladung
 Max Discharge=Max. Entladung
-Max km/h=Max. km/h
+Max km/h="Max km/h"
 No=Nein
 Odometer=Kilometerstand
 Resume Teslalogger=Teslalogger starten
@@ -45,7 +46,7 @@ Start=Start
 TextSuspendTeslalogger=Teslalogger wurde angehalten! Daten werden nicht geloggt!
 Typical Range=Reichweite
 Yes=Ja
-Ø Consumption=Ø Verbrauch
+Ø Consumption="Ø Verbrauch"
 mi=mi
 min=min
 kWh=kWh
@@ -60,11 +61,11 @@ Unit of length=Längenmaß
 Automatic updates=Automatische Updates
 Range=Reichweite
 Show calc. 100% range=Zeige errechnete 100 %
-Car Name=Fahrzeugname
-Enable=Aktiviert
+Car Name="Fahrzeugname"
+Enable="Aktiviert"
 Fahrenheit=Fahrenheit
 Language=Sprache
-Main Car=Hauptfahrzeug
+Main Car="Hauptfahrzeug"
 None=Keine
 Received Tasker Token=Empfangenes Tasker Token
 ScanMyTesla last received=ScanMyTesla zuletzt empfangen
@@ -86,7 +87,7 @@ Celsius=Celsius
 km=km
 mile=Meilen
 Ideal=Ideal
-Rated=Bewerted
+Rated=Bewertet
 All=Alle
 Stable=Stabil
 to=bis
@@ -99,8 +100,8 @@ ABRPTitle=Verbindung mit „A Better Routeplanner“
 TextABRP=Sie können eine Verbindung von Teslalogger zu „A Better Routeplanner“ einrichten, um zu vermeiden, dass Sie Ihre Tesla-Anmeldeinformationen an Dritte weitergeben müssen. Ein weiterer Vorteil besteht darin, die Wahrscheinlichkeit zu minimieren, das Fahrzeug daran zu hindern, in den Ruhezustand zu wechseln, wenn mehr als ein Dienst Ihre Anmeldeinformationen verwendet.
 ABRP1=Erstellen Sie ein „A Better Routeplanner“-Konto
 ABRP2=Gehen sie zu den Einstellungen
-ABRP3=Wählen Sie Ihr Fahrzeug
-ABRP4=Speichern Sie Ihr Fahrzeug
+ABRP3="Wählen Sie Ihr Fahrzeug"
+ABRP4="Speichern Sie Ihr Fahrzeug"
 ABRP5="Geben Sie Ihrem Fahrzeug einen Namen"
 ABRP6=Klicken Sie auf „Verknüpfen Teslalogger“, um ein ABRP-Token zu erhalten
 ABRP7=Token kopieren und auf „Fertig“ klicken
@@ -121,11 +122,11 @@ BA_Read=Bitte lesen Sie alle Schritte, bevor Sie fortfahren:
 BA_Logon=Klicken Sie auf den unten stehenden <b>Tesla Logon</b> Link, der einen neuen Tab für die Tesla-Anmeldeseite öffnet
 BA_Auth=Melden Sie sich mit Ihren Tesla-Zugangsdaten und ggf. MFA an (Tesla merkt sich diese Daten, wenn Sie den Link schon einmal verwendet haben)
 BA_NotFound=Dies führt zu einer "Page Not Found" Seite. Das ist normal.
-BA_URL=Kopieren Sie den Link dieser Webseite in das unten stehende Feld. Im Link ist ein einmaliger, temporärer Code enthalten, den wir zur Generierung von Token verwenden können. Wir werden diesen Code aus dem Link extrahieren.
+BA_URL="Kopieren Sie den Link dieser Webseite in das unten stehende Feld. Im Link ist ein einmaliger, temporärer Code enthalten, den wir zur Generierung von Token verwenden können. Wir werden diesen Code aus dem Link extrahieren."
 BA_Invalid=Diese Links funktionieren in der Regel nur einmal. Wenn also auf unserer Website die Meldung "Invalid Grant" oder eine andere Fehlermeldung erscheint, müssen Sie möglicherweise den Tesla-Logon-Link erneut aufrufen, der einen neuen Link erzeugen sollte.
 BA_Logoff=Wenn Sie ein anderes Konto verwenden möchten, müssen Sie sich {hier} manuell abmelden!
 BA_GetToken="Wir werden dann die Token für Ihren Tesla-Konto bekommen."
-BA_SelectCar=Wählen Sie das Fahrzeug aus, das Sie für den Teslalogger verwenden möchten.
+BA_SelectCar="Wählen Sie das Fahrzeug aus, das Sie für den Teslalogger verwenden möchten."
 BA_Step1=Schritt 1:
 BA_Step2=Schritt 2:
 BA_Step3=Schritt 3:
@@ -137,29 +138,29 @@ Get Tokens=Tokens holen
 Access Token=Access Token
 Refresh Token=Refresh Token
 OK=OK
-Email=E-Mail
-Car=Fahrzeug
+Email="E-Mail"
+Car="Fahrzeug"
 Free Supercharging=Kostenloses Supercharging
-Reconnect=Reconnect
+Reconnect="Erneut verbinden"
 ID=ID
 Model=Modell
 VIN=VIN
 Free SUC=Free SUC
 Edit=Ändern
-New car=Neues Fahrzeug
+New car="Neues Fahrzeug"
 Do you want to delete?=Wollen Sie das Fahrzeug löschen?
-Please enter the access token!=Bitte das Access Token entragen!
-Please enter the refresh token!=Bitte das Refresh Token entragen!
+Please enter the access token!=Bitte das Access Token eintragen!
+Please enter the refresh token!=Bitte das Refresh Token eintragen!
 Check Logfile!=Bitte die Logdatei prüfen!
-Do you really want to delete this vehicle?="Wollen Sie das Fahrzeug wirklich löschen?"
+Do you really want to delete this vehicle?="Dieses Fahrzeug löschen?"
 Check Logfile in one minute!=Bitte die Logdatei in einer Minute prüfen!
 Unauthorized=Nicht autorisiert
-This isn't a valid URL!="Dies ist kein gültige URL!"
+This isn't a valid URL!="Ungültige URL!"
 This isn't an auth link by Tesla!=Dies ist ein Autorisierungslink von Tesla!
-The URL doesn't contain the expected format!="Die URL enthält nicht das erwartete Format!"
+The URL doesn't contain the expected format!="Die URL ist nicht im erwartete Format!"
 
 #password_fleet.php
-PF_LOGOUT=Melden Sie sich von Ihrem Tesla-Konto ab, wenn Sie bereits eingeloggt sind
+PF_LOGOUT="Melden Sie sich von Ihrem Tesla-Konto ab, wenn Sie bereits eingeloggt sind"
 PF_LOGIN=Gehen Sie zur Tesla-Authentifizierungsseite und erlauben Sie Teslalogger auf ihre Daten zuzugreifen
 PF_HELP=Hilfsvideo
 PF_PERMISSION=Info. Welche Rechte werden verwendet und weshalb
@@ -179,7 +180,7 @@ Dashboard=Dashboard
 #geoadd.php
 Charger=Ladesäule
 Copy Charging Costs=Ladekosten kopieren
-Count=Count
+Count="Anzahl"
 D → P=D → P
 D/R → P=D/R → P
 Description=Beschreibung
@@ -225,7 +226,7 @@ Total=Summe
 
 #adminpanelpassword.php
 Admin Panel Credentials=Anmeldedaten für das Admin-Panel
-Teslalogger Tesla Credentials=Teslalogger Tesla Credentials
+Teslalogger Tesla Credentials="Teslalogger Tesla Zugangsdaten"
 Passwords do not match!=Passwörter stimmen nicht überein!
 Do you want to delete your password?=Möchten Sie Ihr Passwort löschen?
 Set password for Teslalogger's admin panel=Legen Sie das Passwort für das Admin-Panel von Teslalogger fest
@@ -249,16 +250,16 @@ Host=Host
 Param=Param
 Test=Test
 Version=Version
-Utility kWh=Utility kWh
+Utility kWh="Energieversorger kWh"
 Vehicle kWh=kWh Fahrzeug
 
 #mqtt.php
 MQTTSettings=MQTT Einstellungen
-MQTTSettingsInfo=MQTT Host ist erforderlich. Alle andere Einstellungen sind optional
+MQTTSettingsInfo="MQTT Host ist erforderlich. Alle anderen Einstellungen sind optional."
 TopicStructure=Topics sind im folgenden Format:
 MQTT1="Alle Werte in einem JSON (wenn aktiviert): "_QQ_"teslalogger/json/CAR_VIN/currentjson"_QQ_""
-MQTT2=Alle Werte als Singletopics (wenn aktiviert): "teslalogger/cars/CAR_VIN/ideal_battery_range_km"
-MQTT3="teslalogger" ist parametrierbar im Feld "Topic"
+MQTT2="Alle Werte als Singletopics (wenn aktiviert): "_QQ_"teslalogger/cars/CAR_VIN/ideal_battery_range_km"_QQ_""
+MQTT3="teslalogger"_QQ_" ist parametrierbar im Feld "_QQ_"Topic"
 MQTT4="CAR_VIN" ist die VIN des Autos
 MQTT5="ideal_battery_range_km" sind einzelne Topics
 ADDescription=AutoDiscovery:
@@ -329,9 +330,9 @@ Restart=Neustart
 Dashboards=Dashboards
 Fleet Statistic=Flottenstatistik
 My Degradation=Meine Degradation
-My Charging AVG=Meine Aufladungen AVG
-Fleet Degradation AVG=Flotten-Degradation AVG
-Fleet Charging AVG=Flottenaufladung AVG
+My Charging AVG="Ø meiner Aufladungen"
+Fleet Degradation AVG="Ø Flotten-Degradation"
+Fleet Charging AVG="Ø Flottenaufladung"
 Fleet Charging MAX (Firmware)=Flottenladestation MAX (Firmware)
 Fleet Charging Locations=Flotten-Ladestationen
 Fleet Fast Charging Map=Flotten-Schnellladekarte
@@ -342,8 +343,8 @@ Backup=Datensicherung
 Restore=Wiederherstellung
 Geofence=Geofence
 Abetterrouteplanner=Abetteroutenplaner
-Wakeup Teslalogger=Wakeup Teslalogger
-Suspend Teslalogger=Suspend Teslalogger
+Wakeup Teslalogger="Teslalogger aufwecken"
+Suspend Teslalogger="Teslalogger pausieren"
 km Stand="km-Stand"
 
 #ovms.php
@@ -361,7 +362,7 @@ TextRestore2=Der Wiederherstellungsprozess kann bis zu 10 Minuten dauern!
 TextRestore3=Unterbrechen Sie den Wiederherstellungsprozess in keiner Weise! Laden Sie die Seite nicht neu! Schließen Sie diese Seite nicht!
 
 #dashboard.php
-Sleeping="Schlafen"
+Sleeping="Schläft"
 Start Trip="Fahrtbeginn"
 End Trip="Fahrtende"
 Start km="Start km"
@@ -445,3 +446,119 @@ Stromstärke [A]="aktuelle Stromstärke [A]"
 
 #Vampir Drain Monatsstatistik.json
 Vampir Drain Monatsstatistik="Standby Energieverlust Monatsstatistik"
+Pilot [A]="Pilot [A]"
+Fahrzeug="Fahrzeug"
+Standby="Energiesparmodus"
+
+#Verbrauch.json
+Verbrauch="Verbrauch"
+Außentemperatur [°C]="Außentemperatur [°C]"
+max km/h="Max. km/h"
+Temperatur="Temperatur"
+Ø km/h="Ø kph"
+
+#Alle Verbräuche - ScanMyTesla.json
+Alle Verbräuche - ScanMyTesla="Alle Verbräuche - ScanMyTesla"
+Zellspannungen 01-20 - ScanMyTesla="Zellspannungen 01-20 - ScanMyTesla"
+Zellspannungen 21-40 - ScanMyTesla="Zellspannungen 21-40 - ScanMyTesla"
+Nur verfügbar mit ScanMyTesla="Nur verfügbar mit ScanMyTesla"
+Reichweite="Reichweite"
+Leistung [PS]="Leistung [PS]"
+
+#Verbrauchsstatistik.json
+Verbrauchsstatistik="Verbrauchsstatistik"
+Eur Verlust="Eur Verlust"
+Ø mph="Ø mph"
+
+#Trip Top Destinations.json
+Trip Top Ziele="Trip Top Ziele"
+Löschen="Löschen"
+PF_HERE="Hier"
+Strecke [mi]="Fahrstrecke [mi]"
+Wirkungsgrad="Wirkungsgrad"
+Speichern="Speichern"
+Zellspannungen 41-60 - ScanMyTesla="Zellspannungen 41-60 - ScanMyTesla"
+Ja="Ja"
+Kosten pro Ladung="Kosten pro Ladung"
+Höhe [m]="Höhe [m]"
+Innentemperatur [°F]="Innentemperatur [°F]"
+Zeitspanne Stunden="Zeitspanne Stunden"
+Ziel Adresse="Zieladresse"
+Ø °F="Ø °F"
+Zelltemperatur [°C]="Zelltemperatur [°C]"
+Kosten Blockiergebühr="Kosten Blockiergebühr"
+
+#Vampir Drain.json
+Vampir Drain="Vampir Drain"
+Standby Stunden="Standby Stunden"
+TR km Verlust="TR km Verlust"
+Altitude [m]="Höhe [m]"
+Innentemperatur [°C]="Innentemperatur [°C]"
+Verbraucht kWh="Verbrauchte kWh"
+max mph="Max. mph"
+Ø Verbraucht kWh="Ø Verbrauch kWh"
+
+#Trip Monatsstatistik.json
+Datum="Datum"
+Ladesäule="Ladesäule"
+Kosten pro Minute="Kosten pro min"
+Summe="Gesamt"
+Verbraucht="Verbraucht"
+TR mi Verlust="TR mi Verlust"
+kWh Verlust="kWh Verlust"
+TR mi Verlust pro Stunde="TR mi Verlust pro Stunde"
+mi Stand="Kilometerstand [mi]"
+
+#Trip.json
+Trip="Fahrt"
+Ø °C="Ø °C"
+min kW="min kW"
+Ø Verbrauch kWh/100km="Ø Verbrauch kWh/100km"
+Zelltemperatur [°F]="Zelltemperatur [°F]"
+Trip Monatsstatistik="Trip Monatsstatistik"
+Zellspannungen="Zellspannungen"
+
+#Status.json
+Current Status="Aktueller Status"
+Geschwindigkeit [mph]="Geschwindigkeit [mph]"
+Schlafen="Schläft"
+Angefordert [A]="Angefordert [A]"
+Start Adresse="Start Adresse"
+Ø PS="Ø PS"
+Währung="Währung"
+TR km Verlust pro Stunde="TR km Verlust pro Stunde"
+Außentemperatur [°F]="Außentemperatur [°F]"
+max kW="Max kW"
+Letzte Fahrt="Letzte Fahrt"
+Strecke [km]="Fahrstrecke [km]"
+Jahr/Monat="Jahr/Monat"
+Daten anonym teilen="Daten anonym teilen"
+Kosten pro kWh="Kosten pro kWh"
+kWh laut Zähler / Rechnung="kWh laut Zähler / Rechnung"
+Anzahl Trips="Anzahl Fahrten"
+
+#Visited.json
+Visited="Besuchte Orte"
+Ø Verbrauch [kWh]="Ø Verbrauch kWh"
+Zelltemperatur="Zelltemperatur"
+Geschwindigkeit [km/h]="Geschwindigkeit [km/h]"
+Ø Verbrauch kWh="Ø Verbrauch kWh"
+Ø Dauer Min="Ø Zeit Min"
+Fahrzeit [h]="Fahrzeit [h]"
+Zellspannungen 61-80 - ScanMyTesla="Zellspannungen 61-80 - ScanMyTesla"
+Zellspannung="Zellspannung"
+Einschlafen="Einschlafen"
+Ladekosten="Ladekosten"
+Außentemperatur="Außentemperatur"
+Ende="Ende"
+Dauer Min="Dauer Min"
+max PS="Max. PS"
+Verbrauch [kWh]="Verbraucht kWh"
+Zellspannungen 81-99 - ScanMyTesla="Zellspannungen 81-99 - ScanMyTesla"
+Nein="Nein"
+Laden fertig="Vollständig geladen"
+min PS="Min. PS"
+Ø kW="Ø kW"
+
+#journeys.php
+Ladezeit [h]="Ladezeit [h]"

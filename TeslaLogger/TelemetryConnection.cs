@@ -291,11 +291,19 @@ namespace TeslaLogger
                                     case "On":
                                         state = 1;
                                         break;
+                                    case "Override":
+                                        state = 2;
+                                        break;
                                     case "Standby":
                                         state = -1;
                                         break;
+                                    case "Standstill":
+                                        state = -2;
+                                        break;
                                     default:
+                                        state = -99;
                                         car.Log("Unhandled Cruise State: " + v1);
+                                        car.CreateExeptionlessLog("CruiseStateUnhandled", v1, Exceptionless.Logging.LogLevel.Warn).Submit();
                                         break;
                                 }
 
@@ -452,11 +460,13 @@ namespace TeslaLogger
                 {
                     car.Log("Connect to Telemetry Server Error: " + ex2.InnerException.Message);
                     car.CreateExceptionlessClient(ex2).Submit();
+                    Thread.Sleep(60000);
                 }
                 else
                 {
                     car.Log("Connect to Telemetry Server Error: " + ex.Message);
                     car.CreateExceptionlessClient(ex).Submit();
+                    Thread.Sleep(60000);
                 }
             }
         }

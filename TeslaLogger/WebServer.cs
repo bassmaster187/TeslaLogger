@@ -485,17 +485,19 @@ namespace TeslaLogger
                 p = p.Replace(@"net8.0\", "");
             }
 
-            if (File.Exists(p))
-            {
-                string data = GetDataFromRequestInputStream(request);
-                File.Delete(p);
-                File.WriteAllText(p, data);
-                WriteString(response, "ok");
-                return;
-            }
+            if (filename == "settings.json")
+                p = FileManager.GetFilePath(TLFilename.SettingsFilename);
 
-            response.StatusCode = (int)HttpStatusCode.NotFound;
-            WriteString(response, @"File Not Found!");
+            System.Diagnostics.Debug.WriteLine("Webserver writefile: " + p);
+
+            if (File.Exists(p))
+                File.Delete(p);
+
+            string data = GetDataFromRequestInputStream(request);
+                
+            File.WriteAllText(p, data);
+            WriteString(response, "ok");
+            return;
         }
 
         private static void TelemetryClose(HttpListenerResponse response, Uri url)
@@ -515,7 +517,7 @@ namespace TeslaLogger
         }
 
         static string[] allowed_getfiles = new string[] {
-        "changelog.md", "geofence.csv","geofence-private.csv","settings.json","weather.ini"};
+        "changelog.md", "geofence.csv","geofence-private.csv","settings.json","weather.ini","dashboardlinks.txt"};
 
         private void Admin_Getfile(HttpListenerRequest request, HttpListenerResponse response)
         {
@@ -540,6 +542,8 @@ namespace TeslaLogger
                 p = p.Replace(@"Debug\", "");
                 p = p.Replace(@"net8.0\", "");
             }
+
+            System.Diagnostics.Debug.WriteLine("Webserver getfile: " + p);
 
             if (File.Exists(p))
             {
@@ -633,8 +637,7 @@ WHERE
                             }
                             else
                             {
-                                response.AddHeader("Content-Type", "application/json; charset=utf-8");
-                                WriteString(response, "{\"response\":{ \"value\":\"" + state[TeslaAPIState.Key.Value].ToString() + "\", \"timestamp\":" + state[TeslaAPIState.Key.Timestamp] + "} }");
+                                WriteString(response, "{\"response\":{ \"value\":\"" + state[TeslaAPIState.Key.Value].ToString() + "\", \"timestamp\":" + state[TeslaAPIState.Key.Timestamp] + "} }", "application/json; charset=utf-8");
                                 return;
                             }
                         }
@@ -807,7 +810,7 @@ WHERE
         </ul>
     </body>
 </html>");
-            WriteString(response, html.ToString());
+            WriteString(response, html.ToString(), "text/html");
         }
 
         private static void Admin_RestoreChargingCostsFromBackup2(HttpListenerRequest request, HttpListenerResponse response)
@@ -853,7 +856,7 @@ WHERE
                 WriteString(response, errorText);
                 return;
             }
-            WriteString(response, html.ToString());
+            WriteString(response, html.ToString(), "text/html");
         }
 
         private static void RestoreChargingCostsFromBackupCompare(HttpListenerResponse response, ref string errorText, StringBuilder html)
@@ -1287,7 +1290,7 @@ DROP TABLE chargingstate_bak";
 
                 var json = JsonConvert.SerializeObject(tokens);
 
-                WriteString(response, json);
+                WriteString(response, json, "application/json");
             }
             catch (Exception ex)
             {
@@ -1302,7 +1305,7 @@ DROP TABLE chargingstate_bak";
 
                 var json = JsonConvert.SerializeObject(error);
 
-                WriteString(response, json);
+                WriteString(response, json, "application/json");
 
                 ex.ToExceptionless().FirstCarUserID().MarkAsCritical().Submit();
             }
@@ -1329,6 +1332,7 @@ DROP TABLE chargingstate_bak";
         private static void Admin_GetCarsFromAccount(HttpListenerRequest request, HttpListenerResponse response, bool fleetAPI)
         {
             string responseString = "";
+            string contentType = null;
 
             try
             {
@@ -1381,6 +1385,7 @@ DROP TABLE chargingstate_bak";
                 }
 
                 responseString = JsonConvert.SerializeObject(o);
+                contentType = "application/json";
 
             }
             catch (UnauthorizedAccessException)
@@ -1394,7 +1399,7 @@ DROP TABLE chargingstate_bak";
                 Logfile.Log(ex.ToString());
             }
 
-            WriteString(response, responseString);
+            WriteString(response, responseString, contentType);
         }
 
         private static void Restart(HttpListenerRequest request, HttpListenerResponse response)
@@ -1448,7 +1453,7 @@ DROP TABLE chargingstate_bak";
 
                     string ret = JsonConvert.SerializeObject(obj);
 
-                    WriteString(response, ret);
+                    WriteString(response, ret, "application/json");
                 }
                 else if (Tools.IsPropertyExist(r, "save"))
                 {
@@ -1481,7 +1486,7 @@ DROP TABLE chargingstate_bak";
                     };
 
                     string ret = JsonConvert.SerializeObject(obj);
-                    WriteString(response, ret);
+                    WriteString(response, ret, "application/json");
                 }
             }
             catch (Exception ex)
@@ -1601,8 +1606,7 @@ DROP TABLE chargingstate_bak";
                     };
 
                     string json = JsonConvert.SerializeObject(t);
-                    response.AddHeader("Content-Type", "application/json; charset=utf-8");
-                    WriteString(response, json);
+                    WriteString(response, json, "application/json");
                     return;
                 }
             }
@@ -1662,8 +1666,7 @@ DROP TABLE chargingstate_bak";
                     };
 
                     string json = JsonConvert.SerializeObject(t);
-                    response.AddHeader("Content-Type", "application/json; charset=utf-8");
-                    WriteString(response, json);
+                    WriteString(response, json, "application/json");
                     return;
                 }
             }
@@ -1739,8 +1742,7 @@ DROP TABLE chargingstate_bak";
             if (m.Success)
             {
                 KVS.Get("MQTTSettings", out string json);
-                response.AddHeader("Content-Type", "application/json; charset=utf-8");
-                WriteString(response, json);
+                WriteString(response, json, "application/json");
                 return;
             }
             WriteString(response, "");
@@ -1912,7 +1914,7 @@ DROP TABLE chargingstate_bak";
                         System.Threading.Thread.Sleep(250);
                     }
 
-                    WriteString(response, car.Captcha);
+                    WriteString(response, car.Captcha, "image/svq+xml");
                     return;
                 }
             }
@@ -2138,7 +2140,7 @@ DROP TABLE chargingstate_bak";
                     response.AddHeader("Content-Type", "application/gpx+xml; charset=utf-8");
                     response.AddHeader("Content-Disposition", "inline; filename=\"trip.gpx\"");
                     Tools.DebugLog("GPX:" + Environment.NewLine + GPX.ToString());
-                    WriteString(response, GPX.ToString());
+                    WriteString(response, GPX.ToString(), "application/gpx+xml");
                 }
                 else
                 {
@@ -2180,8 +2182,20 @@ DROP TABLE chargingstate_bak";
 
         private static void Debug_TeslaLoggerMessages(HttpListenerRequest request, HttpListenerResponse response)
         {
-            response.AddHeader("Content-Type", "text/html; charset=utf-8");
-            WriteString(response, "<html><head></head><body><table border=\"1\">" + string.Concat(Tools.debugBuffer.Select(a => string.Format(Tools.ciEnUS, "<tr><td>{0}&nbsp;{1}</td></tr>", a.Item1, a.Item2))) + "</table></body></html>");
+            string temp = "<html><head></head><body><table border=\"1\">";
+
+            string filter = request.QueryString["filter"];
+
+            if (!String.IsNullOrEmpty(filter))
+                temp += string.Concat(Tools.debugBuffer.Where(w => w.Item2.IndexOf(filter, StringComparison.OrdinalIgnoreCase) >= 0)
+                    .Select(a => string.Format(Tools.ciEnUS, "<tr><td>{0}&nbsp;{1}</td></tr>", a.Item1, HttpUtility.HtmlEncode(a.Item2)))
+                    );
+            else
+                temp += string.Concat(Tools.debugBuffer.Select(a => string.Format(Tools.ciEnUS, "<tr><td>{0}&nbsp;{1}</td></tr>", a.Item1, HttpUtility.HtmlEncode(a.Item2))));
+
+            temp += "</table></body></html>";
+
+            WriteString(response, temp, "text/html; charset=utf-8");
         }
 
         private static void Admin_passwortinfo(HttpListenerRequest request, HttpListenerResponse response)
@@ -2230,7 +2244,7 @@ DROP TABLE chargingstate_bak";
                 {
                     if (CurrentJSON.jsonStringHolder.TryGetValue(CarID, out string json))
                     {
-                        WriteString(response, json);
+                        WriteString(response, json, "application/json");
                     }
                     else
                     {
@@ -2322,7 +2336,7 @@ DROP TABLE chargingstate_bak";
                     for (int retry = 0; retry < 10; retry++)
                     {
                         // vehicle_config = c.webhelper.GetCommand("vehicle_config").Result;
-                        vehicle_config = c.webhelper.GetCommand("vehicle_data").Result;
+                        vehicle_config = c.webhelper.GetCommand("vehicle_data?endpoints=vehicle_config&let_sleep=true").Result;
                         if (vehicle_config?.Trim()?.StartsWith("{", System.StringComparison.Ordinal) == true)
                             break;
 
@@ -2388,6 +2402,7 @@ DROP TABLE chargingstate_bak";
 
         private void SendCarCommandID(HttpListenerRequest request, HttpListenerResponse response)
         {
+            string responseText = string.Empty;
             Match m = Regex.Match(request.Url.LocalPath, @"/command/([0-9]+)/(.+)");
             if (m.Success && m.Groups.Count == 3 && m.Groups[1].Captures.Count == 1 && m.Groups[2].Captures.Count == 1)
             {
@@ -2398,90 +2413,16 @@ DROP TABLE chargingstate_bak";
                     Car car = Car.GetCarByID(CarID);
                     if (car != null)
                     {
-                        // check if command is in list of allowed commands
-                        if (AllowedTeslaAPICommands.Contains(command))
-                        {
-                            switch (command)
-                            {
-                                case "auto_conditioning_start":
-                                    WriteString(response, car.webhelper.PostCommand("command/auto_conditioning_start", null).Result);
-                                    break;
-                                case "auto_conditioning_stop":
-                                    WriteString(response, car.webhelper.PostCommand("command/auto_conditioning_stop", null).Result);
-                                    break;
-                                case "auto_conditioning_toggle":
-                                    if (car.CurrentJSON.current_is_preconditioning)
-                                    {
-                                        WriteString(response, car.webhelper.PostCommand("command/auto_conditioning_stop", null).Result);
-                                    }
-                                    else
-                                    {
-                                        WriteString(response, car.webhelper.PostCommand("command/auto_conditioning_start", null).Result);
-                                    }
-                                    break;
-                                case "sentry_mode_on":
-                                    WriteString(response, car.webhelper.PostCommand("command/set_sentry_mode", "{\"on\":true}", true).Result);
-                                    break;
-                                case "sentry_mode_off":
-                                    WriteString(response, car.webhelper.PostCommand("command/set_sentry_mode", "{\"on\":false}", true).Result);
-                                    break;
-                                case "sentry_mode_toggle":
-                                    if (car.webhelper.is_sentry_mode)
-                                    {
-                                        WriteString(response, car.webhelper.PostCommand("command/set_sentry_mode", "{\"on\":false}", true).Result);
-                                    }
-                                    else
-                                    {
-                                        WriteString(response, car.webhelper.PostCommand("command/set_sentry_mode", "{\"on\":true}", true).Result);
-                                    }
-                                    break;
-                                case "wake_up":
-                                    WriteString(response, car.webhelper.Wakeup().Result);
-                                    break;
-                                case "set_charge_limit":
-                                    if (request.QueryString.Count == 1 && int.TryParse(string.Concat(request.QueryString.GetValues(0)), out int newChargeLimit))
-                                    {
-                                        Address addr = Geofence.GetInstance().GetPOI(car.CurrentJSON.GetLatitude(), car.CurrentJSON.GetLongitude(), false);
-                                        if (addr != null)
-                                        {
-                                            car.Log($"SetChargeLimit to {newChargeLimit} at '{addr.name}' ...");
-                                            car.LastSetChargeLimitAddressName = addr.name;
-                                        }
-                                        WriteString(response, car.webhelper.PostCommand("command/set_charge_limit", "{\"percent\":" + newChargeLimit + "}", true).Result);
-                                    }
-                                    break;
-                                case "charge_start":
-                                    WriteString(response, car.webhelper.PostCommand("command/charge_start", null).Result);
-                                    break;
-                                case "charge_stop":
-                                    WriteString(response, car.webhelper.PostCommand("command/charge_stop", null).Result);
-                                    break;
-                                case "set_charging_amps":
-                                    if (request.QueryString.Count == 1 && int.TryParse(string.Concat(request.QueryString.GetValues(0)), out int newChargingAmps))
-                                    {
-                                        Address addr = Geofence.GetInstance().GetPOI(car.CurrentJSON.GetLatitude(), car.CurrentJSON.GetLongitude(), false);
-                                        if (addr != null)
-                                        {
-                                            car.Log($"SetChargingAmps to {newChargingAmps} at '{addr.name}' ...");
-                                            car.LastSetChargingAmpsAddressName = addr.name;
-                                        }
-                                        WriteString(response, car.webhelper.PostCommand("command/set_charging_amps", "{\"charging_amps\":" + newChargingAmps + "}", true).Result);
-                                    }
-                                    break;
-                                default:
-                                    WriteString(response, "");
-                                    break;
-                            }
-                            return;
-                        }
+                        responseText = SendCarCommand(request, responseText, command, car);
                     }
                 }
             }
-            WriteString(response, "");
+            WriteString(response, responseText);
         }
 
         private void SendCarCommandVIN(HttpListenerRequest request, HttpListenerResponse response)
         {
+            string responseText = string.Empty;
             Match m = Regex.Match(request.Url.LocalPath, @"/command/(.{17})/(.+)");
             if (m.Success && m.Groups.Count == 3 && m.Groups[1].Captures.Count == 1 && m.Groups[2].Captures.Count == 1)
             {
@@ -2492,127 +2433,137 @@ DROP TABLE chargingstate_bak";
                     Car car = Car.GetCarByID(CarID);
                     if (car != null)
                     {
-                        // check if command is in list of allowed commands
-                        if (AllowedTeslaAPICommands.Contains(command))
-                        {
-                            string var = string.Concat(request.QueryString.GetValues(0)).ToLower();
-                            switch (command)
-                            {
-                                case "auto_conditioning_start":
-                                    WriteString(response, car.webhelper.PostCommand("command/auto_conditioning_start", null).Result);
-                                    break;
-                                case "auto_conditioning_stop":
-                                    WriteString(response, car.webhelper.PostCommand("command/auto_conditioning_stop", null).Result);
-                                    break;
-                                case "auto_conditioning_start_stop":
-                                    
-                                    if (request.QueryString.Count == 1)
-                                    {
-                                        if (var == "1" || var == "true" || var == "on")
-                                        {
-                                            WriteString(response, car.webhelper.PostCommand("command/auto_conditioning_start", null).Result);
-                                        }
-                                        else
-                                        {
-                                            WriteString(response, car.webhelper.PostCommand("command/auto_conditioning_stop", null).Result);
-                                        }
-                                    }
-                                    break;
-                                case "auto_conditioning_toggle":
-                                    if (car.CurrentJSON.current_is_preconditioning)
-                                    {
-                                        WriteString(response, car.webhelper.PostCommand("command/auto_conditioning_stop", null).Result);
-                                    }
-                                    else
-                                    {
-                                        WriteString(response, car.webhelper.PostCommand("command/auto_conditioning_start", null).Result);
-                                    }
-                                    break;
-                                case "sentry_mode_on":
-                                    WriteString(response, car.webhelper.PostCommand("command/set_sentry_mode", "{\"on\":true}", true).Result);
-                                    break;
-                                case "sentry_mode_off":
-                                    WriteString(response, car.webhelper.PostCommand("command/set_sentry_mode", "{\"on\":false}", true).Result);
-                                    break;
-                                case "sentry_mode_on_off":
-                                    if (request.QueryString.Count == 1)
-                                    {
-                                        if (var == "1" || var == "true" || var == "on")
-                                        {
-                                            WriteString(response, car.webhelper.PostCommand("command/set_sentry_mode", "{\"on\":true}", true).Result);
-                                        }
-                                        else
-                                        {
-                                            WriteString(response, car.webhelper.PostCommand("command/set_sentry_mode", "{\"on\":false}", true).Result);
-                                        }
-                                    }
-                                    break;
-                                case "sentry_mode_toggle":
-                                    if (car.webhelper.is_sentry_mode)
-                                    {
-                                        WriteString(response, car.webhelper.PostCommand("command/set_sentry_mode", "{\"on\":false}", true).Result);
-                                    }
-                                    else
-                                    {
-                                        WriteString(response, car.webhelper.PostCommand("command/set_sentry_mode", "{\"on\":true}", true).Result);
-                                    }
-                                    break;
-                                case "wake_up":
-                                    WriteString(response, car.webhelper.Wakeup().Result);
-                                    break;
-                                case "set_charge_limit":
-                                    if (request.QueryString.Count == 1 && int.TryParse(string.Concat(request.QueryString.GetValues(0)), out int newChargeLimit))
-                                    {
-                                        Address addr = Geofence.GetInstance().GetPOI(car.CurrentJSON.GetLatitude(), car.CurrentJSON.GetLongitude(), false);
-                                        if (addr != null)
-                                        {
-                                            car.Log($"SetChargeLimit to {newChargeLimit} at '{addr.name}' ...");
-                                            car.LastSetChargeLimitAddressName = addr.name;
-                                        }
-                                        WriteString(response, car.webhelper.PostCommand("command/set_charge_limit", "{\"percent\":" + newChargeLimit + "}", true).Result);
-                                    }
-                                    break;
-                                case "charge_start":
-                                    WriteString(response, car.webhelper.PostCommand("command/charge_start", null).Result);
-                                    break;
-                                case "charge_stop":
-                                    WriteString(response, car.webhelper.PostCommand("command/charge_stop", null).Result);
-                                    break;
-                                case "charge_start_stop":
-                                    if (request.QueryString.Count == 1)
-                                    {
-                                        if(var == "1" || var == "true" || var == "on")
-                                        {
-                                            WriteString(response, car.webhelper.PostCommand("command/charge_start", null).Result);
-                                        }
-                                        else
-                                        {
-                                            WriteString(response, car.webhelper.PostCommand("command/charge_stop", null).Result);
-                                        }
-                                    }
-                                    break;
-                                case "set_charging_amps":
-                                    if (request.QueryString.Count == 1 && int.TryParse(string.Concat(request.QueryString.GetValues(0)), out int newChargingAmps))
-                                    {
-                                        Address addr = Geofence.GetInstance().GetPOI(car.CurrentJSON.GetLatitude(), car.CurrentJSON.GetLongitude(), false);
-                                        if (addr != null)
-                                        {
-                                            car.Log($"SetChargingAmps to {newChargingAmps} at '{addr.name}' ...");
-                                            car.LastSetChargingAmpsAddressName = addr.name;
-                                        }
-                                        WriteString(response, car.webhelper.PostCommand("command/set_charging_amps", "{\"charging_amps\":" + newChargingAmps + "}", true).Result);
-                                    }
-                                    break;
-                                default:
-                                    WriteString(response, "");
-                                    break;
-                            }
-                            return;
-                        }
+                        responseText = SendCarCommand(request, responseText, command, car);
                     }
                 }
             }
-            WriteString(response, "");
+            WriteString(response, responseText);
+        }
+
+        private string SendCarCommand(HttpListenerRequest request, string responseText, string command, Car car)
+        {
+            // check if command is in list of allowed commands
+            if (AllowedTeslaAPICommands.Contains(command))
+            {
+                switch (command)
+                {
+                    case "auto_conditioning_start":
+                        responseText = car.webhelper.PostCommand("command/auto_conditioning_start", null).Result;
+                        break;
+                    case "auto_conditioning_stop":
+                        responseText = car.webhelper.PostCommand("command/auto_conditioning_stop", null).Result;
+                        break;
+                    case "auto_conditioning_start_stop":
+                        if (request.QueryString.Count == 1)
+                        {
+                            string var = string.Concat(request.QueryString.GetValues(0)).ToLower();
+                            if (var == "1" || var == "true" || var == "on")
+                            {
+                                responseText = car.webhelper.PostCommand("command/auto_conditioning_start", null).Result;
+                            }
+                            else
+                            {
+                                responseText = car.webhelper.PostCommand("command/auto_conditioning_stop", null).Result;
+                            }
+                        }
+                        break;
+                    case "auto_conditioning_toggle":
+                        if (car.CurrentJSON.current_is_preconditioning)
+                        {
+                            responseText = car.webhelper.PostCommand("command/auto_conditioning_stop", null).Result;
+                        }
+                        else
+                        {
+                            responseText = car.webhelper.PostCommand("command/auto_conditioning_start", null).Result;
+                        }
+                        break;
+                    case "sentry_mode_on":
+                        responseText = car.webhelper.PostCommand("command/set_sentry_mode", "{\"on\":true}", true).Result;
+                        break;
+                    case "sentry_mode_off":
+                        responseText = car.webhelper.PostCommand("command/set_sentry_mode", "{\"on\":false}", true).Result;
+                        break;
+                    case "sentry_mode_on_off":
+                        if (request.QueryString.Count == 1)
+                        {
+                            string var = string.Concat(request.QueryString.GetValues(0)).ToLower();
+                            if (var == "1" || var == "true" || var == "on")
+                            {
+                                responseText = car.webhelper.PostCommand("command/set_sentry_mode", "{\"on\":true}", true).Result;
+                            }
+                            else
+                            {
+                                responseText = car.webhelper.PostCommand("command/set_sentry_mode", "{\"on\":false}", true).Result;
+                            }
+                        }
+                        break;
+                    case "sentry_mode_toggle":
+                        if (car.webhelper.is_sentry_mode)
+                        {
+                            responseText = car.webhelper.PostCommand("command/set_sentry_mode", "{\"on\":false}", true).Result;
+                        }
+                        else
+                        {
+                            responseText = car.webhelper.PostCommand("command/set_sentry_mode", "{\"on\":true}", true).Result;
+                        }
+                        break;
+                    case "wake_up":
+                        responseText = car.webhelper.Wakeup().Result;
+                        break;
+                    case "set_charge_limit":
+                        if (request.QueryString.Count == 1 && int.TryParse(string.Concat(request.QueryString.GetValues(0)), out int newChargeLimit))
+                        {
+                            Address addr = Geofence.GetInstance().GetPOI(car.CurrentJSON.GetLatitude(), car.CurrentJSON.GetLongitude(), false);
+                            if (addr != null)
+                            {
+                                car.Log($"SetChargeLimit to {newChargeLimit} at '{addr.name}' ...");
+                                car.LastSetChargeLimitAddressName = addr.name;
+                            }
+                            responseText = car.webhelper.PostCommand("command/set_charge_limit", "{\"percent\":" + newChargeLimit + "}", true).Result;
+                        }
+                        break;
+                    case "charge_start":
+                        responseText = car.webhelper.PostCommand("command/charge_start", null).Result;
+                        break;
+                    case "charge_stop":
+                        responseText = car.webhelper.PostCommand("command/charge_stop", null).Result;
+                        break;
+                    case "charge_start_stop":
+                        if (request.QueryString.Count == 1)
+                        {
+                            string var = string.Concat(request.QueryString.GetValues(0)).ToLower();
+                            if (var == "1" || var == "true" || var == "on")
+                            {
+                                responseText = car.webhelper.PostCommand("command/charge_start", null).Result;
+                            }
+                            else
+                            {
+                                responseText = car.webhelper.PostCommand("command/charge_stop", null).Result;
+                            }
+                        }
+                        break;
+                    case "set_charging_amps":
+                        if (request.QueryString.Count == 1 && int.TryParse(string.Concat(request.QueryString.GetValues(0)), out int newChargingAmps))
+                        {
+                            Address addr = Geofence.GetInstance().GetPOI(car.CurrentJSON.GetLatitude(), car.CurrentJSON.GetLongitude(), false);
+                            if (addr != null)
+                            {
+                                car.Log($"SetChargingAmps to {newChargingAmps} at '{addr.name}' ...");
+                                car.LastSetChargingAmpsAddressName = addr.name;
+                            }
+                            responseText = car.webhelper.PostCommand("command/set_charging_amps", "{\"charging_amps\":" + newChargingAmps + "}", true).Result;
+                        }
+                        break;
+                    default:
+                        Logfile.Log("unexpected switch case default in SendCarCommand");
+                        break;
+                }
+            }
+            else
+            {
+                responseText = $"command {command} is not allowed";
+            }
+            return responseText;
         }
 
         private static void Admin_SetPassword(HttpListenerRequest request, HttpListenerResponse response)
@@ -2682,8 +2633,9 @@ DROP TABLE chargingstate_bak";
                     string password = r["password"];
                     bool freesuc = r["freesuc"];
 
-                    string access_token = r["access_token"];
-                    string refresh_token = r["refresh_token"];
+                    string access_token = StringCipher.Encrypt(r["access_token"].ToString());
+                    string refresh_token = StringCipher.Encrypt(r["refresh_token"].ToString());
+
                     bool FleetAPI = false;
 
                     if (r["fleetAPI"] != null)
@@ -2883,8 +2835,7 @@ FROM
                             }
                             else
                             {
-                                response.AddHeader("Content-Type", "application/json; charset=utf-8");
-                                WriteString(response, "{\"response\":{ \"value\":\"" + state[TeslaAPIState.Key.Value].ToString() + "\", \"timestamp\":" + state[TeslaAPIState.Key.Timestamp] + "} }");
+                                WriteString(response, "{\"response\":{ \"value\":\"" + state[TeslaAPIState.Key.Value].ToString() + "\", \"timestamp\":" + state[TeslaAPIState.Key.Timestamp] + "} }", "application/json; charset=utf-8");
                                 return;
                             }
                         }
@@ -2946,12 +2897,11 @@ FROM
                         )
                     )
                 );
-                response.AddHeader("Content-Type", "text/html; charset=utf-8");
-                WriteString(response, "<html><head></head><body><table border=\"1\">" + string.Concat(geofence) + string.Concat(geofenceprivate) + "</table></body></html>");
+                WriteString(response, "<html><head></head><body><table border=\"1\">" + string.Concat(geofence) + string.Concat(geofenceprivate) + "</table></body></html>", "text/html; charset=utf-8");
             }
             else
             {
-                WriteString(response, "{\"response\":{\"reason\":\"\", \"result\":true}}");
+                WriteString(response, "{\"response\":{\"reason\":\"\", \"result\":true}}", "application/json");
             }
             WebHelper.UpdateAllPOIAddresses();
             Logfile.Log("Admin: ReloadGeofence done");
@@ -3010,7 +2960,7 @@ FROM
             },*/
 
             IEnumerable<string> trs = values.Select(a => string.Format("<tr><td>{0}</td><td>{1}</td></tr>", a.Key, a.Value));
-            WriteString(response, "<html><head></head><body><table>" + string.Concat(trs) + "</table></body></html>");
+            WriteString(response, "<html><head></head><body><table>" + string.Concat(trs) + "</table></body></html>", "text/html; charset=utf-8");
         }
 
         private static void Debug_TeslaAPI(HttpListenerRequest request, HttpListenerResponse response)
@@ -3018,15 +2968,21 @@ FROM
             Match m = Regex.Match(request.Url.LocalPath, @"/debug/TeslaAPI/([0-9]+)/(.+)");
             if (m.Success && m.Groups.Count == 3 && m.Groups[1].Captures.Count == 1 && m.Groups[2].Captures.Count == 1)
             {
-                string value = m.Groups[2].Captures[0].ToString();
+                var value = m.Groups[2].Captures[0].ToString();
                 _ = int.TryParse(m.Groups[1].Captures[0].ToString(), out int CarID);
                 if (value.Length > 0 && CarID > 0)
                 {
-                    Car car = Car.GetCarByID(CarID);
-                    if (car != null && car.GetWebHelper().TeslaAPI_Commands.TryGetValue(value, out string TeslaAPIJSON))
+                    var car = Car.GetCarByID(CarID);
+                    if (car == null)
                     {
-                        response.AddHeader("Content-Type", "application/json; charset=utf-8");
-                        WriteString(response, TeslaAPIJSON);
+                        WriteString(response, $"Car not found");
+                        return;
+                    }
+                    var wh = car.GetWebHelper();
+                    if (wh.TeslaAPI_Commands.TryGetValue(value, out var TeslaAPIJSON) ||
+                        wh.TeslaAPI_Commands.TryGetValue(value+request.Url.Query, out TeslaAPIJSON))
+                    {
+                        WriteString(response, TeslaAPIJSON, "application/json; charset=utf-8");
                     }
                     else
                     {
@@ -3135,7 +3091,7 @@ FROM
 
             Logfile.Log("JSON: " + responseString);
 
-            WriteString(response, responseString);
+            WriteString(response, responseString, "application/json");
         }
 
         private static void Admin_GetAllCars(HttpListenerRequest request, HttpListenerResponse response)
@@ -3153,7 +3109,7 @@ FROM
                 {
                     using (DataTable dt = new DataTable())
                     {
-                        using (MySqlDataAdapter da = new MySqlDataAdapter("SELECT id, display_name, tasker_hash, model_name, vin, tesla_name, tesla_carid, lastscanmytesla, freesuc, fleetAPI, needVirtualKey, needCommandPermission, needFleetAPI FROM cars order by display_name", DBHelper.DBConnectionstring))
+                        using (MySqlDataAdapter da = new MySqlDataAdapter("SELECT id, display_name, tasker_hash, model_name, vin, tesla_name, tesla_carid, lastscanmytesla, freesuc, fleetAPI, needVirtualKey, needCommandPermission, needFleetAPI, access_type, virtualkey FROM cars order by display_name", DBHelper.DBConnectionstring))
                         {
                             SQLTracer.TraceDA(dt, da);
 
@@ -3169,17 +3125,29 @@ FROM
                 Logfile.Log(ex.ToString());
             }
 
-            WriteString(response, responseString);
+            WriteString(response, responseString, "application/json");
         }
 
-        private static void WriteString(HttpListenerResponse response, string responseString)
+        private static void WriteString(HttpListenerResponse response, string responseString, string contentType=null)
         {
             response.ContentEncoding = Encoding.UTF8;
-            byte[] buffer = Encoding.UTF8.GetBytes(responseString);
+            var buffer = Encoding.UTF8.GetBytes(responseString);
             // Get a response stream and write the response to it.
             response.ContentLength64 = buffer.Length;
-            response.ContentType = "text/plain; charset=utf-8";
-            Stream output = response.OutputStream;
+            if (string.IsNullOrEmpty(contentType))
+            {
+                response.ContentType = "text/plain; charset=utf-8";
+            }
+            else if (contentType.Contains("charset"))
+            {
+                response.ContentType = contentType;
+            }
+            else
+            {
+                response.ContentType = $"{contentType.TrimEnd(new[] {';'})}; charset=utf-8";
+            }
+
+            var output = response.OutputStream;
             if (output != null && output.CanWrite)
             {
                 output.Write(buffer, 0, buffer.Length);
@@ -3233,8 +3201,7 @@ FROM
                             specialflags.Add(flag.Key.ToString(), flag.Value);
                         }
                         data.Add("SpecialFlags", specialflags);
-                        response.AddHeader("Content-Type", "application/json; charset=utf-8");
-                        WriteString(response, JsonConvert.SerializeObject(data));
+                        WriteString(response, JsonConvert.SerializeObject(data), "application/json; charset=utf-8");
                         return;
                     }
                 }
@@ -3243,7 +3210,7 @@ FROM
             WriteString(response, "");
         }
 
-        private static void Admin_UpdateElevation(HttpListenerRequest request, HttpListenerResponse response)
+        private static void Admin_UpdateElevation(HttpListenerRequest _, HttpListenerResponse response)
         {
             int from = 1;
             int to = 1;
@@ -3257,7 +3224,7 @@ FROM
                         MySqlDataReader dr = SQLTracer.TraceDR(cmd);
                         if (dr.Read() && dr[0] != DBNull.Value)
                         {
-                            _ = int.TryParse(dr[0].ToString(), out to);
+                            int.TryParse(dr[0].ToString(), out to);
                         }
                         con.Close();
                     }
@@ -3380,7 +3347,7 @@ function checkform() {
             html.Append(@"
     </body>
 </html>");
-            WriteString(response, html.ToString());
+            WriteString(response, html.ToString(), "text/html");
         }
     }
 }

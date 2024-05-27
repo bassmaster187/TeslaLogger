@@ -90,3 +90,5 @@ TeslaLogger/GrafanaDB/*
 TeslaLogger/NOBACKUPONUPDATE
 TeslaLogger/copytodebian.cmd
 TeslaLogger/bin/LASTTASKERWAKEUPFILE_*
+/TeslaLogger/bin/logs
+TeslaLogger/bin/encryption.txt

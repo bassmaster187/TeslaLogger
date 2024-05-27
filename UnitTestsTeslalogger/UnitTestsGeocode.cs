@@ -54,7 +54,7 @@ namespace UnitTestsTeslalogger
         public void SulzbacherStr()
         {
             string temp = WebHelper.ReverseGecocodingAsync(c, 48.96092, 9.43113, true).Result;
-            Assert.AreEqual("71522 Backnang, Sulzbacher Straße 176", temp);
+            Assert.AreEqual("71522 Backnang, Sulzbacher Straße ", temp);
             Assert.AreEqual("de", c.CurrentJSON.current_country_code);
             Assert.AreEqual("Baden-Württemberg", c.CurrentJSON.current_state);
         }
@@ -73,7 +73,7 @@ namespace UnitTestsTeslalogger
         public void UlmBeringerbruecke()
         {
             string temp = WebHelper.ReverseGecocodingAsync(c, 48.400892, 9.970095, true).Result;
-            Assert.AreEqual("89077 Ulm, Beringerstraße ", temp);
+            Assert.AreEqual("89077 Ulm, Blaubeurer Straße ", temp);
             Assert.AreEqual("de", c.CurrentJSON.current_country_code);
             Assert.AreEqual("Baden-Württemberg", c.CurrentJSON.current_state);
         }

@@ -1,3 +1,23 @@
+# Version 1.58.0
+- New stable version
+- Encryption file is protected against grafana, apache and mariadb 
+
+# Version 1.57.14
+- Tesla access token and refresh token are stored encryted
+
+# Version 1.57.13
+- Use Guest NearbySuCService to complete Supercharger usage map
+
+# Version 1.57.11
+- Rollback code to 1.57.9
+
+# Version 1.57.10
+- Show virtual key and access type in settings / cars
+
+# Version 1.57.9
+- New Wallbox supported: cFos
+- New Wallbox supported: EVCC
+
 # Version 1.57.8
 - Dashboard consumption shows the usage of Autopilot / TACC in different colors (Fleet Telemetry). [Screenshot](https://raw.githubusercontent.com/bassmaster187/TeslaLogger/master/TeslaLogger/screenshots/Autopilot.PNG)
 
