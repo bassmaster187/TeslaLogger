@@ -228,7 +228,6 @@ namespace TeslaLogger
                 car.Raven = raven;
                 car._virtual_key = virtualKey;
                 car._access_type  = access_type;
-
 #pragma warning restore CA2000 // Objekte verwerfen, bevor Bereich verloren geht
             }
             catch (Exception ex)

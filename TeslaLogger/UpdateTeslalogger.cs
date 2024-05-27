@@ -1209,6 +1209,7 @@ PRIMARY KEY(id)
                 Logfile.Log("ALTER TABLE cars ADD Column virtualkey");
                 AssertAlterDB();
                 DBHelper.ExecuteSQLQuery(@"ALTER TABLE `cars` ADD `virtualkey` TINYINT UNSIGNED  NULL DEFAULT '0'", 600);
+            }
 
             if (!DBHelper.ColumnExists("cars", "charge_point"))
             {
