@@ -168,6 +168,8 @@
     <Compile Include="MQTTClient.cs" />
     <Compile Include="ScanMyTesla.cs" />
     <Compile Include="ShareData.cs" />
+    <Compile Include="SolarChargingBase.cs" />
+    <Compile Include="SolarChargingOpenWB.cs" />
     <Compile Include="TelemetryConnection.cs" />
     <Compile Include="TeslaAuth.cs" />
     <Compile Include="UpdateTeslalogger.cs" />
