@@ -226,6 +226,8 @@ namespace TeslaLogger
 #pragma warning disable CA2000 // Objekte verwerfen, bevor Bereich verloren geht
                 Car car = new Car(id, Name, Password, carid, tesla_token, tesla_token_expire, Model_Name, car_type, car_special_type, car_trim_badging, display_name, vin, tasker_hash, wh_tr, fleetAPI, oldCarState, wheel_type, charge_point);
                 car.Raven = raven;
+                car._virtual_key = virtualKey;
+                car._access_type  = access_type;
 
 #pragma warning restore CA2000 // Objekte verwerfen, bevor Bereich verloren geht
             }

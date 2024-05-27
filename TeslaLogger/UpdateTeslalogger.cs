@@ -993,6 +993,13 @@ PRIMARY KEY(id)
                 DBHelper.ExecuteSQLQuery("ALTER TABLE charging ADD COLUMN battery_range_km DOUBLE NULL", 600);
             }
 
+            if (!DBHelper.ColumnExists("charging", "charger_actual_current_calc"))
+            {
+                Logfile.Log("ALTER TABLE charging ADD COLUMN charger_actual_current_calc INT NULL");
+                AssertAlterDB();
+                DBHelper.ExecuteSQLQuery("ALTER TABLE charging ADD COLUMN charger_actual_current_calc INT NULL");
+            }
+
             if (!DBHelper.ColumnExists("charging", "charger_phases_calc"))
             {
                 Logfile.Log("ALTER TABLE charging ADD COLUMN charger_phases_calc TINYINT(1) NULL");
@@ -1189,6 +1196,20 @@ PRIMARY KEY(id)
                 AssertAlterDB();
                 DBHelper.ExecuteSQLQuery(@"ALTER TABLE `cars` ADD `needFleetAPI` TINYINT UNSIGNED NOT NULL DEFAULT '0'", 600);
             }
+            
+            if (!DBHelper.ColumnExists("cars", "access_type"))
+            {
+                Logfile.Log("ALTER TABLE cars ADD Column access_type");
+                AssertAlterDB();
+                DBHelper.ExecuteSQLQuery(@"ALTER TABLE `cars` ADD `access_type` varchar(20) NULL", 600);
+            }
+
+            if (!DBHelper.ColumnExists("cars", "virtualkey")) 
+            {
+                Logfile.Log("ALTER TABLE cars ADD Column virtualkey");
+                AssertAlterDB();
+                DBHelper.ExecuteSQLQuery(@"ALTER TABLE `cars` ADD `virtualkey` TINYINT UNSIGNED  NULL DEFAULT '0'", 600);
+
             if (!DBHelper.ColumnExists("cars", "charge_point"))
             {
                 Logfile.Log("ALTER TABLE cars ADD Column charge_point");
