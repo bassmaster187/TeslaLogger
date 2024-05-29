@@ -56,30 +56,30 @@ Geladen="Naładowano"
 Ladezeit="Czas ładowania"
 Anz. Ladungen="Ilość"
 Ladehub=
-PV=
+PV="Ze słońca"
 
 #SOC Ladestatistik.json
-SOC Ladestatistik=
-SOC [%]=
+SOC Ladestatistik="SOC Statystyki Ładowania"
+SOC [%]="SOC [%]"
 
 #SOC Entladestatistik.json
-SOC Entladestatistik=
+SOC Entladestatistik="SOC Statystyki Rozładowania"
 
 #Laden.json
-Laden=
-Ladespannung [V]=
-Reichweite [mi]=
-Reichweite [km]=
-Leistung [kW]=
-Phasen=
-Stromstärke [A]=
-Angefordert [A]=
-Pilot [A]=
+Laden="Ładowanie"
+Ladespannung [V]="Napięcie Ładowania [V]"
+Reichweite [mi]="Zasięg [mi]"
+Reichweite [km]="Zasięg [km]"
+Leistung [kW]="Moc [kW]"
+Phasen="Fazy"
+Stromstärke [A]="Prąd [A]"
+Angefordert [A]="Oczekiwane [A]"
+Pilot [A]="Pilot [A]"
 
 #Vampir Drain Monatsstatistik.json
 Vampir Drain Monatsstatistik=
 TR mi Verlust=
-kWh Verlust=
+kWh Verlust="Utrata kWh"
 Eur Verlust=
 Zeitspanne Stunden=
 TR mi Verlust pro Stunde=
