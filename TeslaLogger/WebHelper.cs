@@ -4844,10 +4844,15 @@ DESC", con))
                     }
                     else if ((int)result.StatusCode == 429) // TooManyRequests
                     {
+                        // Retry-After: time in seconds
                         Tools.DebugLog($"429: response Retry-After:{result.Headers.RetryAfter}");
-                        if (!int.TryParse(result.Headers.RetryAfter.ToString(), out int sleep))
+                        if (int.TryParse(result.Headers.RetryAfter.ToString(), out int sleep))
                         {
-                            sleep = random.Next(5000) + 60000;
+                            sleep = sleep * 1000;
+                        }
+                        else 
+                        {
+                            sleep = (random.Next(5000) + 60000) * 1000;
                         }
 
                         Log("Result.Statuscode: " + (int)result.StatusCode + " (" + result.StatusCode.ToString() + ") cmd: " + cmd + " Sleep: " + sleep + "ms");
