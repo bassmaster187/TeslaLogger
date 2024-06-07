@@ -4854,8 +4854,18 @@ DESC", con))
                         {
                             sleep = (random.Next(5000) + 60000) * 1000;
                         }
+                        string l = "Result.Statuscode: " + (int)result.StatusCode + " (" + result.StatusCode.ToString() + ") cmd: " + cmd + " Sleep: " + sleep + "ms";
 
-                        Log("Result.Statuscode: " + (int)result.StatusCode + " (" + result.StatusCode.ToString() + ") cmd: " + cmd + " Sleep: " + sleep + "ms");
+                        if (result.Headers.TryGetValues("ratelimit-limit", out var v))
+                            l += ", ratelimit-limit: " + v.First();
+
+                        if (result.Headers.TryGetValues("ratelimit-remaining", out var v2))
+                            l += ", ratelimit-remaining: " + v2.First();
+
+                        if (result.Headers.TryGetValues("ratelimit-reset", out var v3))
+                            l += ", ratelimit-reset: " + v3.First();
+
+                        Log(l);
                         Thread.Sleep(sleep);
                     }
                     else
