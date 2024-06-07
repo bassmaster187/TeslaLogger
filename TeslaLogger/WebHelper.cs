@@ -4865,6 +4865,8 @@ DESC", con))
                         if (result.Headers.TryGetValues("ratelimit-reset", out var v3))
                             l += ", ratelimit-reset: " + v3.First();
 
+                        l += ", sleep till: "+ DateTime.Now.AddMilliseconds(sleep).ToString(Tools.ciDeDE);
+
                         Log(l);
                         Thread.Sleep(sleep);
                     }
