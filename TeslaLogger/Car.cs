@@ -308,7 +308,7 @@ namespace TeslaLogger
                     InitStage3();
                     if (ApplicationSettings.Default.UseTelemetryServer)
                     {
-                        if (FleetAPI && !(CarType == "models" || CarType == "models2" || CarType == "modelx"))
+                        if (Virtual_key && !(CarType == "models" || CarType == "models2" || CarType == "modelx"))
                         {
                             telemetry = new TelemetryConnection(this);
                             if (GetCurrentState() == TeslaState.Online || GetCurrentState() == TeslaState.Drive || GetCurrentState() == TeslaState.Charge)
