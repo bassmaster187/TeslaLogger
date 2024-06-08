@@ -156,8 +156,8 @@ Do you really want to delete this vehicle?="Dieses Fahrzeug löschen?"
 Check Logfile in one minute!=Bitte die Logdatei in einer Minute prüfen!
 Unauthorized=Nicht autorisiert
 This isn't a valid URL!="Ungültige URL!"
-This isn't an auth link by Tesla!="Dies ist ein Autorisierungslink von Tesla!"
-The URL doesn't contain the expected format!="Die URL ist nicht im erwartete Format!"
+This isn't an auth link by Tesla!="Dies ist kein Autorisierungslink von Tesla!"
+The URL doesn't contain the expected format!="Die URL ist nicht im erwarteten Format!"
 
 #password_fleet.php
 PF_LOGOUT="Melden Sie sich von Ihrem Tesla-Konto ab, wenn Sie bereits eingeloggt sind"
