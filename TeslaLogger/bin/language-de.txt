@@ -21,7 +21,7 @@ Last Driven=Letzte Fahrt  * * *
 
 #index.php
 Battery Heater=Batterie-Heizung
-Car Info="Fahrzeuginformationen"
+Car Info="Fahrzeug-Info"
 Car Version=Fahrzeug-Version
 Cell Imbalance=Zellen-Imbalance
 Cell Temp=Zelltemperatur
@@ -37,7 +37,7 @@ Last Trip=Letzte Fahrt
 Last Update=Letztes Update
 Max Charge=Max. Ladung
 Max Discharge=Max. Entladung
-Max km/h="Max. km/h"
+Max km/h="Max km/h"
 No=Nein
 Odometer=Kilometerstand
 Resume Teslalogger=Teslalogger starten
@@ -62,7 +62,7 @@ Automatic updates=Automatische Updates
 Range=Reichweite
 Show calc. 100% range=Zeige errechnete 100 %
 Car Name="Fahrzeugname"
-Enable="Aktiviert"
+Enable="Aktivieren"
 Fahrenheit=Fahrenheit
 Language=Sprache
 Main Car="Hauptfahrzeug"
@@ -116,7 +116,7 @@ Please choose your vehicle=Bitte wählen Sie Ihr Fahrzeug aus
 Bitte Tesla Account Zugangsdaten eingeben=Bitte Tesla Account Zugangsdaten eingeben
 Please enter your Tesla account credentials=Bitte geben Sie Ihre Tesla-Zugangsdaten ein
 Please select a vehicle=Bitte wählen Sie ein Fahrzeug aus
-TeslaAuthApps="Du kannst folgende Apps verwenden, um ein Access Token & Refresh Token vom Tesla-Server zu generieren:"
+TeslaAuthApps="Generiere ein Access- und Refresh-Token mit diesen Apps:"
 BA_Browser=Im lokalen {Browser}
 BA_Read=Bitte lesen Sie alle Schritte, bevor Sie fortfahren:
 BA_Logon=Klicken Sie auf den unten stehenden <b>Tesla Logon</b> Link, der einen neuen Tab für die Tesla-Anmeldeseite öffnet
@@ -156,8 +156,8 @@ Do you really want to delete this vehicle?="Dieses Fahrzeug löschen?"
 Check Logfile in one minute!=Bitte die Logdatei in einer Minute prüfen!
 Unauthorized=Nicht autorisiert
 This isn't a valid URL!="Ungültige URL!"
-This isn't an auth link by Tesla!=Dies ist ein Autorisierungslink von Tesla!
-The URL doesn't contain the expected format!="Die URL ist nicht im erwartete Format!"
+This isn't an auth link by Tesla!="Dies ist kein Autorisierungslink von Tesla!"
+The URL doesn't contain the expected format!="Die URL ist nicht im erwarteten Format!"
 
 #password_fleet.php
 PF_LOGOUT="Melden Sie sich von Ihrem Tesla-Konto ab, wenn Sie bereits eingeloggt sind"
@@ -310,7 +310,7 @@ New Journey=Neue Reise
 Journey name=Name der Reise
 Please wait=Bitte warten
 Please select start first=Bitte wählen Sie zuerst den Startpunkt
-DelJourney="Wollen Sie wirklich Reise Nr. {id} löschen?"
+DelJourney="Reise Nr. {id} löschen?"
 Nothing found=Nichts gefunden
 Display _MENU_ records per page=Zeige _MENU_ Zeilen pro Seite
 Showing _START_ to _END_ of _TOTAL_ entries=Zeige _START_ bis _END_ von _TOTAL_ Einträgen
@@ -330,9 +330,9 @@ Restart=Neustart
 Dashboards=Dashboards
 Fleet Statistic=Flottenstatistik
 My Degradation=Meine Degradation
-My Charging AVG=Meine Aufladungen AVG
-Fleet Degradation AVG=Flotten-Degradation AVG
-Fleet Charging AVG=Flottenaufladung AVG
+My Charging AVG="Ø meiner Aufladungen"
+Fleet Degradation AVG="Ø Flotten-Degradation"
+Fleet Charging AVG="Ø Flottenaufladung"
 Fleet Charging MAX (Firmware)=Flottenladestation MAX (Firmware)
 Fleet Charging Locations=Flotten-Ladestationen
 Fleet Fast Charging Map=Flotten-Schnellladekarte
@@ -362,7 +362,7 @@ TextRestore2=Der Wiederherstellungsprozess kann bis zu 10 Minuten dauern!
 TextRestore3=Unterbrechen Sie den Wiederherstellungsprozess in keiner Weise! Laden Sie die Seite nicht neu! Schließen Sie diese Seite nicht!
 
 #dashboard.php
-Sleeping="Schlafen"
+Sleeping="Schläft"
 Start Trip="Fahrtbeginn"
 End Trip="Fahrtende"
 Start km="Start km"
@@ -521,7 +521,7 @@ Zellspannungen="Zellspannungen"
 #Status.json
 Current Status="Aktueller Status"
 Geschwindigkeit [mph]="Geschwindigkeit [mph]"
-Schlafen="Schlafen"
+Schlafen="Schläft"
 Angefordert [A]="Angefordert [A]"
 Start Adresse="Start Adresse"
 Ø PS="Ø PS"
@@ -538,7 +538,7 @@ kWh laut Zähler / Rechnung="kWh laut Zähler / Rechnung"
 Anzahl Trips="Anzahl Fahrten"
 
 #Visited.json
-Visited="Besuchte Standorte"
+Visited="Besuchte Orte"
 Ø Verbrauch [kWh]="Ø Verbrauch kWh"
 Zelltemperatur="Zelltemperatur"
 Geschwindigkeit [km/h]="Geschwindigkeit [km/h]"

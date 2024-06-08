@@ -32,6 +32,7 @@ namespace TeslaLogger
             
             if (!ApplicationSettings.Default.UseMQTT)
             {
+                Logfile.Log("MQTT: No settings found, disabled!");
                 return;
             }
 
@@ -40,7 +41,6 @@ namespace TeslaLogger
                 System.Threading.Thread MQTTthread = new System.Threading.Thread(StartMqttClient);
                 MQTTthread.Start();
                 Logfile.Log("MQTT: Using old MQTT client, not recomended!");
-                ExceptionlessClient.Default.CreateFeatureUsage("MQTTClientOld").FirstCarUserID().Submit();
             }
             catch (Exception ex)
             {
@@ -61,6 +61,8 @@ namespace TeslaLogger
                     Logfile.Log("MQTTClient.exe not found!");
                     return;
                 }
+
+                ExceptionlessClient.Default.CreateFeatureUsage("MQTTClientOld").FirstCarUserID().Submit();
 
                 using (System.Diagnostics.Process proc = new System.Diagnostics.Process
                 {

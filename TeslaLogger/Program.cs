@@ -6,6 +6,7 @@ using System.Net;
 using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace TeslaLogger
 {
@@ -31,32 +32,6 @@ namespace TeslaLogger
 
         private static void Main(string[] _)
         {
-            // TLUpdate.exe main
-            if (System.Diagnostics.Process.GetCurrentProcess().ProcessName.Equals("TLUpdate"))
-            {
-                Logfile.Log(" *** TLUpdate MAIN ***");
-                try
-                {
-                    Tools.ExecMono("pkill", "TeslaLogger.exe");
-
-                    Tools.CopyFilesRecursively(new DirectoryInfo("/etc/teslalogger/git/TeslaLogger/bin"), new DirectoryInfo("/etc/teslalogger"), "TeslaLogger.exe");
-
-                    Tools.CopyFile("/etc/teslalogger/git/TeslaLogger/bin/TeslaLogger.exe", "/etc/teslalogger/TeslaLogger.exe");
-
-                    Logfile.Log("End update");
-
-                    Logfile.Log("Rebooting");
-
-                    Tools.ExecMono("reboot", "");
-                }
-                catch (Exception ex)
-                {
-                    ex.ToExceptionless().FirstCarUserID().Submit();
-                    Logfile.Log(ex.ToString());
-                }
-            }
-
-            // TeslaLogger.exe main
             try
             {
                 try
@@ -143,14 +118,18 @@ namespace TeslaLogger
             {
                 if(KVS.Get("MQTTSettings", out string mqttSettings) == KVS.SUCCESS)
                 {
-                    Thread mqttThread = new Thread(() =>
+                    dynamic settings = JsonConvert.DeserializeObject(mqttSettings);
+                    if (settings["mqtt_host"] > 0)
                     {
+                        Thread mqttThread = new Thread(() =>
+                        {
                         MQTT.GetSingleton().RunMqtt();
-                    })
-                    {
-                        Name = "MqttThread"
-                    };
-                    mqttThread.Start();
+                        })
+                        {
+                            Name = "MqttThread"
+                        };
+                        mqttThread.Start();
+                    }
                 }
                 else
                 {

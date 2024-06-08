@@ -9,6 +9,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Diagnostics.Metrics;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -4843,7 +4844,16 @@ DESC", con))
                     }
                     else if ((int)result.StatusCode == 429) // TooManyRequests
                     {
-                        int sleep = random.Next(12000) + 27000;
+                        // Retry-After: time in seconds
+                        Tools.DebugLog($"429: response Retry-After:{result.Headers.RetryAfter}");
+                        if (int.TryParse(result.Headers.RetryAfter.ToString(), out int sleep))
+                        {
+                            sleep = sleep * 1000;
+                        }
+                        else 
+                        {
+                            sleep = (random.Next(5000) + 60000) * 1000;
+                        }
 
                         Log("Result.Statuscode: " + (int)result.StatusCode + " (" + result.StatusCode.ToString() + ") cmd: " + cmd + " Sleep: " + sleep + "ms");
                         Thread.Sleep(sleep);
@@ -5019,6 +5029,7 @@ DESC", con))
 
                     if (!result.IsSuccessStatusCode)
                     {
+                        PDF = null;
                         throw new Exception("GetChargingHistoryInvoicePDF: " + result.StatusCode.ToString() + " CarState: " + car.GetCurrentState().ToString() + " (OK: " + car.webhelper.getChargingHistoryV2OK + " - Fail: " + car.webhelper.getChargingHistoryV2Fail + ")");
                     }
                     return PDF;
