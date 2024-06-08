@@ -1331,10 +1331,18 @@ PRIMARY KEY(id)
                 if (File.Exists("BRANCH"))
                 {
                     var branch = File.ReadAllText("BRANCH").Trim();
-                    Logfile.Log($"YOU ARE USING BRANCH: " + branch);
 
-                    GitHubURL = "https://github.com/bassmaster187/TeslaLogger/archive/refs/heads/" + branch + ".zip";
-                    master = branch;
+                    if (WebHelper.BranchExists(branch))
+                    {
+                        Logfile.Log($"YOU ARE USING BRANCH: " + branch);
+
+                        GitHubURL = "https://github.com/bassmaster187/TeslaLogger/archive/refs/heads/" + branch + ".zip";
+                        master = branch;
+                    }
+                    else
+                    {
+                        Logfile.Log($"BRANCH NOT EXIST: " + branch);
+                    }
                 }
 
 

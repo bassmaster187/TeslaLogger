@@ -109,6 +109,8 @@ namespace TeslaLogger
         DateTime lastRefreshToken = DateTime.MinValue;
         DateTime nextTeslaTokenFromRefreshToken = DateTime.MaxValue;
 
+        int commandCounter = 0;
+
         protected virtual void Dispose(bool disposing)
         {
             if (disposing)
@@ -4800,6 +4802,17 @@ DESC", con))
                         {
                             TeslaAPI_Commands.TryAdd(cmd, resultContent);
                         }
+
+                        /*
+                        if (result.Headers.TryGetValues("ratelimit-remaining", out var v2))
+                            Log("ratelimit-remaining: " + v2.First());
+                        */
+
+                        commandCounter++;
+
+                        if (commandCounter % 100 == 0)
+                            Log("Command counter: " + commandCounter);
+
                         return resultContent;
                     }
                     DBHelper.AddMothershipDataToDB("GetCommand(" + cmd + ")", double.Parse("-1." + (int)result.StatusCode, Tools.ciEnUS), (int)result.StatusCode);
@@ -5699,6 +5712,37 @@ DESC", con))
 
             return null;
         }
+
+        internal static bool BranchExists(string branch)
+        {
+            try
+            {
+                HttpClient client = new HttpClient();
+                client.DefaultRequestHeaders.ConnectionClose = true;
+                ProductInfoHeaderValue userAgent = new ProductInfoHeaderValue("Teslalogger", Assembly.GetExecutingAssembly().GetName().Version.ToString());
+                client.DefaultRequestHeaders.UserAgent.Add(userAgent);
+                client.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue("(00000000; " + Thread.CurrentThread.ManagedThreadId + ")"));
+
+                var g = client.GetAsync("https://api.github.com/repos/bassmaster187/TeslaLogger/branches/" + branch).Result;
+                if (g.IsSuccessStatusCode)
+                {
+                    string res = g.Content.ReadAsStringAsync().Result;
+                    return res.Contains("signature");
+                }
+                else if (g.StatusCode == HttpStatusCode.NotFound)
+                {
+                    return false;
+                }    
+            }
+            catch (Exception ex)
+            {
+                ex.ToExceptionless().FirstCarUserID().Submit();
+                Logfile.Log(ex.ToString());
+            }
+
+            return false;
+        }
+
     }
 
     class Account
