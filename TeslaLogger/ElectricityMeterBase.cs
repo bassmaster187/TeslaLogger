@@ -1,6 +1,4 @@
-﻿
-using System;
-using Exceptionless;
+﻿using System;
 
 namespace TeslaLogger
 {

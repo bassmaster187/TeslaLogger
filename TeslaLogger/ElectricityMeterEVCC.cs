@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Net;
 using System.Runtime.Caching;
-
 using Exceptionless;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;

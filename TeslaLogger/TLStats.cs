@@ -2,7 +2,6 @@
 using System.Diagnostics;
 using System.Text;
 using System.Threading;
-using Exceptionless;
 using MySql.Data.MySqlClient;
 
 namespace TeslaLogger

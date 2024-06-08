@@ -3,7 +3,6 @@ using System;
 using System.Net.Http;
 using System.Security.Cryptography;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
 using System.Net.Http.Headers;
 using System.Net;

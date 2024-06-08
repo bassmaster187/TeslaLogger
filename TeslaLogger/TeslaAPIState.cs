@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
-
 using Exceptionless;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -983,6 +982,7 @@ namespace TeslaLogger
                             case "pws":
                             case "range_plus_badging":
                             case "rhd":
+                            case "sentry_preview_supported":
                             case "supports_qr_pairing":
                             case "use_range_badging":
                             case "webcam_selfie_supported":
