@@ -27,24 +27,24 @@ namespace TLUpdate
                     {
                         if (excludeFile != null && file.Name == excludeFile)
                         {
-                            Console.WriteLine($"CopyFilesRecursively: skip {excludeFile}");
+                            Console.WriteLine($" *** CopyFilesRecursively: skip {excludeFile}");
                         }
                         else
                         {
                             string p = Path.Combine(target.FullName, file.Name);
-                            Console.WriteLine("Copy '" + file.FullName + "' to '" + p + "'");
+                            Console.WriteLine(" *** Copy '" + file.FullName + "' to '" + p + "'");
                             File.Copy(file.FullName, p, true);
                         }
                     }
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine("CopyFilesRecursively Exception: " + ex.ToString());
+                    Console.WriteLine(" *** CopyFilesRecursively Exception: " + ex.ToString());
                 }
             }
             else
             {
-                Console.WriteLine($"CopyFilesRecursively: source or target is null - source:{source} target:{target}");
+                Console.WriteLine($" *** CopyFilesRecursively: source or target is null - source:{source} target:{target}");
             }
         }
 
@@ -57,13 +57,13 @@ namespace TLUpdate
             }
             catch (Exception ex)
             {
-                Console.WriteLine("CopyFile Exception: " + ex.ToString());
+                Console.WriteLine(" *** CopyFile Exception: " + ex.ToString());
             }
         }
 
         public static string ExecMono(string cmd, string param, bool logging = true, bool stderr2stdout = false, int timeout = 0)
         {
-            Console.WriteLine("Exec_mono: " + cmd + " " + param);
+            Console.WriteLine(" *** Exec_mono: " + cmd + " " + param);
 
             StringBuilder sb = new StringBuilder();
 
@@ -106,7 +106,7 @@ namespace TLUpdate
 
                     if (logging && line.Length > 0)
                     {
-                        Console.WriteLine(" " + line);
+                        Console.WriteLine(" ***  " + line);
                     }
 
                     sb.AppendLine(line);
@@ -116,11 +116,11 @@ namespace TLUpdate
                     {
                         if (stderr2stdout)
                         {
-                            Console.WriteLine(" " + line);
+                            Console.WriteLine(" ***  " + line);
                         }
                         else
                         {
-                            Console.WriteLine("Error: " + line);
+                            Console.WriteLine(" *** Error: " + line);
                         }
                     }
 
@@ -129,7 +129,7 @@ namespace TLUpdate
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Exception " + cmd + " " + ex.Message);
+                Console.WriteLine(" *** Exception " + cmd + " " + ex.Message);
                 return "Exception";
             }
             return bTimeout ? "Timeout! " + sb.ToString() : sb.ToString();
@@ -166,7 +166,7 @@ namespace TLUpdate
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Exception " + ex.Message);
+                Console.WriteLine(" *** Exception " + ex.Message);
             }
 
             return false;
