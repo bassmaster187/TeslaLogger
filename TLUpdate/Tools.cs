@@ -52,7 +52,7 @@ namespace TLUpdate
         {
             try
             {
-                Console.WriteLine("Copy '" + srcFile + "' to '" + directory + "'");
+                Console.WriteLine(" *** Copy '" + srcFile + "' to '" + directory + "'");
                 File.Copy(srcFile, directory, true);
             }
             catch (Exception ex)
