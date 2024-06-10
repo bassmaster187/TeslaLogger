@@ -6,6 +6,7 @@ using System.Net;
 using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace TeslaLogger
 {
@@ -29,7 +30,7 @@ namespace TeslaLogger
         private static WebServer webServer;
         private static bool OVMSStarted; // defaults to false;
 
-        private static void Main(string[] args)
+        private static void Main(string[] _)
         {
             try
             {
@@ -117,14 +118,18 @@ namespace TeslaLogger
             {
                 if(KVS.Get("MQTTSettings", out string mqttSettings) == KVS.SUCCESS)
                 {
-                    Thread mqttThread = new Thread(() =>
+                    dynamic settings = JsonConvert.DeserializeObject(mqttSettings);
+                    if (settings["mqtt_host"] > 0)
                     {
+                        Thread mqttThread = new Thread(() =>
+                        {
                         MQTT.GetSingleton().RunMqtt();
-                    })
-                    {
-                        Name = "MqttThread"
-                    };
-                    mqttThread.Start();
+                        })
+                        {
+                            Name = "MqttThread"
+                        };
+                        mqttThread.Start();
+                    }
                 }
                 else
                 {
@@ -374,7 +379,6 @@ namespace TeslaLogger
         private static void InitStage1()
         {
             Tools.SetThreadEnUS();
-            UpdateTeslalogger.Chmod("encryption.txt", 600, false);
             UpdateTeslalogger.Chmod("nohup.out", 666, false);
             UpdateTeslalogger.Chmod("backup.sh", 777, false);
             UpdateTeslalogger.Chmod("TeslaLogger.exe", 755, false);

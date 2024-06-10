@@ -13,14 +13,12 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
-
 using Exceptionless;
 using Newtonsoft.Json;
 using System.Web;
 using System.Net.Http;
 using HttpMultipartParser;
 using System.Reflection;
-using Microsoft.VisualBasic.Logging;
 
 namespace TeslaLogger
 {

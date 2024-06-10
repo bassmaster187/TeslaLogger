@@ -308,7 +308,7 @@ namespace TeslaLogger
                     InitStage3();
                     if (ApplicationSettings.Default.UseTelemetryServer)
                     {
-                        if (FleetAPI && !(CarType == "models" || CarType == "models2" || CarType == "modelx"))
+                        if (Virtual_key && !(CarType == "models" || CarType == "models2" || CarType == "modelx"))
                         {
                             telemetry = new TelemetryConnection(this);
                             if (GetCurrentState() == TeslaState.Online || GetCurrentState() == TeslaState.Drive || GetCurrentState() == TeslaState.Charge)
@@ -912,7 +912,7 @@ namespace TeslaLogger
                                             break;
                                         }
 
-                                        if (x % 10 == 0)
+                                        if (x % 10 == 0) // log every 60 seconds
                                         {
                                             Log("Waiting for car to go to sleep " + (x / 10).ToString(Tools.ciEnUS));
 
@@ -926,7 +926,17 @@ namespace TeslaLogger
                                             }
                                         }
 
-                                        Thread.Sleep(1000 * 6);
+                                        // check if car is already asleep/offline and we can break the loop
+                                        string online = webhelper.IsOnline().Result;
+                                        Tools.DebugLog($"#{CarInDB} IsOnline():{online} x:{x}");
+                                        if (online != null && (online.Equals("offline") || online.Equals("asleep")))
+                                        {
+                                            Log($"Car is {online} now");
+                                            Log("Restart communication with Tesla Server! 3");
+                                            break;
+                                        }
+
+                                        Thread.Sleep(1000 * 6); // sleep 6 seconds
                                     }
                                 }
                                 finally

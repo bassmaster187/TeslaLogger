@@ -5,13 +5,13 @@ using System.IO;
 using MySql.Data.MySqlClient;
 using System.Text.RegularExpressions;
 using System.Reflection;
-
 using System.Threading;
 using System.Net;
 using System.IO.Compression;
 using Exceptionless;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using System.Diagnostics;
 
 namespace TeslaLogger
 {
@@ -999,14 +999,14 @@ PRIMARY KEY(id)
             {
                 Logfile.Log("ALTER TABLE charging ADD COLUMN charger_phases_calc TINYINT(1) NULL");
                 AssertAlterDB();
-                DBHelper.ExecuteSQLQuery("ALTER TABLE charging ADD COLUMN charger_phases_calc TINYINT(1) NULL");
+                DBHelper.ExecuteSQLQuery("ALTER TABLE charging ADD COLUMN charger_phases_calc TINYINT(1) NULL", 600);
             }
 
             if (!DBHelper.ColumnExists("charging", "charger_power_calc_w"))
             {
                 Logfile.Log("ALTER TABLE charging ADD COLUMN charger_power_calc_w INT NULL");
                 AssertAlterDB();
-                DBHelper.ExecuteSQLQuery("ALTER TABLE charging ADD COLUMN charger_power_calc_w INT NULL");
+                DBHelper.ExecuteSQLQuery("ALTER TABLE charging ADD COLUMN charger_power_calc_w INT NULL", 600);
             }
 
             InsertCarID_Column("charging"); 
@@ -1331,10 +1331,18 @@ PRIMARY KEY(id)
                 if (File.Exists("BRANCH"))
                 {
                     var branch = File.ReadAllText("BRANCH").Trim();
-                    Logfile.Log($"YOU ARE USING BRANCH: " + branch);
 
-                    GitHubURL = "https://github.com/bassmaster187/TeslaLogger/archive/refs/heads/" + branch + ".zip";
-                    master = branch;
+                    if (WebHelper.BranchExists(branch))
+                    {
+                        Logfile.Log($"YOU ARE USING BRANCH: " + branch);
+
+                        GitHubURL = "https://github.com/bassmaster187/TeslaLogger/archive/refs/heads/" + branch + ".zip";
+                        master = branch;
+                    }
+                    else
+                    {
+                        Logfile.Log($"BRANCH NOT EXIST: " + branch);
+                    }
                 }
 
 
@@ -1448,31 +1456,45 @@ PRIMARY KEY(id)
                     Logfile.Log(ex.ToString());
                 }
 
-                Tools.CopyFilesRecursively(new DirectoryInfo("/etc/teslalogger/git/TeslaLogger/bin"), new DirectoryInfo("/etc/teslalogger"), "TeslaLogger.exe");
-
-                try
+                // running in TeslaLogger.exe, prepare update in separate process
+                if (System.Diagnostics.Process.GetCurrentProcess().ProcessName.Equals("TeslaLogger"))
                 {
-                    Tools.CopyFile("/etc/teslalogger/git/TeslaLogger/bin/TeslaLogger.exe", "/etc/teslalogger/TeslaLogger.exe");
+                    try
+                    {
+                        Tools.CopyFile("/etc/teslalogger/git/TeslaLogger/bin/TLUpdate.exe", "/etc/teslalogger/TLUpdate.exe");
+                        foreach (Car car in Car.Allcars)
+                        {
+                            car.CurrentJSON.ToKVS();
+                        }
+                        ExceptionlessClient.Default.CreateLog("Install", "Update finished!").FirstCarUserID().Submit();
+                        await ExceptionlessClient.Default.ProcessQueueAsync();
+                        using (Process process = new Process
+                        {
+                            StartInfo = new ProcessStartInfo
+                            {
+                                FileName = "/etc/teslalogger/TLUpdate.exe",
+                                UseShellExecute = false,
+                                RedirectStandardOutput = true,
+                                CreateNoWindow = true
+                            }
+                        })
+                        {
+                            Logfile.Log(" *** starting TLUpdate.exe now ***");
+                            process.Start();
+                            while (!process.StandardOutput.EndOfStream)
+                            {
+                                Logfile.Log(process.StandardOutput.ReadLine());
+                            }
+                            process.WaitForExit();
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        ex.ToExceptionless().FirstCarUserID().Submit();
+                        Logfile.Log(ex.ToString());
+                    }
                 }
-                catch (Exception ex)
-                {
-                    ex.ToExceptionless().FirstCarUserID().Submit();
-                    Logfile.Log(ex.ToString());
-                }
 
-                ExceptionlessClient.Default.CreateLog("Install", "Update finished!").FirstCarUserID().Submit();
-                ExceptionlessClient.Default.ProcessQueueAsync();
-
-                Logfile.Log("End update");
-
-                Logfile.Log("Rebooting");
-
-                foreach (Car car in Car.Allcars)
-                {
-                    car.CurrentJSON.ToKVS();
-                }
-
-                Tools.ExecMono("reboot", "");
             }
         }
 

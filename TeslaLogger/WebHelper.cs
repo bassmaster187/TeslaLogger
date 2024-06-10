@@ -9,6 +9,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Diagnostics.Metrics;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -107,6 +108,8 @@ namespace TeslaLogger
 
         DateTime lastRefreshToken = DateTime.MinValue;
         DateTime nextTeslaTokenFromRefreshToken = DateTime.MaxValue;
+
+        int commandCounter = 0;
 
         protected virtual void Dispose(bool disposing)
         {
@@ -4799,6 +4802,17 @@ DESC", con))
                         {
                             TeslaAPI_Commands.TryAdd(cmd, resultContent);
                         }
+
+                        /*
+                        if (result.Headers.TryGetValues("ratelimit-remaining", out var v2))
+                            Log("ratelimit-remaining: " + v2.First());
+                        */
+
+                        commandCounter++;
+
+                        if (commandCounter % 100 == 0)
+                            Log("Command counter: " + commandCounter);
+
                         return resultContent;
                     }
                     DBHelper.AddMothershipDataToDB("GetCommand(" + cmd + ")", double.Parse("-1." + (int)result.StatusCode, Tools.ciEnUS), (int)result.StatusCode);
@@ -4843,9 +4857,30 @@ DESC", con))
                     }
                     else if ((int)result.StatusCode == 429) // TooManyRequests
                     {
-                        int sleep = random.Next(12000) + 27000;
+                        // Retry-After: time in seconds
+                        Tools.DebugLog($"429: response Retry-After:{result.Headers.RetryAfter}");
+                        if (int.TryParse(result.Headers.RetryAfter.ToString(), out int sleep))
+                        {
+                            sleep = sleep * 1000;
+                        }
+                        else 
+                        {
+                            sleep = (random.Next(5000) + 60000) * 1000;
+                        }
+                        string l = "Result.Statuscode: " + (int)result.StatusCode + " (" + result.StatusCode.ToString() + ") cmd: " + cmd + " Sleep: " + sleep + "ms";
 
-                        Log("Result.Statuscode: " + (int)result.StatusCode + " (" + result.StatusCode.ToString() + ") cmd: " + cmd + " Sleep: " + sleep + "ms");
+                        if (result.Headers.TryGetValues("ratelimit-limit", out var v))
+                            l += ", ratelimit-limit: " + v.First();
+
+                        if (result.Headers.TryGetValues("ratelimit-remaining", out var v2))
+                            l += ", ratelimit-remaining: " + v2.First();
+
+                        if (result.Headers.TryGetValues("ratelimit-reset", out var v3))
+                            l += ", ratelimit-reset: " + v3.First();
+
+                        l += ", sleep till: "+ DateTime.Now.AddMilliseconds(sleep).ToString(Tools.ciDeDE);
+
+                        Log(l);
                         Thread.Sleep(sleep);
                     }
                     else
@@ -5677,6 +5712,37 @@ DESC", con))
 
             return null;
         }
+
+        internal static bool BranchExists(string branch)
+        {
+            try
+            {
+                HttpClient client = new HttpClient();
+                client.DefaultRequestHeaders.ConnectionClose = true;
+                ProductInfoHeaderValue userAgent = new ProductInfoHeaderValue("Teslalogger", Assembly.GetExecutingAssembly().GetName().Version.ToString());
+                client.DefaultRequestHeaders.UserAgent.Add(userAgent);
+                client.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue("(00000000; " + Thread.CurrentThread.ManagedThreadId + ")"));
+
+                var g = client.GetAsync("https://api.github.com/repos/bassmaster187/TeslaLogger/branches/" + branch).Result;
+                if (g.IsSuccessStatusCode)
+                {
+                    string res = g.Content.ReadAsStringAsync().Result;
+                    return res.Contains("signature");
+                }
+                else if (g.StatusCode == HttpStatusCode.NotFound)
+                {
+                    return false;
+                }    
+            }
+            catch (Exception ex)
+            {
+                ex.ToExceptionless().FirstCarUserID().Submit();
+                Logfile.Log(ex.ToString());
+            }
+
+            return false;
+        }
+
     }
 
     class Account

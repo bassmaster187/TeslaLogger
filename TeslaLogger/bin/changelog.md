@@ -1,3 +1,7 @@
+# Version 1.58.1
+- Using Telemetry Server even with old Tesla API. Require Virtual Key
+- New update client
+
 # Version 1.58.0
 - New stable version
 - Encryption file is protected against grafana, apache and mariadb 

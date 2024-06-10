@@ -5,7 +5,6 @@ using System.Data;
 using System.Diagnostics.CodeAnalysis;
 using System.Net.Http;
 using System.Text;
-using Exceptionless;
 using Newtonsoft.Json;
 using System.Linq;
 
