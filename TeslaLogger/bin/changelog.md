@@ -1,6 +1,8 @@
 # Version 1.58.1
 - Using Telemetry Server even with old Tesla API. Require Virtual Key
 - New update client
+- MQTT: active cars only
+- Calculated Power/Current/Phases in Admin-Panel and MQTT
 
 # Version 1.58.0
 - New stable version
