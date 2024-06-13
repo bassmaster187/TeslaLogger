@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Linq;
 using MySql.Data.MySqlClient;
 using System.Reflection;
+using System.IO;
 
 namespace TeslaLogger
 {
@@ -21,7 +22,46 @@ namespace TeslaLogger
 
         String lastCruiseState = "";
 
-        bool connect = false;
+        bool connect;
+
+        private bool driving;
+        public bool charging;
+
+        public DateTime lastDriving = DateTime.MinValue;
+        public DateTime lastMessageReceived = DateTime.MinValue;
+
+        public bool Driving { 
+            get {
+                if (driving)
+                {
+                    var ts = DateTime.Now - lastDriving;
+                    if (ts.TotalMinutes > 15)
+                    {
+                        driving = false;
+                        car.Log("*** Parking time: " + lastDriving.ToString());
+                        return false;
+                    }
+
+                    return true;
+                }
+
+                return false;
+            
+            } 
+            set => driving = value; }
+
+        public bool isOnline()
+        {
+            if (!Driving && !charging)
+            {
+                var ts = DateTime.UtcNow - lastMessageReceived;
+                if (ts.TotalMinutes > 10)
+                    return false;
+            }
+
+            return true;
+        }
+            
 
         public TelemetryConnection(Car car)
         {
@@ -35,6 +75,9 @@ namespace TeslaLogger
         {
             try
             {
+                if (car.FleetAPI)
+                    return;
+
                 car.Log("Telemetry Server close connection!");
                 connect = false;
                 cts.Cancel();
@@ -112,8 +155,10 @@ namespace TeslaLogger
                     if (car.Vin.Equals(vin, StringComparison.OrdinalIgnoreCase))
                     {
                         car.Log("Telemetry Server Data");
+                        lastMessageReceived = DateTime.UtcNow;
                         InsertBatteryTable(jData, d, resultContent);
                         InsertCruiseStateTable(jData, d, resultContent);
+                        handleStatemachine(jData, d, resultContent);
                     }
                 }
                 else if (j.ContainsKey("alerts"))
@@ -135,6 +180,11 @@ namespace TeslaLogger
                 else
                 {
                     car.Log("Unhandled: " + resultContent);
+
+                    CheckDriving();
+
+                    car.Log("Sleep");
+                    lastMessageReceived = DateTime.MinValue;
                 }
 
             }
@@ -429,6 +479,121 @@ namespace TeslaLogger
             {
                 car.Log("Telemetry Error: " + ex.ToString());
                 car.CreateExceptionlessClient(ex).AddObject(resultContent, "ResultContent").Submit();
+            }
+        }
+
+        void handleStatemachine(dynamic j, DateTime date, string resultContent)
+        {
+            try
+            {
+                var cols = new string[] { "ChargeState", "Gear", "VehicleSpeed" };
+
+                foreach (dynamic jj in j)
+                {
+                    string key = jj["key"];
+                    if (cols.Any(key.Contains))
+                    {
+                        dynamic value = jj["value"];
+                        if (value.ContainsKey("stringValue"))
+                        {
+                            string v1 = value["stringValue"];
+
+                            if (key == "ChargeState")
+                            {
+                                if (v1 == "Enable")
+                                {
+                                    if (Driving)
+                                    {
+                                        car.Log("*** Parking -> Charging ***");
+                                        Driving = false;
+                                    }
+
+                                    if (!charging)
+                                    {
+                                        car.Log("*** Charging ***");
+                                        charging = true;
+                                    }
+                                }
+                                else if (v1 == "Idle")
+                                {
+                                    if (charging)
+                                    {
+                                        car.Log("*** Stop Charging ***");
+                                        charging = false;
+                                    }
+                                }
+                                else
+                                {
+                                    car.Log("*** unknown ChargeState: " + v1);
+                                }
+
+                            }
+                            else if (key == "Gear")
+                            {
+                                if (v1 == "P")
+                                {
+                                    if (Driving)
+                                    {
+                                        car.Log("*** Parking ***");
+                                        Driving = false;
+                                    }
+                                }
+                                else if (v1.Length > 0)
+                                {
+                                    lastDriving = DateTime.Now;
+
+                                    if (!Driving)
+                                    {
+                                        car.Log("*** Driving ***");
+                                        Driving = true;
+                                    }
+                                }
+
+                                car.Log("Gear: " + v1);
+                            }
+                            else if (key == "VehicleSpeed")
+                            {
+                                if (Double.TryParse(v1, out double speed))
+                                {
+                                    if (speed > 0)
+                                    {
+                                        lastDriving = DateTime.Now;
+
+                                        if (!Driving)
+                                        {
+                                            car.Log("*** Driving by speed ***");
+                                            Driving = true;
+                                        }
+                                    }
+
+                                    car.Log("Speed: " + v1);
+                                }
+                            }
+                        }
+                    }
+                }
+
+                CheckDriving();
+
+            }
+            catch (Exception ex)
+            {
+                car.Log("Telemetry Error: " + ex.ToString());
+                car.CreateExceptionlessClient(ex).AddObject(resultContent, "ResultContent").Submit();
+            }
+
+        }
+
+        private void CheckDriving()
+        {
+            if (Driving)
+            {
+                var ts = DateTime.Now - lastDriving;
+                if (ts.TotalMinutes > 5)
+                {
+                    car.Log("*** Driving stop by speed " + lastDriving.ToString());
+                    Driving = false;
+                }
             }
         }
 

@@ -1582,6 +1582,10 @@ namespace TeslaLogger
 
         internal bool IsCharging(bool justCheck = false, bool noMemcache = false)
         {
+            if (car.FleetAPI) {
+                return car.telemetry?.charging ?? false;    
+            }   
+
             string resultContent = "";
             try
             {
@@ -2279,6 +2283,14 @@ namespace TeslaLogger
                     {
                         nextTeslaTokenFromRefreshToken = DateTime.UtcNow.AddMinutes(5);
                         UpdateTeslaTokenFromRefreshToken();
+                    }
+
+                    if (car.FleetAPI)
+                    {
+                        if (car.telemetry?.isOnline() == true)
+                            return "online";
+                        else
+                            return "asleep";
                     }
 
 
@@ -3215,6 +3227,11 @@ namespace TeslaLogger
 
         public bool IsDriving(bool justinsertdb = false)
         {
+            if (car.FleetAPI)
+            {
+                return car.telemetry?.Driving ?? false;
+            }
+
             string resultContent = "";
             try
             {

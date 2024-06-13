@@ -311,7 +311,9 @@ namespace TeslaLogger
                         if (Virtual_key && !(CarType == "models" || CarType == "models2" || CarType == "modelx"))
                         {
                             telemetry = new TelemetryConnection(this);
-                            if (GetCurrentState() == TeslaState.Online || GetCurrentState() == TeslaState.Drive || GetCurrentState() == TeslaState.Charge)
+                            if (FleetAPI)
+                                telemetry.StartConnection();
+                            else if (GetCurrentState() == TeslaState.Online || GetCurrentState() == TeslaState.Drive || GetCurrentState() == TeslaState.Charge)
                                 telemetry.StartConnection();
                         }
                     } 
