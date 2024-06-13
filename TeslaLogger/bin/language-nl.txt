@@ -170,7 +170,7 @@ Max Discharge=Maximale ontlading
 Cell Imbalance=Cel onbalans
 Software Update=Software-update
 Consumption=Verbruik
-Ø Consumption="Ø Verbruik"
+Ø Consumption="Ø Gemiddelde Verbruik"
 min=min
 Wh/km=Wh/km
 km/h=km/h
@@ -487,3 +487,19 @@ Restore Database=Database herstellen
 TextRestore1=Zorg ervoor dat u een back-up maakt van uw Teslalogger voordat u databases herstelt. Verplaats de map met back-ups van de Teslalogger naar uw harde schijf!
 TextRestore2=Het herstelproces kan tot 10 minuten duren!
 TextRestore3=Onderbreek het herstelproces op geen enkele manier! Herlaad de pagina niet! Sluit deze pagina niet!
+Fahrzeug="Auto"
+
+#Verbrauchsstatistik.json
+Verbrauchsstatistik="Verbruiks statistieken"
+Löschen="Wissen"
+
+#Trip Top Destinations.json
+Trip Top Ziele="Trip Top Bestemmingen"
+
+#SOC Entladestatistik.json
+SOC Entladestatistik="SOC Ontlaadstatistieken"
+Ø Verbrauch kWh/100km="Ø Verbuik kWh/100km"
+Ø Verbraucht kWh="Ø Verbruikte kWh"
+Letzte Fahrt="Laatste rit"
+PV="PV"
+Ø Dauer Min="Ø Tijd Min"
