@@ -557,6 +557,12 @@ namespace TeslaLogger
                                 {
                                     if (speed > 0)
                                     {
+                                        if (charging)
+                                        {
+                                            car.Log("*** Stop Charging by speed ***");
+                                            charging = false;
+                                        }
+
                                         lastDriving = DateTime.Now;
 
                                         if (!Driving)
@@ -634,6 +640,9 @@ namespace TeslaLogger
         private void Login()
         {
             car.Log("Login to Telemetry Server");
+            string configname = "";
+            if (car.FleetAPI)
+                configname = "free";
 
             Dictionary<string, object> login = new Dictionary<string, object>{
                     { "msg_type", "login"},
@@ -641,6 +650,7 @@ namespace TeslaLogger
                     { "token", car.TaskerHash},
                     { "accesstoken", car.Tesla_Token},
                     { "regionurl", car.webhelper.apiaddress},
+                    { "config", configname},
                     { "version", Assembly.GetExecutingAssembly().GetName().Version.ToString()}
                 };
 

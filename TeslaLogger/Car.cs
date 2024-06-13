@@ -720,6 +720,27 @@ namespace TeslaLogger
                     else
                     {
                         Thread.Sleep(10000); // 10000
+
+                        if (FleetAPI)
+                        {
+                            int minutes = 1;
+                            if (currentJSON.current_charger_power < 23)
+                                minutes = 5;
+
+                            for (int m = 0; m < minutes; m++)
+                            {
+                                for (int p = 0; p < 60; p++)
+                                {
+                                    if (telemetry?.charging == false)
+                                        break;
+
+                                    Thread.Sleep(1000);
+                                }
+
+                                if (telemetry?.charging == false)
+                                    break;
+                            }
+                        }
                     }
 
                     //wh.GetCachedRollupData();

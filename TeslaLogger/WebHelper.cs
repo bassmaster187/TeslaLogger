@@ -1582,7 +1582,7 @@ namespace TeslaLogger
 
         internal bool IsCharging(bool justCheck = false, bool noMemcache = false)
         {
-            if (car.FleetAPI) {
+            if (car.FleetAPI && justCheck) {
                 return car.telemetry?.charging ?? false;    
             }   
 
@@ -4794,6 +4794,8 @@ DESC", con))
                     request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", Tesla_token);
                     Tools.DebugLog($"GetCommand #{car.CarInDB} request: {adresse}");
                     HttpResponseMessage result = await httpClientTeslaAPI.SendAsync(request);
+
+                    car.Log("Command: " + cmd + " [" + commandCounter + "]");
 
                     if (result.IsSuccessStatusCode)
                     {
