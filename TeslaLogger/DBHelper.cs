@@ -228,7 +228,7 @@ VALUES(
             }
         }
 
-        public static void AddMothershipDataToDB(string command, DateTime start, int httpcode)
+        public static void AddMothershipDataToDB(string command, DateTime start, int httpcode, int carid)
         {
             if (mothershipEnabled == false)
             {
@@ -238,11 +238,13 @@ VALUES(
             DateTime end = DateTime.UtcNow;
             TimeSpan ts = end - start;
             double duration = ts.TotalSeconds;
-            AddMothershipDataToDB(command, duration, httpcode);
+            AddMothershipDataToDB(command, duration, httpcode, carid);
         }
 
-        public static void AddMothershipDataToDB(string command, double duration, int httpcode)
+        public static void AddMothershipDataToDB(string command, double duration, int httpcode, int carid)
         {
+            if (command == WebHelper.vehicle_data_everything)
+                command = "vehicle_data_everything";
 
             if (!mothershipCommands.ContainsKey(command))
             {
@@ -258,19 +260,25 @@ INSERT
         ts,
         commandid,
         duration,
-        httpcode
+        httpcode,
+        carid
     )
 VALUES(
     @ts,
     @commandid,
     @duration,
-    @httpcode
+    @httpcode,
+    @carid
 )", con))
                 {
                     cmd.Parameters.AddWithValue("@ts", DateTime.Now);
                     cmd.Parameters.AddWithValue("@commandid", mothershipCommands[command]);
                     cmd.Parameters.AddWithValue("@duration", duration);
                     cmd.Parameters.AddWithValue("@httpcode", httpcode);
+                    if (carid == 0)
+                        cmd.Parameters.AddWithValue("@carid", null);
+                    else
+                        cmd.Parameters.AddWithValue("@carid", carid);
                     _ = SQLTracer.TraceNQ(cmd, out _);
                 }
             }

@@ -25,13 +25,15 @@ namespace TeslaLogger
         bool connect;
 
         private bool driving;
-        public bool charging;
+        private bool charging;
 
         public DateTime lastDriving = DateTime.MinValue;
         public DateTime lastMessageReceived = DateTime.MinValue;
 
-        public bool Driving { 
-            get {
+        public bool Driving
+        {
+            get
+            {
                 if (driving)
                 {
                     var ts = DateTime.Now - lastDriving;
@@ -46,13 +48,22 @@ namespace TeslaLogger
                 }
 
                 return false;
-            
+
+            }
+            set {
+                driving = value;
+            }
+        }
+
+        public bool Charging { get => charging; 
+            set { 
+                charging = value;
             } 
-            set => driving = value; }
+        }
 
         public bool isOnline()
         {
-            if (!Driving && !charging)
+            if (!Driving && !Charging)
             {
                 var ts = DateTime.UtcNow - lastMessageReceived;
                 if (ts.TotalMinutes > 10)
@@ -508,18 +519,18 @@ namespace TeslaLogger
                                         Driving = false;
                                     }
 
-                                    if (!charging)
+                                    if (!Charging)
                                     {
                                         car.Log("*** Charging ***");
-                                        charging = true;
+                                        Charging = true;
                                     }
                                 }
                                 else if (v1 == "Idle")
                                 {
-                                    if (charging)
+                                    if (Charging)
                                     {
                                         car.Log("*** Stop Charging ***");
-                                        charging = false;
+                                        Charging = false;
                                     }
                                 }
                                 else
@@ -557,10 +568,10 @@ namespace TeslaLogger
                                 {
                                     if (speed > 0)
                                     {
-                                        if (charging)
+                                        if (Charging)
                                         {
                                             car.Log("*** Stop Charging by speed ***");
-                                            charging = false;
+                                            Charging = false;
                                         }
 
                                         lastDriving = DateTime.Now;
@@ -639,10 +650,12 @@ namespace TeslaLogger
 
         private void Login()
         {
-            car.Log("Login to Telemetry Server");
+            
             string configname = "";
             if (car.FleetAPI)
                 configname = "free";
+
+            car.Log("Login to Telemetry Server / config: " + configname);
 
             Dictionary<string, object> login = new Dictionary<string, object>{
                     { "msg_type", "login"},

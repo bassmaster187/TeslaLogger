@@ -468,6 +468,7 @@ namespace TeslaLogger
                     ParseDriveState(JSON);
                     break;
                 case "vehicle_data":
+                case WebHelper.vehicle_data_everything:
                     ParseChargeState(JSON);
                     ParseVehicleConfig(JSON);
                     ParseClimateState(JSON);

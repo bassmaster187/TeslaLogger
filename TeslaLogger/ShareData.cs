@@ -200,7 +200,7 @@ ORDER BY
                                         DateTime start = DateTime.UtcNow;
                                         HttpResponseMessage result = client.PostAsync(new Uri("http://teslalogger.de/share_charging.php"), content).Result;
                                         string r = result.Content.ReadAsStringAsync().Result;
-                                        DBHelper.AddMothershipDataToDB("teslalogger.de/share_charging.php", start, (int)result.StatusCode);
+                                        DBHelper.AddMothershipDataToDB("teslalogger.de/share_charging.php", start, (int)result.StatusCode, car.CarInDB);
 
                                         //resultContent = result.Content.ReadAsStringAsync();
                                         car.Log("ShareData: " + r);
@@ -409,7 +409,7 @@ ORDER BY
                                     DateTime start = DateTime.UtcNow;
                                     HttpResponseMessage result = client.PostAsync(new Uri("http://teslalogger.de/share_drivestate.php"), content).Result;
                                     string r = result.Content.ReadAsStringAsync().Result;
-                                    DBHelper.AddMothershipDataToDB("teslalogger.de/share_drivestate.php", start, (int)result.StatusCode);
+                                    DBHelper.AddMothershipDataToDB("teslalogger.de/share_drivestate.php", start, (int)result.StatusCode, car.CarInDB);
 
                                     //resultContent = result.Content.ReadAsStringAsync();
                                     car.Log("ShareData: " + r);
@@ -551,7 +551,7 @@ GROUP BY
                                     DateTime start = DateTime.UtcNow;
                                     HttpResponseMessage result = client.PostAsync(new Uri("http://teslalogger.de/share_degradation.php"), content).Result;
                                     string r = result.Content.ReadAsStringAsync().Result;
-                                    DBHelper.AddMothershipDataToDB("teslalogger.de/share_degradation.php", start, (int)result.StatusCode);
+                                    DBHelper.AddMothershipDataToDB("teslalogger.de/share_degradation.php", start, (int)result.StatusCode, car.CarInDB);
 
                                     //resultContent = result.Content.ReadAsStringAsync();
                                     car.Log("ShareData: " + r);

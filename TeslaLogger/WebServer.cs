@@ -2328,7 +2328,8 @@ DROP TABLE chargingstate_bak";
                     for (int retry = 0; retry < 10; retry++)
                     {
                         // vehicle_config = c.webhelper.GetCommand("vehicle_config").Result;
-                        vehicle_config = c.webhelper.GetCommand("vehicle_data?endpoints=vehicle_config&let_sleep=true").Result;
+                        //vehicle_config = c.webhelper.GetCommand("vehicle_data?endpoints=vehicle_config&let_sleep=true").Result;
+                        vehicle_config = c.webhelper.GetCommand(WebHelper.vehicle_data_everything).Result;
                         if (vehicle_config?.Trim()?.StartsWith("{", System.StringComparison.Ordinal) == true)
                             break;
 

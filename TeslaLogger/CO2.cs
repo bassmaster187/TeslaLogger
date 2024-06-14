@@ -320,7 +320,7 @@ namespace TeslaLogger
                 {
                     resultContent = client.DownloadString(url);
 
-                    DBHelper.AddMothershipDataToDB("EnergyCharts", start, 0);
+                    DBHelper.AddMothershipDataToDB("EnergyCharts", start, 0, 0);
                 }
                 catch (Exception)
                 {
