@@ -243,8 +243,8 @@ VALUES(
 
         public static void AddMothershipDataToDB(string command, double duration, int httpcode, int carid)
         {
-            if (command == WebHelper.vehicle_data_everything)
-                command = "vehicle_data_everything";
+            if (command.Contains(WebHelper.vehicle_data_everything))
+                command = command.Replace(WebHelper.vehicle_data_everything, "vehicle_data_everything");
 
             if (!mothershipCommands.ContainsKey(command))
             {
