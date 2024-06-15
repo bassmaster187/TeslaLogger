@@ -1591,10 +1591,7 @@ namespace TeslaLogger
             try
             {
                 // resultContent = GetCommand("charge_state").Result;
-                if (car.FleetAPI)
-                    resultContent = GetCommand(vehicle_data_everything).Result;
-                else
-                    resultContent = GetCommand("vehicle_data?endpoints=charge_state&let_sleep=true", noMemcache).Result;
+                resultContent = GetCommand(vehicle_data_everything).Result;
 
                 if (resultContent == INSERVICE)
                 {
@@ -3245,10 +3242,7 @@ namespace TeslaLogger
             {
                 if (car.FirmwareAtLeastVersion("2023.38.4"))
                 {
-                    if (car.FleetAPI)
-                        resultContent = GetCommand(vehicle_data_everything).Result;
-                    else
-                        resultContent = GetCommand("vehicle_data?endpoints=drive_state%3Blocation_data&let_sleep=true").Result;
+                    resultContent = GetCommand(vehicle_data_everything).Result;
                 }
                 else
                 {
@@ -4595,10 +4589,7 @@ DESC", con))
             try
             {
                 // resultContent = await GetCommand("vehicle_state");
-                if (car.FleetAPI)
-                    resultContent = await GetCommand(vehicle_data_everything);
-                else
-                    resultContent = await GetCommand("vehicle_data?endpoints=vehicle_state&let_sleep=true");
+                resultContent = await GetCommand(vehicle_data_everything);
 
                 Tools.SetThreadEnUS();
 
@@ -4695,10 +4686,8 @@ DESC", con))
             try
             {
                 // resultContent = await GetCommand("climate_state");
-                if (car.FleetAPI)
-                    resultContent = GetCommand(vehicle_data_everything).Result;
-                else
-                    resultContent = GetCommand("vehicle_data?endpoints=climate_state&let_sleep=true").Result;
+
+                resultContent = GetCommand(vehicle_data_everything).Result;
 
                 if (resultContent == null || resultContent.Length == 0 || resultContent == "NULL")
                 {
@@ -4906,7 +4895,8 @@ DESC", con))
                         {
                             sleep = (random.Next(5000) + 60000) * 1000;
                         }
-                        string l = "Result.Statuscode: " + (int)result.StatusCode + " (" + result.StatusCode.ToString() + ") cmd: " + cmd + " Sleep: " + sleep + "ms";
+                        string l1 = "Result.Statuscode: " + (int)result.StatusCode + " (" + result.StatusCode.ToString() + ") cmd: " + cmd + " Sleep: " + sleep + "ms";
+                        string l = "";
 
                         if (result.Headers.TryGetValues("ratelimit-limit", out var v))
                             l += ", ratelimit-limit: " + v.First();
@@ -4919,7 +4909,14 @@ DESC", con))
 
                         l += ", sleep till: "+ DateTime.Now.AddMilliseconds(sleep).ToString(Tools.ciDeDE);
 
-                        Log(l);
+                        if (car.FleetAPI)
+                            l += ", FleetAPI";
+                        else
+                            l += ", OwnersAPI";
+
+                        car.CreateExeptionlessLog("TooManyRequests", l, LogLevel.Warn).Submit();
+
+                        Log(l1+l);
                         Thread.Sleep(sleep);
                     }
                     else
