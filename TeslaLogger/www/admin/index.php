@@ -147,7 +147,13 @@ else
 			$('#car_version').text(car_version);
 			$('#car_version_link').attr("href", "https://www.notateslaapp.com/software-updates/version/"+ car_version +"/release-notes");
 
-			if (jsonData["charging"])
+			if (jsonData["FatalError"])
+			{
+				$('#car_statusLabel').html("<font color='red'><?php t("Fatal Error"); ?>: </font>");
+				$('#car_status').html("<font color='red'>"+ jsonData["FatalError"] +"</font>");
+				updateSMT(jsonData);
+			}
+			else if (jsonData["charging"])
 			{
 				var ttfc = jsonData["time_to_full_charge"];
 				var hour = parseInt(ttfc);
