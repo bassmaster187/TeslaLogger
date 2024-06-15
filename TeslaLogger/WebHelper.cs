@@ -5710,6 +5710,7 @@ DESC", con))
                             if (kpv)
                             {
                                 car.Virtual_key = true;
+                                Log("*** Virtual Key available");
                                 return true;
                             }
 
@@ -5718,6 +5719,7 @@ DESC", con))
 
                             if (upv)
                             {
+                                Log("*** No Virtual Key. Teslalogger won't work!!! go to https://www.tesla.com/_ak/teslalogger.de");
                                 car.Virtual_key = false;
                                 return false;
                             }
