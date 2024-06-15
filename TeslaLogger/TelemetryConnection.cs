@@ -204,6 +204,19 @@ namespace TeslaLogger
                         }
                     }
                 }
+                else if (j.ContainsKey("Teslalogger"))
+                {
+                    String cmd = j["Teslalogger"];
+                    switch (cmd) 
+                    {
+                        case "LoginRespone":
+                            handleLoginResponse(j);
+                            break;
+                        default:
+                            Log("Unhandled Teslalogger MSG: " + resultContent);
+                            break;
+                    }
+                }
                 else
                 {
                     Log("Unhandled: " + resultContent);
@@ -219,6 +232,23 @@ namespace TeslaLogger
             catch (Exception ex)
             {
                 Log(ex.ToString()+ "\n" + resultContent);
+            }
+        }
+
+        private void handleLoginResponse(dynamic j)
+        {
+            try
+            {
+                dynamic response = j["Response"];
+                dynamic updated_vehicles = response["updated_vehicles"];
+                if (updated_vehicles == "1")
+                    Log("LoginRespone: OK");
+                else
+                    Log("LoginRespone ERROR: " + response);
+            }
+            catch (Exception ex)
+            {
+                Log(ex.ToString());
             }
         }
 
