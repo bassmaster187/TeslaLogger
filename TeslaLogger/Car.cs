@@ -700,7 +700,17 @@ namespace TeslaLogger
             }
             else
             {
-                Thread.Sleep(ApplicationSettings.Default.SleepInStateSleep); // 10000
+                int sleep = ApplicationSettings.Default.SleepInStateSleep / 250;
+                for (int x = 0; x < sleep; x++)
+                {
+                    Thread.Sleep(250);
+                    if (FleetAPI && telemetry?.isOnline() == true)
+                    {
+                        Log("skip sleep because of telemetry is online");
+                        break;
+                    }
+                }
+
                 UpdateTeslalogger.CheckForNewVersion();
             }
         }
@@ -844,7 +854,7 @@ namespace TeslaLogger
                     else if (FleetAPI && (CarType == "model3" || CarType == "modely" || CarType == "lychee" || CarType == "tamarind"))
                     {
                         // Log("API not suspended!");
-                        Thread.Sleep(30000);
+                        Thread.Sleep(1000);
                         string res = "";
                         lock (WebHelper.isOnlineLock)
                         {
@@ -854,6 +864,7 @@ namespace TeslaLogger
                         {
                             SetCurrentState(TeslaState.Start);
                             lastCarUsed = DateTime.Now;
+                            doSleep = false;
                         }
 
                         var srt = webhelper.startRequestTimeout;
@@ -997,6 +1008,9 @@ namespace TeslaLogger
                     if (doSleep)
                     {
                         int sleepduration = ApplicationSettings.Default.SleepInStateOnline; // 5000
+                        if (FleetAPI)
+                            sleepduration = 1000;
+
                         // if charging is starting just now, decrease sleepduration to 0.5 second
                         try
                         {

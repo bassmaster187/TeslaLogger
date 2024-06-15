@@ -30,6 +30,11 @@ namespace TeslaLogger
         public DateTime lastDriving = DateTime.MinValue;
         public DateTime lastMessageReceived = DateTime.MinValue;
 
+        void Log(string message)
+        {
+            car.Log("*** FT: " +  message);
+        }
+
         public bool Driving
         {
             get
@@ -40,7 +45,7 @@ namespace TeslaLogger
                     if (ts.TotalMinutes > 15)
                     {
                         driving = false;
-                        car.Log("*** Parking time: " + lastDriving.ToString());
+                        Log("Parking time: " + lastDriving.ToString());
                         return false;
                     }
 
@@ -65,12 +70,20 @@ namespace TeslaLogger
         {
             if (!Driving && !Charging)
             {
-                var ts = DateTime.UtcNow - lastMessageReceived;
-                if (ts.TotalMinutes > 10)
+                if (OnlineTimeout())
                     return false;
             }
 
             return true;
+        }
+
+        public bool OnlineTimeout()
+        {
+            var ts = DateTime.UtcNow - lastMessageReceived;
+            if (ts.TotalMinutes > 10)
+                return true;
+
+            return false;
         }
             
 
@@ -89,7 +102,7 @@ namespace TeslaLogger
                 if (car.FleetAPI)
                     return;
 
-                car.Log("Telemetry Server close connection!");
+                Log("Telemetry Server close connection!");
                 connect = false;
                 cts.Cancel();
 
@@ -106,13 +119,13 @@ namespace TeslaLogger
                 if (connect)
                     return;
 
-                car.Log("Telemetry Server start connection");
+                Log("Telemetry Server start connection");
                 cts = new CancellationTokenSource();
                 connect = true;
             }
             catch (Exception ex)
             {
-                car.Log("Telemetry StartConnection " + ex.Message);
+                Log("Telemetry StartConnection " + ex.Message);
             }
         }
 
@@ -143,7 +156,7 @@ namespace TeslaLogger
                     if (!connect && ex.InnerException is TaskCanceledException)
                         System.Diagnostics.Debug.WriteLine("Telemetry Cancel OK");
                     else
-                        car.Log("Telemetry Exception: " + ex.ToString());                    
+                        Log("Telemetry Exception: " + ex.ToString());                    
 
                     var s = r.Next(30000, 60000);
                     Thread.Sleep(s);
@@ -165,7 +178,10 @@ namespace TeslaLogger
 
                     if (car.Vin.Equals(vin, StringComparison.OrdinalIgnoreCase))
                     {
-                        car.Log("Telemetry Server Data");
+                        Log("Telemetry Server Data");
+                        if (OnlineTimeout())
+                            Log("Car Online!");
+
                         lastMessageReceived = DateTime.UtcNow;
                         InsertBatteryTable(jData, d, resultContent);
                         InsertCruiseStateTable(jData, d, resultContent);
@@ -180,7 +196,7 @@ namespace TeslaLogger
 
                     if (car.Vin.Equals(vin, StringComparison.OrdinalIgnoreCase))
                     {
-                        car.Log("Telemetry Server Alerts");
+                        Log("Telemetry Server Alerts");
 
                         foreach (dynamic ji in jData)
                         {
@@ -190,18 +206,19 @@ namespace TeslaLogger
                 }
                 else
                 {
-                    car.Log("Unhandled: " + resultContent);
+                    Log("Unhandled: " + resultContent);
 
                     CheckDriving();
-
-                    car.Log("Sleep");
+                    driving = false;
+                    charging = false;
+                    Log("Sleep");
                     lastMessageReceived = DateTime.MinValue;
                 }
 
             }
             catch (Exception ex)
             {
-                car.Log(ex.ToString()+ "\n" + resultContent);
+                Log(ex.ToString()+ "\n" + resultContent);
             }
         }
 
@@ -278,7 +295,7 @@ namespace TeslaLogger
                             case "Service": aid = 2; break;
                             default:
                                 car.CreateExeptionlessLog("Telemetry audience unknown", s, Exceptionless.Logging.LogLevel.Error).Submit();
-                                car.Log("Audience unknown: " + s);
+                                Log("Audience unknown: " + s);
                                 break;
                         }
 
@@ -358,7 +375,7 @@ namespace TeslaLogger
                                         break;
                                     default:
                                         state = -99;
-                                        car.Log("Unhandled Cruise State: " + v1);
+                                        Log("Unhandled Cruise State: " + v1);
                                         car.CreateExeptionlessLog("CruiseStateUnhandled", v1, Exceptionless.Logging.LogLevel.Warn).Submit();
                                         break;
                                 }
@@ -375,7 +392,7 @@ namespace TeslaLogger
                                         cmd.Parameters.AddWithValue("@state", state);
                                         cmd.ExecuteNonQuery();
 
-                                        car.Log("Telemetry Server: Cruise State");
+                                        Log("Telemetry Server: Cruise State");
                                     }
                                 }
                             }
@@ -384,7 +401,7 @@ namespace TeslaLogger
                 }
             }
             catch (Exception ex) { 
-                car.Log(ex.ToString());
+                Log(ex.ToString());
                 car.CreateExceptionlessClient(ex).AddObject(resultContent, "ResultContent").Submit();
             }
         }
@@ -488,7 +505,7 @@ namespace TeslaLogger
                 }
             } catch (Exception ex)
             {
-                car.Log("Telemetry Error: " + ex.ToString());
+                Log("Telemetry Error: " + ex.ToString());
                 car.CreateExceptionlessClient(ex).AddObject(resultContent, "ResultContent").Submit();
             }
         }
@@ -515,13 +532,13 @@ namespace TeslaLogger
                                 {
                                     if (Driving)
                                     {
-                                        car.Log("*** Parking -> Charging ***");
+                                        Log("Parking -> Charging ***");
                                         Driving = false;
                                     }
 
                                     if (!Charging)
                                     {
-                                        car.Log("*** Charging ***");
+                                        Log("Charging ***");
                                         Charging = true;
                                     }
                                 }
@@ -529,13 +546,13 @@ namespace TeslaLogger
                                 {
                                     if (Charging)
                                     {
-                                        car.Log("*** Stop Charging ***");
+                                        Log("Stop Charging ***");
                                         Charging = false;
                                     }
                                 }
                                 else
                                 {
-                                    car.Log("*** unknown ChargeState: " + v1);
+                                    Log("unknown ChargeState: " + v1);
                                 }
 
                             }
@@ -545,7 +562,7 @@ namespace TeslaLogger
                                 {
                                     if (Driving)
                                     {
-                                        car.Log("*** Parking ***");
+                                        Log("Parking ***");
                                         Driving = false;
                                     }
                                 }
@@ -555,12 +572,12 @@ namespace TeslaLogger
 
                                     if (!Driving)
                                     {
-                                        car.Log("*** Driving ***");
+                                        Log("Driving ***");
                                         Driving = true;
                                     }
                                 }
 
-                                car.Log("Gear: " + v1);
+                                Log("Gear: " + v1);
                             }
                             else if (key == "VehicleSpeed")
                             {
@@ -570,7 +587,7 @@ namespace TeslaLogger
                                     {
                                         if (Charging)
                                         {
-                                            car.Log("*** Stop Charging by speed ***");
+                                            Log("Stop Charging by speed ***");
                                             Charging = false;
                                         }
 
@@ -578,12 +595,12 @@ namespace TeslaLogger
 
                                         if (!Driving)
                                         {
-                                            car.Log("*** Driving by speed ***");
+                                            Log("Driving by speed ***");
                                             Driving = true;
                                         }
                                     }
 
-                                    car.Log("Speed: " + v1);
+                                    Log("Speed: " + v1);
                                 }
                             }
                         }
@@ -595,7 +612,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
-                car.Log("Telemetry Error: " + ex.ToString());
+                Log("Telemetry Error: " + ex.ToString());
                 car.CreateExceptionlessClient(ex).AddObject(resultContent, "ResultContent").Submit();
             }
 
@@ -608,7 +625,7 @@ namespace TeslaLogger
                 var ts = DateTime.Now - lastDriving;
                 if (ts.TotalMinutes > 5)
                 {
-                    car.Log("*** Driving stop by speed " + lastDriving.ToString());
+                    Log("Driving stop by speed " + lastDriving.ToString());
                     Driving = false;
                 }
             }
@@ -616,7 +633,7 @@ namespace TeslaLogger
 
         private void ConnectToServer()
         {
-            car.Log("Connect to Telemetry Server");
+            Log("Connect to Telemetry Server");
 
             if (ws != null)
                 ws.Dispose();
@@ -635,13 +652,13 @@ namespace TeslaLogger
             {
                 if (ex is AggregateException ex2)
                 {
-                    car.Log("Connect to Telemetry Server Error: " + ex2.InnerException.Message);
+                    Log("Connect to Telemetry Server Error: " + ex2.InnerException.Message);
                     car.CreateExceptionlessClient(ex2).Submit();
                     Thread.Sleep(60000);
                 }
                 else
                 {
-                    car.Log("Connect to Telemetry Server Error: " + ex.Message);
+                    Log("Connect to Telemetry Server Error: " + ex.Message);
                     car.CreateExceptionlessClient(ex).Submit();
                     Thread.Sleep(60000);
                 }
@@ -655,7 +672,7 @@ namespace TeslaLogger
             if (car.FleetAPI)
                 configname = "free";
 
-            car.Log("Login to Telemetry Server / config: " + configname);
+            Log("Login to Telemetry Server / config: " + configname);
 
             Dictionary<string, object> login = new Dictionary<string, object>{
                     { "msg_type", "login"},
