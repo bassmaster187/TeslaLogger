@@ -1310,6 +1310,10 @@ namespace TeslaLogger
         public void HandleShiftStateChange(string oldState, string newState)
         {
             Log("ShiftStateChange: " + oldState + " -> " + newState);
+
+            if (FleetAPI && telemetry != null)
+                telemetry.Driving = false;
+
             lastCarUsed = DateTime.Now;
             Address addr = Geofence.GetInstance().GetPOI(CurrentJSON.GetLatitude(), CurrentJSON.GetLongitude(), false);
             // process special flags for POI
