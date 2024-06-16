@@ -79,7 +79,7 @@
               "mode": "off"
             }
           },
-          "decimals": 1,
+          "decimals": 4,
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
