@@ -614,7 +614,9 @@ namespace TeslaLogger
                 lastCarUsed = DateTime.Now;
                 int SleepPosition = ApplicationSettings.Default.SleepPosition;
                 if (FleetAPI)
-                    SleepPosition = 30000;
+                    SleepPosition = Math.Max(30000, SleepPosition);
+                else
+                    SleepPosition = Math.Max(20000, SleepPosition);
 
                 t = SleepPosition - 1000 - (Environment.TickCount - t);
 
@@ -1010,6 +1012,8 @@ namespace TeslaLogger
                         int sleepduration = ApplicationSettings.Default.SleepInStateOnline; // 5000
                         if (FleetAPI)
                             sleepduration = 1000;
+                        else
+                            sleepduration = Math.Max(30000, sleepduration);
 
                         // if charging is starting just now, decrease sleepduration to 0.5 second
                         try
@@ -1068,7 +1072,16 @@ namespace TeslaLogger
 
                             Tools.DebugLog("Exception sleepduration", ex);
                         }
-                        Thread.Sleep(sleepduration);
+
+                        for (int s = 0; s < sleepduration / 500; s++)
+                        {
+                            Thread.Sleep(500);
+                            if (webhelper.DrivingOrChargingByStream)
+                            {
+                                Log("Stop sleep by DrivingOrChargingByStream");
+                                break;
+                            }
+                        }
                     }
                     else
                     {
