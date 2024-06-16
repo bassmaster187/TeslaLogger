@@ -19,6 +19,7 @@ using System.Net.Http.Headers;
 using System.Reflection;
 using System.Runtime.Caching;
 using System.Runtime.CompilerServices;
+using System.Runtime.ConstrainedExecution;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -1879,6 +1880,9 @@ namespace TeslaLogger
                     {
                         if (resultContent != null)
                             car.Log("GetVehicles: " + resultContent);
+
+                        car.CurrentJSON.FatalError = "Car not found!";
+                        car.CurrentJSON.CreateCurrentJSON();
 
                         return "NULL";
                     }
@@ -4917,7 +4921,11 @@ DESC", con))
                         car.CreateExeptionlessLog("TooManyRequests", l, LogLevel.Warn).Submit();
 
                         Log(l1+l);
+                        car.CurrentJSON.FatalError += " TooManyRequests";
+                        car.CurrentJSON.CreateCurrentJSON();
                         Thread.Sleep(sleep);
+                        car.CurrentJSON.FatalError = car.CurrentJSON.FatalError.Replace(" TooManyRequests", "");
+                        car.CurrentJSON.CreateCurrentJSON();
                     }
                     else
                     {
@@ -5719,6 +5727,8 @@ DESC", con))
 
                             if (upv)
                             {
+                                car.CurrentJSON.FatalError = "No Virtual Key!!! Go to: <a href='https://www.tesla.com/_ak/teslalogger.de'>https://www.tesla.com/_ak/teslalogger.de</a>";
+                                car.CurrentJSON.CreateCurrentJSON();
                                 Log("*** No Virtual Key. Teslalogger won't work!!! go to https://www.tesla.com/_ak/teslalogger.de");
                                 car.Virtual_key = false;
                                 return false;

@@ -62,6 +62,9 @@ namespace TeslaLogger
 
         public bool Charging { get => charging; 
             set { 
+                if (charging != value)
+                    Log("Driving = " +  value);
+
                 charging = value;
             } 
         }
@@ -244,7 +247,11 @@ namespace TeslaLogger
                 if (updated_vehicles == "1")
                     Log("LoginRespone: OK");
                 else
+                {
                     Log("LoginRespone ERROR: " + response);
+                    car.CurrentJSON.FatalError = "Telemetry Login Error!!! Check Logfile!";
+                    car.CurrentJSON.CreateCurrentJSON();
+                }
             }
             catch (Exception ex)
             {

@@ -91,6 +91,8 @@ namespace TeslaLogger
         public double? active_route_latitude; // defaults to null;
         public double? active_route_longitude; // defaults to null;
 
+        public string FatalError;
+
         public string current_json = "";
         private DateTime lastJSONwrite = DateTime.MinValue;
         Car car;
@@ -249,7 +251,8 @@ namespace TeslaLogger
                    { "open_doors" , open_doors},
                    { "frunk" , frunk},
                    { "trunk" , trunk},
-                   { "locked" , locked}
+                   { "locked" , locked},
+                   { "FatalError", FatalError}
                 };
 
                 TimeSpan ts = DateTime.Now - lastScanMyTeslaReceived;
