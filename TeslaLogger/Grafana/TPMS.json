@@ -76,7 +76,7 @@
               "mode": "none"
             },
             "thresholdsStyle": {
-              "mode": "off"
+              "mode": "line"
             }
           },
           "decimals": 4,
@@ -90,7 +90,7 @@
               },
               {
                 "color": "red",
-                "value": 80
+                "value": 2.8958
               }
             ]
           },
