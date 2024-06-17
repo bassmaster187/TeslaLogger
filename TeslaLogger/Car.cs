@@ -757,6 +757,14 @@ namespace TeslaLogger
                                     break;
                             }
                         }
+                        else
+                        {
+                            if (currentJSON.current_charger_power < 12)
+                                Thread.Sleep(50000);
+                            else
+                                Thread.Sleep(20000);
+
+                        }
                     }
 
                     //wh.GetCachedRollupData();
