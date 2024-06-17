@@ -491,6 +491,7 @@ Supercharger FI-Pyhäjärvi, 63.716298, 25.920103
 Supercharger-V3 Fi-Rovaniemi, 66.501765,25.723048
 Supercharger FI-Vierumäki, 61.112472,25.929927
 Supercharger LI-Schaan, 47.165317, 9.507795
+Supercharger-V3 FR-Agen, 44.17776193, 0.63026876
 Supercharger FR-Aire de Cambarette, 43.423964, 5.99017
 Supercharger FR-Aire de Châteauvillain - Orges, 48.057681, 4.96061
 Supercharger FR-Aire de Châteauvillain - Val Marnay, 48.057341, 4.959604
@@ -508,107 +509,184 @@ Supercharger-V3 FR-Aire de l'Abis, 45.524989, 5.976465
 Supercharger-V3 FR-Aire de la Vendée, 46.573233, -1.11793
 Supercharger-V3 FR-Aire des Portes d'Angers,47.498968,-0.491404
 Supercharger-V3 FR-Aire du Jura,46.774663,5.522206
+Supercharger-V3 FR-Aire du Bourbonnais, 46.49712065, 3.36270123
 Supercharger FR-Aix-en-Provence Val de l'Arc, 43.5119793, 5.466397
 Supercharger FR-Aix-en-Provence, 43.5106478, 5.4564393
+Supercharger-V3 FR-Ajaccio, 41.951864, 8.792775
 Supercharger FR-Albaret-Sainte-Marie,44.870977, 3.252918
+Supercharger-V3 FR-Albi, 43.95773, 2.154951
 Supercharger FR-Amiens, 49.863492, 2.27814
+Supercharger-V3 FR-Angers Espace Anjou, 47.466441, -0.524568
 Supercharger-V3 FR-Angoulême, 45.69444, 0.178841
+Supercharger-V3 FR-Annecy - Seynod, 45.877092, 6.0879
+Supercharger-V3 FR-Annemasse, 46.19477139, 6.2554387
 Supercharger FR-Appoigny, 47.85183, 3.542802
 Supercharger FR-Archamps, 46.136917, 6.124306
+Supercharger-V3 FR-Artenay, 48.0829792, 1.8646925
 Supercharger FR-Auxerre, 47.851819, 3.542894
 Supercharger-V3 FR-Avallon, 47.502121,3.984249
+Supercharger-V3 FR-Avignon - Le Pontet, 43.980282, 4.8801075
 Supercharger FR-Barberaz, 45.56085, 5.949646
 Supercharger FR-Bayonne, 43.4938044, -1.4524967
+Supercharger-V3 FR-Beaune Nord, 47.0432, 4.839921
 Supercharger FR-Beaune, 47.017319, 4.83779
+Supercharger-V3 FR-Beauvais, 49.409907, 2.113721
 Supercharger FR-Bernin, 45.265676, 5.876448
 Supercharger FR-Besançon, 47.234539, 5.901153
-Supercharger FR-Bourg-Achard, 49.359627, 0.817716, 30
-Supercharger FR-Bourges, 47.049393, 2.344843 
-Supercharger FR-Buchelay, 48.990144, 1.671559
-Supercharger FR-Brive-la-Gaillarde, 45.16724, 1.483119
-Supercharger FR-Bordeaux Merignac, 44.8342076, -0.6810947
+Supercharger-V3 FR-Beynost, 45.82379524, 4.99773319
+Supercharger-V3 FR-Biganos, 44.637014, -0.960205
+Supercharger-V3 FR-Biguglia, 42.594669, 9.437173
+Supercharger-V3 FR-Blagnac, 43.647712, 1.370026
 Supercharger-V3 FR-Blois,47.611942,1.339408
+Supercharger FR-Bordeaux Merignac, 44.8342076, -0.6810947
+Supercharger-V3 FR-Bordeaux Lac, 44.882469, -0.56391
+Supercharger-V3 FR-Boulogne-sur-Mer, 50.73346, 1.671219
+Supercharger FR-Bourg-Achard, 49.359627, 0.817716, 30
+Supercharger FR-Bourg-de-Péage, 45.033274, 5.051818
+Supercharger FR-Bourg-en-Bresse, 46.143806, 5.282492
+Supercharger FR-Bourges, 47.049393, 2.344843
+Supercharger-V3 FR-Brest - Gouesnou, 48.43091449, -4.47084498
+Supercharger-V3 FR-Briançon, 44.903824, 6.630075
+Supercharger FR-Brive-la-Gaillarde, 45.16724, 1.483119
+Supercharger-V3 FR-Bron, 45.722035, 4.923751
+Supercharger FR-Buchelay, 48.990144, 1.671559
+Supercharger-V3 FR-Bègles, 44.793792, -0.533489
+Supercharger-V3 FR-Béziers, 43.33661, 3.283
+Supercharger FR-Caen Saint-Contest, 49.200795, -0.399727
 Supercharger FR-Caen, 49.16398, -0.424802
 Supercharger FR-Cagnes-sur-Mer, 43.666446, 7.127372
-Supercharger FR-Châlons-en-Champagne, 48.991982, 4.245320
+Supercharger FR-Calais - Eurotunnel Terminal, 50.935031, 1.812951
+Supercharger FR-Calais, 50.924425, 1.80414
+Supercharger FR-Carcassonne, 43.206224, 2.310792
+Supercharger-V3 FR-Centre Tesla Aix-Marseille, 43.4146793, 5.2748805
+Supercharger-V3 FR-Centre Tesla Paris-Val d’Europe, 48.836648, 2.800013
+Supercharger FR-Cesson, 48.584701, 2.604331
 Supercharger-V3 FR-Chalon-sur-Saône, 46.796267, 4.835472
 Supercharger FR-Chambéry, 45.593128,5.898171
+Supercharger-V3 FR-Champfleury, 49.203953, 4.013348
 Supercharger FR-Chapelle sur Erdre, 47.2827707, -1.5500076
 Supercharger FR-Charleville-Mézières, 49.736834, 4.744095
+Supercharger FR-Chartres Supercharger, 48.4466117, 1.5390104
+Supercharger FR-Chasse-sur-Rhône - Chasse Sud, 45.5736658, 4.8114341
 Supercharger FR-Chasseneuil-du-Poitou, 46.650703, 0.374772
+Supercharger-V3 FR-Chatellerault, 46.836112, 0.5418739
+Supercharger-V3 FR-Cherbourg, 49.60275, -1.602326
+Supercharger FR-Châlons-en-Champagne, 48.991982, 4.245320
 Supercharger FR-Châteauroux, 46.863047, 1.716028
 Supercharger FR-Clermont-Ferrand, 45.785937, 3.141488
 Supercharger FR-Coings, 46.863058, 1.716048
 Supercharger-V3 FR-Colmar, 48.129045, 7.368740
-Supercharger FR-Calais, 50.924425, 1.80414
-Supercharger FR-Calais - Eurotunnel Terminal, 50.935031, 1.812951
+Supercharger-V3 FR-Colmar, 48.128684, 7.369823
 Supercharger-V3 FR-Dardilly, 45.820165,4.760176
+Supercharger FR-Deauville, 49.344809, 0.096677
 Supercharger-V3 FR-Dijon, 47.271754, 5.043424
+Supercharger-V3 FR-Dinan, 48.4447515, -2.06830832
 Supercharger FR-Dommartin-lès-Cuiseaux, 46.496179, 5.310394
+Supercharger-V3 FR-Dunkerque, 51.005494, 2.281523
+Supercharger-V3 FR-Englos, 50.629871, 2.970873
 Supercharger FR-Eurotunnel Flexiplus Lounge, 50.929973, 1.813182
 Supercharger FR-Fontainebleau, 48.3495627, 2.6067816
+Supercharger FR-G La Galerie – Albertville, 45.655436, 6.365683
+Supercharger-V3 FR-Gap, 44.569565, 6.104458
+Supercharger-V3 FR-Honfleur, 49.414263, 0.265752
 Supercharger FR-La Léchère-les-Bains, 45.51877, 6.482522
-Supercharger FR-Le Mans, 48.041833, 0.175342
 Supercharger FR-La Seyne-sur-Mer, 43.121199, 5.85086
 Supercharger-V3 FR-Labouheyre, 44.202799, -0.92682
 Supercharger FR-Langon, 44.5424356, -0.2539542
 Supercharger-V3 FR-Laxou,48.691096,6.127684
+Supercharger FR-Le Mans, 48.041833, 0.175342
 Supercharger-V3 FR-Le Mans - Saint-Saturnin,48.052932,0.166434
+Supercharger-V3 FR-Le Bosc, 43.68814, 3.355094
+Supercharger-V3 FR-Le Touquet-Paris-Plage, 50.521625, 1.598625
 Supercharger-V3 FR-Les Herbiers, 46.889368, -1.032994
 Supercharger FR-Lille, 50.583306, 3.08982
 Supercharger FR-Limoges, 45.86723, 1.270344
 Supercharger FR-Lorient, 47.787895, -3.33146989
-Supercharger FR-Mâcon, 46.346653, 4.849067
+Supercharger FR-Mandelieu-la-Napoule, 43.533651, 6.933019
+Supercharger-V3 FR-Manosque, 43.81886548, 5.79689581
 Supercharger FR-Marne-la-Vallée, 48.8307897, 2.6780359
+Supercharger FR-Marseille La Valentine, 43.2946806, 5.4795679
+Supercharger-V3 FR-Megève, 45.87134613, 6.63030654
 Supercharger FR-Merignac, 44.835346, -0.681374
+Supercharger-V3 FR-Metz Sud, 49.079621, 6.10359
 Supercharger FR-Metz, 49.216512, 6.171239
 Supercharger FR-Mont-Saint-Michel, 48.568171, -1.543283
-Supercharger FR-Montélimar, 44.676319, 4.795763
+Supercharger-V3 FR-Montauban, 44.036554, 1.378
 Supercharger-V3 FR-Montluçon, 46.378453, 2.586523
 Supercharger-V3 FR-Montpellier, 43.602398, 3.919982, 40
+Supercharger FR-Montélimar, 44.676319, 4.795763
+Supercharger FR-Morlaix, 48.57439, -3.85318
 Supercharger FR-Mougins, 43.6036681, 7.011086
 Supercharger FR-Mulhouse, 47.782016, 7.388299
 Supercharger-V3 FR-Mundolsheim, 48.653104, 7.731952, 40
+Supercharger FR-Mâcon, 46.346653, 4.849067
 Supercharger FR-Nancy, 48.638215, 6.184349
 Supercharger FR-Nantes - La Chapelle-sur-Erdre, 47.282708, -1.549982
+Supercharger-V3 FR-Nantes - Atlantis, 47.225998, -1.62904
 Supercharger FR-Narbonne, 43.1676432, 2.9859067
-Supercharger FR-Nîmes, 43.81655, 4.345061
-Supercharger-V3 FR-Nîmes - Carré Sud, 43.807991, 4.363603, 50
+Supercharger-V3 FR-Neuville-en-Ferrain, 50.74221, 3.145036
 Supercharger-V3 FR-Nice,43.727727,7.186527
+Supercharger FR-Niort 2, 46.340231, -0.384126
 Supercharger-V3 FR-Niort,46.29825,-0.375256
+Supercharger-V3 FR-Noyelles-Godault, 50.410222, 2.974629
+Supercharger-V3 FR-Nîmes - Carré Sud, 43.807991, 4.363603, 50
+Supercharger FR-Nîmes, 43.81655, 4.345061
 Supercharger-V3 FR-Orange, 44.1121375, 4.8517996
 Supercharger FR-Orgeval, 48.925026, 1.996508
-Supercharger FR-Ostwald, 48.534041, 7.702054
 Supercharger FR-Orleans, 47.9488696, 1.868313
+Supercharger FR-Ostwald, 48.534041, 7.702054
+Supercharger-V3 FR-Parly 2, 48.82751, 2.118757
 Supercharger FR-Pau, 43.332257, -0.358762
 Supercharger-V3 FR-Perigueux, 45.152424, 0.789938
+Supercharger-V3 FR-Poitiers Sud, 46.548393, 0.296635
 Supercharger FR-Poitiers, 46.670356, 0.362651
 Supercharger-V3 FR-Reims-Tinqueux, 49.252931, 3.975959
+Supercharger-V3 FR-Rennes Cleunay, 48.10396222, -1.7122015
 Supercharger FR-Rennes, 48.082064, -1.684180
+Supercharger-V3 FR-Riom, 45.89550865, 3.1378776
 Supercharger-V3 FR-Rivesaltes,42.775351,2.908241
+Supercharger-V3 FR-Rodez, 44.3783, 2.564829
+Supercharger-V3 FR-Roissy-en-, 48.985279, 2.510685
 Supercharger FR-Rouen, 49.388964, 1.059818
 Supercharger FR-Rouvignies, 50.336704, 3.455931
 Supercharger FR-Rungis, 48.7544317, 2.3510298
 Supercharger FR-Saint-Brieuc, 48.493466, -2.7226299
+Supercharger-V3 FR-Saint-Chamond, 45.461071, 4.494828
+Supercharger-V3 FR-Saint-Dizier, 48.623657, 4.963378
+Supercharger-V3 FR-Saint-Dié-des-Vosges, 48.29337153, 6.93653259
+Supercharger-V3 FR-Saint-Gaudens, 43.11655, 0.767059
+Supercharger-V3 FR-Saint-Jean-de-Maurienne, 45.26639202, 6.37274261
 Supercharger-V3 FR-Saint-Julien-en-Genevois,46.129633,6.087681,16
 Supercharger-V3 FR-Saint-Julien-en-Genevois,46.129901,6.087538,16
+Supercharger-V3 FR-Saint-Louis, 47.605065, 7.543048
+Supercharger-V3 FR-Saint-Quentin, 49.859531, 3.25422
 Supercharger FR-Saintes, 45.7500261, -0.6616366
 Supercharger-V3 FR-Salaise-sur-Sanne,45.3271326,4.805307
-Supercharger-V3 FR-Sallanches,45.952671,6.628494
 Supercharger FR-Sallanches, 45.951545, 6.62879
+Supercharger-V3 FR-Sallanches,45.952671,6.628494
 Supercharger FR-Senlis, 49.208545, 2.606701
 Supercharger-V3 FR-Sisteron,44.22584,5.912426,30
 Supercharger FR-Sisteron,44.225891,5.913562,10
 Supercharger FR-Strasbourg, 48.53407, 7.70201
+Supercharger FR-Tesla - Montbéliard, 47.5005812, 6.8123432
 Supercharger FR-Thiais,48.754759,2.373078
 Supercharger FR-Toulouse, 43.769238, 1.361623
 Supercharger-V3 FR-Tournus, 46.577333, 4.899973, 55
+Supercharger FR-Tours Sud, 47.32476, 0.713971
 Supercharger FR-Tours, 47.406937,0.742856
 Supercharger FR-Troyes - Saint-Parres-aux-Tertres, 48.293229, 4.130685
 Supercharger FR-Val-de-Meuse, 47.99147, 5.51296
 Supercharger FR-Valence, 44.91894, 4.878101
-Supercharger-V3 FR-Vélizy 2,48.78399,2.220896,20
+Supercharger-V3 FR-Vannes, 47.67735752, -2.80353239
+Supercharger-V3 FR-Varennes-Vauzelles, 47.02483978, 3.14726396
+Supercharger-V3 FR-Varneville-Bretteville, 49.645036, 1.046589
+Supercharger-V3 FR-Verniolle, 43.074792, 1.640626
 Supercharger FR-Vienne, 45.58748, 4.78751
+Supercharger-V3 FR-Vierzon, 47.245792, 2.068988
+Supercharger-V3 FR-Villedieu-les-Poêles-Rouffigny, 48.84698355, -1.21082205
+Supercharger-V3 FR-Vélizy 2,48.78399,2.220896,20
+Supercharger-V3 FR-Épinal, 48.2008301, 6.4774781
+Supercharger-V3 FR-Évry-Courcouronnes, 48.616299, 2.423207
 Supercharger GB-Abington, 55.507944, -3.694786
 Supercharger-V3 GB-Amesbury, 51.177215, -1.756282
 Supercharger GB-Aviemore, 57.189774, -3.836206
