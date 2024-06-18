@@ -1371,13 +1371,14 @@ namespace TeslaLogger
                 }
             }
             // execute shift state change actions independant from special flags
-            // TODO discuss!
-            /*if (_newState.Equals("D") && DBHelper.currentJSON.current_is_sentry_mode)
+            if (!oldState.Equals("P") && newState.Equals("P"))
             {
-                Log("DisableSentryMode ...");
-                string result = webhelper.PostCommand("command/set_sentry_mode?on=false", null).Result;
-                Log("DisableSentryMode(): " + result);
-            }*/
+                // get a position
+                _ = Task.Factory.StartNew(() =>
+                {
+                    webhelper.IsDriving(true);
+                }, CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
+            }
         }
 
         private void HandleSpecialFlag_HighFrequencyLogging(string _flagconfig)
@@ -1590,6 +1591,15 @@ namespace TeslaLogger
                 _ = Task.Factory.StartNew(() =>
                 {
                     dbHelper.CombineChangingStates();
+                }, CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
+            }
+            // any -> Online
+            if (_oldState != TeslaState.Online && _newState == TeslaState.Online)
+            {
+                // get a position
+                _ = Task.Factory.StartNew(() =>
+                {
+                    webhelper.IsDriving(true);
                 }, CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
             }
             // any -> charging
