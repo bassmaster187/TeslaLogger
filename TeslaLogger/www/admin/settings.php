@@ -244,6 +244,7 @@ echo(menu("Settings"));
 		<option value="it">Italiano</option>
 		<option value="nl">Nederlands</option>
 		<option value="no">Norsk</option>
+		<option value="pl">Polski</option>
 		<option value="pt">Português</option>
 		<option value="ru">Русский</option>
 		<option value="cn">漢語</option>

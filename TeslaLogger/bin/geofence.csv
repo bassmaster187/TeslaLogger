@@ -3,10 +3,12 @@ Supercharger AT-Biberwier, 47.372431,10.886093
 Supercharger AT-Bregenz, 47.488583, 9.740172, 30
 Supercharger AT-Flachau, 47.354581, 13.386174
 Supercharger AT-Graz, 47.037058,15.478501
+Supercharger-V4 AT-Graz Center West,47.033482,15.414662,15
 Supercharger-V3 AT-Eberstalzell,48.039338,13.991089
 Supercharger-V3 AT-Hall in Tirol,47.276897,11.469074
 Supercharger-V3 AT-Hall in Tirol,47.273290,11.475335
 Supercharger AT-Innsbruck, 47.264882, 11.428380
+Supercharger-V3 AT-Kalwang, 47.422813, 14.759271
 Supercharger AT-Kapfenberg, 47.450188, 15.317675
 Supercharger AT-Kitzbühel, 47.459205, 12.386105
 Supercharger-V3 AT-Langkampfen, 47.534597, 12.092972
@@ -14,7 +16,9 @@ Supercharger AT-Laßnitzhöhe, 47.070925, 15.578139
 Supercharger AT-Lermoos, 47.394965, 10.887519
 Supercharger AT-Lermoos, 47.395975, 10.887217
 Supercharger AT-Liezen, 47.559370, 14.252606
+Supercharger-V4 AT-Meggenhofen,48.183502,13.785966
 Supercharger AT-Poysdorf, 48.676534, 16.623013
+Supercharger-V3 AT-Rankweil, 47.273, 9.617555
 Supercharger AT-Salzburg, 47.727056, 13.060672
 Supercharger-V3 AT-Salzburg Nord,47.836027,13.059075
 Supercharger AT-St. Anton, 47.131123, 10.271497
@@ -134,6 +138,7 @@ Supercharger CH-Schaffhausen, 47.720985, 8.646664
 Supercharger-V3 CH-St. Gallen, 47.408150, 9.304028
 Supercharger CH-St. Moritz, 46.496797, 9.84272
 Supercharger CH-Steg-Hohtenn, 46.310364, 7.749565
+Supercharger-V3 CH-Wallisellen, 47.408003, 8.598291
 Supercharger CN-DoubleTree by Hilton Hotel Guangzhou Huihua, 23.183827,113.470749
 Supercharger CN-Guangzhou International Finance Center, 23.121138,113.317477, 70
 Supercharger CN-Guangzhou Jockey Club Home Furnishing,23.120633,113.340501
@@ -213,6 +218,7 @@ Supercharger-V3 DE-Hamburg - Stillhorn, 53.479701, 10.025150
 Supercharger-V3 DE-Hamburg-Wandsbek, 53.586773, 10.098058
 Supercharger-V3 DE-Hanau, 50.104919, 8.916077, 30
 Supercharger-V3 DE-Hannover, 52.423275,9.835039, 20
+Supercharger-V3 DE-Hattersheim - Globus, 50.071139, 8.475361, 35
 Supercharger-V3 DE-Heede, 52.985372, 7.248233
 Supercharger-V3 DE-Hemsbach, 49.594071, 8.632455, 30
 Supercharger DE-Hengersberg, 48.76555, 13.04668
@@ -264,10 +270,12 @@ Supercharger-V3 DE-Leipzig-Flughafen,51.401534,12.181377
 Supercharger DE-Leonberg, 48.78523, 9.01755
 Supercharger-V3 DE-Leonberg Glemseck,48.784561, 9.019178
 Supercharger-V3 DE-Limburg an der Lahn,50.381161, 8.089549
+Supercharger-V4 DE-Lindau, 47.54807, 9.725779
 Supercharger-V3 DE-Lippetal, 51.69554, 7.967128
 Supercharger-V3 DE-Linstow, 53.618217, 12.372581
 Supercharger-V3 DE-Lohfelden, 51.271885,9.526877, 20
 Supercharger-V3 DE-Lohne, 52.65768, 8.16927
+Supercharger-V3 DE-Ludwigshafen-Oggersheim, 49.490583, 8.352128, 10
 Supercharger DE-Lutterberg alt, 51.370977, 9.633306, 10
 Supercharger DE-Lutterberg, 51.370193,9.633918, 20
 Supercharger DE-Malsfeld, 51.0872578, 9.485137, 20
@@ -504,6 +512,7 @@ Supercharger FR-Chasseneuil-du-Poitou, 46.650703, 0.374772
 Supercharger FR-Châteauroux, 46.863047, 1.716028
 Supercharger FR-Clermont-Ferrand, 45.785937, 3.141488
 Supercharger FR-Coings, 46.863058, 1.716048
+Supercharger-V3 FR-Colmar, 48.129045, 7.368740
 Supercharger FR-Calais, 50.924425, 1.80414
 Supercharger FR-Calais - Eurotunnel Terminal, 50.935031, 1.812951
 Supercharger-V3 FR-Dardilly, 45.820165,4.760176
@@ -571,6 +580,7 @@ Supercharger FR-Tours, 47.406937,0.742856
 Supercharger FR-Troyes - Saint-Parres-aux-Tertres, 48.293229, 4.130685
 Supercharger FR-Val-de-Meuse, 47.99147, 5.51296
 Supercharger FR-Valence, 44.91894, 4.878101
+Supercharger-V3 FR-Vélizy 2,48.78399,2.220896,20
 Supercharger FR-Vienne, 45.58748, 4.78751
 Supercharger GB-Abington, 55.507944, -3.694786
 Supercharger-V3 GB-Amesbury, 51.177215, -1.756282
@@ -974,6 +984,7 @@ Supercharger-V3 SE-Vetlanda, 57.415344, 15.090615
 Supercharger-V3 SE-Ystad, 55.434597, 13.839937
 Supercharger-V3 SE-Ånge, 62.537307, 15.919596
 Supercharger-V3 SE-Åsarna, 62.6408, 14.370883
+Supercharger-V4 SI-Koper,45.540777,13.735721
 Supercharger SI-Kozina, 45.60492, 13.928521
 Supercharger SI-Kozina, 45.607449, 13.931531
 Supercharger SI-Ljubljana, 46.051778, 14.452056
