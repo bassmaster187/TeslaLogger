@@ -256,7 +256,7 @@ BA_Step3=Step 3:
 BA_FillOut=Fill out this form:
 BA_CopyUrl="Copy the resulting URL as shown"
 BA_Paste="Paste the resulting URL into the box and click "_QQ_"Get Tokens"_QQ_" Button:"
-BA_FLEETAPI=Tesla Fleet API (currently not recommended !!!)
+BA_FLEETAPI=Tesla Fleet API (Recommended only for vehicles built after Nov. 2023!!!)
 Get Tokens=Get Tokens
 
 #password_fleet.php

@@ -1,3 +1,7 @@
+# Version 1.58.2
+- Many changes to Fleet API and Owners API due to command limit by tesla (Owners API: 600/day, Fleet API: 300/day) [LINK](https://github.com/bassmaster187/TeslaLogger/issues/1304)
+- Dashboard Mothership filter by car
+
 # Version 1.58.1
 - Using Telemetry Server even with old Tesla API. Require Virtual Key
 - New update client
