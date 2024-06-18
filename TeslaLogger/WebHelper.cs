@@ -3826,7 +3826,8 @@ namespace TeslaLogger
                 && double.TryParse(est_lat, NumberStyles.Any, CultureInfo.InvariantCulture, out double latitude)
                 && double.TryParse(est_lng, NumberStyles.Any, CultureInfo.InvariantCulture, out double longitude)
                 && decimal.TryParse(power, out decimal dpower) // power in kW
-                && int.TryParse(range, out int irange))
+                && int.TryParse(range, out int irange)
+                && int.TryParse(heading, out int iheading))
             {
                 // speed is converted by InsertPos
                 // power is converted by InsertPos
@@ -3836,6 +3837,7 @@ namespace TeslaLogger
                 // ideal_battery_range_km = ideal_battery_range_km * car specific factor
                 double ideal_battery_range_km = battery_range_km * battery_range2ideal_battery_range;
                 double? outside_temp = car.CurrentJSON.current_outside_temperature;
+                car.CurrentJSON.heading = iheading;
                 if (!string.IsNullOrEmpty(shift_state) && shift_state.Equals("D") &&
                     (latitude != last_latitude_streaming || longitude != last_longitude_streaming || dpower != last_power_streaming))
                 {
