@@ -161,15 +161,18 @@ Supercharger-V3 DE-Augsburg,48.398938,10.868306,30
 Supercharger-V3 DE-Bad Oeynhausen,52.213278,8.814397
 Supercharger DE-Bad Rappenau, 49.21198, 9.07726
 Supercharger-V3 DE-Baden-Baden, 48.78364, 8.19225
+Supercharger-V3 DE-Barsbüttel, 53.578593, 10.192967
 Supercharger-V3 DE-Bayreuth,49.962203,11.610271,20
 Supercharger DE-Beelitz, 52.266803, 12.922467
 Supercharger-V3 DE-Berchtesgaden, 47.626649, 13.000651
 Supercharger-V3 DE-Bergkamen,51.649452,7.671108,20
 Supercharger-V3 DE-Bensheim, 49.672353, 8.6022525, 22
+Supercharger-V3 DE-Berlin - APCOA ALEXA, 52.519393, 13.416735
 Supercharger-V3 DE-Berlin - EUREF-Campus, 52.4808984, 13.3558539
 Supercharger-V3 DE-Berlin Parkhaus Gleisdreieck, 52.501800,13.373985
 Supercharger DE-Bernau am Chiemsee, 47.81445, 12.36792
 Supercharger DE-Bersteland, 51.949066, 13.787906
+Supercharger-V3 DE-Bielefeld - Beckhaus Center, 52.038601, 8.543807
 Supercharger DE-Bispingen, 53.104326, 9.981842
 Supercharger-V3 DE-Bispingen-Behringen, 53.0998617, 9.9791921, 75
 Supercharger-V3 DE-Bissendorf,52.238354,8.162975
@@ -188,6 +191,7 @@ Supercharger-V3 DE-Brunnthal,48.039686,11.661457
 Supercharger-V3 DE-Dasing,48.393731,11.070452
 Supercharger-V3 DE-Denkendorf,48.707,9.306556
 Supercharger DE-Dettelbach, 49.7788313, 10.0686375
+Supercharger-V3 DE-Düsseldorf - Ando Campus, 51.251629, 6.794317
 Supercharger-V3 DE-Eching,48.306431,11.634784
 Supercharger-V3 DE-Eimeldingen,47.626603,7.599543, 20
 Supercharger-V3 DE-Eimeldingen, 47.626690, 7.599410
@@ -201,6 +205,7 @@ Supercharger-V3 DE-Erharting, 48.282664, 12.554758
 Supercharger-V3 DE-Eschborn, 50.133770, 8.561050
 Supercharger-V3 DE-Frechen, 50.917843, 6.83323183, 20
 Supercharger-V3 DE-Feucht, 49.36501,11.20753
+Supercharger-V3 DE-Fürth - Ronhof, 49.494376, 10.994299
 Supercharger-V3 DE-Füssen, 47.567924, 10.675875, 18
 Supercharger DE-Geiselwind, 49.769178, 10.470429, 15
 Supercharger-V3 DE-Geiselwind, 49.769526,10.470298, 50
@@ -209,11 +214,14 @@ Supercharger-V3 DE-Gelnhausen,50.188644,9.186141
 Supercharger-V3 DE-Gensingen, 49.90202, 7.929759
 Supercharger-V4 DE-Gigafactory Berlin-Brandenburg, 52.391, 13.796778
 Supercharger-V4 DE-Gigafactory Berlin-Brandenburg, 52.391321, 13.796042
+Supercharger-V3 DE-Göttingen (Cafe del Sol), 51.528335, 9.88688
 Supercharger DE-Gramschatzer Wald, 49.91202, 10.00176, 30
 Supercharger-V3 DE-Gramschatzer Wald, 49.912304,10.000582, 30
 Supercharger-V3 DE-Greding,49.041979,11.342705,20
 Supercharger DE-Gützkow, 53.943943, 13.396739
 Supercharger DE-Hamburg, 53.460881, 9.940546
+Supercharger-V3 DE-Hamburg - EEZ, 53.571606, 9.860833
+Supercharger-V3 DE-Hamburg - Lübecker Strasse, 53.562115, 10.031658
 Supercharger-V3 DE-Hamburg - Stillhorn, 53.479701, 10.025150
 Supercharger-V3 DE-Hamburg-Wandsbek, 53.586773, 10.098058
 Supercharger-V3 DE-Hanau, 50.104919, 8.916077, 30
@@ -224,6 +232,7 @@ Supercharger-V3 DE-Hemsbach, 49.594071, 8.632455, 30
 Supercharger DE-Hengersberg, 48.76555, 13.04668
 Supercharger DE-Herboltzheim, 48.22704, 7.75368
 Supercharger-V3 DE-Hermsdorf, 50.889889,11.871397, 30
+Supercharger-V3 DE-Herne (Zurbrüggen), 51.531182, 7.209585
 Supercharger-V3 DE-Herrieden, 49.257951,10.501761
 Supercharger-V3 DE-Herzsprung,53.067285,12.533197,20
 Supercharger DE-Herzsprung, 53.067341,12.533227,20
@@ -255,39 +264,49 @@ Supercharger DE-Kaiserslautern, 49.459907, 7.821410
 Supercharger-V3 DE-Karlsruhe, 48.999096,8.428591,30
 Supercharger DE-Kamen, 51.5701781, 7.675317
 Supercharger-V3 DE-Kassel,51.313688,9.493689
+Supercharger-V3 DE-Kassel (Cafe del Sol), 51.3083959, 9.5411861
 Supercharger DE-Kappel-Grafenhausen, 48.281347, 7.77755
 Supercharger-V3 DE-Kaltenkirchen,53.846035,9.936263,20
 Supercharger-V3 DE-Kerpen,50.897831,6.682291
 Supercharger-V3 DE-Kirchheim,50.834803,9.574426, 30
 Supercharger-V3 DE-Kleinostheim,49.9941,9.0705
 Supercharger-V3 DE-Knetzgau, 49.982399, 10.555616
+Supercharger-V3 DE-Köln Bonn Airport, 50.883137, 7.111943
 Supercharger-V4 DE-Köln Carlswerk, 50.966078, 7.014042
 Supercharger-V3 DE-Kösching, 48.811333, 11.479899
+Supercharger-V3 DE-Krefeld - (Globus), 51.321961, 6.603147
+Supercharger-V3 DE-Langenhagen, 52.45814, 9.7154173
 Supercharger-V3 DE-Lauenau, 52.279023, 9.35083
 Supercharger-V3 DE-Leer, 53.25967, 7.45557, 25
 Supercharger-V3 DE-Lehre, 52.313216,10.635089
 Supercharger-V3 DE-Leipzig-Flughafen,51.401534,12.181377
 Supercharger DE-Leonberg, 48.78523, 9.01755
 Supercharger-V3 DE-Leonberg Glemseck,48.784561, 9.019178
+Supercharger-V3 DE-Limburg - (Globus), 50.39842425, 8.07624192
 Supercharger-V3 DE-Limburg an der Lahn,50.381161, 8.089549
 Supercharger-V4 DE-Lindau, 47.54807, 9.725779
+Supercharger-V3 DE-Lindau (Bodensee), 47.548462, 9.725801
 Supercharger-V3 DE-Lippetal, 51.69554, 7.967128
 Supercharger-V3 DE-Linstow, 53.618217, 12.372581
 Supercharger-V3 DE-Lohfelden, 51.271885,9.526877, 20
 Supercharger-V3 DE-Lohne, 52.65768, 8.16927
+Supercharger-V3 DE-Lübeck (Cafe del Sol), 53.882003, 10.6581543
 Supercharger-V3 DE-Ludwigshafen-Oggersheim, 49.490583, 8.352128, 10
 Supercharger DE-Lutterberg alt, 51.370977, 9.633306, 10
 Supercharger DE-Lutterberg, 51.370193,9.633918, 20
+Supercharger-V3 DE-Magdeburg, 52.2106324, 11.670302
 Supercharger DE-Malsfeld, 51.0872578, 9.485137, 20
 Supercharger-V3 DE-Merklingen,48.516376,9.757564
 Supercharger DE-Moers, 51.441816, 6.611833
 Supercharger DE-Mogendorf, 50.4827719, 7.750309
 Supercharger-V3 DE-Montabaur,50.443591,7.830885,20
+Supercharger-V3 DE-Motorworld München, 48.196866, 11.605312
 Supercharger DE-Motten, 50.355621, 9.75384
 Supercharger-V3 DE-Murr, 48.956119,9.245459
 Supercharger-V3 DE-Mücke, 50.645442, 8.989816
 Supercharger DE-Mühldorf, 48.27257, 12.54995
 Supercharger-V3 DE-Münchberg-Nord, 50.202822,11.776624, 18
+Supercharger-V3 DE-München - Die Hirschau, 48.161505, 11.602763
 Supercharger-V3 DE-München - Pasing Arcaden, 48.147909,11.464882
 Supercharger-V3 DE-München - OEZ, 48.184493713, 11.5323986
 Supercharger-V3 DE-München - Sendling, 48.105054,11.536857,30
@@ -305,6 +324,7 @@ Supercharger-V3 DE-Northeim, 51.731815, 9.972845
 Supercharger-V3 DE-Nörten-Hardenberg, 51.632847, 9.909942
 Supercharger-V3 DE-Nottuln, 51.911333, 7.398475, 16
 Supercharger-V3 DE-Oberhausen,51.485746,6.886665
+Supercharger-V3 DE-Oberhausen - Bero Zentrum, 51.475367, 6.840742
 Supercharger DE-Oberhonnefeld, 50.562662, 7.525183, 25
 Supercharger-V3 DE-Oberhonnefeld, 50.562897, 7.524883, 15
 Supercharger-V3 DE-Offenburg,48.469907,7.931822
@@ -328,6 +348,7 @@ Supercharger DE-Regensburg-Ost, 48.9947224, 12.150609
 Supercharger-V3 DE-Regensburg - Ostenviertel, 48.999794,12.148433, 25
 Supercharger-V3 DE-Reichertshofen,48.645645,11.520604
 Supercharger-V3 DE-Reinfeld, 53.8232, 10.50352
+Supercharger-V3 DE-Reiskirchen, 50.595729, 8.818522
 Supercharger-V3 DE-Rhüden,51.947273, 10.1409618, 9
 Supercharger-V3 DE-Rhüden,51.947298,10.140858,6
 Supercharger-V3 DE-Rhüden,51.947243,10.140858,6
@@ -340,8 +361,11 @@ Supercharger-V3 DE-Schönefeld, 52.38872295907895, 13.498046804438706, 30
 Supercharger-V3 DE-Schierling, 48.83825495249082, 12.119170804848606, 30
 Supercharger-V3 DE-Schleiz,50.54638104111437,11.803507002785663,20
 Supercharger-V3 DE-Schleiz,50.54647989730031,11.803035300128926,20
+Supercharger-V3 DE-Schwandorf (Globus), 49.31447914, 12.1465116
+Supercharger-V3 DE-Schwarzheide, 51.471528, 13.871028
 Supercharger DE-Schweitenkirchen, 48.510765, 11.582025, 19
 Supercharger-V3 DE-Sindelsdorf, 47.728372, 11.361923
+Supercharger-V3 DE-Sittensen, 53.287186, 9.5062473
 Supercharger-V3 DE-Solingen, 51.129579, 6.995592
 Supercharger-V3 DE-Soltau-Ost,52.983332,9.925548
 Supercharger DE-Stuhr (Bremen-Brinkum), 53.0284305, 8.8061246
@@ -353,6 +377,7 @@ Supercharger-V3 DE-Türkheim, 48.04251558, 10.6201373
 Supercharger DE-Uckerfelde, 53.23499, 13.98606
 Supercharger-V3 DE-Ulm, 48.4564812, 10.0308326
 Supercharger DE-Ulm, 48.456714, 10.030097, 18
+Supercharger-V3 DE-Ursensollen, 49.4057, 11.761033
 Supercharger-V3 DE-Vaterstetten, 48.146953,11.790152
 Supercharger-V3 DE-Vaterstetten, 48.146719,11.790205
 Supercharger-V3 DE-Vaterstetten, 48.146472,11.790255
@@ -373,6 +398,7 @@ Supercharger DE-Weyarn, 47.865307, 11.790695
 Supercharger-V4 DE-Wildau A10 Center Chausseestraße 1, 52.313098, 13.605076
 Supercharger DE-Wiesbaden, 50.0598477, 8.3451326
 Supercharger DE-Wilnsdorf, 50.8168944, 8.085813
+Supercharger-V3 DE-Winsen (Luhe), 53.350053, 10.14686
 Supercharger-V3 DE-Wismar, 53.879307, 11.454047
 Supercharger-V3 DE-Wittenburg, 53.507361, 11.096852
 Supercharger DE-Wittlich, 49.97003, 6.86175
@@ -384,6 +410,7 @@ Supercharger-V3 DE-Wuppertal, 51.282478, 7.256275
 Supercharger-V3 DE-Wuppertal, 51.282426, 7.256019
 Supercharger DE-Zella-Mehlis, 50.64359332740897, 10.684717119049072
 Supercharger-V3 DE-Zusmarshausen, 48.407771,10.599446, 25
+Supercharger-V3 DE-Zweibrücken, 49.230727, 7.40817
 Supercharger-V3 DK-Aalborg, 57.004005, 9.870825
 Supercharger DK-Aarhus, 56.178223, 10.139406
 Supercharger-V3 DK-Copenhagen North, 55.772665, 12.504799
@@ -464,6 +491,7 @@ Supercharger FI-Pyhäjärvi, 63.716298, 25.920103
 Supercharger-V3 Fi-Rovaniemi, 66.501765,25.723048
 Supercharger FI-Vierumäki, 61.112472,25.929927
 Supercharger LI-Schaan, 47.165317, 9.507795
+Supercharger-V3 FR-Agen, 44.17776193, 0.63026876
 Supercharger FR-Aire de Cambarette, 43.423964, 5.99017
 Supercharger FR-Aire de Châteauvillain - Orges, 48.057681, 4.96061
 Supercharger FR-Aire de Châteauvillain - Val Marnay, 48.057341, 4.959604
@@ -481,107 +509,184 @@ Supercharger-V3 FR-Aire de l'Abis, 45.524989, 5.976465
 Supercharger-V3 FR-Aire de la Vendée, 46.573233, -1.11793
 Supercharger-V3 FR-Aire des Portes d'Angers,47.498968,-0.491404
 Supercharger-V3 FR-Aire du Jura,46.774663,5.522206
+Supercharger-V3 FR-Aire du Bourbonnais, 46.49712065, 3.36270123
 Supercharger FR-Aix-en-Provence Val de l'Arc, 43.5119793, 5.466397
 Supercharger FR-Aix-en-Provence, 43.5106478, 5.4564393
+Supercharger-V3 FR-Ajaccio, 41.951864, 8.792775
 Supercharger FR-Albaret-Sainte-Marie,44.870977, 3.252918
+Supercharger-V3 FR-Albi, 43.95773, 2.154951
 Supercharger FR-Amiens, 49.863492, 2.27814
+Supercharger-V3 FR-Angers Espace Anjou, 47.466441, -0.524568
 Supercharger-V3 FR-Angoulême, 45.69444, 0.178841
+Supercharger-V3 FR-Annecy - Seynod, 45.877092, 6.0879
+Supercharger-V3 FR-Annemasse, 46.19477139, 6.2554387
 Supercharger FR-Appoigny, 47.85183, 3.542802
 Supercharger FR-Archamps, 46.136917, 6.124306
+Supercharger-V3 FR-Artenay, 48.0829792, 1.8646925
 Supercharger FR-Auxerre, 47.851819, 3.542894
 Supercharger-V3 FR-Avallon, 47.502121,3.984249
+Supercharger-V3 FR-Avignon - Le Pontet, 43.980282, 4.8801075
 Supercharger FR-Barberaz, 45.56085, 5.949646
 Supercharger FR-Bayonne, 43.4938044, -1.4524967
+Supercharger-V3 FR-Beaune Nord, 47.0432, 4.839921
 Supercharger FR-Beaune, 47.017319, 4.83779
+Supercharger-V3 FR-Beauvais, 49.409907, 2.113721
 Supercharger FR-Bernin, 45.265676, 5.876448
 Supercharger FR-Besançon, 47.234539, 5.901153
-Supercharger FR-Bourg-Achard, 49.359627, 0.817716, 30
-Supercharger FR-Bourges, 47.049393, 2.344843 
-Supercharger FR-Buchelay, 48.990144, 1.671559
-Supercharger FR-Brive-la-Gaillarde, 45.16724, 1.483119
-Supercharger FR-Bordeaux Merignac, 44.8342076, -0.6810947
+Supercharger-V3 FR-Beynost, 45.82379524, 4.99773319
+Supercharger-V3 FR-Biganos, 44.637014, -0.960205
+Supercharger-V3 FR-Biguglia, 42.594669, 9.437173
+Supercharger-V3 FR-Blagnac, 43.647712, 1.370026
 Supercharger-V3 FR-Blois,47.611942,1.339408
+Supercharger FR-Bordeaux Merignac, 44.8342076, -0.6810947
+Supercharger-V3 FR-Bordeaux Lac, 44.882469, -0.56391
+Supercharger-V3 FR-Boulogne-sur-Mer, 50.73346, 1.671219
+Supercharger FR-Bourg-Achard, 49.359627, 0.817716, 30
+Supercharger FR-Bourg-de-Péage, 45.033274, 5.051818
+Supercharger FR-Bourg-en-Bresse, 46.143806, 5.282492
+Supercharger FR-Bourges, 47.049393, 2.344843
+Supercharger-V3 FR-Brest - Gouesnou, 48.43091449, -4.47084498
+Supercharger-V3 FR-Briançon, 44.903824, 6.630075
+Supercharger FR-Brive-la-Gaillarde, 45.16724, 1.483119
+Supercharger-V3 FR-Bron, 45.722035, 4.923751
+Supercharger FR-Buchelay, 48.990144, 1.671559
+Supercharger-V3 FR-Bègles, 44.793792, -0.533489
+Supercharger-V3 FR-Béziers, 43.33661, 3.283
+Supercharger FR-Caen Saint-Contest, 49.200795, -0.399727
 Supercharger FR-Caen, 49.16398, -0.424802
 Supercharger FR-Cagnes-sur-Mer, 43.666446, 7.127372
-Supercharger FR-Châlons-en-Champagne, 48.991982, 4.245320
+Supercharger FR-Calais - Eurotunnel Terminal, 50.935031, 1.812951
+Supercharger FR-Calais, 50.924425, 1.80414
+Supercharger FR-Carcassonne, 43.206224, 2.310792
+Supercharger-V3 FR-Centre Tesla Aix-Marseille, 43.4146793, 5.2748805
+Supercharger-V3 FR-Centre Tesla Paris-Val d’Europe, 48.836648, 2.800013
+Supercharger FR-Cesson, 48.584701, 2.604331
 Supercharger-V3 FR-Chalon-sur-Saône, 46.796267, 4.835472
 Supercharger FR-Chambéry, 45.593128,5.898171
+Supercharger-V3 FR-Champfleury, 49.203953, 4.013348
 Supercharger FR-Chapelle sur Erdre, 47.2827707, -1.5500076
 Supercharger FR-Charleville-Mézières, 49.736834, 4.744095
+Supercharger FR-Chartres Supercharger, 48.4466117, 1.5390104
+Supercharger FR-Chasse-sur-Rhône - Chasse Sud, 45.5736658, 4.8114341
 Supercharger FR-Chasseneuil-du-Poitou, 46.650703, 0.374772
+Supercharger-V3 FR-Chatellerault, 46.836112, 0.5418739
+Supercharger-V3 FR-Cherbourg, 49.60275, -1.602326
+Supercharger FR-Châlons-en-Champagne, 48.991982, 4.245320
 Supercharger FR-Châteauroux, 46.863047, 1.716028
 Supercharger FR-Clermont-Ferrand, 45.785937, 3.141488
 Supercharger FR-Coings, 46.863058, 1.716048
 Supercharger-V3 FR-Colmar, 48.129045, 7.368740
-Supercharger FR-Calais, 50.924425, 1.80414
-Supercharger FR-Calais - Eurotunnel Terminal, 50.935031, 1.812951
+Supercharger-V3 FR-Colmar, 48.128684, 7.369823
 Supercharger-V3 FR-Dardilly, 45.820165,4.760176
+Supercharger FR-Deauville, 49.344809, 0.096677
 Supercharger-V3 FR-Dijon, 47.271754, 5.043424
+Supercharger-V3 FR-Dinan, 48.4447515, -2.06830832
 Supercharger FR-Dommartin-lès-Cuiseaux, 46.496179, 5.310394
+Supercharger-V3 FR-Dunkerque, 51.005494, 2.281523
+Supercharger-V3 FR-Englos, 50.629871, 2.970873
 Supercharger FR-Eurotunnel Flexiplus Lounge, 50.929973, 1.813182
 Supercharger FR-Fontainebleau, 48.3495627, 2.6067816
+Supercharger FR-G La Galerie – Albertville, 45.655436, 6.365683
+Supercharger-V3 FR-Gap, 44.569565, 6.104458
+Supercharger-V3 FR-Honfleur, 49.414263, 0.265752
 Supercharger FR-La Léchère-les-Bains, 45.51877, 6.482522
-Supercharger FR-Le Mans, 48.041833, 0.175342
 Supercharger FR-La Seyne-sur-Mer, 43.121199, 5.85086
 Supercharger-V3 FR-Labouheyre, 44.202799, -0.92682
 Supercharger FR-Langon, 44.5424356, -0.2539542
 Supercharger-V3 FR-Laxou,48.691096,6.127684
+Supercharger FR-Le Mans, 48.041833, 0.175342
 Supercharger-V3 FR-Le Mans - Saint-Saturnin,48.052932,0.166434
+Supercharger-V3 FR-Le Bosc, 43.68814, 3.355094
+Supercharger-V3 FR-Le Touquet-Paris-Plage, 50.521625, 1.598625
 Supercharger-V3 FR-Les Herbiers, 46.889368, -1.032994
 Supercharger FR-Lille, 50.583306, 3.08982
 Supercharger FR-Limoges, 45.86723, 1.270344
 Supercharger FR-Lorient, 47.787895, -3.33146989
-Supercharger FR-Mâcon, 46.346653, 4.849067
+Supercharger FR-Mandelieu-la-Napoule, 43.533651, 6.933019
+Supercharger-V3 FR-Manosque, 43.81886548, 5.79689581
 Supercharger FR-Marne-la-Vallée, 48.8307897, 2.6780359
+Supercharger FR-Marseille La Valentine, 43.2946806, 5.4795679
+Supercharger-V3 FR-Megève, 45.87134613, 6.63030654
 Supercharger FR-Merignac, 44.835346, -0.681374
+Supercharger-V3 FR-Metz Sud, 49.079621, 6.10359
 Supercharger FR-Metz, 49.216512, 6.171239
 Supercharger FR-Mont-Saint-Michel, 48.568171, -1.543283
-Supercharger FR-Montélimar, 44.676319, 4.795763
+Supercharger-V3 FR-Montauban, 44.036554, 1.378
 Supercharger-V3 FR-Montluçon, 46.378453, 2.586523
 Supercharger-V3 FR-Montpellier, 43.602398, 3.919982, 40
+Supercharger FR-Montélimar, 44.676319, 4.795763
+Supercharger FR-Morlaix, 48.57439, -3.85318
 Supercharger FR-Mougins, 43.6036681, 7.011086
 Supercharger FR-Mulhouse, 47.782016, 7.388299
 Supercharger-V3 FR-Mundolsheim, 48.653104, 7.731952, 40
+Supercharger FR-Mâcon, 46.346653, 4.849067
 Supercharger FR-Nancy, 48.638215, 6.184349
 Supercharger FR-Nantes - La Chapelle-sur-Erdre, 47.282708, -1.549982
+Supercharger-V3 FR-Nantes - Atlantis, 47.225998, -1.62904
 Supercharger FR-Narbonne, 43.1676432, 2.9859067
-Supercharger FR-Nîmes, 43.81655, 4.345061
-Supercharger-V3 FR-Nîmes - Carré Sud, 43.807991, 4.363603, 50
+Supercharger-V3 FR-Neuville-en-Ferrain, 50.74221, 3.145036
 Supercharger-V3 FR-Nice,43.727727,7.186527
+Supercharger FR-Niort 2, 46.340231, -0.384126
 Supercharger-V3 FR-Niort,46.29825,-0.375256
+Supercharger-V3 FR-Noyelles-Godault, 50.410222, 2.974629
+Supercharger-V3 FR-Nîmes - Carré Sud, 43.807991, 4.363603, 50
+Supercharger FR-Nîmes, 43.81655, 4.345061
 Supercharger-V3 FR-Orange, 44.1121375, 4.8517996
 Supercharger FR-Orgeval, 48.925026, 1.996508
-Supercharger FR-Ostwald, 48.534041, 7.702054
 Supercharger FR-Orleans, 47.9488696, 1.868313
+Supercharger FR-Ostwald, 48.534041, 7.702054
+Supercharger-V3 FR-Parly 2, 48.82751, 2.118757
 Supercharger FR-Pau, 43.332257, -0.358762
 Supercharger-V3 FR-Perigueux, 45.152424, 0.789938
+Supercharger-V3 FR-Poitiers Sud, 46.548393, 0.296635
 Supercharger FR-Poitiers, 46.670356, 0.362651
 Supercharger-V3 FR-Reims-Tinqueux, 49.252931, 3.975959
+Supercharger-V3 FR-Rennes Cleunay, 48.10396222, -1.7122015
 Supercharger FR-Rennes, 48.082064, -1.684180
+Supercharger-V3 FR-Riom, 45.89550865, 3.1378776
 Supercharger-V3 FR-Rivesaltes,42.775351,2.908241
+Supercharger-V3 FR-Rodez, 44.3783, 2.564829
+Supercharger-V3 FR-Roissy-en-, 48.985279, 2.510685
 Supercharger FR-Rouen, 49.388964, 1.059818
 Supercharger FR-Rouvignies, 50.336704, 3.455931
 Supercharger FR-Rungis, 48.7544317, 2.3510298
 Supercharger FR-Saint-Brieuc, 48.493466, -2.7226299
+Supercharger-V3 FR-Saint-Chamond, 45.461071, 4.494828
+Supercharger-V3 FR-Saint-Dizier, 48.623657, 4.963378
+Supercharger-V3 FR-Saint-Dié-des-Vosges, 48.29337153, 6.93653259
+Supercharger-V3 FR-Saint-Gaudens, 43.11655, 0.767059
+Supercharger-V3 FR-Saint-Jean-de-Maurienne, 45.26639202, 6.37274261
 Supercharger-V3 FR-Saint-Julien-en-Genevois,46.129633,6.087681,16
 Supercharger-V3 FR-Saint-Julien-en-Genevois,46.129901,6.087538,16
+Supercharger-V3 FR-Saint-Louis, 47.605065, 7.543048
+Supercharger-V3 FR-Saint-Quentin, 49.859531, 3.25422
 Supercharger FR-Saintes, 45.7500261, -0.6616366
 Supercharger-V3 FR-Salaise-sur-Sanne,45.3271326,4.805307
-Supercharger-V3 FR-Sallanches,45.952671,6.628494
 Supercharger FR-Sallanches, 45.951545, 6.62879
+Supercharger-V3 FR-Sallanches,45.952671,6.628494
 Supercharger FR-Senlis, 49.208545, 2.606701
 Supercharger-V3 FR-Sisteron,44.22584,5.912426,30
 Supercharger FR-Sisteron,44.225891,5.913562,10
 Supercharger FR-Strasbourg, 48.53407, 7.70201
+Supercharger FR-Tesla - Montbéliard, 47.5005812, 6.8123432
 Supercharger FR-Thiais,48.754759,2.373078
 Supercharger FR-Toulouse, 43.769238, 1.361623
 Supercharger-V3 FR-Tournus, 46.577333, 4.899973, 55
+Supercharger FR-Tours Sud, 47.32476, 0.713971
 Supercharger FR-Tours, 47.406937,0.742856
 Supercharger FR-Troyes - Saint-Parres-aux-Tertres, 48.293229, 4.130685
 Supercharger FR-Val-de-Meuse, 47.99147, 5.51296
 Supercharger FR-Valence, 44.91894, 4.878101
-Supercharger-V3 FR-Vélizy 2,48.78399,2.220896,20
+Supercharger-V3 FR-Vannes, 47.67735752, -2.80353239
+Supercharger-V3 FR-Varennes-Vauzelles, 47.02483978, 3.14726396
+Supercharger-V3 FR-Varneville-Bretteville, 49.645036, 1.046589
+Supercharger-V3 FR-Verniolle, 43.074792, 1.640626
 Supercharger FR-Vienne, 45.58748, 4.78751
+Supercharger-V3 FR-Vierzon, 47.245792, 2.068988
+Supercharger-V3 FR-Villedieu-les-Poêles-Rouffigny, 48.84698355, -1.21082205
+Supercharger-V3 FR-Vélizy 2,48.78399,2.220896,20
+Supercharger-V3 FR-Épinal, 48.2008301, 6.4774781
+Supercharger-V3 FR-Évry-Courcouronnes, 48.616299, 2.423207
 Supercharger GB-Abington, 55.507944, -3.694786
 Supercharger-V3 GB-Amesbury, 51.177215, -1.756282
 Supercharger GB-Aviemore, 57.189774, -3.836206
@@ -994,281 +1099,1845 @@ Supercharger SK-Bratislava, 48.132138, 17.108438
 Supercharger SK-Demänová, 49.054815, 19.579253
 Supercharger-V3 SK-Košice, 48.695151,21.235604
 Supercharger SK-Zvolen, 48.627379, 19.103481
+Supercharger-V3 US-Abbott TX, 31.899572, -97.091485
+Supercharger US-Aberdeen MD, 39.498524, -76.230515
+Supercharger-V3 US-Aberdeen MD - Churchville Road, 39.52892, -76.1946
+Supercharger US-Aberdeen WA, 46.976424, -123.813948
+Supercharger-V3 US-Abingdon MD - Woodsdale Road, 39.4654, -76.31065
+Supercharger-V3 US-Abingdon VA, 36.71248, -81.92929
 Supercharger US-Acworth GA,34.075813,-84.652334
+Supercharger-V3 US-Adairsville GA , 34.377811, -84.914561
+Supercharger-V3 US-Aiea HI (Ground Floor), 21.382141, -157.940644
+Supercharger-V3 US-Alachua FL, 29.79751, -82.50169
+Supercharger US-Alameda CA, 37.756786, -122.249458
+Supercharger-V3 US-Alamosa CO, 37.46734, -105.868573
+Supercharger US-Albany NY, 42.710558, -73.819182
+Supercharger US-Albert Lea MN - Happy Trails Lane, 43.657705, -93.317706
+Supercharger US-Albuquerque NM,35.108563,-106.612715
+Supercharger-V3 US-Albuquerque NM - Louisiana Boulevard Northeast, 35.104445, -106.56624
+Supercharger US-Alexandria LA, 31.31214, -92.446881
+Supercharger-V3 US-Alexandria MN, 45.850448, -95.389237
+Supercharger-V3 US-Algonquin IL, 42.1719913, -88.33631595
+Supercharger-V3 US-Alhambra CA, 34.087135, -118.151192
+Supercharger-V3 US-Allentown PA, 40.588912, -75.55995
+Supercharger US-Alpharetta GA, 34.071317, -84.27505
+Supercharger US-Altamonte Springs FL, 28.664516, -81.381943
+Supercharger US-Altoona IA, 41.6642, -93.465622
+Supercharger US-Altoona PA, 40.499187, -78.392213
+Supercharger-V3 US-Alturas CA, 41.495365, -120.55955
 Supercharger US-Amarillo TX, 35.189094, -101.931492
+Supercharger-V3 US-Amarillo TX - East Interstate 40, 35.193177, -101.744968
+Supercharger US-Anaheim CA, 33.866571, -117.747219
+Supercharger-V3 US-Anaheim CA - East Katella Avenue, 33.805025, -117.88263
+Supercharger US-Angola IN, 41.699428, -85.000283
+Supercharger US-Ann Arbor MI, 42.240917, -83.766393
 Supercharger US-Annapolis MD, 38.980072,-76.540796
+Supercharger US-Antioch CA, 37.96276, -121.737539
+Supercharger-V3 US-Apopka FL, 28.65399, -81.46924
+Supercharger-V3 US-Arcadia FL, 27.20918, -81.83831
+Supercharger-V3 US-Archdale NC, 35.899058, -79.945798
 Supercharger US-Ardmore OK,34.179246,-97.1656
 Supercharger US-Arlington TX, 32.754621, -97.082784
-Supercharger US-Albuquerque NM,35.108563,-106.612715
-Supercharger US-Altoona IA, 41.6642, -93.465622
+Supercharger-V3 US-Arlington TX - East Bardin Road, 32.670205, -97.113473
+Supercharger US-Arlington VA (Pay to Park Floor 5), 38.887481, -77.092956
+Supercharger US-Arlington WA, 48.212506, -122.18307
+Supercharger-V3 US-Arnold CA, 38.239152, -120.364871
+Supercharger-V3 US-Arroyo Grande CA - W Branch Rd, 35.126387, -120.596517
+Supercharger-V3 US-Ashburn VA, 39.009092, -77.502241
 Supercharger US-Asheville NC, 35.531388, -82.604514
+Supercharger-V3 US-Asheville NC - 4 South Tunnel Road, 35.58188, -82.5238
+Supercharger-V3 US-Asheville NC - South Tunnel Road, 35.58424, -82.523956
+Supercharger-V3 US-Asheville NC - Thetford Street, 35.484166, -82.557525
+Supercharger-V3 US-Ashland NH, 43.69813, -71.64043
+Supercharger-V3 US-Ashland OH - Enterprise Parkway, 40.859396, -82.268051
+Supercharger-V3 US-Ashland OR, 42.182731, -122.662758
+Supercharger-V3 US-Ashland VA, 37.74626, -77.47261
+Supercharger US-Aspen CO, 39.206288, -106.858721
 Supercharger US-Atascadero CA,35.486605,-120.666411
+Supercharger US-Athens AL, 34.786312, -86.942384
+Supercharger US-Athens GA, 33.916517, -83.452416
+Supercharger-V3 US-Atkins VA, 36.86497, -81.43316
+Supercharger-V3 US-Atlanta GA (Floor P2), 33.794099, -84.395929
+Supercharger US-Atlanta GA - Lenox Road (Floor 1), 33.847056, -84.360083
+Supercharger US-Atlanta GA - Peachtree Road, 33.84832, -84.363937
 Supercharger US-Auburn MA, 42.203788, -71.832927
+Supercharger US-Auburn AL, 32.627995, -85.4451
+Supercharger-V3 US-Auburn AL - South College Street, 32.576339, -85.498239
+Supercharger-V3 US-Auburn CA, 38.926307, -121.056974
+Supercharger US-Auburn Hills MI, 42.707498, -83.289748
+Supercharger US-Auburn WA, 47.29803, -122.24873
 Supercharger US-Augusta GA - Belair Frontage Road,33.481707,-82.13021
 Supercharger US-Augusta ME, 44.347861,-69.786019
+Supercharger-V3 US-Aurora IL - IL-59, 41.767675, -88.206166
 Supercharger US-Austin TX,30.329202,-97.706266
+Supercharger-V3 US-Austin TX - 5601 Brodie Lane, 30.225862, -97.822625
+Supercharger US-Austin TX - Century Oaks Terrace (Floor 2), 30.403355, -97.724276
+Supercharger-V3 US-Austin TX - FM 969, 30.254696, -97.606458
+Supercharger-V3 US-Austin TX - Frontage Road, 30.162883, -97.792096
+Supercharger US-Austin TX - Research Boulevard, 30.389562, -97.739544
+Supercharger-V3 US-Austin TX - South Congress Avenue (Pay to Park Floor B1), 30.247825, -97.749866
+Supercharger-V3 US-Avenel NJ, 40.57703077, -74.28747656
+Supercharger US-Aventura FL, 25.97051, -80.1411
+Supercharger US-Aventura FL (Floor 1E), 25.959482, -80.142374
+Supercharger-V3 US-Azusa CA, 34.1371556, -117.9081369
+Supercharger-V3 US-Bad Axe MI, 43.82364, -83.00494
+Supercharger US-Baileyville ME, 45.12327, -67.347461
 Supercharger US-Baker CA, 35.262512, -116.080666
 Supercharger US-Baker City OR,44.783068,-117.81242
-Supercharger US-Bay City MI, 43.622212, -83.932216
-Supercharger-V3 US-Bishop CA, 37.360582,-118.396552
-Supercharger US-Birmingham AL, 33.525915,-86.806862
-Supercharger-V3 US-Beaver UT - 525 W,38.2489777,-112.652765
-Supercharger US-Bowling Green KY, 36.955168, -86.438863
-Supercharger US-Brewer ME, 44.775854,-68.734722
-Supercharger-V3 US-Brighton CO, 39.971947, -104.74852
-Supercharger US-Bristol TN, 36.591663, -82.261292
-Supercharger-V3 US-Brunswick GA,31.246021,-81.501863
-Supercharger US-Buford GA, 34.061649, -83.994602
 Supercharger US-Bakersfield CA,35.354621,-119.33163
+Supercharger-V3 US-Bakersfield CA - Camino Del Rio Ct, 35.382684, -119.047467
+Supercharger-V3 US-Bakersfield CA - South Enos Lane, 35.26671, -119.252869
+Supercharger-V3 US-Baltimore MD, 39.27657, -76.55416
+Supercharger-V3 US-Baltimore MD - Boston Street, 39.275253, -76.564309
+Supercharger US-Baltimore MD - McHenry Row, 39.268618, -76.598867
+Supercharger-V3 US-Baltimore MD - South Caton Avenue, 39.268956, -76.669363
+Supercharger US-Bandon OR, 43.121929, -124.398992
+Supercharger US-Barnegat NJ, 39.759236, -74.253469
+Supercharger US-Barstow CA, 34.849329, -117.083069
+Supercharger-V3 US-Barstow CA - East Virginia Way, 34.886438, -117.019894
+Supercharger-V3 US-Barstow CA - Tanger Way, 34.844597, -117.0857
+Supercharger-V3 US-Bartonsville PA, 41.00187, -75.27283
+Supercharger US-Basking Ridge NJ, 40.654995, -74.52935
+Supercharger-V3 US-Bastrop TX, 30.107006, -97.307187
+Supercharger US-Baton Rouge LA, 30.42370033, -91.15459277
+Supercharger-V3 US-Baton Rouge LA - Highland Road, 30.348898, -91.028117
+Supercharger US-Baxter MN, 46.379401, -94.256394
+Supercharger US-Bay City MI, 43.622212, -83.932216
+Supercharger-V3 US-Bay Shore NY, 40.727885, -73.276951
+Supercharger-V3 US-Baytown TX, 29.801606, -94.998612
+Supercharger-V3 US-Bealeton VA, 38.6196, -77.80027
+Supercharger US-Beatty NV, 36.913694, -116.753253
+Supercharger-V3 US-Beaumont CA, 33.9229, -116.9523
+Supercharger-V3 US-Beaver UT - 525 W,38.2489777,-112.652765
+Supercharger-V3 US-Beaver Dam KY, 37.377274, -86.825882
+Supercharger-V3 US-Beavercreek OH, 39.775871, -84.075844
+Supercharger-V3 US-Beaverton OR, 45.501107, -122.809638
+Supercharger-V3 US-Bee Cave TX, 30.30525, -97.941571
+Supercharger-V3 US-Bel Air MD, 39.56919, -76.35363
+Supercharger-V3 US-Belgrade MT, 45.77317, -111.198921
+Supercharger-V3 US-Bell CA - 4416 Gage Avenue, 33.977815, -118.188883
+Supercharger US-Bellefonte PA, 40.913553, -77.737799
+Supercharger US-Bellevue WA (Pay to Park Floor P1), 47.610704, -122.20175
+Supercharger-V3 US-Beltsville MD, 39.027495, -76.91802
+Supercharger-V3 US-Bemidji MN, 47.492032, -94.906976
+Supercharger US-Bend OR, 44.034763, -121.307963
+Supercharger-V3 US-Bensalem PA, 40.125444, -74.963758
+Supercharger-V3 US-Benson NC, 35.374028, -78.542285
+Supercharger-V3 US-Benton Harbor MI, 42.08242321, -86.42404321
+Supercharger US-Berlin VT, 44.212652, -72.575233
+Supercharger US-Bethany MO, 40.265386, -94.015792
+Supercharger-V3 US-Bethel ME, 44.424719, -70.797333
+Supercharger-V3 US-Bethesda MD - Elm Street (Pay to Park Floor 1), 38.982073, -77.098044
+Supercharger US-Big Sur CA - Ventana, 36.226594, -121.761469
+Supercharger-V3 US-Big Pine Key FL, 24.673307, -81.356387
+Supercharger US-Big Rapids MI, 43.689532, -85.515481
+Supercharger US-Big Sky MT, 45.260115, -111.307197
+Supercharger US-Big Timber MT, 45.83653, -109.943514
+Supercharger US-Billings MT, 45.734828, -108.605244
+Supercharger-V3 US-Billings MT -  North Frontage Road, 45.816828, -108.416569
+Supercharger US-Binghamton NY (No Amenities), 42.145558, -75.902388
+Supercharger US-Birmingham AL, 33.525915,-86.806862
+Supercharger-V3 US-Bishop CA, 37.360582,-118.396552
+Supercharger-V3 US-Bismarck ND, 46.833065, -100.807401
+Supercharger-V3 US-Black River Falls WI, 44.293899, -90.826278
+Supercharger-V3 US-Blaine MN, 45.125867, -93.258022
+Supercharger US-Blaine WA, 48.937071, -122.66839
+Supercharger US-Blanding UT, 37.62611, -109.47353
+Supercharger-V3 US-Bloomington IN, 39.165311, -86.579114
+Supercharger-V3 US-Bloomington MN, 44.86017449, -93.3101358
+Supercharger US-Bloomsburg PA, 41.016388, -76.492779
+Supercharger-V3 US-Boardman OR, 45.840945, -119.685074
+Supercharger-V3 US-Boca Raton FL (Floor 2), 26.361663, -80.13276
+Supercharger US-Boise ID, 43.592633, -116.280653
+Supercharger-V3 US-Bolingbrook IL, 41.722252, -88.037124
+Supercharger US-Boonton NJ, 40.907481, -74.397943
+Supercharger US-Boston MA - Allstate Road (Floor 6), 42.325504, -71.063523
+Supercharger US-Boston MA - Boylston Street (Pay to Park Floor P1), 42.346397, -71.081032
+Supercharger US-Boston MA - Richard B. Ross Way (Pay to Park Floor P3), 42.344862, -71.099165
+Supercharger US-Bothell WA, 47.767193, -122.191614
+Supercharger US-Boulder CO, 40.02021, -105.25727
+Supercharger-V3 US-Boulder CO - 28th Street, 40.031564, -105.257385
+Supercharger-V3 US-Bowie MD, 38.95631, -76.82489
+Supercharger US-Bowling Green KY, 36.955168, -86.438863
+Supercharger-V3 US-Boynton Beach FL, 26.53195, -80.08852
+Supercharger US-Bozeman MT, 45.699512, -111.063219
+Supercharger US-Braintree MA (Floor 2), 42.223902, -71.022958
+Supercharger US-Brandon FL, 27.940439, -82.3223
+Supercharger-V3 US-Brandywine MD, 38.66435, -76.87625
+Supercharger-V3 US-Brattleboro VT, 42.838603, -72.56546
+Supercharger US-Brea CA, 33.919237, -117.902249
+Supercharger-V3 US-Brea CA, 33.914603, -117.883758
+Supercharger US-Breezewood PA, 39.999619, -78.238693
+Supercharger-V3 US-Breezewood PA - Lincoln Highway, 39.999267, -78.235732
+Supercharger-V3 US-Brentwood MO, 38.62646664, -90.3441559
+Supercharger-V3 US-Brentwood TN - Old Hickory Boulevard, 36.042359, -86.777834
+Supercharger US-Brewer ME, 44.775854,-68.734722
+Supercharger-V3 US-Brewster NY, 41.391948, -73.594935
+Supercharger-V3 US-Bridgewater NJ, 40.56810672, -74.56398239
+Supercharger-V3 US-Brighton CO, 39.971947, -104.74852
+Supercharger-V3 US-Brinkley AR, 34.904861, -91.199112
+Supercharger US-Bristol TN, 36.591663, -82.261292
+Supercharger-V3 US-Bristol PA, 40.11822664, -74.84437297
+Supercharger-V3 US-Bristol VA, 36.628234, -82.148613
+Supercharger-V3 US-Bristol VA - Euclid Avenue, 36.601737, -82.191193
+Supercharger-V3 US-Broadview Heights OH - Great Lakes Service Plaza, 41.291648, -81.671326
+Supercharger US-Bronx NY - Bay Plaza (Pay to Park Floor 2), 40.865091, -73.82944
+Supercharger US-Brooklyn NY - Atlantic Avenue (Pay to Park Floor P2), 40.684787, -73.976021
+Supercharger US-Brooklyn NY - Brooklyn Museum (Pay to Park), 40.669848, -73.962294
+Supercharger US-Brooklyn NY - N. 12th Street (Valet & Pay to Park), 40.721853, -73.956658
+Supercharger-V3 US-Brooklyn OH, 41.422295, -81.7593417
+Supercharger-V3 US-Brooksville FL, 28.52286, -82.2306
+Supercharger-V3 US-Brownsville TX, 25.950691, -97.487778
+Supercharger-V3 US-Brunswick GA,31.246021,-81.501863
+Supercharger US-Brush CO, 40.271063, -103.621782
+Supercharger-V3 US-Buckeye AZ, 33.442529, -112.556665
+Supercharger US-Buena Park CA - Beach Boulevard (Floor 3), 33.86051, -117.997837
+Supercharger-V3 US-Buffalo Grove IL, 42.167827, -87.924599
+Supercharger US-Buffalo NY, 42.967944, -78.696643
+Supercharger US-Buford GA, 34.061649, -83.994602
+Supercharger-V3 US-Burbank CA - North San Fernando Boulevard, 34.187405, -118.317839
+Supercharger US-Burbank CA - North Third Street (Floor 2), 34.184958, -118.311537
+Supercharger-V3 US-Burbank CA - North Victory Boulevard, 34.179153, -118.321686
 Supercharger US-Burleson TX, 32.464365,-97.26451
 Supercharger-V3 US-Burley ID,42.561592,-113.790105
-Supercharger-V3 US-Bolingbrook IL, 41.722252, -88.037124
+Supercharger-V3 US-Burlington MA, 42.483636, -71.217466
+Supercharger US-Burlington NJ, 40.10185, -74.794044
+Supercharger US-Burlington NC, 36.070929, -79.509922
+Supercharger US-Burlington WA, 48.509076, -122.33726
+Supercharger-V3 US-Burlington WA - Old Highway 99 North, 48.509422, -122.337786
+Supercharger US-Butte MT, 45.981768, -112.508033
+Supercharger US-Buttonwillow CA, 35.400652, -119.397576
+Supercharger-V3 US-Buttonwillow CA - Cal Club Rd (No Amenities), 35.498433, -119.546824
 Supercharger US-Cabazon CA,33.931388,-116.820265
 Supercharger US-Cadillac MI,44.282661,-85.403062
+Supercharger-V3 US-Calabasas CA, 34.154687, -118.645173
+Supercharger-V3 US-California MD, 38.30276, -76.52208
 Supercharger US-Cambridge OH, 40.003559, -81.574903
+Supercharger US-Cambridge MA (Pay to Park Floor G1), 42.367087, -71.075918
+Supercharger-V3 US-Cameron Park CA, 38.655624, -120.965536
+Supercharger-V3 US-Canoe Creek FL - Florida Turnpike Service Plaza, 28.095314, -81.274626
+Supercharger-V3 US-Cape Girardeau MO, 37.348646, -89.598039
+Supercharger US-Cape May Court House NJ, 39.088296, -74.821792
+Supercharger-V3 US-Carle Place NY, 40.744608, -73.616388
+Supercharger US-Carlisle PA, 40.233659, -77.119049
+Supercharger US-Carlsbad CA, 33.083684, -117.266409
+Supercharger-V3 US-Carlsbad CA - Paseo Del Norte, 33.123825, -117.31933
 Supercharger-V3 US-Carlton MN,46.664937,-92.477709
+Supercharger US-Carmel IN, 39.972061, -86.151754
+Supercharger-V3 US-Carmel IN - Illinois Street, 39.954505, -86.162684
+Supercharger-V3 US-Carneys Point NJ, 39.6851847, -75.48345337
 Supercharger US-Cary NC,35.843593,-78.886314
+Supercharger-V3 US-Cary NC - Bass Pro Lane, 35.830287, -78.769131
+Supercharger US-Casa Grande AZ, 32.879134, -111.682551
+Supercharger-V3 US-Castaic CA (No Amenities), 34.452692, -118.616072
 Supercharger US-Catoosa OK, 36.167589, -95.766032
+Supercharger-V3 US-Cayce SC, 33.928145, -81.07838
 Supercharger US-Cedar City UT,37.605961,-113.1612
+Supercharger-V3 US-Cedar Rapids IA, 41.955992, -91.658776
+Supercharger-V3 US-Cedar Park TX, 30.524626, -97.819173
+Supercharger US-Celebration FL, 28.330973, -81.533956
+Supercharger-V3 US-Centennial CO, 39.567031, -104.87806
+Supercharger-V3 US-Centerville TX, 31.259556, -95.985289
+Supercharger-V3 US-Central Valley NY, 41.312976, -74.124863
 Supercharger US-Centralia WA,46.729893,-122.977271
+Supercharger US-Cerritos CA - Los Cerritos Center, 33.864341, -118.091923
+Supercharger US-Champaign IL, 40.146441, -88.26002
+Supercharger-V3 US-Chandler AZ, 33.319172, -111.896566
 Supercharger US-Channelview TX, 29.784662, -95.110606
 Supercharger US-Chantilly VA, 38.913606,-77.486836
+Supercharger-V3 US-Chapel Hill NC, 35.970065, -79.064258
 Supercharger US-Charleston WV, 38.35475, -81.642864
+Supercharger US-Charlotte NC - Toringdon Way,35.069109,-80.842119
+Supercharger-V3 US-Charlotte NC -  Metropolitan Avenue (Floor P6), 35.2128269, -80.8352693
+Supercharger-V3 US-Charlotte NC - Northlake Centre Parkway, 35.347297, -80.859002
+Supercharger US-Charlottesville VA, 38.067383, -78.493376
+Supercharger-V3 US-Charlottesville VA - Proffit Road, 38.13245, -78.43488
 Supercharger-V3 US-Charlton MA (EB),42.139226,-72.025781
 Supercharger-V3 US-Charlton MA (WB),42.156811,-71.962966
-Supercharger US-Charlotte NC - Toringdon Way,35.069109,-80.842119
 Supercharger US-Chattanooga TN,35.038706,-85.195937
+Supercharger-V3 US-Chattanooga TN - Hamilton Place Boulevard, 35.037015, -85.160024
+Supercharger-V3 US-Cheektowaga NY, 42.90768, -78.76212
+Supercharger-V3 US-Cherry Hill NJ - Haddonfield Road, 39.92585614, -75.03208362
+Supercharger-V3 US-Cherry Hill NJ - Walt Whitman, 39.8867, -75.001939
+Supercharger-V3 US-Chesapeake VA, 36.65758, -76.22478
+Supercharger US-Chester VA, 37.367014, -77.416555
+Supercharger-V3 US-Chesterfield MO - North Outer 40 Road, 38.670555, -90.5895
 Supercharger-V3 US-Chestertown NY, 43.665431,-73.784933
+Supercharger US-Chestnut Hill MA, 42.32218, -71.17228
+Supercharger-V3 US-Chevy Chase MD (Floor L1), 38.99634, -77.075218
+Supercharger US-Cheyenne WY, 41.160986, -104.80452
+Supercharger-V3 US-Chicago IL - Elston Avenue (Floor 1), 41.92828952, -87.6857581
+Supercharger US-Chicago IL - North Broadway (Floor 3), 41.937097, -87.644406
+Supercharger US-Chicago IL - North Columbus Drive (Pay to Park Floor L), 41.886732, -87.619782
+Supercharger US-Chicago IL - North Halsted (Pay to Park Floor 7), 41.908572, -87.6481
+Supercharger US-Chicago IL - O'Hare, 41.998603, -87.888601
+Supercharger US-Chicago IL - South Canal Street (Pay to Park Floor 5), 41.869036, -87.640652
+Supercharger-V3 US-Chicago IL - South Pulaski Road, 41.81328, -87.722683
+Supercharger US-Chico CA, 39.727156, -121.803084
+Supercharger-V3 US-Chicopee MA, 42.175294, -72.57787
 Supercharger US-Childress TX,34.435278,-100.2319
-Supercharger-V3 US-Chillicothe OH, 39.358367, -82.977389
 Supercharger US-Childress TX, 34.432503, -100.218625
+Supercharger-V3 US-Chillicothe OH, 39.358367, -82.977389
+Supercharger-V3 US-Chino Hills CA, 34.002301, -117.730277
+Supercharger-V3 US-Chipley FL, 30.75184, -85.55166
+Supercharger-V3 US-Chowchilla CA, 37.126541, -120.247546
+Supercharger-V3 US-Chula Vista CA, 32.648807, -116.967934
+Supercharger-V3 US-Chula Vista CA - Telegraph Canyon Road, 32.62894, -117.041402
 Supercharger US-Cincinnati OH Marburg Avenue, 39.162772, -84.426492
 Supercharger US-Cincinnati OH Blue Ash Road, 39.224481,-84.383907
+Supercharger US-Cisco TX, 32.374516, -99.00665
+Supercharger-V3 US-City of Industry CA - Gale Avenue, 33.994565, -117.900358
+Supercharger US-Clare MI,43.820301,-84.766746
+Supercharger-V3 US-Clarksburg NJ, 40.157971, -74.429527
+Supercharger US-Claymont DE, 39.81808, -75.457775
+Supercharger-V3 US-Claymont DE - Philadelphia Pike, 39.794166, -75.469254
+Supercharger-V3 US-Claysburg PA, 40.273747, -78.459841
+Supercharger-V3 US-Clayton NM, 36.449444,-103.181929
+Supercharger US-Cle Elum WA, 47.188558, -120.902861
+Supercharger-V3 US-Cle Elum WA - West Davis Street, 47.195239, -120.956153
+Supercharger US-Clearwater MN, 45.411954,-94.054901
+Supercharger-V3 US-Clearwater FL, 28.013251, -82.735903
+Supercharger US-Clinton Corners NY, 41.825978, -73.770942
+Supercharger-V3 US-Clovis CA, 36.836658, -119.697632
+Supercharger-V3 US-Coalinga CA, 36.254418, -120.238437
+Supercharger-V3 US-Coeur d'Alene ID, 47.70835, -116.794488
+Supercharger US-Colby KS, 39.362374, -101.054082
 Supercharger-V3 US-Colfax NC, 36.09507,-79.994715
+Supercharger-V3 US-College Station TX - Texas Avenue South, 30.612892, -96.317329
+Supercharger-V3 US-Collinsville IL, 38.67340461, -90.01328374
+Supercharger-V3 US-Colonial Heights VA, 37.3055, -77.40843
 Supercharger US-Colorado Springs CO,38.837485,-104.824858
 Supercharger US-Columbia MO, 38.957869, -92.252786
+Supercharger-V3 US-Columbia MO - West Broadway, 38.954732, -92.382939
+Supercharger-V3 US-Columbia NJ, 40.93490785, -75.10137813
+Supercharger US-Columbia SC, 34.106418, -80.951623
+Supercharger-V3 US-Columbia SC - Harbison Boulevard, 34.0739801, -81.15490964
+Supercharger-V3 US-Columbia SC - Town Center Place, 34.127001, -80.87812
+Supercharger-V3 US-Columbus GA, 32.533103, -84.970795
+Supercharger-V3 US-Columbus IN, 39.1337, -85.96109
+Supercharger-V3 US-Columbus OH - Hilliard Rome Road, 39.983566, -83.150636
+Supercharger US-Columbus OH Supercharger, 39.974322, -83.000802
+Supercharger US-Columbus TX, 29.690149, -96.53853
+Supercharger-V3 US-Commerce CA, 34.003692, -118.15023
+Supercharger US-Concord CA, 37.972185, -122.056622
+Supercharger-V3 US-Concord CA - Diamond Blvd, 37.969792, -122.058611
+Supercharger-V3 US-Concord NH, 43.2883, -71.5799
+Supercharger-V3 US-Concordia MO, 38.98976488, -93.56660952
 Supercharger-V3 US-Conifer CO - Conifer Road, 39.54408, -105.290051
-Supercharger US-Clare MI,43.820301,-84.766746
-Supercharger US-Clearwater MN, 45.411954,-94.054901
-Supercharger-V3 US-Clayton NM, 36.449444,-103.181929
-Supercharger US-Council Bluffs IA, 41.22093,-95.835632
 Supercharger US-Cookeville TN, 36.155752,-85.515201
+Supercharger-V3 US-Coos Bay OR, 43.366333, -124.215585
+Supercharger-V3 US-Copiague NY, 40.688883, -73.406437
+Supercharger-V3 US-Copperopolis CA, 37.972472, -120.652806
 Supercharger US-Coralville IA, 41.680508, -91.591347
+Supercharger-V3 US-Cordele GA, 31.963608, -83.766394
+Supercharger US-Cordes Lakes AZ, 34.327613, -112.118572
+Supercharger US-Corning CA, 39.926618, -122.197775
+Supercharger US-Corona CA, 33.826735, -117.515369
+Supercharger-V3 US-Corpus Christi TX, 27.71029, -97.369275
 Supercharger US-Corsicana TX, 32.0686, -96.448217
+Supercharger US-Corte Madera CA, 37.928217, -122.514879
+Supercharger-V3 US-Costa Mesa CA, 33.6925, -117.92529
+Supercharger-V3 US-Cottondale AL, 33.17466, -87.450076
+Supercharger-V3 US-Cottonwood CA, 40.389169, -122.287832
+Supercharger US-Council Bluffs IA, 41.22093,-95.835632
+Supercharger US-Country Club Hills IL, 41.585151, -87.721535
+Supercharger-V3 US-Covington LA, 30.443562, -90.140745
+Supercharger-V3 US-Craig CO, 40.514181, -107.538781
 Supercharger US-Cranberry Township PA, 40.683579, -80.108262
+Supercharger-V3 US-Cranbury NJ, 40.32217, -74.487087
+Supercharger-V3 US-Cranford NJ, 40.65824512, -74.28822204
+Supercharger US-Crescent City CA, 41.752517, -124.194275
+Supercharger-V3 US-Crestview FL, 30.733856, -86.566375
+Supercharger-V3 US-Crossville TN, 35.98424, -85.0109
+Supercharger-V3 US-Crystal River FL, 28.898709, -82.58687
+Supercharger US-Culver City CA, 33.98619, -118.39057
+Supercharger-V3 US-Culver City CA - 11924 Washington Blvd (Floor 1), 33.997772, -118.420557
+Supercharger US-Cupertino CA (Floor 2), 37.324211, -122.008437
+Supercharger-V3 US-Cupertino CA - Stevens Creek Boulevard, 37.324894, -122.037219
+Supercharger US-Custer SD, 43.766918, -103.59533
+Supercharger-V3 US-Cutler Bay FL , 25.598312, -80.371743
+Supercharger-V3 US-Cypress CA, 33.804303, -118.044193
+Supercharger-V3 US-D'Iberville MS, 30.458624, -88.893658
 Supercharger US-Dallas TX - North Central Expressway,32.88102,-96.769588
+Supercharger-V3 US-Dallas TX - Mountain Creek Parkway, 32.672274, -96.968816
+Supercharger US-Daly City CA (Floor 5), 37.673343, -122.472475
+Supercharger-V3 US-Daly City CA - Mission Street, 37.697623, -122.464173
+Supercharger US-Danbury CT, 41.379489, -73.477627
+Supercharger-V3 US-Dansville NY, 42.5633082, -77.71211003
+Supercharger-V3 US-Danvers MA, 42.5855836, -70.9661514
+Supercharger-V3 US-Darien CT (NB), 41.079691, -73.462502
+Supercharger-V3 US-Darien CT (SB), 41.068042, -73.503258
+Supercharger-V3 US-Dartmouth MA, 41.640793, -70.99689
+Supercharger-V3 US-Davenport FL, 28.258136, -81.590488
+Supercharger US-Davenport IA, 41.576085, -90.513332
+Supercharger-V3 US-Davie FL, 26.092588, -80.24975
+Supercharger-V3 US-Davis CA, 38.542148, -121.725709
 Supercharger US-Dayton OH, 39.858615, -84.276928
 Supercharger-V3 US-Daytona Beach FL,29.183465,-81.078799
+Supercharger US-DeFuniak Springs FL, 30.720925, -86.116601
+Supercharger-V3 US-Decatur GA - East Ponce de Leon Avenue (Pay to Park), 33.7761226, -84.2955574
+Supercharger US-Dedham MA, 42.236421, -71.178365
 Supercharger-V3 US-Deerfield Beach FL,26.317051,-80.119156
+Supercharger-V3 US-Del Valle TX, 30.172965, -97.630774
+Supercharger US-Delray Beach FL, 26.455303, -80.190552
+Supercharger-V3 US-Deltona FL, 28.949941, -81.251472
+Supercharger US-Deming NM, 32.281674, -107.760737
+Supercharger-V3 US-Denison TX, 33.792946, -96.555505
 Supercharger US-Denton TX, 33.231528, -97.166391
+Supercharger-V3 US-Denton TX - South Interstate 35, 33.178823, -97.10218
 Supercharger US-Denver CO, 39.775097,-104.794655
+Supercharger-V3 US-Denver CO - 6691 Tower Road, 39.817907, -104.773319
+Supercharger-V3 US-Denver CO - Pontiac St, 39.717396, -104.905997
+Supercharger-V3 US-Denver CO - Tower Road, 39.804158, -104.770877
+Supercharger-V3 US-Denver PA, 40.20395186, -76.01675108
+Supercharger US-Deptford NJ, 39.833479, -75.097916
+Supercharger-V3 US-Detroit MI, 42.44641, -83.11892
+Supercharger US-Detroit Lake OR, 44.73704, -122.151999
+Supercharger-V3 US-Diamond Bar CA, 33.975922, -117.838337
+Supercharger-V3 US-Dickinson ND, 46.900718, -102.790345
 Supercharger US-Dickson TN, 36.018432, -87.332851
-Supercharger US-Dublin-Amador Plaza CA,37.702516,-121.924675
+Supercharger-V3 US-District Heights MD, 38.861181, -76.917983
+Supercharger-V3 US-Dobbs Ferry NY (Floor L1), 41.003806, -73.856174
+Supercharger-V3 US-Doral FL , 25.80622, -80.33778
+Supercharger-V3 US-Dothan AL, 31.2129473, -85.3614622
+Supercharger-V3 US-Douglasville GA,33.726865,-84.735714
+Supercharger US-Dover DE, 39.194688, -75.547935
+Supercharger US-Downey CA - Lakewood Boulevard, 33.953699, -118.112708
+Supercharger US-Downey CA - Stonewood Street, 33.934605, -118.120316
+Supercharger US-Dows IA, 42.674131, -93.461319
+Supercharger-V3 US-Doylestown PA, 40.300309, -75.128049
+Supercharger-V3 US-Draper UT, 40.526548, -111.886147
+Supercharger-V3 US-Dripping Springs TX, 30.195513, -97.998215
 Supercharger US-Dublin OH, 40.093198, -83.092261
+Supercharger US-Dublin CA - Dublin Boulevard, 37.702155, -121.852508
+Supercharger-V3 US-Dublin GA, 32.4906114, -82.9326978
+Supercharger US-Dublin-Amador Plaza CA,37.702516,-121.924675
 Supercharger US-Dubuque IA, 42.487438, -90.664024
 Supercharger US-Duluth MN, 46.784582, -92.102298
+Supercharger-V3 US-Duluth GA, 34.00026, -84.168532
 Supercharger-V3 US-Durham NC,35.953016,-78.990961
-Supercharger-V3 US-Douglasville GA,33.726865,-84.735714
-Supercharger US-Effingham IL,39.13713,-88.563387
-Supercharger US-Elko NV, 40.836298, -115.790796
-Supercharger US-Evanston WY, 41.26299,-110.985504
+Supercharger-V3 US-Dwight IL, 41.09371436, -88.44218057
+Supercharger-V3 US-Eagan MN, 44.795177, -93.205545
+Supercharger US-East Palo Alto CA, 37.460534, -122.137868
+Supercharger-V3 US-East Palo Alto CA - 1700 East Bayshore Road, 37.4606492, -122.1382061
+Supercharger-V3 US-East Point GA, 33.658283, -84.501366
+Supercharger-V3 US-East Templeton MA, 42.561076, -72.0405534
+Supercharger-V3 US-East Brunswick NJ, 40.416912, -74.444446
+Supercharger US-East Brunswick NJ - State Route 18, 40.424078, -74.380411
+Supercharger-V3 US-East Rutherford NJ (Pay to Park Floor D), 40.811689, -74.065723
+Supercharger-V3 US-East Hampton NY, 40.965519, -72.189778
+Supercharger US-East Greenwich RI, 41.660881, -71.497355
+Supercharger-V3 US-Easton MD, 38.759305, -76.061036
+Supercharger-V3 US-Easton PA, 40.73843122, -75.2629913
+Supercharger-V3 US-Eastvale CA - Limonite Ave, 33.975412, -117.555758
 Supercharger US-Eau Claire WI, 44.770877,-91.437202
+Supercharger-V3 US-Edgewater MD, 38.93618, -76.56736
+Supercharger-V3 US-Edison NJ, 40.544345, -74.334119
+Supercharger-V3 US-Edison NJ - U.S. Route 1, 40.506715, -74.393679
+Supercharger-V3 US-Edwards CO, 39.648124, -106.5877902
+Supercharger-V3 US-Edwardsville IL, 38.788818, -89.981418
+Supercharger US-Effingham IL,39.13713,-88.563387
+Supercharger US-Egg Harbor Township NJ, 39.392927, -74.561642
+Supercharger-V3 US-Ehrenberg AZ, 33.602156, -114.521724
 Supercharger US-El Paso TX,31.883934,-106.583629
+Supercharger US-El Centro CA, 32.761499, -115.534751
+Supercharger-V3 US-El Centro CA – Wake Avenue, 32.771316, -115.55063
+Supercharger US-El Cerrito CA, 37.898685, -122.300652
+Supercharger-V3 US-El Portal CA, 37.679316, -119.762721
+Supercharger-V3 US-El Dorado KS, 37.765733, -96.982574
+Supercharger-V3 US-Elgin IL, 42.0146788, -88.3351149
+Supercharger-V3 US-Elizabeth NJ, 40.663124, -74.174101
+Supercharger-V3 US-Elizabethtown KY, 37.67163, -85.84511
+Supercharger-V3 US-Elk Grove CA - 7119 Elk Grove Blvd, 38.409166, -121.418858
+Supercharger-V3 US-Elk Grove CA - Elk Grove Blvd, 38.409381, -121.390618
+Supercharger-V3 US-Elkhart IN - George Craig Travel Plaza, 41.73195, -86.00715
+Supercharger-V3 US-Elkhart IN - Henry Schricker Travel Plaza, 41.73255, -86.00293
+Supercharger US-Elko NV, 40.836298, -115.790796
+Supercharger US-Ellensburg WA, 46.97655, -120.54237
+Supercharger-V3 US-Ellensburg WA - Canyon Road, 46.978257, -120.543526
+Supercharger-V3 US-Ellsworth ME, 44.532524, -68.408756
+Supercharger-V3 US-Elverson PA, 40.121002, -75.775361
+Supercharger-V3 US-Elwood NJ, 39.550064, -74.734353
+Supercharger-V3 US-Emeryville CA - Christie Ave, 37.837517, -122.295135
+Supercharger-V3 US-Emporia KS, 38.414615, -96.21688
+Supercharger-V3 US-Entiat WA, 47.684532, -120.207198
+Supercharger-V3 US-Ephrata PA, 40.16394248, -76.15407447
+Supercharger-V3 US-Epsom NH, 43.226909, -71.359867
 Supercharger US-Erie PA, 42.049606,-80.086404
+Supercharger-V3 US-Erie PA - Perry Highway, 42.0655747, -80.03747385
+Supercharger US-Erwin NY, 42.171309, -77.107631
+Supercharger-V3 US-Escanaba MI, 45.7499987, -87.0856606
+Supercharger US-Estero FL Supercharger, 26.435708, -81.772149
+Supercharger US-Estes Park CO (Pay to Park), 40.38382, -105.519754
+Supercharger US-Eureka CA, 40.77928, -124.188612
+Supercharger US-Evanston WY, 41.26299,-110.985504
+Supercharger-V3 US-Evanston IL (Pay to Park Floor 2), 42.0500937, -87.6849313
+Supercharger-V3 US-Evansville WY, 42.84728, -106.21396
+Supercharger US-Evergreen Park IL, 41.724905, -87.683326
+Supercharger-V3 US-Exmore VA, 37.51626, -75.83206
+Supercharger-V3 US-Exton PA, 40.047859, -75.662831
+Supercharger-V3 US-Fair Oaks IN, 41.010997, -87.2763195
+Supercharger-V3 US-Fair Play SC, 34.50503, -82.96593
+Supercharger-V3 US-Fairfax VA, 38.85933, -77.35785
+Supercharger-V3 US-Fairfax VA - Fairfax Boulevard, 38.864868, -77.279091
+Supercharger US-Fairfield CA - Holiday Lane, 38.256883, -122.065391
+Supercharger US-Fairfield CA - Travis Boulevard, 38.261823, -122.052028
+Supercharger-V3 US-Fairfield CT - Northbound, 41.146469, -73.257238
+Supercharger-V3 US-Fairfield CT - Southbound, 41.147897, -73.255484
+Supercharger-V3 US-Fairmont WV, 39.47181, -80.15367
+Supercharger US-Falls Creek PA, 41.14129, -78.7848
+Supercharger-V3 US-Falls Church VA, 38.902051, -77.204177
+Supercharger-V3 US-Falmouth ME, 43.7333343, -70.29511238
+Supercharger-V3 US-Fargo ND, 46.84368, -96.881522
 Supercharger US-Farmington NM,36.766341,-108.144164
+Supercharger-V3 US-Farmington ME - Hannaford Drive, 44.651835, -70.150194
+Supercharger-V3 US-Farmville VA - S Main Street, 37.271789, -78.401803
 Supercharger US-Fayetteville NC,35.009743,-78.822333
+Supercharger-V3 US-Federal Way WA, 47.314731, -122.31485
+Supercharger-V3 US-Fernley NV, 39.609811, -119.220696
+Supercharger-V3 US-Findlay OH, 41.0597, -83.67082
 Supercharger-V3 US-Firebaugh CA,36.639163,-120.625873
+Supercharger US-Fish Camp CA, 37.47403, -119.637861
+Supercharger US-Fishers IN (Floor 3), 39.958357, -86.015943
 Supercharger-V3 US-Fishkill NY,41.526741,-73.894409
+Supercharger US-Flagstaff AZ, 35.174247, -111.663799
+Supercharger US-Flatonia TX, 29.69831, -97.10049
+Supercharger-V3 US-Flemington NJ, 40.505409, -74.851716
 Supercharger US-Florence SC,34.190258,-79.832607
+Supercharger-V3 US-Florence KY - Houston Road, 39.0117433, -84.6406556
+Supercharger-V3 US-Florence SC - North Williston Road, 34.27244003, -79.7042616
+Supercharger US-Florida City FL, 25.45645, -80.4746
+Supercharger-V3 US-Flossmoor IL, 41.528839, -87.709305
+Supercharger US-Flushing NY (Valet & Pay to Park), 40.761015, -73.829777
+Supercharger US-Folsom CA - Iron Point Rd., 38.642337, -121.188104
+Supercharger-V3 US-Folsom CA - Palladio Parkway, 38.64762, -121.118573
+Supercharger-V3 US-Fond du Lac WI, 43.791429, -88.486016
+Supercharger US-Fontana CA, 34.15128, -117.471555
+Supercharger-V3 US-Forks WA, 47.94305, -124.385307
 Supercharger-V3 US-Fort Pierce FL,27.416821,-80.381874
 Supercharger US-Fort Wayne IN, 41.138389, -85.163327
-Supercharger US-Frederick MD, 39.384667, -77.405375
-Supercharger US-Freeport ME, 43.858727,-70.104076
 Supercharger-V3 US-Fort Lauderdale FL,26.121011,-80.17706
 Supercharger US-Fort Stockton TX,30.905975,-102.884557
+Supercharger-V3 US-Fort Bragg CA, 39.421156, -123.805913
+Supercharger US-Fort Drum FL, 27.601605, -80.823354
+Supercharger-V3 US-Fort Lauderdale FL - East Sunrise Boulevard, 26.13664, -80.11697
+Supercharger-V3 US-Fort Lauderdale FL - Powerline Road, 26.202218, -80.155979
+Supercharger US-Fort Myers FL, 26.608176, -81.809961
+Supercharger-V3 US-Fort Myers FL - Gulf Coast Main Street, 26.488319, -81.785302
+Supercharger-V3 US-Fort Wayne IN - Illinois Road, 41.07426, -85.21852
+Supercharger-V3 US-Fort Washington PA, 40.13938822, -75.17239024
+Supercharger-V3 US-Fort Mill SC, 35.095561, -80.93532
+Supercharger US-Fort Worth TX - Whitmore Street, 32.758214, -97.353742
+Supercharger US-Fountain Valley CA, 33.702563, -117.934393
+Supercharger-V3 US-Fountain Valley CA - Warner Avenue, 33.715813, -117.964629
+Supercharger US-Framingham MA, 42.303338, -71.393807
+Supercharger-V3 US-Franklin MA, 42.090421, -71.424898
+Supercharger US-Franklin Park PA, 40.613146, -80.099976
+Supercharger US-Frederick MD, 39.384667, -77.405375
+Supercharger US-Fredericksburg VA, 38.225425, -77.506141
+Supercharger-V3 US-Fredericksburg VA - Jefferson Davis Highway, 38.19418, -77.50749
+Supercharger-V3 US-Freehold NJ, 40.238545, -74.228533
+Supercharger US-Freeport ME, 43.858727,-70.104076
+Supercharger-V3 US-Fremont CA, 37.492356, -121.946558
+Supercharger US-Fremont CA - 39201 Fremont Blvd, 37.544715, -121.983675
+Supercharger-V3 US-Fremont CA - Civic Center Drive, 37.554992, -121.9742
+Supercharger-V3 US-Fremont CA - Pacific Commons Boulevard, 37.502073, -121.967167
+Supercharger US-Fresno CA, 36.834368, -119.909391
+Supercharger-V3 US-Fresno CA - North Blackstone Avenue, 36.85009, -119.791168
+Supercharger-V3 US-Fresno CA - North Riverside Drive, 36.832867, -119.907905
+Supercharger-V3 US-Fullerton CA, 33.859834, -117.92203
 Supercharger US-Gainesville FL,29.624766,-82.376616
+Supercharger-V3 US-Gainesville FL - Northwest 39th Avenue, 29.68822, -82.44322
 Supercharger US-Gaithersburg MD, 39.118133,-77.202291
+Supercharger-V3 US-Gallup NM, 35.505553, -108.828563
+Supercharger-V3 US-Garden City NY, 40.741719, -73.613239
+Supercharger-V3 US-Gardendale AL, 33.65242955, -86.8096048
 Supercharger US-Gardnerville NV, 38.696494,-119.548509
 Supercharger-V3 US-Garner NC,35.60857,-78.563043
+Supercharger-V3 US-Gastonia NC, 35.260002, -81.124083
 Supercharger US-Gaylord MI, 45.025599, -84.722179
-Supercharger US-Giddings TX, 30.178965, -96.906996
-Supercharger US-Glen Allen VA, 37.669845, -77.461682
-Supercharger US-Goodland KS, 39.326284, -101.725034
+Supercharger-V3 US-Genoa OH - Blue Heron Service Plaza, 41.49043, -83.36756
+Supercharger-V3 US-Genoa OH - Wyandot Service Plaza, 41.49024, -83.36958
+Supercharger-V3 US-George WA, 47.081118, -119.861923
+Supercharger-V3 US-Georgetown TX, 30.632086, -97.694076
 Supercharger-V3 US-Gettysburg PA,39.84396,-77.198706
+Supercharger US-Giddings TX, 30.178965, -96.906996
+Supercharger-V3 US-Gila Bend AZ, 32.943663, -112.733862
+Supercharger US-Gillette WY, 44.292775, -105.52689
+Supercharger-V3 US-Gilman IL, 40.751987, -87.9963
 Supercharger-V3 US-Gilroy Camino Arroyo CA,37.001072,-121.553955
+Supercharger US-Gilroy CA, 37.02445, -121.56535
+Supercharger-V3 US-Girard OH, 41.149533, -80.699651
+Supercharger US-Glen Allen VA, 37.669845, -77.461682
+Supercharger-V3 US-Glen Mills PA, 39.88273, -75.53434
+Supercharger-V3 US-Glendale AZ, 33.537198, -112.262295
+Supercharger US-Glendale CA (Pay to Park Floor 7), 34.144497, -118.257393
+Supercharger-V3 US-Glendale CA - Harvey Drive, 34.147831, -118.227454
+Supercharger US-Glendale NY - Cooper Avenue (Pay to Park Floor 1), 40.708462, -73.8675
+Supercharger-V3 US-Glendale WI (Floor L2), 43.12089, -87.91637
+Supercharger-V3 US-Glendive MT, 47.126819, -104.693131
+Supercharger US-Glenview IL, 42.0774, -87.861229
+Supercharger US-Glenwood Springs CO, 39.552011, -107.340235
+Supercharger-V3 US-Gloucester MA, 42.622815, -70.65667
+Supercharger-V3 US-Goldsboro NC, 35.386985, -77.947868
+Supercharger-V3 US-Goleta CA, 34.429199, -119.873314
+Supercharger US-Goodland KS, 39.326284, -101.725034
+Supercharger US-Gothenburg NE, 40.917333, -100.170627
+Supercharger-V3 US-Granada Hills CA, 34.266462, -118.526744
 Supercharger US-Grand Rapids MI,42.914212,-85.533093
-Supercharger-V3 US-Greenfield CA,36.3293,-121.245518
+Supercharger US-Grand Junction CO, 39.091392, -108.604429
+Supercharger US-Grand Island NE, 40.829915, -98.379695
+Supercharger-V3 US-Grand Forks ND, 47.888156, -97.081138
+Supercharger US-Grants Pass OR, 42.460931, -123.324124
+Supercharger-V3 US-Grapevine TX, 32.941369, -97.065382
+Supercharger-V3 US-Grapevine TX - East Northwest Highway, 32.941268, -97.073727
+Supercharger US-Grasonville MD, 38.96576, -76.221193
+Supercharger-V3 US-Grasonville MD - Hissey Road, 38.965897, -76.193891
+Supercharger-V3 US-Great Barrington MA, 42.180357, -73.364433
+Supercharger-V3 US-Great Falls MT, 47.482817, -111.338089
 Supercharger US-Green River UT,38.993552,-110.140555
+Supercharger US-Greenbrae CA, 37.944669, -122.522257
+Supercharger-V3 US-Greenfield CA,36.3293,-121.245518
+Supercharger-V3 US-Greenfield WI, 42.960028, -87.987187
+Supercharger US-Greensboro NC, 36.05965, -79.908763
+Supercharger-V3 US-Greenville AL, 31.855527, -86.635308
+Supercharger-V3 US-Greenville NC, 35.60531, -77.40069
+Supercharger US-Greenville SC, 34.82495, -82.306634
+Supercharger-V3 US-Greenville SC - Haywood Road, 34.848315, -82.33945
+Supercharger US-Greenwich CT (NB), 41.040524, -73.672917
+Supercharger US-Greenwich CT (SB), 41.041965, -73.672265
+Supercharger US-Grenada MS, 33.78664, -89.849622
+Supercharger-V3 US-Grinnell IA, 41.699888, -92.726323
 Supercharger US-Grove City OH, 39.877185, -83.063419
+Supercharger-V3 US-Grove City PA, 41.143856, -80.157427
+Supercharger US-Groveland CA (Limited Amenities), 37.8388, -120.23175
 Supercharger US-Guilderland NY, 42.688555,-73.85295
+Supercharger-V3 US-Gulf Breeze FL, 30.389285, -87.062209
+Supercharger US-Gustine CA, 37.109819, -121.015847
+Supercharger-V3 US-Hackensack NJ, 40.904295, -74.030114
+Supercharger US-Hadley MA, 42.339183, -72.609755
+Supercharger US-Hagerstown MD, 39.605936, -77.732898
+Supercharger-V3 US-Hagerstown MD - Venture Drive, 39.60926, -77.750084
+Supercharger-V3 US-Halifax NC, 36.365052, -77.674524
+Supercharger-V3 US-Hallandale Beach FL, 25.993948, -80.142826
+Supercharger-V3 US-Hamburg PA, 40.5642961, -76.00885921
+Supercharger-V3 US-Hamden CT - Dixwell Avenue, 41.369869, -72.919884
+Supercharger US-Hamilton Township NJ, 40.195023, -74.640935
+Supercharger-V3 US-Hamilton Township NJ - Flock Road, 40.24853784, -74.68454956
+Supercharger-V3 US-Hamilton NJ - Woodrow Wilson, 40.17617, -74.629907
+Supercharger-V3 US-Hamilton TX, 31.70622, -98.122156
+Supercharger-V3 US-Hancock NY, 41.95595493, -75.2944836
+Supercharger-V3 US-Hannibal MO, 39.71819401, -91.3921344
+Supercharger US-Hanover MD (Floor 3), 39.152625, -76.743829
+Supercharger-V3 US-Hanover MA, 42.14832361, -70.8421341
 Supercharger-V3 US-Hardeeville SC,32.270501,-81.080986
-Supercharger US-Hays KS, 38.900536, -99.319335
+Supercharger-V3 US-Harlingen TX, 26.187972, -97.756746
+Supercharger US-Harris Ranch, 36.253606, -120.238307
+Supercharger US-Harrisburg OR Supercharger, 44.279989, -123.063323
+Supercharger US-Harrisburg PA, 40.277467, -76.82482
+Supercharger-V3 US-Harrisonburg VA, 38.42906, -78.85642
+Supercharger US-Hartford CT, 41.76655, -72.673782
+Supercharger US-Hartford CT - Leibert Road, 41.788173, -72.654661
+Supercharger US-Hattiesburg MS, 31.32277, -89.381601
+Supercharger-V3 US-Haubstadt IN, 38.1603639, -87.551294
+Supercharger-V3 US-Hauppauge NY - Motor Parkway, 40.806812, -73.238697
+Supercharger US-Hawthorne CA - El Segundo Boulevard, 33.918141, -118.353448
+Supercharger-V3 US-Hawthorne CA - West 120th Street, 33.922935, -118.322136
+Supercharger US-Hawthorne NV, 38.533493, -118.622892
 Supercharger US-Haymarket VA,38.815126, -77.6427411, 30
+Supercharger US-Hays KS, 38.900536, -99.319335
+Supercharger US-Hayward CA - Hesperian Boulevard, 37.667225, -122.120691
+Supercharger-V3 US-Helena MT, 46.617972, -112.007218
+Supercharger US-Henderson NV, 35.971645, -114.911593
+Supercharger-V3 US-Henderson NV - Las Vegas Boulevard South, 35.963843, -115.16771
+Supercharger-V3 US-Henderson NV - Paseo Verde Parkway (Floor 4), 36.022933, -115.090003
+Supercharger US-Henderson NC, 36.329703, -78.448123
+Supercharger-V3 US-Hendersonville TN, 36.320082, -86.601255
 Supercharger US-Henrietta TX,33.800589,-98.196653
+Supercharger US-Hermitage PA, 41.200951, -80.455658
+Supercharger-V3 US-Hermosa Beach CA (Floor 1), 33.865262, -118.395161
+Supercharger-V3 US-Hesperia CA, 34.42469, -117.385621
+Supercharger-V3 US-Hesperia CA - Main Street, 34.42607, -117.354519
+Supercharger-V3 US-Hialeah FL, 25.943094, -80.34414
 Supercharger US-Hickory NC,35.706929,-81.294784
+Supercharger-V3 US-Highland CA, 34.135635, -117.194159
+Supercharger-V3 US-Highland Park IL - Skokie Valley Road, 42.191158, -87.826256
 Supercharger-V3 US-Hillsboro OR,45.538523,-122.866128
-Supercharger US-Houston-North TX, 29.980302, -95.421564
+Supercharger US-Hinckley MN, 46.009865, -92.929909
+Supercharger-V3 US-Hines OR, 43.572949, -119.074873
+Supercharger-V3 US-Holbrook AZ, 34.92321, -110.146393
+Supercharger-V3 US-Holland MI, 42.781743, -86.077365
+Supercharger US-Hollister CA, 36.9901, -121.381456
+Supercharger-V3 US-Honolulu HI - Kahala Avenue (Valet & Pay to Park Floor 2), 21.271694, -157.774028
+Supercharger-V3 US-Hood River OR - Anchor Way, 45.713988, -121.515849
+Supercharger US-Hooksett NH (NB), 43.109244, -71.475297
+Supercharger US-Hooksett NH (SB), 43.110397, -71.477691
 Supercharger US-Houston TX - Northwest Freeway, 29.867279, -95.538107
+Supercharger-V3 US-Houston TX - 9633 Westheimer Road, 29.736007, -95.538575
+Supercharger-V3 US-Houston TX - Louetta Road, 29.997127, -95.575319
+Supercharger-V3 US-Houston TX - Westheimer Road (Floor LL2), 29.736872, -95.462955
+Supercharger US-Houston-North TX, 29.980302, -95.421564
+Supercharger US-Howard WI, 44.536272,-88.077732
+Supercharger-V3 US-Howe IN - Ernie Pyle Travel Plaza - WB, 41.7458146, -85.3270463
+Supercharger-V3 US-Howe IN - Gene Stratton Travel Plaza - EB, 41.74619868, -85.3308931
+Supercharger-V3 US-Howell Township NJ, 40.13713826, -74.22573943
+Supercharger US-Hudson MA, 42.395293,-71.595076
+Supercharger-V3 US-Hudson NY, 42.223384, -73.825679
+Supercharger US-Hudsonville MI, 42.842951, -85.861936
 Supercharger US-Huntington WV, 38.410909, -82.487255
 Supercharger US-Huntsville TX, 30.716159, -95.565965
-Supercharger US-Howard WI, 44.536272,-88.077732
-Supercharger US-Hudson MA, 42.395293,-71.595076
+Supercharger-V3 US-Huntsville AL, 34.740608, -86.665899
+Supercharger-V3 US-Hyannis MA, 41.676666, -70.307068
+Supercharger-V3 US-Idaho Springs CO, 39.741722, -105.518318
+Supercharger US-Idaho Falls ID, 43.484549, -112.052199
+Supercharger US-Incline Village NV, 39.2504, -119.949165
 Supercharger US-Independence MO, 39.040819, -94.36928
+Supercharger US-Indianapolis IN, 39.702061, -86.079885
+Supercharger US-Indianapolis IN - Capitol Avenue (Pay to Park Floor 1), 39.765569, -86.161096
+Supercharger-V3 US-Indianapolis IN - East 86th Street, 39.913972, -86.139228
+Supercharger-V3 US-Indianapolis IN - East Southport Road, 39.6660277, -86.0759681
+Supercharger-V3 US-Indio CA, 33.741875, -116.215035
 Supercharger US-Inyokern CA, 35.646456, -117.812561
+Supercharger-V3 US-Iowa City IA, 41.67576, -91.52019
+Supercharger-V3 US-Iowa LA - Henry's Travel Plaza, 30.241185, -92.928925
+Supercharger-V3 US-Irvine CA - Culver Drive, 33.706923, -117.785242
+Supercharger-V3 US-Irvine CA - Main Street (Pay to Park Floor 1), 33.684599, -117.852978
+Supercharger US-Irvine CA - Michelson Drive (Floor 2), 33.673398, -117.84531
+Supercharger-V3 US-Irvine CA - Walnut Ave, 33.690589, -117.769242
+Supercharger US-Islandia NY, 40.803838, -73.178575
+Supercharger US-Issaquah WA, 47.547455, -122.039719
+Supercharger US-Italy TX, 32.19467, -96.897971
+Supercharger US-Ithaca NY, 42.428766, -76.509016
+Supercharger US-Jackman ME, 45.624363, -70.251966
 Supercharger US-Jackson TN, 35.660411, -88.855634
+Supercharger-V3 US-Jackson CA, 38.34868, -120.775299
+Supercharger-V3 US-Jackson MI, 42.26972, -84.45008
+Supercharger US-Jackson WY, 43.463993, -110.794488
 Supercharger-V3 US-Jacksonville FL - Chaffee Road,30.307179,-81.847891
+Supercharger-V3 US-Jacksonville FL - City Center Boulevard, 30.47966, -81.63759
+Supercharger US-Jacksonville FL - County Road, 30.060211, -81.513399
+Supercharger US-Jacksonville FL - Gate Parkway, 30.253438, -81.537149
+Supercharger-V3 US-Jacksonville FL - Phillips Hwy, 30.266153, -81.617074
+Supercharger-V3 US-Jacksonville FL - Wilson Boulevard, 30.27125, -81.75611
+Supercharger-V3 US-Jacksonville NC, 34.776308, -77.414072
+Supercharger-V3 US-Jamestown ND, 46.884849, -98.719498
+Supercharger-V3 US-Janesville WI, 42.717565, -88.993812
+Supercharger-V3 US-Jasper FL, 30.44665, -82.93361
+Supercharger-V3 US-Jericho NY, 40.78959836, -73.53614023
+Supercharger US-Jersey City NJ - Mall Drive West (Pay to Park Floor 1), 40.727302, -74.038737
+Supercharger US-Jersey City NJ – First Street (Valet & Pay to Park), 40.721498, -74.040481
+Supercharger-V3 US-Jim Thorpe PA - Northbound, 40.972164, -75.630021
+Supercharger-V3 US-Jim Thorpe PA - Southbound, 40.968311, -75.630669
+Supercharger-V3 US-Johnson City TX - US-281, 30.26958, -98.398369
+Supercharger-V3 US-Johnstown CO, 40.333878, -104.983113
+Supercharger-V3 US-Joliet IL, 41.576166, -88.153745
+Supercharger-V3 US-Jonesboro AR, 35.7972899, -90.731112
+Supercharger-V3 US-Joplin MO - South Main Street, 37.033646, -94.515958
+Supercharger-V3 US-Joppatowne MD, 39.439787, -76.34527
 Supercharger US-Junction TX, 30.509278,-99.774676
+Supercharger US-Kansas City MO, 39.245572, -94.646767
+Supercharger US-Katy TX, 29.774393, -95.821473
+Supercharger-V3 US-Katy TX - Katy Freeway, 29.77899, -95.84881
+Supercharger-V3 US-Kearney NE, 40.681935, -99.083406
+Supercharger US-Kearny NJ, 40.748805, -74.136193
+Supercharger-V3 US-Kelso WA, 46.143269, -122.898898
 Supercharger US-Kennebunk ME North, 43.409428,-70.558581
 Supercharger US-Kennebunk ME South, 43.411056,-70.560704
+Supercharger-V3 US-Kennesaw GA, 34.012866, -84.564916
+Supercharger US-Kennewick WA, 46.198566, -119.162184
+Supercharger-V3 US-Kenosha WI, 42.569016, -87.947149
+Supercharger-V3 US-Kernersville NC, 36.070862, -80.112182
 Supercharger-V3 US-Kettleman City CA,35.98742,-119.961979
+Supercharger US-Kill Devil Hills NC, 35.993937, -75.649312
+Supercharger-V3 US-Kimball TN, 35.04033, -85.68532
+Supercharger-V3 US-King City CA, 36.202379, -121.129283
+Supercharger-V3 US-King of Prussia PA - South Henderson Road, 40.092414, -75.359459
+Supercharger-V3 US-King George VA - Owens Drive, 38.353516, -77.0486117
+Supercharger US-Kingman AZ, 35.191508, -114.065633
+Supercharger-V3 US-Kingman AZ - West Andy Devine, 35.18911, -114.057782
+Supercharger US-Kingsland GA, 30.790896, -81.663907
 Supercharger US-Kingston NY,41.9419,-74.027369
+Supercharger US-Kingsville TX, 27.493609, -97.844998
+Supercharger-V3 US-Kinston NC, 35.260312, -77.649636
+Supercharger US-Kissimmee FL, 28.345501, -81.604193
+Supercharger-V3 US-Kissimmee FL - West Osceola Parkway, 28.34132, -81.41093
+Supercharger US-Klamath Falls OR, 42.216835, -121.757171
 Supercharger US-Knoxville TN, 35.901323,-84.149622
+Supercharger-V3 US-Knoxville TN - Brookview Centre Way, 35.93563, -84.00277
+Supercharger-V3 US-Kokomo IN, 40.47528, -86.09943
+Supercharger-V3 US-Kremmling CO - Park Avenue, 40.059708, -106.388109
 Supercharger US-Kuttawa KY, 37.073581, -88.124831
+Supercharger-V3 US-Kyle TX , 30.01283, -97.8628
 Supercharger US-La Vale MD, 39.63615, -78.845823
+Supercharger-V3 US-La Mesa CA (Floor L1), 32.780677, -117.013012
+Supercharger US-La Crosse WI, 43.879166, -91.188024
+Supercharger-V3 US-Lacey WA, 47.042158, -122.833946
+Supercharger-V3 US-Lady Lake FL, 28.916949, -81.922448
 Supercharger US-Lafayette IN,40.416178,-86.814081
+Supercharger-V3 US-Lafayette LA, 30.265659, -91.99363
+Supercharger-V3 US-Lagrangeville NY, 41.668459, -73.794117
+Supercharger-V3 US-Laguna Hills CA, 33.595329, -117.675554
 Supercharger US-Lake Elsinore CA, 33.698631, -117.349266
+Supercharger-V3 US-Lake Arrowhead CA (Floor 3), 34.251487, -117.190242
+Supercharger-V3 US-Lake Elsinore CA - Grape Street, 33.659471, -117.294529
+Supercharger-V3 US-Lake Forest CA - Muirlands Boulevard, 33.629389, -117.705886
+Supercharger US-Lake City FL, 30.180173, -82.679311
+Supercharger-V3 US-Lake City FL - US-441, 29.99604, -82.59898
+Supercharger US-Lake Charles LA, 30.199129, -93.249328
+Supercharger-V3 US-Lake Grove NY, 40.863044, -73.128296
+Supercharger-V3 US-Lake Placid NY, 44.2951169, -74.0107226
+Supercharger-V3 US-Lake Delton WI, 43.577285, -89.77901
+Supercharger US-Lake Geneva WI, 42.609155, -88.407364
+Supercharger-V3 US-Lakeland FL, 28.097969, -81.975045
+Supercharger-V3 US-Lakemoor IL, 42.32149131, -88.16977174
+Supercharger-V3 US-Lakewood CA, 33.858572, -118.116482
+Supercharger-V3 US-Lakewood CO, 39.733982, -105.154053
+Supercharger US-Lakewood CO - 5505 W 20th Ave, 39.748196, -105.057777
+Supercharger-V3 US-Lamar CO, 38.089303, -102.617951
+Supercharger-V3 US-Lamont FL, 30.47215, -83.89144
+Supercharger-V3 US-Lancaster PA, 40.052249, -76.255562
+Supercharger-V3 US-Land O’ Lakes FL, 28.188715, -82.400169
+Supercharger-V3 US-Langhorne PA, 40.163511, -74.904581
 Supercharger US-Lansing MI,42.766519,-84.514587
+Supercharger-V3 US-Lansing MI - South Pennsylvania Avenue, 42.667063, -84.540184
+Supercharger-V3 US-Lantana FL, 26.58776, -80.06433
+Supercharger US-Laramie WY, 41.324533, -105.618733
+Supercharger US-Laredo TX, 27.554639, -99.494931
 Supercharger US-Las Vegas NV, 36.165906, -115.138655
-Supercharger US-Lexington KY, 38.017734, -84.421103
-Supercharger US-Lexington VA, 37.79696, -79.419029
-Supercharger US-Lindale TX,32.470712,-95.450594
-Supercharger-V3 US-Long Pine CA, 36.600623, -118.062336
-Supercharger US-Loveland CO, 40.441433,-104.991188
-Supercharger US-Louisville KY, 38.211971, -85.673251
-Supercharger-V3 US-Louisville KY - Preston Highway,38.11187,-85.677328
 Supercharger-V3 US-Las Vegas NV - Linq High Roller, 36.116648, -115.168277
 Supercharger US-Las Vegas NV - Blvd South, 36.070704, -115.172895
 Supercharger US-Las Vegas NM, 35.621984, -105.205447
+Supercharger-V3 US-Las Vegas NV - West Tropical Parkway, 36.271351, -115.266188
+Supercharger-V3 US-Las Vegas NV - East Sahara Avenue, 36.145062, -115.102638
+Supercharger-V3 US-Las Vegas NV - South Eastern Avenue, 36.083017, -115.120163
+Supercharger US-Las Vegas NV - Tivoli Village (Floor P1), 36.167414, -115.287254
+Supercharger-V3 US-Las Cruces NM, 32.29674, -106.812514
+Supercharger-V3 US-Lathrop CA, 37.826242, -121.286263
+Supercharger-V3 US-Laughlin NV, 35.150385, -114.575435
+Supercharger US-Laurel MD (Floor 1), 39.094586, -76.85824
+Supercharger-V3 US-Laurel MD - Fort Meade Road, 39.09546, -76.84069
+Supercharger-V3 US-Laurel MD - Van Dusen Road, 39.08188, -76.88885
+Supercharger-V3 US-Laurel MT, 45.666149, -108.76143
+Supercharger-V3 US-Lawndale CA, 33.893119, -118.353503
+Supercharger-V3 US-Lawrence KS, 39.018527, -95.137184
+Supercharger US-Laytonville CA, 39.688938, -123.483168
+Supercharger US-Leavenworth WA, 47.598802, -120.65614
+Supercharger-V3 US-Leavenworth WA - US-2, 47.755249, -120.740669
+Supercharger US-Lee MA, 42.296, -73.239208
+Supercharger-V3 US-Leeds AL, 33.542762, -86.587744
+Supercharger US-Leesburg VA (Floor 2), 39.089837, -77.526638
+Supercharger-V3 US-Leesburg VA - California Drive Northeast, 39.10232, -77.52591
+Supercharger-V3 US-Leland NC, 34.217654, -78.018849
+Supercharger-V3 US-Lenox MA, 42.37706537, -73.27735524
+Supercharger US-Leominster MA, 42.529658, -71.744353
+Supercharger US-Leon Springs TX, 29.666211, -98.633952
+Supercharger US-Lewes DE, 38.744467, -75.154255
+Supercharger-V3 US-Lewisburg WV, 37.81036, -80.43135
+Supercharger US-Lexington KY, 38.017734, -84.421103
+Supercharger US-Lexington VA, 37.79696, -79.419029
+Supercharger-V3 US-Lexington KY - Meijer Way, 37.99561, -84.53276
+Supercharger-V3 US-Lexington NC, 35.800272, -80.288692
+Supercharger-V3 US-Lexington SC, 33.95131, -81.23364
+Supercharger-V3 US-Lexington VA - East Nelson Street, 37.77853, -79.43408
+Supercharger-V3 US-Liberty MO, 39.245492, -94.448776
+Supercharger-V3 US-Liberty Lake WA, 47.673991, -117.11259
+Supercharger US-Lima MT, 44.632752, -112.591642
+Supercharger US-Lima OH, 40.727249, -84.072302
 Supercharger US-Limon CO, 39.268995, -103.708624
+Supercharger-V3 US-Lincoln CA - Groveland Lane, 38.869972, -121.302521
+Supercharger US-Lincoln NE, 40.860878, -96.68
+Supercharger-V3 US-Lincoln NE - West O Street, 40.81386, -96.727987
+Supercharger-V3 US-Lincoln NH, 44.043133, -71.666943
+Supercharger US-Lincoln City OR, 44.95772, -124.01135
+Supercharger US-Lindale TX,32.470712,-95.450594
+Supercharger-V3 US-Lisbon CT, 41.585099, -71.991211
+Supercharger US-Lithonia GA, 33.699152, -84.173491
 Supercharger US-Little Rock AR, 34.661548, -92.410467
+Supercharger-V3 US-Little Ferry NJ, 40.85503308, -74.03273256
 Supercharger-V3 US-Littleton MA, 42.553046,-71.474114
+Supercharger US-Live Oak FL, 30.332681, -82.961018
+Supercharger-V3 US-Livermore CA - West Jack London Boulevard, 37.696161, -121.844205
+Supercharger US-Livermore CA Supercharger, 37.700342, -121.840938
 Supercharger US-Livonia MI, 42.379355, -83.329502
+Supercharger-V3 US-Llano TX, 30.7506542, -98.674797
+Supercharger-V3 US-Lodi NJ, 40.891529, -74.072434
 Supercharger US-London KY, 37.149148, -84.11394
+Supercharger US-Lone Tree CO - Park Meadows Center Drive, 39.562485, -104.873368
+Supercharger-V3 US-Long Pine CA, 36.600623, -118.062336
+Supercharger-V3 US-Long Beach CA, 33.757194, -118.107277
+Supercharger-V3 US-Loomis CA, 38.817531, -121.189522
+Supercharger US-Los Altos CA (Floor P2), 37.398868, -122.110184
+Supercharger US-Los Angeles CA - Francisco Street (Valet Only), 34.047463, -118.263961
+Supercharger-V3 US-Los Angeles CA - Industrial Street (Pay to Park Floor P1), 34.036061, -118.237933
+Supercharger-V3 US-Los Angeles CA - Venice Boulevard (Level 2), 34.027813, -118.393161
+Supercharger-V3 US-Los Angeles CA - W Olympic Boulevard (Floor 1), 34.03815, -118.444
+Supercharger US-Los Gatos CA, 37.230356, -121.979198
+Supercharger-V3 US-Los Gatos CA - Los Gatos Boulevard, 37.236985, -121.962143
+Supercharger US-Los Angeles CA - Alameda Street (Floor 5), 34.033632, -118.239789
+Supercharger-V3 US-Lost Hills CA, 35.61681629, -119.6560425
+Supercharger US-Louisville KY, 38.211971, -85.673251
+Supercharger-V3 US-Louisville KY - Preston Highway,38.11187,-85.677328
+Supercharger-V3 US-Louisville KY - Towne Center Drive, 38.29953, -85.55535
+Supercharger US-Loveland CO, 40.441433,-104.991188
 Supercharger US-Lovelock NV, 40.179476, -118.472197
 Supercharger US-Lowell AR, 36.255397, -94.152674
+Supercharger-V3 US-Lubbock TX, 33.520866, -101.962385
+Supercharger US-Ludington MI, 43.956372, -86.376006
+Supercharger-V3 US-Luling TX, 29.64993118, -97.59201374
+Supercharger US-Lumberton NC, 34.666489, -79.002238
+Supercharger US-Lusk WY, 42.75601, -104.45202
+Supercharger-V3 US-Lynchburg VA, 37.324963, -79.190054
+Supercharger US-Lynnfield MA, 42.516398, -71.03219
+Supercharger US-Lynnwood WA, 47.846508, -122.272118
+Supercharger-V3 US-Lynnwood WA - 148th Street Southwest, 47.865523, -122.283056
 Supercharger US-Macedonia OH,41.313652,-81.51703
 Supercharger-V3 US-Mackinaw City MI, 45.772228, -84.72645
+Supercharger US-Macon GA - Tom Hill Senior Boulevard, 32.897466, -83.689678
+Supercharger-V3 US-Madera CA - Avenue 7, 36.851422, -119.952623
 Supercharger US-Madison WI - E. Washington Ave., 43.11915,-89.319102
 Supercharger US-Madison WI – East Towne Mall, 43.126624,-89.30686
+Supercharger-V3 US-Madison CT - Northbound, 41.29042, -72.58084
+Supercharger-V3 US-Madison CT - Southbound, 41.291179, -72.578087
+Supercharger-V3 US-Madison FL, 30.43352, -83.45372
+Supercharger-V3 US-Madison GA, 33.557739, -83.473748
+Supercharger-V3 US-Madison Heights VA, 37.46651, -79.1179
+Supercharger-V3 US-Madison VA, 38.346154, -78.286033
+Supercharger-V3 US-Madison WI - South Livingston, 43.080649, -89.374804
+Supercharger-V3 US-Madison WI - Whitney Way, 43.05018493, -89.47201631
+Supercharger-V3 US-Madisonville TX, 30.966873, -95.879649
+Supercharger-V3 US-Madras OR, 44.614089, -121.135273
+Supercharger-V3 US-Mahwah NJ, 41.090031, -74.155242
+Supercharger-V3 US-Malaga NJ, 39.57234577, -75.05302191
+Supercharger-V3 US-Malibu CA, 34.035892, -118.684403
+Supercharger US-Malibu CA - Whole Foods and the Park, 34.036889, -118.6865
+Supercharger-V3 US-Malta NY, 43.026258, -73.792196
+Supercharger-V3 US-Malvern PA, 40.05066004, -75.52527627
 Supercharger US-Mammoth Lakes CA, 37.644533, -118.96555
+Supercharger US-Manahawkin NJ, 39.7117727, -74.2839598
+Supercharger-V3 US-Manassas VA, 38.79372, -77.51527
+Supercharger US-Manchester CT, 41.804722, -72.562119
+Supercharger-V3 US-Manchester NH, 42.961327, -71.439146
+Supercharger US-Manchester TN, 35.459259, -86.057086
+Supercharger US-Manhattan Beach CA (Floor 1), 33.90166, -118.393507
+Supercharger US-Manhattan NY - Vesey Street (Valet & Pay to Park), 40.7143965, -74.0164439
+Supercharger-V3 US-Manorville NY, 40.870784, -72.798771
 Supercharger-V3 US-Mansfield PA, 41.804934,-77.085086
+Supercharger US-Mansfield MA, 42.013252, -71.231544
 Supercharger US-Manteca CA, 37.782562,-121.228676
+Supercharger-V3 US-Manteca CA - Spreckels Avenue, 37.79542, -121.197695
+Supercharger-V3 US-Maple Grove MN, 45.135012, -93.476242
+Supercharger-V3 US-Maple Shade NJ, 39.937074, -74.970052
+Supercharger US-Marathon FL, 24.725916, -81.047519
+Supercharger-V3 US-Marianna FL, 30.716686, -85.185122
+Supercharger-V3 US-Marietta GA, 33.903586, -84.465985
+Supercharger US-Marin City CA - Donahue Street, 37.872131, -122.510613
+Supercharger-V3 US-Marina Del Rey CA, 33.980685, -118.444684
+Supercharger-V3 US-Marina CA, 36.666193, -121.81016
+Supercharger-V3 US-Marinette WI, 45.08039, -87.661956
+Supercharger-V3 US-Marion IL, 37.74462, -88.96263
+Supercharger-V3 US-Mariposa CA, 37.489149, -119.97206
+Supercharger US-Marlton NJ, 39.878451, -74.918253
+Supercharger-V3 US-Marmet WV, 38.240965, -81.560136
+Supercharger-V3 US-Marquette MI, 46.55197759, -87.47023048
 Supercharger US-Marshall MI, 42.292068, -84.96416
+Supercharger-V3 US-Martinez CA, 37.993011, -122.121308
+Supercharger US-Martinsburg WV, 39.48495, -77.9576
+Supercharger-V3 US-Marysville CA, 39.111127, -121.556525
+Supercharger US-Mashpee MA, 41.617498, -70.488788
+Supercharger-V3 US-Massapequa NY, 40.702098, -73.432938
+Supercharger-V3 US-Matamoras PA, 41.35332804, -74.72416374
+Supercharger-V3 US-Matthews NC, 35.12848, -80.700299
 Supercharger US-Maumee OH, 41.578401, -83.664689
 Supercharger US-Mauston WI, 43.795476,-90.059363
+Supercharger US-McAllen TX, 26.198446, -98.259821
+Supercharger US-McComb MS, 31.2477, -90.47125
+Supercharger-V3 US-McDermitt NV, 41.995039, -117.718981
 Supercharger-V3 US-McDonough GA,33.425901,-84.187713
+Supercharger-V3 US-McKinney TX, 33.151856, -96.717094
+Supercharger-V3 US-McKinney TX - University Drive, 33.217459, -96.657046
+Supercharger-V3 US-McLeansville NC, 36.055829, -79.65967
 Supercharger US-Mebane NC,36.069852,-79.27005
+Supercharger-V3 US-Mechanicsburg PA, 40.194423, -76.992167
+Supercharger-V3 US-Mechanicsville VA, 37.61338, -77.3288
+Supercharger-V3 US-Medford NJ, 39.90377182, -74.80429565
+Supercharger-V3 US-Medford OR, 42.347946, -122.87819
 Supercharger US-Medway ME, 45.609342,-68.522743
-Supercharger US-Memphis TN, 35.097843, -89.859007
 Supercharger US-Mehlville MO, 38.507468, -90.32907
+Supercharger-V3 US-Melbourne FL, 28.11976, -80.70014
+Supercharger-V3 US-Melissa TX, 33.270326, -96.592961
+Supercharger-V3 US-Melville NY, 40.798977, -73.412242
+Supercharger-V3 US-Melville NY - Walt Whitman Road, 40.783941, -73.422386
+Supercharger US-Memphis TN, 35.097843, -89.859007
+Supercharger-V3 US-Memphis TN - North Germantown Parkway, 35.20179, -89.79256
 Supercharger US-Menifee CA, 33.679638, -117.173752
+Supercharger US-Menlo Park CA, 37.423936, -122.198522
+Supercharger-V3 US-Menomonee Falls WI, 43.164163, -88.066178
+Supercharger-V3 US-Menomonie WI, 44.902115, -91.933418
+Supercharger-V3 US-Merced CA - Martin Luther King Junior Way, 37.297689, -120.484072
+Supercharger-V3 US-Meredith NH, 43.6615, -71.494162
 Supercharger-V3 US-Meriden CT, 41.527346,-72.773551
+Supercharger US-Meridian MS, 32.35675, -88.67118
+Supercharger-V3 US-Merrillville IN, 41.469493, -87.342973
+Supercharger-V3 US-Mesa AZ, 33.380195, -111.805669
+Supercharger-V3 US-Mesquite NV, 36.80315, -114.100385
+Supercharger-V3 US-Mesquite NV - Mesa Boulevard, 36.816383, -114.063708
+Supercharger-V3 US-Metairie LA, 30.002337, -90.124595
+Supercharger-V3 US-Metter GA, 32.379051, -82.062113
+Supercharger US-Miami Beach FL - Pennsylvania Avenue (Pay to Park Floor 5), 25.791204, -80.133863
+Supercharger US-Miami Beach FL - West Avenue (Pay to Park Floor 2), 25.7804, -80.141702
+Supercharger-V3 US-Miami Gardens FL - Northwest 183rd Street, 25.93994, -80.24642
+Supercharger-V3 US-Miami FL - Bird Road, 25.73228, -80.30617
+Supercharger US-Miami FL - Mary Brickell Village (Pay to Park Floor 3), 25.764494, -80.194663
+Supercharger US-Miami FL - NE 41st Street (Pay to Park Floor 3 & 5), 25.814111, -80.193941
+Supercharger-V3 US-Miami FL - NE 4th Ct (Pay to Park), 25.846, -80.18833
+Supercharger-V3 US-Miami FL - SW 24th Street, 25.748193, -80.307917
+Supercharger US-Miami FL - SW 7th Street (Pay to Park Floor B2), 25.767467, -80.192287
+Supercharger US-Miami FL - SW 8th Street, 25.766432, -80.194864
 Supercharger-V3 US-Michigan City MI, 41.673819, -86.890904
+Supercharger-V3 US-Middletown DE, 39.479068, -75.720345
+Supercharger US-Middletown NY, 41.442795, -74.377247
+Supercharger US-Midland TX, 31.946799, -102.142028
+Supercharger-V3 US-Midvale UT, 40.622532, -111.868854
+Supercharger-V3 US-Milan NM, 35.183017, -107.898129
+Supercharger-V3 US-Miles City MT, 46.390473, -105.82276
+Supercharger US-Milford CT - Boston Post Road, 41.237583, -73.03625
+Supercharger US-Milford CT - I-95 N, 41.245823, -73.009056
+Supercharger US-Milford CT - I-95 S, 41.246682, -73.009491
+Supercharger-V3 US-Mill Hall PA (No Amenities), 41.025039, -77.52415
+Supercharger-V3 US-Millen GA, 32.803669, -81.948534
+Supercharger US-Milpitas CA, 37.434845, -121.891405
+Supercharger US-Milpitas CA - Great Mall, 37.413524, -121.898362
+Supercharger-V3 US-Milpitas CA - South Abbott Avenue, 37.425363, -121.914536
+Supercharger US-Miner MO, 36.89332, -89.534742
+Supercharger-V3 US-Minneapolis MN, 45.004669, -93.228356
+Supercharger-V3 US-Minnetonka MN, 44.970401, -93.447213
+Supercharger-V3 US-Minocqua WI, 45.887122, -89.720544
+Supercharger-V3 US-Miramar FL - Miramar Parkway, 25.9764, -80.31075
 Supercharger US-Mishawaka IN, 41.717332,-86.188565
+Supercharger US-Mission Viejo CA, 33.557197, -117.667756
+Supercharger US-Mission Viejo CA - Crown Valley Parkway (Floor P1), 33.560534, -117.671375
+Supercharger US-Mission KS, 39.020433, -94.662274
+Supercharger US-Missoula MT, 46.914636, -114.033216
+Supercharger-V3 US-Missoula MT - Highway 93 North, 46.954241, -114.132005
+Supercharger US-Mitchell SD, 43.701825, -98.044431
 Supercharger US-Moab UT,38.573099,-109.552293
+Supercharger US-Mobile AL, 30.671543, -88.119041
+Supercharger-V3 US-Mocksville NC, 35.918336, -80.585293
+Supercharger-V3 US-Modesto CA - Joyce Avenue, 37.610754, -120.976335
+Supercharger-V3 US-Modesto CA - Sisk Road, 37.694652, -121.064286
 Supercharger US-Mojave CA, 35.068596, -118.174568
+Supercharger-V3 US-Mokena IL, 41.499687, -87.88864
 Supercharger US-Monroe LA, 32.496447,-92.05509
+Supercharger-V3 US-Monroe Township NJ, 40.26628708, -74.47077084
+Supercharger US-Monroe WA, 47.862949, -121.9764
+Supercharger-V3 US-Monroeville PA, 40.44533143, -79.76041339
+Supercharger-V3 US-Montauk NY, 41.035909, -71.943823
+Supercharger-V3 US-Monteagle TN, 35.237604, -85.850886
+Supercharger US-Montecito CA, 34.421817, -119.630766
+Supercharger-V3 US-Monterey CA, 36.585864, -121.898411
+Supercharger-V3 US-Montgomery AL, 32.361448, -86.160484
+Supercharger-V3 US-Monticello MN, 45.300998, -93.799256
+Supercharger-V3 US-Montrose CO, 38.481221, -107.87638
+Supercharger-V3 US-Monument CO, 39.092465, -104.851906
+Supercharger-V3 US-Mooresville NC, 35.586802, -80.872824
+Supercharger US-Moosic PA, 41.36183, -75.6772
+Supercharger-V3 US-Moreno Valley CA, 33.91054153, -117.27384672
+Supercharger US-Morgan Hill CA, 37.156227, -121.653191
+Supercharger US-Morgantown WV, 39.578941, -79.953216
+Supercharger-V3 US-Morgantown WV - Earl L Core Road, 39.61964, -79.92296
+Supercharger-V3 US-Moses Lake WA, 47.103808, -119.310556
+Supercharger US-Mount Shasta CA - 111 Morgan Way, 41.310258, -122.317148
+Supercharger US-Mount Shasta CA - 134 Morgan Way, 41.310372, -122.315577
+Supercharger-V3 US-Mount Pleasant IA, 40.96157315, -91.5282458
+Supercharger-V3 US-Mount Laurel NJ - James Fenimore, 39.98010855, -74.8917515
+Supercharger-V3 US-Mount Juliet TN, 36.173778, -86.513702
+Supercharger-V3 US-Mountain Brook AL, 33.484874, -86.772057
+Supercharger US-Mountain View CA, 37.415417, -122.076915
+Supercharger-V3 US-Mountain Village CO (Floor 1), 37.93272034, -107.8550438
+Supercharger US-Mt Airy NC, 36.459973, -80.636834
+Supercharger-V3 US-Mt Airy NC - Graceland Lane, 36.485865, -80.745534
 Supercharger US-Mt. Gilead OH, 40.493768, -82.71308
 Supercharger US-Mt. Hope WV, 37.846882, -81.195869
 Supercharger US-Mt. Vernon IL, 38.316210, -88.955901
+Supercharger-V3 US-Mt. Vernon IL - South 42nd Street, 38.30047, -88.942482
+Supercharger US-Mt. Jackson VA, 38.760709, -78.630963
+Supercharger US-Murdo SD, 43.886741, -100.71682
+Supercharger US-Muskegon MI, 43.154193, -86.202005
+Supercharger-V3 US-Myrtle Creek OR, 42.972617, -123.339132
+Supercharger US-Myrtle Beach SC, 33.704636, -78.925204
+Supercharger-V3 US-Mystic CT, 41.372215, -71.95688
 Supercharger US-Nacogdoches TX, 31.652005, -94.679586
+Supercharger US-Napa CA, 38.235628, -122.263124
+Supercharger-V3 US-Napa CA - Bel Aire Plaza, 38.321792, -122.307478
+Supercharger US-Napa CA - Factory Stores Drive, 38.297542, -122.302643
+Supercharger US-Naples FL, 26.144564, -81.789188
+Supercharger-V3 US-Naples FL - Tarpon Bay Boulevard, 26.271777, -81.73792
 Supercharger-V3 US-Nashville TN, 36.110553,-86.723791
+Supercharger-V3 US-Nashville TN - 11th Avenue North (Floor 1), 36.164309, -86.791766
+Supercharger-V3 US-Nashville TN - Charlotte Pike, 36.133324, -86.892099
+Supercharger-V3 US-Natchitoches LA, 31.72525, -93.16249
+Supercharger US-National Harbor MD - Potomac Passage (Pay to Park Floor 2), 38.784822, -77.014693
+Supercharger US-Needles CA, 34.85126, -114.624257
+Supercharger-V3 US-Needles CA - West Broadway Street, 34.850929, -114.62288
 Supercharger US-Nephi UT,39.678046,-111.84082
+Supercharger-V3 US-Nevada MO, 37.836879, -94.35117778
+Supercharger US-New River AZ, 33.914502, -112.143564
+Supercharger-V3 US-New Haven CT, 41.296561, -72.918098
+Supercharger-V3 US-New London CT, 41.370955, -72.119373
+Supercharger-V3 US-New Milford CT, 41.539009, -73.421177
+Supercharger-V3 US-New Castle DE - Christiana Bypass, 39.665108, -75.66706
+Supercharger-V3 US-New Castle DE - North Dupont Highway, 39.7094, -75.5631
+Supercharger-V3 US-New Port Richey FL, 28.218028, -82.7362
+Supercharger-V3 US-New Orleans LA (Floor 2), 29.957299, -90.076621
+Supercharger-V3 US-New Paltz NY, 41.743831, -74.07013
+Supercharger US-New Rochelle NY (Pay to Park), 40.912607, -73.77916
+Supercharger-V3 US-New York JFK NY, 40.662842, -73.793235
+Supercharger US-New York NY - 59 Allen Street (Valet & Pay to Park), 40.717129, -73.99168
+Supercharger US-New York NY - E 47th Street (Valet & Pay to Park), 40.753618, -73.9714
+Supercharger US-New York NY - Mott Street (Valet & Pay to Park), 40.717566, -73.997176
+Supercharger US-New York NY - W 75th Street (Valet & Pay to Park), 40.780903, -73.980092
+Supercharger-V3 US-New Bern NC, 35.104946, -77.081114
+Supercharger-V3 US-New Bern NC - Dr. M.L.K. Jr Blvd, 35.102486, -77.083879
+Supercharger-V3 US-New Springfield OH - Glacier Hills Service Plaza, 40.93909, -80.58788
+Supercharger-V3 US-New Springfield OH - Mahoning Valley Service Plaza, 40.94011, -80.58525
+Supercharger-V3 US-New Braunfels TX, 29.727813, -98.07727
+Supercharger-V3 US-New Caney TX, 30.131599, -95.237274
+Supercharger US-Newark CA, 37.525677, -122.006731
+Supercharger-V3 US-Newark CA - Gateway Boulevard, 37.535895, -122.063079
+Supercharger US-Newark DE, 39.663584, -75.689802
+Supercharger-V3 US-Newark DE - East Chestnut Hill Road, 39.662048, -75.73562
+Supercharger-V3 US-Newark NJ - Lindbergh Road, 40.691635, -74.184315
+Supercharger US-Newburgh NY, 41.499892, -74.071916
+Supercharger-V3 US-Newhall CA, 34.367852, -118.509807
+Supercharger-V3 US-Newnan GA, 33.393986, -84.760934
 Supercharger US-Newport News VA, 37.114579, -76.496197
+Supercharger-V3 US-Newport OR, 44.653362, -124.052786
+Supercharger-V3 US-Newton MA, 42.330838, -71.254943
+Supercharger US-Norfolk VA, 36.860512, -76.2076
+Supercharger-V3 US-Norfolk VA - N Military Hwy, 36.89669, -76.22626
+Supercharger US-Normal IL (Floor 3), 40.508598, -88.985312
+Supercharger-V3 US-Normal IL - East College Avenue, 40.51109, -88.94794
+Supercharger-V3 US-Normal IL - West Raab Road, 40.53271178, -88.99730785
 Supercharger-V3 US-North Charleston SC,32.872514,-80.015414
+Supercharger-V3 US-North Canaan CT, 42.023617, -73.321016
+Supercharger US-North Stamford CT, 41.107302, -73.546669
+Supercharger-V3 US-North Miami Beach FL, 25.90671111, -80.15824109
+Supercharger-V3 US-North Aurora IL, 41.8034, -88.3711
+Supercharger US-North Bethesda MD (Floor P6), 39.050207, -77.1163
+Supercharger US-North East MD, 39.61163, -76.0098
+Supercharger-V3 US-North East MD - Pulaski Highway, 39.613128, -75.930298
+Supercharger-V3 US-North Branch MN, 45.511294, -92.990668
+Supercharger-V3 US-North Platte NE, 41.120697, -100.762719
+Supercharger-V3 US-North Conway NH, 44.020212, -71.114275
+Supercharger-V3 US-North Bergen NJ, 40.774821, -74.033869
+Supercharger-V3 US-North Bergen NJ - John F. Kennedy Boulevard, 40.773883, -74.038139
+Supercharger US-North Brunswick NJ, 40.440033, -74.503845
+Supercharger-V3 US-North Babylon NY, 40.739671, -73.318902
+Supercharger-V3 US-North Canton OH, 40.872217, -81.422937
+Supercharger US-North Huntingdon PA, 40.314562, -79.671169
+Supercharger-V3 US-North Wales PA, 40.21871584, -75.24749202
+Supercharger-V3 US-North Myrtle Beach SC, 33.79908205, -78.74738976
+Supercharger-V3 US-North Richland Hills TX, 32.906772, -97.187294
+Supercharger-V3 US-North Bend WA, 47.467842, -121.716462
+Supercharger-V3 US-Northbrook IL, 42.108097, -87.801507
+Supercharger-V3 US-Northridge CA, 34.234722, -118.553231
+Supercharger-V3 US-Northville MI, 42.437447, -83.43781
+Supercharger-V3 US-Nortonville KY, 37.193006, -87.448578
+Supercharger US-Novato CA, 38.089733, -122.551768
+Supercharger US-Oacoma SD, 43.803125, -99.383673
 Supercharger US-Oak Creek WI, 42.900051,-87.913746
+Supercharger-V3 US-Oak Brook IL, 41.85377, -87.95846
 Supercharger US-Oakdale MN, 44.964849,-92.961271
+Supercharger-V3 US-Oakhurst CA, 37.334677, -119.646113
+Supercharger US-Oakland CA - 2nd Street (Pay to Park Floor 2), 37.794269, -122.272934
+Supercharger-V3 US-Oakland CA - Hegenberger Rd, 37.7464561, -122.195408
+Supercharger-V3 US-Oakley KS, 39.118767, -100.812275
 Supercharger US-Ocala FL,29.140929,-82.19403
+Supercharger-V3 US-Ocala FL - West Silver Springs Boulevard, 29.185901, -82.178101
+Supercharger-V3 US-Ocean City MD, 38.335434, -75.10524
+Supercharger-V3 US-Ocean City MD - Ocean Gateway, 38.33901, -75.11905
+Supercharger-V3 US-Ochopee FL, 26.174423, -80.856205
+Supercharger-V3 US-Odessa FL, 28.190048, -82.616333
+Supercharger US-Ogallala NE, 41.115657, -101.709883
+Supercharger US-Ojai CA, 34.442077, -119.259231
+Supercharger-V3 US-Okahumpka FL - Florida Turnpike Service Plaza, 28.787206, -81.982388
+Supercharger US-Oklahoma City OK, 35.462865, -97.65342
+Supercharger US-Olathe KS, 38.911974, -94.794712
+Supercharger-V3 US-Old Bridge NJ, 40.390666, -74.339509
+Supercharger-V3 US-Old Fort NC, 35.63776, -82.14391
+Supercharger US-Olema CA, 38.040481, -122.787784
+Supercharger-V3 US-Omaha NE, 41.233664, -96.052417
+Supercharger-V3 US-Oneonta NY, 42.447913, -75.048911
 Supercharger-V3 US-Ontario OR,44.025563,-116.942069
+Supercharger-V3 US-Ontario CA (Floor 1), 34.065879, -117.650113
+Supercharger-V3 US-Ontario CA - South Vineyard Avenue, 34.029764, -117.612128
+Supercharger-V3 US-Orangeburg SC, 33.55231, -80.82764
+Supercharger-V3 US-Orland Park IL, 41.632335, -87.851982
+Supercharger-V3 US-Orlando FL - 7826 West Sand Lake Road, 28.44979, -81.4903
+Supercharger-V3 US-Orlando FL - Central Florida Parkway, 28.405926, -81.457895
+Supercharger-V3 US-Orlando FL - East Colonial Drive, 28.56941, -81.27816
+Supercharger-V3 US-Orlando FL - Millenia Plaza Way, 28.49186, -81.42849
+Supercharger US-Orlando FL - North Alafaya Trail, 28.555639, -81.199158
+Supercharger-V3 US-Orlando FL - Palm Parkway, 28.38497, -81.50127
+Supercharger-V3 US-Orlando FL - South Orange Blossom Trail, 28.44848, -81.39391
+Supercharger US-Orlando FL - West Sand Lake Road, 28.449911, -81.467472
+Supercharger US-Orleans MA, 41.796706, -69.985575
+Supercharger US-Osage Beach MO, 38.16165, -92.605792
 Supercharger US-Oshkosh WI, 44.028786,-88.592554
+Supercharger US-Ossining NY, 41.14462, -73.861708
+Supercharger-V3 US-Oswego IL, 41.70132, -88.312632
+Supercharger-V3 US-Overland Park KS, 38.955432, -94.685578
+Supercharger-V3 US-Owatonna MN, 44.095802, -93.249586
+Supercharger-V3 US-Owings Mills MD, 39.407696, -76.783782
+Supercharger US-Oxford AL, 33.610433, -85.78321
+Supercharger-V3 US-Oxford NC, 36.28082321, -78.605658
+Supercharger US-Oxnard CA, 34.238487, -119.177217
 Supercharger-V3 US-Ozark AR, 35.523836, -93.863559
 Supercharger US-Ozona TX,30.706676,-101.196059
+Supercharger-V3 US-Pacific Palisades CA (Pay to Park Floor P1), 34.04756122, -118.52520425
+Supercharger US-Page AZ, 36.925113, -111.467946
+Supercharger-V3 US-Pahrump NV, 36.2111218, -115.9859293
 Supercharger-V3 US-Palm Coast FL,29.47661,-81.206392
+Supercharger-V3 US-Palm Springs CA (Floor 5 & 6), 33.824959, -116.549321
+Supercharger-V3 US-Palm Beach Gardens FL, 26.84026, -80.10391
+Supercharger-V3 US-Palmdale CA, 34.606418, -118.150681
+Supercharger-V3 US-Palmdale CA - 10th Street West, 34.601966, -118.145346
+Supercharger-V3 US-Palmer MA, 42.17337882, -72.3250156
+Supercharger-V3 US-Palo Alto CA - Bryant Street (Floor 3), 37.446368, -122.162292
+Supercharger US-Palo Alto CA - Stanford Shopping Center (Floor 2), 37.441891, -122.169773
+Supercharger-V3 US-Panama City Beach FL, 30.211264, -85.84984
+Supercharger-V3 US-Parachute CO, 39.452131, -108.046094
+Supercharger-V3 US-Parish NY, 43.40864371, -76.11430685
 Supercharger US-Parkersburg WV,39.26278,-81.544928
+Supercharger-V3 US-Parsippany NJ, 40.84984, -74.351681
+Supercharger US-Pasadena CA (Pay to Park Top Floor), 34.145104, -118.147318
+Supercharger-V3 US-Pasadena CA - 3363 E Foothill Blvd, 34.153951, -118.081387
+Supercharger-V3 US-Pasadena CA - East Glenarm Street, 34.127402, -118.147928
+Supercharger-V3 US-Pasadena CA - Shoppers Lane, 34.1387312, -118.1311252
+Supercharger-V3 US-Pasco WA, 46.272432, -119.182453
+Supercharger-V3 US-Paso Robles CA - Golden Hill Road, 35.646045, -120.658336
+Supercharger-V3 US-Paso Robles CA - Riverside Avenue, 35.6267477, -120.687231
+Supercharger-V3 US-Patterson CA - Speno Dr, 37.466215, -121.174554
+Supercharger US-Paulsboro NJ, 39.821984, -75.240915
+Supercharger US-Payson AZ, 34.24185, -111.322701
+Supercharger-V3 US-Peachtree Corners GA (Floor 1), 33.979728, -84.215088
 Supercharger US-Pearl MS, 32.274117,-90.151055
+Supercharger US-Pecos TX,31.40035,-103.487009
+Supercharger-V3 US-Pedricktown NJ - Clara Barton, 39.697399, -75.396561
+Supercharger-V3 US-Pedricktown NJ - John Fenwick, 39.696109, -75.396668
+Supercharger US-Pembroke Pines FL, 26.006547, -80.347738
+Supercharger-V3 US-Pembroke Pines FL - South Hiatus Road, 25.99493, -80.29607
 Supercharger US-Pendleton OR,45.646576,-118.682277
+Supercharger-V3 US-Peoria IL - N Sheridan Rd, 40.739001, -89.606777
+Supercharger-V3 US-Perry FL, 30.086496, -83.571377
+Supercharger US-Perry OK, 36.289543, -97.325368
+Supercharger-V3 US-Perth Amboy NJ, 40.517668, -74.286452
+Supercharger-V3 US-Peru IL, 41.348195, -89.126136
+Supercharger US-Petaluma CA, 38.242862, -122.625214
+Supercharger-V3 US-Petersburg VA - Wagner Road, 37.19041, -77.36686
+Supercharger US-Philadelphia PA - Center City, 39.951448, -75.158456
+Supercharger-V3 US-Philadelphia PA - Church Street, 40.002285, -75.081643
+Supercharger US-Philadelphia PA - North 20th Street (Pay to Park Floor G), 39.961734, -75.171462
+Supercharger-V3 US-Philadelphia PA - Penrose Avenue, 39.903419, -75.197242
+Supercharger US-Phoenix AZ - Agua Fria Freeway, 33.666917, -112.120889
+Supercharger US-Phoenix AZ - East Camelback Road, 33.51125, -112.0267
+Supercharger-V3 US-Phoenix AZ - East Mayo Boulevard, 33.655304, -111.927509
+Supercharger-V3 US-Phoenix AZ - North 19th Avenue, 33.521675, -112.099134
+Supercharger-V3 US-Phoenix AZ - West Peoria Avenue, 33.580949, -112.126585
+Supercharger-V3 US-Piedmont SC, 34.75733, -82.4738
+Supercharger-V3 US-Pigeon Forge TN, 35.806572, -83.573001
+Supercharger US-Pinellas Park FL, 27.846015, -82.677163
 Supercharger-V3 US-Pismo Beach CA,35.136648,-120.628795
+Supercharger US-Pittsburgh PA (Floor 1), 40.456482, -79.935152
+Supercharger-V3 US-Placerville CA, 38.710311, -120.84224
+Supercharger US-Placerville CA - Broadway, 38.730996, -120.787699
+Supercharger US-Plainview NY, 40.779807, -73.451444
+Supercharger US-Plano TX (Floor 3), 33.079, -96.8194
+Supercharger-V3 US-Plano TX - Windhaven Parkway, 33.0559, -96.8308
+Supercharger-V3 US-Plant City FL , 28.02592, -82.15131
+Supercharger US-Plantation FL, 26.108503, -80.252629
+Supercharger US-Plattsburgh NY, 44.70491, -73.492202
+Supercharger US-Playa Vista CA - West Jefferson Blvd (Pay to Park Floor 3), 33.976833, -118.416646
+Supercharger US-Pleasant Prairie WI, 42.518367, -87.950154
+Supercharger-V3 US-Pleasanton CA, 37.7000242, -121.8710063
+Supercharger US-Plymouth NC, 35.849796, -76.755119
+Supercharger US-Polaris OH, 40.141082, -82.98912
+Supercharger-V3 US-Pollock Pines CA, 38.7597, -120.529795
+Supercharger-V3 US-Pompano Beach FL - Florida Turnpike Service Plaza , 26.22718, -80.183001
+Supercharger-V3 US-Pompano Beach FL - North Federal Highway, 26.275676, -80.098173
+Supercharger-V3 US-Pompton Lakes NJ, 41.007619, -74.294029
+Supercharger US-Poncha Springs CO, 38.511369, -106.076097
+Supercharger-V3 US-Pooler GA, 32.079646, -81.280912
+Supercharger-V3 US-Pooler GA - US-80, 32.1107577, -81.2358025
+Supercharger US-Port Orange FL, 29.108525, -81.035006
+Supercharger US-Port St. Lucie FL, 27.312604, -80.406956
+Supercharger-V3 US-Port St. Lucie FL - Florida's Turnpike, 27.300209, -80.372299
+Supercharger US-Port Huron MI, 42.99881, -82.428653
+Supercharger-V3 US-Portage IN - George Ade Travel Plaza, 41.58818, -87.21908
+Supercharger-V3 US-Portage IN - John T. McCutcheon Travel Plaza, 41.58755, -87.21477
+Supercharger-V3 US-Portage MI - Westnedge Avenue, 42.243743, -85.587891
+Supercharger US-Portland ME, 43.664543,-70.269452
+Supercharger-V3 US-Portland OR - Southwest Broadway (Pay to Park Floor P4), 45.518276, -122.681027
+Supercharger-V3 US-Portland OR, 45.572503, -122.553875
+Supercharger-V3 US-Portland OR - North Pavilion Avenue, 45.611805, -122.684999
+Supercharger-V3 US-Portsmouth RI, 41.6179792, -71.2463444
+Supercharger-V3 US-Portsmouth VA, 36.83745, -76.3057
+Supercharger-V3 US-Potsdam NY, 44.667226, -74.990353
+Supercharger-V3 US-Pottstown PA, 40.23306658, -75.65793458
+Supercharger-V3 US-Prairie du Chien WI, 43.046358, -91.14162
+Supercharger US-Price UT, 39.60106, -110.8309
 Supercharger US-Primm NV, 35.610592, -115.387932
-Supercharger US-Rancho Cucamonga CA, 34.113557, -117.529450
-Supercharger US-Rawlins WY, 41.79092, -107.210242
+Supercharger-V3 US-Princeton WV, 37.36414, -81.05288
+Supercharger-V3 US-Providence RI, 41.82786288, -71.42640008
+Supercharger-V3 US-Provincetown MA, 42.062305, -70.162497
+Supercharger-V3 US-Provo UT, 40.214214, -111.656689
+Supercharger-V3 US-Pueblo CO (Floor L1), 38.266702, -104.608993
+Supercharger-V3 US-Punta Gorda FL, 26.89596, -82.01133
+Supercharger-V3 US-Quanah TX, 34.2919652, -99.75597325
+Supercharger-V3 US-Quartzsite AZ, 33.661606, -114.242143
+Supercharger-V3 US-Quartzsite AZ - Main Event Lane, 33.66276996, -114.23993225
+Supercharger US-Queens NY - Queens Center (Pay to Park Floor G), 40.735285, -73.870325
+Supercharger US-Queensbury NY, 43.328368, -73.680134
 Supercharger US-Raleigh NC, 35.83554,-78.642814
+Supercharger US-Rancho Cucamonga CA, 34.113557, -117.529450
+Supercharger US-Rancho Mirage CA, 33.740984, -116.409588
+Supercharger-V3 US-Raphine VA, 37.93026, -79.23448
+Supercharger US-Rapid City SD, 44.105567, -103.212122
+Supercharger US-Rawlins WY, 41.79092, -107.210242
+Supercharger-V3 US-Reading PA, 40.30202178, -75.85338765
+Supercharger-V3 US-Red Bluff CA, 40.181832, -122.227627
+Supercharger-V3 US-Red Bluff CA - South Main Street, 40.16237, -122.228164
+Supercharger-V3 US-Red Hook NY, 41.979185, -73.882937
+Supercharger-V3 US-Red Oak TX, 32.517048, -96.821525
+Supercharger-V3 US-Redding CA, 40.589377, -122.377982
+Supercharger-V3 US-Redding CA - Hilltop Drive, 40.578941, -122.35942
+Supercharger-V3 US-Redlands CA - West Stuart Avenue (Floor L5), 34.0595, -117.1852
+Supercharger US-Redondo Beach CA, 33.894543, -118.367818
+Supercharger-V3 US-Rehoboth Beach DE, 38.713054, -75.10428
+Supercharger-V3 US-Rehoboth Beach DE - Coastal Highway, 38.716557, -75.10979
+Supercharger US-Reno NV, 39.489809, -119.795267
+Supercharger-V3 US-Reno NV - Element Lane (Floor 2), 39.503937, -119.800099
+Supercharger-V3 US-Reno NV - North Sierra Street, 39.528639, -119.815325
+Supercharger-V3 US-Renton WA - Southwest 41st Street, 47.443065, -122.225152
+Supercharger-V3 US-Reston VA, 38.94924, -77.339689
+Supercharger-V3 US-Reston VA -  Sunset Hills Road, 38.95617, -77.36494
+Supercharger-V3 US-Revere MA, 42.398422, -71.000344
 Supercharger US-Richfield UT,38.788013,-112.085139
 Supercharger-V3 US-Richmond IN, 39.867882, -84.887238
 Supercharger US-Richmond TX, 29.561532, -95.695252
 Supercharger US-Richmond VA, 37.529808, -77.353916
+Supercharger US-Richmond CA - Meeker Avenue, 37.919771, -122.348889
+Supercharger-V3 US-Richmond CA - Pierce Street, 37.898555, -122.30894
+Supercharger-V3 US-Richmond KY, 37.67210616, -84.30818449
+Supercharger-V3 US-Richmond RI, 41.51414, -71.6982
+Supercharger-V3 US-Richmond VA - South Providence Road, 37.49607, -77.54725
+Supercharger US-Ridgefield WA - Park and Ride, 45.817752, -122.682883
+Supercharger-V3 US-Ridgeland SC, 32.48533056, -80.9780793
+Supercharger-V3 US-Rifle CO, 39.523071, -107.774132
+Supercharger-V3 US-Ripley WV, 38.82226, -81.72453
+Supercharger-V3 US-Ripon CA, 37.747058, -121.142215
+Supercharger US-Ritzville WA, 47.116469, -118.368505
+Supercharger US-Riverdale Park MD, 38.97062, -76.937563
+Supercharger-V3 US-Riverhead NY - Old Country Road, 40.923721, -72.703741
+Supercharger US-Riverside CA (Pay to Park Floor 1 & 3), 33.981294, -117.375919
+Supercharger-V3 US-Riverside CA - Canyon Springs Parkway, 33.939488, -117.282791
+Supercharger US-Riverview FL, 27.79129, -82.33292
+Supercharger-V3 US-Riverview FL - Highway 301 South, 27.85865, -82.32695
+Supercharger-V3 US-Roanoke VA, 37.29937, -79.89395
+Supercharger US-Robbinsdale MN, 45.020419, -93.327556
+Supercharger US-Robbinsville NJ, 40.194296, -74.594546
+Supercharger-V3 US-Robertsdale AL, 30.6332448, -87.67599
+Supercharger-V3 US-Rochelle IL, 41.9168553, -89.068768
 Supercharger US-Rochester MN,44.006249,-92.470914
+Supercharger US-Rochester NH, 43.31064, -70.99342
 Supercharger US-Rock Springs WY, 41.580713, -109.262277
+Supercharger US-Rockaway NJ, 40.908401, -74.557579
+Supercharger US-Rockford IL, 42.244027, -88.978658
+Supercharger-V3 US-Rockford IL - McFarland Road, 42.30596, -88.976752
+Supercharger-V3 US-Rockingham NC, 34.922341, -79.748928
+Supercharger-V3 US-Rockledge FL, 28.266994, -80.718667
+Supercharger US-Rocklin CA, 38.801412, -121.210475
+Supercharger US-Rockville MD (Floor 3), 39.08690102, -77.14982763
+Supercharger-V3 US-Rocky Hill CT, 41.653461, -72.679726
+Supercharger US-Rocky Mount NC, 35.972684, -77.847338
+Supercharger US-Rohnert Park CA, 38.348019, -122.720919
 Supercharger US-Rolla MO, 37.939942, -91.801636
-Supercharger US-Roseville CA - Galleria Boulevard, 38.768016, -121.263461
-Supercharger-V3 US-Round Rock TX,30.509775,-97.687696
 Supercharger-V3 US-Rolling Meadows IL, 42.049748, -87.994922
-Supercharger US-Pecos TX,31.40035,-103.487009
-Supercharger US-Portland ME, 43.664543,-70.269452
-Supercharger US-Salina KS, 38.877354, -97.618643
+Supercharger-V3 US-Rolling Prairie IN - S Knute Rockne Plaza, 41.7052198, -86.623256
+Supercharger-V3 US-Rolling Prairie IN - Wilbur Shaw Travel Plaza, 41.70761244, -86.6213546
+Supercharger US-Roscoe NY, 41.930369, -74.909108
+Supercharger-V3 US-Rosedale MD, 39.31204, -76.52492
+Supercharger US-Rosemont IL (Floor 6), 41.975337, -87.865734
+Supercharger US-Roseville CA - Galleria Boulevard, 38.768016, -121.263461
+Supercharger-V3 US-Roseville CA - Douglas Boulevard, 38.745489, -121.253403
+Supercharger-V3 US-Roseville CA - Freedom Way, 38.792058, -121.298417
+Supercharger US-Roseville MI, 42.522447, -82.9087
+Supercharger-V3 US-Roslyn Heights NY - Willis Avenue, 40.779541, -73.649849
+Supercharger-V3 US-Rossford OH, 41.54617, -83.59017
+Supercharger-V3 US-Roswell GA, 34.01915625, -84.3129057
+Supercharger-V3 US-Rotterdam NY, 42.793638, -74.005337
+Supercharger-V3 US-Round Rock TX,30.509775,-97.687696
+Supercharger US-Rowland Heights CA, 33.991406, -117.927925
+Supercharger-V3 US-Royse City TX, 32.979212, -96.296355
+Supercharger-V3 US-Russell KS, 38.867924, -98.853921
+Supercharger-V3 US-Ruston LA, 32.542936, -92.625537
+Supercharger-V3 US-Rutland VT, 43.617723, -72.956966
+Supercharger-V3 US-Saco ME, 43.5109252, -70.43447628
+Supercharger US-Sacramento CA, 38.637925, -121.497027
+Supercharger US-Sacramento CA - Arden Way, 38.603271, -121.429329
+Supercharger-V3 US-Sacramento CA - Freeport Boulevard, 38.533289, -121.494797
+Supercharger-V3 US-Sacramento CA - J Street (Pay to Park Floor C2), 38.582141, -121.500815
+Supercharger-V3 US-Sacramento CA - Point West Way, 38.601236, -121.431308
+Supercharger US-Sagamore Beach MA, 41.781274, -70.540655
+Supercharger-V3 US-Saint Petersburg FL, 27.735199, -82.679629
+Supercharger-V3 US-Saint Louis Park MN, 44.935895, -93.348289
+Supercharger-V3 US-Saint Peter MN, 44.336652, -93.949783
+Supercharger-V3 US-Saint Louis MO, 38.620011, -90.260885
+Supercharger-V3 US-Saint Louis MO - Riverview Drive, 38.76887, -90.18284
+Supercharger US-Salamanca NY, 42.153105, -78.748559
 Supercharger-V3 US-Salem OR,44.938985,-122.987957
+Supercharger-V3 US-Salem OR - Mission Street Southeast, 44.9212455, -123.0065365
+Supercharger US-Salem VA, 37.289599, -80.079095
+Supercharger US-Salina KS, 38.877354, -97.618643
+Supercharger US-Salinas CA, 36.715166, -121.654174
+Supercharger US-Salisbury MD, 38.401631, -75.56469
+Supercharger-V3 US-Salisbury MD - North Salisbury Boulevard, 38.42094, -75.56598
+Supercharger-V3 US-Salisbury NC, 35.64529092, -80.48574796
+Supercharger US-Salt Lake City UT, 40.746158, -111.899674
+Supercharger-V3 US-Salt Lake City UT - S 300 W, 40.730328, -111.901175
+Supercharger-V3 US-Sammamish WA, 47.616463, -122.033253
 Supercharger US-San Clemente CA, 33.437347, -117.626808
 Supercharger US-San Diego CA, 32.902115,-117.193604
 Supercharger US-San Jose CA - Coleman Avenue, 37.339758,-121.903654
 Supercharger US-San Marcos TX,29.827636,-97.979561
+Supercharger-V3 US-San Ardo CA, 35.974772, -120.900585
+Supercharger US-San Bernardino CA, 34.084096, -117.299376
+Supercharger-V3 US-San Bruno CA - El Camino Real, 37.636189, -122.420257
+Supercharger-V3 US-San Bruno CA - San Bruno Ave, 37.61901, -122.440087
+Supercharger US-San Carlos CA, 37.501682, -122.245936
+Supercharger-V3 US-San Clemente CA - Avenida Vista Hermosa, 33.462102, -117.607636
+Supercharger US-San Diego CA - A Street (Pay to Park Floor 1), 32.718917, -117.159613
+Supercharger-V3 US-San Diego CA - Balboa Ave, 32.81953, -117.179612
+Supercharger-V3 US-San Diego CA - Camino De La Plaza, 32.545323, -117.040851
+Supercharger US-San Diego CA - Camino Del Sur, 33.020294, -117.125881
+Supercharger-V3 US-San Diego CA - Carmel Mountain Road, 32.921468, -117.214283
+Supercharger-V3 US-San Diego CA - Clairemont Mesa Boulevard, 32.831788, -117.159182
+Supercharger-V3 US-San Diego CA - Friars Road, 32.768254, -117.163544
+Supercharger-V3 US-San Diego CA - Mira Mesa Boulevard, 32.911949, -117.146798
+Supercharger-V3 US-San Diego CA - Mission Center Road, 32.776162, -117.15438
+Supercharger US-San Diego CA - Truxtun Road Supercharger, 32.738478, -117.216047
+Supercharger-V3 US-San Fernando CA - Celis Street, 34.281711, -118.441719
+Supercharger US-San Francisco CA - 16th Street, 37.76582, -122.409562
+Supercharger-V3 US-San Francisco CA - Geary Boulevard (Top Floor), 37.781478, -122.445301
+Supercharger US-San Francisco CA - Letterman Drive Supercharger, 37.798185, -122.448715
+Supercharger US-San Francisco CA - Van Ness Avenue (Valet & Pay to Park), 37.781806, -122.42125
+Supercharger-V3 US-San Gabriel CA, 34.077201, -118.100113
+Supercharger US-San Jose CA - Blossom Hill Road, 37.24494, -121.891481
+Supercharger US-San Jose CA - Cherry Avenue, 37.258861, -121.871854
+Supercharger-V3 US-San Jose CA - E Capitol Expressway, 37.300254, -121.825188
+Supercharger US-San Jose CA - Holger Way, 37.417144, -121.956559
+Supercharger US-San Jose CA - Santana Row (Floor 4), 37.322538, -121.948724
+Supercharger-V3 US-San Jose CA - Saratoga Avenue, 37.300189, -121.98211
+Supercharger US-San Juan Capistrano CA, 33.498614, -117.662638
+Supercharger-V3 US-San Juan Capistrano CA -  Verdugo Street, 33.503524, -117.664175
+Supercharger-V3 US-San Leandro CA, 37.709866, -122.164662
+Supercharger-V3 US-San Luis Obispo CA - Higuera St., 35.248243, -120.672695
+Supercharger-V3 US-San Luis Obispo CA - Los Osos Valley Road, 35.25406, -120.68436
+Supercharger US-San Luis Obispo CA Supercharger, 35.265129, -120.676216
+Supercharger-V3 US-San Marcos CA, 33.136516, -117.175896
+Supercharger-V3 US-San Mateo CA - 1878 S Norfolk Street, 37.5543796, -122.293054
+Supercharger-V3 US-San Mateo CA - 2817 S El Camino Real, 37.54151, -122.30242
+Supercharger-V3 US-San Mateo CA - 2940 South Norfolk Street, 37.54379, -122.285474
+Supercharger US-San Mateo CA - Bridgepointe Pkwy, 37.558617, -122.284058
+Supercharger-V3 US-San Mateo CA - De Anza Boulevard, 37.521536, -122.337644
+Supercharger-V3 US-San Mateo CA - Hillsdale Boulevard, 37.533486, -122.32758
+Supercharger US-San Mateo CA - Park Place, 37.544151, -122.290817
+Supercharger-V3 US-San Rafael CA, 37.971118, -122.517435
+Supercharger US-San Ramon CA, 37.762776, -121.96316
+Supercharger US-San Ramon CA - Diablo Plaza, 37.774168, -121.979667
+Supercharger-V3 US-San Ramon CA - San Ramon Valley Boulevard, 37.723146, -121.944336
+Supercharger US-San Antonio TX, 29.54902, -98.58109
+Supercharger-V3 US-San Antonio TX - North Loop 1604 East, 29.610343, -98.489072
+Supercharger-V3 US-Sand City CA, 36.622085, -121.844224
+Supercharger US-Sandusky OH, 41.4098, -82.663973
+Supercharger US-Sandy OR, 45.40291, -122.294789
+Supercharger-V3 US-Sanford FL, 28.7992, -81.33825
+Supercharger-V3 US-Sanford NC, 35.4879484, -79.1934466
 Supercharger US-Santa Ana CA, 33.775828,-117.872036
 Supercharger US-Santa Fe NM,35.6116,-106.031465
 Supercharger US-Santa Rosa NM,34.94717,-104.648025
+Supercharger US-Santa Ana CA - East 5th Street (Pay to Park Floor 3), 33.748711, -117.865563
+Supercharger-V3 US-Santa Barbara CA, 34.439966, -119.75318
+Supercharger-V3 US-Santa Barbara CA - Anacapa Street (Pay to Park Floor 3), 34.41927071, -119.6973828
+Supercharger US-Santa Clara CA (Floor 2), 37.394969, -121.946106
+Supercharger-V3 US-Santa Clarita CA, 34.431277, -118.554311
+Supercharger-V3 US-Santa Cruz CA, 36.978454, -122.013465
+Supercharger US-Santa Maria CA Supercharger, 34.952989, -120.435169
+Supercharger-V3 US-Santa Monica CA - Cloverfield Blvd, 34.025027, -118.469332
+Supercharger US-Santa Monica CA - Santa Monica Place (Pay to Park Floor 5), 34.014343, -118.494322
+Supercharger-V3 US-Santa Nella CA, 37.100253, -121.01207
+Supercharger-V3 US-Santa Rosa CA, 38.459231, -122.730204
+Supercharger-V3 US-Santa Ysabel CA, 33.109141, -116.674608
+Supercharger US-Santee SC, 33.486252, -80.475964
+Supercharger US-Sarasota FL, 27.386447, -82.46395
+Supercharger-V3 US-Sarasota FL - Clark Road, 27.2694, -82.46306
+Supercharger-V3 US-Sault Ste. Marie MI, 46.46406888, -84.38739704
+Supercharger-V3 US-Scappoose OR, 45.756213, -122.876417
 Supercharger US-Schertz TX,29.598375,-98.27598
+Supercharger-V3 US-Scotts Valley CA, 37.047742, -122.028092
+Supercharger-V3 US-Scottsdale AZ - East Shea Boulevard, 33.582142, -111.894959
+Supercharger US-Scottsdale AZ - N. Scottsdale Road, 33.62354, -111.922351
+Supercharger US-Scottsdale AZ - North Kierland Blvd., 33.622997, -111.929513
 Supercharger US-Seabrook NH,42.895343,-70.869288
+Supercharger-V3 US-Seaford DE, 38.65932, -75.59383
+Supercharger US-Seaside CA, 36.616841, -121.843764
+Supercharger US-Seaside OR, 46.000577, -123.916851
+Supercharger US-Seattle WA - 1201 2nd Avenue (Pay to Park Floor P2), 47.606359, -122.337277
+Supercharger-V3 US-Seattle WA - NE Northgate Way (Floor 2), 47.70663, -122.327324
+Supercharger US-Seattle WA - NW Ballard Way (Floor P0), 47.662935, -122.375582
+Supercharger US-Seattle WA - Union Street (Valet & Pay to Park), 47.610134, -122.332036
+Supercharger-V3 US-Sebastian FL, 27.76787, -80.54963
+Supercharger-V3 US-Sebring FL, 27.46589, -81.43422
+Supercharger US-Sedona AZ, 34.774578, -111.763956
+Supercharger-V3 US-Seekonk MA, 41.799212, -71.33078
+Supercharger-V3 US-Selma CA, 36.576394, -119.630755
+Supercharger US-Sequim WA, 48.071434, -123.074271
+Supercharger-V3 US-Seville OH, 41.0355458, -81.86460706
+Supercharger-V3 US-Shaker Heights OH, 41.465946, -81.538675
+Supercharger US-Shamrock TX, 35.22693, -100.249058
+Supercharger US-Sheboygan WI, 43.750158, -87.74773
+Supercharger US-Sheffield OH, 41.426971, -82.07687
+Supercharger US-Shelby IA, 41.501013, -95.451344
+Supercharger-V3 US-Shelbyville IN, 39.553874, -85.775191
+Supercharger-V3 US-Shenandoah TX, 30.18840415, -95.452307
+Supercharger-V3 US-Shenandoah TX - Metropark Drive, 30.194794, -95.4535204
+Supercharger US-Sherburn MN, 43.661514, -94.732824
+Supercharger US-Sheridan WY, 44.804305, -106.955891
+Supercharger US-Sherman Oaks CA, 34.156372, -118.468147
+Supercharger-V3 US-Shirley NY, 40.804826, -72.859741
 Supercharger US-Shreveport LA,32.478711,-93.754368
+Supercharger US-Sidney NE, 41.115572, -102.951091
+Supercharger-V3 US-Siler City NC, 35.73394, -79.441277
 Supercharger US-Silverthorne CO, 39.631417, -106.070817
+Supercharger-V3 US-Simi Valley CA - Tierra Rejada Road, 34.272129, -118.797303
 Supercharger US-Sioux Falls SD, 43.527636,-96.790581
+Supercharger-V3 US-Sioux City IA - Southern Hills Drive, 42.44050327, -96.3460162
+Supercharger-V3 US-Sisseton SD, 45.659959, -97.017521
 Supercharger US-Skokie IL, 42.009046,-87.763186
+Supercharger US-Skowhegan ME, 44.779885, -69.726954
+Supercharger US-Slidell LA, 30.2664, -89.759908
 Supercharger US-Smithfield NC,35.504984,-78.325487
+Supercharger-V3 US-Socorro NM, 34.071757, -106.893212
+Supercharger-V3 US-Solana Beach CA (Floor B), 32.986533, -117.271693
+Supercharger-V3 US-Soldotna AK, 60.493983, -151.046105
+Supercharger-V3 US-Soledad CA - Front Street, 36.430137, -121.334708
+Supercharger-V3 US-Soledad CA - H Dela Rosa Street, 36.418472, -121.31999
+Supercharger US-Somerset PA, 40.01709, -79.078029
+Supercharger-V3 US-Somerset PA - Service Plaza Eastbound, 40.00076123, -79.04826698
+Supercharger-V3 US-Somerset PA - Service Plaza Westbound, 39.99911714, -79.04244641
+Supercharger-V3 US-Somerville MA, 42.39037, -71.085492
+Supercharger US-South Hill VA,36.748531,-78.103525
+Supercharger-V3 US-South Lake Tahoe CA, 38.854812, -120.013797
+Supercharger US-South San Francisco CA, 37.655559, -122.401558
+Supercharger-V3 US-South Barrington IL, 42.0751659, -88.186507
+Supercharger-V3 US-South River NJ, 40.46147481, -74.40114116
+Supercharger US-South Toms River NJ, 39.941641, -74.212712
+Supercharger US-South Padre Island TX, 26.08113, -97.161507
+Supercharger US-South Salt Lake City UT, 40.720339, -111.889066
+Supercharger US-South Burlington VT, 44.463464, -73.179404
+Supercharger-V3 US-South Boston VA - Philpott Road, 36.6868, -78.90085
+Supercharger US-Southampton NY, 40.892189, -72.426636
+Supercharger-V3 US-Southaven MS, 34.96343686, -89.99193
+Supercharger-V3 US-Southington CT, 41.61190646, -72.9007363
 Supercharger US-Southlake TX, 32.943636, -97.133889
+Supercharger-V3 US-Sparks NV, 39.538168, -119.733914
+Supercharger-V3 US-Spartanburg SC, 34.93652115, -81.9828229
+Supercharger US-Spearfish SD, 44.520309, -103.8903
+Supercharger-V3 US-Speedway IN, 39.80066288, -86.27004941
+Supercharger-V3 US-Spiceland IN, 39.847977, -85.41949
+Supercharger-V3 US-Spokane WA, 47.590147, -117.561816
+Supercharger-V3 US-Sprague WA, 47.209351, -118.225177
+Supercharger-V3 US-Spring TX - Spring Stuebner Road, 30.085521, -95.449877
 Supercharger US-Springfield IL, 39.748851, -89.671111
 Supercharger US-Springfield MO, 37.252146, -93.265243
 Supercharger US-Springfield VA, 38.774594,-77.177393
-Supercharger US-Staunton VA, 38.133369, -79.043456
-Supercharger US-Strongsville OH, 41.343339, -81.824921
+Supercharger-V3 US-Springfield IL - West Jefferson Street, 39.80794291, -89.68189331
+Supercharger-V3 US-Springfield NJ - Cleveland Place, 40.717865, -74.329506
+Supercharger US-Springfield OR - Kruse Way, 44.0826, -123.0381799
 Supercharger US-St. Charles MO, 38.78214, -90.532841
 Supercharger-V3 US-St. George SC,33.195509,-80.599848
 Supercharger US-St. George UT,37.126512,-113.601752
-Supercharger US-South Hill VA,36.748531,-78.103525
+Supercharger US-St. Augustine FL, 29.924286, -81.416018
+Supercharger-V3 US-St. Augustine FL - Inman Road, 29.91689, -81.40318
+Supercharger-V3 US-St. Augustine FL - World Commerce Pkwy, 29.98287, -81.46499
+Supercharger US-St. Joseph MI, 42.057253, -86.456475
+Supercharger-V3 US-St. Paul MN, 44.95471, -93.15532
+Supercharger US-St. Charles MO - Beale Street, 38.764741, -90.49338
+Supercharger US-St. Joseph MO, 39.768386, -94.80244
+Supercharger-V3 US-St. Regis MT, 47.298899, -115.099192
+Supercharger-V3 US-St. Johnsbury VT, 44.4609573, -72.0153012
+Supercharger-V3 US-Stafford VA, 38.46749, -77.41211
+Supercharger US-Stamford CT (Floor G), 41.068649, -73.545495
+Supercharger-V3 US-State College PA, 40.815338, -77.901595
+Supercharger US-Stateline NV (Pay to Park), 38.962652, -119.9399
+Supercharger US-Staten Island NY - Veterans Road West, 40.527032, -74.231204
+Supercharger US-Staunton VA, 38.133369, -79.043456
+Supercharger US-Steele AL, 33.9328, -86.191772
+Supercharger-V3 US-Sterling VA, 38.977874, -77.411866
+Supercharger-V3 US-Stevensville MI, 42.02706988, -86.51766791
+Supercharger-V3 US-Stockton CA, 37.984877, -121.336342
+Supercharger-V3 US-Stockton CA - East Morada Lane, 38.039397, -121.261204
+Supercharger-V3 US-Stoney Creek VA, 36.978006, -77.395017
+Supercharger-V3 US-Stoughton MA, 42.152934, -71.072828
+Supercharger US-Strasburg VA, 39.004725, -78.338305
+Supercharger US-Strongsville OH, 41.343339, -81.824921
+Supercharger-V3 US-Stuart FL, 27.174756, -80.252657
+Supercharger-V3 US-Sturbridge MA, 42.0985316, -72.07247674
+Supercharger-V3 US-Sturgeon Bay WI, 44.822138, -87.403171
+Supercharger-V3 US-Suffolk VA, 36.716931, -76.656643
+Supercharger-V3 US-Sulphur LA, 30.214463, -93.375353
+Supercharger US-Sulphur Springs TX, 33.137182, -95.603196
+Supercharger-V3 US-Summerton SC, 33.58641, -80.35701
+Supercharger-V3 US-Sun City Center FL, 27.71367, -82.37598
+Supercharger-V3 US-Sunnyvale CA - S Bernardo Ave, 37.372459, -122.05705
+Supercharger US-Sunnyvale CA - W. McKinley Ave., 37.373536, -122.033258
 Supercharger US-Superior CO, 39.954891, -105.164528
+Supercharger US-Superior MT, 47.192171, -114.888404
+Supercharger-V3 US-Susanville CA, 40.431188, -120.657819
+Supercharger-V3 US-Sutherlin OR, 43.38688, -123.341572
+Supercharger-V3 US-Sutton WV, 38.700355, -80.664055
+Supercharger-V3 US-Suwanee GA, 34.03406992, -84.0526646
+Supercharger US-Swartz Creek MI, 42.967072, -83.829044
+Supercharger-V3 US-Swedesboro NJ, 39.75990504, -75.36008049
+Supercharger US-Sweetwater TX, 32.451, -100.39285
+Supercharger-V3 US-Syosset NY - Jericho Turnpike, 40.810436, -73.50567
 Supercharger US-Syracuse NY,43.10238,-76.187497
+Supercharger-V3 US-Syracuse NY - Destiny USA Drive, 43.06725, -76.174972
+Supercharger-V3 US-Tacna AZ, 32.690999, -113.953353
+Supercharger US-Tahoe City CA, 39.167711, -120.144615
+Supercharger US-Tallahassee FL, 30.510797, -84.247745
+Supercharger-V3 US-Tallahassee FL - West Pensacola Street, 30.441613, -84.31976
+Supercharger US-Tampa FL, 27.965009, -82.402577
+Supercharger-V3 US-Tampa FL - East Bearss Avenue, 28.08817, -82.45258
+Supercharger-V3 US-Tampa FL - North Dale Mabry Highway, 27.949252, -82.505069
+Supercharger US-Tampa FL - West Swann Avenue, 27.937283, -82.481566
+Supercharger US-Tannersville PA, 41.045633, -75.312381
+Supercharger-V3 US-Tappahannock VA, 37.90395, -76.8661
+Supercharger-V3 US-Tarpon Springs FL, 28.13708, -82.7567
+Supercharger US-Tarrytown NY, 41.061402, -73.836346
 Supercharger US-Tejon Ranch CA, 34.987, -118.946172
 Supercharger US-Temecula CA, 33.524190, -117.152544
+Supercharger-V3 US-Temecula CA - Temecula Parkway, 33.474971, -117.129145
+Supercharger-V3 US-Tempe AZ, 33.378623, -111.965416
+Supercharger-V3 US-Temple TX, 31.138143, -97.329037
 Supercharger US-Terre Haute IN, 39.443344, -87.331722
+Supercharger-V3 US-Terrell TX, 32.7174, -96.323137
 Supercharger US-Texarkana TX, 33.459914, -94.077229
 Supercharger US-The Dalles OR,45.611963,-121.208359
+Supercharger-V3 US-Thomasville NC, 35.8559055, -80.07265178
 Supercharger-V3 US-Thornton CO, 39.914837, -104.9864, 70
+Supercharger-V3 US-Thornton NH, 43.870719, -71.652497
+Supercharger US-Thousand Oaks CA - East Thousand Oaks Boulevard, 34.159574, -118.822809
+Supercharger US-Thousand Oaks CA - West Hillcrest Drive, 34.184718, -118.89107
 Supercharger US-Three Rivers TX,28.521622,-98.185825
 Supercharger US-Tifton GA,31.448777,-83.532257
+Supercharger US-Tigard OR (Floor L), 45.450508, -122.783501
+Supercharger-V3 US-Tillamook OR, 45.481666, -123.842476
+Supercharger-V3 US-Tilton NH, 43.455135, -71.565511
+Supercharger-V3 US-Tinton Falls NJ, 40.226248, -74.093416
+Supercharger-V3 US-Titusville FL, 28.551923, -80.840638
+Supercharger-V3 US-Tofte MN, 47.564462, -90.856492
 Supercharger US-Toledo OH,41.721536,-83.509201
+Supercharger-V3 US-Tomah WI, 44.018686, -90.507303
+Supercharger US-Tonopah NV, 38.06963, -117.231678
+Supercharger US-Tooele UT, 40.685402, -112.267799
+Supercharger US-Topeka KS, 39.043757, -95.759847
+Supercharger-V3 US-Topeka KS - Topeka Service Area, 39.01937, -95.508092
+Supercharger-V3 US-Torrance CA (Floor 1), 33.83431, -118.346985
+Supercharger-V3 US-Towson MD, 39.396423, -76.575478
+Supercharger-V3 US-Tracy CA - West Grant Line Road, 37.752906, -121.467661
 Supercharger-V3 US-Traver CA, 36.448943,-119.486536
 Supercharger US-Traverse City MI,44.744824,-85.644033
 Supercharger US-Tremonton UT,41.709934,-112.198557
+Supercharger-V3 US-Trenton NJ - Richard Stockton, 40.177959, -74.62996
+Supercharger US-Triadelphia WV, 40.06076, -80.602742
+Supercharger-V3 US-Triadelphia WV - Gantzer Ridge Road, 40.06086, -80.58933
 Supercharger US-Trinidad CO,37.134148,-104.519374
+Supercharger-V3 US-Troutdale OR, 45.543105, -122.389693
+Supercharger US-Truckee CA - Brockway Road, 39.321517, -120.162489
+Supercharger US-Truckee CA - Donner Pass Road, 39.326962, -120.207476
+Supercharger-V3 US-Truckee CA - Soaring Way, 39.320481, -120.155382
 Supercharger US-Truth or Consequences NM,33.15523,-107.251652
+Supercharger US-Tucson AZ, 32.0846, -110.80395
+Supercharger US-Tucson AZ - East Skyline Drive, 32.325321, -110.931694
+Supercharger-V3 US-Tucson AZ - West River Road, 32.323084, -111.043891
 Supercharger US-Tucumcari NM, 35.153945, -103.722726
+Supercharger-V3 US-Tukwila WA - Strander Boulevard, 47.455312, -122.256845
+Supercharger-V3 US-Tulalip Bay WA, 48.095561, -122.188333
+Supercharger-V3 US-Tully NY, 42.800068, -76.121841
+Supercharger-V3 US-Tulsa OK, 36.054129, -96.004924
 Supercharger-V3 US-Tumwater WA,46.952976,-122.935158
 Supercharger US-Tupelo MS, 34.311517, -88.70099
-Supercharger-V3 US-Vancouver WA - NE Vancouver Mall Drive, 45.659599, -122.583534
+Supercharger US-Turkey Lake FL, 28.514876, -81.500512
+Supercharger-V3 US-Turlock CA, 37.509278, -120.876381
+Supercharger US-Tusayan AZ Supercharger, 35.969454, -112.127708
+Supercharger-V3 US-Tustin CA, 33.710872, -117.817284
+Supercharger-V3 US-Tustin CA - Flight Way, 33.703899, -117.837267
+Supercharger-V3 US-Tustin CA - Red Hill Avenue, 33.728264, -117.82171
+Supercharger US-Twentynine Palms CA, 34.1211, -116.050824
+Supercharger US-Twin Falls ID, 42.598054, -114.455579
+Supercharger-V3 US-Twinsburg OH, 41.311513, -81.448866
+Supercharger-V3 US-Two Harbors MN, 47.028324, -91.680656
+Supercharger-V3 US-Tyngsborough MA, 42.69755, -71.439571
+Supercharger-V3 US-Tysons VA (Floor 1), 38.91551, -77.22411
+Supercharger US-Ukiah CA, 39.147838, -123.208707
+Supercharger-V3 US-Ukiah CA - North State Street, 39.167816, -123.210423
+Supercharger-V3 US-Union City CA, 37.587022, -122.020124
+Supercharger-V3 US-Union NJ, 40.695841, -74.253994
+Supercharger-V3 US-Universal City CA, 34.138187, -118.359252
+Supercharger-V3 US-Upper Sandusky OH, 40.834626, -83.237153
+Supercharger-V3 US-Urbana IL, 40.11513862, -88.1827053
+Supercharger-V3 US-Urbana MD, 39.32738, -77.34679
+Supercharger US-Utica NY, 43.114038, -75.206198
+Supercharger US-Vacaville CA, 38.366761, -121.957984
+Supercharger-V3 US-Vacaville CA - Harbison Drive, 38.362255, -121.963247
+Supercharger-V3 US-Valdosta GA, 30.816378, -83.320657
+Supercharger-V3 US-Valencia CA, 34.423707, -118.584577
+Supercharger US-Vallejo CA, 38.131234, -122.223719
+Supercharger-V3 US-Vallejo CA - Solano Avenue, 38.10476627, -122.23068829
+Supercharger-V3 US-Valley Stream NY, 40.664272, -73.725037
 Supercharger US-Van Horn TX,31.034468,-104.861422
+Supercharger-V3 US-Van Buren AR, 35.458721, -94.355384
+Supercharger-V3 US-Vancouver WA - NE Vancouver Mall Drive, 45.659599, -122.583534
+Supercharger-V3 US-Vancouver WA - Northeast Fourth Plain Boulevard, 45.645638, -122.601482
+Supercharger-V3 US-Vandalia IL, 38.978076, -89.099183
+Supercharger-V3 US-Veedersburg IN, 40.11304, -87.24752
+Supercharger-V3 US-Venice FL, 27.10789, -82.38575
+Supercharger-V3 US-Ventura CA, 34.27512778, -119.23966623
+Supercharger-V3 US-Ventura CA - South Ann Street, 34.277333, -119.283323
+Supercharger-V3 US-Vernon CT, 41.831076, -72.495841
+Supercharger-V3 US-Vernon TX, 34.161151, -99.297562
 Supercharger-V3 US-Vero Beach FL,27.64031,-80.513508
+Supercharger-V3 US-Verona NY, 43.112774, -75.591209
+Supercharger-V3 US-Vicksburg MS, 32.314095, -90.898906
 Supercharger US-Victor NY,43.028653,-77.440279
+Supercharger US-Victoria TX, 28.766882, -96.97882
+Supercharger-V3 US-Victorville CA, 34.51729, -117.314069
+Supercharger-V3 US-Victorville CA - Amargosa Road, 34.462979, -117.352688
+Supercharger-V3 US-Vienna VA, 38.895249, -77.27431
+Supercharger-V3 US-Villa Park IL, 41.90650655, -87.97823471
+Supercharger-V3 US-Virginia Beach VA, 36.84092, -76.05565
+Supercharger-V3 US-Virginia Beach VA - Lynnhaven Parkway, 36.7959, -76.10194
+Supercharger-V3 US-Visalia CA, 36.351051, -119.425071
+Supercharger-V3 US-Vista CA, 33.200243, -117.245757
+Supercharger-V3 US-Vista CA - University Drive, 33.1700099, -117.2189425
 Supercharger US-Waco TX, 31.582197, -97.109052
+Supercharger-V3 US-Walcott IA, 41.618278, -90.782927
+Supercharger-V3 US-Waldorf MD, 38.63031, -76.919152
+Supercharger US-Walker MI, 43.018186, -85.724421
+Supercharger US-Wall SD, 43.993484, -102.242389
+Supercharger US-Wallace NC, 34.756571, -77.948119
+Supercharger-V3 US-Waller TX, 30.071011, -95.932459
+Supercharger-V3 US-Walnut Creek CA - Oak Grove Road, 37.930066, -122.014754
+Supercharger US-Walnut Creek CA - Plaza Escuela (Level 4), 37.895525, -122.061284
+Supercharger-V3 US-Walterboro SC, 32.93214, -80.69271
+Supercharger US-Wareham MA, 41.774509, -70.743851
+Supercharger-V3 US-Warsaw NC - NC-24, 34.993268, -78.136298
+Supercharger-V3 US-Warwick RI, 41.733136, -71.436134
 Supercharger-V3 US-Washington PA,40.187308,-80.2294
+Supercharger-V3 US-Washington DC - Idaho Avenue (Pay to Park Floor P2), 38.934857, -77.073612
+Supercharger-V3 US-Washington DC - M Street Northeast, 38.90574, -77.005
+Supercharger-V3 US-Washington DC - Market Street NE, 38.921756, -76.953072
+Supercharger US-Washington DC - Wisconsin Ave NW (Ground Floor), 38.915854, -77.067303
+Supercharger-V3 US-Washington IN, 38.652394, -87.133278
+Supercharger-V3 US-Water Mill NY, 40.911494, -72.352835
 Supercharger US-Waterbury CT, 41.537145, -73.00555
-Supercharger US-Watterloo NY, 42.969202, -76.846107
+Supercharger-V3 US-Waterloo IA, 42.45953237, -92.3286852
 Supercharger US-Watertown NY, 43.979582, -75.954102
+Supercharger-V3 US-Watertown SD, 44.88934144, -97.09431938
+Supercharger-V3 US-Waterville ME, 44.568839, -69.639171
+Supercharger US-Watsonville CA, 36.915836, -121.773048
+Supercharger US-Watterloo NY, 42.969202, -76.846107
+Supercharger-V3 US-Waukesha WI, 43.022692, -88.202864
 Supercharger US-Wausau WI, 44.931231, -89.661909
-Supercharger US-Webster TX, 29.519295, -95.122049
 Supercharger US-Weatherford OK, 35.538718, -98.660132
+Supercharger-V3 US-Weaverville CA, 40.720346, -122.927085
+Supercharger US-Webster TX, 29.519295, -95.122049
+Supercharger-V3 US-Wells ME, 43.3207506, -70.5805397
+Supercharger-V3 US-Wells NV, 41.10112, -114.957007
 Supercharger US-West Des Moines IA, 41.598957, -93.806328
 Supercharger US-West Palm Beach FL - Garden Road,26.781972,-80.092564
 Supercharger-V3 US-West Palm Beach FL - Palm Beach Outlets,26.726273,-80.087486
 Supercharger US-West Nyack NY,41.094726,-73.955692
 Supercharger US-West Wendover NV, 40.738369, -114.059043
+Supercharger-V3 US-West Covina CA, 34.070435, -117.889539
+Supercharger-V3 US-West Hollywood CA (Pay to Park), 34.091242, -118.382628
+Supercharger US-West Hartford CT, 41.722556, -72.760125
+Supercharger US-West Melbourne FL, 28.037106, -80.663879
+Supercharger-V3 US-West Palm Beach FL - 45th Street, 26.758285, -80.089347
+Supercharger-V3 US-West Palm Beach FL - Florida Turnpike Service Plaza, 26.635456, -80.174813
+Supercharger US-West Springfield MA, 42.131659, -72.622369
+Supercharger US-West Yellowstone MT, 44.656368, -111.099617
+Supercharger-V3 US-West Lebanon NH, 43.624294, -72.324394
+Supercharger-V3 US-West Chester Township OH, 39.356268, -84.377583
+Supercharger US-West Cincinnati OH, 39.19334, -84.658931
+Supercharger-V3 US-West Unity OH - Indian Meadow Service Plaza, 41.60485, -84.40689
+Supercharger-V3 US-West Unity OH - Tiffin River Service Plaza, 41.60408, -84.40848
+Supercharger-V3 US-West Lake Hills TX, 30.290949, -97.827122
+Supercharger-V3 US-Westampton NJ - Rancocas Road, 40.006576, -74.859803
+Supercharger US-Westminster CA, 33.745047, -118.013077
+Supercharger-V3 US-Westminster CO, 39.83093, -105.02389
+Supercharger US-Weston WV, 39.019403, -80.416528
+Supercharger-V3 US-Wharton TX, 29.326682, -96.123772
+Supercharger US-Wheatland WY, 42.072447, -104.963081
+Supercharger-V3 US-White Hills AZ, 35.699574, -114.476485
+Supercharger-V3 US-White Marsh MD, 39.373814, -76.443473
+Supercharger-V3 US-White Plains MD, 38.595787, -76.936495
+Supercharger US-Wichita KS, 37.608894, -97.333795
+Supercharger US-Wickenburg AZ, 33.970361, -112.73168
+Supercharger-V3 US-Wilkes-Barre Township PA, 41.23866475, -75.84582248
+Supercharger US-Willcox AZ, 32.270764, -109.84577
+Supercharger-V3 US-Williams CA - 6th Street, 39.155735, -122.148923
+Supercharger-V3 US-Williamsburg VA, 37.26584, -76.676705
 Supercharger US-Williamsport PA,41.232444,-77.020135
+Supercharger-V3 US-Williston VT, 44.448722, -73.107999
+Supercharger US-Wilmington NC, 34.242299, -77.828761
+Supercharger-V3 US-Winchester VA, 39.188133, -78.125725
+Supercharger-V3 US-Windham ME, 43.84157332, -70.4418255
+Supercharger-V3 US-Windsor CA, 38.549875, -122.805393
+Supercharger-V3 US-Winnemucca NV, 40.959262, -117.74675
 Supercharger-V3 US-Winter Garden FL,28.552156,-81.584031
+Supercharger-V3 US-Winter Park FL, 28.605232, -81.366242
+Supercharger-V3 US-Woburn MA, 42.518154, -71.137139
+Supercharger-V3 US-Woodbridge Township NJ, 40.536353, -74.298016
+Supercharger US-Woodbridge VA, 38.64082, -77.29633
+Supercharger-V3 US-Woodbridge VA - Jefferson Davis Highway, 38.60892, -77.29031
+Supercharger-V3 US-Woodbridge VA - Potomac Town Place, 38.62924, -77.28939
+Supercharger-V3 US-Woodburn OR, 45.152814, -122.882442
+Supercharger-V3 US-Woodcliff Lake NJ, 41.041381, -74.074801
+Supercharger-V3 US-Woodland CA, 38.670936, -121.723771
+Supercharger-V3 US-Woodstock GA, 34.118331, -84.52855
+Supercharger-V3 US-Woodstock VA, 38.86728, -78.51888
+Supercharger US-Worthington MN, 43.63477, -95.595216
 Supercharger US-Wytheville VA, 36.945711, -81.054562
+Supercharger-V3 US-Yakima WA, 46.609199, -120.49244
+Supercharger-V3 US-Yakima WA - East Yakima Avenue, 46.605313, -120.482625
+Supercharger-V3 US-Yemassee SC, 32.63314, -80.87461
+Supercharger US-Yermo CA, 34.907176, -116.836014
+Supercharger-V3 US-Yermo CA - Sunrise Canyon Road, 34.919649, -116.769199
+Supercharger US-Yonkers NY, 40.963659, -73.85529
+Supercharger-V3 US-Yonkers NY - Central Park Avenue, 40.966304, -73.838378
+Supercharger-V3 US-Yorba Linda CA, 33.889198, -117.808147
+Supercharger-V3 US-Yorba Linda CA - Yorba Linda Boulevard, 33.887762, -117.813759
+Supercharger US-York PA, 39.910468, -76.701726
+Supercharger US-Yorktown Heights NY, 41.290501, -73.8315
+Supercharger-V3 US-Ypsilanti MI, 42.23284181, -83.67999711
+Supercharger-V3 US-Yreka CA, 41.701728, -122.645546
+Supercharger US-Yuba City CA, 39.148073, -121.648431
+Supercharger-V3 US-Yucca Valley CA, 34.123116, -116.416066
+Supercharger-V3 US-Yulee FL, 30.623956, -81.637801
+Supercharger US-Yuma AZ, 32.726552, -114.619149
+Supercharger-V3 US-Yuma AZ - South Fortuna Road, 32.668372, -114.443146
 Supercharger US-Zionsville IL, 39.950588,-86.343793
 
 Urbancharger US-Anaheim CA, 33.805187, -117.882111
