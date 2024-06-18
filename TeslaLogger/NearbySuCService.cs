@@ -629,7 +629,7 @@ VALUES(
             return false;
         }
 
-        void GetNextSuperchargerToCalculate()
+        internal static void GetNextSuperchargerToCalculate()
         {
             try
             {
@@ -638,8 +638,8 @@ VALUES(
                     Car c = Car.Allcars[0];
                     HttpClient client = c.webhelper.httpclient_teslalogger_de;
 
-                    HttpResponseMessage result = client.GetAsync("https://teslalogger.de:8089/GetNextSuperchargerToCalculate").Result;
-                    var resultContent = result.Content.ReadAsStringAsync().Result;
+                    HttpResponseMessage result = client.GetAsync(new Uri("https://teslalogger.de:8089/GetNextSuperchargerToCalculate")).Result;
+                    string resultContent = result.Content.ReadAsStringAsync().Result;
 
                     if (int.TryParse(resultContent, out int trid))
                     {
@@ -654,20 +654,20 @@ VALUES(
             }
         }
 
-        Available GetGuestAvailability(Car c, int trid)
+        internal static Available GetGuestAvailability(Car c, int trid)
         {
             Available a = new Available();
 
             string content = "{\"variables\":{\"identifier\":{\"siteId\":{\"id\":$SITEID$,\"siteType\":\"SITE_TYPE_SUPERCHARGER\"}},\"experience\":\"GUEST\",\"deviceLocale\":\"de-DE\"},\"operationName\":\"getGuestChargingSiteDetails\",\"query\":\"\\n    query getGuestChargingSiteDetails($identifier: ChargingSiteIdentifierInput!, $deviceLocale: String!, $experience: ChargingExperienceEnum!) {\\n  site(\\n    identifier: $identifier\\n    deviceLocale: $deviceLocale\\n    experience: $experience\\n  ) {\\n    activeOutages\\n    address {\\n      countryCode\\n    }\\n    chargers {\\n      id\\n      label\\n    }\\n    chargersAvailable {\\n      chargerDetails {\\n        id\\n        availability\\n      }\\n    }\\n    holdAmount {\\n      holdAmount\\n      currencyCode\\n    }\\n    maxPowerKw\\n    name\\n    programType\\n    publicStallCount\\n    id\\n    pricing(experience: $experience) {\\n      userRates {\\n        activePricebook {\\n          charging {\\n            uom\\n            rates\\n            buckets {\\n              start\\n              end\\n            }\\n            bucketUom\\n            currencyCode\\n            programType\\n            vehicleMakeType\\n            touRates {\\n              enabled\\n              activeRatesByTime {\\n                startTime\\n                endTime\\n                rates\\n              }\\n            }\\n          }\\n          parking {\\n            uom\\n            rates\\n            buckets {\\n              start\\n              end\\n            }\\n            bucketUom\\n            currencyCode\\n            programType\\n            vehicleMakeType\\n            touRates {\\n              enabled\\n              activeRatesByTime {\\n                startTime\\n                endTime\\n                rates\\n              }\\n            }\\n          }\\n          congestion {\\n            uom\\n            rates\\n            buckets {\\n              start\\n              end\\n            }\\n            bucketUom\\n            currencyCode\\n            programType\\n            vehicleMakeType\\n            touRates {\\n              enabled\\n              activeRatesByTime {\\n                startTime\\n                endTime\\n                rates\\n              }\\n            }\\n          }\\n        }\\n      }\\n    }\\n  }\\n}\\n    \"}";
             content = content.Replace("$SITEID$", trid.ToString());
 
-            var client = TeslaGuestHttpClient();
+            HttpClient client = TeslaGuestHttpClient();
 
             using (var request = new HttpRequestMessage())
             {
-                using (var scontent = new StringContent(content, Encoding.UTF8, "application/json"))
+                using (StringContent scontent = new StringContent(content, Encoding.UTF8, "application/json"))
                 {
-                    var result = client.PostAsync("https://www.tesla.com/de_DE/charging/guest/api/graphql?operationName=getGuestChargingSiteDetails", scontent).Result;
+                    HttpResponseMessage result = client.PostAsync(new Uri("https://www.tesla.com/de_DE/charging/guest/api/graphql?operationName=getGuestChargingSiteDetails"), scontent).Result;
                     string r = result.Content.ReadAsStringAsync().Result;
 
                     dynamic j = JsonConvert.DeserializeObject(r);
