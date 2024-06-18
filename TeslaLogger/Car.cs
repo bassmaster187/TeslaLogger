@@ -1376,6 +1376,7 @@ namespace TeslaLogger
                 // get a position
                 _ = Task.Factory.StartNew(() =>
                 {
+                    Tools.DebugLog("ShiftStateChange: " + oldState + " -> " + newState + " -- webhelper.IsDriving(true)");
                     webhelper.IsDriving(true);
                 }, CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
             }
@@ -1599,6 +1600,7 @@ namespace TeslaLogger
                 // get a position
                 _ = Task.Factory.StartNew(() =>
                 {
+                    Tools.DebugLog("change TeslaLogger state: " + _oldState.ToString() + " -> " + _newState.ToString() + " -- webhelper.IsDriving(true)");
                     webhelper.IsDriving(true);
                 }, CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
             }
