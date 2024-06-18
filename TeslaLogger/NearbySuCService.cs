@@ -47,8 +47,8 @@ namespace TeslaLogger
                         GetNextSuperchargerToCalculate();
                     }
 
-                    // sleep 5 Minutes
-                    Thread.Sleep(300000);
+                    // sleep 10 Minutes
+                    Thread.Sleep(600000);
                 }
             }
             catch (Exception ex)
