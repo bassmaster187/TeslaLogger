@@ -1374,11 +1374,8 @@ namespace TeslaLogger
             if (!oldState.Equals("P") && newState.Equals("P"))
             {
                 // get a position
-                _ = Task.Factory.StartNew(() =>
-                {
-                    Tools.DebugLog("ShiftStateChange: " + oldState + " -> " + newState + " -- webhelper.IsDriving(true)");
-                    webhelper.IsDriving(true);
-                }, CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
+                Tools.DebugLog("ShiftStateChange: " + oldState + " -> " + newState + " -- webhelper.IsDriving(true)");
+                webhelper.IsDriving(true);
             }
         }
 
@@ -1598,11 +1595,8 @@ namespace TeslaLogger
             if (_oldState != TeslaState.Online && _newState == TeslaState.Online)
             {
                 // get a position
-                _ = Task.Factory.StartNew(() =>
-                {
-                    Tools.DebugLog("change TeslaLogger state: " + _oldState.ToString() + " -> " + _newState.ToString() + " -- webhelper.IsDriving(true)");
-                    webhelper.IsDriving(true);
-                }, CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
+                Tools.DebugLog("change TeslaLogger state: " + _oldState.ToString() + " -> " + _newState.ToString() + " -- webhelper.IsDriving(true)");
+                webhelper.IsDriving(true);
             }
             // any -> charging
             if (_oldState != TeslaState.Charge && _newState == TeslaState.Charge)
