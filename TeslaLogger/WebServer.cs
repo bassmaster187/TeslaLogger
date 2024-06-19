@@ -231,6 +231,9 @@ namespace TeslaLogger
                     case bool _ when request.Url.LocalPath.Equals("/getchargingstate", System.StringComparison.Ordinal):
                         Admin_Getchargingstate(request, response);
                         break;
+                    case bool _ when request.Url.LocalPath.Equals("/getchargingstates", System.StringComparison.Ordinal):
+                        Admin_Getchargingstates(request, response);
+                        break;
                     case bool _ when request.Url.LocalPath.Equals("/setcost", System.StringComparison.Ordinal):
                         Admin_Setcost(request, response);
                         break;
@@ -3083,6 +3086,70 @@ FROM
             }
 
             Logfile.Log("JSON: " + responseString);
+
+            WriteString(response, responseString, "application/json");
+        }
+
+        private static void Admin_Getchargingstates(HttpListenerRequest request, HttpListenerResponse response)
+        {
+            var startStr = request.QueryString["start"];
+            var gotStart = long.TryParse(startStr, out var start);
+            var endStr = request.QueryString["end"];
+            var gotEnd = long.TryParse(endStr, out var end);
+            var responseString = "";
+
+            try
+            {
+                Logfile.Log("HTTP getchargingstate");
+
+                using (var dt = new DataTable())
+                {
+                    var query = new StringBuilder();
+                    query.Append(@"SELECT chargingstate.id, UNIX_TIMESTAMP(chargingstate.StartDate)*1000 as StartDate, UNIX_TIMESTAMP(chargingstate.EndDate)*1000 as EndDate
+                            FROM chargingstate join pos on chargingstate.pos = pos.id 
+                            join charging on chargingstate.EndChargingID = charging.id");
+                    if (gotStart)
+                    {
+                        query.Append(" WHERE UNIX_TIMESTAMP(chargingstate.StartDate)*1000 >= @start");
+                        if (gotEnd)
+                        {
+                            query.Append(" AND UNIX_TIMESTAMP(chargingstate.EndDate)*1000 <= @end");
+                        }
+                    }
+                    else if (gotEnd)
+                    {
+                        query.Append(" WHERE UNIX_TIMESTAMP(chargingstate.EndDate)*1000 <= @end");
+                    }
+
+                    //Tools.DebugLog("Query: " + query);
+
+#pragma warning disable CA2100 // Review SQL queries for security vulnerabilities
+                    using (var da = new MySqlDataAdapter(query.ToString(), DBHelper.DBConnectionstring))
+                    {
+                        if (gotStart)
+                        {
+                            da.SelectCommand.Parameters.AddWithValue("@start", start);
+                        }
+                        if (gotEnd)
+                        {
+                            da.SelectCommand.Parameters.AddWithValue("@end", end);
+                        }
+
+                        SQLTracer.TraceDA(dt, da);
+
+                        responseString = dt.Rows.Count > 0 ? Tools.DataTableToJSONWithJavaScriptSerializer(dt) : "[]";
+                    }
+#pragma warning restore CA2100 // Review SQL queries for security vulnerabilities
+                    dt.Clear();
+                }
+            }
+            catch (Exception ex)
+            {
+                ex.ToExceptionless().FirstCarUserID().Submit();
+                Logfile.Log(ex.ToString());
+            }
+
+            Tools.DebugLog("JSON: " + responseString);
 
             WriteString(response, responseString, "application/json");
         }
