@@ -1350,7 +1350,7 @@ WHERE
 ", con))
                         {
                             cmd.Parameters.AddWithValue("@chagingStateID", chargingstate);
-                            Tools.DebugLog(cmd);
+//                            Tools.DebugLog(cmd);
                             MySqlDataReader dr = SQLTracer.TraceDR(cmd);
                             if (dr.Read())
                             {
