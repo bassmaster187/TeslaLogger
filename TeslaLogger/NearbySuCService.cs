@@ -671,6 +671,12 @@ VALUES(
                     string r = result.Content.ReadAsStringAsync().Result;
 
                     dynamic j = JsonConvert.DeserializeObject(r);
+                    if (j?["data"] == null || j["errors"] != null)
+                    {
+                        Tools.DebugLog($"Unexpected GuestAPI response: {r}");
+                        return a;
+                    }
+
                     dynamic site = j["data"]["site"];
                     JArray chargers = site["chargers"];
                     JArray chargerDetails = site["chargersAvailable"]["chargerDetails"];
