@@ -2813,44 +2813,54 @@ Supercharger NL-Zwolle, 52.531928, 6.157031
 Supercharger-V3 NL-Weert,51.281770, 5.650989
 Supercharger-V3 NL-Wolvega, 52.880495, 6.021328
 Supercharger-V3 NL-Tilburg,51.543084, 5.111792
-Supercharger NO-Aksdal, 59.423006, 5.44306
 Supercharger-V3 NO-Aksdal South, 59.421206, 5.4435
-Supercharger NO-Alvdal, 62.114854, 10.616826
+Supercharger NO-Aksdal, 59.423006, 5.44306
 Supercharger-V3 NO-Alta, 69.961145,23.232869
-Supercharger NO-Åndalsnes, 62.557776,7.685321
+Supercharger NO-Alvdal, 62.114854, 10.616826
+Supercharger-V3 NO-Arendal, 58.467053, 8.721947
 Supercharger NO-Arna, 60.421924, 5.46703
-Supercharger NO-Åsane, 60.484345, 5.375959
 Supercharger NO-Aspøya, 63.011584, 7.977743
 Supercharger NO-Aurland, 60.89863, 7.21082
 Supercharger-V3 NO-Bamble, 58.9713, 9.51278, 15
 Supercharger-V3 NO-Bamble,58.971497,9.512768,15
+Supercharger-V3 NO-Beitostølen, 61.248669, 8.906103
 Supercharger NO-Berkåk, 62.831859, 10.009871
 Supercharger NO-Bismo, 61.883135, 8.267249
 Supercharger-V3 NO-Brekkvasselv, 64.847611,13.015797
 Supercharger NO-Brumunddal, 60.878507,10.929387
 Supercharger NO-Bygland, 58.82792, 7.796114
 Supercharger NO-Dombås, 62.074749, 9.12783
+Supercharger-V3 NO-Eggedal, 60.246023, 9.355252
 Supercharger NO-Eidfjord, 60.467438, 7.068209
 Supercharger NO-Eidsvoll Verk, 60.312269, 11.145104
 Supercharger NO-Elverum old, 60.884053, 11.541698, 20
 Supercharger-V3 NO-Elverum, 60.887617,11.515327
+Supercharger-V3 NO-Evenes, 68.497406, 16.702666
 Supercharger-V3 NO-Fauske, 67.258778,15.400971, 20
 Supercharger NO-Flå, 60.381236, 9.610003
-Supercharger NO-Gol, 60.70232, 8.9862
+Supercharger-V3 NO-Forus, 58.897167, 5.705408
+Supercharger-V3 NO-Gjøvik, 60.798565, 10.695083
 Supercharger NO-Gol West, 60.697258,8.953551
+Supercharger NO-Gol, 60.70232, 8.9862
 Supercharger NO-Grong, 64.464913, 12.316532
+Supercharger-V3 NO-Grålum, 59.297057, 11.062906
+Supercharger-V3 NO-Gudvangen, 60.878909, 6.843175
 Supercharger NO-Gulsvik, 60.381223, 9.609859
 Supercharger NO-Hernes, 60.933109, 11.676209
+Supercharger-V3 NO-Hitra, 63.521397, 9.109465
+Supercharger-V3 NO-Hjerkinn, 62.221256, 9.545176
 Supercharger NO-Hokksund, 59.761033, 9.905583
 Supercharger NO-Holmestrand, 59.490174, 10.294565
 Supercharger-V3 NO-Honningsvåg, 70.999642,25.967133
 Supercharger NO-Hovden, 59.561243, 7.356849
 Supercharger NO-Indre Arna, 60.421749, 5.467271
 Supercharger NO-Innhavet, 67.962417, 15.929685
+Supercharger-V3 NO-Innlandsporten, 60.63055647, 11.30151687
 Supercharger NO-Jaren, 59.617769, 11.00302
 Supercharger-V3 NO-Karasjok, 69.471888,25.509338
 Supercharger-V3 NO-Kautokeino, 69.020412,23.048909
-Supercharger NO-Lærdal, 61.064751, 7.510658
+Supercharger-V3 NO-Kristiansand, 58.177107, 8.135951
+Supercharger-V3 NO-Krokstad, 59.758045, 9.995073
 Supercharger NO-Lampeland, 59.836224, 9.579221
 Supercharger NO-Larvik, 59.112393, 10.108783
 Supercharger NO-Lasses,59.037499,9.673879
@@ -2861,28 +2871,39 @@ Supercharger NO-Levanger, 63.734517, 11.281552
 Supercharger NO-Lier North, 59.770833, 10.262139
 Supercharger NO-Lier South, 59.766259, 10.257838
 Supercharger-V3 NO-Liertoppen, 59.80906, 10.299437
-Supercharger NO-Lillehammer, 61.13045, 10.43491
 Supercharger-V3 NO-Lillehammer - Strandtorget, 61.114584,10.447309
+Supercharger NO-Lillehammer, 61.13045, 10.43491
 Supercharger NO-Lillesand, 58.236817, 8.299052
 Supercharger NO-Lyngdal, 58.155643, 7.102354
+Supercharger NO-Lærdal, 61.064751, 7.510658
 Supercharger-V3 NO-Maurset, 60.410401, 7.325072
 Supercharger NO-Mo i Rana, 66.307374, 14.152668
 Supercharger-V3 NO-Molde, 62.739453,7.19985
-Supercharger NO-Mosjøen, 65.83483634, 13.191672563
 Supercharger NO-Mosjøen North, 65.841627, 13.187939
+Supercharger NO-Mosjøen, 65.83483634, 13.191672563
+Supercharger NO-Narvik, 68.43662, 17.425043
 Supercharger NO-Nes i Ådal, 60.58475, 9.985092
-Supercharger-V3 NO-Notodden, 59.566832,9.219062
+Supercharger-V3 NO-Nordfjordeid, 61.912414, 5.9805
 Supercharger NO-Norheimsund, 60.372342, 6.141213
+Supercharger-V3 NO-Notodden, 59.566832,9.219062
 Supercharger NO-Nyborg, 60.484297, 5.375426
+Supercharger-V3 NO-Oppdal, 62.595069, 9.689805
 Supercharger NO-Os, 60.192788, 5.4652
+Supercharger-V3 NO-Oslo  - Central- Sentrum P-hus, 59.915991, 10.741252
+Supercharger-V3 NO-Oslo North - Ullevaal, 59.950036, 10.737609
 Supercharger NO-Porsgrunn, 59.122098, 9.707564
+Supercharger-V3 NO-Reine, 67.934833, 13.094056
 Supercharger NO-Rennebu, 62.832142, 10.010141
 Supercharger NO-Ringdalskogen, 59.112402, 10.108727
+Supercharger-V3 NO-Rjukan, 59.88045, 8.62511
+Supercharger-V3 NO-Rudshøgda, 60.910186, 10.812331
 Supercharger NO-Rugtvedt, 59.035933, 9.67402
 Supercharger NO-Rygge, 59.38753, 10.751039
+Supercharger-V3 NO-Rødberg, 60.265975, 8.947862
 Supercharger NO-Røldal, 59.816824, 6.752226
 Supercharger NO-Sandane, 61.7780226, 6.2131884
 Supercharger-V3 NO-Sandefjord,59.179708,10.209267
+Supercharger-V3 NO-Seljord, 59.480648, 8.635094
 Supercharger NO-Setermoen, 68.860147, 18.346723
 Supercharger-V3 NO-Skaidi, 70.431954, 24.50683
 Supercharger NO-Skarnes, 60.248841, 11.743848
@@ -2891,19 +2912,33 @@ Supercharger NO-Skibotn, 69.392448, 20.268423
 Supercharger-V3 NO-Skien,59.206742,9.6090613
 Supercharger NO-Skjåk, 61.88317, 8.267157
 Supercharger NO-Skulestadmo, 60.658297, 6.436256
-Supercharger NO-Svolvær, 68.233132, 14.559828
 Supercharger NO-Solli, 59.324292, 10.954448
+Supercharger-V3 NO-Stavanger Central, 58.971873, 5.736712
+Supercharger-V3 NO-Steinkjer, 64.019643, 11.493163
 Supercharger NO-Stjørdal, 63.466385, 10.918098
-Supercharger-V3 NO-Stryn, 61.904677,6.7258
+Supercharger-V3 NO-Stord, 59.775313, 5.485631
 Supercharger NO-Storjord, 66.814045, 15.401738
+Supercharger-V3 NO-Stryn, 61.904677,6.7258
 Supercharger NO-Sundebru, 58.820783, 9.073746
+Supercharger NO-Svolvær, 68.233132, 14.559828
 Supercharger NO-Sørkjosen, 69.792498, 20.93907
+Supercharger-V3 NO-Treungen, 59.018753, 8.52381
 Supercharger-V3 NO-Trondheim, 63.441755,10.457297
+Supercharger-V3 NO-Trysil, 61.315993, 12.264412
+Supercharger-V3 NO-Veggli, 60.039943, 9.156763
+Supercharger-V3 NO-Verdal, 63.79299, 11.489223
 Supercharger-V3 NO-Vestby, 59.602901,10.741182
+Supercharger-V3 NO-Vestnes, 62.622437, 7.089761
 Supercharger NO-Vikeså, 58.631954, 6.077949
 Supercharger NO-Vinje, 59.5701306, 7.992551
 Supercharger NO-Vinstra, 61.59049, 9.72166
+Supercharger-V3 NO-Volda, 62.140821, 6.089844
 Supercharger NO-Voss, 60.658184, 6.436238
+Supercharger-V3 NO-Åfjord, 63.959951, 10.226023
+Supercharger-V3 NO-Ål, 60.63013, 8.563912
+Supercharger NO-Åndalsnes, 62.557776,7.685321
+Supercharger NO-Åsane, 60.484345, 5.375959
+Supercharger-V3 NO-Ørnes, 66.86818, 13.703568
 Supercharger NO-Ørskog, 62.520404, 6.915983
 Supercharger NO-Øyer,61.243388,10.434378,30
 Supercharger NZ-Auckland-Ponsonby, -36.858347,174.754238
