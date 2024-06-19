@@ -76,10 +76,10 @@
               "mode": "none"
             },
             "thresholdsStyle": {
-              "mode": "off"
+              "mode": "line"
             }
           },
-          "decimals": 1,
+          "decimals": 4,
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
@@ -90,7 +90,7 @@
               },
               {
                 "color": "red",
-                "value": 80
+                "value": 2.8958
               }
             ]
           },
