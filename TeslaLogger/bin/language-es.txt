@@ -506,7 +506,7 @@ Letzte Fahrt="Último viaje"
 Ø Verbraucht kWh="Ø kWh consumidos"
 Fahrzeug="Vehículo"
 Löschen="Borrar"
-BA_FLEETAPI="Tesla Fleet API (recomendada)"
+BA_FLEETAPI="API de flota de Tesla (¡¡recomendada solo para vehículos fabricados después de noviembre de 2023!!!)"
 
 #password_fleet.php
 PF_LOGOUT="Salga de su cuenta Tesla si ya ha iniciado sesión"
