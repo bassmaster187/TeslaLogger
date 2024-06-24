@@ -337,17 +337,17 @@ namespace TeslaLogger
 
             Logfile.Log("Current Culture: " + Thread.CurrentThread.CurrentCulture.ToString());
             Logfile.Log("Mono Runtime: " + Tools.GetMonoRuntimeVersion());
-            ExceptionlessClient.Default.Configuration.DefaultData.Add("Mono Runtime", Tools.GetMonoRuntimeVersion());
+            ExceptionlessClient.Default.Configuration.DefaultData.Add("MonoRuntime", Tools.GetMonoRuntimeVersion());
             ExceptionlessClient.Default.Configuration.DefaultData.Add("OS", Tools.GetOsRelease());
 
             Logfile.Log("Grafana Version: " + Tools.GetGrafanaVersion());
-            ExceptionlessClient.Default.Configuration.DefaultData.Add("Grafana Version", Tools.GetGrafanaVersion());
+            ExceptionlessClient.Default.Configuration.DefaultData.Add("GrafanaVersion", Tools.GetGrafanaVersion());
 
             Logfile.Log("OS Version: " + Tools.GetOsVersion());
-            ExceptionlessClient.Default.Configuration.DefaultData.Add("OS Version", Tools.GetOsVersion());
+            ExceptionlessClient.Default.Configuration.DefaultData.Add("OSVersion", Tools.GetOsVersion());
 
             Logfile.Log("Update Settings: " + Tools.GetOnlineUpdateSettings().ToString());
-            ExceptionlessClient.Default.Configuration.DefaultData.Add("Update Settings", Tools.GetOnlineUpdateSettings().ToString());
+            ExceptionlessClient.Default.Configuration.DefaultData.Add("UpdateSettings", Tools.GetOnlineUpdateSettings().ToString());
 
             Logfile.Log("DBConnectionstring: " + DBHelper.GetDBConnectionstring(true));
 

@@ -3613,7 +3613,7 @@ WHERE
                                 double latitude = (double)dr[1];
                                 double longitude = (double)dr[2];
 
-                                if (latitude > 90 || latitude < -90 || longitude > 180 || longitude < -180)
+                                if (latitude > 90 || latitude < -90 || longitude > 180 || longitude < -180 || (latitude == 0 && longitude == 0))
                                     continue;
 
                                 int? height = srtmData.GetElevation(latitude, longitude);
@@ -4474,7 +4474,7 @@ WHERE
 
         int last_active_route_energy_at_arrival = int.MinValue;
 
-        public void InsertPos(string timestamp, double latitude, double longitude, int speed, decimal power, double odometer, double idealBatteryRangeKm, double batteryRangeKm, int batteryLevel, double? outsideTemp, string altitude)
+        public void InsertPos(string timestamp, double latitude, double longitude, int speed, decimal? power, double? odometer, double idealBatteryRangeKm, double batteryRangeKm, int batteryLevel, double? outsideTemp, string altitude)
         {
             double? inside_temp = car.CurrentJSON.current_inside_temperature;
             using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
@@ -4525,8 +4525,13 @@ VALUES(
                     cmd.Parameters.AddWithValue("@lat", latitude);
                     cmd.Parameters.AddWithValue("@lng", longitude);
                     cmd.Parameters.AddWithValue("@speed", (int)MphToKmhRounded(speed));
-                    cmd.Parameters.AddWithValue("@power", Convert.ToInt32(power * 1.35962M));
-                    cmd.Parameters.AddWithValue("@odometer", odometer);
+                    
+                    if (power == null)
+                        cmd.Parameters.AddWithValue("@power", DBNull.Value);
+                    else
+                        cmd.Parameters.AddWithValue("@power", Convert.ToInt32(power * 1.35962M));
+                    
+                    cmd.Parameters.AddWithValue("@odometer", odometer ?? (object)DBNull.Value);
 
                     if (idealBatteryRangeKm == -1)
                     {
@@ -4593,12 +4598,15 @@ VALUES(
                     try
                     {
                         car.CurrentJSON.current_speed = (int)(speed * 1.609344M);
-                        car.CurrentJSON.current_power = (int)(power * 1.35962M);
+                        
+                        if (power != null)
+                            car.CurrentJSON.current_power = (int)(power * 1.35962M);
+
                         car.CurrentJSON.SetPosition(latitude, longitude, long.Parse(timestamp, Tools.ciEnUS));
 
-                        if (odometer > 0)
+                        if (odometer != null && odometer > 0)
                         {
-                            car.CurrentJSON.current_odometer = odometer;
+                            car.CurrentJSON.current_odometer = odometer.Value;
                         }
 
                         if (idealBatteryRangeKm >= 0)
@@ -4613,7 +4621,11 @@ VALUES(
 
                         if (car.CurrentJSON.current_trip_km_start == 0)
                         {
-                            car.CurrentJSON.current_trip_km_start = odometer;
+                            if (odometer != null)
+                                car.CurrentJSON.current_trip_km_start = odometer.Value;
+                            else
+                                car.Log("current_trip_km_start not set !!!");
+
                             car.CurrentJSON.current_trip_start_range = car.CurrentJSON.current_ideal_battery_range_km;
                         }
 

@@ -189,6 +189,7 @@ namespace TeslaLogger
                         InsertBatteryTable(jData, d, resultContent);
                         InsertCruiseStateTable(jData, d, resultContent);
                         handleStatemachine(jData, d, resultContent);
+                        InsertLocation(jData, d, resultContent);
                     }
                 }
                 else if (j.ContainsKey("alerts"))
@@ -235,6 +236,47 @@ namespace TeslaLogger
             catch (Exception ex)
             {
                 Log(ex.ToString()+ "\n" + resultContent);
+            }
+        }
+
+        public void InsertLocation(dynamic j, DateTime d, string resultContent)
+        {
+            try
+            {
+                double? latitude = null;
+                double? longitude = null;
+                double? speed = null;
+
+                foreach (dynamic jj in j)
+                {
+                    string key = jj["key"];
+                    dynamic value = jj["value"];
+
+                    if (key == "Location")
+                    {    
+                        dynamic locationValue = value["locationValue"];
+                        latitude = locationValue["latitude"];
+                        longitude = locationValue["longitude"];
+                    }
+                    else if (key == "VehicleSpeed")
+                    {
+                        string v1 = value["stringValue"];
+                        if (Double.TryParse(v1, out double s))
+                            speed = s;
+                    }
+                }
+
+                if (latitude != null && longitude != null && speed != null)
+                {
+                    long ts= (long)(d.ToUniversalTime().Subtract(new DateTime(1970, 1, 1))).TotalSeconds*1000;
+                    Log("Insert Location");
+                    car.DbHelper.InsertPos(ts.ToString(), latitude.Value, longitude.Value, (int)speed.Value, null, null, -1, -1, -1, null, "");
+                }
+            }
+            catch (Exception ex)
+            {
+                Log(ex.ToString());
+                car.CreateExceptionlessClient(ex).AddObject(resultContent, "ResultContent").Submit();
             }
         }
 
@@ -551,7 +593,7 @@ namespace TeslaLogger
         {
             try
             {
-                var cols = new string[] { "ChargeState", "Gear", "VehicleSpeed" };
+                var cols = new string[] { "ChargeState", "Gear", "VehicleSpeed","Location" };
 
                 foreach (dynamic jj in j)
                 {
@@ -639,6 +681,9 @@ namespace TeslaLogger
 
                                     Log("Speed: " + v1);
                                 }
+                            } else
+                            {
+                                Log($"Key: {key} / Value: {v1}");
                             }
                         }
                     }
@@ -707,7 +752,7 @@ namespace TeslaLogger
             
             string configname = "";
             if (car.FleetAPI)
-                configname = "free";
+                configname = "free2";
 
             Log("Login to Telemetry Server / config: " + configname);
 

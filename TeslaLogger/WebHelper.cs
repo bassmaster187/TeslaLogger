@@ -111,7 +111,8 @@ namespace TeslaLogger
         DateTime lastRefreshToken = DateTime.MinValue;
         DateTime nextTeslaTokenFromRefreshToken = DateTime.MaxValue;
 
-        int commandCounter = 0;
+        internal int commandCounter = 0;
+        int commandCounterDay = DateTime.UtcNow.Day;
 
         protected virtual void Dispose(bool disposing)
         {
@@ -3395,6 +3396,12 @@ namespace TeslaLogger
 
                     _ = SendDataToAbetterrouteplannerAsync(ts, battery_level, speed, false, power, (double)dLatitude, (double)dLongitude);
 
+                    if (car.FleetAPI && !justinsertdb)
+                    {
+                        latitude = 0;
+                        longitude = 0;
+                    }
+
                     car.DbHelper.InsertPos(ts.ToString(), latitude, longitude, speed, power, odometer.Result, ideal_battery_range_km, battery_range_km, battery_level, outside_temp, elevation);
 
                     if (shift_state == "D" || shift_state == "R" || shift_state == "N")
@@ -4840,6 +4847,8 @@ DESC", con))
                             Log("ratelimit-remaining: " + v2.First());
                         */
 
+                        ResetCommandCounterEveryDay();
+
                         commandCounter++;
 
                         if (commandCounter % 100 == 0)
@@ -4944,6 +4953,16 @@ DESC", con))
             }
 
             return "NULL";
+        }
+
+        private void ResetCommandCounterEveryDay()
+        {
+            if (DateTime.UtcNow.Day != commandCounterDay)
+            {
+                commandCounterDay = DateTime.UtcNow.Day;
+                Log("Total Commands Today: " + commandCounter);
+                commandCounter = 0;
+            }
         }
 
         public bool LoginRetry(HttpResponseMessage result)
@@ -5761,7 +5780,7 @@ DESC", con))
             return null;
         }
 
-        internal static bool BranchExists(string branch)
+        internal static bool BranchExists(string branch, out HttpStatusCode statusCode)
         {
             try
             {
@@ -5772,6 +5791,7 @@ DESC", con))
                 client.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue("(00000000; " + Thread.CurrentThread.ManagedThreadId + ")"));
 
                 var g = client.GetAsync("https://api.github.com/repos/bassmaster187/TeslaLogger/branches/" + branch).Result;
+                statusCode = g.StatusCode;
                 if (g.IsSuccessStatusCode)
                 {
                     string res = g.Content.ReadAsStringAsync().Result;
@@ -5787,7 +5807,7 @@ DESC", con))
                 ex.ToExceptionless().FirstCarUserID().Submit();
                 Logfile.Log(ex.ToString());
             }
-
+            statusCode = 0;
             return false;
         }
 

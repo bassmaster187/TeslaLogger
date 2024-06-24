@@ -2051,6 +2051,23 @@ WHERE
 
             return "";
         }
+
+        public static int CalculateSleepSeconds(int RateLimitPerDay, int UsedCommands, DateTime utcnow)
+        {
+            var remainingCommands = RateLimitPerDay - UsedCommands;
+
+            var min = utcnow.Hour * 60 + utcnow.Minute;
+            var minutesperday = 1440;
+            var remainminutes = minutesperday - min;
+            var remainsecounds = remainminutes * 60;
+
+            var sleepPerCommand = remainsecounds / remainingCommands;
+
+            if (sleepPerCommand < 10)
+                sleepPerCommand = 10;
+
+            return (int)sleepPerCommand;
+        }
     }
 
     public static class EventBuilderExtension

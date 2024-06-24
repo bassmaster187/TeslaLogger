@@ -1338,7 +1338,7 @@ PRIMARY KEY(id)
                 {
                     var branch = File.ReadAllText("BRANCH").Trim();
 
-                    if (WebHelper.BranchExists(branch))
+                    if (WebHelper.BranchExists(branch, out HttpStatusCode statusCode))
                     {
                         Logfile.Log($"YOU ARE USING BRANCH: " + branch);
 
@@ -1348,6 +1348,12 @@ PRIMARY KEY(id)
                     else
                     {
                         Logfile.Log($"BRANCH NOT EXIST: " + branch);
+
+                        if (statusCode == HttpStatusCode.NotFound)
+                        {
+                            File.Delete("BRANCH");
+                            Logfile.Log("BRANCH file deleted!");
+                        }
                     }
                 }
 
