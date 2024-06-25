@@ -275,8 +275,8 @@ VALUES(
                     cmd.Parameters.AddWithValue("@commandid", mothershipCommands[command]);
                     cmd.Parameters.AddWithValue("@duration", duration);
                     cmd.Parameters.AddWithValue("@httpcode", httpcode);
-                    if (carid == 0)
-                        cmd.Parameters.AddWithValue("@carid", null);
+                    if (carid == 0 || carid == -1)
+                        cmd.Parameters.AddWithValue("@carid", DBNull.Value);
                     else
                         cmd.Parameters.AddWithValue("@carid", carid);
                     _ = SQLTracer.TraceNQ(cmd, out _);
