@@ -4932,7 +4932,7 @@ VALUES(
             if (power <= 0 || voltage <= 0 || current <= 0 )
                 return 0;
 
-            int phases = Convert.ToInt32(Math.Truncate((power * 1000.0 + 500) / voltage / current));
+            int phases = Convert.ToInt32(Math.Truncate(Math.Truncate((power * 1000.0 + 500) / voltage / current))+0.3);
             
             if (phases > 3)
                 return 3;
