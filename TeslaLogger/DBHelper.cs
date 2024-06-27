@@ -15,6 +15,8 @@ using Exceptionless;
 using Newtonsoft.Json;
 using System.Diagnostics;
 using System.Data.Common;
+using System.Runtime.InteropServices.ComTypes;
+using Microsoft.VisualBasic.Logging;
 
 namespace TeslaLogger
 {
@@ -4442,7 +4444,21 @@ WHERE
         {
             // driving means that charging must be over
             UpdateUnplugDate();
-            int posID = GetMaxPosid();
+            int posID = 0;
+            
+            if (car.FleetAPI) // maxpos in Fleetapi is useless because lat & lng = 0
+            {
+                posID = car.telemetry.lastposid;
+                if (posID > 0)
+                {
+                    DBHelper.UpdateAddress(car, posID);
+                    UpdatePosFromCurrentJSON(posID);
+                }
+            }
+
+            if (posID == 0)
+                posID = GetMaxPosid();
+
             using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
             {
                 con.Open();
@@ -4472,10 +4488,41 @@ WHERE
             car.CurrentJSON.CreateCurrentJSON();
         }
 
+        private void UpdatePosFromCurrentJSON(int posID)
+        {
+            car.Log("UpdatePosFromCurrentJSON " + posID);
+            using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+            {
+                con.Open();
+                using (MySqlCommand cmd = new MySqlCommand(@"
+                    UPDATE
+                        pos
+                    SET
+                        power = 1,
+                        odometer = @odometer,
+                        ideal_battery_range_km = @ideal_battery_range_km,
+                        outside_temp = @outside_temp,
+                        battery_level = @battery_level,
+                        battery_range_km = @battery_range_km
+                    WHERE
+                        id = @id", con))
+                {
+                    cmd.Parameters.AddWithValue("@id", posID);
+                    cmd.Parameters.AddWithValue("@odometer", car.CurrentJSON.current_odometer);
+                    cmd.Parameters.AddWithValue("@ideal_battery_range_km", car.CurrentJSON.current_ideal_battery_range_km);
+                    cmd.Parameters.AddWithValue("@outside_temp", car.CurrentJSON.current_outside_temperature);
+                    cmd.Parameters.AddWithValue("@battery_level", car.CurrentJSON.current_battery_level);
+                    cmd.Parameters.AddWithValue("@battery_range_km", car.CurrentJSON.current_battery_range_km);
+                    _ = SQLTracer.TraceNQ(cmd, out _);
+                }
+            }
+        }
+
         int last_active_route_energy_at_arrival = int.MinValue;
 
-        public void InsertPos(string timestamp, double latitude, double longitude, int speed, decimal? power, double? odometer, double idealBatteryRangeKm, double batteryRangeKm, int batteryLevel, double? outsideTemp, string altitude)
+        public int InsertPos(string timestamp, double latitude, double longitude, int speed, decimal? power, double? odometer, double idealBatteryRangeKm, double batteryRangeKm, int batteryLevel, double? outsideTemp, string altitude)
         {
+            int posid = 0;
             double? inside_temp = car.CurrentJSON.current_inside_temperature;
             using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
             {
@@ -4595,6 +4642,11 @@ VALUES(
 
                     Insert_active_route_energy_at_arrival(posID);
 
+                    using (MySqlCommand cmdid = new MySqlCommand("SELECT LAST_INSERT_ID()", con))
+                    {
+                        posid = Convert.ToInt32(cmdid.ExecuteScalar());
+                    }
+
                     try
                     {
                         car.CurrentJSON.current_speed = (int)(speed * 1.609344M);
@@ -4642,6 +4694,8 @@ VALUES(
             }
 
             car.CurrentJSON.CreateCurrentJSON();
+
+            return posid;
         }
 
         private void Insert_active_route_energy_at_arrival(long posID, bool force = false)

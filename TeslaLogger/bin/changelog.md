@@ -1,5 +1,5 @@
-# Version 1.58.4
-- More logging
+# Version 1.58.5
+- Bugfixes
 
 # Version 1.58.2
 - Many improvements for Fleet API

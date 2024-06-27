@@ -30,6 +30,8 @@ namespace TeslaLogger
         public DateTime lastDriving = DateTime.MinValue;
         public DateTime lastMessageReceived = DateTime.MinValue;
 
+        public int lastposid = 0;
+
         void Log(string message)
         {
             car.Log("*** FT: " +  message);
@@ -270,7 +272,7 @@ namespace TeslaLogger
                 {
                     long ts= (long)(d.ToUniversalTime().Subtract(new DateTime(1970, 1, 1))).TotalSeconds*1000;
                     Log("Insert Location");
-                    car.DbHelper.InsertPos(ts.ToString(), latitude.Value, longitude.Value, (int)speed.Value, null, null, -1, -1, -1, null, "");
+                    lastposid = car.DbHelper.InsertPos(ts.ToString(), latitude.Value, longitude.Value, (int)speed.Value, null, null, -1, -1, -1, null, "");
                 }
             }
             catch (Exception ex)

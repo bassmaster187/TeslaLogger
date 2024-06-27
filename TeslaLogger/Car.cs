@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Runtime.ExceptionServices;
+using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
@@ -397,6 +398,8 @@ namespace TeslaLogger
                     }
                     catch (Exception ex)
                     {
+                        Log("LOOP: " + ex.ToString()); // xxx
+
                         SendException2Exceptionless(ex);
 
                         Logfile.ExceptionWriter(ex, "#" + CarInDB + ": main loop");
@@ -1098,6 +1101,11 @@ namespace TeslaLogger
                             if (webhelper.DrivingOrChargingByStream)
                             {
                                 Log("Stop sleep by DrivingOrChargingByStream");
+                                break;
+                            }
+                            if (FleetAPI && (telemetry?.Driving == true || telemetry?.Charging == true))
+                            {
+                                Log("Stop sleep by telemetry");
                                 break;
                             }
                         }
