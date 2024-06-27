@@ -34,7 +34,7 @@ namespace TeslaLogger
                 Logfile.Log(Dump());
                 while (true)
                 {
-                    if (DateTime.Now.Minute % 10 == 0)
+                    if (DateTime.Now.Minute % 30 == 0)
                     {
                         Logfile.Log(Dump());
                         Thread.Sleep(60000); // sleep 60 seconds

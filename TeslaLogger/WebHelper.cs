@@ -164,6 +164,15 @@ namespace TeslaLogger
         {
             this.car = car;
 
+            if (KVS.Get($"commandCounter_{car.CarInDB}", out commandCounter) == KVS.NOT_FOUND)
+                commandCounter = 0;
+
+            if (KVS.Get($"commandCounterDay{car.CarInDB}", out commandCounterDay) == KVS.NOT_FOUND)
+                commandCounterDay = DateTime.UtcNow.Day;
+
+            ResetCommandCounterEveryDay();
+
+
             httpclient_teslalogger_de.DefaultRequestHeaders.ConnectionClose = true;
             ProductInfoHeaderValue userAgent = new ProductInfoHeaderValue("Teslalogger", Assembly.GetExecutingAssembly().GetName().Version.ToString());
             httpclient_teslalogger_de.DefaultRequestHeaders.UserAgent.Add(userAgent);
@@ -4851,6 +4860,8 @@ DESC", con))
 
                         commandCounter++;
 
+                        KVS.InsertOrUpdate($"commandCounter_{car.CarInDB}", commandCounter);
+
                         if (commandCounter % 100 == 0)
                             Log("Command counter: " + commandCounter);
 
@@ -4922,6 +4933,8 @@ DESC", con))
 
                         l += ", sleep till: "+ DateTime.Now.AddMilliseconds(sleep).ToString(Tools.ciDeDE);
 
+                        l += ", CommandCounter: " + commandCounter;
+
                         if (car.FleetAPI)
                             l += ", FleetAPI";
                         else
@@ -4962,6 +4975,8 @@ DESC", con))
                 commandCounterDay = DateTime.UtcNow.Day;
                 Log("Total Commands Today: " + commandCounter);
                 commandCounter = 0;
+                KVS.InsertOrUpdate($"commandCounter_{car.CarInDB}", commandCounter);
+                KVS.InsertOrUpdate($"commandCounterDay{car.CarInDB}", commandCounterDay);
             }
         }
 
