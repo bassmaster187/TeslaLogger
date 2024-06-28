@@ -1749,6 +1749,7 @@ DROP TABLE chargingstate_bak";
             int endPosID = 0;
             int width = 240;
             int height = 0;
+            int carid = 1;
             StaticMapProvider.MapMode mode = StaticMapProvider.MapMode.Regular;
             if (request.QueryString.HasKeys())
             {
@@ -1777,6 +1778,10 @@ DROP TABLE chargingstate_bak";
                         case "type":
                             // TODO
                             break;
+                        case "carid":
+                            _ = int.TryParse(request.QueryString.GetValues(key)[0], out carid);
+                            break;
+
                         default:
                             break;
                     }
@@ -1806,7 +1811,7 @@ DROP TABLE chargingstate_bak";
                     else
                     {
                         // order static map generation
-                        StaticMapService.GetSingleton().Enqueue(1, startPosID, endPosID, width, height, mode, StaticMapProvider.MapSpecial.None);
+                        StaticMapService.GetSingleton().Enqueue(carid, startPosID, endPosID, width, height, mode, StaticMapProvider.MapSpecial.None);
                         // wait
                         for (int i = 0; i < 30; i++)
                         {
