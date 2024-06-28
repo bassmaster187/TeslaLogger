@@ -3303,6 +3303,15 @@ LIMIT 1", con)
                 Logfile.Log(ex.ToString());
             }
 
+            int posid = GetMaxPosid();
+
+            if (car.FleetAPI)
+            {
+                car.webhelper.IsCharging(); // insert a charging row in DB
+                UpdatePosFromCurrentJSON(posid);
+            }
+
+
             int chargeID = GetMaxChargeid(out DateTime chargeStart);
             long chargingstateid = 0;
             if (wh != null)
@@ -3341,7 +3350,7 @@ VALUES(
                     {
                         cmd.Parameters.AddWithValue("@CarID", wh.car.CarInDB);
                         cmd.Parameters.AddWithValue("@StartDate", chargeStart);
-                        cmd.Parameters.AddWithValue("@Pos", GetMaxPosid());
+                        cmd.Parameters.AddWithValue("@Pos", posid);
                         cmd.Parameters.AddWithValue("@StartChargingID", chargeID);
                         cmd.Parameters.AddWithValue("@fast_charger_brand", wh.fast_charger_brand);
                         cmd.Parameters.AddWithValue("@fast_charger_type", wh.fast_charger_type);
