@@ -4499,7 +4499,6 @@ WHERE
 
         private void UpdatePosFromCurrentJSON(int posID)
         {
-            car.Log("UpdatePosFromCurrentJSON " + posID);
             using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
             {
                 con.Open();
@@ -4514,7 +4513,7 @@ WHERE
                         battery_level = @battery_level,
                         battery_range_km = @battery_range_km
                     WHERE
-                        id = @id", con))
+                        id = @id and power is null and odometer is null", con))
                 {
                     cmd.Parameters.AddWithValue("@id", posID);
                     cmd.Parameters.AddWithValue("@odometer", car.CurrentJSON.current_odometer);
@@ -4522,7 +4521,9 @@ WHERE
                     cmd.Parameters.AddWithValue("@outside_temp", car.CurrentJSON.current_outside_temperature);
                     cmd.Parameters.AddWithValue("@battery_level", car.CurrentJSON.current_battery_level);
                     cmd.Parameters.AddWithValue("@battery_range_km", car.CurrentJSON.current_battery_range_km);
-                    _ = SQLTracer.TraceNQ(cmd, out _);
+                    int x = SQLTracer.TraceNQ(cmd, out _);
+
+                    car.Log($"UpdatePosFromCurrentJSON {posID} - affected: {x}");
                 }
             }
         }
@@ -5067,6 +5068,9 @@ WHERE
                         {
                             UpdateAddress(car, pos);
                         }
+
+                        if (car.FleetAPI)
+                            UpdatePosFromCurrentJSON(pos);
 
                         return pos;
                     }

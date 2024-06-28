@@ -1,4 +1,4 @@
-# Version 1.58.6
+# Version 1.58.7
 - Bugfixes
 
 # Version 1.58.2
