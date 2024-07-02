@@ -595,7 +595,7 @@ namespace TeslaLogger
         {
             try
             {
-                var cols = new string[] { "ChargeState", "Gear", "VehicleSpeed","Location" };
+                var cols = new string[] { "ChargeState", "Gear", "VehicleSpeed","Location", "FastChargerPresent" };
 
                 foreach (dynamic jj in j)
                 {
@@ -683,7 +683,24 @@ namespace TeslaLogger
 
                                     Log("Speed: " + v1);
                                 }
-                            } else
+                            } else if (key == "FastChargerPresent")
+                            {
+                                if (v1 == "true")
+                                {
+                                    if (Driving)
+                                    {
+                                        Log("Parking -> DC Charging ***");
+                                        Driving = false;
+                                    }
+
+                                    if (!Charging)
+                                    {
+                                        Log("DC Charging ***");
+                                        Charging = true;
+                                    }
+                                }
+                            }
+                            else
                             {
                                 Log($"Key: {key} / Value: {v1}");
                             }
