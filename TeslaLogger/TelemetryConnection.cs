@@ -160,6 +160,10 @@ namespace TeslaLogger
                 {
                     if (!connect && ex.InnerException is TaskCanceledException)
                         System.Diagnostics.Debug.WriteLine("Telemetry Cancel OK");
+                    else if (ex.InnerException?.InnerException is System.Net.Sockets.SocketException se)
+                    {
+                        Log(se.Message);
+                    }
                     else
                         Log("Telemetry Exception: " + ex.ToString());                    
 
