@@ -22,13 +22,15 @@ if [ $DAY -eq 1 ]; then
 	MONTH=$(date +%m)
 	YEAR=$(date +%Y)
 	LYEAR=$((YEAR-1))
-	#echo processing logfile backup
-	cp /etc/teslalogger/nohup.out /etc/teslalogger/logfile-$YEAR$MONTH.log
-	gzip -c9 /etc/teslalogger/logfile-*.log > /etc/teslalogger/backup/logfile-$YEAR$MONTH.gz
-	if test -f "/etc/teslalogger/backup/logfile-$YEAR$MONTH.gz"; then
-		rm /etc/teslalogger/logfile-*.log
-	fi
-	echo > /etc/teslalogger/nohup.out
+	#echo processing logfile backup and cleaning of logfile only if backup of this month does not already exist
+ 	if ! test -f "/etc/teslalogger/backup/logfile-$YEAR$MONTH.gz"; then
+		cp /etc/teslalogger/nohup.out /etc/teslalogger/logfile-$YEAR$MONTH.log
+		gzip -c9 /etc/teslalogger/logfile-*.log > /etc/teslalogger/backup/logfile-$YEAR$MONTH.gz
+ 		if test -f "/etc/teslalogger/backup/logfile-$YEAR$MONTH.gz"; then
+            		rm /etc/teslalogger/logfile-*.log
+            		echo > /etc/teslalogger/nohup.out
+        	fi
+  	fi
 
 	#echo processing cleanup of files older than $LYEAR$MONTH*
 	if test -f "/etc/teslalogger/backup/logfile-$LYEAR$MONTH.gz"; then
@@ -40,7 +42,7 @@ if [ $DAY -eq 1 ]; then
 	if test -f "/etc/teslalogger/backup/mysqldump$LYEAR$MONTH*.gz"; then
 		rm /etc/teslalogger/backup/mysqldump$LYEAR$MONTH*.gz
 	fi
-    if test -f "\\teslalogger\teslalogger\Exception\ex_$LYEAR$MONTH*.gz"; then
+        if test -f "\\teslalogger\teslalogger\Exception\ex_$LYEAR$MONTH*.gz"; then
 		rm \\teslalogger\teslalogger\Exception\ex_$LYEAR$MONTH*.gz
 	fi
 fi
