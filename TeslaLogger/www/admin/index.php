@@ -165,7 +165,7 @@ else
 				var datetime = at.toLocaleTimeString(loc, { hour: '2-digit', minute: '2-digit' });
 
 				$('#car_statusLabel').text("<?php t("Charging"); ?>:");
-				if(jsonData["charger_phases_calc" > 0])
+				if(jsonData["charger_phases_calc"] > 0)
                                 {
                                         $('#car_status').html(jsonData["charger_power_calc_w"] + " W / +" + jsonData["charge_energy_added"] + " kWh<br>" +
                                         jsonData["charger_voltage"]+"V / " + jsonData["charger_actual_current_calc"]+"A / "+ jsonData["charger_phases_calc"]+"P<br>" +
