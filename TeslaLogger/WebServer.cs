@@ -2844,6 +2844,7 @@ FROM
                         {
                             Logfile.Log($"Get_CarValueID: state not found: GetState({name})");
                             WriteString(response, $"state {name} not found, was the car {CarID} awake since the last TeslaLogger restart or Car Thread restart?");
+                            return;
                         }
                     }
                     else

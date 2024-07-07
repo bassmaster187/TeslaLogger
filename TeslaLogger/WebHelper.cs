@@ -112,6 +112,9 @@ namespace TeslaLogger
         DateTime nextTeslaTokenFromRefreshToken = DateTime.MaxValue;
 
         internal int commandCounter = 0;
+        internal int commandCounterDrive = 0;
+        internal int commandCounterCharging = 0;
+        internal int commandcounterOnline = 0;
         int commandCounterDay = DateTime.UtcNow.Day;
 
         protected virtual void Dispose(bool disposing)
@@ -166,6 +169,15 @@ namespace TeslaLogger
 
             if (KVS.Get($"commandCounter_{car.CarInDB}", out commandCounter) == KVS.NOT_FOUND)
                 commandCounter = 0;
+
+            if (KVS.Get($"commandCounterDrive_{car.CarInDB}", out commandCounterDrive) == KVS.NOT_FOUND)
+                commandCounterDrive = 0;
+
+            if (KVS.Get($"commandCounterCharging_{car.CarInDB}", out commandCounterCharging) == KVS.NOT_FOUND)
+                commandCounterCharging = 0;
+
+            if (KVS.Get($"commandCounterOnline_{car.CarInDB}", out commandcounterOnline) == KVS.NOT_FOUND)
+                commandcounterOnline = 0;
 
             if (KVS.Get($"commandCounterDay{car.CarInDB}", out commandCounterDay) == KVS.NOT_FOUND)
                 commandCounterDay = DateTime.UtcNow.Day;
@@ -1595,7 +1607,7 @@ namespace TeslaLogger
         internal bool IsCharging(bool justCheck = false, bool noMemcache = false)
         {
             if (car.FleetAPI && justCheck) {
-                return car.telemetry?.Charging ?? false;    
+                return car.telemetry?.IsCharging ?? false;    
             }   
 
             string resultContent = "";
@@ -2302,7 +2314,7 @@ namespace TeslaLogger
 
                     if (car.FleetAPI)
                     {
-                        if (car.telemetry?.isOnline() == true)
+                        if (car.telemetry?.IsOnline() == true)
                             return "online";
                         else
                             return "asleep";
@@ -4859,8 +4871,23 @@ DESC", con))
                         ResetCommandCounterEveryDay();
 
                         commandCounter++;
-
                         KVS.InsertOrUpdate($"commandCounter_{car.CarInDB}", commandCounter);
+
+                        switch (car.GetCurrentState())
+                        {
+                            case TeslaState.Drive:
+                                commandCounterDrive++;
+                                KVS.InsertOrUpdate($"commandCounterDrive_{car.CarInDB}", commandCounterDrive);
+                                break;
+                            case TeslaState.Charge:
+                                commandCounterCharging++;
+                                KVS.InsertOrUpdate($"commandCounterCharging_{car.CarInDB}", commandCounterCharging);
+                                break;
+                            default:
+                                commandcounterOnline++;
+                                KVS.InsertOrUpdate($"commandCounterOnline_{car.CarInDB}", commandcounterOnline);
+                                break;
+                        }
 
                         if (commandCounter % 100 == 0)
                             Log("Command counter: " + commandCounter);
@@ -4933,7 +4960,7 @@ DESC", con))
 
                         l += ", sleep till: "+ DateTime.Now.AddMilliseconds(sleep).ToString(Tools.ciDeDE);
 
-                        l += ", CommandCounter: " + commandCounter;
+                        l += $", CommandCounter: {commandCounter} Drive: {commandCounterDrive} Charge: {commandCounterCharging} Online: {commandcounterOnline}";
 
                         if (car.FleetAPI)
                             l += ", FleetAPI";
@@ -4973,9 +5000,15 @@ DESC", con))
             if (DateTime.UtcNow.Day != commandCounterDay)
             {
                 commandCounterDay = DateTime.UtcNow.Day;
-                Log("Total Commands Today: " + commandCounter);
+                Log($"Total Commands Today: {commandCounter} Drive: {commandCounterDrive} Charge: {commandCounterCharging} Online: {commandcounterOnline}");
                 commandCounter = 0;
+                commandCounterDrive = 0;
+                commandCounterCharging = 0;
+                commandcounterOnline = 0;
                 KVS.InsertOrUpdate($"commandCounter_{car.CarInDB}", commandCounter);
+                KVS.InsertOrUpdate($"commandCounterDrive_{car.CarInDB}", commandCounterDrive);
+                KVS.InsertOrUpdate($"commandCounterCharging_{car.CarInDB}", commandCounterCharging);
+                KVS.InsertOrUpdate($"commandCounterOnline_{car.CarInDB}", commandcounterOnline);
                 KVS.InsertOrUpdate($"commandCounterDay{car.CarInDB}", commandCounterDay);
             }
         }

@@ -724,7 +724,7 @@ namespace TeslaLogger
                 for (int x = 0; x < sleep; x++)
                 {
                     Thread.Sleep(250);
-                    if (FleetAPI && telemetry?.isOnline() == true)
+                    if (FleetAPI && telemetry?.IsOnline() == true)
                     {
                         Log("skip sleep because of telemetry is online");
                         break;
@@ -765,7 +765,7 @@ namespace TeslaLogger
 
                             for (int p = 0; p < seconds; p++)
                             {
-                                if (telemetry?.Charging == false)
+                                if (telemetry?.IsCharging == false)
                                     break;
 
                                 Thread.Sleep(1000);
@@ -1103,7 +1103,7 @@ namespace TeslaLogger
                                 Log("Stop sleep by DrivingOrChargingByStream");
                                 break;
                             }
-                            if (FleetAPI && (telemetry?.Driving == true || telemetry?.Charging == true))
+                            if (FleetAPI && (telemetry?.Driving == true || telemetry?.IsCharging == true))
                             {
                                 Log("Stop sleep by telemetry");
                                 break;

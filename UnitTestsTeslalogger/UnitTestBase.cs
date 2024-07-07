@@ -1141,5 +1141,18 @@ namespace UnitTestsTeslalogger
             int s3 = Tools.CalculateSleepSeconds(300, 0, fiveMinuteRemaining);
             Assert.AreEqual(s2, 18);
         }
+
+        [TestMethod]
+        public void ParsePackCurrent()
+        {
+            string data =
+                "{\"data\":[{\"key\":\"PackCurrent\",\"value\":{\"stringValue\":\"121.900\"}},{\"key\":\"ChargeState\",\"value\":{\"stringValue\":\"Idle\"}},{\"key\":\"FastChargerPresent\",\"value\":{\"stringValue\":\"true\"}}],\"createdAt\":\"2024-07-07T15:11:05.839516023Z\",\"vin\":\"5YJ3E7EA3LF123456\"}";
+            dynamic j = JsonConvert.DeserializeObject(data);
+            dynamic jData = j["data"];
+
+            double? current = TelemetryConnection.PackCurrent(jData);
+            Assert.AreEqual(current, 121.9d);
+
+        }
     }
 }

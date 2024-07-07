@@ -9,6 +9,8 @@ using System.Linq;
 using MySql.Data.MySqlClient;
 using System.Reflection;
 using System.IO;
+using Exceptionless;
+using Newtonsoft.Json.Linq;
 
 namespace TeslaLogger
 {
@@ -25,12 +27,14 @@ namespace TeslaLogger
         bool connect;
 
         private bool driving;
-        private bool charging;
+        private bool _acCharging;
+        private bool dcCharging;
 
         public DateTime lastDriving = DateTime.MinValue;
         public DateTime lastMessageReceived = DateTime.MinValue;
 
         public int lastposid = 0;
+        
 
         void Log(string message)
         {
@@ -57,23 +61,23 @@ namespace TeslaLogger
                 return false;
 
             }
-            set {
-                driving = value;
-            }
+            set => driving = value;
         }
 
-        public bool Charging { get => charging; 
+        bool acCharging { get => _acCharging; 
             set { 
-                if (charging != value)
-                    Log("Driving = " +  value);
+                if (_acCharging != value)
+                    Log("ACCharging = " +  value);
 
-                charging = value;
+                _acCharging = value;
             } 
         }
 
-        public bool isOnline()
+        public bool IsCharging => acCharging || dcCharging;
+
+        public bool IsOnline()
         {
-            if (!Driving && !Charging)
+            if (!Driving && !acCharging && !dcCharging)
             {
                 if (OnlineTimeout())
                     return false;
@@ -85,10 +89,7 @@ namespace TeslaLogger
         public bool OnlineTimeout()
         {
             var ts = DateTime.UtcNow - lastMessageReceived;
-            if (ts.TotalMinutes > 10)
-                return true;
-
-            return false;
+            return ts.TotalMinutes > 10;
         }
             
 
@@ -233,7 +234,8 @@ namespace TeslaLogger
 
                     CheckDriving();
                     driving = false;
-                    charging = false;
+                    acCharging = false;
+                    dcCharging = false;
                     Log("Sleep");
                     lastMessageReceived = DateTime.MinValue;
                 }
@@ -245,7 +247,7 @@ namespace TeslaLogger
             }
         }
 
-        public void InsertLocation(dynamic j, DateTime d, string resultContent)
+        public void InsertLocation(dynamic j, DateTime d, string resultContent, bool force = false)
         {
             try
             {
@@ -272,10 +274,13 @@ namespace TeslaLogger
                     }
                 }
 
-                if (latitude != null && longitude != null && speed != null)
+                if (latitude != null && longitude != null && (speed != null || force))
                 {
+                    if (force && speed == null)
+                        speed = 0;
+
                     long ts= (long)(d.ToUniversalTime().Subtract(new DateTime(1970, 1, 1))).TotalSeconds*1000;
-                    Log("Insert Location");
+                    Log("Insert Location" + (force ? " Force" : ""));
                     lastposid = car.DbHelper.InsertPos(ts.ToString(), latitude.Value, longitude.Value, (int)speed.Value, null, null, -1, -1, -1, null, "");
                 }
             }
@@ -617,22 +622,23 @@ namespace TeslaLogger
                                 {
                                     if (Driving)
                                     {
-                                        Log("Parking -> Charging ***");
+                                        Log("Driving -> AC Charging ***");
                                         Driving = false;
                                     }
 
-                                    if (!Charging)
+                                    if (!acCharging)
                                     {
-                                        Log("Charging ***");
-                                        Charging = true;
+                                        Log("AC Charging ***");
+                                        InsertLocation(j, date, resultContent, true);
+                                        acCharging = true;
                                     }
                                 }
                                 else if (v1 == "Idle")
                                 {
-                                    if (Charging)
+                                    if (acCharging)
                                     {
-                                        Log("Stop Charging ***");
-                                        Charging = false;
+                                        Log("Stop AC Charging ***");
+                                        acCharging = false;
                                     }
                                 }
                                 else
@@ -670,10 +676,16 @@ namespace TeslaLogger
                                 {
                                     if (speed > 0)
                                     {
-                                        if (Charging)
+                                        if (acCharging)
                                         {
-                                            Log("Stop Charging by speed ***");
-                                            Charging = false;
+                                            Log("Stop AC Charging by speed ***");
+                                            acCharging = false;
+                                        }
+
+                                        if (dcCharging)
+                                        {
+                                            Log("Stop DC Charging by speed ***");
+                                            dcCharging = false;
                                         }
 
                                         lastDriving = DateTime.Now;
@@ -693,14 +705,29 @@ namespace TeslaLogger
                                 {
                                     if (Driving)
                                     {
-                                        Log("Parking -> DC Charging ***");
+                                        Log("Driving -> DC Charging ***");
                                         Driving = false;
                                     }
 
-                                    if (!Charging)
+                                    if (!dcCharging)
                                     {
-                                        Log("DC Charging ***");
-                                        Charging = true;
+                                        var current = PackCurrent(j);
+                                        Log($"FastChargerPresent {current}A ***");
+
+                                        if (current > 5) {
+                                            Log($"DC Charging ***");
+
+                                            InsertLocation(j, date, resultContent, true);
+                                            dcCharging = true;
+                                        }
+                                    }
+                                }
+                                else if (v1 == "false")
+                                {
+                                    if (dcCharging)
+                                    {
+                                        Log("stop DC Charging ***");
+                                        dcCharging = false;
                                     }
                                 }
                             }
@@ -721,6 +748,23 @@ namespace TeslaLogger
                 car.CreateExceptionlessClient(ex).AddObject(resultContent, "ResultContent").Submit();
             }
 
+        }
+
+        internal static double? PackCurrent(dynamic o)
+        {
+            try
+            {
+                JToken j = o.SelectToken("$[?(@.key=='PackCurrent')].value.stringValue");
+                double val = j.Value<double>();
+                return val;
+            }
+            catch (Exception e)
+            {
+                Logfile.Log("*** FT: PackCurrent " + e.ToString());
+                e.ToExceptionless().FirstCarUserID().Submit();
+            }
+
+            return null;
         }
 
         private void CheckDriving()
