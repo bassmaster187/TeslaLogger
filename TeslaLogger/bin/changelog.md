@@ -1,5 +1,5 @@
-# Version 1.58.9
-- Bugfixes
+# Version 1.59.0
+- Tesla API has been changed!
 
 # Version 1.58.2
 - Many improvements for Fleet API
