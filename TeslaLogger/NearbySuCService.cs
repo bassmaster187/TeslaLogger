@@ -166,12 +166,12 @@ namespace TeslaLogger
                                     Tools.DebugLog("NearbySuCService.Work: Exception parsing " + result);
                                 }
                             }
-                            if (send.Count > 0)
-                            {
-                                ShareSuc(send, false, out _, out _);
-                            }
-                            send.Clear();
                         }
+                        if (send.Count > 0)
+                        {
+                            ShareSuc(send, false, out _, out _);
+                        }
+                        send.Clear();
                     }
                     catch (Exception ex)
                     {
