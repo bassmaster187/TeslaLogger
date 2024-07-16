@@ -4,14 +4,12 @@ using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Runtime.ExceptionServices;
-using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using Exceptionless;
 using MySql.Data.MySqlClient;
-using Newtonsoft.Json;
 
 namespace TeslaLogger
 {

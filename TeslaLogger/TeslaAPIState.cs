@@ -447,40 +447,33 @@ namespace TeslaLogger
             {
                 case "vehicle_data?endpoints=vehicle_config":
                 case "vehicle_data?endpoints=vehicle_config&let_sleep=true":
-                    ParseVehicleConfig(JSON);
-                    break;
+                    return ParseVehicleConfig(JSON);
                 case "vehicle_data?endpoints=charge_state":
                 case "vehicle_data?endpoints=charge_state&let_sleep=true":
-                    ParseChargeState(JSON);
-                    break;
+                    return ParseChargeState(JSON);
                 case "vehicle_data?endpoints=vehicle_state":
                 case "vehicle_data?endpoints=vehicle_state&let_sleep=true":
-                    ParseVehicleState(JSON);
-                    break;
+                    return ParseVehicleState(JSON);
                 case "vehicle_data?endpoints=climate_state":
                 case "vehicle_data?endpoints=climate_state&let_sleep=true":
-                    ParseClimateState(JSON);
-                    break;
+                    return ParseClimateState(JSON);
                 case "vehicle_data?endpoints=drive_state":
                 case "vehicle_data?endpoints=drive_state%3Blocation_data":
                 case "vehicle_data?endpoints=drive_state&let_sleep=true":
                 case "vehicle_data?endpoints=drive_state%3Blocation_data&let_sleep=true":
-                    ParseDriveState(JSON);
-                    break;
+                    return ParseDriveState(JSON);
                 case "vehicle_data":
                 case WebHelper.vehicle_data_everything:
-                    ParseChargeState(JSON);
-                    ParseVehicleConfig(JSON);
-                    ParseClimateState(JSON);
-                    ParseDriveState(JSON);
+                    return ParseChargeState(JSON) &
+                    ParseVehicleConfig(JSON) &
+                    ParseClimateState(JSON) &
+                    ParseDriveState(JSON) &
                     ParseVehicleState(JSON);
-                    break;
                 case "vehicles":
                     return ParseVehicles(JSON);
                 case "vehicle_data?endpoints=location_data":
                 case "vehicle_data?endpoints=location_data&let_sleep=true":
-                    // ignore
-                    break;
+                case "nearby_charging_sites":
                 case "nearby_charging_sites?detail=true":
                     // ignore
                     break;
