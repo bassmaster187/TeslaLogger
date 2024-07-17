@@ -534,7 +534,7 @@ VALUES(
 
                     if (!string.IsNullOrEmpty(name))
                     {
-                        Tools.DebugLog($"#{car.CarInDB}Guest SuC: <{name}> <{a.available}> <{a.total}>");
+                        Tools.DebugLog($"#{car.CarInDB} Guest SuC: <{name}> <{a.available}> <{a.total}>");
 
                         ArrayList send = new ArrayList();
                         Dictionary<string, object> sendKV = new Dictionary<string, object>();
