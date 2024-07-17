@@ -5039,52 +5039,13 @@ DESC", con))
             return false;
         }
 
-        public async Task<string> GetNearbyChargingSites(double lat, double lng)
+        // for classic Owner API
+        public string GetNearbyChargingSitesOwnerAPI()
         {
             string resultContent = "";
             try
             {
-                HttpClient client = GethttpclientTeslaNearbyChargingSites();
-
-                string adresse = "https://akamai-apigateway-charging-ownership.tesla.com/graphql?deviceLanguage=en&deviceCountry=US&ttpLocale=en_US&vin=" + car.Vin + "&operationName=GetNearbyChargingSites";
-
-                DateTime start = DateTime.UtcNow;
-                string data = @"{ ""query"": ""query GetNearbyChargingSites($args: GetNearbyChargingSitesRequestType!) {charging {\n    nearbySites(args: $args) {\n      sitesAndDistances {\n        ...ChargingNearbySitesFragment\n      }\n    }\n  }\n}\n    \n    fragment ChargingNearbySitesFragment on ChargerSiteAndDistanceType {\n  activeOutages {\n    message\n  }\n  availableStalls {\n    value\n  }\n  centroid {\n    ...EnergySvcCoordinateTypeFields\n  }\n  drivingDistanceMiles {\n    value\n  }\n  entryPoint {\n    ...EnergySvcCoordinateTypeFields\n  }\n  haversineDistanceMiles {\n    value\n  }\n  id {\n    text\n  }\n  localizedSiteName {\n    value\n  }\n  maxPowerKw {\n    value\n  }\n  totalStalls {\n    value\n  }\n  siteType\n  accessType\n}\n    \n    fragment EnergySvcCoordinateTypeFields on EnergySvcCoordinateType {\n  latitude\n  longitude\n}\n    "",
-  ""variables"": {
-                    ""args"": {
-                        ""userLocation"": {
-        ""latitude"": " + lat.ToString(Tools.ciEnUS) + @",
-        ""longitude"": " + lng.ToString(Tools.ciEnUS) + @"
-                        },
-      ""northwestCorner"": {
-        ""latitude"": " + (lat + 2).ToString(Tools.ciEnUS) + @",
-        ""longitude"": " + (lng - 2).ToString(Tools.ciEnUS) + @"
-      },
-      ""southeastCorner"": {
-        ""latitude"": " + (lat - 2).ToString(Tools.ciEnUS) + @",
-        ""longitude"": " + (lng + 2).ToString(Tools.ciEnUS) + @"
-      },
-      ""openToNonTeslasFilter"": {
-                            ""value"": false
-      },
-      ""languageCode"": ""en"",
-      ""countryCode"": ""US"",
-      ""vin"": """ + car.Vin + @"""
-                    }
-                },
-  ""operationName"": ""GetNearbyChargingSites""
-}";
-
-                StringContent queryString = new StringContent(data, Encoding.UTF8, "application/json");
-                HttpResponseMessage result = await client.PostAsync(adresse, queryString);
-                resultContent = await result.Content.ReadAsStringAsync().ConfigureAwait(false);
-                DBHelper.AddMothershipDataToDB("GetCommand(nearby_charging_sites)", start, (int)result.StatusCode, car.CarInDB);
-
-                if (!result.IsSuccessStatusCode)
-                {
-                    car.webhelper.nearbySuCServiceFail++;
-                    throw new Exception("NearbyChargingSiteFail: " + result.StatusCode.ToString() + " CarState: " + car.GetCurrentState().ToString() + " (OK: " + car.webhelper.nearbySuCServiceOK + " - Fail: " + car.webhelper.nearbySuCServiceFail + ")");
-                }
+                resultContent = GetCommand("nearby_charging_sites").Result;
                 return resultContent;
             }
             catch (Exception ex)
