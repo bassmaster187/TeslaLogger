@@ -1,3 +1,6 @@
+# Version 1.59.1
+- Bugfixes
+
 # Version 1.59.0
 - Tesla API has been changed!
 
