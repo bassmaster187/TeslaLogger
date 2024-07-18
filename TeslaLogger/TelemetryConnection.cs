@@ -48,7 +48,7 @@ namespace TeslaLogger
                 if (driving)
                 {
                     var ts = DateTime.Now - lastDriving;
-                    if (ts.TotalMinutes > 15)
+                    if (ts.TotalMinutes > 10)
                     {
                         driving = false;
                         Log("Parking time: " + lastDriving.ToString());
@@ -251,6 +251,9 @@ namespace TeslaLogger
         {
             try
             {
+                if (!car.FleetAPI)
+                    return;
+
                 double? latitude = null;
                 double? longitude = null;
                 double? speed = null;
@@ -628,9 +631,14 @@ namespace TeslaLogger
 
                                     if (!acCharging)
                                     {
-                                        Log("AC Charging ***");
-                                        InsertLocation(j, date, resultContent, true);
-                                        acCharging = true;
+                                        var current = PackCurrent(j);
+
+                                        Log($"AC Charging  {current}A ***");
+                                        if (current > 2)
+                                        {
+                                            InsertLocation(j, date, resultContent, true);
+                                            acCharging = true;
+                                        }
                                     }
                                 }
                                 else if (v1 == "Idle")
