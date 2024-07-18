@@ -5340,17 +5340,26 @@ WHERE
         [SuppressMessage("Security", "CA2100:Review SQL queries for security vulnerabilities")]
         public static bool ColumnExists(string table, string column)
         {
-            using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+            try
             {
-                con.Open();
-                using (MySqlCommand cmd = new MySqlCommand("SHOW COLUMNS FROM `" + table + "` LIKE '" + column + "';", con))
+                using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
                 {
-                    MySqlDataReader dr = SQLTracer.TraceDR(cmd);
-                    if (dr.Read())
+                    con.Open();
+                    using (MySqlCommand cmd = new MySqlCommand("SHOW COLUMNS FROM `" + table + "` LIKE '" + column + "';", con))
                     {
-                        return true;
+                        MySqlDataReader dr = SQLTracer.TraceDR(cmd);
+                        if (dr.Read())
+                        {
+                            return true;
+                        }
                     }
                 }
+            } catch (MySqlException ex)
+            {
+                if (ex.Number == 1146)  // Table doesn't exist
+                    return false;
+
+                throw;
             }
 
             return false;
