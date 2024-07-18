@@ -762,6 +762,12 @@ namespace TeslaLogger
                 lastRefreshToken = DateTime.UtcNow;
 
                 Log("Update Access Token From Refresh Token - FleetAPI!");
+                if (String.IsNullOrEmpty(refresh_token))
+                {
+                    car.Log("No Refresh Token");
+                    return "";
+                }
+
                 using (var formContent = new FormUrlEncodedContent(new[]
             {
                 new KeyValuePair<string, string>("refresh_token", refresh_token),
