@@ -638,7 +638,16 @@ namespace TeslaLogger
 
                 if (t > 0)
                 {
-                    Thread.Sleep(t); // alle 5 sek eine positionsmeldung
+                    t = t / 100;
+                    for (int x = 0; x < t; x++)
+                    {
+                        Thread.Sleep(100);
+                        if (FleetAPI && telemetry?.IsCharging == true)
+                        {
+                            Log("skip sleep because of telemetry is charging");
+                            break;
+                        }
+                    }
                 }
 
                 if (odometerLastTrip != CurrentJSON.current_odometer)
