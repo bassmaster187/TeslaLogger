@@ -1,4 +1,4 @@
-# Version 1.59.1
+# Version 1.59.2
 - Bugfixes
 
 # Version 1.59.0
