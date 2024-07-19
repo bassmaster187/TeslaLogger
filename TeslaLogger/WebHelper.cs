@@ -3299,6 +3299,7 @@ namespace TeslaLogger
                 decimal dLongitude = 0;
                 int heading = 0;
 
+                /*
                 try
                 {
                     string temp_Tesla_Streamingtoken = jsonResult["response"]["tokens"][0].ToString();
@@ -3316,6 +3317,7 @@ namespace TeslaLogger
                     SubmitExceptionlessClientWithResultContent(ex, resultContent);
                     ExceptionWriter(ex, resultContent);
                 }
+                */
 
                 if (drive_state.ContainsKey("latitude"))
                 {
