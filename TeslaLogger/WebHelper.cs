@@ -3884,6 +3884,9 @@ namespace TeslaLogger
                     car.DbHelper.InsertPos(v[0], latitude, longitude, ispeed, dpower, dodometer_km, ideal_battery_range_km, battery_range_km, isoc, outside_temp, String.Empty);
                 }
             }
+            if (int.TryParse(heading, out int iheading)) {  // heading in degrees
+                car.CurrentJSON.heading = iheading;
+            }
         }
 
 
