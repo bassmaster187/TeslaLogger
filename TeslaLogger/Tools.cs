@@ -2085,6 +2085,11 @@ WHERE
             }
             return Math.Round(speed_mph / 0.62137119223733);
         }
+
+        internal static double MlToKm(double miles)
+        {
+            return miles / 0.62137119223733;
+        }
     }
 
     public static class EventBuilderExtension
