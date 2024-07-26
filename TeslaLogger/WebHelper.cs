@@ -3867,9 +3867,9 @@ namespace TeslaLogger
             {
                 // speed is converted by InsertPos
                 // power is converted by InsertPos
-                double dodometer_km = dodometer / 0.62137119223733;
+                double dodometer_km = Tools.MphToKmhRounded(dodometer);
                 // battery_range_km = range in ml to km
-                double battery_range_km = irange / 0.62137119223733;
+                double battery_range_km = Tools.MphToKmhRounded(irange);
                 // ideal_battery_range_km = ideal_battery_range_km * car specific factor
                 double ideal_battery_range_km = battery_range_km * battery_range2ideal_battery_range;
                 double? outside_temp = car.CurrentJSON.current_outside_temperature;
@@ -5561,7 +5561,7 @@ DESC", con))
                     }
                 }
 
-                double speed_kmh = (int)DBHelper.MphToKmhRounded(speed_mph);
+                double speed_kmh = (int)Tools.MphToKmhRounded(speed_mph);
 
                 Dictionary<string, object> values = new Dictionary<string, object>
                     {
