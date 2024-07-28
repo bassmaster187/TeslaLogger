@@ -35,6 +35,8 @@ namespace TeslaLogger
 
         public int lastposid = 0;
         
+        public DateTime lastPackCurrent = DateTime.MinValue;
+        double packCurrent = 0;
 
         void Log(string message)
         {
@@ -299,6 +301,18 @@ namespace TeslaLogger
             try
             {
                 dynamic response = j["Response"];
+
+                if (response is JValue && response == "synced")
+                {
+                    Log("LoginRespone: synced");
+                    return;
+                }
+                else if (response is JValue && response == "NOT synced")
+                {
+                    Log("LoginRespone: NOT synced");
+                    return;
+                }
+
                 dynamic updated_vehicles = response["updated_vehicles"];
                 if (updated_vehicles == "1")
                     Log("LoginRespone: OK");
@@ -552,6 +566,11 @@ namespace TeslaLogger
                                     currentJSONUpdated = true;
                                     BrickVoltageMax = d;
                                 }
+                                else if (key == "PackCurrent")
+                                {
+                                    lastPackCurrent = DateTime.Now;
+                                    packCurrent = d;
+                                }
                             }
                         }
                     }
@@ -643,6 +662,7 @@ namespace TeslaLogger
                                         {
                                             InsertLocation(j, date, resultContent, true);
                                             acCharging = true;
+                                            Login();
                                         }
                                     }
                                 }
@@ -652,6 +672,7 @@ namespace TeslaLogger
                                     {
                                         Log("Stop AC Charging ***");
                                         acCharging = false;
+                                        Login();
                                     }
                                 }
                                 else
@@ -707,6 +728,7 @@ namespace TeslaLogger
                                         {
                                             Log("Driving by speed ***");
                                             Driving = true;
+                                            Login();
                                         }
                                     }
 
@@ -716,10 +738,13 @@ namespace TeslaLogger
                             {
                                 if (v1 == "true")
                                 {
+                                    bool login = false;
+
                                     if (Driving)
                                     {
                                         Log("Driving -> DC Charging ***");
                                         Driving = false;
+                                        login = true;
                                     }
 
                                     if (!dcCharging)
@@ -732,8 +757,12 @@ namespace TeslaLogger
 
                                             InsertLocation(j, date, resultContent, true);
                                             dcCharging = true;
+                                            login = true;
                                         }
                                     }
+
+                                    if (login)
+                                        Login();
                                 }
                                 else if (v1 == "false")
                                 {
@@ -741,6 +770,7 @@ namespace TeslaLogger
                                     {
                                         Log("stop DC Charging ***");
                                         dcCharging = false;
+                                        Login();
                                     }
                                 }
                             }
@@ -763,11 +793,21 @@ namespace TeslaLogger
 
         }
 
-        internal static double? PackCurrent(dynamic o)
+        internal double? PackCurrent(dynamic o)
         {
             try
             {
                 JToken j = o.SelectToken("$[?(@.key=='PackCurrent')].value.stringValue");
+
+                if (j == null)
+                {
+                    var ts = DateTime.Now - lastPackCurrent;
+                    if (ts.TotalSeconds < 45)
+                        return packCurrent;
+
+                    return null;
+                }
+
                 double val = j.Value<double>();
                 return val;
             }
@@ -789,6 +829,7 @@ namespace TeslaLogger
                 {
                     Log("Driving stop by speed " + lastDriving.ToString());
                     Driving = false;
+                    Login();
                 }
             }
         }
@@ -831,8 +872,14 @@ namespace TeslaLogger
         {
             
             string configname = "";
-            if (car.FleetAPI)
-                configname = "free2";
+            if (driving)
+                configname = "drive";
+            else if (acCharging)
+                configname = "ac";
+            else if (dcCharging)
+                configname = "dc";
+            else
+                configname = "online";
 
             Log("Login to Telemetry Server / config: " + configname);
 
