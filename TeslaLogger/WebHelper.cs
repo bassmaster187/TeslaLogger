@@ -3443,7 +3443,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
-                if (resultContent == null || resultContent == "NULL")
+                if (resultContent == null || resultContent == "NULL" )
                 {
                     Log("IsDriving = NULL!");
                     Thread.Sleep(10000);
@@ -4903,6 +4903,12 @@ DESC", con))
 
                         return resultContent;
                     }
+
+                    if (cmd.Contains("vehicle_data") && noMemcache == false && result.StatusCode == HttpStatusCode.RequestTimeout)
+                    {
+                        MemoryCache.Default.Add(cacheKey, "NULL", DateTime.Now.AddSeconds(15));
+                    }
+
                     DBHelper.AddMothershipDataToDB("GetCommand(" + cmd + ")", double.Parse("-1." + (int)result.StatusCode, Tools.ciEnUS), (int)result.StatusCode, car.CarInDB);
                     if (result.StatusCode == HttpStatusCode.Unauthorized)
                     {
