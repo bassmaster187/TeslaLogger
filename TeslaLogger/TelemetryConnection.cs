@@ -307,6 +307,11 @@ namespace TeslaLogger
                     Log("LoginRespone ERROR: " + response);
                     car.CurrentJSON.FatalError = "Telemetry Login Error!!! Check Logfile!";
                     car.CurrentJSON.CreateCurrentJSON();
+
+                    if (response.ToString().Contains("not_found"))
+                    {
+                        Thread.Sleep(10 * 60 * 1000);
+                    }
                 }
             }
             catch (Exception ex)
