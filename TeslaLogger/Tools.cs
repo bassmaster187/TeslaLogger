@@ -2068,6 +2068,28 @@ WHERE
 
             return (int)sleepPerCommand;
         }
+
+        internal static double MphToKmhRounded(double speed_mph)
+        {
+            int speed_floor = (int)(speed_mph * 1.609344);
+            // handle special speed_floor as Math.Round is off by +1
+            if (
+                speed_floor == 30
+                || speed_floor == 33
+                || speed_floor == 83
+                || speed_floor == 123
+                || speed_floor == 133
+                )
+            {
+                return speed_floor;
+            }
+            return Math.Round(speed_mph / 0.62137119223733);
+        }
+
+        internal static double MlToKm(double miles)
+        {
+            return miles / 0.62137119223733;
+        }
     }
 
     public static class EventBuilderExtension
