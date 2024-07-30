@@ -7,6 +7,7 @@ using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using System.Security.Cryptography;
 
 namespace TeslaLogger
 {
@@ -567,6 +568,20 @@ namespace TeslaLogger
 
         private static void UpdateDbInBackground()
         {
+            // Run only once a day per version
+            string kvskey = "UpdateDbInBackground";
+            string check = DateTime.Now.ToString("yyyyMMdd") + "-" + Assembly.GetExecutingAssembly().GetName().Version.ToString();
+
+            if (KVS.Get(kvskey, out string updateDbInBackground) == KVS.SUCCESS)
+            {
+                if (updateDbInBackground == check)
+                {
+                    Logfile.Log("UpdateDbInBackground: SKIP today");
+                    return;
+                }
+            }
+
+
             Thread DBUpdater = new Thread(() =>
             {
                 try
@@ -628,6 +643,8 @@ namespace TeslaLogger
 
                     Logfile.Log("UpdateDbInBackground finished, took " + (DateTime.Now - start).TotalMilliseconds + "ms");
                     RunHousekeepingInBackground();
+
+                    KVS.InsertOrUpdate(kvskey, check);
                 }
                 catch (Exception ex)
                 {
