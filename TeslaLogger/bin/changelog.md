@@ -1,5 +1,5 @@
-# Version 1.59.2
-- Bugfixes
+# Version 1.59.3
+- Support for new FW 2024.26 with Fleet API
 
 # Version 1.59.0
 - Tesla API has been changed!
