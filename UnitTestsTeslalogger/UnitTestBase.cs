@@ -1150,7 +1150,8 @@ namespace UnitTestsTeslalogger
             dynamic j = JsonConvert.DeserializeObject(data);
             dynamic jData = j["data"];
 
-            double? current = TelemetryConnection.PackCurrent(jData);
+            TelemetryConnection f = new TelemetryConnection(null);
+            double? current = f.PackCurrent(jData, DateTime.Now);
             Assert.AreEqual(current, 121.9d);
 
         }
