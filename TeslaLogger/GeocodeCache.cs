@@ -129,7 +129,7 @@ WHERE
                     con.Open();
 
                     using (MySqlCommand cmd = new MySqlCommand(@"
-INSERT
+REPLACE
     geocodecache(
         lat,
         lng,
