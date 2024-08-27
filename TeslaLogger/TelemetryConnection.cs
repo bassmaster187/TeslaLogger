@@ -40,6 +40,8 @@ namespace TeslaLogger
         public DateTime lastVehicleSpeedDate = DateTime.MinValue;
         public double lastVehicleSpeed = 0.0;
 
+        public String lastChargeState = "";
+
         public int lastposid = 0;
         
 
@@ -615,6 +617,18 @@ namespace TeslaLogger
                                     System.Diagnostics.Debug.WriteLine("PackCurrent: " + d);
                                     lastPackCurrent = d;
                                     lastPackCurrentDate = date;
+
+                                    if (!acCharging && lastChargeState == "Enable")
+                                    {
+                                        var current = PackCurrent(j, date);
+
+                                        if (current > 2)
+                                        {
+                                            Log($"AC Charging  {current}A ***");
+                                            InsertLocation(j, date, resultContent, true);
+                                            acCharging = true;
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -691,6 +705,12 @@ namespace TeslaLogger
 
                             if (key == "ChargeState")
                             {
+                                if (lastChargeState != v1)
+                                {
+                                    lastChargeState = v1;
+                                    Log("ChargeState " + lastChargeState);
+                                }
+
                                 if (v1 == "Enable")
                                 {
                                     if (Driving)
@@ -703,9 +723,9 @@ namespace TeslaLogger
                                     {
                                         var current = PackCurrent(j, date);
 
-                                        Log($"AC Charging  {current}A ***");
                                         if (current > 2)
                                         {
+                                            Log($"AC Charging  {current}A ***");
                                             InsertLocation(j, date, resultContent, true);
                                             acCharging = true;
                                         }
@@ -718,6 +738,10 @@ namespace TeslaLogger
                                         Log("Stop AC Charging ***");
                                         acCharging = false;
                                     }
+                                }
+                                else if (v1 == "QualifyLineConfig")
+                                {
+
                                 }
                                 else
                                 {
