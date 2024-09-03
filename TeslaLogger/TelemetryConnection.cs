@@ -42,6 +42,8 @@ namespace TeslaLogger
 
         public String lastChargeState = "";
 
+        public bool lastFastChargerPresent = false;
+
         public int lastposid = 0;
         
 
@@ -629,6 +631,20 @@ namespace TeslaLogger
                                             acCharging = true;
                                         }
                                     }
+
+                                    if (!dcCharging && lastFastChargerPresent)
+                                    {
+                                        var current = PackCurrent(j, date);
+                                        Log($"FastChargerPresent {current}A ***");
+
+                                        if (current > 5)
+                                        {
+                                            Log($"DC Charging ***");
+
+                                            InsertLocation(j, date, resultContent, true);
+                                            dcCharging = true;
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -808,6 +824,12 @@ namespace TeslaLogger
                             {
                                 if (v1 == "true")
                                 {
+                                    if (!lastFastChargerPresent)
+                                    {
+                                        Log("lastFastChargerPresent = true");
+                                        lastFastChargerPresent = true;
+                                    }
+
                                     if (Driving)
                                     {
                                         Log("Driving -> DC Charging ***");
@@ -829,6 +851,8 @@ namespace TeslaLogger
                                 }
                                 else if (v1 == "false")
                                 {
+                                    lastFastChargerPresent = false;
+
                                     if (dcCharging)
                                     {
                                         Log("stop DC Charging ***");
