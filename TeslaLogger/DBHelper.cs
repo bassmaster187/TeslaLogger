@@ -4468,17 +4468,24 @@ WHERE
             if (posID == 0)
                 posID = GetMaxPosid();
 
-            using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+            try
             {
-                con.Open();
-                using (MySqlCommand cmd = new MySqlCommand("insert drivestate (StartDate, StartPos, CarID, wheel_type) values (@StartDate, @Pos, @CarID, @wheel_type)", con))
+                using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
                 {
-                    cmd.Parameters.AddWithValue("@StartDate", now);
-                    cmd.Parameters.AddWithValue("@Pos", posID);
-                    cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
-                    cmd.Parameters.AddWithValue("@wheel_type", car.wheel_type);
-                    _ = SQLTracer.TraceNQ(cmd, out _);
+                    con.Open();
+                    using (MySqlCommand cmd = new MySqlCommand("insert drivestate (StartDate, StartPos, CarID, wheel_type) values (@StartDate, @Pos, @CarID, @wheel_type)", con))
+                    {
+                        cmd.Parameters.AddWithValue("@StartDate", now);
+                        cmd.Parameters.AddWithValue("@Pos", posID);
+                        cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
+                        cmd.Parameters.AddWithValue("@wheel_type", car.wheel_type);
+                        _ = SQLTracer.TraceNQ(cmd, out _);
+                    }
                 }
+            } catch (Exception ex)
+            {
+                car.Log(ex.ToString());
+                car.SendException2Exceptionless(ex);
             }
 
             Insert_active_route_energy_at_arrival(posID, true);
