@@ -8,7 +8,7 @@
 	$carid = 1;
 	
 	if (isset($_REQUEST["id"]) && strlen($_REQUEST["id"]) > 0)
-		$carid = $_REQUEST["id"];
+		$carid = intval($_REQUEST["id"]);
 
 	unlink($prefix."cmd_gosleep_$carid.txt");
 	$filename = $prefix."wakeupteslalogger_$carid.txt";
