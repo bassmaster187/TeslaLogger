@@ -9140,7 +9140,7 @@ EWE-GO DE-Marktoberdorf Brückenstraße, 47.773399, 10.60495
 EWE-GO DE-Marktredwitz Böttgerstraße, 50.0134, 12.09918
 EWE-GO DE-Martfeld Hauptstraße, 52.876632, 9.062726
 EWE-GO DE-Massen-Niederlausitz Ludwig-Erhard-Straße, 51.63656, 13.73728
-EWE-GO DE-Meerane Hohe Straße, 50.841761, 12.44489
+EWE-GO DE-Meerane Hohe Straße, 50.841761, 12.44489, 5
 EWE-GO DE-Meißen Fabrikstraße, 51.164993, 13.489314
 EWE-GO DE-Melle Industriestraße, 52.190412132036, 8.3527933577986
 EWE-GO DE-Menden Hämmerstraße, 51.450727, 7.752865
@@ -12125,6 +12125,7 @@ TEAG DE-Amt Wachsenburg, 50.888332, 10.935136
 TEAG DE-Gera Globus, 50.8874229, 12.1384896
 TEAG DE-Hermsdorf Rodaer Straße 72, 50.8864278, 11.8501822
 TEAG DE-Schleiz Autohof, 50.551565, 11.789977
+TEAG DE-Schmölln Rossmann, 50.8930064, 12.332003
 
 Threeforce DE-Aschendorf In der Emsmarsch 1-7, 53.0490595625, 7.3212071875
 Threeforce DE-Aurich Tjüchkampstraße 4A, 53.440542, 7.515881
