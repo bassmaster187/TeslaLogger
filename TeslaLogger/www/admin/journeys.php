@@ -23,6 +23,14 @@ select.newJourney {width: 500px;}
 </style>
 
 <script>
+    function escapeHtml(unsafe)
+    {
+        var el = document.createElement("div");
+        el.innerText = el.textContent = unsafe;
+        s = el.innerHTML;
+        return s;
+    }
+
 	<?php
 	if (isset($_REQUEST["carid"]))
         echo("var carid=".$_REQUEST["carid"].";\n");
@@ -358,7 +366,7 @@ select.newJourney {width: 500px;}
         temp += uid;
         temp += "/dashboard?orgId=1&from=";
         temp += ustart +"&to="+ uend +"&var-Car="+carid+ parameters+ "' target=\"_blank\">";
-        temp += text;
+        temp += escapeHtml(text);
         temp += "</a>";
 
         return temp;
