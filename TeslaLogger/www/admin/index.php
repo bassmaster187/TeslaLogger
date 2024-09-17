@@ -7,8 +7,8 @@ global $display_name;
 $carid = GetDefaultCarId();
 if (isset($_REQUEST["carid"]))
 {
-	$_SESSION["carid"] = $_REQUEST["carid"];
-	$carid = $_REQUEST["carid"];
+	$_SESSION["carid"] = intval($_REQUEST["carid"]);
+	$carid = intval($_REQUEST["carid"]);
 }
 else
 {
