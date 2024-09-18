@@ -4454,7 +4454,7 @@ WHERE
             // driving means that charging must be over
             UpdateUnplugDate();
             int posID = 0;
-            
+
             if (car.FleetAPI) // maxpos in Fleetapi is useless because lat & lng = 0
             {
                 posID = car.telemetry.lastposid;
@@ -4467,25 +4467,13 @@ WHERE
 
             if (posID == 0)
                 posID = GetMaxPosid();
-
-            try
+            
+            if (!InsertDrivestate(now, posID))
             {
-                using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
-                {
-                    con.Open();
-                    using (MySqlCommand cmd = new MySqlCommand("insert drivestate (StartDate, StartPos, CarID, wheel_type) values (@StartDate, @Pos, @CarID, @wheel_type)", con))
-                    {
-                        cmd.Parameters.AddWithValue("@StartDate", now);
-                        cmd.Parameters.AddWithValue("@Pos", posID);
-                        cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
-                        cmd.Parameters.AddWithValue("@wheel_type", car.wheel_type);
-                        _ = SQLTracer.TraceNQ(cmd, out _);
-                    }
-                }
-            } catch (Exception ex)
-            {
-                car.Log(ex.ToString());
-                car.SendException2Exceptionless(ex);
+                posID = (int)DBHelper.DuplicatePos(posID);
+                car.Log("DuplicatePos: " + posID);
+                if (posID > 0)
+                    InsertDrivestate(now, posID);
             }
 
             Insert_active_route_energy_at_arrival(posID, true);
@@ -4502,6 +4490,38 @@ WHERE
             car.CurrentJSON.current_trip_end_range = 0;
 
             car.CurrentJSON.CreateCurrentJSON();
+        }
+
+        private bool InsertDrivestate(DateTime now, int posID)
+        {
+            try
+            {
+                using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+                {
+                    con.Open();
+                    using (MySqlCommand cmd = new MySqlCommand("insert drivestate (StartDate, StartPos, CarID, wheel_type) values (@StartDate, @Pos, @CarID, @wheel_type)", con))
+                    {
+                        cmd.Parameters.AddWithValue("@StartDate", now);
+                        cmd.Parameters.AddWithValue("@Pos", posID);
+                        cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
+                        cmd.Parameters.AddWithValue("@wheel_type", car.wheel_type);
+                        _ = SQLTracer.TraceNQ(cmd, out _);
+                        return true;
+                    }
+                }
+            }
+            catch (MySqlException ex)
+            {
+                if (ex.ErrorCode == -2147467259) // Duplicate entry
+                {
+                    car.Log(ex.Message);
+                    return false;
+                }
+
+                car.Log(ex.ToString());
+                car.SendException2Exceptionless(ex);
+            }
+            return false;
         }
 
         private void UpdatePosFromCurrentJSON(int posID)
@@ -7244,6 +7264,26 @@ ORDER BY startdate", con))
                 Logfile.Log(ex.ToString());
                 ex.ToExceptionless().FirstCarUserID().Submit();
             }
+        }
+
+        internal static long DuplicatePos(int id)
+        {
+             string sql = @"INSERT INTO `pos` (`Datum`,`lat`,`lng`,`speed`,`power`,`odometer`,`ideal_battery_range_km`,`address`,`outside_temp`,`altitude`,`battery_level`,`inside_temp`,`battery_heater`,`is_preconditioning`,`sentry_mode`,`import`,`battery_range_km`,`CarID`,`AP`) 
+                select now() ,`lat`,`lng`,`speed`,`power`,`odometer`,`ideal_battery_range_km`,`address`,`outside_temp`,`altitude`,`battery_level`,`inside_temp`,`battery_heater`,`is_preconditioning`,`sentry_mode`,`import`,`battery_range_km`,`CarID`,`AP`
+                from pos
+                where id = " + id;
+
+            using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+            {
+                con.Open();
+                using (MySqlCommand cmd = new MySqlCommand(sql, con))
+                {
+                    cmd.ExecuteNonQuery();
+                    return cmd.LastInsertedId;
+                }
+            }
+
+            return 0;
         }
     }
 }
