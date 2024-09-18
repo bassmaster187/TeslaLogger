@@ -1791,6 +1791,7 @@ Supercharger-V3 DE-Geiselwind, 49.769526,10.470298, 50
 Supercharger-V3 DE-Geiselwind, 49.769742,10.470259, 50
 Supercharger-V3 DE-Gelnhausen,50.188644,9.186141
 Supercharger-V3 DE-Gensingen, 49.90202, 7.929759
+Supercharger-V4 DE-Gera, 50.8878111, 12.1364607, 35
 Supercharger-V4 DE-Gigafactory Berlin-Brandenburg, 52.391, 13.796778
 Supercharger-V4 DE-Gigafactory Berlin-Brandenburg, 52.391321, 13.796042
 Supercharger-V3 DE-Göttingen (Cafe del Sol), 51.528335, 9.88688
@@ -7445,7 +7446,7 @@ EnBW DE-Georgsmarienhütte Brüsseler Str. Penny, 52.22266, 8.084771
 EnBW DE-Georgsmarienhütte Penny, 52.20307, 8.03237
 EnBW DE-Gera Bauhaus, 50.86827, 12.07705
 EnBW DE-Gera Bieblach, 50.8987583, 12.1001272
-EnBW DE-Gera Globus, 50.8880999, 12.1374571
+EnBW DE-Gera Globus, 50.8880999, 12.1374571, 45
 EnBW DE-Gerabronn Jahnstr., 49.2499, 9.928
 EnBW DE-Gerlingen Fürsaalstr., 48.803266, 9.067024
 EnBW DE-Gerlingen Hofwiesenstr., 48.803839, 9.063077
@@ -9140,7 +9141,7 @@ EWE-GO DE-Marktoberdorf Brückenstraße, 47.773399, 10.60495
 EWE-GO DE-Marktredwitz Böttgerstraße, 50.0134, 12.09918
 EWE-GO DE-Martfeld Hauptstraße, 52.876632, 9.062726
 EWE-GO DE-Massen-Niederlausitz Ludwig-Erhard-Straße, 51.63656, 13.73728
-EWE-GO DE-Meerane Hohe Straße, 50.841761, 12.44489
+EWE-GO DE-Meerane Hohe Straße, 50.841761, 12.44489, 5
 EWE-GO DE-Meißen Fabrikstraße, 51.164993, 13.489314
 EWE-GO DE-Melle Industriestraße, 52.190412132036, 8.3527933577986
 EWE-GO DE-Menden Hämmerstraße, 51.450727, 7.752865
@@ -12122,9 +12123,11 @@ SWU DE-Ulm Wilhelmstraße, 48.404929, 9.9856399
 SWU DE-Neu-Ulm Glacis Galerie, 48.393879, 10.0039061
 
 TEAG DE-Amt Wachsenburg, 50.888332, 10.935136
+TEAG DE-Bad Klosterlausnitz An der Autobahn, 50.907984, 11.8436292
 TEAG DE-Gera Globus, 50.8874229, 12.1384896
 TEAG DE-Hermsdorf Rodaer Straße 72, 50.8864278, 11.8501822
 TEAG DE-Schleiz Autohof, 50.551565, 11.789977
+TEAG DE-Schmölln Rossmann, 50.8930064, 12.332003
 
 Threeforce DE-Aschendorf In der Emsmarsch 1-7, 53.0490595625, 7.3212071875
 Threeforce DE-Aurich Tjüchkampstraße 4A, 53.440542, 7.515881
