@@ -1,6 +1,10 @@
+# Version 1.59.6
+- BF: missing trip because of Duplicate entry 'xxx' for key 'ix_startpos'
+- XSS vulnerability in some php files. Thanks to Mohammed Shine 
+
 # Version 1.59.5
 - BF: Fleet API detecting DC charging on newer Tesla firmware
-- 
+ 
 # Version 1.59.4
 - BF: Fleet API detecting AC charging on newer Tesla firmware
 

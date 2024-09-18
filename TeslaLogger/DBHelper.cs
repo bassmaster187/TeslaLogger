@@ -4468,7 +4468,7 @@ WHERE
             if (posID == 0)
                 posID = GetMaxPosid();
             
-            if (!InsertDrivestate(now, posID))
+            if (!InsertDrivestate(now, posID)) // if starting a drive state is failing because of duplicate startposid, the pos will be duplicated and retry
             {
                 posID = (int)DBHelper.DuplicatePos(posID);
                 car.Log("DuplicatePos: " + posID);
