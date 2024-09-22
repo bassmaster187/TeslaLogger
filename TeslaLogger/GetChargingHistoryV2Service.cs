@@ -190,31 +190,32 @@ INSERT IGNORE INTO teslacharging SET
             }
         }
 
-        internal static void LoadLatest(Car car)
+        internal static bool LoadLatest(Car car)
         {
             Tools.DebugLog($"GetChargingHistoryV2Service.LoadLatest(#{car.CarInDB})");
             string result = car.webhelper.GetChargingHistoryV2(1).Result;
             if (result == null || result == "{}" || string.IsNullOrEmpty(result))
             {
                 Tools.DebugLog($"GetChargingHistoryV2Service.LoadLatest(#{car.CarInDB}): result == null");
-                return;
+                return false;
             }
             if (result.Contains("Retry later"))
             {
                 Tools.DebugLog($"GetChargingHistoryV2Service.LoadLatest(#{car.CarInDB}): Retry later");
-                return;
+                return false;
             }
             else if (result.Contains("vehicle unavailable"))
             {
                 Tools.DebugLog($"GetChargingHistoryV2Service.LoadLatest(#{car.CarInDB}): vehicle unavailable");
-                return;
+                return false;
             }
             else if (result.Contains("502 Bad Gateway"))
             {
                 Tools.DebugLog($"GetChargingHistoryV2Service.LoadLatest(#{car.CarInDB}): 502 Bad Gateway");
-                return;
+                return false;
             }
             _ = ParseJSON(result, car);
+            return true;
         }
 
         internal static void CheckSchema()
