@@ -3,10 +3,7 @@
     "list": [
       {
         "builtIn": 1,
-        "datasource": {
-          "type": "datasource",
-          "uid": "grafana"
-        },
+        "datasource": "-- Grafana --",
         "enable": true,
         "hide": true,
         "iconColor": "rgba(0, 211, 255, 1)",
@@ -27,7 +24,7 @@
       "title": "Admin Panel",
       "tooltip": "",
       "type": "link",
-      "url": "https://raspberry/admin/"
+      "url": "http://raspberry/admin/"
     }
   ],
   "liveNow": false,
@@ -149,7 +146,7 @@
           ]
         }
       ],
-      "title": "Odometer",
+      "title": "km Stand",
       "type": "timeseries"
     }
   ],
@@ -190,7 +187,7 @@
     ]
   },
   "timezone": "",
-  "title": "Odometer",
+  "title": "km Stand",
   "uid": "NjtMTFggz",
   "version": 1,
   "weekStart": ""
