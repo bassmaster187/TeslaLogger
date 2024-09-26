@@ -1405,7 +1405,7 @@ DROP TABLE chargingstate_bak";
                     o.Add(new KeyValuePair<string, string>(ccVin.ToString(), "VIN: "+ ccVin + " / Name: " + ccDisplayName ));
                 }
 
-                responseString = JsonConvert.SerializeObject(o);)
+                responseString = JsonConvert.SerializeObject(o);
                 contentType = "application/json";
 
             }
