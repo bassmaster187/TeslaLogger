@@ -1155,5 +1155,12 @@ namespace UnitTestsTeslalogger
             Assert.AreEqual(current, 121.9d);
 
         }
+
+        [TestMethod]
+        public void IsInUnitTest()
+        {
+            var inTest = Tools.IsUnitTest();
+            Assert.IsTrue(inTest, "Should detect that we are in unit test");
+        }
     }
 }
