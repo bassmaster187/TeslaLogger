@@ -2697,29 +2697,27 @@ namespace TeslaLogger
             {
                 Tools.VINDecoder(car.Vin, out int year, out _, out bool AWD, out bool MIC, out string battery, out string motor, out _);
 
-                var isPerfomance = car.TrimBadging == "p74d" || motor.Contains("performance");
-
-                if (isPerfomance && year < 2021)
+                if (car.TrimBadging == "p74d" && year < 2021)
                 {
                     WriteCarSettings("0.152", "M3 LR P");
                     return;
                 }
-                if (isPerfomance && year >= 2024)
+                if (car.TrimBadging == "p74d" && year >= 2024)
                 {
                     WriteCarSettings("0.147", "M3 LR P 2024");
                     return;
                 }
-                if (isPerfomance && year >= 2021)
+                if (car.TrimBadging == "p74d" && year >= 2021)
                 {
                     WriteCarSettings("0.158", "M3 LR P 2021");
                     return;
                 }
-                if (isPerfomance && AWD && year < 2021)
+                if (car.TrimBadging == "74d" && AWD && year < 2021)
                 {
                     WriteCarSettings("0.152", "M3 LR");
                     return;
                 }
-                if (isPerfomance && !AWD && year == 2019)
+                if (car.TrimBadging == "74" && !AWD && year == 2019)
                 {
                     WriteCarSettings("0.145", "M3 LR RWD 2019");
                     return;
@@ -2750,6 +2748,11 @@ namespace TeslaLogger
                         else if (motor == "3 dual performance" && year < 2021)
                         {
                             WriteCarSettings("0.158", "M3 LR P");
+                            return;
+                        }
+                        else if (motor == "3 dual performance highland" && year >= 2024)
+                        {
+                            WriteCarSettings("0.147", "M3 LR P 2024");
                             return;
                         }
                         else if (car.DBWhTR >= 0.135 && car.DBWhTR <= 0.142 && AWD)
