@@ -1373,9 +1373,35 @@ DROP TABLE chargingstate_bak";
                 for (int x = 0; x < vehicles.Count; x++)
                 {
                     var cc = vehicles[x];
-                    var ccVin = cc["vin"].ToString();
-                    var ccDisplayName = cc["display_name"].ToString();
-                    
+                    if(cc is null)
+                    {
+                        Logfile.Log($"Car #{x} was invalid");
+                        Tools.DebugLog($"Car #{x} was invalid in response \"{resultContent}\"");
+                        continue;
+                    }
+                    var ccVin = cc["vin"]?.ToString();
+                    var ccDisplayName = cc["display_name"]?.ToString();
+                    if (ccVin is null)
+                    {
+                        var resourceType = cc["resource_type"];
+                        if (resourceType == null)
+                        {
+                            Logfile.Log($"Car #{x} has invalid VIN");
+                            Tools.DebugLog($"Car #{x} has invalid VIN in response \"{resultContent}\"");
+                        }
+                        else
+                        {
+                            Logfile.Log($"Car #{x} was not a car, but {resourceType}. Ignoring...");
+                        }
+                        continue;
+                    }
+                    if (ccDisplayName is null)
+                    {
+                        Logfile.Log($"Car #{x} has invalid display name");
+                        Tools.DebugLog($"Car #{x} has invalid display_name in response \"{resultContent}\"");
+                        ccDisplayName = "";
+                    }
+
                     o.Add(new KeyValuePair<string, string>(ccVin.ToString(), "VIN: "+ ccVin + " / Name: " + ccDisplayName ));
                 }
 
