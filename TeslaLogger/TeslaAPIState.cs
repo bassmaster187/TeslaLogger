@@ -537,6 +537,7 @@ namespace TeslaLogger
                         case "ble_autopair_enrolled":
                         case "calendar_enabled":
                         case "in_service":
+                        case "mobile_access_disabled":
                         case "release_notes_supported":
                             if (r4.TryGetValue(key, out object value))
                             {
@@ -555,6 +556,7 @@ namespace TeslaLogger
                         case "id":
                         case "id_s":
                         case "option_codes":
+                        case "share_type_s":
                         case "state":
                         case "vehicle_config":
                         case "vehicle_id":
