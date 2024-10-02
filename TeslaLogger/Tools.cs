@@ -1211,6 +1211,29 @@ namespace TeslaLogger
             return false;
         }
 
+        public static bool IsUnitTest()
+        {
+            try
+            {
+                foreach(var ass in AppDomain.CurrentDomain.GetAssemblies())
+                {
+                    if(ass.FullName.StartsWith("NUnit.framework", StringComparison.CurrentCultureIgnoreCase) ||
+                       ass.FullName.StartsWith("Microsoft.VisualStudio.QualityTools.UnitTestFramework", StringComparison.InvariantCultureIgnoreCase) ||
+                       ass.FullName.StartsWith("Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter", StringComparison.InvariantCultureIgnoreCase)||
+                       ass.FullName.StartsWith("Microsoft.TestPlatform", StringComparison.InvariantCultureIgnoreCase))
+                    {
+                        return true;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ex.ToExceptionless().FirstCarUserID().Submit();
+                Logfile.ExceptionWriter(ex, "IsUnitTest");
+            }
+            return false;
+        }
+
         public static bool IsShareData()
         {
             try
