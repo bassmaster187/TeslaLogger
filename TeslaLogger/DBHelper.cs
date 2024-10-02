@@ -15,8 +15,6 @@ using Exceptionless;
 using Newtonsoft.Json;
 using System.Diagnostics;
 using System.Data.Common;
-using System.Runtime.InteropServices.ComTypes;
-using Microsoft.VisualBasic.Logging;
 
 namespace TeslaLogger
 {
@@ -28,6 +26,8 @@ namespace TeslaLogger
         private static bool mothershipEnabled; // defaults to false
         private Car car;
         bool CleanPasswortDone; // defaults to false
+
+        private static Random random = new Random();
 
         internal static string Database = "teslalogger";
         internal static string User = "root";
@@ -1830,14 +1830,18 @@ HAVING
                 {
                     _ = Task.Factory.StartNew(() =>
                     {
-                        Thread.Sleep(600000); // sleep 10 minutes so that the invoice is ready
-                        GetChargingHistoryV2Service.LoadLatest(car);
-                        if (GetChargingHistoryV2Service.SyncAll(car) == 0)
+                        Thread.Sleep(600000 + random.Next(1000, 5000)); // sleep 10+rand minutes so that the invoice is ready
+                        if (GetChargingHistoryV2Service.LoadLatest(car))
                         {
-                            // invoice not ready yet
-                            Thread.Sleep(3600000); // sleep 60 minutes so that the invoice is ready
-                            GetChargingHistoryV2Service.LoadLatest(car);
-                            _ = GetChargingHistoryV2Service.SyncAll(car);
+                            if (GetChargingHistoryV2Service.SyncAll(car) == 0)
+                            {
+                                // invoice not ready yet
+                                Thread.Sleep(3600000 + random.Next(1000, 5000)); // sleep 60+rand minutes so that the invoice is ready
+                                if (GetChargingHistoryV2Service.LoadLatest(car))
+                                {
+                                    _ = GetChargingHistoryV2Service.SyncAll(car);
+                                }
+                            }
                         }
                     }, CancellationToken.None, TaskCreationOptions.LongRunning, TaskScheduler.Default);
                 }
