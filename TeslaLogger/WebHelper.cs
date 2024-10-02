@@ -2702,6 +2702,11 @@ namespace TeslaLogger
                     WriteCarSettings("0.152", "M3 LR P");
                     return;
                 }
+                if (car.TrimBadging == "p74d" && year >= 2024)
+                {
+                    WriteCarSettings("0.147", "M3 LR P 2024");
+                    return;
+                }
                 if (car.TrimBadging == "p74d" && year >= 2021)
                 {
                     WriteCarSettings("0.158", "M3 LR P 2021");
@@ -2743,6 +2748,11 @@ namespace TeslaLogger
                         else if (motor == "3 dual performance" && year < 2021)
                         {
                             WriteCarSettings("0.158", "M3 LR P");
+                            return;
+                        }
+                        else if (motor == "3 dual performance highland" && year >= 2024)
+                        {
+                            WriteCarSettings("0.147", "M3 LR P 2024");
                             return;
                         }
                         else if (car.DBWhTR >= 0.135 && car.DBWhTR <= 0.142 && AWD)

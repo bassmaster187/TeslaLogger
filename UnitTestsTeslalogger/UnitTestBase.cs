@@ -203,6 +203,46 @@ namespace UnitTestsTeslalogger
         }
 
         [TestMethod]
+        public void Car_M3_LR_P_2024_MIC()
+        {
+            Car c = new Car(0, "", "", 0, "", DateTime.Now, "", "", "", "", "", "", "", null, false);
+            WebHelper wh = c.webhelper;
+
+            //2021 Model 3 LR Performance
+            MemoryCache.Default.Remove("GetAvgMaxRage_0");
+            MemoryCache.Default.Add("GetAvgMaxRage_0", 505, DateTime.Now.AddMinutes(1));
+            wh.car.Vin = "LRW3E7ET7RCXXXXXX";
+            wh.car.CarType = "model3";
+            wh.car.CarSpecialType = "base";
+            wh.car.DBWhTR = 0.147;
+            wh.car.TrimBadging = "p74d";
+            wh.UpdateEfficiency();
+
+            Assert.AreEqual("M3 LR P 2024", wh.car.ModelName);
+            Assert.AreEqual(0.147, wh.car.WhTR);
+        }
+
+        [TestMethod]
+        public void Car_M3_LR_P_2024_MIC_Without_vehicle_config()
+        {
+            Car c = new Car(0, "", "", 0, "", DateTime.Now, "", "", "", "", "", "", "", null, false);
+            WebHelper wh = c.webhelper;
+
+            //2021 Model 3 LR Performance
+            MemoryCache.Default.Remove("GetAvgMaxRage_0");
+            MemoryCache.Default.Add("GetAvgMaxRage_0", 505, DateTime.Now.AddMinutes(1));
+            wh.car.Vin = "LRW3E7ET7RCXXXXXX";
+            wh.car.CarType = "";
+            wh.car.CarSpecialType = "";
+            wh.car.DBWhTR = 0;
+            wh.car.TrimBadging = "";
+            wh.UpdateEfficiency();
+
+            Assert.AreEqual("M3 LR P 2024", wh.car.ModelName);
+            Assert.AreEqual(0.147, wh.car.WhTR);
+        }
+
+        [TestMethod]
         public void Car_M3_LR_P_2021_MIC()
         {
             Car c = new Car(0, "", "", 0, "", DateTime.Now, "", "", "", "", "", "", "", null, false);
