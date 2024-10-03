@@ -320,6 +320,7 @@ Verbrauch [kWh]=Consumed kWh
 Ø Verbrauch [kWh]=Avg. Consumption kWh
 Anzahl Trips=Trips Count
 Trip Monatsstatistik=Trip Monthly Statistics
+Trip Jahresstatistik="Trip Anual Statistics"
 Jahr/Monat=Year/Month
 Zellspannungen 01-20 - ScanMyTesla="Cell Voltages 01–20 — ScanMyTesla"
 Zellspannungen 21-40 - ScanMyTesla="Cell Voltages 21–40 — ScanMyTesla"
