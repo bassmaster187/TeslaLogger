@@ -516,6 +516,7 @@ min kW="min kW"
 Ø Verbrauch kWh/100km="Ø Verbrauch kWh/100km"
 Zelltemperatur [°F]="Zelltemperatur [°F]"
 Trip Monatsstatistik="Trip Monatsstatistik"
+Trip Jahresstatistik="Trip Jahresstatistik"
 Zellspannungen="Zellspannungen"
 
 #Status.json
