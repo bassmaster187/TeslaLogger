@@ -1,3 +1,7 @@
+# Version 1.59.7
+- Dashboard Trips Monthly Statistics now also shows anual statistics
+- Support for Model 3 Highland
+
 # Version 1.59.6
 - BF: missing trip because of Duplicate entry 'xxx' for key 'ix_startpos'
 - XSS vulnerability in some php files. Thanks to Mohammed Shine 
