@@ -555,3 +555,4 @@ PF_PERMISSION="Info, quali permessi sono utilizzati e perché"
 
 #journeys.php
 Ladezeit [h]="Tempo di ricarica [h]"
+Trip Jahresstatistik="Statistiche annuali dei viaggi"
