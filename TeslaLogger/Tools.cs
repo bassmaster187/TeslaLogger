@@ -13,7 +13,6 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
-
 using MySql.Data.MySqlClient;
 using Exceptionless;
 using Newtonsoft.Json;
@@ -469,10 +468,11 @@ namespace TeslaLogger
                         vin[7] == '6' || // Triple Motor Models S und Model X 2021 Plaid
                         vin[7] == 'B' || // Dual motor - standard Model 3
                         vin[7] == 'C' || // Dual motor - performance Model 3
-                        vin[7] == 'E' ||  // Dual motor - Model Y
-                        vin[7] == 'F' ||  // Dual motor Performance - Model Y
-                        vin[7] == 'K' ||  // Dual motor Standard "Hairpin Windings"
-                        vin[7] == 'L'   // Dual motor Performance "Hairpin Windings"
+                        vin[7] == 'E' || // Dual motor - Model Y
+                        vin[7] == 'F' || // Dual motor Performance - Model Y
+                        vin[7] == 'K' || // Dual motor Standard "Hairpin Windings"
+                        vin[7] == 'L' || // Dual motor Performance "Hairpin Windings"
+                        vin[7] == 'T'    // Dual motor Performance "Highland"
                     )
                 {
                     AWD = true;
@@ -555,6 +555,9 @@ namespace TeslaLogger
                     case 'J':
                     case 'S':
                         motor = "3/Y single";
+                        break;
+                    case 'T':
+                        motor = "3 dual performance highland";
                         break;
                 }
 
@@ -1205,6 +1208,29 @@ namespace TeslaLogger
                 Logfile.ExceptionWriter(ex, "IsDocker");
             }
 
+            return false;
+        }
+
+        public static bool IsUnitTest()
+        {
+            try
+            {
+                foreach(var ass in AppDomain.CurrentDomain.GetAssemblies())
+                {
+                    if(ass.FullName.StartsWith("NUnit.framework", StringComparison.CurrentCultureIgnoreCase) ||
+                       ass.FullName.StartsWith("Microsoft.VisualStudio.QualityTools.UnitTestFramework", StringComparison.InvariantCultureIgnoreCase) ||
+                       ass.FullName.StartsWith("Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter", StringComparison.InvariantCultureIgnoreCase)||
+                       ass.FullName.StartsWith("Microsoft.TestPlatform", StringComparison.InvariantCultureIgnoreCase))
+                    {
+                        return true;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ex.ToExceptionless().FirstCarUserID().Submit();
+                Logfile.ExceptionWriter(ex, "IsUnitTest");
+            }
             return false;
         }
 
@@ -2072,6 +2098,45 @@ WHERE
             }
 
             return "";
+        }
+
+        public static int CalculateSleepSeconds(int RateLimitPerDay, int UsedCommands, DateTime utcnow)
+        {
+            var remainingCommands = RateLimitPerDay - UsedCommands;
+
+            var min = utcnow.Hour * 60 + utcnow.Minute;
+            var minutesperday = 1440;
+            var remainminutes = minutesperday - min;
+            var remainsecounds = remainminutes * 60;
+
+            var sleepPerCommand = remainsecounds / remainingCommands;
+
+            if (sleepPerCommand < 10)
+                sleepPerCommand = 10;
+
+            return (int)sleepPerCommand;
+        }
+
+        internal static double MphToKmhRounded(double speed_mph)
+        {
+            int speed_floor = (int)(speed_mph * 1.609344);
+            // handle special speed_floor as Math.Round is off by +1
+            if (
+                speed_floor == 30
+                || speed_floor == 33
+                || speed_floor == 83
+                || speed_floor == 123
+                || speed_floor == 133
+                )
+            {
+                return speed_floor;
+            }
+            return Math.Round(speed_mph / 0.62137119223733);
+        }
+
+        internal static double MlToKm(double miles)
+        {
+            return miles / 0.62137119223733;
         }
     }
 

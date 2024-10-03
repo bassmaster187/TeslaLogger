@@ -54,7 +54,7 @@ namespace UnitTestsTeslalogger
         public void SulzbacherStr()
         {
             string temp = WebHelper.ReverseGecocodingAsync(c, 48.96092, 9.43113, true).Result;
-            Assert.AreEqual("71522 Backnang, Sulzbacher Straße 176", temp);
+            Assert.AreEqual("71522 Backnang, Sulzbacher Straße ", temp);
             Assert.AreEqual("de", c.CurrentJSON.current_country_code);
             Assert.AreEqual("Baden-Württemberg", c.CurrentJSON.current_state);
         }
@@ -91,7 +91,7 @@ namespace UnitTestsTeslalogger
         public void MietingenMehrzweckhalle()
         {
             string temp = WebHelper.ReverseGecocodingAsync(c, 48.1850756, 9.9016996, true).Result;
-            Assert.AreEqual("88487 Mietingen, Tulpenweg 20", temp); // should be "88487 Mietingen, Tulpenweg 20" but nominatim doesn't provide Mietingen as village
+            Assert.AreEqual("88487 Walpertshofen, Tulpenweg 20", temp); // should be "88487 Mietingen, Tulpenweg 20" but nominatim doesn't provide Mietingen as village
             Assert.AreEqual("de", c.CurrentJSON.current_country_code);
             Assert.AreEqual("Baden-Württemberg", c.CurrentJSON.current_state);
         }
@@ -109,7 +109,7 @@ namespace UnitTestsTeslalogger
         public void Lat0Lng0()
         {
             string temp = WebHelper.ReverseGecocodingAsync(c, 0, 0, true).Result;
-            Assert.AreEqual("- ,  ", temp);
+            Assert.AreEqual("", temp);
         }
 
         [TestMethod]

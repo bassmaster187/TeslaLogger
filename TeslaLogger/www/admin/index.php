@@ -7,8 +7,8 @@ global $display_name;
 $carid = GetDefaultCarId();
 if (isset($_REQUEST["carid"]))
 {
-	$_SESSION["carid"] = $_REQUEST["carid"];
-	$carid = $_REQUEST["carid"];
+	$_SESSION["carid"] = intval($_REQUEST["carid"]);
+	$carid = intval($_REQUEST["carid"]);
 }
 else
 {
@@ -147,7 +147,13 @@ else
 			$('#car_version').text(car_version);
 			$('#car_version_link').attr("href", "https://www.notateslaapp.com/software-updates/version/"+ car_version +"/release-notes");
 
-			if (jsonData["charging"])
+			if (jsonData["FatalError"])
+			{
+				$('#car_statusLabel').html("<font color='red'><?php t("Fatal Error"); ?>: </font>");
+				$('#car_status').html("<font color='red'>"+ jsonData["FatalError"] +"</font>");
+				updateSMT(jsonData);
+			}
+			else if (jsonData["charging"])
 			{
 				var ttfc = jsonData["time_to_full_charge"];
 				var hour = parseInt(ttfc);
@@ -159,9 +165,17 @@ else
 				var datetime = at.toLocaleTimeString(loc, { hour: '2-digit', minute: '2-digit' });
 
 				$('#car_statusLabel').text("<?php t("Charging"); ?>:");
-				$('#car_status').html(jsonData["charger_power"] + " kW / +" + jsonData["charge_energy_added"] + " kWh<br>" +
-				jsonData["charger_voltage"]+"V / " + jsonData["charger_actual_current"]+"A / "+
-				jsonData["charger_phases"]+"P<br><?php t("Done"); ?>: "+ hour +"h "+minute+"m <br><?php t("Done at"); ?>: " + datetime +  " / " + jsonData["charge_limit_soc"] +"%");
+				if(jsonData["charger_phases_calc"] > 0)
+                                {
+                                        $('#car_status').html(jsonData["charger_power_calc_w"] + " W / +" + jsonData["charge_energy_added"] + " kWh<br>" +
+                                        jsonData["charger_voltage"]+"V / " + jsonData["charger_actual_current_calc"]+"A / "+ jsonData["charger_phases_calc"]+"P<br>" +
+                                        "<?php t("Done"); ?>: "+ hour +"h "+minute+"m <br><?php t("Done at"); ?>: " + datetime +  " / " + jsonData["charge_limit_soc"] +"%");
+                                }
+                                else
+                                {
+                                        $('#car_status').html(jsonData["charger_power"] + " kW / +" + jsonData["charge_energy_added"] + " kWh<br>" +
+                                        "<?php t("Done"); ?>: "+ hour +"h "+minute+"m <br><?php t("Done at"); ?>: " + datetime +  " / " + jsonData["charge_limit_soc"] +"%");
+                                }
 
 				updateSMT(jsonData);
 			}

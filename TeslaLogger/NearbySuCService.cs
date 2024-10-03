@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 using System.Threading;
-
 using MySql.Data.MySqlClient;
 using Exceptionless;
 using Newtonsoft.Json;
@@ -49,8 +48,8 @@ namespace TeslaLogger
                         GetNextSuperchargerToCalculate();
                     }
 
-                    // sleep 5 Minutes
-                    Thread.Sleep(300000);
+                    // sleep 10 Minutes
+                    Thread.Sleep(600000);
                 }
             }
             catch (Exception ex)
@@ -112,149 +111,68 @@ namespace TeslaLogger
                     string result = string.Empty;
                     try
                     {
-                        bool logSent = true;
-                        double requestlat = 0; ;
-                        double requestlng = 0;
-
-                        for (int stage = 0; stage < 2; stage++)
+                        result = car.webhelper.GetNearbyChargingSitesOwnerAPI();
+                        if (result == null || result == "NULL")
                         {
-                            double lat = 0;
-                            double lng = 0;
+                            continue;
+                        }
 
-                            if (stage == 0)
+                        if (result.Contains("Retry later"))
+                        {
+                            Tools.DebugLog("NearbySuCService: Retry later");
+                            return;
+                        }
+                        else if (result.Contains("vehicle unavailable"))
+                        {
+                            Tools.DebugLog("NearbySuCService: vehicle unavailable");
+                            return;
+                        }
+                        else if (result.Contains("502 Bad Gateway"))
+                        {
+                            Tools.DebugLog("NearbySuCService: 502 Bad Gateway");
+                            return;
+                        }
+
+                        dynamic jsonResult = JsonConvert.DeserializeObject(result);
+                        if (jsonResult == null)
+                        {
+                            continue;
+                        }
+
+                        dynamic response = jsonResult["response"];
+                        if (response == null)
+                        {
+                            Tools.DebugLog(new Tools.JsonFormatter(result).Format());
+                            continue;
+                        }
+
+                        dynamic superchargers = response["superchargers"];
+                        if (superchargers == null)
+                        {
+                            Tools.DebugLog(new Tools.JsonFormatter(result).Format());
+                            continue;
+                        }
+                        foreach (dynamic suc in superchargers)
+                        {
+                            try
                             {
-                                lat = car.CurrentJSON.GetLatitude();
-                                lng = car.CurrentJSON.GetLongitude();
+                                AddSuperchargerStateOwnerAPI(suc, send, true);
                             }
-                            else if (stage == 1)
+                            catch (Exception ex)
                             {
-                                lat = requestlat;
-                                lng = requestlng;
-                            }
-
-                            if (lat == 0 || lng == 0)
-                            {
-                                continue;
-                            }
-
-                            /*
-                            for (double lat = 20; lat < 55; lat += 4)
-                                for(double lng = -124; lng < -61; lng += 4)
-                            */
-                            {
-                                result = car.webhelper.GetNearbyChargingSites(lat, lng).Result;
-                                if (result == null || result == "NULL")
+                                car.CreateExceptionlessClient(ex).AddObject(result, "ResultContent").Submit();
+                                Logfile.Log(ex.ToString());
+                                if (ex is InvalidOperationException)
                                 {
-                                    continue;
+                                    Tools.DebugLog("NearbySuCService.Work: Exception parsing " + result);
                                 }
-
-                                if (result.Contains("Retry later"))
-                                {
-                                    Tools.DebugLog("NearbySuCService: Retry later");
-                                    return;
-                                }
-                                else if (result.Contains("vehicle unavailable"))
-                                {
-                                    Tools.DebugLog("NearbySuCService: vehicle unavailable");
-                                    return;
-                                }
-                                else if (result.Contains("502 Bad Gateway"))
-                                {
-                                    Tools.DebugLog("NearbySuCService: 502 Bad Gateway");
-                                    return;
-                                }
-
-                                dynamic jsonResult = JsonConvert.DeserializeObject(result);
-                                if (jsonResult == null)
-                                {
-                                    continue;
-                                }
-
-                                if (jsonResult.ContainsKey("data"))
-                                {
-                                    dynamic data = jsonResult["data"];
-                                    if (data == null)
-                                    {
-                                        continue;
-                                    }
-
-                                    if (data.ContainsKey("charging"))
-                                    {
-                                        dynamic charging = data["charging"];
-                                        if (charging == null)
-                                        {
-                                            continue;
-                                        }
-
-                                        if (charging.ContainsKey("nearbySites"))
-                                        {
-                                            dynamic nearbySites = charging["nearbySites"];
-                                            if (nearbySites == null)
-                                            {
-                                                continue;
-                                            }
-
-                                            if (nearbySites.ContainsKey("sitesAndDistances"))
-                                            {
-                                                car.webhelper.nearbySuCServiceOK++;
-                                                car.Log("nearbySuCServiceOK " + car.webhelper.nearbySuCServiceOK);
-                                                //Tools.DebugLog(new Tools.JsonFormatter(nearbySites.ToString()).Format());
-
-                                                dynamic superchargers = nearbySites["sitesAndDistances"];
-                                                if (superchargers == null)
-                                                {
-                                                    continue;
-                                                }
-                                                foreach (dynamic suc in superchargers)
-                                                {
-                                                    try
-                                                    {
-                                                        AddSuperchargerStatePreFleetAPI(suc, send, result, stage == 0);
-                                                    }
-                                                    catch (Exception ex)
-                                                    {
-                                                        car.CreateExceptionlessClient(ex).AddObject(result, "ResultContent").Submit();
-                                                        Logfile.Log(ex.ToString());
-                                                        if (ex is InvalidOperationException)
-                                                        {
-                                                            Tools.DebugLog("NearbySuCService.Work: Exception parsing " + result);
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-
-                                    if (logSent)
-                                    {
-                                        string firstname = "";
-                                        try
-                                        {
-                                            if (send.Count > 0)
-                                            {
-                                                dynamic d = send[0];
-                                                firstname = d["n"];
-                                            }
-                                        }
-                                        catch (Exception ex)
-                                        { Tools.DebugLog(ex.ToString()); }
-
-                                        if (stage == 0)
-                                            car.Log("SuC sent: " + send.Count + " lat:" + lat + " lng: " + lng + " - " + firstname);
-                                        else
-                                            car.Log("Request from teslalogger.de: " + send.Count + " lat:" + lat + " lng: " + lng + " - " + firstname);
-                                    }
-
-                                    if (send.Count > 0)
-                                        ShareSuc(send, stage == 0, out requestlat, out requestlng);
-
-                                    send.Clear();
-                                }
-
-                                Thread.Sleep(1000);
                             }
                         }
-                        Thread.Sleep(30000);
+                        if (send.Count > 0)
+                        {
+                            ShareSuc(send, false, out _, out _);
+                        }
+                        send.Clear();
                     }
                     catch (Exception ex)
                     {
@@ -348,7 +266,7 @@ namespace TeslaLogger
 
                         HttpResponseMessage result = client.PostAsync(new Uri("http://teslalogger.de/share_supercharger2.php" + suffix), content).Result;
                         string r = result.Content.ReadAsStringAsync().Result;
-                        DBHelper.AddMothershipDataToDB("teslalogger.de/share_supercharger.php", start, (int)result.StatusCode);
+                        DBHelper.AddMothershipDataToDB("teslalogger.de/share_supercharger.php", start, (int)result.StatusCode, 0);
 
                         Tools.DebugLog("ShareSuc: " + Environment.NewLine + r);
 
@@ -377,106 +295,19 @@ namespace TeslaLogger
             }
         }
 
-        private static void AddSuperchargerStatePreFleetAPI(Newtonsoft.Json.Linq.JObject suc, ArrayList send, string resultContent, bool insertdb)
+        private static void AddSuperchargerStateOwnerAPI(dynamic suc, ArrayList send, bool insertdb)
         {
-            string name = suc["localizedSiteName"]["value"].ToString();
-            name = name.Replace("Tesla Supercharger", "").Trim();
-            /* suc:
-             {
-    "activeOutages":
-    [
-    ],
-    "availableStalls":
-    {
-        "value": 8
-    },
-    "centroid":
-    {
-        "latitude": 38.922231,
-        "longitude": -6.375038
-    },
-    "drivingDistanceMiles": null,
-    "entryPoint":
-    {
-        "latitude": 38.922409,
-        "longitude": -6.375284
-    },
-    "haversineDistanceMiles":
-    {
-        "value": 117.37894565724743
-    },
-    "id":
-    {
-        "text": "87e6ef6e-9f25-474c-a164-ba185b970f4d"
-    },
-    "localizedSiteName":
-    {
-        "value": "Merida, Spain"
-    },
-    "maxPowerKw":
-    {
-        "value": 150
-    },
-    "totalStalls":
-    {
-        "value": 10
-    },
-    "siteType": "SITE_TYPE_SUPERCHARGER",
-    "accessType": "ACCESS_TYPE_PUBLIC"
-} 
-             */
-            //Tools.DebugLog(new Tools.JsonFormatter(suc.ToString()).Format());
+            string name = suc["name"].ToString();
             bool SuCfound = GetSuperchargerByName(name, out int sucID);
-            dynamic location = suc["centroid"];
-            double lat = location["latitude"];
-            double lng = location["longitude"];
+            dynamic location = suc["location"];
+            double lat = location["lat"];
+            double lng = location["long"];
             string Message = "";
 
-            string siteType = suc["siteType"].ToString();
-            if (siteType != "SITE_TYPE_SUPERCHARGER")
+            string siteType = suc["type"].ToString();
+            if (siteType != "supercharger")
             {
                 Tools.DebugLog("siteType: " + name + " :" + siteType);
-            }
-
-            string accessType = suc["accessType"].ToString();
-            if (accessType != "ACCESS_TYPE_PUBLIC")
-            {
-                Tools.DebugLog("accessType: " + name + " :" + accessType);
-            }
-
-            int maxPowerKw = suc["maxPowerKw"]["value"].ToObject<int>();
-
-            dynamic activeOutages = suc["activeOutages"];
-            int activeOutageCount = activeOutages.Count;
-            if (activeOutageCount > 0)
-            {
-                Tools.DebugLog("Outage: " + name);
-                foreach (dynamic ao in activeOutages)
-                {
-                    if (ao.ContainsKey("message"))
-                    {
-                        if (Message.Length > 0)
-                            Message += "|";
-
-                        Message += ao["message"].ToString();
-                    }
-                }
-
-                Tools.DebugLog("Message: " + Message);
-
-                string cacheKey = "SuperchargerStateOutages_" + name;
-                object cacheValue = MemoryCache.Default.Get(cacheKey);
-                if (cacheValue == null)
-                {
-                    string base64 = Tools.ConvertString2Base64(resultContent);
-
-                    ExceptionlessClient.Default.CreateLog("SuperchargerStateOutages", name + " " + Message, Exceptionless.Logging.LogLevel.Info)
-                        .FirstCarUserID()
-                        .AddObject(resultContent, "ResultContent")
-                        .AddObject(base64, "ResultContentBase64").Submit();
-
-                    MemoryCache.Default.Add(cacheKey, true, DateTime.Now.AddHours(1));
-                }
             }
 
             if (!SuCfound)
@@ -486,63 +317,47 @@ namespace TeslaLogger
                 sucID = AddNewSupercharger(name, lat, lng);
             }
 
-            if (suc.ContainsKey("availableStalls")
-                && suc.ContainsKey("totalStalls")
+            if (suc.ContainsKey("available_stalls")
+                && suc.ContainsKey("total_stalls")
                 )
             {
-                if (!suc["availableStalls"].HasValues)
+                if (int.TryParse(suc["available_stalls"].ToString(), out int available_stalls)
+                        & int.TryParse(suc["total_stalls"].ToString(), out int total_stalls))
                 {
-                    Logfile.Log($"SUC: {name} has no values at availableStalls");
-                    return;
-                }
+                    Tools.DebugLog($"SuC: <{name}> <{available_stalls}> <{total_stalls}>");
 
-                if (!suc["totalStalls"].HasValues)
-                {
-                    Logfile.Log($"SUC: {name} has no values at totalStalls");
-                    return;
-                }
-
-                if (suc["availableStalls"].HasValues
-                    && suc["totalStalls"].HasValues)
-                {
-
-                    if (int.TryParse(suc["availableStalls"]["value"].ToString(), out int available_stalls)
-                        && int.TryParse(suc["totalStalls"]["value"].ToString(), out int total_stalls))
+                    if (total_stalls > 0)
                     {
-                        Tools.DebugLog($"SuC: <{name}> <{available_stalls}> <{total_stalls}>");
-
-                        if (total_stalls > 0)
+                        if (!ContainsSupercharger(send, name))
                         {
-                            if (!ContainsSupercharger(send, name))
-                            {
-                                Dictionary<string, object> sendKV = new Dictionary<string, object>();
-                                send.Add(sendKV);
-                                sendKV.Add("n", name);
-                                sendKV.Add("lat", lat);
-                                sendKV.Add("lng", lng);
-                                sendKV.Add("ts", DateTime.UtcNow.ToString("s", Tools.ciEnUS));
-                                sendKV.Add("a", available_stalls);
-                                sendKV.Add("t", total_stalls);
-                                sendKV.Add("kw", maxPowerKw);
-                                sendKV.Add("m", Message);
+                            Dictionary<string, object> sendKV = new Dictionary<string, object>();
+                            send.Add(sendKV);
+                            sendKV.Add("n", name);
+                            sendKV.Add("lat", lat);
+                            sendKV.Add("lng", lng);
+                            sendKV.Add("ts", DateTime.UtcNow.ToString("s", Tools.ciEnUS));
+                            sendKV.Add("a", available_stalls);
+                            sendKV.Add("t", total_stalls);
+                            sendKV.Add("kw", "n/a");
+                            sendKV.Add("m", Message);
 
-                                if (insertdb)
-                                {
-                                    InsertIntoDB(sucID, available_stalls, total_stalls);
-                                }
+                            if (insertdb)
+                            {
+                                InsertIntoDB(sucID, available_stalls, total_stalls);
                             }
                         }
-                        else
-                        {
-                            // TODO how do we handle total_stalls == 0 ?
-                        }
+                    }
+                    else
+                    {
+                        // TODO how do we handle total_stalls == 0 ?
                     }
                 }
-                else
-                {
-                    Logfile.Log("Supercharger " + name + " doesn't contain availableStalls.value or totalStalls.value");
-                }
             }
+            else
+            {
+                Logfile.Log("Supercharger " + name + " doesn't contain availableStalls.value or totalStalls.value");
+            }
+
         }
 
         private static void InsertIntoDB(int sucID, int available_stalls, int total_stalls)
@@ -656,7 +471,92 @@ VALUES(
             }
         }
 
-        Available GetGuestAvailability(Car c, int trid)
+        Available GetGuestAvailability(Car car, int trid)
+        {
+            Available a = new Available();
+
+            string content = "{\"operationName\":\"GetSiteDetails\",\"query\":\"\\n    query GetSiteDetails($siteId: SiteIdInput!) {\\n  chargingNetwork {\\n    site(siteId: $siteId) {\\n      address {\\n        countryCode\\n      }\\n      chargerList {\\n        id\\n        label\\n        availability\\n      }\\n      holdAmount {\\n        amount\\n        currencyCode\\n      }\\n      maxPowerKw\\n      name\\n      programType\\n      publicStallCount\\n      trtId\\n      pricing {\\n        userRates {\\n          activePricebook {\\n            charging {\\n              ...ChargingRate\\n            }\\n            parking {\\n              ...ChargingRate\\n            }\\n            congestion {\\n              ...ChargingRate\\n            }\\n          }\\n        }\\n      }\\n    }\\n  }\\n}\\n    \\n    fragment ChargingRate on ChargingUserRate {\\n  uom\\n  rates\\n  buckets {\\n    start\\n    end\\n  }\\n  bucketUom\\n  currencyCode\\n  programType\\n  vehicleMakeType\\n  touRates {\\n    enabled\\n    activeRatesByTime {\\n      startTime\\n      endTime\\n      rates\\n    }\\n  }\\n}\\n    \",\"variables\":{\"siteId\":{\"byTrtId\":{\"trtId\":$SITEID$,\"programType\":\"PTSCH\",\"chargingExperience\":\"ADHOC\",\"locale\":\"en-US\"}}}}";
+            content = content.Replace("$SITEID$", trid.ToString());
+
+            var client = TeslaGuestHttpClient();
+
+            using (var request = new HttpRequestMessage())
+            {
+                using (var scontent = new StringContent(content, Encoding.UTF8, "application/json"))
+                {
+                    string r = "";
+                    try
+                    {
+                        var result = client.PostAsync("https://www.tesla.com/charging/guest/api/graphql?operationName=GetSiteDetails", scontent).Result;
+                        r = result.Content.ReadAsStringAsync().Result;
+                    }
+                    catch (Exception ex)
+                    {
+                        System.Diagnostics.Debug.WriteLine(ex.ToString());
+                        throw;
+                    }
+
+                    dynamic j = JsonConvert.DeserializeObject(r);
+                    if (j?["data"] == null || j["errors"] != null)
+                    {
+                        Tools.DebugLog($"Unexpected GuestAPI response: {r}");
+                        return a;
+                    }
+
+                    dynamic site = j["data"]["chargingNetwork"]["site"];
+                    JArray chargers = site["chargerList"];
+                    //JArray chargerDetails = site["chargersAvailable"]["chargerDetails"];
+
+                    string name = site["name"];
+
+                    a.total = chargers.Count;
+
+                    foreach (dynamic charger in chargers)
+                    {
+                        string id = charger["id"];
+                        string label = charger["label"];
+
+
+                        string availability = charger["availability"];
+                        // System.Diagnostics.Debug.WriteLine($"Label: {label} availability: {availability}");
+
+                        if (availability == "CHARGER_AVAILABILITY_AVAILABLE")
+                            a.available++;
+                        else if (availability == "CHARGER_AVAILABILITY_OCCUPIED")
+                            a.occupied++;
+                        else if (availability == "CHARGER_AVAILABILITY_DOWN")
+                            a.down++;
+                        else if (availability == "CHARGER_AVAILABILITY_UNKNOWN")
+                            a.unknown++;
+                        else
+                            a.unhandled++;
+
+                    }
+
+                    if (!string.IsNullOrEmpty(name))
+                    {
+                        Tools.DebugLog($"#{car.CarInDB} Guest SuC: <{name}> <{a.available}> <{a.total}>");
+
+                        ArrayList send = new ArrayList();
+                        Dictionary<string, object> sendKV = new Dictionary<string, object>();
+                        send.Add(sendKV);
+                        sendKV.Add("n", name);
+                        // sendKV.Add("lat", lat);
+                        // sendKV.Add("lng", lng);
+                        sendKV.Add("ts", DateTime.UtcNow.ToString("s", Tools.ciEnUS));
+                        sendKV.Add("a", a.available);
+                        sendKV.Add("t", a.total);
+                        sendKV.Add("kw", 0);
+                        sendKV.Add("m", "");
+                        ShareSuc(send, false, out _, out _);
+                    }
+                }
+            }
+
+            return a;
+        }
+        /*
+        Available GetGuestAvailabilityOld(Car c, int trid)
         {
             Available a = new Available();
 
@@ -673,6 +573,12 @@ VALUES(
                     string r = result.Content.ReadAsStringAsync().Result;
 
                     dynamic j = JsonConvert.DeserializeObject(r);
+                    if (j?["data"] == null || j["errors"] != null)
+                    {
+                        Tools.DebugLog($"Unexpected GuestAPI response: {r}");
+                        return a;
+                    }
+
                     dynamic site = j["data"]["site"];
                     JArray chargers = site["chargers"];
                     JArray chargerDetails = site["chargersAvailable"]["chargerDetails"];
@@ -731,6 +637,7 @@ VALUES(
 
             return a;
         }
+        */
 
         public class Available
         {
@@ -751,8 +658,8 @@ VALUES(
                 {
                     CookieContainer = new CookieContainer(),
                     AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate,
-                    AllowAutoRedirect = false,
-                    UseCookies = true
+                    AllowAutoRedirect = true,
+                    UseCookies = false
                 };
 
                 var client = new HttpClient(ch)
@@ -760,18 +667,18 @@ VALUES(
                     BaseAddress = new Uri("https://www.tesla.com"),
                     DefaultRequestHeaders =
                 {
-                    ConnectionClose = false,
+                    ConnectionClose = true,
                     Accept = { new MediaTypeWithQualityHeaderValue("application/json") },
                     }
                 };
 
                 client.DefaultRequestHeaders.Add("accept", "application/json; charset=UTF-8");
                 client.DefaultRequestHeaders.Add("accept-language", "de-DE,de;q=0.9,en-US;q=0.8,en;q=0.7,es-ES;q=0.6,es;q=0.5,zh-CN;q=0.4,zh;q=0.3,fr;q=0.2");
-                client.DefaultRequestHeaders.Add("cache-control", "no-cache");
-                client.DefaultRequestHeaders.Add("pragma", "no-cache");
-                client.DefaultRequestHeaders.Add("upgrade-insecure-requests", "1");
-                client.DefaultRequestHeaders.Add("user-agent", "okhttp/4.9.2");
-                client.DefaultRequestHeaders.Add("x-tesla-user-agent", "TeslaApp/4.19.5-1667/3a5d531cc3/android/27");
+                // client.DefaultRequestHeaders.Add("cache-control", "no-cache");
+                // client.DefaultRequestHeaders.Add("pragma", "no-cache");
+                // client.DefaultRequestHeaders.Add("upgrade-insecure-requests", "1");
+                client.DefaultRequestHeaders.Add("user-agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36");
+                // client.DefaultRequestHeaders.Add("x-tesla-user-agent", "TeslaApp/4.19.5-1667/3a5d531cc3/android/27");
 
                 client.Timeout = TimeSpan.FromSeconds(20);
 

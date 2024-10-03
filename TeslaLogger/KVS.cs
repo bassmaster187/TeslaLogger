@@ -328,6 +328,12 @@ WHERE
         // defaults to int.MinValue, check return code for SUCCESS
         internal static int Get(string key, out int value)
         {
+            if(Tools.IsUnitTest())
+            {
+                value = int.MinValue;
+                return NOT_FOUND;
+            }
+
             try
             {
                 using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
@@ -362,6 +368,12 @@ WHERE
         // defaults to {} (empty JSON), check return code for SUCCESS
         internal static int Get(string key, out string value)
         {
+            if (Tools.IsUnitTest())
+            {
+                value = "{}";
+                return NOT_FOUND;
+            }
+
             try
             {
                 using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))

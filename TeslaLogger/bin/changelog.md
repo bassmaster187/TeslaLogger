@@ -1,3 +1,43 @@
+# Version 1.59.7
+- Dashboard Trips Monthly Statistics now also shows anual statistics
+- Support for Model 3 Highland
+
+# Version 1.59.6
+- BF: missing trip because of Duplicate entry 'xxx' for key 'ix_startpos'
+- XSS vulnerability in some php files. Thanks to Mohammed Shine 
+
+# Version 1.59.5
+- BF: Fleet API detecting DC charging on newer Tesla firmware
+ 
+# Version 1.59.4
+- BF: Fleet API detecting AC charging on newer Tesla firmware
+
+# Version 1.59.3
+- Support for new FW 2024.26 with Fleet API
+
+# Version 1.59.0
+- Tesla API has been changed!
+
+# Version 1.58.2
+- Many improvements for Fleet API
+
+# Version 1.58.2
+- Many changes to Fleet API and Owners API due to command limit by tesla (Owners API: 600/day, Fleet API: 300/day) [LINK](https://github.com/bassmaster187/TeslaLogger/issues/1304)
+- Dashboard Mothership filter by car
+
+# Version 1.58.1
+- Using Telemetry Server even with old Tesla API. Require Virtual Key
+- New update client
+- MQTT: active cars only
+- Calculated Power/Current/Phases in Admin-Panel and MQTT
+
+# Version 1.58.0
+- New stable version
+- Encryption file is protected against grafana, apache and mariadb 
+
+# Version 1.57.14
+- Tesla access token and refresh token are stored encryted
+
 # Version 1.57.13
 - Use Guest NearbySuCService to complete Supercharger usage map
 

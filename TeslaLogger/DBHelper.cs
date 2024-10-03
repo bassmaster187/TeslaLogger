@@ -11,12 +11,10 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
-
 using Exceptionless;
 using Newtonsoft.Json;
 using System.Diagnostics;
 using System.Data.Common;
-using System.Security.Cryptography;
 
 namespace TeslaLogger
 {
@@ -28,6 +26,8 @@ namespace TeslaLogger
         private static bool mothershipEnabled; // defaults to false
         private Car car;
         bool CleanPasswortDone; // defaults to false
+
+        private static Random random = new Random();
 
         internal static string Database = "teslalogger";
         internal static string User = "root";
@@ -230,7 +230,7 @@ VALUES(
             }
         }
 
-        public static void AddMothershipDataToDB(string command, DateTime start, int httpcode)
+        public static void AddMothershipDataToDB(string command, DateTime start, int httpcode, int carid)
         {
             if (mothershipEnabled == false)
             {
@@ -240,11 +240,13 @@ VALUES(
             DateTime end = DateTime.UtcNow;
             TimeSpan ts = end - start;
             double duration = ts.TotalSeconds;
-            AddMothershipDataToDB(command, duration, httpcode);
+            AddMothershipDataToDB(command, duration, httpcode, carid);
         }
 
-        public static void AddMothershipDataToDB(string command, double duration, int httpcode)
+        public static void AddMothershipDataToDB(string command, double duration, int httpcode, int carid)
         {
+            if (command.Contains(WebHelper.vehicle_data_everything))
+                command = command.Replace(WebHelper.vehicle_data_everything, "vehicle_data_everything");
 
             if (!mothershipCommands.ContainsKey(command))
             {
@@ -260,19 +262,25 @@ INSERT
         ts,
         commandid,
         duration,
-        httpcode
+        httpcode,
+        carid
     )
 VALUES(
     @ts,
     @commandid,
     @duration,
-    @httpcode
+    @httpcode,
+    @carid
 )", con))
                 {
                     cmd.Parameters.AddWithValue("@ts", DateTime.Now);
                     cmd.Parameters.AddWithValue("@commandid", mothershipCommands[command]);
                     cmd.Parameters.AddWithValue("@duration", duration);
                     cmd.Parameters.AddWithValue("@httpcode", httpcode);
+                    if (carid == 0 || carid == -1)
+                        cmd.Parameters.AddWithValue("@carid", DBNull.Value);
+                    else
+                        cmd.Parameters.AddWithValue("@carid", carid);
                     _ = SQLTracer.TraceNQ(cmd, out _);
                 }
             }
@@ -1344,7 +1352,7 @@ WHERE
 ", con))
                         {
                             cmd.Parameters.AddWithValue("@chagingStateID", chargingstate);
-                            Tools.DebugLog(cmd);
+//                            Tools.DebugLog(cmd);
                             MySqlDataReader dr = SQLTracer.TraceDR(cmd);
                             if (dr.Read())
                             {
@@ -1822,14 +1830,18 @@ HAVING
                 {
                     _ = Task.Factory.StartNew(() =>
                     {
-                        Thread.Sleep(600000); // sleep 10 minutes so that the invoice is ready
-                        GetChargingHistoryV2Service.LoadLatest(car);
-                        if (GetChargingHistoryV2Service.SyncAll(car) == 0)
+                        Thread.Sleep(600000 + random.Next(1000, 5000)); // sleep 10+rand minutes so that the invoice is ready
+                        if (GetChargingHistoryV2Service.LoadLatest(car))
                         {
-                            // invoice not ready yet
-                            Thread.Sleep(3600000); // sleep 60 minutes so that the invoice is ready
-                            GetChargingHistoryV2Service.LoadLatest(car);
-                            _ = GetChargingHistoryV2Service.SyncAll(car);
+                            if (GetChargingHistoryV2Service.SyncAll(car) == 0)
+                            {
+                                // invoice not ready yet
+                                Thread.Sleep(3600000 + random.Next(1000, 5000)); // sleep 60+rand minutes so that the invoice is ready
+                                if (GetChargingHistoryV2Service.LoadLatest(car))
+                                {
+                                    _ = GetChargingHistoryV2Service.SyncAll(car);
+                                }
+                            }
                         }
                     }, CancellationToken.None, TaskCreationOptions.LongRunning, TaskScheduler.Default);
                 }
@@ -1842,6 +1854,9 @@ HAVING
             car.CurrentJSON.current_charger_actual_current = 0;
             car.CurrentJSON.current_charge_current_request = 0;
             car.CurrentJSON.current_charge_rate_km = 0;
+            car.CurrentJSON.current_charger_actual_current_calc = 0;
+            car.CurrentJSON.current_charger_phases_calc = 0;
+            car.CurrentJSON.current_charger_power_calc_w = 0;
 
             UpdateMaxChargerPower();
 
@@ -3292,6 +3307,15 @@ LIMIT 1", con)
                 Logfile.Log(ex.ToString());
             }
 
+            int posid = GetMaxPosid();
+
+            if (car.FleetAPI)
+            {
+                car.webhelper.IsCharging(); // insert a charging row in DB
+                UpdatePosFromCurrentJSON(posid);
+            }
+
+
             int chargeID = GetMaxChargeid(out DateTime chargeStart);
             long chargingstateid = 0;
             if (wh != null)
@@ -3330,7 +3354,7 @@ VALUES(
                     {
                         cmd.Parameters.AddWithValue("@CarID", wh.car.CarInDB);
                         cmd.Parameters.AddWithValue("@StartDate", chargeStart);
-                        cmd.Parameters.AddWithValue("@Pos", GetMaxPosid());
+                        cmd.Parameters.AddWithValue("@Pos", posid);
                         cmd.Parameters.AddWithValue("@StartChargingID", chargeID);
                         cmd.Parameters.AddWithValue("@fast_charger_brand", wh.fast_charger_brand);
                         cmd.Parameters.AddWithValue("@fast_charger_type", wh.fast_charger_type);
@@ -3604,7 +3628,7 @@ WHERE
                                 double latitude = (double)dr[1];
                                 double longitude = (double)dr[2];
 
-                                if (latitude > 90 || latitude < -90 || longitude > 180 || longitude < -180)
+                                if (latitude > 90 || latitude < -90 || longitude > 180 || longitude < -180 || (latitude == 0 && longitude == 0))
                                     continue;
 
                                 int? height = srtmData.GetElevation(latitude, longitude);
@@ -4433,18 +4457,27 @@ WHERE
         {
             // driving means that charging must be over
             UpdateUnplugDate();
-            int posID = GetMaxPosid();
-            using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+            int posID = 0;
+
+            if (car.FleetAPI) // maxpos in Fleetapi is useless because lat & lng = 0
             {
-                con.Open();
-                using (MySqlCommand cmd = new MySqlCommand("insert drivestate (StartDate, StartPos, CarID, wheel_type) values (@StartDate, @Pos, @CarID, @wheel_type)", con))
+                posID = car.telemetry.lastposid;
+                if (posID > 0)
                 {
-                    cmd.Parameters.AddWithValue("@StartDate", now);
-                    cmd.Parameters.AddWithValue("@Pos", posID);
-                    cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
-                    cmd.Parameters.AddWithValue("@wheel_type", car.wheel_type);
-                    _ = SQLTracer.TraceNQ(cmd, out _);
+                    DBHelper.UpdateAddress(car, posID);
+                    UpdatePosFromCurrentJSON(posID);
                 }
+            }
+
+            if (posID == 0)
+                posID = GetMaxPosid();
+            
+            if (!InsertDrivestate(now, posID)) // if starting a drive state is failing because of duplicate startposid, the pos will be duplicated and retry
+            {
+                posID = (int)DBHelper.DuplicatePos(posID);
+                car.Log("DuplicatePos: " + posID);
+                if (posID > 0)
+                    InsertDrivestate(now, posID);
             }
 
             Insert_active_route_energy_at_arrival(posID, true);
@@ -4463,10 +4496,74 @@ WHERE
             car.CurrentJSON.CreateCurrentJSON();
         }
 
+        private bool InsertDrivestate(DateTime now, int posID)
+        {
+            try
+            {
+                using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+                {
+                    con.Open();
+                    using (MySqlCommand cmd = new MySqlCommand("insert drivestate (StartDate, StartPos, CarID, wheel_type) values (@StartDate, @Pos, @CarID, @wheel_type)", con))
+                    {
+                        cmd.Parameters.AddWithValue("@StartDate", now);
+                        cmd.Parameters.AddWithValue("@Pos", posID);
+                        cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
+                        cmd.Parameters.AddWithValue("@wheel_type", car.wheel_type);
+                        _ = SQLTracer.TraceNQ(cmd, out _);
+                        return true;
+                    }
+                }
+            }
+            catch (MySqlException ex)
+            {
+                if (ex.ErrorCode == -2147467259) // Duplicate entry
+                {
+                    car.Log(ex.Message);
+                    return false;
+                }
+
+                car.Log(ex.ToString());
+                car.SendException2Exceptionless(ex);
+            }
+            return false;
+        }
+
+        private void UpdatePosFromCurrentJSON(int posID)
+        {
+            using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+            {
+                con.Open();
+                using (MySqlCommand cmd = new MySqlCommand(@"
+                    UPDATE
+                        pos
+                    SET
+                        power = 1,
+                        odometer = @odometer,
+                        ideal_battery_range_km = @ideal_battery_range_km,
+                        outside_temp = @outside_temp,
+                        battery_level = @battery_level,
+                        battery_range_km = @battery_range_km
+                    WHERE
+                        id = @id and power is null and odometer is null", con))
+                {
+                    cmd.Parameters.AddWithValue("@id", posID);
+                    cmd.Parameters.AddWithValue("@odometer", car.CurrentJSON.current_odometer);
+                    cmd.Parameters.AddWithValue("@ideal_battery_range_km", car.CurrentJSON.current_ideal_battery_range_km);
+                    cmd.Parameters.AddWithValue("@outside_temp", car.CurrentJSON.current_outside_temperature);
+                    cmd.Parameters.AddWithValue("@battery_level", car.CurrentJSON.current_battery_level);
+                    cmd.Parameters.AddWithValue("@battery_range_km", car.CurrentJSON.current_battery_range_km);
+                    int x = SQLTracer.TraceNQ(cmd, out _);
+
+                    car.Log($"UpdatePosFromCurrentJSON {posID} - affected: {x}");
+                }
+            }
+        }
+
         int last_active_route_energy_at_arrival = int.MinValue;
 
-        public void InsertPos(string timestamp, double latitude, double longitude, int speed, decimal power, double odometer, double idealBatteryRangeKm, double batteryRangeKm, int batteryLevel, double? outsideTemp, string altitude)
+        public int InsertPos(string timestamp, double latitude, double longitude, int speed, decimal? power, double? odometer, double idealBatteryRangeKm, double batteryRangeKm, int batteryLevel, double? outsideTemp, string altitude)
         {
+            int posid = 0;
             double? inside_temp = car.CurrentJSON.current_inside_temperature;
             using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
             {
@@ -4515,9 +4612,14 @@ VALUES(
                     cmd.Parameters.AddWithValue("@Datum", UnixToDateTime(long.Parse(timestamp, Tools.ciEnUS)));
                     cmd.Parameters.AddWithValue("@lat", latitude);
                     cmd.Parameters.AddWithValue("@lng", longitude);
-                    cmd.Parameters.AddWithValue("@speed", (int)MphToKmhRounded(speed));
-                    cmd.Parameters.AddWithValue("@power", Convert.ToInt32(power * 1.35962M));
-                    cmd.Parameters.AddWithValue("@odometer", odometer);
+                    cmd.Parameters.AddWithValue("@speed", (int)Tools.MphToKmhRounded(speed));
+                    
+                    if (power == null)
+                        cmd.Parameters.AddWithValue("@power", DBNull.Value);
+                    else
+                        cmd.Parameters.AddWithValue("@power", Convert.ToInt32(power * 1.35962M));
+                    
+                    cmd.Parameters.AddWithValue("@odometer", odometer ?? (object)DBNull.Value);
 
                     if (idealBatteryRangeKm == -1)
                     {
@@ -4581,15 +4683,23 @@ VALUES(
 
                     Insert_active_route_energy_at_arrival(posID);
 
+                    using (MySqlCommand cmdid = new MySqlCommand("SELECT LAST_INSERT_ID()", con))
+                    {
+                        posid = Convert.ToInt32(cmdid.ExecuteScalar());
+                    }
+
                     try
                     {
                         car.CurrentJSON.current_speed = (int)(speed * 1.609344M);
-                        car.CurrentJSON.current_power = (int)(power * 1.35962M);
+                        
+                        if (power != null)
+                            car.CurrentJSON.current_power = (int)(power * 1.35962M);
+
                         car.CurrentJSON.SetPosition(latitude, longitude, long.Parse(timestamp, Tools.ciEnUS));
 
-                        if (odometer > 0)
+                        if (odometer != null && odometer > 0)
                         {
-                            car.CurrentJSON.current_odometer = odometer;
+                            car.CurrentJSON.current_odometer = odometer.Value;
                         }
 
                         if (idealBatteryRangeKm >= 0)
@@ -4604,7 +4714,11 @@ VALUES(
 
                         if (car.CurrentJSON.current_trip_km_start == 0)
                         {
-                            car.CurrentJSON.current_trip_km_start = odometer;
+                            if (odometer != null)
+                                car.CurrentJSON.current_trip_km_start = odometer.Value;
+                            else
+                                car.Log("current_trip_km_start not set !!!");
+
                             car.CurrentJSON.current_trip_start_range = car.CurrentJSON.current_ideal_battery_range_km;
                         }
 
@@ -4621,6 +4735,8 @@ VALUES(
             }
 
             car.CurrentJSON.CreateCurrentJSON();
+
+            return posid;
         }
 
         private void Insert_active_route_energy_at_arrival(long posID, bool force = false)
@@ -4727,6 +4843,14 @@ WHERE
 
             double powerkW = Convert.ToDouble(charger_power, Tools.ciEnUS);
 
+            int power = Convert.ToInt32(charger_power, Tools.ciEnUS);
+            int voltage = int.Parse(charger_voltage, Tools.ciEnUS);
+            int actual_current = Convert.ToInt32(charger_actual_current, Tools.ciEnUS);
+            int requested_current = Convert.ToInt32(charge_current_request, Tools.ciEnUS);
+            int current_calculated = CalculateCurrent(actual_current, requested_current);
+            int phases_calculated = CalculatePhases(power, voltage, current_calculated);
+            int power_calculated = CalculatePower(voltage, phases_calculated, current_calculated);
+
             // default waitbetween2pointsdb
             double waitbetween2pointsdb = 1000.0 / powerkW;
             // if charging started less than 5 minutes ago, insert one charging data point every ~60 seconds
@@ -4774,11 +4898,14 @@ INSERT
         battery_level,
         charge_energy_added,
         charger_power,
+        charger_power_calc_w,
         ideal_battery_range_km,
         battery_range_km,
         charger_voltage,
         charger_phases,
+        charger_phases_calc,
         charger_actual_current,
+        charger_actual_current_calc,
         outside_temp,
         charger_pilot_current,
         charge_current_request,
@@ -4790,11 +4917,14 @@ VALUES(
     @battery_level,
     @charge_energy_added,
     @charger_power,
+    @charger_power_calc_w,
     @ideal_battery_range_km,
     @battery_range_km,
     @charger_voltage,
     @charger_phases,
+    @charger_phases_calc,
     @charger_actual_current,
+    @charger_actual_current_calc,
     @outside_temp,
     @charger_pilot_current,
     @charge_current_request,
@@ -4806,11 +4936,14 @@ VALUES(
                         cmd.Parameters.AddWithValue("@battery_level", battery_level);
                         cmd.Parameters.AddWithValue("@charge_energy_added", charge_energy_added);
                         cmd.Parameters.AddWithValue("@charger_power", charger_power);
+                        cmd.Parameters.AddWithValue("@charger_power_calc_w", power_calculated);
                         cmd.Parameters.AddWithValue("@ideal_battery_range_km", kmIdeal_Battery_Range);
                         cmd.Parameters.AddWithValue("@battery_range_km", kmBattery_Range);
-                        cmd.Parameters.AddWithValue("@charger_voltage", int.Parse(charger_voltage, Tools.ciEnUS));
+                        cmd.Parameters.AddWithValue("@charger_voltage", voltage);
                         cmd.Parameters.AddWithValue("@charger_phases", charger_phases);
+                        cmd.Parameters.AddWithValue("@charger_phases_calc", phases_calculated);
                         cmd.Parameters.AddWithValue("@charger_actual_current", charger_actual_current);
+                        cmd.Parameters.AddWithValue("@charger_actual_current_calc", current_calculated);
                         cmd.Parameters.AddWithValue("@battery_heater", car.CurrentJSON.current_battery_heater ? 1 : 0);
 
                         if (charger_pilot_current != null && int.TryParse(charger_pilot_current, out int i))
@@ -4852,7 +4985,6 @@ VALUES(
                 }
 
                 car.CurrentJSON.current_charge_energy_added = Convert.ToDouble(charge_energy_added, Tools.ciEnUS);
-                car.CurrentJSON.current_charger_power = Convert.ToInt32(charger_power, Tools.ciEnUS);
                 if (kmIdeal_Battery_Range >= 0)
                 {
                     car.CurrentJSON.current_ideal_battery_range_km = kmIdeal_Battery_Range;
@@ -4862,11 +4994,14 @@ VALUES(
                 {
                     car.CurrentJSON.current_battery_range_km = kmBattery_Range;
                 }
-
-                car.CurrentJSON.current_charger_voltage = int.Parse(charger_voltage, Tools.ciEnUS);
+                car.CurrentJSON.current_charger_power = power;
+                car.CurrentJSON.current_charger_voltage = voltage;
+                car.CurrentJSON.current_charger_actual_current = actual_current;
+                car.CurrentJSON.current_charge_current_request = requested_current;
                 car.CurrentJSON.current_charger_phases = Convert.ToInt32(charger_phases, Tools.ciEnUS);
-                car.CurrentJSON.current_charger_actual_current = Convert.ToInt32(charger_actual_current, Tools.ciEnUS);
-                car.CurrentJSON.current_charge_current_request = Convert.ToInt32(charge_current_request, Tools.ciEnUS);
+                car.CurrentJSON.current_charger_actual_current_calc = current_calculated;
+                car.CurrentJSON.current_charger_phases_calc = phases_calculated;
+                car.CurrentJSON.current_charger_power_calc_w = power_calculated;
                 car.CurrentJSON.CreateCurrentJSON();
             }
             catch (Exception ex)
@@ -4874,6 +5009,41 @@ VALUES(
                 car.CreateExceptionlessClient(ex).Submit();
                 car.Log(ex.ToString());
             }
+        }
+
+        public static int CalculateCurrent(int actualCurrent, int requestedCurrent)
+        {
+            if (actualCurrent < 1 || requestedCurrent < 1)
+                return 0;
+
+            if (actualCurrent > requestedCurrent && requestedCurrent < 6)
+                return requestedCurrent;
+
+            return actualCurrent;
+        }
+
+        public static int CalculatePhases(int power, int voltage, int current)
+        {
+            if (power <= 0 || voltage <= 0 || current <= 0 )
+                return 0;
+
+            int phases = Convert.ToInt32(Math.Truncate(Math.Truncate((power * 1000.0 + 500) / voltage / current))+0.3);
+            
+            if (phases > 3)
+                return 3;
+
+            if (phases < 1)
+                return 1;
+            
+            return phases;
+        }
+        
+        public static int CalculatePower(int voltage, int phases, int current)
+        {
+            if (voltage < 0 || phases < 1 || current < 1)
+                return 0;
+                       
+            return phases * voltage * current;
         }
 
         public static DateTime UnixToDateTime(long t)
@@ -4929,6 +5099,9 @@ WHERE
                         {
                             UpdateAddress(car, pos);
                         }
+
+                        if (car.FleetAPI)
+                            UpdatePosFromCurrentJSON(pos);
 
                         return pos;
                     }
@@ -5198,17 +5371,26 @@ WHERE
         [SuppressMessage("Security", "CA2100:Review SQL queries for security vulnerabilities")]
         public static bool ColumnExists(string table, string column)
         {
-            using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+            try
             {
-                con.Open();
-                using (MySqlCommand cmd = new MySqlCommand("SHOW COLUMNS FROM `" + table + "` LIKE '" + column + "';", con))
+                using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
                 {
-                    MySqlDataReader dr = SQLTracer.TraceDR(cmd);
-                    if (dr.Read())
+                    con.Open();
+                    using (MySqlCommand cmd = new MySqlCommand("SHOW COLUMNS FROM `" + table + "` LIKE '" + column + "';", con))
                     {
-                        return true;
+                        MySqlDataReader dr = SQLTracer.TraceDR(cmd);
+                        if (dr.Read())
+                        {
+                            return true;
+                        }
                     }
                 }
+            } catch (MySqlException ex)
+            {
+                if (ex.Number == 1146)  // Table doesn't exist
+                    return false;
+
+                throw;
             }
 
             return false;
@@ -6094,23 +6276,6 @@ CHANGE {columnname} {columnname} {columntype} CHARACTER SET utf8mb4 COLLATE utf8
             }
         }
 
-        internal static double MphToKmhRounded(double speed_mph)
-        {
-            int speed_floor = (int)(speed_mph * 1.609344);
-            // handle special speed_floor as Math.Round is off by +1
-            if (
-                speed_floor == 30
-                || speed_floor == 33
-                || speed_floor == 83
-                || speed_floor == 123
-                || speed_floor == 133
-                )
-            {
-                return speed_floor;
-            }
-            return Math.Round(speed_mph / 0.62137119223733);
-        }
-
         internal static void MigrateFloorRound()
         {
             string migrationstatusfile = "migrate_floor_round.txt";
@@ -6173,7 +6338,7 @@ FROM
                     for (int speed_mph = (int)Math.Round(maxspeed_kmh * 0.62137119223733) + 1; speed_mph > 0; speed_mph--)
                     {
                         int speed_floor = (int)(speed_mph * 1.609344); // old conversion
-                        int speed_round = (int)MphToKmhRounded(speed_mph); // new conversion
+                        int speed_round = (int)Tools.MphToKmhRounded(speed_mph); // new conversion
                         if (speed_floor != speed_round)
                         {
                             DateTime start = DateTime.Now;
@@ -7103,6 +7268,26 @@ ORDER BY startdate", con))
                 Logfile.Log(ex.ToString());
                 ex.ToExceptionless().FirstCarUserID().Submit();
             }
+        }
+
+        internal static long DuplicatePos(int id)
+        {
+             string sql = @"INSERT INTO `pos` (`Datum`,`lat`,`lng`,`speed`,`power`,`odometer`,`ideal_battery_range_km`,`address`,`outside_temp`,`altitude`,`battery_level`,`inside_temp`,`battery_heater`,`is_preconditioning`,`sentry_mode`,`battery_range_km`,`CarID`,`AP`) 
+                select now() ,`lat`,`lng`,`speed`,`power`,`odometer`,`ideal_battery_range_km`,`address`,`outside_temp`,`altitude`,`battery_level`,`inside_temp`,`battery_heater`,`is_preconditioning`,`sentry_mode`,`battery_range_km`,`CarID`,`AP`
+                from pos
+                where id = " + id;
+
+            using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+            {
+                con.Open();
+                using (MySqlCommand cmd = new MySqlCommand(sql, con))
+                {
+                    cmd.ExecuteNonQuery();
+                    return cmd.LastInsertedId;
+                }
+            }
+
+            return 0;
         }
     }
 }

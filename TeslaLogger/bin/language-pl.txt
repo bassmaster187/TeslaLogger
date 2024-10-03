@@ -1,0 +1,552 @@
+﻿#Akku Trips.json
+Akku Trips="Użycie baterii (w czasie jazdy)"
+Start Trip="Początek trasy"
+End Trip="Koniec trasy"
+Time="Data"
+StartSOC="SOC początkowy"
+EndSOC="SOC końcowy"
+SOC diff="SOC różnica"
+Start km="Początek km"
+End km="Koniec km"
+Start mi="Początek mi"
+End mi="Koniec mi"
+kmDiff="Różnica km"
+Max Range="Maksymalny zasięg"
+Ø Verbrauch="Średnie zużycie"
+Tage="Dni"
+Save="Zapisz"
+
+#Degradation.json
+Degradation="Degradacja"
+Maximalreichweite [km]="Maksymalny zasięg [km]"
+Maximalreichweite [mi]="Maksymalny zasięg [mi]"
+km Stand [km]="Dystans [km]"
+mi Stand [mi]="Przebieg [mi]"
+Odometer [mi]="Przebieg [mi]"
+Max. Reichweite (Monatsmittel) [km]="Zasięg maksymalny (średnia miesięczna) [km]"
+Max. Reichweite (Monatsmittel) [mi]="Zasięg maksymalny (średnia miesięczna) [mi]"
+
+#Ladehistorie.json
+Ladehistorie="Historia ładowania"
+Startdatum="Data startu"
+Enddatum="Data końca"
+geladen kWh="Naładowano kWh"
+km Stand="Przebieg"
+Adresse="Adres"
+TR km Start=
+TR km Ende=
+SOC Ende="SOC końcowe"
+100% TR=
+Minuten="Minuty"
+TR mi Start=
+TR mi Ende=
+ØkW="Średnio kW"
+
+#Ladestatistik.json
+Ladestatistik="Statystyki ładowania"
+Letzte Ladung="Ostatnie ładowanie"
+Ort="Adres"
+Ø geladen kWh="Średnie ładowanie kWh"
+Ladezeit h="Czas ładowania h"
+Ø SOC="SOC średnio"
+Max SOC="SOC maksymalne"
+Anzahl Ladungen="Ilość ładowań"
+Anzahl=
+Geladen="Naładowano"
+Ladezeit="Czas ładowania"
+Anz. Ladungen="Ilość"
+Ladehub=
+PV="Ze słońca"
+
+#SOC Ladestatistik.json
+SOC Ladestatistik="SOC Statystyki Ładowania"
+SOC [%]="SOC [%]"
+
+#SOC Entladestatistik.json
+SOC Entladestatistik="SOC Statystyki Rozładowania"
+
+#Laden.json
+Laden="Ładowanie"
+Ladespannung [V]="Napięcie Ładowania [V]"
+Reichweite [mi]="Zasięg [mi]"
+Reichweite [km]="Zasięg [km]"
+Leistung [kW]="Moc [kW]"
+Phasen="Fazy"
+Stromstärke [A]="Prąd [A]"
+Angefordert [A]="Oczekiwane [A]"
+Pilot [A]="Pilot [A]"
+
+#Vampir Drain Monatsstatistik.json
+Vampir Drain Monatsstatistik=
+TR mi Verlust=
+kWh Verlust="Utrata kWh"
+Eur Verlust=
+Zeitspanne Stunden=
+TR mi Verlust pro Stunde=
+mi Stand=
+
+#Trip.json
+Trip=
+Start=
+Ende=
+Start Adresse=
+Ziel Adresse=
+Ø Verbrauch kWh=
+Verbraucht kWh=
+Dauer Min=
+mi=
+km=
+Ø °C=
+Ø °F=
+max mph=
+max km/h=
+max PS=
+min PS=
+max kW=
+min kW=
+Ø PS=
+Ø kW=
+Ø mph=
+Ø km/h=
+
+#Trip Top Destinations.json
+Trip Top Ziele=
+Letzte Fahrt=
+Ø Dauer Min=
+Ø Verbrauch kWh/100km=
+Ø Verbraucht kWh=
+Anzahl Trips=
+Anzahl="Ilość"
+Fahrzeug=
+
+#Vampir Drain.json
+Vampir Drain=
+Standby Stunden=
+Standby=
+TR km Verlust=
+TR km Verlust pro Stunde=
+
+#Verbrauch.json
+Verbrauch=
+Höhe [m]=
+Altitude [m]=
+Geschwindigkeit [mph]=
+Geschwindigkeit [km/h]=
+Leistung [PS]=
+Außentemperatur [°C]=
+Außentemperatur [°F]=
+Innentemperatur [°C]=
+Innentemperatur [°F]=
+Laden fertig=
+Schlafen=
+Online=
+
+#Verbrauchsstatistik.json
+Verbrauchsstatistik=
+
+#Visited.json
+Visited=
+
+#index.php
+Car Info=
+Status=
+Typical Range=
+Odometer=
+Car Version=
+Last Trip=
+Duration=
+Distance=
+Max km/h=
+PS=
+Current Pos=
+Last Update=
+Charging=
+Done=
+Done at=
+Battery Heater=
+Sentry Mode=
+Preconditioning=
+Offline=
+Falling asleep=
+min=
+kWh=
+Wh/km=
+km/h=
+Sleeping=
+kW=
+OK=
+No=
+Yes=
+Cell Temp=
+Max Charge=
+Max Discharge=
+Cell Imbalance=
+Software Update=
+Consumption=
+Ø Consumption=
+Please update to latest docker-compose.yml file. Check: {LINK}=
+
+#menu.php
+Logfile=
+Restart=
+Update=
+Dashboards=
+Fleet Statistic=
+Extras=
+Settings=
+Backup=
+Restore=
+Geofence=
+Suspend Teslalogger=
+Wakeup Teslalogger=
+Dashboard=
+My Degradation=
+My Charging AVG=
+Fleet Degradation AVG=
+Fleet Charging AVG=
+Fleet Charging MAX (Firmware)=
+Fleet Charging Locations=
+Fleet Fast Charging Map=
+Supercharger Usage=
+Firmware Tracker=
+Abetterrouteplanner=
+
+#password.php
+Teslalogger Tesla Credentials=
+Please enter your Tesla account credentials=
+Email=
+Password=
+Repeat Password=
+Löschen=
+Speichern=
+Please enter the access token!=
+Please enter the refresh token!=
+Please select a vehicle=
+Check Logfile!=
+Do you really want to delete this vehicle?=
+Check Logfile in one minute!=
+Unauthorized=
+This isn't a valid URL!=
+This isn't an auth link by Tesla!=
+The URL doesn't contain the expected format!=
+Access Token=
+Refresh Token=
+Car=
+Free Supercharging=
+Reconnect=
+Model=
+VIN=
+Free SUC=
+Edit=
+New car=
+TeslaAuthApps=
+BA_Browser=
+BA_Read=
+BA_Logon=
+BA_Auth=
+BA_NotFound=
+BA_URL=
+BA_Invalid=
+BA_Logoff=
+BA_GetToken=
+BA_SelectCar=
+BA_Step1=
+BA_Step2=
+BA_Step3=
+BA_FillOut=
+BA_CopyUrl=
+BA_Paste=
+BA_FLEETAPI=
+Get Tokens=
+
+#password_fleet.php
+PF_LOGOUT=
+PF_LOGIN=
+PF_LINK=
+PF_HELP=
+PF_PERMISSION=
+PF_OLDSX=
+PF_HERE=
+PF_VKEY=
+
+#settings.php
+Please choose your vehicle=
+Credentials=
+Language=
+Power=
+Temperatur=
+Unit of length=
+URL Admin Panel=
+All=
+Stable=
+None=
+Enable=
+Celsius=
+Fahrenheit=
+URL Grafana=
+Teslalogger HTTP Port=
+Zoom Level=
+ScanMyTesla integration=
+Main Car=
+Car Name=
+ScanMyTesla last received=
+Tasker Token=
+Tasker URL=
+Received Tasker Token=
+Show calc. 100% range=
+Saved!=
+MyTesla=
+Teslalogger Adminpanel=
+Temperature=
+mile=
+Ideal=
+Rated=
+Share data anonymously=
+Sleep=
+to=
+Position by StreamingAPI=
+
+#Alle Verbräuche - ScanMyTesla.json
+Alle Verbräuche - ScanMyTesla=
+Zelltemperatur [°C]=
+Zelltemperatur [°F]=
+
+#Trip Monatsstatistik.json
+Datum=
+Fahrzeit [h]=
+Strecke [km]=
+Strecke [mi]=
+Verbrauch [kWh]=
+Ø Verbrauch [kWh]=
+Anzahl Trips=
+Trip Monatsstatistik=
+Jahr/Monat=
+Zellspannungen 01-20 - ScanMyTesla=
+Zellspannungen 21-40 - ScanMyTesla=
+Zellspannungen 41-60 - ScanMyTesla=
+Zellspannungen 61-80 - ScanMyTesla=
+Zellspannungen 81-99 - ScanMyTesla=
+Zellspannungen=
+Zellspannung=
+Ja=
+Nein=
+Einschlafen=
+Automatic updates=
+TextShare=
+Daten anonym teilen=
+TextSuspendTeslalogger=
+Resume Teslalogger=
+Range=
+Ladekosten=
+Ladesäule=
+Währung=
+Kosten pro kWh=
+Kosten pro Ladung=
+Kosten pro Minute=
+Kosten Blockiergebühr=
+Summe=
+kWh laut Zähler / Rechnung=
+Wirkungsgrad=
+
+#Timeline Plugin.json
+Dauer=
+Parking=
+Driving=
+Missing=
+Ø Temperatur=
+Verbraucht=
+StreamingPosHelp=
+
+#journeys.php
+Ladezeit [h]=
+Journeys=
+Journey name missing!=
+Please select=
+Please select start point!=
+Please select end point!=
+TextJourneys=
+ID=
+Journey=
+Start address=
+Target address=
+End=
+Consumed kWh=
+Charged kWh=
+Drive time [h]=
+Charge time [h]=
+Distance [mi]=
+Distance [km]=
+Charging costs=
+CO2 [kg]=
+New Journey=
+Journey name=
+Please wait=
+Please select start first=
+DelJourney=
+Display _MENU_ records per page=
+Nothing found=
+Showing _START_ to _END_ of _TOTAL_ entries=
+No records available=
+(filtered from _MAX_ total records)=
+Search=
+First=
+Last=
+Next=
+Previous=
+
+#Status.json
+Current Status=
+SOC=
+Reichweite=
+Außentemperatur=
+Zelltemperatur=
+Nur verfügbar mit ScanMyTesla=
+
+#abrp.php
+ABRPTitle=
+TextABRP=
+ABRP1=
+ABRP2=
+ABRP3=
+ABRP4=
+ABRP5=
+ABRP6=
+ABRP7=
+ABRP8=
+ABRP9=
+ABRPYT=
+ABRPToken=
+Enabled=
+
+#wallbox.php
+Wallbox=
+WallboxComment=
+Host=
+Param=
+Test=
+Type=
+Info=
+Version=
+Utility kWh=
+Vehicle kWh=
+
+#mqtt.php
+MQTTSettings=
+MQTTSettingsInfo=
+TopicStructure=
+MQTT1=
+MQTT2=
+MQTT3=
+MQTT4=
+MQTT5=
+ADDescription=
+MQTTAD1=
+ControlTopic=
+MQTT6=
+MQTT7=
+RebootAfterSave=
+Host=
+Port=
+Topic=
+PublishJson=
+Singletopics=
+ClientID=
+AutoDiscovery=
+AutoDiscoveryTopic=
+
+#superchargebingo.php
+SuperChargeBingo=
+SuperChargeBingoComment=
+Setup=
+Create a SuperChargeBingo account=
+Create API key (must be secure)=
+Copy Username and API key and insert it in TeslaLogger=
+Save and restart TeslaLogger=
+Username=
+API key=
+
+#geoadd.php
+Name & Position=
+Description=
+Radius=
+Special Flags=
+Home=
+Work=
+Charger=
+Copy Charging Costs=
+Don't Combine Charging Sessions=
+Set Charge Limit=
+Set on arrival=
+Set Charge Limit After Charging=
+Open Charge Port=
+Gear=
+D → P=
+D/R → P=
+R → P=
+High Frequency Logging=
+Minutes=
+Special Count=
+Count=
+Special Features=
+Enable Sentry Mode=
+Disable Sentry Mode=
+Turn HVAC off=
+No sleep=
+Delete=
+Are you sure you want to delete this geofencing location?=
+Error=
+Deleted!=
+Meter=
+
+#adminpanelpassword.php
+Please enter password!=
+Passwords do not match!=
+Do you want to delete your password?=
+Set password for Teslalogger's admin panel=
+Name=
+
+#changelog.php
+Changelog=
+
+#chargingcost.php
+Charging Costs=
+Date=
+Charged=
+Efficiency=
+Currency=
+kWh according to meter/invoice=
+Cost per kWh=
+Cost per charge=
+Cost per minute=
+Idle cost per minute=
+Total=
+
+#logfile.php
+Download Logfile=
+Lines=
+Housekeeping=
+Sleep Attempt=
+
+#ovms.php
+Please enter your dexters-web.de account credentials=
+Dexter Login=
+Dexter Password=
+
+#password_info.php
+Credentials Info=
+
+#restore.php
+Restore Database=
+TextRestore1=
+TextRestore2=
+TextRestore3=
+
+#dashboard.php
+Sleeping=
+
+#Vehicle Alerts
+Fahrzeug Fehler=
+startedAt=
+endedAt=
+Häufigkeit=
+Fehler=

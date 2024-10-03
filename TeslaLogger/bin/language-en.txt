@@ -256,7 +256,7 @@ BA_Step3=Step 3:
 BA_FillOut=Fill out this form:
 BA_CopyUrl="Copy the resulting URL as shown"
 BA_Paste="Paste the resulting URL into the box and click "_QQ_"Get Tokens"_QQ_" Button:"
-BA_FLEETAPI=Tesla Fleet API (recommended)
+BA_FLEETAPI=Tesla Fleet API (Recommended only for vehicles built after Nov. 2023!!!)
 Get Tokens=Get Tokens
 
 #password_fleet.php
@@ -320,6 +320,7 @@ Verbrauch [kWh]=Consumed kWh
 Ø Verbrauch [kWh]=Avg. Consumption kWh
 Anzahl Trips=Trips Count
 Trip Monatsstatistik=Trip Monthly Statistics
+Trip Jahresstatistik="Trip Anual Statistics"
 Jahr/Monat=Year/Month
 Zellspannungen 01-20 - ScanMyTesla="Cell Voltages 01–20 — ScanMyTesla"
 Zellspannungen 21-40 - ScanMyTesla="Cell Voltages 21–40 — ScanMyTesla"

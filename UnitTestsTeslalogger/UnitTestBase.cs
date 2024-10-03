@@ -168,7 +168,7 @@ namespace UnitTestsTeslalogger
             Car c = new Car(0, "", "", 0, "", DateTime.Now, "", "", "", "", "", "", "", null, false);
             WebHelper wh = c.webhelper;
 
-            
+
             MemoryCache.Default.Remove("GetAvgMaxRage_0");
             MemoryCache.Default.Add("GetAvgMaxRage_0", 488, DateTime.Now.AddMinutes(1));
             wh.car.Vin = "5YJ3E7EA5KFXXXXXX";
@@ -200,6 +200,46 @@ namespace UnitTestsTeslalogger
 
             Assert.AreEqual("M3 LR P 2021", wh.car.ModelName);
             Assert.AreEqual(0.158, wh.car.WhTR);
+        }
+
+        [TestMethod]
+        public void Car_M3_LR_P_2024_MIC()
+        {
+            Car c = new Car(0, "", "", 0, "", DateTime.Now, "", "", "", "", "", "", "", null, false);
+            WebHelper wh = c.webhelper;
+
+            //2021 Model 3 LR Performance
+            MemoryCache.Default.Remove("GetAvgMaxRage_0");
+            MemoryCache.Default.Add("GetAvgMaxRage_0", 505, DateTime.Now.AddMinutes(1));
+            wh.car.Vin = "LRW3E7ET7RCXXXXXX";
+            wh.car.CarType = "model3";
+            wh.car.CarSpecialType = "base";
+            wh.car.DBWhTR = 0.147;
+            wh.car.TrimBadging = "p74d";
+            wh.UpdateEfficiency();
+
+            Assert.AreEqual("M3 LR P 2024", wh.car.ModelName);
+            Assert.AreEqual(0.147, wh.car.WhTR);
+        }
+
+        [TestMethod]
+        public void Car_M3_LR_P_2024_MIC_Without_vehicle_config()
+        {
+            Car c = new Car(0, "", "", 0, "", DateTime.Now, "", "", "", "", "", "", "", null, false);
+            WebHelper wh = c.webhelper;
+
+            //2021 Model 3 LR Performance
+            MemoryCache.Default.Remove("GetAvgMaxRage_0");
+            MemoryCache.Default.Add("GetAvgMaxRage_0", 505, DateTime.Now.AddMinutes(1));
+            wh.car.Vin = "LRW3E7ET7RCXXXXXX";
+            wh.car.CarType = "";
+            wh.car.CarSpecialType = "";
+            wh.car.DBWhTR = 0;
+            wh.car.TrimBadging = "";
+            wh.UpdateEfficiency();
+
+            Assert.AreEqual("M3 LR P 2024", wh.car.ModelName);
+            Assert.AreEqual(0.147, wh.car.WhTR);
         }
 
         [TestMethod]
@@ -535,7 +575,7 @@ namespace UnitTestsTeslalogger
         [TestMethod]
         public void Car_X_2021_Plaid()
         {
-            Car c = new Car(0, "", "", 0, "", DateTime.Now, "", "", "", "", "", "", "", null, false); 
+            Car c = new Car(0, "", "", 0, "", DateTime.Now, "", "", "", "", "", "", "", null, false);
             WebHelper wh = c.webhelper;
 
             MemoryCache.Default.Remove("GetAvgMaxRage_0");
@@ -624,18 +664,18 @@ namespace UnitTestsTeslalogger
         [TestMethod]
         public void Car_Y_SR_MIG_BYD()
         {
-            string[] VINSs = { 
-                "XP7YGCEJ1PB", 
-                "XP7YGCEJ2PB", 
-                "XP7YGCEJ3PB", 
-                "XP7YGCEJ6PB", 
-                "XP7YGCEJ7PB", 
-                "XP7YGCEJ8PB", 
-                "XP7YGCEJ9PB", 
-                "XP7YGCES0RB", 
-                "XP7YGCES1RB", 
-                "XP7YGCES4RB", 
-                "XP7YGCES8PB", 
+            string[] VINSs = {
+                "XP7YGCEJ1PB",
+                "XP7YGCEJ2PB",
+                "XP7YGCEJ3PB",
+                "XP7YGCEJ6PB",
+                "XP7YGCEJ7PB",
+                "XP7YGCEJ8PB",
+                "XP7YGCEJ9PB",
+                "XP7YGCES0RB",
+                "XP7YGCES1RB",
+                "XP7YGCES4RB",
+                "XP7YGCES8PB",
                 "XP7YGCES9RB" };
 
             foreach (string vin in VINSs)
@@ -660,7 +700,7 @@ namespace UnitTestsTeslalogger
         [TestMethod]
         public void Car_Y_SR_MIG_CATL()
         {
-            string[] VINSs = { "XP7YGCFS2RB", "XP7YGCFSXRB"};
+            string[] VINSs = { "XP7YGCFS2RB", "XP7YGCFSXRB" };
 
             foreach (string vin in VINSs)
             {
@@ -989,7 +1029,7 @@ namespace UnitTestsTeslalogger
             Car c = new Car(0, "", "", 0, "", DateTime.Now, "", "", "", "", "", "5YJSA7E21JF230000", "", null, false);
             var t = new TeslaAPIState(c);
             t.ParseAPI(json, "vehicles");
-            
+
             t.GetString("vin", out string vin);
             Assert.AreEqual("5YJSA7E21JF230000", vin);
 
@@ -1003,7 +1043,7 @@ namespace UnitTestsTeslalogger
             Assert.AreEqual("1492932463490000", id);
 
             t.GetString("vehicle_id", out string vehicle_id);
-            Assert.AreEqual("163110000", vehicle_id); 
+            Assert.AreEqual("163110000", vehicle_id);
 
             t.GetString("display_name", out string display_name);
             Assert.AreEqual("Teslarossa", display_name);
@@ -1081,9 +1121,9 @@ namespace UnitTestsTeslalogger
             var wrongPass = "hjiodgfodfgj";
 
             string encrypted = StringCipher.Encrypt(body, pass);
-            string decrypted = StringCipher.Decrypt(encrypted, pass);   
+            string decrypted = StringCipher.Decrypt(encrypted, pass);
 
-            Assert.AreEqual(body , decrypted);
+            Assert.AreEqual(body, decrypted);
             Assert.AreNotEqual(body, encrypted);
 
             var expectedExceptionCatched = false;
@@ -1123,6 +1163,44 @@ namespace UnitTestsTeslalogger
             var url = t.GetLoginUrlForBrowser();
             string newurl = "https://auth.tesla.com/void/callback?code=1c0939d1421cd504cca7405b76c92b25fb6b2419e88e2231b568c70e7671&state=xqXt8LsGQle0UximPatd&issuer=https%3A%2F%2Fauth.tesla.com%2Foauth2%2Fv3";
             var tokens = t.GetTokenAfterLoginAsync(newurl).Result;
+        }
+
+        [TestMethod]
+        public void SleepRateLimit()
+        {
+            DateTime startOfDay = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 0, 0 ,0, DateTimeKind.Utc);
+            int s = Tools.CalculateSleepSeconds(300, 0, startOfDay);
+            Assert.AreEqual(s, 288);
+
+            DateTime oneHourRemaining = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 23, 0, 0, DateTimeKind.Utc);
+            int s2 = Tools.CalculateSleepSeconds(300, 100, oneHourRemaining);
+            Assert.AreEqual(s2, 18);
+
+            DateTime fiveMinuteRemaining = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 23, 55, 0, DateTimeKind.Utc);
+
+            int s3 = Tools.CalculateSleepSeconds(300, 0, fiveMinuteRemaining);
+            Assert.AreEqual(s2, 18);
+        }
+
+        [TestMethod]
+        public void ParsePackCurrent()
+        {
+            string data =
+                "{\"data\":[{\"key\":\"PackCurrent\",\"value\":{\"stringValue\":\"121.900\"}},{\"key\":\"ChargeState\",\"value\":{\"stringValue\":\"Idle\"}},{\"key\":\"FastChargerPresent\",\"value\":{\"stringValue\":\"true\"}}],\"createdAt\":\"2024-07-07T15:11:05.839516023Z\",\"vin\":\"5YJ3E7EA3LF123456\"}";
+            dynamic j = JsonConvert.DeserializeObject(data);
+            dynamic jData = j["data"];
+
+            TelemetryConnection f = new TelemetryConnection(null);
+            double? current = f.PackCurrent(jData, DateTime.Now);
+            Assert.AreEqual(current, 121.9d);
+
+        }
+
+        [TestMethod]
+        public void IsInUnitTest()
+        {
+            var inTest = Tools.IsUnitTest();
+            Assert.IsTrue(inTest, "Should detect that we are in unit test");
         }
     }
 }

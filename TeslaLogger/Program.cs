@@ -6,6 +6,8 @@ using System.Net;
 using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
+using System.Security.Cryptography;
 
 namespace TeslaLogger
 {
@@ -29,7 +31,7 @@ namespace TeslaLogger
         private static WebServer webServer;
         private static bool OVMSStarted; // defaults to false;
 
-        private static void Main(string[] args)
+        private static void Main(string[] _)
         {
             try
             {
@@ -117,14 +119,18 @@ namespace TeslaLogger
             {
                 if(KVS.Get("MQTTSettings", out string mqttSettings) == KVS.SUCCESS)
                 {
-                    Thread mqttThread = new Thread(() =>
+                    dynamic settings = JsonConvert.DeserializeObject(mqttSettings);
+                    if (settings["mqtt_host"] > 0)
                     {
+                        Thread mqttThread = new Thread(() =>
+                        {
                         MQTT.GetSingleton().RunMqtt();
-                    })
-                    {
-                        Name = "MqttThread"
-                    };
-                    mqttThread.Start();
+                        })
+                        {
+                            Name = "MqttThread"
+                        };
+                        mqttThread.Start();
+                    }
                 }
                 else
                 {
@@ -332,17 +338,17 @@ namespace TeslaLogger
 
             Logfile.Log("Current Culture: " + Thread.CurrentThread.CurrentCulture.ToString());
             Logfile.Log("Mono Runtime: " + Tools.GetMonoRuntimeVersion());
-            ExceptionlessClient.Default.Configuration.DefaultData.Add("Mono Runtime", Tools.GetMonoRuntimeVersion());
+            ExceptionlessClient.Default.Configuration.DefaultData.Add("MonoRuntime", Tools.GetMonoRuntimeVersion());
             ExceptionlessClient.Default.Configuration.DefaultData.Add("OS", Tools.GetOsRelease());
 
             Logfile.Log("Grafana Version: " + Tools.GetGrafanaVersion());
-            ExceptionlessClient.Default.Configuration.DefaultData.Add("Grafana Version", Tools.GetGrafanaVersion());
+            ExceptionlessClient.Default.Configuration.DefaultData.Add("GrafanaVersion", Tools.GetGrafanaVersion());
 
             Logfile.Log("OS Version: " + Tools.GetOsVersion());
-            ExceptionlessClient.Default.Configuration.DefaultData.Add("OS Version", Tools.GetOsVersion());
+            ExceptionlessClient.Default.Configuration.DefaultData.Add("OSVersion", Tools.GetOsVersion());
 
             Logfile.Log("Update Settings: " + Tools.GetOnlineUpdateSettings().ToString());
-            ExceptionlessClient.Default.Configuration.DefaultData.Add("Update Settings", Tools.GetOnlineUpdateSettings().ToString());
+            ExceptionlessClient.Default.Configuration.DefaultData.Add("UpdateSettings", Tools.GetOnlineUpdateSettings().ToString());
 
             try
             {
@@ -596,6 +602,20 @@ namespace TeslaLogger
 
         private static void UpdateDbInBackground()
         {
+            // Run only once a day per version
+            string kvskey = "UpdateDbInBackground";
+            string check = DateTime.Now.ToString("yyyyMMdd") + "-" + Assembly.GetExecutingAssembly().GetName().Version.ToString();
+
+            if (KVS.Get(kvskey, out string updateDbInBackground) == KVS.SUCCESS)
+            {
+                if (updateDbInBackground == check)
+                {
+                    Logfile.Log("UpdateDbInBackground: SKIP today");
+                    return;
+                }
+            }
+
+
             Thread DBUpdater = new Thread(() =>
             {
                 try
@@ -657,6 +677,8 @@ namespace TeslaLogger
 
                     Logfile.Log("UpdateDbInBackground finished, took " + (DateTime.Now - start).TotalMilliseconds + "ms");
                     RunHousekeepingInBackground();
+
+                    KVS.InsertOrUpdate(kvskey, check);
                 }
                 catch (Exception ex)
                 {

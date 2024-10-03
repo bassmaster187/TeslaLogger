@@ -1,6 +1,4 @@
-﻿using Exceptionless.Utility;
-using Newtonsoft.Json;
-using Org.BouncyCastle.Asn1.X509;
+﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Net.WebSockets;
@@ -9,10 +7,11 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Linq;
 using MySql.Data.MySqlClient;
-using System.Configuration;
 using System.Reflection;
 using System.IO;
-using System.Runtime.ConstrainedExecution;
+using Exceptionless;
+using Newtonsoft.Json.Linq;
+using System.Globalization;
 
 namespace TeslaLogger
 {
@@ -26,11 +25,90 @@ namespace TeslaLogger
 
         String lastCruiseState = "";
 
-        bool connect = false;
+        bool connect;
+
+        private bool driving;
+        private bool _acCharging;
+        private bool dcCharging;
+
+        public DateTime lastDriving = DateTime.MinValue;
+        public DateTime lastMessageReceived = DateTime.MinValue;
+
+        public DateTime lastPackCurrentDate = DateTime.MinValue;
+        public double lastPackCurrent = 0.0;
+
+        public DateTime lastVehicleSpeedDate = DateTime.MinValue;
+        public double lastVehicleSpeed = 0.0;
+
+        public String lastChargeState = "";
+
+        public bool lastFastChargerPresent = false;
+
+        public int lastposid = 0;
+        
+
+        void Log(string message)
+        {
+            car.Log("*** FT: " +  message);
+        }
+
+        public bool Driving
+        {
+            get
+            {
+                if (driving)
+                {
+                    var ts = DateTime.Now - lastDriving;
+                    if (ts.TotalMinutes > 10)
+                    {
+                        driving = false;
+                        Log("Parking time: " + lastDriving.ToString());
+                        return false;
+                    }
+
+                    return true;
+                }
+
+                return false;
+
+            }
+            set => driving = value;
+        }
+
+        bool acCharging { get => _acCharging; 
+            set { 
+                if (_acCharging != value)
+                    Log("ACCharging = " +  value);
+
+                _acCharging = value;
+            } 
+        }
+
+        public bool IsCharging => acCharging || dcCharging;
+
+        public bool IsOnline()
+        {
+            if (!Driving && !acCharging && !dcCharging)
+            {
+                if (OnlineTimeout())
+                    return false;
+            }
+
+            return true;
+        }
+
+        public bool OnlineTimeout()
+        {
+            var ts = DateTime.UtcNow - lastMessageReceived;
+            return ts.TotalMinutes > 10;
+        }
+            
 
         public TelemetryConnection(Car car)
         {
             this.car = car;
+            if (car == null)
+                return;
 
             t = new Thread(() => { Run(); });
             t.Start();
@@ -40,7 +118,10 @@ namespace TeslaLogger
         {
             try
             {
-                car.Log("Telemetry Server close connection!");
+                if (car.FleetAPI)
+                    return;
+
+                Log("Telemetry Server close connection!");
                 connect = false;
                 cts.Cancel();
 
@@ -57,13 +138,13 @@ namespace TeslaLogger
                 if (connect)
                     return;
 
-                car.Log("Telemetry Server start connection");
+                Log("Telemetry Server start connection");
                 cts = new CancellationTokenSource();
                 connect = true;
             }
             catch (Exception ex)
             {
-                car.Log("Telemetry StartConnection " + ex.Message);
+                Log("Telemetry StartConnection " + ex.Message);
             }
         }
 
@@ -93,8 +174,12 @@ namespace TeslaLogger
                 {
                     if (!connect && ex.InnerException is TaskCanceledException)
                         System.Diagnostics.Debug.WriteLine("Telemetry Cancel OK");
+                    else if (ex.InnerException?.InnerException is System.Net.Sockets.SocketException se)
+                    {
+                        Log(se.Message);
+                    }
                     else
-                        car.Log("Telemetry Exception: " + ex.ToString());                    
+                        Log("Telemetry Exception: " + ex.ToString());                    
 
                     var s = r.Next(30000, 60000);
                     Thread.Sleep(s);
@@ -116,9 +201,15 @@ namespace TeslaLogger
 
                     if (car.Vin.Equals(vin, StringComparison.OrdinalIgnoreCase))
                     {
-                        car.Log("Telemetry Server Data");
+                        Log("Telemetry Server Data");
+                        if (OnlineTimeout())
+                            Log("Car Online!");
+
+                        lastMessageReceived = DateTime.UtcNow;
                         InsertBatteryTable(jData, d, resultContent);
                         InsertCruiseStateTable(jData, d, resultContent);
+                        handleStatemachine(jData, d, resultContent);
+                        InsertLocation(jData, d, resultContent);
                     }
                 }
                 else if (j.ContainsKey("alerts"))
@@ -129,7 +220,7 @@ namespace TeslaLogger
 
                     if (car.Vin.Equals(vin, StringComparison.OrdinalIgnoreCase))
                     {
-                        car.Log("Telemetry Server Alerts");
+                        Log("Telemetry Server Alerts");
 
                         foreach (dynamic ji in jData)
                         {
@@ -137,15 +228,155 @@ namespace TeslaLogger
                         }
                     }
                 }
+                else if (j.ContainsKey("Teslalogger"))
+                {
+                    String cmd = j["Teslalogger"];
+                    switch (cmd) 
+                    {
+                        case "LoginRespone":
+                            handleLoginResponse(j);
+                            break;
+                        default:
+                            Log("Unhandled Teslalogger MSG: " + resultContent);
+                            break;
+                    }
+                }
                 else
                 {
-                    car.Log("Unhandled: " + resultContent);
+                    Log("Unhandled: " + resultContent);
+
+                    CheckDriving();
+                    driving = false;
+                    acCharging = false;
+                    dcCharging = false;
+                    Log("Sleep");
+                    lastMessageReceived = DateTime.MinValue;
                 }
 
             }
             catch (Exception ex)
             {
-                car.Log(ex.ToString()+ "\n" + resultContent);
+                Log(ex.ToString()+ "\n" + resultContent);
+            }
+        }
+
+        public void InsertLocation(dynamic j, DateTime d, string resultContent, bool force = false)
+        {
+            try
+            {
+                if (!car.FleetAPI)
+                    return;
+
+                double? latitude = null;
+                double? longitude = null;
+                double? speed = null;
+
+                foreach (dynamic jj in j)
+                {
+                    string key = jj["key"];
+                    dynamic value = jj["value"];
+
+                    if (key == "Location")
+                    {    
+                        dynamic locationValue = value["locationValue"];
+                        if (locationValue != null)
+                        {
+                            latitude = locationValue["latitude"];
+                            longitude = locationValue["longitude"];
+                        }
+                        else
+                        {
+                            string v = value["stringValue"];
+                            if (v != null)
+                            {
+                                v = v.Replace("(", "").Replace(")", "");
+                                v = v.Replace("\"", "");
+                                var vs = v.Split(',');
+                                if (vs.Length == 2)
+                                {
+                                    // Split the string into latitude and longitude parts
+                                    string[] coordinates = v.Split(',');
+
+                                    // Parse latitude
+                                    string latitudeStr = coordinates[0].Trim();
+                                    latitude = Double.Parse(latitudeStr.TrimEnd('N', 'S'), CultureInfo.InvariantCulture);
+                                    if (latitudeStr.EndsWith("S"))
+                                    {
+                                        latitude = -latitude;
+                                    }
+
+                                    // Parse longitude
+                                    string longitudeStr = coordinates[1].Trim();
+                                    longitude = Double.Parse(longitudeStr.TrimEnd('E', 'W'), CultureInfo.InvariantCulture);
+                                    if (longitudeStr.EndsWith("W"))
+                                    {
+                                        longitude = -longitude;
+                                    }
+                                }
+
+                            }
+                        }
+                    }
+                    else if (key == "VehicleSpeed")
+                    {
+                        string v1 = value["stringValue"];
+                        if (v1 != null)
+                        {
+                            v1 = v1.Replace("\"", "");
+                            if (Double.TryParse(v1, out double s))
+                                speed = s;
+                        }
+                    }
+                }
+
+                if (speed == null)
+                {
+                    var ts = d - lastVehicleSpeedDate;
+                    if (ts.TotalSeconds < 20)
+                        speed = lastVehicleSpeed;
+                }
+
+
+                if (latitude != null && longitude != null && (speed != null || force))
+                {
+                    if (force && speed == null)
+                        speed = 0;
+
+                    long ts= (long)(d.ToUniversalTime().Subtract(new DateTime(1970, 1, 1))).TotalSeconds*1000;
+                    Log("Insert Location" + (force ? " Force" : ""));
+                    lastposid = car.DbHelper.InsertPos(ts.ToString(), latitude.Value, longitude.Value, (int)speed.Value, null, null, -1, -1, -1, null, "");
+                }
+            }
+            catch (Exception ex)
+            {
+                Log(ex.ToString());
+                car.CreateExceptionlessClient(ex).AddObject(resultContent, "ResultContent").Submit();
+            }
+        }
+
+        private void handleLoginResponse(dynamic j)
+        {
+            try
+            {
+                dynamic response = j["Response"];
+                dynamic updated_vehicles = response["updated_vehicles"];
+                if (updated_vehicles == "1")
+                    Log("LoginRespone: OK");
+                else
+                {
+                    Log("LoginRespone ERROR: " + response);
+                    car.CurrentJSON.FatalError = "Telemetry Login Error!!! Check Logfile!";
+                    car.CurrentJSON.CreateCurrentJSON();
+
+                    if (response.ToString().Contains("not_found"))
+                    {
+                        Thread.Sleep(10 * 60 * 1000);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Log(ex.ToString());
             }
         }
 
@@ -222,7 +453,7 @@ namespace TeslaLogger
                             case "Service": aid = 2; break;
                             default:
                                 car.CreateExeptionlessLog("Telemetry audience unknown", s, Exceptionless.Logging.LogLevel.Error).Submit();
-                                car.Log("Audience unknown: " + s);
+                                Log("Audience unknown: " + s);
                                 break;
                         }
 
@@ -277,6 +508,7 @@ namespace TeslaLogger
                         if (value.ContainsKey("stringValue"))
                         {
                             string v1 = value["stringValue"];
+                            v1 = v1.Replace("\"", "");
 
                             if (v1 != lastCruiseState)
                             {
@@ -302,7 +534,7 @@ namespace TeslaLogger
                                         break;
                                     default:
                                         state = -99;
-                                        car.Log("Unhandled Cruise State: " + v1);
+                                        Log("Unhandled Cruise State: " + v1);
                                         car.CreateExeptionlessLog("CruiseStateUnhandled", v1, Exceptionless.Logging.LogLevel.Warn).Submit();
                                         break;
                                 }
@@ -319,7 +551,7 @@ namespace TeslaLogger
                                         cmd.Parameters.AddWithValue("@state", state);
                                         cmd.ExecuteNonQuery();
 
-                                        car.Log("Telemetry Server: Cruise State");
+                                        Log("Telemetry Server: Cruise State");
                                     }
                                 }
                             }
@@ -328,7 +560,7 @@ namespace TeslaLogger
                 }
             }
             catch (Exception ex) { 
-                car.Log(ex.ToString());
+                Log(ex.ToString());
                 car.CreateExceptionlessClient(ex).AddObject(resultContent, "ResultContent").Submit();
             }
         }
@@ -355,6 +587,7 @@ namespace TeslaLogger
                             if (value.ContainsKey("stringValue"))
                             {
                                 string v1 = value["stringValue"];
+                                v1 = v1.Replace("\"", "");
                                 double d = double.Parse(v1, Tools.ciEnUS);
                                 cmd.Parameters.AddWithValue("@" + key, d);
 
@@ -380,6 +613,38 @@ namespace TeslaLogger
                                     car.CurrentJSON.SMTCellMaxV = d;
                                     currentJSONUpdated = true;
                                     BrickVoltageMax = d;
+                                }
+                                else if (key == "PackCurrent")
+                                {
+                                    System.Diagnostics.Debug.WriteLine("PackCurrent: " + d);
+                                    lastPackCurrent = d;
+                                    lastPackCurrentDate = date;
+
+                                    if (!acCharging && lastChargeState == "Enable")
+                                    {
+                                        var current = PackCurrent(j, date);
+
+                                        if (current > 2)
+                                        {
+                                            Log($"AC Charging  {current}A ***");
+                                            InsertLocation(j, date, resultContent, true);
+                                            acCharging = true;
+                                        }
+                                    }
+
+                                    if (!dcCharging && lastFastChargerPresent)
+                                    {
+                                        var current = PackCurrent(j, date);
+                                        Log($"FastChargerPresent {current}A ***");
+
+                                        if (current > 5)
+                                        {
+                                            Log($"DC Charging ***");
+
+                                            InsertLocation(j, date, resultContent, true);
+                                            dcCharging = true;
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -432,14 +697,254 @@ namespace TeslaLogger
                 }
             } catch (Exception ex)
             {
-                car.Log("Telemetry Error: " + ex.ToString());
+                Log("Telemetry Error: " + ex.ToString());
                 car.CreateExceptionlessClient(ex).AddObject(resultContent, "ResultContent").Submit();
+            }
+        }
+
+        void handleStatemachine(dynamic j, DateTime date, string resultContent)
+        {
+            try
+            {
+                var cols = new string[] { "ChargeState", "Gear", "VehicleSpeed","Location", "FastChargerPresent" };
+
+                foreach (dynamic jj in j)
+                {
+                    string key = jj["key"];
+                    if (cols.Any(key.Contains))
+                    {
+                        dynamic value = jj["value"];
+                        if (value.ContainsKey("stringValue"))
+                        {
+                            string v1 = value["stringValue"];
+                            v1 = v1.Replace("\"", "");
+
+                            if (key == "ChargeState")
+                            {
+                                if (lastChargeState != v1)
+                                {
+                                    lastChargeState = v1;
+                                    Log("ChargeState " + lastChargeState);
+                                }
+
+                                if (v1 == "Enable")
+                                {
+                                    if (Driving)
+                                    {
+                                        Log("Driving -> AC Charging ***");
+                                        Driving = false;
+                                    }
+
+                                    if (!acCharging)
+                                    {
+                                        var current = PackCurrent(j, date);
+
+                                        if (current > 2)
+                                        {
+                                            Log($"AC Charging  {current}A ***");
+                                            InsertLocation(j, date, resultContent, true);
+                                            acCharging = true;
+                                        }
+                                    }
+                                }
+                                else if (v1 == "Idle")
+                                {
+                                    if (acCharging)
+                                    {
+                                        Log("Stop AC Charging ***");
+                                        acCharging = false;
+                                    }
+                                }
+                                else if (v1 == "QualifyLineConfig")
+                                {
+
+                                }
+                                else
+                                {
+                                    Log("unknown ChargeState: " + v1);
+                                }
+
+                            }
+                            else if (key == "Gear")
+                            {
+                                if (v1 == "P")
+                                {
+                                    if (Driving)
+                                    {
+                                        Log("Parking ***");
+                                        Driving = false;
+                                    }
+                                }
+                                else if (v1.Length > 0)
+                                {
+                                    lastDriving = DateTime.Now;
+
+                                    if (!Driving)
+                                    {
+                                        Log("Driving ***");
+                                        Driving = true;
+                                    }
+                                }
+
+                                Log("Gear: " + v1);
+                            }
+                            else if (key == "VehicleSpeed")
+                            {
+                                if (Double.TryParse(v1, out double speed))
+                                {
+                                    if (speed > 0)
+                                    {
+                                        lastVehicleSpeed = speed;
+                                        lastVehicleSpeedDate = date;
+
+                                        if (acCharging)
+                                        {
+                                            Log("Stop AC Charging by speed ***");
+                                            acCharging = false;
+                                        }
+
+                                        if (dcCharging)
+                                        {
+                                            Log("Stop DC Charging by speed ***");
+                                            dcCharging = false;
+                                        }
+
+                                        lastDriving = DateTime.Now;
+
+                                        if (!Driving)
+                                        {
+                                            Log("Driving by speed ***");
+                                            Driving = true;
+                                        }
+                                    }
+
+                                    Log("Speed: " + v1);
+                                }
+                            } else if (key == "FastChargerPresent")
+                            {
+                                if (v1 == "true")
+                                {
+                                    if (!lastFastChargerPresent)
+                                    {
+                                        Log("lastFastChargerPresent = true");
+                                        lastFastChargerPresent = true;
+                                    }
+
+                                    if (Driving)
+                                    {
+                                        Log("Driving -> DC Charging ***");
+                                        Driving = false;
+                                    }
+
+                                    if (!dcCharging)
+                                    {
+                                        var current = PackCurrent(j, date);
+                                        Log($"FastChargerPresent {current}A ***");
+
+                                        if (current > 5) {
+                                            Log($"DC Charging ***");
+
+                                            InsertLocation(j, date, resultContent, true);
+                                            dcCharging = true;
+                                        }
+                                    }
+                                }
+                                else if (v1 == "false")
+                                {
+                                    lastFastChargerPresent = false;
+
+                                    if (dcCharging)
+                                    {
+                                        Log("stop DC Charging ***");
+                                        dcCharging = false;
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                Log($"Key: {key} / Value: {v1}");
+                            }
+                        }
+                    }
+                }
+
+                CheckDriving();
+
+            }
+            catch (Exception ex)
+            {
+                Log("Telemetry Error: " + ex.ToString());
+                car.CreateExceptionlessClient(ex).AddObject(resultContent, "ResultContent").Submit();
+            }
+
+        }
+
+        internal double? PackCurrent(dynamic o, DateTime date)
+        {
+            JToken j = null;
+            try
+            {
+                j = o.SelectToken("$[?(@.key=='PackCurrent')].value.stringValue");
+                if (j == null)
+                {
+                    var ts = date - lastPackCurrentDate;
+                    if (ts.TotalSeconds < 10)
+                    {
+                        return lastPackCurrent;
+                    }
+
+                    return null;
+                }
+                
+                double? val = j.Value<double?>();
+                return val;
+            }
+            catch (Exception e)
+            {
+                try
+                {
+                    string v = j.Value<string>();
+                    if (!String.IsNullOrEmpty(v))
+                    {
+                        v = v.Replace("\"", "");
+                        return Double.Parse(v, CultureInfo.InvariantCulture);
+                    }
+                }
+                catch (Exception e2)
+                {
+                    var ts = date - lastPackCurrentDate;
+                    if (ts.TotalSeconds < 10)
+                    {
+                        return lastPackCurrent;
+                    }
+
+                    Logfile.Log("*** FT: PackCurrent2 " + e2.ToString());
+                    e2.ToExceptionless().FirstCarUserID().Submit();
+                }
+
+                Logfile.Log("*** FT: PackCurrent " + e.ToString());
+                e.ToExceptionless().FirstCarUserID().Submit();
+            }
+
+            return null;
+        }
+
+        private void CheckDriving()
+        {
+            if (Driving)
+            {
+                var ts = DateTime.Now - lastDriving;
+                if (ts.TotalMinutes > 5)
+                {
+                    Log("Driving stop by speed " + lastDriving.ToString());
+                    Driving = false;
+                }
             }
         }
 
         private void ConnectToServer()
         {
-            car.Log("Connect to Telemetry Server");
+            Log("Connect to Telemetry Server");
 
             if (ws != null)
                 ws.Dispose();
@@ -458,13 +963,13 @@ namespace TeslaLogger
             {
                 if (ex is AggregateException ex2)
                 {
-                    car.Log("Connect to Telemetry Server Error: " + ex2.InnerException.Message);
+                    Log("Connect to Telemetry Server Error: " + ex2.InnerException.Message);
                     car.CreateExceptionlessClient(ex2).Submit();
                     Thread.Sleep(60000);
                 }
                 else
                 {
-                    car.Log("Connect to Telemetry Server Error: " + ex.Message);
+                    Log("Connect to Telemetry Server Error: " + ex.Message);
                     car.CreateExceptionlessClient(ex).Submit();
                     Thread.Sleep(60000);
                 }
@@ -473,14 +978,23 @@ namespace TeslaLogger
 
         private void Login()
         {
-            car.Log("Login to Telemetry Server");
+            
+            string configname = "";
+            if (car.FleetAPI)
+                configname = "free2";
+
+            Log("Login to Telemetry Server / config: " + configname);
+            string vin = car.Vin;
+            // vin = "LRW3E7EK6NC483045"; // xxx
 
             Dictionary<string, object> login = new Dictionary<string, object>{
                     { "msg_type", "login"},
-                    { "vin", car.Vin},
+                    { "vin", vin},
                     { "token", car.TaskerHash},
+                    { "FW", car.CurrentJSON.current_car_version.Substring(0, car.CurrentJSON.current_car_version.IndexOf(" ")).Trim()},
                     { "accesstoken", car.Tesla_Token},
                     { "regionurl", car.webhelper.apiaddress},
+                    { "config", configname},
                     { "version", Assembly.GetExecutingAssembly().GetName().Version.ToString()}
                 };
 

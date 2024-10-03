@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
-
 using Exceptionless;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -448,39 +447,33 @@ namespace TeslaLogger
             {
                 case "vehicle_data?endpoints=vehicle_config":
                 case "vehicle_data?endpoints=vehicle_config&let_sleep=true":
-                    ParseVehicleConfig(JSON);
-                    break;
+                    return ParseVehicleConfig(JSON);
                 case "vehicle_data?endpoints=charge_state":
                 case "vehicle_data?endpoints=charge_state&let_sleep=true":
-                    ParseChargeState(JSON);
-                    break;
+                    return ParseChargeState(JSON);
                 case "vehicle_data?endpoints=vehicle_state":
                 case "vehicle_data?endpoints=vehicle_state&let_sleep=true":
-                    ParseVehicleState(JSON);
-                    break;
+                    return ParseVehicleState(JSON);
                 case "vehicle_data?endpoints=climate_state":
                 case "vehicle_data?endpoints=climate_state&let_sleep=true":
-                    ParseClimateState(JSON);
-                    break;
+                    return ParseClimateState(JSON);
                 case "vehicle_data?endpoints=drive_state":
                 case "vehicle_data?endpoints=drive_state%3Blocation_data":
                 case "vehicle_data?endpoints=drive_state&let_sleep=true":
                 case "vehicle_data?endpoints=drive_state%3Blocation_data&let_sleep=true":
-                    ParseDriveState(JSON);
-                    break;
+                    return ParseDriveState(JSON);
                 case "vehicle_data":
-                    ParseChargeState(JSON);
-                    ParseVehicleConfig(JSON);
-                    ParseClimateState(JSON);
-                    ParseDriveState(JSON);
+                case WebHelper.vehicle_data_everything:
+                    return ParseChargeState(JSON) &
+                    ParseVehicleConfig(JSON) &
+                    ParseClimateState(JSON) &
+                    ParseDriveState(JSON) &
                     ParseVehicleState(JSON);
-                    break;
                 case "vehicles":
                     return ParseVehicles(JSON);
                 case "vehicle_data?endpoints=location_data":
                 case "vehicle_data?endpoints=location_data&let_sleep=true":
-                    // ignore
-                    break;
+                case "nearby_charging_sites":
                 case "nearby_charging_sites?detail=true":
                     // ignore
                     break;
@@ -544,6 +537,7 @@ namespace TeslaLogger
                         case "ble_autopair_enrolled":
                         case "calendar_enabled":
                         case "in_service":
+                        case "mobile_access_disabled":
                         case "release_notes_supported":
                             if (r4.TryGetValue(key, out object value))
                             {
@@ -562,6 +556,7 @@ namespace TeslaLogger
                         case "id":
                         case "id_s":
                         case "option_codes":
+                        case "share_type_s":
                         case "state":
                         case "vehicle_config":
                         case "vehicle_id":
@@ -983,6 +978,7 @@ namespace TeslaLogger
                             case "pws":
                             case "range_plus_badging":
                             case "rhd":
+                            case "sentry_preview_supported":
                             case "supports_qr_pairing":
                             case "use_range_badging":
                             case "webcam_selfie_supported":

@@ -171,7 +171,7 @@ No=Non
 Yes=Oui
 Cell Temp=Température de la cellule
 Max Charge=Charge maximale
-Max Discharge=Max Discharge
+Max Discharge="Décharge maximale"
 Cell Imbalance=Déséquilibre cellulaire
 Software Update=Mise à jour du logiciel
 Consumption=Consommation
@@ -515,3 +515,5 @@ TextRestore3=N'interrompez pas le processus de restauration de quelque manière 
 
 
 
+
+Letzte Fahrt="Dernier trajet"

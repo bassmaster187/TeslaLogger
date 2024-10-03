@@ -114,7 +114,7 @@ namespace TeslaLogger
                 DateTime start = DateTime.UtcNow;
                 HttpResponseMessage result = client.GetAsync(new Uri(queryString)).Result;
                 resultContent = result.Content.ReadAsStringAsync().Result;
-                DBHelper.AddMothershipDataToDB("OpenTopoData.Query", start, (int)result.StatusCode);
+                DBHelper.AddMothershipDataToDB("OpenTopoData.Query", start, (int)result.StatusCode, 0);
             }
             // parse result JSON
             if (!string.IsNullOrEmpty(resultContent))

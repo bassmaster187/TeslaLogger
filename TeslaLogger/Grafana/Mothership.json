@@ -3,7 +3,10 @@
     "list": [
       {
         "builtIn": 1,
-        "datasource": "-- Grafana --",
+        "datasource": {
+          "type": "datasource",
+          "uid": "grafana"
+        },
         "enable": true,
         "hide": true,
         "iconColor": "rgba(0, 211, 255, 1)",
@@ -11,7 +14,10 @@
         "type": "dashboard"
       },
       {
-        "datasource": "teslalogger",
+        "datasource": {
+          "type": "mysql",
+          "uid": "PC0C98BF192F75B00"
+        },
         "enable": true,
         "hide": false,
         "iconColor": "rgba(255, 96, 96, 1)",
@@ -23,7 +29,10 @@
         "type": "tags"
       },
       {
-        "datasource": "teslalogger",
+        "datasource": {
+          "type": "mysql",
+          "uid": "PC0C98BF192F75B00"
+        },
         "enable": true,
         "hide": false,
         "iconColor": "#96D98D",
@@ -35,7 +44,10 @@
         "type": "tags"
       },
       {
-        "datasource": "teslalogger",
+        "datasource": {
+          "type": "mysql",
+          "uid": "PC0C98BF192F75B00"
+        },
         "enable": true,
         "hide": false,
         "iconColor": "#8AB8FF",
@@ -49,10 +61,8 @@
     ]
   },
   "editable": true,
-  "gnetId": null,
+  "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 44,
-  "iteration": 1589459916940,
   "links": [
     {
       "icon": "external link",
@@ -64,16 +74,67 @@
       "url": "http://raspberry/admin/"
     }
   ],
+  "liveNow": false,
   "panels": [
     {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": "teslalogger",
-      "decimals": 1,
-      "fill": 0,
-      "fillGradient": 0,
+      "datasource": {
+        "type": "mysql",
+        "uid": "PC0C98BF192F75B00"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "points",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 6,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "always",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "links": [],
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "s"
+        },
+        "overrides": []
+      },
       "gridPos": {
         "h": 20,
         "w": 24,
@@ -81,41 +142,41 @@
         "y": 0
       },
       "id": 2,
-      "legend": {
-        "alignAsTable": true,
-        "avg": true,
-        "current": false,
-        "max": true,
-        "min": true,
-        "rightSide": true,
-        "show": true,
-        "total": true,
-        "values": true
-      },
-      "lines": false,
-      "linewidth": 1,
-      "nullPointMode": "null",
       "options": {
-        "dataLinks": []
+      "legend": {
+          "calcs": [
+            "mean",
+            "max",
+            "min",
+            "sum",
+            "count"
+          ],
+          "displayMode": "table",
+          "placement": "right",
+          "showLegend": true,
+          "sortBy": "Count",
+          "sortDesc": true
       },
-      "percentage": false,
-      "pointradius": 2,
-      "points": true,
-      "renderer": "flot",
-      "repeat": null,
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "10.0.1",
       "repeatDirection": "v",
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
       "targets": [
         {
+          "datasource": {
+            "type": "mysql",
+            "uid": "PC0C98BF192F75B00"
+          },
+          "editorMode": "code",
           "format": "time_series",
           "group": [],
           "hide": false,
           "metricColumn": "command",
           "rawQuery": true,
-          "rawSql": "SELECT\n  $__time(ts),\n  duration as value,\n  command as metric\nFROM mothership join mothershipcommands on mothership.commandid = mothershipcommands.id where command in ( $Commands ) AND $__timeFilter(ts)\nORDER BY ts ASC\n",
+          "rawSql": "SELECT\n  $__time(ts),\n  duration as value,\n  command as metric\nFROM mothership join mothershipcommands on mothership.commandid = mothershipcommands.id where command in ( $Commands ) AND $__timeFilter(ts) AND carid in ($Car)\nORDER BY ts ASC\n",
           "refId": "A",
           "select": [
             [
@@ -127,6 +188,23 @@
               }
             ]
           ],
+          "sql": {
+            "columns": [
+              {
+                "parameters": [],
+                "type": "function"
+              }
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          },
           "table": "mothership",
           "timeColumn": "ts",
           "timeColumnType": "datetime",
@@ -139,51 +217,99 @@
           ]
         }
       ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeRegions": [],
-      "timeShift": null,
       "title": "Mothership",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
+      "type": "timeseries"
       },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
+    {
+      "datasource": {
+        "type": "mysql",
+        "uid": "PC0C98BF192F75B00"
       },
-      "yaxes": [
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "auto",
+            "cellOptions": {
+              "type": "auto"
+      },
+            "inspect": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
         {
-          "decimals": null,
-          "format": "s",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
+                "color": "green",
+                "value": null
         },
         {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 11,
+        "w": 7,
+        "x": 0,
+        "y": 20
+      },
+      "id": 4,
+      "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "showHeader": true
+      },
+      "pluginVersion": "10.0.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "mysql",
+            "uid": "PC0C98BF192F75B00"
+          },
+          "editorMode": "code",
+          "format": "table",
+          "rawQuery": true,
+          "rawSql": "SELECT\r\n  httpcode as 'HTTP Code',\r\n  CASE httpcode\r\n    WHEN 200 THEN 'OK'    \r\n    WHEN 401 THEN 'Unauthorized'\r\n    WHEN 403 THEN 'Forbidden'\r\n    WHEN 404 THEN 'Not Found'\r\n    WHEN 408 THEN 'Request Timeout'\r\n    WHEN 429 THEN 'Too Many Requests'\r\n    ELSE NULL\r\n  END as Text,\r\n  count(*) as cnt\r\nFROM mothership join mothershipcommands on mothership.commandid = mothershipcommands.id where command in ( $Commands ) AND $__timeFilter(ts) AND carid in ($Car)\r\nGROUP BY httpcode\r\nORDER BY cnt DESC\r\n",
+          "refId": "A",
+          "sql": {
+            "columns": [
+              {
+                "parameters": [],
+                "type": "function"
+              }
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
         }
       ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
+            "limit": 50
       }
     }
   ],
-  "refresh": false,
-  "schemaVersion": 19,
+      "title": "HTTP Codes",
+      "type": "table"
+    }
+  ],
+  "refresh": "",
+  "schemaVersion": 38,
   "style": "dark",
   "tags": [],
   "templating": {
@@ -191,16 +317,21 @@
       {
         "allValue": "",
         "current": {
-          "text": "All",
+          "selected": true,
+          "text": [
+            "All"
+          ],
           "value": [
             "$__all"
           ]
         },
-        "datasource": "teslalogger",
+        "datasource": {
+          "type": "mysql",
+          "uid": "PC0C98BF192F75B00"
+        },
         "definition": "select command from mothershipcommands",
         "hide": 0,
         "includeAll": true,
-        "label": null,
         "multi": true,
         "name": "Commands",
         "options": [],
@@ -210,10 +341,37 @@
         "skipUrlSync": false,
         "sort": 1,
         "tagValuesQuery": "",
-        "tags": [],
         "tagsQuery": "",
         "type": "query",
         "useTags": false
+      },
+      {
+        "current": {
+          "selected": true,
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": {
+          "type": "mysql",
+          "uid": "PC0C98BF192F75B00"
+        },
+        "definition": "select display_name as __text, id as __value from cars where length(vin) > 5 order by display_name",
+        "hide": 0,
+        "includeAll": true,
+        "label": "Fahrzeug",
+        "multi": true,
+        "name": "Car",
+        "options": [],
+        "query": "select display_name as __text, id as __value from cars where length(vin) > 5 order by display_name",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 1,
+        "type": "query"
       }
     ]
   },
@@ -238,5 +396,6 @@
   "timezone": "",
   "title": "Mothership",
   "uid": "ear7TuZgz",
-  "version": 1
+  "version": 1,
+  "weekStart": ""
 }

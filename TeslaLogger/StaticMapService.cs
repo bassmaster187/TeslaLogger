@@ -237,17 +237,19 @@ WHERE
             if (CarID != int.MinValue && CarID > 0)
             {
                 using (MySqlDataAdapter da = new MySqlDataAdapter(@"
-SELECT
-  lat,
-  lng
-FROM
-  pos
-WHERE
-  CarID = @CarID
-  AND id >= @startID
-  AND id <= @endID
-ORDER BY
-  Datum", DBHelper.DBConnectionstring))
+                    SELECT
+                      lat,
+                      lng
+                    FROM
+                      pos
+                    WHERE
+                      CarID = @CarID
+                      AND id >= @startID
+                      AND id <= @endID
+                      AND lat <> 0
+                      AND lng <> 0
+                    ORDER BY
+                      Datum", DBHelper.DBConnectionstring))
                 {
                     da.SelectCommand.Parameters.AddWithValue("@CarID", CarID);
                     da.SelectCommand.Parameters.AddWithValue("@startID", request.StartPosID);

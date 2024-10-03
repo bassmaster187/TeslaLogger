@@ -57,7 +57,7 @@
       <Value Profile="(Default)">10000</Value>
     </Setting>
     <Setting Name="SleepInStateOnline" Type="System.Int32" Scope="Application">
-      <Value Profile="(Default)">5000</Value>
+      <Value Profile="(Default)">30000</Value>
     </Setting>
     <Setting Name="SleepInStateCharge" Type="System.Int32" Scope="Application">
       <Value Profile="(Default)">10000</Value>
