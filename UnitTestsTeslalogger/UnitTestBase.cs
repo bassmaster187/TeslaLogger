@@ -223,6 +223,46 @@ namespace UnitTestsTeslalogger
         }
 
         [TestMethod]
+        public void Car_M3_LR_2024_MIC_Without_vehicle_config()
+        {
+            Car c = new Car(0, "", "", 0, "", DateTime.Now, "", "", "", "", "", "", "", null, false);
+            WebHelper wh = c.webhelper;
+
+            //2021 Model 3 LR Highland
+            MemoryCache.Default.Remove("GetAvgMaxRage_0");
+            MemoryCache.Default.Add("GetAvgMaxRage_0", 550, DateTime.Now.AddMinutes(1));
+            wh.car.Vin = "LRW3E7EK2RCXXXXXX";
+            wh.car.CarType = "";
+            wh.car.CarSpecialType = "";
+            wh.car.DBWhTR = 0.141;
+            wh.car.TrimBadging = "";
+            wh.UpdateEfficiency();
+
+            Assert.AreEqual("M3 LR 2024", wh.car.ModelName);
+            Assert.AreEqual(0.141, wh.car.WhTR);
+        }
+
+        [TestMethod]
+        public void Car_M3_LR_2024_MIC()
+        {
+            Car c = new Car(0, "", "", 0, "", DateTime.Now, "", "", "", "", "", "", "", null, false);
+            WebHelper wh = c.webhelper;
+
+            //2021 Model 3 LR Highland
+            MemoryCache.Default.Remove("GetAvgMaxRage_0");
+            MemoryCache.Default.Add("GetAvgMaxRage_0", 550, DateTime.Now.AddMinutes(1));
+            wh.car.Vin = "LRW3E7EK2RCXXXXXX";
+            wh.car.CarType = "model3";
+            wh.car.CarSpecialType = "base";
+            wh.car.DBWhTR = 0.141;
+            wh.car.TrimBadging = "74d";
+            wh.UpdateEfficiency();
+
+            Assert.AreEqual("M3 LR 2024", wh.car.ModelName);
+            Assert.AreEqual(0.141, wh.car.WhTR);
+        }
+
+        [TestMethod]
         public void Car_M3_LR_P_2024_MIC_Without_vehicle_config()
         {
             Car c = new Car(0, "", "", 0, "", DateTime.Now, "", "", "", "", "", "", "", null, false);

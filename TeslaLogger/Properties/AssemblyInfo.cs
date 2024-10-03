@@ -35,4 +35,5 @@ using System.Runtime.CompilerServices;
 [assembly: AssemblyVersion("1.59.7.0")]
 [assembly: AssemblyFileVersion("1.59.7.0")]
 
+[assembly: InternalsVisibleTo("UnitTestsTeslaloggerNET8")]
 [assembly: InternalsVisibleTo("UnitTestsTeslalogger")]
