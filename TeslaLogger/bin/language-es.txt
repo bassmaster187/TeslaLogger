@@ -552,3 +552,4 @@ Fehler="Alertas"
 
 #Timeline Plugin.json
 Dauer="Duración"
+Trip Jahresstatistik="Viaje Anual Estadística"
