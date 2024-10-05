@@ -353,7 +353,10 @@ namespace TeslaLogger
             try
             {
                 if (Environment.Version?.ToString()?.StartsWith("8.0") == true)
+                {
+                    ExceptionlessClient.Default.Configuration.DefaultData.Add("dotnet", Environment.Version?.ToString());
                     ExceptionlessClient.Default.CreateFeatureUsage("USE_DOTNET8").FirstCarUserID().AddObject(Environment.Version.ToString(), "DOTNET8").Submit();
+                }
             } catch (Exception) { }
 
             Logfile.Log("DBConnectionstring: " + DBHelper.GetDBConnectionstring(true));
