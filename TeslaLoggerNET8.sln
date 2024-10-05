@@ -1,9 +1,8 @@
-
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34607.119
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TeslaLogger", "TeslaLogger\TeslaLoggerNET8.csproj", "{9932F717-1BEE-4D0F-B5B0-FB8665FFE647}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TeslaLoggerNET8", "TeslaLogger\TeslaLoggerNET8.csproj", "{9932F717-1BEE-4D0F-B5B0-FB8665FFE647}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{37F4A1BB-79C0-4358-A773-738FC7CE332A}"
 	ProjectSection(SolutionItems) = preProject
@@ -21,17 +20,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Grafana", "Grafana", "{4C42
 		TeslaLogger\Grafana\Verbrauch.json = TeslaLogger\Grafana\Verbrauch.json
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MQTTClient", "MQTTClient\MQTTClientNET8.csproj", "{6333ABAD-51F4-430D-9BA5-0047602612D1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SRTMNET8", "srtm\src\SRTM\SRTMNET8.csproj", "{AE6A978E-8084-48C7-85DD-2E90FCD82F30}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SRTM", "srtm\src\SRTM\SRTMNET8.csproj", "{AE6A978E-8084-48C7-85DD-2E90FCD82F30}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LogfileNET8", "Logfile\LogfileNET8.csproj", "{B6462053-A913-47B8-8719-CA08EE5B2E4E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Logfile", "Logfile\LogfileNET8.csproj", "{B6462053-A913-47B8-8719-CA08EE5B2E4E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnitTestsTeslaloggerNET8", "UnitTestsTeslalogger\UnitTestsTeslaloggerNET8.csproj", "{AE80A9DA-E9B1-4BFD-8D2D-A2EA81B8EADC}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnitTestsTeslalogger", "UnitTestsTeslalogger\UnitTestsTeslaloggerNET8.csproj", "{AE80A9DA-E9B1-4BFD-8D2D-A2EA81B8EADC}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OSMMapGenerator", "OSMMapGenerator\OSMMapGeneratorNET8.csproj", "{852390A2-450B-43B3-A79A-F6C1DD988AE5}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TLUpdate", "TLUpdate\TLUpdate.csproj", "{DEC85AE5-91E5-4DC7-A35A-F98E53568A85}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OSMMapGeneratorNET8", "OSMMapGenerator\OSMMapGeneratorNET8.csproj", "{852390A2-450B-43B3-A79A-F6C1DD988AE5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -43,10 +38,6 @@ Global
 		{9932F717-1BEE-4D0F-B5B0-FB8665FFE647}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9932F717-1BEE-4D0F-B5B0-FB8665FFE647}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9932F717-1BEE-4D0F-B5B0-FB8665FFE647}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6333ABAD-51F4-430D-9BA5-0047602612D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6333ABAD-51F4-430D-9BA5-0047602612D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6333ABAD-51F4-430D-9BA5-0047602612D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6333ABAD-51F4-430D-9BA5-0047602612D1}.Release|Any CPU.Build.0 = Release|Any CPU
 		{AE6A978E-8084-48C7-85DD-2E90FCD82F30}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{AE6A978E-8084-48C7-85DD-2E90FCD82F30}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AE6A978E-8084-48C7-85DD-2E90FCD82F30}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -63,10 +54,6 @@ Global
 		{852390A2-450B-43B3-A79A-F6C1DD988AE5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{852390A2-450B-43B3-A79A-F6C1DD988AE5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{852390A2-450B-43B3-A79A-F6C1DD988AE5}.Release|Any CPU.Build.0 = Release|Any CPU
-		{DEC85AE5-91E5-4DC7-A35A-F98E53568A85}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DEC85AE5-91E5-4DC7-A35A-F98E53568A85}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DEC85AE5-91E5-4DC7-A35A-F98E53568A85}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DEC85AE5-91E5-4DC7-A35A-F98E53568A85}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
