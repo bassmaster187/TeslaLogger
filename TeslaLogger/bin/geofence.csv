@@ -7881,6 +7881,7 @@ EnBW DE-Meine, 52.380484, 10.536498
 EnBW DE-Meitingen Euronics, 48.5561974, 10.851761, 10
 EnBW DE-Meitingen Nord, 48.557666, 10.852404, 20
 EnBW DE-Meitingen OMV, 48.5581413, 10.8526477, 10
+EnBW DE-Mellingen, 50.9375299, 11.3900127
 EnBW DE-Memmingen Woringer Straße, 47.971073749095, 10.184847340797
 EnBW DE-Memmingen, 47.999336, 10.153201, 10
 EnBW DE-Menden (Sauerland), 51.442689, 7.784449
@@ -8543,6 +8544,7 @@ EnBW DE-Weiden in der Oberpfalz Robert-Bosch-Straße, 49.66344, 12.14901
 EnBW DE-Weil am Rhein, 47.598580838741, 7.6033846612694
 EnBW DE-Weilerswist, 50.751686, 6.84701
 EnBW DE-Weilheim an der Teck Im Stockach, 48.62470789801, 9.5272148573619
+EnBW DE-Weimar REWE Center, 51.0077604, 11.3335696
 EnBW DE-Weingarten Ettishofer Straße, 47.812760595146, 9.6354936117091
 EnBW DE-Weinheim Röntgenstr., 49.549386, 8.646601
 EnBW DE-Weinheim Südliche Bergstraße, 49.527776, 8.656796
@@ -12124,8 +12126,14 @@ SWU DE-Neu-Ulm Glacis Galerie, 48.393879, 10.0039061
 
 TEAG DE-Amt Wachsenburg, 50.888332, 10.935136
 TEAG DE-Bad Klosterlausnitz An der Autobahn, 50.907984, 11.8436292
+TEAG DE-Eisenberg REWE, 50.9710784, 11.883232
 TEAG DE-Gera Globus, 50.8874229, 12.1384896
+TEAG DE-Petersberg, 50.9694306, 11.8550465
 TEAG DE-Hermsdorf Rodaer Straße 72, 50.8864278, 11.8501822
+TEAG DE-Jena GLOBUS Jena-Isserstedt, 50.9590316, 11.5096653
+TEAG DE-Jena Rudolstädter Str., 50.8958004, 11.5836652
+TEAG DE-Magdala, 50.9007383, 11.4459709
+TEAG DE-Mellingen Hainholzstraße, 50.9364413, 11.3895584
 TEAG DE-Schleiz Autohof, 50.551565, 11.789977
 TEAG DE-Schmölln Rossmann, 50.8930064, 12.332003
 
