@@ -239,14 +239,29 @@ namespace TeslaLogger
 
         private static void GetOSMMapGeneratorFilename(out string fileName, out string arguments)
         {
-            fileName = "/usr/bin/mono";
-            arguments = "/etc/teslalogger/OSMMapGenerator.exe ";
-
-            if (!Tools.IsMono())
+            if (Tools.IsMono())
             {
-                var f = new FileInfo("../../../OSMMapGenerator/bin/Debug/OSMMapGenerator.exe");
-                fileName = f.FullName;
-                arguments = "";
+                fileName = "/usr/bin/mono";
+                arguments = "/etc/teslalogger/OSMMapGenerator.exe ";
+
+                if (!Tools.IsMono())
+                {
+                    var f = new FileInfo("../../../OSMMapGenerator/bin/Debug/OSMMapGenerator.exe");
+                    fileName = f.FullName;
+                    arguments = "";
+                }
+            }
+            else
+            {
+                fileName = "/home/cli/dotnet";
+                arguments = "/etc/teslalogger/OSMMapGenerator.exe ";
+
+                if (!Tools.IsMono())
+                {
+                    var f = new FileInfo("OSMMapGeneratorNET8.dll");
+                    fileName = f.FullName;
+                    arguments = "";
+                }
             }
         }
 
