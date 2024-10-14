@@ -17,23 +17,23 @@ namespace UnitTestsTeslalogger
         {
             if (!Directory.Exists("maps"))
                 Directory.CreateDirectory("maps");
-            else
-            {
-                var files = Directory.GetFiles("maps");
-                foreach (var file in files)
-                    File.Delete(file);
-            }
+
+            if (!Directory.Exists("map-data"))
+                Directory.CreateDirectory("map-data");
         }
 
         [TestMethod]
         public void ParkingP1()
         {
+            StringWriter sw = new StringWriter();
+            Console.SetOut(sw);
+
             var f = new FileInfo("../../../Testfile-P1.txt");
             string tempfile = GetTempFileName();
-            f.CopyTo(tempfile,true);
+            f.CopyTo(tempfile, true);
 
             var map = new FileInfo("maps/P-51,1624-13,5748.png");
-            if (map.Exists) 
+            if (map.Exists)
                 map.Delete();
 
             string p = f.FullName;
@@ -41,13 +41,18 @@ namespace UnitTestsTeslalogger
             string[] args = { "-jobfile", tempfile, "-debug" };
             OSMMapGenerator.Main(args);
 
+            System.Diagnostics.Debug.Write(sw.ToString());
             map = new FileInfo("maps/P-51,1624-13,5748.png");
             Assert.IsTrue(map.Exists);
+            sw.Dispose();
         }
 
         [TestMethod]
         public void ParkingP2()
         {
+            StringWriter sw = new StringWriter();
+            Console.SetOut(sw);
+
             var f = new FileInfo("../../../Testfile-P2.txt");
             string tempfile = GetTempFileName();
             f.CopyTo(tempfile, true);
@@ -60,16 +65,23 @@ namespace UnitTestsTeslalogger
 
             string[] args = { "-jobfile", tempfile, "-debug" };
             OSMMapGenerator.Main(args);
+            System.Diagnostics.Debug.Write(sw.ToString());
+            map = new FileInfo("maps/P-51,1576-13,6364.png");
+            Assert.IsTrue(map.Exists);
+            sw.Dispose();
         }
 
         [TestMethod]
         public void ParkingP3()
         {
+            StringWriter sw = new StringWriter();
+            Console.SetOut(sw);
+
             var f = new FileInfo("../../../Testfile-P3.txt");
             string tempfile = GetTempFileName();
             f.CopyTo(tempfile, true);
 
-            var map = new FileInfo("maps/P-51,1576-13,6364.png");
+            var map = new FileInfo("maps/P-51,2576-13,7364.png");
             if (map.Exists)
                 map.Delete();
 
@@ -77,11 +89,19 @@ namespace UnitTestsTeslalogger
 
             string[] args = { "-jobfile", tempfile, "-debug" };
             OSMMapGenerator.Main(args);
+            System.Diagnostics.Debug.Write(sw.ToString());
+
+            map = new FileInfo("maps/P-51,2576-13,7364.png");
+            Assert.IsTrue(map.Exists);
+            sw.Dispose();
         }
 
         [TestMethod]
         public void ParkingP4()
         {
+            StringWriter sw = new StringWriter();
+            Console.SetOut(sw);
+
             var f = new FileInfo("../../../Testfile-P4.txt");
             string tempfile = GetTempFileName();
             f.CopyTo(tempfile, true);
@@ -94,11 +114,44 @@ namespace UnitTestsTeslalogger
 
             string[] args = { "-jobfile", tempfile, "-debug" };
             OSMMapGenerator.Main(args);
+            System.Diagnostics.Debug.Write(sw.ToString());
+
+            map = new FileInfo("maps/P-51,1576-13,6364.png");
+            Assert.IsTrue(map.Exists);
+            sw.Dispose();
+        }
+
+        [TestMethod]
+        public void ChargingC1()
+        {
+            StringWriter sw = new StringWriter();
+            Console.SetOut(sw);
+
+            var f = new FileInfo("../../../Testfile-C1.txt");
+            string tempfile = GetTempFileName();
+            f.CopyTo(tempfile, true);
+
+            var map = new FileInfo("maps/C-51,1624-13,5748.png");
+            if (map.Exists)
+                map.Delete();
+
+            string p = f.FullName;
+
+            string[] args = { "-jobfile", tempfile, "-debug" };
+            OSMMapGenerator.Main(args);
+
+            System.Diagnostics.Debug.Write(sw.ToString());
+            map = new FileInfo("maps/C-51,1624-13,5748.png");
+            Assert.IsTrue(map.Exists);
+            sw.Dispose();
         }
 
         [TestMethod]
         public void TripT1()
         {
+            StringWriter sw = new StringWriter();
+            Console.SetOut(sw);
+
             var f = new FileInfo("../../../Testfile-T1.txt");
             string tempfile = GetTempFileName();
             f.CopyTo(tempfile, true);
@@ -111,9 +164,11 @@ namespace UnitTestsTeslalogger
 
             string[] args = { "-jobfile", tempfile, "-debug" };
             OSMMapGenerator.Main(args);
+            System.Diagnostics.Debug.Write(sw.ToString());
 
             map = new FileInfo("maps/T2-400371-400398.png");
             Assert.IsTrue(map.Exists);
+            sw.Dispose();
         }
 
         static string GetTempFileName()
