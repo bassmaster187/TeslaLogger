@@ -12,10 +12,23 @@ namespace UnitTestsTeslalogger
     [TestClass]
     public class UnitTestOSMMapGenerator
     {
+        [TestInitialize]
+        public void InitializeTests()
+        {
+            if (!Directory.Exists("maps"))
+                Directory.CreateDirectory("maps");
+            else
+            {
+                var files = Directory.GetFiles("maps");
+                foreach (var file in files)
+                    File.Delete(file);
+            }
+        }
+
         [TestMethod]
         public void ParkingP1()
         {
-            var f = new FileInfo("../../Testfile-P1.txt");
+            var f = new FileInfo("../../../Testfile-P1.txt");
             string tempfile = GetTempFileName();
             f.CopyTo(tempfile,true);
 
@@ -35,7 +48,7 @@ namespace UnitTestsTeslalogger
         [TestMethod]
         public void ParkingP2()
         {
-            var f = new FileInfo("../../Testfile-P2.txt");
+            var f = new FileInfo("../../../Testfile-P2.txt");
             string tempfile = GetTempFileName();
             f.CopyTo(tempfile, true);
 
@@ -52,7 +65,7 @@ namespace UnitTestsTeslalogger
         [TestMethod]
         public void ParkingP3()
         {
-            var f = new FileInfo("../../Testfile-P3.txt");
+            var f = new FileInfo("../../../Testfile-P3.txt");
             string tempfile = GetTempFileName();
             f.CopyTo(tempfile, true);
 
@@ -69,7 +82,7 @@ namespace UnitTestsTeslalogger
         [TestMethod]
         public void ParkingP4()
         {
-            var f = new FileInfo("../../Testfile-P4.txt");
+            var f = new FileInfo("../../../Testfile-P4.txt");
             string tempfile = GetTempFileName();
             f.CopyTo(tempfile, true);
 
@@ -86,7 +99,7 @@ namespace UnitTestsTeslalogger
         [TestMethod]
         public void TripT1()
         {
-            var f = new FileInfo("../../Testfile-T1.txt");
+            var f = new FileInfo("../../../Testfile-T1.txt");
             string tempfile = GetTempFileName();
             f.CopyTo(tempfile, true);
 

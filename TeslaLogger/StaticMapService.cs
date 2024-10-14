@@ -142,13 +142,14 @@ namespace TeslaLogger
                 int queueLength = queue.Count;
                 if (queue.TryDequeue(out Request request))
                 {
-                    //Tools.DebugLog("StaticMapService:Work() queue:" + queue.Count + " MapProvider:" + _StaticMapProvider);
+                    Tools.DebugLog("StaticMapService:Work() queue:" + queue.Count + " MapProvider:" + _StaticMapProvider);
                     int width = request.Width > 0 ? request.Width : 200;
                     int height = request.Height > 0 ? request.Height : 150;
                     if (request is TripRequest)
                     {
                         //Tools.DebugLog($"StaticMapService:Work() request:{request.Type} {((TripRequest)request).StartPosID}->{((TripRequest)request).EndPosID}");
                         string filename = System.IO.Path.Combine(GetMapDir(), GetMapFileName(((TripRequest)request).CarID, ((TripRequest)request).StartPosID, ((TripRequest)request).EndPosID));
+                        Tools.DebugLog("StaticMapService:filename = " + filename);
                         if (MapFileExistsOrIsTooOld(filename))
                         {
                             using (DataTable dt = TripToCoords((TripRequest)request))
@@ -384,7 +385,7 @@ ORDER BY
         {
             string mapdir = "/var/lib/grafana/plugins/teslalogger-timeline-panel/dist/maps";
 
-            if (!Tools.IsMono())
+            if (!Tools.IsMono() && !Tools.IsDotnet8())
                 mapdir = new DirectoryInfo("maps").FullName;
 
             try

@@ -6,6 +6,7 @@
     <AssemblyTitle>OSMMapGenerator</AssemblyTitle>
     <Copyright>%24{AuthorCopyright}</Copyright>
     <AssemblyVersion>1.1.0</AssemblyVersion>
+    <StartupObject>TeslaLogger.OSMMapGenerator</StartupObject>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <OutputPath>bin\Debug</OutputPath>
@@ -19,6 +20,7 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-    <PackageReference Include="System.Drawing.Common" Version="8.0.2" />
+    <PackageReference Include="SkiaSharp" Version="2.88.8" />
+    <PackageReference Include="SkiaSharp.NativeAssets.Linux" Version="2.88.8" />
   </ItemGroup>
 </Project>

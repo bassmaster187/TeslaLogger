@@ -352,7 +352,7 @@ namespace TeslaLogger
 
             try
             {
-                if (Environment.Version?.ToString()?.StartsWith("8.0") == true)
+                if (Tools.IsDotnet8())
                 {
                     ExceptionlessClient.Default.Configuration.DefaultData.Add("dotnet", Environment.Version?.ToString());
                     ExceptionlessClient.Default.CreateFeatureUsage("USE_DOTNET8").FirstCarUserID().AddObject(Environment.Version.ToString(), "DOTNET8").Submit();

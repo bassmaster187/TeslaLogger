@@ -53,6 +53,7 @@ namespace TeslaLogger
         public enum UpdateType { all, stable, none };
 
         internal static ConcurrentQueue<Tuple<DateTime, string>> debugBuffer = new ConcurrentQueue<Tuple<DateTime, string>>();
+        internal static bool dotnet8;
 
         public static void SetThreadEnUS()
         {
@@ -1232,6 +1233,11 @@ namespace TeslaLogger
                 Logfile.ExceptionWriter(ex, "IsUnitTest");
             }
             return false;
+        }
+
+        public static bool IsDotnet8()
+        {
+            return Environment.Version?.ToString()?.StartsWith("8.0") == true;
         }
 
         public static bool IsDockerNET8()

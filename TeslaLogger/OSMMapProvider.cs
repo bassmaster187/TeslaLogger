@@ -53,7 +53,9 @@ namespace TeslaLogger
             File.WriteAllText(tempfile, JsonConvert.SerializeObject(job), Encoding.UTF8);
 
             GetOSMMapGeneratorFilename(out string fileName, out string arguments);
-            arguments += "-jobfile " + tempfile + (Program.VERBOSE ? " - debug" : "");
+            arguments += "-jobfile " + tempfile + (Program.VERBOSE ? " -debug" : "");
+
+            Logfile.Log("cmd: " + fileName + " " + arguments);
 
             using (Process process = new Process
             {
@@ -254,14 +256,18 @@ namespace TeslaLogger
             else
             {
                 fileName = "/home/cli/dotnet";
-                arguments = "/etc/teslalogger/OSMMapGenerator.exe ";
+                if (!File.Exists(fileName))
+                    fileName = "dotnet";
 
+                arguments = "OSMMapGeneratorNET8.dll ";
+
+                /*
                 if (!Tools.IsMono())
                 {
                     var f = new FileInfo("OSMMapGeneratorNET8.dll");
                     fileName = f.FullName;
                     arguments = "";
-                }
+                }*/
             }
         }
 
