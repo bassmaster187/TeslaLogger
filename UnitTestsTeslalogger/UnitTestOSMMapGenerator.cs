@@ -164,10 +164,12 @@ namespace UnitTestsTeslalogger
 
             string[] args = { "-jobfile", tempfile, "-debug" };
             OSMMapGenerator.Main(args);
-            System.Diagnostics.Debug.Write(sw.ToString());
-
+            
             map = new FileInfo("maps/T2-400371-400398.png");
             Assert.IsTrue(map.Exists);
+            Console.WriteLine("Pfad: " + map.FullName);
+
+            System.Diagnostics.Debug.Write(sw.ToString());
             sw.Dispose();
         }
 
