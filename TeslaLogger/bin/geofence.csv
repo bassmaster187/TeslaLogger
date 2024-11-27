@@ -1783,7 +1783,7 @@ Supercharger-V3 DE-Erlangen, 49.5440686, 11.02870
 Supercharger-V3 DE-Erharting, 48.282664, 12.554758
 Supercharger-V3 DE-Eschborn, 50.133770, 8.561050
 Supercharger-V3 DE-Frechen, 50.917843, 6.83323183, 20
-Supercharger-V4 DE-Friedrichsdorf, 50.254130, 8.643807,10
+Supercharger-V4 DE-Friedrichsdorf, 50.254130, 8.643807,25
 Supercharger-V3 DE-Feucht, 49.36501,11.20753
 Supercharger-V3 DE-Fürth - Ronhof, 49.494376, 10.994299
 Supercharger-V3 DE-Füssen, 47.567924, 10.675875, 18
@@ -1795,7 +1795,7 @@ Supercharger-V3 DE-Gensingen, 49.90202, 7.929759
 Supercharger-V4 DE-Gera, 50.8878111, 12.1364607, 35
 Supercharger-V4 DE-Gigafactory Berlin-Brandenburg, 52.391, 13.796778
 Supercharger-V4 DE-Gigafactory Berlin-Brandenburg, 52.391321, 13.796042
-Supercharger-V3 DE-Göttingen (Cafe del Sol), 51.528335, 9.88688
+Supercharger-V3 DE-Göttingen (Cafe del Sol), 51.528335, 9.88688, 30
 Supercharger DE-Gramschatzer Wald, 49.91202, 10.00176, 30
 Supercharger-V3 DE-Gramschatzer Wald, 49.912304,10.000582, 30
 Supercharger-V3 DE-Greding,49.041979,11.342705,20
@@ -1845,7 +1845,7 @@ Supercharger DE-Kaiserslautern, 49.459907, 7.821410
 Supercharger-V3 DE-Karlsruhe, 48.999096,8.428591,30
 Supercharger DE-Kamen, 51.5701781, 7.675317
 Supercharger-V3 DE-Kassel,51.313688,9.493689
-Supercharger-V3 DE-Kassel (Cafe del Sol), 51.3083959, 9.5411861
+Supercharger-V3 DE-Kassel (Cafe del Sol), 51.3083959, 9.5411861, 25
 Supercharger-V3 DE-Kassel (GALERIA),51.313232,9.493343,25
 Supercharger DE-Kappel-Grafenhausen, 48.281347, 7.77755
 Supercharger-V3 DE-Kaltenkirchen,53.846035,9.936263,20
@@ -1948,7 +1948,7 @@ Supercharger-V3 DE-Schwarzheide, 51.471528, 13.871028
 Supercharger DE-Schweitenkirchen, 48.510765, 11.582025, 19
 Supercharger-V3 DE-Sindelsdorf, 47.728372, 11.361923
 Supercharger-V3 DE-Sittensen, 53.287186, 9.5062473
-Supercharger-V3 DE-Solingen, 51.129579, 6.995592
+Supercharger-V3 DE-Solingen, 51.129579, 6.995592,20
 Supercharger-V3 DE-Soltau-Ost,52.983332,9.925548
 Supercharger DE-Stuhr (Bremen-Brinkum), 53.0284305, 8.8061246
 Supercharger DE-Sulz-Vöhringen, 48.34305, 8.66262, 30
@@ -6917,6 +6917,9 @@ ELEN HR-Poreč, 45.22419,1359817
 ELEN HR-Rijeka Gomila, 45.32812,14.442247
 ELEN HR-Vižinada, 45.33017,13.75735
 
+EnelX IT-Gagliano del Capo LE, 39.838057, 18.366472, 15
+EnelX IT-Torre Pali Stazione di Ricarica, 39.844032, 18.211256,10
+EnelX IT-Lecce Stazione di Ricarica ,40.353177, 18.171802,10
 EnelX IT-Ramiola, 44.698924,10.090093
 
 EnBW CZ-Karlovy Vary, 50.232775,12.8678
@@ -12079,6 +12082,9 @@ Porsche DE-Wiesbaden Mainzer Straße, 50.0559, 8.25723
 Porsche DE-Willich Jakob-Kaiser-Str., 51.2721, 6.51569
 Porsche DE-Wuppertal Porschestraße, 51.3053, 7.25279
 
+quello DE-Frankfurt am Main Rotlintstraße 10,50.124269, 8.692695,10
+quello DE-Frankfurt am Main Rotlintstraße 35,50.126233, 8.693672,10
+
 Recharge FI-Sodankylä, 67.431695,26.57509
 
 REWE DE-Bremen, 53.136455, 8.739926
@@ -12521,3 +12527,4 @@ DE Wetzlar Leica, 50.553084, 8.533377, 20
 ES Gandia, 38.969986, -0.178789
 FR 68510 Sierentz Hyper U et Drive, 47.666180, 7.441494, 10
 IT Vahrn Mautstation Casello Bressanone-Val Pusteria, 46.763952, 11.6430823, 20
+IT Parma Destination Charger Hotel San Marco & Formula Club,  44.826238, 10.203621, 15
