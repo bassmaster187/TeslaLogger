@@ -218,7 +218,9 @@ namespace TeslaLogger
                                 var topics = JsonConvert.DeserializeObject<Dictionary<string, string>>(temp);
                                 foreach (var keyvalue in topics)
                                 {
-                                    client.Publish(carTopic + "/" + keyvalue.Key, Encoding.UTF8.GetBytes(keyvalue.Value ?? "NULL"),
+                                    var safeValue = GetSafeValueForPublishing(keyvalue);
+
+                                    client.Publish(carTopic + "/" + keyvalue.Key, Encoding.UTF8.GetBytes(safeValue),
                                     uPLibrary.Networking.M2Mqtt.Messages.MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, true);
 
                                 }
@@ -242,6 +244,33 @@ namespace TeslaLogger
             }
         }
 
+        /// <summary>
+        /// Compute safe value for publishing in MQTT topic
+        /// E.q. HomeAssistant will throw errors, if "NULL" is found, but a numeric value is expected
+        /// </summary>
+        /// <param name="keyvalue">a KeyValuePair where Key is the topic and Value is the value</param>
+        /// <returns></returns>
+        private static string GetSafeValueForPublishing(KeyValuePair<string, string> keyvalue)
+        {
+            if (!(keyvalue.Value is null))
+            { 
+                return keyvalue.Value; 
+            }
+
+            switch (keyvalue.Key)
+            {
+                case "active_route_energy_at_arrival":
+                case "active_route_km_to_arrival":
+                    return "0";
+                case "active_route_minutes_to_arrival":
+                case "active_route_traffic_minutes_delay":
+                case "active_route_latitude":
+                case "active_route_longitude":
+                    return "0.0";
+                default:
+                    return "NULL";
+            }
+        }
 
         private void Client_MqttMsgPublishReceived(object sender, MqttMsgPublishEventArgs e)
         {
