@@ -90,6 +90,7 @@ namespace TeslaLogger
                             {
                                 storage[name][Key.ValueLastUpdate] = timestamp;
                                 HandleStateChange(name, oldvalue, value, long.Parse(oldTS.ToString(), Tools.ciEnUS), timestamp);
+                                UpdateCurrentJson(name, value);
                             }
                         }
                     }
@@ -107,6 +108,7 @@ namespace TeslaLogger
                 else
                 {
                     storage[name][Key.Value] = value;
+                    UpdateCurrentJson(name, value);
                 }
                 storage[name][Key.Timestamp] = timestamp;
                 storage[name][Key.Source] = source;
@@ -1557,6 +1559,21 @@ namespace TeslaLogger
             }
             long now = (long)DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1)).TotalMilliseconds;
             return maxTS > 0 ? now - maxTS : 0;
+        }
+
+        private void UpdateCurrentJson(string name, object value)
+        {
+            if(car?.CurrentJSON == null || value == null)
+            {
+                return;
+            }
+
+            switch(name)
+            {
+                case "charge_limit_soc":
+                    car.CurrentJSON.charge_limit_soc = Convert.ToInt32(value);
+                    return;
+            }
         }
 
         void ExceptionlessLogUnknowKey(string text)

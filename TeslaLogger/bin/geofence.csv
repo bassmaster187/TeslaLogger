@@ -1783,6 +1783,7 @@ Supercharger-V3 DE-Erlangen, 49.5440686, 11.02870
 Supercharger-V3 DE-Erharting, 48.282664, 12.554758
 Supercharger-V3 DE-Eschborn, 50.133770, 8.561050
 Supercharger-V3 DE-Frechen, 50.917843, 6.83323183, 20
+Supercharger-V4 DE-Friedrichsdorf, 50.254130, 8.643807,25
 Supercharger-V3 DE-Feucht, 49.36501,11.20753
 Supercharger-V3 DE-Fürth - Ronhof, 49.494376, 10.994299
 Supercharger-V3 DE-Füssen, 47.567924, 10.675875, 18
@@ -1794,7 +1795,7 @@ Supercharger-V3 DE-Gensingen, 49.90202, 7.929759
 Supercharger-V4 DE-Gera, 50.8878111, 12.1364607, 35
 Supercharger-V4 DE-Gigafactory Berlin-Brandenburg, 52.391, 13.796778
 Supercharger-V4 DE-Gigafactory Berlin-Brandenburg, 52.391321, 13.796042
-Supercharger-V3 DE-Göttingen (Cafe del Sol), 51.528335, 9.88688
+Supercharger-V3 DE-Göttingen (Cafe del Sol), 51.528335, 9.88688, 30
 Supercharger DE-Gramschatzer Wald, 49.91202, 10.00176, 30
 Supercharger-V3 DE-Gramschatzer Wald, 49.912304,10.000582, 30
 Supercharger-V3 DE-Greding,49.041979,11.342705,20
@@ -1844,7 +1845,7 @@ Supercharger DE-Kaiserslautern, 49.459907, 7.821410
 Supercharger-V3 DE-Karlsruhe, 48.999096,8.428591,30
 Supercharger DE-Kamen, 51.5701781, 7.675317
 Supercharger-V3 DE-Kassel,51.313688,9.493689
-Supercharger-V3 DE-Kassel (Cafe del Sol), 51.3083959, 9.5411861
+Supercharger-V3 DE-Kassel (Cafe del Sol), 51.3083959, 9.5411861, 25
 Supercharger-V3 DE-Kassel (GALERIA),51.313232,9.493343,25
 Supercharger DE-Kappel-Grafenhausen, 48.281347, 7.77755
 Supercharger-V3 DE-Kaltenkirchen,53.846035,9.936263,20
@@ -1947,11 +1948,12 @@ Supercharger-V3 DE-Schwarzheide, 51.471528, 13.871028
 Supercharger DE-Schweitenkirchen, 48.510765, 11.582025, 19
 Supercharger-V3 DE-Sindelsdorf, 47.728372, 11.361923
 Supercharger-V3 DE-Sittensen, 53.287186, 9.5062473
-Supercharger-V3 DE-Solingen, 51.129579, 6.995592
+Supercharger-V3 DE-Solingen, 51.129579, 6.995592,20
 Supercharger-V3 DE-Soltau-Ost,52.983332,9.925548
 Supercharger DE-Stuhr (Bremen-Brinkum), 53.0284305, 8.8061246
 Supercharger DE-Sulz-Vöhringen, 48.34305, 8.66262, 30
 Supercharger-V3 DE-Sulz-Vöhringen, 48.343461,8.663791, 30
+Supercharger-V4 DE-Sulzbach - Taunus, 50.116696, 8.530323,20
 Supercharger DE-Süderholz, 54.093037, 13.085923
 Supercharger-V3 DE-Troisdorf, 50.813724,7.107381
 Supercharger-V3 DE-Türkheim, 48.04251558, 10.6201373
@@ -6915,6 +6917,9 @@ ELEN HR-Poreč, 45.22419,1359817
 ELEN HR-Rijeka Gomila, 45.32812,14.442247
 ELEN HR-Vižinada, 45.33017,13.75735
 
+EnelX IT-Gagliano del Capo LE, 39.838057, 18.366472, 15
+EnelX IT-Torre Pali Stazione di Ricarica, 39.844032, 18.211256,10
+EnelX IT-Lecce Stazione di Ricarica ,40.353177, 18.171802,10
 EnelX IT-Ramiola, 44.698924,10.090093
 
 EnBW CZ-Karlovy Vary, 50.232775,12.8678
@@ -7881,6 +7886,7 @@ EnBW DE-Meine, 52.380484, 10.536498
 EnBW DE-Meitingen Euronics, 48.5561974, 10.851761, 10
 EnBW DE-Meitingen Nord, 48.557666, 10.852404, 20
 EnBW DE-Meitingen OMV, 48.5581413, 10.8526477, 10
+EnBW DE-Mellingen, 50.9375299, 11.3900127
 EnBW DE-Memmingen Woringer Straße, 47.971073749095, 10.184847340797
 EnBW DE-Memmingen, 47.999336, 10.153201, 10
 EnBW DE-Menden (Sauerland), 51.442689, 7.784449
@@ -8543,6 +8549,7 @@ EnBW DE-Weiden in der Oberpfalz Robert-Bosch-Straße, 49.66344, 12.14901
 EnBW DE-Weil am Rhein, 47.598580838741, 7.6033846612694
 EnBW DE-Weilerswist, 50.751686, 6.84701
 EnBW DE-Weilheim an der Teck Im Stockach, 48.62470789801, 9.5272148573619
+EnBW DE-Weimar REWE Center, 51.0077604, 11.3335696
 EnBW DE-Weingarten Ettishofer Straße, 47.812760595146, 9.6354936117091
 EnBW DE-Weinheim Röntgenstr., 49.549386, 8.646601
 EnBW DE-Weinheim Südliche Bergstraße, 49.527776, 8.656796
@@ -12124,8 +12131,14 @@ SWU DE-Neu-Ulm Glacis Galerie, 48.393879, 10.0039061
 
 TEAG DE-Amt Wachsenburg, 50.888332, 10.935136
 TEAG DE-Bad Klosterlausnitz An der Autobahn, 50.907984, 11.8436292
+TEAG DE-Eisenberg REWE, 50.9710784, 11.883232
 TEAG DE-Gera Globus, 50.8874229, 12.1384896
+TEAG DE-Petersberg, 50.9694306, 11.8550465
 TEAG DE-Hermsdorf Rodaer Straße 72, 50.8864278, 11.8501822
+TEAG DE-Jena GLOBUS Jena-Isserstedt, 50.9590316, 11.5096653
+TEAG DE-Jena Rudolstädter Str., 50.8958004, 11.5836652
+TEAG DE-Magdala, 50.9007383, 11.4459709
+TEAG DE-Mellingen Hainholzstraße, 50.9364413, 11.3895584
 TEAG DE-Schleiz Autohof, 50.551565, 11.789977
 TEAG DE-Schmölln Rossmann, 50.8930064, 12.332003
 
@@ -12511,3 +12524,4 @@ DE Wetzlar Leica, 50.553084, 8.533377, 20
 ES Gandia, 38.969986, -0.178789
 FR 68510 Sierentz Hyper U et Drive, 47.666180, 7.441494, 10
 IT Vahrn Mautstation Casello Bressanone-Val Pusteria, 46.763952, 11.6430823, 20
+IT Parma Destination Charger Hotel San Marco & Formula Club,  44.826238, 10.203621, 15

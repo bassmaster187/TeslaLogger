@@ -8,6 +8,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using System.Security.Cryptography;
+using System.Diagnostics;
 
 namespace TeslaLogger
 {
@@ -48,6 +49,8 @@ namespace TeslaLogger
                 {
                     Logfile.Log(ex.ToString());
                 }
+
+                InitCheckNet8();
 
                 InitDebugLogging();
 
@@ -110,6 +113,47 @@ namespace TeslaLogger
                         ExceptionlessClient.Default.SubmitLog("Program", "Emergency DownloadUpdateAndInstall()");
                     }
                 }
+            }
+        }
+
+        private static void InitCheckNet8()
+        {
+            try
+            {
+                if (File.Exists("TESLALOGGERNET8"))
+                {
+                    var net8version = Tools.GetNET8Version();
+                    if (net8version?.Contains("8.") == true)
+                    {
+                        Logfile.Log("Start Teslalogger.net8");
+
+                        // Copy settings for .net8
+                        if (!Directory.Exists("data"))
+                        {
+                            Directory.CreateDirectory("data");
+                            File.Copy("settings.json", "data/settings.json");
+                            File.Copy("encryption.txt", "data/encryption.txt");
+                        }
+
+                        UpdateTeslalogger.Chmod("startnet8.sh", 777, false);
+
+                        var p = new Process();
+                        p.StartInfo.FileName = "/bin/bash";
+                        p.StartInfo.Arguments = $"startnet8.sh";
+                        p.StartInfo.CreateNoWindow = true;
+                        p.StartInfo.UseShellExecute = false;
+                        p.Start();
+
+                        Thread.Sleep(5000);
+
+                        Thread.CurrentThread.Abort();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ex.ToExceptionless().FirstCarUserID().Submit();
+                Logfile.Log(ex.ToString());
             }
         }
 

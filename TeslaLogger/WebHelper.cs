@@ -2537,8 +2537,10 @@ namespace TeslaLogger
 
                         if (unknownStateCounter == 0)
                         {
+                            /*
                             string r = Wakeup().Result;
                             Log("WakupResult: " + r);
+                            */
                         }
                         else
                         {
@@ -2763,7 +2765,7 @@ namespace TeslaLogger
                         }
                         else if (car.DBWhTR >= 0.135 && car.DBWhTR <= 0.142 && AWD && year >= 2024)
                         {
-                            WriteCarSettings("0.139", "M3 LR 2024");
+                            WriteCarSettings("0.141", "M3 LR 2024");
                             return;
                         }
                         else if (car.DBWhTR >= 0.135 && car.DBWhTR <= 0.142 && AWD)
