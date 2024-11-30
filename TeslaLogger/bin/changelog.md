@@ -1,3 +1,6 @@
+# Version 1.59.8
+- Show signal counter for Fleet API cars in Settings / My Tesla Credentials
+
 # Version 1.59.7
 - Dashboard Trips Monthly Statistics now also shows anual statistics
 - Support for Model 3 Highland
