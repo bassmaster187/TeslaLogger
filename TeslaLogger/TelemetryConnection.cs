@@ -986,12 +986,15 @@ namespace TeslaLogger
             Log("Login to Telemetry Server / config: " + configname);
             string vin = car.Vin;
             // vin = "LRW3E7EK6NC483045"; // xxx
+            string fw = car.CurrentJSON.current_car_version;
+            if (fw?.Contains(" ") == true)
+                fw = fw.Substring(0, fw.IndexOf(" ")).Trim();
 
             Dictionary<string, object> login = new Dictionary<string, object>{
                     { "msg_type", "login"},
                     { "vin", vin},
                     { "token", car.TaskerHash},
-                    { "FW", car.CurrentJSON.current_car_version.Substring(0, car.CurrentJSON.current_car_version.IndexOf(" ")).Trim()},
+                    { "FW", fw},
                     { "accesstoken", car.Tesla_Token},
                     { "regionurl", car.webhelper.apiaddress},
                     { "config", configname},
