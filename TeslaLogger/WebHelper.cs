@@ -1613,7 +1613,7 @@ namespace TeslaLogger
 
         internal bool IsCharging(bool justCheck = false, bool noMemcache = false)
         {
-            if (car.FleetAPI && justCheck)
+            if (car.FleetAPI)
             {
                 return car.telemetry?.IsCharging ?? false;
             }
@@ -3284,11 +3284,18 @@ namespace TeslaLogger
 
         public bool IsDriving(bool justinsertdb = false)
         {
-            if (car.FleetAPI && !justinsertdb)
+            if (car.FleetAPI)
             {
                 if (car.telemetry?.Driving == false)
                 {
                     return false;
+                }
+                else
+                {
+                    if (car.telemetry != null)
+                        return car.telemetry.Driving == true;
+                    else
+                        return false;
                 }
             }
 
