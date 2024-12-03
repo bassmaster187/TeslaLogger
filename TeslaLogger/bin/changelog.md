@@ -1,3 +1,6 @@
+# Version 1.59.9
+- Use as less commands as possible with FleetAPI
+
 # Version 1.59.8
 - Show signal counter for Fleet API cars in Settings / My Tesla Credentials
 
