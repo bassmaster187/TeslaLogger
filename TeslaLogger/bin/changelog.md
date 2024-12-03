@@ -1,3 +1,6 @@
+# Version 1.59.10
+- Bugfixes
+
 # Version 1.59.9
 - Use as less commands as possible with FleetAPI
 
