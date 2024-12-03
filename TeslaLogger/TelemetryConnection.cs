@@ -54,6 +54,9 @@ namespace TeslaLogger
         private double? lastOdometer;
         private double? lastOutsideTemp;
 
+        double lastLatitude = 0;
+        double lastLongitude = 0;
+
         void Log(string message)
         {
             car.Log("*** FT: " +  message);
@@ -291,11 +294,13 @@ namespace TeslaLogger
                         {
                             car.webhelper.is_sentry_mode = true;
                             car.CurrentJSON.current_is_sentry_mode = true;
+                            car.CurrentJSON.CreateCurrentJSON();
                         }
                         else
                         {
                             car.webhelper.is_sentry_mode = false;
                             car.CurrentJSON.current_is_sentry_mode = false;
+                            car.CurrentJSON.CreateCurrentJSON();
                         }
                         car.CurrentJSON.CreateCurrentJSON();
                     }
@@ -321,6 +326,24 @@ namespace TeslaLogger
                             car.CurrentJSON.CreateCurrentJSON();
                         }
                     }
+                    else if (key == "TimeToFullCharge")
+                    {
+                        string v = value["stringValue"];
+                        if (double.TryParse(v, out double TimeToFullCharge))
+                        {
+                            car.CurrentJSON.current_time_to_full_charge = TimeToFullCharge;
+                            car.CurrentJSON.CreateCurrentJSON();
+                        }
+                    }
+                    else if (key == "ChargeLimitSoc")
+                    {
+                        string v = value["stringValue"];
+                        if (double.TryParse(v, out double ChargeLimitSoc))
+                        {
+                            car.CurrentJSON.charge_limit_soc = (int)ChargeLimitSoc;
+                            car.CurrentJSON.CreateCurrentJSON();
+                        }
+                    }
                 }
             }
         }
@@ -328,6 +351,7 @@ namespace TeslaLogger
         private void InsertCharging(dynamic j, DateTime d, string resultContent)
         {
             double ChargingEnergyIn = double.NaN;
+            bool changed = false;
 
             using (MySqlCommand cmd = new MySqlCommand())
             {
@@ -341,7 +365,10 @@ namespace TeslaLogger
                         string v1 = value["stringValue"];
                         if (double.TryParse(v1, out ChargingEnergyIn))
                         {
+                            ChargingEnergyIn = Math.Round(ChargingEnergyIn, 2);
                             cmd.Parameters.AddWithValue("@charge_energy_added", ChargingEnergyIn);
+                            car.CurrentJSON.current_charge_energy_added = ChargingEnergyIn;
+                            changed = true;
                         }
 
                     }
@@ -350,7 +377,10 @@ namespace TeslaLogger
                         string v1 = value["stringValue"];
                         if (double.TryParse(v1, out ChargingEnergyIn))
                         {
+                            ChargingEnergyIn = Math.Round(ChargingEnergyIn, 2);
                             cmd.Parameters.AddWithValue("@charge_energy_added", ChargingEnergyIn);
+                            car.CurrentJSON.current_charge_energy_added = ChargingEnergyIn;
+                            changed = true;
                         }
                     }
                     else if (key == "Soc")
@@ -358,8 +388,12 @@ namespace TeslaLogger
                         string v1 = value["stringValue"];
                         if (double.TryParse(v1, out double Soc))
                         {
+                            Soc = Math.Round(Soc, 1);
                             lastSoc = Soc;
                             lastSocDate = d;
+
+                            car.CurrentJSON.current_battery_level = (int)lastSoc;
+                            changed = true;
                         }
                     }
                     else if (key == "ACChargingPower" && acCharging)
@@ -368,6 +402,8 @@ namespace TeslaLogger
                         if (double.TryParse(v1, out double ChargingPower))
                         {
                             lastChargingPower = ChargingPower;
+                            car.CurrentJSON.current_charger_power = (int)Math.Round(ChargingPower);
+                            changed = true;
                         }
                     }
                     else if (key == "DCChargingPower" && dcCharging)
@@ -376,6 +412,8 @@ namespace TeslaLogger
                         if (double.TryParse(v1, out double ChargingPower))
                         {
                             lastChargingPower = ChargingPower;
+                            car.CurrentJSON.current_charger_power = (int)Math.Round(ChargingPower);
+                            changed = true;
                         }
                     }
                     else if (key == "IdealBatteryRange")
@@ -385,9 +423,14 @@ namespace TeslaLogger
                         {
                             lastIdealBatteryRange = IdealBatteryRange * 1.609344;
                             car.CurrentJSON.current_ideal_battery_range_km = lastIdealBatteryRange;
-                            car.CurrentJSON.CreateCurrentJSON();
+                            changed = true;
                         }
                     }
+                }
+
+                if (changed)
+                {
+                    car.CurrentJSON.CreateCurrentJSON();
                 }
 
                 if (cmd.Parameters.Count > 0 && IsCharging)
@@ -496,9 +539,24 @@ namespace TeslaLogger
                                         longitude = -longitude;
                                     }
                                 }
-
                             }
                         }
+
+                        if (lastLatitude != latitude || lastLongitude != longitude)
+                        {
+                            if (latitude != null && longitude != null)
+                            {
+                                if (lastLatitude != 0 && lastLongitude != 0)
+                                {
+                                    double bearing = Tools.CalculateBearing(lastLatitude, lastLongitude, latitude.Value, longitude.Value);
+                                    car.CurrentJSON.heading = (int)bearing;
+                                }
+
+                                lastLatitude = latitude.Value;
+                                lastLongitude = longitude.Value;
+                            }
+                        }
+
                     }
                     else if (key == "VehicleSpeed")
                     {

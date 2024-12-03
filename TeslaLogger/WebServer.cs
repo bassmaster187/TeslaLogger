@@ -3192,23 +3192,15 @@ FROM
 
             try
             {
-                Car c = Car.Allcars.FirstOrDefault(r => r.waitForMFACode);
-                if (c != null)
+                using (DataTable dt = new DataTable())
                 {
-                    responseString = "WAITFORMFA:" + c.CarInDB;
-                }
-                else
-                {
-                    using (DataTable dt = new DataTable())
+                    using (MySqlDataAdapter da = new MySqlDataAdapter("SELECT id, display_name, tasker_hash, model_name, vin, tesla_name, tesla_carid, lastscanmytesla, freesuc, fleetAPI, needVirtualKey, needCommandPermission, needFleetAPI, access_type, virtualkey FROM cars order by display_name", DBHelper.DBConnectionstring))
                     {
-                        using (MySqlDataAdapter da = new MySqlDataAdapter("SELECT id, display_name, tasker_hash, model_name, vin, tesla_name, tesla_carid, lastscanmytesla, freesuc, fleetAPI, needVirtualKey, needCommandPermission, needFleetAPI, access_type, virtualkey FROM cars order by display_name", DBHelper.DBConnectionstring))
-                        {
-                            SQLTracer.TraceDA(dt, da);
+                        SQLTracer.TraceDA(dt, da);
 
-                            responseString = dt.Rows.Count > 0 ? Tools.DataTableToJSONWithJavaScriptSerializer(dt) : "not found!";
-                        }
-                        dt.Clear();
+                        responseString = dt.Rows.Count > 0 ? Tools.DataTableToJSONWithJavaScriptSerializer(dt) : "not found!";
                     }
+                    dt.Clear();
                 }
             }
             catch (Exception ex)
