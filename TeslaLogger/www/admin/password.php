@@ -472,7 +472,10 @@ else
 				$subscription = file_get_contents("https://teslalogger.de/stripe/subscription-check.php?vin=$vin");
 				
 				if (strpos($subscription, "current_period_end") > 0)
+				{
 					echo(GetCheckbox("1"));
+					echo("&nbsp;<a target='_blank' href='https://billing.stripe.com/p/login/8wMaGogxma56fGUdQQ'>Manage</a>");
+				}
 				else
 					echo("<a target='_blank' href='https://buy.stripe.com/9AQaHNdU33k29Vu144?client_reference_id=$vin'>Subscribe</a>");
 			}
