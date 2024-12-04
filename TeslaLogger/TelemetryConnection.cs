@@ -344,6 +344,32 @@ namespace TeslaLogger
                             car.CurrentJSON.CreateCurrentJSON();
                         }
                     }
+                    else if (key == "DestinationName")
+                    {
+                        string v = value["stringValue"];
+                        
+                        car.CurrentJSON.active_route_destination = v;
+                        car.CurrentJSON.CreateCurrentJSON();
+                        
+                    }
+                    else if (key == "MinutesToArrival")
+                    {
+                        string v = value["stringValue"];
+                        if (double.TryParse(v, out double MinutesToArrival))
+                        {
+                            car.CurrentJSON.active_route_minutes_to_arrival = (int)MinutesToArrival;
+                            car.CurrentJSON.CreateCurrentJSON();
+                        }
+                    }
+                    else if (key == "MilesToArrival")
+                    {
+                        string v = value["stringValue"];
+                        if (double.TryParse(v, out double MilesToArrival))
+                        {
+                            car.CurrentJSON.active_route_km_to_arrival = (long)(MilesToArrival * 1.609344);
+                            car.CurrentJSON.CreateCurrentJSON();
+                        }
+                    }
                 }
             }
         }

@@ -1,5 +1,7 @@
-# Version 1.59.10
-- Bugfixes
+# Version 1.59.11
+- From the beginning of 2025, Tesla will charge money for the use of FleetAPI and will probably switch off the unofficial “Owners API”. Therefore I am forced to offer a monthly subscription for Teslalogger. Please switch your Teslas to FleetAPI and take out the subscription model. We do not yet know what will happen with Model S/X before 2021. For this reason, please do not switch the old Model S/X to Fleet API. 
+- Subscription link in Settings/MyTesla
+- Show destination and eta in Admin Panel with FleetAPI
 
 # Version 1.59.9
 - Use as less commands as possible with FleetAPI
