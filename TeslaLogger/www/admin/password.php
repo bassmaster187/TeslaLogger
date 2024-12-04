@@ -428,6 +428,7 @@ else
 			<th style='text-align:center;'>Virtual Key</th>
 			<th style='text-align:center;'>Access Type</th>
 			<th style='text-align:center;'>Signal Counter</th>
+			<th style='text-align:center;'>Subscription</th>
 			<th><?php t("Edit"); ?></th>
 		</tr>
 	</thead>
@@ -459,10 +460,25 @@ else
 			echo("		<td style='text-align:center;'>$fleetAPICheckBox</td>\r\n");
 			echo("		<td style='text-align:center;'>$virtualKeyCheckBox</td>\r\n");
 			echo("		<td style='text-align:center;'>$access_type</td>\r\n");
+			
 			echo("		<td style='text-align:center;'>");
 			if ($v->{"fleetAPI"} == "1")
 				echo(file_get_contents("https://teslalogger.de:4501/SignalCounter/$vin"));
 			echo("</td>\r\n");
+
+			echo("		<td style='text-align:center;'>");
+			//if ($v->{"fleetAPI"} == "1")
+			{
+				$subscription = file_get_contents("https://teslalogger.de/stripe/subscription-check.php?vin=$vin");
+				
+				if (strpos($subscription, "current_period_end") > 0)
+					echo(GetCheckbox("1"));
+				else
+					echo("<a target='_blank' href='https://buy.stripe.com/9AQaHNdU33k29Vu144?client_reference_id=$vin'>Subscribe</a>");
+			}
+			echo("</td>\r\n");
+
+
 			echo("		<td><a href='password.php?id=$id&vin=$vin'>");
 			echo t("Edit");
 			echo("</a></td>\r\n");
