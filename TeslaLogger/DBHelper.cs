@@ -3253,7 +3253,7 @@ LIMIT 1", con)
 
                             if (dr["battery_level"] != DBNull.Value)
                             {
-                                car.CurrentJSON.current_battery_level = Convert.ToInt32(dr["battery_level"], Tools.ciEnUS);
+                                car.CurrentJSON.current_battery_level = Convert.ToDouble(dr["battery_level"], Tools.ciEnUS);
                             }
 
                             if (dr["lat"] != DBNull.Value)
@@ -4981,7 +4981,7 @@ VALUES(
             {
                 if (Convert.ToInt32(battery_level, Tools.ciEnUS) >= 0)
                 {
-                    car.CurrentJSON.current_battery_level = Convert.ToInt32(battery_level, Tools.ciEnUS);
+                    car.CurrentJSON.current_battery_level = Convert.ToDouble(battery_level, Tools.ciEnUS);
                 }
 
                 car.CurrentJSON.current_charge_energy_added = Convert.ToDouble(charge_energy_added, Tools.ciEnUS);

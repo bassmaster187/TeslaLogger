@@ -25,7 +25,7 @@ namespace TeslaLogger
         public double current_ideal_battery_range_km; // defaults to 0
         public double current_battery_range_km; // defaults to 0
         public double current_outside_temperature; // defaults to 0
-        public int current_battery_level; // defaults to 0
+        public double current_battery_level; // defaults to 0
 
         public int current_charger_voltage; // defaults to 0
         public int current_charger_phases; // defaults to 0
@@ -34,7 +34,7 @@ namespace TeslaLogger
         public int current_charger_actual_current_calc; // defaults to 0
         public int current_charge_current_request; // defaults to 0
         public double current_charge_energy_added; // defaults to 0
-        public int current_charger_power; // defaults to 0
+        public double current_charger_power; // defaults to 0
         public int current_charger_power_calc_w; // defaults to 0
         public double current_charge_rate_km; // defaults to 0
         public double current_time_to_full_charge; // defaults to 0

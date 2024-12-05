@@ -428,7 +428,7 @@ namespace TeslaLogger
                         if (double.TryParse(v1, out double ChargingPower))
                         {
                             lastChargingPower = ChargingPower;
-                            car.CurrentJSON.current_charger_power = (int)Math.Round(ChargingPower);
+                            car.CurrentJSON.current_charger_power = Math.Round(ChargingPower, 2);
                             changed = true;
                         }
                     }
@@ -438,7 +438,7 @@ namespace TeslaLogger
                         if (double.TryParse(v1, out double ChargingPower))
                         {
                             lastChargingPower = ChargingPower;
-                            car.CurrentJSON.current_charger_power = (int)Math.Round(ChargingPower);
+                            car.CurrentJSON.current_charger_power = Math.Round(ChargingPower, 2);
                             changed = true;
                         }
                     }
