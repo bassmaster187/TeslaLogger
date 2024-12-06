@@ -4561,7 +4561,7 @@ WHERE
 
         int last_active_route_energy_at_arrival = int.MinValue;
 
-        public int InsertPos(string timestamp, double latitude, double longitude, int speed, decimal? power, double? odometer, double idealBatteryRangeKm, double batteryRangeKm, int batteryLevel, double? outsideTemp, string altitude)
+        public int InsertPos(string timestamp, double latitude, double longitude, int speed, decimal? power, double? odometer, double idealBatteryRangeKm, double batteryRangeKm, double batteryLevel, double? outsideTemp, string altitude)
         {
             int posid = 0;
             double? inside_temp = car.CurrentJSON.current_inside_temperature;

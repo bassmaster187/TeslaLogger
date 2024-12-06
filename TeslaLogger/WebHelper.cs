@@ -3446,7 +3446,7 @@ namespace TeslaLogger
                         elevation = "";
                     }
 
-                    double ideal_battery_range_km = GetIdealBatteryRangekm(out int battery_level, out double battery_range_km);
+                    double ideal_battery_range_km = GetIdealBatteryRangekm(out double battery_level, out double battery_range_km);
 
                     if (t_outside_temp != null)
                     {
@@ -3888,7 +3888,7 @@ namespace TeslaLogger
             }
             if (int.TryParse(speed, out int ispeed) // speed in mph
                 && double.TryParse(odometer, out double dodometer) // odometer in miles
-                && int.TryParse(soc, out int isoc)
+                && double.TryParse(soc, out double isoc)
                 && double.TryParse(est_lat, NumberStyles.Any, CultureInfo.InvariantCulture, out double latitude)
                 && double.TryParse(est_lng, NumberStyles.Any, CultureInfo.InvariantCulture, out double longitude)
                 && decimal.TryParse(power, out decimal dpower) // power in kW
@@ -4591,7 +4591,7 @@ DESC", con))
             }
         }
 
-        private double GetIdealBatteryRangekm(out int battery_level, out double battery_range_km)
+        private double GetIdealBatteryRangekm(out double battery_level, out double battery_range_km)
         {
             string resultContent = "";
             battery_level = -1;
