@@ -3,6 +3,10 @@ function ShowInfo()
 {
     <?php
     $fileinfofleetapi = "/tmp/fleetapiinfo".date("Y-m-d").".txt";
+	$prefix = "/etc/teslalogger/";
+    if (isDocker())
+		$prefix = "/tmp/";
+
     if (!file_exists($fileinfofleetapi))
     {
         file_put_contents($fileinfofleetapi, ''); 
@@ -20,12 +24,7 @@ function ShowInfo()
 
         <?php
     }
-
-	$prefix = "/etc/teslalogger/";
-    if (isDocker())
-		$prefix = "/tmp/";
-
-	if (file_exists($prefix."cmd_gosleep_$carid.txt"))
+	else if (file_exists($prefix."cmd_gosleep_$carid.txt"))
 	{?>
 		$("#InfoText").html("<h1><?php t("TextSuspendTeslalogger"); ?></h1>");
 		$(".HeaderT").show();
