@@ -29,7 +29,20 @@ namespace TeslaLogger
 
         private bool driving;
         private bool _acCharging;
-        private bool dcCharging;
+        internal bool dcCharging
+        {
+            get => _dcCharging;
+            set
+            {
+                if (_dcCharging != value)
+                {
+                    car.CurrentJSON.current_fast_charger_present = value;
+                    car.CurrentJSON.CreateCurrentJSON();
+                }
+                _dcCharging = value;
+            }
+        }
+        private bool _dcCharging;
 
         public DateTime lastDriving = DateTime.MinValue;
         public DateTime lastMessageReceived = DateTime.MinValue;

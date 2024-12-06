@@ -15,6 +15,7 @@ using Exceptionless;
 using Newtonsoft.Json;
 using System.Diagnostics;
 using System.Data.Common;
+using ZstdSharp.Unsafe;
 
 namespace TeslaLogger
 {
@@ -3315,6 +3316,9 @@ LIMIT 1", con)
                 UpdatePosFromCurrentJSON(posid);
             }
 
+            bool fast_charger_present = wh.fast_charger_present;
+            if (car.telemetry?.dcCharging == true)
+                fast_charger_present = true;
 
             int chargeID = GetMaxChargeid(out DateTime chargeStart);
             long chargingstateid = 0;
@@ -3359,7 +3363,7 @@ VALUES(
                         cmd.Parameters.AddWithValue("@fast_charger_brand", wh.fast_charger_brand);
                         cmd.Parameters.AddWithValue("@fast_charger_type", wh.fast_charger_type);
                         cmd.Parameters.AddWithValue("@conn_charge_cable", wh.conn_charge_cable);
-                        cmd.Parameters.AddWithValue("@fast_charger_present", wh.fast_charger_present);
+                        cmd.Parameters.AddWithValue("@fast_charger_present",fast_charger_present);
                         cmd.Parameters.AddWithValue("@meter_vehicle_kwh_start", meter_vehicle_kwh_start);
                         cmd.Parameters.AddWithValue("@meter_utility_kwh_start", meter_utility_kwh_start);
                         cmd.Parameters.AddWithValue("@wheel_type", wh.car.wheel_type);
