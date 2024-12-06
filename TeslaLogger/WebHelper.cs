@@ -1669,7 +1669,7 @@ namespace TeslaLogger
                     ideal_battery_range = battery_range;
                 }
 
-                car.CurrentJSON.current_ideal_battery_range_km = (double)ideal_battery_range * 1.609344;
+                car.CurrentJSON.current_ideal_battery_range_km = Math.Round((double)ideal_battery_range * 1.609344, 1);
 
                 string battery_level = charge_state["battery_level"].ToString();
                 if (battery_level != null && Convert.ToDouble(battery_level) != car.CurrentJSON.current_battery_level)
@@ -3446,7 +3446,7 @@ namespace TeslaLogger
                         elevation = "";
                     }
 
-                    double ideal_battery_range_km = GetIdealBatteryRangekm(out int battery_level, out double battery_range_km);
+                    double ideal_battery_range_km = GetIdealBatteryRangekm(out double battery_level, out double battery_range_km);
 
                     if (t_outside_temp != null)
                     {
@@ -3888,7 +3888,7 @@ namespace TeslaLogger
             }
             if (int.TryParse(speed, out int ispeed) // speed in mph
                 && double.TryParse(odometer, out double dodometer) // odometer in miles
-                && int.TryParse(soc, out int isoc)
+                && double.TryParse(soc, out double isoc)
                 && double.TryParse(est_lat, NumberStyles.Any, CultureInfo.InvariantCulture, out double latitude)
                 && double.TryParse(est_lng, NumberStyles.Any, CultureInfo.InvariantCulture, out double longitude)
                 && decimal.TryParse(power, out decimal dpower) // power in kW
@@ -3896,9 +3896,9 @@ namespace TeslaLogger
             {
                 // speed is converted by InsertPos
                 // power is converted by InsertPos
-                double dodometer_km = Tools.MlToKm(dodometer);
+                double dodometer_km = Tools.MlToKm(dodometer, 3);
                 // battery_range_km = range in ml to km
-                double battery_range_km = Tools.MlToKm(irange);
+                double battery_range_km = Tools.MlToKm(irange, 1);
                 // ideal_battery_range_km = ideal_battery_range_km * car specific factor
                 double ideal_battery_range_km = battery_range_km * battery_range2ideal_battery_range;
                 double? outside_temp = car.CurrentJSON.current_outside_temperature;
@@ -4591,7 +4591,7 @@ DESC", con))
             }
         }
 
-        private double GetIdealBatteryRangekm(out int battery_level, out double battery_range_km)
+        private double GetIdealBatteryRangekm(out double battery_level, out double battery_range_km)
         {
             string resultContent = "";
             battery_level = -1;
@@ -4629,7 +4629,7 @@ DESC", con))
 
                 if (r2["battery_range"] != null)
                 {
-                    battery_range_km = Convert.ToDouble(r2["battery_range"]) / (double)0.62137;
+                    battery_range_km = Tools.MlToKm(Convert.ToDouble(r2["battery_range"]), 1);
                 }
 
                 if (r2["battery_level"] != null)
@@ -4638,7 +4638,7 @@ DESC", con))
                     car.CurrentJSON.current_battery_level = battery_level;
                 }
                 battery_range2ideal_battery_range = (double)ideal_battery_range / Convert.ToDouble(r2["battery_range"]);
-                return (double)ideal_battery_range / (double)0.62137;
+                return Tools.MlToKm((double)ideal_battery_range, 1);
             }
             catch (Exception ex)
             {
@@ -4702,7 +4702,7 @@ DESC", con))
                     return lastOdometerKM;
                 }
 
-                decimal odometer = (decimal)vehicle_state["odometer"];
+                double odometer = (double)vehicle_state["odometer"];
 
 
                 try
@@ -4724,8 +4724,7 @@ DESC", con))
                     Log(ex.ToString());
                 }
 
-                decimal odometerKM = odometer / 0.62137M;
-                lastOdometerKM = (double)odometerKM;
+                lastOdometerKM = Tools.MlToKm(odometer, 3);
                 return lastOdometerKM;
             }
             catch (Exception ex)

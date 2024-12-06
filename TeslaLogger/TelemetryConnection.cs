@@ -431,7 +431,7 @@ namespace TeslaLogger
                             lastSoc = Soc;
                             lastSocDate = d;
 
-                            car.CurrentJSON.current_battery_level = (int)lastSoc;
+                            car.CurrentJSON.current_battery_level = lastSoc;
                             changed = true;
                         }
                     }
@@ -460,7 +460,7 @@ namespace TeslaLogger
                         string v1 = value["stringValue"];
                         if (double.TryParse(v1, out double IdealBatteryRange))
                         {
-                            lastIdealBatteryRange = IdealBatteryRange * 1.609344;
+                            lastIdealBatteryRange = Tools.MlToKm(IdealBatteryRange, 1);
                             car.CurrentJSON.current_ideal_battery_range_km = lastIdealBatteryRange;
                             changed = true;
                         }
@@ -470,7 +470,7 @@ namespace TeslaLogger
                         string v1 = value["stringValue"];
                         if (double.TryParse(v1, out double RatedRange))
                         {
-                            lastRatedRange = RatedRange * 1.609344;
+                            lastRatedRange = Tools.MlToKm(RatedRange, 1);
                             car.CurrentJSON.current_battery_range_km = lastRatedRange;
                             changed = true;
                         }
@@ -556,7 +556,7 @@ namespace TeslaLogger
                         if (v != null)
                         {
                             if (double.TryParse(v, out double Odometer))
-                                lastOdometer = Odometer * 1.609344;
+                                lastOdometer = Tools.MlToKm(Odometer, 3);
                         }
                     }
                     else if (key == "Location")
@@ -642,7 +642,7 @@ namespace TeslaLogger
 
                     long ts= (long)(d.ToUniversalTime().Subtract(new DateTime(1970, 1, 1))).TotalSeconds*1000;
                     Log("Insert Location" + (force ? " Force" : ""));
-                    lastposid = car.DbHelper.InsertPos(ts.ToString(), latitude.Value, longitude.Value, (int)speed.Value, null, lastOdometer, lastIdealBatteryRange, lastRatedRange, (int)lastSoc, lastOutsideTemp, "");
+                    lastposid = car.DbHelper.InsertPos(ts.ToString(), latitude.Value, longitude.Value, (int)speed.Value, null, lastOdometer, lastIdealBatteryRange, lastRatedRange, lastSoc, lastOutsideTemp, "");
                 }
             }
             catch (Exception ex)
@@ -1210,7 +1210,7 @@ namespace TeslaLogger
         {
             long ts = (long)(date.ToUniversalTime().Subtract(new DateTime(1970, 1, 1))).TotalSeconds * 1000;
             
-            lastposid = car.DbHelper.InsertPos(ts.ToString(), lastLatitude, lastLongitude, speed, null, lastOdometer, lastIdealBatteryRange, lastRatedRange, (int)lastSoc, lastOutsideTemp, "");
+            lastposid = car.DbHelper.InsertPos(ts.ToString(), lastLatitude, lastLongitude, speed, null, lastOdometer, lastIdealBatteryRange, lastRatedRange, lastSoc, lastOutsideTemp, "");
             Log($"InsertFirstPos {date} ID: {lastposid}");
         }
 
