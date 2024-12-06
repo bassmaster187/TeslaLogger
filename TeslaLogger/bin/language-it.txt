@@ -507,7 +507,7 @@ Fehler="Allarmi"
 Trip Top Ziele="Destinazioni top dei miei viaggi"
 Ladekosten="Costi di ricarica"
 kWh laut Zähler / Rechnung="KWh come da contatore o fattura"
-BA_FLEETAPI="API Tesla Fleet (Utilizzabili solo per veicoli costruiti dopo Novembre 2023!!!)"
+BA_FLEETAPI="API Tesla Fleet"
 
 #password_fleet.php
 PF_LOGOUT="Sconnettiti dall'account Tesal, in caso non l'avessi ancora fatto"
