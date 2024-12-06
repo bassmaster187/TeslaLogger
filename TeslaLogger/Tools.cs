@@ -2168,7 +2168,7 @@ WHERE
 
         internal static double MlToKm(double miles, int decimals = 3)
         {
-            return Math.Round(miles / 0.62137119223733, decimals);
+            return Math.Round(miles * 1.609344, decimals);
         }
     }
 
