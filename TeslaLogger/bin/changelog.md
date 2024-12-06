@@ -1,3 +1,6 @@
+# Version 1.59.13
+- Bugfixes
+
 # Version 1.59.12
 - Daily info on admin panel about the need to migrate to Fleet API and the subscription model
 - Bugfixes for charging state detection with Fleet API / more signals
