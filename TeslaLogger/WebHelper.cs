@@ -1939,7 +1939,7 @@ namespace TeslaLogger
                     System.Diagnostics.Debug.WriteLine(DateTime.Now.ToString() + " : " + OnlineState);
 
                     string display_name = r2["display_name"].ToString();
-                    if (car.DisplayName != display_name)
+                    if (!string.IsNullOrEmpty(display_name) && car.DisplayName != display_name)
                     {
                         car.DisplayName = display_name;
                         Log("WriteCarSettings -> Display_Name");
