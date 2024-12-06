@@ -1672,9 +1672,9 @@ namespace TeslaLogger
                 car.CurrentJSON.current_ideal_battery_range_km = (double)ideal_battery_range * 1.609344;
 
                 string battery_level = charge_state["battery_level"].ToString();
-                if (battery_level != null && Convert.ToInt32(battery_level) != car.CurrentJSON.current_battery_level)
+                if (battery_level != null && Convert.ToDouble(battery_level) != car.CurrentJSON.current_battery_level)
                 {
-                    car.CurrentJSON.current_battery_level = Convert.ToInt32(battery_level);
+                    car.CurrentJSON.current_battery_level = Convert.ToDouble(battery_level);
                     car.CurrentJSON.CreateCurrentJSON();
                 }
                 string charger_power = "";
@@ -4634,7 +4634,7 @@ DESC", con))
 
                 if (r2["battery_level"] != null)
                 {
-                    battery_level = Convert.ToInt32(r2["battery_level"]);
+                    battery_level = Convert.ToDouble(r2["battery_level"]);
                     car.CurrentJSON.current_battery_level = battery_level;
                 }
                 battery_range2ideal_battery_range = (double)ideal_battery_range / Convert.ToDouble(r2["battery_range"]);
@@ -5577,7 +5577,7 @@ DESC", con))
             car.Log(text);
         }
 
-        internal async Task SendDataToAbetterrouteplannerAsync(long utc, int soc, double speed_mph, bool is_charging, double power, double lat, double lon)
+        internal async Task SendDataToAbetterrouteplannerAsync(long utc, double soc, double speed_mph, bool is_charging, double power, double lat, double lon)
         {
             try
             {
