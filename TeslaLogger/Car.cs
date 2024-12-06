@@ -627,9 +627,7 @@ namespace TeslaLogger
                 int SleepPosition = ApplicationSettings.Default.SleepPosition;
                 if (FleetAPI)
                 {
-                    SleepPosition = Tools.CalculateSleepSeconds(300, webhelper.commandCounter, DateTime.UtcNow) * 1000;
-                    SleepPosition = Math.Max(30000, SleepPosition);
-                    Log("Drive Sleep " + SleepPosition);
+                    SleepPosition = 5000;
                 }
                 else
                     SleepPosition = Math.Max(20000, SleepPosition);

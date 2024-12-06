@@ -56,6 +56,7 @@ namespace TeslaLogger
 
         double lastLatitude = 0;
         double lastLongitude = 0;
+        private double lastRatedRange;
 
         void Log(string message)
         {
@@ -123,6 +124,7 @@ namespace TeslaLogger
             lastIdealBatteryRange = car.CurrentJSON.current_ideal_battery_range_km;
             lastSoc = car.CurrentJSON.current_battery_level;
             lastOdometer = car.CurrentJSON.current_odometer;
+            lastRatedRange = car.CurrentJSON.current_battery_range_km;
 
             t = new Thread(() => { Run(); });
             t.Start();
@@ -370,6 +372,17 @@ namespace TeslaLogger
                             car.CurrentJSON.CreateCurrentJSON();
                         }
                     }
+                    else if (key == "BatteryHeaterOn")
+                    {
+                        /*
+                        string v = value["stringValue"];
+                        if (bool.TryParse(v, out bool BatteryHeaterOn))
+                        {
+                            car.CurrentJSON.current_battery_heater = BatteryHeaterOn;
+                            car.CurrentJSON.CreateCurrentJSON();
+                        }
+                        */
+                    }
                 }
             }
         }
@@ -452,6 +465,16 @@ namespace TeslaLogger
                             changed = true;
                         }
                     }
+                    else if (key == "RatedRange")
+                    {
+                        string v1 = value["stringValue"];
+                        if (double.TryParse(v1, out double RatedRange))
+                        {
+                            lastRatedRange = RatedRange * 1.609344;
+                            car.CurrentJSON.current_battery_range_km = lastRatedRange;
+                            changed = true;
+                        }
+                    }
                 }
 
                 if (changed)
@@ -461,46 +484,54 @@ namespace TeslaLogger
 
                 if (cmd.Parameters.Count > 0 && IsCharging)
                 {
-                    cmd.Parameters.AddWithValue("@battery_level", lastSoc);
-
-                    cmd.Parameters.AddWithValue("@charger_power", lastChargingPower);
-                    cmd.Parameters.AddWithValue("@ideal_battery_range_km", lastIdealBatteryRange);
-
-                    cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
-                    cmd.Parameters.AddWithValue("@Datum", d);
-
-                    var sb = new StringBuilder("insert into charging (");
-                    var sbc = new StringBuilder(") values (");
-                    var names = cmd.Parameters.Cast<MySqlParameter>()
-                        .Select(p => p.ParameterName.Substring(1))
-                        .ToArray();
-                    sb.Append(string.Join(", ", names));
-
-                    var values = cmd.Parameters.Cast<MySqlParameter>()
-                        .Select(p => p.ParameterName)
-                        .ToArray();
-                    sbc.Append(string.Join(", ", values));
-                    sbc.Append(")");
-
-                    sb.Append(sbc);
-
-                    sb.Append("\n ON DUPLICATE KEY UPDATE ");
-                    var update = cmd.Parameters.Cast<MySqlParameter>()
-                        .Where(w => w.ParameterName != "@CarID" && w.ParameterName != "@Datum")
-                        .Select(p => p.ParameterName.Substring(1) + "=" + p.ParameterName)
-                        .ToArray();
-
-                    sb.Append(string.Join(", ", update));
-                    cmd.CommandText = sb.ToString();
-
-                    using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
-                    {
-                        con.Open();
-                        cmd.Connection = con;
-                        cmd.ExecuteNonQuery();
-                        Log($"Insert Charging TR: {lastIdealBatteryRange}km");
-                    }
+                    InsertCharging(d, cmd);
                 }
+            }
+        }
+
+        private void InsertCharging(DateTime d, MySqlCommand cmd)
+        {
+            cmd.Parameters.AddWithValue("@battery_level", lastSoc);
+
+            cmd.Parameters.AddWithValue("@charger_power", lastChargingPower);
+            cmd.Parameters.AddWithValue("@ideal_battery_range_km", lastIdealBatteryRange);
+            cmd.Parameters.AddWithValue("@battery_range_km", lastRatedRange);
+            cmd.Parameters.AddWithValue("@outside_temp", lastOutsideTemp);
+            cmd.Parameters.AddWithValue("@battery_heater", car.CurrentJSON.current_battery_heater);
+
+            cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
+            cmd.Parameters.AddWithValue("@Datum", d);
+
+            var sb = new StringBuilder("insert into charging (");
+            var sbc = new StringBuilder(") values (");
+            var names = cmd.Parameters.Cast<MySqlParameter>()
+                .Select(p => p.ParameterName.Substring(1))
+                .ToArray();
+            sb.Append(string.Join(", ", names));
+
+            var values = cmd.Parameters.Cast<MySqlParameter>()
+                .Select(p => p.ParameterName)
+                .ToArray();
+            sbc.Append(string.Join(", ", values));
+            sbc.Append(")");
+
+            sb.Append(sbc);
+
+            sb.Append("\n ON DUPLICATE KEY UPDATE ");
+            var update = cmd.Parameters.Cast<MySqlParameter>()
+                .Where(w => w.ParameterName != "@CarID" && w.ParameterName != "@Datum")
+                .Select(p => p.ParameterName.Substring(1) + "=" + p.ParameterName)
+                .ToArray();
+
+            sb.Append(string.Join(", ", update));
+            cmd.CommandText = sb.ToString();
+
+            using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+            {
+                con.Open();
+                cmd.Connection = con;
+                cmd.ExecuteNonQuery();
+                Log($"Insert Charging TR: {lastIdealBatteryRange}km");
             }
         }
 
@@ -611,7 +642,7 @@ namespace TeslaLogger
 
                     long ts= (long)(d.ToUniversalTime().Subtract(new DateTime(1970, 1, 1))).TotalSeconds*1000;
                     Log("Insert Location" + (force ? " Force" : ""));
-                    lastposid = car.DbHelper.InsertPos(ts.ToString(), latitude.Value, longitude.Value, (int)speed.Value, null, lastOdometer, lastIdealBatteryRange, -1, (int)lastSoc, lastOutsideTemp, "");
+                    lastposid = car.DbHelper.InsertPos(ts.ToString(), latitude.Value, longitude.Value, (int)speed.Value, null, lastOdometer, lastIdealBatteryRange, lastRatedRange, (int)lastSoc, lastOutsideTemp, "");
                 }
             }
             catch (Exception ex)
@@ -894,6 +925,7 @@ namespace TeslaLogger
                                         if (current > 2)
                                         {
                                             Log($"AC Charging  {current}A ***");
+                                            InsertFirstCharging(date);
                                             InsertLocation(j, date, resultContent, true);
                                             acCharging = true;
                                         }
@@ -907,7 +939,7 @@ namespace TeslaLogger
                                         if (current > 5)
                                         {
                                             Log($"DC Charging ***");
-
+                                            InsertFirstCharging(date);
                                             InsertLocation(j, date, resultContent, true);
                                             dcCharging = true;
                                         }
@@ -966,6 +998,17 @@ namespace TeslaLogger
             {
                 Log("Telemetry Error: " + ex.ToString());
                 car.CreateExceptionlessClient(ex).AddObject(resultContent, "ResultContent").Submit();
+            }
+        }
+
+        private void InsertFirstCharging(DateTime date)
+        {
+            Log("InsertFirstCharging " + date.ToString());
+
+            using (MySqlCommand cmd = new MySqlCommand())
+            {
+                cmd.Parameters.AddWithValue("@charge_energy_added", 0);
+                InsertCharging(date, cmd);
             }
         }
 
@@ -1049,6 +1092,7 @@ namespace TeslaLogger
                                     if (!Driving)
                                     {
                                         Log("Driving ***");
+                                        InsertFirstPos(date, 0);
                                         Driving = true;
                                     }
                                 }
@@ -1082,6 +1126,7 @@ namespace TeslaLogger
                                         if (!Driving)
                                         {
                                             Log("Driving by speed ***");
+                                            InsertFirstPos(date, (int)speed);
                                             Driving = true;
                                         }
                                     }
@@ -1159,6 +1204,14 @@ namespace TeslaLogger
                 car.CreateExceptionlessClient(ex).AddObject(resultContent, "ResultContent").Submit();
             }
 
+        }
+
+        private void InsertFirstPos(DateTime date, int speed)
+        {
+            long ts = (long)(date.ToUniversalTime().Subtract(new DateTime(1970, 1, 1))).TotalSeconds * 1000;
+            
+            lastposid = car.DbHelper.InsertPos(ts.ToString(), lastLatitude, lastLongitude, speed, null, lastOdometer, lastIdealBatteryRange, lastRatedRange, (int)lastSoc, lastOutsideTemp, "");
+            Log($"InsertFirstPos {date} ID: {lastposid}");
         }
 
         internal double? PackCurrent(dynamic o, DateTime date)
