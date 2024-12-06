@@ -4838,8 +4838,8 @@ WHERE
                 charger_phases = "1";
             }
 
-            double kmIdeal_Battery_Range = ideal_battery_range / (double)0.62137;
-            double kmBattery_Range = battery_range / (double)0.62137;
+            double kmIdeal_Battery_Range = Tools.MlToKm(ideal_battery_range, 1);
+            double kmBattery_Range = Tools.MlToKm(battery_range, 1);
 
             double powerkW = Convert.ToDouble(charger_power, Tools.ciEnUS);
 
