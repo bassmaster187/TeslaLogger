@@ -1,5 +1,5 @@
-# Version 1.59.14
-- Bugfixes
+# Version 1.60.0
+- Stable version
 
 # Version 1.59.12
 - Daily info on admin panel about the need to migrate to Fleet API and the subscription model
