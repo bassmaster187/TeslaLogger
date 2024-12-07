@@ -83,8 +83,9 @@ namespace TeslaLogger
                 if (driving)
                 {
                     var ts = DateTime.Now - lastDriving;
-                    if (ts.TotalMinutes > 10)
+                    if (ts.TotalMinutes > 30)
                     {
+                        Log("Stop Driving by timeout 30 minutes ***");
                         driving = false;
                         Log("Parking time: " + lastDriving.ToString());
                         return false;
@@ -206,9 +207,18 @@ namespace TeslaLogger
                     else if (ex.InnerException?.InnerException is System.Net.Sockets.SocketException se)
                     {
                         Log(se.Message);
+                        car.CreateExceptionlessClient(ex.InnerException).Submit();
+                    }
+                    else if (ex.InnerException?.InnerException != null)
+                    {
+                        Log(ex.InnerException.Message);
+                        car.CreateExceptionlessClient(ex.InnerException).Submit();
                     }
                     else
-                        Log("Telemetry Exception: " + ex.ToString());                    
+                    {
+                        Log("Telemetry Exception: " + ex.ToString());
+                        car.CreateExceptionlessClient(ex).Submit();
+                    }
 
                     var s = r.Next(30000, 60000);
                     Thread.Sleep(s);
@@ -1312,7 +1322,11 @@ namespace TeslaLogger
                 if (ex is AggregateException ex2)
                 {
                     Log("Connect to Telemetry Server Error: " + ex2.InnerException.Message);
-                    car.CreateExceptionlessClient(ex2).Submit();
+                    if (ex.InnerException != null)
+                        car.CreateExceptionlessClient(ex2.InnerException).Submit();
+                    else
+                        car.CreateExceptionlessClient(ex2).Submit();
+
                     Thread.Sleep(60000);
                 }
                 else
