@@ -436,7 +436,7 @@ else
 			<th style='text-align:center;'><?php t("Free SUC"); ?></th>
 			<th style='text-align:center;'>Fleet API</th>
 			<th style='text-align:center;'>Virtual Key</th>
-			<th style='text-align:center;'>Access Type</th>
+			<!-- <th style='text-align:center;'>Access Type</th> -->
 			<th style='text-align:center;'>Signal Counter</th>
 			<th style='text-align:center;'>Subscription</th>
 			<th><?php t("Edit"); ?></th>
@@ -469,7 +469,7 @@ else
 			echo("		<td style='text-align:center;'>$freesuccheckbox</td>\r\n");
 			echo("		<td style='text-align:center;'>$fleetAPICheckBox</td>\r\n");
 			echo("		<td style='text-align:center;'>$virtualKeyCheckBox</td>\r\n");
-			echo("		<td style='text-align:center;'>$access_type</td>\r\n");
+			// echo("		<td style='text-align:center;'>$access_type</td>\r\n");
 			
 			echo("		<td style='text-align:center;'>");
 			if ($v->{"fleetAPI"} == "1")
