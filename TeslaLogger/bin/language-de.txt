@@ -138,10 +138,8 @@ BA_FillOut=Bitte ausfüllen:
 BA_CopyUrl="Kopieren Sie die angezeigte URL"
 BA_Paste="Die URL hier einfügen und auf "_QQ_"Tokens holen"_QQ_" klicken:"
 BA_FLEETAPI="Tesla Fleet API"
-
 BA_ALLCARS="Alle Fahrzeuge außer Model S/X vor Baujahr 2021"
 BA_MODELSXOLD="Model S/X vor Baujahr 2021"
-
 Get Tokens=Tokens holen
 Access Token=Access Token
 Refresh Token="Refresh Token"
@@ -174,7 +172,7 @@ PF_HELP=Hilfsvideo
 PF_PERMISSION=Info. Welche Rechte werden verwendet und weshalb
 PF_LINK=LINK
 PF_OLDSX=Wenn Sie ein älteres Tesla Model S/X vor 2021 haben, sind Sie fertig und können zurück zur Startseite
-PF_VKEY=Andernfalls richten Sie einen virtuellen Schlüssel eines Drittanbieters ein
+PF_VKEY="Richten Sie einen virtuellen Schlüssel eines Drittanbieters ein"
 
 #changecarname.php
 CarNameTitle=Name des Autos ändern
