@@ -164,6 +164,9 @@ Unauthorized=Nicht autorisiert
 This isn't a valid URL!="Ungültige URL!"
 This isn't an auth link by Tesla!="Dies ist kein Autorisierungslink von Tesla!"
 The URL doesn't contain the expected format!="Die URL ist nicht im erwarteten Format!"
+Subscription="Abo"
+Subscribe="Abo abschließen"
+SubscribeManage="Abo verwalten"
 
 #password_fleet.php
 PF_LOGOUT="Melden Sie sich von Ihrem Tesla-Konto ab, wenn Sie bereits eingeloggt sind"
