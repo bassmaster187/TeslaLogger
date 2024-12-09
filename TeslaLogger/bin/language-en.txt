@@ -262,6 +262,9 @@ BA_CopyUrl="Copy the resulting URL as shown"
 BA_Paste="Paste the resulting URL into the box and click "_QQ_"Get Tokens"_QQ_" Button:"
 BA_FLEETAPI="Tesla Fleet API"
 Get Tokens=Get Tokens
+Subscription="Subscription"
+Subscribe="Subscribe"
+SubscribeManage="Manage"
 
 #password_fleet.php
 PF_LOGOUT="Log out from your Tesla account if logged in already"
