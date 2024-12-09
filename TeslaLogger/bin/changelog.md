@@ -1,3 +1,6 @@
+# Version 1.60.2
+- don't use nearby_charging_sites anymore in fleet api because it is a paid feature
+
 # Version 1.60.1
 - You can rename your cars in the admin panel / settings / my Tesla Credentials. Useful if Tesla API has overwritten an empty name or for old cars without access anymore. The name will be used in the Grafana dashboards and in the MQTT topics.
 

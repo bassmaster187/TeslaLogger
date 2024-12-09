@@ -75,6 +75,7 @@ namespace TeslaLogger
                    || car.GetCurrentState() == Car.TeslaState.Online)
                    && car.CurrentJSON.current_falling_asleep == false)
                     {
+                        /* nearby charging sites is a paid pricing category: https://developer.tesla.com/docs/fleet-api/endpoints/vehicle-endpoints#nearby-charging-sites
                         string result = string.Empty;
                         try
                         {
@@ -96,6 +97,7 @@ namespace TeslaLogger
                             Tools.DebugLog($"NearbySuCService.Work: result {new Tools.JsonFormatter(result).Format()}");
                             Tools.DebugLog("NearbySuCService.Work: Exception", ex);
                         }
+                        */
                     }
                     continue;
                 }
