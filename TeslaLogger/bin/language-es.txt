@@ -558,3 +558,4 @@ INFO_FLEETAPI="A partir del 1 de enero de 2025, Tesla pasará de la API oficial 
 CarName="Nuevo nombre"
 CarNameTitle="Cambiar el nombre del coche"
 TextCarName="Puedes cambiar el nombre del coche aquí"
+PF_SUBSCRIPTION="Suscríbete para recibir datos de Tesla"
