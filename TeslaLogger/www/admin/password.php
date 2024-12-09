@@ -462,7 +462,7 @@ else
 
 			echo("	<tr>\r\n");
 			echo("		<td>$id</td>\r\n");
-			echo("		<td>$display_name</td>\r\n");
+			echo("		<td>$display_name <a href='changecarname.php?carid=$id'>&#9998</a></td>\r\n");
 			echo("		<td>$car</td>\r\n");
 			echo("		<td>$vin</td>\r\n");
 			echo("		<td>$tasker_token</td>\r\n");

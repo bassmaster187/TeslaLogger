@@ -344,6 +344,12 @@ namespace TeslaLogger
                     case bool _ when Regex.IsMatch(request.Url.LocalPath, @"/captchapic/[0-9]+"):
                         CaptchaPic(request, response);
                         break;
+                    case bool _ when Regex.IsMatch(request.Url.LocalPath, @"/carname/[0-9]+/info"):
+                        CarName_Info(request, response);
+                        break;
+                    case bool _ when Regex.IsMatch(request.Url.LocalPath, @"/carname/[0-9]+/set"):
+                        CarName_Set(request, response);
+                        break;
                     case bool _ when Regex.IsMatch(request.Url.LocalPath, @"/abrp/[0-9]+/info"):
                         ABRP_Info(request, response);
                         break;
@@ -1574,6 +1580,61 @@ DROP TABLE chargingstate_bak";
             }
         }
 
+        private static void CarName_Set(HttpListenerRequest request, HttpListenerResponse response)
+        {
+            Match m = Regex.Match(request.Url.LocalPath, @"/carname/([0-9]+)/set");
+            if (m.Success && m.Groups.Count == 2 && m.Groups[1].Captures.Count == 1)
+            {
+                _ = int.TryParse(m.Groups[1].Captures[0].ToString(), out int CarID);
+                Car car = Car.GetCarByID(CarID);
+                if (car != null)
+                {
+                    string data = GetDataFromRequestInputStream(request);
+                    string car_name = "";
+
+                    if (String.IsNullOrEmpty(data))
+                    {
+                        car_name = request.QueryString["car_name"];
+                    }
+                    else
+                    {
+                        dynamic r = JsonConvert.DeserializeObject(data);
+                        car_name = r["car_name"];
+                    }
+
+                    if (!car.DbHelper.SetCarName(car_name))
+                        WriteString(response, "Wrong car name!");
+                    else
+                        WriteString(response, "OK");
+
+                    return;
+                }
+            }
+            WriteString(response, "");
+        }
+
+        private static void CarName_Info(HttpListenerRequest request, HttpListenerResponse response)
+        {
+            Match m = Regex.Match(request.Url.LocalPath, @"/carname/([0-9]+)/info");
+            if (m.Success && m.Groups.Count == 2 && m.Groups[1].Captures.Count == 1)
+            {
+                _ = int.TryParse(m.Groups[1].Captures[0].ToString(), out int CarID);
+                Car car = Car.GetCarByID(CarID);
+                if (car != null)
+                {
+                    car.DbHelper.GetCarName(out string carname);
+                    var t = new
+                    {
+                        car_name = carname
+                    };
+
+                    string json = JsonConvert.SerializeObject(t);
+                    WriteString(response, json, "application/json");
+                    return;
+                }
+            }
+            WriteString(response, "");
+        }
         private static void ABRP_Set(HttpListenerRequest request, HttpListenerResponse response)
         {
             Match m = Regex.Match(request.Url.LocalPath, @"/abrp/([0-9]+)/set");
