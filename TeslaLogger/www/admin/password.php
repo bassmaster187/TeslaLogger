@@ -418,7 +418,7 @@ if ($_REQUEST["id"] != -1)
 else
 {
 	$tinfo = get_text("INFO_FLEETAPI");
-	$tinfo=str_replace("{LINK1}", "<a href='https://developer.tesla.com/docs/fleet-api/support/announcements#2024-11-27-pay-per-use-pricing' target='_blank'>Tesla Pay per use pricing</a>", $tinfo);
+	$tinfo=str_replace("{LINK1}", "<a href='https://developer.tesla.com/docs/fleet-api/announcements#2024-11-27-pay-per-use-pricing' target='_blank'>Tesla Pay per use pricing</a>", $tinfo);
 	$tinfo=str_replace("{LINK2}", "<a href='https://digitalassets.tesla.com/tesla-contents/image/upload/Fleet-API-Agreement-EN.pdf' target='_blank'>Fleet API Agreement</a>", $tinfo);    
 ?>
 <div>
