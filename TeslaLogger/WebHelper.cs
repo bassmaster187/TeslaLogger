@@ -2567,7 +2567,7 @@ namespace TeslaLogger
 
                     TimeSpan ts = DateTime.Now - lastUpdateEfficiency;
 
-                    if (ts.TotalMinutes > 60)
+                    if (ts.TotalMinutes > 240)
                     {
                         if (state == "offline" || state == "asleep")
                             return state;
@@ -2616,6 +2616,7 @@ namespace TeslaLogger
             {
                 // resultContent2 = GetCommand("vehicle_config").Result;
                 // resultContent2 = GetCommand("vehicle_data?endpoints=vehicle_config&let_sleep=true").Result;
+                Log("CheckVehicleConfig");
                 resultContent2 = GetCommand(vehicle_data_everything).Result;
 
                 if (resultContent2 == INSERVICE || resultContent2 == "NULL")
@@ -5052,6 +5053,8 @@ DESC", con))
         {
             if (DateTime.UtcNow.Day != commandCounterDay)
             {
+                UpdateTaskerTokenAsync().Wait();
+
                 commandCounterDay = DateTime.UtcNow.Day;
                 Log($"Total Commands Today: {commandCounter} Drive: {commandCounterDrive} Charge: {commandCounterCharging} Online: {commandcounterOnline}");
                 commandCounter = 0;
@@ -5063,8 +5066,26 @@ DESC", con))
                 KVS.InsertOrUpdate($"commandCounterCharging_{car.CarInDB}", commandCounterCharging);
                 KVS.InsertOrUpdate($"commandCounterOnline_{car.CarInDB}", commandcounterOnline);
                 KVS.InsertOrUpdate($"commandCounterDay{car.CarInDB}", commandCounterDay);
+
+                UpdateTaskerTokenAsync();
             }
         }
+
+        private async Task UpdateTaskerTokenAsync()
+        {
+            try
+            {
+                HttpResponseMessage response = await  httpclient_teslalogger_de.GetAsync($"https://teslalogger.de/update-commandcounter.php?token={car.TaskerHash}&drive={commandCounterDrive}&charging={commandCounterCharging}&online={commandcounterOnline}");
+                response.EnsureSuccessStatusCode();
+                string responseBody = await response.Content.ReadAsStringAsync();
+                Log($"UpdateTaskerToken: {responseBody}");
+            }
+            catch (HttpRequestException e)
+            {
+                Log($"UpdateTaskerToken error: {e.Message}");
+            }
+        }
+
 
         public bool LoginRetry(HttpResponseMessage result)
         {
