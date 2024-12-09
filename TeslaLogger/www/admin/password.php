@@ -438,7 +438,7 @@ else
 			<th style='text-align:center;'>Virtual Key</th>
 			<!-- <th style='text-align:center;'>Access Type</th> -->
 			<th style='text-align:center;'>Signal Counter</th>
-			<th style='text-align:center;'>Subscription</th>
+			<th style='text-align:center;'><?php t("Subscription"); ?></th>
 			<th><?php t("Edit"); ?></th>
 		</tr>
 	</thead>
@@ -484,10 +484,10 @@ else
 				if (strpos($subscription, "current_period_end") > 0)
 				{
 					echo(GetCheckbox("1"));
-					echo("&nbsp;<a target='_blank' href='https://billing.stripe.com/p/login/8wMaGogxma56fGUdQQ'>Manage</a>");
+					echo("&nbsp;<a target='_blank' href='https://billing.stripe.com/p/login/8wMaGogxma56fGUdQQ'>". get_text("SubscribeManage") ."</a>");
 				}
 				else
-					echo("<a target='_blank' href='https://buy.stripe.com/9AQaHNdU33k29Vu144?client_reference_id=$vin'>Subscribe</a>");
+					echo("<a target='_blank' href='https://buy.stripe.com/9AQaHNdU33k29Vu144?client_reference_id=$vin'>&#x274c; ". get_text("Subscribe") ."</a>");
 			}
 			echo("</td>\r\n");
 
