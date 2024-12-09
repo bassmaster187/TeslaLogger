@@ -459,6 +459,37 @@ WHERE
             return "";
         }
 
+        internal bool SetCarName(string car_name)
+        {
+            car.CarName = car_name;
+
+            try
+            {
+                using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+                {
+                    con.Open();
+                    using (MySqlCommand cmd = new MySqlCommand(@"
+UPDATE
+    cars
+SET
+    display_name = @carname
+WHERE
+    id = @CarID", con))
+                    {
+                        cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
+                        cmd.Parameters.AddWithValue("@carname", car_name);
+                        _ = SQLTracer.TraceNQ(cmd, out _);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                car.CreateExceptionlessClient(ex).Submit();
+                Logfile.Log(ex.ToString());
+            }
+            return true;
+        }
+
         internal bool SetABRP(string abrp_token, int abrp_mode)
         {
             car.ABRPToken = abrp_token;
@@ -1005,6 +1036,37 @@ WHERE
                 Logfile.Log(ex.ToString());
             }
             return double.NaN;
+        }
+
+        internal bool GetCarName(out string car_name)
+        {
+            car_name = "";
+
+            try
+            {
+                using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+                {
+                    con.Open();
+                    using (MySqlCommand cmd = new MySqlCommand("SELECT display_name FROM cars where id = @CarID", con))
+                    {
+                        cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
+
+                        MySqlDataReader dr = SQLTracer.TraceDR(cmd);
+                        if (dr.Read())
+                        {
+                            car_name = dr[0].ToString();
+                            return true;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ex.ToExceptionless().FirstCarUserID().Submit();
+                Logfile.Log(ex.ToString());
+            }
+
+            return false;
         }
 
         internal bool GetABRP(out string ABRP_token, out int ABRP_mode)

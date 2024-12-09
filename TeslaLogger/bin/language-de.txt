@@ -176,6 +176,11 @@ PF_LINK=LINK
 PF_OLDSX=Wenn Sie ein älteres Tesla Model S/X vor 2021 haben, sind Sie fertig und können zurück zur Startseite
 PF_VKEY=Andernfalls richten Sie einen virtuellen Schlüssel eines Drittanbieters ein
 
+#changecarname.php
+CarNameTitle=Name des Autos ändern
+TextCarName=Hier können Sie den Namen ändern.
+CarName=Neuer Name
+
 #dashboard.php
 Online=Online
 Offline=Offline
@@ -368,6 +373,7 @@ Restore Database=Datenbank wiederherstellen
 TextRestore1=Bitte stellen Sie sicher, dass Sie Ihren Teslalogger sichern, bevor Sie Datenbanken wiederherstellen. Verschieben Sie den Sicherungsordner von \\RASPBERRY\teslalogger\backup auf Ihre Festplatte!
 TextRestore2=Der Wiederherstellungsprozess kann bis zu 10 Minuten dauern!
 TextRestore3=Unterbrechen Sie den Wiederherstellungsprozess in keiner Weise! Laden Sie die Seite nicht neu! Schließen Sie diese Seite nicht!
+
 
 #dashboard.php
 Sleeping="Schläft"

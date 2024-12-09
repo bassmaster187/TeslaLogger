@@ -98,6 +98,7 @@ namespace TeslaLogger
 
         private string taskerHash = "";
         private string vin = "";
+        private string car_name = "";
 
         private string aBRP_token = "";
         private int aBRP_mode; // defaults to 0;
@@ -141,6 +142,7 @@ namespace TeslaLogger
         public string DisplayName { get => display_name; set => display_name = value; }
         public string TaskerHash { get => taskerHash; set => taskerHash = value; }
         public string Vin { get => vin; set => vin = value; }
+        public string CarName { get => car_name; set => car_name = value; }
         public string ABRPToken { get => aBRP_token; set => aBRP_token = value; }
         public int ABRPMode { get => aBRP_mode; set => aBRP_mode = value; }
         public string SuCBingoUser { get => sucBingo_user; set => sucBingo_user = value; }
