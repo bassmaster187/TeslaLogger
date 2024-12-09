@@ -487,7 +487,7 @@ else
 					echo("&nbsp;<a target='_blank' href='https://billing.stripe.com/p/login/8wMaGogxma56fGUdQQ'>". get_text("SubscribeManage") ."</a>");
 				}
 				else
-					echo("<a target='_blank' href='https://buy.stripe.com/9AQaHNdU33k29Vu144?client_reference_id=$vin'>&#x274c; ". get_text("Subscribe") ."</a>");
+					echo("<a target='_blank' href='https://buy.stripe.com/9AQaHNdU33k29Vu144?client_reference_id=$vin'>⚠️ ". get_text("Subscribe") ."</a>");
 			}
 			echo("</td>\r\n");
 
