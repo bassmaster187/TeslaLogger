@@ -894,11 +894,11 @@ namespace TeslaLogger
                         }
                         if (res == "asleep")
                         {
-                            SetCurrentState(TeslaState.Start);
+                            SetCurrentState(TeslaState.Sleep);
                             lastCarUsed = DateTime.Now;
                             doSleep = false;
                         }
-
+                        /* Bug switch between sleep and online all the time
                         var srt = webhelper.startRequestTimeout;
                         if (srt != null && srt.Value.AddMinutes(15) < DateTime.UtcNow)
                         {
@@ -906,7 +906,7 @@ namespace TeslaLogger
                             SetCurrentState(TeslaState.Sleep);
                             lastCarUsed = DateTime.Now;
                             DbHelper.StartState("asleep");
-                        }
+                        }*/
                     }
                     else
                     {
