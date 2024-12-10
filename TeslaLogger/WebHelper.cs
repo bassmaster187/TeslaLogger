@@ -109,7 +109,7 @@ namespace TeslaLogger
         private static object httpClientLock = new object();
 
         DateTime lastRefreshToken = DateTime.MinValue;
-        DateTime nextTeslaTokenFromRefreshToken = DateTime.MaxValue;
+        internal DateTime nextTeslaTokenFromRefreshToken = DateTime.Now.AddHours(1);
 
         internal int commandCounter = 0;
         internal int commandCounterDrive = 0;
@@ -181,6 +181,8 @@ namespace TeslaLogger
 
             if (KVS.Get($"commandCounterDay{car.CarInDB}", out commandCounterDay) == KVS.NOT_FOUND)
                 commandCounterDay = DateTime.UtcNow.Day;
+
+            nextTeslaTokenFromRefreshToken = car.Tesla_Token_Expire;
 
             ResetCommandCounterEveryDay();
 
@@ -267,21 +269,24 @@ namespace TeslaLogger
                     return false;
                 }
 
+                /*
 
                 TimeSpan ts = DateTime.Now - car.Tesla_Token_Expire;
 
                 if (ts.TotalDays < 8)
-                {
+                { */
                     Tesla_token = car.Tesla_Token;
                     lastTokenRefresh = car.Tesla_Token_Expire;
 
-                    Log("Restore Token OK. Age: " + car.Tesla_Token_Expire.ToString(Tools.ciEnUS));
+                    Log("Restore Token OK. Valid: " + car.Tesla_Token_Expire.ToString(Tools.ciEnUS));
                     return true;
+
+                /*
                 }
                 else
                 {
                     Log("Restore Token too old! " + car.Tesla_Token_Expire.ToString(Tools.ciEnUS));
-                }
+                }*/
 
             }
             catch (Exception ex)
@@ -666,7 +671,7 @@ namespace TeslaLogger
         {
             Tesla_token = StringCipher.Decrypt(access_token);
             car.Tesla_Token = StringCipher.Decrypt(access_token);
-            car.Tesla_Token_Expire = DateTime.Now;
+            car.Tesla_Token_Expire = nextTeslaTokenFromRefreshToken;
             car.LoginRetryCounter = 0;
             car.DbHelper.UpdateTeslaToken();
 

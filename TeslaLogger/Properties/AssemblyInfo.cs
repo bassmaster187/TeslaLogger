@@ -32,8 +32,8 @@ using System.Runtime.CompilerServices;
 // Sie können alle Werte angeben oder Standardwerte für die Build- und Revisionsnummern verwenden,
 // übernehmen, indem Sie "*" eingeben:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.60.4.0")]
-[assembly: AssemblyFileVersion("1.60.4.0")]
+[assembly: AssemblyVersion("1.60.5.0")]
+[assembly: AssemblyFileVersion("1.60.5.0")]
 
 [assembly: InternalsVisibleTo("UnitTestsTeslaloggerNET8")]
 [assembly: InternalsVisibleTo("UnitTestsTeslalogger")]

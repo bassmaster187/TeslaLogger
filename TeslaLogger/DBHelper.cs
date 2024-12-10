@@ -1623,7 +1623,7 @@ HAVING
                     {
                         cmd.Parameters.AddWithValue("@id", car.CarInDB);
                         cmd.Parameters.AddWithValue("@tesla_token", token);
-                        cmd.Parameters.AddWithValue("@tesla_token_expire", DateTime.Now);
+                        cmd.Parameters.AddWithValue("@tesla_token_expire", car.webhelper.nextTeslaTokenFromRefreshToken);
                         int done = SQLTracer.TraceNQ(cmd, out _);
 
                         car.Log("update tesla_token OK: " + done + " - " + car.webhelper.Tesla_token.Substring(0,20) + "xxxxxx");

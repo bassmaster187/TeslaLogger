@@ -1,4 +1,4 @@
-# Version 1.60.4
+# Version 1.60.5
 - Bugfixes
 
 # Version 1.60.3
