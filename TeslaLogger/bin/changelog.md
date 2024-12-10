@@ -1,3 +1,6 @@
+# Version 1.60.3
+- don't use data commands at all for fleet api cars
+
 # Version 1.60.2
 - don't use nearby_charging_sites anymore in fleet api because it is a paid feature
 

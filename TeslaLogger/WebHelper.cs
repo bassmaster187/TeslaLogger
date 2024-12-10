@@ -4860,6 +4860,13 @@ DESC", con))
 
         public async Task<string> GetCommand(string cmd, bool noMemcache = false)
         {
+            if (car.FleetAPI)
+            {
+                Log("*** FleetAPI no Datacalls allowed! ***");
+                return "";
+            }
+
+
             string resultContent = "";
             try
             {

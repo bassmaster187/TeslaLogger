@@ -693,6 +693,11 @@ namespace TeslaLogger
                     {
                         Thread.Sleep(10 * 60 * 1000);
                     }
+                    else if (response.ToString().Contains("token expired"))
+                    {
+                        Log("Login Error: token expired!");
+                        car.webhelper.GetToken();
+                    }
                 }
             }
             catch (Exception ex)
