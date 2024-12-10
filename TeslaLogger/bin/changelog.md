@@ -1,3 +1,6 @@
+# Version 1.60.4
+- Bugfixes
+
 # Version 1.60.3
 - don't use data commands at all for fleet api cars
 

@@ -894,7 +894,7 @@ namespace TeslaLogger
                         }
                         if (res == "asleep")
                         {
-                            SetCurrentState(TeslaState.Sleep);
+                            SetCurrentState(TeslaState.Start);
                             lastCarUsed = DateTime.Now;
                             doSleep = false;
                         }
