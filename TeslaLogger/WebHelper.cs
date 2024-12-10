@@ -2611,6 +2611,12 @@ namespace TeslaLogger
 
         void CheckVehicleConfig()
         {
+            if (car.FleetAPI)
+            {
+                lastUpdateEfficiency = DateTime.Now;
+                return;
+            }
+
             string resultContent2 = "";
             try
             {
