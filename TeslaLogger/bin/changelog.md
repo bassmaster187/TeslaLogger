@@ -1,5 +1,5 @@
-# Version 1.60.5
-- Bugfixes
+# Version 1.60.6
+- Fleet API: TPMS, VehicleName, Trim, CarType, Version now available
 
 # Version 1.60.3
 - don't use data commands at all for fleet api cars

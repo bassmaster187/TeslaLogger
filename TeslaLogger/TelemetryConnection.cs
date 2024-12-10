@@ -406,6 +406,105 @@ namespace TeslaLogger
                         }
                         */
                     }
+                    else if (key.StartsWith("TpmsPressure"))
+                    {
+                        string suffix = key.Substring(key.Length - 2);
+                        string v = value["stringValue"];
+                        if (double.TryParse(v, out double pressure))
+                        {
+                            pressure = Math.Round(pressure, 2);
+                            switch (suffix)
+                            {
+                                case "Fl":
+                                    car.DbHelper.InsertTPMS(1, pressure, d);
+                                    break;
+                                case "Fr":
+                                    car.DbHelper.InsertTPMS(2, pressure, d);
+                                    break;
+                                case "Rl":
+                                    car.DbHelper.InsertTPMS(3, pressure, d);
+                                    break;
+                                case "Rr":
+                                    car.DbHelper.InsertTPMS(4, pressure, d);
+                                    break;
+                            }
+                        }
+                    }
+                    else if (key == "VehicleName")
+                    {
+                        string v = value["stringValue"];
+                        if (!String.IsNullOrEmpty(v))
+                        {
+                            if (car.DisplayName != v)
+                            {
+                                Log("DisplayName: " + v);
+                                car.DisplayName = v;
+                                car.DbHelper.WriteCarSettings();
+                            }
+                        }
+                    }
+                    else if (key == "Trim")
+                    {
+                        string v = value["stringValue"];
+                        if (!String.IsNullOrEmpty(v))
+                        {
+                            v = v.ToLower();
+                            if (car.TrimBadging != v)
+                            {
+                                Log("Trim: " + v);
+                                car.TrimBadging = v;
+                                car.DbHelper.WriteCarSettings();
+                                car.webhelper.UpdateEfficiency();
+
+                                Log("Car Model Name: " + car.ModelName);
+                            }
+                        }
+                    }
+                    else if (key == "ServiceMode")
+                    {
+                        string v = value["stringValue"];
+                        if (bool.TryParse(v, out bool serviceMode))
+                        {
+                            //TODO : Implement ServiceMode
+                        }
+                    }
+                    else if (key == "CarType")
+                    {
+                        string v = value["stringValue"];
+                        if (!String.IsNullOrEmpty(v))
+                        {
+                            v = v.ToLower();
+
+                            if (car.CarType != v)
+                            {
+                                Log("CarType: " + v);
+                                car.CarType = v;
+                                car.CarSpecialType = "base";
+                                car.DbHelper.WriteCarSettings();
+                                car.webhelper.UpdateEfficiency();
+
+                                Log("Car Model Name: " + car.ModelName);
+                            }
+                        }
+                    }
+                    else if (key == "Version")
+                    { 
+                        string car_version = value["stringValue"];
+                        if (!String.IsNullOrEmpty(car_version))
+                        {
+                            if (car.CurrentJSON.current_car_version != car_version)
+                            {
+                                Log("Car Version: " + car_version);
+                                car.CurrentJSON.current_car_version = car_version;
+                                car.CurrentJSON.CreateCurrentJSON();
+
+                                car.DbHelper.SetCarVersion(car_version);
+
+                                car.webhelper.TaskerWakeupfile(true);
+                            }
+                            
+                        }
+                    }
                 }
             }
         }
