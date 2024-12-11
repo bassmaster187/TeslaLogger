@@ -1,3 +1,11 @@
+# Version 1.61.0
+- Simplified the switch to Fleet API. 
+- Infos if you need to switch to Fleet API in the admin panel. 
+- Info if you need a subscription in the admin panel.
+- Info screen about Fleet API and subscription won't be shown anymore if you have a subscription and Fleet API is enabled.
+- Direct link to subscription in the My Tesla Credentials settings if you need to switch to Fleet API.
+- Don't show the subscription info if you are using the old Tesla API. (old Model S/X)
+
 # Version 1.60.6
 - Fleet API: TPMS, VehicleName, Trim, CarType, Version now available
 
