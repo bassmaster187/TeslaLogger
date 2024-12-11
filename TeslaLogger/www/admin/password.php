@@ -454,10 +454,18 @@ else
 			$vin = $v->{"vin"};
 			$tesla_carid = $v->{"tesla_carid"};
 			$access_type = $v->{"access_type"};
-			
+
+			$cartype = $v->{"car_type"};
+			$NeedSubscription = !($cartype === "models" || $cartype === "modelx" || $cartype === "models2");
 			
 			$freesuccheckbox = GetCheckbox($v->{"freesuc"});
-			$fleetAPICheckBox = GetCheckbox($v->{"fleetAPI"});
+			$fleetAPICheckBox = "";
+			
+			if ($v->{"fleetAPI"} == "0" && $NeedSubscription)
+				$fleetAPICheckBox = "<a href='password_fleet.php?id=$id&vin=$carVIN'>".get_text("FleetAPIRequired")." ⚠️</a>";
+			else
+				$fleetAPICheckBox = GetCheckbox($v->{"fleetAPI"});
+
 			$virtualKeyCheckBox = GetCheckbox($v->{"virtualkey"});
 
 			echo("	<tr>\r\n");
@@ -477,7 +485,7 @@ else
 			echo("</td>\r\n");
 
 			echo("		<td style='text-align:center;'>");
-			//if ($v->{"fleetAPI"} == "1")
+			if ($NeedSubscription)
 			{
 				$subscription = file_get_contents("https://teslalogger.de/stripe/subscription-check.php?vin=$vin");
 				
