@@ -2,15 +2,25 @@
 function ShowInfo()
 {
     <?php
+	if (session_status() == PHP_SESSION_NONE) {
+		session_start();
+	}
+	global $fleetapiinfo;
+
     $fileinfofleetapi = "/tmp/fleetapiinfo".date("Y-m-d").".txt";
 	$prefix = "/etc/teslalogger/";
     if (isDocker())
 		$prefix = "/tmp/";
 
-    if (!file_exists($fileinfofleetapi))
+    
+	echo ("\r\n<!-- fleetapiinfo: show: ".$_SESSION["fleetapiinfo"]." -->\r\n");
+
+	if ($fleetapiinfo === true
+		//&& !file_exists($fileinfofleetapi)
+		)
     {
         file_put_contents($fileinfofleetapi, ''); 
-        $tinfo = get_text("INFO_FLEETAPI");
+        $tinfo = get_text("INFO_FLEETAPI"). "<br>FleetAPI: " . $_SESSION["fleetapiinfo"];
         $tinfo=str_replace("{LINK1}", "<a href='https://developer.tesla.com/docs/fleet-api/announcements#2024-11-27-pay-per-use-pricing' target='_blank'>Tesla Pay per use pricing</a>", $tinfo);
         $tinfo=str_replace("{LINK2}", "<a href='https://digitalassets.tesla.com/tesla-contents/image/upload/Fleet-API-Agreement-EN.pdf' target='_blank'>Fleet API Agreement</a>", $tinfo);
         ?>

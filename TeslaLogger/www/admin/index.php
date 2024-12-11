@@ -2,8 +2,19 @@
 require_once("redirect.php");
 require_once("language.php");
 require_once("tools.php");
-session_start();
+
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+
+include "menu.php";
 global $display_name;
+global $carNeedFleetAPI;
+global $carVIN;
+global $carNeedSubscription;
+global $fleetapiinfo;
+
+$carNeedSubscription = false;
 $carid = GetDefaultCarId();
 if (isset($_REQUEST["carid"]))
 {
@@ -425,14 +436,12 @@ else
 	}
 
 	<?php
-	require_once("info.php");
 	?>
   </script>
 
   </head>
   <body>
   <?php
-    include "menu.php";
     echo(menu("Teslalogger"));
 ?>
 
@@ -455,6 +464,31 @@ else
 			<img id="unlocked"class="caricons" src="img/unlocked.png" title="Unlocked">
 		</td>
 	  </thead>
+	  <?php
+	  	if ($carNeedFleetAPI)
+	  		echo("<tr><td><font color='red'><b>".get_text("FleetAPI")."</b></font></td><td><a href='password_fleet.php?id=$carid&vin=$carVIN'>".get_text("FleetAPIRequired")." ⚠️</a></td></tr>");
+		else if ($carNeedSubscription)
+		{
+			?>
+			<!-- car need subscription -->
+			<tr id="subscriptioninfo" style='display: none;'><td><font color='red'><b><?php t("Subscription") ?></b></font></td><td><a href='https://buy.stripe.com/9AQaHNdU33k29Vu144?client_reference_id=<?=$carVIN?>'><?php t("SubscriptionRequired") ?> ⚠️</a></td></tr>
+			<script>
+				$(document).ready(function(){
+					$.ajax({
+						url: "subscription-check.php?vin=<?=$carVIN?>",
+					}).done(function(data) {
+						if (data == "No subscription") {
+							$("#subscriptioninfo").show();
+						} 
+                    }).fail(function(jqXHR, textStatus, errorThrown) {
+                        console.error("Error: " + textStatus, errorThrown);
+                    });
+                });
+            </script>
+			<?php
+		}
+	
+	  ?>
 	  <tr><td width="130px"><b><span id="car_statusLabel"></span></b></td><td width="180px"><span id="car_status"></span></td></tr>
 	  <tr id='CellTempRow'><td><b><?php t("Cell Temp"); ?>:</b></td><td><span id="CellTemp"></span></td></tr>
 	  <tr id='BMSMaxChargeRow'><td><b><?php t("Max Charge"); ?>:</b></td><td><span id="BMSMaxCharge"></span></td></tr>
@@ -546,5 +580,8 @@ function getZoomLevel()
 
   ?>
   </div>
+  <script>
+	<?php require_once("info.php"); ?>
+  </script>
   </body>
 </html>

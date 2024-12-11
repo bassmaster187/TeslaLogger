@@ -1,4 +1,8 @@
 <?PHP
+if (session_status() == PHP_SESSION_NONE) {
+	session_start();
+}
+
 require_once("language.php");
 require_once("tools.php");
 function full_path()
@@ -22,6 +26,10 @@ function menu($title, $prefix = "")
     $car = "";
     $tasker_token = "";
     global $display_name;
+	global $carNeedFleetAPI;
+	global $carNeedSubscription;
+	global $carVIN;
+	global $fleetapiinfo;
 
     $current_carid = $_SESSION["carid"];
     if (!isset($current_carid))
@@ -34,17 +42,54 @@ function menu($title, $prefix = "")
     $jcars = json_decode($allcars);
     if ($jcars !== null)
     {
+		$fleetapiinfo = false;
         foreach ($jcars as $k => $v) {
             if ($v->{"id"} == $current_carid)
             {
                 $display_name = $v->{"display_name"};
                 $tasker_token = $v->{"tasker_hash"};
                 $car = $v->{"model_name"};
+				$carVIN = $v->{"vin"};
 
                 if (strlen($display_name) == 0)
                     $display_name = "Car ".$v->{"id"};
             }
-        }
+
+			$carid = $v->{"id"};
+
+			if ($v->{"inactive"} == 0) // info will be shown only if the car is active
+			{
+				$cartype = $v->{"car_type"};
+				$NeedSubscription = !($cartype === "models" || $cartype === "modelx" || $cartype === "models2");
+
+				if ($v->{"fleetAPI"} == 0)
+				{ 	
+					if ($NeedSubscription) // old Model S/X doesn't need a subscription 
+					{
+						echo ("<!-- fleetapiinfo: cartype: $cartype - ID: $carid - Name: $car -->\r\n");
+						$fleetapiinfo = true;
+						if ($v->{"id"} == $current_carid)
+						{
+							$carNeedFleetAPI = true;
+							$carNeedSubscription = true;
+							echo("<!-- car need subscription true 2-->");
+						}
+					}
+					else
+						$carNeedSubscription = false;
+				}
+				else
+				{
+					if ($v->{"id"} == $current_carid)
+					{
+						$carNeedSubscription = true;
+						echo("<!-- car need subscription true 3-->");
+					}
+				}
+			}
+			else
+				echo ("<!-- fleetapiinfo: car inactive: ID: $carid - Name: $car -->");
+		}
     }
 
     $ref = "?token=" . $tasker_token . "&ref=" . full_path()."&car=".$car;
