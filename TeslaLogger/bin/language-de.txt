@@ -167,6 +167,8 @@ The URL doesn't contain the expected format!="Die URL ist nicht im erwarteten Fo
 Subscription="Abo"
 Subscribe="Abo abschließen"
 SubscribeManage="Abo verwalten"
+SubscriptionRequired="Abo notwendig!"
+FleetAPIRequired="Fleet API notwendig!"
 
 #password_fleet.php
 PF_LOGOUT="Melden Sie sich von Ihrem Tesla-Konto ab, wenn Sie bereits eingeloggt sind"
