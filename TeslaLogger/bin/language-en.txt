@@ -265,6 +265,8 @@ Get Tokens=Get Tokens
 Subscription="Subscription"
 Subscribe="Subscribe"
 SubscribeManage="Manage"
+SubscriptionRequired="Subscription Required!"
+FleetAPIRequired="Fleet API Required!"
 
 #password_fleet.php
 PF_LOGOUT="Log out from your Tesla account if logged in already"
