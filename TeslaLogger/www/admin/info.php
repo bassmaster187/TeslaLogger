@@ -13,14 +13,14 @@ function ShowInfo()
 		$prefix = "/tmp/";
 
     
-	echo ("\r\n<!-- fleetapiinfo: show: ".$_SESSION["fleetapiinfo"]." -->\r\n");
+	echo ("\r\n<!-- fleetapiinfo: show: $fleetapiinfo -->\r\n");
 
 	if ($fleetapiinfo === true
-		//&& !file_exists($fileinfofleetapi)
+		&& !file_exists($fileinfofleetapi)
 		)
     {
         file_put_contents($fileinfofleetapi, ''); 
-        $tinfo = get_text("INFO_FLEETAPI"). "<br>FleetAPI: " . $_SESSION["fleetapiinfo"];
+        $tinfo = get_text("INFO_FLEETAPI"). "<br>FleetAPI: $fleetapiinfo";
         $tinfo=str_replace("{LINK1}", "<a href='https://developer.tesla.com/docs/fleet-api/announcements#2024-11-27-pay-per-use-pricing' target='_blank'>Tesla Pay per use pricing</a>", $tinfo);
         $tinfo=str_replace("{LINK2}", "<a href='https://digitalassets.tesla.com/tesla-contents/image/upload/Fleet-API-Agreement-EN.pdf' target='_blank'>Fleet API Agreement</a>", $tinfo);
         ?>

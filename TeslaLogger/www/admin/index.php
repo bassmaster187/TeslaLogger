@@ -530,7 +530,8 @@ else
 	else
 		$installed = getTeslaloggerVersion("/etc/teslalogger/git/TeslaLogger/Properties/AssemblyInfo.cs");
 
-	$branch = file_get_contents("/etc/teslalogger/BRANCH");
+	if (file_exists("/etc/teslalogger/BRANCH"))
+		$branch = file_get_contents("/etc/teslalogger/BRANCH");
 
 	if (!empty($branch))
 	{
