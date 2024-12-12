@@ -96,3 +96,4 @@ TeslaLogger/copyto.net8docker.cmd
 /TeslaLogger/bin/data
 /TeslaLogger/data
 TeslaLogger/bin/encryption.txt
+/TeslaLogger/bin/tesla_invoices

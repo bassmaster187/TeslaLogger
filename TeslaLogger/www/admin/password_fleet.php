@@ -76,6 +76,12 @@ $actual_link = str_replace("&", "%26", $actual_link);
 
 		function save() {
 			sendRequest();
+
+			var teslacarid = $('#carid option:selected').attr('id');
+			if (teslacarid.length > 10) {
+				$("#abolink").attr("href", "https://buy.stripe.com/9AQaHNdU33k29Vu144?client_reference_id=" + teslacarid);
+				$("#aborow").show();
+			}
 		}
 
 		function sendRequest() {
@@ -106,7 +112,7 @@ $actual_link = str_replace("&", "%26", $actual_link);
 					$("#btnSave").hide();
 					$("#checkcar").html("&#9989;");
 					$("#checkfreesuc").html("&#9989;");
-
+					
 				});
 		}
 
@@ -291,11 +297,11 @@ $actual_link = str_replace("&", "%26", $actual_link);
 						</tr>
 						<tr>
 							<td>5.</td>
-							<td colspan="2"><?php t("PF_OLDSX"); ?> <a href="index.php"><?php t("PF_LINK"); ?></a>.</td>
-						<tr>
-						<tr>
-							<td></td>
 							<td colspan="2"><?php t("PF_VKEY"); ?>: <a target="_blank" href="https://www.tesla.com/_ak/teslalogger.de"><?php t("PF_LINK"); ?></a></td>
+						<tr>
+						<tr id="aborow" style="display:none;">
+							<td>6.</td>
+							<td colspan="2"><?php t("PF_SUBSCRIPTION"); ?>: <a target="_blank" href="#" id="abolink"><?php t("PF_LINK"); ?></a></td>
 						<tr>
 					</table>
 				</div>

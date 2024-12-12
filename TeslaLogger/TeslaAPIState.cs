@@ -59,7 +59,7 @@ namespace TeslaLogger
             this.car = car;
         }
 
-        private void AddValue(string name, string type, object value, long timestamp, string source)
+        internal void AddValue(string name, string type, object value, long timestamp, string source)
         {
             lock (TeslaAPIStateLock)
             {

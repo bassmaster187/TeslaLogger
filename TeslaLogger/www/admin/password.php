@@ -335,11 +335,16 @@ if (isset($_REQUEST["id"]))
 <h1><?php t("Please enter your Tesla account credentials"); ?>:</h1>
 <div id="dialog-TokenHelp" title="Info">
 <?php t("TeslaAuthApps"); ?>
+
+<h3><?php t("BA_ALLCARS"); ?>:</h3>
 <ul>
 <li><?php t("BA_FLEETAPI"); ?>: <a href="<?php 
 $TeslaFleetURL = str_replace("password.php", "password_fleet.php", $actual_link);
 echo $TeslaFleetURL;
 ?>"><?php t("PF_LINK"); ?></a></li>
+</ul>
+<h3><?php t("BA_MODELSXOLD"); ?>:</h3>
+<ul>
 <li><?php
 	$t1=get_text("BA_Browser");
 	$t1=str_replace("{", '<a href="javascript:BrowserAuth();">', $t1);
@@ -412,8 +417,13 @@ if ($_REQUEST["id"] != -1)
 }
 else
 {
+	$tinfo = get_text("INFO_FLEETAPI");
+	$tinfo=str_replace("{LINK1}", "<a href='https://developer.tesla.com/docs/fleet-api/announcements#2024-11-27-pay-per-use-pricing' target='_blank'>Tesla Pay per use pricing</a>", $tinfo);
+	$tinfo=str_replace("{LINK2}", "<a href='https://digitalassets.tesla.com/tesla-contents/image/upload/Fleet-API-Agreement-EN.pdf' target='_blank'>Fleet API Agreement</a>", $tinfo);    
 ?>
 <div>
+<h1><?php t("INFO_important"); ?>:</h1>
+<p><?php echo($tinfo); ?>:</p>
 <h1><?php t("Please choose your vehicle"); ?>:</h1>
 <table id="cars" class="">
 	<thead>
@@ -426,8 +436,9 @@ else
 			<th style='text-align:center;'><?php t("Free SUC"); ?></th>
 			<th style='text-align:center;'>Fleet API</th>
 			<th style='text-align:center;'>Virtual Key</th>
-			<th style='text-align:center;'>Access Type</th>
+			<!-- <th style='text-align:center;'>Access Type</th> -->
 			<th style='text-align:center;'>Signal Counter</th>
+			<th style='text-align:center;'><?php t("Subscription"); ?></th>
 			<th><?php t("Edit"); ?></th>
 		</tr>
 	</thead>
@@ -443,26 +454,52 @@ else
 			$vin = $v->{"vin"};
 			$tesla_carid = $v->{"tesla_carid"};
 			$access_type = $v->{"access_type"};
-			
+
+			$cartype = $v->{"car_type"};
+			$NeedSubscription = !($cartype === "models" || $cartype === "modelx" || $cartype === "models2");
 			
 			$freesuccheckbox = GetCheckbox($v->{"freesuc"});
-			$fleetAPICheckBox = GetCheckbox($v->{"fleetAPI"});
+			$fleetAPICheckBox = "";
+			
+			if ($v->{"fleetAPI"} == "0" && $NeedSubscription)
+				$fleetAPICheckBox = "<a href='password_fleet.php?id=$id&vin=$carVIN'>".get_text("FleetAPIRequired")." ⚠️</a>";
+			else
+				$fleetAPICheckBox = GetCheckbox($v->{"fleetAPI"});
+
 			$virtualKeyCheckBox = GetCheckbox($v->{"virtualkey"});
 
 			echo("	<tr>\r\n");
 			echo("		<td>$id</td>\r\n");
-			echo("		<td>$display_name</td>\r\n");
+			echo("		<td>$display_name <a href='changecarname.php?carid=$id'>&#9998</a></td>\r\n");
 			echo("		<td>$car</td>\r\n");
 			echo("		<td>$vin</td>\r\n");
 			echo("		<td>$tasker_token</td>\r\n");
 			echo("		<td style='text-align:center;'>$freesuccheckbox</td>\r\n");
 			echo("		<td style='text-align:center;'>$fleetAPICheckBox</td>\r\n");
 			echo("		<td style='text-align:center;'>$virtualKeyCheckBox</td>\r\n");
-			echo("		<td style='text-align:center;'>$access_type</td>\r\n");
+			// echo("		<td style='text-align:center;'>$access_type</td>\r\n");
+			
 			echo("		<td style='text-align:center;'>");
 			if ($v->{"fleetAPI"} == "1")
 				echo(file_get_contents("https://teslalogger.de:4501/SignalCounter/$vin"));
 			echo("</td>\r\n");
+
+			echo("		<td style='text-align:center;'>");
+			if ($NeedSubscription)
+			{
+				$subscription = file_get_contents("https://teslalogger.de/stripe/subscription-check.php?vin=$vin");
+				
+				if (strpos($subscription, "current_period_end") > 0)
+				{
+					echo(GetCheckbox("1"));
+					echo("&nbsp;<a target='_blank' href='https://billing.stripe.com/p/login/8wMaGogxma56fGUdQQ'>". get_text("SubscribeManage") ."</a>");
+				}
+				else
+					echo("<a target='_blank' href='https://buy.stripe.com/9AQaHNdU33k29Vu144?client_reference_id=$vin'>⚠️ ". get_text("Subscribe") ."</a>");
+			}
+			echo("</td>\r\n");
+
+
 			echo("		<td><a href='password.php?id=$id&vin=$vin'>");
 			echo t("Edit");
 			echo("</a></td>\r\n");

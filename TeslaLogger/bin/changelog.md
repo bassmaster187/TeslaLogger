@@ -1,3 +1,38 @@
+# Version 1.61.0
+- Simplified the switch to Fleet API. 
+- Infos if you need to switch to Fleet API in the admin panel. 
+- Info if you need a subscription in the admin panel.
+- Info screen about Fleet API and subscription won't be shown anymore if you have a subscription and Fleet API is enabled.
+- Direct link to subscription in the My Tesla Credentials settings if you need to switch to Fleet API.
+- Don't show the subscription info if you are using the old Tesla API. (old Model S/X)
+
+# Version 1.60.6
+- Fleet API: TPMS, VehicleName, Trim, CarType, Version now available
+
+# Version 1.60.3
+- don't use data commands at all for fleet api cars
+
+# Version 1.60.2
+- don't use nearby_charging_sites anymore in fleet api because it is a paid feature
+
+# Version 1.60.1
+- You can rename your cars in the admin panel / settings / my Tesla Credentials. Useful if Tesla API has overwritten an empty name or for old cars without access anymore. The name will be used in the Grafana dashboards and in the MQTT topics.
+
+# Version 1.60.0
+- Stable version
+
+# Version 1.59.12
+- Daily info on admin panel about the need to migrate to Fleet API and the subscription model
+- Bugfixes for charging state detection with Fleet API / more signals
+
+# Version 1.59.11
+- From the beginning of 2025, Tesla will charge money for the use of FleetAPI and will probably switch off the unofficial “Owners API”. Therefore I am forced to offer a monthly subscription for Teslalogger. Please switch your Teslas to FleetAPI and take out the subscription model. We do not yet know what will happen with Model S/X before 2021. For this reason, please do not switch the old Model S/X to Fleet API. 
+- Subscription link in Settings/MyTesla
+- Show destination and eta in Admin Panel with FleetAPI
+
+# Version 1.59.9
+- Use as less commands as possible with FleetAPI
+
 # Version 1.59.8
 - Show signal counter for Fleet API cars in Settings / My Tesla Credentials
 

@@ -98,6 +98,7 @@ namespace TeslaLogger
 
         private string taskerHash = "";
         private string vin = "";
+        private string car_name = "";
 
         private string aBRP_token = "";
         private int aBRP_mode; // defaults to 0;
@@ -111,7 +112,7 @@ namespace TeslaLogger
 
         private DBHelper dbHelper;
 
-        private readonly TeslaAPIState teslaAPIState;
+        internal readonly TeslaAPIState teslaAPIState;
 
         private bool useTaskerToken = true;
         internal string wheel_type = "";
@@ -141,6 +142,7 @@ namespace TeslaLogger
         public string DisplayName { get => display_name; set => display_name = value; }
         public string TaskerHash { get => taskerHash; set => taskerHash = value; }
         public string Vin { get => vin; set => vin = value; }
+        public string CarName { get => car_name; set => car_name = value; }
         public string ABRPToken { get => aBRP_token; set => aBRP_token = value; }
         public int ABRPMode { get => aBRP_mode; set => aBRP_mode = value; }
         public string SuCBingoUser { get => sucBingo_user; set => sucBingo_user = value; }
@@ -454,7 +456,8 @@ namespace TeslaLogger
                 if (!DbHelper.GetRegion())
                     webhelper.GetRegion();
 
-                webhelper.CheckVirtualKey();
+                if (!dbHelper.CheckVirtualKey())
+                    webhelper.CheckVirtualKey();
 
                 if (webhelper.GetVehicles() == "NULL")
                 {
@@ -627,9 +630,7 @@ namespace TeslaLogger
                 int SleepPosition = ApplicationSettings.Default.SleepPosition;
                 if (FleetAPI)
                 {
-                    SleepPosition = Tools.CalculateSleepSeconds(300, webhelper.commandCounter, DateTime.UtcNow) * 1000;
-                    SleepPosition = Math.Max(30000, SleepPosition);
-                    Log("Drive Sleep " + SleepPosition);
+                    SleepPosition = 5000;
                 }
                 else
                     SleepPosition = Math.Max(20000, SleepPosition);
@@ -897,7 +898,7 @@ namespace TeslaLogger
                             lastCarUsed = DateTime.Now;
                             doSleep = false;
                         }
-
+                        /* Bug switch between sleep and online all the time
                         var srt = webhelper.startRequestTimeout;
                         if (srt != null && srt.Value.AddMinutes(15) < DateTime.UtcNow)
                         {
@@ -905,7 +906,7 @@ namespace TeslaLogger
                             SetCurrentState(TeslaState.Sleep);
                             lastCarUsed = DateTime.Now;
                             DbHelper.StartState("asleep");
-                        }
+                        }*/
                     }
                     else
                     {
@@ -1602,7 +1603,9 @@ namespace TeslaLogger
             if (_oldState == TeslaState.Start && _newState == TeslaState.Online)
             {
                 telemetry?.StartConnection();
-                _ = webhelper.GetOdometerAsync();
+                if (!FleetAPI)
+                    _ = webhelper.GetOdometerAsync();
+
                 Tools.DebugLog($"#{CarInDB}:Start -> Online SendDataToAbetterrouteplannerAsync(utc:{Tools.ToUnixTime(DateTime.UtcNow) * 1000}, soc:{CurrentJSON.current_battery_level}, speed:0, charging:false, power:0, lat:{CurrentJSON.GetLatitude()}, lon:{CurrentJSON.GetLongitude()})");
                 _ = webhelper.SendDataToAbetterrouteplannerAsync(Tools.ToUnixTime(DateTime.UtcNow) * 1000, CurrentJSON.current_battery_level, 0, false, 0, CurrentJSON.GetLatitude(), CurrentJSON.GetLongitude());
             }

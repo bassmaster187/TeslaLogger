@@ -1,4 +1,8 @@
-﻿#Akku Trips.json
+﻿#Info
+INFO_important="Important Info"
+INFO_FLEETAPI="Starting January 1, 2025, Tesla will transition the official Fleet API to a paid model ({LINK1}). As a result, I am forced to switch to a subscription model and charge a small monthly fee to cover my expenses for Tesla, taxes, and the payment service provider.<br><br>At the same time, Tesla’s Terms of Service ({LINK2}) compel me to discontinue the use of the unofficial Owners API; otherwise, they could take legal action against me (§5.6.6 and §5.6.11). Please migrate your vehicles from the Owners API to the Fleet API by re-entering your login credentials.<br><br>Unfortunately, for older Model S/X vehicles (manufactured before 2021), there is no solution to use the Fleet API. These vehicles can continue to operate via the old Owners API, and I don’t expect Tesla to take any legal action in such cases. However, you can still choose to subscribe for these vehicles as a form of donation, since I don’t have to pay Tesla for their usage.<br><br>Since Tesla aims to reduce server load and generate revenue with the Fleet API, it is likely that the unofficial Owners API will be shut down on January 1, 2025. We hope that older Model S/X vehicles will not be affected by this change."
+
+#Akku Trips.json
 Akku Trips=Battery Usage (Driving)
 Start Trip=Start Trip
 End Trip=End Trip
@@ -256,8 +260,13 @@ BA_Step3=Step 3:
 BA_FillOut=Fill out this form:
 BA_CopyUrl="Copy the resulting URL as shown"
 BA_Paste="Paste the resulting URL into the box and click "_QQ_"Get Tokens"_QQ_" Button:"
-BA_FLEETAPI=Tesla Fleet API (Recommended only for vehicles built after Nov. 2023!!!)
+BA_FLEETAPI="Tesla Fleet API"
 Get Tokens=Get Tokens
+Subscription="Subscription"
+Subscribe="Subscribe"
+SubscribeManage="Manage"
+SubscriptionRequired="Subscription Required!"
+FleetAPIRequired="Fleet API Required!"
 
 #password_fleet.php
 PF_LOGOUT="Log out from your Tesla account if logged in already"
@@ -267,7 +276,13 @@ PF_HELP=Help video
 PF_PERMISSION=Info, which permissions are used and why
 PF_OLDSX=If you have a pre-2021 Tesla Model S/X, you're done and can go back to the main page
 PF_HERE=here
-PF_VKEY=Otherwise set Up Third-Party Virtual Key
+PF_VKEY="Set Up Third-Party Virtual Key"
+PF_SUBSCRIPTION="Subscribe to receive data from Tesla"
+
+#changecarname.php
+CarNameTitle=Change car name
+TextCarName=You can change car name here
+CarName=New Name
 
 #settings.php
 Please choose your vehicle=Please choose your vehicle

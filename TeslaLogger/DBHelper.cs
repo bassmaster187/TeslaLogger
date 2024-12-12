@@ -15,6 +15,7 @@ using Exceptionless;
 using Newtonsoft.Json;
 using System.Diagnostics;
 using System.Data.Common;
+using ZstdSharp.Unsafe;
 
 namespace TeslaLogger
 {
@@ -456,6 +457,37 @@ WHERE
             }
 
             return "";
+        }
+
+        internal bool SetCarName(string car_name)
+        {
+            car.CarName = car_name;
+
+            try
+            {
+                using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+                {
+                    con.Open();
+                    using (MySqlCommand cmd = new MySqlCommand(@"
+UPDATE
+    cars
+SET
+    display_name = @carname
+WHERE
+    id = @CarID", con))
+                    {
+                        cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
+                        cmd.Parameters.AddWithValue("@carname", car_name);
+                        _ = SQLTracer.TraceNQ(cmd, out _);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                car.CreateExceptionlessClient(ex).Submit();
+                Logfile.Log(ex.ToString());
+            }
+            return true;
         }
 
         internal bool SetABRP(string abrp_token, int abrp_mode)
@@ -1004,6 +1036,37 @@ WHERE
                 Logfile.Log(ex.ToString());
             }
             return double.NaN;
+        }
+
+        internal bool GetCarName(out string car_name)
+        {
+            car_name = "";
+
+            try
+            {
+                using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+                {
+                    con.Open();
+                    using (MySqlCommand cmd = new MySqlCommand("SELECT display_name FROM cars where id = @CarID", con))
+                    {
+                        cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
+
+                        MySqlDataReader dr = SQLTracer.TraceDR(cmd);
+                        if (dr.Read())
+                        {
+                            car_name = dr[0].ToString();
+                            return true;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ex.ToExceptionless().FirstCarUserID().Submit();
+                Logfile.Log(ex.ToString());
+            }
+
+            return false;
         }
 
         internal bool GetABRP(out string ABRP_token, out int ABRP_mode)
@@ -1560,7 +1623,7 @@ HAVING
                     {
                         cmd.Parameters.AddWithValue("@id", car.CarInDB);
                         cmd.Parameters.AddWithValue("@tesla_token", token);
-                        cmd.Parameters.AddWithValue("@tesla_token_expire", DateTime.Now);
+                        cmd.Parameters.AddWithValue("@tesla_token_expire", car.webhelper.nextTeslaTokenFromRefreshToken);
                         int done = SQLTracer.TraceNQ(cmd, out _);
 
                         car.Log("update tesla_token OK: " + done + " - " + car.webhelper.Tesla_token.Substring(0,20) + "xxxxxx");
@@ -3253,7 +3316,7 @@ LIMIT 1", con)
 
                             if (dr["battery_level"] != DBNull.Value)
                             {
-                                car.CurrentJSON.current_battery_level = Convert.ToInt32(dr["battery_level"], Tools.ciEnUS);
+                                car.CurrentJSON.current_battery_level = Convert.ToDouble(dr["battery_level"], Tools.ciEnUS);
                             }
 
                             if (dr["lat"] != DBNull.Value)
@@ -3315,6 +3378,9 @@ LIMIT 1", con)
                 UpdatePosFromCurrentJSON(posid);
             }
 
+            bool fast_charger_present = wh.fast_charger_present;
+            if (car.telemetry?.dcCharging == true)
+                fast_charger_present = true;
 
             int chargeID = GetMaxChargeid(out DateTime chargeStart);
             long chargingstateid = 0;
@@ -3359,7 +3425,7 @@ VALUES(
                         cmd.Parameters.AddWithValue("@fast_charger_brand", wh.fast_charger_brand);
                         cmd.Parameters.AddWithValue("@fast_charger_type", wh.fast_charger_type);
                         cmd.Parameters.AddWithValue("@conn_charge_cable", wh.conn_charge_cable);
-                        cmd.Parameters.AddWithValue("@fast_charger_present", wh.fast_charger_present);
+                        cmd.Parameters.AddWithValue("@fast_charger_present",fast_charger_present);
                         cmd.Parameters.AddWithValue("@meter_vehicle_kwh_start", meter_vehicle_kwh_start);
                         cmd.Parameters.AddWithValue("@meter_utility_kwh_start", meter_utility_kwh_start);
                         cmd.Parameters.AddWithValue("@wheel_type", wh.car.wheel_type);
@@ -4561,7 +4627,7 @@ WHERE
 
         int last_active_route_energy_at_arrival = int.MinValue;
 
-        public int InsertPos(string timestamp, double latitude, double longitude, int speed, decimal? power, double? odometer, double idealBatteryRangeKm, double batteryRangeKm, int batteryLevel, double? outsideTemp, string altitude)
+        public int InsertPos(string timestamp, double latitude, double longitude, int speed, decimal? power, double? odometer, double idealBatteryRangeKm, double batteryRangeKm, double batteryLevel, double? outsideTemp, string altitude)
         {
             int posid = 0;
             double? inside_temp = car.CurrentJSON.current_inside_temperature;
@@ -4838,8 +4904,8 @@ WHERE
                 charger_phases = "1";
             }
 
-            double kmIdeal_Battery_Range = ideal_battery_range / (double)0.62137;
-            double kmBattery_Range = battery_range / (double)0.62137;
+            double kmIdeal_Battery_Range = Tools.MlToKm(ideal_battery_range, 1);
+            double kmBattery_Range = Tools.MlToKm(battery_range, 1);
 
             double powerkW = Convert.ToDouble(charger_power, Tools.ciEnUS);
 
@@ -4981,7 +5047,7 @@ VALUES(
             {
                 if (Convert.ToInt32(battery_level, Tools.ciEnUS) >= 0)
                 {
-                    car.CurrentJSON.current_battery_level = Convert.ToInt32(battery_level, Tools.ciEnUS);
+                    car.CurrentJSON.current_battery_level = Convert.ToDouble(battery_level, Tools.ciEnUS);
                 }
 
                 car.CurrentJSON.current_charge_energy_added = Convert.ToDouble(charge_energy_added, Tools.ciEnUS);
@@ -7089,6 +7155,40 @@ WHERE
                 ex.ToExceptionless().FirstCarUserID().Submit();
                 Logfile.Log(ex.ToString());
             }
+        }
+
+        internal bool CheckVirtualKey()
+        {
+            try
+            {
+                using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+                {
+                    con.Open();
+                    using (MySqlCommand cmd = new MySqlCommand("SELECT needVirtualKey, virtualkey FROM cars where id = @CarID", con))
+                    {
+                        cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
+
+                        MySqlDataReader dr = SQLTracer.TraceDR(cmd);
+                        if (dr.Read())
+                        {
+                            if (dr[0] == DBNull.Value)
+                                return false;
+
+                            if (dr["needVirtualKey"].ToString() == "0" && dr["virtualKey"].ToString() == "1")
+                            {
+                                return true;
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ex.ToExceptionless().FirstCarUserID().Submit();
+                Logfile.Log(ex.ToString());
+            }
+
+            return false;
         }
 
         internal bool GetRegion()

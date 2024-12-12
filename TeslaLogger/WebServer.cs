@@ -357,6 +357,12 @@ namespace TeslaLogger
                     case bool _ when Regex.IsMatch(request.Url.LocalPath, @"/captchapic/[0-9]+"):
                         CaptchaPic(request, response);
                         break;
+                    case bool _ when Regex.IsMatch(request.Url.LocalPath, @"/carname/[0-9]+/info"):
+                        CarName_Info(request, response);
+                        break;
+                    case bool _ when Regex.IsMatch(request.Url.LocalPath, @"/carname/[0-9]+/set"):
+                        CarName_Set(request, response);
+                        break;
                     case bool _ when Regex.IsMatch(request.Url.LocalPath, @"/abrp/[0-9]+/info"):
                         ABRP_Info(request, response);
                         break;
@@ -1661,6 +1667,61 @@ DROP TABLE chargingstate_bak";
             }
         }
 
+        private static void CarName_Set(HttpListenerRequest request, HttpListenerResponse response)
+        {
+            Match m = Regex.Match(request.Url.LocalPath, @"/carname/([0-9]+)/set");
+            if (m.Success && m.Groups.Count == 2 && m.Groups[1].Captures.Count == 1)
+            {
+                _ = int.TryParse(m.Groups[1].Captures[0].ToString(), out int CarID);
+                Car car = Car.GetCarByID(CarID);
+                if (car != null)
+                {
+                    string data = GetDataFromRequestInputStream(request);
+                    string car_name = "";
+
+                    if (String.IsNullOrEmpty(data))
+                    {
+                        car_name = request.QueryString["car_name"];
+                    }
+                    else
+                    {
+                        dynamic r = JsonConvert.DeserializeObject(data);
+                        car_name = r["car_name"];
+                    }
+
+                    if (!car.DbHelper.SetCarName(car_name))
+                        WriteString(response, "Wrong car name!");
+                    else
+                        WriteString(response, "OK");
+
+                    return;
+                }
+            }
+            WriteString(response, "");
+        }
+
+        private static void CarName_Info(HttpListenerRequest request, HttpListenerResponse response)
+        {
+            Match m = Regex.Match(request.Url.LocalPath, @"/carname/([0-9]+)/info");
+            if (m.Success && m.Groups.Count == 2 && m.Groups[1].Captures.Count == 1)
+            {
+                _ = int.TryParse(m.Groups[1].Captures[0].ToString(), out int CarID);
+                Car car = Car.GetCarByID(CarID);
+                if (car != null)
+                {
+                    car.DbHelper.GetCarName(out string carname);
+                    var t = new
+                    {
+                        car_name = carname
+                    };
+
+                    string json = JsonConvert.SerializeObject(t);
+                    WriteString(response, json, "application/json");
+                    return;
+                }
+            }
+            WriteString(response, "");
+        }
         private static void ABRP_Set(HttpListenerRequest request, HttpListenerResponse response)
         {
             Match m = Regex.Match(request.Url.LocalPath, @"/abrp/([0-9]+)/set");
@@ -3279,23 +3340,15 @@ FROM
 
             try
             {
-                Car c = Car.Allcars.FirstOrDefault(r => r.waitForMFACode);
-                if (c != null)
+                using (DataTable dt = new DataTable())
                 {
-                    responseString = "WAITFORMFA:" + c.CarInDB;
-                }
-                else
-                {
-                    using (DataTable dt = new DataTable())
+                    using (MySqlDataAdapter da = new MySqlDataAdapter("SELECT id, display_name, tasker_hash, model_name, vin, tesla_name, tesla_carid, lastscanmytesla, freesuc, fleetAPI, needVirtualKey, needCommandPermission, needFleetAPI, access_type, virtualkey, car_type, tesla_token_expire < DATE_SUB(NOW(), INTERVAL 12 HOUR) as inactive FROM cars order by display_name", DBHelper.DBConnectionstring))
                     {
-                        using (MySqlDataAdapter da = new MySqlDataAdapter("SELECT id, display_name, tasker_hash, model_name, vin, tesla_name, tesla_carid, lastscanmytesla, freesuc, fleetAPI, needVirtualKey, needCommandPermission, needFleetAPI, access_type, virtualkey FROM cars order by display_name", DBHelper.DBConnectionstring))
-                        {
-                            SQLTracer.TraceDA(dt, da);
+                        SQLTracer.TraceDA(dt, da);
 
-                            responseString = dt.Rows.Count > 0 ? Tools.DataTableToJSONWithJavaScriptSerializer(dt) : "not found!";
-                        }
-                        dt.Clear();
+                        responseString = dt.Rows.Count > 0 ? Tools.DataTableToJSONWithJavaScriptSerializer(dt) : "not found!";
                     }
+                    dt.Clear();
                 }
             }
             catch (Exception ex)
