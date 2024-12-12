@@ -1,3 +1,6 @@
+# Version 1.62.0
+- Update = none is no longer supported. Tesla may force me to update a version so "none" is now "stable"
+
 # Version 1.61.0
 - Simplified the switch to Fleet API. 
 - Infos if you need to switch to Fleet API in the admin panel. 

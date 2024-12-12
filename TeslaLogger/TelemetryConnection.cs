@@ -554,7 +554,7 @@ namespace TeslaLogger
                             lastSoc = Soc;
                             lastSocDate = d;
 
-                            car.teslaAPIState.AddValue("battery_level", "int", value, Tools.ToUnixTime(d), "charge_state");
+                            car.teslaAPIState.AddValue("battery_level", "int", Soc, Tools.ToUnixTime(d), "charge_state");
 
                             car.CurrentJSON.current_battery_level = lastSoc;
                             changed = true;

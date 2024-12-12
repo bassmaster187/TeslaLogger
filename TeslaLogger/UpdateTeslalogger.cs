@@ -2784,12 +2784,13 @@ PRIMARY KEY(id)
 
         public static bool UpdateNeeded(string currentVersion, string online_version, Tools.UpdateType updateType)
         {
-            if (updateType == Tools.UpdateType.none)
+            /*
+            if (updateType == Tools.UpdateType.none) // None isn't supported anymore, because Tesla may force me to do an update
             {
                 return false;
-            }
+            }*/
 
-            if (updateType == Tools.UpdateType.stable || updateType == Tools.UpdateType.all)
+            if (updateType == Tools.UpdateType.stable || updateType == Tools.UpdateType.all || updateType == Tools.UpdateType.none)
             {
                 Version cv = new Version(currentVersion);
                 Version ov = new Version(online_version);
