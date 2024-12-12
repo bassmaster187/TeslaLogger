@@ -112,7 +112,7 @@ namespace TeslaLogger
 
         private DBHelper dbHelper;
 
-        private readonly TeslaAPIState teslaAPIState;
+        internal readonly TeslaAPIState teslaAPIState;
 
         private bool useTaskerToken = true;
         internal string wheel_type = "";

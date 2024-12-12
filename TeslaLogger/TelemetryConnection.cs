@@ -12,6 +12,7 @@ using System.IO;
 using Exceptionless;
 using Newtonsoft.Json.Linq;
 using System.Globalization;
+using Google.Protobuf.WellKnownTypes;
 
 namespace TeslaLogger
 {
@@ -552,6 +553,8 @@ namespace TeslaLogger
                             Soc = Math.Round(Soc, 1);
                             lastSoc = Soc;
                             lastSocDate = d;
+
+                            car.teslaAPIState.AddValue("battery_level", "int", value, Tools.ToUnixTime(d), "charge_state");
 
                             car.CurrentJSON.current_battery_level = lastSoc;
                             changed = true;
