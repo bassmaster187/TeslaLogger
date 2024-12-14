@@ -308,9 +308,11 @@ namespace TeslaLogger
                     CheckNewCredentials();
 
                     InitStage3();
+
                     if (ApplicationSettings.Default.UseTelemetryServer)
                     {
-                        if (Virtual_key && !(CarType == "models" || CarType == "models2" || CarType == "modelx"))
+                        bool supportedByFleetTelemetry = SupportedByFleetTelemetry();
+                        if (supportedByFleetTelemetry)
                         {
                             telemetry = new TelemetryConnection(this);
                             /*
@@ -328,7 +330,14 @@ namespace TeslaLogger
                             else if (GetCurrentState() == TeslaState.Online || GetCurrentState() == TeslaState.Drive || GetCurrentState() == TeslaState.Charge)
                                 telemetry.StartConnection();
                         }
-                    } 
+                        else
+                        {
+                            Log("Car not supported by Fleet Telemetry!!! " + Tools.VINDecoder(vin, out _, out _, out _, out _, out _, out _, out _).ToString() + " /  VIN: " + vin);
+                            currentJSON.FatalError = "Car not supported by Fleet API!!!";
+                            currentJSON.CreateCurrentJSON();
+                            thread.Abort();
+                        }
+                    }
                     else
                     {
                         Log("Telemetry Connection turned off!");
@@ -421,6 +430,20 @@ namespace TeslaLogger
             {
                 Log("*** Exit Loop !!!");
             }
+        }
+
+        internal bool SupportedByFleetTelemetry()
+        {
+            string vindecoder = Tools.VINDecoder(vin, out int y, out string carType, out _, out _, out _, out _, out _).ToString();
+            if (y >= 2021) // all cars from 2021 are supported
+                return true;
+
+            if ((carType == "Model S" || carType == "Model X") & y < 2021) 
+            {
+                return false;
+            }
+
+            return true;
         }
 
         private void InitStage3()

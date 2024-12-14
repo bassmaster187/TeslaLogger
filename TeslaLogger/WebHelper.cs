@@ -5071,7 +5071,7 @@ DESC", con))
         {
             if (DateTime.UtcNow.Day != commandCounterDay)
             {
-                UpdateTaskerTokenAsync().Wait();
+                UpdateCommandConterAsync().Wait();
 
                 commandCounterDay = DateTime.UtcNow.Day;
                 Log($"Total Commands Today: {commandCounter} Drive: {commandCounterDrive} Charge: {commandCounterCharging} Online: {commandcounterOnline}");
@@ -5084,16 +5084,15 @@ DESC", con))
                 KVS.InsertOrUpdate($"commandCounterCharging_{car.CarInDB}", commandCounterCharging);
                 KVS.InsertOrUpdate($"commandCounterOnline_{car.CarInDB}", commandcounterOnline);
                 KVS.InsertOrUpdate($"commandCounterDay{car.CarInDB}", commandCounterDay);
-
-                UpdateTaskerTokenAsync();
             }
         }
 
-        private async Task UpdateTaskerTokenAsync()
+        private async Task UpdateCommandConterAsync()
         {
             try
             {
-                HttpResponseMessage response = await  httpclient_teslalogger_de.GetAsync($"https://teslalogger.de/update-commandcounter.php?token={car.TaskerHash}&drive={commandCounterDrive}&charging={commandCounterCharging}&online={commandcounterOnline}");
+                int fleetapi = car.FleetAPI ? 1 : 0;
+                HttpResponseMessage response = await  httpclient_teslalogger_de.GetAsync($"https://teslalogger.de/update-commandcounter2.php?token={car.TaskerHash}&drive={commandCounterDrive}&charging={commandCounterCharging}&online={commandcounterOnline}&fleetapi={fleetapi}");
                 response.EnsureSuccessStatusCode();
                 string responseBody = await response.Content.ReadAsStringAsync();
                 Log($"UpdateTaskerToken: {responseBody}");
