@@ -311,31 +311,34 @@ namespace TeslaLogger
 
                     if (ApplicationSettings.Default.UseTelemetryServer)
                     {
-                        bool supportedByFleetTelemetry = SupportedByFleetTelemetry();
-                        if (supportedByFleetTelemetry)
+                        if (FleetAPI)
                         {
-                            telemetry = new TelemetryConnection(this);
-                            /*
+                            bool supportedByFleetTelemetry = SupportedByFleetTelemetry();
+                            if (supportedByFleetTelemetry)
+                            {
+                                telemetry = new TelemetryConnection(this);
+                                /*
 
-                            string resultContent = "{\"data\":[{\"key\":\"VehicleSpeed\",\"value\":{\"stringValue\":\"25.476\"}},{\"key\":\"CruiseState\",\"value\":{\"stringValue\":\"Standby\"}},{\"key\":\"Location\",\"value\":{\"locationValue\":{\"latitude\":48.18759,\"longitude\":9.899887}}}],\"createdAt\":\"2024-06-20T22:00:30.129139612Z\",\"vin\":\"xxx\"}";
-                            dynamic j = JsonConvert.DeserializeObject(resultContent);
-                            DateTime d = j["createdAt"];
-                            dynamic jData = j["data"];
-                            
-                            telemetry.InsertLocation(jData, d, resultContent);
-                            */
+                                string resultContent = "{\"data\":[{\"key\":\"VehicleSpeed\",\"value\":{\"stringValue\":\"25.476\"}},{\"key\":\"CruiseState\",\"value\":{\"stringValue\":\"Standby\"}},{\"key\":\"Location\",\"value\":{\"locationValue\":{\"latitude\":48.18759,\"longitude\":9.899887}}}],\"createdAt\":\"2024-06-20T22:00:30.129139612Z\",\"vin\":\"xxx\"}";
+                                dynamic j = JsonConvert.DeserializeObject(resultContent);
+                                DateTime d = j["createdAt"];
+                                dynamic jData = j["data"];
 
-                            if (FleetAPI)
-                                telemetry.StartConnection();
-                            else if (GetCurrentState() == TeslaState.Online || GetCurrentState() == TeslaState.Drive || GetCurrentState() == TeslaState.Charge)
-                                telemetry.StartConnection();
-                        }
-                        else
-                        {
-                            Log("Car not supported by Fleet Telemetry!!! " + Tools.VINDecoder(vin, out _, out _, out _, out _, out _, out _, out _).ToString() + " /  VIN: " + vin);
-                            currentJSON.FatalError = "Car not supported by Fleet API!!!";
-                            currentJSON.CreateCurrentJSON();
-                            thread.Abort();
+                                telemetry.InsertLocation(jData, d, resultContent);
+                                */
+
+                                if (FleetAPI)
+                                    telemetry.StartConnection();
+                                else if (GetCurrentState() == TeslaState.Online || GetCurrentState() == TeslaState.Drive || GetCurrentState() == TeslaState.Charge)
+                                    telemetry.StartConnection();
+                            }
+                            else
+                            {
+                                Log("Car not supported by Fleet Telemetry!!! " + Tools.VINDecoder(vin, out _, out _, out _, out _, out _, out _, out _).ToString() + " /  VIN: " + vin);
+                                currentJSON.FatalError = "Car not supported by Fleet API!!!";
+                                currentJSON.CreateCurrentJSON();
+                                thread.Abort();
+                            }
                         }
                     }
                     else

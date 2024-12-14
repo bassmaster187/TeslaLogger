@@ -1,3 +1,6 @@
+# Version 1.62.2
+- Bugfixes
+
 # Version 1.62.1
 - BF: Supoort for new Tesla Model S/X 2021 - Tesla identified the new Model S/X as pre face lift Model S/X.
 
