@@ -1,5 +1,5 @@
-# Version 1.62.2
-- Bugfixes
+# Version 1.62.3
+- Fleet API: Doors, Windows, Trunk, Frunk and Locked status will be send to Admin Panel and MQTT
 
 # Version 1.62.1
 - BF: Supoort for new Tesla Model S/X 2021 - Tesla identified the new Model S/X as pre face lift Model S/X.
