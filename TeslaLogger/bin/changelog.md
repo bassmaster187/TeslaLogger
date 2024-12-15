@@ -1,3 +1,6 @@
+# Version 1.62.4
+- Better support for new Tesla Model S/X 2021 
+
 # Version 1.62.3
 - Fleet API: Doors, Windows, Trunk, Frunk and Locked status will be send to Admin Panel and MQTT
 

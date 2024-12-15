@@ -3253,15 +3253,38 @@ FROM
 
             try
             {
-                using (DataTable dt = new DataTable())
+                lock (Car.Allcars)
                 {
-                    using (MySqlDataAdapter da = new MySqlDataAdapter("SELECT id, display_name, tasker_hash, model_name, vin, tesla_name, tesla_carid, lastscanmytesla, freesuc, fleetAPI, needVirtualKey, needCommandPermission, needFleetAPI, access_type, virtualkey, car_type, tesla_token_expire < DATE_SUB(NOW(), INTERVAL 12 HOUR) as inactive FROM cars order by display_name", DBHelper.DBConnectionstring))
+                    using (DataTable dt = new DataTable())
                     {
-                        SQLTracer.TraceDA(dt, da);
+                        using (MySqlDataAdapter da = new MySqlDataAdapter("SELECT id, display_name, tasker_hash, model_name, vin, tesla_name, tesla_carid, lastscanmytesla, freesuc, fleetAPI, needVirtualKey, needCommandPermission, needFleetAPI, access_type, virtualkey, car_type FROM cars order by display_name", DBHelper.DBConnectionstring))
+                        {
+                            SQLTracer.TraceDA(dt, da);
 
-                        responseString = dt.Rows.Count > 0 ? Tools.DataTableToJSONWithJavaScriptSerializer(dt) : "not found!";
+                            dt.Columns.Add("SupportedByFleetTelemetry");
+                            dt.Columns.Add("inactive");
+
+                            foreach (DataRow dr in dt.Rows)
+                            {
+                                try
+                                {
+                                    Car c = Car.GetCarByID(Convert.ToInt32(dr["id"]));
+                                    if (c != null)
+                                        dr["SupportedByFleetTelemetry"] = c.SupportedByFleetTelemetry() ? 1 : 0;
+                                    else
+                                        dr["inactive"] = 1;
+                                }
+                                catch (Exception ex)
+                                {
+                                    ex.ToExceptionless().FirstCarUserID().Submit();
+                                    Logfile.Log(ex.ToString());
+                                }
+                            }
+
+                            responseString = dt.Rows.Count > 0 ? Tools.DataTableToJSONWithJavaScriptSerializer(dt) : "not found!";
+                        }
+                        dt.Clear();
                     }
-                    dt.Clear();
                 }
             }
             catch (Exception ex)
