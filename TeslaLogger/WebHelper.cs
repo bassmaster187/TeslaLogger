@@ -626,6 +626,21 @@ namespace TeslaLogger
                             // as of March 21 2022 Tesla returns a bearer token. GetTokenAsync4 is no longer neeaded. 
                             car.CreateExeptionlessLog("Tesla Token", "UpdateTeslaTokenFromRefreshToken Success", Exceptionless.Logging.LogLevel.Info).Submit();
                             string Token = jsonResult["access_token"];
+
+                            if (jsonResult.ContainsKey("expires_in"))
+                            {
+                                var t = DateTime.UtcNow.AddSeconds((int)(jsonResult["expires_in"])).AddHours(-2);
+                                if (t > DateTime.UtcNow.AddHours(1))
+                                    nextTeslaTokenFromRefreshToken = t;
+                                else
+                                {
+                                    t = DateTime.UtcNow.AddSeconds((int)(jsonResult["expires_in"]));
+                                    nextTeslaTokenFromRefreshToken = t;
+                                }
+
+                                Log("access token expires: " + nextTeslaTokenFromRefreshToken.ToLocalTime());
+                            }
+
                             SetNewAccessToken(Token);
 
                             return Tesla_token;
@@ -2068,6 +2083,8 @@ namespace TeslaLogger
                             {
                                 Log("GetVehicles Error: " + ex.Message);
                             }
+                            else
+                                Log("GetVehicles Error: " + ex.Message);
 
                             ex = ex.InnerException;
                         }
