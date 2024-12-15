@@ -456,7 +456,7 @@ else
 			$access_type = $v->{"access_type"};
 
 			$cartype = $v->{"car_type"};
-			$NeedSubscription = !($cartype === "models" || $cartype === "modelx" || $cartype === "models2");
+			$NeedSubscription = $v->{"SupportedByFleetTelemetry"} == "1";
 			
 			$freesuccheckbox = GetCheckbox($v->{"freesuc"});
 			$fleetAPICheckBox = "";
