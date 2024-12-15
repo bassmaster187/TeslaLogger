@@ -506,6 +506,84 @@ namespace TeslaLogger
                             
                         }
                     }
+                    else if (key == "DoorState")
+                    {
+                        string DoorState = value["stringValue"];
+                        if (!String.IsNullOrEmpty(DoorState))
+                        {
+                            if (DoorState.Contains("DriverFront"))
+                                car.teslaAPIState.AddValue("df", "int", 1, Tools.ToUnixTime(d), "vehicle_state");
+                            else
+                                car.teslaAPIState.AddValue("df", "int", 0, Tools.ToUnixTime(d), "vehicle_state");
+
+                            if (DoorState.Contains("DriverRear"))
+                                car.teslaAPIState.AddValue("dr", "int", 1, Tools.ToUnixTime(d), "vehicle_state");
+                            else
+                                car.teslaAPIState.AddValue("dr", "int", 0, Tools.ToUnixTime(d), "vehicle_state");
+
+                            if (DoorState.Contains("PassengerFront"))
+                                car.teslaAPIState.AddValue("pf", "int", 1, Tools.ToUnixTime(d), "vehicle_state");
+                            else
+                                car.teslaAPIState.AddValue("pf", "int", 0, Tools.ToUnixTime(d), "vehicle_state");
+
+                            if (DoorState.Contains("PassengerRear"))
+                                car.teslaAPIState.AddValue("pr", "int", 1, Tools.ToUnixTime(d), "vehicle_state");
+                            else
+                                car.teslaAPIState.AddValue("pr", "int", 0, Tools.ToUnixTime(d), "vehicle_state");
+
+                            if (DoorState.Contains("TrunkFront"))
+                                car.teslaAPIState.AddValue("ft", "int", 1, Tools.ToUnixTime(d), "vehicle_state");
+                            else
+                                car.teslaAPIState.AddValue("ft", "int", 0, Tools.ToUnixTime(d), "vehicle_state");
+
+                            if (DoorState.Contains("TrunkRear"))
+                                car.teslaAPIState.AddValue("rt", "int", 1, Tools.ToUnixTime(d), "vehicle_state");
+                            else
+                                car.teslaAPIState.AddValue("rt", "int", 0, Tools.ToUnixTime(d), "vehicle_state");
+                        }
+                        else
+                        {
+                            car.teslaAPIState.AddValue("df", "int", 0, Tools.ToUnixTime(d), "vehicle_state");
+                            car.teslaAPIState.AddValue("dr", "int", 0, Tools.ToUnixTime(d), "vehicle_state");
+                            car.teslaAPIState.AddValue("pf", "int", 0, Tools.ToUnixTime(d), "vehicle_state");
+                            car.teslaAPIState.AddValue("pr", "int", 0, Tools.ToUnixTime(d), "vehicle_state");
+                            car.teslaAPIState.AddValue("ft", "int", 0, Tools.ToUnixTime(d), "vehicle_state");
+                            car.teslaAPIState.AddValue("rt", "int", 0, Tools.ToUnixTime(d), "vehicle_state");
+                        }
+
+                        Log("XXXX DoorState:" + DoorState);
+                        car.CurrentJSON.CreateCurrentJSON();
+
+                    }
+                    else if (key == "Locked")
+                    {
+                        string Locked = value["stringValue"];
+                        if (bool.TryParse(Locked, out bool l))
+                        {
+                            car.teslaAPIState.AddValue("locked", "bool", l, Tools.ToUnixTime(d), "vehicle_state");
+                            car.CurrentJSON.CreateCurrentJSON();
+
+                        }
+                    }
+                    else if (key.EndsWith("Window"))
+                    {
+                        string apistatekey = key.ToLower().Insert(2, "_");
+                        string Window = value["stringValue"];
+
+                        Log("Window: " + key + " / " + Window);
+                        if (!String.IsNullOrEmpty(Window))
+                        {
+                            int apistatevalue = 0;
+                            if (Window.Contains("Open"))
+                                apistatevalue = 1;
+
+                            car.teslaAPIState.AddValue(apistatekey, "int", apistatevalue, Tools.ToUnixTime(d), "vehicle_state");
+                        }
+                        else
+                            car.teslaAPIState.AddValue(apistatekey, "int", 0, Tools.ToUnixTime(d), "vehicle_state");
+
+                        car.CurrentJSON.CreateCurrentJSON();
+                    }
                 }
             }
         }
