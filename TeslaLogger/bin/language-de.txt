@@ -169,6 +169,7 @@ Subscribe="Abo abschließen"
 SubscribeManage="Abo verwalten"
 SubscriptionRequired="Abo notwendig!"
 FleetAPIRequired="Fleet API notwendig!"
+Aktiv="Aktiv"
 
 #password_fleet.php
 PF_LOGOUT="Melden Sie sich von Ihrem Tesla-Konto ab, wenn Sie bereits eingeloggt sind"

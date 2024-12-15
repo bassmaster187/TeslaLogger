@@ -433,6 +433,7 @@ else
 			<th><?php t("Model"); ?></th>
 			<th><?php t("VIN"); ?></th>
 			<th><?php t("Tasker Token"); ?></th>
+			<th><?php t("Aktiv"); ?></th>
 			<th style='text-align:center;'><?php t("Free SUC"); ?></th>
 			<th style='text-align:center;'>Fleet API</th>
 			<th style='text-align:center;'>Virtual Key</th>
@@ -454,6 +455,7 @@ else
 			$vin = $v->{"vin"};
 			$tesla_carid = $v->{"tesla_carid"};
 			$access_type = $v->{"access_type"};
+			$inactive = $v->{"inactive"} == 1;
 
 			$cartype = $v->{"car_type"};
 			$NeedSubscription = $v->{"SupportedByFleetTelemetry"} == "1";
@@ -468,12 +470,15 @@ else
 
 			$virtualKeyCheckBox = GetCheckbox($v->{"virtualkey"});
 
+			$activeCheckBox = GetCheckbox(!$inactive);
+
 			echo("	<tr>\r\n");
 			echo("		<td>$id</td>\r\n");
 			echo("		<td>$display_name <a href='changecarname.php?carid=$id'>&#9998</a></td>\r\n");
 			echo("		<td>$car</td>\r\n");
 			echo("		<td>$vin</td>\r\n");
 			echo("		<td>$tasker_token</td>\r\n");
+			echo("		<td style='text-align:center;'>$activeCheckBox</td>\r\n");
 			echo("		<td style='text-align:center;'>$freesuccheckbox</td>\r\n");
 			echo("		<td style='text-align:center;'>$fleetAPICheckBox</td>\r\n");
 			echo("		<td style='text-align:center;'>$virtualKeyCheckBox</td>\r\n");
@@ -485,7 +490,7 @@ else
 			echo("</td>\r\n");
 
 			echo("		<td style='text-align:center;'>");
-			if ($NeedSubscription)
+			if ($NeedSubscription && !$inactive)
 			{
 				$subscription = file_get_contents("https://teslalogger.de/stripe/subscription-check.php?vin=$vin");
 				

@@ -267,6 +267,7 @@ Subscribe="Subscribe"
 SubscribeManage="Manage"
 SubscriptionRequired="Subscription Required!"
 FleetAPIRequired="Fleet API Required!"
+Aktiv="Active"
 
 #password_fleet.php
 PF_LOGOUT="Log out from your Tesla account if logged in already"
