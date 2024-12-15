@@ -2727,13 +2727,12 @@ namespace TeslaLogger
         public void UpdateEfficiency()
         {
             //string eff = "0.190052356";
-            String vinCarType = "";
-            if (String.IsNullOrEmpty(car.CarType))
-                Tools.VINDecoder(car.Vin, out _, out vinCarType, out bool AWD, out _, out string battery, out _, out _);
+            
+            Tools.VINDecoder(car.Vin, out int year, out string vinCarType, out bool AWD, out bool MIC, out string battery, out string motor, out bool MIG);
 
             if (car.CarType == "model3" || vinCarType == "Model 3")
             {
-                Tools.VINDecoder(car.Vin, out int year, out _, out bool AWD, out bool MIC, out string battery, out string motor, out _);
+                // Tools.VINDecoder(car.Vin, out int year, out _, out bool AWD, out bool MIC, out string battery, out string motor, out _);
 
                 if (car.TrimBadging == "p74d" && year < 2021)
                 {
@@ -2892,7 +2891,7 @@ namespace TeslaLogger
                 }
                 else if (car.TrimBadging.Length == 0)
                 {
-                    Tools.VINDecoder(car.Vin, out _, out _, out bool AWD, out _, out _, out string motor, out _);
+                    // Tools.VINDecoder(car.Vin, out _, out _, out bool AWD, out _, out _, out string motor, out _);
                     int maxRange = car.DbHelper.GetAvgMaxRage();
                     if (maxRange > 500)
                     {
@@ -2917,7 +2916,7 @@ namespace TeslaLogger
                     return;
                 }
             }
-            else if (car.CarType == "models" && (car.CarSpecialType == "base" || car.CarSpecialType == "signature"))
+            else if (car.CarType == "models" && (car.CarSpecialType == "base" || car.CarSpecialType == "signature") && year < 2021)
             {
                 if (car.TrimBadging == "60")
                 {
@@ -2991,7 +2990,7 @@ namespace TeslaLogger
                     return;
                 }
             }
-            else if (car.CarType == "modelx" && car.CarSpecialType == "base")
+            else if (car.CarType == "modelx" && car.CarSpecialType == "base" && year < 2021)
             {
                 if (car.TrimBadging == "75d")
                 {
@@ -3029,7 +3028,7 @@ namespace TeslaLogger
             }
             else if (car.CarType == "modely" && car.CarSpecialType == "base")
             {
-                Tools.VINDecoder(car.Vin, out int year, out string ct, out bool AWD, out bool MIC, out string battery, out string motor, out bool MIG);
+                // Tools.VINDecoder(car.Vin, out int year, out string ct, out bool AWD, out bool MIC, out string battery, out string motor, out bool MIG);
                 if (car.TrimBadging == "74d")
                 {
                     if (MIC)
@@ -3097,11 +3096,11 @@ namespace TeslaLogger
             }
             else if (car.CarType == "tamarind" && car.CarSpecialType == "base")
             {
-                Tools.VINDecoder(car.Vin, out int year, out _, out bool AWD, out bool MIC, out string battery, out string motor, out _);
+                // Tools.VINDecoder(car.Vin, out int year, out _, out bool AWD, out bool MIC, out string battery, out string motor, out _);
 
                 if (motor == "triple 2021 plaid")
                 {
-                    WriteCarSettings("0.149", "X 2021 Plaid");
+                    WriteCarSettings("0.193", "X 2021 Plaid");
                     return;
                 }
                 else
@@ -3112,11 +3111,11 @@ namespace TeslaLogger
             }
             else if (car.CarType == "lychee" && car.CarSpecialType == "base")
             {
-                Tools.VINDecoder(car.Vin, out int year, out _, out bool AWD, out bool MIC, out string battery, out string motor, out _);
+                // Tools.VINDecoder(car.Vin, out int year, out _, out bool AWD, out bool MIC, out string battery, out string motor, out _);
 
                 if (motor == "triple 2021 plaid")
                 {
-                    WriteCarSettings("0.151", "S 2021 Plaid");
+                    WriteCarSettings("0.172", "S 2021 Plaid");
                     return;
                 }
                 else
@@ -3125,6 +3124,33 @@ namespace TeslaLogger
                     return;
                 }
             }
+            else if (vinCarType == "Model X" && year >= 2021)
+            {
+                if (motor == "triple 2021 plaid")
+                {
+                    WriteCarSettings("0.193", "X 2021 Plaid");
+                    return;
+                }
+                else
+                {
+                    WriteCarSettings("0.181", "X 2021 LR");
+                    return;
+                }
+            }
+            else if (vinCarType == "Model S" && year >= 2021)
+            {
+                if (motor == "triple 2021 plaid")
+                {
+                    WriteCarSettings("0.172", "S 2021 Plaid");
+                    return;
+                }
+                else
+                {
+                    WriteCarSettings("0.151", "S 2021 LR");
+                    return;
+                }
+            }
+
 
             /*
             if (car.Model == "MS")

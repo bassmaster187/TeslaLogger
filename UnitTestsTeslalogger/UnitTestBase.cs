@@ -692,7 +692,27 @@ namespace UnitTestsTeslalogger
             wh.UpdateEfficiency();
 
             Assert.AreEqual("X 2021 Plaid", wh.car.ModelName);
-            Assert.AreEqual(0.149, wh.car.WhTR);
+            Assert.AreEqual(0.193, wh.car.WhTR);
+
+            bool supportedByFleetTelemetry = c.SupportedByFleetTelemetry();
+            Assert.IsTrue(supportedByFleetTelemetry);
+        }
+
+        [TestMethod]
+        public void Car_X_2021_Plaid_vin()
+        {
+            Car c = new Car(0, "", "", 0, "", DateTime.Now, "", "", "", "", "", "", "", null, false);
+            WebHelper wh = c.webhelper;
+
+            MemoryCache.Default.Remove("GetAvgMaxRage_0");
+            // wh.car.CarType = "tamarind";
+            // wh.car.CarSpecialType = "base";
+            // wh.car.TrimBadging = "p100d";
+            wh.car.Vin = "7SAXCBE62NFxxxxxx";
+            wh.UpdateEfficiency();
+
+            Assert.AreEqual("X 2021 Plaid", wh.car.ModelName);
+            Assert.AreEqual(0.193, wh.car.WhTR);
 
             bool supportedByFleetTelemetry = c.SupportedByFleetTelemetry();
             Assert.IsTrue(supportedByFleetTelemetry);
@@ -712,7 +732,87 @@ namespace UnitTestsTeslalogger
             wh.UpdateEfficiency();
 
             Assert.AreEqual("S 2021 Plaid", wh.car.ModelName);
+            Assert.AreEqual(0.172, wh.car.WhTR);
+
+            bool supportedByFleetTelemetry = c.SupportedByFleetTelemetry();
+            Assert.IsTrue(supportedByFleetTelemetry);
+        }
+
+        [TestMethod]
+        public void Car_S_2021_Plaidvin()
+        {
+            Car c = new Car(0, "", "", 0, "", DateTime.Now, "", "", "", "", "", "", "", null, false);
+            WebHelper wh = c.webhelper;
+
+            MemoryCache.Default.Remove("GetAvgMaxRage_0");
+            // wh.car.CarType = "lychee";
+            // wh.car.CarSpecialType = "base";
+            // wh.car.TrimBadging = "p100d";
+            wh.car.Vin = "5YJSA7E66PFxxxxxx";
+            wh.UpdateEfficiency();
+
+            Assert.AreEqual("S 2021 Plaid", wh.car.ModelName);
+            Assert.AreEqual(0.172, wh.car.WhTR);
+
+            bool supportedByFleetTelemetry = c.SupportedByFleetTelemetry();
+            Assert.IsTrue(supportedByFleetTelemetry);
+        }
+
+        [TestMethod]
+        public void Car_S_2021_LRvinTelemetry()
+        {
+            Car c = new Car(0, "", "", 0, "", DateTime.Now, "", "", "", "", "", "", "", null, false);
+            WebHelper wh = c.webhelper;
+
+            MemoryCache.Default.Remove("GetAvgMaxRage_0");
+            wh.car.CarType = "models";
+            wh.car.CarSpecialType = "base";
+            wh.car.TrimBadging = "100d";
+            wh.car.Vin = "SYJSA7E53PFXXXXXX";
+            wh.UpdateEfficiency();
+
+            Assert.AreEqual("S 2021 LR", wh.car.ModelName);
             Assert.AreEqual(0.151, wh.car.WhTR);
+
+            bool supportedByFleetTelemetry = c.SupportedByFleetTelemetry();
+            Assert.IsTrue(supportedByFleetTelemetry);
+        }
+
+        [TestMethod]
+        public void Car_S_2021_PlaidvinTelemetry()
+        {
+            Car c = new Car(0, "", "", 0, "", DateTime.Now, "", "", "", "", "", "", "", null, false);
+            WebHelper wh = c.webhelper;
+
+            MemoryCache.Default.Remove("GetAvgMaxRage_0");
+            wh.car.CarType = "models";
+            wh.car.CarSpecialType = "base";
+            wh.car.TrimBadging = "p100d";
+            wh.car.Vin = "5YJSA7E66PFXXXXXX";
+            wh.UpdateEfficiency();
+
+            Assert.AreEqual("S 2021 Plaid", wh.car.ModelName);
+            Assert.AreEqual(0.172, wh.car.WhTR);
+
+            bool supportedByFleetTelemetry = c.SupportedByFleetTelemetry();
+            Assert.IsTrue(supportedByFleetTelemetry);
+        }
+
+        [TestMethod]
+        public void Car_X_2021_LRvinTelemetry()
+        {
+            Car c = new Car(0, "", "", 0, "", DateTime.Now, "", "", "", "", "", "", "", null, false);
+            WebHelper wh = c.webhelper;
+
+            MemoryCache.Default.Remove("GetAvgMaxRage_0");
+            wh.car.CarType = "modelx";
+            wh.car.CarSpecialType = "base";
+            wh.car.TrimBadging = "100d";
+            wh.car.Vin = "7SAXCCE50PFXXXXXX";
+            wh.UpdateEfficiency();
+
+            Assert.AreEqual("X 2021 LR", wh.car.ModelName);
+            Assert.AreEqual(0.181, wh.car.WhTR);
 
             bool supportedByFleetTelemetry = c.SupportedByFleetTelemetry();
             Assert.IsTrue(supportedByFleetTelemetry);
