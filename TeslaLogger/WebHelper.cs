@@ -2635,6 +2635,7 @@ namespace TeslaLogger
         {
             if (car.FleetAPI)
             {
+                UpdateEfficiency();
                 lastUpdateEfficiency = DateTime.Now;
                 return;
             }
