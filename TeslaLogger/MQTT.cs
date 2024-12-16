@@ -430,7 +430,8 @@ namespace TeslaLogger
                 foreach (dynamic car in cars)
                 {
                     int id = car["id"];
-                    if(Car.GetCarByID(id).GetCurrentState() == Car.TeslaState.Inactive)
+                    var carObj = Car.GetCarByID(id);
+                    if (carObj == null || carObj.GetCurrentState() == Car.TeslaState.Inactive)
                     {
                         continue; //skip inactive cars
                     }
@@ -447,7 +448,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
-                Logfile.Log("MQTT: HashSet Exception: " + ex.Message);
+                Logfile.Log("MQTT: HashSet Exception: " + ex);
                 ex.ToExceptionless().FirstCarUserID().Submit();
                 System.Threading.Thread.Sleep(20000);
             }
@@ -460,9 +461,19 @@ namespace TeslaLogger
         {
 
             int carId = Car.GetCarIDFromVIN(vin);
+            if(carId <= 0)
+            {
+                Logfile.Log($"MQTT: AutoDiscovery for {vin}: car not found");
+                return;
+            }
             string model = "Model " + vin[3]; //Car.GetCarByID(carId).CarType;
-            string name = Car.GetCarByID(carId).DisplayName;
-            string sw = Car.GetCarByID(carId).CurrentJSON.current_car_version;
+            var car = Car.GetCarByID(carId);
+            if (car == null)
+            {
+                Logfile.Log($"MQTT: AutoDiscovery for {vin}: car {carId} not found or not active");
+            }
+            string name = car.DisplayName;
+            string sw = car.CurrentJSON.current_car_version;
             string type = "sensor";
 
             foreach (string entity in MQTTAutoDiscovery.autoDiscovery.Keys)
