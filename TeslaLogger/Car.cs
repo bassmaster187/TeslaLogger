@@ -254,14 +254,17 @@ namespace TeslaLogger
                     this.wheel_type = wheel_type;
                     this.FleetAPI = fleetAPI;
 
-                    if (CarInDB > 0)
+                    var manualTokenRefreshNeeded = TeslaTokenExpire > DateTime.MinValue && TeslaTokenExpire < DateTime.UtcNow.AddHours(-24);
+
+                    // if we cannot refresh the token automatically, because the refresh token is expired, treat car as inactive.
+                    if (CarInDB > 0 && !manualTokenRefreshNeeded)
                     {
                         Allcars.Add(this);
                     }
                     DbHelper = new DBHelper(this);
                     webhelper = new WebHelper(this);
 
-                    if (CarInDB > 0)
+                    if (CarInDB > 0 && !manualTokenRefreshNeeded)
                     {
                         thread = new Thread(Loop)
                         {
