@@ -5837,7 +5837,7 @@ WHERE
             DataTable dt = new DataTable();
 
             // defense against SQLInjection
-            if(!Regex.Match(orderByCol "^\w+"$))
+            if(!Regex.IsMatch(orderByCol, @"^\w+$"))
             {
                 orderByCol = "id";
             }
