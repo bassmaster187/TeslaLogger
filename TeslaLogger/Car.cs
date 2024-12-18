@@ -343,7 +343,7 @@ namespace TeslaLogger
                                 Log("Car not supported by Fleet Telemetry!!! " + Tools.VINDecoder(vin, out _, out _, out _, out _, out _, out _, out _).ToString() + " /  VIN: " + vin);
                                 currentJSON.FatalError = "Car not supported by Fleet API!!!";
                                 currentJSON.CreateCurrentJSON();
-                                thread.Abort();
+                                ExitCarThread("Car not supported by Fleet Telemetry");
                             }
                         }
                     }
@@ -575,11 +575,13 @@ namespace TeslaLogger
         {
             Log("ExitCarThread: " + v);
             run = false;
-            thread.Abort();
+            
             Allcars.Remove(this);
 
             if (VIN2DBCarID.ContainsKey(vin))
                 VIN2DBCarID.Remove(vin);
+
+            thread.Abort();
         }
 
         public void ThreadJoin()
