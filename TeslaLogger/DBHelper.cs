@@ -5822,19 +5822,35 @@ WHERE
             return "";
         }
 
+        public static DataTable GetCarsByTokenAge(bool descending=false)
+        {
+            return GetCars($"tesla_token_expire {(descending?"DESC":"ASC")}");
+        }
+
         public static DataTable GetCars()
+        {
+            return GetCars("id");
+        }
+        
+        private static DataTable GetCars(string orderByCol)
         {
             DataTable dt = new DataTable();
 
+            // defense against SQLInjection
+            if(!Regex.IsMatch(orderByCol, @"^\w+$"))
+            {
+                orderByCol = "id";
+            }
+
             try
             {
-                using (MySqlDataAdapter da = new MySqlDataAdapter(@"
+                using (MySqlDataAdapter da = new MySqlDataAdapter($@"
 SELECT
     *
 FROM
     cars
 ORDER BY
-    id", DBConnectionstring))
+    {orderByCol}", DBConnectionstring))
                 {
                     _ = SQLTracer.TraceDA(dt, da);
                 }

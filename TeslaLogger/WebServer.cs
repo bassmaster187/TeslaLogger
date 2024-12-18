@@ -505,7 +505,7 @@ namespace TeslaLogger
         {
             int CarID = int.Parse(url.Segments[2]);
             Car car = Car.GetCarByID(CarID);
-            car.telemetry.CloseConnection();
+            car?.telemetry.CloseConnection();
             WriteString(response, @"OK");
         }
 
@@ -513,7 +513,7 @@ namespace TeslaLogger
         {
             int CarID = int.Parse(url.Segments[2]);
             Car car = Car.GetCarByID(CarID);
-            car.telemetry.StartConnection();
+            car?.telemetry.StartConnection();
             WriteString(response, @"OK");
         }
 
@@ -1789,10 +1789,13 @@ DROP TABLE chargingstate_bak";
                 {
                     c = Car.GetCarByID(CarID);
                     Logfile.Log("SuCBingoDev: lat=" + lat.ToString(Tools.ciEnUS) + " lng=" + lng.ToString(Tools.ciEnUS));
-                    _ = Task.Factory.StartNew(() =>
+                    if(c != null)
                     {
-                        _ = c.webhelper.SuperchargeBingoCheckin(lat, lng);
-                    }, CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
+                        _ = Task.Factory.StartNew(() =>
+                        {
+                            _ = c.webhelper.SuperchargeBingoCheckin(lat, lng);
+                        }, CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
+                    }
                 }
 
                 catch (Exception ex)
@@ -2385,6 +2388,12 @@ DROP TABLE chargingstate_bak";
                 {
                     StringBuilder sb = new StringBuilder();
                     c = Car.GetCarByID(CarID);
+
+                    if(c == null)
+                    {
+                        response.StatusCode = (int)HttpStatusCode.NotFound;
+                        WriteString(response, "Car not found");
+                    }
 
                     c.webhelper.lastUpdateEfficiency = DateTime.Now.AddDays(-1);
                     string s = c.webhelper.Wakeup().Result;
