@@ -3094,6 +3094,11 @@ namespace TeslaLogger
                     WriteCarSettings("0.142", "Y SR+");
                     return;
                 }
+                else if (car.TrimBadging == "74")
+                {
+                    WriteCarSettings("0.149", "Y LR RWD");
+                    return;
+                }
             }
             else if (car.CarType == "tamarind" && car.CarSpecialType == "base")
             {
