@@ -1477,7 +1477,7 @@ namespace TeslaLogger
             if (Driving)
             {
                 var ts = DateTime.Now - lastDriving;
-                if (ts.TotalMinutes > 5)
+                if (ts.TotalMinutes > 15)
                 {
                     Log("Driving stop by speed " + lastDriving.ToString());
                     Driving = false;
