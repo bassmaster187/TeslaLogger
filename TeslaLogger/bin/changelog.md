@@ -1,3 +1,9 @@
+# Version 1.62.5
+- Detect Model Y LR RWD
+- BF: Split drives
+- BF: inactive cars
+- BF: faster startup (inactive cars will be checked after active cars)
+
 # Version 1.62.4
 - Better support for new Tesla Model S/X 2021 
 

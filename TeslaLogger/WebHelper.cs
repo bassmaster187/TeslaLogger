@@ -747,8 +747,14 @@ namespace TeslaLogger
                     }
                     else
                     {
+                        if (result.Contains("token expired"))
+                        {
+                            car.Log("Token expired");
+                            UpdateTeslaTokenFromRefreshToken();
+                        }
+
                         car.CreateExeptionlessLog("GetRegion", "Error", LogLevel.Fatal).AddObject((int)response.StatusCode + " / " + response.StatusCode.ToString(), "StatusCode").Submit();
-                        Log("Error getting Region: " + (int)response.StatusCode + " / " + response.StatusCode.ToString());
+                        Log("Error getting Region: " + (int)response.StatusCode + " / " + response.StatusCode.ToString() + " result: " + result);
                         return "";
                     }
                 }
@@ -2343,11 +2349,7 @@ namespace TeslaLogger
                 }
                 else
                 {
-                    if (nextTeslaTokenFromRefreshToken < DateTime.UtcNow)
-                    {
-                        nextTeslaTokenFromRefreshToken = DateTime.UtcNow.AddMinutes(5);
-                        UpdateTeslaTokenFromRefreshToken();
-                    }
+                    CheckRefreshToken();
 
                     if (car.FleetAPI)
                     {
@@ -2629,6 +2631,15 @@ namespace TeslaLogger
             }
 
             return "NULL";
+        }
+
+        internal void CheckRefreshToken()
+        {
+            if (nextTeslaTokenFromRefreshToken < DateTime.UtcNow)
+            {
+                nextTeslaTokenFromRefreshToken = DateTime.UtcNow.AddMinutes(5);
+                UpdateTeslaTokenFromRefreshToken();
+            }
         }
 
         void CheckVehicleConfig()

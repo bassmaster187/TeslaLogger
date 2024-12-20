@@ -413,6 +413,8 @@ namespace TeslaLogger
                                 break;
                         }
 
+                        webhelper.CheckRefreshToken();
+
                     }
                     catch (Exception ex)
                     {
