@@ -430,8 +430,9 @@ namespace TeslaLogger
                 foreach (dynamic car in cars)
                 {
                     int id = car["id"];
+                    string inactiveFlag = car["inactive"];
                     var carObj = Car.GetCarByID(id);
-                    if (carObj == null || carObj.GetCurrentState() == Car.TeslaState.Inactive)
+                    if (carObj == null || carObj.GetCurrentState() == Car.TeslaState.Inactive || inactiveFlag == "1")
                     {
                         continue; //skip inactive cars
                     }
