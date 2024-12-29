@@ -418,7 +418,8 @@ LIMIT 1
                                     }
                                 }
                                 if (fee.ContainsKey("pricingType")
-                                    && fee["pricingType"].ToString().Equals("PAYMENT")
+                                    && (fee["pricingType"].ToString().Equals("PAYMENT") ||
+                                        fee["pricingType"].ToString().Equals("CREDIT_PARTIAL_PAYMENT"))
                                     && fee.ContainsKey("totalDue")
                                     )
                                 {
