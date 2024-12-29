@@ -5211,13 +5211,17 @@ DESC", con))
             return "NULL";
         }
 
-        public async Task<string> GetChargingHistoryV2(int pageNumber = 1)
+
+
+        public async Task<string> GetChargingHistoryV2(int pageNumber = 1) => await GetChargingHistoryV2(null, pageNumber);
+
+        public async Task<string> GetChargingHistoryV2(string vin, int pageNumber = 1)
         {
             string resultContent = "";
             try
             {
                 HttpClient httpclientgetChargingHistoryV2 = GethttpclientgetChargingHistoryV2();
-                using (var request = new HttpRequestMessage(HttpMethod.Get, new Uri($"{apiaddress}api/1/dx/charging/history?pageNo={pageNumber}")))
+                using (var request = new HttpRequestMessage(HttpMethod.Get, new Uri($"{apiaddress}api/1/dx/charging/history?pageNo={pageNumber}{(!string.IsNullOrEmpty(vin)?"&vin="+vin:"")}")))
                 {
                     Tools.DebugLog($"GetChargingHistoryV2 #{car.CarInDB} request: {request.RequestUri}");
                     request.Headers.Add("Authorization", "Bearer " + Tesla_token);
