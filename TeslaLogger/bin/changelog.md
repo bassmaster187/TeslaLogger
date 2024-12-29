@@ -1,3 +1,6 @@
+# Version 1.62.6
+- Bugfixes
+
 # Version 1.62.5
 - Detect Model Y LR RWD
 - BF: Split drives
