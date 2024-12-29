@@ -841,7 +841,7 @@ namespace TeslaLogger
                     if (force && speed == null)
                         speed = 0;
 
-                    long ts= (long)(d.ToUniversalTime().Subtract(new DateTime(1970, 1, 1))).TotalSeconds*1000;
+                    long ts = (long)(d.ToUniversalTime().Subtract(new DateTime(1970, 1, 1))).TotalSeconds*1000;
                     Log("Insert Location" + (force ? " Force" : ""));
                     lastposid = car.DbHelper.InsertPos(ts.ToString(), latitude.Value, longitude.Value, (int)speed.Value, null, lastOdometer, lastIdealBatteryRange, lastRatedRange, lastSoc, lastOutsideTemp, "");
                 }
@@ -850,6 +850,25 @@ namespace TeslaLogger
             {
                 Log(ex.ToString());
                 car.CreateExceptionlessClient(ex).AddObject(resultContent, "ResultContent").Submit();
+            }
+        }
+
+        void InsertLastLocation(DateTime d)
+        {
+            try
+            {
+                if (lastLatitude != 0 && lastLongitude != 0)
+                {
+                    long ts = (long)(d.ToUniversalTime().Subtract(new DateTime(1970, 1, 1))).TotalSeconds * 1000;
+                    lastposid = car.DbHelper.InsertPos(ts.ToString(), lastLatitude, lastLongitude, 0, null, lastOdometer, lastIdealBatteryRange, lastRatedRange, lastSoc, lastOutsideTemp, "");
+
+                    Log("Insert Last Location ID: " + lastposid);
+                }
+            }
+            catch (Exception ex)
+            {
+                Log(ex.ToString());
+                car.CreateExceptionlessClient(ex).Submit();
             }
         }
 
@@ -1135,7 +1154,7 @@ namespace TeslaLogger
                                         {
                                             Log($"AC Charging  {current}A ***");
                                             InsertFirstCharging(date);
-                                            InsertLocation(j, date, resultContent, true);
+                                            InsertLastLocation(date);
                                             acCharging = true;
                                         }
                                     }
@@ -1149,7 +1168,7 @@ namespace TeslaLogger
                                         {
                                             Log($"DC Charging ***");
                                             InsertFirstCharging(date);
-                                            InsertLocation(j, date, resultContent, true);
+                                            InsertLastLocation(date);
                                             dcCharging = true;
                                         }
                                     }
@@ -1261,7 +1280,7 @@ namespace TeslaLogger
                                         if (current > 2)
                                         {
                                             Log($"AC Charging  {current}A ***");
-                                            InsertLocation(j, date, resultContent, true);
+                                            InsertLastLocation(date);
                                             acCharging = true;
                                         }
                                     }
@@ -1368,7 +1387,7 @@ namespace TeslaLogger
                                         {
                                             Log($"DC Charging ***");
 
-                                            InsertLocation(j, date, resultContent, true);
+                                            InsertLastLocation(date);
                                             dcCharging = true;
                                         }
                                     }
