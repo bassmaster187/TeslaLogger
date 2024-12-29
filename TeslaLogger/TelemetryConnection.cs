@@ -832,9 +832,7 @@ namespace TeslaLogger
 
                 if (speed == null)
                 {
-                    var ts = d - lastVehicleSpeedDate;
-                    if (ts.TotalSeconds < 20)
-                        speed = lastVehicleSpeed;
+                    speed = lastVehicleSpeed;
                 }
 
 
@@ -862,7 +860,10 @@ namespace TeslaLogger
                 dynamic response = j["Response"];
                 dynamic updated_vehicles = response["updated_vehicles"];
                 if (updated_vehicles == "1")
-                    Log("LoginRespone: OK");
+                {
+                    string cfg = j["Config"];
+                    Log("LoginRespone: OK / Config: "+cfg);
+                }
                 else
                 {
                     Log("LoginRespone ERROR: " + response);
@@ -1530,7 +1531,7 @@ namespace TeslaLogger
             if (car.FleetAPI)
                 configname = "paid";
 
-            Log("Login to Telemetry Server / config: " + configname);
+            Log("Login to Telemetry Server");
             string vin = car.Vin;
             // vin = "LRW3E7EK6NC483045"; // xxx
             string fw = car.CurrentJSON.current_car_version;
