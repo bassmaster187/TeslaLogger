@@ -13,6 +13,7 @@ global $carNeedFleetAPI;
 global $carVIN;
 global $carNeedSubscription;
 global $fleetapiinfo;
+global $car_inactive;
 
 $carNeedSubscription = false;
 $carid = GetDefaultCarId();
@@ -158,7 +159,13 @@ else
 			$('#car_version').text(car_version);
 			$('#car_version_link').attr("href", "https://www.notateslaapp.com/software-updates/version/"+ car_version +"/release-notes");
 
-			if (jsonData["FatalError"])
+			if (car_inactive)
+			{
+				$('#car_status').html("<font color='red'><?php t("Inactive"); ?></font>");
+				$('#car_statusLabel').text("<?php t("Status"); ?>:");
+				hideSMT();
+			}
+			else if (jsonData["FatalError"])
 			{
 				$('#car_statusLabel').html("<font color='red'><?php t("Fatal Error"); ?>: </font>");
 				$('#car_status').html("<font color='red'>"+ jsonData["FatalError"] +"</font>");
@@ -471,7 +478,7 @@ else
 		{
 			?>
 			<!-- car need subscription -->
-			<tr id="subscriptioninfo" style='display: none;'><td><font color='red'><b><?php t("Subscription") ?></b></font></td><td><a href='https://buy.stripe.com/9AQaHNdU33k29Vu144?client_reference_id=<?=$carVIN?>'><?php t("SubscriptionRequired") ?> ⚠️</a></td></tr>
+			<tr id="subscriptioninfo" style='display: none;'><td><font color='red'><b><?php t("Subscription") ?></b></font></td><td><a href='https://buy.stripe.com/9AQaHNdU33k29Vu144?client_reference_id=<?=$carVIN?>'><?php t("SubscriptionRequired") ?>⚠️</a><br><a href="javascript:showInfoRestricted();">Funktion eingeschränkt⚠️</a></td></tr>
 			<script>
 				$(document).ready(function(){
 					$.ajax({
@@ -582,6 +589,12 @@ function getZoomLevel()
   ?>
   </div>
   <script>
+	var car_inactive = <?php 
+	if ($car_inactive === "1")
+	 	echo "true";
+	else 
+		echo "false";?>;
+
 	<?php require_once("info.php"); ?>
   </script>
   </body>

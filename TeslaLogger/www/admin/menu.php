@@ -30,6 +30,7 @@ function menu($title, $prefix = "")
 	global $carNeedSubscription;
 	global $carVIN;
 	global $fleetapiinfo;
+	global $car_inactive;
 
     $current_carid = $_SESSION["carid"];
     if (!isset($current_carid))
@@ -50,6 +51,7 @@ function menu($title, $prefix = "")
                 $tasker_token = $v->{"tasker_hash"};
                 $car = $v->{"model_name"};
 				$carVIN = $v->{"vin"};
+				$car_inactive = $v->{"inactive"};
 
                 if (strlen($display_name) == 0)
                     $display_name = "Car ".$v->{"id"};
@@ -60,7 +62,7 @@ function menu($title, $prefix = "")
 			if ($v->{"inactive"} == 0) // info will be shown only if the car is active
 			{
 				$cartype = $v->{"car_type"};
-				$NeedSubscription = !($cartype === "models" || $cartype === "modelx" || $cartype === "models2");
+				$NeedSubscription = $v->{"SupportedByFleetTelemetry"} === "1";
 
 				if ($v->{"fleetAPI"} == 0)
 				{ 	
@@ -72,7 +74,7 @@ function menu($title, $prefix = "")
 						{
 							$carNeedFleetAPI = true;
 							$carNeedSubscription = true;
-							echo("<!-- car need subscription true 2-->");
+							echo("<!-- car need subscription true 2-->\r\n");
 						}
 					}
 					else
@@ -83,12 +85,12 @@ function menu($title, $prefix = "")
 					if ($v->{"id"} == $current_carid)
 					{
 						$carNeedSubscription = true;
-						echo("<!-- car need subscription true 3-->");
+						echo("<!-- car need subscription true 3-->\r\n");
 					}
 				}
 			}
 			else
-				echo ("<!-- fleetapiinfo: car inactive: ID: $carid - Name: $car -->");
+				echo ("<!-- fleetapiinfo: car inactive: ID: $carid - Name: $car -->\r\n");
 		}
     }
 
