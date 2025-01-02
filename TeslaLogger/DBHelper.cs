@@ -3379,7 +3379,7 @@ LIMIT 1", con)
             }
 
             bool fast_charger_present = wh.fast_charger_present;
-            if (car.telemetry?.dcCharging == true)
+            if (car.telemetryParser?.dcCharging == true)
                 fast_charger_present = true;
 
             int chargeID = GetMaxChargeid(out DateTime chargeStart);
@@ -4527,7 +4527,7 @@ WHERE
 
             if (car.FleetAPI) // maxpos in Fleetapi is useless because lat & lng = 0
             {
-                posID = car.telemetry.lastposid;
+                posID = car.telemetryParser.lastposid;
                 if (posID > 0)
                 {
                     DBHelper.UpdateAddress(car, posID);
