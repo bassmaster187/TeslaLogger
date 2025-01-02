@@ -1455,7 +1455,10 @@ namespace UnitTestsTeslalogger
             dynamic j = JsonConvert.DeserializeObject(data);
             dynamic jData = j["data"];
 
-            TelemetryConnection f = new TelemetryConnection(null);
+            Car c = new Car(0, "", "", 0, "", DateTime.Now, "", "", "", "", "", "", "", null, false);
+            WebHelper wh = c.webhelper;
+
+            TelemetryParser f = new TelemetryParser(c);
             double? current = f.PackCurrent(jData, DateTime.Now);
             Assert.AreEqual(current, 121.9d);
 
