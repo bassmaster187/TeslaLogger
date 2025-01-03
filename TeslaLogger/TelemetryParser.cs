@@ -1390,7 +1390,9 @@ namespace TeslaLogger
         {
             long ts = (long)(date.ToUniversalTime().Subtract(new DateTime(1970, 1, 1))).TotalSeconds * 1000;
 
-            lastposid = car.DbHelper.InsertPos(ts.ToString(), lastLatitude, lastLongitude, speed, null, lastOdometer, lastIdealBatteryRange, lastRatedRange, lastSoc, lastOutsideTemp, "");
+            if (databaseCalls)
+                lastposid = car.DbHelper.InsertPos(ts.ToString(), lastLatitude, lastLongitude, speed, null, lastOdometer, lastIdealBatteryRange, lastRatedRange, lastSoc, lastOutsideTemp, "");
+
             Log($"InsertFirstPos {date} ID: {lastposid}");
         }
 
