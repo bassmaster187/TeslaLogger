@@ -8,6 +8,9 @@ using Exceptionless;
 using Newtonsoft.Json;
 using uPLibrary.Networking.M2Mqtt.Messages;
 using uPLibrary.Networking.M2Mqtt;
+using System.Linq;
+using Org.BouncyCastle.Utilities.Encoders;
+using System.Web;
 
 namespace TeslaLogger
 {
@@ -50,8 +53,12 @@ namespace TeslaLogger
         }
         internal void RunMqtt()
         {
-            // initially sleep 30 seconds to let the cars get from Start to Online
-            Thread.Sleep(30000);
+            // https://github.com/bassmaster187/TeslaLogger/issues/1434
+            // We could make sleep below much longer, but that bears the risk that car_1 is already asleep again before we finish MQTT discovery
+            // -> only increase to 40 seconds and handle 404 later
+
+            // initially sleep 40 seconds to let the cars get from Start to Online
+            Thread.Sleep(40000);
 
             try
             {
@@ -167,72 +174,100 @@ namespace TeslaLogger
         {
             try
             {
-                if (ConnectionCheck())
+                // Not connected ? do nothing
+                if (!ConnectionCheck())
                 {
-                    //heartbeat
-                    if (heartbeatCounter % 10 == 0)
+                    return;
+                }
+
+                var needsAllCarRefresh = false;
+
+                //heartbeat
+                if (heartbeatCounter % 10 == 0)
+                {
+                    client.Publish($@"{topic}/system/status", Encoding.UTF8.GetBytes("online"),
+                                uPLibrary.Networking.M2Mqtt.Messages.MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, true);
+                    //Tools.DebugLog("MQTT: hearbeat!");
+                    heartbeatCounter = 0;
+                }
+                heartbeatCounter++;
+
+
+                foreach (string vin in allCars)
+                {
+                    string temp = null;
+                    string carTopic = $"{topic}/car/{vin}";
+                    string jsonTopic = $"{topic}/json/{vin}/currentjson";
+
+                    int carId = Car.GetCarIDFromVIN(vin);
+
+                    if (carId < 0)
                     {
-                        client.Publish($@"{topic}/system/status", Encoding.UTF8.GetBytes("online"),
-                                    uPLibrary.Networking.M2Mqtt.Messages.MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, true);
-                        //Tools.DebugLog("MQTT: hearbeat!");
-                        heartbeatCounter = 0;
+                        // https://github.com/bassmaster187/TeslaLogger/issues/1434
+                        // carId is not found ? -> either removed after discovery, or other error occurred in TL
+                        // -> sinal to refresh allCars and continue.
+
+                        Tools.DebugLog($"MQTT: VIN {vin} returned car ID {carId}. Skipping...");
+
+                        needsAllCarRefresh = true;
+                        continue;
                     }
-                    heartbeatCounter++;
 
-
-                    foreach (string vin in allCars)
+                    using (WebClient wc = new WebClient())
                     {
-                        string temp = null;
-                        string carTopic = $"{topic}/car/{vin}";
-                        string jsonTopic = $"{topic}/json/{vin}/currentjson";
-
-                        int carId = Car.GetCarIDFromVIN(vin);
-
-                        using (WebClient wc = new WebClient())
+                        try
                         {
-                            try
-                            {
-                                temp = wc.DownloadString($"http://localhost:{httpport}/currentjson/" + carId);
-                            }
-                            catch (Exception ex)
-                            {
-                                Logfile.Log("MQTT: CurrentJson Exeption: " + ex.Message);
-                                Tools.DebugLog("MQTT: CurrentJson Exception", ex);
-//                                ex.ToExceptionless().FirstCarUserID().Submit();
-                                System.Threading.Thread.Sleep(60000); //wait 60 seconds after exception
-                            }
-                            
+                            temp = wc.DownloadString($"http://localhost:{httpport}/currentjson/" + carId);
+                        }
+                        catch (WebException wex) when (wex.Response is HttpWebResponse httpResponse && httpResponse.StatusCode == HttpStatusCode.NotFound)
+                        {
+                            Logfile.Log($"MQTT: Could not retrieve CurrentJson for car id {carId}: {wex.Message}");
+                            Tools.DebugLog("MQTT: CurrentJson Exception", wex);
+                            needsAllCarRefresh = true;
+                            continue;
+                        }
+                        catch (Exception ex)
+                        {
+                            Logfile.Log("MQTT: CurrentJson Exeption: " + ex.Message);
+                            Tools.DebugLog("MQTT: CurrentJson Exception", ex);
+                            //                                ex.ToExceptionless().FirstCarUserID().Submit();
+                            System.Threading.Thread.Sleep(60000); //wait 60 seconds after exception
+                        }
+                    }
+
+                    if (!lastjson.ContainsKey(carId) || temp != lastjson[carId])
+                    {
+                        lastjson[carId] = temp;
+                        if (publishJson)
+                        {
+                            client.Publish(jsonTopic, Encoding.UTF8.GetBytes(lastjson[carId]),
+                                uPLibrary.Networking.M2Mqtt.Messages.MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, true);
                         }
 
-                        if (!lastjson.ContainsKey(carId) || temp != lastjson[carId])
+                        if (singletopics)
                         {
-                            lastjson[carId] = temp;
-                            if (publishJson)
+                            var topics = JsonConvert.DeserializeObject<Dictionary<string, string>>(temp);
+                            foreach (var keyvalue in topics)
                             {
-                                client.Publish(jsonTopic, Encoding.UTF8.GetBytes(lastjson[carId]),
-                                    uPLibrary.Networking.M2Mqtt.Messages.MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, true);
+                                var safeValue = GetSafeValueForPublishing(keyvalue);
+
+                                client.Publish(carTopic + "/" + keyvalue.Key, Encoding.UTF8.GetBytes(safeValue),
+                                uPLibrary.Networking.M2Mqtt.Messages.MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, true);
+
                             }
-
-                            if (singletopics)
-                            {
-                                var topics = JsonConvert.DeserializeObject<Dictionary<string, string>>(temp);
-                                foreach (var keyvalue in topics)
-                                {
-                                    var safeValue = GetSafeValueForPublishing(keyvalue);
-
-                                    client.Publish(carTopic + "/" + keyvalue.Key, Encoding.UTF8.GetBytes(safeValue),
-                                    uPLibrary.Networking.M2Mqtt.Messages.MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, true);
-
-                                }
-                                Double.TryParse(topics["latitude"], out double lat);
-                                Double.TryParse(topics["longitude"], out double lon);
-                                PublichGPSTracker(vin, lat, lon);
-                            }
-
+                            Double.TryParse(topics["latitude"], out double lat);
+                            Double.TryParse(topics["longitude"], out double lon);
+                            PublichGPSTracker(vin, lat, lon);
                         }
+
                     }
                 }
 
+                if (!needsAllCarRefresh)
+                {
+                    return;
+                }
+                allCars = GetAllcars();
             }
             catch (Exception ex)
             {
