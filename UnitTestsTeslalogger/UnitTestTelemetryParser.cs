@@ -12,6 +12,7 @@ namespace UnitTestsTeslalogger
     public class UnitTestTelemetryParser
     {
         bool expectedACCharge = false;
+        bool expectedDriving = false;
 
         [TestMethod]
         public void ACCharging1()
@@ -31,7 +32,7 @@ namespace UnitTestsTeslalogger
 
                 telemetry.handleMessage(lines[i]);
 
-                Assert.AreEqual(expectedACCharge, telemetry.acCharging);
+                AssertStates(telemetry);
             }
         }
 
@@ -50,13 +51,65 @@ namespace UnitTestsTeslalogger
             {
                 
                 if (i == 25)
-                    expectedACCharge = true;
-                
-                
+                    expectedACCharge = true; // ACChargingPower: 3.2
+
+
                 telemetry.handleMessage(lines[i]);
 
-                Assert.AreEqual(expectedACCharge, telemetry.acCharging);
+                AssertStates(telemetry);
             }
+        }
+
+        [TestMethod]
+        public void DrivingByGear()
+        {
+            Car c = new Car(0, "", "", 0, "", DateTime.Now, "", "", "", "", "", "5YJ3E7EA3LF700000", "", null, false);
+
+            var telemetry = new TelemetryParser(c);
+            telemetry.databaseCalls = false;
+            telemetry.handleACChargeChange += Telemetry_handleACChargeChange;
+
+            var lines = LoadData("../../testdata/DrivingByGear.txt");
+
+            for (int i = 0; i < lines.Count; i++)
+            {
+                if (i == 13)
+                    expectedDriving = true; // Gear: D
+                else if (i == 38)
+                    expectedDriving = false; // Gear: P
+
+                telemetry.handleMessage(lines[i]);
+                AssertStates(telemetry);
+            }
+        }
+
+        [TestMethod]
+        public void DrivingBySpeed()
+        {
+            Car c = new Car(0, "", "", 0, "", DateTime.Now, "", "", "", "", "", "5YJ3E7EA3LF700000", "", null, false);
+
+            var telemetry = new TelemetryParser(c);
+            telemetry.databaseCalls = false;
+            telemetry.handleACChargeChange += Telemetry_handleACChargeChange;
+
+            var lines = LoadData("../../testdata/DrivingBySpeed.txt");
+
+            for (int i = 0; i < lines.Count; i++)
+            {
+                if (i == 15)
+                    expectedDriving = true; // VehicleSpeed: 16.15
+                else if (i == 37)
+                    expectedDriving = false; // Gear: P
+
+                telemetry.handleMessage(lines[i]);
+                AssertStates(telemetry);
+            }
+        }
+
+        private void AssertStates(TelemetryParser telemetry)
+        {
+            Assert.AreEqual(expectedACCharge, telemetry.acCharging);
+            Assert.AreEqual(expectedDriving, telemetry.Driving);
         }
 
         private void Telemetry_handleACChargeChange(object sender, EventArgs e)
@@ -71,7 +124,11 @@ namespace UnitTestsTeslalogger
             string[] lines = System.IO.File.ReadAllLines(path);
             foreach (string line in lines)
             {
-                string s = line.Substring(line.IndexOf("*** FT:") + 7);
+                var pos = line.IndexOf("*** FT:");
+                if (pos == -1)
+                    continue;
+
+                string s = line.Substring(pos + 7);
                 data.Add(s);
             }
             return data;
