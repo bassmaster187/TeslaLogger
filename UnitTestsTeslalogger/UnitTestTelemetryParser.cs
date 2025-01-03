@@ -116,12 +116,37 @@ namespace UnitTestsTeslalogger
 
                 if (i == 190)
                 {
-                    Assert.AreEqual(35.75, c.CurrentJSON.current_charge_energy_added);
-                    Assert.AreEqual(35.75, telemetry.charge_energy_added);
+                    Assert.AreEqual(35.76, c.CurrentJSON.current_charge_energy_added);
+                    Assert.AreEqual(35.76, telemetry.charge_energy_added);
                 }
 
                 AssertStates(telemetry);
             }
+        }
+
+        [TestMethod]
+        public void DCCharging2()
+        {
+            Car c = new Car(0, "", "", 0, "", DateTime.Now, "", "", "", "", "", "5YJ3E7EA3LF700000", "", null, false);
+
+            var telemetry = new TelemetryParser(c);
+            telemetry.databaseCalls = false;
+            telemetry.handleACChargeChange += Telemetry_handleACChargeChange;
+
+            var lines = LoadData("../../testdata/DCCharging2.txt");
+
+            for (int i = 0; i < lines.Count; i++)
+            {
+                if (i == 6)
+                    expectedDCCharge = true; // DCChargingPower 7.3
+
+                telemetry.handleMessage(lines[i]);
+
+                AssertStates(telemetry);
+            }
+
+            Assert.AreEqual(10.4, c.CurrentJSON.current_charge_energy_added);
+            Assert.AreEqual(10.4, telemetry.charge_energy_added);
         }
 
         [TestMethod]

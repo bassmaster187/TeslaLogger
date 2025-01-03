@@ -1032,7 +1032,7 @@ namespace TeslaLogger
             try
             {
                 var cols = new string[] {"PackVoltage", "PackCurrent", "IsolationResistance", "NumBrickVoltageMax", "BrickVoltageMax",
-                "NumBrickVoltageMin", "BrickVoltageMin", "ModuleTempMax", "ModuleTempMin", "LifetimeEnergyUsed", "LifetimeEnergyUsedDrive"};
+                "NumBrickVoltageMin", "BrickVoltageMin", "ModuleTempMax", "ModuleTempMin", "LifetimeEnergyUsed", "LifetimeEnergyUsedDrive", "DCChargingPower"};
 
                 double? BrickVoltageMin = null;
                 double? BrickVoltageMax = null;
@@ -1099,6 +1099,18 @@ namespace TeslaLogger
                                         Log($"FastChargerPresent {current}A ***");
 
                                         if (current > 5)
+                                        {
+                                            Log($"DC Charging ***");
+                                            StartDCCharging(date);
+                                        }
+                                    }
+                                }
+                                else if (key == "DCChargingPower")
+                                {
+                                    if (!dcCharging && lastFastChargerPresent)
+                                    {
+                                        Log($"FastChargerPresent DCChargingPower " + d);
+                                        if (d > 5)
                                         {
                                             Log($"DC Charging ***");
                                             StartDCCharging(date);
