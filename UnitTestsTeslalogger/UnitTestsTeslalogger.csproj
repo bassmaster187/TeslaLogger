@@ -99,6 +99,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Content Include="testdata\ACChargingJustPreheating.txt" />
     <Compile Include="UnitTestBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UnitTestCO2.cs" />
@@ -109,6 +110,7 @@
     <Compile Include="UnitTestOpenTopoDataService.cs" />
     <Compile Include="UnitTestOSMMapGenerator.cs" />
     <Compile Include="UnitTestsGeocode.cs" />
+    <Compile Include="UnitTestTelemetryParser.cs" />
     <Compile Include="UnitTestWallbox.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -136,6 +138,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="testdata\ACCharging1.txt" />
     <Content Include="testdata\shelly-em1-shelly.txt" />
     <Content Include="testdata\shelly-em1-status.txt" />
   </ItemGroup>
