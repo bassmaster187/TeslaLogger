@@ -11,8 +11,27 @@ namespace UnitTestsTeslalogger
     [TestClass]
     public class UnitTestTelemetryParser
     {
-        bool expectedACCharge = false;
-        bool expectedDriving = false;
+        bool _expectedACCharge = false;
+        bool _expectedDriving = false;
+
+        public bool expectedACCharge
+        {
+            get => _expectedACCharge; 
+            set
+            {
+                Console.WriteLine("### ExpectedACCharge: " + value);
+                _expectedACCharge = value;
+            }
+        }
+        public bool expectedDriving
+        {
+            get => _expectedDriving;
+            set
+            {
+                Console.WriteLine("### ExpectedDriving: " + value);
+                _expectedDriving = value;
+            }
+        }
 
         [TestMethod]
         public void ACCharging1()
