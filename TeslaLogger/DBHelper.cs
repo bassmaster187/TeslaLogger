@@ -6928,14 +6928,10 @@ FROM
 WHERE
     sessionId IS NULL
     AND CarID = @CarID
-    AND fast_charger_brand = @brand
-    AND (fast_charger_type = @type1 OR fast_charger_type = @type2)
+    AND fast_charger_present = 1
 ", con))
                     {
                         cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
-                        cmd.Parameters.AddWithValue("@brand", "Tesla");
-                        cmd.Parameters.AddWithValue("@type1", "Tesla");
-                        cmd.Parameters.AddWithValue("@type2", "Combo");
                         MySqlDataReader dr = SQLTracer.TraceDR(cmd);
                         while (dr.Read())
                         {
