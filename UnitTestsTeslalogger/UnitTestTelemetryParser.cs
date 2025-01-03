@@ -28,7 +28,7 @@ namespace UnitTestsTeslalogger
             for (int i = 0; i < lines.Count; i++)
             {
                 if (i == 7)
-                    expectedACCharge = true;
+                    expectedACCharge = true; // PackCurrent: 16.8
 
                 telemetry.handleMessage(lines[i]);
 
