@@ -45,7 +45,7 @@ namespace TeslaLogger
         double lastLongitude = 0;
         private double lastRatedRange;
 
-        double? charge_energy_added = null;
+        internal double? charge_energy_added = null;
         double? ACChargingPower = null;
 
         String lastCruiseState = "";
@@ -318,7 +318,7 @@ namespace TeslaLogger
                     else if (key == "MilesToArrival")
                     {
                         string v = value["stringValue"];
-                        if (double.TryParse(v, out double MilesToArrival))
+                        if (double.TryParse(v, NumberStyles.Any, CultureInfo.InvariantCulture, out double MilesToArrival))
                         {
                             car.CurrentJSON.active_route_km_to_arrival = (long)(MilesToArrival * 1.609344);
                             car.CurrentJSON.CreateCurrentJSON();
@@ -1101,9 +1101,7 @@ namespace TeslaLogger
                                         if (current > 5)
                                         {
                                             Log($"DC Charging ***");
-                                            InsertFirstCharging(date);
-                                            InsertLastLocation(date);
-                                            dcCharging = true;
+                                            StartDCCharging(date);
                                         }
                                     }
                                 }
@@ -1165,6 +1163,13 @@ namespace TeslaLogger
                 Log("Telemetry Error: " + ex.ToString());
                 car.CreateExceptionlessClient(ex).AddObject(resultContent, "ResultContent").Submit();
             }
+        }
+
+        private void StartDCCharging(DateTime date)
+        {
+            InsertFirstCharging(date);
+            InsertLastLocation(date);
+            dcCharging = true;
         }
 
         private void StartACCharging(DateTime date)
@@ -1339,8 +1344,7 @@ namespace TeslaLogger
                                         {
                                             Log($"DC Charging ***");
 
-                                            InsertLastLocation(date);
-                                            dcCharging = true;
+                                            StartDCCharging(date);
                                         }
                                     }
                                 }

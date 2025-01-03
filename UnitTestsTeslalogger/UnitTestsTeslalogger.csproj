@@ -100,6 +100,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Content Include="testdata\ACChargingJustPreheating.txt" />
+    <Content Include="testdata\DCCharging1.txt" />
     <Content Include="testdata\DrivingBySpeed.txt" />
     <Compile Include="UnitTestBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
