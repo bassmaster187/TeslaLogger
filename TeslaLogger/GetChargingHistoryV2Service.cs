@@ -158,7 +158,7 @@ INSERT IGNORE INTO teslacharging SET
         {
             Tools.DebugLog($"GetChargingHistoryV2Service.LoadAll(#{car.CarInDB})");
             int resultPage = 1;
-            string result = car.webhelper.GetChargingHistoryV2(resultPage).Result;
+            string result = car.webhelper.GetChargingHistoryV2(car.Vin, resultPage).Result;
             if (result == null || result == "{}" || string.IsNullOrEmpty(result))
             {
                 Tools.DebugLog($"GetChargingHistoryV2Service.LoadAll(#{car.CarInDB}): result == null");
@@ -186,7 +186,7 @@ INSERT IGNORE INTO teslacharging SET
                 resultPage++;
                 Thread.Sleep(2500); // wait a bit
                 Tools.DebugLog($"GetChargingHistoryV2Service.LoadAll(#{car.CarInDB}) resultpage {resultPage}");
-                result = car.webhelper.GetChargingHistoryV2(resultPage).Result;
+                result = car.webhelper.GetChargingHistoryV2(car.Vin, resultPage).Result;
             }
         }
 
@@ -418,7 +418,8 @@ LIMIT 1
                                     }
                                 }
                                 if (fee.ContainsKey("pricingType")
-                                    && fee["pricingType"].ToString().Equals("PAYMENT")
+                                    && (fee["pricingType"].ToString().Equals("PAYMENT") ||
+                                        fee["pricingType"].ToString().Equals("CREDIT_PARTIAL_PAYMENT"))
                                     && fee.ContainsKey("totalDue")
                                     )
                                 {
