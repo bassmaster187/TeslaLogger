@@ -206,6 +206,10 @@ namespace TeslaLogger
                         case "LoginRespone":
                             handleLoginResponse(j);
                             break;
+                        case "ConfigAlreadySent":
+                            string Config = j["Config"];
+                            Log("Config Already Sent: " + Config);
+                            break;
                         default:
                             Log("Unhandled Teslalogger MSG: " + resultContent);
                             break;
@@ -1032,7 +1036,7 @@ namespace TeslaLogger
             try
             {
                 var cols = new string[] {"PackVoltage", "PackCurrent", "IsolationResistance", "NumBrickVoltageMax", "BrickVoltageMax",
-                "NumBrickVoltageMin", "BrickVoltageMin", "ModuleTempMax", "ModuleTempMin", "LifetimeEnergyUsed", "LifetimeEnergyUsedDrive", "DCChargingPower"};
+                "NumBrickVoltageMin", "BrickVoltageMin", "ModuleTempMax", "ModuleTempMin", "LifetimeEnergyUsed", "LifetimeEnergyUsedDrive"};
 
                 double? BrickVoltageMin = null;
                 double? BrickVoltageMax = null;
@@ -1051,6 +1055,7 @@ namespace TeslaLogger
                                 string v1 = value["stringValue"];
                                 v1 = v1.Replace("\"", "");
                                 double d = double.Parse(v1, Tools.ciEnUS);
+
                                 cmd.Parameters.AddWithValue("@" + key, d);
 
                                 if (key == "ModuleTempMin")
@@ -1099,18 +1104,6 @@ namespace TeslaLogger
                                         Log($"FastChargerPresent {current}A ***");
 
                                         if (current > 5)
-                                        {
-                                            Log($"DC Charging ***");
-                                            StartDCCharging(date);
-                                        }
-                                    }
-                                }
-                                else if (key == "DCChargingPower")
-                                {
-                                    if (!dcCharging && lastFastChargerPresent)
-                                    {
-                                        Log($"FastChargerPresent DCChargingPower " + d);
-                                        if (d > 5)
                                         {
                                             Log($"DC Charging ***");
                                             StartDCCharging(date);
@@ -1209,7 +1202,7 @@ namespace TeslaLogger
         {
             try
             {
-                var cols = new string[] { "ChargeState", "Gear", "VehicleSpeed", "Location", "FastChargerPresent" };
+                var cols = new string[] { "ChargeState", "Gear", "VehicleSpeed", "Location", "FastChargerPresent", "DCChargingPower" };
 
                 foreach (dynamic jj in j)
                 {
@@ -1368,6 +1361,21 @@ namespace TeslaLogger
                                     {
                                         Log("stop DC Charging ***");
                                         dcCharging = false;
+                                    }
+                                }
+                            }
+                            else if (key == "DCChargingPower")
+                            {
+                                if (!dcCharging && lastFastChargerPresent)
+                                {
+                                    v1 = v1.Replace("\"", "");
+                                    double d = double.Parse(v1, Tools.ciEnUS);
+
+                                    Log($"FastChargerPresent DCChargingPower " + d);
+                                    if (d > 5)
+                                    {
+                                        Log($"DC Charging ***");
+                                        StartDCCharging(date);
                                     }
                                 }
                             }
