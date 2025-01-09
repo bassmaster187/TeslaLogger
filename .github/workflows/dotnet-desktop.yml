@@ -89,14 +89,16 @@ jobs:
       run: |
         Start-Process -FilePath "C:\MariaDB\bin\mysqld.exe" -ArgumentList "--console" -NoNewWindow
 
-    - name: Sleep for 30 seconds
-      run: Start-Sleep -s 15
-      shell: powershell
+    - name: Checkout
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+    
 
-    - name: Run mysql_upgrade
-      working-directory: C:\MariaDB
-      run: |
-        C:\MariaDB\bin\mysql_upgrade.exe -u root -proot
+    #- name: Run mysql_upgrade
+    #  working-directory: C:\MariaDB
+    #  run: |
+    #    C:\MariaDB\bin\mysql_upgrade.exe -u root -proot
 
     - name: Set root password
       run: |
@@ -111,12 +113,6 @@ jobs:
         C:\MariaDB\bin\mysql.exe -u root -proot test_db -e "CREATE TABLE sample_table (id INT PRIMARY KEY, name VARCHAR(50));"
         C:\MariaDB\bin\mysql.exe -u root -proot test_db -e "INSERT INTO sample_table VALUES (1, 'GitHub Actions with MariaDB');"
         C:\MariaDB\bin\mysql.exe -u root -proot test_db -e "SELECT * FROM sample_table;"
-
-
-    - name: Checkout
-      uses: actions/checkout@v3
-      with:
-        fetch-depth: 0
 
     # Add  MSBuild to the PATH: https://github.com/microsoft/setup-msbuild
     - name: Setup MSBuild.exe
