@@ -56,9 +56,15 @@ jobs:
         }
         New-Item -ItemType Directory -Path "C:\MariaDB\data"
 
+    - name: Check permissions
+      run: |
+        icacls C:\MariaDB
+        icacls C:\MariaDB\data
+
     - name: Start MariaDB server (initialize data directory)
       run: |
-        C:\MariaDB\bin\mysqld.exe --initialize-insecure --basedir=C:\MariaDB --datadir=C:\MariaDB\data
+        C:\MariaDB\bin\mysqld.exe --initialize-insecure --basedir=C:\MariaDB --datadir=C:\MariaDB\data --log-error=C:\MariaDB\mysqld-debug.log
+        type C:\MariaDB\mysqld-debug.log
 
     - name: Start MariaDB
       run: |
