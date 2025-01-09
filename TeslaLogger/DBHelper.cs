@@ -5247,7 +5247,7 @@ LIMIT 1", con))
             return 0;
         }
 
-        private int GetMaxChargingstateId(out double lat, out double lng, out DateTime UnplugDate, out DateTime EndDate)
+        internal int GetMaxChargingstateId(out double lat, out double lng, out DateTime UnplugDate, out DateTime EndDate)
         {
             UnplugDate = DateTime.MinValue;
             EndDate = DateTime.MinValue;
