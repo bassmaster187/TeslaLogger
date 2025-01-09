@@ -71,20 +71,20 @@ jobs:
       run: |
         C:\MariaDB\bin\mysqld.exe --install MariaDB --defaults-file=C:\MariaDB\my.ini
 
-    - name: Start MariaDB service
-      working-directory: C:\MariaDB
-      run: |
-        Start-Service -Name MariaDB
+    # - name: Start MariaDB service
+    #   working-directory: C:\MariaDB
+    #   run: |
+    #     Start-Service -Name MariaDB
 
     - name: Run mysql_upgrade
       working-directory: C:\MariaDB
       run: |
         C:\MariaDB\bin\mysql_upgrade.exe -u root -proot
 
-    - name: Start MariaDB
-      working-directory: C:\MariaDB
-      run: |
-        C:\MariaDB\bin\mysqld.exe --console &
+    # - name: Start MariaDB
+    #   working-directory: C:\MariaDB
+    #   run: |
+    #     C:\MariaDB\bin\mysqld.exe --console &
 
     - name: Set root password
       run: |
