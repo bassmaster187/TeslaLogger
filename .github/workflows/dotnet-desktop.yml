@@ -69,7 +69,7 @@ jobs:
     - name: Start MariaDB server (initialize data directory)
       working-directory: C:\MariaDB
       run: |
-        C:\MariaDB\bin\mysqld.exe --datadir=C:\MariaDB\data --log-error=C:\MariaDB\mysqld-debug.log
+        C:\MariaDB\bin\mysqld.exe --console --datadir=C:\MariaDB\data --log-error=C:\MariaDB\mysqld-debug.log
         type C:\MariaDB\mysqld-debug.log
 
     - name: Run mysql_upgrade
