@@ -29,7 +29,7 @@ jobs:
 
     - name: Download MariaDB 10.0.1 Installer
       run: |
-        curl -L -o mariadb-10.0.1.zip https://downloads.mariadb.org/interstitial/mariadb-10.0.1/winx64-packages/mariadb-10.0.1-winx64.zip/
+        curl -L -o mariadb-10.0.1.zip https://archive.mariadb.org/mariadb-10.0.1/winx64-packages/mariadb-10.0.1-winx64.zip
         tar -xf mariadb-10.0.1.zip -C C:\MariaDB
 
     - name: Configure MariaDB
