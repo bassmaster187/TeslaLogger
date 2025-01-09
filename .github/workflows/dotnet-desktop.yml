@@ -27,6 +27,30 @@ jobs:
       with:
         fetch-depth: 0
 
+    - name: Install Chocolatey
+      run: |
+        Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
+
+    - name: Install MySQL
+      run: |
+        choco install choco install mariadb -y --version=10.0.1
+        RefreshEnv
+
+
+    - name: Configure MariaDB (Set root password)
+      run: |
+        "C:\Program Files\MariaDB 10.0\bin\mysqladmin.exe" -u root password "teslalogger"
+
+    - name: Create test database
+      run: |
+        "C:\Program Files\MariaDB 10.0\bin\mysql.exe" -u root -pteslalogger -e "CREATE DATABASE test_db;"
+
+    - name: Run SQL commands
+      run: |
+        "C:\Program Files\MariaDB 10.0\bin\mysql.exe" -u root -pteslalogger test_db -e "CREATE TABLE sample_table (id INT PRIMARY KEY, name VARCHAR(50));"
+        "C:\Program Files\MariaDB 10.0\bin\mysql.exe" -u root -pteslalogger test_db -e "INSERT INTO sample_table VALUES (1, 'GitHub Actions with MariaDB');"
+        "C:\Program Files\MariaDB 10.0\bin\mysql.exe" -u root -pteslalogger test_db -e "SELECT * FROM sample_table;"
+
     # Add  MSBuild to the PATH: https://github.com/microsoft/setup-msbuild
     - name: Setup MSBuild.exe
       uses: microsoft/setup-msbuild@v2    
