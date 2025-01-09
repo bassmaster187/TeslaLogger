@@ -22,9 +22,6 @@ jobs:
       Test_Project_Path: UnitTestsTeslalogger\UnitTestsTeslalogger.csproj                 # Replace with the path to your test project, i.e. MyWpfApp.Tests\MyWpfApp.Tests.csproj.
      
     steps:
-    - name: Set up Docker Buildx
-      uses: docker/setup-buildx-action@v2
-
     - name: Run MariaDB in Docker
       run: |
         docker run -d -p 3306:3306 --name mariadb-container -e MYSQL_ROOT_PASSWORD=teslalogger -e MYSQL_USER=teslalogger -e MYSQL_PASSWORD=teslalogger -e MYSQL_DATABASE=teslalogger -v ./TeslaLogger/sqlschema.sql:/docker-entrypoint-initdb.d/sqlschema.sql mariadb:10.4.7
