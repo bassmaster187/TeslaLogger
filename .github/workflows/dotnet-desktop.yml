@@ -22,10 +22,74 @@ jobs:
       Test_Project_Path: UnitTestsTeslalogger\UnitTestsTeslalogger.csproj                 # Replace with the path to your test project, i.e. MyWpfApp.Tests\MyWpfApp.Tests.csproj.
      
     steps:
-    - name: Run MariaDB in Docker
-      run: |
-        docker run -d -p 3306:3306 --name mariadb-container -e MYSQL_ROOT_PASSWORD=teslalogger -e MYSQL_USER=teslalogger -e MYSQL_PASSWORD=teslalogger -e MYSQL_DATABASE=teslalogger -v ./TeslaLogger/sqlschema.sql:/docker-entrypoint-initdb.d/sqlschema.sql mariadb:10.4.7
 
+    - name: Cache MariaDB
+      id: cache-mariadb
+      uses: actions/cache@v3
+      with:
+        path: C:\MariaDB
+        key: ${{ runner.os }}-mariadb-${{ hashFiles('mariadb-10.0.1.zip') }}
+        restore-keys: |
+          ${{ runner.os }}-mariadb-
+
+    - name: Download MariaDB 10.0.1 Installer
+      if: steps.cache-mariadb.outputs.cache-hit != 'true'
+      run: |
+        curl -L -o mariadb-10.0.1.zip https://archive.mariadb.org/mariadb-10.0.1/winx64-packages/mariadb-10.0.1-winx64.zip
+       
+    - name: Create target folder for MariaDB
+      if: steps.cache-mariadb.outputs.cache-hit != 'true'
+      run: |
+        mkdir C:\MariaDB
+
+    - name: Unzip MariaDB files
+      if: steps.cache-mariadb.outputs.cache-hit != 'true'
+      run: |
+        powershell -Command "Expand-Archive -Path mariadb-10.0.1.zip -DestinationPath C:\MariaDB"
+
+    - name: Move files to correct directory
+      if: steps.cache-mariadb.outputs.cache-hit != 'true'
+      run: |
+        Move-Item -Path "C:\MariaDB\mariadb-10.0.1-winx64\*" -Destination "C:\MariaDB" -Force
+        Remove-Item -Recurse -Force "C:\MariaDB\mariadb-10.0.1-winx64"
+
+    - name: Verify MariaDB installation
+      run: |
+        dir C:\MariaDB
+        dir C:\MariaDB\bin
+
+    - name: Clean data directory
+      run: |
+        if (Test-Path "C:\MariaDB\data") {
+          Remove-Item -Recurse -Force "C:\MariaDB\data"
+        }
+        New-Item -ItemType Directory -Path "C:\MariaDB\data"
+
+    - name: Check permissions
+      run: |
+        icacls C:\MariaDB
+        icacls C:\MariaDB\data
+
+    #- name: Initialize MariaDB without --initialize-insecure
+    #  working-directory: C:\MariaDB
+    #  run: |
+    #    C:\MariaDB\bin\mysql_install_db.exe --datadir=C:\MariaDB\data
+
+    #- name: Install MariaDB as a service
+    #  working-directory: C:\MariaDB
+    #  run: |
+    #    C:\MariaDB\bin\mysqld.exe --install MariaDB --defaults-file=C:\MariaDB\my.ini
+#
+    # - name: Start MariaDB service
+    #   working-directory: C:\MariaDB
+    #   run: |
+    #     Start-Service -Name MariaDB
+
+    - name: Start MariaDB
+      working-directory: C:\MariaDB
+      run: |
+        Start-Process -FilePath "C:\MariaDB\bin\mysqld.exe" -ArgumentList "--console" -NoNewWindow
+    
     - name: Checkout
       uses: actions/checkout@v3
       with:
