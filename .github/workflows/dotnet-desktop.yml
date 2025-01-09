@@ -44,6 +44,18 @@ jobs:
         Move-Item -Path "C:\MariaDB\mariadb-10.0.1-winx64\*" -Destination "C:\MariaDB" -Force
         Remove-Item -Recurse -Force "C:\MariaDB\mariadb-10.0.1-winx64"
 
+    - name: Verify MariaDB installation
+      run: |
+        dir C:\MariaDB
+        dir C:\MariaDB\bin
+
+    - name: Clean data directory
+      run: |
+        if (Test-Path "C:\MariaDB\data") {
+          Remove-Item -Recurse -Force "C:\MariaDB\data"
+        }
+        New-Item -ItemType Directory -Path "C:\MariaDB\data"
+
     - name: Start MariaDB server (initialize data directory)
       run: |
         C:\MariaDB\bin\mysqld.exe --initialize-insecure --basedir=C:\MariaDB --datadir=C:\MariaDB\data
