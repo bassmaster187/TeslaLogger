@@ -67,10 +67,12 @@ jobs:
         C:\MariaDB\bin\mysql_install_db.exe --datadir=C:\MariaDB\data
 
     - name: Install MariaDB as a service
+      working-directory: C:\MariaDB
       run: |
         C:\MariaDB\bin\mysqld.exe --install MariaDB --defaults-file=C:\MariaDB\my.ini
 
     - name: Start MariaDB service
+      working-directory: C:\MariaDB
       run: |
         Start-Service -Name MariaDB
 
