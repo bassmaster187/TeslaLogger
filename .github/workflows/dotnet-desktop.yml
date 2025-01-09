@@ -87,7 +87,7 @@ jobs:
     - name: Start MariaDB
       working-directory: C:\MariaDB
       run: |
-        START /B mysqld.exe --console
+        Start-Process -FilePath "C:\MariaDB\bin\mysqld.exe" -ArgumentList "--console" -NoNewWindow
 
     - name: Sleep for 30 seconds
       run: Start-Sleep -s 15
