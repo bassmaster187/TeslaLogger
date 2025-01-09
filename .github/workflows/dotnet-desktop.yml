@@ -17,22 +17,6 @@ jobs:
     runs-on: windows-2019  # For a list of available runner types, refer to
                              # https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idruns-on
 
-    services:
-      mysql:
-        image: mariadb:10.4.7
-        ports:
-          - 3306:3306
-        options: >-
-          --health-cmd="mysqladmin ping --silent"
-          --health-interval=10s
-          --health-timeout=5s
-          --health-retries=3
-        env:
-          MYSQL_ROOT_PASSWORD: teslalogger
-          MYSQL_DATABASE: teslalogger
-          MYSQL_USER: teslalogger
-          MYSQL_PASSWORD: teslalogger
-
     env:
       Solution_Name: TeslaLogger.sln                         # Replace with your solution name, i.e. MyWpfApp.sln.
       Test_Project_Path: UnitTestsTeslalogger\UnitTestsTeslalogger.csproj                 # Replace with the path to your test project, i.e. MyWpfApp.Tests\MyWpfApp.Tests.csproj.
@@ -42,25 +26,6 @@ jobs:
       uses: actions/checkout@v3
       with:
         fetch-depth: 0
-
-    - name: Install MySQL client
-      run: |
-        choco install mysql --version=8.0
-        mysql --version
-
-    - name: Wait for MySQL to start
-      run: |
-        echo "Waiting for MySQL service to be ready..."
-        for i in {1..10}; do
-          mysqladmin ping -h localhost -u root --password=root && break || sleep 5
-        done
-
-    - name: Run MySQL commands
-      run: |
-        mysql -h localhost -u root --password=root -e "SHOW DATABASES;"
-        mysql -h localhost -u root --password=root -e "CREATE TABLE test_db.sample_table (id INT PRIMARY KEY, name VARCHAR(50));"
-        mysql -h localhost -u root --password=root -e "INSERT INTO test_db.sample_table VALUES (1, 'GitHub Actions');"
-        mysql -h localhost -u root --password=root -e "SELECT * FROM test_db.sample_table;"
 
     # Add  MSBuild to the PATH: https://github.com/microsoft/setup-msbuild
     - name: Setup MSBuild.exe
