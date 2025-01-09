@@ -37,12 +37,11 @@ jobs:
 
     - name: Unzip MariaDB files
       run: |
-        tar -xf mariadb-10.0.1.zip -C C:\MariaDB
+        powershell -Command "Expand-Archive -Path mariadb-10.0.1.zip -DestinationPath C:\MariaDB"
 
-    - name: Configure MariaDB
+    - name: Start MariaDB server (initialize data directory)
       run: |
-        C:\MariaDB\bin\mysql_install_db.exe --datadir=C:\MariaDB\data
-        C:\MariaDB\bin\mysqld.exe --initialize-insecure
+        C:\MariaDB\bin\mysqld.exe --initialize-insecure --basedir=C:\MariaDB --datadir=C:\MariaDB\data
 
     - name: Start MariaDB
       run: |
