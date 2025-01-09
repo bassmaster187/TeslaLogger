@@ -88,7 +88,7 @@ jobs:
     - name: Start MariaDB
       working-directory: C:\MariaDB
       run: |
-        Start-Process -FilePath "C:\MariaDB\bin\mysqld.exe" -ArgumentList "--console --standalone --initialize" -NoNewWindow
+        Start-Process -FilePath "C:\MariaDB\bin\mysqld.exe" -ArgumentList "--console --standalone --bootstrap" -NoNewWindow
     
     - name: Checkout
       uses: actions/checkout@v3
