@@ -30,7 +30,13 @@ jobs:
     - name: Download MariaDB 10.0.1 Installer
       run: |
         curl -L -o mariadb-10.0.1.zip https://archive.mariadb.org/mariadb-10.0.1/winx64-packages/mariadb-10.0.1-winx64.zip
+       
+    - name: Create target folder for MariaDB
+      run: |
         mkdir C:\MariaDB
+
+    - name: Unzip MariaDB files
+      run: |
         tar -xf mariadb-10.0.1.zip -C C:\MariaDB
 
     - name: Configure MariaDB
