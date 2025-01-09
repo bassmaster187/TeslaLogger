@@ -22,24 +22,32 @@ jobs:
       Test_Project_Path: UnitTestsTeslalogger\UnitTestsTeslalogger.csproj                 # Replace with the path to your test project, i.e. MyWpfApp.Tests\MyWpfApp.Tests.csproj.
      
     steps:
-    - name: Checkout
-      uses: actions/checkout@v3
+    - name: Cache MariaDB
+      id: cache-mariadb
+      uses: actions/cache@v3
       with:
-        fetch-depth: 0
+        path: C:\MariaDB
+        key: ${{ runner.os }}-mariadb-${{ hashFiles('mariadb-10.0.1.zip') }}
+        restore-keys: |
+          ${{ runner.os }}-mariadb-
 
     - name: Download MariaDB 10.0.1 Installer
+      if: steps.cache-mariadb.outputs.cache-hit != 'true'
       run: |
         curl -L -o mariadb-10.0.1.zip https://archive.mariadb.org/mariadb-10.0.1/winx64-packages/mariadb-10.0.1-winx64.zip
        
     - name: Create target folder for MariaDB
+      if: steps.cache-mariadb.outputs.cache-hit != 'true'
       run: |
         mkdir C:\MariaDB
 
     - name: Unzip MariaDB files
+      if: steps.cache-mariadb.outputs.cache-hit != 'true'
       run: |
         powershell -Command "Expand-Archive -Path mariadb-10.0.1.zip -DestinationPath C:\MariaDB"
 
     - name: Move files to correct directory
+      if: steps.cache-mariadb.outputs.cache-hit != 'true'
       run: |
         Move-Item -Path "C:\MariaDB\mariadb-10.0.1-winx64\*" -Destination "C:\MariaDB" -Force
         Remove-Item -Recurse -Force "C:\MariaDB\mariadb-10.0.1-winx64"
@@ -79,7 +87,11 @@ jobs:
     - name: Start MariaDB
       working-directory: C:\MariaDB
       run: |
-        C:\MariaDB\bin\mysqld.exe --console &
+        START /B mysqld.exe --console
+
+    - name: Sleep for 30 seconds
+      run: Start-Sleep -s 15
+      shell: powershell
 
     - name: Run mysql_upgrade
       working-directory: C:\MariaDB
@@ -99,6 +111,12 @@ jobs:
         C:\MariaDB\bin\mysql.exe -u root -proot test_db -e "CREATE TABLE sample_table (id INT PRIMARY KEY, name VARCHAR(50));"
         C:\MariaDB\bin\mysql.exe -u root -proot test_db -e "INSERT INTO sample_table VALUES (1, 'GitHub Actions with MariaDB');"
         C:\MariaDB\bin\mysql.exe -u root -proot test_db -e "SELECT * FROM sample_table;"
+
+
+    - name: Checkout
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
 
     # Add  MSBuild to the PATH: https://github.com/microsoft/setup-msbuild
     - name: Setup MSBuild.exe
