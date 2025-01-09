@@ -28,14 +28,14 @@ jobs:
       uses: actions/cache@v3
       with:
         path: C:\MariaDB
-        key: ${{ runner.os }}-mariadb-${{ hashFiles('mariadb-10.0.1.zip') }}
+        key: ${{ runner.os }}-mariadb-${{ hashFiles('mariadb-10.4.7.zip') }}
         restore-keys: |
           ${{ runner.os }}-mariadb-
 
-    - name: Download MariaDB 10.0.1 Installer
+    - name: Download MariaDB 10.4.7 Installer
       if: steps.cache-mariadb.outputs.cache-hit != 'true'
       run: |
-        curl -L -o mariadb-10.0.1.zip https://archive.mariadb.org/mariadb-10.0.1/winx64-packages/mariadb-10.0.1-winx64.zip
+        curl -L -o mariadb-10.4.7.zip https://archive.mariadb.org/mariadb-10.4.7/winx64-packages/mariadb-10.4.7-winx64.zip
        
     - name: Create target folder for MariaDB
       if: steps.cache-mariadb.outputs.cache-hit != 'true'
@@ -45,13 +45,13 @@ jobs:
     - name: Unzip MariaDB files
       if: steps.cache-mariadb.outputs.cache-hit != 'true'
       run: |
-        powershell -Command "Expand-Archive -Path mariadb-10.0.1.zip -DestinationPath C:\MariaDB"
+        powershell -Command "Expand-Archive -Path mariadb-10.4.7.zip -DestinationPath C:\MariaDB"
 
     - name: Move files to correct directory
       if: steps.cache-mariadb.outputs.cache-hit != 'true'
       run: |
-        Move-Item -Path "C:\MariaDB\mariadb-10.0.1-winx64\*" -Destination "C:\MariaDB" -Force
-        Remove-Item -Recurse -Force "C:\MariaDB\mariadb-10.0.1-winx64"
+        Move-Item -Path "C:\MariaDB\mariadb-10.4.7-winx64\*" -Destination "C:\MariaDB" -Force
+        Remove-Item -Recurse -Force "C:\MariaDB\mariadb-10.4.7-winx64"
 
     - name: Verify MariaDB installation
       run: |
@@ -88,7 +88,7 @@ jobs:
     - name: Start MariaDB
       working-directory: C:\MariaDB
       run: |
-        Start-Process -FilePath "C:\MariaDB\bin\mysqld.exe" -ArgumentList "--console" -NoNewWindow
+        Start-Process -FilePath "C:\MariaDB\bin\mysqld.exe" -ArgumentList "--console --standalone --initialize" -NoNewWindow
     
     - name: Checkout
       uses: actions/checkout@v3
