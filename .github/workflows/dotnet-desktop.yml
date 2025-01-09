@@ -94,6 +94,19 @@ jobs:
       uses: actions/checkout@v3
       with:
         fetch-depth: 0
+    
+    - name: Configure MariaDB (Set root password)
+      run: |
+        "C:\Program Files\MariaDB 10.0\bin\mysqladmin.exe" -u root password "teslalogger"
+
+    - name: Verify MariaDB installation
+      run: |
+        dir .\TeslaLogger
+
+    - name: Restore Teslalogger DB
+      working-directory: C:\MariaDB
+      run: |
+        C:\MariaDB\bin\mysql.exe -uroot -pteslalogger -Dteslalogger < .\TeslaLogger\sqlschema.sql
 
     # Add  MSBuild to the PATH: https://github.com/microsoft/setup-msbuild
     - name: Setup MSBuild.exe
