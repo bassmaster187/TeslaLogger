@@ -96,8 +96,9 @@ jobs:
         fetch-depth: 0
     
     - name: Configure MariaDB (Set root password)
+      working-directory: C:\MariaDB
       run: |
-        "C:\Program Files\MariaDB 10.0\bin\mysqladmin.exe" -u root password "teslalogger"
+        mysqladmin.exe -u root password "teslalogger"
 
     - name: Verify MariaDB installation
       run: |
