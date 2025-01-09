@@ -63,7 +63,7 @@ jobs:
 
     - name: Initialize MariaDB without --initialize-insecure
       run: |
-        C:\MariaDB\bin\mysql_install_db.exe --datadir=C:\MariaDB\data --basedir=C:\MariaDB
+        C:\MariaDB\bin\mysql_install_db.exe --datadir=C:\MariaDB\data
 
     - name: Run mysql_upgrade
       run: |
