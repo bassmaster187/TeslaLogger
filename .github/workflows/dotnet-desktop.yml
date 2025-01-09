@@ -61,9 +61,17 @@ jobs:
         icacls C:\MariaDB
         icacls C:\MariaDB\data
 
+    - name: Initialize MariaDB without --initialize-insecure
+      run: |
+        C:\MariaDB\bin\mysql_install_db.exe --datadir=C:\MariaDB\data --basedir=C:\MariaDB
+
+    - name: Run mysql_upgrade
+      run: |
+        C:\MariaDB\bin\mysql_upgrade.exe -u root -proot
+
     - name: Start MariaDB server (initialize data directory)
       run: |
-        C:\MariaDB\bin\mysqld.exe --initialize-insecure --basedir=C:\MariaDB --datadir=C:\MariaDB\data --log-error=C:\MariaDB\mysqld-debug.log
+        C:\MariaDB\bin\mysqld.exe --basedir=C:\MariaDB --datadir=C:\MariaDB\data --log-error=C:\MariaDB\mysqld-debug.log
         type C:\MariaDB\mysqld-debug.log
 
     - name: Start MariaDB
