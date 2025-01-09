@@ -39,6 +39,11 @@ jobs:
       run: |
         powershell -Command "Expand-Archive -Path mariadb-10.0.1.zip -DestinationPath C:\MariaDB"
 
+    - name: Move files to correct directory
+      run: |
+        Move-Item -Path "C:\MariaDB\mariadb-10.0.1-winx64\*" -Destination "C:\MariaDB" -Force
+        Remove-Item -Recurse -Force "C:\MariaDB\mariadb-10.0.1-winx64"
+
     - name: Start MariaDB server (initialize data directory)
       run: |
         C:\MariaDB\bin\mysqld.exe --initialize-insecure --basedir=C:\MariaDB --datadir=C:\MariaDB\data
