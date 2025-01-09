@@ -85,10 +85,20 @@ jobs:
     #   run: |
     #     Start-Service -Name MariaDB
 
+    #- name: Start MariaDB
+    #  working-directory: C:\MariaDB
+    #  run: |
+    #    Start-Process -FilePath "C:\MariaDB\bin\mysqld.exe" -ArgumentList "--console --standalone --bootstrap" -NoNewWindow
+
     - name: Start MariaDB
       working-directory: C:\MariaDB
       run: |
-        Start-Process -FilePath "C:\MariaDB\bin\mysqld.exe" -ArgumentList "--console --standalone --bootstrap" -NoNewWindow
+        Start-Process -FilePath "C:\MariaDB\bin\mysqld.exe" -ArgumentList "--install mysql
+
+    - name: Start MariaDB 2
+      working-directory: C:\MariaDB
+      run: |
+        net start mysql
     
     - name: Checkout
       uses: actions/checkout@v3
