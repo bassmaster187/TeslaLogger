@@ -10,34 +10,50 @@ on:
 jobs:
   database:
     runs-on: ubuntu-latest
+    services:
+      mariadb:
+        image: mariadb:10.4
+        env:
+          MYSQL_ROOT_PASSWORD: teslalogger
+          MYSQL_DATABASE: teslalogger
+          MYSQL_USER: teslalogger
+          MYSQL_PASSWORD: teslalogger
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping --silent"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=3
     steps:
-    - uses: getong/mariadb-action@v1.11
-      with:
-        mariadb version: '10.4'
-        mysql root password: 'teslalogger'
-        mysql database: 'teslalogger'
-        mysql user: 'teslalogger'
-        mysql password: 'teslalogger'
-
     - name: Checkout
       uses: actions/checkout@v3
       with:
         sparse-checkout: |
           TeslaLogger/sqlschema.sql
 
-    - name: Sleep for 30 seconds
-      uses: jakejarvis/wait-action@master
-      with:
-        time: '30s'
+    - name: Wait for MariaDB to be healthy
+      run: |
+        for i in {1..30}; do
+          if docker inspect --format '{{json .State.Health.Status}}' $(docker-compose ps -q mariadb) | grep -q "healthy"; then
+            echo "MariaDB is healthy"
+            break
+          fi
+          echo "Waiting for MariaDB to be healthy..."
+          sleep 1
+        done
 
     - name: Run SQL script
       run: mysql -h127.0.0.1 -uroot -pteslalogger -Dteslalogger < TeslaLogger/sqlschema.sql
+
+
 
   build:
     strategy:
       matrix:
         configuration: [Debug]
 
+    needs: database    
     runs-on: windows-2019  # For a list of available runner types, refer to
                              # https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idruns-on
 
@@ -68,6 +84,9 @@ jobs:
     - name: Execute unit tests
       run: dotnet test --filter "UnitTestsGeocode|UnitTestGrafana|UnitTestBase|UnitTestTelemetryParser" --logger trx --logger console UnitTestsTeslalogger\bin\Debug\UnitTestsTeslalogger.dll
       #run: dotnet vstest /Tests:UnitTestsGeocode /Logger:trx UnitTestsTeslalogger\bin\Debug\UnitTestsTeslalogger.dll
+
+    - name: Run SQL script
+      run: mysql -h127.0.0.1 -uroot -pteslalogger -Dteslalogger < TeslaLogger/sqlschema.sql
 
     - name: Publish Test Results
       uses: EnricoMi/publish-unit-test-result-action/windows@v2
