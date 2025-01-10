@@ -11,8 +11,6 @@ jobs:
   database:
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout
-      uses: actions/checkout@v2
     - uses: getong/mariadb-action@v1.11
       with:
         version: '10.4'
@@ -20,6 +18,15 @@ jobs:
         database: 'teslalogger'
         mysql user: 'teslalogger'
         mysql password: 'teslalogger'
+
+    - name: Checkout
+      uses: actions/checkout@v3
+      with:
+        sparse-checkout: |
+          TeslaLogger/sqlschema.sql
+
+    - name: Run SQL script
+      run: mysql -u teslalogger -pteslalogger teslalogger < TeslaLogger/sqlschema.sql
 
   build:
     strategy:
