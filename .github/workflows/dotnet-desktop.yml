@@ -36,7 +36,9 @@ jobs:
 
     - name: Wait for MariaDB to be healthy
       run: |
-        while ! curl -o - 127.0.0.1:3306; do sleep 1; done
+        while ! mysqladmin ping -h"127.0.0.1" --silent; do
+          sleep 1
+        done
 
     - name: Run SQL script
       run: mysql -h127.0.0.1 -uroot -pteslalogger -Dteslalogger < TeslaLogger/sqlschema.sql
