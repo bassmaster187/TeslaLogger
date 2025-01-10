@@ -31,7 +31,7 @@ jobs:
         time: '30s'
 
     - name: Run SQL script
-      run: mysql -u teslalogger -pteslalogger teslalogger < TeslaLogger/sqlschema.sql
+      run: mysql -h127.0.0.1 -uroot -pteslalogger -Dteslalogger < TeslaLogger/sqlschema.sql
 
   build:
     strategy:
