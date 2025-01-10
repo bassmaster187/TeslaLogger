@@ -25,6 +25,11 @@ jobs:
         sparse-checkout: |
           TeslaLogger/sqlschema.sql
 
+    - name: Sleep for 30 seconds
+      uses: jakejarvis/wait-action@master
+      with:
+        time: '30s'
+
     - name: Run SQL script
       run: mysql -u teslalogger -pteslalogger teslalogger < TeslaLogger/sqlschema.sql
 
