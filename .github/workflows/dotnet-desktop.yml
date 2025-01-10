@@ -13,9 +13,9 @@ jobs:
     steps:
     - uses: getong/mariadb-action@v1.11
       with:
-        version: '10.4'
-        root_password: 'teslalogger'
-        database: 'teslalogger'
+        mariadb version: '10.4'
+        mysql root password: 'teslalogger'
+        mysql database: 'teslalogger'
         mysql user: 'teslalogger'
         mysql password: 'teslalogger'
 
