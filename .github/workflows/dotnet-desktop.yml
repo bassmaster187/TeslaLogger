@@ -74,7 +74,7 @@ jobs:
       run: nuget restore TeslaLogger.sln
 
     - name: ping
-      run: ping database
+      run: ping mariadb
     
     - name: Build solution
       run: msbuild TeslaLogger.sln -t:rebuild -property:Configuration=Debug
