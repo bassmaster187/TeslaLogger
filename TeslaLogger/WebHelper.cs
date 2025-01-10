@@ -1641,7 +1641,7 @@ namespace TeslaLogger
         {
             if (car.FleetAPI)
             {
-                return car.telemetry?.IsCharging ?? false;
+                return car.telemetryParser?.IsCharging ?? false;
             }
 
             string resultContent = "";
@@ -2353,7 +2353,7 @@ namespace TeslaLogger
 
                     if (car.FleetAPI)
                     {
-                        if (car.telemetry?.IsOnline() == true)
+                        if (car.telemetryParser?.IsOnline() == true)
                             return "online";
                         else
                             return "asleep";
@@ -3365,14 +3365,14 @@ namespace TeslaLogger
         {
             if (car.FleetAPI)
             {
-                if (car.telemetry?.Driving == false)
+                if (car.telemetryParser?.Driving == false)
                 {
                     return false;
                 }
                 else
                 {
                     if (car.telemetry != null)
-                        return car.telemetry.Driving == true;
+                        return car.telemetryParser.Driving == true;
                     else
                         return false;
                 }

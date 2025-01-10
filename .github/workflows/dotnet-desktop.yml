@@ -8,12 +8,48 @@ on:
     branches: [ "master", "TeslaFleetAPI"]
 
 jobs:
-  build:
+  database:
+    
+    runs-on: ubuntu-latest
+  
+    services:
+      mariadb:
+        image: mariadb:10.4
+        env:
+          MYSQL_ROOT_PASSWORD: teslalogger
+          MYSQL_DATABASE: teslalogger
+          MYSQL_USER: teslalogger
+          MYSQL_PASSWORD: teslalogger
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping --silent"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=3
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+      with:
+        sparse-checkout: |
+          TeslaLogger/sqlschema.sql
 
+    - name: Wait for MariaDB to be healthy
+      run: |
+        while ! mysqladmin ping -h"127.0.0.1" --silent; do
+          sleep 1
+        done
+
+    - name: Run SQL script
+      run: mysql -h127.0.0.1 -uroot -pteslalogger -Dteslalogger < TeslaLogger/sqlschema.sql
+
+
+
+  build:
     strategy:
       matrix:
         configuration: [Debug]
-
+  
     runs-on: windows-2019  # For a list of available runner types, refer to
                              # https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idruns-on
 
@@ -36,21 +72,26 @@ jobs:
 
     - name: Restore nuget packages
       run: nuget restore TeslaLogger.sln
+
+    - name: ping
+      run: ping mariadb
     
     - name: Build solution
       run: msbuild TeslaLogger.sln -t:rebuild -property:Configuration=Debug
 
     # Execute all unit tests in the solution
     - name: Execute unit tests
-      run: dotnet test --filter "UnitTestsGeocode|UnitTestGrafana|UnitTestBase" --logger trx --logger console UnitTestsTeslalogger\bin\Debug\UnitTestsTeslalogger.dll
+      run: dotnet test --filter "UnitTestsGeocode|UnitTestGrafana|UnitTestBase|UnitTestTelemetryParser" --logger trx --logger console UnitTestsTeslalogger\bin\Debug\UnitTestsTeslalogger.dll
       #run: dotnet vstest /Tests:UnitTestsGeocode /Logger:trx UnitTestsTeslalogger\bin\Debug\UnitTestsTeslalogger.dll
 
     - name: Publish Test Results
-      uses: EnricoMi/publish-unit-test-result-action/composite@v2
+      uses: EnricoMi/publish-unit-test-result-action/windows@v2
       if: always()
       with:
         files: |
+          **/TestResults/**/*.xml
           **/TestResults/*.trx
+          **/TestResults/**/*.json
 
     - name: Upload artifacts
       uses: actions/upload-artifact@v4
