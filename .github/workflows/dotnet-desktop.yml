@@ -35,7 +35,7 @@ jobs:
     - name: Wait for MariaDB to be healthy
       run: |
         for i in {1..30}; do
-          if docker inspect --format '{{json .State.Health.Status}}' $(docker-compose ps -q mariadb) | grep -q "healthy"; then
+          if docker inspect --format '{{json .State.Health.Status}}' $(docker ps -q mariadb) | grep -q "healthy"; then
             echo "MariaDB is healthy"
             break
           fi
@@ -52,8 +52,7 @@ jobs:
     strategy:
       matrix:
         configuration: [Debug]
-
-    needs: database    
+  
     runs-on: windows-2019  # For a list of available runner types, refer to
                              # https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idruns-on
 
@@ -76,6 +75,9 @@ jobs:
 
     - name: Restore nuget packages
       run: nuget restore TeslaLogger.sln
+
+    - name: ping
+      run: ping database
     
     - name: Build solution
       run: msbuild TeslaLogger.sln -t:rebuild -property:Configuration=Debug
@@ -84,9 +86,6 @@ jobs:
     - name: Execute unit tests
       run: dotnet test --filter "UnitTestsGeocode|UnitTestGrafana|UnitTestBase|UnitTestTelemetryParser" --logger trx --logger console UnitTestsTeslalogger\bin\Debug\UnitTestsTeslalogger.dll
       #run: dotnet vstest /Tests:UnitTestsGeocode /Logger:trx UnitTestsTeslalogger\bin\Debug\UnitTestsTeslalogger.dll
-
-    - name: Run SQL script
-      run: mysql -h127.0.0.1 -uroot -pteslalogger -Dteslalogger < TeslaLogger/sqlschema.sql
 
     - name: Publish Test Results
       uses: EnricoMi/publish-unit-test-result-action/windows@v2
