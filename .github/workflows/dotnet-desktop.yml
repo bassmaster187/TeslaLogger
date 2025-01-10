@@ -9,7 +9,9 @@ on:
 
 jobs:
   database:
+    
     runs-on: ubuntu-latest
+  
     services:
       mariadb:
         image: mariadb:10.4
@@ -34,14 +36,7 @@ jobs:
 
     - name: Wait for MariaDB to be healthy
       run: |
-        for i in {1..30}; do
-          if docker inspect --format '{{json .State.Health.Status}}' $(docker ps -q mariadb) | grep -q "healthy"; then
-            echo "MariaDB is healthy"
-            break
-          fi
-          echo "Waiting for MariaDB to be healthy..."
-          sleep 1
-        done
+        while ! curl -o - 127.0.0.1:3306; do sleep 1; done
 
     - name: Run SQL script
       run: mysql -h127.0.0.1 -uroot -pteslalogger -Dteslalogger < TeslaLogger/sqlschema.sql
