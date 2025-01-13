@@ -558,7 +558,8 @@ namespace TeslaLogger
                         }
                     }
 
-                    if (key == "ACChargingEnergyIn" && acCharging)
+                    //Changed from ACChargingEnergyIn to DCChargingEnergyIn: AC* is grid side, DC* is energy charged into to the battery
+                    if (key == "DCChargingEnergyIn" && acCharging)
                     {
                         string v1 = value["stringValue"];
                         if (double.TryParse(v1, NumberStyles.Any, CultureInfo.InvariantCulture, out ChargingEnergyIn))
