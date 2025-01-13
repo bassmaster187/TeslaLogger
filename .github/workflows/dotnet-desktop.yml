@@ -8,10 +8,10 @@ on:
     branches: [ "master", "TeslaFleetAPI"]
 
 jobs:
-  database:
-    
-    runs-on: ubuntu-latest
-  
+  #database:
+   # 
+    #runs-on: ubuntu-latest
+  #
     #services:
     #  mariadb:
     #    image: mariadb:10.4
