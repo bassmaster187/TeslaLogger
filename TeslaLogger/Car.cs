@@ -111,7 +111,7 @@ namespace TeslaLogger
 
         private static List<Car> allcars = new List<Car>();
 
-        private DBHelper dbHelper;
+        internal DBHelper dbHelper;
 
         internal readonly TeslaAPIState teslaAPIState;
 

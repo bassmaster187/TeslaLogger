@@ -64,7 +64,7 @@ namespace UnitTestsTeslalogger
 
                 telemetry.handleMessage(lines[i]);
 
-                AssertStates(telemetry);
+                AssertStates(telemetry, i, lines[i]);
             }
         }
 
@@ -88,7 +88,7 @@ namespace UnitTestsTeslalogger
 
                 telemetry.handleMessage(lines[i]);
 
-                AssertStates(telemetry);
+                AssertStates(telemetry, i, lines[i]);
             }
         }
 
@@ -120,7 +120,7 @@ namespace UnitTestsTeslalogger
                     Assert.AreEqual(35.76, telemetry.charge_energy_added);
                 }
 
-                AssertStates(telemetry);
+                AssertStates(telemetry, i, lines[i]);
             }
         }
 
@@ -142,7 +142,7 @@ namespace UnitTestsTeslalogger
 
                 telemetry.handleMessage(lines[i]);
 
-                AssertStates(telemetry);
+                AssertStates(telemetry, i, lines[i]);
             }
 
             Assert.AreEqual(10.4, c.CurrentJSON.current_charge_energy_added);
@@ -168,7 +168,7 @@ namespace UnitTestsTeslalogger
                     expectedDriving = false; // Gear: P
 
                 telemetry.handleMessage(lines[i]);
-                AssertStates(telemetry);
+                AssertStates(telemetry, i, lines[i]);
             }
         }
 
@@ -191,15 +191,34 @@ namespace UnitTestsTeslalogger
                     expectedDriving = false; // Gear: P
 
                 telemetry.handleMessage(lines[i]);
-                AssertStates(telemetry);
+                AssertStates(telemetry, i, lines[i]);
             }
         }
 
-        private void AssertStates(TelemetryParser telemetry)
+        [TestMethod]
+        public void PluggedInNotChargingPrecondition()
         {
-            Assert.AreEqual(expectedACCharge, telemetry.acCharging);
-            Assert.AreEqual(expectedDriving, telemetry.Driving);
-            Assert.AreEqual(expectedDCCharge, telemetry.dcCharging);
+            Car c = new Car(0, "", "", 0, "", DateTime.Now, "", "", "", "", "", "5YJ3E7EA3LF700000", "", null, false);
+
+            var telemetry = new TelemetryParser(c);
+            telemetry.databaseCalls = false;
+            telemetry.handleACChargeChange += Telemetry_handleACChargeChange;
+
+            var lines = LoadData("../../testdata/PluggedIn-NotCharging-Precondition.txt");
+
+            for (int i = 0; i < lines.Count; i++)
+            {
+                telemetry.handleMessage(lines[i]);
+                Assert.Inconclusive("Test skipped! Known problem");
+                // AssertStates(telemetry, i, lines[i]);
+            }
+        }
+
+        private void AssertStates(TelemetryParser telemetry, int line, string content)
+        {
+            Assert.AreEqual(expectedACCharge, telemetry.acCharging, $"\r\nLine: {line}\r\n" +content);
+            Assert.AreEqual(expectedDriving, telemetry.Driving, $"\r\nLine: {line}\r\n" + content);
+            Assert.AreEqual(expectedDCCharge, telemetry.dcCharging, $"\r\nLine: {line}\r\n" + content);
         }
 
         private void Telemetry_handleACChargeChange(object sender, EventArgs e)

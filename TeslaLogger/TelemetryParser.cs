@@ -581,7 +581,8 @@ namespace TeslaLogger
                         }
                     }
 
-                    if (key == "ACChargingEnergyIn" && acCharging)
+                    //Changed from ACChargingEnergyIn to DCChargingEnergyIn: AC* is grid side, DC* is energy charged into to the battery
+                    if (key == "DCChargingEnergyIn" && acCharging)
                     {
                         string v1 = value["stringValue"];
                         if (double.TryParse(v1, NumberStyles.Any, CultureInfo.InvariantCulture, out ChargingEnergyIn))
@@ -827,8 +828,7 @@ namespace TeslaLogger
                 {
                     if (force && speed == null)
                         speed = 0;
-
-                    long ts = (long)(d.ToUniversalTime().Subtract(new DateTime(1970, 1, 1))).TotalSeconds * 1000;
+                    long ts = DateTimeToUTC_UnixTimestamp(d);
                     Log("Insert Location" + (force ? " Force" : ""));
                     lastposid = car.DbHelper.InsertPos(ts.ToString(), latitude.Value, longitude.Value, (int)speed.Value, null, lastOdometer, lastIdealBatteryRange, lastRatedRange, lastSoc, lastOutsideTemp, "");
                 }
@@ -840,13 +840,18 @@ namespace TeslaLogger
             }
         }
 
+        public static long DateTimeToUTC_UnixTimestamp(DateTime d)
+        {
+            return (long)(d.ToUniversalTime().Subtract(new DateTime(1970, 1, 1))).TotalSeconds * 1000;
+        }
+
         void InsertLastLocation(DateTime d)
         {
             try
             {
                 if (lastLatitude != 0 && lastLongitude != 0)
                 {
-                    long ts = (long)(d.ToUniversalTime().Subtract(new DateTime(1970, 1, 1))).TotalSeconds * 1000;
+                    long ts = DateTimeToUTC_UnixTimestamp(d);
                     lastposid = car.DbHelper.InsertPos(ts.ToString(), lastLatitude, lastLongitude, 0, null, lastOdometer, lastIdealBatteryRange, lastRatedRange, lastSoc, lastOutsideTemp, "");
 
                     Log("Insert Last Location ID: " + lastposid);
@@ -1435,7 +1440,7 @@ namespace TeslaLogger
 
         private void InsertFirstPos(DateTime date, int speed)
         {
-            long ts = (long)(date.ToUniversalTime().Subtract(new DateTime(1970, 1, 1))).TotalSeconds * 1000;
+            long ts = DateTimeToUTC_UnixTimestamp(date);
 
             if (databaseCalls)
                 lastposid = car.DbHelper.InsertPos(ts.ToString(), lastLatitude, lastLongitude, speed, null, lastOdometer, lastIdealBatteryRange, lastRatedRange, lastSoc, lastOutsideTemp, "");
