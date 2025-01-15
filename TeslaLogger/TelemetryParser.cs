@@ -516,6 +516,29 @@ namespace TeslaLogger
 
                         car.CurrentJSON.CreateCurrentJSON();
                     }
+                    else if (key == "DetailedChargeState")
+                    {
+                        string DetailedChargeState = value["stringValue"];
+                        if (!String.IsNullOrEmpty(DetailedChargeState))
+                        {
+                            if (DetailedChargeState.Contains("DetailedChargeStateNoPower") ||
+                                DetailedChargeState.Contains("DetailedChargeStateStarting") ||
+                                DetailedChargeState.Contains("DetailedChargeStateCharging") ||
+                                DetailedChargeState.Contains("DetailedChargeStateComplete") ||
+                                DetailedChargeState.Contains("DetailedChargeStateStopped"))
+                            {
+                                car.CurrentJSON.current_plugged_in = true;
+                            }
+                            else
+                            {
+                                car.CurrentJSON.current_plugged_in = false;
+                            }
+                            car.CurrentJSON.CreateCurrentJSON();
+
+                        }
+                        Log("DetailedChargeState: " + DetailedChargeState);
+
+                    }
                 }
             }
         }
