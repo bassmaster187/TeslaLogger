@@ -40,6 +40,7 @@ namespace TeslaLogger
         private double lastIdealBatteryRange;
         private double? lastOdometer;
         private double? lastOutsideTemp;
+        private double? lastInsideTemp;
 
         double lastLatitude = 0;
         double lastLongitude = 0;
@@ -284,6 +285,16 @@ namespace TeslaLogger
                             car.CurrentJSON.CreateCurrentJSON();
                         }
                     }
+                    else if (key == "InsideTemp")
+                    {
+                        string v = value["stringValue"];
+                        if (double.TryParse(v, NumberStyles.Any, CultureInfo.InvariantCulture, out double InsideTemp))
+                        {
+                            lastInsideTemp = InsideTemp;
+                            car.CurrentJSON.current_inside_temperature = InsideTemp;
+                            car.CurrentJSON.CreateCurrentJSON();
+                        }
+                    }
                     else if (key == "TimeToFullCharge")
                     {
                         string v = value["stringValue"];
@@ -518,7 +529,7 @@ namespace TeslaLogger
                     }
                     else if (key == "DetailedChargeState")
                     {
-                        string DetailedChargeState = value["stringValue"];
+                        string DetailedChargeState = value["detailedChargeStateValue"];
                         if (!String.IsNullOrEmpty(DetailedChargeState))
                         {
                             if (DetailedChargeState.Contains("DetailedChargeStateNoPower") ||
