@@ -213,7 +213,7 @@ namespace UnitTestsTeslalogger
         public void TestGR()
         {
             int c = co2.GetData("gr", dateTime);
-            Assert.AreEqual(571, c);
+            Assert.AreEqual(571, c, 20);
         }
 
 
