@@ -28,6 +28,6 @@
     <ProjectReference Include="..\..\..\Logfile\LogfileNET8.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="System.IO.Compression" />
+    <PackageReference Include="System.IO.Compression" Version="4.3.0" />
   </ItemGroup>
 </Project>

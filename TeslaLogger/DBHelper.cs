@@ -7402,8 +7402,6 @@ ORDER BY startdate", con))
                     return cmd.LastInsertedId;
                 }
             }
-
-            return 0;
         }
     }
 }
