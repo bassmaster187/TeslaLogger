@@ -169,6 +169,7 @@
     <Compile Include="ScanMyTesla.cs" />
     <Compile Include="ShareData.cs" />
     <Compile Include="TelemetryConnection.cs" />
+    <Compile Include="TelemetryParser.cs" />
     <Compile Include="TeslaAuth.cs" />
     <Compile Include="UpdateTeslalogger.cs" />
     <Compile Include="DBHelper.cs" />

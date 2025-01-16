@@ -1,3 +1,24 @@
+# Version 1.62.9
+- Bugfixes
+
+# Version 1.62.5
+- Detect Model Y LR RWD
+- BF: Split drives
+- BF: inactive cars
+- BF: faster startup (inactive cars will be checked after active cars)
+
+# Version 1.62.4
+- Better support for new Tesla Model S/X 2021 
+
+# Version 1.62.3
+- Fleet API: Doors, Windows, Trunk, Frunk and Locked status will be send to Admin Panel and MQTT
+
+# Version 1.62.1
+- BF: Support for new Tesla Model S/X 2021 - Tesla identified the new Model S/X as pre face lift Model S/X.
+
+# Version 1.62.0
+- Update = none is no longer supported. Tesla may force me to update a version so "none" is now "stable"
+
 # Version 1.61.0
 - Simplified the switch to Fleet API. 
 - Infos if you need to switch to Fleet API in the admin panel. 

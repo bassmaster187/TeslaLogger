@@ -3379,7 +3379,7 @@ LIMIT 1", con)
             }
 
             bool fast_charger_present = wh.fast_charger_present;
-            if (car.telemetry?.dcCharging == true)
+            if (car.telemetryParser?.dcCharging == true)
                 fast_charger_present = true;
 
             int chargeID = GetMaxChargeid(out DateTime chargeStart);
@@ -4527,7 +4527,7 @@ WHERE
 
             if (car.FleetAPI) // maxpos in Fleetapi is useless because lat & lng = 0
             {
-                posID = car.telemetry.lastposid;
+                posID = car.telemetryParser.lastposid;
                 if (posID > 0)
                 {
                     DBHelper.UpdateAddress(car, posID);
@@ -5247,7 +5247,7 @@ LIMIT 1", con))
             return 0;
         }
 
-        private int GetMaxChargingstateId(out double lat, out double lng, out DateTime UnplugDate, out DateTime EndDate)
+        internal int GetMaxChargingstateId(out double lat, out double lng, out DateTime UnplugDate, out DateTime EndDate)
         {
             UnplugDate = DateTime.MinValue;
             EndDate = DateTime.MinValue;
@@ -5822,19 +5822,35 @@ WHERE
             return "";
         }
 
+        public static DataTable GetCarsByTokenAge(bool descending=false)
+        {
+            return GetCars($"tesla_token_expire {(descending?"DESC":"ASC")}");
+        }
+
         public static DataTable GetCars()
+        {
+            return GetCars("id");
+        }
+        
+        private static DataTable GetCars(string orderByCol)
         {
             DataTable dt = new DataTable();
 
+            // defense against SQLInjection
+            if(!Regex.IsMatch(orderByCol, @"^\w+$"))
+            {
+                orderByCol = "id";
+            }
+
             try
             {
-                using (MySqlDataAdapter da = new MySqlDataAdapter(@"
+                using (MySqlDataAdapter da = new MySqlDataAdapter($@"
 SELECT
     *
 FROM
     cars
 ORDER BY
-    id", DBConnectionstring))
+    {orderByCol}", DBConnectionstring))
                 {
                     _ = SQLTracer.TraceDA(dt, da);
                 }

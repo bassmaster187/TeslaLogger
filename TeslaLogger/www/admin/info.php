@@ -88,5 +88,13 @@ function ShowInfo()
 	<?php
 	}
 	?>
+}
 
+function showInfoRestricted() {
+	$("#InfoText").html("<?php t("INFO_RESTRICTED"); ?>");
+	$(".HeaderT").show();
+	$("#PositiveButton").text("<?php t("Subscribe"); ?>");
+	$("#PositiveButton").click(function(){window.location.href='https://buy.stripe.com/9AQaHNdU33k29Vu144?client_reference_id=<?php echo $carVIN; ?>';});
+	$("#NegativeButton").text("<?php t("OK"); ?>");
+	$("#NegativeButton").click(function(){location.reload();});
 }

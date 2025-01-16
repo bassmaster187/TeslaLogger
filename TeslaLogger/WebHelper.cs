@@ -627,6 +627,21 @@ namespace TeslaLogger
                             // as of March 21 2022 Tesla returns a bearer token. GetTokenAsync4 is no longer neeaded. 
                             car.CreateExeptionlessLog("Tesla Token", "UpdateTeslaTokenFromRefreshToken Success", Exceptionless.Logging.LogLevel.Info).Submit();
                             string Token = jsonResult["access_token"];
+
+                            if (jsonResult.ContainsKey("expires_in"))
+                            {
+                                var t = DateTime.UtcNow.AddSeconds((int)(jsonResult["expires_in"])).AddHours(-2);
+                                if (t > DateTime.UtcNow.AddHours(1))
+                                    nextTeslaTokenFromRefreshToken = t;
+                                else
+                                {
+                                    t = DateTime.UtcNow.AddSeconds((int)(jsonResult["expires_in"]));
+                                    nextTeslaTokenFromRefreshToken = t;
+                                }
+
+                                Log("access token expires: " + nextTeslaTokenFromRefreshToken.ToLocalTime());
+                            }
+
                             SetNewAccessToken(Token);
 
                             return Tesla_token;
@@ -733,8 +748,14 @@ namespace TeslaLogger
                     }
                     else
                     {
+                        if (result.Contains("token expired"))
+                        {
+                            car.Log("Token expired");
+                            UpdateTeslaTokenFromRefreshToken();
+                        }
+
                         car.CreateExeptionlessLog("GetRegion", "Error", LogLevel.Fatal).AddObject((int)response.StatusCode + " / " + response.StatusCode.ToString(), "StatusCode").Submit();
-                        Log("Error getting Region: " + (int)response.StatusCode + " / " + response.StatusCode.ToString());
+                        Log("Error getting Region: " + (int)response.StatusCode + " / " + response.StatusCode.ToString() + " result: " + result);
                         return "";
                     }
                 }
@@ -1621,7 +1642,7 @@ namespace TeslaLogger
         {
             if (car.FleetAPI)
             {
-                return car.telemetry?.IsCharging ?? false;
+                return car.telemetryParser?.IsCharging ?? false;
             }
 
             string resultContent = "";
@@ -2069,6 +2090,8 @@ namespace TeslaLogger
                             {
                                 Log("GetVehicles Error: " + ex.Message);
                             }
+                            else
+                                Log("GetVehicles Error: " + ex.Message);
 
                             ex = ex.InnerException;
                         }
@@ -2327,15 +2350,11 @@ namespace TeslaLogger
                 }
                 else
                 {
-                    if (nextTeslaTokenFromRefreshToken < DateTime.UtcNow)
-                    {
-                        nextTeslaTokenFromRefreshToken = DateTime.UtcNow.AddMinutes(5);
-                        UpdateTeslaTokenFromRefreshToken();
-                    }
+                    CheckRefreshToken();
 
                     if (car.FleetAPI)
                     {
-                        if (car.telemetry?.IsOnline() == true)
+                        if (car.telemetryParser?.IsOnline() == true)
                             return "online";
                         else
                             return "asleep";
@@ -2615,10 +2634,20 @@ namespace TeslaLogger
             return "NULL";
         }
 
+        internal void CheckRefreshToken()
+        {
+            if (nextTeslaTokenFromRefreshToken < DateTime.UtcNow)
+            {
+                nextTeslaTokenFromRefreshToken = DateTime.UtcNow.AddMinutes(5);
+                UpdateTeslaTokenFromRefreshToken();
+            }
+        }
+
         void CheckVehicleConfig()
         {
             if (car.FleetAPI)
             {
+                UpdateEfficiency();
                 lastUpdateEfficiency = DateTime.Now;
                 return;
             }
@@ -2711,13 +2740,12 @@ namespace TeslaLogger
         public void UpdateEfficiency()
         {
             //string eff = "0.190052356";
-            String vinCarType = "";
-            if (String.IsNullOrEmpty(car.CarType))
-                Tools.VINDecoder(car.Vin, out _, out vinCarType, out bool AWD, out _, out string battery, out _, out _);
+            
+            Tools.VINDecoder(car.Vin, out int year, out string vinCarType, out bool AWD, out bool MIC, out string battery, out string motor, out bool MIG);
 
             if (car.CarType == "model3" || vinCarType == "Model 3")
             {
-                Tools.VINDecoder(car.Vin, out int year, out _, out bool AWD, out bool MIC, out string battery, out string motor, out _);
+                // Tools.VINDecoder(car.Vin, out int year, out _, out bool AWD, out bool MIC, out string battery, out string motor, out _);
 
                 if (car.TrimBadging == "p74d" && year < 2021)
                 {
@@ -2876,7 +2904,7 @@ namespace TeslaLogger
                 }
                 else if (car.TrimBadging.Length == 0)
                 {
-                    Tools.VINDecoder(car.Vin, out _, out _, out bool AWD, out _, out _, out string motor, out _);
+                    // Tools.VINDecoder(car.Vin, out _, out _, out bool AWD, out _, out _, out string motor, out _);
                     int maxRange = car.DbHelper.GetAvgMaxRage();
                     if (maxRange > 500)
                     {
@@ -2901,7 +2929,7 @@ namespace TeslaLogger
                     return;
                 }
             }
-            else if (car.CarType == "models" && (car.CarSpecialType == "base" || car.CarSpecialType == "signature"))
+            else if (car.CarType == "models" && (car.CarSpecialType == "base" || car.CarSpecialType == "signature") && year < 2021)
             {
                 if (car.TrimBadging == "60")
                 {
@@ -2975,7 +3003,7 @@ namespace TeslaLogger
                     return;
                 }
             }
-            else if (car.CarType == "modelx" && car.CarSpecialType == "base")
+            else if (car.CarType == "modelx" && car.CarSpecialType == "base" && year < 2021)
             {
                 if (car.TrimBadging == "75d")
                 {
@@ -3013,7 +3041,7 @@ namespace TeslaLogger
             }
             else if (car.CarType == "modely" && car.CarSpecialType == "base")
             {
-                Tools.VINDecoder(car.Vin, out int year, out string ct, out bool AWD, out bool MIC, out string battery, out string motor, out bool MIG);
+                // Tools.VINDecoder(car.Vin, out int year, out string ct, out bool AWD, out bool MIC, out string battery, out string motor, out bool MIG);
                 if (car.TrimBadging == "74d")
                 {
                     if (MIC)
@@ -3078,14 +3106,19 @@ namespace TeslaLogger
                     WriteCarSettings("0.142", "Y SR+");
                     return;
                 }
+                else if (car.TrimBadging == "74")
+                {
+                    WriteCarSettings("0.149", "Y LR RWD");
+                    return;
+                }
             }
             else if (car.CarType == "tamarind" && car.CarSpecialType == "base")
             {
-                Tools.VINDecoder(car.Vin, out int year, out _, out bool AWD, out bool MIC, out string battery, out string motor, out _);
+                // Tools.VINDecoder(car.Vin, out int year, out _, out bool AWD, out bool MIC, out string battery, out string motor, out _);
 
                 if (motor == "triple 2021 plaid")
                 {
-                    WriteCarSettings("0.149", "X 2021 Plaid");
+                    WriteCarSettings("0.193", "X 2021 Plaid");
                     return;
                 }
                 else
@@ -3096,11 +3129,11 @@ namespace TeslaLogger
             }
             else if (car.CarType == "lychee" && car.CarSpecialType == "base")
             {
-                Tools.VINDecoder(car.Vin, out int year, out _, out bool AWD, out bool MIC, out string battery, out string motor, out _);
+                // Tools.VINDecoder(car.Vin, out int year, out _, out bool AWD, out bool MIC, out string battery, out string motor, out _);
 
                 if (motor == "triple 2021 plaid")
                 {
-                    WriteCarSettings("0.151", "S 2021 Plaid");
+                    WriteCarSettings("0.172", "S 2021 Plaid");
                     return;
                 }
                 else
@@ -3109,6 +3142,33 @@ namespace TeslaLogger
                     return;
                 }
             }
+            else if (vinCarType == "Model X" && year >= 2021)
+            {
+                if (motor == "triple 2021 plaid")
+                {
+                    WriteCarSettings("0.193", "X 2021 Plaid");
+                    return;
+                }
+                else
+                {
+                    WriteCarSettings("0.181", "X 2021 LR");
+                    return;
+                }
+            }
+            else if (vinCarType == "Model S" && year >= 2021)
+            {
+                if (motor == "triple 2021 plaid")
+                {
+                    WriteCarSettings("0.172", "S 2021 Plaid");
+                    return;
+                }
+                else
+                {
+                    WriteCarSettings("0.151", "S 2021 LR");
+                    return;
+                }
+            }
+
 
             /*
             if (car.Model == "MS")
@@ -3306,14 +3366,14 @@ namespace TeslaLogger
         {
             if (car.FleetAPI)
             {
-                if (car.telemetry?.Driving == false)
+                if (car.telemetryParser?.Driving == false)
                 {
                     return false;
                 }
                 else
                 {
                     if (car.telemetry != null)
-                        return car.telemetry.Driving == true;
+                        return car.telemetryParser.Driving == true;
                     else
                         return false;
                 }
@@ -5072,7 +5132,7 @@ DESC", con))
         {
             if (DateTime.UtcNow.Day != commandCounterDay)
             {
-                UpdateTaskerTokenAsync().Wait();
+                UpdateCommandConterAsync().Wait();
 
                 commandCounterDay = DateTime.UtcNow.Day;
                 Log($"Total Commands Today: {commandCounter} Drive: {commandCounterDrive} Charge: {commandCounterCharging} Online: {commandcounterOnline}");
@@ -5085,16 +5145,15 @@ DESC", con))
                 KVS.InsertOrUpdate($"commandCounterCharging_{car.CarInDB}", commandCounterCharging);
                 KVS.InsertOrUpdate($"commandCounterOnline_{car.CarInDB}", commandcounterOnline);
                 KVS.InsertOrUpdate($"commandCounterDay{car.CarInDB}", commandCounterDay);
-
-                UpdateTaskerTokenAsync();
             }
         }
 
-        private async Task UpdateTaskerTokenAsync()
+        private async Task UpdateCommandConterAsync()
         {
             try
             {
-                HttpResponseMessage response = await  httpclient_teslalogger_de.GetAsync($"https://teslalogger.de/update-commandcounter.php?token={car.TaskerHash}&drive={commandCounterDrive}&charging={commandCounterCharging}&online={commandcounterOnline}");
+                int fleetapi = car.FleetAPI ? 1 : 0;
+                HttpResponseMessage response = await  httpclient_teslalogger_de.GetAsync($"https://teslalogger.de/update-commandcounter2.php?token={car.TaskerHash}&drive={commandCounterDrive}&charging={commandCounterCharging}&online={commandcounterOnline}&fleetapi={fleetapi}");
                 response.EnsureSuccessStatusCode();
                 string responseBody = await response.Content.ReadAsStringAsync();
                 Log($"UpdateTaskerToken: {responseBody}");
@@ -5153,13 +5212,17 @@ DESC", con))
             return "NULL";
         }
 
-        public async Task<string> GetChargingHistoryV2(int pageNumber = 1)
+
+
+        public async Task<string> GetChargingHistoryV2(int pageNumber = 1) => await GetChargingHistoryV2(null, pageNumber);
+
+        public async Task<string> GetChargingHistoryV2(string vin, int pageNumber = 1)
         {
             string resultContent = "";
             try
             {
                 HttpClient httpclientgetChargingHistoryV2 = GethttpclientgetChargingHistoryV2();
-                using (var request = new HttpRequestMessage(HttpMethod.Get, new Uri($"{apiaddress}api/1/dx/charging/history?pageNo={pageNumber}")))
+                using (var request = new HttpRequestMessage(HttpMethod.Get, new Uri($"{apiaddress}api/1/dx/charging/history?pageNo={pageNumber}{(!string.IsNullOrEmpty(vin)?"&vin="+vin:"")}")))
                 {
                     Tools.DebugLog($"GetChargingHistoryV2 #{car.CarInDB} request: {request.RequestUri}");
                     request.Headers.Add("Authorization", "Bearer " + Tesla_token);

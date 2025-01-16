@@ -8,9 +8,30 @@ using Exceptionless;
 using Newtonsoft.Json;
 using uPLibrary.Networking.M2Mqtt.Messages;
 using uPLibrary.Networking.M2Mqtt;
+using System.Linq;
+using Org.BouncyCastle.Utilities.Encoders;
+using System.Web;
+using static uPLibrary.Networking.M2Mqtt.MqttClient;
+using System.Security.Cryptography.X509Certificates;
 
 namespace TeslaLogger
 {
+    public interface IWebDownloader
+    {
+        string DownloadString(string url);
+    }
+
+    public interface IMqttClient
+    {
+        bool IsConnected { get; }
+
+        event MqttMsgPublishEventHandler MqttMsgPublishReceived;
+        ushort Subscribe(string[] topics, byte[] qosLevels);
+        ushort Publish(string topic, byte[] message, byte qosLevel, bool retain);
+        byte Connect(string clientId, string username, string password, bool willRetain, byte willQosLevel, bool willFlag, string willTopic, string willMessage, bool cleanSession, ushort keepAlivePeriod);
+        ushort Unsubscribe(string[] topics);
+    }
+
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1031:Keine allgemeinen Ausnahmetypen abfangen", Justification = "<Pending>")]
     internal class MQTT
     {
@@ -30,7 +51,7 @@ namespace TeslaLogger
         private static int heartbeatCounter;
         private static bool connecting;
 
-        MqttClient client;
+        private IMqttClient client;
 
         System.Collections.Generic.HashSet<string> allCars;
         System.Collections.Generic.Dictionary<int, string> lastjson = new Dictionary<int, string>();
@@ -50,66 +71,21 @@ namespace TeslaLogger
         }
         internal void RunMqtt()
         {
-            // initially sleep 30 seconds to let the cars get from Start to Online
-            Thread.Sleep(30000);
+            // https://github.com/bassmaster187/TeslaLogger/issues/1434
+            // We could make sleep below much longer, but that bears the risk that car_1 is already asleep again before we finish MQTT discovery
+            // -> only increase to 40 seconds and handle 404 later
+
+            // initially sleep 40 seconds to let the cars get from Start to Online
+            Thread.Sleep(40000);
 
             try
             {
                 httpport = Tools.GetHttpPort();
                 allCars = GetAllcars();
-                if (KVS.Get("MQTTSettings", out string mqttSettingsJson) == KVS.SUCCESS)
-                {
-                    dynamic r = JsonConvert.DeserializeObject(mqttSettingsJson);
-                    if (r["mqtt_host"] > 0)
-                    {
-                        host = r["mqtt_host"];
-                    }
-                    else
-                    {
-                        Logfile.Log("MQTT: No host setting -> MQTT disabled! Check settings and reboot");
-                        return;
-                    }
-                    if (r["mqtt_port"] > 0)
-                    {
-                        port = (int)r["mqtt_port"];
-                    }
-                    if (r["mqtt_user"] > 0 && r["mqtt_passwd"] > 0)
-                    {
-                        user = r["mqtt_user"];
-                        password = r["mqtt_passwd"];
-                    }
-                    if (r["mqtt_topic"] > 0)
-                    {
-                        topic = r["mqtt_topic"];
-                    }
-                    if (r["mqtt_publishjson"] > 0)
-                    {
-                        publishJson = (bool)r["mqtt_publishjson"];
-                    }
-                    if (r["mqtt_singletopics"] > 0)
-                    {
-                        singletopics = (bool)r["mqtt_singletopics"];
-                    }
-                    if (r["mqtt_discoveryenable"] > 0)
-                    {
-                        discoveryEnable = (bool)r["mqtt_discoveryenable"];
-                    }
-                    if (r["mqtt_topic"] > 0)
-                    {
-                        discoverytopic = r["mqtt_discoverytopic"];
-                    }
-                    if (r["mqtt_clientid"] > 0)
-                    {
-                        clientid = r["mqtt_clientid"];
-                    }
-                    Logfile.Log("MQTT: Settings found");
-                }
-                else
-                {
-                    Logfile.Log("MQTT: Settings not found!");
-                }
 
-                client = new MqttClient(host, port, false, null, null, MqttSslProtocols.None);
+                ParseSettings();
+
+                client = MqttClientWrapper.CreateClient(host, port, false, null, null, MqttSslProtocols.None);
 
                 ConnectionCheck();
 
@@ -132,28 +108,23 @@ namespace TeslaLogger
 
                     if (discoveryEnable && singletopics)
                     {
-                        foreach(string vin in allCars)
+                        foreach (string vin in allCars)
                         {
                             PublishDiscovery(vin);
                         }
                     }
-
-                    
-
                 }
                 else
                 {
                     Logfile.Log("MQTT: Connection failed!");
                 }
-                
+
                 while (true)
                 {
                     Work();
                     // sleep 1 second
                     Thread.Sleep(1000);
                 }
-
-
             }
             catch (Exception ex)
             {
@@ -163,76 +134,163 @@ namespace TeslaLogger
             }
         }
 
+        private void ParseSettings()
+        {
+            if (KVS.Get("MQTTSettings", out string mqttSettingsJson) == KVS.SUCCESS)
+            {
+                dynamic r = JsonConvert.DeserializeObject(mqttSettingsJson);
+                if (r["mqtt_host"] > 0)
+                {
+                    host = r["mqtt_host"];
+                }
+                else
+                {
+                    Logfile.Log("MQTT: No host setting -> MQTT disabled! Check settings and reboot");
+                    return;
+                }
+                if (r["mqtt_port"] > 0)
+                {
+                    port = (int)r["mqtt_port"];
+                }
+                if (r["mqtt_user"] > 0 && r["mqtt_passwd"] > 0)
+                {
+                    user = r["mqtt_user"];
+                    password = r["mqtt_passwd"];
+                }
+                if (r["mqtt_topic"] > 0)
+                {
+                    topic = r["mqtt_topic"];
+                }
+                if (r["mqtt_publishjson"] > 0)
+                {
+                    publishJson = (bool)r["mqtt_publishjson"];
+                }
+                if (r["mqtt_singletopics"] > 0)
+                {
+                    singletopics = (bool)r["mqtt_singletopics"];
+                }
+                if (r["mqtt_discoveryenable"] > 0)
+                {
+                    discoveryEnable = (bool)r["mqtt_discoveryenable"];
+                }
+                if (r["mqtt_topic"] > 0)
+                {
+                    discoverytopic = r["mqtt_discoverytopic"];
+                }
+                if (r["mqtt_clientid"] > 0)
+                {
+                    clientid = r["mqtt_clientid"];
+                }
+                Logfile.Log("MQTT: Settings found");
+            }
+            else
+            {
+                Logfile.Log("MQTT: Settings not found!");
+            }
+        }
+
         internal void Work()
         {
+            // TODO: in unittest, initialization is not done like in real code
+            if (allCars == null && Tools.IsUnitTest())
+            {
+                allCars = GetAllcars();
+            }
+
             try
             {
-                if (ConnectionCheck())
+                // Not connected ? do nothing
+                if (!ConnectionCheck())
                 {
-                    //heartbeat
-                    if (heartbeatCounter % 10 == 0)
+                    return;
+                }
+                var needsAllCarRefresh = false;
+
+                //heartbeat
+                if (heartbeatCounter % 10 == 0)
+                {
+                    client.Publish($@"{topic}/system/status", Encoding.UTF8.GetBytes("online"),
+                                uPLibrary.Networking.M2Mqtt.Messages.MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, true);
+                    //Tools.DebugLog("MQTT: hearbeat!");
+                    heartbeatCounter = 0;
+                }
+                heartbeatCounter++;
+
+                var cars = allCars.ToList();
+                foreach (string vin in cars)
+                {
+                    string temp = null;
+                    string carTopic = $"{topic}/car/{vin}";
+                    string jsonTopic = $"{topic}/json/{vin}/currentjson";
+
+                    int carId = Car.GetCarIDFromVIN(vin);
+
+                    if (carId < 0)
                     {
-                        client.Publish($@"{topic}/system/status", Encoding.UTF8.GetBytes("online"),
-                                    uPLibrary.Networking.M2Mqtt.Messages.MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, true);
-                        //Tools.DebugLog("MQTT: hearbeat!");
-                        heartbeatCounter = 0;
+                        // https://github.com/bassmaster187/TeslaLogger/issues/1434
+                        // carId is not found ? -> either removed after discovery, or other error occurred in TL
+                        // -> sinal to refresh allCars and continue.
+
+                        Tools.DebugLog($"MQTT: VIN {vin} returned car ID {carId}. Skipping...");
+                        needsAllCarRefresh = true;
+                        continue;
                     }
-                    heartbeatCounter++;
 
-
-                    foreach (string vin in allCars)
+                    try
                     {
-                        string temp = null;
-                        string carTopic = $"{topic}/car/{vin}";
-                        string jsonTopic = $"{topic}/json/{vin}/currentjson";
+                        temp = RetrieveJsonString($"http://localhost:{httpport}/currentjson/" + carId);
 
-                        int carId = Car.GetCarIDFromVIN(vin);
+                    }
+                    catch (WebException wex) when (wex.Response is HttpWebResponse httpResponse && httpResponse.StatusCode == HttpStatusCode.NotFound)
+                    {
+                        Logfile.Log($"MQTT: Could not retrieve CurrentJson for car id {carId}: {wex.Message}");
+                        Tools.DebugLog("MQTT: CurrentJson Exception", wex);
+                        needsAllCarRefresh = true;
+                        continue;
+                    }
+                    catch (Exception ex)
+                    {
+                        Logfile.Log("MQTT: CurrentJson Exeption: " + ex.Message);
+                        Tools.DebugLog("MQTT: CurrentJson Exception", ex);
+                        // ex.ToExceptionless().FirstCarUserID().Submit();
+                        System.Threading.Thread.Sleep(60000); //wait 60 seconds after exception
+                    }
 
-                        using (WebClient wc = new WebClient())
+                    if (!lastjson.ContainsKey(carId) || temp != lastjson[carId])
+                    {
+                        lastjson[carId] = temp;
+                        if (publishJson)
                         {
-                            try
-                            {
-                                temp = wc.DownloadString($"http://localhost:{httpport}/currentjson/" + carId);
-                            }
-                            catch (Exception ex)
-                            {
-                                Logfile.Log("MQTT: CurrentJson Exeption: " + ex.Message);
-                                Tools.DebugLog("MQTT: CurrentJson Exception", ex);
-//                                ex.ToExceptionless().FirstCarUserID().Submit();
-                                System.Threading.Thread.Sleep(60000); //wait 60 seconds after exception
-                            }
-                            
+                            client.Publish(jsonTopic, Encoding.UTF8.GetBytes(lastjson[carId]),
+                                uPLibrary.Networking.M2Mqtt.Messages.MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, true);
                         }
 
-                        if (!lastjson.ContainsKey(carId) || temp != lastjson[carId])
+                        if (singletopics)
                         {
-                            lastjson[carId] = temp;
-                            if (publishJson)
+                            var topics = JsonConvert.DeserializeObject<Dictionary<string, string>>(temp);
+                            foreach (var keyvalue in topics)
                             {
-                                client.Publish(jsonTopic, Encoding.UTF8.GetBytes(lastjson[carId]),
-                                    uPLibrary.Networking.M2Mqtt.Messages.MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, true);
+                                var safeValue = GetSafeValueForPublishing(keyvalue);
+
+                                client.Publish(carTopic + "/" + keyvalue.Key, Encoding.UTF8.GetBytes(safeValue),
+                                uPLibrary.Networking.M2Mqtt.Messages.MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, true);
+
                             }
-
-                            if (singletopics)
-                            {
-                                var topics = JsonConvert.DeserializeObject<Dictionary<string, string>>(temp);
-                                foreach (var keyvalue in topics)
-                                {
-                                    var safeValue = GetSafeValueForPublishing(keyvalue);
-
-                                    client.Publish(carTopic + "/" + keyvalue.Key, Encoding.UTF8.GetBytes(safeValue),
-                                    uPLibrary.Networking.M2Mqtt.Messages.MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, true);
-
-                                }
-                                Double.TryParse(topics["latitude"], out double lat);
-                                Double.TryParse(topics["longitude"], out double lon);
-                                PublichGPSTracker(vin, lat, lon);
-                            }
-
+                            Double.TryParse(topics["latitude"], out double lat);
+                            Double.TryParse(topics["longitude"], out double lon);
+                            PublichGPSTracker(vin, lat, lon);
                         }
+
                     }
                 }
 
+                if (!needsAllCarRefresh)
+                {
+                    return;
+                }
+                allCars = GetAllcars();
+
+                UnsubscribeFromRemovedCars(cars.Except(allCars));
             }
             catch (Exception ex)
             {
@@ -240,8 +298,17 @@ namespace TeslaLogger
                 Tools.DebugLog("MQTT: Work Exception", ex);
                 ex.ToExceptionless().FirstCarUserID().Submit();
                 System.Threading.Thread.Sleep(60000);
-
             }
+        }
+
+        private void UnsubscribeFromRemovedCars(IEnumerable<string> vinsToUnsubscribe)
+        {
+            if(!client.IsConnected)
+            {
+                return;
+            }
+
+            client.Unsubscribe(vinsToUnsubscribe.Select(vin => $"{topic}/command/{vin}/+").ToArray());
         }
 
         /// <summary>
@@ -380,7 +447,7 @@ namespace TeslaLogger
             return false;
         }
 
-        private void MQTTConnectionHandler(MqttClient client)
+        private void MQTTConnectionHandler(IMqttClient client)
         {
             while (true)
             {
@@ -411,10 +478,7 @@ namespace TeslaLogger
 
             try
             {
-                using (WebClient wc = new WebClient())
-                {
-                    json = wc.DownloadString($"http://localhost:{httpport}/getallcars");
-                }
+                json = RetrieveJsonString($"http://localhost:{httpport}/getallcars");
             }
             catch (Exception ex)
             {
@@ -430,7 +494,9 @@ namespace TeslaLogger
                 foreach (dynamic car in cars)
                 {
                     int id = car["id"];
-                    if(Car.GetCarByID(id).GetCurrentState() == Car.TeslaState.Inactive)
+                    string inactiveFlag = car["inactive"];
+                    var carObj = Car.GetCarByID(id);
+                    if (carObj == null || carObj.GetCurrentState() == Car.TeslaState.Inactive || inactiveFlag == "1")
                     {
                         continue; //skip inactive cars
                     }
@@ -447,7 +513,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
-                Logfile.Log("MQTT: HashSet Exception: " + ex.Message);
+                Logfile.Log("MQTT: HashSet Exception: " + ex);
                 ex.ToExceptionless().FirstCarUserID().Submit();
                 System.Threading.Thread.Sleep(20000);
             }
@@ -456,13 +522,28 @@ namespace TeslaLogger
 
         }
 
+        private static string RetrieveJsonString(string url)
+        {
+            return MQTTWebDownloader.GetSingleton().DownloadString(url);
+        }
+
         internal void PublishDiscovery(string vin)
         {
 
             int carId = Car.GetCarIDFromVIN(vin);
+            if(carId <= 0)
+            {
+                Logfile.Log($"MQTT: AutoDiscovery for {vin}: car not found");
+                return;
+            }
             string model = "Model " + vin[3]; //Car.GetCarByID(carId).CarType;
-            string name = Car.GetCarByID(carId).DisplayName;
-            string sw = Car.GetCarByID(carId).CurrentJSON.current_car_version;
+            var car = Car.GetCarByID(carId);
+            if (car == null)
+            {
+                Logfile.Log($"MQTT: AutoDiscovery for {vin}: car {carId} not found or not active");
+            }
+            string name = car.DisplayName;
+            string sw = car.CurrentJSON.current_car_version;
             string type = "sensor";
 
             foreach (string entity in MQTTAutoDiscovery.autoDiscovery.Keys)
@@ -607,5 +688,55 @@ namespace TeslaLogger
 
             }
         }
+    }
+
+    internal class MQTTWebDownloader : IWebDownloader
+    {
+        private static IWebDownloader _instance;
+
+        public static IWebDownloader GetSingleton() => _instance ?? (_instance = new MQTTWebDownloader());
+
+        public string DownloadString(string url)
+        {
+            string json;
+            using (WebClient wc = new WebClient())
+            {
+                json = wc.DownloadString(url);
+            }
+
+            return json;
+        }
+    }
+
+    internal class MqttClientWrapper : IMqttClient
+    {
+        private MqttClient _client;
+
+        public bool IsConnected => _client.IsConnected;
+
+        public event MqttMsgPublishEventHandler MqttMsgPublishReceived
+        {
+            add => _client.MqttMsgPublishReceived += value;
+            remove => _client.MqttMsgPublishReceived -= value;
+        }
+
+        public static IMqttClient CreateClient(string brokerHostName, int brokerPort, bool secure, X509Certificate caCert, X509Certificate clientCert, MqttSslProtocols sslProtocol)
+        {
+            var result = new MqttClientWrapper
+            {
+                _client = new MqttClient(brokerHostName, brokerPort, secure, caCert, clientCert, sslProtocol)
+            };
+            return result;
+        }
+
+        private MqttClientWrapper() { }
+
+        public byte Connect(string clientId, string username, string password, bool willRetain, byte willQosLevel, bool willFlag, string willTopic, string willMessage, bool cleanSession, ushort keepAlivePeriod) => _client.Connect(clientId, username, password, willRetain, willQosLevel, willFlag, willTopic, willMessage, cleanSession, keepAlivePeriod);
+
+        public ushort Publish(string topic, byte[] message, byte qosLevel, bool retain) => _client.Publish(topic, message, qosLevel, retain);
+
+        public ushort Subscribe(string[] topics, byte[] qosLevels) => _client.Subscribe(topics, qosLevels);
+
+        public ushort Unsubscribe(string[] topics) => _client.Unsubscribe(topics);
     }
 }

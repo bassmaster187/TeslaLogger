@@ -977,7 +977,7 @@ namespace TeslaLogger
                     }
                     else if (j["update"] == "none")
                     {
-                        return UpdateType.none;
+                        return UpdateType.stable;
                     }
                 }
             }

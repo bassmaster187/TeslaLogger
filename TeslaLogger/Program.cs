@@ -214,7 +214,7 @@ namespace TeslaLogger
 
         internal static void GetAllCars()
         {
-            using (DataTable dt = DBHelper.GetCars())
+            using (DataTable dt = DBHelper.GetCarsByTokenAge(true))
             {
                 foreach (DataRow r in dt.Rows)
                 {

@@ -2,6 +2,8 @@
 INFO_important="Wichtige Info"
 INFO_FLEETAPI="Tesla wird ab dem 01.01.2025 die offizielle Fleet API in ein Bezahlmodell umwandeln ({LINK1}). Aus diesem Grund bin ich gezwungen, auf ein Abomodell umzusteigen und monatlich eine geringe Gebühr zu verlangen, um meine Ausgaben für Tesla, Steuern und den Zahlungsdienstleister zu decken.<br>Gleichzeitig verpflichten mich Teslas AGBs ({LINK2}), die inoffizielle Owners API aufzugeben, da Tesla ansonsten rechtliche Schritte gegen mich einleiten könnte (§5.6.6 und §5.6.11). Bitte wechselt eure Fahrzeuge von der Owners API zur Fleet API, indem ihr eure Zugangsdaten erneut eingebt.<br><br>Für die älteren Model S/X (Baujahr vor 2021) gibt es jedoch keine Lösung für die Nutzung der Fleet API. Diese Fahrzeuge können weiterhin über die alte Owners API betrieben werden. Ich gehe davon aus, dass Tesla in diesen Fällen keine rechtlichen Schritte einleiten wird. Für diese Fahrzeuge könnt ihr dennoch ein Abo abschließen, was jedoch eher als freiwillige Spende zu verstehen ist, da ich dafür keine Gebühren an Tesla zahlen muss.<br><br>Da Tesla mit der Fleet API sowohl ihre Server entlasten als auch Einnahmen generieren möchte, besteht die Möglichkeit, dass die inoffizielle Owners API am 01.01.2025 abgeschaltet wird. Wir hoffen, dass die älteren Model S/X davon nicht betroffen sein werden."
 
+INFO_RESTRICTED="Ohne ein aktives Abonnement können wir die Kosten für deinen Tesla leider nicht tragen. Daher sehen wir uns gezwungen, die Funktionalität und insbesondere die Übermittlungsfrequenz der Positionsdaten erheblich einzuschränken."
+
 #Allgemein
 Delete=Löschen
 Save=Speichern
@@ -169,6 +171,7 @@ Subscribe="Abo abschließen"
 SubscribeManage="Abo verwalten"
 SubscriptionRequired="Abo notwendig!"
 FleetAPIRequired="Fleet API notwendig!"
+Aktiv="Aktiv"
 
 #password_fleet.php
 PF_LOGOUT="Melden Sie sich von Ihrem Tesla-Konto ab, wenn Sie bereits eingeloggt sind"
@@ -193,6 +196,7 @@ Sentry Mode=Wächter-Modus
 Status=Status
 Sleeping=Schlafen
 Dashboard=Dashboard
+Inactive=Inaktiv
 
 #geoadd.php
 Charger=Ladesäule
