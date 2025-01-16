@@ -40,6 +40,7 @@ namespace TeslaLogger
         private double lastIdealBatteryRange;
         private double? lastOdometer;
         private double? lastOutsideTemp;
+        private double? lastInsideTemp;
 
         double lastLatitude = 0;
         double lastLongitude = 0;
@@ -284,6 +285,16 @@ namespace TeslaLogger
                             car.CurrentJSON.CreateCurrentJSON();
                         }
                     }
+                    else if (key == "InsideTemp")
+                    {
+                        string v = value["stringValue"];
+                        if (double.TryParse(v, NumberStyles.Any, CultureInfo.InvariantCulture, out double InsideTemp))
+                        {
+                            lastInsideTemp = InsideTemp;
+                            car.CurrentJSON.current_inside_temperature = InsideTemp;
+                            car.CurrentJSON.CreateCurrentJSON();
+                        }
+                    }
                     else if (key == "TimeToFullCharge")
                     {
                         string v = value["stringValue"];
@@ -516,6 +527,29 @@ namespace TeslaLogger
 
                         car.CurrentJSON.CreateCurrentJSON();
                     }
+                    else if (key == "DetailedChargeState")
+                    {
+                        string DetailedChargeState = value["detailedChargeStateValue"];
+                        if (!String.IsNullOrEmpty(DetailedChargeState))
+                        {
+                            if (DetailedChargeState.Contains("DetailedChargeStateNoPower") ||
+                                DetailedChargeState.Contains("DetailedChargeStateStarting") ||
+                                DetailedChargeState.Contains("DetailedChargeStateCharging") ||
+                                DetailedChargeState.Contains("DetailedChargeStateComplete") ||
+                                DetailedChargeState.Contains("DetailedChargeStateStopped"))
+                            {
+                                car.CurrentJSON.current_plugged_in = true;
+                            }
+                            else
+                            {
+                                car.CurrentJSON.current_plugged_in = false;
+                            }
+                            car.CurrentJSON.CreateCurrentJSON();
+
+                        }
+                        Log("DetailedChargeState: " + DetailedChargeState);
+
+                    }
                 }
             }
         }
@@ -558,7 +592,8 @@ namespace TeslaLogger
                         }
                     }
 
-                    if (key == "ACChargingEnergyIn" && acCharging)
+                    //Changed from ACChargingEnergyIn to DCChargingEnergyIn: AC* is grid side, DC* is energy charged into to the battery
+                    if (key == "DCChargingEnergyIn" && acCharging)
                     {
                         string v1 = value["stringValue"];
                         if (double.TryParse(v1, NumberStyles.Any, CultureInfo.InvariantCulture, out ChargingEnergyIn))

@@ -703,11 +703,11 @@ namespace TeslaLogger
                     }
                     else
                     {
-                        // Odometer didn't change for 600 seconds 
+                        // Odometer didn't change for 900 seconds 
                         TimeSpan ts = DateTime.Now - lastOdometerChanged;
-                        if (ts.TotalSeconds > 600)
+                        if (ts.TotalSeconds > 900 && !FleetAPI) // Fleet API has its own logic
                         {
-                            Log("Odometer didn't change for 600 seconds  -> Finish Trip!!!");
+                            Log("Odometer didn't change for 900 seconds  -> Finish Trip!!!");
                             DriveFinished();
                         }
                     }
