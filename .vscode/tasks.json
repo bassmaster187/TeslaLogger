@@ -1,0 +1,15 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "build TeslaLoggerNET8",
+			"command": "dotnet",
+			"type": "process",
+			"args": [
+				"build",
+				"${workspaceFolder}/TeslaLogger/TeslaLoggerNET8.csproj"
+			],
+			"problemMatcher": "$msCompile"
+		}
+	]
+}
