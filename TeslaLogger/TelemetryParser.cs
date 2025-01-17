@@ -65,6 +65,31 @@ namespace TeslaLogger
             lastRatedRange = car.CurrentJSON.current_battery_range_km;
         }
 
+        public void InitFromDB()
+        {
+            try
+            {
+                car.dbHelper.GetMaxChargeid(out DateTime chargeStart, out double? _charge_energy_added);
+
+                double drivenAfterLastCharge = car.dbHelper.GetDrivenKm(chargeStart, DateTime.Now);
+                if (drivenAfterLastCharge > 0)
+                {
+                    charge_energy_added = 0;
+                    Log("Driving after last charge: " + drivenAfterLastCharge + " km -> charge_energy_added = 0");
+                }
+                else
+                {
+                    charge_energy_added = _charge_energy_added;
+                    Log("charge_energy_added from DB: " + charge_energy_added);
+                }
+            }
+            catch (Exception ex)
+            {
+                Log(ex.ToString());
+                car.CreateExceptionlessClient(ex).Submit();
+            }
+        }
+
         private bool driving;
         private bool _acCharging;
         internal bool dcCharging
@@ -107,7 +132,7 @@ namespace TeslaLogger
             {
                 if (value)
                 {
-                    charge_energy_added = null;
+                    charge_energy_added = 0;
                 }
 
                 driving = value;
