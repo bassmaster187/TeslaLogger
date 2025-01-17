@@ -21,7 +21,7 @@ namespace UnitTestsTeslalogger
 
             UpdateTeslalogger.Start();
 
-            while (UpdateTeslalogger.Done == false)
+            while (UpdateTeslalogger.done.IsCancellationRequested == false)
             {
                 System.Threading.Thread.Sleep(100);
             }

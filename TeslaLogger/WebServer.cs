@@ -386,7 +386,7 @@ namespace TeslaLogger
                         Dev_DumpJSON(response, true);
                         break;
                     case bool _ when request.Url.LocalPath.Equals("/dev/dumpJSON/off", System.StringComparison.Ordinal):
-                        Dev_DumpJSON(response, false);
+                        Dev_DumpJSON(response, false); 
                         break;
                     case bool _ when request.Url.LocalPath.Equals("/dev/verbose/on", System.StringComparison.Ordinal):
                         Program.VERBOSE = true;

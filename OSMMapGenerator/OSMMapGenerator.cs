@@ -739,7 +739,7 @@ namespace TeslaLogger
                     if (debug) Console.WriteLine("Download:" + url);
                     try
                     {
-                        using (WebClient wc = new WebClient())
+                        using (var wc = new WebClient())
                         {
                             wc.Headers["User-Agent"] = "TeslaLogger.OSMMapGenerator";
                             wc.DownloadFile(url, localMapCacheFilePath);
