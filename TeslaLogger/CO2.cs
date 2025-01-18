@@ -201,6 +201,12 @@ namespace TeslaLogger
             string w = wi.ToString("D2");
             int year = dateTime.Year;
 
+            if (w == "53")
+            {
+                year++;
+                w = "01";
+            }
+
             string filename = $"week_cbpf_saldo_{year}_{w}.json";
             string path = $"EngergyChartData/{country}/{filename}";
 
