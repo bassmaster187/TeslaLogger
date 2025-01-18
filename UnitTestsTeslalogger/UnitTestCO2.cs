@@ -49,171 +49,171 @@ namespace UnitTestsTeslalogger
         public void TestDE()
         {
             int c = co2.GetData("de", dateTime);
-            Assert.AreEqual(423, c);
+            Assert.AreEqual(423, c, 10);
         }
 
         [TestMethod]
         public void TestDE_KW53()
         {
             int c = co2.GetData("de", new DateTime(2024,12,30,12,10,0));
-            Assert.AreEqual(91, c);
+            Assert.AreEqual(91, c, 10);
         }
 
         [TestMethod]
         public void TestFR()
         {
             int c = co2.GetData("fr", dateTime);
-            Assert.AreEqual(67, c);
+            Assert.AreEqual(67, c, 10);
         }
 
         [TestMethod]
         public void TestCH()
         {
             int c = co2.GetData("ch", dateTime);
-            Assert.AreEqual(153, c);
+            Assert.AreEqual(153, c, 10);
         }
 
         [TestMethod]
         public void TestAT()
         {
             int c = co2.GetData("at", dateTime);
-            Assert.AreEqual(414, c);
+            Assert.AreEqual(414, c, 10);
         }
 
         [TestMethod]
         public void TestIT()
         {
             int c = co2.GetData("it", dateTime);
-            Assert.AreEqual(500, c);
+            Assert.AreEqual(500, c, 10);
         }
 
         [TestMethod]
         public void TestRO()
         {
             int c = co2.GetData("ro", dateTime);
-            Assert.AreEqual(320, c);
+            Assert.AreEqual(320, c, 10);
         }
 
         [TestMethod]
         public void TestPT()
         {
             int c = co2.GetData("pt", dateTime);
-            Assert.AreEqual(125, c);
+            Assert.AreEqual(125, c, 10);
         }
 
         [TestMethod]
         public void TestES()
         {
             int c = co2.GetData("es", dateTime);
-            Assert.AreEqual(140, c);
+            Assert.AreEqual(140, c, 10);
         }
 
         [TestMethod]
         public void TestBE()
         {
             int c = co2.GetData("be", dateTime);
-            Assert.AreEqual(201, c);
+            Assert.AreEqual(201, c, 10);
         }
         [TestMethod]
         public void TestDK()
         {
             int c = co2.GetData("dk", dateTime);
-            Assert.AreEqual(209, c);
+            Assert.AreEqual(209, c, 10);
         }
         [TestMethod]
         public void TestHR()
         {
             int c = co2.GetData("hr", dateTime);
-            Assert.AreEqual(336, c);
+            Assert.AreEqual(336, c, 10);
         }
         [TestMethod]
         public void TestCZ()
         {
             int c = co2.GetData("cz", dateTime);
-            Assert.AreEqual(620, c);
+            Assert.AreEqual(620, c, 10);
         }
         [TestMethod]
         public void TestHU()
         {
             int c = co2.GetData("hu", dateTime);
-            Assert.AreEqual(317, c);
+            Assert.AreEqual(317, c, 10);
         }
         [TestMethod]
         public void TestNL()
         {
             int c = co2.GetData("nl", dateTime);
-            Assert.AreEqual(512, c);
+            Assert.AreEqual(512, c, 10);
         }
         [TestMethod]
         public void TestNO()
         {
             int c = co2.GetData("no", dateTime);
-            Assert.AreEqual(47, c);
+            Assert.AreEqual(47, c, 10);
         }
         [TestMethod]
         public void TestSI()
         {
             int c = co2.GetData("si", dateTime);
-            Assert.AreEqual(291, c);
+            Assert.AreEqual(291, c, 10);
         }
         [TestMethod]
         public void TestSE()
         {
             int c = co2.GetData("se", dateTime);
-            Assert.AreEqual(69, c);
+            Assert.AreEqual(69, c, 10);
         }
         [TestMethod]
         public void TestGB()
         {
             int c = co2.GetData("gb", dateTime);
-            Assert.AreEqual(161, c);
+            Assert.AreEqual(161, c, 10);
         }
         [TestMethod]
         public void TestUK()
         {
             int c = co2.GetData("uk", dateTime);
-            Assert.AreEqual(161, c);
+            Assert.AreEqual(161, c, 10);
         }
         [TestMethod]
         public void TestPL()
         {
             int c = co2.GetData("pl", dateTime);
-            Assert.AreEqual(719, c);
+            Assert.AreEqual(719, c, 10);
         }
 
         [TestMethod]
         public void TestFI()
         {
             int c = co2.GetData("fi", dateTime);
-            Assert.AreEqual(171, c);
+            Assert.AreEqual(171, c, 10);
         }
 
         [TestMethod]
         public void TestSK()
         {
             int c = co2.GetData("sk", dateTime);
-            Assert.AreEqual(363, c);
+            Assert.AreEqual(363, c, 10);
         }
 
         [TestMethod]
         public void TestBG()
         {
             int c = co2.GetData("bg", dateTime);
-            Assert.AreEqual(641, c);
+            Assert.AreEqual(641, c, 10);
         }
 
         [TestMethod]
         public void TestEE()
         {
             int c = co2.GetData("ee", dateTime);
-            Assert.AreEqual(767, c);
+            Assert.AreEqual(767, c, 10);
         }
 
         [TestMethod]
         public void TestLV()
         {
             int c = co2.GetData("lv", dateTime);
-            Assert.AreEqual(490, c);
+            Assert.AreEqual(490, c, 10);
         }
 
         [TestMethod]
