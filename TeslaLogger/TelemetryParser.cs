@@ -930,6 +930,7 @@ namespace TeslaLogger
                                 Log("LoginRespone: missing_key");
                                 car.CurrentJSON.FatalError = "missing_key";
                                 car.CurrentJSON.CreateCurrentJSON();
+                                return;
                             }
                         }
                     }
