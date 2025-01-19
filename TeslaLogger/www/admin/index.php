@@ -167,8 +167,18 @@ else
 			}
 			else if (jsonData["FatalError"])
 			{
+				if (jsonData["FatalError"] == "missing_key")
+				{
+					var missingkeytext = "<?php t("FatalErrorMissingKey"); ?>";
+					missingkeytext = missingkeytext.replace("{LINK}", '<a href="https://www.tesla.com/_ak/teslalogger.de" target="_blank">LINK</a>');
+
+					$('#car_status').html('<font color="red">'+missingkeytext+'</font>');
+				}
+				else
+					$('#car_status').html("<font color='red'>"+ jsonData["FatalError"] +"</font>");
+
 				$('#car_statusLabel').html("<font color='red'><?php t("Fatal Error"); ?>: </font>");
-				$('#car_status').html("<font color='red'>"+ jsonData["FatalError"] +"</font>");
+				
 				updateSMT(jsonData);
 			}
 			else if (jsonData["charging"])
