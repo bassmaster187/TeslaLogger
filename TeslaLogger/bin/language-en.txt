@@ -191,6 +191,7 @@ Software Update=Software Update
 Consumption=Consumption
 Ø Consumption="Avg Consumption"
 Please update to latest docker-compose.yml file. Check: {LINK}=Please update to latest docker-compose.yml file. Check: {LINK}
+FatalErrorMissingKey=Virtual Key Missig!<br>Finish Setup at: {LINK}<br>And restart Teslalogger.
 
 #menu.php
 Logfile=Logfile

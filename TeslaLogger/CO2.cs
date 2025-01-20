@@ -11,6 +11,7 @@ namespace TeslaLogger
     public class CO2
     {
         HashSet<string> supportedCountries = new HashSet<string> { "at", "be", "bg", "ch", "cz", "de", "dk", "ee", "es", "fi", "fr", "gr", "hr", "hu", "it", "lu", "lv", "nl", "no", "pl", "pt" ,"ro", "se", "si", "sk", "uk" };
+        public bool useCache = true;
 
         static void Log(string msg) {
             Logfile.Log(" ** CO2: " + msg);
@@ -58,7 +59,7 @@ namespace TeslaLogger
             string filename = $"week_{year}_{w}.json";
             string path = $"EngergyChartData/{country}/{filename}";
 
-            if (File.Exists(path))
+            if (File.Exists(path) && useCache)
                 content = File.ReadAllText(path);
             else
                 content = GetEnergyChartData(country, filename, writeCache);
@@ -118,6 +119,9 @@ namespace TeslaLogger
                 dynamic data = d["data"];
 
                 if (data == null)
+                    continue;
+
+                if (data.Count <= ix)
                     continue;
 
                 if (data[ix].Type == Newtonsoft.Json.Linq.JTokenType.Null)
@@ -196,6 +200,12 @@ namespace TeslaLogger
 
             string w = wi.ToString("D2");
             int year = dateTime.Year;
+
+            if (w == "53")
+            {
+                year++;
+                w = "01";
+            }
 
             string filename = $"week_cbpf_saldo_{year}_{w}.json";
             string path = $"EngergyChartData/{country}/{filename}";
@@ -321,6 +331,8 @@ namespace TeslaLogger
                     resultContent = client.DownloadString(url);
 
                     DBHelper.AddMothershipDataToDB("EnergyCharts", start, 0, 0);
+
+                    Console.WriteLine("Download URL ok: " + url);
                 }
                 catch (Exception)
                 {

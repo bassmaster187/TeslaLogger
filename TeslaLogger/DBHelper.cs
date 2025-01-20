@@ -3382,7 +3382,7 @@ LIMIT 1", con)
             if (car.telemetryParser?.dcCharging == true)
                 fast_charger_present = true;
 
-            int chargeID = GetMaxChargeid(out DateTime chargeStart);
+            int chargeID = GetMaxChargeid(out DateTime chargeStart, out double? _);
             long chargingstateid = 0;
             if (wh != null)
             {
@@ -5214,7 +5214,7 @@ WHERE
             return 0;
         }
 
-        private int GetMaxChargeid(out DateTime chargeStart)
+        public int GetMaxChargeid(out DateTime chargeStart, out double? charge_energy_added)
         {
             using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
             {
@@ -5222,7 +5222,8 @@ WHERE
                 using (MySqlCommand cmd = new MySqlCommand(@"
 SELECT
     id,
-    datum
+    datum,
+    charge_energy_added
 FROM
     charging
 WHERE
@@ -5239,11 +5240,15 @@ LIMIT 1", con))
                         {
                             chargeStart = DateTime.Now;
                         }
+
+                        charge_energy_added = Convert.ToDouble(dr[2]);
+
                         return Convert.ToInt32(dr[0], Tools.ciEnUS);
                     }
                 }
             }
             chargeStart = DateTime.Now;
+            charge_energy_added = null;
             return 0;
         }
 
@@ -6533,7 +6538,7 @@ WHERE
             {
                 car.Log($"CloseChargingState id:{openChargingState}");
                 StaticMapService.CreateChargingMapOnChargingCompleted(car.CarInDB);
-                int chargeID = GetMaxChargeid(out DateTime chargeEnd);
+                int chargeID = GetMaxChargeid(out DateTime chargeEnd, out double? _);
                 using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
                 {
                     con.Open();
@@ -7399,6 +7404,36 @@ ORDER BY startdate", con))
                 }
             }
 
+            return 0;
+        }
+
+        internal double GetDrivenKm(DateTime startDate, DateTime endDate)
+        {
+            try
+            {
+                using (MySqlConnection con = new MySqlConnection(DBConnectionstring + ";Allow User Variables=True"))
+                {
+                    con.Open();
+                    using (MySqlCommand cmd = new MySqlCommand($@"SELECT max(odometer) - min(odometer)  
+                        FROM pos where carid = @carid and 
+                        Datum between @startdate and @enddate", con))
+                    {
+                        cmd.Parameters.AddWithValue("@carid", car.CarInDB);
+                        cmd.Parameters.AddWithValue("@startdate", startDate);
+                        cmd.Parameters.AddWithValue("@enddate", endDate);
+                        var odo = cmd.ExecuteScalar();
+                        if (odo != null && double.TryParse(odo.ToString(), out double drivenkm))
+                        {
+                            return drivenkm;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logfile.Log(ex.ToString());
+                ex.ToExceptionless().Submit();
+            }
             return 0;
         }
     }

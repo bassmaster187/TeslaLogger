@@ -65,6 +65,31 @@ namespace TeslaLogger
             lastRatedRange = car.CurrentJSON.current_battery_range_km;
         }
 
+        public void InitFromDB()
+        {
+            try
+            {
+                car.dbHelper.GetMaxChargeid(out DateTime chargeStart, out double? _charge_energy_added);
+
+                double drivenAfterLastCharge = car.dbHelper.GetDrivenKm(chargeStart, DateTime.Now);
+                if (drivenAfterLastCharge > 0)
+                {
+                    charge_energy_added = 0;
+                    Log("Driving after last charge: " + drivenAfterLastCharge + " km -> charge_energy_added = 0");
+                }
+                else
+                {
+                    charge_energy_added = _charge_energy_added;
+                    Log("charge_energy_added from DB: " + charge_energy_added);
+                }
+            }
+            catch (Exception ex)
+            {
+                Log(ex.ToString());
+                car.CreateExceptionlessClient(ex).Submit();
+            }
+        }
+
         private bool driving;
         private bool _acCharging;
         internal bool dcCharging
@@ -107,7 +132,7 @@ namespace TeslaLogger
             {
                 if (value)
                 {
-                    charge_energy_added = null;
+                    charge_energy_added = 0;
                 }
 
                 driving = value;
@@ -881,26 +906,48 @@ namespace TeslaLogger
             {
                 dynamic response = j["Response"];
                 dynamic updated_vehicles = response["updated_vehicles"];
+                
                 if (updated_vehicles == "1")
                 {
                     string cfg = j["Config"];
                     Log("LoginRespone: OK / Config: " + cfg);
+                    return;
                 }
-                else
-                {
-                    Log("LoginRespone ERROR: " + response);
-                    car.CurrentJSON.FatalError = "Telemetry Login Error!!! Check Logfile!";
-                    car.CurrentJSON.CreateCurrentJSON();
 
-                    if (response.ToString().Contains("not_found"))
+                dynamic skipped_vehicles = response["skipped_vehicles"];
+
+                if (skipped_vehicles != null)
+                {
+                    dynamic missing_key = skipped_vehicles["missing_key"];
+
+                    if (missing_key is JArray arrayMissing_key)
                     {
-                        Thread.Sleep(10 * 60 * 1000);
+                        if (arrayMissing_key?.Count == 1)
+                        {
+                            dynamic mkvin = arrayMissing_key[0];
+                            if (mkvin?.ToString() == car.Vin)
+                            {
+                                Log("LoginRespone: missing_key");
+                                car.CurrentJSON.FatalError = "missing_key";
+                                car.CurrentJSON.CreateCurrentJSON();
+                                return;
+                            }
+                        }
                     }
-                    else if (response.ToString().Contains("token expired"))
-                    {
-                        Log("Login Error: token expired!");
-                        car.webhelper.GetToken();
-                    }
+                }
+
+                Log("LoginRespone ERROR: " + response);
+                car.CurrentJSON.FatalError = "Telemetry Login Error!!! Check Logfile!";
+                car.CurrentJSON.CreateCurrentJSON();
+
+                if (response.ToString().Contains("not_found"))
+                {
+                    Thread.Sleep(10 * 60 * 1000);
+                }
+                else if (response.ToString().Contains("token expired"))
+                {
+                    Log("Login Error: token expired!");
+                    car.webhelper.GetToken();
                 }
             }
             catch (Exception ex)
