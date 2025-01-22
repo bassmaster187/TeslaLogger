@@ -31,6 +31,7 @@ namespace TeslaLogger
         public double lastSoc = 0.0;
 
         public double lastChargingPower = 0.0;
+        double lastDCChargingPower = 0.0;
 
         public String lastChargeState = "";
 
@@ -65,8 +66,35 @@ namespace TeslaLogger
             lastRatedRange = car.CurrentJSON.current_battery_range_km;
         }
 
+        public void InitFromDB()
+        {
+            try
+            {
+                car.dbHelper.GetMaxChargeid(out DateTime chargeStart, out double? _charge_energy_added);
+
+                double drivenAfterLastCharge = car.dbHelper.GetDrivenKm(chargeStart, DateTime.Now);
+                if (drivenAfterLastCharge > 0)
+                {
+                    charge_energy_added = 0;
+                    Log("Driving after last charge: " + drivenAfterLastCharge + " km -> charge_energy_added = 0");
+                }
+                else
+                {
+                    charge_energy_added = _charge_energy_added;
+                    Log("charge_energy_added from DB: " + charge_energy_added);
+                }
+            }
+            catch (Exception ex)
+            {
+                Log(ex.ToString());
+                car.CreateExceptionlessClient(ex).Submit();
+            }
+        }
+
         private bool driving;
         private bool _acCharging;
+        private string lastDetailedChargeState;
+
         internal bool dcCharging
         {
             get => _dcCharging;
@@ -107,7 +135,7 @@ namespace TeslaLogger
             {
                 if (value)
                 {
-                    charge_energy_added = null;
+                    charge_energy_added = 0;
                 }
 
                 driving = value;
@@ -357,20 +385,23 @@ namespace TeslaLogger
                         if (double.TryParse(v, NumberStyles.Any, CultureInfo.InvariantCulture, out double pressure))
                         {
                             pressure = Math.Round(pressure, 2);
-                            switch (suffix)
+                            if (databaseCalls)
                             {
-                                case "Fl":
-                                    car.DbHelper.InsertTPMS(1, pressure, d);
-                                    break;
-                                case "Fr":
-                                    car.DbHelper.InsertTPMS(2, pressure, d);
-                                    break;
-                                case "Rl":
-                                    car.DbHelper.InsertTPMS(3, pressure, d);
-                                    break;
-                                case "Rr":
-                                    car.DbHelper.InsertTPMS(4, pressure, d);
-                                    break;
+                                switch (suffix)
+                                {
+                                    case "Fl":
+                                        car.DbHelper.InsertTPMS(1, pressure, d);
+                                        break;
+                                    case "Fr":
+                                        car.DbHelper.InsertTPMS(2, pressure, d);
+                                        break;
+                                    case "Rl":
+                                        car.DbHelper.InsertTPMS(3, pressure, d);
+                                        break;
+                                    case "Rr":
+                                        car.DbHelper.InsertTPMS(4, pressure, d);
+                                        break;
+                                }
                             }
                         }
                     }
@@ -530,8 +561,20 @@ namespace TeslaLogger
                     else if (key == "DetailedChargeState")
                     {
                         string DetailedChargeState = value["detailedChargeStateValue"];
+
                         if (!String.IsNullOrEmpty(DetailedChargeState))
                         {
+                            lastDetailedChargeState = DetailedChargeState;
+
+                            CheckDetailedChargeState(d);
+
+                            if (IsCharging && DetailedChargeState == "DetailedChargeStateStopped")
+                            {
+                                Log("Stop Charging by DetailedChargeState");
+                                acCharging = false;
+                                dcCharging = false;
+                            }
+
                             if (DetailedChargeState.Contains("DetailedChargeStateNoPower") ||
                                 DetailedChargeState.Contains("DetailedChargeStateStarting") ||
                                 DetailedChargeState.Contains("DetailedChargeStateCharging") ||
@@ -549,6 +592,29 @@ namespace TeslaLogger
                         }
                         Log("DetailedChargeState: " + DetailedChargeState);
 
+                    }
+                }
+            }
+        }
+
+        private void CheckDetailedChargeState(DateTime d)
+        {
+            if (!IsCharging && lastDetailedChargeState == "DetailedChargeStateCharging")
+            {
+                if (lastFastChargerPresent)
+                {
+                    if (lastPackCurrent > 1 || lastDCChargingPower > 1)
+                    {
+                        Log("Start DC Charging by DetailedChargeState Packcurrent: " + lastPackCurrent);
+                        StartDCCharging(d);
+                    }
+                }
+                else
+                {
+                    if (lastPackCurrent > 1 || ACChargingPower > 1)
+                    {
+                        Log("Start AC Charging by DetailedChargeState Packcurrent: " + lastPackCurrent);
+                        StartACCharging(d);
                     }
                 }
             }
@@ -648,6 +714,7 @@ namespace TeslaLogger
                         string v1 = value["stringValue"];
                         if (double.TryParse(v1, out double ChargingPower))
                         {
+                            lastDCChargingPower = ChargingPower;
                             lastChargingPower = ChargingPower;
                             car.CurrentJSON.current_charger_power = Math.Round(ChargingPower, 2);
                             changed = true;
@@ -881,26 +948,48 @@ namespace TeslaLogger
             {
                 dynamic response = j["Response"];
                 dynamic updated_vehicles = response["updated_vehicles"];
+                
                 if (updated_vehicles == "1")
                 {
                     string cfg = j["Config"];
                     Log("LoginRespone: OK / Config: " + cfg);
+                    return;
                 }
-                else
-                {
-                    Log("LoginRespone ERROR: " + response);
-                    car.CurrentJSON.FatalError = "Telemetry Login Error!!! Check Logfile!";
-                    car.CurrentJSON.CreateCurrentJSON();
 
-                    if (response.ToString().Contains("not_found"))
+                dynamic skipped_vehicles = response["skipped_vehicles"];
+
+                if (skipped_vehicles != null)
+                {
+                    dynamic missing_key = skipped_vehicles["missing_key"];
+
+                    if (missing_key is JArray arrayMissing_key)
                     {
-                        Thread.Sleep(10 * 60 * 1000);
+                        if (arrayMissing_key?.Count == 1)
+                        {
+                            dynamic mkvin = arrayMissing_key[0];
+                            if (mkvin?.ToString() == car.Vin)
+                            {
+                                Log("LoginRespone: missing_key");
+                                car.CurrentJSON.FatalError = "missing_key";
+                                car.CurrentJSON.CreateCurrentJSON();
+                                return;
+                            }
+                        }
                     }
-                    else if (response.ToString().Contains("token expired"))
-                    {
-                        Log("Login Error: token expired!");
-                        car.webhelper.GetToken();
-                    }
+                }
+
+                Log("LoginRespone ERROR: " + response);
+                car.CurrentJSON.FatalError = "Telemetry Login Error!!! Check Logfile!";
+                car.CurrentJSON.CreateCurrentJSON();
+
+                if (response.ToString().Contains("not_found"))
+                {
+                    Thread.Sleep(10 * 60 * 1000);
+                }
+                else if (response.ToString().Contains("token expired"))
+                {
+                    Log("Login Error: token expired!");
+                    car.webhelper.GetToken();
                 }
             }
             catch (Exception ex)
@@ -1125,6 +1214,8 @@ namespace TeslaLogger
                                     System.Diagnostics.Debug.WriteLine("PackCurrent: " + d);
                                     lastPackCurrent = d;
                                     lastPackCurrentDate = date;
+
+                                    CheckDetailedChargeState(date);
 
                                     if (!acCharging && lastChargeState == "Enable")
                                     {
