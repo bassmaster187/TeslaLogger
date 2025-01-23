@@ -1,6 +1,6 @@
 ﻿#Общий
 Delete=Удалить
-Save=Сохранять
+Save="Сохранить"
 Settings=Настройки
 Setup=Настраивать
 Enabled="Включено"
@@ -310,8 +310,8 @@ MyTesla=MyTesla
 Teslalogger Adminpanel=Панель администратора теслалоггера
 Temperature=Температура
 mile=миля
-Ideal=Идеально
-Rated=Номинальный
+Ideal="расчетный"
+Rated="идеальный"
 Share data anonymously=Делитесь данными анонимно
 Sleep=Сон
 to=на
