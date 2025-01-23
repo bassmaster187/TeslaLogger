@@ -323,7 +323,7 @@ namespace TeslaLogger
                             bool supportedByFleetTelemetry = SupportedByFleetTelemetry();
                             if (supportedByFleetTelemetry)
                             {
-                                telemetry = new TelemetryConnection(this);
+                                telemetry = TelemetryConnection.Instance(this);
                                 telemetryParser = telemetry.parser;
                                 /*
 
