@@ -239,5 +239,14 @@ namespace TeslaLogger {
                 return ((string)(this["TelemetryServerType"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://teslalogger.de:4444")]
+        public string TeslaHttpProxyURL {
+            get {
+                return ((string)(this["TeslaHttpProxyURL"]));
+            }
+        }
     }
 }

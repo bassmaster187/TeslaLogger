@@ -74,5 +74,8 @@
     <Setting Name="TelemetryServerType" Type="System.String" Scope="Application">
       <Value Profile="(Default)">WS</Value>
     </Setting>
+    <Setting Name="TeslaHttpProxyURL" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">https://teslalogger.de:4444</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

@@ -5878,7 +5878,7 @@ DESC", con))
                 {
                     Tools.SetThreadEnUS();
                     HttpClient httpClientTeslaAPI = GetHttpClientTeslaAPI();
-                    using (var request = new HttpRequestMessage(HttpMethod.Post, new Uri("https://teslalogger.de:4444/api/1/vehicles/fleet_status")))
+                    using (var request = new HttpRequestMessage(HttpMethod.Post, new Uri( ApplicationSettings.Default.TeslaHttpProxyURL + "/api/1/vehicles/fleet_status")))
                     {
                         request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", Tesla_token);
                         request.Content = content;
