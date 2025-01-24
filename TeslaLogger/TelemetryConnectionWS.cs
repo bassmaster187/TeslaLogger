@@ -158,7 +158,7 @@ namespace TeslaLogger
 
         private void ConnectToServer()
         {
-            Log("Connect to Telemetry Server");
+            Log("Connect to Telemetry Server (WS)");
 
             if (ws != null)
                 ws.Dispose();
@@ -177,7 +177,7 @@ namespace TeslaLogger
             {
                 if (ex is AggregateException ex2)
                 {
-                    Log("Connect to Telemetry Server Error: " + ex2.InnerException.Message);
+                    Log("Connect to Telemetry Server (WS) Error: " + ex2.InnerException.Message);
                     if (ex.InnerException != null)
                         car.CreateExceptionlessClient(ex2.InnerException).Submit();
                     else
@@ -187,7 +187,7 @@ namespace TeslaLogger
                 }
                 else
                 {
-                    Log("Connect to Telemetry Server Error: " + ex.Message);
+                    Log("Connect to Telemetry Server (WS) Error: " + ex.Message);
                     car.CreateExceptionlessClient(ex).Submit();
                     Thread.Sleep(60000);
                 }
