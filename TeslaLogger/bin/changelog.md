@@ -1,5 +1,5 @@
-# Version 1.62.11
-- Bugfixes
+# Version 1.62.12
+- Fleet API: new signals: ExpectedEnergyPercentAtTripArrival and ExpectedEnergyPercentAtTripEnd
 
 # Version 1.62.5
 - Detect Model Y LR RWD
