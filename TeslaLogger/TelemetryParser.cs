@@ -367,6 +367,36 @@ namespace TeslaLogger
                             car.CurrentJSON.CreateCurrentJSON();
                         }
                     }
+                    else if (key == "ExpectedEnergyPercentAtTripArrival")
+                    {
+                        try
+                        {
+                            int? v = value["intValue"];
+                            car.CurrentJSON.active_route_energy_at_arrival = v;
+                            car.CurrentJSON.CreateCurrentJSON();
+                        }
+                        catch (Exception ex)
+                        {
+                            ex.ToExceptionless().Submit();
+                            Log(ex.ToString());
+                        }
+
+                    }
+                    else if (key == "RouteTrafficMinutesDelay")
+                    {
+                        try
+                        {
+                            double v = value["doubleValue"];
+
+                            car.CurrentJSON.active_route_traffic_minutes_delay = v;
+                            car.CurrentJSON.CreateCurrentJSON();
+                        }
+                        catch (Exception ex)
+                        {
+                            ex.ToExceptionless().Submit();
+                            Log(ex.ToString());
+                        }
+                    }
                     else if (key == "BatteryHeaterOn")
                     {
                         /*
@@ -727,6 +757,7 @@ namespace TeslaLogger
                         {
                             lastIdealBatteryRange = Tools.MlToKm(IdealBatteryRange, 1);
                             car.CurrentJSON.current_ideal_battery_range_km = lastIdealBatteryRange;
+                            car.CurrentJSON.current_battery_range_km = lastIdealBatteryRange;
                             changed = true;
                         }
                     }
