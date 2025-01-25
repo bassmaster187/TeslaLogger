@@ -5,13 +5,7 @@ namespace TeslaLogger
     class TelemetryConnection
     {
         public TelemetryParser parser;
-        /*
-        public static TelemetryConnection Instance(Car car)
-        {
-            var ret = TelemetryConnection.Instance(car, ApplicationSettings.Default.TelemetryServerType);
-            return ret;
-        }
-        */
+
         public static TelemetryConnection Instance(Car car)
         {
             if (ApplicationSettings.Default.TelemetryServerType == "ZMQ")

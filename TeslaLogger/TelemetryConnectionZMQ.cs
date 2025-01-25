@@ -28,9 +28,6 @@ namespace TeslaLogger
 
         bool connect;
 
-        public TelemetryParser parser;
-
-
         void Log(string message)
         {
             car.Log("*** FT-ZMQ: " + message);
