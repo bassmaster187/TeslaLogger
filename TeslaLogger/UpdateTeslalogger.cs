@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.IO;
-using MySql.Data.MySqlClient;
+using MySqlConnector;
 using System.Text.RegularExpressions;
 using System.Reflection;
 using System.Threading;

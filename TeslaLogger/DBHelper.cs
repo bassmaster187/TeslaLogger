@@ -1,5 +1,4 @@
-﻿using MySql.Data.MySqlClient;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics.CodeAnalysis;
@@ -15,7 +14,7 @@ using Exceptionless;
 using Newtonsoft.Json;
 using System.Diagnostics;
 using System.Data.Common;
-using ZstdSharp.Unsafe;
+using MySqlConnector;
 
 namespace TeslaLogger
 {
@@ -47,9 +46,9 @@ namespace TeslaLogger
             if (string.IsNullOrEmpty(ApplicationSettings.Default.DBConnectionstring))
             {
                 if (Tools.IsDocker())
-                    DBConnectionstring = "Server=database;Database=teslalogger;Uid=root;Password=teslalogger;CharSet=utf8mb4;";
+                    DBConnectionstring = "Server=database;Database=teslalogger;Uid=root;Password=teslalogger;";
                 else
-                    DBConnectionstring = "Server=127.0.0.1;Database=teslalogger;Uid=root;Password=teslalogger;CharSet=utf8mb4;";
+                    DBConnectionstring = "Server=127.0.0.1;Database=teslalogger;Uid=root;Password=teslalogger;";
             }
             else
             {
@@ -1542,7 +1541,7 @@ WHERE
             }
             catch (MySqlException ex)
             {
-                if (ex.ErrorCode == -2147467259) // Duplicate entry
+                if (ex.ErrorCode == MySqlErrorCode.DuplicateKeyEntry) // Duplicate entry
                     return;
 
                 car.SendException2Exceptionless(ex);
@@ -4582,7 +4581,7 @@ WHERE
             }
             catch (MySqlException ex)
             {
-                if (ex.ErrorCode == -2147467259) // Duplicate entry
+                if (ex.ErrorCode == MySqlErrorCode.DuplicateKeyEntry) // Duplicate entry
                 {
                     car.Log(ex.Message);
                     return false;

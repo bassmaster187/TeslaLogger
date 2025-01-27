@@ -5,14 +5,7 @@ using System.Net.WebSockets;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Linq;
-using MySql.Data.MySqlClient;
 using System.Reflection;
-using System.IO;
-using Exceptionless;
-using Newtonsoft.Json.Linq;
-using System.Globalization;
-using Google.Protobuf.WellKnownTypes;
 
 namespace TeslaLogger
 {

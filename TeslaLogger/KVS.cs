@@ -1,6 +1,6 @@
 ﻿using System;
 using Exceptionless;
-using MySql.Data.MySqlClient;
+using MySqlConnector;
 
 namespace TeslaLogger
 {

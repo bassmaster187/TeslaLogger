@@ -4,7 +4,7 @@ using System.Data;
 using System.IO;
 using System.Text;
 using System.Threading;
-using MySql.Data.MySqlClient;
+using MySqlConnector;
 using static TeslaLogger.StaticMapProvider;
 using Exceptionless;
 

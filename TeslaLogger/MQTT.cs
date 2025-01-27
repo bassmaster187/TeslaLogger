@@ -9,8 +9,6 @@ using Newtonsoft.Json;
 using uPLibrary.Networking.M2Mqtt.Messages;
 using uPLibrary.Networking.M2Mqtt;
 using System.Linq;
-using Org.BouncyCastle.Utilities.Encoders;
-using System.Web;
 using static uPLibrary.Networking.M2Mqtt.MqttClient;
 using System.Security.Cryptography.X509Certificates;
 

@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using System.Security.Cryptography;
 using System.Diagnostics;
+using System.Data.SqlClient;
 
 namespace TeslaLogger
 {
@@ -44,6 +45,7 @@ namespace TeslaLogger
                     ExceptionlessClient.Default.Configuration.SetVersion(Assembly.GetExecutingAssembly().GetName().Version);
 
                     ExceptionlessClient.Default.CreateLog("Program", "Start " + Assembly.GetExecutingAssembly().GetName().Version, Exceptionless.Logging.LogLevel.Info).FirstCarUserID().Submit();
+
                 }
                 catch (Exception ex)
                 {
