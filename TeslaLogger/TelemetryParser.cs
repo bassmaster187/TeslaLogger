@@ -1206,7 +1206,7 @@ namespace TeslaLogger
                     foreach (dynamic jj in j)
                     {
                         string key = jj["key"];
-                        if (cols.Any(key.Contains))
+                        if (cols.Any(key.Equals))
                         {
                             dynamic value = jj["value"];
                             if (value.ContainsKey("stringValue"))
