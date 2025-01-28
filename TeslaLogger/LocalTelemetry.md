@@ -16,8 +16,8 @@ For more information: https://github.com/teslamotors/fleet-telemetry?tab=readme-
 - Tesla Http Proxy running
 - Tesla Telemetry Server running
 - Telemetry Server outputs via ZeroMQ protocol
-<details>
-<summary>Recomended/tested telemetry config:</summary>
+
+Recomended/tested telemetry config:
 ```
 {
     "host": "",
@@ -51,13 +51,8 @@ For more information: https://github.com/teslamotors/fleet-telemetry?tab=readme-
     }
 }
 ```
-</details>
 
-
-
-<details>
-
-<summary>Recomended car profile:</summary>
+Recomended car profile:
 ```
 {
   "vins": ["XP7XXXXXXXX0000000"],
@@ -135,13 +130,12 @@ For more information: https://github.com/teslamotors/fleet-telemetry?tab=readme-
   }
 }
 ```
-</details>
+
 
 ## TeslaLogger settings: ##
 You need to know the local IPs and ports of the HTTP Proxy and Telemetry server
 
-<details>
-<summary>To switch to local telemetry add this lines (with your IPs and ports) to TeslaLogger.exe.config file:</summary>
+To switch to local telemetry add this lines (with your IPs and ports) to TeslaLogger.exe.config file:
 ```
             <setting name="TeslaHttpProxyURL" serializeAs="String">
                 <value>https://192.x.x.x:4443</value>
@@ -153,4 +147,3 @@ You need to know the local IPs and ports of the HTTP Proxy and Telemetry server
                 <value>ZMQ</value>
             </setting>
 ```
-</details>
