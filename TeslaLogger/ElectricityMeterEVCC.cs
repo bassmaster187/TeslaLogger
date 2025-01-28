@@ -93,18 +93,29 @@ namespace TeslaLogger
                     return null;
 
                 JToken grid = jsonResult.SelectToken($"$.result.grid");
-
-                Dictionary<string, object> r1 = grid.ToObject<Dictionary<string, object>>();
-
-                if (r1.ContainsKey("energy"))
+                if (grid != null)
                 {
-                    double.TryParse(r1["energy"].ToString(), out double value);
-                    return value;
+                    Dictionary<string, object> r1 = grid.ToObject<Dictionary<string, object>>();
+
+                    if (r1.ContainsKey("energy"))
+                    {
+                        double.TryParse(r1["energy"].ToString(), out double value);
+                        return value;
+                    }
                 }
                 else
                 {
-                    return null;
+                    Dictionary<string, object> r1 = jsonResult["result"].ToObject<Dictionary<string, object>>();
+
+                    if (r1.ContainsKey("gridEnergy"))
+                    {
+                        double.TryParse(r1["gridEnergy"].ToString(), out double value);
+
+                        return value;
+                    }
                 }
+                return null;
+                
 
             }
             catch (Exception ex)
