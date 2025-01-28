@@ -5686,6 +5686,7 @@ DESC", con))
                         {
                             car.Log("vehicle_location: " + vehicle_location);
                             car.Log("offline_access: " + offline_access);
+                            car.vehicle_location = vehicle_location;
                         }
                     }
                     catch (Exception ex)
