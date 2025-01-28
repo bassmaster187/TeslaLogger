@@ -84,6 +84,30 @@ namespace UnitTestsTeslalogger
         }
 
         [TestMethod]
+        public void WARP()
+        {
+            var v = new ElectricityMeterWARP("", "");
+
+            v.mockup_info_version = System.IO.File.ReadAllText(@"..\..\testdata\warp_infos_version.txt");
+            v.mockup_evse_state = System.IO.File.ReadAllText(@"..\..\testdata\warp_evse_state.txt");
+            v.mockup_wallbox_value_ids = System.IO.File.ReadAllText(@"..\..\testdata\warp_wallbox_value_ids.txt");
+            v.mockup_wallbox_values = System.IO.File.ReadAllText(@"..\..\testdata\warp_wallbox_values.txt");
+            v.mockup_grid_value_ids = System.IO.File.ReadAllText(@"..\..\testdata\warp_grid_value_ids.txt");
+            v.mockup_grid_values = System.IO.File.ReadAllText(@"..\..\testdata\warp_grid_values.txt");
+
+            double? kwh = v.GetVehicleMeterReading_kWh();
+            var charging = v.IsCharging();
+            var utility_meter_kwh = v.GetUtilityMeterReading_kWh();
+            var version = v.GetVersion();
+            string ret = v.ToString();
+            Console.WriteLine(ret);
+            Assert.AreEqual(544.4099731, kwh);
+            Assert.AreEqual(false, charging);
+            Assert.AreEqual(5762.71875, utility_meter_kwh);
+            Assert.AreEqual("2.6.6+675aeb99", version);
+        }
+
+        [TestMethod]
         public void Shelly3EM()
         {
             var v = new ElectricityMeterShelly3EM("", "");
