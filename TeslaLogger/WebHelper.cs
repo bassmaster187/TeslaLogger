@@ -5677,7 +5677,64 @@ DESC", con))
             set
             {
                 tesla_token = StringCipher.Decrypt(value);
+                if (car.FleetAPI)
+                {
+                    try
+                    {
+                        var ok = CheckJWT(tesla_token, out bool vehicle_location, out bool offline_access);
+                        if (ok)
+                        {
+                            car.Log("vehicle_location: " + vehicle_location);
+                            car.Log("offline_access: " + offline_access);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        ex.ToExceptionless().Submit();
+                        Logfile.Log(ex.ToString());
+                    }
+                }
             }
+        }
+
+        public static bool CheckJWT(string jwt, out bool vehicle_location, out bool offline_access)
+        {
+            vehicle_location = false;
+            offline_access = false;
+
+            if (jwt == "NULL")
+                return false;
+
+            try
+            {
+                var j = jwt.Split('.');
+                var pl = j[1].Replace('-', '+').Replace('_', '/');
+                switch (pl.Length % 4)
+                {
+                    case 2: pl += "=="; break;
+                    case 3: pl += "="; break;
+                }
+                var payload = System.Text.Encoding.UTF8.GetString(Convert.FromBase64String(pl));
+                dynamic d = JsonConvert.DeserializeObject(payload);
+                JArray scp = d["scp"];
+
+                List<string> scopes = scp.ToObject<List<string>>();
+
+                if (scopes.Contains("vehicle_location"))
+                    vehicle_location = true;
+
+                if (scopes.Contains("offline_access"))
+                    offline_access = true;
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                ex.ToExceptionless().Submit();
+                Logfile.Log(ex.ToString());
+            }
+
+            return false;
         }
 
         private void Log(string text)
