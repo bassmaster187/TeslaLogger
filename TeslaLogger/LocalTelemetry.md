@@ -11,14 +11,18 @@ You can use your own local server, with own car configs, other signal frequency 
 
 ## Requierments: ##
 Only local intances are supported (without authentification)!
-- All needed keys, certifikates, car profiles etc. are available and functioning. 
+
 For more information: https://github.com/teslamotors/fleet-telemetry?tab=readme-ov-file#configuring-and-running-the-service
+
+- All needed keys, certifikates, car profiles etc. are available and functioning
 - Tesla Http Proxy running
 - Tesla Telemetry Server running
 - Telemetry Server outputs via ZeroMQ protocol
+<details>
 
-Recomended/tested telemetry config:
-```
+<summary>Recomended/tested telemetry config:</summary>
+
+```json
 {
     "host": "",
     "port": 12345,
@@ -52,8 +56,13 @@ Recomended/tested telemetry config:
 }
 ```
 
-Recomended car profile:
-```
+</details>
+
+<details>
+
+<summary>Recomended car profile:</summary>
+
+```json
 {
   "vins": ["XP7XXXXXXXX0000000"],
   "config": {
@@ -101,8 +110,6 @@ Recomended car profile:
       "TpmsPressureFr": { "interval_seconds": 10 },
       "TpmsPressureRl": { "interval_seconds": 10 },
       "TpmsPressureRr": { "interval_seconds": 10 },
-      "SpeedLimitMode": { "interval_seconds": 30 },
-      "CurrentLimitMph": { "interval_seconds": 60 },
       "VehicleName": { "interval_seconds": 600 },
       "CarType": { "interval_seconds": 600 },
       "Trim": { "interval_seconds": 600 },
@@ -131,12 +138,16 @@ Recomended car profile:
 }
 ```
 
+</details>
 
 ## TeslaLogger settings: ##
 You need to know the local IPs and ports of the HTTP Proxy and Telemetry server
 
-To switch to local telemetry add this lines (with your IPs and ports) to TeslaLogger.exe.config file:
-```
+<details>
+
+<summary>To switch to local telemetry add this lines (with your IPs and ports) to TeslaLogger.exe.config file:</summary>
+
+```xml
             <setting name="TeslaHttpProxyURL" serializeAs="String">
                 <value>https://192.x.x.x:4443</value>
             </setting>
@@ -147,3 +158,4 @@ To switch to local telemetry add this lines (with your IPs and ports) to TeslaLo
                 <value>ZMQ</value>
             </setting>
 ```
+</details>
