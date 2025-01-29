@@ -13,7 +13,8 @@ namespace TeslaLogger
     {
         string host;
         string parameter;
-        string loadpointname;
+        string loadpointcarname;
+        internal string api_state;
 
         Guid guid; // defaults to new Guid();
         static WebClient client; 
@@ -30,7 +31,7 @@ namespace TeslaLogger
 
             if(parameter != null)
             {
-                loadpointname = parameter;
+                loadpointcarname = parameter;
             }
         }
 
@@ -38,6 +39,11 @@ namespace TeslaLogger
         {
             try
             {
+                if (api_state != null)
+                {
+                    return api_state;
+                }
+
                 string cacheKey = "evcc_" + guid.ToString();
                 object o = MemoryCache.Default.Get(cacheKey);
 
@@ -70,6 +76,39 @@ namespace TeslaLogger
             return "";
         }
 
+        JToken getLoadPointJson(dynamic json)
+        {
+            JToken loadpoint = null;
+            // loadpointcarname can be vehicle title ("TestCar1", vehicle name ("tsla") or loadpoint name ("Wallbox1")
+            // Maybe vehicle name?
+            loadpoint = json.SelectToken($"$.result.loadpoints[?(@.vehicleName == '{loadpointcarname}')]");
+
+            if (loadpoint == null)
+            {
+                // it's not a vehicle name, maybe vehicle title?
+                foreach (var vehicle in json.result.vehicles)
+                {
+                    string vehicleTitle = vehicle.Value.title;
+                    string vehicleName = vehicle.Name;
+                    if (vehicleTitle == loadpointcarname)
+                    {
+                        loadpoint = json.SelectToken($"$.result.loadpoints[?(@.vehicleName == '{vehicleName}')]");
+                        continue;
+                    }
+                }
+                // it's also not a vehicle title. Maybe loadpoint title?
+                if (loadpoint == null)
+                {
+
+                    loadpoint = json.SelectToken($"$.result.loadpoints[?(@.title == '{loadpointcarname}')]");
+                    if (loadpoint == null)
+                    {
+                        return null;
+                    }
+                }
+            }
+            return loadpoint;
+        }
 
         public override double? GetUtilityMeterReading_kWh()
         {
@@ -86,18 +125,31 @@ namespace TeslaLogger
                 if (!Tools.IsPropertyExist(jsonResult, "result"))
                     return null;
 
-                Dictionary<string, object> r1 = jsonResult["result"].ToObject<Dictionary<string, object>>();
-
-                if (r1.ContainsKey("gridEnergy"))
+                JToken grid = jsonResult.SelectToken($"$.result.grid");
+                if (grid != null)
                 {
-                    double.TryParse(r1["gridEnergy"].ToString(), out double value);
+                    Dictionary<string, object> r1 = grid.ToObject<Dictionary<string, object>>();
 
-                    return value;
+                    if (r1.ContainsKey("energy"))
+                    {
+                        double.TryParse(r1["energy"].ToString(), out double value);
+                        return value;
+                    }
                 }
                 else
                 {
-                    return null;
+                    Dictionary<string, object> r1 = jsonResult["result"].ToObject<Dictionary<string, object>>();
+
+                    if (r1.ContainsKey("gridEnergy"))
+                    {
+                        double.TryParse(r1["gridEnergy"].ToString(), out double value);
+
+                        return value;
+                    }
                 }
+                return null;
+                
+
             }
             catch (Exception ex)
             {
@@ -122,9 +174,12 @@ namespace TeslaLogger
                 if (!Tools.IsPropertyExist(jsonResult, "result"))
                     return null;
 
-                JToken acme = jsonResult.SelectToken($"$.result.loadpoints[?(@.title == '{loadpointname}')]");
+                JToken loadpoint = getLoadPointJson(jsonResult);
 
-                Dictionary<string, object> r1 = acme.ToObject<Dictionary<string, object>>();
+                if (loadpoint == null)
+                    return null;
+
+                Dictionary<string, object> r1 = loadpoint.ToObject<Dictionary<string, object>>();
 
                 if (r1.ContainsKey("chargeTotalImport"))
                 {
@@ -160,9 +215,12 @@ namespace TeslaLogger
                 if (!Tools.IsPropertyExist(jsonResult, "result"))
                     return null;
 
-                JToken acme = jsonResult.SelectToken($"$.result.loadpoints[?(@.title == '{loadpointname}')]");
+                JToken loadpoint = getLoadPointJson(jsonResult);
 
-                Dictionary<string, object> r1 = acme.ToObject<Dictionary<string, object>>();
+                if (loadpoint == null)
+                    return null;
+
+                Dictionary<string, object> r1 = loadpoint.ToObject<Dictionary<string, object>>();
 
                 if (r1.ContainsKey("sessionPrice") && r1["sessionPrice"] != null)
                 {
@@ -200,9 +258,12 @@ namespace TeslaLogger
                 if (!Tools.IsPropertyExist(jsonResult, "result"))
                     return null;
 
-                JToken acme = jsonResult.SelectToken($"$.result.loadpoints[?(@.title == '{loadpointname}')]");
+                JToken loadpoint = getLoadPointJson(jsonResult);
 
-                Dictionary<string, object> r1 = acme.ToObject<Dictionary<string, object>>();
+                if (loadpoint == null)
+                    return null;
+
+                Dictionary<string, object> r1 = loadpoint.ToObject<Dictionary<string, object>>();
 
                 if (r1.ContainsKey("charging"))
                 {
