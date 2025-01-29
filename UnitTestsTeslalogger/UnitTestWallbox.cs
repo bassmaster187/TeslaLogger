@@ -122,6 +122,25 @@ namespace UnitTestsTeslalogger
         }
 
         [TestMethod]
+        public void EVCC_multiple()
+        {
+            var v = new ElectricityMeterEVCC("", "TestCar2");
+            v.api_state = System.IO.File.ReadAllText(@"..\..\testdata\evcc_multiple.txt");
+
+            double? kwh = v.GetVehicleMeterReading_kWh();
+            var charging = v.IsCharging();
+            var utility_meter_kwh = v.GetUtilityMeterReading_kWh();
+            var version = v.GetVersion();
+            string ret = v.ToString();
+            Console.WriteLine(ret);
+
+            Assert.AreEqual(6716.148, kwh);
+            Assert.AreEqual(false, charging);
+            Assert.AreEqual(null, utility_meter_kwh);
+            Assert.AreEqual("0.133.0", version);
+        }
+
+        [TestMethod]
         public void Shelly3EM()
         {
             var v = new ElectricityMeterShelly3EM("", "");
