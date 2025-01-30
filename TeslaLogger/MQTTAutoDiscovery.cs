@@ -30,25 +30,25 @@ namespace TeslaLogger
             autoDiscovery["battery_level"]["name"] = "Battery Level";
             autoDiscovery["battery_level"]["unit"] = "%";
             autoDiscovery["battery_level"]["class"] = "battery";
-
+            /* telemetry, missing signal
             autoDiscovery["power"] = new Dictionary<string, string>();
             autoDiscovery["power"]["type"] = "sensor";
             autoDiscovery["power"]["name"] = "Power";
             autoDiscovery["power"]["unit"] = "kW";
             autoDiscovery["power"]["class"] = "power";
-
+            */
             autoDiscovery["charger_power"] = new Dictionary<string, string>();
             autoDiscovery["charger_power"]["type"] = "sensor";
             autoDiscovery["charger_power"]["name"] = "Charge power";
             autoDiscovery["charger_power"]["unit"] = "kW";
             autoDiscovery["charger_power"]["class"] = "power";
-
+            /* telemetry, missing signal or not needed anymore
             autoDiscovery["charger_power_calc_w"] = new Dictionary<string, string>();
             autoDiscovery["charger_power_calc_w"]["type"] = "sensor";
             autoDiscovery["charger_power_calc_w"]["name"] = "Charge power calculated";
             autoDiscovery["charger_power_calc_w"]["unit"] = "W";
             autoDiscovery["charger_power_calc_w"]["class"] = "power";
-
+            
             autoDiscovery["charger_voltage"] = new Dictionary<string, string>();
             autoDiscovery["charger_voltage"]["type"] = "sensor";
             autoDiscovery["charger_voltage"]["name"] = "Charge voltage";
@@ -66,13 +66,13 @@ namespace TeslaLogger
             autoDiscovery["charger_actual_current_calc"]["name"] = "Charge current calculated";
             autoDiscovery["charger_actual_current_calc"]["unit"] = "A";
             autoDiscovery["charger_actual_current_calc"]["class"] = "current";
-
+            */
             autoDiscovery["charge_energy_added"] = new Dictionary<string, string>();
             autoDiscovery["charge_energy_added"]["type"] = "sensor";
             autoDiscovery["charge_energy_added"]["name"] = "Energy added";
             autoDiscovery["charge_energy_added"]["unit"] = "kWh";
             autoDiscovery["charge_energy_added"]["class"] = "energy";
-
+            /* telemetry, missing signal or not needed anymore
             autoDiscovery["charger_phases"] = new Dictionary<string, string>();
             autoDiscovery["charger_phases"]["type"] = "sensor";
             autoDiscovery["charger_phases"]["name"] = "Charge phases";
@@ -82,7 +82,7 @@ namespace TeslaLogger
             autoDiscovery["charger_phases_calc"]["type"] = "sensor";
             autoDiscovery["charger_phases_calc"]["name"] = "Charge phases calculated";
             autoDiscovery["charger_phases_calc"]["icon"] = "mdi:lightning-bolt";
-            
+            */
             autoDiscovery["charge_rate_km"] = new Dictionary<string, string>();
             autoDiscovery["charge_rate_km"]["type"] = "sensor";
             autoDiscovery["charge_rate_km"]["name"] = "Charge rate";
