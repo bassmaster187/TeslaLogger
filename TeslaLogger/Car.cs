@@ -222,6 +222,7 @@ namespace TeslaLogger
         internal string FleetApiAddress = "";
         public string _access_type;
         public bool _virtual_key;
+        internal bool vehicle_location = true;
 
         [MethodImpl(MethodImplOptions.Synchronized)]
         internal TeslaAPIState GetTeslaAPIState() { return teslaAPIState; }
