@@ -6,8 +6,11 @@ function ShowInfo()
 		session_start();
 	}
 	global $fleetapiinfo;
+	global $vehicle_location;
+	global $carVIN;
 
     $fileinfofleetapi = "/tmp/fleetapiinfo".date("Y-m-d").".txt";
+	$filevehicle_location = "/tmp/vehicle_location-$carid-".date("Y-m-d").".txt";
 	$prefix = "/etc/teslalogger/";
     if (isDocker())
 		$prefix = "/tmp/";
@@ -34,6 +37,24 @@ function ShowInfo()
 
         <?php
     }
+	else if ($vehicle_location !== true && !file_exists($filevehicle_location))
+	{
+		file_put_contents($filevehicle_location, ''); 
+		$passwordlink = "password_fleet.php?id=$carid&vin=$carVIN";
+		$tinfo = get_text("INFO_VEHICLE_LOCATION");
+        $tinfo=str_replace("{LINK1}", "<a href='https://developer.tesla.com/docs/fleet-api/announcements#2024-11-26-introducing-a-new-oauth-scope-vehicle-location' target='_blank'>LINK</a>", $tinfo);
+        $tinfo=str_replace("{LINK2}", "<a href='$passwordlink' target='_blank'>LINK</a>", $tinfo);
+        ?>
+
+        $("#InfoText").html("<h1><?php t("INFO_important"); ?></h1><p><?php echo($tinfo); ?></p>");
+        $(".HeaderT").show();
+        $("#PositiveButton").text("<?php t("OK"); ?>");
+        $("#PositiveButton").click(function(){location.reload();});
+        $("#NegativeButton").text("<?php t("Credentials"); ?>");
+        $("#NegativeButton").click(function(){window.location.href='<?php echo $passwordlink; ?>';});
+
+        <?php
+	}
 	else if (file_exists($prefix."cmd_gosleep_$carid.txt"))
 	{?>
 		$("#InfoText").html("<h1><?php t("TextSuspendTeslalogger"); ?></h1>");

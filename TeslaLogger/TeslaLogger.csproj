@@ -212,6 +212,7 @@
     <None Include="www\admin\settings.php.bak" />
     <None Include="www\admin\Teslalogger.odt" />
     <None Include="www\admin\Teslalogger.pdf" />
+    <None Include="www\admin\wallbox.php" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Logfile\Logfile.csproj">

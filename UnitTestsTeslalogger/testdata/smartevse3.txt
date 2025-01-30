@@ -1,0 +1,94 @@
+{
+  "version": "v3.6.10",
+  "serialnr": 1234,
+  "mode": "NORMAL",
+  "mode_id": 1,
+  "car_connected": true,
+  "wifi": {
+    "status": "WL_CONNECTED",
+    "ssid": "Network",
+    "rssi": -24,
+    "bssid": "01:23:45:67:89:0A"
+  },
+  "evse": {
+    "temp": 20,
+    "temp_max": 70,
+    "connected": true,
+    "access": true,
+    "mode": 0,
+    "loadbl": 0,
+    "pwm": 169,
+    "solar_stop_timer": 0,
+    "state": "Charging",
+    "state_id": 2,
+    "error": "None",
+    "error_id": 0,
+    "rfid": "Not Installed"
+  },
+  "settings": {
+    "charge_current": 100,
+    "override_current": 100,
+    "current_min": 6,
+    "current_max": 16,
+    "current_main": 25,
+    "current_max_circuit": 16,
+    "current_max_sum_mains": 0,
+    "max_sum_mains_time": 0,
+    "solar_max_import": 0,
+    "solar_start_current": 12,
+    "solar_stop_time": 30,
+    "enable_C2": "Solar Off",
+    "mains_meter": "API",
+    "starttime": 0,
+    "stoptime": 0,
+    "repeat": 0
+  },
+  "mqtt": {
+    "host": "192.168.0.1",
+    "port": 1883,
+    "topic_prefix": "SmartEVSE/1234",
+    "username": "",
+    "password_set": false,
+    "status": "Connected"
+  },
+  "home_battery": {
+    "current": 0,
+    "last_update": 0
+  },
+  "ev_meter": {
+    "description": "Eastron3P",
+    "address": 20,
+    "import_active_power": 6.800000191,
+    "total_kwh": 2874.199951,
+    "charged_kwh": 13.80000019,
+    "currents": {
+      "TOTAL": 302,
+      "L1": 100,
+      "L2": 101,
+      "L3": 101
+    },
+    "import_active_energy": 2874.199951,
+    "export_active_energy": 0
+  },
+  "mains_meter": {
+    "import_active_energy": 3456.98765,
+    "export_active_energy": 0
+  },
+  "phase_currents": {
+    "TOTAL": 339,
+    "L1": 121,
+    "L2": 106,
+    "L3": 112,
+    "last_data_update": 1736631027,
+    "original_data": {
+      "TOTAL": 339,
+      "L1": 121,
+      "L2": 106,
+      "L3": 112
+    }
+  },
+  "backlight": {
+    "timer": 120,
+    "status": "ON"
+  }
+}
