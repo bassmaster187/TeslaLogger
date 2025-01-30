@@ -712,7 +712,7 @@ namespace TeslaLogger
                 }
 
                 HttpClient httpClientTeslaAPI = GetHttpClientTeslaAPI();
-                using (var request = new HttpRequestMessage(HttpMethod.Get, new Uri("https://teslalogger.de:4444/api/1/users/region")))
+                using (var request = new HttpRequestMessage(HttpMethod.Get, new Uri(ApplicationSettings.Default.TeslaHttpProxyURL + "/api/1/users/region")))
                 {
                     request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", Tesla_token);
                     Tools.DebugLog($"GetRegion #{car.CarInDB} request: {request.RequestUri}");
@@ -5319,7 +5319,7 @@ DESC", con))
                 if (proxyServer)
                 {
                     car.Log("Use ProxyServer");
-                    url = "https://teslalogger.de:4444/api/1/vehicles/" + car.Vin + "/" + cmd;
+                    url = ApplicationSettings.Default.TeslaHttpProxyURL + "/api/1/vehicles/" + car.Vin + "/" + cmd;
                 }
                 else if (car.FleetAPI) // pre 2021 Model S / X
                 {
