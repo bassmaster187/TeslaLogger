@@ -148,6 +148,7 @@
     <Compile Include="CaptchaSolver.cs" />
     <Compile Include="CaptchaSolverKey.cs" />
     <Compile Include="Car.cs" />
+    <Compile Include="ElectricityMeterSmartEVSE3.cs" />
     <Compile Include="ElectricityMeterWARP.cs" />
     <Compile Include="MQTTAutoDiscovery.cs" />
     <Compile Include="MQTT.cs" />

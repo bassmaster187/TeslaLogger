@@ -84,6 +84,82 @@ namespace UnitTestsTeslalogger
         }
 
         [TestMethod]
+        public void SmartEVSE3()
+        {
+            var v = new ElectricityMeterSmartEVSE3("", "");
+            v.mockup_status = System.IO.File.ReadAllText(@"..\..\testdata\smartevse3.txt");
+
+            double? kwh = v.GetVehicleMeterReading_kWh();
+            var charging = v.IsCharging();
+            var utility_meter_kwh = v.GetUtilityMeterReading_kWh();
+            var version = v.GetVersion();
+            string ret = v.ToString();
+            Console.WriteLine(ret);
+
+            Assert.AreEqual(2874.199951, kwh);
+            Assert.AreEqual(true, charging);
+            Assert.AreEqual(3456.98765, utility_meter_kwh);
+            Assert.AreEqual("v3.6.10", version);
+        }
+
+        [TestMethod]
+        public void EVCC_Wallbox()
+        {
+            var v = new ElectricityMeterEVCC("", "Wallbox1");
+            v.api_state = System.IO.File.ReadAllText(@"..\..\testdata\evcc.txt");
+
+            double? kwh = v.GetVehicleMeterReading_kWh();
+            var charging = v.IsCharging();
+            var utility_meter_kwh = v.GetUtilityMeterReading_kWh();
+            var version = v.GetVersion();
+            string ret = v.ToString();
+            Console.WriteLine(ret);
+
+            Assert.AreEqual(544.41, kwh);
+            Assert.AreEqual(false, charging);
+            Assert.AreEqual(5755.34, utility_meter_kwh);
+            Assert.AreEqual("0.133.0", version);
+        }
+
+        [TestMethod]
+        public void EVCC_Vehicle()
+        {
+            var v = new ElectricityMeterEVCC("", "TestCar1");
+            v.api_state = System.IO.File.ReadAllText(@"..\..\testdata\evcc.txt");
+
+            double? kwh = v.GetVehicleMeterReading_kWh();
+            var charging = v.IsCharging();
+            var utility_meter_kwh = v.GetUtilityMeterReading_kWh();
+            var version = v.GetVersion();
+            string ret = v.ToString();
+            Console.WriteLine(ret);
+
+            Assert.AreEqual(544.41, kwh);
+            Assert.AreEqual(false, charging);
+            Assert.AreEqual(5755.34, utility_meter_kwh);
+            Assert.AreEqual("0.133.0", version);
+        }
+
+        [TestMethod]
+        public void EVCC_multiple()
+        {
+            var v = new ElectricityMeterEVCC("", "TestCar2");
+            v.api_state = System.IO.File.ReadAllText(@"..\..\testdata\evcc_multiple.txt");
+
+            double? kwh = v.GetVehicleMeterReading_kWh();
+            var charging = v.IsCharging();
+            var utility_meter_kwh = v.GetUtilityMeterReading_kWh();
+            var version = v.GetVersion();
+            string ret = v.ToString();
+            Console.WriteLine(ret);
+
+            Assert.AreEqual(6716.148, kwh);
+            Assert.AreEqual(false, charging);
+            Assert.AreEqual(null, utility_meter_kwh);
+            Assert.AreEqual("0.133.0", version);
+        }
+
+        [TestMethod]
         public void WARP()
         {
             var v = new ElectricityMeterWARP("", "");
