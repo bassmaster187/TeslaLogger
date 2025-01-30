@@ -161,8 +161,6 @@
     <Compile Include="CaptchaSolver.cs" />
     <Compile Include="CaptchaSolverKey.cs" />
     <Compile Include="Car.cs" />
-    <Compile Include="TelemetryConnection.cs" />
-    <Compile Include="TelemetryConnectionZMQ.cs" />
     <Compile Include="MQTTAutoDiscovery.cs" />
     <Compile Include="MQTT.cs" />
     <Compile Include="CO2.cs" />
@@ -178,11 +176,15 @@
     <Compile Include="ElectricityMeterShelly3EM.cs" />
     <Compile Include="ElectricityMeterShellyEM.cs" />
     <Compile Include="ElectricityMeterTeslaGen3WallConnector.cs" />
+    <Compile Include="ElectricityMeterSmartEVSE3.cs" />
+    <Compile Include="ElectricityMeterWARP.cs" />
     <Compile Include="FileManager.cs" />
     <Compile Include="GeocodeCache.cs" />
     <Compile Include="MQTTClient.cs" />
     <Compile Include="ScanMyTesla.cs" />
     <Compile Include="ShareData.cs" />
+    <Compile Include="TelemetryConnection.cs" />
+    <Compile Include="TelemetryConnectionZMQ.cs" />
     <Compile Include="TelemetryConnectionWS.cs" />
     <Compile Include="TelemetryParser.cs" />
     <Compile Include="TeslaAuth.cs" />
@@ -225,6 +227,7 @@
     <None Include="www\admin\settings.php.bak" />
     <None Include="www\admin\Teslalogger.odt" />
     <None Include="www\admin\Teslalogger.pdf" />
+    <None Include="www\admin\wallbox.php" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Logfile\Logfile.csproj">

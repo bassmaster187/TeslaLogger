@@ -1,0 +1,1 @@
+{"firmware":"2.6.6+675aeb99","config":"2.6.6","config_type":"warp"}
