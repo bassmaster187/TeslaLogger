@@ -1051,20 +1051,24 @@ namespace TeslaLogger
                     dynamic value = jj["value"];
                     if (key == "Odometer")
                     {
-                        //prefer_typed = false
-                        string v = value["stringValue"];
-                        if (v != null)
+                        string v1;
+                        if (value.ContainsKey("stringValue"))
                         {
-                            if (double.TryParse(v, NumberStyles.Any, CultureInfo.InvariantCulture, out double Odometer))
-                                lastOdometer = Tools.MlToKm(Odometer, 3);
+                            v1 = value["stringValue"];
+                            v1 = v1.Replace("\"", "");
+
                         }
-                        //prefer_typed = true
-                        v = value["doubleValue"];
-                        if (v != null)
+                        else if (value.ContainsKey("doubleValue"))
                         {
-                            if (double.TryParse(v, NumberStyles.Any, CultureInfo.InvariantCulture, out double Odometer))
-                                lastOdometer = Tools.MlToKm(Odometer, 3);
+                            v1 = value["doubleValue"];
                         }
+                        else
+                        {
+                            continue;
+                        }
+
+                        if (double.TryParse(v1, NumberStyles.Any, CultureInfo.InvariantCulture, out double Odometer))
+                            lastOdometer = Tools.MlToKm(Odometer, 3);
                     }
                     else if (key == "Location")
                     {
@@ -1124,20 +1128,24 @@ namespace TeslaLogger
                     }
                     else if (key == "VehicleSpeed")
                     {
-                        string v1 = value["stringValue"];
-                        if (v1 != null)
+                        string v1;
+                        if (value.ContainsKey("stringValue"))
                         {
+                            v1 = value["stringValue"];
                             v1 = v1.Replace("\"", "");
-                            if (Double.TryParse(v1, NumberStyles.Any, CultureInfo.InvariantCulture, out double s))
-                                speed = s;
+
                         }
-                        v1 = value["doubleValue"];
-                        if (v1 != null)
+                        else if (value.ContainsKey("doubleValue"))
                         {
-                            v1 = v1.Replace("\"", "");
-                            if (Double.TryParse(v1, NumberStyles.Any, CultureInfo.InvariantCulture, out double s))
-                                speed = s;
+                            v1 = value["doubleValue"];
                         }
+                        else
+                        {
+                            continue;
+                        }
+
+                        if (Double.TryParse(v1, NumberStyles.Any, CultureInfo.InvariantCulture, out double s))
+                            speed = s;
                     }
                 }
 
@@ -1427,21 +1435,18 @@ namespace TeslaLogger
                             dynamic value = jj["value"];
                             if (value.ContainsKey("stringValue"))
                             {
-                                //prefer_typed = false
                                 string v1 = value["stringValue"];
                                 v1 = v1.Replace("\"", "");
                                 d = double.Parse(v1, Tools.ciEnUS);
                             }
                             else if (value.ContainsKey("doubleValue"))
                             {
-                                //prefer_typed = true
                                 string v1 = value["doubleValue"];
                                 v1 = v1.Replace("\"", "");
                                 d = double.Parse(v1, Tools.ciEnUS);
                             }
                             else if (value.ContainsKey("intValue"))
                             {
-                                //prefer_typed = true
                                 string v1 = value["intValue"];
                                 v1 = v1.Replace("\"", "");
                                 d = double.Parse(v1, Tools.ciEnUS);
@@ -1777,7 +1782,7 @@ namespace TeslaLogger
                             {
                                 continue;
                             }
-                            v1.ToLower();
+                            v1 = v1.ToLower(CultureInfo.InvariantCulture);
 
                             if (v1 == "true")
                             {
