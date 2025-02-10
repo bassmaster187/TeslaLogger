@@ -1,4 +1,6 @@
 # Version 1.62.14
+- New Wallboxes: SmartEVSE 3 and WARP
+- EVCC supports multiple loadpoints and cars now. You can find a loadpoint by car name (EVCC should be configured correctly)
 - Bugfixes
 
 # Version 1.62.13
