@@ -836,7 +836,7 @@ namespace TeslaLogger
 
             try
             {
-                if (!Tools.IsMono() && !Tools.IsDocker() && !Tools.IsDotnet8() && !Tools.IsDockerNET8()))
+                if (!Tools.IsMono() && !Tools.IsDocker() && !Tools.IsDotnet8() && !Tools.IsDockerNET8())
                 {
                     Logfile.Log("ExecMono: unsupported environment");
                     return "";
