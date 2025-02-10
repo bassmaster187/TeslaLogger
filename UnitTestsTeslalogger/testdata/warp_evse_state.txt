@@ -1,0 +1,1 @@
+{"iec61851_state":0,"charger_state":0,"contactor_state":0,"contactor_error":0,"allowed_charging_current":0,"error_state":0,"lock_state":0,"dc_fault_current_state":0}

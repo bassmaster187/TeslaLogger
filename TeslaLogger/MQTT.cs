@@ -549,7 +549,16 @@ namespace TeslaLogger
             foreach (string entity in MQTTAutoDiscovery.autoDiscovery.Keys)
             {
                 Dictionary<string, string> entitycontainer = MQTTAutoDiscovery.autoDiscovery[entity];
-                Dictionary<string, object> device = new Dictionary<string, object>
+                
+                //mandotory
+                entitycontainer.TryGetValue("name", out string entityName);
+                entitycontainer.TryGetValue("type", out string entityType);
+
+                entitycontainer.TryGetValue("discovery_active", out string active);
+                if (active == "true")
+                {
+
+                    Dictionary<string, object> device = new Dictionary<string, object>
                 {
                    { "ids", vin },
                    { "mf", "Tesla" },
@@ -557,75 +566,82 @@ namespace TeslaLogger
                    { "name", name },
                    { "sw", sw }
                 };
-                Dictionary<string, object> entityConfig = new Dictionary<string, object>
+                    Dictionary<string, object> entityConfig = new Dictionary<string, object>
                 {
                    { "dev", device }
                 };
 
-                //mandotory
-                entitycontainer.TryGetValue("name", out string entityName);
-                entitycontainer.TryGetValue("type", out string entityType);
-                //optional
-                entitycontainer.TryGetValue("icon", out string entityIcon);
-                entitycontainer.TryGetValue("class", out string entityClass);
-                entitycontainer.TryGetValue("unit", out string entityUnit);
-                //type dependent:
-                //switch
-                entitycontainer.TryGetValue("pl_on", out string entityTextOn);
-                entitycontainer.TryGetValue("pl_off", out string entityTextOff);
-                entitycontainer.TryGetValue("cmd_topic", out string entityControlTopic);
-                //switch
-                entitycontainer.TryGetValue("min", out string entityMin);
-                entitycontainer.TryGetValue("max", out string entityMax);
-                entitycontainer.TryGetValue("step", out string entityStep);
+                    
+                    //optional
+                    entitycontainer.TryGetValue("icon", out string entityIcon);
+                    entitycontainer.TryGetValue("class", out string entityClass);
+                    entitycontainer.TryGetValue("unit", out string entityUnit);
+                    //type dependent:
+                    //switch
+                    entitycontainer.TryGetValue("pl_on", out string entityTextOn);
+                    entitycontainer.TryGetValue("pl_off", out string entityTextOff);
+                    entitycontainer.TryGetValue("cmd_topic", out string entityControlTopic);
+                    //number
+                    entitycontainer.TryGetValue("min", out string entityMin);
+                    entitycontainer.TryGetValue("max", out string entityMax);
+                    entitycontainer.TryGetValue("step", out string entityStep);
+
+                    entityConfig.Add("name", entityName);
+                    entityConfig.Add("uniq_id", vin + "_" + entity);
+                    entityConfig.Add("stat_t", $"{topic}/car/{vin}/{entity}");
+
+
+                    if (entityIcon != null)
+                    {
+                        entityConfig.Add("icon", entityIcon);
+                    }
+                    if (entityClass != null)
+                    {
+                        entityConfig.Add("dev_cla", entityClass);
+                    }
+                    if (entityUnit != null)
+                    {
+                        entityConfig.Add("unit_of_meas", entityUnit);
+                    }
+                    if (entityTextOn != null)
+                    {
+                        entityConfig.Add("pl_on", entityTextOn);
+                    }
+                    if (entityTextOff != null)
+                    {
+                        entityConfig.Add("pl_off", entityTextOff);
+                    }
+                    if (entityControlTopic != null)
+                    {
+                        entityConfig.Add("cmd_t", $"{topic}/command/{vin}/{entityControlTopic}");
+                    }
+                    if (entityMin != null)
+                    {
+                        entityConfig.Add("min", entityMin);
+                    }
+                    if (entityMax != null)
+                    {
+                        entityConfig.Add("max", entityMax);
+                    }
+                    if (entityStep != null)
+                    {
+                        entityConfig.Add("step", entityStep);
+                    }
+                    var configJson = JsonConvert.SerializeObject(entityConfig);
+
+                    client.Publish($"{discoverytopic}/{entityType}/{vin}/{entity}/config", Encoding.UTF8.GetBytes(configJson ?? "NULL"),
+                                        uPLibrary.Networking.M2Mqtt.Messages.MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, true);
+                    
+                    Tools.DebugLog($"MQTT: AutoDiscovery for {vin}: " + entity);
+                }
+                else
+                {
+                    //if discovery_active is false or null, delete retainded discovery message from broker: send "null" to discovery config topic
+                    client.Publish($"{discoverytopic}/{entityType}/{vin}/{entity}/config", null,
+                                        uPLibrary.Networking.M2Mqtt.Messages.MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, false);
+                    Tools.DebugLog($"MQTT: AutoDiscovery removed {vin}: " + entity);
+                }
                 
-                entityConfig.Add("name", entityName);
-                entityConfig.Add("uniq_id", vin + "_" + entity);
-                entityConfig.Add("stat_t", $"{topic}/car/{vin}/{entity}");
-
-
-                if (entityIcon != null)
-                {
-                    entityConfig.Add("icon", entityIcon);
-                }
-                if (entityClass != null)
-                {
-                    entityConfig.Add("dev_cla", entityClass);
-                }
-                if (entityUnit != null)
-                {
-                    entityConfig.Add("unit_of_meas", entityUnit);
-                }
-                if (entityTextOn != null)
-                {
-                    entityConfig.Add("pl_on", entityTextOn);
-                }
-                if (entityTextOff != null)
-                {
-                    entityConfig.Add("pl_off", entityTextOff);
-                }
-                if (entityControlTopic != null)
-                {
-                    entityConfig.Add("cmd_t", $"{topic}/command/{vin}/{entityControlTopic}");
-                }
-                if (entityMin != null)
-                {
-                    entityConfig.Add("min", entityMin);
-                }
-                if (entityMax != null)
-                {
-                    entityConfig.Add("max", entityMax);
-                }
-                if (entityStep != null)
-                {
-                    entityConfig.Add("step", entityStep);
-                }
-                var configJson = JsonConvert.SerializeObject(entityConfig);
-
-                client.Publish($"{discoverytopic}/{entityType}/{vin}/{entity}/config", Encoding.UTF8.GetBytes(configJson ?? "NULL"),
-                                    uPLibrary.Networking.M2Mqtt.Messages.MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, true);
-
-            Tools.DebugLog($"MQTT: AutoDiscovery for {vin}: " + entity);
             }
 
             //special case: GPS Tracker

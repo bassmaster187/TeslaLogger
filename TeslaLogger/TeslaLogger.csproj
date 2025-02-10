@@ -148,6 +148,8 @@
     <Compile Include="CaptchaSolver.cs" />
     <Compile Include="CaptchaSolverKey.cs" />
     <Compile Include="Car.cs" />
+    <Compile Include="ElectricityMeterSmartEVSE3.cs" />
+    <Compile Include="ElectricityMeterWARP.cs" />
     <Compile Include="MQTTAutoDiscovery.cs" />
     <Compile Include="MQTT.cs" />
     <Compile Include="CO2.cs" />
@@ -210,6 +212,7 @@
     <None Include="www\admin\settings.php.bak" />
     <None Include="www\admin\Teslalogger.odt" />
     <None Include="www\admin\Teslalogger.pdf" />
+    <None Include="www\admin\wallbox.php" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Logfile\Logfile.csproj">

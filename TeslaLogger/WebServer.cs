@@ -3359,6 +3359,7 @@ FROM
 
                             dt.Columns.Add("SupportedByFleetTelemetry");
                             dt.Columns.Add("inactive");
+                            dt.Columns.Add("vehicle_location");
 
                             foreach (DataRow dr in dt.Rows)
                             {
@@ -3366,7 +3367,10 @@ FROM
                                 {
                                     Car c = Car.GetCarByID(Convert.ToInt32(dr["id"]));
                                     if (c != null)
+                                    {
                                         dr["SupportedByFleetTelemetry"] = c.SupportedByFleetTelemetry() ? 1 : 0;
+                                        dr["vehicle_location"] = c.vehicle_location;
+                                    }
                                     else
                                         dr["inactive"] = 1;
                                 }

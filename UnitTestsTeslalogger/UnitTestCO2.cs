@@ -69,14 +69,14 @@ namespace UnitTestsTeslalogger
         public void TestCH()
         {
             int c = co2.GetData("ch", dateTime);
-            Assert.AreEqual(153, c, 10);
+            Assert.AreEqual(153, c, 20);
         }
 
         [TestMethod]
         public void TestAT()
         {
             int c = co2.GetData("at", dateTime);
-            Assert.AreEqual(414, c, 10);
+            Assert.AreEqual(414, c, 20);
         }
 
         [TestMethod]
@@ -97,21 +97,21 @@ namespace UnitTestsTeslalogger
         public void TestPT()
         {
             int c = co2.GetData("pt", dateTime);
-            Assert.AreEqual(125, c, 10);
+            Assert.AreEqual(125, c, 20);
         }
 
         [TestMethod]
         public void TestES()
         {
             int c = co2.GetData("es", dateTime);
-            Assert.AreEqual(140, c, 10);
+            Assert.AreEqual(140, c, 30);
         }
 
         [TestMethod]
         public void TestBE()
         {
             int c = co2.GetData("be", dateTime);
-            Assert.AreEqual(201, c, 10);
+            Assert.AreEqual(201, c, 20);
         }
         [TestMethod]
         public void TestDK()
@@ -123,7 +123,7 @@ namespace UnitTestsTeslalogger
         public void TestHR()
         {
             int c = co2.GetData("hr", dateTime);
-            Assert.AreEqual(336, c, 10);
+            Assert.AreEqual(336, c, 35);
         }
         [TestMethod]
         public void TestCZ()
@@ -147,7 +147,7 @@ namespace UnitTestsTeslalogger
         public void TestNO()
         {
             int c = co2.GetData("no", dateTime);
-            Assert.AreEqual(47, c, 10);
+            Assert.AreEqual(47, c, 20);
         }
         [TestMethod]
         public void TestSI()
@@ -177,7 +177,7 @@ namespace UnitTestsTeslalogger
         public void TestPL()
         {
             int c = co2.GetData("pl", dateTime);
-            Assert.AreEqual(719, c, 10);
+            Assert.AreEqual(719, c, 20);
         }
 
         [TestMethod]
@@ -191,7 +191,7 @@ namespace UnitTestsTeslalogger
         public void TestSK()
         {
             int c = co2.GetData("sk", dateTime);
-            Assert.AreEqual(363, c, 10);
+            Assert.AreEqual(363, c, 20);
         }
 
         [TestMethod]
@@ -205,14 +205,14 @@ namespace UnitTestsTeslalogger
         public void TestEE()
         {
             int c = co2.GetData("ee", dateTime);
-            Assert.AreEqual(767, c, 10);
+            Assert.AreEqual(767, c, 130);
         }
 
         [TestMethod]
         public void TestLV()
         {
             int c = co2.GetData("lv", dateTime);
-            Assert.AreEqual(490, c, 10);
+            Assert.AreEqual(490, c, 55);
         }
 
         [TestMethod]

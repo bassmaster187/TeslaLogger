@@ -117,7 +117,7 @@ namespace TeslaLogger
                 if (driving)
                 {
                     var ts = DateTime.Now - lastDriving;
-                    if (ts.TotalMinutes > 30)
+                    if (ts.TotalMinutes > 60)
                     {
                         Log("Stop Driving by timeout 30 minutes ***");
                         driving = false;
@@ -365,6 +365,36 @@ namespace TeslaLogger
                         {
                             car.CurrentJSON.active_route_km_to_arrival = (long)(MilesToArrival * 1.609344);
                             car.CurrentJSON.CreateCurrentJSON();
+                        }
+                    }
+                    else if (key == "ExpectedEnergyPercentAtTripArrival")
+                    {
+                        try
+                        {
+                            int? v = value["intValue"];
+                            car.CurrentJSON.active_route_energy_at_arrival = v;
+                            car.CurrentJSON.CreateCurrentJSON();
+                        }
+                        catch (Exception ex)
+                        {
+                            ex.ToExceptionless().Submit();
+                            Log(ex.ToString());
+                        }
+
+                    }
+                    else if (key == "RouteTrafficMinutesDelay")
+                    {
+                        try
+                        {
+                            double v = value["doubleValue"];
+
+                            car.CurrentJSON.active_route_traffic_minutes_delay = v;
+                            car.CurrentJSON.CreateCurrentJSON();
+                        }
+                        catch (Exception ex)
+                        {
+                            ex.ToExceptionless().Submit();
+                            Log(ex.ToString());
                         }
                     }
                     else if (key == "BatteryHeaterOn")
@@ -727,6 +757,7 @@ namespace TeslaLogger
                         {
                             lastIdealBatteryRange = Tools.MlToKm(IdealBatteryRange, 1);
                             car.CurrentJSON.current_ideal_battery_range_km = lastIdealBatteryRange;
+                            car.CurrentJSON.current_battery_range_km = lastIdealBatteryRange;
                             changed = true;
                         }
                     }
@@ -1605,7 +1636,7 @@ namespace TeslaLogger
             if (Driving)
             {
                 var ts = DateTime.Now - lastDriving;
-                if (ts.TotalMinutes > 15)
+                if (ts.TotalMinutes > 60)
                 {
                     Log("Driving stop by speed " + lastDriving.ToString());
                     Driving = false;

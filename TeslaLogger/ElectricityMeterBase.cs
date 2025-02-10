@@ -51,6 +51,10 @@ namespace TeslaLogger
                 return new ElectricityMeterKeba(host, paramater);
             else if (type == "evcc")
                 return new ElectricityMeterEVCC(host, paramater);
+            else if (type == "smartevse3")
+                return new ElectricityMeterSmartEVSE3(host, paramater);
+            else if (type == "warp")
+                return new ElectricityMeterWARP(host, paramater);
 
             return null;
         }
