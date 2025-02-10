@@ -12,6 +12,7 @@ using Exceptionless;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using System.Diagnostics;
+using System.Net.Http;
 
 namespace TeslaLogger
 {
@@ -1279,7 +1280,15 @@ PRIMARY KEY(id)
             Logfile.Log("Start update");
             ExceptionlessClient.Default.CreateLog("Install", "Start update from " + Assembly.GetExecutingAssembly().GetName().Version).Submit();
 
-            if (Tools.IsMono())
+            if (Tools.IsDockerNET8())
+            {
+                Logfile.Log("use Watchtower");
+                HttpClient client = new HttpClient();
+                client.DefaultRequestHeaders.Add("Authorization", "Bearer teslalogger");
+                client.GetAsync("http://watchtower:8080/v1/update").Wait();
+                return;
+            }
+            else if (Tools.IsMono())
             {
                 Chmod("VERSION", 666);
                 Chmod("settings.json", 666);
