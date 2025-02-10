@@ -828,7 +828,7 @@ namespace TeslaLogger
         // https://docs.microsoft.com/de-de/dotnet/api/system.diagnostics.process.exitcode?view=netcore-3.1
         public static string ExecMono(string cmd, string param, bool logging = true, bool stderr2stdout = false, int timeout = 0)
         {
-            Logfile.Log("Exec_mono: " + cmd + " " + param);
+            Logfile.Log("ExecMono: " + cmd + " " + param);
 
             StringBuilder sb = new StringBuilder();
 
@@ -836,8 +836,9 @@ namespace TeslaLogger
 
             try
             {
-                if (!Tools.IsMono())
+                if (!Tools.IsMono() && !Tools.IsDocker() && !Tools.IsDotnet8() && !Tools.IsDockerNET8()))
                 {
+                    Logfile.Log("ExecMono: unsupported environment");
                     return "";
                 }
 
