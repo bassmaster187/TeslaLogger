@@ -193,17 +193,8 @@ else
 				var datetime = at.toLocaleTimeString(loc, { hour: '2-digit', minute: '2-digit' });
 
 				$('#car_statusLabel').text("<?php t("Charging"); ?>:");
-				if(jsonData["charger_phases_calc"] > 0)
-                                {
-                                        $('#car_status').html(jsonData["charger_power_calc_w"] + " W / +" + jsonData["charge_energy_added"] + " kWh<br>" +
-                                        jsonData["charger_voltage"]+"V / " + jsonData["charger_actual_current_calc"]+"A / "+ jsonData["charger_phases_calc"]+"P<br>" +
+				$('#car_status').html(jsonData["charger_power"] + " kW / +" + jsonData["charge_energy_added"] + " kWh<br>" +
                                         "<?php t("Done"); ?>: "+ hour +"h "+minute+"m <br><?php t("Done at"); ?>: " + datetime +  " / " + jsonData["charge_limit_soc"] +"%");
-                                }
-                                else
-                                {
-                                        $('#car_status').html(jsonData["charger_power"] + " kW / +" + jsonData["charge_energy_added"] + " kWh<br>" +
-                                        "<?php t("Done"); ?>: "+ hour +"h "+minute+"m <br><?php t("Done at"); ?>: " + datetime +  " / " + jsonData["charge_limit_soc"] +"%");
-                                }
 
 				updateSMT(jsonData);
 			}
@@ -212,14 +203,9 @@ else
 				$('#car_statusLabel').text("<?php t("Driving"); ?>:");
 				var str = "";
 				if (LengthUnit == "mile")
-					str = (jsonData["speed"]/ km2mls).toFixed(0) + " mph / "
+					str = (jsonData["speed"]/ km2mls).toFixed(0) + " mph"
 				else
-					str = jsonData["speed"] + " <?php t("km/h"); ?> / ";
-
-				if (PowerUnit == "kw")
-					str += (jsonData["power"] / 1.35962).toFixed(0) + " <?php t("kW"); ?>";
-				else
-					str += jsonData["power"] + " <?php t("PS"); ?>";
+					str = jsonData["speed"] + " <?php t("km/h"); ?>";
 
 				if (jsonData["active_route_destination"])
 				{
@@ -294,17 +280,6 @@ else
 
 				$("#trip_avg_kwh").text(jsonData["trip_avg_kwh"].toLocaleString(loc,{maximumFractionDigits:1, minimumFractionDigits: 1}));
 				$("#trip_distance").text(jsonData["trip_distance"].toLocaleString(loc,{maximumFractionDigits:1, minimumFractionDigits: 1}));
-			}
-
-			if (PowerUnit == "kw")
-			{
-				$("#max_power").text((jsonData["trip_max_power"] / 1.35962).toFixed(0));
-				$("#lt_trip_PS").text("<?php t("kW"); ?>");
-			}
-			else
-			{
-				$("#max_power").text(jsonData["trip_max_power"]);
-				$("#lt_trip_PS").text("<?php t("PS"); ?>");
 			}
 
 			var ts2 = new Date(Date.parse(jsonData["trip_start_dt"]));
@@ -527,7 +502,7 @@ else
 	  <tr><td><b><?php t("Distance"); ?>:</b></td><td><span id="trip_distance">---</span> <span id="lt_trip_distance_km"><?php t("km"); ?></span></td></tr>
 	  <tr><td><b><?php t("Consumption"); ?>:</b></td><td><span id="trip_kwh">---</span> <?php t("kWh"); ?></td></tr>
 	  <tr><td><b><?php t("Ø Consumption"); ?>:</b></td><td><span id="trip_avg_kwh">---</span> <span id="lt_whkm"><?php t("Wh/km"); ?></span></td></tr>
-	  <tr><td><b><?php t("Max km/h"); ?> / <?php t("PS"); ?>:</b></td><td><span id="max_speed">---</span> <span id="lt_kmh"><?php t("km/h"); ?></span> / <span id="max_power">---</span> <span id="lt_trip_PS"><span></td></tr>
+	  <tr><td><b><?php t("Max km/h"); ?>:</b></td><td><span id="max_speed">---</span> <?php t("km/h"); ?></span> </td></tr>
   </table>
   </div>
 
