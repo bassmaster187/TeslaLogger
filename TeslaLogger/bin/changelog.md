@@ -1,5 +1,12 @@
-# Version 1.62.10
+# Version 1.62.14
 - Bugfixes
+
+# Version 1.62.13
+- Tesla has introduced more granular control over data access: [LINK](https://developer.tesla.com/docs/fleet-api/announcements#2024-11-26-introducing-a-new-oauth-scope-vehicle-location) 
+  Third-party apps can request permission to access location information. Starting in March 2025, no location information will be shared unless you grant the necessary permission.
+
+# Version 1.62.12
+- Fleet API: new signals: ExpectedEnergyPercentAtTripArrival and ExpectedEnergyPercentAtTripEnd
 
 # Version 1.62.5
 - Detect Model Y LR RWD

@@ -141,9 +141,12 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Content Include="testdata\ACCharging2.txt" />
     <Content Include="testdata\ACChargingJustPreheating.txt" />
+    <Content Include="testdata\ChargingDetailedWithoutChargingState.txt" />
     <Content Include="testdata\DCCharging1.txt" />
     <Content Include="testdata\DCCharging2.txt" />
+    <Content Include="testdata\DCCharging3.txt" />
     <Content Include="testdata\DrivingBySpeed.txt" />
     <Compile Include="UnitTestBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -188,6 +191,7 @@
     <Content Include="testdata\ACCharging1.txt" />
     <Content Include="testdata\DrivingByGear.txt" />
     <Content Include="testdata\PluggedIn-NotCharging-Precondition.txt" />
+    <Content Include="testdata\Route.txt" />
     <Content Include="testdata\shelly-em1-shelly.txt" />
     <Content Include="testdata\shelly-em1-status.txt" />
   </ItemGroup>

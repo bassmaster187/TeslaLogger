@@ -31,6 +31,7 @@ namespace TeslaLogger
         public double lastSoc = 0.0;
 
         public double lastChargingPower = 0.0;
+        double lastDCChargingPower = 0.0;
 
         public String lastChargeState = "";
 
@@ -92,6 +93,8 @@ namespace TeslaLogger
 
         private bool driving;
         private bool _acCharging;
+        private string lastDetailedChargeState;
+
         internal bool dcCharging
         {
             get => _dcCharging;
@@ -364,6 +367,36 @@ namespace TeslaLogger
                             car.CurrentJSON.CreateCurrentJSON();
                         }
                     }
+                    else if (key == "ExpectedEnergyPercentAtTripArrival")
+                    {
+                        try
+                        {
+                            int? v = value["intValue"];
+                            car.CurrentJSON.active_route_energy_at_arrival = v;
+                            car.CurrentJSON.CreateCurrentJSON();
+                        }
+                        catch (Exception ex)
+                        {
+                            ex.ToExceptionless().Submit();
+                            Log(ex.ToString());
+                        }
+
+                    }
+                    else if (key == "RouteTrafficMinutesDelay")
+                    {
+                        try
+                        {
+                            double v = value["doubleValue"];
+
+                            car.CurrentJSON.active_route_traffic_minutes_delay = v;
+                            car.CurrentJSON.CreateCurrentJSON();
+                        }
+                        catch (Exception ex)
+                        {
+                            ex.ToExceptionless().Submit();
+                            Log(ex.ToString());
+                        }
+                    }
                     else if (key == "BatteryHeaterOn")
                     {
                         /*
@@ -382,20 +415,23 @@ namespace TeslaLogger
                         if (double.TryParse(v, NumberStyles.Any, CultureInfo.InvariantCulture, out double pressure))
                         {
                             pressure = Math.Round(pressure, 2);
-                            switch (suffix)
+                            if (databaseCalls)
                             {
-                                case "Fl":
-                                    car.DbHelper.InsertTPMS(1, pressure, d);
-                                    break;
-                                case "Fr":
-                                    car.DbHelper.InsertTPMS(2, pressure, d);
-                                    break;
-                                case "Rl":
-                                    car.DbHelper.InsertTPMS(3, pressure, d);
-                                    break;
-                                case "Rr":
-                                    car.DbHelper.InsertTPMS(4, pressure, d);
-                                    break;
+                                switch (suffix)
+                                {
+                                    case "Fl":
+                                        car.DbHelper.InsertTPMS(1, pressure, d);
+                                        break;
+                                    case "Fr":
+                                        car.DbHelper.InsertTPMS(2, pressure, d);
+                                        break;
+                                    case "Rl":
+                                        car.DbHelper.InsertTPMS(3, pressure, d);
+                                        break;
+                                    case "Rr":
+                                        car.DbHelper.InsertTPMS(4, pressure, d);
+                                        break;
+                                }
                             }
                         }
                     }
@@ -555,8 +591,20 @@ namespace TeslaLogger
                     else if (key == "DetailedChargeState")
                     {
                         string DetailedChargeState = value["detailedChargeStateValue"];
+
                         if (!String.IsNullOrEmpty(DetailedChargeState))
                         {
+                            lastDetailedChargeState = DetailedChargeState;
+
+                            CheckDetailedChargeState(d);
+
+                            if (IsCharging && DetailedChargeState == "DetailedChargeStateStopped")
+                            {
+                                Log("Stop Charging by DetailedChargeState");
+                                acCharging = false;
+                                dcCharging = false;
+                            }
+
                             if (DetailedChargeState.Contains("DetailedChargeStateNoPower") ||
                                 DetailedChargeState.Contains("DetailedChargeStateStarting") ||
                                 DetailedChargeState.Contains("DetailedChargeStateCharging") ||
@@ -574,6 +622,29 @@ namespace TeslaLogger
                         }
                         Log("DetailedChargeState: " + DetailedChargeState);
 
+                    }
+                }
+            }
+        }
+
+        private void CheckDetailedChargeState(DateTime d)
+        {
+            if (!IsCharging && lastDetailedChargeState == "DetailedChargeStateCharging")
+            {
+                if (lastFastChargerPresent)
+                {
+                    if (lastPackCurrent > 1 || lastDCChargingPower > 1)
+                    {
+                        Log("Start DC Charging by DetailedChargeState Packcurrent: " + lastPackCurrent);
+                        StartDCCharging(d);
+                    }
+                }
+                else
+                {
+                    if (lastPackCurrent > 1 || ACChargingPower > 1)
+                    {
+                        Log("Start AC Charging by DetailedChargeState Packcurrent: " + lastPackCurrent);
+                        StartACCharging(d);
                     }
                 }
             }
@@ -673,6 +744,7 @@ namespace TeslaLogger
                         string v1 = value["stringValue"];
                         if (double.TryParse(v1, out double ChargingPower))
                         {
+                            lastDCChargingPower = ChargingPower;
                             lastChargingPower = ChargingPower;
                             car.CurrentJSON.current_charger_power = Math.Round(ChargingPower, 2);
                             changed = true;
@@ -685,6 +757,7 @@ namespace TeslaLogger
                         {
                             lastIdealBatteryRange = Tools.MlToKm(IdealBatteryRange, 1);
                             car.CurrentJSON.current_ideal_battery_range_km = lastIdealBatteryRange;
+                            car.CurrentJSON.current_battery_range_km = lastIdealBatteryRange;
                             changed = true;
                         }
                     }
@@ -1172,6 +1245,8 @@ namespace TeslaLogger
                                     System.Diagnostics.Debug.WriteLine("PackCurrent: " + d);
                                     lastPackCurrent = d;
                                     lastPackCurrentDate = date;
+
+                                    CheckDetailedChargeState(date);
 
                                     if (!acCharging && lastChargeState == "Enable")
                                     {

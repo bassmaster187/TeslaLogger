@@ -31,6 +31,7 @@ function menu($title, $prefix = "")
 	global $carVIN;
 	global $fleetapiinfo;
 	global $car_inactive;
+	global $vehicle_location;
 
     $current_carid = $_SESSION["carid"];
     if (!isset($current_carid))
@@ -52,6 +53,7 @@ function menu($title, $prefix = "")
                 $car = $v->{"model_name"};
 				$carVIN = $v->{"vin"};
 				$car_inactive = $v->{"inactive"};
+				$vehicle_location = $v->{"vehicle_location"};
 
                 if (strlen($display_name) == 0)
                     $display_name = "Car ".$v->{"id"};

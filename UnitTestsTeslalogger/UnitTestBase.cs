@@ -1470,5 +1470,22 @@ namespace UnitTestsTeslalogger
             var inTest = Tools.IsUnitTest();
             Assert.IsTrue(inTest, "Should detect that we are in unit test");
         }
+
+        [TestMethod]
+        public void TestJWT1()
+        {
+            string token = "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6InFEc3NoM2FTV0cyT05YTTdLMzFWV0VVRW5BNCJ9.eyJpc3MiOiJodHRwczovL2F1dGgudGVzbGEuY29tL29hdXRoMi92My9udHMiLCJhenAiOiI5MWQ0ZGEyYTM0NjgtNGI4MS1hZGJhLWQyYjI3MWJlZGZhMiIsInN1YiI6ImVhZTU4YzE4LWRiODEtNGZhZC05NDU2LTJiZDJhOWYyZjg0MCIsImF1ZCI6WyJodHRwczovL2ZsZWV0LWFwaS5wcmQubmEudm4uY2xvdWQudGVzbGEuY29tIiwiaHR0cHM6Ly9mbGVldC1hcGkucHJkLmV1LnZuLmNsb3VkLnRlc2xhLmNvbSIsImh0dHBzOi8vYXV0aC50ZXNsYS5jb20vb2F1dGgyL3YzL3VzZXJpbmZvIl0sInNjcCI6WyJvZmZsaW5lX2FjY2VzcyIsIm9wZW5pZCIsInVzZXJfZGF0YSIsInZlaGljbGVfZGV2aWNlX2RhdGEiLCJ2ZWhpY2xlX2NtZHMiLCJ2ZWhpY2xlX2NoYXJnaW5nX2NtZHMiXSwiYW1yIjpbInB3ZCIsIm1mYSIsIm90cCJdLCJleHAiOjE3MzgwNzA4ODQsImlhdCI6MTczODA0MjA4NCwib3VfY29kZSI6IkVVIiwibG9jYWxlIjoiZGEtREsiLCJhY2NvdW50X3R5cGUiOiJidXNpbmVzcyIsIm9wZW5fc291cmNlIjpudWxsLCJhY2NvdW50X2lkIjoiNGZjZTM3OWMtMmU0NS00Y2Y0LTkwYmMtNDZhMzE5MTZkZDE0IiwiYXV0aF90aW1lIjoxNzM4MDQyMDg0LCJub25jZSI6bnVsbH0.XXXXXXXXXXXXXX";
+            WebHelper.CheckJWT(token, out bool vehicle_location, out bool offline_access);
+            Assert.IsFalse(vehicle_location);
+            Assert.IsTrue(offline_access);
+        }
+        [TestMethod]
+        public void TestJWT2()
+        {
+            string token = "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6InFEc3NoM2FTV0cyT05YTTdLMzFWV0VVRW5BNCJ9.eyJpc3MiOiJodHRwczovL2F1dGgudGVzbGEuY29tL29hdXRoMi92My9udHMiLCJhenAiOiI5MWQ0ZGEyYTM0NjgtNGI4MS1hZGJhLWQyYjI3MWJlZGZhMiIsInN1YiI6IjQ0ZjBjYTA5LTk0OGQtNDgxNy1hMWQ4LWMzNjM0YWY3MmNhYiIsImF1ZCI6WyJodHRwczovL2ZsZWV0LWFwaS5wcmQubmEudm4uY2xvdWQudGVzbGEuY29tIiwiaHR0cHM6Ly9mbGVldC1hcGkucHJkLmV1LnZuLmNsb3VkLnRlc2xhLmNvbSIsImh0dHBzOi8vYXV0aC50ZXNsYS5jb20vb2F1dGgyL3YzL3VzZXJpbmZvIl0sInNjcCI6WyJ1c2VyX2RhdGEiLCJ2ZWhpY2xlX2RldmljZV9kYXRhIiwidmVoaWNsZV9sb2NhdGlvbiIsInZlaGljbGVfY21kcyIsInZlaGljbGVfY2hhcmdpbmdfY21kcyIsIm9mZmxpbmVfYWNjZXNzIiwib3BlbmlkIl0sImFtciI6WyJwd2QiXSwiZXhwIjoxNzM4MDgxMzIzLCJpYXQiOjE3MzgwNTI1MjMsIm91X2NvZGUiOiJFVSIsImxvY2FsZSI6ImRlLURFIiwiYWNjb3VudF90eXBlIjoiYnVzaW5lc3MiLCJvcGVuX3NvdXJjZSI6bnVsbCwiYWNjb3VudF9pZCI6IjRmY2UzNzljLTJlNDUtNGNmNC05MGJjLTQ2YTMxOTE2ZGQxNCIsImF1dGhfdGltZSI6MTczODA1MjUyMywibm9uY2UiOm51bGx9.XXXXXXXXXX";
+            WebHelper.CheckJWT(token, out bool vehicle_location, out bool offline_access);
+            Assert.IsTrue(vehicle_location);
+            Assert.IsTrue(offline_access);
+        }
     }
 }
