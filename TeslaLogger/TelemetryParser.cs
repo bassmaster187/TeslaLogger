@@ -756,6 +756,7 @@ namespace TeslaLogger
                         if (double.TryParse(v1, NumberStyles.Any, CultureInfo.InvariantCulture, out double IdealBatteryRange))
                         {
                             lastIdealBatteryRange = Tools.MlToKm(IdealBatteryRange, 1);
+                            lastRatedRange = lastIdealBatteryRange;
                             car.CurrentJSON.current_ideal_battery_range_km = lastIdealBatteryRange;
                             car.CurrentJSON.current_battery_range_km = lastIdealBatteryRange;
                             changed = true;
