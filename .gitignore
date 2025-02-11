@@ -2,8 +2,8 @@
 # Diese .gitignore-Datei wurde von Microsoft(R) Visual Studio automatisch erstellt.
 ################################################################################
 
-*/bin/Debug
-*/bin/Release
+*/bin/Debug/*
+*/bin/Release/*
 *obj/
 /.vs
 /TeslaLogger/obj/Release
@@ -97,15 +97,9 @@ TeslaLogger/copyto.net8docker.cmd
 /TeslaLogger/data
 TeslaLogger/bin/encryption.txt
 /TeslaLogger/bin/tesla_invoices
-cmd_updated.txt
-TeslaLogger/bin/Debug/net8.0/LogfileNET8.dll
-TeslaLogger/bin/Debug/net8.0/LogfileNET8.pdb
-TeslaLogger/bin/Debug/net8.0/OSMMapGeneratorNET8.dll
-TeslaLogger/bin/Debug/net8.0/OSMMapGeneratorNET8.pdb
-TeslaLogger/bin/Debug/net8.0/SRTMNET8.dll
-TeslaLogger/bin/Debug/net8.0/SRTMNET8.pdb
-TeslaLogger/bin/Debug/net8.0/TeslaLoggerNET8.deps.json
-TeslaLogger/bin/Debug/net8.0/TeslaLoggerNET8.dll
-TeslaLogger/bin/Debug/net8.0/TeslaLoggerNET8.pdb
-TeslaLogger/bin/Debug/net8.0/BouncyCastle.Cryptography.dll
-TeslaLogger/bin/Debug/net8.0/M2Mqtt.Net.dll
+
+!/TeslaLogger/bin/Debug/net8.0
+/TeslaLogger/bin/Debug/net8.0/cmd_updated.txt
+/TeslaLogger/bin/Debug/net8.0/geofence-private.csv
+/TeslaLogger/bin/Debug/net8.0/VERSION
+/TeslaLogger/bin/Debug/net8.0/weather.ini
