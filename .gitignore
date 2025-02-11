@@ -103,3 +103,11 @@ TeslaLogger/bin/encryption.txt
 /TeslaLogger/bin/Debug/net8.0/geofence-private.csv
 /TeslaLogger/bin/Debug/net8.0/VERSION
 /TeslaLogger/bin/Debug/net8.0/weather.ini
+/TeslaLogger/bin/Debug/net8.0/MAP-Data
+/TeslaLogger/bin/Debug/net8.0/maps
+TeslaLogger/bin/Debug/net8.0/encryption.txt
+/TeslaLogger/bin/Debug/net8.0/SRTM-Data
+TeslaLogger/bin/Debug/net8.0/settings.json
+TeslaLogger/bin/Debug/net8.0/TeslaLogger.deps.json
+TeslaLogger/bin/Debug/net8.0/TeslaLogger.dll.config
+cmd_updated.txt
