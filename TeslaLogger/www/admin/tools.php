@@ -11,12 +11,25 @@ function isDocker()
     return file_exists($dockerfile);
 }
 
+function isDockerNET8()
+{
+    $dockerfile = "/var/tmp/dockernet8";
+    return file_exists($dockerfile);
+}
+
 function GetFileFromTeslaloggerAndWriteToTMP($filename)
 {
     $url = GetTeslaloggerURL("getfile/$filename");
     $contenturl = @file_get_contents($url);
     if ($contenturl)
         file_put_contents("/tmp/$filename", $contenturl);
+}
+
+function GetFromTeslalogger($path)
+{
+    $url = GetTeslaloggerURL($path);
+    $contenturl = @file_get_contents($url);
+    return $contenturl;
 }
 
 function GetTeslaloggerHTTPPort()

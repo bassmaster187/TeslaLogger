@@ -88,7 +88,7 @@ function ShowInfo()
 		$("#PositiveButton").click(function(){window.location.href='https://github.com/bassmaster187/TeslaLogger/blob/master/docker_setup.md#docker-update--upgrade';});
 		$("#NegativeButton").hide();
 	<?php
-	} else if (isDocker() && !DatasourceUpdated())
+	} else if (isDocker() && !isDockerNET8() && !DatasourceUpdated())
 	{?>
 		$("#InfoText").html("<h1>Please update datasource.yaml file. Check: <a href='https://github.com/bassmaster187/TeslaLogger/blob/master/docker_setup.md#docker-update--upgrade'>LINK</a></h1>");
 		$(".HeaderT").show();
