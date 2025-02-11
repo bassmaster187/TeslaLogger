@@ -51,6 +51,10 @@
     <Reference Include="BouncyCastle.Crypto, Version=1.9.0.0, Culture=neutral, PublicKeyToken=0e99375e54769942, processorArchitecture=MSIL">
       <HintPath>..\packages\Portable.BouncyCastle.1.9.0\lib\net40\BouncyCastle.Crypto.dll</HintPath>
     </Reference>
+    <Reference Include="BouncyCastle.Cryptography, Version=2.0.0.0, Culture=neutral, PublicKeyToken=072edcf4a5328938">
+      <HintPath>..\packages/BouncyCastle.Cryptography.2.3.1/lib/net461/BouncyCastle.Cryptography.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="K4os.Hash.xxHash, Version=1.0.8.0, Culture=neutral, PublicKeyToken=32cd54395057cec3, processorArchitecture=MSIL">
       <HintPath>..\packages\K4os.Hash.xxHash.1.0.8\lib\net462\K4os.Hash.xxHash.dll</HintPath>
     </Reference>
@@ -106,9 +110,6 @@
     </Reference>
     <Reference Include="K4os.Compression.LZ4">
       <HintPath>..\packages\K4os.Compression.LZ4.1.3.6\lib\net462\K4os.Compression.LZ4.dll</HintPath>
-    </Reference>
-    <Reference Include="BouncyCastle.Cryptography">
-      <HintPath>..\packages\BouncyCastle.Cryptography.2.2.1\lib\net461\BouncyCastle.Cryptography.dll</HintPath>
     </Reference>
     <Reference Include="System.Configuration.ConfigurationManager">
       <HintPath>..\packages\System.Configuration.ConfigurationManager.8.0.0\lib\net462\System.Configuration.ConfigurationManager.dll</HintPath>
