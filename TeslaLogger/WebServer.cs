@@ -2335,6 +2335,7 @@ DROP TABLE chargingstate_bak";
             try
             {
                 string logfilePath = Path.Combine(FileManager.GetExecutingPath(), "nohup.out");
+                logfilePath = logfilePath.Replace("/Debug/net8.0", "");
 
                 if (Directory.Exists("zip"))
                     Directory.Delete("zip", true);
@@ -2348,6 +2349,8 @@ DROP TABLE chargingstate_bak";
                 ZipFile.CreateFromDirectory("zip", "logfile.zip");
 
                 WriteFile(response, "logfile.zip");
+
+                File.Delete("zip/logfile.txt");
             }
             catch (Exception ex)
             {
