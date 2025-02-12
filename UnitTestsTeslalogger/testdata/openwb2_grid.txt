@@ -1,0 +1,5 @@
+{
+  "status": "success",
+  "topic": "openWB/counter/7/get/imported",
+  "message": 123456789
+}

@@ -51,6 +51,30 @@ namespace UnitTestsTeslalogger
         }
 
         [TestMethod]
+        public void OpenWB2()
+        {
+            var v = new ElectricityMeterOpenWB2("", "");
+
+            v.mockup_version = System.IO.File.ReadAllText(@"..\..\testdata\openwb2_version.txt");
+            v.mockup_charge_state = System.IO.File.ReadAllText(@"..\..\testdata\openwb2_charge_state.txt");
+            v.mockup_charge_point = System.IO.File.ReadAllText(@"..\..\testdata\openwb2_cp.txt");
+            v.mockup_grid = System.IO.File.ReadAllText(@"..\..\testdata\openwb2_grid.txt");
+            v.mockup_hierarchy = System.IO.File.ReadAllText(@"..\..\testdata\openwb2_hierarchy.txt");
+
+            double? kwh = v.GetVehicleMeterReading_kWh();
+            var charging = v.IsCharging();
+            var utility_meter_kwh = v.GetUtilityMeterReading_kWh();
+            var version = v.GetVersion();
+            string ret = v.ToString();
+            Console.WriteLine(ret);
+            Assert.AreEqual(441759, kwh);
+            Assert.AreEqual(false, charging);
+            Assert.AreEqual(123456789, utility_meter_kwh);
+            Assert.AreEqual("2.1.7-Beta.2", version);
+        }
+
+
+        [TestMethod]
         public void GoEMeter()
         {
             string url = Settings.Default.ElectricityMeterGoEURL;
