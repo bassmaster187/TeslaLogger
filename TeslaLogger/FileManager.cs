@@ -20,8 +20,10 @@ namespace TeslaLogger
         TeslaLoggerExeConfigFilename,
         GeocodeCache,
         GeofenceRacingFilename,
-        TLRoot,
-        TLBackupDir
+        BackupDir,
+        ExceptionDir,
+        LogFile,
+        LogsDir
     }
 
     /// <summary>
@@ -41,20 +43,22 @@ namespace TeslaLogger
             }
             Filenames = new Dictionary<TLFilename, string>()
             {
-                { TLFilename.CarSettings,               "car_settings.xml"},
-                { TLFilename.TeslaTokenFilename,        "tesla_token.txt"},
-                { TLFilename.SettingsFilename,          "settings.json"},
-                { TLFilename.CurrentJsonFilename,       "current_json.txt"},
-                { TLFilename.WakeupFilename,            "wakeupteslalogger_ID.txt"},
-                { TLFilename.CmdGoSleepFilename,        "cmd_gosleep_ID.txt"},
-                { TLFilename.GeofenceFilename,          "geofence.csv"},
-                { TLFilename.GeofencePrivateFilename,   "geofence-private.csv"},
-                { TLFilename.GeofenceRacingFilename,    "geofence-racing.csv"},
-                { TLFilename.NewCredentialsFilename,    "new_credentials.json"},
-                { TLFilename.TeslaLoggerExeConfigFilename,"TeslaLogger.exe.config"},
-                { TLFilename.GeocodeCache,              "GeocodeCache.xml"},
-                { TLFilename.TLRoot, ""},               _Root},
-                {TLFilename.TLBackupDir,                _Root + "/backup"}
+                { TLFilename.CarSettings,                   _Root + "/car_settings.xml"},
+                { TLFilename.TeslaTokenFilename,            _Root + "/tesla_token.txt"},
+                { TLFilename.SettingsFilename,              _Root + "/settings.json"},
+                { TLFilename.CurrentJsonFilename,           _Root + "/current_json.txt"},
+                { TLFilename.WakeupFilename,                _Root + "/wakeupteslalogger_ID.txt"},
+                { TLFilename.CmdGoSleepFilename,            _Root + "/cmd_gosleep_ID.txt"},
+                { TLFilename.GeofenceFilename,              _Root + "/geofence.csv"},
+                { TLFilename.GeofencePrivateFilename,       _Root + "/geofence-private.csv"},
+                { TLFilename.GeofenceRacingFilename,        _Root + "/geofence-racing.csv"},
+                { TLFilename.NewCredentialsFilename,        _Root + "/new_credentials.json"},
+                { TLFilename.TeslaLoggerExeConfigFilename,  _Root + "/TeslaLogger.exe.config"},
+                { TLFilename.GeocodeCache,                  _Root + "/GeocodeCache.xml"},
+                { TLFilename.BackupDir,                     _Root + "/backup"},
+                { TLFilename.ExceptionDir,                  _Root + "/Exception"},
+                { TLFilename.Logfile,                       _Root + "/nohup.out"},
+                { TLFilename.LogsDir,                       _Root + "/logs"}
             };
         }
         internal static string GetFilePath(TLFilename filename)
