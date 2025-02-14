@@ -1555,11 +1555,11 @@ namespace TeslaLogger
                 if (new FileInfo(FileManager.GetFilePath(TLFilename.LogFile)).Length > 10000000)
                 {
                     // check or create logs dir
-                    if (!Directory.Exists(FileManager.GetFilePath(TLFilename.LogDir)))
+                    if (!Directory.Exists(FileManager.GetFilePath(TLFilename.LogsDir)))
                     {
-                        Directory.CreateDirectory(FileManager.GetFilePath(TLFilename.LogDir));
+                        Directory.CreateDirectory(FileManager.GetFilePath(TLFilename.LogsDir));
                     }
-                    var targetFile = Path.Combine(FileManager.GetFilePath(TLFilename.LogDir), $"nohup-{DateTime.UtcNow:yyyyMMddHHmmssfff}");
+                    var targetFile = Path.Combine(FileManager.GetFilePath(TLFilename.LogsDir), $"nohup-{DateTime.UtcNow:yyyyMMddHHmmssfff}");
                     // copy to logs dir with timestamp
                     ExecMono("/bin/cp", FileManager.GetFilePath(TLFilename.LogFile) + " " + targetFile);
                     // gzip copied file
@@ -1568,7 +1568,7 @@ namespace TeslaLogger
                     ExecMono("/bin/sh", $"-c '/bin/echo > {FileManager.GetFilePath(TLFilename.LogFile)}'");
                     // cleanup old logfile backups
                     // old means older than 90 days
-                    DirectoryInfo di = new DirectoryInfo(FileManager.GetFilePath(TLFilename.LogDir));
+                    DirectoryInfo di = new DirectoryInfo(FileManager.GetFilePath(TLFilename.LogsDir));
                     FileInfo[] files = di.GetFiles();
                     if (files.Length > 0)
                     {

@@ -147,7 +147,7 @@ namespace TeslaLogger
             
             if (fsw == null)
             {
-                fsw = new FileSystemWatcher(FileManager.GetExecutingPath(), "*.csv");
+                fsw = new FileSystemWatcher(FileManager.GetFilePath(TLFilename.TLRoot), "*.csv");
                 FSWCounter++;
                 if (FSWCounter > 1) 
                 {

@@ -439,7 +439,7 @@ namespace TeslaLogger
             Logfile.Log("SRTM Version: " + Assembly.GetAssembly(typeof(SRTM.SRTMData)).GetName().Version);
             try
             {
-                string versionpath = Path.Combine(FileManager.GetExecutingPath(), "VERSION");
+                string versionpath = Path.Combine(FileManager.GetFilePath(TLFilename.TLRoot), "VERSION");
                 File.WriteAllText(versionpath, Assembly.GetExecutingAssembly().GetName().Version.ToString());
             }
             catch (Exception)

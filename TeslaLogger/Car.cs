@@ -1780,7 +1780,7 @@ namespace TeslaLogger
         {
             try
             {
-                string filepath = Path.Combine(FileManager.GetExecutingPath(), "MISSINGKM");
+                string filepath = Path.Combine(FileManager.GetFilePath(TLFilename.TLRoot), "MISSINGKM");
                 File.AppendAllText(filepath, DateTime.Now.ToString(Tools.ciDeDE) + " : " + $"Missing: {missingOdometer}km!\r\n");
 
                 UpdateTeslalogger.Chmod(filepath, 666, false);

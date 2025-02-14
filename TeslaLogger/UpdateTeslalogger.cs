@@ -1598,7 +1598,7 @@ PRIMARY KEY(id)
             try
             {
                 // create empty weather.ini file
-                string filepath = Path.Combine(FileManager.GetExecutingPath(), "weather.ini");
+                string filepath = Path.Combine(FileManager.GetFilePath(TLFilename.TLRoot), "weather.ini");
                 if (!File.Exists(filepath))
                 {
                     File.WriteAllText(filepath, "city = \"Berlin, de\"\r\nappid = \"12345678901234567890123456789012\"");
@@ -1851,7 +1851,7 @@ PRIMARY KEY(id)
 
         private static string GetLanguageFilepath(string language)
         {
-            string filename = Path.Combine(FileManager.GetExecutingPath(), "language-" + language + ".txt");
+            string filename = Path.Combine(FileManager.GetFilePath(TLFilename.TLRoot), "language-" + language + ".txt");
             filename = filename.Replace("\\bin\\Debug", "\\bin");
             return filename;
         }

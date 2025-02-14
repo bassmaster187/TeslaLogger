@@ -487,7 +487,7 @@ namespace TeslaLogger
             }
 
             if (filename == "settings.json")
-                p = FileManager.GetFilePath(TLFilename.SettingsFilename);
+                p = FileManager.GetFilePath(TLFilename.SettingsFile);
 
             System.Diagnostics.Debug.WriteLine("Webserver writefile: " + p);
 
@@ -2247,18 +2247,20 @@ DROP TABLE chargingstate_bak";
         {
             try
             {
-                string logfilePath = Path.Combine(FileManager.GetExecutingPath(), "nohup.out");
+                string logfilePath = ;
 
-                if (Directory.Exists("zip"))
-                    Directory.Delete("zip", true);
+                if (Directory.Exists(Path.Combine(FileManager.GetFilePath(TLFilename.TLRoot), "zip"))){
+                    Directory.Delete(Path.Combine(FileManager.GetFilePath(TLFilename.TLRoot), "zip"), true);
+                }
 
-                Directory.CreateDirectory("zip");
-                File.Copy(logfilePath, "zip/logfile.txt");
+                Directory.CreateDirectory(Path.Combine(FileManager.GetFilePath(TLFilename.TLRoot), "zip"));
+                File.Copy(FileManager.GetFilePath(TLFilename.LogFile), Path.Combine(FileManager.GetFilePath(TLFilename.TLRoot), "zip/logfile.txt"));
 
-                if (File.Exists("logfile.zip"))
-                    File.Delete("logfile.zip");
+                if (File.Exists(Path.Combine(FileManager.GetFilePath(TLFilename.TLRoot), "logfilezip"))) {
+                    File.Delete(Path.Combine(FileManager.GetFilePath(TLFilename.TLRoot), "logfilezip"));
+                }
 
-                ZipFile.CreateFromDirectory("zip", "logfile.zip");
+                ZipFile.CreateFromDirectory(Path.Combine(FileManager.GetFilePath(TLFilename.TLRoot), "zip"), Path.Combine(FileManager.GetFilePath(TLFilename.TLRoot), "logfile.zip"));
 
                 WriteFile(response, "logfile.zip");
             }
