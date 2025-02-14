@@ -2007,7 +2007,7 @@ WHERE
                 if (!File.Exists(FileManager.GetFilePath(TLFilename.SettingsFile)))
                 {
                     Logfile.Log("settings file not found at " + FileManager.GetFilePath(TLFilename.SettingsFile));
-                    return FileManager.GetFilePath(TLFilename.SettingsFile);
+                    return Default;
                 }
                 json = File.ReadAllText(FileManager.GetFilePath(TLFilename.SettingsFile));
                 dynamic j = JsonConvert.DeserializeObject(json);
