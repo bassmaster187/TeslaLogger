@@ -1892,10 +1892,10 @@ WHERE
 
         internal static void LogDiskUsage()
         {
-            _ = ExecMono("/bin/df", "-k", true, true);
-            if (Directory.Exists(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "/backup"))
+            _ = ExecMono("/bin/df", "-k " + FileManager.TLRoot, true, true);
+            if (Directory.Exists(FileManager.TLBackupDir))
             {
-                _ = ExecMono("/usr/bin/du", "-sk " + Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "/backup", true, true);
+                _ = ExecMono("/usr/bin/du", "-sk " + FileManager.TLBackupDir, true, true);
             }
             if (Directory.Exists(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "/Exception"))
             {

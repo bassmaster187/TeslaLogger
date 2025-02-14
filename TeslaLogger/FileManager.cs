@@ -19,7 +19,9 @@ namespace TeslaLogger
         NewCredentialsFilename,
         TeslaLoggerExeConfigFilename,
         GeocodeCache,
-        GeofenceRacingFilename
+        GeofenceRacingFilename,
+        TLRoot,
+        TLBackupDir
     }
 
     /// <summary>
@@ -32,10 +34,12 @@ namespace TeslaLogger
     internal class FileManager
     {
         private static readonly Dictionary<TLFilename, string> Filenames;
-        private static string _ExecutingPath; // defaults to null
-#pragma warning disable CA1810 // Statische Felder für Referenztyp inline initialisieren
-        static FileManager() => Filenames = new Dictionary<TLFilename, string>()
-#pragma warning restore CA1810 // Statische Felder für Referenztyp inline initialisieren
+        private static string _Root = "/etc/teslalogger"; // defaults for RasPi
+        static FileManager() { 
+            if (Tools.IsDocker() || Tools.IsDockerNET8()) {
+                // TODO different root for docker env?
+            }
+            Filenames = new Dictionary<TLFilename, string>()
             {
                 { TLFilename.CarSettings,               "car_settings.xml"},
                 { TLFilename.TeslaTokenFilename,        "tesla_token.txt"},
@@ -48,9 +52,11 @@ namespace TeslaLogger
                 { TLFilename.GeofenceRacingFilename,    "geofence-racing.csv"},
                 { TLFilename.NewCredentialsFilename,    "new_credentials.json"},
                 { TLFilename.TeslaLoggerExeConfigFilename,"TeslaLogger.exe.config"},
-                { TLFilename.GeocodeCache,              "GeocodeCache.xml"}
+                { TLFilename.GeocodeCache,              "GeocodeCache.xml"},
+                { TLFilename.TLRoot, ""},               _Root},
+                {TLFilename.TLBackupDir,                _Root + "/backup"}
             };
-
+        }
         internal static string GetFilePath(TLFilename filename)
         {
             return Path.Combine(GetExecutingPath(), Filenames[filename]);
@@ -178,10 +184,9 @@ namespace TeslaLogger
         /// will write the file in / (root)
         /// </summary>
         /// <returns>the path where the application execute is located</returns>
-        public static string GetExecutingPath()
+        private static string GetExecutingPath()
         {
-            //System.IO.Directory.GetCurrentDirectory() is not returning the current path of the assembly
-            if (_ExecutingPath == null)
+            /* if (_Root == null)
             {
 
                 System.Reflection.Assembly executingAssembly = System.Reflection.Assembly.GetExecutingAssembly();
@@ -191,10 +196,10 @@ namespace TeslaLogger
                 executingPath = executingPath.Replace(executingAssembly.ManifestModule.Name, string.Empty);
                 executingPath = executingPath.Replace("UnitTestsTeslalogger", "TeslaLogger");
 
-                _ExecutingPath = executingPath;
-            }
+                _Root = executingPath;
+            } */
 
-            return _ExecutingPath;
+            return _Root;
         }
     }
 }
