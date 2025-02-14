@@ -1841,7 +1841,7 @@ WHERE
         {
             bool filesFoundForDeletion = false;
             int countDeletedFiles = 0;
-            if (Directory.Exists(TLFilename.ExceptionDir))
+            if (Directory.Exists(FileManager.GetFilePath(TLFilename.ExceptionDir)))
             {
                 foreach (string fs in Directory.EnumerateFiles(FileManager.GetFilePath(TLFilename.ExceptionDir)))
                 {
@@ -2007,7 +2007,7 @@ WHERE
                 if (!File.Exists(FileManager.GetFilePath(TLFilename.SettingsFile)))
                 {
                     Logfile.Log("settings file not found at " + FileManager.GetFilePath(TLFilename.SettingsFile));
-                    return TLFilename.SettingsFile;
+                    return FileManager.GetFilePath(TLFilename.SettingsFile);
                 }
                 json = File.ReadAllText(FileManager.GetFilePath(TLFilename.SettingsFile));
                 dynamic j = JsonConvert.DeserializeObject(json);
