@@ -613,12 +613,12 @@ namespace TeslaLogger
 
             try
             {
-                if (!File.Exists(TLFilename.SettingsFile))
+                if (!File.Exists(FileManager.GetFilePath(TLFilename.SettingsFile)))
                 {
                     return;
                 }
 
-                json = File.ReadAllText(TLFilename.SettingsFile);
+                json = File.ReadAllText(FileManager.GetFilePath(TLFilename.SettingsFile));
 
                 dynamic j = JsonConvert.DeserializeObject(json);
 
@@ -648,12 +648,12 @@ namespace TeslaLogger
             int httpport = 5000; // default
             try
             {
-                if (!File.Exists(TLFilename.SettingsFile))
+                if (!File.Exists(FileManager.GetFilePath(TLFilename.SettingsFile)))
                 {
-                    Logfile.Log("settings file not found at " + TLFilename.SettingsFile);
+                    Logfile.Log("settings file not found at " + FileManager.GetFilePath(TLFilename.SettingsFile));
                     return httpport;
                 }
-                string json = File.ReadAllText(TLFilename.SettingsFile);
+                string json = File.ReadAllText(FileManager.GetFilePath(TLFilename.SettingsFile));
                 dynamic j = JsonConvert.DeserializeObject(json);
                 if (IsPropertyExist(j, "HTTPPort"))
                 {
@@ -677,12 +677,12 @@ namespace TeslaLogger
         {
             try
             {
-                if (!File.Exists(TLFilename.SettingsFile))
+                if (!File.Exists(FileManager.GetFilePath(TLFilename.SettingsFile)))
                 {
-                    Logfile.Log("settings file not found at " + TLFilename.SettingsFile);
+                    Logfile.Log("settings file not found at " + FileManager.GetFilePath(TLFilename.SettingsFile));
                     return false;
                 }
-                string json = File.ReadAllText(TLFilename.SettingsFile);
+                string json = File.ReadAllText(FileManager.GetFilePath(TLFilename.SettingsFile));
                 dynamic j = JsonConvert.DeserializeObject(json);
                 if (IsPropertyExist(j, "CombineChargingStates"))
                 {
@@ -738,12 +738,12 @@ namespace TeslaLogger
                     return (bool)_StreamingPos;
                 }
 
-                if (!File.Exists(TLFilename.SettingsFile))
+                if (!File.Exists(FileManager.GetFilePath(TLFilename.SettingsFile)))
                 {
-                    Logfile.Log("settings file not found at " + TLFilename.SettingsFile);
+                    Logfile.Log("settings file not found at " + FileManager.GetFilePath(TLFilename.SettingsFile));
                     return false;
                 }
-                string json = File.ReadAllText(TLFilename.SettingsFile);
+                string json = File.ReadAllText(FileManager.GetFilePath(TLFilename.SettingsFile));
                 dynamic j = JsonConvert.DeserializeObject(json);
                 if (IsPropertyExist(j, "StreamingPos"))
                 {
@@ -782,13 +782,13 @@ namespace TeslaLogger
             string json = "";
             try
             {
-                if (!File.Exists(TLFilename.SettingsFile))
+                if (!File.Exists(FileManager.GetFilePath(TLFilename.SettingsFile)))
                 {
                     lastSleepingHourMinutsUpdated = DateTime.UtcNow;
                     return;
                 }
 
-                json = File.ReadAllText(TLFilename.SettingsFile);
+                json = File.ReadAllText(FileManager.GetFilePath(TLFilename.SettingsFile));
                 dynamic j = JsonConvert.DeserializeObject(json);
 
                 if (IsPropertyExist(j, "SleepTimeSpanEnable") && IsPropertyExist(j, "SleepTimeSpanStart"))
@@ -924,12 +924,12 @@ namespace TeslaLogger
                     return true;
                 }
 
-                if (!File.Exists(TLFilename.SettingsFile))
+                if (!File.Exists(FileManager.GetFilePath(TLFilename.SettingsFile)))
                 {
                     return false;
                 }
 
-                string json = File.ReadAllText(TLFilename.SettingsFile);
+                string json = File.ReadAllText(FileManager.GetFilePath(TLFilename.SettingsFile));
                 dynamic j = JsonConvert.DeserializeObject(json);
 
                 if (IsPropertyExist(j, "ScanMyTesla"))
@@ -950,12 +950,12 @@ namespace TeslaLogger
         {
             try
             {
-                if (!File.Exists(TLFilename.SettingsFile))
+                if (!File.Exists(FileManager.GetFilePath(TLFilename.SettingsFile)))
                 {
                     return UpdateType.all;
                 }
 
-                string json = File.ReadAllText(TLFilename.SettingsFile);
+                string json = File.ReadAllText(FileManager.GetFilePath(TLFilename.SettingsFile));
                 dynamic j = JsonConvert.DeserializeObject(json);
 
                 if (IsPropertyExist(j, "update"))
@@ -1010,13 +1010,13 @@ namespace TeslaLogger
 
             try
             {
-                if (!File.Exists(TLFilename.SettingsFile))
+                if (!File.Exists(FileManager.GetFilePath(TLFilename.SettingsFile)))
                 {
                     lastGrafanaSettings = DateTime.UtcNow;
                     return;
                 }
 
-                json = File.ReadAllText(TLFilename.SettingsFile);
+                json = File.ReadAllText(FileManager.GetFilePath(TLFilename.SettingsFile));
 
                 dynamic j = JsonConvert.DeserializeObject(json);
 
@@ -1257,7 +1257,7 @@ namespace TeslaLogger
                     return File.Exists("/tmp/sharedata.txt");
                 }
 
-                if (File.Exists(TLFilename.ShareDataFile))
+                if (File.Exists(FileManager.GetFilePath(TLFilename.ShareDataFile)))
                 {
                     return true;
                 }
@@ -1552,23 +1552,23 @@ namespace TeslaLogger
             try
             {
                 // check if nohup.out is bigger than 10MB
-                if (new FileInfo(TLFilename.LogFile).Length > 10000000)
+                if (new FileInfo(FileManager.GetFilePath(TLFilename.LogFile)).Length > 10000000)
                 {
                     // check or create logs dir
-                    if (!Directory.Exists(TLFilename.LogDir))
+                    if (!Directory.Exists(FileManager.GetFilePath(TLFilename.LogDir)))
                     {
-                        Directory.CreateDirectory(TLFilename.LogDir);
+                        Directory.CreateDirectory(FileManager.GetFilePath(TLFilename.LogDir));
                     }
-                    var targetFile = Path.Combine(TLFilename.LogDir, $"nohup-{DateTime.UtcNow:yyyyMMddHHmmssfff}");
+                    var targetFile = Path.Combine(FileManager.GetFilePath(TLFilename.LogDir), $"nohup-{DateTime.UtcNow:yyyyMMddHHmmssfff}");
                     // copy to logs dir with timestamp
-                    ExecMono("/bin/cp", TLFilename.LogFile + " " + targetFile);
+                    ExecMono("/bin/cp", FileManager.GetFilePath(TLFilename.LogFile) + " " + targetFile);
                     // gzip copied file
                     ExecMono("/bin/gzip", targetFile);
                     // empty nohup.out
-                    ExecMono("/bin/sh", $"-c '/bin/echo > {TLFilename.LogFile}'");
+                    ExecMono("/bin/sh", $"-c '/bin/echo > {FileManager.GetFilePath(TLFilename.LogFile)}'");
                     // cleanup old logfile backups
                     // old means older than 90 days
-                    DirectoryInfo di = new DirectoryInfo(TLFilename.LogDir);
+                    DirectoryInfo di = new DirectoryInfo(FileManager.GetFilePath(TLFilename.LogDir));
                     FileInfo[] files = di.GetFiles();
                     if (files.Length > 0)
                     {
@@ -1619,7 +1619,7 @@ namespace TeslaLogger
                 return;
             }
 
-            DirectoryInfo di = new DirectoryInfo(Path.GetDirectoryName(TLFilename.BackupDir));
+            DirectoryInfo di = new DirectoryInfo(Path.GetDirectoryName(FileManager.GetFilePath(TLFilename.BackupDir)));
 
             if (di.Exists)
             {
@@ -1688,7 +1688,7 @@ namespace TeslaLogger
 
         internal static long FreeDiskSpaceMB()
         {
-            DirectoryInfo di = new DirectoryInfo(Path.GetDirectoryName(TLFilename.TLRoot));
+            DirectoryInfo di = new DirectoryInfo(Path.GetDirectoryName(FileManager.GetFilePath(TLFilename.TLRoot)));
 
             DriveInfo driveinfo = new DriveInfo(di.Root.FullName);
             long freeMB = driveinfo.AvailableFreeSpace / 1024 / 1024;
@@ -1843,7 +1843,7 @@ WHERE
             int countDeletedFiles = 0;
             if (Directory.Exists(TLFilename.ExceptionDir))
             {
-                foreach (string fs in Directory.EnumerateFiles(TLFilename.ExceptionDir))
+                foreach (string fs in Directory.EnumerateFiles(FileManager.GetFilePath(TLFilename.ExceptionDir)))
                 {
                     if ((DateTime.Now - File.GetLastWriteTime(fs)).TotalDays > 30)
                     {
@@ -1864,27 +1864,27 @@ WHERE
             if (filesFoundForDeletion)
             {
                 Logfile.Log($"Housekeeping: {countDeletedFiles} file(s) deleted in Exception directory");
-                if (Directory.Exists(TLFilename.ExceptionDir))
+                if (Directory.Exists(FileManager.GetFilePath(TLFilename.ExceptionDir)))
                 {
-                    ExecMono("/usr/bin/du", "-sk " + TLFilename.ExceptionDir, true, true);
+                    ExecMono("/usr/bin/du", "-sk " + FileManager.GetFilePath(TLFilename.ExceptionDir), true, true);
                 }
             }
         }
 
         internal static void LogDiskUsage()
         {
-            _ = ExecMono("/bin/df", "-k " + TLFilename.TLRoot, true, true);
-            if (Directory.Exists(TLFilename.BackupDir))
+            _ = ExecMono("/bin/df", "-k " + FileManager.GetFilePath(TLFilename.TLRoot), true, true);
+            if (Directory.Exists(FileManager.GetFilePath(TLFilename.BackupDir)))
             {
                 _ = ExecMono("/usr/bin/du", "-sk " + TLFilename.BackupDir, true, true);
             }
-            if (Directory.Exists(TLFilename.ExceptionDir))
+            if (Directory.Exists(FileManager.GetFilePath(TLFilename.ExceptionDir)))
             {
                 _ = ExecMono("/usr/bin/du", "-sk " + TLFilename.ExceptionDir, true, true);
             }
-            if (File.Exists(TLFilename.LogFile))
+            if (File.Exists(FileManager.GetFilePath(TLFilename.LogFile)))
             {
-                _ = ExecMono("/usr/bin/du", "-sk " + TLFilename.LogFile, true, true);
+                _ = ExecMono("/usr/bin/du", "-sk " + FileManager.GetFilePath(TLFilename.LogFile), true, true);
             }
         }
 
@@ -1974,12 +1974,12 @@ WHERE
             int days = 14; // default
             try
             {
-                if (!File.Exists(TLFilename.SettingsFile))
+                if (!File.Exists(FileManager.GetFilePath(TLFilename.SettingsFile)))
                 {
-                    Logfile.Log("settings file not found at " + TLFilename.SettingsFile);
+                    Logfile.Log("settings file not found at " + FileManager.GetFilePath(TLFilename.SettingsFile));
                     return days;
                 }
-                string json = File.ReadAllText(TLFilename.SettingsFile);
+                string json = File.ReadAllText(FileManager.GetFilePath(TLFilename.SettingsFile));
                 dynamic j = JsonConvert.DeserializeObject(json);
                 if (IsPropertyExist(j, "MothershipKeepDays"))
                 {
@@ -2004,12 +2004,12 @@ WHERE
             string json = "";
             try
             {
-                if (!File.Exists(TLFilename.SettingsFile))
+                if (!File.Exists(FileManager.GetFilePath(TLFilename.SettingsFile)))
                 {
-                    Logfile.Log("settings file not found at " + TLFilename.SettingsFile);
+                    Logfile.Log("settings file not found at " + FileManager.GetFilePath(TLFilename.SettingsFile));
                     return TLFilename.SettingsFile;
                 }
-                json = File.ReadAllText(TLFilename.SettingsFile);
+                json = File.ReadAllText(FileManager.GetFilePath(TLFilename.SettingsFile));
                 dynamic j = JsonConvert.DeserializeObject(json);
                 if (IsPropertyExist(j, name))
                 {
@@ -2031,12 +2031,12 @@ WHERE
             string mapProvider = "OSMMapProvider"; // default
             try
             {
-                if (!File.Exists(TLFilename.SettingsFile))
+                if (!File.Exists(FileManager.GetFilePath(TLFilename.SettingsFile)))
                 {
                     return mapProvider;
                 }
 
-                string json = File.ReadAllText(TLFilename.SettingsFile);
+                string json = File.ReadAllText(FileManager.GetFilePath(TLFilename.SettingsFile));
                 dynamic j = JsonConvert.DeserializeObject(json);
 
                 if (IsPropertyExist(j, "MapProvider"))
