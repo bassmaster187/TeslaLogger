@@ -2247,8 +2247,6 @@ DROP TABLE chargingstate_bak";
         {
             try
             {
-                string logfilePath = ;
-
                 if (Directory.Exists(Path.Combine(FileManager.GetFilePath(TLFilename.TLRoot), "zip"))){
                     Directory.Delete(Path.Combine(FileManager.GetFilePath(TLFilename.TLRoot), "zip"), true);
                 }
