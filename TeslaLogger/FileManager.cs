@@ -46,24 +46,24 @@ namespace TeslaLogger
             }
             Filenames = new Dictionary<TLFilename, string>()
             {
-                { TLFilename.CarSettings,                   _Root + "/car_settings.xml"},
-                { TLFilename.TeslaTokenFilename,            _Root + "/tesla_token.txt"},
-                { TLFilename.SettingsFile,                  _Root + "/settings.json"},
-                { TLFilename.ShareDataFile,                 _Root + "/sharedata.txt"},
-                { TLFilename.CurrentJsonFilename,           _Root + "/current_json.txt"},
-                { TLFilename.WakeupFilename,                _Root + "/wakeupteslalogger_ID.txt"},
-                { TLFilename.CmdGoSleepFilename,            _Root + "/cmd_gosleep_ID.txt"},
-                { TLFilename.GeofenceFilename,              _Root + "/geofence.csv"},
-                { TLFilename.GeofencePrivateFilename,       _Root + "/geofence-private.csv"},
-                { TLFilename.GeofenceRacingFilename,        _Root + "/geofence-racing.csv"},
-                { TLFilename.NewCredentialsFilename,        _Root + "/new_credentials.json"},
-                { TLFilename.TeslaLoggerExeConfigFilename,  _Root + "/TeslaLogger.exe.config"},
-                { TLFilename.GeocodeCache,                  _Root + "/GeocodeCache.xml"},
-                { TLFilename.BackupDir,                     _Root + "/backup"},
-                { TLFilename.BackupSH,                      _Root + "/backup.sh"},
-                { TLFilename.ExceptionDir,                  _Root + "/Exception"},
-                { TLFilename.LogFile,                       _Root + "/nohup.out"},
-                { TLFilename.LogsDir,                       _Root + "/logs"},
+                { TLFilename.CarSettings,                   "/car_settings.xml"},
+                { TLFilename.TeslaTokenFilename,            "/tesla_token.txt"},
+                { TLFilename.SettingsFile,                  "/settings.json"},
+                { TLFilename.ShareDataFile,                 "/sharedata.txt"},
+                { TLFilename.CurrentJsonFilename,           "/current_json.txt"},
+                { TLFilename.WakeupFilename,                "/wakeupteslalogger_ID.txt"},
+                { TLFilename.CmdGoSleepFilename,            "/cmd_gosleep_ID.txt"},
+                { TLFilename.GeofenceFilename,              "/geofence.csv"},
+                { TLFilename.GeofencePrivateFilename,       "/geofence-private.csv"},
+                { TLFilename.GeofenceRacingFilename,        "/geofence-racing.csv"},
+                { TLFilename.NewCredentialsFilename,        "/new_credentials.json"},
+                { TLFilename.TeslaLoggerExeConfigFilename,  "/TeslaLogger.exe.config"},
+                { TLFilename.GeocodeCache,                  "/GeocodeCache.xml"},
+                { TLFilename.BackupDir,                     "/backup"},
+                { TLFilename.BackupSH,                      "/backup.sh"},
+                { TLFilename.ExceptionDir,                  "/Exception"},
+                { TLFilename.LogFile,                       "/nohup.out"},
+                { TLFilename.LogsDir,                       "/logs"},
                 { TLFilename.TLRoot,                        _Root}
             };
         }
@@ -196,7 +196,7 @@ namespace TeslaLogger
         /// <returns>the path where the application execute is located</returns>
         private static string GetExecutingPath()
         {
-            /* if (_Root == null)
+            if (System.Reflection.Assembly.GetExecutingAssembly().Location.Contains("UnitTestsTeslalogger"))
             {
 
                 System.Reflection.Assembly executingAssembly = System.Reflection.Assembly.GetExecutingAssembly();
@@ -207,7 +207,7 @@ namespace TeslaLogger
                 executingPath = executingPath.Replace("UnitTestsTeslalogger", "TeslaLogger");
 
                 _Root = executingPath;
-            } */
+            } 
 
             return _Root;
         }
