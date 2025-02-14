@@ -23,7 +23,8 @@ namespace TeslaLogger
         BackupDir,
         ExceptionDir,
         LogFile,
-        LogsDir
+        LogsDir,
+        TLRoot
     }
 
     /// <summary>
@@ -58,7 +59,8 @@ namespace TeslaLogger
                 { TLFilename.BackupDir,                     _Root + "/backup"},
                 { TLFilename.ExceptionDir,                  _Root + "/Exception"},
                 { TLFilename.Logfile,                       _Root + "/nohup.out"},
-                { TLFilename.LogsDir,                       _Root + "/logs"}
+                { TLFilename.LogsDir,                       _Root + "/logs"},
+                { TLFilename.TLRoot,                        _Root}
             };
         }
         internal static string GetFilePath(TLFilename filename)

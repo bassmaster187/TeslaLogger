@@ -1569,26 +1569,24 @@ namespace TeslaLogger
         {
             try
             {
-                var nohup = Path.Combine(Logfile.GetExecutingPath(), "nohup.out");
                 // check if nohup.out is bigger than 10MB
-                if (new FileInfo(nohup).Length > 10000000)
+                if (new FileInfo(FileManager.Logfile).Length > 10000000)
                 {
                     // check or create logs dir
-                    var LogDir = Path.Combine(Logfile.GetExecutingPath(), "logs");
-                    if (!Directory.Exists(LogDir))
+                    if (!Directory.Exists(FileManager.LogDir))
                     {
-                        Directory.CreateDirectory(Path.Combine(Logfile.GetExecutingPath(), "logs"));
+                        Directory.CreateDirectory(FileManager.LogDir);
                     }
-                    var targetFile = Path.Combine(Path.Combine(Logfile.GetExecutingPath(), "logs"), $"nohup-{DateTime.UtcNow:yyyyMMddHHmmssfff}");
+                    var targetFile = Path.Combine(FileManager.LogDir), $"nohup-{DateTime.UtcNow:yyyyMMddHHmmssfff}");
                     // copy to logs dir with timestamp
-                    ExecMono("/bin/cp", nohup + " " + targetFile);
+                    ExecMono("/bin/cp", FileManager.Logfile + " " + targetFile);
                     // gzip copied file
                     ExecMono("/bin/gzip", targetFile);
                     // empty nohup.out
-                    ExecMono("/bin/sh", $"-c '/bin/echo > {nohup}'");
+                    ExecMono("/bin/sh", $"-c '/bin/echo > {FileManager.Logfile}'");
                     // cleanup old logfile backups
                     // old means older than 90 days
-                    DirectoryInfo di = new DirectoryInfo(LogDir);
+                    DirectoryInfo di = new DirectoryInfo(FileManager.LogDir);
                     FileInfo[] files = di.GetFiles();
                     if (files.Length > 0)
                     {
@@ -1638,7 +1636,7 @@ namespace TeslaLogger
                 return;
             }
 
-            DirectoryInfo di = new DirectoryInfo(Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "backup"));
+            DirectoryInfo di = new DirectoryInfo(Path.Combine(Path.GetDirectoryName(FileManager.BackupDir));
 
             if (di.Exists)
             {
@@ -1707,7 +1705,7 @@ namespace TeslaLogger
 
         internal static long FreeDiskSpaceMB()
         {
-            DirectoryInfo di = new DirectoryInfo(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location));
+            DirectoryInfo di = new DirectoryInfo(Path.GetDirectoryName(FileManager.TLRoot));
 
             DriveInfo driveinfo = new DriveInfo(di.Root.FullName);
             long freeMB = driveinfo.AvailableFreeSpace / 1024 / 1024;
@@ -1860,9 +1858,9 @@ WHERE
         {
             bool filesFoundForDeletion = false;
             int countDeletedFiles = 0;
-            if (Directory.Exists(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "/Exception"))
+            if (Directory.Exists(FileManager.ExceptionDir))
             {
-                foreach (string fs in Directory.EnumerateFiles(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "/Exception"))
+                foreach (string fs in Directory.EnumerateFiles(FileManager.ExceptionDir))
                 {
                     if ((DateTime.Now - File.GetLastWriteTime(fs)).TotalDays > 30)
                     {
@@ -1883,9 +1881,9 @@ WHERE
             if (filesFoundForDeletion)
             {
                 Logfile.Log($"Housekeeping: {countDeletedFiles} file(s) deleted in Exception directory");
-                if (Directory.Exists(System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "/Exception"))
+                if (Directory.Exists(FileManager.ExceptionDir))
                 {
-                    ExecMono("/usr/bin/du", "-sk " + System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "/Exception", true, true);
+                    ExecMono("/usr/bin/du", "-sk " + FileManager.ExceptionDir, true, true);
                 }
             }
         }
@@ -1893,17 +1891,17 @@ WHERE
         internal static void LogDiskUsage()
         {
             _ = ExecMono("/bin/df", "-k " + FileManager.TLRoot, true, true);
-            if (Directory.Exists(FileManager.TLBackupDir))
+            if (Directory.Exists(FileManager.BackupDir))
             {
-                _ = ExecMono("/usr/bin/du", "-sk " + FileManager.TLBackupDir, true, true);
+                _ = ExecMono("/usr/bin/du", "-sk " + FileManager.BackupDir, true, true);
             }
-            if (Directory.Exists(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "/Exception"))
+            if (Directory.Exists(FileManager.ExceptionDir))
             {
-                _ = ExecMono("/usr/bin/du", "-sk " + Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "/Exception", true, true);
+                _ = ExecMono("/usr/bin/du", "-sk " + FileManager.ExceptionDir, true, true);
             }
-            if (File.Exists(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "/nohup.out"))
+            if (File.Exists(FileManager.Logfile))
             {
-                _ = ExecMono("/usr/bin/du", "-sk " + Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "/nohup.out", true, true);
+                _ = ExecMono("/usr/bin/du", "-sk " + FileManager.Logfile, true, true);
             }
         }
 
