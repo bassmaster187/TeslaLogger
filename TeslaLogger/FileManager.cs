@@ -10,7 +10,7 @@ namespace TeslaLogger
     {
         CarSettings,
         TeslaTokenFilename,
-        SettingsFilename,
+        SettingsFile,
         CurrentJsonFilename,
         WakeupFilename,
         CmdGoSleepFilename,
@@ -25,7 +25,8 @@ namespace TeslaLogger
         LogFile,
         LogsDir,
         TLRoot,
-        BackupSH
+        BackupSH,
+        ShareDataFile
     }
 
     /// <summary>
@@ -47,7 +48,8 @@ namespace TeslaLogger
             {
                 { TLFilename.CarSettings,                   _Root + "/car_settings.xml"},
                 { TLFilename.TeslaTokenFilename,            _Root + "/tesla_token.txt"},
-                { TLFilename.SettingsFilename,              _Root + "/settings.json"},
+                { TLFilename.SettingsFile,                  _Root + "/settings.json"},
+                { TLFilename.ShareDataFile,                 _Root + "/sharedata.txt"},
                 { TLFilename.CurrentJsonFilename,           _Root + "/current_json.txt"},
                 { TLFilename.WakeupFilename,                _Root + "/wakeupteslalogger_ID.txt"},
                 { TLFilename.CmdGoSleepFilename,            _Root + "/cmd_gosleep_ID.txt"},

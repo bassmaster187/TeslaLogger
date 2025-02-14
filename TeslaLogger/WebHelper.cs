@@ -5573,7 +5573,7 @@ DESC", con))
                     {
                         try
                         {
-                            string lasttaskerwakeupfilepaht = System.IO.Path.Combine(FileManager.GetExecutingPath(), "LASTTASKERWAKEUPFILE_" + car.CarInDB);
+                            string lasttaskerwakeupfilepaht = System.IO.Path.Combine(FileManager.TLRoot, "LASTTASKERWAKEUPFILE_" + car.CarInDB);
                             string ltwf = resultContent.Replace("wakeupfile", "").Trim();
                             System.IO.File.WriteAllText(lasttaskerwakeupfilepaht, ltwf);
                         }
