@@ -1570,7 +1570,7 @@ namespace TeslaLogger
             try
             {
                 // check if nohup.out is bigger than 10MB
-                if (new FileInfo(FileManager.Logfile).Length > 10000000)
+                if (new FileInfo(FileManager.LogFile).Length > 10000000)
                 {
                     // check or create logs dir
                     if (!Directory.Exists(FileManager.LogDir))
@@ -1579,11 +1579,11 @@ namespace TeslaLogger
                     }
                     var targetFile = Path.Combine(FileManager.LogDir, $"nohup-{DateTime.UtcNow:yyyyMMddHHmmssfff}");
                     // copy to logs dir with timestamp
-                    ExecMono("/bin/cp", FileManager.Logfile + " " + targetFile);
+                    ExecMono("/bin/cp", FileManager.LogFile + " " + targetFile);
                     // gzip copied file
                     ExecMono("/bin/gzip", targetFile);
                     // empty nohup.out
-                    ExecMono("/bin/sh", $"-c '/bin/echo > {FileManager.Logfile}'");
+                    ExecMono("/bin/sh", $"-c '/bin/echo > {FileManager.LogFile}'");
                     // cleanup old logfile backups
                     // old means older than 90 days
                     DirectoryInfo di = new DirectoryInfo(FileManager.LogDir);
@@ -1624,8 +1624,9 @@ namespace TeslaLogger
 
         public static void CleanupBackupFolder(long freeDiskSpaceNeededMB = 2048, int keepDays = 14)
         {
-            if (Tools.IsDocker())
+            if (Tools.IsDocker()) {
                 return;
+            }
 
             bool filesFoundForDeletion = false;
             int countDeletedFiles = 0;
@@ -1636,7 +1637,7 @@ namespace TeslaLogger
                 return;
             }
 
-            DirectoryInfo di = new DirectoryInfo(Path.Combine(Path.GetDirectoryName(FileManager.BackupDir));
+            DirectoryInfo di = new DirectoryInfo(Path.GetDirectoryName(FileManager.BackupDir));
 
             if (di.Exists)
             {
@@ -1899,9 +1900,9 @@ WHERE
             {
                 _ = ExecMono("/usr/bin/du", "-sk " + FileManager.ExceptionDir, true, true);
             }
-            if (File.Exists(FileManager.Logfile))
+            if (File.Exists(FileManager.LogFile))
             {
-                _ = ExecMono("/usr/bin/du", "-sk " + FileManager.Logfile, true, true);
+                _ = ExecMono("/usr/bin/du", "-sk " + FileManager.LogFile, true, true);
             }
         }
 

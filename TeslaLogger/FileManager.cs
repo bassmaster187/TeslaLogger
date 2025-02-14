@@ -24,7 +24,8 @@ namespace TeslaLogger
         ExceptionDir,
         LogFile,
         LogsDir,
-        TLRoot
+        TLRoot,
+        BackupSH
     }
 
     /// <summary>
@@ -57,8 +58,9 @@ namespace TeslaLogger
                 { TLFilename.TeslaLoggerExeConfigFilename,  _Root + "/TeslaLogger.exe.config"},
                 { TLFilename.GeocodeCache,                  _Root + "/GeocodeCache.xml"},
                 { TLFilename.BackupDir,                     _Root + "/backup"},
+                { TLFilename.BackupSH,                      _Root + "/backup.sh"},
                 { TLFilename.ExceptionDir,                  _Root + "/Exception"},
-                { TLFilename.Logfile,                       _Root + "/nohup.out"},
+                { TLFilename.LogFile,                       _Root + "/nohup.out"},
                 { TLFilename.LogsDir,                       _Root + "/logs"},
                 { TLFilename.TLRoot,                        _Root}
             };
