@@ -1577,7 +1577,7 @@ namespace TeslaLogger
                     {
                         Directory.CreateDirectory(FileManager.LogDir);
                     }
-                    var targetFile = Path.Combine(FileManager.LogDir), $"nohup-{DateTime.UtcNow:yyyyMMddHHmmssfff}");
+                    var targetFile = Path.Combine(FileManager.LogDir, $"nohup-{DateTime.UtcNow:yyyyMMddHHmmssfff}");
                     // copy to logs dir with timestamp
                     ExecMono("/bin/cp", FileManager.Logfile + " " + targetFile);
                     // gzip copied file
