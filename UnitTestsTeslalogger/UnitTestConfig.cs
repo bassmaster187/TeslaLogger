@@ -17,7 +17,7 @@ namespace UnitTestsTeslalogger
         {
             System.Diagnostics.Debug.WriteLine("ClassInit");
 
-            var filePath = FileManager.GetFilePath(TLFilename.SettingsFilename);
+            var filePath = FileManager.GetFilePath(TLFilename.SettingsFile);
             if (File.Exists(filePath))
             {
                 File.Copy(filePath, filePath + "-backup", true);
@@ -35,7 +35,7 @@ namespace UnitTestsTeslalogger
         [TestMethod]
         public void CheckDefaultConfig()
         {
-            var filePath = FileManager.GetFilePath(TLFilename.SettingsFilename);
+            var filePath = FileManager.GetFilePath(TLFilename.SettingsFile);
             File.WriteAllText(filePath, Program.GetDefaultConfigFileContent());
             CheckSettings(-1, -1, -1, -1, 5000, true, false, false, Tools.UpdateType.all, "hp", "celsius", "en", "", "IR", "http://raspberry:3000/", "", "");
         }
@@ -91,7 +91,7 @@ namespace UnitTestsTeslalogger
         [TestMethod]
         public void CheckConfig1()
         {
-            var filePath = FileManager.GetFilePath(TLFilename.SettingsFilename);
+            var filePath = FileManager.GetFilePath(TLFilename.SettingsFile);
             File.Copy("../../settings-test1.json", filePath , true);
 
             CheckSettings(2, 0, 0, 30, 5000, true, true, true, Tools.UpdateType.stable, "kw", "fahrenheit", "en", "http://chris8:8888/admin/", "RR", "http://chris8:3000/", "Two weeks", "1");
@@ -102,7 +102,7 @@ namespace UnitTestsTeslalogger
         {
             System.Diagnostics.Debug.WriteLine("ClassCleanup");
 
-            var filePath = FileManager.GetFilePath(TLFilename.SettingsFilename);
+            var filePath = FileManager.GetFilePath(TLFilename.SettingsFile);
             if (File.Exists(filePath + "-backup"))
             {
                 File.Copy(filePath + "-backup", filePath, true);
