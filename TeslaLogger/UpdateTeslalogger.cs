@@ -1265,7 +1265,7 @@ PRIMARY KEY(id)
             DownloadUpdateAndInstallStarted = true;
             CheckNET8Installed();
 
-            if (File.Exists("cmd_updated.txt"))
+            if (File.Exists("/etc/teslalogger/cmd_updated.txt"))
             {
                 Logfile.Log("Update skipped!");
                 try
@@ -1276,7 +1276,7 @@ PRIMARY KEY(id)
                 return;
             }
 
-            File.AppendAllText("cmd_updated.txt", DateTime.Now.ToLongTimeString());
+            File.AppendAllText("/etc/teslalogger/cmd_updated.txt", DateTime.Now.ToLongTimeString());
             Logfile.Log("Start update");
             ExceptionlessClient.Default.CreateLog("Install", "Start update from " + Assembly.GetExecutingAssembly().GetName().Version).Submit();
 
@@ -1288,11 +1288,11 @@ PRIMARY KEY(id)
                 client.GetAsync("http://watchtower:8080/v1/update").Wait();
                 return;
             }
-            else if (Tools.IsMono())
+            else if (Tools.IsMono() || Tools.IsDotnet8())
             {
                 Chmod("VERSION", 666);
                 Chmod("settings.json", 666);
-                Chmod("cmd_updated.txt", 666);
+                Chmod("/etc/teslalogger/cmd_updated.txt", 666);
                 Chmod("MQTTClient.exe.config", 666);
 
                 if (!File.Exists("NOBACKUPONUPDATE"))
@@ -1406,6 +1406,8 @@ PRIMARY KEY(id)
                             {
                                 Directory.Delete("/etc/teslalogger/git", true);
                             }
+                            Directory.CreateDirectory("/etc/teslalogger/git");
+
                             if (Directory.Exists("/etc/teslalogger/tmp/zip"))
                             {
                                 Directory.Delete("/etc/teslalogger/tmp/zip", true);
@@ -1417,6 +1419,7 @@ PRIMARY KEY(id)
                             {
                                 Logfile.Log($"move update files from /etc/teslalogger/tmp/zip/TeslaLogger-" + master + " to /etc/teslalogger/git");
                                 Tools.ExecMono("mv", "/etc/teslalogger/tmp/zip/TeslaLogger-" + master + " /etc/teslalogger/git");
+
                                 if (Directory.Exists("/etc/teslalogger/git/TeslaLogger/GrafanaPlugins"))
                                 {
                                     Logfile.Log("update package: download and unzip successful");
@@ -1478,11 +1481,12 @@ PRIMARY KEY(id)
                 }
 
                 // running in TeslaLogger.exe, prepare update in separate process
-                if (System.Diagnostics.Process.GetCurrentProcess().ProcessName.Equals("TeslaLogger"))
+                if (Process.GetCurrentProcess().ProcessName.Equals("TeslaLogger") || Process.GetCurrentProcess().ProcessName == "dotnet")
                 {
                     try
                     {
                         Tools.CopyFile("/etc/teslalogger/git/TeslaLogger/bin/TLUpdate.exe", "/etc/teslalogger/TLUpdate.exe");
+                        Chmod("/etc/teslalogger/TLUpdate.exe", 777); // Set executable permissions
                         foreach (Car car in Car.Allcars)
                         {
                             car.CurrentJSON.ToKVS();
@@ -1496,7 +1500,8 @@ PRIMARY KEY(id)
                                 FileName = "/etc/teslalogger/TLUpdate.exe",
                                 UseShellExecute = false,
                                 RedirectStandardOutput = true,
-                                CreateNoWindow = true
+                                CreateNoWindow = true,
+                                WorkingDirectory = "/etc/teslalogger"
                             }
                         })
                         {
@@ -1715,11 +1720,11 @@ PRIMARY KEY(id)
                     {
                         Logfile.Log("Update Request!");
 
-                        if (File.Exists("cmd_updated.txt"))
+                        if (File.Exists("/etc/teslalogger/cmd_updated.txt"))
                         {
                             Logfile.Log("delete cmd_updated.txt");
 
-                            File.Delete("cmd_updated.txt");
+                            File.Delete("/etc/teslalogger/cmd_updated.txt");
                         }
                     }
 
@@ -2694,7 +2699,7 @@ PRIMARY KEY(id)
         {
             try
             {
-                if (!Tools.IsMono())
+                if (!Tools.RunOnLinux())
                 {
                     return;
                 }

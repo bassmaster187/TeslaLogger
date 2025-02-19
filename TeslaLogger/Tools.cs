@@ -376,7 +376,7 @@ namespace TeslaLogger
             return GetMonoRuntimeVersion() != "NULL";
         }
 
-        public static void CopyFilesRecursively(DirectoryInfo source, DirectoryInfo target, string excludeFile = null)
+        public static void CopyFilesRecursively(DirectoryInfo source, DirectoryInfo target, string excludeFile = null, bool writeToLogfile = true)
         {
             if (source != null && target != null)
             {
@@ -396,7 +396,9 @@ namespace TeslaLogger
                         else
                         {
                             string p = Path.Combine(target.FullName, file.Name);
-                            Logfile.Log("Copy '" + file.FullName + "' to '" + p + "'");
+                            if (writeToLogfile)
+                                Logfile.Log("Copy '" + file.FullName + "' to '" + p + "'");
+
                             File.Copy(file.FullName, p, true);
                         }
                     }
@@ -837,7 +839,7 @@ namespace TeslaLogger
 
             try
             {
-                if (!Tools.IsMono() && !Tools.IsDocker())
+                if (!Tools.RunOnLinux())
                 {
                     return "";
                 }
@@ -1233,6 +1235,11 @@ namespace TeslaLogger
                 Logfile.ExceptionWriter(ex, "IsUnitTest");
             }
             return false;
+        }
+
+        public static bool RunOnLinux()
+        {
+            return Environment.OSVersion.Platform == PlatformID.Unix;
         }
 
         public static bool IsDotnet8()

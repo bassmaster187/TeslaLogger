@@ -50,6 +50,9 @@ namespace TeslaLogger
                     Logfile.Log(ex.ToString());
                 }
 
+                Logfile.Log("Processname: " + System.Diagnostics.Process.GetCurrentProcess().ProcessName);
+                Logfile.Log("Run on Linux: " + Tools.RunOnLinux());
+
                 InitCheckNet8();
 
                 InitDebugLogging();
@@ -445,6 +448,9 @@ namespace TeslaLogger
             try
             {
                 string versionpath = Path.Combine(FileManager.GetExecutingPath(), "VERSION");
+                if (Tools.RunOnLinux())
+                    versionpath = "/etc/teslalogger/VERSION";
+
                 File.WriteAllText(versionpath, Assembly.GetExecutingAssembly().GetName().Version.ToString());
             }
             catch (Exception)
