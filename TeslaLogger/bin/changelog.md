@@ -1,7 +1,9 @@
+# Version 1.62.15
+- Bugfixes
+
 # Version 1.62.14
 - New Wallboxes: SmartEVSE 3 and WARP
 - EVCC supports multiple loadpoints and cars now. You can find a loadpoint by car name (EVCC should be configured correctly)
-- Bugfixes
 
 # Version 1.62.13
 - Tesla has introduced more granular control over data access: [LINK](https://developer.tesla.com/docs/fleet-api/announcements#2024-11-26-introducing-a-new-oauth-scope-vehicle-location) 
