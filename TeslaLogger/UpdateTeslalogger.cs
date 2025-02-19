@@ -1418,7 +1418,9 @@ PRIMARY KEY(id)
                             if (Directory.Exists("/etc/teslalogger/tmp/zip/TeslaLogger-" + master))
                             {
                                 Logfile.Log($"move update files from /etc/teslalogger/tmp/zip/TeslaLogger-" + master + " to /etc/teslalogger/git");
-                                Tools.ExecMono("mv", "/etc/teslalogger/tmp/zip/TeslaLogger-" + master + " /etc/teslalogger/git");
+                                // Tools.ExecMono("mv", "/etc/teslalogger/tmp/zip/TeslaLogger-" + master + " /etc/teslalogger/git");
+                                Tools.CopyFilesRecursively(new DirectoryInfo("/etc/teslalogger/tmp/zip/TeslaLogger-" + master), new DirectoryInfo("/etc/teslalogger/git"), null, false);
+                                Directory.Delete("/etc/teslalogger/tmp/zip/TeslaLogger-" + master, true);
 
                                 if (Directory.Exists("/etc/teslalogger/git/TeslaLogger/GrafanaPlugins"))
                                 {
