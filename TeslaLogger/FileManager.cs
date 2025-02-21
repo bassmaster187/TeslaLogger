@@ -92,6 +92,7 @@ namespace TeslaLogger
 
         internal static string GetFilePath(TLFilename filename)
         {
+            Logfile.Log($"GetFilePath filename:{filename.ToString()} GetExecutingPath:{GetExecutingPath()} Filenames:{Filenames[filename]}");
             return Path.Combine(GetExecutingPath(), Filenames[filename]);
         }
 
