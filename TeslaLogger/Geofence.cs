@@ -163,9 +163,9 @@ namespace TeslaLogger
 
         internal void Init()
         {
-            if (File.Exists(FileManager.GetFilePath(TLFilename.GeofenceRacingFilename)) && _RacingMode)
+            if (File.Exists(FileManager.GetFilePath(TLFilename.GeofenceRacingFile)) && _RacingMode)
             {
-                ReadGeofenceFile(geofenceList, FileManager.GetFilePath(TLFilename.GeofenceRacingFilename));
+                ReadGeofenceFile(geofenceList, FileManager.GetFilePath(TLFilename.GeofenceRacingFile));
                 RacingMode = true;
 
                 Logfile.Log("*** RACING MODE ***");
@@ -173,16 +173,16 @@ namespace TeslaLogger
             else
             {
                 RacingMode = false;
-                ReadGeofenceFile(geofenceList, FileManager.GetFilePath(TLFilename.GeofenceFilename));
+                ReadGeofenceFile(geofenceList, FileManager.GetFilePath(TLFilename.GeofenceFile));
                 Logfile.Log("Geofence: addresses inserted from geofence.csv: " + geofenceList.Count);
-                if (!File.Exists(FileManager.GetFilePath(TLFilename.GeofencePrivateFilename)))
+                if (!File.Exists(FileManager.GetFilePath(TLFilename.GeofencePrivateFile)))
                 {
-                    Logfile.Log("Create: " + FileManager.GetFilePath(TLFilename.GeofencePrivateFilename));
-                    File.AppendAllText(FileManager.GetFilePath(TLFilename.GeofencePrivateFilename), "");
+                    Logfile.Log("Create: " + FileManager.GetFilePath(TLFilename.GeofencePrivateFile));
+                    File.AppendAllText(FileManager.GetFilePath(TLFilename.GeofencePrivateFile), "");
                 }
 
-                UpdateTeslalogger.Chmod(FileManager.GetFilePath(TLFilename.GeofencePrivateFilename), 666);
-                ReadGeofenceFile(geofencePrivateList, FileManager.GetFilePath(TLFilename.GeofencePrivateFilename));
+                UpdateTeslalogger.Chmod(FileManager.GetFilePath(TLFilename.GeofencePrivateFile), 666);
+                ReadGeofenceFile(geofencePrivateList, FileManager.GetFilePath(TLFilename.GeofencePrivateFile));
             }
 
             Logfile.Log("Geofence: addresses inserted from geofence-private.csv: " + geofencePrivateList.Count);
@@ -259,7 +259,7 @@ namespace TeslaLogger
                                 string flags = args[4];
                                 ParseSpecialFlags(addr, flags);
                             }
-                            if (filename == FileManager.GetFilePath(TLFilename.GeofencePrivateFilename))
+                            if (filename == FileManager.GetFilePath(TLFilename.GeofencePrivateFile))
                             {
                                 Logfile.Log("GeofencePrivate: Address inserted: " + args[0]);
                             }

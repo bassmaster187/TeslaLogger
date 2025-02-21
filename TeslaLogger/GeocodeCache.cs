@@ -51,10 +51,10 @@ CREATE TABLE geocodecache(
             dt.PrimaryKey = new DataColumn[] { dtlat, dtlng };
             try
             {
-                if (System.IO.File.Exists(FileManager.GetFilePath(TLFilename.GeocodeCache)))
+                if (System.IO.File.Exists(FileManager.GetFilePath(TLFilename.GeocodeCacheFile)))
                 {
 #pragma warning disable CA3075 // Unsichere DTD-Verarbeitung in XML
-                    _ = dt.ReadXml(FileManager.GetFilePath(TLFilename.GeocodeCache));
+                    _ = dt.ReadXml(FileManager.GetFilePath(TLFilename.GeocodeCacheFile));
 #pragma warning restore CA3075 // Unsichere DTD-Verarbeitung in XML
                     foreach (DataRow dr in dt.Rows)
                     {
@@ -65,7 +65,7 @@ CREATE TABLE geocodecache(
                             Insert(lat, lng, dr?["value"].ToString());
                         }
                     }
-                    System.IO.File.Delete(FileManager.GetFilePath(TLFilename.GeocodeCache));
+                    System.IO.File.Delete(FileManager.GetFilePath(TLFilename.GeocodeCacheFile));
                 }
             }
             catch (Exception ex)

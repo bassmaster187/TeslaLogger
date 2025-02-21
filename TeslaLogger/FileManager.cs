@@ -8,24 +8,24 @@ namespace TeslaLogger
 {
     internal enum TLFilename
     {
-        CarSettings,
-        TeslaTokenFilename,
+        CarSettingsFile,
+        TeslaTokenFile,
         SettingsFile,
-        CurrentJsonFilename,
-        WakeupFilename,
-        CmdGoSleepFilename,
-        GeofenceFilename,
-        GeofencePrivateFilename,
-        NewCredentialsFilename,
-        TeslaLoggerExeConfigFilename,
-        GeocodeCache,
-        GeofenceRacingFilename,
+        CurrentJsonFile,
+        WakeupFile,
+        CmdGoSleepFile,
+        GeofenceFile,
+        GeofencePrivateFile,
+        NewCredentialsFile,
+        TeslaLoggerExeConfigFile,
+        GeocodeCacheFile,
+        GeofenceRacingFile,
         BackupDir,
-        ExceptionDir,
+        ExceptionsDir,
         LogFile,
         LogsDir,
         TLRoot,
-        BackupSH,
+        BackupSHFile,
         ShareDataFile
     }
 
@@ -46,22 +46,22 @@ namespace TeslaLogger
             }
             Filenames = new Dictionary<TLFilename, string>()
             {
-                { TLFilename.CarSettings,                   "/car_settings.xml"},
-                { TLFilename.TeslaTokenFilename,            "/tesla_token.txt"},
+                { TLFilename.CarSettingsFile,               "/car_settings.xml"},
+                { TLFilename.TeslaTokenFile,                "/tesla_token.txt"},
                 { TLFilename.SettingsFile,                  "/settings.json"},
                 { TLFilename.ShareDataFile,                 "/sharedata.txt"},
-                { TLFilename.CurrentJsonFilename,           "/current_json.txt"},
-                { TLFilename.WakeupFilename,                "/wakeupteslalogger_ID.txt"},
-                { TLFilename.CmdGoSleepFilename,            "/cmd_gosleep_ID.txt"},
-                { TLFilename.GeofenceFilename,              "/geofence.csv"},
-                { TLFilename.GeofencePrivateFilename,       "/geofence-private.csv"},
-                { TLFilename.GeofenceRacingFilename,        "/geofence-racing.csv"},
-                { TLFilename.NewCredentialsFilename,        "/new_credentials.json"},
-                { TLFilename.TeslaLoggerExeConfigFilename,  "/TeslaLogger.exe.config"},
-                { TLFilename.GeocodeCache,                  "/GeocodeCache.xml"},
+                { TLFilename.CurrentJsonFile,               "/current_json.txt"},
+                { TLFilename.WakeupFile,                    "/wakeupteslalogger_ID.txt"},
+                { TLFilename.CmdGoSleepFile,                "/cmd_gosleep_ID.txt"},
+                { TLFilename.GeofenceFile,                  "/geofence.csv"},
+                { TLFilename.GeofencePrivateFile,           "/geofence-private.csv"},
+                { TLFilename.GeofenceRacingFile,            "/geofence-racing.csv"},
+                { TLFilename.NewCredentialsFile,            "/new_credentials.json"},
+                { TLFilename.TeslaLoggerExeConfigFile,      "/TeslaLogger.exe.config"},
+                { TLFilename.GeocodeCacheFile,              "/GeocodeCache.xml"},
                 { TLFilename.BackupDir,                     "/backup"},
-                { TLFilename.BackupSH,                      "/backup.sh"},
-                { TLFilename.ExceptionDir,                  "/Exception"},
+                { TLFilename.BackupSHFile,                  "/backup.sh"},
+                { TLFilename.ExceptionsDir,                 "/Exception"},
                 { TLFilename.LogFile,                       "/nohup.out"},
                 { TLFilename.LogsDir,                       "/logs"},
                 { TLFilename.TLRoot,                        _Root}
@@ -105,7 +105,7 @@ namespace TeslaLogger
 
         private static string GetGoSleepPath(int carid)
         {
-            String filename = Filenames[TLFilename.CmdGoSleepFilename];
+            String filename = Filenames[TLFilename.CmdGoSleepFile];
             filename = filename.Replace("ID", carid.ToString(Tools.ciDeDE));
 
             if (Tools.IsDocker())
@@ -120,7 +120,7 @@ namespace TeslaLogger
 
         internal static string GetWakeupTeslaloggerPath(int carid)
         {
-            string filename = Filenames[TLFilename.WakeupFilename];
+            string filename = Filenames[TLFilename.WakeupFile];
             filename = filename.Replace("ID", carid.ToString(Tools.ciDeDE));
 
             if (Tools.IsDocker())
@@ -135,7 +135,7 @@ namespace TeslaLogger
 
             try
             {
-                string path = GetFilePath(TLFilename.TeslaTokenFilename);
+                string path = GetFilePath(TLFilename.TeslaTokenFile);
                 if (!string.IsNullOrEmpty(path))
                 {
                     filecontent = File.ReadAllText(path);

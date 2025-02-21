@@ -1841,9 +1841,9 @@ WHERE
         {
             bool filesFoundForDeletion = false;
             int countDeletedFiles = 0;
-            if (Directory.Exists(FileManager.GetFilePath(TLFilename.ExceptionDir)))
+            if (Directory.Exists(FileManager.GetFilePath(TLFilename.ExceptionsDir)))
             {
-                foreach (string fs in Directory.EnumerateFiles(FileManager.GetFilePath(TLFilename.ExceptionDir)))
+                foreach (string fs in Directory.EnumerateFiles(FileManager.GetFilePath(TLFilename.ExceptionsDir)))
                 {
                     if ((DateTime.Now - File.GetLastWriteTime(fs)).TotalDays > 30)
                     {
@@ -1864,9 +1864,9 @@ WHERE
             if (filesFoundForDeletion)
             {
                 Logfile.Log($"Housekeeping: {countDeletedFiles} file(s) deleted in Exception directory");
-                if (Directory.Exists(FileManager.GetFilePath(TLFilename.ExceptionDir)))
+                if (Directory.Exists(FileManager.GetFilePath(TLFilename.ExceptionsDir)))
                 {
-                    ExecMono("/usr/bin/du", "-sk " + FileManager.GetFilePath(TLFilename.ExceptionDir), true, true);
+                    ExecMono("/usr/bin/du", "-sk " + FileManager.GetFilePath(TLFilename.ExceptionsDir), true, true);
                 }
             }
         }
@@ -1878,9 +1878,9 @@ WHERE
             {
                 _ = ExecMono("/usr/bin/du", "-sk " + TLFilename.BackupDir, true, true);
             }
-            if (Directory.Exists(FileManager.GetFilePath(TLFilename.ExceptionDir)))
+            if (Directory.Exists(FileManager.GetFilePath(TLFilename.ExceptionsDir)))
             {
-                _ = ExecMono("/usr/bin/du", "-sk " + TLFilename.ExceptionDir, true, true);
+                _ = ExecMono("/usr/bin/du", "-sk " + TLFilename.ExceptionsDir, true, true);
             }
             if (File.Exists(FileManager.GetFilePath(TLFilename.LogFile)))
             {
