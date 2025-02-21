@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Security.Policy;
 using System.Text;
 using Exceptionless;
 
@@ -66,7 +67,29 @@ namespace TeslaLogger
                 { TLFilename.LogsDir,                       "/logs"},
                 { TLFilename.TLRoot,                        _Root}
             };
+            CheckDirectories();
         }
+
+        private static void CheckDirectories()
+        {
+            foreach (string tlf in Enum.GetNames(typeof(TLFilename)))
+            {
+                if (tlf.EndsWith("Dir", StringComparison.Ordinal) && !Directory.Exists(tlf))
+                {
+                    try
+                    {
+                        Tools.DebugLog($"FileManager: creating missing directory {tlf}");
+                        Directory.CreateDirectory(tlf);
+                    }
+                    catch (Exception ex)
+                    {
+                        ex.ToExceptionless().FirstCarUserID().Submit();
+                        Logfile.Log(ex.ToString());
+                    }
+                }
+            }
+        }
+
         internal static string GetFilePath(TLFilename filename)
         {
             return Path.Combine(GetExecutingPath(), Filenames[filename]);
