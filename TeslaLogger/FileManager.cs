@@ -219,6 +219,7 @@ namespace TeslaLogger
         /// <returns>the path where the application execute is located</returns>
         private static string GetExecutingPath()
         {
+            Logfile.Log($"GetExecutingPath(): {System.Reflection.Assembly.GetExecutingAssembly().Location}");
             if (System.Reflection.Assembly.GetExecutingAssembly().Location.Contains("UnitTestsTeslalogger"))
             {
 
