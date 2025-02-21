@@ -40,31 +40,31 @@ namespace TeslaLogger
     internal class FileManager
     {
         private static readonly Dictionary<TLFilename, string> Filenames;
-        private static string _Root = "/etc/teslalogger"; // defaults for RasPi
+        private static string _Root; // defaults to empty string
         static FileManager() { 
             if (Tools.IsDocker() || Tools.IsDockerNET8()) {
                 // TODO different root for docker env?
             }
             Filenames = new Dictionary<TLFilename, string>()
             {
-                { TLFilename.CarSettingsFile,               "/car_settings.xml"},
-                { TLFilename.TeslaTokenFile,                "/tesla_token.txt"},
-                { TLFilename.SettingsFile,                  "/settings.json"},
-                { TLFilename.ShareDataFile,                 "/sharedata.txt"},
-                { TLFilename.CurrentJsonFile,               "/current_json.txt"},
-                { TLFilename.WakeupFile,                    "/wakeupteslalogger_ID.txt"},
-                { TLFilename.CmdGoSleepFile,                "/cmd_gosleep_ID.txt"},
-                { TLFilename.GeofenceFile,                  "/geofence.csv"},
-                { TLFilename.GeofencePrivateFile,           "/geofence-private.csv"},
-                { TLFilename.GeofenceRacingFile,            "/geofence-racing.csv"},
-                { TLFilename.NewCredentialsFile,            "/new_credentials.json"},
-                { TLFilename.TeslaLoggerExeConfigFile,      "/TeslaLogger.exe.config"},
-                { TLFilename.GeocodeCacheFile,              "/GeocodeCache.xml"},
-                { TLFilename.BackupDir,                     "/backup"},
-                { TLFilename.BackupSHFile,                  "/backup.sh"},
-                { TLFilename.ExceptionsDir,                 "/Exception"},
-                { TLFilename.LogFile,                       "/nohup.out"},
-                { TLFilename.LogsDir,                       "/logs"},
+                { TLFilename.CarSettingsFile,               "car_settings.xml"},
+                { TLFilename.TeslaTokenFile,                "tesla_token.txt"},
+                { TLFilename.SettingsFile,                  "settings.json"},
+                { TLFilename.ShareDataFile,                 "sharedata.txt"},
+                { TLFilename.CurrentJsonFile,               "current_json.txt"},
+                { TLFilename.WakeupFile,                    "wakeupteslalogger_ID.txt"},
+                { TLFilename.CmdGoSleepFile,                "cmd_gosleep_ID.txt"},
+                { TLFilename.GeofenceFile,                  "geofence.csv"},
+                { TLFilename.GeofencePrivateFile,           "geofence-private.csv"},
+                { TLFilename.GeofenceRacingFile,            "geofence-racing.csv"},
+                { TLFilename.NewCredentialsFile,            "new_credentials.json"},
+                { TLFilename.TeslaLoggerExeConfigFile,      "TeslaLogger.exe.config"},
+                { TLFilename.GeocodeCacheFile,              "GeocodeCache.xml"},
+                { TLFilename.BackupDir,                     "backup"},
+                { TLFilename.BackupSHFile,                  "backup.sh"},
+                { TLFilename.ExceptionsDir,                 "Exception"},
+                { TLFilename.LogFile,                       "nohup.out"},
+                { TLFilename.LogsDir,                       "logs"},
                 { TLFilename.TLRoot,                        _Root}
             };
             CheckDirectories();
@@ -72,14 +72,14 @@ namespace TeslaLogger
 
         private static void CheckDirectories()
         {
-            foreach (string tlf in Enum.GetNames(typeof(TLFilename)))
+            foreach (TLFilename tlf in Enum.GetValues(typeof(TLFilename)))
             {
-                if (tlf.EndsWith("Dir", StringComparison.Ordinal) && !Directory.Exists(tlf))
+                if (tlf.ToString().EndsWith("Dir", StringComparison.Ordinal) && !Directory.Exists(GetFilePath(tlf)))
                 {
                     try
                     {
-                        Tools.DebugLog($"FileManager: creating missing directory {tlf}");
-                        Directory.CreateDirectory(tlf);
+                        Tools.DebugLog($"FileManager: creating missing directory {GetFilePath(tlf)}");
+                        Directory.CreateDirectory(GetFilePath(tlf));
                     }
                     catch (Exception ex)
                     {
@@ -218,8 +218,8 @@ namespace TeslaLogger
         /// will write the file in / (root)
         /// </summary>
         /// <returns>the path where the application execute is located</returns>
-        private static string GetExecutingPath()
-        {
+        private static string GetExecutingPath() {
+            _Root = "/etc/teslalogger";
             if (System.Reflection.Assembly.GetExecutingAssembly().Location.Contains("UnitTestsTeslalogger"))
             {
 
@@ -231,6 +231,11 @@ namespace TeslaLogger
                 executingPath = executingPath.Replace("UnitTestsTeslalogger", "TeslaLogger");
 
                 _Root = executingPath;
+            }
+            if (_Root.Contains("Debug"))
+            {
+                _Root = _Root.Replace(@"Debug\", "");
+                _Root = _Root.Replace(@"Debug/", "");
             }
             Logfile.Log($"GetExecutingPath(): {System.Reflection.Assembly.GetExecutingAssembly().Location} -> {_Root}");
             return _Root;
