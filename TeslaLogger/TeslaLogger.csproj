@@ -198,6 +198,7 @@
     <Compile Include="Journeys.cs" />
     <Compile Include="KVS.cs" />
     <Compile Include="GetChargingHistoryV2Service.cs" />
+    <Compile Include="Komoot.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
