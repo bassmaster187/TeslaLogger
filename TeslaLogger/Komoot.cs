@@ -75,7 +75,152 @@ namespace TeslaLogger
 							{
 								string resultContent = result.Content.ReadAsStringAsync().Result;
 								Tools.DebugLog($"Komoot_{{carID}} GetTour({tourid}) result: {resultContent.Length}");
-								dynamic jsonResult = JsonConvert.DeserializeObject(resultContent);
+                                /* expected JSON
+{
+    "id": 987654321,
+    "type": "tour_recorded",
+    "name": "Tour",
+    "source": {
+        "api": "de.komoot.main-api/tour/recorded",
+        "type": "tour_recorded",
+        "id": 987654321
+    },
+    "status": "private",
+    "date": "2025-02-12T17:00:10.291Z",
+    "kcal_active": 0,
+    "kcal_resting": 0,
+    "start_point": {
+        "lat": 54.4484,
+        "lng": 33.340371,
+        "alt": 42.1
+    },
+    "distance": 2272.7719709160106,
+    "duration": 945,
+    "elevation_up": 8.89315328029921,
+    "elevation_down": 4.006897096236379,
+    "sport": "touringbicycle",
+    "time_in_motion": 441,
+    "changed_at": "2025-02-12T17:18:10.047Z",
+    "map_image": {
+        "src": "https://tourpic-vector.maps.komoot.net/r/big/gk__@wxcdPh@CB/?width={width}&height={height}&crop={crop}",
+        "templated": true,
+        "type": "image/*",
+        "attribution": "Map data © OpenStreetMap contributors"
+    },
+    "map_image_preview": {
+        "src": "https://tourpic-vector.maps.komoot.net/r/small/gk__@wxcf@iIJ%7B@Dfoo@CB/?width={width}&height={height}&crop={crop}",
+        "templated": true,
+        "type": "image/*",
+        "attribution": "Map data © OpenStreetMap contributors"
+    },
+    "vector_map_image": {
+        "src": "https://tourpic-vector.maps.komoot.net/r/big/gk__@wpcGxcfSVWPh@CB/",
+        "templated": false,
+        "type": "image/*",
+        "attribution": "Map data © OpenStreetMap contributors"
+    },
+    "vector_map_image_preview": {
+        "src": "https://tourpic-vector.maps.komoot.net/r/small/gk__@wpcGcfrPh@CB/",
+        "templated": false,
+        "type": "image/*",
+        "attribution": "Map data © OpenStreetMap contributors"
+    },
+    "potential_route_update": false,
+    "_embedded": {
+        "coordinates": {
+            "items": [
+                {
+                    "lat": 42.4484,
+                    "lng": 53.340371,
+                    "alt": 42.3,
+                    "t": 0
+                },
+                {
+                    "lat": 62.448262,
+                    "lng": 73.340385,
+                    "alt": 42.3,
+                    "t": 2000
+                },
+                {
+                    "lat": 82.448126,
+                    "lng": 33.340499,
+                    "alt": 42.3,
+                    "t": 4709
+                }
+            ],
+            "_links": {
+                "self": {
+                    "href": "https://api.komoot.de/v007/tours/987654321/coordinates"
+                }
+            }
+        },
+        "creator": {
+            "username": "1234567890",
+            "avatar": {
+                "src": "https://dfr.cloudfront.net/www/000/defaultuserimage-full/0?width={width}&height={height}&crop={crop}",
+                "templated": true,
+                "type": "image/*"
+            },
+            "status": "public",
+            "_links": {
+                "self": {
+                    "href": "https://api.komoot.de/v007/users/1234567890/profile_embedded"
+                },
+                "relation": {
+                    "href": "https://api.komoot.de/v007/users/{username}/relations/1234567890",
+                    "templated": true
+                }
+            },
+            "display_name": "DisplayNameCFGT",
+            "is_premium": false
+        },
+        "participants": [],
+        "timeline": {
+            "_links": {
+                "self": {
+                    "href": "https://api.komoot.de/v007/tours/987654321/timeline/"
+                }
+            },
+            "page": {
+                "size": 0,
+                "totalElements": 0,
+                "totalPages": 1,
+                "number": 0
+            }
+        }
+    },
+    "_links": {
+        "creator": {
+            "href": "https://api.komoot.de/v007/users/1234567890/profile_embedded"
+        },
+        "self": {
+            "href": "https://api.komoot.de/v007/tours/987654321?_embedded=way_types%252Cdirections%252Csurfaces%252Ccoordinates%252Ctimeline%252Cparticipants"
+        },
+        "coordinates": {
+            "href": "https://api.komoot.de/v007/tours/987654321/coordinates"
+        },
+        "tour_line": {
+            "href": "https://api.komoot.de/v007/tours/987654321/tour_line"
+        },
+        "participants": {
+            "href": "https://api.komoot.de/v007/tours/987654321/participants/"
+        },
+        "timeline": {
+            "href": "https://api.komoot.de/v007/tours/987654321/timeline/"
+        },
+        "translations": {
+            "href": "https://api.komoot.de/v007/tours/987654321/translations"
+        },
+        "cover_images": {
+            "href": "https://api.komoot.de/v007/tours/987654321/cover_images/"
+        },
+        "tour_rating": {
+            "href": "https://api.komoot.de/v007/tours/987654321/ratings/1234567890"
+        }
+    }
+}
+                                 */
+                                dynamic jsonResult = JsonConvert.DeserializeObject(resultContent);
 								if (jsonResult.ContainsKey("date") && jsonResult.ContainsKey("_embedded") && jsonResult["_embedded"].ContainsKey("coordinates") && jsonResult["_embedded"]["coordinates"].ContainsKey("items"))
 								{
 									DateTime start = DateTime.Parse(jsonResult["date"].ToString(), null, DateTimeStyles.AdjustToUniversal);
@@ -269,6 +414,126 @@ VALUES(
 						{
 							string resultContent = result.Content.ReadAsStringAsync().Result;
 							Tools.DebugLog($"Komoot_{{carID}} GetTours result: {resultContent.Length}");
+                            /* expected JSOn
+		{
+    "_embedded": {
+        "tours": [
+            {
+                "id": 987654321,
+                "type": "tour_recorded",
+                "name": "Tour",
+                "source": "{\"api\":\"de.komoot.main-api/tour/recorded\",\"type\":\"tour_recorded\",\"id\":2052310542}",
+                "status": "private",
+                "date": "2025-02-12T17:00:10.291Z",
+                "kcal_active": 0,
+                "kcal_resting": 0,
+                "start_point": {
+                    "lat": 53.4484,
+                    "lng": 23.340371,
+                    "alt": 42.1
+                },
+                "distance": 2272.7719709160106,
+                "duration": 945,
+                "elevation_up": 8.89315328029921,
+                "elevation_down": 4.006897096236379,
+                "sport": "touringbicycle",
+                "time_in_motion": 441,
+                "changed_at": "2025-02-12T17:18:10.047Z",
+                "map_image": {
+                    "src": "https://tourpic-vector.maps.komoot.net/r/big/gk__@wpcGxxxVWxxCB/?width={width}&height={height}&crop={crop}",
+                    "templated": true,
+                    "type": "image/*",
+                    "attribution": "Map data © OpenStreetMap contributors"
+                },
+                "map_image_preview": {
+                    "src": "https://tourpic-vector.maps.komoot.net/r/small/gk__@wpcGDAITxxx@iIJ%7xxxh@CB/?width={width}&height={height}&crop={crop}",
+                    "templated": true,
+                    "type": "image/*",
+                    "attribution": "Map data © OpenStreetMap contributors"
+                },
+                "vector_map_image": {
+                    "src": "https://tourpic-vector.maps.komoot.net/r/big/gk__@wpcGxxx@iIJ%7B@xxx@CB/",
+                    "templated": false,
+                    "type": "image/*",
+                    "attribution": "Map data © OpenStreetMap contributors"
+                },
+                "vector_map_image_preview": {
+                    "src": "https://tourpic-vector.maps.komoot.net/r/small/gk__@wpcGxxxVWPh@CB/",
+                    "templated": false,
+                    "type": "image/*",
+                    "attribution": "Map data © OpenStreetMap contributors"
+                },
+                "potential_route_update": false,
+                "_embedded": {
+                    "creator": {
+                        "username": "1234567890",
+                        "avatar": {
+                            "src": "https://xcd.cloudfront.net/www/000/defaultuserimage-full/0?width={width}&height={height}&crop={crop}",
+                            "templated": true,
+                            "type": "image/*"
+                        },
+                        "status": "public",
+                        "_links": {
+                            "self": {
+                                "href": "https://api.komoot.de/v007/users/1234567890/profile_embedded"
+                            },
+                            "relation": {
+                                "href": "https://api.komoot.de/v007/users/{username}/relations/1234567890",
+                                "templated": true
+                            }
+                        },
+                        "display_name": "DisplayNamexyz",
+                        "is_premium": false
+                    }
+                },
+                "_links": {
+                    "creator": {
+                        "href": "https://api.komoot.de/v007/users/1234567890/profile_embedded"
+                    },
+                    "self": {
+                        "href": "https://api.komoot.de/v007/tours/987654321"
+                    },
+                    "coordinates": {
+                        "href": "https://api.komoot.de/v007/tours/987654321/coordinates"
+                    },
+                    "tour_line": {
+                        "href": "https://api.komoot.de/v007/tours/987654321/tour_line"
+                    },
+                    "participants": {
+                        "href": "https://api.komoot.de/v007/tours/987654321/participants/"
+                    },
+                    "timeline": {
+                        "href": "https://api.komoot.de/v007/tours/987654321/timeline/"
+                    },
+                    "translations": {
+                        "href": "https://api.komoot.de/v007/tours/987654321/translations"
+                    },
+                    "cover_images": {
+                        "href": "https://api.komoot.de/v007/tours/987654321/cover_images/"
+                    },
+                    "tour_rating": {
+                        "href": "https://api.komoot.de/v007/tours/987654321/ratings/1234567890"
+                    }
+                }
+            }
+        ]
+    },
+    "_links": {
+        "self": {
+            "href": "https://api.komoot.de/v007/users/1234567890/tours/"
+        },
+        "next": {
+            "href": "https://api.komoot.de/v007/users/1234567890/tours/?page=1&limit=100"
+        }
+    },
+    "page": {
+        "size": 100,
+        "totalElements": 101,
+        "totalPages": 2,
+        "number": 0
+    }
+}
+							 */
                             dynamic jsonResult = JsonConvert.DeserializeObject(resultContent);
                             if (jsonResult.ContainsKey("_links") && jsonResult["_links"].ContainsKey("next") && jsonResult["_links"]["next"].ContainsKey("href"))
 							{
@@ -313,6 +578,30 @@ VALUES(
 					{
 						string resultContent = result.Content.ReadAsStringAsync().Result;
 						Tools.DebugLog($"Komoot_{{carID}} login result: {resultContent.Length}");
+                        /* expected JSON
+{
+    "email": "abc@xyz.net",
+    "username": "1234567890",
+    "user": {
+        "createdAt": "2018-07-12 16:16:53 +0000",
+        "username": "1234567890",
+        "displayname": "DisplayNameXY",
+        "content": {
+            "hasImage": true
+        },
+        "state": "1",
+        "newsletter": true,
+        "welcomeMails": false,
+        "metric": true,
+        "locale": "de_DE",
+        "imageUrl": "https://xxx.cloudfront.net/www/000/defaultuserimage-full/0",
+        "fitness": {
+            "personalised": false
+        }
+    },
+    "password": "asdfasdfasdf"
+}
+						 */
                         dynamic jsonResult = JsonConvert.DeserializeObject(resultContent);
 						if (jsonResult.ContainsKey("user"))
 						{
