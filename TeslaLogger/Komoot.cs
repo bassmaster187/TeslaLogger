@@ -53,7 +53,8 @@ namespace TeslaLogger
 			List<int> tours = GetTours();
 			tours.Sort();
 			ParseTours(tours);
-		}
+            Logfile.Log($"Komoot_{carID}: done");
+        }
 
 		private void ParseTours(List<int> tours)
 		{
@@ -546,7 +547,8 @@ VALUES(
 							if (jsonResult.ContainsKey("_embedded") && jsonResult["_embedded"].ContainsKey("tours"))
 							{
 								dynamic jtours = jsonResult["_embedded"]["tours"];
-								foreach (dynamic tour in jtours)
+                                Logfile.Log($"Komoot_{carID}: found {jsonResult["_embedded"]["tours"].Count} tours ...");
+                                foreach (dynamic tour in jtours)
 								{
 									if (tour.ContainsKey("id") && tour.ContainsKey("type") && tour["type"].ToString().Equals("tour_recorded"))
 									{
