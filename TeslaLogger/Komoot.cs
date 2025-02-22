@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Net.Http;
+using System.Runtime.ConstrainedExecution;
 using System.Text;
 using System.Threading;
 using Exceptionless;
@@ -85,15 +86,17 @@ namespace TeslaLogger
 									double prev_lat = double.NaN;
 									double prev_lng = double.NaN;
 									long firstPosID = 0;
-                                    long lastPosID = 0;
-                                    long t = 0;
-                                    long prev_t = 0;
+									long lastPosID = 0;
+									long t = 0;
+									long prev_t = 0;
+									double odo = GetMaxOdo(carID);
+                                    Logfile.Log($"Komoot_{carID}: inserting {jsonResult["_embedded"]["coordinates"]["items"].Count} positions ...");
 									foreach (dynamic pos in jsonResult["_embedded"]["coordinates"]["items"])
 									{
 										if (pos.ContainsKey("lat") && pos.ContainsKey("lng") && pos.ContainsKey("alt") && pos.ContainsKey("t"))
 										{
-											double alt = double.NaN;
-											double speed = 0;
+											double alt = 0.0;
+											double speed = 0.0;
 											if (!firstPos)
 											{
 												prev_lat = lat;
@@ -101,32 +104,35 @@ namespace TeslaLogger
 												prev_t = t;
 											}
 											if (Double.TryParse(pos["lat"].ToString(), out lat) && Double.TryParse(pos["lng"].ToString(), out lng) && Double.TryParse(pos["alt"].ToString(), out alt) && long.TryParse(pos["t"].ToString(), out t))
+											{
 												end = start.AddMilliseconds(t);
-											if (firstPos)
-											{
-												firstPos = false;
-												firstPosID = InsertPos(carID, lat, lng, start, speed, alt);
-											}
-											else
-											{
-												// calculate distance and speed with previous pos
-												// inspired by https://github.com/mapado/haversine/blob/main/haversine/haversine.py
-												double AVG_EARTH_RADIUS_KM = 6371.0088;
-												double lat1 = lat * Math.PI / 180;
-												double lng1 = lng * Math.PI / 180;
-												double lat2 = prev_lat * Math.PI / 180;
-												double lng2 = prev_lng * Math.PI / 180;
-												double d = Math.Pow(Math.Sin((lat2 - lat1) * 0.5), 2) + Math.Cos(lat1) * Math.Cos(lat2) * Math.Pow(Math.Sin((lng2 - lng1) * 0.5), 2);
-												double dist_km = AVG_EARTH_RADIUS_KM * 2 * Math.Asin(Math.Sqrt(d));
-												speed = dist_km / (t - prev_t) * 3600000; // km/ms -> km/h
-																						  //Tools.DebugLog($"<{tourid}> {lat} {lng} {alt} {start.AddMilliseconds(t)} dist:{dist_km} speed:{speed}");
-												lastPosID = InsertPos(carID, lat, lng, end, speed, alt);
+												if (firstPos)
+												{
+													firstPos = false;
+													firstPosID = InsertPos(carID, lat, lng, start, speed, alt, odo);
+												}
+												else
+												{
+													// calculate distance and speed with previous pos
+													// inspired by https://github.com/mapado/haversine/blob/main/haversine/haversine.py
+													double AVG_EARTH_RADIUS_KM = 6371.0088;
+													double lat1 = lat * Math.PI / 180;
+													double lng1 = lng * Math.PI / 180;
+													double lat2 = prev_lat * Math.PI / 180;
+													double lng2 = prev_lng * Math.PI / 180;
+													double d = Math.Pow(Math.Sin((lat2 - lat1) * 0.5), 2) + Math.Cos(lat1) * Math.Cos(lat2) * Math.Pow(Math.Sin((lng2 - lng1) * 0.5), 2);
+													double dist_km = AVG_EARTH_RADIUS_KM * 2 * Math.Asin(Math.Sqrt(d));
+													speed = dist_km / (t - prev_t) * 3600000; // km/ms -> km/h
+													odo = odo + dist_km;
+													//Tools.DebugLog($"<{tourid}> {lat} {lng} {alt} {start.AddMilliseconds(t)} dist:{dist_km} speed:{speed}");
+													lastPosID = InsertPos(carID, lat, lng, end, speed, alt, odo);
+												}
 											}
 										}
 									}
 									if (firstPosID > 0 && lastPosID > 0)
 									{
-                                        CreateDriveState(carID, start, firstPosID, end, lastPosID);
+										CreateDriveState(carID, start, firstPosID, end, lastPosID);
 									}
 								}
 							}
@@ -137,7 +143,33 @@ namespace TeslaLogger
 			}
 		}
 
-		private static void CreateDriveState(int carID, DateTime start, long firstPosID, DateTime end, long lastPosID)
+        private static double GetMaxOdo(int carid)
+        {
+            using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+            {
+                con.Open();
+                using (MySqlCommand cmd = new MySqlCommand(@"
+SELECT
+    MAX(odometer)
+FROM
+    pos
+WHERE
+    CarID = @CarID", con))
+                {
+                    cmd.Parameters.AddWithValue("@CarID", carid);
+                    MySqlDataReader dr = SQLTracer.TraceDR(cmd);
+                    if (dr.Read() && dr[0] != DBNull.Value)
+                    {
+						if (double.TryParse(dr[0].ToString(), out double pos)) {
+							return pos;
+						}
+                    }
+                }
+            }
+            return 0.0;
+        }
+
+        private static void CreateDriveState(int carID, DateTime start, long firstPosID, DateTime end, long lastPosID)
 		{
             Logfile.Log($"Komoot_{carID}: CreateDriveState {firstPosID}->{lastPosID} {start} {end} ...");
             using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
@@ -171,7 +203,7 @@ VALUES(
 			}
 		} 
 
-        private static long InsertPos(int carID, double lat, double lng, DateTime timestamp, double speed, double alt)
+        private static long InsertPos(int carID, double lat, double lng, DateTime timestamp, double speed, double alt, double odometer)
         {
 			int posid = 0;
 			using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
@@ -185,7 +217,8 @@ INSERT
         lat,
         lng,
         speed,
-		altitude
+		altitude,
+		odometer
 )
 VALUES(
     @CarID,
@@ -193,7 +226,8 @@ VALUES(
     @lat,
     @lng,
     @speed,
-    @altitude
+    @altitude,
+    @odometer
 )"
                 , con))
 				{
@@ -203,6 +237,7 @@ VALUES(
                     cmd.Parameters.AddWithValue("@lng", lng);
                     cmd.Parameters.AddWithValue("@speed", speed);
                     cmd.Parameters.AddWithValue("@altitude", alt);
+                    cmd.Parameters.AddWithValue("@odometer", odometer);
                     _ = SQLTracer.TraceNQ(cmd, out long _);
                     using (MySqlCommand cmdid = new MySqlCommand("SELECT LAST_INSERT_ID()", con))
                     {
