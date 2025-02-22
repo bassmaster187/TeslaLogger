@@ -201,7 +201,10 @@ VALUES(
 					_ = SQLTracer.TraceNQ(cmd, out long _);
 				}
 			}
-		} 
+			// update start address and end address
+			_ = WebHelper.UpdateAllPOIAddresses(0, $"{firstPosID};{lastPosID}");
+
+        } 
 
         private static long InsertPos(int carID, double lat, double lng, DateTime timestamp, double speed, double alt, double odometer)
         {
