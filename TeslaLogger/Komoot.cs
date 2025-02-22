@@ -5,6 +5,7 @@ using System.Net.Http;
 using System.Runtime.ConstrainedExecution;
 using System.Text;
 using System.Threading;
+using System.Threading.Tasks;
 using Exceptionless;
 using MySql.Data.MySqlClient;
 using Newtonsoft.Json;
@@ -231,8 +232,8 @@ namespace TeslaLogger
 									double lng = double.NaN;
 									double prev_lat = double.NaN;
 									double prev_lng = double.NaN;
-									long firstPosID = 0;
-									long lastPosID = 0;
+									int firstPosID = 0;
+									int lastPosID = 0;
 									long t = 0;
 									long prev_t = 0;
 									double odo = GetMaxOdo(carID);
@@ -315,7 +316,7 @@ WHERE
             return 0.0;
         }
 
-        private static void CreateDriveState(int carID, DateTime start, long firstPosID, DateTime end, long lastPosID)
+        private static void CreateDriveState(int carID, DateTime start, int firstPosID, DateTime end, int lastPosID)
 		{
             Logfile.Log($"Komoot_{carID}: CreateDriveState {firstPosID}->{lastPosID} {start} {end} ...");
             using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
@@ -349,10 +350,17 @@ VALUES(
 			}
 			// update start address and end address
 			_ = WebHelper.UpdateAllPOIAddresses(0, $"{firstPosID},{lastPosID}");
+            // create timeline maps
+            _ = Task.Factory.StartNew(() =>
+            {
+                    StaticMapService.GetSingleton().Enqueue(carID, firstPosID, lastPosID, 0, 0, StaticMapProvider.MapMode.Dark, StaticMapProvider.MapSpecial.None);
+                    StaticMapService.CreateParkingMapFromPosid(firstPosID);
+                    StaticMapService.CreateParkingMapFromPosid(lastPosID);
+            }, CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
 
         } 
 
-        private static long InsertPos(int carID, double lat, double lng, DateTime timestamp, double speed, double alt, double odometer)
+        private static int InsertPos(int carID, double lat, double lng, DateTime timestamp, double speed, double alt, double odometer)
         {
 			int posid = 0;
 			using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
