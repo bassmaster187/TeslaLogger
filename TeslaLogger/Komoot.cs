@@ -202,7 +202,7 @@ VALUES(
 				}
 			}
 			// update start address and end address
-			_ = WebHelper.UpdateAllPOIAddresses(0, $"{firstPosID};{lastPosID}");
+			_ = WebHelper.UpdateAllPOIAddresses(0, $"{firstPosID},{lastPosID}");
 
         } 
 
