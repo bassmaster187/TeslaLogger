@@ -1,5 +1,5 @@
-# Version 1.62.15
-- Bugfixes
+# Version 1.63.0
+- Stable Version
 
 # Version 1.62.14
 - New Wallboxes: SmartEVSE 3 and WARP
