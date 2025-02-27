@@ -37,7 +37,7 @@ function ShowInfo()
 
         <?php
     }
-	else if ($vehicle_location !== true && !file_exists($filevehicle_location))
+	else if ($vehicle_location != null && $vehicle_location != "True"  && !file_exists($filevehicle_location))
 	{
 		file_put_contents($filevehicle_location, ''); 
 		$passwordlink = "password_fleet.php?id=$carid&vin=$carVIN";
