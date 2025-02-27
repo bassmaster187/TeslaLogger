@@ -37,7 +37,7 @@ function ShowInfo()
 
         <?php
     }
-	else if ($vehicle_location !== true && !file_exists($filevehicle_location))
+	else if ($vehicle_location != null && $vehicle_location != "True"  && !file_exists($filevehicle_location))
 	{
 		file_put_contents($filevehicle_location, ''); 
 		$passwordlink = "password_fleet.php?id=$carid&vin=$carVIN";
@@ -88,7 +88,7 @@ function ShowInfo()
 		$("#PositiveButton").click(function(){window.location.href='https://github.com/bassmaster187/TeslaLogger/blob/master/docker_setup.md#docker-update--upgrade';});
 		$("#NegativeButton").hide();
 	<?php
-	} else if (isDocker() && !DatasourceUpdated())
+	} else if (isDocker() && !isDockerNET8() && !DatasourceUpdated())
 	{?>
 		$("#InfoText").html("<h1>Please update datasource.yaml file. Check: <a href='https://github.com/bassmaster187/TeslaLogger/blob/master/docker_setup.md#docker-update--upgrade'>LINK</a></h1>");
 		$(".HeaderT").show();

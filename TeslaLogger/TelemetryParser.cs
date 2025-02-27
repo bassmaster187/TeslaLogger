@@ -117,7 +117,7 @@ namespace TeslaLogger
                 if (driving)
                 {
                     var ts = DateTime.Now - lastDriving;
-                    if (ts.TotalMinutes > 30)
+                    if (ts.TotalMinutes > 60)
                     {
                         Log("Stop Driving by timeout 30 minutes ***");
                         driving = false;
@@ -756,6 +756,7 @@ namespace TeslaLogger
                         if (double.TryParse(v1, NumberStyles.Any, CultureInfo.InvariantCulture, out double IdealBatteryRange))
                         {
                             lastIdealBatteryRange = Tools.MlToKm(IdealBatteryRange, 1);
+                            lastRatedRange = lastIdealBatteryRange;
                             car.CurrentJSON.current_ideal_battery_range_km = lastIdealBatteryRange;
                             car.CurrentJSON.current_battery_range_km = lastIdealBatteryRange;
                             changed = true;
@@ -1636,7 +1637,7 @@ namespace TeslaLogger
             if (Driving)
             {
                 var ts = DateTime.Now - lastDriving;
-                if (ts.TotalMinutes > 15)
+                if (ts.TotalMinutes > 60)
                 {
                     Log("Driving stop by speed " + lastDriving.ToString());
                     Driving = false;

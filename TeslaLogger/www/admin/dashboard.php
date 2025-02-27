@@ -80,7 +80,7 @@ else
 			if (jsonData["charging"])
 			{
 				$('#car_statusLabel').text("<?php t("Charging"); ?>:");
-				$('#car_status').html(jsonData["charger_power"] + " kW / +" + jsonData["charge_energy_added"] + " kWh<br>" + jsonData["charger_voltage"]+"V / " + jsonData["charger_actual_current"]+"A / "+ jsonData["charger_phases"]+"P");
+				$('#car_status').html(jsonData["charger_power"] + " kW / +" + jsonData["charge_energy_added"] + " kWh");
 			}
 			else if (jsonData["driving"])
 			{
