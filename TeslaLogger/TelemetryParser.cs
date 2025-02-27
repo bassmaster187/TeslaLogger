@@ -117,7 +117,7 @@ namespace TeslaLogger
                 if (driving)
                 {
                     var ts = DateTime.Now - lastDriving;
-                    if (ts.TotalMinutes > 30)
+                    if (ts.TotalMinutes > 60)
                     {
                         Log("Stop Driving by timeout 30 minutes ***");
                         driving = false;
@@ -1940,7 +1940,7 @@ namespace TeslaLogger
             if (Driving)
             {
                 var ts = DateTime.Now - lastDriving;
-                if (ts.TotalMinutes > 15)
+                if (ts.TotalMinutes > 60)
                 {
                     Log("Driving stop by speed " + lastDriving.ToString());
                     Driving = false;
