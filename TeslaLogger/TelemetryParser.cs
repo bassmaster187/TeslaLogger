@@ -468,6 +468,25 @@ namespace TeslaLogger
                         }
                         */
                     }
+                    else if (key == "DefrostForPreconditioning")
+                    {
+                        string v = value["stringValue"];
+                        if (v == null)
+                        {
+                            v = value["booleanValue"];
+                            if (v == null)
+                            {
+                                continue;
+                            }
+                        }
+                        v = v.ToLower(CultureInfo.InvariantCulture);
+                        if (bool.TryParse(v, out bool preconditioning))
+                        {
+                            car.CurrentJSON.current_is_preconditioning = preconditioning;
+                            Log("Preconditioning: " + preconditioning);
+                            car.CurrentJSON.CreateCurrentJSON();
+                        }
+                    }
                     else if (key.StartsWith("TpmsPressure"))
                     {
                         string suffix = key.Substring(key.Length - 2);
@@ -544,6 +563,7 @@ namespace TeslaLogger
                                 continue;
                             }
                         }
+                        v = v.ToLower(CultureInfo.InvariantCulture);
                         if (bool.TryParse(v, out bool serviceMode))
                         {
                             //TODO : Implement ServiceMode
