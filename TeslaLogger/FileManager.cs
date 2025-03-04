@@ -210,5 +210,15 @@ namespace TeslaLogger
 
             return _ExecutingPath;
         }
+
+        public static string GetCmdUpdatedTxt()
+        {
+            if (Tools.RunOnLinux())
+            {
+                return "/etc/teslalogger/cmd_updated.txt";
+            }
+
+            return "cmd_updated.txt";
+        }
     }
 }

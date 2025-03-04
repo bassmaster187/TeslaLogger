@@ -1265,7 +1265,7 @@ PRIMARY KEY(id)
             DownloadUpdateAndInstallStarted = true;
             CheckNET8Installed();
 
-            if (File.Exists("/etc/teslalogger/cmd_updated.txt"))
+            if (File.Exists(FileManager.GetCmdUpdatedTxt()))
             {
                 Logfile.Log("Update skipped!");
                 try
@@ -1276,7 +1276,7 @@ PRIMARY KEY(id)
                 return;
             }
 
-            File.AppendAllText("/etc/teslalogger/cmd_updated.txt", DateTime.Now.ToLongTimeString());
+            File.AppendAllText(FileManager.GetCmdUpdatedTxt(), DateTime.Now.ToLongTimeString());
             Logfile.Log("Start update");
             ExceptionlessClient.Default.CreateLog("Install", "Start update from " + Assembly.GetExecutingAssembly().GetName().Version).Submit();
 
