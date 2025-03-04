@@ -1,0 +1,5 @@
+{
+  "status": "success",
+  "topic": "openWB/system/version",
+  "message": "2.1.7-Beta.2"
+}

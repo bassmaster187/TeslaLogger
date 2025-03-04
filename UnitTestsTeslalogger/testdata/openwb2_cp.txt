@@ -1,0 +1,5 @@
+{
+  "status": "success",
+  "topic": "openWB/chargepoint/27/get/imported",
+  "message": 441759
+}
