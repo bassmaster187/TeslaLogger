@@ -2,8 +2,8 @@
 # Diese .gitignore-Datei wurde von Microsoft(R) Visual Studio automatisch erstellt.
 ################################################################################
 
-*/bin/Debug
-*/bin/Release
+*/bin/Debug/*
+*/bin/Release/*
 *obj/
 /.vs
 /TeslaLogger/obj/Release
@@ -93,3 +93,9 @@ TeslaLogger/bin/LASTTASKERWAKEUPFILE_*
 /TeslaLogger/bin/logs
 TeslaLogger/bin/encryption.txt
 /TeslaLogger/bin/tesla_invoices
+
+!/TeslaLogger/bin/Debug/net8.0
+/TeslaLogger/bin/Debug/net8.0/cmd_updated.txt
+/TeslaLogger/bin/Debug/net8.0/geofence-private.csv
+/TeslaLogger/bin/Debug/net8.0/VERSION
+/TeslaLogger/bin/Debug/net8.0/weather.ini
