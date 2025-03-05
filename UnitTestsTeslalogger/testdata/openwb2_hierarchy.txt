@@ -1,0 +1,60 @@
+[
+	{
+		"id": 7,
+		"type": "counter",
+		"children": [
+			{
+				"id": 23,
+				"type": "inverter",
+				"children": []
+			},
+			{
+				"id": 22,
+				"type": "inverter",
+				"children": []
+			},
+			{
+				"id": 14,
+				"type": "counter",
+				"children": []
+			},
+			{
+				"id": 24,
+				"type": "inverter",
+				"children": [
+					{
+						"id": 25,
+						"type": "bat",
+						"children": []
+					}
+				]
+			},
+			{
+				"id": 28,
+				"type": "counter",
+				"children": [
+					{
+						"id": 26,
+						"type": "cp",
+						"children": []
+					},
+					{
+						"id": 27,
+						"type": "cp",
+						"children": []
+					}
+				]
+			},
+			{
+				"id": 34,
+				"type": "counter",
+				"children": []
+			},
+			{
+				"id": 35,
+				"type": "counter",
+				"children": []
+			}
+		]
+	}
+] 

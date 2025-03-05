@@ -324,8 +324,8 @@ namespace TeslaLogger
                             bool supportedByFleetTelemetry = SupportedByFleetTelemetry();
                             if (supportedByFleetTelemetry)
                             {
-                                telemetry = new TelemetryConnection(this);
-                                telemetryParser = telemetry.parser;
+                                telemetry = TelemetryConnection.Instance(this);
+                                telemetryParser = telemetry?.parser;
                                 /*
 
                                 string resultContent = "{\"data\":[{\"key\":\"VehicleSpeed\",\"value\":{\"stringValue\":\"25.476\"}},{\"key\":\"CruiseState\",\"value\":{\"stringValue\":\"Standby\"}},{\"key\":\"Location\",\"value\":{\"locationValue\":{\"latitude\":48.18759,\"longitude\":9.899887}}}],\"createdAt\":\"2024-06-20T22:00:30.129139612Z\",\"vin\":\"xxx\"}";
