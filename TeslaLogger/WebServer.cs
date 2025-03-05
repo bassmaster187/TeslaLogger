@@ -400,6 +400,9 @@ namespace TeslaLogger
                     case bool _ when Journeys.CanHandleRequest(request):
                         Journeys.HandleRequest(request, response);
                         break;
+                    case bool _ when Komoot.CanHandleRequest(request):
+                        Komoot.HandleRequest(request, response);
+                        break;
                     case bool _ when request.Url.LocalPath.Equals("/teslaauthurl", System.StringComparison.Ordinal):
                         TeslaAuthURL(response);
                         break;
