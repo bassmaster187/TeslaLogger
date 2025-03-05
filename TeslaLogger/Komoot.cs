@@ -422,7 +422,7 @@ VALUES(
 						if (result.IsSuccessStatusCode)
 						{
 							string resultContent = result.Content.ReadAsStringAsync().Result;
-							Tools.DebugLog($"Komoot_{{carID}} GetTours result: {resultContent.Length}");
+							Tools.DebugLog($"Komoot_{carID} GetTours result: {resultContent.Length}");
                             /* expected JSOn
 		{
     "_embedded": {
