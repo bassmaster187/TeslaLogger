@@ -241,7 +241,7 @@ namespace TeslaLogger
                     {
                         _komoot.Run();
                     });
-                    komootThread.Name = $"KomootThread_{carid}";
+                    komootThread.Name = $"KomootThread_{id}";
                     komootThread.Start();
                 }
                 String tesla_token = r["tesla_token"] as String ?? "";

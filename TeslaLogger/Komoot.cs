@@ -675,12 +675,46 @@ VALUES(
 
         private static void KomootSaveSettings(HttpListenerRequest request, HttpListenerResponse response)
         {
-            
+            using (StreamReader reader = new StreamReader(request.InputStream, Encoding.UTF8))
+            {
+                string data = reader.ReadToEnd();
+                Tools.DebugLog($"KomootSaveSettings request: {data}");
+            }
         }
 
         private static void KomootInfo(HttpListenerRequest request, HttpListenerResponse response)
         {
-            
+            List<object> komootConfigs = new List<object>();
+            using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+            {
+                con.Open();
+                using (MySqlCommand cmd = new MySqlCommand(@"
+SELECT
+    id,
+    tesla_name,
+    tesla_password
+FROM
+    cars
+WHERE
+    tesla_name LIKE 'KOMOOT:%'
+"
+                , con))
+                {
+                    MySqlDataReader dr = SQLTracer.TraceDR(cmd);
+                    while (dr.Read())
+                    {
+                        Dictionary<string, object> komootConfig = new Dictionary<string, object>
+                        {
+                            { "carid", dr["id"] },
+                            { "user", dr["tesla_name"] },
+                            { "passwd", dr["tesla_password"] }
+                        };
+                        komootConfigs.Add(komootConfig);
+                    }
+                }
+            }
+            string json = JsonConvert.SerializeObject(komootConfigs, Formatting.Indented);
+            Tools.DebugLog($"KomootInfo JSON: {json}");
         }
 
         private static void WriteString(HttpListenerResponse response, string responseString)
