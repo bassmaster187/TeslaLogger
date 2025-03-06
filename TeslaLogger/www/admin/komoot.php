@@ -25,20 +25,45 @@ global $display_name;
 	<?php 
     include "menu.php";
     echo(menu("Komoot"));
-
-    $komootinfo = file_get_contents(GetTeslaloggerURL("komoot/info"),0, stream_context_create(["http"=>["timeout"=>2]]));
-    $jkomoot = json_decode($komootinfo);
-    $komoot_carid = $jkomoot->{"komoot_carid"};
-    $komoot_user = $jkomoot->{"komoot_user"};
-    $komoot_passwd = $jkomoot->{"komoot_passwd"};
-    echo("<!-- Response of komoot/info:\n"); 
-    var_dump($komootinfo);
-    echo ("-->\n");
-?>
+    $komoot_carid = "";
+    $komoot_user = "Kommot_User";
+    $komoot_passwd = "secretPassword";
+    $komootinfo = file_get_contents(GetTeslaloggerURL("komoot/listSettings"),0, stream_context_create(["http"=>["timeout"=>2]]));
+    // echo("<!-- komootinfo:\n"); 
+    // var_dump($komootinfo);
+    // echo ("-->\n");
+    $jkomoot = json_decode($komootinfo); 
+    // echo("<!-- jkomoot:\n"); 
+    // var_dump($jkomoot);
+    // echo ("-->\n");
+    foreach($jkomoot as $item) { 
+        // echo("<!-- item:\n"); 
+        // var_dump($item);
+        // echo ("-->\n");
+        $komoot_carid = $item->carid;
+        // echo("<!-- komoot_carid:\n"); 
+        // var_dump($komoot_carid);
+        // echo ("-->\n");
+        $komoot_user = str_replace("KOMOOT:", "", $item->user);
+        // echo("<!-- komoot_user:\n"); 
+        // var_dump($komoot_user);
+        // echo ("-->\n");
+        $komoot_passwd = $item->passwd;
+        // echo("<!-- komoot_passwd:\n"); 
+        // var_dump($komoot_passwd);
+        // echo ("-->\n");
+        break;
+        // TODO enable for multiple accounts
+    }
+    // echo("<!-- Response of komoot/listSettings:\n"); 
+    // var_dump($komootinfo);
+    // echo ("-->\n");
+    ?>
 
 <script>
     function Save()
     {
+        // TODO enable for multiple accounts
         var j = {
             "komoot_carid" : $("#carid").val(),
             "mqtt_user" : $("#user").val(),
@@ -47,7 +72,7 @@ global $display_name;
 
         var jsonstring = JSON.stringify(j);
 
-        var url = "komoot/set";
+        var url = "komoot/saveSettings";
         console.log("url: " + url);
         var jqxhr = $.post("teslaloggerstream.php", {url: url, data: jsonstring}).always(function (r) {
             console.log("Response of:"+ url + ":" + r);

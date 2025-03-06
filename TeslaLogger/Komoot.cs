@@ -27,7 +27,7 @@ namespace TeslaLogger
 
         private static readonly Dictionary<string, string> EndPoints = new Dictionary<string, string>()
         {
-            { "KomootInfo", "/komoot/info" },
+            { "KomootListSetting", "/komoot/listSettings" },
             { "KomootSaveSettings", "/komoot/saveSettings" }
         };
 
@@ -660,15 +660,15 @@ VALUES(
         {
             switch (true)
             {
-                case bool _ when request.Url.LocalPath.Equals(EndPoints["KomootInfo"], StringComparison.Ordinal):
-                    KomootInfo(request, response);
+                case bool _ when request.Url.LocalPath.Equals(EndPoints["KomootListSettings"], StringComparison.Ordinal):
+                    KomootListSettings(request, response);
                     break;
                 case bool _ when request.Url.LocalPath.Equals(EndPoints["KomootSaveSettings"], StringComparison.Ordinal):
                     KomootSaveSettings(request, response);
                     break;
                 default:
                     response.StatusCode = (int)HttpStatusCode.NotFound;
-                    WriteString(response, @"URL Not Found!");
+                    WebServer.WriteString(response, @"URL Not Found!");
                     break;
             }
         }
@@ -680,9 +680,10 @@ VALUES(
                 string data = reader.ReadToEnd();
                 Tools.DebugLog($"KomootSaveSettings request: {data}");
             }
+            WebServer.WriteString(response, "OK");
         }
 
-        private static void KomootInfo(HttpListenerRequest request, HttpListenerResponse response)
+        private static void KomootListSettings(HttpListenerRequest _, HttpListenerResponse response)
         {
             List<object> komootConfigs = new List<object>();
             using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
@@ -714,20 +715,10 @@ WHERE
                 }
             }
             string json = JsonConvert.SerializeObject(komootConfigs, Formatting.Indented);
-            Tools.DebugLog($"KomootInfo JSON: {json}");
+            //Tools.DebugLog($"KomootInfo JSON: {json}");
+            WebServer.WriteString(response, json, "application/json");
         }
 
-        private static void WriteString(HttpListenerResponse response, string responseString)
-        {
-            response.ContentEncoding = Encoding.UTF8;
-            byte[] buffer = Encoding.UTF8.GetBytes(responseString);
-            // Get a response stream and write the response to it.
-            response.ContentLength64 = buffer.Length;
-            Stream output = response.OutputStream;
-            output.Write(buffer, 0, buffer.Length);
-            // You must close the output stream.
-            output.Close();
-        }
     }
 }
 
