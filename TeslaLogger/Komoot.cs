@@ -692,6 +692,11 @@ VALUES(
                             && komootSetting.ContainsKey("komoot_displayname"))
                         {
                             int komoot_carid = (int)komootSetting["komoot_carid"];
+                            if (komoot_carid == -1)
+                            {
+                                // new entry
+                                komoot_carid = DBHelper.GetNextAvailableCarID();
+                            }
                             string komoot_user = "KOMOOT:" + komootSetting["komoot_user"];
                             string komoot_passwd = komootSetting["komoot_passwd"];
                             string komoot_displayname = komootSetting["komoot_displayname"];
