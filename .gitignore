@@ -99,3 +99,7 @@ TeslaLogger/bin/encryption.txt
 /TeslaLogger/bin/Debug/net8.0/geofence-private.csv
 /TeslaLogger/bin/Debug/net8.0/VERSION
 /TeslaLogger/bin/Debug/net8.0/weather.ini
+/Logfile/.vs
+/MQTTClient/.vs
+/OSMMapGenerator/.vs
+/TeslaLogger/.vs

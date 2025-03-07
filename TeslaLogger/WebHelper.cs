@@ -143,8 +143,6 @@ namespace TeslaLogger
 
         internal static int ABRPtimeouts; // defaults to 0;
 
-        bool useCaptcha; // defaults to false;
-
         static Dictionary<string, Account> vehicles2Account = new Dictionary<string, Account>();
         static int nextAccountId = 1;
 
@@ -393,119 +391,6 @@ namespace TeslaLogger
                 if (!String.IsNullOrEmpty(tempToken))
                     return tempToken;
 
-
-                string hiddenPassword = "";
-                for (int x = 0; x < car.TeslaPasswort.Length; x++)
-                {
-                    hiddenPassword += "x";
-                }
-
-                Log("Login with : '" + Tools.ObfuscateString(car.TeslaName) + "' / '" + hiddenPassword + "'");
-
-                if (car.TeslaName.Length == 0 || !car.TeslaName.Contains("@"))
-                {
-                    car.Passwortinfo.Append("Car inactive!<br>");
-                    Log("Car inactive");
-                    car.SetCurrentState(TeslaState.Inactive);
-                    throw new Exception("Car inactive");
-                }
-
-                if (car.TeslaName.Length == 0 || car.TeslaPasswort.Length == 0)
-                {
-                    car.Passwortinfo.Append("ERROR: NO Credentials!<br>");
-                    Log("NO Credentials");
-                    throw new Exception("NO Credentials");
-                }
-
-                var code_verifier = RandomString(86);
-                // car.Log("code_verifier:" + code_verifier);
-
-                var code_challenge_SHA256 = ComputeSHA256Hash(code_verifier);
-                var code_challenge = Convert.ToBase64String(Encoding.Default.GetBytes(code_challenge_SHA256));
-
-                var state = RandomString(20);
-
-                // car.Log("code_challenge:" + code_challenge);
-                // car.Log("state:" + state);
-
-                tokenCookieContainer = new CookieContainer();
-
-                HttpClient client = GetDefaultHttpClientForAuthentification();
-
-                Dictionary<string, string> values = new Dictionary<string, string>
-                {
-                    { "client_id", "ownerapi" },
-                    { "code_challenge", code_challenge },
-                    { "code_challenge_method", "S256" },
-                    { "redirect_uri", "https://auth.tesla.com/void/callback" },
-                    { "response_type", "code" },
-                    { "scope", "openid email offline_access" },
-                    { "state", state }
-                    ,{ "login_hint",  car.TeslaName }
-                };
-
-                string json = JsonConvert.SerializeObject(values);
-                using (StringContent content = new StringContent(json.ToString(Tools.ciEnUS), Encoding.UTF8, "application/json"))
-                {
-                    UriBuilder b = new UriBuilder(authHost + "/oauth2/v3/authorize");
-                    b.Port = -1;
-                    var q = HttpUtility.ParseQueryString(b.Query);
-                    foreach (var v in values)
-                    {
-                        q[v.Key] = v.Value;
-                    }
-                    b.Query = q.ToString();
-                    string url = b.ToString();
-
-                    DateTime start = DateTime.UtcNow;
-
-                    if (getTokenDebugVerbose) Log("GetToken url:" + url);
-
-                    HttpResponseMessage result = client.GetAsync(new Uri(url)).Result;
-                    resultContent = result.Content.ReadAsStringAsync().Result;
-
-                    if (resultContent.Contains("name=\"captcha\""))
-                        useCaptcha = true;
-
-                    LogGetToken(resultContent, "GetToken");
-
-                    if (getTokenDebugVerbose) Log("GetToken resultContent Length:" + resultContent.Length);
-
-                    m = Regex.Matches(resultContent, "type=\\\"hidden\\\" name=\\\"(.*?)\\\" value=\\\"(.*?)\\\"");
-
-                    if (getTokenDebugVerbose) Log("GetToken resultContent Regex Matches:" + m.Count);
-
-                    DBHelper.AddMothershipDataToDB("GetTokenAsync()", start, (int)result.StatusCode, car.CarInDB);
-
-                    if (resultContent.Contains("authorization_required"))
-                    {
-                        car.Passwortinfo.Append("ERROR: Wrong Credentials!<br>");
-
-                        Log("Wrong Credentials");
-
-                        if (Tools.IsDocker())
-                        {
-                            Thread.Sleep(5 * 60000);
-                        }
-
-                        throw new Exception("Wrong Credentials");
-                    }
-
-                    if (result.StatusCode == HttpStatusCode.RedirectMethod)
-                    {
-                        if (result.Headers.Location.Host == "auth.tesla.cn" && authHost != "https://auth.tesla.cn")
-                        {
-                            authHost = "https://auth.tesla.cn";
-                            Log("Use chinese auth server: auth.tesla.cn!");
-                            return GetToken();
-                        }
-                    }
-
-                    if (useCaptcha)
-                        GetCaptcha();
-
-                    return GetTokenAsync2(code_challenge, m, state, code_verifier, b.Uri, true);
-                }
             }
             catch (ThreadAbortException)
             {
@@ -533,17 +418,6 @@ namespace TeslaLogger
             return "NULL";
         }
 
-        private void GetCaptcha()
-        {
-            car.CaptchaString = null;
-            HttpClient client = GetDefaultHttpClientForAuthentification();
-            string url = authHost + "/captcha";
-            HttpResponseMessage result = client.GetAsync(new Uri(url)).Result;
-            string resultContent = result.Content.ReadAsStringAsync().Result;
-            car.Captcha = resultContent;
-            System.IO.File.WriteAllText("captcha.svg", resultContent);
-        }
-
         internal string UpdateTeslaTokenFromRefreshToken()
         {
             car.CreateExeptionlessLog("Tesla Token", "UpdateTeslaTokenFromRefreshToken", Exceptionless.Logging.LogLevel.Info).Submit();
@@ -551,7 +425,12 @@ namespace TeslaLogger
             string refresh_token = car.DbHelper.GetRefreshToken(out string tesla_token);
 
             if (car.FleetAPI)
+            {
+                if (!String.IsNullOrEmpty(ApplicationSettings.Default.TelemetryClientID))
+                    return UpdateTeslaTokenFromRefreshTokenFromFleetAPIWithClientID(refresh_token);
+
                 return UpdateTeslaTokenFromRefreshTokenFromFleetAPI(refresh_token);
+            }
 
             if (car.oldAPIchinaCar)
                 authHost = "https://auth.tesla.cn";
@@ -889,6 +768,121 @@ namespace TeslaLogger
             return "";
         }
 
+        private string UpdateTeslaTokenFromRefreshTokenFromFleetAPIWithClientID(string refresh_token)
+        {
+            try
+            {
+                var ts = DateTime.UtcNow - lastRefreshToken;
+                if (ts.TotalMinutes < 5)
+                {
+                    car.Log("ERROR: Refresh Token Spam!!!");
+                    return "";
+                }
+
+                lastRefreshToken = DateTime.UtcNow;
+
+                Log("Update Access Token From Refresh Token - FleetAPI! with ClientID");
+                if (String.IsNullOrEmpty(refresh_token))
+                {
+                    car.Log("No Refresh Token");
+                    return "";
+                }
+
+                using (var formContent = new FormUrlEncodedContent(new[]
+            {
+                new KeyValuePair<string, string>("refresh_token", refresh_token),
+                new KeyValuePair<string, string>("grant_type", "refresh_token"),
+                new KeyValuePair<string, string>("client_id", ApplicationSettings.Default.TelemetryClientID),
+            }))
+                {
+
+                    var response = httpclient_teslalogger_de.PostAsync(new Uri("https://auth.tesla.com/oauth2/v3/token"), formContent).Result;
+                    string result = response.Content.ReadAsStringAsync().Result;
+                    if (response.IsSuccessStatusCode)
+                    {
+                        if (result.Contains("User revoked consent"))
+                            car.CreateExeptionlessLog("User revoked consent", "Teslalogger won't work anymore!", LogLevel.Warn).Submit();
+
+                        if (result.Contains("\"error\""))
+                        {
+                            string error = result;
+
+                            try
+                            {
+                                dynamic j2 = JsonConvert.DeserializeObject(result);
+                                error = j2["error"];
+                            }
+                            catch (Exception)
+                            { }
+
+                            car.CreateExeptionlessLog("UpdateTeslaTokenFromRefreshTokenFromFleetAPI", error, LogLevel.Error)
+                                .AddObject(result, "Result Content")
+                                .Submit();
+                            car.Log(result);
+                            Thread.Sleep(30000);
+                            return "";
+                        }
+
+                        dynamic jsonResult = JsonConvert.DeserializeObject(result);
+                        if (jsonResult.ContainsKey("expires_in"))
+                        {
+                            var t = DateTime.UtcNow.AddSeconds((int)(jsonResult["expires_in"])).AddHours(-2);
+                            if (t > DateTime.UtcNow.AddHours(1))
+                                nextTeslaTokenFromRefreshToken = t;
+                            else
+                            {
+                                t = DateTime.UtcNow.AddSeconds((int)(jsonResult["expires_in"]));
+                                nextTeslaTokenFromRefreshToken = t;
+                            }
+
+                            Log("access token expires: " + nextTeslaTokenFromRefreshToken.ToLocalTime());
+
+                            /*
+                            CacheItemPolicy policy = new CacheItemPolicy();
+                            policy.AbsoluteExpiration = DateTime.Now.AddSeconds((int)(jsonResult["expires_in"])).AddMinutes(-5);
+                            policy.RemovedCallback = new CacheEntryRemovedCallback((CacheEntryRemovedArguments _) =>
+                            {
+                                Tools.DebugLog($"#{car.CarInDB}: access token will expire in 5 minutes");
+                                UpdateTeslaTokenFromRefreshToken();
+                            });
+                            _ = MemoryCache.Default.Add("RefreshToken_" + car.CarInDB+ $"_{Environment.TickCount}", policy, policy);
+                            */
+                        }
+                        string access_token = jsonResult["access_token"];
+
+                        string new_refresh_token = jsonResult["refresh_token"];
+                        CheckNewRefreshToken(refresh_token, new_refresh_token);
+
+                        SetNewAccessToken(access_token);
+                        return access_token;
+                    }
+                    else
+                    {
+                        car.CreateExeptionlessLog("UpdateTeslaTokenFromRefreshTokenFromFleetAPI", response.StatusCode.ToString(), LogLevel.Error)
+                            .AddObject(result, "Result Content")
+                            .Submit();
+
+                        Log("Error getting Access Token from Refreh Token: " + (int)response.StatusCode + " / " + response.StatusCode.ToString());
+                        Thread.Sleep(30000);
+                        return "";
+                    }
+                }
+            }
+            catch (ThreadAbortException)
+            {
+                System.Diagnostics.Debug.WriteLine("Thread Stop!");
+            }
+            catch (Exception ex)
+            {
+                car.Log(ex.ToString());
+                car.CreateExceptionlessClient(ex).MarkAsCritical().Submit();
+                ExceptionlessClient.Default.ProcessQueueAsync();
+                Thread.Sleep(30000);
+            }
+
+            return "";
+        }
+
         internal static void SearchFornewCars()
         {
             Logfile.Log("SearchFornewCars");
@@ -997,639 +991,7 @@ namespace TeslaLogger
             }, CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="code_challenge"></param>
-        /// <param name="mc"></param>
-        /// <param name="state"></param>
-        /// <param name="code_verifier"></param>
-        /// <param name="Referer"></param>
-        /// <param name="firstIteration">
-        /// Will prevent an endless loop if something went wrong with reCaptacha as it will call GetTokenAsync2 again!
-        /// </param>
-        /// <returns></returns>
-        private string GetTokenAsync2(string code_challenge, MatchCollection mc, string state, string code_verifier, Uri Referer, bool firstIteration)
-        {
-            if (useCaptcha)
-                WaitForCaptcha();
-
-            Log("GetTokenAsync2");
-
-            int length = 0;
-            string transaction_id = "";
-
-            var d = new Dictionary<string, string>();
-            foreach (Match m in mc)
-            {
-                string key = m.Groups[1].Value;
-                string value = m.Groups[2].Value;
-
-                if (d.ContainsKey(key))
-                {
-                    car.Log("Key already in directory: " + key);
-                    continue;
-                }
-
-                d.Add(key, value);
-
-                if (key == "transaction_id")
-                {
-                    transaction_id = value;
-                }
-
-                // car.Log("Key: " + key +  " Value: " + value);
-
-                length += m.Groups[1].Value.Length;
-                length += m.Groups[2].Value.Length;
-                length += 4;
-            }
-
-            d.Add("identity", car.TeslaName);
-            d.Add("credential", car.TeslaPasswort);
-
-            if (car.CaptchaString != null)
-            {
-                d.Add("captcha", car.CaptchaString);
-            }
-
-            if (car.ReCaptchaCode != null)
-            {
-                d.Add("g-recaptcha-response", car.ReCaptchaCode);
-                d.Add("recaptcha", car.ReCaptchaCode);
-            }
-
-            string resultContent = "";
-
-            try
-            {
-                string code = "";
-                HttpClient client = GetDefaultHttpClientForAuthentification();
-                HttpResponseMessage result = null;
-                DateTime start = DateTime.UtcNow;
-                UriBuilder b;
-
-                using (FormUrlEncodedContent content = new FormUrlEncodedContent(d))
-                {
-                    b = new UriBuilder(authHost + "/oauth2/v3/authorize");
-                    b.Port = -1;
-                    var q = HttpUtility.ParseQueryString(b.Query);
-                    q["client_id"] = "ownerapi";
-                    q["code_challenge"] = code_challenge;
-                    q["code_challenge_method"] = "S256";
-                    q["redirect_uri"] = "https://auth.tesla.com/void/callback";
-                    q["response_type"] = "code";
-                    q["scope"] = "openid email offline_access";
-                    q["state"] = state;
-                    b.Query = q.ToString();
-                    string url = b.ToString();
-
-                    var temp = content.ReadAsStringAsync().Result;
-
-                    // car.Log("FormUrlEncodedContent: " + temp.Substring(0, temp.Length - 6));
-
-                    // car.Log("URL: " + url);
-
-                    client.DefaultRequestHeaders.Referrer = Referer;
-
-                    /*
-                    var cs = GetAllCookies(tokenCookieContainer);
-                    foreach (Cookie c in cs)
-                    {
-                        car.Log("Cookie: " + c.ToString());
-                    }
-                    */
-
-                    result = client.PostAsync(new Uri(url), content).Result;
-                    resultContent = result.Content.ReadAsStringAsync().Result;
-
-                    /*
-                    car.Log("Request:\r\n" + result.RequestMessage.ToString());
-                    car.Log("Request Headers:\r\n" + result.RequestMessage.Headers.ToString());
-                    car.Log("Response:\r\n" + result.ToString());
-                    */
-
-                    LogGetToken(resultContent, "GetTokenAsync2");
-
-                    if (resultContent.Contains("www.recaptcha.net"))
-                    {
-                        if (!firstIteration)
-                        {
-                            car.Log("Error!!! There is still a reCaptcha. Prevent endless loop!");
-                            car.ExternalLog("Error!!! There is still a reCaptcha. Prevent endless loop!");
-                            return "NULL";
-                        }
-
-                        car.Passwortinfo.Append("Waiting for Recaptcha solver. This may take up to one minute!<br>");
-                        // car.passwortinfo.Append("*** try to use access token & refresh token instead of email & password!!! ***<br>");
-                        car.Log("Waiting for Recaptcha solver!");
-
-                        car.waitForRecaptcha = true;
-                        CaptchaSolver cs = new CaptchaSolver(car);
-                        string sitekey = cs.SearchForSitekey(resultContent);
-
-                        cs.Send(sitekey, b.ToString());
-                        car.ReCaptchaCode = cs.Get();
-
-                        if (car.ReCaptchaCode != null)
-                        {
-                            car.Passwortinfo.Append("Recaptcha code received<br>");
-
-                            return GetTokenAsync2(code_challenge, mc, state, code_verifier, Referer, false);
-                        }
-                    }
-
-                    if (resultContent.Contains("Captcha does not match"))
-                    {
-                        car.Passwortinfo.Append("Captcha does not match !!!<br>");
-                        car.Log("Captcha does not match");
-                    }
-
-                    if (resultContent.Contains("Your account has been locked"))
-                    {
-                        car.Passwortinfo.Append("Your account has been locked!!!<br>");
-                        car.Log("Your account has been locked !!!");
-                    }
-
-                    DBHelper.AddMothershipDataToDB("GetTokenAsync2()", start, (int)result.StatusCode, car.CarInDB);
-
-                    Uri location = result.Headers.Location;
-
-                    bool isMFA = false;
-
-                    if (result.StatusCode != HttpStatusCode.Redirect)
-                    {
-                        if (result.StatusCode == HttpStatusCode.OK && resultContent.Contains("passcode"))
-                        {
-                            isMFA = true;
-                            car.Passwortinfo.Append("Wait for MFA code<br>");
-                            car.waitForMFACode = true;
-                            code = WaitForMFA_Code(transaction_id, code_challenge, state);
-
-                            if (String.IsNullOrEmpty(code))
-                            {
-                                return "NULL";
-                            }
-                        }
-                        else
-                        {
-                            car.Passwortinfo.Append("Error: GetTokenAsync2 Redirect Location = null!!! Wrong credentials?<br>");
-                            car.Log("Error: GetTokenAsync2 HttpStatus: " + result.StatusCode.ToString() + " / Expecting: Redirect !!!");
-                            ExceptionlessClient.Default.CreateLog("Auth", "Error: GetTokenAsync2 HttpStatus: " + result.StatusCode.ToString() + " / Expecting: Redirect !!!").AddObject(resultContent, "resultContent").FirstCarUserID().Submit();
-                            ExceptionWriter(null, resultContent);
-                        }
-                    }
-
-                    if (!isMFA)
-                    {
-                        if (location == null)
-                        {
-                            car.Passwortinfo.Append("Error: GetTokenAsync2 Redirect Location = null!!! Wrong credentials?<br>");
-                            car.Log("Error: GetTokenAsync2 Redirect Location = null!!! Wrong credentials?");
-                            // car.Log(resultContent);
-                        }
-
-                        if (result.StatusCode == HttpStatusCode.Redirect && location != null)
-                        {
-                            code = HttpUtility.ParseQueryString(location.Query).Get("code");
-                            // car.Log("Code: " + code);
-                        }
-                        else
-                        {
-                            return "NULL";
-                        }
-                    }
-                }
-
-                return GetTokenAsync3(code, code_verifier, b.Uri);
-
-            }
-            catch (Exception ex)
-            {
-                car.Passwortinfo.Append("Exception in GetTokenAsync2 !!!: " + ex.Message + "<br>");
-                if (ex.InnerException != null)
-                    car.Passwortinfo.Append("Exception in GetTokenAsync2 !!!: " + ex.InnerException.Message + "<br>");
-
-                car.ExternalLog("GetTokenAsync2: " + ex.ToString());
-
-                car.Log(ex.ToString());
-                ExceptionWriter(ex, resultContent);
-
-                SubmitExceptionlessClientWithResultContent(ex, resultContent);
-            }
-
-            return "";
-        }
-
-        internal static IEnumerable<Cookie> GetAllCookies(CookieContainer c)
-        {
-            Hashtable k = (Hashtable)c.GetType().GetField("m_domainTable", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(c);
-            foreach (DictionaryEntry element in k)
-            {
-                SortedList l = (SortedList)element.Value.GetType().GetField("m_list", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(element.Value);
-                foreach (var e in l)
-                {
-                    CookieCollection cl = (CookieCollection)((DictionaryEntry)e).Value;
-                    foreach (Cookie fc in cl)
-                    {
-                        yield return fc;
-                    }
-                }
-            }
-        }
-
-        private void WaitForCaptcha()
-        {
-            bool hasLock = Monitor.IsEntered(Car.InitCredentialsLock);
-            try
-            {
-                // don't wait (forever) for user input. Give other Cars a chance to authentificate meanwile
-                if (hasLock)
-                    Monitor.Exit(Car.InitCredentialsLock);
-
-                car.Log("Start waiting for captcha code !!!");
-                DateTime timeout = DateTime.UtcNow;
-
-                while (car.CaptchaString == null)
-                {
-                    Thread.Sleep(10);
-
-                    if (DateTime.UtcNow - timeout > TimeSpan.FromSeconds(10))
-                    {
-                        timeout = DateTime.UtcNow;
-                        car.Log("Wait for captcha code !!!");
-                    }
-                }
-                car.Log("Captcha Code: " + car.CaptchaString);
-            }
-            finally
-            {
-                if (hasLock)
-                    Monitor.Enter(Car.InitCredentialsLock);
-            }
-        }
-
-        private string WaitForMFA_Code(string transaction_id, string code_challenge, string state)
-        {
-            car.Log("Start waiting for MFA code !!!");
-            bool hasLock = Monitor.IsEntered(Car.InitCredentialsLock);
-            try
-            {
-                // don't wait (forever) for user input. Give other Cars a chance to authentificate meanwile
-                if (hasLock)
-                    Monitor.Exit(Car.InitCredentialsLock);
-
-                DateTime timeout = DateTime.UtcNow;
-
-                while (car.MFACode == null || car.MFACode.Length != 6)
-                {
-                    Thread.Sleep(10);
-
-                    if (DateTime.UtcNow - timeout > TimeSpan.FromSeconds(10))
-                    {
-                        timeout = DateTime.UtcNow;
-                        car.Log("Wait for MFA code !!!");
-                    }
-                }
-
-                car.Log("MFA Code: " + car.MFACode);
-
-                // while (true)
-                {
-                    Log("transaction_id: " + transaction_id);
-
-                    string code = MFA1(transaction_id, code_challenge, state);
-
-                    if (code.Length > 0)
-                        return code;
-
-                    car.Passwortinfo.Append("Code received from Tesla server<br>");
-
-                    System.Threading.Thread.Sleep(500);
-                }
-            }
-            finally
-            {
-                if (hasLock)
-                    Monitor.Enter(Car.InitCredentialsLock);
-            }
-
-            return "";
-        }
-
-        private string MFA1(string transaction_id, string code_challenge, string state)
-        {
-            string resultContent;
-
-            HttpClient client = GetDefaultHttpClientForAuthentification();
-            UriBuilder b = new UriBuilder("https://auth.tesla.com/oauth2/v3/authorize/mfa/factors");
-            b.Port = -1;
-
-            var q = HttpUtility.ParseQueryString(b.Query);
-            q.Add("transaction_id", transaction_id);
-            b.Query = q.ToString();
-            string url = b.ToString();
-
-            DateTime start = DateTime.UtcNow;
-            HttpResponseMessage result = client.GetAsync(new Uri(url)).Result;
-            resultContent = result.Content.ReadAsStringAsync().Result;
-
-            LogGetToken(resultContent, "MFA1");
-
-            Log("MFA1 Result: " + resultContent);
-
-            dynamic jsonResult = JsonConvert.DeserializeObject(resultContent);
-
-            string factor_id = null;
-            try
-            {
-                var authentificatorDevices = jsonResult["data"];
-                car.Passwortinfo.Append("Found " + authentificatorDevices.Length + " Authentificator Devices<br>");
-
-                for (int ad = 0; ad < authentificatorDevices.Length; ad++)
-                {
-                    try
-                    {
-                        car.Passwortinfo.Append("Try Device:  " + jsonResult["data"][ad]["name"] + "<br>");
-                        factor_id = jsonResult["data"][ad]["id"];
-                        string c = MFA2(code_challenge, state, transaction_id, factor_id);
-
-                        if (c.Length > 10)
-                        {
-                            car.Passwortinfo.Append("factor_id received from Tesla server<br>");
-                            return c;
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        car.Passwortinfo.Append("Exception in MFA1 Try Device!!!: " + ex.Message + "<br>");
-
-                        if (ex.InnerException != null)
-                            car.Passwortinfo.Append("Exception in MFA1 Try Device!!!: " + ex.InnerException.Message + "<br>");
-
-                        car.Log("MFA1 ResultContent: " + resultContent);
-                        car.Log(ex.ToString());
-
-                        SubmitExceptionlessClientWithResultContent(ex, resultContent);
-
-                        car.ExternalLog("MFA1 Try Device: " + ex.ToString());
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                car.Passwortinfo.Append("Exception in MFA1 : " + ex.Message + "<br>");
-                car.Log("MFA1 ResultContent: " + resultContent);
-                car.Log(ex.ToString());
-                ExceptionWriter(null, resultContent);
-
-                car.ExternalLog("MFA1: " + ex.ToString());
-
-                SubmitExceptionlessClientWithResultContent(ex, resultContent);
-            }
-
-            return "";
-        }
-
-        private string MFA2(string code_challenge, string state, string transaction_id, string factor_id)
-        {
-            HttpClient client = GetDefaultHttpClientForAuthentification();
-
-            DateTime start = DateTime.UtcNow;
-
-            Dictionary<string, string> d = new Dictionary<string, string>();
-            d.Add("factor_id", factor_id);
-            d.Add("passcode", car.MFACode);
-            d.Add("transaction_id", transaction_id);
-
-            string json = JsonConvert.SerializeObject(d);
-
-            using (var content = new StringContent(json, System.Text.Encoding.UTF8, "application/json"))
-            {
-                HttpResponseMessage result = client.PostAsync(new Uri("https://auth.tesla.com/oauth2/v3/authorize/mfa/verify"), content).Result;
-                string resultContent = result.Content.ReadAsStringAsync().Result;
-
-                LogGetToken(resultContent, "MFA2");
-
-                DBHelper.AddMothershipDataToDB("MFA2()", start, (int)result.StatusCode, car.CarInDB);
-
-                try
-                {
-                    dynamic jsonResult = JsonConvert.DeserializeObject(resultContent);
-                    object o = jsonResult["data"]["valid"];
-
-                    if ((bool)o)
-                        return MFA3(code_challenge, state, transaction_id);
-                }
-                catch (Exception ex)
-                {
-                    car.Passwortinfo.Append("Error: MFA2! <br>");
-                    car.Log("Error: MFA2 : " + resultContent);
-                    ExceptionWriter(null, resultContent);
-
-                    SubmitExceptionlessClientWithResultContent(ex, resultContent);
-                }
-            }
-
-            return "NULL";
-        }
-
-        private string MFA3(string code_challenge, string state, string transaction_id)
-        {
-
-            HttpClient client = GetDefaultHttpClientForAuthentification();
-
-            DateTime start = DateTime.UtcNow;
-
-            Dictionary<string, string> d = new Dictionary<string, string>();
-            d.Add("transaction_id", transaction_id);
-
-            using (FormUrlEncodedContent content = new FormUrlEncodedContent(d))
-            {
-                UriBuilder b = new UriBuilder("https://auth.tesla.com/oauth2/v3/authorize");
-                b.Port = -1;
-                var q = HttpUtility.ParseQueryString(b.Query);
-                q.Add("client_id", "ownerapi");
-                q.Add("code_challenge", code_challenge);
-                q.Add("code_challenge_method", "S256");
-                q.Add("redirect_uri", "https://auth.tesla.com/void/callback");
-                q.Add("response_type", "code");
-                q.Add("scope", "openid email offline_access");
-                q.Add("state", state);
-                b.Query = q.ToString();
-                string url = b.ToString();
-
-                var temp = content.ReadAsStringAsync().Result;
-
-                // car.Log("FormUrlEncodedContent: " + temp.Substring(0, temp.Length - 6));
-
-                // car.Log("URL: " + url);
-
-                HttpResponseMessage result = client.PostAsync(url, content).Result;
-                string resultContent = result.Content.ReadAsStringAsync().Result;
-
-                LogGetToken(resultContent, "MFA3");
-
-                DBHelper.AddMothershipDataToDB("MFA3()", start, (int)result.StatusCode, car.CarInDB);
-
-                Uri location = result.Headers.Location;
-
-                if (result.StatusCode == HttpStatusCode.Redirect && location != null)
-                {
-                    string code = HttpUtility.ParseQueryString(location.Query).Get("code");
-                    car.Log("Code: " + code);
-                    return code;
-                }
-                else
-                {
-                    ExceptionlessClient.Default.CreateLog("Auth", "Error: MFA2 Fail!").AddObject(resultContent, "resultContent").FirstCarUserID().Submit();
-                    car.Log("Error: MFA2 Fail!");
-                    ExceptionWriter(null, resultContent);
-                    return "NULL";
-                }
-            }
-        }
-
-        private string GetTokenAsync3(string code, string code_verifier, Uri Referrer)
-        {
-            string resultContent = "";
-            try
-            {
-                string access_token = "";
-
-                var d = new Dictionary<string, string>();
-                d.Add("grant_type", "authorization_code");
-                d.Add("client_id", "ownerapi");
-                d.Add("code", code);
-                d.Add("code_verifier", code_verifier);
-                d.Add("redirect_uri", "https://auth.tesla.com/void/callback");
-
-                string json = JsonConvert.SerializeObject(d);
-
-                DateTime start = DateTime.UtcNow;
-
-                HttpClient client = GetDefaultHttpClientForAuthentification();
-                client.DefaultRequestHeaders.Referrer = Referrer;
-
-                using (var content = new StringContent(json, System.Text.Encoding.UTF8, "application/json"))
-                {
-                    HttpResponseMessage result = client.PostAsync(authHost + "/oauth2/v3/token", content).Result;
-                    resultContent = result.Content.ReadAsStringAsync().Result;
-                    LogGetToken(resultContent, "GetTokenAsync3");
-
-
-                    DBHelper.AddMothershipDataToDB("GetTokenAsync3()", start, (int)result.StatusCode, car.CarInDB);
-
-                    // car.Log("HttpStatus: " + result.StatusCode.ToString());
-
-                    dynamic jsonResult = JsonConvert.DeserializeObject(resultContent);
-
-                    if (Tools.IsPropertyExist(jsonResult, "error"))
-                    {
-                        string error = jsonResult["error"];
-                        car.Passwortinfo.Append("Error: " + error + " <br>");
-                        car.Log("Error: GetTokenAsync3(): " + error);
-                    }
-                    else
-                    {
-                        string refresh_token = jsonResult["refresh_token"];
-                        access_token = jsonResult["access_token"];
-
-                        car.DbHelper.UpdateRefreshToken(refresh_token);
-
-                        car.Passwortinfo.Append("Access Token received. Everything is OK!!!<br>");
-                    }
-
-                    // car.Log(resultContent);
-                }
-
-                return GetTokenAsync4(access_token);
-            }
-            catch (Exception ex)
-            {
-                car.Passwortinfo.Append("Error: GetTokenAsync3! <br>");
-                car.Log(ex.ToString());
-
-                ExceptionWriter(ex, resultContent);
-                SubmitExceptionlessClientWithResultContent(ex, resultContent);
-
-                car.ExternalLog("GetTokenAsync3: " + ex.ToString());
-            }
-
-            return "";
-        }
-
-
-        private string GetTokenAsync4(string access_token)
-        {
-            string resultContent = "";
-
-            try
-            {
-                var d = new Dictionary<string, string>();
-                d.Add("grant_type", "urn:ietf:params:oauth:grant-type:jwt-bearer");
-                d.Add("client_id", TESLA_CLIENT_ID);
-                d.Add("client_secret", TESLA_CLIENT_SECRET);
-
-                string json = JsonConvert.SerializeObject(d);
-
-                DateTime start = DateTime.UtcNow;
-
-                httpClientForAuthentification?.Dispose();
-                httpClientForAuthentification = null;
-                HttpClient client = GetDefaultHttpClientForAuthentification();
-
-                // client.DefaultRequestHeaders.Add("User-Agent", TeslaloggerUserAgent);
-                client.DefaultRequestHeaders.Connection.Add("keep-alive");
-                client.DefaultRequestHeaders.Add("Authorization", "Bearer " + access_token);
-
-                using (var content = new StringContent(json, System.Text.Encoding.UTF8, "application/json"))
-                {
-                    HttpResponseMessage result = client.PostAsync("https://owner-api.teslamotors.com/oauth/token", content).Result;
-                    resultContent = result.Content.ReadAsStringAsync().Result;
-                    LogGetToken(resultContent, "GetTokenAsync4");
-
-                    DBHelper.AddMothershipDataToDB("GetTokenAsync4()", start, (int)result.StatusCode, car.CarInDB);
-
-                    car.Log("HttpStatus: " + result.StatusCode.ToString());
-
-                    dynamic jsonResult = JsonConvert.DeserializeObject(resultContent);
-                    if (Tools.IsPropertyExist(jsonResult, "error"))
-                    {
-                        string error = jsonResult["error"];
-                        car.Passwortinfo.Append("Error: " + error + " <br>");
-                        car.Log("Error: GetTokenAsync4(): " + error);
-                        car.CreateExeptionlessLog("GetTokenAsync4", "Error: " + error, Exceptionless.Logging.LogLevel.Error).Submit();
-                        return "NULL";
-                    }
-                    else
-                    {
-                        string access_token2 = jsonResult["access_token"] ?? throw new Exception("access_token Missing");
-                        int created_at = jsonResult["created_at"] ?? throw new Exception("created_at Missing");
-                        int expires_in = jsonResult["expires_in"] ?? throw new Exception("expires_in Missing");
-
-                        String token = jsonResult["access_token"];
-                        SetNewAccessToken(token);
-                        return Tesla_token;
-                    }
-                }
-            }
-            catch (ThreadAbortException)
-            {
-                System.Diagnostics.Debug.WriteLine("Thread Stop!");
-            }
-            catch (Exception ex)
-            {
-                car.Log(ex.ToString());
-                ExceptionWriter(ex, resultContent);
-                SubmitExceptionlessClientWithResultContent(ex, resultContent);
-                car.CreateExeptionlessLog("GetTokenAsync4", "Error getting access token", Exceptionless.Logging.LogLevel.Error).AddObject(resultContent, "ResultContent").Submit();
-
-                car.ExternalLog("GetTokenAsync4: " + ex.ToString());
-            }
-            return "";
-        }
-
+       
         private string lastCharging_State = "";
 
         public void ResetLastChargingState()
