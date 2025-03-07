@@ -16,18 +16,18 @@ global $display_name;
 	<link rel="stylesheet" href="static/teslalogger_style.css">
 	<script src="static/jquery/jquery-1.12.4.js"></script>
 	<script src="static/jquery/ui/1.12.1/jquery-ui.js"></script>
-	<script src="jquery/jquery-migrate-1.4.1.min.js"></script>
 	<link rel="stylesheet" href="static/leaflet/1.4.0/leaflet.css" />
 	<link rel='stylesheet' id='genericons-css'  href='static/genericons.css?ver=3.0.3' type='text/css' media='all' />
 </head>
-  	<body>
+<body>
 	
 	<?php 
     include "menu.php";
     echo(menu("Komoot"));
-    $komoot_carid = "";
+    $komoot_carid = -1;
     $komoot_user = "Kommot_User";
     $komoot_passwd = "secretPassword";
+    $komoot_displayname = "MyBike";
     $komootinfo = file_get_contents(GetTeslaloggerURL("komoot/listSettings"),0, stream_context_create(["http"=>["timeout"=>2]]));
     // echo("<!-- komootinfo:\n"); 
     // var_dump($komootinfo);
@@ -52,6 +52,10 @@ global $display_name;
         // echo("<!-- komoot_passwd:\n"); 
         // var_dump($komoot_passwd);
         // echo ("-->\n");
+        $komoot_displayname = $item->displayname;
+        // echo("<!-- komoot_displayname:\n"); 
+        // var_dump($komoot_displayname);
+        // echo ("-->\n");
         break;
         // TODO enable for multiple accounts
     }
@@ -64,11 +68,12 @@ global $display_name;
     function Save()
     {
         // TODO enable for multiple accounts
-        var j = {
+        var j = [ {
             "komoot_carid" : $("#carid").val(),
-            "mqtt_user" : $("#user").val(),
-            "mqtt_passwd" : $("#passwd").val(),
-        };
+            "komoot_user" : $("#user").val(),
+            "komoot_passwd" : $("#passwd").val(),
+            "komoot_displayname" : $("#bikename").val()
+        }];
 
         var jsonstring = JSON.stringify(j);
 
@@ -103,6 +108,12 @@ global $display_name;
         <input type="hidden" id="carid" value="<?= $komoot_carid ?>">
     </td>
 </tr>
+<tr>
+    <td><?php t("DisplayName"); ?>: </td><td><input id="bikename" size="40" value="<?= $komoot_displayname ?>"/></td>
+</tr>
 <tr>    
     <td></td><td><button onClick="javascript:Save();"><?php t("Save"); ?></button></td>
 </tr>
+</table>
+</body>
+</html>

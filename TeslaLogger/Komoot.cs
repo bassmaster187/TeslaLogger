@@ -9,8 +9,10 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Exceptionless;
+using Google.Protobuf.WellKnownTypes;
 using MySql.Data.MySqlClient;
 using Newtonsoft.Json;
+using static TeslaLogger.TeslaAPIState;
 
 // inspired by https://github.com/timschneeb/KomootGPX
 
@@ -27,7 +29,7 @@ namespace TeslaLogger
 
         private static readonly Dictionary<string, string> EndPoints = new Dictionary<string, string>()
         {
-            { "KomootListSetting", "/komoot/listSettings" },
+            { "KomootListSettings", "/komoot/listSettings" },
             { "KomootSaveSettings", "/komoot/saveSettings" }
         };
 
@@ -679,6 +681,57 @@ VALUES(
             {
                 string data = reader.ReadToEnd();
                 Tools.DebugLog($"KomootSaveSettings request: {data}");
+                try
+                {
+                    dynamic komootSettings = JsonConvert.DeserializeObject(data);
+                    foreach (dynamic komootSetting in komootSettings)
+                    {
+                        if (komootSetting.ContainsKey("komoot_carid")
+                            && komootSetting.ContainsKey("komoot_user")
+                            && komootSetting.ContainsKey("komoot_passwd")
+                            && komootSetting.ContainsKey("komoot_displayname"))
+                        {
+                            int komoot_carid = (int)komootSetting["komoot_carid"];
+                            string komoot_user = "KOMOOT:" + komootSetting["komoot_user"];
+                            string komoot_passwd = komootSetting["komoot_passwd"];
+                            string komoot_displayname = komootSetting["komoot_displayname"];
+                            using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+                            {
+                                con.Open();
+                                using (MySqlCommand cmd = new MySqlCommand(@"
+INSERT INTO cars SET
+    id = @komoot_carid,
+    tesla_name = @komoot_user,
+    tesla_password = @komoot_passwd,
+    display_name = @komoot_displayname,
+    vin = @VIN
+ON DUPLICATE KEY UPDATE
+    id = @komoot_carid,
+    tesla_name = @komoot_user,
+    tesla_password = @komoot_passwd,
+    display_name = @komoot_displayname,
+    vin = @VIN
+"
+                                , con))
+                                {
+                                    cmd.Parameters.AddWithValue("@komoot_carid", komoot_carid);
+                                    cmd.Parameters.AddWithValue("@komoot_user", komoot_user);
+                                    cmd.Parameters.AddWithValue("@komoot_passwd", komoot_passwd);
+                                    cmd.Parameters.AddWithValue("@komoot_displayname", komoot_displayname);
+                                    cmd.Parameters.AddWithValue("@VIN", $"KOMOOT{komoot_carid}");
+                                    int rowsAffected = SQLTracer.TraceNQ(cmd, out _);
+                                }
+                            }
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    ex.ToExceptionless().FirstCarUserID().Submit();
+                    Logfile.Log(ex.ToString());
+                    WebServer.WriteString(response, "not OK");
+                    return;
+                }
             }
             WebServer.WriteString(response, "OK");
         }
@@ -693,7 +746,8 @@ VALUES(
 SELECT
     id,
     tesla_name,
-    tesla_password
+    tesla_password,
+    display_name
 FROM
     cars
 WHERE
@@ -708,7 +762,8 @@ WHERE
                         {
                             { "carid", dr["id"] },
                             { "user", dr["tesla_name"] },
-                            { "passwd", dr["tesla_password"] }
+                            { "passwd", dr["tesla_password"] },
+                            { "displayname", dr["display_name"] },
                         };
                         komootConfigs.Add(komootConfig);
                     }
