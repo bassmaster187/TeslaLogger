@@ -234,6 +234,16 @@ namespace TeslaLogger
                 String Name = r["tesla_name"].ToString();
                 String Password = r["tesla_password"].ToString();
                 int carid = r["tesla_carid"] as Int32? ?? 0;
+                if (Name.StartsWith("KOMOOT:", StringComparison.Ordinal))
+                {
+                    Komoot _komoot = new Komoot(id, Name.Replace("KOMOOT:", string.Empty), Password);
+                    Thread komootThread = new Thread(() =>
+                    {
+                        _komoot.Run();
+                    });
+                    komootThread.Name = $"KomootThread_{id}";
+                    komootThread.Start();
+                }
                 String tesla_token = r["tesla_token"] as String ?? "";
                 if (tesla_token.StartsWith("OVMS:")) // OVMS Cars are not handled by Teslalogger
                 {
