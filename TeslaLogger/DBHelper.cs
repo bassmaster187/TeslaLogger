@@ -6637,9 +6637,9 @@ WHERE
             return json;
         }
 
-        public static decimal InsertNewCar(string email, string password, int teslacarid, bool freesuc, string access_token, string refresh_token, string vin, string display_name, bool fleetAPI)
+        internal static int GetNextAvailableCarID()
         {
-            Logfile.Log($"Insert new Car: {display_name}, VIN: {vin}, TeslaCarId: {teslacarid}");
+            int newid = 1;
             using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
             {
                 con.Open();
@@ -6660,34 +6660,42 @@ FROM
         pos
 ) AS t", con))
                 {
-                    int newid = 1;
-
                     object oid = SQLTracer.TraceSc(cmd);
                     if (oid != null)
-                        newid = Convert.ToInt32(oid);
-
-                    using (var cmd2 = new MySqlCommand("insert cars (id, tesla_name, tesla_password, tesla_carid, display_name, freesuc, tesla_token, refresh_token, vin, fleetAPI) values (@id, @tesla_name, @tesla_password, @tesla_carid, @display_name, @freesuc,  @tesla_token, @refresh_token, @vin, @fleetAPI)", con))
                     {
-                        cmd2.Parameters.AddWithValue("@id", newid);
-                        cmd2.Parameters.AddWithValue("@tesla_name", email);
-                        cmd2.Parameters.AddWithValue("@tesla_password", password);
-                        cmd2.Parameters.AddWithValue("@tesla_carid", teslacarid);
-                        cmd2.Parameters.AddWithValue("@display_name", display_name);
-                        cmd2.Parameters.AddWithValue("@freesuc", freesuc ? 1 : 0);
-                        cmd2.Parameters.AddWithValue("@tesla_token", access_token);
-                        cmd2.Parameters.AddWithValue("@refresh_token", refresh_token);
-                        cmd2.Parameters.AddWithValue("@vin", vin);
-                        cmd2.Parameters.AddWithValue("@fleetAPI", fleetAPI);
-                        _ = SQLTracer.TraceNQ(cmd2, out _);
-
-#pragma warning disable CA2000 // Objekte verwerfen, bevor Bereich verloren geht
-                        Car nc = new Car(Convert.ToInt32(newid), email, password, teslacarid, access_token, DateTime.Now, "", "", "", "", display_name, vin, "", null, fleetAPI);
-#pragma warning restore CA2000 // Objekte verwerfen, bevor Bereich verloren geht
+                        newid = Convert.ToInt32(oid);
                     }
-
-                    return newid;
                 }
             }
+            return newid;
+        }
+
+        internal static decimal InsertNewCar(string email, string password, int teslacarid, bool freesuc, string access_token, string refresh_token, string vin, string display_name, bool fleetAPI)
+        {
+            Logfile.Log($"Insert new Car: {display_name}, VIN: {vin}, TeslaCarId: {teslacarid}");
+            int newid = GetNextAvailableCarID();
+            using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+            {
+                using (var cmd2 = new MySqlCommand("insert cars (id, tesla_name, tesla_password, tesla_carid, display_name, freesuc, tesla_token, refresh_token, vin, fleetAPI) values (@id, @tesla_name, @tesla_password, @tesla_carid, @display_name, @freesuc,  @tesla_token, @refresh_token, @vin, @fleetAPI)", con))
+                {
+                    cmd2.Parameters.AddWithValue("@id", newid);
+                    cmd2.Parameters.AddWithValue("@tesla_name", email);
+                    cmd2.Parameters.AddWithValue("@tesla_password", password);
+                    cmd2.Parameters.AddWithValue("@tesla_carid", teslacarid);
+                    cmd2.Parameters.AddWithValue("@display_name", display_name);
+                    cmd2.Parameters.AddWithValue("@freesuc", freesuc ? 1 : 0);
+                    cmd2.Parameters.AddWithValue("@tesla_token", access_token);
+                    cmd2.Parameters.AddWithValue("@refresh_token", refresh_token);
+                    cmd2.Parameters.AddWithValue("@vin", vin);
+                    cmd2.Parameters.AddWithValue("@fleetAPI", fleetAPI);
+                    _ = SQLTracer.TraceNQ(cmd2, out _);
+
+#pragma warning disable CA2000 // Objekte verwerfen, bevor Bereich verloren geht
+                    Car nc = new Car(Convert.ToInt32(newid), email, password, teslacarid, access_token, DateTime.Now, "", "", "", "", display_name, vin, "", null, fleetAPI);
+#pragma warning restore CA2000 // Objekte verwerfen, bevor Bereich verloren geht
+                }
+            }
+            return newid;
         }
 
         public static DataTable GetAllChargingstates()
