@@ -4566,7 +4566,7 @@ DESC", con))
             }
         }
 
-        private static int UpdateAllPOIAddresses(int count, string bucket)
+        internal static int UpdateAllPOIAddresses(int count, string bucket)
         {
             if (bucket.Length == 0)
                 return count;

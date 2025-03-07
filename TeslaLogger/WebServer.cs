@@ -413,6 +413,9 @@ namespace TeslaLogger
                     case bool _ when Journeys.CanHandleRequest(request):
                         Journeys.HandleRequest(request, response);
                         break;
+                    case bool _ when Komoot.CanHandleRequest(request):
+                        Komoot.HandleRequest(request, response);
+                        break;
                     case bool _ when request.Url.LocalPath.Equals("/teslaauthurl", System.StringComparison.Ordinal):
                         TeslaAuthURL(response);
                         break;
@@ -3399,7 +3402,7 @@ FROM
             WriteString(response, responseString, "application/json");
         }
 
-        private static void WriteString(HttpListenerResponse response, string responseString, string contentType=null)
+        internal static void WriteString(HttpListenerResponse response, string responseString, string contentType=null)
         {
             response.ContentEncoding = Encoding.UTF8;
             var buffer = Encoding.UTF8.GetBytes(responseString);

@@ -477,6 +477,10 @@ ClientID=ClientID
 AutoDiscovery=AutoDiscovery
 AutoDiscoveryTopic=AutoDiscovery Topic
 
+#komoot.php
+KomootSettings="Komoot Settings"
+KomootSettingsInfo="Username (eMail) and password for your Komoot account"
+
 #superchargebingo.php
 SuperChargeBingo=SuperChargeBingo
 SuperChargeBingoComment=You can setup a link from TeslaLogger to SuperChargeBingo to perform automatic checkins at Superchargers.
