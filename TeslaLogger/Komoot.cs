@@ -61,9 +61,22 @@ namespace TeslaLogger
         private void Work()
         {
             Login();
-            List<int> tours = GetTours();
-            tours.Sort();
-            ParseTours(tours);
+            if (string.IsNullOrEmpty(token))
+            {
+                Logfile.Log($"Komoot_{carID}: Login failed!");
+            }
+            else { 
+                List<int> tours = GetTours();
+                if (tours.Count > 0)
+                {
+                    tours.Sort();
+                    ParseTours(tours);
+                }
+                else
+                {
+                    Logfile.Log($"Komoot_{carID}: no tours found!");
+                }
+            }
             Logfile.Log($"Komoot_{carID}: done");
         }
 
@@ -421,6 +434,8 @@ VALUES(
         private List<int> GetTours()
         {
             Logfile.Log($"Komoot_{carID}: getting tours ...");
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine();
             List<int> tours = new List<int>();
             bool nextPage = true;
             string url = $"https://api.komoot.de/v007/users/{user_id}/tours/";
@@ -436,7 +451,7 @@ VALUES(
                         {
                             string resultContent = result.Content.ReadAsStringAsync().Result;
                             Tools.DebugLog($"Komoot_{carID} GetTours result: {resultContent.Length}");
-                            /* expected JSOn
+                            /* expected JSON
 		{
     "_embedded": {
         "tours": [
@@ -571,12 +586,34 @@ VALUES(
                                 Logfile.Log($"Komoot_{carID}: found {jsonResult["_embedded"]["tours"].Count} tours ...");
                                 foreach (dynamic tour in jtours)
                                 {
+                                    // build tour info
+                                    if (tour.ContainsKey("id"))
+                                    {
+                                        sb.Append($"Tour id:{tour["id"]}");
+                                    }
+                                    if (tour.ContainsKey("type"))
+                                    {
+                                        sb.Append($" type:{tour["type"]}");
+                                    }
+                                    if (tour.ContainsKey("sport"))
+                                    {
+                                        sb.Append($" sport:{tour["sport"]}");
+                                    }
+                                    if (tour.ContainsKey("date"))
+                                    {
+                                        sb.Append($" date:{tour["date"]}");
+                                    }
+                                    sb.AppendLine();
                                     if (tour.ContainsKey("id") && tour.ContainsKey("type") && tour["type"].ToString().Equals("tour_recorded"))
                                     {
                                         if (Int32.TryParse(tour["id"].ToString(), out int tourid))
                                         {
                                             tours.Add(tourid);
                                         }
+                                    }
+                                    else if (tour.ContainsKey("id") && tour.ContainsKey("type"))
+                                    {
+                                        Logfile.Log($"Komoot_{carID}: tour {tour["id"]} skipped, type: {tour["type"]} ...");
                                     }
                                 }
                             }
@@ -585,6 +622,7 @@ VALUES(
                 }
             }
             Tools.DebugLog("GetTours() -> " + string.Join(",", tours));
+            Logfile.Log($"Komoot_{carID}: Tours:" + sb.ToString());
             return tours;
         }
 
@@ -600,7 +638,7 @@ VALUES(
                     if (result.IsSuccessStatusCode)
                     {
                         string resultContent = result.Content.ReadAsStringAsync().Result;
-                        Tools.DebugLog($"Komoot_{{carID}} login result: {resultContent.Length}");
+                        Tools.DebugLog($"Komoot_{carID} login result: {resultContent.Length}");
                         /* expected JSON
 {
     "email": "abc@xyz.net",

@@ -478,8 +478,8 @@ AutoDiscovery=AutoDiscovery
 AutoDiscoveryTopic=AutoDiscovery Topic
 
 #komoot.php
-KomootSettings="Komoot Settings"
-KomootSettingsInfo="Username (eMail) and password for your Komoot account"
+KomootSettings=Komoot Settings
+KomootSettingsInfo=Username (eMail) and password for your Komoot account
 
 #superchargebingo.php
 SuperChargeBingo=SuperChargeBingo
