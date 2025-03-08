@@ -301,19 +301,22 @@ namespace TeslaLogger
                     }
                     else if (key == "PreconditioningEnabled")
                     {
-                        bool preconditioning = false;
-
                         string v = value["stringValue"];
-                        if (v == "True")
-                            preconditioning = true;
-
-                        bool v1 = value["booleanValue"];
-                        if (v1)
-                            preconditioning = true;
-
-                        car.CurrentJSON.current_is_preconditioning = preconditioning;
-                        Log("Preconditioning: " + preconditioning);
-                        car.CurrentJSON.CreateCurrentJSON();
+                        if (v == null)
+                        {
+                            v = value["booleanValue"];
+                            if (v == null)
+                            {
+                                continue;
+                            }
+                        }
+                        v = v.ToLower(CultureInfo.InvariantCulture);
+                        if (bool.TryParse(v, out bool preconditioning))
+                        {
+                            car.CurrentJSON.current_is_preconditioning = preconditioning;
+                            Log("Preconditioning: " + preconditioning);
+                            car.CurrentJSON.CreateCurrentJSON();
+                        }
                     }
                     else if (key == "OutsideTemp")
                     {
@@ -702,12 +705,20 @@ namespace TeslaLogger
                     }
                     else if (key == "Locked")
                     {
-                        string Locked = value["stringValue"];
-                        if (bool.TryParse(Locked, out bool l))
+                        string v = value["stringValue"];
+                        if (v == null)
+                        {
+                            v = value["booleanValue"];
+                            if (v == null)
+                            {
+                                continue;
+                            }
+                        }
+                        v = v.ToLower(CultureInfo.InvariantCulture);
+                        if (bool.TryParse(v, out bool l))
                         {
                             car.teslaAPIState.AddValue("locked", "bool", l, Tools.ToUnixTime(d), "vehicle_state");
                             car.CurrentJSON.CreateCurrentJSON();
-
                         }
                     }
                     else if (key.EndsWith("Window"))
