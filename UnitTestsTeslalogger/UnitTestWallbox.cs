@@ -67,9 +67,9 @@ namespace UnitTestsTeslalogger
             var version = v.GetVersion();
             string ret = v.ToString();
             Console.WriteLine(ret);
-            Assert.AreEqual(441759, kwh);
+            Assert.AreEqual(441.759, kwh);
             Assert.AreEqual(false, charging);
-            Assert.AreEqual(123456789, utility_meter_kwh);
+            Assert.AreEqual(123456.789, utility_meter_kwh);
             Assert.AreEqual("2.1.7-Beta.2", version);
         }
 
