@@ -666,6 +666,9 @@ namespace TeslaLogger
 
                             if (doors is JObject doorValues)
                             {
+                                foreach (var dm in doorMapping) // close all doors
+                                    car.teslaAPIState.AddValue(dm.Value, "int", 0, Tools.ToUnixTime(d), "vehicle_state");
+                               
                                 foreach (var door in doorValues)
                                 {
                                     string originalKey = door.Key;
@@ -674,14 +677,7 @@ namespace TeslaLogger
                                     // Übersetzung des Türnamens
                                     if (doorMapping.TryGetValue(originalKey, out string shortKey))
                                     {
-                                        if (isOpen)
-                                        {
-                                            car.teslaAPIState.AddValue(shortKey, "int", 1, Tools.ToUnixTime(d), "vehicle_state");
-                                        }
-                                        else
-                                        {
-                                            car.teslaAPIState.AddValue(shortKey, "int", 0, Tools.ToUnixTime(d), "vehicle_state");
-                                        }
+                                        car.teslaAPIState.AddValue(shortKey, "int", isOpen ? 1 : 0, Tools.ToUnixTime(d), "vehicle_state");
                                     }
                                 }
                             }
