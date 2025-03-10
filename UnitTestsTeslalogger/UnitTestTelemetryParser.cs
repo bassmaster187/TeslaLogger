@@ -409,6 +409,10 @@ namespace UnitTestsTeslalogger
                     CheckDoors(c, true, true, true, true, true, true);
                 else if (i == 15)
                     CheckDoors(c, true, true, true, true, false, true);
+                else if(i == 16)
+                    CheckDoors(c, false, false, true, true, false, false);
+                else if (i == 17)
+                    CheckDoors(c, false, false, false, false, false, false);
 
             }
         }
