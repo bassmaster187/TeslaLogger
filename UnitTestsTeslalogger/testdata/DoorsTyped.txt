@@ -1,0 +1,18 @@
+{ "data": [ { "key": "DoorState", "value": { "doorValue": { } } } ], "createdAt": "2025-03-10T08:47:33.520131215Z", "vin": "5YJ3E7EA3LF700000" }
+{ "data": [ { "key": "DoorState", "value": { "doorValue": { "DriverFront": true, "TrunkFront": true } } } ], "createdAt": "2025-03-10T08:47:43.517217233Z", "vin": "5YJ3E7EA3LF700000" }
+{ "data": [ { "key": "DoorState", "value": { "doorValue": { "TrunkFront": true } } } ], "createdAt": "2025-03-10T08:47:53.518005227Z", "vin": "5YJ3E7EA3LF700000" }
+{ "data": [ { "key": "DoorState", "value": { "doorValue": { "TrunkFront": true } } } ], "createdAt": "2025-03-10T08:48:03.517498647Z", "vin": "5YJ3E7EA3LF700000" }
+{ "data": [ { "key": "DoorState", "value": { "doorValue": { } } } ], "createdAt": "2025-03-10T08:48:13.517397857Z", "vin": "5YJ3E7EA3LF700000" }
+{ "data": [ { "key": "DoorState", "value": { "doorValue": { "TrunkRear": true } } } ], "createdAt": "2025-03-10T08:48:23.517817602Z", "vin": "5YJ3E7EA3LF700000" }
+{ "data": [ { "key": "DoorState", "value": { "doorValue": { } } } ], "createdAt": "2025-03-10T08:48:33.517304354Z", "vin": "5YJ3E7EA3LF700000" }
+{ "data": [ { "key": "DoorState", "value": { "doorValue": { "PassengerFront": true } } } ], "createdAt": "2025-03-10T08:49:03.517272821Z", "vin": "5YJ3E7EA3LF700000" }
+{ "data": [ { "key": "DoorState", "value": { "doorValue": { } } } ], "createdAt": "2025-03-10T08:49:13.517447118Z", "vin": "5YJ3E7EA3LF700000" }
+{ "data": [ { "key": "DoorState", "value": { "doorValue": { "PassengerRear": true } } } ], "createdAt": "2025-03-10T08:49:23.517304623Z", "vin": "5YJ3E7EA3LF700000" }
+{ "data": [ { "key": "DoorState", "value": { "doorValue": { } } } ], "createdAt": "2025-03-10T08:49:33.517150570Z", "vin": "5YJ3E7EA3LF700000" }
+{ "data": [ { "key": "DoorState", "value": { "doorValue": { "DriverRear": true } } } ], "createdAt": "2025-03-10T08:49:43.517585552Z", "vin": "5YJ3E7EA3LF700000" }
+{ "data": [ { "key": "DoorState", "value": { "doorValue": { "DriverFront": true, "PassengerFront": true, "DriverRear": true, "TrunkRear": true } } } ], "createdAt": "2025-03-10T08:49:53.517604940Z", "vin": "5YJ3E7EA3LF700000" }
+{ "data": [ { "key": "DoorState", "value": { "doorValue": { "DriverFront": true, "PassengerFront": true, "DriverRear": true, "TrunkFront": true, "TrunkRear": true } } } ], "createdAt": "2025-03-10T08:50:03.517266541Z", "vin": "5YJ3E7EA3LF700000" }
+{ "data": [ { "key": "DoorState", "value": { "doorValue": { "DriverFront": true, "PassengerFront": true, "DriverRear": true, "PassengerRear": true, "TrunkFront": true, "TrunkRear": true } } } ], "createdAt": "2025-03-10T08:50:13.516946550Z", "vin": "5YJ3E7EA3LF700000" }
+{ "data": [ { "key": "DoorState", "value": { "doorValue": { "DriverFront": true, "PassengerFront": true, "DriverRear": true, "TrunkFront": true, "TrunkRear": true } } } ], "createdAt": "2025-03-10T08:50:31.517462412Z", "vin": "5YJ3E7EA3LF700000" }
+{ "data": [ { "key": "DoorState", "value": { "doorValue": { "DriverFront": true, "PassengerFront": true } } } ], "createdAt": "2025-03-10T08:50:41.517146563Z", "vin": "5YJ3E7EA3LF700000" }
+{ "data": [ { "key": "DoorState", "value": { "doorValue": { } } } ], "createdAt": "2025-03-10T08:50:51.517596782Z", "vin": "5YJ3E7EA3LF700000" }

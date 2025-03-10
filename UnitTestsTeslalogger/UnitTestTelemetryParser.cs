@@ -364,6 +364,81 @@ namespace UnitTestsTeslalogger
         }
 
         [TestMethod]
+        public void DoorsTyped()
+        {
+            Car c = new Car(0, "", "", 0, "", DateTime.Now, "", "", "", "", "", "5YJ3E7EA3LF700000", "", null, false);
+
+            var telemetry = new TelemetryParser(c);
+            telemetry.databaseCalls = false;
+
+            var lines = LoadData("../../testdata/DoorsTyped.txt");
+
+            for (int i = 0; i < lines.Count; i++)
+            {
+                telemetry.handleMessage(lines[i]);
+
+                if (i == 0)
+                    CheckDoors(c, false, false, false, false, false, false);
+                else if (i == 1)
+                    CheckDoors(c, true, false, true, false, false, false);
+                else if (i == 2)
+                    CheckDoors(c, true, false, false, false, false, false);
+                else if (i == 3)
+                    CheckDoors(c, true, false, false, false, false, false);
+                else if (i == 4)
+                    CheckDoors(c, false, false, false, false, false, false);
+                else if (i == 5)
+                    CheckDoors(c, false, true, false, false, false, false);
+                else if (i == 6)
+                    CheckDoors(c, false, false, false, false, false, false);
+                else if (i == 7)
+                    CheckDoors(c, false, false, false, true, false, false);
+                else if (i == 8)
+                    CheckDoors(c, false, false, false, false, false, false);
+                else if (i == 9)
+                    CheckDoors(c, false, false, false, false, true, false);
+                else if (i == 10)
+                    CheckDoors(c, false, false, false, false, false, false);
+                else if (i == 11)
+                    CheckDoors(c, false, false, false, false, false, true);
+                else if (i == 12)
+                    CheckDoors(c, false, true, true, true, false, true);
+                else if (i == 13)
+                    CheckDoors(c, true, true, true, true, false, true);
+                else if (i == 14)
+                    CheckDoors(c, true, true, true, true, true, true);
+                else if (i == 15)
+                    CheckDoors(c, true, true, true, true, false, true);
+                else if(i == 16)
+                    CheckDoors(c, false, false, true, true, false, false);
+                else if (i == 17)
+                    CheckDoors(c, false, false, false, false, false, false);
+
+            }
+        }
+
+        void CheckDoors(Car car, bool trunkFront, bool trunkRear, bool driverFront, bool passengerFront, bool pessengerRear, bool driverRear)
+        {
+            if (car.teslaAPIState.GetInt("df", out int df) && df > 0 != driverFront)
+                Assert.Fail("DriverFront door state wrong!");
+
+            if (car.teslaAPIState.GetInt("ft", out int ft) && ft > 0 != trunkFront)
+                Assert.Fail("TrunkFront door state wrong!");
+
+            if (car.teslaAPIState.GetInt("rt", out int rt) && rt > 0 != trunkRear)
+                Assert.Fail("TrunkRear door state wrong!");
+            
+            if (car.teslaAPIState.GetInt("pf", out int pf) && pf > 0 != passengerFront)
+                Assert.Fail("PassengerFront door state wrong!");
+
+            if (car.teslaAPIState.GetInt("pr", out int pr) && pr > 0 != pessengerRear)
+                Assert.Fail("PessengerRear door state wrong!");
+
+            if (car.teslaAPIState.GetInt("dr", out int dr) && dr > 0 != driverRear)
+                Assert.Fail("DriverRear door state wrong!");
+        }
+
+        [TestMethod]
         public void DrivingBySpeed_typed()
         {
             Car c = new Car(0, "", "", 0, "", DateTime.Now, "", "", "", "", "", "XP7YGCEK9PB000000", "", null, false);

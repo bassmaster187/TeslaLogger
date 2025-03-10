@@ -1,3 +1,9 @@
+# Version 1.63.2
+- faster logging (positions every 10 seconds)
+- Komoot integration (admin panel / extras / Komoot Settings)
+- New Wallbox: Openwb 2
+- Local Fleet Telemetry support with ZMQ
+
 # Version 1.63.0
 - Stable Version
 
