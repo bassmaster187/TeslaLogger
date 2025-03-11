@@ -30,7 +30,8 @@ namespace TeslaLogger
         private static readonly Dictionary<string, string> EndPoints = new Dictionary<string, string>()
         {
             { "KomootListSettings", "/komoot/listSettings" },
-            { "KomootSaveSettings", "/komoot/saveSettings" }
+            { "KomootSaveSettings", "/komoot/saveSettings" },
+            { "KomootReimport" , "/komoot/reimport" }
         };
 
         public Komoot(int CarID, string Username, string Password)
@@ -80,7 +81,7 @@ namespace TeslaLogger
             Logfile.Log($"Komoot_{carID}: done");
         }
 
-        private void ParseTours(List<int> tours)
+        private void ParseTours(List<int> tours, bool dumpJSON = false)
         {
             string KVSkey = $"Komoot_{carID}_Max_Tour_ID";
             foreach (int tourid in tours)
@@ -89,6 +90,7 @@ namespace TeslaLogger
                 {
                     maxTourID = 0;
                 }
+                Logfile.Log($"Komoot_{carID}: parsing tours newer than tourID {maxTourID} ...");
                 if (tourid > maxTourID)
                 {
                     Logfile.Log($"Komoot_{carID}: getting tour {tourid} ...");
@@ -102,6 +104,10 @@ namespace TeslaLogger
                             {
                                 string resultContent = result.Content.ReadAsStringAsync().Result;
                                 Tools.DebugLog($"Komoot_{{carID}} GetTour({tourid}) result: {resultContent.Length}");
+                                if (dumpJSON)
+                                {
+                                    Logfile.Log($"Komoot_{carID}: GetTour({tourid}) JSON:" + Environment.NewLine + resultContent);
+                                }
                                 /* expected JSON
 {
     "id": 987654321,
@@ -301,11 +307,46 @@ namespace TeslaLogger
                                                 }
                                             }
                                         }
+                                        else
+                                        {
+                                            StringBuilder sb = new StringBuilder();
+                                            sb.AppendLine();
+                                            sb.Append("lat:");
+                                            sb.AppendLine(jsonResult.ContainsKey("lat"));
+                                            sb.Append("lng:");
+                                            sb.AppendLine(jsonResult.ContainsKey("lng"));
+                                            sb.Append("alt:");
+                                            sb.AppendLine(jsonResult.ContainsKey("alt"));
+                                            sb.Append("t:");
+                                            sb.AppendLine(jsonResult.ContainsKey("t"));
+                                            Logfile.Log($"Komoot_{carID}: parsing tours error - missing JSON contents" + sb.ToString());
+                                        }
                                     }
                                     if (firstPosID > 0 && lastPosID > 0)
                                     {
                                         CreateDriveState(carID, start, firstPosID, end, lastPosID);
                                     }
+                                }
+                                else
+                                {
+                                    StringBuilder sb = new StringBuilder();
+                                    sb.AppendLine();
+                                    sb.Append("date:");
+                                    sb.AppendLine(jsonResult.ContainsKey("date"));
+                                    sb.Append("_embedded:");
+                                    sb.AppendLine(jsonResult.ContainsKey("_embedded"));
+                                    if (jsonResult.ContainsKey("_embedded"))
+                                    {
+                                        sb.Append("_embedded.coordinates:");
+                                        sb.AppendLine(jsonResult["_embedded"].ContainsKey("coordinates"));
+                                        if (jsonResult["_embedded"].ContainsKey("coordinates"))
+                                        {
+                                            sb.Append("_embedded.coordinates.items:");
+                                            sb.AppendLine(jsonResult["_embedded"]["coordinates"].ContainsKey("items"));
+                                        }
+                                    }
+                                    sb.AppendLine();
+                                    Logfile.Log($"Komoot_{carID}: parsing tours error - missing JSON contents" + sb.ToString() + resultContent);
                                 }
                             }
                         }
@@ -431,7 +472,7 @@ VALUES(
             return posid;
         }
 
-        private List<int> GetTours()
+        private List<int> GetTours(bool dumpJSON = false)
         {
             Logfile.Log($"Komoot_{carID}: getting tours ...");
             StringBuilder sb = new StringBuilder();
@@ -451,6 +492,10 @@ VALUES(
                         {
                             string resultContent = result.Content.ReadAsStringAsync().Result;
                             Tools.DebugLog($"Komoot_{carID} GetTours result: {resultContent.Length}");
+                            if (dumpJSON)
+                            {
+                                Logfile.Log($"Komoot_{carID}: tours JSON:" + Environment.NewLine + resultContent);
+                            }
                             /* expected JSON
 		{
     "_embedded": {
@@ -610,6 +655,10 @@ VALUES(
                                         {
                                             tours.Add(tourid);
                                         }
+                                        else
+                                        {
+                                            Logfile.Log($"Komoot_{carID}: error parsing tour ID {tour["id"]}");
+                                        }
                                     }
                                     else if (tour.ContainsKey("id") && tour.ContainsKey("type"))
                                     {
@@ -706,11 +755,29 @@ VALUES(
                 case bool _ when request.Url.LocalPath.Equals(EndPoints["KomootSaveSettings"], StringComparison.Ordinal):
                     KomootSaveSettings(request, response);
                     break;
+                case bool _ when request.Url.LocalPath.Equals(EndPoints["KomootReimport"], StringComparison.Ordinal):
+                    KomootReimport(request, response);
+                    break;
                 default:
                     response.StatusCode = (int)HttpStatusCode.NotFound;
                     WebServer.WriteString(response, @"URL Not Found!");
                     break;
             }
+        }
+
+        private static void KomootReimport(HttpListenerRequest request, HttpListenerResponse response)
+        {
+            // TODO
+            /* 
+             * try to reimport all trips
+             * 
+             * foreach KOMOOT: car entry do
+             * 1) login
+             * 2) get all trips unfiltered
+             * 3) analyze each trip
+             *   3a) try to find existing trip in drivestate, 1st pos with lat+lng+timestamp exists
+             *   3b) only import nonexisting drivestates
+             */
         }
 
         private static void KomootSaveSettings(HttpListenerRequest request, HttpListenerResponse response)
