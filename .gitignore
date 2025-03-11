@@ -116,3 +116,7 @@ cmd_updated.txt
 /MQTTClient/.vs
 /OSMMapGenerator/.vs
 /TeslaLogger/.vs
+TeslaLogger/bin/Debug/net8.0/TeslaLoggerNET8.dll
+TeslaLogger/bin/Debug/net8.0/TeslaLoggerNET8.exe
+TeslaLogger/bin/Debug/net8.0/TeslaLoggerNET8.pdb
+TeslaLogger/copy_release_to_main_branch.cmd
