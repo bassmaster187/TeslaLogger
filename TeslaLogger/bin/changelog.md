@@ -1,3 +1,6 @@
+# Version 1.63.3
+- Bugfixes
+
 # Version 1.63.2
 - faster logging (positions every 10 seconds)
 - Komoot integration (admin panel / extras / Komoot Settings)
