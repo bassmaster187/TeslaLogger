@@ -20,12 +20,27 @@ namespace TeslaLogger
 {
     public class Komoot
     {
+        private class KomootLoginInfo
+        {
+            internal int carID;
+            internal string username;
+            internal string password;
+            internal string user_id;
+            internal string token;
+            internal KomootLoginInfo(int carID, string username, string password, string user_id, string token)
+            {
+                this.carID = carID;
+                this.username = username;
+                this.password = password;
+                this.user_id = user_id;
+                this.token = token;
+            }
+        }
+
         private readonly int interval = 6 * 60 * 60; // 6 hours in seconds
         private readonly int carID = -1;
         private readonly string username = string.Empty;
         private readonly string password = string.Empty;
-        private string user_id = string.Empty;
-        private string token = string.Empty;
 
         private static readonly Dictionary<string, string> EndPoints = new Dictionary<string, string>()
         {
@@ -37,8 +52,8 @@ namespace TeslaLogger
         public Komoot(int CarID, string Username, string Password)
         {
             this.carID = CarID;
-            username = Username;
-            password = Password;
+            this.username = Username;
+            this.password = Password;
         }
 
         // main loop
@@ -61,17 +76,18 @@ namespace TeslaLogger
 
         private void Work()
         {
-            Login();
-            if (string.IsNullOrEmpty(token))
+            KomootLoginInfo kli = new KomootLoginInfo(carID, username, password, string.Empty, string.Empty);
+            Login(kli);
+            if (string.IsNullOrEmpty(kli.token))
             {
                 Logfile.Log($"Komoot_{carID}: Login failed!");
             }
             else { 
-                List<int> tours = GetTours();
+                List<int> tours = GetTours(kli);
                 if (tours.Count > 0)
                 {
                     tours.Sort();
-                    ParseTours(tours);
+                    ParseTours(kli, tours);
                 }
                 else
                 {
@@ -81,32 +97,32 @@ namespace TeslaLogger
             Logfile.Log($"Komoot_{carID}: done");
         }
 
-        private void ParseTours(List<int> tours, bool dumpJSON = false)
+        private static void ParseTours(KomootLoginInfo kli, List<int> tours, bool dumpJSON = false)
         {
-            string KVSkey = $"Komoot_{carID}_Max_Tour_ID";
+            string KVSkey = $"Komoot_{kli.carID}_Max_Tour_ID";
             foreach (int tourid in tours)
             {
                 if (KVS.Get(KVSkey, out int maxTourID) == KVS.FAILED)
                 {
                     maxTourID = 0;
                 }
-                Logfile.Log($"Komoot_{carID}: parsing tours newer than tourID {maxTourID} ...");
+                Logfile.Log($"Komoot_{kli.carID}: parsing tours newer than tourID {maxTourID} ...");
                 if (tourid > maxTourID)
                 {
-                    Logfile.Log($"Komoot_{carID}: getting tour {tourid} ...");
+                    Logfile.Log($"Komoot_{kli.carID}: getting tour {tourid} ...");
                     using (HttpClient httpClient = new HttpClient())
                     {
-                        httpClient.DefaultRequestHeaders.Add("Authorization", "Basic " + Convert.ToBase64String(Encoding.UTF8.GetBytes($"{user_id}:{token}")));
+                        httpClient.DefaultRequestHeaders.Add("Authorization", "Basic " + Convert.ToBase64String(Encoding.UTF8.GetBytes($"{kli.user_id}:{kli.token}")));
                         using (HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, new Uri($"https://api.komoot.de/v007/tours/{tourid}?_embedded=coordinates,way_types,surfaces,directions,participants,timeline&directions=v2&fields=timeline&format=coordinate_array&timeline_highlights_fields=tips,recommenders")))
                         {
                             HttpResponseMessage result = httpClient.SendAsync(request).Result;
                             if (result.IsSuccessStatusCode)
                             {
                                 string resultContent = result.Content.ReadAsStringAsync().Result;
-                                Tools.DebugLog($"Komoot_{{carID}} GetTour({tourid}) result: {resultContent.Length}");
+                                Tools.DebugLog($"Komoot_{kli.carID} GetTour({tourid}) result: {resultContent.Length}");
                                 if (dumpJSON)
                                 {
-                                    Logfile.Log($"Komoot_{carID}: GetTour({tourid}) JSON:" + Environment.NewLine + resultContent);
+                                    Logfile.Log($"Komoot_{kli.carID}: GetTour({tourid}) JSON:" + Environment.NewLine + resultContent);
                                 }
                                 /* expected JSON
 {
@@ -267,8 +283,8 @@ namespace TeslaLogger
                                     int lastPosID = 0;
                                     long t = 0;
                                     long prev_t = 0;
-                                    double odo = GetMaxOdo(carID);
-                                    Logfile.Log($"Komoot_{carID}: inserting {jsonResult["_embedded"]["coordinates"]["items"].Count} positions ...");
+                                    double odo = GetMaxOdo(kli.carID);
+                                    Logfile.Log($"Komoot_{kli.carID}: inserting {jsonResult["_embedded"]["coordinates"]["items"].Count} positions ...");
                                     foreach (dynamic pos in jsonResult["_embedded"]["coordinates"]["items"])
                                     {
                                         if (pos.ContainsKey("lat") && pos.ContainsKey("lng") && pos.ContainsKey("alt") && pos.ContainsKey("t"))
@@ -287,7 +303,7 @@ namespace TeslaLogger
                                                 if (firstPos)
                                                 {
                                                     firstPos = false;
-                                                    firstPosID = InsertPos(carID, lat, lng, start, speed, alt, odo);
+                                                    firstPosID = InsertPos(kli.carID, lat, lng, start, speed, alt, odo);
                                                 }
                                                 else
                                                 {
@@ -303,7 +319,7 @@ namespace TeslaLogger
                                                     speed = dist_km / (t - prev_t) * 3600000; // km/ms -> km/h
                                                     odo = odo + dist_km;
                                                     //Tools.DebugLog($"<{tourid}> {lat} {lng} {alt} {start.AddMilliseconds(t)} dist:{dist_km} speed:{speed}");
-                                                    lastPosID = InsertPos(carID, lat, lng, end, speed, alt, odo);
+                                                    lastPosID = InsertPos(kli.carID, lat, lng, end, speed, alt, odo);
                                                 }
                                             }
                                         }
@@ -319,12 +335,12 @@ namespace TeslaLogger
                                             sb.AppendLine(jsonResult.ContainsKey("alt"));
                                             sb.Append("t:");
                                             sb.AppendLine(jsonResult.ContainsKey("t"));
-                                            Logfile.Log($"Komoot_{carID}: parsing tours error - missing JSON contents" + sb.ToString());
+                                            Logfile.Log($"Komoot_{kli.carID}: parsing tours error - missing JSON contents" + sb.ToString());
                                         }
                                     }
                                     if (firstPosID > 0 && lastPosID > 0)
                                     {
-                                        CreateDriveState(carID, start, firstPosID, end, lastPosID);
+                                        CreateDriveState(kli.carID, start, firstPosID, end, lastPosID);
                                     }
                                 }
                                 else
@@ -346,7 +362,7 @@ namespace TeslaLogger
                                         }
                                     }
                                     sb.AppendLine();
-                                    Logfile.Log($"Komoot_{carID}: parsing tours error - missing JSON contents" + sb.ToString() + resultContent);
+                                    Logfile.Log($"Komoot_{kli.carID}: parsing tours error - missing JSON contents" + sb.ToString() + resultContent);
                                 }
                             }
                         }
@@ -472,29 +488,29 @@ VALUES(
             return posid;
         }
 
-        private List<int> GetTours(bool dumpJSON = false)
+        private static List<int> GetTours(KomootLoginInfo kli, bool dumpJSON = false)
         {
-            Logfile.Log($"Komoot_{carID}: getting tours ...");
+            Logfile.Log($"Komoot_{kli.carID}: getting tours ...");
             StringBuilder sb = new StringBuilder();
             sb.AppendLine();
             List<int> tours = new List<int>();
             bool nextPage = true;
-            string url = $"https://api.komoot.de/v007/users/{user_id}/tours/";
+            string url = $"https://api.komoot.de/v007/users/{kli.user_id}/tours/";
             while (nextPage)
             {
                 using (HttpClient httpClient = new HttpClient())
                 {
-                    httpClient.DefaultRequestHeaders.Add("Authorization", "Basic " + Convert.ToBase64String(Encoding.UTF8.GetBytes($"{user_id}:{token}")));
+                    httpClient.DefaultRequestHeaders.Add("Authorization", "Basic " + Convert.ToBase64String(Encoding.UTF8.GetBytes($"{kli.user_id}:{kli.token}")));
                     using (HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, new Uri(url)))
                     {
                         HttpResponseMessage result = httpClient.SendAsync(request).Result;
                         if (result.IsSuccessStatusCode)
                         {
                             string resultContent = result.Content.ReadAsStringAsync().Result;
-                            Tools.DebugLog($"Komoot_{carID} GetTours result: {resultContent.Length}");
+                            Tools.DebugLog($"Komoot_{kli.carID} GetTours result: {resultContent.Length}");
                             if (dumpJSON)
                             {
-                                Logfile.Log($"Komoot_{carID}: tours JSON:" + Environment.NewLine + resultContent);
+                                Logfile.Log($"Komoot_{kli.carID}: tours JSON:" + Environment.NewLine + resultContent);
                             }
                             /* expected JSON
 		{
@@ -628,7 +644,7 @@ VALUES(
                             if (jsonResult.ContainsKey("_embedded") && jsonResult["_embedded"].ContainsKey("tours"))
                             {
                                 dynamic jtours = jsonResult["_embedded"]["tours"];
-                                Logfile.Log($"Komoot_{carID}: found {jsonResult["_embedded"]["tours"].Count} tours ...");
+                                Logfile.Log($"Komoot_{kli.carID}: found {jsonResult["_embedded"]["tours"].Count} tours ...");
                                 foreach (dynamic tour in jtours)
                                 {
                                     // build tour info
@@ -657,12 +673,12 @@ VALUES(
                                         }
                                         else
                                         {
-                                            Logfile.Log($"Komoot_{carID}: error parsing tour ID {tour["id"]}");
+                                            Logfile.Log($"Komoot_{kli.carID}: error parsing tour ID {tour["id"]}");
                                         }
                                     }
                                     else if (tour.ContainsKey("id") && tour.ContainsKey("type"))
                                     {
-                                        Logfile.Log($"Komoot_{carID}: tour {tour["id"]} skipped, type: {tour["type"]} ...");
+                                        Logfile.Log($"Komoot_{kli.carID}: tour {tour["id"]} skipped, type: {tour["type"]} ...");
                                     }
                                 }
                             }
@@ -671,23 +687,23 @@ VALUES(
                 }
             }
             Tools.DebugLog("GetTours() -> " + string.Join(",", tours));
-            Logfile.Log($"Komoot_{carID}: Tours:" + sb.ToString());
+            Logfile.Log($"Komoot_{kli.carID}: Tours:" + sb.ToString());
             return tours;
         }
 
-        private void Login()
+        private static KomootLoginInfo Login(KomootLoginInfo kli)
         {
-            Logfile.Log($"Komoot_{carID}: logging in as {username} ...");
+            Logfile.Log($"Komoot_{kli.carID}: logging in as {kli.username} ...");
             using (HttpClient httpClient = new HttpClient())
             {
-                httpClient.DefaultRequestHeaders.Add("Authorization", "Basic " + Convert.ToBase64String(Encoding.UTF8.GetBytes($"{username}:{password}")));
-                using (HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, new Uri($"https://api.komoot.de/v006/account/email/{username}/")))
+                httpClient.DefaultRequestHeaders.Add("Authorization", "Basic " + Convert.ToBase64String(Encoding.UTF8.GetBytes($"{kli.username}:{kli.password}")));
+                using (HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, new Uri($"https://api.komoot.de/v006/account/email/{kli.username}/")))
                 {
                     HttpResponseMessage result = httpClient.SendAsync(request).Result;
                     if (result.IsSuccessStatusCode)
                     {
                         string resultContent = result.Content.ReadAsStringAsync().Result;
-                        Tools.DebugLog($"Komoot_{carID} login result: {resultContent.Length}");
+                        Tools.DebugLog($"Komoot_{kli.carID} login result: {resultContent.Length}");
                         /* expected JSON
 {
     "email": "abc@xyz.net",
@@ -718,26 +734,27 @@ VALUES(
                             dynamic jsonUser = jsonResult["user"];
                             if (jsonUser.ContainsKey("displayname") && jsonResult.ContainsKey("username") && jsonResult.ContainsKey("password"))
                             {
-                                user_id = jsonResult["username"];
-                                token = jsonResult["password"];
-                                Logfile.Log($"Komoot_{carID}: logged in as {jsonUser["displayname"]}");
+                                kli.user_id = jsonResult["username"];
+                                kli.token = jsonResult["password"];
+                                Logfile.Log($"Komoot_{kli.carID}: logged in as {jsonUser["displayname"]}");
                             }
                             else
                             {
-                                Logfile.Log($"Komoot_{carID}: login failed - user JSON does not contain displayname");
+                                Logfile.Log($"Komoot_{kli.carID}: login failed - user JSON does not contain displayname");
                             }
                         }
                         else
                         {
-                            Logfile.Log($"Komoot_{carID}: login failed - JSON does not contain user");
+                            Logfile.Log($"Komoot_{kli.carID}: login failed - JSON does not contain user");
                         }
                     }
                     else
                     {
-                        Logfile.Log($"Komoot_{carID}: login failed ({result.StatusCode})");
+                        Logfile.Log($"Komoot_{kli.carID}: login failed ({result.StatusCode})");
                     }
                 }
             }
+            return kli;
         }
 
         internal static bool CanHandleRequest(HttpListenerRequest request)
