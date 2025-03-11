@@ -100,13 +100,13 @@ namespace TeslaLogger
         private static void ParseTours(KomootLoginInfo kli, List<int> tours, bool dumpJSON = false)
         {
             string KVSkey = $"Komoot_{kli.carID}_Max_Tour_ID";
+            if (KVS.Get(KVSkey, out int maxTourID) == KVS.FAILED)
+            {
+                maxTourID = 0;
+            }
+            Logfile.Log($"Komoot_{kli.carID}: parsing tours newer than tourID {maxTourID} ...");
             foreach (int tourid in tours)
             {
-                if (KVS.Get(KVSkey, out int maxTourID) == KVS.FAILED)
-                {
-                    maxTourID = 0;
-                }
-                Logfile.Log($"Komoot_{kli.carID}: parsing tours newer than tourID {maxTourID} ...");
                 if (tourid > maxTourID)
                 {
                     Logfile.Log($"Komoot_{kli.carID}: getting tour {tourid} ...");
@@ -782,7 +782,7 @@ VALUES(
             }
         }
 
-        private static void KomootReimport(HttpListenerRequest request, HttpListenerResponse response)
+        private static void KomootReimport(HttpListenerRequest _, HttpListenerResponse response)
         {
             // TODO
             /* 
@@ -795,6 +795,29 @@ VALUES(
              *   3a) try to find existing trip in drivestate, 1st pos with lat+lng+timestamp exists
              *   3b) only import nonexisting drivestates
              */
+            using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+            {
+                con.Open();
+                using (MySqlCommand cmd = new MySqlCommand(@"
+SELECT
+    id,
+    tesla_name,
+    tesla_password
+FROM
+    cars
+WHERE
+    tesla_name LIKE 'KOMOOT:%'", con))
+                {
+                    MySqlDataReader dr = SQLTracer.TraceDR(cmd);
+                    while (dr.Read() && dr[0] != DBNull.Value && dr[1] != DBNull.Value && dr[2] != DBNull.Value)
+                    {
+                        int carID = Convert.ToInt32(dr["id"], Tools.ciDeDE);
+                        string username = dr["tesla_name"].ToString();
+                        string password = dr["tesla_password"].ToString();
+                        KomootLoginInfo kli = new KomootLoginInfo(carID, username, password, string.Empty, string.Empty);
+                    }
+                }
+            }
         }
 
         private static void KomootSaveSettings(HttpListenerRequest request, HttpListenerResponse response)
