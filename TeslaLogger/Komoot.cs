@@ -307,7 +307,15 @@ namespace TeslaLogger
                                                 if (firstPos)
                                                 {
                                                     firstPos = false;
-                                                    firstPosID = InsertPos(kli.carID, lat, lng, start, speed, alt, odo);
+                                                    // if checkExistingTours is false, then this is a new tour and can be added
+                                                    if (!checkExistingTours)
+                                                    {
+                                                        firstPosID = InsertPos(kli.carID, lat, lng, start, speed, alt, odo);
+                                                    }
+                                                    else
+                                                    {
+                                                        // TODO
+                                                    }
                                                 }
                                                 else
                                                 {
@@ -327,6 +335,10 @@ namespace TeslaLogger
                                                     if (!checkExistingTours)
                                                     {
                                                         lastPosID = InsertPos(kli.carID, lat, lng, end, speed, alt, odo);
+                                                    }
+                                                    else
+                                                    {
+                                                        // TODO
                                                     }
                                                 }
                                             }
