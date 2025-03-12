@@ -245,7 +245,7 @@ namespace TeslaLogger
                     komootThread.Start();
                 }
                 String tesla_token = r["tesla_token"] as String ?? "";
-                if (tesla_token.StartsWith("OVMS:")) // OVMS Cars are not handled by Teslalogger
+                if (tesla_token.StartsWith("OVMS:", StringComparison.Ordinal)) // OVMS Cars are not handled by Teslalogger
                 {
                     if (!OVMSStarted)
                     {
