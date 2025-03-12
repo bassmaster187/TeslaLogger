@@ -2364,7 +2364,7 @@ namespace TeslaLogger
                     return;
                 }
             }
-            else if (car.CarType == "modelx" && car.CarSpecialType == "base" && year < 2021)
+            else if (car.CarType == "modelx" && (car.CarSpecialType == "base" || car.CarSpecialType == "founder") && year < 2021)
             {
                 if (car.TrimBadging == "75d")
                 {
