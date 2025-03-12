@@ -280,7 +280,6 @@ namespace TeslaLogger
                     CreateEmptyWeatherIniFile();
                     CheckBackupCrontab();
                 }, CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
-
             }
             catch (Exception ex)
             {
