@@ -1,49 +1,49 @@
 ﻿#Info
-INFO_important=
-INFO_FLEETAPI=
-INFO_RESTRICTED=
-INFO_VEHICLE_LOCATION=
+INFO_important="Önemli Bilgi"
+INFO_FLEETAPI="1 Ocak 2025'ten itibaren Tesla resmi Filo API'yi ücretli bir modele geçecek. ({LINK1}). Sonuç olarak, bir abonelik modeline geçmek ve Tesla, vergiler ve ödeme hizmeti sağlayıcı için masraflarını karşılamak için küçük aylık bir ücret ödemek zorunda kaldım.<br/><br/>Aynı zamanda, Tesla'nın Hizmet Şartları ({LINK2}) resmi olmayan Sahiplerin API'sinin kullanımını durdurmamı sağladı; aksi takdirde, bana karşı yasal eylem yapabilirler (§5.6.6 ve §5.6.11). Lütfen araçlarınızı ana giriş bilgilerini yeniden girince Filo API'sine gönderin.<br/><br/>Ne yazık ki, eski Model S/X araçları ( 2021'den önce icat edildi), Filo API'sini kullanmak için bir çözüm yoktur. Bu araçlar eski Sahibi API aracılığıyla çalışmaya devam edebilir ve Tesla'nın böyle durumlarda yasal bir eylem yapmasını beklemiyorum. Ancak, bu araçlar için hala bir bağış biçimi olarak abone olmayı seçebilirsiniz, çünkü kullanımları için Tesla ödemek zorunda değilim.<br/><br/>Tesla sunucu yükünü azaltmayı ve Fleet API ile gelir üretmeyi amaçladığından, resmi olmayan Sahibi API'sinin 1 Ocak 2025'te kapatılacağı muhtemeldir. Eski Model S/X araçlarının bu değişiklikten etkilenmediğini umuyoruz."
+INFO_RESTRICTED="Aktif bir abonelik olmadan, ne yazık ki Tesla'nızın maliyetlerini karşılayamıyoruz. Bu nedenle, işlevselliği ve özellikle konum güncellemelerinin sıklığını önemli ölçüde sınırlamak zorunda kalıyoruz."
+INFO_VEHICLE_LOCATION="Tesla, veri erişimi üzerinde daha ayrıntılı bir kontrol getirdi: {LINK1} <br>Üçüncü taraf uygulamaları konum bilgilerine erişim izni isteyebilir. Bu izni henüz vermediniz. Mart 2025'ten itibaren, gerekli izni vermediğiniz sürece hiçbir konum bilgisi paylaşılmayacaktır. Lütfen tekrar giriş yapın: {LINK2}."
 
 #Akku Trips.json
-Akku Trips=
-Start Trip=
-End Trip=
-Time=
-StartSOC=
-EndSOC=
-SOC diff=
-Start km=
-End km=
-Start mi=
-End mi=
-kmDiff=
-Max Range=
-Ø Verbrauch=
-Tage=
-Save=
+Akku Trips="Pil Kullanımı (Sürüşte)"
+Start Trip="Seyahati Başlat"
+End Trip="Seyahati Bitir"
+Time="Tarih"
+StartSOC="Başlangıç Şarj Seviyesi"
+EndSOC="Bitiş Şarj Seviyesi"
+SOC diff="Şarj Seviyesi Farkı"
+Start km="Başlangıç KM"
+End km="Bitiş KM"
+Start mi="Başlangıç Mil"
+End mi="Bitiş Mil"
+kmDiff="KM Fark"
+Max Range="Maks Menzil"
+Ø Verbrauch="Ort. Tüketim"
+Tage="Günler"
+Save="Kaydet"
 
 #Degradation.json
-Degradation=
-Maximalreichweite [km]=
-Maximalreichweite [mi]=
-km Stand [km]=
-mi Stand [mi]=
-Odometer [mi]=
-Max. Reichweite (Monatsmittel) [km]=
-Max. Reichweite (Monatsmittel) [mi]=
+Degradation="Aşınma"
+Maximalreichweite [km]="Maks Menzil (KM)"
+Maximalreichweite [mi]="Maks Menzil (Mil)"
+km Stand [km]="Mesafe [KM]"
+mi Stand [mi]="Mesafe [Mil]"
+Odometer [mi]="Kilometre Sayacı [Mil]"
+Max. Reichweite (Monatsmittel) [km]="Maks Menzil (aylık ort) [km]"
+Max. Reichweite (Monatsmittel) [mi]="Maks Menzil (aylık ort) [Mil]"
 
 #Ladehistorie.json
-Ladehistorie=
-Startdatum=
-Enddatum=
-geladen kWh=
-km Stand=
-Adresse=
+Ladehistorie="Şarj Geçmişi"
+Startdatum="Başlangıç Tarihi"
+Enddatum="Bitiş Tarihi"
+geladen kWh="kWSa Şarj Edilen"
+km Stand="Kilometre Sayacı"
+Adresse="Adres"
 TR km Start=
 TR km Ende=
-SOC Ende=
-100% TR=
-Minuten=
+SOC Ende="Şarj Seviyesi Bitiş"
+100% TR="100% TR"
+Minuten="Dakika"
 TR mi Start=
 TR mi Ende=
 ØkW=
