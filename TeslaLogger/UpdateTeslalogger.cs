@@ -141,6 +141,8 @@ namespace TeslaLogger
 
                 GetChargingHistoryV2Service.CheckSchema();
 
+                Komoot.CheckSchema();
+
                 Logfile.Log("DBSchema Update finished.");
 
                 // end of schema update
