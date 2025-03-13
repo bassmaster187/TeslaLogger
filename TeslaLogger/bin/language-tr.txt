@@ -39,30 +39,30 @@ Enddatum="Bitiş Tarihi"
 geladen kWh="kWSa Şarj Edilen"
 km Stand="Kilometre Sayacı"
 Adresse="Adres"
-TR km Start=
-TR km Ende=
+TR km Start="TR km Başlangıç"
+TR km Ende="TR km Bitiş"
 SOC Ende="Şarj Seviyesi Bitiş"
 100% TR="100% TR"
 Minuten="Dakika"
-TR mi Start=
-TR mi Ende=
-ØkW=
+TR mi Start="TR Mil Başlangıç"
+TR mi Ende="TR Mil Bitiş"
+ØkW="Ort. kW"
 
 #Ladestatistik.json
-Ladestatistik=
-Letzte Ladung=
-Ort=
-Ø geladen kWh=
-Ladezeit h=
-Ø SOC=
-Max SOC=
-Anzahl Ladungen=
+Ladestatistik="Şarj İstatistikleri"
+Letzte Ladung="Son Şarj"
+Ort="Adres"
+Ø geladen kWh="Ort. Yapılan Şarj kWh"
+Ladezeit h="Şarj Süresi Saat"
+Ø SOC="Ort. Şarj Yüzdesi"
+Max SOC="Maks Şarj Yüzdesi"
+Anzahl Ladungen="Şarj Kont"
 Anzahl=
-Geladen=
-Ladezeit=
-Anz. Ladungen=
-Ladehub=
-PV=
+Geladen="Şarj"
+Ladezeit="Şarj Zamanı"
+Anz. Ladungen="Miktar"
+Ladehub="Şarj Aralığı"
+PV="Solar"
 
 #SOC Ladestatistik.json
 SOC Ladestatistik=
@@ -122,7 +122,7 @@ Letzte Fahrt=
 Ø Verbrauch kWh/100km=
 Ø Verbraucht kWh=
 Anzahl Trips=
-Anzahl=
+Anzahl="Kont"
 Fahrzeug=
 
 #Vampir Drain.json
