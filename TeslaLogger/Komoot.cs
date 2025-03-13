@@ -104,10 +104,14 @@ namespace TeslaLogger
             {
                 maxTourID = 0;
             }
+            if (checkExistingTours)
+            {
+                maxTourID = 0;
+            }
             Logfile.Log($"Komoot_{kli.carID}: parsing tours newer than tourID {maxTourID} ...");
             foreach (int tourid in tours)
             {
-                if (tourid > maxTourID || checkExistingTours)
+                if (tourid > maxTourID)
                 {
                     Logfile.Log($"Komoot_{kli.carID}: getting tour {tourid} ...");
                     using (HttpClient httpClient = new HttpClient())
@@ -303,7 +307,15 @@ namespace TeslaLogger
                                                 if (firstPos)
                                                 {
                                                     firstPos = false;
-                                                    firstPosID = InsertPos(kli.carID, lat, lng, start, speed, alt, odo);
+                                                    // if checkExistingTours is false, then this is a new tour and can be added
+                                                    if (!checkExistingTours)
+                                                    {
+                                                        firstPosID = InsertPos(kli.carID, lat, lng, start, speed, alt, odo);
+                                                    }
+                                                    else
+                                                    {
+                                                        // TODO
+                                                    }
                                                 }
                                                 else
                                                 {
@@ -323,6 +335,10 @@ namespace TeslaLogger
                                                     if (!checkExistingTours)
                                                     {
                                                         lastPosID = InsertPos(kli.carID, lat, lng, end, speed, alt, odo);
+                                                    }
+                                                    else
+                                                    {
+                                                        // TODO
                                                     }
                                                 }
                                             }
@@ -792,7 +808,7 @@ VALUES(
 
         private static void KomootReimport(HttpListenerRequest _, HttpListenerResponse response)
         {
-            Tools.DebugLog("KomootReimport");
+            Logfile.Log("KomootReimport");
             // TODO
             /* 
              * try to reimport all trips
@@ -822,7 +838,7 @@ WHERE
                     {
                         int carID = Convert.ToInt32(dr["id"], Tools.ciDeDE);
                         string username = dr["tesla_name"].ToString().Replace("KOMOOT:", string.Empty);
-                        Tools.DebugLog($"KomootReimport carID {carID} username {username}");
+                        Logfile.Log($"KomootReimport carID {carID} username {username}");
                         string password = dr["tesla_password"].ToString();
                         KomootLoginInfo kli = new KomootLoginInfo(carID, username, password, string.Empty, string.Empty);
                         kli = Login(kli);
@@ -833,10 +849,21 @@ WHERE
                         else
                         {
                             List<int> tours = GetTours(kli, true);
+                            Logfile.Log($"KomootReimport carID {kli.carID} tours found: {tours.Count}");
+                            if (tours.Count > 0)
+                            {
+                                tours.Sort();
+                                ParseTours(kli, tours, true, true);
+                            }
+                            else
+                            {
+                                Logfile.Log($"KomootReimport carID {kli.carID} no tours found!");
+                            }
                         }
                     }
                 }
             }
+            Logfile.Log("KomootReimport done");
             WebServer.WriteString(response, "OK");
         }
 
