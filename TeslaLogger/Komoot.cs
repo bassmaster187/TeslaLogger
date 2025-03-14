@@ -48,7 +48,6 @@ namespace TeslaLogger
             internal Position lastPosition;
             internal string json = "{}";
             internal DateTime end;
-            private double distance_correction_factor = 1.0;
 
             internal Dictionary<int, Position> positions = new Dictionary<int, Position>();
 
@@ -75,20 +74,6 @@ namespace TeslaLogger
                     sb.AppendLine($" {key} - ({positions[key].lat},{positions[key].lng}) t:{positions[key].delta_t} s:{positions[key].speed}");
                 }
                 return sb.ToString();
-            }
-
-            internal void calculateTourDistance()
-            {
-                double dist = 0.0;
-                if (!double.IsNaN(distance_m))
-                {
-                    foreach (int posID in positions.Keys)
-                    {
-                        dist = dist + positions[posID].dist_km;
-                    }
-                    distance_correction_factor = distance_m / dist;
-                }
-                Tools.DebugLog($"calculateTourDistance {tourID} distance_m:{distance_m} calculated:{dist} distance_correction_factor:{distance_correction_factor}");
             }
 
             internal class Position
@@ -130,16 +115,7 @@ namespace TeslaLogger
                 {
                     // calculate distance and speed with previous pos
                     // inspired by https://github.com/mapado/haversine/blob/main/haversine/haversine.py
-                    Position pos1 = this;
-                    Position pos2 = other;
-                    double AVG_EARTH_RADIUS_KM = 6371.0088;
-                    double lat1 = pos1.lat * Math.PI / 180;
-                    double lng1 = pos1.lng * Math.PI / 180;
-                    double lat2 = pos2.lat * Math.PI / 180;
-                    double lng2 = pos2.lng * Math.PI / 180;
-                    double d = Math.Pow(Math.Sin((lat2 - lat1) * 0.5), 2) + Math.Cos(lat1) * Math.Cos(lat2) * Math.Pow(Math.Sin((lng2 - lng1) * 0.5), 2);
-                    double dist_km = AVG_EARTH_RADIUS_KM * 2 * Math.Asin(Math.Sqrt(d));
-                    double speed = dist_km / Math.Abs(pos1.delta_t - pos2.delta_t) * 3600000; // km/ms -> km/h
+                    double speed = this.dist_km / Math.Abs(this.delta_t - other.delta_t) * 3600000; // km/ms -> km/h
                     return speed;
                 }
             }
@@ -149,18 +125,18 @@ namespace TeslaLogger
                 if (positions.Count == 0)
                 {
                     // insert first pos
-                    firstPosition = new Position(lat, lng, alt, delta_t, double.IsNaN(speed) ? 0 : speed);
+                    firstPosition = new Position(lat, lng, alt, delta_t, double.IsNaN(speed) ? 0.0 : speed);
                     positions.Add(delta_t, firstPosition);
                     lastPosition = firstPosition;
                 }
                 else if (!positions.ContainsKey(delta_t))
                 {
                     Position newPosition = new Position(lat, lng, alt, delta_t, speed);
+                    newPosition.dist_km = newPosition.calculateDistance(lastPosition);
                     if (double.IsNaN(speed))
                     {
                         newPosition.speed = newPosition.calculateSpeed(lastPosition);
                     }
-                    newPosition.dist_km = newPosition.calculateDistance(lastPosition);
                     positions.Add(delta_t, newPosition);
                     lastPosition = newPosition;
                 }
@@ -573,7 +549,6 @@ WHERE
                 Tools.DebugLog($"Komoot_{kli.carID} ParseTours({tourid}) initialOdo:{odo}");
                 int firstPosID = 0;
                 int LastPosId = 0;
-                tour.calculateTourDistance();
                 foreach (int posID in tour.positions.Keys.OrderBy(k => k))
                 {
                     KomootTour.Position pos = tour.positions[posID];
@@ -1045,7 +1020,6 @@ VALUES(
                                             if (tour.ContainsKey("id") && double.TryParse(tour["distance"].ToString(), out double _))
                                             {
                                                 newTour.distance_m = double.Parse(tour["distance"].ToString());
-                                                newTour.calculateTourDistance();
                                             }
                                             komootTours.Add(tourid, newTour);
                                         }
