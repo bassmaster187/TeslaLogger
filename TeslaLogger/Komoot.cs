@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.IO;
 using System.Net;
 using System.Net.Http;
@@ -8,9 +7,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Exceptionless;
-using Microsoft.VisualBasic.Logging;
 using MySql.Data.MySqlClient;
-using MySqlX.XDevAPI.Common;
 using Newtonsoft.Json;
 
 // inspired by https://github.com/timschneeb/KomootGPX
@@ -40,21 +37,26 @@ namespace TeslaLogger
 
         private class KomootTour
         {
+            internal int carID;
             internal long tourID;
             readonly internal DateTime start;
             readonly string type;
             readonly string sport;
             internal Position firstPosition;
             internal Position lastPosition;
+            internal string json = "{}";
+            internal DateTime end;
 
-            private Dictionary<int, Position> positions = new Dictionary<int, Position>();
+            internal Dictionary<int, Position> positions = new Dictionary<int, Position>();
 
-            public KomootTour(long tourid, string type, string sport, DateTime start)
+            public KomootTour(int carID, long tourid, string type, string sport, DateTime start)
             {
+                this.carID = carID;
                 tourID = tourid;
                 this.type = type;
                 this.sport = sport;
                 this.start = start;
+                end = start;
             }
 
             public override string ToString()
@@ -67,7 +69,7 @@ namespace TeslaLogger
                 sb.AppendLine($"Positions: {positions.Count}");
                 foreach (int key in positions.Keys)
                 {
-                    sb.AppendLine($" {key} - ({positions[key].lat},{positions[key].lng} t:{positions[key].delta_t} s:{positions[key].speed}");
+                    sb.AppendLine($" {key} - ({positions[key].lat},{positions[key].lng}) t:{positions[key].delta_t} s:{positions[key].speed}");
                 }
                 return sb.ToString();
             }
@@ -76,16 +78,36 @@ namespace TeslaLogger
             {
                 internal double lat;
                 internal double lng;
+                internal double alt;
                 internal long delta_t;
                 internal double speed;
+                internal double dist_km = 0.0;
 
-                public Position(double lat, double lng, int delta_t, double speed)
+                public Position(double lat, double lng, double alt, int delta_t, double speed)
                 {
                     this.lat = lat;
                     this.lng = lng;
+                    this.alt = alt;
                     this.delta_t = delta_t;
                     this.speed = speed;
                 }
+
+                internal double calculateDistance(Position other)
+                {
+                    // calculate distance and speed with previous pos
+                    // inspired by https://github.com/mapado/haversine/blob/main/haversine/haversine.py
+                    Position pos1 = this;
+                    Position pos2 = other;
+                    double AVG_EARTH_RADIUS_KM = 6371.0088;
+                    double lat1 = pos1.lat * Math.PI / 180;
+                    double lng1 = pos1.lng * Math.PI / 180;
+                    double lat2 = pos2.lat * Math.PI / 180;
+                    double lng2 = pos2.lng * Math.PI / 180;
+                    double d = Math.Pow(Math.Sin((lat2 - lat1) * 0.5), 2) + Math.Cos(lat1) * Math.Cos(lat2) * Math.Pow(Math.Sin((lng2 - lng1) * 0.5), 2);
+                    double dist_km = AVG_EARTH_RADIUS_KM * 2 * Math.Asin(Math.Sqrt(d));
+                    return dist_km;
+                }
+
 
                 internal double calculateSpeed(Position other)
                 {
@@ -105,26 +127,58 @@ namespace TeslaLogger
                 }
             }
 
-            internal void addPosition(double lat, double lng, int delta_t, double speed = double.NaN)
+            internal void addPosition(double lat, double lng, double alt, int delta_t, double speed = double.NaN)
             {
                 if (positions.Count == 0)
                 {
                     // insert first pos
-                    firstPosition = new Position(lat, lng, delta_t, double.IsNaN(speed) ? 0 : speed);
+                    firstPosition = new Position(lat, lng, alt, delta_t, double.IsNaN(speed) ? 0 : speed);
+                    positions.Add(delta_t, firstPosition);
                     lastPosition = firstPosition;
                 }
                 else if (!positions.ContainsKey(delta_t))
                 {
-                    Position newPosition = new Position(lat, lng, delta_t, speed);
+                    Position newPosition = new Position(lat, lng, alt, delta_t, speed);
                     if (double.IsNaN(speed))
                     {
                         newPosition.speed = newPosition.calculateSpeed(lastPosition);
                     }
+                    newPosition.dist_km = newPosition.calculateDistance(lastPosition);
                     positions.Add(delta_t, newPosition);
                     lastPosition = newPosition;
                 }
+                else
+                {
+                    Tools.DebugLog($"addPosition(lat:{lat}, lng:{lng}, alt:{alt}, delta_t:{delta_t}, speed:{speed} not added");
+                }
+                if (start.AddMilliseconds(delta_t) > end)
+                {
+                    end = start.AddMilliseconds(delta_t);
+                }
             }
 
+            internal void DownloadTour(KomootLoginInfo kli)
+            {
+                Logfile.Log($"Komoot_{kli.carID}: DownloadTour {tourID} ...");
+                using (HttpClient httpClient = new HttpClient())
+                {
+                    httpClient.DefaultRequestHeaders.Add("Authorization", "Basic " + Convert.ToBase64String(Encoding.UTF8.GetBytes($"{kli.user_id}:{kli.token}")));
+                    using (HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, new Uri($"https://api.komoot.de/v007/tours/{tourID}?_embedded=coordinates,way_types,surfaces,directions,participants,timeline&directions=v2&fields=timeline&format=coordinate_array&timeline_highlights_fields=tips,recommenders")))
+                    {
+                        HttpResponseMessage result = httpClient.SendAsync(request).Result;
+                        if (result.IsSuccessStatusCode)
+                        {
+                            string resultContent = result.Content.ReadAsStringAsync().Result;
+                            Logfile.Log($"Komoot_{kli.carID}: DownloadTour {tourID} done");
+                            this.json = resultContent;
+                        }
+                        else
+                        {
+                            Logfile.Log($"Komoot_{kli.carID}: DownloadTour{tourID} error: {result.StatusCode}");
+                        }
+                    }
+                }
+            }
         }
 
         private readonly int interval = 6 * 60 * 60; // 6 hours in seconds
@@ -136,7 +190,7 @@ namespace TeslaLogger
         {
             { "KomootListSettings", "/komoot/listSettings" },
             { "KomootSaveSettings", "/komoot/saveSettings" },
-            { "KomootReimport" , "/komoot/reimport" }
+            { "CheckAllTours" , "/komoot/checkAllTours" }
         };
 
         public Komoot(int CarID, string Username, string Password)
@@ -150,11 +204,20 @@ namespace TeslaLogger
         {
             try
             {
-                if (DBHelper.ColumnExists("drivestate", "komoot_tour_id"))
+                if (!DBHelper.TableExists("komoot"))
                 {
-                    Logfile.Log("ALTER TABLE drivestate ADD komoot_tour_id BIGINT NULL");
+                    string sql = @"
+CREATE TABLE komoot (
+    tourID BIGINT NOT NULL,
+    carID int(11) NOT NULL,
+    drivestateID int(11) NULL,
+    json LONGTEXT NOT NULL,
+    UNIQUE ix_tourID(tourID)
+)";
+                    Logfile.Log(sql);
                     UpdateTeslalogger.AssertAlterDB();
-                    DBHelper.ExecuteSQLQuery(@"ALTER TABLE drivestate ADD komoot_tour_id BIGINT NULL", 600);
+                    DBHelper.ExecuteSQLQuery(sql);
+                    Logfile.Log("CREATE TABLE komoot OK");
                 }
             }
             catch (Exception ex)
@@ -206,13 +269,12 @@ WHERE
         // main loop
         public void Run()
         {
-            bool firstrun = true;
             try
             {
+                KomootLoginInfo kli = new KomootLoginInfo(carID, username, password, string.Empty, string.Empty);
                 while (true)
                 {
-                    Work(firstrun);
-                    firstrun = false;
+                    Work(kli);
                     Thread.Sleep(interval * 1000);
                 }
             }
@@ -223,91 +285,61 @@ WHERE
             }
         }
 
-        private void Work(bool firstrun)
+        private static void Work(KomootLoginInfo kli, bool dumpJSON = false)
         {
-            KomootLoginInfo kli = new KomootLoginInfo(carID, username, password, string.Empty, string.Empty);
             Login(kli);
             if (!kli.loginSuccessful)
             {
-                Logfile.Log($"Komoot_{carID}: Login failed!");
+                Logfile.Log($"Komoot_{kli.carID}: Login failed!");
             }
             else
             {
-                Dictionary<int, KomootTour> tours = DownloadTours(kli);
+                Dictionary<long, KomootTour> tours = DownloadTours(kli, dumpJSON);
                 if (tours.Count > 0)
                 {
-                    ParseTours(kli, tours);
-                    if (firstrun)
-                    {
-                        CheckDriveState(kli, tours);
-                    }
+                    ParseTours(kli, tours, dumpJSON);
                 }
                 else
                 {
-                    Logfile.Log($"Komoot_{carID}: no tours found!");
+                    Logfile.Log($"Komoot_{kli.carID}: no tours found!");
                 }
             }
-            Logfile.Log($"Komoot_{carID}: done");
+            Logfile.Log($"Komoot_{kli.carID}: done");
         }
 
-        private static string DownloadTour(KomootLoginInfo kli, int tourID)
+        private static void ParseTours(KomootLoginInfo kli, Dictionary<long, KomootTour> tours, bool dumpJSON = false)
         {
-            Logfile.Log($"Komoot_{kli.carID}: DownloadTour{tourID} ...");
-            using (HttpClient httpClient = new HttpClient())
-            {
-                httpClient.DefaultRequestHeaders.Add("Authorization", "Basic " + Convert.ToBase64String(Encoding.UTF8.GetBytes($"{kli.user_id}:{kli.token}")));
-                using (HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, new Uri($"https://api.komoot.de/v007/tours/{tourID}?_embedded=coordinates,way_types,surfaces,directions,participants,timeline&directions=v2&fields=timeline&format=coordinate_array&timeline_highlights_fields=tips,recommenders")))
-                {
-                    HttpResponseMessage result = httpClient.SendAsync(request).Result;
-                    if (result.IsSuccessStatusCode)
-                    {
-                        string resultContent = result.Content.ReadAsStringAsync().Result;
-                        Logfile.Log($"Komoot_{kli.carID}: DownloadTour{tourID} done");
-                        return resultContent;
-                    }
-                    Logfile.Log($"Komoot_{kli.carID}: DownloadTour{tourID} error: {result.StatusCode}");
-                }
-            }
-            return string.Empty;
-        }
-
-        private static void ParseTours(KomootLoginInfo kli, Dictionary<long, KomootTour> tours, bool dumpJSON = false, bool checkExistingTours = false)
-        {
-            string KVSkey = $"Komoot_{kli.carID}_Max_Tour_ID";
-            if (KVS.Get(KVSkey, out int maxTourIDint32) == KVS.SUCCESS)
-            {
-                // migrate int to long
-                KVS.Remove(KVSkey);
-                if (KVS.InsertOrUpdate(KVSkey, (long)maxTourIDint32) == KVS.SUCCESS)
-                {
-                    Logfile.Log($"Komoot_{kli.carID}: migrated KVS {KVSkey} from int32 to int64");
-                }
-                else
-                {
-                    Logfile.Log($"Komoot_{kli.carID}: error migrating KVS {KVSkey} from int32 to int64");
-                }
-            }
-            if (KVS.Get(KVSkey, out long maxTourID) == KVS.FAILED)
-            {
-                maxTourID = 0;
-            }
-            if (checkExistingTours)
-            {
-                maxTourID = 0;
-            }
-            Logfile.Log($"Komoot_{kli.carID}: parsing tours newer than tourID {maxTourID} ...");
             foreach (int tourid in tours.Keys)
             {
-                if (tourid > maxTourID)
+                KomootTour tour = tours[tourid];
+                Logfile.Log($"Komoot_{kli.carID}: ParseTours" + Environment.NewLine + tour);
+                // check if tour already exists in table komoot
+                if (TourExists(tourid))
                 {
-                    Logfile.Log($"Komoot_{kli.carID}: {tours[tourid]}");
-                    string resultContent = DownloadTour(kli, tourid);
-                    Tools.DebugLog($"Komoot_{kli.carID} GetTour({tourid}) result: {resultContent.Length}");
-                    if (dumpJSON)
-                    {
-                        Logfile.Log($"Komoot_{kli.carID}: GetTour({tourid}) JSON:" + Environment.NewLine + resultContent);
-                    }
-                    /* expected JSON
+                    Tools.DebugLog($"Komoot tour {tourid} exists in table komoot, continue");
+                    continue;
+                }
+                // download tour to get source JSON
+                tour.DownloadTour(kli);
+                if (dumpJSON)
+                {
+                    Logfile.Log($"Komoot_{kli.carID}: tour({tourid}) JSON:" + Environment.NewLine + tour.json);
+                }
+                // check if drivestate already exists
+                if (DriveStateExists(kli.carID, tour.start, out int drivestateID))
+                {
+                    // tour does not exist in komoot table, but drivestate exists
+                    // --> insert into komoot table
+                    Tools.DebugLog($"Komoot tour {tourid} does not exist in table komoot, but drivestate with carID {kli.carID} start {tours[tourid].start} exists: {drivestateID}");
+                    InsertTour(kli.carID, drivestateID, tour);
+                    continue;
+                }
+                // tour does not exist in table komoot nor in table drivestate
+                if (dumpJSON)
+                {
+                    Logfile.Log($"Komoot_{kli.carID}: GetTour({tourid}) JSON:" + Environment.NewLine + tour.json);
+                }
+                /* expected JSON
 {
 "id": 987654321,
 "type": "tour_recorded",
@@ -361,47 +393,47 @@ WHERE
 "_embedded": {
 "coordinates": {
 "items": [
-    {
-        "lat": 42.4484,
-        "lng": 53.340371,
-        "alt": 42.3,
-        "t": 0
-    },
-    {
-        "lat": 62.448262,
-        "lng": 73.340385,
-        "alt": 42.3,
-        "t": 2000
-    },
-    {
-        "lat": 82.448126,
-        "lng": 33.340499,
-        "alt": 42.3,
-        "t": 4709
-    }
+{
+    "lat": 42.4484,
+    "lng": 53.340371,
+    "alt": 42.3,
+    "t": 0
+},
+{
+    "lat": 62.448262,
+    "lng": 73.340385,
+    "alt": 42.3,
+    "t": 2000
+},
+{
+    "lat": 82.448126,
+    "lng": 33.340499,
+    "alt": 42.3,
+    "t": 4709
+}
 ],
 "_links": {
-    "self": {
-        "href": "https://api.komoot.de/v007/tours/987654321/coordinates"
-    }
+"self": {
+    "href": "https://api.komoot.de/v007/tours/987654321/coordinates"
+}
 }
 },
 "creator": {
 "username": "1234567890",
 "avatar": {
-    "src": "https://dfr.cloudfront.net/www/000/defaultuserimage-full/0?width={width}&height={height}&crop={crop}",
-    "templated": true,
-    "type": "image/*"
+"src": "https://dfr.cloudfront.net/www/000/defaultuserimage-full/0?width={width}&height={height}&crop={crop}",
+"templated": true,
+"type": "image/*"
 },
 "status": "public",
 "_links": {
-    "self": {
-        "href": "https://api.komoot.de/v007/users/1234567890/profile_embedded"
-    },
-    "relation": {
-        "href": "https://api.komoot.de/v007/users/{username}/relations/1234567890",
-        "templated": true
-    }
+"self": {
+    "href": "https://api.komoot.de/v007/users/1234567890/profile_embedded"
+},
+"relation": {
+    "href": "https://api.komoot.de/v007/users/{username}/relations/1234567890",
+    "templated": true
+}
 },
 "display_name": "DisplayNameCFGT",
 "is_premium": false
@@ -409,15 +441,15 @@ WHERE
 "participants": [],
 "timeline": {
 "_links": {
-    "self": {
-        "href": "https://api.komoot.de/v007/tours/987654321/timeline/"
-    }
+"self": {
+    "href": "https://api.komoot.de/v007/tours/987654321/timeline/"
+}
 },
 "page": {
-    "size": 0,
-    "totalElements": 0,
-    "totalPages": 1,
-    "number": 0
+"size": 0,
+"totalElements": 0,
+"totalPages": 1,
+"number": 0
 }
 }
 },
@@ -451,164 +483,267 @@ WHERE
 }
 }
 }
-                     */
-                    dynamic jsonResult = JsonConvert.DeserializeObject(resultContent);
-                    if (jsonResult.ContainsKey("date") && jsonResult.ContainsKey("_embedded") && jsonResult["_embedded"].ContainsKey("coordinates") && jsonResult["_embedded"]["coordinates"].ContainsKey("items"))
+                 */
+                dynamic jsonResult = JsonConvert.DeserializeObject(tour.json);
+                // check JSON contents
+                if (jsonResult.ContainsKey("_embedded") && jsonResult["_embedded"].ContainsKey("coordinates") && jsonResult["_embedded"]["coordinates"].ContainsKey("items"))
+                {
+                    // JSON OK
+                    Logfile.Log($"Komoot_{kli.carID}: ParseTours({tourid}) parsing {jsonResult["_embedded"]["coordinates"]["items"].Count} coordinates ...");
+                    foreach (dynamic pos in jsonResult["_embedded"]["coordinates"]["items"])
                     {
-                        DateTime start = DateTime.Parse(jsonResult["date"].ToString(), null, DateTimeStyles.AdjustToUniversal);
-                        DateTime end = start;
-                        bool firstPos = true;
-                        double lat = double.NaN;
-                        double lng = double.NaN;
-                        double prev_lat = double.NaN;
-                        double prev_lng = double.NaN;
-                        int firstPosID = 0;
-                        int lastPosID = 0;
-                        long t = 0;
-                        long prev_t = 0;
-                        double odo = GetMaxOdo(kli.carID);
-                        Logfile.Log($"Komoot_{kli.carID}: inserting {jsonResult["_embedded"]["coordinates"]["items"].Count} positions ...");
-                        // TODO filter out duplicate positions
-                        foreach (dynamic pos in jsonResult["_embedded"]["coordinates"]["items"])
+                        if (pos.ContainsKey("lat") && pos.ContainsKey("lng") && pos.ContainsKey("alt") && pos.ContainsKey("t"))
                         {
-                            if (pos.ContainsKey("lat") && pos.ContainsKey("lng") && pos.ContainsKey("alt") && pos.ContainsKey("t"))
+                            if (double.TryParse(pos["lat"].ToString(), out double lat) && double.TryParse(pos["lng"].ToString(), out double _) && double.TryParse(pos["alt"].ToString(), out double _) && int.TryParse(pos["t"].ToString(), out int _))
                             {
-                                double alt = 0.0;
-                                double speed = 0.0;
-                                if (!firstPos)
-                                {
-                                    prev_lat = lat;
-                                    prev_lng = lng;
-                                    prev_t = t;
-                                }
-                                if (Double.TryParse(pos["lat"].ToString(), out lat) && Double.TryParse(pos["lng"].ToString(), out lng) && Double.TryParse(pos["alt"].ToString(), out alt) && long.TryParse(pos["t"].ToString(), out t))
-                                {
-                                    end = start.AddMilliseconds(t);
-                                    if (firstPos)
-                                    {
-                                        firstPos = false;
-                                        // if checkExistingTours is false, then this is a new tour and can be added
-                                        if (!checkExistingTours)
-                                        {
-                                            firstPosID = InsertPos(kli.carID, lat, lng, start, speed, alt, odo);
-                                        }
-                                        else
-                                        {
-                                            // TODO
-                                        }
-                                    }
-                                    else
-                                    {
-                                        // calculate distance and speed with previous pos
-                                        // inspired by https://github.com/mapado/haversine/blob/main/haversine/haversine.py
-                                        double AVG_EARTH_RADIUS_KM = 6371.0088;
-                                        double lat1 = lat * Math.PI / 180;
-                                        double lng1 = lng * Math.PI / 180;
-                                        double lat2 = prev_lat * Math.PI / 180;
-                                        double lng2 = prev_lng * Math.PI / 180;
-                                        double d = Math.Pow(Math.Sin((lat2 - lat1) * 0.5), 2) + Math.Cos(lat1) * Math.Cos(lat2) * Math.Pow(Math.Sin((lng2 - lng1) * 0.5), 2);
-                                        double dist_km = AVG_EARTH_RADIUS_KM * 2 * Math.Asin(Math.Sqrt(d));
-                                        speed = dist_km / (t - prev_t) * 3600000; // km/ms -> km/h
-                                        odo = odo + dist_km;
-                                        //Tools.DebugLog($"<{tourid}> {lat} {lng} {alt} {start.AddMilliseconds(t)} dist:{dist_km} speed:{speed}");
-                                        // if checkExistingTours is false, then this is a new tour and can be added
-                                        if (!checkExistingTours)
-                                        {
-                                            lastPosID = InsertPos(kli.carID, lat, lng, end, speed, alt, odo);
-                                        }
-                                        else
-                                        {
-                                            // TODO
-                                        }
-                                    }
-                                }
+                                tour.addPosition(lat, double.Parse(pos["lng"].ToString()), double.Parse(pos["alt"].ToString()), int.Parse(pos["t"].ToString()));
                             }
                             else
                             {
                                 StringBuilder sb = new StringBuilder();
                                 sb.AppendLine();
                                 sb.Append("lat:");
-                                sb.AppendLine(jsonResult.ContainsKey("lat"));
+                                sb.AppendLine(pos["lat"]);
                                 sb.Append("lng:");
-                                sb.AppendLine(jsonResult.ContainsKey("lng"));
+                                sb.AppendLine(pos["lng"]);
                                 sb.Append("alt:");
-                                sb.AppendLine(jsonResult.ContainsKey("alt"));
+                                sb.AppendLine(pos["alt"]);
                                 sb.Append("t:");
-                                sb.AppendLine(jsonResult.ContainsKey("t"));
-                                Logfile.Log($"Komoot_{kli.carID}: parsing tours error - missing JSON contents" + sb.ToString());
+                                sb.AppendLine(pos["t"]);
+                                Logfile.Log($"Komoot_{kli.carID}: ParseTours({tourid}) parsing tours.pos error - error parsing JSON contents" + sb.ToString());
                             }
                         }
-                        if (firstPosID > 0 && lastPosID > 0)
+                        else
                         {
-                            // if checkExistingTours is false, then this is a new tour and can be added
-                            if (!checkExistingTours)
-                            {
-                                CreateDriveState(kli.carID, start, firstPosID, end, lastPosID);
-                            }
+                            StringBuilder sb = new StringBuilder();
+                            sb.AppendLine();
+                            sb.Append("lat:");
+                            sb.AppendLine(jsonResult.ContainsKey("lat"));
+                            sb.Append("lng:");
+                            sb.AppendLine(jsonResult.ContainsKey("lng"));
+                            sb.Append("alt:");
+                            sb.AppendLine(jsonResult.ContainsKey("alt"));
+                            sb.Append("t:");
+                            sb.AppendLine(jsonResult.ContainsKey("t"));
+                            Logfile.Log($"Komoot_{kli.carID}: ParseTours({tourid}) parsing tours.pos error - missing JSON contents" + sb.ToString());
                         }
+                    }
+                }
+                else
+                {
+                    StringBuilder sb = new StringBuilder();
+                    sb.AppendLine();
+                    sb.Append("date:");
+                    sb.AppendLine(jsonResult.ContainsKey("date"));
+                    sb.Append("_embedded:");
+                    sb.AppendLine(jsonResult.ContainsKey("_embedded"));
+                    if (jsonResult.ContainsKey("_embedded"))
+                    {
+                        sb.Append("_embedded.coordinates:");
+                        sb.AppendLine(jsonResult["_embedded"].ContainsKey("coordinates"));
+                        if (jsonResult["_embedded"].ContainsKey("coordinates"))
+                        {
+                            sb.Append("_embedded.coordinates.items:");
+                            sb.AppendLine(jsonResult["_embedded"]["coordinates"].ContainsKey("items"));
+                        }
+                    }
+                    sb.AppendLine();
+                    Logfile.Log($"Komoot_{kli.carID}: parsing tours error - missing JSON contents" + sb.ToString() + tour.json);
+                }
+                // positions parsed, continue to insert positions into table pos
+                Tools.DebugLog($"Komoot_{kli.carID} ParseTours({tourid}) " + Environment.NewLine + tour);
+                // find initial odometer for first pos
+                double odo = GetInitialOdo(tour.carID, tour.start);
+                Tools.DebugLog($"Komoot_{kli.carID} ParseTours({tourid}) initialOdo:{odo}");
+                int firstPosID = 0;
+                int LastPosId = 0;
+                foreach (int posID in tour.positions.Keys)
+                {
+                    KomootTour.Position pos = tour.positions[posID];
+                    if (pos == tour.firstPosition)
+                    {
+                        firstPosID = InsertPos(tour.carID, pos.lat, pos.lng, tour.start.AddMilliseconds(pos.delta_t), pos.speed, pos.alt, odo);
                     }
                     else
                     {
-                        StringBuilder sb = new StringBuilder();
-                        sb.AppendLine();
-                        sb.Append("date:");
-                        sb.AppendLine(jsonResult.ContainsKey("date"));
-                        sb.Append("_embedded:");
-                        sb.AppendLine(jsonResult.ContainsKey("_embedded"));
-                        if (jsonResult.ContainsKey("_embedded"))
-                        {
-                            sb.Append("_embedded.coordinates:");
-                            sb.AppendLine(jsonResult["_embedded"].ContainsKey("coordinates"));
-                            if (jsonResult["_embedded"].ContainsKey("coordinates"))
-                            {
-                                sb.Append("_embedded.coordinates.items:");
-                                sb.AppendLine(jsonResult["_embedded"]["coordinates"].ContainsKey("items"));
-                            }
-                        }
-                        sb.AppendLine();
-                        Logfile.Log($"Komoot_{kli.carID}: parsing tours error - missing JSON contents" + sb.ToString() + resultContent);
+                        odo = odo + pos.dist_km;
+                        LastPosId = InsertPos(tour.carID, pos.lat, pos.lng, tour.start.AddMilliseconds(pos.delta_t), pos.speed, pos.alt, odo);
                     }
-
-                    KVS.InsertOrUpdate(KVSkey, tourid);
+                }
+                if (firstPosID > 0 && LastPosId > 0)
+                {
+                    // successfully added positions to table pos
+                    drivestateID = CreateDriveState(tour.carID, tour.start, firstPosID, tour.end, LastPosId);
+                    InsertTour(kli.carID, drivestateID, tour);
+                }
+                else
+                {
+                    Logfile.Log($"Komoot_{kli.carID}: error - no positions added to table pos - tour JSON:" + Environment.NewLine + tour.json);
                 }
             }
         }
 
-        private static double GetMaxOdo(int carid)
+        private static void InsertTour(int carID, int drivestateID, KomootTour komootTour)
         {
-            using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+            try
             {
-                con.Open();
-                using (MySqlCommand cmd = new MySqlCommand(@"
-SELECT
-    MAX(odometer)
-FROM
-    pos
-WHERE
-    CarID = @CarID", con))
+                using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
                 {
-                    cmd.Parameters.AddWithValue("@CarID", carid);
-                    MySqlDataReader dr = SQLTracer.TraceDR(cmd);
-                    if (dr.Read() && dr[0] != DBNull.Value)
+                    con.Open();
+                    using (MySqlCommand cmd = new MySqlCommand(@"
+INSERT
+    komoot(
+        tourID,
+        carID,
+        drivestateID,
+        json
+)
+VALUES(
+    @tourID,
+    @carID,
+    @drivestateID,
+    @json
+)"
+                    , con))
                     {
-                        if (double.TryParse(dr[0].ToString(), out double pos))
+                        cmd.Parameters.AddWithValue("@tourID", komootTour.tourID);
+                        cmd.Parameters.AddWithValue("@CarID", carID);
+                        cmd.Parameters.AddWithValue("@drivestateID", drivestateID);
+                        cmd.Parameters.AddWithValue("@json", komootTour.json);
+                        _ = SQLTracer.TraceNQ(cmd, out long _);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ex.ToExceptionless().FirstCarUserID().Submit();
+                Logfile.Log(ex.ToString());
+            }
+        }
+
+        private static bool DriveStateExists(int carID, DateTime start, out int drivestateID)
+        {
+            drivestateID = -1;
+            try
+            {
+                using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+                {
+                    con.Open();
+                    using (MySqlCommand cmd = new MySqlCommand(@"
+SELECT
+    id
+FROM
+    drivestate
+WHERE
+    carID = @carID
+    AND StartDate = @StartDate", con))
+                    {
+                        cmd.Parameters.AddWithValue("@carID", carID);
+                        cmd.Parameters.AddWithValue("@StartDate", start);
+                        MySqlDataReader dr = SQLTracer.TraceDR(cmd);
+                        if (dr.Read() && dr[0] != DBNull.Value)
                         {
-                            return pos;
+                            if (int.TryParse(dr[0].ToString(), out drivestateID))
+                            {
+                                return true;
+                            }
                         }
                     }
                 }
+            }
+            catch (Exception ex)
+            {
+                ex.ToExceptionless().FirstCarUserID().Submit();
+                Logfile.Log(ex.ToString());
+            }
+            return false;
+        }
+
+        private static bool TourExists(int tourid)
+        {
+            try
+            {
+                using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+                {
+                    con.Open();
+                    using (MySqlCommand cmd = new MySqlCommand(@"
+SELECT
+    count(tourID)
+FROM
+    komoot
+WHERE
+    tourID = @tourID", con))
+                    {
+                        cmd.Parameters.AddWithValue("@tourID", tourid);
+                        MySqlDataReader dr = SQLTracer.TraceDR(cmd);
+                        if (dr.Read() && dr[0] != DBNull.Value)
+                        {
+                            if (int.TryParse(dr[0].ToString(), out int count))
+                            {
+                                return count > 0 ? true : false;
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ex.ToExceptionless().FirstCarUserID().Submit();
+                Logfile.Log(ex.ToString());
+            }
+            return false;
+        }
+
+        private static double GetInitialOdo(int carid, DateTime start)
+        {
+            try
+            {
+                using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+                {
+                    con.Open();
+                    using (MySqlCommand cmd = new MySqlCommand(@"
+SELECT
+    odometer
+FROM
+    pos
+WHERE
+    CarID = @CarID
+    AND Datum < @start
+ORDER BY Datum DESC
+LIMIT 1", con))
+                    {
+                        cmd.Parameters.AddWithValue("@CarID", carid);
+                        cmd.Parameters.AddWithValue("@start", start);
+                        MySqlDataReader dr = SQLTracer.TraceDR(cmd);
+                        if (dr.Read() && dr[0] != DBNull.Value)
+                        {
+                            if (double.TryParse(dr[0].ToString(), out double odo))
+                            {
+                                return odo;
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ex.ToExceptionless().FirstCarUserID().Submit();
+                Logfile.Log(ex.ToString());
             }
             return 0.0;
         }
 
         // TODO wheel_type = tourID
-        private static void CreateDriveState(int carID, DateTime start, int firstPosID, DateTime end, int lastPosID)
+        private static int CreateDriveState(int carID, DateTime start, int firstPosID, DateTime end, int lastPosID)
         {
             Logfile.Log($"Komoot_{carID}: CreateDriveState {firstPosID}->{lastPosID} {start} {end} ...");
-            using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+            int drivestateID = -1;
+            try
             {
-                con.Open();
-                using (MySqlCommand cmd = new MySqlCommand(@"
+                using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+                {
+                    con.Open();
+                    using (MySqlCommand cmd = new MySqlCommand(@"
 INSERT
     drivestate(
         CarID,
@@ -624,35 +759,47 @@ VALUES(
     @EndDate,
     @EndPos
 )"
-                , con))
-                {
-                    cmd.Parameters.AddWithValue("@CarID", carID);
-                    cmd.Parameters.AddWithValue("@StartDate", start);
-                    cmd.Parameters.AddWithValue("@StartPos", firstPosID);
-                    cmd.Parameters.AddWithValue("@EndDate", end);
-                    cmd.Parameters.AddWithValue("@EndPos", lastPosID);
-                    _ = SQLTracer.TraceNQ(cmd, out long _);
+                    , con))
+                    {
+                        cmd.Parameters.AddWithValue("@CarID", carID);
+                        cmd.Parameters.AddWithValue("@StartDate", start);
+                        cmd.Parameters.AddWithValue("@StartPos", firstPosID);
+                        cmd.Parameters.AddWithValue("@EndDate", end);
+                        cmd.Parameters.AddWithValue("@EndPos", lastPosID);
+                        _ = SQLTracer.TraceNQ(cmd, out long _);
+                        using (MySqlCommand cmdid = new MySqlCommand("SELECT LAST_INSERT_ID()", con))
+                        {
+                            drivestateID = Convert.ToInt32(cmdid.ExecuteScalar());
+                        }
+                    }
                 }
+                // update start address and end address
+                _ = WebHelper.UpdateAllPOIAddresses(0, $"{firstPosID},{lastPosID}");
+                // create timeline maps
+                _ = Task.Factory.StartNew(() =>
+                {
+                    StaticMapService.GetSingleton().Enqueue(carID, firstPosID, lastPosID, 0, 0, StaticMapProvider.MapMode.Dark, StaticMapProvider.MapSpecial.None);
+                    StaticMapService.CreateParkingMapFromPosid(firstPosID);
+                    StaticMapService.CreateParkingMapFromPosid(lastPosID);
+                }, CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
             }
-            // update start address and end address
-            _ = WebHelper.UpdateAllPOIAddresses(0, $"{firstPosID},{lastPosID}");
-            // create timeline maps
-            _ = Task.Factory.StartNew(() =>
+            catch (Exception ex)
             {
-                StaticMapService.GetSingleton().Enqueue(carID, firstPosID, lastPosID, 0, 0, StaticMapProvider.MapMode.Dark, StaticMapProvider.MapSpecial.None);
-                StaticMapService.CreateParkingMapFromPosid(firstPosID);
-                StaticMapService.CreateParkingMapFromPosid(lastPosID);
-            }, CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
-
+                ex.ToExceptionless().FirstCarUserID().Submit();
+                Logfile.Log(ex.ToString());
+            }
+            return drivestateID;
         }
 
         private static int InsertPos(int carID, double lat, double lng, DateTime timestamp, double speed, double alt, double odometer)
         {
             int posid = 0;
-            using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+            try
             {
-                con.Open();
-                using (MySqlCommand cmd = new MySqlCommand(@"
+                using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+                {
+                    con.Open();
+                    using (MySqlCommand cmd = new MySqlCommand(@"
 INSERT
     pos(
         CarID,
@@ -672,28 +819,34 @@ VALUES(
     @altitude,
     @odometer
 )"
-                , con))
-                {
-                    cmd.Parameters.AddWithValue("@CarID", carID);
-                    cmd.Parameters.AddWithValue("@Datum", timestamp);
-                    cmd.Parameters.AddWithValue("@lat", lat);
-                    cmd.Parameters.AddWithValue("@lng", lng);
-                    cmd.Parameters.AddWithValue("@speed", speed);
-                    cmd.Parameters.AddWithValue("@altitude", alt);
-                    cmd.Parameters.AddWithValue("@odometer", odometer);
-                    _ = SQLTracer.TraceNQ(cmd, out long _);
-                    using (MySqlCommand cmdid = new MySqlCommand("SELECT LAST_INSERT_ID()", con))
+                    , con))
                     {
-                        posid = Convert.ToInt32(cmdid.ExecuteScalar());
+                        cmd.Parameters.AddWithValue("@CarID", carID);
+                        cmd.Parameters.AddWithValue("@Datum", timestamp);
+                        cmd.Parameters.AddWithValue("@lat", lat);
+                        cmd.Parameters.AddWithValue("@lng", lng);
+                        cmd.Parameters.AddWithValue("@speed", speed);
+                        cmd.Parameters.AddWithValue("@altitude", alt);
+                        cmd.Parameters.AddWithValue("@odometer", odometer);
+                        _ = SQLTracer.TraceNQ(cmd, out long _);
+                        using (MySqlCommand cmdid = new MySqlCommand("SELECT LAST_INSERT_ID()", con))
+                        {
+                            posid = Convert.ToInt32(cmdid.ExecuteScalar());
+                        }
                     }
                 }
+            }
+            catch (Exception ex)
+            {
+                ex.ToExceptionless().FirstCarUserID().Submit();
+                Logfile.Log(ex.ToString());
             }
             return posid;
         }
 
         private static Dictionary<long, KomootTour> DownloadTours(KomootLoginInfo kli, bool dumpJSON = false)
         {
-            Logfile.Log($"Komoot_{kli.carID}: getting tours ...");
+            Logfile.Log($"Komoot_{kli.carID}: downloading tours ...");
             StringBuilder sb = new StringBuilder();
             sb.AppendLine();
             Dictionary<long, KomootTour> komootTours = new Dictionary<long, KomootTour>();
@@ -872,7 +1025,7 @@ VALUES(
                                     {
                                         if (Int64.TryParse(tour["id"].ToString(), out long tourid) && DateTime.TryParse(tour["date"].ToString(), out DateTime _))
                                         {
-                                            komootTours.Add(tourid, new KomootTour(tourid, tour["type"].ToString(), tour["sport"].ToString(), DateTime.Parse(tour["date"].ToString())));
+                                            komootTours.Add(tourid, new KomootTour(kli.carID, tourid, tour["type"].ToString(), tour["sport"].ToString(), DateTime.Parse(tour["date"].ToString())));
                                         }
                                         else
                                         {
@@ -884,6 +1037,10 @@ VALUES(
                                         Logfile.Log($"Komoot_{kli.carID}: tour {tour["id"]} skipped, type: {tour["type"]} ...");
                                     }
                                 }
+                            }
+                            else
+                            {
+                                Logfile.Log($"Komoot_{kli.carID}: error: tours does not contain _embedded.tours");
                             }
                         }
                     }
@@ -969,13 +1126,13 @@ VALUES(
             switch (true)
             {
                 case bool _ when request.Url.LocalPath.Equals(EndPoints["KomootListSettings"], StringComparison.Ordinal):
-                    KomootListSettings(request, response);
+                    HandleRequest_KomootListSettings(request, response);
                     break;
                 case bool _ when request.Url.LocalPath.Equals(EndPoints["KomootSaveSettings"], StringComparison.Ordinal):
-                    KomootSaveSettings(request, response);
+                    HandleRequest_KomootSaveSettings(request, response);
                     break;
-                case bool _ when request.Url.LocalPath.Equals(EndPoints["KomootReimport"], StringComparison.Ordinal):
-                    CheckAllTours(request, response);
+                case bool _ when request.Url.LocalPath.Equals(EndPoints["CheckAllTours"], StringComparison.Ordinal):
+                    HandleRequest_CheckAllTours(request, response);
                     break;
                 default:
                     response.StatusCode = (int)HttpStatusCode.NotFound;
@@ -984,7 +1141,7 @@ VALUES(
             }
         }
 
-        private static void CheckAllTours(HttpListenerRequest _, HttpListenerResponse response)
+        private static void HandleRequest_CheckAllTours(HttpListenerRequest _, HttpListenerResponse response)
         {
             Logfile.Log("CheckAllTours");
             using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
@@ -1008,24 +1165,7 @@ WHERE
                         Logfile.Log($"CheckAllTours carID {carID} username {username}");
                         string password = dr["tesla_password"].ToString();
                         KomootLoginInfo kli = new KomootLoginInfo(carID, username, password, string.Empty, string.Empty);
-                        kli = Login(kli);
-                        if (!kli.loginSuccessful)
-                        {
-                            Logfile.Log($"CheckAllTours carID {kli.carID} Login failed!");
-                        }
-                        else
-                        {
-                            Dictionary<long, KomootTour> tours = DownloadTours(kli, true);
-                            Logfile.Log($"CheckAllTours carID {kli.carID} tours found: {tours.Count}");
-                            if (tours.Count > 0)
-                            {
-                                ParseTours(kli, tours, true, true);
-                            }
-                            else
-                            {
-                                Logfile.Log($"CheckAllTours carID {kli.carID} no tours found!");
-                            }
-                        }
+                        Work(kli, true);
                     }
                 }
             }
@@ -1033,7 +1173,7 @@ WHERE
             WebServer.WriteString(response, "OK");
         }
 
-        private static void KomootSaveSettings(HttpListenerRequest request, HttpListenerResponse response)
+        private static void HandleRequest_KomootSaveSettings(HttpListenerRequest request, HttpListenerResponse response)
         {
             using (StreamReader reader = new StreamReader(request.InputStream, Encoding.UTF8))
             {
@@ -1099,7 +1239,7 @@ ON DUPLICATE KEY UPDATE
             WebServer.WriteString(response, "OK");
         }
 
-        private static void KomootListSettings(HttpListenerRequest _, HttpListenerResponse response)
+        private static void HandleRequest_KomootListSettings(HttpListenerRequest _, HttpListenerResponse response)
         {
             List<object> komootConfigs = new List<object>();
             using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
