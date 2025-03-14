@@ -68,7 +68,7 @@ namespace TeslaLogger
                 sb.AppendLine($"Sport: {sport}");
                 sb.AppendLine($"Start: {start}");
                 sb.AppendLine($"Positions: {positions.Count}");
-                foreach (int key in positions.Keys)
+                foreach (int key in positions.Keys.OrderBy(k => k))
                 {
                     sb.AppendLine($" {key} - ({positions[key].lat},{positions[key].lng}) t:{positions[key].delta_t} s:{positions[key].speed}");
                 }
@@ -252,7 +252,7 @@ WHERE
                         {
                             // try to find tour by startdate
                             DateTime start = DateTime.Parse(dr[1].ToString());
-                            foreach (int tourID in tours.Keys)
+                            foreach (int tourID in tours.Keys.OrderBy(k => k))
                             {
                                 if (tours[tourID].start.Equals(start))
                                 {
@@ -558,7 +558,7 @@ WHERE
                 Tools.DebugLog($"Komoot_{kli.carID} ParseTours({tourid}) initialOdo:{odo}");
                 int firstPosID = 0;
                 int LastPosId = 0;
-                foreach (int posID in tour.positions.Keys)
+                foreach (int posID in tour.positions.Keys.OrderBy(k => k))
                 {
                     KomootTour.Position pos = tour.positions[posID];
                     if (pos == tour.firstPosition)
