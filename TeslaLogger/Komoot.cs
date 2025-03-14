@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Text;
@@ -309,7 +310,7 @@ WHERE
 
         private static void ParseTours(KomootLoginInfo kli, Dictionary<long, KomootTour> tours, bool dumpJSON = false)
         {
-            foreach (int tourid in tours.Keys)
+            foreach (int tourid in tours.Keys.OrderBy(k => k))
             {
                 KomootTour tour = tours[tourid];
                 Logfile.Log($"Komoot_{kli.carID}: ParseTours" + Environment.NewLine + tour);
@@ -733,7 +734,6 @@ LIMIT 1", con))
             return 0.0;
         }
 
-        // TODO wheel_type = tourID
         private static int CreateDriveState(int carID, DateTime start, int firstPosID, DateTime end, int lastPosID)
         {
             Logfile.Log($"Komoot_{carID}: CreateDriveState {firstPosID}->{lastPosID} {start} {end} ...");
