@@ -41,12 +41,14 @@ namespace TeslaLogger
             internal int carID;
             internal long tourID;
             readonly internal DateTime start;
+            internal double distance_m = double.NaN;
             readonly string type;
             readonly string sport;
             internal Position firstPosition;
             internal Position lastPosition;
             internal string json = "{}";
             internal DateTime end;
+            private double distance_correction_factor = 1.0;
 
             internal Dictionary<int, Position> positions = new Dictionary<int, Position>();
 
@@ -73,6 +75,19 @@ namespace TeslaLogger
                     sb.AppendLine($" {key} - ({positions[key].lat},{positions[key].lng}) t:{positions[key].delta_t} s:{positions[key].speed}");
                 }
                 return sb.ToString();
+            }
+
+            internal void calculateTourDistance()
+            {
+                double dist = 0.0;
+                if (!double.IsNaN(distance_m))
+                {
+                    foreach (int posID in positions.Keys)
+                    {
+                        dist = dist + positions[posID].dist_km;
+                    }
+                }
+                Tools.DebugLog($"calculateTourDistance {tourID} distance_m:{distance_m} calculated:{dist}");
             }
 
             internal class Position
@@ -190,8 +205,7 @@ namespace TeslaLogger
         private static readonly Dictionary<string, string> EndPoints = new Dictionary<string, string>()
         {
             { "KomootListSettings", "/komoot/listSettings" },
-            { "KomootSaveSettings", "/komoot/saveSettings" },
-            { "CheckAllTours" , "/komoot/checkAllTours" }
+            { "KomootSaveSettings", "/komoot/saveSettings" }
         };
 
         public Komoot(int CarID, string Username, string Password)
@@ -558,6 +572,7 @@ WHERE
                 Tools.DebugLog($"Komoot_{kli.carID} ParseTours({tourid}) initialOdo:{odo}");
                 int firstPosID = 0;
                 int LastPosId = 0;
+                tour.calculateTourDistance();
                 foreach (int posID in tour.positions.Keys.OrderBy(k => k))
                 {
                     KomootTour.Position pos = tour.positions[posID];
@@ -1025,7 +1040,13 @@ VALUES(
                                     {
                                         if (Int64.TryParse(tour["id"].ToString(), out long tourid) && DateTime.TryParse(tour["date"].ToString(), out DateTime _))
                                         {
-                                            komootTours.Add(tourid, new KomootTour(kli.carID, tourid, tour["type"].ToString(), tour["sport"].ToString(), DateTime.Parse(tour["date"].ToString())));
+                                            KomootTour newTour = new KomootTour(kli.carID, tourid, tour["type"].ToString(), tour["sport"].ToString(), DateTime.Parse(tour["date"].ToString()));
+                                            if (tour.ContainsKey("id") && double.TryParse(tour["distance"].ToString(), out double _))
+                                            {
+                                                newTour.distance_m = double.Parse(tour["distance"].ToString());
+                                                newTour.calculateTourDistance();
+                                            }
+                                            komootTours.Add(tourid, newTour);
                                         }
                                         else
                                         {
@@ -1131,46 +1152,11 @@ VALUES(
                 case bool _ when request.Url.LocalPath.Equals(EndPoints["KomootSaveSettings"], StringComparison.Ordinal):
                     HandleRequest_KomootSaveSettings(request, response);
                     break;
-                case bool _ when request.Url.LocalPath.Equals(EndPoints["CheckAllTours"], StringComparison.Ordinal):
-                    HandleRequest_CheckAllTours(request, response);
-                    break;
                 default:
                     response.StatusCode = (int)HttpStatusCode.NotFound;
                     WebServer.WriteString(response, @"URL Not Found!");
                     break;
             }
-        }
-
-        private static void HandleRequest_CheckAllTours(HttpListenerRequest _, HttpListenerResponse response)
-        {
-            Logfile.Log("CheckAllTours");
-            using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
-            {
-                con.Open();
-                using (MySqlCommand cmd = new MySqlCommand(@"
-SELECT
-    id,
-    tesla_name,
-    tesla_password
-FROM
-    cars
-WHERE
-    tesla_name LIKE 'KOMOOT:%'", con))
-                {
-                    MySqlDataReader dr = SQLTracer.TraceDR(cmd);
-                    while (dr.Read() && dr[0] != DBNull.Value && dr[1] != DBNull.Value && dr[2] != DBNull.Value)
-                    {
-                        int carID = Convert.ToInt32(dr["id"], Tools.ciDeDE);
-                        string username = dr["tesla_name"].ToString().Replace("KOMOOT:", string.Empty);
-                        Logfile.Log($"CheckAllTours carID {carID} username {username}");
-                        string password = dr["tesla_password"].ToString();
-                        KomootLoginInfo kli = new KomootLoginInfo(carID, username, password, string.Empty, string.Empty);
-                        Work(kli, true);
-                    }
-                }
-            }
-            Logfile.Log("CheckAllTours done");
-            WebServer.WriteString(response, "OK");
         }
 
         private static void HandleRequest_KomootSaveSettings(HttpListenerRequest request, HttpListenerResponse response)
