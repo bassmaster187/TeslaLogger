@@ -86,8 +86,9 @@ namespace TeslaLogger
                     {
                         dist = dist + positions[posID].dist_km;
                     }
+                    distance_correction_factor = distance_m / dist;
                 }
-                Tools.DebugLog($"calculateTourDistance {tourID} distance_m:{distance_m} calculated:{dist}");
+                Tools.DebugLog($"calculateTourDistance {tourID} distance_m:{distance_m} calculated:{dist} distance_correction_factor:{distance_correction_factor}");
             }
 
             internal class Position
