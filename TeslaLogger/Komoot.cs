@@ -221,23 +221,21 @@ CREATE TABLE komoot (
 
         internal static string CheckVIN(int carID, string VIN)
         {
-            string newVIN = $"KOMOOT{carID}";
-            newVIN = newVIN.Length < 17 ? newVIN.PadRight(17, 'A') : newVIN.Substring(0, 17);
             if (VIN.Length != 17)
             {
+                string newVIN = $"KOMOOT{carID}";
+                newVIN = newVIN.Length < 17 ? newVIN.PadRight(17, 'A') : newVIN.Substring(0, 17);
+                Tools.DebugLog($"CheckVIN rename {VIN}->{newVIN}");
                 try
                 {
                     using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
                     {
                         con.Open();
                         using (MySqlCommand cmd = new MySqlCommand(@"
-INSERT
-    cars(
-        vin
-)
-VALUES(
-    @VIN
-)
+UPDATE
+    cars
+SET
+    vin = @VIN
 WHERE
     CarID = @CarID
 "
