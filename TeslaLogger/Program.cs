@@ -236,12 +236,14 @@ namespace TeslaLogger
                 int carid = r["tesla_carid"] as Int32? ?? 0;
                 if (Name.StartsWith("KOMOOT:", StringComparison.Ordinal))
                 {
+                    string komoot_vin = Komoot.CheckVIN(carid, r["vin"].ToString());
                     Komoot _komoot = new Komoot(id, Name.Replace("KOMOOT:", string.Empty), Password);
                     Thread komootThread = new Thread(() =>
                     {
                         _komoot.Run();
                     });
                     komootThread.Name = $"KomootThread_{id}";
+                    Logfile.Log($"starting Komoot thread for ID {id} {Name.Replace("KOMOOT:", string.Empty)} <{komoot_vin}>");
                     komootThread.Start();
                 }
                 String tesla_token = r["tesla_token"] as String ?? "";
