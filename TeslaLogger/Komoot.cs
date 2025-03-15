@@ -219,6 +219,46 @@ CREATE TABLE komoot (
             }
         }
 
+        internal static string CheckVIN(int carID, string VIN)
+        {
+            string newVIN = $"KOMOOT{carID}";
+            newVIN = newVIN.Length < 17 ? newVIN.PadRight(17, 'A') : newVIN.Substring(0, 17);
+            if (VIN.Length != 17)
+            {
+                try
+                {
+                    using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+                    {
+                        con.Open();
+                        using (MySqlCommand cmd = new MySqlCommand(@"
+INSERT
+    cars(
+        vin
+)
+VALUES(
+    @VIN
+)
+WHERE
+    CarID = @CarID
+"
+                        , con))
+                        {
+                            cmd.Parameters.AddWithValue("@CarID", carID);
+                            cmd.Parameters.AddWithValue("@VIN", newVIN);
+                            _ = SQLTracer.TraceNQ(cmd, out long _);
+                            return newVIN;
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    ex.ToExceptionless().FirstCarUserID().Submit();
+                    Logfile.Log(ex.ToString());
+                }
+            }
+            return VIN;
+        }
+
         private static void CheckDriveState(KomootLoginInfo kli, Dictionary<int, KomootTour> tours)
         {
             Tools.DebugLog($"CheckDriveState");
