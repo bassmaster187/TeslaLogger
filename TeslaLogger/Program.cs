@@ -232,10 +232,10 @@ namespace TeslaLogger
                 id = Convert.ToInt32(r["id"], Tools.ciDeDE);
                 String Name = r["tesla_name"].ToString();
                 String Password = r["tesla_password"].ToString();
-                int carid = r["tesla_carid"] as Int32? ?? 0;
+                int car_id_in_account = r["tesla_carid"] as Int32? ?? 0;
                 if (Name.StartsWith("KOMOOT:", StringComparison.Ordinal))
                 {
-                    string komoot_vin = Komoot.CheckVIN(carid, r["vin"].ToString());
+                    string komoot_vin = Komoot.CheckVIN(id, r["vin"].ToString());
                     Komoot _komoot = new Komoot(id, Name.Replace("KOMOOT:", string.Empty), Password);
                     Thread komootThread = new Thread(() =>
                     {
@@ -289,7 +289,7 @@ namespace TeslaLogger
                     access_type = r["access_type"].ToString();
 
 #pragma warning disable CA2000 // Objekte verwerfen, bevor Bereich verloren geht
-                Car car = new Car(id, Name, Password, carid, tesla_token, tesla_token_expire, Model_Name, car_type, car_special_type, car_trim_badging, display_name, vin, tasker_hash, wh_tr, fleetAPI, oldCarState, wheel_type);
+                Car car = new Car(id, Name, Password, car_id_in_account, tesla_token, tesla_token_expire, Model_Name, car_type, car_special_type, car_trim_badging, display_name, vin, tasker_hash, wh_tr, fleetAPI, oldCarState, wheel_type);
                 car.Raven = raven;
                 car._virtual_key = virtualKey;
                 car._access_type  = access_type;
