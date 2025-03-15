@@ -7,7 +7,6 @@ using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
-using System.Security.Cryptography;
 using System.Diagnostics;
 
 namespace TeslaLogger
