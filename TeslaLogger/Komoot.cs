@@ -802,11 +802,12 @@ VALUES(
                         }
                     }
                 }
-                // update start address and end address
-                _ = WebHelper.UpdateAllPOIAddresses(0, $"{firstPosID},{lastPosID}");
-                // create timeline maps
                 _ = Task.Factory.StartNew(() =>
                 {
+                    // update start address and end address
+                    DBHelper.UpdateAddress(null, firstPosID);
+                    DBHelper.UpdateAddress(null, lastPosID);
+                    // create timeline maps
                     StaticMapService.GetSingleton().Enqueue(carID, firstPosID, lastPosID, 0, 0, StaticMapProvider.MapMode.Dark, StaticMapProvider.MapSpecial.None);
                     StaticMapService.CreateParkingMapFromPosid(firstPosID);
                     StaticMapService.CreateParkingMapFromPosid(lastPosID);
