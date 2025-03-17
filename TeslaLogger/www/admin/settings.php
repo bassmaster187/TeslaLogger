@@ -247,6 +247,8 @@ echo(menu("Settings"));
 		<option value="pl">Polski</option>
 		<option value="pt">Português</option>
 		<option value="ru">Русский</option>
+		<option value="ta">தமிழ் – Tamil</option>
+		<option value="tr">Türkçe</option>
 		<option value="cn">漢語</option>
 	</select>
 	</td></tr>
