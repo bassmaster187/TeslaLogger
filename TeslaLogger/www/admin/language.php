@@ -84,7 +84,14 @@ if(file_exists($filename_en))
 		if (count($a) == 1)
 			continue;
 
-		$lnen[$a[0]] = $a[1];
+		$tmp = $a[1];
+
+		if ($tmp[0] == '"' && $tmp[strlen($tmp)-1] == '"')
+			$tmp = substr($tmp, 1,-1);
+
+		$tmp = str_replace('"_QQ_"','"', $tmp);
+
+		$lnen[$a[0]] = $tmp;
 	}
 }
 	
