@@ -717,8 +717,17 @@ namespace TeslaLogger
                     }
                     else if (key == "Locked")
                     {
-                        string Locked = value["stringValue"];
-                        if (bool.TryParse(Locked, out bool l))
+                        string v = value["stringValue"];
+                        if (v == null)
+                        {
+                            v = value["booleanValue"];
+                            if (v == null)
+                            {
+                                continue;
+                            }
+                        }
+                        v = v.ToLower(CultureInfo.InvariantCulture);
+                        if (bool.TryParse(v, out bool l))
                         {
                             car.teslaAPIState.AddValue("locked", "bool", l, Tools.ToUnixTime(d), "vehicle_state");
                             car.CurrentJSON.CreateCurrentJSON();
