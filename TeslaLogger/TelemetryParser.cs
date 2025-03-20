@@ -43,6 +43,10 @@ namespace TeslaLogger
         private double? lastOutsideTemp;
         private double? lastInsideTemp;
 
+        double? latitude = null;
+        double? longitude = null;
+        double? speed = null;
+
         double lastLatitude = 0;
         double lastLongitude = 0;
         private double lastRatedRange;
@@ -290,33 +294,37 @@ namespace TeslaLogger
                             car.webhelper.is_sentry_mode = true;
                             car.CurrentJSON.current_is_sentry_mode = true;
                             car.CurrentJSON.CreateCurrentJSON();
+
+                            Log("Insert Location (SentryMode)");
+                            InsertLastLocation(d, false);
                         }
                         else
                         {
                             car.webhelper.is_sentry_mode = false;
                             car.CurrentJSON.current_is_sentry_mode = false;
                             car.CurrentJSON.CreateCurrentJSON();
+
+                            Log("Insert Location (SentryMode)");
+                            InsertLastLocation(d, false);
                         }
                         car.CurrentJSON.CreateCurrentJSON();
                     }
                     else if (key == "PreconditioningEnabled")
                     {
                         string v = value["stringValue"];
-                        if (v == null)
-                        {
-                            v = value["booleanValue"];
-                            if (v == null)
-                            {
-                                continue;
-                            }
-                        }
-                        v = v.ToLower(CultureInfo.InvariantCulture);
-                        if (bool.TryParse(v, out bool preconditioning))
-                        {
-                            car.CurrentJSON.current_is_preconditioning = preconditioning;
-                            Log("Preconditioning: " + preconditioning);
-                            car.CurrentJSON.CreateCurrentJSON();
-                        }
+                        if (v == "True")
+                            preconditioning = true;
+
+                        bool v1 = value["booleanValue"];
+                        if (v1)
+                            preconditioning = true;
+
+                        car.CurrentJSON.current_is_preconditioning = preconditioning;
+                        Log("Preconditioning: " + preconditioning);
+                        car.CurrentJSON.CreateCurrentJSON();
+                        
+                        Log("Insert Location (Preconditioning)");
+                        InsertLastLocation(d, false);
                     }
                     else if (key == "OutsideTemp")
                     {
@@ -334,6 +342,9 @@ namespace TeslaLogger
                             lastOutsideTemp = OutsideTemp;
                             car.CurrentJSON.current_outside_temperature = OutsideTemp;
                             car.CurrentJSON.CreateCurrentJSON();
+
+                            Log("Insert Location (OutsideTemp)");
+                            InsertLastLocation(d, false);
                         }
                     }
                     else if (key == "InsideTemp")
@@ -352,6 +363,9 @@ namespace TeslaLogger
                             lastInsideTemp = InsideTemp;
                             car.CurrentJSON.current_inside_temperature = InsideTemp;
                             car.CurrentJSON.CreateCurrentJSON();
+
+                            Log("Insert Location (InsideTemp)");
+                            InsertLastLocation(d, false); 
                         }
                     }
                     else if (key == "TimeToFullCharge")
@@ -1069,10 +1083,6 @@ namespace TeslaLogger
                 if (!car.FleetAPI)
                     return;
 
-                double? latitude = null;
-                double? longitude = null;
-                double? speed = null;
-
                 foreach (dynamic jj in j)
                 {
                     string key = jj["key"];
@@ -1187,9 +1197,10 @@ namespace TeslaLogger
                 {
                     if (force && speed == null)
                         speed = 0;
-                    long ts = DateTimeToUTC_UnixTimestamp(d);
+
                     Log("Insert Location" + (force ? " Force" : ""));
-                    lastposid = car.DbHelper.InsertPos(ts.ToString(), latitude.Value, longitude.Value, (int)speed.Value, null, lastOdometer, lastIdealBatteryRange, lastRatedRange, lastSoc, lastOutsideTemp, "");
+
+                    InsertLastLocation(d, false);
                 }
             }
             catch (Exception ex)
@@ -1204,16 +1215,23 @@ namespace TeslaLogger
             return (long)(d.ToUniversalTime().Subtract(new DateTime(1970, 1, 1))).TotalSeconds * 1000;
         }
 
-        void InsertLastLocation(DateTime d)
+        void InsertLastLocation(DateTime d, bool loggingPosId = true)
         {
             try
             {
                 if (lastLatitude != 0 && lastLongitude != 0)
                 {
                     long ts = DateTimeToUTC_UnixTimestamp(d);
-                    lastposid = car.DbHelper.InsertPos(ts.ToString(), lastLatitude, lastLongitude, 0, null, lastOdometer, lastIdealBatteryRange, lastRatedRange, lastSoc, lastOutsideTemp, "");
+                    
+                    if (speed == null)
+                        speed = 0;
 
-                    Log("Insert Last Location ID: " + lastposid);
+                    lastposid = car.DbHelper.InsertPos(ts.ToString(), lastLatitude, lastLongitude, (int)speed.Value, null, lastOdometer, lastIdealBatteryRange, lastRatedRange, lastSoc, lastOutsideTemp, "");
+
+                    if (loggingPosId)
+                    {
+                        Log("Insert Last Location ID: " + lastposid);
+                    }
                 }
             }
             catch (Exception ex)
