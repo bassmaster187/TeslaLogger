@@ -103,3 +103,4 @@ TeslaLogger/bin/encryption.txt
 /MQTTClient/.vs
 /OSMMapGenerator/.vs
 /TeslaLogger/.vs
+.vscode/settings.json
