@@ -152,7 +152,7 @@ namespace TeslaLogger
 
             internal void DownloadTour(KomootLoginInfo kli)
             {
-                Logfile.Log($"Komoot_{kli.carID}: DownloadTour {tourID} ...");
+                Logfile.Log($"#{kli.carID} Komoot: DownloadTour {tourID} ...");
                 using (HttpClient httpClient = new HttpClient())
                 {
                     httpClient.DefaultRequestHeaders.Add("Authorization", "Basic " + Convert.ToBase64String(Encoding.UTF8.GetBytes($"{kli.user_id}:{kli.token}")));
@@ -162,12 +162,12 @@ namespace TeslaLogger
                         if (result.IsSuccessStatusCode)
                         {
                             string resultContent = result.Content.ReadAsStringAsync().Result;
-                            Logfile.Log($"Komoot_{kli.carID}: DownloadTour {tourID} done");
+                            Logfile.Log($"#{kli.carID} Komoot: DownloadTour {tourID} done");
                             this.json = resultContent;
                         }
                         else
                         {
-                            Logfile.Log($"Komoot_{kli.carID}: DownloadTour{tourID} error: {result.StatusCode}");
+                            Logfile.Log($"#{kli.carID} Komoot: DownloadTour{tourID} error: {result.StatusCode}");
                         }
                     }
                 }
@@ -320,7 +320,7 @@ WHERE
             Login(kli);
             if (!kli.loginSuccessful)
             {
-                Logfile.Log($"Komoot_{kli.carID}: Login failed!");
+                Logfile.Log($"#{kli.carID} Komoot: Login failed!");
             }
             else
             {
@@ -331,10 +331,10 @@ WHERE
                 }
                 else
                 {
-                    Logfile.Log($"Komoot_{kli.carID}: no tours found!");
+                    Logfile.Log($"#{kli.carID} Komoot: no tours found!");
                 }
             }
-            Logfile.Log($"Komoot_{kli.carID}: done");
+            Logfile.Log($"#{kli.carID} Komoot: done");
         }
 
         private static void ParseTours(KomootLoginInfo kli, Dictionary<long, KomootTour> tours, bool dumpJSON = false)
@@ -342,7 +342,7 @@ WHERE
             foreach (int tourid in tours.Keys.OrderBy(k => k))
             {
                 KomootTour tour = tours[tourid];
-                Logfile.Log($"Komoot_{kli.carID}: ParseTours" + Environment.NewLine + tour);
+                Logfile.Log($"#{kli.carID} Komoot: ParseTours" + Environment.NewLine + tour);
                 // check if tour already exists in table komoot
                 if (TourExists(tourid))
                 {
@@ -353,7 +353,7 @@ WHERE
                 tour.DownloadTour(kli);
                 if (dumpJSON)
                 {
-                    Logfile.Log($"Komoot_{kli.carID}: tour({tourid}) JSON:" + Environment.NewLine + tour.json);
+                    Logfile.Log($"#{kli.carID} Komoot: tour({tourid}) JSON:" + Environment.NewLine + tour.json);
                 }
                 // check if drivestate already exists
                 if (DriveStateExists(kli.carID, tour.start, out int drivestateID))
@@ -367,7 +367,7 @@ WHERE
                 // tour does not exist in table komoot nor in table drivestate
                 if (dumpJSON)
                 {
-                    Logfile.Log($"Komoot_{kli.carID}: GetTour({tourid}) JSON:" + Environment.NewLine + tour.json);
+                    Logfile.Log($"#{kli.carID} Komoot: GetTour({tourid}) JSON:" + Environment.NewLine + tour.json);
                 }
                 /* expected JSON
 {
@@ -519,7 +519,7 @@ WHERE
                 if (jsonResult.ContainsKey("_embedded") && jsonResult["_embedded"].ContainsKey("coordinates") && jsonResult["_embedded"]["coordinates"].ContainsKey("items"))
                 {
                     // JSON OK
-                    Logfile.Log($"Komoot_{kli.carID}: ParseTours({tourid}) parsing {jsonResult["_embedded"]["coordinates"]["items"].Count} coordinates ...");
+                    Logfile.Log($"#{kli.carID} Komoot: ParseTours({tourid}) parsing {jsonResult["_embedded"]["coordinates"]["items"].Count} coordinates ...");
                     foreach (dynamic pos in jsonResult["_embedded"]["coordinates"]["items"])
                     {
                         if (pos.ContainsKey("lat") && pos.ContainsKey("lng") && pos.ContainsKey("alt") && pos.ContainsKey("t"))
@@ -540,7 +540,7 @@ WHERE
                                 sb.AppendLine(pos["alt"]);
                                 sb.Append("t:");
                                 sb.AppendLine(pos["t"]);
-                                Logfile.Log($"Komoot_{kli.carID}: ParseTours({tourid}) parsing tours.pos error - error parsing JSON contents" + sb.ToString());
+                                Logfile.Log($"#{kli.carID} Komoot: ParseTours({tourid}) parsing tours.pos error - error parsing JSON contents" + sb.ToString());
                             }
                         }
                         else
@@ -555,7 +555,7 @@ WHERE
                             sb.AppendLine(jsonResult.ContainsKey("alt"));
                             sb.Append("t:");
                             sb.AppendLine(jsonResult.ContainsKey("t"));
-                            Logfile.Log($"Komoot_{kli.carID}: ParseTours({tourid}) parsing tours.pos error - missing JSON contents" + sb.ToString());
+                            Logfile.Log($"#{kli.carID} Komoot: ParseTours({tourid}) parsing tours.pos error - missing JSON contents" + sb.ToString());
                         }
                     }
                 }
@@ -578,13 +578,13 @@ WHERE
                         }
                     }
                     sb.AppendLine();
-                    Logfile.Log($"Komoot_{kli.carID}: parsing tours error - missing JSON contents" + sb.ToString() + tour.json);
+                    Logfile.Log($"#{kli.carID} Komoot: parsing tours error - missing JSON contents" + sb.ToString() + tour.json);
                 }
                 // positions parsed, continue to insert positions into table pos
-                Tools.DebugLog($"Komoot_{kli.carID} ParseTours({tourid}) " + Environment.NewLine + tour);
+                Tools.DebugLog($"#{kli.carID} Komoot: ParseTours({tourid}) " + Environment.NewLine + tour);
                 // find initial odometer for first pos
                 double odo = GetInitialOdo(tour.carID, tour.start);
-                Tools.DebugLog($"Komoot_{kli.carID} ParseTours({tourid}) initialOdo:{odo}");
+                Tools.DebugLog($"#{kli.carID} Komoot: ParseTours({tourid}) initialOdo:{odo}");
                 int firstPosID = 0;
                 int LastPosId = 0;
                 foreach (int posID in tour.positions.Keys.OrderBy(k => k))
@@ -608,7 +608,7 @@ WHERE
                 }
                 else
                 {
-                    Logfile.Log($"Komoot_{kli.carID}: error - no positions added to table pos - tour JSON:" + Environment.NewLine + tour.json);
+                    Logfile.Log($"#{kli.carID} Komoot: error - no positions added to table pos - tour JSON:" + Environment.NewLine + tour.json);
                 }
             }
         }
@@ -765,7 +765,7 @@ LIMIT 1", con))
 
         private static int CreateDriveState(int carID, DateTime start, int firstPosID, DateTime end, int lastPosID)
         {
-            Logfile.Log($"Komoot_{carID}: CreateDriveState {firstPosID}->{lastPosID} {start} {end} ...");
+            Logfile.Log($"#{carID} Komoot: CreateDriveState {firstPosID}->{lastPosID} {start} {end} ...");
             int drivestateID = -1;
             try
             {
@@ -875,7 +875,7 @@ VALUES(
 
         private static Dictionary<long, KomootTour> DownloadTours(KomootLoginInfo kli, bool dumpJSON = false)
         {
-            Logfile.Log($"Komoot_{kli.carID}: downloading tours ...");
+            Logfile.Log($"#{kli.carID} Komoot: downloading tours ...");
             StringBuilder sb = new StringBuilder();
             sb.AppendLine();
             Dictionary<long, KomootTour> komootTours = new Dictionary<long, KomootTour>();
@@ -892,10 +892,10 @@ VALUES(
                         if (result.IsSuccessStatusCode)
                         {
                             string resultContent = result.Content.ReadAsStringAsync().Result;
-                            Tools.DebugLog($"Komoot_{kli.carID} GetTours result: {resultContent.Length}");
+                            Tools.DebugLog($"#{kli.carID} Komoot: GetTours result: {resultContent.Length}");
                             if (dumpJSON)
                             {
-                                Logfile.Log($"Komoot_{kli.carID}: tours JSON:" + Environment.NewLine + resultContent);
+                                Logfile.Log($"#{kli.carID} Komoot: tours JSON:" + Environment.NewLine + resultContent);
                             }
                             /* expected JSON
 		{
@@ -1029,7 +1029,7 @@ VALUES(
                             if (jsonResult.ContainsKey("_embedded") && jsonResult["_embedded"].ContainsKey("tours"))
                             {
                                 dynamic jtours = jsonResult["_embedded"]["tours"];
-                                Logfile.Log($"Komoot_{kli.carID}: found {jsonResult["_embedded"]["tours"].Count} tours ...");
+                                Logfile.Log($"#{kli.carID} Komoot: found {jsonResult["_embedded"]["tours"].Count} tours ...");
                                 foreach (dynamic tour in jtours)
                                 {
                                     // build tour info
@@ -1063,18 +1063,18 @@ VALUES(
                                         }
                                         else
                                         {
-                                            Logfile.Log($"Komoot_{kli.carID}: error parsing tour ID {tour["id"]}");
+                                            Logfile.Log($"#{kli.carID} Komoot: error parsing tour ID {tour["id"]}");
                                         }
                                     }
                                     else if (tour.ContainsKey("id") && tour.ContainsKey("type"))
                                     {
-                                        Logfile.Log($"Komoot_{kli.carID}: tour {tour["id"]} skipped, type: {tour["type"]} ...");
+                                        Logfile.Log($"#{kli.carID} Komoot: tour {tour["id"]} skipped, type: {tour["type"]} ...");
                                     }
                                 }
                             }
                             else
                             {
-                                Logfile.Log($"Komoot_{kli.carID}: error: tours does not contain _embedded.tours");
+                                Logfile.Log($"#{kli.carID} Komoot: error: tours does not contain _embedded.tours");
                             }
                         }
                     }
@@ -1085,7 +1085,7 @@ VALUES(
 
         private static KomootLoginInfo Login(KomootLoginInfo kli)
         {
-            Logfile.Log($"Komoot_{kli.carID}: logging in as {kli.username} ...");
+            Logfile.Log($"#{kli.carID} Komoot: logging in as {kli.username} ...");
             using (HttpClient httpClient = new HttpClient())
             {
                 httpClient.DefaultRequestHeaders.Add("Authorization", "Basic " + Convert.ToBase64String(Encoding.UTF8.GetBytes($"{kli.username}:{kli.password}")));
@@ -1095,7 +1095,7 @@ VALUES(
                     if (result.IsSuccessStatusCode)
                     {
                         string resultContent = result.Content.ReadAsStringAsync().Result;
-                        Tools.DebugLog($"Komoot_{kli.carID} login result: {resultContent.Length}");
+                        Tools.DebugLog($"#{kli.carID} Komoot: login result: {resultContent.Length}");
                         /* expected JSON
 {
     "email": "abc@xyz.net",
@@ -1129,21 +1129,21 @@ VALUES(
                                 kli.user_id = jsonResult["username"];
                                 kli.token = jsonResult["password"];
                                 kli.loginSuccessful = true;
-                                Logfile.Log($"Komoot_{kli.carID}: logged in as {jsonUser["displayname"]}");
+                                Logfile.Log($"#{kli.carID} Komoot: logged in as {jsonUser["displayname"]}");
                             }
                             else
                             {
-                                Logfile.Log($"Komoot_{kli.carID}: login failed - user JSON does not contain displayname");
+                                Logfile.Log($"#{kli.carID} Komoot: login failed - user JSON does not contain displayname");
                             }
                         }
                         else
                         {
-                            Logfile.Log($"Komoot_{kli.carID}: login failed - JSON does not contain user");
+                            Logfile.Log($"#{kli.carID} Komoot: login failed - JSON does not contain user");
                         }
                     }
                     else
                     {
-                        Logfile.Log($"Komoot_{kli.carID}: login failed ({result.StatusCode})");
+                        Logfile.Log($"#{kli.carID} Komoot: login failed ({result.StatusCode})");
                     }
                 }
             }
