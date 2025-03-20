@@ -228,7 +228,7 @@ else
 				var text = "<?php t("Online"); ?>";
 
 				if (jsonData["is_preconditioning"])
-					text = text + "<br><?php t("Preconditioning"); ?> " + jsonData["inside_temperature"] +"°C";
+					text = text + "<br><?php t("Preconditioning"); ?> " + parseFloat(jsonData["inside_temperature"]).toFixed(1) +"°C";
 
 				if (jsonData["sentry_mode"])
 					text = text + "<br><?php t("Sentry Mode"); ?>";

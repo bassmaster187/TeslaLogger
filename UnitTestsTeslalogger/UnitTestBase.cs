@@ -658,6 +658,22 @@ namespace UnitTestsTeslalogger
         }
 
         [TestMethod]
+        public void Car_X_P100D_founder()
+        {
+            Car c = new Car(0, "", "", 0, "", DateTime.Now, "", "", "", "", "", "", "", null, false);
+            WebHelper wh = c.webhelper;
+
+            MemoryCache.Default.Remove("GetAvgMaxRage_0");
+            wh.car.CarType = "modelx";
+            wh.car.CarSpecialType = "founder";
+            wh.car.TrimBadging = "p100d";
+            wh.UpdateEfficiency();
+
+            Assert.AreEqual("X P100D", wh.car.ModelName);
+            Assert.AreEqual(0.226, wh.car.WhTR);
+        }
+        
+        [TestMethod]
         public void Car_X_100DRaven()
         {
             Car c = new Car(0, "", "", 0, "", DateTime.Now, "", "", "", "", "", "", "", null, false);

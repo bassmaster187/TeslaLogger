@@ -40,6 +40,12 @@ CREATE TABLE kvs(
 ) ENGINE = InnoDB CHARSET = utf8mb4 COLLATE utf8mb4_unicode_ci;");
                     Logfile.Log("CREATE TABLE OK");
                 }
+                if (DBHelper.ColumnExists("kvs", "longvalue"))
+                {
+                    Logfile.Log("ALTER TABLE kvs ADD longvalue BIGINT NULL");
+                    UpdateTeslalogger.AssertAlterDB();
+                    DBHelper.ExecuteSQLQuery(@"ALTER TABLE kvs ADD longvalue BIGINT NULL", 600);
+                }
             }
             catch (Exception ex)
             {
@@ -62,6 +68,41 @@ INSERT INTO kvs SET
 ON DUPLICATE KEY UPDATE
     id = @key,
     ivalue = @value", con))
+                    {
+                        cmd.Parameters.AddWithValue("@key", key);
+                        cmd.Parameters.AddWithValue("@value", value);
+                        int rowsAffected = SQLTracer.TraceNQ(cmd, out _);
+                        if (rowsAffected == 1 // INSERT
+                            || rowsAffected == 2 // DELETE and INSERT
+                           )
+                        {
+                            return SUCCESS;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ex.ToExceptionless().FirstCarUserID().Submit();
+                Tools.DebugLog("KVS: Exception", ex);
+            }
+            return FAILED;
+        }
+
+        internal static int InsertOrUpdate(string key, long value)
+        {
+            try
+            {
+                using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+                {
+                    con.Open();
+                    using (MySqlCommand cmd = new MySqlCommand(@"
+INSERT INTO kvs SET
+    id = @key,
+    longvalue = @value
+ON DUPLICATE KEY UPDATE
+    id = @key,
+    longvalue = @value", con))
                     {
                         cmd.Parameters.AddWithValue("@key", key);
                         cmd.Parameters.AddWithValue("@value", value);
@@ -328,7 +369,7 @@ WHERE
         // defaults to int.MinValue, check return code for SUCCESS
         internal static int Get(string key, out int value)
         {
-            if(Tools.IsUnitTest())
+            if (Tools.IsUnitTest())
             {
                 value = int.MinValue;
                 return NOT_FOUND;
@@ -362,6 +403,46 @@ WHERE
                 Tools.DebugLog("KVS: Exception", ex);
             }
             value = int.MinValue;
+            return NOT_FOUND;
+        }
+
+        // defaults to long.MinValue, check return code for SUCCESS
+        internal static int Get(string key, out long value)
+        {
+            if (Tools.IsUnitTest())
+            {
+                value = long.MinValue;
+                return NOT_FOUND;
+            }
+
+            try
+            {
+                using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+                {
+                    con.Open();
+                    using (MySqlCommand cmd = new MySqlCommand(@"
+SELECT
+    longvalue
+FROM
+    kvs
+WHERE
+    id = @key", con))
+                    {
+                        cmd.Parameters.AddWithValue("@key", key);
+                        MySqlDataReader dr = SQLTracer.TraceDR(cmd);
+                        if (dr.Read() && dr[0] != DBNull.Value && long.TryParse(dr[0].ToString(), out value))
+                        {
+                            return SUCCESS;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ex.ToExceptionless().FirstCarUserID().Submit();
+                Tools.DebugLog("KVS: Exception", ex);
+            }
+            value = long.MinValue;
             return NOT_FOUND;
         }
 

@@ -1,0 +1,580 @@
+﻿#Info
+INFO_important="Önemli Bilgi"
+INFO_FLEETAPI="1 Ocak 2025'ten itibaren Tesla resmi Filo API'yi ücretli bir modele geçecek. ({LINK1}). Sonuç olarak, bir abonelik modeline geçmek ve Tesla, vergiler ve ödeme hizmeti sağlayıcı için masraflarını karşılamak için küçük aylık bir ücret ödemek zorunda kaldım.<br/><br/>Aynı zamanda, Tesla'nın Hizmet Şartları ({LINK2}) resmi olmayan Sahiplerin API'sinin kullanımını durdurmamı sağladı; aksi takdirde, bana karşı yasal eylem yapabilirler (§5.6.6 ve §5.6.11). Lütfen araçlarınızı ana giriş bilgilerini yeniden girince Filo API'sine gönderin.<br/><br/>Ne yazık ki, eski Model S/X araçları ( 2021'den önce icat edildi), Filo API'sini kullanmak için bir çözüm yoktur. Bu araçlar eski Sahibi API aracılığıyla çalışmaya devam edebilir ve Tesla'nın böyle durumlarda yasal bir eylem yapmasını beklemiyorum. Ancak, bu araçlar için hala bir bağış biçimi olarak abone olmayı seçebilirsiniz, çünkü kullanımları için Tesla ödemek zorunda değilim.<br/><br/>Tesla sunucu yükünü azaltmayı ve Fleet API ile gelir üretmeyi amaçladığından, resmi olmayan Sahibi API'sinin 1 Ocak 2025'te kapatılacağı muhtemeldir. Eski Model S/X araçlarının bu değişiklikten etkilenmediğini umuyoruz."
+INFO_RESTRICTED="Aktif bir abonelik olmadan, ne yazık ki Tesla'nızın maliyetlerini karşılayamıyoruz. Bu nedenle, işlevselliği ve özellikle konum güncellemelerinin sıklığını önemli ölçüde sınırlamak zorunda kalıyoruz."
+INFO_VEHICLE_LOCATION="Tesla, veri erişimi üzerinde daha ayrıntılı bir kontrol getirdi: {LINK1} <br>Üçüncü taraf uygulamaları konum bilgilerine erişim izni isteyebilir. Bu izni henüz vermediniz. Mart 2025'ten itibaren, gerekli izni vermediğiniz sürece hiçbir konum bilgisi paylaşılmayacaktır. Lütfen tekrar giriş yapın: {LINK2}."
+
+#Akku Trips.json
+Akku Trips="Batarya Kullanımı (Sürüşte)"
+Start Trip="Seyahati Başlat"
+End Trip="Seyahati Bitir"
+Time="Tarih"
+StartSOC="Başlangıç Şarj Seviyesi"
+EndSOC="Bitiş Şarj Seviyesi"
+SOC diff="Şarj Seviyesi Farkı"
+Start km="Başlangıç KM"
+End km="Bitiş KM"
+Start mi="Başlangıç Mil"
+End mi="Bitiş Mil"
+kmDiff="KM Fark"
+Max Range="Maks. Menzil"
+Ø Verbrauch="Ort. Tüketim"
+Tage="Günler"
+Save="Kaydet"
+
+#Degradation.json
+Degradation="Aşınma"
+Maximalreichweite [km]="Maks. Menzil (KM)"
+Maximalreichweite [mi]="Maks. Menzil (Mil)"
+km Stand [km]="Mesafe [KM]"
+mi Stand [mi]="Mesafe [Mil]"
+Odometer [mi]="Kilometre Sayacı [Mil]"
+Max. Reichweite (Monatsmittel) [km]="Maks Menzil (aylık ort) [km]"
+Max. Reichweite (Monatsmittel) [mi]="Maks Menzil (aylık ort) [Mil]"
+
+#Ladehistorie.json
+Ladehistorie="Şarj Geçmişi"
+Startdatum="Başlangıç Tarihi"
+Enddatum="Bitiş Tarihi"
+geladen kWh="kWSa Şarj Edilen"
+km Stand="Kilometre Sayacı"
+Adresse="Adres"
+TR km Start="Başlangıç KM"
+TR km Ende="Bitiş KM"
+SOC Ende="Şarj Seviyesi Bitiş"
+100% TR="100% TR"
+Minuten="Dakika"
+TR mi Start="Başlangıç Mil"
+TR mi Ende="Bitiş Mil"
+ØkW="Ort. kW"
+
+#Ladestatistik.json
+Ladestatistik="Şarj İstatistikler"
+Letzte Ladung="Son şarj"
+Ort="Konum"
+Ø geladen kWh="Ort. şarj edilen kWSa"
+Ladezeit h="Şarj Süreci"
+Ø SOC="Ort. Şarj Seviyesi"
+Max SOC="Maks. Şarj Seviyesi"
+Anzahl Ladungen="Şarj Sayısı"
+Anzahl="Sayı"
+Geladen="Şarj edildi"
+Ladezeit="Şarj süreci"
+Anz. Ladungen="Şarj Sayısı"
+Ladehub="Şarj-Hub"
+PV="FV"
+
+#SOC Ladestatistik.json
+SOC Ladestatistik= "Şarj Seviyesi İstatistikler" 
+SOC [%]="Şarj Seviyesi [%]"
+
+#SOC Entladestatistik.json
+SOC Entladestatistik="Şarj Seviyesi Boşalma İstatistikleri"
+
+#Laden.json
+Laden="Şarj"
+Ladespannung [V]="Şarj Voltajı"
+Reichweite [mi]="Menzil (Mil)"
+Reichweite [km]="Menzil (KM)"
+Leistung [kW]="Şarj Gücü"
+Phasen="Faz"
+Stromstärke [A]="Akım Gücü"
+Angefordert [A]="Sorgulanan Akım"
+Pilot [A]="Pilot [A]"
+
+#Vampir Drain Monatsstatistik.json
+Vampir Drain Monatsstatistik="Aylık Vampir Drain İstatistikleri"
+TR mi Verlust="TR mil Kaybı"
+kWh Verlust="kWSa Kaybı"
+Eur Verlust="EUR Kaybı"
+Zeitspanne Stunden="Zaman aralığı Saat"
+TR mi Verlust pro Stunde="TR Saat`te mi Kaybı"
+mi Stand="mi Durum"
+
+#Trip.json
+Trip="Seyahat"
+Start="Başlangıç"
+Ende="Bitiş"
+Start Adresse="Başlangıç Adresi"
+Ziel Adresse="Bitiş Adresi"
+Ø Verbrauch kWh="Ort. Tüketim kWSa"
+Verbraucht kWh="kWSa Tüketim"
+Dauer Min="Sürec (dak.)"
+mi="Mil"
+km="Km"
+Ø °C="Ort.°C"
+Ø °F="Ort.°F"
+max mph="max Mph"
+max km/h="max Km/h"
+max PS="max BG"
+min PS="min BG"
+max kW="max kW"
+min kW="min kW"
+Ø PS="Ort. BG"
+Ø kW="Ort. kW"
+Ø mph="Ort. Mph"
+Ø km/h="Ort. Km/h"
+
+#Trip Top Destinations.json
+Trip Top Ziele="En sık Rotalar"
+Letzte Fahrt="Son Seyahat"
+Ø Dauer Min="Ort. Sürec (dak.)"
+Ø Verbrauch kWh/100km="Ort. Tüketim kWSa/100Km"
+Ø Verbraucht kWh="Ort. Tüketim kWSa"
+Anzahl Trips="Seyahat Sayısı"
+Anzahl="Seyahat Sayısı"
+Fahrzeug="Araç"
+
+#Vampir Drain.json
+Vampir Drain="Vampir Kaybı"
+Standby Stunden="bekleme modundaki süreç"
+Standby="bekleme modu"
+TR km Verlust="TR Km Kaybı"
+TR km Verlust pro Stunde="Saat`te TR Km Kaybı"
+
+#Verbrauch.json
+Verbrauch="Tüketim"
+Höhe [m]="Yükseklik (m)"
+Altitude [m]="Yükseklik (m)"
+Geschwindigkeit [mph]="Hiz Mph"
+Geschwindigkeit [km/h]="Hiz Km/h"
+Leistung [PS]="Belgier Gücü BG"
+Außentemperatur [°C]="Dış sıcaklık [°C]"
+Außentemperatur [°F]="Dış sıcaklık [°F]"
+Innentemperatur [°C]="İç  sıcaklık [°C]"
+Innentemperatur [°F]="İç  sıcaklık [°F]"
+Laden fertig="Sarj Bitti"
+Schlafen="Uyku"
+Online="Çevrimci"
+
+#Verbrauchsstatistik.json
+Verbrauchsstatistik="Tüketim İstatistikleri"
+
+#Visited.json
+Visited="Ziyaret edilen"
+
+#index.php
+Car Info="Arac Bilgileri"
+Status="Statü"
+Typical Range="Tipik Menzil"
+Odometer="Kilometre Sayaçı"
+Car Version="Araç Versiyonu"
+Last Trip="Son Seyahat"
+Duration="Sürec"
+Distance="Mesafe"
+Max km/h="Max Km/h"
+PS="Beygir Gücü"
+Current Pos="Bulunan Konum"
+Last Update="Son güncelleme"
+Charging="Sarj"
+Done="Bitti"
+Done at=
+Battery Heater="Batarya Isıtıcısı"
+Sentry Mode="Sentrik Modus"
+Preconditioning="Ön İklimlendirme"
+Offline="Çevrim Dışı"
+Inactive="Aktif Dışı"
+Falling asleep="Uyku moduna geçiş"
+min="Min"
+kWh="kWSa"
+Wh/km="WSa/Km"
+km/h="Km/h"
+Sleeping="Uyku modunda"
+kW="kW"
+OK="Ok"
+No="Hayır"
+Yes="Evet"
+Cell Temp="Hücre Isısı"
+Max Charge="Max Sarj"
+Max Discharge="Maks Deşarj"
+Cell Imbalance="Hücre Dengesizliği"
+Software Update="Yazılım Güncelleme"
+Consumption="Tüketim"
+Ø Consumption="Ort. Tüketim"
+Please update to latest docker-compose.yml file. Check: {LINK}="Lütfen en son docker-compose.yml dosyasını güncelleyin. Kontrol edin:{LINK}"
+FatalErrorMissingKey="Hata oluştu, 'MissingKey'"
+
+#menu.php
+Logfile="Günlük Tutanağı"
+Restart="Yeniden Başlat"
+Update="Güncelleme"
+Dashboards="Gösterge Tabloları"
+Fleet Statistic="Filo İstatistikleri"
+Extras="Ekstralar"
+Settings="Ayarlar"
+Backup="Yedekle"
+Restore="İyileştirme"
+Geofence="Geofence"
+Suspend Teslalogger=""
+Wakeup Teslalogger="Teslalogger'i uyandır"
+Dashboard="Gösterge Tablosu"
+My Degradation="Degratasyonum"
+My Charging AVG="Şahsi Ort. Şarjım"
+Fleet Degradation AVG="Ort. Filo Degratasyonu"
+Fleet Charging AVG="Ort. Filo Şarj"
+Fleet Charging MAX (Firmware)="Maks Filo Şarj (Yazılım)"
+Fleet Charging Locations="Filo Şarj Konumları"
+Fleet Fast Charging Map="Filo hızlı Şarj hartiası"
+Supercharger Usage="SüperŞarj Kullanımı"
+Firmware Tracker="Yazılım Takibi"
+Abetterrouteplanner="Daha uygun rota planlayıcı"
+
+#password.php
+Teslalogger Tesla Credentials="Teslalogger Tesla bilgileri"
+Please enter your Tesla account credentials="Lütfen Tesla Kullanıcı bilgilerinizi girin"
+Email="e-posta adresiniz"
+Password="Şifre"
+Repeat Password="Şifreyi tekrarla"
+Löschen="Sil"
+Speichern="Kaydet"
+Please enter the access token!="Lütfen 'Access Token' Erişim Token bilgilerinizi girin"
+Please enter the refresh token!="Lütfen 'Refresh Token' Yenileme Token bilgilerinizi girin"
+Please select a vehicle="Lütfen aracınızı seçin"
+Check Logfile!="Tutanağı kontrol ediniz"
+Do you really want to delete this vehicle?="Aracı silmek üzeresiniz, emin misiniz?"
+Check Logfile in one minute!="Tutanağı bir dak. sonra tekrar kontrol ediniz"
+Unauthorized="İzinsiz"
+This isn't a valid URL!="Bu geçerli bir URL değil! "
+This isn't an auth link by Tesla!="Bu bir Tesla kimlik doğrulama bağlantısı değil!"
+The URL doesn't contain the expected format!="URL beklenen formatta değil!"
+Access Token="Erişim Tokeni"
+Refresh Token="Yenileme Tokeni"
+Car="Araç"
+Free Supercharging="Ücretsiz SüperŞarj"
+Reconnect="Tekrar bağlan"
+Model="Model"
+VIN="Şasi Numarası"
+Free SUC=
+Edit=
+New car="Yeni Araç"
+TeslaAuthApps=
+BA_Browser=
+BA_Read=
+BA_Logon=
+BA_Auth=
+BA_NotFound=
+BA_URL=
+BA_Invalid=
+BA_Logoff=
+BA_GetToken=
+BA_SelectCar=
+BA_Step1=
+BA_Step2=
+BA_Step3=
+BA_FillOut=
+BA_CopyUrl=
+BA_Paste=
+BA_FLEETAPI=
+BA_ALLCARS=
+BA_MODELSXOLD=
+Get Tokens=
+Subscription=
+Subscribe=
+SubscribeManage=
+SubscriptionRequired=
+FleetAPIRequired=
+Aktiv="Aktif"
+
+#password_fleet.php
+PF_LOGOUT=
+PF_LOGIN=
+PF_LINK=
+PF_HELP=
+PF_PERMISSION=
+PF_OLDSX=
+PF_HERE=
+PF_VKEY=
+PF_SUBSCRIPTION=
+
+#changecarname.php
+CarNameTitle=
+TextCarName=
+CarName=
+
+#settings.php
+Please choose your vehicle="Lütfen arajınızı seçin"
+Credentials="Bilgileriniz"
+Language="Dil"
+Power="Güç"
+Temperatur="Isı"
+Unit of length=
+URL Admin Panel=
+All="Hepsi"
+Stable="Saglam"
+None="Yok"
+Enable="Etkinleştir"
+Celsius="Santigrat"
+Fahrenheit="Fahrenhayt"
+URL Grafana="Grafna URL'si"
+Teslalogger HTTP Port="Teslalogger HHTP Portu"
+Zoom Level="Yakınlaştırma Seviyesi"
+ScanMyTesla integration="ScanMyTesla entegrasyonu"
+Main Car="Ana Araç"
+Car Name="Araç Adı"
+ScanMyTesla last received="ScanMyTesla son alınan"
+Tasker Token="Tasker Token"
+Tasker URL="Tasker URL"
+Received Tasker Token="Gelen Tasker Token"
+Show calc. 100% range="Hesaplanan 100% menzili göster"
+Saved!="Kaydeldi"
+MyTesla="Teslam"
+Teslalogger Adminpanel="Teslalogger Yönetici Paneli"
+Temperature="Sıcaklık"
+mile="Mil"
+Ideal="İdeal"
+Rated="Nominal"
+Share data anonymously="Verileri anonim olarak paylaş"
+Sleep="Uyku"
+to="ile"
+Position by StreamingAPI="StreamingAPI`den gelen konum"
+
+#Alle Verbräuche - ScanMyTesla.json
+Alle Verbräuche - ScanMyTesla="Tüm Tüketimler"
+Zelltemperatur [°C]="Hücre Sıcaklığı [°C]"
+Zelltemperatur [°F]="Hücre Sıcaklığı [°F]"
+
+#Trip Monatsstatistik.json
+Datum="Tarih"
+Fahrzeit [h]="Sürüş Süresi [sa]"
+Strecke [km]="Mesafe [km]"
+Strecke [mi]="Mesafe [mi]"
+Verbrauch [kWh]="Tüketim [kWsa]"
+Ø Verbrauch [kWh]="Ort. Tüketim [kWh]"
+Anzahl Trips="Yolculuk Sayısı"
+Trip Monatsstatistik="Aylık Yolculuk İstatistikleri"
+Trip Jahresstatistik="Yıllık Yolculuk İstatistikleri"
+Jahr/Monat="Yıl/Ay"
+Zellspannungen 01-20 - ScanMyTesla="Hücre Voltajları 01-20 - ScanMyTesla"
+Zellspannungen 21-40 - ScanMyTesla="Hücre Voltajları 21-40 - ScanMyTesla"
+Zellspannungen 41-60 - ScanMyTesla="Hücre Voltajları 41-60 - ScanMyTesla"
+Zellspannungen 61-80 - ScanMyTesla="Hücre Voltajları 61-80 - ScanMyTesla"
+Zellspannungen 81-99 - ScanMyTesla="Hücre Voltajları 81-99 - ScanMyTesla"
+Zellspannungen="Hücre Voltajları"
+Zellspannung="Hücre Voltajı"
+Ja="Evet"
+Nein="Hayır"
+Einschlafen="Uyku Moduna Geç"
+Automatic updates="Otomatik Güncelleme"
+TextShare="Metin Paylaşımı"
+Daten anonym teilen="Verileri anonim olarak paylaş"
+TextSuspendTeslalogger="Teslalogger'ı Askıya Al"
+Resume Teslalogger="Günlükleyiciyi Devam Ettir"
+Range="Menzil"
+Ladekosten="Sarj Maliyetleri"
+Ladesäule="Sarj İstasyonu""
+Währung="Para Birimi"
+Kosten pro kWh="kWsa başına maliyet"
+Kosten pro Ladung="Şarj başına maliyet"
+Kosten pro Minute="Dakika başına maliyet"
+Kosten Blockiergebühr="Bloke ücreti maliyeti"
+Summe="Toplam"
+kWh laut Zähler / Rechnung="Sayaça göre kWsa/Fatura"
+Wirkungsgrad="Verimlilik"
+
+#Timeline Plugin.json
+Dauer="Süre"
+Parking="Park etme"
+Driving="Sürüş"
+Missing="Eksik"
+Ø Temperatur="Ort. Sıcaklık"
+Verbraucht="Tüketilen"
+StreamingPosHelp="Streaming Konumu Yardımı"
+
+#journeys.php
+Ladezeit [h]="Şarj Süresi [sa]"
+Journeys="Yolculuklar"
+Journey name missing!="Yolculuk adı eksik!"
+Please select="Lütfen seçiniz"
+Please select start point!="Lütfen başlangıç noktasını seçin!"
+Please select end point!="Lütfen bitiş noktasını seçin!"
+TextJourneys="Yolculuk Metni"
+ID="No"
+Journey="Yolculuk"
+Start address="Başlangıç adresi"
+Target address="Hedef adresi"
+End="Bitiş"
+Consumed kWh="Tüketilen kWsa"
+Charged kWh="Şarj edilen kWh"
+Drive time [h]="Sürüş süresi [sa]"
+Charge time [h]="Şarj süresi [sa]"
+Distance [mi]="Mesafe [mil]"
+Distance [km]="Mesafe [km]"
+Charging costs="Şarj maliyetleri"
+CO2 [kg]="CO2 [kg]"
+New Journey="Yeni Yolculuk"
+Journey name="Yolculuk adı"
+Please wait="Lütfen bekleyin"
+Please select start first="Lütfen önce başlangıcı seçiniz"
+DelJourney="Yolculuğu Sil"
+Display _MENU_ records per page="Sayfa başına _MENU_ kayıt göster"
+Nothing found="Bir şey bulunamadı"
+Showing _START_ to _END_ of _TOTAL_ entries="_START_'tan _END_'e kadar _TOTAL_ kayıtlar gösteriliyor"
+No records available="Hic bir kayıt mevcut değil"
+(filtered from _MAX_ total records)="(toplam _MAX_ kayıttan filtrelendi)"
+Search="Arama"
+First="İlk"
+Last="Son"
+Next="Sonraki"
+Previous="Önceki"
+
+#Status.json
+Current Status="Mevcut Durum"
+SOC="Şarj Durumu (SOC)"
+Reichweite="Menzil"
+Außentemperatur="Dış Sıcaklık"
+Zelltemperatur="Hücre Sıcaklığı"
+Nur verfügbar mit ScanMyTesla="Sadece ScanMyTesla üzeri mevcut"
+
+#abrp.php
+ABRPTitle=
+TextABRP=
+ABRP1=
+ABRP2=
+ABRP3=
+ABRP4=
+ABRP5=
+ABRP6=
+ABRP7=
+ABRP8=
+ABRP9=
+ABRPYT=
+ABRPToken=
+Enabled=
+
+#wallbox.php
+Wallbox=
+WallboxComment=
+Host=
+Param=
+Test=
+Type=
+Info=
+Version=
+Utility kWh=
+Vehicle kWh=
+
+#mqtt.php
+MQTTSettings=
+MQTTSettingsInfo=
+TopicStructure=
+MQTT1=
+MQTT2=
+MQTT3=
+MQTT4=
+MQTT5=
+ADDescription=
+MQTTAD1=
+ControlTopic=
+MQTT6=
+MQTT7=
+RebootAfterSave=
+Host=
+Port=
+Topic=
+PublishJson=
+Singletopics=
+ClientID=
+AutoDiscovery=
+AutoDiscoveryTopic=
+
+#komoot.php
+KomootSettings=
+KomootSettingsInfo=
+
+#superchargebingo.php
+SuperChargeBingo="SuperChargeBingo"
+SuperChargeBingoComment="SuperChargeBingo Yorumu"
+Setup="Kurulum"
+Create a SuperChargeBingo account="SuperChargeBingo hesabı oluştur"
+Create API key (must be secure)="API anahtarı oluştur (güvenli olmalı)"
+Copy Username and API key and insert it in TeslaLogger="Kullanıcı adını ve API anahtarını kopyalayıp TeslaLogger'a ekleyin"
+Save and restart TeslaLogger="Kaydedin ve yeniden başlatın"
+Username="Kullanıcı adı"
+API key="API anahtarı"
+
+#geoadd.php
+Name & Position="Ad & Konum"
+Description="Açıklama"
+Radius="Yarıçap"
+Special Flags="Özel Bayraklar"
+Home="Ev"
+Work="İş"
+Charger="Şarj Tipi"
+Copy Charging Costs="Şarj Maliyetlerini Kopyala"
+Don't Combine Charging Sessions="Şarj Oturumlarını Birleştirme"
+Set Charge Limit="Şarj Limitini Belirt"
+Set on arrival="Varışta Belirt"
+Set Charge Limit After Charging="Şarjdan Sonra Şarj Limitini Ayarla Belirtin"
+Open Charge Port="Şarj Portunu Aç"
+Gear="Vites"
+D → P="D → P"
+D/R → P="D/R → P"
+R → P="R → P"
+High Frequency Logging="Yüksek Frekanslı Günlük Kaydı"
+Minutes="Dakika"
+Special Count="Özel Sayım"
+Count="Sayım"
+Special Features="Özel Özellikler"
+Enable Sentry Mode="Nöbetçi Modunu Etkinleştir"
+Disable Sentry Mode="Nöbetçi Modunu Devre Dışı Bırak"
+Turn HVAC off="Klimayı Kapat"
+No sleep="Uyumak Yok"
+Delete="Sil"
+Are you sure you want to delete this geofencing location?="Bu coğrafi sınırlama konumunu silmek istediğinizden emin misiniz?"
+Error="Hata"
+Deleted!="Silindi!"
+Meter="Metre"
+
+#adminpanelpassword.php
+Please enter password!="Lütfen şifreyi girin!"
+Passwords do not match!="Şifreler eşleşmiyor!"
+Do you want to delete your password?="Şifrenizi silmek istiyor musunuz?"
+Set password for Teslalogger's admin panel="Teslalogger'ın yönetici paneli için şifre belirleyin"
+Name="Ad"
+
+#changelog.php
+Changelog="Güncellenen Biligleri"
+
+#chargingcost.php
+Charging Costs="Şarj Maliyetleri"
+Date="Tarih"
+Charged="Şarj Edilen"
+Efficiency="Verimlilik"
+Currency="Para Birimi"
+kWh according to meter/invoice="Sayaça göre metre/Fatura"
+Cost per kWh="kWsa başına maliyet"
+Cost per charge="Şarj başına maliyet"
+Cost per minute="Dakika başına maliyet"
+Idle cost per minute="Boşta kalma maliyeti (dakika başına)"
+Total="Toplam"
+
+#logfile.php
+Download Logfile="Günlüğü İndir"
+Lines="Satırlar"
+Housekeeping="Bakım/Temizlik"
+Sleep Attempt="Uyuma Deneyimi"
+
+#ovms.php
+Please enter your dexters-web.de account credentials="Lütfen dexters-web.de hesap bilgilerinizi girin"
+Dexter Login="Dexter Kullanıcı adi"
+Dexter Password="Dexter Şifresi"
+
+#password_info.php
+Credentials Info="Kimlik Bilgileri"
+
+#restore.php
+Restore Database="Veritabanını Geri/Tekrar Yükle"
+TextRestore1="Metin Geri Yükleme 1"
+TextRestore2="Metin Geri Yükleme 2"
+TextRestore3="Metin Geri Yükleme 3"
+
+#dashboard.php
+Sleeping="Uyku Mode"
+
+#Vehicle Alerts
+Fahrzeug Fehler="Araç Hatası"
+startedAt="Başlangıç"
+endedAt="Bitiş"
+Häufigkeit="Sıklık"
+Fehler="Hata"
+
