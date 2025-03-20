@@ -311,6 +311,8 @@ namespace TeslaLogger
                     }
                     else if (key == "PreconditioningEnabled")
                     {
+                        bool preconditioning = false;
+
                         string v = value["stringValue"];
                         if (v == "True")
                             preconditioning = true;
