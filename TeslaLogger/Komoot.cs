@@ -24,7 +24,7 @@ namespace TeslaLogger
             internal string password;
             internal string user_id;
             internal string token;
-            internal bool loginSuccessful = false;
+            internal bool loginSuccessful;
 
             internal KomootLoginInfo(int carID, string username, string password, string user_id, string token)
             {
@@ -83,7 +83,7 @@ namespace TeslaLogger
                 internal double alt;
                 internal long delta_t;
                 internal double speed;
-                internal double dist_km = 0.0;
+                internal double dist_km;
 
                 public Position(double lat, double lng, double alt, int delta_t, double speed)
                 {
@@ -129,6 +129,7 @@ namespace TeslaLogger
                     positions.Add(delta_t, firstPosition);
                     lastPosition = firstPosition;
                 }
+                // TODO: .net8 change to TryAdd for performance reasons
                 else if (!positions.ContainsKey(delta_t))
                 {
                     Position newPosition = new Position(lat, lng, alt, delta_t, speed);
@@ -800,12 +801,13 @@ VALUES(
                         {
                             drivestateID = Convert.ToInt32(cmdid.ExecuteScalar());
                         }
+                        // update start address and end address
+                        int count = 0;
+                        WebHelper.UpdateAllPOIAddresses(count, $"firstPosID,lastPosID");
                     }
                 }
                 _ = Task.Factory.StartNew(() =>
                 {
-                    // update start address and end address
-                    WebHelper.UpdateAllPOIAddresses();
                     // create timeline maps
                     StaticMapService.GetSingleton().Enqueue(carID, firstPosID, lastPosID, 0, 0, StaticMapProvider.MapMode.Dark, StaticMapProvider.MapSpecial.None);
                     StaticMapService.CreateParkingMapFromPosid(firstPosID);
