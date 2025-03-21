@@ -10,7 +10,7 @@ Save=Speichern
 Settings=Einstellungen
 Setup=Einrichtung
 Enabled="Aktiviert"
-StreamingPosHelp=<h1>Position von StreamingAPI</h1>aktiviert Positions-DB-Einträge von der Streaming-API - je nach Empfang des Fahrzeugs bedeutet dies bis zu 5 Positionen pro Sekunde (im Vergleich zu einer Position alle fünf Sekunden im normalen Modus), was die Größe der Datenbank stark erhöht, den Verschleiß der SD-Karte erhöht und zu großen Backups führt
+StreamingPosHelp="<h1>Position von StreamingAPI</h1>aktiviert Positions-DB-Einträge von der Streaming-API - je nach Empfang des Fahrzeugs bedeutet dies bis zu 5 Positionen pro Sekunde (im Vergleich zu einer Position alle fünf Sekunden im normalen Modus), was die Größe der Datenbank stark erhöht, den Verschleiß der SD-Karte erhöht und zu großen Backups führt."
 
 #Timeline Plugin.json
 Parking=Parken
@@ -186,7 +186,7 @@ PF_SUBSCRIPTION="Schließen sie ein Abo ab um Daten von Tesla zu bekommen"
 
 #changecarname.php
 CarNameTitle=Name des Autos ändern
-TextCarName=Hier können Sie den Namen ändern.
+TextCarName="Hier können Sie den Namen ändern"
 CarName=Neuer Name
 
 #dashboard.php
@@ -304,7 +304,7 @@ SuperChargeBingo=SuperChargeBingo
 SuperChargeBingoComment=Sie können einen Link von TeslaLogger zu SuperChargeBingo einrichten, um automatische Checkins an Superchargern durchzuführen.
 Create a SuperChargeBingo account=Erstellen Sie ein SuperChargeBingo-Konto
 Create API key (must be secure)=API-Schlüssel erstellen (muss sicher sein)
-Copy Username and API key and insert it in TeslaLogger=Kopieren Sie Benutzername und API-Schlüssel und fügen Sie sie in TeslaLogger ein.
+Copy Username and API key and insert it in TeslaLogger="Kopieren Sie Benutzername und API-Schlüssel und fügen Sie sie in TeslaLogger ein"
 Save and restart TeslaLogger=Speichern und Neustart von TeslaLogger
 Username=Benutzername
 API key=API-Schlüssel
@@ -586,3 +586,5 @@ min PS="Min. PS"
 
 #journeys.php
 Ladezeit [h]="Ladezeit [h]"
+KomootSettings="Komoot Einstellungen"
+KomootSettingsInfo="Benutzername (eMail) und Passwort für Ihr Komoot-Konto"
