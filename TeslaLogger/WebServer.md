@@ -98,7 +98,7 @@ Allowed commands:
 * charge_start
 * charge_stop
 * charge_start_stop
-* set_charging_amps
+* set_charging_amps (because this is very expensive, we are blocking set_charging_amps)
 
 ### /command/_CarID_/_name_?_parameter_
 
