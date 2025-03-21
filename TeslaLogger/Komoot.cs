@@ -24,7 +24,7 @@ namespace TeslaLogger
             internal string password;
             internal string user_id;
             internal string token;
-            internal bool loginSuccessful = false;
+            internal bool loginSuccessful;
 
             internal KomootLoginInfo(int carID, string username, string password, string user_id, string token)
             {
@@ -83,7 +83,7 @@ namespace TeslaLogger
                 internal double alt;
                 internal long delta_t;
                 internal double speed;
-                internal double dist_km = 0.0;
+                internal double dist_km;
 
                 public Position(double lat, double lng, double alt, int delta_t, double speed)
                 {
