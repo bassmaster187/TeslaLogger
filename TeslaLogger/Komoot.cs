@@ -243,6 +243,7 @@ namespace TeslaLogger
                             // load tour
                             dynamic jtour = GetTourByID(tourID);
                             KomootTour tour = new KomootTour(carID, tourID, jtour["type"].ToString(), jtour["sport"].ToString(), DateTime.Parse(jtour["date"].ToString()));
+                            tour.distance_m = double.Parse(jtour["distance"].ToString());
                             foreach (dynamic pos in jtour["_embedded"]["coordinates"]["items"])
                             {
                                 tour.AddPosition(double.Parse(pos["lat"].ToString()), double.Parse(pos["lng"].ToString()), double.Parse(pos["alt"].ToString()), int.Parse(pos["t"].ToString()));
