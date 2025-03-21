@@ -274,8 +274,8 @@ namespace TeslaLogger
                 if (status.ToString() != "success")
                     return null;
 
-                r1.TryGetValue("message", out object version);
-                if (version.ToString() == "true")
+                r1.TryGetValue("message", out object message);
+                if (message.ToString().ToLower() == "true")
                 {
                     return true;
                 }

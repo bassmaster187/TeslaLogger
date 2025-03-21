@@ -1,8 +1,8 @@
 ﻿#Info
-INFO_important="Önemli Bilgi"
-INFO_FLEETAPI="1 Ocak 2025'ten itibaren Tesla resmi Filo API'yi ücretli bir modele geçecek. ({LINK1}). Sonuç olarak, bir abonelik modeline geçmek ve Tesla, vergiler ve ödeme hizmeti sağlayıcı için masraflarını karşılamak için küçük aylık bir ücret ödemek zorunda kaldım.<br/><br/>Aynı zamanda, Tesla'nın Hizmet Şartları ({LINK2}) resmi olmayan Sahiplerin API'sinin kullanımını durdurmamı sağladı; aksi takdirde, bana karşı yasal eylem yapabilirler (§5.6.6 ve §5.6.11). Lütfen araçlarınızı ana giriş bilgilerini yeniden girince Filo API'sine gönderin.<br/><br/>Ne yazık ki, eski Model S/X araçları ( 2021'den önce icat edildi), Filo API'sini kullanmak için bir çözüm yoktur. Bu araçlar eski Sahibi API aracılığıyla çalışmaya devam edebilir ve Tesla'nın böyle durumlarda yasal bir eylem yapmasını beklemiyorum. Ancak, bu araçlar için hala bir bağış biçimi olarak abone olmayı seçebilirsiniz, çünkü kullanımları için Tesla ödemek zorunda değilim.<br/><br/>Tesla sunucu yükünü azaltmayı ve Fleet API ile gelir üretmeyi amaçladığından, resmi olmayan Sahibi API'sinin 1 Ocak 2025'te kapatılacağı muhtemeldir. Eski Model S/X araçlarının bu değişiklikten etkilenmediğini umuyoruz."
-INFO_RESTRICTED="Aktif bir abonelik olmadan, ne yazık ki Tesla'nızın maliyetlerini karşılayamıyoruz. Bu nedenle, işlevselliği ve özellikle konum güncellemelerinin sıklığını önemli ölçüde sınırlamak zorunda kalıyoruz."
-INFO_VEHICLE_LOCATION="Tesla, veri erişimi üzerinde daha ayrıntılı bir kontrol getirdi: {LINK1} <br>Üçüncü taraf uygulamaları konum bilgilerine erişim izni isteyebilir. Bu izni henüz vermediniz. Mart 2025'ten itibaren, gerekli izni vermediğiniz sürece hiçbir konum bilgisi paylaşılmayacaktır. Lütfen tekrar giriş yapın: {LINK2}."
+INFO_important="Önemli Duyuru"
+INFO_FLEETAPI="Tesla, 01.01.2025 tarihinden itibaren resmi Fleet API'sini ücretli bir modele dönüştürdü. ({LINK1}). Bu nedenle, Tesla'ya, vergilere ve ödeme hizmeti sağlayıcısına olan giderlerimi karşılamak için abonelik modeline geçmek ve aylık küçük bir ücret talep etmek zorundayım.<br/><br/>Aynı zamanda, Tesla'nın Kullanım Şartları ({LINK2})beni gayri resmi Owners API'sini kullanmayı bırakmaya zorluyor, aksi takdirde Tesla bana karşı yasal işlem başlatabilir (Madde 5.6.6 ve 5.6.11). Lütfen araçlarınızı Owners API'den Fleet API'ye geçirin ve bunu yapmak için giriş bilgilerinizi yeniden girin.<br/><br/>Ne yazık ki, eski Model S/X'ler (2021 öncesi üretim) için Fleet API kullanımına yönelik bir çözüm bulunmamaktadır. Bu araçlar eski Owners API üzerinden çalıştırılmaya devam edilebilir. Tesla'nın bu durumlarda yasal işlem başlatmayacağını varsayıyorum. Bu araçlar için yine de abonelik satın alabilirsiniz, ancak bu daha çok gönüllü bir bağış olarak anlaşılmalıdır, çünkü bunun için Tesla'ya herhangi bir ücret ödemem gerekmiyor.<br/><br/>Tesla, Fleet API ile hem sunucularını rahatlatmak hem de gelir elde etmek istediğinden, gayri resmi Owners API'nin 01.01.2025 tarihinden sonra kapatılma olasılığı vardır. Umarız ki daha eski Model S/X'ler bundan etkilenmeyecektir."
+INFO_RESTRICTED="Aktif bir abonelik olmadan, maalesef Tesla'nız için maliyetleri karşılayamıyoruz. Bu nedenle, işlevselliği ve özellikle konum güncellemelerinin sıklığını önemli ölçüde sınırlamak zorundayız."
+INFO_VEHICLE_LOCATION="Tesla, veri erişimi üzerinde daha ayrıntılı kontrol sağladı: {LINK1} Üçüncü taraf uygulamalar, konum bilgilerine erişmek için izin isteyebilir. Henüz bu izni vermediniz. Mart 2025'ten itibaren, gerekli izni vermediğiniz sürece hiçbir konum bilgisi paylaşılmayacaktır. Lütfen tekrar giriş yapın: {LINK2}."
 
 #Akku Trips.json
 Akku Trips="Batarya Kullanımı (Sürüşte)"
@@ -24,12 +24,12 @@ Save="Kaydet"
 
 #Degradation.json
 Degradation="Aşınma"
-Maximalreichweite [km]="Maks. Menzil (KM)"
+Maximalreichweite [km]="Maks. Menzil (Km)"
 Maximalreichweite [mi]="Maks. Menzil (Mil)"
-km Stand [km]="Mesafe [KM]"
-mi Stand [mi]="Mesafe [Mil]"
+km Stand [km]="Sayaç [Km]"
+mi Stand [mi]="Sayaç [Mil]"
 Odometer [mi]="Kilometre Sayacı [Mil]"
-Max. Reichweite (Monatsmittel) [km]="Maks Menzil (aylık ort) [km]"
+Max. Reichweite (Monatsmittel) [km]="Maks Menzil (aylık ort) [Km]"
 Max. Reichweite (Monatsmittel) [mi]="Maks Menzil (aylık ort) [Mil]"
 
 #Ladehistorie.json
@@ -39,13 +39,13 @@ Enddatum="Bitiş Tarihi"
 geladen kWh="kWSa Şarj Edilen"
 km Stand="Kilometre Sayacı"
 Adresse="Adres"
-TR km Start="Başlangıç KM"
-TR km Ende="Bitiş KM"
+TR km Start="Tipik Menzil Seyahat Başlangıç Km"
+TR km Ende="Tipik Menzil Seyahat Bitiş Km"
 SOC Ende="Şarj Seviyesi Bitiş"
-100% TR="100% TR"
+100% TR="100% Seyahat"
 Minuten="Dakika"
-TR mi Start="Başlangıç Mil"
-TR mi Ende="Bitiş Mil"
+TR mi Start="Seyahat Başlangıç Mil"
+TR mi Ende="Seyahat Bitiş Mil"
 ØkW="Ort. kW"
 
 #Ladestatistik.json
@@ -83,12 +83,12 @@ Angefordert [A]="Sorgulanan Akım"
 Pilot [A]="Pilot [A]"
 
 #Vampir Drain Monatsstatistik.json
-Vampir Drain Monatsstatistik="Aylık Vampir Drain İstatistikleri"
-TR mi Verlust="TR mil Kaybı"
+Vampir Drain Monatsstatistik="Aylık Vampir Kaybı İstatistikleri"
+TR mi Verlust="Tipik Menzil mil Kaybı"
 kWh Verlust="kWSa Kaybı"
 Eur Verlust="EUR Kaybı"
 Zeitspanne Stunden="Zaman aralığı Saat"
-TR mi Verlust pro Stunde="TR Saat`te mi Kaybı"
+TR mi Verlust pro Stunde="Tipik Menzil Seyahat Saat`te mi Kaybı"
 mi Stand="mi Durum"
 
 #Trip.json
@@ -96,10 +96,10 @@ Trip="Seyahat"
 Start="Başlangıç"
 Ende="Bitiş"
 Start Adresse="Başlangıç Adresi"
-Ziel Adresse="Bitiş Adresi"
+Ziel Adresse="Hedef Adresi"
 Ø Verbrauch kWh="Ort. Tüketim kWSa"
 Verbraucht kWh="kWSa Tüketim"
-Dauer Min="Sürec (dak.)"
+Dauer Min="Süreç (dak.)"
 mi="Mil"
 km="Km"
 Ø °C="Ort.°C"
@@ -116,34 +116,34 @@ min kW="min kW"
 Ø km/h="Ort. Km/h"
 
 #Trip Top Destinations.json
-Trip Top Ziele="En sık Rotalar"
+Trip Top Ziele="En Sık Hedefler"
 Letzte Fahrt="Son Seyahat"
-Ø Dauer Min="Ort. Sürec (dak.)"
+Ø Dauer Min="Ort. Süreç (dak.)"
 Ø Verbrauch kWh/100km="Ort. Tüketim kWSa/100Km"
 Ø Verbraucht kWh="Ort. Tüketim kWSa"
 Anzahl Trips="Seyahat Sayısı"
-Anzahl="Seyahat Sayısı"
+Anzahl="Sayı"
 Fahrzeug="Araç"
 
 #Vampir Drain.json
 Vampir Drain="Vampir Kaybı"
 Standby Stunden="bekleme modundaki süreç"
 Standby="bekleme modu"
-TR km Verlust="TR Km Kaybı"
-TR km Verlust pro Stunde="Saat`te TR Km Kaybı"
+TR km Verlust="Tipik Menzil Seyahat Km Kaybı"
+TR km Verlust pro Stunde="Tipik Menzil Seyahat Saat`te Km Kaybı"
 
 #Verbrauch.json
 Verbrauch="Tüketim"
 Höhe [m]="Yükseklik (m)"
 Altitude [m]="Yükseklik (m)"
-Geschwindigkeit [mph]="Hiz Mph"
-Geschwindigkeit [km/h]="Hiz Km/h"
-Leistung [PS]="Belgier Gücü BG"
+Geschwindigkeit [mph]="Hız Mph"
+Geschwindigkeit [km/h]="Hız Km/h"
+Leistung [PS]="Beygir Gücü [BG]"
 Außentemperatur [°C]="Dış sıcaklık [°C]"
 Außentemperatur [°F]="Dış sıcaklık [°F]"
 Innentemperatur [°C]="İç  sıcaklık [°C]"
 Innentemperatur [°F]="İç  sıcaklık [°F]"
-Laden fertig="Sarj Bitti"
+Laden fertig="Şarj Bitti"
 Schlafen="Uyku"
 Online="Çevrimci"
 
@@ -154,21 +154,21 @@ Verbrauchsstatistik="Tüketim İstatistikleri"
 Visited="Ziyaret edilen"
 
 #index.php
-Car Info="Arac Bilgileri"
+Car Info="Araç Bilgileri"
 Status="Statü"
 Typical Range="Tipik Menzil"
 Odometer="Kilometre Sayaçı"
 Car Version="Araç Versiyonu"
 Last Trip="Son Seyahat"
-Duration="Sürec"
+Duration="Süreç"
 Distance="Mesafe"
-Max km/h="Max Km/h"
+Max km/h="Maks. Km/h"
 PS="Beygir Gücü"
-Current Pos="Bulunan Konum"
+Current Pos="Konum"
 Last Update="Son güncelleme"
-Charging="Sarj"
+Charging="Şarj Ediliyor"
 Done="Bitti"
-Done at=
+Done at="Bitiş Vakti" 
 Battery Heater="Batarya Isıtıcısı"
 Sentry Mode="Sentrik Modus"
 Preconditioning="Ön İklimlendirme"
@@ -234,7 +234,7 @@ Check Logfile!="Tutanağı kontrol ediniz"
 Do you really want to delete this vehicle?="Aracı silmek üzeresiniz, emin misiniz?"
 Check Logfile in one minute!="Tutanağı bir dak. sonra tekrar kontrol ediniz"
 Unauthorized="İzinsiz"
-This isn't a valid URL!="Bu geçerli bir URL değil! "
+This isn't a valid URL!="Bu geçerli bir URL değil!"
 This isn't an auth link by Tesla!="Bu bir Tesla kimlik doğrulama bağlantısı değil!"
 The URL doesn't contain the expected format!="URL beklenen formatta değil!"
 Access Token="Erişim Tokeni"
@@ -244,52 +244,52 @@ Free Supercharging="Ücretsiz SüperŞarj"
 Reconnect="Tekrar bağlan"
 Model="Model"
 VIN="Şasi Numarası"
-Free SUC=
-Edit=
+Free SUC="Ücretsiz Süper Şarj"
+Edit="Düzenle"
 New car="Yeni Araç"
-TeslaAuthApps=
-BA_Browser=
-BA_Read=
-BA_Logon=
-BA_Auth=
-BA_NotFound=
-BA_URL=
-BA_Invalid=
-BA_Logoff=
-BA_GetToken=
-BA_SelectCar=
-BA_Step1=
-BA_Step2=
-BA_Step3=
-BA_FillOut=
-BA_CopyUrl=
-BA_Paste=
-BA_FLEETAPI=
-BA_ALLCARS=
-BA_MODELSXOLD=
-Get Tokens=
-Subscription=
-Subscribe=
-SubscribeManage=
-SubscriptionRequired=
-FleetAPIRequired=
+TeslaAuthApps="Tesla Kimlik Doğrulama Uygulamaları"
+BA_Browser="Tarayıcı"
+BA_Read="Oku"
+BA_Logon="Oturum Aç"
+BA_Auth="Kimlik Doğrulama"
+BA_NotFound="Bulunamadı"
+BA_URL="URL"
+BA_Invalid="Geçersiz"
+BA_Logoff="Oturumu Kapat"
+BA_GetToken="Token Al"
+BA_SelectCar="Araç Seç"
+BA_Step1="Adım 1"
+BA_Step2="Adım 2"
+BA_Step3="Adım 3"
+BA_FillOut="Doldur"
+BA_CopyUrl="URL'yi Kopyala"
+BA_Paste="Yapıştır"
+BA_FLEETAPI="Filo API'si"
+BA_ALLCARS="Tüm Araçlar"
+BA_MODELSXOLD="Eski Model S/X"
+Get Tokens="Tokenleri Al"
+Subscription="Abonelik"
+Subscribe="Abone Ol"
+SubscribeManage="Aboneliği Yönet"
+SubscriptionRequired="Abonelik Gerekli"
+FleetAPIRequired="Filo API'si Gerekli"
 Aktiv="Aktif"
 
 #password_fleet.php
-PF_LOGOUT=
-PF_LOGIN=
-PF_LINK=
-PF_HELP=
-PF_PERMISSION=
-PF_OLDSX=
-PF_HERE=
-PF_VKEY=
-PF_SUBSCRIPTION=
+PF_LOGOUT="Çıkış"
+PF_LOGIN="Giriş"
+PF_LINK="Link"
+PF_HELP="Yardım"
+PF_PERMISSION="İzin"
+PF_OLDSX="Eski S/X"
+PF_HERE="Burada"
+PF_VKEY="Doğrulama Anahtarı"
+PF_SUBSCRIPTION="Abonelik"
 
 #changecarname.php
-CarNameTitle=
-TextCarName=
-CarName=
+CarNameTitle="Araç Adı Başlığı"
+TextCarName="Araç Adı Metni"
+CarName="Araç Adı"
 
 #settings.php
 Please choose your vehicle="Lütfen arajınızı seçin"
@@ -361,7 +361,7 @@ TextSuspendTeslalogger="Teslalogger'ı Askıya Al"
 Resume Teslalogger="Günlükleyiciyi Devam Ettir"
 Range="Menzil"
 Ladekosten="Sarj Maliyetleri"
-Ladesäule="Sarj İstasyonu""
+Ladesäule="Sarj İstasyonu"
 Währung="Para Birimi"
 Kosten pro kWh="kWsa başına maliyet"
 Kosten pro Ladung="Şarj başına maliyet"
@@ -426,60 +426,60 @@ Zelltemperatur="Hücre Sıcaklığı"
 Nur verfügbar mit ScanMyTesla="Sadece ScanMyTesla üzeri mevcut"
 
 #abrp.php
-ABRPTitle=
-TextABRP=
-ABRP1=
-ABRP2=
-ABRP3=
-ABRP4=
-ABRP5=
-ABRP6=
-ABRP7=
-ABRP8=
-ABRP9=
-ABRPYT=
-ABRPToken=
-Enabled=
+ABRPTitle="ABRP"
+TextABRP="Metin"
+ABRP1="ABRP1"
+ABRP2="ABRP1"
+ABRP3="ABRP1"
+ABRP4="ABRP1"
+ABRP5="ABRP1"
+ABRP6="ABRP1"
+ABRP7="ABRP1"
+ABRP8="ABRP1"
+ABRP9="ABRP1"
+ABRPYT="ABRPYT"
+ABRPToken="ABRPToken"
+Enabled="Etkin"
 
 #wallbox.php
-Wallbox=
-WallboxComment=
-Host=
-Param=
-Test=
-Type=
-Info=
-Version=
-Utility kWh=
-Vehicle kWh=
+Wallbox="Duvar Kutusu"
+WallboxComment="Duvar Kutusu Yorumu"
+Host="Sunucu"
+Param="Parametre"
+Test="Test"
+Type="Tür"
+Info="Bilgi"
+Version="Sürüm"
+Utility kWh="Şebeke kWSa"
+Vehicle kWh="Araç kWSa"
 
 #mqtt.php
-MQTTSettings=
-MQTTSettingsInfo=
-TopicStructure=
-MQTT1=
-MQTT2=
-MQTT3=
-MQTT4=
-MQTT5=
-ADDescription=
-MQTTAD1=
-ControlTopic=
-MQTT6=
-MQTT7=
-RebootAfterSave=
-Host=
-Port=
-Topic=
-PublishJson=
-Singletopics=
-ClientID=
-AutoDiscovery=
-AutoDiscoveryTopic=
+MQTTSettings="MQTT Ayarları"
+MQTTSettingsInfo="MQTT Ayarları Bilgisi"
+TopicStructure="Konu Yapısı"
+MQTT1="MQTT1"
+MQTT2="MQTT2"
+MQTT3="MQTT3"
+MQTT4="MQTT4"
+MQTT5="MQTT5"
+ADDescription="AD Açıklaması"
+MQTTAD1="MQTTAD1"
+ControlTopic="Kontrol Konusu"
+MQTT6="MQTT6"
+MQTT7="MQTT7"
+RebootAfterSave="Kaydettikten Sonra Yeniden Başlat"
+Host="Sunucu"
+Port="Port"
+Topic="Konu"
+PublishJson="JSON Yayınla"
+Singletopics="Tekil Konular"
+ClientID="İstemci Kimliği"
+AutoDiscovery="Otomatik Keşif"
+AutoDiscoveryTopic="Otomatik Keşif Konusu"
 
 #komoot.php
-KomootSettings=
-KomootSettingsInfo=
+KomootSettings="Komoot Ayarları"
+KomootSettingsInfo="Komoot Ayarlar Bilgisi"
 
 #superchargebingo.php
 SuperChargeBingo="SuperChargeBingo"
