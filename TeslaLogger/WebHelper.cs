@@ -3741,6 +3741,7 @@ namespace TeslaLogger
 
         public void UpdateAllEmptyAddresses()
         {
+            Tools.DebugLog("UpdateAllEmptyAddresses()");
             using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
             {
                 con.Open();
@@ -3845,6 +3846,7 @@ namespace TeslaLogger
 
         public static void UpdateAllPOIAddresses()
         {
+            Tools.DebugLog("UpdateAllPOIAddresses()");
             try
             {
                 if (Geofence.GetInstance().RacingMode)
