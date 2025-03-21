@@ -183,7 +183,7 @@ namespace TeslaLogger
                 {
                     distance_computed_km += positions[posID].dist_km;
                 }
-                double correction_factor = distance_m * 1000 / distance_computed_km;
+                double correction_factor = distance_m / 1000 / distance_computed_km;
                 Tools.DebugLog($"Tour {tourID} correction_factor:{correction_factor}");
                 Position lastPos = null;
                 foreach (int posID in positions.Keys.OrderBy(k => k))
