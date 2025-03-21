@@ -178,12 +178,12 @@ namespace TeslaLogger
 
             internal void CorrectPositionDistances()
             {
-                double distance_computed = 0.0;
+                double distance_computed_km = 0.0;
                 foreach (int posID in positions.Keys.OrderBy(k => k))
                 {
-                    distance_computed += positions[posID].dist_km;
+                    distance_computed_km += positions[posID].dist_km;
                 }
-                double correction_factor = distance_m / distance_computed;
+                double correction_factor = distance_m * 1000 / distance_computed_km;
                 Tools.DebugLog($"Tour {tourID} correction_factor:{correction_factor}");
                 Position lastPos = null;
                 foreach (int posID in positions.Keys.OrderBy(k => k))
