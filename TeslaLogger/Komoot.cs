@@ -210,7 +210,7 @@ namespace TeslaLogger
             this.username = Username;
             this.password = Password;
         }
-        
+
         internal static void CheckTours()
         {
             try
