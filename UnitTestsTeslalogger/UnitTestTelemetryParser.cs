@@ -275,16 +275,20 @@ namespace UnitTestsTeslalogger
 
             for (int i = 0; i < lines.Count; i++)
             {
-                if (i == 16)
+                if (i == 17)
                     expectedDCCharge = true; // DCChargingPower: 13.47
-                else if (i == 41)
+                else if (i == 42)
                     expectedDCCharge = false; // DetailedChargeStateStopped
-                else if (i == 63)
+                else if (i == 64)
                     expectedDriving = true; // VehicleSpeed = 0.62
 
                 telemetry.handleMessage(lines[i]);
+                if (i == 15)
+                {
+                    Assert.AreEqual(true, c.CurrentJSON.current_battery_heater);
+                }
 
-                if (i == 41)
+                if (i == 42)
                 {
                     Assert.AreEqual(0.24, c.CurrentJSON.current_charge_energy_added);
                     Assert.AreEqual(0.24, telemetry.charge_energy_added);

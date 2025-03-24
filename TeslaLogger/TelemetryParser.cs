@@ -478,14 +478,22 @@ namespace TeslaLogger
                     }
                     else if (key == "BatteryHeaterOn")
                     {
-                        /*
                         string v = value["stringValue"];
+                        if (v == null)
+                        {
+                            v = value["booleanValue"];
+                            if (v == null)
+                            {
+                                continue;
+                            }
+                        }
+                        v = v.ToLower(CultureInfo.InvariantCulture);
                         if (bool.TryParse(v, out bool BatteryHeaterOn))
                         {
                             car.CurrentJSON.current_battery_heater = BatteryHeaterOn;
+                            Log("BatteryHeaterOn: " + BatteryHeaterOn);
                             car.CurrentJSON.CreateCurrentJSON();
                         }
-                        */
                     }
                     else if (key == "DefrostForPreconditioning")
                     {
