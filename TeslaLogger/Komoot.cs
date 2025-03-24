@@ -239,9 +239,9 @@ namespace TeslaLogger
                                 tour.AddPosition(double.Parse(pos["lat"].ToString()), double.Parse(pos["lng"].ToString()), double.Parse(pos["alt"].ToString()), int.Parse(pos["t"].ToString()));
                             }
                             // compute distance
-                            Logfile.Log($"Komoot: CheckTours() #{carID} tour{tourID} distance:{tour.distance_m} calculated:{tour.distance_calculated}");
+                            Logfile.Log($"Komoot: CheckTours() #{carID} tour:{tourID} distance:{tour.distance_m} calculated:{tour.distance_calculated}");
                             tour.CorrectPositionDistances();
-                            Logfile.Log($"Komoot: CheckTours() #{carID} tour{tourID} distance:{tour.distance_m} calculated:{tour.distance_calculated}");
+                            Logfile.Log($"Komoot: CheckTours() #{carID} tour:{tourID} distance:{tour.distance_m} calculated:{tour.distance_calculated}");
                             Tools.DebugLog(tour.ToString());
                             foreach (int posID in tour.positions.Keys.OrderBy(k => k))
                             {
@@ -343,7 +343,8 @@ WHERE
                     con.Open();
                     using (MySqlCommand cmd = new MySqlCommand(@"
 SELECT
-  odometer
+  odometer,
+  id
 FROM
   pos
 WHERE
@@ -354,18 +355,21 @@ ORDER BY
                     {
                         cmd.Parameters.AddWithValue("@carID", carID);
                         MySqlDataReader dr = SQLTracer.TraceDR(cmd);
-                        double odometer = 0.0;
-                        while (dr.Read() && dr[0] != DBNull.Value)
+                        double odometer = -1;
+                        int id = -1;
+                        while (dr.Read() && dr[0] != DBNull.Value && dr[1] != DBNull.Value)
                         {
                             if (double.TryParse(dr[0].ToString(), out double odo))
                             {
                                 if (odo < odometer)
                                 {
+                                    Tools.DebugLog($"OdometerNeedsCorrection id1:{id} odo1{odometer} id2:{dr[1]} odo2:{odo}");
                                     return true;
                                 }
                                 else
                                 {
                                     odometer = odo;
+                                    _ = int.TryParse(dr[1].ToString(), out id);
                                 }
                             }
                         }
