@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Runtime.ConstrainedExecution;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -72,7 +73,7 @@ namespace TeslaLogger
                 sb.AppendLine($"Positions: {positions.Count}");
                 foreach (int key in positions.Keys.OrderBy(k => k))
                 {
-                    sb.AppendLine($" {key} - ({positions[key].lat},{positions[key].lng}) t:{positions[key].delta_t} s:{positions[key].speed}");
+                    sb.AppendLine($" {key} - ({positions[key].lat},{positions[key].lng}) t:{positions[key].delta_t} s:{positions[key].speed} d:{positions[key].dist_km}");
                 }
                 return sb.ToString();
             }
@@ -185,20 +186,9 @@ namespace TeslaLogger
                 }
                 double correction_factor = distance_m / 1000 / distance_computed_km;
                 Tools.DebugLog($"Tour {tourID} correction_factor:{correction_factor}");
-                Position lastPos = null;
                 foreach (int posID in positions.Keys.OrderBy(k => k))
                 {
-                    Position currentPos = positions[posID];
-                    if (currentPos == firstPosition)
-                    {
-                        // skip first position
-                        lastPos = currentPos;
-                    }
-                    else
-                    {
-                        currentPos.dist_km = lastPos.CalculateDistance(lastPos) * correction_factor;
-                        lastPos = currentPos;
-                    }
+                    positions[posID].dist_km *= correction_factor;
                 }
             }
         }
@@ -238,7 +228,7 @@ namespace TeslaLogger
                         List<long> tourIDs = GetAllTourIDs(carID);
                         double odometer = 0.0;
                         // foreach tour in table komoot for this carid ordered by tourid
-                        foreach (long tourID in tourIDs)
+                        foreach (long tourID in tourIDs.OrderBy(k => k))
                         {
                             // load tour
                             dynamic jtour = GetTourByID(tourID);
@@ -252,6 +242,12 @@ namespace TeslaLogger
                             Logfile.Log($"Komoot: CheckTours() #{carID} tour{tourID} distance:{tour.distance_m} calculated:{tour.distance_calculated}");
                             tour.CorrectPositionDistances();
                             Logfile.Log($"Komoot: CheckTours() #{carID} tour{tourID} distance:{tour.distance_m} calculated:{tour.distance_calculated}");
+                            Tools.DebugLog(tour.ToString());
+                            foreach (int posID in tour.positions.Keys.OrderBy(k => k))
+                            {
+                                odometer = odometer + tour.positions[posID].dist_km;
+                                UpdatePosition(tour.positions[posID], tour.start, carID, odometer);
+                            }
                         }
                     }
                 }
@@ -263,6 +259,81 @@ namespace TeslaLogger
             }
         }
 
+        private static void UpdatePosition(KomootTour.Position position, DateTime start, int carID, double odometer)
+        {
+            // find position in table pos
+            int posID = GetPosID(position, start, carID);
+            if (posID != int.MinValue)
+            {
+                Tools.DebugLog($"UpdatePosition posID:{posID} odometer:{odometer}");
+                try
+                {
+                    using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+                    {
+                        con.Open();
+                        using (MySqlCommand cmd = new MySqlCommand(@"
+UPDATE 
+  pos 
+SET 
+  odometer = @odometer
+WHERE 
+  id = @posID", con))
+                        {
+                            cmd.Parameters.AddWithValue("@posID", posID);
+                            cmd.Parameters.AddWithValue("@odometer", odometer);
+                            _ = SQLTracer.TraceNQ(cmd, out _);
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    ex.ToExceptionless().FirstCarUserID().Submit();
+                    Logfile.Log(ex.ToString());
+                }
+            }
+        }
+
+        private static int GetPosID(KomootTour.Position position, DateTime start, int carID)
+        {
+            int posID = int.MinValue;
+            try
+            {
+                using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+                {
+                    con.Open();
+                    using (MySqlCommand cmd = new MySqlCommand(@"
+SELECT
+  id
+FROM
+  pos
+WHERE
+  carID = @carID
+  AND Datum = @Datum
+  AND lat = @lat
+  AND lng = @lng
+", con))
+                    {
+                        cmd.Parameters.AddWithValue("@carID", carID);
+                        cmd.Parameters.AddWithValue("@Datum", start.AddMilliseconds(position.delta_t));
+                        cmd.Parameters.AddWithValue("@lat", position.lat);
+                        cmd.Parameters.AddWithValue("@lng", position.lng);
+                        MySqlDataReader dr = SQLTracer.TraceDR(cmd);
+                        if (dr.Read() && dr[0] != DBNull.Value)
+                        {
+                            _ = int.TryParse(dr[0].ToString(), out posID);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ex.ToExceptionless().FirstCarUserID().Submit();
+                Logfile.Log(ex.ToString());
+            }
+
+            return posID;
+        }
+
         private static bool OdometerNeedsCorrection(int carID)
         {
             try
@@ -272,13 +343,13 @@ namespace TeslaLogger
                     con.Open();
                     using (MySqlCommand cmd = new MySqlCommand(@"
 SELECT
-    odometer
+  odometer
 FROM
-    pos
+  pos
 WHERE
-    carID = @carID
+  carID = @carID
 ORDER BY
-    Datum ASC
+  Datum ASC
 ", con))
                     {
                         cmd.Parameters.AddWithValue("@carID", carID);
@@ -317,11 +388,11 @@ ORDER BY
                 {
                     string sql = @"
 CREATE TABLE komoot (
-    tourID BIGINT NOT NULL,
-    carID int(11) NOT NULL,
-    drivestateID int(11) NULL,
-    json LONGTEXT NOT NULL,
-    UNIQUE ix_tourID(tourID)
+  tourID BIGINT NOT NULL,
+  carID int(11) NOT NULL,
+  drivestateID int(11) NULL,
+  json LONGTEXT NOT NULL,
+  UNIQUE ix_tourID(tourID)
 )";
                     Logfile.Log($"Komoot: {sql}");
                     UpdateTeslalogger.AssertAlterDB();
@@ -350,11 +421,11 @@ CREATE TABLE komoot (
                         con.Open();
                         using (MySqlCommand cmd = new MySqlCommand(@"
 UPDATE
-    cars
+  cars
 SET
-    vin = @VIN
+  vin = @VIN
 WHERE
-    id = @CarID
+  id = @CarID
 "
                         , con))
                         {
@@ -382,13 +453,12 @@ WHERE
                 con.Open();
                 using (MySqlCommand cmd = new MySqlCommand(@"
 SELECT
-    id,
-    StartDate
+  id,
+  StartDate
 FROM
-    drivestate
+  drivestate
 WHERE
-    CarID = @CarID
-    AND wheel_type IS NULL", con))
+  CarID = @CarID", con))
                 {
                     cmd.Parameters.AddWithValue("@CarID", kli.carID);
                     MySqlDataReader dr = SQLTracer.TraceDR(cmd);
@@ -740,17 +810,17 @@ WHERE
                     con.Open();
                     using (MySqlCommand cmd = new MySqlCommand(@"
 INSERT
-    komoot(
-        tourID,
-        carID,
-        drivestateID,
-        json
+  komoot(
+    tourID,
+    carID,
+    drivestateID,
+    json
 )
 VALUES(
-    @tourID,
-    @carID,
-    @drivestateID,
-    @json
+  @tourID,
+  @carID,
+  @drivestateID,
+  @json
 )"
                     , con))
                     {
@@ -779,12 +849,12 @@ VALUES(
                     con.Open();
                     using (MySqlCommand cmd = new MySqlCommand(@"
 SELECT
-    id
+  id
 FROM
-    drivestate
+  drivestate
 WHERE
-    carID = @carID
-    AND StartDate = @StartDate", con))
+  carID = @carID
+  AND StartDate = @StartDate", con))
                     {
                         cmd.Parameters.AddWithValue("@carID", carID);
                         cmd.Parameters.AddWithValue("@StartDate", start);
@@ -816,11 +886,11 @@ WHERE
                     con.Open();
                     using (MySqlCommand cmd = new MySqlCommand(@"
 SELECT
-    count(tourID)
+  count(tourID)
 FROM
-    komoot
+  komoot
 WHERE
-    tourID = @tourID", con))
+  tourID = @tourID", con))
                     {
                         cmd.Parameters.AddWithValue("@tourID", tourid);
                         MySqlDataReader dr = SQLTracer.TraceDR(cmd);
@@ -852,11 +922,11 @@ WHERE
                     con.Open();
                     using (MySqlCommand cmd = new MySqlCommand(@"
 SELECT DISTINCT
-    carID
+  carID
 FROM
-    komoot
+  komoot
 ORDER BY
-    carID ASC
+  carID ASC
 ", con))
                     {
                         MySqlDataReader dr = SQLTracer.TraceDR(cmd);
@@ -887,13 +957,14 @@ ORDER BY
                     con.Open();
                     using (MySqlCommand cmd = new MySqlCommand(@"
 SELECT
-    odometer
+  odometer
 FROM
-    pos
+  pos
 WHERE
-    CarID = @CarID
-    AND Datum < @start
-ORDER BY Datum DESC
+  CarID = @CarID
+  AND Datum < @start
+ORDER BY
+  Datum DESC
 LIMIT 1", con))
                     {
                         cmd.Parameters.AddWithValue("@CarID", carid);
@@ -927,12 +998,13 @@ LIMIT 1", con))
                     con.Open();
                     using (MySqlCommand cmd = new MySqlCommand(@"
 SELECT
-    tourID
+  tourID
 FROM
-    komoot
+  komoot
 WHERE
-    CarID = @CarID
-ORDER BY tourID ASC
+  CarID = @CarID
+ORDER BY
+  tourID ASC
 ", con))
                     {
                         cmd.Parameters.AddWithValue("@CarID", carID);
@@ -964,12 +1036,13 @@ ORDER BY tourID ASC
                     con.Open();
                     using (MySqlCommand cmd = new MySqlCommand(@"
 SELECT
-    json
+  json
 FROM
-    komoot
+  komoot
 WHERE
-    tourID = @tourID
-ORDER BY tourID ASC
+  tourID = @tourID
+ORDER BY
+  tourID ASC
 ", con))
                     {
                         cmd.Parameters.AddWithValue("@tourID", tourID);
@@ -1000,19 +1073,19 @@ ORDER BY tourID ASC
                     con.Open();
                     using (MySqlCommand cmd = new MySqlCommand(@"
 INSERT
-    drivestate(
-        CarID,
-        StartDate,
-        StartPos,
-        EndDate,
-        EndPos
+  drivestate (
+    CarID,
+    StartDate,
+    StartPos,
+    EndDate,
+    EndPos
 )
-VALUES(
-    @CarID,
-    @StartDate,
-    @StartPos,
-    @EndDate,
-    @EndPos
+VALUES (
+  @CarID,
+ StartDate,
+  @StartPos,
+  @EndDate,
+  @EndPos
 )"
                     , con))
                     {
@@ -1057,23 +1130,23 @@ VALUES(
                     con.Open();
                     using (MySqlCommand cmd = new MySqlCommand(@"
 INSERT
-    pos(
-        CarID,
-        Datum,
-        lat,
-        lng,
-        speed,
-		altitude,
-		odometer
+  pos (
+    CarID,
+    Datum,
+    lat,
+    lng,
+    speed,
+	altitude,
+    odometer
 )
-VALUES(
-    @CarID,
-    @Datum,
-    @lat,
-    @lng,
-    @speed,
-    @altitude,
-    @odometer
+VALUES (
+  @CarID,
+  @Datum,
+  @lat,
+  @lng,
+  @speed,
+  @altitude,
+  @odometer
 )"
                     , con))
                     {
@@ -1432,18 +1505,20 @@ VALUES(
                             {
                                 con.Open();
                                 using (MySqlCommand cmd = new MySqlCommand(@"
-INSERT INTO cars SET
-    id = @komoot_carid,
-    tesla_name = @komoot_user,
-    tesla_password = @komoot_passwd,
-    display_name = @komoot_displayname,
-    vin = @VIN
+INSERT INTO
+  cars
+SET
+  id = @komoot_carid,
+  tesla_name = @komoot_user,
+  tesla_password = @komoot_passwd,
+  display_name = @komoot_displayname,
+  vin = @VIN
 ON DUPLICATE KEY UPDATE
-    id = @komoot_carid,
-    tesla_name = @komoot_user,
-    tesla_password = @komoot_passwd,
-    display_name = @komoot_displayname,
-    vin = @VIN
+  id = @komoot_carid,
+  tesla_name = @komoot_user,
+  tesla_password = @komoot_passwd,
+  display_name = @komoot_displayname,
+  vin = @VIN
 "
                                 , con))
                                 {
@@ -1477,14 +1552,14 @@ ON DUPLICATE KEY UPDATE
                 con.Open();
                 using (MySqlCommand cmd = new MySqlCommand(@"
 SELECT
-    id,
-    tesla_name,
-    tesla_password,
-    display_name
+  id,
+  tesla_name,
+  tesla_password,
+  display_name
 FROM
-    cars
+  cars
 WHERE
-    tesla_name LIKE 'KOMOOT:%'
+  tesla_name LIKE 'KOMOOT:%'
 "
                 , con))
                 {
