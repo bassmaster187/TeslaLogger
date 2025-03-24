@@ -13,6 +13,7 @@
 31.01.2025 17:34:45 : #3[:28]: *** FT: {"data":[{"key":"TimeToFullCharge","value":{"doubleValue":24.807114070023687}},{"key":"FastChargerPresent","value":{"booleanValue":true}},{"key":"FastChargerType","value":{"fastChargerValue":"FastChargerCombo"}}],"createdAt":"2025-01-31T16:34:45.681360336Z","vin":"XP7YGCEK9PB000000"}
 31.01.2025 17:34:47 : #3[:28]: *** FT: {"data":[{"key":"Odometer","value":{"doubleValue":18237.828825965607}}],"createdAt":"2025-01-31T16:34:47.681325240Z","vin":"XP7YGCEK9PB000000"}
 31.01.2025 17:34:48 : #3[:28]: *** FT: {"data":[{"key":"ChargeLimitSoc","value":{"intValue":80}}],"createdAt":"2025-01-31T16:34:48.681338387Z","vin":"XP7YGCEK9PB000000"}
+31.01.2025 17:34:48 : #3[:28]: *** FT: {"data":[{"key":"BatteryHeaterOn","value":{"booleanValue":true}}],"createdAt":"2025-01-31T16:34:48.681338387Z","vin":"XP7YGCEK9PB000000"}
 31.01.2025 17:34:49 : #3[:28]: *** FT: {"data":[{"key":"DCChargingPower","value":{"doubleValue":1.0882799756750465}},{"key":"ModuleTempMin","value":{"doubleValue":12.5}}],"createdAt":"2025-01-31T16:34:49.681468371Z","vin":"XP7YGCEK9PB000000"}
 31.01.2025 17:34:50 : #3[:28]: *** FT: {"data":[{"key":"DCChargingPower","value":{"doubleValue":13.475029698809609}}],"createdAt":"2025-01-31T16:34:50.680746401Z","vin":"XP7YGCEK9PB000000"}
 31.01.2025 17:34:51 : #3[:28]: *** FT: {"data":[{"key":"DCChargingPower","value":{"doubleValue":29.524799340069293}}],"createdAt":"2025-01-31T16:34:51.681473328Z","vin":"XP7YGCEK9PB000000"}
