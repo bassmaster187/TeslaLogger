@@ -4,7 +4,6 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Runtime.ConstrainedExecution;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -43,7 +42,7 @@ namespace TeslaLogger
             internal long tourID;
             readonly internal DateTime start;
             internal double distance_m = double.NaN;
-            internal double distance_calculated = 0.0;
+            internal double distance_calculated;
             readonly string type;
             readonly string sport;
             internal Position firstPosition;
@@ -213,49 +212,41 @@ namespace TeslaLogger
 
         internal static void CheckTours()
         {
-            try
+            Logfile.Log("Komoot: CheckTours()");
+            // foreach car id in table komoot
+            List<int> cars = GetAllCars();
+            foreach (int carID in cars)
             {
-                Logfile.Log("Komoot: CheckTours()");
-                // foreach car id in table komoot
-                List<int> cars = GetAllCars();
-                foreach (int carID in cars)
+                // get pos.odometer to check if the DB needs correction
+                Logfile.Log($"Komoot: CheckTours() check odometer for #{carID}");
+                if (OdometerNeedsCorrection(carID))
                 {
-                    // get pos.odometer to check if the DB needs correction
-                    Logfile.Log($"Komoot: CheckTours() check odometer for #{carID}");
-                    if (OdometerNeedsCorrection(carID))
+                    Logfile.Log($"Komoot: CheckTours() odometer needs correction for #{carID}");
+                    List<long> tourIDs = GetAllTourIDs(carID);
+                    double odometer = 0.0;
+                    // foreach tour in table komoot for this carid ordered by tourid
+                    foreach (long tourID in tourIDs.OrderBy(k => k))
                     {
-                        Logfile.Log($"Komoot: CheckTours() odometer needs correction for #{carID}");
-                        List<long> tourIDs = GetAllTourIDs(carID);
-                        double odometer = 0.0;
-                        // foreach tour in table komoot for this carid ordered by tourid
-                        foreach (long tourID in tourIDs.OrderBy(k => k))
+                        // load tour
+                        dynamic jtour = GetTourByID(tourID);
+                        KomootTour tour = new KomootTour(carID, tourID, jtour["type"].ToString(), jtour["sport"].ToString(), DateTime.Parse(jtour["date"].ToString()));
+                        tour.distance_m = double.Parse(jtour["distance"].ToString());
+                        foreach (dynamic pos in jtour["_embedded"]["coordinates"]["items"])
                         {
-                            // load tour
-                            dynamic jtour = GetTourByID(tourID);
-                            KomootTour tour = new KomootTour(carID, tourID, jtour["type"].ToString(), jtour["sport"].ToString(), DateTime.Parse(jtour["date"].ToString()));
-                            tour.distance_m = double.Parse(jtour["distance"].ToString());
-                            foreach (dynamic pos in jtour["_embedded"]["coordinates"]["items"])
-                            {
-                                tour.AddPosition(double.Parse(pos["lat"].ToString()), double.Parse(pos["lng"].ToString()), double.Parse(pos["alt"].ToString()), int.Parse(pos["t"].ToString()));
-                            }
-                            // compute distance
-                            Logfile.Log($"Komoot: CheckTours() #{carID} tour:{tourID} distance:{tour.distance_m} calculated:{tour.distance_calculated}");
-                            tour.CorrectPositionDistances();
-                            Logfile.Log($"Komoot: CheckTours() #{carID} tour:{tourID} distance:{tour.distance_m} calculated:{tour.distance_calculated}");
-                            Tools.DebugLog(tour.ToString());
-                            foreach (int posID in tour.positions.Keys.OrderBy(k => k))
-                            {
-                                odometer = odometer + tour.positions[posID].dist_km;
-                                UpdatePosition(tour.positions[posID], tour.start, carID, odometer);
-                            }
+                            tour.AddPosition(double.Parse(pos["lat"].ToString()), double.Parse(pos["lng"].ToString()), double.Parse(pos["alt"].ToString()), int.Parse(pos["t"].ToString()));
+                        }
+                        // compute distance
+                        Logfile.Log($"Komoot: CheckTours() #{carID} tour:{tourID} distance:{tour.distance_m} calculated:{tour.distance_calculated}");
+                        tour.CorrectPositionDistances();
+                        Logfile.Log($"Komoot: CheckTours() #{carID} tour:{tourID} distance:{tour.distance_m} calculated:{tour.distance_calculated}");
+                        Tools.DebugLog(tour.ToString());
+                        foreach (int posID in tour.positions.Keys.OrderBy(k => k))
+                        {
+                            odometer += tour.positions[posID].dist_km;
+                            UpdatePosition(tour.positions[posID], tour.start, carID, odometer);
                         }
                     }
                 }
-            }
-            catch (Exception ex)
-            {
-                ex.ToExceptionless().FirstCarUserID().Submit();
-                Logfile.Log(ex.ToString());
             }
         }
 
@@ -530,7 +521,7 @@ WHERE
 
         private static void ParseTours(KomootLoginInfo kli, Dictionary<long, KomootTour> tours, bool dumpJSON = false)
         {
-            foreach (int tourid in tours.Keys.OrderBy(k => k))
+            foreach (long tourid in tours.Keys.OrderBy(k => k))
             {
                 KomootTour tour = tours[tourid];
                 // Logfile.Log($"#{kli.carID} Komoot: ParseTours" + Environment.NewLine + tour);
@@ -881,7 +872,7 @@ WHERE
             return false;
         }
 
-        private static bool TourExists(int tourid)
+        private static bool TourExists(long tourid)
         {
             try
             {
