@@ -42,6 +42,7 @@ namespace TeslaLogger
             internal long tourID;
             readonly internal DateTime start;
             internal double distance_m = double.NaN;
+            internal double distance_calculated;
             readonly string type;
             readonly string sport;
             internal Position firstPosition;
@@ -71,7 +72,7 @@ namespace TeslaLogger
                 sb.AppendLine($"Positions: {positions.Count}");
                 foreach (int key in positions.Keys.OrderBy(k => k))
                 {
-                    sb.AppendLine($" {key} - ({positions[key].lat},{positions[key].lng}) t:{positions[key].delta_t} s:{positions[key].speed}");
+                    sb.AppendLine($" {key} - ({positions[key].lat},{positions[key].lng}) t:{positions[key].delta_t} s:{positions[key].speed} d:{positions[key].dist_km}");
                 }
                 return sb.ToString();
             }
@@ -94,7 +95,7 @@ namespace TeslaLogger
                     this.speed = speed;
                 }
 
-                internal double calculateDistance(Position other)
+                internal double CalculateDistance(Position other)
                 {
                     // calculate distance and speed with previous pos
                     // inspired by https://github.com/mapado/haversine/blob/main/haversine/haversine.py
@@ -111,7 +112,7 @@ namespace TeslaLogger
                 }
 
 
-                internal double calculateSpeed(Position other)
+                internal double CalculateSpeed(Position other)
                 {
                     // calculate distance and speed with previous pos
                     // inspired by https://github.com/mapado/haversine/blob/main/haversine/haversine.py
@@ -120,7 +121,7 @@ namespace TeslaLogger
                 }
             }
 
-            internal void addPosition(double lat, double lng, double alt, int delta_t, double speed = double.NaN)
+            internal void AddPosition(double lat, double lng, double alt, int delta_t, double speed = double.NaN)
             {
                 if (positions.Count == 0)
                 {
@@ -133,10 +134,11 @@ namespace TeslaLogger
                 else if (!positions.ContainsKey(delta_t))
                 {
                     Position newPosition = new Position(lat, lng, alt, delta_t, speed);
-                    newPosition.dist_km = newPosition.calculateDistance(lastPosition);
+                    newPosition.dist_km = newPosition.CalculateDistance(lastPosition);
+                    distance_calculated += newPosition.dist_km;
                     if (double.IsNaN(speed))
                     {
-                        newPosition.speed = newPosition.calculateSpeed(lastPosition);
+                        newPosition.speed = newPosition.CalculateSpeed(lastPosition);
                     }
                     positions.Add(delta_t, newPosition);
                     lastPosition = newPosition;
@@ -173,6 +175,21 @@ namespace TeslaLogger
                     }
                 }
             }
+
+            internal void CorrectPositionDistances()
+            {
+                double distance_computed_km = 0.0;
+                foreach (int posID in positions.Keys.OrderBy(k => k))
+                {
+                    distance_computed_km += positions[posID].dist_km;
+                }
+                double correction_factor = distance_m / 1000 / distance_computed_km;
+                Tools.DebugLog($"Tour {tourID} correction_factor:{correction_factor}");
+                foreach (int posID in positions.Keys.OrderBy(k => k))
+                {
+                    positions[posID].dist_km *= correction_factor;
+                }
+            }
         }
 
         private readonly int interval = 6 * 60 * 60; // 6 hours in seconds
@@ -201,16 +218,16 @@ namespace TeslaLogger
                 {
                     string sql = @"
 CREATE TABLE komoot (
-    tourID BIGINT NOT NULL,
-    carID int(11) NOT NULL,
-    drivestateID int(11) NULL,
-    json LONGTEXT NOT NULL,
-    UNIQUE ix_tourID(tourID)
+  tourID BIGINT NOT NULL,
+  carID int(11) NOT NULL,
+  drivestateID int(11) NULL,
+  json LONGTEXT NOT NULL,
+  UNIQUE ix_tourID(tourID)
 )";
-                    Logfile.Log(sql);
+                    Logfile.Log($"Komoot: {sql}");
                     UpdateTeslalogger.AssertAlterDB();
                     DBHelper.ExecuteSQLQuery(sql);
-                    Logfile.Log("CREATE TABLE komoot OK");
+                    Logfile.Log($"Komoot: CREATE TABLE komoot OK");
                 }
             }
             catch (Exception ex)
@@ -234,11 +251,11 @@ CREATE TABLE komoot (
                         con.Open();
                         using (MySqlCommand cmd = new MySqlCommand(@"
 UPDATE
-    cars
+  cars
 SET
-    vin = @VIN
+  vin = @VIN
 WHERE
-    id = @CarID
+  id = @CarID
 "
                         , con))
                         {
@@ -256,45 +273,6 @@ WHERE
                 }
             }
             return VIN;
-        }
-
-        private static void CheckDriveState(KomootLoginInfo kli, Dictionary<int, KomootTour> tours)
-        {
-            Tools.DebugLog($"CheckDriveState");
-            using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
-            {
-                con.Open();
-                using (MySqlCommand cmd = new MySqlCommand(@"
-SELECT
-    id,
-    StartDate
-FROM
-    drivestate
-WHERE
-    CarID = @CarID
-    AND wheel_type IS NULL", con))
-                {
-                    cmd.Parameters.AddWithValue("@CarID", kli.carID);
-                    MySqlDataReader dr = SQLTracer.TraceDR(cmd);
-                    if (dr.Read() && dr[0] != DBNull.Value)
-                    {
-                        if (int.TryParse(dr[0].ToString(), out int id) && DateTime.TryParse(dr[1].ToString(), out DateTime _))
-                        {
-                            // try to find tour by startdate
-                            DateTime start = DateTime.Parse(dr[1].ToString());
-                            foreach (int tourID in tours.Keys.OrderBy(k => k))
-                            {
-                                if (tours[tourID].start.Equals(start))
-                                {
-                                    Tools.DebugLog($"CheckDriveState: found tour for start {start} -> {tourID}");
-                                    break;
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-            Tools.DebugLog($"CheckDriveState done");
         }
 
         // main loop
@@ -340,10 +318,10 @@ WHERE
 
         private static void ParseTours(KomootLoginInfo kli, Dictionary<long, KomootTour> tours, bool dumpJSON = false)
         {
-            foreach (int tourid in tours.Keys.OrderBy(k => k))
+            foreach (long tourid in tours.Keys.OrderBy(k => k))
             {
                 KomootTour tour = tours[tourid];
-                Logfile.Log($"#{kli.carID} Komoot: ParseTours" + Environment.NewLine + tour);
+                // Logfile.Log($"#{kli.carID} Komoot: ParseTours" + Environment.NewLine + tour);
                 // check if tour already exists in table komoot
                 if (TourExists(tourid))
                 {
@@ -527,7 +505,7 @@ WHERE
                         {
                             if (double.TryParse(pos["lat"].ToString(), out double lat) && double.TryParse(pos["lng"].ToString(), out double _) && double.TryParse(pos["alt"].ToString(), out double _) && int.TryParse(pos["t"].ToString(), out int _))
                             {
-                                tour.addPosition(lat, double.Parse(pos["lng"].ToString()), double.Parse(pos["alt"].ToString()), int.Parse(pos["t"].ToString()));
+                                tour.AddPosition(lat, double.Parse(pos["lng"].ToString()), double.Parse(pos["alt"].ToString()), int.Parse(pos["t"].ToString()));
                             }
                             else
                             {
@@ -588,6 +566,7 @@ WHERE
                 Tools.DebugLog($"#{kli.carID} Komoot: ParseTours({tourid}) initialOdo:{odo}");
                 int firstPosID = 0;
                 int LastPosId = 0;
+                tour.CorrectPositionDistances();
                 foreach (int posID in tour.positions.Keys.OrderBy(k => k))
                 {
                     KomootTour.Position pos = tour.positions[posID];
@@ -623,17 +602,17 @@ WHERE
                     con.Open();
                     using (MySqlCommand cmd = new MySqlCommand(@"
 INSERT
-    komoot(
-        tourID,
-        carID,
-        drivestateID,
-        json
+  komoot(
+    tourID,
+    carID,
+    drivestateID,
+    json
 )
 VALUES(
-    @tourID,
-    @carID,
-    @drivestateID,
-    @json
+  @tourID,
+  @carID,
+  @drivestateID,
+  @json
 )"
                     , con))
                     {
@@ -662,12 +641,12 @@ VALUES(
                     con.Open();
                     using (MySqlCommand cmd = new MySqlCommand(@"
 SELECT
-    id
+  id
 FROM
-    drivestate
+  drivestate
 WHERE
-    carID = @carID
-    AND StartDate = @StartDate", con))
+  carID = @carID
+  AND StartDate = @StartDate", con))
                     {
                         cmd.Parameters.AddWithValue("@carID", carID);
                         cmd.Parameters.AddWithValue("@StartDate", start);
@@ -690,7 +669,7 @@ WHERE
             return false;
         }
 
-        private static bool TourExists(int tourid)
+        private static bool TourExists(long tourid)
         {
             try
             {
@@ -699,11 +678,11 @@ WHERE
                     con.Open();
                     using (MySqlCommand cmd = new MySqlCommand(@"
 SELECT
-    count(tourID)
+  count(tourID)
 FROM
-    komoot
+  komoot
 WHERE
-    tourID = @tourID", con))
+  tourID = @tourID", con))
                     {
                         cmd.Parameters.AddWithValue("@tourID", tourid);
                         MySqlDataReader dr = SQLTracer.TraceDR(cmd);
@@ -734,13 +713,14 @@ WHERE
                     con.Open();
                     using (MySqlCommand cmd = new MySqlCommand(@"
 SELECT
-    odometer
+  odometer
 FROM
-    pos
+  pos
 WHERE
-    CarID = @CarID
-    AND Datum < @start
-ORDER BY Datum DESC
+  CarID = @CarID
+  AND Datum < @start
+ORDER BY
+  Datum DESC
 LIMIT 1", con))
                     {
                         cmd.Parameters.AddWithValue("@CarID", carid);
@@ -775,19 +755,19 @@ LIMIT 1", con))
                     con.Open();
                     using (MySqlCommand cmd = new MySqlCommand(@"
 INSERT
-    drivestate(
-        CarID,
-        StartDate,
-        StartPos,
-        EndDate,
-        EndPos
+  drivestate (
+    CarID,
+    StartDate,
+    StartPos,
+    EndDate,
+    EndPos
 )
-VALUES(
-    @CarID,
-    @StartDate,
-    @StartPos,
-    @EndDate,
-    @EndPos
+VALUES (
+  @CarID,
+  @StartDate,
+  @StartPos,
+  @EndDate,
+  @EndPos
 )"
                     , con))
                     {
@@ -803,7 +783,7 @@ VALUES(
                         }
                         // update start address and end address
                         int count = 0;
-                        WebHelper.UpdateAllPOIAddresses(count, $"firstPosID,lastPosID");
+                        WebHelper.UpdateAllPOIAddresses(count, $"{firstPosID},{lastPosID}");
                     }
                 }
                 _ = Task.Factory.StartNew(() =>
@@ -832,23 +812,23 @@ VALUES(
                     con.Open();
                     using (MySqlCommand cmd = new MySqlCommand(@"
 INSERT
-    pos(
-        CarID,
-        Datum,
-        lat,
-        lng,
-        speed,
-		altitude,
-		odometer
+  pos (
+    CarID,
+    Datum,
+    lat,
+    lng,
+    speed,
+	altitude,
+    odometer
 )
-VALUES(
-    @CarID,
-    @Datum,
-    @lat,
-    @lng,
-    @speed,
-    @altitude,
-    @odometer
+VALUES (
+  @CarID,
+  @Datum,
+  @lat,
+  @lng,
+  @speed,
+  @altitude,
+  @odometer
 )"
                     , con))
                     {
@@ -1079,6 +1059,10 @@ VALUES(
                                 Logfile.Log($"#{kli.carID} Komoot: error: tours does not contain _embedded.tours");
                             }
                         }
+                        else
+                        {
+                            Logfile.Log($"#{kli.carID} Komoot: download error: {result.StatusCode}");
+                        }
                     }
                 }
             }
@@ -1203,18 +1187,20 @@ VALUES(
                             {
                                 con.Open();
                                 using (MySqlCommand cmd = new MySqlCommand(@"
-INSERT INTO cars SET
-    id = @komoot_carid,
-    tesla_name = @komoot_user,
-    tesla_password = @komoot_passwd,
-    display_name = @komoot_displayname,
-    vin = @VIN
+INSERT INTO
+  cars
+SET
+  id = @komoot_carid,
+  tesla_name = @komoot_user,
+  tesla_password = @komoot_passwd,
+  display_name = @komoot_displayname,
+  vin = @VIN
 ON DUPLICATE KEY UPDATE
-    id = @komoot_carid,
-    tesla_name = @komoot_user,
-    tesla_password = @komoot_passwd,
-    display_name = @komoot_displayname,
-    vin = @VIN
+  id = @komoot_carid,
+  tesla_name = @komoot_user,
+  tesla_password = @komoot_passwd,
+  display_name = @komoot_displayname,
+  vin = @VIN
 "
                                 , con))
                                 {
@@ -1248,14 +1234,14 @@ ON DUPLICATE KEY UPDATE
                 con.Open();
                 using (MySqlCommand cmd = new MySqlCommand(@"
 SELECT
-    id,
-    tesla_name,
-    tesla_password,
-    display_name
+  id,
+  tesla_name,
+  tesla_password,
+  display_name
 FROM
-    cars
+  cars
 WHERE
-    tesla_name LIKE 'KOMOOT:%'
+  tesla_name LIKE 'KOMOOT:%'
 "
                 , con))
                 {

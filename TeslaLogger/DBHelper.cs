@@ -345,6 +345,7 @@ WHERE
         [SuppressMessage("Security", "CA2100:Review SQL queries for security vulnerabilities")]
         internal static void UpdateCarIDNull()
         {
+            Tools.DebugLog("UpdateCarIDNull()");
             string[] tables = { "can", "car_version", "charging", "chargingstate", "drivestate", "pos", "shiftstate", "state" };
             foreach (string table in tables)
             {
@@ -565,6 +566,7 @@ WHERE
 
         public static void UpdateAllNullAmpereCharging()
         {
+            Tools.DebugLog("UpdateAllNullAmpereCharging()");
             try
             {
                 string sql = @"
@@ -721,6 +723,7 @@ ORDER BY
 
         internal static void DeleteDuplicateTrips()
         {
+            Tools.DebugLog("DeleteDuplicateTrips()");
             try
             {
                 var sw = new Stopwatch();
@@ -1137,6 +1140,7 @@ WHERE
 
         internal void UpdateEmptyChargeEnergy()
         {
+            Tools.DebugLog("UpdateEmptyChargeEnergy()");
             Queue<int> emptyChargeEnergy = new Queue<int>();
             try
             {
@@ -1180,6 +1184,7 @@ WHERE
 
         internal void UpdateEmptyUnplugDate()
         {
+            Tools.DebugLog("UpdateEmptyUnplugDate()");
             try
             {
                 using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
@@ -1293,8 +1298,9 @@ WHERE
 
         internal void CombineChangingStates()
         {
+            Tools.DebugLog("CombineChangingStates()");
             // find candidates to combine
-            car.Log("CombineChangingStates start");
+            // car.Log("CombineChangingStates start");
             int t = Environment.TickCount;
             // find chargingstates with exactly the same odometer -> car did no move between charging states
             Queue<int> combineCandidates = FindCombineCandidates();
@@ -3179,6 +3185,7 @@ LIMIT 1", con))
 
         internal static void UpdateAllChargingMaxPower()
         {
+            Tools.DebugLog("UpdateAllChargingMaxPower()");
             try
             {
                 using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
@@ -3961,6 +3968,7 @@ WHERE
 
         public void UpdateAllDriveHeightStatistics()
         {
+            Tools.DebugLog("UpdateAllDriveHeightStatistics()");
             try
             {
                 using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
@@ -3999,6 +4007,7 @@ WHERE
 
         public static void UpdateElevationForAllPoints()
         {
+            Tools.DebugLog("UpdateElevationForAllPoints()");
             try
             {
                 foreach (string f in System.IO.Directory.EnumerateFiles(FileManager.GetSRTMDataPath(), "*.txt"))
@@ -4427,6 +4436,7 @@ WHERE
 
         public static bool UpdateIncompleteTrips()
         {
+            Tools.DebugLog("UpdateIncompleteTrips()");
             try
             {
                 using (MySqlConnection con = new MySqlConnection(DBConnectionstring))

@@ -768,6 +768,7 @@ WHERE
 
         internal static void UpdateAllJourneys()
         {
+            Tools.DebugLog("UpdateAllJourneys()");
             try
             {
                 using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
