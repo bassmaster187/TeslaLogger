@@ -696,8 +696,6 @@ namespace TeslaLogger
 
                     DBHelper.MigratePosOdometerNullValues();
 
-                    Komoot.CheckTours();
-
                     Logfile.Log("UpdateDbInBackground finished, took " + (DateTime.Now - start).TotalMilliseconds + "ms");
                     RunHousekeepingInBackground();
 
