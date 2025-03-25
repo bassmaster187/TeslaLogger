@@ -764,7 +764,7 @@ INSERT
 )
 VALUES (
   @CarID,
- StartDate,
+  @StartDate,
   @StartPos,
   @EndDate,
   @EndPos
@@ -783,7 +783,7 @@ VALUES (
                         }
                         // update start address and end address
                         int count = 0;
-                        WebHelper.UpdateAllPOIAddresses(count, $"firstPosID,lastPosID");
+                        WebHelper.UpdateAllPOIAddresses(count, $"{firstPosID},{lastPosID}");
                     }
                 }
                 _ = Task.Factory.StartNew(() =>
