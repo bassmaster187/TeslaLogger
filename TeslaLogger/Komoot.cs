@@ -95,6 +95,11 @@ namespace TeslaLogger
                     this.speed = speed;
                 }
 
+                /// Calculates the distance in kilometers between the current position and another position
+                /// using the Haversine formula.
+                /// </summary>
+                /// <param name="other">The other position to calculate the distance to.</param>
+                /// <returns>The distance in kilometers between the two positions.</returns>
                 internal double CalculateDistance(Position other)
                 {
                     // calculate distance and speed with previous pos
@@ -111,12 +116,23 @@ namespace TeslaLogger
                     return dist_km;
                 }
 
-
+                /// <summary>
+                /// Calculates the speed between the current position and another position.
+                /// </summary>
+                /// <param name="other">The other position to compare with the current position.</param>
+                /// <returns>
+                /// The calculated speed in kilometers per hour (km/h), based on the distance 
+                /// between the two positions and the time difference.
+                /// </returns>
+                /// <remarks>
+                /// The calculation uses the Haversine formula to determine the distance 
+                /// between two geographical points and assumes the time difference is in milliseconds.
+                /// </remarks>
                 internal double CalculateSpeed(Position other)
                 {
                     // calculate distance and speed with previous pos
                     // inspired by https://github.com/mapado/haversine/blob/main/haversine/haversine.py
-                    double speed = this.dist_km / Math.Abs(this.delta_t - other.delta_t) * 3600000; // km/ms -> km/h
+                    double speed = CalculateDistance(other) / Math.Abs(this.delta_t - other.delta_t) * 3600000; // km/ms -> km/h
                     return speed;
                 }
             }
@@ -176,6 +192,15 @@ namespace TeslaLogger
                 }
             }
 
+            /// <summary>
+            /// Adjusts the distances of positions in the tour to correct any discrepancies
+            /// between the computed total distance and the actual measured distance.
+            /// </summary>
+            /// <remarks>
+            /// This method calculates a correction factor based on the ratio of the actual
+            /// measured distance to the computed total distance. It then applies this correction
+            /// factor to each position's distance to ensure the total matches the measured value.
+            /// </remarks>
             internal void CorrectPositionDistances()
             {
                 double distance_computed_km = 0.0;
