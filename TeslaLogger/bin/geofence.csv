@@ -9,6 +9,8 @@ Supercharger-V3 AT-Hall in Tirol,47.276897,11.469074
 Supercharger-V3 AT-Hall in Tirol,47.273290,11.475335
 Supercharger-V3 AT-Hartberg, 47.281418, 15.993699
 Supercharger-V4 AT-Heiterwang,47.437165,10.766143,30
+Supercharger-V4 AT-Imst, 47.218731, 10.731508
+Supercharger-V4 AT-Imst, 47.218524, 10.731943, 25
 Supercharger-V4 AT-Inning,48.183622,15.417924,30
 Supercharger AT-Innsbruck, 47.264882, 11.428380
 Supercharger-V3 AT-Kalwang, 47.422813, 14.759271
@@ -38,6 +40,7 @@ Supercharger-V3 AT-Villach-Ost,46.601751,13.883361
 Supercharger-V4 AT-Völkermarkt, 46.682274, 14.679134
 Supercharger AT-Wiener Neustadt, 47.804724, 16.210564
 Supercharger-V3 AT-Wien Gewerbepark Stadlau,48.24714357207139,16.46435981212852,30
+Supercharger-V4 AT-Zeltweg, 47.194056, 14.722814
 Supercharger-V3 AU-Abbotsford VIC, -37.80941, 144.99568
 Supercharger AU-Adelaide, -34.927592, 138.595240
 Supercharger-V3 AU-Albany WA, -35.02793495, 117.8807307
@@ -1869,7 +1872,7 @@ Supercharger DE-Kaiserslautern, 49.459907, 7.821410
 Supercharger-V3 DE-Karlsruhe, 48.999096,8.428591,30
 Supercharger DE-Kamen, 51.5701781, 7.675317
 Supercharger-V3 DE-Kassel,51.313688,9.493689
-Supercharger-V3 DE-Kassel (Cafe del Sol), 51.3083959, 9.5411861, 25
+Supercharger-V3 DE-Kassel (Cafe del Sol), 51.308679, 9.545969
 Supercharger-V3 DE-Kassel (GALERIA),51.313232,9.493343,25
 Supercharger DE-Kappel-Grafenhausen, 48.281347, 7.77755
 Supercharger-V3 DE-Kaltenkirchen,53.846035,9.936263,20
@@ -2457,6 +2460,7 @@ Supercharger HU-Fót, 47.581808,19.162384
 Supercharger HU-Miskolc,48.058002,20.799201
 Supercharger HU-Sormás, 46.460543, 16.906756
 Supercharger HU-Szeged, 46.274868,20.1024638
+Supercharger-V3 HU-Szigetszentmiklós, 47.383471, 19.026911
 Supercharger HU-Törökbálint, 47.439444, 18.889835
 Supercharger IE-Ballacolla, 52.86704, -7.481818
 Supercharger IE-Birdhill, 52.757747, -8.40932
@@ -2822,7 +2826,7 @@ Supercharger NL-Badhoevedorp, 52.329302, 4.78487
 Supercharger NL-Breda, 51.577493, 4.729968
 Supercharger NL-Breukelen, 52.167169, 4.98908
 Supercharger NL-Bunnik, 52.061077, 5.2055
-Supercharger-V3 NL-Deventer, 52.233798, 6.209399
+Supercharger-V3 NL-Deventer, 52.233435, 6.210287
 Supercharger NL-Dordrecht, 51.7744542, 4.65301
 Supercharger NL-Drachten, 53.105883, 6.129539
 Supercharger NL-Duiven, 51.958931, 6.020418
@@ -2830,7 +2834,10 @@ Supercharger-V3 NL-Eemnes,52.235630,5.2302213
 Supercharger NL-Eindhoven, 51.4069155, 5.479269
 Supercharger NL-Emmeloord, 52.727421, 5.764693
 Supercharger-V3 NL-Emmen,52.724202,6.883345
+Supercharger NL-Enschede, 52.202894, 6.888738
 Supercharger NL-Gouda, 52.022465, 4.684526
+Supercharger NL-Haarlem, 52.369457, 4.648263
+Supercharger NL-Harderwijk, 52.335913, 5.643527
 Supercharger-V4 NL-Heerlen, 50.893031, 5.955571
 Supercharger-V3 NL-Hengelo,52.287275,6.773343
 Supercharger NL-Hoorn, 52.650769, 5.038917
@@ -2841,6 +2848,7 @@ Supercharger-V3 NL-Maastricht, 50.816519, 5.725658, 20
 Supercharger-V3 NL-Meerkerk,51.899474,4.982747
 Supercharger-V3 NL-Middelburg, 51.480275, 3.636485
 Supercharger NL-Naarden, 52.30858, 5.141127
+Supercharger NL-Nootdorp, 52.05265, 4.402214
 Supercharger NL-Oosterhout, 51.626423, 4.869517
 Supercharger-V3 NL-Ridderkerk, 51.867934, 4.557695
 Supercharger-V3 NL-Rijswijk, 52.048276, 4.349078
@@ -2851,6 +2859,7 @@ Supercharger NL-Tilburg, 51.606331, 5.005621
 Supercharger-V3 NL-Uden, 51.671308, 5.60267
 Supercharger NL-Ugchelen, 52.177996, 5.912627
 Supercharger NL-Urmond, 50.9894104, 5.7815227
+Supercharger NL-Venray, 51.547121, 5.997161
 Supercharger NL-Vuren, 51.838827, 5.090846
 Supercharger NL-Zaltbommel, 51.796330, 5.254697
 Supercharger NL-Zevenaar, 51.940585, 6.081817
@@ -5049,6 +5058,7 @@ Aldi DE-Bonn-Lannesdorf Drachenburgstraße, 50.667667, 7.18025
 Aldi DE-Bottrop Horster Str., 51.524417, 6.932389
 Aldi DE-Böblingen Süd Bahnhof, 48.677525,9.011909
 Aldi DE-Böblingen, 48.685646, 8.993401
+Aldi DE-Butzbach Am Keltenhof, 50.428844, 8.6848, 50
 Aldi DE-Dannstadt Riedstraße, 49.434278, 8.317528
 Aldi DE-Darmstadt  Eschollbrücker Straße, 49.859889, 8.63675
 Aldi DE-Darmstadt-Arheilgen, 49.906825,8.648799
@@ -5636,6 +5646,7 @@ Allego DE-Übersee Bahnhofstraße 89 , 47.818892, 12.496413
 Allego FR-Avignon 162 Avenue Pierre Semard, 43.927801,4.834637
 Allego FR-Géant Casino Montpellier, 43.588535,3.888928
 Allego NL-Meerkerk,51.899809,4.982779
+Allego SE-Helsingborg Landskronavägen, 56.001269, 12.744955
 Allego SE-Gävle, 60.645483,17.146225
 Allego SE-Örkelljunga, 56.285576,13.337159
 
@@ -6656,6 +6667,7 @@ Compleo DE-Zwickau Uhdestraße, 50.70933, 12.50408
 Compleo DE-Zwingenberg Gießer Weg, 49.72307, 8.60184
 
 da-emobil AT-Ansfelden Stelzhammerstraße, 48.204409, 14.259646
+da-emobil AT-Eisenwang Enzersbergstraße, 47.822392, 13.200104
 da-emobil AT-Guntramsdorf, 48.033848,16.337711, 20
 da-emobil AT-Haid Stelzhamerstraße, 48.204404, 14.25965
 da-emobil AT-Niederndorf, 47.648726, 12.197558, 10
@@ -6805,6 +6817,7 @@ E.ON DE-Remscheid An der A1 , 51.158116298312, 7.2267234413944
 E.ON DE-Rheinbach Peppenhoven Ost, 50.644491, 6.942145
 E.ON DE-Rheinbach Peppenhoven West, 50.64325, 6.942062
 E.ON DE-Rösrath An der A3 , 50.897495292239, 7.1533592663671
+E.ON DE-Rostock Zum Südtor, 54.138321, 12.114062, 20
 E.ON DE-Sandersdorf-Brehna An der A9 , 51.607277, 12.183264
 E.ON DE-Sandhausen An der A5 , 49.350108, 8.630616
 E.ON DE-Schallstadt Breisgau Ost, 47.970558, 7.72173, 20
@@ -6845,6 +6858,7 @@ E.ON DE-Ziesar An der A2 , 52.250741, 12.309279
 E.ON DK-Karlslunde West, 55.560857, 12.229259
 E.ON DK-Karlslunde Ost, 55.560657, 12.231491
 E.ON DK-Korsør, 55.347704, 11.120238
+E.ON SE-Rydebäck Landskronavägen, 55.964455, 12.789519
 
 EDEKA DE-Ahorn Lindenstraße, 50.23425, 10.9182
 EDEKA DE-Asendorf Altenfelder Weg, 52.77811, 9.00129
@@ -6984,6 +6998,7 @@ EnelX IT-Torre Pali Stazione di Ricarica, 39.844032, 18.211256,10
 EnelX IT-Lecce Stazione di Ricarica ,40.353177, 18.171802,10
 EnelX IT-Ramiola, 44.698924,10.090093
 
+EnBW AT-Blindenmarkt Felbering, 48.126911, 15.008798
 EnBW CZ-Karlovy Vary, 50.232775,12.8678
 EnBW DE-Aach, 47.840881, 8.852887
 EnBW DE-Achern Fautenbacher Straße, 48.627599512154, 8.0569213389771
@@ -7095,6 +7110,7 @@ EnBW DE-Bad Schussenried Wilhelm-Schussen-Straße, 48.0065, 9.65591
 EnBW DE-Bad Schönborn Hermann-Löns-Straße, 49.225143, 8.654241
 EnBW DE-Bad Segeberg, 53.92544, 10.31909
 EnBW DE-Bad Sooden-Allendorf, 51.267112, 9.970196
+EnBW DE-Bad Staffelstein Lichtenfelser Straße, 50.10461, 11.006372
 EnBW DE-Bad Urach Beim Tiergarten, 48.491137, 9.397532
 EnBW DE-Bad Urach Im Greuth, 48.491925, 9.401081
 EnBW DE-Bad Waldsee Badstr., 47.916388, 9.762818
@@ -7337,6 +7353,7 @@ EnBW DE-Dätgen, 54.180464, 9.943138
 EnBW DE-Döbeln, 51.118133, 13.1475
 EnBW DE-Dörzbach Marktplatz, 49.383275, 9.708368
 EnBW DE-Dörzbach Max-Planck-Str., 49.38337, 9.69581
+EnBW DE-Dresden Tschirnhausstraße, 50.997173, 13.79755
 EnBW DE-Dülmen, 51.813719, 7.256831
 EnBW DE-Düren Bauhaus, 50.82965, 6.47601
 EnBW DE-Düren Shell, 50.797546, 6.476773
@@ -7408,6 +7425,7 @@ EnBW DE-Erlangen BAB A3 Aurach, 49.58181007976, 10.92684514421
 EnBW DE-Erlangen Hofmannstraße, 49.592873,11.014516, 10
 EnBW DE-Erlangen Karl-May-Straße, 49.581707, 10.930694
 EnBW DE-Erwitte, 51.60625, 8.33675
+EnBW DE-Eschborn Ginnheimer Straße, 50.141238, 8.581703, 15
 EnBW DE-Eschelbronn Bahnhofstr., 49.320104, 8.868043
 EnBW DE-Eschenbach In den Bühlgärten, 48.657721, 9.673706
 EnBW DE-Essen Aktienstr. Hellweg, 51.462438830389, 6.930230208645
@@ -7843,6 +7861,7 @@ EnBW DE-Langenau Parkplatz, 48.5000571, 10.123939
 EnBW DE-Langenburg Hauptstr., 49.2531, 9.845753
 EnBW DE-Langenfeld (Rheinland), 51.0964, 6.94991
 EnBW DE-Langenhagen, 52.44352, 9.722693
+EnBW DE-Langenselbold Kinzigstraße, 50.175099, 9.0442015
 EnBW DE-Langgöns, 50.49304, 8.655976
 EnBW DE-Lauchheim Hauptstraße, 48.871184, 10.24152
 EnBW DE-Lauenau, 52.27655, 9.3523
@@ -8050,6 +8069,7 @@ EnBW DE-Niederaichbach Eichenstraße, 48.60745, 12.31597
 EnBW DE-Niederfischbach, 50.854366, 7.862987
 EnBW DE-Niederkrüchten, 51.209935, 6.180511
 EnBW DE-Niedernhall Hauptstraße, 49.295228, 9.615302
+EnBW DE-Niederzier Rurbenden, 50.847793, 6.447313
 EnBW DE-Norden, 53.582786, 7.225637
 EnBW DE-Norderstedt, 53.7230458, 9.997396
 EnBW DE-Nordhausen, 51.4967108, 10.78607
@@ -9165,6 +9185,7 @@ EWE-GO DE-Lastrup St. Elisabeth-Straße, 52.7923, 7.863864
 EWE-GO DE-Lastrup Vlämische Straße, 52.797321, 7.865796
 EWE-GO DE-Lathen Große Straße, 52.861625, 7.317643
 EWE-GO DE-Lauingen (Donau) Werner-von-Siemens-Straße, 48.57513, 10.44796
+EWE-GO DE-Lauterbach Umgehungsstraße, 50.642593, 9.396792
 EWE-GO DE-Leer Am Emsdeich, 53.221834, 7.434542
 EWE-GO DE-Leer Am Schlosspark, 53.23201, 7.49231
 EWE-GO DE-Leer Annenstraße, 53.235045, 7.459196
@@ -9587,7 +9608,7 @@ Fastned DE-Gladbeck-Ellinghorst, 51.5552, 6.96951
 Fastned DE-Goldbach, 49.993547,9.173447
 Fastned DE-Herbolzheim, 48.22685, 7.75509
 Fastned DE-Hermsdorf, 50.8897673, 11.8719638, 18
-Fastned DE-Hilden, 51.192201,6.935931,3
+Fastned DE-Hilden, 51.192201, 6.936038, 18
 Fastned DE-Hildesheim, 52.16083, 9.99676
 Fastned DE-Leutkirch im Allgäu Auf der, 47.83136, 10.00428
 Fastned DE-Limburg Süd, 50.37993, 8.09248
@@ -9669,6 +9690,7 @@ Fortum NO-Bykle, 59.354746,7.355757
 Fortum NO-Bøde Esso Rønvik, 67.293538, 14.407496
 Fortum NO-Sortland, 68.704914, 15.414759
 
+Grid DE-Göttingen Am Kauf Park, 51.527386, 9.883872
 Grid DE-Lollar Rothweg, 50.640669, 8.700592
 
 Iberdrola ES-Huelva, 37.306245, -6.87322
@@ -10992,6 +11014,7 @@ Lidl DE-Bruchsal,49.1213611,8.5819725
 Lidl DE-Brüggen Borner Straße 78, 51.245378, 6.195312
 Lidl DE-Brühl-Badorf Steingasse 4, 50.806877, 6.899435
 Lidl DE-Burgdorf Ostlandring 2a, 52.445126, 10.024391
+Lidl DE-Butzbach John-F-Kennedy-Straße, 50.442566, 8.663718, 65
 Lidl DE-Buxtehude Harburger Straße 60-62, 53.473894, 9.713599
 Lidl DE-Böblingen,48.678196,9.0125519
 Lidl DE-Büdelsdorf Konrad-Adenauer-Str. 1, 54.322518, 9.692149
@@ -11492,6 +11515,8 @@ Lidl RO-Târgoviște,44.918809,25.481056
 Lidl RO-Târgu Jiu,45.053249,23.282905
 Lidl SE-Falkenberg, 56.91611,12.502524
 Lidl SK-Komárno,47.7644999,18.0946626
+
+MB DE-Butzbach In der Alböhn, 50.429422, 8.683063, 50
 
 Mer DE-Lohfelden Kassel Ost, 51.268231,9.522843
 Mer DE-Quickborn Holmmoor Ost, 53.717076, 9.939984
@@ -12159,7 +12184,7 @@ Porsche DE-Oldenburg Nadorster Straße, 53.1608, 8.22354
 Porsche DE-Osnabrück Blumenhaller Weg, 52.2646, 8.00935
 Porsche DE-Pforzheim Kieselbronner Straße, 48.9108, 8.7197964685059
 Porsche DE-Recklinghausen Schmalkalder Straße, 51.5979, 7.2463036069489
-Porsche DE-Rostock Ferdinand Porsche Straße, 54.0327, 12.0998
+Porsche DE-Rostock Ferdinand-Porsche-Straße, 54.058136, 12.117726
 Porsche DE-Schwäbisch Gmünd Ferdinand-Porsche-Weg, 48.7915, 9.7722198827362
 Porsche DE-Siegen Marienhütte, 50.8527, 8.000793125
 Porsche DE-Sinzheim Landstraße, 48.7668, 8.17029
@@ -12201,6 +12226,10 @@ ShellRecharge FR-Aire de Béziers-Montblanc Sud, 43.359314, 3.34559, 30
 ShellRecharge NL-Heerlen, 50.823176, 6.019581, 30
 
 Smatrics AT-Feldkirchen bei Graz, 47.009115, 15.44097, 20
+
+solid DE-Nürnberg Am Leonhardspark, 49.44341, 11.056229
+solid DE-Nürnberg Grünstraße, 49.439396, 11.051154
+solid DE-Nürnberg Kornmarkt, 49.449167, 11.074717
 
 SWARCO DE-Lich Gottlieb-Daimler-Straße, 50.51113, 8.82727
 
