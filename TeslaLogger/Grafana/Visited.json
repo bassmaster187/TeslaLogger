@@ -33,7 +33,7 @@
       "title": "Admin Panel",
       "tooltip": "",
       "type": "link",
-      "url": "http://teslalogger/admin/"
+      "url": "http://raspberry/admin/"
     }
   ],
   "liveNow": false,
