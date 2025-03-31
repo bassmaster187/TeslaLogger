@@ -309,7 +309,7 @@ WHERE
                 while (true)
                 {
                     Work(kli);
-                    Thread.Sleep(interval * 1000);
+                    Thread.Sleep((int)(((DateTime.Now.Hour >= 4 && DateTime.Now.Hour < 18) ? 0.5 : 1.0) * (double)interval * 1000.0));
                 }
             }
             catch (Exception ex)
