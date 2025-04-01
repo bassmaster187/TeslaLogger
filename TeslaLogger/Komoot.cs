@@ -177,7 +177,9 @@ namespace TeslaLogger
                     httpClient.DefaultRequestHeaders.Add("Authorization", "Basic " + Convert.ToBase64String(Encoding.UTF8.GetBytes($"{kli.user_id}:{kli.token}")));
                     using (HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, new Uri($"https://api.komoot.de/v007/tours/{tourID}?_embedded=coordinates,way_types,surfaces,directions,participants,timeline&directions=v2&fields=timeline&format=coordinate_array&timeline_highlights_fields=tips,recommenders")))
                     {
+                        DateTime start = DateTime.UtcNow;
                         HttpResponseMessage result = httpClient.SendAsync(request).Result;
+                        DBHelper.AddMothershipDataToDB("Komoot: DownloadTour", start, (int)result.StatusCode, kli.carID);
                         if (result.IsSuccessStatusCode)
                         {
                             string resultContent = result.Content.ReadAsStringAsync().Result;
@@ -895,7 +897,9 @@ VALUES (
                     httpClient.DefaultRequestHeaders.Add("Authorization", "Basic " + Convert.ToBase64String(Encoding.UTF8.GetBytes($"{kli.user_id}:{kli.token}")));
                     using (HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, new Uri(url)))
                     {
+                        DateTime start = DateTime.UtcNow;
                         HttpResponseMessage result = httpClient.SendAsync(request).Result;
+                        DBHelper.AddMothershipDataToDB("Komoot: DownloadTours", start, (int)result.StatusCode, kli.carID);
                         if (result.IsSuccessStatusCode)
                         {
                             string resultContent = result.Content.ReadAsStringAsync().Result;
@@ -1102,7 +1106,9 @@ VALUES (
                 httpClient.DefaultRequestHeaders.Add("Authorization", "Basic " + Convert.ToBase64String(Encoding.UTF8.GetBytes($"{kli.username}:{kli.password}")));
                 using (HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, new Uri($"https://api.komoot.de/v006/account/email/{kli.username}/")))
                 {
+                    DateTime start = DateTime.UtcNow;
                     HttpResponseMessage result = httpClient.SendAsync(request).Result;
+                    DBHelper.AddMothershipDataToDB("Komoot: Login", start, (int)result.StatusCode, kli.carID);
                     if (result.IsSuccessStatusCode)
                     {
                         string resultContent = result.Content.ReadAsStringAsync().Result;
