@@ -43,6 +43,8 @@ namespace TeslaLogger
         public bool current_fast_charger_present; // defaults to false
 
         public string current_car_version = "";
+        public string software_update_status = ""; // defaults to null;
+        public string software_update_version = ""; // defaults to null;
 
         public DateTime current_trip_start = DateTime.MinValue;
         public DateTime current_trip_end = DateTime.MinValue;
@@ -162,8 +164,8 @@ namespace TeslaLogger
                 var apistate = car.GetTeslaAPIState();
 
                 apistate.GetBool("charge_port_door_open", out current_charge_port_door_open);
-                apistate.GetString("software_update.status", out string software_update_status);
-                apistate.GetString("software_update.version", out string software_update_version);
+                apistate.GetString("software_update.status", out software_update_status);
+                apistate.GetString("software_update.version", out software_update_version);
 
                 apistate.GetInt("fd_window", out int fd_window);
                 apistate.GetInt("fp_window", out int fp_window);

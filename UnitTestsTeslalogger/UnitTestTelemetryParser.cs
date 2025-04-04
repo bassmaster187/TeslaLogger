@@ -557,6 +557,43 @@ namespace UnitTestsTeslalogger
             }
         }
 
+        [TestMethod]
+        public void SWUpdate()
+        {
+            Car c = new Car(0, "", "", 0, "", DateTime.Now, "", "", "", "", "", "XP7YGCEK9PB000000", "", null, false);
+
+            var telemetry = new TelemetryParser(c);
+            telemetry.databaseCalls = false;
+            telemetry.handleACChargeChange += Telemetry_handleACChargeChange;
+
+            var lines = LoadData("../../testdata/SWUpdate.txt");
+
+            for (int i = 0; i < lines.Count; i++)
+            {
+                telemetry.handleMessage(lines[i]);
+                if (i == 0)
+                {
+                    Assert.AreEqual("", c.CurrentJSON.software_update_version);
+                    Assert.AreEqual("", c.CurrentJSON.software_update_status);
+                }
+                else if (i == 3)
+                {
+                    Assert.AreEqual("2025.2.6", c.CurrentJSON.software_update_version);
+                    Assert.AreEqual("Downloading", c.CurrentJSON.software_update_status);
+                }
+                else if (i == 7)
+                {
+                    Assert.AreEqual("2025.2.6", c.CurrentJSON.software_update_version);
+                    Assert.AreEqual("Installing", c.CurrentJSON.software_update_status);
+                }
+                else if (i == 11)
+                {
+                    Assert.AreEqual("", c.CurrentJSON.software_update_version);
+                    Assert.AreEqual("", c.CurrentJSON.software_update_status);
+                }
+            }
+        }
+
         private void AssertStates(TelemetryParser telemetry, int line, string content)
         {
             Assert.AreEqual(expectedACCharge, telemetry.acCharging, $"\r\nLine: {line}\r\n" +content);
