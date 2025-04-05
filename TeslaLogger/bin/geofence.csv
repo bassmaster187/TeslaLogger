@@ -1936,6 +1936,7 @@ Supercharger-V3 DE-Münchberg-Nord, 50.202914, 11.77689, 9
 Supercharger-V3 DE-Münchberg-Nord, 50.202995, 11.776503, 8
 Supercharger-V3 DE-München - Die Hirschau, 48.161505, 11.602763
 Supercharger-V3 DE-München - Pasing Arcaden, 48.147909,11.464882
+Supercharger-V4 DE-München Riem Arcaden, 48.132573, 11.689725, 60
 Supercharger-V3 DE-München - OEZ, 48.184493713, 11.5323986
 Supercharger-V3 DE-München - Sendling, 48.105054,11.536857,30
 Supercharger-V4 DE Münster, 51.992189, 7.571158
@@ -2085,6 +2086,7 @@ Supercharger-V3 ES-Antequera, 37.113318, -4.566764
 Supercharger ES-Aranda de Duero, 41.623235, -3.687739
 Supercharger ES-Ariza, 41.313192, -2.002201
 Supercharger ES-Atalaya del Cañavate, 39.538687, -2.254555
+Supercharger-V3 ES-Barakaldo MegaPark, 43.293842, -3.005063
 Supercharger ES-Barcelona-L'Illa Diagonal, 41.389679,2.137354
 Supercharger ES-Bembibre, 42.623488,-6.453124
 Supercharger-V3 ES-Benavente, 42.007749,-5.663257
@@ -2100,6 +2102,7 @@ Supercharger ES-Alcobendas, 40.5215749, -3.6560602
 Supercharger ES-Girona, 41.998411, 2.817295
 Supercharger ES-Granada, 37.181805, -3.928417
 Supercharger ES-Guarromán, 38.143021, -3.722848
+Supercharger-V4 ES-Hernani,43.276171,-1.987865
 Supercharger ES-Jerez, 36.692378,-6.160246
 Supercharger ES-La Seu d'Urgell, 42.358898, 1.462893
 Supercharger ES-Lleida, 41.663959, 0.605371
@@ -2139,6 +2142,7 @@ Supercharger-V3 FI-Karesuvanto, 68.450226,22.4814
 Supercharger-V3 FI-Kempele, 64.9018031, 25.5353976
 Supercharger FI-Koivisto, 62.516908, 25.691666
 Supercharger FI-Kokkola, 63.829282, 23.148487
+Supercharger-V3 FI-Kuopio, 62.820695, 27.607985
 Supercharger FI-Paimio, 60.442961, 22.605621
 Supercharger-V3 FI-Pello, 66.808793,23.996331,20
 Supercharger FI-Pori, 61.49467, 21.798006
@@ -2185,6 +2189,7 @@ Supercharger-V3 FR-Avallon, 47.502121,3.984249
 Supercharger-V3 FR-Avignon - Le Pontet, 43.980282, 4.8801075
 Supercharger FR-Barberaz, 45.56085, 5.949646
 Supercharger FR-Bayonne, 43.4938044, -1.4524967
+Supercharger-V4 FR-Bayonne Ametzondo,43.481965,-1.445765
 Supercharger-V3 FR-Beaune Nord, 47.0432, 4.839921
 Supercharger FR-Beaune, 47.017319, 4.83779
 Supercharger-V3 FR-Beauvais, 49.409907, 2.113721
@@ -2254,7 +2259,7 @@ Supercharger FR-Langon, 44.5424356, -0.2539542
 Supercharger-V3 FR-Laxou,48.691096,6.127684
 Supercharger FR-Le Mans, 48.041833, 0.175342
 Supercharger-V3 FR-Le Mans - Saint-Saturnin,48.052932,0.166434
-Supercharger-V3 FR-Le Bosc, 43.68814, 3.355094
+Supercharger-V3 FR-Le Bosc, 43.688495, 3.354224
 Supercharger-V3 FR-Le Touquet-Paris-Plage, 50.521625, 1.598625
 Supercharger-V3 FR-Les Herbiers, 46.889368, -1.032994
 Supercharger FR-Lille, 50.583306, 3.08982
@@ -2271,6 +2276,7 @@ Supercharger FR-Metz, 49.216512, 6.171239
 Supercharger FR-Mont-Saint-Michel, 48.568171, -1.543283
 Supercharger-V3 FR-Montauban, 44.036554, 1.378
 Supercharger-V3 FR-Montluçon, 46.378453, 2.586523
+Supercharger-V4 FR-Montmarault,46.330875,2.975815
 Supercharger-V3 FR-Montpellier, 43.602398, 3.919982, 40
 Supercharger FR-Montélimar, 44.676319, 4.795763
 Supercharger FR-Morlaix, 48.57439, -3.85318
@@ -2510,6 +2516,8 @@ Supercharger-V3 IE-Enfield,53.406101,-6.838143
 Supercharger IE-Tralee,52.260703,-9.659141
 Supercharger-V3 IS-Egilsstaðir, 65.259368,-14.406532
 Supercharger IS-Fossvogur, 64.117994, -21.899666
+Supercharger IS-Höfn, 64.250137, -15.205539
+Supercharger IS-Hvolsvöllur, 63.75234, -20.235952
 Supercharger-V3 IS-Kirkjubæjarklaustur, 63.789025,-18.052187
 Supercharger-V3 IS-Staðarskáli, 65.14475,-21.084813
 Supercharger-V3 IS-Vatnagardar, 64.14496,-21.854711
@@ -2859,6 +2867,7 @@ Supercharger KR-서울 - 구로 수퍼차저, 37.47984, 126.8953
 Supercharger KR-평창 휘닉스, 37.586293, 128.322665
 Supercharger LI-Schaan, 47.16519, 9.50775
 Supercharger-V3 LT-Kaunas, 54.942187, 24.006453
+Supercharger-V3 LU-Luxembourg Urban, 49.583756, 6.124503
 Supercharger LU-Mënsbech, 49.6409, 6.27076
 Supercharger-V3 NL-Akersloot, 52.547541, 4.722741
 Supercharger-V4 NL-Almere, 52.358163, 5.251845, 50
@@ -3057,11 +3066,11 @@ Supercharger-V3 NZ-New Plymouth, -39.05600591, 174.08676123
 Supercharger NZ-Omarama, -44.484879, 169.971191
 Supercharger NZ-Palmerston North, -40.358441, 175.614978
 Supercharger-V3 NZ-Paraparaumu, -40.917165, 175.005529
-Supercharger NZ-Queenstown, -45.026528, 168.744639
+Supercharger NZ-Queenstown, -45.026699, 168.74399
 Supercharger-V3 NZ-Rainbow Point, -38.722167, 176.080208
 Supercharger-V3 NZ-Rotorua, -38.14113292, 176.25301011
 Supercharger-V3 NZ-Ruakura, -37.777419, 175.345078
-Supercharger NZ-Sylvia Park, -36.912556, 174.841139
+Supercharger NZ-Sylvia Park, -36.913358, 174.841418
 Supercharger-V3 NZ-Taihape, -39.67351, 175.793023
 Supercharger NZ-Taupo, -38.692628, 176.075996
 Supercharger-V3 NZ-Waitomo, -38.24364262, 175.18328441
@@ -3182,6 +3191,7 @@ Supercharger SK-Bratislava, 48.132138, 17.108438
 Supercharger SK-Demänová, 49.054815, 19.579253
 Supercharger-V3 SK-Košice, 48.695151,21.235604
 Supercharger SK-Zvolen, 48.627379, 19.103481
+Supercharger-V3 TR-Akhisar, 38.930236, 27.703596
 Supercharger-V3 US-Abbott TX, 31.899572, -97.091485
 Supercharger US-Aberdeen MD, 39.498524, -76.230515
 Supercharger-V3 US-Aberdeen MD - Churchville Road, 39.52892, -76.1946
