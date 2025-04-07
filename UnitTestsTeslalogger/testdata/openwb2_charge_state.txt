@@ -1,5 +1,5 @@
 {
   "status": "success",
   "topic": "openWB/chargepoint/27/get/charge_state",
-  "message": false
+  "message": true
 }
