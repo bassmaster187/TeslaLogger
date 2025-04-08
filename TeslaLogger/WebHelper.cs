@@ -3931,27 +3931,36 @@ DESC", con))
 
         internal static int UpdateAllPOIAddresses(int count, string bucket)
         {
+            Tools.DebugLog($"UpdateAllPOIAddresses(count:{count}, bucket:<{bucket}>)");
             if (bucket.Length == 0)
+            {
                 return count;
-
+            }
             using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
             {
                 con.Open();
-
-                using (MySqlCommand cmd = new MySqlCommand(@"Select lat, lng, pos.id, address, fast_charger_brand, max_charger_power 
-                        from pos    
-                        left join chargingstate on pos.id = chargingstate.pos
-                        where pos.id in (" + MySql.Data.MySqlClient.MySqlHelper.EscapeString(bucket) + ")", con))
+                using (MySqlCommand cmd = new MySqlCommand(@"
+SELECT
+    lat,
+    lng,
+    pos.id,
+    address,
+    fast_charger_brand,
+    max_charger_power 
+FROM
+    pos    
+    LEFT JOIN chargingstate ON pos.id = chargingstate.pos
+WHERE
+    pos.id IN (" + MySql.Data.MySqlClient.MySqlHelper.EscapeString(bucket) + ")", con))
                 {
                     MySqlDataReader dr = SQLTracer.TraceDR(cmd);
-
+                    Tools.DebugLog(cmd);
                     while (dr.Read())
                     {
                         count = UpdatePOIAdress(count, dr);
                     }
                 }
             }
-
             return count;
         }
 
