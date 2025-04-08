@@ -1065,7 +1065,7 @@ VALUES (
                                     {
                                         if (Int64.TryParse(tour["id"].ToString(), out long tourid) && DateTime.TryParse(tour["date"].ToString(), out DateTime _))
                                         {
-                                            KomootTour newTour = new KomootTour(kli.carID, tourid, tour["type"].ToString(), tour["sport"].ToString(), DateTime.Parse(tour["date"].ToString()));
+                                            KomootTour newTour = new KomootTour(kli.carID, tourid, tour["type"].ToString(), tour["sport"].ToString(), DateTime.Parse(tour["date"].ToString()).ToLocalTime());
                                             if (tour.ContainsKey("id") && double.TryParse(tour["distance"].ToString(), out double _))
                                             {
                                                 newTour.distance_m = double.Parse(tour["distance"].ToString());
