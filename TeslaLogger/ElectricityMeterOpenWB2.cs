@@ -42,7 +42,7 @@ namespace TeslaLogger
             Example parameters: 
             "": grid id will be assumed from hierarchy, first charge point id will be taken from hierarchy
             "CP:26": chargepoind id = 26, grid id will be assumed from hierarchy
-            "G:7|CP:27": Grid meter with id = 7 and chargepoind id = 26
+            "G:7|CP:27": Grid meter with id = 7 and chargepoind id = 27
             */
 
             var args = parameter.Split('|');
@@ -73,70 +73,40 @@ namespace TeslaLogger
                 if (o != null)
                     return (string)o;
 
+                string lastJSON = null;
                 string url = host + "/v1/?topic=" + topic;
-                string lastJSON = client.DownloadString(url);
 
-                MemoryCache.Default.Add(cacheKey, lastJSON, DateTime.Now.AddSeconds(10));
-                return lastJSON;
-            }
-            catch (Exception ex)
-            {
-                if (ex is WebException wx)
+                //UnitTests
+                if (mockup_hierarchy != null && mockup_version != null && mockup_grid != null && mockup_charge_state != null && mockup_charge_point != null)
                 {
-                    if ((wx.Response as HttpWebResponse)?.StatusCode == HttpStatusCode.NotFound)
+                    if (topic.Contains("hierarchy"))
                     {
-                        Logfile.Log(wx.Message);
-                        return "";
+                        lastJSON = mockup_hierarchy;
                     }
-
-                }
-                if (!WebHelper.FilterNetworkoutage(ex))
-                    ex.ToExceptionless().FirstCarUserID().Submit();
-
-                Logfile.Log(ex.ToString());
-            }
-
-            return "";
-        }
-
-        public override double? GetUtilityMeterReading_kWh()
-        {
-            string h = null;
-            string j = null;
-            try
-            {
-                if (string.IsNullOrEmpty(gridmeterid))
-                {
-                    //get grid meter id via hierarchy:
-                    if (mockup_hierarchy != null)
+                    else if (topic.Contains("version"))
                     {
-                        h = mockup_hierarchy;
+                        lastJSON = mockup_version;
                     }
-                    else
+                    else if (topic.Contains("chargepoint") && topic.Contains("charge_state"))
                     {
-                        h = GetCurrentData("openWB/counter/get/hierarchy");
+                        lastJSON = mockup_charge_state;
                     }
-
-                    JArray jsonArray = JArray.Parse(h);
-                    JToken firstCounter = jsonArray
-                        .FirstOrDefault(item => (string)item["type"] == "counter");
-
-                    if (string.IsNullOrEmpty(firstCounter["id"].ToString()))
-                        return null;
-
-                    gridmeterid = firstCounter["id"].ToString();
-                }
-
-                if (mockup_grid != null)
-                {
-                    j = mockup_grid;
+                    else if (topic.Contains("chargepoint") && topic.Contains("imported"))
+                    {
+                        lastJSON = mockup_charge_point;
+                    }
+                    else if (topic.Contains("counter") && topic.Contains("imported"))
+                    {
+                        lastJSON = mockup_grid;
+                    }
                 }
                 else
                 {
-                    j = GetCurrentData("openWB/counter/" + gridmeterid + "/get/imported");
+                    //real data
+                    lastJSON = client.DownloadString(url);
                 }
-                
-                dynamic jsonResult = JsonConvert.DeserializeObject(j);
+
+                dynamic jsonResult = JsonConvert.DeserializeObject(lastJSON);
                 if (jsonResult == null)
                     return null;
 
@@ -149,16 +119,75 @@ namespace TeslaLogger
                 if (status.ToString() != "success")
                     return null;
 
-                if (r1.ContainsKey("message"))
+                if (!r1.ContainsKey("message"))
                 {
-                    double.TryParse(r1["message"].ToString(), out double value);
-                    return value/1000;
+                    return null;
+                }
+
+                string message = null;
+                message = r1["message"].ToString();
+
+                MemoryCache.Default.Add(cacheKey, message, DateTime.Now.AddSeconds(10));
+
+                return message;
+            }
+            catch (Exception ex)
+            {
+                if (ex is WebException wx)
+                {
+                    if ((wx.Response as HttpWebResponse)?.StatusCode == HttpStatusCode.NotFound)
+                    {
+                        Logfile.Log(wx.Message);
+                        return null;
+                    }
+
+                }
+                if (!WebHelper.FilterNetworkoutage(ex))
+                    ex.ToExceptionless().FirstCarUserID().Submit();
+
+                Logfile.Log(ex.ToString());
+            }
+
+            return null;
+        }
+
+        public override double? GetUtilityMeterReading_kWh()
+        {
+            string h = null;
+            string j = null;
+            try
+            {
+                if (string.IsNullOrEmpty(gridmeterid))
+                {
+                    //get grid meter id via hierarchy:
+                    h = GetCurrentData("openWB/counter/get/hierarchy");
+
+                    if (String.IsNullOrEmpty(h))
+                        return double.NaN;
+
+                    JArray jsonArray = JArray.Parse(h);
+                    JToken firstCounter = jsonArray
+                        .FirstOrDefault(item => (string)item["type"] == "counter");
+
+                    if (string.IsNullOrEmpty(firstCounter["id"].ToString()))
+                        return double.NaN;
+
+                    gridmeterid = firstCounter["id"].ToString();
+                }
+
+                j = GetCurrentData("openWB/counter/" + gridmeterid + "/get/imported");
+                
+                if (String.IsNullOrEmpty(j))
+                    return double.NaN;
+
+                if (double.TryParse(j, out double value))
+                {
+                    return value / 1000;
                 }
                 else
                 {
                     return double.NaN;
                 }
-
 
             }
             catch (Exception ex)
@@ -179,58 +208,32 @@ namespace TeslaLogger
                 if (string.IsNullOrEmpty(chargepointid))
                 {
                     //no charge point id provided, get first charge point id via hierarchy:
-                    if (mockup_hierarchy != null)
-                    {
-                        h = mockup_hierarchy;
-                    }
-                    else
-                    {
-                        h = GetCurrentData("openWB/counter/get/hierarchy");
-                    }
+                    h = GetCurrentData("openWB/counter/get/hierarchy");
 
-                    JArray jsonArray = JArray.Parse(h);
-                    JObject firstItem = (JObject)jsonArray[0];
-                    JArray childrenArray = (JArray)firstItem["children"];
-                    JToken cpEntry = childrenArray
-                                        .Where(child => (string)child["type"] == "counter" && child["children"] != null)
-                                        .SelectMany(child => child["children"])
-                                        .Where(grandchild => (string)grandchild["type"] == "cp")
-                                        .FirstOrDefault();
+                    if (String.IsNullOrEmpty(h))
+                        return double.NaN;
+
+                    JToken cpEntry = JArray.Parse(h)
+                        .Cast<JObject>()
+                        .SelectMany(o => o.DescendantsAndSelf().OfType<JObject>())
+                        .FirstOrDefault(t => (string)t["type"] == "cp");
 
                     if (cpEntry == null)
                     {
-                        return null;
+                        return double.NaN;
                     }
 
                     chargepointid = cpEntry["id"].ToString();
                 }
 
-                if (mockup_charge_point != null)
+                j = GetCurrentData("openWB/chargepoint/" + chargepointid + "/get/imported");
+
+                if (String.IsNullOrEmpty(j))
+                    return double.NaN;
+
+                if (double.TryParse(j, out double value))
                 {
-                    j = mockup_charge_point;
-                }
-                else
-                {
-                    j = GetCurrentData("openWB/chargepoint/" + chargepointid + "/get/imported");
-                }
-
-                dynamic jsonResult = JsonConvert.DeserializeObject(j);
-                if (jsonResult == null)
-                    return null;
-
-                if (!Tools.IsPropertyExist(jsonResult, "status"))
-                    return null;
-
-                Dictionary<string, object> r1 = jsonResult.ToObject<Dictionary<string, object>>();
-
-                r1.TryGetValue("status", out object status);
-                if (status.ToString() != "success")
-                    return null;
-
-                if (r1.ContainsKey("message"))
-                {
-                    double.TryParse(r1["message"].ToString(), out double value);
-                    return value/1000;
+                    return value / 1000;
                 }
                 else
                 {
@@ -244,7 +247,7 @@ namespace TeslaLogger
                 Logfile.ExceptionWriter(ex, j);
             }
 
-            return null;
+            return double.NaN;
         }
 
         public override bool? IsCharging()
@@ -252,30 +255,12 @@ namespace TeslaLogger
             string j = null;
             try
             {
-                if (mockup_charge_state != null)
-                {
-                    j = mockup_charge_state;
-                }
-                else
-                {
-                    j = GetCurrentData("openWB/chargepoint/" + chargepointid + "/get/charge_state");
-                }
+                j = GetCurrentData("openWB/chargepoint/" + chargepointid + "/get/charge_state");
 
-                dynamic jsonResult = JsonConvert.DeserializeObject(j);
-                if (jsonResult == null)
-                    return null;
+                if (String.IsNullOrEmpty(j))
+                    return false;
 
-                if (!Tools.IsPropertyExist(jsonResult, "status"))
-                    return null;
-
-                Dictionary<string, object> r1 = jsonResult.ToObject<Dictionary<string, object>>();
-
-                r1.TryGetValue("status", out object status);
-                if (status.ToString() != "success")
-                    return null;
-
-                r1.TryGetValue("message", out object message);
-                if (message.ToString().ToLower() == "true")
+                if (j.ToLower() == "true")
                 {
                     return true;
                 }
@@ -299,30 +284,9 @@ namespace TeslaLogger
             string j = null;
             try
             {
-                if (mockup_version != null)
-                {
-                    j = mockup_version;
-                }
-                else
-                {
-                    j = GetCurrentData("openWB/system/version");
-                }
+                j = GetCurrentData("openWB/system/version");
 
-                dynamic jsonResult = JsonConvert.DeserializeObject(j);
-                if (jsonResult == null)
-                    return null;
-
-                if (!Tools.IsPropertyExist(jsonResult, "status"))
-                    return null;
-
-                Dictionary<string, object> r1 = jsonResult.ToObject<Dictionary<string, object>>();
-
-                r1.TryGetValue("status", out object status);
-                if (status.ToString() != "success")
-                    return null;
-
-                r1.TryGetValue("message", out object version);
-                return version.ToString();
+                return j;
             }
             catch (Exception ex)
             {
@@ -332,7 +296,7 @@ namespace TeslaLogger
                 Logfile.ExceptionWriter(ex, j);
             }
 
-            return "";
+            return null;
         }
 
     }
