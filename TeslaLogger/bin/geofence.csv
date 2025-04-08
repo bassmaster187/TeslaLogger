@@ -41,9 +41,9 @@ Supercharger AT-Vienna, 48.157246,16.334045
 Supercharger AT-Villach, 46.604193, 13.869091
 Supercharger-V3 AT-Villach-Ost,46.601751,13.883361
 Supercharger-V4 AT-Völkermarkt, 46.682274, 14.679134
+Supercharger-V4 AT-Wels, 48.145889, 13.975208
 Supercharger-V4 AT-Wels, 48.180313, 14.063536, 20
 Supercharger-V4 AT-Wien, 48.193045, 16.27707
-Supercharger-V4 AT-Wels Salzburger Straße, 48.145889, 13.975208
 Supercharger AT-Wiener Neustadt, 47.804724, 16.210564
 Supercharger-V3 AT-Wien Gewerbepark Stadlau,48.24714357207139,16.46435981212852,30
 Supercharger-V4 AT-Zeltweg, 47.194056, 14.722814
@@ -12446,6 +12446,8 @@ Smatrics AT-Linz Untere Donaulände, 48.313366, 14.298537
 Smatrics AT-Wien Ludwig-von-Höhnel-Gasse, 48.159603, 16.385089
 Smatrics AT-Wien Simmeringer Hauptstraße, 48.14635, 16.460827
 Smatrics AT-Wiener Neudorf IZ-NÖ-Süd Straße, 48.077225, 16.330032
+Smatrics AT-Wien Ludwig-von-Höhnel-Gasse, 48.159603, 16.385089
+Smatrics AT-Wien Simmeringer Hauptstraße, 48.14635, 16.460827
 
 solid DE-Nürnberg Am Leonhardspark, 49.44341, 11.056229
 solid DE-Nürnberg Grünstraße, 49.439396, 11.051154
@@ -12457,6 +12459,9 @@ SW-Kassel DE-Kassel Friedrichsplatz, 51.313361, 9.495128, 30
 SW-Lübeck DE-Lübeck Priwallpromenade, 53.95621, 10.88116
 SW-Münster DE-Münster Kiesekamps Mühle, 51.949318, 7.641345
 SW-Sondershausen DE-Sondershausen Erfurter Straße, 51.364575, 10.844618
+SW-Kassel DE-Kassel Friedrichsplatz, 51.313361, 9.495128, 30
+SW-Lübeck DE-Lübeck Priwallpromenade, 53.95621, 10.88116
+SW-Münster DE-Münster Kiesekamps Mühle, 51.949318, 7.641345
 
 SWARCO DE-Lich Gottlieb-Daimler-Straße, 50.51113, 8.82727
 

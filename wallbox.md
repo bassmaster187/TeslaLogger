@@ -2,6 +2,7 @@
 You can connect your Teslalogger to your Wallbox to calculate the efficiency of charging or the percentage of photovoltaics used to charge your car. 
 ## Supported Wallboxes
 - OpenWB
+- OpenWB 2
 - go-eCharger
 - Tesla Wallbox Gen 3
 - KEBA KeContact P30 (P20?)
@@ -24,6 +25,15 @@ Some types of wallboxes needs some special params to work as expected.
 # OpenWB
 ### Param:
 LP1 - LP8 Charging point used for this car. Default: LP1
+
+# OpenWB 2
+Please enable "HTTP-API" in OpenWB settings
+For host use https and port, example: https://192.168.1.38:8443
+Per default and without params TeslaLogger uses first founded Wallbox and Grid meter.
+If you have multiple Wallboxes or you have problems with automatic settings:
+Param:
+- "CP:26": chargepoind id = 26, grid id will be assumed from hierarchy
+- "G:7|CP:27": Grid meter with id = 7 and chargepoind id = 27
 
 # go-eCharger
 Please make sure you enable HTTP API v1 in "Internet / Enhanced Settings"
@@ -48,5 +58,6 @@ If it's not a case, provide paramas in this format:
 - "G:2|W:0:210": Grid meter with ID 2 and default value_id=209, wallbox meter with ID 0 and value_id=210
 
 For more information about value_ids: https://github.com/Tinkerforge/esp32-firmware/blob/master/software/src/modules/meters/meter_value_id.csv
+
 # Dashboard
 In Charging History you can see the efficiency of charging and percentage of photovoltaics if the wallbox supports this value.

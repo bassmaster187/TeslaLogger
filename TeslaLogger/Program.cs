@@ -244,6 +244,7 @@ namespace TeslaLogger
                     komootThread.Name = $"KomootThread_{id}";
                     Logfile.Log($"starting Komoot thread for ID {id} {Name.Replace("KOMOOT:", string.Empty)} <{komoot_vin}>");
                     komootThread.Start();
+                    return; // do not start a car thread for komoot "cars"
                 }
                 String tesla_token = r["tesla_token"] as String ?? "";
                 if (tesla_token.StartsWith("OVMS:", StringComparison.Ordinal)) // OVMS Cars are not handled by Teslalogger

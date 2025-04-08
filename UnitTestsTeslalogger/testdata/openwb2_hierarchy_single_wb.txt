@@ -1,0 +1,22 @@
+{
+	"status": "success",
+	"topic": "openWB/counter/get/hierarchy",
+	"message": [
+		{
+			"id": 0,
+			"type": "counter",
+			"children": [
+				{
+					"id": 1,
+					"type": "cp",
+					"children": []
+				},
+				{
+					"id": 2,
+					"type": "inverter",
+					"children": []
+				}
+			]
+		}
+	]
+}
