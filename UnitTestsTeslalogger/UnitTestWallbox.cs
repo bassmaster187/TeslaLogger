@@ -51,7 +51,7 @@ namespace UnitTestsTeslalogger
         }
 
         [TestMethod]
-        public void OpenWB2()
+        public void OpenWB2_single()
         {
             var v = new ElectricityMeterOpenWB2("", "");
 
@@ -59,7 +59,7 @@ namespace UnitTestsTeslalogger
             v.mockup_charge_state = System.IO.File.ReadAllText(@"..\..\testdata\openwb2_charge_state.txt");
             v.mockup_charge_point = System.IO.File.ReadAllText(@"..\..\testdata\openwb2_cp.txt");
             v.mockup_grid = System.IO.File.ReadAllText(@"..\..\testdata\openwb2_grid.txt");
-            v.mockup_hierarchy = System.IO.File.ReadAllText(@"..\..\testdata\openwb2_hierarchy.txt");
+            v.mockup_hierarchy = System.IO.File.ReadAllText(@"..\..\testdata\openwb2_hierarchy_single_wb.txt");
 
             double? kwh = v.GetVehicleMeterReading_kWh();
             var charging = v.IsCharging();
@@ -68,7 +68,30 @@ namespace UnitTestsTeslalogger
             string ret = v.ToString();
             Console.WriteLine(ret);
             Assert.AreEqual(441.759, kwh);
-            Assert.AreEqual(false, charging);
+            Assert.AreEqual(true, charging);
+            Assert.AreEqual(123456.789, utility_meter_kwh);
+            Assert.AreEqual("2.1.7-Beta.2", version);
+        }
+
+        [TestMethod]
+        public void OpenWB2_multiple()
+        {
+            var v = new ElectricityMeterOpenWB2("", "");
+
+            v.mockup_version = System.IO.File.ReadAllText(@"..\..\testdata\openwb2_version.txt");
+            v.mockup_charge_state = System.IO.File.ReadAllText(@"..\..\testdata\openwb2_charge_state.txt");
+            v.mockup_charge_point = System.IO.File.ReadAllText(@"..\..\testdata\openwb2_cp.txt");
+            v.mockup_grid = System.IO.File.ReadAllText(@"..\..\testdata\openwb2_grid.txt");
+            v.mockup_hierarchy = System.IO.File.ReadAllText(@"..\..\testdata\openwb2_hierarchy_multiple_wb.txt");
+
+            double? kwh = v.GetVehicleMeterReading_kWh();
+            var charging = v.IsCharging();
+            var utility_meter_kwh = v.GetUtilityMeterReading_kWh();
+            var version = v.GetVersion();
+            string ret = v.ToString();
+            Console.WriteLine(ret);
+            Assert.AreEqual(441.759, kwh);
+            Assert.AreEqual(true, charging);
             Assert.AreEqual(123456.789, utility_meter_kwh);
             Assert.AreEqual("2.1.7-Beta.2", version);
         }
