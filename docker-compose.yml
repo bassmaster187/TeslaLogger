@@ -1,16 +1,15 @@
 version: "3"
 services:
-
   teslalogger:
-    build: docker/teslalogger/.
+    image: bassmaster187/teslalogger:latest
     restart: always
     volumes:
-      - ./TeslaLogger/www:/var/www/html
-      - ./TeslaLogger/bin:/etc/teslalogger
-      - ./TeslaLogger/GrafanaDashboards/:/var/lib/grafana/dashboards/
-      - ./TeslaLogger/GrafanaPlugins/:/var/lib/grafana/plugins
-      - ./docker/teslalogger/Dockerfile:/tmp/teslalogger-DOCKER
       - teslalogger-tmp:/tmp/
+      - teslalogger-sqlschema:/etc/teslalogger/sqlschema
+      - teslalogger-grafanadashboards:/var/lib/grafana/dashboards/
+      - teslalogger-grafanaplugins:/var/lib/grafana/plugins/
+      - ./backup:/etc/teslalogger/backup
+      - teslalogger-data:/etc/teslalogger/data
     depends_on:
       - database
     environment:
@@ -21,49 +20,56 @@ services:
   database:
     image: mariadb:10.4.7
     restart: always
-    env_file:
-      - .env
+    environment:
+      - MYSQL_USER=teslalogger
+      - MYSQL_PASSWORD=teslalogger
+      - MYSQL_DATABASE=teslalogger
+      - MYSQL_ROOT_PASSWORD=teslalogger
+      - TZ=Europe/Berlin
     volumes:
-      - ./TeslaLogger/sqlschema.sql:/docker-entrypoint-initdb.d/sqlschema.sql
-      - ./TeslaLogger/mysql:/var/lib/mysql
+      - teslalogger-sqlschema:/docker-entrypoint-initdb.d
+      - ./mysql:/var/lib/mysql
     ports:
       - 3306:3306
-    environment:
-      - TZ=Europe/Berlin
 
   grafana:
-    image: grafana/grafana:10.0.1
+    image: bassmaster187/teslalogger-grafana:latest
     restart: always
+    volumes: 
+      - teslalogger-grafanadashboards:/var/lib/grafana/dashboards/
+      - teslalogger-grafanaplugins:/var/lib/grafana/plugins/
     environment:
       - GF_SECURITY_ADMIN_PASSWORD=teslalogger
-      - GF_PLUGINS_ALLOW_LOADING_UNSIGNED_PLUGINS=natel-discrete-panel,pr0ps-trackmap-panel,teslalogger-timeline-panel
       - TZ=Europe/Berlin
     ports:
       - 3000:3000
-    volumes:
-      - ./TeslaLogger/bin:/etc/teslalogger
-      - ./TeslaLogger/GrafanaDashboards/:/var/lib/grafana/dashboards/
-      - ./TeslaLogger/GrafanaPlugins/:/var/lib/grafana/plugins
-      - ./TeslaLogger/GrafanaDB:/var/lib/grafana/
-      - ./TeslaLogger/GrafanaConfig/datasource.yaml:/etc/grafana/provisioning/datasources/datasource.yml
-      - ./TeslaLogger/GrafanaConfig/sample.yaml:/etc/grafana/provisioning/dashboards/dashboards.yml
     depends_on:
       - database
 
   webserver:
-    build: docker/webserver/.
+    image: bassmaster187/teslalogger-webserver:latest
     restart: always
     volumes:
-      - ./docker/webserver/php.ini:/usr/local/etc/php/php.ini
-      - ./TeslaLogger/www:/var/www/html
-      - ./TeslaLogger/bin:/etc/teslalogger
-      - ./docker/teslalogger/Dockerfile:/tmp/teslalogger-DOCKER
-      - ./TeslaLogger/GrafanaConfig/datasource.yaml:/tmp/datasource-DOCKER
       - teslalogger-tmp:/tmp/
+      #- ./www:/var/www/html
+    depends_on:
+      - teslalogger
+      - grafana
     ports:
       - 8888:80
     environment:
       - TZ=Europe/Berlin
+  watchtower:
+    image: containrrr/watchtower
+    volumes:
+        - /var/run/docker.sock:/var/run/docker.sock
+    command: --debug --http-api-update 
+    environment:
+      - WATCHTOWER_HTTP_API_TOKEN=teslalogger
 
 volumes:
     teslalogger-tmp:
+    teslalogger-data:
+    teslalogger-sqlschema:
+    teslalogger-grafanadashboards:
+    teslalogger-grafanaplugins:
