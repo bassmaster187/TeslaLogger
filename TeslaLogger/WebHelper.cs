@@ -3401,7 +3401,7 @@ namespace TeslaLogger
             
         }*/
 
-        internal static async Task<string> ReverseGecocodingAsync(Car c, double latitude, double longitude, bool forceGeocoding = false, bool insertGeocodecache = true)
+        internal static async Task<string> ReverseGecocodingAsync(Car car, double latitude, double longitude, bool forceGeocoding = false, bool insertGeocodecache = true)
         {
             string url = "";
             string resultContent = "";
@@ -3464,8 +3464,10 @@ namespace TeslaLogger
 
                     DateTime start = DateTime.UtcNow;
                     resultContent = await webClient.DownloadStringTaskAsync(new Uri(url));
-                    DBHelper.AddMothershipDataToDB("ReverseGeocoding", start, 0, c.CarInDB);
-
+                    if (car != null)
+                    {
+                        DBHelper.AddMothershipDataToDB("ReverseGeocoding", start, 0, car.CarInDB);
+                    }
                     dynamic jsonResult = JsonConvert.DeserializeObject(resultContent);
                     string adresse = "";
 
@@ -3485,10 +3487,10 @@ namespace TeslaLogger
                         if (loc0.ContainsKey("adminArea1") && loc0["adminArea1Type"].ToString() == "Country")
                             country_code = loc0["adminArea1"].ToString().ToLower();
 
-                        if (country_code.Length > 0 && c != null)
+                        if (country_code.Length > 0 && car != null)
                         {
-                            c.CurrentJSON.current_country_code = country_code;
-                            c.CurrentJSON.current_state = loc0.ContainsKey("adminArea3") ? loc0["adminArea3"].ToString() : "";
+                            car.CurrentJSON.current_country_code = country_code;
+                            car.CurrentJSON.current_state = loc0.ContainsKey("adminArea3") ? loc0["adminArea3"].ToString() : "";
                         }
 
                         string road = "";
@@ -3535,10 +3537,10 @@ namespace TeslaLogger
                         if (r2.ContainsKey("country_code"))
                             country_code = r2["country_code"].ToString();
 
-                        if (country_code.Length > 0 && c != null)
+                        if (country_code.Length > 0 && car != null)
                         {
-                            c.CurrentJSON.current_country_code = country_code;
-                            c.CurrentJSON.current_state = r2.ContainsKey("state") ? r2["state"].ToString() : "";
+                            car.CurrentJSON.current_country_code = country_code;
+                            car.CurrentJSON.current_state = r2.ContainsKey("state") ? r2["state"].ToString() : "";
                         }
 
                         string road = "";
@@ -3600,7 +3602,7 @@ namespace TeslaLogger
                     else
                     {
                         NominatimCount++;
-                        Logfile.Log("Reverse geocoding by Nominatim" + NominatimCount);
+                        Logfile.Log("Reverse geocoding by Nominatim: " + NominatimCount);
                     }
 
                     return adresse;
@@ -3931,7 +3933,6 @@ DESC", con))
 
         internal static int UpdateAllPOIAddresses(int count, string bucket)
         {
-            Tools.DebugLog($"UpdateAllPOIAddresses(count:{count}, bucket:<{bucket}>)");
             if (bucket.Length == 0)
             {
                 return count;
