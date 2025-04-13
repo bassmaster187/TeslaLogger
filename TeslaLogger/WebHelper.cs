@@ -3955,7 +3955,7 @@ WHERE
     pos.id IN (" + MySql.Data.MySqlClient.MySqlHelper.EscapeString(bucket) + ")", con))
                 {
                     MySqlDataReader dr = SQLTracer.TraceDR(cmd);
-                    Tools.DebugLog(cmd);
+                    //Tools.DebugLog(cmd);
                     while (dr.Read())
                     {
                         count = UpdatePOIAdress(count, dr);
