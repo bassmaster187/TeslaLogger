@@ -17,6 +17,7 @@ Supercharger AT-Innsbruck, 47.264882, 11.428380
 Supercharger-V3 AT-Kalwang, 47.422813, 14.759271
 Supercharger AT-Kapfenberg, 47.450188, 15.317675
 Supercharger AT-Kitzbühel, 47.459205, 12.386105
+Supercharger-V4 AT-Klagenfurt,46.627228,14.344443
 Supercharger-V3 AT-Langkampfen, 47.534597, 12.092972
 Supercharger AT-Laßnitzhöhe, 47.070925, 15.578139
 Supercharger AT-Lermoos, 47.394965, 10.887519
@@ -144,6 +145,8 @@ Supercharger BE-Nivelles-Sud, 50.5887, 4.30809
 Supercharger BE-Remouchamps, 50.483878, 5.700335
 Supercharger BE-Verviers, 50.59223, 5.84857
 Supercharger BE-Wavre, 50.7080753,4.5983481
+Supercharger BE-Wavre,50.707612,4.598896,20
+Supercharger-V3 BE-Zaventem,50.869908,4.502047
 Supercharger BG-Plovdiv, 42.144727, 24.768828
 Supercharger-V3 BG-Sofia,42.65777,23.313598
 Supercharger CA-Abbotsford BC - Mount Lehman Road Supercharger, 49.059056, -122.377021
@@ -2100,6 +2103,8 @@ Supercharger ES-Bembibre, 42.623488,-6.453124
 Supercharger-V3 ES-Benavente, 42.007749,-5.663257
 Supercharger ES-Burgos, 42.312365, -3.704115
 Supercharger ES-Caldes de Malavella, 41.859029, 2.767237
+Supercharger-V4 ES-Camargo,43.429308,-3.838264
+Supercharger-V4 ES-Castellón,40.004583,-0.055867
 Supercharger ES-Cúllar, 37.5540305, -2.6139444
 Supercharger ES-Fuengirola, 36.580783, -4.595893
 Supercharger ES-Cambrils, 41.086286, 1.037798
@@ -2117,6 +2122,7 @@ Supercharger-V4 ES-León Trobajo del Camino, 42.591401, -5.619581
 Supercharger ES-Lleida, 41.663959, 0.605371
 Supercharger ES-L´Aldea, 40.753019, 0.606421
 Supercharger ES-Lugo, 43.03653,-7.568994
+Supercharger-V3 ES-Lugones,43.38917,-5.803684
 Supercharger ES-Madrid, 40.443856,-3.691665
 Supercharger-V4 ES-Majadahonda, 40.489738, -3.898333
 Supercharger ES-Manzanares, 39.006325,-3.383318
@@ -2130,6 +2136,7 @@ Supercharger-V3 ES-Sagunto,39.672924,-0.266304
 Supercharger-V3 ES-Salamanca, 40.945571, -5.639382
 Supercharger-V3 ES-San Pedro del Pinatar, 37.823213, -0.809725, 30
 Supercharger ES-Sant Cugat, 41.498096,2.072692
+Supercharger-V4 ES-Santa Agnès de Malanyanes - La Roca Village,41.607636,2.340909
 Supercharger ES-Sevilla, 37.391485,-6.009627
 Supercharger ES-Tarragona, 41.134294, 1.1683
 Supercharger-V3 ES-Toledo, 39.863257, -3.974064
@@ -2258,6 +2265,7 @@ Supercharger FR-Dommartin-lès-Cuiseaux, 46.496179, 5.310394
 Supercharger-V3 FR-Dunkerque, 51.005132, 2.28106
 Supercharger-V3 FR-Englos, 50.629871, 2.970873
 Supercharger FR-Eurotunnel Flexiplus Lounge, 50.929973, 1.813182
+Supercharger-V4 FR-Farébersviller, 49.111647,6.855271
 Supercharger FR-Fontainebleau, 48.3495627, 2.6067816
 Supercharger FR-G La Galerie – Albertville, 45.655436, 6.365683
 Supercharger-V3 FR-Gap, 44.569565, 6.104458
@@ -2274,6 +2282,7 @@ Supercharger-V3 FR-Le Touquet-Paris-Plage, 50.521625, 1.598625
 Supercharger-V3 FR-Les Herbiers, 46.889368, -1.032994
 Supercharger FR-Lille, 50.583306, 3.08982
 Supercharger FR-Limoges, 45.86723, 1.270344
+Supercharger-V3 FR-Limoges,45.870671,1.2684
 Supercharger FR-Lorient, 47.787895, -3.33146989
 Supercharger FR-Mandelieu-la-Napoule, 43.533651, 6.933019
 Supercharger-V3 FR-Manosque, 43.81886548, 5.79689581
@@ -2298,6 +2307,7 @@ Supercharger FR-Nancy, 48.638215, 6.184349
 Supercharger FR-Nantes - La Chapelle-sur-Erdre, 47.282708, -1.549982
 Supercharger-V3 FR-Nantes - Atlantis, 47.225998, -1.62904
 Supercharger FR-Narbonne, 43.1676432, 2.9859067
+Supercharger-V4 FR-Narbonne Sud,43.161761,2.982099
 Supercharger-V3 FR-Neuville-en-Ferrain, 50.74221, 3.145036
 Supercharger-V3 FR-Nice,43.727727,7.186527
 Supercharger FR-Niort 2, 46.340231, -0.384126
@@ -2490,6 +2500,7 @@ Supercharger-V3 GB-Swansea, 51.678371, -3.996227
 Supercharger GB-Tebay Southbound, 54.453104, -2.605743
 Supercharger GB-Telford, 52.677334, -2.399552
 Supercharger-V3 GB-Thurrock, 51.492427, 0.271248
+Supercharger-V4 GB-Todhills,54.951707,-2.97733,30
 Supercharger-V3 GB-Tongham, 51.226139, -0.722281
 Supercharger-V3 GB-Trentham, 52.96302, -2.196439
 Supercharger-V3 GB-Trumpington,52.168240,0.109177
@@ -3412,6 +3423,7 @@ Supercharger US-Burbank CA - North Third Street (Floor 2), 34.184958, -118.31153
 Supercharger-V3 US-Burbank CA - North Victory Boulevard, 34.179153, -118.321686
 Supercharger US-Burleson TX, 32.464365,-97.26451
 Supercharger-V3 US-Burley ID,42.561592,-113.790105
+Supercharger US-Burlingame CA,37.591198,-122.349011
 Supercharger-V3 US-Burlington MA, 42.483636, -71.217466
 Supercharger US-Burlington NJ, 40.10185, -74.794044
 Supercharger US-Burlington NC, 36.070929, -79.509922
@@ -7184,6 +7196,7 @@ ELEN HR-Poreč, 45.22419,1359817
 ELEN HR-Rijeka Gomila, 45.32812,14.442247
 ELEN HR-Vižinada, 45.33017,13.75735
 
+ELLA AT-Bergland Holzring,48.139275,15.137583
 ELLA AT-Stockerau Donaukraftwerkstraße, 48.37447, 16.238065
 
 En-Yakıt TR-Bucak Atilla, 37.409444, 30.54361
@@ -8753,7 +8766,7 @@ EnBW DE-Süßen Bühlstr., 48.679149, 9.762005
 EnBW DE-Süßen Sommerauweg, 48.67797, 9.765328
 EnBW DE-Tauberbischofsheim Am Wört, 49.62490058887, 9.6646999267574
 EnBW DE-Taufkirchen, 48.352605,12.129578,10
-EnBW DE-Taunusstein Kleiststraße, 50.139036, 8.154933
+EnBW DE-Taunusstein Kleiststraße,50.139036,8.154933
 EnBW DE-Tennenbronn Hauptstr., 48.190635, 8.351273
 EnBW DE-Tiefenbach Buchauer Str., 48.088355, 9.652229
 EnBW DE-Titisee-Neustadt Freiburger Straße, 47.923368, 8.189472
