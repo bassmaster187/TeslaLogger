@@ -1854,7 +1854,7 @@ Supercharger-V3 DE-Hattersheim - Globus, 50.071139, 8.475361, 35
 Supercharger-V3 DE-Heede, 52.985372, 7.248233
 Supercharger-V3 DE-Hemsbach, 49.594071, 8.632455, 30
 Supercharger DE-Hengersberg, 48.76555, 13.04668
-Supercharger-V4 DE-Herbolzheim, 48.22704, 7.75368
+Supercharger DE-Herboltzheim, 48.22704, 7.75368
 Supercharger-V4 DE-Herborn, 50.67534,8.279983, 40
 Supercharger-V3 DE-Hermsdorf, 50.889889,11.871397, 30
 Supercharger-V3 DE-Herne (Zurbrüggen), 51.531182, 7.209585
@@ -2312,7 +2312,7 @@ Supercharger-V3 FR-Neuville-en-Ferrain, 50.74221, 3.145036
 Supercharger-V3 FR-Nice,43.727727,7.186527
 Supercharger FR-Niort 2, 46.340231, -0.384126
 Supercharger-V3 FR-Niort,46.29825,-0.375256
-Supercharger-V3 FR-Noyelles-Godault, 50.410222, 2.974629
+Supercharger-V3 FR-Noyelles-Godault,50.409679,2.974371
 Supercharger-V3 FR-Nîmes - Carré Sud, 43.807991, 4.363603, 50
 Supercharger FR-Nîmes, 43.81655, 4.345061
 Supercharger-V3 FR-Orange, 44.1121375, 4.8517996
@@ -2322,7 +2322,7 @@ Supercharger FR-Ostwald, 48.534041, 7.702054
 Supercharger-V3 FR-Parly 2, 48.82751, 2.118757
 Supercharger FR-Pau, 43.332257, -0.358762
 Supercharger-V3 FR-Perigueux, 45.152424, 0.789938
-Supercharger-V3 FR-Poitiers Sud, 46.548393, 0.296635
+Supercharger-V3 FR-Poitiers Sud, 46.547666,0.296006
 Supercharger FR-Poitiers, 46.670356, 0.362651
 Supercharger-V4 FR-Pontarlier, 46.909145, 6.337706
 Supercharger-V3 FR-Reims-Tinqueux, 49.252931, 3.975959
@@ -2512,6 +2512,7 @@ Supercharger GB-Washington, 54.887483, -1.558291
 Supercharger GB-Winchester, 51.16725, -1.328024
 Supercharger GB-Wokingham, 51.42849, -0.898897
 Supercharger-V3 GB-Wyboston, 52.202701, -0.291631
+Supercharger-V4 GB-York,3.924296,-1.078043
 Supercharger GR-Athens,38.034938,23.79096
 Supercharger-V3 GR-Psathopyrgos South,38.324376,21.869179,15
 Supercharger HR-Karlovac, 45.51297, 15.54748
@@ -2591,6 +2592,7 @@ Supercharger IT-Milano Urban, 45.4781426, 9.1523515
 Supercharger IT-Modena, 44.574119, 10.981157
 Supercharger IT-Mogliano Veneto, 45.58469, 12.28721
 Supercharger IT-Moncalieri, 44.973333, 7.730113
+Supercharger IT-Mondovi,44.419674,7.849966,40
 Supercharger-V3 IT-Montenero di Bisaccia, 42.062664, 14.778677
 Supercharger IT-Morano Calabro, 39.875989, 16.065094
 Supercharger-V3 IT-Montenero di Bisaccia, 42.062339, 14.778845,30
@@ -2978,7 +2980,7 @@ Supercharger-V3 NO-Gjøvik, 60.798565, 10.695083
 Supercharger NO-Gol West, 60.697258,8.953551
 Supercharger NO-Gol, 60.70232, 8.9862
 Supercharger NO-Grong, 64.464913, 12.316532
-Supercharger-V3 NO-Grålum, 59.297057, 11.062906
+Supercharger-V3 NO-Grålum, 59.297585,11.062783
 Supercharger-V3 NO-Gudvangen, 60.878909, 6.843175
 Supercharger NO-Gulsvik, 60.381223, 9.609859
 Supercharger NO-Hernes, 60.933109, 11.676209
@@ -3059,6 +3061,7 @@ Supercharger-V3 NO-Stryn, 61.904677,6.7258
 Supercharger NO-Sundebru, 58.820783, 9.073746
 Supercharger NO-Sundebru, 58.820888, 9.072827
 Supercharger NO-Svolvær, 68.233132, 14.559828
+Supercharger-NO-Svolvær,68.238849,14.56638
 Supercharger NO-Sørkjosen, 69.792498, 20.93907
 Supercharger-V3 NO-Treungen, 59.018753, 8.52381
 Supercharger-V3 NO-Trondheim, 63.441755,10.457297
@@ -10218,7 +10221,7 @@ Ionity DK-Fredericia, 55.53682, 9.7169
 Ionity DK-Greve, 55.58492, 12.258
 Ionity DK-Nørager, 56.78302, 9.69481
 Ionity DK-Nyborg, 55.30933, 10.80495
-Ionity DK-Skanderborg, 56.06861, 9.97816
+Ionity DK-Skanderborg,56.068144,9.978471
 Ionity DK-Vordingborg, 54.99774, 12.0007
 Ionity ES-Ariza Norte, 41.31261, -2.00133
 Ionity ES-Ariza Sur, 41.311642, -2.002738
@@ -11863,7 +11866,7 @@ Lidl RO-Târgu Jiu,45.053249,23.282905
 Lidl SE-Falkenberg, 56.91611,12.502524
 Lidl SK-Komárno,47.7644999,18.0946626
 
-Linz AT-Golfplatzstraße Puchenau, 48.310794, 14.233407
+Linz AT-Puchenau Golfplatzstraße,48.310791,14.233391
 
 LSW DE-Leipzig Friedrich-Ebert-Straße, 51.338607, 12.362264
 LSW DE-Leipzig Wilmar-Schwabe-Straße, 51.341652, 12.357869
@@ -12613,8 +12616,10 @@ Repower CH-Uster Aathalstrasse, 47.345401, 8.742130
 
 Repsol ES-Alcorcón Camino de Leganes, 40.32415, -3.847402
 Repsol ES-Las Navas del Marqués, 40.594971, -4.333199
+Repsol ES-Madrid Av. Villa de Vallecas,40.366279,-3.655322
 Repsol ES-Madrid Moncloa-Aravaca, 40.460896, -3.757607
 Repsol ES-Madrid San Blas-Canillejas, 40.448908, -3.565237
+Repsol ES-Madrid Villaviciosa de Odón M-50,40.376694,-3.874704
 Repsol ES-Santa Marta de Tormes, 40.949717, -5.610224
 Repsol ES-Villares de la Reina, 40.988319, -5.645795, 30
 
@@ -12682,10 +12687,14 @@ SW-Dinslaken DE-Dinslaken Am Neutor, 51.563239, 6.742098
 SW-Flensburg DE-Flensburg Batteriestraße, 54.8047, 9.429783
 SW-Gotha DE-Gotha Friedrichstraße, 50.947563, 10.709862
 SW-Greven DE-Greven Hinter der Lake, 52.092794, 7.608831
+SW-Heidelberg DE-Heidelberg-Alte Eppelheimer Straße,49.406414,8.681353
 SW-Kassel DE-Kassel Friedrichsplatz, 51.313361, 9.495128, 30
+SW-Lübeck DE-Ahrensburg An der Strusbek,53.68386,10.266588
 SW-Lübeck DE-Lübeck Priwallpromenade, 53.95621, 10.88116
 SW-Münster DE-Münster Kiesekamps Mühle, 51.949318, 7.641345
+SW-Norden DE-Norden Dörper Weg,53.611416,7.155474
 SW-Rüsselsheim DE-Rüsselsheim am Main Am Sommerdamm, 50.001808, 8.42508
+SW-Schwarzenberg DE-Schwarzenberg Straße der Einheit,50.547186,12.787756
 SW-Sondershausen DE-Sondershausen Erfurter Straße, 51.364575, 10.844618
 SW-Weimar DE-Weimar Damaschkestraße, 50.98012, 11.309194
 SW-Weinheim DE-Heidelberg Englerstraße, 49.365529, 8.684117
@@ -12722,6 +12731,7 @@ TEA HU-Kecskemét Izsáki út, 46.899223, 19.67733
 TEAG DE-Amt Wachsenburg, 50.888332, 10.935136
 TEAG DE-Bad Klosterlausnitz An der Autobahn, 50.907984, 11.8436292
 TEAG DE-Buseck Schützenweg, 50.607152, 8.779752
+TEAG DE-Butzbach Kaiserstraße,50.430762,8.668589,52
 TEAG DE-Eisenberg REWE, 50.9710784, 11.883232
 TEAG DE-Gera Globus, 50.8874229, 12.1384896
 TEAG DE-Gießen Gottlieb-Daimler-Str., 50.582799, 8.649173
@@ -12735,6 +12745,7 @@ TEAG DE-Kirchhain Fuldaer Straße, 50.819943, 8.940269
 TEAG DE-Lich Carl-Benz-Ring, 50.506769, 8.829616
 TEAG DE-Magdala, 50.9007383, 11.4459709
 TEAG DE-Mellingen Hainholzstraße, 50.9364413, 11.3895584
+TEAG DE-Osterfeld Im Heidegrund Süd,51.039729,11.93777
 TEAG DE-Petersberg, 50.9694306, 11.8550465
 TEAG DE-Reiskirchen Carl-Benz-Str., 50.597876, 8.822887, 25
 TEAG DE-Schleiz Autohof, 50.551565, 11.789977
