@@ -581,8 +581,9 @@ namespace TeslaLogger
             {
                 // wait for DB updates
                 while (!UpdateTeslalogger.Done)
+                {
                     Thread.Sleep(5000);
-
+                }
                 DateTime start = DateTime.Now;
                 Logfile.Log("RunHousekeepingInBackground started");
                 Tools.Housekeeping();
@@ -633,6 +634,8 @@ namespace TeslaLogger
                 if (updateDbInBackground == check)
                 {
                     Logfile.Log("UpdateDbInBackground: SKIP today");
+                    // run HouseKeeping anyway
+                    RunHousekeepingInBackground();
                     return;
                 }
             }
