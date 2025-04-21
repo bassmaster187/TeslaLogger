@@ -242,7 +242,7 @@ namespace TeslaLogger
                     // compute last
                     positions[positionKeys[positionKeys.Count - 2]].heading = GetBearing(positions[positionKeys[positionKeys.Count - 2]].lat, positions[positionKeys[positionKeys.Count - 2]].lng, positions[positionKeys[positionKeys.Count - 1]].lat, positions[positionKeys[positionKeys.Count - 1]].lng);
                     // compute everything in between 2..(n-1)
-                    for (index = 1; index < positionKeys.Count -2; index++)
+                    for (index = 1; index < positionKeys.Count - 2; index++)
                     {
                         Position prevP = positions[positionKeys[index - 1]];
                         Position currP = positions[positionKeys[index]];
@@ -250,6 +250,7 @@ namespace TeslaLogger
                         double bearing1 = GetBearing(prevP.lat, prevP.lng, currP.lat, currP.lng);
                         double bearing2 = GetBearing(currP.lat, currP.lng, nextP.lat, nextP.lng);
                         currP.heading = (bearing1 + bearing2) / 2;
+                        Tools.DebugLog($"({prevP.lat},{prevP.lng})->({currP.lat},{currP.lng}) heading:{prevP.heading}{currP.heading} diff:{Math.Abs(prevP.heading - currP.heading)}");
                     }
                 }
             }
@@ -271,6 +272,28 @@ namespace TeslaLogger
 
             private static double ToRadians(double degrees) => degrees * Math.PI / 180.0;
             private static double ToDegrees(double radians) => radians * 180.0 / Math.PI;
+
+            internal void CheckSpeed()
+            {
+                if (this.positions.Count > 2)
+                {
+                    // 3 or more positions
+                    Dictionary<int, int> positionKeys = new Dictionary<int, int>();
+                    int index = 0;
+                    foreach (int posID in positions.Keys.OrderBy(k => k))
+                    {
+                        positionKeys.Add(index, posID);
+                        index += 1;
+                    }
+                    for (index = 1; index < positionKeys.Count - 1; index++)
+                    {
+                        Position prevP = positions[positionKeys[index - 1]];
+                        Position currP = positions[positionKeys[index]];
+                        double acceleration = (currP.speed - prevP.speed) / (currP.delta_t - prevP.delta_t);
+                        Tools.DebugLog($"({prevP.lat},{prevP.lng})->({currP.lat},{currP.lng}) speed:{prevP.speed}->{currP.speed} acceleration:{acceleration}");
+                    }
+                }
+            }
         }
 
         private readonly int interval = 6 * 60 * 60; // 6 hours in seconds
@@ -648,6 +671,7 @@ WHERE
                 int LastPosId = 0;
                 tour.CorrectPositionDistances();
                 tour.ComputeHeading();
+                tour.CheckSpeed();
                 Tools.DebugLog($"#{kli.carID} Komoot: ParseTours({tourid}) " + Environment.NewLine + tour);
                 foreach (int posID in tour.positions.Keys.OrderBy(k => k))
                 {
