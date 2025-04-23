@@ -1688,6 +1688,11 @@ namespace TeslaLogger
             InsertFirstCharging(date);
             InsertLastLocation(date);
             dcCharging = true;
+            if (!String.IsNullOrEmpty(car.SuCBingoUser) && !String.IsNullOrEmpty(car.SuCBingoApiKey))
+            {
+                car.Log("SuperchargeBingo: Checkin!");
+                car.webhelper.SuperchargeBingoCheckin(lastLatitude, lastLongitude);
+            }
         }
 
         private void StartACCharging(DateTime date)
