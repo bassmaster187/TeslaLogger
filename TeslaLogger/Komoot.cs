@@ -459,7 +459,46 @@ WHERE
                 {
                     Logfile.Log($"#{kli.carID} Komoot: GetTour({tourid}) JSON:" + Environment.NewLine + tour.json);
                 }
-                /* expected JSON
+                ParseTourJSON(kli, tourid, tour);
+                // positions parsed, continue to insert positions into table pos
+                // find initial odometer for first pos
+                double odo = GetInitialOdo(tour.carID, tour.start);
+                Tools.DebugLog($"#{kli.carID} Komoot: ParseTours({tourid}) initialOdo:{odo}");
+                int firstPosID = 0;
+                int LastPosId = 0;
+                tour.CorrectPositionDistances();
+                tour.ComputeHeading();
+                tour.CheckSpeed();
+                Tools.DebugLog($"#{kli.carID} Komoot: ParseTours({tourid}) " + Environment.NewLine + tour);
+                foreach (int posID in tour.positions.Keys.OrderBy(k => k))
+                {
+                    KomootTour.Position pos = tour.positions[posID];
+                    if (pos == tour.firstPosition)
+                    {
+                        firstPosID = InsertPos(tour.carID, pos.lat, pos.lng, tour.start.AddMilliseconds(pos.delta_t), pos.speed, pos.alt, odo);
+                    }
+                    else
+                    {
+                        odo = odo + pos.dist_km;
+                        LastPosId = InsertPos(tour.carID, pos.lat, pos.lng, tour.start.AddMilliseconds(pos.delta_t), pos.speed, pos.alt, odo);
+                    }
+                }
+                if (firstPosID > 0 && LastPosId > 0)
+                {
+                    // successfully added positions to table pos
+                    drivestateID = CreateDriveState(tour.carID, tour.start, firstPosID, tour.end, LastPosId);
+                    InsertTour(kli.carID, drivestateID, tour);
+                }
+                else
+                {
+                    Logfile.Log($"#{kli.carID} Komoot: error - no positions added to table pos - tour JSON:" + Environment.NewLine + tour.json);
+                }
+            }
+        }
+
+        private static void ParseTourJSON(KomootLoginInfo kli, long tourid, KomootTour tour)
+        {
+            /* expected JSON
 {
 "id": 987654321,
 "type": "tour_recorded",
@@ -514,27 +553,27 @@ WHERE
 "coordinates": {
 "items": [
 {
-    "lat": 42.4484,
-    "lng": 53.340371,
-    "alt": 42.3,
-    "t": 0
+"lat": 42.4484,
+"lng": 53.340371,
+"alt": 42.3,
+"t": 0
 },
 {
-    "lat": 62.448262,
-    "lng": 73.340385,
-    "alt": 42.3,
-    "t": 2000
+"lat": 62.448262,
+"lng": 73.340385,
+"alt": 42.3,
+"t": 2000
 },
 {
-    "lat": 82.448126,
-    "lng": 33.340499,
-    "alt": 42.3,
-    "t": 4709
+"lat": 82.448126,
+"lng": 33.340499,
+"alt": 42.3,
+"t": 4709
 }
 ],
 "_links": {
 "self": {
-    "href": "https://api.komoot.de/v007/tours/987654321/coordinates"
+"href": "https://api.komoot.de/v007/tours/987654321/coordinates"
 }
 }
 },
@@ -548,11 +587,11 @@ WHERE
 "status": "public",
 "_links": {
 "self": {
-    "href": "https://api.komoot.de/v007/users/1234567890/profile_embedded"
+"href": "https://api.komoot.de/v007/users/1234567890/profile_embedded"
 },
 "relation": {
-    "href": "https://api.komoot.de/v007/users/{username}/relations/1234567890",
-    "templated": true
+"href": "https://api.komoot.de/v007/users/{username}/relations/1234567890",
+"templated": true
 }
 },
 "display_name": "DisplayNameCFGT",
@@ -562,7 +601,7 @@ WHERE
 "timeline": {
 "_links": {
 "self": {
-    "href": "https://api.komoot.de/v007/tours/987654321/timeline/"
+"href": "https://api.komoot.de/v007/tours/987654321/timeline/"
 }
 },
 "page": {
@@ -603,106 +642,72 @@ WHERE
 }
 }
 }
-                 */
-                dynamic jsonResult = JsonConvert.DeserializeObject(tour.json);
-                // check JSON contents
-                if (jsonResult.ContainsKey("_embedded") && jsonResult["_embedded"].ContainsKey("coordinates") && jsonResult["_embedded"]["coordinates"].ContainsKey("items"))
+             */
+            dynamic jsonResult = JsonConvert.DeserializeObject(tour.json);
+            // check JSON contents
+            if (jsonResult.ContainsKey("_embedded") && jsonResult["_embedded"].ContainsKey("coordinates") && jsonResult["_embedded"]["coordinates"].ContainsKey("items"))
+            {
+                // JSON OK
+                Logfile.Log($"#{kli.carID} Komoot: ParseTours({tourid}) parsing {jsonResult["_embedded"]["coordinates"]["items"].Count} coordinates ...");
+                foreach (dynamic pos in jsonResult["_embedded"]["coordinates"]["items"])
                 {
-                    // JSON OK
-                    Logfile.Log($"#{kli.carID} Komoot: ParseTours({tourid}) parsing {jsonResult["_embedded"]["coordinates"]["items"].Count} coordinates ...");
-                    foreach (dynamic pos in jsonResult["_embedded"]["coordinates"]["items"])
+                    if (pos.ContainsKey("lat") && pos.ContainsKey("lng") && pos.ContainsKey("alt") && pos.ContainsKey("t"))
                     {
-                        if (pos.ContainsKey("lat") && pos.ContainsKey("lng") && pos.ContainsKey("alt") && pos.ContainsKey("t"))
+                        if (double.TryParse(pos["lat"].ToString(), out double lat) && double.TryParse(pos["lng"].ToString(), out double _) && double.TryParse(pos["alt"].ToString(), out double _) && int.TryParse(pos["t"].ToString(), out int _))
                         {
-                            if (double.TryParse(pos["lat"].ToString(), out double lat) && double.TryParse(pos["lng"].ToString(), out double _) && double.TryParse(pos["alt"].ToString(), out double _) && int.TryParse(pos["t"].ToString(), out int _))
-                            {
-                                tour.AddPosition(lat, double.Parse(pos["lng"].ToString()), double.Parse(pos["alt"].ToString()), int.Parse(pos["t"].ToString()));
-                            }
-                            else
-                            {
-                                StringBuilder sb = new StringBuilder();
-                                sb.AppendLine();
-                                sb.Append("lat:");
-                                sb.AppendLine(pos["lat"]);
-                                sb.Append("lng:");
-                                sb.AppendLine(pos["lng"]);
-                                sb.Append("alt:");
-                                sb.AppendLine(pos["alt"]);
-                                sb.Append("t:");
-                                sb.AppendLine(pos["t"]);
-                                Logfile.Log($"#{kli.carID} Komoot: ParseTours({tourid}) parsing tours.pos error - error parsing JSON contents" + sb.ToString());
-                            }
+                            tour.AddPosition(lat, double.Parse(pos["lng"].ToString()), double.Parse(pos["alt"].ToString()), int.Parse(pos["t"].ToString()));
                         }
                         else
                         {
                             StringBuilder sb = new StringBuilder();
                             sb.AppendLine();
                             sb.Append("lat:");
-                            sb.AppendLine(jsonResult.ContainsKey("lat"));
+                            sb.AppendLine(pos["lat"]);
                             sb.Append("lng:");
-                            sb.AppendLine(jsonResult.ContainsKey("lng"));
+                            sb.AppendLine(pos["lng"]);
                             sb.Append("alt:");
-                            sb.AppendLine(jsonResult.ContainsKey("alt"));
+                            sb.AppendLine(pos["alt"]);
                             sb.Append("t:");
-                            sb.AppendLine(jsonResult.ContainsKey("t"));
-                            Logfile.Log($"#{kli.carID} Komoot: ParseTours({tourid}) parsing tours.pos error - missing JSON contents" + sb.ToString());
+                            sb.AppendLine(pos["t"]);
+                            Logfile.Log($"#{kli.carID} Komoot: ParseTours({tourid}) parsing tours.pos error - error parsing JSON contents" + sb.ToString());
                         }
-                    }
-                }
-                else
-                {
-                    StringBuilder sb = new StringBuilder();
-                    sb.AppendLine();
-                    sb.Append("date:");
-                    sb.AppendLine(jsonResult.ContainsKey("date"));
-                    sb.Append("_embedded:");
-                    sb.AppendLine(jsonResult.ContainsKey("_embedded"));
-                    if (jsonResult.ContainsKey("_embedded"))
-                    {
-                        sb.Append("_embedded.coordinates:");
-                        sb.AppendLine(jsonResult["_embedded"].ContainsKey("coordinates"));
-                        if (jsonResult["_embedded"].ContainsKey("coordinates"))
-                        {
-                            sb.Append("_embedded.coordinates.items:");
-                            sb.AppendLine(jsonResult["_embedded"]["coordinates"].ContainsKey("items"));
-                        }
-                    }
-                    sb.AppendLine();
-                    Logfile.Log($"#{kli.carID} Komoot: parsing tours error - missing JSON contents" + sb.ToString() + tour.json);
-                }
-                // positions parsed, continue to insert positions into table pos
-                // find initial odometer for first pos
-                double odo = GetInitialOdo(tour.carID, tour.start);
-                Tools.DebugLog($"#{kli.carID} Komoot: ParseTours({tourid}) initialOdo:{odo}");
-                int firstPosID = 0;
-                int LastPosId = 0;
-                tour.CorrectPositionDistances();
-                tour.ComputeHeading();
-                tour.CheckSpeed();
-                Tools.DebugLog($"#{kli.carID} Komoot: ParseTours({tourid}) " + Environment.NewLine + tour);
-                foreach (int posID in tour.positions.Keys.OrderBy(k => k))
-                {
-                    KomootTour.Position pos = tour.positions[posID];
-                    if (pos == tour.firstPosition)
-                    {
-                        firstPosID = InsertPos(tour.carID, pos.lat, pos.lng, tour.start.AddMilliseconds(pos.delta_t), pos.speed, pos.alt, odo);
                     }
                     else
                     {
-                        odo = odo + pos.dist_km;
-                        LastPosId = InsertPos(tour.carID, pos.lat, pos.lng, tour.start.AddMilliseconds(pos.delta_t), pos.speed, pos.alt, odo);
+                        StringBuilder sb = new StringBuilder();
+                        sb.AppendLine();
+                        sb.Append("lat:");
+                        sb.AppendLine(jsonResult.ContainsKey("lat"));
+                        sb.Append("lng:");
+                        sb.AppendLine(jsonResult.ContainsKey("lng"));
+                        sb.Append("alt:");
+                        sb.AppendLine(jsonResult.ContainsKey("alt"));
+                        sb.Append("t:");
+                        sb.AppendLine(jsonResult.ContainsKey("t"));
+                        Logfile.Log($"#{kli.carID} Komoot: ParseTours({tourid}) parsing tours.pos error - missing JSON contents" + sb.ToString());
                     }
                 }
-                if (firstPosID > 0 && LastPosId > 0)
+            }
+            else
+            {
+                StringBuilder sb = new StringBuilder();
+                sb.AppendLine();
+                sb.Append("date:");
+                sb.AppendLine(jsonResult.ContainsKey("date"));
+                sb.Append("_embedded:");
+                sb.AppendLine(jsonResult.ContainsKey("_embedded"));
+                if (jsonResult.ContainsKey("_embedded"))
                 {
-                    // successfully added positions to table pos
-                    drivestateID = CreateDriveState(tour.carID, tour.start, firstPosID, tour.end, LastPosId);
-                    InsertTour(kli.carID, drivestateID, tour);
+                    sb.Append("_embedded.coordinates:");
+                    sb.AppendLine(jsonResult["_embedded"].ContainsKey("coordinates"));
+                    if (jsonResult["_embedded"].ContainsKey("coordinates"))
+                    {
+                        sb.Append("_embedded.coordinates.items:");
+                        sb.AppendLine(jsonResult["_embedded"]["coordinates"].ContainsKey("items"));
+                    }
                 }
-                else
-                {
-                    Logfile.Log($"#{kli.carID} Komoot: error - no positions added to table pos - tour JSON:" + Environment.NewLine + tour.json);
-                }
+                sb.AppendLine();
+                Logfile.Log($"#{kli.carID} Komoot: parsing tours error - missing JSON contents" + sb.ToString() + tour.json);
             }
         }
 
