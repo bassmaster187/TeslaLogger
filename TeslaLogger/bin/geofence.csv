@@ -2612,6 +2612,7 @@ Supercharger-V3 IT-Palmanova,45.88421,13.34502
 Supercharger IT-Palmi,38.366929,15.869555
 Supercharger-V3 IT-Parma North,44.82108,10.336591
 Supercharger-V3 IT-Perugia South,43.047725,12.40817
+Supercharger-V4 IT-Piacenza 2,45.040054,9.751785
 Supercharger IT-Piacenza,45.039461,9.753871
 Supercharger IT-Pollein,45.737122,7.372441
 Supercharger-V3 IT-Porto Sant'Elpidio,43.232399,13.74994
@@ -3490,6 +3491,7 @@ Supercharger-V3 US-Carmel IN - Illinois Street,39.954505,-86.162684
 Supercharger US-Carmel IN,39.972061,-86.151754
 Supercharger-V3 US-Carneys Point NJ,39.685185,-75.483453
 Supercharger-V3 US-Cary NC Bass Pro Lane,35.831476,-78.76894
+Supercharger US-Cary NC,35.745158,-78.76226
 Supercharger US-Cary NC,35.843593,-78.886314
 Supercharger US-Casa Grande AZ,32.879134,-111.682551
 Supercharger-V3 US-Castaic CA (No Amenities),34.452692,-118.616072
@@ -9338,6 +9340,60 @@ Energie-Burgenland AT-Güssing Grazerstraße,47.049267,16.321636
 
 Energie-Oberösterreich AT-Linz Energiestraße,48.292685,14.290674
 
+Energielösung DE-Bad Hersfeld Hainstrasse,50.865741,9.710786
+Energielösung DE-Bad Königshofen Schweinfurter Straße,50.296141,10.45911
+Energielösung DE-Bad Steben Äußere Steinbacher Straße,50.36334,11.6347
+Energielösung DE-Berching Gutenbergstraße,49.13919,11.45105
+Energielösung DE-Bichl Kocheler Straße,47.718359,11.413267
+Energielösung DE-Bischbrunn Straßlücke,49.873974,9.495719
+Energielösung DE-Ebersberg Reitgesing,48.06485,11.93421
+Energielösung DE-Eggenfelden Öttingerstraße,48.40174,12.763214
+Energielösung DE-Esselbach E41 A3 Parkplatz Kohlsberg Nord,49.837398,9.516399
+Energielösung DE-Essing Am Schulerloch,48.927945,11.820466
+Energielösung DE-Faulbach Schulgasse,49.78251,9.44273
+Energielösung DE-Feldkirchen-Westerham Otto-von-Steinbeis-Straße,47.894668,11.844353
+Energielösung DE-Feuchtwangen Glashofen,49.1888,10.337253
+Energielösung DE-Forstinning Jahnstraße,48.17067,11.91799
+Energielösung DE-Frauenneuharting Kirchplatz,48.036385,12.04786
+Energielösung DE-Großmehring Dieselstraße,48.789456,11.502199
+Energielösung DE-Gundelsheim Hauptstraße,49.93714,10.92026
+Energielösung DE-Heldenstein Binderweg,48.24575,12.37087
+Energielösung DE-Jandelsbrunn Hauptstraße,48.730719,13.691905
+Energielösung DE-Kastl Amberger Straße,49.366714,11.685542
+Energielösung DE-Landshut Ingolstädter Straße,48.561827,12.136024
+Energielösung DE-Landshut Ottostraße,48.550927,12.152935
+Energielösung DE-Maisach Am Strasserwinkel,48.21536,11.27034
+Energielösung DE-Maisach Maisacher Straße,48.21205,11.28263
+Energielösung DE-München Claudius-Keller-Straße,48.116339,11.60255
+Energielösung DE-München Triebstraße,48.18647,11.53647
+Energielösung DE-Münnerstadt Vorndranweg,50.25272,10.28226
+Energielösung DE-Obertraubling Schloßstraße,48.959951,12.184389
+Energielösung DE-Obing Lohenfeld,47.99751,12.40063
+Energielösung DE-Ortenburg Eichfeldstraße,48.5436,13.2177
+Energielösung DE-Pfaffenhofen an der Glonn Hauptstraße,48.294937,11.147717
+Energielösung DE-Pfaffenhofen an der Ilm Schäfflerstraße,48.524066,11.537817
+Energielösung DE-Puchheim Junkerstraße,48.16338,11.34117
+Energielösung DE-Regensburg Fritz-Fend-Straße,49.01229,12.09017
+Energielösung DE-Regensburg Krauterermarkt,49.01988,12.098767
+Energielösung DE-Regensburg Lilienthalstraße,49.01861,12.05748
+Energielösung DE-Schernfeld Obereichstätter Weg,48.900813,11.114137
+Energielösung DE-Schierling Ludwig-Erhard-Straße,48.495077,12.75133
+Energielösung DE-Schnelldorf Birkenbergstraße,49.207779,10.170789
+Energielösung DE-Schnelldorf Rothenburger Straße,49.198856,10.175666
+Energielösung DE-Schnelldorf Theuerbronner Straße,49.231923,10.132801
+Energielösung DE-Schrobenhausen Gerolsbacher Straße,48.555247,11.269263
+Energielösung DE-Schrobenhausen Rinderhofer Breite,48.56493,11.28845
+Energielösung DE-Schwarzenbach am Wald Schützenstraße,50.28148,11.625197
+Energielösung DE-Seeon Weinbergstraße,47.97567,12.45952
+Energielösung DE-Sinzing Kreuzseestraße,48.982095,11.966525
+Energielösung DE-Suhl Johann-Wendel-Straße,50.590758,10.673859
+Energielösung DE-Tirschenreuth Einsteinstraße,49.87135,12.34277
+Energielösung DE-Tirschenreuth Hammstrasse,49.88649,12.31056
+Energielösung DE-Truchtlaching Wehrländerstraße,47.96115,12.50018
+Energielösung DE-Unterreit Oberreith,48.114124,12.320266
+Energielösung DE-Wasserburg am Inn Eiselfinger Straße,48.052475,12.23533
+Energielösung DE-Zandt Kirchplatz,49.156266,12.725372
+
 EnergieSteiermark AT-Graz Neuholdaugasse,47.056778,15.437455
 EnergieSteiermark AT-Graz Weblinger Gürtel,47.033791,15.414556,8
 EnergieSteiermark AT-Lieboch Radlstraße,46.956961,15.346721
@@ -9350,6 +9406,7 @@ Enio AT-Flughafen Wien Ausfahrtsstraße,48.124247,16.559234
 ENIO AT-Möllbrücke Mölltal Straße,46.83754,13.370139
 
 ensev DE-Bad Nauheim Frankfurter Straße,50.372014,8.743325,30
+ensev DE-Bad Nauheim Parkstraße,50.365533,8.734777
 ensev DE-Bad Nauheim Schwalheimer Straße,50.356686,8.749915
 
 ENTEGA DE-Groß-Umstadt Georg-August-Zinn-Straße,49.872049,8.914015
@@ -10389,6 +10446,7 @@ Fastned NL-Wellerzand,52.78436,5.759275
 Fastned NL-Willemsbos,52.360573,5.766818
 
 Fines BG-Targovishte Търговище,43.244632,26.54884
+Fines BG-Търговище Targovishte 4009,43.244632,26.54884
 
 Fortum NO-Alta,69.966743,23.268569
 Fortum NO-Bykle,59.354746,7.355757
@@ -10427,6 +10485,7 @@ GOFAST CH-Zuchwil Schützenweg,47.201739,7.571397
 GP-JOULE DE-Marne Alter Kirchweg,53.955923,9.022613
 
 Greenway PL-Bielsko-Biała,49.803432,19.049971
+GreenWay PL-Gdańsk Jana Kilińskiego,54.382743,18.60472
 GreenWay PL-Gdańsk Uczniowska,54.398962,18.630005
 Greenway PL-Grajewo,53.632866,22.475282
 GreenWay PL-Grudziądz Chełmińska,53.483724,18.747218
@@ -10803,7 +10862,9 @@ Ionity CZ-Pávov (dir. Prague),49.455104,15.593272
 Ionity DE-Aachener Land Nord,50.817668,6.213854
 Ionity DE-Aachener Land Süd,50.817306,6.216629
 Ionity DE-Aalbek West,54.092671,9.92914
+Ionity DE-Aichstetten Am Waizenhof,47.880681,10.04109
 Ionity DE-Alsfeld Dirsröder Feld,50.737372,9.244829
+Ionity DE-Altdorf b. Nürnberg Nürnberger Straße,49.383303,11.343168
 Ionity DE-Altenburger Land Nord,50.860662,12.307977
 Ionity DE-Altenburger Land Süd,50.85675,12.3132
 Ionity DE-Am Fichtenplan Nord,52.318183,13.494709
@@ -10811,6 +10872,8 @@ Ionity DE-Am Fichtenplan Süd,52.31562,13.494702
 Ionity DE-Auetal Nord,52.223703,9.221469
 Ionity DE-Auetal Süd,52.226977,9.232545
 Ionity DE-Augsburg Ost,48.411614,10.914898
+Ionity DE-Aurach Frankenhöhe Süd,49.241155,10.356121
+Ionity DE-Aurach Leutershausener Straße,49.250466,10.422754
 Ionity DE-Bad Camberg West,50.299926,8.2347
 Ionity DE-Bad Honnef,50.647664,7.334521
 Ionity DE-Bayerischer Wald Nord,48.931751,12.708247
@@ -12485,8 +12548,6 @@ MVV DE-Mannheim S5,49.488425,8.47219
 Neogy IT-Castelrotto - Kastelruth Seis Schlernstraße,46.540455,11.564826
 Neogy IT-Vipiteno Piazza Canonico Michael Gamper,46.898872,11.429214
 
-NetMotion DE-Rheinstetten An der B36,48.954682,8.293252
-
 NewMotion CH-Biel/Bienne Chemin du Long-Champ / Längfeldweg,47.161032,7.298134
 NewMotion DE-Ahrensfelde Karower Weg,52.601114,13.514322
 NewMotion DE-Aschaffenburg Schillerstr.,49.986982,9.140212
@@ -13309,6 +13370,8 @@ ShellRecharge DE-Kirchheim,50.834252,9.574485,10
 ShellRecharge DE-Kraftsdorf,50.895948,11.979361,5
 ShellRecharge DE-Neu-Ulm,48.387577,10.03316
 ShellRecharge DE-Osnabrück,52.301747,7.949302
+ShellRecharge DE-Rheinstetten An der B36,48.954684,8.293244
+ShellRecharge DE-Schwerin Friedrich-Engels-Straße,53.59861,11.431833
 ShellRecharge FR-Aire de Béziers-Montblanc Sud,43.359314,3.34559,30
 ShellRecharge NL-Heerlen,50.823176,6.019581,30
 ShellRecharge PL-Nowa Wieś Legnicka,51.158851,16.171596
@@ -13342,11 +13405,12 @@ solid DE-Nürnberg Kornmarkt,49.449167,11.074717
 
 Spirii DE-Flensburg Lise-Meitner-Straße,54.760918,9.437311
 
+SSN DE-Schwerin Eckdrift,53.595251,11.394029
+
 SVG DE-Merenberg Autohof Benzstraße,50.49926,8.18562
 
 SW-Aachen DE-Aachen Burgau,50.552676,6.238098
 SW-Aalen DE-Aalen Kocherstraße,48.817544,10.12691
-SW-BadNauheim DE-Bad Nauheim Parkstraße,50.365533,8.734777
 SW-Bonn DE-Bonn Emil-Nolde-Straße,50.714982,7.119913
 SW-Bonn DE-Köln Flughafen Köln/Bonn,50.879883,7.119183
 SW-Dinslaken DE-Dinslaken Am Neutor,51.563239,6.742098
@@ -13408,6 +13472,7 @@ TankE DE-Köln Vorsterstraße,50.938792,7.001982
 
 TCB ES-Navalmoral Autovía del Suroeste,39.873511,-5.549847
 
+TEA HU-Balatonalmádi Szabolcs u.,47.040134,18.019039
 TEA HU-Gyenesdiá Kereskedők útja,46.77272,17.276458
 TEA HU-Kecskemét Izsáki út,46.899223,19.67733
 
@@ -13847,6 +13912,9 @@ Volkswagen DE-Zwickau Schubertstraße,50.746634,12.478944
 Volkswagen DE-Öhringen Rudolf-Diesel-Straße 1,49.200257,9.47635
 Volkswagen DE-Überlingen Hauptstraße 37,47.802296,9.238275
 
+WEMAG DE-Schwerin Obotritenring,53.637566,11.404817
+WEMAG DE-Schwerin Platz der Freiheit,53.633438,11.402878
+
 WENEA ES-Madrid Calle Roberto Domingo,40.433794,-3.661095
 
 Westfalen DE-Münster Weseler Straße,51.942749,7.610616
@@ -13892,7 +13960,6 @@ DE Aurich EEZ,53.496286,7.494351
 DE Aurich McDonnald's,53.471027,7.46725
 DE Bad Homburg Hessenring,50.220598,8.622014
 DE Bad Homburg Horexstraße 28-30,50.219575,8.621767
-DE Bad Nauheim Schwalheimer Str.,50.356686,8.749915
 DE Bad Oldesloe Käthe-Kollwitz-Straße,53.807283,10.382586
 DE Bad Segeberg EWS-Servicecenter,53.937808,10.306605
 DE Barth Hafenstraße Destination Charger,54.370514,12.722957
