@@ -250,7 +250,7 @@ namespace TeslaLogger
                         double bearing1 = GetBearing(prevP.lat, prevP.lng, currP.lat, currP.lng);
                         double bearing2 = GetBearing(currP.lat, currP.lng, nextP.lat, nextP.lng);
                         currP.heading = (bearing1 + bearing2) / 2;
-                        Tools.DebugLog($"({prevP.lat},{prevP.lng})->({currP.lat},{currP.lng}) heading:{prevP.heading}{currP.heading} diff:{Math.Abs(prevP.heading - currP.heading)}");
+                        //Tools.DebugLog($"({prevP.lat},{prevP.lng})->({currP.lat},{currP.lng}) heading:{prevP.heading}{currP.heading} diff:{Math.Abs(prevP.heading - currP.heading)}");
                     }
                 }
             }
@@ -292,11 +292,12 @@ namespace TeslaLogger
                         Position nextP = positions[positionKeys[index + 1]];
                         double acceleration1 = Math.Round(((currP.speed - prevP.speed) / 3.6) / ((currP.delta_t - prevP.delta_t) / 1000), 6);
                         double acceleration2 = Math.Round(((nextP.speed - currP.speed) / 3.6) / ((nextP.delta_t - currP.delta_t) / 1000), 6);
-                        Tools.DebugLog($"speed:{prevP.speed}->{currP.speed}->{nextP.speed} acceleration1:{acceleration1}m/s acceleration2:{acceleration2}m/s");
-                        if (acceleration1 > 1 && acceleration2 < 1)
+                        Tools.DebugLog($"speed:{prevP.speed}->{currP.speed}->{nextP.speed} acceleration1:{acceleration1}m/s acceleration2:{acceleration2}m/s headingdiff1:{prevP.heading-currP.heading} headingdiff2:{currP.heading-nextP.heading}");
+                        if (acceleration1 > 1 && acceleration2 < -1)
                         {
                             // TODO find sensible threshhold
                             // drop speed at currP and replace with avg(prevP,nextP)
+                            Tools.DebugLog($"correct speed:{currP.speed}->{(prevP.speed+nextP.speed)/2.0}");
                         }
                     }
                 }
