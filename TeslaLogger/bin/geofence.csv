@@ -2068,7 +2068,7 @@ Supercharger-V3 DK-Maribo,54.779188,11.477063,40
 Supercharger DK-Middelfart,55.511311,9.765029
 Supercharger-V3 DK-Nykøbing Mors,56.788618,8.828769
 Supercharger DK-Nørre Alslev,54.899872,11.896921
-Supercharger-V3 DK-Odense,55.385736,10.427055,75
+Supercharger-V3 DK-Odense,55.386324,10.426873
 Supercharger DK-Randers,56.430263,10.061737
 Supercharger DK-Randers,56.433685,10.055412
 Supercharger DK-Rødekro,55.067331,9.361081,20
@@ -2096,6 +2096,7 @@ Supercharger ES-Caldes de Malavella,41.859029,2.767237
 Supercharger-V4 ES-Camargo,43.429308,-3.838264
 Supercharger ES-Cambrils,41.086286,1.037798
 Supercharger ES-Cúllar,37.554031,-2.613944
+Supercharger-V3 ES-El Ejido,36.752381,-2.80533
 Supercharger ES-Fuengirola,36.580783,-4.595893
 Supercharger ES-Fuenlabrada,40.298262,-3.820891
 Supercharger ES-Getafe,40.290389,-3.696302
@@ -2157,9 +2158,7 @@ Supercharger-V3 FI-Pello,66.808793,23.996331,20
 Supercharger FI-Pori,61.49467,21.798006
 Supercharger FI-Pyhtää,60.489054,26.554835
 Supercharger FI-Pyhäjärvi,63.716298,25.920103
-
-Supercharger-V3 Fi-Rovaniemi,66.501765,25.723048
-
+Supercharger-V3 FI-Rovaniemi,66.501765,25.723048
 Supercharger FI-Vierumäki,61.112472,25.929927
 Supercharger FI-Äänekoski,62.516741,25.6913
 
@@ -2553,9 +2552,11 @@ Supercharger-V3 IS-Kirkjubæjarklaustur,63.789025,-18.052187
 Supercharger-V3 IS-Staðarskáli,65.14475,-21.084813
 Supercharger-V3 IS-Vatnagardar,64.14496,-21.854711
 
+Supercharger-V3 IT-Adda Nord,45.511548,9.634876
 Supercharger-V3 IT-Adda Sud,45.510724,9.63624
 Supercharger-V3 IT-Affi,45.551296,10.787143
 Supercharger-V3 IT-Afragola - Napoli North,40.933331,14.357418
+Supercharger-V3 IT-Alessandria,44.916643,8.599638
 Supercharger IT-Aosta,45.73745,7.371416
 Supercharger-V3 IT-Arese,45.561371,9.055905
 Supercharger IT-Arezzo,43.436801,11.779599
@@ -2623,7 +2624,7 @@ Supercharger-V3 IT-Roma South West,41.815947,12.400934
 Supercharger-V3 IT-Rovereto,45.856559,11.001817
 Supercharger IT-San Giovanni Teatino,42.399194,14.16396
 Supercharger-V3 IT-Sarzana - La Spezia,44.117695,9.945583
-Supercharger-V3 IT-Serravalle Scrivia,44.735587,8.839628
+Supercharger-V3 IT-Serravalle Scrivia,44.735607,8.839653
 Supercharger IT-Sondrio,46.164535,9.677329
 Supercharger IT-Tarquinia,42.183306,11.788161
 Supercharger-V4 IT-Telgate,45.633205,9.852077
@@ -3128,6 +3129,7 @@ Supercharger NZ-Taupo,-38.692628,176.075996
 Supercharger-V3 NZ-Waitomo,-38.243643,175.183284
 Supercharger NZ-Whangarei,-35.72449,174.318696
 
+Supercharger-V3 PL-Białystok,53.124454,23.167551
 Supercharger PL-Ciechocinek,52.875248,18.774952
 Supercharger-V4 PL-Gliwice,50.256102,18.654369
 Supercharger PL-Katowice,50.254594,19.046594
@@ -5199,6 +5201,8 @@ ABC FI-Rauma Unajantie,61.099832,21.505434
 ABC FI-Vaala Vaalantie,64.566786,26.874453
 ABC FI-Vaasa Elementtitehtaantie,63.072859,21.699253
 
+Acea IT-Capena Via Tiberina,42.120239,12.590254
+
 AGRAVIS DE-Vettweiß An der Tankstelle,50.73148,6.596273
 
 Aldi DE-Aachen Neuenhofstraße,50.760742,6.152673
@@ -5405,6 +5409,7 @@ Aldi DE-Wörnitz,49.259366,10.24192
 Aldi DE-Zweibrücken Etzelweg,49.227083,7.355306
 Aldi DE-Öhringen Steinsfeldle,49.189917,9.495556
 
+Allego AT-Wien Albert-Schweitzer-Gasse,48.20742,16.218279
 Allego DE-Aachen Debyestraße,50.75944,6.153289,15
 Allego DE-Aachen Rotter Bruch,50.781127,6.127809
 Allego DE-Achern Am Achernsee 1,48.640828,8.037328
@@ -5918,6 +5923,7 @@ ARAL DE-Bochum,51.501513,7.258011
 ARAL DE-Braunschweig,52.322159,10.478146
 ARAL DE-Celle Siedemeierkamp,52.600738,10.10726,25
 ARAL DE-Dettelbach,49.778176,10.0658,20
+ARAL DE-Dettelbach,49.778618,10.065659
 ARAL DE-Elstal,52.540089,12.977459
 ARAL DE-Ettenheim,48.274746,7.785175
 ARAL DE-Geseke,51.597496,8.515457,10
@@ -5932,7 +5938,7 @@ ARAL DE-Lübeck Fackenburger Allee,53.870645,10.669914
 ARAL DE-Magdeburg Ziolkowskistraße,52.175189,11.628756
 ARAL DE-Merklingen,48.516282,9.759379
 ARAL DE-Montabaur Alleestraße 18,50.440191,7.830364,10
-ARAL DE-Neuenkirchen-Vörden,52.491559,8.0783,10
+ARAL DE-Neuenkirchen-Vörden,52.491559,8.0783
 ARAL DE-Northeim,51.731118,9.973121
 ARAL DE-Nürnberg Münchenerstr.,49.401353,11.116122,10
 ARAL DE-Piding,47.764118,12.904173,5
@@ -5940,6 +5946,7 @@ ARAL DE-Regensburg,49.000182,12.14799,5
 ARAL DE-Reichenbach Goethestraße,50.622637,12.294304
 ARAL DE-Schwarmstedt Autohof,52.673543,9.688409
 ARAL DE-Schwerin,53.600345,11.465313
+ARAL DE-Staßfurt Am Heidfuchsberg,51.896302,11.692
 ARAL DE-Stuhr,53.020699,8.687762,15
 ARAL DE-Tübingen Reutlinger Straße 72,48.512816,9.073854,20
 ARAL DE-Uelzen,52.99585,10.539363
@@ -5974,7 +5981,18 @@ autostrom.plus DE-Midlum A27 West,53.72631,8.660925
 
 Backcharge DE-Papenburg Carl-Benz-Straße,53.05111,7.489103
 
+BayWa DE-Augsburg Gubener Straße,48.38911,10.864633
+BayWa DE-Bad Windsheim Hofmannstraße,49.508906,10.417739
+BayWa DE-Deggendorf An der Ackerloh,48.833225,12.946928
+BayWa DE-Feldkirchen Oberndorfer Straße,48.14214,11.73451
+BayWa DE-Forchheim Am Bertelsweiher,49.692946,11.070873
+BayWa DE-Manching Weberstraße,48.713755,11.48144
 BayWa DE-München Arabellastraße,48.153016,11.617487
+BayWa DE-Nördlingen Markham-Straße,48.863492,10.51938
+BayWa DE-Passau Baywastraße,48.587267,13.499416
+BayWa DE-Schwandorf Max-Planck-Straße,49.308411,12.099482
+BayWa DE-Unna Massener Straße,51.53162,7.66366
+BayWa DE-Weiden i.d.OPf. Untere Bauscherstraße,49.662545,12.155766
 
 be.energised AT-Salzburg Flughafen,47.794119,12.997795
 be.energised DE-Freising,48.383269,11.753238,20
@@ -5983,6 +6001,7 @@ be.energised DE-Kassel Porsche,51.304914,9.528714
 be.energised DE-Unterschleißheim Audi Kölbl,48.28313,11.567575
 
 BeCharge IT-Albenga Regione Cime di Leca,44.066007,8.176305
+BeCharge IT-Arona Via Vittorio Veneto,45.753495,8.543138
 BeCharge IT-Ponte di Legno Via Cida,46.257058,10.510159
 BeCharge IT-San Giuliano Terme Via Giosuè Carducci,43.724815,10.418244
 BeCharge IT-San Vittore Olona Via Sempione,45.591317,8.935639
@@ -6386,6 +6405,7 @@ ChargePoint DE-Neuss 4 Im Taubental,51.166856,6.758268
 ChargePoint DE-Nürnberg 14 Kressengartenstraße,49.449934,11.099394
 ChargePoint DE-Nürnberg 97 Flughafenstraße,49.493548,11.080217
 ChargePoint DE-Oberding Flughafen Südring P36 Delivery,48.352941,11.816863
+ChargePoint DE-Offenbach Mozartstraße,49.194781,8.19143
 ChargePoint DE-Olpe 5 Ziegeleistraße,51.038328,7.86167
 ChargePoint DE-Ostbevern 57 Loburg,52.036928,7.857509
 ChargePoint DE-Pfaffenhofen an der Ilm 6 Otto-Hahn-Straße,48.54499,11.513349
@@ -6526,6 +6546,7 @@ Citywatt DE-Köfering Scheuererstraße 1a,48.940897,12.200819
 Citywatt DE-Lahr/Schwarzwald Im Götzmann 10,48.334274,7.844688
 Citywatt DE-Landau an der Isar Röntgenstraße 1,48.690195,12.706413
 Citywatt DE-Landau an der Isar Wiesenweg 10,48.685529,12.695221
+Citywatt DE-Langenfeld Alter Knipprather Weg,51.101892,6.934684
 Citywatt DE-Langenzenn Mühlsteig 57,49.486682,10.777252
 Citywatt DE-Lübbenau Robert-Koch-Straße 45 a-i,51.857952,13.963854
 Citywatt DE-Lüdenscheid Bräuckenstraße 95,51.218517,7.654652
@@ -6611,6 +6632,7 @@ Citywatt DE-Zirndorf Buchackerstraße 4,49.438337,10.9538
 Citywatt DE-Zwickau Maxhütte Gewerbering 15,50.705227,12.446013
 
 Clever DE-Fehmarn Mummendorfer Weg,54.443081,11.178395
+Clever DE-Osterrönfeld Kieler Strasse,54.295806,9.707114
 Clever DK-Aabenraa Egevej,55.064129,9.36671
 Clever DK-Bakkebølle,54.948667,11.988156
 Clever DK-Brabrand Silkeborgvej,56.153817,10.097521
@@ -7101,6 +7123,7 @@ Drewag DE-Dresden Schillergalerie,51.051405,13.804725
 Duferco IT-Torino Via Parenzo,45.103057,7.646126
 
 E-MAXX DE-Harxheim Gerbstedterstraße,49.90317,8.276746
+E-MAXX DE-Limburg Limburgerstraße,50.403889,8.0675
 
 E.ON CZ-Jenišov,50.218688,12.806822
 E.ON CZ-Ostrovačice Veveří,49.218186,16.412659
@@ -7478,6 +7501,7 @@ Eichsfeldwerke DE-Leinefelde-Worbis Scharfenstein,51.363291,10.266229
 
 Electra BE-Auderghem Chaussée de Wavre,50.794779,4.478889
 Electra FR-Zac des Tulipes Rue de Montservon,48.968781,2.463222
+Electra IT-Peschiera del Garda Via Tangenziale,45.43407,10.710375
 
 Electric55 FR-Grimaud Avenue de la Mer,43.274918,6.577813
 
@@ -7500,6 +7524,8 @@ eLoaded DE-Ulm Magirus-Deutz-Straße,48.398353,9.958587
 eLoaded DE-Ulm Magirus-Deutz-Straße,48.398651,9.957918
 eLoaded DE-Zusmarshausen Am Innovationspark,48.407431,10.600065,30
 eLoaded DE-Zusmarshausen Am Innovationspark,48.40764,10.600005,25
+
+Elocity PL-Siemianowice Śląskie Elizy Orzeszkowej,50.320105,19.010029
 
 EM1 DE-Ahrensburg Am Postwald,53.6767,10.241641
 EM1 DE-Altötting Bahnhofstraße,48.222672,12.674143
@@ -8442,12 +8468,13 @@ EnBW DE-Loßburg Freudenstädter Straße,48.420334,8.444033
 EnBW DE-Loßburg Hauptstr.,48.41414,8.45013
 EnBW DE-Ludwigsburg Heinkelstraße,48.920951,9.149329
 EnBW DE-Ludwigshafen am Rhein Industriestraße,49.486286,8.416976
-EnBW DE-Ludwigshafen am Rhein Knollstraße,49.47587,8.44152
+EnBW DE-Ludwigshafen am Rhein Knollstraße,49.475371,8.441141
 EnBW DE-Luhden,52.2293,9.09452
 EnBW DE-Lutherstadt Eisleben,51.513315,11.568462
 EnBW DE-Lörrach Industriestraße,47.634882,7.677357
 EnBW DE-Lörrach Wiesentalstr.,47.622804,7.656234
 EnBW DE-Löwenberger Land,52.898284,13.157323
+EnBW DE-Lübeck b. d. Lohmühle,53.879728,10.676252
 EnBW DE-Lübeck BAUHAUS,53.862047,10.629666
 EnBW DE-Lübeck Penny,53.865476,10.721
 EnBW DE-Lübz,53.465291,12.041725
@@ -9280,6 +9307,7 @@ EnBW DE-Überlingen Lippersreuther Str.,47.770249,9.172718
 
 Enefit EE-Pärnu Ranna pst,58.37367,24.503218
 
+EnelX IT-Castelfiorentino Via Cesare Pavese,43.602416,10.970405
 EnelX IT-Castelletto Ticino,45.712974,8.643274,40
 EnelX IT-Fidenza Cia Federico Fellini,44.882458,10.090366
 EnelX IT-Firenze Via Enrico de Nicola,43.766224,11.301613
@@ -10325,24 +10353,27 @@ EWE-SWB DE-Friesoythe,53.014858,7.851011
 EWE-SWB DE-Illertissen,48.219521,10.126724,10
 EWE-SWB DE-Marktrodach,50.256351,11.397455
 
+Ewiva IT-Alessandria Via Vecchia Torino,44.915296,8.599882
+Ewiva IT-Peschiera del Garda Via Tangenziale,45.435685,10.710101
+Ewiva IT-Roma Corsa di Francia,41.944798,12.469523
+
 EWV-Bonn DE-Bonn Flughafen Köln-Bonn,50.879856,7.119221
 
 eze DE-Frankfurt am Main Luxemburgerallee,50.119729,8.711134
 
-famila DE-Elmshorn Hans-Böckler- Straße,53.74851,9.68473
-famila DE-Geesthacht Spandauer Straße,53.432495,10.34185
-famila DE-Kiel Preetzer Straße,54.299085,10.167869
-famila DE-Kiel Prinz-Heinrich-Straße,54.361092,10.133147
-famila DE-Kiel Schönkirchener Straße,54.32947,10.19825
-famila DE-Pinneberg Flensburger Straße,53.67249,9.80131
-famila DE-Walsrode Verdener Straße,52.857398,9.575561
-famila DE-Wedemark OT Mellendorf Wedemarkstraße,52.5478,9.7474
-
+familia DE-Elmshorn Hans-Böckler- Straße,53.74851,9.68473
+familia DE-Geesthacht Spandauer Straße,53.432495,10.34185
 Familia DE-Hamburg,53.608366,10.044162
+familia DE-Kiel Preetzer Straße,54.299085,10.167869
+familia DE-Kiel Prinz-Heinrich-Straße,54.361092,10.133147
+familia DE-Kiel Schönkirchener Straße,54.32947,10.19825
 Familia DE-Osterholz-Scharmbeck,53.232695,8.754733
+familia DE-Pinneberg Flensburger Straße,53.67249,9.80131
 Familia DE-Quickborn,53.743005,9.940652
-Familia DE-Reihenfeld,53.822247,10.502483
+familia DE-Reinfeld Barnitzer Strasse,53.822247,10.502483
 Familia DE-Tarp,54.669585,9.395309
+familia DE-Walsrode Verdener Straße,52.857398,9.575561
+familia DE-Wedemark OT Mellendorf Wedemarkstraße,52.5478,9.7474
 
 Fastned BE-Oostende luchthaven,51.20561,2.871165
 Fastned DE-Altmühltal,48.997562,11.375364
@@ -10445,7 +10476,7 @@ Fastned NL-Vrijenban,51.983412,4.392855
 Fastned NL-Wellerzand,52.78436,5.759275
 Fastned NL-Willemsbos,52.360573,5.766818
 
-Fines BG-Targovishte Търговище,43.244632,26.54884
+Fines BG-Пролеша 8,42.783942,23.166997
 Fines BG-Търговище Targovishte 4009,43.244632,26.54884
 
 Fortum NO-Alta,69.966743,23.268569
@@ -10467,7 +10498,17 @@ Fraunhofer DE-Paderborn Zukunftsmeile,51.730757,8.738679
 Fraunhofer DE-Stuttgart Nobelstraße,48.74027,9.097226
 Fraunhofer DE-Würzburg Neunerplatz,49.797548,9.918745
 
+FreeToX IT-Anagni Autostrada del Sole,41.686067,13.187432
+FreeToX IT-Anagni Autostrada del Sole,41.686491,13.188588
+FreeToX IT-Andria Autostrada Adriatica,41.250782,16.218906
+FreeToX IT-Andria Autostrada Adriatica,41.251829,16.220171
 FreeToX IT-Ferno Malpensa Aeroporto,45.624813,8.712106
+FreeToX IT-Ferrara A13,44.879338,11.570719
+FreeToX IT-Ferrara A13,44.880089,11.569079
+FreeToX IT-Melegnano Autostrada del Sole,45.321062,9.375328
+FreeToX IT-Melegnano Autostrada del Sole,45.32148,9.377207
+FreeToX IT-Modena Autostrada del Sole,44.662302,10.857942
+FreeToX IT-San Giovanni Valdarno Autostrada del Sole,43.582907,11.522605
 
 Galp PT-Vouzela A25 / IP5,40.686186,-8.232199
 
@@ -11138,6 +11179,7 @@ Ionity IT-Agira,37.57169,14.4797
 Ionity IT-Battipaglia,40.6147,14.96799
 Ionity IT-Binasco,45.33552,9.10753
 Ionity IT-Brenner,47.006302,11.506653,30
+Ionity IT-Brenner,47.006671,11.506571
 Ionity IT-Brugnato Ovest,44.22647,9.72971
 Ionity IT-Carpi,44.77544,10.86072
 Ionity IT-Ceriale Sud,44.08777,8.20626
@@ -11148,6 +11190,7 @@ Ionity IT-Piacenza,45.02694,9.73478
 Ionity IT-Portogruaro,45.79725,12.81914
 Ionity IT-Potenza,40.63193,15.81358
 Ionity IT-Rinovo Nord,43.9592,8.13416
+Ionity IT-Scarlino,42.958526,10.81659
 Ionity IT-Trento,46.08704,11.1111
 Ionity IT-Valdichiana Outlet Village,43.22381,11.80217
 Ionity IT-Versilia Est,43.9292,10.22384
@@ -11590,7 +11633,23 @@ Kaufland SK-Senec Brezová,48.22463,17.403691
 
 Kople NO-Andenes Industriveien,69.310198,16.098938
 
+Ladegrün DE-Arnstein Cancale-Platz,49.976265,9.967147
+Ladegrün DE-Arnstein Hofriedplatz,49.978919,9.965356
+Ladegrün DE-Backnang Gaildorfer Straße,48.960303,9.428377
 Ladegrün DE-Butzbach Marie-Curie-Str.,50.429741,8.690035
+Ladegrün DE-Darmstadt Mahatma-Gandhi-Straße,49.85465,8.626914
+Ladegrün DE-Emmendingen Geyer-zu-Lauf-Straße,48.113129,7.860019
+Ladegrün DE-Frankfurt am Main Eckenheimer Landstraße,50.147222,8.681111
+Ladegrün DE-Hamburg Billwerder Billdeich,53.496444,10.182701
+Ladegrün DE-Hannover An der Weide,52.361786,9.764225
+Ladegrün DE-Karlsruhe Käppelestraße,49.008064,8.439024
+Ladegrün DE-Köln Berrenrather Straße,50.918571,6.92535
+Ladegrün DE-Schönau Friedrichstraße,47.790859,7.90012
+Ladegrün DE-Stadtbergen Daimlerstraße,48.376892,10.842475
+Ladegrün DE-Stuttgart Frankenstraße,48.82541,9.172328
+Ladegrün DE-Süderholz Pommerndreieck,54.0941,13.0878
+Ladegrün DE-Uetze Marktstraße,52.468649,10.20433
+Ladegrün DE-Viernheim Heidelberger Straße,49.528308,8.573227
 
 Ladenetz DE-Wuppertal - Botanischer Garten,51.26118,7.162568,10
 Ladenetz DE-Wuppertal - Hauptbahnhof,51.255269,7.151023,15
@@ -12456,6 +12515,7 @@ M-Charge CH-Thun Weststrasse Panorama-Center,46.744414,7.605008
 MB DE-Butzbach In der Alböhn,50.429422,8.683063,50
 
 Mer AT-Brunn am Gebirge Wienerstraße,48.112659,16.30259,30
+Mer AT-Ebreichsdorf Betriebsring,47.983231,16.396287
 Mer AT-Linz Wegscheider Straße,48.254318,14.281426,40
 Mer AT-Wien Hadikgasse,48.193011,16.275551
 Mer AT-Wien Hietzinger Kai,48.191687,16.279224
@@ -13387,10 +13447,12 @@ Smatrics AT-Haid Ikeaplatz,48.197307,14.249527
 Smatrics AT-Kapfenberg Bahnstraße,47.445153,15.292904
 Smatrics AT-Linz Hafenstraße,48.3156,14.30173,25
 Smatrics AT-Linz Untere Donaulände,48.313366,14.298537
+Smatrics AT-Salzburg Franz Brötzner Straße,47.794638,12.987004
 Smatrics AT-St. Pölten Karl Pfeffer-Gasse,48.181014,15.620998
 Smatrics AT-St. Pölten Mariazeller Straße,48.18905,15.618962
 Smatrics AT-Steyr Kaserngasse,48.048469,14.415657
 Smatrics AT-Stockerau Rudolf Diesel-Straße,48.389171,16.179846
+Smatrics AT-Wals-Himmelreich Kasernenstraße,47.792453,12.987462
 Smatrics AT-Wien Gaudenzdorfer Gürtel,48.187695,16.338955
 Smatrics AT-Wien Ludwig-von-Höhnel-Gasse,48.159603,16.385089
 Smatrics AT-Wien Siemensstraße,48.270292,16.422644
@@ -13400,6 +13462,7 @@ Smatrics AT-Wiener Neustadt Gerasdorfer Gasse,47.805386,16.21233
 Smatrics IT-Vahrn-Varna Forch Straße,46.760248,11.637929
 
 solid DE-Nürnberg Am Leonhardspark,49.44341,11.056229
+solid DE-Nürnberg Glogauer Straße,49.397803,11.142122
 solid DE-Nürnberg Grünstraße,49.439396,11.051154
 solid DE-Nürnberg Kornmarkt,49.449167,11.074717
 
@@ -13459,6 +13522,7 @@ SWN DE-Neuwied Zeppelinsweg 14,50.438716,7.475956
 SWN DE-Neuwied-Segendorf Auwiese 11,50.467279,7.462726
 
 SWU DE-Neu-Ulm Glacis Galerie,48.393879,10.003906
+SWU DE-Ulm Basteistraße,48.400873,10.005338
 SWU DE-Ulm Deutschhaus,48.398008,9.984775
 SWU DE-Ulm Donaustraße,48.396863,9.995613
 SWU DE-Ulm Hafenbad,48.400459,9.993709
@@ -13577,10 +13641,13 @@ TEAG DE-Wurzen Dresdener Straße,51.365748,12.747015
 TEAG DE-Zella-Mehlis An der Quelle,50.643773,10.685111,15
 TEAG DE-Zeulenroda-Triebes Am Waldstadion,50.661353,11.995857
 
+team-Emobility DE-Ulm Basteistraße Maritim,48.400378,10.005348
+
 teamstrom DE-Bad Oldesloe Hamburger Straße,53.803266,10.363653
 teamstrom DE-Flensburg Marie-Curie-Ring,54.763163,9.449304
 teamstrom DE-Handewitt Scandinavian-Park,54.778115,9.33609
 teamstrom DE-Kronshagen Eckernförder Straße,54.337082,10.105607
+teamstrom DE-Osterrönfeld Kieler Straße,54.295861,9.70783
 
 Threeforce DE-Aschendorf In der Emsmarsch 1-7,53.04906,7.321207
 Threeforce DE-Aurich Tjüchkampstraße 4A,53.440542,7.515881
@@ -14010,6 +14077,7 @@ ES Gandia,38.969986,-0.178789
 FR 68510 Sierentz Hyper U et Drive,47.66618,7.441494,10
 IT Parma Destination Charger Hotel San Marco & Formula Club,44.826238,10.203621,15
 IT Vahrn Mautstation Casello Bressanone-Val Pusteria,46.763952,11.643082,20
+IT Vizzola Ticino Pirelli,45.625684,8.677574
 RO Brașov Bulevardul Gării,45.66043,25.613542
 RO Brașov RAT Rulmentul,45.681568,25.614809
 RO Brașov Strada Poienelor,45.633184,25.63254
