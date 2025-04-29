@@ -226,7 +226,7 @@
     ]
   },
   "time": {
-    "from": "now-6m",
+    "from": "now-6M",
     "to": "now"
   },
   "timepicker": {
