@@ -292,12 +292,12 @@ namespace TeslaLogger
                         Position nextP = positions[positionKeys[index + 1]];
                         double acceleration1 = Math.Round(((currP.speed - prevP.speed) / 3.6) / ((currP.delta_t - prevP.delta_t) / 1000), 6);
                         double acceleration2 = Math.Round(((nextP.speed - currP.speed) / 3.6) / ((nextP.delta_t - currP.delta_t) / 1000), 6);
-                        Tools.DebugLog($"speed:{prevP.speed}->{currP.speed}->{nextP.speed} acceleration1:{acceleration1}m/s acceleration2:{acceleration2}m/s headingdiff1:{prevP.heading-currP.heading} headingdiff2:{currP.heading-nextP.heading}");
-                        if (acceleration1 > 1 && acceleration2 < -1)
+                        //Tools.DebugLog($"speed:{prevP.speed}->{currP.speed}->{nextP.speed} acceleration1:{acceleration1}m/s acceleration2:{acceleration2}m/s headingdiff1:{prevP.heading-currP.heading} headingdiff2:{currP.heading-nextP.heading}");
+                        if (acceleration1 > 1.1 && acceleration2 < -1.1)
                         {
-                            // TODO find sensible threshhold
                             // drop speed at currP and replace with avg(prevP,nextP)
-                            Tools.DebugLog($"correct speed:{currP.speed}->{(prevP.speed+nextP.speed)/2.0}");
+                            Tools.DebugLog($"speed: {prevP.speed}->{currP.speed}->{nextP.speed} correct speed:{currP.speed}->{(prevP.speed+nextP.speed)/2.0}");
+                            currP.speed = (prevP.speed + nextP.speed) / 2.0;
                         }
                     }
                 }
