@@ -70,7 +70,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT\r\n  avg(UNIX_TIMESTAMP(datum)) as time_sec,\r\n   avg(lat),\r\n   avg(lng),\r\n   0 as type,\r\n   null as address, CarID\r\n   FROM pos\r\n   WHERE $__timeFilter(datum) and CarID in ($Car) and lat <> 0 AND lng <> 0\r\ngroup by CarID, UNIX_TIMESTAMP(datum) div 180\r\nUNION\r\n  SELECT UNIX_TIMESTAMP(pos.datum) as time_sec, lat, lng, 1 as type, concat('<b>',address, '</b><br>Date: ',pos.datum, '<br>Duration: ', TIMESTAMPDIFF(MINUTE, StartDate, EndDate) ,'min<br>Charged: ',charging.charge_energy_added, 'kWh<br>Max Power:', max_charger_power, 'kW<br><a href=\"d/BHhxFeZRz/laden?orgId=1&from=', UNIX_TIMESTAMP(StartDate)*1000,'&to=',UNIX_TIMESTAMP(EndDate)*1000,'&var-Car=',chargingstate.CarID,'\">[CHARGING]</a><br><a href=\"d/TSmNYvRRk/ladehistorie?orgId=1&var-Car=',chargingstate.CarID,'&var-Textfilter=',address,'&from=now-2y&to=now\">[CHARGINGHISTORY]</a>') as address, chargingstate.CarID FROM chargingstate join charging on endchargingid = charging.id join pos on chargingstate.Pos = pos.id\r\n  WHERE '$Charger' = 'ON' and $__timeFilter(pos.datum) and chargingstate.CarID in ($Car) and (fast_charger_brand = 'Tesla' or address like '%Supercharger%')\r\nUNION\r\n  SELECT UNIX_TIMESTAMP(pos.datum) as time_sec, lat, lng, 2 as type, concat('<b>',address, '</b><br>Date: ',pos.datum, '<br>Duration: ', TIMESTAMPDIFF(MINUTE, StartDate, EndDate) ,'min<br>Charged: ',charging.charge_energy_added, 'kWh<br>Max Power:', max_charger_power, 'kW<br><a href=\"d/BHhxFeZRz/laden?orgId=1&from=', UNIX_TIMESTAMP(StartDate)*1000,'&to=',UNIX_TIMESTAMP(EndDate)*1000,'&var-Car=',chargingstate.CarID,'\">[CHARGING]</a><br><a href=\"d/TSmNYvRRk/ladehistorie?orgId=1&var-Car=',chargingstate.CarID,'&var-Textfilter=',address,'&from=now-2y&to=now\">[CHARGINGHISTORY]</a>') as address, chargingstate.CarID FROM chargingstate join charging on endchargingid = charging.id join pos on chargingstate.Pos = pos.id\r\n  WHERE '$Charger' = 'ON' and $__timeFilter(pos.datum) and chargingstate.CarID in ($Car) \r\n  and ((fast_charger_brand is not null && fast_charger_brand not in ('Tesla') and fast_charger_present = 1 and address not like '%supercharger%') \r\n  or (fast_charger_present is null and max_charger_power > 25 and address not like '%supercharger%'))\r\n\r\n ORDER BY CarID, time_sec ASC",
+          "rawSql": "SELECT\r\n  avg(UNIX_TIMESTAMP(datum)) as time_sec,\r\n   avg(lat),\r\n   avg(lng),\r\n   0 as type,\r\n   null as address, CarID\r\n   FROM pos\r\n   WHERE $__timeFilter(datum) and CarID in ($Car) and lat <> 0 AND lng <> 0\r\ngroup by CarID, UNIX_TIMESTAMP(datum) div $div\r\nUNION\r\n  SELECT UNIX_TIMESTAMP(pos.datum) as time_sec, lat, lng, 1 as type, concat('<b>',address, '</b><br>Date: ',pos.datum, '<br>Duration: ', TIMESTAMPDIFF(MINUTE, StartDate, EndDate) ,'min<br>Charged: ',charging.charge_energy_added, 'kWh<br>Max Power:', max_charger_power, 'kW<br><a href=\"d/BHhxFeZRz/laden?orgId=1&from=', UNIX_TIMESTAMP(StartDate)*1000,'&to=',UNIX_TIMESTAMP(EndDate)*1000,'&var-Car=',chargingstate.CarID,'\">[CHARGING]</a><br><a href=\"d/TSmNYvRRk/ladehistorie?orgId=1&var-Car=',chargingstate.CarID,'&var-Textfilter=',address,'&from=now-2y&to=now\">[CHARGINGHISTORY]</a>') as address, chargingstate.CarID FROM chargingstate join charging on endchargingid = charging.id join pos on chargingstate.Pos = pos.id\r\n  WHERE '$Charger' = 'ON' and $__timeFilter(pos.datum) and chargingstate.CarID in ($Car) and (fast_charger_brand = 'Tesla' or address like '%Supercharger%')\r\nUNION\r\n  SELECT UNIX_TIMESTAMP(pos.datum) as time_sec, lat, lng, 2 as type, concat('<b>',address, '</b><br>Date: ',pos.datum, '<br>Duration: ', TIMESTAMPDIFF(MINUTE, StartDate, EndDate) ,'min<br>Charged: ',charging.charge_energy_added, 'kWh<br>Max Power:', max_charger_power, 'kW<br><a href=\"d/BHhxFeZRz/laden?orgId=1&from=', UNIX_TIMESTAMP(StartDate)*1000,'&to=',UNIX_TIMESTAMP(EndDate)*1000,'&var-Car=',chargingstate.CarID,'\">[CHARGING]</a><br><a href=\"d/TSmNYvRRk/ladehistorie?orgId=1&var-Car=',chargingstate.CarID,'&var-Textfilter=',address,'&from=now-2y&to=now\">[CHARGINGHISTORY]</a>') as address, chargingstate.CarID FROM chargingstate join charging on endchargingid = charging.id join pos on chargingstate.Pos = pos.id\r\n  WHERE '$Charger' = 'ON' and $__timeFilter(pos.datum) and chargingstate.CarID in ($Car) \r\n  and ((fast_charger_brand is not null && fast_charger_brand not in ('Tesla') and fast_charger_present = 1 and address not like '%supercharger%') \r\n  or (fast_charger_present is null and max_charger_power > 25 and address not like '%supercharger%'))\r\n\r\n ORDER BY CarID, time_sec ASC",
           "refId": "A",
           "select": [
             [
@@ -179,6 +179,49 @@
         "query": "ON,OFF",
         "skipUrlSync": false,
         "type": "custom"
+      },
+      {
+        "current": {
+          "selected": true,
+          "text": "180",
+          "value": "180"
+        },
+        "hide": 0,
+        "includeAll": false,
+        "label": "Level of Detail",
+        "multi": false,
+        "name": "div",
+        "options": [
+          {
+            "selected": false,
+            "text": "180",
+            "value": "180"
+          },
+          {
+            "selected": false,
+            "text": "90",
+            "value": "90"
+          },
+          {
+            "selected": false,
+            "text": "60",
+            "value": "60"
+          },
+          {
+            "selected": true,
+            "text": "30",
+            "value": "30"
+          },
+          {
+            "selected": false,
+            "text": "15",
+            "value": "15"
+          }
+        ],
+        "query": "180,90,60,30,15",
+        "queryValue": "",
+        "skipUrlSync": false,
+        "type": "custom"
       }
     ]
   },
@@ -214,6 +257,6 @@
   "timezone": "",
   "title": "Visited",
   "uid": "RG_DxSmgk",
-  "version": 9,
+  "version": 16,
   "weekStart": ""
 }
