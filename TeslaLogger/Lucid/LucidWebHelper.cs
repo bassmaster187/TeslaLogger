@@ -43,6 +43,11 @@ namespace TeslaLoggerNET8.Lucid
 
         public override async Task<string> IsOnline(bool returnOnUnauthorized = false)
         {
+            GetNewData();
+
+            if (power == "POWER_STATE_SLEEP")
+                return "asleep";
+
             return "online";
         }
 
@@ -262,9 +267,8 @@ namespace TeslaLoggerNET8.Lucid
             return string.Empty;
         }
 
-        bool isCharging()
+        internal override void CheckRefreshToken()
         {
-            return charge_state == "CHARGE_STATE_CHARGING";
         }
     }
 }

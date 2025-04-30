@@ -6,13 +6,17 @@ RUN echo "Europe/Berlin" > /etc/timezone && dpkg-reconfigure -f noninteractive t
 RUN apt-get update && \
  apt-get install -y --no-install-recommends git && \
  apt-get install -y --no-install-recommends mariadb-client && \
- apt-get install -y optipng && \
+ apt-get install -y optipng python3 python3.pip && \
  apt-get clean && \
  apt-get autoremove -y && \
  rm -rf /var/lib/apt/lists/* && \
  echo "export TERM=xterm" >> /root/.bashrc  && \
  echo "DOCKER" >> /tmp/teslalogger-DOCKER && \
- echo "DOCKER" >> /tmp/teslalogger-dockernet8
+ echo "DOCKER" >> /tmp/teslalogger-dockernet8 && \
+ pip3 install grpc-stubs --break-system-packages && \
+ pip3 install grpcio --break-system-packages && \
+ pip3 install protobuf --break-system-packages && \
+ pip3 install rich --break-system-packages
 
 RUN mkdir -p /etc/teslalogger
 RUN mkdir -p /etc/teslalogger/sqlschema

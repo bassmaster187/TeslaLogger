@@ -1997,7 +1997,7 @@ namespace TeslaLogger
             return "NULL";
         }
 
-        internal void CheckRefreshToken()
+        internal virtual void CheckRefreshToken()
         {
             if (nextTeslaTokenFromRefreshToken < DateTime.UtcNow)
             {
