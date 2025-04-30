@@ -417,6 +417,18 @@ namespace TeslaLogger
 
         internal static object VINDecoder(string vin, out int year, out string carType, out bool AWD, out bool MIC, out string battery, out string motor, out bool MIG)
         {
+            if (vin == null || vin == "")
+            {
+                year = 0;
+                carType = "";
+                AWD = false;
+                MIC = false;
+                battery = "";
+                motor = "";
+                MIG = false;
+                return "?";
+            }
+
             year = 0;
             carType = "";
             AWD = false;
@@ -2177,6 +2189,11 @@ WHERE
         internal static double MlToKm(double miles, int decimals = 3)
         {
             return Math.Round(miles * 1.609344, decimals);
+        }
+
+        internal static double KmToMl(double km, int decimals = 3)
+        {
+            return Math.Round(km / 1.609344, decimals);
         }
     }
 

@@ -72,7 +72,7 @@ namespace TeslaLogger
         private HFLMode highFrequencyLoggingMode = HFLMode.Ticks;
         internal HFLMode GetHighFrequencyLoggingMode() { return highFrequencyLoggingMode; }
 
-        private Thread thread;
+        protected Thread thread;
         private bool run = true;
 
         internal string TeslaName;
@@ -301,7 +301,7 @@ namespace TeslaLogger
             return -1; // -1 means error as CarID in database can only be a positive integer
         }
 
-        private void Loop()
+        protected void Loop()
         {
             try
             {

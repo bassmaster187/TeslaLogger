@@ -1,6 +1,4 @@
 ﻿using Exceptionless;
-using Microsoft.VisualBasic;
-using Microsoft.VisualBasic.Devices;
 using MySql.Data.MySqlClient;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;

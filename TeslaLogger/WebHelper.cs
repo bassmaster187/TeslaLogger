@@ -68,7 +68,7 @@ namespace TeslaLogger
         internal string conn_charge_cable = "";
         internal bool fast_charger_present; // defaults to false;
         //private bool stopStreaming = false;
-        private string elevation = "";
+        protected string elevation = "";
         private DateTime elevation_time = DateTime.Now;
         internal DateTime lastTokenRefresh = DateTime.Now;
         internal DateTime lastIsDriveTimestamp = DateTime.Now;
@@ -258,7 +258,7 @@ namespace TeslaLogger
             }
         }
 
-        public bool RestoreToken()
+        public virtual bool RestoreToken()
         {
             try
             {
@@ -1001,7 +1001,7 @@ namespace TeslaLogger
             lastCharging_State = "";
         }
 
-        internal bool IsCharging(bool justCheck = false, bool noMemcache = false)
+        public virtual bool IsCharging(bool justCheck = false, bool noMemcache = false)
         {
             if (car.FleetAPI)
             {
@@ -1286,7 +1286,7 @@ namespace TeslaLogger
             }
         }
 
-        public string GetVehicles()
+        public virtual string GetVehicles()
         {
             string resultContent = "";
             while (true)
@@ -1685,7 +1685,7 @@ namespace TeslaLogger
         public static object isOnlineLock = new object();
 #pragma warning restore CA2211 // Nicht konstante Felder dürfen nicht sichtbar sein
 
-        public async Task<string> IsOnline(bool returnOnUnauthorized = false)
+        public async virtual Task<string> IsOnline(bool returnOnUnauthorized = false)
         {
             string resultContent = "";
             try
@@ -2725,7 +2725,7 @@ namespace TeslaLogger
             }
         }
 
-        public bool IsDriving(bool justinsertdb = false)
+        public virtual bool IsDriving(bool justinsertdb = false)
         {
             if (car.FleetAPI)
             {
@@ -4111,7 +4111,7 @@ WHERE
             return -1;
         }
 
-        internal async Task<double> GetOdometerAsync()
+        public virtual async Task<double> GetOdometerAsync()
         {
             string resultContent = "";
             try
