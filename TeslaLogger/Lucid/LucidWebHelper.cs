@@ -4,6 +4,7 @@ using System.CodeDom.Compiler;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -228,16 +229,34 @@ namespace TeslaLoggerNET8.Lucid
         {
             try
             {
-                ProcessStartInfo processInfo = new ProcessStartInfo
+                ProcessStartInfo processInfo = null;
+
+                if (Directory.Exists("/etc/lucidapi/examples"))
                 {
-                    FileName = "py",
-                    Arguments = @"C:\dev\LucidAPI\python-lucidmotors\examples\vehicle_info.py",
-                    WorkingDirectory = @"C:\dev\LucidAPI\python-lucidmotors\examples",
-                    RedirectStandardOutput = true,
-                    RedirectStandardError = true,
-                    UseShellExecute = false,
-                    CreateNoWindow = true
-                };
+                    processInfo = new ProcessStartInfo
+                    {
+                        FileName = "python3",
+                        Arguments = @"/etc/lucidapi/examples/vehicle_info.py",
+                        WorkingDirectory = @"/etc/lucidapi/examples",
+                        RedirectStandardOutput = true,
+                        RedirectStandardError = true,
+                        UseShellExecute = false,
+                        CreateNoWindow = true
+                    };
+                }
+                else
+                {
+                    processInfo = new ProcessStartInfo
+                    {
+                        FileName = "py",
+                        Arguments = @"C:\dev\LucidAPI\python-lucidmotors\examples\vehicle_info.py",
+                        WorkingDirectory = @"C:\dev\LucidAPI\python-lucidmotors\examples",
+                        RedirectStandardOutput = true,
+                        RedirectStandardError = true,
+                        UseShellExecute = false,
+                        CreateNoWindow = true
+                    };
+                }
 
                 using (Process process = Process.Start(processInfo))
                 {
