@@ -326,6 +326,7 @@ Supercharger-V3 CA-Terrace Bay ON,48.782934,-87.09986
 Supercharger-V3 CA-Thunder Bay ON,48.381856,-89.311627
 Supercharger CA-Toronto ON - Bay Street (Pay to Park Floor P2 & P3),43.654986,-79.38336
 Supercharger-V3 CA-Toronto ON - Don Mills Road (Floor P2 & P3),43.736111,-79.345833
+Supercharger-V3 CA-Toronto ON Lakeshore Boulevard W,43.632564,-79.411909
 Supercharger-V3 CA-Trenton ON,44.130278,-77.579975
 Supercharger CA-Tsawwassen BC,49.04114,-123.082496
 Supercharger-V3 CA-Upsala ON,49.041776,-90.468545
@@ -3284,8 +3285,6 @@ Supercharger SK-Demänová,49.054815,19.579253
 Supercharger-V3 SK-Košice,48.695151,21.235604
 Supercharger-V3 SK-Trenčín,48.8643,18.022982,40
 Supercharger SK-Zvolen,48.627379,19.103481
-
-Supercharger-V3 Toronto ON Lakeshore Boulevard W,43.632564,-79.411909
 
 Supercharger-V3 TR-Akhisar,38.930236,27.703596
 Supercharger-V3 TR-Ankara,39.949583,32.832923
@@ -9532,7 +9531,7 @@ ensev DE-Bad Nauheim Frankfurter Straße,50.372014,8.743325,30
 ensev DE-Bad Nauheim Parkstraße,50.365533,8.734777
 ensev DE-Bad Nauheim Schwalheimer Straße,50.356686,8.749915
 
-Entega DE-Büttelborn Im Mehlsee,49.902926,8.523264
+ENTEGA DE-Büttelborn Im Mehlsee,49.902926,8.523264
 ENTEGA DE-Groß-Umstadt Georg-August-Zinn-Straße,49.872049,8.914015
 
 enviaM DE-Bitterfeld-Wolfen Niels-Bohr-Straße,51.624576,12.307812
