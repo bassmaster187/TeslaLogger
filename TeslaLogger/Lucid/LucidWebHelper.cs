@@ -55,15 +55,19 @@ namespace TeslaLoggerNET8.Lucid
         public override bool IsDriving(bool justinsertdb = false)
         {
             GetNewData();
-            
-            if (justinsertdb || gear_position == "GEAR_DRIVE" || gear_position == "GEAR_REVERSE")
-            {
-                car.Log("Insert Pos");
-                var ts = Tools.ToUnixTime(DateTime.UtcNow) * 1000;
-                car.DbHelper.InsertPos(ts.ToString(), latitude, longitude, (int)Math.Round(speed), null, car.CurrentJSON.current_odometer, ideal_battery_range, ideal_battery_range, battery_level, car.CurrentJSON.current_outside_temperature, elevation);
-            }
+            bool isDriving = power == "POWER_STATE_DRIVE" || gear_position == "GEAR_DRIVE" || gear_position == "GEAR_REVERSE";
 
-            return power == "POWER_STATE_DRIVE" || gear_position == "GEAR_DRIVE" || gear_position == "GEAR_REVERSE";
+            if (justinsertdb || isDriving)
+            {
+                var ts = Tools.ToUnixTime(DateTime.UtcNow) * 1000;
+                int id = car.DbHelper.InsertPos(ts.ToString(), latitude, longitude, (int)Math.Round(speed), null, car.CurrentJSON.current_odometer, Tools.MlToKm(ideal_battery_range, 1), Tools.MlToKm(ideal_battery_range, 1), battery_level, car.CurrentJSON.current_outside_temperature, elevation);
+                car.Log("Insert Pos " + id);
+            }
+            
+            if (isDriving)
+                lastIsDriveTimestamp = DateTime.Now;
+
+            return isDriving;
         }
 
         public override bool IsCharging(bool justCheck = false, bool noMemcache = false)
@@ -78,7 +82,7 @@ namespace TeslaLoggerNET8.Lucid
             if (!justCheck)
             {
                 car.Log("Insert Charging " + batteryLevel);
-                car.DbHelper.InsertCharging(ts.ToString(), batteryLevel, charge_energy_added.ToString(), chargerPower, (double)ideal_battery_range, (double)ideal_battery_range, "0", "0", "0", 0.0, car.IsHighFrequenceLoggingEnabled(true), "0", "0");
+                car.DbHelper.InsertCharging(ts.ToString(), batteryLevel, charge_energy_added.ToString(), chargerPower,  (double)ideal_battery_range, (double)ideal_battery_range, "0", "0", "0", 0.0, car.IsHighFrequenceLoggingEnabled(true), "0", "0");
             }
 
             return charging;
@@ -128,7 +132,7 @@ namespace TeslaLoggerNET8.Lucid
                                 longitude = double.Parse(value, CultureInfo.InvariantCulture);
                                 break;
                             case "elevation":
-                                elevation = value;
+                                elevation = ((int)(double.Parse(value, CultureInfo.InvariantCulture)) / 100.0).ToString() ;
                                 break;
                             case "heading_precise":
                                 car.CurrentJSON.heading = (int)double.Parse(value, CultureInfo.InvariantCulture);
@@ -189,7 +193,7 @@ namespace TeslaLoggerNET8.Lucid
                                 }
                                 break;
                             case "speed":
-                                speed = double.Parse(value, CultureInfo.InvariantCulture);
+                                speed = Tools.KmToMl(double.Parse(value, CultureInfo.InvariantCulture), 1);
                                 break;
                             case "gear_position":
                                 if (gear_position != value)
