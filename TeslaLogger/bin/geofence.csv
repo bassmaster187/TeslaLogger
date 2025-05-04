@@ -39,6 +39,7 @@ Supercharger-V4 AT-St. Michael im Lungau,47.096663,13.632742
 Supercharger AT-St. Pölten,48.205769,15.618485
 Supercharger AT-St. Valentin,48.196507,14.527879,20
 Supercharger-V4 AT-St. Veit an der Glan,46.730391,14.37859
+Supercharger-V4 AT-Stumm,47.289947,11.887704
 Supercharger AT-Vienna,48.157246,16.334045
 Supercharger AT-Villach,46.604193,13.869091
 Supercharger-V3 AT-Villach-Ost,46.601751,13.883361
@@ -1946,7 +1947,7 @@ Supercharger DE-Nempitz,51.290012,12.137346,9
 Supercharger DE-Nempitz,51.290095,12.137335,7
 Supercharger DE-Nempitz,51.290154,12.137387,4
 Supercharger DE-Nempitz,51.290155,12.137455,4
-Supercharger DE-Neuberg,50.18194,9.0067
+Supercharger DE-Neuberg,50.181904,9.00663,40
 Supercharger-V4 DE-Neudrossenfeld,50.037763,11.489359,20
 Supercharger-V3 DE-Neumünster,54.070285,9.94136
 Supercharger-V4 DE-Neuss,51.200904,6.713603
@@ -2114,6 +2115,7 @@ Supercharger ES-Guarromán,38.143021,-3.722848
 Supercharger-V4 ES-Hernani,43.276171,-1.987865
 Supercharger ES-Jerez,36.692378,-6.160246
 Supercharger-V3 ES-La Jonquera,42.401718,2.880498
+Supercharger-V3 ES-La Puebla de Valverde,40.217545,-0.939622
 Supercharger ES-La Seu d'Urgell,42.358898,1.462893
 Supercharger-V4 ES-León Trobajo del Camino,42.591401,-5.619581
 Supercharger ES-Lleida,41.663959,0.605371
@@ -5253,22 +5255,29 @@ Albwerk DE-Winterbach Bahnhofstraße,48.799156,9.480962
 Aldi DE-Aachen Neuenhofstraße,50.760742,6.152673
 Aldi DE-Aachen Ronder Weg,50.817262,6.065772
 Aldi DE-Aachen Süsterfeldstraße,50.786292,6.063822
+Aldi DE-Aachen Werkstraße,50.712694,6.137944
+Aldi DE-Ahlen Ostbredenstraße,51.7601,7.90855
 Aldi DE-Allershausen Mühlenstraße,48.429667,11.580861
 Aldi DE-Altötting Mühldorfer Straße,48.226528,12.657944
 Aldi DE-Alzey Karl-Heinz-Kipp-Straße,49.7455,8.140417
 Aldi DE-Ansbach,49.293465,10.603837,20
-Aldi DE-Augsburg Albert-Albert-Schenavsky-Straße,48.382147,10.93113
+Aldi DE-Augsburg Albert-Schenavsky-Straße,48.382167,10.931194
 Aldi DE-Augsburg Edisonstraße,48.346333,10.881444
 Aldi DE-Augsburg Steinerne Furt,48.393611,10.925278
 Aldi DE-Augsburg Weiherstraße,48.388611,10.883306
 Aldi DE-Bad Camberg,50.296238,8.254424
+Aldi DE-Bad Dürrheim Carl-Friedrich-Benz-Straße,48.03221,8.52767
 Aldi DE-Bad Münstereifel Trierer Straße,50.549227,6.762653
 Aldi DE-Bad Nauheim Hubert-Vergölst-Straße,50.362501,8.756567,20
+Aldi DE-Bad Staffelstein Bischof-von-Dinkel-Straße,50.105542,11.007317
 Aldi DE-Baden-Baden Schwarzwaldstraße,48.776975,8.213665
 Aldi DE-Bamberg Münchner Ring,49.884222,10.915056
+Aldi DE-Beckum Haselnussweg,51.798822,8.034839
+Aldi DE-Beckum Lippweg,51.753003,8.048864
 Aldi DE-Bergisch Gladbach Am Stockbrunnen,50.963611,7.164361
 Aldi DE-Bergisch Gladbach-Gronau Kradepohlsmühlenweg,50.982722,7.104194
 Aldi DE-Bernau am Chiemsee,47.825325,12.384109
+Aldi DE-Beselich Hauptstraße,50.463709,8.132341
 Aldi DE-Bodenheim Lange Ruthe,49.92572,8.324425,18
 Aldi DE-Bogen Bärndorf,48.913528,12.728222
 ALdi DE-Bonn Brühler Straße,50.741871,7.072367
@@ -5276,17 +5285,20 @@ Aldi DE-Bonn Im Bendel,50.690559,7.136253
 Aldi DE-Bonn-Beuel Gartenstr.,50.750278,7.130667
 Aldi DE-Bonn-Beuel Maarstraße,50.73775,7.131111
 Aldi DE-Bonn-Lannesdorf Drachenburgstraße,50.667667,7.18025
+Aldi DE-Bonn-Nordstadt Brühler Straße,50.741861,7.072472
 Aldi DE-Bottrop Horster Str.,51.524417,6.932389
 Aldi DE-Butzbach Am Keltenhof,50.428844,8.6848,50
 Aldi DE-Böblingen Süd Bahnhof,48.677525,9.011909
 Aldi DE-Böblingen,48.685646,8.993401
 Aldi DE-Dannstadt Riedstraße,49.434278,8.317528
 Aldi DE-Darmstadt Eschollbrücker Straße,49.859889,8.63675
+Aldi DE-Darmstadt Otto-Röhm-Straße,49.889741,8.634319
 Aldi DE-Darmstadt-Arheilgen,49.906825,8.648799
 Aldi DE-Dierdorf Königsberger Straße,50.545225,7.635626
 Aldi DE-Dinslaken,51.560813,6.741382,20
 Aldi DE-Dormagen-Horrem Mathias-Giesen-Straße,51.094778,6.816278
 Aldi DE-Dormagen-Nievenheim An der Sausweide,51.120194,6.76875
+Aldi DE-Duisburg Flutweg,51.4119,6.691913
 Aldi DE-Duisburg Rathausallee,51.3975,6.663528
 Aldi DE-Duisburg-Duissern Aakerfährstraße,51.440111,6.782694
 Aldi DE-Duisburg-Duissern Auf der Höhe,51.441972,6.760806
@@ -5301,15 +5313,24 @@ Aldi DE-Düsseldorf Gaußstraße,51.227278,6.818222
 Aldi DE-Düsseldorf Heerdter Landstraße,51.231167,6.711333
 Aldi DE-Düsseldorf Nürnberger Straße,51.171278,6.860667
 Aldi DE-Düsseldorf Paulsmühlenstraße,51.163983,6.880664
+Aldi DE-Eberbach Neuer Weg-Nord,49.47352,8.98602
 Aldi DE-Echterdingen,48.695676,9.168745
+Aldi DE-Eisenberg (Pfalz) Am Gielbrunnen,49.55828,8.086
 Aldi DE-Eisingen,49.761243,9.845965,20
 Aldi DE-Elsenfeld Bahnhofstraße,49.841579,9.156343
 Aldi DE-Emmerich am Rhein Moritz-von-Nassau-Straße,51.846528,6.234389
 Aldi DE-Emmerich Bahnhofstraße,51.833444,6.252111
 Aldi DE-Erlangen Gundstraße 2,49.583525,10.965227,10
 Aldi DE-Erlangen Henkestraße,49.593528,11.018139
+Aldi DE-Essen Am Luftschacht,51.461146,7.066194
+Aldi DE-Essenbach Daimlerstraße,48.586889,12.189611,20
+Aldi DE-Esterwegen Poststraße,52.990506,7.627129
 Aldi DE-Ettenheim Tullastraße,48.260806,7.804972
 Aldi DE-Euskirchen Stresemannstraße,50.667139,6.806361
+Aldi DE-Florstadt Freiherr-vom-Stein-Straße,50.3223,8.86825
+Aldi DE-Frankfurt am Main Berner Straße,50.193573,8.657416,20
+Aldi DE-Frankfurt am Main Berner Straße,50.193875,8.657723
+Aldi DE-Frankfurt am Main Homburger Landstraße,50.16028,8.687419
 Aldi DE-Frankfurt am Main Lärchenstraße,50.099306,8.586222
 Aldi DE-Frankfurt Heddernheim Olof-Palme-Straße,50.1665,8.644111
 Aldi DE-Frankfurt West-Höchster Straße,50.091944,8.503306
@@ -5321,8 +5342,15 @@ Aldi DE-Friedberg,48.406611,10.951264,10
 Aldi DE-Fußgönheim Am Weisenheimer Weg,49.467667,8.286278
 Aldi DE-Fürth Karolinenstraße,49.467472,10.995139
 Aldi DE-Fürth Magazinstraße 61,49.454155,11.001397,10
+Aldi DE-Gau-Algesheim Rheinstraße,49.971139,8.023
 Aldi DE-Germering Industriestraße,48.131924,11.37954
+Aldi DE-Grafenberg Im Trieb,48.567143,9.313323
 Aldi DE-Griesheim Flughafenstraße,49.860556,8.590778
+Aldi DE-Gummersbach Gelpestraße,51.028249,7.46739
+Aldi DE-Göttingen Industriestraße,51.540785,9.896965
+Aldi DE-Göttingen Werner-von-Siemens-Straße,51.558381,9.930328
+Aldi DE-Haar Hans-Stießberger-Straße,48.109444,11.718028
+Aldi DE-Hainichen Bahnhofstraße,50.97099,13.1194
 Aldi DE-Heidelberg Im Schuhmachergewann,49.426194,8.639611
 Aldi DE-Heidelberg Kleingemünder Straße,49.41338,8.775348
 Aldi DE-Heidelberg Pleikartsförster Straße,49.378139,8.664111
@@ -5368,6 +5396,7 @@ Aldi DE-Leverkusen Syltstraße,51.033571,7.010778
 Aldi DE-Leverkusen-Fixheide Schlebuscher Straße,51.05,7.013389
 Aldi DE-Leverkusen-Opladen Bonner Straße,51.067417,6.990194
 Aldi DE-Lindau Von-Behring-Str.,47.550611,9.722111
+Aldi DE-Linden Carl-Benz-Straße,50.538326,8.654354
 Aldi DE-Lorsch,49.65359,8.555596
 Aldi DE-Ludwigsburg Martin-Luther-Straße,48.891194,9.181389
 Aldi DE-Ludwigsburg,48.879803,9.218476,20
@@ -5785,6 +5814,7 @@ Allego DE-Mülheim/Ruhr Weseler Str. 77,51.433012,6.843968
 Allego DE-Münchberg,50.20277,11.77692,4
 Allego DE-München Bodenseestraße 209,48.143433,11.429782
 Allego DE-Münster Weseler Str. 535,51.92793,7.587946
+Allego DE-Neuberg (Erlensee) Röntgenstraße 1,50.182116,9.006875,10
 Allego DE-Neuberg (Erlensee) Röntgenstraße 1,50.182562,9.006933
 Allego DE-Neumarkt Autohof,49.312989,11.475396,5
 Allego DE-Neuruppin Wilhelm-Bartelt-Strasse 3,52.888557,12.810769
@@ -7594,6 +7624,15 @@ EDEKA DE-Zossen Gutstedtstraße,52.17,13.47159
 
 EDP ES-Bergara Urteaga kalea,43.108058,-2.40634
 
+Eichsfeldwerke DE-Dingelstädt Mühlhäuser Straße,51.308365,10.324275
+Eichsfeldwerke DE-Heilbad Heiligenstadt Brüsseler Straße,51.385763,10.132963
+Eichsfeldwerke DE-Heilbad Heiligenstadt Göttinger Straße,51.377944,10.134587
+Eichsfeldwerke DE-Heilbad Heiligenstadt Holzweg,51.374145,10.131659
+Eichsfeldwerke DE-Heilbad Heiligenstadt In der Leineaue,51.385032,10.14961
+Eichsfeldwerke DE-Heilbad Heiligenstadt Robert-Koch-Straße,51.376195,10.138767
+Eichsfeldwerke DE-Heilbad Heiligenstadt Wilhelmstraße,51.376988,10.144452
+Eichsfeldwerke DE-Leinefelde-Worbis Beethovenstraße,51.37512,10.324802
+Eichsfeldwerke DE-Leinefelde-Worbis Hausener Weg,51.414046,10.367031
 Eichsfeldwerke DE-Leinefelde-Worbis Scharfenstein,51.363291,10.266229
 
 Electra BE-Auderghem Chaussée de Wavre,50.794779,4.478889
@@ -8009,7 +8048,7 @@ EnBW DE-Düsseldorf Kölner Landstr.,51.18517,6.82107
 EnBW DE-Düsseldorf Reisholzer Bahnstraße,51.180278,6.852899
 EnBW DE-Ebelsbach,49.984874,10.668505
 EnBW DE-Ebensfeld Frankenstraße,50.071966,10.96189
-EnBW DE-Eberbach Neuer Weg-Nord,49.47302,8.98683
+EnBW DE-Eberbach Neuer Weg-Nord,49.473412,8.987489
 EnBW DE-Eberhardzell Haupstr.,48.001506,9.824761
 EnBW DE-Eberhardzell Petrusstraße,47.986923,9.771755
 EnBW DE-Ebern Alte Ziegelei,50.093442,10.782796
@@ -9548,6 +9587,7 @@ ensev DE-Bad Nauheim Schwalheimer Straße,50.356686,8.749915
 
 ENTEGA DE-Büttelborn Im Mehlsee,49.902926,8.523264
 ENTEGA DE-Groß-Umstadt Georg-August-Zinn-Straße,49.872049,8.914015
+ENTEGA DE-Weiterstadt LOOP5,49.893191,8.605177
 
 enviaM DE-Bitterfeld-Wolfen Niels-Bohr-Straße,51.624576,12.307812
 enviaM DE-Köthen (Anhalt) Dessauer Straße,51.764312,11.986108
@@ -9599,17 +9639,8 @@ EVN AT-Wien Albert-Schweitzer-Gasse,48.207501,16.22199
 EVN AT-Zwettl Gartenstraße,48.604227,15.16982
 EVN DE-Nordhausen Engelsburg,51.503143,10.793401
 
-EW-Eichsfeldgas DE-Dingelstädt Mühlhäuser Straße,51.308365,10.324275
-EW-Eichsfeldgas DE-Heilbad Heiligenstadt Brüsseler Straße,51.385763,10.132963
-EW-Eichsfeldgas DE-Heilbad Heiligenstadt Göttinger Straße,51.377944,10.134587
-EW-Eichsfeldgas DE-Heilbad Heiligenstadt Holzweg,51.374145,10.131659
-EW-Eichsfeldgas DE-Heilbad Heiligenstadt In der Leineaue,51.385032,10.14961
-EW-Eichsfeldgas DE-Heilbad Heiligenstadt Robert-Koch-Straße,51.376195,10.138767
-EW-Eichsfeldgas DE-Heilbad Heiligenstadt Wilhelmstraße,51.376988,10.144452
-EW-Eichsfeldgas DE-Leinefelde-Worbis Beethovenstraße,51.37512,10.324802
-EW-Eichsfeldgas DE-Leinefelde-Worbis Hausener Weg,51.414046,10.367031
-
 Eways SE-Västervik Norra Strandvägen,57.763453,16.63204
+Eways SE-Ödåkra Marknadsvägen,56.090643,12.758475
 
 EWE-GO DE-Aachen Debyestraße,50.759646,6.153621,15
 EWE-GO DE-Achim Margarete-Steiff-Allee,53.018814,9.069053
@@ -12948,7 +12979,6 @@ NewMotion DE-Düsseldorf Münsterstraße,51.252735,6.801829
 NewMotion DE-Eisenberg Jenaer Str.,50.971174,11.875574
 NewMotion DE-Ellwangen An der Jagst,48.967436,10.127776
 NewMotion DE-Enzberg-Mühlacker B,48.933677,8.804939
-NewMotion DE-Essenbach Daimlerstrasse,48.58663,12.189633
 NewMotion DE-Flensburg Friesische Straße,54.77812,9.415282
 NewMotion DE-Forchheim Äussere Nürnberger Straße,49.702908,11.061222
 NewMotion DE-Frankfurt Hanauer Landstraße,50.122496,8.742636
@@ -13775,6 +13805,7 @@ Shell CH-Villars-sur-Ollon Avenue Centrale,46.295072,7.055679
 
 ShellRecharge AT-Strengberg Westautobahn Autobahnstation A1,48.114623,14.666307
 ShellRecharge DE-Berg,50.372,11.787795
+ShellRecharge DE-Essenbach Daimlerstraße,48.586653,12.189322,20
 ShellRecharge DE-Filderstadt Echterdinger Straße,48.678336,9.192873,20
 ShellRecharge DE-Gießen Schiffenberger Weg,50.572413,8.690782,30
 ShellRecharge DE-Kamen Karree,51.568119,7.674458
@@ -14271,6 +14302,7 @@ Virta AT-Bad Fischau Industriegebiet B21,47.831789,16.186032
 Virta AT-Wiener Neudorf IZ-NÖ Süd Straße,48.07098,16.327825
 Virta CH-Feuerthalen Schützenstrasse,47.690757,8.647688
 Virta DE-Friedberg Frankfurter Straße,50.328552,8.750175
+Virta SE-Smygehamn Smyge strandväg,55.339217,13.35998
 
 Volkswagen DE-Aichtal Uferstraße 10,48.625343,9.261603
 Volkswagen DE-Alfeld (Leine) Senator-Behrens-Straße 6,51.992064,9.83923
