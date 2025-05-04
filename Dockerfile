@@ -7,17 +7,24 @@ RUN apt-get update && \
  apt-get upgrade && \
  apt-get install -y --no-install-recommends git && \
  apt-get install -y --no-install-recommends mariadb-client && \
- apt-get install -y optipng python3 python3.pip && \
+ # apt-get install -y optipng python3 python3.pip && \
+ apt-get install -y wget build-essential libreadline-dev libncursesw5-dev libssl-dev libsqlite3-dev tk-dev libgdbm-dev libc6-dev libbz2-dev libffi-dev zlib1g-dev && \
+ wget -c https://www.python.org/ftp/python/3.13.3/Python-3.13.3.tar.xz && \
+ tar -Jxvf Python-3.13.3.tar.xz && \
+ cd Python-3.13.3 && \
+ ./configure --enable-optimizations && \
+ make -j $(nproc) && \
+ make altinstall && \
  apt-get clean && \
  apt-get autoremove -y && \
  rm -rf /var/lib/apt/lists/* && \
  echo "export TERM=xterm" >> /root/.bashrc  && \
  echo "DOCKER" >> /tmp/teslalogger-DOCKER && \
  echo "DOCKER" >> /tmp/teslalogger-dockernet8 && \
- pip3 install grpc-stubs --break-system-packages && \
- pip3 install grpcio --break-system-packages && \
- pip3 install protobuf --break-system-packages && \
- pip3 install rich --break-system-packages
+ pip3.13 install grpc-stubs==1.53.0.5 --break-system-packages && \
+ pip3.13 install grpcio==1.67.1 --break-system-packages && \
+ pip3.13 install protobuf==5.29.1 --break-system-packages && \
+ pip3.13 install rich --break-system-packages
 
 RUN mkdir -p /etc/teslalogger
 RUN mkdir -p /etc/teslalogger/sqlschema

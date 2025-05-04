@@ -235,7 +235,7 @@ namespace TeslaLoggerNET8.Lucid
                 {
                     processInfo = new ProcessStartInfo
                     {
-                        FileName = "python3",
+                        FileName = "python3.13",
                         Arguments = @"/etc/lucidapi/examples/vehicle_info.py",
                         WorkingDirectory = @"/etc/lucidapi/examples",
                         RedirectStandardOutput = true,
