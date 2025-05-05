@@ -27,6 +27,9 @@ namespace TeslaLoggerNET8.Lucid
         private string gear_position;
         private double latitude;
         private double longitude;
+        private long last_updated_ms;
+        private double kwhr;
+        private double kw;
 
         internal LucidWebHelper(Car car) : base(car)
         {
@@ -60,8 +63,8 @@ namespace TeslaLoggerNET8.Lucid
             if (justinsertdb || isDriving)
             {
                 var ts = Tools.ToUnixTime(DateTime.UtcNow) * 1000;
-                _ = SendDataToAbetterrouteplannerAsync(ts, battery_level, speed, false, 0, latitude, longitude);
-                int id = car.DbHelper.InsertPos(ts.ToString(), latitude, longitude, (int)Math.Round(speed), null, car.CurrentJSON.current_odometer, Tools.MlToKm(ideal_battery_range, 1), Tools.MlToKm(ideal_battery_range, 1), battery_level, car.CurrentJSON.current_outside_temperature, elevation);
+                _ = SendDataToAbetterrouteplannerAsync(ts, battery_level, speed, false, kw, latitude, longitude);
+                int id = car.DbHelper.InsertPos(ts.ToString(), latitude, longitude, (int)Math.Round(speed), (decimal)kw, car.CurrentJSON.current_odometer, Tools.MlToKm(ideal_battery_range, 1), Tools.MlToKm(ideal_battery_range, 1), battery_level, car.CurrentJSON.current_outside_temperature, elevation);
                 car.Log("Insert Pos " + id);
             }
             
@@ -101,8 +104,11 @@ namespace TeslaLoggerNET8.Lucid
         {
             var ts = DateTime.UtcNow - lastNewData;
             if (ts.TotalSeconds < 5)
-                return;    
-            
+                return;
+
+            var last_updated_ms_before = last_updated_ms;
+            var kwhr_before = kwhr;
+
             //lastData = System.IO.File.ReadAllText(@"C:\dev\TeslaLoggerNET8\TeslaLogger\bin\Debug\net8.0\lucid\20250430122944434.txt");
             lastData = ExecuteShellCommand();
             lastNewData = DateTime.UtcNow;
@@ -152,6 +158,7 @@ namespace TeslaLoggerNET8.Lucid
                                 break;
                             case "kwhr":
                                 //Console.WriteLine($"Kwhr: {value}");
+                                kwhr = double.Parse(value, CultureInfo.InvariantCulture);
                                 break;
                             case "odometer_km":
                                 car.CurrentJSON.current_odometer = double.Parse(value, CultureInfo.InvariantCulture);
@@ -215,6 +222,10 @@ namespace TeslaLoggerNET8.Lucid
 
                                 gear_position = value;
                                 break;
+                            case "last_updated_ms":
+                                last_updated_ms = long.Parse(value, CultureInfo.InvariantCulture);
+                                DateTime lastUpdated = DateTimeOffset.FromUnixTimeMilliseconds(last_updated_ms).DateTime;
+                                break;
 
                             default:
                                 //Console.WriteLine($"Unknown Key: '{key}', Value: {value}");
@@ -228,6 +239,17 @@ namespace TeslaLoggerNET8.Lucid
                     car.Log($"Error parsing line '{line}': {ex.Message}");
                 }
             }
+
+            if (last_updated_ms_before != last_updated_ms)
+            {
+                var kwhrdiff = kwhr_before - kwhr;
+                var ms = last_updated_ms - last_updated_ms_before;
+                var p = kwhrdiff / 60.0 / 60.0 * (double)ms;
+
+                kw = p;
+                car.Log("kw " + kw);
+            }
+
             car.CurrentJSON.CreateCurrentJSON();
         }
 
