@@ -60,6 +60,7 @@ namespace TeslaLoggerNET8.Lucid
             if (justinsertdb || isDriving)
             {
                 var ts = Tools.ToUnixTime(DateTime.UtcNow) * 1000;
+                _ = SendDataToAbetterrouteplannerAsync(ts, battery_level, speed, false, 0, latitude, longitude);
                 int id = car.DbHelper.InsertPos(ts.ToString(), latitude, longitude, (int)Math.Round(speed), null, car.CurrentJSON.current_odometer, Tools.MlToKm(ideal_battery_range, 1), Tools.MlToKm(ideal_battery_range, 1), battery_level, car.CurrentJSON.current_outside_temperature, elevation);
                 car.Log("Insert Pos " + id);
             }
@@ -82,6 +83,7 @@ namespace TeslaLoggerNET8.Lucid
             if (!justCheck)
             {
                 car.Log("Insert Charging " + batteryLevel);
+                _ = SendDataToAbetterrouteplannerAsync(ts, car.CurrentJSON.current_battery_level, 0, true, charger_power, car.CurrentJSON.GetLatitude(), car.CurrentJSON.GetLongitude());
                 car.DbHelper.InsertCharging(ts.ToString(), batteryLevel, charge_energy_added.ToString(), chargerPower,  (double)ideal_battery_range, (double)ideal_battery_range, "0", "0", "0", 0.0, car.IsHighFrequenceLoggingEnabled(true), "0", "0");
             }
 
@@ -146,7 +148,7 @@ namespace TeslaLoggerNET8.Lucid
                                 break;
                             case "charge_percent":
                                 battery_level = double.Parse(value, CultureInfo.InvariantCulture);
-                                car.CurrentJSON.current_battery_level = battery_level;
+                                car.CurrentJSON.current_battery_level = Math.Round(battery_level,1);
                                 break;
                             case "kwhr":
                                 //Console.WriteLine($"Kwhr: {value}");
@@ -187,7 +189,7 @@ namespace TeslaLoggerNET8.Lucid
                                 if (!value.Contains("HVAC"))
                                 {
                                     if (power != value)
-                                        car.Log("Power: " + value);
+                                        car.Log("Power: " + value + " Range: " + Tools.MlToKm(ideal_battery_range, 1));
                                     
                                     power = value;
                                 }
