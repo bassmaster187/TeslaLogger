@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using MySql.Data.MySqlClient;
+using Newtonsoft.Json.Linq;
 using System;
 using System.CodeDom.Compiler;
 using System.Collections.Generic;
@@ -35,9 +36,15 @@ namespace TeslaLoggerNET8.Lucid
         private double front_right_tire_pressure_bar;
         private double rear_right_tire_pressure_bar;
         private long tire_pressure_last_updated;
+        private double max_cell_temp;
+        private double min_cell_temp;
+        private double max_cell_temp_db;
+        private double min_cell_temp_db;
+
 
         internal LucidWebHelper(Car car) : base(car)
         {
+            car.CurrentJSON.current_car_version = car.DbHelper.GetLastCarVersion();
         }
 
         public override bool RestoreToken()
@@ -193,9 +200,10 @@ namespace TeslaLoggerNET8.Lucid
                             case "min_cell_temp":
                                 car.CurrentJSON.SMTCellTempAvg = double.Parse(value, CultureInfo.InvariantCulture);
                                 car.CurrentJSON.lastScanMyTeslaReceived = DateTime.Now;
+                                min_cell_temp = (double)car.CurrentJSON.SMTCellTempAvg;
                                 break;
                             case "software_version":
-                                car.CurrentJSON.current_car_version = value.Replace("\"","") + " 0000";
+                                handleCarVersion(value);
                                 break;
                             case "power":
                                 if (!value.Contains("HVAC"))
@@ -257,6 +265,10 @@ namespace TeslaLoggerNET8.Lucid
                                 }
                                 break;
 
+                            case "max_cell_temp":
+                                max_cell_temp = double.Parse(value, CultureInfo.InvariantCulture);
+                                break;
+
                             default:
                                 //Console.WriteLine($"Unknown Key: '{key}', Value: {value}");
                                 break;
@@ -272,16 +284,69 @@ namespace TeslaLoggerNET8.Lucid
 
             // calculate power in kW
             if (last_updated_ms_before != last_updated_ms && last_updated_ms_before > 0)
-            {
-                var kwhrdiff = kwhr_before - kwhr;
-                var ms = last_updated_ms - last_updated_ms_before;
-                double p = kwhrdiff * 3600000.0 / (double)ms;
+                CalculatePower(last_updated_ms_before, kwhr_before);
 
-                kw = p;
-                car.Log($"kwhr {kwhr} / kwhrdiff {kwhrdiff} / ms {ms} / p: {p}kW");
-            }
+            if (Math.Abs(max_cell_temp - max_cell_temp_db) > 0.25 || Math.Abs(min_cell_temp - min_cell_temp_db) > 0.25)
+                InsertBatteryTemperatureData();
 
             car.CurrentJSON.CreateCurrentJSON();
+        }
+
+        private void CalculatePower(long last_updated_ms_before, double kwhr_before)
+        {
+            var kwhrdiff = kwhr_before - kwhr;
+            var ms = last_updated_ms - last_updated_ms_before;
+            double p = kwhrdiff * 3600000.0 / (double)ms;
+
+            kw = p;
+            car.Log($"kwhr {kwhr} / kwhrdiff {kwhrdiff} / ms {ms} / p: {p}kW");
+        }
+
+        private void InsertBatteryTemperatureData()
+        {
+            try
+            {
+                car.Log("Insert Battery Temperature Data: " + min_cell_temp + " / " + max_cell_temp);
+                string sql = "insert into battery (ModuleTempMin, ModuleTempMax, CarID, date) values (@ModuleTempMin, @ModuleTempMax, @CarID, @date)";
+                using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+                using (var cmd = new MySqlCommand())
+                {
+                    con.Open();
+                    cmd.Connection = con;
+                    cmd.CommandText = sql;
+                    cmd.Parameters.AddWithValue("@ModuleTempMin", min_cell_temp);
+                    cmd.Parameters.AddWithValue("@ModuleTempMax", max_cell_temp);
+                    cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
+                    cmd.Parameters.AddWithValue("@date", DateTime.UtcNow);
+                    cmd.ExecuteNonQuery();
+                }
+                max_cell_temp_db = max_cell_temp;
+                min_cell_temp_db = min_cell_temp;
+            }
+            catch (Exception ex)
+            {
+                car.Log("Error inserting battery temperature data: " + ex.ToString());
+            }
+        }
+
+        private void handleCarVersion(string value)
+        {
+            string car_version = value.Replace("\"", "") + " 0000";
+
+            if (!String.IsNullOrEmpty(car_version))
+            {
+                if (car.CurrentJSON.current_car_version != car_version)
+                {
+                    car.Log("Car Version: " + car_version);
+                    car.CurrentJSON.current_car_version = car_version;
+
+                    car.DbHelper.SetCarVersion(car_version);
+
+                    car.webhelper.TaskerWakeupfile(true);
+                }
+
+            }
+
         }
 
         public string ExecuteShellCommand()
