@@ -30,6 +30,11 @@ namespace TeslaLoggerNET8.Lucid
         private long last_updated_ms;
         private double kwhr;
         private double kw;
+        private double front_left_tire_pressure_bar;
+        private double rear_left_tire_pressure_bar;
+        private double front_right_tire_pressure_bar;
+        private double rear_right_tire_pressure_bar;
+        private long tire_pressure_last_updated;
 
         internal LucidWebHelper(Car car) : base(car)
         {
@@ -227,6 +232,31 @@ namespace TeslaLoggerNET8.Lucid
                                 DateTime lastUpdated = DateTimeOffset.FromUnixTimeMilliseconds(last_updated_ms).DateTime;
                                 break;
 
+                            case "front_left_tire_pressure_bar":
+                                front_left_tire_pressure_bar = double.Parse(value, CultureInfo.InvariantCulture);
+                                break;
+                            case "front_right_tire_pressure_bar":
+                                front_right_tire_pressure_bar = double.Parse(value, CultureInfo.InvariantCulture);
+                                break;
+                            case "rear_left_tire_pressure_bar":
+                                rear_left_tire_pressure_bar = double.Parse(value, CultureInfo.InvariantCulture);
+                                break;
+                            case "rear_right_tire_pressure_bar":
+                                rear_right_tire_pressure_bar = double.Parse(value, CultureInfo.InvariantCulture);
+                                break;
+                            case "tire_pressure_last_updated":
+                                var tire_pressure_last_updated2 = long.Parse(value, CultureInfo.InvariantCulture);
+                                if (tire_pressure_last_updated2 != tire_pressure_last_updated)
+                                {
+                                    DateTime d = DateTimeOffset.FromUnixTimeMilliseconds(tire_pressure_last_updated2 * 1000).DateTime;
+                                    tire_pressure_last_updated = tire_pressure_last_updated2;
+                                    car.DbHelper.InsertTPMS(1, front_left_tire_pressure_bar, d);
+                                    car.DbHelper.InsertTPMS(2, front_right_tire_pressure_bar, d);
+                                    car.DbHelper.InsertTPMS(3, rear_left_tire_pressure_bar, d);
+                                    car.DbHelper.InsertTPMS(4, rear_right_tire_pressure_bar, d);
+                                }
+                                break;
+
                             default:
                                 //Console.WriteLine($"Unknown Key: '{key}', Value: {value}");
                                 break;
@@ -240,14 +270,15 @@ namespace TeslaLoggerNET8.Lucid
                 }
             }
 
-            if (last_updated_ms_before != last_updated_ms)
+            // calculate power in kW
+            if (last_updated_ms_before != last_updated_ms && last_updated_ms_before > 0)
             {
                 var kwhrdiff = kwhr_before - kwhr;
                 var ms = last_updated_ms - last_updated_ms_before;
-                var p = kwhrdiff / 60.0 / 60.0 * (double)ms;
+                double p = kwhrdiff * 3600000.0 / (double)ms;
 
                 kw = p;
-                car.Log("kw " + kw);
+                car.Log($"kwhr {kwhr} / kwhrdiff {kwhrdiff} / ms {ms} / p: {p}kW");
             }
 
             car.CurrentJSON.CreateCurrentJSON();
