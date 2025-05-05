@@ -283,21 +283,22 @@ namespace TeslaLoggerNET8.Lucid
                                 break;
 
                             case "variant":
-                                string temp = value.Replace("MODEL_VARIANT_", "");
+                                string tempVariant = value.Replace("MODEL_VARIANT_", "");
 
-                                if (car.TrimBadging != temp)
+                                if (car.TrimBadging != tempVariant)
                                 { 
-                                    car.TrimBadging = temp;
-                                    car.CarName = "Lucid Air " + temp;
+                                    car.TrimBadging = tempVariant;
+                                    car.ModelName = "Lucid Air " + tempVariant;
                                     car.WriteSettings();
                                     car.webhelper.TaskerWakeupfile(true);
                                 }
                                 break;
 
                             case "nickname":
-                                if (car.DisplayName != value)
+                                string tempNickname = value.Replace("\"", "");
+                                if (car.DisplayName != tempNickname)
                                 {
-                                    car.DisplayName = value;
+                                    car.DisplayName = tempNickname;
                                     car.WriteSettings();
                                     car.webhelper.TaskerWakeupfile(true);
                                 }
