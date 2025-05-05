@@ -13,11 +13,6 @@ namespace TeslaLoggerNET8.Lucid
         public LucidCar(int CarInDB, string TeslaName, string TeslaPasswort, int CarInAccount, string TeslaToken, DateTime TeslaTokenExpire, string ModelName, string cartype, string carspecialtype, string cartrimbadging, string displayname, string vin, string TaskerHash, double? WhTR, bool fleetAPI, TeslaState currentState = TeslaState.Start, string wheel_type = "") 
             : base(CarInDB, TeslaName, TeslaPasswort, CarInAccount, TeslaToken, TeslaTokenExpire, ModelName, cartype, carspecialtype, cartrimbadging, displayname, vin, TaskerHash, WhTR, fleetAPI, currentState, wheel_type)
         {
-            Allcars.Add(this);
-
-            dbHelper = new LucidDBHelper(this);
-            webhelper = new LucidWebHelper(this);
-
             Program.SuspendAPIMinutes = 0;
         }
     }

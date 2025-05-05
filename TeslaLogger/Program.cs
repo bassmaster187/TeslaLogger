@@ -296,16 +296,14 @@ namespace TeslaLogger
 #pragma warning disable CA2000 // Objekte verwerfen, bevor Bereich verloren geht
                 if (car_type == "LUCID")
                 {
-                    LucidCar car = new LucidCar(id, Name, Password, car_id_in_account, tesla_token, tesla_token_expire, Model_Name, car_type, car_special_type, car_trim_badging, display_name, vin, tasker_hash, wh_tr, fleetAPI, oldCarState, wheel_type);
+                    LucidCar car = new LucidCar(id, Name, Password, car_id_in_account, "LUCID", tesla_token_expire, Model_Name, car_type, car_special_type, car_trim_badging, display_name, vin, tasker_hash, wh_tr, fleetAPI, oldCarState, wheel_type);
                 }
                 else
                 {
-                    /* LUCID
                     Car car = new Car(id, Name, Password, car_id_in_account, tesla_token, tesla_token_expire, Model_Name, car_type, car_special_type, car_trim_badging, display_name, vin, tasker_hash, wh_tr, fleetAPI, oldCarState, wheel_type);
                     car.Raven = raven;
                     car._virtual_key = virtualKey;
                     car._access_type = access_type;
-                    */
                 }
 #pragma warning restore CA2000 // Objekte verwerfen, bevor Bereich verloren geht
             }

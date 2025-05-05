@@ -10,6 +10,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Exceptionless;
 using MySql.Data.MySqlClient;
+using TeslaLoggerNET8.Lucid;
 
 namespace TeslaLogger
 {
@@ -266,8 +267,17 @@ namespace TeslaLogger
                     {
                         Allcars.Add(this);
                     }
-                    DbHelper = new DBHelper(this);
-                    webhelper = new WebHelper(this);
+
+                    if (this is TeslaLoggerNET8.Lucid.LucidCar)
+                    {
+                        dbHelper = new LucidDBHelper(this);
+                        webhelper = new LucidWebHelper(this);
+                    }
+                    else
+                    {
+                        DbHelper = new DBHelper(this);
+                        webhelper = new WebHelper(this);
+                    }
 
                     if (CarInDB > 0 && !manualTokenRefreshNeeded)
                     {

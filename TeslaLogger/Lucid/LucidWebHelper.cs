@@ -45,6 +45,19 @@ namespace TeslaLoggerNET8.Lucid
         internal LucidWebHelper(Car car) : base(car)
         {
             car.CurrentJSON.current_car_version = car.DbHelper.GetLastCarVersion();
+
+            byte[] tempTasker = Encoding.UTF8.GetBytes(car.Vin + car.TeslaName);
+
+            string oldTaskerHash = car.TaskerHash;
+
+            car.TaskerHash = string.Empty;
+            using (DamienG.Security.Cryptography.Crc32 crc32 = new DamienG.Security.Cryptography.Crc32())
+            {
+                foreach (byte b in crc32.ComputeHash(tempTasker))
+                {
+                    car.TaskerHash += b.ToString("x2").ToLower();
+                }
+            }
         }
 
         public override bool RestoreToken()
@@ -152,7 +165,7 @@ namespace TeslaLoggerNET8.Lucid
                                 longitude = double.Parse(value, CultureInfo.InvariantCulture);
                                 break;
                             case "elevation":
-                                elevation = ((int)(double.Parse(value, CultureInfo.InvariantCulture)) / 100.0).ToString() ;
+                                elevation = ((int)(double.Parse(value, CultureInfo.InvariantCulture)) / 100.0).ToString();
                                 break;
                             case "heading_precise":
                                 car.CurrentJSON.heading = (int)double.Parse(value, CultureInfo.InvariantCulture);
@@ -166,7 +179,7 @@ namespace TeslaLoggerNET8.Lucid
                                 break;
                             case "charge_percent":
                                 battery_level = double.Parse(value, CultureInfo.InvariantCulture);
-                                car.CurrentJSON.current_battery_level = Math.Round(battery_level,1);
+                                car.CurrentJSON.current_battery_level = Math.Round(battery_level, 1);
                                 break;
                             case "kwhr":
                                 //Console.WriteLine($"Kwhr: {value}");
@@ -210,7 +223,7 @@ namespace TeslaLoggerNET8.Lucid
                                 {
                                     if (power != value)
                                         car.Log("Power: " + value + " Range: " + Tools.MlToKm(ideal_battery_range, 1));
-                                    
+
                                     power = value;
                                 }
                                 break;
@@ -267,6 +280,27 @@ namespace TeslaLoggerNET8.Lucid
 
                             case "max_cell_temp":
                                 max_cell_temp = double.Parse(value, CultureInfo.InvariantCulture);
+                                break;
+
+                            case "variant":
+                                string temp = value.Replace("MODEL_VARIANT_", "");
+
+                                if (car.TrimBadging != temp)
+                                { 
+                                    car.TrimBadging = temp;
+                                    car.CarName = "Lucid Air " + temp;
+                                    car.WriteSettings();
+                                    car.webhelper.TaskerWakeupfile(true);
+                                }
+                                break;
+
+                            case "nickname":
+                                if (car.DisplayName != value)
+                                {
+                                    car.DisplayName = value;
+                                    car.WriteSettings();
+                                    car.webhelper.TaskerWakeupfile(true);
+                                }
                                 break;
 
                             default:
@@ -412,6 +446,11 @@ namespace TeslaLoggerNET8.Lucid
 
         internal override void CheckRefreshToken()
         {
+        }
+
+        public override string GetToken()
+        {
+            return "LUCID";
         }
     }
 }

@@ -377,7 +377,7 @@ namespace TeslaLogger
                 System.IO.File.WriteAllText("Logfile_GetToken_" + name + ".txt", resultContent);
         }
 
-        public string GetToken()
+        public virtual string GetToken()
         {
             string resultContent = "";
             MatchCollection m;
