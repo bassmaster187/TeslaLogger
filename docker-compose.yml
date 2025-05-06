@@ -16,6 +16,8 @@ services:
       - TZ=Europe/Berlin
     ports:
       - 5010:5000
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
 
   database:
     image: mariadb:10.4.7
@@ -31,6 +33,8 @@ services:
       - ./mysql:/var/lib/mysql
     ports:
       - 3306:3306
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
 
   grafana:
     image: bassmaster187/teslalogger-grafana:latest
@@ -45,6 +49,8 @@ services:
       - 3000:3000
     depends_on:
       - database
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
 
   webserver:
     image: bassmaster187/teslalogger-webserver:latest
@@ -59,6 +65,8 @@ services:
       - 8888:80
     environment:
       - TZ=Europe/Berlin
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
   watchtower:
     image: containrrr/watchtower
     volumes:
@@ -66,6 +74,7 @@ services:
     command: --debug --http-api-update 
     environment:
       - WATCHTOWER_HTTP_API_TOKEN=teslalogger
+      - WATCHTOWER_LABEL_ENABLE=true
 
 volumes:
     teslalogger-tmp:
