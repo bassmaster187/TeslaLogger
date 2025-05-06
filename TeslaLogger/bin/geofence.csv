@@ -2410,6 +2410,7 @@ Supercharger GB-Bristol,51.477207,-2.706308
 Supercharger GB-Bristol,51.526694,-2.599806
 Supercharger GB-Burtonwood,53.417605,-2.639522
 Supercharger-V3 GB-Camborne,50.227643,-5.279001
+Supercharger-V4 GB-Cambridge,52.256509,0.016594
 Supercharger-V3 GB-Cardiff,51.531534,-3.139834
 Supercharger-V3 GB-Carmarthen,51.858422,-4.310869
 Supercharger GB-Chorley,53.630562,-2.692578
@@ -5250,6 +5251,8 @@ AGRAVIS DE-Münster Industrieweg,51.9607,7.6261
 AGRAVIS DE-Thedinghausen Auf dem Rövekamp,52.962875,9.023485
 AGRAVIS DE-Vettweiß An der Tankstelle,50.73148,6.596273
 
+AGROLA CH-Matzingen St. Gallerstrasse,47.515133,8.936507
+
 Albwerk DE-Winterbach Bahnhofstraße,48.799156,9.480962
 
 Aldi DE-Aachen Neuenhofstraße,50.760742,6.152673
@@ -6018,6 +6021,7 @@ ARAL DE-Celle Siedemeierkamp,52.600738,10.10726,25
 ARAL DE-Dettelbach,49.778176,10.0658,20
 ARAL DE-Dettelbach,49.778618,10.065659
 ARAL DE-Dummerstorf Manfred-Roth-Straße,54.021956,12.230515
+ARAL DE-Dätgen Grotwisch,54.180523,9.944185,25
 ARAL DE-Elstal,52.540089,12.977459
 ARAL DE-Ettenheim,48.274746,7.785175
 ARAL DE-Ettlingen Karlsruher Straße,48.957989,8.406616
@@ -6077,6 +6081,7 @@ Audi DE-St. Augustin Einsteinstraße,50.789961,7.182174,15
 Audi DE-Stuttgart Heilbronner Straße,48.818214,9.176391
 Audi DE-Zwickau Oskar-Arnold-Straße,50.708891,12.502916
 
+autoSense CH-Fislisbach Winkelstrasse,47.441401,8.295446
 autoSense CH-Sihlbrugg Zugerstrasse,47.217321,8.576232
 
 autostrom.plus DE-Midlum A27 West,53.72631,8.660925
@@ -6104,8 +6109,10 @@ be.energised DE-Kassel Porsche,51.304914,9.528714
 be.energised DE-Unterschleißheim Audi Kölbl,48.28313,11.567575
 
 BeCharge AT-Pirching an der Raab Pirching,47.089466,15.732672
+BeCharge IT-Alba Adriatica Piazza Aldo Moro,42.835346,13.930695
 BeCharge IT-Albenga Regione Cime di Leca,44.066007,8.176305
 BeCharge IT-Arona Via Vittorio Veneto,45.753495,8.543138
+BeCharge IT-Bressanone Peter-Mayr-Straße,46.720221,11.655295
 BeCharge IT-Ponte di Legno Via Cida,46.257058,10.510159
 BeCharge IT-San Giuliano Terme Via Giosuè Carducci,43.724815,10.418244
 BeCharge IT-San Vittore Olona Via Sempione,45.591317,8.935639
@@ -7645,7 +7652,10 @@ Electric55 FR-Grimaud Avenue de la Mer,43.274918,6.577813
 electrip HR-Zagreb Oreškovićeva ulica,45.759464,15.98306
 electrip HR-Zagreb Ulica Velimira Škorpika,45.796794,15.859543
 
+ELEN HR-Brinje Autocesta A1,45.00604,15.128411
+ELEN HR-Brinje Autocesta A1,45.007105,15.128201
 ELEN HR-Kanfanar,45.12281,1383895.0
+ELEN HR-Karlovac Straža,45.456172,15.378477
 ELEN HR-Motovun,45.331222,13.824982
 ELEN HR-Opatija Štangerova,45.347349,14.319122
 ELEN HR-Poreč,45.22419,1359817.0
@@ -7906,10 +7916,10 @@ EnBW DE-Braunsbach Marktplatz,49.199483,9.792348
 EnBW DE-Braunschweig Bauhaus,52.215153,10.530136
 EnBW DE-Braunschweig Hildesheimer Str. Bauhaus,52.271381,10.497193
 EnBW DE-Breitengüßbach,49.973346,10.87513
-EnBW DE-Bremen Bauhaus,53.07245,8.86271
 EnBW DE-Bremen Burger King,53.053192,8.74211
 EnBW DE-Bremen Hemmstr.,53.100479,8.814605
 EnBW DE-Bremen Shell,53.082095,8.876911
+EnBW DE-Bremen Stresemannstraße,53.072197,8.86187
 EnBW DE-Bremen-Osterholz Bauhaus,53.052164,8.962116
 EnBW DE-Bremerhaven,53.54537,8.59281
 EnBW DE-Bretten Am Viehmarkt,49.03597,8.70304
@@ -8067,6 +8077,7 @@ EnBW DE-Edewecht,53.12326,8.085511
 EnBW DE-Edingen-Neckarhausen Hauptstr.,49.46408,8.602485
 EnBW DE-Edingen-Neckarhausen Mannheimer Straße,49.451323,8.603817
 EnBW DE-Egelsbach Kurt-Schumacher-Ring,49.961826,8.670718
+EnBW DE-Eggenfelden Schellenbruckplatz,48.400376,12.74881
 EnBW DE-Eggenstein-Leopoldshafen Hermann-von-Helmholtz-Platz,49.09185,8.42848
 EnBW DE-Ehingen (Donau) Riedlinger Straße,48.282052,9.712327
 EnBW DE-Ehingen Ortsteil Dächingen Bruder-Johannes-Str.,48.309945,9.613925
@@ -9384,7 +9395,7 @@ EnBW DE-Wetzlar Shell,50.545655,8.529394
 EnBW DE-Weyerbusch,50.713436,7.560886
 EnBW DE-Wiehl Wiesenstraße,50.946226,7.5502
 EnBW DE-Wiehl,50.94602,7.54929
-EnBW DE-Wiesbaden Erich-Ollenhauer-Straße,50.06148,8.21726
+EnBW DE-Wiesbaden Erich-Ollenhauer-Straße,50.061922,8.217125
 EnBW DE-Wiesloch Adelsförsterpfad,49.2948,8.667
 EnBW DE-Wiesloch In den Ziegelwiesen,49.2905,8.6648
 EnBW DE-Wiesloch Meßplatzstr.,49.293157,8.701533
@@ -9617,6 +9628,7 @@ Eviny NO-Andenes Industriveien,69.309859,16.100335
 Eviny NO-Kristiansund Kongens Plass,63.110416,7.728622
 Eviny NO-Svelgen Gunnar Scheldrups veg,61.76843,5.292211
 Eviny NO-Ålesund Nedre Strandgate,62.469703,6.148216
+Eviny NP-Tau Fiskåvegen,59.065012,5.920978
 Eviny SE-Hyllinge Dragaregatan,56.100975,12.857447
 
 EVM DE-Cochem Bahnhofsvorplatz,50.153328,7.167515
@@ -10134,6 +10146,7 @@ EWE-GO DE-Löningen Poststraße,52.734376,7.759257
 EWE-GO DE-Löningen Ringstraße,52.742508,7.759159
 EWE-GO DE-Löningen Tabbenstraße,52.73443,7.75663
 EWE-GO DE-Lübbecke Thyssenstraße,52.32146,8.62589
+EWE-GO DE-Lübbecke Zeiss-Straße,52.325526,8.623601
 EWE-GO DE-Lübbenau/Spreewald LPG-Straße,51.84966,13.90757
 EWE-GO DE-Lübeck Bei der Lohmühle,53.880904,10.673955
 EWE-GO DE-Lübeck Hinter den Kirschkaten,53.848088,10.677746
@@ -11925,6 +11938,7 @@ LadeverbundPlus DE-Tauberbischofsheim,49.630349,9.666165
 LadeverbundPlus DE-Wilhermsdorf,49.4811,10.716472
 
 Last-Mile-Solutions DE-Darmstadt Dornheimer Weg,49.874904,8.625082
+Last-Mile-Solutions DE-Lorsch Lindenstraße,49.659077,8.567135
 Last-Mile-Solutions DE-Sinzig Bahnhofstraße,50.556655,7.217666
 
 LEW DE-Deffingen,48.433701,10.292805,10
@@ -13018,7 +13032,6 @@ NewMotion DE-Hockenheim Max-Planck-Strasse,49.311163,8.558715
 NewMotion DE-Hohen Neuendorf Berliner Straße,52.660075,13.28714
 NewMotion DE-Husum Robert-Koch-Str.,54.493082,9.085125
 NewMotion DE-Illertissen Memminger Str.,48.217235,10.103004
-NewMotion DE-Itzehoe Lindenstraße,53.932372,9.482678
 NewMotion DE-Kahl am Main Aschaffenburger Strasse,50.063387,9.004958
 NewMotion DE-Karlsfeld Münchner Str.,48.224491,11.468557
 NewMotion DE-Kiel Hamburger Chaussee,54.301019,10.108457
@@ -13121,6 +13134,7 @@ nextmove DE-Arnstadt,50.830822,10.948586
 
 Nissan DE-Neustadt in Holstein Eutiner Straße,54.10199,10.799542
 
+nonoxx-pro DE-Itzehoe Wilhelm-Biel-Straße,53.926682,9.509129
 nonoxx-pro DE-Neustadt in Holstein Klosterstraße,54.10878,10.812887
 
 NRMA AU-Coonabarabran NSW Newell Highway,-31.27889,149.279255
@@ -13702,6 +13716,7 @@ Q1 DE-Westerrönfeld Kanaltunnel,54.280327,9.658604
 Recharge FI-Kärsämäki Pihtipudas Haapajärventie,63.974542,25.760347
 Recharge FI-Sodankylä,67.431695,26.57509
 Recharge FI-Tampere Kangasalantie,61.477127,23.873108
+Recharge NO-Jørpeland Stålverksvegen,59.01662,6.038172
 Recharge SE-Ljungby Ringvägen,56.814007,13.905327
 
 REHAU AT-Guntramsdorf Industriestrasse,48.066964,16.325111
@@ -13808,11 +13823,13 @@ ShellRecharge DE-Berg,50.372,11.787795
 ShellRecharge DE-Essenbach Daimlerstraße,48.586653,12.189322,20
 ShellRecharge DE-Filderstadt Echterdinger Straße,48.678336,9.192873,20
 ShellRecharge DE-Gießen Schiffenberger Weg,50.572413,8.690782,30
+ShellRecharge DE-Itzehoe Lindenstraße,53.933044,9.482901
 ShellRecharge DE-Kamen Karree,51.568119,7.674458
 ShellRecharge DE-Kirchheim,50.834146,9.574321,10
 ShellRecharge DE-Kirchheim,50.834252,9.574485,10
 ShellRecharge DE-Kraftsdorf,50.895948,11.979361,5
 ShellRecharge DE-Neu-Ulm,48.387577,10.03316
+ShellRecharge DE-Neuenstein-Aua Im Biegen,50.912754,9.576859
 ShellRecharge DE-Osnabrück,52.301747,7.949302
 ShellRecharge DE-Rheinstetten An der B36,48.954684,8.293244
 ShellRecharge DE-Schwerin Friedrich-Engels-Straße,53.59861,11.431833
@@ -13900,12 +13917,14 @@ SW-München DE-München Marklandstraße,48.092533,11.604476
 SW-München DE-München Maximilianstraße,48.139169,11.581335
 SW-München DE-München Steubenplatz,48.151145,11.520079
 SW-Münster DE-Münster Kiesekamps Mühle,51.949318,7.641345
+SW-Neumünster DE-Heiligenstedten Juliankadamm,53.934643,9.469525
 SW-Norden DE-Norden Dörper Weg,53.611416,7.155474
 SW-Rüsselsheim DE-Rüsselsheim am Main Am Sommerdamm,50.001808,8.42508
 SW-Schwarzenberg DE-Schwarzenberg Straße der Einheit,50.547186,12.787756
 SW-SH DE-Schleswig Lattenkamp,54.530127,9.529554
 SW-Sondershausen DE-Sondershausen Erfurter Straße,51.364575,10.844618
 SW-Sondershausen DE-Sondershausen Schachtstraße,51.387738,10.844689
+SW-Stralsund DE-Stralsund Greifswalder Chaussee,54.299996,13.093987
 SW-Velbert DE-Velbert Friedrichstraße,51.332307,7.055833
 SW-Weimar DE-Weimar Damaschkestraße,50.98012,11.309194
 SW-Weinheim DE-Heidelberg Englerstraße,49.365529,8.684117
