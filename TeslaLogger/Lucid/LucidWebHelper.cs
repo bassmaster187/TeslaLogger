@@ -89,7 +89,7 @@ namespace TeslaLoggerNET8.Lucid
             {
                 var ts = Tools.ToUnixTime(DateTime.UtcNow) * 1000;
                 _ = SendDataToAbetterrouteplannerAsync(ts, battery_level, speed, false, kw, latitude, longitude);
-                int id = car.DbHelper.InsertPos(ts.ToString(), latitude, longitude, (int)Math.Round(speed), (decimal)kw, car.CurrentJSON.current_odometer, Tools.MlToKm(ideal_battery_range, 1), Tools.MlToKm(ideal_battery_range, 1), battery_level, car.CurrentJSON.current_outside_temperature, elevation);
+                int id = car.DbHelper.InsertPos(ts.ToString(), latitude, longitude, (int)Math.Round(speed), (decimal)kw, car.CurrentJSON.current_odometer, ideal_battery_range, ideal_battery_range, battery_level, car.CurrentJSON.current_outside_temperature, elevation);
                 car.Log("Insert Pos " + id);
             }
             
@@ -112,7 +112,7 @@ namespace TeslaLoggerNET8.Lucid
             {
                 car.Log("Insert Charging " + batteryLevel);
                 _ = SendDataToAbetterrouteplannerAsync(ts, car.CurrentJSON.current_battery_level, 0, true, charger_power, car.CurrentJSON.GetLatitude(), car.CurrentJSON.GetLongitude());
-                car.DbHelper.InsertCharging(ts.ToString(), batteryLevel, charge_energy_added.ToString(), chargerPower,  (double)ideal_battery_range, (double)ideal_battery_range, "0", "0", "0", 0.0, car.IsHighFrequenceLoggingEnabled(true), "0", "0");
+                car.DbHelper.InsertCharging(ts.ToString(), batteryLevel, charge_energy_added.ToString(), chargerPower,  (double)Tools.KmToMl(ideal_battery_range,1), (double)Tools.KmToMl(ideal_battery_range,1), "0", "0", "0", 0.0, car.IsHighFrequenceLoggingEnabled(true), "0", "0");
             }
 
             return charging;
@@ -174,7 +174,7 @@ namespace TeslaLoggerNET8.Lucid
                                 // Console.WriteLine($"Position Time: {value}");
                                 break;
                             case "remaining_range":
-                                ideal_battery_range = Tools.KmToMl(double.Parse(value, CultureInfo.InvariantCulture));
+                                ideal_battery_range = Math.Round(double.Parse(value, CultureInfo.InvariantCulture));
                                 car.CurrentJSON.current_ideal_battery_range_km = ideal_battery_range;
                                 break;
                             case "charge_percent":
@@ -222,7 +222,7 @@ namespace TeslaLoggerNET8.Lucid
                                 if (!value.Contains("HVAC"))
                                 {
                                     if (power != value)
-                                        car.Log("Power: " + value + " Range: " + Tools.MlToKm(ideal_battery_range, 1));
+                                        car.Log("Power: " + value + " Range: " + ideal_battery_range);
 
                                     power = value;
                                 }
