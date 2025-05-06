@@ -1,0 +1,177 @@
+import user_profile_service_pb2 as _user_profile_service_pb2
+import vehicle_state_service_pb2 as _vehicle_state_service_pb2
+from google.protobuf.internal import containers as _containers
+from google.protobuf.internal import enum_type_wrapper as _enum_type_wrapper
+from google.protobuf import descriptor as _descriptor
+from google.protobuf import message as _message
+from typing import ClassVar as _ClassVar, Iterable as _Iterable, Mapping as _Mapping, Optional as _Optional, Union as _Union
+
+DESCRIPTOR: _descriptor.FileDescriptor
+
+class NotificationChannelType(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
+    __slots__ = ()
+    NOTIFICATION_CHANNEL_UNKNOWN: _ClassVar[NotificationChannelType]
+    NOTIFICATION_CHANNEL_ONE: _ClassVar[NotificationChannelType]
+    NOTIFICATION_CHANNEL_TWO: _ClassVar[NotificationChannelType]
+
+class Os(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
+    __slots__ = ()
+    OS_UNKNOWN: _ClassVar[Os]
+    OS_IOS: _ClassVar[Os]
+    OS_ANDROID: _ClassVar[Os]
+
+class Subscription(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
+    __slots__ = ()
+    SUBSCRIPTION_UNKNOWN: _ClassVar[Subscription]
+    SUBSCRIPTION_CHARGE: _ClassVar[Subscription]
+    SUBSCRIPTION_SECURITY: _ClassVar[Subscription]
+    SUBSCRIPTION_SOFTWARE: _ClassVar[Subscription]
+    SUBSCRIPTION_HVAC: _ClassVar[Subscription]
+    SUBSCRIPTION_REQUIRED: _ClassVar[Subscription]
+    SUBSCRIPTION_CDR_EMAIL: _ClassVar[Subscription]
+    SUBSCRIPTION_SUBSCRIPTION: _ClassVar[Subscription]
+
+class Encryption(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
+    __slots__ = ()
+    ENCRYPTION_UNKNOWN: _ClassVar[Encryption]
+    ENCRYPTION_SINGLE: _ClassVar[Encryption]
+NOTIFICATION_CHANNEL_UNKNOWN: NotificationChannelType
+NOTIFICATION_CHANNEL_ONE: NotificationChannelType
+NOTIFICATION_CHANNEL_TWO: NotificationChannelType
+OS_UNKNOWN: Os
+OS_IOS: Os
+OS_ANDROID: Os
+SUBSCRIPTION_UNKNOWN: Subscription
+SUBSCRIPTION_CHARGE: Subscription
+SUBSCRIPTION_SECURITY: Subscription
+SUBSCRIPTION_SOFTWARE: Subscription
+SUBSCRIPTION_HVAC: Subscription
+SUBSCRIPTION_REQUIRED: Subscription
+SUBSCRIPTION_CDR_EMAIL: Subscription
+SUBSCRIPTION_SUBSCRIPTION: Subscription
+ENCRYPTION_UNKNOWN: Encryption
+ENCRYPTION_SINGLE: Encryption
+
+class LoginRequest(_message.Message):
+    __slots__ = ("username", "password", "notification_channel_type", "os", "notification_device_token", "locale", "device_id", "client_name")
+    USERNAME_FIELD_NUMBER: _ClassVar[int]
+    PASSWORD_FIELD_NUMBER: _ClassVar[int]
+    NOTIFICATION_CHANNEL_TYPE_FIELD_NUMBER: _ClassVar[int]
+    OS_FIELD_NUMBER: _ClassVar[int]
+    NOTIFICATION_DEVICE_TOKEN_FIELD_NUMBER: _ClassVar[int]
+    LOCALE_FIELD_NUMBER: _ClassVar[int]
+    DEVICE_ID_FIELD_NUMBER: _ClassVar[int]
+    CLIENT_NAME_FIELD_NUMBER: _ClassVar[int]
+    username: str
+    password: str
+    notification_channel_type: NotificationChannelType
+    os: Os
+    notification_device_token: str
+    locale: str
+    device_id: str
+    client_name: str
+    def __init__(self, username: _Optional[str] = ..., password: _Optional[str] = ..., notification_channel_type: _Optional[_Union[NotificationChannelType, str]] = ..., os: _Optional[_Union[Os, str]] = ..., notification_device_token: _Optional[str] = ..., locale: _Optional[str] = ..., device_id: _Optional[str] = ..., client_name: _Optional[str] = ...) -> None: ...
+
+class SessionInfo(_message.Message):
+    __slots__ = ("id_token", "expiry_time_sec", "refresh_token", "gigya_jwt")
+    ID_TOKEN_FIELD_NUMBER: _ClassVar[int]
+    EXPIRY_TIME_SEC_FIELD_NUMBER: _ClassVar[int]
+    REFRESH_TOKEN_FIELD_NUMBER: _ClassVar[int]
+    GIGYA_JWT_FIELD_NUMBER: _ClassVar[int]
+    id_token: str
+    expiry_time_sec: int
+    refresh_token: str
+    gigya_jwt: str
+    def __init__(self, id_token: _Optional[str] = ..., expiry_time_sec: _Optional[int] = ..., refresh_token: _Optional[str] = ..., gigya_jwt: _Optional[str] = ...) -> None: ...
+
+class LoginResponse(_message.Message):
+    __slots__ = ("uid", "session_info", "user_profile", "user_vehicle_data", "subscriptions", "encryption")
+    UID_FIELD_NUMBER: _ClassVar[int]
+    SESSION_INFO_FIELD_NUMBER: _ClassVar[int]
+    USER_PROFILE_FIELD_NUMBER: _ClassVar[int]
+    USER_VEHICLE_DATA_FIELD_NUMBER: _ClassVar[int]
+    SUBSCRIPTIONS_FIELD_NUMBER: _ClassVar[int]
+    ENCRYPTION_FIELD_NUMBER: _ClassVar[int]
+    uid: str
+    session_info: SessionInfo
+    user_profile: _user_profile_service_pb2.UserProfile
+    user_vehicle_data: _containers.RepeatedCompositeFieldContainer[_vehicle_state_service_pb2.Vehicle]
+    subscriptions: _containers.RepeatedScalarFieldContainer[Subscription]
+    encryption: Encryption
+    def __init__(self, uid: _Optional[str] = ..., session_info: _Optional[_Union[SessionInfo, _Mapping]] = ..., user_profile: _Optional[_Union[_user_profile_service_pb2.UserProfile, _Mapping]] = ..., user_vehicle_data: _Optional[_Iterable[_Union[_vehicle_state_service_pb2.Vehicle, _Mapping]]] = ..., subscriptions: _Optional[_Iterable[_Union[Subscription, str]]] = ..., encryption: _Optional[_Union[Encryption, str]] = ...) -> None: ...
+
+class GetNewJWTTokenRequest(_message.Message):
+    __slots__ = ("refresh_token",)
+    REFRESH_TOKEN_FIELD_NUMBER: _ClassVar[int]
+    refresh_token: str
+    def __init__(self, refresh_token: _Optional[str] = ...) -> None: ...
+
+class GetNewJWTTokenResponse(_message.Message):
+    __slots__ = ("session_info",)
+    SESSION_INFO_FIELD_NUMBER: _ClassVar[int]
+    session_info: SessionInfo
+    def __init__(self, session_info: _Optional[_Union[SessionInfo, _Mapping]] = ...) -> None: ...
+
+class ConfirmResetPinRequest(_message.Message):
+    __slots__ = ()
+    def __init__(self) -> None: ...
+
+class ConfirmResetPinResponse(_message.Message):
+    __slots__ = ()
+    def __init__(self) -> None: ...
+
+class GetSubscriptionRequest(_message.Message):
+    __slots__ = ()
+    def __init__(self) -> None: ...
+
+class GetSubscriptionResponse(_message.Message):
+    __slots__ = ("subscriptions",)
+    SUBSCRIPTIONS_FIELD_NUMBER: _ClassVar[int]
+    subscriptions: _containers.RepeatedScalarFieldContainer[Subscription]
+    def __init__(self, subscriptions: _Optional[_Iterable[_Union[Subscription, str]]] = ...) -> None: ...
+
+class GetUserVehiclesRequest(_message.Message):
+    __slots__ = ()
+    def __init__(self) -> None: ...
+
+class GetUserVehiclesResponse(_message.Message):
+    __slots__ = ("user_vehicle_data",)
+    USER_VEHICLE_DATA_FIELD_NUMBER: _ClassVar[int]
+    user_vehicle_data: _containers.RepeatedCompositeFieldContainer[_vehicle_state_service_pb2.Vehicle]
+    def __init__(self, user_vehicle_data: _Optional[_Iterable[_Union[_vehicle_state_service_pb2.Vehicle, _Mapping]]] = ...) -> None: ...
+
+class LogoutRequest(_message.Message):
+    __slots__ = ()
+    def __init__(self) -> None: ...
+
+class LogoutResponse(_message.Message):
+    __slots__ = ()
+    def __init__(self) -> None: ...
+
+class RefreshNotificationTokenRequest(_message.Message):
+    __slots__ = ()
+    def __init__(self) -> None: ...
+
+class RefreshNotificationTokenResponse(_message.Message):
+    __slots__ = ()
+    def __init__(self) -> None: ...
+
+class SetNickNameRequest(_message.Message):
+    __slots__ = ("vehicle_id", "nickname")
+    VEHICLE_ID_FIELD_NUMBER: _ClassVar[int]
+    NICKNAME_FIELD_NUMBER: _ClassVar[int]
+    vehicle_id: str
+    nickname: str
+    def __init__(self, vehicle_id: _Optional[str] = ..., nickname: _Optional[str] = ...) -> None: ...
+
+class SetNickNameResponse(_message.Message):
+    __slots__ = ()
+    def __init__(self) -> None: ...
+
+class SetSubscriptionRequest(_message.Message):
+    __slots__ = ()
+    def __init__(self) -> None: ...
+
+class SetSubscriptionResponse(_message.Message):
+    __slots__ = ()
+    def __init__(self) -> None: ...
