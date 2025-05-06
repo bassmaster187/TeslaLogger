@@ -15,5 +15,10 @@ namespace TeslaLoggerNET8.Lucid
         {
             Program.SuspendAPIMinutes = 0;
         }
+
+        internal override bool SupportedByFleetTelemetry()
+        {
+            return false;
+        }
     }
 }
