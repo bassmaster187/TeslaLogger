@@ -61,3 +61,13 @@ Password: teslalogger
 Make sure to make a test drive / charging before using Grafana otherwise you will see just boring empty dashboards.
 
 ![image](https://github.com/user-attachments/assets/111ea889-ed96-4d05-aaaa-8170b7edea7c)
+
+Also check the regular Teslalogger docs / infos:
+
+https://github.com/bassmaster187/TeslaLogger
+
+
+## Donations
+
+[![Paypal Donate](https://img.shields.io/badge/Donate-PayPal-ff69b4.svg)](http://paypal.me/ChristianPogea)
+
