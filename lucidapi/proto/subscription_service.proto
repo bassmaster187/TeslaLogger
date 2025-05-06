@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+package mobilegateway.protos;
+
+message GetUserActiveEntitlementsRequest {}
+message GetUserActiveEntitlementsResponse {}
+
+service SubscriptionService {
+    rpc GetUserActiveEntitlements(GetUserActiveEntitlementsRequest) returns (GetUserActiveEntitlementsResponse) {}
+}

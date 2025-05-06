@@ -26,12 +26,14 @@ RUN apt-get update && \
  pip3.13 install protobuf==5.29.1 --break-system-packages && \
  pip3.13 install rich --break-system-packages
 
+RUN mkdir -p /etc/lucidapi
 RUN mkdir -p /etc/teslalogger
 RUN mkdir -p /etc/teslalogger/sqlschema
 RUN mkdir -p /etc/teslalogger/git/TeslaLogger/Grafana
 RUN mkdir -p /etc/teslalogger/git/TeslaLogger/GrafanaConfig
 RUN mkdir -p /etc/teslalogger/git/TeslaLogger/GrafanaPlugins
 
+COPY lucidapi /etc/lucidapi
 COPY TeslaLogger/sqlschema.sql /etc/teslalogger/sqlschema
 COPY --chmod=777 TeslaLogger/bin /etc/teslalogger/
 COPY TeslaLogger/Grafana /etc/teslalogger/git/TeslaLogger/Grafana

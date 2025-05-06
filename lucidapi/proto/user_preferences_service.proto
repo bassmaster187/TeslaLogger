@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+package mobilegateway.protos;
+
+message Empty {}
+
+message UserPreferences {
+    string first_name = 1;
+    string last_name = 2;
+    string photo_url = 4;
+    uint64 updated_ns = 18;
+    string email = 19;
+}
+
+message GetUserPreferencesResponse {
+    UserPreferences preferences = 1;
+    uint64 commit_ns = 2;
+}
+
+message CreateUserPreferencesRequest {
+    UserPreferences preferences = 1;
+}
+
+message GetUserPreferencesCommitIDResponse {
+    uint64 commit_ns = 1;
+}
+
+service UserPreferencesService {
+    rpc CreateUserPreferences(CreateUserPreferencesRequest) returns (Empty) {}
+    rpc GetUserPreferences(Empty) returns (GetUserPreferencesResponse) {}
+    rpc GetUserPreferencesCommitID(Empty) returns (Empty) {}
+    rpc SetUserPreferences(Empty) returns (Empty) {}
+}

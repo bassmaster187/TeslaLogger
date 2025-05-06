@@ -1,0 +1,112 @@
+syntax = "proto3";
+
+package mobilegateway.protos;
+
+import "user_profile_service.proto";
+import "vehicle_state_service.proto";
+
+enum NotificationChannelType {
+    NOTIFICATION_CHANNEL_UNKNOWN = 0;
+    /* No idea what these actually mean, but these are the only accepted values */
+    /* One of these is FIREBASE */
+    NOTIFICATION_CHANNEL_ONE = 1;
+    NOTIFICATION_CHANNEL_TWO = 2;
+}
+
+enum Os {
+    OS_UNKNOWN = 0;
+    /* Could have these backwards */
+    OS_IOS = 1;
+    OS_ANDROID = 2;
+}
+
+message LoginRequest {
+    string username = 1;
+    string password = 2;
+    NotificationChannelType notification_channel_type = 3;
+    Os os = 4;
+    string notification_device_token = 5;
+    string locale = 6;
+    optional string device_id = 7;
+    optional string client_name = 8;
+}
+
+message SessionInfo {
+    string id_token = 1;
+    int32 expiry_time_sec = 2;
+    optional string refresh_token = 3;
+    string gigya_jwt = 4;
+}
+
+enum Subscription {
+    SUBSCRIPTION_UNKNOWN = 0;
+    SUBSCRIPTION_CHARGE = 1;
+    SUBSCRIPTION_SECURITY = 2;
+    SUBSCRIPTION_SOFTWARE = 3;
+    SUBSCRIPTION_HVAC = 4;
+    SUBSCRIPTION_REQUIRED = 5;
+    SUBSCRIPTION_CDR_EMAIL = 6;
+    SUBSCRIPTION_SUBSCRIPTION = 7;
+}
+
+enum Encryption {
+    ENCRYPTION_UNKNOWN = 0;
+    ENCRYPTION_SINGLE = 1;
+}
+
+message LoginResponse {
+    string uid = 1;
+    SessionInfo session_info = 2;
+    UserProfile user_profile = 3;
+    repeated Vehicle user_vehicle_data = 4;
+    repeated Subscription subscriptions = 5;
+    Encryption encryption = 6;
+}
+
+message GetNewJWTTokenRequest {
+    string refresh_token = 1;
+}
+
+message GetNewJWTTokenResponse {
+    SessionInfo session_info = 1;
+}
+
+message ConfirmResetPinRequest {}
+message ConfirmResetPinResponse {}
+
+message GetSubscriptionRequest {}
+message GetSubscriptionResponse {
+    repeated Subscription subscriptions = 1;
+}
+
+message GetUserVehiclesRequest {}
+message GetUserVehiclesResponse {
+    repeated Vehicle user_vehicle_data = 1;
+}
+
+message LogoutRequest {}
+message LogoutResponse {}
+
+message RefreshNotificationTokenRequest {}
+message RefreshNotificationTokenResponse {}
+
+message SetNickNameRequest {
+    string vehicle_id = 1;
+    string nickname = 2;
+}
+message SetNickNameResponse {}
+
+message SetSubscriptionRequest {}
+message SetSubscriptionResponse {}
+
+service LoginSession {
+    rpc ConfirmResetPin(ConfirmResetPinRequest) returns (ConfirmResetPinResponse) {}
+    rpc GetNewJWTToken(GetNewJWTTokenRequest) returns (GetNewJWTTokenResponse) {}
+    rpc GetSubscription(GetSubscriptionRequest) returns (GetSubscriptionResponse) {}
+    rpc GetUserVehicles(GetUserVehiclesRequest) returns (GetUserVehiclesResponse) {}
+    rpc Login(LoginRequest) returns (LoginResponse) {}
+    rpc Logout(LogoutRequest) returns (LogoutResponse) {}
+    rpc RefreshNotificationToken(RefreshNotificationTokenRequest) returns (RefreshNotificationTokenResponse) {}
+    rpc SetNickName(SetNickNameRequest) returns (SetNickNameResponse) {}
+    rpc SetSubscription(SetSubscriptionRequest) returns (SetSubscriptionResponse) {}
+}

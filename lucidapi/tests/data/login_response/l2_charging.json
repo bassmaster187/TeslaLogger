@@ -1,0 +1,199 @@
+{
+  "uid": "0123456789abcdef0123456789abcdef",
+  "sessionInfo": {
+    "idToken": "dGVzdCBkYXRhCg",
+    "expiryTimeSec": 1699798609,
+    "refreshToken": "",
+    "gigyaJwt": "bW9yZSB0ZXN0IGRhdGEK"
+  },
+  "userProfile": {
+    "email": "mail@example.com",
+    "locale": "",
+    "username": "mail@example.com",
+    "photoUrl": "",
+    "firstName": "Lucid",
+    "lastName": "Owner",
+    "emaId": ""
+  },
+  "userVehicleData": [
+    {
+      "vehicleId": "0123456789abcdef01234567",
+      "accessLevel": "PRIMARY_OWNER",
+      "vehicleConfig": {
+        "vin": "0123456789ABCDEFG",
+        "model": "AIR",
+        "modelVariant": "TOURING",
+        "releaseDate": null,
+        "nickname": "Lucid AIR",
+        "paintColor": "COSMOS_SILVER",
+        "emaId": "USLCDABCDEFGHI",
+        "wheels": "BLADE",
+        "easubscription": {
+          "name": "EA",
+          "expirationDate": "1782495678",
+          "startDate": "1687795678",
+          "status": "CURRENT"
+        },
+        "chargingAccounts": [
+          {
+            "emaid": "USLCDABCDEFGHI",
+            "vehicleId": "0123456789abcdef01234567",
+            "status": "ENROLLED",
+            "createdAtEpochSec": "1687735678",
+            "expiryOnEpochSec": "1719360000",
+            "vendorName": "ELECTRIFY_AMERICA"
+          }
+        ],
+        "countryCode": "US",
+        "regionCode": "NA",
+        "edition": "EDITION_STANDARD",
+        "battery": "BATTERY_TYPE_01",
+        "interior": "TAHOE",
+        "specialIdentifiers": null,
+        "look": "PLATINUM",
+        "exteriorColorCode": "L203",
+        "interiorColorCode": "INT08",
+        "frunkStrut": "POWER_STRUT"
+      },
+      "vehicleState": {
+        "batteryState": {
+          "range": 276,
+          "chargePercent": 48.90000072866678,
+          "kwHr": 39.33999912068248,
+          "capacityKwHr": 86.21999807283282,
+          "batteryHealth": "WARNING_OFF",
+          "lowChargeLevel": "WARNING_OFF",
+          "criticalChargeLevel": "WARNING_OFF",
+          "unavailableChargePercent": 3.300000049173832,
+          "batteryPreconStatus": "BATTERY_PRECON_OFF",
+          "batteryPreconTimeRemaining": 0
+        },
+        "powerState": "SLEEP_CHARGE",
+        "cabinState": {
+          "interiorTemp": 15.900001429021358,
+          "exteriorTemp": 8.100000716745853
+        },
+        "bodyState": {
+          "doorLocks": "LOCKED",
+          "frontCargo": "CLOSED",
+          "rearCargo": "CLOSED",
+          "frontLeftDoor": "CLOSED",
+          "frontRightDoor": "CLOSED",
+          "rearLeftDoor": "CLOSED",
+          "rearRightDoor": "CLOSED",
+          "chargePortState": "OPEN",
+          "walkawayLockSts": "WALKAWAY_ACTIVE",
+          "accessTypeSts": "ACTIVE_ACCESS_REQUEST"
+        },
+        "lastUpdatedMs": "1699798309285",
+        "chassisState": {
+          "odometer": 8457.900126032531,
+          "frontLeftTirePressBar": 2.675000039860606,
+          "frontRightTirePressBar": 2.625000039115548,
+          "rearLeftTirePressBar": 2.625000039115548,
+          "rearRightTirePressBar": 2.675000039860606,
+          "headlightState": "LIGHTS_OFF",
+          "indicatorState": "UNKNOWN_LIGHTS_STATE",
+          "hardWarnLeftFront": "WARNING_OFF",
+          "hardWarnLeftRear": "WARNING_OFF",
+          "hardWarnRightFront": "WARNING_OFF",
+          "hardWarnRightRear": "WARNING_OFF",
+          "softWarnLeftFront": "WARNING_ON",
+          "softWarnLeftRear": "WARNING_OFF",
+          "softWarnRightFront": "WARNING_OFF",
+          "softWarnRightRear": "WARNING_OFF",
+          "softwareVersion": "2.1.33"
+        },
+        "chargingState": {
+          "chargeState": "CHARGING",
+          "energyType": "AC",
+          "chargeSessionMi": 1.9000000283122063,
+          "chargeSessionKwh": 0.3499999921768904,
+          "sessionMinutesRemaining": 275,
+          "chargeLimit": 24950,
+          "cableLock": "LOCKED",
+          "chargeRateKwhPrecise": 6.100000090897083,
+          "chargeRateMphPrecise": 24.70000036805868,
+          "chargeRateMilesMinPrecise": 0.4000000059604645,
+          "chargeLimitPercent": 80.0000011920929,
+          "chargeScheduledStatus": "UNKNOWN_CHARGE_SCHEDULED_STATUS",
+          "chargeScheduledTime": 300,
+          "scheduledChargeStatus": "SCHEDULED_CHARGE_IDLE",
+          "scheduledChargeUnavailableStatus": "SCHEDULED_CHARGE_NO_REQUEST"
+        },
+        "gps": {
+          "location": {
+            "latitude": 36.479682901534396,
+            "longitude": -118.83790036260578
+          },
+          "elevation": 3790,
+          "positiontime": "1699798309",
+          "headingPrecise": 244.10000363737345
+        },
+        "softwareUpdate": {
+          "versionAvailable": "0.0.0",
+          "installDurationMinutes": 0,
+          "percentComplete": 0,
+          "updateState": "UPDATE_FAILED_DRIVE_ALLOWED",
+          "rollbackState": "UNKNOWN_ROLLBACK_STATE",
+          "rollbackPercentComplete": 0,
+          "versionAvailableRaw": 0,
+          "updateAvailable": "UNKNOWN_UPDATE_AVAILABLE",
+          "scheduledStartTimeSec": "0"
+        },
+        "alarmState": {
+          "alarmStatus": "ALARM_ARMED",
+          "alarmMode": "ALARM_ON"
+        },
+        "cloudConnectionState": "CLOUD_CONNECTED",
+        "keylessDrivingState": "KEYLESS_OFF",
+        "hvacStatus": {
+          "powerMode": "HVAC_OFF",
+          "defrost": "DEFROST_OFF",
+          "preconditionStatus": "USER_INPUT"
+        },
+        "driveMode": "DRIVEMODE_COMFORT",
+        "privacyMode": "CONNECTIVITY_ENABLED",
+        "gearPosition": "GEAR_PARK",
+        "mobileAppReqStatus": {
+          "alarmSetReq": "UNKNOWN_ALARM_MODE",
+          "chargePortReq": "UNKNOWN_CLOSURE_STATE",
+          "chargeLockReq": "UNKNOWN_LOCK_STATE",
+          "doorLeftFrontReq": "UNKNOWN_CLOSURE_STATE",
+          "doorLeftRearReq": "UNKNOWN_CLOSURE_STATE",
+          "doorRightFrontReq": "UNKNOWN_CLOSURE_STATE",
+          "doorRightRearReq": "UNKNOWN_CLOSURE_STATE",
+          "driveEnable": "KEYLESS_DRIVING_STATE_UNKNOWN",
+          "frunkCargoReq": "UNKNOWN_CLOSURE_STATE",
+          "hornReq": "UNKNOWN_CLOSURE_STATE",
+          "hvacDefrostEnable": "DEFROST_OFF",
+          "hvacPreconditionEnable": "HVAC_ON",
+          "lightReq": "UNKNOWN_LIGHTS_STATE",
+          "panicReq": "PANIC_ALARM_UNKNOWN",
+          "sharedTripReq": "SHARED_TRIP_NOTIFICATIONS_UNKNOWN",
+          "trunkCargoReq": "UNKNOWN_CLOSURE_STATE",
+          "vehicleUnlockReq": "UNKNOWN_LOCK_STATE"
+        },
+        "tcuState": "TCU_FULL",
+        "tcuInternetStatus": {
+          "lteType": "FOUR_G_LTE",
+          "lteStatus": "INTERNET_ACCESS",
+          "wifiStatus": "NO_INTERNET_ACCESS",
+          "lteRssi": 31,
+          "wifiRssi": 0
+        }
+      }
+    }
+  ],
+  "subscription": [
+    "CHARGE",
+    "SECURITY",
+    "SOFTWARE",
+    "SERVICE",
+    "HVAC",
+    "REQUIRED",
+    "CDR_EMAIL",
+    "SUBSCRIPTION"
+  ],
+  "encryption": "SINGLE"
+}

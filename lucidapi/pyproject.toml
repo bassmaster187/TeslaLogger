@@ -1,0 +1,36 @@
+[tool.poetry]
+name = "lucidmotors"
+version = "1.2.0"
+description = ""
+authors = ["Nick Shipp <git@segbrk.com>", "Michael Borohovski <borski@owlpost.lol>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+grpcio = "1.67.1"
+grpc-stubs = "^1.53.0"
+protobuf = "^5.28.3"
+
+[tool.poetry.group.dev.dependencies]
+rich = "^13.6.0"
+mypy = "^1.13.0"
+poetry = "^1.7.1"
+pytest = "^7.4.3"
+pytest-cases = "^3.8.1"
+black = "^24.3.0"
+flake8 = "^6.1.0"
+flake8-black = "^0.3.6"
+pyjwt = "^2.8.0"
+mypy-protobuf = "^3.6.0"
+types-protobuf = "^4.24.0.4"
+grpcio-tools = "1.67.1"
+poetry-plugin-export = "^1.6.0"
+
+[tool.black]
+line-length = 88
+skip-string-normalization = true
+exclude = '\/gen\/.*\.py'
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

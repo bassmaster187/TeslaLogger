@@ -1,0 +1,54 @@
+syntax = "proto3";
+
+package mobilegateway.protos;
+
+message UserProfile {
+    string email = 1;
+    optional string locale = 2;
+    string username = 3;
+    optional string photo_url = 4;
+    string first_name = 5;
+    string last_name = 6;
+}
+
+message PhoneNumber {
+    string number = 2;
+}
+
+message UserProfileData {
+    string first_name = 1;
+    string last_name = 2;
+    string email = 3;
+    string locale = 4;
+    string address = 6;
+    string city = 7;
+    string state = 8;
+    string postal_code = 9;
+    string country = 10;
+    PhoneNumber phone = 11;
+}
+
+message SetUserProfileRequest {}
+message SetUserProfileResponse {}
+
+message GetUserProfileRequest {}
+message GetUserProfileResponse {
+    UserProfileData profile = 1;
+}
+
+message UploadUserProfilePhotoRequest {
+    string photo_bytes = 1;
+}
+message UploadUserProfilePhotoResponse {
+    string photo_url = 1;
+}
+
+message ReferralHistoryApiRequest {}
+message ReferralHistoryApiResponse {}
+
+service UserProfileService {
+    rpc GetUserProfile(GetUserProfileRequest) returns (GetUserProfileResponse) {}
+    rpc SetUserProfile(SetUserProfileRequest) returns (SetUserProfileResponse) {}
+    rpc UploadUserProfilePhoto(UploadUserProfilePhotoRequest) returns (UploadUserProfilePhotoResponse) {}
+    rpc ReferralHistoryApi(ReferralHistoryApiRequest) returns (ReferralHistoryApiResponse) {}
+}

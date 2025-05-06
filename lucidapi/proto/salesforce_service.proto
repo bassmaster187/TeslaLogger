@@ -1,0 +1,65 @@
+syntax = "proto3";
+
+package mobilegateway.protos;
+
+message ReferralHistory {
+    string refereeEmail = 1;
+    string referralStatus = 2;
+    double referralPoints = 3;
+    string refereeFirstName = 4;
+    string refereeLastName = 5;
+    string referralDate = 6;
+    string trim = 7;
+}
+
+message MemberAttributes {
+    string value = 1;
+    string name = 2;
+}
+
+message ReferralData {
+    string email = 1;
+    string status = 2;
+    string referralCode = 3;
+    uint32 pointsBalance = 4;
+    uint32 totalReferralCount = 5;
+    repeated ReferralHistory referrals = 6;
+    repeated MemberAttributes member_attributes = 7;
+    bool validState = 8;
+    bool validAge = 9;
+    string country = 10;
+}
+
+message ReferralHistoryRequest {
+    string email = 1;
+}
+
+message ReferralHistoryResponse {
+    uint32 statusCode = 1;
+    string message = 2;
+    ReferralData data = 3;
+}
+
+message ServiceAppointment {
+}
+
+message GetServiceAppointmentsV1Request {
+    string customer_id = 1;
+}
+message GetServiceAppointmentsV1Response {
+    /* These _used_ to be response fields, but the API has changed a lot since then */
+    /* string status = 1; */
+    /* repeated ServiceAppointment appointments = 2; */
+    /* string comment = 3; */
+}
+
+message GetServiceAppointmentSlotsRequest {
+    string location_id = 1;
+}
+message GetServiceAppointmentSlotsResponse { }
+
+service SalesforceService {
+    rpc GetServiceAppointmentsV1(GetServiceAppointmentsV1Request) returns (GetServiceAppointmentsV1Response) {}
+    rpc GetServiceAppointmentSlots(GetServiceAppointmentSlotsRequest) returns (GetServiceAppointmentSlotsResponse) {}
+    rpc ReferralHistory(ReferralHistoryRequest) returns (ReferralHistoryResponse) {}
+}

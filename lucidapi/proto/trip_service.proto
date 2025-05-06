@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+package mobilegateway.protos;
+
+enum WaypointType {
+    WAYPOINT_TYPE_UNKNOWN = 0;
+    WAYPOINT_TYPE_CHARGING = 1;
+    WAYPOINT_TYPE_WAYPOINT = 2;
+}
+
+message Waypoint {
+    double latitude = 1;
+    double longitude = 2;
+    string address = 3;
+    WaypointType waypoint_type = 5;
+}
+
+message Trip {
+    string destination_name = 2;
+    optional uint64 distance_meters = 3;
+    optional uint64 elapsed_time_sec = 4;
+    optional uint32 charging_stops = 5;
+    repeated Waypoint waypoints = 7;
+    optional string sender = 8;
+}
+
+message ShareTripRequest {
+    Trip trip = 2;
+    string vehicle_id = 3;
+}
+
+message ShareTripResponse {}
+
+service TripService {
+    rpc ShareTrip(ShareTripRequest) returns (ShareTripResponse) {}
+}

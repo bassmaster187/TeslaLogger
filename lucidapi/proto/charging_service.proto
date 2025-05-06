@@ -1,0 +1,174 @@
+syntax = "proto3";
+
+package mobilegateway.protos;
+
+import "vehicle_state_service.proto";
+
+message DateTime {
+    uint64 seconds = 1;
+}
+
+message Unknown {}
+
+enum ImageCategory {
+    IMAGE_CATEGORY_UNKNOWN = 0;
+    IMAGE_CATEGORY_OPERATOR = 5;
+}
+
+message Image {
+    string url = 1;
+    ImageCategory category = 3;
+    string type = 4;
+}
+
+message Operator {
+    string name = 1;
+    Image logo = 3;
+}
+
+enum ChargingStatus {
+    CHARGING_STATUS_UNKNOWN = 0;
+    CHARGING_STATUS_CHARGING = 3;
+}
+
+enum ConnectorStandard {
+    CONNECTOR_STANDARD_UNKNOWN = 0;
+    CONNECTOR_STANDARD_IEC_62196_T1_COMBO = 19;
+}
+
+enum ConnectorFormat {
+    CONNECTOR_FORMAT_UNKNOWN = 0;
+    CONNECTOR_FORMAT_CABLE = 2;
+}
+
+enum PowerType {
+    POWER_TYPE_UNKNOWN = 0;
+    POWER_TYPE_DC = 3;
+}
+
+message Connector {
+    string id = 1;
+    ConnectorStandard standard = 2;
+    ConnectorFormat format = 3;
+    PowerType power_type = 4;
+    uint32 voltage = 5;
+    uint32 amperage = 6;
+    ChargingStatus status = 11;
+    uint32 power = 12;
+}
+
+message ChargingSession {
+    string uid = 1;
+    string evse_id = 2;
+    ChargingStatus status = 3;
+    repeated Connector connectors = 6;
+    Location coordinates = 8;
+    string physical_reference = 9;
+}
+
+message OpeningTimes {
+    bool twentyfourseven = 1;
+}
+
+message ChargingLocation {
+    string id = 1;
+    string name = 3;
+    string address = 4;
+    string city = 5;
+    string postal_code = 6;
+    string state = 7;
+    string country = 8;
+    Location coordinates = 9;
+    ChargingSession session = 11;
+    Operator operator = 13;
+    Operator suboperator = 14;
+    string timezone = 17;
+    OpeningTimes opening_times = 18;
+    /* DateTime last_updated = ??; */
+}
+
+enum FeeName {
+    FEE_NAME_UNKNOWN = 0;
+    FEE_NAME_TAX = 1;
+    FEE_NAME_PARKING_FEE = 4;
+}
+
+enum FeeType {
+    FEE_TYPE_UNKNOWN = 0;
+    FEE_TYPE_ADD_ON_FEE_FLAT = 1;
+}
+
+message Fee {
+    FeeName name = 1;
+    string description = 2;
+    FeeType type = 4;
+}
+
+/* Charging data something? Describes a charging session */
+message Cdr {
+    string id = 1;
+    DateTime start_datetime = 2;
+    DateTime stop_datetime = 3;
+    string auth_id = 4;
+    double total_energy = 6;
+    double total_parking_time = 7;
+    ChargingLocation location = 10;
+    double total_time = 11;
+    repeated Fee add_on_fee = 14;
+    double charge_time = 15;
+    double idle_time = 17;
+    string currency = 21;
+}
+
+message GetCdrRequest {}
+message GetCdrResponse {}
+
+message GetCdrsRequest {
+    string ema_id = 1;
+    uint32 limit = 3;
+}
+message GetCdrsResponse {
+    repeated Cdr cdr = 1;
+}
+
+message GetLocationsBoxRequest {}
+message GetLocationsBoxResponse {}
+
+message ChargingLocationDistance {
+    ChargingLocation location = 1;
+    uint64 distance = 2;
+}
+
+message GetLocationsByRadiusRequest {
+    Location origin = 1;
+    uint32 radius = 2;
+}
+message GetLocationsByRadiusResponse {
+    repeated ChargingLocationDistance locations = 1;
+}
+
+message GetTariffRequest {}
+message GetTariffResponse {}
+
+message RegisterRFIDRequest {
+    string ema_id = 1;
+    string rfid_token = 2;
+}
+message RegisterRFIDResponse {}
+
+message StartSessionRequest {}
+message StartSessionResponse {}
+
+message StopSessionRequest {}
+message StopSessionResponse {}
+
+service ChargingService {
+    rpc GetCdr(GetCdrRequest) returns (GetCdrResponse) {}
+    rpc GetCdrs(GetCdrsRequest) returns (GetCdrsResponse) {}
+    rpc GetLocationsBox(GetLocationsBoxRequest) returns (GetLocationsBoxResponse) {}
+    rpc GetLocationsByRadius(GetLocationsByRadiusRequest) returns (GetLocationsByRadiusResponse) {}
+    rpc GetTariff(GetTariffRequest) returns (GetTariffResponse) {}
+    rpc RegisterRFID(RegisterRFIDRequest) returns (RegisterRFIDResponse) {}
+    rpc StartSession(StartSessionRequest) returns (StartSessionResponse) {}
+    rpc StopSession(StopSessionRequest) returns (StopSessionResponse) {}
+}

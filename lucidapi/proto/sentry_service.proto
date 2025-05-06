@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+package mobilegateway.protos;
+
+import "vehicle_state_service.proto";
+
+message GetEventsRequest {
+    string vehicle_id = 1;
+    string a = 2;
+    uint32 limit = 3;
+    uint32 b = 4;
+}
+
+message GetEventsResponse {
+}
+
+message SetSentryModeRequest {
+    string vehicle_id = 1;
+    uint32 state = 2;
+}
+message SetSentryModeResponse {
+}
+
+service SentryService {
+    rpc GetEvents(GetEventsRequest) returns (GetEventsResponse) {}
+    rpc SetSentryMode(SetSentryModeRequest) returns (SetSentryModeResponse) {}
+}
