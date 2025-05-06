@@ -135,14 +135,18 @@ namespace TeslaLoggerNET8.Lucid
             var kwhr_before = kwhr;
 
             //lastData = System.IO.File.ReadAllText(@"C:\dev\TeslaLoggerNET8\TeslaLogger\bin\Debug\net8.0\lucid\20250430122944434.txt");
-            lastData = ExecuteShellCommand();
+            lastData = PythonLucidAPI(car.TeslaName, car.TeslaPasswort, car.FleetApiAddress);
             lastNewData = DateTime.UtcNow;
 
             // var j = JsonConvert.DeserializeObject(ret);
 
             // System.IO.File.WriteAllText("lucid/" + DateTime.Now.ToString("yyyyMMddHHmmssfff") + ".txt", lastData);
 
+
+
             string[] lines = lastData.Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
+
+            string currentVIN = "";
 
             foreach (string line in lines)
             {
@@ -153,6 +157,15 @@ namespace TeslaLoggerNET8.Lucid
                     {
                         string key = parts[0].Trim();
                         string value = parts[1].Trim();
+
+                        if (String.Compare(currentVIN,car.Vin, true) != 0)
+                        { 
+                            if (key == "vin")
+                            {
+                                currentVIN = value.Replace("\"","").Trim();
+                            }
+                            continue;
+                        }
 
                         switch (key)
                         {
@@ -384,7 +397,7 @@ namespace TeslaLoggerNET8.Lucid
 
         }
 
-        public string ExecuteShellCommand()
+        public string PythonLucidAPI(string username, string password, string region)
         {
             try
             {
@@ -395,7 +408,7 @@ namespace TeslaLoggerNET8.Lucid
                     processInfo = new ProcessStartInfo
                     {
                         FileName = "python3.13",
-                        Arguments = @"/etc/lucidapi/examples/vehicle_info.py",
+                        Arguments = @$"/etc/lucidapi/examples/teslalogger.py --username {username} --password {password} --region {region}",
                         WorkingDirectory = @"/etc/lucidapi/examples",
                         RedirectStandardOutput = true,
                         RedirectStandardError = true,
@@ -408,7 +421,7 @@ namespace TeslaLoggerNET8.Lucid
                     processInfo = new ProcessStartInfo
                     {
                         FileName = "py",
-                        Arguments = @"C:\dev\LucidAPI\python-lucidmotors\examples\vehicle_info.py",
+                        Arguments = @$"C:\dev\LucidAPI\python-lucidmotors\examples\teslalogger.py --username {username} --password {password} --region {region}",
                         WorkingDirectory = @"C:\dev\LucidAPI\python-lucidmotors\examples",
                         RedirectStandardOutput = true,
                         RedirectStandardError = true,
