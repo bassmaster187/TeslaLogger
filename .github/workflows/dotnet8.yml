@@ -5,11 +5,7 @@ name: .NET8
 
 on:
   workflow_dispatch:
-  push:
-    branches: [ "NET8" ]
-  pull_request:
-    branches: [ "NET8" ]
-
+  
 jobs:
   build:
 
