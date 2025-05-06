@@ -7452,7 +7452,9 @@ E.ON DK-Væggerløse Væggerløsevej,54.70973,11.919614
 E.ON SE-Kalmar Dragonvägen,56.674893,16.321684
 E.ON SE-Markaryd Ulvarydsvägen,56.445162,13.603104
 E.ON SE-Rydebäck Landskronavägen,55.964455,12.789519
+E.ON SK-Bratislava Mlynské nivy,48.146676,17.126711
 E.ON SK-Moldava nad Bodvou Rožňavská,48.608534,20.985711
+E.ON SK-Nitra Bratislavská,48.314424,18.06249
 E.ON SK-Senec Trnavská,48.224636,17.403704
 E.ON SK-Trenčín Belá,48.86455,18.022728
 
@@ -7606,7 +7608,7 @@ EDEKA DE-Peine Woltorfer Weg,52.32045,10.23364
 EDEKA DE-Petershagen Lessingstraße,52.53008,13.79142
 EDEKA DE-Randersacker Am Sonnenstuhl,49.75312,9.98715
 EDEKA DE-Ransbach-Baumbach Pleurtuit-Str.,50.46398,7.72463
-EDEKA DE-Ratingen Am Sandbach,51.29717,6.83118
+EDEKA DE-Ratingen Am Sandbach,51.295869,6.830408
 EDEKA DE-Regensburg-Galgenberg Franz-Mayer-Straße,49.00112,12.105
 EDEKA DE-Schwedt Landgrabenpark,53.06554,14.27345
 EDEKA DE-Sinzig Kölnerstr.,50.54706,7.24557
@@ -8104,7 +8106,7 @@ EnBW DE-Endingen Freiburger,48.138361,7.703374
 EnBW DE-Endingen St.-Jakobs-Gässli,48.142337,7.70365
 EnBW DE-Endingen Wilhelm-Pfefferle-Str.,48.148052,7.709592
 EnBW DE-Engelskirchen,50.9861,7.40839
-EnBW DE-Engen A81 Raststätte Hegau,47.861479,8.786144,25
+EnBW DE-Engen A81 Raststätte Hegau,47.861378,8.786276
 EnBW DE-Engstingen Kirchstr.,48.386804,9.284147
 EnBW DE-Engstingen Reutlinger Straße,48.38521,9.29783
 EnBW DE-Eningen Max-Planck-Str.,48.4775,9.2428
@@ -8132,9 +8134,9 @@ EnBW DE-Essen Aktienstr. Hellweg,51.462439,6.93023
 EnBW DE-Essen Burger King,51.525953,7.007733
 EnBW DE-Essen Donnerstr. Penny,51.487656,6.931917
 EnBW DE-Essen Fillendorfer Str. Hellweg,51.459045,7.038228
-EnBW DE-Essen Frankenstr. Hellweg,51.427651,7.048283
+EnBW DE-Essen Frankenstraße,51.427651,7.048283
 EnBW DE-Essen Hellweg,51.380296,6.93657
-EnBW DE-Essen Krablerstr. Hellweg,51.485628,6.996347
+EnBW DE-Essen Krablerstraße,51.485628,6.996347
 EnBW DE-Essen Penny,51.458878,6.982148
 EnBW DE-Essingen Margarete-Steiff-Straße,48.821423,10.045433
 EnBW DE-Esslingen am Neckar Weilstraße,48.742352,9.268862
@@ -8903,7 +8905,7 @@ EnBW DE-Raesfeld,51.766889,6.85109
 EnBW DE-Rain 1,48.693887,9.303839
 EnBW DE-Rangendingen Hechinger Straße,48.377717,8.90333
 EnBW DE-Rastatt Im Baisert,48.85973,8.240877
-EnBW DE-Ratingen ROSI's Hohenstein,51.2902,6.804563,20
+EnBW DE-Ratingen ROSI's Hohenstein,51.2902,6.804563,30
 EnBW DE-Ratzeburg Hagebaumarkt,53.699656,10.741201
 EnBW DE-Ratzeburg Penny,53.69123,10.7938
 EnBW DE-Rauenberg Wieslocher Str.,49.266572,8.704368
@@ -9639,6 +9641,7 @@ EVM DE-Koblenz Autohof Rübenacher Wald,50.346812,7.507836
 EVM DE-Koblenz Contel Hotel,50.365908,7.57722
 EVM DE-Koblenz Festung Ehrenbreitstein,50.367221,7.617626
 
+EVN AT-Amstetten Kupferstraße,48.116694,14.892285
 EVN AT-Amstetten Otto-Schott-Straße,48.117532,14.910831
 EVN AT-Böheimkirchen Reith,48.187943,15.765036
 EVN AT-Mank Schulstraße,48.110774,15.340993,30
@@ -10734,6 +10737,19 @@ GRIDSERVE GB-Folkestone and Hythe M20,51.095118,1.045353
 
 Grønn-Kontakt NO-Leknes,68.14874,13.612729
 Grønn-Kontakt NO-Stryn Extra Markt,61.902547,6.715027
+
+Grüne-Säule DE-Berlin Holzhauser Straße,52.577487,13.295097
+Grüne-Säule DE-Chemnitz Annaberger Straße,50.808249,12.915561
+Grüne-Säule DE-Chemnitz Carl-von-Bach-Straße,50.802482,12.85204
+Grüne-Säule DE-Chemnitz F.-O.-Schimmel-Straße,50.805365,12.925298
+Grüne-Säule DE-Chemnitz Fabrikstraße,50.837209,12.914
+Grüne-Säule DE-Chemnitz Harthweg,50.824772,12.84861
+Grüne-Säule DE-Chemnitz Hauboldstraße,50.846346,12.922824
+Grüne-Säule DE-Chemnitz Hoffmannstraße,50.830299,12.89619
+Grüne-Säule DE-Chemnitz Reichenhainer Straße,50.81815,12.92948
+Grüne-Säule DE-Chemnitz Technologie-Campus,50.8157,12.925067
+Grüne-Säule DE-Glauchau Leipziger Straße,50.821075,12.542552
+Grüne-Säule DE-Magdeburg Am Fuchsberg,52.11238,11.61701
 
 HEnW DE-Hamburg Christoph-Probst-Weg,53.596775,9.976206
 HEnW DE-Hamburg Eichholz,53.546227,9.973006
@@ -12809,6 +12825,7 @@ Mer DE-Kalbach Uttrichshausen Ost,50.419009,9.737387
 Mer DE-Lohfelden Kassel Ost,51.268231,9.522843
 Mer DE-Ludwigshafen Am Penzinger Feld,48.053699,10.890181
 Mer DE-Mühlenfließ Fläming West An der A9,52.13232,12.750212
+Mer DE-Nidda Eisenried,50.41725,9.0183
 Mer DE-Nörten-Hardenberg Unter dem Pferdestiege,51.629888,9.921655
 Mer DE-Quickborn Holmmoor Ost,53.717076,9.939984
 Mer DE-Rasthaus Rimberg An der A5,50.738262,9.246298
@@ -13249,6 +13266,7 @@ ORLEN PL-Olsztyn Aleja Generała Władysława Sikorskiego,53.758446,20.487395
 OVAG DE-Butzbach Griedeler Straße,50.43538,8.676418
 OVAG DE-Butzbach Weiseler Straße,50.430966,8.671897
 OVAG DE-Gedern Ober Seemer Straße,50.42334,9.204413
+OVAG DE-Schotten Am Vulkaneum,50.50445,9.12686,30
 
 Parkstrom DE-Amöneburg Manfred-Stumpf-Straße,50.774147,8.89373
 Parkstrom DE-Reiskirchen Freiherr-Vom-Stein-Str.,50.597726,8.823727,20
@@ -13555,6 +13573,7 @@ Pfalzwerke DE-Saarbrücken Uni-Campus Nord,49.25806,7.042692
 Pfalzwerke DE-Sandhausen Hauptstraße 208,49.348589,8.654037
 Pfalzwerke DE-Sankt Martin Riedweg,49.298984,8.106857
 Pfalzwerke DE-Schifferstadt Waldspitzweg 3,49.383164,8.391852
+Pfalzwerke DE-Schotten Am Vulkaneum,50.5048,9.1264
 Pfalzwerke DE-Schwabach Am Falbenholzweg 7,49.321143,11.049662
 Pfalzwerke DE-Schweigen-Rechtenbach St. Urban-Platz 1,49.054,7.956139
 Pfalzwerke DE-Schwetzingen Grenzhöfer Str. 100,49.396731,8.578203
@@ -14321,6 +14340,7 @@ Virta AT-Bad Fischau Industriegebiet B21,47.831789,16.186032
 Virta AT-Wiener Neudorf IZ-NÖ Süd Straße,48.07098,16.327825
 Virta CH-Feuerthalen Schützenstrasse,47.690757,8.647688
 Virta DE-Friedberg Frankfurter Straße,50.328552,8.750175
+Virta DE-Nidda Eisenried,50.416387,9.017287
 Virta SE-Smygehamn Smyge strandväg,55.339217,13.35998
 
 Volkswagen DE-Aichtal Uferstraße 10,48.625343,9.261603
@@ -14509,7 +14529,6 @@ DE Berlin Südkreuz,52.475697,13.364082
 DE Bochum Ruhrpark,51.494065,7.28446
 DE Bonn Welschnonnenstraße,50.740501,7.101638
 DE Braunschweig IIM,52.272656,10.526041
-DE Chemnitz HEOS Solar-Carport,50.802484,12.852011
 DE Diepholz Verwaltung Stadtwerke,52.612027,8.374783
 DE Frankfurt am Main Hainer Weg 74,50.09682,8.693074
 DE Frankfurt am Main Parkhaus Opernturm,50.116366,8.67072
