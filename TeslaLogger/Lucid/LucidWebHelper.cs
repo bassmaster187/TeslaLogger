@@ -366,7 +366,7 @@ namespace TeslaLoggerNET8.Lucid
                     cmd.Parameters.AddWithValue("@ModuleTempMin", min_cell_temp);
                     cmd.Parameters.AddWithValue("@ModuleTempMax", max_cell_temp);
                     cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
-                    cmd.Parameters.AddWithValue("@date", DateTime.UtcNow);
+                    cmd.Parameters.AddWithValue("@date", DateTime.Now);
                     cmd.ExecuteNonQuery();
                 }
                 max_cell_temp_db = max_cell_temp;
