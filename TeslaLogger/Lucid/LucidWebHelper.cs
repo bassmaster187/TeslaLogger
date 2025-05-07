@@ -193,6 +193,7 @@ namespace TeslaLoggerNET8.Lucid
                             case "charge_percent":
                                 battery_level = double.Parse(value, CultureInfo.InvariantCulture);
                                 car.CurrentJSON.current_battery_level = Math.Round(battery_level, 1);
+                                car.teslaAPIState.AddValue("battery_level", "int", (int)Math.Round(battery_level, 1), Tools.ToUnixTime(DateTime.UtcNow), "charge_state");
                                 break;
                             case "kwhr":
                                 //Console.WriteLine($"Kwhr: {value}");
