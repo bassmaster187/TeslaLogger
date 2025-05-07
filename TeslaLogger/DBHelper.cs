@@ -1786,7 +1786,7 @@ HAVING
             }
         }
 
-        internal void CleanPasswort()
+        internal virtual void CleanPasswort()
         {
             try
             {

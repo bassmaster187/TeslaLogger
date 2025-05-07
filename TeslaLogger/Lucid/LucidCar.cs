@@ -14,6 +14,7 @@ namespace TeslaLoggerNET8.Lucid
             : base(CarInDB, TeslaName, TeslaPasswort, CarInAccount, TeslaToken, TeslaTokenExpire, ModelName, cartype, carspecialtype, cartrimbadging, displayname, vin, TaskerHash, WhTR, fleetAPI, currentState, wheel_type)
         {
             Program.SuspendAPIMinutes = 0;
+            SleepInStateSleep = 30000;   
         }
 
         internal override bool SupportedByFleetTelemetry()

@@ -12,5 +12,9 @@ namespace TeslaLoggerNET8.Lucid
         internal LucidDBHelper(Car car) : base(car)
         {
         }
+
+        internal override void CleanPasswort()
+        {
+        }
     }
 }

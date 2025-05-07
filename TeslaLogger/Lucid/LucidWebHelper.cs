@@ -399,6 +399,7 @@ namespace TeslaLoggerNET8.Lucid
 
         public string PythonLucidAPI(string username, string password, string region)
         {
+            DateTime start = DateTime.UtcNow;
             try
             {
                 ProcessStartInfo processInfo = null;
@@ -453,6 +454,10 @@ namespace TeslaLoggerNET8.Lucid
             catch (Exception ex)
             {
                 car.Log($"An error occurred: {ex.Message}");
+            }
+            finally
+            {
+                DBHelper.AddMothershipDataToDB("LucidAPI", start, 0, car.CarInDB);
             }
 
             return string.Empty;
