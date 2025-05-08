@@ -273,8 +273,8 @@ namespace TeslaLogger
 
                     if (this is TeslaLoggerNET8.Lucid.LucidCar)
                     {
-                        dbHelper = new LucidDBHelper(this);
-                        webhelper = new LucidWebHelper(this);
+                        dbHelper = new LucidDBHelper((LucidCar)this);
+                        webhelper = new LucidWebHelper((LucidCar)this);
                     }
                     else
                     {

@@ -429,6 +429,19 @@ namespace TeslaLogger
                 return "?";
             }
 
+            if (vin.StartsWith("50E"))
+            {
+                year = 0;
+                carType = "";
+                AWD = false;
+                MIC = false;
+                battery = "";
+                motor = "";
+                MIG = false;
+                return LucidVINDecoder(vin, out year, out carType, out AWD, out MIC, out battery, out motor);
+            }
+
+
             year = 0;
             carType = "";
             AWD = false;
@@ -448,7 +461,7 @@ namespace TeslaLogger
                 if (dateCode > 73) // skip I
                 {
                     year--;
-                }
+                } 
                 if (dateCode > 79) // skip O
                 {
                     year--;
@@ -585,6 +598,87 @@ namespace TeslaLogger
             }
 
             return "?";
+        }
+
+        private static object LucidVINDecoder(string vin, out int year, out string carType, out bool aWD, out bool mIC, out string battery, out string motor)
+        {
+            aWD = true;
+            mIC = false;
+
+            carType = vin[3] == 'A' ? "Lucid Air" : "Lucid Gravity";
+            switch (vin[5])
+            {
+                case 'P':
+                    carType += " Pure";
+                    break;
+                case 'D':
+                    carType += " Dream";
+                    break;
+                case 'G':
+                    carType += " Grand Touring";
+                    break;
+                case 'T':
+                    carType += " Touring";
+                    break;
+                case 'S':
+                    carType += " Sapphire";
+                    break;
+                default:
+                    carType += " ???";
+                    break;
+
+            }
+
+            int dateCode = (int)vin[9];
+            year = 2009 + dateCode - (int)'A';
+
+            battery = "NMC";
+            motor = "";
+
+            switch (vin[6])
+            {
+                case 'A':
+                    motor = "Dual Motor 828kw";
+                    break;
+                case 'B':
+                    motor = "Dual Motor 597kw";
+                    break;
+                case 'C':
+                    motor = "Dual Motor 695kw";
+                    break;
+                case 'D':
+                    motor = "Dual Motor 783kw";
+                    break;
+                case 'E':
+                    motor = "?";
+                    break;
+                case 'F':
+                    motor = "Dual Motor ???kw";
+                    break;
+                default:
+                    motor = "?";    
+                    break;
+            }
+
+            string market = "";
+
+            switch (vin[11])
+            {
+                case '0':
+                    market = "USA";
+                    break;
+                case '3':
+                    market = "Canada";
+                    break;
+                case '1':
+                    market = "Europe";
+                    break;
+                default:
+                    market = "?";
+                    break;
+            }
+
+            return carType + " / " + year +  " motor: " + motor + " market: " + market;
         }
 
         public static void CopyFile(string srcFile, string directory)

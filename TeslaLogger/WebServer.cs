@@ -237,6 +237,12 @@ namespace TeslaLogger
 
                     }
                 }
+                
+                if (url.Segments.Length > 2 && url.Segments[1] == "lucid/")
+                {
+                    TeslaLoggerNET8.Lucid.LucidWebServer.HandleRequest(url, request, response);
+                    return;
+                }
 
 
                 switch (true)

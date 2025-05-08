@@ -3007,7 +3007,7 @@ namespace TeslaLogger
             }
         }
 
-        private void StartStream()
+        protected virtual void StartStream()
         {
             string resultContent = null;
             byte[] buffer = new byte[1024];
