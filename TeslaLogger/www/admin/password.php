@@ -514,7 +514,8 @@ else
 	</tbody>
 </table>
 <p></p>
-<button onclick="location.href='password.php?id=-1'"><?php t("New car"); ?></button>
+<button onclick="location.href='password.php?id=-1'"><?php t("New Tesla"); ?></button>
+<button onclick="location.href='lucidpassword.php?id=-1'"><?php t("New Lucid"); ?></button>
 </div>
 <?php
 }
