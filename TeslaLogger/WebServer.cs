@@ -638,6 +638,8 @@ namespace TeslaLogger
 
             if (filename == "settings.json")
                 p = FileManager.GetFilePath(TLFilename.SettingsFilename);
+            else if (filename == "geofence-private.csv")
+                p = FileManager.GetFilePath(TLFilename.GeofencePrivateFilename);
 
             System.Diagnostics.Debug.WriteLine("Webserver getfile: " + p);
 
