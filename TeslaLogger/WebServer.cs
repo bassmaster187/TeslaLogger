@@ -567,7 +567,6 @@ namespace TeslaLogger
             else if (filename == "geofence-private.csv")
             {
                 p = FileManager.GetFilePath(TLFilename.GeofencePrivateFilename);
-                p = p.Replace("Debug/net8.0/", "");
             }
 
             System.Diagnostics.Debug.WriteLine("Webserver writefile: " + p);

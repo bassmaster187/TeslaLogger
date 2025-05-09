@@ -55,7 +55,7 @@ namespace TeslaLogger
 
         internal static string GetFilePath(TLFilename filename)
         {
-            if (filename == TLFilename.SettingsFilename || filename == TLFilename.EncryptionFilename)
+            if (filename == TLFilename.SettingsFilename || filename == TLFilename.EncryptionFilename || filename == TLFilename.GeofencePrivateFilename)
             {
                 var p = GetExecutingPath();
                 p = p.Replace("Debug/net8.0/", "data/");
