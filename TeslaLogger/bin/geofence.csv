@@ -1811,6 +1811,7 @@ Supercharger DE-Dettelbach,49.778831,10.068637
 Supercharger-V4 DE-Dietmannsried,47.811457,10.303146,28
 Supercharger-V4 DE-Dortmund-Nord,51.530488,7.471507
 Supercharger-V3 DE-Düsseldorf - Ando Campus,51.251629,6.794317
+Supercharger-V4 DE-Ebersdorf bei Coburg,50.223548,11.052627
 Supercharger-V3 DE-Eching,48.306431,11.634784
 Supercharger-V3 DE-Eimeldingen,47.626603,7.599543,20
 Supercharger-V3 DE-Eimeldingen,47.62669,7.59941
@@ -6082,6 +6083,7 @@ amperio DE-Zell Plänterstraße,50.019327,7.176777
 APCOA DE-Leipzig Petersstraße,51.337119,12.373691
 APCOA DE-München Berg am Laim Straße,48.129773,11.624369
 
+ARAL DE-Bad Honnef Gewerbepark Dachsberg,50.646867,7.337694
 ARAL DE-Bensheim,49.672869,8.597024,10
 ARAL DE-Bensheim,49.672979,8.59661,20
 ARAL DE-Bochum,51.501513,7.258011
@@ -9990,7 +9992,6 @@ EWE-GO DE-Drochtersen Sietwender Straße,53.710657,9.381782
 EWE-GO DE-Dummerstorf Manfred-Roth-Straße,54.022709,12.231404
 EWE-GO DE-Dörpen Bahnhofstraße,52.9686,7.3495
 EWE-GO DE-Dötlingen Rittrumer Kirchweg,52.937851,8.37914
-EWE-GO DE-Ebersdorf bei Coburg Frankenring,50.223628,11.052035
 EWE-GO DE-Eching Strogenweg,48.485462,12.014435
 EWE-GO DE-Edewecht Friedrichsfehner Straße,53.124702,8.087392
 EWE-GO DE-Edewecht Hauptstraße,53.117173,7.969386
@@ -14187,6 +14188,27 @@ Spirii DE-Flensburg Lise-Meitner-Straße,54.760918,9.437311
 
 SSN DE-Schwerin Eckdrift,53.595251,11.394029
 
+STAWAG DE-Aachen Am Kraftversorgungsturm,50.78911,6.112223
+STAWAG DE-Aachen Annastraße,50.772714,6.080673
+STAWAG DE-Aachen Judengasse,50.775974,6.080608
+STAWAG DE-Aachen Krefelder Straße,50.790849,6.096747
+STAWAG DE-Aachen Kullenhofstraße,50.775174,6.045444
+STAWAG DE-Aachen Lombardenstraße,50.782875,6.100832
+STAWAG DE-Aachen Mathieustraße,50.78911,6.049518
+STAWAG DE-Aachen Nirmer Straße,50.784525,6.157622
+STAWAG DE-Aachen Nizzaallee,50.784613,6.0788
+STAWAG DE-Aachen Schillerstraße,50.763317,6.076905
+STAWAG DE-Aachen Schönforststraße,50.762473,6.133111
+STAWAG DE-Aachen Triererstraße,50.75164,6.15795
+STAWAG DE-Aachen Vaalser Straße,50.770217,6.040944
+STAWAG DE-Aachen Vaalser Straße,50.770322,6.07271
+STAWAG DE-Aachen Verlautenheidener Straße,50.797081,6.155689
+STAWAG DE-Aachen Zollamtstraße,50.767554,6.088063
+STAWAG DE-Eschweiler Zum Hagelkreuz,50.83397,6.31389
+STAWAG DE-Monschau Burgau,50.552687,6.238135
+STAWAG DE-Monschau Trierer Straße,50.573817,6.262871
+STAWAG DE-Simmerath In den Bremen,50.607278,6.309555
+
 StromSpeicherMarkt DE-Freiburg im Breisgau Im Maierbrühl,47.983546,7.719172
 
 SVG DE-Merenberg Autohof Benzstraße,50.49926,8.18562
@@ -14278,9 +14300,62 @@ Süwag DE-Langgöns Sankt-Ulrich-Ring,50.492413,8.658913
 Tango NL-Meerkerk Energieweg,51.899723,4.983659,18
 Tango NL-Steenbergen Koperslagerij,51.588523,4.302757
 
+TankE DE-Bornheim Rathausstraße,50.757272,7.004436
+TankE DE-Brüggen St.-Barbara-Straße,51.256286,6.174229
+TankE DE-Köln Adolf-Kober-Straße,50.98231,6.99772
+TankE DE-Köln Am Malzbüchel,50.93439,6.95979
+TankE DE-Köln Am Römerhof,50.937226,6.867287
+TankE DE-Köln Am Schwanebitzer Hof,50.882473,7.080422
+TankE DE-Köln Am Südpark,50.898399,6.975829
+TankE DE-Köln Brüggener Straße,50.905259,6.938654
+TankE DE-Köln Brühler Straße,50.899201,6.95306
+TankE DE-Köln Buchheimer Straße,50.962577,7.003101
+TankE DE-Köln Christrosenweg,50.874653,7.05661
+TankE DE-Köln Dagobertstraße,50.9483,6.957764
 TankE DE-Köln Esserstraße,50.930366,6.996549
+TankE DE-Köln Europaring,50.93436,7.060649
 TankE DE-Köln Geisbergstraße,50.907419,6.919629
+TankE DE-Köln Georgsplatz,50.932011,6.957856
+TankE DE-Köln Gernsheimer Straße,50.931484,7.038197
+TankE DE-Köln Gottesweg,50.914172,6.932892
+TankE DE-Köln Hadersleber Straße,50.963621,6.918163
+TankE DE-Köln Hammerschmidtstraße,50.871326,7.021518
+TankE DE-Köln Haselnußweg,51.010987,6.906082
+TankE DE-Köln Holzmarkt,50.929816,6.961474
+TankE DE-Köln Honschaftsstraße,50.9799,7.03274
+TankE DE-Köln Kapuzinerstraße,50.983612,6.946765
+TankE DE-Köln Karl-Berbuer-Platz,50.928469,6.956927
+TankE DE-Köln Karl-Schüßler-Straße,50.921855,7.087448
+TankE DE-Köln Kierberger Straße,50.910091,6.946245
+TankE DE-Köln Klingerstraße,50.88522,7.062674
+TankE DE-Köln Käulchensweg,50.912826,6.987826
+TankE DE-Köln Leichweg,50.904612,6.949598
+TankE DE-Köln Liverpooler Platz,51.020967,6.898027
+TankE DE-Köln Lucas-Cranach-Straße,50.881245,7.015169
+TankE DE-Köln Merheimer Straße,50.970934,6.946411
+TankE DE-Köln Moses-Heß-Straße,50.98491,6.99677
+TankE DE-Köln Neusser Wall,50.955841,6.962041
+TankE DE-Köln Nikolausstraße,50.923151,6.929002
+TankE DE-Köln Ottostraße,50.952359,6.923396
+TankE DE-Köln Peterstraße,50.93386,6.949753
+TankE DE-Köln Pfarrer-Oermann-Platz,50.89377,7.07819
+TankE DE-Köln Prälat-van-Acken-Straße,50.925322,6.897056
+TankE DE-Köln Reiherstraße,50.874574,6.958476
+TankE DE-Köln Rosenstraße,50.926567,6.958534
+TankE DE-Köln Salierring,50.927678,6.94431
+TankE DE-Köln Schwalbacher Straße,50.909885,6.946981
+TankE DE-Köln St. Sebastianusstraße,50.856644,7.086501
+TankE DE-Köln Stammheimer Straße,50.964896,6.976624
+TankE DE-Köln Sürther Marktplatz,50.86178,7.00788
+TankE DE-Köln Thorwaldsenstraße,50.93471,7.0272
+TankE DE-Köln Tiefentalstraße,50.974309,7.009839
+TankE DE-Köln Venloer Straße,50.95814,6.898984
 TankE DE-Köln Vorsterstraße,50.938792,7.001982
+TankE DE-Köln Walther-Rathenau-Straße,50.89152,6.99761
+TankE DE-Köln Woensamstraße,50.939036,6.922319
+TankE DE-Köln Zum Gremberger Wäldchen,50.91552,7.00078
+TankE DE-Köln Zülpicher Straße,50.921509,6.920071
+TankE DE-Pulheim In den Benden,51.014301,6.749043
 
 TCB ES-Navalmoral Autovía del Suroeste,39.873511,-5.549847
 
@@ -14408,7 +14483,6 @@ Threeforce DE-Babenhausen An der Stadtmauer 5,49.962623,8.954204
 Threeforce DE-Bad Zwischenahn Ocholter Straße 10a,53.188187,7.967912
 Threeforce DE-Barßel Gewerbepark 19,53.128699,7.769879
 Threeforce DE-Birkenfeld Hochwaldstraße 2,49.650445,7.156906
-Threeforce DE-Bützow Vor dem Rühner Tor,53.848315,11.976961
 Threeforce DE-Darmstadt Kasinostraße 96 A,49.88349,8.64835
 Threeforce DE-Daun Rosenbergstraße,50.196868,6.828973
 Threeforce DE-Dörpen Industriestr. 6,52.971251,7.36132
@@ -14457,6 +14531,16 @@ Threeforce DE-Wildeshausen Buchbinderstraße 1,52.887098,8.413097
 Threeforce DE-Wolfsburg Brandgehaege,52.369121,10.731178
 Threeforce DE-Wuppertal Unten Vorm Steeg,51.236613,7.096498
 
+Thüga DE-Gaienhofen Im Kohlgarten,47.684483,8.983745
+Thüga DE-Gailingen Hauptstraße,47.6971,8.754161
+Thüga DE-Kandel Gartenstraße,49.080936,8.19673
+Thüga DE-Kandel Mittlere Ortsstraße,49.156361,8.288902
+Thüga DE-Schifferstadt Bahnhofstraße,49.389395,8.371992
+Thüga DE-Singen Hohgarten,47.76139,8.83299
+Thüga DE-Singen Maggistraße,47.755939,8.839817
+Thüga DE-Singen Schaffhauser Straße,47.762038,8.829227
+Thüga DE-Singen Stockholzstraße,47.753535,8.858779
+
 TIWAG AT-Kirchberg im Tirol Hauptstraße,47.448501,12.315506
 TIWAG AT-Lienz Mühlgasse,46.828366,12.767434
 TIWAG AT-See Elis,47.086113,10.470062
@@ -14476,20 +14560,30 @@ TotalEnergies BE-Total Zolder E314 Dir Aachen,51.011414,5.332598,80
 TotalEnergies BE-Total Zolder E314 Dir Leuven,51.012986,5.333206
 TotalEnergies BE-Totalenergies Vilvoorde,50.919011,4.425911,80
 TotalEnergies BE-Totalenergies Zwijndrecht,51.203703,4.318192,80
+TotalEnergies DE-Ahlen Kruppstraße,51.769063,7.929198
 TotalEnergies DE-Alsfeld,50.733014,9.242024,40
 TotalEnergies DE-Bad Hersfeld Carl-Benz-Str.,50.858612,9.722855,80
 TotalEnergies DE-Barsinghausen,52.333147,9.414582,80
 TotalEnergies DE-Berlin Margarete-Sommer-Straße,52.531029,13.441236,80
 TotalEnergies DE-Berlin Storkower Straße,52.527557,13.45786,80
 TotalEnergies DE-Berlin,52.582051,13.43239,80
+TotalEnergies DE-Bochum Hattinger Straße,51.44558,7.1939
+TotalEnergies DE-Bochum Porschestraße,51.487106,7.1926
 TotalEnergies DE-Burgoberbach,49.241276,10.608111,80
+TotalEnergies DE-Castrop-Rauxel Westring,51.5526,7.294461
 TotalEnergies DE-Coswig,51.889257,12.402952,80
+TotalEnergies DE-Drensteinfurt Am Ladestrang,51.700223,7.317477
+TotalEnergies DE-Emsdetten Grevener Damm,52.145249,7.563511
 TotalEnergies DE-Erlangen,49.545248,11.029815,80
 TotalEnergies DE-Ferch,52.303758,12.971626,80
 TotalEnergies DE-Friedenweiler,47.897567,8.274452,80
 TotalEnergies DE-Glauchau,50.840013,12.542341,80
+TotalEnergies DE-Grasberg Wörpedorfer Straße,53.184435,8.981924
 TotalEnergies DE-Haag,48.1652,12.163295,80
+TotalEnergies DE-Hagen Elseyer Straße,51.367628,7.550393
+TotalEnergies DE-Herne Holsterhauser Straße,51.53103,7.204865
 TotalEnergies DE-Hirschberg,49.507923,8.638197,80
+TotalEnergies DE-Idstein Wiesbadener Straße,50.216926,8.254032
 TotalEnergies DE-Karlsruhe,48.985836,8.4475,80
 TotalEnergies DE-Kirchheim,48.641957,9.433532,80
 TotalEnergies DE-Kösching,48.811149,11.479536
@@ -14615,6 +14709,7 @@ UNI-ELEKTRO DE-Dresden Bamberger Straße,51.035756,13.710349
 Uno-X DK-Vejle Grønlandsvej,55.664123,9.549478
 
 Vattenfall DE-Berlin Kiefholzstraße,52.491352,13.450965
+Vattenfall DE-Berlin Segelfliegerdamm,52.444882,13.510587
 Vattenfall DE-Bismark Breite Straße,52.661963,11.554862
 Vattenfall DE-Erfurt Gothaer Straße,50.960457,10.991635
 Vattenfall SE-Kristianstad Bochums väg,56.023166,14.118127
@@ -14751,9 +14846,12 @@ Volkswagen DE-Zwickau Schubertstraße,50.746634,12.478944
 Volkswagen DE-Öhringen Rudolf-Diesel-Straße 1,49.200257,9.47635
 Volkswagen DE-Überlingen Hauptstraße 37,47.802296,9.238275
 
+WEMAG DE-Bützow Vor dem Rühner Tor,53.848041,11.976902
 WEMAG DE-Dobbertin Goldberger Straße,53.620337,12.082154
+WEMAG DE-Lübz Am Fuchsberg,53.46397,12.045951
 WEMAG DE-Schwerin Obotritenring,53.637566,11.404817
 WEMAG DE-Schwerin Platz der Freiheit,53.633438,11.402878
+WEMAG DE-Valluhn Am Heisterbusch,53.508901,10.845572
 
 WENEA ES-Madrid Calle Roberto Domingo,40.433794,-3.661095
 
@@ -14785,8 +14883,6 @@ ZSE SK-Rimavská Sobota Košická cesta,48.392075,20.003666
 
 Белоруснефть BY-Мінск праспект Газеты Праўда,53.864494,27.482092
 Белоруснефть BY-Мінск праспект Машэрава,53.917145,27.5436
-
-﻿ARAL DE-Bad Honnef Gewerbepark Dachsberg,50.646867,7.337694
 
 AT Altentann Berg,47.891075,13.21846
 AT Eugendorf Center,47.860013,13.126857,20
