@@ -513,7 +513,7 @@ WHERE
                 tour.CorrectPositionDistances();
                 tour.ComputeHeading();
                 tour.CheckSpeed();
-                Tools.DebugLog($"#{kli.carID} Komoot: ParseTours({tourid}) " + Environment.NewLine + tour);
+                // Tools.DebugLog($"#{kli.carID} Komoot: ParseTours({tourid}) " + Environment.NewLine + tour);
                 foreach (int posID in tour.positions.Keys.OrderBy(k => k))
                 {
                     KomootTour.Position pos = tour.positions[posID];
