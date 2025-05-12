@@ -430,7 +430,7 @@ WHERE
             catch (Exception ex)
             {
                 ex.ToExceptionless().FirstCarUserID().Submit();
-                Tools.DebugLog("Komoot: Exception", ex);
+                // Tools.DebugLog("Komoot: Exception", ex);
             }
         }
 
