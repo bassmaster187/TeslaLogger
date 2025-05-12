@@ -337,10 +337,14 @@ namespace TeslaLogger
         private readonly string username = string.Empty;
         private readonly string password = string.Empty;
 
+        private bool workNow; // defaults to false
+        private static List<Komoot> komootInstances = new List<Komoot>();
+
         private static readonly Dictionary<string, string> EndPoints = new Dictionary<string, string>()
         {
             { "KomootListSettings", "/komoot/listSettings" },
-            { "KomootSaveSettings", "/komoot/saveSettings" }
+            { "KomootSaveSettings", "/komoot/saveSettings" },
+            { "KomootWorkNow", "/komoot/workNow" }
         };
 
         public Komoot(int CarID, string Username, string Password)
@@ -348,6 +352,12 @@ namespace TeslaLogger
             this.carID = CarID;
             this.username = Username;
             this.password = Password;
+            komootInstances.Add(this);
+        }
+
+        public void WorkNow()
+        {
+            workNow = true;
         }
 
         internal static void CheckSchema()
@@ -424,7 +434,11 @@ WHERE
                 while (true)
                 {
                     Work(kli);
-                    Thread.Sleep((int)(((DateTime.Now.Hour >= 4 && DateTime.Now.Hour < 18) ? 0.5 : 1.0) * (double)interval * 1000.0));
+                    for (int i = 0; i < 1000; i++)
+                    {
+                        if (workNow) { break; }
+                        Thread.Sleep((int)(((DateTime.Now.Hour >= 4 && DateTime.Now.Hour < 18) ? 0.5 : 1.0) * (double)interval));
+                    }
                 }
             }
             catch (Exception ex)
@@ -1302,11 +1316,23 @@ VALUES (
                 case bool _ when request.Url.LocalPath.Equals(EndPoints["KomootSaveSettings"], StringComparison.Ordinal):
                     HandleRequest_KomootSaveSettings(request, response);
                     break;
+                case bool _ when request.Url.LocalPath.Equals(EndPoints["KomootWorkNow"], StringComparison.Ordinal):
+                    HandleRequest_KomootWorkNow(request, response);
+                    break;
                 default:
                     response.StatusCode = (int)HttpStatusCode.NotFound;
                     WebServer.WriteString(response, @"URL Not Found!");
                     break;
             }
+        }
+
+        private static void HandleRequest_KomootWorkNow(HttpListenerRequest _, HttpListenerResponse response)
+        {
+            foreach (Komoot komoot in komootInstances)
+            {
+                komoot.WorkNow();
+            }
+            WebServer.WriteString(response, "OK");
         }
 
         private static void HandleRequest_KomootSaveSettings(HttpListenerRequest request, HttpListenerResponse response)
