@@ -240,7 +240,7 @@ namespace TeslaLogger
                     // compute first
                     positions[positionKeys[0]].heading = GetBearing(positions[positionKeys[0]].lat, positions[positionKeys[0]].lng, positions[positionKeys[1]].lat, positions[positionKeys[1]].lng);
                     // compute last
-                    positions[positionKeys[positionKeys.Count - 2]].heading = GetBearing(positions[positionKeys[positionKeys.Count - 2]].lat, positions[positionKeys[positionKeys.Count - 2]].lng, positions[positionKeys[positionKeys.Count - 1]].lat, positions[positionKeys[positionKeys.Count - 1]].lng);
+                    positions[positionKeys[positionKeys.Count - 1]].heading = GetBearing(positions[positionKeys[positionKeys.Count - 2]].lat, positions[positionKeys[positionKeys.Count - 2]].lng, positions[positionKeys[positionKeys.Count - 1]].lat, positions[positionKeys[positionKeys.Count - 1]].lng);
                     // compute everything in between 2..(n-1)
                     for (index = 1; index < positionKeys.Count - 2; index++)
                     {
