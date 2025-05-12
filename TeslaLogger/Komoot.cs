@@ -275,6 +275,34 @@ namespace TeslaLogger
 
             internal void CheckSpeed()
             {
+                if (this.positions.Count > 3)
+                {
+                    // 4 or more positions
+                    Dictionary<int, int> positionKeys = new Dictionary<int, int>();
+                    int index = 0;
+                    foreach (int posID in positions.Keys.OrderBy(k => k))
+                    {
+                        positionKeys.Add(index, posID);
+                        index += 1;
+                    }
+                    for (index = 1; index < positionKeys.Count - 3; index++)
+                    {
+                        Position prevP = positions[positionKeys[index - 1]];
+                        Position currP1 = positions[positionKeys[index]];
+                        Position currP2 = positions[positionKeys[index + 1]];
+                        Position nextP = positions[positionKeys[index + 2]];
+                        double acceleration1 = (currP1.speed - prevP.speed) / 3.6 / (currP1.delta_t - prevP.delta_t) / 1000;
+                        double acceleration2 = (nextP.speed - currP2.speed) / 3.6 / (nextP.delta_t - currP2.delta_t) / 1000;
+                        //Tools.DebugLog($"speed:{prevP.speed}->{currP.speed}->{nextP.speed} acceleration1:{acceleration1}m/s acceleration2:{acceleration2}m/s headingdiff1:{prevP.heading-currP.heading} headingdiff2:{currP.heading-nextP.heading}");
+                        if (acceleration1 > 1.1 && acceleration2 < -1.1)
+                        {
+                            // drop speed at currP and replace with avg(prevP,nextP)
+                            Tools.DebugLog($"speed4: {Math.Round(prevP.speed, 2)}->{Math.Round(currP1.speed, 2)}->{Math.Round(currP2.speed, 2)}->{Math.Round(nextP.speed, 2)} acc:{Math.Round(acceleration1, 2)}-{Math.Round(acceleration2, 2)} correct speed:{Math.Round(currP1.speed, 2)}->{Math.Round((prevP.speed * 3 + nextP.speed * 2) / 5.0, 2)},{Math.Round(currP2.speed, 2)}->{Math.Round((prevP.speed * 2 + nextP.speed * 3) / 5.0, 2)}");
+                            currP1.speed = (prevP.speed * 3 + nextP.speed * 2) / 5.0;
+                            currP2.speed = (prevP.speed * 2 + nextP.speed * 3) / 5.0;
+                        }
+                    }
+                }
                 if (this.positions.Count > 2)
                 {
                     // 3 or more positions
@@ -296,7 +324,7 @@ namespace TeslaLogger
                         if (acceleration1 > 1.1 && acceleration2 < -1.1)
                         {
                             // drop speed at currP and replace with avg(prevP,nextP)
-                            Tools.DebugLog($"speed: {Math.Round(prevP.speed, 2)}->{Math.Round(currP.speed, 2)}->{Math.Round(nextP.speed, 2)} acc:{Math.Round(acceleration1, 2)}-{Math.Round(acceleration2, 2)} correct speed:{Math.Round(currP.speed, 2)}->{Math.Round((prevP.speed+nextP.speed)/2.0,2 )}");
+                            Tools.DebugLog($"speed3: {Math.Round(prevP.speed, 2)}->{Math.Round(currP.speed, 2)}->{Math.Round(nextP.speed, 2)} acc:{Math.Round(acceleration1, 2)}-{Math.Round(acceleration2, 2)} correct speed:{Math.Round(currP.speed, 2)}->{Math.Round((prevP.speed+nextP.speed)/2.0,2 )}");
                             currP.speed = (prevP.speed + nextP.speed) / 2.0;
                         }
                     }
