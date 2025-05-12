@@ -242,7 +242,7 @@ namespace TeslaLogger
                     // compute last
                     positions[positionKeys[positionKeys.Count - 1]].heading = GetBearing(positions[positionKeys[positionKeys.Count - 2]].lat, positions[positionKeys[positionKeys.Count - 2]].lng, positions[positionKeys[positionKeys.Count - 1]].lat, positions[positionKeys[positionKeys.Count - 1]].lng);
                     // compute everything in between 2..(n-1)
-                    for (index = 1; index < positionKeys.Count - 2; index++)
+                    for (index = 1; index < positionKeys.Count - 1; index++)
                     {
                         Position prevP = positions[positionKeys[index - 1]];
                         Position currP = positions[positionKeys[index]];
