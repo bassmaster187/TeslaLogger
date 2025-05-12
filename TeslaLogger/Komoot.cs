@@ -439,6 +439,7 @@ WHERE
                         if (workNow) { break; }
                         Thread.Sleep((int)(((DateTime.Now.Hour >= 4 && DateTime.Now.Hour < 18) ? 0.5 : 1.0) * (double)interval));
                     }
+                    workNow = false;
                 }
             }
             catch (Exception ex)
