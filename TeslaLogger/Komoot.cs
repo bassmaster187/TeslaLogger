@@ -360,6 +360,7 @@ namespace TeslaLogger
 
         public void WorkNow()
         {
+            Tools.DebugLog("WorkNow()");
             workNow = true;
         }
 
