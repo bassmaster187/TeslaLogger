@@ -2648,6 +2648,8 @@ Supercharger-V3 IT-Roma - North,41.970607,12.541756
 Supercharger-V3 IT-Roma South West,41.815947,12.400934
 Supercharger-V3 IT-Rovereto,45.856559,11.001817
 Supercharger IT-San Giovanni Teatino,42.399194,14.16396
+Supercharger-V4 IT-San Giuliano Milanese,45.388555,9.258962
+Supercharger-V4 IT-San Giuliano Milanese,45.388759,9.258819
 Supercharger-V3 IT-Sarzana - La Spezia,44.117695,9.945583
 Supercharger-V3 IT-Serravalle Scrivia,44.735607,8.839653
 Supercharger IT-Sondrio,46.164535,9.677329
@@ -3300,6 +3302,7 @@ Supercharger SK-Zvolen,48.627379,19.103481
 Supercharger-V3 TR-Akhisar,38.930236,27.703596
 Supercharger-V3 TR-Ankara,39.949583,32.832923
 Supercharger-V3 TR-Edirne,41.680352,26.582235
+Supercharger-V3 TR-Istanbul Asia Garage Floor -2,41.003233,29.070793
 
 Supercharger-V3 US-Abbott TX,31.899572,-97.091485
 Supercharger-V3 US-Aberdeen MD Churchville Road,39.529619,-76.194111
@@ -5498,7 +5501,7 @@ Aldi DE-Nürnberg Wiesbadenerstr.,49.522306,11.007037
 Aldi DE-Nürnberg-Herpersdorf An der Radrunde,49.372028,11.081889
 Aldi DE-Oberasbach Kurt-Schumacher-Straße,49.4348,10.970972
 Aldi DE-Oberhausen Dorstener Straße,51.536713,6.880898
-Aldi DE-Oberhausen Mellinghofer Str.,51.479778,6.88525
+Aldi DE-Oberhausen Mellinghofer Straße,51.479495,6.886037
 Aldi DE-Oberndorf am Neckar An der Hochbrücke,48.257366,8.848647
 Aldi DE-Osterhofen Industriestraße,48.7095,13.0084
 Aldi DE-Passau Neuburger Straße,48.55951,13.422341
@@ -6158,6 +6161,16 @@ autoSense CH-Sihlbrugg Zugerstrasse,47.217321,8.576232
 
 autostrom.plus DE-Midlum A27 West,53.72631,8.660925
 
+AVIA DE-Borken Ahauser Straße,51.852478,6.864004
+AVIA DE-Borken Boumannstraße,51.8497,6.84698
+AVIA DE-Isselburg Bocholter Straße,51.81948,6.44506
+AVIA DE-Lauf a.d.Pegnitz Altdorfer Straße,49.503687,11.28584
+AVIA DE-Oldenburg Bremer Heerstraße,53.11873,8.25854,25
+AVIA DE-Rhede (Ems) Zum Spieksee,53.064132,7.275805
+
+Backcharge DE-Leer (Ostfriesland) Ringstraße,53.241384,7.459588,25
+Backcharge DE-Neubörger Hauptstraße,52.956025,7.449563
+Backcharge DE-Neuharlingersiel Wirrenburg,53.697414,7.718373
 Backcharge DE-Papenburg Carl-Benz-Straße,53.05111,7.489103
 
 badenova DE-Freiburg im Breisgau Schreiberstraße,47.990635,7.846362
@@ -6192,6 +6205,7 @@ BeCharge IT-San Vittore Olona Via Sempione,45.591317,8.935639
 Bestcharge LU-Wasserbillig Mertert Route de Wasserbillig,49.706841,6.4888
 Bestcharge LU-Wasserbillig Mertert Route de Wasserbillig,49.706947,6.488415
 
+Bosch DE-Salzgitter John-F.-Kennedy-Straße,52.138041,10.294846
 Bosch DE-Salzgitter John-F.-Kennedy-Straße,52.138666,10.295846
 
 BP DE-Allershausen Schroßlacher Straße,48.428106,11.585223
@@ -6431,6 +6445,51 @@ BP GB-Poppleton Boroughbridge Road,53.971951,-1.142952
 BP NL-Amsterdam Nieuwe Hemweg,52.39394,4.864531
 BP NZ-Wānaka Sir Tim Wallis Drive,-44.69491,169.155997
 
+BS-ENERGY DE-Braunschweig Am Mascheroder Holz,52.225439,10.566852
+BS-ENERGY DE-Braunschweig Am Schlossgarten,52.264949,10.52972
+BS-ENERGY DE-Braunschweig Auguststraße,52.258917,10.527825
+BS-ENERGY DE-Braunschweig Beckenwerkerstraße,52.267225,10.516405
+BS-ENERGY DE-Braunschweig Brackestraße,52.310231,10.517722
+BS-ENERGY DE-Braunschweig Bunsenstraße,52.242663,10.563604
+BS-ENERGY DE-Braunschweig Burgundenplatz,52.287181,10.533081
+BS-ENERGY DE-Braunschweig Fichtengrund,52.237097,10.549416
+BS-ENERGY DE-Braunschweig Frankfurter Straße,52.253251,10.510326
+BS-ENERGY DE-Braunschweig Gerstäckerstraße,52.259267,10.539086
+BS-ENERGY DE-Braunschweig Gneisenaustraße,52.268706,10.543751
+BS-ENERGY DE-Braunschweig Hans-Porner-Straße,52.244039,10.537026
+BS-ENERGY DE-Braunschweig Havelstraße,52.246598,10.478556
+BS-ENERGY DE-Braunschweig Helene-Künne-Allee,52.233874,10.490343
+BS-ENERGY DE-Braunschweig Herzogin-Elisabeth-Straße,52.269741,10.548088
+BS-ENERGY DE-Braunschweig Kannengießerstraße,52.264858,10.519701
+BS-ENERGY DE-Braunschweig Kurt-Schumacher-Straße,52.253832,10.537399
+BS-ENERGY DE-Braunschweig Lilienthalplatz,52.31613,10.560168
+BS-ENERGY DE-Braunschweig Neue Straße,52.263867,10.518492
+BS-ENERGY DE-Braunschweig Nimes-Straße,52.257243,10.521958
+BS-ENERGY DE-Braunschweig Pockelsstraße,52.274582,10.528785
+BS-ENERGY DE-Braunschweig Reichsstraße,52.266932,10.52223
+BS-ENERGY DE-Braunschweig Siegfriedstraße,52.287043,10.519884
+BS-ENERGY DE-Braunschweig Thüringenplatz,52.229463,10.533787
+BS-ENERGY DE-Braunschweig Werder,52.269819,10.523136
+
+BundK DE-Bad Homburg Ober-Eschenbacher Straße,50.210821,8.655651
+BundK DE-Bad Oyenhausen Mindener Straße,52.210898,8.811119
+BundK DE-Bad Salzuflen Benzstraße,52.054529,8.756617
+BundK DE-Burgdorf Lise-Meitner-Straße,52.460881,9.992311
+BundK DE-Cloppenburg Nicolaus-Otto-Straße,52.835298,8.097463
+BundK DE-Detmold Windmeierweg,51.961235,8.842273
+BundK DE-Gütersloh Hülsbrockstraße,51.918967,8.410106
+BundK DE-Herford Goebenstraße,52.13023,8.668954
+BundK DE-Höxter Holzmindener Straße,51.829978,9.436635
+BundK DE-Ibbenbühren Rudolf-Diesel-Straße,52.260198,7.712429
+BundK DE-Kronberg Frankfurter Straße,50.174742,8.521667
+BundK DE-Melle Johann-Uttinger-Straße,52.194857,8.343742
+BundK DE-Paderborn Stedener Feld,51.730429,8.721432
+BundK DE-Salzwedel Hauptstraße,52.86679,11.095144
+BundK DE-Stendal Heerener Straße,51.73014,8.72137
+BundK DE-Uelzen Nordallee,52.986693,10.547285
+BundK DE-Vechta Osloer Straße,52.730668,8.264596
+BundK DE-Winsen/Luhe Lüneburger Straße,53.352199,10.227263
+
 CEZ CZ-Děčín,50.770023,14.207249
 CEZ CZ-Frýdek-Místek,49.681595,18.347128
 CEZ CZ-Harrachov Nový Svět,50.780771,15.420342
@@ -6446,6 +6505,7 @@ CEZ CZ-Stráž nad Nisou,50.783638,15.023201
 CEZ CZ-Trmice,50.646149,13.986876
 CEZ CZ-Třinec,49.660275,18.672079
 CEZ CZ-Vrchlabí,50.62006,15.599216
+CEZ CZ-Čechtice,49.658431,15.118353
 CEZ CZ-Šlovice Dobřany-Plzeň,49.678013,13.330395
 
 Chargefox AU-Browns Plains QLD Browns Plains Rd,-27.663758,153.041055
@@ -7273,8 +7333,14 @@ Compleo DE-Zwenkau Hafenstraße,51.23378,12.334526
 Compleo DE-Zwickau Uhdestraße,50.70933,12.50408
 Compleo DE-Zwingenberg Gießer Weg,49.72307,8.60184
 
+CutPower DE-Berlin Spandauer Damm,52.519541,13.291894
+CutPower DE-Dietzenbach Elisabeth-Selbert-Straße,50.014207,8.794652,25
+CutPower DE-Flensburg Husumer Straße,54.759538,9.409237
+CutPower DE-Flensburg Nordstraße,54.8015,9.486089
+CutPower DE-Neumünster Krokamp,54.047816,9.984584
 CutPower DE-Niebüll Ostring,54.78219,8.85223
 CutPower DE-Sylt Kiarwai,54.902477,8.328275
+CutPower DE-Wilhelmshaven Ernst-Barlach-Straße,53.52719,8.064548
 
 da-emobil AT-Ansfelden Stelzhammerstraße,48.204409,14.259646
 da-emobil AT-Brunn am Gebirge Industriestraße,48.109267,16.302805,30
@@ -7340,6 +7406,7 @@ E.ON DE-Alt Duvenstedt An der A7,54.366156,9.670627
 E.ON DE-Ascheberg,51.774488,7.6394
 E.ON DE-Auetal An der A2,52.257491,9.306432
 E.ON DE-Augsburg Ab der A8,48.412634,10.91163
+E.ON DE-Bad Schwartau Eutiner Ring,53.917803,10.696242
 E.ON DE-Bad Segeberg Wasserwerk,53.938991,10.28695
 E.ON DE-Baden-Baden An der A5,48.80881,8.18106
 E.ON DE-Bautzen An der A4,51.198028,14.330231
@@ -7736,6 +7803,7 @@ Electra IT-Peschiera del Garda Via Tangenziale,45.43407,10.710375
 Electric55 FR-Gap Bis Rue Carnot,44.561015,6.081755
 Electric55 FR-Grimaud Avenue de la Mer,43.274918,6.577813
 
+Electrip HR-Jablanovec Zaprešićka Westgate,45.87226,15.827895
 electrip HR-Zagreb Oreškovićeva ulica,45.759464,15.98306
 electrip HR-Zagreb Ulica Velimira Škorpika,45.796794,15.859543
 
@@ -9723,6 +9791,11 @@ evd DE-Dormagen Lübecker Straße,51.094089,6.81296
 Evie AU-Cannon Hill QLD Creek Rd,-27.471975,153.097473
 Evie AU-Coomera QLD Pacific Highway,-27.855358,153.310488
 
+Eviny DE-Bad Windsheim Rothenburger Straße,49.498535,10.410445
+Eviny DE-Düren Neusser Straße,50.842644,6.486259
+Eviny DE-Gaildorf Schmiedstraße,48.999267,9.772956
+Eviny DE-Halver Von-Vincke-Straße,51.189726,7.503823
+Eviny DE-Wassenberg Brabanter Straße,51.1018,6.1833
 Eviny NO-Andenes Industriveien,69.309859,16.100335
 Eviny NO-Kristiansund Kongens Plass,63.110416,7.728622
 Eviny NO-Svelgen Gunnar Scheldrups veg,61.76843,5.292211
@@ -10454,6 +10527,7 @@ EWE-GO DE-Schortens Oldenburger Straße,53.537419,7.967845
 EWE-GO DE-Schortens Rheinstr.,53.53684,7.9487
 EWE-GO DE-Schrobenhausen Rinderhofer Breite,48.56416,11.28907
 EWE-GO DE-Schwabach Am Falbenholzweg,49.318986,11.048517
+EWE-GO DE-Schwabach Am Falbenholzweg,49.322897,11.05428
 EWE-GO DE-Schwabmünchen Augsburger Straße,48.19723,10.75826
 EWE-GO DE-Schwanewede Blumenthaler Straße,53.22398,8.59486
 EWE-GO DE-Schwanewede Hannoversche Str.,53.22636,8.58243
@@ -10631,6 +10705,8 @@ EWV-Bonn DE-Bonn Flughafen Köln-Bonn,50.879856,7.119221
 
 eze DE-Frankfurt am Main Luxemburgerallee,50.119729,8.711134
 
+Eşarj TR-Silivri/İstanbul General Ali İhsan Türkkan Cd.,41.074694,28.2608
+
 familia DE-Elmshorn Hans-Böckler- Straße,53.74851,9.68473
 familia DE-Geesthacht Spandauer Straße,53.432495,10.34185
 Familia DE-Hamburg,53.608366,10.044162
@@ -10807,6 +10883,8 @@ GOFAST CH-Zuchwil Schützenweg,47.201739,7.571397
 
 GP-JOULE DE-Kiel Winterbeker Weg,54.309316,10.109595
 GP-JOULE DE-Marne Alter Kirchweg,53.955923,9.022613
+
+GreenFlux NL-Amsterdam Sint Antoniesluis,52.369763,4.900891
 
 GreenMotion CH-Mörschwil Schulstraße,47.468429,9.424728
 
@@ -11272,6 +11350,7 @@ Ionity CZ-Lovosice,50.51188,14.0527,5
 Ionity CZ-Nupaky,49.984404,14.602629
 Ionity CZ-Pávov (dir. Brno),49.453814,15.59148
 Ionity CZ-Pávov (dir. Prague),49.455104,15.593272
+Ionity CZ-Čechtice,49.65828,15.120532
 Ionity DE-Aachener Land Nord,50.817668,6.213854
 Ionity DE-Aachener Land Süd,50.817306,6.216629
 Ionity DE-Aalbek West,54.092671,9.92914
@@ -12085,9 +12164,18 @@ Kaufland SK-Senec Brezová,48.22463,17.403691
 
 KELAG AT-Klagenfurt Arnulfplatz,46.620712,14.310094
 
+Klindwort-BHKW DE-Bad Schwartau Auguststraße,53.917378,10.697308
+
 Kople NO-Andenes Industriveien,69.310198,16.098938
 
 Kreisler AT-St. Veit Technologiepark,46.757146,15.6238
+
+LADEFIX DE-Aue Wettinerstraße,50.586075,12.700782
+LADEFIX DE-Burgstädt Beethovenstrasse,50.912944,12.809113
+LADEFIX DE-Chemnitz Zwickauer Straße,50.816214,12.842483
+LADEFIX DE-Grüna Chemnitzer Straße,50.81093,12.787175
+LADEFIX DE-Limbach-Oberfrohna Helenenstraße,50.858479,12.775807
+LADEFIX DE-Stollberg Lutherstrasse,50.710134,12.777614
 
 Ladegrün DE-Arnstein Cancale-Platz,49.976265,9.967147
 Ladegrün DE-Arnstein Hofriedplatz,49.978919,9.965356
@@ -12122,6 +12210,7 @@ LadeverbundPlus DE-Fürth Nürnberger Straße,49.465506,11.011214
 LadeverbundPlus DE-Langenzenn Nürnberger Straße,49.496364,10.804363
 LadeverbundPlus DE-Langenzenn Sanktustorstraße,49.495477,10.795194
 LadeverbundPlus DE-Nürnberg,49.435375,11.059562
+LadeverbundPlus DE-Schwabach Am Falbenholzweg,49.322433,11.051597
 LadeverbundPlus DE-Schwabach,49.323136,11.042675
 LadeverbundPlus DE-Tauberbischofsheim,49.630349,9.666165
 LadeverbundPlus DE-Wilhermsdorf,49.4811,10.716472
@@ -12748,7 +12837,7 @@ Lidl DE-Nortorf,54.165269,9.857603
 Lidl DE-Nördlingen Hofer Straße 10,48.858032,10.505455
 Lidl DE-Nörten-Hardenberg,51.624651,9.937396
 Lidl DE-Nörvenich,50.807616,6.654059
-Lidl DE-Oberhausen Dorstener Straße 290-292,51.522689,6.864541
+Lidl DE-Oberhausen Dorstener Straße,51.523159,6.864312
 Lidl DE-Oberhausen Teutoburger Straße,51.520149,6.89273
 Lidl DE-Oberhausen Teutoburger Straße,51.52023,6.893598
 Lidl DE-Oberkirch Hammermatt 2,48.536471,8.062956
@@ -12980,6 +13069,25 @@ M-Charge CH-Sarnen Nelkenstrasse,46.896802,8.249671
 M-Charge CH-Steinhausen Hinterbergstrasse,47.192268,8.477475
 M-Charge CH-Thun Weststrasse Panorama-Center,46.744414,7.605008
 M-Charge CH-Worb Richigenstrasse,46.926743,7.564881
+
+Mainova DE-Bad Homburg Gluckensteinweg,50.233797,8.608915
+Mainova DE-Bad Soden am Taunus Am Schnittelberg,50.16046,8.487073
+Mainova DE-Flörsheim am Main Industriestraße,50.040783,8.444136
+Mainova DE-Frankfurt am Main Darmstädter Landstraße,50.089222,8.691443
+Mainova DE-Frankfurt am Main Europa-Allee,50.10837,8.628456
+Mainova DE-Frankfurt am Main Gräfstraße,50.121224,8.651965
+Mainova DE-Frankfurt am Main Heerstraße,50.14492,8.606483
+Mainova DE-Frankfurt am Main Heinrich-Lanz-Allee,50.190584,8.652075
+Mainova DE-Frankfurt am Main Kuhwaldstraße,50.117119,8.640922
+Mainova DE-Frankfurt am Main Lange Meile,50.191245,8.638627
+Mainova DE-Frankfurt am Main Ludwig-Erhard-Anlage,50.112048,8.642547
+Mainova DE-Frankfurt am Main Ludwig-Landmann-Straße,50.128886,8.621355
+Mainova DE-Frankfurt am Main Zum Rebstockbad,50.111892,8.62006
+Mainova DE-Mainz Am Leichborn,49.998551,8.21503
+Mainova DE-Mainz Dijonstraße,49.997127,8.230398
+Mainova DE-Niedernhausen Idsteiner Straße,50.16321,8.313718
+Mainova DE-Schmitten im Taunus Kanonenstraße,50.269489,8.444861
+Mainova DE-Waldbrunn (Westerwald) In der Struth,50.51855,8.109852
 
 MB DE-Butzbach In der Alböhn,50.429422,8.683063,50
 
@@ -13498,6 +13606,7 @@ OK DK-Hasle Storegade,55.184427,14.705407
 OKQ8 SE-Sveg Vallarvägen,62.034668,14.367836
 
 OMV-eMotion AT-Deutsch-Wagram S1 Ost,48.310754,16.515215
+OMV-eMotion HU-Budapest Sibrik Miklós út,47.469994,19.156208
 OMV-eMotion HU-Révfülöp Badacsonyi út hrsz.,46.826208,17.605703
 OMV-eMotion RO-Margina Sat Sintesti,45.857355,22.247342
 
@@ -14265,6 +14374,7 @@ SWARCO DE-Lich Gottlieb-Daimler-Straße,50.51113,8.82727
 
 swb DE-Bremen Heidlerchenstraße,53.192924,8.554896
 
+swisscharge CH-Ascona Via Albarelle,46.151748,8.771934
 swisscharge CH-Chur,46.847542,9.501609,10
 swisscharge CH-Flums Staatsstrasse,47.096255,9.353509
 swisscharge CH-Hinwil Gossauerstrasse,47.29897,8.83834
@@ -14360,6 +14470,7 @@ TankE DE-Pulheim In den Benden,51.014301,6.749043
 TCB ES-Navalmoral Autovía del Suroeste,39.873511,-5.549847
 
 TEA HU-Balatonalmádi Szabolcs u.,47.040134,18.019039
+TEA HU-Budapest Gyömrői út,47.464225,19.159225
 TEA HU-Gyenesdiá Kereskedők útja,46.77272,17.276458
 TEA HU-Kecskemét Izsáki út,46.899223,19.67733
 
@@ -14877,6 +14988,7 @@ ZES TR-Savaştepe Karaçam,39.349632,27.629283
 Zest GB-Gateshead Metrocentre,54.955215,-1.666485
 
 ZSE SK-Banská Bystrica Na Troskách,48.731194,19.135926,10
+ZSE SK-Bratislava Jelačičova,48.156915,17.130352
 ZSE SK-Rimavská Sobota Košická cesta,48.392075,20.003666
 
 ÖAMTC AT-Wien Hadikgasse,48.192959,16.278226,20
