@@ -40,7 +40,7 @@ namespace TeslaLogger
         {
             internal int carID;
             internal long tourID;
-            readonly internal DateTime start;
+            readonly internal DateTime startTS;
             internal double distance_m = double.NaN;
             internal double distance_calculated;
             readonly string type;
@@ -48,9 +48,10 @@ namespace TeslaLogger
             internal Position firstPosition;
             internal Position lastPosition;
             internal string json = "{}";
-            internal DateTime end;
+            internal DateTime endTS;
 
             internal Dictionary<int, Position> positions = new Dictionary<int, Position>();
+            internal double odometer;
 
             public KomootTour(int carID, long tourid, string type, string sport, DateTime start)
             {
@@ -58,8 +59,8 @@ namespace TeslaLogger
                 tourID = tourid;
                 this.type = type;
                 this.sport = sport;
-                this.start = start;
-                end = start;
+                this.startTS = start;
+                endTS = start;
             }
 
             public override string ToString()
@@ -68,7 +69,7 @@ namespace TeslaLogger
                 sb.AppendLine($"TourID: {tourID}");
                 sb.AppendLine($"Type: {type}");
                 sb.AppendLine($"Sport: {sport}");
-                sb.AppendLine($"Start: {start}");
+                sb.AppendLine($"Start: {startTS}");
                 sb.AppendLine($"Positions: {positions.Count}");
                 foreach (int key in positions.Keys.OrderBy(k => k))
                 {
@@ -164,9 +165,9 @@ namespace TeslaLogger
                 {
                     Tools.DebugLog($"addPosition(lat:{lat}, lng:{lng}, alt:{alt}, delta_t:{delta_t}, speed:{speed} not added");
                 }
-                if (start.AddMilliseconds(delta_t) > end)
+                if (startTS.AddMilliseconds(delta_t) > endTS)
                 {
-                    end = start.AddMilliseconds(delta_t);
+                    endTS = startTS.AddMilliseconds(delta_t);
                 }
             }
 
@@ -277,6 +278,7 @@ namespace TeslaLogger
             {
                 if (this.positions.Count > 3)
                 {
+                    Tools.DebugLog("CheckSpeed() speed4");
                     // 4 or more positions
                     Dictionary<int, int> positionKeys = new Dictionary<int, int>();
                     int index = 0;
@@ -305,6 +307,7 @@ namespace TeslaLogger
                 }
                 if (this.positions.Count > 2)
                 {
+                    Tools.DebugLog("CheckSpeed() speed3");
                     // 3 or more positions
                     Dictionary<int, int> positionKeys = new Dictionary<int, int>();
                     int index = 0;
@@ -490,11 +493,11 @@ WHERE
                     Logfile.Log($"#{kli.carID} Komoot: tour({tourid}) JSON:" + Environment.NewLine + tour.json);
                 }
                 // check if drivestate already exists
-                if (DriveStateExists(kli.carID, tour.start, out int drivestateID))
+                if (DriveStateExists(kli.carID, tour.startTS, out int drivestateID))
                 {
                     // tour does not exist in komoot table, but drivestate exists
                     // --> insert into komoot table
-                    Tools.DebugLog($"Komoot tour {tourid} does not exist in table komoot, but drivestate with carID {kli.carID} start {tours[tourid].start} exists: {drivestateID}");
+                    Tools.DebugLog($"Komoot tour {tourid} does not exist in table komoot, but drivestate with carID {kli.carID} start {tours[tourid].startTS} exists: {drivestateID}");
                     InsertTour(kli.carID, drivestateID, tour);
                     continue;
                 }
@@ -506,8 +509,8 @@ WHERE
                 ParseTourJSON(kli, tourid, tour);
                 // positions parsed, continue to insert positions into table pos
                 // find initial odometer for first pos
-                double odo = GetInitialOdo(tour.carID, tour.start);
-                Tools.DebugLog($"#{kli.carID} Komoot: ParseTours({tourid}) initialOdo:{odo}");
+                tour.odometer = GetInitialOdo(tour.carID, tour.startTS);
+                Tools.DebugLog($"#{kli.carID} Komoot: ParseTours({tourid}) initialOdo:{tour.odometer}");
                 int firstPosID = 0;
                 int LastPosId = 0;
                 tour.CorrectPositionDistances();
@@ -519,25 +522,40 @@ WHERE
                     KomootTour.Position pos = tour.positions[posID];
                     if (pos == tour.firstPosition)
                     {
-                        firstPosID = InsertPos(tour.carID, pos.lat, pos.lng, tour.start.AddMilliseconds(pos.delta_t), pos.speed, pos.alt, odo);
+                        firstPosID = InsertPos(tour.carID, pos.lat, pos.lng, tour.startTS.AddMilliseconds(pos.delta_t), pos.speed, pos.alt, tour.odometer);
                     }
                     else
                     {
-                        odo = odo + pos.dist_km;
-                        LastPosId = InsertPos(tour.carID, pos.lat, pos.lng, tour.start.AddMilliseconds(pos.delta_t), pos.speed, pos.alt, odo);
+                        tour.odometer = tour.odometer + pos.dist_km;
+                        LastPosId = InsertPos(tour.carID, pos.lat, pos.lng, tour.startTS.AddMilliseconds(pos.delta_t), pos.speed, pos.alt, tour.odometer);
                     }
                 }
                 if (firstPosID > 0 && LastPosId > 0)
                 {
                     // successfully added positions to table pos
-                    drivestateID = CreateDriveState(tour.carID, tour.start, firstPosID, tour.end, LastPosId);
+                    drivestateID = CreateDriveState(tour.carID, tour.startTS, firstPosID, tour.endTS, LastPosId);
                     InsertTour(kli.carID, drivestateID, tour);
+                    // mock CurrentJSON
+                    MockCurrentJSON(kli, tour);
                 }
                 else
                 {
                     Logfile.Log($"#{kli.carID} Komoot: error - no positions added to table pos - tour JSON:" + Environment.NewLine + tour.json);
                 }
             }
+
+        }
+
+        static void MockCurrentJSON(KomootLoginInfo kli, KomootTour tour)
+        {
+            CurrentJSON.jsonStringHolder[kli.carID] = $@"{{
+    ""sleeping"": true,
+    ""odometer"": {tour.odometer},
+    ""ts"": ""{tour.endTS.ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ssZ")}"",
+    ""latitude"": {tour.lastPosition.lat},
+    ""longitude"": {tour.lastPosition.lng},
+    ""heading"": {tour.lastPosition.heading}
+}}";
         }
 
         private static void ParseTourJSON(KomootLoginInfo kli, long tourid, KomootTour tour)
