@@ -296,7 +296,7 @@ namespace TeslaLogger
                         double acceleration1 = ((currP1.speed - prevP.speed) / 3.6) / ((currP1.delta_t - prevP.delta_t) / 1000);
                         double acceleration2 = ((currP2.speed - currP1.speed) / 3.6) / ((currP2.delta_t - currP1.delta_t) / 1000);
                         double acceleration3 = ((nextP.speed - currP2.speed) / 3.6) / ((nextP.delta_t - currP2.delta_t) / 1000);
-                        Tools.DebugLog($"speed:{prevP.speed}->{currP1.speed}->{currP2.speed}->{nextP.speed} acceleration1:{acceleration1}m/s acceleration2:{acceleration2}m/s acceleration3:{acceleration3}m/s ");
+                        //Tools.DebugLog($"speed:{prevP.speed}->{currP1.speed}->{currP2.speed}->{nextP.speed} acceleration1:{acceleration1}m/s acceleration2:{acceleration2}m/s acceleration3:{acceleration3}m/s ");
                         if (acceleration1 > 1.1 && Math.Abs(acceleration2) < 0.5 && acceleration3 < -1.1)
                         {
                             // drop speed at currP and replace with avg(prevP,nextP)
@@ -324,7 +324,7 @@ namespace TeslaLogger
                         Position nextP = positions[positionKeys[index + 1]];
                         double acceleration1 = ((currP.speed - prevP.speed) / 3.6) / ((currP.delta_t - prevP.delta_t) / 1000);
                         double acceleration2 = ((nextP.speed - currP.speed) / 3.6) / ((nextP.delta_t - currP.delta_t) / 1000);
-                        Tools.DebugLog($"speed:{prevP.speed}->{currP.speed}->{nextP.speed} acceleration1:{acceleration1}m/s acceleration2:{acceleration2}m/s");
+                        //Tools.DebugLog($"speed:{prevP.speed}->{currP.speed}->{nextP.speed} acceleration1:{acceleration1}m/s acceleration2:{acceleration2}m/s");
                         if (acceleration1 > 1.1 && acceleration2 < -1.1)
                         {
                             // drop speed at currP and replace with avg(prevP,nextP)
