@@ -274,7 +274,7 @@ namespace TeslaLogger
             private static double ToRadians(double degrees) => degrees * Math.PI / 180.0;
             private static double ToDegrees(double radians) => radians * 180.0 / Math.PI;
 
-            internal void CheckSpeed()
+            internal void CheckSpeed(KomootLoginInfo kli)
             {
                 if (this.positions.Count > 3)
                 {
@@ -299,8 +299,8 @@ namespace TeslaLogger
                         //Tools.DebugLog($"speed:{prevP.speed}->{currP1.speed}->{currP2.speed}->{nextP.speed} acceleration1:{acceleration1}m/s acceleration2:{acceleration2}m/s acceleration3:{acceleration3}m/s ");
                         if (acceleration1 > 1.1 && Math.Abs(acceleration2) < 0.5 && acceleration3 < -1.1)
                         {
-                            // drop speed at currP and replace with avg(prevP,nextP)
-                            Tools.DebugLog($"speed4: {Math.Round(prevP.speed, 2)}->{Math.Round(currP1.speed, 2)}->{Math.Round(currP2.speed, 2)}->{Math.Round(nextP.speed, 2)} acc:{Math.Round(acceleration1, 2)}-{Math.Round(acceleration2, 2)} correct speed:{Math.Round(currP1.speed, 2)}->{Math.Round((prevP.speed * 3 + nextP.speed * 2) / 5.0, 2)},{Math.Round(currP2.speed, 2)}->{Math.Round((prevP.speed * 2 + nextP.speed * 3) / 5.0, 2)}");
+                            // drop speed at currP1 and CurrP2 and replace with weighted 3:2 avg(prevP,nextP)
+                            Logfile.Log($"#{kli.carID} Komoot: speed4: {Math.Round(prevP.speed, 2)}->{Math.Round(currP1.speed, 2)}->{Math.Round(currP2.speed, 2)}->{Math.Round(nextP.speed, 2)} acc:{Math.Round(acceleration1, 2)}-{Math.Round(acceleration2, 2)} correct speed:{Math.Round(currP1.speed, 2)}->{Math.Round((prevP.speed * 3 + nextP.speed * 2) / 5.0, 2)},{Math.Round(currP2.speed, 2)}->{Math.Round((prevP.speed * 2 + nextP.speed * 3) / 5.0, 2)}");
                             currP1.speed = (prevP.speed * 3 + nextP.speed * 2) / 5.0;
                             currP2.speed = (prevP.speed * 2 + nextP.speed * 3) / 5.0;
                         }
@@ -328,7 +328,7 @@ namespace TeslaLogger
                         if (acceleration1 > 1.1 && acceleration2 < -1.1)
                         {
                             // drop speed at currP and replace with avg(prevP,nextP)
-                            Tools.DebugLog($"speed3: {Math.Round(prevP.speed, 2)}->{Math.Round(currP.speed, 2)}->{Math.Round(nextP.speed, 2)} acc:{Math.Round(acceleration1, 2)}-{Math.Round(acceleration2, 2)} correct speed:{Math.Round(currP.speed, 2)}->{Math.Round((prevP.speed+nextP.speed)/2.0,2 )}");
+                            Logfile.Log($"#{kli.carID} Komoot: speed3: {Math.Round(prevP.speed, 2)}->{Math.Round(currP.speed, 2)}->{Math.Round(nextP.speed, 2)} acc:{Math.Round(acceleration1, 2)}-{Math.Round(acceleration2, 2)} correct speed:{Math.Round(currP.speed, 2)}->{Math.Round((prevP.speed+nextP.speed)/2.0,2 )}");
                             currP.speed = (prevP.speed + nextP.speed) / 2.0;
                         }
                     }
@@ -512,12 +512,12 @@ WHERE
                 // positions parsed, continue to insert positions into table pos
                 // find initial odometer for first pos
                 tour.odometer = GetInitialOdo(tour.carID, tour.startTS);
-                Tools.DebugLog($"#{kli.carID} Komoot: ParseTours({tourid}) initialOdo:{tour.odometer}");
+                Logfile.Log($"#{kli.carID} Komoot: ParseTours({tourid}) initialOdo:{tour.odometer}");
                 int firstPosID = 0;
                 int LastPosId = 0;
                 tour.CorrectPositionDistances();
                 tour.ComputeHeading();
-                tour.CheckSpeed();
+                tour.CheckSpeed(kli);
                 // Tools.DebugLog($"#{kli.carID} Komoot: ParseTours({tourid}) " + Environment.NewLine + tour);
                 foreach (int posID in tour.positions.Keys.OrderBy(k => k))
                 {
