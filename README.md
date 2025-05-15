@@ -13,7 +13,7 @@
 [![.NET Core Desktop](https://github.com/bassmaster187/TeslaLogger/actions/workflows/dotnet-desktop.yml/badge.svg)](https://github.com/bassmaster187/TeslaLogger/actions/workflows/dotnet-desktop.yml)
 [![translated](https://hosted.weblate.org/widget/teslalogger/teslalogger/svg-badge.svg)](https://hosted.weblate.org/engage/teslalogger/)
 
-TeslaLogger is a self hosted data logger for your Tesla Model S/3/X/Y. Currently it supports RaspberryPi 3B, 3B+, 4B, Docker and Synology NAS.
+TeslaLogger is a self hosted data logger for your Tesla Model S/3/X/Y/Cybertruck and [Lucid AIR](docs/en/lucid-install.md). Currently it supports RaspberryPi 3B, 3B+, 4B, Docker and Synology NAS.
 
 - You may purchase a ready to go [Raspberry PI with TeslaLogger installed](https://teslalogger.de:8808/produkt/teslalogger/)
 
