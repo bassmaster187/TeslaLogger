@@ -287,11 +287,11 @@ Supercharger-V3 CA-Prawda MB,49.649219,-95.793313
 Supercharger-V3 CA-Prince Albert SK,53.19947,-105.732171
 Supercharger-V3 CA-Prince George BC,53.890082,-122.771075
 Supercharger-V3 CA-Princeton BC,49.457614,-120.506707
-Supercharger-V3 CA-Quebec City QC - Boulevard de l'Ormière,46.818266,-71.331292
+Supercharger-V3 CA-Quebec City QC Boulevard de l’Ormière,46.817684,-71.333572
 Supercharger-V3 CA-Quebec City Quebec - Boulevard des Gradins,46.840629,-71.277878
 Supercharger-V3 CA-Quesnel BC,52.966949,-122.440156
 Supercharger CA-Quispamsis NB,45.41751,-65.943243
-Supercharger-V3 CA-Québec City QC - Rue de l'Hétrière,46.763282,-71.370705
+Supercharger-V3 CA-Québec City QC Rue de l’Hétrière,46.763282,-71.370705
 Supercharger CA-Red Deer AB,52.252002,-113.815043
 Supercharger-V3 CA-Red Deer County AB,52.216147,-113.815797
 Supercharger-V3 CA-Regina SK,50.442622,-104.532672
@@ -1798,6 +1798,7 @@ Supercharger DE-Blankenfelde-Mahlow,52.308955,13.444767
 Supercharger-V3 DE-Bochum - Ruhr Park,51.49506,7.28483
 Supercharger-V3 DE-Bonn - Bonner Bogen,50.718553,7.152138
 Supercharger-V3 DE-Braak,53.617876,10.239352
+Supercharger-V4 DE-Bremen,53.049614,8.820908
 Supercharger DE-Brinkum,53.028326,8.808758
 Supercharger DE-Bruchsal,49.13837,8.56242
 Supercharger-V3 DE-Brunnthal,48.039686,11.661457
@@ -2100,7 +2101,7 @@ Supercharger ES-Ariza,41.313192,-2.002201
 Supercharger ES-Atalaya del Cañavate,39.538687,-2.254555
 Supercharger-V3 ES-Barakaldo MegaPark,43.293842,-3.005063
 Supercharger-V4 ES-Barbastro Carretera de Huesca,42.033193,0.104275
-Supercharger ES-Barcelona-L'Illa Diagonal,41.389679,2.137354
+Supercharger ES-Barcelona-L’Illa Diagonal,41.389402,2.134064
 Supercharger ES-Bembibre,42.623488,-6.453124
 Supercharger-V3 ES-Benavente,42.007749,-5.663257
 Supercharger ES-Burgos,42.312365,-3.704115
@@ -2122,7 +2123,7 @@ Supercharger-V4 ES-Hernani,43.276171,-1.987865
 Supercharger ES-Jerez,36.692378,-6.160246
 Supercharger-V3 ES-La Jonquera,42.401718,2.880498
 Supercharger-V3 ES-La Puebla de Valverde,40.217545,-0.939622
-Supercharger ES-La Seu d'Urgell,42.358898,1.462893
+Supercharger ES-La Seu d’Urgell,42.35891,1.46275,40
 Supercharger-V4 ES-León Trobajo del Camino,42.591401,-5.619581
 Supercharger ES-Lleida,41.663959,0.605371
 Supercharger ES-Lugo,43.03653,-7.568994
@@ -2182,26 +2183,26 @@ Supercharger FI-Vierumäki,61.112472,25.929927
 Supercharger FI-Äänekoski,62.516741,25.6913
 
 Supercharger-V3 FR-Agen,44.177762,0.630269
-Supercharger FR-Aire d'Urvillers,49.787019,3.335626
 Supercharger FR-Aire de Cambarette,43.423964,5.99017
 Supercharger FR-Aire de Châteauvillain - Orges,48.057681,4.96061
 Supercharger FR-Aire de Châteauvillain - Val Marnay,48.057341,4.959604
-Supercharger-V3 FR-Aire de l'Abis,45.524989,5.976465
 Supercharger FR-Aire de la Baie de Somme,50.167321,1.755505
 Supercharger-V3 FR-Aire de la Vendée,46.573233,-1.11793
+Supercharger-V3 FR-Aire de l’Abis,45.524989,5.976465
 Supercharger FR-Aire de Manissieux,45.69848,4.977541
 Supercharger-V3 FR-Aire de Portes-Lès-Valence Ouest,44.86473,4.8649,30
 Supercharger FR-Aire de Reims-Champagne-Nord,49.119348,4.245689
 Supercharger FR-Aire de Reims-Champagne-Sud,49.120696,4.242712
 Supercharger FR-Aire de Saint-Priest,45.698042,4.975513
 Supercharger FR-Aire de Vidauban Sud,43.413832,6.451177
-Supercharger-V3 FR-Aire des Portes d'Angers,47.498968,-0.491404
+Supercharger-V3 FR-Aire des Portes d’Angers,47.498968,-0.491404
 Supercharger-V3 FR-Aire du Bourbonnais,46.497491,3.362673
 Supercharger FR-Aire du Caylar,43.864588,3.313267
 Supercharger-V3 FR-Aire du Granier,45.525586,5.97485
 Supercharger-V3 FR-Aire du Jura,46.774663,5.522206
 Supercharger FR-Aire du Poulet de Bresse,46.496045,5.310426
-Supercharger FR-Aix-en-Provence Val de l'Arc,43.511979,5.466397
+Supercharger FR-Aire d’Urvillers,49.787019,3.335626
+Supercharger FR-Aix-en-Provence Val de l’Arc,43.511979,5.466397
 Supercharger FR-Aix-en-Provence,43.510648,5.456439
 Supercharger-V3 FR-Ajaccio,41.951864,8.792775
 Supercharger FR-Albaret-Sainte-Marie,44.870977,3.252918
@@ -2366,7 +2367,7 @@ Supercharger-V3 FR-Saint-Jean-de-Maurienne,45.266392,6.372743
 Supercharger-V3 FR-Saint-Julien-en-Genevois,46.129633,6.087681,16
 Supercharger-V3 FR-Saint-Julien-en-Genevois,46.129901,6.087538,16
 Supercharger-V3 FR-Saint-Louis,47.605065,7.543048
-Supercharger-V4 FR-Saint-Pardoux-l'Ortigier,45.306263,1.561602
+Supercharger-V4 FR-Saint-Pardoux-l’Ortigier,45.306263,1.561602
 Supercharger-V3 FR-Saint-Quentin,49.85898,3.253667
 Supercharger-V4 FR-Saintes Cours du Maréchal Leclerc,45.753763,-0.653268
 Supercharger FR-Saintes,45.750026,-0.661637
@@ -2469,8 +2470,8 @@ Supercharger-V3 GB-Ipswich,52.084716,1.116459
 Supercharger GB-Keele Northbound,52.993,-2.2903
 Supercharger GB-Keele Southbound,52.99413,-2.290797
 Supercharger-V3 GB-Kettering,52.386377,-0.696887
-Supercharger-V3 GB-King's Lynn,52.735115,0.414803
 Supercharger-V4 GB-Kingston upon Thames,51.413021,-0.306297
+Supercharger-V3 GB-King’s Lynn,52.73522,0.414
 Supercharger-V3 GB-Larkhall,55.719943,-3.95388
 Supercharger-V3 GB-Leeds - Whitehouse Street,53.784433,-1.532576
 Supercharger GB-Leeds,53.732769,-1.585628
@@ -2647,8 +2648,7 @@ Supercharger-V3 IT-Perugia South,43.047725,12.40817
 Supercharger-V4 IT-Piacenza 2,45.040054,9.751785
 Supercharger IT-Piacenza,45.039461,9.753871
 Supercharger IT-Pollein,45.737122,7.372441
-Supercharger-V3 IT-Porto Sant'Elpidio,43.232399,13.74994
-Supercharger-V3 IT-Porto Sant’Elpidio,43.232212,13.749903
+Supercharger-V3 IT-Porto Sant’Elpidio,43.232404,13.749889
 Supercharger-V3 IT-Rimini,44.040676,12.589337
 Supercharger-V3 IT-Roma - North,41.970607,12.541756
 Supercharger-V3 IT-Roma South West,41.815947,12.400934
@@ -3590,9 +3590,9 @@ Supercharger-V3 US-Chicago IL - Elston Avenue (Floor 1),41.92829,-87.685758
 Supercharger US-Chicago IL - North Broadway (Floor 3),41.937097,-87.644406
 Supercharger US-Chicago IL - North Columbus Drive (Pay to Park Floor L),41.886732,-87.619782
 Supercharger US-Chicago IL - North Halsted (Pay to Park Floor 7),41.908572,-87.6481
-Supercharger US-Chicago IL - O'Hare,41.998603,-87.888601
 Supercharger US-Chicago IL - South Canal Street (Pay to Park Floor 5),41.869036,-87.640652
 Supercharger-V3 US-Chicago IL - South Pulaski Road,41.81328,-87.722683
+Supercharger US-Chicago IL O’Hare,41.998603,-87.8882
 Supercharger US-Chico CA,39.726643,-121.80243
 Supercharger-V3 US-Chicopee MA,42.175294,-72.57787
 Supercharger US-Childress TX,34.432503,-100.218625
@@ -3620,7 +3620,7 @@ Supercharger US-Clearwater MN,45.411954,-94.054901
 Supercharger US-Clinton Corners NY,41.825978,-73.770942
 Supercharger-V3 US-Clovis CA,36.836658,-119.697632
 Supercharger-V3 US-Coalinga CA,36.254418,-120.238437
-Supercharger-V3 US-Coeur d'Alene ID,47.70835,-116.794488
+Supercharger-V3 US-Coeur d’Alene ID,47.708891,-116.793937
 Supercharger US-Colby KS,39.362374,-101.054082
 Supercharger-V3 US-Colfax NC,36.09507,-79.994715
 Supercharger-V3 US-College Station TX - Texas Avenue South,30.612892,-96.317329
@@ -3678,7 +3678,6 @@ Supercharger-V3 US-Cupertino CA - Stevens Creek Boulevard,37.324894,-122.037219
 Supercharger US-Custer SD,43.766918,-103.59533
 Supercharger-V3 US-Cutler Bay FL,25.598312,-80.371743
 Supercharger-V3 US-Cypress CA,33.804303,-118.044193
-Supercharger-V3 US-D'Iberville MS,30.458624,-88.893658
 Supercharger-V3 US-Dallas TX - Mountain Creek Parkway,32.672274,-96.968816
 Supercharger US-Dallas TX - North Central Expressway,32.88102,-96.769588
 Supercharger US-Dallas TX Belt Line Road,32.950164,-96.818574
@@ -3740,6 +3739,7 @@ Supercharger-V3 US-Duluth GA,34.00026,-84.168532
 Supercharger US-Duluth MN,46.784582,-92.102298
 Supercharger-V3 US-Durham NC,35.953016,-78.990961
 Supercharger-V3 US-Dwight IL,41.093714,-88.442181
+Supercharger-V3 US-D’Iberville MS,30.459,-88.8933
 Supercharger-V3 US-Eagan MN,44.795177,-93.205545
 Supercharger US-East Brunswick NJ - State Route 18,40.424078,-74.380411
 Supercharger-V3 US-East Brunswick NJ,40.416912,-74.444446
@@ -4029,7 +4029,7 @@ Supercharger-V3 US-Indio CA,33.741875,-116.215035
 Supercharger US-Inyokern CA,35.64624,-117.813289
 Supercharger US-Inyokern CA,35.646456,-117.812561
 Supercharger-V3 US-Iowa City IA,41.67576,-91.52019
-Supercharger-V3 US-Iowa LA - Henry's Travel Plaza,30.241185,-92.928925
+Supercharger-V3 US-Iowa LA Henry’s Travel Plaza,30.241185,-92.928925
 Supercharger-V3 US-Irvine CA - Culver Drive,33.706923,-117.785242
 Supercharger-V3 US-Irvine CA - Main Street (Pay to Park Floor 1),33.684599,-117.852978
 Supercharger US-Irvine CA - Michelson Drive (Floor 2),33.673398,-117.84531
@@ -4609,7 +4609,7 @@ Supercharger-V3 US-Pooler GA - US-80,32.110758,-81.235803
 Supercharger-V3 US-Pooler GA,32.079646,-81.280912
 Supercharger US-Port Huron MI,42.99881,-82.428653
 Supercharger US-Port Orange FL,29.108525,-81.035006
-Supercharger-V3 US-Port St. Lucie FL - Florida's Turnpike,27.300209,-80.372299
+Supercharger-V3 US-Port St. Lucie FL Florida’s Turnpike,27.300209,-80.372299
 Supercharger US-Port St. Lucie FL,27.312604,-80.406956
 Supercharger-V3 US-Portage IN - George Ade Travel Plaza,41.58818,-87.21908
 Supercharger-V3 US-Portage IN - John T. McCutcheon Travel Plaza,41.58755,-87.21477
@@ -6553,6 +6553,7 @@ CEZ CZ-Trmice,50.646149,13.986876
 CEZ CZ-Třinec,49.660275,18.672079
 CEZ CZ-Vrchlabí,50.62006,15.599216
 CEZ CZ-Čechtice,49.658431,15.118353
+CEZ CZ-Šenov u Nového Jičína,49.601853,18.006163
 CEZ CZ-Šlovice Dobřany-Plzeň,49.678013,13.330395
 
 Chargefox AU-Browns Plains QLD Browns Plains Rd,-27.663758,153.041055
@@ -6786,10 +6787,10 @@ CircleK DE-Zinnowitz Ahlbecker Straße,54.067399,13.919599
 CircleK SE-Bjärred,55.722256,13.08846
 CircleK SE-Göteborg,57.707127,11.870444
 
-Circuit-électrique CA-L'Ange-Gardien QC,45.608768,-75.395496
 Circuit-électrique CA-Labelle QC Boulevard du Curé Labelle,46.280554,-74.73926
+Circuit-électrique CA-L’Ange-Gardien QC,45.608768,-75.395496
 Circuit-électrique CA-Namur QC Route 323,45.897743,-74.920675
-Circuit-électrique CA-Rivière-Rouge QC Rue L'Annonciation S,46.401359,-74.86661
+Circuit-électrique CA-Rivière-Rouge QC Rue L’Annonciation S,46.401359,-74.86661
 Circuit-électrique CA-Saint-Roch-des-Aulnaies QC Rte de la Seigneurie,47.317569,-70.138871
 
 Citywatt DE-Aalen Obere Bahnstraße 78,48.828152,10.078588
@@ -10341,8 +10342,8 @@ EWE-GO DE-Iserlohn Raiffeisenstraße,51.38551,7.67569
 EWE-GO DE-Ismaning Robert-Bürkle-Straße,48.23159,11.68767
 EWE-GO DE-Jade-Jaderberg Georgstraße,53.344931,8.184257
 EWE-GO DE-Jaderberg Vareler Straße,53.340668,8.185791
-EWE-GO DE-Jemgum A'nt Splittland,53.314118,7.284842
 EWE-GO DE-Jemgum Am Tief,53.31549,7.28106
+EWE-GO DE-Jemgum A’nt Splittland,53.314118,7.284842
 EWE-GO DE-Jemgum Hofstraße,53.26294,7.38374
 EWE-GO DE-Jever Adolf-Ahlers-Straße,53.57062,7.88933
 EWE-GO DE-Jever Alter Markt,53.574139,7.905162
@@ -10817,6 +10818,8 @@ EWE-SWB DE-Friesoythe,53.014858,7.851011
 EWE-SWB DE-Illertissen,48.219521,10.126724,10
 EWE-SWB DE-Marktrodach,50.256351,11.397455
 
+EWF DE-Willingen (Upland) Zur Hoppecke,51.291536,8.603761
+
 EWII DK-Blåvand Tane Hedevej,55.555733,8.137469
 
 Ewiva IT-Alessandria Via Vecchia Torino,44.915296,8.599882
@@ -10892,9 +10895,9 @@ Fastned DE-Stuhr Delmenhorster Straße,53.012543,8.702095
 Fastned DE-Uffenheim-Langensteinach,49.50991,10.19602
 Fastned DE-Wittenburg,53.50764,11.09686
 Fastned DE-Wittstock,53.15744,12.45124
-Fastned FR-Aire d'Ambrussum Nord,43.715234,4.133395,30
 Fastned FR-Aire de Gevrey - Chambertin Ouest,47.216718,5.00188,30
 Fastned FR-Aire de Saint Ambreuil,46.691106,4.844877,30
+Fastned FR-Aire d’Ambrussum Nord,43.715234,4.133395,30
 Fastned FR-Romagnieu Aire du Guiers A43,45.577629,5.630846
 Fastned FR-Écot A36,47.440489,6.728826
 Fastned IT-Castenedolo Via Sandro Pertini,45.484816,10.321338
@@ -11024,6 +11027,7 @@ GP-JOULE DE-Bergisch Gladbach Siebenmorgen,50.957639,7.115852
 GP-JOULE DE-Berlin An der Schule,52.506115,13.614855
 GP-JOULE DE-Berlin Kniprodestraße,52.533789,13.44505
 GP-JOULE DE-Busdorf Schulstraße,54.492395,9.553431
+GP-JOULE DE-Busdorf Wittgenstein,54.477627,9.545448,20
 GP-JOULE DE-Buttenwiesen Maierhof,48.615855,10.77393
 GP-JOULE DE-Büdelsdorf An den Reesenbetten,54.321976,9.698761
 GP-JOULE DE-Büsum Am Bauhof,54.140303,8.877273
@@ -11478,7 +11482,7 @@ Innogy DE-Hemmingen,48.86795,9.041447
 Innogy DE-Horhausen,50.589107,7.529869
 Innogy DE-Hunsrück Ost,49.963783,7.768701
 Innogy DE-Hösbach Jahnstraße,50.007214,9.205869
-Innogy DE-Hückeswagen Auf'm Schloß,51.150588,7.341565
+Innogy DE-Hückeswagen Auf’m Schloß,51.150588,7.341565
 Innogy DE-Hückeswagen Rader Straße,51.153701,7.341464
 Innogy DE-Idar-Oberstein,49.730596,7.393954
 Innogy DE-Illertissen Unterrother Straße,48.22295,10.11912
@@ -11841,7 +11845,6 @@ Ionity FR-Haut Koenigsbourg,48.23192,7.402639
 Ionity FR-Jardin des arbres,47.852405,2.684731
 Ionity FR-Jura,46.774589,5.523009,10
 Ionity FR-Kergoët,48.273976,-2.187471
-Ionity FR-l'Isle-d'Abeau,45.611787,5.212795
 Ionity FR-La Ferté-Bernard,48.126596,0.62333
 Ionity FR-La Garde,44.870544,3.253033
 Ionity FR-La Réserve,47.974493,3.197267
@@ -11856,6 +11859,7 @@ Ionity FR-Lochères,47.30968,4.501811
 Ionity FR-Longué la Couaille,47.4189,-0.1343
 Ionity FR-Longué-les-Cossonnières,47.4186,-0.1315
 Ionity FR-Lyon-Dagneux Sud,45.843868,5.070508
+Ionity FR-l’Isle-d’Abeau,45.611787,5.212795
 Ionity FR-Macon Saint-Albain,46.420537,4.865333
 Ionity FR-Mayenne,48.09518,-0.693474
 Ionity FR-Mionnay Chatanay,45.889238,4.893502
@@ -11874,7 +11878,7 @@ Ionity FR-Pech Montat Est,45.030878,1.525098
 Ionity FR-Pech Montat Ouest,45.030881,1.524313
 Ionity FR-Poitiers Chincé,46.701811,0.371062
 Ionity FR-Poitiers Jaunay-Clan,46.704579,0.371265
-Ionity FR-Portes d'Angers (Sud),47.50047,-0.49057
+Ionity FR-Portes d’Angers (Sud),47.50047,-0.49057
 Ionity FR-Rely,50.573089,2.377188
 Ionity FR-Saint Léger Est,45.610095,-0.598651
 Ionity FR-Saint-Pantaléon-de-Larche A89,45.1607,1.440858,20
@@ -14035,6 +14039,8 @@ OVAG DE-Wölfersheim Querstraße,50.397914,8.813274
 Parkstrom DE-Amöneburg Manfred-Stumpf-Straße,50.774147,8.89373
 Parkstrom DE-Reiskirchen Freiherr-Vom-Stein-Str.,50.597726,8.823727,20
 
+Peusa ES-La Seu d’Urgell Cami Ral de la Cerdanya,42.35894,1.46327,30
+
 Pfalzwerke AT-Brunn am Gebirge Johann Steinböck-Straße,48.108639,16.312933
 Pfalzwerke AT-Wels Gunskirchener Straße,48.148595,13.974621
 Pfalzwerke DE-Achern Severinstraße 8,48.634319,8.06005
@@ -14817,6 +14823,7 @@ SW-Jena-Pößneck DE-Jena Philipp-Müller-Straße,50.919716,11.56684
 SW-Jülich DE-Jülich Heinrich-Mußmann-Straße,50.935184,6.373604
 SW-Kassel DE-Kassel Friedrichsplatz,51.313361,9.495128,30
 SW-Kiel DE-Kiel Mühlendamm,54.311493,10.099895
+SW-Kiel DE-LKiel Am Seefischmarkt,54.325779,10.179758
 SW-Köflach AT-Köflach Stadtwerkgasse,47.060545,15.078317
 SW-Langen DE-Langen Liebigstraße,49.994277,8.65773
 SW-Leipzig DE-Leipzig Dortmunder Straße,51.365945,12.401899
@@ -15240,19 +15247,19 @@ TotalEnergies FR-Relais Des Coquelicots,45.52452,4.295566,80
 TotalEnergies FR-Relais Fontbelleau,44.87366,-0.50616,80
 TotalEnergies FR-Relais Guidel Sud,47.821635,-3.468731,80
 TotalEnergies FR-Relais Herrenwald,48.707985,7.709794,80
-TotalEnergies FR-Relais L'Adour,43.721222,-0.269559,80
-TotalEnergies FR-Relais L'Isle D'Abeau Nord,45.613803,5.212535,80
 TotalEnergies FR-Relais La Bayanne,44.9997,5.00055,80
-TotalEnergies FR-Relais La Dentelle D'Alencon,48.456669,0.125336,80
-TotalEnergies FR-Relais La Porte D'Alsace Nord,47.7167,7.1364,80
+TotalEnergies FR-Relais La Dentelle D’Alencon,48.456669,0.125336,80
+TotalEnergies FR-Relais La Porte D’Alsace Nord,47.7167,7.1364,80
 TotalEnergies FR-Relais Le Mont Saint Michel,48.584798,-1.32577,80
 TotalEnergies FR-Relais Lorraine Les Rappes,48.266949,5.863402,80
+TotalEnergies FR-Relais L’Adour,43.721222,-0.269559,80
+TotalEnergies FR-Relais L’Isle D’Abeau Nord,45.613803,5.212535,80
 TotalEnergies FR-Relais Macon La Salle,46.418606,4.865283,80
 TotalEnergies FR-Relais Marguerittes Nord,43.8755,4.449003,80
 TotalEnergies FR-Relais Mille Etangs,46.715962,1.593513,80
 TotalEnergies FR-Relais Passage D Agen,44.171001,0.608616,80
 TotalEnergies FR-Relais Ploumagoar,48.550222,-3.112511,80
-TotalEnergies FR-Relais Pont De L'Isere,45.018137,4.874171,80
+TotalEnergies FR-Relais Pont De L’Isere,45.018137,4.874171,80
 TotalEnergies FR-Relais Port Lauragais Sud,43.35267,1.80428,80
 TotalEnergies FR-Relais Portes Du Tarn,43.752619,1.655602,80
 TotalEnergies FR-Relais Portes Les Valence Est,44.866331,4.867226,80
