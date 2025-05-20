@@ -40,7 +40,7 @@ namespace TeslaLogger
         {
             internal int carID;
             internal long tourID;
-            readonly internal DateTime start;
+            readonly internal DateTime startTS;
             internal double distance_m = double.NaN;
             internal double distance_calculated;
             readonly string type;
@@ -48,9 +48,10 @@ namespace TeslaLogger
             internal Position firstPosition;
             internal Position lastPosition;
             internal string json = "{}";
-            internal DateTime end;
+            internal DateTime endTS;
 
             internal Dictionary<int, Position> positions = new Dictionary<int, Position>();
+            internal double odometer;
 
             public KomootTour(int carID, long tourid, string type, string sport, DateTime start)
             {
@@ -58,8 +59,8 @@ namespace TeslaLogger
                 tourID = tourid;
                 this.type = type;
                 this.sport = sport;
-                this.start = start;
-                end = start;
+                this.startTS = start;
+                endTS = start;
             }
 
             public override string ToString()
@@ -68,7 +69,7 @@ namespace TeslaLogger
                 sb.AppendLine($"TourID: {tourID}");
                 sb.AppendLine($"Type: {type}");
                 sb.AppendLine($"Sport: {sport}");
-                sb.AppendLine($"Start: {start}");
+                sb.AppendLine($"Start: {startTS}");
                 sb.AppendLine($"Positions: {positions.Count}");
                 foreach (int key in positions.Keys.OrderBy(k => k))
                 {
@@ -164,9 +165,9 @@ namespace TeslaLogger
                 {
                     Tools.DebugLog($"addPosition(lat:{lat}, lng:{lng}, alt:{alt}, delta_t:{delta_t}, speed:{speed} not added");
                 }
-                if (start.AddMilliseconds(delta_t) > end)
+                if (startTS.AddMilliseconds(delta_t) > endTS)
                 {
-                    end = start.AddMilliseconds(delta_t);
+                    endTS = startTS.AddMilliseconds(delta_t);
                 }
             }
 
@@ -240,9 +241,9 @@ namespace TeslaLogger
                     // compute first
                     positions[positionKeys[0]].heading = GetBearing(positions[positionKeys[0]].lat, positions[positionKeys[0]].lng, positions[positionKeys[1]].lat, positions[positionKeys[1]].lng);
                     // compute last
-                    positions[positionKeys[positionKeys.Count - 2]].heading = GetBearing(positions[positionKeys[positionKeys.Count - 2]].lat, positions[positionKeys[positionKeys.Count - 2]].lng, positions[positionKeys[positionKeys.Count - 1]].lat, positions[positionKeys[positionKeys.Count - 1]].lng);
+                    positions[positionKeys[positionKeys.Count - 1]].heading = GetBearing(positions[positionKeys[positionKeys.Count - 2]].lat, positions[positionKeys[positionKeys.Count - 2]].lng, positions[positionKeys[positionKeys.Count - 1]].lat, positions[positionKeys[positionKeys.Count - 1]].lng);
                     // compute everything in between 2..(n-1)
-                    for (index = 1; index < positionKeys.Count - 2; index++)
+                    for (index = 1; index < positionKeys.Count - 1; index++)
                     {
                         Position prevP = positions[positionKeys[index - 1]];
                         Position currP = positions[positionKeys[index]];
@@ -273,10 +274,41 @@ namespace TeslaLogger
             private static double ToRadians(double degrees) => degrees * Math.PI / 180.0;
             private static double ToDegrees(double radians) => radians * 180.0 / Math.PI;
 
-            internal void CheckSpeed()
+            internal void CheckSpeed(KomootLoginInfo kli)
             {
+                if (this.positions.Count > 3)
+                {
+                    Tools.DebugLog("CheckSpeed() speed4");
+                    // 4 or more positions
+                    Dictionary<int, int> positionKeys = new Dictionary<int, int>();
+                    int index = 0;
+                    foreach (int posID in positions.Keys.OrderBy(k => k))
+                    {
+                        positionKeys.Add(index, posID);
+                        index += 1;
+                    }
+                    for (index = 1; index < positionKeys.Count - 3; index++)
+                    {
+                        Position prevP = positions[positionKeys[index - 1]];
+                        Position currP1 = positions[positionKeys[index]];
+                        Position currP2 = positions[positionKeys[index + 1]];
+                        Position nextP = positions[positionKeys[index + 2]];
+                        double acceleration1 = ((currP1.speed - prevP.speed) / 3.6) / ((currP1.delta_t - prevP.delta_t) / 1000);
+                        double acceleration2 = ((currP2.speed - currP1.speed) / 3.6) / ((currP2.delta_t - currP1.delta_t) / 1000);
+                        double acceleration3 = ((nextP.speed - currP2.speed) / 3.6) / ((nextP.delta_t - currP2.delta_t) / 1000);
+                        //Tools.DebugLog($"speed:{prevP.speed}->{currP1.speed}->{currP2.speed}->{nextP.speed} acceleration1:{acceleration1}m/s acceleration2:{acceleration2}m/s acceleration3:{acceleration3}m/s ");
+                        if (acceleration1 > 1.1 && Math.Abs(acceleration2) < 0.5 && acceleration3 < -1.1)
+                        {
+                            // drop speed at currP1 and CurrP2 and replace with weighted 3:2 avg(prevP,nextP)
+                            Logfile.Log($"#{kli.carID} Komoot: speed4: {Math.Round(prevP.speed, 2)}->{Math.Round(currP1.speed, 2)}->{Math.Round(currP2.speed, 2)}->{Math.Round(nextP.speed, 2)} acc:{Math.Round(acceleration1, 2)}-{Math.Round(acceleration2, 2)} correct speed:{Math.Round(currP1.speed, 2)}->{Math.Round((prevP.speed * 3 + nextP.speed * 2) / 5.0, 2)},{Math.Round(currP2.speed, 2)}->{Math.Round((prevP.speed * 2 + nextP.speed * 3) / 5.0, 2)}");
+                            currP1.speed = (prevP.speed * 3 + nextP.speed * 2) / 5.0;
+                            currP2.speed = (prevP.speed * 2 + nextP.speed * 3) / 5.0;
+                        }
+                    }
+                }
                 if (this.positions.Count > 2)
                 {
+                    Tools.DebugLog("CheckSpeed() speed3");
                     // 3 or more positions
                     Dictionary<int, int> positionKeys = new Dictionary<int, int>();
                     int index = 0;
@@ -290,13 +322,13 @@ namespace TeslaLogger
                         Position prevP = positions[positionKeys[index - 1]];
                         Position currP = positions[positionKeys[index]];
                         Position nextP = positions[positionKeys[index + 1]];
-                        double acceleration1 = Math.Round(((currP.speed - prevP.speed) / 3.6) / ((currP.delta_t - prevP.delta_t) / 1000), 6);
-                        double acceleration2 = Math.Round(((nextP.speed - currP.speed) / 3.6) / ((nextP.delta_t - currP.delta_t) / 1000), 6);
-                        //Tools.DebugLog($"speed:{prevP.speed}->{currP.speed}->{nextP.speed} acceleration1:{acceleration1}m/s acceleration2:{acceleration2}m/s headingdiff1:{prevP.heading-currP.heading} headingdiff2:{currP.heading-nextP.heading}");
+                        double acceleration1 = ((currP.speed - prevP.speed) / 3.6) / ((currP.delta_t - prevP.delta_t) / 1000);
+                        double acceleration2 = ((nextP.speed - currP.speed) / 3.6) / ((nextP.delta_t - currP.delta_t) / 1000);
+                        //Tools.DebugLog($"speed:{prevP.speed}->{currP.speed}->{nextP.speed} acceleration1:{acceleration1}m/s acceleration2:{acceleration2}m/s");
                         if (acceleration1 > 1.1 && acceleration2 < -1.1)
                         {
                             // drop speed at currP and replace with avg(prevP,nextP)
-                            Tools.DebugLog($"speed: {prevP.speed}->{currP.speed}->{nextP.speed} correct speed:{currP.speed}->{(prevP.speed+nextP.speed)/2.0}");
+                            Logfile.Log($"#{kli.carID} Komoot: speed3: {Math.Round(prevP.speed, 2)}->{Math.Round(currP.speed, 2)}->{Math.Round(nextP.speed, 2)} acc:{Math.Round(acceleration1, 2)}-{Math.Round(acceleration2, 2)} correct speed:{Math.Round(currP.speed, 2)}->{Math.Round((prevP.speed+nextP.speed)/2.0,2 )}");
                             currP.speed = (prevP.speed + nextP.speed) / 2.0;
                         }
                     }
@@ -309,10 +341,14 @@ namespace TeslaLogger
         private readonly string username = string.Empty;
         private readonly string password = string.Empty;
 
+        private bool workNow; // defaults to false
+        private static List<Komoot> komootInstances = new List<Komoot>();
+
         private static readonly Dictionary<string, string> EndPoints = new Dictionary<string, string>()
         {
             { "KomootListSettings", "/komoot/listSettings" },
-            { "KomootSaveSettings", "/komoot/saveSettings" }
+            { "KomootSaveSettings", "/komoot/saveSettings" },
+            { "KomootWorkNow", "/komoot/workNow" }
         };
 
         public Komoot(int CarID, string Username, string Password)
@@ -320,6 +356,13 @@ namespace TeslaLogger
             this.carID = CarID;
             this.username = Username;
             this.password = Password;
+            komootInstances.Add(this);
+        }
+
+        public void WorkNow()
+        {
+            Tools.DebugLog("WorkNow()");
+            workNow = true;
         }
 
         internal static void CheckSchema()
@@ -396,13 +439,18 @@ WHERE
                 while (true)
                 {
                     Work(kli);
-                    Thread.Sleep((int)(((DateTime.Now.Hour >= 4 && DateTime.Now.Hour < 18) ? 0.5 : 1.0) * (double)interval * 1000.0));
+                    for (int i = 0; i < 1000; i++)
+                    {
+                        if (workNow) { break; }
+                        Thread.Sleep((int)(((DateTime.Now.Hour >= 4 && DateTime.Now.Hour < 18) ? 0.5 : 1.0) * (double)interval));
+                    }
+                    workNow = false;
                 }
             }
             catch (Exception ex)
             {
                 ex.ToExceptionless().FirstCarUserID().Submit();
-                Tools.DebugLog("Komoot: Exception", ex);
+                // Tools.DebugLog("Komoot: Exception", ex);
             }
         }
 
@@ -447,11 +495,11 @@ WHERE
                     Logfile.Log($"#{kli.carID} Komoot: tour({tourid}) JSON:" + Environment.NewLine + tour.json);
                 }
                 // check if drivestate already exists
-                if (DriveStateExists(kli.carID, tour.start, out int drivestateID))
+                if (DriveStateExists(kli.carID, tour.startTS, out int drivestateID))
                 {
                     // tour does not exist in komoot table, but drivestate exists
                     // --> insert into komoot table
-                    Tools.DebugLog($"Komoot tour {tourid} does not exist in table komoot, but drivestate with carID {kli.carID} start {tours[tourid].start} exists: {drivestateID}");
+                    Tools.DebugLog($"Komoot tour {tourid} does not exist in table komoot, but drivestate with carID {kli.carID} start {tours[tourid].startTS} exists: {drivestateID}");
                     InsertTour(kli.carID, drivestateID, tour);
                     continue;
                 }
@@ -463,38 +511,53 @@ WHERE
                 ParseTourJSON(kli, tourid, tour);
                 // positions parsed, continue to insert positions into table pos
                 // find initial odometer for first pos
-                double odo = GetInitialOdo(tour.carID, tour.start);
-                Tools.DebugLog($"#{kli.carID} Komoot: ParseTours({tourid}) initialOdo:{odo}");
+                tour.odometer = GetInitialOdo(tour.carID, tour.startTS);
+                Logfile.Log($"#{kli.carID} Komoot: ParseTours({tourid}) initialOdo:{tour.odometer}");
                 int firstPosID = 0;
                 int LastPosId = 0;
                 tour.CorrectPositionDistances();
                 tour.ComputeHeading();
-                tour.CheckSpeed();
-                Tools.DebugLog($"#{kli.carID} Komoot: ParseTours({tourid}) " + Environment.NewLine + tour);
+                tour.CheckSpeed(kli);
+                // Tools.DebugLog($"#{kli.carID} Komoot: ParseTours({tourid}) " + Environment.NewLine + tour);
                 foreach (int posID in tour.positions.Keys.OrderBy(k => k))
                 {
                     KomootTour.Position pos = tour.positions[posID];
                     if (pos == tour.firstPosition)
                     {
-                        firstPosID = InsertPos(tour.carID, pos.lat, pos.lng, tour.start.AddMilliseconds(pos.delta_t), pos.speed, pos.alt, odo);
+                        firstPosID = InsertPos(tour.carID, pos.lat, pos.lng, tour.startTS.AddMilliseconds(pos.delta_t), pos.speed, pos.alt, tour.odometer);
                     }
                     else
                     {
-                        odo = odo + pos.dist_km;
-                        LastPosId = InsertPos(tour.carID, pos.lat, pos.lng, tour.start.AddMilliseconds(pos.delta_t), pos.speed, pos.alt, odo);
+                        tour.odometer = tour.odometer + pos.dist_km;
+                        LastPosId = InsertPos(tour.carID, pos.lat, pos.lng, tour.startTS.AddMilliseconds(pos.delta_t), pos.speed, pos.alt, tour.odometer);
                     }
                 }
                 if (firstPosID > 0 && LastPosId > 0)
                 {
                     // successfully added positions to table pos
-                    drivestateID = CreateDriveState(tour.carID, tour.start, firstPosID, tour.end, LastPosId);
+                    drivestateID = CreateDriveState(tour.carID, tour.startTS, firstPosID, tour.endTS, LastPosId);
                     InsertTour(kli.carID, drivestateID, tour);
+                    // mock CurrentJSON
+                    MockCurrentJSON(kli, tour);
                 }
                 else
                 {
                     Logfile.Log($"#{kli.carID} Komoot: error - no positions added to table pos - tour JSON:" + Environment.NewLine + tour.json);
                 }
             }
+
+        }
+
+        static void MockCurrentJSON(KomootLoginInfo kli, KomootTour tour)
+        {
+            CurrentJSON.jsonStringHolder[kli.carID] = $@"{{
+    ""sleeping"": true,
+    ""odometer"": {tour.odometer},
+    ""ts"": ""{tour.endTS.ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ssZ")}"",
+    ""latitude"": {tour.lastPosition.lat},
+    ""longitude"": {tour.lastPosition.lng},
+    ""heading"": {tour.lastPosition.heading}
+}}";
         }
 
         private static void ParseTourJSON(KomootLoginInfo kli, long tourid, KomootTour tour)
@@ -1274,11 +1337,23 @@ VALUES (
                 case bool _ when request.Url.LocalPath.Equals(EndPoints["KomootSaveSettings"], StringComparison.Ordinal):
                     HandleRequest_KomootSaveSettings(request, response);
                     break;
+                case bool _ when request.Url.LocalPath.Equals(EndPoints["KomootWorkNow"], StringComparison.Ordinal):
+                    HandleRequest_KomootWorkNow(request, response);
+                    break;
                 default:
                     response.StatusCode = (int)HttpStatusCode.NotFound;
                     WebServer.WriteString(response, @"URL Not Found!");
                     break;
             }
+        }
+
+        private static void HandleRequest_KomootWorkNow(HttpListenerRequest _, HttpListenerResponse response)
+        {
+            foreach (Komoot komoot in komootInstances)
+            {
+                komoot.WorkNow();
+            }
+            WebServer.WriteString(response, "OK");
         }
 
         private static void HandleRequest_KomootSaveSettings(HttpListenerRequest request, HttpListenerResponse response)
