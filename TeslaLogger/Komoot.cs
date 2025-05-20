@@ -304,6 +304,10 @@ namespace TeslaLogger
                             currP1.speed = (prevP.speed * 3 + nextP.speed * 2) / 5.0;
                             currP2.speed = (prevP.speed * 2 + nextP.speed * 3) / 5.0;
                         }
+                        if (acceleration1 > 0.9 && Math.Abs(acceleration2) < 0.25 && acceleration3 < -0.9)
+                        {
+                            Tools.DebugLog($"speed4: candidate? {prevP.speed}->{currP1.speed}->{currP2.speed}->{nextP.speed} acceleration1:{acceleration1}m/s acceleration2:{acceleration2}m/s acceleration3:{acceleration3}m/s ");
+                        }
                     }
                 }
                 if (this.positions.Count > 2)
