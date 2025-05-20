@@ -19,19 +19,19 @@ docker compose up -d
 If you have a slow machine, the first init can take very long
 
 ## Connect your car to the LucidLogger
-Because there is right now no wizard to guide you trough the process, you have to insert your car directly into the database.
+Go to admin panel / settings / MyLucid credentials or directly to:
+http://localhost:8888/admin/password.php
 
-If you have more than one Lucid / Tesla (lucky you), you have to use the next id for the next car...
-Enter your username, password, VIN and region of your car (US / EN ...)
+Click on "New Lucid".
+![image](https://github.com/user-attachments/assets/d196699c-e0d8-439d-9561-52ab777a9896)
 
-```
-docker exec teslaloggernet8-teslalogger-1 mysql -u root -pteslalogger teslalogger -hdatabase -Bse "insert into cars(id, tesla_name, tesla_password, car_type, vin, fleetAPIaddress) values (1, 'enter username', 'enter password', 'LUCID', 'enter VIN', 'US');"
-```
+Enter your MyLucid credentials and select your region. 
+Click on Get Cars.
 
-Restart the container
-```
-restart the docker container
-```
+![image](https://github.com/user-attachments/assets/5a8a6c28-4640-46ef-9b91-ae58d4eec40e)
+
+Select your car if you have more than one and click "Save"
+
 
 If everything works, you should see the car in the teslalogger container logfile
 ```

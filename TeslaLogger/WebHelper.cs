@@ -5286,6 +5286,7 @@ WHERE
                             dynamic jsonResult = JsonConvert.DeserializeObject(response);
                             dynamic message = jsonResult["message"];
                             Logfile.Log("SuperchargeBingo: Checkin Error: " + message);
+                            Tools.DebugLog($"SuperchargeBingo error {json}");
                         }
                     }
 
