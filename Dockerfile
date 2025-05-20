@@ -4,7 +4,7 @@ RUN echo "Europe/Berlin" > /etc/timezone && dpkg-reconfigure -f noninteractive t
 
 # install packages
 RUN apt-get update && \
- apt-get upgrade && \
+ apt-get upgrade -y && \
  apt-get install -y --no-install-recommends git && \
  apt-get install -y --no-install-recommends mariadb-client && \
  # apt-get install -y optipng python3 python3.pip && \
