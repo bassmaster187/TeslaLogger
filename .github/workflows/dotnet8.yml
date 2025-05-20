@@ -44,6 +44,7 @@ jobs:
         file: ./Dockerfile
         push: true
         tags: bassmaster187/teslalogger:latest
+        platforms: linux/amd64,linux/arm64
 
     - name: Build and push Webserver
       uses: docker/build-push-action@v5
@@ -52,6 +53,7 @@ jobs:
         file: ./Dockerfile-Webserver
         push: true
         tags: bassmaster187/teslalogger-webserver:latest
+        platforms: linux/amd64,linux/arm64
     
     - name: Build and push Grafana
       uses: docker/build-push-action@v5
@@ -60,5 +62,6 @@ jobs:
         file: ./Dockerfile-Grafana
         push: true
         tags: bassmaster187/teslalogger-grafana:latest
+        platforms: linux/amd64,linux/arm64
    
       
