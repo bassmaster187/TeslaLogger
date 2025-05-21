@@ -20,16 +20,16 @@ require("language.php");
 <div>
 <?php 
     include "menu.php";
-    echo(menu("Restore Database"));
+    echo(menu("Restore"));
 ?>
-	<h1><?php t("Restore Database"); ?></h1>
+	<h1><?php t("Restore"); ?></h1>
 	<p><?php t("TextRestore1"); ?></p>
 	<p><?php t("TextRestore2"); ?></p>
 	<p><?php t("TextRestore3"); ?></p>
 	
 <form action="restore_upload.php" method="post" enctype="multipart/form-data">
     <input type="file" name="fileToUpload" id="fileToUpload"><br><br>
-    <input type="submit" value="<?php t("Restore Database"); ?>" name="submit">
+    <input type="submit" value="<?php t("Restore"); ?>" name="submit">
 </form>
 </div>
 </body>
