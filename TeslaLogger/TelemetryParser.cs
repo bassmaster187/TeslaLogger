@@ -1224,7 +1224,7 @@ namespace TeslaLogger
                                 {
                                     double bearing = Tools.CalculateBearing(lastLatitude, lastLongitude, latitude.Value, longitude.Value);
                                     car.CurrentJSON.heading = (int)bearing;
-                                    car.teslaAPIState.AddValue("heading", "int", value, Tools.ToUnixTime(d), "drive_state");
+                                    car.teslaAPIState.AddValue("heading", "int", (int)bearing, Tools.ToUnixTime(d), "drive_state");
                                 }
 
                                 lastLatitude = latitude.Value;
