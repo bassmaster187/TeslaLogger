@@ -1,20 +1,31 @@
-FROM mcr.microsoft.com/dotnet/aspnet:8.0.15
+FROM python:3.13.3-slim-bookworm
+
+ARG TARGETARCH
+
 # timezone / date
 RUN echo "Europe/Berlin" > /etc/timezone && dpkg-reconfigure -f noninteractive tzdata
 
 # install packages
-RUN apt-get update && \
+RUN echo "TARGETARCH=${TARGETARCH}" && \
+ apt-get update && \
  apt-get upgrade -y && \
  apt-get install -y --no-install-recommends git && \
  apt-get install -y --no-install-recommends mariadb-client && \
- # apt-get install -y optipng python3 python3.pip && \
- apt-get install -y wget build-essential libreadline-dev libncursesw5-dev libssl-dev libsqlite3-dev tk-dev libgdbm-dev libc6-dev libbz2-dev libffi-dev zlib1g-dev && \
- wget -c https://www.python.org/ftp/python/3.13.3/Python-3.13.3.tar.xz && \
- tar -Jxvf Python-3.13.3.tar.xz && \
- cd Python-3.13.3 && \
- ./configure --enable-optimizations && \
- make -j $(nproc) && \
- make altinstall && \
+ apt-get install -y --no-install-recommends optipng wget gnupg && \
+# Add Microsoft repository and install .NET 8 Runtimes (architecture-specific)
+    if [ "${TARGETARCH}" = "arm64" ]; then \
+      wget https://dot.net/v1/dotnet-install.sh -O /home/dotnet-install.sh && \
+      chmod +x /home/dotnet-install.sh && \
+      /home/dotnet-install.sh --runtime aspnetcore --channel 8.0 --install-dir /usr/share/dotnet --no-path && \
+      apt-get install -y --no-install-recommends libicu72 && \
+      rm -f /home/dotnet-install.sh;\
+    else \
+      wget https://packages.microsoft.com/config/debian/12/packages-microsoft-prod.deb -O packages-microsoft-prod.deb && \
+      dpkg -i packages-microsoft-prod.deb && \
+      rm packages-microsoft-prod.deb && \
+      apt-get update && \
+      apt-get install -y dotnet-runtime-8.0 aspnetcore-runtime-8.0; \
+    fi && \
  apt-get clean && \
  apt-get autoremove -y && \
  rm -rf /var/lib/apt/lists/* && \
@@ -32,6 +43,8 @@ RUN mkdir -p /etc/teslalogger/sqlschema
 RUN mkdir -p /etc/teslalogger/git/TeslaLogger/Grafana
 RUN mkdir -p /etc/teslalogger/git/TeslaLogger/GrafanaConfig
 RUN mkdir -p /etc/teslalogger/git/TeslaLogger/GrafanaPlugins
+
+ENV PATH="/usr/share/dotnet:${PATH}"
 
 COPY lucidapi /etc/lucidapi
 COPY TeslaLogger/sqlschema.sql /etc/teslalogger/sqlschema
