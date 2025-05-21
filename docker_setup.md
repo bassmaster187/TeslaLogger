@@ -5,15 +5,11 @@ Docker on Raspberry: It won't work if you don't have a 64bit OS as MariaDB requi
 
 Please make sure you have the latest docker and docker compose. Many repositories comes with old docker and / or docker compose. You can avoid a lot of problems by doblecheck it.
 
-Create 2 folders:
+## Install:
 ```
-backup
-mysql
-```
-download docker-compose.yml file: https://github.com/bassmaster187/TeslaLogger/blob/NET8/docker-compose.yml
-
-run:
-```
+mkdir backup
+mkdir mysql
+wget https://raw.githubusercontent.com/bassmaster187/TeslaLogger/refs/heads/NET8/docker-compose.yml
 docker compose pull
 docker compose up -d
 ```
