@@ -2239,6 +2239,7 @@ Supercharger-V3 FR-Boulogne-sur-Mer,50.73346,1.671219
 Supercharger FR-Bourg-Achard,49.359752,0.817785
 Supercharger FR-Bourg-de-Péage,45.033274,5.051818
 Supercharger FR-Bourg-en-Bresse,46.144087,5.282481,60
+Supercharger-V4 FR-Bourg-en-Bresse,46.217384,5.243952
 Supercharger FR-Bourges,47.049393,2.344843
 Supercharger-V3 FR-Brest Gouesnou,48.430746,-4.470105
 Supercharger-V3 FR-Briançon,44.903824,6.630075
@@ -5233,7 +5234,7 @@ Tesla Service Center DE-Kirchheim,48.15108,11.74895
 Tesla Service Center DE-Mannheim,49.44434,8.574597
 Tesla Service Center DE-Neu-Ulm,48386722.0,10.030244
 Tesla Service Center DE-Nürnberg,49.463634,11.127495
-Tesla Service Center DE-Oldenburg,53.12543,8.163534
+Tesla Service Center DE-Oldenburg,53.12557,8.16375,60
 Tesla Service Center DE-Rostock,54.142615,12.168203
 Tesla Service Center DE-Stuttgart,48.82695,9.09938
 Tesla Service Center DK-Aarhus,56.178148,10.137029
@@ -7924,6 +7925,7 @@ En-Yakıt TR-Bucak Atilla,37.409444,30.54361
 
 EnBW AT-Blindenmarkt Felbering,48.126911,15.008798
 EnBW CZ-Karlovy Vary,50.232775,12.8678
+EnBW DE-Aach Singener Straße,47.838983,8.860239
 EnBW DE-Aach,47.840881,8.852887
 EnBW DE-Aachen Stolberger Straße,50.77591,6.111827
 EnBW DE-Abensberg Straubinger Straße,48.81055,11.8601
@@ -8180,6 +8182,7 @@ EnBW DE-Bondorf Am Römerfeld,48.5076,8.828301
 EnBW DE-Bondorf Hindenburgstr.,48.52148,8.835588
 EnBW DE-Bonn Gartenstraße,50.750189,7.129639,20
 EnBW DE-Bonndorf im Schwarzwald Bahnhofstraße,47.817657,8.33323
+EnBW DE-Bopfingen Bergstraße,48.851245,10.357695
 EnBW DE-Borken (Hessen) Alfred-Nobel-Straße,51.05216,9.2688
 EnBW DE-Borken (Hessen),51.052002,9.26968
 EnBW DE-Bornheim Aarhusweg,50.79354,6.95835
@@ -8300,6 +8303,7 @@ EnBW DE-Dollenberg Ost,50.688429,8.295862,5
 EnBW DE-Donaueschingen Bregstr.,47.933767,8.498903
 EnBW DE-Donauwörth Alte Augsburger Straße,48.710734,10.786827
 EnBW DE-Donauwörth Ludwig-Auer-Straße,48.708813,10.757953
+EnBW DE-Donauwörth Rosenstraße,48.70293,10.80064
 EnBW DE-Donzdorf Dieselstr.,48.686078,9.789328
 EnBW DE-Dorfen Haager Straße,48.26764,12.15754
 EnBW DE-Dorfen Zieglhaus,48.25938,12.157888
@@ -8369,16 +8373,19 @@ EnBW DE-Ehningen Gartenstr.,48.659957,8.943261
 EnBW DE-Ehrenberg West,51.265618,7.245238,20
 EnBW DE-Eifel Ost,50.070141,6.880988
 EnBW DE-Eifel West,50.068546,6.880065
+EnBW DE-Eigeltingen Krumme Straße,47.85846,8.89687
 EnBW DE-Eisenberg (Pfalz) In den Geldäckern,49.557312,8.080851
 EnBW DE-Eisingen Talstraße,48.947869,8.669131
 EnBW DE-Ellhofen,49.143621,9.308792
 EnBW DE-Ellwangen (Jagst) Doktor-Adolf-Schneider-Straße,48.95421,10.169293
 EnBW DE-Ellwangen (Jagst) Rasthof Ellwanger Berge Ost,48.984851,10.196098
 EnBW DE-Ellwangen (Jagst) Rasthof Ellwanger Berge West,48.983091,10.193419
+EnBW DE-Ellwangen Unterer Brühl,48.96882,10.127694
 EnBW DE-Elmshorn,53.74573,9.66126
 EnBW DE-Elsterwerda,51.465849,13.533734
 EnBW DE-Elztal Nord,50.266916,7.224769
 EnBW DE-Elztal Süd,50.265633,7.227239
+EnBW DE-Emerkingen Bachstraße,48.216755,9.65799
 EnBW DE-Emmendingen Schwarzwaldstr.,48.116881,7.850507
 EnBW DE-Ems-Vechte Ost,52.52832,7.199853
 EnBW DE-Ems-Vechte-West,52.527915,7.196439,10
@@ -8658,6 +8665,7 @@ EnBW DE-Herford,52.1314,8.658232
 EnBW DE-Heringen/Helme,51.44726,10.87378
 EnBW DE-Herleshausen Brandenburgstraße 99,51.006613,10.175765
 EnBW DE-Herleshausen Werratal Süd,51.006849,10.180803
+EnBW DE-Hermaringen Robert-Bosch-Straße,48.590692,10.268147
 EnBW DE-Herne,51.538074,7.178124
 EnBW DE-Herrenberg Benzstr.,48.599152,8.870362
 EnBW DE-Herschbach,50.569133,7.736197
@@ -8702,7 +8710,7 @@ EnBW DE-Hüfingen Lindenpark,47.934041,8.497137
 EnBW DE-Hünxe Ost,51.636934,6.746968
 EnBW DE-Hünxe West,51.635723,6.74493
 EnBW DE-Hürth,50.88546,6.89686
-EnBW DE-Hüttenberg,50.521852,8.59014
+EnBW DE-Hüttenberg Im Dollenstück,50.521949,8.590575
 EnBW DE-Igersheim,49.486855,9.820828
 EnBW DE-Illertal Ost,48.124722,10.11212,20
 EnBW DE-Illertal West,48.125496,10.10963,20
@@ -9007,6 +9015,7 @@ EnBW DE-Mudau Schloßauer Str.,49.535012,9.20243
 EnBW DE-Mulfingen Hauptstr.,49.3409,9.800015
 EnBW DE-Munderkingen Badstubenweg,48.233968,9.644065
 EnBW DE-Murrhardt Gartenstr.,48.977783,9.580876
+EnBW DE-Murrhardt Murrtalstraße,48.975132,9.641382
 EnBW DE-Mutterstadt An der Fohlenweide,49.42539,8.364603
 EnBW DE-Möglingen Ludwigsburger Str.,48.888058,9.135368
 EnBW DE-Mölln,53.622641,10.682439
@@ -9088,6 +9097,8 @@ EnBW DE-Nortorf,54.164966,9.854245
 EnBW DE-Nottuln,51.927221,7.363626
 EnBW DE-Nusplingen Marktplatz,48.13186,8.89148
 EnBW DE-Nußloch Allming,49.32616,8.683861
+EnBW DE-Nördlingen An der Reimlinger Mauer,48.84898,10.492764
+EnBW DE-Nördlingen Augsburger Straße,48.84313,10.50385
 EnBW DE-Nümbrecht,50.90389,7.54066
 EnBW DE-Nürnberg Bregenzer Straße,49.398242,11.175675
 EnBW DE-Nürnberg Eibach,49.399141,11.03835,50
@@ -9103,6 +9114,7 @@ EnBW DE-Oberderdingen Schillerstr.,49.063583,8.797662
 EnBW DE-Oberhausen Essener Str.,51.481464,6.894158
 EnBW DE-Oberhausen Hellweg,51.491909,6.838026
 EnBW DE-Oberhausen Shell,51.489008,6.883758
+EnBW DE-Oberkochen Carl-Zeiss-Straße,48.783128,10.10107
 EnBW DE-Oberndorf am Neckar Im Vogelloch,48.29834,8.62799
 EnBW DE-Oberndorf am Neckar Sägewerkstraße,48.296011,8.575718
 EnBW DE-Oberndorf Klosterstr.,48.29227,8.574691
@@ -9290,6 +9302,7 @@ EnBW DE-Sankt Katharinen,50.60393,7.33096
 EnBW DE-Sarstedt,52.23699,9.87374
 EnBW DE-Sasbach Marckolsheimer Str.,48.139945,7.614473
 EnBW DE-Scheeßel,53.161406,9.473892
+EnBW DE-Schelklingen Ehinger Straße,48.37063,9.732524
 EnBW DE-Schelklingen Fabrikstr.,48.364831,9.711711
 EnBW DE-Schelklingen Müllergasse,48.374243,9.73298
 EnBW DE-Schemmerhofen Hauptstr.,48.174367,9.793933
@@ -9304,7 +9317,12 @@ EnBW DE-Schneeberg,50.599161,12.635617
 EnBW DE-Schongau Tannenberger Str.,47.807439,10.873641
 EnBW DE-Schongau,47.808188,10.877717
 EnBW DE-Schopfloch Dornstetter Straße,48.459441,8.546145
+EnBW DE-Schorndorf An der Mauer,48.805842,9.523853
+EnBW DE-Schorndorf Arnoldstraße,48.806732,9.532023
+EnBW DE-Schorndorf Heinkelstraße,48.807803,9.532061
 EnBW DE-Schorndorf Rosenstraße,48.806541,9.525804
+EnBW DE-Schorndorf Stuttgarter Straße,48.8055,9.511796
+EnBW DE-Schorndorf Wallstraße,48.806354,9.530124
 EnBW DE-Schortens,53.539121,7.966783
 EnBW DE-Schramberg Albert-Moser,48.2382,8.4184
 EnBW DE-Schramberg Gewerbepark H.A.U.,48.230238,8.396275
@@ -9361,6 +9379,7 @@ EnBW DE-Siegenburg Dassfeld,48.758611,11.836059
 EnBW DE-Siegerland Ost,50.877603,7.945751
 EnBW DE-Siegerland West,50.879832,7.935429
 EnBW DE-Siegsdorf Breslauer Straße,47.828713,12.636864
+EnBW DE-Sigmaringen Friedrich-List-Straße,48.080678,9.235487
 EnBW DE-Sindelfingen Feldbergstr.,48.725255,9.008961
 EnBW DE-Sindelfingen Goldmühlestr.,48.702532,9.013724
 EnBW DE-Sindelfingen Hans-Thoma-Platz,48.708111,9.034088
@@ -9695,9 +9714,11 @@ EnBW DE-Wildenfels,50.680479,12.590721,25
 EnBW DE-Wildflecken,50.377087,9.914401
 EnBW DE-Wilhelmshaven Graudenzer Straße,53.570757,8.093617
 EnBW DE-Wilhelmshaven,53.528539,8.088595
-EnBW DE-Winningen Moseltal Ost,50.316586,7.4988,10
-EnBW DE-Winningen Moseltal West,50.317548,7.4978,10
+EnBW DE-Winningen Moseltal Ost,50.316545,7.498842
+EnBW DE-Winningen Moseltal West,50.317467,7.497907
 EnBW DE-Winterbach Ritterstr.,48.804627,9.478579
+EnBW DE-Wirges Bahnhofstraße,50.47247,7.794138
+EnBW DE-Wirges Samoborstraße,50.47264,7.788874
 EnBW DE-Wischhafen,53.76793,9.32033
 EnBW DE-Witten Aldi,51.437893,7.325173
 EnBW DE-Witten Shell,51.452225,7.323964
@@ -9709,8 +9730,10 @@ EnBW DE-Wittmund Hagebaumarkt,53.582519,7.796267
 EnBW DE-Wittstock/Dosse,53.15772,12.45599
 EnBW DE-Wolfegg Alttanner Str.,47.821382,9.79452
 EnBW DE-Wolfenbüttel,52.167044,10.572271
+EnBW DE-Wolfratshausen Bergkramerhof,47.906,11.401537
 EnBW DE-Wolfratshausen Hans-Urmiller-Ring,47.907525,11.427754
 EnBW DE-Wolfsburg,52.44912,10.83517
+EnBW DE-Wollin Im Gewerbegebiet,52.288292,12.464917
 EnBW DE-Wolpertshausen Kuno-Haberkern-Str.,49.169032,9.848119
 EnBW DE-Wolpertswende Kirchplatz,47.894463,9.612668
 EnBW DE-Wonnegau Ost,49.647041,8.293444
@@ -9729,19 +9752,26 @@ EnBW DE-Wurzen Tedi,51.37072,12.74628
 EnBW DE-Wurzen,51.381708,12.739439
 EnBW DE-Wyhl Pfarrgässle,48.168277,7.650691
 EnBW DE-Wörth a.d. Donau,49.000989,12.365447
+EnBW DE-Wörth am Rhein Maximilianstraße,49.0405,8.29287
 EnBW DE-Wülferode West,52.338094,9.86385
+EnBW DE-Würselen Adenauerstraße,50.806184,6.152408
 EnBW DE-Würzburg Mainfrankenhöhe,49.82055,9.97913
 EnBW DE-Würzburg Nürnberger Straße,49.79388,10.00296
+EnBW DE-Zeitz Hainichener Dorfstraße,51.070322,12.12091
 EnBW DE-Zeitz Kaufland,51.037444,12.163286
-EnBW DE-Zeitz Tedi,51.070297,12.121568
+EnBW DE-Zeitz Zeitzer Straße,51.081589,12.108296
 EnBW DE-Zell Göppinger Str.,48.648716,9.575523
 EnBW DE-Zella-Mehlis,50.64267,10.68121
 EnBW DE-Zeven,53.27713,9.293374
 EnBW DE-Zimmern o.R. Hauptstr.,48.166915,8.593122
 EnBW DE-Zirndorf Albert-Einstein-Straße,49.44567,10.95122
 EnBW DE-Zirndorf Rothenburger Straße,49.434987,10.959788
+EnBW DE-Zolling Am Sägewerk,48.448558,11.764789
+EnBW DE-Zweibrücken Gottlieb-Daimler-Straße,49.248134,7.351535
 EnBW DE-Zwickau Hellweg,50.753058,12.481222
 EnBW DE-Zwickau Rossmann,50.737925,12.491723
+EnBW DE-Zwickau Äußere Schneeberger Straße,50.70495,12.497151
+EnBW DE-Zwiesel Regener Straße,49.0034,13.22
 EnBW DE-Öhringen Austraße,49.204334,9.488376
 EnBW DE-Öhringen Euronics,49.20321,9.491336
 EnBW DE-Öhringen Meisterhausstr.,49.20465,9.50171
@@ -10991,6 +11021,7 @@ Fines BG-Търговище Targovishte 4009,43.244632,26.54884
 Fortum NO-Alta,69.966743,23.268569
 Fortum NO-Bykle,59.354746,7.355757
 Fortum NO-Bøde Esso Rønvik,67.293538,14.407496
+Fortum NO-Geiranger Gjorvahaugen,62.095088,7.211245
 Fortum NO-Sortland,68.704914,15.414759
 
 Fraunhofer DE-Berlin Gustav-Meyer-Allee,52.541473,13.385278
@@ -11307,6 +11338,7 @@ IECharge FR-Henrichemont Prairie des Gimonets,47.303759,2.545237
 IECharge FR-La Roche-sur-Yon La Vergne Babouin,46.633558,-1.413197
 IECharge FR-Mairy-Mainville Rue du Petit Mont,49.305955,5.854291
 
+IKB AT-Innsbruck Salurner Straße,47.262477,11.397359
 IKB AT-Schönberg im Stubaital Europabrücke-Parkplatz,47.197433,11.397733
 
 IKEA AU-Slacks Creek QLD,-27.637344,153.135277
@@ -11619,6 +11651,7 @@ Ionity AT-Nassereith,47.327313,10.819309
 Ionity AT-Parndorf Richard Erlinger Platz,47.975945,16.854379
 Ionity AT-Pinkafeld,47.373952,16.093842
 Ionity AT-St. Lorenzen im Mürztal Dr.-Reinhard-Machold-Straße,47.468751,15.344324,30
+Ionity AT-St. Valentin,48.196342,14.528431,8
 Ionity AT-St. Valentin,48.196397,14.52822,8
 Ionity AT-Steinhäusl,48.157839,15.940398
 Ionity BE-Bierset,50.651848,5.473755
@@ -14795,6 +14828,7 @@ Smatrics AT-Haid Ikeaplatz,48.197307,14.249527
 Smatrics AT-Innsbruck Mitterweg,47.257962,11.376605
 Smatrics AT-Innsbruck Mitterweg,47.257987,11.376648
 Smatrics AT-Kapfenberg Bahnstraße,47.445153,15.292904
+Smatrics AT-Klagenfurt am Wörthersee Rosentaler Straße,46.606182,14.298608
 Smatrics AT-Liezen Gesäusestraße,47.560208,14.252779
 Smatrics AT-Linz Hafenstraße,48.3156,14.30173,25
 Smatrics AT-Linz Untere Donaulände,48.313366,14.298537
@@ -14866,7 +14900,10 @@ StromSpeicherMarkt DE-Freiburg im Breisgau Im Maierbrühl,47.983546,7.719172
 SVG DE-Merenberg Autohof Benzstraße,50.49926,8.18562
 
 SW-Aachen DE-Aachen Burgau,50.552676,6.238098
+SW-Aachen DE-Monheimsallee,50.781109,6.090785
 SW-Aalen DE-Aalen Kocherstraße,48.817544,10.12691
+SW-Bad-Homburg DE-Bad Homburg Bahnhofsplatz,50.220598,8.622014
+SW-Bad-Homburg DE-Bad Homburg Horexstraße,50.219575,8.621767
 SW-Bamberg DE-Bamberg Mußstraße,49.897828,10.877873
 SW-Bamberg DE-Hallstadt Laubanger,49.913468,10.869012
 SW-Bielefeld DE-Bielefeld Föhrenstraße,51.970024,8.463546
@@ -14885,6 +14922,7 @@ SW-Flensburg DE-Flensburg Batteriestraße,54.8047,9.429783
 SW-Gießen DE-Gießen Senckenbergstraße,50.587169,8.677625
 SW-Gotha DE-Gotha Friedrichstraße,50.947563,10.709862
 SW-Greven DE-Greven Hinter der Lake,52.092794,7.608831
+SW-Heidelberg DE-Heidelberg Vangerowstraße,49.4089,8.678841
 SW-Heidelberg DE-Heidelberg-Alte Eppelheimer Straße,49.406414,8.681353
 SW-Jena-Pößneck DE-Jena Eichplatz,50.928242,11.585432
 SW-Jena-Pößneck DE-Jena Philipp-Müller-Straße,50.919716,11.56684
@@ -15144,6 +15182,7 @@ teamstrom DE-Kronshagen Eckernförder Straße,54.337082,10.105607
 teamstrom DE-Osterrönfeld Kieler Straße,54.295861,9.70783
 teamstrom DE-Otterndorf Cuxhavener Straße,53.806606,8.890619
 teamstrom DE-Rendsburg Friedrichstädter Straße,54.320145,9.626945
+teamstrom DE-Schleswig Marie-Curie-Straße,54.542193,9.581212
 
 Teccon AT-Lendorf Katschberg Straße,46.82732,13.490701
 Teccon AT-Lendorf Katschberg Straße,46.828236,13.491213
@@ -15390,6 +15429,7 @@ Vattenfall DE-Berlin Kiefholzstraße,52.491352,13.450965
 Vattenfall DE-Berlin Segelfliegerdamm,52.444882,13.510587
 Vattenfall DE-Bismark Breite Straße,52.661963,11.554862
 Vattenfall DE-Erfurt Gothaer Straße,50.960457,10.991635
+Vattenfall DE-Frankfurt am Main Georg-Baumgarten-Straße,50.054411,8.590799
 Vattenfall SE-Kristianstad Bochums väg,56.023166,14.118127
 Vattenfall SE-Lund Förhandlingsvägen,55.715834,13.156021
 Vattenfall SE-Täby Ytterbyvägen,59.434309,18.066909
@@ -15531,6 +15571,7 @@ Volkswagen DE-Überlingen Hauptstraße 37,47.802296,9.238275
 WEMAG DE-Bützow Vor dem Rühner Tor,53.848041,11.976902
 WEMAG DE-Dobbertin Goldberger Straße,53.620337,12.082154
 WEMAG DE-Lübz Am Fuchsberg,53.46397,12.045951
+WEMAG DE-Ostseebad Boltenhagen Zum Sportplatz,53.981871,11.193372
 WEMAG DE-Schwerin Obotritenring,53.637566,11.404817
 WEMAG DE-Schwerin Platz der Freiheit,53.633438,11.402878
 WEMAG DE-Valluhn Am Heisterbusch,53.508901,10.845572
@@ -15643,11 +15684,8 @@ CH Zürich ABB Oerlikon,47.411564,8.54106
 CZ Brno Řípská,49.175874,16.679106
 CZ Praha Cinestar,50.070897,14.401644
 CZ Praha Siemens,50.04811,14.306508
-DE Aachen Quellenhof,50.781109,6.090785
 DE Aurich EEZ,53.496286,7.494351
 DE Bad Doberan Grand Hotel Heiligendamm,54.143733,11.842857
-DE Bad Homburg Hessenring,50.220598,8.622014
-DE Bad Homburg Horexstraße 28-30,50.219575,8.621767
 DE Bad Oldesloe Käthe-Kollwitz-Straße,53.807283,10.382586
 DE Bad Segeberg EWS-Servicecenter,53.937808,10.306605
 DE Barth Hafenstraße Destination Charger,54.370514,12.722957
@@ -15688,6 +15726,7 @@ DE Roth Autohaus,49.245669,11.119321
 DE Sandersdorf-Brehna The Style Outlets,51.555325,12.192875
 DE Schönefeld Total,52.370738,13.526929
 DE Stuttgart Flughafen P12,48.691895,9.195894
+DE Stuttgart Pfaffenwaldring ARENA2036,48.748637,9.109677
 DE Waltrop An der Zechenbahn,51.621852,7.430029
 DE Wetzlar Leica,50.553084,8.533377,20
 ES Gandia,38.969986,-0.178789
