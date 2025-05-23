@@ -1,4 +1,3 @@
-version: "3"
 services:
   teslalogger:
     image: bassmaster187/teslalogger:latest
@@ -69,6 +68,7 @@ services:
       - "com.centurylinklabs.watchtower.enable=true"
   watchtower:
     image: containrrr/watchtower
+    restart: always
     volumes:
         - /var/run/docker.sock:/var/run/docker.sock
     command: --debug --http-api-update 
