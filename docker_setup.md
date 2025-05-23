@@ -9,7 +9,7 @@ Please make sure you have the latest docker and docker compose. Many repositorie
 ```
 mkdir backup
 mkdir mysql
-wget https://raw.githubusercontent.com/bassmaster187/TeslaLogger/refs/heads/NET8/docker-compose.yml
+wget https://raw.githubusercontent.com/bassmaster187/TeslaLogger/refs/heads/NET8/docker-compose.yml -O docker-compose.yml
 docker compose pull
 docker compose up -d
 ```
