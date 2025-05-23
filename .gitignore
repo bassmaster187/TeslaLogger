@@ -124,3 +124,7 @@ TeslaLogger/copy_release_to_main_branch.cmd
 /TeslaLogger/bin/Debug/net8.0/lucid
 TeslaLogger/create-REDIRECTDOCKERTOHOST.cmd
 TeslaLogger/copy-bin-to.net8docker.cmd
+TeslaLogger/bin/Debug/net8.0/logfile.zip
+TeslaLogger/bin/Debug/net8.0/nohup.out
+TeslaLogger/copy-bin-to-release(main).cmd
+TeslaLogger/delete-REDIRECTDOCKERTOHOST.cmd

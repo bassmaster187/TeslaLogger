@@ -52,6 +52,9 @@ namespace TeslaLogger
 
         private static void StartMqttClient()
         {
+            if (Tools.IsDockerNET8())
+                return;
+
             string MQTTClientPath = "/etc/teslalogger/MQTTClient.exe";
 
             try

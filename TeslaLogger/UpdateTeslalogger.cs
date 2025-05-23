@@ -1572,6 +1572,9 @@ PRIMARY KEY(id)
 
         public static void CertUpdate()
         {
+            if (Tools.IsDockerNET8())
+                return;
+
             try
             {
                 // https://github.com/KSP-CKAN/CKAN/wiki/SSL-certificate-errors#removing-expired-lets-encrypt-certificates
