@@ -5,24 +5,12 @@ Docker on Raspberry: It won't work if you don't have a 64bit OS as MariaDB requi
 
 Please make sure you have the latest docker and docker compose. Many repositories comes with old docker and / or docker compose. You can avoid a lot of problems by doblecheck it.
 
-These versions are known to work fine:
+## Install:
 ```
-docker -v
-Docker version 19.03.2, build 6a30dfca03
-
-docker compose version
-docker compose version 1.24.1, build 4667896b
-```
-
-1. Clone the Teslalogger repository into a new folder:
-```
-git clone https://github.com/bassmaster187/TeslaLogger
-```
-
-2. fire up docker containers. Make sure, you got the latest docker & docker compose version. Many repositories comes with very old versions!
-```
-cd TeslaLogger
-docker compose build
+mkdir backup
+mkdir mysql
+wget https://raw.githubusercontent.com/bassmaster187/TeslaLogger/refs/heads/NET8/docker-compose.yml
+docker compose pull
 docker compose up -d
 ```
 

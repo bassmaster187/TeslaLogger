@@ -446,6 +446,7 @@ namespace UnitTestsTeslalogger
         public void DrivingBySpeed_typed()
         {
             Car c = new Car(0, "", "", 0, "", DateTime.Now, "", "", "", "", "", "XP7YGCEK9PB000000", "", null, false);
+            c.FleetAPI = true;
 
             var telemetry = new TelemetryParser(c);
             telemetry.databaseCalls = false;
@@ -456,9 +457,15 @@ namespace UnitTestsTeslalogger
             for (int i = 0; i < lines.Count; i++)
             {
                 if (i == 0)
+                {
                     expectedDriving = true; // VehicleSpeed: 1.86
+                }
                 else if (i == 16)
+                {
                     expectedDriving = false; // Gear: P
+                    c.GetTeslaAPIState().GetInt("heading", out int heading);
+                    Assert.AreEqual(127, heading);
+                }
 
                 telemetry.handleMessage(lines[i]);
                 AssertStates(telemetry, i, lines[i]);

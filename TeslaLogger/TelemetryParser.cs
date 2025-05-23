@@ -1138,6 +1138,8 @@ namespace TeslaLogger
                     cmd.ExecuteNonQuery();
                     
                 }
+                long ts = DateTimeToUTC_UnixTimestamp(d);
+                _ = car.webhelper.SendDataToAbetterrouteplannerAsync(ts, car.CurrentJSON.current_battery_level, 0, true, lastChargingPower * -1.0, car.CurrentJSON.GetLatitude(), car.CurrentJSON.GetLongitude());
             }
             Log($"Insert Charging TR: {lastIdealBatteryRange}km");
         }
@@ -1222,6 +1224,7 @@ namespace TeslaLogger
                                 {
                                     double bearing = Tools.CalculateBearing(lastLatitude, lastLongitude, latitude.Value, longitude.Value);
                                     car.CurrentJSON.heading = (int)bearing;
+                                    car.teslaAPIState.AddValue("heading", "int", (int)bearing, Tools.ToUnixTime(d), "drive_state");
                                 }
 
                                 lastLatitude = latitude.Value;
@@ -1291,6 +1294,11 @@ namespace TeslaLogger
                     
                     if (speed == null)
                         speed = 0;
+
+                    if (IsCharging)
+                        _ = car.webhelper.SendDataToAbetterrouteplannerAsync(ts, car.CurrentJSON.current_battery_level, 0, true, lastChargingPower * -1.0, (double)latitude, (double)longitude);
+                    else
+                        _ = car.webhelper.SendDataToAbetterrouteplannerAsync(ts, lastSoc, (double)speed, false, 0.0, (double)latitude, (double)longitude);
 
                     lastposid = car.DbHelper.InsertPos(ts.ToString(), lastLatitude, lastLongitude, (int)speed.Value, null, lastOdometer, lastIdealBatteryRange, lastRatedRange, lastSoc, lastOutsideTemp, "");
 
