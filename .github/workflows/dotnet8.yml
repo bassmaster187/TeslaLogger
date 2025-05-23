@@ -8,6 +8,7 @@ on:
   
 jobs:
   build:
+    if: github.ref == 'refs/heads/NET8'
 
     runs-on: ubuntu-latest
 
