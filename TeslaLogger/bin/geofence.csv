@@ -2012,8 +2012,8 @@ Supercharger DE-Süderholz,54.093304,13.087853,30
 Supercharger-V3 DE-Troisdorf,50.813724,7.107381
 Supercharger-V3 DE-Türkheim,48.042516,10.620137
 Supercharger DE-Uckerfelde,53.23499,13.98606
-Supercharger-V3 DE-Ulm,48.456481,10.030833
-Supercharger DE-Ulm,48.456714,10.030097,18
+Supercharger-V4 DE-Ulm,48.456481,10.030833
+Supercharger-V4 DE-Ulm,48.456714,10.030097,20
 Supercharger-V3 DE-Ursensollen,49.4057,11.761033
 Supercharger-V3 DE-Vaterstetten,48.146213,11.790329
 Supercharger-V3 DE-Vaterstetten,48.146472,11.790255
@@ -3048,6 +3048,8 @@ Supercharger NO-Grong,64.464913,12.316532
 Supercharger-V3 NO-Grålum,59.297635,11.062809
 Supercharger-V3 NO-Gudvangen,60.878909,6.843175
 Supercharger NO-Gulsvik,60.381223,9.609859
+Supercharger-V4 NO-Hell Stjørdal,63.447571,10.912859
+Supercharger-V4 NO-Hell Stjørdal,63.447784,10.913101
 Supercharger-V4 NO-Hemsedal,60.862309,8.555466
 Supercharger NO-Hernes,60.933109,11.676209
 Supercharger-V3 NO-Hitra,63.521397,9.109465
@@ -3904,7 +3906,7 @@ Supercharger US-Gillette WY,44.292775,-105.52689
 Supercharger-V3 US-Gilman IL,40.751987,-87.9963
 Supercharger US-Gilroy CA,37.02445,-121.56535
 Supercharger-V3 US-Gilroy Camino Arroyo CA,37.001072,-121.553955
-Supercharger-V3 US-Girard OH,41.149373,-80.700647
+Supercharger-V3 US-Girard OH,41.149533,-80.699651
 Supercharger US-Glen Allen VA,37.669845,-77.461682
 Supercharger-V3 US-Glen Mills PA,39.88273,-75.53434
 Supercharger-V3 US-Glendale AZ,33.537198,-112.262295
@@ -4341,7 +4343,7 @@ Supercharger US-Miami FL - SW 8th Street,25.766432,-80.194864
 Supercharger-V3 US-Miami Gardens FL - Northwest 183rd Street,25.93994,-80.24642
 Supercharger-V3 US-Michigan City MI,41.673819,-86.890904
 Supercharger-V3 US-Middletown DE,39.479666,-75.720719
-Supercharger-V3 US-Middletown NY,41.442405,-74.376472
+Supercharger US-Middletown NY,41.442795,-74.377247
 Supercharger US-Midland TX,31.946799,-102.142028
 Supercharger-V3 US-Midvale UT,40.622532,-111.868854
 Supercharger-V3 US-Milan NM,35.183017,-107.898129
@@ -5744,7 +5746,7 @@ Allego DE-Ellwangen Max-Eyth-Straße 44,48.959142,10.173462
 Allego DE-Emden Thüringer Straße,53.36323,7.168789
 Allego DE-Emsbüren Merianstraße,52.359586,7.265125,10
 Allego DE-Erftstadt Zunftstraße 2,50.796543,6.780905
-Allego DE-Erhartingen Gewerbepark Frixing,48.272555,12.550022,10
+Allego DE-Erharting Gewerbepark Frixing,48.272555,12.550022,10
 Allego DE-Erkrath Bergstraße 9,51.213114,6.962119
 Allego DE-Erkrath Brechtstraße 37,51.201574,6.958952
 Allego DE-Erkrath Feldheider Straße 47,51.200707,6.939922
@@ -7562,6 +7564,7 @@ E-MAXX DE-Frickhofen Schulstraße,50.504932,8.027944
 E-MAXX DE-Harxheim Gerbstedterstraße,49.90317,8.276746
 E-MAXX DE-Limburg Limburgerstraße,50.403889,8.0675
 
+e-regio DE-Mechernich Gartenstraße,50.590096,6.655214
 e-regio DE-Nettersheim Bahnhofstraße,50.490557,6.629605
 
 E.ON CZ-Jenišov,50.218688,12.806822
@@ -7832,131 +7835,178 @@ Ecotap NL-Wemeldinge Ruisweg,51.521996,3.980178
 
 EDEKA DE-Ahorn Lindenstraße,50.23425,10.9182
 EDEKA DE-Asendorf Altenfelder Weg,52.77811,9.00129
+EDEKA DE-Asendorf Altenfelder Weg,52.778427,9.002084
 EDEKA DE-Bad Belzig Weitzgrunder Str,52.14475,12.59097
+EDEKA DE-Bad Essen Hartmannstraße,52.310999,8.429603
+EDEKA DE-Bad Honnef Himberger Straße,50.651573,7.301564
+EDEKA DE-Bad Münder am Deister Hasselweg,52.236844,9.422222
 EDEKA DE-Barleben Breiteweg,52.19387,11.6233
 EDEKA DE-Barntrup Försterweg,51.98629,9.1346
-EDEKA DE-Bergatreute Roßberger Straße,47.84903,9.75231
-EDEKA DE-Berlin Blankenburger Str.,52.58477,13.41664
-EDEKA DE-Berlin Britzer Straße,52.43921,13.41118
+EDEKA DE-Barßel Dorfstraße,53.117899,7.822076
+EDEKA DE-Belm Weberstraße,52.300738,8.113258
+EDEKA DE-Bergatreute Roßbergerstraße,47.849393,9.752179
+EDEKA DE-Berlin Berlepschstraße,52.425992,13.24393
+EDEKA DE-Berlin Blankenburger Straße,52.584477,13.417992
+EDEKA DE-Berlin Britzer Straße,52.43953,13.408684
+EDEKA DE-Berlin Drakestraße,52.441799,13.299045
 EDEKA DE-Berlin Eichborndamm,52.57519,13.31438
 EDEKA DE-Berlin Heerstraße,52.515648,13.185989
-EDEKA DE-Berlin Potsdamer Chaussee,52.42695,13.21664
-EDEKA DE-Berlin Rixdorfer Str.,52.44786,13.40464
-EDEKA DE-Berlin Siemensstraße,52.44419,13.33582
-EDEKA DE-Berlin Wiesbadener Straße,52.47348,13.30219
+EDEKA DE-Berlin Königin-Elisabeth-Straße,52.511962,13.279654
+EDEKA DE-Berlin Potsdamer Chaussee,52.427145,13.215337
+EDEKA DE-Berlin Rixdorfer Straße,52.447737,13.403916
+EDEKA DE-Berlin Schnellerstraße,52.457477,13.509611
+EDEKA DE-Berlin Siemensstraße,52.443617,13.336233
+EDEKA DE-Berlin Streitstraße,52.55865,13.21082
+EDEKA DE-Berlin Wiesbadener Straße,52.473989,13.301582
 EDEKA DE-Bernburg Gröbziger Straße,51.78841,11.75377
 EDEKA DE-Binz Vierte Straße,54.442268,13.568479
+EDEKA DE-Bissendorf Mindener Straße,52.261363,8.212064
 EDEKA DE-Bocholt Dinxperloerstr.,51.85394,6.59379
 EDEKA DE-Bocholt Wigger Str.,51.86016,6.49928
 EDEKA DE-Bochum Wasserstr.,51.46386,7.23712
 EDEKA DE-Bonn Basketring,50.70666,7.05997
+EDEKA DE-Bremen Heidlerchenstraße,53.192066,8.558613
 EDEKA DE-Bremen Rockwinkeler Heerstraße,53.089163,8.933304
+EDEKA DE-Bremerhaven Schiffdorfer Chaussee,53.530873,8.603505
 EDEKA DE-Bruchköbel Bahnhofstraße,50.18399,8.92312
 EDEKA DE-Burgbernheim Bergeler Str.,49.44851,10.33049
+EDEKA DE-Burgwedel Hauptstraße,52.508707,9.926592
 EDEKA DE-Butjadingen Butjadinger Straße,53.5764,8.35895
 EDEKA DE-Büdelsdorf Hollerstraße,54.313773,9.675719
-EDEKA DE-Bünde Herforder Straße,52.18835,8.59885
-EDEKA DE-Bünde Wilhelmstraße,52.20135,8.57253
-EDEKA DE-Celle Dörnbergstraße,52.62747,10.09957
+EDEKA DE-Bünde Herforder Straße,52.187763,8.59886
+EDEKA DE-Celle Dörnbergstraße,52.62907,10.100269
 EDEKA DE-Coppenbrügge Alte Heerstraße,52.116,9.55597
 EDEKA DE-Coswig-Anhalt Berliner Straße,51.8921,12.46464
-EDEKA DE-Datteln Schachtstr.,51.63416,7.33283
+EDEKA DE-Cottbus Madlower Chaussee,51.716956,14.32233
+EDEKA DE-Datteln Schachtstraße,51.634389,7.332081
+EDEKA DE-Dessau-Roßlau Heidestraße,51.806367,12.241669
 EDEKA DE-Dortmund Nelkenstr.,51.47759,7.59982
 EDEKA DE-Dresden Dohnaer Str.,51.0085,13.78422
 EDEKA DE-Dresden Holbeinstr.,51.04902,13.76994
-EDEKA DE-Dülmen Auf dem Quellberg,51.84274,7.29472
+EDEKA DE-Dülmen Auf dem Quellberg,51.84292,7.2943
+EDEKA DE-Eichstätt Industriestraße,48.882845,11.197708
 EDEKA DE-Eichstätt Weißenburger Straße,48.89651,11.17584
 EDEKA DE-Eilenburg Ziegelstr.,51.46355,12.64697
-EDEKA DE-Erding Pretzener Str,48.27278,11.89633
+EDEKA DE-Erding Pretzener Straße,48.273733,11.896675
 EDEKA DE-Erkelenz Karolingerring,51.09054,6.32004
 EDEKA DE-Essen Velberter Straße,51.388356,7.010934
-EDEKA DE-Fehrbellin Berliner Allee,52.80862,12.77719
+EDEKA DE-Fehrbellin Berliner Allee,52.809022,12.776847
 EDEKA DE-Freital Oppelstr.,51.01597,13.63717
-EDEKA DE-Fürstenwalde Lange Straße,52.34712,14.05708
-EDEKA DE-Gaimersheim Dr.-Ludwig-Kraus-Straße,48.79086,11.378
+EDEKA DE-Fürstenwalde Lange Straße,52.346471,14.058684
+EDEKA DE-Gaimersheim Dr.-Ludwig Kraus-Straße,48.790648,11.378478
+EDEKA DE-Gardelegen Wilhelmstraße,52.48509,11.215774
 EDEKA DE-Geiselbach Omersbacher Weg,50.10886,9.19192
 EDEKA DE-Geldern Annastr.,51.51793,6.34108
-EDEKA DE-Genthin Geschwister-Scholl-Straße,52.40835,12.16029
 EDEKA DE-Gevelsberg Wittener Str.,51.33023,7.33646
 EDEKA DE-Goch Sandthof,51.66679,6.17664
+EDEKA DE-Goslar Gutenbergstraße,51.916187,10.449951
 EDEKA DE-Grainau An der Zugspitze,47.479069,11.054677,15
 EDEKA DE-Greven Bismarckstraße,52.09806,7.61899
-EDEKA DE-Großbeeren Dorfaue,52.35276,13.30596
+EDEKA DE-Großbeeren Dorfaue,52.352657,13.307139
+EDEKA DE-Großefehn Müllers Kamp,53.404053,7.603078
+EDEKA DE-Großheide Schloßstraße,53.5864,7.349282
 EDEKA DE-Gütersloh Rhedaer Str.,51.89355,8.36366
+EDEKA DE-Halle (Saale) Hermesstraße,51.49805,11.9854
 EDEKA DE-Halle (Saale) Karl-Meseberg-Straße,51.469912,11.982199
-EDEKA DE-Halle (Saale) Weißenfelser Straße,51.43748,11.97292
-EDEKA DE-Halle (Saale) Wilhelm-von-Klewiz-Straße,51.4428,11.96655
+EDEKA DE-Halle (Saale) Weißenfelser Straße,51.437248,11.973568
+EDEKA DE-Halle (Saale) Wilhelm-von-Klewitz-Straße,51.443217,11.966175
 EDEKA DE-Hamburg Neuer Kamp,53.55554,9.967
-EDEKA DE-Hannover Grethe-Jürgens-Str.,52.40297,9.7892
-EDEKA DE-Herford Elverdisser Straße,52.07778,8.65122
-EDEKA DE-Herford Goebenstraße,52.12353,8.66813
+EDEKA DE-Hannover Grethe-Jürgens-Straße,52.402502,9.788897
+EDEKA DE-Herford Elverdisser Straße,52.077449,8.651788
+EDEKA DE-Herford Goebenstraße,52.124469,8.668506
 EDEKA DE-Herten Hoppenwall,51.61818,7.07912
 EDEKA DE-Hettstedt Eislebener Straße,51.63566,11.51278
-EDEKA DE-Hohenhameln Schützenstr,52.26144,10.06665
+EDEKA DE-Hohenhameln Schützenstraße,52.2601,10.06695
 EDEKA DE-Holzwickede Kirchstr.,51.49923,7.61937
 EDEKA DE-Höhn Am Gewerbepark,50.61707,7.97911
-EDEKA DE-Joachimsthal Templiner Str.,52.9783,13.74416
+EDEKA DE-Ilsenburg (Harz) Apfelweg,51.872804,10.692087
+EDEKA DE-Ingolstadt Despag-Straße,48.776306,11.452222
+EDEKA DE-Jessen (Elster) Rehainer Straße,51.791736,12.952732
+EDEKA DE-Joachimsthal Templiner Straße,52.978528,13.743799
 EDEKA DE-Kevelaer Feldstr.,51.57975,6.2558
 EDEKA DE-Kevelaer Kevelaerer Str.,51.59794,6.27951
 EDEKA DE-Kiel Hamburger Chaussee,54.29949,10.10442
 EDEKA DE-Kirchlengern In der Mark,52.20762,8.65131
 EDEKA DE-Köln Godorfer Haupstraße,50.8577,6.97468
-EDEKA DE-Köln Longericher Str.,50.99742,6.914
+EDEKA DE-Köln Longericher Straße,50.997774,6.91372
 EDEKA DE-Kösching Ingolstädter Straße,48.80913,11.48145
-EDEKA DE-Langenhagen Hannoversche Strasse / Stadtweg,52.44303,9.66941
+EDEKA DE-Langenberg Hauptstraße,51.775569,8.32245
+EDEKA DE-Langenhagen Stadtweg,52.442708,9.668603
+EDEKA DE-Lauenau Am Markt,52.2742,9.37
 EDEKA DE-Lebach-Thalexweiler Steinbacher Str.,49.44826,6.96455
 EDEKA DE-Leinefelde Herderstraße,51.3742,10.31794,60
 EDEKA DE-Leipzig Lindenthaler Hauptstr.,51.39018,12.32761
 EDEKA DE-Leipzig Wittenberger Straße,51.35973,12.38563
+EDEKA DE-Leverkusen Pommernstraße,51.068558,7.014155
+EDEKA DE-Lilienthal Falkenberger Landstraße,53.1485,8.911985
 EDEKA DE-Lippstadt Otto-Hahn-Str.,51.65636,8.32977
-EDEKA DE-Lübben (Spreewald) Berliner Chaussee,51.94511,13.8863
+EDEKA DE-Lohne (Oldenburg) Keetstraße,52.667127,8.230083
+EDEKA DE-Lübben Berliner Chaussee,51.945242,13.885941
 EDEKA DE-Mantel Weidenerstr.,49.65608,12.04742
+EDEKA DE-Marienhafe Rosenstraße,53.519837,7.279929
 EDEKA DE-Meerbusch-Osterath Gottlieb-Daimler-Str.,51.26961,6.62745
-EDEKA DE-Meinersen-Ohof Schwarzer Weg,52.45172,10.31141
+EDEKA DE-Meinersen Schwarzer Weg,52.451547,10.311048
+EDEKA DE-Melle Sondermühlener Straße,52.157353,8.270399
+EDEKA DE-Meppen Esterfelder Stiege,52.700386,7.273371
+EDEKA DE-Meppen Helter Damm,52.684184,7.310486
 EDEKA DE-Minden Lübbecker Straße,52.27261,8.86602
-EDEKA DE-Mittenwalde An der Feuerwehr,52.26018,13.53958
-EDEKA DE-Moers Edekaplatz,51.46989,6.63324
+EDEKA DE-Mittenwalde An der Feuerwehr,52.259561,13.539416
+EDEKA DE-Moers Edekaplatz,51.470754,6.632262
 EDEKA DE-Moers Römerstr.,51.44172,6.66245
+EDEKA DE-Märkische Heide Bahnhofstraße,52.045,14.021
+EDEKA DE-Mühlenbeck Hauptstraße,52.662169,13.378687
 EDEKA DE-Mülheim a. d. Ruhr Düsseldorfer Str.,51.4071,6.87033
-EDEKA DE-Müllrose Alte Poststraße,52.2415,14.41105
-EDEKA DE-Naumburg Overwegstr.,51.15758,11.82071
+EDEKA DE-Müllrose Alte Poststraße,52.241876,14.412536
+EDEKA DE-Nauen Brandenburger Straße,52.601201,12.860419
+EDEKA DE-Naumburg (Saale) Overwegstraße,51.157574,11.82182
 EDEKA DE-Neumünster Gadelander Straße,54.0512,9.98892
 EDEKA DE-Neunkirchen Zeithstr.,50.87214,7.32502
 EDEKA DE-Neuss Schellbergstr.,51.16722,6.7347
-EDEKA DE-Nienburg Verdener Landstraße,52.65336,9.21689
+EDEKA DE-Nienburg/Weser Verdener Landstraße,52.653537,9.217964
 EDEKA DE-Oberhausen Goldammerweg,51.52451,6.82454
 EDEKA DE-Oer-Erkenschwick Industriestr.,51.63899,7.27763
 EDEKA DE-Otterndorf Marktstraße,53.80776,8.90621
 EDEKA DE-Paderborn Alisostr.,51.73503,8.68189
 EDEKA DE-Paderborn Alter Hellweg,51.68767,8.69684
 EDEKA DE-Paderborn Detmolder Str.,51.72323,8.75927
-EDEKA DE-Papenburg Kapitän-Venema-Straße,53.08205,7.41971
-EDEKA DE-Peine Lindenstraße,52.32029,10.22902
-EDEKA DE-Peine Woltorfer Weg,52.32045,10.23364
-EDEKA DE-Petershagen Lessingstraße,52.53008,13.79142
+EDEKA DE-Papenburg Am Ems-Center,53.083204,7.388208
+EDEKA DE-Papenburg Kapitän-Venema-Straße,53.081567,7.420341
+EDEKA DE-Papenburg Moorstraße,53.07364,7.387376
+EDEKA DE-Peine Lindenstraße,52.31923,10.228867
+EDEKA DE-Peine Woltorfer Straße,52.298531,10.272038
+EDEKA DE-Penzberg Grube,47.7575,11.3828
+EDEKA DE-Petershagen Lessingstraße,52.530234,13.792365
 EDEKA DE-Randersacker Am Sonnenstuhl,49.75312,9.98715
 EDEKA DE-Ransbach-Baumbach Pleurtuit-Str.,50.46398,7.72463
 EDEKA DE-Ratingen Am Sandbach,51.295869,6.830408
 EDEKA DE-Regensburg-Galgenberg Franz-Mayer-Straße,49.00112,12.105
-EDEKA DE-Schwedt Landgrabenpark,53.06554,14.27345
+EDEKA DE-Remlingen Parkstraße,52.110373,10.68009
+EDEKA DE-Schiffdorf Zum Feldkamp,53.526339,8.646428
+EDEKA DE-Schwarmstedt Celler Straße,52.6804,9.61845
+EDEKA DE-Schwedt Landgrabenpark,53.065905,14.275042
 EDEKA DE-Sinzig Kölnerstr.,50.54706,7.24557
-EDEKA DE-Spenge Industriestraße,52.1444,8.49103
+EDEKA DE-Spenge Industriestraße,52.144804,8.491713
 EDEKA DE-Stadtilm Weimarische Str.,50.77705,11.08792
 EDEKA DE-Steinhorst Marktstraße,52.68994,10.40538
-EDEKA DE-Stolzenau Bürgermeister-Heuvemann-Str.,52.51124,9.06146
+EDEKA DE-Stolzenau Bürgermeister-Heuvemann-Straße,52.511229,9.060492
 EDEKA DE-Sulzbach-Rosenberg Rosenberger Str.,49.50382,11.74461
+EDEKA DE-Syke Sudweyher Straße,52.941586,8.82795
 EDEKA DE-Sörup Bahnhofstraße,54.71902,9.67769
-EDEKA DE-Thedinghausen Syker Straße,52.96111,9.0187
-EDEKA DE-Troisdorf Marie-Lene-Rödder-Str.,50.80285,7.14504
-EDEKA DE-Uplengen - Remels Ostertorstrasse,53.30373,7.74563
-EDEKA DE-Varel Wiefelsteder Straße,53.37576,8.10365
-EDEKA DE-Viechtach Schmidstraße,49.07858,12.88105
+EDEKA DE-Thedinghausen Syker Straße,52.960922,9.019512
+EDEKA DE-Troisdorf Marie-Lene-Rödder-Straße,50.802591,7.144997
+EDEKA DE-Uplengen-Remels Ostertorstraße,53.304103,7.745537
+EDEKA DE-Varel Wiefelsteder Straße,53.375856,8.104328
+EDEKA DE-Viechtach Schmidstraße,49.078019,12.882864
 EDEKA DE-Waltrop Am Moselbach,51.62467,7.39915
+EDEKA DE-Wanzleben-Börde Gartenstraße,52.103586,11.294743
 EDEKA DE-Wesendorf Gifhorner Straße,52.589874,10.533102
-EDEKA DE-Wiesmoor Hauptstraße,53.41759,7.73964
+EDEKA DE-Weyhausen Wolfsburger Straße,52.463643,10.716422
+EDEKA DE-Wiesmoor Hauptstraße,53.41785,7.73905
+EDEKA DE-Wietzen Herrlichkeit,52.710854,9.074771
 EDEKA DE-Wilsdruff OT Mohorn Mohorner Höhe,50.99391,13.45434
-EDEKA DE-Wittingen Bromer Str.,52.64494,10.86819
+EDEKA DE-Wittingen Benitzer Straße,52.64505,10.868917
 EDEKA DE-Wrist Eken,53.92854,9.75124
+EDEKA DE-Wuppertal Albertstraße,51.269634,7.209428
 EDEKA DE-Zossen Gutstedtstraße,52.17,13.47159
 
 EDP ES-Bergara Urteaga kalea,43.108058,-2.40634
@@ -9259,7 +9309,7 @@ EnBW DE-Paderborn Balhornstr.,51.7125,8.734013
 EnBW DE-Paderborn,51.706307,8.729175
 EnBW DE-Pasewalk Torgelower Straße,53.51472,14.011801
 EnBW DE-Peine Celler Straße,52.330123,10.233493
-EnBW DE-Peine Penny,52.31363,10.22837
+EnBW DE-Peine Wiesenstraße,52.314156,10.228455
 EnBW DE-Peine Wilhelm-Rausch-Str.,52.339915,10.247884,20
 EnBW DE-Penig,50.92169,12.714609
 EnBW DE-Pentling Ammerholz,48.97292,12.065341
@@ -9812,6 +9862,7 @@ EnBW DE-Weyerbusch,50.713436,7.560886
 EnBW DE-Wiehl Wiesenstraße,50.946226,7.5502
 EnBW DE-Wiehl,50.94602,7.54929
 EnBW DE-Wiesbaden Erich-Ollenhauer-Straße,50.061922,8.217125
+EnBW DE-Wiesbaden Otto-Wallach-Straße,50.043615,8.217063
 EnBW DE-Wiesloch Adelsförsterpfad,49.2948,8.667
 EnBW DE-Wiesloch In den Ziegelwiesen,49.2905,8.6648
 EnBW DE-Wiesloch Meßplatzstr.,49.293157,8.701533
@@ -9898,6 +9949,7 @@ EnelX IT-Lecce Stazione di Ricarica,40.353177,18.171802,10
 EnelX IT-Legnano Via Fabio Filzi,45.607315,8.927481
 EnelX IT-Olbia Via Basa,40.96083,9.491849
 EnelX IT-Ramiola,44.698924,10.090093
+EnelX IT-Sassari Via Washington,40.710753,8.553156
 EnelX IT-Torre Pali Stazione di Ricarica,39.844032,18.211256,10
 
 enercity DE-Barsinghausen Kirchstraße,52.301779,9.461021
@@ -10022,6 +10074,7 @@ EnergieSteiermark AT-Graz Neuholdaugasse,47.056778,15.437455
 EnergieSteiermark AT-Graz Weblinger Gürtel,47.033791,15.414556,8
 EnergieSteiermark AT-Lieboch Radlstraße,46.956961,15.346721
 EnergieSteiermark AT-Unzmarkt Simon-Hafnerplatz,47.198231,14.445851
+EnergieSteiermark AT-Wildon Kainachtalstraße,50.067976,19.946278
 
 ENGIE AU-Wynnum West QLD Wynnum Road,27.457805,153.154785
 ENGIE FR-Aire du Val de Meuse,47.975545,5.498574
@@ -10991,6 +11044,7 @@ EWF DE-Willingen (Upland) Zur Hoppecke,51.291536,8.603761
 EWII DK-Blåvand Tane Hedevej,55.555733,8.137469
 
 Ewiva IT-Alessandria Via Vecchia Torino,44.915296,8.599882
+Ewiva IT-Giave Statale,40.467727,8.739463
 Ewiva IT-Peschiera del Garda Via Tangenziale,45.435685,10.710101
 Ewiva IT-Roma Corsa di Francia,41.944798,12.469523
 
@@ -11174,6 +11228,8 @@ FreeToX IT-Modena Autostrada del Sole,44.661644,10.854855
 FreeToX IT-Modena Autostrada del Sole,44.662302,10.857942
 FreeToX IT-Occimiano Autostrada dei Trafori,45.074668,8.510987
 FreeToX IT-Occimiano Autostrada dei Trafori,45.07481,8.5089
+FreeToX IT-Parma A1 Autostrada del Sole,44.8264,10.3782
+FreeToX IT-Parma A1 Autostrada del Sole,44.827142,10.379529
 FreeToX IT-Riccione Autostrada Adriatica,43.994407,12.618552
 FreeToX IT-Roncadelle A4 Torino - Trieste,45.532562,10.151192
 FreeToX IT-Roncadelle A4 Torino - Trieste,45.532564,10.148387
@@ -12442,7 +12498,6 @@ Kaufland DE-Königs Wusterhausen Luckenwalder Str.7,52.294791,13.620696
 Kaufland DE-Königsbrunn Germanenstraße 16,48.286884,10.890218
 Kaufland DE-Künzelsau Bergstraße 9,49.277427,9.683906
 Kaufland DE-Lahr/Schwarzwald Offenburger Straße 11,48.344966,7.841325
-Kaufland DE-Leinefelde Bahnhofstraße,51.387747,10.32775
 Kaufland DE-Leipzig Anton-Zickmantel-Straße,51.303693,12.323066
 Kaufland DE-Leipzig Dresdner Straße,51.337352,12.404789
 Kaufland DE-Leipzig Georg-Schumann-Straße,51.373025,12.32891
@@ -13342,7 +13397,7 @@ Lidl DE-Passau Lindau 9,48.584099,13.500191
 Lidl DE-Pattensen Göttinger Straße 11-13,52.268686,9.764105
 Lidl DE-Pegau Groitzscher Fußweg 1,51.164496,12.262903
 Lidl DE-Peißenberg Hochreuther Straße 4,47.785625,11.049509
-Lidl DE-Penzberg Grube 16,47.75578,11.38186
+Lidl DE-Penzberg Grube,47.756493,11.382257
 Lidl DE-Pforzheim Am Hauptgüterbahnhof 2-4,48.896442,8.71305
 Lidl DE-Pforzheim,48.886972,8.66217
 Lidl DE-Pfungstadt Eberstädter Straße 134,49.807859,8.610923
@@ -13582,15 +13637,7 @@ Mark-E DE-Hagen Bahnhofstraße,51.359833,7.468871
 
 MB DE-Butzbach In der Alböhn,50.429422,8.683063,50
 
-mblty DE-Anzing Gewerbepark,48.159306,11.853891
 mblty DE-Bad Fallingbostel Klaus-Seckel-Straße,52.892427,9.767786
-mblty DE-Grabenstätt Oberwinkl,47.8279,12.52106
-mblty DE-Lederhose Neuensorga,50.80324,11.89429
-mblty DE-Lehrte Straßburger Straße,52.385283,9.953135
-mblty DE-Magstadt Aichern,48.74423,8.94824
-
-MENNEKES DE-Kirchhundem Industriestraße,51.038666,7.997107
-MENNEKES DE-Langgöns Hauptstraße,50.461496,8.584555
 
 Mer AT-Ansfelden Haider Straße,48.211118,14.279784,25
 Mer AT-Brunn am Gebirge Wienerstraße,48.112659,16.30259,30
@@ -14463,6 +14510,7 @@ Pfalzwerke DE-LAHNSTEIN Industriestraße,50.322194,7.599004
 Pfalzwerke DE-Lambrecht Franz-Hartmann-Str. 9,49.369724,8.079776
 Pfalzwerke DE-Lambsheim Landmundstraße 1-3,49.50815,8.288461
 Pfalzwerke DE-Lampertsheim Otto-Hahn-Straße,49.596533,8.485017
+Pfalzwerke DE-Landau in der Pfalz Lotschstraße,49.209966,8.11238
 Pfalzwerke DE-Landau Lise-Meitner-Str. 2,49.191043,8.13187
 Pfalzwerke DE-Landsberg Mägdeberge 1,51.516735,12.062187
 Pfalzwerke DE-Landstuhl Bahnhofstraße 82,49.415583,7.582056
@@ -14743,6 +14791,7 @@ Porsche DE-Willich Jakob-Kaiser-Straße,51.27255,6.51521
 Porsche DE-Wuppertal Porschestraße,51.3053,7.25279
 
 Powerdot FR-Cosne-Cours-sur-Loire Rue des Minotiers,47.383055,2.919293
+Powerdot PL-Kraków Pawia,50.067976,19.946278
 
 PRE CZ-Praha Nusle,50.062217,14.433209
 
@@ -15104,6 +15153,7 @@ SW-Neuruppin DE-Neuruppin Präsidentenstraße,52.92295,12.8037
 SW-Neuss DE-Neuss Holzheimer Weg,51.182733,6.682412
 SW-Norden DE-Norden Dörper Weg,53.611416,7.155474
 SW-Norden DE-Norden Heringstraße,53.591027,7.211188
+SW-Rheine DE-Rheine Schultenstraße,52.296243,7.419707
 SW-Rostock DE-Rostock August-Bebel-Straße,54.085661,12.134546
 SW-Rüsselsheim DE-Rüsselsheim am Main Am Sommerdamm,50.001808,8.42508
 SW-Schwarzenberg DE-Schwarzenberg Straße der Einheit,50.547186,12.787756
@@ -15286,7 +15336,6 @@ TEAG DE-Kaltennordheim Feldabahnstraße,50.630046,10.158468
 TEAG DE-Kassel Harleshäuser Straße,51.326042,9.445198
 TEAG DE-Kaulsdorf Könitzer Straße,50.616723,11.429509
 TEAG DE-Kirchhain Fuldaer Straße,50.819943,8.940269
-TEAG DE-Leinefelde Konrad-Martin-Straße,51.384866,10.3238
 TEAG DE-Lich Carl-Benz-Ring,50.506769,8.829616
 TEAG DE-Magdala,50.900738,11.445971
 TEAG DE-Mellingen Hainholzstraße,50.936441,11.389558
@@ -15867,6 +15916,7 @@ DE Hamburg Audi Wichert,53.548799,10.036493
 DE Hameln Bahnhof,52.101277,9.374308
 DE Hannover A2 Center,52.42332,9.835401,10
 DE Hannover PZH IFA Uni,52.426875,9.618212
+DE Ilmenau Hotel Tanne,50.682515,10.909629
 DE Karlsruhe BFT/EFA Tankstelle,48.999479,8.428314,10
 DE Kettig Alterauge GmbH,50.405837,7.472896
 DE Knetzgau Euro Rastpark,49.982321,10.555823,5
@@ -15884,6 +15934,7 @@ DE Paderborn Westfalen Weser Netz,51.725959,8.756923,5
 DE Rheydt New AG,51.157497,6.448055
 DE Riesa Stadtwerke Riesa,51.301571,13.309787
 DE Roth Autohaus,49.245669,11.119321
+DE Saarbrücken Hotel-Mercure Hafenstrasse,49.237533,6.989432
 DE Sandersdorf-Brehna The Style Outlets,51.555325,12.192875
 DE Schönefeld Total,52.370738,13.526929
 DE Stuttgart Flughafen P12,48.691895,9.195894
@@ -15896,6 +15947,7 @@ FR 68510 Sierentz Hyper U et Drive,47.66618,7.441494,10
 IT Parma Destination Charger Hotel San Marco & Formula Club,44.826238,10.203621,15
 IT Vahrn Mautstation Casello Bressanone-Val Pusteria,46.763952,11.643082,20
 IT Vizzola Ticino Pirelli,45.625684,8.677574
+PL Best Western Plus Krakow Old Town,50.058091,19.941162
 RO Brașov Bulevardul Gării,45.66043,25.613542
 RO Brașov RAT Rulmentul,45.681568,25.614809
 RO Brașov Strada Poienelor,45.633184,25.63254
