@@ -34,9 +34,9 @@ $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
 // Check if image file is a actual image or fake image
 if(isset($_POST["submit"])) {
 	$file_name = $_FILES["fileToUpload"]["tmp_name"];
-    echo("filename:" . $file_name ." Size compressed:". filesize($file_name));
+    echo("filename:" . $file_name ." <br>Size compressed:". filesize($file_name));
 	echo("<br>Original filename:" . $originalfilename);
-	logger("<br>Filesize compressed: ". filesize($file_name));
+	logger("Filesize compressed: ". filesize($file_name));
 	
 	rename($file_name, $file_name.".gz");
 	
@@ -63,6 +63,7 @@ if(isset($_POST["submit"])) {
 
 	if (strpos($originalfilename, "geofence-private") === 0)
 	{
+		echo("<br>Geofence-Private CSV file detected.<br>");
 		$csvtext = file_get_contents($out_file_name);
 		$url = GetTeslaloggerURL("writefile/geofence-private.csv");
         echo file_get_contents($url, false, stream_context_create([
@@ -76,6 +77,7 @@ if(isset($_POST["submit"])) {
 	}
 	else
 	{
+		echo("<br>Decompressed file: <br>");
 		echo("<br>filename:" . $out_file_name ." Size:". filesize($out_file_name));
 		
 		logger("Filesize decompressed: ". filesize($out_file_name));
@@ -86,16 +88,28 @@ if(isset($_POST["submit"])) {
 		$output = NULL;
 
 		if (file_exists("/tmp/teslalogger-DOCKER"))
+		{
+			echo("<br>Docker detected, using database host 'database'");
+			logger("Docker detected, using database host 'database'");
+			$command = exec("sed -i '/\\/\\*M!999999\\\\-/d' /tmp/mybackup.sql", $output, $return_var); // bug in mariaDB - removes special comment: enable sandbox mode
+
+			logger("start mysql restore");
 			$command = exec("/usr/bin/mysql -hdatabase -uroot -pteslalogger -Dteslalogger < /tmp/mybackup.sql", $output, $return_var);
+		}
 		else
 			$command = exec("/usr/bin/mysql -uroot -pteslalogger -Dteslalogger < /tmp/mybackup.sql", $output, $return_var);
 
 		logger("Output from mysql: " . var_export($output));
+		echo "<br>Output from mysql: <br>";
+		foreach ($output as $line) {
+			echo htmlspecialchars($line) . "<br>";
+		}
 		echo("<br>Restore finished. Please Reboot!");	
 	}
-	
+	/*
 	if (file_exists($out_file_name))
 		unlink($out_file_name);
+		*/
 }
 ?>
 </div>

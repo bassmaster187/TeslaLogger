@@ -205,6 +205,9 @@ namespace TeslaLogger
                         case "backup":
                             Backup(response);
                             return;
+                        case "logger":
+                            logger(request, response);
+                            return;
                     }
                 }
                 else if (url.Segments.Length == 3)
@@ -537,6 +540,14 @@ namespace TeslaLogger
                     }
                 }
             }
+        }
+
+        private void logger(HttpListenerRequest request, HttpListenerResponse response)
+        {
+            string data = GetDataFromRequestInputStream(request);
+            Logfile.Log(data);
+            System.Diagnostics.Debug.WriteLine("Logger: " + data);
+            WriteString(response, "ok");
         }
 
         private void Admin_Writefile(HttpListenerRequest request, HttpListenerResponse response)
