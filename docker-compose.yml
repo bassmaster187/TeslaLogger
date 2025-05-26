@@ -3,12 +3,12 @@ services:
     image: bassmaster187/teslalogger:latest
     restart: always
     volumes:
-      - teslalogger-tmp:/tmp/
-      - teslalogger-sqlschema:/etc/teslalogger/sqlschema
-      - teslalogger-grafanadashboards:/var/lib/grafana/dashboards/
-      - teslalogger-grafanaplugins:/var/lib/grafana/plugins/
+      - teslalogger-net8-tmp:/tmp/
+      - teslalogger-net8-sqlschema:/etc/teslalogger/sqlschema
+      - teslalogger-net8-grafanadashboards:/var/lib/grafana/dashboards/
+      - teslalogger-net8-grafanaplugins:/var/lib/grafana/plugins/
       - ./backup:/etc/teslalogger/backup
-      - teslalogger-data:/etc/teslalogger/data
+      - teslalogger-net8-data:/etc/teslalogger/data
     depends_on:
       - database
     environment:
@@ -28,7 +28,7 @@ services:
       - MYSQL_ROOT_PASSWORD=teslalogger
       - TZ=Europe/Berlin
     volumes:
-      - teslalogger-sqlschema:/docker-entrypoint-initdb.d
+      - teslalogger-net8-sqlschema:/docker-entrypoint-initdb.d
       - ./mysql:/var/lib/mysql
     ports:
       - 3306:3306
@@ -39,8 +39,8 @@ services:
     image: bassmaster187/teslalogger-grafana:latest
     restart: always
     volumes: 
-      - teslalogger-grafanadashboards:/var/lib/grafana/dashboards/
-      - teslalogger-grafanaplugins:/var/lib/grafana/plugins/
+      - teslalogger-net8-grafanadashboards:/var/lib/grafana/dashboards/
+      - teslalogger-net8-grafanaplugins:/var/lib/grafana/plugins/
     environment:
       - GF_SECURITY_ADMIN_PASSWORD=teslalogger
       - TZ=Europe/Berlin
@@ -55,7 +55,7 @@ services:
     image: bassmaster187/teslalogger-webserver:latest
     restart: always
     volumes:
-      - teslalogger-tmp:/tmp/
+      - teslalogger-net8-tmp:/tmp/
       #- ./www:/var/www/html
     depends_on:
       - teslalogger
@@ -77,8 +77,8 @@ services:
       - WATCHTOWER_LABEL_ENABLE=true
 
 volumes:
-    teslalogger-tmp:
-    teslalogger-data:
-    teslalogger-sqlschema:
-    teslalogger-grafanadashboards:
-    teslalogger-grafanaplugins:
+    teslalogger-net8-tmp:
+    teslalogger-net8-data:
+    teslalogger-net8-sqlschema:
+    teslalogger-net8-grafanadashboards:
+    teslalogger-net8-grafanaplugins:
