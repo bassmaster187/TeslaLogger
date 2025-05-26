@@ -106,10 +106,12 @@ if(isset($_POST["submit"])) {
 		}
 		echo("<br>Restore finished. Please Reboot!");	
 	}
-	/*
+	
 	if (file_exists($out_file_name))
 		unlink($out_file_name);
-		*/
+
+	if (file_exists($file_name))
+		unlink($file_name);
 }
 ?>
 </div>
