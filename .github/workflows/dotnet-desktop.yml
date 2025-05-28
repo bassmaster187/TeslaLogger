@@ -63,6 +63,11 @@ jobs:
       with:
         fetch-depth: 0
 
+    - name: Test
+      shell: bash
+      run: |
+        git describe --tags --abbrev=0)
+
     - name: Get latest version tag
       shell: bash
       run: |
