@@ -65,8 +65,8 @@ jobs:
 
     - name: Show latest version tag
       run: |
-        echo "Tag name from GITHUB_REF_NAME: $GITHUB_REF_NAME"
-        echo "Tag name from github.ref_name: ${{  github.ref_name }}"
+        echo "GIT_TAG=`echo $(git describe --tags --abbrev=0)`" >> $GITHUB_ENV
+        echo "TAG: ${{ env.GIT_TAG }}""
 
     # Add  MSBuild to the PATH: https://github.com/microsoft/setup-msbuild
     - name: Setup MSBuild.exe
