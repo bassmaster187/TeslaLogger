@@ -67,6 +67,7 @@ jobs:
       run: |
         echo "GIT_TAG=`echo $(git describe --tags --abbrev=0)`" >> $GITHUB_ENV
         echo "TAG: ${{ env.GIT_TAG }}""
+        echo "GITHUB_ENV: ${{ env.GITHUB_ENV }}""
 
     # Add  MSBuild to the PATH: https://github.com/microsoft/setup-msbuild
     - name: Setup MSBuild.exe
