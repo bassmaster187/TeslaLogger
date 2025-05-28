@@ -66,6 +66,8 @@ jobs:
     - name: Get repository metadata
       id: meta
       uses: devops-infra/action-github-metadata@v2
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
       
     - name: Show latest version tag
       run: |
