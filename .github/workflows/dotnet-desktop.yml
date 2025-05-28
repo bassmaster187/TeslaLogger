@@ -65,7 +65,7 @@ jobs:
 
     - name: Get repository metadata
       id: meta
-      uses: devops-infra/action-github-metadata@v2
+      uses: devops-infra/action-github-metadata@2.3.0
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
       
