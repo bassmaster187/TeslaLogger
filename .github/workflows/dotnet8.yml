@@ -18,8 +18,19 @@ jobs:
       uses: actions/setup-dotnet@v3
       with:
         dotnet-version: 8.0.x
+  
+    - name: Get latest version tag
+      shell: bash
+      run: |
+        echo "GIT_TAG=`echo $(git describe --tags --abbrev=0)`" >> $GITHUB_ENV
+        
+    - name: Show latest version tag
+      run: |
+        echo "GIT_TAG=${{ env.GIT_TAG }}"
+
     - name: Restore dependencies
       run: dotnet restore TeslaLoggerNET8.sln
+
     - name: Build
       run: dotnet build --no-restore TeslaLoggerNET8.sln
 
@@ -44,7 +55,9 @@ jobs:
         context: .
         file: ./Dockerfile
         push: true
-        tags: bassmaster187/teslalogger:latest
+        tags: |
+          bassmaster187/teslalogger:latest
+          bassmaster187/teslalogger:${{ env.GIT_TAG }}
         platforms: linux/amd64,linux/arm64
 
     - name: Build and push Webserver
@@ -53,7 +66,9 @@ jobs:
         context: .
         file: ./Dockerfile-Webserver
         push: true
-        tags: bassmaster187/teslalogger-webserver:latest
+        tags: | 
+          bassmaster187/teslalogger-webserver:latest
+          bassmaster187/teslalogger-webserver:${{ env.GIT_TAG }}
         platforms: linux/amd64,linux/arm64
     
     - name: Build and push Grafana
@@ -62,7 +77,9 @@ jobs:
         context: .
         file: ./Dockerfile-Grafana
         push: true
-        tags: bassmaster187/teslalogger-grafana:latest
+        tags: | 
+          bassmaster187/teslalogger-grafana:latest
+          bassmaster187/teslalogger-grafana:${{ env.GIT_TAG }}
         platforms: linux/amd64,linux/arm64
    
       
