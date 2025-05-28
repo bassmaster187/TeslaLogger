@@ -75,7 +75,7 @@ jobs:
         
     - name: Show latest version tag
       run: |
-        echo "GIT_TAG=$GIT_TAG"
+        echo "GIT_TAG=${{ env.GIT_TAG }}"
 
     # Add  MSBuild to the PATH: https://github.com/microsoft/setup-msbuild
     - name: Setup MSBuild.exe
