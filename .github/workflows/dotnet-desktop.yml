@@ -68,7 +68,8 @@ jobs:
       uses: devops-infra/action-github-metadata@v2
       
     - name: Show latest version tag
-      run: echo "Latest version tag: ${{ steps.meta.outputs.latest_tag }}"
+      run: |
+        echo "Latest version tag: ${{ steps.meta.outputs.latest_tag }}"
 
     # Add  MSBuild to the PATH: https://github.com/microsoft/setup-msbuild
     - name: Setup MSBuild.exe
