@@ -1771,6 +1771,7 @@ Supercharger-V3 DE-Alsfeld,50.734003,9.241448,40
 Supercharger-V3 DE-Altdorf bei Nürnberg,49.381627,11.344434,40
 Supercharger-V3 DE-Augsburg,48.398906,10.868047,30
 Supercharger-V3 DE-Augsburg,48.398938,10.868306,30
+Supercharger-V4 DE-Augsburg-Haunstetten,48.297555,10.899144
 Supercharger-V3 DE-Bad Oeynhausen,52.213278,8.814397
 Supercharger DE-Bad Rappenau,49.21198,9.07726
 Supercharger-V3 DE-Baden-Baden,48.78364,8.19225
@@ -2084,6 +2085,7 @@ Supercharger DK-Middelfart,55.511311,9.765029
 Supercharger-V3 DK-Nykøbing Mors,56.786984,8.83028,30
 Supercharger-V3 DK-Nykøbing Mors,56.788618,8.828769
 Supercharger DK-Nørre Alslev,54.899872,11.896921
+Supercharger DK-Nørre Alslev,54.899885,11.89693
 Supercharger-V3 DK-Odense,55.386324,10.426873
 Supercharger DK-Randers,56.430263,10.061737
 Supercharger DK-Randers,56.433685,10.055412
@@ -3271,7 +3273,7 @@ Supercharger SE-Mellbystrand,56.501606,12.95763
 Supercharger SE-Mora,61.005921,14.54418
 Supercharger-V3 SE-Nacka,59.311237,18.176019
 Supercharger SE-Norrköping,58.62191,16.154806
-Supercharger SE-Nørre Alslev,54.899885,11.89693
+Supercharger-V4 SE-Oskarshamn,57.263232,16.427816
 Supercharger SE-Puoltikasvaara,67.440201,21.115515
 Supercharger SE-Skellefteå,64.76235,21.002864
 Supercharger-V3 SE-Sollentuna,59.496586,17.92444
@@ -3279,7 +3281,7 @@ Supercharger SE-Stockholm,59.500624,17.926818
 Supercharger SE-Storlien,63.310045,12.109286
 Supercharger SE-Storuman,65.092642,17.107984
 Supercharger-V3 SE-Strängnäs,59.328208,17.017658
-Supercharger-V3 SE-Strömstad,58.946329,11.19394
+Supercharger-V3 SE-Strömstad,58.945779,11.193034
 Supercharger-V3 SE-Sundsvall - West,62.396129,17.251596
 Supercharger-V4 SE-Sundsvall North,62.442858,17.345383
 Supercharger SE-Sundsvall,62.398468,17.338902
@@ -7561,7 +7563,9 @@ da-emobil AT-Völs Cytastraße,47.257635,11.322796
 
 deer DE-Bondorf Niederreutin,48.527883,8.806548
 deer DE-Calw Auf dem Brühl,48.717585,8.738101
+deer DE-Calw Gottlob-Bauknecht-Straße,48.705738,8.765716
 deer DE-Calw Robert-Bosch-Str.,48.706298,8.753633
+deer DE-Holzgerlingen Bühlenstraße,48.645123,9.026643
 deer DE-Kuppenheim Friedrichstraße,48.824706,8.252724
 deer DE-Metzingen Auchtertstraße,48.532407,9.2899,15
 deer DE-München Am Ausbesserungswerk,48.197997,11.606032
@@ -7799,6 +7803,7 @@ E.ON DK-Vejle Skærup Øst,55.64045,9.563059
 E.ON DK-Væggerløse Væggerløsevej,54.70973,11.919614
 E.ON SE-Kalmar Dragonvägen,56.674893,16.321684
 E.ON SE-Markaryd Ulvarydsvägen,56.445162,13.603104
+E.ON SE-Norrköping Skärblackavägen,58.568434,16.080373
 E.ON SE-Rydebäck Landskronavägen,55.964455,12.789519
 E.ON SK-Beladice Čeladická,48.331752,18.267202
 E.ON SK-Bratislava Mlynské nivy,48.146676,17.126711
@@ -8182,6 +8187,7 @@ EnBW DE-Arnsberg,51.444021,7.967238
 EnBW DE-Arnstadt Hellweg,50.849291,10.95524
 EnBW DE-Arnstadt Netto,50.831329,10.962759
 EnBW DE-Artern,51.375583,11.285147
+EnBW DE-Aschaffenburg Horchstraße,49.980702,9.118189
 EnBW DE-Aschersleben Güstener Str.,51.76425,11.473594
 EnBW DE-Aschersleben Hellweg,51.76777,11.484123
 EnBW DE-Ascholding,47.890484,11.504948
@@ -11919,6 +11925,7 @@ Ionity DE-Bad Honnef,50.647664,7.334521
 Ionity DE-Bayerischer Wald Nord,48.931751,12.708247
 Ionity DE-Bayerischer Wald Süd,48.931044,12.705416
 Ionity DE-Berg bei Neumarkt in der Oberpfalz Karl-Schiller-Straße,49.312948,11.474745
+Ionity DE-Bernau am Chiemsee Theodor-Sanne-Straße,47.815311,12.366538
 Ionity DE-Bingen am Rhein Rasthof Autobahnkreuz Nahetal,49.92578,7.936795
 Ionity DE-Bochum,51.474082,7.151429
 Ionity DE-Bornheim Carl-Benz-Straße,50.762068,7.029584
@@ -12293,10 +12300,10 @@ Ionity SE-Kristianstad,56.023285,14.173829
 Ionity SE-Malmø,55.5562,12.95218
 Ionity SE-Mantorp,58.37214,15.2948
 Ionity SE-Mariestad,58.68492,13.84544
-Ionity SE-Norrkøping,58.57675,16.1812
+Ionity SE-Norrköping Gröndalsgatan,58.577064,16.181308
 Ionity SE-Oskarshamn,57.2513,16.44875
-Ionity SE-Spekerød,58.0244,11.84746
-Ionity SE-Strømstad,58.91483,11.26034
+Ionity SE-Spekeröd,58.024744,11.847286
+Ionity SE-Strömstad,58.914771,11.259396
 Ionity SE-Sundsvall,62.33874,17.3538
 Ionity SE-Södertälje,59.17525,17.64293
 Ionity SE-Ulricehamn,57.81289,13.41947
@@ -12578,7 +12585,7 @@ Kaufland DE-Mönchengladbach Reyerhütte 1,51.192003,6.459484
 Kaufland DE-Mönchengladbach,51.182896,6.411377
 Kaufland DE-Mühlhausen/Thüringen Papiermühlenweg 18,51.224361,10.451265
 Kaufland DE-Münchberg,50.190847,11.783391
-Kaufland DE-Nagold Haiterbacher Straße 82-86,48.544061,8.729978
+Kaufland DE-Nagold,48.544254,8.728435
 Kaufland DE-Naila Dr.-Hans-Künzel-Straße 1,50.323575,11.705792
 Kaufland DE-Neckarsulm,49.172356,9.222237
 Kaufland DE-Neu-Ulm Memminger Straße 54,48.385571,10.004221
@@ -12815,6 +12822,7 @@ LichtBlick DE-Bad Neustadt a.d. Saale Roßmarktstraße,50.32267,10.2195
 LichtBlick DE-Bad Neustadt Schweinfurter Straße,50.32021,10.208691
 LichtBlick DE-Bad Segeberg Eutiner Straße,53.950988,10.312108
 LichtBlick DE-Bergen/Rügen Ringstraße,54.423238,13.421419
+LichtBlick DE-Biebergemünd Wirtheimer Straße,50.215573,9.27063
 LichtBlick DE-Bietigheim-Bissingen Buchstr.,48.945748,9.145529
 LichtBlick DE-Bietigheim-Bissingen Rötestraße,48.951933,9.149448
 LichtBlick DE-Bietigheim-Bissingen Schwarzwaldstraße,48.951294,9.121405
@@ -13776,9 +13784,12 @@ Mer DE-Zwiesel Badstraße,49.02458,13.22562
 Mer DE-Zwiesel Bahnhofsplatz,49.020643,13.226609
 Mer DE-Zwiesel Kirchplatz,49.01539,13.23344
 Mer NO-Bjerkvik,68.550885,17.55264
+Mer NO-Sandefjord Fokserødveien,59.178772,10.209071
 Mer NO-Tromsø,69.67366,18.923151
+Mer SE-Gävle Johanneslötsvägen,60.667786,17.080474
 Mer SE-Ljungby Ringvägen,56.813133,13.906555
 Mer SE-Löddeköpinge Marknadsvägen,55.766646,12.990359,16
+Mer SE-Norrköping Järngatan,58.618527,16.162364
 
 MFG GB-Sowerby York Road,54.228782,-1.329168
 
@@ -14894,6 +14905,8 @@ Recharge FI-Sodankylä,67.431695,26.57509
 Recharge FI-Tampere Kangasalantie,61.477127,23.873108
 Recharge NO-Jørpeland Stålverksvegen,59.01662,6.038172
 Recharge SE-Ljungby Ringvägen,56.814007,13.905327
+Recharge SE-Oskarshamn Södra Fabriksgatan,57.263691,16.429998
+Recharge SE-Västervik Timmergatan,57.765343,16.602195
 
 reev DE-Landsberg am Lech Otto-Lilienthal-Straße,48.066515,10.860823
 reev DE-Leidersbach Roßbacher Straße,49.878367,9.244406
@@ -15848,7 +15861,9 @@ Vattenfall DE-Zossen Gerichtstraße,52.217499,13.469447
 Vattenfall DE-Zossen Gutstedtstraße,52.170101,13.471497
 Vattenfall SE-Kristianstad Bochums väg,56.023166,14.118127
 Vattenfall SE-Lund Förhandlingsvägen,55.715834,13.156021
+Vattenfall SE-Löttorp Bödasandsallén,57.275163,17.047883
 Vattenfall SE-Täby Ytterbyvägen,59.434309,18.066909
+Vattenfall SE-Västervik Rest area Botorpström,57.661834,16.447212
 
 vaylens DE-Bodenheim Lange Ruthe,49.925713,8.324836,18
 vaylens DE-Kassel Zum Hirtenkamp,51.343771,9.444818
@@ -15864,6 +15879,7 @@ Virta DE-Friedberg Frankfurter Straße,50.328552,8.750175
 Virta DE-Nidda Eisenried,50.416387,9.017287
 Virta FI-Jyväskylä Sammontie,62.286632,25.718973
 Virta SE-Smygehamn Smyge strandväg,55.339217,13.35998
+Virta SE-Västervik Allén,57.760546,16.612694
 
 Vogt CH-Lostorf Duschletenstrasse,47.385574,7.952666
 
