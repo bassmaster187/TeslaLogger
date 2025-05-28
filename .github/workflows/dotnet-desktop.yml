@@ -63,15 +63,10 @@ jobs:
       with:
         fetch-depth: 0
 
-    - name: Get repository metadata
-      id: meta
-      uses: devops-infra/action-github-metadata@2.3.0
-      with:
-        token: ${{ secrets.GITHUB_TOKEN }}
-      
     - name: Show latest version tag
       run: |
-        echo "Latest version tag: ${{ steps.meta.outputs.latest_tag }}"
+        echo "Tag name from GITHUB_REF_NAME: $GITHUB_REF_NAME"
+        echo "Tag name from github.ref_name: ${{  github.ref_name }}"
 
     # Add  MSBuild to the PATH: https://github.com/microsoft/setup-msbuild
     - name: Setup MSBuild.exe
