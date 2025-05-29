@@ -7,34 +7,47 @@ services:
       - teslalogger-net8-sqlschema:/etc/teslalogger/sqlschema
       - teslalogger-net8-grafanadashboards:/var/lib/grafana/dashboards/
       - teslalogger-net8-grafanaplugins:/var/lib/grafana/plugins/
-      - ./backup:/etc/teslalogger/backup
+      - ${BACKUP_PATH}/backup:/etc/teslalogger/backup
       - teslalogger-net8-data:/etc/teslalogger/data
     depends_on:
-      - database
+      database:
+        condition: service_healthy
     environment:
-      - TZ=Europe/Berlin
+      - TZ=${TZ:-Europe/Berlin}
     ports:
-      - 5010:5000
+      - ${TESLALOGGER_PORT:-5010}:5000
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:${TESLALOGGER_PORT:-5010}/admin/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
     labels:
-      - "com.centurylinklabs.watchtower.enable=true"
-
+      - "com.centurylinklabs.watchtower.enable=${WATCHTOWER_ENABLE:-true}"
+      
+      
   database:
     image: mariadb:10.4.7
     restart: always
+    env_file:
+      - .env
     environment:
-      - MYSQL_USER=teslalogger
-      - MYSQL_PASSWORD=teslalogger
-      - MYSQL_DATABASE=teslalogger
-      - MYSQL_ROOT_PASSWORD=teslalogger
-      - TZ=Europe/Berlin
+      - TZ=${TZ:-Europe/Berlin}
     volumes:
       - teslalogger-net8-sqlschema:/docker-entrypoint-initdb.d
-      - ./mysql:/var/lib/mysql
+      - ${BACKUP_PATH}/mysql:/var/lib/mysql
     ports:
       - 3306:3306
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      start_period: 10s
+      interval: 10s
+      timeout: 5s
+      retries: 3
     labels:
-      - "com.centurylinklabs.watchtower.enable=true"
-
+      - "com.centurylinklabs.watchtower.enable=${WATCHTOWER_ENABLE:-true}"
+      
+      
   grafana:
     image: bassmaster187/teslalogger-grafana:latest
     restart: always
@@ -42,15 +55,22 @@ services:
       - teslalogger-net8-grafanadashboards:/var/lib/grafana/dashboards/
       - teslalogger-net8-grafanaplugins:/var/lib/grafana/plugins/
     environment:
-      - GF_SECURITY_ADMIN_PASSWORD=teslalogger
-      - TZ=Europe/Berlin
+      - GF_SECURITY_ADMIN_PASSWORD=${GRAFANA_PASSWORD}
+      - TZ=${TZ:-Europe/Berlin}
     ports:
-      - 3000:3000
+      - ${GRAFANA_PORT:-3000}:3000
     depends_on:
-      - database
+      database:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "-q", "http://localhost:3000/api/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
     labels:
-      - "com.centurylinklabs.watchtower.enable=true"
-
+      - "com.centurylinklabs.watchtower.enable=${WATCHTOWER_ENABLE:-true}"
+      
+      
   webserver:
     image: bassmaster187/teslalogger-webserver:latest
     restart: always
@@ -61,11 +81,19 @@ services:
       - teslalogger
       - grafana
     ports:
-      - 8888:80
+      - ${WEBSERVER_PORT:-8888}:80
     environment:
-      - TZ=Europe/Berlin
+      - TZ=${TZ:-Europe/Berlin}
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:80/"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 30s
     labels:
-      - "com.centurylinklabs.watchtower.enable=true"
+      - "com.centurylinklabs.watchtower.enable=${WATCHTOWER_ENABLE:-true}"
+      
+      
   watchtower:
     image: containrrr/watchtower
     restart: always
@@ -73,9 +101,10 @@ services:
         - /var/run/docker.sock:/var/run/docker.sock
     command: --debug --http-api-update 
     environment:
-      - WATCHTOWER_HTTP_API_TOKEN=teslalogger
+      - WATCHTOWER_HTTP_API_TOKEN=${WATCHTOWER_TOKEN}
       - WATCHTOWER_LABEL_ENABLE=true
-
+      
+      
 volumes:
     teslalogger-net8-tmp:
     teslalogger-net8-data:
