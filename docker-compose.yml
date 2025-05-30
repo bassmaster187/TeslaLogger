@@ -15,12 +15,6 @@ services:
       - TZ=${TZ:-Europe/Berlin}
     ports:
       - ${TESLALOGGER_PORT:-5010}:5000
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:${TESLALOGGER_PORT:-5010}/admin/"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-      start_period: 60s
     labels:
       - "com.centurylinklabs.watchtower.enable=${WATCHTOWER_ENABLE:-true}"
       
@@ -37,12 +31,12 @@ services:
       - ${BACKUP_PATH}/mysql:/var/lib/mysql
     ports:
       - 3306:3306
-    healthcheck:
-      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
-      start_period: 10s
-      interval: 10s
-      timeout: 5s
-      retries: 3
+    #healthcheck:
+    #  test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+    #  start_period: 10s
+    #  interval: 10s
+    #  timeout: 5s
+    #  retries: 3
     labels:
       - "com.centurylinklabs.watchtower.enable=${WATCHTOWER_ENABLE:-true}"
       
