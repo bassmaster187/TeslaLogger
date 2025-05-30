@@ -1,6 +1,7 @@
 services:
   teslalogger:
     image: bassmaster187/teslalogger:latest
+    container_name: teslalogger-core
     restart: always
     volumes:
       - teslalogger-net8-tmp:/tmp/
@@ -21,6 +22,7 @@ services:
       
   database:
     image: mariadb:10.4.7
+    container_name: teslalogger-db
     restart: always
     env_file:
       - .env
@@ -43,6 +45,7 @@ services:
       
   grafana:
     image: bassmaster187/teslalogger-grafana:latest
+    container_name: teslalogger-grafana
     restart: always
     volumes: 
       - teslalogger-net8-grafanadashboards:/var/lib/grafana/dashboards/
@@ -65,6 +68,7 @@ services:
       
   webserver:
     image: bassmaster187/teslalogger-webserver:latest
+    container_name: teslalogger-webserver
     restart: always
     volumes:
       - teslalogger-net8-tmp:/tmp/
@@ -88,6 +92,7 @@ services:
       
   watchtower:
     image: containrrr/watchtower
+    container_name: teslalogger-watchtower
     restart: always
     volumes:
         - /var/run/docker.sock:/var/run/docker.sock
