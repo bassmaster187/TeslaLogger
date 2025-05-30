@@ -10,8 +10,7 @@ services:
       - ${BACKUP_PATH}/backup:/etc/teslalogger/backup
       - teslalogger-net8-data:/etc/teslalogger/data
     depends_on:
-      database:
-        condition: service_healthy
+      - database
     environment:
       - TZ=${TZ:-Europe/Berlin}
     ports:
@@ -60,8 +59,7 @@ services:
     ports:
       - ${GRAFANA_PORT:-3000}:3000
     depends_on:
-      database:
-        condition: service_healthy
+      - database
     healthcheck:
       test: ["CMD", "wget", "--spider", "-q", "http://localhost:3000/api/health"]
       interval: 30s
