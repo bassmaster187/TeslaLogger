@@ -63,6 +63,20 @@ jobs:
       with:
         fetch-depth: 0
 
+    - name: Test
+      shell: bash
+      run: |
+        git describe --tags --abbrev=0
+
+    - name: Get latest version tag
+      shell: bash
+      run: |
+        echo "GIT_TAG=`echo $(git describe --tags --abbrev=0)`" >> $GITHUB_ENV
+        
+    - name: Show latest version tag
+      run: |
+        echo "GIT_TAG=${{ env.GIT_TAG }}"
+
     # Add  MSBuild to the PATH: https://github.com/microsoft/setup-msbuild
     - name: Setup MSBuild.exe
       uses: microsoft/setup-msbuild@v2    
