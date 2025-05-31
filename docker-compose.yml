@@ -23,7 +23,8 @@ services:
     ports:
       - ${TESLALOGGER_PORT:-5010}:5000
     labels:
-      - "com.centurylinklabs.watchtower.enable=${WATCHTOWER_ENABLE:-true}"
+      - com.centurylinklabs.watchtower.enable=${WATCHTOWER_ENABLE:-true}
+      - com.centurylinklabs.watchtower.scope=teslalogger-stack
       
       
   database:
@@ -46,7 +47,8 @@ services:
     #  timeout: 5s
     #  retries: 3
     labels:
-      - "com.centurylinklabs.watchtower.enable=${WATCHTOWER_ENABLE:-true}"
+      - com.centurylinklabs.watchtower.enable=${WATCHTOWER_ENABLE:-true}
+      - com.centurylinklabs.watchtower.scope=teslalogger-stack
       
       
   grafana:
@@ -69,7 +71,8 @@ services:
       timeout: 5s
       retries: 3
     labels:
-      - "com.centurylinklabs.watchtower.enable=${WATCHTOWER_ENABLE:-true}"
+      - com.centurylinklabs.watchtower.enable=${WATCHTOWER_ENABLE:-true}
+      - com.centurylinklabs.watchtower.scope=teslalogger-stack
       
       
   webserver:
@@ -93,19 +96,22 @@ services:
       retries: 3
       start_period: 30s
     labels:
-      - "com.centurylinklabs.watchtower.enable=${WATCHTOWER_ENABLE:-true}"
+      - com.centurylinklabs.watchtower.enable=${WATCHTOWER_ENABLE:-true}
+      - com.centurylinklabs.watchtower.scope=teslalogger-stack
       
       
+  # watchtower updates label "teslalogger-stack" only
   watchtower:
     image: containrrr/watchtower
     container_name: teslalogger-watchtower
     restart: always
     volumes:
         - /var/run/docker.sock:/var/run/docker.sock
-    command: --debug --http-api-update 
+    command: --debug --http-api-update --scope teslalogger-stack
     environment:
       - WATCHTOWER_HTTP_API_TOKEN=${WATCHTOWER_TOKEN}
       - WATCHTOWER_LABEL_ENABLE=true
+      - WATCHTOWER_SCOPE=teslalogger-stack
       
       
 volumes:
