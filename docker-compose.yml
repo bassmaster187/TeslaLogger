@@ -14,7 +14,8 @@ services:
       - teslalogger-net8-sqlschema:/etc/teslalogger/sqlschema
       - teslalogger-net8-grafanadashboards:/var/lib/grafana/dashboards/
       - teslalogger-net8-grafanaplugins:/var/lib/grafana/plugins/
-      - ${APPDATA_PATH:-./TeslaLogger}/backup:/etc/teslalogger/backup
+      - ${APPDATA_PATH:-.}/backup:/etc/teslalogger/backup
+      - ${APPDATA_PATH:-.}/invoices:/etc/teslalogger/Debug/net8.0/tesla_invoices
       - teslalogger-net8-data:/etc/teslalogger/data
     depends_on:
       - database
@@ -37,7 +38,7 @@ services:
       - TZ=${TZ:-Europe/Berlin}
     volumes:
       - teslalogger-net8-sqlschema:/docker-entrypoint-initdb.d
-      - ${APPDATA_PATH:-./TeslaLogger}/mysql:/var/lib/mysql
+      - ${APPDATA_PATH:-.}/mysql:/var/lib/mysql
     #ports:
     #  - 3306:3306      # No need to expose the DB to the public, communication is stack-internal
     #healthcheck:
