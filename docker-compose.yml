@@ -36,6 +36,10 @@ services:
       - .env
     environment:
       - TZ=${TZ:-Europe/Berlin}
+      - MYSQL_USER=teslalogger
+      - MYSQL_PASSWORD=teslalogger
+      - MYSQL_DATABASE=teslalogger
+      - MYSQL_ROOT_PASSWORD=teslalogger
     volumes:
       - teslalogger-net8-sqlschema:/docker-entrypoint-initdb.d
       - ${APPDATA_PATH:-.}/mysql:/var/lib/mysql
@@ -60,7 +64,7 @@ services:
       - teslalogger-net8-grafanadashboards:/var/lib/grafana/dashboards/
       - teslalogger-net8-grafanaplugins:/var/lib/grafana/plugins/
     environment:
-      - GF_SECURITY_ADMIN_PASSWORD=${GRAFANA_PASSWORD}
+      - GF_SECURITY_ADMIN_PASSWORD=teslalogger
       - TZ=${TZ:-Europe/Berlin}
     ports:
       - ${GRAFANA_PORT:-3000}:3000
