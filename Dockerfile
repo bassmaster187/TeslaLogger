@@ -12,6 +12,8 @@ RUN echo "TARGETARCH=${TARGETARCH}" && \
  apt-get install -y --no-install-recommends git && \
  apt-get install -y --no-install-recommends mariadb-client && \
  apt-get install -y --no-install-recommends optipng wget gnupg && \
+# required for OSMMapGenerator (SkiaSharp)
+ apt-get install -y --no-install-recommends libfontconfig1 libfreetype6 libpng16-16 libexpat1 libuuid1 && \ 
 # Add Microsoft repository and install .NET 8 Runtimes (architecture-specific)
     if [ "${TARGETARCH}" = "arm64" ]; then \
       wget https://dot.net/v1/dotnet-install.sh -O /home/dotnet-install.sh && \
