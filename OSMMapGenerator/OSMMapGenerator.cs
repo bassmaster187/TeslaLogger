@@ -7,6 +7,7 @@ using System.Data;
 using System.Diagnostics;
 using System.IO;
 using System.Net;
+using System.Threading;
 
 
 namespace TeslaLogger
@@ -65,95 +66,115 @@ namespace TeslaLogger
 
         public static void Main(string[] args)
         {
-            // args = new string[] { "-jobfile", @"c:\temp\tiles\05f1e9ff-5b20-4548-9e75-a1b6458b7d5f", "-debug" };
-
-            if (ParseCmdLineArgs(args))
+            try
             {
-                if (debug) { Console.WriteLine("OSMMapGenerator - Job: " + jobfile); }
-                try
+                // args = new string[] { "-jobfile", @"c:\temp\jobfile", "-debug" };
+                // args = new string[] { @"-jobfile c:\temp\tiles\05f1e9ff-5b20-4548-9e75-a1b6458b7d5f -debug" };
+                /*
+                Console.WriteLine("Wait for debugger to attach");
+
+                while (!Debugger.IsAttached)
                 {
-                    string json = File.ReadAllText(jobfile);
-                    
-                    if (!System.Diagnostics.Debugger.IsAttached)
-                        File.Delete(jobfile);
+                    Thread.Sleep(100);
+                }*/
 
-                    dynamic jsonResult = JsonConvert.DeserializeObject(json);
-                    Dictionary<string, object> job = jsonResult.ToObject<Dictionary<string, object>>();
-                    if (job != null)
+                Console.WriteLine("Start OSMMapGenerator args: " + args.Length);
+
+                if (ParseCmdLineArgs(args))
+                {
+                    if (debug) { Console.WriteLine("OSMMapGenerator - Job: " + jobfile); }
+                    try
                     {
-                        int width = Convert.ToInt32(job["width"]);
-                        int height = Convert.ToInt32(job["height"]);
-                        int zoom = Convert.ToInt32(job["zoom"]);
-                        tileSize = Convert.ToInt32(job["tileSize"]);
-                        double x_center = Convert.ToDouble(job["x_center"]);
-                        double y_center = Convert.ToDouble(job["y_center"]);
+                        string json = File.ReadAllText(jobfile);
 
-                        if (debug) { Console.WriteLine($"width: {width} - height: {height} - zoom: {zoom} - tileSize: {tileSize}"); }
+                        if (!System.Diagnostics.Debugger.IsAttached)
+                            File.Delete(jobfile);
 
-                        MapMode mapmode = (MapMode)Enum.ToObject(typeof(MapMode), job["mapmode"]);
-                        MapCachePath = job["MapCachePath"].ToString();
-                        if (System.Diagnostics.Debugger.IsAttached)
-                            MapCachePath = "map-data";
-
-                        if (debug) { Console.WriteLine($"OSMMapGenerator - DrawMap(width:{width}, height:{height}, zoom:{zoom}, x_center:{x_center}, y_center:{y_center}, mapmode:{mapmode})"); }
-                        SKBitmap map = DrawMap(width, height, zoom, x_center, y_center, mapmode);
-                        if (job.ContainsKey("latlng"))
+                        dynamic jsonResult = JsonConvert.DeserializeObject(json);
+                        Dictionary<string, object> job = jsonResult.ToObject<Dictionary<string, object>>();
+                        if (job != null)
                         {
-                            DataTable coords = new DataTable();
-                            DataColumn column = new DataColumn();
-                            column.DataType = System.Type.GetType("System.Double");
-                            column.ColumnName = "lat";
-                            coords.Columns.Add(column);
-                            column = new DataColumn();
-                            column.DataType = Type.GetType("System.Double");
-                            column.ColumnName = "lng";
-                            coords.Columns.Add(column);
-                            JArray latlng = (JArray)job["latlng"];
+                            int width = Convert.ToInt32(job["width"]);
+                            int height = Convert.ToInt32(job["height"]);
+                            int zoom = Convert.ToInt32(job["zoom"]);
+                            tileSize = Convert.ToInt32(job["tileSize"]);
+                            double x_center = Convert.ToDouble(job["x_center"]);
+                            double y_center = Convert.ToDouble(job["y_center"]);
 
-                            if (debug) { Console.WriteLine("OSMMapGenerator - latlng: " + latlng.Count); }
-                            for (int index = 0; index < latlng.Count; index += 2)
+                            if (debug) { Console.WriteLine($"width: {width} - height: {height} - zoom: {zoom} - tileSize: {tileSize}"); }
+
+                            MapMode mapmode = (MapMode)Enum.ToObject(typeof(MapMode), job["mapmode"]);
+                            MapCachePath = job["MapCachePath"].ToString();
+                            if (System.Diagnostics.Debugger.IsAttached)
+                                MapCachePath = "map-data";
+
+                            if (debug) { Console.WriteLine($"OSMMapGenerator - DrawMap(width:{width}, height:{height}, zoom:{zoom}, x_center:{x_center}, y_center:{y_center}, mapmode:{mapmode})"); }
+                            SKBitmap map = DrawMap(width, height, zoom, x_center, y_center, mapmode);
+                            if (job.ContainsKey("latlng"))
                             {
-                                DataRow drow = coords.NewRow();
-                                drow["lat"] = latlng[index];
-                                drow["lng"] = latlng[index + 1];
-                                coords.Rows.Add(drow);
-                            }
-                            if (debug) { Console.WriteLine("OSMMapGenerator - DrawTrip"); }
-                            DrawTrip(map, coords, zoom, x_center, y_center);
-                            if (debug) { Console.WriteLine("OSMMapGenerator - DrawIcon"); }
-                            DrawIcon(map, Convert.ToDouble(coords.Rows[0]["lat"]), Convert.ToDouble(coords.Rows[0]["lng"]), MapIcon.Start, zoom, x_center, y_center);
-                            if (debug) { Console.WriteLine("OSMMapGenerator - DrawIcon"); }
-                            DrawIcon(map, Convert.ToDouble(coords.Rows[coords.Rows.Count - 1]["lat"]), Convert.ToDouble(coords.Rows[coords.Rows.Count - 1]["lng"]), MapIcon.End, zoom, x_center, y_center);
-                        }
-                        else if (job.ContainsKey("poi"))
-                        {
-                            double lat = Convert.ToDouble(job["lat"]);
-                            double lng = Convert.ToDouble(job["lng"]);
-                            switch (job["poi"].ToString())
-                            {
-                                case "park":
-                                    DrawIcon(map, lat, lng, MapIcon.Park, zoom, x_center, y_center);
-                                    break;
-                                case "charge":
-                                    DrawIcon(map, lat, lng, MapIcon.Charge, zoom, x_center, y_center);
-                                    break;
-                            }
-                        }
-                        string filename = job["filename"].ToString();
-                        if (mapmode == MapMode.Regular)
-                        {
-                            var f = new FileInfo(filename);
-                            filename = Path.Combine(f.DirectoryName, "L_" + f.Name);
-                        }
+                                DataTable coords = new DataTable();
+                                DataColumn column = new DataColumn();
+                                column.DataType = System.Type.GetType("System.Double");
+                                column.ColumnName = "lat";
+                                coords.Columns.Add(column);
+                                column = new DataColumn();
+                                column.DataType = Type.GetType("System.Double");
+                                column.ColumnName = "lng";
+                                coords.Columns.Add(column);
+                                JArray latlng = (JArray)job["latlng"];
 
-                        SaveImage(map, filename);
+                                if (debug) { Console.WriteLine("OSMMapGenerator - latlng: " + latlng.Count); }
+                                for (int index = 0; index < latlng.Count; index += 2)
+                                {
+                                    DataRow drow = coords.NewRow();
+                                    drow["lat"] = latlng[index];
+                                    drow["lng"] = latlng[index + 1];
+                                    coords.Rows.Add(drow);
+                                }
+                                if (debug) { Console.WriteLine("OSMMapGenerator - DrawTrip"); }
+                                DrawTrip(map, coords, zoom, x_center, y_center);
+                                if (debug) { Console.WriteLine("OSMMapGenerator - DrawIcon"); }
+                                DrawIcon(map, Convert.ToDouble(coords.Rows[0]["lat"]), Convert.ToDouble(coords.Rows[0]["lng"]), MapIcon.Start, zoom, x_center, y_center);
+                                if (debug) { Console.WriteLine("OSMMapGenerator - DrawIcon"); }
+                                DrawIcon(map, Convert.ToDouble(coords.Rows[coords.Rows.Count - 1]["lat"]), Convert.ToDouble(coords.Rows[coords.Rows.Count - 1]["lng"]), MapIcon.End, zoom, x_center, y_center);
+                            }
+                            else if (job.ContainsKey("poi"))
+                            {
+                                double lat = Convert.ToDouble(job["lat"]);
+                                double lng = Convert.ToDouble(job["lng"]);
+                                switch (job["poi"].ToString())
+                                {
+                                    case "park":
+                                        DrawIcon(map, lat, lng, MapIcon.Park, zoom, x_center, y_center);
+                                        break;
+                                    case "charge":
+                                        DrawIcon(map, lat, lng, MapIcon.Charge, zoom, x_center, y_center);
+                                        break;
+                                }
+                            }
+                            string filename = job["filename"].ToString();
+                            if (mapmode == MapMode.Regular)
+                            {
+                                var f = new FileInfo(filename);
+                                filename = Path.Combine(f.DirectoryName, "L_" + f.Name);
+                            }
+
+                            SaveImage(map, filename);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        if (debug)
+                        { Console.WriteLine("OSMMapGenerator - Exception: " + ex.Message + " " + ex.StackTrace); }
                     }
                 }
-                catch (Exception ex)
-                {
-                    if (debug)
-                    { Console.WriteLine("OSMMapGenerator - Exception: " + ex.Message + " " + ex.StackTrace); }
-                }
+                else
+                    Console.WriteLine("No jobfile args found");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+
             }
         }
 
@@ -207,6 +228,8 @@ namespace TeslaLogger
             {
                 for (int i = 0; i < args.Length; i++)
                 {
+                    // Console.WriteLine($"args {i}: " + args[i]);
+
                     switch (args[i])
                     {
                         case "-jobfile":
@@ -219,7 +242,9 @@ namespace TeslaLogger
                     }
                 }
             }
-            catch (Exception) { }
+            catch (Exception ex) { 
+                Console.WriteLine(ex.ToString());
+            }
             return jobfilefound;
         }
 
