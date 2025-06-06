@@ -5002,6 +5002,14 @@ WHERE
 
             try
             {
+                if (Tools.IsDockerNET8())
+                {
+                    using (WebClient wc = new WebClient())
+                    {
+                        contents = wc.DownloadString("https://teslalogger.de/latest_teslalogger_docker_version.txt");
+                        return contents;
+                    }
+                }
 
                 using (WebClient wc = new WebClient())
                 {

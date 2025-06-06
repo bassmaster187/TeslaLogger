@@ -89,5 +89,9 @@ jobs:
           bassmaster187/teslalogger-grafana:latest
           bassmaster187/teslalogger-grafana:${{ env.GIT_TAG }}
         platforms: linux/amd64,linux/arm64
-   
-      
+
+    - name: Update Docker Version via HTTP GET
+      run: |
+        curl -v "https://teslalogger.de/set_latest_teslalogger_docker_version.php?apikey=${{ secrets.APIKEY_DOCKER_VERSION}}&version=${{ env.GIT_TAG }}"
+
+

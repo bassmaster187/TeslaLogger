@@ -61,6 +61,7 @@ else
 	var TemperatureUnit = "<?php echo($TemperatureUnit); ?>";
 	var PowerUnit = "<?php echo($PowerUnit); ?>";
 	var Range  = "<?php echo ($Range); ?>";
+	var isDockerNet8 = <?php echo (isDockerNet8() ? "true" : "false"); ?>;
 
 	var Display100pctEnable = "<?php echo($Display100pctEnable); ?>";
 
@@ -534,7 +535,12 @@ else
 		$onlineversion = getTeslaloggerVersion("https://raw.githubusercontent.com/bassmaster187/TeslaLogger/$branch/TeslaLogger/Properties/AssemblyInfo.cs");
 	}
 	else
-		$onlineversion = getTeslaloggerVersion("https://raw.githubusercontent.com/bassmaster187/TeslaLogger/master/TeslaLogger/Properties/AssemblyInfo.cs");
+	{
+		if (isDockerNet8)
+			$onlineversion = file_get_contents("https://teslalogger.de/latest_teslalogger_docker_version.txt");
+		else
+			$onlineversion = getTeslaloggerVersion("https://raw.githubusercontent.com/bassmaster187/TeslaLogger/master/TeslaLogger/Properties/AssemblyInfo.cs");
+	}
 
 	if ($installed != $onlineversion)
 	{
