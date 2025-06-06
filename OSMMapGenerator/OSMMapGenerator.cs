@@ -78,7 +78,7 @@ namespace TeslaLogger
                     Thread.Sleep(100);
                 }*/
 
-                Console.WriteLine("Start OSMMapGenerator args: " + args.Length);
+                // Console.WriteLine("Start OSMMapGenerator args: " + args.Length);
 
                 if (ParseCmdLineArgs(args))
                 {
