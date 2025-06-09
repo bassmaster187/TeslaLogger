@@ -5888,7 +5888,6 @@ Allego DE-Fürstenwalde Ehrenfried-Jopp-Str. 16,52.366186,14.066417
 Allego DE-Fürth Würzburger Straße,49.483013,10.966013
 Allego DE-Füssen Kemptener Str. 71,47.56801,10.680532
 Allego DE-Füssen Kemptener Straße,48.56801,10.680532
-Allego DE-Garten von Ehren,53.430268,9.935228
 Allego DE-Gelnhausen Lützelhäuser Weg,50.188206,9.185957,20
 Allego DE-Gelsenkirchen Cranger Straße 160,51.569111,7.079642
 Allego DE-Gera Bieblach,50.897956,12.100849
@@ -5918,6 +5917,7 @@ Allego DE-Hamburg An der Walddörferbahn 1,53.604277,10.116021
 Allego DE-Hamburg Dehnhaide 57,53.579083,10.0466
 Allego DE-Hamburg Großmoorbogen 1,53.461175,10.011347
 Allego DE-Hamburg Julius-Vosseler-Straße,53.593853,9.944519
+Allego DE-Hamburg Maldfeldstraße,53.430268,9.935228,15
 Allego DE-Hamburg Weidestraße,53.581843,10.0276
 Allego DE-Hameln Zinngießerstraße,52.084561,9.341443
 Allego DE-Hamm Roemerstr. 18A,51.692693,7.776856
@@ -6751,6 +6751,7 @@ CEZ CZ-Šenov u Nového Jičína,49.601853,18.006163
 CEZ CZ-Šlovice Dobřany-Plzeň,49.678013,13.330395
 
 Charge-and-GO RS-Novi Sad E75,45.276042,19.921247
+Charge-and-GO RS-Čačak Konjevići,43.903191,20.398646
 
 Chargefox AU-Altona VIC Civic Parade,-37.863421,144.83153
 Chargefox AU-Barnawartha North VIC Murray Valley Highway,-36.073974,146.726838
@@ -7024,52 +7025,60 @@ Circuit-électrique CA-Namur QC Route 323,45.897743,-74.920675
 Circuit-électrique CA-Rivière-Rouge QC Rue L’Annonciation S,46.401359,-74.86661
 Circuit-électrique CA-Saint-Roch-des-Aulnaies QC Rte de la Seigneurie,47.317569,-70.138871
 
-Citywatt DE-Aalen Obere Bahnstraße 78,48.828152,10.078588
+Citywatt DE-Aalen Obere Bahnstraße,48.828152,10.078588
 Citywatt DE-Achern Oberacherner Straße 90,48.612619,8.083529
 Citywatt DE-Albstadt - Tailfingen Im Weglanger 11,48.249426,8.994488
 Citywatt DE-Albstadt Ebingertalstr. 58,48.214023,8.970499
 Citywatt DE-Arnsberg Nelkenpfad 9,51.461105,7.983785
-Citywatt DE-Asbach Anton-Jaumann-Str. 1,48.673737,10.82314
+Citywatt DE-Asbach Anton-Jaumann-Straße,48.6737,10.823257
 Citywatt DE-Augsburg Austraße 35,48.38996,10.887771
 Citywatt DE-Augustusburg Waldstraße 23,50.802955,13.098611
 Citywatt DE-Bad Dürrheim Schwenninger Straße 20,48.032284,8.532327
 Citywatt DE-Bad Kissingen Theresienstraße 12,50.19981,10.073962
 Citywatt DE-Bad Klosterlausnitz An der Krümme 3,50.908396,11.860495
 Citywatt DE-Bad Kreuznach Mainzer Straße,49.857734,7.897132
-Citywatt DE-Bad Kötzting Weißenregener Straße 1 - 5,49.16912,12.85708
+Citywatt DE-Bad Kötzting Weißenregener Straße,49.169159,12.857121
 Citywatt DE-Bad Wörishofen Eichwaldstraße 10,48.008998,10.591253
 Citywatt DE-Bad Zwischenahn Langenhof 14,53.181897,8.001886
-Citywatt DE-Baden Baden Bahnhofstraße 61,48.811594,8.213815
+Citywatt DE-Baden Baden Bahnhofstraße,48.811594,8.213815
 Citywatt DE-Baiern / Berganger Parkplatz an der Birkenstraße,47.980432,11.915848
 Citywatt DE-Baiern / Piusheim Parkplatz an der Glonntalstraße,47.959288,11.894433
 Citywatt DE-Bayerbach Holzham 5,48.427278,13.14956
+Citywatt DE-Berkheim Leutkircher Straße,48.030113,10.089056
 Citywatt DE-Bothel Hauptstraße 24,53.07113,9.501961
 Citywatt DE-Breklum Wellingmaase 1,54.609951,8.991591
 Citywatt DE-Chemnitz Frankenberger Straße 61,50.852849,12.946296
 Citywatt DE-Deggendorf Großwalding 10,48.852322,12.985289
 Citywatt DE-Delmenhorst Bremer Straße 186,53.053187,8.662918
 Citywatt DE-Diera-Zehren Niederlommatzscher Straße 10,51.239776,13.407485
-Citywatt DE-Dingolfing Amperstraße 2,48.638843,12.482779
+Citywatt DE-Dingolfing Amperstraße,48.638842,12.482833
 Citywatt DE-Eching Am Moos 17,48.490119,12.022848
 Citywatt DE-Egmating Am Mitterfeld 2,48.004266,11.791495
 Citywatt DE-Egmating Schloßstraße 19,48.001502,11.795502
 Citywatt DE-Ehingen Hauptstraße 116,48.282961,9.722954
 Citywatt DE-Eibenstock Am Bühl 1,50.504958,12.596626
+Citywatt DE-Eichenzell Im Oberfeld,50.491957,9.683498
+Citywatt DE-Erding Johann-Auer-Straße,48.309225,11.889522
 Citywatt DE-Esens Emder Str. 1,53.632845,7.61597
 Citywatt DE-Frammersbach Dorfstraße 73,50.06215,9.394378
 Citywatt DE-Freising Ismaninger Straße,48.383328,11.752929
+Citywatt DE-Friedrichshafen Lindauer Straße,47.646492,9.506528
 Citywatt DE-Fürstenzell Gruberfeld 1,48.527364,13.326498
 Citywatt DE-Germering Lise-Meitner-Straße 1,48.140629,11.370163
+Citywatt DE-Gestratz Am Winkelholz,47.639828,10.000418
 Citywatt DE-Gnarrenburg Giehler Straße 3,53.379917,8.960429
-Citywatt DE-Heidenheim Am Kalkwerk 5,48.694925,10.172064
+Citywatt DE-Grafenau Finkenweg,48.860169,13.390628
+Citywatt DE-Hamburg Maldfeldstraße,53.430464,9.934694,18
+Citywatt DE-Heidenheim Am Kalkwerk,48.69484,10.172149
 Citywatt DE-Hemmingstedt Carl-Friedrich-Benz Straße 1,54.165147,9.088894
 Citywatt DE-Hofheim am Taunus Casteller Straße,50.057534,8.410052
 Citywatt DE-Husum Goethestraße 46-48,54.48638,9.066118
-Citywatt DE-Hutthurm Goldener Steig 35,48.666688,13.482685
+Citywatt DE-Hutthurm Goldener Steig,48.666457,13.485224
 Citywatt DE-Hutthurm Marktplatz 5,48.672286,13.471764
-Citywatt DE-Ingelheim am Rhein Prof.-Karl-Bohland-Straße 4,50.00136,8.133095
+Citywatt DE-Ingelheim am Rhein Prof.-Karl-Bohland-Straße,50.001778,8.133663
+Citywatt DE-Ingolstadt Degenhardtstraße,48.769047,11.393784
 Citywatt DE-Ingolstadt Friedrichshofenerstr. 6-10,48.774137,11.385069
-Citywatt DE-Ismaning Gutenbergstraße 10,48.234499,11.683556
+Citywatt DE-Ismaning Gutenbrgstraße,48.234505,11.683549
 Citywatt DE-Jüterbog Luckenwalder Straße 17,52.002823,13.08616
 Citywatt DE-Kamen Kamen Karree 3,51.571317,7.671473
 Citywatt DE-Kappel-Grafenhausen Fertighauswelt 1,48.27501,7.775809
@@ -7077,14 +7086,16 @@ Citywatt DE-Kaufbeuren Gottlieb-Daimler-Straße 2,47.89777,10.646437
 Citywatt DE-Kirchenlamitz Weißenstädter Str. 79,50.14917,11.942044
 Citywatt DE-Kloster Lehnin Friedenstraße 13,52.31748,12.743904
 Citywatt DE-Koblenz August-Thyssen-Straße 6,50.388844,7.557058
+Citywatt DE-Korschenbroich Mühlenstraße,51.196082,6.50005
 Citywatt DE-Köfering Scheuererstraße 1a,48.940897,12.200819
-Citywatt DE-Lahr/Schwarzwald Im Götzmann 10,48.334274,7.844688
+Citywatt DE-Lahr/Schwarzwald Im Götzmann,48.334205,7.844615
 Citywatt DE-Landau an der Isar Röntgenstraße 1,48.690195,12.706413
 Citywatt DE-Landau an der Isar Wiesenweg 10,48.685529,12.695221
 Citywatt DE-Langenfeld Alter Knipprather Weg,51.101892,6.934684
+Citywatt DE-Langenhorn Redlingsweg,54.685991,8.929536
 Citywatt DE-Langenzenn Mühlsteig 57,49.486682,10.777252
 Citywatt DE-Lübbenau Robert-Koch-Straße 45 a-i,51.857952,13.963854
-Citywatt DE-Lüdenscheid Bräuckenstraße 95,51.218517,7.654652
+Citywatt DE-Lüdenscheid Bräuckenstraße,51.218967,7.655518
 Citywatt DE-Mannheim Seckenheimer Landstraße 270,49.473727,8.53942
 Citywatt DE-Markleeberg Hauptstraße,51.271873,12.377137
 Citywatt DE-Memmingen Goldhoferstraße 5,47.999724,10.170694
@@ -7095,8 +7106,10 @@ Citywatt DE-Münster Handorfer Straße,51.978647,7.70532
 Citywatt DE-Neu Zauche Cottbuser Straße 17a,51.925553,14.093953
 Citywatt DE-Neufarn/Vaterstetten Münchener Straße 1,48.148343,11.82175
 Citywatt DE-Neuhaus am Rennweg Schwarzburger Straße 132,50.519945,11.144605
+Citywatt DE-Neumarkt i. d. Oberpfalz Blomenhofstraße,49.299833,11.459302
 Citywatt DE-Neumünster Kieler Straße 239 - 247,54.092331,9.987291
 Citywatt DE-Neustadt an der Weinstraße Chemnitzer Str. 30,49.340313,8.158086
+Citywatt DE-Neuwied Allensteiner Straße,50.438276,7.493489
 Citywatt DE-Neuötting Berliner Straße 24,48.246733,12.68812
 Citywatt DE-Neuötting Braumeister Str. 3,48.241428,12.708802
 Citywatt DE-Nonnenhorn Kapellenplatz 3,47.576475,9.609786
@@ -7104,13 +7117,15 @@ Citywatt DE-Nordhorn Otto-Hahn-Straße 54,52.400491,7.076615
 Citywatt DE-Oberdorla Bahnhofstraße 40,51.164691,10.424348
 Citywatt DE-Oberhaching Ödenpullach 3,47.992629,11.552467
 Citywatt DE-Oberpframmern Am Soiherweg 6,48.020709,11.819057
+Citywatt DE-Oberschneiding Siebenkofen,48.808722,12.637126
 Citywatt DE-Ortenburg Gewerbegebiet 1,48.522709,13.235173
 Citywatt DE-Osnabrück Oldenburger Landstraße 1,52.303713,8.035557
 Citywatt DE-Ostseeheilbad Zingst Am Fressenbruch,54.440985,12.660566
+Citywatt DE-Paderborn Walter-Schrader-Weg,51.716534,8.807572
 Citywatt DE-Passau Fürstenzeller Straße 39,48.560791,13.363148
 Citywatt DE-Passau Höllgasse 20,48.575558,13.465895
 Citywatt DE-Passau Kohlbruck 6a,48.553976,13.411131
-Citywatt DE-Passau Pionierstraße 1,48.556444,13.416882
+Citywatt DE-Passau Pionierstraße,48.556458,13.41539
 Citywatt DE-Passau Stelzlhof 1,48.576131,13.421952
 Citywatt DE-Passau Stephanstraße 64,48.584933,13.437921
 Citywatt DE-Pfullingen Marktstraße 160 Dehner,48.480382,9.229756,30
@@ -7121,26 +7136,27 @@ Citywatt DE-Randersacker Würzburger Str. 6,49.758727,9.980664
 Citywatt DE-Ravensburg Bleicherstraße 53,47.793998,9.613255
 Citywatt DE-Regensburg Straubinger Straße 60,49.012654,12.153475
 Citywatt DE-Reisbach Fellbach 1,48.531519,12.635591
-Citywatt DE-Rellingen Industriestraße 22,53.63941,9.884732
+Citywatt DE-Rellingen Industriestraße,53.639359,9.884723
 Citywatt DE-Rhede Burgstraße 4,53.06029,7.273716
 Citywatt DE-Rimsting Weingarten 1,47.873821,12.30708
 Citywatt DE-Rottau Grassauerstraße 1,47.793806,12.41204
-Citywatt DE-Rottenburg Max-von-Müller-Str. 57,48.710394,12.016991
+Citywatt DE-Rottenburg Max-von-Müller-Straße,48.710394,12.016991
 Citywatt DE-Ruderting Gewerbering 4,48.651902,13.426884
 Citywatt DE-Ruderting Haselbacherstraße 8,48.652921,13.406111
-Citywatt DE-Ruderting Passauer Str. 36,48.649609,13.410788
 Citywatt DE-Ruderting Passauer Straße 25,48.652606,13.410353
+Citywatt DE-Ruderting Passauer Straße,48.649675,13.410638
 Citywatt DE-Rödental Nikolaus-August-Otto-Straße 4 Dehner,50.289074,11.018452
 Citywatt DE-Salzweg Ebenäcker 2a,48.629752,13.472371
 Citywatt DE-Salzweg Waldstraße 53,48.60568,13.485987
 Citywatt DE-Sarstedt Hottelner Straße 18,52.253722,9.909949
-Citywatt DE-Sauerlach Robert-Bosch-Straße 1,47.970254,11.665148
-Citywatt DE-Scheidegg Grüntenweg 6,47.586516,9.858212
+Citywatt DE-Sauerlach Robert-Bosch-Straße,47.970368,11.665137
+Citywatt DE-Scheidegg Grüntenweg,47.586491,9.858477
 Citywatt DE-Scheidegg Zollstraße 19,47.580532,9.846631
 Citywatt DE-Schweinfurt Friedrich-Rätzer-Straße 5,50.028892,10.236977
 Citywatt DE-Schüttorf Holmers Kamp 6,52.321579,7.241582
 Citywatt DE-Selb Albert-Pausch-Ring 1,50.172726,12.120501
 Citywatt DE-Siebenlehn Freiberger Straße 30,51.024806,13.306113
+Citywatt DE-Singen Gottlieb-Daimler-Straße,47.75297,8.882006
 Citywatt DE-Soest Nottebohmweg 18,51.574313,8.119597
 Citywatt DE-St. Egidien Lungwitzer Str. 82,50.783742,12.62352
 Citywatt DE-St. Gangloff Am Wachtelberg 16,50.856592,11.909384
@@ -7151,17 +7167,18 @@ Citywatt DE-Thiersheim Wampener Straße,50.071946,12.097207
 Citywatt DE-Tiefenbach Am Zugsberg 1,48.633594,13.414525
 Citywatt DE-Tittling Passauer Straße 20,48.725797,13.381503
 Citywatt DE-Trier Auf dem Petrisberg 4,49.754184,6.666445
-Citywatt DE-Trier Loebstraße 12,49.775612,6.678939
+Citywatt DE-Trier Loebstraße,49.775588,6.67895
 Citywatt DE-Tutzing Bräuhausstraße 1,47.907952,11.275142
 Citywatt DE-Twistringen Konrad-Adenauer-Straße 38,52.792402,8.641235
 Citywatt DE-Vilsbiburg Hauptstraße 2,48.430975,12.353627
 Citywatt DE-Wangen Hochbergweg 4,47.625104,9.74858
 Citywatt DE-Weiden Pressather Straße 50,49.686168,12.130802
 Citywatt DE-Weihenzell Ansbacher Straße 4,49.354713,10.62872
+Citywatt DE-Weil am Rhein Rennemattenweg,47.620565,7.612298
 Citywatt DE-Weißdorf Wulmersreuth 17,50.190291,11.830173
 Citywatt DE-Weißensberg Gewerbepark Edelweiß 4,47.586984,9.737942
-Citywatt DE-Wilhelmshaven Güterstraße 30,53.522066,8.081034
-Citywatt DE-Worms Mainzer Str. 55,49.643905,8.362627
+Citywatt DE-Wilhelmshaven Güterstraße,53.522066,8.081034
+Citywatt DE-Worms Mainzer Straße,49.643813,8.362633
 Citywatt DE-Worpswede Findorffstraße 3,53.221417,8.920534
 Citywatt DE-Zirndorf Buchackerstraße 4,49.438337,10.9538
 Citywatt DE-Zwickau Maxhütte Gewerbering 15,50.705227,12.446013
@@ -8992,6 +9009,7 @@ EnBW DE-Halle (Saale) Leipziger Chaussee,51.45609,12.0146
 EnBW DE-Halle (Saale) Toom,51.523591,11.95318
 EnBW DE-Hallstadt Biegenhofstraße,49.917785,10.869153
 EnBW DE-Haltern am See,51.733143,7.167997
+EnBW DE-Hamburg Maldfeldstraße,53.430464,9.93585,15
 EnBW DE-Hamburg Penny Oberer Landweg,53.48998,10.18764
 EnBW DE-Hamburg Penny,53.584064,10.058082
 EnBW DE-Hamburg Shell,53.515415,10.081894
@@ -9164,7 +9182,7 @@ EnBW DE-Karlsruhe Landauer Straße,49.030733,8.368123
 EnBW DE-Karlsruhe Lorenzstraße,49.00106,8.38377
 EnBW DE-Karlsruhe Luisenstraße,49.000605,8.404852
 EnBW DE-Karlsruhe Moltkestraße,49.014381,8.396731
-EnBW DE-Karlsruhe Neureuter Straße,49.01723,8.3546
+EnBW DE-Karlsruhe Neureuter Straße,49.018029,8.355005
 EnBW DE-Karlsruhe Nürnberger Straße,48.984704,8.40134
 EnBW DE-Karlsruhe Parkplatz,49.001161,8.473169
 EnBW DE-Karlsruhe Pfizerstr.,49.024222,8.456113
@@ -12745,6 +12763,7 @@ Ionity PL-Rzędziwojowice A4 Highway MOP Mlynski Staw,50.676777,17.657357
 Ionity PL-Rzędziwojowice A4 Highway MOP Mlynski Staw,50.677422,17.650864
 Ionity PL-Tatary National Road,53.335569,20.436557
 Ionity PL-Warsaw MOP Nowostawy Dolne,51.897492,19.706819
+Ionity PL-Wierzbocice DW466,52.249889,17.821525
 Ionity PL-Zgorzelec Jędrzychowice DK94,51.176527,15.032709
 Ionity PL-Świecko,52.313054,14.641559
 Ionity PT-Almodovar L,37.536329,-8.182924
@@ -13826,6 +13845,7 @@ Lidl DE-Lage Friedrich-Petri-Str. 18 - 26,51.992616,8.789682
 Lidl DE-Landau Wieslauterstr. 55,49.201703,8.123453
 Lidl DE-Landshut,48.544097,12.135483
 Lidl DE-Langerwehe Am vorderen Steinchen 4,50.817544,6.374832
+Lidl DE-Langgöns Sankt-Ulrich-Ring,50.49247,8.6579
 Lidl DE-Laubach Philipp-Reis-Str.,50.543477,8.978197
 Lidl DE-Lauenburg/Elbe Glüsinger Weg 1-7,53.37402,10.547926
 Lidl DE-Lauta Senftenberger Str. 1,51.461139,14.097718
@@ -15859,6 +15879,8 @@ Shell NL-Oirschot Rijksweg A58,51.49231,5.349267
 Shell NO-Kristiansand Vigeveien,58.163866,8.043222
 Shell PL-Nowa Wieś Legnicka,51.158851,16.171596
 
+SI-Energy DE-Langgöns Sankt-Ulrich-Ring,50.492413,8.658913,20
+
 Siemens DE-Nürnberg Humboldtstraße,49.438403,11.0753
 
 Smatrics AT-Altlengbach Steinhäusl,48.157892,15.941884
@@ -16139,7 +16161,6 @@ Süwag DE-Allmersbach Allmersbacher Straße,48.908499,9.484948
 Süwag DE-Bad Ems Silberau,50.332595,7.708017
 Süwag DE-Eltville am Rhein Taunusstraße,50.02711,8.12039
 Süwag DE-Frankfurt Schützenbleiche,50.096544,8.543414
-Süwag DE-Langgöns Sankt-Ulrich-Ring,50.492413,8.658913
 
 Tango NL-Meerkerk Energieweg,51.899723,4.983659,18
 Tango NL-Steenbergen Koperslagerij,51.588523,4.302757
