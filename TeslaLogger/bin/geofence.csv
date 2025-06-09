@@ -141,6 +141,7 @@ Supercharger-V3 BE-Arlon,49.648129,5.818957
 Supercharger-V3 BE-Brugge,51.16989,3.19666
 Supercharger-V3 BE-Bruxelles Brussels,50.878701,4.37317
 Supercharger-V3 BE-Charleroi,50.452328,4.430355
+Supercharger-V4 BE-Couvin,50.083724,4.524027
 Supercharger BE-Edegem,51.151055,4.432582
 Supercharger-V3 BE-Hasselt,50.951748,5.353142,17
 Supercharger BE-Heusden-Zolder,50.9934,5.2422
@@ -2223,6 +2224,7 @@ Supercharger FR-Appoigny,47.853123,3.543243
 Supercharger FR-Archamps,46.136917,6.124306
 Supercharger-V4 FR-Argenton-sur-Creuse,46.573218,1.502358
 Supercharger-V3 FR-Artenay,48.082979,1.864693
+Supercharger-V4 FR-Arès,44.770683,-1.113638
 Supercharger-V3 FR-Avallon,47.502121,3.984249
 Supercharger-V3 FR-Avignon - Le Pontet,43.980584,4.879857
 Supercharger FR-Barberaz,45.56085,5.949646
@@ -2283,6 +2285,7 @@ Supercharger-V3 FR-Colmar,48.1289,7.368817
 Supercharger-V4 FR-Colombe,45.396343,5.466685
 Supercharger-V3 FR-Dardilly,45.820165,4.760176
 Supercharger FR-Deauville,49.344809,0.096677
+Supercharger-V4 FR-Dieppe,49.905637,1.078212
 Supercharger-V3 FR-Dijon,47.271754,5.043424
 Supercharger-V3 FR-Dinan,48.444752,-2.068308
 Supercharger-V3 FR-Dunkerque,51.005132,2.28106
@@ -2648,6 +2651,7 @@ Supercharger-V3 IT-Milano Urban,45.478476,9.154914
 Supercharger IT-Modena,44.574119,10.981157
 Supercharger IT-Mogliano Veneto,45.58469,12.28721
 Supercharger IT-Moncalieri,44.973333,7.730113
+Supercharger-V3 IT-Mondovì,44.419691,7.849982
 Supercharger-V3 IT-Montenero di Bisaccia,42.062339,14.778845,30
 Supercharger-V3 IT-Montenero di Bisaccia,42.062664,14.778677
 Supercharger IT-Morano Calabro,39.875989,16.065094
@@ -2656,7 +2660,7 @@ Supercharger IT-Occhiobello,44.918787,11.594051
 Supercharger-V3 IT-Olbia,40.9069,9.515961
 Supercharger IT-Oristano,39.890044,8.599804
 Supercharger-V3 IT-Padova North,45.454351,11.856405
-Supercharger-V3 IT-Palermo - Palermo East,38.089131,13.410342
+Supercharger-V3 IT-Palermo East,38.089686,13.409944
 Supercharger-V3 IT-Palmanova,45.88421,13.34502
 Supercharger IT-Palmi,38.366929,15.869555
 Supercharger-V3 IT-Parma North,44.82108,10.336591
@@ -2666,7 +2670,7 @@ Supercharger IT-Piacenza,45.039461,9.753871
 Supercharger IT-Pollein,45.737122,7.372441
 Supercharger-V3 IT-Porto Sant’Elpidio,43.232404,13.749889
 Supercharger-V3 IT-Rimini,44.040676,12.589337
-Supercharger-V3 IT-Roma - North,41.970607,12.541756
+Supercharger-V3 IT-Roma North,41.9697,12.540717
 Supercharger-V3 IT-Roma South West,41.815947,12.400934
 Supercharger-V3 IT-Rovereto,45.856559,11.001817
 Supercharger IT-San Giovanni Teatino,42.399194,14.16396
@@ -2674,6 +2678,7 @@ Supercharger-V4 IT-San Giuliano Milanese,45.388555,9.258962
 Supercharger-V4 IT-San Giuliano Milanese,45.388759,9.258819
 Supercharger-V3 IT-Sarzana - La Spezia,44.117695,9.945583
 Supercharger-V3 IT-Serravalle Scrivia,44.735607,8.839653
+Supercharger-V4 IT-Settimo Torinese,45.127435,7.737372
 Supercharger IT-Sondrio,46.164535,9.677329
 Supercharger IT-Tarquinia,42.183306,11.788161
 Supercharger-V4 IT-Telgate,45.633205,9.852077
@@ -3607,7 +3612,7 @@ Supercharger US-Chester VA,37.367014,-77.416555
 Supercharger-V3 US-Chesterfield MO - North Outer 40 Road,38.670555,-90.5895
 Supercharger-V3 US-Chestertown NY,43.665431,-73.784933
 Supercharger US-Chestnut Hill MA,42.32218,-71.17228
-Supercharger-V3 US-Chevy Chase MD (Floor L1),38.99634,-77.075218
+Supercharger-V3 US-Chevy Chase MD (Floor L1),38.995922,-77.076133
 Supercharger US-Cheyenne WY,41.160986,-104.80452
 Supercharger-V3 US-Chicago IL - Elston Avenue (Floor 1),41.92782,-87.685849
 Supercharger US-Chicago IL - North Broadway (Floor 3),41.937097,-87.644406
@@ -5304,6 +5309,7 @@ AAE AT-Rauris Seidlwinkl,47.110536,12.832509
 
 ABB CH-Schaffhausen Fulachstrasse,47.708821,8.641302
 ABB IT-Affi SP29b,45.55148,10.787692,15
+ABB IT-Bagnolo San Vito Autostrada del Brennero,45.059928,10.840496
 ABB IT-Lavis Area Paganella Ovest,46.140107,11.085365
 ABB IT-Lavis Area Paganella Ovest,46.140558,11.087593
 ABB IT-Nogaredo A22,45.901841,11.027177
@@ -6166,8 +6172,12 @@ Allego SE-Örkelljunga,56.285576,13.337159
 AllgäuStrom DE-Fischen im Allgäu An der Breitach,47.425857,10.265904
 AllgäuStrom DE-Kempten (Allgäu) Bleicherstraße,47.736612,10.327834
 
+alperia IT-Brixen Campillstraße,46.7096,11.662063
 alperia IT-Egna Via Brennero,46.3196,11.269783
 Alperia IT-Kardaun Zona Produttiva,46.491917,11.399316
+alperia IT-Meran Novemberstraße,46.673798,11.148907
+alperia IT-Nals Via Dogna,46.552367,11.213094
+alperia IT-San Candido Matthias-Schranzhofer-Straße,46.730626,12.278077
 
 AMAG CH-Winterthur Zürcherstrasse,47.485487,8.702153
 
@@ -6414,8 +6424,12 @@ BeCharge IT-Alba Adriatica Piazza Aldo Moro,42.835346,13.930695
 BeCharge IT-Albenga Regione Cime di Leca,44.066007,8.176305
 BeCharge IT-Aprica Corso Roma,46.153907,10.153185
 BeCharge IT-Arona Via Vittorio Veneto,45.753495,8.543138
+BeCharge IT-Bibione Corso del Sole,45.639792,13.061443
 BeCharge IT-Bressanone Peter-Mayr-Straße,46.720221,11.655295
 BeCharge IT-Firenze Via Senese,43.749179,11.234093
+BeCharge IT-Lido di Jesolo Via Aquileia,45.501627,12.630307
+BeCharge IT-Livigno Via Borch,46.519186,10.124823
+BeCharge IT-Milano Via Riccardo Pitteri,45.479768,9.245739
 BeCharge IT-Ponte di Legno Via Cida,46.257058,10.510159
 BeCharge IT-Riccione Via Enrico Berlinguer,43.986654,12.642154
 BeCharge IT-Roseto degli Abruzzi Via Nazionale,42.664101,14.025553
@@ -6443,6 +6457,7 @@ Bosch DE-Reutlingen Markwiesenstraße,48.494479,9.142514
 Bosch DE-Salzgitter John-F.-Kennedy-Straße,52.138041,10.294846
 Bosch DE-Salzgitter John-F.-Kennedy-Straße,52.138666,10.295846
 Bosch DE-Schwieberdingen Robert-Bosch-Straße,48.881413,9.080732
+Bosch IT-Torri del Benaco Via Bardino,45.610686,10.705955
 
 BP DE-Allershausen Schroßlacher Straße,48.428106,11.585223
 BP DE-Altdorf bei Nürnberg Nürnberger Straße,49.383969,11.34805
@@ -6962,6 +6977,7 @@ ChargePoint DE-Wörthsee 11 Inninger Straße,48.085498,11.199361
 ChargePoint DE-Würzburg 10a Friedrichstraße,49.797157,9.914771
 ChargePoint IT-Area di servizio Altivole,45.752779,11.896712
 ChargePoint IT-Castelrotto Kastelruth Autostrada del Brennero,46.57,11.522867
+ChargePoint IT-Lutago Via Valle Aurina,46.950787,11.922009
 ChargePoint US-Bellville OH State Route 97,40.645793,-82.543001
 ChargePoint US-Bluff UT 455 W Main Street,37.281693,-109.567547
 ChargePoint US-Fruita CO N Elm St,39.159882,-108.73062
@@ -7371,6 +7387,7 @@ Comfortcharge DE-Limbach-Oberfrohna Weststraße,50.85576,12.75632
 Comfortcharge DE-Lingen (Ems) Kiefernstrasse,52.51134,7.28733
 Comfortcharge DE-Luckenwalde Dessauer Str,52.092718,13.161526
 Comfortcharge DE-Ludwigsfelde Bruno-Taut-Straße,52.30256,13.25475
+Comfortcharge DE-Löbau Äußere Zittauer Straße,51.084437,14.670988
 Comfortcharge DE-Lübbecke Augustaweg,52.30928,8.61618
 Comfortcharge DE-Mannheim Dynamostraße,49.47426,8.49333
 Comfortcharge DE-Mannheim Karl-Ludwig-Straße,49.4835,8.48578
@@ -7988,6 +8005,7 @@ EAM DE-Wabern Reiherwaldweg,51.09553,9.353367
 EAM DE-Weimar (Lahn) Herborner Straße,50.76247,8.739391
 
 eborn FR-Castellane Anc. Rte de Grasse,43.846447,6.51518
+eborn FR-La Salle-les-Alpes Chem. du Rioulet,44.944401,6.564132
 eborn FR-Menthon-Saint-Bernard Rte des Moulins,45.861665,6.197802
 
 eCarUp CH-Aarau Buchserstrasse,47.391541,8.059656
@@ -10207,10 +10225,12 @@ EnelX IT-Gagliano del Capo LE,39.838057,18.366472,15
 EnelX IT-Lecce Stazione di Ricarica,40.353177,18.171802,10
 EnelX IT-Legnano Via Fabio Filzi,45.607315,8.927481
 EnelX IT-Olbia Via Basa,40.96083,9.491849
+EnelX IT-Palermo Via Marchese di Villabianca,38.139612,13.349534
 EnelX IT-Ramiola,44.698924,10.090093
 EnelX IT-Sassari Via Washington,40.710753,8.553156
 EnelX IT-Torre Pali Stazione di Ricarica,39.844032,18.211256,10
 EnelX IT-Tortolì Via Giacomo Puccini,39.925559,9.65228
+EnelX IT-Tremezzina Via Patrizio Peduzzi,45.98272,9.221832
 
 EnerCharge AT-Rauris Sportstraße,47.229812,12.992638
 
@@ -11510,11 +11530,15 @@ EWF DE-Willingen (Upland) Zur Hoppecke,51.291536,8.603761
 EWII DK-Blåvand Tane Hedevej,55.555733,8.137469
 
 Ewiva IT-Alessandria Via Vecchia Torino,44.915296,8.599882
+Ewiva IT-Arcola Via della Repubblica,44.116042,9.913094
 Ewiva IT-Bagnolo San Vito Via Marco Biagi,45.085816,10.855625
 Ewiva IT-Giave Statale,40.467727,8.739463
 Ewiva IT-Mogliano Veneto Via Bonfadini,45.584343,12.287914,20
 Ewiva IT-Peschiera del Garda Via Tangenziale,45.435685,10.710101
 Ewiva IT-Roma Corsa di Francia,41.944798,12.469523
+Ewiva IT-Settimo Torinese Via Torino,45.127265,7.736641
+Ewiva IT-Siena Via Fausto Coppi,43.335683,11.296563
+Ewiva IT-Tortona Strada Provinciale per Viguzzolo,44.907117,8.878633
 
 eze DE-Frankfurt am Main Luxemburgerallee,50.119729,8.711134
 
@@ -11687,6 +11711,10 @@ FreeToX IT-Bentivoglio Autostrada Bologna-Padova,44.621136,11.419777
 FreeToX IT-Bentivoglio Autostrada Bologna-Padova,44.622597,11.419838
 FreeToX IT-Castel San Pietro Terme Autostrada Adriatica,44.427786,11.599325
 FreeToX IT-Castel San Pietro Terme Autostrada Adriatica,44.42924,11.600217
+FreeToX IT-Castrocielo Autostrada del Sole,41.496876,13.683106
+FreeToX IT-Castrocielo Autostrada del Sole,41.497785,13.684181
+FreeToX IT-Fabro Autostrade del Sole,42.875861,12.019105
+FreeToX IT-Fabro Autostrade del Sole,42.876551,12.017115
 FreeToX IT-Ferno Malpensa Aeroporto,45.624813,8.712106
 FreeToX IT-Ferrara A13,44.879338,11.570719
 FreeToX IT-Ferrara A13,44.880089,11.569079
@@ -11708,7 +11736,14 @@ FreeToX IT-Riccione Autostrada Adriatica,43.994407,12.618552
 FreeToX IT-Roncadelle A4 Torino - Trieste,45.532562,10.151192
 FreeToX IT-Roncadelle A4 Torino - Trieste,45.532564,10.148387
 FreeToX IT-San Giovanni Valdarno Autostrada del Sole,43.582907,11.522605
+FreeToX IT-Santa Croce Autostrada del Sole,41.234111,14.091769
+FreeToX IT-Savignano sul Rubicone A14,44.116909,12.408965
+FreeToX IT-Torre Cerrano Autostrada Adriatica,42.530745,14.124201
+FreeToX IT-Torre Cerrano Autostrada Adriatica,42.531747,14.124345
+FreeToX IT-Vallata Autostrada dei Due Mari,41.064678,15.314257
+FreeToX IT-Vallata Autostrada dei Due Mari,41.066672,15.315947
 
+Freshmile FR-Bastelicaccia Lieu-dit Suaralta,41.923437,8.824706
 freshmile FR-La Bresse Rue des Proyes,48.002657,6.873606
 
 Galp PT-Vouzela A25 / IP5,40.686186,-8.232199
@@ -12587,12 +12622,14 @@ Ionity FR-Boismandé Est,46.314271,1.419247
 Ionity FR-Boismandé Ouest,46.313348,1.416566
 Ionity FR-Bonneville,46.064687,6.409478
 Ionity FR-Bréguières Nord,43.59197,7.036228
+Ionity FR-Buchères Troyes Sud,48.225449,4.133162
 Ionity FR-Cambarette Nord,43.423464,5.993311
 Ionity FR-Centre de la France Nord,46.751937,2.417075
 Ionity FR-Centre de la France Sud,46.751623,2.417606
 Ionity FR-Champfleury Voie de la Liberté,49.204202,4.012283,25
 Ionity FR-Chartres Bois Paris,48.467,1.579341
 Ionity FR-Chartres Gasville,48.468541,1.580005
+Ionity FR-Coquelles Av. Charles de Gaulle,50.927076,1.798244
 Ionity FR-Fontaine Colette,47.16577,0.63161
 Ionity FR-Fontanelles,45.876536,6.070678
 Ionity FR-Freney,45.197124,6.624119
@@ -12707,6 +12744,7 @@ Ionity IT-Brugnato Ovest,44.22647,9.72971
 Ionity IT-Carpi,44.77544,10.86072
 Ionity IT-Ceriale Sud,44.08777,8.20626
 Ionity IT-Forlì,44.24285,12.08184,20
+Ionity IT-Mondovì,44.42,7.8501
 Ionity IT-Monselice,45.2374,11.76287
 Ionity IT-Montecchio Maggiore,45.50105,11.43627
 Ionity IT-Piacenza,45.02694,9.73478
@@ -12801,6 +12839,7 @@ Ionity SK-Čaradice R1,48.355665,18.49675
 
 IZIVIA FR-Aix-les-Bains Avenue Daniel Rops,45.694245,5.896935
 IZIVIA FR-Lyon Rue Jean Marcuit,45.788684,4.814377
+IZIVIA FR-Munster Rue Hilti,48.044282,7.160577
 IZIVIA FR-Niort Avenue de la Rochelle,46.312624,-0.478912
 
 JET DE-Bielefeld Eckendorfer Straße,52.03283,8.552652
@@ -13750,6 +13789,7 @@ Lidl DE-Hainichen August-Bebel-Str. 1,50.967317,13.119582
 Lidl DE-Halle (Westfalen) Elsa-Brändström-Straße 1,52.054386,8.373094
 Lidl DE-Halle Krausenstr. 9,51.487567,11.983414
 Lidl DE-Halle Merseburger Str. 221,51.455763,11.984001
+Lidl DE-Hallstadt Gundelsheimer Straße,49.933835,10.882814
 Lidl DE-Hambergen Hauptstr. 34,53.308041,8.836427
 Lidl DE-Hamburg Altonaer Straße 10,53.56383,9.961463
 Lidl DE-Hamburg Bahrenfelder Chaussee,53.563903,9.914108
@@ -14327,6 +14367,7 @@ Mer SE-Gävle Johanneslötsvägen,60.667786,17.080474
 Mer SE-Ljungby Ringvägen,56.813133,13.906555
 Mer SE-Löddeköpinge Marknadsvägen,55.766646,12.990359,16
 Mer SE-Norrköping Järngatan,58.618527,16.162364
+Mer SE-Nybro Norra Vägen,56.73614,15.934698
 
 MFG GB-Sowerby York Road,54.228782,-1.329168
 
@@ -14504,6 +14545,7 @@ naturenergie DE-Waldshut-Tiengen Lise-Meitner-Ring,47.616731,8.249187
 naturenergie DE-Waldshut-Tiengen Nikolaus-Otto-Straße,47.6202,8.253457
 
 Neogy IT-Castelrotto - Kastelruth Seis Schlernstraße,46.540455,11.564826
+Neogy IT-Eppan an der Weinstraße Kalterer Straße,46.440278,11.25971
 Neogy IT-Marlengo Franz Innerhofer Straße,46.655659,11.14103
 Neogy IT-Piazza Catena Riva del Garda,45.883382,10.838777
 Neogy IT-Rablà Vicolo Gerold,46.669743,11.059455
@@ -15462,12 +15504,16 @@ Porsche DE-Willich Jakob-Kaiser-Straße,51.27255,6.51521
 Porsche DE-Wuppertal Porschestraße,51.3053,7.25279
 Porsche LU-Howald Hesperange Rue Peternelchen,49.575682,6.138282
 
+Powerdot FR-Charmes Voie Carpini,48.359627,6.304077
 Powerdot FR-Cosne-Cours-sur-Loire Rue des Minotiers,47.383055,2.919293
 Powerdot FR-Montélimar Boulevard Charles André,44.525683,4.74468
+Powerdot FR-Monéteau Av. de Paris,47.843097,3.552494
 Powerdot PL-Kraków Pawia,50.067976,19.946278
 Powerdot PL-Leszno Niepodległości,51.846245,16.588073
 Powerdot PL-Poznań Jana Brzechwy,52.411869,16.832071
 Powerdot PL-Ustronie Morskie Kolejowa,54.203002,15.749827
+
+Powy IT-Cesena Via Leopoldo Lucchi,44.143867,12.26004
 
 PRE CZ-Olomouc Horní lán,49.574085,17.2318
 PRE CZ-Praha 7-Bubeneč U Výstaviště,50.106314,14.434708
@@ -15477,6 +15523,8 @@ PRE CZ-Uherské Hradiště Tř. Maršála Malinovského,49.055996,17.467152
 PRE CZ-Vrbová Lhota D11,50.120533,15.081765
 
 prio PT-Coimbra Av. Lousã,40.203504,-8.425337
+
+PROVIRIDIS FR-Puget-sur-Argens Bd du Commerce,43.448294,6.698967
 
 Q1 DE-Bad Bentheim Hengeloer Straße,52.295911,7.099811
 Q1 DE-Bad Nenndorf Hauptstraße,52.335385,9.377994
@@ -15574,6 +15622,8 @@ Rheinenergie DE-Köln Yitzhak-Rabin-Platz,50.93297,6.93879
 
 rhenag DE-Siegburg Bachstraße,50.798213,7.203909
 rhenag DE-Siegburg Wilhelm-Ostwald-Straße,50.792783,7.221005,30
+
+RICARICA IT-Livorno Via Giovanni Gelati,43.530357,10.325833
 
 RoboCharge NL-Biervliet Middenweg,51.326131,3.667839
 
@@ -16787,6 +16837,7 @@ Virta DE-Nidda Eisenried,50.416387,9.017287
 Virta DE-Reddeber Am Stadtweg,51.861832,10.80263
 Virta FI-Jyväskylä Sammontie,62.286632,25.718973
 Virta FI-Pello Kolarintie,66.80841,23.995786
+Virta FR-Saintes Rue de la Côte de Beauté,45.746659,-0.669742
 Virta SE-Smygehamn Smyge strandväg,55.339217,13.35998
 Virta SE-Västervik Allén,57.760546,16.612694
 
@@ -16913,6 +16964,8 @@ Volkswagen DE-Zwickau Glauchauer Straße,50.788723,12.489462
 Volkswagen DE-Zwickau Schubertstraße,50.746634,12.478944
 Volkswagen DE-Öhringen Rudolf-Diesel-Straße 1,49.200257,9.47635
 Volkswagen DE-Überlingen Hauptstraße 37,47.802296,9.238275
+
+Volvo IT-Ferrara Via Eridano,44.848679,11.589752
 
 Wattif DE-Binz Forsthaus Prora,54.434559,13.557487
 
