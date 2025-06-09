@@ -6187,6 +6187,7 @@ AmpCharge AU-Hawthorn East VIC Camberwell Road,-37.82687,145.05199
 AmpCharge AU-Hillside VIC Melton Highway,-37.694038,144.754365
 AmpCharge AU-Keysborough VIC Cheltenham Road,-37.9954,145.1823
 AmpCharge AU-Kilsyth VIC Gatwick Road,-37.82322,145.2963
+AmpCharge AU-Marsden Park NSW Richmond Road,-33.716104,150.844658
 AmpCharge AU-Mill Park VIC Plenty Road,-37.694038,144.7554
 AmpCharge AU-Mount Waverley VIC Blackburn Road,-37.900945,145.1436
 AmpCharge AU-Rowville VIC Kingsley Close,-37.9073,145.23675
@@ -9452,6 +9453,7 @@ EnBW DE-Nentershausen Ost,50.423135,7.928387
 EnBW DE-Neu-Ulm Augsburger Str.,48.40118,10.022635
 EnBW DE-Neu-Ulm Euronics,48.3881,10.035964
 EnBW DE-Neu-Ulm Europastr.,48.387569,10.03312
+EnBW DE-Neu-Ulm Europastraße,48.387577,10.03316
 EnBW DE-Neu-Ulm Finninger Str.,48.39193,10.0219
 EnBW DE-Neubrandenburg,53.565091,13.268248
 EnBW DE-Neuenrade,51.286081,7.807952
@@ -10370,12 +10372,12 @@ ENTEGA DE-Rödermark Am Schwimmbad,49.976334,8.803954,18
 ENTEGA DE-Weiterstadt LOOP5,49.89237,8.60564
 ENTEGA DE-Weiterstadt LOOP5,49.8931,8.60577
 
-envia DE-Bitterfeld-Wolfen Niels-Bohr-Straße,51.624576,12.307812
-envia DE-Köthen (Anhalt) Dessauer Straße,51.764312,11.986108
-envia DE-Oberlungwitz Am Sachsenring,50.789372,12.693952
-envia DE-Oberlungwitz Am Sachsenring,50.789727,12.6947
-envia DE-Wildenfels Arno-Schmidt-Straße,50.681519,12.592092
-envia DE-Zwickau Uhdestraße,50.71454,12.49923
+enviaM DE-Bitterfeld-Wolfen Niels-Bohr-Straße,51.624576,12.307812
+enviaM DE-Köthen (Anhalt) Dessauer Straße,51.764312,11.986108
+enviaM DE-Oberlungwitz Am Sachsenring,50.789372,12.693952
+enviaM DE-Oberlungwitz Am Sachsenring,50.789727,12.6947
+enviaM DE-Wildenfels Arno-Schmidt-Straße,50.681519,12.592092
+enviaM DE-Zwickau Uhdestraße,50.71454,12.49923
 
 enwag DE-Wetzlar Am Leitz-Park,50.55306,8.533399,18
 
@@ -15343,6 +15345,7 @@ Pfalzwerke DE-Würzburg Robert-Bunsen-Straße,49.797224,9.991293
 Pfalzwerke DE-Zweibrücken Londoner Bogen,49.230819,7.406062
 Pfalzwerke DE-Zweibrücken Wilkstraße 2,49.251736,7.344511
 
+Plugpoint RO-Arpașu de Sus Str. Prundul Arpasului,45.698481,24.610972
 Plugpoint RO-Piatra Neamț Bulevardul Decebal,46.934151,26.348447
 
 Plug’N’Roll CH-Affoltern Raststätte My Stop,47.2714,8.439115,12
@@ -15655,7 +15658,7 @@ Schüren DE-Hilden Mühlenbachweg,51.1707,6.951007
 
 Shell AT-Amstetten Otto-Schott-Straße,48.116329,14.911406
 Shell AT-Schwanenstadt Vor der Au,48.047808,13.78082
-Shell AT-Strengberg Westautobahn Autobahnstation A1,48.114623,14.666307
+Shell AT-Strengberg Westautobahn A1,48.114623,14.666307
 Shell AT-Wien Wagramer Straße,48.264631,16.454496
 Shell CH-Kirchberg Wilerstrasse,47.439374,9.056007
 Shell CH-Lupfig Flugplatz Birrfeld,47.444452,8.228608
@@ -15668,7 +15671,7 @@ Shell DE-Achim Margarete-Steiff Allee,53.019466,9.068053
 Shell DE-Andernach Rasselsteinstraße,50.433135,7.426765
 Shell DE-Angermünde Prenzlauer Straße,53.026547,13.995819
 Shell DE-Bad Belzig Brücker Landstraße,52.144539,12.609381
-Shell DE-Bad Doberan An der B 105,54.105956,11.928312
+Shell DE-Bad Doberan An der B105,54.105956,11.928312
 Shell DE-Bad Driburg Dringenbergerstraße,51.72253,9.016095
 Shell DE-Bad Kreuznach Bosenheimer Straße,49.849195,7.897201
 Shell DE-Bad Liebenwerda Heinrich-Heine-Straße,51.524149,13.405714
@@ -15676,7 +15679,7 @@ Shell DE-Bad Saulgau Platzstraße,48.00651,9.51345
 Shell DE-Bardowick Hamburger Landstraße,53.29199,10.38887
 Shell DE-Bayreuth Christian-Ritter-von-Langheinrich-Straße,49.962815,11.61106
 Shell DE-Beelitz Trebbiner Straße,52.234862,12.980057
-Shell DE-Berg,50.372,11.787795
+Shell DE-Berg Sieggrubenstraße,50.372,11.787795
 Shell DE-Berlin Alt-Kaulsdorf,52.505561,13.588271
 Shell DE-Berlin Bergstraße,52.458056,13.338333
 Shell DE-Berlin Bundesallee,52.492737,13.331541
@@ -15701,18 +15704,18 @@ Shell DE-Coswig Dresdner Straße,51.12633,13.57197
 Shell DE-Cottbus Hermannstraße,51.76312,14.34862
 Shell DE-Cottbus Turower Straße,51.724955,14.321162
 Shell DE-Darmstadt Rüdesheimer Straße,49.853213,8.644191
-Shell DE-Dasing Laimeringer Strasse,48.389921,11.066027
+Shell DE-Dasing Laimeringer Straße,48.389921,11.066027
 Shell DE-Deizisau Seewiesenweg,48.715078,9.3777
 Shell DE-Dessau-Roßlau Kiefernweg,51.889534,12.272161
 Shell DE-Dietzenbach Justus-von-Liebig-Straße,50.00282,8.79405
-Shell DE-Dillenburg Frankfurter Strasse,50.73567,8.29052
+Shell DE-Dillenburg Frankfurter Straße,50.73567,8.29052
 Shell DE-Dormagen Hamburger Straße,51.090437,6.811746
 Shell DE-Dortmund Bornstraße,51.530938,7.474047
 Shell DE-Dortmund Ruhrallee,51.496467,7.468238
 Shell DE-Dresden Washingtonstraße,51.067278,13.688885
 Shell DE-Eggersdorf Landhausstraße,52.539595,13.828408
 Shell DE-Ellwangen An der Jagst,48.967372,10.127059
-Shell DE-Emmelshausen Trinkbornstrasse,50.15952,7.58926
+Shell DE-Emmelshausen Trinkbornstraße,50.15952,7.58926
 Shell DE-Empfingen Robert-Bosch-Straße,48.386633,8.72245
 Shell DE-Erkelenz Krefelder Straße,51.083111,6.312259
 Shell DE-Erkrath Max-Planck-Straße,51.20019,6.938561
@@ -15722,12 +15725,12 @@ Shell DE-Falkenberg Liebenwerdaer Straße,51.57739,13.244613
 Shell DE-Filderstadt Echterdinger Straße,48.678336,9.192873,20
 Shell DE-Frankfurt am Main Mörfelder Landstraße,50.088866,8.669073
 Shell DE-Frankfurt am Main Niederräder Ufer,50.088479,8.63574
-Shell DE-Freiburg Tullastrasse,48.022309,7.849648
+Shell DE-Freiburg Tullastraße,48.022309,7.849648
 Shell DE-Fulda Frankfurter Straße,50.53008,9.67685
 Shell DE-Fürstenwalde Trebuser Straße,52.368808,14.059818
 Shell DE-Gau-Algesheim Rheinstraße,49.971659,8.023141,30
 Shell DE-Gelsenkirchen Willy-Brandt-Allee,51.548725,7.074277
-Shell DE-Gemünden Wernfelder Strasse,50.04907,9.70276
+Shell DE-Gemünden Wernfelder Straße,50.04907,9.70276
 Shell DE-Genshagen Parkallee,52.309319,13.313377
 Shell DE-Gera Johannes-R.-Becher-Straße,50.896154,12.085452
 Shell DE-Gießen Schiffenberger Weg,50.572413,8.690782,30
@@ -15760,15 +15763,15 @@ Shell DE-Hösbach Industriestraße,50.00602,9.221178
 Shell DE-Ingelheim Herman-Bopp-Straße 1,49.986976,8.02829
 Shell DE-Isernhagen Opelstraße,52.424286,9.837596
 Shell DE-Itzehoe Lindenstraße,53.933044,9.482901
-Shell DE-Kahl am Main Aschaffenburger Strasse,50.06579,9.00561
+Shell DE-Kahl am Main Aschaffenburger Straße,50.06579,9.00561
 Shell DE-Kaltenkirchen Kieler Straße,53.840978,9.948871,40
 Shell DE-Kamen Karree,51.568119,7.674458
 Shell DE-Karlsdorf-Neuthard Im Entenfang,49.135209,8.527083
 Shell DE-Kirchheim,50.834221,9.574422,30
-Shell DE-Kitzingen Repperndorfer Strasse,49.73912,10.15256
+Shell DE-Kitzingen Repperndorfer Straße,49.73912,10.15256
 Shell DE-Kleinostheim Kardinal-Faulhaber-Straße,50.00863,9.05644
 Shell DE-Knetzgau Steinbruch,49.981557,10.555571,25
-Shell DE-Koblenz Friedrich-Mohr-Strasse,50.380548,7.576939
+Shell DE-Koblenz Friedrich-Mohr-Straße,50.380548,7.576939
 Shell DE-Kraftsdorf Am Rüdersdorfer  Wege,50.895948,11.979361
 Shell DE-Kranichfeld Erfurter Straße,50.860908,11.207079
 Shell DE-Krefeld Diessemer Bruch,51.327372,6.590652
@@ -15788,13 +15791,12 @@ Shell DE-Magdeburg Lunochodstraße,52.091036,11.611697
 Shell DE-Maintal Am Kreuzstein,50.146054,8.807924
 Shell DE-Mainz An der Ochsenwiese,49.997371,8.209414
 Shell DE-Mainz Dagobertstraße,49.995284,8.28056
-Shell DE-Mayen Koblenzer Strasse,50.32757,7.24182
+Shell DE-Mayen Koblenzer Straße,50.32757,7.24182
 Shell DE-Metzingen Maienwaldstraße,48.53218,9.27677
 Shell DE-Mildenau Gewerbegebiet Nord,50.599666,13.062688
 Shell DE-Mönchengladbach Korschenbroicher Straße,51.195097,6.451595
 Shell DE-Naumburg (Saale) Weißenfelser Straße,51.149755,11.816097
 Shell DE-Nettetal Leuther Straße,51.329475,6.211252
-Shell DE-Neu-Ulm,48.387577,10.03316
 Shell DE-Neubrandenburg Sattelplatz,53.570053,13.262006
 Shell DE-Neuenstein-Aua Im Biegen,50.912754,9.576859
 Shell DE-Neukirchen-Vluyn Inneboltstraße,51.433875,6.545475,35
@@ -15807,13 +15809,13 @@ Shell DE-Niendorf Schönberger Land A20,53.815758,10.878049
 Shell DE-Offenburg Burdastraße,48.464005,7.928641
 Shell DE-Offenburg Freiburger Straße,48.475505,7.941003
 Shell DE-Oranienburg Lehnitzstraße,52.74586,13.25379
-Shell DE-Osnabrück,52.301747,7.949302
+Shell DE-Osnabrück Professor-Porsche-Straße,52.301747,7.949302
 Shell DE-Ostfildern Felix Wankelstraße,48.713486,9.308548,30
 Shell DE-Pegau Leipziger Vorstadt,51.164861,12.264046
 Shell DE-Petershagen Mierwerder Weg,52.519062,13.769699
 Shell DE-Pirna Kirchweg,50.993139,13.910069
 Shell DE-Potsdam Fritz-Zubeil-Straße,52.381683,13.100285
-Shell DE-Potsdam Potsdamer Strasse,52.41464,13.02336
+Shell DE-Potsdam Potsdamer Straße,52.41464,13.02336
 Shell DE-Rathenow Fehrbelliner Straße,52.60776,12.3389
 Shell DE-Remscheid Neuenkamper Straße,51.17677,7.21831
 Shell DE-Remscheid Willy-Brandt-Platz,51.177717,7.201177
@@ -15844,7 +15846,7 @@ Shell DE-Weida Neustädter Straße,50.777695,12.04717
 Shell DE-Weilerbach Danziger Straße,49.477217,7.63979
 Shell DE-Westerland Trift,54.904609,8.310817
 Shell DE-Wittstock Fretzdorfer Steinstraße,53.06798,12.533306,30
-Shell DE-Wolfhagen Warburgerstrasse,51.4028,9.183616,30
+Shell DE-Wolfhagen Warburgerstraße,51.4028,9.183616,30
 Shell DE-Wunstorf Hannoversche Straße,52.426128,9.455037
 Shell DE-Wülfrath Hohdahlsfeld,51.300285,7.062605
 Shell DE-Würselen Hauptstraße,50.8165,6.15489
