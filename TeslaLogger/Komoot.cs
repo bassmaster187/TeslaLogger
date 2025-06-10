@@ -1246,6 +1246,12 @@ VALUES (
                             {
                                 Logfile.Log($"#{kli.carID} Komoot: error: tours does not contain _embedded.tours");
                             }
+                            // komoot responds with the newest tour as first tour
+                            // check if we already have this and skip next pages
+                            if (TourIsAlreadyInDatabase(komootTours.Keys.Max())) {
+                                Tools.DebugLog("Tour {komootTours.Keys.Max()} is already in the database, skip next downloads");
+                                nextPage = false;
+                            }
                         }
                         else
                         {
@@ -1255,6 +1261,43 @@ VALUES (
                 }
             }
             return komootTours;
+        }
+
+        private static bool TourIsAlreadyInDatabase(long tourID)
+        {
+            try
+            {
+                using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+                {
+                    con.Open();
+                    using (MySqlCommand cmd = new MySqlCommand(@"
+SELECT
+  count(*)
+FROM
+  komoot
+WHERE
+  tourID = @tourID
+", con))
+                    {
+                        cmd.Parameters.AddWithValue("@tourID", tourID);
+                        MySqlDataReader dr = SQLTracer.TraceDR(cmd);
+                        if (dr.Read() && dr[0] != DBNull.Value)
+                        {
+                            if (long.TryParse(dr[0].ToString(), out long _))
+                            {
+                                return true;
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ex.ToExceptionless().FirstCarUserID().Submit();
+                Logfile.Log(ex.ToString());
+            }
+
+            return false;
         }
 
         private static KomootLoginInfo Login(KomootLoginInfo kli)
