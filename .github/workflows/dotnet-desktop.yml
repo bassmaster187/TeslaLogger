@@ -117,7 +117,7 @@ jobs:
       uses: nerdoza/action-simple-file-upload@v2
       with:
         host: ftp.pogea.de
-        username: git
+        user: git
         password: ${{ secrets.FTP_PASSWORD_POGEA_DE }}
         src: TeslaLogger\bin\Debug\TeslaLogger.exe
         dest: /main/
