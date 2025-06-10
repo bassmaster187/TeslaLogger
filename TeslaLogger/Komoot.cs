@@ -1249,7 +1249,8 @@ VALUES (
                             // komoot responds with the newest tour as first tour
                             // check if we already have this and skip next pages
                             if (TourIsAlreadyInDatabase(komootTours.Keys.Max())) {
-                                Tools.DebugLog("Tour {komootTours.Keys.Max()} is already in the database, skip next downloads");
+                                Tools.DebugLog($"Tour {komootTours.Keys.Max()} is already in the database");
+                                Logfile.Log($"#{kli.carID} Komoot: no new tours");
                                 nextPage = false;
                             }
                         }
