@@ -340,7 +340,7 @@ namespace TeslaLogger
             }
         }
 
-        private readonly int interval = 6 * 60 * 60; // 6 hours in seconds
+        private readonly int interval = 3 * 60 * 60; // 6 hours in seconds
         private readonly int carID = -1;
         private readonly string username = string.Empty;
         private readonly string password = string.Empty;
