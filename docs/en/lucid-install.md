@@ -6,7 +6,9 @@ LucidLogger is enbedded into TeslaLogger and reuse many components and features.
 ```
 mkdir backup
 mkdir mysql
-wget https://raw.githubusercontent.com/bassmaster187/TeslaLogger/refs/heads/NET8/docker-compose.yml
+mkdir invoices
+wget https://raw.githubusercontent.com/bassmaster187/TeslaLogger/refs/heads/NET8/.env -O .env
+wget https://raw.githubusercontent.com/bassmaster187/TeslaLogger/refs/heads/NET8/docker-compose.yml -O docker-compose.yml
 docker compose pull
 docker compose up -d
 ```
