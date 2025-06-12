@@ -2531,185 +2531,19 @@ namespace TeslaLogger
                     return;
                 }
             }
-
-
-            /*
-            if (car.Model == "MS")
+            else if (car.CarType == "LUCID")
             {
-                if (car.Battery == "BTX5")
+                if (car.TrimBadging == "PURE")
                 {
-                    if (car.AWD)
-                    {
-                        eff = "0.186";
-                        car = "S 75D";
-                    }
-                    else
-                    {
-                        eff = "0.185";
-                        car = "S 75";
-                    }
-                }
-                else if (car.Battery == "BTX4")
-                {
-                    if (car.Performance)
-                    {
-                        eff = "0.200";
-                        car = "S P90D";
-                    }
-                    else
-                    {
-                        eff = "0.189";
-                        car = "S90D";
-                    }
-                }
-                else if (car.Battery == "BTX6")
-                {
-                    if (car.Performance)
-                    {
-                        eff = "0.200";
-                        car = "S P100D";
-                    }
-                    else
-                    {
-                        eff = "0.189";
-                        car = "S 100D";
-                    }
-                }
-                else if (car.Battery == "BTX8")
-                {
-                    if (car.AWD)
-                    {
-                        eff = "0.186";
-                        car = "S 75D (85kWh)";
-                    }
-                    else
-                    {
-                        eff = "0.185";
-                        car = "S 75 (85kWh)";
-                    }
-                }
-                else if (car.Battery == "BT85")
-                {
-                    if (car.AWD)
-                    {
-                        if (car.Performance)
-                        {
-                            car = "S P85D";
-                            eff = "0.201";
-                        }
-                        else
-                        {
-                            car = "S 85D";
-                            eff = "0.186";
-                        }
-                    }
-                    else
-                    {
-                        if (car.Performance)
-                        {
-                            car = "S P85";
-                            eff = "0.210";
-                        }
-                        else
-                        {
-                            car = "S 85";
-                            eff = "0.201";
-                        }
-                    }
-                }
-                else if (car.Battery == "PBT85")
-                {
-                    car = "S P85";
-                    eff = "0.210";
-                }
-                else if (car.Battery == "BT70")
-                {
-                    car = "S 70 ?";
-                    eff = "0.200";
-                }
-                else if (car.Battery == "BT60")
-                {
-                    car = "S 60 ?";
-                    eff = "0.200";
+                    WriteCarSettings("0.134", "Lucid Air PURE");
+                    return;
                 }
                 else
                 {
-                    car = "S ???";
-                    eff = "0.200";
+                    car.WhTR = 0.140;
+                    car.WriteSettings();
                 }
             }
-            else if (car.Model == "MX")
-            {
-                if (car.Battery == "BTX5")
-                {
-                    eff = "0.208";
-                    car = "X 75D";
-                }
-                else if (car.Battery == "BTX4")
-                {
-                    if (!car.Performance)
-                    {
-                        eff = "0.208";
-                        car = "X 90D";
-                    }
-                    else
-                    {
-                        eff = "0.217";
-                        car = "X P90D";
-                    }
-                }
-                else if (car.Battery == "BTX6")
-                {
-                    if (car.Performance)
-                    {
-                        eff = "0.226";
-                        car = "X P100D";
-                    }
-                    else
-                    {
-                        eff = "0.208";
-                        car = "X 100D";
-                    }
-                }
-                else
-                {
-                    car = "X ???";
-                    eff = "0.208";
-                }
-
-            }
-            else if (car.Model == "M3")
-            {
-                if (car.Battery == "BT37")
-                {
-                    if (car.Performance)
-                    {
-                        eff = "0.153";
-                        car = "M3P";
-                    }
-                    else
-                    {
-                        eff = "0.153";
-                        car = "M3";
-                    }
-                }
-                else
-                {
-                    eff = "0.153";
-                    car = "M3 ???";
-                }
-            }
-            else
-            {
-                if (car.Battery == "BT85")
-                {
-                    car = "S 85 ?";
-                    eff = "0.200";
-                }
-            }
-
-            WriteCarSettings(eff, car);
-            */
         }
 
         private void WriteCarSettings(string eff, string ModelName)
