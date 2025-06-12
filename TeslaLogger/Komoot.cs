@@ -304,6 +304,10 @@ namespace TeslaLogger
                             currP1.speed = (prevP.speed * 3 + nextP.speed * 2) / 5.0;
                             currP2.speed = (prevP.speed * 2 + nextP.speed * 3) / 5.0;
                         }
+                        if (acceleration1 > 0.75 && Math.Abs(acceleration2) < 0.25 && acceleration3 < -0.75)
+                        {
+                            Tools.DebugLog($"speed4: candidate? {prevP.speed}->{currP1.speed}->{currP2.speed}->{nextP.speed} acceleration1:{acceleration1}m/s acceleration2:{acceleration2}m/s acceleration3:{acceleration3}m/s ");
+                        }
                     }
                 }
                 if (this.positions.Count > 2)
@@ -336,7 +340,7 @@ namespace TeslaLogger
             }
         }
 
-        private readonly int interval = 6 * 60 * 60; // 6 hours in seconds
+        private readonly int interval = 3 * 60 * 60; // 3 hours in seconds
         private readonly int carID = -1;
         private readonly string username = string.Empty;
         private readonly string password = string.Empty;
@@ -1242,6 +1246,13 @@ VALUES (
                             {
                                 Logfile.Log($"#{kli.carID} Komoot: error: tours does not contain _embedded.tours");
                             }
+                            // komoot responds with the newest tour as first tour
+                            // check if we already have this and skip next pages
+                            if (TourIsAlreadyInDatabase(komootTours.Keys.Max())) {
+                                Tools.DebugLog($"Tour {komootTours.Keys.Max()} is already in the database");
+                                Logfile.Log($"#{kli.carID} Komoot: no new tours");
+                                nextPage = false;
+                            }
                         }
                         else
                         {
@@ -1251,6 +1262,43 @@ VALUES (
                 }
             }
             return komootTours;
+        }
+
+        private static bool TourIsAlreadyInDatabase(long tourID)
+        {
+            try
+            {
+                using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+                {
+                    con.Open();
+                    using (MySqlCommand cmd = new MySqlCommand(@"
+SELECT
+  count(*)
+FROM
+  komoot
+WHERE
+  tourID = @tourID
+", con))
+                    {
+                        cmd.Parameters.AddWithValue("@tourID", tourID);
+                        MySqlDataReader dr = SQLTracer.TraceDR(cmd);
+                        if (dr.Read() && dr[0] != DBNull.Value)
+                        {
+                            if (long.TryParse(dr[0].ToString(), out long _))
+                            {
+                                return true;
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ex.ToExceptionless().FirstCarUserID().Submit();
+                Logfile.Log(ex.ToString());
+            }
+
+            return false;
         }
 
         private static KomootLoginInfo Login(KomootLoginInfo kli)
