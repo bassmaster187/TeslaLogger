@@ -349,8 +349,15 @@ namespace TeslaLoggerNET8.Lucid
             var ms = last_updated_ms - last_updated_ms_before;
             double p = kwhrdiff * 3600000.0 / (double)ms;
 
-            kw = p;
-            car.Log($"kwhr {kwhr} / kwhrdiff {kwhrdiff} / ms {ms} / p: {p}kW");
+            if (Math.Abs(p) < 1000)
+            {
+                kw = p;
+                car.Log($"kwhr {kwhr} / kwhrdiff {kwhrdiff} / ms {ms} / p: {Math.Round(p, 1)} kW");
+            }
+            else
+            {
+                car.Log($"ERROR: kwhr {kwhr} / kwhrdiff {kwhrdiff} / ms {ms} / p: {Math.Round(p, 1)} kW");
+            }
         }
 
         private void InsertBatteryTemperatureData()
