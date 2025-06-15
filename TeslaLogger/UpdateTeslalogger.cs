@@ -1968,7 +1968,7 @@ PRIMARY KEY(id)
                             {
                                 s = s.Replace("Ø °C", "Ø °F");
 
-                                s = s.Replace(" outside_temp_avg", "outside_temp_avg * 9/5 + 32 as outside_temp_avg");
+                                s = s.Replace(" outside_temp_avg", " Round(outside_temp_avg * 9/5 + 32,1) as outside_temp_avg");
                             }
                             else if (f.EndsWith("Verbrauch.json", StringComparison.Ordinal))
                             {
