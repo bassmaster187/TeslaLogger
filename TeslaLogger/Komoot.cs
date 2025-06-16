@@ -151,6 +151,19 @@ namespace TeslaLogger
                 // TODO: .net8 change to TryAdd for performance reasons
                 else if (!positions.ContainsKey(delta_t))
                 {
+                    if (delta_t - lastPosition.delta_t > 4000)
+                    {
+                        long timediff = delta_t - lastPosition.delta_t;
+                        int pseudopositions = (int)Math.Floor((timediff - 2000) / 2000.0);
+                        long step = timediff / pseudopositions;
+                        Tools.DebugLog($"pos delta {delta_t - lastPosition.delta_t} insert pseudo positions: {pseudopositions}");
+                        Tools.DebugLog($"lastpos delta_t: {lastPosition.delta_t}");
+                        for (int i = 1; i <= pseudopositions; i++)
+                        {
+                            Tools.DebugLog($"pseudopos {i} at delta_t {lastPosition.delta_t + step * i}");
+                        }
+                        Tools.DebugLog($"currpos delta_t: {delta_t}");
+                    }
                     Position newPosition = new Position(lat, lng, alt, delta_t, speed);
                     newPosition.dist_km = newPosition.CalculateDistance(lastPosition);
                     distance_calculated += newPosition.dist_km;
