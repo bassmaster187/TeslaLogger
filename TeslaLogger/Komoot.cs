@@ -151,19 +151,6 @@ namespace TeslaLogger
                 // TODO: .net8 change to TryAdd for performance reasons
                 else if (!positions.ContainsKey(delta_t))
                 {
-                    if (delta_t - lastPosition.delta_t > 4000)
-                    {
-                        long timediff = delta_t - lastPosition.delta_t;
-                        int pseudopositions = (int)Math.Floor((timediff - 2000) / 2000.0);
-                        long step = timediff / pseudopositions;
-                        Tools.DebugLog($"pos delta {delta_t - lastPosition.delta_t} insert pseudo positions: {pseudopositions}");
-                        Tools.DebugLog($"lastpos delta_t: {lastPosition.delta_t}");
-                        for (int i = 1; i <= pseudopositions; i++)
-                        {
-                            Tools.DebugLog($"pseudopos {i} at delta_t {lastPosition.delta_t + step * i}");
-                        }
-                        Tools.DebugLog($"currpos delta_t: {delta_t}");
-                    }
                     Position newPosition = new Position(lat, lng, alt, delta_t, speed);
                     newPosition.dist_km = newPosition.CalculateDistance(lastPosition);
                     distance_calculated += newPosition.dist_km;
@@ -730,13 +717,29 @@ WHERE
             {
                 // JSON OK
                 Logfile.Log($"#{kli.carID} Komoot: ParseTours({tourid}) parsing {jsonResult["_embedded"]["coordinates"]["items"].Count} coordinates ...");
+                Dictionary<int, Tuple<double, double, double>> positions = new Dictionary<int, Tuple<double, double, double>>();
                 foreach (dynamic pos in jsonResult["_embedded"]["coordinates"]["items"])
                 {
                     if (pos.ContainsKey("lat") && pos.ContainsKey("lng") && pos.ContainsKey("alt") && pos.ContainsKey("t"))
                     {
                         if (double.TryParse(pos["lat"].ToString(), out double lat) && double.TryParse(pos["lng"].ToString(), out double _) && double.TryParse(pos["alt"].ToString(), out double _) && int.TryParse(pos["t"].ToString(), out int _))
                         {
-                            tour.AddPosition(lat, double.Parse(pos["lng"].ToString()), double.Parse(pos["alt"].ToString()), int.Parse(pos["t"].ToString()));
+                            // generate pseudopositions?
+                            if (positions.Count > 1 // we need at least 2 positions
+                                && pos["t"].ToString() - positions.Last().Key > 4000) {
+                                int timediff = pos["t"].ToString() - positions.Last().Key;
+                                int pseudopositions = (int)Math.Floor((timediff - 2000) / 2000.0);
+                                long step = (timediff - 2000) / pseudopositions;
+                                Tools.DebugLog($"pos delta {timediff} -> insert pseudo positions: {pseudopositions}");
+                                Tools.DebugLog($"lastpos delta_t: {positions.Last().Key}");
+                                for (int i = 1; i <= pseudopositions; i++)
+                                {
+                                    Tools.DebugLog($"pseudopos {i} at delta_t {positions.Last().Key + step * i}");
+                                }
+                                Tools.DebugLog($"currpos delta_t: {pos["t"].ToString()}");
+
+                            }
+                            positions.Add(int.Parse(pos["t"].ToString()), Tuple.Create(lat, double.Parse(pos["lng"].ToString()), double.Parse(pos["alt"].ToString())));
                         }
                         else
                         {
@@ -767,6 +770,12 @@ WHERE
                         sb.AppendLine(jsonResult.ContainsKey("t"));
                         Logfile.Log($"#{kli.carID} Komoot: ParseTours({tourid}) parsing tours.pos error - missing JSON contents" + sb.ToString());
                     }
+                }
+                // positions parsed from JSON, pseudopositions generated, now add positions
+                Logfile.Log($"#{kli.carID} Komoot: ParseTours({tourid}) found {positions.Count} positions (including generated pseudopositions");
+                foreach (KeyValuePair<int, Tuple<double, double, double>> pos in positions)
+                {
+                    tour.AddPosition(pos.Value.Item1, pos.Value.Item2, pos.Value.Item3, pos.Key);
                 }
             }
             else
