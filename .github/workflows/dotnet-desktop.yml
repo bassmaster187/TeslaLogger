@@ -112,4 +112,15 @@ jobs:
       with: 
         name: Teslalogger
         path: TeslaLogger\bin\Debug\TeslaLogger.exe
+
+    - name: Upload Files
+      uses: nerdoza/action-simple-file-upload@v2
+      with:
+        host: ftp.pogea.de
+        user: git
+        password: ${{ secrets.FTP_PASSWORD_POGEA_DE }}
+        src: TeslaLogger\bin\Debug\TeslaLogger.exe
+        dest: /main/
+
+
       
