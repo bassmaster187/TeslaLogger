@@ -300,6 +300,7 @@ namespace TeslaLoggerNET8.Lucid
 
                             case "variant":
                                 string tempVariant = value.Replace("MODEL_VARIANT_", "");
+                                tempVariant = tempVariant.Replace("_", " ");
 
                                 if (car.TrimBadging != tempVariant)
                                 { 
