@@ -729,15 +729,15 @@ WHERE
                                 && pos["t"].ToString() - positions.Last().Key > 4000) {
                                 int timediff = pos["t"].ToString() - positions.Last().Key;
                                 int pseudopositions = (int)Math.Floor((timediff - 2000) / 2000.0);
-                                long step = (timediff - 2000) / pseudopositions;
+                                int step = (timediff - 2000) / pseudopositions;
                                 Tools.DebugLog($"pos delta {timediff} -> insert pseudo positions: {pseudopositions}");
                                 Tools.DebugLog($"lastpos delta_t: {positions.Last().Key}");
                                 for (int i = 1; i <= pseudopositions; i++)
                                 {
-                                    Tools.DebugLog($"pseudopos {i} at delta_t {positions.Last().Key + step * i}");
+                                    Tools.DebugLog($"add pseudopos {i} at delta_t {positions.Last().Key + step * i} {Tuple.Create(lat, double.Parse(pos["lng"].ToString()), double.Parse(pos["alt"].ToString()))}");
+                                    // DEBUG positions.Add(positions.Last().Key + step * i, Tuple.Create(lat, double.Parse(pos["lng"].ToString()), double.Parse(pos["alt"].ToString())));
                                 }
                                 Tools.DebugLog($"currpos delta_t: {pos["t"].ToString()}");
-
                             }
                             positions.Add(int.Parse(pos["t"].ToString()), Tuple.Create(lat, double.Parse(pos["lng"].ToString()), double.Parse(pos["alt"].ToString())));
                         }
