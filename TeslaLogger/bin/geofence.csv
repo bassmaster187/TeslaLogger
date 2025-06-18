@@ -1823,6 +1823,7 @@ Supercharger-V4 DE-Bochum,51.5068,7.192052
 Supercharger-V4 DE-Bockenem,52.00238,10.135615
 Supercharger-V3 DE-Bonn - Bonner Bogen,50.718553,7.152138
 Supercharger-V3 DE-Braak,53.617876,10.239352
+Supercharger-V4 DE-Braunschweig (Globus),52.24386,10.51293
 Supercharger-V4 DE-Bremen,53.049614,8.820908
 Supercharger DE-Brinkum,53.028326,8.808758
 Supercharger DE-Bruchsal,49.13837,8.56242
@@ -1850,6 +1851,7 @@ Supercharger-V3 DE-Eimeldingen,47.62669,7.59941
 Supercharger-V4 DE-Eislingen,48.695886,9.686757
 Supercharger-V3 DE-Ellwangen - Hotel Montana,48.959163,10.173781
 Supercharger DE-Ellwangen,48.955835,10.182623,55
+Supercharger-V4 DE-Elmshorn,53.74173,9.70839,40
 Supercharger DE-Emsbüren,52.359338,7.26476
 Supercharger-V3 DE-Endsee,49.445152,10.246912,30
 Supercharger-V3 DE-Erfstadt,50.796478,6.77994
@@ -1902,6 +1904,7 @@ Supercharger-V3 DE-Hemsbach,49.593966,8.632465
 Supercharger DE-Hengersberg,48.76555,13.04668
 Supercharger-V4 DE-Herbolzheim,48.22704,7.75368
 Supercharger-V4 DE-Herborn,50.67534,8.279983,40
+Supercharger-V4 DE-Herford,52.12684,8.67533
 Supercharger-V3 DE-Hermsdorf,50.889889,11.871397,30
 Supercharger-V3 DE-Herne (Zurbrüggen),51.531182,7.209585
 Supercharger-V3 DE-Herrieden,49.257951,10.501761
@@ -1943,6 +1946,7 @@ Supercharger-V3 DE-Kaltenkirchen,53.846223,9.936353,10
 Supercharger-V4 DE-Kamen,51.570178,7.675317
 Supercharger DE-Kappel-Grafenhausen,48.281347,7.77755
 Supercharger-V3 DE-Karlsruhe,48.999096,8.428591,30
+Supercharger-V4 DE-Karlsruhe-Grünwinkel,49.00952,8.35407
 Supercharger-V3 DE-Kassel (Cafe del Sol),51.308679,9.545969
 Supercharger-V3 DE-Kassel (GALERIA),51.31331,9.493391
 Supercharger-V3 DE-Kaufering,48.08077,10.858599,30
@@ -1952,6 +1956,7 @@ Supercharger-V3 DE-Kleinostheim,49.993998,9.070655
 Supercharger-V3 DE-Knetzgau,49.982399,10.555616
 Supercharger-V4 DE-Koblenz-Bubenheim (Globus),50.385984,7.553784
 Supercharger-V4 DE-Konstanz Lago,47.656219,9.176227
+Supercharger-V4 DE-Kornwestheim,48.86046,9.19826
 Supercharger-V4 DE-Krefeld,51.321583,6.6018
 Supercharger-V3 DE-Köln Bonn Airport,50.883137,7.111943
 Supercharger-V4 DE-Köln Carlswerk,50.966078,7.014042
@@ -2037,6 +2042,7 @@ Supercharger-V3 DE-Piding,47.764,12.904551,27
 Supercharger-V3 DE-Plattling,48.7887,12.89745
 Supercharger-V3 DE-Plauen,50.497406,12.170422
 Supercharger-V3 DE-Posthausen,53.057581,9.165191,35
+Supercharger-V4 DE-Prüm,50.20577,6.42568
 Supercharger-V4 DE-Quickborn,53.742746,9.943359,20
 Supercharger DE-Rade,53.369702,9.802181
 Supercharger-V3 DE-Rade-Appel,53.387855,9.796527
@@ -2053,6 +2059,7 @@ Supercharger-V3 DE-Rhüden,51.947243,10.140858,6
 Supercharger-V3 DE-Rhüden,51.947273,10.140962,9
 Supercharger-V3 DE-Rhüden,51.947298,10.140858,6
 Supercharger-V4 DE-Ringsheim,48.249992,7.765669,18
+Supercharger-V4 DE-Rosengarten,53.37879,9.89814
 Supercharger-V3 DE-Rosenheim,47.817007,12.120582
 Supercharger-V4 DE Rostock-Bentwisch,54.112772,12.192144
 Supercharger-V3 DE-Rüsselsheim,49.96834,8.39035,20
@@ -2072,18 +2079,21 @@ Supercharger-V3 DE Schwarzheide,51.469478,13.869274
 Supercharger DE-Schweitenkirchen,48.510765,11.582025,19
 Supercharger-V4 DE-Schwetzingen,49.413803,8.543361
 Supercharger-V3 DE-Schönefeld,52.388723,13.498047,30
+Supercharger-V4 DE-Siegen,50.85664,8.01141
+Supercharger-V4 DE-Simmern,49.98277,7.54717
 Supercharger-V3 DE-Sindelsdorf,47.728372,11.361923
 Supercharger-V3 DE Sittensen,53.287441,9.508025,40
 Supercharger-V4 DE-Soest,51.5669,8.1304
 Supercharger-V3 DE Solingen,51.130189,6.995972
 Supercharger-V3 DE-Soltau-Ost,52.9834,9.925491,40
 Supercharger-V4 DE Stuckenborstel,53.116895,9.204895
-Supercharger DE-Sulz-Vöhringen,48.34307,8.66262,40
+Supercharger-V4 DE-Sulz-Vöhringen,48.34307,8.66262,40
 Supercharger-V4 DE-Sulz-Vöhringen,48.34345,8.66381,20
-Supercharger DE-Sulz-Vöhringen,48.34356,8.66315,30
+Supercharger-V4 DE-Sulz-Vöhringen,48.34356,8.66315,30
 Supercharger-V4 DE-Sulzbach (Taunus) MTZ,50.116696,8.530323,18
 Supercharger DE-Süderholz,54.093037,13.085923
 Supercharger DE-Süderholz,54.093304,13.087853,30
+Supercharger-V4 DE-Tiengen,47.98355,7.71917
 Supercharger-V3 DE-Troisdorf,50.813724,7.107381
 Supercharger-V3 DE-Türkheim,48.042516,10.620137
 Supercharger DE-Uckerfelde,53.23499,13.98606
@@ -2111,14 +2121,17 @@ Supercharger-V3 DE-Wertheim-Almosenberg,49.772295,9.587571
 Supercharger-V3 DE-Wertheim-Almosenberg,49.772417,9.58423
 Supercharger-V3 DE-Wetzlar,50.552762,8.532845,30
 Supercharger DE-Weyarn,47.865307,11.790695
+Supercharger-V4 DE-Wiesbaden (Globus),50.0566,8.34306
 Supercharger DE-Wiesbaden,50.059848,8.345133
 Supercharger-V4 DE-Wiesbaden-Äppelallee,50.046184,8.219883
 Supercharger-V4 DE-Wildau,52.3136,13.60497,40
 Supercharger-V4 DE-Willich,51.279442,6.508057
 Supercharger DE-Wilnsdorf,50.816894,8.085813
+Supercharger-V4 DE-Windischeschenbach,49.80454,12.18425,30
 Supercharger-V3 DE Winsen (Luhe),53.35028,10.147426
 Supercharger-V3 DE-Wismar,53.879307,11.454047
 Supercharger-V3 DE-Wittenburg,53.507361,11.096852
+Supercharger-V4 DE-Wittlich (Globus),49.98189,6.9086
 Supercharger DE-Wittlich,49.97003,6.86175
 Supercharger-V4 DE-Wolfsburg,52.423764,10.732424,20
 Supercharger-V3 DE-Woringen,47.923272,10.209062
@@ -2321,6 +2334,7 @@ Supercharger-V3 FR-Annecy - Seynod,45.877092,6.0879
 Supercharger-V3 FR-Annemasse,46.194771,6.255439
 Supercharger FR-Appoigny,47.85183,3.542802
 Supercharger FR-Appoigny,47.853123,3.543243
+Supercharger-V4 FR-Arc-sur-Tille,47.34517,5.15745
 Supercharger FR-Archamps,46.136917,6.124306
 Supercharger-V4 FR-Argenton-sur-Creuse,46.573218,1.502358
 Supercharger-V3 FR-Artenay,48.082979,1.864693
@@ -4414,6 +4428,7 @@ Supercharger US-Lowell AR,36.255397,-94.152674
 Supercharger-V3 US-Lubbock TX,33.520866,-101.962385
 Supercharger US-Ludington MI,43.956372,-86.376006
 Supercharger-V3 US-Luling TX,29.649931,-97.592014
+Supercharger-V3 US-Lumberton NC W 5th St,34.62255,-79.04971
 Supercharger US-Lumberton NC,34.666489,-79.002238
 Supercharger US-Lusk WY,42.75601,-104.45202
 Supercharger-V3 US-Lynchburg VA,37.324963,-79.190054
@@ -4622,6 +4637,7 @@ Supercharger-V3 US-New Braunfels TX,29.727813,-98.07727
 Supercharger-V3 US-New Caney TX,30.131599,-95.237274
 Supercharger-V3 US-New Castle DE - Christiana Bypass,39.665108,-75.66706
 Supercharger-V3 US-New Castle DE - North Dupont Highway,39.7094,-75.5631
+Supercharger-V3 US-New Castle DE New Castle Avenue,39.6955,-75.556
 Supercharger-V3 US-New Haven CT,41.296561,-72.918098
 Supercharger-V3 US-New London CT,41.370955,-72.119373
 Supercharger-V3 US-New Milford CT,41.539009,-73.421177
@@ -6323,7 +6339,7 @@ Allego DE-Wang Semptstr. 15,48.484072,12.005799
 Allego DE-Wathlingen Nienhagener Str. 15,52.541847,10.133864
 Allego DE-Westerstede Leererstr. 7,53.287879,7.892675
 Allego DE-Wilhelmshaven Posener Straße 36-38,53.574008,8.094087
-Allego DE-Windischeschenbach Am Gewerbepark 2A,49.804537,12.184248
+Allego DE-Windischeschenbach Autohof Bergler,49.80413,12.18416,20
 Allego DE-Winsen Osttangente 210,53.350665,10.223448
 Allego DE-Wismar Kapitänspromenade 29-31,53.881171,11.439219
 Allego DE-Wittstock/Dosse Jägerstraße 1,53.067164,12.532995
@@ -8048,7 +8064,7 @@ E.ON DE-Duisburg Beeker Strasse 51,51.48432,6.76359
 E.ON DE-Döbeln An der A14,51.090952,13.236838
 E.ON DE-Dötlingen An der A1,52.913791,8.425558
 E.ON DE-Eberswalde Eberswalder Straße 4,52.840038,13.769135
-E.ON DE-Elmshorn Teppich Kibek,53.741661,9.707776
+E.ON DE-Elmshorn Ramskamp,53.74165,9.70775,20
 E.ON DE-Eschweiler BAB 4,50.817141,6.215553
 E.ON DE-Essen Altenessener Str. 610,51.51003,7.007423
 E.ON DE-Essen Langenbergerstraße 482d,51.457152,7.013515
@@ -9160,6 +9176,7 @@ EnBW DE-Frankfurt am Main Hanauer Landstraße,50.131929,8.764669
 EnBW DE-Frankfurt am Main Victor-Slotosch-Straße,50.143463,8.747893
 EnBW DE-Frechen Europaallee,50.916874,6.833987
 EnBW DE-Frechen Europaallee,50.917143,6.833331
+EnBW DE-Frechen Europaallee,50.91896,6.83783
 EnBW DE-Frechen,50.912347,6.819812
 EnBW DE-Fredersdorf-Vogelsdorf,52.500328,13.735027
 EnBW DE-Freiamt Badstr.,48.179778,7.901749
@@ -13122,6 +13139,7 @@ Ionity NO-Alvdal,62.11837,10.61407
 Ionity NO-Aspøya,63.01096,7.97538
 Ionity NO-Aurland,60.89896,7.2108
 Ionity NO-Bagn,60.82244,9.55347
+Ionity NO-Bardu Fogd Holmboes gate,68.86166,18.34872
 Ionity NO-Bergen,60.48457,5.37679
 Ionity NO-Dal,60.25416,11.18202
 Ionity NO-Dombås,62.07428,9.12514
@@ -14042,7 +14060,7 @@ Lidl DE-Borna Lobstädter Straße 17,51.122239,12.488086
 Lidl DE-Bottrop Horster Straße 262,51.533811,6.954136
 Lidl DE-Brake Am Stadion 2,53.331286,8.459482
 Lidl DE-Bramsche Lindenstraße 64,52.417531,7.976095
-Lidl DE-Braunschweig Otto-von-Guericke-Straße,52.243924,10.512374
+Lidl DE-Braunschweig Otto-von-Guericke-Straße,52.24529,10.5137
 Lidl DE-Bremen-Findorff Hemmstraße 340,53.101454,8.813231
 Lidl DE-Bremen-Findorff Hemmstraße,53.101071,8.814084
 Lidl DE-Bremervörde Alte Straße 35,53.486893,9.14105
@@ -16502,8 +16520,6 @@ STAWAG DE-Monschau Trierer Straße,50.573817,6.262871
 STAWAG DE-Simmerath In den Bremen,50.607278,6.309555
 
 Steinhoff DE-Bad Ems Silberau,50.33236,7.709039
-
-StromSpeicherMarkt DE-Freiburg im Breisgau Im Maierbrühl,47.983546,7.719172
 
 StromTankstelle DE-Waltenhofen Ahornweg,47.682945,10.308779
 
