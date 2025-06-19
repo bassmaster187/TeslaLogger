@@ -1843,7 +1843,7 @@ Supercharger-V4 DE-Dresden Elbepark,51.08533,13.693485,30
 Supercharger-V4 DE-Dresden Kaufpark,50.995,13.8003
 Supercharger-V4 DE-Duisburg,51.481697,6.809756
 Supercharger-V3 DE-Düsseldorf - Ando Campus,51.251629,6.794317
-Supercharger-V4 DE-Ebersdorf bei Coburg,50.223548,11.052627
+Supercharger-V4 DE-Ebersdorf bei Coburg,50.223548,11.052627,35
 Supercharger-V3 DE-Eching,48.306431,11.634784
 Supercharger-V4 DE Eging am See,48.689644,13.212607
 Supercharger-V4 DE Eichenzell Rhönhof,50.487892,9.708998,40
@@ -5600,6 +5600,7 @@ Aldi DE-Düsseldorf Nürnberger Straße,51.171278,6.860667
 Aldi DE-Düsseldorf Paulsmühlenstraße,51.163983,6.880664
 Aldi DE-Eberbach Neuer Weg-Nord,49.47352,8.98602
 Aldi DE-Echterdingen,48.695676,9.168745
+Aldi DE-Eimeldingen Im Rebacker,47.62598,7.5996,30
 Aldi DE-Eisenberg (Pfalz) Am Gielbrunnen,49.55828,8.086
 Aldi DE-Eisingen,49.761243,9.845965,20
 Aldi DE-Elsenfeld Bahnhofstraße,49.841579,9.156343
@@ -5657,6 +5658,7 @@ Aldi DE-Idstein Richard-Klinger-Straße,50.206373,8.260126
 Aldi DE-Idstein Richard-Klinger-Straße,50.206969,8.2604
 Aldi DE-Ingolstadt Despag-Straße,48.776139,11.451806
 Aldi DE-Ingolstadt Münchener Straße,48.735361,11.43925
+Aldi DE-Jestetten Schaffhauser Straße,47.653267,8.575343,30
 Aldi DE-Kaarst,51.218956,6.633498
 Aldi DE-Kaisersesch Koblenzer Straße,50.2353,7.146365
 Aldi DE-Kaiserslautern Königstraße,49.437306,7.757167
@@ -5726,6 +5728,7 @@ Aldi DE-Mechernich Kölner Straße,50.617979,6.656612
 Aldi DE-Meerbusch Hessenweg,51.236658,6.693345,15
 Aldi DE-Memmingen,47.972183,10.184331
 Aldi DE-Merchweiler,49.349395,7.050618
+Aldi DE-Mering Wallbergstraße,48.254624,10.986687
 Aldi DE-Merzenich Am Merzpark,50.831314,6.532987
 Aldi DE-Merzhausen Freiburger Tor,47.972737,7.828132
 Aldi DE-Merzig Rieffstraße,49.436861,6.632111
@@ -5774,7 +5777,7 @@ Aldi DE-Neuss-Weißenberg Normannenstraße,51.216806,6.682528
 Aldi DE-Niederwerrn Schweinfurter Straße,50.058361,10.188778
 Aldi DE-Nürnberg Geisseestr.,49.434974,11.041029
 Aldi DE-Nürnberg Grolandstraße,49.465417,11.076167
-Aldi DE-Nürnberg Lübener Straße,49.410389,11.14
+Aldi DE-Nürnberg Lübener Straße,49.410389,11.14,30
 Aldi DE-Nürnberg Münchenerstr.,49.400938,11.117048
 Aldi DE-Nürnberg Ostendstraße,49.456361,11.121444
 Aldi DE-Nürnberg Regensburgerstr.,49.435626,11.122648
@@ -6526,6 +6529,7 @@ ARAL DE-Heppenheim Lorscher Straße,49.643895,8.625823
 ARAL DE-Hildesheim Albert-Einstein-Straße,52.160464,9.997162,25
 ARAL DE-Hoppegarten Altlandsberger Chaussee,52.54408,13.646934
 ARAL DE-Hürth Luxemburger Straße,50.89448,6.90494
+ARAL DE-Ingolstadt Fauststraße,48.740105,11.435138
 ARAL DE-Jena,50.877065,11.621512
 ARAL DE-Kehl Straßburger Straße,48.575577,7.818461
 ARAL DE-Kleinostheim Aschaffenburger Straße,49.99504,9.0686,20
@@ -6596,6 +6600,7 @@ Audi DE-Ingolstadt Pascalstraße,48.785087,11.398401
 Audi DE-Ingolstadt Senefelderstraße,48.78145,11.418156
 Audi DE-Karlsruhe Gerwigstraße,49.006383,8.443331
 Audi DE-München Albrechtstraße,48.154947,11.540685
+Audi DE-München Flughafen,48.349538,11.757035
 Audi DE-München Wasserburger Landstraße,48.119381,11.679983
 Audi DE-München Zielstattstraße,48.10333,11.53178
 Audi DE-München-Flughafen Nordallee,48.356508,11.77095
@@ -6999,6 +7004,8 @@ BundK DE-Stendal Heerener Straße,51.73014,8.72137
 BundK DE-Uelzen Nordallee,52.986693,10.547285
 BundK DE-Vechta Osloer Straße,52.730668,8.264596
 BundK DE-Winsen/Luhe Lüneburger Straße,53.352199,10.227263
+
+Bürger DE-Moosburg an der Isar Viehmarktplatz,48.466018,11.93983
 
 Camer IT-Lecce Via G. Marconi,40.351696,18.17437
 
@@ -8047,6 +8054,7 @@ E.ON DE-Bad Schwartau Eutiner Ring,53.917803,10.696242
 E.ON DE-Bad Segeberg Wasserwerk,53.938991,10.28695
 E.ON DE-Baden-Baden An der A5,48.80881,8.18106
 E.ON DE-Bautzen An der A4,51.198028,14.330231
+E.ON DE-Bayreuth Luitpoldplatz,49.945647,11.576714,30
 E.ON DE-Bedburg Händelstraße 25,50.978263,6.56339
 E.ON DE-Bensheim Ampèrestraße,49.675572,8.591313
 E.ON DE-Bensheim An der A,49.690307,8.603811
@@ -8172,6 +8180,7 @@ E.ON DE-Mellrichstadt Raststätte Mellrichstädter Höhe Süd,50.421217,10.35089
 E.ON DE-Michendorf An der A10,52.302979,13.01724
 E.ON DE-Mittenwalde An der A13,52.207556,13.607545
 E.ON DE-Mühlenfließ An der A9,52.133086,12.754556
+E.ON DE-München Wilhelm-Hale-Straße,48.149157,11.521574
 E.ON DE-Münster An der A1,51.942285,7.551004
 E.ON DE-Nellingen An der A8,48.520649,9.806683
 E.ON DE-Neuenhagen bei Berlin An der A10,52.542215,13.689707
@@ -8331,6 +8340,7 @@ eCarUp DE-Linden Konrad-Zuse-Straße,50.53575,8.657672
 EcoEsco IT-Palau Via Fonte Vecchia,41.178723,9.383838
 
 Ecotap DE-Goch Am Bössershof,51.665633,6.173346
+Ecotap DE-Nürnberg Lübener Straße,49.410359,11.139266,25
 Ecotap NL-Wemeldinge Ruisweg,51.521996,3.980178
 
 ecowerk DE-Tübingen Eisenhutstraße,48.510943,9.070798,20
@@ -9259,7 +9269,7 @@ EnBW DE-Fulda,50.529409,9.690463
 EnBW DE-Fuldabrück,51.272833,9.504195
 EnBW DE-Fürholzen Ost,48.336792,11.611033
 EnBW DE-Fürstenau,52.5144,7.686079
-EnBW DE-Fürstenfeldbruck Nicolaus-Otto-Str.,48.185753,11.236946
+EnBW DE-Fürstenfeldbruck Nicolaus-Otto-Straße,48.186164,11.237266,30
 EnBW DE-Fürstenwalde Juri-Gagarin-Straße,52.372568,14.073217
 EnBW DE-Gadebusch,53.697744,11.104169
 EnBW DE-Gaggenau Ringstraße,48.818245,8.302521
@@ -9507,7 +9517,7 @@ EnBW DE-Ispringen Bahnhofstr.,48.915481,8.670491
 EnBW DE-Ispringen Turnstr.,48.913556,8.668123
 EnBW DE-Jagsttal Ost,49.322951,9.415858,20
 EnBW DE-Jagsttal West,49.324021,9.412184
-EnBW DE-Jestetten Saarstrasse,47.653199,8.574437
+EnBW DE-Jestetten Saarstrasse,47.653246,8.574305,30
 EnBW DE-Jestetten Schaffhauser Straße,47.651006,8.57226
 EnBW DE-Jungingen Märzengasse,48.326571,9.041705
 EnBW DE-Jülich,50.92911,6.3565
@@ -9592,6 +9602,7 @@ EnBW DE-Koblenz An der Römervilla,50.381636,7.563319,20
 EnBW DE-Koblenz Autohof Rübenacher Wald,50.347123,7.507522,12
 EnBW DE-Koblenz Bauhaus,50.382329,7.573037
 EnBW DE-Koblenz DM,50.363464,7.571934
+EnBW DE-Konstanz Line-Eid-Straße,47.673474,9.154451
 EnBW DE-Korntal-Münchingen Martin-Luther-Str.,48.8296,9.1203
 EnBW DE-Korntal-Münchingen Schwieberdinger Str.,48.84839,9.12593
 EnBW DE-Korntal-Münchingen Schöckinger Straße,48.85269,9.089186
@@ -10566,6 +10577,7 @@ EnBW DE-Öhringen Siemensstraße,49.207153,9.480891
 EnBW DE-Überlingen Lippersreuther Str.,47.770249,9.172718
 
 Eneco DE-Kiel Alte Weide,54.33118,10.11332
+Eneco DE-Landshut Wittstraße,48.53071,12.146114,30
 Eneco DE-Ludwigsburg Gänsfußallee,48.89199,9.17599
 Eneco DE-Pentling Hohengebrachinger Straße,48.97936,12.06739
 
@@ -10661,12 +10673,17 @@ Energie-Oberösterreich AT-Liezen Gesäusestraße,47.55946,14.253905
 Energie-Oberösterreich AT-Liezen Gesäusestraße,47.559767,14.253796
 Energie-Oberösterreich AT-Linz Energiestraße,48.292685,14.290674
 
+energie-schwaben DE-Augsburg Bayerstraße,48.343625,10.884503
+
 Energie-Südbayern DE-Alling Hoflacher Straße,48.144636,11.301403
+Energie-Südbayern DE-Dießen am Ammersee Reitstege,47.948736,11.107325
 Energie-Südbayern DE-Dingolfing Fischerei,48.631823,12.494977
 Energie-Südbayern DE-Dingolfing Rennstraße,48.629654,12.49485
 Energie-Südbayern DE-Dingolfing Wollerstraße,48.630458,12.499095
+Energie-Südbayern DE-Ettal Linderhof,47.569589,10.95571
 Energie-Südbayern DE-Irschenberg Wendling,47.827991,11.902965,10
 Energie-Südbayern DE-Irschenberg Wendling,47.828387,11.900902,10
+Energie-Südbayern DE-Mittenwald Dammkarstraße,47.440957,11.266573
 Energie-Südbayern DE-Sulzemoos Ohmstraße,48.280144,11.269269
 
 Energie360 CH-Dietikon Silbernstrasse,47.41798,8.39301
@@ -10853,6 +10870,7 @@ EVN AT-Amstetten Kupferstraße,48.116694,14.892285
 EVN AT-Amstetten Otto-Schott-Straße,48.117532,14.910831
 EVN AT-Amstetten Ybbsstraße,48.113975,14.870678
 EVN AT-Brunn am Gebirge Johann Steinböck-Straße,48.105502,16.310296
+EVN AT-Böheimkirchen Hainfelder Straße,48.195251,15.764868
 EVN AT-Böheimkirchen Reith,48.187943,15.765036
 EVN AT-Eggenburg Grafenbergerstraße,48.643769,15.822473
 EVN AT-Herzogenburg Traismauerstraße,48.290148,15.694952
@@ -12344,6 +12362,7 @@ GreenWay PL-Szczecinek Jana Pawła,53.710518,16.690281
 GreenWay PL-Słupia pod Bralinem,51.297194,17.77746
 GreenWay PL-Tarnów Lwowska,50.014223,21.011799
 Greenway PL-Warszawa BMW,52.18526,21.00287
+GreenWay PL-Wyszków aleja Piłsudskiego,52.601506,21.439874
 GreenWay PL-Łaziska Powstańców Śląskich,49.94362,18.430292
 GreenWay SK-Banská Bystrica Na Troskách,48.731089,19.135867,8
 GreenWay SK-Rožňava Krásnohorská,48.660715,20.536277
@@ -12374,6 +12393,7 @@ Grüne-Säule DE-Glauchau Leipziger Straße,50.821075,12.542552
 Grüne-Säule DE-Magdeburg Am Fuchsberg,52.11238,11.61701
 
 GW-Finnentrop DE-Finnentrop Bamenohler Straße,51.172249,7.964876
+GW-GP DE-Garmisch-Partenkirchen Am Kreuzeckbahnhof,47.472112,11.063397
 GW-Grefrath DE-Grefrath Hauptstraße,51.34029,6.36847
 GW-Murnau DE-Murnau am Staffelsee Bahnhofstraße,47.679482,11.198206
 
@@ -12542,6 +12562,7 @@ illwerke-vkw AT-Rankweil Langgasse,47.272062,9.61733
 illwerke-vkw AT-Riefensberg Dorf,47.504448,9.963311
 illwerke-vkw AT-Schwarzenberg Hof,47.413951,9.855151
 illwerke-vkw AT-Silbertal Dorfstraße,47.094353,9.980518
+illwerke-vkw DE-Lindenberg im Allgäu Sedanstraße,47.602733,9.883529
 
 Ingeteam IT-Prato Sardo Via Antonio Cambosu,40.333609,9.273108
 
@@ -13382,6 +13403,7 @@ Kaufland DE-Arnsberg Westring,51.430398,8.010905
 Kaufland DE-Arnstadt Alfred-Ley-Straße 12,50.855904,10.955762
 Kaufland DE-Aschaffenburg,49.968144,9.165434
 Kaufland DE-Augsburg Meraner Straße 6,48.380871,10.932866
+Kaufland DE-Augsburg Reichenberger Straße,48.363758,10.929175
 Kaufland DE-Backnang Industriestraße,48.935862,9.445813
 Kaufland DE-Backnang,48.962571,9.43141
 Kaufland DE-Bad Dürrheim,48.03049,8.52575
@@ -13431,7 +13453,7 @@ Kaufland DE-Coesfeld Hansestraße,51.938657,7.165994
 Kaufland DE-Coswig Salzstraße 16a,51.133246,13.585782
 Kaufland DE-Cottbus Hardenbergstraße,51.734451,14.333941
 Kaufland DE-Crailsheim,49.140163,10.034126,10
-Kaufland DE-Dachau Danziger Straße 1,48.258571,11.46666
+Kaufland DE-Dachau Danziger Straße,48.258722,11.468381
 Kaufland DE-Dallgow-Döberitz,52.530752,13.080011
 Kaufland DE-Dillingen an der Donau Johannes-Scheiffele-Straße 3-7,48.578666,10.478157
 Kaufland DE-Dillingen/Saar Daimlerstraße 4,49.36785,6.71343
@@ -13512,7 +13534,7 @@ Kaufland DE-Köln Boltensternstraße 104,50.972533,6.976868
 Kaufland DE-Köln Frankfurter Straße 87A,50.958903,7.015017
 Kaufland DE-Köln Ostmerheimer Straße,50.941765,7.051004
 Kaufland DE-Königs Wusterhausen Luckenwalder Str.7,52.294791,13.620696
-Kaufland DE-Königsbrunn Germanenstraße 16,48.286884,10.890218
+Kaufland DE-Königsbrunn Germanenstraße,48.287018,10.89103
 Kaufland DE-Künzelsau Bergstraße 9,49.277427,9.683906
 Kaufland DE-Lahr/Schwarzwald Offenburger Straße 11,48.344966,7.841325
 Kaufland DE-Leinefelde Bahnhofstraße,51.387747,10.32775
@@ -13569,7 +13591,7 @@ Kaufland DE-Neustadt an der Aisch Robert-Bosch-Straße 2,49.5813,10.637254
 Kaufland DE-Neustadt an der Donau Gewerbepark 48,48.798193,11.76134
 Kaufland DE-Neusäß Daimlerstraße 18,48.394243,10.82446
 Kaufland DE-Nördlingen Raiffeisenstraße 4,48.857513,10.480366
-Kaufland DE-Nürnberg Dianaplatz 23-25,49.427406,11.066446
+Kaufland DE-Nürnberg Dianaplatz,49.426924,11.066389
 Kaufland DE-Nürnberg Schwabacher Straße 99,49.436756,11.051168
 Kaufland DE-Oberasbach,49.435136,10.967694
 Kaufland DE-Offenburg Okenstrasse 74,48.481463,7.94686
@@ -13590,7 +13612,7 @@ Kaufland DE-Rees Grüttweg 42-46,51.767412,6.381882
 Kaufland DE-Regensburg Hans-Hayder-Straße 2,49.03398,12.111104
 Kaufland DE-Rendsburg Schleswiger Chaussee,54.319974,9.636575
 Kaufland DE-Rheda-Wiedenbrück Bahnhofstraße 36,51.852895,8.287195
-Kaufland DE-Rheinfelden,47.575215,7.799236
+Kaufland DE-Rheinfelden,47.575442,7.798298
 Kaufland DE-Riegelsberg Saarbrücker Straße 262,49.322677,6.939136
 Kaufland DE-Ritterhude Rosenhügel 5,53.180804,8.708573
 Kaufland DE-Rosenheim Kufsteiner Straße 124,47.838391,12.120908
@@ -13635,7 +13657,7 @@ Kaufland DE-Troisdorf,50.813239,7.1557
 Kaufland DE-Tuttlingen Stockacher Straße 146,47.973943,8.827381
 Kaufland DE-Tübingen,48.514286,9.066617
 Kaufland DE-Uhingen,48.714102,9.56216
-Kaufland DE-Unterschleißheim Andreas-Danzer-Weg 2,48.285699,11.561345
+Kaufland DE-Unterschleißheim Andreas-Danzer-Weg,48.28552,11.56078
 Kaufland DE-Velbert,51.335796,7.049863
 Kaufland DE-Verden (Aller) Schulstraße 22,52.952689,9.235589
 Kaufland DE-Vilshofen an der Donau,48.607649,13.170784
@@ -13733,6 +13755,10 @@ Kia BG-Sofia Gorublyane Mladost,42.636691,23.415721
 
 Klindwort-BHKW DE-Bad Schwartau Auguststraße,53.917378,10.697308
 
+KommEnergie DE-Eichenau Budrio-Allee,48.167563,11.31263
+KommEnergie DE-Puchheim Aubinger Weg,48.169572,11.36394
+KommEnergie DE-Puchheim Aubinger Weg,48.169599,11.362819
+
 Kople NO-Andenes Industriveien,69.310198,16.098938
 Kople NO-Hammerfest Jernbanetrasken,70.66394,23.67754
 
@@ -13811,6 +13837,7 @@ LEW DE-Jengen,48.003413,10.721623
 LEW DE-Krumbach,48.245095,10.361661,10
 LEW DE-Pfaffenhausen,48.120746,10.457604
 LEW DE-Pforzen,47.933544,10.607971
+LEW DE-Steingaden Kissingerstraße,47.702092,10.861947
 
 LichtBlick DE-Andernach Am weißen Haus,50.418419,7.418061
 LichtBlick DE-Bad Fallingborstel Becklingr Str.,52.897467,9.777757
@@ -13871,7 +13898,6 @@ LichtBlick DE-Kitzingen Im Richthofen Circle,49.747972,10.188363
 LichtBlick DE-Künzelsau Dieselstraße,49.258091,9.67806
 LichtBlick DE-Laichingen Wilhelm-Maybach-Straße,48.493278,9.711083
 LichtBlick DE-Landau an der Isar Kleegartenstraße,48.686023,12.712283
-LichtBlick DE-Landshut Parkplatz Grieserwiese,48.531097,12.145354
 LichtBlick DE-Lauterbach Bleichstraße,50.638312,9.402692
 LichtBlick DE-Lautertal Reutersgasse,50.295118,10.980004
 LichtBlick DE-Lippstadt Eickelbornstr.,51.653244,8.214608
@@ -14829,8 +14855,10 @@ Mer DE-Grammow Raststätte Lindholz,54.054634,12.630382
 Mer DE-Kalbach Uttrichshausen Ost,50.419009,9.737387
 Mer DE-Kirchlengern Alfred-Krupp-Straße,52.182228,8.657717
 Mer DE-Kolbermoor Carl-Jordan-Straße,47.843179,12.063993
+Mer DE-Landshut Watzmannstraße,48.537604,12.119756
 Mer DE-Lohfelden Kassel Ost,51.268231,9.522843
 Mer DE-Ludwigshafen Am Penzinger Feld,48.053699,10.890181
+Mer DE-Marktl Postmeisterstraße,48.2479,12.834905
 Mer DE-Mörsdorf Raststätte Teufelstal,50.875728,11.808333
 Mer DE-Mörsdorf Raststätte Teufelstal,50.877383,11.8076
 Mer DE-Mühldorf am Inn Oderstraße,48.234887,12.541419
@@ -14908,6 +14936,7 @@ MOON AT-Mistelbach Ernstbrunnerstraße,48.557928,16.562185
 MOON AT-Neusiedl Josef Kamper Straße,47.971205,16.853501
 MOON AT-Pöllan Gewerbepark,46.696503,13.644015
 MOON AT-Spittal an der Drau Villacher Straße,46.792623,13.508709
+MOON DE-Anger Hauptstraße,47.790725,12.869243
 MOON DE-Augsburg Donaustraße 8,48.375551,10.931804
 MOON DE-Bad Kötzting Lehmgasse 14,49.173259,12.865033
 MOON DE-Balingen Auf Stetten 4,48.263933,8.846278
@@ -15073,6 +15102,7 @@ Neogy IT-Bozen Marco Polo Straße,46.473123,11.326097
 Neogy IT-Castelrotto - Kastelruth Seis Schlernstraße,46.540455,11.564826
 Neogy IT-Eppan an der Weinstraße Kalterer Straße,46.440278,11.25971
 Neogy IT-Marlengo Franz Innerhofer Straße,46.655659,11.14103
+Neogy IT-Partschins Wasserfallweg,46.684464,11.072104
 Neogy IT-Piazza Catena Riva del Garda,45.883382,10.838777
 Neogy IT-Rablà Vicolo Gerold,46.669743,11.059455
 Neogy IT-San Martino in Badia Str. Picolin,46.692556,11.892488
@@ -16188,6 +16218,8 @@ rhenag DE-Siegburg Wilhelm-Ostwald-Straße,50.792783,7.221005,30
 
 RICARICA IT-Livorno Via Giovanni Gelati,43.530357,10.325833
 
+Rloaded DE-Leipheim Albert-Einstein-Straße,48.44706,10.240232
+
 RoboCharge NL-Biervliet Middenweg,51.326131,3.667839
 
 SachsenEnergie DE-Altenberg Dresdner Str.,50.764811,13.755286
@@ -16588,6 +16620,8 @@ solid DE-Nürnberg Am Leonhardspark,49.44341,11.056229
 solid DE-Nürnberg Glogauer Straße,49.397803,11.142122
 solid DE-Nürnberg Grünstraße,49.439396,11.051154
 solid DE-Nürnberg Kornmarkt,49.449167,11.074717
+solid DE-Nürnberg Sandstraße,49.445791,11.072203
+solid DE-Nürnberg Südwestpark,49.426762,11.018225
 
 Spirii DE-Flensburg Lise-Meitner-Straße,54.760918,9.437311
 
@@ -16618,6 +16652,8 @@ STAWAG DE-Simmerath In den Bremen,50.607278,6.309555
 
 Steinhoff DE-Bad Ems Silberau,50.33236,7.709039
 
+StromSpeicherMarkt DE-Freiburg im Breisgau Ensisheimer Straße,48.00817,7.828434,30
+
 StromTankstelle DE-Waltenhofen Ahornweg,47.682945,10.308779
 
 SVG DE-Merenberg Autohof Benzstraße,50.49926,8.18562
@@ -16626,7 +16662,11 @@ SW-Aachen DE-Aachen Burgau,50.552676,6.238098
 SW-Aachen DE-Aachen Försterstraße,50.784738,6.076592
 SW-Aachen DE-Monheimsallee,50.781109,6.090785
 SW-Aalen DE-Aalen Kocherstraße,48.817544,10.12691
+SW-am-See DE-Friedrichshafen Karlstraße,47.650315,9.478475
+SW-Augsburg DE-Augsburg Am Schwall,48.364907,10.903411
+SW-Augsburg DE-Augsburg Augsburger Straße,48.363827,10.874827
 SW-Augsburg DE-Augsburg Friedberger Straße,48.355436,10.948743
+SW-Augsburg DE-Augsburg Hoher Weg,48.370959,10.897413
 SW-Augsburg DE-Augsburg Prinzregentenplatz,48.367934,10.889464
 SW-Bad-Homburg DE-Bad Homburg Bahnhofsplatz,50.220598,8.622014
 SW-Bad-Homburg DE-Bad Homburg Horexstraße,50.219575,8.621767
@@ -16685,6 +16725,7 @@ SW-Elmshorn DE-Elmshorn Ernst-Abbe-Straße,53.744336,9.699227
 SW-Elmshorn DE-Elmshorn Hamburger Straße,53.74843,9.69172
 SW-Elmshorn DE-Elmshorn Westerstraße,53.748062,9.649952
 SW-Emden DE-Emden Bahnhofsplatz,53.36856,7.197215
+SW-Emmendingen DE-Emmendingen Karl-Bautz-Straße,48.117206,7.848467,30
 SW-Eutin DE-Eutin Am Stadtgraben,54.136651,10.615037
 SW-Flensburg DE-Flensburg Batteriestraße,54.8047,9.429783
 SW-Forchheim DE-Forchheim Äußere Nürnberger Straße,49.704445,11.060294
@@ -16762,10 +16803,17 @@ SW-Magdeburg DE-Magdeburg Am Blauen Bock,52.131331,11.63506
 SW-Merseburg DE-Merseburg Querfurter Straße,51.37147,11.98317
 SW-Mülheim DE-Mülheim am Main Ringstraße,50.121276,8.830682
 SW-München DE-München Deroystraße,48.145795,11.54602
+SW-München DE-München Englschalkinger Straße,48.153542,11.620223
+SW-München DE-München Feilitzschstraße,48.16104,11.589764,30
 SW-München DE-München Ganghoferstraße,48.134578,11.53985
 SW-München DE-München Haager Straße,48.126619,11.608372
+SW-München DE-München Josephsburgstraße,48.126339,11.632061
+SW-München DE-München Kirchseeoner Straße,48.115563,11.617197
 SW-München DE-München Marklandstraße,48.092533,11.604476
 SW-München DE-München Maximilianstraße,48.139169,11.581335
+SW-München DE-München Nordendstraße,48.155483,11.575228
+SW-München DE-München Oslostraße,48.131542,11.68955,30
+SW-München DE-München Seeriederstraße,48.133953,11.602091,30
 SW-München DE-München Steubenplatz,48.151145,11.520079
 SW-Münster DE-Münster Kiesekamps Mühle,51.949318,7.641345
 SW-Neu-Isenburg DE Neu-Isenburg Alicestraße,50.050185,8.675374
@@ -16812,6 +16860,7 @@ SW-Velbert DE-Velbert Friedrichstraße,51.332307,7.055833
 SW-Velbert DE-Velbert Güterstraße,51.34223,7.05142
 SW-Velbert DE-Velbert Thomasstraße,51.34063,7.04197
 SW-Versmold DE-Bad Rothenfelde Hannoversche Straße,52.106472,8.164392
+SW-Waldkraiburg DE-Waldkraiburg Friedländer Straße,48.207795,12.402059,30
 SW-Weimar DE-Weimar Damaschkestraße,50.98012,11.309194
 SW-Weimar DE-Weimar Industriestraße,50.997433,11.324577
 SW-Weinheim DE-Heidelberg Englerstraße,49.365529,8.684117
@@ -16865,6 +16914,7 @@ SWN DE-Neuwied Zeppelinsweg 14,50.438716,7.475956
 SWN DE-Neuwied-Segendorf Auwiese 11,50.467279,7.462726
 
 SWU DE-Neu-Ulm Glacis Galerie,48.393879,10.003906
+SWU DE-Neu-Ulm Maximilianstraße,48.396345,10.001586
 SWU DE-Ulm Basteistraße,48.400873,10.005338
 SWU DE-Ulm Deutschhaus,48.398008,9.984775
 SWU DE-Ulm Donaustraße,48.396863,9.995613
@@ -17516,6 +17566,7 @@ Virta CH-Feuerthalen Schützenstrasse,47.690757,8.647688
 Virta DE-Borken Weseler Straße,51.827088,6.827603
 Virta DE-Dortmund Flamingoweg,51.497889,7.47383
 Virta DE-Friedberg Frankfurter Straße,50.328552,8.750175
+Virta DE-Füssen Kemptener Straße,47.568256,10.669272
 Virta DE-Günzburg Augsburger Straße,48.452641,10.285685
 Virta DE-Ichenhausen Weiler Weg,48.37573,10.313648
 Virta DE-Karlsruhe Wolfartsweierer Straße,48.999479,8.428314,12
@@ -17607,6 +17658,7 @@ Volkswagen DE-Moers Rheinberger Str. 61,51.45772,6.63124
 Volkswagen DE-Mücke Gottesrain,50.646487,8.990603
 Volkswagen DE-Mühlacker Industriestraße 27,48.953048,8.851331
 Volkswagen DE-Mühlhausen/Thüringen Kasseler Str. 45-47,51.203796,10.438102
+Volkswagen DE-München Posener Platz,48.148174,11.641058
 Volkswagen DE-Neuburg an der Donau Am Schwalbanger,48.725682,11.191323
 Volkswagen DE-Neumarkt in der Oberpfalz Nürnberger Str. 45,49.289555,11.436363
 Volkswagen DE-Neuss Jülicher Landstraße 41-43,51.187611,6.685147
