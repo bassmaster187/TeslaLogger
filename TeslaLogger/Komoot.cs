@@ -332,7 +332,7 @@ namespace TeslaLogger
                         if (acceleration1 > 1.1 && acceleration2 < -1.1)
                         {
                             // drop speed at currP and replace with avg(prevP,nextP)
-                            Logfile.Log($"#{kli.carID} Komoot: speed3: {Math.Round(prevP.speed, 2)}->{Math.Round(currP.speed, 2)}->{Math.Round(nextP.speed, 2)} acc:{Math.Round(acceleration1, 2)}-{Math.Round(acceleration2, 2)} correct speed:{Math.Round(currP.speed, 2)}->{Math.Round((prevP.speed+nextP.speed)/2.0,2 )}");
+                            Tools.DebugLog($"#{kli.carID} Komoot: speed3: {Math.Round(prevP.speed, 2)}->{Math.Round(currP.speed, 2)}->{Math.Round(nextP.speed, 2)} acc:{Math.Round(acceleration1, 2)}-{Math.Round(acceleration2, 2)} correct speed:{Math.Round(currP.speed, 2)}->{Math.Round((prevP.speed+nextP.speed)/2.0,2 )}");
                             currP.speed = (prevP.speed + nextP.speed) / 2.0;
                         }
                     }
@@ -716,14 +716,34 @@ WHERE
             if (jsonResult.ContainsKey("_embedded") && jsonResult["_embedded"].ContainsKey("coordinates") && jsonResult["_embedded"]["coordinates"].ContainsKey("items"))
             {
                 // JSON OK
-                Logfile.Log($"#{kli.carID} Komoot: ParseTours({tourid}) parsing {jsonResult["_embedded"]["coordinates"]["items"].Count} coordinates ...");
+                Dictionary<int, Tuple<double, double, double>> positions = new Dictionary<int, Tuple<double, double, double>>();
+                Logfile.Log($"#{kli.carID} Komoot: ParseTourJSON({tourid}) parsing {jsonResult["_embedded"]["coordinates"]["items"].Count} coordinates ...");
                 foreach (dynamic pos in jsonResult["_embedded"]["coordinates"]["items"])
                 {
                     if (pos.ContainsKey("lat") && pos.ContainsKey("lng") && pos.ContainsKey("alt") && pos.ContainsKey("t"))
                     {
                         if (double.TryParse(pos["lat"].ToString(), out double lat) && double.TryParse(pos["lng"].ToString(), out double _) && double.TryParse(pos["alt"].ToString(), out double _) && int.TryParse(pos["t"].ToString(), out int _))
                         {
-                            tour.AddPosition(lat, double.Parse(pos["lng"].ToString()), double.Parse(pos["alt"].ToString()), int.Parse(pos["t"].ToString()));
+                            // generate pseudopositions?
+                            if (positions.Count > 0)
+                            {
+                                var lastpos = positions.OrderByDescending(kvp => kvp.Key).First();
+                                if (int.Parse(pos["t"].ToString()) - lastpos.Key > 9000)
+                                {
+                                    int timediff = int.Parse(pos["t"].ToString()) - lastpos.Key;
+                                    int pseudopositions = (int)Math.Floor((timediff - 2000) / 2000.0);
+                                    int step = (timediff - 2000) / pseudopositions;
+                                    Tools.DebugLog($"pos delta {timediff} -> insert pseudo positions: {pseudopositions}");
+                                    Tools.DebugLog($"lastpos delta_t: {lastpos.Key}");
+                                    for (int i = 1; i <= pseudopositions; i++)
+                                    {
+                                        Tools.DebugLog($"add pseudopos {i} at delta_t {lastpos.Key + step * i} {Tuple.Create(lastpos.Value.Item1, lastpos.Value.Item2, lastpos.Value.Item3)}");
+                                        positions[lastpos.Key + step * i] = Tuple.Create(lastpos.Value.Item1, lastpos.Value.Item2, lastpos.Value.Item3);
+                                    }
+                                    Tools.DebugLog($"currpos delta_t: {pos["t"].ToString()}");
+                                }
+                            }
+                            positions[int.Parse(pos["t"].ToString())] = Tuple.Create(lat, double.Parse(pos["lng"].ToString()), double.Parse(pos["alt"].ToString()));
                         }
                         else
                         {
@@ -737,7 +757,7 @@ WHERE
                             sb.AppendLine(pos["alt"]);
                             sb.Append("t:");
                             sb.AppendLine(pos["t"]);
-                            Logfile.Log($"#{kli.carID} Komoot: ParseTours({tourid}) parsing tours.pos error - error parsing JSON contents" + sb.ToString());
+                            Logfile.Log($"#{kli.carID} Komoot: ParseTourJSON({tourid}) parsing tours.pos error - error parsing JSON contents" + sb.ToString());
                         }
                     }
                     else
@@ -752,8 +772,14 @@ WHERE
                         sb.AppendLine(jsonResult.ContainsKey("alt"));
                         sb.Append("t:");
                         sb.AppendLine(jsonResult.ContainsKey("t"));
-                        Logfile.Log($"#{kli.carID} Komoot: ParseTours({tourid}) parsing tours.pos error - missing JSON contents" + sb.ToString());
+                        Logfile.Log($"#{kli.carID} Komoot: ParseTourJSON({tourid}) parsing tours.pos error - missing JSON contents" + sb.ToString());
                     }
+                }
+                // positions parsed from JSON, pseudopositions generated, now add positions
+                Logfile.Log($"#{kli.carID} Komoot: ParseTourJSON({tourid}) found {positions.Count} positions (including generated pseudopositions)");
+                foreach (KeyValuePair<int, Tuple<double, double, double>> pos in positions)
+                {
+                    tour.AddPosition(pos.Value.Item1, pos.Value.Item2, pos.Value.Item3, pos.Key);
                 }
             }
             else
@@ -1273,7 +1299,7 @@ VALUES (
                     con.Open();
                     using (MySqlCommand cmd = new MySqlCommand(@"
 SELECT
-  count(*)
+  tourID
 FROM
   komoot
 WHERE
