@@ -2540,7 +2540,7 @@ namespace TeslaLogger
                 }
                 else
                 {
-                    car.WhTR = 0.140;
+                    car.WhTR = 134;
                     car.WriteSettings();
                 }
             }
