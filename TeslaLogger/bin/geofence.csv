@@ -2595,10 +2595,12 @@ Supercharger-V3 GB-Aberystwyth,52.405307,-4.064732
 Supercharger GB-Abington,55.507944,-3.694786
 Supercharger-V3 GB-Adderstone,55.564956,-1.791893
 Supercharger-V3 GB-Amesbury,51.177215,-1.756282
+Supercharger-V4 GB-Anglesey,53.224083,-4.264199
 Supercharger-V3 GB-Annesley,53.069104,-1.252649
 Supercharger GB-Aviemore,57.189774,-3.836206
 Supercharger-V3 GB-Banbury,52.073055,-1.341804
 Supercharger GB-Barnsley,53.489393,-1.486223
+Supercharger-V4 GB-Belfast 2,54.584952,-5.959096
 Supercharger-V3 GB-Belfast,54.583523,-5.960532
 Supercharger-V3 GB-Birch - Eastbound,53.568359,-2.234161
 Supercharger GB-Birchanger Green,51.870767,0.196508
@@ -2607,15 +2609,21 @@ Supercharger-V3 GB-Birmingham - St Andrews,52.471621,-1.873908
 Supercharger GB-Birmingham,52.362924,-1.945572
 Supercharger-V3 GB-Blyth,53.386809,-1.059722
 Supercharger-V3 GB-Braintree,51.852568,0.522422
+Supercharger-V4 GB-Bridgend,51.53251,-3.573568
 Supercharger-V3 GB-Bristol - Eastgate,51.47352,-2.564753
 Supercharger GB-Bristol Cribbs Causeway,51.526887,-2.59964
+Supercharger-V4 GB-Brora,58.012292,-3.848578
 Supercharger GB-Burtonwood,53.417605,-2.639522
 Supercharger-V3 GB-Camborne,50.227643,-5.279001
 Supercharger-V4 GB-Cambridge,52.256509,0.016594
+Supercharger-V4 GB-Cannock,52.687759,-2.01457
 Supercharger-V3 GB-Cardiff,51.531534,-3.139834
 Supercharger-V3 GB-Carmarthen,51.858349,-4.3115
+Supercharger-V4 GB-Cheshunt,51.720267,-0.037312
 Supercharger GB-Chorley,53.630562,-2.692578
 Supercharger GB-Colchester,51.88071,0.788574
+Supercharger-V4 GB-Craigavon,54.448966,-6.391254
+Supercharger-V4 GB-Crick,52.352622,-1.160603
 Supercharger-V3 GB-Dartford Tesla Service Centre,51.453505,0.246775
 Supercharger GB-Dartford,51.438052,0.26879
 Supercharger GB-Derby,52.9179,-1.47425
@@ -2635,11 +2643,13 @@ Supercharger-V3 GB-Ferrybridge,53.698625,-1.265508
 Supercharger GB-Fleet,51.296156,-0.857274
 Supercharger-V3 GB-Flimwell,51.05249,0.455713
 Supercharger-V3 GB-Flint Mountain,53.232043,-3.140121
-Supercharger GB-Folkestone,51.089496,1.123928
+Supercharger-V4 GB-Folkestone,51.089496,1.123928
 Supercharger GB-Folkestone,51.095988,1.120931
 Supercharger-V3 GB-Fort William,56.821521,-5.103637
-Supercharger-V3 GB-Frankley - Southbound,52.429104,-2.016669
+Supercharger-V4 GB-Frankley Northbound,52.429119,-2.018577
+Supercharger-V3 GB-Frankley Southbound,52.429853,-2.017158
 Supercharger-V3 GB-Gatwick - Gridserve Electric Forecourt,51.156117,-0.153673
+Supercharger-V4 GB-Glasgow Airport,55.855955,-4.447827
 Supercharger GB-Glasgow Tesla Service Centre,55.867664,-4.239206
 Supercharger-V3 GB-Gloucester Northbound,51.819541,-2.227771
 Supercharger-V3 GB-Gloucester Southbound,51.819745,-2.223498
@@ -2649,6 +2659,7 @@ Supercharger-V3 GB-Grays,51.490717,0.286168
 Supercharger-V4 GB-Gretna Caledonia Park,54.996828,-3.0596
 Supercharger GB-Gretna Green,55.0078,-3.083018
 Supercharger GB-Guildford,51.248329,-0.55985
+Supercharger-V4 GB-Harlington,51.961749,-0.511626
 Supercharger-V3 GB-Harrogate,53.962085,-1.52856
 Supercharger GB-Hartshead Moor - Eastbound,53.711301,-1.745676
 Supercharger GB-Hartshead Moor - Westbound,53.713573,-1.742836
@@ -2660,13 +2671,17 @@ Supercharger-V3 GB-Heston - Eastbound,51.488858,-0.388922
 Supercharger-V3 GB-Heston - Westbound,51.488315,-0.395407
 Supercharger GB-Hilton Park Northbound,52.644021,-2.058587
 Supercharger GB-Hilton Park Southbound,52.644074,-2.054225
+Supercharger-V4 GB-Huddersfield,53.670968,-1.827989
+Supercharger-V4 GB-Hull,53.794878,-0.367221
 Supercharger GB-Inverness,57.481674,-4.225466
 Supercharger-V3 GB-Ipswich,52.084716,1.116459
 Supercharger GB-Keele Northbound,52.993,-2.2903
 Supercharger GB-Keele Southbound,52.99413,-2.290797
 Supercharger-V3 GB-Kettering,52.386377,-0.696887
+Supercharger-V4 GB-Kidderminster,52.391128,-2.24804
 Supercharger-V4 GB-Kingston upon Thames,51.413021,-0.306297
 Supercharger-V3 GB-King’s Lynn,52.73522,0.414
+Supercharger-V4 GB-Knutsford Southbound,53.30118,-2.400336
 Supercharger-V3 GB-Larkhall,55.719943,-3.95388
 Supercharger-V3 GB-Leeds - Whitehouse Street,53.784433,-1.532576
 Supercharger GB-Leeds,53.732769,-1.585628
@@ -2686,6 +2701,7 @@ Supercharger GB-London-Heathrow,51.51099,-0.460461
 Supercharger GB-London-Tower,51.506333,-0.072778
 Supercharger GB-London-Westfield London,51.507888,-0.221972
 Supercharger-V3 GB-Luton,51.871899,-0.397296
+Supercharger-V4 GB-Lymm,53.358573,-2.506133
 Supercharger-V4 GB-Macmerry Gladsmuir,55.951557,-2.882369
 Supercharger GB-Maidstone,51.286224,0.545783
 Supercharger-V3 GB-Manchester - South,53.430305,-2.179438
@@ -2697,26 +2713,33 @@ Supercharger-V3 GB-Medway - Westbound,51.341559,0.611212
 Supercharger GB-Membury Eastbound,51.48391,-1.556821
 Supercharger GB-Membury Westbound,51.481293,-1.556196
 Supercharger-V3 GB-Merry Hill,52.48358,-2.112747
+Supercharger-V4 GB-Michaelwood Southbound,51.657195,-2.426898
 Supercharger-V3 GB-Michaelwood,51.65588,-2.432036
+Supercharger-V4 GB-Middlesbrough Acklam Road,54.55964,-1.259646
+Supercharger-V4 GB-Middlesbrough Marton Road,54.571823,-1.22504
 Supercharger-V3 GB-Newark,53.081144,-0.806543
 Supercharger-V3 GB-Newmarket - Studlands Shopping Park,52.26224,0.39757
 Supercharger GB-Newport Pagnell,52.084312,-0.748467
+Supercharger-V4 GB-Newtown,52.50252,-3.349306
 Supercharger GB-North Greenwich,51.507022,0.015928
 Supercharger GB-Northampton,52.185729,-0.89127
 Supercharger-V3 GB-Norwich East,52.627571,1.383871
 Supercharger-V3 GB-Norwich Service Centre,52.656593,1.28759
 Supercharger-V3 GB-Nottingham - Service Centre,52.936032,-1.134447
 Supercharger-V3 GB-Nottingham - Victoria Centre,52.957656,-1.147067
+Supercharger-V4 GB-Oxford 2,51.793653,-1.283858
 Supercharger-V3 GB-Oxford Redbridge,51.729656,-1.249647
 Supercharger GB-Oxford,51.7374,-1.0948
 Supercharger-V3 GB-Park Royal,51.52681,-0.283526
 Supercharger-V3 GB-Pease Pottage,51.084029,-0.19778
 Supercharger-V3 GB-Penhale,50.378223,-4.942544
 Supercharger GB-Perth,56.386,-3.4792
+Supercharger-V4 GB-Polmont,55.996577,-3.722955
 Supercharger-V4 GB-Preston South,53.71897,-2.653739
 Supercharger-V3 GB-Reading - Katesgrove,51.438129,-0.968514
 Supercharger-V3 GB-Reading - Westbound,51.422766,-1.029052
 Supercharger GB-Reading,51.420611,-0.988028
+Supercharger-V4 GB-Rheged,54.646723,-2.781466
 Supercharger GB-Richmond,54.4421,-1.6713
 Supercharger-V3 GB-Rugby,52.409672,-1.250838
 Supercharger GB-Sarn,51.535351,-3.577637
@@ -2724,19 +2747,29 @@ Supercharger-V3 GB-Sevenoaks,51.302673,0.160995
 Supercharger GB-Sheffield,53.314145,-1.281904
 Supercharger-V3 GB-Solihull - Service Centre,52.376374,-1.796275
 Supercharger GB-South Mimms,51.687536,-0.223548
+Supercharger-V4 GB-Sprucefield,54.491991,-6.068177
+Supercharger-V4 GB-Stanwell,51.442912,-0.474949
+Supercharger-V4 GB-Stevenage,51.901772,-0.208134
 Supercharger-V3 GB-Swansea,51.678371,-3.996227
 Supercharger GB-Tebay Southbound,54.453473,-2.606108
 Supercharger GB-Telford,52.677334,-2.399552
+Supercharger-V4 GB-Thorne,53.615719,-0.977078
 Supercharger-V3 GB-Thurrock,51.492427,0.271248
 Supercharger-V4 GB-Todhills,54.951707,-2.97733,30
 Supercharger-V3 GB-Tongham,51.226139,-0.722281
 Supercharger-V3 GB-Trentham,52.96302,-2.196439
 Supercharger-V3 GB-Trumpington,52.16824,0.109177
+Supercharger-V4 GB-Tyndrum,56.43844,-4.710994
 Supercharger GB-Uxbridge,51.546259,-0.475128
+Supercharger-V4 GB-Waddon,51.371687,-0.116853
+Supercharger-V4 GB-Wallasey,53.412539,-3.073522
 Supercharger GB-Warrington,53.339515,-2.569358
 Supercharger GB-Warwick Northbound,52.216118,-1.504695
 Supercharger GB-Warwick Southbound,52.219048,-1.50126
+Supercharger-V4 GB-Washington Northbound,54.889688,-1.560204
+Supercharger-V4 GB-Washington Southbound,54.890431,-1.558326
 Supercharger GB-Washington,54.887483,-1.558291
+Supercharger-V4 GB-Wetherby,53.94565,-1.37059
 Supercharger GB-Winchester,51.16725,-1.328024
 Supercharger GB-Wokingham,51.42849,-0.898897
 Supercharger-V3 GB-Wyboston,52.202314,-0.291534
@@ -3758,6 +3791,7 @@ Supercharger-V4 US-Barkeyville PA,41.204363,-79.973587
 Supercharger US-Barnegat NJ,39.759236,-74.253469
 Supercharger-V3 US-Barstow CA - East Virginia Way,34.886438,-117.019894
 Supercharger-V3 US-Barstow CA - Tanger Way,34.844597,-117.0857
+Supercharger-V4 US-Barstow CA East Main Street,34.893581,-117.0027
 Supercharger US-Barstow CA,34.849182,-117.085411
 Supercharger-V3 US-Bartonsville PA,41.00187,-75.27283
 Supercharger US-Basking Ridge NJ,40.654995,-74.52935
@@ -5881,7 +5915,7 @@ Aldi DE-Linden Carl-Benz-Straße,50.538326,8.654354
 Aldi DE-Lorsch,49.65359,8.555596
 Aldi DE-Ludwigsburg Martin-Luther-Straße,48.891194,9.181389
 Aldi DE-Ludwigsburg,48.879803,9.218476,20
-Aldi DE-Mainaschaff,49.986603,9.084044,10
+Aldi DE-Mainaschaff Johann-Dahlem-Straße,49.986596,9.084048,20
 Aldi DE-Mainz-Hechtsheim Johannes-Kepler-Straße,49.964167,8.2625
 Aldi DE-Mainz-Neustadt Hattenbergstraße,50.013583,8.247972
 Aldi DE-Mannheim Floßwörthstraße,49.45825,8.503102
@@ -6731,6 +6765,8 @@ ARAL DE-Osterwieck Lüttgenröder Straße,51.968578,10.699633
 ARAL DE-Pforzheim Lochäckerstraße,48.910601,8.718322
 ARAL DE-Piding,47.764118,12.904173,5
 ARAL DE-Radeberg Badstraße,51.131,13.91717
+ARAL DE-Rasthof Beselich,50.468237,8.138068,30
+ARAL DE-Rasthof Beselich,50.468861,8.13718,30
 ARAL DE-Regensburg Max-Planck-Straße,49.000213,12.148014,25
 ARAL DE-Reichenbach Goethestraße,50.622637,12.294304
 ARAL DE-Riegel am Kaiserstuhl Forchheimer Straße,48.156656,7.744962
@@ -6916,8 +6952,6 @@ BP DE-Berlin Holzmarktstraße,52.513835,13.422426
 BP DE-Berlin Schnellerstraße,52.460058,13.503729
 BP DE-Berlin Seestraße,52.546415,13.345433
 BP DE-Bernburg (Saale) Hallesche Landstraße,51.778699,11.747512
-BP DE-Beselich Nordseite,50.468861,8.13718,30
-BP DE-Beselich Südseite,50.468237,8.138068,30
 BP DE-Bielefeld Paderborner Straße,51.932083,8.60688
 BP DE-Bingen am Rhein Hitchinstraße,49.948302,7.903622
 BP DE-Bitburg Saarstraße,49.955869,6.524894
@@ -9571,8 +9605,6 @@ EnBW DE-Hamm Alter Uentroper Weg Penny,51.69182,7.86642
 EnBW DE-Hamm Bockumer Weg Penny,51.688887,7.801241
 EnBW DE-Hamm Hellweg,51.66959,7.81033
 EnBW DE-Hamm Penny,51.669905,7.785312
-EnBW DE-Hammersbach Langen-Bergheim Ost,50.250621,8.994564,10
-EnBW DE-Hammersbach Langen-Bergheim West,50.24844,8.99398,10
 EnBW DE-Hanau Edisonstraße,50.114133,8.928306
 EnBW DE-Hanau Kinzigbogen,50.146039,8.932719
 EnBW DE-Hannover Am Leineufer,52.414635,9.643332,20
@@ -10170,6 +10202,8 @@ EnBW DE-Raesfeld,51.766889,6.85109
 EnBW DE-Rain 1,48.693887,9.303839
 EnBW DE-Rangendingen Hechinger Straße,48.377717,8.90333
 EnBW DE-Rastatt Im Baisert,48.85973,8.240877
+EnBW DE-Raststätte Langen-Bergheim,50.24843,8.99398
+EnBW DE-Raststätte Langen-Bergheim,50.250597,8.994507
 EnBW DE-Ratingen Hohenstein A52,51.290187,6.80453
 EnBW DE-Ratzeburg Hagebaumarkt,53.699656,10.741201
 EnBW DE-Ratzeburg Penny,53.69123,10.7938
@@ -12379,6 +12413,8 @@ GOFAST CH-Quarten Rastplatz Bergsboden,47.11332,9.267714
 GOFAST CH-Rastplatz Oftringen Ost,47.316009,7.945185
 GOFAST CH-Raststätte Gunzgen Nord,47.310148,7.831888
 GOFAST CH-Raststätte Gunzgen Süd,47.310231,7.847058
+GOFAST CH-Raststätte Würenlos,47.438229,8.346583
+GOFAST CH-Raststätte Würenlos,47.439215,8.348093
 GOFAST CH-Rothrist Neue Aarburgerstrasse,47.313995,7.894136
 GOFAST CH-Rümlang Flughofstrasse,47.450654,8.540002
 GOFAST CH-Schwyz Mythen-Centerstrasse,47.015981,8.644918
@@ -12555,6 +12591,7 @@ GreenWay SK-Zvolen Zvolenská Európa Shopping Center,48.57996,19.125107
 GreenYellow FR-Roissy-en-France Rue de la Belle Étoile,48.9888,2.513854
 
 GRIDSERVE GB-Folkestone and Hythe M20,51.095118,1.045353
+GRIDSERVE GB-Penrith Rheged Redhills Lane,54.646983,-2.781507,15
 
 Group-E CH-Bern Wangenstrasse,46.932939,7.386168
 Group-E CH-Biel Boulevard des Sports,47.155543,7.280579
@@ -14611,7 +14648,6 @@ Lidl DE-Lüneburg,53.237416,10.413661
 Lidl DE-Lünen Bergstr. 3,51.605464,7.514834
 Lidl DE-Magdeburg,52.097918,11.621397
 Lidl DE-Magdeburg-Brückfeld Berliner Chaussee 48,52.128812,11.671305
-Lidl DE-Mainaschaff Johann-Dahlem-Straße,49.987432,9.084378,25
 Lidl DE-Mainaschaff Johann-Dahlem-Straße,49.98744,9.08438,25
 Lidl DE-Mainz Alte Markthalle,50.023637,8.221896
 Lidl DE-Mainz Heilgkreuzweg,49.975911,8.284316
@@ -17125,8 +17161,6 @@ swisscharge CH-Täsch Kantonstrasse,46.069563,7.776482
 swisscharge CH-Wallisellen Neue Winterthurerstrasse,47.408937,8.594655,40
 swisscharge CH-Winterthur,47.501314,8.764747
 swisscharge CH-Worb Rubigenstrasse,46.91583,7.56335
-swisscharge CH-Würenlos Limmat,47.43818,8.346574
-swisscharge CH-Würenlos Wald,47.439222,8.348134
 
 Switch DE-Köln Hornstraße,50.955273,6.940532
 
