@@ -121,7 +121,7 @@ WHERE
         fast_charger_present
         OR address LIKE 'Supercharger%'
         OR address LIKE 'Ionity%'
-        OR max_charger_power > 19
+        OR max_charger_power > 23
     )
 ORDER BY
     StartDate";
