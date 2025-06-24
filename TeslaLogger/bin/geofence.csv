@@ -4271,6 +4271,7 @@ Supercharger-V3 US-Fremont CA - Pacific Commons Boulevard,37.502073,-121.967167
 Supercharger-V3 US-Fremont CA,37.492356,-121.946558
 Supercharger-V3 US-Fresno CA - North Blackstone Avenue,36.85009,-119.791168
 Supercharger-V3 US-Fresno CA - North Riverside Drive,36.832867,-119.907905
+Supercharger-V3 US-Fresno CA North Blackstone Avenue,36.8443,-119.786938
 Supercharger US-Fresno CA,36.834368,-119.909391
 Supercharger-V3 US-Fullerton CA,33.859834,-117.92203
 Supercharger-V3 US-Gainesville FL - Northwest 39th Avenue,29.68822,-82.44322
@@ -5319,6 +5320,7 @@ Supercharger US-Springfield MO,37.252146,-93.265243
 Supercharger-V3 US-Springfield NJ - Cleveland Place,40.717865,-74.329506
 Supercharger US-Springfield OR - Kruse Way,44.08267,-123.037542
 Supercharger US-Springfield VA,38.774594,-77.177393
+Supercharger US-Springfield VA,38.776235,-77.17596
 Supercharger-V3 US-St. Augustine FL - Inman Road,29.91689,-81.40318
 Supercharger-V3 US-St. Augustine FL - World Commerce Pkwy,29.98287,-81.46499
 Supercharger US-St. Augustine FL,29.924286,-81.416018
@@ -5804,7 +5806,7 @@ Aldi DE-Eisingen,49.761243,9.845965,20
 Aldi DE-Elsenfeld Bahnhofstraße,49.841579,9.156343
 Aldi DE-Emmerich am Rhein Moritz-von-Nassau-Straße,51.846528,6.234389
 Aldi DE-Emmerich Bahnhofstraße,51.833444,6.252111
-ALDI DE-Erftstadt Köttinger Straße,50.8134,6.81141,30
+Aldi DE-Erftstadt Köttinger Straße,50.8134,6.81141,30
 Aldi DE-Erlangen Gundstraße 2,49.583525,10.965227,10
 Aldi DE-Erlangen Henkestraße,49.593528,11.018139
 Aldi DE-Essen Am Luftschacht,51.461146,7.066194
@@ -9383,7 +9385,7 @@ EnBW DE-Eppingen Wilhelmstr.,49.13714,8.90832
 EnBW DE-Erbach Brühlstr.,48.328599,9.881436
 EnBW DE-Erbach Ehinger,48.325255,9.891622
 EnBW DE-Erding Josef-Schwankl-Straße,48.305744,11.891107
-EnBW DE-Erftstadt Köttinger Str. Rewe,50.81396,6.810224
+EnBW DE-Erftstadt Köttinger Straße,50.81344,6.809922,30
 EnBW DE-Erftstadt Penny,50.83177,6.80105
 EnBW DE-Erftstadt Rewe,50.802635,6.779756
 EnBW DE-Eriskirch Friedrichshafener Straße,47.633908,9.524435
@@ -10847,6 +10849,7 @@ enercity DE-Hannover Kantplatz,52.372028,9.785545
 enercity DE-Hannover Kestnerstraße,52.370531,9.758593
 enercity DE-Hannover Kornstraße,52.386187,9.725925
 enercity DE-Hannover Lindener Marktplatz,52.367477,9.714585
+enercity DE-Hannover Luisenstraße,52.374423,9.74166,30
 enercity DE-Hannover Nussriede,52.389406,9.812659
 enercity DE-Hannover Pfarrlandstraße,52.374495,9.706389
 enercity DE-Hannover Platz der Kaufleute,52.375931,9.750767
@@ -12555,6 +12558,7 @@ GreenCharge DE-Wolgast Leeraner Straße,54.046819,13.753355
 GreenFlux NL-Amsterdam Sint Antoniesluis,52.369763,4.900891
 
 GreenMotion CH-Baden Stadtturmstrasse,47.475367,8.306511
+GreenMotion CH-Basel St. Alban-Graben,47.55386,7.593068,30
 GreenMotion CH-Chur Raschärenstrasse,46.846333,9.508211
 GreenMotion CH-Mörschwil Schulstraße,47.468429,9.424728
 
@@ -14648,6 +14652,7 @@ Lidl DE-Lüneburg,53.237416,10.413661
 Lidl DE-Lünen Bergstr. 3,51.605464,7.514834
 Lidl DE-Magdeburg,52.097918,11.621397
 Lidl DE-Magdeburg-Brückfeld Berliner Chaussee 48,52.128812,11.671305
+Lidl DE-Mainaschaff Johann-Dahlem-Straße,49.987432,9.084378,25
 Lidl DE-Mainaschaff Johann-Dahlem-Straße,49.98744,9.08438,25
 Lidl DE-Mainz Alte Markthalle,50.023637,8.221896
 Lidl DE-Mainz Heilgkreuzweg,49.975911,8.284316
@@ -15316,6 +15321,7 @@ naturenergie DE-Donaueschingen Robert-Gerwig-Straße,47.965995,8.510123
 naturenergie DE-Efringen-Kirchen Rheinstraße,47.685615,7.522566
 naturenergie DE-Emmendingen Cornelia-Passage,48.120219,7.848615
 naturenergie DE-Emmendingen Karl-Bautz-Straße,48.11807,7.848251
+naturenergie DE-Emmendingen Luisenstraße,48.118202,7.852465,30
 naturenergie DE-Emmingen-Liptingen Carl-Benz-Straße,47.934221,8.860041
 naturenergie DE-Feldberg (Schwarzwald) Feldbergstraße,47.868403,8.09578
 naturenergie DE-Gottmadingen Bahnhofstraße,47.735763,8.775906
@@ -17143,6 +17149,8 @@ swisscharge CH-Ascona Via Albarelle,46.151748,8.771934
 swisscharge CH-Ascona Via Collegio,46.155603,8.77028
 swisscharge CH-Ascona Viale Monte Verità,46.159794,8.774109
 swisscharge CH-Basel Güterstrasse,47.54577,7.587988
+swisscharge CH-Basel Signalstrasse,47.570329,7.603323
+swisscharge CH-Basel Zürcherstrasse,47.555023,7.612595
 swisscharge CH-Cadenazzo Via Stazione,46.152033,8.937525,10
 swisscharge CH-Chur Scalärastrasse,46.867275,9.537479
 swisscharge CH-Chur,46.847542,9.501609,10
@@ -18119,11 +18127,13 @@ AT Linz PLUSCITY,48.24345,14.23428,25
 AT Linz PLUSCITY,48.24397,14.2348,25
 AT Linz PLUSCITY,48.24458,14.23531,25
 AT Raststation Marché Wörthersee,46.629952,14.094825
+AT Ratten HORN,47.472919,15.708816
 AT Wien Billa Brünner Straße,48.267452,16.402954
 AU Brisbane The Chocolate Factory,-27.40879,153.06116
 AU Tonsley SA South Road,-35.008163,138.574993
 BE Hasselt Corda Campus Kempische Steenweg 293,50.951484,5.353231,14
 BE Rotselaar Belparts,50.938946,4.742856
+CH Basel Brunngässlein,47.552749,7.594589
 CH Domat/Ems Golf Club,46.8266,9.43602
 CH Frutigen Hotel National Destination Charger,46.588925,7.647674,5
 CH Härkingen Briefzentrum,47.318791,7.816421
@@ -18192,6 +18202,7 @@ DE Koblenz Bardelebenstraße,50.358505,7.587261
 DE Köln Brügelmannstraße 3,50.943937,6.985898
 DE Köln Neumarkt Passage,50.93734,6.9472
 DE Köln Opladener Straße,50.939697,6.974031
+DE Langen (Hessen) esatus,49.987575,8.678133,35
 DE Leipzig Thiel Ludwig-Hupfeld-Straße,51.351898,12.301393
 DE Lübeck Flughafen,53.804405,10.699887
 DE Machern Ringstraße,51.35571,12.57101
@@ -18210,6 +18221,8 @@ DE Nürnberg Eggersheimer Straße,49.447788,11.010655
 DE Nürnberg Virnsberger Straße,49.448044,11.005672
 DE Offenbach Betriebshof OVB,50.102554,8.778845,20
 DE Offenbach Honda,50.08437,8.839102
+DE Ostbevern CANWAY,52.049918,7.846
+DE Ostbevern CANWAY,52.050221,7.846436
 DE Paderborn Westfalen Weser Netz,51.725959,8.756923,5
 DE Parkplatz Staufenberg A7,51.34918,9.60625
 DE Pettstadt Gemeinde,49.830728,10.925097
@@ -18231,6 +18244,7 @@ DE Wolfsburg Karl-Ferdinand-Braun-Ring,52.42152,10.86141
 DE Wuppertal Bergische Universität,51.23953,7.160973
 ES Gandia,38.969986,-0.178789
 ES Madrid Alcobendas Calle del Pintor Murillo,40.542868,-3.648588
+ES Madrid Hotel Madrid Centro,40.423082,-3.709453
 FR 68510 Sierentz Hyper U et Drive,47.66618,7.441494,10
 FR Disneyland Paris,48.864413,2.790116
 FR Disneyland Paris,48.864611,2.790354
