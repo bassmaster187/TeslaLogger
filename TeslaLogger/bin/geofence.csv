@@ -2313,7 +2313,8 @@ Supercharger ES-Zaragoza,41.62583,-1.0096
 Supercharger-V4 ES-Zestoa,43.26922,-2.27114
 
 Supercharger FI-Akaa,61.181106,23.885075
-Supercharger-V4 FI-Espoo,60.216876,24.665957
+Supercharger-V4 FI-Espoo IKEA,60.21688,24.66596
+Supercharger FI-Espoo,60.2145,24.65336,30
 Supercharger-V4 FI-Forssa,60.82679,23.57722
 Supercharger-V4 FI-Hankasalmi,62.3587,26.571
 Supercharger-V3 FI-Hartola,61.578409,26.009758
@@ -5732,6 +5733,8 @@ Tesla Service Center DE-Rostock,54.142615,12.168203
 Tesla Service Center DE-Stuttgart,48.82695,9.09938
 Tesla Service Center DK-Aarhus,56.178148,10.137029
 Tesla Service Center DK-København,55.64863,12.566136
+Tesla Service Center FI-Helsinki-Vantaa,60.27046,24.87716,50
+Tesla Service Center FI-Raisio,60.49328,22.20386
 Tesla Service Center FR-Aix-en-Provence,43.478753,5.365475
 Tesla Service Center FR-Bordeaux,44.833846,-0.677458
 Tesla Service Center FR-Dardilly,45.808203,4.765263
@@ -5772,15 +5775,38 @@ ABB IT-San Giorgio Bigarello Via maestri del lavoro,45.166656,10.852428
 ABB NZ-Mount Maunganui Maru Street,-37.665067,176.196996
 
 ABC AT-Ansfelden Carl-Anton-Carlone-Straße,48.209717,14.290248
+ABC FI-Espoo Komeetankatu,60.16665,24.73444
+ABC FI-Forssa Matkailijankatu,60.82763,23.57226
+ABC FI-Hyvinkää Peltokuumolantie,60.61899,24.80656
 ABC FI-Hämeenlinna Paroistentie,61.013573,24.417542
 ABC FI-Joensuu Koskikatu,62.600071,29.762005
+ABC FI-Kangasala Mäkirinteentie,61.47447,23.97938
+ABC FI-Kankaanpää Asemakatu,61.81423,22.3759
+ABC FI-Kimito Engelsbyvägen,60.16369,22.73586
 ABC FI-Kristinestad Gamla Vasavägen,62.26183,21.4857
+ABC FI-Mikkeli Hietakatu,61.67641,27.24274
+ABC FI-Padasjoki Tauluntie,61.34411,25.25049
 ABC FI-Pirkkala Keisarinviitta,61.45161,23.642142
+ABC FI-Pori Eteläväylä,61.47811,21.75727
 ABC FI-Pori Itäkeskuksenkaari,61.454902,21.839494
+ABC FI-Pori Tikkulantie,61.4882,21.75179
+ABC FI-Pori Tikkulantie,61.48821,21.7518
+ABC FI-Porvoo Aleksanterinkaari,60.38702,25.65169
+ABC FI-Raisio Piilipuunkatu,60.50545,22.15968
+ABC FI-Raseborg Järnvägsgatan,59.97863,23.44009
 ABC FI-Rauma Unajantie,61.099832,21.505434
+ABC FI-Riihimäki Kinturintie,60.75243,24.73482
+ABC FI-Riihimäki Voimalankatu,60.73167,24.77838
+ABC FI-Sastamala Taitajantie,61.47454,22.55551
+ABC FI-Savonlinna Suuri Savontie,61.8774,28.82845
+ABC FI-Tampere Keskisenkatu,61.47371,23.87376
+ABC FI-Tampere Rieväkatu,61.49147,23.82044
+ABC FI-Turku Joukahaisenkatu,60.45031,22.29645
 ABC FI-Ulvila Etupalokuja,61.426668,21.869311
 ABC FI-Vaala Vaalantie,64.566786,26.874453
 ABC FI-Vaasa Elementtitehtaantie,63.072859,21.699253
+ABC FI-Viitasaari Kokkosalmentie,63.07438,25.86506
+ABC FI-Ähtäri Oikotie,62.54999,24.08735
 
 Acea IT-Capena Via Tiberina,42.120239,12.590254
 
@@ -7617,6 +7643,7 @@ Chargy LU-Roeser Aire de Berchem,49.541595,6.120758
 CircleK DE-Berlin Heerstraße,52.516789,13.179936
 CircleK DE-Berlin Indira-Gandhi-Straße,52.547482,13.468407
 CircleK DE-Bruchköbel Römerstraße,50.179506,8.909239
+CircleK DE-Diemelstadt Wrexer Teich,51.48886,9.00764
 CircleK DE-Egestorf Thaneberg,53.161278,10.061318
 CircleK DE-Gärtringen Böblinger Straße,48.638673,8.910368
 CircleK DE-Gärtringen Böblinger Straße,48.63868,8.910335
@@ -7626,6 +7653,7 @@ CircleK DE-Hamburg Cuxhavener Straße,53.47317,9.84674
 CircleK DE-Hamburg/ Moorfleet Andreas- Meyer- Straße,53.514264,10.089733
 CircleK DE-Hirschberg Goldbeckstraße,49.507949,8.636984,20
 CircleK DE-Ibbenbüren Münsterstraße,52.258724,7.711672
+CircleK DE-Kirchheim unter Teck Im Hag,48.64236,9.43332,30
 CircleK DE-Krefeld Nirostastraße,51.28918,6.55366
 CircleK DE-Löbau Weißenberger Straße,51.103028,14.670282
 CircleK DE-Mahlberg Alte Landstraße,48.276738,7.786502
@@ -9470,7 +9498,7 @@ EnBW DE-Dettingen Kirchheimer Str.,48.620229,9.453779
 EnBW DE-Dettingen Rathausplatz,48.528911,9.34587
 EnBW DE-Dieburg Frankfurter Straße,49.909245,8.849164
 EnBW DE-Dielheim Hauptstr.,49.282138,8.735081
-EnBW DE-Diemelstadt Wrexer Teich,51.488452,9.006041
+EnBW DE-Diemelstadt Wrexer Teich,51.48839,9.0057
 EnBW DE-Dierdorf,50.54583,7.63511
 EnBW DE-Dietenheim Kirchstr.,48.21108,10.068883
 EnBW DE-Dietmannsried Raiffeisenstraße,47.8046,10.30008
@@ -10000,6 +10028,7 @@ EnBW DE-Kirchhain Im Riedeboden,50.826041,8.928156
 EnBW DE-Kirchheim (Teck) Hahnweidstraße,48.639967,9.444517
 EnBW DE-Kirchheim Trigema,50.832535,9.573149,30
 EnBW DE-Kirchheim unter Teck Kruichling,48.644171,9.429751
+EnBW DE-Kirchheim unter Teck Kruichling,48.64423,9.42936
 EnBW DE-Kirchheim unter Teck Roßmarkt,48.646394,9.45217
 EnBW DE-Kirchheim Untere Steinstr.,48.650465,9.457406
 EnBW DE-Kirchlengern Elsestraße,52.19283,8.63106
@@ -10331,7 +10360,7 @@ EnBW DE-Obrigheim Auweg,49.35179,9.096587
 EnBW DE-Ochsenhausen Bahnhof,48.070844,9.947454
 EnBW DE-Ochsenhausen Memminger Str.,48.069579,9.953645
 EnBW DE-Ochtrup,52.20642,7.207506
-EnBW DE-Odenthal,51.02984,7.102414
+EnBW DE-Odenthal Auenweg,51.02971,7.10292,25
 EnBW DE-Oerlenbach An der Heide,50.14459,10.15397
 EnBW DE-Offenau Hauptstraße,49.24516,9.1638
 EnBW DE-Offenburg Schutterwälder Str.,48.465131,7.931099
@@ -12107,7 +12136,7 @@ EWE-GO DE-Pforzheim Adolf-Seebacher-Straße,48.91042,8.716654
 EWE-GO DE-Pfullingen Max-Eyth-Straße,48.474563,9.226802
 EWE-GO DE-Pinneberg Friedrich-Ebert-Straße,53.664061,9.7936
 EWE-GO DE-Pirmasens Turnstraße,49.214422,7.595474,25
-EWE-GO DE-Pocking Bgm.-Wenig-Str.,48.395047,13.311973
+EWE-GO DE-Pocking Bürgermeister-Wenig-Straße,48.39467,13.31166,25
 EWE-GO DE-Porta Westfalica Zum Autohof,52.210649,8.874717
 EWE-GO DE-Pulheim Sachsstraße,50.958113,6.800715
 EWE-GO DE-Quakenbrück Hasestraße,52.675897,7.946103
@@ -12403,6 +12432,8 @@ eze DE-Frankfurt am Main Luxemburgerallee,50.119729,8.711134
 eze DE-Stuttgart Salzäckerstraße,48.725108,9.152714
 
 Eşarj TR-Silivri/İstanbul General Ali İhsan Türkkan Cd.,41.074694,28.2608
+Eşarj TR-Suluca Lapseki Servis Alanı,40.27569,26.62788
+Eşarj TR-Suluca Lapseki Servis Alanı,40.27589,26.62543
 
 familia DE-Elmshorn Hans-Böckler- Straße,53.74851,9.68473
 familia DE-Geesthacht Spandauer Straße,53.432495,10.34185
@@ -12558,6 +12589,7 @@ Fines BG-Марикостиново,41.434421,23.333701
 Fines BG-Пролеша 8,42.783942,23.166997
 Fines BG-Търговище Targovishte 4009,43.244632,26.54884
 
+Fortum FI-Salo Ruoksmäentie,60.41877,23.16442
 Fortum NO-Alta,69.966743,23.268569
 Fortum NO-Bykle,59.354746,7.355757
 Fortum NO-Bøde Esso Rønvik,67.293538,14.407496
@@ -12883,6 +12915,8 @@ GW-Murnau DE-Murnau am Staffelsee Bahnhofstraße,47.679482,11.198206
 HadSol DE-Bremen Fangturm,53.0792,8.79823,25
 
 Harz-Energie DE-Altenau Torfhaus,51.80391,10.53587
+
+Helen FI-Espoo Piispansilta,60.16177,24.73858
 
 HEnW DE-Grömitz Rathausplatz,54.150844,10.958223
 HEnW DE-Hamburg Alter Fischmarkt,53.548537,9.997061
@@ -13569,12 +13603,12 @@ Ionity ES-Vila Sana,41.643444,0.931306
 Ionity FI-Jyväskylä,62.286903,25.714905
 Ionity FI-Karisto,60.9835,25.73731
 Ionity FI-Oulu,64.957547,25.52472
-Ionity FI-Paimio,60.42587,22.724
+Ionity FI-Paimio,60.42632,22.72266,30
 Ionity FI-Pyhäjärvi,63.713943,25.919011
 Ionity FI-Rovaniemi,66.517714,25.756892
 Ionity FI-Saariselkä Saariseläntie,68.419805,27.408501
 Ionity FI-Sodankylä Ivalontie,67.422859,26.586283
-Ionity FI-Tiiriö,61.00769,24.42201
+Ionity FI-Tiiriö,61.00853,24.41973
 Ionity FR-Agen,44.171306,0.60966
 Ionity FR-Aire de Darvault,48.264072,2.722024
 Ionity FR-Arclusaz,45.548541,6.158058
@@ -13898,11 +13932,22 @@ JOLT DE-Stuttgart Aldinger Straße,48.842207,9.232344
 JOLT DE-Stuttgart Rotenwaldstraße,48.767772,9.146954
 JOLT DE-Stuttgart Siemensstraße,48.811354,9.177144
 
+K-Lataus FI-Espoo Isonniitynkuja,60.16267,24.70714
 K-Lataus FI-Kotka Jumalniementie,60.505419,26.912911
+K-Lataus FI-Kouvola Tervasharjunkatu,60.87586,26.65345
+K-Lataus FI-Mäntsälä Sälinkääntie,60.63753,25.3162
+K-Lataus FI-Paimio Jokipellontie,60.45541,22.67942
 K-Lataus FI-Pieksämäki Kukkaroniementie,62.302633,27.164518
+K-Lataus FI-Pirkkala Palmrothintie,61.46629,23.72235
+K-Lataus FI-Raisio Voudinkatu,60.49038,22.16946
 K-Lataus FI-Rovaniemi Pulkamontie,66.518583,25.754303
+K-Lataus FI-Savonlinna Kullervonkatu,61.8648,28.94042
+K-Lataus FI-Seinäjoki Suupohjantie,62.79292,22.79174
 K-Lataus FI-Seinäjoki Väinämöinen,62.794812,22.875738
 K-Lataus FI-Tampere Martinpojankatu,61.476411,23.838876
+K-Lataus FI-Tampere Mäentakusenkatu,61.49732,23.89059
+K-Lataus FI-Turku Hakakatu,60.45751,22.30789
+K-Lataus FI-Turku Kingelininkatu,60.44196,22.28485
 
 Kaufland CZ-Praha (Hrdlořezy),50.092464,14.499563,30
 Kaufland CZ-Praha (Kolbenova),50.109281,14.544551,30
@@ -14885,7 +14930,7 @@ Lidl DE-Kiel Kirchhofallee,54.315871,10.118932
 Lidl DE-Kiel-Elmschenhagen Preetzer Straße 306,54.297308,10.169236
 Lidl DE-Kiel-Russee Rendsburger Landstr. 360,54.300548,10.072727
 Lidl DE-Kirchen Jungenthaler Str. 1,50.810378,7.87174
-Lidl DE-Kirchhain Niederrheinische Straße 60,50.824737,8.932151
+Lidl DE-Kirchhain Niederrheinische Straße,50.82475,8.93175
 Lidl DE-Kirchheim am Neckar Kreidlerstr. 2,49.036335,9.144422
 Lidl DE-Knittlingen,49.020952,8.750698
 Lidl DE-Korbach Arolser Landstr. 35,51.281319,8.875935
@@ -15169,8 +15214,15 @@ Lidl DE-Zwiesel,49.005602,13.222743
 Lidl DE-Überherrn Langwies 4,49.249482,6.698594
 Lidl DK-Ribe Saltgade,55.332214,8.767663
 Lidl FI-Espoo Kukkaromäki,60.20847,24.63643
+Lidl FI-Espoo Kurjenkellontie,60.15892,24.70506
+Lidl FI-Heinola Kaivokatu,61.20482,26.03823,30
+Lidl FI-Helsinki Vanha talvitie,60.19205,24.97697
 Lidl FI-Jyväskylä Akkalankuja,62.237597,25.81652
 Lidl FI-Jyväskylä Saarijärventie,62.29005,25.71637
+Lidl FI-Tampere Autovarikonkatu,61.45384,23.76498
+Lidl FI-Tampere Harjuntausta,61.51646,23.66541
+Lidl FI-Vantaa Murmelikuja,60.34516,25.10519
+Lidl FI-Vantaa Säätökuja,60.27424,24.9688
 Lidl FI-Vantaa,60.261581,24.87252
 Lidl FR-Bitche Rue de la Gare,49.048803,7.431454
 Lidl FR-Lamballe-Armor Rue des Prés Jouettes,48.481044,-2.499486
@@ -16557,6 +16609,7 @@ Pfalzwerke DE-Würzburg Robert-Bunsen-Straße,49.797224,9.991293
 Pfalzwerke DE-Zweibrücken Londoner Bogen,49.230819,7.406062
 Pfalzwerke DE-Zweibrücken Wilkstraße 2,49.251736,7.344511
 
+Plugit FI-Kangasniemi Otto Mannisen tie,61.9898,26.64419
 Plugit FI-Kokkola Kahvitie,63.825859,23.163124
 
 Plugpoint RO-Arpașu de Sus Str. Prundul Arpasului,45.698481,24.610972
@@ -16733,15 +16786,25 @@ Raiffeisenbank DE-Bad Homburg Werner-Reimers-Straße,50.216939,8.611279
 Recharge FI-Hankasalmi Pieksämäentie,62.358295,26.573299
 Recharge FI-Jalasjärvi Seinäjoentie,62.511838,22.729751
 Recharge FI-Jyväskylä Vapaaherrantie,62.250979,25.768702
+Recharge FI-Jämsä Kauhkialantie,61.85263,25.17333
 Recharge FI-Kemi Teollisuuskyläntie,65.80026,24.50519,20
 Recharge FI-Kuopio Naulakatu,62.820494,27.60667,18
 Recharge FI-Kärsämäki Pihtipudas Haapajärventie,63.974542,25.760347,25
 Recharge FI-Lapinlahti Kuopiontie,63.348968,27.412456
+Recharge FI-Lieto Haimiontie,60.48645,22.40169
 Recharge FI-Lohja Hossanmäentie,60.292683,24.063171,30
 Recharge FI-Mikkeli Graanintie,61.685816,27.298638
+Recharge FI-Mäntsälä Pohjoinen Pikatie,60.67509,25.35296
+Recharge FI-Pihtipudas Viitasaarentie,63.34772,25.60369,30
 Recharge FI-Pirkkala Palmrothintie,61.46403,23.71815
+Recharge FI-Pori Säästäjänkatu,61.47466,21.81611
+Recharge FI-Rautalampi Kuopiontie,62.62112,26.83679,30
 Recharge FI-Sodankylä,67.431695,26.57509
+Recharge FI-Suonenjoki Ysitie,62.58637,27.05107
 Recharge FI-Tampere Kangasalantie,61.477127,23.873108
+Recharge FI-Turku Piiskakuja,60.48573,22.32255
+Recharge FI-Vantaa Kirkkotie,60.27056,24.97444
+Recharge FI-Vantaa Maissikuja,60.27026,24.80469
 Recharge NO-Jørpeland Stålverksvegen,59.01662,6.038172
 Recharge NO-Malvik Stav,63.424355,10.729603
 Recharge SE-Ljungby Ringvägen,56.814007,13.905327
@@ -17598,6 +17661,8 @@ SWU DE-Ulm Hafenbad,48.400459,9.993709
 SWU DE-Ulm Steingasse,48.399029,9.997411
 SWU DE-Ulm Wilhelmstraße,48.404929,9.98564
 
+Sähkötalo FI-Helsinki Runeberginkatu,60.16774,24.93063
+
 Süwag DE-Allmersbach Allmersbacher Straße,48.908499,9.484948
 Süwag DE-Bad Ems Silberau,50.332595,7.708017
 Süwag DE-Eltville am Rhein Taunusstraße,50.02711,8.12039
@@ -17965,7 +18030,6 @@ TotalEnergies DE-Hagen Elseyer Straße,51.367628,7.550393
 TotalEnergies DE-Herne Holsterhauser Straße,51.53103,7.204865
 TotalEnergies DE-Idstein Wiesbadener Straße,50.216926,8.254032
 TotalEnergies DE-Karlsruhe,48.985836,8.4475,80
-TotalEnergies DE-Kirchheim,48.641957,9.433532,80
 TotalEnergies DE-Kösching,48.811149,11.479536
 TotalEnergies DE-Lohfelden,51.286809,9.529609,80
 TotalEnergies DE-Magdeburg Maxim-Gorki-Straße,52.131011,11.620677
@@ -18102,6 +18166,8 @@ twn DE-Naumburg (Saale) Jakobsring,51.149859,11.814456
 Ultra-Fast SE-Varberg Gunnestorpsvägen,57.16941,12.276915,25
 
 UNI-ELEKTRO DE-Dresden Bamberger Straße,51.035756,13.710349
+
+Unified FI-Lahti Pasaasi,60.93526,25.62618
 
 Uno-X DK-Kliplev Industripark,54.939616,9.379191,21
 Uno-X DK-Nyborg Storebæltsvej,5.308467,10.809753
@@ -18267,10 +18333,17 @@ Virta DE-Nidda Eisenried,50.416387,9.017287
 Virta DE-Reddeber Am Stadtweg,51.861832,10.80263
 Virta DE-Rostock Alte Dorfstraße,54.10095,12.18146
 Virta DE-Salzwedel Brunnenstraße,52.85815,11.14482
+Virta FI-Harjavalta Yhdyskatu,61.3105,22.14535
+Virta FI-Helsinki Maneesikatu,60.17344,24.9602
 Virta FI-Hyvinkää Kalevankatu,60.605277,24.867179
 Virta FI-Iittala Könnölänmäentie,61.090003,24.130057
 Virta FI-Jyväskylä Sammontie,62.286632,25.718973
+Virta FI-Liminka Yritystie,64.80733,25.45752
+Virta FI-Mäntsälä Huvitie,60.63418,25.31764
+Virta FI-Nurmes Kauppalan talo,63.54465,29.13302
+Virta FI-Parkano Pahkalantie,62.00497,23.01036
 Virta FI-Pello Kolarintie,66.80841,23.99579,20
+Virta FI-Rauma Ottilantie,61.10116,21.50577
 Virta FR-Reichstett Boulevard des Enseignes,48.65242,7.73073
 Virta FR-Saintes Rue de la Côte de Beauté,45.746659,-0.669742
 Virta SE-Luleå Besiktningsvägen,65.617968,22.044465
