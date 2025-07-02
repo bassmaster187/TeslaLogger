@@ -10,9 +10,15 @@ Please make sure you have the latest docker and docker compose. Many repositorie
 mkdir backup
 mkdir mysql
 mkdir invoices
+chmod 777 backup
+chmod 777 mysql
+chmod 777 invoices
 wget https://raw.githubusercontent.com/bassmaster187/TeslaLogger/refs/heads/NET8/.env -O .env
 wget https://raw.githubusercontent.com/bassmaster187/TeslaLogger/refs/heads/NET8/docker-compose.yml -O docker-compose.yml
 docker compose pull
+```
+You can adjust some settings in your .env file like Timezone (default is MEZ / Berlin)
+```
 docker compose up -d
 ```
 
