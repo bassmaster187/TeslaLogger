@@ -2007,6 +2007,7 @@ Supercharger-V3 DE-Münchberg-Nord,50.202995,11.776503,8
 Supercharger-V3 DE-München - Die Hirschau,48.161505,11.602763
 Supercharger-V3 DE-München - OEZ,48.184494,11.532399
 Supercharger-V3 DE-München - Pasing Arcaden,48.147909,11.464882
+Supercharger-V3 DE-München - Pasing Arcaden,48.14826,11.46415,35
 Supercharger-V3 DE-München - Sendling,48.105054,11.536857,30
 Supercharger-V4 DE-München Riem Arcaden,48.132573,11.689725,60
 Supercharger-V4 DE Münster,51.992189,7.571158
@@ -3609,7 +3610,7 @@ Supercharger-V4 SE-Eskilstuna,59.388227,16.532384
 Supercharger SE-Falkenberg,56.931922,12.518628
 Supercharger-V4 SE-Falun,60.605638,15.628506
 Supercharger SE-Grums,59.365749,13.14537
-Supercharger-V4 SE-Gränna,57.924965,14.319822
+Supercharger-V4 SE-Gränna,57.92497,14.31982,30
 Supercharger SE-Gäddede,64.5065,14.1435
 Supercharger SE-Gävle,60.648513,17.120583
 Supercharger-V3 SE-Göteborg,57.651627,11.95105
@@ -3628,6 +3629,7 @@ Supercharger SE-Jäckvik,66.39067,16.964868
 Supercharger-V3 SE-Jönköping,57.772539,14.199845
 Supercharger SE-Kalmar,56.673228,16.321408
 Supercharger-V3 SE-Kalmar-Giraffen,56.671493,16.333901
+Supercharger-V3 SE-Karlshamn,56.1911,14.84701,40
 Supercharger-V4 SE-Karlskoga,59.327377,14.534623
 Supercharger-V4 SE-Karlskrona,56.196043,15.639362
 Supercharger SE-Karlstad,59.381535,13.467609
@@ -3646,6 +3648,7 @@ Supercharger SE-Lagan,57.028956,14.014744
 Supercharger-V4 SE-Laxå,58.982245,14.623561
 Supercharger-V3 SE-Linköping,58.435438,15.590951
 Supercharger-V3 SE-Ljusdal,61.827747,16.094661
+Supercharger-V3 SE-Ludvika,60.1518,15.19179
 Supercharger-V4 SE-Luleå,65.590269,22.147879
 Supercharger-V3 SE-Lycksele,64.596066,18.674414
 Supercharger-V4 SE-Länsjärv,66.65169,22.18229
@@ -3660,10 +3663,11 @@ Supercharger-V3 SE-Markaryd,56.444825,13.603916
 Supercharger SE-Mellbystrand,56.501606,12.95763
 Supercharger-V4 SE-Mellerud,58.700124,12.450541
 Supercharger SE-Mora,61.005921,14.54418
-Supercharger-V3 SE-Nacka,59.311237,18.176019
+Supercharger-V3 SE-Nacka,59.31149,18.17496,30
 Supercharger SE-Norrköping,58.62191,16.154806
 Supercharger-V4 SE-Nynäshamn,58.912296,17.956868
 Supercharger-V4 SE-Nässjö,57.650685,14.736702
+Supercharger-V4 SE-Orsa,61.11675,14.62762
 Supercharger-V4 SE-Oskarshamn,57.263232,16.427816
 Supercharger-V4 SE-Piteå,65.235417,21.530925
 Supercharger SE-Puoltikasvaara,67.440201,21.115515
@@ -3690,8 +3694,8 @@ Supercharger SE-Tanum,58.722128,11.344127,40
 Supercharger-V4 SE-Tierp,60.340202,17.487263
 Supercharger SE-Torsby,60.129704,12.998069
 Supercharger-V4 SE-Torsvik,57.691181,14.155433
-Supercharger SE-Trollhättan,58.313643,12.299041
-Supercharger SE-Tystberga,58.918156,17.367987
+Supercharger-V3 SE-Trollhättan,58.31361,12.299
+Supercharger SE-Tystberga,58.91818,17.36792,30
 Supercharger-V4 SE-Tärnaby,65.711569,15.255972
 Supercharger SE-Töcksfors,59.509437,11.822381
 Supercharger SE-Töre,65.911639,22.65727
@@ -3711,12 +3715,14 @@ Supercharger-V3 SE-Vetlanda,57.414845,15.09037
 Supercharger-V4 SE-Vimmerby,57.663727,15.854937
 Supercharger-V4 SE-Visby,57.621272,18.321336
 Supercharger-V4 SE-Värnamo,57.450577,14.100694
+Supercharger-V4 SE-Västerås,59.60876,16.62239
 Supercharger-V3 SE-Växjö,56.884262,14.763464
 Supercharger-V3 SE-Ystad,55.43402,13.83989,30
 Supercharger-V4 SE-Ytterhogdal,62.174472,14.937149
 Supercharger-V4 SE-Ängelholm,56.254452,12.894906
 Supercharger-V4 SE-Åkersberga,59.487925,18.27068
 Supercharger-V3 SE-Ånge,62.537307,15.919596
+Supercharger SE-Åre,63.3951,13.08778
 Supercharger-V3 SE-Åsarna,62.640554,14.37138
 Supercharger SE-Ödeshög,58.227173,14.668821
 Supercharger-V3 SE-Örebro,59.297677,15.206645,40
@@ -6718,8 +6724,11 @@ Allego NL-Meerkerk,51.89981,4.98278,12
 Allego NL-Paukenweg Middelburg,51.48,3.6368,15
 Allego NL-Venlo Nijmeegseweg,51.395385,6.174293,60
 Allego NL-Zaltbommel Hogeweg,51.79655,5.2553,22
+Allego SE-Arboga Burskapsvägen,59.42677,15.8286,25
 Allego SE-Gävle,60.645483,17.146225
 Allego SE-Helsingborg Landskronavägen,56.001269,12.744955
+Allego SE-Linköping Norra Svedengatan,58.43366,15.5882
+Allego SE-Södertälje Genetaleden,59.1866,17.57406
 Allego SE-Örkelljunga,56.285576,13.337159
 
 AllgäuStrom DE-Fischen im Allgäu An der Breitach,47.425857,10.265904
@@ -6840,7 +6849,7 @@ ARAL DE-Bautzen Kreckwitzer Straße,51.19029,14.45191
 ARAL DE-Bensheim,49.672869,8.597024,10
 ARAL DE-Bensheim,49.672979,8.59661,20
 ARAL DE-Bochum,51.501513,7.258011
-ARAL DE-Braunschweig,52.322159,10.478146
+ARAL DE-Braunschweig Hansestraße,52.32218,10.47816,40
 ARAL DE-Bremen Osterholzer Heerstraße,53.05817,8.93889
 ARAL DE-Bremen Stapelfeldtstraße,53.11069,8.75425
 ARAL DE-Bremen Stapelfeldtstraße,53.1111,8.75315
@@ -7443,6 +7452,7 @@ chargeIT DE-Nürnberg Marienbergstraße,49.48473,11.08936
 chargeIT DE-Petershausen,48.416818,11.478081
 chargeIT DE-Saarlouis,49.290288,6.758827,20
 chargeIT DE-Ungerhausen,48.017723,10.270062
+chargeIT SE-Bromma Ulvsundavägen,59.35631,17.94863
 
 ChargeNet NZ-Bombay Mill Road,-37.192741,174.983653
 ChargeNet US-South San Francisco El Camino Real,37.646701,-122.429172
@@ -7699,9 +7709,13 @@ CircleK EE-Valga maakond Pikk tn,57.788455,26.048332
 CircleK LT-Kryžkalnis Dvaro gatvė,55.484335,22.58835,25
 CircleK SE-Bjärred,55.722256,13.08846
 CircleK SE-Göteborg,57.707127,11.870444
+CircleK SE-Kiruna Industrivägen,67.84812,20.27537
 CircleK SE-Lund Magistratsvägen,55.72023,13.203808
+CircleK SE-Lycksele Umevägen,64.59021,18.69169
 CircleK SE-Malmö Derbyvägen,55.57868,13.06286
+CircleK SE-Skellefteå Kågevägen,64.75814,20.9659
 CircleK SE-Solna Järva krog,59.38018,18.00905
+CircleK SE-Upplands Väsby Kapellvägen,59.51355,17.92023
 
 Circontrol AL-Bërzhitë Palmanova,41.248442,19.903761
 Circontrol AL-Tiranë Bajram Curri Blvd,41.322884,19.812235
@@ -8687,11 +8701,16 @@ E.ON DK-Vejle Skærup Øst,55.64045,9.563059
 E.ON DK-Væggerløse Væggerløsevej,54.70973,11.919614
 E.ON NO-Lillesand Legdene,58.23974,8.29801,15
 E.ON SE-Arboga Burskapsvägen,59.42613,15.82931,15
+E.ON SE-Arvidsjaur Skillnadsgatan,65.59324,19.1637
 E.ON SE-Bunkeflostrand Skånegårdsvägen,55.559388,12.935508,30
+E.ON SE-Eskilstuna Västerleden,59.39352,16.46654
+E.ON SE-Huskvarna Grännavägen,57.78894,14.26533,20
+E.ON SE-Höör Nya Sätoftavägen,55.92608,13.54569
 E.ON SE-Kalmar Dragonvägen,56.674893,16.321684
 E.ON SE-Markaryd Ulvarydsvägen,56.44516,13.6031,15
 E.ON SE-Norrköping Skärblackavägen,58.568434,16.080373
 E.ON SE-Rydebäck Landskronavägen,55.964455,12.789519
+E.ON SE-Stockholm Jarlaplan,59.34438,18.06269,25
 E.ON SK-Beladice Čeladická,48.331752,18.267202
 E.ON SK-Bratislava Mlynské nivy,48.146676,17.126711
 E.ON SK-Moldava nad Bodvou Rožňavská,48.608534,20.985711
@@ -10091,6 +10110,7 @@ EnBW DE-Köngen Stöfflerplatz,48.684751,9.363116
 EnBW DE-Könnern,51.692169,11.767342
 EnBW DE-Köthen (Anhalt),51.754592,11.999232
 EnBW DE-Künzelsau Wertwiesen,49.280232,9.692526
+EnBW DE-Kürten Wipperfürther Straße,51.01998,7.24648,25
 EnBW DE-Küssaberg Rheinpromenade,47.586924,8.304186
 EnBW DE-Laatzen Bauhaus,52.308314,9.805588
 EnBW DE-Laatzen Pettenkoferstraße,52.305513,9.812718
@@ -11263,6 +11283,7 @@ ensev DE-Varel Bockhorner Straße,53.393638,8.093035
 
 ENTEGA DE-Büttelborn Im Mehlsee,49.902926,8.523264
 ENTEGA DE-Darmstadt Frankfurter Straße,49.886491,8.651784
+ENTEGA DE-Darmstadt Kasinostraße,49.88339,8.64826,30
 ENTEGA DE-Groß-Umstadt Georg-August-Zinn-Straße,49.872049,8.914015
 ENTEGA DE-Rödermark Am Schwimmbad,49.976334,8.803954,18
 ENTEGA DE-Weiterstadt LOOP5,49.89237,8.60564
@@ -11328,7 +11349,14 @@ Eviny NO-Svelgen Gunnar Scheldrups veg,61.76843,5.292211
 Eviny NO-Valderøy Valderøyvegen,62.52914,6.11634,25
 Eviny NO-Ålesund Nedre Strandgate,62.469703,6.148216
 Eviny NP-Tau Fiskåvegen,59.065012,5.920978
+Eviny SE-Boden Lulevägen,65.81616,21.70918,25
+Eviny SE-Gällivare Sommarvägen,67.14815,20.66107
 Eviny SE-Hyllinge Dragaregatan,56.100975,12.857447
+Eviny SE-Norrfjärden Porsnästorget,65.42187,21.49673
+Eviny SE-Ramsele Storgatan,63.53912,16.46971
+Eviny SE-Sandöverken Hornöberget,62.80411,17.95201,30
+Eviny SE-Skellefteå Kronbodgatan,64.75571,20.91828
+Eviny SE-Sölvesborg Järnvägsgatan,56.04848,14.58137
 Eviny SE-Älmhult Silverdalsgatan,56.556522,14.147798,30
 
 EVite CH-Baden Segelhof,47.458561,8.278505
@@ -12401,7 +12429,7 @@ EWE-GO DE-Wurster Nordseeküste Feuerweg,53.778911,8.61385
 EWE-GO DE-Wurster Nordseeküste In der Langen Straße,53.649001,8.509067
 EWE-GO DE-Wustermark Alter Spandauer Weg,52.539945,12.978594
 EWE-GO DE-Wörth an der Donau Im Gewerbepark,49.00215,12.36504
-EWE-GO DE-Würselen Adenauerstraße,50.805236,6.154017
+EWE-GO DE-Würselen Adenauerstraße,50.80527,6.15399,25
 EWE-GO DE-Würzburg Faulenbergstraße,49.79771,9.98693
 EWE-GO DE-Zeitz Geußnitzer Straße,51.03663,12.16023
 EWE-GO DE-Zetel Neuenburger Straße,53.41799,7.972179
@@ -12608,6 +12636,7 @@ Fortum NO-Bykle,59.354746,7.355757
 Fortum NO-Bøde Esso Rønvik,67.293538,14.407496
 Fortum NO-Geiranger Gjorvahaugen,62.095088,7.211245
 Fortum NO-Sortland,68.704914,15.414759
+Fortum SE-Karlskoga Norra Viaduktgatan,59.32518,14.52661,20
 
 Fraunhofer DE-Berlin Gustav-Meyer-Allee,52.541473,13.385278
 Fraunhofer DE-Berlin Pascalstraße,52.523217,13.323841
@@ -13029,6 +13058,8 @@ HoryzontEV PL-Piła al. Powstańców Wielkopolskich,53.168749,16.7705
 Hrvatski-Telekom HR-Rijeka Rujevica ul.,45.34492,14.40687
 Hrvatski-Telekom HR-Sveti Vid-Miholjice,45.13105,14.543484
 
+I2GO SE-Grums Nyängsgatan,59.36735,13.14465,15
+
 Iberdrola ES-Calvarrasa de Abajo Crta de Madrid,40.945784,-5.554589
 Iberdrola ES-Carbajosa de la Sagrada,40.94678,-5.642569
 Iberdrola ES-Gran Alacant Carrer de Finlandia,38.233337,-0.550077
@@ -13097,6 +13128,7 @@ IKEA DE-Walldorf,49.30499,8.629349
 IKEA DE-Wetzlar,50.568262,8.498073
 IKEA DE-Wuppertal,51.310176,7.25413,15
 IKEA DE-Würzburg,49.821812,9.982398
+IKEA SE-Umeå,63.80821,20.25179,25
 
 illwerke-vkw AT-Argenau Au,47.322021,9.980906
 illwerke-vkw AT-Bregenz Weidachstraße,47.488331,9.740697,10
@@ -13824,23 +13856,29 @@ Ionity PL-Zgorzelec Jędrzychowice DK94,51.176527,15.032709
 Ionity PL-Świecko,52.313054,14.641559
 Ionity PT-Almodovar L,37.536329,-8.182924
 Ionity PT-Almodovar O,37.535858,-8.184742
+Ionity SE-Docksta Dockstavägen,63.05722,18.33733,30
 Ionity SE-Enköping,59.65339,17.08324
 Ionity SE-Gränna,58.001572,14.450217
 Ionity SE-Helsingborg,56.016989,12.759809,25
 Ionity SE-Hudiksvall,61.74251,17.07861
-Ionity SE-Karlskrona,56.20688,15.64293
+Ionity SE-Jävrebyn,65.14307,21.50461
+Ionity SE-Karlskrona,56.20643,15.64273,25
 Ionity SE-Karlstad,59.38093,13.46529
 Ionity SE-Kristianstad,56.023285,14.173829
 Ionity SE-Malmö Vintrie,55.556238,12.952515,30
 Ionity SE-Mantorp,58.37214,15.2948
-Ionity SE-Mariestad,58.68492,13.84544
+Ionity SE-Mariestad Sandbäcksvägen,58.68557,13.84551,30
+Ionity SE-Mellerud Snickargatan,58.70585,12.45395
 Ionity SE-Norrköping Gröndalsgatan,58.577064,16.181308
+Ionity SE-Nyköping Stenbocksvägen,58.7717,17.02
 Ionity SE-Oskarshamn,57.2513,16.44875
 Ionity SE-Spekeröd,58.024744,11.847286
 Ionity SE-Strömstad,58.914771,11.259396
 Ionity SE-Sundsvall,62.33874,17.3538
 Ionity SE-Södertälje,59.17525,17.64293
 Ionity SE-Ulricehamn,57.81289,13.41947
+Ionity SE-Umeå Gräddvägen,63.85334,20.29989
+Ionity SE-Uppsala Takpannegatan,59.88546,17.66705,30
 Ionity SE-Varberg,57.168434,12.277196,25
 Ionity SE-Värnamo,57.1645,14.07578
 Ionity SE-Ytterån,63.31709,14.1692
@@ -14267,6 +14305,7 @@ Kaufland HR-Bjelovar Ulica Vlahe Paljetka,45.902743,16.852224
 Kaufland HR-Bjelovar Ulica Vlahe Paljetka,45.902749,16.852193
 Kaufland HR-Poreč Ul. Mate Vlašića,45.232059,13.620495
 Kaufland HR-Pula Ul. Jurja Žakna,44.878244,13.863232
+Kaufland HR-Sesvete Bistrička ul.,45.83341,16.10836
 Kaufland HR-Umag Novigradska ulica,45.423808,13.527193
 Kaufland PL-Gdynia Morska,54.52951,18.50433
 Kaufland PL-Szczecin Andrzeja Struga,53.38489,14.65884
@@ -14356,6 +14395,8 @@ Kreisler AT-St. Veit Technologiepark,46.757146,15.6238
 Kuopion-Energia FI-Kuopio Vitostie,62.836956,27.608008
 
 KW-Main-Kinzig DE-Bad Orb Würzburger Straße,50.227531,9.349265
+
+kWatt SE-Kiruna Österleden,67.84465,20.25528
 
 KWMS AT-Fusch Ferleiten,47.168672,12.813372
 
@@ -14545,7 +14586,7 @@ Lidl AT-Frastanz,47.223951,9.620142
 Lidl AT-Gleisdorf,47.111567,15.708227
 Lidl AT-Gmunden,47.929019,13.788997
 Lidl AT-Graz,47.099401,15.417457
-Lidl AT-Gänserndorf Neusiedler Straße,48.334646,16.711622
+Lidl AT-Gänserndorf Neusiedler Straße,48.33465,16.71162,30
 Lidl AT-Götzis,47.341072,9.652542
 Lidl AT-Hall in Tirol,47.277601,11.495474
 Lidl AT-Hard,47.481178,9.688615
@@ -15272,6 +15313,7 @@ Lidl IT-Peschiera del Garda,45.43475,10.680242
 Lidl LU-Schmëtt Huldange Troisvierges,50.181824,6.023547
 Lidl NL-Zierikzee Haringvlietplein,51.652977,3.91038
 Lidl PL-Dąbrówka,52.376433,16.742482
+Lidl PL-Giżycko Bohaterów Westerplatte,54.03546,21.77894
 Lidl PL-Poznań,52.41669,16.890348
 Lidl PL-Poznań,52.44325,16.94678
 Lidl PL-Rokietnica,52.507335,16.737923
@@ -15314,6 +15356,8 @@ Lidl RO-Târgoviște,44.918809,25.481056
 Lidl RO-Târgu Jiu,45.053249,23.282905
 Lidl SE-Boden Kaptensgatan,65.823936,21.667282
 Lidl SE-Falkenberg,56.91611,12.502524
+Lidl SE-Oskarshamn Hantverksgatan,57.25968,16.45708
+Lidl SE-Sollentuna Djupdalsvägen,59.44547,17.95535
 Lidl SI-Postojna Reška cesta,45.77068,14.19829,15
 Lidl SK-Galanta Esterházyovcov,48.194772,17.735124
 Lidl SK-Komárno,47.7645,18.094663
@@ -15328,6 +15372,8 @@ Linz AT-Linz Industriezeile,48.301408,14.319432
 Linz AT-Mittertreffling Johann-Wöckinger-Straße,48.337237,14.367777
 Linz AT-Puchenau Golfplatzstraße,48.310791,14.233391
 Linz AT-Sierning Gewerbestraße,48.035646,14.314642
+
+Ljusdal-Energi SE-Kårböle Härjedalsvägen,61.98695,15.30037
 
 LM-Energy AT-Seeboden Hauptstraße,46.816517,13.510438
 
@@ -15522,10 +15568,18 @@ Mer NO-Haugesund Karmsundgata,59.402876,5.289789,30
 Mer NO-Sandefjord Fokserødveien,59.178772,10.209071
 Mer NO-Tromsø,69.67366,18.923151
 Mer SE-Gävle Johanneslötsvägen,60.667786,17.080474
+Mer SE-Laxå Revirvägen,58.98276,14.62493,25
+Mer SE-Linköping Nygårdsinfarten,58.43082,15.5844
 Mer SE-Ljungby Ringvägen,56.813133,13.906555
 Mer SE-Löddeköpinge Marknadsvägen,55.766646,12.990359,16
+Mer SE-Malmö Derbyvägen,55.57868,13.06286,25
+Mer SE-Mjölby Sparregatan,58.32376,15.09222
 Mer SE-Norrköping Järngatan,58.618527,16.162364
 Mer SE-Nybro Norra Vägen,56.73614,15.934698
+Mer SE-Solna Vallgatan,59.3795,18.01045
+Mer SE-Sundsvall Skepparegatan,62.3932,17.30567
+Mer SE-Vindeln Hökvägen,64.19781,19.72296
+Mer SE-Åre Björnenvägen,63.38654,13.15324
 
 MFG GB-Sowerby York Road,54.228782,-1.329168
 
@@ -15545,6 +15599,8 @@ MOL RO-Ilia A1,45.948194,22.654306
 Monta DE-Egling St2070,47.923998,11.488849
 Monta DK-Billund Ellehammers Alle,55.731321,9.135699
 Monta FR-Bonifacio Av. Sylvère Bohn,41.38904,9.16589
+Monta SE-Granö Beckasin,64.24773,19.30651
+Monta SE-Mölndal Åby Arenaväg,57.6488,12.00263
 
 MOON AT-Bärnbach Packer Straße,47.054591,15.137164
 MOON AT-Bärnbach Packer Straße,47.054634,15.136206
@@ -16047,7 +16103,16 @@ ODE DE-Zella-Mehlis Am Köhlersgehäu,50.643717,10.685751,15
 OK DK-Hasle Storegade,55.184427,14.705407
 OK DK-Løkken Industrivej,57.37333,9.72812,15
 
+OKQ8 SE-Kalix Parallellgatan,65.85369,23.14756
+OKQ8 SE-Kiruna Österleden,67.84552,20.25424
+OKQ8 SE-Luleå Robertsviksgatan,65.59071,22.1485,20
+OKQ8 SE-Motala Vintergatan,58.5428,15.01357
+OKQ8 SE-Mönsterås Storgatan,57.05069,16.43983
 OKQ8 SE-Sveg Vallarvägen,62.034668,14.367836
+OKQ8 SE-Tystberga Sillekrog,58.91809,17.36909,20
+OKQ8 SE-Vilhelmina Volgsjövägen,64.62213,16.66623
+OKQ8 SE-Värnamo Refugen,57.16263,14.07357,25
+OKQ8 SE-Växjö Norremarksvägen,56.90196,14.82747
 OKQ8 SE-Örnsköldsvik Härnösandsvägen,63.29173,18.7059,10
 
 OMV AT-Alland Gewerbestraße,48.06799,16.06332
@@ -16625,6 +16690,8 @@ Pfalzwerke DE-Würzburg Robert-Bunsen-Straße,49.797224,9.991293
 Pfalzwerke DE-Zweibrücken Londoner Bogen,49.230819,7.406062
 Pfalzwerke DE-Zweibrücken Wilkstraße 2,49.251736,7.344511
 
+PiteEnergi SE-Piteå Västra Kajvägen,65.31615,21.45845
+
 Plugit FI-Joensuu Kuurnankatu,62.61789,29.77164
 Plugit FI-Kangasniemi Otto Mannisen tie,61.9898,26.64419
 Plugit FI-Kokkola Kahvitie,63.825859,23.163124
@@ -16834,9 +16901,20 @@ Recharge FI-Varkaus Käpykankaantie,62.30518,27.85627
 Recharge FI-Ähtäri Myllymäentie,62.55644,24.11053
 Recharge NO-Jørpeland Stålverksvegen,59.01662,6.038172
 Recharge NO-Malvik Stav,63.424355,10.729603
+Recharge SE-Askersund Södra Infarten,58.87979,14.8974,25
+Recharge SE-Bålsta Södra Bålstaleden,59.56022,17.54867
+Recharge SE-Gävle Fjärdingsvägen,60.64809,17.12218,25
+Recharge SE-Hisings Backa Transportgatan,57.77324,12.0013
+Recharge SE-Järfälla Skarprättarvägen,59.46942,17.81066
+Recharge SE-Karlskrona Vedeby gata,56.20413,15.64101
+Recharge SE-Kista Knarrarnäsgatan,59.40091,17.9496
+Recharge SE-Kungsängen Femstenavägen,59.49632,17.74264
 Recharge SE-Ljungby Ringvägen,56.814007,13.905327
+Recharge SE-Nyköping Hästvägen,58.76476,16.98988
 Recharge SE-Oskarshamn Södra Fabriksgatan,57.263691,16.429998
+Recharge SE-Trollhättan Överby Köpcenter,58.31374,12.30868
 Recharge SE-Västervik Timmergatan,57.765343,16.602195
+Recharge SE-Örebro Kundvägen,59.21048,15.13189
 Recharge SE-Örnsköldsvik Valhallavägen,63.301555,18.725273
 
 reev CH-Spiez Oberriedstrasse,46.890603,7.356605
@@ -17787,6 +17865,7 @@ TankE DE-Köln Woensamstraße,50.939036,6.922319
 TankE DE-Köln Wupperplatz,50.99009,7.03328
 TankE DE-Köln Zum Gremberger Wäldchen,50.91552,7.00078
 TankE DE-Köln Zülpicher Straße,50.921509,6.920071
+TankE DE-Papenburg Hauptkanal Rechts,53.08572,7.38764
 TankE DE-Pulheim In den Benden,51.014301,6.749043
 TankE DE-Pulheim Velderhof,51.042104,6.758879
 TankE DE-Sankt Augustin Grantham-Allee,50.778397,7.181329
@@ -17943,7 +18022,6 @@ Threeforce DE-Babenhausen An der Stadtmauer 5,49.962623,8.954204
 Threeforce DE-Bad Zwischenahn Ocholter Straße 10a,53.188187,7.967912
 Threeforce DE-Barßel Gewerbepark 19,53.128699,7.769879
 Threeforce DE-Birkenfeld Hochwaldstraße 2,49.650445,7.156906
-Threeforce DE-Darmstadt Kasinostraße 96 A,49.88349,8.64835
 Threeforce DE-Daun Rosenbergstraße,50.196868,6.828973
 Threeforce DE-Dörpen Industriestr. 6,52.971251,7.36132
 Threeforce DE-Dörpen Neudörpener Straße 48-52,52.962762,7.343597
@@ -18320,12 +18398,26 @@ Vattenfall DE-Zossen Gerichtstraße,52.217499,13.469447
 Vattenfall DE-Zossen Gutstedtstraße,52.170101,13.471497
 Vattenfall NL-Beverwijk Parallelweg,52.480307,4.665939
 Vattenfall NL-Gronsveld Burg. Frans Cortenraadstraat,50.8125,5.72178
+Vattenfall SE-Ammarnäs Strandvägen,65.95758,16.21079
 Vattenfall SE-Arlöv Vassvägen,55.613434,13.102772,20
+Vattenfall SE-Boden Kyrkgatan,65.82433,21.68958
+Vattenfall SE-Bromma Ulvsundavägen,59.35064,17.9568
+Vattenfall SE-Fredriksberg Säfsbyn,60.14041,14.42078
+Vattenfall SE-Klimpfjäll Kultsjovägen,65.06323,14.80824
 Vattenfall SE-Kristianstad Jochums väg,56.02317,14.11813
+Vattenfall SE-Kungsbacka Kungsparksvägen,57.51449,12.07435
 Vattenfall SE-Lund Förhandlingsvägen,55.715834,13.156021
 Vattenfall SE-Löddeköpinge Handelsvägen,55.771406,12.988871,30
 Vattenfall SE-Löttorp Bödasandsallén,57.275163,17.047883
+Vattenfall SE-Norberg Fagerstavägen,60.06535,15.91861
+Vattenfall SE-Solna Evenemangsgatan,59.36967,18.00231
+Vattenfall SE-Sorsele Stationsgatan,65.53536,17.54203
+Vattenfall SE-Stockholm Sandhamnsgatan,59.34177,18.11033
+Vattenfall SE-Stockholm Valhallavägen,59.35088,18.05812,25
+Vattenfall SE-Strömstad Nordby Köpcenter,59.06492,11.20899,30
+Vattenfall SE-Trollhättan Anes väg,58.31365,12.3074
 Vattenfall SE-Täby Ytterbyvägen,59.434309,18.066909
+Vattenfall SE-Vännäsby Företagsvägen,63.91963,19.82843
 Vattenfall SE-Västervik Rest area Botorpström,57.661834,16.447212
 Vattenfall SE-Åsele Adamsgatan,64.163412,17.347031
 
@@ -18341,6 +18433,8 @@ VBE DE-Lauenburg/Elbe Hamburger Straße,53.374094,10.554125
 VBH DE-Hoyerswerda Kamenzer Bogen,51.42739,14.235942
 
 vigoris DE-Zinnowitz Dr.-Wachsmann-Straße,54.08001,13.90632
+
+Vimmerby-Energi SE-Vimmerby Västra Tullportsgatan,57.66819,15.8544,25
 
 Virta AT-Bad Fischau Industriegebiet B21,47.831789,16.186032
 Virta AT-Wiener Neudorf IZ-NÖ Süd Straße,48.07098,16.327825
@@ -18380,7 +18474,9 @@ Virta FI-Vaasa Kiitokaari,63.05324,21.71852,30
 Virta FI-Vaasa Laivakatu,63.10321,21.62373
 Virta FR-Reichstett Boulevard des Enseignes,48.65242,7.73073
 Virta FR-Saintes Rue de la Côte de Beauté,45.746659,-0.669742
+Virta SE-Gävle Geodetgatan,60.64035,17.14678
 Virta SE-Luleå Besiktningsvägen,65.617968,22.044465
+Virta SE-Råneå Kängsövägen,65.85626,22.29
 Virta SE-Smygehamn Smyge strandväg,55.339217,13.35998
 Virta SE-Västervik Allén,57.760546,16.612694
 
@@ -18520,6 +18616,8 @@ Volkswagen DE-Öhringen Rudolf-Diesel-Straße 1,49.200257,9.47635
 Volkswagen DE-Überlingen Hauptstraße 37,47.802296,9.238275
 Volkswagen IT-Bolzano Vittorio-Lancia-Straße,46.484029,11.336793
 
+Voltiva SE-Vetlanda Kyrkogatan,57.42667,15.09076
+
 Volvo IT-Ferrara Via Eridano,44.848679,11.589752
 
 VSW DE-Bad Oldesloe Am Bürgerpark,53.81141,10.3709
@@ -18613,6 +18711,7 @@ Wien-Energie AT-Wien Felberstraße,48.197281,16.335561
 Wien-Energie AT-Wien Guglgasse,48.185265,16.421039
 Wien-Energie AT-Wien Margaretengürtel,48.180155,16.352097
 Wien-Energie AT-Wien Montleartstraße,48.210903,16.304506
+Wien-Energie AT-Wien Ottakringer Straße,48.21346,16.32004
 Wien-Energie AT-Wien Senefeldergasse,48.17185,16.37475
 Wien-Energie AT-Wien U-Bahn-Bogen,48.217703,16.342094,60
 Wien-Energie AT-Wiener Neudorf Multiplex,48.103063,16.318812
@@ -18836,6 +18935,8 @@ RO Brașov Regina Maria,45.643713,25.599572
 RO Brașov Strada Poienelor,45.633184,25.63254
 RO Oradea Pasajul Vulturul Negru,47.055133,21.93175
 RO Săcele Strada George Moroianu,45.618203,25.698313
+SE Gällivare Postgatan,67.13387,20.65995
+SE Strömstad Nordby Köpcenter,59.06458,11.20858
 SE Tanumshede Tanum Shoppingcenter,58.72225,11.34893
 SK Bratislava Staré Grunty,48.15059,17.0674
 UA Cherkasy Gagarina St,49.438087,32.075958
