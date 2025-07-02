@@ -2322,6 +2322,7 @@ Supercharger-V3 FI-Huittinen,61.16836,22.67993,35
 Supercharger-V4 FI-Hämeenlinna,60.9962,24.45549
 Supercharger-V3 FI-Inari,68.906674,27.025661
 Supercharger FI-Jalasjärvi,62.417071,22.791815
+Supercharger-V3 FI-Joensuu,62.60113,29.78203
 Supercharger FI-Jyväskylä,62.214407,25.72246
 Supercharger-V4 FI-Jämsä,61.87004,25.23529
 Supercharger-V3 FI-Karesuvanto,68.450226,22.4814
@@ -2329,7 +2330,7 @@ Supercharger-V4 FI-Keminmaa,65.79995,24.50417,30
 Supercharger-V3 FI-Kempele,64.901803,25.535398
 Supercharger FI-Kokkola,63.829282,23.148487
 Supercharger-V3 FI-Kuopio,62.820695,27.607985
-Supercharger FI-Kärsämäki,63.974089,25.760145
+Supercharger-V3 FI-Kärsämäki,63.97403,25.76049,40
 Supercharger-V3 FI-Lappeenranta,61.052624,28.261424
 Supercharger-V3 FI-Levi,67.785892,24.818396
 Supercharger-V3 FI-Mikkeli,61.688444,27.280711
@@ -2342,6 +2343,7 @@ Supercharger FI-Pyhäjärvi,63.716298,25.920103
 Supercharger-V3 FI-Rovaniemi,66.501765,25.723048
 Supercharger-V3 FI-Sodankylä,67.419824,26.591239
 Supercharger-V4 FI-Tampere IKEA,61.45161,23.76986
+Supercharger-V4 FI-Vaasa,63.11251,21.65643
 Supercharger-V4 FI-Vantaa,60.2779,25.0822
 Supercharger FI-Vierumäki,61.112472,25.929927
 Supercharger-V3 FI-Ylöjärvi,61.556839,23.562433
@@ -5779,11 +5781,18 @@ ABC FI-Espoo Komeetankatu,60.16665,24.73444
 ABC FI-Forssa Matkailijankatu,60.82763,23.57226
 ABC FI-Hyvinkää Peltokuumolantie,60.61899,24.80656
 ABC FI-Hämeenlinna Paroistentie,61.013573,24.417542
+ABC FI-Inari Petsamontie,68.65909,27.54209
 ABC FI-Joensuu Koskikatu,62.600071,29.762005
+ABC FI-Joensuu Marjalantie,62.63588,29.66556
+ABC FI-Juuka Karjalantie,63.24685,29.26564
 ABC FI-Kangasala Mäkirinteentie,61.47447,23.97938
 ABC FI-Kankaanpää Asemakatu,61.81423,22.3759
+ABC FI-Kauhava Peltopassi,63.09122,23.05934
 ABC FI-Kimito Engelsbyvägen,60.16369,22.73586
+ABC FI-Kokkola Heinolankaari,63.83026,23.1467
 ABC FI-Kristinestad Gamla Vasavägen,62.26183,21.4857
+ABC FI-Kurikka Oikotie,62.48609,22.75211
+ABC FI-Lieksa Kalliokatu,63.32211,30.0082
 ABC FI-Mikkeli Hietakatu,61.67641,27.24274
 ABC FI-Padasjoki Tauluntie,61.34411,25.25049
 ABC FI-Pirkkala Keisarinviitta,61.45161,23.642142
@@ -5799,13 +5808,16 @@ ABC FI-Riihimäki Kinturintie,60.75243,24.73482
 ABC FI-Riihimäki Voimalankatu,60.73167,24.77838
 ABC FI-Sastamala Taitajantie,61.47454,22.55551
 ABC FI-Savonlinna Suuri Savontie,61.8774,28.82845
+ABC FI-Seinäjoki Latvalantie,62.80388,22.87457
 ABC FI-Tampere Keskisenkatu,61.47371,23.87376
 ABC FI-Tampere Rieväkatu,61.49147,23.82044
 ABC FI-Turku Joukahaisenkatu,60.45031,22.29645
 ABC FI-Ulvila Etupalokuja,61.426668,21.869311
 ABC FI-Vaala Vaalantie,64.566786,26.874453
 ABC FI-Vaasa Elementtitehtaantie,63.072859,21.699253
+ABC FI-Vaasa Kiitokaari,63.05362,21.71884,30
 ABC FI-Viitasaari Kokkosalmentie,63.07438,25.86506
+ABC FI-Ylivieska Joutsentie,64.07236,24.50942
 ABC FI-Ähtäri Oikotie,62.54999,24.08735
 
 Acea IT-Capena Via Tiberina,42.120239,12.590254
@@ -12590,6 +12602,7 @@ Fines BG-Пролеша 8,42.783942,23.166997
 Fines BG-Търговище Targovishte 4009,43.244632,26.54884
 
 Fortum FI-Salo Ruoksmäentie,60.41877,23.16442
+Fortum FI-Vaasa Kiilletie,63.11153,21.65328
 Fortum NO-Alta,69.966743,23.268569
 Fortum NO-Bykle,59.354746,7.355757
 Fortum NO-Bøde Esso Rønvik,67.293538,14.407496
@@ -12917,6 +12930,7 @@ HadSol DE-Bremen Fangturm,53.0792,8.79823,25
 Harz-Energie DE-Altenau Torfhaus,51.80391,10.53587
 
 Helen FI-Espoo Piispansilta,60.16177,24.73858
+Helen FI-Mäyry Seinäjoentie,62.76815,23.52667
 
 HEnW DE-Grömitz Rathausplatz,54.150844,10.958223
 HEnW DE-Hamburg Alter Fischmarkt,53.548537,9.997061
@@ -13600,7 +13614,7 @@ Ionity ES-Puerto Lumbreras,37.575694,-1.800833
 Ionity ES-Trigueros Norte,37.334097,-6.789422
 Ionity ES-Trigueros Sur,37.331672,-6.802211
 Ionity ES-Vila Sana,41.643444,0.931306
-Ionity FI-Jyväskylä,62.286903,25.714905
+Ionity FI-Jyväskylä,62.2869,25.71491,25
 Ionity FI-Karisto,60.9835,25.73731
 Ionity FI-Oulu,64.957547,25.52472
 Ionity FI-Paimio,60.42632,22.72266,30
@@ -13933,6 +13947,8 @@ JOLT DE-Stuttgart Rotenwaldstraße,48.767772,9.146954
 JOLT DE-Stuttgart Siemensstraße,48.811354,9.177144
 
 K-Lataus FI-Espoo Isonniitynkuja,60.16267,24.70714
+K-Lataus FI-Joensuu Linjatie,62.62878,29.70338
+K-Lataus FI-Kauhajoki Savikyläntie,62.43417,22.17694
 K-Lataus FI-Kotka Jumalniementie,60.505419,26.912911
 K-Lataus FI-Kouvola Tervasharjunkatu,60.87586,26.65345
 K-Lataus FI-Mäntsälä Sälinkääntie,60.63753,25.3162
@@ -16609,6 +16625,7 @@ Pfalzwerke DE-Würzburg Robert-Bunsen-Straße,49.797224,9.991293
 Pfalzwerke DE-Zweibrücken Londoner Bogen,49.230819,7.406062
 Pfalzwerke DE-Zweibrücken Wilkstraße 2,49.251736,7.344511
 
+Plugit FI-Joensuu Kuurnankatu,62.61789,29.77164
 Plugit FI-Kangasniemi Otto Mannisen tie,61.9898,26.64419
 Plugit FI-Kokkola Kahvitie,63.825859,23.163124
 
@@ -16785,26 +16802,36 @@ Raiffeisenbank DE-Bad Homburg Werner-Reimers-Straße,50.216939,8.611279
 
 Recharge FI-Hankasalmi Pieksämäentie,62.358295,26.573299
 Recharge FI-Jalasjärvi Seinäjoentie,62.511838,22.729751
+Recharge FI-Joensuu Kuurnankatu,62.61868,29.7719
 Recharge FI-Jyväskylä Vapaaherrantie,62.250979,25.768702
 Recharge FI-Jämsä Kauhkialantie,61.85263,25.17333
 Recharge FI-Kemi Teollisuuskyläntie,65.80026,24.50519,20
 Recharge FI-Kuopio Naulakatu,62.820494,27.60667,18
+Recharge FI-Kuusamo Torangintaival,65.9557,29.15944
 Recharge FI-Kärsämäki Pihtipudas Haapajärventie,63.974542,25.760347,25
 Recharge FI-Lapinlahti Kuopiontie,63.348968,27.412456
+Recharge FI-Leppävirta Kokoojatie,62.49457,27.75717
 Recharge FI-Lieto Haimiontie,60.48645,22.40169
 Recharge FI-Lohja Hossanmäentie,60.292683,24.063171,30
 Recharge FI-Mikkeli Graanintie,61.685816,27.298638
+Recharge FI-Muonio Torniontie,67.95514,23.68342
 Recharge FI-Mäntsälä Pohjoinen Pikatie,60.67509,25.35296
+Recharge FI-Pello Burmanintie,66.77562,23.96527
 Recharge FI-Pihtipudas Viitasaarentie,63.34772,25.60369,30
 Recharge FI-Pirkkala Palmrothintie,61.46403,23.71815
 Recharge FI-Pori Säästäjänkatu,61.47466,21.81611
 Recharge FI-Rautalampi Kuopiontie,62.62112,26.83679,30
+Recharge FI-Saariselkä Kiveliöntie,68.42256,27.40923
 Recharge FI-Sodankylä,67.431695,26.57509
 Recharge FI-Suonenjoki Ysitie,62.58637,27.05107
 Recharge FI-Tampere Kangasalantie,61.477127,23.873108
+Recharge FI-Tolosenmäki Joensuuntie,62.14238,30.04348
+Recharge FI-Tornio Teollisuuskatu,65.84393,24.18915
 Recharge FI-Turku Piiskakuja,60.48573,22.32255
 Recharge FI-Vantaa Kirkkotie,60.27056,24.97444
 Recharge FI-Vantaa Maissikuja,60.27026,24.80469
+Recharge FI-Varkaus Käpykankaantie,62.30518,27.85627
+Recharge FI-Ähtäri Myllymäentie,62.55644,24.11053
 Recharge NO-Jørpeland Stålverksvegen,59.01662,6.038172
 Recharge NO-Malvik Stav,63.424355,10.729603
 Recharge SE-Ljungby Ringvägen,56.814007,13.905327
@@ -18341,9 +18368,16 @@ Virta FI-Jyväskylä Sammontie,62.286632,25.718973
 Virta FI-Liminka Yritystie,64.80733,25.45752
 Virta FI-Mäntsälä Huvitie,60.63418,25.31764
 Virta FI-Nurmes Kauppalan talo,63.54465,29.13302
+Virta FI-Outokumpu Kummunkatu,62.72675,29.01391
 Virta FI-Parkano Pahkalantie,62.00497,23.01036
 Virta FI-Pello Kolarintie,66.80841,23.99579,20
+Virta FI-Raippaluoto Raippaluodontie,63.20691,21.46183
 Virta FI-Rauma Ottilantie,61.10116,21.50577
+Virta FI-Rovaniemi Lapinkävijäntie,66.50233,25.72143,20
+Virta FI-Rovaniemi Lautatie,66.49052,25.68369
+Virta FI-Vaasa Jukolantie,63.10284,21.64517
+Virta FI-Vaasa Kiitokaari,63.05324,21.71852,30
+Virta FI-Vaasa Laivakatu,63.10321,21.62373
 Virta FR-Reichstett Boulevard des Enseignes,48.65242,7.73073
 Virta FR-Saintes Rue de la Côte de Beauté,45.746659,-0.669742
 Virta SE-Luleå Besiktningsvägen,65.617968,22.044465
