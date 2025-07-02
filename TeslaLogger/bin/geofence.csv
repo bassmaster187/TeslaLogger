@@ -2125,8 +2125,11 @@ Supercharger-V4 DE-Waltershausen,50.90015,10.5653
 Supercharger-V3 DE-Weibersbrunn,49.934777,9.353755
 Supercharger DE-Weimar,50.934216,11.289809
 Supercharger-V3 DE-Weiterstadt,49.89679,8.614198
+Supercharger-V3 DE-Wernberg-Köblitz,49.53223,12.13502,10
 Supercharger-V3 DE-Wernberg-Köblitz,49.532249,12.134949,8
+Supercharger-V3 DE-Wernberg-Köblitz,49.53225,12.13484,10
 Supercharger-V3 DE-Wernberg-Köblitz,49.53225,12.1351,7
+Supercharger-V3 DE-Wernberg-Köblitz,49.53225,12.13528,20
 Supercharger-V3 DE-Wernberg-Köblitz,49.532255,12.135223,7
 Supercharger DE-Wertheim,49.77075,9.57622
 Supercharger-V3 DE-Wertheim-Almosenberg,49.772295,9.587571
@@ -6203,6 +6206,8 @@ Allego BE-Genk Thor Park,50.997547,5.533956
 Allego BE-Grimbergen Brusselsesteenweg,50.92776,4.36611,30
 Allego BE-Middelkerke Diksmuidestraat,51.139864,2.862489
 Allego BE-Oostende Buskruitstraat,51.23624,2.92619
+Allego BE-Rotselaar E314,50.95144,4.79261
+Allego BE-Tessenderlo-Ham E313,51.0721,5.14656,25
 Allego BE-Tongeren-Borgloon Maastrichtersteenweg,50.791836,5.529208
 Allego DE-Aachen Am Gut Wolf,50.791644,6.098746
 Allego DE-Aachen Debyestraße,50.75944,6.153289,15
@@ -6222,6 +6227,8 @@ Allego DE-Augsburg Lise-Meitner-Str.1,48.38521,10.85319
 Allego DE-Augsburg-Lechhausen Meraner Str. 36,48.386968,10.938608
 Allego DE-Aulendorf Poststr. 22,47.950563,9.642588
 Allego DE-Autohof Lippetal,51.69575,7.96646,10
+Allego DE-Autohof Thiersheim,50.074,12.09871,25
+Allego DE-Autohof Wernberg,49.53222,12.13535,5
 Allego DE-Backnang Stuttgarter Straße,48.936625,9.436644
 Allego DE-Bad Hersfeld Hünfelder Straße 73,50.855661,9.722714
 Allego DE-Bad Nauheim Georg-Scheller-Str.,50.361114,8.752728
@@ -6233,14 +6240,14 @@ Allego DE-Bad Segeberg Bahnhofstraße 13,53.934587,10.307248
 Allego DE-Barkhausen Feldstraße 20,52.26068,8.901366
 Allego DE-Barsbüttel Bauhaus,53.576785,10.194484
 Allego DE-Barth Gewerbegebiet am Mastweg 8,54.359264,12.711007
-Allego DE-Bayreuth Ludwig-Thoma-Straße 24,49.932966,11.567755
+Allego DE-Bayreuth Ludwig-Thoma-Straße,49.93297,11.56776,20
 Allego DE-Bayreuth Sophian-Kolb-Straße 6 a,49.957842,11.601896
 Allego DE-Bendorf Hauptstraße,50.426807,7.570357
 Allego DE-Berg / Neumarkt Autohof,49.31299,11.4754,10
-Allego DE-Bergkirchen Kreuzackerstraße 1,48.238579,11.353797
+Allego DE-Bergkirchen Kreuzackerstraße,48.2386,11.35382,25
 Allego DE-Berlin (Spandau) Nonnendammallee 7,52.538496,13.234371
 Allego DE-Berlin Abram-Joffe-Str. 18,52.43258,13.527693
-Allego DE-Berlin Alexanderstr. 4,52.522747,13.413833
+Allego DE-Berlin Alexanderstraße,52.52285,13.41371,25
 Allego DE-Berlin Alt-Mahlsdorf 40,52.5049,13.616753
 Allego DE-Berlin An der Ostbahn,52.508925,13.441935
 Allego DE-Berlin Berliner Straße,52.577336,13.293621
@@ -6295,6 +6302,7 @@ Allego DE-Bremerhaven Ringstr. 100-110,53.51171,8.60295
 Allego DE-Brühl Kölnstr. 243,50.840532,6.91125
 Allego DE-Burgdorf Marktstr.,52.44637,10.012751
 Allego DE-Burglengenfeld Am Rodinger Berg,49.193784,12.057012
+Allego DE-Busdorf Wittgenstein,54.47672,9.54446,25
 Allego DE-Buxtehude Ostmoorweg,53.467149,9.720745
 Allego DE-Böblingen Hanns-Klemm-Straße 13,48.683325,8.991681
 Allego DE-Bühler Höhe,50.912825,7.910041
@@ -6317,7 +6325,7 @@ Allego DE-Dessau-Roßlau Zunftstraße 12,51.817284,12.218428
 Allego DE-Dettelbach Mainfrankenpark,49.77824,10.06916,30
 Allego DE-Diez Industriestraße,50.374058,8.048503
 Allego DE-Donauwörth Dr.-Friedrich-Drechsler-Straße,48.709333,10.75806
-Allego DE-Dorf Mecklenburg OT Karow Akazienstraße 1,53.852273,11.457002
+Allego DE-Dorf Mecklenburg Akazienstraße,53.85232,11.457,25
 Allego DE-Dornstadt Zur alten Chaussee,48.463713,9.947807
 Allego DE-Dorsten Gahlener Str. 306,51.657783,6.904045
 Allego DE-Dortmund An den Wasserbecken,51.49488,7.47977
@@ -6363,7 +6371,7 @@ Allego DE-Eschweiler Aachener Straße,50.822563,6.24815
 Allego DE-Essen Abteistraße 9,51.387433,7.001336
 Allego DE-Essen Alte Hauptstraße 70,51.415292,7.112896
 Allego DE-Essen Alte Hauptstraße/Am Kieskamp 4,51.416963,7.121662
-Allego DE-Essen Am Hauptbahnhof 2,51.452388,7.013563
+Allego DE-Essen Am Hauptbahnhof,51.45236,7.01374,25
 Allego DE-Essen Am Westbahnhof 1,51.453856,6.978637
 Allego DE-Essen Beckmannsfeld 2,51.459185,7.078838
 Allego DE-Essen Busehofstraße 22,51.451136,6.976151
@@ -6467,9 +6475,9 @@ Allego DE-Göttingen Wagenstieg 2,51.561004,9.930687
 Allego DE-Göttingen Weender Landstr. 76/ Annastraße,51.545651,9.933831
 Allego DE-Güstrow Neue Straße,53.799767,12.177316
 Allego DE-Hagen Wandhofener Straße,51.406736,7.478545
-Allego DE-Haiger Kalteiche Ring 68,50.765155,8.158986
+Allego DE-Haiger Kalteiche-Ring,50.76525,8.15894,25
 Allego DE-Halle/ Saale Berliner Straße 61,51.495797,12.010145
-Allego DE-Halstenbek Gärtnerstraße 169-MediaMarkt,53.629558,9.867123
+Allego DE-Halstenbek Gärtnerstraße,53.62956,9.86717,25
 Allego DE-Hamburg Am Schiffbeker Berg 6a,53.542346,10.092252
 Allego DE-Hamburg Am Stadtrand 56a,53.592509,10.098453
 Allego DE-Hamburg An der Walddörferbahn 1,53.604277,10.116021
@@ -6488,7 +6496,7 @@ Allego DE-Hannover Heisterbergallee 99,52.376803,9.660966
 Allego DE-Hannover Ohefeldweg,52.35757,9.8537
 Allego DE-Hannover Rendsburger Straße,52.41925,9.8324
 Allego DE-Hannover Schierholzstr. 59,52.400294,9.823056
-Allego DE-Hannover Spielhagenstr. 23,52.364183,9.762336
+Allego DE-Hannover Spielhagenstraße,52.36414,9.76236,25
 Allego DE-Hannover-Laatzen Lüneburger Straße 3,52.29731,9.826047
 Allego DE-Heide Fritz-Thiedemann-Ring 40,54.17727,9.092317
 Allego DE-Heidelberg Henkel-Tereson-Str. 24,49.408115,8.651558
@@ -6519,7 +6527,7 @@ Allego DE-Hildesheim Bavenstedter Str. 71,52.164928,9.97228
 Allego DE-Hildesheim Herbert-Quandt-Straße,52.164846,9.968613
 Allego DE-Hilpoltstein,49.161056,11.260274,8
 Allego DE-Hilter Bielefelder Straße 35z,52.13442,8.150307
-Allego DE-Himmelkron Bayreuther Straße 3,50.056111,11.609461
+Allego DE-Himmelkron Bayreuther Straße,50.05614,11.60951,15
 Allego DE-Himmelkron Kulmbacher Straße 5,50.054078,11.616755
 Allego DE-Hohen Neuendorf Kurt-Tucholsky-Str. 33e,52.662448,13.271336
 Allego DE-Hohenwarsleben,52.1741,11.4954,18
@@ -6571,7 +6579,7 @@ Allego DE-Linden Robert-Bosch-Straße 4b,50.537685,8.650627
 Allego DE-Lingen Rheiner Str. 110,52.507043,7.32138
 Allego DE-Ludwigsfelde Zossener Landstr. 12,52.292931,13.271841
 Allego DE-Ludwigshafen Hoheloogstr. 6,49.45722,8.43144
-Allego DE-Luebbenau LPG Str. 1,51.849957,13.907028
+Allego DE-Lübbenau LPG-Straße,51.84996,13.90697,20
 Allego DE-Lübeck Bei der Lohmühle,53.879,10.669432,30
 Allego DE-Lübeck Luisenstraße 4,53.886906,10.706809
 Allego DE-Lübeck Moislinger Allee 56,53.858942,10.671009
@@ -6614,12 +6622,12 @@ Allego DE-Oberkrämer Im Gewerbepark,52.71026,13.112778
 Allego DE-Oberlichtenau Sachsenstraße 9,50.906951,12.978084
 Allego DE-Oberschleißheim Mittenheimer Str. 51,48.257904,11.558088
 Allego DE-Offenburg Schutterwälder Straße 2,48.464964,7.931835
-Allego DE-Oldenburg Posthalterweg 15,53.161359,8.172802
+Allego DE-Oldenburg Posthalterweg,53.16134,8.17273
 Allego DE-Osnabrück Hannoversche Straße 70,52.260406,8.076756
 Allego DE-Osnabrück,52.275733,8.073959,10
 Allego DE-Ottersberg Posthausen,53.057561,9.165869,12
 Allego DE-Overath Großbernsau 2,50.939581,7.293598
-Allego DE-Oyten Hauptstraße 74,53.060039,9.018061
+Allego DE-Oyten Hauptstraße,53.06006,9.01809,25
 Allego DE-Paderborn Frankfurter Weg 35,51.696749,8.734701
 Allego DE-Panketal Dorfstraße,52.621152,13.542544,25
 Allego DE-Passau Regensburger Str. 37,48.574449,13.415087
@@ -6634,7 +6642,7 @@ Allego DE-Ravensburg Goethestr. 24,47.774784,9.604058
 Allego DE-Recklinghausen Dordrechtring 38,51.609665,7.207005
 Allego DE-Regensburg,48.995441,12.151227,20
 Allego DE-Rhede (Ems) Siemensstraße 7,53.067012,7.24257
-Allego DE-Ritterhude Ihlpohler Heerstr. 47,53.185473,8.706364
+Allego DE-Ritterhude Ihlpohler Heerstraße,53.18547,8.70638,25
 Allego DE-Rosenheim Klepperstraße 16,47.848985,12.118201
 Allego DE-Rosenheim-Kolbermoor Georg-Aicher-Str. 20,47.848497,12.08588
 Allego DE-Rostock ATU,54.081492,12.192205
@@ -6648,11 +6656,11 @@ Allego DE-Saarbrücken Gasweg 1,49.240842,6.962856
 Allego DE-Salzkotten Geseker Straße,51.66723,8.59135,30
 Allego DE-Satteldorf Marco-Polo-Straße,49.18147,10.06946,15
 Allego DE-Schipkau Senftenberger Str. 30,51.535798,13.914721
-Allego DE-Schkeuditz An der Autobahn 1,51.401608,12.181602
+Allego DE-Schkeuditz An der Autobahn,51.40149,12.18158,8
+Allego DE-Schkeuditz An der Autobahn,51.4016,12.18156,8
 Allego DE-Schkeuditz Bierweg,51.399593,12.191641
 Allego DE-Schleiz Industriestraße,50.550064,11.788162,30
 Allego DE-Schleiz,50.549278,11.789369
-Allego DE-Schleswig-Busdorf Wittgenstein 2,54.476698,9.544344
 Allego DE-Schoeneiche bei Berlin Kalkberger Str. 189,52.472636,13.738215
 Allego DE-Schorfheide An der B167 6,52.849737,13.68662
 Allego DE-Schweinfurt Friedrich-Rätzer-Str. 3,50.027888,10.237882
@@ -6661,7 +6669,7 @@ Allego DE-Schweitenkirchen,48.510717,11.582345,6
 Allego DE-Seesen Autohof Rhüden,51.947217,10.140737,5
 Allego DE-Seesen Autohof Rhüden,51.947261,10.140715,5
 Allego DE-Seevetal,53.396642,10.042457
-Allego DE-Selbitz Stegenwaldhauser Str. 1,50.324533,11.785001
+Allego DE-Selbitz Stegenwaldhauser Straße,50.32474,11.78441,25
 Allego DE-Sereetz Sereetzer Feld 1,53.926944,10.722568
 Allego DE-Sindelfingen Mahdentalstr. 88,48.706694,9.029095
 Allego DE-Speyer Wormser Landstraße 94,49.331093,8.430171
@@ -6671,14 +6679,13 @@ Allego DE-Stollberg Hohensteiner Straße 60 Z,50.712837,12.762789
 Allego DE-Straubing Ittlinger Str. 193,48.885344,12.61206
 Allego DE-Stuttgart Ulmer Straße 225,48.778395,9.233296
 Allego DE-Suhl Pfütschbergstraße 1,50.590157,10.713106
-Allego DE-Sulz-Vöhringen Eythstraße 16,48.343556,8.663552,12
+Allego DE-Sulz-Vöhringen Eythstraße,48.34356,8.66355,10
 Allego DE-Sulzbach (Taunus) MTZ,50.116678,8.530816,17
 Allego DE-Teltow Mahlower Straße 142,52.396042,13.279901
 Allego DE-Teupitz Buchholzer Straße 18,52.123445,13.638079
-Allego DE-Thiersheim Wampener 1,50.074008,12.098575
 Allego DE-Trappenkamp Gablonzer Str. 1,54.04306,10.213704
 Allego DE-Trier Wasserweg,49.76327,6.65785
-Allego DE-Tönning Dithmarscher Str. 1,54.323417,8.951809
+Allego DE-Tönning Dithmarscher Straße,54.32344,8.95185,25
 Allego DE-Tübingen Reutlinger Str. 68,48.51325,9.072101
 Allego DE-Türkheim Mindelheimer Straße,48.04249,10.62034,10
 Allego DE-Ulmen Ritter-Heinrich-Str. 10,50.213973,6.972871
@@ -6689,8 +6696,8 @@ Allego DE-Verden Max-Planck-Str. 1,52.913786,9.252549
 Allego DE-Viernheim Bürgermeister-Neff-Str. 14,49.52675,8.5683
 Allego DE-Viernheim Rhein-Neckar-Zentrum,49.5281,8.56548,12
 Allego DE-Waiblingen Ruhrstraße 5,48.818655,9.29954
-Allego DE-Waldlaubersheim Auf dem Stein 1,49.923694,7.825641,15
-Allego DE-Waldshut-Tiengen Carl-Duisburg-Straße 2,47.614103,8.237895
+Allego DE-Waldlaubersheim Auf dem Stein,49.92375,7.82563,12
+Allego DE-Waldshut-Tiengen Carl-Duisburg-Straße,47.61415,8.23793,25
 Allego DE-Walsrode Ernst-August-Str. 7,52.852688,9.596385
 Allego DE-Wandlitz Prenzlauer Str 71,52.710287,13.439314
 Allego DE-Wang Semptstr. 15,48.484072,12.005799
@@ -6704,7 +6711,7 @@ Allego DE-Wittstock/Dosse Jägerstraße,53.0671,12.53304,7
 Allego DE-Wolfhagen Otto-Hahn-Str. 8,51.402576,9.186849
 Allego DE-Wolfsburg Braunschweiger Str. 204,52.401327,10.752018
 Allego DE-Wolfsburg Westerlinge,52.42376,10.7321,11
-Allego DE-Wustermark Zur Döbritzer Heide 1,52.533476,12.997968
+Allego DE-Wustermark Zur Döbritzer Heide,52.53352,12.99799,20
 Allego DE-Wyk auf Föhr Koogskuhl 2,54.6928,8.569154
 Allego DE-Wörrstadt Sophie-Opel-Straße,49.83992,8.14349,10
 Allego DE-Wörrstadt Sophie-Opel-Straße,49.84006,8.14347,10
@@ -6843,6 +6850,7 @@ APCOA DE-München Berg am Laim Straße,48.129773,11.624369
 Applegreen-Electric GB-Newport Pagnell Welcome Break,52.082895,-0.748398
 
 ARAL DE-Ahrensfelde Mc-Donald’s-Straße,52.596628,13.600672
+ARAL DE-Auerswalder Blick,50.89344,12.94604,25
 ARAL DE-Autohof Röttenbach,49.15785,11.04086
 ARAL DE-Bad Honnef Gewerbepark Dachsberg,50.646867,7.337694
 ARAL DE-Bautzen Kreckwitzer Straße,51.19029,14.45191
@@ -6894,6 +6902,7 @@ ARAL DE-Kleinostheim Aschaffenburger Straße,49.99504,9.0686,20
 ARAL DE-Koblenz Andernacher Straße,50.378477,7.582793,25
 ARAL DE-Koblenz Schlachthofstraße,50.362645,7.574207
 ARAL DE-Kodersdorf Siedlerweg,51.225889,14.902267
+ARAL DE-Köln Am Verteilerkreis,50.89209,6.96649,25
 ARAL DE-Königslutter Autohof,52.311549,10.823469
 ARAL DE-Könnern,51.69016,11.767012
 ARAL DE-Ladbergen,52.146616,7.735806
@@ -6946,6 +6955,7 @@ ARAL DE-Tübingen Reutlinger Straße 72,48.512816,9.073854,20
 ARAL DE-Uelzen,52.99585,10.539363
 ARAL DE-Verden (Aller) Achimer Straße,52.95042,9.23444,20
 ARAL DE-Vetschau Kleine Bahnhofstraße,51.78392,14.07867
+ARAL DE-Warburg Paderborner Tor,51.49454,9.12634,25
 ARAL DE-Winsen (Luhe) Max-Planck-Straße,53.339067,10.219588
 ARAL DE-Wittenburg Autohof,53.502361,11.097974
 ARAL DE-Worms Mainzer Straße,49.65494,8.359737
@@ -7080,6 +7090,7 @@ Bestcharge LU-Remerschen Schengerwis,49.480006,6.364406
 Bestcharge LU-Wasserbillig Mertert Route de Wasserbillig,49.706841,6.4888
 Bestcharge LU-Wasserbillig Mertert Route de Wasserbillig,49.706947,6.488415
 
+Blink BE-Eupen Am Stadthaus,50.63238,6.02806
 Blink US-Salt Lake City UT S 300 W,40.73144,-111.90179
 
 BMW AT-Lieboch Gadystraße,46.957327,15.344792
@@ -7110,7 +7121,6 @@ Bosch IT-Torri del Benaco Via Bardino,45.610686,10.705955
 BP DE-Allershausen Schroßlacher Straße,48.428106,11.585223
 BP DE-Altdorf bei Nürnberg Nürnberger Straße,49.383969,11.34805
 BP DE-Arnstadt Lindenplatz,50.860322,10.96045
-BP DE-Auerswalde An der,50.893449,12.946001
 BP DE-Augsburg Aindlinger Straße,48.392692,10.933418
 BP DE-Backnang Manfred-von-Ardenne-Allee 2,48.959211,9.423126
 BP DE-Bad Berka Weimarische Straße,50.904707,11.27835
@@ -7237,7 +7247,6 @@ BP DE-Kolbermoor Aiblinger Au,47.851146,12.017452
 BP DE-Konstanz Opelstraße,47.67595,9.152839
 BP DE-Kressbronn am Bodensee Linderhof,47.60761,9.586792
 BP DE-Kreuztal Hagener Straße,50.961375,7.988984
-BP DE-Köln Am,50.892176,6.966475
 BP DE-Köln Bergisch Gladbacher Straße,50.967782,7.034807
 BP DE-Köln Kölner Straße,50.903592,7.020729
 BP DE-Köln Oskar-Schindler-Straße,51.032809,6.919276
@@ -7315,7 +7324,6 @@ BP DE-Taucha Leipziger Straße,51.371728,12.474485
 BP DE-Uplengen Rudolf-Diesel-Straße,53.262665,7.755892
 BP DE-Vechta Osloer Straße,52.731188,8.265227
 BP DE-Wang Gewerbepark Spörer Au,48.482866,12.000469
-BP DE-Warburg Paderborner Tor 180/B,51.494593,9.126022
 BP DE-Weeze Industriestraße,51.620177,6.209968
 BP DE-Weingarten Waldseer Straße,47.817642,9.64217
 BP DE-Werneuchen Freienwalder Straße,52.6363,13.7449
@@ -9055,6 +9063,7 @@ ElDrive RO-Lehliu-Gară Str. Elefterie Papadisia,44.435903,26.856617
 ELE DE-Gelsenkirchen Husemannstraße,51.50603,7.09896,20
 
 Electra BE-Auderghem Chaussée de Wavre,50.794779,4.478889
+Electra BE-Maasmechelen Koninginnelaan,50.98633,5.7015
 Electra BE-Zandhoven Liersebaan,51.198904,4.643527
 Electra FR-Zac des Tulipes Rue de Montservon,48.968781,2.463222
 Electra IT-Peschiera del Garda Via Tangenziale,45.43407,10.710375
@@ -9323,7 +9332,7 @@ EnBW DE-Barsinghausen Wilhelm-Heß-Straße,52.307114,9.455312
 EnBW DE-Barsinghausen,52.305809,9.467864
 EnBW DE-Baunach Haßbergstraße,49.9913,10.8437
 EnBW DE-Bautzen Dresdener Straße,51.17956,14.411
-EnBW DE-Bayreuth Ludwig-Thoma-Straße,49.933436,11.568065
+EnBW DE-Bayreuth Ludwig-Thoma-Straße,49.93318,11.56795,20
 EnBW DE-Bayreuth Spinnereistraße,49.952106,11.567123
 EnBW DE-Beckum Hellweg,51.774183,8.040673
 EnBW DE-Beckum Vellern Süd,51.79106,8.073932
@@ -12002,7 +12011,7 @@ EWE-GO DE-Löningen Ringstraße,52.742508,7.759159
 EWE-GO DE-Löningen Tabbenstraße,52.73443,7.75663
 EWE-GO DE-Lübbecke Thyssenstraße,52.32146,8.62589
 EWE-GO DE-Lübbecke Zeiss-Straße,52.325526,8.623601
-EWE-GO DE-Lübbenau/Spreewald LPG-Straße,51.84966,13.90757
+EWE-GO DE-Lübbenau LPG-Straße,51.84966,13.90757,20
 EWE-GO DE-Lübeck Bei der Lohmühle,53.880904,10.673955
 EWE-GO DE-Lübeck Hinter den Kirschkaten,53.848088,10.677746
 EWE-GO DE-Lüdinghausen Valve,51.76691,7.45978
@@ -12496,6 +12505,8 @@ Fastned BE-Diepenbeek E313,50.895302,5.400928
 Fastned BE-Diepenbeek E313,50.8958,5.404
 Fastned BE-Everberg E40,50.86858,4.5451
 Fastned BE-Everberg E40,50.87002,4.545619
+Fastned BE-Halle Carpool Halle-Sint Rochus,50.72662,4.25917
+Fastned BE-Jabbeke Vlamingveld,51.17952,3.11287
 Fastned BE-Kontich Carpool,51.12653,4.433007
 Fastned BE-Maasmechelen Rijksweg,50.954346,5.694797
 Fastned BE-Oostende luchthaven,51.20561,2.871165
@@ -13465,6 +13476,7 @@ Ionity DE-Auetal Süd,52.226977,9.232545
 Ionity DE-Augsburg Ost,48.411614,10.914898
 Ionity DE-Aurach Frankenhöhe Süd,49.241155,10.356121
 Ionity DE-Autohof Lippetal,51.69593,7.96615
+Ionity DE-Autohof Wernberg,49.53246,12.13486,14
 Ionity DE-Bad Camberg West,50.299926,8.2347
 Ionity DE-Bad Honnef,50.647664,7.334521
 Ionity DE-Bayerischer Wald Nord,48.931751,12.708247
@@ -14632,6 +14644,7 @@ Lidl AT-Wien Sagedergasse,48.162667,16.316008
 Lidl AT-Wiener Neustadt,47.830085,16.245312
 Lidl AT-Wieselburg,48.139019,15.138295
 Lidl AT-Ybbs,48.17549,15.083871
+Lidl BE-Antwerpen Weerstandlaan,51.18611,4.37063
 Lidl BE-Eupen Rue de Herbesthal,50.636237,6.021413
 Lidl BE-Hamme Veldstraat,51.093965,4.147137
 Lidl BE-Ixelles Rue Gray,50.833249,4.378596
@@ -16128,6 +16141,8 @@ OMV SK-Dolný Hričov Majora Antona Matúška,49.23302,18.624219
 
 ON IS-Jökulsárlón Þjóðvegur,64.048266,-16.179408
 
+Optimile BE-Drogenbos Mozartlaan,50.81151,4.30268
+Optimile BE-Grimbergen Kerkstraat,50.97294,4.3858
 Optimile BE-Welkenraedt Rue de l’Economie,50.648917,5.989012
 Optimile IT-Foligno Viale Quattro Novembre,42.959595,12.708472
 
@@ -16864,6 +16879,8 @@ Q1 DE-Storkow Heinrich-Heine-Straße,52.262243,13.936176
 Q1 DE-Triptis Neustädter Straße,50.737564,11.845551
 Q1 DE-Westerrönfeld Kanaltunnel,54.280327,9.658604
 Q1 DE-Westerstede Lange Straße,53.259789,7.919506
+
+Q8 BE-Ranst Hogenaardweg,51.2103,4.5476
 
 Raiffeisenbank DE-Bad Homburg Werner-Reimers-Straße,50.216939,8.611279
 
