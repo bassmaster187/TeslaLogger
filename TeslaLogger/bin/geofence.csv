@@ -8436,6 +8436,7 @@ E-MAXX DE-Frickhofen Schulstraße,50.504932,8.027944
 E-MAXX DE-Harxheim Gerbstedterstraße,49.90317,8.276746
 E-MAXX DE-Limburg Limburgerstraße,50.403889,8.0675
 
+e-motum FR-Calvi Rue Albert 1er,42.56798,8.7585,25
 e-motum FR-Ghisonaccia Av. du 9 Septembre,42.017285,9.406426
 e-motum FR-Serra-di-Ferro Lieu-dit Porto Pollo,41.70757,8.79374
 
@@ -9084,6 +9085,7 @@ Electrify-America US-North Platte NE S Dewey St,41.12047,-100.75946
 Electrify-America US-Ogallala NE Pony Express Ln,41.11276,-101.71856
 Electrify-America US-Pompton Plains NJ Route 23 North,40.96869,-74.28467
 Electrify-America US-Salina UT South State Street,38.93164,-111.85423
+Electrify-America US-San Jose CA Berryessa Rd,37.38811,-121.85856
 Electrify-America US-San Jose CA Zanker Road,37.39439,-121.92795
 Electrify-America US-Scipio UT Frontage Road,39.25552,-112.11646
 Electrify-America US-Secaucus NJ Park Plaza,40.79187,-74.04196
@@ -13373,7 +13375,6 @@ Innogy DE-Stuttgart-Neuwirtshaus,48.836434,9.148119
 Innogy DE-Stuttgart-Zuffenhausen Lorenzstr.,48.833486,9.149043
 Innogy DE-Thannhausen Edmund-Zimmermann-Straße,48.28195,10.4707
 Innogy DE-Timmendorfer Strand Strandallee,53.998729,10.779577
-Innogy DE-Tor1 NORD,51.410888,12.294661
 Innogy DE-Treuen,50.549113,12.286336
 Innogy DE-Unkel Kamener,50.598541,7.218679
 Innogy DE-Unna Heinrich-Hertz-Straße,51.535701,7.727683
@@ -16771,8 +16772,7 @@ Porsche DE-Kleinmachnow Albert-Einstein-Ring,52.4061,13.188634
 Porsche DE-Koblenz Andernacher Straße,50.37869,7.58376
 Porsche DE-Köln Fröbelstraße,50.9442,6.91637
 Porsche DE-Landau in der Pfalz Hermann Staudinger Straße,49.1928,8.143086
-Porsche DE-Leipzig Kundenzentrum,51.406501,12.296514
-Porsche DE-Leipzig Kundenzentrum,51.407016,12.296726
+Porsche DE-Leipzig Experience Center,51.40685,12.29644
 Porsche DE-Ludwigsburg Porschestraße,48.9187,9.15016
 Porsche DE-Lörrach Eisenbahnstraße,47.6318,7.68351
 Porsche DE-Lübeck Berliner Straße,53.850176,10.681935
@@ -18724,6 +18724,7 @@ Wien-Energie AT-Traiskirchen Tribuswinkel Neurißgasse,47.991227,16.275386
 Wien-Energie AT-Wien Felberstraße,48.197281,16.335561
 Wien-Energie AT-Wien Guglgasse,48.185265,16.421039
 Wien-Energie AT-Wien Margaretengürtel,48.180155,16.352097
+Wien-Energie AT-Wien Martinstraße,48.22019,16.34015
 Wien-Energie AT-Wien Montleartstraße,48.210903,16.304506
 Wien-Energie AT-Wien Ottakringer Straße,48.21346,16.32004
 Wien-Energie AT-Wien Senefeldergasse,48.17185,16.37475
@@ -18886,6 +18887,7 @@ DE Lichtenfels GE Additive,50.12836,11.03537
 DE Lübeck Flughafen,53.804405,10.699887
 DE Machern Ringstraße,51.35571,12.57101
 DE Mainz Malakoff-Passage,49.99617,8.28132
+DE Melle Hageböke,52.176211,8.367606
 DE Mölln Euronics,53.640516,10.695056
 DE Mölln VW Riemer,53.623707,10.678989
 DE München Hotel Heigl,48.075613,11.513897
