@@ -629,8 +629,29 @@ namespace TeslaLogger
 
             }
 
-            int dateCode = (int)vin[9];
-            year = 2009 + dateCode - (int)'A';
+            switch (vin[9])
+            {
+                case 'P':
+                    year = 2022;
+                    break;
+                case 'Q':
+                    year = 2023;
+                    break;
+                case 'R':
+                    year = 2024;
+                    break;
+                case 'S':
+                    year = 2025;
+                    break;
+                case 'T':
+                    year = 2026;
+                    break;
+                default:
+                    // unknown year
+                    year = 0;
+                    break;
+
+            }
 
             battery = "NMC";
             motor = "";

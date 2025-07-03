@@ -2006,7 +2006,7 @@ namespace TeslaLogger
             }
         }
 
-        void CheckVehicleConfig()
+        protected void CheckVehicleConfig()
         {
             if (car.FleetAPI)
             {
@@ -2535,7 +2535,25 @@ namespace TeslaLogger
             {
                 if (car.TrimBadging == "PURE")
                 {
-                    WriteCarSettings("0.134", "Lucid Air PURE");
+                    if (year == 2025)
+                        WriteCarSettings("0.119", "Lucid Air PURE 2025");
+                    else
+                        WriteCarSettings("0.134", "Lucid Air PURE");
+                    return;
+                }
+                else if (car.TrimBadging == "TOURING")
+                {
+                    WriteCarSettings("0.134", "Lucid Air TOURING");
+                    return;
+                }
+                else if (car.TrimBadging == "GRAND TOURING")
+                {
+                    WriteCarSettings("0.134", "Lucid Air GRAND TOURING");
+                    return;
+                }
+                else if (car.TrimBadging == "DREAM EDITION")
+                {
+                    WriteCarSettings("0.134", "Lucid Air DREAM EDITION");
                     return;
                 }
                 else

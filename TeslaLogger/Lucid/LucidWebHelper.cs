@@ -74,6 +74,15 @@ namespace TeslaLoggerNET8.Lucid
         {
             GetNewData();
 
+            TimeSpan ts = DateTime.Now - lastUpdateEfficiency;
+
+            if (ts.TotalMinutes > 240)
+            {
+                UpdateEfficiency();
+                lastUpdateEfficiency = DateTime.Now;
+            }
+
+
             if (power == "POWER_STATE_SLEEP")
                 return "asleep";
 
