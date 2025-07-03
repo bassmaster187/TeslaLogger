@@ -146,7 +146,13 @@ namespace TeslaLoggerNET8.Lucid
             var kwhr_before = kwhr;
 
             //lastData = System.IO.File.ReadAllText(@"C:\dev\TeslaLoggerNET8\TeslaLogger\bin\Debug\net8.0\lucid\20250430122944434.txt");
-            lastData = PythonLucidAPI(car.TeslaName, car.TeslaPasswort, car.FleetApiAddress, (LucidCar)car, out _);
+            lastData = PythonLucidAPI(car.TeslaName, car.TeslaPasswort, car.FleetApiAddress, (LucidCar)car, out string error);
+            if (!string.IsNullOrEmpty(error))
+            {
+                lastNewData = DateTime.UtcNow.AddMinutes(1);
+                return;
+            }
+
             lastNewData = DateTime.UtcNow;
 
             // var j = JsonConvert.DeserializeObject(ret);
@@ -419,6 +425,10 @@ namespace TeslaLoggerNET8.Lucid
 
         public static string PythonLucidAPI(string username, string password, string region, LucidCar? car, out string error)
         {
+            int carid = 0;
+            if (car != null)
+                carid = car.CarInDB;
+
             error = string.Empty;
             DateTime start = DateTime.UtcNow;
             try
@@ -465,10 +475,22 @@ namespace TeslaLoggerNET8.Lucid
 
                         if (!string.IsNullOrEmpty(error))
                         {
+
                             if (car != null)
-                                car.Log("Error: " + error);
+                            {
+                                car.Log("Error: " + error);    
+                            }
                             else
+                            {
                                 Logfile.Log("Error: " + error);
+                            }
+
+                            var ts = DateTime.UtcNow - start;
+                            DBHelper.AddMothershipDataToDB("LucidAPI", ts.TotalSeconds, 500, carid);
+                        }
+                        else
+                        {
+                            DBHelper.AddMothershipDataToDB("LucidAPI", start, 0, carid);
                         }
 
                         return output;
@@ -478,14 +500,10 @@ namespace TeslaLoggerNET8.Lucid
             catch (Exception ex)
             {
                 car.Log($"An error occurred: {ex.Message}");
+                var ts = DateTime.UtcNow - start;
+                DBHelper.AddMothershipDataToDB("LucidAPI", ts.TotalSeconds, 400, carid);
             }
-            finally
-            {
-                int carid = 0;
-                if (car != null)
-                    carid = car.CarInDB;
-                DBHelper.AddMothershipDataToDB("LucidAPI", start, 0, carid);
-            }
+            
 
             return string.Empty;
         }
