@@ -118,7 +118,7 @@ else
 		  url: "current_json.php",
 		  dataType: "json"
 		  }).done(function( jsonData ) {
-			if (jsonData["ideal_battery_range_km"] && jsonData["battery_level"] && jsonData["battery_range_km"] && jsonData["odometer"]) {
+			if ("ideal_battery_range_km" in jsonData && "battery_level" in jsonData && "battery_range_km" in jsonData && "odometer" in jsonData) {
 				if (LengthUnit == "mile")
 				{
 					if ( Range == 'IR')
@@ -148,7 +148,7 @@ else
 					$('#odometer').text((jsonData["odometer"]).toLocaleString(loc,{maximumFractionDigits:1, minimumFractionDigits: 1}) + " <?php t("km"); ?>");
 				}
 			}
-			else if (jsonData["odometer"]) {
+			else if ("odometer" in jsonData) {
 				if (LengthUnit == "mile")
 				{
 					$('#odometer').text((jsonData["odometer"] / km2mls).toLocaleString(loc,{maximumFractionDigits:1, minimumFractionDigits: 1}) + " <?php t("mi"); ?>");

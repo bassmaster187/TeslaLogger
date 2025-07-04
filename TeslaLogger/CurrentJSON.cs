@@ -354,6 +354,10 @@ namespace TeslaLogger
             {
                 jsonStringHolder[CarInDB] = cJSON;
             }
+            else
+            {
+                jsonStringHolder[CarInDB] = "{}";
+            }
         }
     }
 }
