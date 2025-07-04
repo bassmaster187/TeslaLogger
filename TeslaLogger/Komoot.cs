@@ -467,6 +467,7 @@ WHERE
             }
             else
             {
+                CurrentJSON.FromKVS(kli.carID);
                 Dictionary<long, KomootTour> tours = DownloadTours(kli, dumpJSON);
                 if (tours.Count > 0)
                 {
@@ -560,8 +561,11 @@ WHERE
     ""ts"": ""{tour.endTS.ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ssZ")}"",
     ""latitude"": {tour.lastPosition.lat},
     ""longitude"": {tour.lastPosition.lng},
-    ""heading"": {tour.lastPosition.heading}
+    ""heading"": {tour.lastPosition.heading},
+    ""trip_start_dt"": ""{tour.startTS.ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ssZ")}"",
+    ""trip_duration_sec"": ""{(tour.endTS-tour.startTS).Seconds}""
 }}";
+            CurrentJSON.ToKVS(kli.carID);
         }
 
         private static void ParseTourJSON(KomootLoginInfo kli, long tourid, KomootTour tour)
