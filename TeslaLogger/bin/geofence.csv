@@ -1780,8 +1780,6 @@ Supercharger-V3 CZ-Lovosice,50.511713,14.052644,15
 Supercharger CZ-Olomouc,49.560857,17.262371
 Supercharger-V4 CZ-Ostrava,49.80018,18.22383
 Supercharger CZ-Plzeň,49.72512,13.326045
-Supercharger-V4 CZ-Prague Zličín,50.05081,14.2952
-Supercharger-V4 CZ-Prague Štěrboholy,50.07136,14.54087
 Supercharger-V4 CZ-Praha Zličín,50.05081,14.2952
 Supercharger-V4 CZ-Praha Štěrboholy,50.07136,14.54087
 Supercharger-V4 CZ-Vestec,49.99022,14.49048,60
@@ -6251,6 +6249,7 @@ Aldi DE-Wörnitz,49.259366,10.24192
 Aldi DE-Zimmern ob Rottweil Raiffeisenstraße,48.171444,8.574278
 Aldi DE-Zweibrücken Etzelweg,49.227083,7.355306
 Aldi DE-Öhringen Steinsfeldle,49.189917,9.495556
+Aldi HU-Győr Fehérvári út,47.68239,17.6557
 
 Allego AT-Brunn am Gebirge Johann Steinböck-Straße,48.106173,16.310347
 Allego AT-Seiersberg-Pirka Werschweg,47.010134,15.411795
@@ -6819,6 +6818,9 @@ Allego SE-Linköping Norra Svedengatan,58.43366,15.5882
 Allego SE-Södertälje Genetaleden,59.1866,17.57406
 Allego SE-Örkelljunga,56.285576,13.337159
 
+AllElectric HU-Kiskunfélegyháza X. körzet tanya,46.67529,19.82032,20
+AllElectric HU-Tolna Gém utca,46.42068,18.7591
+
 AllgäuStrom DE-Fischen im Allgäu An der Breitach,47.425857,10.265904
 AllgäuStrom DE-Kempten (Allgäu) Bleicherstraße,47.736612,10.327834
 
@@ -7208,6 +7210,7 @@ Bosch DE-Salzgitter John-F.-Kennedy-Straße,52.138041,10.294846
 Bosch DE-Salzgitter John-F.-Kennedy-Straße,52.138666,10.295846
 Bosch DE-Schwieberdingen Laiblinger Weg,48.884297,9.08721
 Bosch DE-Schwieberdingen Robert-Bosch-Straße,48.881413,9.080732
+Bosch HU-Budapest HOP Technology Office Park,47.46435,19.15856,25
 Bosch IT-Torri del Benaco Via Bardino,45.610686,10.705955
 
 BP AU-Jindabyne NSW Kosciuszko Rd,-36.41474,148.61784
@@ -7795,6 +7798,7 @@ CircleK DE-Werther Am Helmeberg,51.486986,10.74461
 CircleK DE-Wismar Dr.-Leber-Straße,53.889974,11.471461
 CircleK DE-Zinnowitz Ahlbecker Straße,54.067399,13.919599
 CircleK EE-Mustvee Jõgeva maakond,58.850808,26.913377
+CircleK EE-Tartu Lääneringtee,58.36047,26.67667
 CircleK EE-Valga maakond Pikk tn,57.788455,26.048332
 CircleK LT-Kryžkalnis Dvaro gatvė,55.484335,22.58835,25
 CircleK NL-Amsterdam Kromwijkdreef,52.31336,4.98285
@@ -7805,6 +7809,7 @@ CircleK SE-Kiruna Industrivägen,67.84812,20.27537
 CircleK SE-Lund Magistratsvägen,55.72023,13.203808
 CircleK SE-Lycksele Umevägen,64.59021,18.69169
 CircleK SE-Malmö Derbyvägen,55.57868,13.06286
+CircleK SE-Sigtuna Cederströms Slinga,59.60648,17.89644
 CircleK SE-Skellefteå Kågevägen,64.75814,20.9659
 CircleK SE-Solna Järva krog,59.38018,18.00905
 CircleK SE-Upplands Väsby Kapellvägen,59.51355,17.92023
@@ -8819,6 +8824,8 @@ E.ON DK-Køge Servicevej,55.48923,12.1627,10
 E.ON DK-Rømø Lakolk,55.146378,8.495677
 E.ON DK-Vejle Skærup Øst,55.64045,9.563059
 E.ON DK-Væggerløse Væggerløsevej,54.70973,11.919614
+E.ON HU-Debrecen Kishatár utca,47.54231,21.58161
+E.ON HU-Zalaegerszeg Balatoni út,46.84285,16.86776,25
 E.ON NO-Lillesand Legdene,58.23974,8.29801,15
 E.ON SE-Arboga Burskapsvägen,59.42613,15.82931,15
 E.ON SE-Arvidsjaur Skillnadsgatan,65.59324,19.1637
@@ -11231,6 +11238,7 @@ Eneco DE-Pentling Hohengebrachinger Straße,48.97936,12.06739
 Eneco NL-Haarlem Emrikweg,52.39576,4.66413
 
 Enefit EE-Jüri Harju maakond,59.358956,24.895166
+Enefit EE-Narva Tallinna mnt,59.37906,28.18792
 Enefit EE-Pärnu Ranna pst,58.37367,24.503218
 
 EnelX IT-Alghero degli Artigiani,40.592421,8.285237
@@ -14076,8 +14084,8 @@ Ionity HR-Gospić Budačka ul.,44.576994,15.392954
 Ionity HR-Kanfanar Okreti,45.111697,13.802624
 Ionity HR-Sop,45.78376,16.150672
 Ionity HR-Zemunik Gornji Zadar Tromilja,44.114619,15.407588,25
-Ionity HU-Balatonkeresztúr (dir. Budapest),46.68356,17.37848
-Ionity HU-Balatonkeresztúr (dir. Zagreb),46.685063,17.37977
+Ionity HU-Balatonkeresztúr,46.68328,17.3794,30
+Ionity HU-Balatonkeresztúr,46.68544,17.37948,30
 Ionity HU-Bábolna (dir. Budapest),47.680553,17.976528
 Ionity HU-Kajászó (dir. Balaton),47.307602,18.744217
 Ionity HU-Szigetszentmiklós,47.380371,19.055785
@@ -15657,9 +15665,11 @@ Lidl HU-Budapest Hungária krt,47.495592,19.108681
 Lidl HU-Budapest Pesti út,47.48459,19.229407
 Lidl HU-Budapest Üllői út,47.446502,19.170256
 Lidl HU-Békéscsaba,46.670835,21.106397
-Lidl HU-Debrecen,47.525514,21.598253
+Lidl HU-Debrecen Derék utca,47.52529,21.59766
+Lidl HU-Eger Rákóczi Ferenc utca,47.92543,20.36861
 Lidl HU-Nyíregyháza,47.969311,21.737894
 Lidl HU-Pécs,46.071135,18.205811
+Lidl HU-Sopron Bánfalvi út,47.68539,16.56928
 Lidl HU-Szeged Makkosházi,46.272946,20.154244
 Lidl HU-Szeged Szabadkai,46.242532,20.126373
 Lidl HU-Szombathely Károlyi Antal,47.225109,16.633095
@@ -15955,6 +15965,20 @@ MFG GB-Sowerby York Road,54.228782,-1.329168
 
 Midorion DE-Karlsruhe Parkplatz Karlsbad A8,48.94493,8.49432
 
+Mobiliti HU-Budapest Hunyadi János utca,47.43517,19.03919
+Mobiliti HU-Budapest Pala utca,47.50099,19.03996
+Mobiliti HU-Sopron Révai Miklós utca,47.69407,16.578
+Mobiliti HU-Szombathely Hollán Ernő utca,47.23032,16.61786
+Mobiliti HU-Sárvár Várkerület utca,47.2521,16.93999
+
+Mobility HU-Balatonkeresztúr,46.68503,17.37851,25
+Mobility HU-Budapest Airport,47.43157,19.26382
+Mobility HU-Debrecen Balmazújvárosi utca,47.54301,21.59421
+Mobility HU-Eger Knézich Károly utca,47.90488,20.37626
+Mobility HU-Pécs Lahti utca,46.04136,18.21444
+Mobility HU-Szigliget Kisfaludy utca,46.804,17.43427
+Mobility HU-Zalaegerszeg Balatoni út,46.84277,16.86713,25
+
 MObiVE FR-Moliets-et-Maa Rue du Général Caunègre,43.84949,-1.35942
 MObiVE FR-Royan Av. des Congrès,45.62046,-1.03309,30
 MObiVE FR-Royan Pl. Charles de Gaulle,45.62458,-1.02941,30
@@ -15967,6 +15991,12 @@ MOL CZ-Velké Meziříčí,49.345539,16.040024
 MOL CZ-Velké Němčice,49.010451,16.686846,10
 MOL HR-Jasenice,44.24008,15.57,15
 MOL HR-Jasenice,44.24082,15.56687,15
+MOL HU-Alacska pihenőhely,47.38427,19.28166
+MOL HU-Görbeháza I. jobb oldal,47.80152,21.1982
+MOL HU-Hatvan Fürdő utca,47.66923,19.62582
+MOL HU-Kerekharaszt pihenő,47.66763,19.6244
+MOL HU-Kál Rekettyés pihenő,47.72225,20.31557
+MOL HU-Kál Rekettyés pihenő,47.7236,20.31821
 MOL RO-Ilia A1,45.947561,22.651971
 MOL RO-Ilia A1,45.948194,22.654306
 MOL SK-Senec Bratislavská,48.2133,17.38219
@@ -17446,7 +17476,7 @@ SachsenEnergie DE-Dresden Bautzner Landstraße,51.061245,13.885264
 SachsenEnergie DE-Dresden Bertolt-Brecht-Allee,51.041008,13.780622
 SachsenEnergie DE-Dresden Bärensteiner Straße,51.039216,13.8055
 SachsenEnergie DE-Dresden Döbelner Straße,51.096491,13.719554
-SachsenEnergie DE-Dresden Elbepark,51.08504,13.693367,15
+SachsenEnergie DE-Dresden Elbepark,51.08501,13.69338,15
 SachsenEnergie DE-Dresden Fetscherplatz,51.045961,13.771425
 SachsenEnergie DE-Dresden Fetscherstraße,51.060243,13.776673
 SachsenEnergie DE-Dresden Freiberger Straße,51.049705,13.722658
@@ -18383,10 +18413,14 @@ TankE DE-Uslar Hans-Böckler-Straße,51.659654,9.651023
 TCB ES-Navalmoral Autovía del Suroeste,39.873511,-5.549847
 
 TEA HU-Balatonalmádi Szabolcs u.,47.040134,18.019039
-TEA HU-Budapest Gyömrői út,47.464225,19.159225
+TEA HU-Budapest Gyömrői utca,47.46422,19.15922,25
+TEA HU-Cegléd Hrsz,47.1851,19.93155
 TEA HU-Gyenesdiá Kereskedők útja,46.77272,17.276458
 TEA HU-Hort 60-as Fogado,47.68784,19.741664
 TEA HU-Kecskemét Izsáki út,46.899223,19.67733
+TEA HU-Nyíregyháza Tünde utca,47.93709,21.74936
+TEA HU-Orosháza Dózsa György utca,46.5588,20.6732
+TEA HU-Polgár Ipari Park,47.84054,21.13145
 
 TEAG DE-Am Ettersberg Schwerstedter Straße,51.062259,11.250298
 TEAG DE-Amt Wachsenburg,50.888332,10.935136
@@ -18983,6 +19017,9 @@ Virta DE-Nidda Eisenried,50.416387,9.017287
 Virta DE-Reddeber Am Stadtweg,51.861832,10.80263
 Virta DE-Rostock Alte Dorfstraße,54.10095,12.18146
 Virta DE-Salzwedel Brunnenstraße,52.85815,11.14482
+Virta EE-Narva-Jõesuu L. Koidula tn,59.44513,28.01689
+Virta EE-Tallinn Narva mnt,59.44047,24.78137
+Virta EE-Tallinn Paldiski mnt,59.42545,24.65005
 Virta FI-Harjavalta Yhdyskatu,61.3105,22.14535
 Virta FI-Helsinki Maneesikatu,60.17344,24.9602
 Virta FI-Hyvinkää Kalevankatu,60.605277,24.867179
@@ -19279,6 +19316,7 @@ Zest GB-Gateshead Metrocentre,54.955215,-1.666485
 
 ZEV DE-Zwickau Äußere Schneeberger Straße,50.707476,12.499435
 
+ZSE HU-Alacska pihenőhely,47.38406,19.28321
 ZSE SK-Banská Bystrica Na Troskách,48.731194,19.135926,10
 ZSE SK-Bernolákovo Baničova,48.211016,17.263182
 ZSE SK-Bratislava Bory Mall,48.20621,17.03329,75
@@ -19531,7 +19569,10 @@ ES Madrid Hotel Madrid Centro,40.423082,-3.709453
 FR 68510 Sierentz Hyper U et Drive,47.66618,7.441494,10
 FR Disneyland Paris,48.86427,2.78954,99
 FR Disneyland Paris,48.87352,2.78475,60
-HU Budapest Omega,47.46768,19.16731
+GU Budapest Gizella utca,47.50983,19.0995
+HU Budapest Omega,47.46799,19.16747,60
+HU Kecskemét Four Points by Sheraton,46.89802,19.67362
+HU Körmend Mjus,47.00862,16.5687
 IT Bollate Via S. Bernardo Pirelli,45.563026,9.147342
 IT Bruneck Intercable,46.80072,11.92867
 IT Lazise Camping Spiaggia D’Oro,45.49657,10.73528,200
