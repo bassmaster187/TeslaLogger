@@ -563,7 +563,7 @@ WHERE
     ""longitude"": {tour.lastPosition.lng},
     ""heading"": {tour.lastPosition.heading},
     ""trip_start_dt"": ""{tour.startTS.ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ssZ")}"",
-    ""trip_duration_sec"": ""{(tour.endTS-tour.startTS).Seconds}""
+    ""trip_duration_sec"": ""{(int)(tour.endTS-tour.startTS).TotalSeconds}""
 }}";
             CurrentJSON.ToKVS(kli.carID);
         }
