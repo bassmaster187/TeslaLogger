@@ -1942,6 +1942,7 @@ Supercharger-V3 DE-Illertissen,48.21882,10.127614,25
 Supercharger-V3 DE-Irschenberg,47.826678,11.898501
 Supercharger-V3 DE-Irxleben,52.170617,11.484912
 Supercharger-V4 DE-Jettingen,48.41098,10.44051,40
+Supercharger-V4 DE-Kaiserslautern Merkurstraße,49.44158,7.70743
 Supercharger-V4 DE-Kaiserslautern,49.459907,7.82141
 Supercharger-V3 DE-Kaltenkirchen,53.846035,9.936263,20
 Supercharger-V3 DE-Kaltenkirchen,53.846223,9.936353,10
@@ -3273,7 +3274,7 @@ Supercharger LU-Mënsbech,49.6409,6.27076
 Supercharger LV-Rēzekne,56.514628,27.350956
 Supercharger-V3 LV-Rīga,56.924138,24.177005
 
-Supercharger-V3 NL-Akersloot,52.547541,4.722741
+Supercharger-V3 NL-Akersloot,52.54776,4.72287,70
 Supercharger-V4 NL-Almere,52.358163,5.251845,50
 Supercharger-V3 NL-Apeldoorn Oost,52.204703,6.016104
 Supercharger NL-Apeldoorn,52.178323,5.912639
@@ -3295,21 +3296,23 @@ Supercharger-V3 NL-Emmen,52.724202,6.883345
 Supercharger-V4 NL-Enschede,52.20289,6.88875
 Supercharger-V4 NL-Gorinchem,51.841309,5.009061,35
 Supercharger NL-Gouda,52.022465,4.684526
-Supercharger NL-Haarlem,52.369457,4.648263
-Supercharger NL-Harderwijk,52.335913,5.643527
+Supercharger-V4 NL-Haarlem,52.36946,4.64826
+Supercharger-V4 NL-Harderwijk,52.33594,5.64359,30
 Supercharger-V4 NL-Heerlen,50.893031,5.955571
 Supercharger-V3 NL-Hengelo,52.287275,6.773343
-Supercharger NL-Hoorn,52.650769,5.038917
+Supercharger NL-Hoorn,52.65081,5.03883,32
 Supercharger-V3 NL-Horst,51.47005,6.05723
 Supercharger-V4 NL-Houten,52.0261,5.13789
 Supercharger NL-Leiderdorp,52.160698,4.54893
 Supercharger-V3 NL-Leusden,52.14405,5.4169,35
 Supercharger-V3 NL-Maastricht,50.816519,5.725658
+Supercharger-V3 NL-Meerkerk,51.89949,4.98264,32
 Supercharger-V3 NL-Meerkerk,51.89951,4.98285,35
+Supercharger-V3 NL-Meerkerk,51.89962,4.98346,32
 Supercharger-V3 NL-Middelburg,51.480275,3.636485,30
 Supercharger NL-Naarden,52.30858,5.141127
 Supercharger-V4 NL-Nieuwerkerk aan den IJssel,51.978425,4.618982
-Supercharger NL-Nootdorp,52.05265,4.402214
+Supercharger-V4 NL-Nootdorp,52.05265,4.40221
 Supercharger NL-Oosterhout,51.626423,4.869517
 Supercharger-V3 NL-Ridderkerk,51.867934,4.557695
 Supercharger-V3 NL-Rijswijk,52.048276,4.349078
@@ -3322,7 +3325,7 @@ Supercharger-V3 NL-Tilburg,51.543084,5.111792
 Supercharger NL-Tilburg,51.606331,5.005621
 Supercharger-V3 NL-Uden,51.671308,5.60267
 Supercharger NL-Urmond,50.98941,5.781523
-Supercharger NL-Venray,51.547121,5.997161
+Supercharger-V4 NL-Venray,51.54712,5.99716
 Supercharger NL-Vuren,51.838827,5.090846
 Supercharger-V3 NL-Weert,51.28177,5.650989
 Supercharger-V3 NL-Wolvega,52.880495,6.021328
@@ -5798,7 +5801,7 @@ Tesla Service Center LU-Luxembourg,49.589429,6.140689
 Tesla Service Center NL-Amsterdam Zuid-Oost,52.310477,4.936176
 Tesla Service Center NL-Arnhem,51.965004,6.003759
 Tesla Service Center NL-Den Haag,52.070438,4.388344
-Tesla Service Center NL-Groningen,53.223064,6.609412
+Tesla Service Center NL-Groningen,53.22297,6.61148
 Tesla Service Center NL-Rotterdam,51.864975,4.456947
 Tesla Service Center NL-Tilburg,51.606062,4.9964
 Tesla Service Center NO-Skodje,62.492199,6.606938
@@ -5828,6 +5831,7 @@ ABB IT-San Giorgio Bigarello Via maestri del lavoro,45.166656,10.852428
 ABB NZ-Mount Maunganui Maru Street,-37.665067,176.196996
 
 ABC AT-Ansfelden Carl-Anton-Carlone-Straße,48.209717,14.290248
+ABC FI-Alavus Piirantie,62.59289,23.60903,20
 ABC FI-Espoo Komeetankatu,60.16665,24.73444
 ABC FI-Forssa Matkailijankatu,60.82763,23.57226
 ABC FI-Hyvinkää Peltokuumolantie,60.61899,24.80656
@@ -5885,6 +5889,7 @@ AGRAVIS DE-Münster Industrieweg,51.9607,7.6261
 AGRAVIS DE-Thedinghausen Auf dem Rövekamp,52.962875,9.023485
 AGRAVIS DE-Vettweiß An der Tankstelle,50.73148,6.596273
 
+AgriSnellaad NL-Goes Hudsonweg,51.48319,3.89467,30
 AgriSnellaad NL-Kruiningen Weihoek,51.465069,4.029549
 AgriSnellaad NL-Middelburg Mortiereboulevard,51.48015,3.62581
 
@@ -5943,7 +5948,7 @@ Aldi DE-Bonn-Beuel Maarstraße,50.73775,7.131111
 Aldi DE-Bonn-Lannesdorf Drachenburgstraße,50.667667,7.18025
 Aldi DE-Bonn-Nordstadt Brühler Straße,50.741861,7.072472
 Aldi DE-Bottrop Horster Str.,51.524417,6.932389
-Aldi DE-Butzbach Am Keltenhof,50.428844,8.6848,50
+Aldi DE-Butzbach Am Keltenhof,50.42884,8.6848
 Aldi DE-Böblingen Süd Bahnhof,48.677525,9.011909
 Aldi DE-Böblingen,48.685646,8.993401
 Aldi DE-Bürstadt Mainstraße,49.65388,8.452371
@@ -6232,6 +6237,7 @@ Aldi DE-Wiesbaden Mainzer Straße,50.057156,8.256999,30
 Aldi DE-Wiesbaden Rostocker Straße,50.08846,8.289717
 Aldi DE-Wiesbaden Siemensstraße,50.059017,8.338261,20
 Aldi DE-Wiesbaden-Dotzheim Am Hang,50.079333,8.201861
+Aldi DE-Wilhelmshaven Posener Straße,53.57357,8.08479
 Aldi DE-Wittlich Gottlieb-Daimler-Straße,49.980806,6.903278
 Aldi DE-Wölfersheim-Berstadt Benzstraße,50.422056,8.856306
 Aldi DE-Wöllstein In der Krummgewann,49.82322,7.97459
@@ -6785,12 +6791,21 @@ Allego FR-Saint-Louis Av. Général de Gaulle,47.58318,7.55722
 Allego FR-Thiais Rue du Luxembourg,48.75427,2.37341,15
 Allego FR-Venette Av. de l’Europe,49.40815,2.78088,30
 Allego FR-Épinal Rue du Saut le Cerf,48.1974,6.47749
+Allego NL-De Koog Pelikaanweg,53.0817,4.76146
 Allego NL-Eelderwolde Borchsingel,53.19675,6.5161,30
+Allego NL-Eindhoven Stationsplein,51.44191,5.48039
+Allego NL-Eindhoven Stevertsemolen,51.44899,5.48104
+Allego NL-Hellevoetsluis Struytse Hoeck,51.83245,4.14729
 Allego NL-Hengelo Bornsestraat,52.28699,6.77462,20
+Allego NL-Hoorn Westfriese Parkweg,52.65111,5.03843,12
 Allego NL-Meerkerk,51.89981,4.98278,12
+Allego NL-Nieuwegein Waterliniedok A27,52.01124,5.12244
 Allego NL-Paukenweg Middelburg,51.48,3.6368,15
+Allego NL-Utrecht Meerndijk A12,52.0725,5.02687
+Allego NL-Veenendaal Bastion,52.04191,5.56792
 Allego NL-Venlo Nijmeegseweg,51.395385,6.174293,60
 Allego NL-Zaltbommel Hogeweg,51.79655,5.2553,22
+Allego NL-Zurich N31,53.09901,5.38405
 Allego SE-Arboga Burskapsvägen,59.42677,15.8286,25
 Allego SE-Gävle,60.645483,17.146225
 Allego SE-Helsingborg Landskronavägen,56.001269,12.744955
@@ -7124,6 +7139,7 @@ be.energised DE-Kassel Porsche,51.304914,9.528714
 be.energised DE-Köln Von-Hünefeld-Straße,50.98271,6.88529
 be.energised DE-St. Ingbert Geistkircher Straße,49.27805,7.180204
 be.energised DE-Unterschleißheim Audi Kölbl,48.28313,11.567575
+be.energised NL-Sneek Oude Oppenhuizerweg,53.02853,5.67214
 
 BeCharge AT-Pirching an der Raab Pirching,47.089466,15.732672
 BeCharge IT-Alba Adriatica Piazza Aldo Moro,42.835346,13.930695
@@ -7404,6 +7420,7 @@ BP DE-Wuppertal Nevigeser Straße,51.268683,7.126744
 BP DE-Wörth am Main Landstraße,49.79783,9.15649
 BP DE-Zwickau Leipziger Straße,50.742861,12.488611
 BP GB-Poppleton Boroughbridge Road,53.971951,-1.142952
+BP NL-Alkmaar Rijksweg,52.61463,4.73975
 BP NL-Amsterdam Nieuwe Hemweg,52.39394,4.864531
 BP NZ-Wānaka Sir Tim Wallis Drive,-44.69491,169.155997
 
@@ -7714,6 +7731,7 @@ ChargePoint DE-Würzburg 10a Friedrichstraße,49.797157,9.914771
 ChargePoint IT-Area di servizio Altivole,45.752779,11.896712
 ChargePoint IT-Castelrotto Kastelruth Autostrada del Brennero,46.57,11.522867
 ChargePoint IT-Lutago Via Valle Aurina,46.950787,11.922009
+ChargePoint NL-Goes Olympiastraat,51.49488,3.87392
 ChargePoint US-Auburn CA Grass Valley Hwy,38.90178,-121.07402
 ChargePoint US-Bellville OH State Route 97,40.645793,-82.543001
 ChargePoint US-Bluff UT 455 W Main Street,37.281693,-109.567547
@@ -7794,6 +7812,7 @@ CircleK DE-Zinnowitz Ahlbecker Straße,54.067399,13.919599
 CircleK EE-Mustvee Jõgeva maakond,58.850808,26.913377
 CircleK EE-Valga maakond Pikk tn,57.788455,26.048332
 CircleK LT-Kryžkalnis Dvaro gatvė,55.484335,22.58835,25
+CircleK NL-Amsterdam Kromwijkdreef,52.31336,4.98285
 CircleK NO-Oslo Ankerveien,59.96261,10.64281,30
 CircleK SE-Bjärred,55.722256,13.08846
 CircleK SE-Göteborg,57.707127,11.870444
@@ -8516,7 +8535,10 @@ Duferco IT-Torino Via Parenzo,45.103057,7.646126
 
 E-Flux BE-Chimay Rue Madeleine,50.039692,4.377412
 E-Flux DE-Bergisch Gladbach Stegerwaldstraße,50.957793,7.145137
+E-Flux NL-Alkmaar Olympiaweg,52.63508,4.71392
 E-Flux NL-Berkhout Kleine wijzend,52.648667,5.032723
+E-Flux NL-Lattrop-Breklenkamp Spiekweg,52.43171,6.96598
+E-Flux NL-Steenwijk Eesergaard,52.80507,6.134
 
 e-laden-Tirol AT-Kematen Sellrainer Straße,47.261524,11.264524
 e-laden-Tirol AT-Kematen Sportplatzweg,47.260587,11.268672
@@ -8892,6 +8914,8 @@ EcoEsco IT-Palau Via Fonte Vecchia,41.178723,9.383838
 
 Ecotap DE-Goch Am Bössershof,51.665633,6.173346
 Ecotap DE-Nürnberg Lübener Straße,49.410359,11.139266,25
+Ecotap NL-Goes Goese Poort,51.5068,3.87532,30
+Ecotap NL-Wemeldinge Oostelijke Kanaalweg,51.51578,4.00752
 Ecotap NL-Wemeldinge Ruisweg,51.521996,3.980178
 
 ecowerk DE-Tübingen Eisenhutstraße,48.510943,9.070798,20
@@ -10126,7 +10150,7 @@ EnBW DE-Jestetten Schaffhauser Straße,47.651006,8.57226
 EnBW DE-Jungingen Märzengasse,48.326571,9.041705
 EnBW DE-Jülich,50.92911,6.3565
 EnBW DE-Kaarst,51.22642,6.60024
-EnBW DE-Kaiserslautern Merkurstraße,49.441559,7.708135
+EnBW DE-Kaiserslautern Merkurstraße,49.44156,7.70814,10
 EnBW DE-Kaltenborn,51.288867,7.5718
 EnBW DE-Kamen Kamener Kreuz,51.567135,7.674563,60
 EnBW DE-Kamenz,51.28738,14.111254
@@ -11194,6 +11218,7 @@ Eneco DE-Kiel Alte Weide,54.33118,10.11332
 Eneco DE-Landshut Wittstraße,48.53071,12.146114,30
 Eneco DE-Ludwigsburg Gänsfußallee,48.89199,9.17599
 Eneco DE-Pentling Hohengebrachinger Straße,48.97936,12.06739
+Eneco NL-Haarlem Emrikweg,52.39576,4.66413
 
 Enefit EE-Jüri Harju maakond,59.358956,24.895166
 Enefit EE-Pärnu Ranna pst,58.37367,24.503218
@@ -11215,6 +11240,7 @@ EnelX IT-Lecce Stazione di Ricarica,40.353177,18.171802,10
 EnelX IT-Legnano Via Fabio Filzi,45.607315,8.927481
 EnelX IT-Olbia Via Basa,40.96083,9.491849
 EnelX IT-Palermo Via Marchese di Villabianca,38.139612,13.349534
+EnelX IT-Quartu Sant’Elena Viale C. Colombo,39.23191,9.18797
 EnelX IT-Ramiola,44.698924,10.090093
 EnelX IT-Sassari Via Washington,40.710753,8.553156
 EnelX IT-Stresa Piazza Marconi,45.88419,8.54132
@@ -11414,6 +11440,7 @@ ENGIE FR-Eurotunnel Le Shuttle Calai Coquelles,50.928381,1.811841
 ENGIE FR-Meaux Av. de la Victoire,48.9581,2.90808,25
 ENGIE FR-Romagnieu Aire du Guiers A43,45.57821,5.633827
 ENGIE FR-Vitrac-sur-Montane Aire Corrèze,45.360055,1.937966
+ENGIE NL-Den Haag Van Bleiswijkstraat,52.09403,4.28025
 
 Enio AT-Flughafen Wien Ausfahrtsstraße,48.124247,16.559234
 Enio AT-Möllbrücke Mölltal Straße,46.83754,13.370139
@@ -11445,12 +11472,15 @@ enwag DE-Wetzlar Am Leitz-Park,50.55306,8.533399,18
 
 EPO CH-Amriswil Marktplatz,47.545497,9.299695
 
+EQUANS NL-Amsterdam IJdoornlaan,52.41527,4.91168
+
 ESARJ TR-Afyonkarahisar Merkez Dörtyol,38.793372,30.457982
 
 ESWE DE-Idstein Limburger Straße,50.223519,8.267802
 ESWE DE-Wiesbaden Hauptbahnhof Gartenfeldstraße,50.070716,8.245458
 ESWE DE-Wiesbaden Mainzer Straße,50.060553,8.254324
 
+EV-Beckum DE-Beckum Bauknechtstraße,51.77246,8.03242
 EV-Dahlenburg-Bleckede DE-Dahlenburg Am Markt,53.186467,10.742472
 EV-Halle DE-Halle (Saale) Hansering,51.4811,11.97546
 EV-Leverkusen DE-Leverkusen Martin-Luther-Straße,51.03348,7.04619
@@ -11461,10 +11491,11 @@ EV-Sylt DE-List Hafenstraße,55.019234,8.438824
 EV-Sylt DE-Sylt Andreas-Nielsen-Straße,54.909464,8.310061
 EV-Sylt DE-Sylt Maybachstraße,54.90665,8.3059
 
-evb DE-Beckum Bauknecht Bauknechtstraße / Obere Brede,51.772439,8.032388
 EVB DE-Eisenach Adam-Opel-Straße,50.980301,10.297469
 
 EVBox CH-Egerkingen Hausimollstrasse,47.318099,7.802282
+EVBox NL-Enschede Strootsweg,52.22154,6.83426
+EVBox NL-Vriezenveen De Zuivering,52.40457,6.63523
 
 EVconnect RO-Blejoi DN1A DN1B,44.971994,26.021522
 EVconnect RO-Brașov Calea București,45.63239,25.63677,25
@@ -12724,45 +12755,78 @@ Fastned FR-Écot A36,47.440489,6.728826
 Fastned IT-Castenedolo Via Sandro Pertini,45.484816,10.321338
 Fastned NL-Aalscholver,52.436005,5.424898
 Fastned NL-Akermaat,52.498623,4.698793
+Fastned NL-Alblasserdam A15,51.85071,4.67979,30
 Fastned NL-Beek Vossedal,50.9365,5.78356
+Fastned NL-Bisde A2,51.9117,5.17845,20
 Fastned NL-Bloemheuvel,52.04989,5.461548
 Fastned NL-Bloomendaal,51.912029,4.984937
+Fastned NL-Bornheim A28,52.45166,5.97785,30
 Fastned NL-Bospoort,52.16278,4.55405
+Fastned NL-Bosserhof A2,51.11368,5.86792,30
 Fastned NL-Bovenboer,52.752832,6.186554
-Fastned NL-Breukelen Haarrijn,52.143186,5.000308
+Fastned NL-Breukelen Haarrijn,52.14313,5.00035,20
+Fastned NL-Broerdijk A7,52.71182,5.02898
+Fastned NL-Coosenhoek N57,51.87059,4.18041,20
+Fastned NL-De Abt A6,52.62593,5.66672,30
 Fastned NL-De Beerze,51.324273,5.223084
+Fastned NL-De Buunderkamp A12,52.02087,5.75481,30
+Fastned NL-De Gagel A50,51.74562,5.60276,30
 Fastned NL-De Hackerlaar,52.322064,5.084425
+Fastned NL-De Hucht A1,52.18578,5.8908,30
+Fastned NL-De Keizer,51.74688,4.92192,20
 Fastned NL-De Knoest,52.014226,5.122142
 Fastned NL-De Kroon,52.016089,5.120814
 Fastned NL-De Slenk,52.007451,5.812322
+Fastned NL-De Tille N59,51.69707,4.2294,30
 Fastned NL-De Watering,52.44225,4.854528
+Fastned NL-De Weeren A32,52.91563,5.98245,30
+Fastned NL-De Zuidpunt A16,51.7341,4.63203
+Fastned NL-Dekkersland A28,52.62449,6.20807,30
+Fastned NL-Delfgauw Ruyven A13,51.98433,4.39494,20
+Fastned NL-Den Bout A15,51.83214,4.88122
 Fastned NL-Den Hoek,51.662581,4.678008
+Fastned NL-Den Hoorn Hogenhoorn,52.01186,4.31538
 Fastned NL-Den Ruygen Hoek-Oost,52.258294,4.686117
 Fastned NL-Den Ruygen Hoek-West,52.261416,4.686326
 Fastned NL-Ede De Poel A30,52.063747,5.612108
 Fastned NL-Eigenblok,51.849157,5.191428
+Fastned NL-Eindhoven Limburglaan,51.43424,5.45073
+Fastned NL-Ellerbrug A2,51.22078,5.80889,30
 Fastned NL-Fustweg,52.385156,4.661724
+Fastned NL-Galgeveld,51.60298,4.84085,30
+Fastned NL-Ganzenven A50,51.74659,5.59917,30
 Fastned NL-GelreDome,51.964668,5.89232
+Fastned NL-Han Stijkel A6,52.66088,5.68924
 Fastned NL-Hazeldonk-Oost,51.497862,4.743228
-Fastned NL-Hazeldonk-West,51.500096,4.740994
+Fastned NL-Hazeldonk-West,51.50025,4.74074,30
 Fastned NL-Heerde Het Veen A50,52.395969,6.0132
 Fastned NL-Heeze Meelakkers,51.40385,5.53798
 Fastned NL-Hendriksbos,52.363044,5.76797
 Fastned NL-Her Goor,51.321341,5.219179
+Fastned NL-Het Anker A2,51.0574,5.82517,30
 Fastned NL-Het Gevlocht,51.404412,5.810961
+Fastned NL-Het Lonnekermeer A1,52.28141,6.85293
+Fastned NL-Het Lonnekermeer,52.28141,6.85293
+Fastned NL-Het Veelsveld A1,52.28698,6.86097,30
 Fastned NL-Hoezaar,51.54884,4.529072
-Fastned NL-Hoge Kwel,52.857402,5.021431
+Fastned NL-Hoge Kwel A7,52.85719,5.02147,20
 Fastned NL-Holten A1,52.25557,6.43712,25
 Fastned NL-Honswijck,52.320129,5.077844
 Fastned NL-Jutphaas,52.017667,5.068278
+Fastned NL-Keizershof A59,51.642,4.55664,25
 Fastned NL-Klarenbeek De Brink A50,52.170733,6.025852
 Fastned NL-Klarenbeek De Somp,52.16625,6.026103,30
+Fastned NL-Knuvelkes A2,50.78605,5.72775,30
 Fastned NL-Labbegat,51.69393,5.01359
 Fastned NL-Laerd,53.051399,5.553802
 Fastned NL-Lemsterhop,52.818501,5.74235
 Fastned NL-Lepelaar,52.432869,5.422989
+Fastned NL-Lingehorst A2,51.91277,5.18091,20
+Fastned NL-Lokkant A73,51.68429,5.89098,30
+Fastned NL-Maasbree Midden Peelweg,51.37647,5.98555,30
 Fastned NL-Mastpolder,51.547724,4.530389
 Fastned NL-Molenkamp,51.84753,5.19078
+Fastned NL-Nagele Han Stijkel,52.66088,5.68924
 Fastned NL-Oirschot Kriekampen A58,51.492017,5.363832
 Fastned NL-Ooiendonk,51.556297,5.361872
 Fastned NL-Opheusden Varakker A15,51.923942,5.605205
@@ -12772,19 +12836,25 @@ Fastned NL-Panjerd Rijksweg,52.68269,6.369016
 Fastned NL-Portland,51.862667,4.459778
 Fastned NL-Prinses Máximaplein,52.055171,4.391199
 Fastned NL-Ravensewetering,52.049847,5.122276
+Fastned NL-Roevenpeel A2,51.25488,5.76408,30
+Fastned NL-Rosmalen Graafsebaan,51.70282,5.35835
 Fastned NL-Sandelingen-Oost,51.834753,4.620995
 Fastned NL-Scheiwijk Hoogblokland A27,51.871617,4.962894
 Fastned NL-Selnisse,51.49875,3.77227
 Fastned NL-Son Sonse Heide A50,51.535544,5.478894
 Fastned NL-Stadionweg,51.89654,4.539005
+Fastned NL-Streepland A16,51.69066,4.65763,25
 Fastned NL-Swentibold,51.01059,5.80057
 Fastned NL-Tafelbergweg,52.292076,4.945501
+Fastned NL-Tussenhoek N57,51.87026,4.18248,20
 Fastned NL-Velder,51.559136,5.3568
 Fastned NL-Vliedberg,51.48431,3.85084
 Fastned NL-Voorst De paal,52.209097,6.097979
 Fastned NL-Vrijenban,51.983412,4.392855
 Fastned NL-Wellerzand,52.78436,5.759275
 Fastned NL-Willemsbos,52.360573,5.766818
+Fastned NL-Zalkerbroek N50,52.50478,5.97327,30
+Fastned NL-Zuidwolde A28,52.67927,6.35898,30
 
 FDE80 FR-Ault Imp. Desmond,50.09962,1.44905
 FDE80 FR-Mers-les-Bains Rue du 4 Septembre,50.06333,1.38804
@@ -14018,6 +14088,7 @@ Ionity NL-Mienscheer,53.161647,6.292686
 Ionity NL-Oosterhout,51.6269,4.8701,10
 Ionity NL-Overbroek,51.921616,5.603749
 Ionity NL-Sandeligen West,51.834832,4.618082
+Ionity NL-Sandelingen Oost A16,51.83603,4.61978
 Ionity NL-Sevenum,51.38008,5.985541
 Ionity NL-Tolnegen Noord,52.184387,5.670553
 Ionity NO-Alvdal,62.11837,10.61407
@@ -15484,6 +15555,7 @@ Lidl DE-Zella-Mehlis,50.654054,10.662837
 Lidl DE-Zwiesel,49.005602,13.222743
 Lidl DE-Überherrn Langwies 4,49.249482,6.698594
 Lidl DK-Ribe Saltgade,55.332214,8.767663
+Lidl DK-Rødovre Roskildevej,55.6713,12.45544
 Lidl FI-Espoo Kukkaromäki,60.20847,24.63643
 Lidl FI-Espoo Kurjenkellontie,60.15892,24.70506
 Lidl FI-Heinola Kaivokatu,61.20482,26.03823,30
@@ -15553,6 +15625,7 @@ Lidl HU-Veszprém,47.111508,17.926394
 Lidl IT-Peschiera del Garda,45.43475,10.680242
 Lidl LU-Schmëtt Huldange Troisvierges,50.181824,6.023547
 Lidl NL-Almere Daniël Goedkoopstraat,52.37545,5.29279
+Lidl NL-Weert Keulerstraat,51.24407,5.69604
 Lidl NL-Zierikzee Haringvlietplein,51.652977,3.91038
 Lidl PL-Dąbrówka,52.376433,16.742482
 Lidl PL-Giżycko Bohaterów Westerplatte,54.03546,21.77894
@@ -15670,7 +15743,7 @@ Malanka BY-Minsk vulica Uladzislava Halubka,53.92613,27.44256
 Mark-E DE-Hagen Bahnhofstraße,51.359833,7.468871
 
 MB DE-Aurich Korbweidenstraße,53.45056,7.50673
-MB DE-Butzbach In der Alböhn,50.429422,8.683063,50
+MB DE-Butzbach In der Alböhn,50.42942,8.68306
 MB DE-Mannheim Gottlieb-Daimler-Straße,49.475862,8.495459
 MB DE-Stuttgart Siemensstraße,48.81003,9.180705,15
 MB US-Waller TX US 290 Frontage Rd,30.07166,-95.9309
@@ -16248,6 +16321,8 @@ Next-e SK-Budča,48.568762,19.06073
 Nissan DE-Ahrensburg An der Strusbek,53.68379,10.26576,25
 Nissan DE-München Zamdorfer Straße,48.138678,11.642689
 Nissan DE-Neustadt in Holstein Eutiner Straße,54.10199,10.799542
+
+NLE NL-Lingehorst A2,51.91256,5.1807,20
 
 nonoxx-pro DE-Cochem Ravenestraße,50.150771,7.165315
 nonoxx-pro DE-Grömitz Am Strande,54.14459,10.95913
@@ -17258,6 +17333,8 @@ Rifil SE-Arlöv Gullrisvägen,55.614023,13.10072,30
 Rloaded DE-Leipheim Albert-Einstein-Straße,48.44706,10.240232
 
 RoboCharge NL-Biervliet Middenweg,51.326131,3.667839
+RoboCharge NL-Breskens Westlandstraat,51.39697,3.55573
+RoboCharge NL-Dalen Reindersdijk,52.67694,6.77534
 
 Révéo FR-Gignac Parc d’Activité de Camalcé,43.64964,3.54682
 Révéo FR-Lavelanet Pl. Jeanne d’Arc,42.93532,1.8503,25
@@ -17602,12 +17679,29 @@ Shell DK-Kruså Sønderborgvej,54.849584,9.405117
 Shell FR-Aire de Béziers-Montblanc Sud,43.359314,3.34559,30
 Shell FR-Sommesous Aire de Sommesous,48.7294,4.2291
 Shell HU-Pécs Budai Vám utca,46.083554,18.270951
+Shell NL-Amersfoort Boerderijenboulevard,52.18225,5.43427
+Shell NL-Breda Backer en Ruebweg,51.60233,4.76947
+Shell NL-Breukelen Haarrijn,52.14346,5.00116,20
+Shell NL-De Lucht-Oost A2,51.77525,5.26021,30
+Shell NL-De Schaars A12,52.0241,5.88037,30
+Shell NL-De Somp A50,52.166,6.02513,30
+Shell NL-Enschede Broekheurne-Ring,52.1996,6.8639
 Shell NL-Etten-Leur A58,51.573567,4.684423
+Shell NL-Hank A27,51.74434,4.91808,30
+Shell NL-Hardenberg Lange Spruit,52.57753,6.59682
 Shell NL-Hazeldonk-Oost,51.497412,4.741936,30
+Shell NL-Hazeldonk-West,51.49981,4.74195,30
 Shell NL-Heerlen,50.823176,6.019581,30
+Shell NL-Hoge Kwel A7,52.85689,5.02116,20
 Shell NL-Holten A1,52.25538,6.43789,25
+Shell NL-Lelystad Larserdreef,52.48666,5.49276,30
+Shell NL-Moldenheide A58,51.55459,4.91283,30
 Shell NL-Oirschot Rijksweg A58,51.49231,5.349267
+Shell NL-Oostburg Torenweidelaan,51.32573,3.48462
+Shell NL-Peulwijk-Oost A4,52.00931,4.31141,20
+Shell NL-Rotterdam Schiekade,51.92551,4.47812,25
 Shell NL-Winterswijk Europark,51.97298,6.70488
+Shell NL-Workum Spoardyk,52.97395,5.45226
 Shell NO-Kristiansand Vigeveien,58.163866,8.043222
 Shell PL-Nowa Wieś Legnicka,51.158851,16.171596
 Shell US-De Soto IA Guthrie St,41.53846,-94.01151
@@ -18081,7 +18175,7 @@ Süwag DE-Bad Ems Silberau,50.332595,7.708017
 Süwag DE-Eltville am Rhein Taunusstraße,50.02711,8.12039
 Süwag DE-Frankfurt Schützenbleiche,50.096544,8.543414
 
-Tango NL-Meerkerk Energieweg,51.899723,4.983659,18
+Tango NL-Harderwijk Boekhorstlaan,52.33564,5.64287,20
 Tango NL-Steenbergen Koperslagerij,51.588523,4.302757
 
 TankE DE-Alsfeld An der Bleiche,50.746257,9.274916
@@ -18717,8 +18811,14 @@ Vattenfall DE-Wildeshausen Westring,52.892716,8.414819
 Vattenfall DE-Wittstock/Dosse Polthierstraße,53.156304,12.482213
 Vattenfall DE-Zossen Gerichtstraße,52.217499,13.469447
 Vattenfall DE-Zossen Gutstedtstraße,52.170101,13.471497
+Vattenfall NL-Beuningen Hadrianussingel,51.85621,5.75153
 Vattenfall NL-Beverwijk Parallelweg,52.480307,4.665939
+Vattenfall NL-Breda Kruisvoort,51.58231,4.73088
+Vattenfall NL-Duiven Nieuwgraaf,51.96724,5.98923
+Vattenfall NL-Geleen Rijksweg Zuid,50.9565,5.81353
 Vattenfall NL-Gronsveld Burg. Frans Cortenraadstraat,50.8125,5.72178
+Vattenfall NL-Rosmalen Burgemeester Burgerslaan,51.7194,5.33523
+Vattenfall NL-Schagen Grotewallerweg,52.78243,4.80893
 Vattenfall SE-Ammarnäs Strandvägen,65.95758,16.21079
 Vattenfall SE-Arlöv Vassvägen,55.613434,13.102772,20
 Vattenfall SE-Boden Kyrkgatan,65.82433,21.68958
@@ -18771,6 +18871,7 @@ Virta DE-Ichenhausen Weiler Weg,48.37573,10.313648
 Virta DE-Karlsruhe Wolfartsweierer Straße,48.999479,8.428314,12
 Virta DE-Kirchlengern Hüllerstraße,52.217459,8.638052
 Virta DE-Kreuzwertheim Hasslocher Straße,49.769024,9.512555
+Virta DE-München Balanstraße,48.12122,11.59824
 Virta DE-Nidda Eisenried,50.416387,9.017287
 Virta DE-Reddeber Am Stadtweg,51.861832,10.80263
 Virta DE-Rostock Alte Dorfstraße,54.10095,12.18146
@@ -19133,6 +19234,7 @@ CZ Praha Cinestar,50.070897,14.401644
 CZ Praha Siemens,50.04811,14.306508
 DE Arnstadt nextmove,50.830822,10.948586
 DE Aurich EEZ,53.496286,7.494351
+DE Babensham ENERSYS,48.09008,12.31608
 DE Bad Doberan Grand Hotel Heiligendamm,54.143733,11.842857
 DE Bad Münstereifel Bendenweg,50.574357,6.765263
 DE Bad Oeynhausen Mindener Straße,52.21557,8.81643
