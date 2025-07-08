@@ -1785,10 +1785,10 @@ Supercharger-V4 CZ-Praha Štěrboholy,50.07136,14.54087
 Supercharger-V4 CZ-Vestec,49.99022,14.49048,60
 Supercharger-V4 CZ-Čestlice,50.00247,14.57338,30
 
-Supercharger DE-Achern,48.6413,8.03774
+Supercharger-V4 DE-Achern,48.64145,8.03749
 Supercharger-V4 DE Achim-Ost,53.018479,9.07028
-Supercharger DE-Aichstetten,47.8803,10.04052,10
-Supercharger DE-Aichstetten,47.88038,10.0404,10
+Supercharger-V4 DE-Aichstetten,47.8803,10.04052,10
+Supercharger-V4 DE-Aichstetten,47.88038,10.0404,10
 Supercharger-V4 DE-Allershausen,48.428631,11.583691
 Supercharger-V3 DE-Alsfeld,50.734003,9.241448,40
 Supercharger-V3 DE-Altdorf bei Nürnberg,49.381627,11.344434,40
@@ -1796,12 +1796,12 @@ Supercharger-V3 DE-Augsburg,48.398914,10.868163,32
 Supercharger-V4 DE-Augsburg-Haunstetten,48.297555,10.899144
 Supercharger-V4 DE-Bad Dürrheim,48.03618,8.531306
 Supercharger-V3 DE-Bad Oeynhausen,52.213,8.81417
-Supercharger DE-Bad Rappenau,49.211952,9.077337,25
+Supercharger-V4 DE-Bad Rappenau,49.21191,9.07711,30
 Supercharger-V4 DE-Bad Segeberg,53.93766,10.296875
 Supercharger-V3 DE-Baden-Baden,48.78364,8.19225
 Supercharger-V3 DE-Barsbüttel,53.578295,10.193266
 Supercharger-V3 DE-Bayreuth,49.96221,11.61027
-Supercharger DE-Beelitz,52.266784,12.92225
+Supercharger-V4 DE-Beelitz,52.26678,12.92225
 Supercharger-V3 DE-Bensheim,49.6723,8.6022,30
 Supercharger-V3 DE-Berchtesgaden,47.626949,13.000833
 Supercharger-V3 DE-Bergkamen,51.649509,7.67112,30
@@ -1829,18 +1829,18 @@ Supercharger-V3 DE-Bonn - Bonner Bogen,50.71867,7.15184,66
 Supercharger-V3 DE-Braak,53.617876,10.239352
 Supercharger-V4 DE-Braunschweig (Globus),52.24386,10.51293
 Supercharger-V4 DE-Bremen,53.049614,8.820908
-Supercharger DE-Brinkum,53.028326,8.808758
-Supercharger DE-Bruchsal,49.13837,8.56242
+Supercharger-V4 DE-Brinkum,53.02833,8.80876
+Supercharger-V4 DE-Bruchsal,49.13837,8.56242
 Supercharger-V3 DE-Brunnthal,48.039686,11.661457
 Supercharger-V3 DE-Burgdorf,52.122717,10.229433,35
-Supercharger DE-Busdorf,54.477959,9.544944,40
+Supercharger-V4 DE-Busdorf,54.47796,9.54494,40
 Supercharger-V3 DE-Böblingen,48.69138,9.003647
 Supercharger-V4 DE-Bühl,48.724669,8.110452
 Supercharger-V4 DE-Chemnitz,50.864124,12.867845
 Supercharger-V4 DE-Cottbus,51.71617,14.351694
 Supercharger-V3 DE-Dasing,48.393731,11.070452
 Supercharger-V3 DE-Denkendorf,48.707,9.306556
-Supercharger DE-Dettelbach,49.778831,10.068637
+Supercharger-V4 DE-Dettelbach,49.77883,10.06864
 Supercharger-V4 DE-Dietmannsried,47.811457,10.303146,28
 Supercharger-V4 DE-Dortmund-Nord,51.530488,7.471507
 Supercharger-V4 DE-Dresden Elbepark,51.08533,13.693485,30
@@ -1885,8 +1885,8 @@ Supercharger-V4 DE-Germersheim,49.2272,8.3732
 Supercharger-V4 DE-Gießen,50.588444,8.708071,35
 Supercharger-V4 DE-Gigafactory Berlin-Brandenburg,52.391408,13.796028
 Supercharger-V4 DE Gilching,48.093998,11.282514
-Supercharger DE-Gramschatzer Wald,49.91202,10.00176,30
-Supercharger-V3 DE-Gramschatzer Wald,49.912245,10.00073,30
+Supercharger-V4 DE-Gramschatzer Wald,49.91202,10.00176,30
+Supercharger-V4 DE-Gramschatzer Wald,49.91224,10.00073,30
 Supercharger-V3 DE-Greding,49.041979,11.342705
 Supercharger-V4 DE-Guxhagen,51.202502,9.468531,43
 Supercharger-V4 DE-Göttingen (Cafe del Sol),51.528354,9.887817
@@ -1972,7 +1972,7 @@ Supercharger-V3 DE-Leer,53.25967,7.45557
 Supercharger-V3 DE-Lehre,52.31315,10.63488,30
 Supercharger-V4 DE-Leipzig Sachsenpark,51.401142,12.39782,15
 Supercharger-V3 DE-Leipzig-Flughafen,51.401534,12.181377
-Supercharger DE-Leonberg,48.78523,9.01755
+Supercharger-V4 DE-Leonberg,48.78523,9.01755
 Supercharger-V3 DE-Leonberg Glemseck,48.784561,9.019178
 Supercharger-V3 DE-Limburg - (Globus),50.398424,8.076242
 Supercharger-V3 DE-Limburg an der Lahn,50.381161,8.089549
@@ -1990,17 +1990,17 @@ Supercharger-V4 DE Lübeck (Cafe del Sol),53.881288,10.660194
 Supercharger-V4 DE-Lübeck Moisling,53.912554,10.732506
 Supercharger-V3 DE-Magdeburg,52.210632,11.670302
 Supercharger-V4 DE-Magdeburg Florapark,52.1605,11.608187
-Supercharger DE-Malsfeld,51.087258,9.485137,20
+Supercharger-V4 DE-Malsfeld,51.08726,9.48514,20
 Supercharger-V3 DE-Merklingen,48.51637,9.75754,32
 Supercharger-V4 DE-Moers,51.44182,6.61183
-Supercharger DE-Mogendorf,50.482772,7.750309
+Supercharger-V4 DE-Mogendorf,50.48288,7.74995
 Supercharger-V3 DE Montabaur,50.44355,7.83113,60
 Supercharger-V3 DE-Motorworld München,48.196866,11.605312
-Supercharger DE-Motten,50.355621,9.75384
+Supercharger-V4 DE-Motten,50.35562,9.75384
 Supercharger-V3 DE-Murr,48.95615,9.24545
 Supercharger-V4 DE-Mönchengladbach,51.144112,6.426722
 Supercharger-V3 DE-Mücke,50.645442,8.989816
-Supercharger DE-Mühldorf,48.27257,12.55001,30
+Supercharger-V4 DE-Mühldorf,48.27257,12.55001,30
 Supercharger-V4 DE Mülheim an der Ruhr,51.450248,6.91344
 Supercharger-V3 DE-Münchberg-Nord,50.202822,11.776624,18
 Supercharger-V3 DE-Münchberg-Nord,50.202914,11.77689,10
@@ -2012,10 +2012,10 @@ Supercharger-V3 DE-München - Pasing Arcaden,48.14826,11.46415,35
 Supercharger-V3 DE-München - Sendling,48.105054,11.536857,30
 Supercharger-V4 DE-München Riem Arcaden,48.132573,11.689725,60
 Supercharger-V4 DE Münster,51.992189,7.571158
-Supercharger DE-Nempitz,51.29,12.13736,12
-Supercharger DE-Nempitz,51.29009,12.13734,8
-Supercharger DE-Nempitz,51.29015,12.13739,5
-Supercharger DE-Nempitz,51.29016,12.13744,5
+Supercharger-V4 DE-Nempitz,51.29,12.13736,12
+Supercharger-V4 DE-Nempitz,51.29009,12.13734,8
+Supercharger-V4 DE-Nempitz,51.29015,12.13739,5
+Supercharger-V4 DE-Nempitz,51.29016,12.13744,5
 Supercharger-V4 DE-Neu-Ulm,48.376918,10.006533
 Supercharger-V4 DE-Neuberg,50.1819,9.00663,40
 Supercharger-V4 DE-Neuberg,50.18256,9.0074
@@ -2053,7 +2053,7 @@ Supercharger-V3 DE-Plauen,50.497406,12.170422
 Supercharger-V3 DE-Posthausen,53.057581,9.165191,35
 Supercharger-V4 DE-Prüm,50.20577,6.42568
 Supercharger-V4 DE-Quickborn,53.742746,9.943359,20
-Supercharger DE-Rade,53.369702,9.802181
+Supercharger-V4 DE-Rade,53.3697,9.80218
 Supercharger-V3 DE-Rade-Appel,53.387855,9.796527
 Supercharger-V4 DE-Ratingen,51.352624,6.865141
 Supercharger-V4 DE-Rauenberg,49.27377,8.69561
@@ -2063,12 +2063,12 @@ Supercharger-V4 DE-Regensburg-Ost,48.99472,12.15061
 Supercharger-V3 DE-Reichertshofen,48.645645,11.520604
 Supercharger-V3 DE-Reinfeld,53.8232,10.50352
 Supercharger-V4 DE-Reiskirchen,50.59563,8.818755,30
-Supercharger DE-Rhüden,51.947102,10.14049,4
-Supercharger DE-Rhüden,51.947221,10.140505,12
+Supercharger-V4 DE-Rhüden,51.9471,10.14049,4
+Supercharger-V4 DE-Rhüden,51.94722,10.1405,12
 Supercharger-V3 DE-Rhüden,51.947243,10.140858,6
 Supercharger-V3 DE-Rhüden,51.947273,10.140962,12
 Supercharger-V3 DE-Rhüden,51.947298,10.140858,6
-Supercharger DE-Rhüden,51.947344,10.140582,5
+Supercharger-V4 DE-Rhüden,51.94734,10.14058,5
 Supercharger-V4 DE-Ringsheim,48.249992,7.765669,18
 Supercharger-V4 DE-Rosengarten,53.37879,9.89814
 Supercharger-V3 DE-Rosenheim,47.81716,12.1207,60
@@ -2087,9 +2087,9 @@ Supercharger-V4 DE-Schorndorf,48.8169,9.5383
 Supercharger-V4 DE-Schwaig,49.48155,11.196833
 Supercharger-V4 DE-Schwandorf (Globus),49.31446,12.14706
 Supercharger-V3 DE Schwarzheide,51.469478,13.869274
-Supercharger DE-Schweitenkirchen,48.510612,11.582234,6
-Supercharger DE-Schweitenkirchen,48.510715,11.581775,25
-Supercharger DE-Schweitenkirchen,48.510765,11.582025,19
+Supercharger-V4 DE-Schweitenkirchen,48.51061,11.58223,6
+Supercharger-V4 DE-Schweitenkirchen,48.51071,11.58178,25
+Supercharger-V4 DE-Schweitenkirchen,48.51076,11.58202,19
 Supercharger-V4 DE-Schwetzingen,49.413803,8.543361
 Supercharger-V3 DE-Schönefeld,52.388723,13.498047,30
 Supercharger-V4 DE-Siegen,50.85664,8.01141
@@ -2125,12 +2125,12 @@ Supercharger-V3 DE-Waldlaubersheim,49.92401,7.82565
 Supercharger-V4 DE-Waltersdorf Am Rondell,52.368556,13.558913
 Supercharger-V4 DE-Waltershausen,50.90015,10.5653
 Supercharger-V3 DE-Weibersbrunn,49.934777,9.353755
-Supercharger DE-Weimar,50.934216,11.289809
+Supercharger-V4 DE-Weimar,50.93422,11.28981
 Supercharger-V3 DE-Weiterstadt,49.89679,8.614198
 Supercharger-V3 DE-Wernberg-Köblitz,49.53223,12.13502,10
 Supercharger-V3 DE-Wernberg-Köblitz,49.53225,12.13484,10
 Supercharger-V3 DE-Wernberg-Köblitz,49.53225,12.13528,20
-Supercharger DE-Wertheim,49.77075,9.57622
+Supercharger-V4 DE-Wertheim,49.77075,9.57622
 Supercharger-V3 DE-Wertheim-Almosenberg,49.772295,9.587571
 Supercharger-V3 DE-Wertheim-Almosenberg,49.772417,9.58423
 Supercharger-V3 DE-Wetzlar,50.552762,8.532845,30
@@ -2140,7 +2140,7 @@ Supercharger-V4 DE-Wiesbaden (Globus),50.0566,8.34306
 Supercharger-V4 DE-Wiesbaden-Äppelallee,50.046184,8.219883
 Supercharger-V4 DE-Wildau,52.3136,13.60497,40
 Supercharger-V4 DE-Willich,51.279442,6.508057
-Supercharger DE-Wilnsdorf,50.816894,8.085813
+Supercharger-V4 DE-Wilnsdorf,50.81689,8.08581
 Supercharger-V4 DE-Windischeschenbach,49.80454,12.18425,30
 Supercharger-V3 DE Winsen (Luhe),53.35028,10.147426
 Supercharger-V3 DE-Wismar,53.879307,11.454047
@@ -8700,7 +8700,7 @@ E.ON DE-Fränkische Schweiz-Pegnitz Ost,49.74854,11.514097
 E.ON DE-Fürstenwalde Nikolaus-Otto-Straße,52.37833,14.068971
 E.ON DE-Garbsen An der A2,52.421196,9.565675
 E.ON DE-Garbsen Nord,52.422338,9.554441
-E.ON DE-Geiselwind,49.769102,10.470809,7
+E.ON DE-Geiselwind,49.7691,10.47081,9
 E.ON DE-Geisenhausen,48.555675,11.588303,5
 E.ON DE-Gersthofen Henleinstr. 35,48.4442,10.876023
 E.ON DE-Gettorf Eichkoppel,54.4126,9.9851,20
@@ -13019,7 +13019,6 @@ Fastned NL-Lokkant A73,51.68429,5.89098,30
 Fastned NL-Maasbree Midden Peelweg,51.37647,5.98555,30
 Fastned NL-Mastpolder,51.547724,4.530389
 Fastned NL-Molenkamp,51.84753,5.19078
-Fastned NL-Nagele Han Stijkel,52.66088,5.68924
 Fastned NL-Oirschot Kriekampen A58,51.492017,5.363832
 Fastned NL-Ooiendonk,51.556297,5.361872
 Fastned NL-Opheusden Varakker A15,51.923942,5.605205
@@ -19937,7 +19936,6 @@ IT Parma Destination Charger Hotel San Marco & Formula Club,44.826238,10.203621,
 IT Sanremo Grand Hotel Des Anglais,43.81277,7.76474
 IT Vahrn Mautstation Casello Bressanone-Val Pusteria,46.763952,11.643082,20
 IT Vizzola Ticino Pirelli,45.625684,8.677574
-NL Voorhout Loosterweg,52.24065,4.51004
 PL Best Western Plus Krakow Old Town,50.058091,19.941162
 RO Brașov Bulevardul Gării,45.66043,25.613542
 RO Brașov RAT Rulmentul,45.681568,25.614809
