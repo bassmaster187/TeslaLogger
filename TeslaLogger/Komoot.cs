@@ -733,7 +733,7 @@ WHERE
                             if (positions.Count > 0)
                             {
                                 var lastpos = positions.OrderByDescending(kvp => kvp.Key).First();
-                                if (int.Parse(pos["t"].ToString()) - lastpos.Key > 9000)
+                                if (int.Parse(pos["t"].ToString()) - lastpos.Key > 11000)
                                 {
                                     int timediff = int.Parse(pos["t"].ToString()) - lastpos.Key;
                                     int pseudopositions = (int)Math.Floor((timediff - 2000) / 2000.0);
