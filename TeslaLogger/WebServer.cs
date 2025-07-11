@@ -19,6 +19,7 @@ using System.Web;
 using System.Net.Http;
 using HttpMultipartParser;
 using System.Reflection;
+using System.Xml.Linq;
 
 namespace TeslaLogger
 {
@@ -3259,7 +3260,7 @@ FROM
             WriteString(response, responseString, "application/json");
         }
 
-        private static void Admin_GetAllCars(HttpListenerRequest request, HttpListenerResponse response)
+        private static void Admin_GetAllCars(HttpListenerRequest _, HttpListenerResponse response)
         {
             string responseString = "";
 
@@ -3287,8 +3288,14 @@ FROM
                                         dr["SupportedByFleetTelemetry"] = c.SupportedByFleetTelemetry() ? 1 : 0;
                                         dr["vehicle_location"] = c.vehicle_location;
                                     }
+                                    else if (dr["tesla_name"] != null && dr["tesla_name"].ToString().StartsWith("KOMOOT:", StringComparison.Ordinal))
+                                    {
+                                        dr["inactive"] = 0;
+                                    }
                                     else
+                                    {
                                         dr["inactive"] = 1;
+                                    }
                                 }
                                 catch (Exception ex)
                                 {
