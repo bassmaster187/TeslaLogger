@@ -6710,7 +6710,6 @@ Allego DE-Paderborn Frankfurter Weg 35,51.696749,8.734701
 Allego DE-Panketal Dorfstraße,52.621152,13.542544,25
 Allego DE-Passau Regensburger Str. 37,48.574449,13.415087
 Allego DE-Pirna Dresdner Str. 49,50.956299,13.912881
-Allego DE-Plochingen Filsallee,48.70284,9.43859,25
 Allego DE-Plochingen Filsallee,48.70284,9.43859,30
 Allego DE-Potsdam Fritz-Zubeil-Straße,52.38264,13.1019,30
 Allego DE-Potsdam Zum Kirchsteigfeld,52.371192,13.12859
@@ -8572,6 +8571,7 @@ Duferco IT-Torino Via Parenzo,45.103057,7.646126
 Duferco IT-Vado Ligure Via Trieste,44.26627,8.43146
 
 E-Flux BE-Chimay Rue Madeleine,50.039692,4.377412
+E-Flux BE-Middelkerke Steenovenstraat,51.17785,2.82741
 E-Flux DE-Bergisch Gladbach Stegerwaldstraße,50.957793,7.145137
 E-Flux NL-Alkmaar Olympiaweg,52.63508,4.71392
 E-Flux NL-Berkhout Kleine wijzend,52.648667,5.032723
@@ -11589,6 +11589,8 @@ EnergieSüdwest DE-Landau in der Pfalz Johannes-Kopp-Straße,49.191983,8.130961
 EnergieSüdwest DE-Landau in der Pfalz Langstraße,49.198499,8.110556
 EnergieSüdwest DE-Landau in der Pfalz Wollmesheimer Höhe,49.1871,8.09324
 
+EnergyVision BE-Oostende Torhoutsesteenweg,51.19837,2.90284
+
 ENGIE AU-Wynnum West QLD Wynnum Road,27.457805,153.154785
 ENGIE FR-Aire de Brumath,48.72363,7.69208
 ENGIE FR-Aire de Châtellerault Antran,46.90689,0.52255
@@ -13071,12 +13073,12 @@ FDE80 FR-Mers-les-Bains Rue du 4 Septembre,50.06333,1.38804
 
 Feníe-Energía ES-Can Picafort Passeig Mallorca,39.76225,3.16273
 
-Fines BG-Ruse 5 Русе бул. Христо Ботев,43.83214,25.97155
 Fines BG-Летница,43.312113,25.07321
 Fines BG-Лозен Автомагистрала Тракия,42.632198,23.458115
 Fines BG-Лозен Автомагистрала Тракия,42.632276,23.459349
 Fines BG-Марикостиново,41.434421,23.333701
 Fines BG-Пролеша 8,42.783942,23.166997
+Fines BG-Русе бул. Христо Ботев,43.83214,25.97155
 Fines BG-Търговище Targovishte 4009,43.244632,26.54884
 
 Fortum FI-Salo Ruoksmäentie,60.41877,23.16442
@@ -14057,6 +14059,7 @@ Ionity DE-Harz Ost,51.926279,10.143238
 Ionity DE-Harz West,51.928028,10.14173
 Ionity DE-Heiligengrabe Liebenthaler Dorfstraße,53.147521,12.398905
 Ionity DE-Hepberg A9 Köschinger Forst,48.837085,11.469313
+Ionity DE-Herne Holsterhauser Straße,51.52873,7.19984
 Ionity DE-Himmelkron,50.055972,11.609148
 Ionity DE-Hohenlohe Nord,49.207007,9.639273
 Ionity DE-Hohenlohe Süd,49.205379,9.639696
@@ -16357,8 +16360,6 @@ MOVE CH-Inwil Raststätte Sankt Katharina,47.11965,8.3742
 MOVE CH-Kreuzlingen Marktstrasse,47.64854,9.17301
 MOVE CH-Lenzerheide Clavadoiras,46.72279,9.55854
 MOVE CH-Liebefeld Kohlenweg,46.93203,7.42089
-Move CH-Mumpf Rastplatz Mumpf,47.545112,7.932068
-Move CH-Mumpf Rastplatz Mumpf,47.545594,7.932111
 MOVE CH-Münchenstein Weidenstrasse,47.51344,7.6161
 MOVE CH-Neuenhof Zürcherstrasse,47.450972,8.327305
 MOVE CH-Niedergösgen Hauptstrasse,47.37215,7.991561
@@ -16372,6 +16373,8 @@ MOVE CH-Rastplatz Hexentobel,47.489812,8.9556
 MOVE CH-Rastplatz Inseli,47.15615,8.15664
 MOVE CH-Rastplatz Knutwil,47.18901,8.07671
 MOVE CH-Rastplatz Knutwil,47.19776,8.06461
+Move CH-Rastplatz Mumpf,47.54511,7.93207
+Move CH-Rastplatz Mumpf,47.54559,7.93211
 MOVE CH-Rastplatz Mühlematt,47.4284,7.80916
 MOVE CH-Rastplatz Othmarsingen,47.402103,8.207312
 MOVE CH-Rastplatz Teufengraben,47.3332,7.8214
@@ -18381,10 +18384,12 @@ SW-Elmshorn DE-Elmshorn Westerstraße,53.748062,9.649952
 SW-Emden DE-Emden Bahnhofsplatz,53.36856,7.197215
 SW-Emmendingen DE-Emmendingen Karl-Bautz-Straße,48.117206,7.848467,30
 SW-Erfurt DE-Erfurt Binderslebener Landstraße,50.9733,10.993903
+SW-Erfurt DE-Erfurt Weimarische Straße,50.9727,11.04964
 SW-Eutin DE-Eutin Am Stadtgraben,54.136651,10.615037
 SW-Flensburg DE-Flensburg Batteriestraße,54.8047,9.429783
 SW-Flensburg DE-Flensburg Nordergraben,54.78729,9.43153
 SW-Forchheim DE-Forchheim Äußere Nürnberger Straße,49.704445,11.060294
+SW-Geesthacht DE-Großhansdorf Schaapkamp,52.39088,13.0629
 SW-Gießen DE-Biebertal Hofgut Schmitte,50.61385,8.604648
 SW-Gießen DE-Fernwald O ppenröder Straße,50.554977,8.782338
 SW-Gießen DE-Gießen Bachweg,50.568398,8.64745
