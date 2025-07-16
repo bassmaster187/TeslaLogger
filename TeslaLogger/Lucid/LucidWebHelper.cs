@@ -40,7 +40,7 @@ namespace TeslaLoggerNET8.Lucid
         private double min_cell_temp;
         private double max_cell_temp_db;
         private double min_cell_temp_db;
-
+        private bool isDoorLocked;
 
         internal LucidWebHelper(LucidCar car) : base(car)
         {
@@ -333,6 +333,16 @@ namespace TeslaLoggerNET8.Lucid
                                     car.DisplayName = tempNickname;
                                     car.WriteSettings();
                                     car.webhelper.TaskerWakeupfile(true);
+                                }
+                                break;
+
+                            case "door_locks":
+                                var Locked = value.Contains("_LOCKED");
+                                if (isDoorLocked != Locked)
+                                {
+                                    isDoorLocked = Locked;
+                                    car.teslaAPIState.AddValue("locked", "bool", isDoorLocked, Tools.ToUnixTime(DateTime.UtcNow), "vehicle_state");
+                                    car.Log($"Lock: {isDoorLocked}");
                                 }
                                 break;
 
