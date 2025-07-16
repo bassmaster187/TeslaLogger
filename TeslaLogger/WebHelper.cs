@@ -4782,7 +4782,8 @@ WHERE
                     { "year" , car.Year.ToString() },
                     { "motor" , car.Motor } ,
                     { "wt" , car.wheel_type } ,
-                    { "vin" , obfuscatedVin} // just the first 11 chars of the vin will be sent. The serial number is truncated!
+                    { "vin" , obfuscatedVin}, // just the first 11 chars of the vin will be sent. The serial number is truncated!
+                    { "NET8", Tools.IsDotnet8() ? "1" : "0"  }
                 };
 
                 using (FormUrlEncodedContent content = new FormUrlEncodedContent(d))
