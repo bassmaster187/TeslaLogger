@@ -5770,7 +5770,10 @@ Urbancharger US-Westminster CA,33.744808,-118.01284
 Tesla Service Center AT-Graz,47.036973,15.478172,30
 Tesla Service Center AT-Klagenfurt,46.65165,14.29593
 Tesla Service Center AT-Linz,48.23673,14.240654
+Tesla Service Center AT-Linz Leonding,48.26296,14.26149,60
 Tesla Service Center AT-Salzburg,47.787926,12.980254
+Tesla Service Center AT-Salzburg Aigner Straße,47.79034,13.07601,20
+Tesla Service Center AT-Salzburg Samergasse,47.81607,13.05948
 Tesla Service Center AT-Wien,48.1485,16.33555
 Tesla Service Center BE-Antwerp,51.137098,4.37472
 Tesla Service Center BE-Brussels,50.871384,4.464462
@@ -7618,6 +7621,7 @@ ChargeNet US-South San Francisco El Camino Real,37.646701,-122.429172
 ChargePlace-Scotland GB-Bowmore Isle of Islay The Square,55.75666,-6.288741
 
 ChargePoint AT-Anif Salzachtalstraße,47.726824,13.0607,8
+ChargePoint AT-Eugendorf Gewerbestraße,47.85806,13.13337
 ChargePoint AT-Gratkorn Am Hartboden,47.120416,15.372291
 ChargePoint AT-Graz Wiener Straße,47.10483,15.399748
 ChargePoint AT-Graz Zanklstraße,47.09623,15.40694,25
@@ -8561,10 +8565,12 @@ da-emobil AT-Parndorf Shoppingstraße,47.979367,16.843588,11
 da-emobil AT-Pettau,47.284483,11.164263,20
 da-emobil AT-Prutz Gewerbestraße,47.09088,10.667111,30
 da-emobil AT-Prutz Gewerbestraße,47.091063,10.666626,30
+da-emobil AT-Rutzenmoos Am Moosgraben,47.9554,13.72683,20
 da-emobil AT-Salzburg Europastraße,47.816533,13.008688
 da-emobil AT-Schwanenstadt Staig,48.060593,13.785561
 da-emobil AT-Spielfeld Bundesstraße,46.708301,15.634057
 da-emobil AT-Spittal an der Drau Villacher Straße,46.792093,13.510538
+da-emobil AT-St. Johann im Pongau Bundesstraße,47.36924,13.20645
 da-emobil AT-St. Peter in der Au-Markt Dr.-Hans-Blank-Weg,48.04241,14.61183
 da-emobil AT-St. Pölten,48.177086,15.553222
 da-emobil AT-Umhausen Löck,47.136446,10.926384
@@ -8996,6 +9002,7 @@ eborn FR-Menthon-Saint-Bernard Rte des Moulins,45.861665,6.197802
 eborn FR-Orgnac-l’Aven,44.31816,4.41391
 eborn FR-Saint-Didier-sous-Aubenas Chem. des Vignettes,44.61239,4.40904
 
+eCarUp AT-Radingdorf Betriebsstraße,48.35779,14.47635
 eCarUp CH-Aarau Buchserstrasse,47.391541,8.059656
 eCarUp CH-Aesch Therwilerstrasse,47.47936,7.59217
 eCarUp CH-Biel/Bienne Grenchenstrasse,47.15859,7.28746
@@ -9408,7 +9415,9 @@ Eliso DE-Magdeburg Eisvogelstrasse,52.139513,11.588016
 
 ELLA AT-Gemeinde Imst Brennbichl,47.221079,10.75213
 ELLA AT-Holzing Betriebsgebiet,48.13927,15.13758,20
+ELLA AT-Linz Altenberger Straße,48.33394,14.31905
 ELLA AT-Sattledt Hauptstraße,48.073415,14.051495,25
+ELLA AT-St. Martin im Innkreis Diesseits,48.29328,13.43802
 ELLA AT-Stockerau Donaukraftwerkstraße,48.37447,16.238065
 ELLA AT-Wien Albert-Schweitzer-Gasse,48.206345,16.222951
 
@@ -11478,6 +11487,7 @@ EnelX IT-Villa di Serio Piazza Mercato,45.7223,9.73639
 EnelX IT-Villaggio Pescara del Tronto,42.74521,13.2685
 EnelX IT-Villetta Barrea Via Del Lago,41.7739,13.94495
 
+EnerCharge AT-Fusch Glocknerstraße,47.22713,12.82648
 EnerCharge AT-Jenbach Bahnhofstraße,47.38765,11.77476
 EnerCharge AT-Millstatt Kaiser-Franz-Josef-Straße,46.804295,13.567829
 EnerCharge AT-Rauris Sportstraße,47.229812,12.992638
@@ -11539,7 +11549,12 @@ enercity DE-Sarstedt Steinstraße,52.234461,9.851209
 enercity DE-Seelze Am Kreuzweg,52.39573,9.58982
 enercity DE-Seelze Kastanienplatz,52.39726,9.63813
 
+Energie AT-Braunau am Inn Auf der Haiden,48.25001,13.04723
+Energie AT-Ebensee Im Gemeindeamt,47.81263,13.7743
 Energie AT-Grieskirchen Manglburg,48.234117,13.825708
+Energie AT-Mattighofen Römerstraße,48.10713,13.1483
+Energie AT-Schwanenstadt Stadtplatz,48.05457,13.77367
+Energie AT-Schärding Karl-Gruber-Straße,48.44838,13.43813
 
 Energie-Architektur DE-Leipzig Gießerstraße,51.32458,12.32733,30
 
@@ -11553,7 +11568,7 @@ Energie-Graz AT-Graz Kärntner Straße,47.06085,15.42101
 Energie-Graz AT-Graz Wiener Straße,47.103777,15.401707
 
 Energie-Oberösterreich AT-Liezen Gesäusestraße,47.55972,14.25383,40
-Energie-Oberösterreich AT-Linz Energiestraße,48.292685,14.290674
+Energie-Oberösterreich AT-Linz Energiestraße,48.29268,14.29067,25
 
 Energie-OÖ AT-Bad Ischl Götzstraße,47.71369,13.62392
 
@@ -13812,6 +13827,7 @@ IKEA IT-Rimini,44.0783,12.47641
 IKEA IT-Torino Collegno,45.09846,7.58054
 IKEA SE-Umeå,63.80821,20.25179,25
 
+illwerke-vkw AT-Anif Waldbadstraße,47.73691,13.07043
 illwerke-vkw AT-Argenau Au,47.322021,9.980906
 illwerke-vkw AT-Bregenz Weidachstraße,47.488331,9.740697,10
 illwerke-vkw AT-Bregenz Weidachstraße,47.488431,9.74042,10
@@ -14090,10 +14106,10 @@ Ionity AT-Kaiserwald,46.959244,15.382045
 Ionity AT-Klösterle,47.129066,10.060559
 Ionity AT-Meggenhofen Trappenhof,48.18382,13.78581,20
 Ionity AT-Meggenhofen Trappenhof,48.18383,13.78539,20
-Ionity AT-Mondsee,47.836599,13.395919
 Ionity AT-Nassereith,47.327313,10.819309
 Ionity AT-Parndorf Richard Erlinger Platz,47.975945,16.854379
 Ionity AT-Pinkafeld,47.373952,16.093842
+Ionity AT-Raststätte Mondsee,47.83664,13.39583,30
 Ionity AT-St. Lorenzen im Mürztal,47.46875,15.34432,25
 Ionity AT-St. Valentin,48.19637,14.52835,16
 Ionity AT-Steinhäusl,48.157839,15.940398
@@ -15323,8 +15339,8 @@ Lidl AT-Mauthausen,48.246916,14.502228
 Lidl AT-Mistelbach,48.562883,16.577442
 Lidl AT-Niederalm,47.733169,13.064658
 Lidl AT-Oberpullendorf,47.49569,16.509893
-Lidl AT-Salzburg Aigner Straße,47.79076,13.075131
-Lidl AT-Salzburg Bahnhofstraße,47.823506,13.051982
+Lidl AT-Salzburg Aigner Straße,47.79047,13.07566,20
+Lidl AT-Salzburg Bahnhofstraße,47.82351,13.05198,60
 Lidl AT-Salzburg Münchener Bundesstraße,47.817517,13.019284
 Lidl AT-Salzburg Robinigstraße,47.809423,13.058905
 Lidl AT-Salzburg Siezenheimer Straße,47.805782,13.009089
@@ -16141,16 +16157,26 @@ Liebevoll DE-Ratingen Auermühle,51.306334,6.8797
 
 LIFF EE-Pärnu Niidu tn,58.39297,24.54008
 
+Linz AT-Ansfelden Traunuferstraße,48.21556,14.27953
+Linz AT-Freistadt Promenade,48.51337,14.50295
+Linz AT-Gmunden Druckereistraße,47.92534,13.78839
 Linz AT-Haselbach Erlachweg,48.25092,13.04697
+Linz AT-Leonding Kornstraße,48.25847,14.25449
+Linz AT-Linz Bahnhofplatz,48.29014,14.28962
 Linz AT-Linz Derfflingerstraße,48.308067,14.310401
 Linz AT-Linz Industriezeile,48.301408,14.319432
+Linz AT-Linz Khevenhüllerstraße,48.30076,14.30124
+Linz AT-Linz Wiener Straße,48.28083,14.30952
+Linz AT-Linz Ziegeleistraße,48.29116,14.2749
 Linz AT-Mittertreffling Johann-Wöckinger-Straße,48.337237,14.367777
 Linz AT-Puchenau Golfplatzstraße,48.310791,14.233391
 Linz AT-Sierning Gewerbestraße,48.035646,14.314642
+Linz AT-Walding Gewerbepark,48.34604,14.16071
 
 Ljusdal-Energi SE-Kårböle Härjedalsvägen,61.98695,15.30037
 
 LM-Energy AT-Seeboden Hauptstraße,46.816517,13.510438
+LM-Energy AT-Straßwalchen Braunauerstraße,47.98831,13.24927
 
 Losch LU-Echternach Rte de Luxembourg,49.808914,6.411744
 
@@ -16236,6 +16262,7 @@ MENNEKES DE-Kirchhundem Industriestraße,51.038666,7.997107
 MENNEKES DE-Langgöns Hauptstraße,50.461496,8.584555
 MENNEKES DE-Trebbin Markt,52.21471,13.21384
 
+Mer AT-Allhaming Poststraße,48.15352,14.15817
 Mer AT-Ansfelden Haider Straße,48.211118,14.279784,25
 Mer AT-Brunn am Gebirge Wienerstraße,48.112659,16.30259,30
 Mer AT-Deutsch-Wagram Dammstraße,48.30325,16.57714
@@ -16243,22 +16270,26 @@ Mer AT-Ebreichsdorf Betriebsring,47.983231,16.396287
 Mer AT-Eisenstadt Handelsstraße,47.828805,16.531741
 Mer AT-Frauenhofen Wiener Straße,48.66573,15.63357
 Mer AT-Gmunden Aubauerstraße,47.93097,13.78547
+Mer AT-Haag am Hausruck Geierau,48.19952,13.64239
 Mer AT-Hohenems Diepoldsauer Straße,47.373721,9.675551
 Mer AT-Korneuburg Stockerauer Straße,48.35889,16.31184
 Mer AT-Leoben Am Tivoli,47.37651,15.08932
 Mer AT-Leobersdorf Europastraße,47.93148,16.20426
 Mer AT-Linz Freistädter Straße,48.3292,14.31256
 Mer AT-Linz Wegscheider Straße,48.254318,14.281426,40
+Mer AT-Rohrbach Volksfeststraße,48.56651,13.98278
 Mer AT-Schwechat Franz Schubert-Straße,48.13824,16.47846
 Mer AT-Steyr Haratzmüllerstraße,48.042574,14.4354
 Mer AT-Steyr Marlen-Haushofer-Straße,48.055112,14.422656
 Mer AT-Telfs Untermarktstraße,47.307807,11.076695
 Mer AT-Tulln an der Donau Königstetter Straße,48.31984,16.08209
+Mer AT-Unterweitersdorf Radingdorf,48.35939,14.48012
 Mer AT-Wien Hadikgasse,48.19301,16.27555,20
 Mer AT-Wien Hietzinger Kai,48.19169,16.27922,20
 Mer AT-Wien Triester Straße,48.16546,16.34595
 Mer AT-Wiener Neustadt Nikolaus-August-Otto-Straße,47.843871,16.246763
 Mer AT-Ybbs Bergland Center,48.160658,15.106513
+Mer AT-Zell am See Prof.-F.-Porsche-Straße,47.29585,12.79571
 Mer AT-Zwettl Andre Freyskorn Straße,48.60187,15.18669
 Mer DE-Abensberg Max Bronold Straße,48.813818,11.845554
 Mer DE-Abensberg Straubinger Straße,48.811093,11.858045
@@ -16422,6 +16453,7 @@ MOL RO-Ilia A1,45.947561,22.651971
 MOL RO-Ilia A1,45.948194,22.654306
 MOL SK-Senec Bratislavská,48.2133,17.38219
 
+Monta AT-Burgfried Böhmer Straße,48.52589,14.29368
 Monta DE-Egling St2070,47.923998,11.488849
 Monta DE-Hafenlohr Bahnhofstraße,49.86712,9.6031
 Monta DE-München Frankfurter Ring,48.18624,11.60598,25
@@ -16440,6 +16472,7 @@ MOON AT-Mistelbach Ernstbrunnerstraße,48.557928,16.562185
 MOON AT-Neusiedl Josef Kamper Straße,47.971205,16.853501
 MOON AT-Pöllan Gewerbepark,46.696503,13.644015
 MOON AT-Spittal an der Drau Villacher Straße,46.792623,13.508709
+MOON AT-Tarsdorf Weilhartstraße,48.07886,12.82685
 MOON AT-Wien Harry-Glück-Platz,48.16716,16.34891
 MOON AT-Wien Ketzergasse,48.13058,16.29811
 MOON DE-Anger Hauptstraße,47.790725,12.869243
@@ -17169,6 +17202,7 @@ Peusa ES-La Seu d’Urgell Cami Ral de la Cerdanya,42.35894,1.46327,30
 
 Pfalzwerke AT-Ansfelden Traunuferstraße,48.210551,14.273282
 Pfalzwerke AT-Brunn am Gebirge Johann Steinböck-Straße,48.108639,16.312933
+Pfalzwerke AT-Rutzenmoos Am Moosgraben,47.95532,13.72718,20
 Pfalzwerke AT-St. Pölten Stifterstraße,48.183939,15.6151
 Pfalzwerke AT-Wels Gunskirchener Straße,48.148595,13.974621
 Pfalzwerke AT-Wiener Neudorf IZ NÖ-Süd Straße,48.07306,16.32988
@@ -18025,21 +18059,35 @@ SachsenEnergie DE-Wilthen St.-Barbara-Platz,51.099951,14.400265
 
 SalzachSonne AT-Mittersill Zeller Straße,47.28512,12.48996
 
+Salzburg AT-Altenmarkt im Pongau Sinnhub,47.38862,13.41269
 Salzburg AT-Anif Eisgrabenstraße,47.745807,13.059325
+Salzburg AT-Bad Hofgastein Kurgartenstraße,47.16968,13.09925
 Salzburg AT-Bad Hofgastein Weitmoserstraße,47.15729,13.10638
 Salzburg AT-Bruck Kaprunerstraße,47.28744,12.81005
+Salzburg AT-Burgfried Kletzlgutweg,47.68496,13.10582
+Salzburg AT-Flachau Flachauer Straße,47.35444,13.39315
 Salzburg AT-Fuschl am See Kirchenstraße,47.79478,13.302881
 Salzburg AT-Glasenbach Johann-Herbst-Straße,47.769818,13.086961
+Salzburg AT-Golling an der Salzach Obergau,47.59055,13.18088
 Salzburg AT-Golling Obergau,47.59183,13.17578
 Salzburg AT-Hinterglemm Dorfstraße,47.37811,12.59299
 Salzburg AT-Kaprun Landesstraße,47.277301,12.757207
 Salzburg AT-Kaprun Tauern Spa Platz,47.28336,12.760014
 Salzburg AT-Koppl Wolfgangseestraße,47.819538,13.100495
+Salzburg AT-Krössenbach Safestraße,47.28537,12.81433
+Salzburg AT-Lamprechtshausen Schulstraße,47.99297,12.95741
+Salzburg AT-Leogang Hütten,47.43952,12.71878
+Salzburg AT-Lofer Loferer Straße,47.5837,12.69416
 Salzburg AT-Mattsee Passauer Straße,47.97388,13.10236
+Salzburg AT-Mattsee Passauer Straße,47.9739,13.10234
 Salzburg AT-Mittersill Kirchgasse,47.280459,12.481777
 Salzburg AT-Neu-Anif Alpenstraße,47.737713,13.051322
+Salzburg AT-Plainfeld Salzburgring,47.82341,13.1688,80
 Salzburg AT-Reinbach Industriestraße,47.3508,13.19592
 Salzburg AT-Saalbach Glemmerstraße,47.38931,12.63677
+Salzburg AT-Saalfelden am Steinernen Meer Industriestraße,47.41991,12.82904
+Salzburg AT-Saalfelden am Steinernen Meer Leogangerstraße,47.42977,12.84286
+Salzburg AT-Saalfelden am Steinernen Meer Leogangerstraße,47.43074,12.83219
 Salzburg AT-Saalfelden Hohlwegen,47.481674,12.830856
 Salzburg AT-Saalfelden Mühlbachweg,47.425512,12.846924
 Salzburg AT-Salzburg Adolf-Kolping-Straße,47.821138,13.036036
@@ -18047,20 +18095,30 @@ Salzburg AT-Salzburg Alois-Schmiedbauer-Straße,47.810061,13.038407
 Salzburg AT-Salzburg Auerspergstraße,47.807178,13.040552
 Salzburg AT-Salzburg Bayerhamerstraße,47.812149,13.050424
 Salzburg AT-Salzburg Bräuhausstraße,47.79372,13.022693
+Salzburg AT-Salzburg Europastraße,47.8183,13.00622
 Salzburg AT-Salzburg Franz-Josef-Straße,47.807124,13.043518
 Salzburg AT-Salzburg Julius-Raab-Platz,47.808321,13.044126
 Salzburg AT-Salzburg Kleßheimer Allee,47.809441,13.011603
+Salzburg AT-Salzburg Moosstraße,47.79747,13.03084
 Salzburg AT-Salzburg Münchner Bundesstraße,47.829303,13.003156
+Salzburg AT-Salzburg Oberndorferstraße,47.8333,13.02897
 Salzburg AT-Salzburg Reichenhaller Straße,47.798278,13.036824
+Salzburg AT-Salzburg Siezenheimer Straße,47.8068,13.0105
 Salzburg AT-Salzburg Sterneckstraße,47.808864,13.056117
 Salzburg AT-Salzburg Strubergasse,47.808947,13.027593
 Salzburg AT-Salzburg Vogelweiderstraße,47.809784,13.056038,40
 Salzburg AT-Schladming Salzburger-Siedlung,47.390831,13.658943,30
+Salzburg AT-St. Johann im Pongau Hauptstraße,47.34928,13.20406
+Salzburg AT-St. Johann im Pongau Industriestraße,47.35481,13.19913
+Salzburg AT-St. Johann im Pongau Palfengasse,47.35379,13.19477
 Salzburg AT-St. Michael im Lungau Gewerbestraße,47.096423,13.633386,25
 Salzburg AT-St. Wolfgang Robert-Stolz-Straße,47.739208,13.43921
 Salzburg AT-Strobl Wolfgangseestraße,47.712972,13.485245
 Salzburg AT-Tamsweg Sauerfelder Straße,47.12661,13.81435
+Salzburg AT-Uttendorf Seeweg,47.28129,12.57948
 Salzburg AT-Wald im Pinzgau Wald,47.245072,12.230296
+Salzburg AT-Wildshut Wildshuter Straße,48.00855,12.8662
+Salzburg AT-Zell am See Salzachtal-Bundesstraße,47.29976,12.78889
 
 SCAPO DE-Mainz Mombacher Straße,50.011054,8.243949
 
@@ -18091,7 +18149,9 @@ Shell AT-Haid Salzburgerstraße,48.20488,14.24822,30
 Shell AT-Maria Lanzendorf Wiener Straße,48.09911,16.41869
 Shell AT-Mistelbach Mitschastraße,48.56178,16.57714
 Shell AT-Raststation Eben,47.42114,13.383
-Shell AT-Schwanenstadt Vor der Au,48.047808,13.78082
+Shell AT-Raststation Walserberg,47.76781,12.94826
+Shell AT-Schwanenstadt Vor der Au,48.04781,13.78082,60
+Shell AT-St. Marienkirchen Andiesen,48.39092,13.42519
 Shell AT-St. Pölten Mariazeller Straße,48.187626,15.6167
 Shell AT-Strengberg Westautobahn A1,48.114623,14.666307
 Shell AT-Wien Pfenninggeldgasse,48.208101,16.313643
@@ -18364,6 +18424,7 @@ Smatrics AT-Anif Salzachtalstraße,47.72713,13.06038,6
 Smatrics AT-Ansfelden Ikea-Platz,48.197307,14.249527
 Smatrics AT-Ansfelden Traunuferstraße,48.210569,14.273273
 Smatrics AT-Ansfelden Traunuferstraße,48.211537,14.27498
+Smatrics AT-Bad Ischl Sulzbacherstraße,47.69079,13.62284
 Smatrics AT-Bad Voslau Flugfeldstraße,47.965965,16.23926
 Smatrics AT-Bad Voslau Flugfeldstraße,47.966088,16.238587
 Smatrics AT-Bad Waltersdorf,47.18288,15.99365
@@ -18375,23 +18436,31 @@ Smatrics AT-Brunn am Gebirge Wienerstraße,48.11246,16.300056,30
 Smatrics AT-Deutsch-Wagram Promenadenweg,48.295124,16.555666
 Smatrics AT-Erlauf Erlaufstraße,48.071922,15.137488
 Smatrics AT-Feldkirchen bei Graz,47.009115,15.44097,20
+Smatrics AT-Flachau Reitdorfer Straße,47.36239,13.38239
 Smatrics AT-Flughafen Wien Schwechat,48.12475,16.56365
+Smatrics AT-Freistadt Linzer Straße,48.49918,14.50343
 Smatrics AT-Grafenwörth Gewerbepark,48.41218,15.77737
 Smatrics AT-Graz Conrad-von-Hötzendorf-Straße,47.05577,15.44823
+Smatrics AT-Grein Breitenangerstraße,48.22917,14.84565
 Smatrics AT-Haberl Gewerbepark,47.481074,16.091338
 Smatrics AT-Haid Ikeaplatz,48.197307,14.249527
 Smatrics AT-Horn Prager Straße,48.66451,15.63613
 Smatrics AT-Innsbruck Mitterweg,47.257962,11.376605
 Smatrics AT-Innsbruck Mitterweg,47.257987,11.376648
+Smatrics AT-Inzersdorf im Kremstal Gewerbestraße,47.92934,14.08614
 Smatrics AT-Kapfenberg Bahnstraße,47.445153,15.292904
+Smatrics AT-Kirchdorf an der Krems Gaisbauer-Straße,47.90022,14.12598
 Smatrics AT-Kittsee Eisenstädter Straße,48.08576,17.04827
 Smatrics AT-Klagenfurt am Wörthersee Rosentaler Straße,46.606182,14.298608
 Smatrics AT-Klosterneuburg Wiener Straße,48.29811,16.33397
 Smatrics AT-Krems an der Donau Landersdorfer Straße,48.41681,15.62759
+Smatrics AT-Laakirchen Schillerstraße,47.97684,13.82056
 Smatrics AT-Liezen Gesäusestraße,47.560208,14.252779
 Smatrics AT-Linz Hafenstraße,48.3156,14.30173,25
+Smatrics AT-Linz Jägerstätterstraße,48.33573,14.30002
 Smatrics AT-Linz Untere Donaulände,48.313366,14.298537
 Smatrics AT-Loosdorf Gewerbestraße,48.189809,15.408297
+Smatrics AT-Löbenau Forstauer Straße,47.37673,13.47542
 Smatrics AT-Maria Ellend Marienring,48.1091,16.68283
 Smatrics AT-Maria Enzersdorf Hauptstraße,48.094029,16.282389
 Smatrics AT-Mauthausen Gewerbestraße,48.241616,14.54625
@@ -18408,10 +18477,12 @@ Smatrics AT-Pöchlarn Heizwerkstraße,48.202455,15.22267
 Smatrics AT-Rastplatz Schottwien,47.64921,15.85833
 Smatrics AT-Raststation Simmering,48.18156,16.44427
 Smatrics AT-Raststation Ybbs,48.15831,15.112381
+Smatrics AT-Raststätte Mondsee,47.83662,13.39498,20
 Smatrics AT-Salzburg Franz Brötzner Straße,47.794638,12.987004
 Smatrics AT-Scheibbs Eisenwurzenstraße,48.01476,15.16084
 Smatrics AT-Schwechat Brucker Bundesstrasse,48.13573,16.49193
 Smatrics AT-St. Georgen im Attergau Am See-Ring,47.928913,13.504302
+Smatrics AT-St. Marienkirchen Andiesen,48.3946,13.42787
 Smatrics AT-St. Pölten Anton Scheiblin-Gasse,48.182788,15.620019
 Smatrics AT-St. Pölten Karl Pfeffer-Gasse,48.181014,15.620998
 Smatrics AT-St. Pölten Mariazeller Straße,48.18905,15.618962
@@ -18423,6 +18494,7 @@ Smatrics AT-Strasshof an der Nordbahn,48.321384,16.664931
 Smatrics AT-Straßwalchen Neumarkterstraße,47.958421,13.236025
 Smatrics AT-Tulln an der Donau Frauentorgasse,48.32786,16.05458
 Smatrics AT-Villach Maria-Gailer-Straße,46.605376,13.865967
+Smatrics AT-Vorchdorf Feldhamer Straße,48.01106,13.92058
 Smatrics AT-Völs Cytastraße,47.259073,11.322192
 Smatrics AT-Vösendorf Südring,48.105341,16.315758
 Smatrics AT-Vösendorf Triester Straße,48.13757,16.325
@@ -18673,6 +18745,7 @@ SW-Klagenfurt AT-Klagenfurt Pyramidenkogelstraße,47.78202,16.19118
 SW-Konstanz DE-Konstanz Bruder-Klaus-Straße,47.673191,9.173572
 SW-Kufstein AT-Kufstein Fischergries,47.585176,12.16837
 SW-Köflach AT-Köflach Stadtwerkgasse,47.060545,15.078317
+SW-Landshut DE-Landshut Isargestade,48.53986,12.15252
 SW-Langen DE-Langen Liebigstraße,49.994277,8.65773
 SW-LB DE-Ludwigsburg Brenzstraße,48.892324,9.182775
 SW-LE DE-Leinfelden-Echterdingen Häuserwiesenstraße,48.704338,9.118296
@@ -19392,10 +19465,19 @@ TotalEnergies NL-Poort Van Veghel,51.599527,5.516732,80
 TotalEnergies NL-Schiedam,51.930238,4.403939,80
 TotalEnergies NL-Vliedberg,51.484617,3.850016,80
 
+Turmstrom AT-Hallein Salzachtalstraße,47.68229,13.10055
+Turmstrom AT-Klaus an der Pyhrnbahn Steyrtal-Radweg,47.84527,14.17043
 Turmstrom AT-Linz Bockgasse,48.29073,14.277679,30
+Turmstrom AT-Linz Goethestraße,48.30051,14.3082
+Turmstrom AT-Linz Industriezeile,48.3003,14.32059
+Turmstrom AT-Linz Unionstraße,48.2842,14.29259
 Turmstrom AT-Neumarkt in der Steiermark Wiener Straße,47.079346,14.424862
 Turmstrom AT-Puchenau Weitenfeld,48.311704,14.22638
 Turmstrom AT-Sattledt Hauptstraße,48.073184,14.051783,25
+Turmstrom AT-Steyr Pachergasse,48.04141,14.42837
+Turmstrom AT-Wels Eferdinger Straße,48.18087,14.02691
+Turmstrom AT-Wels Salzburger Straße,48.15335,13.98703
+Turmstrom AT-Wels Salzburger Straße,48.15666,14.00062
 Turmstrom AT-Wien Absberggasse,48.17137,16.3886
 Turmstrom AT-Wien Breitenfurter Straße,48.13784,16.25742
 Turmstrom AT-Wolfsberg Grazer Straße,46.846418,14.843636
@@ -19633,6 +19715,9 @@ Virta SE-Smygehamn Smyge strandväg,55.339217,13.35998
 Virta SE-Västervik Allén,57.760546,16.612694
 Virta SK-Prešov Cesta na Senec,48.98978,21.25838
 
+Volkswagen AT-Haag am Hausruck Reischau,48.19852,13.6362
+Volkswagen AT-Radstadt Salzburger Straße,47.38637,13.453
+Volkswagen AT-Salzburg Vogelweiderstraße,47.81569,13.05315
 Volkswagen CH-Cham Alte Steinhauserstrasse,47.18685,8.47367
 Volkswagen CH-Chur Rossbodenstrasse,46.85132,9.50497
 Volkswagen DE-Aichtal Uferstraße 10,48.625343,9.261603
@@ -19786,6 +19871,8 @@ VSW DE-Ratzeburg Schloßwiese,53.69925,10.76584
 Wattif DE-Binz Forsthaus Prora,54.434559,13.557487
 Wattif DE-Putbus Fürst-Malte-Allee,54.34418,13.51208
 
+Wels-Strom AT-Kammer Reichersberg,48.31023,13.4195
+Wels-Strom AT-Wels Stelzhamerstraße,48.16155,14.0289
 Wels-Strom AT-Wels Waidhausenstraße,48.146959,13.976295
 
 WEMAG DE-Bützow Vor dem Rühner Tor,53.848041,11.976902
@@ -19946,15 +20033,20 @@ ZSE SK-Žilina-Solinky Prielohy,49.19491,18.73937
 Zunder ES-Lleida Salida,41.66394,0.60495,12
 Zunder ES-Villalpando Cam. de los Gallegos,41.82615,-5.37888,12
 
+ÖAMTC AT-Bad Ischl Salzburger Straße,47.718,13.594
+ÖAMTC AT-Braunau am Inn Auf der Haiden,48.2493,13.04947
 ÖAMTC AT-Klosterneuburg Schüttaustraße,48.29574,16.34157
 ÖAMTC AT-Krems an der Donau Bertschingerstraße,48.40646,15.60432
 ÖAMTC AT-Langenzersdorf Wiener Straße,48.29805,16.37515
+ÖAMTC AT-Linz Wankmüllerhofstraße,48.27992,14.30424
+ÖAMTC AT-Mattighofen Salzburger Straße,48.09546,13.15659
 ÖAMTC AT-Melk Am Wachauring,48.212382,15.32797
 ÖAMTC AT-Teesdorf Triester Straße,47.96154,16.2734
 ÖAMTC AT-Traiskirchen Zubringerstraße,48.03511,16.80851
 ÖAMTC AT-Wien Hadikgasse,48.192959,16.278226,20
 ÖAMTC AT-Wien Wienerbergstraße,48.17084,16.3376
 ÖAMTC AT-Wiener Neustadt Neunkirchner Straße,47.78072,16.19059
+ÖAMTC AT-Zell am See Loferer Bundesstraße,47.34049,12.79824
 
 ČEZ CZ-Beroun Obchodní,49.95654,14.0596
 ČEZ CZ-Bečov nad Teplou Karlovarská,50.09306,12.84122
@@ -20023,6 +20115,7 @@ AT Lendorf Teccon,46.82824,13.49121
 AT Linz Gstöttnerhofstraße,48.315009,14.283574
 AT Linz KEBA,48.31767,14.28739
 AT Linz KEBA,48.31788,14.28706
+AT Linz Metro,48.24862,14.29475
 AT Linz PLUSCITY,48.24345,14.23428,25
 AT Linz PLUSCITY,48.24397,14.2348,25
 AT Linz PLUSCITY,48.24458,14.23531,25
