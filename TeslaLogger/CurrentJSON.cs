@@ -335,14 +335,28 @@ namespace TeslaLogger
 
         internal void ToKVS()
         {
-            KVS.InsertOrUpdate($"currentJSON_{car.CarInDB}", jsonStringHolder[car.CarInDB]);
+            ToKVS(car.CarInDB);
+        }
+
+        internal static void ToKVS(int CarInDB)
+        {
+            KVS.InsertOrUpdate($"currentJSON_{CarInDB}", jsonStringHolder[CarInDB]);
         }
 
         internal void FromKVS()
         {
-            if (KVS.Get($"currentJSON_{car.CarInDB}", out string cJSON) == KVS.SUCCESS)
+            FromKVS(car.CarInDB);
+        }
+
+        internal static void FromKVS(int CarInDB)
+        {
+            if (KVS.Get($"currentJSON_{CarInDB}", out string cJSON) == KVS.SUCCESS)
             {
-                jsonStringHolder[car.CarInDB] = cJSON;
+                jsonStringHolder[CarInDB] = cJSON;
+            }
+            else
+            {
+                jsonStringHolder[CarInDB] = "{}";
             }
         }
     }
