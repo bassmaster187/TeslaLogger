@@ -2513,6 +2513,7 @@ Supercharger-V4 FR-Limoges Centre,45.844611,1.287198
 Supercharger-V4 FR-Livry-Gargan,48.927178,2.549042
 Supercharger FR-Lorient,47.787895,-3.33147
 Supercharger-V4 FR-Loudéac,48.193224,-2.757943
+Supercharger-V4 FR-Luçon,46.46077,-1.13032
 Supercharger-V4 FR-Magnant,48.1807,4.4348
 Supercharger-V4 FR-Mandelieu-la-Napoule,43.53363,6.933
 Supercharger-V3 FR-Manosque,43.818865,5.796896
@@ -2824,6 +2825,7 @@ Supercharger GB-York,53.92417,-1.077908
 Supercharger-V3 GR-Atalanti Αταλάντη East,38.6612,23.07388
 Supercharger-V3 GR-Atalanti Αταλάντη West,38.65883,23.07121
 Supercharger GR-Athens,38.034938,23.79096
+Supercharger-V4 GR-Ioannina Ιωάννινα,39.60365,20.86215
 Supercharger-V3 GR-Larissa Λάρισα South,39.60536,22.44146
 Supercharger-V3 GR-Psathopyrgos South,38.324376,21.869179,15
 
@@ -3554,6 +3556,7 @@ Supercharger PL-Kostomłoty,51.037361,16.584208
 Supercharger-V4 PL-Koszalin,54.217078,16.113755
 Supercharger-V3 PL-Kraków,50.027431,19.952651
 Supercharger-V4 PL-Legnica,51.184768,16.169004
+Supercharger-V3 PL-Lublin,51.2822,22.5703,30
 Supercharger-V3 PL-Lucmierz,51.88676,19.38437,40
 Supercharger-V4 PL-Odolion,52.869767,18.748078
 Supercharger-V4 PL-Piła,53.15057,16.76943
@@ -3842,12 +3845,12 @@ Supercharger US-Augusta GA - Belair Frontage Road,33.481707,-82.13021
 Supercharger US-Augusta ME,44.347861,-69.786019
 Supercharger-V3 US-Aurora IL - IL-59,41.767675,-88.206166
 Supercharger US-Austin TX,30.329202,-97.706266
-Supercharger-V3 US-Austin TX - 5601 Brodie Lane,30.225862,-97.822625
 Supercharger US-Austin TX - Century Oaks Terrace (Floor 2),30.403355,-97.724276
 Supercharger-V3 US-Austin TX - FM 969,30.254696,-97.606458
 Supercharger-V3 US-Austin TX - Frontage Road,30.162883,-97.792096
 Supercharger US-Austin TX - Research Boulevard,30.389562,-97.739544
 Supercharger-V3 US-Austin TX - South Congress Avenue (Pay to Park Floor B1),30.247825,-97.749866
+Supercharger-V3 US-Austin TX Brodie Lane,30.22618,-97.8219
 Supercharger-V3 US-Avenel NJ,40.577031,-74.287477
 Supercharger US-Aventura FL,25.97051,-80.1411
 Supercharger US-Aventura FL (Floor 1E),25.959482,-80.142374
@@ -4049,6 +4052,7 @@ Supercharger-V3 US-Charlton MA (WB),42.156811,-71.962966
 Supercharger US-Chattanooga TN,35.038706,-85.195937
 Supercharger-V3 US-Chattanooga TN Hamilton Place Boulevard,35.03646,-85.15986
 Supercharger-V3 US-Cheektowaga NY,42.907365,-78.762234
+Supercharger-V3 US-Chehalis WA,46.67969,-122.97701
 Supercharger-V3 US-Cherry Hill NJ - Haddonfield Road,39.925856,-75.032084
 Supercharger-V3 US-Cherry Hill NJ - Walt Whitman,39.8867,-75.001939
 Supercharger-V3 US-Chesapeake VA,36.65758,-76.22478
@@ -5767,7 +5771,10 @@ Urbancharger US-Westminster CA,33.744808,-118.01284
 Tesla Service Center AT-Graz,47.036973,15.478172,30
 Tesla Service Center AT-Klagenfurt,46.65165,14.29593
 Tesla Service Center AT-Linz,48.23673,14.240654
+Tesla Service Center AT-Linz Leonding,48.26296,14.26149,60
 Tesla Service Center AT-Salzburg,47.787926,12.980254
+Tesla Service Center AT-Salzburg Aigner Straße,47.79034,13.07601,20
+Tesla Service Center AT-Salzburg Samergasse,47.81607,13.05948
 Tesla Service Center AT-Wien,48.1485,16.33555
 Tesla Service Center BE-Antwerp,51.137098,4.37472
 Tesla Service Center BE-Brussels,50.871384,4.464462
@@ -5826,11 +5833,21 @@ Tesla Service Center US-Tulsa,36.076867,-95.83393
 800Volt DE-Dresden Sternstraße,51.074709,13.698399
 
 A2A IT-Bergamo Via dell’ Industria,45.66799,9.664775
+A2A IT-Bergamo Via S. Lazzaro,45.69151,9.66174
+A2A IT-Brescia Via Corfù,45.52823,10.21191
 A2A IT-Castenedolo Via Sandro Pertini,45.484595,10.32268
 A2A IT-Lecco Corso Martiri della Liberazione,45.850654,9.393834
+A2A IT-San Felice del Benaco Via Dietro Castello,45.58652,10.54727
+A2A IT-Truccazzano Via Rivoltana,45.48038,9.44681
 
+AAE AT-Assling Thal-Aue,46.78325,12.66245
+AAE AT-Imst Rathausstraße,47.23954,10.73779
+AAE AT-Jenbach Südtiroler Platz,47.39168,11.77201
 AAE AT-Kitzbühel Jochberger Straße,47.44414,12.398331
+AAE AT-Kötschach-Mauthen,46.67127,13.00102
 AAE AT-Rauris Seidlwinkl,47.110536,12.832509
+AAE AT-Seeboden Seepromenade,46.81602,13.51886
+AAE AT-Wolkersdorf Resselstraße,48.36876,16.5046
 
 ABB AT-Wiener Neudorf Brown-Boveri-Straße,48.076069,16.306272
 ABB CH-Magadino Via Luserte Sud,46.15024,8.91131
@@ -5842,6 +5859,7 @@ ABB IT-Lavis Area Paganella Ovest,46.140107,11.085365
 ABB IT-Lavis Area Paganella Ovest,46.140558,11.087593
 ABB IT-Nogaredo A22,45.901841,11.027177
 ABB IT-Nogaredo A22,45.902149,11.025974
+ABB IT-Rovereto Via S. Romedio,45.84856,11.0016
 ABB IT-San Giorgio Bigarello Via maestri del lavoro,45.166656,10.852428
 ABB NZ-Mount Maunganui Maru Street,-37.665067,176.196996
 
@@ -5898,6 +5916,8 @@ Acemo DE-Aachen Dennewartstraße,50.78025,6.10439
 ADAC DE-St. Augustin Richthofenstraße,50.766006,7.164093
 
 AEW CH-Aarau Obere Vorstadt,47.38883,8.04696
+
+AGEtech AT-Lienz Schillerstraße,46.83125,12.77785
 
 AggerEnergie DE-Gummersbach Steinmüllerallee,51.022398,7.564621
 
@@ -6220,6 +6240,7 @@ Aldi DE-Sandhausen Gottlieb-Daimler-Straße,49.340389,8.667
 Aldi DE-Sankt Augustin Einsteinstraße,50.789384,7.1848
 Aldi DE-Sankt Augustin Im Mittelfeld,50.77784,7.230817
 Aldi DE-Satteldorf Industriestraße,49.180559,10.072113
+Aldi DE-Schorndorf Waiblinger Straße,48.81336,9.52312
 Aldi DE-Schwegenheim Speyerer Straße,49.2733,8.3373
 Aldi DE-Schweich In den Schlimmfuhren,49.82,6.746639
 Aldi DE-Schwetzingen Schubertstraße,49.389566,8.579122
@@ -6626,6 +6647,7 @@ Allego DE-Kalefeld-Echte Hauptstraße 6,51.787912,10.063094
 Allego DE-Kaltenkirchen Auf dem Berge,53.845884,9.935842,15
 Allego DE-Kaltenkirchen Flottkamp 22 - 26,53.833703,9.963327
 Allego DE-Kamen Kamen Karree 5,51.570013,7.673189
+Allego DE-Kappeln Glücksburger Straße,54.6586,9.94817
 Allego DE-Karlsruhe Windeckstraße,48.989146,8.373847
 Allego DE-Kehl Eugen-Ensslin-Straße 2,48.57924,7.809228
 Allego DE-Kerpen Kerpener Straße,50.89868,6.68284,30
@@ -6844,13 +6866,24 @@ AllElectric HU-Tolna Gém utca,46.42068,18.7591
 AllgäuStrom DE-Fischen im Allgäu An der Breitach,47.425857,10.265904
 AllgäuStrom DE-Kempten (Allgäu) Bleicherstraße,47.736612,10.327834
 
+alperia IT-Badia Str. Pedraces,46.60937,11.89464
 alperia IT-Brixen Campillstraße,46.7096,11.662063
+alperia IT-Brunico Kapuzinerplatz,46.7971,11.94016
+alperia IT-Caldaro Via Prati,46.41399,11.24803
 alperia IT-Egna Via Brennero,46.3196,11.269783
 alperia IT-Kardaun Zona Produttiva,46.491917,11.399316
+alperia IT-Lana Postgasse,46.61617,11.14443
+alperia IT-Meran Garibaldistraße,46.6695,11.16279
 alperia IT-Meran Novemberstraße,46.673798,11.148907
+alperia IT-Moena Piaz da Navalge,46.37354,11.65752
 alperia IT-Nals Via Dogna,46.552367,11.213094
+alperia IT-Perca Pustertaler Straße,46.79245,11.98054
 alperia IT-San Candido Matthias-Schranzhofer-Straße,46.730626,12.278077
+alperia IT-San Cassiano Strada Micurà de Rü,46.57008,11.93346
+alperia IT-San Pancrazio Via Principale,46.58557,11.08785
 alperia IT-Sankt Ulrich Ortisei Streda Tresval,46.571392,11.677345
+alperia IT-Sinigo Via Nazionale,46.63855,11.17511
+alperia IT-Vahrn Eisackstraße,46.73456,11.64812
 
 AMAG CH-Bern Wankdorffeldstrasse,46.96575,7.46638,30
 AMAG CH-Winterthur Zürcherstrasse,47.485487,8.702153
@@ -7024,7 +7057,7 @@ ARAL DE-Mainz Pariser Straße,49.987599,8.26705
 ARAL DE-Mainz Rheinallee,50.026966,8.223242
 ARAL DE-Mannheim Frankenthaler Straße,49.550042,8.449925,20
 ARAL DE-Marburg Am Krekel,50.793984,8.760689,25
-ARAL DE-Meißen Großenhainer Straße,51.07267,13.68468
+ARAL DE-Meißen Großenhainer Straße,51.16561,13.48611
 ARAL DE-Merklingen,48.516282,9.759379
 ARAL DE-Montabaur Alleestraße,50.44021,7.83036,20
 ARAL DE-Murr Im Langen Feld,48.957097,9.244167
@@ -7104,6 +7137,7 @@ Audi DE-Schleswig Werner-von-Siemens-Straße,54.537626,9.581049
 Audi DE-St. Augustin Einsteinstraße,50.789961,7.182174,15
 Audi DE-Stuttgart Heilbronner Straße,48.818214,9.176391
 Audi DE-Zwickau Oskar-Arnold-Straße,50.708891,12.502916
+Audi PL-Wrocław al. Karkonoska,51.06301,16.99938
 
 autoSense CH-Dübendorf Giessenstrasse,47.40168,8.61012
 autoSense CH-Fislisbach Winkelstrasse,47.441401,8.295446
@@ -7161,7 +7195,11 @@ BayWa DE-Schwandorf Max-Planck-Straße,49.308411,12.099482
 BayWa DE-Unna Massener Straße,51.53162,7.66366
 BayWa DE-Weiden i.d.OPf. Untere Bauscherstraße,49.662545,12.155766
 
+be.energised AT-Bad Gleichenberg Grazer Straße,46.87108,15.90266
 be.energised AT-Fehring Radkersburger Straße,46.935692,16.007059
+be.energised AT-Leitendorf Kärntner Straße,47.37304,15.08771
+be.energised AT-Maurach Dorfstraße,47.4228,11.75038
+be.energised AT-Prama Kaiserweg,47.51517,12.34594
 be.energised AT-Salzburg Flughafen,47.794119,12.997795
 be.energised AT-St. Johann in Tirol Pass-Thurn-Straße,47.5183,12.41389
 be.energised CH-Bonaduz Via Crusch,46.8079,9.39705
@@ -7181,25 +7219,39 @@ BeCharge IT-Alba Adriatica Piazza Aldo Moro,42.835346,13.930695
 BeCharge IT-Albenga Regione Cime di Leca,44.066007,8.176305
 BeCharge IT-Aprica Corso Roma,46.153907,10.153185
 BeCharge IT-Arona Via Vittorio Veneto,45.753495,8.543138
+BeCharge IT-Bettola-Zeloforomagno Via della Liberazione,45.42691,9.30717
 BeCharge IT-Bibione Corso del Sole,45.639792,13.061443
+BeCharge IT-Bormio Via Milano,46.46483,10.36712
 BeCharge IT-Bressanone Peter-Mayr-Straße,46.720221,11.655295
-BeCharge IT-Calderara di Reno Via Papa Giovanni  XXIII,44.53667,11.30187
+BeCharge IT-Calderara di Reno Via Papa Giovanni XXIII,44.53667,11.30187
+BeCharge IT-Castellanza Via Buon Gesu,45.61523,8.88037
 BeCharge IT-Chiusi Via dell’Orchidea,43.01653,11.90536
+BeCharge IT-Como Via Pasquale Paoli,45.79037,9.0815
 BeCharge IT-Courmayeur Strada della Brenva,45.8156,6.95694
 BeCharge IT-Firenze Via Senese,43.749179,11.234093
+BeCharge IT-Gallarate Via Padre Angelo Ambrosoli,45.65049,8.80776
 BeCharge IT-Genova Via Giorgio Perlasca,44.44565,8.89069
+BeCharge IT-Gonars,45.88221,13.25789
 BeCharge IT-La Spezia Viale Italia,44.11434,9.83964
+BeCharge IT-Legnano Viale L. Cadorna,45.59844,8.93999
 BeCharge IT-Lido di Jesolo Via Aquileia,45.501627,12.630307
+BeCharge IT-Lignano Sabbiadoro Via Latisana,45.69008,13.14003
 BeCharge IT-Livigno Via Borch,46.519186,10.124823
 BeCharge IT-Malborghetto Valbruna Piazza Municipio,46.506746,13.440135,30
 BeCharge IT-Massa Via Massa Avenza,44.02357,10.10927
 BeCharge IT-Milano Via Riccardo Pitteri,45.479768,9.245739
+BeCharge IT-Monza Viale Lombardia,45.57439,9.24689
 BeCharge IT-Piombino Lungomare Guglielmo Marconi,42.937,10.50737
 BeCharge IT-Ponte di Legno Via Cida,46.257058,10.510159
 BeCharge IT-Riccione Via Enrico Berlinguer,43.986654,12.642154
 BeCharge IT-Rimini Lungomare Giuseppe di Vittorio,44.04864,12.60241
 BeCharge IT-Roseto degli Abruzzi Via Nazionale,42.664101,14.025553
+BeCharge IT-San Donà di Piave Via Unità d’Italia,45.63797,12.54196
 BeCharge IT-San Giuliano Terme Via Giosuè Carducci,43.724815,10.418244
+BeCharge IT-San Michele al Tagliamento Via Maja,45.63992,13.05445
+BeCharge IT-San Michele al Tagliamento Via Perseo,45.63501,13.06449
+BeCharge IT-San Michele al Tagliamento Viale dei Ginepri,45.63213,12.99633
+BeCharge IT-San Michele all’Adige Via Brennero,46.18751,11.12701
 BeCharge IT-San Vittore Olona Via Sempione,45.591317,8.935639
 BeCharge IT-Sassari Via Predda Niedda,40.727928,8.54924
 BeCharge IT-Serravalle Scrivia Via Novi,44.7321,8.83781
@@ -7207,7 +7259,9 @@ BeCharge IT-Sestri Levante Via Bruno Primi,44.26986,9.42513
 BeCharge IT-Trento Piazzale Lionello Groff,46.10751,11.11294
 BeCharge IT-Trento Piazzale Lionello Groff,46.107536,11.112949
 BeCharge IT-Trento Via Giuseppe Grazioli,46.06726,11.128699
+BeCharge IT-Udine Viale Monsignore Giuseppe Nogara,46.06431,13.21169
 BeCharge IT-Villa Pedergnano Via Rovato,45.583916,9.993532
+BeCharge IT-Villadossola Via Pracastelli,46.08207,8.27827
 
 BEDEC BE-Leuven Korte Holsbeeksesteenweg,50.933578,4.743238
 
@@ -7499,6 +7553,8 @@ BS-ENERGY DE-Braunschweig Siegfriedstraße,52.287043,10.519884
 BS-ENERGY DE-Braunschweig Thüringenplatz,52.229463,10.533787
 BS-ENERGY DE-Braunschweig Werder,52.269819,10.523136
 
+Budimex PL-Siedlce plac Zdanowskiego,52.1624,22.27239
+
 BundK DE-Bad Homburg Ober-Eschenbacher Straße,50.210821,8.655651
 BundK DE-Bad Oeynhausen Mindener Straße,52.2109,8.81112
 BundK DE-Bad Salzuflen Benzstraße,52.054529,8.756617
@@ -7581,11 +7637,15 @@ ChargeNet US-South San Francisco El Camino Real,37.646701,-122.429172
 ChargePlace-Scotland GB-Bowmore Isle of Islay The Square,55.75666,-6.288741
 
 ChargePoint AT-Anif Salzachtalstraße,47.726824,13.0607,8
+ChargePoint AT-Eugendorf Gewerbestraße,47.85806,13.13337
+ChargePoint AT-Gleisdorf Hartberger Straße,47.11535,15.71116
 ChargePoint AT-Gratkorn Am Hartboden,47.120416,15.372291
+ChargePoint AT-Graz Schwarzer Weg,47.03054,15.42355
 ChargePoint AT-Graz Wiener Straße,47.10483,15.399748
 ChargePoint AT-Graz Zanklstraße,47.09623,15.40694,25
 ChargePoint AT-Liezen Salzburger Straße,47.567576,14.232019,20
 ChargePoint AT-St. Johann in der Haide Rathstraße,47.280639,16.006366
+ChargePoint AT-Stattegg Dorfplatz,47.13736,15.41941
 ChargePoint AT-Vasoldsberg Schemerlhöhe,47.057246,15.599613
 ChargePoint BE-Groot-Bijgaarden,50.882,4.25334
 ChargePoint CH-Davos Promenade,46.80706,9.83838
@@ -7759,6 +7819,7 @@ ChargePoint DE-Würzburg 10a Friedrichstraße,49.797157,9.914771
 ChargePoint IT-Area di servizio Altivole,45.752779,11.896712
 ChargePoint IT-Castelrotto Kastelruth Autostrada del Brennero,46.57,11.522867
 ChargePoint IT-Lutago Via Valle Aurina,46.950787,11.922009
+ChargePoint IT-Molteno SS36,45.7874,9.29694
 ChargePoint NL-Goes Olympiastraat,51.49488,3.87392
 ChargePoint US-Auburn CA Grass Valley Hwy,38.90178,-121.07402
 ChargePoint US-Bellville OH State Route 97,40.645793,-82.543001
@@ -7794,6 +7855,9 @@ Chargy LU-Kirchberg Rue Richard Coudenhove-Kalergi,49.626583,6.160497
 Chargy LU-Mertert Aire de Wasserbillig,49.72764,6.489429
 Chargy LU-Roeser Aire de Berchem,49.541595,6.120758
 
+CircleK BE-Kalken E17,51.0705,3.91987
+CircleK BE-Kalken E17,51.07132,3.92131
+CircleK DE-Autohof Alsfeld Pfefferhöhe,50.73306,9.24198,30
 CircleK DE-Berlin Heerstraße,52.516789,13.179936
 CircleK DE-Berlin Indira-Gandhi-Straße,52.547482,13.468407
 CircleK DE-Bruchköbel Römerstraße,50.179506,8.909239
@@ -7845,6 +7909,7 @@ CircleK NL-Amsterdam Kromwijkdreef,52.31336,4.98285
 CircleK NO-Oslo Ankerveien,59.96261,10.64281,30
 CircleK SE-Bjärred,55.722256,13.08846
 CircleK SE-Göteborg,57.707127,11.870444
+CircleK SE-Göteborg Torpavallsgatan,57.72356,12.02531
 CircleK SE-Kiruna Industrivägen,67.84812,20.27537
 CircleK SE-Lund Magistratsvägen,55.72023,13.203808
 CircleK SE-Lycksele Umevägen,64.59021,18.69169
@@ -8496,38 +8561,74 @@ CutPower DE-Wilhelmshaven Ernst-Barlach-Straße,53.52719,8.064548
 
 da-emobil AT-Aistersheim Innkreis Autobahn A8,48.179124,13.747004
 da-emobil AT-Ansfelden Stelzhammerstraße,48.204409,14.259646
+da-emobil AT-Breitenwang Kreckelmoosstraße,47.47977,10.73544
 da-emobil AT-Brunn am Gebirge Industriestraße,48.108443,16.30817
 da-emobil AT-Brunn am Gebirge Industriestraße,48.109267,16.302805,30
+da-emobil AT-Eibiswald,46.68652,15.24323
 da-emobil AT-Eisenstadt Ruster Straße,47.828136,16.53035
 da-emobil AT-Eisenwang Enzersbergstraße,47.822392,13.200104
 da-emobil AT-Feldbach Hauptplatz,46.953933,15.888035
 da-emobil AT-Fischbach Dorfstraße,47.44252,15.65058
+da-emobil AT-Fiss Fisser Straße,47.05341,10.61294
 da-emobil AT-Gleisdorf Mühlgasse,47.098969,15.713098
+da-emobil AT-Graz Feldkirchner Straße,47.01073,15.41195,25
+da-emobil AT-Graz Frachtengasse,47.0284,15.43241
+da-emobil AT-Graz Puntigamer Straße,47.03198,15.44156
 da-emobil AT-Großarl Marktstraße,47.240061,13.199945
 da-emobil AT-Guntramsdorf,48.033848,16.337711,20
+da-emobil AT-Hall in Tirol Brockenweg,47.27967,11.51271
 da-emobil AT-Heiligkreuz Schlöglstraße,47.273516,11.475648,16
 da-emobil AT-Heiterwang Oberdorf,47.43631,10.76691,25
+da-emobil AT-Höfen Gewerbegebiet,47.46644,10.68247
+da-emobil AT-Imst Gewerbepark,47.21834,10.74313
+da-emobil AT-Imst Langgasse,47.22767,10.74659
 da-emobil AT-Innsbruck Fürstenweg,47.262355,11.373057
+da-emobil AT-Innsbruck Leopoldstraße,47.25437,11.39907
 da-emobil AT-Innsbruck Maximilianstraße,47.262811,11.393327
+da-emobil AT-Ischgl Dorfstraße,47.00854,10.28524
+da-emobil AT-Kufstein Endach,47.56627,12.1515
+da-emobil AT-Landeck Bundesstraße,47.13627,10.52334
+da-emobil AT-Leoben Prettachstraße,47.35536,15.08482
+da-emobil AT-Lermoos Juch,47.40183,10.87943
 da-emobil AT-Liezen Werkstraße,47.56363,14.248112
 da-emobil AT-Linz Tirolerstraße,46.827305,12.766076
 da-emobil AT-Matrei in Osttirol Seblas,46.989725,12.544702
 da-emobil AT-Mauer Südlandstraße,48.102048,14.822834
+da-emobil AT-Mayrhofen Durster Straße,47.16854,11.86701
+da-emobil AT-Mieders Stubaital Straße,47.15973,11.36791
 da-emobil AT-Niederndorf,47.648726,12.197558,10
 da-emobil AT-Oberhart Voralpenkreuz,48.06658,14.033971
 da-emobil AT-Parndorf Shoppingstraße,47.979367,16.843588,11
 da-emobil AT-Pettau,47.284483,11.164263,20
+da-emobil AT-Pettneu am Arlberg Schnann,47.14929,10.37602
+da-emobil AT-Prutz Dorfstraße,47.07094,10.66408
 da-emobil AT-Prutz Gewerbestraße,47.09088,10.667111,30
 da-emobil AT-Prutz Gewerbestraße,47.091063,10.666626,30
+da-emobil AT-Ramsau im Zillertal Ramsau,47.20922,11.87261
+da-emobil AT-Rutzenmoos Am Moosgraben,47.9554,13.72683,20
 da-emobil AT-Salzburg Europastraße,47.816533,13.008688
 da-emobil AT-Schwanenstadt Staig,48.060593,13.785561
+da-emobil AT-Serfaus Kreuzwiesenweg,47.03938,10.61436
+da-emobil AT-Sinabelkirchen Untergroßau,47.09653,15.82452
 da-emobil AT-Spielfeld Bundesstraße,46.708301,15.634057
 da-emobil AT-Spittal an der Drau Villacher Straße,46.792093,13.510538
+da-emobil AT-St. Johann im Pongau Bundesstraße,47.36924,13.20645
+da-emobil AT-St. Peter in der Au-Markt Dr.-Hans-Blank-Weg,48.04241,14.61183
 da-emobil AT-St. Pölten,48.177086,15.553222
+da-emobil AT-Tux Lanersbach,47.15631,11.72847
 da-emobil AT-Umhausen Löck,47.136446,10.926384
+da-emobil AT-Villach ATRIO,46.59618,13.83512
+da-emobil AT-Voitsberg Am Vorum,47.05176,15.13602
 da-emobil AT-Vomp Industriestraße,47.353296,11.700683
 da-emobil AT-Völs Cytastraße,47.257635,11.322796
 da-emobil AT-Walchensee Seestraße,47.590011,11.317232
+da-emobil AT-Westendorf Bergliftstraße,47.42796,12.21351
+da-emobil AT-Wiesing Dorf,47.40352,11.80361
+da-emobil AT-Wörgl Johann-Federer-Straße 24,47.48867,12.07343
+da-emobil AT-Zirl Zirlerberg,47.28164,11.22461
+da-emobil IT-Appiano Unterrainer Straße,46.49725,11.2577
+da-emobil IT-Curon Venosta Grafl Straße,46.80848,10.54025
+da-emobil IT-Glorenza Malserstraße,46.67234,10.55252
 
 DB-Energie DE-Düsseldorf Konrad-Adenauer-Platz,51.22102,6.79349
 
@@ -8557,6 +8658,7 @@ Drewag DE-Dresden Pirnaischer Platz,51.048762,13.744022
 Drewag DE-Dresden Sarrasaniparkplatz,51.057835,13.745202
 Drewag DE-Dresden Schillergalerie,51.051405,13.804725
 
+Driveco FR-Bagnols-sur-Cèze Rte de Nîmes,44.15384,4.61799
 Driveco FR-Biguglia Lieu dit Campo Vallone,42.59322,9.43867
 Driveco FR-Boismont Route de Pinchefalise,50.17189,1.64838
 Driveco FR-Furiani Av. Sampiero Corso,42.64948,9.44016
@@ -8570,6 +8672,8 @@ Duferco IT-Rapallo Via Bartolomeo Maggiocco,44.35148,9.23364
 Duferco IT-Torino Via Parenzo,45.103057,7.646126
 Duferco IT-Vado Ligure Via Trieste,44.26627,8.43146
 
+e-con DE-Sonthofen Rudolf-Diesel-Straße,47.52355,10.26885
+
 E-Flux BE-Chimay Rue Madeleine,50.039692,4.377412
 E-Flux BE-Middelkerke Steenovenstraat,51.17785,2.82741
 E-Flux DE-Bergisch Gladbach Stegerwaldstraße,50.957793,7.145137
@@ -8578,8 +8682,13 @@ E-Flux NL-Berkhout Kleine wijzend,52.648667,5.032723
 E-Flux NL-Lattrop-Breklenkamp Spiekweg,52.43171,6.96598
 E-Flux NL-Steenwijk Eesergaard,52.80507,6.134
 
+e-laden-Tirol AT-Brixlegg Innsbrucker Straße,47.4368,11.88561
+e-laden-Tirol AT-Innsbruck Langer Weg,47.27021,11.42652
+e-laden-Tirol AT-Innsbruck Technikerstraße,47.2643,11.35063
 e-laden-Tirol AT-Kematen Sellrainer Straße,47.261524,11.264524
 e-laden-Tirol AT-Kematen Sportplatzweg,47.260587,11.268672
+e-laden-Tirol AT-Kitzbühel Jochberger Straße,47.43815,12.40086
+e-laden-Tirol AT-Schönberg im Stubaital Europabrücke-Parkplatz,47.19827,11.39695
 
 E-MAXX DE-Frickhofen Schulstraße,50.504932,8.027944
 E-MAXX DE-Harxheim Gerbstedterstraße,49.90317,8.276746
@@ -8607,6 +8716,10 @@ e-Vadea FR-Aire de Besançon Marchaux,47.32703,6.12525,30
 e-Vadea FR-Aire de Bourg Teyssonge,46.20553,5.29453,30
 
 E-Way SM-Città di San Marino Parcheggio,43.933037,12.449936
+
+E-Werk-Franz AT-Graz Andritzer Reichsstraße,47.10061,15.42549
+E-Werk-Franz AT-Graz Viktor-Franz-Straße,47.08993,15.41302
+E-Werk-Franz AT-Thal Arnold Schwarzenegger Museum,47.07218,15.36271
 
 E-Werk-Mittelbaden DE-Offenburg Freiburger Straße,48.471757,7.936133
 
@@ -8680,6 +8793,7 @@ E.ON DE-Bielefeld,51.927961,8.529158
 E.ON DE-Bottrop Am Hauptbahnhof 1,51.509199,6.935654
 E.ON DE-Bottrop An der A2,51.539811,6.887362
 E.ON DE-Büsum Lehnsweg,54.13177,8.85542
+E.ON DE-Cuxhaven Grodener Chaussee,53.85418,8.70891,25
 E.ON DE-Dannstadt An der A61,49.410299,8.339939
 E.ON DE-Dannstadt-Schauernheim An der A61,49.4102,8.341658
 E.ON DE-Dernbach An der A3,50.548416,7.585134
@@ -8946,6 +9060,8 @@ eborn FR-Menthon-Saint-Bernard Rte des Moulins,45.861665,6.197802
 eborn FR-Orgnac-l’Aven,44.31816,4.41391
 eborn FR-Saint-Didier-sous-Aubenas Chem. des Vignettes,44.61239,4.40904
 
+eCarUp AT-Neustift im Stubaital Mutterberg,47.01296,11.16042
+eCarUp AT-Radingdorf Betriebsstraße,48.35779,14.47635
 eCarUp CH-Aarau Buchserstrasse,47.391541,8.059656
 eCarUp CH-Aesch Therwilerstrasse,47.47936,7.59217
 eCarUp CH-Biel/Bienne Grenchenstrasse,47.15859,7.28746
@@ -8976,6 +9092,8 @@ eCarUp CH-Volketswil Hölzliwisenstrasse,47.37835,8.679815
 eCarUp CH-Winterthur Hegmattenstrasse,47.51,8.76041
 eCarUp DE-Gerstetten Ludwig-Erhard-Straße,48.58969,10.12808,30
 eCarUp DE-Linden Konrad-Zuse-Straße,50.53575,8.657672
+
+ECO PL-Opole plac Wolności,50.6673,17.92318
 
 EcoEsco IT-Palau Via Fonte Vecchia,41.178723,9.383838
 
@@ -9254,6 +9372,8 @@ eins-energie DE-Zschopau Launer Ring,50.754724,13.068593
 eins-energie DE-Zschopau Straubeweg,50.756832,13.069817
 eins-energie DE-Zwickau Georgenstraße,50.718932,12.49008
 
+EKOEN PL-Nadarzyn Aleja Katowicka,52.07336,20.76802
+
 Elbizz NL-Hilversum Bisonlaan,52.23422,5.14745
 
 ElDrive LT-Vilnius Vikingų g.,54.649788,25.279766
@@ -9268,7 +9388,10 @@ Electra FR-Aire de Arzens,43.21972,2.21619,30
 Electra FR-Nanterre Av. Pablo Picasso,48.89171,2.21374
 Electra FR-Rosny-sous-Bois Rue de Lisbonne,48.87797,2.47551
 Electra FR-Zac des Tulipes Rue de Montservon,48.968781,2.463222
+Electra IT-Lonato del Garda Via Battaglie,45.43199,10.51885
+Electra IT-Modena Via Emilia Ovest,44.65001,10.85315,25
 Electra IT-Peschiera del Garda Via Tangenziale,45.43407,10.710375
+Electra IT-Portogruaro Via Prati Guori,45.79198,12.8152
 Electra IT-Stezzano Via Guzzanica,45.64659,9.62873
 
 Electra-Avellana ES-Vilademuls Hotel Sausa,42.09476,2.89294
@@ -9320,6 +9443,7 @@ electrip HR-Zagreb Oreškovićeva ulica,45.759464,15.98306
 electrip HR-Zagreb Ulica Velimira Škorpika,45.796794,15.859543
 electrip IT-Argenta Largo Ludovico Ariosto,44.583438,11.861565
 electrip IT-Assago Business Park,45.407323,9.150871
+electrip IT-Crêtes Località Autoporto,45.73502,7.37007
 electrip IT-Firenze Via Gabriele D’Annunzio,43.77554,11.29007
 
 ELEN HR-Bačva,45.23834,13.71582,15
@@ -9338,6 +9462,7 @@ ELEN HR-Mogorić Odmorište Zir,44.462722,15.602718
 ELEN HR-Motovun,45.331222,13.824982
 ELEN HR-Novalja Burin Bok,44.552543,14.893334
 ELEN HR-Opatija Štangerova,45.347349,14.319122
+ELEN HR-Pašman,43.95679,15.38808
 ELEN HR-Poreč,45.22419,1359817.0
 ELEN HR-Pula,44.83862,1383365.0
 ELEN HR-Rijeka Gomila,45.32812,14.442247
@@ -9353,7 +9478,10 @@ Elinta LT-Nida Taikos g.,55.30104,20.98653
 Eliso DE-Magdeburg Eisvogelstrasse,52.139513,11.588016
 
 ELLA AT-Gemeinde Imst Brennbichl,47.221079,10.75213
+ELLA AT-Holzing Betriebsgebiet,48.13927,15.13758,20
+ELLA AT-Linz Altenberger Straße,48.33394,14.31905
 ELLA AT-Sattledt Hauptstraße,48.073415,14.051495,25
+ELLA AT-St. Martin im Innkreis Diesseits,48.29328,13.43802
 ELLA AT-Stockerau Donaukraftwerkstraße,48.37447,16.238065
 ELLA AT-Wien Albert-Schweitzer-Gasse,48.206345,16.222951
 
@@ -9364,6 +9492,7 @@ eLoaded DE-Zusmarshausen Am Innovationspark,48.407431,10.600065,30
 eLoaded DE-Zusmarshausen Am Innovationspark,48.40764,10.600005,25
 
 Elocity PL-Siemianowice Śląskie Elizy Orzeszkowej,50.320105,19.010029
+Elocity PL-Warszawa Aleja Krakowska,52.17339,20.93957
 
 EM1 DE-Ahrensburg Am Postwald,53.6767,10.241641
 EM1 DE-Altötting Bahnhofstraße,48.222672,12.674143
@@ -9381,6 +9510,8 @@ EMB DE-Michendorf Michendorfer Gartenstraße,52.31406,13.02783
 
 Emobility-East DE-Drebach Straße der Jugend,50.67323,13.01824
 Emobility-East DE-Mittenwald Obermarkt,47.441255,11.261307
+
+emobitaly IT-Bussolengo Strada Comunale dei Tre Castel,45.44861,10.88199
 
 emoti CH-Locarno Viale Al Lido,46.16292,8.80299
 
@@ -10418,6 +10549,7 @@ EnBW DE-Lutherstadt Eisleben,51.513315,11.568462
 EnBW DE-Lörrach Industriestraße,47.634882,7.677357
 EnBW DE-Lörrach Wiesentalstr.,47.622804,7.656234
 EnBW DE-Löwenberger Land,52.898284,13.157323
+EnBW DE-Lübbenau Chausseestraße,51.86551,13.93916
 EnBW DE-Lübeck b. d. Lohmühle,53.879728,10.676252
 EnBW DE-Lübeck BAUHAUS,53.862047,10.629666
 EnBW DE-Lübeck Penny,53.865476,10.721
@@ -10497,6 +10629,7 @@ EnBW DE-Meßstetten Bolgasse,48.179863,8.962511
 EnBW DE-Michelfeld Daimlerstraße,49.102138,9.694876
 EnBW DE-Michelstadt Industriestraße,49.67703,8.99956
 EnBW DE-Miesbach Am Windfeld,47.793573,11.838587
+EnBW DE-Miesbach Am Windfeld,47.79522,11.83718
 EnBW DE-Minden Penny,52.304343,8.916249
 EnBW DE-Minden Stiftsallee Penny,52.30731,8.89853
 EnBW DE-Moers,51.450767,6.643424
@@ -11301,6 +11434,8 @@ Eneco NL-Haarlem Emrikweg,52.39576,4.66413
 Enefit EE-Jüri Harju maakond,59.358956,24.895166
 Enefit EE-Narva Tallinna mnt,59.37906,28.18792
 Enefit EE-Pärnu Ranna pst,58.37367,24.503218
+Enefit EE-Tallinn Marja tn,59.42299,24.69653
+Enefit LV-Cēsis Raunas iela,57.31243,25.27532
 
 EnelX IT-Adria Via Bortolina,45.06226,12.05158
 EnelX IT-Alba Parcheggio Conad,44.71616,8.03511
@@ -11315,6 +11450,7 @@ EnelX IT-Aosta Corso Ivrea,45.73975,7.34646
 EnelX IT-Bagnoregio Piazzale Battaglini,42.62736,12.09295
 EnelX IT-Barberino di Mugello Via del Lago,43.98206,11.2155,20
 EnelX IT-Bari Sardo Piazza Mercato,39.842933,9.644817
+EnelX IT-Bazzera,45.52535,12.25972
 EnelX IT-Bellano Via Martiri della Libertà,46.040783,9.299396
 EnelX IT-Bologna Via Marco Emilio Lepido,44.52117,11.26404
 EnelX IT-Bologna Via Stalingrado,44.51961,11.36264
@@ -11323,6 +11459,8 @@ EnelX IT-Candela localita la pescara,41.14506,15.52689
 EnelX IT-Castelfiorentino Via Cesare Pavese,43.602416,10.970405
 EnelX IT-Castelletto Ticino,45.712974,8.643274,40
 EnelX IT-Cisano sul Neva Via Benessea,44.06985,8.16872
+EnelX IT-Corsico Via Matteotti,45.43471,9.10822
+EnelX IT-Corvara in Badia Str. Col Alt,46.55274,11.87512
 EnelX IT-Cuorgnè Via Don Giovanni Minzoni,45.39019,7.64941
 EnelX IT-Desenzano del Garda Località la perla,45.457,10.52266
 EnelX IT-Desio Via delle Rose,45.60091,9.199766
@@ -11338,11 +11476,15 @@ EnelX IT-Foiano della Chiana Valdichiana Outlet,43.22707,11.7993
 EnelX IT-Gagliano del Capo LE,39.838057,18.366472,15
 EnelX IT-Gela Via Generale Cascino,37.06503,14.26126
 EnelX IT-Giardini-Naxos Viale Jannuzzo,37.81831,15.26601
+EnelX IT-Grado Riva Z. Gregori,45.682,13.38777
 EnelX IT-Imperia Via Giuseppe Airenti,43.87851,8.00645
 EnelX IT-Imperia Via Tommaso Littardi,43.871925,8.001121
+EnelX IT-Lainate Villoresi Est,45.55964,9.0401
+EnelX IT-Latisana Via Crosere,45.78654,13.00922
 EnelX IT-Lazise Via Gardesana,45.49592,10.73872,20
 EnelX IT-Lecce Stazione di Ricarica,40.353177,18.171802,10
 EnelX IT-Legnano Via Fabio Filzi,45.607315,8.927481
+EnelX IT-Lipomo V. Statale per Lecco,45.79717,9.11861
 EnelX IT-Livorno Via Giovanni Gelati,43.52923,10.32936
 EnelX IT-Lucca Via Giacomo Puccini,43.84837,10.47272
 EnelX IT-L’Aquila Via Giuseppe Mezzanotte,42.35462,13.41443
@@ -11350,13 +11492,18 @@ EnelX IT-Marina di Bibbona Via dei Cavalleggeri Nord,43.24556,10.53135
 EnelX IT-Masero Via Nazionale Cisa,44.227,9.96887
 EnelX IT-Massa Marittima Via Antonio Gramsci,43.04878,10.89348
 EnelX IT-Misterbianco Str. S. Giovanni Galermo,37.53442,15.0314
+EnelX IT-Moltrasio Via Durini,45.86007,9.1009
 EnelX IT-Montegrosso Piazza Saracco,44.81891,8.24023
+EnelX IT-Monza Viale Enrico Fermi,45.56589,9.28166
 EnelX IT-Napoli Via Murelle,40.84138,14.30028
 EnelX IT-Nichelino Via dei Cacciatori,45.00588,7.62316
+EnelX IT-Novara Via Pietro Generali,45.43348,8.60534
 EnelX IT-Olbia Piazzale Benedetto Brin,40.92353,9.50676
 EnelX IT-Olbia Via Bambini di Beslan,40.90811,9.51547,30
 EnelX IT-Olbia Via Basa,40.96083,9.491849
+EnelX IT-Orta San Giulio Via Panoramica,45.79747,8.41471
 EnelX IT-Palermo Via Marchese di Villabianca,38.139612,13.349534
+EnelX IT-Piazza Stazione Via Francesco Baracca,45.75498,8.56061
 EnelX IT-Pietra Ligure Viale 25 Aprile,44.14421,8.27462
 EnelX IT-Pizzo Tirrena Inferiore,38.77308,16.21561
 EnelX IT-Poggibonsi Via Salceto,43.46754,11.15499
@@ -11366,6 +11513,7 @@ EnelX IT-Quartu Sant’Elena Viale Lungomore del Golfo,39.22908,9.21616
 EnelX IT-Ragusa Via G. di Vittorio,36.91492,14.72468
 EnelX IT-Ramiola,44.698924,10.090093
 EnelX IT-Ravenna Via Classicana,44.37624,12.2237
+EnelX IT-Rodengo Saiano Via Girolamo Romanino,45.57499,10.12088
 EnelX IT-Roma Via Aosta,41.88327,12.51469
 EnelX IT-Roma Viale dei Quattro Venti,41.8797,12.45856
 EnelX IT-Rovigo Viale Porta Adige,45.08557,11.78552
@@ -11381,7 +11529,10 @@ EnelX IT-Savignano sul Rubicone C. Colombo,44.15777,12.42902
 EnelX IT-Selva Candida,41.9579,12.38587
 EnelX IT-Serravalle Scrivia Via Novi,44.73201,8.84134
 EnelX IT-Siena Strada delle Grondaie,43.33021,11.32848
+EnelX IT-Sommacampagna Piazza Carlo Alberto,45.4073,10.84025
+EnelX IT-Spilimbergo Via Udine,46.10212,12.90512
 EnelX IT-Stresa Piazza Marconi,45.88419,8.54132
+EnelX IT-Stresa Via del Torchio,45.87531,8.54502
 EnelX IT-Taverna Via Alessandro Manzoni,39.42982,16.22638
 EnelX IT-Termini Imerese Via Giuseppe Seminara,37.97725,13.68755
 EnelX IT-Termoli Via Regina Margherita di Savoia,42.00332,14.99494
@@ -11396,10 +11547,16 @@ EnelX IT-Urbino Via Bonconte da Montefeltro,43.73488,12.63195
 EnelX IT-Vada SP13,43.35361,10.46148
 EnelX IT-Valenzano Via Casamassima,41.03831,16.88843
 EnelX IT-Vallecrosia Via Roma,43.79103,7.64328
+EnelX IT-Venegono Inferiore Via Fratelli Kennedy,45.72929,8.88755
 EnelX IT-Ventimiglia Passeggiata Marconi,43.79037,7.59995
+EnelX IT-Verona C.so Milano,45.44403,10.96555
+EnelX IT-Vicenza Piazzale della Stazione,45.54146,11.53924
+EnelX IT-Vieste Via Alessandro Manzoni,41.8815,16.17355
+EnelX IT-Villa di Serio Piazza Mercato,45.7223,9.73639
 EnelX IT-Villaggio Pescara del Tronto,42.74521,13.2685
 EnelX IT-Villetta Barrea Via Del Lago,41.7739,13.94495
 
+EnerCharge AT-Fusch Glocknerstraße,47.22713,12.82648
 EnerCharge AT-Jenbach Bahnhofstraße,47.38765,11.77476
 EnerCharge AT-Millstatt Kaiser-Franz-Josef-Straße,46.804295,13.567829
 EnerCharge AT-Rauris Sportstraße,47.229812,12.992638
@@ -11461,33 +11618,68 @@ enercity DE-Sarstedt Steinstraße,52.234461,9.851209
 enercity DE-Seelze Am Kreuzweg,52.39573,9.58982
 enercity DE-Seelze Kastanienplatz,52.39726,9.63813
 
-Energie AT-Grieskirchen Manglburg,48.234117,13.825708
+Energa PL-Gdańsk aleja Grunwaldzka,54.40231,18.5708
+Energa PL-Koszalin Jana Pawła II,54.2065,16.18583
+Energa PL-Słupsk plac Zwycięstwa,54.46441,17.0281
 
+Energie AT-Braunau am Inn Auf der Haiden,48.25001,13.04723
+Energie AT-Ebensee Im Gemeindeamt,47.81263,13.7743
+Energie AT-Grieskirchen Manglburg,48.234117,13.825708
+Energie AT-Mattighofen Römerstraße,48.10713,13.1483
+Energie AT-Schwanenstadt Stadtplatz,48.05457,13.77367
+Energie AT-Schärding Karl-Gruber-Straße,48.44838,13.43813
+
+Energie-Architektur DE-Leipzig Gießerstraße,51.32458,12.32733,30
+
+Energie-Burgenland AT-Eisenstadt Ruster Straße,47.83533,16.52882
 Energie-Burgenland AT-Frauenkirchen Franziskanerstraße,47.835509,16.924221
+Energie-Burgenland AT-Gols Hauptplatz,47.898,16.90799
 Energie-Burgenland AT-Güssing Europastraße,47.080799,16.319972
 Energie-Burgenland AT-Güssing Grazerstraße,47.049267,16.321636
+Energie-Burgenland AT-Jennersdorf Technologiepark,46.93741,16.14894
+Energie-Burgenland AT-Markt Allhau Industrieweg,47.27679,16.08671
+Energie-Burgenland AT-Neusiedl am See Seegelände,47.92979,16.83728
+Energie-Burgenland AT-Oberwart Europastraße,47.288,16.18658
 Energie-Burgenland AT-Steinberg-Dörfl Burgenland Straße,47.489749,16.494049
 
-Energie-Graz AT-Graz Conrad-von-Hötzendorf-Straße,47.048064,15.453588,30
-Energie-Graz AT-Graz Kärntner Straße,47.06085,15.42101
-Energie-Graz AT-Graz Wiener Straße,47.103777,15.401707
+Energie-Klagenfurt AT-Klagenfurt 8.-Mai-Straße,46.62319,14.3072
 
+Energie-Oberösterreich AT-Bad Ischl Götzstraße,47.71369,13.62392
 Energie-Oberösterreich AT-Liezen Gesäusestraße,47.55972,14.25383,40
-Energie-Oberösterreich AT-Linz Energiestraße,48.292685,14.290674
-
-Energie-OÖ AT-Bad Ischl Götzstraße,47.71369,13.62392
+Energie-Oberösterreich AT-Linz Energiestraße,48.29268,14.29067,25
 
 energie-schwaben DE-Augsburg Bayerstraße,48.343625,10.884503
 
 Energie-Steiermark AT-Brunn am Gebirge Kärntner Straße,47.33838,15.010619,25
+Energie-Steiermark AT-Feldkirchen bei Graz Bahnweg,47.01215,15.44031
+Energie-Steiermark AT-Fohnsdorf Arena am Waldfeld,47.18352,14.67929
+Energie-Steiermark AT-Fürstenfeld Neudorf,47.0792,15.95799
+Energie-Steiermark AT-Gleisdorf Grazer Straße,47.10576,15.69806
+Energie-Steiermark AT-Graz Conrad-von-Hötzendorf-Straße,47.04806,15.45359,30
+Energie-Steiermark AT-Graz Elisabethstraße,47.07782,15.46253
+Energie-Steiermark AT-Graz Kärntner Straße,47.06085,15.42101
+Energie-Steiermark AT-Graz Körblergasse,47.08783,15.43954
+Energie-Steiermark AT-Graz Lazarettgürtel,47.06007,15.42925
+Energie-Steiermark AT-Graz Leonhardgürtel,47.07456,15.45516
 Energie-Steiermark AT-Graz Neuholdaugasse,47.056778,15.437455,25
+Energie-Steiermark AT-Graz Puchstraße,47.03796,15.43971
+Energie-Steiermark AT-Graz Ragnitzstraße,47.07743,15.49161
+Energie-Steiermark AT-Graz Stattegger Straße,47.11022,15.42302
 Energie-Steiermark AT-Graz Weblinger Gürtel,47.033791,15.414556,8
+Energie-Steiermark AT-Graz Wiener Straße,47.10378,15.40171
+Energie-Steiermark AT-Hart bei Graz Industriestraße,47.04081,15.50833
+Energie-Steiermark AT-Judenburg Hauptplatz,47.16846,14.66107
+Energie-Steiermark AT-Kumberg Grazer Straße,47.14436,15.54908
 Energie-Steiermark AT-Lieboch Radlstraße,46.956961,15.346721,25
+Energie-Steiermark AT-Passail Fladnitzer Straße,47.27958,15.50633
 Energie-Steiermark AT-Prutz Moosweg,47.071719,10.66437,25
 Energie-Steiermark AT-Raaba Dr. Auner Straße,47.026565,15.488085,25
+Energie-Steiermark AT-Schladming Pichl,47.38948,13.61102
 Energie-Steiermark AT-Schladming Salzburger-Siedlung,47.390759,13.658383,25
+Energie-Steiermark AT-Spielberg Red Bull Ring,47.21907,14.76501
 Energie-Steiermark AT-Trieben Europastraße,47.48994,14.484885,20
 Energie-Steiermark AT-Unzmarkt Simon-Hafnerplatz,47.198231,14.445851,25
+Energie-Steiermark AT-Voitsberg von-Hötzendorf-Straße,47.05207,15.14186
 
 Energie-Südbayern DE-Alling Hoflacher Straße,48.144636,11.301403
 Energie-Südbayern DE-Bad Füssing Rathausstraße,48.35153,13.31342
@@ -11609,7 +11801,9 @@ ENGIE FR-Vitrac-sur-Montane Aire Corrèze,45.360055,1.937966
 ENGIE NL-Den Haag Van Bleiswijkstraat,52.09403,4.28025
 
 Enio AT-Flughafen Wien Ausfahrtsstraße,48.124247,16.559234
+Enio AT-Korneuburg Laaer Straße,48.36037,16.34948
 Enio AT-Möllbrücke Mölltal Straße,46.83754,13.370139
+Enio AT-Rudersdorf Teichweg,47.04537,16.12217
 
 Eniwa CH-Buchs Industriestrasse,47.392681,8.064548
 
@@ -11642,6 +11836,9 @@ EPO CH-Amriswil Marktplatz,47.545497,9.299695
 
 EQUANS NL-Amsterdam IJdoornlaan,52.41527,4.91168
 
+EQUAY PL-Gdańsk mjr. Henryka Sucharskiego,54.40323,18.68079
+EQUAY PL-Gdańsk Zamknięta,54.40017,18.678
+
 ESARJ TR-Afyonkarahisar Merkez Dörtyol,38.793372,30.457982
 
 ESWE DE-Idstein Limburger Straße,50.223519,8.267802
@@ -11653,6 +11850,7 @@ EV-Dahlenburg-Bleckede DE-Dahlenburg Am Markt,53.186467,10.742472
 EV-Halle DE-Halle (Saale) Hansering,51.4811,11.97546
 EV-Leverkusen DE-Leverkusen Martin-Luther-Straße,51.03348,7.04619
 EV-Leverkusen DE-Leverkusen Paracelsusstraße,51.03254,7.02968
+eV-Now IT-Lainate Villoresi Est,45.55904,9.04173
 EV-Rudolstadt DE-Rudolstadt Albert-Lindner-Straße,50.71809,11.33546
 EV-Rudolstadt DE-Rudolstadt Oststraße,50.72486,11.36791
 EV-Sylt DE-List Hafenstraße,55.019234,8.438824
@@ -11665,6 +11863,7 @@ EVB DE-Eisenach Hinter der Mauer,50.9763,10.31766
 EVBox CH-Bern Riedbachstrasse,46.94621,7.37338
 EVBox CH-Egerkingen Hausimollstrasse,47.318099,7.802282
 EVBox CH-Urtenen-Schönbühl Industriestrasse,47.01816,7.49243,20
+EVBox IT-St. Vigilio Corso Lanz,46.7006,11.92962
 EVBox NL-Enschede Strootsweg,52.22154,6.83426
 EVBox NL-Vriezenveen De Zuivering,52.40457,6.63523
 
@@ -11680,7 +11879,6 @@ EvGateway US-Vernal UT S 500 E Ste 101,40.454329,-109.518367
 
 EVgo US-Atlanta GA Virginia Ave,33.65951,-84.41739
 EVgo US-Castro Valley CA Castro Valley Blvd,37.6949,-122.07639
-EVgo US-Chehalis WA NW Louisiana Ave,46.67969,-122.97701
 EVgo US-Daly City CA Southgate Ave,37.69989,-122.48358
 EVgo US-Hollister CA McCray St,36.85278,-121.3973
 EVgo US-Leesylvania VA Potomac Town Pl,38.62978,-77.28907,15
@@ -11716,6 +11914,7 @@ Eviny SE-Sandöverken Hornöberget,62.80411,17.95201,30
 Eviny SE-Skellefteå Kronbodgatan,64.75571,20.91828
 Eviny SE-Sölvesborg Järnvägsgatan,56.04848,14.58137
 Eviny SE-Älmhult Silverdalsgatan,56.556522,14.147798,30
+Eviny SE-Östersund Arenavägen,63.19201,14.65214
 
 EVite CH-Baden Segelhof,47.458561,8.278505
 
@@ -11737,24 +11936,50 @@ EVN AT-Amstetten Eggersdorfer Straße,48.120875,14.874438
 EVN AT-Amstetten Kupferstraße,48.116694,14.892285
 EVN AT-Amstetten Otto-Schott-Straße,48.117532,14.910831
 EVN AT-Amstetten Ybbsstraße,48.113975,14.870678
+EVN AT-Bruck an der Leitha Eco-Plus-Park 4.Straße,48.03511,16.80851
 EVN AT-Brunn am Gebirge Johann Steinböck-Straße,48.105502,16.310296
 EVN AT-Böheimkirchen Hainfelder Straße,48.195251,15.764868
 EVN AT-Böheimkirchen Reith,48.187943,15.765036
 EVN AT-Eggenburg Grafenbergerstraße,48.643769,15.822473
+EVN AT-Grafenwörth Gewerbepark,48.41187,15.776
+EVN AT-Grimmenstein Wechselbundesstrasse,47.63344,16.13192
 EVN AT-Herzogenburg Traismauerstraße,48.290148,15.694952
+EVN AT-Horn Prager Straße,48.66136,15.65458
+EVN AT-Höbenbach Ortsstraße,48.35014,15.64742
+EVN AT-Korneuburg Girakstraße,48.36066,16.32724
+EVN AT-Krems an der Donau Flughafenstraße,48.44614,15.62969
+EVN AT-Krems an der Donau Steiner Donaulände,48.40407,15.59108
 EVN AT-Leobendorf Hammerschmied-Straße,48.360036,16.310463
+EVN AT-Mank Bahnhofstraße,48.1119,15.34337
 EVN AT-Mank Schulstraße,48.110774,15.340993,30
+EVN AT-Maria Ellend Marienring,48.1091,16.68283
+EVN AT-Maria Enzersdorf Südstadtzentrum,48.09522,16.31016
+EVN AT-Mistelbach Ernstbrunnerstraße,48.56046,16.56092
+EVN AT-Mistelbach Ernstbrunnerstraße,48.56101,16.56091
+EVN AT-Mistelbach Hüttendorfweg,48.56149,16.55836
 EVN AT-Perchtoldsdorf Mühlgasse,48.123588,16.293183
 EVN AT-Pressbaum Hauptstraße,48.180373,16.079066
 EVN AT-Pressbaum Hauptstraße,48.182763,16.089191
+EVN AT-Purgstall Erlauftalstraße,48.06599,15.13419
 EVN AT-Pöchlarn Manker Straße,48.19958,15.22043
 EVN AT-Roggendorf A1,48.194754,15.383732
+EVN AT-Schrems Josef-Widy-Straße,48.79162,15.07124
+EVN AT-Schwechat Mannswörther Straße,48.15125,16.4739
+EVN AT-Semmering-Kurort Semmering,47.64703,15.82485
+EVN AT-St. Andrä-Wördern Tullnerstraße,48.32272,16.20127
 EVN AT-St. Pölten Ausstellungsstraße,48.20061,15.629955
+EVN AT-St. Pölten Pottenbrunner Hauptstraße,48.23851,15.69444
 EVN AT-St. Pölten Stattersdorfer Hauptstraße,48.197377,15.64104
+EVN AT-Stockerau Horner Straße,48.38807,16.18479
+EVN AT-Tulln an der Donau Frauentorgasse,48.32718,16.05535
+EVN AT-Tulln an der Donau Langenlebarner Straße,48.32822,16.08246
 EVN AT-Waidhofen an der Ybbs Pocksteinerstraße,47.956449,14.777679
 EVN AT-Wien Albert-Schweitzer-Gasse,48.207501,16.22199
+EVN AT-Wien Dommesgasse,48.17229,16.41517
 EVN AT-Wiener Neustadt Puchberger Straße,47.80452,16.21039,6
 EVN AT-Wiener Neustadt Puchberger Straße,47.80466,16.21039,8
+EVN AT-Wolkersdorf Julius Bittner Platz,48.3852,16.51515
+EVN AT-Ybbsitz Alte Poststraße,47.94852,14.89427
 EVN AT-Zwettl Gartenstraße,48.604227,15.16982
 EVN DE-Nordhausen Engelsburg,51.503143,10.793401
 
@@ -11770,6 +11995,8 @@ EVPlus PL-Sieradz 1 Maja,51.57957,18.71439
 EVR DE-Rudolstadt Oststraße,50.720881,11.351418
 
 EVSC US-Cannon Beach OR Elk Creek Rd,45.88923,-123.95582
+
+evway IT-Moso In Passiria Timmelsjochstrasse,46.8311,11.16787
 
 EVzen FR-Béziers Rue Zenobe Gramme,43.34748,3.25572,25
 
@@ -12821,19 +13048,28 @@ Ewiva IT-Aprilia Via Aldo Moro,41.58686,12.64667
 Ewiva IT-Arcola Via della Repubblica,44.116042,9.913094
 Ewiva IT-Asti Corso Casale,44.91548,8.22732
 Ewiva IT-Bagnolo San Vito Via Marco Biagi,45.085816,10.855625
+Ewiva IT-Biandrate Via Valsesia,45.45706,8.46356,20
 Ewiva IT-Bracciano Via Santa Lucia,42.08823,12.18323
 Ewiva IT-Campagnano di Roma Via della Mola Maggiorana,42.15344,12.36919
 Ewiva IT-Campi Bisenzio Via Salvador Allende,43.83068,11.14942
+Ewiva IT-Castelfranco Emilia Via Emilia Ovest,44.60276,11.03142
+Ewiva IT-Castenedolo Tangenziale Est,45.46067,10.31911
 Ewiva IT-Castro Via di Mezzo,40.01016,18.42513
 Ewiva IT-Catania Asse dei Servizi,37.47216,15.05612
 Ewiva IT-Ciliegi Piazza Giorgio Amendola,43.66437,11.45661
+Ewiva IT-Como Via Guido da Como,45.78552,9.06888
+Ewiva IT-Corsico Via Marchesi,45.42846,9.07902
+Ewiva IT-Creazzo Str. Padana Verso Verona,45.53139,11.50183
 Ewiva IT-Deruta Via Tiberina,42.99877,12.42694
 Ewiva IT-Elmas Via Sulcitana,39.26464,9.05681
 Ewiva IT-Finale Ligure Corso Europa,44.17088,8.35297
 Ewiva IT-Gatteo Via della Cooperazione,44.1144,12.38694
+Ewiva IT-Gemona Via Monsignor Pietro Cappellari,46.27629,13.13705
 Ewiva IT-Giave Statale,40.467727,8.739463
 Ewiva IT-Guidonia Montecelio Via Volturno,42.0,12.72475
+Ewiva IT-Lainate Via Juan Manuel Fangio,45.56472,9.04596,20
 Ewiva IT-Livorno Viale Giovanni Boccaccio,43.53607,10.32351
+Ewiva IT-Milano Via Benozzo Gozzoli,45.4514,9.09544
 Ewiva IT-Milazzo Via Arno,38.18799,15.26918
 Ewiva IT-Mogliano Veneto Via Bonfadini,45.584343,12.287914,20
 Ewiva IT-Montalto di Castro Aurelia,42.34208,11.61616
@@ -12845,6 +13081,7 @@ Ewiva IT-Pomigliano d’Arco Via Indira Gandhi,40.90498,14.39972
 Ewiva IT-Porto San Giorgio Via Ferraris,43.16389,13.79072
 Ewiva IT-Pula Via Camillo Benso,39.0092,8.99587
 Ewiva IT-Ragusa Via A. Moro,36.93044,14.70952
+Ewiva IT-Rescaldina Via Fratelli d’Italia,45.61144,8.9613
 Ewiva IT-Roma Corsa di Francia,41.944798,12.469523
 Ewiva IT-San Gimignano Piazzale Ludovico Quaroni,43.46259,11.04164
 Ewiva IT-San Lazzaro di Savena Via Cà Ricchi,44.47708,11.41638
@@ -12853,6 +13090,7 @@ Ewiva IT-Siena Via Fausto Coppi,43.335683,11.296563
 Ewiva IT-Signoressa Via Ortigara,45.75491,12.0977
 Ewiva IT-Siniscola Via Luca Tanzi,40.57847,9.70321
 Ewiva IT-Termoli SS87 Sannitica,41.95958,14.99322
+Ewiva IT-Torri di Quartesolo VI Via Pola,45.50913,11.62935
 Ewiva IT-Tortona Strada Provinciale per Viguzzolo,44.907117,8.878633
 Ewiva IT-Valdera,43.64262,10.61749
 Ewiva IT-Valmontone Fashion District,41.7627,12.95579
@@ -12869,6 +13107,7 @@ EWZ CH-Zürich Ueberlandstrasse,47.40464,8.5942
 EXP HU-Budapest Alkotmány u.,47.507498,19.050478
 
 eze DE-Frankfurt am Main Luxemburgerallee,50.119729,8.711134
+eze DE-Stuttgart Liststraße,48.76381,9.17615
 eze DE-Stuttgart Salzäckerstraße,48.725108,9.152714
 
 Eşarj TR-Silivri/İstanbul General Ali İhsan Türkkan Cd.,41.074694,28.2608
@@ -13061,6 +13300,7 @@ Fastned NL-Tafelbergweg,52.292076,4.945501
 Fastned NL-Tussenhoek N57,51.87026,4.18248,20
 Fastned NL-Velder,51.559136,5.3568
 Fastned NL-Vliedberg,51.48431,3.85084
+Fastned NL-Vliete A58,51.4236,4.09546
 Fastned NL-Voorst De paal,52.209097,6.097979
 Fastned NL-Vrijenban,51.983412,4.392855
 Fastned NL-Wellerzand,52.78436,5.759275
@@ -13108,11 +13348,17 @@ FreeToX IT-Anagni Autostrada del Sole,41.686067,13.187432
 FreeToX IT-Anagni Autostrada del Sole,41.686491,13.188588
 FreeToX IT-Andria Autostrada Adriatica,41.250782,16.218906
 FreeToX IT-Andria Autostrada Adriatica,41.251829,16.220171
+FreeToX IT-Area di Lario,45.72902,9.02876
+FreeToX IT-Area di Lario,45.7299,9.02799
 FreeToX IT-Badia al Pino,43.40561,11.76381
 FreeToX IT-Badia al Pino,43.40796,11.76282
 FreeToX IT-Badia Nuova,44.15108,11.19367
 FreeToX IT-Bentivoglio Autostrada Bologna-Padova,44.621136,11.419777
 FreeToX IT-Bentivoglio Autostrada Bologna-Padova,44.622597,11.419838
+FreeToX IT-Brembo,45.63298,9.59957
+FreeToX IT-Brianza,45.57409,9.39333
+FreeToX IT-Brianza,45.57585,9.39384
+FreeToX IT-Brianza,45.57586,9.3938
 FreeToX IT-Campofilone Autostrada Adriatica,43.075062,13.842852
 FreeToX IT-Campofilone Autostrada Adriatica,43.075132,13.844134
 FreeToX IT-Cantallago,44.4567,11.28032
@@ -13123,25 +13369,30 @@ FreeToX IT-Castrocielo Autostrada del Sole,41.497785,13.684181
 FreeToX IT-Conero,43.4812,13.59488
 FreeToX IT-Fabro Autostrade del Sole,42.875861,12.019105
 FreeToX IT-Fabro Autostrade del Sole,42.876551,12.017115
+FreeToX IT-Fella,46.49899,13.37543
 FreeToX IT-Ferno Malpensa Aeroporto,45.624813,8.712106
 FreeToX IT-Ferrara A13,44.879338,11.570719
 FreeToX IT-Ferrara A13,44.880089,11.569079
 FreeToX IT-Fiorenzuola d´Arda Autostrada del Sole,44.962671,9.904396
 FreeToX IT-Fiorenzuola d´Arda Autostrada del Sole,44.962779,9.906498
+FreeToX IT-Garda,45.53945,10.7805
 FreeToX IT-Genova Autostrada Azzurra,44.39229,9.045102
 FreeToX IT-Genova Autostrada Azzurra,44.393339,9.046635
 FreeToX IT-La Pioppa,44.51832,11.21427
 FreeToX IT-La Pioppa,44.51948,11.21397
+FreeToX IT-Lainate Villoresi Est,45.55888,9.04232
 FreeToX IT-Melegnano Autostrada del Sole,45.321062,9.375328
 FreeToX IT-Melegnano Autostrada del Sole,45.32148,9.377207
 FreeToX IT-Milano Autostrada dei Laghi,45.762394,8.81088
 FreeToX IT-Milano Autostrada dei Laghi,45.762908,8.809596
 FreeToX IT-Modena Autostrada del Sole,44.661644,10.854855
 FreeToX IT-Modena Autostrada del Sole,44.662302,10.857942
+FreeToX IT-Novegro-Tregarezzo Airport,45.46183,9.27628
 FreeToX IT-Occimiano Autostrada dei Trafori,45.074668,8.510987
 FreeToX IT-Occimiano Autostrada dei Trafori,45.07481,8.5089
 FreeToX IT-Parma A1 Autostrada del Sole,44.8264,10.3782
 FreeToX IT-Parma A1 Autostrada del Sole,44.827142,10.379529
+FreeToX IT-Povegliano,45.29688,10.89767
 FreeToX IT-Prenestina,41.88951,12.75833
 FreeToX IT-Prenestina,41.89144,12.75891
 FreeToX IT-Riccione Autostrada Adriatica,43.994407,12.618552
@@ -13161,6 +13412,8 @@ FreeToX IT-Sarni Sangro,42.20058,14.56326
 FreeToX IT-Sarni Torre Fantine,41.908906,15.168545
 FreeToX IT-Sarni Torre Fantine,41.909696,15.168956
 FreeToX IT-Savignano sul Rubicone A14,44.116909,12.408965
+FreeToX IT-Sile,45.60774,12.29867
+FreeToX IT-Sile,45.60822,12.29718
 FreeToX IT-Stura,44.59223,8.66481
 FreeToX IT-Tirreno,42.02953,11.9622
 FreeToX IT-Tirreno,42.03131,11.9629
@@ -13185,6 +13438,8 @@ Freshmile FR-Soufflenheim Rue de Drusenheim,48.81953,7.96402
 Galp PT-Vouzela A25 / IP5,40.686186,-8.232199
 
 GardaUno IT-Limone sul Garda Via Lungolago Guglielmo Marconi,45.811562,10.793539
+
+GENOL AT-Mistelbach Wirtschaftspark,48.56421,16.63686
 
 GETEC DE-Bremen Waterfront,53.11118,8.74851
 
@@ -13237,6 +13492,7 @@ GOFAST CH-Raststätte Thurau,47.45969,9.0929
 GOFAST CH-Raststätte Thurau,47.46087,9.09472
 GOFAST CH-Raststätte Würenlos,47.43823,8.34658
 GOFAST CH-Raststätte Würenlos,47.43904,8.3481,60
+GOFAST CH-Rossens Rte de Montena,46.72121,7.0892,30
 GOFAST CH-Rothrist Neue Aarburgerstrasse,47.313995,7.894136
 GOFAST CH-Rotkreuz Blegistrasse,47.1478,8.43372
 GOFAST CH-Rümlang Flughofstrasse,47.450654,8.540002
@@ -13257,6 +13513,8 @@ GOFAST CH-Wettswil am Albis Moosstrasse,47.33446,8.45973
 GOFAST CH-Zuchwil Schützenweg,47.20174,7.5714,25
 GOFAST CH-Zug Industriestrasse,47.172383,8.517638
 GOFAST CH-Zürich Hohlstrasse,47.3906,8.49138
+
+GOplusEAuto PL-Kraków Praska,50.04758,19.91431
 
 GP-JOULE DE-Bad Herrenalb Ettlinger Straße,48.805337,8.444954
 GP-JOULE DE-Bad Vilbel Friedberger Straße,50.189,8.741028
@@ -13389,6 +13647,9 @@ GreenCharge DE-Wolgast Leeraner Straße,54.046819,13.753355
 GreenFlux IT-Pisa Via Fagiana,43.6884,10.43308
 GreenFlux NL-Amsterdam Sint Antoniesluis,52.369763,4.900891
 
+GreenMobility IT-Terlan Mebo,46.56361,11.21332
+
+GreenMotion AT-Neusiedl am See Am Hirschfeld,47.96772,16.83759
 GreenMotion CH-Bad Zurzach Dr. Martin Erb-Strasse,47.5877,8.28931
 GreenMotion CH-Baden Stadtturmstrasse,47.475367,8.306511
 GreenMotion CH-Basel St. Alban-Graben,47.55386,7.593068,30
@@ -13405,41 +13666,99 @@ GreenMotion CH-Täsch Alte Kantonsstrasse,46.06827,7.77528
 GreenMotion CH-Zug Grafenauweg,47.1745,8.5145
 
 GreenWay HR-Zagreb Alfreda Nobela,45.79344,16.152967
+GreenWay PL-Biała Podlaska Warszawska,52.03398,23.06812
 GreenWay PL-Białystok Produkcyjna,53.16004,23.09569
-Greenway PL-Bielsko-Biała,49.803432,19.049971
+GreenWay PL-Bielany Wrocławskie Czekoladowa,51.04657,16.96132
+GreenWay PL-Bielsko-Biała Leszczyńska,49.80343,19.04997
+GreenWay PL-Bolesławiec Lipiany,51.33801,15.63159
+GreenWay PL-Chromna E30,52.10826,22.38702
+GreenWay PL-Częstochowa Generała Leopolda Okulickiego,50.82453,19.09885
+GreenWay PL-Człuchów Koszalińska,53.67298,17.34735
+GreenWay PL-Elbląg Komorowo Żuławskie,54.10945,19.49901
 GreenWay PL-Elbląg Teatralna,54.16666,19.40024
 GreenWay PL-Gdańsk Jana Kilińskiego,54.382743,18.60472
+GreenWay PL-Gdańsk Obrońców Wybrzeża,54.40952,18.59369
+GreenWay PL-Gdańsk Powstańców Warszawskich,54.35779,18.6214
 GreenWay PL-Gdańsk Uczniowska,54.398962,18.630005
+GreenWay PL-Gdańsk Złota Karczma,54.37276,18.51926
 GreenWay PL-Gdynia Parkowa,54.47197,18.51477
+GreenWay PL-Gdynia Wielkopolska,54.47308,18.51288
+GreenWay PL-Gliwice Jana Nowaka-Jeziorańskiego,50.30669,18.64681
 GreenWay PL-Gniezno Gdańska,52.561835,17.609282
-Greenway PL-Grajewo,53.632866,22.475282
+GreenWay PL-Grajewo Białostocka,53.63287,22.47531
 GreenWay PL-Grudziądz Chełmińska,53.483724,18.747218
-Greenway PL-Góra Libertowska,49.980812,19.909254
-Greenway PL-Katowice Bytkowska,50.29134,19.005942
+GreenWay PL-Góra Libertowska,49.98081,19.90925
+GreenWay PL-Katowice Bytkowska,50.29134,19.00594
+GreenWay PL-Konin Szpitalna,52.19223,18.23329
+GreenWay PL-Kopytkowo Smarzewo,53.74107,18.63955
 GreenWay PL-Koszalin Wąwozowa,54.21049,16.18295
-Greenway PL-Kowale,54.309147,18.561917
+GreenWay PL-Kowale Glazurowa,54.30913,18.56193
+GreenWay PL-Kraków Listopada,50.07709,19.94619
+GreenWay PL-Kraków Stawowa,50.09163,19.89676
+GreenWay PL-Krosno Bieszczadzka,49.67429,21.77368
 GreenWay PL-Kąty Wrocławskie Handlowa,51.022945,16.760694
-Greenway PL-Lublin,51.282566,22.570069
-GreenWay PL-Mława Dzierzgowska,53.118103,20.39883
+GreenWay PL-Lublin Kupiecka,51.28257,22.57007,20
+GreenWay PL-Modlniczka Factory Kraków,50.11004,19.84776
+GreenWay PL-MOP Chojny,51.35748,18.52281
+GreenWay PL-MOP Dąbrowa Wielka,51.52717,18.69739
+GreenWay PL-MOP Głowno,52.00757,19.54433
+GreenWay PL-MOP Majdany Wielkie,53.79956,19.79108
+GreenWay PL-MOP Malankowo,53.34135,18.7067
+GreenWay PL-Mława Dzierzgowska,53.11809,20.39885,25
 GreenWay PL-Nagoszewka Druga Orchidea Zajazd,52.753641,21.786038
+GreenWay PL-Niedzica-Zamek Zamkowa,49.41947,20.32047
 GreenWay PL-Niepruszewo Brzozowa,52.37852,16.57757
+GreenWay PL-Nowy Ciechocinek,52.87073,18.75638
+GreenWay PL-Olszewo-Borki Warszawska,53.05351,21.52896
 GreenWay PL-Ostróda Plebiscytowa,53.7103,19.97735
 GreenWay PL-Osła A4,51.30325,15.72714
+GreenWay PL-Piotrków Trybunalski Aleje Generała Władysława Sikorskiego,51.40484,19.66026
+GreenWay PL-Piotrków Trybunalski Aleje Generała Władysława Sikorskiego,51.40835,19.64718
 GreenWay PL-Piła Bydgoska,53.151366,16.769576
+GreenWay PL-Poznań Torowa,52.36853,16.9882
+GreenWay PL-Promna-Kolonia E77,51.69861,20.929
+GreenWay PL-Przyłęk,52.33899,16.10809
+GreenWay PL-Płońsk Dalanówek,52.58943,20.45227
 GreenWay PL-Radomsko Portowa,51.084151,19.379532
 GreenWay PL-Rogów Opolski Posiłek,50.523265,17.918112
-Greenway PL-Ryki,51.639735,21.913078
+GreenWay PL-Ryki Warszawska,51.63974,21.91308
+GreenWay PL-Sieradz Wojska Polskiego,51.59701,18.72545
+GreenWay PL-Sokolniki Prusak,51.30802,18.36532
 GreenWay PL-Stargard Szczecińska,53.342263,14.992552
+GreenWay PL-Stryków DK14,51.88203,19.58462
+GreenWay PL-Sulbiny Bitumiczna,51.86768,21.64406
 GreenWay PL-Suwałki Generała Kazimierza Pułaskiego,54.125456,22.944129
+GreenWay PL-Szczecin Goleniowska,53.40825,14.69914
+GreenWay PL-Szczecin Ustowo,53.38479,14.50779
+GreenWay PL-Szczecinek Cieślaka,53.7094,16.70666
 GreenWay PL-Szczecinek Jana Pawła,53.710518,16.690281
 GreenWay PL-Słupia pod Bralinem,51.297194,17.77746
 GreenWay PL-Słupsk Szczecińska,54.45659,16.98742
+GreenWay PL-Tarnów Gemini Park,50.03004,21.00314
 GreenWay PL-Tarnów Lwowska,50.014223,21.011799
+GreenWay PL-Tczew Gdańska,54.10052,18.77899
+GreenWay PL-Torzym Sulęcińska,52.31886,15.08864
 GreenWay PL-Tychy Towarowa,50.09653,19.01107
-Greenway PL-Warszawa BMW,52.18526,21.00287
+GreenWay PL-Ujazd Irlandzka,50.46379,18.2768
+GreenWay PL-Warszawa Górczewska,52.24123,20.9291
+GreenWay PL-Warszawa Heliotropów,52.18493,21.13216
+GreenWay PL-Warszawa Modlińska,52.2947,21.00006
+GreenWay PL-Warszawa Westfield Mokotów,52.18054,21.00534
+GreenWay PL-Warszawa Wołoska,52.18527,21.00289
+GreenWay PL-Wejherowo I Brygady Pancernej Wojska Polskiego,54.60708,18.22386
 GreenWay PL-Woźniki Zachód,50.57587,19.04851
+GreenWay PL-Wrocław ARENA,51.09517,17.02889
+GreenWay PL-Wrocław Graniczna,51.10727,16.94841
+GreenWay PL-Wrocław Świętej Katarzyny,51.10989,17.03806
 GreenWay PL-Wyszków aleja Piłsudskiego,52.601506,21.439874
+GreenWay PL-Zabrze Plutonowego Ryszarda Szkubacza,50.31778,18.75321
+GreenWay PL-Zakopane Tytusa Chałubińskiego,49.28536,19.97183
+GreenWay PL-Zgorzelec Słowiańska,51.16182,15.02846
 GreenWay PL-Łaziska Powstańców Śląskich,49.94362,18.430292
+GreenWay PL-Łyszkowice Kościelna,51.98566,19.91046
+GreenWay PL-Łódź Aleksandra Puszkina,51.75215,19.53338
+GreenWay PL-Świecie Morsk,53.41846,18.47478
+GreenWay PL-Świnoujście Skandynawska,53.90239,14.27527
 GreenWay SK-Banská Bystrica Na Troskách,48.731089,19.135867,8
 GreenWay SK-Košice Moldavská cesta,48.70027,21.24055
 GreenWay SK-Košťany nad Turcom,49.03429,18.90843
@@ -13610,8 +13929,10 @@ IECharge FR-Rue Chem. des Joncs,50.26372,1.69225
 
 Ignitis LT-Klaipėda Baltijos pr.,55.68572,21.15422
 Ignitis LT-Raseinių Gabšiai,55.3399,23.09851
+Ignitis LT-Rokiškis Respublikos g.,55.94649,25.58947
 Ignitis LT-Vilnius Birutės g.,54.692063,25.246066
 
+IKB AT-Innsbruck DEZ,47.26221,11.42823,25
 IKB AT-Innsbruck Salurner Straße,47.262477,11.397359
 IKB AT-Schönberg im Stubaital Europabrücke-Parkplatz,47.197433,11.397733
 
@@ -13671,24 +13992,54 @@ IKEA IT-Rimini,44.0783,12.47641
 IKEA IT-Torino Collegno,45.09846,7.58054
 IKEA SE-Umeå,63.80821,20.25179,25
 
+illwerke-vkw AT-Andelsbuch Bühel,47.40253,9.87906
+illwerke-vkw AT-Andelsbuch Hof,47.41172,9.89385
+illwerke-vkw AT-Anif Waldbadstraße,47.73691,13.07043
 illwerke-vkw AT-Argenau Au,47.322021,9.980906
+illwerke-vkw AT-Bezau Platz,47.38408,9.90052
+illwerke-vkw AT-Bludenz Werdenbergerstraße,47.15737,9.81759
+illwerke-vkw AT-Bregenz Kennelbacherstraße,47.49271,9.74209
+illwerke-vkw AT-Bregenz Landstraße,47.49162,9.73957
+illwerke-vkw AT-Bregenz Seestraße,47.50551,9.74837
 illwerke-vkw AT-Bregenz Weidachstraße,47.488331,9.740697,10
 illwerke-vkw AT-Bregenz Weidachstraße,47.488431,9.74042,10
 illwerke-vkw AT-Bürs Bremschlstraße,47.151734,9.81568
+illwerke-vkw AT-Dornbirn Dr. Anton-Schneider-Straße,47.42386,9.74962
+illwerke-vkw AT-Dornbirn Grabenweg,47.41633,9.74044
 illwerke-vkw AT-Dornbirn Messestraße,47.41163,9.71053
+illwerke-vkw AT-Dornbirn Schwefel,47.42965,9.74112
+illwerke-vkw AT-Dornbirn Sparkassenplatz,47.41488,9.74086
 illwerke-vkw AT-Egg Pfister,47.42779,9.89642
+illwerke-vkw AT-Feldkirch Mühletorplatz,47.23577,9.59624
 illwerke-vkw AT-Feldkirch Rösslepark,47.235391,9.598664
 illwerke-vkw AT-Gargellen Bergbahnstraße,46.967949,9.919269
 illwerke-vkw AT-Gargellen Bergbahnstraße,46.968298,9.918903
 illwerke-vkw AT-Hittisau Platz,47.45695,9.96042
+illwerke-vkw AT-Hittisau Platz,47.45838,9.95963
 illwerke-vkw AT-Hohenems Diepoldsauer Straße,47.374075,9.674825
+illwerke-vkw AT-Hörbranz Amerikaweg,47.54533,9.73745
+illwerke-vkw AT-Kappl Silvrettastraße,47.03906,10.33163
 illwerke-vkw AT-Krumbach Dorf,47.48366,9.93458
+illwerke-vkw AT-Krumbach Ladau,47.48959,9.93298
+illwerke-vkw AT-Langenegg Bach,47.46845,9.89691
 illwerke-vkw AT-Lingenau Hof,47.44998,9.91903
+illwerke-vkw AT-Lingenau Hof,47.45073,9.9216
+illwerke-vkw AT-Lochau Pfänderstraße,47.53004,9.75233
+illwerke-vkw AT-Lustenau Pfarrweg,47.42643,9.65965
+illwerke-vkw AT-Mellau Platz,47.34869,9.87928
+illwerke-vkw AT-Nenzing Bahnhofstraße,47.18689,9.70837
 illwerke-vkw AT-Partenen Silvretta Hochalpenstraße,46.917498,10.093155
 illwerke-vkw AT-Rankweil Langgasse,47.272062,9.61733
 illwerke-vkw AT-Riefensberg Dorf,47.504448,9.963311
+illwerke-vkw AT-Riefensberg Meierhof,47.49842,9.94627
+illwerke-vkw AT-Schnepfau Schnepfegg,47.35603,9.94762
+illwerke-vkw AT-Schoppernau Unterdorf,47.3118,10.01617
 illwerke-vkw AT-Schwarzenberg Hof,47.413951,9.855151
+illwerke-vkw AT-Sibratsgfäll Dorf,47.42786,10.03665
 illwerke-vkw AT-Silbertal Dorfstraße,47.094353,9.980518
+illwerke-vkw AT-Sulzberg Dorf,47.52084,9.91332
+illwerke-vkw AT-Sulzberg Dorf,47.52137,9.91422
+illwerke-vkw AT-Wolfurt Brückenweg,47.48135,9.74314
 illwerke-vkw DE-Lindenberg im Allgäu Sedanstraße,47.602733,9.883529
 
 Innocept DE-Köln Heinrichshofweg,51.040897,6.904807
@@ -13949,10 +14300,10 @@ Ionity AT-Kaiserwald,46.959244,15.382045
 Ionity AT-Klösterle,47.129066,10.060559
 Ionity AT-Meggenhofen Trappenhof,48.18382,13.78581,20
 Ionity AT-Meggenhofen Trappenhof,48.18383,13.78539,20
-Ionity AT-Mondsee,47.836599,13.395919
 Ionity AT-Nassereith,47.327313,10.819309
 Ionity AT-Parndorf Richard Erlinger Platz,47.975945,16.854379
 Ionity AT-Pinkafeld,47.373952,16.093842
+Ionity AT-Raststätte Mondsee,47.83664,13.39583,30
 Ionity AT-St. Lorenzen im Mürztal,47.46875,15.34432,25
 Ionity AT-St. Valentin,48.19637,14.52835,16
 Ionity AT-Steinhäusl,48.157839,15.940398
@@ -14348,7 +14699,7 @@ Ionity IT-Les Iles de Brissogne,45.73734,7.40525
 Ionity IT-Les Îles de Brissogne,45.73734,7.40525
 Ionity IT-Mondovì,44.42,7.8501
 Ionity IT-Monselice,45.2374,11.76287
-Ionity IT-Montecchio Maggiore,45.50105,11.43627
+Ionity IT-Montecchio Maggiore,45.50143,11.43584
 Ionity IT-Piacenza,45.02694,9.73478
 Ionity IT-Portogruaro,45.79725,12.81914
 Ionity IT-Potenza,40.63193,15.81358
@@ -14402,11 +14753,15 @@ Ionity NO-Vik,60.083312,10.287055
 Ionity NO-Åndalsnes,62.55773,7.687378,40
 Ionity NO-Øyer,61.24315,10.43481,12
 Ionity PL-Kaszewy Kóscielne (Kutno),52.219064,19.461939
+Ionity PL-Koszalin Przemysłowa,54.20244,16.15838
+Ionity PL-MOP Olsze,53.88682,18.63083
+Ionity PL-MOP Olsze,53.88925,18.63086
 Ionity PL-Poznan MOP Nowostawy,51.900409,19.706499,30
 Ionity PL-Poznań Bolesława Krzywoustego,52.352146,16.998626
 Ionity PL-Radomsko Portowa,51.082015,19.37508
 Ionity PL-Rzędziwojowice A4 Highway MOP Mlynski Staw,50.676777,17.657357
 Ionity PL-Rzędziwojowice A4 Highway MOP Mlynski Staw,50.677422,17.650864
+Ionity PL-Skawina Stanisława Chmielka,49.98933,19.83585
 Ionity PL-Tatary National Road,53.335569,20.436557
 Ionity PL-Warsaw MOP Nowostawy Dolne,51.897492,19.706819
 Ionity PL-Wierzbocice DW466,52.249889,17.821525
@@ -14459,12 +14814,14 @@ IZIVIA FR-Aix-les-Bains Avenue Daniel Rops,45.694245,5.896935
 IZIVIA FR-Bordeaux Cr Charles Bricaud,44.88841,-0.56182
 IZIVIA FR-Bretteville-sur-Odon Av. du Fresne,49.16436,-0.42333,25
 IZIVIA FR-Cournon-d’Auvergne Av. Maréchal Leclerc,45.73998,3.17278,30
+IZIVIA FR-Dunkerque Av. du Stade,51.03307,2.39317
 IZIVIA FR-Lyon Rue Jean Marcuit,45.788684,4.814377
 IZIVIA FR-Munster Rue Hilti,48.044282,7.160577
 IZIVIA FR-Niort Avenue de la Rochelle,46.312624,-0.478912
 IZIVIA FR-Roye Rue Colones Sorlin,49.70751,2.77407
 IZIVIA FR-Saint-Valery-sur-Somme Cavée Lévêque,50.17327,1.63742
 
+JET AT-Wien Laxenburger Straße,48.1358,16.35648
 JET DE-Bielefeld Eckendorfer Straße,52.03283,8.552652
 JET DE-Füssen Kemptener Straße,47.5686,10.6885
 JET DE-Giengen an der Brenz Frostelstraße,48.610979,10.210743
@@ -14723,6 +15080,7 @@ Kaufland DE-Lahr/Schwarzwald Offenburger Straße 11,48.344966,7.841325
 Kaufland DE-Leinefelde Bahnhofstraße,51.387747,10.32775
 Kaufland DE-Leipzig,51.33711,12.336445
 Kaufland DE-Leipzig Anton-Zickmantel-Straße,51.303693,12.323066
+Kaufland DE-Leipzig Dresdner Straße,51.33685,12.40447
 Kaufland DE-Leipzig Dresdner Straße,51.33763,12.404982
 Kaufland DE-Leipzig Georg-Schumann-Straße,51.373025,12.32891
 Kaufland DE-Leipzig Torgauer Straße,51.36845,12.45879
@@ -14876,10 +15234,13 @@ Kaufland HR-Sesvete Bistrička ul.,45.83341,16.10836
 Kaufland HR-Umag Novigradska ulica,45.423808,13.527193
 Kaufland PL-Brodnica,53.25931,19.39631
 Kaufland PL-Gdynia Morska,54.52951,18.50433
+Kaufland PL-Sanok Królowej Bony,49.5667,22.20706
 Kaufland PL-Szczecin Andrzeja Struga,53.38489,14.65884
 Kaufland PL-Szczecin Floriana Krygiera,53.392323,14.498953
 Kaufland PL-Wałbrzych Długa,50.812398,16.279914
 Kaufland PL-Wałbrzych Długa,50.81247,16.279943
+Kaufland PL-Wrocław Legnicka,51.12253,16.98916
+Kaufland PL-Zielona Góra Lwowska,51.93651,15.51666
 Kaufland RO-Bacau,46.53851,26.91228
 Kaufland RO-Balș,44.343806,24.124408
 Kaufland RO-Bistrița,47.146204,24.513572
@@ -14931,17 +15292,27 @@ Kaufland SK-Nitra Zlatomoravecká,48.318215,18.116295
 Kaufland SK-Senec Brezová,48.22463,17.403691
 Kaufland SK-Trnava Trstínska cesta,48.387152,17.574667
 
+KEBA AT-Döbriach Strandweg,46.77193,13.64591
+KEBA AT-Linz Gewerbepark Urfahr,48.31767,14.28739
+KEBA AT-Linz Gewerbepark Urfahr,48.31788,14.28706
+KEBA AT-Matrei in Osttirol Europastraße,46.99073,12.54342
+
 KELAG AT-Arnoldstein Dreiländereck,46.57118,13.69732
 KELAG AT-Flattach Kleindorf,46.93568,13.11005
+KELAG AT-Haimburg IGP Süd Völkermarkt,46.68216,14.67627
 KELAG AT-Kammern Pyhrn Autobahn,47.386094,14.899993
 KELAG AT-Klagenfurt Arnulfplatz,46.620712,14.310094
 KELAG AT-Rammersdorf Völkermarkt,46.679359,14.595504
 KELAG AT-Raststation Eben,47.4209,13.38188
 KELAG AT-Raststation Wörthersee,46.62995,14.09486,25
+KELAG AT-Saag Klagenfurter Straße,46.62277,14.07299
+KELAG AT-Spittal an der Drau Zernattostraße,46.79864,13.49021
 KELAG AT-St. Veit an der Glan Kalten Kellerstraße,46.765773,14.377244
 KELAG AT-St. Veit an der Glan Völkermarkter Straße,46.765281,14.369795
 KELAG AT-Velden Villacher Straße,46.6141,14.03883
 KELAG AT-Villach Maria-Gailer-Straße,46.60398,13.86929,12
+KELAG AT-Wien Gutheil-Schoder-Gasse,48.16241,16.3402
+KELAG AT-Wolfsberg Gemmersdorfer Straße,46.81774,14.85132
 
 Kia BG-Sofia Gorublyane Mladost,42.636691,23.415721
 
@@ -14952,6 +15323,7 @@ KommEnergie DE-Puchheim Aubinger Weg,48.169572,11.36394
 KommEnergie DE-Puchheim Aubinger Weg,48.169599,11.362819
 
 Kople NO-Andenes Industriveien,69.310198,16.098938
+Kople NO-Finnsnes Sjøgata,69.23112,18.00356,60
 Kople NO-Hammerfest Jernbanetrasken,70.66394,23.67754
 
 KOS IT-Varna Forch Straße,46.759149,11.63778,12
@@ -14966,6 +15338,7 @@ KW-Main-Kinzig DE-Bad Orb Würzburger Straße,50.227531,9.349265
 
 kWatt SE-Kiruna Österleden,67.84465,20.25528
 
+KWMS AT-Finkenstein Strand-Nord,46.5723,13.93277
 KWMS AT-Fusch Ferleiten,47.168672,12.813372
 
 LADEFIX DE-Aue Wettinerstraße,50.586075,12.700782
@@ -15155,10 +15528,12 @@ Lidl AT-Bad Radkersburg,46.689869,15.982148
 Lidl AT-Brunn am Gebirge Leopold-Gattringer-Straße,48.113048,16.273394
 Lidl AT-Dornbirn,47.409717,9.725804
 Lidl AT-Engerwitzdorf,48.347284,14.411782
+Lidl AT-Feldkirch Kaiserstraße,47.25996,9.61533
 Lidl AT-Frastanz,47.223951,9.620142
 Lidl AT-Gleisdorf,47.111567,15.708227
 Lidl AT-Gmunden,47.929019,13.788997
 Lidl AT-Graz,47.099401,15.417457
+Lidl AT-Guntramsdorf Kammeringstraße,48.052,16.30759
 Lidl AT-Gänserndorf Neusiedler Straße,48.33465,16.71162,30
 Lidl AT-Götzis,47.341072,9.652542
 Lidl AT-Hall in Tirol,47.277601,11.495474
@@ -15169,6 +15544,7 @@ Lidl AT-Klagenfurt Feldkirchner Straße,46.629623,14.3034
 Lidl AT-Klagenfurt Flatschacher Straße,46.608313,14.311609
 Lidl AT-Laakirchen,47.985988,13.813869
 Lidl AT-Landwiedstraße,48.26602,14.287816
+Lidl AT-Leitendorf Kärntner Straße,47.37253,15.08793
 Lidl AT-Leonding,48.247654,14.239852
 Lidl AT-Linz,48.25415,14.282992
 Lidl AT-Lustenau,47.420717,9.661155
@@ -15176,14 +15552,16 @@ Lidl AT-Mauthausen,48.246916,14.502228
 Lidl AT-Mistelbach,48.562883,16.577442
 Lidl AT-Niederalm,47.733169,13.064658
 Lidl AT-Oberpullendorf,47.49569,16.509893
-Lidl AT-Salzburg Aigner Straße,47.79076,13.075131
-Lidl AT-Salzburg Bahnhofstraße,47.823506,13.051982
+Lidl AT-Reutte Innsbrucker Straße,47.48181,10.72477
+Lidl AT-Salzburg Aigner Straße,47.79047,13.07566,20
+Lidl AT-Salzburg Bahnhofstraße,47.82351,13.05198,60
 Lidl AT-Salzburg Münchener Bundesstraße,47.817517,13.019284
 Lidl AT-Salzburg Robinigstraße,47.809423,13.058905
 Lidl AT-Salzburg Siezenheimer Straße,47.805782,13.009089
 Lidl AT-Schärding,48.450562,13.437096
 Lidl AT-Sierning,48.040628,14.314362
 Lidl AT-Spittal an der Drau,46.793874,13.495784
+Lidl AT-St. Egidi Römersiedlung,47.1114,14.18671
 Lidl AT-St. Pölten,48.205618,15.638888
 Lidl AT-St. Valentin,48.182093,14.521351
 Lidl AT-Steyr,48.026208,14.418286
@@ -15191,12 +15569,13 @@ Lidl AT-Steyr Ennser Straße,48.055164,14.420965
 Lidl AT-Treffen,46.652093,13.875587
 Lidl AT-Villach,46.618646,13.860427
 Lidl AT-Voitsberg,47.054272,15.138175
-Lidl AT-Weiz,47.216192,15.630316
+Lidl AT-Weiz Herta-Nest-Straße,47.21642,15.62909
 Lidl AT-Wels,48.164524,14.034472
 Lidl AT-Wernberg,46.621155,13.942641
 Lidl AT-Wien Breitenfurter Straße,48.140738,16.291546
 Lidl AT-Wien Davidgasse,48.173558,16.366361
 Lidl AT-Wien Erzherzog-Karl-Straße,48.224582,16.469875
+Lidl AT-Wien Jedletzbergerstraße,48.17042,16.45824
 Lidl AT-Wien Laxenburgerstr.,48.163719,16.36824
 Lidl AT-Wien Leberstraße,48.176846,16.407076
 Lidl AT-Wien Linzer Straße,48.203644,16.240203
@@ -15875,6 +16254,7 @@ Lidl FI-Vantaa Murmelikuja,60.34516,25.10519
 Lidl FI-Vantaa Säätökuja,60.27424,24.9688
 Lidl FR-Ambérieu-en-Bugey Av. de la Libération,45.96591,5.33842
 Lidl FR-Amilly Rte de Saint-Firmin des Vignes,47.97759,2.73617
+Lidl FR-Bagnols-sur-Cèze Rte d’Avignon,44.15236,4.64764
 Lidl FR-Beaune Bd Clemenceau,47.02239,4.8308
 Lidl FR-Bitche Rue de la Gare,49.048803,7.431454
 Lidl FR-Crolles Rue du Moulin,45.27482,5.88429,30
@@ -15935,16 +16315,24 @@ Lidl LU-Schmëtt Huldange Troisvierges,50.181824,6.023547
 Lidl NL-Almere Daniël Goedkoopstraat,52.37545,5.29279
 Lidl NL-Weert Keulerstraat,51.24407,5.69604
 Lidl NL-Zierikzee Haringvlietplein,51.652977,3.91038
+Lidl PL-Braniewo Królewiecka,54.38893,19.83462
 Lidl PL-Dąbrówka,52.376433,16.742482
 Lidl PL-Giżycko Bohaterów Westerplatte,54.03546,21.77894
+Lidl PL-Kąty Wrocławskie Handlowa,51.0243,16.76048
+Lidl PL-Leszno,51.84837,16.58207
 Lidl PL-Poznań,52.41669,16.890348
 Lidl PL-Poznań,52.44325,16.94678
 Lidl PL-Rokietnica,52.507335,16.737923
+Lidl PL-Rudno Handlowa,51.79681,15.68216
+Lidl PL-Sanok Kochanowskiego,49.55615,22.20598
 Lidl PL-Stegna Elbląska,54.32538,19.111632
+Lidl PL-Szczecin Plac Brama Portowa,53.42443,14.55007
 Lidl PL-Toruń,53.017489,18.63476
 Lidl PL-Warszawa Mieczysława Pożaryskiego,52.20724,21.17303
 Lidl PL-Warszawa Modlińska,52.303601,20.987223
 Lidl PL-Warszawa Puławska,52.108992,21.017513
+Lidl PL-Warszawa Trakt Lubelski,52.22266,21.13831
+Lidl PL-Zakopane Juliusza Zborowskiego,49.29597,19.95271
 Lidl RO-Bacău,46.574476,26.932243
 Lidl RO-Baia Mare,47.643121,23.571317
 Lidl RO-Botoșani,47.746699,26.668038
@@ -15982,6 +16370,7 @@ Lidl SE-Falkenberg,56.91611,12.502524
 Lidl SE-Oskarshamn Hantverksgatan,57.25968,16.45708
 Lidl SE-Sollentuna Djupdalsvägen,59.44547,17.95535
 Lidl SI-Brežice Cesta svobode,45.90429,15.60285
+Lidl SI-Ilirska Bistrica Vilharjeva cesta,45.57245,14.23774
 Lidl SI-Postojna Reška cesta,45.77068,14.19829,15
 Lidl SK-Galanta Esterházyovcov,48.194772,17.735124
 Lidl SK-Komárno,47.7645,18.094663
@@ -15992,16 +16381,27 @@ Liebevoll DE-Ratingen Auermühle,51.306334,6.8797
 
 LIFF EE-Pärnu Niidu tn,58.39297,24.54008
 
+Linz AT-Ansfelden Traunuferstraße,48.21556,14.27953
+Linz AT-Freistadt Promenade,48.51337,14.50295
+Linz AT-Gmunden Druckereistraße,47.92534,13.78839
 Linz AT-Haselbach Erlachweg,48.25092,13.04697
+Linz AT-Leonding Kornstraße,48.25847,14.25449
+Linz AT-Linz Bahnhofplatz,48.29014,14.28962
 Linz AT-Linz Derfflingerstraße,48.308067,14.310401
 Linz AT-Linz Industriezeile,48.301408,14.319432
+Linz AT-Linz Khevenhüllerstraße,48.30076,14.30124
+Linz AT-Linz Wiener Straße,48.28083,14.30952
+Linz AT-Linz Ziegeleistraße,48.29116,14.2749
 Linz AT-Mittertreffling Johann-Wöckinger-Straße,48.337237,14.367777
 Linz AT-Puchenau Golfplatzstraße,48.310791,14.233391
 Linz AT-Sierning Gewerbestraße,48.035646,14.314642
+Linz AT-Walding Gewerbepark,48.34604,14.16071
 
 Ljusdal-Energi SE-Kårböle Härjedalsvägen,61.98695,15.30037
 
+LM-Energy AT-Innsbruck Amraser-See-Straße,47.26071,11.42134
 LM-Energy AT-Seeboden Hauptstraße,46.816517,13.510438
+LM-Energy AT-Straßwalchen Braunauerstraße,47.98831,13.24927
 
 Losch LU-Echternach Rte de Luxembourg,49.808914,6.411744
 
@@ -16061,10 +16461,13 @@ Mainova DE-Waldbrunn (Westerwald) In der Struth,50.51855,8.109852
 
 Malanka BY-Minsk vulica Uladzislava Halubka,53.92613,27.44256
 
+MAN AT-Leopoldsdorf MAN-Straße,48.09976,16.39722
+
 Mark-E DE-Hagen Bahnhofstraße,51.359833,7.468871
 
 MB DE-Aurich Korbweidenstraße,53.45056,7.50673
 MB DE-Butzbach In der Alböhn,50.42942,8.68306
+MB DE-Ludwigsfelde Gottlieb-Daimler-Straße,52.32867,13.273
 MB DE-Mannheim Gottlieb-Daimler-Straße,49.475862,8.495459
 MB DE-Stuttgart Siemensstraße,48.81003,9.180705,15
 MB US-Waller TX US 290 Frontage Rd,30.07166,-95.9309
@@ -16084,22 +16487,42 @@ MENNEKES DE-Kirchhundem Industriestraße,51.038666,7.997107
 MENNEKES DE-Langgöns Hauptstraße,50.461496,8.584555
 MENNEKES DE-Trebbin Markt,52.21471,13.21384
 
+Mer AT-Allhaming Poststraße,48.15352,14.15817
 Mer AT-Ansfelden Haider Straße,48.211118,14.279784,25
 Mer AT-Brunn am Gebirge Wienerstraße,48.112659,16.30259,30
+Mer AT-Deutsch-Wagram Dammstraße,48.30325,16.57714
 Mer AT-Ebreichsdorf Betriebsring,47.983231,16.396287
 Mer AT-Eisenstadt Handelsstraße,47.828805,16.531741
+Mer AT-Feldkirchen in Kärnten Gurktalerstraße,46.73119,14.09518
+Mer AT-Frauenhofen Wiener Straße,48.66573,15.63357
 Mer AT-Gmunden Aubauerstraße,47.93097,13.78547
+Mer AT-Graz Plüddemanngasse,47.06405,15.465
+Mer AT-Haag am Hausruck Geierau,48.19952,13.64239
 Mer AT-Hohenems Diepoldsauer Straße,47.373721,9.675551
+Mer AT-Korneuburg Stockerauer Straße,48.35889,16.31184
 Mer AT-Leoben Am Tivoli,47.37651,15.08932
+Mer AT-Leobersdorf Europastraße,47.93148,16.20426
 Mer AT-Linz Freistädter Straße,48.3292,14.31256
 Mer AT-Linz Wegscheider Straße,48.254318,14.281426,40
+Mer AT-Lustenau Sägerstraße,47.41796,9.67112
+Mer AT-Neusiedl am See Wiener Straße,47.97165,16.83809
+Mer AT-Rohrbach Volksfeststraße,48.56651,13.98278
+Mer AT-Rum Kaplanstraße,47.27711,11.4562
+Mer AT-Schlitters Gewerbegebiet Nord,47.38126,11.8331
+Mer AT-Schwechat Franz Schubert-Straße,48.13824,16.47846
+Mer AT-Spital am Semmering McDonald´s Straße,47.6028,15.71945
 Mer AT-Steyr Haratzmüllerstraße,48.042574,14.4354
 Mer AT-Steyr Marlen-Haushofer-Straße,48.055112,14.422656
 Mer AT-Telfs Untermarktstraße,47.307807,11.076695
+Mer AT-Tulln an der Donau Königstetter Straße,48.31984,16.08209
+Mer AT-Unterweitersdorf Radingdorf,48.35939,14.48012
 Mer AT-Wien Hadikgasse,48.19301,16.27555,20
 Mer AT-Wien Hietzinger Kai,48.19169,16.27922,20
+Mer AT-Wien Triester Straße,48.16546,16.34595
 Mer AT-Wiener Neustadt Nikolaus-August-Otto-Straße,47.843871,16.246763
 Mer AT-Ybbs Bergland Center,48.160658,15.106513
+Mer AT-Zell am See Prof.-F.-Porsche-Straße,47.29585,12.79571
+Mer AT-Zwettl Andre Freyskorn Straße,48.60187,15.18669
 Mer DE-Abensberg Max Bronold Straße,48.813818,11.845554
 Mer DE-Abensberg Straubinger Straße,48.811093,11.858045
 Mer DE-Abensberg Zöttlparkplatz Weinbergerstraße,48.815745,11.848307
@@ -16262,6 +16685,7 @@ MOL RO-Ilia A1,45.947561,22.651971
 MOL RO-Ilia A1,45.948194,22.654306
 MOL SK-Senec Bratislavská,48.2133,17.38219
 
+Monta AT-Burgfried Böhmer Straße,48.52589,14.29368
 Monta DE-Egling St2070,47.923998,11.488849
 Monta DE-Hafenlohr Bahnhofstraße,49.86712,9.6031
 Monta DE-München Frankfurter Ring,48.18624,11.60598,25
@@ -16274,11 +16698,17 @@ MOON AT-Bärnbach Packer Straße,47.054591,15.137164
 MOON AT-Bärnbach Packer Straße,47.054634,15.136206
 MOON AT-Feldkirchen Flughafenstraße,46.996772,15.445322
 MOON AT-Herzogenburg Wiener Straße,48.281063,15.716759
+MOON AT-Hollabrunn Gewerbering,48.57998,16.07557
 MOON AT-Köflach Grazerstraße,47.062856,15.088075
 MOON AT-Mistelbach Ernstbrunnerstraße,48.557928,16.562185
 MOON AT-Neusiedl Josef Kamper Straße,47.971205,16.853501
 MOON AT-Pöllan Gewerbepark,46.696503,13.644015
 MOON AT-Spittal an der Drau Villacher Straße,46.792623,13.508709
+MOON AT-St. Gallenkirch Valiserabahnstraße,47.02267,9.96395
+MOON AT-Tarsdorf Weilhartstraße,48.07886,12.82685
+MOON AT-Umhausen Niederthai,47.12481,10.96205
+MOON AT-Wien Harry-Glück-Platz,48.16716,16.34891
+MOON AT-Wien Ketzergasse,48.13058,16.29811
 MOON DE-Anger Hauptstraße,47.790725,12.869243
 MOON DE-Augsburg Donaustraße 8,48.375551,10.931804
 MOON DE-Bad Kötzting Lehmgasse 14,49.173259,12.865033
@@ -16507,15 +16937,31 @@ naturenergie DE-Waldshut-Tiengen Nikolaus-Otto-Straße,47.6202,8.253457
 Naturstrom DE-Bad Zwischenahn Am Badepark,53.186,7.99886
 
 Neogy IT-Arco Via S. Pietro,45.918146,10.887132
+Neogy IT-Baveno Via Edelweiss,45.91414,8.50145
+Neogy IT-Bolzano Piavestraße,46.49982,11.35846
 Neogy IT-Bozen Marco Polo Straße,46.473123,11.326097
+Neogy IT-Braies St.Veit,46.70516,12.08684
+Neogy IT-Brunico Nordring,46.80004,11.93291
+Neogy IT-Brunico Via Andreas Hofer,46.80275,11.93864
 Neogy IT-Castelrotto - Kastelruth Seis Schlernstraße,46.540455,11.564826
+Neogy IT-Dobbiaco Pustertaler Straße,46.72931,12.21911
 Neogy IT-Eppan an der Weinstraße Kalterer Straße,46.440278,11.25971
+Neogy IT-Kurtinig Weinstraße,46.26909,11.22297
 Neogy IT-Marlengo Franz Innerhofer Straße,46.655659,11.14103
+Neogy IT-Meran Rennstallweg,46.65586,11.14929
+Neogy IT-Montagna Dolomitenstraße,46.33299,11.30066
 Neogy IT-Partschins Wasserfallweg,46.684464,11.072104
 Neogy IT-Piazza Catena Riva del Garda,45.883382,10.838777
+Neogy IT-Prato Allo Stelvio Spondigna,46.63429,10.61133
 Neogy IT-Rablà Vicolo Gerold,46.669743,11.059455
+Neogy IT-Rasun-Anterselva Obertaler Straße,46.88434,12.15446
+Neogy IT-Reiperting Seilbahnstraße,46.77296,11.94256
+Neogy IT-Riva del Garda Viale Rovereto,45.87839,10.85721
+Neogy IT-Salurn Staatsstraße,46.24071,11.20838
+Neogy IT-Salò Via Zane,45.60472,10.51514
 Neogy IT-San Martino in Badia Str. Picolin,46.692556,11.892488
 Neogy IT-Vipiteno Piazza Canonico Michael Gamper,46.898872,11.429214
+Neogy IT-Welschnofen Karerseestraße,46.43106,11.54429
 
 Neste FI-Hankasalmi Pieksämäentie,62.357625,26.571546
 Neste FI-Lapinlahti Kuopiontie,63.348083,27.413686
@@ -16705,6 +17151,7 @@ NewMotion NL-Maarssen Industrieweg,52.12747,5.03937
 Next-e SK-Budča,48.568138,19.06033
 Next-e SK-Budča,48.568762,19.06073
 
+Nissan AT-Graz Schießstattgasse,47.06276,15.43847
 Nissan DE-Ahrensburg An der Strusbek,53.68379,10.26576,25
 Nissan DE-München Zamdorfer Straße,48.138678,11.642689
 Nissan DE-Neustadt in Holstein Eutiner Straße,54.10199,10.799542
@@ -16840,7 +17287,12 @@ OKQ8 SE-Örnsköldsvik Härnösandsvägen,63.29173,18.7059,10
 
 OMV AT-Alland Gewerbestraße,48.06799,16.06332
 OMV AT-Deutsch-Wagram S1 Ost,48.310754,16.515215
+OMV AT-Dornbirn Schwefel,47.42823,9.7398
+OMV AT-Feldkirchen in Kärnten 10.-Oktober-Straße,46.72298,14.09707
+OMV AT-Frauenhofen Wiener Straße,48.6654,15.6329
 OMV AT-Gföhl Langenloiser Straße,48.51218,15.51018
+OMV AT-Haag Straße zur Autobahn,48.11527,14.57095
+OMV AT-Raststation Deutschfeistritz,47.20517,15.31583
 OMV HU-Budapest Sibrik Miklós út,47.469994,19.156208
 OMV HU-Pécs Siklósi út,46.057065,18.232504
 OMV HU-Révfülöp Badacsonyi út hrsz.,46.826208,17.605703
@@ -16866,11 +17318,34 @@ ORLEN DE-St. Peter-Ording Bövergeest,54.305707,8.647567
 ORLEN DE-Vogelsdorf Frankfurter Chaussee,52.50097,13.73274
 ORLEN DE-Zella-Mehlis Am Köhlersgehäu,50.64472,10.68638,25
 ORLEN PL-Bolesławiec Łąka,51.307855,15.570017
+ORLEN PL-Bytom Chorzowska,50.31871,18.94557
+ORLEN PL-Częstochowa Świętej Barbary,50.80284,19.08761
+ORLEN PL-Goleniów Wolińska,53.56867,14.83214
 ORLEN PL-Kraśnik Dolny Dąbrowa Bolesławiecka A4,51.317032,15.596647
+ORLEN PL-Miastko Marii Konopnickiej,54.0049,16.9844
 ORLEN PL-Michałowice Łosice,51.224611,17.200275
+ORLEN PL-MOP Jaworzno,50.14953,19.30122
+ORLEN PL-MOP Kołbaskowo,53.3367,14.42164
+ORLEN PL-MOP Kołbaskowo,53.33848,14.42308
+ORLEN PL-MOP Paszczyna Północ,50.09793,21.52051
+ORLEN PL-MOP Pawliki,53.2995,20.43715
+ORLEN PL-MOP Rudniki Południe,53.99783,22.82569
+ORLEN PL-MOP Sosna,52.32416,14.65298
+ORLEN PL-MOP Wieszowa,50.3705,18.7414
+ORLEN PL-MOP Wiśniowa Góra,51.70161,19.60419
 ORLEN PL-Mrągowo Olsztyńska,53.86022,21.282814
 ORLEN PL-Olsztyn Aleja Generała Władysława Sikorskiego,53.758446,20.487395
+ORLEN PL-Poznań Ludwika Zamenhofa,52.38367,16.943
+ORLEN PL-Płońsk Warszawska,52.6139,20.38606
+ORLEN PL-Sianów Łubuszan,54.23106,16.30848
 ORLEN PL-Szumowo Antoniego Kozłowskiego,52.908154,22.093038
+ORLEN PL-Toruń Łódzka,52.99236,18.63384
+ORLEN PL-Warszawa Ostrobramska,52.2366,21.08777
+ORLEN PL-Wierzchosławice,50.01712,20.86193
+ORLEN PL-Wrocław Szybowcowa,51.13041,16.96656
+ORLEN PL-Zielona Góra Głogowska,51.90433,15.58642
+ORLEN PL-Łączyn E77,50.62318,20.28394
+ORLEN PL-Świebodzin Wojska Polskiego,52.26022,15.53348
 
 OVAG DE-Alsfeld Am Schnepfenhain,50.750367,9.269176
 OVAG DE-Alsfeld Hersfelderstraße,50.751317,9.27628
@@ -16989,8 +17464,12 @@ Peusa ES-La Seu d’Urgell Cami Ral de la Cerdanya,42.35894,1.46327,30
 
 Pfalzwerke AT-Ansfelden Traunuferstraße,48.210551,14.273282
 Pfalzwerke AT-Brunn am Gebirge Johann Steinböck-Straße,48.108639,16.312933
+Pfalzwerke AT-Leoben Prettachstraße,47.35697,15.07454
+Pfalzwerke AT-Rutzenmoos Am Moosgraben,47.95532,13.72718,20
+Pfalzwerke AT-Seiersberg Werschweg,47.00849,15.40859
 Pfalzwerke AT-St. Pölten Stifterstraße,48.183939,15.6151
 Pfalzwerke AT-Wels Gunskirchener Straße,48.148595,13.974621
+Pfalzwerke AT-Wiener Neudorf IZ NÖ-Süd Straße,48.07306,16.32988
 Pfalzwerke DE-Achern Severinstraße 8,48.634319,8.06005
 Pfalzwerke DE-Adelsheim Untere Austraße 38,49.396887,9.393617
 Pfalzwerke DE-Ahrensfelde Rudolf-Diesel-Straße 6,52.607036,13.527031
@@ -17424,11 +17903,16 @@ PitPoint FR-Marseille Esp. de la Tourette,43.2977,5.36413
 PitPoint FR-Wittenheim Rue de Soultz,47.80996,7.31343,30
 
 Plenitude IT-Bologna Via Antoniotto Usodimare,44.51902,11.32701
+Plenitude IT-Canazei Strada Dolomites,46.47735,11.76895
 Plenitude IT-Formigine Via Giardini Nord,44.59819,10.8617
 Plenitude IT-Genova Via Piave,44.39352,8.95467
 Plenitude IT-Livorno Viale della Libertà,43.53249,10.319
+Plenitude IT-Meran Piavestraße,46.66628,11.15812
+Plenitude IT-Pioltello Viale S. Francesco,45.51327,9.3234
 Plenitude IT-San Miniato Via C. Pannocchia,43.68795,10.80601
 Plenitude IT-Sogliano al Rubicone Bivio Montepetra Bassa,43.93325,12.17774
+Plenitude IT-Venezia Via Orlanda,45.47933,12.27087
+Plenitude IT-Villesse Località Maranuz,45.86488,13.4326
 
 Plugit FI-Joensuu Kuurnankatu,62.61789,29.77164
 Plugit FI-Kangasniemi Otto Mannisen tie,61.9898,26.64419
@@ -17456,7 +17940,13 @@ Pod-Point GB-Thornaby Goodwood Square,54.556923,-1.275722
 
 Polarstern DE-Gießen Am alten Flughafen,50.592641,8.718913
 
+Polenergia PL-Augustów Wojska Polskiego,53.83284,22.96428,30
 Polenergia PL-Bydgoszcz Lubostrońska,53.146455,17.963872
+Polenergia PL-Gdańsk Kartuska,54.35164,18.49869
+Polenergia PL-Koszalin Franciszkańska,54.2085,16.16343
+Polenergia PL-MOP Chociszewo,52.31384,15.78121
+Polenergia PL-MOP Chwałszyce,52.31846,17.41816
+Polenergia PL-MOP Konarzewo,52.34918,16.71491
 Polenergia PL-Odolion Szosa Ciechocińska,52.870315,18.75093
 Polenergia PL-Studzianki,51.504996,19.877787
 Polenergia PL-Suwałki Dubowo Drugie,54.051199,22.893792
@@ -17545,7 +18035,9 @@ Porsche DE-Willich Jakob-Kaiser-Str.,51.2721,6.51569
 Porsche DE-Willich Jakob-Kaiser-Straße,51.27255,6.51521
 Porsche DE-Wuppertal Porschestraße,51.3053,7.25279
 Porsche IT-Bologna Via Bruno Monterumici,44.50405,11.30875
+Porsche IT-Desenzano del Garda Via Faustinella,45.44909,10.51635
 Porsche LU-Howald Hesperange Rue Peternelchen,49.575682,6.138282
+Porsche PL-Katowice Kochłowicka,50.25476,18.9704
 
 Powerdot FR-Bergerac Rue du Tounet,44.83547,0.45136,30
 Powerdot FR-Charmes Voie Carpini,48.359627,6.304077
@@ -17562,11 +18054,13 @@ Powerdot FR-Publier Rue du Cartheray,46.390846,6.525237
 Powerdot FR-Russ Rue de la Creuse Fontaine,48.49343,7.25152
 Powerdot FR-Ussac Av. du Griffolet,45.1634,1.48153,30
 Powerdot FR-Valence Imp. des Auréats,44.90199,4.88327
+Powerdot PL-Gdańsk Gdańska,54.40236,18.63141
 Powerdot PL-Kraków Pawia,50.067976,19.946278
 Powerdot PL-Leszno Niepodległości,51.846245,16.588073
 Powerdot PL-Poznań Jana Brzechwy,52.411869,16.832071
 Powerdot PL-Płońsk Pułtuska,52.624744,20.387515
 Powerdot PL-Ustronie Morskie Kolejowa,54.203002,15.749827
+Powerdot PL-Żagań Księżnej Żaganny,51.61755,15.31173
 
 Powerland BE-Knokke-Heist Natiënlaan,51.327074,3.29579
 
@@ -17574,6 +18068,8 @@ Powy IT-Cesena Via Leopoldo Lucchi,44.143867,12.26004
 Powy IT-Levanto Passeggiata a Mare,44.17212,9.60635
 Powy IT-Morena Via Michelangelo Buonarroti,50.93522,7.350141
 Powy IT-Pisa Via Quarantola,43.70929,10.3954
+Powy IT-San Donà di Piave Via dei Laghi 38 Pittarello,45.64244,12.59396
+Powy IT-Silea Via Str. della Serenissima,45.64874,12.31085
 
 PRE CZ-Herálec u Havlíčkova Brodu,49.51429,15.41789
 PRE CZ-Karlovy Vary Stará Kysibelská,50.23661,12.89776
@@ -17836,19 +18332,35 @@ SachsenEnergie DE-Wilthen St.-Barbara-Platz,51.099951,14.400265
 
 SalzachSonne AT-Mittersill Zeller Straße,47.28512,12.48996
 
+Salzburg AT-Altenmarkt im Pongau Sinnhub,47.38862,13.41269
 Salzburg AT-Anif Eisgrabenstraße,47.745807,13.059325
+Salzburg AT-Bad Hofgastein Kurgartenstraße,47.16968,13.09925
 Salzburg AT-Bad Hofgastein Weitmoserstraße,47.15729,13.10638
 Salzburg AT-Bruck Kaprunerstraße,47.28744,12.81005
+Salzburg AT-Burgfried Kletzlgutweg,47.68496,13.10582
+Salzburg AT-Flachau Flachauer Straße,47.35444,13.39315
 Salzburg AT-Fuschl am See Kirchenstraße,47.79478,13.302881
 Salzburg AT-Glasenbach Johann-Herbst-Straße,47.769818,13.086961
+Salzburg AT-Golling an der Salzach Obergau,47.59055,13.18088
 Salzburg AT-Golling Obergau,47.59183,13.17578
+Salzburg AT-Hinterglemm Dorfstraße,47.37811,12.59299
 Salzburg AT-Kaprun Landesstraße,47.277301,12.757207
 Salzburg AT-Kaprun Tauern Spa Platz,47.28336,12.760014
 Salzburg AT-Koppl Wolfgangseestraße,47.819538,13.100495
+Salzburg AT-Krössenbach Safestraße,47.28537,12.81433
+Salzburg AT-Lamprechtshausen Schulstraße,47.99297,12.95741
+Salzburg AT-Leogang Hütten,47.43952,12.71878
+Salzburg AT-Lofer Loferer Straße,47.5837,12.69416
+Salzburg AT-Mattsee Passauer Straße,47.97388,13.10236
+Salzburg AT-Mattsee Passauer Straße,47.9739,13.10234
 Salzburg AT-Mittersill Kirchgasse,47.280459,12.481777
 Salzburg AT-Neu-Anif Alpenstraße,47.737713,13.051322
+Salzburg AT-Plainfeld Salzburgring,47.82341,13.1688,80
 Salzburg AT-Reinbach Industriestraße,47.3508,13.19592
 Salzburg AT-Saalbach Glemmerstraße,47.38931,12.63677
+Salzburg AT-Saalfelden am Steinernen Meer Industriestraße,47.41991,12.82904
+Salzburg AT-Saalfelden am Steinernen Meer Leogangerstraße,47.42977,12.84286
+Salzburg AT-Saalfelden am Steinernen Meer Leogangerstraße,47.43074,12.83219
 Salzburg AT-Saalfelden Hohlwegen,47.481674,12.830856
 Salzburg AT-Saalfelden Mühlbachweg,47.425512,12.846924
 Salzburg AT-Salzburg Adolf-Kolping-Straße,47.821138,13.036036
@@ -17856,20 +18368,30 @@ Salzburg AT-Salzburg Alois-Schmiedbauer-Straße,47.810061,13.038407
 Salzburg AT-Salzburg Auerspergstraße,47.807178,13.040552
 Salzburg AT-Salzburg Bayerhamerstraße,47.812149,13.050424
 Salzburg AT-Salzburg Bräuhausstraße,47.79372,13.022693
+Salzburg AT-Salzburg Europastraße,47.8183,13.00622
 Salzburg AT-Salzburg Franz-Josef-Straße,47.807124,13.043518
 Salzburg AT-Salzburg Julius-Raab-Platz,47.808321,13.044126
 Salzburg AT-Salzburg Kleßheimer Allee,47.809441,13.011603
+Salzburg AT-Salzburg Moosstraße,47.79747,13.03084
 Salzburg AT-Salzburg Münchner Bundesstraße,47.829303,13.003156
+Salzburg AT-Salzburg Oberndorferstraße,47.8333,13.02897
 Salzburg AT-Salzburg Reichenhaller Straße,47.798278,13.036824
+Salzburg AT-Salzburg Siezenheimer Straße,47.8068,13.0105
 Salzburg AT-Salzburg Sterneckstraße,47.808864,13.056117
 Salzburg AT-Salzburg Strubergasse,47.808947,13.027593
 Salzburg AT-Salzburg Vogelweiderstraße,47.809784,13.056038,40
 Salzburg AT-Schladming Salzburger-Siedlung,47.390831,13.658943,30
+Salzburg AT-St. Johann im Pongau Hauptstraße,47.34928,13.20406
+Salzburg AT-St. Johann im Pongau Industriestraße,47.35481,13.19913
+Salzburg AT-St. Johann im Pongau Palfengasse,47.35379,13.19477
 Salzburg AT-St. Michael im Lungau Gewerbestraße,47.096423,13.633386,25
 Salzburg AT-St. Wolfgang Robert-Stolz-Straße,47.739208,13.43921
 Salzburg AT-Strobl Wolfgangseestraße,47.712972,13.485245
 Salzburg AT-Tamsweg Sauerfelder Straße,47.12661,13.81435
+Salzburg AT-Uttendorf Seeweg,47.28129,12.57948
 Salzburg AT-Wald im Pinzgau Wald,47.245072,12.230296
+Salzburg AT-Wildshut Wildshuter Straße,48.00855,12.8662
+Salzburg AT-Zell am See Salzachtal-Bundesstraße,47.29976,12.78889
 
 SCAPO DE-Mainz Mombacher Straße,50.011054,8.243949
 
@@ -17895,12 +18417,24 @@ SEV84 FR-Entrechaux Rte de Faucon,44.21866,5.14106
 Shell AT-Altgralla Phyrnautobahn-Gralla,46.831061,15.552836
 Shell AT-Altgralla Phyrnautobahn-Gralla,46.833,15.548
 Shell AT-Amstetten Otto-Schott-Straße,48.116329,14.911406
+Shell AT-Fürstenfeld Burgauer Straße,47.06547,16.07911
 Shell AT-Gaisberg Thalgaustraße,47.84686,13.339147
 Shell AT-Haid Salzburgerstraße,48.20488,14.24822,30
+Shell AT-Hainfeld bei Fürstenfeld Süd Autobahn,47.07935,15.96171
+Shell AT-Heinfels Panzendorf,46.74978,12.44262
+Shell AT-Hornstein Neufelder Straße,47.87416,16.43207
+Shell AT-Maria Lanzendorf Wiener Straße,48.09911,16.41869
+Shell AT-Mistelbach Mitschastraße,48.56178,16.57714
+Shell AT-Neudörfl Hauptstraße,47.80113,16.27548
 Shell AT-Raststation Eben,47.42114,13.383
-Shell AT-Schwanenstadt Vor der Au,48.047808,13.78082
+Shell AT-Raststation Walserberg,47.76781,12.94826
+Shell AT-Schwanenstadt Vor der Au,48.04781,13.78082,60
+Shell AT-Siegendorf Ödenburger Straße,47.77757,16.52619
+Shell AT-St. Marienkirchen Andiesen,48.39092,13.42519
 Shell AT-St. Pölten Mariazeller Straße,48.187626,15.6167
+Shell AT-Steinberg Businesspark Mittelburgenland,47.49137,16.49137
 Shell AT-Strengberg Westautobahn A1,48.114623,14.666307
+Shell AT-Telfs Anton-Auer-Straße,47.30531,11.07466
 Shell AT-Wien Pfenninggeldgasse,48.208101,16.313643
 Shell AT-Wien Seestadtstraße,48.216606,16.505109
 Shell AT-Wien Wagramer Straße,48.264631,16.454496
@@ -18171,65 +18705,125 @@ Smatrics AT-Anif Salzachtalstraße,47.72713,13.06038,6
 Smatrics AT-Ansfelden Ikea-Platz,48.197307,14.249527
 Smatrics AT-Ansfelden Traunuferstraße,48.210569,14.273273
 Smatrics AT-Ansfelden Traunuferstraße,48.211537,14.27498
+Smatrics AT-Bad Ischl Sulzbacherstraße,47.69079,13.62284
 Smatrics AT-Bad Voslau Flugfeldstraße,47.965965,16.23926
 Smatrics AT-Bad Voslau Flugfeldstraße,47.966088,16.238587
 Smatrics AT-Bad Waltersdorf,47.18288,15.99365
 Smatrics AT-Blindenmarkt Felbering,48.126913,15.008794
+Smatrics AT-Bruck an der Leitha Eco-Plus-Park 2.Straße,48.03385,16.80514
+Smatrics AT-Bruck an der Mur Grazer Straße,47.40817,15.2752
+Smatrics AT-Bruck an der Mur Wiener Straße,47.42124,15.27429
 Smatrics AT-Brunn am Gebirge Brunner Straße,48.122172,16.294201
+Smatrics AT-Brunn am Gebirge Industriestraße,48.10959,16.30756
 Smatrics AT-Brunn am Gebirge Wienerstraße,48.11246,16.300056,30
 Smatrics AT-Deutsch-Wagram Promenadenweg,48.295124,16.555666
+Smatrics AT-Eisenstadt Mattersburger Straße,47.82993,16.51932
 Smatrics AT-Erlauf Erlaufstraße,48.071922,15.137488
 Smatrics AT-Feldkirchen bei Graz,47.009115,15.44097,20
+Smatrics AT-Flachau Reitdorfer Straße,47.36239,13.38239
 Smatrics AT-Flughafen Wien Schwechat,48.12475,16.56365
+Smatrics AT-Frastanz Feldkircher Straße,47.22467,9.61694
+Smatrics AT-Freistadt Linzer Straße,48.49918,14.50343
+Smatrics AT-Fürstenfeld Kirchenplatz,47.05055,16.07971
+Smatrics AT-Grafenwörth Gewerbepark,48.41218,15.77737
+Smatrics AT-Gralla Gewerbepark,46.80576,15.56029
 Smatrics AT-Graz Conrad-von-Hötzendorf-Straße,47.05577,15.44823
+Smatrics AT-Graz Gaswerkstraße,47.06966,15.40186
+Smatrics AT-Graz Weblinger Gürtel,47.03288,15.42375
+Smatrics AT-Grein Breitenangerstraße,48.22917,14.84565
+Smatrics AT-Griffen Gewerbestraße,46.69558,14.73695
 Smatrics AT-Haberl Gewerbepark,47.481074,16.091338
 Smatrics AT-Haid Ikeaplatz,48.197307,14.249527
+Smatrics AT-Haus im Ennstal Ennsling,47.41225,13.7845
+Smatrics AT-Hofstätten an der Raab Hofstätten,47.08223,15.73978
+Smatrics AT-Hofstätten an der Raab Hofstätten,47.08224,15.73976
+Smatrics AT-Horn Prager Straße,48.66451,15.63613
 Smatrics AT-Innsbruck Mitterweg,47.257962,11.376605
 Smatrics AT-Innsbruck Mitterweg,47.257987,11.376648
+Smatrics AT-Inzersdorf im Kremstal Gewerbestraße,47.92934,14.08614
+Smatrics AT-Judenburg Burggasse,47.17211,14.6322
 Smatrics AT-Kapfenberg Bahnstraße,47.445153,15.292904
+Smatrics AT-Kirchdorf an der Krems Gaisbauer-Straße,47.90022,14.12598
+Smatrics AT-Kittsee Eisenstädter Straße,48.08576,17.04827
 Smatrics AT-Klagenfurt am Wörthersee Rosentaler Straße,46.606182,14.298608
+Smatrics AT-Klosterneuburg Wiener Straße,48.29811,16.33397
+Smatrics AT-Krems an der Donau Landersdorfer Straße,48.41681,15.62759
+Smatrics AT-Kufstein Rosenheimer Straße,47.59373,12.17693
+Smatrics AT-Laakirchen Schillerstraße,47.97684,13.82056
 Smatrics AT-Liezen Gesäusestraße,47.560208,14.252779
 Smatrics AT-Linz Hafenstraße,48.3156,14.30173,25
+Smatrics AT-Linz Jägerstätterstraße,48.33573,14.30002
 Smatrics AT-Linz Untere Donaulände,48.313366,14.298537
 Smatrics AT-Loosdorf Gewerbestraße,48.189809,15.408297
+Smatrics AT-Löbenau Forstauer Straße,47.37673,13.47542
+Smatrics AT-Malta Brandstatt,47.07872,13.34532
+Smatrics AT-Maria Ellend Marienring,48.1091,16.68283
 Smatrics AT-Maria Enzersdorf Hauptstraße,48.094029,16.282389
 Smatrics AT-Mauthausen Gewerbestraße,48.241616,14.54625
 Smatrics AT-Meggenhofen Trappenhof,48.1835,13.78571,20
 Smatrics AT-Meggenhofen Trappenhof,48.18357,13.7858,10
+Smatrics AT-Mödling Norbert Sprongl-Gasse,48.08738,16.28467
+Smatrics AT-Müllendorf Bahnstraße,47.83368,16.46186
+Smatrics AT-Neulengbach St. Christophener Straße,48.19145,15.89315
 Smatrics AT-Neusiedl am See Erwin-Schrödinger-Straße,47.973036,16.850978
+Smatrics AT-Neusiedl am See Wiener Straße,47.97314,16.84058
+Smatrics AT-Oberwart Europastraße,47.28558,16.18527
 Smatrics AT-Oberwart Grazerstraße,47.28453,16.18613
 Smatrics AT-Parndorf Pannoniastraße,47.975773,16.852937
+Smatrics AT-Perchtoldsdorf Donauwörther Straße,48.12422,16.26568
 Smatrics AT-Pöchlarn Heizwerkstraße,48.202455,15.22267
+Smatrics AT-Rastplatz Schottwien,47.64921,15.85833
+Smatrics AT-Raststation Simmering,48.18156,16.44427
 Smatrics AT-Raststation Ybbs,48.15831,15.112381
+Smatrics AT-Raststätte Mondsee,47.83662,13.39498,20
 Smatrics AT-Salzburg Franz Brötzner Straße,47.794638,12.987004
+Smatrics AT-Scheibbs Eisenwurzenstraße,48.01476,15.16084
+Smatrics AT-Schnann Gewerbezone,47.14915,10.37391
+Smatrics AT-Schwechat Brucker Bundesstrasse,48.13573,16.49193
+Smatrics AT-Siegendorf GZO-Fachmarktzentrum,47.77391,16.53005
+Smatrics AT-Spielberg Ring Rast Straße,47.21054,14.78435
+Smatrics AT-Spittal an der Drau Villacher Straße,46.7915,13.51312
+Smatrics AT-St. Gallen Markt,47.69265,14.61672
 Smatrics AT-St. Georgen im Attergau Am See-Ring,47.928913,13.504302
+Smatrics AT-St. Marienkirchen Andiesen,48.3946,13.42787
 Smatrics AT-St. Pölten Anton Scheiblin-Gasse,48.182788,15.620019
 Smatrics AT-St. Pölten Karl Pfeffer-Gasse,48.181014,15.620998
 Smatrics AT-St. Pölten Mariazeller Straße,48.18905,15.618962
 Smatrics AT-St. Pölten Schulze Delitzsch-Straße,48.17943,15.61355
 Smatrics AT-Steyr Kaserngasse,48.048469,14.415657
 Smatrics AT-Stockerau Rudolf Diesel-Straße,48.389171,16.179846
+Smatrics AT-Stockerau Wienerstraße,48.3857,16.23564
 Smatrics AT-Strasshof an der Nordbahn,48.321384,16.664931
 Smatrics AT-Straßwalchen Neumarkterstraße,47.958421,13.236025
+Smatrics AT-Tulln an der Donau Frauentorgasse,48.32786,16.05458
 Smatrics AT-Villach Maria-Gailer-Straße,46.605376,13.865967
+Smatrics AT-Villach Nikolaigasse,46.61523,13.85149
+Smatrics AT-Vorchdorf Feldhamer Straße,48.01106,13.92058
 Smatrics AT-Völs Cytastraße,47.259073,11.322192
 Smatrics AT-Vösendorf Südring,48.105341,16.315758
 Smatrics AT-Vösendorf Triester Straße,48.13757,16.325
 Smatrics AT-Wals-Himmelreich Kasernenstraße,47.792453,12.987462
 Smatrics AT-Wels Ginzkeystraße,48.180051,14.063676,12
+Smatrics AT-Wien Bergmillergasse,48.19992,16.25553
 Smatrics AT-Wien Biedermanngasse,48.163958,16.313168
+Smatrics AT-Wien Breitenfurter Straße,48.15051,16.30014
 Smatrics AT-Wien Franzosengraben,48.186006,16.413368
 Smatrics AT-Wien Gaudenzdorfer Gürtel,48.187695,16.338955
 Smatrics AT-Wien Gewerbeparkstraße,48.246027,16.463365
 Smatrics AT-Wien Laxenburger Straße,48.136064,16.358404
+Smatrics AT-Wien Lemböckgasse,48.13488,16.31049
 Smatrics AT-Wien Ludwig-von-Höhnel-Gasse,48.159603,16.385089
 Smatrics AT-Wien Margaretengürtel,48.179819,16.350953
+Smatrics AT-Wien Schönbrunner Schloßstraße,48.18551,16.31859
 Smatrics AT-Wien Siemensstraße,48.270292,16.422644
 Smatrics AT-Wien Simmeringer Hauptstraße,48.14635,16.460827
 Smatrics AT-Wien Sverigestraße,48.253911,16.472187
 Smatrics AT-Wien Swatoschgasse,48.166439,16.411393
+Smatrics AT-Wiener Neudorf IZ NÖ-Süd Straße,48.07599,16.33072
 Smatrics AT-Wiener Neudorf IZ-NÖ-Süd Straße,48.077225,16.330032
 Smatrics AT-Wiener Neustadt Gerasdorfer Gasse,47.805386,16.21233
+Smatrics AT-Wolfsberg Spanheimerstraße,46.83685,14.83941
+Smatrics AT-Wörgl Innsbrucker Straße,47.48192,12.05786
 Smatrics DE-Neuenstadt am Kocher Daimlerstraße,49.238657,9.341164
 Smatrics DE-Uelzen Fischerhofstraße,52.98645,10.54435
 Smatrics DE-Uelzen Hambrocker Straße,52.9638,10.56661
@@ -18300,6 +18894,7 @@ SW-Aachen DE-Aachen Burgau,50.552676,6.238098
 SW-Aachen DE-Aachen Försterstraße,50.784738,6.076592
 SW-Aachen DE-Monheimsallee,50.781109,6.090785
 SW-Aalen DE-Aalen Kocherstraße,48.817544,10.12691
+SW-Ahrensburg DE-Ahrensburg Vogteiweg,53.68595,10.23964
 SW-am-See DE-Friedrichshafen Karlstraße,47.650315,9.478475
 SW-Augsburg DE-Augsburg Am Schwall,48.364907,10.903411
 SW-Augsburg DE-Augsburg Augsburger Straße,48.363827,10.874827
@@ -18314,6 +18909,7 @@ SW-Baden-Baden DE-Baden-Baden Ludwig-Wilhelm-Straße,48.755041,8.241229
 SW-Bamberg DE-Bamberg Mußstraße,49.897828,10.877873
 SW-Bamberg DE-Hallstadt Laubanger,49.913468,10.869012
 SW-Bayreuth DE-Bayreuth Am Sendelbach,49.945054,11.568146
+SW-Bayreuth DE-Bayreuth Bürgerreuther Straße,49.95114,11.57884
 SW-Berlin DE-Berlin Breite Straße,52.45378,13.3277,30
 SW-Berlin DE-Berlin Dresdener Straße,52.50097,13.41696
 SW-Berlin DE-Berlin Dudenstraße,52.485114,13.384049
@@ -18360,11 +18956,14 @@ SW-Bonn DE-Flughafen Köln/Bonn,50.87988,7.11918
 SW-Bonn DE-Flughafen Köln/Bonn,50.88026,7.11839
 SW-Bonn DE-Flughafen Köln/Bonn,50.88077,7.11717
 SW-Bremen DE-Bremen Heidlerchenstraße,53.192924,8.554896
+SW-Burg DE-Burg In der Alten Kaserne,52.26658,11.83913
 SW-Celle DE-Celle Hafenstraße,52.62608,10.07393
 SW-Celle DE-Celle Zur Hasselklink,52.653219,10.06909
 SW-Coesfeld DE-Coesfeld Am Tüskenbach,51.93736,7.15691
+SW-Dessau DE-Dessau-Roßlau Gropiusallee,51.83831,12.22681
 SW-Dinslaken DE-Dinslaken Am Neutor,51.563239,6.742098
 SW-Ditzingen DE-Ditzingen Zeissstraße,48.822039,9.083255
+SW-Duisburg DE-Duisburg Bungertstraße,51.42802,6.75253
 SW-Duisburg DE-Duisburg Bungertstraße,51.42897,6.754937
 SW-Düsseldorf DE-Düsseldorf Cäcilie-Beuken-Straße,51.163336,6.878863
 SW-Düsseldorf DE-Düsseldorf Graf-Adolf-Platz,51.218376,6.775676
@@ -18448,9 +19047,11 @@ SW-Kiel DE-Kiel Tiefe Allee,54.32907,10.18977
 SW-Kiel DE-Kiel Wall,54.32142,10.14047
 SW-Kiel DE-Mönkeberg Am Eksol,54.348503,10.188428
 SW-Kiel DE-Schönberg Bürgermeister-Wiese-Straße,54.39314,10.37349
+SW-Klagenfurt AT-Klagenfurt Pyramidenkogelstraße,47.78202,16.19118
 SW-Konstanz DE-Konstanz Bruder-Klaus-Straße,47.673191,9.173572
 SW-Kufstein AT-Kufstein Fischergries,47.585176,12.16837
 SW-Köflach AT-Köflach Stadtwerkgasse,47.060545,15.078317
+SW-Landshut DE-Landshut Isargestade,48.53986,12.15252
 SW-Langen DE-Langen Liebigstraße,49.994277,8.65773
 SW-LB DE-Ludwigsburg Brenzstraße,48.892324,9.182775
 SW-LE DE-Leinfelden-Echterdingen Häuserwiesenstraße,48.704338,9.118296
@@ -18507,6 +19108,7 @@ SW-Neumünster DE-Neumünster Vicelinstraße,54.08174,9.98635
 SW-Neuruppin DE-Neuruppin Präsidentenstraße,52.92295,12.8037
 SW-Neuss DE-Neuss Holzheimer Weg,51.182733,6.682412
 SW-Neustrelitz DE-Feldberg Weidendamm,53.33599,13.44183
+SW-Neustrelitz DE-Neustrelitz Am Bresebrink,53.28005,12.96672
 SW-Neustrelitz DE-Neustrelitz Am Kiefernwald,53.36156,13.09124,30
 SW-Niestetal DE-Niestetal Heiligenröder Straße,51.314426,9.555118
 SW-Norden DE-Norden Dörper Weg,53.611416,7.155474
@@ -18591,13 +19193,13 @@ swisscharge CH-Bern Viktoriastrasse,46.9529,7.45755
 swisscharge CH-Bregaglia Str. Principale,46.34385,9.59221
 swisscharge CH-Buchs Edisonstrasse,47.39259,8.0659,25
 swisscharge CH-Cadenazzo Via Stazione,46.152033,8.937525,10
-swisscharge CH-Chur,46.847542,9.501609,10
 swisscharge CH-Chur Bahnhofplatz,46.85275,9.52874
 swisscharge CH-Chur Felsenaustrasse,46.85654,9.51356
 swisscharge CH-Chur Gäuggelistrasse,46.85077,9.52401
 swisscharge CH-Chur Industriestrasse,46.85583,9.50623
 swisscharge CH-Chur Loestrasse,46.86385,9.53927
 swisscharge CH-Chur Scalärastrasse,46.867275,9.537479
+swisscharge CH-Chur Spundisstrasse,46.84754,9.50162
 swisscharge CH-Dietikon Riedstrasse,47.41931,8.39411
 swisscharge CH-Dietlikon Industriestrasse,47.41161,8.61809
 swisscharge CH-Dornach Grundackerstrasse,47.47513,7.61615
@@ -18615,18 +19217,17 @@ swisscharge CH-Näfels Bahnhofstrasse,47.09946,9.06332
 swisscharge CH-Pfäffikon Churerstrasse,47.20155,8.77977
 swisscharge CH-Raststätte Münsingen,46.87746,7.54188,30
 swisscharge CH-Raststätte Münsingen,46.8785,7.54236,30
-swisscharge CH-Rossens,46.721205,7.089191
 swisscharge CH-St. Gallen Geltenwilenstrasse,47.419098,9.36618
 swisscharge CH-St. Moritz Via Sela,46.48744,9.84006
 swisscharge CH-Steckborn Seestrasse,47.666587,8.982117
 swisscharge CH-Thyon Rte de Thyon,46.18192,7.37222
-swisscharge CH-Turbenthal,47.4351,8.850689
+swisscharge CH-Turbenthal St. Gallerstrasse,47.43509,8.85069
 swisscharge CH-Täsch Kantonstrasse,46.069563,7.776482
 swisscharge CH-Volketswil Grabenwisstrasse,47.38305,8.66953
 swisscharge CH-Wallisellen Neue Winterthurerstrasse,47.408937,8.594655,40
 swisscharge CH-Weinfelden Dufourstrasse,47.56737,9.08987
 swisscharge CH-Wettingen Zentralstrasse,47.46364,8.32551
-swisscharge CH-Winterthur,47.501314,8.764747
+swisscharge CH-Winterthur Else-Züblin-Strasse,47.50134,8.76473
 swisscharge CH-Winterthur Schlosstalstrasse,47.49849,8.696
 swisscharge CH-Worb Rubigenstrasse,46.91583,7.56335
 swisscharge CH-Zürich Aargauerstrasse,47.39227,8.49346
@@ -18691,6 +19292,7 @@ TankE DE-Köln Brüggener Straße,50.905259,6.938654
 TankE DE-Köln Brühler Straße,50.899201,6.95306
 TankE DE-Köln Buchheimer Straße,50.962577,7.003101
 TankE DE-Köln Butzweilerstraße,50.94166,7.0098
+TankE DE-Köln Butzweilerstraße,50.98095,6.89722
 TankE DE-Köln Christrosenweg,50.874653,7.05661
 TankE DE-Köln Dagobertstraße,50.9483,6.957764
 TankE DE-Köln Dülkenstraße,50.89046,7.05297
@@ -18766,6 +19368,8 @@ TankE DE-Pulheim Velderhof,51.042104,6.758879
 TankE DE-Sankt Augustin Grantham-Allee,50.778397,7.181329
 TankE DE-Siegen Bismarckstraße,50.894872,8.02496
 TankE DE-Uslar Hans-Böckler-Straße,51.659654,9.651023
+
+TAURON PL-Balice Lotnisko,50.07157,19.79963
 
 TCB ES-Navalmoral Autovía del Suroeste,39.873511,-5.549847
 
@@ -18982,12 +19586,22 @@ TIERS FR-Pont-l’Abbé Rte de Saint-Jean-Trolimon,47.865281,-4.235
 
 TIUKKA FI-Kristinestad Vasavägen,62.299773,21.453037
 
+TIWAG AT-Going am Wilden Kaiser Marchstraße,47.51385,12.32458
+TIWAG AT-Gurgl Gurglerstraße,46.87023,11.02714
 TIWAG AT-Hainzenberg Talstraße,47.211416,11.87314
+TIWAG AT-Jochberg Dorf,47.37709,12.41853
 TIWAG AT-Kirchberg im Tirol Hauptstraße,47.448501,12.315506
 TIWAG AT-Kössen Lendgasse,47.660611,12.405067
+TIWAG AT-Lienz Kärntner Straße,46.83103,12.78026
 TIWAG AT-Lienz Mühlgasse,46.828366,12.767434
+TIWAG AT-Maurach Achensee Straße,47.43052,11.73746
+TIWAG AT-Oberndorf in Tirol Bahnhofstraße,47.49937,12.38644
 TIWAG AT-Prutz Dorfstraße,47.068266,10.664093
+TIWAG AT-Ramsau im Zillertal Talstraße,47.20509,11.87104
+TIWAG AT-Ried im Zillertal Landstraße,47.30311,11.87286
 TIWAG AT-See Elis,47.086113,10.470062
+TIWAG AT-Seefeld in Tirol Rosshütte,47.33174,11.19918
+TIWAG AT-Strass im Zillertal Hof,47.39781,11.82345
 TIWAG AT-Sölden Kirchfeldweg,46.960945,11.009419
 TIWAG AT-Unterlängenfeld,47.074888,10.969793
 
@@ -18995,10 +19609,8 @@ Toka UA-Ужгород Zakarpats’ka St,48.632454,22.278862
 
 TotalEnergies BE-Brugge Zwijnstraat,51.20483,3.215492
 TotalEnergies BE-Jabbeke Vlamingveld,51.185315,3.106086
-TotalEnergies BE-Kalken E17 Dir Antwerpen,51.07041,3.919857,80
 TotalEnergies BE-Total Bierges E411 Dir Arlon,50.717844,4.583293,80
 TotalEnergies BE-Total Bierges E411 Dir Bruxelles,50.718913,4.584526,80
-TotalEnergies BE-Total Kalken E17 Dir Gent,51.071354,3.921585,80
 TotalEnergies BE-Total Nazareth E17 Dir Gent,50.970757,3.609604,80
 TotalEnergies BE-Total Nazareth E17 Dir Kortrijk,50.973944,3.615686,80
 TotalEnergies BE-Total Nivelles E19 Dir Bruxelles,50.61517,4.300559,80
@@ -19009,7 +19621,6 @@ TotalEnergies BE-Total Zolder E314 Dir Leuven,51.012986,5.333206
 TotalEnergies BE-Totalenergies Vilvoorde,50.919011,4.425911,80
 TotalEnergies BE-Totalenergies Zwijndrecht,51.203703,4.318192,80
 TotalEnergies DE-Ahlen Kruppstraße,51.769063,7.929198
-TotalEnergies DE-Alsfeld,50.733014,9.242024,40
 TotalEnergies DE-Bad Hersfeld Carl-Benz-Str.,50.858612,9.722855,80
 TotalEnergies DE-Barsinghausen,52.333147,9.414582,80
 TotalEnergies DE-Berlin,52.582051,13.43239,80
@@ -19172,11 +19783,23 @@ TotalEnergies NL-Poort Van Veghel,51.599527,5.516732,80
 TotalEnergies NL-Schiedam,51.930238,4.403939,80
 TotalEnergies NL-Vliedberg,51.484617,3.850016,80
 
+Turmstrom AT-Graz Fabriksgasse,47.05927,15.42646
+Turmstrom AT-Hallein Salzachtalstraße,47.68229,13.10055
+Turmstrom AT-Klaus an der Pyhrnbahn Steyrtal-Radweg,47.84527,14.17043
 Turmstrom AT-Linz Bockgasse,48.29073,14.277679,30
+Turmstrom AT-Linz Goethestraße,48.30051,14.3082
+Turmstrom AT-Linz Industriezeile,48.3003,14.32059
+Turmstrom AT-Linz Unionstraße,48.2842,14.29259
 Turmstrom AT-Neumarkt in der Steiermark Wiener Straße,47.079346,14.424862
 Turmstrom AT-Puchenau Weitenfeld,48.311704,14.22638
 Turmstrom AT-Sattledt Hauptstraße,48.073184,14.051783,25
+Turmstrom AT-Steyr Pachergasse,48.04141,14.42837
+Turmstrom AT-Velden Klagenfurter Straße,46.61793,14.04996
+Turmstrom AT-Wels Eferdinger Straße,48.18087,14.02691
+Turmstrom AT-Wels Salzburger Straße,48.15335,13.98703
+Turmstrom AT-Wels Salzburger Straße,48.15666,14.00062
 Turmstrom AT-Wien Absberggasse,48.17137,16.3886
+Turmstrom AT-Wien Breitenfurter Straße,48.13784,16.25742
 Turmstrom AT-Wolfsberg Grazer Straße,46.846418,14.843636
 
 twn DE-Naumburg (Saale) Jakobsring,51.149859,11.814456
@@ -19191,6 +19814,7 @@ Uno-X DK-Kliplev Industripark,54.939616,9.379191,21
 Uno-X DK-Nyborg Storebæltsvej,5.308467,10.809753
 Uno-X DK-Svendborg Vestergade,55.064243,10.591783
 Uno-X DK-Vejle Grønlandsvej,55.664123,9.549478,30
+Uno-X NO-Tiller Kvenildsskogen,63.33372,10.36051
 Uno-X NO-Valderøy Valderøyvegen,62.529,6.11677,25
 
 Vattenfall DE-Ahrensburg Reeshoop,53.68,10.2343
@@ -19355,6 +19979,11 @@ vigoris DE-Zinnowitz Dr.-Wachsmann-Straße,54.08001,13.90632
 
 Vimmerby-Energi SE-Vimmerby Västra Tullportsgatan,57.66819,15.8544,25
 
+Vinschgauer-Energie IT-Prad am Stilfserjoch Kreuzweg,46.61733,10.58917
+
+Vion IT-Martello Ennewasser,46.5711,10.79594
+Vion IT-Sluderno Via Venosta,46.66406,10.58232
+
 Virta AT-Bad Fischau Industriegebiet B21,47.831789,16.186032
 Virta AT-Wiener Neudorf IZ-NÖ Süd Straße,48.07098,16.327825
 Virta CH-Arbedo Via S. Gottardo,46.2128,9.03959
@@ -19407,6 +20036,12 @@ Virta SE-Smygehamn Smyge strandväg,55.339217,13.35998
 Virta SE-Västervik Allén,57.760546,16.612694
 Virta SK-Prešov Cesta na Senec,48.98978,21.25838
 
+Volkswagen AT-Haag am Hausruck Reischau,48.19852,13.6362
+Volkswagen AT-Obervellach,46.93359,13.1965
+Volkswagen AT-Radstadt Salzburger Straße,47.38637,13.453
+Volkswagen AT-Salzburg Vogelweiderstraße,47.81569,13.05315
+Volkswagen AT-St. Andrä Framrach,46.74579,14.82316
+Volkswagen AT-Zell am Ziller Rohrerstraße,47.23557,11.88347
 Volkswagen CH-Cham Alte Steinhauserstrasse,47.18685,8.47367
 Volkswagen CH-Chur Rossbodenstrasse,46.85132,9.50497
 Volkswagen DE-Aichtal Uferstraße 10,48.625343,9.261603
@@ -19544,6 +20179,7 @@ Volkswagen DE-Zörbig Thura Mark,51.62983,12.13562
 Volkswagen DE-Öhringen Rudolf-Diesel-Straße 1,49.200257,9.47635
 Volkswagen DE-Überlingen Hauptstraße 37,47.802296,9.238275
 Volkswagen IT-Bolzano Vittorio-Lancia-Straße,46.484029,11.336793
+Volkswagen PL-Wrocław al. Karkonoska,51.05556,16.97776
 
 Voltiva SE-Vetlanda Kyrkogatan,57.42667,15.09076
 
@@ -19557,9 +20193,12 @@ VSW DE-Leezen Neversdorfer Straße,53.86533,10.25279
 VSW DE-Mölln Waldhallenweg,53.62199,10.7059
 VSW DE-Ratzeburg Schloßwiese,53.69925,10.76584
 
+Wattif AT-Nauders Doktor-Tschiggfrey-Straße,46.88905,10.50173
 Wattif DE-Binz Forsthaus Prora,54.434559,13.557487
 Wattif DE-Putbus Fürst-Malte-Allee,54.34418,13.51208
 
+Wels-Strom AT-Kammer Reichersberg,48.31023,13.4195
+Wels-Strom AT-Wels Stelzhamerstraße,48.16155,14.0289
 Wels-Strom AT-Wels Waidhausenstraße,48.146959,13.976295
 
 WEMAG DE-Bützow Vor dem Rühner Tor,53.848041,11.976902
@@ -19637,17 +20276,32 @@ Westfalen DE-Stemwede Oppendorferstraße,52.454189,8.481565
 Westfalen DE-Werne Fürstenhof,51.669414,7.634846
 
 Wien-Energie AT-Flughafen Wien Schwechat,48.126,16.5653
+Wien-Energie AT-Guntramsdorf Rathaus Viertel,48.0489,16.31272
 Wien-Energie AT-Leobersdorf Portugieserstrasse,47.932061,16.200985
 Wien-Energie AT-Leobersdorf Portugieserstrasse,47.932418,16.200122
 Wien-Energie AT-Traiskirchen Tribuswinkel Neurißgasse,47.991227,16.275386
+Wien-Energie AT-Wien Antonigasse,48.2225,16.33746
+Wien-Energie AT-Wien Breite Gasse,48.20365,16.35691
+Wien-Energie AT-Wien Breitenfelder Gasse,48.21412,16.34291
+Wien-Energie AT-Wien Cumberlandstraße,48.19175,16.30988
 Wien-Energie AT-Wien Felberstraße,48.197281,16.335561
 Wien-Energie AT-Wien Guglgasse,48.185265,16.421039
+Wien-Energie AT-Wien Handelskai,48.23439,16.39364
+Wien-Energie AT-Wien Hansenstraße,48.20625,16.35857
+Wien-Energie AT-Wien Innovationsstraße,48.16474,16.33359
+Wien-Energie AT-Wien Jörgerstraße,48.21776,16.33778
+Wien-Energie AT-Wien Khevenhüllerstraße,48.24674,16.30767
 Wien-Energie AT-Wien Margaretengürtel,48.180155,16.352097
 Wien-Energie AT-Wien Martinstraße,48.22019,16.34015
 Wien-Energie AT-Wien Montleartstraße,48.210903,16.304506
 Wien-Energie AT-Wien Ottakringer Straße,48.21346,16.32004
+Wien-Energie AT-Wien Perfektastraße,48.13719,16.29996
+Wien-Energie AT-Wien Raffaelgasse,48.23318,16.37169
+Wien-Energie AT-Wien Sagedergasse,48.161,16.31936
 Wien-Energie AT-Wien Senefeldergasse,48.17185,16.37475
+Wien-Energie AT-Wien Spittelauer Lände,48.23271,16.36037
 Wien-Energie AT-Wien U-Bahn-Bogen,48.217703,16.342094,60
+Wien-Energie AT-Wien Waldmüllergasse,48.23295,16.37685
 Wien-Energie AT-Wiener Neudorf Multiplex,48.103063,16.318812
 
 Wiiiz FR-Grasse Pl. de la Buanderie,43.66096,6.9234,30
@@ -19674,12 +20328,15 @@ Zaphyre FR-Celles-sur-Plaine Pl. de la Gare,48.45554,6.94727
 Zapp DK-Rødby Hagesvej,54.66132,11.340961
 
 ZES TR-Beşiktaş/İstanbul Zorlu Center,41.066832,29.017022
+ZES TR-Cedit Atatürk Bl,41.31972,36.33426
 ZES TR-Savaştepe Karaçam,39.349632,27.629283
 ZES TR-Susurluk O178,39.923439,28.132198
 
 Zest GB-Gateshead Metrocentre,54.955215,-1.666485
 
 ZEV DE-Zwickau Äußere Schneeberger Straße,50.707476,12.499435
+
+ziwa AT-Kottingbrunn August-Resch-Straße,47.95588,16.2188
 
 ZSE HU-Alacska pihenőhely,47.38406,19.28321
 ZSE SK-Banská Bystrica Na Troskách,48.731194,19.135926,10
@@ -19702,8 +20359,26 @@ ZSE SK-Žilina-Solinky Prielohy,49.19491,18.73937
 Zunder ES-Lleida Salida,41.66394,0.60495,12
 Zunder ES-Villalpando Cam. de los Gallegos,41.82615,-5.37888,12
 
+ÖAMTC AT-Bad Ischl Salzburger Straße,47.718,13.594
+ÖAMTC AT-Braunau am Inn Auf der Haiden,48.2493,13.04947
+ÖAMTC AT-Dornbirn Untere Roßmähder,47.4122,9.70971
+ÖAMTC AT-Eisenstadt Mattersburger Straße,47.83138,16.52246
+ÖAMTC AT-Klosterneuburg Schüttaustraße,48.29574,16.34157
+ÖAMTC AT-Krems an der Donau Bertschingerstraße,48.40646,15.60432
+ÖAMTC AT-Lang Jöß-Gewerbegebiet,46.84493,15.51788
+ÖAMTC AT-Langenzersdorf Wiener Straße,48.29805,16.37515
+ÖAMTC AT-Linz Wankmüllerhofstraße,48.27992,14.30424
+ÖAMTC AT-Mattighofen Salzburger Straße,48.09546,13.15659
 ÖAMTC AT-Melk Am Wachauring,48.212382,15.32797
+ÖAMTC AT-Möderbrugg Hauptstraße,47.28033,14.48086
+ÖAMTC AT-Neusiedl am See Rot-Kreuz-Gasse,47.96934,16.83777
+ÖAMTC AT-Teesdorf Triester Straße,47.96154,16.2734
+ÖAMTC AT-Traiskirchen Zubringerstraße,48.03511,16.80851
+ÖAMTC AT-Völkermarkt Klagenfurter Straße,46.65781,14.61371
 ÖAMTC AT-Wien Hadikgasse,48.192959,16.278226,20
+ÖAMTC AT-Wien Wienerbergstraße,48.17084,16.3376
+ÖAMTC AT-Wiener Neustadt Neunkirchner Straße,47.78072,16.19059
+ÖAMTC AT-Zell am See Loferer Bundesstraße,47.34049,12.79824
 
 ČEZ CZ-Beroun Obchodní,49.95654,14.0596
 ČEZ CZ-Bečov nad Teplou Karlovarská,50.09306,12.84122
@@ -19761,23 +20436,34 @@ AE UA-Ужгород Капушанська вулиця,48.611924,22.264413
 AE UA-Івано-Франківськ Угорники,48.915354,24.749443
 AT Alpenhotel Ammerwald,47.525696,10.843375
 AT Altentann Berg,47.891075,13.21846
+AT Bad Häring Hotel DAS SIEBEN,47.51318,12.11127
 AT Eugendorf Center,47.860013,13.126857,20
+AT Graz Radisson Hotel,47.07095,15.4199
 AT Guntramsdorf REHAU,48.0673,16.32432,95
 AT Gurten Future Dome,48.24205,13.33889
+AT Götzis Zoowelt Stromberger,47.34547,9.65628
 AT Hartberg Hauptplatz,47.281412,15.968967,20
+AT Hinterriß Natur.Erlebnis.Hotel,47.47312,11.46734
+AT Klagenfurt Richarg-Wagner-Straße,46.61872,14.30134
 AT Kottingbrunn SMARTplast,47.95825,16.25784
 AT Kottingbrunn SMARTplast,47.95883,16.2573
 AT Lendorf Teccon,46.82732,13.4907
 AT Lendorf Teccon,46.82824,13.49121
 AT Linz Gstöttnerhofstraße,48.315009,14.283574
-AT Linz KEBA,48.31767,14.28739
-AT Linz KEBA,48.31788,14.28706
+AT Linz Metro,48.24862,14.29475
 AT Linz PLUSCITY,48.24345,14.23428,25
 AT Linz PLUSCITY,48.24397,14.2348,25
 AT Linz PLUSCITY,48.24458,14.23531,25
+AT Parkplatz Straß,46.73086,15.64186
 AT Pasching Tractive,48.24068,14.2338
 AT Ratten HORN,47.472919,15.708816
+AT Schladming Europaplatz,47.39644,13.69552
+AT St. Veit an der Glan Karosserie Puck,46.75713,14.34241
+AT Tillmitsch Heidenstraße,46.81462,15.53379
+AT Voldöpp Länd,47.44385,11.87979
 AT Wien Billa Brünner Straße,48.267452,16.402954
+AT Wien Flughafen,48.12022,16.56285
+AT Wiener Neustadt Fachhochschule,47.83871,16.24843
 AU Brisbane The Chocolate Factory,-27.40879,153.06116
 AU Browns Plains QLD Browns Plains Rd,-27.6637,153.03996
 AU Burnie TAS North Terrace,-41.04991,145.90733
@@ -19804,6 +20490,7 @@ CH Grimentz Glacier du Moiry,46.10686,7.57861
 CH Gstaad Gstaaderhof,46.47169,7.28498
 CH Härkingen Briefzentrum,47.318791,7.816421
 CH Innertkirchen KWO,46.70107,8.23322
+CH Laax Via Principala,46.80573,9.2575
 CH Lenzerheide Hotel La Palanca,46.72523,9.54805
 CH Lostorf Vogt,47.3855,7.953
 CH Moosseedorf Shoppyland,47.017507,7.492498
@@ -19840,11 +20527,17 @@ DE Bad Münstereifel Bendenweg,50.574357,6.765263
 DE Bad Oeynhausen Mindener Straße,52.21557,8.81643
 DE Barsbüttel Bahnhofstraße,53.56878,10.2278
 DE Barth Hafenstraße Destination Charger,54.370514,12.722957
+DE Basedow Meck-Schweizer,53.69714,12.7121
+DE Bensheim Dorfcafé,49.70728,8.64711
 DE Bergkirchen Kreuzackerstraße,48.23867,11.35501,25
+DE Berlin Carnotstraße,52.52267,13.32116
 DE Berlin Landesvertretung Niedersachsen,52.512375,13.377664
+DE Berlin Landsberger Allee,52.53425,13.50906
+DE Berlin Oberfeldstraße,52.52482,13.55742
 DE Berlin Rumplerzeile,52.43295,13.53357,30
 DE Berlin Scandic,52.50455,13.37563
 DE Berlin Südkreuz,52.475697,13.364082
+DE Berlin Wühlischstraße,52.50916,13.45939
 DE Bernau Rudolf-Diesel-Straße,52.68597,13.56907
 DE Bietigheim-Bissingen Valeo,48.9456,9.13459
 DE Bilsen Jagdhaus Waldfrieden,53.75487,9.88139
@@ -19853,6 +20546,7 @@ DE Braunschweig IIM,52.272656,10.526041
 DE Braunschweig Waller Weg SPIE,52.309673,10.481549
 DE Braunschweig Waller Weg SPIE,52.309941,10.481238
 DE Bünde Zimmerstraße,52.20636,8.592
+DE Chemnitz Florian-Geyer-Straße,50.81895,12.91394
 DE Chemnitz Hotel Plaza Inn,50.86356,12.85756
 DE Chemnitz Kauffahrtei,50.810677,12.905644
 DE Deggendorf Oberer Stadtplatz,48.83492,12.96209
@@ -19863,6 +20557,7 @@ DE Dresden Hauptbahnhof,51.040898,13.733033
 DE Eisenhüttenstadt Zentraler Platz,52.14535,14.62909
 DE Erlangen Valeo,49.58013,10.968941,60
 DE Essen Im Teelbruch,51.37739,6.93982
+DE Falkenstein Hetzner,50.47871,12.33755
 DE Forchheim Äußere Nürnberger Straße,49.703861,11.061186,20
 DE Frankfurt am Main Hainer Weg 74,50.09682,8.693074
 DE Frankfurt am Main Parkhaus Opernturm,50.116366,8.67072
@@ -19873,6 +20568,7 @@ DE Fürth Vacher Mühle,49.52555,10.96974
 DE Garbsen Nord,52.422338,9.554441
 DE Gießen Cursor,50.584926,8.644187
 DE Gladbeck SL Naturenergie,51.56883,6.95326
+DE Großharthau Am Schlosspark,51.10727,14.10977
 DE Grünberg Carl-Benz-Straße,50.60323,8.95896
 DE Gütersloh Arvato,51.88353,8.44304
 DE Gütersloh Arvato,51.88405,8.44351
@@ -19888,20 +20584,26 @@ DE Herten Hotel am Schlosspark,51.59454,7.12339
 DE Herzogenaurach adidas,49.57487,10.91723
 DE Herzogenaurach adidas,49.57654,10.91759
 DE Ilmenau Hotel Tanne,50.682515,10.909629
+DE Ingolstadt IAV,48.78974,11.37989
 DE Jena Zeiss,50.91769,11.56612
 DE Kassel Glinicke,51.3038,9.53016
 DE Kassel Heinrich-Hertz-Straße,51.276943,9.526117
 DE Kettig Alterauge GmbH,50.405837,7.472896
 DE Koblenz Bardelebenstraße,50.358505,7.587261
+DE Koserow Hotel Elisabeth,54.05156,14.00066
 DE Köln Brügelmannstraße 3,50.943937,6.985898
 DE Köln Neumarkt Passage,50.93734,6.9472
 DE Köln Opladener Straße,50.939697,6.974031
 DE Langen (Hessen) esatus,49.987575,8.678133,35
+DE Leer Gaswerkstraße,53.23147,7.45039
 DE Leer Hotel Lange,53.21013,7.4771
+DE Leezen Mohnweg,53.66597,11.49275
+DE Leipzig INNSiDE by Meliá,51.33967,12.37067
 DE Leipzig nextmove,51.32739,12.30916
 DE Leipzig Thiel Ludwig-Hupfeld-Straße,51.351898,12.301393
 DE Lichtenfels GE Additive,50.12836,11.03537
 DE Linden Alternate,50.53579,8.65519
+DE Lößnitz Johannisstraße,50.62807,12.73626
 DE Lübeck Flughafen,53.804405,10.699887
 DE Machern Ringstraße,51.35571,12.57101
 DE Mainz Malakoff-Passage,49.99617,8.28132
@@ -19917,6 +20619,7 @@ DE Neuss An der Skihalle,51.17069,6.649,20
 DE Nidderau BROSCHEIT,51.19155,13.50824
 DE Norden WBZ Parkplatz,53.595065,7.207816
 DE Norderstedt Oststraße,53.740318,10.016947
+DE Nürnberg AAM Metal Forming,49.47875,11.12848
 DE Nürnberg Am Tullnaupark,49.45044,11.10284
 DE Nürnberg Eggersheimer Straße,49.447788,11.010655
 DE Nürnberg Virnsberger Straße,49.448044,11.005672
@@ -19926,6 +20629,7 @@ DE Offenbach Honda,50.08437,8.839102
 DE Ostbevern CANWAY,52.049918,7.846
 DE Ostbevern CANWAY,52.050221,7.846436
 DE Ottobrunn Panasonic,48.05244,11.65555
+DE Paderborn MBörso,51.74011,8.77091
 DE Paderborn Westfalen Weser Netz,51.725959,8.756923,5
 DE Parkplatz Staufenberg A7,51.34918,9.60625
 DE Pettstadt Gemeinde,49.830728,10.925097
@@ -19938,7 +20642,10 @@ DE Saarbrücken Hotel-Mercure Hafenstrasse,49.237533,6.989432
 DE Sandersdorf-Brehna The Style Outlets,51.555325,12.192875
 DE Schipkau Lausitzring,51.53347,13.92388
 DE Schliersee Die Kuh am See,47.71126,11.86701
+DE Schwarzheide Naundorfer Straße,51.47129,13.87011
 DE Schwerin Dreescher Werkstätten,53.56426,11.38108
+DE Schöneck IFA Hotel,50.38921,12.34454
+DE Spalt Ferienhof Hanser,49.14644,10.91641
 DE Steyerberg Große Aue,52.56765,9.02182
 DE Stuhr Waschpark,52.99715,8.77165
 DE Stuttgart Flughafen,48.690548,9.19193
@@ -19954,6 +20661,8 @@ DE Wolfsburg Karl-Ferdinand-Braun-Ring,52.42152,10.86141
 DE Wuppertal AWG Recyclinghof,51.225514,7.143682
 DE Wuppertal Bergische Universität,51.23953,7.160973
 DE Wöbbelin KFZ-Service Braemer,53.39759,11.5145
+DE Zeitz Martin-Planer-Straße,51.04626,12.15665
+DE Zwickau Kopernikusstraße,50.73138,12.47356
 ES Gandia,38.969986,-0.178789
 ES Madrid Alcobendas Calle del Pintor Murillo,40.542868,-3.648588
 ES Madrid Hotel Madrid Centro,40.423082,-3.709453
@@ -19964,15 +20673,21 @@ GU Budapest Gizella utca,47.50983,19.0995
 HU Budapest Omega,47.46799,19.16747,60
 HU Kecskemét Four Points by Sheraton,46.89802,19.67362
 HU Körmend Mjus,47.00862,16.5687
+IT Anterselva di Mezzo,46.85817,12.10115
 IT Bollate Via S. Bernardo Pirelli,45.563026,9.147342
 IT Bruneck Intercable,46.80072,11.92867
 IT Forte dei Marmi UNA Hotels,43.95647,10.19551,15
+IT Kastelruth Silbernagl,46.54109,11.56496
 IT Lazise Camping Spiaggia D’Oro,45.49657,10.73528,200
 IT Parma Destination Charger Hotel San Marco & Formula Club,44.826238,10.203621,15
+IT Rasen-Antholz Toning-Stöckl-Weg,46.77452,12.04274
+IT Rodengo Schwer Präzision,46.79011,11.67095
+IT San Leonardo in Passiria Andreus Golf Lodge,46.77938,11.22864
 IT Sanremo Grand Hotel Des Anglais,43.81277,7.76474
 IT Vahrn Mautstation Casello Bressanone-Val Pusteria,46.763952,11.643082,20
 IT Vizzola Ticino Pirelli,45.625684,8.677574
 PL Best Western Plus Krakow Old Town,50.058091,19.941162
+PL Kraków Hyatt Place,50.06283,19.90943
 RO Brașov Bulevardul Gării,45.66043,25.613542
 RO Brașov RAT Rulmentul,45.681568,25.614809
 RO Brașov Regina Maria,45.643713,25.599572
@@ -19984,4 +20699,6 @@ SE Strömstad Nordby Köpcenter,59.06458,11.20858
 SE Tanumshede Tanum Shoppingcenter,58.72225,11.34893
 SK Bratislava Staré Grunty,48.15059,17.0674
 UA Cherkasy Gagarina St,49.438087,32.075958
+US Arkadelphia AR Iron Mountain Rd,34.22798,-93.11662
+US Carlsbad CA Bressi Ranch,33.12324,-117.26577
 US Stafford VA Richmond Hwy,38.47367,-77.39667

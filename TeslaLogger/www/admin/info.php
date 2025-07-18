@@ -107,6 +107,16 @@ function ShowInfo()
 		$("#PositiveButton").click(function(){window.location.href='changelogread.php';});
 		$("#NegativeButton").hide();
 	<?php
+	} else if (isDocker() && !isDockerNET8())
+	{?>
+		
+		$("#InfoText").html("<?php t("INFO_DEPRECATED_DOCKER"); ?>");
+
+		$(".HeaderT").show();
+		$("#PositiveButton").text("<?php t("OK"); ?>");
+		$("#PositiveButton").click(function(){window.location.href='https://github.com/bassmaster187/TeslaLogger/blob/master/docs/en/upgrade-to-net8-docker.md';});
+		$("#NegativeButton").hide();
+	<?php
 	}
 	?>
 }
