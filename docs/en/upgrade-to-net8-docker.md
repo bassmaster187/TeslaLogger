@@ -4,7 +4,7 @@
 - Move the files to a safe place
 - Stop old Docker
 > docker compose stop
-- Install new .net8 Docker image
+- Install new .net8 Docker image: https://github.com/bassmaster187/TeslaLogger/blob/master/docker_setup.md
 - go to Admin Panlel / Extras / Restore
 - Restore your Database
 - Resotre your geofence file

@@ -118,30 +118,45 @@ else
 		  url: "current_json.php",
 		  dataType: "json"
 		  }).done(function( jsonData ) {
-			if (LengthUnit == "mile")
-			{
-				if ( Range == 'IR'){
-					$('#ideal_battery_range_km').text((jsonData["ideal_battery_range_km"] / km2mls).toLocaleString(loc,{maximumFractionDigits:1, minimumFractionDigits: 1}) + " <?php t("mi"); ?>");
-					$('#full_battery_range_km').text((jsonData["ideal_battery_range_km"]/jsonData["battery_level"]*100/km2mls).toLocaleString(loc,{maximumFractionDigits:1, minimumFractionDigits: 1}) + " <?php t("mi"); ?>");
+			if ("ideal_battery_range_km" in jsonData && "battery_level" in jsonData && "battery_range_km" in jsonData && "odometer" in jsonData) {
+				if (LengthUnit == "mile")
+				{
+					if ( Range == 'IR')
+					{
+						$('#ideal_battery_range_km').text((jsonData["ideal_battery_range_km"] / km2mls).toLocaleString(loc,{maximumFractionDigits:1, minimumFractionDigits: 1}) + " <?php t("mi"); ?>");
+						$('#full_battery_range_km').text((jsonData["ideal_battery_range_km"]/jsonData["battery_level"]*100/km2mls).toLocaleString(loc,{maximumFractionDigits:1, minimumFractionDigits: 1}) + " <?php t("mi"); ?>");
+					}
+					else
+					{
+						$('#ideal_battery_range_km').text((jsonData["battery_range_km"] / km2mls).toLocaleString(loc,{maximumFractionDigits:1, minimumFractionDigits: 1}) + " <?php t("mi"); ?>");
+						$('#full_battery_range_km').text((jsonData["battery_range_km"]/jsonData["battery_level"]*100/km2mls).toLocaleString(loc,{maximumFractionDigits:1, minimumFractionDigits: 1}) + " <?php t("mi"); ?>");
+					}
+					$('#odometer').text((jsonData["odometer"] / km2mls).toLocaleString(loc,{maximumFractionDigits:1, minimumFractionDigits: 1}) + " <?php t("mi"); ?>");
 				}
 				else
 				{
-					$('#ideal_battery_range_km').text((jsonData["battery_range_km"] / km2mls).toLocaleString(loc,{maximumFractionDigits:1, minimumFractionDigits: 1}) + " <?php t("mi"); ?>");
-					$('#full_battery_range_km').text((jsonData["battery_range_km"]/jsonData["battery_level"]*100/km2mls).toLocaleString(loc,{maximumFractionDigits:1, minimumFractionDigits: 1}) + " <?php t("mi"); ?>");
+					if ( Range == 'IR')
+					{
+						$('#ideal_battery_range_km').text(jsonData["ideal_battery_range_km"].toLocaleString(loc,{maximumFractionDigits:1, minimumFractionDigits: 1}) + " <?php t("km"); ?>");
+						$('#full_battery_range_km').text((jsonData["ideal_battery_range_km"]/jsonData["battery_level"]*100).toLocaleString(loc,{maximumFractionDigits:1, minimumFractionDigits: 1}) + " <?php t("km"); ?>");
+					}
+					else
+					{	
+						$('#ideal_battery_range_km').text(jsonData["battery_range_km"].toLocaleString(loc,{maximumFractionDigits:1, minimumFractionDigits: 1}) + " <?php t("km"); ?>");
+						$('#full_battery_range_km').text((jsonData["battery_range_km"]/jsonData["battery_level"]*100).toLocaleString(loc,{maximumFractionDigits:1, minimumFractionDigits: 1}) + " <?php t("km"); ?>");
+					}
+					$('#odometer').text((jsonData["odometer"]).toLocaleString(loc,{maximumFractionDigits:1, minimumFractionDigits: 1}) + " <?php t("km"); ?>");
 				}
-				$('#odometer').text((jsonData["odometer"] / km2mls).toLocaleString(loc,{maximumFractionDigits:1, minimumFractionDigits: 1}) + " <?php t("mi"); ?>");
 			}
-			else
-			{
-				if ( Range == 'IR'){
-					$('#ideal_battery_range_km').text(jsonData["ideal_battery_range_km"].toLocaleString(loc,{maximumFractionDigits:1, minimumFractionDigits: 1}) + " <?php t("km"); ?>");
-					$('#full_battery_range_km').text((jsonData["ideal_battery_range_km"]/jsonData["battery_level"]*100).toLocaleString(loc,{maximumFractionDigits:1, minimumFractionDigits: 1}) + " <?php t("km"); ?>");
+			else if ("odometer" in jsonData) {
+				if (LengthUnit == "mile")
+				{
+					$('#odometer').text((jsonData["odometer"] / km2mls).toLocaleString(loc,{maximumFractionDigits:1, minimumFractionDigits: 1}) + " <?php t("mi"); ?>");
 				}
 				else
-				{	$('#ideal_battery_range_km').text(jsonData["battery_range_km"].toLocaleString(loc,{maximumFractionDigits:1, minimumFractionDigits: 1}) + " <?php t("km"); ?>");
-					$('#full_battery_range_km').text((jsonData["battery_range_km"]/jsonData["battery_level"]*100).toLocaleString(loc,{maximumFractionDigits:1, minimumFractionDigits: 1}) + " <?php t("km"); ?>");
+				{
+					$('#odometer').text((jsonData["odometer"]).toLocaleString(loc,{maximumFractionDigits:1, minimumFractionDigits: 1}) + " <?php t("km"); ?>");
 				}
-				$('#odometer').text((jsonData["odometer"]).toLocaleString(loc,{maximumFractionDigits:1, minimumFractionDigits: 1}) + " <?php t("km"); ?>");
 			}
 
 			if (Display100pctEnable == "true")
@@ -154,10 +169,12 @@ else
 			}
 
 			$('#battery_level').text(jsonData["battery_level"]);
-			var car_version = jsonData["car_version"];
-			car_version = car_version.substring(0,car_version.lastIndexOf(" "));
-			$('#car_version').text(car_version);
-			$('#car_version_link').attr("href", "https://www.notateslaapp.com/software-updates/version/"+ car_version +"/release-notes");
+			if (jsonData["car_version"]) {
+				var car_version = jsonData["car_version"];
+				car_version = car_version.substring(0,car_version.lastIndexOf(" "));
+				$('#car_version').text(car_version);
+				$('#car_version_link').attr("href", "https://www.notateslaapp.com/software-updates/version/"+ car_version +"/release-notes");
+			}
 
 			if (car_inactive)
 			{
@@ -263,23 +280,24 @@ else
 				hideSMT();
 			}
 
-			if (LengthUnit == "mile")
-			{
-				$("#max_speed").text((jsonData["trip_max_speed"]/ km2mls).toFixed(0));
-				$("#lt_kmh").text("mph");
+			if (jsonData["trip_max_speed"] && jsonData["trip_avg_kwh"] && jsonData["trip_distance"]) {
+				if (LengthUnit == "mile")
+				{
+					$("#max_speed").text((jsonData["trip_max_speed"]/ km2mls).toFixed(0));
+					$("#lt_kmh").text("mph");
 
-				$("#trip_avg_kwh").text((jsonData["trip_avg_kwh"]* km2mls).toLocaleString(loc,{maximumFractionDigits:1, minimumFractionDigits: 1}));
-				$("#lt_whkm").text("wh/mi");
+					$("#trip_avg_kwh").text((jsonData["trip_avg_kwh"]* km2mls).toLocaleString(loc,{maximumFractionDigits:1, minimumFractionDigits: 1}));
+					$("#lt_whkm").text("wh/mi");
 
-				$("#trip_distance").text((jsonData["trip_distance"]/km2mls).toLocaleString(loc,{maximumFractionDigits:1, minimumFractionDigits: 1}));
-				$("#lt_trip_distance_km").text("mi");
-			}
-			else
-			{
-				$("#max_speed").text(jsonData["trip_max_speed"]);
-
-				$("#trip_avg_kwh").text(jsonData["trip_avg_kwh"].toLocaleString(loc,{maximumFractionDigits:1, minimumFractionDigits: 1}));
-				$("#trip_distance").text(jsonData["trip_distance"].toLocaleString(loc,{maximumFractionDigits:1, minimumFractionDigits: 1}));
+					$("#trip_distance").text((jsonData["trip_distance"]/km2mls).toLocaleString(loc,{maximumFractionDigits:1, minimumFractionDigits: 1}));
+					$("#lt_trip_distance_km").text("mi");
+				}
+				else
+				{
+					$("#max_speed").text(jsonData["trip_max_speed"]);
+					$("#trip_avg_kwh").text(jsonData["trip_avg_kwh"].toLocaleString(loc,{maximumFractionDigits:1, minimumFractionDigits: 1}));
+					$("#trip_distance").text(jsonData["trip_distance"].toLocaleString(loc,{maximumFractionDigits:1, minimumFractionDigits: 1}));
+				}
 			}
 
 			var ts2 = new Date(Date.parse(jsonData["trip_start_dt"]));
@@ -298,7 +316,7 @@ else
 
 			$("#trip_duration_sec").text(min + ":" + sec);
 
-			if (jsonData["software_update_status"].length > 0)
+			if (jsonData["software_update_status"] && jsonData["software_update_status"].length > 0)
 			{
 				$("#SoftwareUpdateRow").show();
 				var temp = jsonData["software_update_status"];
