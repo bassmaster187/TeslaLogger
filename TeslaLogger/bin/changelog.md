@@ -1,5 +1,5 @@
-# Version 1.63.6
-- Bugfixes
+# Version 1.63.7
+- Info about deprecated Docker. Please update to new Teslalogger Image: [LINK](https://github.com/bassmaster187/TeslaLogger/blob/master/docs/en/upgrade-to-net8-docker.md)
 
 # Version 1.63.2
 - faster logging (positions every 10 seconds)
