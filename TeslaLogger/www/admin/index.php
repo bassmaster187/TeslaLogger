@@ -554,7 +554,7 @@ else
 	}
 	else
 	{
-		if (isDockerNet8)
+		if (isDockerNET8())
 			$onlineversion = file_get_contents("https://teslalogger.de/latest_teslalogger_docker_version.txt");
 		else
 			$onlineversion = getTeslaloggerVersion("https://raw.githubusercontent.com/bassmaster187/TeslaLogger/master/TeslaLogger/Properties/AssemblyInfo.cs");
