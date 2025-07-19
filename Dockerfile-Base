@@ -1,0 +1,40 @@
+FROM python:3.13.3-slim-bookworm
+
+ARG TARGETARCH
+
+# timezone / date
+RUN echo "Europe/Berlin" > /etc/timezone && dpkg-reconfigure -f noninteractive tzdata
+
+# install packages
+RUN echo "TARGETARCH=${TARGETARCH}" && \
+ apt-get update && \
+ apt-get upgrade -y && \
+ apt-get install -y --no-install-recommends git && \
+ apt-get install -y --no-install-recommends mariadb-client && \
+ apt-get install -y --no-install-recommends optipng wget gnupg && \
+# required for OSMMapGenerator (SkiaSharp)
+ apt-get install -y --no-install-recommends libfontconfig1 libfreetype6 libpng16-16 libexpat1 libuuid1 && \ 
+# Add Microsoft repository and install .NET 8 Runtimes (architecture-specific)
+    if [ "${TARGETARCH}" = "arm64" ]; then \
+      wget https://dot.net/v1/dotnet-install.sh -O /home/dotnet-install.sh && \
+      chmod +x /home/dotnet-install.sh && \
+      /home/dotnet-install.sh --runtime aspnetcore --channel 8.0 --install-dir /usr/share/dotnet --no-path && \
+      apt-get install -y --no-install-recommends libicu72 && \
+      rm -f /home/dotnet-install.sh;\
+    else \
+      wget https://packages.microsoft.com/config/debian/12/packages-microsoft-prod.deb -O packages-microsoft-prod.deb && \
+      dpkg -i packages-microsoft-prod.deb && \
+      rm packages-microsoft-prod.deb && \
+      apt-get update && \
+      apt-get install -y dotnet-runtime-8.0 aspnetcore-runtime-8.0; \
+    fi && \
+ apt-get clean && \
+ apt-get autoremove -y && \
+ rm -rf /var/lib/apt/lists/* && \
+ echo "export TERM=xterm" >> /root/.bashrc  && \
+ echo "DOCKER" >> /tmp/teslalogger-DOCKER && \
+ echo "DOCKER" >> /tmp/teslalogger-dockernet8 && \
+ pip3.13 install grpc-stubs==1.53.0.5 --break-system-packages && \
+ pip3.13 install grpcio==1.67.1 --break-system-packages && \
+ pip3.13 install protobuf==5.29.1 --break-system-packages && \
+ pip3.13 install rich --break-system-packages
