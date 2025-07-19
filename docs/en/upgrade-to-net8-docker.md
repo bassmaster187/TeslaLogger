@@ -1,12 +1,13 @@
 # Upgrade from Raspberry Image or legacy Docker to new .net8 Docker
 
-- Backup your database and geofence file
-- Move the files to a safe place
+- Backup your database and geofence file. Your backup is located on your host system at
+> TeslaLogger\TeslaLogger\bin\backup
+- Move the files to a safe place!!! (e.g. your desktop)
 - Stop old Docker
 > docker compose stop
 - Install new .net8 Docker image: https://github.com/bassmaster187/TeslaLogger/blob/master/docker_setup.md
 - go to Admin Panlel / Extras / Restore
-- Restore your Database
+- Restore your Database. Make sure to use the latest backup. The name has a pattern: year-month-day-hour-minute ...
 - Resotre your geofence file
 - Because your tesla auth token are encrypted, the new Teslalogger can't connect to Tesla API.
 - Go to Admin Panel / Settings / My Tesla Credentials / Edit (every car) / reconnect to your cars (don't delete them!)
