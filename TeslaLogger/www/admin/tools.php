@@ -92,7 +92,14 @@ function setShareData($share)
 
 function JSONDatetoString($jsondate)
 {
+    if (empty($jsondate))
+        return "";
+        
     $ts = preg_replace( '/[^0-9]/', '', $jsondate);
+    if (empty($ts))
+        return "";
+        
+    $ts = intval($ts);
     $date = date("Y-m-d H:i:s", $ts / 1000);
     return $date;
 }
