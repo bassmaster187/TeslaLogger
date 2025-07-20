@@ -3386,8 +3386,10 @@ Supercharger-V4 NO-Førde,61.4485,5.88623
 Supercharger-V4 NO-Gardermoen,60.167301,11.152385
 Supercharger-V4 NO-Gjennestad,59.23039,10.27317
 Supercharger-V3 NO-Gjøvik,60.798565,10.695083
+Supercharger-V3 NO-Gjøvik,60.80091,10.69163,60
 Supercharger NO-Gol,60.70232,8.9862
 Supercharger NO-Gol West,60.697258,8.953551
+Supercharger-V3 NO-Gran,60.35444,10.5723
 Supercharger NO-Grong,64.464913,12.316532
 Supercharger-V3 NO-Grålum,59.297635,11.062809
 Supercharger-V3 NO-Gudvangen,60.87966,6.84578
@@ -3412,7 +3414,7 @@ Supercharger-V3 NO-Kautokeino,69.020412,23.048909
 Supercharger-V3 NO-Kløfta,60.079517,11.149442
 Supercharger-V3 NO-Kristiansand,58.177107,8.135951
 Supercharger-V4 NO-Kristiansund,63.12109,7.74136
-Supercharger-V3 NO-Krokstad,59.758045,9.995073
+Supercharger-V4 NO-Krokstad,59.75784,9.99325
 Supercharger NO-Lampeland,59.836224,9.579221
 Supercharger NO-Larvik,59.11219,10.108337
 Supercharger NO-Lasses,59.037499,9.673879
@@ -3448,6 +3450,7 @@ Supercharger-V4 NO-Odda,60.065742,6.548997
 Supercharger-V3 NO-Oppdal,62.595821,9.688972
 Supercharger-V4 NO-Oppdal East,62.65681,9.88176
 Supercharger NO-Os,60.192788,5.4652
+Supercharger-V3 NO-Oslo Bogstadveien,59.92426,10.72618
 Supercharger-V3 NO-Oslo Central Sentrum P-hus,59.916106,10.741818
 Supercharger-V3 NO-Oslo North - Ullevaal,59.950432,10.737688
 Supercharger NO-Porsgrunn,59.122098,9.707564
@@ -3455,7 +3458,7 @@ Supercharger-V4 NO-Porsgrunn Down Town,59.13588,9.64029
 Supercharger-V3 NO-Reine,67.934833,13.094056
 Supercharger-V4 NO-Rena,61.130829,11.375494
 Supercharger-V4 NO-Risør,58.71974,9.22545
-Supercharger-V3 NO-Rjukan,59.88045,8.62511
+Supercharger-V3 NO-Rjukan,59.88054,8.626
 Supercharger-V3 NO-Rudshøgda,60.910144,10.811751
 Supercharger NO-Rugtvedt,59.035933,9.67402
 Supercharger NO-Rygge,59.387918,10.751439
@@ -3475,6 +3478,7 @@ Supercharger NO-Skibotn,69.392448,20.268423
 Supercharger-V3 NO-Skien,59.206742,9.609061
 Supercharger NO-Skjåk,61.88317,8.267157
 Supercharger NO-Skulestadmo,60.658297,6.436256
+Supercharger-V4 NO-Skulestadmo Storrviki,60.65695,6.43733
 Supercharger-V4 NO-Slependen,59.87368,10.50276
 Supercharger NO-Solli,59.324292,10.954448
 Supercharger-V4 NO-Sortland,68.69684,15.4189
@@ -3497,7 +3501,7 @@ Supercharger-V3 NO-Trysil,61.315993,12.264412
 Supercharger-V4 NO-Tvedestrand,58.62814,8.91712
 Supercharger-V4 NO-Tønsberg,59.27267,10.42835
 Supercharger-V3 NO-Varangerbotn,70.171763,28.555617
-Supercharger-V3 NO-Veggli,60.039943,9.156763
+Supercharger-V3 NO-Veggli,60.04024,9.15518
 Supercharger-V3 NO-Verdal,63.79299,11.489223
 Supercharger-V3 NO-Vestby,59.602873,10.74125,60
 Supercharger-V3 NO-Vestnes,62.622437,7.089761
@@ -3512,7 +3516,7 @@ Supercharger-V3 NO-Åfjord,63.959951,10.226023
 Supercharger-V3 NO-Ål,60.63013,8.563912
 Supercharger-V4 NO-Ålesund,62.472474,6.364452
 Supercharger-V4 NO-Åmot Vinje,59.57013,7.99255
-Supercharger NO-Åndalsnes,62.557776,7.685321
+Supercharger NO-Åndalsnes,62.55781,7.68544,60
 Supercharger-V3 NO-Åsane,60.472861,5.333181,80
 Supercharger NO-Åsane,60.484345,5.375959
 Supercharger-V3 NO-Ørnes,66.86818,13.703568
@@ -7941,7 +7945,15 @@ CircleK EE-Tartu Lääneringtee,58.36047,26.67667
 CircleK EE-Valga maakond Pikk tn,57.788455,26.048332
 CircleK LT-Kryžkalnis Dvaro gatvė,55.484335,22.58835,25
 CircleK NL-Amsterdam Kromwijkdreef,52.31336,4.98285
+CircleK NO-Alvdal Nord-Østerdalsveien,62.11837,10.61407
+CircleK NO-Evenes Bedringens vei,68.49635,16.70053
+CircleK NO-Fjellhamar Strømsveien,59.93377,10.98443
+CircleK NO-Geilo Lienvegen,60.53548,8.2206
 CircleK NO-Oslo Ankerveien,59.96261,10.64281,30
+CircleK NO-Oslo Lambertseterveien,59.87916,10.82013
+CircleK NO-Stavanger Petroleumsveien,58.89288,5.724
+CircleK NO-Tromsø Terminalgata,69.67669,18.97973
+CircleK NO-Vågå Vågåvegen,61.87676,9.09894
 CircleK SE-Bjärred,55.722256,13.08846
 CircleK SE-Göteborg,57.707127,11.870444
 CircleK SE-Göteborg Torpavallsgatan,57.72356,12.02531
@@ -8784,6 +8796,7 @@ E-Totem FR-Robion Rte d’Avignon,43.86885,5.1341
 e-Vadea FR-Aire de Besançon Champoux,47.32892,6.12712,30
 e-Vadea FR-Aire de Besançon Marchaux,47.32703,6.12525,30
 e-Vadea FR-Aire de Bourg Teyssonge,46.20553,5.29453,30
+E-VADEA FR-Sandaucourt Aire de repos de Lorraine la Trelle,48.26804,5.86052
 
 E-Way SM-Città di San Marino Parcheggio,43.933037,12.449936
 
@@ -9075,7 +9088,10 @@ E.ON DK-Vejle Skærup Øst,55.64045,9.563059
 E.ON DK-Væggerløse Væggerløsevej,54.70973,11.919614
 E.ON HU-Debrecen Kishatár utca,47.54231,21.58161
 E.ON HU-Zalaegerszeg Balatoni út,46.84285,16.86776,25
+E.ON NO-Evje Verksvegen,58.58311,7.79784
+E.ON NO-Kløfta Kongsvingervegen,60.07771,11.14611
 E.ON NO-Lillesand Legdene,58.23974,8.29801,15
+E.ON NO-Vinterbro Sjøskogenveien,59.7378,10.76395
 E.ON SE-Arboga Burskapsvägen,59.42613,15.82931,15
 E.ON SE-Arvidsjaur Skillnadsgatan,65.59324,19.1637
 E.ON SE-Bunkeflostrand Skånegårdsvägen,55.559388,12.935508,30
@@ -9188,6 +9204,7 @@ EcoEsco IT-Palau Via Fonte Vecchia,41.178723,9.383838
 Ecotap DE-Goch Am Bössershof,51.665633,6.173346
 Ecotap DE-Nürnberg Lübener Straße,49.410359,11.139266,25
 Ecotap NL-Goes Goese Poort,51.5068,3.87532,30
+Ecotap NL-Vaals Drielandenpunt,50.75671,6.01888
 Ecotap NL-Wemeldinge Oostelijke Kanaalweg,51.51578,4.00752
 Ecotap NL-Wemeldinge Ruisweg,51.521996,3.980178
 
@@ -12047,15 +12064,35 @@ Eviny DE-Düren Neusser Straße,50.842644,6.486259
 Eviny DE-Gaildorf Schmiedstraße,48.999267,9.772956
 Eviny DE-Halver Von-Vincke-Straße,51.189726,7.503823
 Eviny DE-Wassenberg Brabanter Straße,51.1018,6.1833
+Eviny NO-Andenes Falcksgate,69.32071,16.11931
 Eviny NO-Andenes Industriveien,69.309859,16.100335
+Eviny NO-Geilo Vesleslåttvegen,60.5331,8.2084
+Eviny NO-Grimstad Odden,58.33743,8.59413
+Eviny NO-Haugesund Markedet,59.4108,5.27402
 Eviny NO-Kristiansund Kongens Plass,63.110416,7.728622
+Eviny NO-Larvik Yttersøveien,59.06794,10.04504
+Eviny NO-Leknes Idrettsgata,68.14509,13.61983
+Eviny NO-Nordfjordeid Sjøgata,61.90895,5.98547
+Eviny NO-Oslo Alna Senter,59.92665,10.84921
+Eviny NO-Risøyhamn Fjøsbakken,68.97467,15.64296
+Eviny NO-Sandnes Gravarsveien,58.84812,5.73804
 Eviny NO-Skodje Digerneset Næringspark Ålesund,62.491973,6.605153
+Eviny NO-Sogndal Stedjevegen,61.22644,7.10177
+Eviny NO-Sortland Vesterålsgata,68.70825,15.4131
+Eviny NO-Stokmarknes Havnegata,68.5658,14.9149
+Eviny NO-Stranda Øyna,62.30743,6.94522
+Eviny NO-Straume Gjertrudvegen,60.35857,5.12212
+Eviny NO-Sunndalsøra Sunndalsvegen,62.67217,8.56902
 Eviny NO-Svelgen Gunnar Scheldrups veg,61.76843,5.292211
+Eviny NO-Svolvær Lofotgata,68.2343,14.55969
+Eviny NO-Sykkylven Auregata,62.39231,6.5833
 Eviny NO-Tau Fiskåvegen,59.06501,5.92098
 Eviny NO-Tjørhom Fv468,58.90725,6.85443
 Eviny NO-Valderøy Valderøyvegen,62.52914,6.11634,25
 Eviny NO-Ålesund Nedre Strandgate,62.469703,6.148216
 Eviny NO-Ålgård Ole Nielsens vei,58.77058,5.84483
+Eviny NO-Ørsta Melsvegen,62.19272,6.12448
+Eviny NO-Ørsta Vikeøyrane,62.19909,6.12311
 Eviny SE-Boden Lulevägen,65.81616,21.70918,25
 Eviny SE-Gällivare Sommarvägen,67.14815,20.66107
 Eviny SE-Haparanda Hästskovägen,65.84194,24.12046
@@ -13481,6 +13518,7 @@ Fortum NO-Bykle,59.354746,7.355757
 Fortum NO-Bøde Esso Rønvik,67.293538,14.407496
 Fortum NO-Geiranger Gjorvahaugen,62.095088,7.211245
 Fortum NO-Sortland,68.704914,15.414759
+Fortum NO-Stavanger Dalsetveien,58.93358,5.73966
 Fortum SE-Karlskoga Norra Viaduktgatan,59.32518,14.52661,20
 
 Fraunhofer DE-Berlin Gustav-Meyer-Allee,52.541473,13.385278
@@ -14902,7 +14940,7 @@ Ionity NL-Sandeligen West,51.834832,4.618082
 Ionity NL-Sandelingen Oost A16,51.83603,4.61978
 Ionity NL-Sevenum,51.38008,5.985541
 Ionity NL-Tolnegen Noord,52.184387,5.670553
-Ionity NO-Alvdal,62.11837,10.61407
+Ionity NO-Alvdal Nord-Østerdalsveien,62.11895,10.61344,30
 Ionity NO-Aspøya,63.01096,7.97538
 Ionity NO-Aurland,60.89896,7.2108
 Ionity NO-Averøy Kårvåg,63.010099,7.432785
@@ -14911,7 +14949,7 @@ Ionity NO-Bardu Fogd Holmboes gate,68.86166,18.34872
 Ionity NO-Bergen,60.48457,5.37679
 Ionity NO-Dal,60.253081,11.182376,30
 Ionity NO-Dombås,62.07428,9.12514
-Ionity NO-Elverum,60.88007,11.55093
+Ionity NO-Elverum Bakketungata,60.8804,11.54935,30
 Ionity NO-Gol,60.70205,8.94337
 Ionity NO-Høydalsmo,59.49497,8.2027
 Ionity NO-Kjerlingland,58.23655,8.29948
@@ -14919,6 +14957,7 @@ Ionity NO-Klett,63.324443,10.305985,30
 Ionity NO-Lakselv Arne M Holdens vei,70.05175,24.96186
 Ionity NO-Leirvik,59.77503,5.48611
 Ionity NO-Lura,58.87322,5.72126
+Ionity NO-Nordkjosbotn Torgveien,69.21818,19.56086,25
 Ionity NO-Ringdalskogen,59.11234,10.11033
 Ionity NO-Rygge,59.3871,10.75119
 Ionity NO-Røldal,59.83325,6.81375
@@ -15517,8 +15556,20 @@ KommEnergie DE-Puchheim Aubinger Weg,48.169572,11.36394
 KommEnergie DE-Puchheim Aubinger Weg,48.169599,11.362819
 
 Kople NO-Andenes Industriveien,69.310198,16.098938
+Kople NO-Bjerkvik Trollvikveien,68.55031,17.55251,30
+Kople NO-Evenskjer Tjeldsundbrua,68.62521,16.59053
 Kople NO-Finnsnes Sjøgata,69.23112,18.00356,60
+Kople NO-Gryllefjord Fv86,69.3633,17.05324
 Kople NO-Hammerfest Jernbanetrasken,70.66394,23.67754
+Kople NO-Havøysund Torget,70.99751,24.66085
+Kople NO-Hesseng Tunnelveien,69.68729,29.98861
+Kople NO-Husøy i Senja Oskarbakken,69.54417,17.66419
+Kople NO-Kautokeino Hannoluohkka,69.01326,23.04072
+Kople NO-Kirkenes Rådhussvingen,69.72876,30.04334
+Kople NO-Myre Storgata,68.91516,15.10068
+Kople NO-Rendalen Engerdalsveien,61.69506,11.21395
+Kople NO-Russenes Vestre Porsangerveien,70.47762,25.06666
+Kople NO-Utskarpen Flostrandveien,66.29598,13.55068
 
 KOS IT-Varna Forch Straße,46.759149,11.63778,12
 
@@ -16618,6 +16669,8 @@ Luleå-Energi SE-Luleå Teknikvägen,65.61445,22.122996
 
 Luminus BE-Wavre Chau. de Namur,50.690097,4.618506
 
+Lyse NO-Stavanger Teaterveien,58.96581,5.73367
+
 M-Charge CH-Ascona Via Locarno,46.163299,8.774395
 M-Charge CH-Bern Zähringerstrasse,46.95563,7.43334
 M-Charge CH-Buchs Bresteneggstrasse,47.384545,8.088484
@@ -16833,10 +16886,34 @@ Mer DE-Zwiesel Angerplatz,49.012386,13.225143
 Mer DE-Zwiesel Badstraße,49.02458,13.22562
 Mer DE-Zwiesel Bahnhofsplatz,49.020643,13.226609
 Mer DE-Zwiesel Kirchplatz,49.01539,13.23344
-Mer NO-Bjerkvik,68.550885,17.55264
+Mer NO-Bjerkvik Trollvikveien,68.55088,17.55264,30
+Mer NO-Dal Kolonivegen,60.24981,11.18049
+Mer NO-Farsund Barbros gate,58.0926,6.80708
+Mer NO-Flekkefjord Jernbaneveien,58.29445,6.66669
+Mer NO-Gardermoen Hotellvegen,60.19143,11.09494
 Mer NO-Haugesund Karmsundgata,59.402876,5.289789,30
+Mer NO-Karmsund Oasen Storsenter,59.37808,5.30532
+Mer NO-Kristiansand Setesdalsveien,58.18098,7.93133
+Mer NO-Kristiansund Fosnagata,63.11685,7.73189
+Mer NO-Laksvatn Fv293,69.37626,19.36223
+Mer NO-Leknes Storgata,68.14818,13.61853
+Mer NO-Moi Øyevollveien,58.46108,6.54433
+Mer NO-Molde Birger Hatlebakks veg,62.73729,7.16929
+Mer NO-Røldal Kyrkjevegen,59.83254,6.81923
 Mer NO-Sandefjord Fokserødveien,59.178772,10.209071
+Mer NO-Sandnes Gamle Stokkavei,58.87525,5.72256
+Mer NO-Skjåk Skjåkvegen,61.88439,8.26402
+Mer NO-Sogndal Hovevegen,61.23208,7.10452
+Mer NO-Sylte Smedgata,62.29833,7.25537
+Mer NO-Tromsdalen Solstrandvegen,69.63984,18.9698
 Mer NO-Tromsø,69.67366,18.923151
+Mer NO-Vigra Flyplassvegen,62.55872,6.11814
+Mer NO-Vik i Sogn Fv121,61.08588,6.58106
+Mer NO-Ålen Fv573,62.84244,11.30248
+Mer NO-Ålesund Langelandsvegen,62.46605,6.3546
+Mer NO-Ålesund Moavegen,62.46649,6.35167
+Mer NO-Ålgård Ålgårdsheia,58.76962,5.85693
+Mer NO-Østre Løding Kvilut,67.30356,14.73657
 Mer SE-Gävle Johanneslötsvägen,60.667786,17.080474
 Mer SE-Laxå Revirvägen,58.98276,14.62493,25
 Mer SE-Linköping Nygårdsinfarten,58.43082,15.5844
@@ -18452,10 +18529,31 @@ Recharge FI-Vantaa Kirkkotie,60.27056,24.97444
 Recharge FI-Vantaa Maissikuja,60.27026,24.80469
 Recharge FI-Varkaus Käpykankaantie,62.30518,27.85627
 Recharge FI-Ähtäri Myllymäentie,62.55644,24.11053
+Recharge NO-Asker Askerveien,59.83489,10.44221
+Recharge NO-Billingstad IKEA,59.874,10.49876
+Recharge NO-Bø i Vesterålen Bøveien,68.62096,14.44445
+Recharge NO-Fauske Storgaten,67.25927,15.3912
+Recharge NO-Fortun Lustravegen,61.48927,7.68091
 Recharge NO-Gudvangen Nærøydalen,60.87896,6.84286,25
+Recharge NO-Hjelmelandsvågen Rv13,59.23073,6.15437
 Recharge NO-Jørpeland Stålverksvegen,59.01662,6.038172
+Recharge NO-Kleppe Solavegen,58.77799,5.62626
+Recharge NO-Konsmo Audnedalsveien,58.28552,7.35546
+Recharge NO-Kristiansand Hånesveien,58.16641,8.09254
+Recharge NO-Kristiansand Tors gate,58.15295,8.02497
+Recharge NO-Leinstrand Heimdalsvegen,63.32114,10.30299
 Recharge NO-Malvik Stav,63.424355,10.729603
+Recharge NO-Markhus Teigland,59.80382,6.21393
+Recharge NO-Mo i Rana Handelspark,66.30621,14.15044,70
+Recharge NO-Odda Røldalsvegen,60.06726,6.54713,20
+Recharge NO-Orkanger Løypstrengen,63.29618,9.85342
+Recharge NO-Os Gudridflaten,60.20441,5.45325
 Recharge NO-Oslo Ankerveien,59.96226,10.64281,30
+Recharge NO-Oslo Strømsveien,59.92517,10.84421
+Recharge NO-Røros Peder Hiortgata,62.57609,11.38022
+Recharge NO-Sola Solbergvegen,58.88156,5.65433
+Recharge NO-Ålesund Blindheimsbreivika,62.44407,6.36612
+Recharge NO-Ålesund Nedre Klokkersundvegen,62.46672,6.24687
 Recharge SE-Askersund Södra Infarten,58.87979,14.8974,25
 Recharge SE-Bålsta Södra Bålstaleden,59.56022,17.54867
 Recharge SE-Gävle Fjärdingsvägen,60.64809,17.12218,25
@@ -19184,6 +19282,8 @@ StromTankstelle DE-Bad Hindelang Dorfstraße,47.50348,10.38436
 StromTankstelle DE-Waltenhofen Ahornweg,47.682945,10.308779
 
 SVG DE-Merenberg Autohof Benzstraße,50.49926,8.18562
+
+Svorka NO-Valsøyfjorden Valsøyvegen,63.14226,8.53325
 
 SW-Aachen DE-Aachen Burgau,50.552676,6.238098
 SW-Aachen DE-Aachen Försterstraße,50.784738,6.076592
@@ -19981,6 +20081,7 @@ TotalEnergies FR-Aire De Lançon,43.58896,5.18936,30
 TotalEnergies FR-Aire de l’Aveyron,44.329345,3.079666,30
 TotalEnergies FR-Aire De Metz Saint Privat,49.179575,6.053394
 TotalEnergies FR-Aire de Mâcon La Salle,46.41875,4.86536
+TotalEnergies FR-Aire de Nîmes Marguerittes Nord,43.87547,4.45011
 TotalEnergies FR-Aire de Poitou Charentes,46.29759,-0.36964
 TotalEnergies FR-Aire De Ressons Est,49.523482,2.722189,80
 TotalEnergies FR-Aire de Solaize,45.65092,4.83542,30
@@ -20036,7 +20137,6 @@ TotalEnergies FR-Relais Le Mont Saint Michel,48.584798,-1.32577,80
 TotalEnergies FR-Relais Lorraine Les Rappes,48.266949,5.863402,80
 TotalEnergies FR-Relais L’Adour,43.721222,-0.269559,80
 TotalEnergies FR-Relais L’Isle D’Abeau Nord,45.613803,5.212535,80
-TotalEnergies FR-Relais Marguerittes Nord,43.8755,4.449003,80
 TotalEnergies FR-Relais Mille Etangs,46.715962,1.593513,80
 TotalEnergies FR-Relais Passage D Agen,44.171001,0.608616,80
 TotalEnergies FR-Relais Ploumagoar,48.550222,-3.112511,80
@@ -20115,6 +20215,8 @@ Uno-X DK-Kliplev Industripark,54.939616,9.379191,21
 Uno-X DK-Nyborg Storebæltsvej,5.308467,10.809753
 Uno-X DK-Svendborg Vestergade,55.064243,10.591783
 Uno-X DK-Vejle Grønlandsvej,55.66408,9.54918
+Uno-X NO-Evje Verksvegen,58.58297,7.7962
+Uno-X NO-Sandnes Hanamyrveien,58.85443,5.77135
 Uno-X NO-Tiller Kvenildsskogen,63.33372,10.36051
 Uno-X NO-Valderøy Valderøyvegen,62.529,6.11677,25
 
@@ -20491,6 +20593,7 @@ Voltiva SE-Vetlanda Kyrkogatan,57.42667,15.09076
 Volvo IT-Bologna Via Stazione Roveri,44.49785,11.41068
 Volvo IT-Ferrara Via Eridano,44.848679,11.589752
 Volvo IT-Roma Via Salaria,41.99307,12.51524
+Volvo NO-Tromsø Ringvegen,69.69097,19.00894
 
 VSW DE-Bad Oldesloe Am Bürgerpark,53.81141,10.3709
 VSW DE-Bad Oldesloe Käthe-Kollwitz-Straße,53.80729,10.38258,30
@@ -21020,6 +21123,10 @@ IT Sanremo Grand Hotel Des Anglais,43.81277,7.76474
 IT Sant’Anna Hotel La Griglia Lago Di Como,45.94034,9.11064
 IT Vahrn Mautstation Casello Bressanone-Val Pusteria,46.763952,11.643082,20
 IT Vizzola Ticino Pirelli,45.625684,8.677574
+NO Balestrand Kviknes Hotel,61.20858,6.53827
+NO Bessaker Bessakersjøveien,64.24739,10.31975
+NO Geiranger Hotel Union,62.09637,7.21084
+NO Trondheim SINTEF,63.4137,10.4101
 PL Best Western Plus Krakow Old Town,50.058091,19.941162
 PL Kraków Hyatt Place,50.06283,19.90943
 PT Alcantarilha Sudoeste Retail Park,37.13211,-8.35923
