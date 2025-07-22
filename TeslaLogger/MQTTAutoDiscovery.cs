@@ -433,9 +433,9 @@ namespace TeslaLogger
             autoDiscovery["trip_avg_kwh"] = new Dictionary<string, string>();
             autoDiscovery["trip_avg_kwh"]["discovery_active"] = "true";
             autoDiscovery["trip_avg_kwh"]["type"] = "sensor";
-            autoDiscovery["trip_avg_kwh"]["name"] = "Trip energy cunsuption";
+            autoDiscovery["trip_avg_kwh"]["name"] = "Trip energy consumption";
             autoDiscovery["trip_avg_kwh"]["unit"] = "Wh/km";
-            autoDiscovery["trip_avg_kwh"]["class"] = "energy";
+            autoDiscovery["trip_avg_kwh"]["class"] = "energy_distance";
 
             autoDiscovery["trip_distance"] = new Dictionary<string, string>();
             autoDiscovery["trip_distance"]["discovery_active"] = "true";
