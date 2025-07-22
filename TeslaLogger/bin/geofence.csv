@@ -1958,7 +1958,7 @@ Supercharger-V3 DE-Limburg - (Globus),50.398424,8.076242
 Supercharger-V3 DE-Limburg an der Lahn,50.38128,8.08996,60
 Supercharger-V4 DE-Lindau,47.548127,9.72566
 Supercharger-V3 DE-Linstow,53.618217,12.372581
-Supercharger-V3 DE-Lippetal,51.69549,7.96721
+Supercharger-V3 DE-Lippetal,51.6957,7.96738,60
 Supercharger-V3 DE-Lohfelden,51.27188,9.52688,25
 Supercharger-V3 DE-Lohne,52.657651,8.169147
 Supercharger-V3 DE-Ludwigshafen-Oggersheim,49.490475,8.352335
@@ -2182,6 +2182,7 @@ Supercharger-V4 ES-Albacete Campollano,39.02847,-1.88675
 Supercharger-V4 ES-Alberique,39.12976,-0.50843
 Supercharger-V3 ES-Alcobendas,40.519701,-3.656799,60
 Supercharger ES-Alcobendas,40.521575,-3.65606
+Supercharger-V3 ES-Aldaia,39.47147,-0.48592
 Supercharger-V3 ES-Algeciras,36.135157,-5.461652
 Supercharger ES-Almaraz,39.791562,-5.695512,30
 Supercharger-V4 ES-Antas,37.21338,-1.89739
@@ -2205,6 +2206,7 @@ Supercharger-V4 ES-Córdoba,37.889848,-4.749685
 Supercharger ES-Cúllar,37.554031,-2.613944
 Supercharger-V4 ES-Darro,37.49307,-2.76319
 Supercharger-V3 ES-El Ejido,36.752381,-2.80533
+Supercharger-V4 ES-Estepona,36.45731,-5.06157
 Supercharger ES-Fuengirola,36.580783,-4.595893
 Supercharger ES-Fuenlabrada,40.298262,-3.820891
 Supercharger ES-Getafe,40.290389,-3.696302
@@ -2212,9 +2214,11 @@ Supercharger-V4 ES-Gibraleón,37.36364,-6.9599
 Supercharger ES-Girona,41.998411,2.817295
 Supercharger-V4 ES-Girona West,41.96565,2.78075
 Supercharger ES-Granada,37.181805,-3.928417
+Supercharger-V4 ES-Granada Calle Menéndez Pelayo,37.14378,-3.60556
 Supercharger ES-Guarromán,38.143021,-3.722848
 Supercharger-V4 ES-Hellín,38.49631,-1.63673,30
 Supercharger-V4 ES-Hernani,43.276171,-1.987865
+Supercharger-V3 ES-Jaén,37.78998,-3.77609
 Supercharger ES-Jerez,36.692378,-6.160246
 Supercharger-V4 ES-Jorba,41.62016,1.50901
 Supercharger-V3 ES-La Jonquera,42.401718,2.880498
@@ -2245,15 +2249,18 @@ Supercharger ES-Murcia,38.038172,-1.149343
 Supercharger-V4 ES-Málaga,36.654784,-4.480178
 Supercharger-V4 ES-Mérida,38.8598,-6.36399
 Supercharger ES-Mérida,38.921746,-6.375133
+Supercharger-V4 ES-Ocaña,39.93407,-3.4897
 Supercharger-V3 ES-Ondara,38.816859,0.022245
 Supercharger-V3 ES-Pamplona,42.783886,-1.630849,60
 Supercharger ES-Reocín,43.355578,-4.09496
 Supercharger ES-Rivabellosa,42.701171,-2.91951
-Supercharger-V3 ES-Sagunto,39.672924,-0.266304
+Supercharger-V3 ES-Sagunto,39.67293,-0.26609
 Supercharger-V3 ES-Salamanca,40.945571,-5.639382
+Supercharger-V3 ES-San José de la Rinconada,37.44024,-5.88562
 Supercharger-V3 ES-San Pedro del Pinatar,37.823213,-0.809725,30
 Supercharger ES-Sant Cugat,41.498096,2.072692
 Supercharger-V4 ES-Santa Agnès de Malanyanes - La Roca Village,41.607636,2.340909
+Supercharger ES-Santiago de Compostela,42.91016,-8.49327
 Supercharger-V4 ES-Sevilla,37.39162,-6.00963
 Supercharger-V4 ES-Sevilla West,37.36306,-6.19967
 Supercharger ES-Tarragona,41.13426,1.16833,25
@@ -2267,6 +2274,7 @@ Supercharger-V4 ES-Totana,37.77605,-1.45422
 Supercharger-V4 ES-Trujillo,39.56539,-5.83312
 Supercharger-V3 ES-Valdepeñas,38.779707,-3.388703
 Supercharger-V3 ES-Valencia Paterna,39.543,-0.45147
+Supercharger-V3 ES-Vigo,42.2206,-8.72507
 Supercharger-V4 ES-Vila-seca,41.096226,1.150441
 Supercharger-V4 ES-Villagonzalo Pedernales,42.28864,-3.70585
 Supercharger-V4 ES-Villalpando,41.82636,-5.3789
@@ -2274,6 +2282,7 @@ Supercharger-V4 ES-Villaquirán de los Infantes,42.220344,-3.998715
 Supercharger-V4 ES-Villar de Chinchilla,38.89854,-1.50344
 Supercharger-V4 ES-Villena,38.7287,-0.93814
 Supercharger-V4 ES-Vitoria-Gasteiz,42.84648,-2.7405,60
+Supercharger-V3 ES-Xinzo de Limia,42.07815,-7.71505
 Supercharger-V4 ES-Zaragoza,41.62583,-1.0096
 Supercharger-V4 ES-Zaragoza East,41.6067,-0.69069
 Supercharger-V4 ES-Zaragoza Gran Casa,41.67028,-0.89014
@@ -5885,6 +5894,9 @@ ABC FI-Viitasaari Kokkosalmentie,63.07438,25.86506
 ABC FI-Ylivieska Joutsentie,64.07236,24.50942
 ABC FI-Ähtäri Oikotie,62.54999,24.08735
 
+ACCIONA ES-Ponts Carr. de La Seu d’Urgell,41.92283,1.19431
+ACCIONA ES-Ribeira Lugar Insuela,42.56999,-8.96743
+
 Acea IT-Capena Via Tiberina,42.120239,12.590254
 Acea IT-Castel Gandolfo Via Spiaggia del Lago,41.75856,12.65374
 
@@ -7576,6 +7588,8 @@ Béa FR-Plélan-le-Grand Rue des Korrigans,48.00597,-2.08934,30
 Bürger DE-Moosburg an der Isar Viehmarktplatz,48.466018,11.93983
 
 Camer IT-Lecce Via G. Marconi,40.351696,18.17437
+
+CanariasTeRecarga ES-Arona Puerto de Los Cristianos,28.04854,-16.72018
 
 CEPSA PT-Abrantes A23,39.48615,-8.15876
 
@@ -9373,7 +9387,16 @@ EDEKA DE-Wrist Eken,53.92854,9.75124
 EDEKA DE-Wuppertal Albertstraße,51.269634,7.209428
 EDEKA DE-Zossen Gutstedtstraße,52.17,13.47159
 
+EDP ES-Avilés Av. de Lugo,43.57515,-5.92896
 EDP ES-Bergara Urteaga kalea,43.108058,-2.40634
+EDP ES-Cangas de Onís C. Picos de Europa,43.35243,-5.12602
+EDP ES-Cudillero N-632,43.55523,-6.16723
+EDP ES-Gijón C. Álvarez Garaya,43.54123,-5.66559
+EDP ES-Llanes La Arquera,43.40749,-4.75854
+EDP ES-Medina del Campo Av. del V Centenario de Isabel la Católica,41.30142,-4.90906
+EDP ES-Siero Avenida Principal,43.41589,-5.79699
+EDP ES-Tapia de Casariego Pol. Ind. El Cortaficio,43.56184,-6.92298
+EDP ES-Tapia de Casariego Pol. Ind. El Cortaficio,43.56187,-6.92298
 EDP PT-Bragança R. Almada Negreiros,41.78769,-6.7745
 EDP PT-Nazaré Largo Padre Silvestre,39.6063,-9.07394
 EDP PT-Peniche R. da Ponte Velha,39.36407,-9.37503
@@ -11538,7 +11561,24 @@ EnBW DE-Öhringen Meisterhausstr.,49.20465,9.50171
 EnBW DE-Öhringen Siemensstraße,49.207153,9.480891
 EnBW DE-Überlingen Lippersreuther Str.,47.770249,9.172718
 
-Endesa ES-Cdad. Quesada C. Vigo,38.0501,-0.72265
+EndesaX ES- Santiago de Compostela Rúa do País Vasco,42.90992,-8.49245,20
+EndesaX ES-Aldeanueva del Camino N-630,40.26513,-5.91751
+EndesaX ES-Armilla Av. Fernando de los Ríos,37.15359,-3.61537
+EndesaX ES-Cdad. Quesada C. Vigo,38.0501,-0.72265
+EndesaX ES-Collado Villalba C. Alejandro Gamella,40.64044,-4.00745
+EndesaX ES-Fuenlabrada Calle de Pinto,40.27449,-3.76053
+EndesaX ES-Guadalajara C. Pescadores,40.63398,-3.1614
+EndesaX ES-La Carlota C. Ing. Juan de la Cierva,37.66615,-4.94041
+EndesaX ES-Loja C. Salar Vial-B,37.16023,-4.12436
+EndesaX ES-Los Barrios C. Océano Atlántico,36.1847,-5.42997
+EndesaX ES-Miraflores de la Sierra C. del Río,40.81066,-3.76915
+EndesaX ES-Ponts C-14,41.92108,1.19171
+EndesaX ES-Pozuelo de Alarcón C. Edgar Neville,40.39452,-3.7981
+EndesaX ES-Sevilla C. Ganímedes,37.43364,-5.96978
+EndesaX ES-Sevilla Centro Comercial Torre Sevilla,37.39177,-6.01042,20
+EndesaX ES-Toledo CM-4003,39.90517,-4.01739
+EndesaX ES-Torre del Mar El Ingenio,36.75579,-4.09886
+EndesaX ES-Área de Servicio Andamur Guarromán,38.14233,-3.72323,20
 
 Endolla-Barcelona ES-Barcelona Sant Martí,41.39334,2.20294
 Endolla-Barcelona ES-Sarrià-Sant Gervasi Pg. de la Bonanova,41.40127,2.12263
@@ -11958,7 +11998,9 @@ EQUANS NL-Amsterdam IJdoornlaan,52.41527,4.91168
 EQUAY PL-Gdańsk mjr. Henryka Sucharskiego,54.40323,18.68079
 EQUAY PL-Gdańsk Zamknięta,54.40017,18.678
 
+Eranovum ES-Daimús C.Assagador,38.97102,-0.15388
 Eranovum ES-Finestrat Avinguda País Valencià,38.53687,-0.17895
+Eranovum ES-Valladolid Cam. Viejo de Simancas,41.62127,-4.75655
 
 ESARJ TR-Afyonkarahisar Merkez Dörtyol,38.793372,30.457982
 
@@ -11988,6 +12030,17 @@ ESWE DE-Wiesbaden Hauptbahnhof Gartenfeldstraße,50.070716,8.245458
 ESWE DE-Wiesbaden Mainzer Straße,50.060553,8.254324
 ESWE DE-Wiesbaden Warmer Damm,50.08353,8.24501
 
+etecnic ES-Amposta Avinguda Alcalde Palau,40.71241,0.57919
+etecnic ES-Calafell Ctra. Sanatori,41.1897,1.56753
+etecnic ES-Cambrils Sortida A-7,41.09041,1.09388
+etecnic ES-Figueres Plaça del President Josep Tarradellas,42.26903,2.96683
+etecnic ES-Lleida Av. de Pinyana,41.62681,0.61062
+etecnic ES-Lleida Av. de Pinyana,41.62955,0.62118
+etecnic ES-L’Espluga de Francolí Avinguda de Catalunya,41.39514,1.09843
+etecnic ES-Ponts Avinguda Font de Valldans,41.91534,1.18544
+etecnic ES-Roses Carrer de la Riera Ginjolers,42.26355,3.17887
+etecnic ES-Sant Feliu de Guíxols Carrer de Cristòfol Colom,41.78139,3.03458
+etecnic ES-Segorbe Av. Fray Luis Amigo,39.84834,-0.48888
 etecnic ES-Vilanova i la Geltrú Carrer dels Escolapis,41.22233,1.72666
 etecnic ES-Vilanova i la Geltrú Passeig Marítim,41.21605,1.73325
 
@@ -14096,35 +14149,66 @@ I2GO SE-Grums Nyängsgatan,59.36735,13.14465,15
 
 IBC CH-Chur Waisenhausstrasse,46.87138,9.5436
 
+Iberdrola ES-Adina Lugar Vinquiño,42.41601,-8.81282
 Iberdrola ES-Alicante Av. de Antonio Ramos Carratalá,38.36972,-0.4662
 Iberdrola ES-Antas C. Mojana,37.26061,-1.90026
 Iberdrola ES-Aranda de Duero C. las Francesas,41.66434,-3.69068
 Iberdrola ES-Atalaya del Cañavate,39.53866,-2.25493,12
 Iberdrola ES-Autovía del Suroeste,38.93821,-6.36089
 Iberdrola ES-Badajoz Av. de Elvas,38.8825,-6.99615
+Iberdrola ES-Benahadux N-340a,37.65504,-1.71148
 Iberdrola ES-Benidorm Avinguda de la Vila Joiosa,38.53536,-0.15504
 Iberdrola ES-Benidorm C. de La Haya,38.54303,-0.10236
+Iberdrola ES-Bilbao Abandoibarra Etorb.,43.26823,-2.93333
+Iberdrola ES-Bullas Ctra. de la Copa,38.05288,-1.66082
+Iberdrola ES-Cabo de Palos Es Paso,37.6276,-0.71011
 Iberdrola ES-Calvarrasa de Abajo Crta de Madrid,40.945784,-5.554589
 Iberdrola ES-Carbajosa de la Sagrada,40.94678,-5.642569
+Iberdrola ES-Cuenca Av. de los Reyes Católicos,40.0593,-2.13878
+Iberdrola ES-Córdoba Pol. Ind. Las Quemadas,37.90335,-4.72397
 Iberdrola ES-Dénia Moll de la Pansa,38.84557,0.1145
+Iberdrola ES-Eibar Torrekua Kalea,43.18024,-2.48815
 Iberdrola ES-Eivissa Carrer de Cales Ànimes,38.92095,1.4411
+Iberdrola ES-El Burgo de Osma Av. Juan Carlos I,41.5879,-3.06723
+Iberdrola ES-El Palmar C.Mayor,37.93556,-1.16327
 Iberdrola ES-Elche Av. del Alcalde Vicente Quiles,38.27242,-0.69049
+Iberdrola ES-Encinas de Abajo Ctra. de Villacastín,40.93201,-5.4669
+Iberdrola ES-Figueres Ctra. De Figueres to Roses,42.26855,2.99926
 Iberdrola ES-Finestrat Avinguda País Valencià,38.53643,-0.17942
+Iberdrola ES-Gandia Partida Rajolar,38.96205,-0.17367
+Iberdrola ES-Getafe Av. Río Guadalquivir,40.27163,-3.69702
 Iberdrola ES-Gran Alacant Carrer de Finlandia,38.233337,-0.550077
 Iberdrola ES-Huelva,37.306245,-6.87322
 Iberdrola ES-Huércal de Almería Ctra. Almería,36.87233,-2.44416
+Iberdrola ES-La Belga C. de los Hermanos Quirós Río,43.39067,-5.78135
+Iberdrola ES-La Franca Bo. las Arenas,43.38562,-4.57127
+Iberdrola ES-Las Rozas de Madrid C. Cruces,40.48995,-3.87419
+Iberdrola ES-Leganés C. de Eduardo Torroja,40.31835,-3.74464
 Iberdrola ES-Los Barrios Av. Carlos Cano,36.17785,-5.49024
 Iberdrola ES-Los Dolses C. Jade,37.9279,-0.73598
 Iberdrola ES-L’Alfàs del Pi Camí Vell d’Altea,38.57253,-0.07583
+Iberdrola ES-Monesterio Camino del Culebrin Monesterio,38.02804,-6.22031
+Iberdrola ES-Murcia Av. de los Pinos,37.99716,-1.1384
+Iberdrola ES-Murcia C. los Nietos,37.96913,-1.1276
 Iberdrola ES-Ondara Av. Costa Blanca,38.8182,0.02444
 Iberdrola ES-Petrer Av. el Guirnei,38.4903,-0.77847
+Iberdrola ES-Peñaranda de Bracamonte Av. de Salamanca,40.90499,-5.20868
 Iberdrola ES-Pineda de Mar Passeig Marina,41.62404,2.67575
 Iberdrola ES-Roquetas de Mar C. Chillida,36.81828,-2.59754
 Iberdrola ES-Sabadell Carr. de Bellaterra,41.5115,2.10673
+Iberdrola ES-Salamanca P.º de la Estación,40.96914,-5.65686
 Iberdrola ES-Salamanca Rector Esperabe,40.958977,-5.665269
 Iberdrola ES-San Fulgencio Calle del Mar,38.11762,-0.65714
+Iberdrola ES-San Sebastián de los Reyes Gta. de Antonio Gaudí,40.55808,-3.61263
+Iberdrola ES-Santa Magdalena de Polpís Carrer Alcalà,40.35538,0.30139
+Iberdrola ES-Siero Langreo,43.38049,-5.69989
+Iberdrola ES-València Av. del Professor López Piñero,39.4553,-0.3554
+Iberdrola ES-Vicálvaro C. Abad Juan Catalán,40.40491,-3.59152
 Iberdrola ES-Villagonzalo Pedernales Av. Pedernales,42.30718,-3.70289
+Iberdrola ES-Villargordo del Cabriel C. Carretera,39.53628,-1.43862
+Iberdrola ES-Villaverde C. del Valle de Tobalina,40.33613,-3.7149
 Iberdrola ES-Xàbia Camí Cabanes,38.76542,0.18098
+Iberdrola ES-Área de Servicio Valcarce,42.65917,-6.91402
 Iberdrola ES-Ávila Ctra. Burgohondo,40.64636,-4.70513
 Iberdrola PT-Caldas da Rainha R. Casal dos Barreiros,39.4171,-9.1516
 
@@ -14736,10 +14820,11 @@ Ionity EE-Häädemeeste,58.07469,24.51278
 Ionity EE-Märjamaa,58.92126,24.45761
 Ionity ES-Ariza Norte,41.31261,-2.00133
 Ionity ES-Ariza Sur,41.311642,-2.002738
-Ionity ES-Campo de las Naciones,40.458398,-3.616092
 Ionity ES-Casabermeja,36.898255,-4.429885
+Ionity ES-Cazalegas Polígono Sector III,39.98405,-4.73184
 Ionity ES-El Hidalgo,38.824574,-3.396857
 Ionity ES-Imarcoain,42.732379,-1.618726
+Ionity ES-Madrid Campo de las Naciones,40.45863,-3.61661
 Ionity ES-Martin de Yeltes,40.769662,-6.286721
 Ionity ES-Merida,38.933955,-6.343053
 Ionity ES-Milagros,41.593947,-3.698254
@@ -14752,6 +14837,9 @@ Ionity ES-Sotogrande A-7,36.28674,-5.31246
 Ionity ES-Trigueros Norte,37.334097,-6.789422
 Ionity ES-Trigueros Sur,37.331672,-6.802211
 Ionity ES-Vila Sana,41.643444,0.931306
+Ionity ES-Vilobí d’Onyar N-156,41.89874,2.77057
+Ionity ES-Área de Servicio Logroño Autopista,42.45011,-2.36973
+Ionity ES-Área de Servicio Tudela La Pausa,42.01239,-1.60049
 Ionity FI-Jyväskylä,62.2869,25.71491,25
 Ionity FI-Karisto,60.9835,25.73731
 Ionity FI-Oulu,64.957547,25.52472
@@ -18374,6 +18462,7 @@ Porsche DE-Wiesbaden Mainzer Straße,50.0559,8.25723
 Porsche DE-Willich Jakob-Kaiser-Str.,51.2721,6.51569
 Porsche DE-Willich Jakob-Kaiser-Straße,51.27255,6.51521
 Porsche DE-Wuppertal Porschestraße,51.3053,7.25279
+Porsche ES-Oleiros Avenida das Mariñas,43.32991,-8.36608
 Porsche HR-Rijeka Škurinjska cesta,45.35415,14.41766
 Porsche HR-Zadar Ul. 4.Gardijske Brigade,44.10645,15.26091
 Porsche HR-Zagreb Miroslava Miholića,45.76073,15.9828
@@ -18383,7 +18472,9 @@ Porsche LU-Howald Hesperange Rue Peternelchen,49.575682,6.138282
 Porsche PL-Katowice Kochłowicka,50.25476,18.9704
 
 Powerdot ES-Alcasar Carrer París,38.71645,0.14068
+Powerdot ES-Ciudad Real Carr. de Porzuna,38.99175,-3.9355
 Powerdot ES-Finestrat C Rei Jaume I,38.53487,-0.1729
+Powerdot ES-Salamanca Av. de los Cipreses,40.97742,-5.64855
 Powerdot FR-Bergerac Rue du Tounet,44.83547,0.45136,30
 Powerdot FR-Charmes Voie Carpini,48.359627,6.304077
 Powerdot FR-Cosne-Cours-sur-Loire Rue des Minotiers,47.383055,2.919293
@@ -18612,14 +18703,27 @@ Renovatio RO-Sibiu Veștem,45.700054,24.249888
 Renovatio RO-Târgu Mureș Strada Gheorghe Doja,46.51084,24.50876
 
 Repsol ES-Alcorcón Camino de Leganes,40.32415,-3.847402
+Repsol ES-Altafulla N-340,41.14004,1.36536
+Repsol ES-Arroyo de la Encomienda Ctra. Salamanca,41.62276,-4.77373
 Repsol ES-Autovía del Noroeste,41.00997,-4.66524
+Repsol ES-Carbajosa de la Sagrada C. Segunda,40.93895,-5.65541
+Repsol ES-La Atalaya,40.3767,-3.87472
 Repsol ES-Las Navas del Marqués,40.594971,-4.333199
+Repsol ES-Madrid C. de Alberto Aguilera,40.4294,-3.70856
+Repsol ES-Madrid C. de Villaamil,40.46128,-3.70826
+Repsol ES-Madrid CR M-301,40.36628,-3.65532
 Repsol ES-Madrid Moncloa-Aravaca,40.460896,-3.757607
+Repsol ES-Madrid P.º de la Castellana,40.44545,-3.69082
 Repsol ES-Madrid San Blas-Canillejas,40.448908,-3.565237
+Repsol ES-Murcia Av. Primero de Mayo,37.9875,-1.115
 Repsol ES-Ripollet B-141,41.50009,2.15096
 Repsol ES-Sabadell Carrer d’Urgell,41.56104,2.10075
 Repsol ES-Santa Marta de Tormes,40.949717,-5.610224
+Repsol ES-Tordesillas Autovía de Castilla,41.51723,-4.94613
+Repsol ES-Valladolid C. del Puente Colgante,41.64124,-4.73436
+Repsol ES-Venturada CR A-I,40.7857,-3.61371
 Repsol ES-Villares de la Reina,40.988319,-5.645795,30
+Repsol ES-Villares de la Reina CR C-519,41.0049,-5.64922
 Repsol PT-Odivelas R. Alm. Gago Coutinho,38.805,-9.15803
 Repsol PT-Torres Vedras R. João Carlos Júnior,39.08217,-9.26058
 
@@ -19060,6 +19164,7 @@ Shell DE-Wülfrath Hohdahlsfeld,51.300285,7.062605
 Shell DE-Würselen Hauptstraße,50.8165,6.15489
 Shell DE-Übach-Palenberg Rörmonderstraße,50.912861,6.137814
 Shell DK-Kruså Sønderborgvej,54.849584,9.405117
+Shell ES-Los Barrios C. Cabotaje,36.18883,-5.43247
 Shell FR-Aire de Béziers-Montblanc Sud,43.359314,3.34559,30
 Shell FR-Sommesous Aire de Sommesous,48.7294,4.2291
 Shell HU-Pécs Budai Vám utca,46.083554,18.270951
@@ -19785,6 +19890,7 @@ TankE DE-Uslar Hans-Böckler-Straße,51.659654,9.651023
 
 TAURON PL-Balice Lotnisko,50.07157,19.79963
 
+TCB ES-Madrid Calle de Fuencarral,40.42963,-3.70251
 TCB ES-Navalmoral Autovía del Suroeste,39.873511,-5.549847
 
 TEA HU-Balatonalmádi Szabolcs u.,47.040134,18.019039
@@ -20083,6 +20189,7 @@ TotalEnergies DE-Warendorf Sassenberger Straße,51.957782,8.01005
 TotalEnergies DE-Weissenfels,51.268727,11.978193,80
 TotalEnergies DE-Wittenberge Parkstraße,53.001612,11.747187
 TotalEnergies ES-s’Argamassa Avinguda de s’Argamassa,38.99229,1.56948
+TotalEnergies ES-Tarancón N-400,40.02451,-2.95062
 TotalEnergies FR-Aire de Canaver,43.46766,6.67055
 TotalEnergies FR-Aire de Coeur des Hauts-de-France,49.88812,2.84037
 TotalEnergies FR-Aire de De Parsac,46.19728,2.18549,30
@@ -20599,6 +20706,7 @@ Volkswagen DE-Zwickau Schubertstraße,50.746634,12.478944
 Volkswagen DE-Zörbig Thura Mark,51.62983,12.13562
 Volkswagen DE-Öhringen Rudolf-Diesel-Straße 1,49.200257,9.47635
 Volkswagen DE-Überlingen Hauptstraße 37,47.802296,9.238275
+Volkswagen ES-Los Barrios ZAL El Fresno,36.17115,-5.45939
 Volkswagen IT-Bolzano Vittorio-Lancia-Straße,46.484029,11.336793
 Volkswagen PL-Wrocław al. Karkonoska,51.05556,16.97776
 Volkswagen RO-Ghimbav Calea Brașovului,45.66277,25.51406
@@ -20634,7 +20742,10 @@ WEMAG DE-Valluhn Am Heisterbusch,53.508901,10.845572
 
 Wenea ES-Almuradiel A-4,38.41779,-3.49883
 Wenea ES-Autovía del Noroeste,41.13219,-4.77741
+Wenea ES-Curtis N-634,43.18162,-7.9678
+Wenea ES-Lugo Playa de Sacido,43.67723,-7.61381
 WENEA ES-Madrid Calle Roberto Domingo,40.433794,-3.661095
+Wenea ES-Tapia de Casariego N-634,43.54202,-6.98357
 
 westenergie DE-Balve Sauerlandstraße,51.327951,7.86794
 westenergie DE-Erftstadt Fritz-Erler-Straße,50.81253,6.81435,30
@@ -20785,8 +20896,15 @@ ZSE SK-Senec Trnavská,48.23,17.40271
 ZSE SK-Žilina-Solinky Prielohy,49.19491,18.73937
 
 Zunder ES-Burgos C. del Carmen,42.33681,-3.70531
+Zunder ES-Estepona Carr. de Cadiz,36.4344,-5.16039
+Zunder ES-Getafe Av. Juan Carlos I,40.2959,-3.74527
+Zunder ES-Gijon-Este C. de Luís Ortiz Berrocal,43.5247,-5.64128
+Zunder ES-Langreo C. Aurelio Delbrouck,43.29529,-5.68416
 Zunder ES-Lleida Salida,41.66394,0.60495,12
+Zunder ES-Mieres C. Rector Julio Rodríguez,43.24328,-5.77581
 Zunder ES-Monesterio C. de los Carpinteros,38.08253,-6.25831
+Zunder ES-Rois Sar Galicia,42.77438,-8.65104
+Zunder ES-Santiago de Compostela Rúa de Miguel Ferro Caaveiro,42.88438,-8.51292
 Zunder ES-Villalpando Cam. de los Gallegos,41.82615,-5.37888,12
 
 Ísorka IS-Stykkishólmur Borgarbraut,65.07335,-22.72929
@@ -21109,10 +21227,17 @@ DE Wuppertal Bergische Universität,51.23953,7.160973
 DE Wöbbelin KFZ-Service Braemer,53.39759,11.5145
 DE Zeitz Martin-Planer-Straße,51.04626,12.15665
 DE Zwickau Kopernikusstraße,50.73138,12.47356
+ES Alcalá de Henares Jardín Botánico,40.50638,-3.34228
+ES Brión Viaducto de Brión,42.86336,-8.6763
+ES Colmenar Viejo P.º de la Ermita de Sta. Ana,40.65449,-3.76011
+ES Donostia Hotel ILUNION San Sebastián,43.31388,-2.00451
 ES Gandia,38.969986,-0.178789
+ES Jarandilla de la Vera Hotel Ruta Imperial,40.12739,-5.66586
 ES Madrid Alcobendas Calle del Pintor Murillo,40.542868,-3.648588
 ES Madrid Hotel Madrid Centro,40.423082,-3.709453
+ES Motril Elba Beach Hotel,36.72366,-3.53931
 ES Sant Cugat del Vallès Carrer de la Mina,41.47519,2.0818
+ES Valladolid Sercotel,41.6357,-4.74707
 FR 68510 Sierentz Hyper U et Drive,47.66618,7.441494,10
 FR Disneyland Paris,48.86427,2.78954,99
 FR Disneyland Paris,48.87352,2.78475,60
