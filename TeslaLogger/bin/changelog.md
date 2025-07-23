@@ -1,3 +1,6 @@
+# Version 1.63.8
+- Settting for Extras/Dashboard. You can now upload your background image fot the dashboard and set the API key for openweather in a dialog. 
+
 # Version 1.63.7
 - Info about deprecated Docker. Please update to new Teslalogger Image: [LINK](https://github.com/bassmaster187/TeslaLogger/blob/master/docs/en/upgrade-to-net8-docker.md)
 
