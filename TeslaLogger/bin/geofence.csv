@@ -2611,7 +2611,7 @@ Supercharger-V3 FR-Épinal,48.20083,6.477478
 Supercharger-V3 FR-Évry-Courcouronnes,48.61589,2.4239
 
 Supercharger-V3 GB-Aberdeen - Service Centre,57.110088,-2.092787
-Supercharger-V3 GB-Aberystwyth,52.405307,-4.064732
+Supercharger-V3 GB-Aberystwyth,52.4047,-4.06458
 Supercharger GB-Abington,55.507944,-3.694786
 Supercharger-V3 GB-Adderstone,55.564956,-1.791893
 Supercharger-V3 GB-Amesbury,51.177215,-1.756282
@@ -2622,7 +2622,7 @@ Supercharger-V3 GB-Banbury,52.073055,-1.341804
 Supercharger GB-Barnsley,53.489393,-1.486223
 Supercharger-V3 GB-Belfast,54.583523,-5.960532
 Supercharger-V4 GB-Belfast 2,54.584952,-5.959096
-Supercharger-V3 GB-Birch - Eastbound,53.568359,-2.234161
+Supercharger-V3 GB-Birch Eastbound,53.56834,-2.23337
 Supercharger GB-Birchanger Green,51.870767,0.196508
 Supercharger GB-Birchanger Green,51.871763,0.193506
 Supercharger GB-Birmingham,52.362924,-1.945572
@@ -2634,7 +2634,7 @@ Supercharger-V3 GB-Bristol - Eastgate,51.47352,-2.564753
 Supercharger GB-Bristol Cribbs Causeway,51.526887,-2.59964
 Supercharger-V4 GB-Brora,58.012292,-3.848578
 Supercharger GB-Burtonwood,53.417605,-2.639522
-Supercharger-V3 GB-Camborne,50.227643,-5.279001
+Supercharger-V3 GB-Camborne,50.22756,-5.28
 Supercharger-V4 GB-Cambridge,52.256509,0.016594
 Supercharger-V4 GB-Cannock,52.687759,-2.01457
 Supercharger-V3 GB-Cardiff,51.531534,-3.139834
@@ -2645,9 +2645,11 @@ Supercharger GB-Colchester,51.88071,0.788574
 Supercharger-V4 GB-Craigavon,54.448966,-6.391254
 Supercharger-V4 GB-Crick,52.352622,-1.160603
 Supercharger GB-Dartford,51.438052,0.26879
+Supercharger-V3 GB-Dartford Service Centre,51.43848,0.26688
 Supercharger-V3 GB-Dartford Tesla Service Centre,51.453505,0.246775
 Supercharger GB-Derby,52.9179,-1.47425
-Supercharger-V3 GB-Dorking,51.244966,-0.324965
+Supercharger GB-Derby,52.91831,-1.47197
+Supercharger-V3 GB-Dorking,51.247,-0.33105
 Supercharger-V4 GB-Dover,51.125224,1.316863
 Supercharger GB-Dundee,56.466428,-3.062962
 Supercharger-V4 GB-Durham,54.727034,-1.528546
@@ -2661,8 +2663,8 @@ Supercharger-V3 GB-Exeter Darts Farm,50.685896,-3.450039
 Supercharger-V3 GB-Exeter Sandygate Roundabout,50.715621,-3.464937
 Supercharger-V3 GB-Ferrybridge,53.698625,-1.265508
 Supercharger GB-Fleet,51.296156,-0.857274
-Supercharger-V3 GB-Flimwell,51.05249,0.455713
-Supercharger-V3 GB-Flint Mountain,53.232043,-3.140121
+Supercharger-V3 GB-Flimwell,51.05242,0.45474
+Supercharger-V3 GB-Flint Mountain,53.23223,-3.14202
 Supercharger-V4 GB-Folkestone,51.089496,1.123928
 Supercharger GB-Folkestone,51.095988,1.120931
 Supercharger-V3 GB-Fort William,56.821521,-5.103637
@@ -2671,14 +2673,14 @@ Supercharger-V3 GB-Frankley Southbound,52.429853,-2.017158
 Supercharger-V3 GB-Gatwick - Gridserve Electric Forecourt,51.156117,-0.153673
 Supercharger-V4 GB-Glasgow Airport,55.855955,-4.447827
 Supercharger GB-Glasgow Tesla Service Centre,55.867664,-4.239206
-Supercharger-V3 GB-Gloucester Northbound,51.819541,-2.227771
-Supercharger-V3 GB-Gloucester Southbound,51.819745,-2.223498
+Supercharger-V4 GB-Gloucester Northbound,51.81992,-2.22738
+Supercharger-V4 GB-Gloucester Southbound,51.81885,-2.22418
 Supercharger GB-Gordano,51.477111,-2.706179
 Supercharger GB-Grantham,52.948437,-0.678221
-Supercharger-V3 GB-Grays,51.490717,0.286168
+Supercharger-V3 GB-Grays,51.48949,0.28681
 Supercharger-V4 GB-Gretna Caledonia Park,54.996828,-3.0596
 Supercharger GB-Gretna Green,55.0078,-3.083018
-Supercharger GB-Guildford,51.248329,-0.55985
+Supercharger-V3 GB-Guildford,51.24964,-0.55946
 Supercharger-V4 GB-Harlington,51.961749,-0.511626
 Supercharger-V3 GB-Harrogate,53.962085,-1.52856
 Supercharger GB-Hartshead Moor - Eastbound,53.711301,-1.745676
@@ -2713,6 +2715,9 @@ Supercharger-V3 GB-London - Bromley,51.404036,0.019443
 Supercharger-V3 GB-London - Croydon,51.35591,-0.116472
 Supercharger-V3 GB-London - Sidcup,51.414249,0.132954
 Supercharger-V3 GB-London - Tottenham,51.611107,-0.043032
+Supercharger-V3 GB-London Gateway,51.63036,-0.26354
+Supercharger GB-London North Greenwich,51.50245,-0.00175
+Supercharger-V3 GB-London Sidcup,51.4128,0.13426
 Supercharger GB-London-Brent Cross,51.57753,-0.223753
 Supercharger GB-London-Canary Wharf,51.504346,-0.016146
 Supercharger-V3 GB-London-Chelmsford,51.750315,0.511402
@@ -2728,8 +2733,8 @@ Supercharger-V4 GB-Manchester,53.461811,-2.285508
 Supercharger-V3 GB-Manchester - South,53.430305,-2.179438
 Supercharger-V3 GB-Manchester Trafford Centre,53.466824,-2.354047
 Supercharger-V3 GB-Mansfield - East Midlands Designer Outlet,53.10912,-1.31227
-Supercharger-V3 GB-Medway - Eastbound,51.341249,0.60578
 Supercharger-V3 GB-Medway - Westbound,51.341559,0.611212
+Supercharger-V3 GB-Medway Eastbound,51.34058,0.60854
 Supercharger GB-Membury Eastbound,51.48391,-1.556821
 Supercharger GB-Membury Westbound,51.481293,-1.556196
 Supercharger-V3 GB-Merry Hill,52.48358,-2.112747
@@ -2739,6 +2744,7 @@ Supercharger-V4 GB-Middlesbrough Acklam Road,54.55964,-1.259646
 Supercharger-V4 GB-Middlesbrough Marton Road,54.571823,-1.22504
 Supercharger-V3 GB-Newark,53.081144,-0.806543
 Supercharger-V3 GB-Newmarket - Studlands Shopping Park,52.26224,0.39757
+Supercharger-V3 GB-Newport,51.60171,-2.93461
 Supercharger GB-Newport Pagnell,52.084312,-0.748467
 Supercharger-V4 GB-Newtown,52.50252,-3.349306
 Supercharger GB-North Greenwich,51.507022,0.015928
@@ -2765,22 +2771,22 @@ Supercharger-V3 GB-Rugby,52.409672,-1.250838
 Supercharger GB-Sarn,51.535351,-3.577637
 Supercharger-V3 GB-Sevenoaks,51.302673,0.160995
 Supercharger GB-Sheffield,53.314145,-1.281904
-Supercharger-V3 GB-Solihull - Service Centre,52.376374,-1.796275
+Supercharger-V4 GB-Solihull,52.37729,-1.79643
 Supercharger GB-South Mimms,51.687536,-0.223548
 Supercharger-V4 GB-Sprucefield,54.491991,-6.068177
 Supercharger-V4 GB-Stanwell,51.442912,-0.474949
 Supercharger-V4 GB-Stevenage,51.901772,-0.208134
-Supercharger-V3 GB-Swansea,51.678371,-3.996227
+Supercharger-V3 GB-Swansea,51.67865,-3.9942
 Supercharger GB-Tebay Southbound,54.453473,-2.606108
 Supercharger GB-Telford,52.677334,-2.399552
 Supercharger-V4 GB-Thorne,53.615719,-0.977078
 Supercharger-V3 GB-Thurrock,51.492427,0.271248
 Supercharger-V4 GB-Todhills,54.951707,-2.97733,30
-Supercharger-V3 GB-Tongham,51.226139,-0.722281
+Supercharger-V3 GB-Tongham,51.22627,-0.72332
 Supercharger-V3 GB-Trentham,52.96302,-2.196439
 Supercharger-V3 GB-Trumpington,52.16824,0.109177
 Supercharger-V4 GB-Tyndrum,56.43844,-4.710994
-Supercharger GB-Uxbridge,51.546259,-0.475128
+Supercharger GB-Uxbridge,51.54567,-0.47437
 Supercharger-V4 GB-Waddon,51.371687,-0.116853
 Supercharger-V4 GB-Wallasey,53.412539,-3.073522
 Supercharger GB-Warrington,53.339515,-2.569358
@@ -2790,8 +2796,10 @@ Supercharger GB-Washington,54.887483,-1.558291
 Supercharger-V4 GB-Washington Northbound,54.889688,-1.560204
 Supercharger-V4 GB-Washington Southbound,54.890431,-1.558326
 Supercharger-V4 GB-Wetherby,53.94565,-1.37059
-Supercharger GB-Winchester,51.16725,-1.328024
+Supercharger-V3 GB-Winchester,51.06729,-1.3
+Supercharger GB-Winchester Norton Park,51.16725,-1.32802
 Supercharger GB-Wokingham,51.42849,-0.898897
+Supercharger-V3 GB-Woodall Southbound,53.31617,-1.28096
 Supercharger-V3 GB-Wyboston,52.202314,-0.291534
 Supercharger GB-York,53.92417,-1.077908
 
@@ -4342,6 +4350,7 @@ Supercharger-V3 US-Fort Wayne IN Illinois Road,41.07304,-85.218158
 Supercharger US-Fort Worth TX - North Freeway,33.023155,-97.279014
 Supercharger US-Fort Worth TX - North Freeway,33.023317,-97.27931
 Supercharger US-Fort Worth TX - Whitmore Street,32.758214,-97.353742
+Supercharger-V4 US-Fort Worth TX North Freeway,32.86496,-97.3138
 Supercharger US-Fountain Valley CA,33.702563,-117.934393
 Supercharger-V3 US-Fountain Valley CA - Warner Avenue,33.715813,-117.964629
 Supercharger US-Framingham MA,42.303659,-71.394176
@@ -7531,6 +7540,13 @@ BP DE-Wunstorf Kolenfelder Straße,52.416923,9.448295
 BP DE-Wuppertal Nevigeser Straße,51.268683,7.126744
 BP DE-Wörth am Main Landstraße,49.79783,9.15649
 BP DE-Zwickau Leipziger Straße,50.742861,12.488611
+BP GB-Ashington Woodhorn Ln,55.18314,-1.54601
+BP GB-Canterbury Holiday Inn Express,51.2876,1.01237
+BP GB-Eastbourne Devonshire Park Hotel,50.76223,0.28275
+BP GB-Maidstone Ashford Road Lenham,51.24289,0.70032
+BP GB-Maidstone M20,51.28658,0.54866
+BP GB-Northallerton Staddlebridge House,54.38746,-1.31833
+BP GB-Plymouth Plymouth Rd,50.39086,-4.07199
 BP GB-Poppleton Boroughbridge Road,53.971951,-1.142952
 BP NL-Alkmaar Rijksweg,52.61463,4.73975
 BP NL-Amsterdam Nieuwe Hemweg,52.39394,4.864531
@@ -7647,8 +7663,31 @@ chargeIT SE-Bromma Ulvsundavägen,59.35631,17.94863
 ChargeNet NZ-Bombay Mill Road,-37.192741,174.983653
 ChargeNet US-South San Francisco El Camino Real,37.646701,-122.429172
 
+ChargePlace-Scotland GB-Achnasheen Bignold Place,57.57986,-5.07185
+ChargePlace-Scotland GB-Ballachulish W Highland Way,56.63232,-4.82829
 ChargePlace-Scotland GB-Bowmore Isle of Islay The Square,55.75666,-6.288741
+ChargePlace-Scotland GB-Dunvegan Kilmuir Rd,57.43472,-6.57861
+ChargePlace-Scotland GB-Ellon A948,57.36744,-2.0413
+ChargePlace-Scotland GB-Gairloch Old Inn Road End,57.71298,-5.6796
+ChargePlace-Scotland GB-Killin Main St,56.4642,-4.31924
+ChargePlace-Scotland GB-Kyle Douglas Row,57.28253,-5.71508
+ChargePlace-Scotland GB-Kyleakin Meuse Ln,57.27282,-5.73059
+ChargePlace-Scotland GB-Lairg A838,58.5678,-4.73988
+ChargePlace-Scotland GB-Lairg A894,58.35227,-5.14888
+ChargePlace-Scotland GB-Lairg Bervie Rd,58.4581,-5.05263
+ChargePlace-Scotland GB-Lairg Church Hill Rd,58.02483,-4.40137
+ChargePlace-Scotland GB-Lairg Cruamer,58.14963,-5.23998
+ChargePlace-Scotland GB-Loanhead Straiton Rd,55.88664,-3.16704
+ChargePlace-Scotland GB-Peebles Rosetta Rd,55.65693,-3.19653
+ChargePlace-Scotland GB-Pitlochry,56.7035,-3.73864
 ChargePlace-Scotland GB-Pitlochry Rie-Achan Rd,56.7035,-3.73864
+ChargePlace-Scotland GB-Portree Lisigarry Ct,57.41222,-6.19697
+ChargePlace-Scotland GB-Stornoway Sandwick Rd,58.20819,-6.37946
+ChargePlace-Scotland GB-Stornoway South Beach,58.20782,-6.38755
+ChargePlace-Scotland GB-Thurso Bettyhill A836,58.52522,-4.22291
+ChargePlace-Scotland GB-Tomintoul Car Park,57.25084,-3.37944
+ChargePlace-Scotland GB-Ullapool St. Valery Pl,57.89757,-5.16566
+ChargePlace-Scotland GB-Ullapool W Shore St,57.89569,-5.16134
 
 ChargePoint AT-Anif Salzachtalstraße,47.726824,13.0607,8
 ChargePoint AT-Eugendorf Gewerbestraße,47.85806,13.13337
@@ -7830,6 +7869,7 @@ ChargePoint DE-Wilhelmshaven Bahnhofstraße,53.51964,8.10916
 ChargePoint DE-Wolfach Hausacher Straße,48.290944,8.217583
 ChargePoint DE-Wörthsee 11 Inninger Straße,48.085498,11.199361
 ChargePoint DE-Würzburg 10a Friedrichstraße,49.797157,9.914771
+ChargePoint GB-Morpeth New Market,55.16662,-1.69094
 ChargePoint HR-Poreč Zelena laguna,45.20186,13.59522
 ChargePoint IT-Area di servizio Altivole,45.752779,11.896712
 ChargePoint IT-Castelrotto Kastelruth Autostrada del Brennero,46.57,11.522867
@@ -8608,6 +8648,7 @@ Compleo DE-Zschopau Chemnitzer Str.,50.750228,13.068602
 Compleo DE-Zwenkau Hafenstraße,51.23378,12.334526
 Compleo DE-Zwickau Uhdestraße,50.70933,12.50408
 Compleo DE-Zwingenberg Gießer Weg,49.72307,8.60184
+Compleo GB-Leeds Princes Exchange,53.7949,-1.54902
 
 Counties NZ-Pōkeno Market Street West,-37.245511,175.021008
 
@@ -8712,6 +8753,8 @@ DEW DE-Dortmund Kleppingstraße,51.510315,7.468403
 DEW DE-Dortmund Ostwall,51.510621,7.469531
 
 DGV DE-Römhild Heurichstraße,50.398895,10.540541
+
+Dragon GB-Cardigan Greenfield Square,52.08474,-4.66128
 
 Drewag DE-Dresden Elbepark,51.086258,13.693972
 Drewag DE-Dresden Mohnstr.,51.077856,13.717185
@@ -9643,6 +9686,7 @@ EM1 DE-Winhöring Obere Hofmark,48.265377,12.651486
 EMB DE-Michendorf Michendorfer Gartenstraße,52.31406,13.02783
 
 Emobility-East DE-Drebach Straße der Jugend,50.67323,13.01824
+Emobility-East DE-Johanngeorgenstadt Eibenstocker Straße,50.43339,12.71038
 Emobility-East DE-Mittenwald Obermarkt,47.441255,11.261307
 
 emobitaly IT-Bussolengo Strada Comunale dei Tre Castel,45.44861,10.88199
@@ -12004,6 +12048,8 @@ Eranovum ES-Valladolid Cam. Viejo de Simancas,41.62127,-4.75655
 
 ESARJ TR-Afyonkarahisar Merkez Dörtyol,38.793372,30.457982
 
+ESB GB-Belfast Lower Cres,54.58775,-5.93493
+ESB GB-Londonderry Waterside,54.99474,-7.30616
 ESB IE-Ballaghaderreen Market St,53.90212,-8.58408
 ESB IE-Ballyvoloon Park Ln,51.85285,-8.29555
 ESB IE-Bantry Harbour View Car Park,51.68172,-9.45705
@@ -12205,6 +12251,8 @@ EVN AT-Ybbsitz Alte Poststraße,47.94852,14.89427
 EVN AT-Zwettl Gartenstraße,48.604227,15.16982
 EVN DE-Nordhausen Engelsburg,51.503143,10.793401
 
+evolt GB-Wick River St,58.44194,-3.09191
+
 EVolve US-Geneva NY Seneca St,42.86574,-76.98376
 EVolve US-Watertown NY Arsenal Street,43.979197,-75.946427
 
@@ -12219,6 +12267,8 @@ EVR DE-Rudolstadt Oststraße,50.720881,11.351418
 EVSC US-Cannon Beach OR Elk Creek Rd,45.88923,-123.95582
 
 evway IT-Moso In Passiria Timmelsjochstrasse,46.8311,11.16787
+
+evyve GB-Burton-on-Trent Second Ave,52.79575,-1.66826
 
 EVzen FR-Béziers Rue Zenobe Gramme,43.34748,3.25572,25
 
@@ -13426,6 +13476,9 @@ Fastned FR-Aire-jardin des Causses du Lot,44.65791,1.56825,30
 Fastned FR-Dracé Aire de Dracé,46.143271,4.767846
 Fastned FR-Romagnieu Aire du Guiers A43,45.577629,5.630846
 Fastned FR-Écot A36,47.440489,6.728826
+Fastned GB-London Ramac Way,51.48714,0.02359
+Fastned GB-Newcastle upon Tyne Wellington St,54.97426,-1.62511
+Fastned GB-Whitley Bay Cromer Gardens,55.04968,-1.45075
 Fastned IT-Castenedolo Via Sandro Pertini,45.484816,10.321338
 Fastned NL-Aalscholver,52.436005,5.424898
 Fastned NL-Akermaat,52.498623,4.698793
@@ -13544,6 +13597,8 @@ Fines BG-Марикостиново,41.434421,23.333701
 Fines BG-Пролеша 8,42.783942,23.166997
 Fines BG-Русе бул. Христо Ботев,43.83214,25.97155
 Fines BG-Търговище Targovishte 4009,43.244632,26.54884
+
+FOR-EV GB-Lochgilphead,56.02807,-5.42519
 
 Fortum FI-Salo Ruoksmäentie,60.41877,23.16442
 Fortum FI-Vaasa Kiilletie,63.11153,21.65328
@@ -13664,6 +13719,10 @@ GALP PT-Alcobaça R. Gen. Humberto Delgado,39.55967,-8.97808
 Galp PT-Vouzela A25 / IP5,40.686186,-8.232199
 
 GardaUno IT-Limone sul Garda Via Lungolago Guglielmo Marconi,45.811562,10.793539
+
+GeniePoint GB-Eastbourne Hargreaves Rd,50.79685,0.2855
+GeniePoint GB-Newquay,50.44687,-5.0021
+GeniePoint GB-Petersfield Rams Walk,51.00511,-0.93741
 
 GENOL AT-Mistelbach Wirtschaftspark,48.56421,16.63686
 
@@ -14000,8 +14059,10 @@ GreenWay SK-Žilina Vysokoškolákov,49.21238,18.75089,30
 
 GreenYellow FR-Roissy-en-France Rue de la Belle Étoile,48.9888,2.513854
 
+GRIDSERVE GB-Carnforth M6 Motorway Northbound,54.179,-2.73482
+GRIDSERVE GB-Cobham M25,51.30481,-0.4066,25
 GRIDSERVE GB-Folkestone and Hythe M20,51.095118,1.045353
-GRIDSERVE GB-Penrith Rheged Redhills Lane,54.646983,-2.781507,15
+GRIDSERVE GB-North Yorkshire Leeming Bar,54.29847,-1.56591
 
 Group-E CH-Bern Wangenstrasse,46.932939,7.386168
 Group-E CH-Biel Boulevard des Sports,47.155543,7.280579
@@ -14285,6 +14346,7 @@ IKEA DE-Walldorf,49.30499,8.629349
 IKEA DE-Wetzlar,50.568262,8.498073
 IKEA DE-Wuppertal,51.310176,7.25413,15
 IKEA DE-Würzburg,49.821812,9.982398
+IKEA GB-Southampton,50.90254,-1.41066
 IKEA IT-Rimini,44.0783,12.47641
 IKEA IT-Torino Collegno,45.09846,7.58054
 IKEA SE-Umeå,63.80821,20.25179,25
@@ -14582,6 +14644,13 @@ Inselwerke DE-Trassenheide Forststraße,54.0888,13.87249
 
 InstaVolt GB-Corwen Rhug Estate Farm Shop,52.981351,-3.411203
 InstaVolt GB-Coulby Newham Dalby Way,54.522914,-1.220313
+InstaVolt GB-Durham Eden Terrace,54.78394,-1.53554
+InstaVolt GB-Gateshead Park Rd,54.96234,-1.58845
+InstaVolt GB-Haverfordwest Well Road,51.79198,-4.97905
+InstaVolt GB-Kendal Wainwrights Yard,54.32804,-2.74914
+InstaVolt GB-Newcastle upon Tyne Rotary Way,55.03616,-1.62728
+InstaVolt GB-Scarborough Dunslow Rd,54.23699,-0.41788
+InstaVolt GB-Windermere The Old Station,54.37928,-2.90383
 Instavolt IS-Keflavík Courtyard Marriott Reykjavik Airport,63.99845,-22.58678
 
 Intermarché FR-Riez Rte de Puimoisson,43.82255,6.09129
@@ -14958,22 +15027,27 @@ Ionity FR-Village Catalan Ouest,42.577784,2.848341
 Ionity FR-Villaines la Gonais,48.125475,0.622302
 Ionity FR-Volvestre,43.3368,1.2449
 Ionity FR-Vrigny,49.242989,3.919106
+Ionity GB-Alnwick Hawfinch Dr,55.39733,-1.6933
 Ionity GB-Baldock,52.013772,-0.203003
 Ionity GB-Beaconsfield,51.587934,-0.629065
 Ionity GB-Blackburn,53.713494,-2.477038
-Ionity GB-Cambridge,52.26907,-0.00901
+Ionity GB-Cambridge A14,52.26968,-0.00982,25
+Ionity GB-Carlisle Kingstown Broadway,54.92771,-2.9503
 Ionity GB-Channel Gateway,51.094411,1.046777
 Ionity GB-Chippenham,51.513848,-2.109768
-Ionity GB-Cobham,51.305255,-0.40673
+Ionity GB-Cobham,51.30539,-0.40678,30
 Ionity GB-Cullompton,50.863745,-3.38449
 Ionity GB-Gateshead Pinetree Way,54.958529,-1.674846
-Ionity GB-Gretna Green,55.00796,-3.08265
+Ionity GB-Gretna Green,55.00827,-3.08655
+Ionity GB-Leeds Knowsthorpe Ln,53.77322,-1.47379
 Ionity GB-Leeds Skelton Lakes,53.77046,-1.47691
 Ionity GB-Maidstone,51.26566,0.61576
 Ionity GB-Milton Keynes,52.05561,-0.6987
+Ionity GB-Norwich Cringleford Hethersett,52.6028,1.22166
 Ionity GB-Perth,56.419402,-3.463082
 Ionity GB-Peterborough,52.532663,-0.32065
 Ionity GB-Polmadie,55.837232,-4.242494
+Ionity GB-Stafford Spitfire Cl,52.83142,-2.13565
 Ionity HR-Gospić Budačka ul.,44.576994,15.392954
 Ionity HR-Kanfanar Okreti,45.111697,13.802624
 Ionity HR-Rašćane Gornje,43.32064,17.16625,15
@@ -16009,7 +16083,7 @@ Lidl DE-Arnsdorf Stolpener Straße 14,51.097429,13.994374
 Lidl DE-Arnstorf Mariakirchner Str. 34,48.564333,12.824601
 Lidl DE-Aschaffenburg Spessartstr.,49.965614,9.154857
 Lidl DE-Augsburg Unterer Talweg 109,48.315045,10.890143
-Lidl DE-Backnang Weissacher Straße 81-85,48.934843,9.446846
+Lidl DE-Backnang Weissacher Straße,48.93456,9.4472
 Lidl DE-Bad Camberg Beuerbacher Landstraße 1,50.29491,8.253665
 Lidl DE-Bad Driburg Mühlenstr. 12,51.733095,9.023268
 Lidl DE-Bad Dürkheim,49.468814,8.202294
@@ -16628,6 +16702,7 @@ Lidl FR-Varennes-sur-Seine Rte du Petit Fossard,48.36123,2.95788
 Lidl FR-Vendargues Av. des Bigos,43.65254,3.961,25
 Lidl FR-Vitrolles Av. Jean Monnet,43.42349,5.28486
 Lidl FR-Wissembourg All. des Peupliers Altenstadt,49.03075,7.95498
+Lidl GB-Witney New Cl Ln,51.7736,-1.4931
 Lidl HR-Biograd na Moru,43.944678,15.453368
 Lidl HR-Dubrovnik Ulica Tomislava Macana,42.630673,18.166585
 Lidl HR-Krk Stjepana Radića,45.03556,14.56825
@@ -17027,6 +17102,9 @@ Mer SE-Åre Björnenvägen,63.38654,13.15324
 
 Metropolis FR-Antony Av. du Général de Gaulle,48.76307,2.30663
 
+MFG GB-Billingham Coal Ln,54.62767,-1.3065
+MFG GB-Dover Hammond’s Garage,51.11795,1.30706
+MFG GB-GB-Newcastle upon Tyne Airport,55.03737,-1.71405
 MFG GB-Sowerby York Road,54.228782,-1.329168
 
 Midorion DE-Karlsruhe Parkplatz Karlsbad A8,48.94493,8.49432
@@ -17038,6 +17116,7 @@ Mobilectric PT-Torres Vedras R. Leonel Trindade,39.10205,-9.25778
 
 Mobiliti HU-Budapest Hunyadi János utca,47.43517,19.03919
 Mobiliti HU-Budapest Pala utca,47.50099,19.03996
+Mobiliti HU-Libás Strand Keszthely,46.7649,17.2658
 Mobiliti HU-Sopron Révai Miklós utca,47.69407,16.578
 Mobiliti HU-Szombathely Hollán Ernő utca,47.23032,16.61786
 Mobiliti HU-Sárvár Várkerület utca,47.2521,16.93999
@@ -17086,6 +17165,7 @@ Monta DK-Ribe Rosen Alle,55.33093,8.77153
 Monta DK-Ringkøbing Torvegade,56.09063,8.23994
 Monta DK-Vejers Strand Vejers Havvej,55.62547,8.12502
 Monta FR-Bonifacio Av. Sylvère Bohn,41.38904,9.16589
+Monta GB-Newcastle upon Tyne Gosforth,55.0039,-1.61993
 Monta RO-Cocani A1,44.63711,25.90258
 Monta SE-Granö Beckasin,64.24773,19.30651
 Monta SE-Mölndal Åby Arenaväg,57.6488,12.00263
@@ -17764,6 +17844,13 @@ ORLEN PL-Zielona Góra Głogowska,51.90433,15.58642
 ORLEN PL-Łączyn E77,50.62318,20.28394
 ORLEN PL-Świebodzin Wojska Polskiego,52.26022,15.53348
 
+Osprey GB-Bristol North St,50.91883,-0.4542
+Osprey GB-Buckfastleigh Dartbridge Rd,50.487,-3.77034
+Osprey GB-Gateshead Team Valley,54.92406,-1.6185
+Osprey GB-Penzance Land’s End,50.06543,-5.71258
+Osprey GB-Shoreham-by-Sea Brighton Rd,50.82788,-0.28857
+Osprey GB-Worthing Wykeham Rd,50.81345,-0.37944
+
 OV IS-Hólmavík við Höfðatún,65.70124,-21.68608
 
 OVAG DE-Alsfeld Am Schnepfenhain,50.750367,9.269176
@@ -18364,6 +18451,9 @@ Plug’N’Roll CH-Sennwald Simon Frick-Strasse,47.24549,9.51508
 
 Pluq DE-Baiersbronn Tonbachstraße,48.537798,8.357629
 
+Pod-Point GB-Newcastle upon Tyne Brunton Ln,55.01429,-1.66314
+Pod-Point GB-Perth Edinburgh Rd,56.38185,-3.43305
+Pod-Point GB-Sidcup Edgington Way,51.41367,0.12289
 Pod-Point GB-Thornaby Goodwood Square,54.556923,-1.275722
 
 Polarstern DE-Gießen Am alten Flughafen,50.592641,8.718913
@@ -18463,6 +18553,8 @@ Porsche DE-Willich Jakob-Kaiser-Str.,51.2721,6.51569
 Porsche DE-Willich Jakob-Kaiser-Straße,51.27255,6.51521
 Porsche DE-Wuppertal Porschestraße,51.3053,7.25279
 Porsche ES-Oleiros Avenida das Mariñas,43.32991,-8.36608
+Porsche GB-Norwich Neatmarket,52.6016,1.28389
+Porsche GB-Stockton-on-Tees Concorde Way,54.5439,-1.33021
 Porsche HR-Rijeka Škurinjska cesta,45.35415,14.41766
 Porsche HR-Zadar Ul. 4.Gardijske Brigade,44.10645,15.26091
 Porsche HR-Zagreb Miroslava Miholića,45.76073,15.9828
@@ -19167,6 +19259,12 @@ Shell DK-Kruså Sønderborgvej,54.849584,9.405117
 Shell ES-Los Barrios C. Cabotaje,36.18883,-5.43247
 Shell FR-Aire de Béziers-Montblanc Sud,43.359314,3.34559,30
 Shell FR-Sommesous Aire de Sommesous,48.7294,4.2291
+Shell GB-Cambridge Newmarket Rd,52.12696,0.22325
+Shell GB-Dover Guston A2,51.14522,1.3294
+Shell GB-Dunblane A9 Southbound,56.22521,-3.91543
+Shell GB-Durham High St,54.79479,-1.5209
+Shell GB-Saint Columb Kingsley Village,50.37871,-4.9422,20
+Shell GB-Saltash A38,50.40724,-4.35294
 Shell HU-Pécs Budai Vám utca,46.083554,18.270951
 Shell NL-Amersfoort Boerderijenboulevard,52.18225,5.43427
 Shell NL-Breda Backer en Ruebweg,51.60233,4.76947
@@ -19696,6 +19794,7 @@ SW-Zwickau DE-Zwickau Äußere Dresdner Straße,50.717285,12.502309
 
 SWARCO DE-Grömitz Gildestraße,54.14487,10.95546
 SWARCO DE-Lich Gottlieb-Daimler-Straße,50.51113,8.82727
+SWARCO GB-Gwynedd Marian Mawr enterprize park Dolgellau,52.74422,-3.88604
 
 swisscharge CH-Adlikon bei Regensdorf Breitestrasse,47.44873,8.46287
 swisscharge CH-Aesch Nordring,47.479035,7.590062
@@ -20746,6 +20845,7 @@ Wenea ES-Curtis N-634,43.18162,-7.9678
 Wenea ES-Lugo Playa de Sacido,43.67723,-7.61381
 WENEA ES-Madrid Calle Roberto Domingo,40.433794,-3.661095
 Wenea ES-Tapia de Casariego N-634,43.54202,-6.98357
+Wenea GB-Plymouth Somerset Pl,50.38157,-4.16068
 
 westenergie DE-Balve Sauerlandstraße,51.327951,7.86794
 westenergie DE-Erftstadt Fritz-Erler-Straße,50.81253,6.81435,30
@@ -20901,6 +21001,7 @@ Zunder ES-Getafe Av. Juan Carlos I,40.2959,-3.74527
 Zunder ES-Gijon-Este C. de Luís Ortiz Berrocal,43.5247,-5.64128
 Zunder ES-Langreo C. Aurelio Delbrouck,43.29529,-5.68416
 Zunder ES-Lleida Salida,41.66394,0.60495,12
+Zunder ES-Lloret de Mar Carrer Joan Miró,41.71372,2.83083
 Zunder ES-Mieres C. Rector Julio Rodríguez,43.24328,-5.77581
 Zunder ES-Monesterio C. de los Carpinteros,38.08253,-6.25831
 Zunder ES-Rois Sar Galicia,42.77438,-8.65104
@@ -21241,6 +21342,8 @@ ES Valladolid Sercotel,41.6357,-4.74707
 FR 68510 Sierentz Hyper U et Drive,47.66618,7.441494,10
 FR Disneyland Paris,48.86427,2.78954,99
 FR Disneyland Paris,48.87352,2.78475,60
+GB Bedford Priory Business Park,52.12925,-0.42072
+GB London Westfield Hammersmith,51.50662,-0.22188
 GU Budapest Gizella utca,47.50983,19.0995
 HR Bale Camping Mon Perin,45.0154,13.71426
 HR Dubrovnik Budget,42.55943,18.26411
