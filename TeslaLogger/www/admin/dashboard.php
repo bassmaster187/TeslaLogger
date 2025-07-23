@@ -36,19 +36,37 @@ else
 
 	$( function() {
 	<?php
-		$files = scandir("wallpapers/".$carid);
-		foreach ($files as $i => &$f)
+		$path = "wallpapers/".$carid;
+		if (isDocker())
 		{
-			if (stripos($f,".") === 0)
-				continue;
-
-			if (stripos($f,".jpg") > 0 || stripos($f,".png") > 0)
+			echo("$('#error').text('');\n");
+			echo("$('body').css('background-image','url(\"dashboard-pic.php?carid=".$carid."\")');\n");
+			echo("checkWallpaperExists('dashboard-pic.php?carid=".$carid."');\n");
+		}
+		else
+		{
+			$files = scandir($path);
+			$wallpaperFound = false;
+			foreach ($files as $i => &$f)
 			{
-				echo("$('#error').text('');\n");
-				echo("$('body').css('background-image','url(\"wallpapers/".$carid."/".$f. "\")');\n");
-				break;
+				if (stripos($f,".") === 0)
+					continue;
+
+				if (stripos($f,".jpg") > 0 || stripos($f,".png") > 0)
+				{
+					echo("$('#error').text('');\n");
+					echo("$('body').css('background-image','url(\"tmp/wallpapers/".$carid."/".$f. "\")');\n");
+					$wallpaperFound = true;
+					break;
+				}
+			}
+			
+			if (!$wallpaperFound) {
+				echo("// No wallpaper found, show upload dialog after a short delay\n");
+				echo("setTimeout(function() { showUploadDialog(); }, 2000);\n");
 			}
 		}
+	
 	?>
 		if (navigator.languages != undefined) loc = navigator.languages[0];
 			else loc = navigator.language;
@@ -60,6 +78,12 @@ else
 			GetCurrentData();
 		}
 		,5000);
+
+		// Settings menu toggle functionality
+		toggleSettingsMenu();
+		$('#settings img').click(function() {
+			toggleSettingsMenu();
+		});
 	} );
 
 	function GetCurrentData()
@@ -185,7 +209,11 @@ if (file_exists("my_dashboard_jsonData.php"))
 		nextGetWeather = Date.now() + 600000;
 
 		<?php
-		$weahterinifile = "/etc/teslalogger/weather.ini";
+		if (isDocker())
+			$weahterinifile = "/tmp/teslalogger/weather.ini";
+		else
+			$weahterinifile = "/etc/teslalogger/weather.ini";
+
 		if (file_exists($weahterinifile))
 		{
 			$weatherParams = parse_ini_file($weahterinifile);
@@ -299,6 +327,178 @@ if (file_exists("my_dashboard_jsonData.php"))
 		}
 	);
   }
+
+  function toggleSettingsMenu()
+  {
+	  $('#settingsmenu').toggle();
+  }
+
+  function showUploadDialog()
+  {
+	  $('#uploadDialog').show();
+	  $('#settingsmenu').hide();
+  }
+
+  function hideUploadDialog()
+  {
+	  $('#uploadDialog').hide();
+  }
+
+  function showWeatherDialog()
+  {
+	  // Load current weather settings
+	  $.ajax({
+		  url: 'set_weather_key.php',
+		  type: 'GET',
+		  success: function(response) {
+			  if (response.configured) {
+				  $('#weatherCity').val(response.city);
+				  // Don't pre-fill API key for security reasons
+			  }
+		  },
+		  error: function() {
+			  // Ignore errors when loading current settings
+		  }
+	  });
+	  
+	  $('#weatherDialog').show();
+	  $('#settingsmenu').hide();
+  }
+
+  function hideWeatherDialog()
+  {
+	  $('#weatherDialog').hide();
+  }
+
+  function checkWallpaperExists(imageUrl)
+  {
+	  // Method 1: Using Image object
+	  var img = new Image();
+	  img.onload = function() {
+		  // Image loaded successfully, do nothing
+		  console.log('Wallpaper loaded successfully');
+	  };
+	  img.onerror = function() {
+		  // Image failed to load (404 or other error)
+		  console.log('Wallpaper not found (404), showing upload dialog');
+		  // Show upload dialog after a short delay
+		  setTimeout(function() {
+			  showUploadDialog();
+		  }, 2000);
+	  };
+	  img.src = imageUrl + '&t=' + new Date().getTime(); // Add timestamp to prevent caching
+	  
+	  // Method 2: Alternative AJAX check for more reliable 404 detection
+	  $.ajax({
+		  url: imageUrl,
+		  type: 'HEAD', // Only get headers, not the full image
+		  cache: false,
+		  success: function() {
+			  console.log('Wallpaper exists (AJAX check)');
+		  },
+		  error: function(xhr) {
+			  if (xhr.status === 404) {
+				  console.log('Wallpaper 404 confirmed via AJAX, showing upload dialog');
+				  setTimeout(function() {
+					  showUploadDialog();
+				  }, 2000);
+			  }
+		  }
+	  });
+  }
+
+  // Handle wallpaper upload form submission
+  $(document).ready(function() {
+	  $('#wallpaperForm').on('submit', function(e) {
+		  e.preventDefault();
+		  
+		  var fileInput = $('#wallpaperFile')[0];
+		  if (!fileInput.files.length) {
+			  alert('Please select a file to upload.');
+			  return;
+		  }
+		  
+		  var formData = new FormData(this);
+		  
+		  $.ajax({
+			  url: 'upload_wallpaper.php',
+			  type: 'POST',
+			  data: formData,
+			  processData: false,
+			  contentType: false,
+			  success: function(response) {
+				  try {
+					  var result = JSON.parse(response);
+					  if (result.success) {
+						  alert('Wallpaper uploaded successfully!');
+						  hideUploadDialog();
+						  // Reload the page to show the new wallpaper
+						  location.reload();
+					  } else {
+						  alert('Upload failed: ' + result.error);
+					  }
+				  } catch (e) {
+					  alert('Upload failed: Invalid response from server');
+				  }
+			  },
+			  error: function(xhr, status, error) {
+				  try {
+					  var result = JSON.parse(xhr.responseText);
+					  alert('Upload failed: ' + result.error);
+				  } catch (e) {
+					  alert('Upload failed: ' + error);
+				  }
+			  }
+		  });
+	  });
+
+	  // Handle weather API key form submission
+	  $('#weatherForm').on('submit', function(e) {
+		  e.preventDefault();
+		  
+		  var apiKey = $('#weatherApiKey').val().trim();
+		  var city = $('#weatherCity').val().trim();
+		  
+		  if (!apiKey || !city) {
+			  alert('Please fill in both API key and city.');
+			  return;
+		  }
+		  
+		  var formData = {
+			  api_key: apiKey,
+			  city: city
+		  };
+		  
+		  $.ajax({
+			  url: 'set_weather_key.php',
+			  type: 'POST',
+			  data: formData,
+			  success: function(response) {
+				  try {
+					  var result = JSON.parse(response);
+					  if (result.success) {
+						  alert('Weather API key saved successfully!');
+						  hideWeatherDialog();
+						  // Reload the page to apply new weather settings
+						  location.reload();
+					  } else {
+						  alert('Save failed: ' + result.error);
+					  }
+				  } catch (e) {
+					  alert('Save failed: Invalid response from server');
+				  }
+			  },
+			  error: function(xhr, status, error) {
+				  try {
+					  var result = JSON.parse(xhr.responseText);
+					  alert('Save failed: ' + result.error);
+				  } catch (e) {
+					  alert('Save failed: ' + error);
+				  }
+			  }
+		  });
+	  });
+  });
   </script>
 </head>
 <body>
@@ -327,6 +527,46 @@ if (file_exists("my_dashboard_jsonData.php"))
   <div id="weather">
 	<img id="weather_icon" src="">
 	<div id="temp">no weather data</div>
+  </div>
+
+  <div id="settings">
+	<div><img src="img/gear.png" align="right"> </div>
+	<span id="settingsmenu">
+		<h1>Settings</h1>
+		<a href="#" onclick="showUploadDialog()">Upload Wallpaper</a><br>
+		<a href="#" onclick="showWeatherDialog()">Set Weather Key</a><br>
+	</span>
+  </div>
+
+  <div class="dialog" id="uploadDialog" style="display: none;">
+	<h1>Wallpaper Upload</h1>
+	<p>Upload a new wallpaper for your car.</p>
+	<form id="wallpaperForm" enctype="multipart/form-data">
+		<input type="file" id="wallpaperFile" name="wallpaper" accept="image/jpeg,image/jpg,image/png" required>
+		<input type="hidden" name="carid" value="<?php echo $carid; ?>">
+		<br><br>
+		<button type="button" onclick="hideUploadDialog()">Cancel</button>
+		<button type="submit">Upload</button>
+	</form>
+  </div>
+
+  <div class="dialog" id="weatherDialog" style="display: none;">
+	<h1>Weather API Configuration</h1>
+	<p>Configure OpenWeatherMap API settings for weather display.</p>
+	<form id="weatherForm">
+		<label for="weatherApiKey">API Key:</label><br>
+		<input type="text" id="weatherApiKey" name="api_key" placeholder="Enter your OpenWeatherMap API key" required maxlength="32"><br><br>
+		
+		<label for="weatherCity">City:</label><br>
+		<input type="text" id="weatherCity" name="city" placeholder="Enter your city name" required><br><br>
+		
+		<p style="font-size: 12px; color: #ccc;">
+			Get your free API key at: <a href="https://openweathermap.org/api" target="_blank" style="color: #007ACC;">openweathermap.org/api</a>
+		</p>
+		
+		<button type="button" onclick="hideWeatherDialog()">Cancel</button>
+		<button type="submit">Save</button>
+	</form>
   </div>
 
 <!-- Begin of my_dashboard.php -->
