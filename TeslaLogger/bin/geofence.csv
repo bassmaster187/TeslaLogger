@@ -125,7 +125,7 @@ Supercharger AU-Moonee Ponds,-37.765834,144.923586
 Supercharger-V3 AU-Mornington VIC,-38.234331,145.051016
 Supercharger-V3 AU-Mount Gambier SA,-37.834977,140.802625
 Supercharger AU-Narooma,-36.223136,150.128346
-Supercharger-V3 AU-North Lakes QLD,-27.240285,153.013366
+Supercharger-V3 AU-North Lakes QLD,-27.23948,153.01372
 Supercharger-V3 AU-Orange NSW,-33.283778,149.096
 Supercharger AU-Ovens,-36.587007,146.759301
 Supercharger AU-Port Macquarie NSW,-31.4361,152.823582
@@ -135,17 +135,20 @@ Supercharger-V3 AU-Rockhampton QLD,-23.343362,150.521157
 Supercharger-V3 AU-Runaway Bay QLD,-27.912565,153.400769
 Supercharger-V3 AU-Shepparton VIC,-36.384356,145.400954
 Supercharger-V3 AU-St Kilda VIC,-37.868187,144.980939
-Supercharger-V3 AU-Tailem Bend SA,-35.304458,139.500924
+Supercharger-V3 AU-Tailem Bend SA,-35.30396,139.50133
 Supercharger AU-Tamworth NSW,-31.101649,150.917126
 Supercharger-V3 AU-Taree NSW,-31.90786,152.461795
 Supercharger-V3 AU-Tenterfield NSW,-29.057293,152.01888
 Supercharger AU-Toowoomba,-27.578061,151.946674
 Supercharger-V3 AU-Tuggeranong ACT,-35.417617,149.067019
 Supercharger-V3 AU-Tweed Heads NSW,-28.173921,153.545101
-Supercharger AU-Warrnambool VIC,-38.385285,142.53364
+Supercharger-V3 AU-Warrnambool VIC,-38.38127,142.51929
+Supercharger AU-Warrnambool VIC Princes Hwy,-38.38529,142.53364
 Supercharger-V3 AU-Williams WA,-33.025028,116.878377
 Supercharger AU-Wodonga,-36.12386,146.889963
 Supercharger-V3 AU-Wollongong NSW,-34.43777,150.863091
+Supercharger-V4 AU-Yass NSW,-34.84366,148.91403
+Supercharger AU-Yea VIC,-37.20989,145.42605
 
 Supercharger BE-Aalst,50.92147,4.03275
 Supercharger BE-Antwerp,51.268051,4.4024,70
@@ -2342,6 +2345,7 @@ Supercharger-V4 FI-Hämeenlinna,60.9962,24.45549
 Supercharger-V3 FI-Inari,68.906674,27.025661
 Supercharger FI-Jalasjärvi,62.417071,22.791815
 Supercharger-V3 FI-Joensuu,62.60113,29.78203
+Supercharger-V4 FI-Joroinen,62.17552,27.84038
 Supercharger FI-Jyväskylä,62.214407,25.72246
 Supercharger-V4 FI-Jämsä,61.87004,25.23529
 Supercharger-V3 FI-Karesuvanto,68.450226,22.4814
@@ -3006,6 +3010,7 @@ Supercharger-V3 IT-Roma Aurelio,41.90242,12.43941
 Supercharger-V4 IT-Roma East,41.942448,12.643581
 Supercharger-V3 IT-Roma North,41.9697,12.540717
 Supercharger-V3 IT-Roma South West,41.815947,12.400934
+Supercharger-V4 IT-Ronchi dei Legionari,45.84032,13.48785
 Supercharger-V4 IT-Ronchi dei Legionari,45.841968,13.490862
 Supercharger-V3 IT-Rovereto,45.856559,11.001817
 Supercharger-V4 IT-Salerno,40.696161,14.832978
@@ -4533,6 +4538,7 @@ Supercharger-V3 US-Henderson NV - Las Vegas Boulevard South,35.963843,-115.16771
 Supercharger-V3 US-Henderson NV - Paseo Verde Parkway (Floor 4),36.022933,-115.090003
 Supercharger-V3 US-Hendersonville TN,36.320082,-86.601255
 Supercharger US-Henrietta TX,33.800589,-98.196653
+Supercharger-V4 US-Henryetta OK,35.44053,-95.97013
 Supercharger US-Hermitage PA,41.200951,-80.455658
 Supercharger-V3 US-Hermosa Beach CA (Floor 1),33.865262,-118.395161
 Supercharger-V3 US-Hesperia CA,34.42469,-117.385621
@@ -4780,7 +4786,7 @@ Supercharger US-Loveland CO,40.441433,-104.991188
 Supercharger US-Lovelock NV,40.179476,-118.472197
 Supercharger US-Lowell AR,36.255397,-94.152674
 Supercharger-V3 US-Lubbock TX,33.520866,-101.962385
-Supercharger US-Ludington MI,43.956372,-86.376006
+Supercharger US-Ludington MI,43.95734,-86.37609
 Supercharger-V3 US-Luling TX,29.649931,-97.592014
 Supercharger US-Lumberton NC,34.66767,-79.00229
 Supercharger-V3 US-Lumberton NC W 5th St,34.62255,-79.04971
@@ -4966,6 +4972,7 @@ Supercharger US-Mt. Gilead OH,40.493768,-82.71308
 Supercharger US-Mt. Hope WV,37.846882,-81.195869
 Supercharger US-Mt. Vernon IL,38.31621,-88.955901
 Supercharger-V3 US-Mt. Vernon IL - South 42nd Street,38.30047,-88.942482
+Supercharger-V3 US-Munster IN,41.56798,-87.50803
 Supercharger US-Murdo SD,43.886741,-100.71682
 Supercharger US-Muskegon MI,43.154193,-86.202005
 Supercharger US-Myrtle Beach SC,33.704636,-78.925204
@@ -5316,6 +5323,7 @@ Supercharger-V3 US-Saint Louis MO - Riverview Drive,38.76887,-90.18284
 Supercharger-V3 US-Saint Louis Park MN,44.935895,-93.348289
 Supercharger-V3 US-Saint Peter MN,44.336652,-93.949783
 Supercharger-V3 US-Saint Petersburg FL,27.734569,-82.680116
+Supercharger-V4 US-Saint Robert MO,37.81535,-92.14107
 Supercharger US-Salamanca NY,42.153105,-78.748559
 Supercharger-V3 US-Salem OR,44.938985,-122.987957
 Supercharger-V3 US-Salem OR - Mission Street Southeast,44.921245,-123.006536
@@ -5924,6 +5932,7 @@ ABC FI-Kauhava Peltopassi,63.09122,23.05934
 ABC FI-Kimito Engelsbyvägen,60.16369,22.73586
 ABC FI-Kokkola Heinolankaari,63.83026,23.1467
 ABC FI-Kristinestad Gamla Vasavägen,62.26183,21.4857
+ABC FI-Kuortti Mäyrätie,61.42195,26.4347
 ABC FI-Kuortti Mäyrätie,61.42204,26.43478
 ABC FI-Kurikka Oikotie,62.48609,22.75211
 ABC FI-Lieksa Kalliokatu,63.32211,30.0082
@@ -6971,6 +6980,7 @@ amic AT-Wien Gewerbeparkstraße,48.244423,16.461556
 AmpCharge AU-Altona North VIC Horsburgh Drive,-37.846724,144.809186
 AmpCharge AU-Belmont WA Great Eastern Highway,-31.93785,115.9331
 AmpCharge AU-Brunswick VIC Sydney Road,-37.7763,144.96377
+AmpCharge AU-Caboolture QLD Pumicestone Rd,-27.04203,152.97543
 AmpCharge AU-Carina QLD Old Cleveland Road,-27.495932,153.093121
 AmpCharge AU-Derrimut VIC Robinsons Road,-37.805,144.7522
 AmpCharge AU-East Perth WA Lord Street,-31.948509,115.869208
@@ -6982,10 +6992,12 @@ AmpCharge AU-Kilsyth VIC Gatwick Road,-37.82322,145.2963
 AmpCharge AU-Marsden Park NSW Richmond Road,-33.716104,150.844658
 AmpCharge AU-Mill Park VIC Plenty Road,-37.694038,144.7554
 AmpCharge AU-Mount Waverley VIC Blackburn Road,-37.900945,145.1436
+AmpCharge AU-Northmead NSW Windsor Rd,-33.78784,150.99462
 AmpCharge AU-Rowville VIC Kingsley Close,-37.9073,145.23675
 AmpCharge AU-Springvale VIC Princes Highway,-37.94125,145.1668
 AmpCharge AU-Werribee VIC Cherry Street,-37.8998,144.66505
 AmpCharge AU-Winchelsea VIC Princes Highway,-38.2459,143.9831
+AmpCharge AU-Yass NSW Yass Valley Way,-34.8064,148.8826
 
 amperio DE-Angermünde Grundmühlenweg,53.015352,13.995139
 amperio DE-Asbach Bitzenstraße,50.66459,7.42429
@@ -7419,7 +7431,9 @@ Bosch DE-Schwieberdingen Robert-Bosch-Straße,48.881413,9.080732
 Bosch HU-Budapest HOP Technology Office Park,47.46435,19.15856,25
 Bosch IT-Torri del Benaco Via Bardino,45.610686,10.705955
 
+BP AU-Brighton East VIC Nepean Hwy,-37.90018,145.00703
 BP AU-Jindabyne NSW Kosciuszko Rd,-36.41474,148.61784
+BP AU-West Ballina NSW Bruxner Wy,-28.86161,153.51688
 BP DE-Allershausen Schroßlacher Straße,48.428106,11.585223
 BP DE-Altdorf bei Nürnberg Nürnberger Straße,49.383969,11.34805
 BP DE-Arnstadt Lindenplatz,50.860322,10.96045
@@ -7711,18 +7725,30 @@ Charge-and-GO RS-Novi Sad E75,45.276042,19.921247
 Charge-and-GO RS-Subotica Segedinski put,46.100506,19.697765
 Charge-and-GO RS-Čačak Konjevići,43.903191,20.398646
 
+Chargefox AU-Airport West VIC Louis St,-37.71359,144.88545
 Chargefox AU-Altona VIC Civic Parade,-37.863421,144.83153
+Chargefox AU-Ballarat Central VIC Curtis St,-37.56129,143.86233
 Chargefox AU-Barnawartha North VIC Murray Valley Highway,-36.073974,146.726838
+Chargefox AU-Bilinga QLD Eastern Ave,-28.16406,153.51492
+Chargefox AU-Brisbane City QLD Lamington Dr,-27.47692,153.02685
 Chargefox AU-Broadbeach QLD Old Burleigh Road,-28.029482,153.434532
 Chargefox AU-Browns Plains QLD Browns Plains Rd,-27.663758,153.041055
 Chargefox AU-Bundall QLD Bundall Road,-28.001592,153.415261
 Chargefox AU-Childers QLD Crescent St,-25.23483,152.279169
 Chargefox AU-Coffs Harbour Drive Thru,-30.317669,153.089785
 Chargefox AU-Deakin ACT Denison Street,-35.31906,149.093679
+Chargefox AU-Esk QLD Pryde St,-27.23908,152.4203
 Chargefox AU-Euroa VIC Tarcombe Street,-36.742903,145.591134
+Chargefox AU-Fairy Meadow NSW Innovation Campus,-34.40006,150.89963
 Chargefox AU-Forest Glen QLD Mons Road,-26.687124,153.004263
+Chargefox AU-Geelong VIC Cunningham St,-38.14328,144.36113
 Chargefox AU-Gin Gin QLD Dear Street,-24.989743,151.953161
 Chargefox AU-Goulburn NSW Sydney Road,-34.748004,149.749639
+Chargefox AU-Gunalda QLD Balkin St,-25.99432,152.56283
+Chargefox AU-Gympie QLD McLeod St,-26.18878,152.66563
+Chargefox AU-Healesville VIC Healesville-Kinglake Rd,-37.65069,145.50309
+Chargefox AU-Horsham VIC Baillie St,-36.71119,142.20202
+Chargefox AU-Ipswich QLD South St,-27.61623,152.75862
 Chargefox AU-Karuah NSW Tarean Road,-32.653851,151.962561
 Chargefox AU-Keith SA Dukes Hwy,-36.104877,140.361585
 Chargefox AU-Mackay QLD Gregory Street,-21.139335,149.185064
@@ -7734,8 +7760,12 @@ Chargefox AU-Moe VIC Lloyd Street,-38.184363,146.237899
 Chargefox AU-Morningside QLD Wynnum Road,-27.467863,153.077776
 Chargefox AU-Nerang QLD Southport Nerang Rd,-27.984267,153.339332
 Chargefox AU-Pimpama QLD Heritage Park,-27.824783,153.292038
+Chargefox AU-Proserpine QLD Dobbins Ln,-20.40251,148.58159
 Chargefox AU-Scottsdale TAS King Street,-41.162147,147.514592
 Chargefox AU-Springfield Central QLD David Henry Way,-27.682102,152.899815
+Chargefox AU-Swansea TAS Noyes St,-42.12371,148.07523
+Chargefox AU-Warrnambool VIC Merri St,-38.38909,142.48485
+Chargefox AU-Wetherill Park The Horsley Dr,-33.85039,150.89837
 Chargefox AU-Wynnum West QLD Wynnum Road,-27.457804,153.154779
 
 ChargeGuru FR-Belfort Rue René Cassin,47.63968,6.87822
@@ -9655,6 +9685,8 @@ eins-energie DE-Zwickau Georgenstraße,50.718932,12.49008
 
 EKOEN PL-Nadarzyn Aleja Katowicka,52.07336,20.76802
 
+Elanga AU-Springwood QLD Magellan Rd,-27.57371,153.09049
+
 Elbizz NL-Hilversum Bisonlaan,52.23422,5.14745
 
 ElDrive LT-Vilnius Vikingų g.,54.649788,25.279766
@@ -10149,6 +10181,7 @@ EnBW DE-Burgwedel,52.486314,9.845092
 EnBW DE-Burladingen Josef-Mayer-Straße,48.291985,9.09676
 EnBW DE-Buttenheim Im Gewerbepark,49.79786,11.02807
 EnBW DE-Buxtehude,53.480943,9.696181
+EnBW DE-Buxtehude Konrad-Adenauer-Allee,53.47013,9.71484
 EnBW DE-Buxtehude Rewe,53.456974,9.67051
 EnBW DE-Bärenthal Kirchstr.,48.073269,8.927233
 EnBW DE-Böblingen Am Hexenbuckel,48.695791,9.027556
@@ -12031,6 +12064,7 @@ Energie-Steiermark AT-Graz Wiener Straße,47.10378,15.40171
 Energie-Steiermark AT-Hart bei Graz Industriestraße,47.04081,15.50833
 Energie-Steiermark AT-Judenburg Hauptplatz,47.16846,14.66107
 Energie-Steiermark AT-Kumberg Grazer Straße,47.14436,15.54908
+Energie-Steiermark AT-Leibnitz Wasserwerkstraße,46.79607,15.55699
 Energie-Steiermark AT-Lieboch Radlstraße,46.956961,15.346721,25
 Energie-Steiermark AT-Passail Fladnitzer Straße,47.27958,15.50633
 Energie-Steiermark AT-Prutz Moosweg,47.071719,10.66437,25
@@ -12302,9 +12336,31 @@ EVgo US-Wynnewood PA E Wynnewood Rd,40.00008,-75.27319
 
 EVI DE-Hildesheim Kennedydamm,52.15576,9.95856
 
+Evie AU-Alexandra Hills QLD Cambridge Road,-27.52347,153.222
+Evie AU-Apollo Bay VIC Pascoe St,-38.75829,143.66896
+Evie AU-Avenel VIC Jones St,-36.90745,145.23987
+Evie AU-Batemans Bay NSW Orient St,-35.7107,150.17767
+Evie AU-Bondi Junction NSW Eastgate Shopping Centre,-33.89308,151.24763
+Evie AU-Brighton VIC Willansby Ave,-37.90624,145.00361
+Evie AU-Bundamba QLD Hawkins Cres,-27.58814,152.82194
+Evie AU-Cabramatta NSW Cabramatta Rd W,-33.89878,150.91983
+Evie AU-Caddens NSW O’Connell St,-33.76932,150.73548
 Evie AU-Campbell Town TAS Commonwealth Ln,-41.929307,147.494485
-Evie AU-Cannon Hill QLD Creek Rd,-27.471975,153.097473
+Evie AU-Camperdown VIC Bath St,-38.23034,143.14588
+Evie AU-Cannon Hill QLD Creek Rd,-27.4719,153.09712
+Evie AU-Casey ACT Kingsland Parade,-35.17444,149.09653
+Evie AU-Castlemaine VIC Forest St,-37.06674,144.21781
+Evie AU-Coochin Creek QLD Bruce Hwy,-26.91822,152.99642
 Evie AU-Coomera QLD Pacific Highway,-27.855358,153.310488
+Evie AU-Hepburn Springs VIC Forest Ave,-37.30906,144.1404
+Evie AU-Melton South VIC Exford Rd,-37.7227,144.57215
+Evie AU-Noosaville QLD Project Ave,-26.40873,153.04612
+Evie AU-Sale VIC Grand Canal Dr,-38.11213,147.06339
+Evie AU-Seven Hills NSW Abbott Rd,-33.76709,150.95484
+Evie AU-Southport QLD Ferry Rd,-27.98518,153.41103
+Evie AU-Sutton Forest NSW Hume Hwy,-34.60721,150.2252
+Evie AU-Taree NSW Manning River Dr,-31.94332,152.47056
+Evie AU-Warwick QLD Acacia Ave,-28.21725,152.03082
 
 Eviny DE-Bad Windsheim Rothenburger Straße,49.498535,10.410445
 Eviny DE-Düren Neusser Straße,50.842644,6.486259
@@ -14902,6 +14958,7 @@ Ionity CZ-Nupaky,49.984404,14.602629
 Ionity CZ-Ostrava-jih Rudná,49.799869,18.225005
 Ionity CZ-Pávov (dir. Brno),49.453814,15.59148
 Ionity CZ-Pávov (dir. Prague),49.455104,15.593272
+Ionity CZ-Turnov Průmyslová,50.59561,15.13121
 Ionity CZ-Čechtice,49.65828,15.120532
 Ionity DE-Aachener Land Nord,50.81772,6.21389,20
 Ionity DE-Aachener Land Süd,50.817306,6.216629
@@ -15413,7 +15470,9 @@ JOE DE-Baindt Am Umspannwerk,47.8364,9.63332
 
 JOLT AU-Beecroft NSW Beecroft Road,-33.750527,151.065097
 JOLT AU-Camp Hill QLD Old Cleveland Road,-27.493943,153.085353
+JOLT AU-Camp Hill QLD Thomas St,-27.50088,153.07722
 JOLT AU-Carindale QLD Old Cleveland Road,-27.502193,153.116708
+JOLT AU-ellyville Ridge NSW Merriville Rd,-33.7004,150.92833
 JOLT DE-Augsburg Donauwörther Straße,48.401023,10.880912
 JOLT DE-Augsburg Landsberger Straße,48.311517,10.906945
 JOLT DE-Berlin Berliner Straße,52.435571,13.266034
@@ -17668,7 +17727,9 @@ Neogy IT-Riva del Garda Viale Rovereto,45.87839,10.85721
 Neogy IT-Salurn Staatsstraße,46.24071,11.20838
 Neogy IT-Salò Via Zane,45.60472,10.51514
 Neogy IT-San Martino in Badia Str. Picolin,46.692556,11.892488
+Neogy IT-Selva di Val Gardena S.da Nives,46.55694,11.75878
 Neogy IT-Sexten Dolomitenstraße,46.69768,12.35656
+Neogy IT-Tiers Via San Giorgio,46.46632,11.52963
 Neogy IT-Vipiteno Piazza Canonico Michael Gamper,46.898872,11.429214
 Neogy IT-Welschnofen Karerseestraße,46.43106,11.54429
 
@@ -17890,13 +17951,28 @@ Norlys DK-Viborg Feltbanen,56.45979,9.40111
 
 NOXO PL-Bełk Główna,50.13117,18.6888
 
+NRMA AU-Armidale NSW Marsh St,-30.51188,151.66967
+NRMA AU-Balranald NSW Market St,-34.63953,143.5647
+NRMA AU-Batemans Bay NSW Visitor Information Centre,-35.70854,150.17535
 NRMA AU-Berri SA Ahern Street,-34.285578,140.603643
+NRMA AU-Brewarrina NSW Bathurst St,-29.96068,146.85778
 NRMA AU-Coonabarabran NSW Newell Highway,-31.27889,149.279255
 NRMA AU-Coonamble NSW Skillmans Ln,-30.95276,148.38794
+NRMA AU-Glen Innes NSW Sommerlad Ln,-29.73844,151.7363
 NRMA AU-Gunnedah NSW Kepreotes Carpark,-30.97787,150.251115
+NRMA AU-Hay NSW Moppett St,-34.50888,144.84284
+NRMA AU-Jindabyne NSW Kalkite St,-36.41607,148.61984
 NRMA AU-Lithgow Eskbank Street,-33.481156,150.158872
 NRMA AU-Lithgow Tank Street,-33.47806,150.161091
+NRMA AU-Mildura VIC Orange Ave,-34.18897,142.16256
+NRMA AU-Narrandera NSW Twynam St,-34.74654,146.55006
+NRMA AU-Parkes NSW Dalton St,-33.13721,148.17267
+NRMA AU-Picton NSW Walton Ln,-34.16824,150.61097
+NRMA AU-Pokolbin NSW Broke Rd,-32.77339,151.29826
+NRMA AU-Temora NSW De Boos St,-34.44606,147.53432
 NRMA AU-Walgett NSW Neilly Street,-30.020746,148.117768
+NRMA AU-West Wyalong NSW Shire St,-33.92383,147.20345
+NRMA AU-Young NSW Lovell St,-34.31177,148.29507
 
 Numbat DE-Aschaffenburg Schiller Straße,49.984904,9.132478
 Numbat DE-Bad Brückenau Gänsrain,50.312116,9.795673
@@ -18808,6 +18884,7 @@ Powerdot ES-Alcasar Carrer París,38.71645,0.14068
 Powerdot ES-Ciudad Real Carr. de Porzuna,38.99175,-3.9355
 Powerdot ES-Finestrat C Rei Jaume I,38.53487,-0.1729
 Powerdot ES-Salamanca Av. de los Cipreses,40.97742,-5.64855
+Powerdot ES-Vilafranca del Penedès Carrer Pla del Viver,41.33542,1.68243
 Powerdot FR-Bergerac Rue du Tounet,44.83547,0.45136,30
 Powerdot FR-Charmes Voie Carpini,48.359627,6.304077
 Powerdot FR-Cosne-Cours-sur-Loire Rue des Minotiers,47.383055,2.919293
@@ -19703,6 +19780,8 @@ Smatrics IT-Vahrn-Varna Forch Straße,46.760248,11.637929
 
 Smopi DE-Markdorf Rathausplatz,47.72002,9.39153,30
 Smopi DE-Weinsberg Am Autobahnkreuz,49.143791,9.308555,15
+
+SolarHub AU-Mitchell ACT Flemington Rd,-35.21779,149.14409
 
 solid DE-Abenberg Burgstraße,49.24348,10.96366
 solid DE-Abenberg Im Gewerbegebiet,49.2356,10.95528
@@ -20967,6 +21046,8 @@ VBE DE-Lauenburg/Elbe Hamburger Straße,53.374094,10.554125
 
 VBH DE-Hoyerswerda Kamenzer Bogen,51.42739,14.235942
 
+Veefi AU-St Lucia QLD Walcott St,-27.49483,153.00886
+
 vigoris DE-Zinnowitz Dr.-Wachsmann-Straße,54.08001,13.90632
 
 Vimmerby-Energi SE-Vimmerby Västra Tullportsgatan,57.66819,15.8544,25
@@ -21365,6 +21446,7 @@ WVV DE-Würzburg Pleichertorstraße,49.79891,9.92584
 
 Yasno UA-Lviv Lypynskoho St,49.86409,24.044024
 
+Yurika AU-Cooroy QLD Cooroy Station,-26.4171,152.91139
 yurika AU-Hamilton QLD MacArthur Avenue,-27.444369,153.08395
 yurika AU-Miriam Vale QLD Blomfield Street,-24.327292,151.560462
 yurika AU-North Lakes QLD Westfield,-27.24326,153.015826
@@ -21376,6 +21458,7 @@ Zapp DK-Rødby Hagesvej,54.66132,11.340961
 
 ZES TR-Beşiktaş/İstanbul Zorlu Center,41.066832,29.017022
 ZES TR-Cedit Atatürk Bl,41.31972,36.33426
+ZES TR-Isparta Bahçelievler,37.78126,30.54464
 ZES TR-Savaştepe Karaçam,39.349632,27.629283
 ZES TR-Susurluk O178,39.923439,28.132198
 
@@ -21528,7 +21611,9 @@ AU Brisbane The Chocolate Factory,-27.40879,153.06116
 AU Browns Plains QLD Browns Plains Rd,-27.6637,153.03996
 AU Burnie TAS North Terrace,-41.04991,145.90733
 AU Kelvin Grove QLD Ring Rd,-27.45318,153.01699
+AU Kingswood NSW Western Sydney University,-33.76984,150.72923
 AU Tonsley SA South Road,-35.008163,138.574993
+AU Waratah TAS Bischoff Hotel,-41.44293,145.52662
 BA Banja Luka Delta Planet,44.78049,17.20657
 BE Hasselt Corda Campus Kempische Steenweg 293,50.951484,5.353231,14
 BE Rotselaar Belparts,50.938946,4.742856
@@ -21641,6 +21726,7 @@ DE Gießen Cursor,50.58493,8.64419,55
 DE Gladbeck SL Naturenergie,51.56883,6.95326
 DE Großharthau Am Schlosspark,51.10727,14.10977
 DE Grünberg Carl-Benz-Straße,50.60323,8.95896
+DE Grünheide Gigafactory,52.39133,13.78861,120
 DE Göppingen Hotel Hohenstaufen,48.70669,9.65513
 DE Gütersloh Arvato,51.88353,8.44304
 DE Gütersloh Arvato,51.88405,8.44351
