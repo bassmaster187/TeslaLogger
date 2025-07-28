@@ -1,5 +1,47 @@
 <?PHP 
 
+checkHTaccess();
+
+function checkHTaccess()
+{
+    $htaccessPath = "/var/www/html/admin/.htaccess";
+    $htpasswdPath = "/tmp/.htpasswd";
+
+    if (filesize($htaccessPath) == 0 && file_exists($htpasswdPath))
+    {
+        error_log("TeslaLogger: .htaccess file is empty but .htpasswd exists - recreating .htaccess");
+        createHTAccess();
+    }
+}
+
+function createHTAccess()
+{
+
+    // Create .htaccess content
+    $htaccessContent = "AuthType Basic\n";
+    $htaccessContent .= "AuthName \"TeslaLogger Admin Panel\"\n";
+    $htaccessContent .= "AuthUserFile /tmp/.htpasswd\n";
+    $htaccessContent .= "Require valid-user\n";
+
+    // Try to write .htaccess file to admin directory
+    $htaccessPath = "/var/www/html/admin/.htaccess";
+    if (file_put_contents($htaccessPath, $htaccessContent) === false) {
+        error_log("TeslaLogger: Failed to write .htaccess file to " . $htaccessPath);
+        
+        // If that fails, write to tmp and try to copy
+        $tempHtaccessPath = "/tmp/.htaccess";
+        file_put_contents($tempHtaccessPath, $htaccessContent);
+        if (!copy($tempHtaccessPath, $htaccessPath)) {
+            error_log("TeslaLogger: Failed to copy .htaccess file from " . $tempHtaccessPath . " to " . $htaccessPath . ". Check permissions on /var/www/html/admin/");
+            throw new Exception("Could not write .htaccess file. Please check permissions on /var/www/html/admin/");
+        } else {
+            error_log("TeslaLogger: Successfully copied .htaccess file from temp location");
+        }
+    } else {
+        error_log("TeslaLogger: Successfully created .htaccess file");
+    }
+}
+
 function isRedirectDockerToHost()
 {
     return file_exists("REDIRECTDOCKERTOHOST");

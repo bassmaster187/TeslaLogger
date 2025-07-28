@@ -9,8 +9,10 @@ RUN apt-get update && \
   rm -rf /var/lib/apt/lists/* && \
   sed -e '/<Directory \/var\/www\/>/,/<\/Directory>/s/AllowOverride None/AllowOverride All/' -i /etc/apache2/apache2.conf && \
   echo "1" > /var/tmp/dockerwebserverversion && \
-  echo "1" > /var/tmp/dockernet8
-
+  echo "1" > /var/tmp/dockernet8 
+  
 COPY TeslaLogger/www /var/www/html
 COPY docker/webserver/php.ini /usr/local/etc/php/
 
+RUN touch /var/www/html/admin/.htaccess && \
+  chmod 777 /var/www/html/admin/.htaccess 
