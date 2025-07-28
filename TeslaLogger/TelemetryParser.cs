@@ -171,7 +171,7 @@ namespace TeslaLogger
         {
             if (!Driving && !acCharging && !dcCharging)
             {
-                if (OnlineTimeout())
+                if (OnlineTimeout() || lastPackCurrent == 0)
                     return false;
             }
 
