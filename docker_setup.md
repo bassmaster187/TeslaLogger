@@ -1,11 +1,19 @@
 # Docker Setup
-For Synology NAS users, check the hints here: [LINK DSM 6](docker_setup_synology.md) / [LINK DSM 7](docker_setup_synology_7.md) 
+## Synology NAS
+Synology users must place the docker inside a special folder:
+```
+sudo -i
+cd /volume1/docker
+mkdir teslalogger
+cd teslalogger
+```
 
-Docker on Raspberry: It won't work if you don't have a 64bit OS as MariaDB requires a 64bit OS!
-
-Please make sure you have the latest docker and docker compose. Many repositories comes with old docker and / or docker compose. You can avoid a lot of problems by doblecheck it.
+## Docker on Raspberry:
+It won't work if you don't have a 64bit OS as MariaDB requires a 64bit OS!
 
 ## Install:
+Please make sure you have the latest docker and docker compose. Many repositories comes with old docker and / or docker compose. You can avoid a lot of problems by doblecheck it.
+
 ```
 mkdir backup
 mkdir mysql
