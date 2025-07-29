@@ -483,6 +483,38 @@ namespace TeslaLogger
             autoDiscovery["active_route_longitude"]["name"] = "Route destination longitude";
             autoDiscovery["active_route_longitude"]["unit"] = "°";
             autoDiscovery["active_route_longitude"]["icon"] = "mdi:longitude";
+
+            autoDiscovery["tpms_pressure_fr"] = new Dictionary<string, string>();
+            autoDiscovery["tpms_pressure_fr"]["discovery_active"] = "true";
+            autoDiscovery["tpms_pressure_fr"]["type"] = "sensor";
+            autoDiscovery["tpms_pressure_fr"]["name"] = "TPMS Front right";
+            autoDiscovery["tpms_pressure_fr"]["unit"] = "bar";
+            autoDiscovery["tpms_pressure_fr"]["class"] = "pressure";
+            autoDiscovery["tpms_pressure_fr"]["icon"] = "mdi:tire";
+
+            autoDiscovery["tpms_pressure_fl"] = new Dictionary<string, string>();
+            autoDiscovery["tpms_pressure_fl"]["discovery_active"] = "true";
+            autoDiscovery["tpms_pressure_fl"]["type"] = "sensor";
+            autoDiscovery["tpms_pressure_fl"]["name"] = "TPMS Front left";
+            autoDiscovery["tpms_pressure_fl"]["unit"] = "bar";
+            autoDiscovery["tpms_pressure_fl"]["class"] = "pressure";
+            autoDiscovery["tpms_pressure_fl"]["icon"] = "mdi:tire";
+
+            autoDiscovery["tpms_pressure_rr"] = new Dictionary<string, string>();
+            autoDiscovery["tpms_pressure_rr"]["discovery_active"] = "true";
+            autoDiscovery["tpms_pressure_rr"]["type"] = "sensor";
+            autoDiscovery["tpms_pressure_rr"]["name"] = "TPMS Rear right";
+            autoDiscovery["tpms_pressure_rr"]["unit"] = "bar";
+            autoDiscovery["tpms_pressure_rr"]["class"] = "pressure";
+            autoDiscovery["tpms_pressure_rr"]["icon"] = "mdi:tire";
+
+            autoDiscovery["tpms_pressure_rl"] = new Dictionary<string, string>();
+            autoDiscovery["tpms_pressure_rl"]["discovery_active"] = "true";
+            autoDiscovery["tpms_pressure_rl"]["type"] = "sensor";
+            autoDiscovery["tpms_pressure_rl"]["name"] = "TPMS Rear left";
+            autoDiscovery["tpms_pressure_rl"]["unit"] = "bar";
+            autoDiscovery["tpms_pressure_rl"]["class"] = "pressure";
+            autoDiscovery["tpms_pressure_rl"]["icon"] = "mdi:tire";
         }
 
     }

@@ -271,6 +271,10 @@ namespace TeslaLogger
                             foreach (var keyvalue in topics)
                             {
                                 var safeValue = GetSafeValueForPublishing(keyvalue);
+                                if(keyvalue.Key == "charge_limit_soc" && safeValue == "0")
+                                {
+                                    safeValue = "50";
+                                }
 
                                 client.Publish(carTopic + "/" + keyvalue.Key, Encoding.UTF8.GetBytes(safeValue),
                                 uPLibrary.Networking.M2Mqtt.Messages.MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, true);
