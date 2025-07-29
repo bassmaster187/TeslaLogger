@@ -536,7 +536,7 @@ namespace TeslaLogger
                                 continue;
                             }
 
-                            if (max_power > 150 && (!p.name.Contains("Supercharger-V3") || !p.name.Contains("Supercharger-V4")))
+                            if (max_power > 150 && !p.name.Contains("Supercharger-V3") && !p.name.Contains("Supercharger-V4"))
                             {
                                 continue;
                             }
