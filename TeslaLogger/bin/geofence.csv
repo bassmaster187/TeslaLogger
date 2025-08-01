@@ -1916,7 +1916,7 @@ Supercharger-V3 DE-Herrieden,49.257951,10.501761
 Supercharger-V3 DE-Herzsprung,53.06744,12.53322
 Supercharger-V4 DE-Hessisch Lichtenau,51.197891,9.745477,25
 Supercharger DE-Hilden,51.191193,6.936986,30
-Supercharger-V3 DE-Hilden,51.19189,6.93536,80
+Supercharger-V3 DE-Hilden,51.19195,6.93595,60
 Supercharger-V3 DE-Hilpoltstein,49.16101,11.26034,80
 Supercharger-V3 DE-Hilpoltstein,49.16116,11.26193,50
 Supercharger-V4 DE-Hirschberg,49.50738,8.63752,40
@@ -5800,6 +5800,7 @@ Tesla Service Center CH-Schlieren,47.40088,8.44
 Tesla Service Center CH-St. Gallen,47.41515,9.34021
 Tesla Service Center CH-Winterthur,47.49629,8.6981
 Tesla Service Center DE-Berlin,52.394091,13.542292
+Tesla Service Center DE-Dortmund Holzwickede,51.51175,7.614
 Tesla Service Center DE-Dresden Kesseldorf,51.03637,13.59807
 Tesla Service Center DE-Duisburg,51.476498,6.794394
 Tesla Service Center DE-Düsseldorf,51.16438,6.85322
@@ -6843,6 +6844,7 @@ Allego DE-Wandlitz Prenzlauer Str 71,52.710287,13.439314
 Allego DE-Wang Semptstr. 15,48.484072,12.005799
 Allego DE-Wathlingen Nienhagener Str. 15,52.541847,10.133864
 Allego DE-Weiden in der Oberpfalz Dr.-Kilian-Straße,49.70002,12.15754
+Allego DE-Wenden Auf dem Ohl,50.99005,7.8412
 Allego DE-Westerstede Leererstraße,53.28786,7.8928,30
 Allego DE-Wilhelmshaven Posener Straße 36-38,53.574008,8.094087
 Allego DE-Windischeschenbach Autohof Bergler,49.80413,12.18416,20
@@ -7095,6 +7097,7 @@ ARAL DE-Hamburg Dehnhaide,53.57945,10.04504
 ARAL DE-Hamburg Stresemannstraße,53.56409,9.9258
 ARAL DE-Hamburg Wilhelm-Iwan-Ring,53.489885,10.114666
 ARAL DE-Hameln Fischbecker Landstraße,52.12086,9.33543
+ARAL DE-Hamm Werler Straße,51.61714,7.84857
 ARAL DE-Hannover Am Leineufer,52.418344,9.636081
 ARAL DE-Hannover Hans-Böckler-Allee,52.37148,9.77404,30
 ARAL DE-Hannover Messeschnellweg,52.32924,9.81231,30
@@ -7174,6 +7177,7 @@ ARAL DE-Verden (Aller) Achimer Straße,52.95042,9.23444,20
 ARAL DE-Vetschau Kleine Bahnhofstraße,51.78392,14.07867
 ARAL DE-Warburg Paderborner Tor,51.49454,9.12634,25
 ARAL DE-Winsen (Luhe) Max-Planck-Straße,53.339067,10.219588
+ARAL DE-Winterberg Am Hagenblech,51.20019,8.53027
 ARAL DE-Wittenburg Autohof,53.502361,11.097974
 ARAL DE-Worms Mainzer Straße,49.65494,8.359737
 ARAL DE-Wuppertal Uellendahler Straße,51.276057,7.155171,30
@@ -7508,7 +7512,6 @@ BP DE-Hamburg Osdorfer Landstraße,53.571399,9.870053
 BP DE-Hamburg Otto-Brenner-Straße,53.489877,10.018841
 BP DE-Hamburg Poppenbütteler Weg,53.649829,10.064677
 BP DE-Hamm Hammer Straße,51.690016,7.775152
-BP DE-Hamm Werler Straße,51.616665,7.848467
 BP DE-Hanau Brüder-Grimm-Straße,50.1278,8.91703
 BP DE-Hanau Maintaler Straße,50.14754,8.90096
 BP DE-Hannover Göttinger Chaussee,52.345632,9.717012
@@ -7932,6 +7935,7 @@ ChargePoint DE-Köln 41 Richard-Byrd-Straße,50.990029,6.88995
 ChargePoint DE-Laaber 2 Reiserweg,49.088613,11.88499
 ChargePoint DE-Landau in der Pfalz Gilletstraße 5,49.211596,8.120238
 ChargePoint DE-Legden Industriepark,52.04749,7.06345
+ChargePoint DE-Lippstadt Rixbecker Straße,51.67296,8.3582
 ChargePoint DE-Luckau Bersteallee,51.911112,13.796821
 ChargePoint DE-Ludwigsburg 140 Schwieberdinger Str.,48.890527,9.158224
 ChargePoint DE-Ludwigsburg 57 Teinacher Straße,48.90339,9.165516
@@ -8339,6 +8343,7 @@ Clever DK-Ringsted Klosterparks Allé,55.45319,11.78904
 Clever DK-Roskilde Stationscentret,55.63728,12.08222
 Clever DK-Roskilde Stationscentret,55.63745,12.08326
 Clever DK-Rødekro Skånevej,55.0694,9.35293
+Clever DK-Silkeborg Borgergade,56.18367,9.54622
 Clever DK-Silkeborg Torvet,56.16826,9.55104
 Clever DK-Skagen Christian Xs Vej,57.723636,10.590669
 Clever DK-Skærbæk Jernbanegade,55.15875,8.76943
@@ -8932,6 +8937,7 @@ e-laden-Tirol AT-Kematen Sportplatzweg,47.260587,11.268672
 e-laden-Tirol AT-Kitzbühel Jochberger Straße,47.43815,12.40086
 e-laden-Tirol AT-Schönberg im Stubaital Europabrücke-Parkplatz,47.19827,11.39695
 
+E-MAXX DE-Bodenheim Am Reichsritterstift,49.9311,8.30093
 E-MAXX DE-Frickhofen Schulstraße,50.504932,8.027944
 E-MAXX DE-Harxheim Gerbstedterstraße,49.90317,8.276746
 E-MAXX DE-Limburg Limburgerstraße,50.403889,8.0675
@@ -9398,6 +9404,7 @@ ecowerk DE-Tübingen Eisenhutstraße,48.510943,9.070798,20
 ecowerk DE-Tübingen Europaplatz,48.51572,9.05236
 ecowerk DE-Tübingen Vor dem Großholz,48.52138,9.097352
 
+EDEKA DE-Ahlen Gebrüder-Kerkmann-Platz,51.76187,7.89876,20
 EDEKA DE-Ahorn Lindenstraße,50.23425,10.9182
 EDEKA DE-Asendorf Altenfelder Weg,52.77811,9.00129
 EDEKA DE-Asendorf Altenfelder Weg,52.778427,9.002084
@@ -9467,7 +9474,7 @@ EDEKA DE-Gaimersheim Dr.-Ludwig Kraus-Straße,48.790648,11.378478
 EDEKA DE-Gardelegen Wilhelmstraße,52.48509,11.215774
 EDEKA DE-Geiselbach Omersbacher Weg,50.10886,9.19192
 EDEKA DE-Geldern Annastr.,51.51793,6.34108
-EDEKA DE-Gevelsberg Wittener Str.,51.33023,7.33646
+EDEKA DE-Gevelsberg Wittener Straße,51.32977,7.33519
 EDEKA DE-Goch Sandthof,51.66679,6.17664
 EDEKA DE-Goslar Gutenbergstraße,51.916187,10.449951
 EDEKA DE-Grainau An der Zugspitze,47.479069,11.054677,15
@@ -9535,6 +9542,7 @@ EDEKA DE-Mühlenbeck Hauptstraße,52.662169,13.378687
 EDEKA DE-Mülheim a. d. Ruhr Düsseldorfer Str.,51.4071,6.87033
 EDEKA DE-Mülheim an der Ruhr Mannesmannallee,51.45867,6.88109
 EDEKA DE-Müllrose Alte Poststraße,52.241876,14.412536
+EDEKA DE-Nastätten Kindchesgarten,50.19923,7.85028
 EDEKA DE-Nauen Brandenburger Straße,52.601201,12.860419
 EDEKA DE-Naumburg (Saale) Overwegstraße,51.157574,11.82182
 EDEKA DE-Naumburg (Saale) Overwegstraße,51.15847,11.8209
@@ -9726,6 +9734,7 @@ Electrify-America US-Bridgeport Main St,38.255155,-119.232015
 Electrify-America US-Bridgewater NJ Promenade Blvd,40.56189,-74.55378
 Electrify-America US-Cedar City UT S Providence Center Dr,37.65477,-113.086737
 Electrify-America US-Cheektowaga NY Walden Ave,42.90934,-78.74461
+Electrify-America US-Clifton NJ Kingsland Rd,40.82432,-74.13654
 Electrify-America US-East Brunswick NJ NJ-18,40.45773,-74.39928
 Electrify-America US-Fort Morgan CO Barlow Rd,40.26132,-103.77123
 Electrify-America US-Genoa OH Blue Heron Service Plaza,41.491074,-83.366741,15
@@ -9967,6 +9976,7 @@ EnBW DE-Aurach Leutershausener Straße,49.25009,10.42442
 EnBW DE-Aurich,53.4704,7.45939
 EnBW DE-Autohof Grabow,53.2982,11.53302,25
 EnBW DE-Autohof Kappel-Grafenhausen,48.28093,7.77691,25
+EnBW DE-Autohof Nahetal,49.9256,7.93568,30
 EnBW DE-Autohof Stuhr,53.01194,8.70454,30
 EnBW DE-Aying Römerstraße,47.94764,11.791601
 EnBW DE-Aßling Glonner Straße,47.99171,12.00092
@@ -10113,7 +10123,6 @@ EnBW DE-Bienenbüttel Poststraße,53.141473,10.492502
 EnBW DE-Bietigheim Malscher Str.,48.911339,8.251018
 EnBW DE-Bietigheim Rastatter Str.,48.909522,8.252883
 EnBW DE-Bindlach Bühlstraße,49.969259,11.611605
-EnBW DE-Bingen am Rhein Gustav-Stresemann-Straße,49.925648,7.935013
 EnBW DE-Bingen Im Winkel,48.108885,9.273638
 EnBW DE-Birkenfeld Hauptstr.,48.870744,8.63678
 EnBW DE-Birkenwerder Hauptstraße,52.704186,13.270066
@@ -10643,7 +10652,7 @@ EnBW DE-Herleshausen Brandenburgstraße 99,51.006613,10.175765
 EnBW DE-Hermaringen Robert-Bosch-Straße,48.590692,10.268147
 EnBW DE-Herne,51.538074,7.178124
 EnBW DE-Herrenberg Benzstr.,48.599152,8.870362
-EnBW DE-Herschbach,50.569133,7.736197
+EnBW DE-Herschbach Rheinstraße,50.56876,7.73684
 EnBW DE-Hettstedt,51.646759,11.516185
 EnBW DE-Heuchelheim Rodheimer Straße,50.598473,8.627789
 EnBW DE-Heusenstamm Werner-von-Siemens-Straße,50.048875,8.800494
@@ -10718,7 +10727,6 @@ EnBW DE-Jungingen Märzengasse,48.326571,9.041705
 EnBW DE-Jülich,50.92911,6.3565
 EnBW DE-Kaarst,51.22642,6.60024
 EnBW DE-Kaiserslautern Merkurstraße,49.44156,7.70814,10
-EnBW DE-Kaltenborn,51.288867,7.5718
 EnBW DE-Kamen Kamener Kreuz,51.567135,7.674563,60
 EnBW DE-Kamenz,51.28738,14.111254
 EnBW DE-Kamp-Lintfort,51.51031,6.546675
@@ -10846,6 +10854,7 @@ EnBW DE-Küssaberg Rheinpromenade,47.586924,8.304186
 EnBW DE-Laatzen Bauhaus,52.30806,9.8052
 EnBW DE-Laatzen Pettenkoferstraße,52.305513,9.812718
 EnBW DE-Lage Lange Straße,51.98974,8.79157
+EnBW DE-Lahnstein Am Rasenplatz,50.32301,7.60696
 EnBW DE-Lahr/Schwarzwald Dinglinger Hauptstraße,48.34192,7.84963
 EnBW DE-Lahr/Schwarzwald Im Götzmann,48.332978,7.846596
 EnBW DE-Landau an der Isar Fichtheimer Feld,48.65254,12.705311
@@ -10939,7 +10948,6 @@ EnBW DE-Mahlberg Rathausplatz,48.287075,7.812286
 EnBW DE-Mahlberg West,48.309677,7.788862
 EnBW DE-Mahlstetten Lippachtalstr.,48.074438,8.84249
 EnBW DE-Mainburg Straßäcker,48.632343,11.774555
-EnBW DE-Maintal Industriestraße,50.10595,8.9139
 EnBW DE-Mainz Geschwister-Scholl-Straße,49.977072,8.270527
 EnBW DE-Mainz Max-Hufschmidt-Straße,49.973589,8.288414
 EnBW DE-Mainz Rheinallee,50.028804,8.221756
@@ -10960,7 +10968,7 @@ EnBW DE-Marktschorgast Am Christophsbühl,50.08275,11.66332
 EnBW DE-Marxzell Klosterstraße,48.83533,8.4415
 EnBW DE-Maselheim Hauptstraße Straße,48.15324,9.85579
 EnBW DE-Massenbachhausen Heilbronner Str.,49.174753,9.047085
-EnBW DE-Mayen Polcher Str.,50.318932,7.233488
+EnBW DE-Mayen Polcher Straße,50.31913,7.23362,30
 EnBW DE-Mechernich Euronics,50.618808,6.650223
 EnBW DE-Mechernich Hellweg,50.61813,6.649101
 EnBW DE-Meckenbeuren Max-Gutknecht-Str.,47.708713,9.601005
@@ -11078,7 +11086,7 @@ EnBW DE-Neuss Bahnhofstraße,51.16678,6.66258
 EnBW DE-Neuss Jülicher Landstraße,51.18396,6.6791,66
 EnBW DE-Neustadt (Wied),50.59919,7.433431
 EnBW DE-Neustadt in Sachsen,51.027436,14.219008
-EnBW DE-Neuwied,50.4386,7.49001
+EnBW DE-Neuwied Allensteiner Straße,50.43812,7.49004
 EnBW DE-Nideggen,50.69595,6.487339
 EnBW DE-Nieder-Olm Bussolengo-Platz,49.907976,8.198114
 EnBW DE-Niederaichbach Eichenstraße,48.60745,12.31597
@@ -11218,6 +11226,7 @@ EnBW DE-Raststätte Dollenberg,50.68836,8.29598,15
 EnBW DE-Raststätte im Hegau A81,47.86136,8.78631
 EnBW DE-Raststätte Inntal,47.61084,12.20169
 EnBW DE-Raststätte Inntal,47.61265,12.20067
+EnBW DE-Raststätte Kaltenborn,51.28886,7.5726
 EnBW DE-Raststätte Langen-Bergheim,50.24843,8.99398
 EnBW DE-Raststätte Langen-Bergheim,50.250597,8.994507
 EnBW DE-Ratingen Hohenstein A52,51.290187,6.80453
@@ -11445,7 +11454,7 @@ EnBW DE-Stade Rewe,53.582518,9.499827
 EnBW DE-Stadthagen Hagebaumarkt,52.330074,9.231677
 EnBW DE-Stadthagen Rewe,52.312748,9.193975
 EnBW DE-Stadthagen Vornhäger Str.,52.32914,9.22471
-EnBW DE-Stadtkyll Im Hahnborn,50.351284,6.544698
+EnBW DE-Stadtkyll Im Hahnborn,50.35145,6.54303
 EnBW DE-Starzach Bachstr.,48.449367,8.803
 EnBW DE-Starzach Hauptstr.,48.432466,8.814238
 EnBW DE-Staufen im Breisgau Großmattenstraße,47.88882,7.72382
@@ -11474,6 +11483,7 @@ EnBW DE-Straubing Dresdner Str.,48.883019,12.614794
 EnBW DE-Straubing Landshuter Straße,48.867521,12.573991
 EnBW DE-Straubing Posener Straße,48.886296,12.615835
 EnBW DE-Straßberg Mühlstr.,48.171753,9.09431
+EnBW DE-Straßenhaus Kirschbüchel,50.54224,7.51949
 EnBW DE-Stuhr Bremer Str.,53.02917,8.807916
 EnBW DE-Stutensee Heinrich-Heine-Str.,49.112734,8.50449
 EnBW DE-Stutensee Kirchstr.,49.110519,8.514993
@@ -11647,6 +11657,7 @@ EnBW DE-Uttenweiler Hauptstr.,48.147014,9.612548
 EnBW DE-Vaihingen an der Enz Franckstr.,48.931382,8.960179
 EnBW DE-Vaihingen an der Enz Hertzstr.,48.926931,8.966447
 EnBW DE-Vaihingen an der Enz Im Mühlkanal,48.931392,8.95571
+EnBW DE-Vallendar Hellenstraße,50.3986,7.61238
 EnBW DE-Veitsbronn Fürtherstr.,49.50469,10.89338
 EnBW DE-Veringenstadt Im Städtle,48.178307,9.212785
 EnBW DE-Viernheim Wiesenstraße,49.544908,8.589202
@@ -12325,6 +12336,7 @@ EVB DE-Eisenach Hinter der Mauer,50.9763,10.31766
 EVBox CH-Bern Riedbachstrasse,46.94621,7.37338
 EVBox CH-Egerkingen Hausimollstrasse,47.318099,7.802282
 EVBox CH-Urtenen-Schönbühl Industriestrasse,47.01816,7.49243,20
+EVBox DE-Winterberg In d. Büre,51.19823,8.51239
 EVBox IT-St. Vigilio Corso Lanz,46.7006,11.92962
 EVBox NL-Enschede Strootsweg,52.22154,6.83426
 EVBox NL-Hoofddorp Taurus Avenue,52.28694,4.70725
@@ -12432,6 +12444,7 @@ EVite CH-Baden Segelhof,47.458561,8.278505
 EVL DE-Limburg Am Hammerberg,50.380094,8.079124
 
 EVM DE-Cochem Bahnhofsvorplatz,50.153328,7.167515
+EVM DE-Höhr-Grenzhausen Schillerstraße,50.44251,7.66136
 EVM DE-Koblenz Altstadt,50.359981,7.598084
 EVM DE-Koblenz An der Römervilla,50.381427,7.563437,20
 EVM DE-Koblenz Autohaus Löhr Becker,50.378368,7.585333
@@ -12445,6 +12458,7 @@ EVM DE-Koblenz Schloßstraße,50.356401,7.596993
 EVN AT-Amstetten Agathastraße,48.122685,14.886241
 EVN AT-Amstetten Eggersdorfer Straße,48.120875,14.874438
 EVN AT-Amstetten Kupferstraße,48.116694,14.892285
+EVN AT-Amstetten Oiden,48.13209,14.84069
 EVN AT-Amstetten Otto-Schott-Straße,48.117532,14.910831
 EVN AT-Amstetten Ybbsstraße,48.113975,14.870678
 EVN AT-Bruck an der Leitha Eco-Plus-Park 4.Straße,48.03511,16.80851
@@ -12556,6 +12570,7 @@ EWE-GO DE-Aurich Marktplatz,53.470269,7.483993
 EWE-GO DE-Aurich Raiffeisen Straße,53.45752,7.49794
 EWE-GO DE-Aurich Westerlooger Straße,53.536224,7.598103
 EWE-GO DE-Aurich Zu den Norderstücken,53.500833,7.486206
+EWE-GO DE-Autohof Nahetal,49.9252,7.93588,30
 EWE-GO DE-Autohof Pfalzfeld,50.11603,7.6002,25
 EWE-GO DE-Aßlar Walbergraben,50.58404,8.48065
 EWE-GO DE-Backnang Wanne,48.93224,9.43907
@@ -12619,7 +12634,6 @@ EWE-GO DE-Biberach an der Riß Leipzigstraße,48.08435,9.80164,30
 EWE-GO DE-Biberach an der Riß Leipzigstraße,48.08436,9.80163,25
 EWE-GO DE-Biedenkopf Georg-Kramer-Straße,50.90116,8.53598
 EWE-GO DE-Bielefeld Eckendorfer Straße,52.034643,8.564506
-EWE-GO DE-Bingen am Rhein Gustav-Stresemann-Straße,49.92518,7.93582
 EWE-GO DE-Bispingen Horstfeldweg,53.100871,9.977802
 EWE-GO DE-Bitburg Bitburger Straße,49.962564,6.541886
 EWE-GO DE-Bitterfeld-Wolfen Krondorfer Straße,51.66709,12.25948
@@ -14373,6 +14387,7 @@ HEnW DE-Hamburg Bornkampsweg,53.56673,9.918201
 HEnW DE-Hamburg Büschstraße,53.55611,9.98995
 HEnW DE-Hamburg Christoph-Probst-Weg,53.5966,9.97622
 HEnW DE-Hamburg Chrysanderstraße,53.488222,10.215524
+HEnW DE-Hamburg Clemens-Schultz-Straße,53.55225,9.96503
 HEnW DE-Hamburg Daimlerstraße,53.556545,9.921305
 HEnW DE-Hamburg Dehnhaide,53.57909,10.04252
 HEnW DE-Hamburg Dorothea-Bernstein-Weg,53.57021,10.03361
@@ -15005,13 +15020,13 @@ Ionity DE-Augsburg Ost,48.411614,10.914898
 Ionity DE-Aurach Frankenhöhe Süd,49.241155,10.356121
 Ionity DE-Autohof Dachsberg,50.64759,7.33472,20
 Ionity DE-Autohof Lippetal,51.69593,7.96615
+Ionity DE-Autohof Nahetal,49.92576,7.93674,30
 Ionity DE-Autohof Wernberg,49.53243,12.1349,12
 Ionity DE-Bad Camberg West,50.299926,8.2347
 Ionity DE-Bayerischer Wald Nord,48.931751,12.708247
 Ionity DE-Bayerischer Wald Süd,48.931044,12.705416
 Ionity DE-Berg / Neumarkt Autohof,49.31295,11.47475,30
 Ionity DE-Bernau am Chiemsee Theodor-Sanne-Straße,47.815311,12.366538
-Ionity DE-Bingen am Rhein Rasthof Autobahnkreuz Nahetal,49.92578,7.936795
 Ionity DE-Bochum,51.474082,7.151429
 Ionity DE-Bornheim Carl-Benz-Straße,50.762068,7.029584
 Ionity DE-Brohltal Ost,50.440471,7.225629
@@ -15996,6 +16011,8 @@ KELAG AT-Velden Villacher Straße,46.6141,14.03883
 KELAG AT-Villach Maria-Gailer-Straße,46.60398,13.86929,12
 KELAG AT-Wien Gutheil-Schoder-Gasse,48.16241,16.3402
 KELAG AT-Wolfsberg Gemmersdorfer Straße,46.81774,14.85132
+
+KH-Energie DE-Winterberg Am Eschenberg,51.24578,8.52863
 
 Kia BG-Sofia Gorublyane Mladost,42.636691,23.415721
 
@@ -17150,6 +17167,7 @@ M-Charge CH-Bülach Süd Center Feldstrasse,47.510158,8.540257
 M-Charge CH-Chur Rheinfelsstrasse,46.85147,9.51294
 M-Charge CH-Davos Promenade,46.80155,9.83283
 M-Charge CH-Dietikon Bernstrasse,47.38439,8.39585
+M-Charge CH-Gretzenbach Oltnerstrasse,47.35979,7.98954
 M-Charge CH-Interlaken Lindenallee,46.68827,7.87685
 M-Charge CH-La Chaux-de-Fonds Rue Daniel-Jeanrichard,47.10027,6.82698
 M-Charge CH-Rothrist Neue Aarburgerstrasse,47.31132,7.89489
@@ -17203,6 +17221,7 @@ MB DE-Aurich Korbweidenstraße,53.45056,7.50673
 MB DE-Butzbach In der Alböhn,50.42942,8.68306
 MB DE-Ludwigsfelde Gottlieb-Daimler-Straße,52.32867,13.273
 MB DE-Mannheim Gottlieb-Daimler-Straße,49.475862,8.495459
+MB DE-Mayen Polcher Straße,50.31949,7.23297,25
 MB DE-Obing Wasserburger Straße,48.00251,12.40044
 MB DE-Stuttgart Siemensstraße,48.81003,9.180705,15
 MB US-Waller TX US 290 Frontage Rd,30.07166,-95.9309
@@ -17597,6 +17616,7 @@ MOVE CH-Inwil Raststätte Sankt Katharina,47.11965,8.3742
 MOVE CH-Kreuzlingen Marktstrasse,47.64854,9.17301
 MOVE CH-Lenzerheide Clavadoiras,46.72279,9.55854
 MOVE CH-Liebefeld Kohlenweg,46.93203,7.42089
+MOVE CH-Meggen Luzernerstrasse,47.04564,8.37209
 MOVE CH-Münchenstein Weidenstrasse,47.51344,7.6161
 MOVE CH-Neuenhof Zürcherstrasse,47.450972,8.327305
 MOVE CH-Niedergösgen Hauptstrasse,47.37215,7.991561
@@ -17723,6 +17743,7 @@ N-ERGIE DE-Wiesentheid Jahnstraße,49.7924,10.35127
 
 naturenergie CH-Grächen Dorfstrasse,46.19548,7.83873
 naturenergie CH-Saas-Fee Dorfplatz,46.11073,7.93252
+naturenergie DE-Altenkirchen Quengelstraße,50.68667,7.643
 naturenergie DE-Bad Krozingen Norsinger Straße,47.922681,7.707747
 naturenergie DE-Badenweiler Kanderner Straße,47.796432,7.669796
 naturenergie DE-Bonndorf im Schwarzwald Talstraße,47.794525,8.351893
@@ -18377,7 +18398,7 @@ Pfalzwerke DE-Bad Dürkheim Bürgermeister-Gropp-Straße 2,49.457924,8.150452
 Pfalzwerke DE-Bad Dürkheim Dr.-Kaufmann-Straße 2,49.46675,8.178083
 Pfalzwerke DE-Bad Dürkheim Sankt-Michaels-Allee 22,49.465178,8.170373
 Pfalzwerke DE-Bad Kreuznach Bosenheimer Str. 214,49.84641,7.88514
-Pfalzwerke DE-Bad Kreuznach  Am Grenzgraben,49.852106,7.899261
+Pfalzwerke DE-Bad Kreuznach Am Grenzgraben,49.85318,7.89918
 Pfalzwerke DE-Bad Säckingen Glarnerstraße 4,47.551779,7.932736
 Pfalzwerke DE-Baden-Baden Neuer Markt,48.796,8.19447
 Pfalzwerke DE-Bamberg Laubanger 5-9,49.90785,10.878875
@@ -18717,6 +18738,7 @@ Pfalzwerke DE-Simmern (Hunsrück) Rödelbachstraße,49.982363,7.549313
 Pfalzwerke DE-Sindelfingen Böblinger Str. 140,48.695679,9.008056
 Pfalzwerke DE-Sinsheim Dührener Str. 33,49.248977,8.861635
 Pfalzwerke DE-Sinsheim Strombergstraße 5,49.247248,8.878005
+Pfalzwerke DE-Soest Römerweg,51.57147,8.12929
 Pfalzwerke DE-St. Ingbert Oststraße 80,49.271147,7.13191
 Pfalzwerke DE-St. Ingbert Poststraße,49.28055,7.114354
 Pfalzwerke DE-Steinfeld Alte Landstraße 12,49.048801,8.030593
@@ -19431,6 +19453,7 @@ Shell AT-Hornstein Neufelder Straße,47.87416,16.43207
 Shell AT-Maria Lanzendorf Wiener Straße,48.09911,16.41869
 Shell AT-Mistelbach Mitschastraße,48.56178,16.57714
 Shell AT-Neudörfl Hauptstraße,47.80113,16.27548
+Shell AT-Raststation Ansfelden,48.21216,14.282
 Shell AT-Raststation Eben,47.42114,13.383
 Shell AT-Raststation Walserberg,47.76781,12.94826
 Shell AT-Schwanenstadt Vor der Au,48.04781,13.78082,60
@@ -20211,6 +20234,8 @@ SW-Lübeck DE-Lübeck Mühlenstraße,53.86318,10.68676
 SW-Lübeck DE-Lübeck Priwallpromenade,53.95621,10.88116
 SW-Magdeburg DE-Magdeburg Am Blauen Bock,52.131331,11.63506
 SW-Magdeburg DE-Magdeburg Ernst-Reuter-Allee,52.13065,11.63851
+SW-Mainz DE-Mainz Fischtorplatz,49.99971,8.27704
+SW-Mainz DE-Mainz Wilhelm-Raabe-Straße,50.00335,8.21321
 SW-Merseburg DE-Merseburg Querfurter Straße,51.37147,11.98317
 SW-Mosbach DE-Mosbach Martin-Butzer-Straße,49.35044,9.14211
 SW-Munster-Bispingen DE-Munster Aussiger Straße,52.98662,10.08471
@@ -20293,6 +20318,7 @@ SW-Schwarzenberg DE-Schwarzenberg Straße der Einheit,50.547186,12.787756
 SW-Schwerte DE-Schwerte Hörder Straße,51.46426,7.55803
 SW-SH DE-Schleswig Am Fabrikhof,54.51098,9.5843
 SW-SH DE-Schleswig Lattenkamp,54.530127,9.529554
+SW-Soest DE-Ense Schlotweg,51.50952,7.99751
 SW-Soest DE-Soest Riga-Ring,51.570059,8.129386
 SW-Soltau DE-Soltau Heide Park,53.0289,9.87483
 SW-Soltau DE-Soltau Outlet,52.983,9.92525,10
@@ -20312,6 +20338,8 @@ SW-Stralsund DE-Stralsund Gustower Weg,54.27091,13.11539
 SW-Stralsund DE-Stralsund Gustower Weg,54.27101,13.11475
 SW-Strausberg DE-Strausberg Herrenseeallee,52.55756,13.87258
 SW-Stuttgart DE-Stuttgart Hedelfinger Straße,48.769774,9.248443
+SW-Trier DE-Trier Am Gillenbach,49.76767,6.6242
+SW-Trier DE-Trier Ostallee,49.75595,6.65058
 SW-Troisdorf DE-Troisdorf Echternacher Straße,50.819357,7.113497
 SW-Troisdorf DE-Troisdorf Heinkelstraße,50.816973,7.108354
 SW-Uetersen DE-Uetersen Am Markt,53.68357,9.66573
@@ -20548,6 +20576,7 @@ TankE DE-Pulheim Siemensstraße,50.99094,6.81916
 TankE DE-Pulheim Velderhof,51.042104,6.758879
 TankE DE-Sankt Augustin Grantham-Allee,50.778397,7.181329
 TankE DE-Siegen Bismarckstraße,50.894872,8.02496
+TankE DE-Siegen Oberes Schloß,50.87538,8.02927
 TankE DE-Uslar Hans-Böckler-Straße,51.659654,9.651023
 
 TAURON PL-Balice Lotnisko,50.07157,19.79963
@@ -21275,7 +21304,9 @@ Volkswagen DE-Braunschweig Schmalbachstraße 1,52.297179,10.514571
 Volkswagen DE-Braunschweig Wolfenbütteler Straße,52.23485,10.52755
 Volkswagen DE-Breitscheid Heisterberger Weg 3,50.665025,8.172521
 Volkswagen DE-Buchholz in der Nordheide Lüneburger Str. 9,53.324369,9.882723
+Volkswagen DE-Burgbrohl Brohltalstraße,50.4574,7.28309
 Volkswagen DE-Butzbach Große Wendelstraße,50.43475,8.67766,30
+Volkswagen DE-Büchenbeuren Hauptstraße,49.92069,7.27927
 Volkswagen DE-Cham Janahofer Straße,49.2162,12.66831
 Volkswagen DE-Chemnitz Limbacher Straße 110-112,50.836424,12.890689
 Volkswagen DE-Crailsheim Ludwig-Erhard-Straße 120,49.134731,10.036892
@@ -21374,6 +21405,7 @@ Volkswagen DE-Querfurt Merseburger Straße,51.382315,11.619605
 Volkswagen DE-Ravensburg Jahnstraße,47.78067,9.60495
 Volkswagen DE-Regensburg Prüller Weg,48.99287,12.12225,30
 Volkswagen DE-Rellingen Stawedder 17-21,53.644005,9.835121
+Volkswagen DE-Rieden Riedener Mühlen,50.383,7.15439
 Volkswagen DE-Riesa Hauptstraße,51.305614,13.305163
 Volkswagen DE-Rodeberg Mühlhäuser Landstraße 4,51.211361,10.330917
 Volkswagen DE-Saarlouis Wallerfanger Straße,49.32006,6.733464
@@ -21463,12 +21495,14 @@ WENEA ES-Madrid Calle Roberto Domingo,40.433794,-3.661095
 Wenea ES-Tapia de Casariego N-634,43.54202,-6.98357
 Wenea GB-Plymouth Somerset Pl,50.38157,-4.16068
 
+westenergie DE-Arnsberg Hellefelder Straße,51.39494,8.06832
 westenergie DE-Balve Sauerlandstraße,51.327951,7.86794
 westenergie DE-Erftstadt Fritz-Erler-Straße,50.81253,6.81435,30
 westenergie DE-Essen Helmut-Käutner-Straße,51.45643,6.99864
 westenergie DE-Essen Hirsestraße,51.47524,6.96923
 westenergie DE-Essen Kupferdreher Straße,51.39412,7.08314
 westenergie DE-Freudenberg Zum Kurpark,50.898648,7.875615
+westenergie DE-Holzwickede Kirchstraße,51.49896,7.61831,25
 westenergie DE-Mayschoß Eurodeplatz,50.51709,7.01987
 westenergie DE-Osnabrück Goethering,52.27425,8.05568
 westenergie DE-Quakenbrück Markt,52.67589,7.95732
@@ -21516,6 +21550,7 @@ Westfalen DE-Münster Steinfurter Straße,51.977606,7.599926
 Westfalen DE-Münster Weseler Straße,51.942749,7.610616
 Westfalen DE-Nottuln Potthof,51.92738,7.35364
 Westfalen DE-Ochtrup Laurenzstraße,52.205593,7.210929
+Westfalen DE-Oelde In d. Geist,51.812,8.13346
 Westfalen DE-Oelde In der Geist,51.814324,8.137045
 Westfalen DE-Olfen Schlosserstraße,51.706288,7.39256
 Westfalen DE-Olsberg Hauptstraße,51.35444,8.48316
@@ -21552,6 +21587,7 @@ Wien-Energie AT-Wien Hansenstraße,48.20625,16.35857
 Wien-Energie AT-Wien Innovationsstraße,48.16474,16.33359
 Wien-Energie AT-Wien Jörgerstraße,48.21776,16.33778
 Wien-Energie AT-Wien Khevenhüllerstraße,48.24674,16.30767
+Wien-Energie AT-Wien Koberweingasse,48.20001,16.31728
 Wien-Energie AT-Wien Lerchenfelder Straße,48.2071,16.34592
 Wien-Energie AT-Wien Margaretengürtel,48.180155,16.352097
 Wien-Energie AT-Wien Martinstraße,48.22019,16.34015
@@ -21586,6 +21622,7 @@ WSW DE-Wuppertal Kasinostraße,51.257256,7.141509
 WVV DE-Sommerhausen Jahnstraße,49.70852,10.02362
 WVV DE-Würzburg Leightonstraße,49.78672,9.98062
 WVV DE-Würzburg Pleichertorstraße,49.79891,9.92584
+WVV DE-Würzburg Residenzplatz,49.79264,9.93701
 
 Yasno UA-Lviv Lypynskoho St,49.86409,24.044024
 
@@ -21817,6 +21854,7 @@ DE Aurich EEZ,53.496286,7.494351
 DE Babensham ENERSYS,48.09008,12.31608
 DE Bad Birnbach Apart Hotel am Sonnenhügel,48.44348,13.08266
 DE Bad Doberan Grand Hotel Heiligendamm,54.143733,11.842857
+DE Bad Ems Therme,50.33317,7.71174
 DE Bad Kreuznach Leonardo Hotel,49.853,7.88291
 DE Bad Münstereifel Bendenweg,50.574357,6.765263
 DE Bad Oeynhausen Mindener Straße,52.21557,8.81643
@@ -21836,6 +21874,7 @@ DE Berlin Wühlischstraße,52.50916,13.45939
 DE Bernau Rudolf-Diesel-Straße,52.68597,13.56907
 DE Bietigheim-Bissingen Valeo,48.9456,9.13459
 DE Bilsen Jagdhaus Waldfrieden,53.75487,9.88139
+DE Bingen am Rhein Broadcast Solutions,49.9218,7.93451
 DE Bispingen Akzent Hotel Zur Grünen Eiche,53.11239,9.96096
 DE Brake Wiechmanns Weserhotel,53.32659,8.4859
 DE Braunschweig IIM,52.272656,10.526041
@@ -21977,6 +22016,7 @@ DE Waltrop An der Zechenbahn,51.621852,7.430029
 DE Weimar Formen Cars,50.99536,11.33896
 DE Wetzlar Gabelsbergerstraße,50.568909,8.508006
 DE Weyhe ffuss,53.017485,8.862624,25
+DE Witten Uni Witten/Herdecke Aktbau,51.44892,7.37712
 DE Wolfsburg Karl-Ferdinand-Braun-Ring,52.42152,10.86141
 DE Wuppertal AWG Recyclinghof,51.225514,7.143682
 DE Wuppertal Bergische Universität,51.23953,7.160973
