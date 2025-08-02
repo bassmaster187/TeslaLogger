@@ -1,4 +1,4 @@
-Supercharger-V4 AT-Amstetten,48.132767,14.84205
+Supercharger-V4 AT-Amstetten,48.13191,14.84103
 Supercharger-V4 AT-Ansfelden,48.195342,14.249553
 Supercharger-V3 AT-Asten,48.221323,14.406747
 Supercharger AT-Biberwier,47.372431,10.886093
@@ -38,7 +38,7 @@ Supercharger-V4 AT-Saalfelden,47.428445,12.840916
 Supercharger AT-Salzburg,47.727056,13.060672
 Supercharger-V3 AT-Salzburg Nord,47.836027,13.059075
 Supercharger-V4 AT-Seefeld in Tirol,47.3252,11.19914
-Supercharger-V4 AT-Spittal an der Drau,46.786442,13.522273
+Supercharger-V4 AT-Spittal an der Drau,46.78644,13.52195,70
 Supercharger AT-St. Anton,47.130092,10.269231
 Supercharger AT-St. Anton,47.131123,10.271497
 Supercharger-V4 AT-St. Georgen,47.92887,13.50225
@@ -1926,8 +1926,7 @@ Supercharger-V3 DE-Herzsprung,53.06744,12.53322
 Supercharger-V4 DE-Hessisch Lichtenau,51.197891,9.745477,25
 Supercharger DE-Hilden,51.191193,6.936986,30
 Supercharger-V3 DE-Hilden,51.19189,6.93536,80
-Supercharger-V3 DE-Hilpoltstein,49.16101,11.26034,80
-Supercharger-V3 DE-Hilpoltstein,49.16116,11.26193,50
+Supercharger-V3 DE-Hilpoltstein,49.16096,11.26101,120
 Supercharger-V4 DE-Hirschberg,49.50738,8.63752,40
 Supercharger-V4 DE Hockenheim,49.337127,8.533233
 Supercharger DE-Hohenwarsleben,52.174053,11.494502,20
@@ -1941,8 +1940,8 @@ Supercharger-V3 DE-Irxleben,52.17062,11.48491,60
 Supercharger-V4 DE-Jettingen,48.41098,10.44051,40
 Supercharger-V4 DE-Kaiserslautern,49.459907,7.82141
 Supercharger-V4 DE-Kaiserslautern Merkurstraße,49.44158,7.70743
-Supercharger-V3 DE-Kaltenkirchen,53.8462,9.9362,36
-Supercharger-V4 DE-Kamen,51.570178,7.675317
+Supercharger-V3 DE-Kaltenkirchen,53.8462,9.9362,38
+Supercharger-V4 DE-Kamen,51.56978,7.67511,70
 Supercharger-V4 DE-Kappel-Grafenhausen,48.28135,7.77755
 Supercharger-V3 DE-Karlsruhe,48.999096,8.428591,30
 Supercharger-V4 DE-Karlsruhe-Grünwinkel,49.00952,8.35407
@@ -2020,8 +2019,7 @@ Supercharger DE-Nürburgring,50.335528,6.948887
 Supercharger-V3 DE-Nürburgring Motorsport Hotel,50.331256,6.945422
 Supercharger-V3 DE-Oberhausen,51.485746,6.886665
 Supercharger-V4 DE Oberhausen Bero Zentrum,51.47575,6.841856
-Supercharger-V3 DE-Oberhonnefeld,50.56266,7.52531,25
-Supercharger-V3 DE-Oberhonnefeld,50.56292,7.52498,20
+Supercharger-V3 DE-Oberhonnefeld,50.56278,7.52512
 Supercharger-V4 DE-Obertshausen,50.075294,8.8577
 Supercharger-V4 DE-Offenbach,50.089134,8.761034
 Supercharger-V3 DE-Offenburg,48.469907,7.931822
@@ -2050,12 +2048,8 @@ Supercharger-V4 DE-Regensburg-Ost,48.99472,12.15061
 Supercharger-V3 DE-Reichertshofen,48.645645,11.520604
 Supercharger-V3 DE-Reinfeld,53.8232,10.50352
 Supercharger-V4 DE-Reiskirchen,50.59563,8.818755,30
-Supercharger-V4 DE-Rhüden,51.9471,10.14049,4
-Supercharger-V4 DE-Rhüden,51.94722,10.1405,12
-Supercharger-V3 DE-Rhüden,51.947243,10.140858,6
-Supercharger-V3 DE-Rhüden,51.947273,10.140962,12
-Supercharger-V3 DE-Rhüden,51.947298,10.140858,6
-Supercharger-V4 DE-Rhüden,51.94734,10.14058,5
+Supercharger-V4 DE-Rhüden,51.9472,10.14027,30
+Supercharger-V3 DE-Rhüden,51.94732,10.14113,30
 Supercharger-V4 DE-Ringsheim,48.249992,7.765669,18
 Supercharger-V4 DE-Rosengarten,53.37879,9.89814
 Supercharger-V3 DE-Rosenheim,47.81716,12.1207,60
@@ -2906,8 +2900,7 @@ Supercharger IT-Borca di Cadore,46.435592,12.222879
 Supercharger IT-Brennero,46.9954,11.5021,60
 Supercharger-V3 IT-Brescia,45.53229,10.16487
 Supercharger-V4 IT-Brescia East,45.507582,10.226131
-Supercharger-V3 IT-Bressanone,46.758983,11.638084,10
-Supercharger-V3 IT-Bressanone,46.759112,11.638132,15
+Supercharger-V3 IT-Bressanone,46.75903,11.63837,40
 Supercharger-V3 IT-Brindisi,40.619822,17.902674
 Supercharger IT-Campogalliano,44.686638,10.851342
 Supercharger IT-Carsoli Oricola,42.081855,13.060047
@@ -2941,6 +2934,7 @@ Supercharger-V4 IT-Imola,44.375448,11.732268
 Supercharger IT-Imperia,43.892498,8.039031
 Supercharger-V4 IT-Ivrea,45.446661,7.853005
 Supercharger-V4 IT-Lagonegro,40.13273,15.76296
+Supercharger-V4 IT-Lodi,45.27676,9.45862
 Supercharger IT-Magliano Sabina,42.372085,12.471703
 Supercharger-V3 IT-Mantua,45.086472,10.856081,30
 Supercharger-V4 IT-Marina di Sibari,39.753241,16.464725
@@ -9769,6 +9763,7 @@ Electra BE-Auderghem Chaussée de Wavre,50.794779,4.478889
 Electra BE-Maasmechelen Koninginnelaan,50.98633,5.7015
 Electra BE-Zandhoven Liersebaan,51.198904,4.643527
 Electra FR-Aire de Arzens,43.21972,2.21619,30
+Electra FR-Aire de Manzat A89,45.9568,2.9891
 Electra FR-Besançon Rue de Dole,47.21988,5.95489
 Electra FR-Nanterre Av. Pablo Picasso,48.89171,2.21374
 Electra FR-Rosny-sous-Bois Rue de Lisbonne,48.87797,2.47551
@@ -9910,7 +9905,7 @@ ELLA AT-Wien Albert-Schweitzer-Gasse,48.206345,16.222951
 eLoaded DE-Neusäß Richard-Wagner-Straße,48.3897,10.83564
 eLoaded DE-Ulm Magirus-Deutz-Straße,48.398353,9.958587
 eLoaded DE-Ulm Magirus-Deutz-Straße,48.398651,9.957918
-eLoaded DE-Zusmarshausen Am Innovationspark,48.40713,10.5999,60
+eLoaded DE-Zusmarshausen Am Innovationspark,48.407,10.59997,99
 
 Elocity PL-Siemianowice Śląskie Elizy Orzeszkowej,50.320105,19.010029
 Elocity PL-Warszawa Aleja Krakowska,52.17339,20.93957
@@ -10774,6 +10769,7 @@ EnBW DE-Ingelheim am Rhein Nahering,49.98052,8.026689
 EnBW DE-Ingolstadt Am Westpark,48.775178,11.387312
 EnBW DE-Ingolstadt Eriagstraße,48.74866,11.47034
 EnBW DE-Ingolstadt Goethestraße,48.772272,11.45188
+EnBW DE-Ingolstadt Isaak-Newton-Straße,48.78263,11.47863
 EnBW DE-Ingolstadt Siemensstraße,48.778773,11.430788
 EnBW DE-Iserlohn,51.395812,7.693116
 EnBW DE-Isny im Allgäu Maierhöfener Straße,47.682502,10.040438
@@ -12521,7 +12517,6 @@ EVM DE-Koblenz Schloßstraße,50.356401,7.596993
 EVN AT-Amstetten Agathastraße,48.122685,14.886241
 EVN AT-Amstetten Eggersdorfer Straße,48.120875,14.874438
 EVN AT-Amstetten Kupferstraße,48.116694,14.892285
-EVN AT-Amstetten Oiden,48.13209,14.84069
 EVN AT-Amstetten Otto-Schott-Straße,48.117532,14.910831
 EVN AT-Amstetten Ybbsstraße,48.113975,14.870678
 EVN AT-Bruck an der Leitha Eco-Plus-Park 4.Straße,48.03511,16.80851
@@ -12551,6 +12546,7 @@ EVN AT-Pressbaum Hauptstraße,48.182763,16.089191
 EVN AT-Purgstall Erlauftalstraße,48.06599,15.13419
 EVN AT-Pöchlarn Manker Straße,48.19958,15.22043
 EVN AT-Roggendorf A1,48.194754,15.383732
+EVN AT-Schiltern Laabergstraße,48.51162,15.63226
 EVN AT-Schrems Josef-Widy-Straße,48.79162,15.07124
 EVN AT-Schwechat Mannswörther Straße,48.15125,16.4739
 EVN AT-Semmering-Kurort Semmering,47.64703,15.82485
@@ -15176,6 +15172,7 @@ Ionity DE-Marl Herzlia-Allee,51.644519,7.102339
 Ionity DE-Meerane Hohe Straße,50.840764,12.445016
 Ionity DE-Memmingen Fraunhoferstraße,47.99943,10.15528
 Ionity DE-Merklingen Nellinger Straße,48.51639,9.75685,25
+Ionity DE-Mönchengladbach Schleswiger Straße,51.19552,6.41265
 Ionity DE-Mühldorf am Inn Äußere Neumarkter Str,48.262445,12.542657
 Ionity DE-Neckarburg Ost,48.206218,8.627155
 Ionity DE-Neckarburg West,48.20593,8.621045
@@ -16209,6 +16206,7 @@ LichtBlick DE-Butzbach Himmrichsweg,50.437798,8.679525
 LichtBlick DE-Büchlberg Goldener Steig,48.653005,13.50688
 LichtBlick DE-Cham Rachelstraße,49.2284,12.67346
 LichtBlick DE-Coburg Bamberger Str.,50.252931,10.962314
+LichtBlick DE-Coburg Mauer,50.25913,10.96251
 LichtBlick DE-Coburg Max-Böhme-Ring,50.279787,10.973911
 LichtBlick DE-Coburg Neuer Weg,50.255555,10.958076
 LichtBlick DE-Coburg Rosenauer Straße,50.275828,10.983551
@@ -19213,6 +19211,7 @@ Recharge NO-Fortun Lustravegen,61.48927,7.68091
 Recharge NO-Gudvangen Nærøydalen,60.87896,6.84286,25
 Recharge NO-Hjelmelandsvågen Rv13,59.23073,6.15437
 Recharge NO-Jørpeland Stålverksvegen,59.01662,6.038172
+Recharge NO-Kaupanger Furuvegen,61.19241,7.22035
 Recharge NO-Kleppe Solavegen,58.77799,5.62626
 Recharge NO-Konsmo Audnedalsveien,58.28552,7.35546
 Recharge NO-Kristiansand Hånesveien,58.16641,8.09254
@@ -19780,6 +19779,7 @@ Shell GB-Durham High St,54.79479,-1.5209
 Shell GB-Saint Columb Kingsley Village,50.37871,-4.9422,20
 Shell GB-Saltash A38,50.40724,-4.35294
 Shell HU-Pécs Budai Vám utca,46.083554,18.270951
+Shell NL-Almere Hopperzuigerstraat,52.40023,5.26233
 Shell NL-Amersfoort Boerderijenboulevard,52.18225,5.43427
 Shell NL-Breda Backer en Ruebweg,51.60233,4.76947
 Shell NL-Breukelen Haarrijn,52.14346,5.00116,20
@@ -21715,6 +21715,7 @@ Zapp DK-Rødby Hagesvej,54.66132,11.340961
 ZES TR-Beşiktaş/İstanbul Zorlu Center,41.066832,29.017022
 ZES TR-Cedit Atatürk Bl,41.31972,36.33426
 ZES TR-Isparta Bahçelievler,37.78126,30.54464
+ZES TR-Kadriye Beylikler Cd.,36.87082,31.01624
 ZES TR-Savaştepe Karaçam,39.349632,27.629283
 ZES TR-Susurluk O178,39.923439,28.132198
 
