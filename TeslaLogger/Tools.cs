@@ -1,4 +1,8 @@
-﻿using System;
+﻿using Exceptionless;
+using MySql.Data.MySqlClient;
+using Newtonsoft.Json;
+using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
@@ -6,18 +10,15 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Net.Sockets;
 using System.Reflection;
 using System.Runtime.Caching;
 using System.Runtime.CompilerServices;
+using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
-using MySql.Data.MySqlClient;
-using Exceptionless;
-using Newtonsoft.Json;
-using System.Collections.Concurrent;
-using System.Security.Cryptography;
 
 namespace TeslaLogger
 {
@@ -2309,6 +2310,63 @@ WHERE
         internal static double KmToMl(double km, int decimals = 3)
         {
             return Math.Round(km / 1.609344, decimals);
+        }
+
+        public static async Task RestartGrafanaServer()
+        {
+            try
+            {
+                if (!Tools.IsDocker())
+                {
+                    Tools.ExecMono("service", "grafana-server restart");
+                    return;
+                }
+                else
+                {
+                    Logfile.Log("Restart Grafana Docker container via linux socket");
+
+                    string socketPath = "/var/run/docker.sock";
+
+                    var handler = new SocketsHttpHandler
+                    {
+                        ConnectCallback = async (context, cancellationToken) =>
+                        {
+                            var socket = new Socket(AddressFamily.Unix, SocketType.Stream, ProtocolType.Unspecified);
+                            var endpoint = new UnixDomainSocketEndPoint(socketPath);
+                            await socket.ConnectAsync(endpoint);
+                            return new NetworkStream(socket, ownsSocket: true);
+                        }
+                    };
+
+                    using var client = new HttpClient(handler);
+                    var requestUri = "http://localhost/containers/teslalogger-grafana/restart";
+
+                    var request = new HttpRequestMessage(HttpMethod.Post, requestUri);
+                    var response = await client.SendAsync(request);
+
+                    Console.WriteLine($"Status: {response.StatusCode}");
+                    var content = await response.Content.ReadAsStringAsync();
+                    Console.WriteLine($"Body: {content}");
+                }
+            }
+            catch (HttpRequestException hre)
+            {
+                if (hre.Message.StartsWith("Cannot assign requested address"))
+                {
+                    Logfile.Log("Error restarting Grafana Docker container: Cannot assign requested address (localhost:80)");
+                    Logfile.Log("Error restarting Grafana Docker container: do you have the latest docker-compose.yml file??? Can't access docker socket!");
+                }
+                else
+                {
+                    Logfile.Log("Error restarting Grafana Docker container: " + hre.ToString());
+                    hre.ToExceptionless().FirstCarUserID().Submit();
+                }
+            }
+            catch (Exception ex)
+            {
+                Logfile.Log("Error restarting Grafana Docker container: " + ex.ToString());
+                ex.ToExceptionless().FirstCarUserID().Submit();
+            }
         }
     }
 

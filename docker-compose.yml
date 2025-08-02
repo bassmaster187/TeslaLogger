@@ -17,6 +17,7 @@ services:
       - ${APPDATA_PATH:-.}/backup:/etc/teslalogger/backup
       - ${APPDATA_PATH:-.}/invoices:/etc/teslalogger/Debug/net8.0/tesla_invoices
       - teslalogger-net8-data:/etc/teslalogger/data
+      - /var/run/docker.sock:/var/run/docker.sock
     depends_on:
       - database
     environment:

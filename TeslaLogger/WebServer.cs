@@ -209,6 +209,10 @@ namespace TeslaLogger
                         case "logger":
                             logger(request, response);
                             return;
+                        case "restartgrafana":
+                            Tools.RestartGrafanaServer().Wait();
+                            WriteString(response, "ok");
+                            return;
                     }
                 }
                 else if (url.Segments.Length == 3)

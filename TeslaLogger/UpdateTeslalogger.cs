@@ -2329,8 +2329,9 @@ PRIMARY KEY(id)
                     if (!Tools.IsDocker())
                     {
                         Tools.ExecMono("grafana-cli", "admin data-migration encrypt-datasource-passwords");
-                        Tools.ExecMono("service", "grafana-server restart");
                     }
+
+                    Tools.RestartGrafanaServer();
 
                     CopyLanguageFileToTimelinePanel(language);
 

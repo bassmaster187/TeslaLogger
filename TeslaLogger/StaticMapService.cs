@@ -201,9 +201,9 @@ namespace TeslaLogger
                         }
                     }
                     // if the queue reaches zero entries, and we're on RasPi, then restart Grafana to have the new maps visible
-                    if (queueLength == 1 && queue.IsEmpty && !Tools.IsDocker())
+                    if (queueLength == 1 && queue.IsEmpty )
                     {
-                        Tools.ExecMono("service", "grafana-server restart");
+                        Tools.RestartGrafanaServer().Wait();
                     }
                 }
             }
