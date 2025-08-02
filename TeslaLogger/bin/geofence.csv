@@ -189,7 +189,7 @@ Supercharger CA-Abbotsford BC - Mount Lehman Road Supercharger,49.059056,-122.37
 Supercharger CA-Aulac NB,45.871352,-64.280378
 Supercharger CA-Baie-Saint-Paul QC,47.435844,-70.506266
 Supercharger-V3 CA-Baldwin ON,46.285862,-81.774667
-Supercharger-V3 CA-Bancroft ON,45.083497,-77.860899
+Supercharger-V3 CA-Bancroft ON,45.08415,-77.86144
 Supercharger CA-Barrie ON,44.340969,-79.678629
 Supercharger CA-Barrie ON - Bayfield Street,44.410678,-79.709568
 Supercharger-V3 CA-Bassano AB,50.791142,-112.450181
@@ -206,22 +206,22 @@ Supercharger CA-Burlington ON,43.326276,-79.822231
 Supercharger-V3 CA-Burnaby BC (Pay to Park Floor P2),49.266748,-123.000377
 Supercharger-V3 CA-Cache Creek BC,50.811223,-121.324786
 Supercharger-V3 CA-Calgary AB - 130 Avenue SE,50.930935,-113.964815
-Supercharger CA-Cambridge ON,43.40946,-80.325974
-Supercharger CA-Canmore AB,51.099731,-115.35991
+Supercharger CA-Cambridge ON,43.4091,-80.32548
+Supercharger CA-Canmore AB,51.10021,-115.35924
 Supercharger-V3 CA-Canmore AB - Bow Valley Trail,51.096274,-115.357001
-Supercharger CA-Casselman ON,45.304636,-75.082751
+Supercharger CA-Casselman ON,45.30455,-75.08181
 Supercharger-V3 CA-Castlegar BC,49.294955,-117.653463
 Supercharger-V3 CA-Charlottetown PEI,46.258814,-63.179871
 Supercharger CA-Chicoutimi QC,48.401176,-71.062036
 Supercharger-V3 CA-Chilliwack BC - Luckakuck Way,49.141426,-121.96386
 Supercharger-V3 CA-Cobourg ON,43.969736,-78.203079
 Supercharger-V3 CA-Collingwood ON,44.508035,-80.238413
-Supercharger CA-Comber ON,42.238326,-82.550234
+Supercharger CA-Comber ON,42.23911,-82.55026
 Supercharger CA-Concord ON,43.827286,-79.539326
 Supercharger-V3 CA-Coquitlam BC - Lougheed Highway,49.2343,-122.862302
 Supercharger CA-Cornwall ON,45.023651,-74.748071
 Supercharger-V3 CA-Cranbrook BC,49.524887,-115.752481
-Supercharger-V3 CA-Creston BC,49.119959,-116.523665
+Supercharger-V3 CA-Creston BC,49.11979,-116.52487
 Supercharger-V3 CA-Davidson SK,51.27329,-105.993176
 Supercharger-V3 CA-Deep River ON,46.099833,-77.49971
 Supercharger-V3 CA-Delta BC,49.08988,-123.078807
@@ -234,14 +234,16 @@ Supercharger CA-Enfield NS,44.927007,-63.536211
 Supercharger-V3 CA-Estevan SK,49.144875,-102.979425
 Supercharger CA-Etobicoke ON,43.613732,-79.553932
 Supercharger-V3 CA-Exeter ON,43.362244,-81.480163
-Supercharger-V3 CA-Fernie BC,49.498409,-115.079816
+Supercharger-V3 CA-Fernie BC,49.49832,-115.08103
 Supercharger CA-Fort MacLeod AB,49.724776,-113.396934
 Supercharger-V3 CA-Gananoque ON,44.337074,-76.150135
 Supercharger-V3 CA-Gaspé QC,48.824028,-64.474015
 Supercharger-V3 CA-Goderich ON,43.729593,-81.688262
 Supercharger CA-Golden BC,51.313039,-116.973754
 Supercharger-V3 CA-Golden BC - Highway 1,51.309749,-116.968758
+Supercharger-V3 CA-Golden BC Trans-Canada Hwy,51.31102,-116.96945
 Supercharger CA-Grimsby ON,43.209627,-79.601118
+Supercharger-V3 CA-Grimsby S Service Rd,43.20508,-79.59842
 Supercharger CA-Hamilton ON,43.21696,-79.864415
 Supercharger CA-Hope BC,49.378522,-121.442691
 Supercharger-V3 CA-Hope BC - Klassen Road,49.364075,-121.480472
@@ -253,10 +255,11 @@ Supercharger CA-Kamloops BC,50.655429,-120.367554
 Supercharger-V3 CA-Kamloops BC - Notre Dame Drive,50.66339,-120.3514
 Supercharger-V3 CA-Kamloops BC - Powwow Trail,50.68194,-120.29724
 Supercharger CA-Kelowna BC,49.885054,-119.427749
-Supercharger-V3 CA-Kemptville ON,45.02967,-75.632825
+Supercharger-V3 CA-Kemptville ON,45.02958,-75.63428
 Supercharger-V3 CA-Kenora ON,49.759846,-94.473487
 Supercharger-V3 CA-Kincardine ON,44.171947,-81.616045
 Supercharger CA-Kingston ON,44.267265,-76.503148
+Supercharger-V3 CA-Kingston ON Dalton Avenue,44.2651,-76.50194
 Supercharger-V3 CA-Kitchener ON,43.461431,-80.47259
 Supercharger-V3 CA-La Tuque QC,47.440008,-72.782723
 Supercharger-V3 CA-Lachenaie QC,45.727904,-73.510909
@@ -273,17 +276,18 @@ Supercharger-V3 CA-Maple Ridge BC,49.220633,-122.600909
 Supercharger CA-Markham ON - Markville,43.866799,-79.286329
 Supercharger CA-Markham ON - Woodside,43.850222,-79.35353
 Supercharger CA-Mascouche QC,45.723065,-73.618514
-Supercharger-V3 CA-Matane QC,48.852222,-67.526736
+Supercharger-V3 CA-Matane QC,48.85284,-67.52468
 Supercharger-V3 CA-Medicine Hat AB,49.9962,-110.6452
 Supercharger CA-Merritt BC,50.123765,-120.750298
 Supercharger-V3 CA-Merritt BC - Airport Road,50.124451,-120.747942
 Supercharger-V3 CA-Merritt BC - De Wolf Way,50.12384,-120.76129
+Supercharger-V3 CA-Merritt BC De Wolf Way,50.12429,-120.76158
 Supercharger-V3 CA-Minden ON,44.931057,-78.715123
 Supercharger-V3 CA-Mission BC,49.133979,-122.341492
 Supercharger-V3 CA-Mississauga ON,43.59039,-79.57654
 Supercharger-V3 CA-Mississauga ON - Vega Boulevard,43.517883,-79.688454
 Supercharger CA-Mississauga ON - Winston Churchill Blvd.,43.598295,-79.786068
-Supercharger CA-Mont-Tremblant QC,46.115935,-74.57399
+Supercharger CA-Mont-Tremblant QC,46.11651,-74.57391
 Supercharger CA-Montreal QC - Cote Vertu Blvd. (Floor 1),45.500702,-73.707857
 Supercharger CA-Montreal QC – Rue Viger (Stationnement Payant Floor L1),45.507849,-73.559242
 Supercharger-V3 CA-Moose Jaw SK,50.404235,-105.534104
@@ -297,10 +301,12 @@ Supercharger-V3 CA-Niagara Falls ON,43.116773,-79.124108
 Supercharger-V3 CA-Nipigon ON,49.017674,-88.308209
 Supercharger-V3 CA-North Battleford SK,52.791766,-108.303232
 Supercharger-V3 CA-North Bay ON,46.332433,-79.470684
+Supercharger-V3 CA-North Vancouver BC Lonsdale Ave,49.32788,-123.07094
 Supercharger CA-North York ON,43.776125,-79.344666
 Supercharger-V3 CA-Oakville ON,43.440963,-79.693834
 Supercharger-V3 CA-Orangeville ON,43.929134,-80.098855
-Supercharger CA-Ottawa ON (Pay to Park Floor P3),45.426118,-75.690044
+Supercharger-V3 CA-Osoyoos,49.03162,-119.46693
+Supercharger CA-Ottawa ON,45.42621,-75.69085
 Supercharger CA-Owen Sound ON,44.574403,-80.912542
 Supercharger CA-Parry Sound ON,45.345659,-80.00706
 Supercharger-V3 CA-Paspebiac QC,48.027646,-65.259685
@@ -315,7 +321,7 @@ Supercharger-V3 CA-Portage la Prairie MB,49.9717,-98.3199
 Supercharger-V3 CA-Prawda MB,49.649219,-95.793313
 Supercharger-V3 CA-Prince Albert SK,53.19947,-105.732171
 Supercharger-V3 CA-Prince George BC,53.890082,-122.771075
-Supercharger-V3 CA-Princeton BC,49.457614,-120.506707
+Supercharger-V3 CA-Princeton BC,49.45797,-120.50624
 Supercharger-V3 CA-Quebec City QC Boulevard de l’Ormière,46.817684,-71.333572
 Supercharger-V3 CA-Quebec City Quebec - Boulevard des Gradins,46.840688,-71.277372
 Supercharger-V3 CA-Quesnel BC,52.966949,-122.440156
@@ -324,18 +330,21 @@ Supercharger-V3 CA-Québec City QC Rue de l’Hétrière,46.763282,-71.370705
 Supercharger CA-Red Deer AB,52.252002,-113.815043
 Supercharger-V3 CA-Red Deer County AB,52.216147,-113.815797
 Supercharger-V3 CA-Regina SK,50.442622,-104.532672
-Supercharger CA-Revelstoke BC,51.010355,-118.218653
+Supercharger CA-Revelstoke BC,51.00967,-118.2189
 Supercharger-V3 CA-Revelstoke BC - Victoria Road,51.00205,-118.198738
 Supercharger CA-Richmond BC,49.169479,-123.138016
+Supercharger-V3 CA-Richmond Steveston Hwy,49.13279,-123.09472
 Supercharger-V3 CA-Rimouski QC,48.435737,-68.524025
 Supercharger CA-Rivière-du-Loup QC,47.820207,-69.558775
-Supercharger CA-Rocky View AB,51.204404,-113.9914
+Supercharger CA-Rocky View AB,51.20355,-113.98975
 Supercharger CA-Saint Leonard NB,47.168726,-67.918016
+Supercharger-V3 CA-Saint-Jérôme QC,45.79501,-74.02868
+Supercharger-V3 CA-Saint-Liboire QC,45.68818,-72.80555
 Supercharger-V3 CA-Saint-Louis-de-Blandford QC,46.21878,-72.053003
 Supercharger CA-Sainte Eulalie QC,46.058345,-72.313283
 Supercharger-V3 CA-Sainte Marie QC,46.449826,-71.030486
 Supercharger CA-Salisbury NB,46.050222,-65.061501
-Supercharger-V3 CA-Salmon Arm BC,50.707996,-119.253586
+Supercharger-V3 CA-Salmon Arm BC,50.7086,-119.25406
 Supercharger-V3 CA-Saskatoon SK,52.086959,-106.644486
 Supercharger-V3 CA-Sault Ste. Marie ON,46.538437,-84.316578
 Supercharger-V3 CA-Scarborough ON,43.798897,-79.147606
@@ -344,7 +353,7 @@ Supercharger-V3 CA-Sherbrooke QC,45.434472,-71.86858
 Supercharger-V3 CA-Simcoe ON,42.848142,-80.293181
 Supercharger CA-Squamish BC,49.736183,-123.132904
 Supercharger-V3 CA-Squamish BC - Commercial Way,49.722806,-123.152229
-Supercharger-V3 CA-Strathmore AB,51.039019,-113.378482
+Supercharger-V3 CA-Strathmore AB,51.03834,-113.3787
 Supercharger CA-Sudbury ON,46.4419,-81.004187
 Supercharger CA-Surrey BC,49.193049,-122.805555
 Supercharger-V3 CA-Surrey BC - 104 Avenue (Floor 1),49.192485,-122.786955
@@ -374,7 +383,7 @@ Supercharger-V3 CA-Williams Lake BC,52.11365,-122.124923
 Supercharger-V3 CA-Windsor ON,42.259041,-82.965136
 Supercharger-V3 CA-Winnipeg MB,49.882369,-97.198327
 Supercharger CA-Woodstock NB,46.123038,-67.606375
-Supercharger CA-Woodstock ON,43.113051,-80.738576
+Supercharger CA-Woodstock ON,43.11197,-80.73885
 Supercharger-V3 CA-Wynyard SK,51.764548,-104.185435
 Supercharger CA-Yamachiche QC,46.26221,-72.87689,30
 Supercharger-V3 CA-Yorkton SK,51.211129,-102.439919
@@ -1916,7 +1925,7 @@ Supercharger-V3 DE-Herrieden,49.257951,10.501761
 Supercharger-V3 DE-Herzsprung,53.06744,12.53322
 Supercharger-V4 DE-Hessisch Lichtenau,51.197891,9.745477,25
 Supercharger DE-Hilden,51.191193,6.936986,30
-Supercharger-V3 DE-Hilden,51.19195,6.93595,60
+Supercharger-V3 DE-Hilden,51.19189,6.93536,80
 Supercharger-V3 DE-Hilpoltstein,49.16101,11.26034,80
 Supercharger-V3 DE-Hilpoltstein,49.16116,11.26193,50
 Supercharger-V4 DE-Hirschberg,49.50738,8.63752,40
@@ -2615,6 +2624,7 @@ Supercharger-V4 FR-Vesoul,47.631408,6.139914
 Supercharger-V4 FR-Vichy,46.11279,3.415589
 Supercharger FR-Vienne,45.58748,4.78751
 Supercharger-V3 FR-Vierzon,47.245991,2.069667
+Supercharger-V4 FR-Villabé,48.58604,2.44937
 Supercharger-V4 FR-Villedieu-les-Poêles-Rouffigny,48.8483,-1.21174
 Supercharger-V4 FR-Voreppe,45.272914,5.629334
 Supercharger-V3 FR-Vouillé,46.29825,-0.37526
@@ -3575,6 +3585,7 @@ Supercharger-V4 PL-Wrocław,51.05185,16.97247
 Supercharger-V4 PL-Zaluski,52.514357,20.528801
 Supercharger-V3 PL-Ząbki,52.301924,21.088165
 
+Supercharger PT-Alcacer do Sal,38.39187,-8.51381
 Supercharger PT-Alcacér do Sal,38.391941,-8.513867
 Supercharger PT-Alcantarilha,37.150601,-8.364433
 Supercharger PT-Fátima,39.635478,-8.688469
@@ -3755,7 +3766,7 @@ Supercharger-V4 SI-Grosuplje,45.96817,14.65767
 Supercharger-V4 SI-Koper,45.54085,13.73565,35
 Supercharger SI-Kozina,45.60492,13.928521
 Supercharger SI-Kozina,45.607449,13.931531
-Supercharger SI-Ljubljana,46.051778,14.452056
+Supercharger-V4 SI-Ljubljana,46.05178,14.45206
 Supercharger-V4 SI-Ljubljana East,46.06345,14.54798
 Supercharger SI-Maribor,46.533005,15.699246,24
 Supercharger-V4 SI-NovoMesto,45.797184,15.181046
@@ -5565,6 +5576,7 @@ Supercharger US-Tonopah NV,38.06963,-117.231678
 Supercharger US-Tooele UT,40.684505,-112.268861
 Supercharger US-Topeka KS,39.043757,-95.759847
 Supercharger-V3 US-Topeka KS - Topeka Service Area,39.01937,-95.508092
+Supercharger US-Toronto,43.74038,-79.3224
 Supercharger-V3 US-Torrance CA (Floor 1),33.83431,-118.346985
 Supercharger-V3 US-Towson MD,39.396423,-76.575478
 Supercharger-V3 US-Tracy CA - West Grant Line Road,37.752906,-121.467661
@@ -5791,6 +5803,9 @@ Tesla Service Center AT-Wien,48.1485,16.33555
 Tesla Service Center BE-Antwerp,51.137098,4.37472
 Tesla Service Center BE-Brussels,50.871384,4.464462
 Tesla Service Center BE-Hasselt,50.941851,5.322659
+Tesla Service Center CA-Ottawa ON,45.27277,-75.80032
+Tesla Service Center CA-Québec,46.7959,-71.27943
+Tesla Service Center CA-Vancouver BC,49.26617,-123.08324
 Tesla Service Center CH-Bern,46.95841,7.471903,20
 Tesla Service Center CH-Bern,46.9589,7.472205
 Tesla Service Center CH-Cham,47.191704,8.456335
@@ -6845,6 +6860,7 @@ Allego DE-Wang Semptstr. 15,48.484072,12.005799
 Allego DE-Wathlingen Nienhagener Str. 15,52.541847,10.133864
 Allego DE-Weiden in der Oberpfalz Dr.-Kilian-Straße,49.70002,12.15754
 Allego DE-Wenden Auf dem Ohl,50.99005,7.8412
+Allego DE-Wernigerode Halberstädter Straße,51.84753,10.81173
 Allego DE-Westerstede Leererstraße,53.28786,7.8928,30
 Allego DE-Wilhelmshaven Posener Straße 36-38,53.574008,8.094087
 Allego DE-Windischeschenbach Autohof Bergler,49.80413,12.18416,20
@@ -8046,6 +8062,7 @@ Chargy LU-Roeser Aire de Berchem,49.541595,6.120758
 
 CircleK BE-Kalken E17,51.0705,3.91987
 CircleK BE-Kalken E17,51.07132,3.92131
+CircleK CA-South Lancaster ON County Rd 2,45.13459,-74.49369
 CircleK DE-Autohof Alsfeld Pfefferhöhe,50.73306,9.24198,30
 CircleK DE-Berlin Heerstraße,52.516789,13.179936
 CircleK DE-Berlin Indira-Gandhi-Straße,52.547482,13.468407
@@ -8131,11 +8148,43 @@ Circontrol BA-Mokrine Lepenica,43.84202,18.12536
 Circontrol HR-Đakovo Ul. Vijenac kardinala Alojzija Stepinca,45.31077,18.4086
 Circontrol LT-Druskininkai Vilniaus kl.,54.009625,24.028568
 
+Circuit-électrique CA-Ange-Gardien QC Rte 235,45.36569,-72.93362
+Circuit-électrique CA-Bromont QC Bd de Bromont,45.3344,-72.6489
+Circuit-électrique CA-Brownsburg QC Rue Principale,45.6219,-74.59369
+Circuit-électrique CA-Chambly QC Rue Briand,45.41264,-73.31089
+Circuit-électrique CA-Chambord QC Rue Principale,48.43043,-72.06174
+Circuit-électrique CA-Châteauguay QC Rue Marc-Laplante E,45.34567,-73.73373
+Circuit-électrique CA-Coaticook QC Rue Laurence,45.13359,-71.80001
+Circuit-électrique CA-Deschambault QC 2e Rang,46.64434,-71.99845
+Circuit-électrique CA-Dorval QC Voie de Service N,45.48308,-73.78825
+Circuit-électrique CA-Kiamika QC Rte 117,46.49968,-75.14528
+Circuit-électrique CA-La Tuque QC Rue St Eugène,47.43841,-72.78122
 Circuit-électrique CA-Labelle QC Boulevard du Curé Labelle,46.280554,-74.73926
+Circuit-électrique CA-Lachute QC Av. Béthany,45.63658,-74.32746
+Circuit-électrique CA-Laval QC Bd Arthur-Sauvé,45.54771,-73.86507
+Circuit-électrique CA-Lévis QC Rte Lagueux,46.67418,-71.34458
 Circuit-électrique CA-L’Ange-Gardien QC,45.608768,-75.395496
+Circuit-électrique CA-L’Île-Perrot QC Grand Boulevard,45.39529,-73.95794
+Circuit-électrique CA-Magog QC Chem. Milletta,45.29109,-72.2131
+Circuit-électrique CA-Mont-Laurier QC Bd Albiny Paquette,46.55078,-75.49239
+Circuit-électrique CA-Mont-Tremblant QC Rue de St Jovite,46.11852,-74.60036
+Circuit-électrique CA-Montcerf-Lytton QC Rte 117,46.73103,-76.07591
+Circuit-électrique CA-Montmagny QC Rte Jean-Baptiste-Casault,46.9403,-70.65602
+Circuit-électrique CA-Montréal QC Rue Hochelaga,45.56894,-73.53833
 Circuit-électrique CA-Namur QC Route 323,45.897743,-74.920675
+Circuit-électrique CA-Orléans ON Jeanne D’Arc Blvd S,45.46652,-75.54387
+Circuit-électrique CA-Québec QC Bd Sainte-Anne,46.85222,-71.19588
+Circuit-électrique CA-Rivière-du-Loup QC Bd Cartier,47.85189,-69.54327
 Circuit-électrique CA-Rivière-Rouge QC Rue L’Annonciation S,46.401359,-74.86661
+Circuit-électrique CA-Saint-Roch-de-Mékinac QC Rte 155,46.8993,-72.92812
 Circuit-électrique CA-Saint-Roch-des-Aulnaies QC Rte de la Seigneurie,47.317569,-70.138871
+Circuit-électrique CA-Sherbrooke QC Bd de l’Université,45.3783,-71.92832
+Circuit-électrique CA-Tadoussac QC Rue des Jésuites,48.14334,-69.71912
+Circuit-électrique CA-Thurso QC Rue Galipeau,45.59998,-75.24338
+Circuit-électrique CA-Trois-Pistoles QC Rte 132,48.10599,-69.20825
+Circuit-électrique CA-Trois-Rivières QC Rue Vachon,46.36964,-72.55564
+Circuit-électrique CA-Val-d’Or QC Trans-Canada Hwy,48.07222,-77.38275
+Circuit-électrique CA-Yamachiche QC Rte Ste Anne,46.26185,-72.87645
 
 City-Concept DE-Leipzig Elsterstraße,51.34026,12.3645
 
@@ -8778,6 +8827,9 @@ Compleo DE-Zwickau Uhdestraße,50.70933,12.50408
 Compleo DE-Zwingenberg Gießer Weg,49.72307,8.60184
 Compleo GB-Leeds Princes Exchange,53.7949,-1.54902
 
+Couche-Tard CA-Ange-Gardien QC Rte 235,45.36482,-72.93384
+Couche-Tard CA-Laval QC Autoroute 13,45.53401,-73.78806
+
 Counties NZ-Pōkeno Market Street West,-37.245511,175.021008
 
 CutEnergy DE-Stadtlohn Grabenstraße,51.99194,6.91535
@@ -8972,6 +9024,7 @@ e-Vadea FR-Aire de repos de Lorraine la Trelle,48.26804,5.86052
 E-Way SM-Città di San Marino Parcheggio,43.933037,12.449936
 
 E-Werk-Franz AT-Graz Andritzer Reichsstraße,47.10061,15.42549
+E-Werk-Franz AT-Graz Schöckelstraße,47.11821,15.43067
 E-Werk-Franz AT-Graz Viktor-Franz-Straße,47.08993,15.41302
 E-Werk-Franz AT-Thal Arnold Schwarzenegger Museum,47.07218,15.36271
 
@@ -9388,7 +9441,12 @@ eCarUp DE-Gerstetten Ludwig-Erhard-Straße,48.58969,10.12808,30
 eCarUp DE-Linden Konrad-Zuse-Straße,50.53575,8.657672
 eCarUp DE-Oberhof Tambacher Straße,50.70595,10.72258
 
+eCharge CA-New Brunswick QC King George Highway Miramichi,47.02943,-65.49447
+
 ECO PL-Opole plac Wolności,50.6673,17.92318
+
+EcoCharge CA-Chelsea QC Quebec Rte,45.59767,-75.8994
+EcoCharge CA-Vaudreuil-Dorion QC Bd Harwood,45.3825,-74.01565
 
 EcoEsco IT-Palau Via Fonte Vecchia,41.178723,9.383838
 
@@ -9767,6 +9825,9 @@ Electrify-America US-Waterloo NY NY-318,42.95572,-76.92106
 Electrify-America US-Waukee IA Grand Prairie Pkwy,41.574009,-93.852656
 Electrify-America US-Williamsburg IA W Evans St,41.69061,-92.00898
 Electrify-America US-Woodbury MN Hudson Rd,44.9457,-92.8987
+
+Electrify-Canada CA-Mirabel QC Chemin Notre Dame,45.67124,-73.92006
+Electrify-Canada CA-Ottawa ON Coventry Rd,45.42069,-75.6517
 
 electrip HR-Jablanovec Zaprešićka Westgate,45.87226,15.827895
 electrip HR-Josipdol D23,45.18348,15.28681
@@ -10546,6 +10607,7 @@ EnBW DE-Groß Schwülper,52.354781,10.44066
 EnBW DE-Groß-Umstadt Georg-August-Zinn-Straße,49.869722,8.920192,25
 EnBW DE-Groß-Umstadt Georg-August-Zinn-Straße,49.871204,8.916913
 EnBW DE-Groß-Umstadt Kappesgärtenweg,49.8727,8.9281
+EnBW DE-Groß-Zimmern Röntgenstraße,49.8811,8.81322
 EnBW DE-Großpösna,51.267252,12.498765
 EnBW DE-Großpösna,51.26757,12.49697
 EnBW DE-Großröhrsdorf,51.154597,14.02058
@@ -12342,6 +12404,7 @@ EVBox NL-Enschede Strootsweg,52.22154,6.83426
 EVBox NL-Hoofddorp Taurus Avenue,52.28694,4.70725
 EVBox NL-Vriezenveen De Zuivering,52.40457,6.63523
 
+EVconnect CA-Rockland ON Laurier St,45.53873,-75.3042
 EVconnect RO-Blejoi DN1A DN1B,44.971994,26.021522
 EVconnect RO-Brașov AFI,45.6504,25.6097
 EVconnect RO-Brașov Calea București,45.63239,25.63677,25
@@ -12514,6 +12577,7 @@ EVolve US-Geneva NY Seneca St,42.86574,-76.98376
 EVolve US-Watertown NY Arsenal Street,43.979197,-75.946427
 
 evpass CH-Appenzell Bankgasse,47.32935,9.40863
+evpass CH-Martigny Rue d’Octodure,46.09823,7.07558
 evpass CH-Rorschacherberg Thalerstrasse,47.47408,9.51585
 evpass CH-St. Gallen Bildweiherstrasse,47.404451,9.308934
 
@@ -13865,6 +13929,10 @@ Fines BG-Пролеша 8,42.783942,23.166997
 Fines BG-Русе бул. Христо Ботев,43.83214,25.97155
 Fines BG-Търговище Targovishte 4009,43.244632,26.54884
 
+Flo CA-Brownsburg QC Rte du Canton,45.63191,-74.39353
+Flo CA-Gloucester ON Ogilvie Rd,45.43582,-75.60518
+Flo CA-Vaudreuil-Dorion QC Bd Harwood,45.38008,-74.01859
+
 FOR-EV GB-Lochgilphead,56.02807,-5.42519
 
 Fortum FI-Salo Ruoksmäentie,60.41877,23.16442
@@ -14006,6 +14074,7 @@ Glattwerk CH-Dübendorf Bettlistrasse,47.397961,8.624511
 GLS-Bank DE-Bochum Christstraße,51.47093,7.21924
 GLS-Bank DE-Mittweida Dreiwerdener Weg,50.97867,12.98227,25
 
+Go-Eletric HR-Punat Puntica,45.02962,14.62886
 Go-Eletric IT-Nuoro Via Antonio Cambosu,40.333597,9.2731
 Go-Eletric IT-Parma Via Emilia Ovest,44.81003,10.2867
 Go-Eletric IT-Tavagnacco Via Ferrara,46.10484,13.19933
@@ -17012,6 +17081,7 @@ Lidl FR-Salon-de-Provence All. de Szentendre,43.63804,5.07582
 Lidl FR-Serres-Castet Rue des Eaux bonnes,43.36005,-0.38521,30
 Lidl FR-Socx Fbg de Cassel,50.96278,2.43232
 Lidl FR-Sète Av. Gilbert Martelli,43.41077,3.70984,30
+Lidl FR-Thonon-les-Bains Av. de Thuyset,46.38055,6.49881
 Lidl FR-Varennes-sur-Seine Rte du Petit Fossard,48.36123,2.95788
 Lidl FR-Vendargues Av. des Bigos,43.65254,3.961,25
 Lidl FR-Vitrolles Av. Jean Monnet,43.42349,5.28486
@@ -17333,6 +17403,7 @@ Mer DE-Cham Mittelweg,49.201741,12.66474
 Mer DE-Deggendorf Hans-Obser-Straße,48.828342,12.957826
 Mer DE-Delmenhorst Seestraße,53.029624,8.657849
 Mer DE-Eltville am Rhein Kiliansring,50.025141,8.117298
+Mer DE-Freiburg im Breisgau Hermann-Mitsch-Straße,48.02792,7.83423,20
 Mer DE-Fulda Autohof Fulda-Nord,50.581137,9.706307
 Mer DE-Fulda Nord An der A7,50.581123,9.706365
 Mer DE-Furtwangen im Schwarzwald Allmendstraße,48.04978,8.21279
@@ -18354,6 +18425,8 @@ Partino CH-Baden Im Graben,47.47198,8.30879
 PC-TANK LU-Grevenmacher Copal,49.676433,6.427323
 PC-TANK LU-Niederanven Route de Trèves,49.643667,6.220377
 
+Petro-Canada CA-Gatineau QC Mnt Paiement,45.48985,-75.67584
+
 Petrol HR-Dugopolje Svetog Leopolda Mandica,43.588525,16.571035
 Petrol HR-Kaštel Sućurac Cesta Franje Tuđmana,43.5479,16.41245
 Petrol HR-Poreč Kosinožići,45.239969,13.624335
@@ -19323,6 +19396,7 @@ SachsenEnergie DE-Dresden Pohlandplatz,51.043328,13.794957
 SachsenEnergie DE-Dresden Provianthofstraße,51.082555,13.759035
 SachsenEnergie DE-Dresden Reisewitzer Str.,51.043101,13.701073
 SachsenEnergie DE-Dresden Scharfenberger Str.,51.072415,13.688326
+SachsenEnergie DE-Dresden Waldschlößchenstraße,51.0684,13.77634
 SachsenEnergie DE-Dresden Wasaplatz,51.028264,13.759824
 SachsenEnergie DE-Dresden Weißeritzstraße,51.056384,13.723257
 SachsenEnergie DE-Dresden Wilhelmine-Reichard-Ring,51.123775,13.764601
@@ -19466,6 +19540,7 @@ Shell AT-Telfs Anton-Auer-Straße,47.30531,11.07466
 Shell AT-Wien Pfenninggeldgasse,48.208101,16.313643
 Shell AT-Wien Seestadtstraße,48.216606,16.505109
 Shell AT-Wien Wagramer Straße,48.264631,16.454496
+Shell CA-Kanata ON Terry Fox Dr,45.3122,-75.93303
 Shell CH-Arosa Jöri-Jenny-Strasse,46.78256,9.68247
 Shell CH-Brig-Glis Bielstrasse,46.30759,7.96506
 Shell CH-Galgenen Kantonsstrasse,47.18138,8.87888
@@ -19781,6 +19856,7 @@ Smatrics AT-Griffen Gewerbestraße,46.69558,14.73695
 Smatrics AT-Haberl Gewerbepark,47.481074,16.091338
 Smatrics AT-Haid Ikeaplatz,48.197307,14.249527
 Smatrics AT-Haus im Ennstal Ennsling,47.41225,13.7845
+Smatrics AT-Himmelreich Josef-Lindner-Straße,47.79414,12.9867,30
 Smatrics AT-Hofstätten an der Raab Hofstätten,47.08223,15.73978
 Smatrics AT-Hofstätten an der Raab Hofstätten,47.08224,15.73976
 Smatrics AT-Horn Prager Straße,48.66451,15.63613
@@ -19822,7 +19898,6 @@ Smatrics AT-Rastplatz Schottwien,47.64921,15.85833
 Smatrics AT-Raststation Simmering,48.18156,16.44427
 Smatrics AT-Raststation Ybbs,48.15831,15.112381
 Smatrics AT-Raststätte Mondsee,47.83662,13.39498,20
-Smatrics AT-Salzburg Franz Brötzner Straße,47.794638,12.987004
 Smatrics AT-Scheibbs Eisenwurzenstraße,48.01476,15.16084
 Smatrics AT-Schnann Gewerbezone,47.14915,10.37391
 Smatrics AT-Schwechat Brucker Bundesstrasse,48.13573,16.49193
@@ -21001,6 +21076,7 @@ TotalEnergies NL-Vliedberg,51.484617,3.850016,80
 
 Turmstrom AT-Graz Fabriksgasse,47.05927,15.42646
 Turmstrom AT-Hallein Salzachtalstraße,47.68229,13.10055
+Turmstrom AT-Himmelreich Franz Brötzner Straße,47.79462,12.98701,30
 Turmstrom AT-Klaus an der Pyhrnbahn Steyrtal-Radweg,47.84527,14.17043
 Turmstrom AT-Linz Bockgasse,48.29073,14.277679,30
 Turmstrom AT-Linz Goethestraße,48.30051,14.3082
