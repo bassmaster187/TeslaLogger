@@ -4637,10 +4637,10 @@ WHERE
 
         int last_active_route_energy_at_arrival = int.MinValue;
 
-        public int InsertPos(string timestamp, double latitude, double longitude, int speed, decimal? power, double? odometer, double idealBatteryRangeKm, double batteryRangeKm, double batteryLevel, double? outsideTemp, string altitude)
+        public int InsertPos(string timestamp, double latitude, double longitude, int speed, decimal? power, double? odometer, double idealBatteryRangeKm, double batteryRangeKm, double batteryLevel, double? insideTemp, double? outsideTemp, string altitude)
         {
             int posid = 0;
-            double? inside_temp = car.CurrentJSON.current_inside_temperature;
+            //double? inside_temp = car.CurrentJSON.current_inside_temperature;
             using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
             {
                 con.Open();
@@ -4742,13 +4742,13 @@ VALUES(
                         cmd.Parameters.AddWithValue("@battery_level", batteryLevel);
                     }
 
-                    if (inside_temp == null)
+                    if (insideTemp == null)
                     {
                         cmd.Parameters.AddWithValue("@inside_temp", DBNull.Value);
                     }
                     else
                     {
-                        cmd.Parameters.AddWithValue("@inside_temp", (double)inside_temp);
+                        cmd.Parameters.AddWithValue("@inside_temp", (double)insideTemp);
                     }
 
                     cmd.Parameters.AddWithValue("@battery_heater", car.CurrentJSON.current_battery_heater ? 1 : 0);

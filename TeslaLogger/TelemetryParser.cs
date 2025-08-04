@@ -1300,7 +1300,7 @@ namespace TeslaLogger
                     else
                         _ = car.webhelper.SendDataToAbetterrouteplannerAsync(ts, lastSoc, (double)speed, false, 0.0, (double)latitude, (double)longitude);
 
-                    lastposid = car.DbHelper.InsertPos(ts.ToString(), lastLatitude, lastLongitude, (int)speed.Value, null, lastOdometer, lastIdealBatteryRange, lastRatedRange, lastSoc, lastOutsideTemp, "");
+                    lastposid = car.DbHelper.InsertPos(ts.ToString(), lastLatitude, lastLongitude, (int)speed.Value, null, lastOdometer, lastIdealBatteryRange, lastRatedRange, lastSoc, lastInsideTemp, lastOutsideTemp, "");
 
                     if (loggingPosId)
                     {
@@ -2000,7 +2000,7 @@ namespace TeslaLogger
             long ts = DateTimeToUTC_UnixTimestamp(date);
 
             if (databaseCalls)
-                lastposid = car.DbHelper.InsertPos(ts.ToString(), lastLatitude, lastLongitude, speed, null, lastOdometer, lastIdealBatteryRange, lastRatedRange, lastSoc, lastOutsideTemp, "");
+                lastposid = car.DbHelper.InsertPos(ts.ToString(), lastLatitude, lastLongitude, speed, null, lastOdometer, lastIdealBatteryRange, lastRatedRange, lastSoc, lastInsideTemp, lastOutsideTemp, "");
 
             Log($"InsertFirstPos {date} ID: {lastposid}");
         }
