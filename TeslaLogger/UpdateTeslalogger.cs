@@ -1963,6 +1963,8 @@ PRIMARY KEY(id)
                             if (f.EndsWith("Laden.json", StringComparison.Ordinal))
                             {
                                 s = s.Replace("outside_temp as 'Außentemperatur [°C]'", "outside_temp * 9/5 + 32 as 'Außentemperatur [°F]'");
+                                s = s.Replace("ModuleTempMin FROM", "Round(ModuleTempMin * 9/5 + 32,0) as ModuleTempMin FROM");
+                                s = s.Replace("ModuleTempMax FROM", "Round(ModuleTempMax * 9/5 + 32,0) as ModuleTempMax FROM");
                             }
                             else if (f.EndsWith("Trip.json", StringComparison.Ordinal))
                             {
@@ -1985,13 +1987,14 @@ PRIMARY KEY(id)
                                 s = s.Replace("Start km", "Start mi");
                                 s = s.Replace("End km", "End mi");
 
-                                s = s.Replace("EndOdometer - StartOdometer AS kmDiff", "(EndOdometer - StartOdometer) / 1.609344 AS kmDiff");
+                                s = s.Replace("EndOdometer - StartOdometer AS kmDiff", "(EndOdometer - StartOdometer) / 1.609344 AS 'mi Diff'");
                                 s = s.Replace("StartOdometer,", " StartOdometer / 1.609344 as StartOdometer,");
                                 s = s.Replace("EndOdometer,", " EndOdometer / 1.609344 as EndOdometer,");
                                 s = s.Replace("100 AS MaxRange", "100 / 1.609344 AS MaxRange");
                                 s = s.Replace("(EndOdometer - StartOdometer) * 100 AS AVGConsumption", "(EndOdometer/1.609344 - StartOdometer/1.609344) * 100 AS AVGConsumption");
 
                                 s = s.Replace("\"unit\": \"lengthkm\"", "\"unit\": \"lengthmi\"");
+                                s = s.Replace("\"kmDiff\"", "\"mi Diff\"");
                             }
                             else if (f.EndsWith("Degradation.json", StringComparison.Ordinal))
                             {
