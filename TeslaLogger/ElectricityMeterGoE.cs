@@ -64,6 +64,26 @@ namespace TeslaLogger
 
         public override double? GetUtilityMeterReading_kWh()
         {
+            string j = null;
+            try
+            {
+                j = GetCurrentData();
+
+                dynamic jsonResult = JsonConvert.DeserializeObject(j);
+                string key = "whg";
+                string value = jsonResult[key];
+
+                double v = Double.Parse(value, Tools.ciEnUS);
+                v = v / (double)10.0;
+
+                return v;
+            }
+            catch (Exception ex)
+            {
+                ex.ToExceptionless().FirstCarUserID().Submit();
+                Logfile.ExceptionWriter(ex, j);
+            }
+
             return null;
         }
 
