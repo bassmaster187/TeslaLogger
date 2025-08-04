@@ -12,6 +12,8 @@ namespace TeslaLogger
         private string host;
         private string paramater;
 
+        internal string status;
+
         Guid guid; // defaults to new Guid();
         static WebClient client;
 
@@ -29,6 +31,12 @@ namespace TeslaLogger
         {
             try
             {
+
+                if (status != null)
+                {
+                    return status;
+                }
+
                 string cacheKey = "goe_" + guid.ToString();
                 object o = MemoryCache.Default.Get(cacheKey);
 
@@ -75,6 +83,7 @@ namespace TeslaLogger
 
                 double v = Double.Parse(value, Tools.ciEnUS);
                 v = v / (double)10.0;
+                v = Math.Round(v, 1);
 
                 return v;
             }
