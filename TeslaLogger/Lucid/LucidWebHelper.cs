@@ -123,7 +123,7 @@ namespace TeslaLoggerNET8.Lucid
 
                 car.Log("Insert Charging " + batteryLevel);
                 _ = SendDataToAbetterrouteplannerAsync(ts, car.CurrentJSON.current_battery_level, 0, true, charger_power, car.CurrentJSON.GetLatitude(), car.CurrentJSON.GetLongitude());
-                car.DbHelper.InsertCharging(ts.ToString(), batteryLevel, charge_energy_added.ToString(), chargerPower,  (double)Tools.KmToMl(ideal_battery_range,1), (double)Tools.KmToMl(ideal_battery_range,1), "0", "0", "0", 0.0, forceInsert, "0", "0");
+                car.DbHelper.InsertCharging(ts.ToString(), batteryLevel, charge_energy_added.ToString(), chargerPower,  (double)Tools.KmToMl(ideal_battery_range,1), (double)Tools.KmToMl(ideal_battery_range,1), "0", "0", "0", car.CurrentJSON.current_outside_temperature, forceInsert, "0", "0");
             }
 
             return charging;
