@@ -92,7 +92,7 @@ else
 		updateWeather();
 
 		$.ajax({
-		  url: "current_json.php",
+		  url: "current_json.php?carid=<?php echo $carid; ?>",
 		  dataType: "json"
 		  }).done(function( jsonData ) {
 			$('#display_name').text(jsonData["display_name"]);
