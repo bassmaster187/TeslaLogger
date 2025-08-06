@@ -1,0 +1,704 @@
+{
+	"alw": false,
+	"acu": null,
+	"cll": {
+		"adapterCurrentLimit": 16,
+		"cableCurrentLimit": 32,
+		"currentLimitMax": 16,
+		"forceState": 0,
+		"requestedCurrent": 6,
+		"temperatureCurrentLimit": 32,
+		"unsymetryCurrentLimit": 32
+	},
+	"adi": true,
+	"dwo": null,
+	"tpa": 0,
+	"sse": "216943",
+	"eto": 6733293,
+	"wifis": [
+		{
+			"ssid": "XXXXXXX",
+			"key": true,
+			"useStaticIp": false,
+			"staticIp": "0.0.0.0",
+			"staticSubnet": "0.0.0.0",
+			"staticGateway": "0.0.0.0",
+			"useStaticDns": false,
+			"staticDns0": "0.0.0.0",
+			"staticDns1": "0.0.0.0",
+			"staticDns2": "0.0.0.0"
+		},
+		{
+			"ssid": "",
+			"key": false,
+			"useStaticIp": false,
+			"staticIp": "0.0.0.0",
+			"staticSubnet": "0.0.0.0",
+			"staticGateway": "0.0.0.0",
+			"useStaticDns": false,
+			"staticDns0": "0.0.0.0",
+			"staticDns1": "0.0.0.0",
+			"staticDns2": "0.0.0.0"
+		},
+		{
+			"ssid": "",
+			"key": false,
+			"useStaticIp": false,
+			"staticIp": "0.0.0.0",
+			"staticSubnet": "0.0.0.0",
+			"staticGateway": "0.0.0.0",
+			"useStaticDns": false,
+			"staticDns0": "0.0.0.0",
+			"staticDns1": "0.0.0.0",
+			"staticDns2": "0.0.0.0"
+		},
+		{
+			"ssid": "",
+			"key": false,
+			"useStaticIp": false,
+			"staticIp": "0.0.0.0",
+			"staticSubnet": "0.0.0.0",
+			"staticGateway": "0.0.0.0",
+			"useStaticDns": false,
+			"staticDns0": "0.0.0.0",
+			"staticDns1": "0.0.0.0",
+			"staticDns2": "0.0.0.0"
+		},
+		{
+			"ssid": "",
+			"key": false,
+			"useStaticIp": false,
+			"staticIp": "0.0.0.0",
+			"staticSubnet": "0.0.0.0",
+			"staticGateway": "0.0.0.0",
+			"useStaticDns": false,
+			"staticDns0": "0.0.0.0",
+			"staticDns1": "0.0.0.0",
+			"staticDns2": "0.0.0.0"
+		},
+		{
+			"ssid": "",
+			"key": false,
+			"useStaticIp": false,
+			"staticIp": "0.0.0.0",
+			"staticSubnet": "0.0.0.0",
+			"staticGateway": "0.0.0.0",
+			"useStaticDns": false,
+			"staticDns0": "0.0.0.0",
+			"staticDns1": "0.0.0.0",
+			"staticDns2": "0.0.0.0"
+		},
+		{
+			"ssid": "",
+			"key": false,
+			"useStaticIp": false,
+			"staticIp": "0.0.0.0",
+			"staticSubnet": "0.0.0.0",
+			"staticGateway": "0.0.0.0",
+			"useStaticDns": false,
+			"staticDns0": "0.0.0.0",
+			"staticDns1": "0.0.0.0",
+			"staticDns2": "0.0.0.0"
+		},
+		{
+			"ssid": "",
+			"key": false,
+			"useStaticIp": false,
+			"staticIp": "0.0.0.0",
+			"staticSubnet": "0.0.0.0",
+			"staticGateway": "0.0.0.0",
+			"useStaticDns": false,
+			"staticDns0": "0.0.0.0",
+			"staticDns1": "0.0.0.0",
+			"staticDns2": "0.0.0.0"
+		},
+		{
+			"ssid": "",
+			"key": false,
+			"useStaticIp": false,
+			"staticIp": "0.0.0.0",
+			"staticSubnet": "0.0.0.0",
+			"staticGateway": "0.0.0.0",
+			"useStaticDns": false,
+			"staticDns0": "0.0.0.0",
+			"staticDns1": "0.0.0.0",
+			"staticDns2": "0.0.0.0"
+		},
+		{
+			"ssid": "",
+			"key": false,
+			"useStaticIp": false,
+			"staticIp": "0.0.0.0",
+			"staticSubnet": "0.0.0.0",
+			"staticGateway": "0.0.0.0",
+			"useStaticDns": false,
+			"staticDns0": "0.0.0.0",
+			"staticDns1": "0.0.0.0",
+			"staticDns2": "0.0.0.0"
+		}
+	],
+	"scan": [
+		{
+			"ssid": "XXXXXXX",
+			"encryptionType": 3,
+			"rssi": -34,
+			"channel": 1,
+			"bssid": "AA:BB:CC:DD:EE:FF",
+			"f": [
+				4,
+				4,
+				true,
+				true,
+				true,
+				false,
+				false,
+				false,
+				false,
+				"AT"
+			]
+		},
+		{
+			"ssid": "XXXXXXX",
+			"encryptionType": 3,
+			"rssi": -69,
+			"channel": 6,
+			"bssid": "AA:BB:CC:DD:EE:FF",
+			"f": [
+				4,
+				4,
+				true,
+				true,
+				true,
+				false,
+				false,
+				false,
+				false,
+				"AT"
+			]
+		},
+		{
+			"ssid": "XXXXXXX",
+			"encryptionType": 3,
+			"rssi": -72,
+			"channel": 11,
+			"bssid": "AA:BB:CC:DD:EE:FF",
+			"f": [
+				4,
+				4,
+				false,
+				true,
+				true,
+				false,
+				false,
+				false,
+				false,
+				"AT"
+			]
+		},
+		{
+			"ssid": "XXXXXXX",
+			"encryptionType": 3,
+			"rssi": -83,
+			"channel": 1,
+			"bssid": "AA:BB:CC:DD:EE:FF",
+			"f": [
+				4,
+				4,
+				true,
+				true,
+				true,
+				false,
+				false,
+				false,
+				false,
+				"AT"
+			]
+		}
+	],
+	"lwf": 32007456,
+	"scaa": 32012159,
+	"wst": 3,
+	"wsc": 0,
+	"wsl": [
+		[
+			32007455,
+			"XXXXXXX",
+			"AA:BB:CC:DD:EE:FF",
+			"BEACON_TIMEOUT"
+		]
+	],
+	"wsms": 3,
+	"ccw": {
+		"ssid": "XXXXXXX",
+		"encryptionType": 3,
+		"pairwiseCipher": 4,
+		"groupCipher": 4,
+		"b": true,
+		"g": true,
+		"n": true,
+		"lr": false,
+		"wps": false,
+		"ftmResponder": false,
+		"ftmInitiator": false,
+		"channel": 1,
+		"bssid": "AA:BB:CC:DD:EE:FF",
+		"ip": "192.168.0.123",
+		"netmask": "255.255.255.0",
+		"gw": "192.168.0.1",
+		"ipv6": [
+			"FEFE::111:2222:3333:4444"
+		]
+	},
+	"wfb": null,
+	"wcb": "AA:BB:CC:DD:EE:FF",
+	"wpb": [
+		"AA:BB:CC:DD:EE:F1",
+		"AA:BB:CC:DD:EE:F2",
+		"AA:BB:CC:DD:EE:F3"
+	],
+	"nif": "st",
+	"dns": {
+		"dns0": "192.168.0.111",
+		"dns1": "0.0.0.0",
+		"dns2": "0.0.0.0"
+	},
+	"wbw": 1,
+	"rssi": -30,
+	"wda": true,
+	"tse": true,
+	"tsss": 0,
+	"tof": 60,
+	"tds": 1,
+	"tzt": "",
+	"utc": "2025-07-17T22:00:46.776",
+	"loc": "2025-07-18T00:00:46.777 +02:00",
+	"tab": 1752682090568,
+	"lto": 7200000,
+	"lbr": 150,
+	"lmo": 3,
+	"ama": 16,
+	"tcl": null,
+	"die": true,
+	"dii": false,
+	"din": 1,
+	"la1": 16,
+	"la3": 16,
+	"di1": false,
+	"pgr": false,
+	"pdi": false,
+	"ufe": false,
+	"ufm": 0,
+	"ufa": 49.79999924,
+	"ufs": 49,
+	"uve": false,
+	"uvt": 184,
+	"uvs": 3000,
+	"clp": [
+		6,
+		8,
+		10,
+		12,
+		15
+	],
+	"bac": 3,
+	"sdp": 2,
+	"bar": 3,
+	"lbp": null,
+	"amp": 6,
+	"fna": "go-eCharger_111111",
+	"isgo": true,
+	"aus": false,
+	"rdbs": 0,
+	"rdes": 0,
+	"rdbf": 0,
+	"rdef": 0,
+	"rdre": 180,
+	"rdpl": 0,
+	"rdbse": null,
+	"rdese": null,
+	"rdbfe": null,
+	"rdefe": null,
+	"rdree": null,
+	"rdple": null,
+	"gmtr": 60,
+	"gsa": null,
+	"rsa": null,
+	"rmiv": 207,
+	"rmav": 250.6999969,
+	"rmif": 49.90000153,
+	"rmaf": 50.09999847,
+	"rsre": false,
+	"rsrr": 0.159999996,
+	"cid": "#0000FF",
+	"cwc": "#FFFF00",
+	"cch": "#FF00F8",
+	"cfi": "#00FF00",
+	"ust": 0,
+	"lck": 0,
+	"sch_week": {
+		"control": 0,
+		"ranges": [
+			{
+				"begin": {
+					"hour": 0,
+					"minute": 0,
+					"second": 0
+				},
+				"end": {
+					"hour": 0,
+					"minute": 0,
+					"second": 0
+				}
+			},
+			{
+				"begin": {
+					"hour": 0,
+					"minute": 0,
+					"second": 0
+				},
+				"end": {
+					"hour": 0,
+					"minute": 0,
+					"second": 0
+				}
+			}
+		]
+	},
+	"sch_satur": {
+		"control": 0,
+		"ranges": [
+			{
+				"begin": {
+					"hour": 0,
+					"minute": 0,
+					"second": 0
+				},
+				"end": {
+					"hour": 0,
+					"minute": 0,
+					"second": 0
+				}
+			},
+			{
+				"begin": {
+					"hour": 0,
+					"minute": 0,
+					"second": 0
+				},
+				"end": {
+					"hour": 0,
+					"minute": 0,
+					"second": 0
+				}
+			}
+		]
+	},
+	"sch_sund": {
+		"control": 0,
+		"ranges": [
+			{
+				"begin": {
+					"hour": 0,
+					"minute": 0,
+					"second": 0
+				},
+				"end": {
+					"hour": 0,
+					"minute": 0,
+					"second": 0
+				}
+			},
+			{
+				"begin": {
+					"hour": 0,
+					"minute": 0,
+					"second": 0
+				},
+				"end": {
+					"hour": 0,
+					"minute": 0,
+					"second": 0
+				}
+			}
+		]
+	},
+	"nmo": false,
+	"fsp": false,
+	"acs": 0,
+	"frc": 1,
+	"rbc": 70,
+	"rbt": 107556239,
+	"car": 1,
+	"err": 0,
+	"cbl": 32,
+	"pha": [
+		false,
+		false,
+		false,
+		true,
+		true,
+		true
+	],
+	"wh": 0,
+	"whs": 0,
+	"whb": 0,
+	"whg": 818.4557252,
+	"who": 0,
+	"trx": null,
+	"evt": null,
+	"fwv": "59.4",
+	"oem": "go-e",
+	"dfam": "goecharger",
+	"typ": "go-eCharger_V4",
+	"lse": true,
+	"cdi": {
+		"type": 1,
+		"value": 0
+	},
+	"lccfi": null,
+	"lccfc": null,
+	"lcctc": null,
+	"tma": [
+		31,
+		26
+	],
+	"amt": 32,
+	"nrg": [
+		236.2200012,
+		235.2899933,
+		235.2899933,
+		3.410000086,
+		0,
+		0,
+		0,
+		0,
+		0,
+		0,
+		0,
+		0,
+		0,
+		0,
+		0,
+		0
+	],
+	"modelStatus": 4,
+	"lmsc": 95804857,
+	"mca": 6,
+	"awc": 1379,
+	"awp": 3,
+	"awcp": {
+		"start": 1752789600,
+		"end": 1752793200,
+		"marketprice": 10.69999981
+	},
+	"frm": 0,
+	"fup": false,
+	"awe": false,
+	"fst": 2000,
+	"fmt": 300000,
+	"att": 28800,
+	"ate": 60000,
+	"ara": false,
+	"acp": true,
+	"cco": 16.2,
+	"esk": true,
+	"fzf": false,
+	"pgt": 0,
+	"sh": 200,
+	"psh": 500,
+	"po": -300,
+	"zfo": 200,
+	"psmd": 10000,
+	"sumd": 10000,
+	"mpwst": 120000,
+	"mptwt": 600000,
+	"mmp": 0,
+	"tlf": false,
+	"tls": null,
+	"lpc": null,
+	"atp": null,
+	"lpsc": null,
+	"inva": 107552387,
+	"pgrid": 4.2899999619999999,
+	"ppv": 0,
+	"pakku": 428,
+	"dsrc": "custom",
+	"deltap": 0,
+	"pnp": 0,
+	"deltaa": 0,
+	"pvopt_averagePGrid": -3.379999876,
+	"pvopt_averagePPv": 0,
+	"pvopt_averagePAkku": 434.8000183,
+	"ct": "default",
+	"mci": 0,
+	"mcpd": 0,
+	"mcpea": null,
+	"su": false,
+	"sua": false,
+	"var": 22,
+	"loe": false,
+	"log": "",
+	"lop": 50,
+	"lopr": false,
+	"lof": 0,
+	"map": [
+		1,
+		2,
+		3
+	],
+	"upo": true,
+	"pwm": 0,
+	"lfspt": null,
+	"fsptws": null,
+	"spl3": 4200,
+	"psm": 0,
+	"csd": false,
+	"ocu": [
+		"59.4",
+		"57.1 OUTDATED",
+		"V 57.0 OUTDATED",
+		"V 56.11 OUTDATED",
+		"V 56.9 OUTDATED",
+		"V 56.8 OUTDATED",
+		"V 56.2 OUTDATED",
+		"V 56.1 OUTDATED",
+		"V 055.8 OUTDATED",
+		"V 055.7 OUTDATED",
+		"V 055.5 OUTDATED",
+		"V 055.0 OUTDATED"
+	],
+	"cwe": true,
+	"clea": 95175092,
+	"cle": "esp_transport_write() returned 0, transport_error=ESP_OK, tls_error_code=0, tls_flags=0, errno=128",
+	"cus": 1,
+	"ffb": 0,
+	"fhz": 49.92399979,
+	"loa": null,
+	"lot": {
+		"amp": 32,
+		"dyn": 32,
+		"sta": 32,
+		"ts": 0
+	},
+	"loty": 0,
+	"cards": [
+		{
+			"name": "n/a",
+			"energy": 0,
+			"cardId": true
+		},
+		{
+			"name": "n/a",
+			"energy": 0,
+			"cardId": false
+		},
+		{
+			"name": "n/a",
+			"energy": 0,
+			"cardId": false
+		},
+		{
+			"name": "n/a",
+			"energy": 0,
+			"cardId": false
+		},
+		{
+			"name": "n/a",
+			"energy": 0,
+			"cardId": false
+		},
+		{
+			"name": "n/a",
+			"energy": 0,
+			"cardId": false
+		},
+		{
+			"name": "n/a",
+			"energy": 0,
+			"cardId": false
+		},
+		{
+			"name": "n/a",
+			"energy": 0,
+			"cardId": false
+		},
+		{
+			"name": "n/a",
+			"energy": 0,
+			"cardId": false
+		},
+		{
+			"name": "n/a",
+			"energy": 0,
+			"cardId": false
+		}
+	],
+	"smd": null,
+	"men": false,
+	"msp": 502,
+	"msb": false,
+	"msr": true,
+	"data": "{\"i\":120,\"url\":\"https://data.v3.go-e.io/data_ng?e=asfhalsjfhlaskjfhlaskjfhaljkh\"}",
+	"dll": "https://data.v3.go-e.io/export?e=faskjhfakjshflajkshfl",
+	"hai": true,
+	"hla": true,
+	"mce": true,
+	"mcu": "mqtt://1111:XXXX@mqtt.local:1883",
+	"mcr": false,
+	"mtp": "go-eCharger/216943/",
+	"mht": "homeassistant/",
+	"mhe": false,
+	"mqg": true,
+	"mqcn": false,
+	"mqss": false,
+	"mcs": true,
+	"mcc": true,
+	"mcca": 32017463,
+	"mlr": "error_type=TCP_TRANSPORT connect_return_code=ACCEPTED",
+	"mlra": 32007420,
+	"ocppe": false,
+	"ocppu": "",
+	"ocppf": null,
+	"ocppg": true,
+	"ocppcn": false,
+	"ocppss": false,
+	"ocpps": false,
+	"ocppc": false,
+	"ocppca": null,
+	"ocppa": false,
+	"ocppaa": null,
+	"ocppti": null,
+	"ocppte": null,
+	"ocppao": false,
+	"ocpplo": true,
+	"ocppla": true,
+	"orsch": false,
+	"ocpph": 3600,
+	"ocppi": 60,
+	"ocppai": 0,
+	"ocppd": "no-card",
+	"ocppr": false,
+	"ocppcm": 0,
+	"ocpplea": null,
+	"ocpple": null,
+	"ocpprl": false,
+	"ocppcs": 0,
+	"ocppmp": null,
+	"ocppdp": null,
+	"ocpptp": null,
+	"rde": false,
+	"lri": null,
+	"tsi": null,
+	"lrc": null,
+	"lrr": null,
+	"cmse": false,
+	"cmmr": 20,
+	"cms": "_go-e_controller",
+	"cmp": "_tcp",
+	"pco": "",
+	"lcs": 0,
+	"csa": false,
+	"ctrls": null,
+	"ccd": null,
+	"emx": 0
+}
