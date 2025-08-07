@@ -2350,7 +2350,7 @@ Supercharger-V3 FR-Aire de Portes-Lès-Valence Ouest,44.86473,4.8649,30
 Supercharger FR-Aire de Reims-Champagne-Nord,49.119348,4.245689
 Supercharger FR-Aire de Reims-Champagne-Sud,49.120696,4.242712
 Supercharger FR-Aire de Saint-Priest,45.698042,4.975513
-Supercharger FR-Aire de Vidauban Sud,43.413832,6.451177
+Supercharger FR-Aire de Vidauban Sud,43.41426,6.45106
 Supercharger-V3 FR-Aire des Portes d’Angers,47.498968,-0.491404
 Supercharger-V3 FR-Aire du Bourbonnais,46.497491,3.362673
 Supercharger FR-Aire du Caylar,43.864588,3.313267
@@ -2363,7 +2363,7 @@ Supercharger-V4 FR-Aix-en-Provence Jas de Bouffan,43.533585,5.416702
 Supercharger-V4 FR-Aix-en-Provence Mercure,43.51368,5.46683
 Supercharger FR-Aix-en-Provence Val de l’Arc,43.511979,5.466397
 Supercharger-V3 FR-Ajaccio,41.951864,8.792775
-Supercharger FR-Albaret-Sainte-Marie,44.870808,3.253098,30
+Supercharger FR-Albaret-Sainte-Marie,44.8708,3.25304
 Supercharger-V3 FR-Albertville,45.65538,6.36566
 Supercharger-V3 FR-Albi,43.95773,2.154951
 Supercharger FR-Amiens,49.863492,2.27814
@@ -2399,7 +2399,7 @@ Supercharger-V3 FR-Blagnac,43.647712,1.370026
 Supercharger-V3 FR-Blois,47.611942,1.339408
 Supercharger-V4 FR-Blois Urban,47.60876,1.327986
 Supercharger-V3 FR-Bordeaux Lac,44.882346,-0.563519
-Supercharger FR-Bordeaux Merignac,44.834208,-0.681095
+Supercharger FR-Bordeaux Mérignac,44.83421,-0.6811
 Supercharger-V3 FR-Boulogne-sur-Mer,50.73344,1.67235
 Supercharger-V3 FR-Bourg-Achard,49.35975,0.81778
 Supercharger-V4 FR-Bourg-de-Péage,45.03334,5.05188
@@ -2503,7 +2503,6 @@ Supercharger FR-Marne-la-Vallée,48.83079,2.678036
 Supercharger-V3 FR-Marseille La Valentine,43.29433,5.4798,30
 Supercharger-V3 FR-Megève,45.87187,6.63077
 Supercharger-V4 FR-Mende,44.516001,3.479967
-Supercharger FR-Merignac,44.835346,-0.681374
 Supercharger FR-Metz,49.216512,6.171239
 Supercharger-V3 FR-Metz Sud,49.079621,6.10359
 Supercharger-V4 FR-Moisselles,49.045792,2.335405
@@ -2614,7 +2613,7 @@ Supercharger-V4 FR-Villabé,48.58604,2.44937
 Supercharger-V4 FR-Villedieu-les-Poêles-Rouffigny,48.8483,-1.21174
 Supercharger-V4 FR-Voreppe,45.272914,5.629334
 Supercharger-V3 FR-Vouillé,46.29825,-0.37526
-Supercharger-V3 FR-Vélizy 2,48.78399,2.220896,20
+Supercharger-V3 FR-Vélizy 2,48.78399,2.2209
 Supercharger-V3 FR-Épinal,48.20083,6.477478
 Supercharger-V3 FR-Évry-Courcouronnes,48.61589,2.4239
 
@@ -3334,7 +3333,7 @@ Supercharger-V3 NL-Weert,51.28177,5.650989
 Supercharger-V3 NL-Wolvega,52.880495,6.021328
 Supercharger NL-Zaltbommel,51.79633,5.254778,30
 Supercharger NL-Zevenaar,51.940585,6.081817
-Supercharger-V3 NL-Zuidbroek,53.169567,6.852949
+Supercharger-V3 NL-Zuidbroek,53.16978,6.85344,60
 Supercharger NL-Zwolle,52.53204,6.15703
 
 Supercharger NO-Aksdal,59.423006,5.44306
@@ -3406,8 +3405,7 @@ Supercharger NO-Lampeland,59.836224,9.579221
 Supercharger NO-Larvik,59.11219,10.108337
 Supercharger NO-Lasses,59.037499,9.673879
 Supercharger NO-Lavik,61.103869,5.51268
-Supercharger NO-Leinstrand,63.324744,10.304436,30
-Supercharger NO-Leinstrand,63.325319,10.305137
+Supercharger NO-Leinstrand,63.32504,10.30449,55
 Supercharger-V3 NO-Leira,60.969163,9.29164
 Supercharger NO-Levanger,63.734517,11.281552
 Supercharger NO-Lier North,59.770663,10.26099
@@ -3535,8 +3533,7 @@ Supercharger NZ-Taupo,-38.692628,176.075996
 Supercharger-V3 NZ-Waitomo,-38.243643,175.183284
 Supercharger NZ-Whangarei,-35.72449,174.318696
 
-Supercharger-V3 PL-Białystok,53.12446,23.16743
-Supercharger-V3 PL-Białystok,53.12446,23.16833
+Supercharger-V3 PL-Białystok,53.12458,23.16743,70
 Supercharger-V4 PL-Boczów,52.325677,14.906565
 Supercharger-V4 PL-Chotyniec,49.94905,23.02343
 Supercharger PL-Ciechocinek,52.875248,18.774952
@@ -3587,7 +3584,7 @@ Supercharger PT-Ribeira de Pena,41.503392,-7.80134
 
 Supercharger-V4 RO-Arad,46.203169,21.248505
 Supercharger-V4 RO-Bacău,46.585946,26.954977
-Supercharger-V3 RO-Bucharest,44.478959,26.103307,32
+Supercharger-V3 RO-București,44.47896,26.10331
 Supercharger-V3 RO-București Bulevardul Pierre de Coubertin,44.440992,26.154434
 Supercharger-V4 RO-București Militari,44.435974,25.957891
 Supercharger-V4 RO-Buzău,45.164247,26.814282
@@ -4343,7 +4340,7 @@ Supercharger US-Flushing NY (Valet & Pay to Park),40.761015,-73.829777
 Supercharger US-Folsom CA - Iron Point Rd.,38.642337,-121.188104
 Supercharger-V3 US-Folsom CA Palladio Parkway,38.64717,-121.11895
 Supercharger-V3 US-Fond du Lac WI,43.791429,-88.486016
-Supercharger US-Fontana CA,34.15128,-117.471555
+Supercharger US-Fontana CA,34.151,-117.47111
 Supercharger-V3 US-Forks WA,47.94305,-124.385307
 Supercharger-V3 US-Fort Bragg CA,39.42105,-123.80738
 Supercharger US-Fort Drum FL,27.600625,-80.822774
@@ -5768,7 +5765,6 @@ Supercharger US-Zionsville IL,39.950588,-86.343793
 
 Urbancharger US-Chicago IL North Broadway,41.937486,-87.644921
 Urbancharger US-Downey CA - Lakewood Boulevard,33.953499,-118.112814
-Urbancharger US-Fontana CA,34.150982,-117.471046
 Urbancharger US-Glendale CA,34.145145,-118.257072
 Urbancharger US-Irvine CA - Michelson Drive,33.673052,-117.844639
 Urbancharger US-Issaquah WA,47.548146,-122.039991
@@ -5828,7 +5824,7 @@ Tesla Service Center DK-København,55.64863,12.566136
 Tesla Service Center FI-Helsinki-Vantaa,60.27046,24.87716,50
 Tesla Service Center FI-Raisio,60.49328,22.20386
 Tesla Service Center FR-Aix-en-Provence,43.478753,5.365475
-Tesla Service Center FR-Bordeaux,44.833846,-0.677458
+Tesla Service Center FR-Bordeaux Mérignac,44.83382,-0.67546
 Tesla Service Center FR-Dardilly,45.808203,4.765263
 Tesla Service Center FR-Lyon,45.785156,4.787735
 Tesla Service Center FR-Nantes,47.248375,-1.622089
@@ -6279,6 +6275,7 @@ Aldi DE-Rotheidlen,47.731574,9.698803,20
 Aldi DE-Rottenburg am Neckar Gartenstraße,48.473359,8.946082
 Aldi DE-Rottweil Saline,48.14585,8.6384
 Aldi DE-Ruhpolding Seehauserstraße,47.750006,12.65668
+Aldi DE-Saarbrücken Bühler Straße,49.20933,7.03123
 Aldi DE-Saarbrücken Hirtenwies,49.218833,6.968444
 Aldi DE-Salzgitter Schlosserstraße,52.157035,10.348682
 Aldi DE-Sandhausen Gottlieb-Daimler-Straße,49.340389,8.667
@@ -6773,8 +6770,8 @@ Allego DE-Oberschleißheim Mittenheimer Str. 51,48.257904,11.558088
 Allego DE-Offenburg Schutterwälder Straße 2,48.464964,7.931835
 Allego DE-Oldenburg Posthalterweg,53.16134,8.17273
 Allego DE-Oldenburg Stubbenweg,53.18047,8.22845
-Allego DE-Osnabrück,52.275733,8.073959,10
 Allego DE-Osnabrück Hannoversche Straße 70,52.260406,8.076756
+Allego DE-Osnabrück Mittelburgstraße,52.27573,8.07396
 Allego DE-Ottersberg Posthausen,53.057561,9.165869,12
 Allego DE-Overath Großbernsau 2,50.939581,7.293598
 Allego DE-Oyten Hauptstraße,53.06006,9.01809,25
@@ -7066,6 +7063,9 @@ ARAL DE-Autohof Dachsberg,50.6478,7.33438,12
 ARAL DE-Autohof Northeim,51.73105,9.97313,25
 ARAL DE-Autohof Röttenbach,49.15785,11.04086
 ARAL DE-Autohof Schkeuditz,51.39926,12.19126,30
+ARAL DE-Autohof Schnaittach,49.56753,11.32699
+ARAL DE-Autohof Soest-Ost,51.55337,8.15855
+ARAL DE-Autohof Wittenburg,53.5024,11.09788
 ARAL DE-Bad Honnef Gewerbepark Dachsberg,50.646867,7.337694
 ARAL DE-Bautzen Kreckwitzer Straße,51.19029,14.45191
 ARAL DE-Bensheim Wormser Straße,49.67641,8.61158
@@ -7171,6 +7171,7 @@ ARAL DE-Saarbrücken Mainzer Straße,49.22561,7.03041,30
 ARAL DE-Schlüsselfeld Attelsdorf,49.74647,10.63388
 ARAL DE-Schwarmstedt Autohof,52.673543,9.688409
 ARAL DE-Schwegenheim Im breiten Pfuhl,49.272272,8.33897
+ARAL DE-Schweinfurt Straßburgstraße,50.0215,10.21636,60
 ARAL DE-Schwerin,53.600345,11.465313
 ARAL DE-Seevetal Jesteburger Straße,53.38251,9.97902,25
 ARAL DE-Stadtallendorf Daimler-Straße,50.83488,9.037868
@@ -7185,7 +7186,6 @@ ARAL DE-Vetschau Kleine Bahnhofstraße,51.78392,14.07867
 ARAL DE-Warburg Paderborner Tor,51.49454,9.12634,25
 ARAL DE-Winsen (Luhe) Max-Planck-Straße,53.339067,10.219588
 ARAL DE-Winterberg Am Hagenblech,51.20019,8.53027
-ARAL DE-Wittenburg Autohof,53.502361,11.097974
 ARAL DE-Worms Mainzer Straße,49.65494,8.359737
 ARAL DE-Wuppertal Uellendahler Straße,51.276057,7.155171,30
 ARAL DE-Wuppertal Uellendahler Straße,51.27606,7.15517
@@ -7619,14 +7619,10 @@ BP DE-Saarlouis Metzer Straße,49.305459,6.74008
 BP DE-Sandersdorf-Brehna An der B 100,51.553759,12.196666
 BP DE-Sankt Ingbert Saarbrücker Straße,49.275611,7.110575
 BP DE-Schackendorf BAB,53.960054,10.260901
-BP DE-Schnaittach Schwarzleite,49.567531,11.326986
 BP DE-Schuby Westring,54.518967,9.464545
-BP DE-Schweinfurt Straßburgstraße,50.021178,10.215869
-BP DE-Schweinfurt Straßburgstraße,50.021741,10.216864
 BP DE-Schweinfurt Willi-Kaidel-Straße,50.054058,10.194942
 BP DE-Schönfeld Königsbrücker Straße,51.295416,13.730064
 BP DE-Sittensen Stader Straße,53.288789,9.507435
-BP DE-Soest Overweg,51.55337,8.158545
 BP DE-Soltau Gottlieb-Daimler-Straße,52.996895,9.921231
 BP DE-Sprockhövel Wittener Straße,51.340392,7.289735
 BP DE-Stendal Arneburger Straße,52.616963,11.868436
@@ -7904,7 +7900,6 @@ ChargePoint DE-Freiburg im Breisgau Kappler Straße 58,47.980468,7.904277
 ChargePoint DE-Friesoythe 1 Bürgermeister-Olberding-Straße,53.021811,7.882554
 ChargePoint DE-Fürth 90 Flugplatzstraße,49.501085,10.966131
 ChargePoint DE-Fürth Schwabacher Straße 382,49.443394,10.990433
-ChargePoint DE-Gevelsberg Rosendahler Straße,51.316835,7.323671
 ChargePoint DE-Goslar Dörntener Str. 2a,51.924466,10.415264
 ChargePoint DE-Gransee 13a Kraatzer Weg,53.003102,13.170179
 ChargePoint DE-Göppingen 22 Leonhard-Weiss-Straße,48.701008,9.670641
@@ -9049,6 +9044,7 @@ E.ON CZ-Ostrovačice Veveří,49.218186,16.412659
 E.ON CZ-Plzeň 3-Jižní Předměstí Sukova,49.729641,13.362791
 E.ON CZ-Praha Fajtlova,50.092559,14.290787
 E.ON CZ-Uherský Brod Močidla,49.02558,17.66029
+E.ON CZ-Zličín Sárská,50.05235,14.29565
 E.ON CZ-Čestlice Obchodní,50.00274,14.57362,5
 E.ON DE-Aachener Land,50.81714,6.21555,12
 E.ON DE-Aachener Land,50.81753,6.21413,10
@@ -9205,6 +9201,8 @@ E.ON DE-Raststätte Brokenlande,54.01393,9.93318,12
 E.ON DE-Raststätte Bühleck,51.3822,9.24682
 E.ON DE-Raststätte Dammer Berge,52.53913,8.11428,15
 E.ON DE-Raststätte Dammer Berge,52.54077,8.11229,20
+E.ON DE-Raststätte Dresdner Tor Nord,51.06304,13.57078,12
+E.ON DE-Raststätte Dresdner Tor Süd,51.06048,13.57232,12
 E.ON DE-Raststätte Eichelborn A4,50.947866,11.196966
 E.ON DE-Raststätte Eichelborn A4,50.950038,11.19506
 E.ON DE-Raststätte Gräfenhausen,49.946431,8.608135
@@ -9296,7 +9294,6 @@ E.ON DE-Wendeburg An der A2,52.340394,10.354565
 E.ON DE-Wiesbaden BAB 3,50.094704,8.352393
 E.ON DE-Wiesbaden Medenbach-Ost An der A3,50.096945,8.353355
 E.ON DE-Willich An der A52,51.23675,6.510817
-E.ON DE-Wilsdruff An der A4,51.060482,13.572325
 E.ON DE-Windischeschenbach Raststätte Waldnaabtal,49.836919,12.172393
 E.ON DE-Windischeschenbach Raststätte Waldnaabtal,49.839655,12.173199
 E.ON DE-Wolferstedt An der A38,51.435207,11.426726
@@ -9339,6 +9336,7 @@ E.ON NO-Kløfta Kongsvingervegen,60.07771,11.14611
 E.ON NO-Lillesand Legdene,58.23974,8.29801,15
 E.ON NO-Vinterbro Sjøskogenveien,59.7378,10.76395
 E.ON RO-Constanța Str. Azuro,44.19846,28.60674
+E.ON RO-Craiova Bulevardul 1 Mai,44.30259,23.7967
 E.ON SE-Arboga Burskapsvägen,59.42613,15.82931,15
 E.ON SE-Arvidsjaur Skillnadsgatan,65.59324,19.1637
 E.ON SE-Bunkeflostrand Skånegårdsvägen,55.559388,12.935508,30
@@ -9478,6 +9476,7 @@ EDEKA DE-Bad Belzig Weitzgrunder Str,52.14475,12.59097
 EDEKA DE-Bad Essen Hartmannstraße,52.310999,8.429603
 EDEKA DE-Bad Honnef Himberger Straße,50.651573,7.301564
 EDEKA DE-Bad Münder am Deister Hasselweg,52.236844,9.422222
+EDEKA DE-Bad Nenndorf Rodenberger Allee,52.32976,9.3694
 EDEKA DE-Barleben Breiteweg,52.19387,11.6233
 EDEKA DE-Barntrup Försterweg,51.98629,9.1346
 EDEKA DE-Barßel Dorfstraße,53.117899,7.822076
@@ -9814,6 +9813,7 @@ Electrify-America US-Lincoln NE 110 NW 20th Street,40.814286,-96.749142
 Electrify-America US-Livermore CA Holmes St,37.66114,-121.78095
 Electrify-America US-Marlborough MA Boston Post Rd W,42.33831,-71.58996
 Electrify-America US-Mesquite NV Pioneer Blvd,36.8065,-114.10701
+Electrify-America US-Milpitas CA Milpitas Square,37.42224,-121.91788
 Electrify-America US-North Platte NE S Dewey St,41.12047,-100.75946
 Electrify-America US-Ogallala NE Pony Express Ln,41.11276,-101.71856
 Electrify-America US-Plymouth Meeting PA W Germantown Pike,40.11699,-75.27937
@@ -9907,7 +9907,8 @@ Elinta LT-Kaunas Jonavos g.,54.90003,23.88745
 Elinta LT-Marijampolė Šv. Margaritos g.,54.55353,23.34648
 Elinta LT-Nida Taikos g.,55.30104,20.98653
 
-Eliso DE-Magdeburg Eisvogelstrasse,52.139513,11.588016
+eliso DE-Essen Bamlerstraße,51.47264,6.99121
+eliso DE-Magdeburg Eisvogelstrasse,52.13951,11.58802
 
 ELLA AT-Gemeinde Imst Brennbichl,47.221079,10.75213
 ELLA AT-Holzing Betriebsgebiet,48.13927,15.13758,20
@@ -10360,7 +10361,7 @@ EnBW DE-Dornstadt Hirschstr.,48.464632,9.941591
 EnBW DE-Dornstadt Häringsgässle,48.49015,9.861754
 EnBW DE-Dornstadt Lerchenbergstr.,48.463346,9.947873
 EnBW DE-Dornstadt Stephanusweg,48.455093,9.911361
-EnBW DE-Dorsten Endelner Feld,51.754145,6.963433
+EnBW DE-Dorsten Endelner Feld,51.75415,6.96343,30
 EnBW DE-Dorsten Hagebaumarkt,51.657127,7.013951
 EnBW DE-Dorsten Hellweg,51.670318,6.975191
 EnBW DE-Dortmund Amazon Locker,51.523632,7.487621
@@ -10597,8 +10598,6 @@ EnBW DE-Gießen Rewe,50.59414,8.681683
 EnBW DE-Gießen Shell,50.57516,8.711753
 EnBW DE-Glauchau,50.839764,12.541133
 EnBW DE-Glinde Berliner Straße,53.54651,10.23234
-EnBW DE-Goldbach Nord,53.000779,9.179497
-EnBW DE-Goldbach Süd,52.998672,9.181154
 EnBW DE-Goldene Bremm Nord,49.2095,6.966424
 EnBW DE-Goldene Bremm Süd,49.207642,6.967181
 EnBW DE-Goslar,51.932551,10.409682
@@ -10634,7 +10633,6 @@ EnBW DE-Gärtringen Hauptstr.,48.642127,8.900531
 EnBW DE-Gärtringen Nufringer Str.,48.625422,8.923513
 EnBW DE-Görlitz Christoph-Lüders-Straße,51.155043,14.970191
 EnBW DE-Göttingen tegut,51.554899,9.939627
-EnBW DE-Göttingen West,51.494746,9.876191
 EnBW DE-Güglingen Stadtgraben,49.067194,9.000795
 EnBW DE-Günzburg Spielplatzstraße,48.433351,10.293138
 EnBW DE-Güstrow,53.815456,12.19278
@@ -10775,7 +10773,6 @@ EnBW DE-Hüttenberg Im Dollenstück,50.521949,8.590575
 EnBW DE-Igersheim,49.486855,9.820828
 EnBW DE-Illertal Ost,48.124722,10.11212,20
 EnBW DE-Illertal West,48.125496,10.10963,20
-EnBW DE-Ilsfeld A81 Raststätte Wunnenstein,49.044439,9.2618
 EnBW DE-Ilsfeld Porschestraße,49.057791,9.267089
 EnBW DE-Ilshofen Am Feuersee,49.168867,9.917508
 EnBW DE-Immendingen Am Freizeitzentrum,47.934095,8.716615
@@ -11114,7 +11111,7 @@ EnBW DE-Mühlhausen/Thüringen Norma,51.205463,10.468972
 EnBW DE-Mühlheim an der Donau Alter Schulplatz,48.02267,8.888749
 EnBW DE-Mühlingen Hauptstr.,47.912879,9.017638
 EnBW DE-Mülheim an der Ruhr Lidl,51.43097,6.86094
-EnBW DE-Mülheim an der Ruhr MediaMarkt,51.45757,6.88114
+EnBW DE-Mülheim an der Ruhr Mannesmannallee,51.45742,6.88145,20
 EnBW DE-Mülheim-Kärlich In der Pützgewann,50.397121,7.512441,25
 EnBW DE-Münchberg August-Horch-Straße,50.202439,11.779644
 EnBW DE-Münchberg Theodor-Heuss-Straße,50.189764,11.777102
@@ -11294,6 +11291,9 @@ EnBW DE-Raststätte Bruchsal Ost,49.16299,8.57098,12
 EnBW DE-Raststätte Bruchsal West,49.16091,8.56703,8
 EnBW DE-Raststätte Denkendorf Nord,48.693856,9.303734,15
 EnBW DE-Raststätte Dollenberg,50.68836,8.29598,15
+EnBW DE-Raststätte Goldbach Nord,53.00084,9.17945,20
+EnBW DE-Raststätte Goldbach Süd,52.99874,9.18113,20
+EnBW DE-Raststätte Göttingen West,51.49462,9.87613,20
 EnBW DE-Raststätte im Hegau A81,47.86136,8.78631
 EnBW DE-Raststätte Inntal,47.61084,12.20169
 EnBW DE-Raststätte Inntal,47.61265,12.20067
@@ -11302,6 +11302,8 @@ EnBW DE-Raststätte Langen-Bergheim,50.24843,8.99398
 EnBW DE-Raststätte Langen-Bergheim,50.250597,8.994507
 EnBW DE-Raststätte Lüneburger Heide Ost,53.1093,9.984
 EnBW DE-Raststätte Lüneburger Heide West,53.10941,9.98134,20
+EnBW DE-Raststätte Wunnenstein Ost,49.0451,9.26597,20
+EnBW DE-Raststätte Wunnenstein West,49.04449,9.26187,12
 EnBW DE-Ratingen Hohenstein A52,51.290187,6.80453
 EnBW DE-Ratzeburg Hagebaumarkt,53.699656,10.741201
 EnBW DE-Ratzeburg Penny,53.69123,10.7938
@@ -11768,7 +11770,7 @@ EnBW DE-Wangen im Allgäu Friedrich-Ebert-Straße,47.68653,9.83722
 EnBW DE-Wangen im Allgäu Hafnergasse,47.68665,9.83463
 EnBW DE-Wangen im Allgäu Kellerbühlstraße,47.640403,9.76165
 EnBW DE-Wangen im Allgäu Liebigstraße,47.68411,9.82894
-EnBW DE-Wangen im Allgäu Ravensburger Straße,47.694897,9.828033,10
+EnBW DE-Wangen im Allgäu Ravensburger Straße,47.6949,9.82803
 EnBW DE-Wangen im Allgäu Scherrichmühlweg,47.687603,9.838406,10
 EnBW DE-Wangen im Allgäu Siemensstraße,47.696577,9.822768
 EnBW DE-Wardenburg Huntetal Ost,53.041733,8.221214
@@ -11852,7 +11854,6 @@ EnBW DE-Wonnegau Ost,49.647041,8.293444
 EnBW DE-Wonnegau West,49.644547,8.290185
 EnBW DE-Worms Mainzer Straße,49.64475,8.36274
 EnBW DE-Worms Petrus-Dorn-Straße,49.644339,8.363131,20
-EnBW DE-Wunnenstein Ost,49.045172,9.265944
 EnBW DE-Wuppertal Bauhaus,51.24568,7.187933
 EnBW DE-Wuppertal Hellweg,51.275352,7.152883
 EnBW DE-Wuppertal Schützenstr.,51.279274,7.185758
@@ -12140,6 +12141,7 @@ Energie-Klagenfurt AT-Klagenfurt 8.-Mai-Straße,46.62319,14.3072
 
 Energie-Oberösterreich AT-Bad Ischl Götzstraße,47.71369,13.62392
 Energie-Oberösterreich AT-Liezen Gesäusestraße,47.55972,14.25383,40
+Energie-Oberösterreich AT-Linz Böhmerwaldstraße,48.29257,14.29,25
 Energie-Oberösterreich AT-Linz Energiestraße,48.29268,14.29067,25
 
 energie-schwaben DE-Augsburg Bayerstraße,48.343625,10.884503
@@ -12888,7 +12890,7 @@ EWE-GO DE-Dinklage Am Markt,52.66257,8.12308
 EWE-GO DE-Dissen Versmolder Straße,52.102106,8.197373
 EWE-GO DE-Donauwörth An der Westspange,48.718231,10.761679
 EWE-GO DE-Dornum Bensjücher Weg,53.64925,7.424618
-EWE-GO DE-Dorsten Endelner Feld,51.754598,6.963776
+EWE-GO DE-Dorsten Endelner Feld,51.7546,6.96378,25
 EWE-GO DE-Dorsten Europaplatz,51.657855,6.968666
 EWE-GO DE-Dortmund Evinger Straße,51.546122,7.460192
 EWE-GO DE-Dortmund Werkmeisterstraße,51.524822,7.493616
@@ -13785,7 +13787,7 @@ Fastned DE-Bochum,51.472019,7.192162
 Fastned DE-Boppard-Buchholz,50.21377,7.548003
 Fastned DE-Dinslaken,51.58101,6.76406
 Fastned DE-Düren Rurbenden,50.840567,6.45579
-Fastned DE-Eching,48.306759,11.639883,10
+Fastned DE-Eching Fraunhoferstraße,48.30676,11.63988
 Fastned DE-Egelsbach Kurt-Schumacher-Ring,49.962742,8.673279
 Fastned DE-Frankfurt am Main Eugen-Hartmann-Straße,50.14704,8.609
 Fastned DE-Friedberg,48.407453,10.952015
@@ -14089,6 +14091,7 @@ GeniePoint GB-Petersfield Rams Walk,51.00511,-0.93741
 GENOL AT-Mistelbach Wirtschaftspark,48.56421,16.63686
 
 GETEC DE-Bremen AG-Weser-Straße,53.10963,8.75083
+GETEC DE-Bremen Konsul-Smidt-Straße,53.08661,8.78263
 GETEC DE-Bremen Waterfront,53.11118,8.74851
 GETEC DE-Böblingen Herrenberger Straße,48.67686,8.97468
 
@@ -14604,6 +14607,7 @@ Iberdrola ES-Benidorm C. de La Haya,38.54303,-0.10236
 Iberdrola ES-Bilbao Abandoibarra Etorb.,43.26823,-2.93333
 Iberdrola ES-Bullas Ctra. de la Copa,38.05288,-1.66082
 Iberdrola ES-Cabo de Palos Es Paso,37.6276,-0.71011
+Iberdrola ES-Calp Carrer Ausias March,38.64616,0.05153
 Iberdrola ES-Calvarrasa de Abajo Crta de Madrid,40.945784,-5.554589
 Iberdrola ES-Carbajosa de la Sagrada,40.94678,-5.642569
 Iberdrola ES-Cuenca Av. de los Reyes Católicos,40.0593,-2.13878
@@ -14622,6 +14626,7 @@ Iberdrola ES-Getafe Av. Río Guadalquivir,40.27163,-3.69702
 Iberdrola ES-Gran Alacant Carrer de Finlandia,38.233337,-0.550077
 Iberdrola ES-Huelva,37.306245,-6.87322
 Iberdrola ES-Huércal de Almería Ctra. Almería,36.87233,-2.44416
+Iberdrola ES-Jaca Av. Ntra. Sra. de la Victoria,42.56541,-0.56446
 Iberdrola ES-La Belga C. de los Hermanos Quirós Río,43.39067,-5.78135
 Iberdrola ES-La Franca Bo. las Arenas,43.38562,-4.57127
 Iberdrola ES-Las Rozas de Madrid C. Cruces,40.48995,-3.87419
@@ -15057,7 +15062,7 @@ Ionity AT-Kaiserwald,46.959244,15.382045
 Ionity AT-Klösterle,47.129066,10.060559
 Ionity AT-Meggenhofen Trappenhof,48.18382,13.78581,20
 Ionity AT-Meggenhofen Trappenhof,48.18383,13.78539,20
-Ionity AT-Nassereith,47.327313,10.819309
+Ionity AT-Nassereith,47.32749,10.81904,30
 Ionity AT-Parndorf Richard Erlinger Platz,47.975945,16.854379
 Ionity AT-Pinkafeld,47.373952,16.093842
 Ionity AT-Raststätte Mondsee,47.83664,13.39583,30
@@ -15135,8 +15140,6 @@ Ionity DE-Dietmannsried Glaserstraße,47.811904,10.302936,30
 Ionity DE-Donautal Ost,48.588065,13.366667
 Ionity DE-Donautal West,48.589422,13.365369
 Ionity DE-Dormagen Hamburger Straße,51.093271,6.807789
-Ionity DE-Dresdner Tor Nord,51.063214,13.571071
-Ionity DE-Dresdner Tor Süd,51.060227,13.571959
 Ionity DE-Eching Dieselstraße,48.310848,11.646729
 Ionity DE-Eichenzell Rhönhof,50.48831,9.70852,20
 Ionity DE-Eifel Ost,50.070186,6.880905
@@ -15148,8 +15151,6 @@ Ionity DE-Friedberg Winterbruckenweg,48.40641,10.95235,35
 Ionity DE-Friedrichshafen Am Flugplatz,47.67253,9.523016
 Ionity DE-Garching bei München Parkring,48.249323,11.634365
 Ionity DE-Geseke Bürener Straße,51.598246,8.51547
-Ionity DE-Goldbach Nord,53.000606,9.179514
-Ionity DE-Goldbach Süd,52.998531,9.181213
 Ionity DE-Großweitzschen Heiterer Blick,51.153685,13.118279
 Ionity DE-Haidt Nord,49.780852,10.244797
 Ionity DE-Haidt Süd,49.779352,10.246493
@@ -15185,7 +15186,7 @@ Ionity DE-Lichtendorf Nord,51.468319,7.594014
 Ionity DE-Lichtendorf Süd,51.46802,7.59722,60
 Ionity DE-Linthe Westfalenstraße,52.160118,12.779906
 Ionity DE-Lonetal Ost,48.584246,10.178939,10
-Ionity DE-Lonetal West,48.583937,10.175605,10
+Ionity DE-Lonetal West,48.58394,10.1756,11
 Ionity DE-Lutterberg,51.370342,9.633558,11
 Ionity DE-Lutterberg,51.370434,9.63373,11
 Ionity DE-Mahlberg Ost,48.30885,7.79153,15
@@ -15203,7 +15204,7 @@ Ionity DE-Nempitz,51.290187,12.137601,7
 Ionity DE-Neuenstein Lohemerfeld,49.207007,9.639273
 Ionity DE-Neumünster Prehnsfelder Weg,54.092671,9.92914
 Ionity DE-Niederöfflingen An der BAB A1,50.068492,6.880212
-Ionity DE-Nörten-Hardenberg Unter dem Pferdestiege,51.628898,9.922462
+Ionity DE-Nörten-Hardenberg Unter dem Pferdestiege,51.6289,9.92246,40
 Ionity DE-Oberhausen Brammenring,51.489778,6.887922
 Ionity DE-Oberhonnefeld,50.562591,7.527838
 Ionity DE-Oberkrämer Im Gewerbepark,52.709772,13.107945
@@ -15229,10 +15230,16 @@ Ionity DE-Raststätte Dammer Berge Ost,52.53915,8.11491,30
 Ionity DE-Raststätte Dammer Berge West,52.54077,8.1129,25
 Ionity DE-Raststätte Denkendorf Nord,48.69368,9.30332,25
 Ionity DE-Raststätte Dollenberg,50.68853,8.29568,15
+Ionity DE-Raststätte Dresdner Tor Nord,51.06325,13.57125,30
+Ionity DE-Raststätte Dresdner Tor Süd,51.06023,13.57196,30
+Ionity DE-Raststätte Goldbach Nord,53.00056,9.17968,20
+Ionity DE-Raststätte Goldbach Süd,52.99833,9.18139,30
 Ionity DE-Raststätte Lüneburger Heide Ost,53.11004,9.98406
 Ionity DE-Raststätte Lüneburger Heide West,53.10922,9.98197,30
 Ionity DE-Raststätte Reinhardshain,50.62186,8.89726,30
 Ionity DE-Raststätte Reinhardshain,50.6229,8.89498,30
+Ionity DE-Raststätte Wunnenstein Ost,49.04541,9.26625,20
+Ionity DE-Raststätte Wunnenstein West,49.04422,9.26157,25
 Ionity DE-Remscheid Ost,51.158407,7.230332
 Ionity DE-Riedener Wald Ost,49.944184,10.019955
 Ionity DE-Riedener Wald West,49.945693,10.016739,30
@@ -15259,8 +15266,6 @@ Ionity DE-Wolfsburg Braunschweiger Str.,52.416656,10.783389
 Ionity DE-Wolfsburg Detmeroder Markt,52.392241,10.753713
 Ionity DE-Wolfsburg Forum AutoVision,52.424872,10.745689
 Ionity DE-Wolfsburg Wolfsburg Bürozentrum Nord,52.445204,10.78523
-Ionity DE-Wunnenstein Ost,49.045334,9.266223
-Ionity DE-Wunnenstein West,49.044276,9.261639
 Ionity DE-Wörrstadt Sophie-Opel-Straße,49.840117,8.14172
 Ionity DE-Zella-Mehlis An der Quelle,50.644522,10.685289,30
 Ionity DE-Überlingen Abigstraße,47.775138,9.186088
@@ -15406,7 +15411,7 @@ Ionity FR-Tavel Sud,43.999633,4.700191
 Ionity FR-Tours La Longue Vue,47.47574,0.77685
 Ionity FR-Vendée,46.573538,-1.118014
 Ionity FR-Veyre,45.660128,3.153525
-Ionity FR-Vidauban Sud,43.413842,6.451935
+Ionity FR-Vidauban Sud,43.41369,6.45157,30
 Ionity FR-Village Catalan Est,42.578429,2.846994
 Ionity FR-Village Catalan Ouest,42.577784,2.848341
 Ionity FR-Villaines la Gonais,48.125475,0.622302
@@ -15454,8 +15459,7 @@ Ionity IT-Affi SP29b,45.552104,10.788347
 Ionity IT-Agira,37.57169,14.4797
 Ionity IT-Battipaglia,40.6147,14.96799
 Ionity IT-Binasco,45.33552,9.10753
-Ionity IT-Brenner,47.006302,11.506653,30
-Ionity IT-Brenner,47.006671,11.506571
+Ionity IT-Brenner,47.00655,11.50668
 Ionity IT-Brugnato Ovest,44.22647,9.72971
 Ionity IT-Carpi,44.77544,10.86072
 Ionity IT-Ceriale Sud,44.08777,8.20626
@@ -15504,10 +15508,10 @@ Ionity NO-Dombås,62.07428,9.12514
 Ionity NO-Elverum Bakketungata,60.8804,11.54935,30
 Ionity NO-Gol,60.70205,8.94337
 Ionity NO-Høydalsmo,59.49497,8.2027
-Ionity NO-Kjerlingland,58.23655,8.29948
 Ionity NO-Klett,63.324443,10.305985,30
 Ionity NO-Lakselv Arne M Holdens vei,70.05175,24.96186
 Ionity NO-Leirvik,59.77503,5.48611
+Ionity NO-Lillesand,58.23655,8.29948,25
 Ionity NO-Lura,58.87322,5.72126
 Ionity NO-Nordkjosbotn Torgveien,69.21818,19.56086,25
 Ionity NO-Ringdalskogen,59.11234,10.11033
@@ -16047,6 +16051,7 @@ Kaufland RO-Carei,47.682598,22.473633
 Kaufland RO-Cluj-Napoca,46.759534,23.563763
 Kaufland RO-Constanța,44.223761,28.592419,10
 Kaufland RO-Craiova,44.300888,23.796626
+Kaufland RO-Curtea de Argeș Str. Albești,45.16711,24.66922
 Kaufland RO-Deva,45.873371,22.919387
 Kaufland RO-Focșani Bulevardul Brăilei,45.688956,27.194849
 Kaufland RO-Focșani Strada Mărășești,45.707378,27.188585
@@ -16384,6 +16389,7 @@ Lidl AT-Weiz Herta-Nest-Straße,47.21642,15.62909
 Lidl AT-Wels,48.164524,14.034472
 Lidl AT-Wernberg,46.621155,13.942641
 Lidl AT-Wien Breitenfurter Straße,48.140738,16.291546
+Lidl AT-Wien Breitenleer Straße,48.24895,16.45286
 Lidl AT-Wien Davidgasse,48.173558,16.366361
 Lidl AT-Wien Erzherzog-Karl-Straße,48.224582,16.469875
 Lidl AT-Wien Jedletzbergerstraße,48.17042,16.45824
@@ -16686,6 +16692,7 @@ Lidl DE-Gera Straße des Bergmanns 10,50.892978,12.084097
 Lidl DE-Gera Straße des Friedens 32,50.869837,12.069055
 Lidl DE-Germering Industriestraße 19,48.132423,11.379057
 Lidl DE-Geseke Störmeder Straße 40,51.639535,8.49417
+Lidl DE-Gevelsberg Rosendahler Straße,51.31683,7.32367
 Lidl DE-Giengen an der Brenz Sundgaustraße 2,48.620467,10.232852
 Lidl DE-Gießen Georg-Elser-Straße,50.588982,8.707925,25
 Lidl DE-Gießen Sudetenlandstraße,50.594622,8.680462
@@ -16714,8 +16721,7 @@ Lidl DE-Hamburg Behringstraße,53.557204,9.903159
 Lidl DE-Hamburg Dehnhaide,53.57917,10.05085
 Lidl DE-Hamburg Dehnhaide,53.57917,10.05085,30
 Lidl DE-Hamburg Kieler Straße,53.585313,9.93338
-Lidl DE-Hamburg Notkestraße,53.57064,9.875997,10
-Lidl DE-Hamburg Osdorfer Landstraße 8,53.570414,9.876947
+Lidl DE-Hamburg Notkestraße,53.57064,9.876
 Lidl DE-Hamburg Pinneberger Straße,53.63269,9.90808
 Lidl DE-Hamburg Reinstorfweg,53.50118,9.9918
 Lidl DE-Hamburg-Duvenstedt Poppenbütteler Chaussee 35,53.704703,10.103218
@@ -16750,7 +16756,6 @@ Lidl DE-Hoppegarten,52.540585,13.63869
 Lidl DE-Horhausen Landblum 2,50.592945,7.529492
 Lidl DE-Hoya Auf dem Kuhkamp,52.81046,9.13744
 Lidl DE-Hoyerswerda Schulstr. 2a,51.437975,14.237915
-Lidl DE-Hönow Mahlsdorfer Str. 82,52.53978,13.638347
 Lidl DE-Höxter Lütmarser Straße 76,51.773981,9.360177
 Lidl DE-Hürth Luxemburger Straße,50.89371,6.90339
 Lidl DE-Ibbenbüren Osnabrücker Straße 97,52.289117,7.72726
@@ -17335,6 +17340,7 @@ mblty DE-Grabenstätt Oberwinkl,47.8279,12.52106
 mblty DE-Lederhose Neuensorga,50.80324,11.89429
 mblty DE-Lehrte Straßburger Straße,52.385283,9.953135
 mblty DE-Magstadt Aichern,48.74423,8.94824
+mblty DE-Raststätte Göttingen West,51.49487,9.87619,10
 mblty DE-Raststätte Werratal,51.006859,10.180879
 
 Megatel SI-Bled Prešernova cesta,46.36948,14.10986
@@ -17382,6 +17388,7 @@ Mer AT-Tulln an der Donau Königstetter Straße,48.31984,16.08209
 Mer AT-Unterweitersdorf Radingdorf,48.35939,14.48012
 Mer AT-Wien Hadikgasse,48.19301,16.27555,20
 Mer AT-Wien Hietzinger Kai,48.19169,16.27922,20
+Mer AT-Wien Seestadtstraße,48.21591,16.50534,30
 Mer AT-Wien Triester Straße,48.16546,16.34595
 Mer AT-Wiener Neustadt Nikolaus-August-Otto-Straße,47.843871,16.246763
 Mer AT-Ybbs Bergland Center,48.160658,15.106513
@@ -17398,6 +17405,7 @@ Mer DE-Arnbruck Gemeindezentrum,49.130103,12.992014
 Mer DE-Arnschwang Kirchgasse,49.271389,12.815981
 Mer DE-Arrach Regentalstraße,49.197059,13.008284
 Mer DE-Auerbach Hauptstraße,48.803448,13.098053
+Mer DE-Autohof Fulda-Nord,50.58114,9.70631
 Mer DE-Bad Frankenhausen August-Bebel-Platz,51.35557,11.102238
 Mer DE-Bad Frankenhausen Fliederweg,51.354608,11.117202
 Mer DE-Bad Frankenhausen Kantor Bischoff Platz,51.354806,11.097758
@@ -17440,8 +17448,6 @@ Mer DE-Deggendorf Hans-Obser-Straße,48.828342,12.957826
 Mer DE-Delmenhorst Seestraße,53.029624,8.657849
 Mer DE-Eltville am Rhein Kiliansring,50.025141,8.117298
 Mer DE-Freiburg im Breisgau Hermann-Mitsch-Straße,48.02792,7.83423,20
-Mer DE-Fulda Autohof Fulda-Nord,50.581137,9.706307
-Mer DE-Fulda Nord An der A7,50.581123,9.706365
 Mer DE-Furtwangen im Schwarzwald Allmendstraße,48.04978,8.21279
 Mer DE-Grammow Raststätte Lindholz,54.054634,12.630382
 Mer DE-Herrenberg Daimlerstraße,48.60211,8.87012
@@ -17660,7 +17666,6 @@ MOON DE-Frankfurt am Main Strahlenberger Weg 30,50.103814,8.705839
 MOON DE-Frankfurt Mainzer Landstraße 406,50.102222,8.62366
 MOON DE-Freiburg im Breisgau Tullastraße 55,48.02355,7.85006
 MOON DE-Gersthofen Augsburger Straße 51-53,48.417579,10.878659
-MOON DE-Gießen Zeppelinstraße 3,50.592795,8.714469
 MOON DE-Hamburg Bornkampsweg 2-4,53.565104,9.919498
 MOON DE-Hamburg Fruchtallee 29,53.569186,9.958189
 MOON DE-Hamburg Großmoorbogen,53.46218,10.01123,20
@@ -17830,23 +17835,23 @@ N-ERGIE DE-Lauf an der Pegnitz Waldluststraße,49.50206,11.28445
 N-ERGIE DE-Leutershausen Am Kirchweihplatz,49.299294,10.410582
 N-ERGIE DE-Neunkirchen am Sand Bahnhofplatz,49.52075,11.32141
 N-ERGIE DE-Neusitz Schaffeldstraße,49.374842,10.235117
-N-Ergie DE-Nürnberg Allersberger Straße,49.43809,11.09047
+N-ERGIE DE-Nürnberg Allersberger Straße,49.43809,11.09047
 N-ERGIE DE-Nürnberg Finkenbrunn,49.40932,11.07297
 N-ERGIE DE-Nürnberg Gutenstetter Straße,49.436108,11.002702
-N-Ergie DE-Nürnberg Keßlerplatz,49.45305,11.0928
-N-Ergie DE-Nürnberg Königstorgraben,49.44951,11.08325
+N-ERGIE DE-Nürnberg Keßlerplatz,49.45305,11.0928
+N-ERGIE DE-Nürnberg Königstorgraben,49.44951,11.08325
 N-ERGIE DE-Nürnberg Norikerstraße,49.45128,11.10351,25
 N-ERGIE DE-Nürnberg Passauer Straße,49.44834,11.12298
-N-Ergie DE-Nürnberg Singerstraße,49.438478,11.068874
-N-Ergie DE-Nürnberg Sulzbacher Straße,49.45787,11.09089
-N-Ergie DE-Nürnberg Südliche Fürther Straße,49.44859,11.06246,25
+N-ERGIE DE-Nürnberg Singerstraße,49.43848,11.06887
+N-ERGIE DE-Nürnberg Sulzbacher Straße,49.45787,11.09089
+N-ERGIE DE-Nürnberg Südliche Fürther Straße,49.44859,11.06246,25
 N-ERGIE DE-Nürnberg Südwestpark,49.427815,11.019527
 N-ERGIE DE-Roßtal Dinkelsbühler Straße,49.3633,10.87108
 N-ERGIE DE-Schnaittach Festungsstraße,49.559536,11.34225
 N-ERGIE DE-Schnaittach Simonshofer Straße,49.556626,11.337581
 N-ERGIE DE-Schwanstetten Alte Straße,49.302313,11.122246
 N-ERGIE DE-Solnhofen Bahnhofstraße,48.8921,10.99286
-N-Ergie DE-Sulzbach-Rosenberg Bayreuther Straße,49.50567,11.74536
+N-ERGIE DE-Sulzbach-Rosenberg Bayreuther Straße,49.50567,11.74536
 N-ERGIE DE-Thurnau Marktplatz,50.0245,11.395389
 N-ERGIE DE-Wiesentheid Jahnstraße,49.7924,10.35127
 
@@ -18278,6 +18283,7 @@ OMV AT-Gföhl Langenloiser Straße,48.51218,15.51018
 OMV AT-Haag Straße zur Autobahn,48.11527,14.57095
 OMV AT-Korneuburg Wiener Straße,48.34058,16.33776
 OMV AT-Raststation Deutschfeistritz,47.20517,15.31583
+OMV AT-Wien Groß-Enzersdorfer Straße,48.21678,16.4937
 OMV HU-Budapest Sibrik Miklós út,47.469994,19.156208
 OMV HU-Pécs Siklósi út,46.057065,18.232504
 OMV HU-Révfülöp Badacsonyi út hrsz.,46.826208,17.605703
@@ -18475,6 +18481,7 @@ Petrol HR-Rovinj Ul. Braće Božić,45.07967,13.66187
 Petrol HR-Slavonski Brod Ul. Petra Svačića,45.16282,18.00911
 Petrol HR-Split Mall of Split,43.519,16.48308
 Petrol HR-Trnbusi Mosor,43.49345,16.78422
+Petrol HR-Zagreb Ul. Vjenceslava Richtera,45.78206,15.98189
 Petrol ME-Podgorica Ilije Plamenca,42.43088,19.24341
 Petrol SI-Bled Ljubljanska cesta,46.36867,14.11159
 Petrol SI-Dogoše Maribor,46.531285,15.701023
@@ -18499,6 +18506,7 @@ Pfalzwerke AT-Rutzenmoos Am Moosgraben,47.95532,13.72718,20
 Pfalzwerke AT-Seiersberg Werschweg,47.00849,15.40859
 Pfalzwerke AT-St. Pölten Stifterstraße,48.183939,15.6151
 Pfalzwerke AT-Wels Gunskirchener Straße,48.148595,13.974621
+Pfalzwerke AT-Wien Stadlauer Straße,48.2302,16.45655
 Pfalzwerke AT-Wiener Neudorf IZ NÖ-Süd Straße,48.07306,16.32988
 Pfalzwerke DE-Achern Severinstraße 8,48.634319,8.06005
 Pfalzwerke DE-Adelsheim Untere Austraße 38,49.396887,9.393617
@@ -18999,6 +19007,7 @@ Polyfazer CZ-Kosmonosy Boleslavská,50.43351,14.92516
 Polyfazer RO-Cornu de Jos DN1,45.148981,25.697431
 
 Porsche AT-Salzburg Alpenstraße,47.760934,13.072588
+Porsche AT-Wien Leopoldauer Straße,48.16525,16.32001
 Porsche CH-Feusisberg Firststrasse,47.19107,8.74261
 Porsche CH-Maienfeld Industriestrasse,47.001744,9.523738
 Porsche CH-Schlieren Bernstrasse,47.40219,8.44036
@@ -19537,7 +19546,7 @@ Salzburg AT-Schladming Salzburger-Siedlung,47.390831,13.658943,30
 Salzburg AT-St. Johann im Pongau Hauptstraße,47.34928,13.20406
 Salzburg AT-St. Johann im Pongau Industriestraße,47.35481,13.19913
 Salzburg AT-St. Johann im Pongau Palfengasse,47.35379,13.19477
-Salzburg AT-St. Michael im Lungau Gewerbestraße,47.096423,13.633386,25
+Salzburg AT-St. Michael im Lungau Gewerbestraße,47.09642,13.63339,12
 Salzburg AT-St. Wolfgang Robert-Stolz-Straße,47.739208,13.43921
 Salzburg AT-Strobl Wolfgangseestraße,47.712972,13.485245
 Salzburg AT-Tamsweg Sauerfelder Straße,47.12661,13.81435
@@ -19820,7 +19829,6 @@ Shell DE-Velten Rosa-Luxemburg-Straße,52.678259,13.165712
 Shell DE-Vöhringen Memminger Straße,48.276764,10.079436
 Shell DE-Waiblingen Mayenner Straße,48.825379,9.30886
 Shell DE-Walzbachtal Wössinger Straße,49.01768,8.598392
-Shell DE-Wangen im Allgäu Am Waltersbühl,47.69388,9.826014
 Shell DE-Wedemark Hessenweg,52.55275,9.77781
 Shell DE-Weida Neustädter Straße,50.777695,12.04717
 Shell DE-Weilerbach Danziger Straße,49.477217,7.63979
@@ -19892,8 +19900,6 @@ Skoda DE-Gelsenkirchen Ewaldstraße,51.57765,7.11335
 Smatrics AT-Altlengbach Steinhäusl,48.157892,15.941884
 Smatrics AT-Anif Salzachtalstraße,47.72713,13.06038,6
 Smatrics AT-Ansfelden Ikea-Platz,48.197307,14.249527
-Smatrics AT-Ansfelden Traunuferstraße,48.210569,14.273273
-Smatrics AT-Ansfelden Traunuferstraße,48.211537,14.27498
 Smatrics AT-Bad Ischl Sulzbacherstraße,47.69079,13.62284
 Smatrics AT-Bad Voslau Flugfeldstraße,47.965965,16.23926
 Smatrics AT-Bad Voslau Flugfeldstraße,47.966088,16.238587
@@ -20340,8 +20346,8 @@ SW-Kiel DE-Mönkeberg Am Eksol,54.348503,10.188428
 SW-Kiel DE-Schönberg Bürgermeister-Wiese-Straße,54.39314,10.37349
 SW-Klagenfurt AT-Klagenfurt 10.-Oktober-Straße,46.62162,14.30779
 SW-Klagenfurt AT-Klagenfurt Kardinalplatz,46.62392,14.31198
-SW-Klagenfurt AT-Klagenfurt Pyramidenkogelstraße,47.78202,16.19118
 SW-Klagenfurt AT-Klagenfurt Völkermarkter Straße,46.62887,14.3501
+SW-Klagenfurt AT-Linden Höhe,46.60924,14.14439
 SW-Klagenfurt AT-Linden Pyramidenkogel,47.06746,14.87888
 SW-Konstanz DE-Konstanz Bruder-Klaus-Straße,47.673191,9.173572
 SW-Konstanz DE-Konstanz Max-Stromeyer-Straße,47.67506,9.16375
@@ -20362,6 +20368,7 @@ SW-Leipzig DE-Leipzig Goldschmidtstraße,51.335169,12.38933
 SW-Leipzig DE-Leipzig Handelsstraße,51.4007,12.40029
 SW-Leipzig DE-Leipzig Karl-Tauchnitz-Straße,51.330694,12.363159
 SW-Leipzig DE-Leipzig Ludwigsburger Straße,51.32047,12.29036
+SW-Leipzig DE-Leipzig Naunhofer Straße,51.31398,12.42138
 SW-Leipzig DE-Leipzig Paunsdorfer Allee,51.34847,12.47552
 SW-Leipzig DE-Leipzig Peterssteinweg,51.332325,12.374098
 SW-Leipzig DE-Leipzig Stötteritzer Straße,51.327502,12.4025
@@ -20485,6 +20492,7 @@ SW-Stralsund DE-Stralsund Gustower Weg,54.27091,13.11539
 SW-Stralsund DE-Stralsund Gustower Weg,54.27101,13.11475
 SW-Strausberg DE-Strausberg Herrenseeallee,52.55756,13.87258
 SW-Stuttgart DE-Stuttgart Hedelfinger Straße,48.769774,9.248443
+SW-Treuchtlingen DE-Treuchtlingen Fischergasse,48.95573,10.9098
 SW-Trier DE-Trier Am Gillenbach,49.76767,6.6242
 SW-Trier DE-Trier Ostallee,49.75595,6.65058
 SW-Troisdorf DE-Troisdorf Echternacher Straße,50.819357,7.113497
@@ -21359,6 +21367,8 @@ Vimmerby-Energi SE-Vimmerby Västra Tullportsgatan,57.66819,15.8544,25
 
 Vinschgauer-Energie IT-Prad am Stilfserjoch Kreuzweg,46.61733,10.58917
 
+VIOCON DE-Schönberg Maukenreuth,48.82422,13.34283
+
 Vion IT-Martello Ennewasser,46.5711,10.79594
 Vion IT-Sluderno Via Venosta,46.66406,10.58232
 
@@ -21486,6 +21496,7 @@ Volkswagen DE-Fürth Weinheimer Straße,49.639749,8.762289
 Volkswagen DE-Garmisch-Partenkirchen Münchner Str. 100,47.507747,11.105271
 Volkswagen DE-Geiselwind Fischhausstraße,49.77292,10.4769
 Volkswagen DE-Gießen Grünberger Straße,50.58467,8.6889
+Volkswagen DE-Gießen Zeppelinstraße,50.5928,8.71447
 Volkswagen DE-Gifhorn Wolfsburger Str. 3,52.4629,10.545884
 Volkswagen DE-Gladenbach Bahnhofstraße,50.7661,8.583046
 Volkswagen DE-Greven Am Eggenkamp,52.10421,7.62279
@@ -21648,7 +21659,7 @@ Wenea ES-Almuradiel A-4,38.41779,-3.49883
 Wenea ES-Autovía del Noroeste,41.13219,-4.77741
 Wenea ES-Curtis N-634,43.18162,-7.9678
 Wenea ES-Lugo Playa de Sacido,43.67723,-7.61381
-WENEA ES-Madrid Calle Roberto Domingo,40.433794,-3.661095
+Wenea ES-Madrid Calle Roberto Domingo,40.43379,-3.66109
 Wenea ES-Tapia de Casariego N-634,43.54202,-6.98357
 Wenea GB-Plymouth Somerset Pl,50.38157,-4.16068
 
@@ -21729,13 +21740,14 @@ WEVG DE-Salzgitter Liebenhaller Straße,52.04621,10.37178
 
 Wien-Energie AT-Flughafen Wien Schwechat,48.126,16.5653
 Wien-Energie AT-Guntramsdorf Rathaus Viertel,48.0489,16.31272
-Wien-Energie AT-Leobersdorf Portugieserstrasse,47.932061,16.200985
-Wien-Energie AT-Leobersdorf Portugieserstrasse,47.932418,16.200122
+Wien-Energie AT-Leobersdorf Portugieserstrasse,47.93226,16.20056,55
 Wien-Energie AT-Traiskirchen Tribuswinkel Neurißgasse,47.991227,16.275386
 Wien-Energie AT-Wien Amerlingstraße,48.19703,16.35125
 Wien-Energie AT-Wien Antonigasse,48.2225,16.33746
+Wien-Energie AT-Wien Austria Center,48.23459,16.41352
 Wien-Energie AT-Wien Breite Gasse,48.20365,16.35691
 Wien-Energie AT-Wien Breitenfelder Gasse,48.21412,16.34291
+Wien-Energie AT-Wien Breitenfurter Straße,48.14641,16.29639
 Wien-Energie AT-Wien Cumberlandstraße,48.19175,16.30988
 Wien-Energie AT-Wien Felberstraße,48.197281,16.335561
 Wien-Energie AT-Wien Guglgasse,48.185265,16.421039
@@ -21746,6 +21758,7 @@ Wien-Energie AT-Wien Jörgerstraße,48.21776,16.33778
 Wien-Energie AT-Wien Khevenhüllerstraße,48.24674,16.30767
 Wien-Energie AT-Wien Koberweingasse,48.20001,16.31728
 Wien-Energie AT-Wien Lerchenfelder Straße,48.2071,16.34592
+Wien-Energie AT-Wien Liesinger Platz,48.1356,16.28382
 Wien-Energie AT-Wien Margaretengürtel,48.180155,16.352097
 Wien-Energie AT-Wien Martinstraße,48.22019,16.34015
 Wien-Energie AT-Wien Montleartstraße,48.210903,16.304506
@@ -21753,6 +21766,7 @@ Wien-Energie AT-Wien Ottakringer Straße,48.21346,16.32004
 Wien-Energie AT-Wien Perfektastraße,48.13719,16.29996
 Wien-Energie AT-Wien Raffaelgasse,48.23318,16.37169
 Wien-Energie AT-Wien Sagedergasse,48.161,16.31936
+Wien-Energie AT-Wien Schiffmühlenstraße,48.22264,16.42653
 Wien-Energie AT-Wien Schnirchgasse,48.19426,16.41093
 Wien-Energie AT-Wien Schüttauplatz,48.22693,16.42402
 Wien-Energie AT-Wien Seestadt Seepark,48.22447,16.50411
@@ -21871,6 +21885,7 @@ Zunder ES-Villalpando Cam. de los Gallegos,41.82615,-5.37888,12
 ÖAMTC AT-Möderbrugg Hauptstraße,47.28033,14.48086
 ÖAMTC AT-Neusiedl am See Rot-Kreuz-Gasse,47.96934,16.83777
 ÖAMTC AT-Teesdorf Triester Straße,47.96154,16.2734
+ÖAMTC AT-Traiskirchen Zubringerstraße,47.99383,16.26288
 ÖAMTC AT-Traiskirchen Zubringerstraße,48.03511,16.80851
 ÖAMTC AT-Völkermarkt Klagenfurter Straße,46.65781,14.61371
 ÖAMTC AT-Wien Hadikgasse,48.192959,16.278226,20
@@ -21946,8 +21961,7 @@ AT Götzis Zoowelt Stromberger,47.34547,9.65628
 AT Hartberg Hauptplatz,47.281412,15.968967,20
 AT Hinterriß Natur.Erlebnis.Hotel,47.47312,11.46734
 AT Klagenfurt Richarg-Wagner-Straße,46.61872,14.30134
-AT Kottingbrunn SMARTplast,47.95825,16.25784
-AT Kottingbrunn SMARTplast,47.95883,16.2573
+AT Kottingbrunn SMARTplast,47.95858,16.25749,60
 AT Köflach Limonade Brantl,47.05386,15.07545
 AT Lendorf Teccon,46.82732,13.4907
 AT Lendorf Teccon,46.82824,13.49121
@@ -21956,12 +21970,14 @@ AT Linz Metro,48.24862,14.29475
 AT Linz PLUSCITY,48.24345,14.23428,25
 AT Linz PLUSCITY,48.24397,14.2348,25
 AT Linz PLUSCITY,48.24458,14.23531,25
+AT Mühldorf Wolf,47.89012,13.93895
 AT Parkplatz Straß,46.73086,15.64186
 AT Pasching Tractive,48.24068,14.2338
 AT Ratten HORN,47.472919,15.708816
 AT Schladming Europaplatz,47.39644,13.69552
 AT St. Veit an der Glan Karosserie Puck,46.75713,14.34241
 AT Tillmitsch Heidenstraße,46.81462,15.53379
+AT Villach Steinwenderstraße,46.61133,13.8421
 AT Voldöpp Länd,47.44385,11.87979
 AT Wien Billa Brünner Straße,48.267452,16.402954
 AT Wien Flughafen,48.12022,16.56285
@@ -21972,6 +21988,7 @@ AU Browns Plains QLD Browns Plains Rd,-27.6637,153.03996
 AU Burnie TAS North Terrace,-41.04991,145.90733
 AU Kelvin Grove QLD Ring Rd,-27.45318,153.01699
 AU Kingswood NSW Western Sydney University,-33.76984,150.72923
+AU Melbourne VIC Lonsdale St,-37.81036,144.9705
 AU Tonsley SA South Road,-35.008163,138.574993
 AU Waratah TAS Bischoff Hotel,-41.44293,145.52662
 BA Banja Luka Delta Planet,44.78049,17.20657
@@ -22011,6 +22028,7 @@ CH Schlatt Kundelfingerhof,47.67734,8.70713
 CH Sevelen b_smart Motel,47.12479,9.49367
 CH Siebnen Multimotor Garage,47.17566,8.91328,25
 CH Thun Panorama Center,46.744436,7.605003
+CH Unterengstringen WEY Technology,47.4106,8.44137
 CH Uster Repower,47.345401,8.74213
 CH Villigen Paul Scherrer Institut,47.53878,8.2236,60
 CH Wallisellen Montessori Kindergarten,47.4222,8.59719
@@ -22025,6 +22043,7 @@ CZ Brno Řípská,49.175874,16.679106
 CZ Praha Cinestar,50.070897,14.401644
 CZ Praha Nové Město Senovážné nám.,50.08593,14.43097
 CZ Praha Siemens,50.04811,14.306508
+DE Abenberg Allcolor,49.23648,10.95333
 DE Arnstadt nextmove,50.830822,10.948586
 DE Aschaffenburg Hauptbahnhof,49.97969,9.14757
 DE Ascheberg Davert,51.79739,7.62373
@@ -22070,6 +22089,7 @@ DE Dortmund adesso,51.50573,7.5274
 DE Dortmund Bielefelder Straße,51.51028,7.50429
 DE Dresden Am Brauhaus,51.06827,13.77956
 DE Dresden Hauptbahnhof,51.040898,13.733033
+DE Dresden Hilti,51.07258,13.6838
 DE Eching Hotel Höckmayr,48.29666,11.62049
 DE Eisenhüttenstadt Zentraler Platz,52.14535,14.62909
 DE Erfurt Optik Anton,50.97804,11.03464
@@ -22090,7 +22110,6 @@ DE Friedrichsdorf Ostpreußenstraße,50.25015,8.63774,30
 DE Friedrichshafen Am Sportpark,47.664288,9.480515
 DE Fulda becon,50.54747,9.67671
 DE Fürth Vacher Mühle,49.52555,10.96974
-DE Garbsen Nord,52.422338,9.554441
 DE Gießen Cursor,50.58493,8.64419,55
 DE Gladbeck SL Naturenergie,51.56883,6.95326
 DE Großharthau Am Schlosspark,51.10727,14.10977
@@ -22104,7 +22123,6 @@ DE Hamburg Airport,53.63239,10.00647
 DE Hamburg Airport,53.63349,10.00702
 DE Hamburg Bargteheider Straße,53.60367,10.1456,15
 DE Hamburg Hotel NH Hamburg Altona,53.56444,9.92108
-DE Hanau Hotel zur Linde,50.11238,8.89514
 DE Hanau Luise-Kiesselbach-Straße,50.145427,8.935681
 DE Hanau Rondo,50.11238,8.89514
 DE Hannover A2 Center,52.42332,9.835401,10
@@ -22166,8 +22184,7 @@ DE Oberlungwitz Sachsenring,50.79197,12.68798
 DE Offenbach am Main Feldstraße,50.09994,8.76783
 DE Offenbach Betriebshof OVB,50.102554,8.778845,20
 DE Offenbach Honda,50.08437,8.839102
-DE Ostbevern CANWAY,52.049918,7.846
-DE Ostbevern CANWAY,52.050221,7.846436
+DE Ostbevern CANWAY,52.05011,7.84619
 DE Ottobrunn Panasonic,48.05244,11.65555
 DE Paderborn MBörso,51.74011,8.77091
 DE Paderborn Westfalen Weser Netz,51.725959,8.756923,5
@@ -22253,8 +22270,10 @@ IT San Daniele del Friuli Prosciutteria,46.16462,13.00787
 IT San Leonardo in Passiria Andreus Golf Lodge,46.77938,11.22864
 IT Sanremo Grand Hotel Des Anglais,43.81277,7.76474
 IT Sant’Anna Hotel La Griglia Lago Di Como,45.94034,9.11064
+IT Tiers Platschgolerhof,46.47067,11.5099
 IT Vahrn Mautstation Casello Bressanone-Val Pusteria,46.763952,11.643082,20
 IT Vizzola Ticino Pirelli,45.625684,8.677574
+LI Schaan Hilti,47.18218,9.52752
 NO Balestrand Kviknes Hotel,61.20858,6.53827
 NO Bessaker Bessakersjøveien,64.24739,10.31975
 NO Geiranger Hotel Union,62.09637,7.21084
