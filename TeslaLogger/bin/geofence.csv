@@ -101,7 +101,7 @@ Supercharger-V3 AU-Geelong,-38.06516,144.38244,25
 Supercharger AU-Gold Coast,-28.035361,153.427306
 Supercharger AU-Goulburn,-34.755597,149.720984
 Supercharger AU-Gundagai,-35.002106,148.109934
-Supercharger AU-Gympie,-26.188745,152.661613
+Supercharger AU-Gympie QLD,-26.18866,152.66164
 Supercharger AU-Harwood NSW,-29.427135,153.239242
 Supercharger-V3 AU-Hawthorn East VIC,-37.845272,145.042714
 Supercharger AU-Heatherbrae,-32.787812,151.727704
@@ -2478,7 +2478,7 @@ Supercharger-V4 FR-Labège,43.549511,1.499973
 Supercharger FR-Langon,44.542436,-0.253954
 Supercharger-V4 FR-Laval Changé,48.092995,-0.758749
 Supercharger-V3 FR-Laxou,48.691096,6.127684
-Supercharger-V3 FR-Le Bosc,43.688495,3.354224
+Supercharger-V3 FR-Le Bosc,43.68861,3.35415
 Supercharger-V4 FR-Le Cannet-des-Maures,43.392215,6.347909
 Supercharger-V3 FR-Le Chesnay (Top Floor),48.826925,2.118539
 Supercharger FR-Le Mans,48.041833,0.175342
@@ -3355,7 +3355,7 @@ Supercharger-V4 NO-Brokelandsheia Øst,58.822296,9.077056
 Supercharger NO-Brumunddal,60.878507,10.929387
 Supercharger-V4 NO-Brønnøysund,65.48722,12.22787
 Supercharger NO-Bygland,58.827783,7.79531
-Supercharger NO-Dombås,62.074749,9.12783
+Supercharger-V3 NO-Dombås,62.07465,9.12789
 Supercharger-V3 NO-Eggedal,60.246023,9.355252
 Supercharger NO-Eidfjord,60.467438,7.068209
 Supercharger NO-Eidsvoll Verk,60.31235,11.14523
@@ -3956,7 +3956,7 @@ Supercharger-V4 US-Brenham TX,30.14044,-96.39929
 Supercharger-V3 US-Brentwood MO,38.626467,-90.344156
 Supercharger-V3 US-Brentwood TN - Old Hickory Boulevard,36.042359,-86.777834
 Supercharger US-Brewer ME,44.775854,-68.734722
-Supercharger-V3 US-Brewster NY,41.391948,-73.594935
+Supercharger-V3 US-Brewster NY,41.39169,-73.59513
 Supercharger-V3 US-Bridgewater NJ,40.567103,-74.563892
 Supercharger-V3 US-Brighton CO,39.971947,-104.74852
 Supercharger-V3 US-Brinkley AR,34.904968,-91.200022
@@ -8843,7 +8843,6 @@ CutPower DE-Niebüll Ostring,54.78219,8.85223
 CutPower DE-Sylt Kiarwai,54.902477,8.328275
 CutPower DE-Wilhelmshaven Ernst-Barlach-Straße,53.52719,8.064548
 
-da-emobil AT-Aistersheim Innkreis Autobahn A8,48.179124,13.747004
 da-emobil AT-Ansfelden Stelzhammerstraße,48.204409,14.259646
 da-emobil AT-Breitenwang Kreckelmoosstraße,47.47977,10.73544
 da-emobil AT-Brunn am Gebirge Industriestraße,48.108443,16.30817
@@ -8889,6 +8888,7 @@ da-emobil AT-Prutz Dorfstraße,47.07094,10.66408
 da-emobil AT-Prutz Gewerbestraße,47.09088,10.667111,30
 da-emobil AT-Prutz Gewerbestraße,47.091063,10.666626,30
 da-emobil AT-Ramsau im Zillertal Ramsau,47.20922,11.87261
+da-emobil AT-Raststation Aistersheim,48.17912,13.747
 da-emobil AT-Raststation Guntramsdorf,48.03385,16.33771
 da-emobil AT-Rutzenmoos Am Moosgraben,47.9554,13.72683,20
 da-emobil AT-Salzburg Europastraße,47.816533,13.008688
@@ -9957,11 +9957,13 @@ EM1 DE-Ramsau bei Berchtesgaden Holzengasse,47.60907,12.89825
 EM1 DE-Traunstein Karl-Theodor-Platz,47.868377,12.648086
 EM1 DE-Winhöring Obere Hofmark,48.265377,12.651486
 
+EMB DE-Kleinmachnow An der Stammbahn,52.42014,13.22476
 EMB DE-Michendorf Michendorfer Gartenstraße,52.31406,13.02783
 
 Emobility-East DE-Drebach Straße der Jugend,50.67323,13.01824
 Emobility-East DE-Johanngeorgenstadt Eibenstocker Straße,50.43339,12.71038
 Emobility-East DE-Mittenwald Obermarkt,47.441255,11.261307
+Emobility-East DE-Reichenschwand Dorfstraße,49.52885,11.37642
 
 Emobility-Netzwerk DE-Laupheim Zeppelinstraße,48.22195,9.8747
 
@@ -10710,8 +10712,8 @@ EnBW DE-Haßloch Fritz-Karl-Henkel-Straße,49.37402,8.25881
 EnBW DE-Hechingen Badstr.,48.361188,8.956999
 EnBW DE-Hechingen Weilheimer Str.,48.345925,8.954311
 EnBW DE-Heide,54.19662,9.128715
-EnBW DE-Heidelberg,49.38418,8.67966
 EnBW DE-Heidelberg Eppelheimer Straße,49.40675,8.65738
+EnBW DE-Heidelberg Sickingenstraße,49.38418,8.67966
 EnBW DE-Heidenfahrt Nord,50.001902,8.107959
 EnBW DE-Heilbronn Charlottenstraße,49.131274,9.218467
 EnBW DE-Heilbronn Etzelstraße,49.15256,9.21568
@@ -10877,7 +10879,6 @@ EnBW DE-Kirchhain Im Riedeboden,50.826041,8.928156
 EnBW DE-Kirchheim (Teck) Hahnweidstraße,48.639967,9.444517
 EnBW DE-Kirchheim bei München Am Gangsteig,48.16206,11.75629
 EnBW DE-Kirchheim Trigema,50.832535,9.573149,30
-EnBW DE-Kirchheim unter Teck Kruichling,48.644171,9.429751
 EnBW DE-Kirchheim unter Teck Kruichling,48.64423,9.42936
 EnBW DE-Kirchheim unter Teck Roßmarkt,48.646394,9.45217
 EnBW DE-Kirchheim Untere Steinstr.,48.650465,9.457406
@@ -11069,7 +11070,6 @@ EnBW DE-Mehrstetten Marktplatz,48.376376,9.566052
 EnBW DE-Meine,52.380484,10.536498
 EnBW DE-Meitingen Euronics,48.556197,10.851761,10
 EnBW DE-Meitingen Nord,48.557666,10.852404,20
-EnBW DE-Meitingen OMV,48.558141,10.852648,10
 EnBW DE-Mellingen,50.93753,11.390013
 EnBW DE-Memmelsdorf Josef-Fösel-Straße,49.93794,10.9651
 EnBW DE-Memmingen,47.999336,10.153201,10
@@ -12123,6 +12123,7 @@ enercity DE-Hannover Sutelstraße,52.40879,9.800892
 enercity DE-Hannover Tiergartenstraße,52.361444,9.828337
 enercity DE-Hannover Wiehbergstraße,52.335665,9.76256
 enercity DE-Hannover Windaustraße,52.406369,9.735423
+enercity DE-Laatzen Karlsruher Straße,52.31764,9.79901,40
 enercity DE-Laatzen Lübecker Straße,52.29807,9.82712
 enercity DE-Langenhagen Flughafenstraße,52.46051,9.696392
 enercity DE-Langenhagen Oertzeweg,52.434567,9.756651
@@ -12305,6 +12306,8 @@ EnergieSüdwest DE-Landau in der Pfalz Langstraße,49.198499,8.110556
 EnergieSüdwest DE-Landau in der Pfalz Wollmesheimer Höhe,49.1871,8.09324
 
 EnergyVision BE-Oostende Torhoutsesteenweg,51.19837,2.90284
+
+Enerstock FR-Le Bosc A75,43.6883,3.35473,10
 
 ENGIE AU-Wynnum West QLD Wynnum Road,27.457805,153.154785
 ENGIE FR-Aire de Brumath,48.72363,7.69208
@@ -13172,7 +13175,7 @@ EWE-GO DE-Königsbrunn Haunstetter Straße,48.289672,10.896984
 EWE-GO DE-Königslutter am Elm Am Mühlenhop,52.311275,10.825176
 EWE-GO DE-Königswinter Königswinterer Straße,50.685193,7.274793
 EWE-GO DE-Künzelsau Würzburger Straße,49.28892,9.67825
-EWE-GO DE-Laatzen Karlsruher Straße,52.317672,9.797413
+EWE-GO DE-Laatzen Karlsruher Straße,52.31758,9.79743,20
 EWE-GO DE-Laatzen Kieler Straße,52.296182,9.821083
 EWE-GO DE-Ladbergen Espenhof,52.147358,7.733911
 EWE-GO DE-Lage Stauffenbergstraße,51.989836,8.789856
@@ -17586,6 +17589,8 @@ MFG GB-Sowerby York Road,54.228782,-1.329168
 
 Midorion DE-Karlsruhe Parkplatz Karlsbad A8,48.94493,8.49432
 
+MNCA FR-Nice Rue Trachel,43.70642,7.26382
+
 MOBI.E PT-Aveiro Estrada Nacional,40.65115,-8.62016
 MOBI.E PT-Lagos Rua Rainha D. Leonor,37.10002,-8.68395
 
@@ -18549,7 +18554,7 @@ Pfalzwerke DE-Berlin Romain-Rolland-Str. 13,52.564461,13.446894
 Pfalzwerke DE-Berlin Schnellerstraße 133,52.458192,13.508435
 Pfalzwerke DE-Berlin-Bohnsdorf Grünbergallee,52.39866,13.54592,30
 Pfalzwerke DE-Bielefeld Detmolder Straße 246,52.002225,8.560531
-Pfalzwerke DE-Binzen Eulerstraße 2,47.624931,7.606339
+Pfalzwerke DE-Binzen Eulerstraße,47.62486,7.60637
 Pfalzwerke DE-Birkweiler Am Hiller 1,49.209167,8.043139
 Pfalzwerke DE-Blieskastel In den Lohgärten,49.234874,7.258998
 Pfalzwerke DE-Bobenheim Roxheim Grünstadter Str. 6,49.589306,8.353639
@@ -19013,6 +19018,7 @@ Polyfazer RO-Cornu de Jos DN1,45.148981,25.697431
 
 Porsche AT-Salzburg Alpenstraße,47.760934,13.072588
 Porsche AT-Wien Leopoldauer Straße,48.26203,16.42422
+Porsche BG-София Запад,42.74402,23.23052
 Porsche CH-Feusisberg Firststrasse,47.19107,8.74261
 Porsche CH-Maienfeld Industriestrasse,47.001744,9.523738
 Porsche CH-Schlieren Bernstrasse,47.40219,8.44036
@@ -19646,6 +19652,7 @@ Shell DE-Aachen Prager Ring,50.797538,6.108947
 Shell DE-Achim Margarete-Steiff Allee,53.019466,9.068053
 Shell DE-Andernach Rasselsteinstraße,50.433135,7.426765
 Shell DE-Angermünde Prenzlauer Straße,53.026547,13.995819
+Shell DE-Autohof Herzsprung,53.06798,12.53331,20
 Shell DE-Autohof Ramstein,49.42368,7.55945
 Shell DE-Bad Belzig Brücker Landstraße,52.144539,12.609381
 Shell DE-Bad Doberan An der B105,54.105956,11.928312
@@ -19772,6 +19779,7 @@ Shell DE-Krefeld Diessemer Bruch,51.327372,6.590652
 Shell DE-Kämpfelbach-Ersingen Raiffeisenstraße,48.928995,8.647136
 Shell DE-Köln Venloer Straße,50.94559,6.927406
 Shell DE-Königsee Gewerbegebiet,50.667036,11.119127
+Shell DE-Laatzen Karlsruher Straße,52.31788,9.79741,20
 Shell DE-Laatzen Oesseler Straße,52.27481,9.84779
 Shell DE-Laboe Brodersdorfer Weg,54.400685,10.22995
 Shell DE-Laichingen Rudolf-Diesel-Straße,48.4945,9.71073
@@ -19848,7 +19856,6 @@ Shell DE-Wedemark Hessenweg,52.55275,9.77781
 Shell DE-Weida Neustädter Straße,50.777695,12.04717
 Shell DE-Weilerbach Danziger Straße,49.477217,7.63979
 Shell DE-Westerland Trift,54.904609,8.310817
-Shell DE-Wittstock Fretzdorfer Steinstraße,53.06798,12.53331,20
 Shell DE-Wolfhagen Warburgerstraße,51.4028,9.183616,30
 Shell DE-Wolfsburg Braunschweiger Straße,52.4005,10.75168,30
 Shell DE-Wolfsburg Heinrich-Nordhoff Straße,52.42613,10.76856
@@ -21338,6 +21345,7 @@ Vattenfall SE-Ammarnäs Strandvägen,65.95758,16.21079
 Vattenfall SE-Arlöv Vassvägen,55.613434,13.102772,20
 Vattenfall SE-Askersund Drottning Kristinas väg,58.88013,14.90865
 Vattenfall SE-Boden Kyrkgatan,65.82433,21.68958
+Vattenfall SE-Bollnäs Postgränd,61.34865,16.38939
 Vattenfall SE-Bromma Ulvsundavägen,59.35064,17.9568
 Vattenfall SE-Fredriksberg Säfsbyn,60.14041,14.42078
 Vattenfall SE-Karlsborg Västra Vägen,58.54293,14.50445
