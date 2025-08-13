@@ -1807,6 +1807,7 @@ Supercharger-V4 DE-Bad Rappenau,49.21191,9.07711,30
 Supercharger-V4 DE-Bad Segeberg,53.93756,10.2974
 Supercharger-V3 DE-Baden-Baden,48.78364,8.19225
 Supercharger-V3 DE-Barsbüttel,53.578295,10.193266
+Supercharger-V4 DE-Bautzen,51.18878,14.45457
 Supercharger-V3 DE-Bayreuth,49.96221,11.61027
 Supercharger-V4 DE-Beelitz,52.26678,12.92225
 Supercharger-V3 DE-Bensheim,49.6723,8.6022
@@ -2815,7 +2816,8 @@ Supercharger-V3 GR-Atalanti Αταλάντη West,38.65883,23.07121
 Supercharger GR-Athens,38.034938,23.79096
 Supercharger-V4 GR-Ioannina Ιωάννινα,39.60365,20.86215
 Supercharger-V3 GR-Larissa Λάρισα South,39.60536,22.44146
-Supercharger-V3 GR-Psathopyrgos South,38.324376,21.869179,15
+Supercharger-V3 GR-Psathopyrgos Ψαθόπυργου North,38.32545,21.86835
+Supercharger-V3 GR-Psathopyrgos Ψαθόπυργου South,38.32438,21.86918
 Supercharger-V4 GR-Thessaloniki Θεσσαλονίκη,40.55471,22.99516
 
 Supercharger-V4 HR-Bačva,45.23919,13.71488
@@ -3411,7 +3413,7 @@ Supercharger NO-Lier North,59.770663,10.26099
 Supercharger NO-Lier North,59.770833,10.262139
 Supercharger NO-Lier South,59.766259,10.257838
 Supercharger-V3 NO-Liertoppen,59.80891,10.29941
-Supercharger NO-Lillehammer,61.13045,10.43491
+Supercharger-V4 NO-Lillehammer,61.13045,10.43491
 Supercharger-V3 NO-Lillehammer - Strandtorget,61.114584,10.447309
 Supercharger-V4 NO-Lillehammer Rosenlund,61.12746,10.45136
 Supercharger NO-Lillesand,58.23681,8.298785,40
@@ -5809,6 +5811,7 @@ Tesla Service Center DE-Gießen,50.5733,8.708517
 Tesla Service Center DE-Hamburg,53.668606,9.99489
 Tesla Service Center DE-Karlsruhe Rintheim,49.0091,8.44301
 Tesla Service Center DE-Kirchheim,48.15108,11.74895
+Tesla Service Center DE-Magdeburg,52.16499,11.60307
 Tesla Service Center DE-Mannheim,49.44434,8.574597
 Tesla Service Center DE-München Parsdorf,48.147015,11.791306
 Tesla Service Center DE-Neu-Ulm,48.386662,10.030265
@@ -9853,6 +9856,7 @@ Electrify-America US-Woodbury MN Hudson Rd,44.9457,-92.8987
 Electrify-Canada CA-Mirabel QC Chemin Notre Dame,45.67124,-73.92006
 Electrify-Canada CA-Ottawa ON Coventry Rd,45.42069,-75.6517
 
+electrip BG-Студена Автомагистрала Струма,42.58385,23.11996,20
 electrip HR-Jablanovec Zaprešićka Westgate,45.87226,15.827895
 electrip HR-Josipdol D23,45.18348,15.28681
 electrip HR-Rijeka Osječka ul.,45.34167,14.42436
@@ -9946,6 +9950,7 @@ Elwateg DE-Emstek Otto-Hahn-Straße,52.82918,8.11697
 
 EM1 DE-Ahrensburg Am Postwald,53.6767,10.241641
 EM1 DE-Altötting Bahnhofstraße,48.222672,12.674143
+EM1 DE-Aschau im Chiemgau Bernauer Straße,47.78483,12.33284
 EM1 DE-Aschau im Chiemgau Scheibenwandstraße,47.776678,12.32529
 EM1 DE-Emmerting Karrerweg,48.19941,12.7668
 EM1 DE-Garching an der Alz Rathausplatz,48.131235,12.582471
@@ -13973,12 +13978,15 @@ FDE80 FR-Mers-les-Bains Rue du 4 Septembre,50.06333,1.38804
 
 Feníe-Energía ES-Can Picafort Passeig Mallorca,39.76225,3.16273
 
+Fines BG-Kostinbrod Poleto,42.79496,23.21518
+Fines BG-Драгичево Главен път Е79,42.6009,23.13062
 Fines BG-Летница,43.312113,25.07321
 Fines BG-Лозен Автомагистрала Тракия,42.632198,23.458115
 Fines BG-Лозен Автомагистрала Тракия,42.632276,23.459349
 Fines BG-Марикостиново,41.434421,23.333701
 Fines BG-Пролеша 8,42.783942,23.166997
 Fines BG-Русе бул. Христо Ботев,43.83214,25.97155
+Fines BG-Студена Автомагистрала Струма,42.58363,23.12001,20
 Fines BG-Търговище Targovishte 4009,43.244632,26.54884
 
 Flo CA-Brownsburg QC Rte du Canton,45.63191,-74.39353
@@ -14703,6 +14711,7 @@ Ignitis LT-Liepāja Vētru iela,56.48325,21.00323
 Ignitis LT-Raseinių Gabšiai,55.3399,23.09851
 Ignitis LT-Rokiškis Respublikos g.,55.94649,25.58947
 Ignitis LT-Vilnius Birutės g.,54.692063,25.246066
+Ignitis LT-Vilnius Upės g.,54.69392,25.27507
 Ignitis LT-Šilagalys Panevėžio aplinkelis,55.67072,24.34852
 
 IKB AT-Innsbruck DEZ,47.26221,11.42823,25
@@ -15472,6 +15481,7 @@ Ionity HU-Balatonkeresztúr,46.68328,17.3794,30
 Ionity HU-Balatonkeresztúr,46.68544,17.37948,30
 Ionity HU-Bábolna (dir. Budapest),47.680553,17.976528
 Ionity HU-Kajászó (dir. Balaton),47.307602,18.744217
+Ionity HU-Kecskemét Felsőcsalános tanya,46.88847,19.60388
 Ionity HU-Szigetszentmiklós,47.380371,19.055785
 Ionity IE-Athlone,53.400721,-7.827948
 Ionity IE-Cashel,52.50884,-7.87441
@@ -15507,6 +15517,7 @@ Ionity IT-Versilia Ovest,43.92911,10.22261
 Ionity IT-Via Ernesto Basile. Palermo,38.09959,13.34651
 Ionity LT-Aplinkkelis,55.67252,24.336014,20
 Ionity LT-Kryžkalnis,55.48423,22.58733
+Ionity LT-Mastaičiai Garliava,54.81912,23.85755
 Ionity NL-Apeldoorn-Zuid,52.1791,5.984281
 Ionity NL-Best,51.503064,5.414372
 Ionity NL-Bodegraven,52.066539,4.738413
@@ -16889,6 +16900,7 @@ Lidl DE-Mühldorf am Inn,48.25157,12.510524
 Lidl DE-München Landsbergerstr.,48.144648,11.489481
 Lidl DE-München-Freiham Bodenseestraße 331,48.141145,11.412021
 Lidl DE-Münster An der Hiltruper Baumschule,51.90652,7.63311
+Lidl DE-Münster Dorbaumstraße,51.99615,7.71108
 Lidl DE-Münster Hammer Straße,51.94294,7.62456
 Lidl DE-Neckarsulm Hohenloher Str. 2/1,49.182591,9.226681
 Lidl DE-Neu-Anspach Rudolf-Diesel-Straße,50.30609,8.512205
@@ -17140,6 +17152,7 @@ Lidl FR-Vendargues Av. des Bigos,43.65254,3.961,25
 Lidl FR-Vitrolles Av. Jean Monnet,43.42349,5.28486
 Lidl FR-Wissembourg All. des Peupliers Altenstadt,49.03075,7.95498
 Lidl GB-Witney New Cl Ln,51.7736,-1.4931
+Lidl GR-Limenas Thasou Λιμένας Θάσου Dimitriadou,40.74142,24.57825
 Lidl HR-Biograd na Moru,43.944678,15.453368
 Lidl HR-Dubrovnik Ulica Tomislava Macana,42.630673,18.166585
 Lidl HR-Krk Stjepana Radića,45.03556,14.56825
@@ -18268,6 +18281,7 @@ nvb DE-Uelsen Zum Waldbad,52.487298,6.884946
 nvb DE-Wietmarschen Am Markt,52.517536,7.132845
 nvb DE-Wilsum Echtelerstraße,52.53992,6.83253
 
+OK DK-Blåvand Hvidbjerg Strandvej,55.54646,8.13497
 OK DK-Dragør Krudttårnsvej,55.58369,12.64723
 OK DK-Fredensborg Humlebækvej,55.96559,12.41031
 OK DK-Hals Brogade,57.05659,10.37049
@@ -18312,6 +18326,7 @@ OMV RS-Beograd Astrid Lindgren,44.70741,20.56801
 OMV RS-Kruševac Jasički put,43.59562,21.31551
 OMV RS-Lapovo Autoput Niš Beograd,44.20527,21.10751
 OMV RS-Martinci Autoput Šid Beograd,45.03558,19.44977
+OMV RS-Општина Дољевац,43.18246,21.86279
 OMV SI-Kozina Bazoviška cesta,45.60471,13.92928,12
 OMV SI-Počivališče Dravsko Polje,46.429,15.79448
 OMV SK-Dolný Hričov Majora Antona Matúška,49.23302,18.624219
@@ -18514,6 +18529,8 @@ Petrol SI-Počivališče Lom,45.89864,14.25664
 Petrol SI-Počivališče Lopata,46.26248,15.22255
 Petrol SI-Počivališče Šentilj,46.68489,15.64979
 
+Petrom RO-Caransebeș Cent.Caransebes,45.36875,22.24154
+Petrom RO-Mehadia E70,44.8875,22.38146
 Petrom RO-Slobozia Șoseaua București-Constanța,44.56926,27.38519
 
 Peusa ES-La Seu d’Urgell Cami Ral de la Cerdanya,42.35894,1.46327,30
@@ -19144,6 +19161,7 @@ Powerdot FR-Publier Rue du Cartheray,46.390846,6.525237
 Powerdot FR-Russ Rue de la Creuse Fontaine,48.49343,7.25152
 Powerdot FR-Ussac Av. du Griffolet,45.1634,1.48153,30
 Powerdot FR-Valence Imp. des Auréats,44.90199,4.88327
+Powerdot PL-Cieszyn Wierzbowa,49.75655,18.63951
 Powerdot PL-Gdańsk Gdańska,54.40236,18.63141
 Powerdot PL-Kraków Pawia,50.067976,19.946278
 Powerdot PL-Leszno Niepodległości,51.846245,16.588073
@@ -19457,7 +19475,6 @@ Saascharge CH-Schlieren Freiestrasse,47.39589,8.44676
 SachsenEnergie DE-Altenberg Dresdner Str.,50.764811,13.755286
 SachsenEnergie DE-Bad Schandau Dresdner Str.,50.918421,14.149496
 SachsenEnergie DE-Bannewitz Hauptstraße,50.965145,13.711756
-SachsenEnergie DE-Bautzen Schliebenstr.,51.181529,14.414873
 SachsenEnergie DE-Bautzen Schliebenstraße,51.18155,14.414924
 SachsenEnergie DE-Dippoldiswalde Obertorplatz,50.895903,13.669594
 SachsenEnergie DE-Dresden Annenstraße,51.050306,13.731177
@@ -21791,6 +21808,7 @@ Wien-Energie AT-Traiskirchen Tribuswinkel Neurißgasse,47.991227,16.275386
 Wien-Energie AT-Wien Amerlingstraße,48.19703,16.35125
 Wien-Energie AT-Wien Antonigasse,48.2225,16.33746
 Wien-Energie AT-Wien Austria Center,48.23459,16.41352
+Wien-Energie AT-Wien Beethovenplatz,48.20186,16.37725
 Wien-Energie AT-Wien Breite Gasse,48.20365,16.35691
 Wien-Energie AT-Wien Breitenfelder Gasse,48.21412,16.34291
 Wien-Energie AT-Wien Breitenfurter Straße,48.14641,16.29639
@@ -21826,6 +21844,7 @@ Wien-Energie AT-Wiener Neudorf Multiplex,48.103063,16.318812
 Wiiiz FR-Grasse Pl. de la Buanderie,43.66096,6.9234,30
 
 Wirelane DE-Achim Uphusener Dorfstraße,53.0282,8.97063
+Wirelane DE-Berlin Leipziger Straße,52.51069,13.40081
 Wirelane DE-Berlin Parkstraße,52.55471,13.45771
 Wirelane DE-Bremen Robert-Hooke-Straße,53.11267,8.8561
 Wirelane DE-Cleebronn Erlebnispark-Tripsdrill-Straße,49.03484,9.0523
@@ -22144,6 +22163,7 @@ DE Dortmund Bielefelder Straße,51.51028,7.50429
 DE Dresden Am Brauhaus,51.06827,13.77956
 DE Dresden Hauptbahnhof,51.040898,13.733033
 DE Dresden Hilti,51.07258,13.6838
+DE Duisburg DB Cargo,51.40779,6.79578
 DE Eching Hotel Höckmayr,48.29666,11.62049
 DE Eisenhüttenstadt Zentraler Platz,52.14535,14.62909
 DE Erfurt Optik Anton,50.97804,11.03464
@@ -22236,6 +22256,7 @@ DE Nürnberg Eggersheimer Straße,49.447788,11.010655
 DE Nürnberg Ramada Parkhotel,49.43649,11.10379
 DE Nürnberg Virnsberger Straße,49.448044,11.005672
 DE Oberlungwitz Sachsenring,50.79197,12.68798
+DE Ochtrup Designer Outlet,52.21141,7.19994
 DE Offenbach am Main Feldstraße,50.09994,8.76783
 DE Offenbach Betriebshof OVB,50.102554,8.778845,20
 DE Offenbach Honda,50.08437,8.839102
@@ -22356,6 +22377,7 @@ RO Oradea Pasajul Vulturul Negru,47.055133,21.93175
 RO Sibiu Piața Mică,45.79757,24.15138
 RO Săcele Strada George Moroianu,45.618203,25.698313
 RO Zalău Aleea Tineretului,47.19534,23.0595
+RS Београд Klinika Varis,44.82424,20.41634
 SE Gällivare Postgatan,67.13387,20.65995
 SE Strömstad Nordby Köpcenter,59.06458,11.20858
 SE Tanumshede Tanum Shoppingcenter,58.72225,11.34893
