@@ -1804,7 +1804,7 @@ Supercharger-V4 DE-Augsburg-Haunstetten,48.297555,10.899144
 Supercharger-V4 DE-Bad Dürrheim,48.03618,8.531306
 Supercharger-V3 DE-Bad Oeynhausen,52.21293,8.81407,55
 Supercharger-V4 DE-Bad Rappenau,49.21191,9.07711,30
-Supercharger-V4 DE-Bad Segeberg,53.93766,10.296875
+Supercharger-V4 DE-Bad Segeberg,53.93756,10.2974
 Supercharger-V3 DE-Baden-Baden,48.78364,8.19225
 Supercharger-V3 DE-Barsbüttel,53.578295,10.193266
 Supercharger-V3 DE-Bayreuth,49.96221,11.61027
@@ -7704,7 +7704,6 @@ BundK DE-Kronberg Frankfurter Straße,50.174742,8.521667
 BundK DE-Melle Johann-Uttinger-Straße,52.194857,8.343742
 BundK DE-Paderborn Stedener Feld,51.730429,8.721432
 BundK DE-Salzwedel Hauptstraße,52.86679,11.095144
-BundK DE-Stendal Heerener Straße,51.73014,8.72137
 BundK DE-Uelzen Nordallee,52.986693,10.547285
 BundK DE-Vechta Osloer Straße,52.730668,8.264596
 BundK DE-Winsen/Luhe Lüneburger Straße,53.352199,10.227263
@@ -9018,6 +9017,7 @@ e-regio DE-Schleiden Blumenthaler Straße,50.52896,6.47713
 e-space GE-Argveta,42.14774,42.96571
 
 E-Totem FR-Beaune Route de Montagny Les Beaune,46.99832,4.85302
+E-Totem FR-Hyères Bd Marechal Juin,43.11503,6.10892
 E-Totem FR-Robion Rte d’Avignon,43.86885,5.1341
 E-Totem FR-Saint-Genis-Pouilly Rue du Tiocan,46.2537,6.02658
 
@@ -12141,6 +12141,7 @@ Energie AT-Grieskirchen Manglburg,48.234117,13.825708
 Energie AT-Mattighofen Römerstraße,48.10713,13.1483
 Energie AT-Schwanenstadt Stadtplatz,48.05457,13.77367
 Energie AT-Schärding Karl-Gruber-Straße,48.44838,13.43813
+Energie AT-Vöcklabruck Varena,48.00303,13.66992
 
 Energie-Architektur DE-Leipzig Gießerstraße,51.32458,12.32733,30
 
@@ -12313,6 +12314,7 @@ ENGIE FR-Aire de Brumath,48.72363,7.69208
 ENGIE FR-Aire de Châtellerault Antran,46.90689,0.52255
 ENGIE FR-Aire de La Sentinelle,50.3407,3.46651
 ENGIE FR-Aire de Lyon Montluel,45.84455,5.06939,30
+ENGIE FR-Aire de Porte de la Drôme,45.07558,5.21129
 ENGIE FR-Aire de Venoy Soleil Levant,47.78846,3.67328
 ENGIE FR-Aire du Val de Meuse,47.975545,5.498574
 ENGIE FR-Aire du Val de Meuse,47.976979,5.49798
@@ -12588,6 +12590,7 @@ EVN AT-Perchtoldsdorf Mühlgasse,48.123588,16.293183
 EVN AT-Pressbaum Hauptstraße,48.180373,16.079066
 EVN AT-Pressbaum Hauptstraße,48.182763,16.089191
 EVN AT-Purgstall Erlauftalstraße,48.06599,15.13419
+EVN AT-Purgstall Friedhofstraße,48.05573,15.13949
 EVN AT-Pöchlarn Manker Straße,48.19958,15.22043
 EVN AT-Roggendorf A1,48.194754,15.383732
 EVN AT-Schiltern Laabergstraße,48.51162,15.63226
@@ -14563,6 +14566,7 @@ HEnW DE-Hamburg Roßberg,53.56786,10.04949
 HEnW DE-Hamburg Schenefelder Landstraße,53.56665,9.8269
 HEnW DE-Hamburg Schloßstraße,53.571148,10.065308
 HEnW DE-Hamburg Schnackenburgallee,53.591272,9.904267
+HEnW DE-Hamburg Seewartenstraße,53.54741,9.96906
 HEnW DE-Hamburg Sellhopsweg,53.6293,9.92887
 HEnW DE-Hamburg Sternstraße,53.559872,9.966901
 HEnW DE-Hamburg Straßenbahnring,53.580737,9.975659
@@ -14692,12 +14696,14 @@ IECharge FR-Henrichemont Prairie des Gimonets,47.303759,2.545237
 IECharge FR-La Roche-sur-Yon La Vergne Babouin,46.633558,-1.413197
 IECharge FR-Mairy-Mainville Rue du Petit Mont,49.305955,5.854291
 IECharge FR-Rue Chem. des Joncs,50.26372,1.69225
+IECharge FR-Vezin-le-Coquet Rue de la Belle Épine,48.1251,-1.75488
 
 Ignitis LT-Klaipėda Baltijos pr.,55.68572,21.15422
 Ignitis LT-Liepāja Vētru iela,56.48325,21.00323
 Ignitis LT-Raseinių Gabšiai,55.3399,23.09851
 Ignitis LT-Rokiškis Respublikos g.,55.94649,25.58947
 Ignitis LT-Vilnius Birutės g.,54.692063,25.246066
+Ignitis LT-Šilagalys Panevėžio aplinkelis,55.67072,24.34852
 
 IKB AT-Innsbruck DEZ,47.26221,11.42823,25
 IKB AT-Innsbruck Salurner Straße,47.262477,11.397359
@@ -15214,13 +15220,12 @@ Ionity DE-Meerane Hohe Straße,50.840764,12.445016
 Ionity DE-Memmingen Fraunhoferstraße,47.99943,10.15528
 Ionity DE-Merklingen Nellinger Straße,48.51639,9.75685,25
 Ionity DE-Mönchengladbach Schleswiger Straße,51.19552,6.41265
-Ionity DE-Mühldorf am Inn Äußere Neumarkter Str,48.262445,12.542657
+Ionity DE-Mühldorf am Inn Äußere Neumarkter Straße,48.26244,12.54266
 Ionity DE-Neckarburg Ost,48.206218,8.627155
 Ionity DE-Neckarburg West,48.20593,8.621045
 Ionity DE-Nempitz,51.290114,12.137547,6
 Ionity DE-Nempitz,51.290187,12.137601,7
 Ionity DE-Neumünster Prehnsfelder Weg,54.092671,9.92914
-Ionity DE-Niederöfflingen An der BAB A1,50.068492,6.880212
 Ionity DE-Nörten-Hardenberg Unter dem Pferdestiege,51.62876,9.92229,40
 Ionity DE-Oberhausen Brammenring,51.489778,6.887922
 Ionity DE-Oberhonnefeld,50.562591,7.527838
@@ -15251,7 +15256,7 @@ Ionity DE-Raststätte Dollenberg,50.68853,8.29568,15
 Ionity DE-Raststätte Dresdner Tor Nord,51.06325,13.57125,30
 Ionity DE-Raststätte Dresdner Tor Süd,51.06023,13.57196,30
 Ionity DE-Raststätte Eifel Ost,50.07029,6.88066,20
-Ionity DE-Raststätte Eifel West,50.06832,6.88035,21
+Ionity DE-Raststätte Eifel West,50.06832,6.88035,22
 Ionity DE-Raststätte Goldbach Nord,53.00056,9.17968,20
 Ionity DE-Raststätte Goldbach Süd,52.99833,9.18139,30
 Ionity DE-Raststätte Lüneburger Heide Ost,53.11004,9.98406
@@ -15309,7 +15314,7 @@ Ionity ES-Merida,38.933955,-6.343053
 Ionity ES-Milagros,41.593947,-3.698254
 Ionity ES-O Corgo Norte,42.965803,-7.454554
 Ionity ES-O Corgo Sur,42.964918,-7.457615
-Ionity ES-Palleja,41.420526,2.00216
+Ionity ES-Palleja,41.42046,2.00165
 Ionity ES-Pola de Lena,43.182391,-5.811289
 Ionity ES-Puerto Lumbreras,37.575694,-1.800833
 Ionity ES-Sotogrande A-7,36.28674,-5.31246
@@ -15845,7 +15850,7 @@ Kaufland DE-Heidenheim an der Brenz Aalener Straße 20,48.713789,10.161584
 Kaufland DE-Heilbronn,49.12452,9.223451
 Kaufland DE-Heilbronn Neckargartacher Straße 111,49.151304,9.196075
 Kaufland DE-Heilbronn Olgastraße 57,49.137231,9.208609
-Kaufland DE-Heinsberg Humboldtstraße,50.93032,6.33965
+Kaufland DE-Heinsberg Humboldtstraße,51.0693,6.11122
 Kaufland DE-Herne Hauptstraße 211,51.527676,7.159594
 Kaufland DE-Hof Hans-Böckler-Straße,50.307202,11.918009
 Kaufland DE-Hohen Neuendorf Schönfließerstraße,52.67182,13.281111
@@ -16134,6 +16139,7 @@ KH-Energie DE-Winterberg Am Eschenberg,51.24578,8.52863
 
 Kia BG-Sofia Gorublyane Mladost,42.636691,23.415721
 
+KLC PT-Cambeses Avenida Fonte Cova,41.30021,-8.70611
 KLC PT-Canidelo R. Nova de Alvites,41.1276,-8.6508
 KLC PT-Moura Rua Dr. Bento Caeiro,38.14012,-7.44507
 KLC PT-Torres Vedras R. António Augusto Cabral,39.08244,-9.2621
@@ -16718,7 +16724,7 @@ Lidl DE-Görlitz Reichenbacher Straße,51.148055,14.950147
 Lidl DE-Günzburg Violastraße,48.451224,10.260908
 Lidl DE-Güstrow,53.777702,12.178483
 Lidl DE-Gütersloh Neuenkirchener Straße,51.89354,8.38123
-Lidl DE-Haan,51.186669,6.987195,15
+Lidl DE-Haan Düsseldorfer Straße,51.18664,6.98721
 Lidl DE-Hagen im Bremischen Amtsdamm 78,53.358524,8.656235
 Lidl DE-Hagen-Hohenlimburg Gotenweg 9,51.363796,7.55662
 Lidl DE-Hainichen August-Bebel-Str. 1,50.967317,13.119582
@@ -22210,6 +22216,7 @@ DE Lößnitz Johannisstraße,50.62807,12.73626
 DE Lübeck Flughafen,53.804405,10.699887
 DE Machern Ringstraße,51.35571,12.57101
 DE Mainz Malakoff-Passage,49.99617,8.28132
+DE Mannheim SV Seckenheim,49.46796,8.55731
 DE Melle Hageböke,52.176211,8.367606
 DE Mölln VW Riemer,53.623707,10.678989
 DE München AF Automotive,48.18688,11.58993,30
