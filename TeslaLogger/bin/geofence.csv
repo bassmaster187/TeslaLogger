@@ -2126,7 +2126,7 @@ Supercharger-V3 DE-Wörth an der Isar,48.625626,12.320216
 Supercharger-V3 DE-Zella-Mehlis,50.64359,10.68472
 Supercharger-V3 DE-Zusmarshausen,48.40787,10.59944,30
 Supercharger-V3 DE-Zweibrücken,49.230727,7.40817
-Supercharger-V3 DE-Öhringen,49.20452,9.48907
+Supercharger-V3 DE-Öhringen,49.20455,9.48926,60
 
 Supercharger-V3 DK-Aalborg,57.004176,9.871407
 Supercharger DK-Aarhus,56.17802,10.138826
@@ -2294,6 +2294,7 @@ Supercharger-V3 ES-Xinzo de Limia,42.07815,-7.71505
 Supercharger-V4 ES-Zaragoza,41.62583,-1.0096
 Supercharger-V4 ES-Zaragoza East,41.6067,-0.69069
 Supercharger-V4 ES-Zaragoza Gran Casa,41.67028,-0.89014
+Supercharger-V4 ES-Zaragoza Travesía Jardines Reales,41.60742,-0.88801
 Supercharger-V4 ES-Zestoa,43.26922,-2.27114
 
 Supercharger FI-Akaa,61.181106,23.885075
@@ -4759,7 +4760,7 @@ Supercharger-V3 US-Lynnwood WA - 148th Street Southwest,47.865523,-122.283056
 Supercharger US-Macedonia OH,41.313652,-81.51703
 Supercharger-V3 US-Mackinaw City MI,45.772228,-84.72645
 Supercharger US-Macon GA Tom Hill Senior Boulevard,32.897138,-83.689173
-Supercharger-V3 US-Madera CA - Avenue 7,36.851422,-119.952623
+Supercharger-V3 US-Madera CA Avenue 7,36.85174,-119.95213
 Supercharger-V3 US-Madison CT - Northbound,41.29042,-72.58084
 Supercharger-V3 US-Madison CT - Southbound,41.291179,-72.578087
 Supercharger-V3 US-Madison FL,30.43352,-83.45372
@@ -8876,6 +8877,7 @@ da-emobil AT-Leoben Prettachstraße,47.35536,15.08482
 da-emobil AT-Lermoos Juch,47.40183,10.87943
 da-emobil AT-Liezen Werkstraße,47.56363,14.248112
 da-emobil AT-Linz Tirolerstraße,46.827305,12.766076
+da-emobil AT-Mals Bahnhof,46.68388,10.54756
 da-emobil AT-Matrei in Osttirol Seblas,46.989725,12.544702
 da-emobil AT-Mauer Südlandstraße,48.102048,14.822834
 da-emobil AT-Mayrhofen Durster Straße,47.16854,11.86701
@@ -9117,8 +9119,7 @@ E.ON DE-Dannstadt-Schauernheim An der A61,49.4102,8.341658
 E.ON DE-Dernbach An der A3,50.548416,7.585134
 E.ON DE-Distelrasen Nord,50.388569,9.530514
 E.ON DE-Dormagen An der A57,51.12548,6.7975
-E.ON DE-Dortmund Florianstraße,51.498324,7.470875
-E.ON DE-Dortmund Florianstraße,51.498531,7.471213
+E.ON DE-Dortmund Florianstraße,51.49834,7.4709
 E.ON DE-Dortmund Kleppingstraße,51.511699,7.468217
 E.ON DE-Dortmund Königswall 15,51.516576,7.457328
 E.ON DE-Duisburg Beecker Straße,51.48419,6.76378
@@ -9867,6 +9868,7 @@ electrip IT-Assago Business Park,45.407323,9.150871
 electrip IT-Crêtes Località Autoporto,45.73502,7.37007
 electrip IT-Firenze Via Gabriele D’Annunzio,43.77554,11.29007
 electrip IT-Forcola Via Piani,46.1648,9.67532
+electrip IT-Rho Via Castelli Fiorenza,45.52648,9.04572
 
 Elektrum LV-Liepāja Jūras iela,56.51114,21.00933
 Elektrum LV-Lubāna Tilta iela,56.9024,26.72048
@@ -12068,6 +12070,7 @@ EnelX IT-Vicenza Piazzale della Stazione,45.54146,11.53924
 EnelX IT-Vieste Via Alessandro Manzoni,41.8815,16.17355
 EnelX IT-Villa di Serio Piazza Mercato,45.7223,9.73639
 EnelX IT-Villaggio Pescara del Tronto,42.74521,13.2685
+EnelX IT-Villanueva de Gállego C. Albert Einstein,41.7549,-0.83767
 EnelX IT-Villetta Barrea Via Del Lago,41.7739,13.94495
 EnelX IT-Vittoria Via G. Santoro,36.95379,14.54317
 EnelX RO-București Intrarea Nețea,44.39216,26.12341
@@ -12374,6 +12377,7 @@ EQUANS NL-Amsterdam IJdoornlaan,52.41527,4.91168
 EQUAY PL-Gdańsk mjr. Henryka Sucharskiego,54.40323,18.68079
 EQUAY PL-Gdańsk Zamknięta,54.40017,18.678
 
+Eranovum ES-Arnuero Bo. el Hoyo,43.49455,-3.57265
 Eranovum ES-Daimús C.Assagador,38.97102,-0.15388
 Eranovum ES-Finestrat Avinguda País Valencià,38.53687,-0.17895
 Eranovum ES-Valladolid Cam. Viejo de Simancas,41.62127,-4.75655
@@ -12610,6 +12614,7 @@ EVN AT-Stockerau Horner Straße,48.38807,16.18479
 EVN AT-Tulln an der Donau Frauentorgasse,48.32718,16.05535
 EVN AT-Tulln an der Donau Langenlebarner Straße,48.32822,16.08246
 EVN AT-Waidhofen an der Ybbs Pocksteinerstraße,47.956449,14.777679
+EVN AT-Weitra Bahnhofstraße,48.70086,14.89769
 EVN AT-Wien Albert-Schweitzer-Gasse,48.207501,16.22199
 EVN AT-Wien Dommesgasse,48.17229,16.41517
 EVN AT-Wiener Neustadt Puchberger Straße,47.80452,16.21039,6
@@ -13161,6 +13166,7 @@ EWE-GO DE-Kirchseeon Siriusstraße,48.08305,11.85447
 EWE-GO DE-Kitzingen Repperndorfer Str.,49.740033,10.146425
 EWE-GO DE-Kleinmachnow Stolper Weg,52.402976,13.18722
 EWE-GO DE-Kleve Van-Den-Bergh-Str,51.789947,6.155465
+EWE-GO DE-Koblenz Friedrich-Mohr-Straße,50.37967,7.5787
 EWE-GO DE-Korbach An der Kuhbach,51.280154,8.859436
 EWE-GO DE-Krefeld Bruchfeld,51.344489,6.627504
 EWE-GO DE-Krefeld Dießemer Bruch,51.327938,6.591047
@@ -13368,6 +13374,7 @@ EWE-GO DE-Oldenburg Haseler Weg,53.180093,8.231748
 EWE-GO DE-Oldenburg Huntestraße,53.140142,8.21942
 EWE-GO DE-Oldenburg in Holstein Dannauer Bruch,54.29693,10.86652
 EWE-GO DE-Oldenburg Klingenbergstraße,53.10913,8.211049
+EWE-GO DE-Oldenburg Nadorster Straße,53.16326,8.22396
 EWE-GO DE-Oldenburg Nadorster Straße,53.16456,8.22514
 EWE-GO DE-Oldenburg Nettelbeckstraße,53.140647,8.18857
 EWE-GO DE-Oldenburg Waterender Weg,53.153883,8.247718
@@ -13723,6 +13730,7 @@ Ewiva IT-Muro Leccese SS16,40.12459,18.33526
 Ewiva IT-Ospedaletti Lungomare Cristoforo Colombo,43.79787,7.72801
 Ewiva IT-Palagiano Viale Chiatona,40.57288,17.03961
 Ewiva IT-Peschiera del Garda Via Tangenziale,45.435685,10.710101
+Ewiva IT-Pistoia Parcheggio Zoo,43.92864,10.86753
 Ewiva IT-Pomigliano d’Arco Via Indira Gandhi,40.90498,14.39972
 Ewiva IT-Porto San Giorgio Via Ferraris,43.16389,13.79072
 Ewiva IT-Pula Via Camillo Benso,39.0092,8.99587
@@ -14260,6 +14268,7 @@ GP-JOULE DE-Rostock Lise-Meitner-Ring,54.059717,12.118427
 GP-JOULE DE-Schwerin Grevesmühlener Straße,53.652063,11.372797
 GP-JOULE DE-Schwäbisch Gmünd Hauberweg,48.798535,9.787208
 GP-JOULE DE-St. Andreasberg Oderbrück-Süd,51.774925,10.552136
+GP-JOULE DE-Sulingen Vorwerker Heide,52.66983,8.7831
 GP-JOULE DE-Süderbrarup team Allee,54.638675,9.76061
 GP-JOULE DE-Upahl Grevesmühlener Straße,53.830088,11.210366
 GP-JOULE DE-Wanderup Husumer Straße,54.68675,9.326219
@@ -15091,7 +15100,7 @@ Ionity AT-Fürnitz Kärntner Straße,46.566751,13.809464
 Ionity AT-Golling,47.584781,13.157939
 Ionity AT-Grafenstein,46.639636,14.451389
 Ionity AT-Göttlesbrunn,48.056232,16.711973
-Ionity AT-Hochleithen,48.425298,16.547783
+Ionity AT-Hochleithen Brünner Straße,48.42531,16.54773,20
 Ionity AT-Hohenems,47.366163,9.659167
 Ionity AT-Innerbraz,47.140914,9.924473
 Ionity AT-Kaiserwald,46.959244,15.382045
@@ -15622,6 +15631,7 @@ IZIVIA FR-Bordeaux Cr Charles Bricaud,44.88841,-0.56182
 IZIVIA FR-Bretteville-sur-Odon Av. du Fresne,49.16436,-0.42333,25
 IZIVIA FR-Cournon-d’Auvergne Av. Maréchal Leclerc,45.73998,3.17278,30
 IZIVIA FR-Dunkerque Av. du Stade,51.03307,2.39317
+IZIVIA FR-Fécamp Bd de la République,49.75933,0.37653
 IZIVIA FR-Haudainville Bd de l’Europe,49.1406,5.40984
 IZIVIA FR-Lyon Rue Jean Marcuit,45.788684,4.814377
 IZIVIA FR-Munster Rue Hilti,48.044282,7.160577
@@ -16977,7 +16987,7 @@ Lidl DE-Remagen Zeppelinstr. 2,50.56812,7.245848
 Lidl DE-Remchingen Hauptstraße,48.95094,8.57006
 Lidl DE-Rendsburg Schleswiger Chaussee 37-39,54.311555,9.646101
 Lidl DE-Renningen,48.777379,8.936272
-Lidl DE-Rheine Elter Straße 234,52.26741,7.46214
+Lidl DE-Rheine Elter Straße,52.26705,7.46246
 Lidl DE-Rhens Mainzer Straße,50.277353,7.626322
 Lidl DE-Rietberg Am Bahnhof 2,51.818184,8.431273
 Lidl DE-Rommerskirchen Mariannenpark 1,51.032121,6.69782
@@ -18349,6 +18359,7 @@ Optimile BE-Grimbergen Kerkstraat,50.97294,4.3858
 Optimile BE-Welkenraedt Rue de l’Economie,50.648917,5.989012
 Optimile IT-Foligno Viale Quattro Novembre,42.959595,12.708472
 
+ORLEN DE-Altenkirchen Marktstraße,54.63193,13.34597
 ORLEN DE-Berlin Adlergestell,52.423635,13.55963
 ORLEN DE-Braunschweig Neustadtring,52.273845,10.51193
 ORLEN DE-Dessau Helmut-Kohl-Straße,51.81223,12.24472
@@ -19905,6 +19916,7 @@ Shell GB-Durham High St,54.79479,-1.5209
 Shell GB-Saint Columb Kingsley Village,50.37871,-4.9422,20
 Shell GB-Saltash A38,50.40724,-4.35294
 Shell HU-Pécs Budai Vám utca,46.083554,18.270951
+Shell HU-Szekszárd Palánki út,46.36622,18.70618
 Shell NL-Almere Hopperzuigerstraat,52.40023,5.26233
 Shell NL-Amersfoort Boerderijenboulevard,52.18225,5.43427
 Shell NL-Breda Backer en Ruebweg,51.60233,4.76947
@@ -19983,6 +19995,7 @@ Smatrics AT-Haberl Gewerbepark,47.481074,16.091338
 Smatrics AT-Haid Ikeaplatz,48.197307,14.249527
 Smatrics AT-Haus im Ennstal Ennsling,47.41225,13.7845
 Smatrics AT-Himmelreich Josef-Lindner-Straße,47.79414,12.9867,30
+Smatrics AT-Hochleithen Brünner Straße,48.4255,16.54814,20
 Smatrics AT-Hofstätten an der Raab Hofstätten,47.08223,15.73978
 Smatrics AT-Hofstätten an der Raab Hofstätten,47.08224,15.73976
 Smatrics AT-Horn Prager Straße,48.66451,15.63613
@@ -20308,6 +20321,7 @@ SW-Düsseldorf DE-Düsseldorf Kreuzstraße,51.22168,6.783
 SW-Düsseldorf DE-Düsseldorf Lippestraße,51.21578,6.75865
 SW-Düsseldorf DE-Düsseldorf Mercedesstraße,51.252518,6.793809
 SW-Düsseldorf DE-Düsseldorf Pariser Straße,51.2317,6.73477
+SW-Düsseldorf DE-Düsseldorf Schloßstraße,51.24258,6.78986
 SW-Düsseldorf DE-Düsseldorf Südring,51.200067,6.768847
 SW-Elmshorn DE-Elmshorn Ernst-Abbe-Straße,53.744336,9.699227
 SW-Elmshorn DE-Elmshorn Hamburger Straße,53.74843,9.69172
@@ -21930,6 +21944,7 @@ Zunder ES-Gijon-Este C. de Luís Ortiz Berrocal,43.5247,-5.64128
 Zunder ES-Langreo C. Aurelio Delbrouck,43.29529,-5.68416
 Zunder ES-Lleida Salida,41.66394,0.60495,12
 Zunder ES-Lloret de Mar Carrer Joan Miró,41.71372,2.83083
+Zunder ES-L’Ametlla del Vallès Calle Llerona Poligon,41.66448,2.26983
 Zunder ES-Mieres C. Rector Julio Rodríguez,43.24328,-5.77581
 Zunder ES-Monesterio C. de los Carpinteros,38.08253,-6.25831
 Zunder ES-Rois Sar Galicia,42.77438,-8.65104
