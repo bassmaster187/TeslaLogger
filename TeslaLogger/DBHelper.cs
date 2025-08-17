@@ -6945,14 +6945,21 @@ WHERE
                     con.Open();
                     using (MySqlCommand cmd = new MySqlCommand(@"
 SELECT
-    id
+	chargingstate.id
 FROM
-    chargingstate
+	chargingstate
+JOIN pos on
+	chargingstate.pos = pos.id
 WHERE
-    sessionId IS NULL
-    AND CarID = @CarID
-    AND fast_charger_brand = @brand
-    AND (fast_charger_type = @type1 OR fast_charger_type = @type2)
+	chargingstate.sessionId IS NULL
+	AND chargingstate.CarID = @CarID
+	AND (
+    	(chargingstate.fast_charger_brand = @brand
+		AND (chargingstate.fast_charger_type = @type1
+			OR chargingstate.fast_charger_type = @type2))
+	OR 
+    	(pos.address LIKE '%Supercharger%')
+    	)
 ", con))
                     {
                         cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
