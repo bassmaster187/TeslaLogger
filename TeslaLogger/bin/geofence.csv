@@ -3844,7 +3844,7 @@ Supercharger US-Auburn AL,32.627995,-85.4451
 Supercharger-V3 US-Auburn AL - South College Street,32.576339,-85.498239
 Supercharger-V4 US-Auburn AL Buc-ee’s Blvd,32.55158,-85.52443
 Supercharger-V3 US-Auburn CA,38.92636,-121.05811
-Supercharger US-Auburn Hills MI,42.707498,-83.289748
+Supercharger US-Auburn Hills MI,42.70682,-83.28959
 Supercharger US-Auburn MA,42.203788,-71.832927
 Supercharger US-Auburn WA,47.29803,-122.24873
 Supercharger US-Augusta GA - Belair Frontage Road,33.481707,-82.13021
@@ -5820,7 +5820,7 @@ Tesla Service Center DE-Holzgerlingen,48.63146,9.02684
 Tesla Service Center DE-Karlsruhe Rintheim,49.0091,8.44301
 Tesla Service Center DE-Kirchheim,48.15108,11.74895
 Tesla Service Center DE-Magdeburg,52.16499,11.60307
-Tesla Service Center DE-Mannheim,49.44434,8.574597
+Tesla Service Center DE-Mannheim,49.44428,8.57507
 Tesla Service Center DE-München Parsdorf,48.147015,11.791306
 Tesla Service Center DE-Neu-Ulm,48.386662,10.030265
 Tesla Service Center DE-Nürnberg,49.46377,11.12743
@@ -5978,6 +5978,8 @@ AGROLA CH-Matzingen St. Gallerstrasse,47.515133,8.936507
 AGROLA CH-Murten Freiburgstrasse,46.91822,7.11171
 AGROLA CH-Saint-Maurice Rte du Simplon,46.20708,7.00797
 AGROLA CH-Thusis Äussere Heinzenbergstrasse,46.71082,9.43587
+
+AGSM-AIM IT-Gardone Riviera Piazzale Amleto Fiorini,45.62053,10.56245
 
 AH-Beteiligung DE-Bremen Schwanengatt,53.08038,8.8011
 
@@ -8129,6 +8131,7 @@ CircleK EE-Tartu Lääneringtee,58.36047,26.67667
 CircleK EE-Valga maakond Pikk tn,57.788455,26.048332
 CircleK LT-Kryžkalnis Dvaro gatvė,55.484335,22.58835,25
 CircleK NL-Amsterdam Kromwijkdreef,52.31336,4.98285
+CircleK NL-Weesp Leeuwenveldseweg,52.31384,5.04223
 CircleK NO-Alvdal Nord-Østerdalsveien,62.11837,10.61407
 CircleK NO-Evenes Bedringens vei,68.49635,16.70053
 CircleK NO-Fjellhamar Strømsveien,59.93377,10.98443
@@ -8359,6 +8362,7 @@ Citywatt DE-Zwickau Maxhütte Gewerbering 15,50.705227,12.446013
 
 Civitronic RO-Florești Strada Avram Iancu,46.75105,23.53291
 
+Claus-Heinemann DE-Braunschweig Hansestraße,52.3093,10.5107,20
 Claus-Heinemann DE-Erlangen Wetterkreuz,49.54286,11.02045
 Claus-Heinemann DE-Hannover Lathusenstraße,52.37963,9.79466
 Claus-Heinemann DE-Neu-Ulm Memminger Straße,48.38809,10.00233
@@ -8897,6 +8901,7 @@ da-emobil AT-Matrei in Osttirol Seblas,46.989725,12.544702
 da-emobil AT-Mauer Südlandstraße,48.102048,14.822834
 da-emobil AT-Mayrhofen Durster Straße,47.16854,11.86701
 da-emobil AT-Mieders Stubaital Straße,47.15973,11.36791
+da-emobil AT-Neustift Stubaitalstraße,47.11037,11.30883
 da-emobil AT-Niederndorf,47.648726,12.197558,10
 da-emobil AT-Oberhart Voralpenkreuz,48.06658,14.033971
 da-emobil AT-Oberndorf in Tirol Bahnhofstraße,47.49641,12.38867
@@ -9375,6 +9380,7 @@ E.ON SE-Arvidsjaur Skillnadsgatan,65.59324,19.1637
 E.ON SE-Bunkeflostrand Skånegårdsvägen,55.559388,12.935508,30
 E.ON SE-Eskilstuna Västerleden,59.39352,16.46654
 E.ON SE-Gullspång Storgatan,58.98658,14.09181
+E.ON SE-Haparanda Hastskovägen,65.8409,24.11638
 E.ON SE-Huskvarna Grännavägen,57.78894,14.26533,20
 E.ON SE-Höör Nya Sätoftavägen,55.92608,13.54569
 E.ON SE-Kalmar Dragonvägen,56.674893,16.321684
@@ -13382,6 +13388,7 @@ EWE-GO DE-Oerel Bohlenstraße,53.480004,9.056206
 EWE-GO DE-Oerlenbach An der Heide,50.145132,10.15202
 EWE-GO DE-Ofterdingen Mössinger Straße,48.41129,9.03516
 EWE-GO DE-Olching Geiselbullacher Straße,48.224865,11.333072
+EWE-GO DE-Oldeburg Nadorster Straße,53.16326,8.224
 EWE-GO DE-Oldenburg Alexanderstraße,53.16006,8.20937,30
 EWE-GO DE-Oldenburg Alexanderstraße,53.168715,8.198708
 EWE-GO DE-Oldenburg Am Küstenkanal,53.11206,8.18269
@@ -13793,6 +13800,7 @@ EWZ CH-Zürich Ueberlandstrasse,47.40464,8.5942
 
 EXP HU-Budapest Alkotmány u.,47.507498,19.050478
 
+eze DE-Berlin Brentanostraße,52.4646,13.309
 eze DE-Frankfurt am Main Luxemburgerallee,50.119729,8.711134
 eze DE-Stuttgart Liststraße,48.76381,9.17615
 eze DE-Stuttgart Salzäckerstraße,48.725108,9.152714
@@ -14627,6 +14635,7 @@ HEnW DE-Hamburg Traberweg,53.597641,10.101829
 HEnW DE-Hamburg Uppenhof,53.649316,10.162687
 HEnW DE-Hamburg Wandsbeker Zollstraße,53.574796,10.074154
 HEnW DE-Hamburg Wexstraße,53.551388,9.983344
+HEnW DE-Hamburg Wielandstraße,53.56936,10.05503
 HEnW DE-Hamburg Wiesenhöfen,53.648794,10.167389
 HEnW DE-Hamburg Zeughausmarkt,53.549318,9.974747
 HEnW DE-Hamburg Zirkusweg,53.548362,9.967543
@@ -17523,7 +17532,7 @@ Mer DE-Cham Mittelweg,49.201741,12.66474
 Mer DE-Deggendorf Hans-Obser-Straße,48.828342,12.957826
 Mer DE-Delmenhorst Seestraße,53.029624,8.657849
 Mer DE-Eltville am Rhein Kiliansring,50.025141,8.117298
-Mer DE-Freiburg im Breisgau Hermann-Mitsch-Straße,48.02792,7.83423,20
+Mer DE-Freiburg im Breisgau Hermann-Mitsch-Straße,48.02817,7.83394
 Mer DE-Furtwangen im Schwarzwald Allmendstraße,48.04978,8.21279
 Mer DE-Grammow Raststätte Lindholz,54.054634,12.630382
 Mer DE-Herrenberg Daimlerstraße,48.60211,8.87012
@@ -18346,6 +18355,7 @@ OK DK-Vig Vig Hovedgade,55.85366,11.57749
 OK DK-Vojens Lysbjergvej,55.24597,9.39752
 
 OKQ8 SE-Kalix Parallellgatan,65.85369,23.14756
+OKQ8 SE-Karlsborg Norra Vägen,58.54423,14.5028
 OKQ8 SE-Kiruna Österleden,67.84552,20.25424
 OKQ8 SE-Luleå Robertsviksgatan,65.59071,22.1485,20
 OKQ8 SE-Motala Vintergatan,58.5428,15.01357
@@ -18690,6 +18700,7 @@ Pfalzwerke DE-Eisenberg Schulstraße 18,49.563008,8.07046
 Pfalzwerke DE-Ellerstadt Speyerer Str. 2,49.463404,8.262961
 Pfalzwerke DE-Emmendingen Karl-Friedrich-Straße 97,48.12813,7.829109
 Pfalzwerke DE-Enkenbach-Alsenborn Hauptstraße 18,49.486911,7.897609
+Pfalzwerke DE-Eschborn Elly-Beinhorn-Straße,50.13348,8.562
 Pfalzwerke DE-Essen Econova-Allee,51.494835,6.955067
 Pfalzwerke DE-Essingen In der Windblase 2,49.213957,8.181986
 Pfalzwerke DE-Essingen Schlossstr. 4,49.234667,8.171167
@@ -19806,6 +19817,7 @@ Shell DE-Emmelshausen Trinkbornstraße,50.15952,7.58926
 Shell DE-Empfingen Robert-Bosch-Straße,48.386633,8.72245
 Shell DE-Erkelenz Krefelder Straße,51.083111,6.312259
 Shell DE-Erkrath Max-Planck-Straße,51.20019,6.938561
+Shell DE-Eschborn Zeilsheimer Weg,50.13965,8.56456
 Shell DE-Essen Grenoblestraße,51.446157,7.083139,25
 Shell DE-Essenbach Daimlerstraße,48.586653,12.189322,20
 Shell DE-Euro Rastpark Knetzgau,49.98156,10.55557,25
@@ -21930,6 +21942,8 @@ Wirelane DE-Neubiberg Äußere Hauptstrasse,48.076094,11.659407
 Wirelane DE-Ostseebad Boltenhagen Zum Hafen,53.97411,11.24561
 Wirelane DE-Rechlin Boeker Landstrasse,53.355142,12.733578
 
+WISAG DE-Neuss Hammfelddamm,51.1952,6.71177
+
 WSW DE-Wuppertal Kasinostraße,51.257256,7.141509
 WSW DE-Wuppertal Zentrale,51.27919,7.18726,30
 
@@ -22334,6 +22348,7 @@ DE Ochtrup Designer Outlet,52.21141,7.19994
 DE Offenbach am Main Feldstraße,50.09994,8.76783
 DE Offenbach Betriebshof OVB,50.102554,8.778845,20
 DE Offenbach Honda,50.08437,8.839102
+DE Oldenburg BTC,53.1485,8.198
 DE Ostbevern CANWAY,52.05011,7.84619
 DE Ottobrunn Panasonic,48.05244,11.65555
 DE Paderborn MBörso,51.74011,8.77091
