@@ -1805,6 +1805,7 @@ Supercharger-V4 DE-Bad Dürrheim,48.03618,8.531306
 Supercharger-V3 DE-Bad Oeynhausen,52.21293,8.81407,55
 Supercharger-V4 DE-Bad Rappenau,49.21191,9.07711,30
 Supercharger-V4 DE-Bad Segeberg,53.93756,10.2974
+Supercharger-V4 DE-Bad Segeberg,53.93756,10.29741
 Supercharger-V3 DE-Baden-Baden,48.78364,8.19225
 Supercharger-V3 DE-Barsbüttel,53.578295,10.193266
 Supercharger-V4 DE-Bautzen,51.18878,14.45457
@@ -5367,7 +5368,7 @@ Supercharger US-Santa Ana CA - East 5th Street (Pay to Park Floor 3),33.748711,-
 Supercharger-V3 US-Santa Barbara CA,34.439966,-119.75318
 Supercharger-V3 US-Santa Barbara CA - Anacapa Street (Pay to Park Floor 3),34.419271,-119.697383
 Supercharger US-Santa Clara CA (Floor 2),37.394969,-121.946106
-Supercharger-V3 US-Santa Clarita CA,34.431277,-118.554311
+Supercharger-V3 US-Santa Clarita CA,34.43103,-118.55416
 Supercharger-V3 US-Santa Cruz CA,36.97907,-122.01383
 Supercharger US-Santa Fe NM,35.6116,-106.031465
 Supercharger-V3 US-Santa Maria CA,34.95287,-120.43475
@@ -5795,8 +5796,7 @@ Tesla Service Center BE-Hasselt,50.941851,5.322659
 Tesla Service Center CA-Ottawa ON,45.27277,-75.80032
 Tesla Service Center CA-Québec,46.7959,-71.27943
 Tesla Service Center CA-Vancouver BC,49.26617,-123.08324
-Tesla Service Center CH-Bern,46.95841,7.471903,20
-Tesla Service Center CH-Bern,46.9589,7.472205
+Tesla Service Center CH-Bern,46.95869,7.47198,70
 Tesla Service Center CH-Cham,47.191704,8.456335
 Tesla Service Center CH-Meyrin,46.223633,6.050607
 Tesla Service Center CH-Möhlin,47.57728,7.841
@@ -7088,6 +7088,7 @@ ARAL DE-Autohof Wittenburg,53.5024,11.09788
 ARAL DE-Bad Honnef Gewerbepark Dachsberg,50.646867,7.337694
 ARAL DE-Bautzen Kreckwitzer Straße,51.19029,14.45191
 ARAL DE-Bensheim Wormser Straße,49.67641,8.61158
+ARAL DE-Bergkamen Hellweg,51.6515,7.66315
 ARAL DE-Bernau am Chiemsee Theodor-Sanne-Straße 4,47.81443,12.36756,10
 ARAL DE-Biberach an der Riß Riedlinger Straße 201,48.098797,9.768412,15
 ARAL DE-Bingen am Rhein Hitchinstraße,49.94839,7.90313
@@ -7122,6 +7123,7 @@ ARAL DE-Groß-Bieberau Bahnhofstraße,49.807,8.82528
 ARAL DE-Gyhum An der Autobahn,53.193463,9.289662
 ARAL DE-Halle (Saale) Eislebener Chaussee,51.47139,11.90558
 ARAL DE-Hamburg Dehnhaide,53.57945,10.04504
+ARAL DE-Hamburg Langenhorner Chaussee,53.63884,10.01311
 ARAL DE-Hamburg Stresemannstraße,53.56409,9.9258
 ARAL DE-Hamburg Wilhelm-Iwan-Ring,53.489885,10.114666
 ARAL DE-Hameln Fischbecker Landstraße,52.12086,9.33543
@@ -7477,7 +7479,6 @@ BP DE-Baunatal Langenbergstraße,51.256352,9.413303
 BP DE-Beckum Neubeckumer Straße,51.765792,8.042426
 BP DE-Bergisch Gladbach Dellbrücker Straße,50.988158,7.0877
 BP DE-Bergisch Gladbach Kölner Straße,50.961577,7.147529
-BP DE-Bergkamen Hellweg,51.651404,7.66276
 BP DE-Berlin Berliner Straße,52.5847,13.2879
 BP DE-Berlin Gartenfelder Straße,52.5437,13.2431
 BP DE-Berlin Heerstraße,52.5168,13.17757
@@ -7544,7 +7545,6 @@ BP DE-Hagen Hagener Straße,51.386465,7.477907
 BP DE-Halle (Saale) Dessauer Platz,51.497638,11.982227
 BP DE-Hamburg Bremer Straße,53.438596,9.936119
 BP DE-Hamburg Großmannstraße,53.536485,10.064796
-BP DE-Hamburg Langenhorner Chaussee,53.638696,10.013557
 BP DE-Hamburg Nettelnburger Landweg,53.486731,10.184006
 BP DE-Hamburg Osdorfer Landstraße,53.571399,9.870053
 BP DE-Hamburg Otto-Brenner-Straße,53.489877,10.018841
@@ -10144,7 +10144,6 @@ EnBW DE-Bad Lauchstädt,51.385629,11.879428
 EnBW DE-Bad Lidl,47.553122,7.934753
 EnBW DE-Bad Marienberg (Westerwald) An der Lehmkaute,50.658286,7.966294
 EnBW DE-Bad Nauheim,50.361282,8.754899
-EnBW DE-Bad Nenndorf,52.33487,9.401244
 EnBW DE-Bad Nenndorf Bückethaler Straße,52.33473,9.40125
 EnBW DE-Bad Oeynhausen,52.22735,8.82484
 EnBW DE-Bad Oldesloe,53.79843,10.4052
@@ -10814,7 +10813,7 @@ EnBW DE-Hurlach,48.12758,10.834338
 EnBW DE-Husum,54.4893,9.045069
 EnBW DE-Hutthurm Am Kreisel,48.66868,13.48394
 EnBW DE-Hutthurm Goldener Steig,48.666275,13.48433
-EnBW DE-Höhn,50.61814,7.9826
+EnBW DE-Höhn Einkaufspark,50.61807,7.98197
 EnBW DE-Höhr-Grenzhausen Shell,50.442042,7.665583
 EnBW DE-Hückelhoven,51.052377,6.218845
 EnBW DE-Hüfingen Lindenpark,47.934041,8.497137
@@ -17327,6 +17326,7 @@ Linz AT-Linz Bahnhofplatz,48.29014,14.28962
 Linz AT-Linz Derfflingerstraße,48.308067,14.310401
 Linz AT-Linz Industriezeile,48.301408,14.319432
 Linz AT-Linz Khevenhüllerstraße,48.30076,14.30124
+Linz AT-Linz Pleschinger Straße,48.32798,14.3077
 Linz AT-Linz Wiener Straße,48.28083,14.30952
 Linz AT-Linz Ziegeleistraße,48.29116,14.2749
 Linz AT-Mittertreffling Johann-Wöckinger-Straße,48.337237,14.367777
