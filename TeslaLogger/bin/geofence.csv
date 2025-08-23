@@ -2047,7 +2047,7 @@ Supercharger-V3 DE-Reinfeld,53.8232,10.50352
 Supercharger-V4 DE-Reiskirchen,50.59563,8.818755,30
 Supercharger-V4 DE-Rhüden,51.9472,10.14027,30
 Supercharger-V3 DE-Rhüden,51.94732,10.14113,30
-Supercharger-V4 DE-Ringsheim,48.249992,7.765669,18
+Supercharger-V4 DE-Ringsheim,48.25,7.76567,21
 Supercharger-V4 DE-Rosengarten,53.37879,9.89814
 Supercharger-V3 DE-Rosenheim,47.81716,12.1207,60
 Supercharger-V4 DE Rostock-Bentwisch,54.112772,12.192144
@@ -3776,6 +3776,8 @@ Supercharger-V4 TR-Cankaya Ankara,39.90963,32.77736
 Supercharger-V3 TR-Edirne,41.680352,26.582235
 Supercharger-V3 TR-Ilgaz Çankırı,40.90657,33.64522
 Supercharger-V3 TR-Istanbul Asia Garage Floor -2,41.003233,29.070793
+
+Supercharger-V3 TW-Tainan Park 17,23.0981,120.28154
 
 Supercharger-V3 US-Abbott TX,31.898856,-97.090947
 Supercharger US-Aberdeen MD,39.497983,-76.231175
@@ -6717,6 +6719,7 @@ Allego DE-Karlsruhe Windeckstraße,48.989146,8.373847
 Allego DE-Kehl Eugen-Ensslin-Straße 2,48.57924,7.809228
 Allego DE-Kerpen Kerpener Straße,50.89868,6.68284,30
 Allego DE-Kiel Edisonstr. 44,54.277796,10.161327
+Allego DE-Kiel Langenfelde,54.41783,10.17048
 Allego DE-Kiel Tonberg,54.30154,10.13268
 Allego DE-Kirchheim an der Weinstraße Rosengartenweg 1,49.554129,8.184556
 Allego DE-Kleinostheim,49.994504,9.070058,20
@@ -7077,6 +7080,7 @@ ARAL DE-Autohof Beselich,50.46828,8.13836
 ARAL DE-Autohof Beselich,50.4689,8.1369
 ARAL DE-Autohof Dachsberg,50.6478,7.33438,12
 ARAL DE-Autohof Geseke,51.59753,8.51556,30
+ARAL DE-Autohof Mitterteich,49.93707,12.22777
 ARAL DE-Autohof Northeim,51.73105,9.97313,25
 ARAL DE-Autohof Röttenbach,49.15785,11.04086
 ARAL DE-Autohof Schkeuditz,51.39926,12.19126,30
@@ -7605,7 +7609,6 @@ BP DE-Mayen Kelberger Straße,50.325661,7.213521
 BP DE-Meißen Hochuferstraße,51.169111,13.471323
 BP DE-Menden (Sauerland) Fröndenberger Straße,51.468173,7.76905
 BP DE-Minden Ringstraße,52.299628,8.910349
-BP DE-Mitterteich Gottlieb-Daimler-Straße,49.937048,12.227611
 BP DE-Moers Römerstraße,51.443927,6.661042
 BP DE-Moosburg an der Isar Landshuter Straße,48.463953,11.939814
 BP DE-Mörfelden-Walldorf Industriestraße,49.979273,8.581791
@@ -7732,7 +7735,10 @@ CanariasTeRecarga ES-Arona Puerto de Los Cristianos,28.04854,-16.72018
 
 CEPSA PT-Abrantes A23,39.48615,-8.15876
 
+Charge-and-GO RS-Autoput Subotica-Novi Sad,45.79238,19.6934
 Charge-and-GO RS-Beograd Novosadski put bb,44.865776,20.345872
+Charge-and-GO RS-Dobanovci Добановци Maršala Tita,44.8146,20.25192
+Charge-and-GO RS-Leskovac Лесковац Петра Цакића,42.99974,21.9532
 Charge-and-GO RS-Novi Sad E75,45.276042,19.921247
 Charge-and-GO RS-Subotica Segedinski put,46.100506,19.697765
 Charge-and-GO RS-Čačak Konjevići,43.903191,20.398646
@@ -9265,6 +9271,8 @@ E.ON DE-Raststätte Mellrichstädter Höhe,50.421217,10.350898,30
 E.ON DE-Raststätte Mellrichstädter Höhe,50.42368,10.349982,30
 E.ON DE-Raststätte Muldental,51.26075,12.70525
 E.ON DE-Raststätte Muldental,51.26194,12.7081
+E.ON DE-Raststätte Münsterland Ost,51.94222,7.55108,30
+E.ON DE-Raststätte Münsterland West,51.94554,7.54785,30
 E.ON DE-Raststätte Neustädter Bucht,54.06822,10.75688
 E.ON DE-Raststätte Neustädter Bucht,54.07086,10.75543
 E.ON DE-Raststätte Nürnberg-Feucht,49.3565,11.20164
@@ -11394,7 +11402,7 @@ EnBW DE-Renningen Benzstr.,48.777416,8.932631
 EnBW DE-Reutlingen Am Echazufer,48.484425,9.222523
 EnBW DE-Reutlingen Burger King,48.50178,9.206215
 EnBW DE-Reutlingen Ernst-Abbe-Straße,48.497685,9.15363
-EnBW DE-Reutlingen Föhrstraße 34,48.503274,9.209738,24
+EnBW DE-Reutlingen Föhrstraße,48.50325,9.2097
 EnBW DE-Reutlingen Justus-von-Liebig-Straße,48.49573,9.15782
 EnBW DE-Rheda-Wiedenbrück,51.858613,8.280765
 EnBW DE-Rheinau Freiburger Straße,48.665676,7.938271
@@ -11407,7 +11415,7 @@ EnBW DE-Riedlingen Gammertinger Straße,48.15348,9.47146
 EnBW DE-Riedlingen Tuchplatz,48.150886,9.474832
 EnBW DE-Riegel am Kaiserstuhl Im Kleinfeldele,48.156968,7.745885
 EnBW DE-Rietheim-Weilheim Rathausplatz,48.0376,8.78215
-EnBW DE-Ringsheim Herbolzheimer Straße,48.250279,7.765958,18
+EnBW DE-Ringsheim Herbolzheimer Straße,48.2503,7.76597,18
 EnBW DE-Ringsheim Rathausplatz,48.246225,7.778481
 EnBW DE-Ringsheim Ruster Straße,48.248539,7.772509
 EnBW DE-Rodenbach Am Aueweg,50.15035,9.029481
@@ -15066,8 +15074,6 @@ Innogy DE-Michendorf Zum Weiher,52.283611,13.028056
 Innogy DE-Möhnesee Hauptstraße,51.496778,8.12878
 Innogy DE-Mönsheim Friedrichshof,48.839252,8.868842
 Innogy DE-Mülheim an der Ruhr Mellinghofer Strasse,51.449975,6.883106
-Innogy DE-Münsterland Ost,51.942185,7.551096
-Innogy DE-Münsterland West,51.945622,7.547827
 Innogy DE-Naumburg enviaM,51.143017,11.824768
 Innogy DE-Neuenkirchen Alte Poststr.,52.418583,7.83615
 Innogy DE-Neuss Collingstraße,51.205039,6.689075
@@ -15561,6 +15567,7 @@ Ionity IT-Les Îles de Brissogne,45.73734,7.40525
 Ionity IT-Mondovì,44.42,7.8501
 Ionity IT-Monselice,45.2374,11.76287
 Ionity IT-Montecchio Maggiore,45.50143,11.43584
+Ionity IT-Palermo Via Ernesto Basile,38.09984,13.34624,30
 Ionity IT-Piacenza,45.02694,9.73478
 Ionity IT-Portogruaro,45.79725,12.81914
 Ionity IT-Potenza,40.63193,15.81358
@@ -15572,7 +15579,6 @@ Ionity IT-Trento,46.08704,11.1111
 Ionity IT-Valdichiana Outlet Village,43.22381,11.80217
 Ionity IT-Versilia Est,43.9292,10.22384
 Ionity IT-Versilia Ovest,43.92911,10.22261
-Ionity IT-Via Ernesto Basile. Palermo,38.09959,13.34651
 Ionity LT-Aplinkkelis,55.67252,24.336014,20
 Ionity LT-Kryžkalnis,55.48423,22.58733
 Ionity LT-Mastaičiai Garliava,54.81912,23.85755
@@ -15603,6 +15609,7 @@ Ionity NO-Klett,63.324443,10.305985,30
 Ionity NO-Lakselv Arne M Holdens vei,70.05175,24.96186
 Ionity NO-Lillesand,58.23655,8.29948,25
 Ionity NO-Lura,58.87322,5.72126
+Ionity NO-Mosjøen Kulstadbakken,65.86462,13.19572
 Ionity NO-Nordkjosbotn Torgveien,69.21818,19.56086,25
 Ionity NO-Ringdalskogen,59.11234,10.11033
 Ionity NO-Rygge,59.3871,10.75119
@@ -16402,7 +16409,6 @@ LichtBlick DE-Seßlach Dietersdorfer Straße,50.21794,10.825727
 LichtBlick DE-Sindelfingen Flugfeld-Allee,48.689926,8.993832
 LichtBlick DE-St. Georgen Bahnhofstraße,48.12477,8.34137
 LichtBlick DE-Stalsund Koppelstraße,54.282629,13.085243
-LichtBlick DE-Staßfurt Am Heidfuchsberg,51.896969,11.692548
 LichtBlick DE-Staßfurt Lehrter Str.,51.85448,11.58218
 LichtBlick DE-Sömmerda Parkweg,51.165103,11.117362
 LichtBlick DE-Theilheim Randersackerer Str.,49.752914,10.016214
@@ -17223,6 +17229,7 @@ Lidl HR-Pula Ulica Proštinske bune,44.862711,13.864765
 Lidl HR-Split Ul. kralja Stjepana Držislava,43.5055,16.50692
 Lidl HR-Umag Ulica Poduzetnika,45.4314,13.530979
 Lidl HR-Zadar Benkovačka cesta,44.10375,15.26489
+Lidl HR-Zagreb Donje Svetice,45.8026,16.01377
 Lidl HR-Šibenik Ul. Velimira Škorpika,43.7103,15.9098
 Lidl HU-Budapest Cziffra György,47.433604,19.201023
 Lidl HU-Budapest Erdőkerülő,47.541364,19.150953
@@ -18954,7 +18961,7 @@ Pfalzwerke DE-Rockenhausen Bezirksamtsstraße 8,49.630051,7.818199
 Pfalzwerke DE-Rodalben Bahnhofstr. 7,49.238889,7.633556
 Pfalzwerke DE-Rodenbach Hautpstraße,49.473361,7.653944
 Pfalzwerke DE-Rohrbach Hauptstr. 93,49.132499,8.133472
-Pfalzwerke DE-Rosbach v.d. Höhe Dieselstraße 3,50.299082,8.693083
+Pfalzwerke DE-Rosbach v.d. Höhe Dieselstraße,50.2991,8.693
 Pfalzwerke DE-Rottweil Saline 15,48.143512,8.637975
 Pfalzwerke DE-Ruppertsberg Hauptstraße,49.39939,8.19406
 Pfalzwerke DE-Rödersheim-Gronau Hauptstraße 46,49.430085,8.26563
@@ -20139,6 +20146,7 @@ Smatrics AT-Villach Maria-Gailer-Straße,46.605376,13.865967
 Smatrics AT-Villach Nikolaigasse,46.61523,13.85149
 Smatrics AT-Vorchdorf Feldhamer Straße,48.01106,13.92058
 Smatrics AT-Völs Cytastraße,47.259073,11.322192
+Smatrics AT-Vösendorf Metro Platz,48.12495,16.3225
 Smatrics AT-Vösendorf Südring,48.105341,16.315758
 Smatrics AT-Vösendorf Triester Straße,48.13757,16.325
 Smatrics AT-Wals-Himmelreich Kasernenstraße,47.792453,12.987462
@@ -20630,6 +20638,7 @@ SW-Sondershausen DE-Sondershausen Schachtstraße,51.387738,10.844689
 SW-Speyer DE-Speyer Alte Ziegelei,49.32462,8.44693
 SW-Speyer DE-Speyer Berliner Platz,49.32692,8.41754
 SW-Stade DE-Stade Bremervörder Straße,53.59572,9.437753
+SW-Staßfurt DE-Autohof Brumby,51.897,11.6922,30
 SW-Steinburg DE-Itzehoe Klosterbrunnen,53.93629,9.51815
 SW-Stendal DE-Stendal Bruchweg,52.60838,11.86522
 SW-Stendal DE-Tangermünde Gewerbepark,52.54992,11.95729
@@ -21497,6 +21506,7 @@ Vattenfall SE-Vännäsby Företagsvägen,63.91963,19.82843
 Vattenfall SE-Västervik Rest area Botorpström,57.661834,16.447212
 Vattenfall SE-Åsele Adamsgatan,64.163412,17.347031
 
+vaylens DE-Aue-Bad Schlema Lessingstraße,50.58633,12.69702
 vaylens DE-Bodenheim Lange Ruthe,49.925713,8.324836,18
 vaylens DE-Bottrop Brauerstraße,51.52148,6.92796
 vaylens DE-Friedrichshafen Eckenerstraße,47.65228,9.48248
