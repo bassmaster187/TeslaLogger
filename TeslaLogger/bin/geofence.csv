@@ -115,6 +115,7 @@ Supercharger AU-Keith,-36.099082,140.355645
 Supercharger-V3 AU-Kirrawee NSW,-34.032401,151.073363
 Supercharger AU-Knockrow,-28.749539,153.534722
 Supercharger-V3 AU-Kojonup WA,-33.83748,117.1579
+Supercharger-V4 AU-Laverton VIC,-37.87177,144.7748
 Supercharger AU-Lucas VIC,-37.542964,143.784883
 Supercharger AU-Macquarie,-33.777782,151.12275
 Supercharger AU-Maroochydore,-26.653878,153.087613
@@ -141,6 +142,7 @@ Supercharger AU-Tamworth NSW,-31.101649,150.917126
 Supercharger-V3 AU-Taree NSW,-31.90786,152.461795
 Supercharger-V3 AU-Tenterfield NSW,-29.057293,152.01888
 Supercharger AU-Toowoomba,-27.578061,151.946674
+Supercharger-V3 AU-Tuggeranong ACT,-35.41575,149.066
 Supercharger-V3 AU-Tuggeranong ACT,-35.417617,149.067019
 Supercharger-V3 AU-Tweed Heads NSW,-28.173921,153.545101
 Supercharger-V3 AU-Warrnambool VIC,-38.38127,142.51929
@@ -3860,6 +3862,7 @@ Supercharger US-Auburn Hills MI,42.70682,-83.2896
 Supercharger US-Auburn MA,42.203788,-71.832927
 Supercharger US-Auburn WA,47.29803,-122.24873
 Supercharger US-Augusta GA - Belair Frontage Road,33.481707,-82.13021
+Supercharger-V4 US-Augusta Jimmie Dyess Pkwy,33.4798,-82.12867
 Supercharger US-Augusta ME,44.347861,-69.786019
 Supercharger-V3 US-Aurora IL - IL-59,41.767675,-88.206166
 Supercharger US-Austin TX,30.329202,-97.706266
@@ -3942,6 +3945,7 @@ Supercharger-V3 US-Bismarck ND,46.833065,-100.807401
 Supercharger-V3 US-Black River Falls WI,44.293899,-90.826278
 Supercharger-V3 US-Blaine MN,45.125867,-93.258022
 Supercharger US-Blaine WA,48.93783,-122.6675
+Supercharger-V4 US-Blaine WA Boblett Street,48.99094,-122.7344
 Supercharger US-Blanding UT,37.62559,-109.47387
 Supercharger-V3 US-Bloomington IN,39.16605,-86.57911
 Supercharger-V3 US-Bloomington MN,44.860174,-93.310136
@@ -4010,8 +4014,9 @@ Supercharger-V3 US-Burlingame CA,37.5912,-122.34901
 Supercharger-V3 US-Burlington MA,42.48358,-71.21664
 Supercharger US-Burlington NC,36.070929,-79.509922
 Supercharger US-Burlington NJ,40.10179,-74.79337
-Supercharger-V3 US-Burlington WA,48.45128,-122.33985
-Supercharger-V3 US-Burlington WA Old Highway 99 North,48.50971,-122.33866
+Supercharger US-Burlington WA,48.5097,-122.33866
+Supercharger-V3 US-Burlington WA Marketplace Dr,48.45128,-122.33985
+Supercharger-V4 US-Burlington WA Old Hwy 99 N,48.50935,-122.33787
 Supercharger-V3 US-Burney CA,40.92411,-121.62055
 Supercharger US-Butte MT,45.98123,-112.50721
 Supercharger US-Buttonwillow CA,35.40015,-119.3979
@@ -4771,7 +4776,7 @@ Supercharger-V3 US-Lumberton NC W 5th St,34.62255,-79.04971
 Supercharger US-Lusk WY,42.75601,-104.45202
 Supercharger-V3 US-Lynchburg VA,37.324963,-79.190054
 Supercharger US-Lynnfield MA,42.516398,-71.03219
-Supercharger US-Lynnwood WA,47.846508,-122.272118
+Supercharger US-Lynnwood WA,47.84672,-122.2714
 Supercharger-V3 US-Lynnwood WA - 148th Street Southwest,47.865523,-122.283056
 Supercharger US-Macedonia OH,41.313652,-81.51703
 Supercharger-V3 US-Mackinaw City MI,45.772228,-84.72645
@@ -5014,6 +5019,7 @@ Supercharger-V3 US-Norfolk VA N Military Hwy,36.897401,-76.226427
 Supercharger US-Normal IL (Floor 3),40.508598,-88.985312
 Supercharger-V3 US-Normal IL - East College Avenue,40.51109,-88.94794
 Supercharger-V3 US-Normal IL - West Raab Road,40.532712,-88.997308
+Supercharger-V3 US-North Augusta SC,33.56898,-81.93853
 Supercharger-V3 US-North Aurora IL,41.8034,-88.3711
 Supercharger-V3 US-North Babylon NY,40.739671,-73.318902
 Supercharger-V3 US-North Bend WA,47.467842,-121.716462
@@ -12543,6 +12549,7 @@ EVBox CH-Egerkingen Hausimollstrasse,47.318099,7.802282
 EVBox CH-Urtenen-Schönbühl Industriestrasse,47.01816,7.49243,20
 EVBox DE-Winterberg In d. Büre,51.19823,8.51239
 EVBox FR-Vendays-Montalivet Av. de l’Europe,45.36665,-1.14926
+EVBox FR-Vendays-Montalivet Avenue de l’Europe,45.34798,-1.1494
 EVBox IT-St. Vigilio Corso Lanz,46.7006,11.92962
 EVBox NL-Enschede Strootsweg,52.22154,6.83426
 EVBox NL-Hoofddorp Taurus Avenue,52.28694,4.70725
@@ -15721,6 +15728,7 @@ Ionity SE-Oskarshamn,57.2513,16.44875
 Ionity SE-Spekeröd,58.024744,11.847286
 Ionity SE-Strömstad,58.914771,11.259396
 Ionity SE-Sundsvall,62.33874,17.3538
+Ionity SE-Sveg Ringvägen,62.03276,14.3677
 Ionity SE-Södertälje,59.17525,17.64293
 Ionity SE-Ulricehamn,57.81289,13.41947
 Ionity SE-Umeå Gräddvägen,63.85334,20.29989
@@ -16108,7 +16116,7 @@ Kaufland DE-Rosenheim Kufsteiner Straße 124,47.838391,12.120908
 Kaufland DE-Rosenheim Äußere Münchener Straße 100,47.847333,12.090766
 Kaufland DE-Rostock Pütterweg,54.076824,12.121358
 Kaufland DE-Roth,49.249584,11.093543
-Kaufland DE-Rottenburg am Neckar Tübinger Straße 2,48.473405,8.935785
+Kaufland DE-Rottenburg am Neckar Tübinger Straße,48.47328,8.93644
 Kaufland DE-Rottweil,48.149525,8.640342
 Kaufland DE-Rüsselsheim am Main Alzeyer Straße 11,49.983939,8.401156
 Kaufland DE-Salzwedel Karl-Marx-Straße 13,52.857506,11.151116
@@ -17331,6 +17339,7 @@ Lidl PL-Dąbrówka,52.376433,16.742482
 Lidl PL-Giżycko Bohaterów Westerplatte,54.03546,21.77894
 Lidl PL-Kąty Wrocławskie Handlowa,51.0243,16.76048
 Lidl PL-Leszno,51.84837,16.58207
+Lidl PL-Oświęcim Stanisława Konarskiego,50.04128,19.214
 Lidl PL-Poznań,52.41669,16.890348
 Lidl PL-Poznań,52.44325,16.94678
 Lidl PL-Rokietnica,52.507335,16.737923
@@ -20213,6 +20222,7 @@ Smatrics AT-Oberwart Europastraße,47.28558,16.18527
 Smatrics AT-Oberwart Grazerstraße,47.28453,16.18613
 Smatrics AT-Parndorf Pannoniastraße,47.975773,16.852937
 Smatrics AT-Perchtoldsdorf Donauwörther Straße,48.12422,16.26568
+Smatrics AT-Poggersdorf Wirtschaftspark,46.64183,14.44983
 Smatrics AT-Pöchlarn Heizwerkstraße,48.202455,15.22267
 Smatrics AT-Rastplatz Schottwien,47.64921,15.85833
 Smatrics AT-Raststation Simmering,48.18156,16.44427
@@ -22268,6 +22278,7 @@ AT Gurten Future Dome,48.24205,13.33889
 AT Götzis Zoowelt Stromberger,47.34547,9.65628
 AT Hartberg Hauptplatz,47.281412,15.968967,20
 AT Hinterriß Natur.Erlebnis.Hotel,47.47312,11.46734
+AT Hintertux Hotel Klausnerhof,47.11524,11.6812
 AT Hörsching Gasthof Mandorfer,48.2194,14.19332
 AT Klagenfurt Richarg-Wagner-Straße,46.61872,14.30134
 AT Kottingbrunn SMARTplast,47.95858,16.25749,60
@@ -22505,6 +22516,7 @@ DE München Pariser Straße,48.127388,11.598612,60
 DE München Wacker Chemie,48.12366,11.6055
 DE Neumünster Steenkoppel,54.0468,9.95665
 DE Neuss An der Skihalle,51.17069,6.649,20
+DE Neustadt in Holstein Campingplatz An der Düne,54.09368,10.8869
 DE Nidderau BROSCHEIT,51.19155,13.50824
 DE Norden WBZ Parkplatz,53.595065,7.207816
 DE Norderstedt Oststraße,53.740318,10.016947
