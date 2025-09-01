@@ -1,4 +1,4 @@
-Supercharger-V4 AT-Amstetten,48.13191,14.84103
+Supercharger-V4 AT-Amstetten,48.13232,14.84104
 Supercharger-V4 AT-Ansfelden,48.195342,14.249553
 Supercharger-V3 AT-Asten,48.221323,14.406747
 Supercharger AT-Biberwier,47.372431,10.886093
@@ -2364,6 +2364,7 @@ Supercharger-V3 FR-Aire du Granier,45.525586,5.97485
 Supercharger-V3 FR-Aire du Jura,46.774663,5.522206
 Supercharger FR-Aire du Poulet de Bresse,46.496045,5.310426
 Supercharger FR-Aire d’Urvillers,49.787019,3.335626
+Supercharger-V4 FR-Aire-sur-l’Adour,43.72515,-0.26717
 Supercharger FR-Aix-en-Provence,43.510648,5.456439
 Supercharger-V4 FR-Aix-en-Provence Jas de Bouffan,43.533585,5.416702
 Supercharger-V4 FR-Aix-en-Provence Mercure,43.51368,5.46683
@@ -2980,7 +2981,7 @@ Supercharger IT-Pollein,45.737122,7.372441
 Supercharger-V3 IT-Porto Sant’Elpidio,43.232404,13.749889
 Supercharger-V4 IT-Potenza,40.631634,15.834372
 Supercharger-V4 IT-Reggio Emilia,44.714879,10.638041
-Supercharger-V3 IT-Rimini,44.040676,12.589337
+Supercharger-V3 IT-Rimini,44.04066,12.589
 Supercharger-V4 IT-Roma,41.88447,12.606245
 Supercharger-V3 IT-Roma Aurelio,41.90242,12.43941
 Supercharger-V4 IT-Roma East,41.942448,12.643581
@@ -4689,7 +4690,7 @@ Supercharger US-Las Vegas NV,35.621984,-105.205447
 Supercharger US-Las Vegas NV - Blvd South,36.070704,-115.172895
 Supercharger-V3 US-Las Vegas NV - East Sahara Avenue,36.145062,-115.102638
 Supercharger-V3 US-Las Vegas NV - Linq High Roller,36.116648,-115.168277
-Supercharger-V3 US-Las Vegas NV - South Eastern Avenue,36.083017,-115.120163
+Supercharger-V3 US-Las Vegas NV - South Eastern Avenue,36.08312,-115.1206
 Supercharger US-Las Vegas NV Bridger Avenue,36.165906,-115.138655
 Supercharger-V3 US-Las Vegas NV Grand Central Parkway,36.16602,-115.15913
 Supercharger-V4 US-Las Vegas NV Purple Heart Highway,36.239192,-115.249857
@@ -9051,6 +9052,7 @@ e-motum FR-Ajaccio Bd Louis Campi,41.94399,8.75469,30
 e-motum FR-Bonifacio Av. Sylvère Bohn,41.39012,9.16489,25
 e-motum FR-Calvi Av. Christophe Colomb,42.55448,8.76222,30
 e-motum FR-Calvi Rue Albert 1er,42.56798,8.7585,25
+e-motum FR-Corte Route d´Ajaccio,42.30187,9.15725
 e-motum FR-Ghisonaccia Av. du 9 Septembre,42.017285,9.406426
 e-motum FR-Lucciana Airport of Bastia Poretta,42.54707,9.47971
 e-motum FR-Porto-Vecchio Rue Henri Frenay,41.60633,9.2779,30
@@ -9400,6 +9402,7 @@ E.ON DK-Tønder Skibbroen,54.93428,8.86517
 E.ON DK-Vejle Skærup Øst,55.64045,9.563059
 E.ON DK-Væggerløse Væggerløsevej,54.70973,11.919614
 E.ON HU-Debrecen Kishatár utca,47.54231,21.58161
+E.ON HU-Siófok Attila u.,46.89198,18.05822
 E.ON HU-Zalaegerszeg Balatoni út,46.84285,16.86776,25
 E.ON NO-Evje Verksvegen,58.58311,7.79784
 E.ON NO-Kløfta Kongsvingervegen,60.07771,11.14611
@@ -9533,6 +9536,7 @@ Ecotap DE-Nürnberg Lübener Straße,49.410359,11.139266,25
 Ecotap DE-Vogtsburg Badbergstraße,48.09542,7.66305
 Ecotap DE-Völklingen Rathausstraße,49.24724,6.84563
 Ecotap NL-Goes Goese Poort,51.5068,3.87532,30
+ecotap NL-Noordwelle Strandpark de Zeeuwse Kust,51.73626,3.8061
 Ecotap NL-Vaals Drielandenpunt,50.75671,6.01888
 Ecotap NL-Wemeldinge Oostelijke Kanaalweg,51.51578,4.00752
 Ecotap NL-Wemeldinge Ruisweg,51.521996,3.980178
@@ -12108,6 +12112,7 @@ EnelX IT-Orta San Giulio Via Panoramica,45.79747,8.41471
 EnelX IT-Palermo Via Marchese di Villabianca,38.139612,13.349534
 EnelX IT-Peschiera del Garda Via Venezia,45.44199,10.70614
 EnelX IT-Piazza Stazione Via Francesco Baracca,45.75498,8.56061
+EnelX IT-Pietra Ligure Via Ignazio Borro,44.15123,8.28485
 EnelX IT-Pietra Ligure Viale 25 Aprile,44.14421,8.27462
 EnelX IT-Pizzo Tirrena Inferiore,38.77308,16.21561
 EnelX IT-Poggibonsi Via Salceto,43.46754,11.15499
@@ -12124,6 +12129,7 @@ EnelX IT-Roma Viale dei Quattro Venti,41.8797,12.45856
 EnelX IT-Rovigo Viale Porta Adige,45.08557,11.78552
 EnelX IT-Saluzzo Via F. e G. Lattanzi,44.64589,7.50439
 EnelX IT-San Benedetto del Tronto Via della Liberazione,42.94108,13.88002
+EnelX IT-San Vincenzo Via Firenze,43.09,10.54203
 EnelX IT-San Vito Via Antonio Meucci,39.43443,9.55033
 EnelX IT-Sant’Ambrogio di Torino Piazza Repubblica,45.09813,7.36265
 EnelX IT-Sant’Antioco Piazzale Sandro Pertini,39.06536,8.45762
@@ -13835,6 +13841,7 @@ Ewiva IT-Giave Statale,40.467727,8.739463
 Ewiva IT-Guidonia Montecelio Via Volturno,42.0,12.72475
 Ewiva IT-Lainate Via Juan Manuel Fangio,45.56472,9.04596,20
 Ewiva IT-Livorno Viale Giovanni Boccaccio,43.53607,10.32351
+Ewiva IT-Loano Via Aurelia,44.13444,8.26283
 Ewiva IT-Milano Via Benozzo Gozzoli,45.4514,9.09544
 Ewiva IT-Milazzo Via Arno,38.18799,15.26918
 Ewiva IT-Mogliano Veneto Via Bonfadini,45.584343,12.287914,20
@@ -15217,6 +15224,7 @@ Intermarché FR-Riez Rte de Puimoisson,43.82255,6.09129
 intrafürth DE-Fürth Europaallee,49.453,11.00065,30
 intrafürth DE-Fürth Moststraße,49.47295,10.99221
 
+Ionity AT-Amstetten Oiden,48.13138,14.84032
 Ionity AT-Angath Nord,47.519215,12.065526
 Ionity AT-Ansfelden Haider Straße,48.210977,14.27965,25
 Ionity AT-Eberstalzell Solarstraße,48.03913,13.99065,30
@@ -16664,7 +16672,7 @@ Lidl DE-Bad Driburg Mühlenstr. 12,51.733095,9.023268
 Lidl DE-Bad Dürkheim,49.468814,8.202294
 Lidl DE-Bad Fallingbostel Düshorner Straße 16,52.863599,9.687641
 Lidl DE-Bad Honnef,50.646978,7.315188
-Lidl DE-Bad Kreuznach,49.841179,7.871719,10
+Lidl DE-Bad Kreuznach Alzeyer Straße,49.84117,7.87173
 Lidl DE-Bad Laasphe Ludwig-Koch-Straße 7,50.92959,8.423907
 Lidl DE-Bad Lippspringe An der Weberei 2,51.77631,8.805487
 Lidl DE-Bad Schandau Dresdner Straße 15,50.92066,14.142974
@@ -20111,6 +20119,7 @@ Shell GB-Saint Columb Kingsley Village,50.37871,-4.9422,20
 Shell GB-Saltash A38,50.40724,-4.35294
 Shell HU-Budapest Könyves Kálmán körút,47.4706,19.08696
 Shell HU-Pécs Budai Vám utca,46.083554,18.270951
+Shell HU-Siófok Vak Bottyán u.,46.89286,18.05578
 Shell HU-Szekszárd Palánki út,46.36622,18.70618
 Shell NL-Almere Hopperzuigerstraat,52.40023,5.26233
 Shell NL-Amersfoort Boerderijenboulevard,52.18225,5.43427
@@ -21715,6 +21724,7 @@ Virta FR-Saintes Rue de la Côte de Beauté,45.746659,-0.669742
 Virta IS-Akureyri Gleráreyrar,65.68835,-18.10166
 Virta SE-Gävle Geodetgatan,60.64035,17.14678
 Virta SE-Höör Frostavallsvägen,55.93715,13.55393
+Virta SE-Järpen Lagervägen,63.3599,13.438
 Virta SE-Luleå Besiktningsvägen,65.617968,22.044465
 Virta SE-Råneå Kängsövägen,65.85626,22.29
 Virta SE-Smygehamn Smyge strandväg,55.339217,13.35998
@@ -22270,6 +22280,7 @@ AT Altentann Berg,47.891075,13.21846
 AT Bad Häring Hotel DAS SIEBEN,47.51318,12.11127
 AT Elsbethen RB,47.7667,13.08544
 AT Eugendorf Center,47.860013,13.126857,20
+AT Fuschl am See RB,47.79048,13.29502
 AT Graz Mursteg-Energie Steiermark,47.05494,15.43691
 AT Graz Radisson Hotel,47.07095,15.4199
 AT Guntramsdorf Ozeanstraße,48.06429,16.31524
@@ -22292,6 +22303,7 @@ AT Linz PLUSCITY,48.2428,14.23398
 AT Linz PLUSCITY,48.24345,14.23428,25
 AT Linz PLUSCITY,48.24397,14.2348,25
 AT Linz PLUSCITY,48.24458,14.23531,25
+AT Maurach Seecamping Wimmer,47.43277,11.73445,70
 AT Mühldorf Wolf,47.89012,13.93895
 AT Parkplatz Straß,46.73086,15.64186
 AT Pasching Tractive,48.24068,14.2338
@@ -22537,6 +22549,7 @@ DE Ottobrunn Panasonic,48.05244,11.65555
 DE Paderborn MBörso,51.74011,8.77091
 DE Parkplatz Staufenberg A7,51.34918,9.60625
 DE Pettstadt Gemeinde,49.830728,10.925097
+DE Pforzheim Deichlerweg,48.902,8.67445
 DE Porta Westfalica rococom,52.2324,8.91289
 DE Prichsenstadt Gewerbegebiet-Ost,49.81766,10.36377,70
 DE Putgarten Dorfstraße,54.67084,13.41001
