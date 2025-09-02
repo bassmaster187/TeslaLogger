@@ -96,20 +96,24 @@ namespace UnitTestsTeslalogger
             Assert.AreEqual("2.1.7-Beta.2", version);
         }
 
-
         [TestMethod]
-        public void GoEMeter()
+        public void GoECharger()
         {
-            string url = Settings.Default.ElectricityMeterGoEURL;
+            var v = new ElectricityMeterGoE("", "");
+            v.status = System.IO.File.ReadAllText(@"..\..\testdata\goe.txt");
 
-            if (string.IsNullOrEmpty(url))
-                Assert.Inconclusive("No Settings for Go-E Charger");
-
-            var v = new ElectricityMeterGoE(url, "");
+            double? kwh = v.GetVehicleMeterReading_kWh();
+            var charging = v.IsCharging();
+            var utility_meter_kwh = v.GetUtilityMeterReading_kWh();
+            var version = v.GetVersion();
             string ret = v.ToString();
             Console.WriteLine(ret);
-        }
 
+            Assert.AreEqual(673329.3, kwh);
+            Assert.AreEqual(false, charging);
+            Assert.AreEqual(81.8, utility_meter_kwh);
+            Assert.AreEqual("59.4", version);
+        }
 
         [TestMethod]
         public void CFos()
