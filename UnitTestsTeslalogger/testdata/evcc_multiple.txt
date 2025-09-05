@@ -1,5 +1,4 @@
 {
-  "result": {
     "auth": {},
     "aux": [],
     "battery": [
@@ -266,6 +265,5 @@
         "repeatingPlans": []
       }
     },
-    "version": "0.133.0"
-  }
+    "version": "0.207.5"
 }

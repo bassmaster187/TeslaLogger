@@ -81,18 +81,18 @@ namespace TeslaLogger
             JToken loadpoint = null;
             // loadpointcarname can be vehicle title ("TestCar1", vehicle name ("tsla") or loadpoint name ("Wallbox1")
             // Maybe vehicle name?
-            loadpoint = json.SelectToken($"$.result.loadpoints[?(@.vehicleName == '{loadpointcarname}')]");
+            loadpoint = json.SelectToken($"$.loadpoints[?(@.vehicleName == '{loadpointcarname}')]");
 
             if (loadpoint == null)
             {
                 // it's not a vehicle name, maybe vehicle title?
-                foreach (var vehicle in json.result.vehicles)
+                foreach (var vehicle in json.vehicles)
                 {
                     string vehicleTitle = vehicle.Value.title;
                     string vehicleName = vehicle.Name;
                     if (vehicleTitle == loadpointcarname)
                     {
-                        loadpoint = json.SelectToken($"$.result.loadpoints[?(@.vehicleName == '{vehicleName}')]");
+                        loadpoint = json.SelectToken($"$.loadpoints[?(@.vehicleName == '{vehicleName}')]");
                         continue;
                     }
                 }
@@ -100,7 +100,7 @@ namespace TeslaLogger
                 if (loadpoint == null)
                 {
 
-                    loadpoint = json.SelectToken($"$.result.loadpoints[?(@.title == '{loadpointcarname}')]");
+                    loadpoint = json.SelectToken($"$.loadpoints[?(@.title == '{loadpointcarname}')]");
                     if (loadpoint == null)
                     {
                         return null;
@@ -122,10 +122,10 @@ namespace TeslaLogger
                 if (jsonResult == null)
                     return null;
 
-                if (!Tools.IsPropertyExist(jsonResult, "result"))
+                if (!Tools.IsPropertyExist(jsonResult, "grid"))
                     return null;
 
-                JToken grid = jsonResult.SelectToken($"$.result.grid");
+                JToken grid = jsonResult.SelectToken($"$.grid");
                 if (grid != null)
                 {
                     Dictionary<string, object> r1 = grid.ToObject<Dictionary<string, object>>();
@@ -171,7 +171,7 @@ namespace TeslaLogger
                 if (jsonResult == null)
                     return null;
 
-                if (!Tools.IsPropertyExist(jsonResult, "result"))
+                if (!Tools.IsPropertyExist(jsonResult, "loadpoints"))
                     return null;
 
                 JToken loadpoint = getLoadPointJson(jsonResult);
@@ -212,7 +212,7 @@ namespace TeslaLogger
                 if (jsonResult == null)
                     return null;
 
-                if (!Tools.IsPropertyExist(jsonResult, "result"))
+                if (!Tools.IsPropertyExist(jsonResult, "loadpoints"))
                     return null;
 
                 JToken loadpoint = getLoadPointJson(jsonResult);
@@ -255,7 +255,7 @@ namespace TeslaLogger
                 if (jsonResult == null)
                     return null;
 
-                if (!Tools.IsPropertyExist(jsonResult, "result"))
+                if (!Tools.IsPropertyExist(jsonResult, "loadpoints"))
                     return null;
 
                 JToken loadpoint = getLoadPointJson(jsonResult);
@@ -296,14 +296,10 @@ namespace TeslaLogger
                 if (jsonResult == null)
                     return null;
 
-                if (!Tools.IsPropertyExist(jsonResult, "result"))
+                if (!Tools.IsPropertyExist(jsonResult, "version"))
                     return null;
 
-                Dictionary<string, object> r1 = jsonResult["result"].ToObject<Dictionary<string, object>>();
-
-                r1.TryGetValue("version", out object value);
-                
-                return value.ToString();
+                return jsonResult.version.ToString();
             }
             catch (Exception ex)
             {
