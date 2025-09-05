@@ -2270,6 +2270,7 @@ Supercharger-V3 ES-Ondara,38.816859,0.022245
 Supercharger-V3 ES-Pamplona,42.783886,-1.630849,60
 Supercharger ES-Reocín,43.355578,-4.09496
 Supercharger ES-Rivabellosa,42.701171,-2.91951
+Supercharger-V4 ES-Rivas Vaciamadrid,40.33593,-3.52432
 Supercharger-V3 ES-Sagunto,39.67293,-0.26609
 Supercharger-V3 ES-Salamanca,40.945571,-5.639382
 Supercharger-V3 ES-San José de la Rinconada,37.44024,-5.88562
@@ -2629,7 +2630,6 @@ Supercharger-V3 FR-Vouillé,46.29825,-0.37526
 Supercharger-V3 FR-Vélizy 2,48.78399,2.2209
 Supercharger-V3 FR-Épinal,48.20083,6.477478
 Supercharger-V3 FR-Évry-Courcouronnes,48.61589,2.4239
-Supercharger-V4 FR-Aire-sur-l'Adour,43.725137;-0.267258
 
 Supercharger-V3 GB-Aberdeen - Service Centre,57.110088,-2.092787
 Supercharger-V3 GB-Aberystwyth,52.4047,-4.06458
@@ -7486,6 +7486,7 @@ BMW DE-Unterschleißheim Röntgenstraße,48.28313,11.56757
 BMW DE-Wittenberg Dessauer Straße,51.8655,12.62283
 BMW DE-Würzburg Louis-Pasteur-Straße,49.7939,9.99685
 BMW DK-Aarhus Blomstervej,56.18134,10.12531
+BMW FR-Coquelles Pl. de Cantorbery,50.93795,1.80884
 BMW PT-Évora R. da Barba Rala,38.5498,-7.91328
 
 Boostcharge BE-Roeselare Kwadestraat,50.919787,3.172201
@@ -8098,6 +8099,8 @@ ChargePoint US-Union City GA Londonderry Way,33.57017,-84.53828
 ChargePoint US-Virginia MN N 3rd Ave W,47.5248,-92.5357
 ChargePoint US-West Gardiner Maine Turnpike,44.207405,-69.827123
 
+chargespot GR-Ξανθη χιλ Ξανθης-Καβαλας,41.12297,24.88067
+
 ChargeUp CZ-Brno-Královo Pole Cimburkova,49.217029,16.606141
 
 Chargewell BE-Oostende Buskruitstraat,51.23613,2.927147
@@ -8190,6 +8193,7 @@ CircleK SE-Nyköping Norrköpingsvägen,58.74967,16.986,15
 CircleK SE-Sigtuna Cederströms Slinga,59.60648,17.89644
 CircleK SE-Skellefteå Kågevägen,64.75814,20.9659
 CircleK SE-Solna Järva krog,59.38018,18.00905
+CircleK SE-Stavsjö Stavsjö trafikplats,58.7304,16.41052
 CircleK SE-Upplands Väsby Kapellvägen,59.51355,17.92023
 CircleK SE-Västerås Bergslagsvägen,59.63558,16.56038
 
@@ -9852,6 +9856,7 @@ Elanga AU-Springwood QLD Magellan Rd,-27.6332,153.13834
 
 Elbizz NL-Hilversum Bisonlaan,52.23422,5.14745
 
+ElDrive BG-Студена Автомагистрала Струма,42.5392,23.12914
 ElDrive LT-Vilnius Vikingų g.,54.649788,25.279766
 ElDrive RO-Brașov Strada Egretei,45.6638,25.56452
 ElDrive RO-Brașov Strada Lacurilor,45.61709,25.64602
@@ -9998,6 +10003,7 @@ ELEN HR-Sonković Prokljan,43.85571,15.84595
 ELEN HR-Sonković Prokljan,43.85668,15.84604
 ELEN HR-Split Blatine-Škrape,43.50687,16.46234
 ELEN HR-Split Lovret,43.51917,16.44634
+ELEN HR-Split Varaždinska ul.,43.5199,16.45365
 ELEN HR-Stankovci Krka,43.80533,15.91633
 ELEN HR-Sukošan Put Raskrižja,44.04363,15.30981
 ELEN HR-Vižinada,45.33017,13.75735
@@ -10042,6 +10048,7 @@ ElpeFuture GR-Kozani Κοζάνη Larisis,39.36797,22.92143
 ElpeFuture GR-Makrichori Epar.Od. Larisas-Evaggelismou,39.81472,22.50856
 ElpeFuture GR-Velo Βέλου E.O. Korinthou Patron,37.9745,22.74162
 ElpeFuture GR-Veria Βέροια Stadiou,40.53804,22.202
+ElpeFuture GR-Δήμος Τρικκαίων Καρδίτσης,39.54456,21.77598
 
 Elwateg DE-Emstek Otto-Hahn-Straße,52.82918,8.11697
 
@@ -12747,6 +12754,7 @@ EVN AT-Wolkersdorf Julius Bittner Platz,48.3852,16.51515
 EVN AT-Ybbsitz Alte Poststraße,47.94852,14.89427
 EVN AT-Zwettl Gartenstraße,48.604227,15.16982
 EVN DE-Nordhausen Engelsburg,51.503143,10.793401
+EVN MK-Gevgelija Граничен Премин Богородица,41.13812,22.54435
 EVN MK-Negotino Неготино ул. Железничка бр.,41.4995,22.10018
 EVN MK-Skopje Скопје International Airport,41.9606,21.62992
 
@@ -17279,7 +17287,7 @@ Lidl FR-Bitche Rue de la Gare,49.048803,7.431454
 Lidl FR-Crolles Rue du Moulin,45.27482,5.88429,30
 Lidl FR-Dives-sur-Mer Rue Général de Gaulle,49.28573,-0.11027
 Lidl FR-Dol-de-Bretagne Rue de la Janaie,48.5524,-1.7239
-Lidl FR-Eauze Av. des Pyrénées,43.8523,0.09706
+Lidl FR-Eauze Avenue des Pyrénées,43.852296,0.097045
 Lidl FR-Jurançon Av. du 18 Juin,43.29089,-0.40521
 Lidl FR-La Ciotat Chem. de la Pépinière,43.18993,5.60227,25
 Lidl FR-Lamballe-Armor Rue des Prés Jouettes,48.481044,-2.499486
@@ -17309,12 +17317,12 @@ Lidl FR-Varennes-sur-Seine Rte du Petit Fossard,48.36123,2.95788
 Lidl FR-Vendargues Av. des Bigos,43.65254,3.961,25
 Lidl FR-Vitrolles Av. Jean Monnet,43.42349,5.28486
 Lidl FR-Wissembourg All. des Peupliers Altenstadt,49.03075,7.95498
-Lidl FR-Eauze Avenue des Pyrénées,43.852296,0.097045
 Lidl GB-Witney New Cl Ln,51.7736,-1.4931
 Lidl GR-Anatoli Ανατολή Digeni Akrita,39.6278,20.8594
 Lidl GR-Kallithea Καλλιθέα Epar.Od. Paliouriou-Afitou,40.06055,23.43108
 Lidl GR-Lefkada Λευκάδα Ep.Od. Lefkadas,38.81592,20.7115
 Lidl GR-Limenas Thasou Λιμένας Θάσου Dimitriadou,40.74142,24.57825
+Lidl GR-Λιμένας Θάσου Δημητριάδη,40.77452,24.7002
 Lidl HR-Biograd na Moru,43.944678,15.453368
 Lidl HR-Dubrovnik Ulica Tomislava Macana,42.630673,18.166585
 Lidl HR-Krk Stjepana Radića,45.03556,14.56825
@@ -17446,6 +17454,7 @@ Linz AT-Linz Ziegeleistraße,48.29116,14.2749
 Linz AT-Mittertreffling Johann-Wöckinger-Straße,48.337237,14.367777
 Linz AT-Puchenau Golfplatzstraße,48.310791,14.233391
 Linz AT-Sierning Gewerbestraße,48.035646,14.314642
+Linz AT-Traunkirchen Feldstraße,47.85582,13.7796
 Linz AT-Walding Gewerbepark,48.34604,14.16071
 
 Ljusdal-Energi SE-Kårböle Härjedalsvägen,61.98695,15.30037
@@ -19753,6 +19762,7 @@ Salzburg AT-Bad Hofgastein Kurgartenstraße,47.16968,13.09925
 Salzburg AT-Bad Hofgastein Weitmoserstraße,47.15729,13.10638
 Salzburg AT-Bruck Kaprunerstraße,47.28744,12.81005
 Salzburg AT-Burgfried Kletzlgutweg,47.68496,13.10582
+Salzburg AT-Flachau Flachauer Straße,47.3535,13.39418
 Salzburg AT-Flachau Flachauer Straße,47.35444,13.39315
 Salzburg AT-Fuschl am See Kirchenstraße,47.79478,13.302881
 Salzburg AT-Glasenbach Johann-Herbst-Straße,47.769818,13.086961
@@ -22672,6 +22682,7 @@ NO Trondheim SINTEF,63.4137,10.4101
 NZ Mount Maunganui Bayfair Shopping Centre,-37.67495,176.2245
 PL Best Western Plus Krakow Old Town,50.058091,19.941162
 PL Kraków Hyatt Place,50.06283,19.90943
+PL Oświęcim Hotel Imperiale,50.0288,19.19825
 PT Alcantarilha Sudoeste Retail Park,37.13211,-8.35923
 PT Almada Forum,38.65966,-9.17526
 PT Lisboa Hotel Hyatt Regency,38.6985,-9.18689
