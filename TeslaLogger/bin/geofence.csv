@@ -51,7 +51,7 @@ Supercharger-V4 AT-Steyr,48.049589,14.414486
 Supercharger-V4 AT-Stockerau,48.38855,16.18087
 Supercharger-V4 AT-Stumm,47.28995,11.88771,25
 Supercharger-V4 AT-Suben,48.394466,13.426544
-Supercharger-V4 AT-Trieben,47.494091,14.483165
+Supercharger-V4 AT-Trieben,47.49214,14.48394
 Supercharger AT-Vienna,48.157246,16.334045
 Supercharger AT-Villach,46.604193,13.869091
 Supercharger-V3 AT-Villach-Ost,46.60166,13.88302
@@ -2000,7 +2000,7 @@ Supercharger-V4 DE-Köln-Goltstein,50.9079,6.97083
 Supercharger-V3 DE-Kösching,48.811333,11.479899
 Supercharger-V4 DE Langenhagen,52.458282,9.716301
 Supercharger-V4 DE-Laucha,50.922513,10.5533
-Supercharger-V3 DE-Lauenau,52.27895,9.35083,55
+Supercharger-V3 DE-Lauenau,52.2791,9.351,60
 Supercharger-V3 DE-Leer,53.25967,7.45557
 Supercharger-V3 DE-Lehre,52.31315,10.63488,30
 Supercharger-V4 DE-Leipzig Central,51.3465,12.39433
@@ -2060,7 +2060,7 @@ Supercharger-V4 DE-Neuss,51.200904,6.713603
 Supercharger-V4 DE-Neustadt an der Weinstraße (Globus),49.3408,8.16172
 Supercharger-V3 DE-Norden,53.61365,7.16718,37
 Supercharger-V3 DE-Northeim,51.731815,9.972845,35
-Supercharger-V3 DE-Nossen,51.08255,13.27406,30
+Supercharger-V3 DE-Nossen,51.08255,13.27406
 Supercharger-V3 DE-Nottuln,51.911341,7.398553,40
 Supercharger-V3 DE-Nörten-Hardenberg,51.632847,9.909942
 Supercharger DE-Nürburgring,50.335528,6.948887
@@ -2154,7 +2154,7 @@ Supercharger-V3 DE-Waiblingen,48.821498,9.296802
 Supercharger-V3 DE-Waldlaubersheim,49.92401,7.82565
 Supercharger-V4 DE-Waltersdorf Am Rondell,52.368556,13.558913
 Supercharger-V4 DE-Waltershausen,50.90015,10.5653
-Supercharger-V3 DE-Weibersbrunn,49.934777,9.353755
+Supercharger-V3 DE-Weibersbrunn,49.93484,9.35315,65
 Supercharger-V4 DE-Weimar,50.93422,11.28981
 Supercharger-V4 DE-Weimar Nord,50.993,11.3317
 Supercharger-V4 DE-Weischlitz,50.43925,12.08933
@@ -4462,6 +4462,7 @@ Supercharger US-Frederick MD,39.384667,-77.405375
 Supercharger-V3 US-Frederick MD Ballenger Creek Pike,39.39256,-77.43862
 Supercharger US-Fredericksburg VA,38.22593,-77.50614
 Supercharger-V3 US-Fredericksburg VA - Jefferson Davis Highway,38.19418,-77.50749
+Supercharger-V4 US-Fredericksburg VA Falcon Dr,38.25,-77.49312
 Supercharger-V3 US-Fredonia NY,42.454084,-79.30868
 Supercharger-V3 US-Freehold NJ,40.238545,-74.228533
 Supercharger US-Freeport ME,43.85884,-70.10409,30
@@ -7347,6 +7348,7 @@ Audi DE-Ingolstadt Senefelderstraße,48.78145,11.418156
 Audi DE-Karlsruhe Gerwigstraße,49.006383,8.443331
 Audi DE-Marktheidenfeld Würzburger Straße,49.84067,9.6073
 Audi DE-München Albrechtstraße,48.154947,11.540685
+Audi DE-München Bodenseestraße,48.1446,11.4387
 Audi DE-München Flughafen,48.349538,11.757035
 Audi DE-München Wasserburger Landstraße,48.119381,11.679983
 Audi DE-München Zielstattstraße,48.10333,11.53178
@@ -11595,6 +11597,7 @@ EnBW DE-Sandhausen Bahnhofstr.,49.341823,8.660026
 EnBW DE-Sandhausen Philipp-Schmitt-Str.,49.341102,8.650649
 EnBW DE-Sangerhausen,51.46709,11.27952
 EnBW DE-Sankt Augustin,50.793631,7.175794
+EnBW DE-Sankt Augustin Johann-Quadt-Straße,50.78056,7.1483
 EnBW DE-Sankt Blasien Am Kugelrain,47.764645,8.123457
 EnBW DE-Sankt Goarshausen Nastätter Straße,50.156742,7.714442
 EnBW DE-Sankt Katharinen,50.60393,7.33096
@@ -12399,11 +12402,14 @@ Energie-Südbayern DE-Pentling Ammerholz,48.97549,12.06498
 Energie-Südbayern DE-Plattling Werkstraße,48.78133,12.86139
 Energie-Südbayern DE-Schliersee Perfallstraße,47.73378,11.86134
 Energie-Südbayern DE-Sulzemoos Ohmstraße,48.280144,11.269269
+Energie-Südbayern DE-Vaterstetten Heimstettener Straße 1,48.1465,11.78153
+Energie-Südbayern DE-Vaterstetten Heimstettener Straße 2,48.14485,11.78412
 
 Energie360 CH-Amriswil Kirchstrasse,47.54755,9.2975
 Energie360 CH-Bachenbülach Bramenstrasse,47.50495,8.54024
 Energie360 CH-Dachsen Lauferstrasse,47.67491,8.61452
 Energie360 CH-Dietikon Silbernstrasse,47.41798,8.39301
+Energie360 CH-Dietlikon Industriestrasse,47.41257,8.6181,30
 Energie360 CH-Kreuzlingen Hauptstrasse,47.64798,9.17613
 Energie360 CH-Küsnacht Seestrasse,47.32716,8.57514
 Energie360 CH-Lenzerheide Voa Sporz,46.72872,9.55521
@@ -16600,7 +16606,7 @@ LichtBlick DE-Zeulenroda-Triebes Bauerfeindallee,50.66682,11.9782
 Lidl AT-Alkoven,48.287056,14.143943
 Lidl AT-Altenmarkt,47.381037,13.430268
 Lidl AT-Ansfelden,48.214815,14.276056
-Lidl AT-Asten Handelsring,48.22259,14.40514,20
+Lidl AT-Asten Handelsring,48.2226,14.40514
 Lidl AT-Bad Radkersburg,46.689869,15.982148
 Lidl AT-Brunn am Gebirge Leopold-Gattringer-Straße,48.113048,16.273394
 Lidl AT-Dornbirn,47.409717,9.725804
@@ -17489,6 +17495,7 @@ Lidl SE-Oskarshamn Hantverksgatan,57.25968,16.45708
 Lidl SE-Sollentuna Djupdalsvägen,59.44547,17.95535
 Lidl SI-Brežice Cesta svobode,45.90429,15.60285
 Lidl SI-Ilirska Bistrica Vilharjeva cesta,45.57245,14.23774
+Lidl SI-Jesenice Skladiščna ulica,46.4313,14.06255
 Lidl SI-Koper Cesta Marežganskega upora,45.529,13.73547
 Lidl SI-Postojna Reška cesta,45.77068,14.19829,15
 Lidl SI-Sežana Partizanska c.,45.70506,13.85846
@@ -18578,6 +18585,7 @@ OKQ8 SE-Växjö Norremarksvägen,56.90196,14.82747
 OKQ8 SE-Örnsköldsvik Härnösandsvägen,63.29173,18.7059,10
 
 OMV AT-Alland Gewerbestraße,48.06799,16.06332
+OMV AT-Asten An der Bundesstraße,48.22226,14.40915
 OMV AT-Deutsch-Wagram S1 Ost,48.310754,16.515215
 OMV AT-Dornbirn Schwefel,47.42823,9.7398
 OMV AT-Feldkirchen in Kärnten 10.-Oktober-Straße,46.72298,14.09707
@@ -20349,7 +20357,7 @@ Smatrics AT-Stockerau Rudolf Diesel-Straße,48.389171,16.179846
 Smatrics AT-Stockerau Wienerstraße,48.3857,16.23564
 Smatrics AT-Strasshof an der Nordbahn,48.321384,16.664931
 Smatrics AT-Straßwalchen Neumarkterstraße,47.958421,13.236025
-Smatrics AT-Trieben Industriepark,47.49242,14.48377
+Smatrics AT-Trieben Industriepark,47.49297,14.48372
 Smatrics AT-Tulln an der Donau Frauentorgasse,48.32786,16.05458
 Smatrics AT-Villach Maria-Gailer-Straße,46.605376,13.865967
 Smatrics AT-Villach Nikolaigasse,46.61523,13.85149
@@ -20632,6 +20640,7 @@ SW-Elmshorn DE-Elmshorn Westerstraße,53.748062,9.649952
 SW-Emden DE-Emden Bahnhofsplatz,53.36856,7.197215
 SW-Emmendingen DE-Emmendingen Hebelstraße,48.12205,7.85041
 SW-Emmendingen DE-Emmendingen Karl-Bautz-Straße,48.117206,7.848467,30
+SW-Erding DE-Erding Gruber Straße,48.1468,11.7887,20
 SW-Erfurt DE-Erfurt Binderslebener Landstraße,50.9733,10.993903
 SW-Erfurt DE-Erfurt Weimarische Straße,50.9727,11.04964
 SW-Erfurt DE-Erfurt Werner-Seelenbinder-Straße,50.95793,11.03698
@@ -20794,6 +20803,7 @@ SW-München DE-München Schellingstraße,48.15481,11.55986
 SW-München DE-München Seeriederstraße,48.133953,11.602091,30
 SW-München DE-München Steinstraße,48.12911,11.59414
 SW-München DE-München Steubenplatz,48.151145,11.520079
+SW-München DE-München Winthirstraße,48.1566,11.52762
 SW-München DE-München Winzererstraße,48.16179,11.56209
 SW-Münster DE-Münster Kiesekamps Mühle,51.949318,7.641345
 SW-Neu-Isenburg DE-Neu-Isenburg Alicestraße,50.050185,8.675374
@@ -20933,6 +20943,7 @@ swisscharge CH-Chur Scalärastrasse,46.867275,9.537479
 swisscharge CH-Chur Spundisstrasse,46.84754,9.50162
 swisscharge CH-Dietikon Riedstrasse,47.41931,8.39411
 swisscharge CH-Dietlikon Industriestrasse,47.41161,8.61809
+swisscharge CH-Dietlikon Industriestrasse,47.41308,8.61796,30
 swisscharge CH-Dornach Grundackerstrasse,47.47513,7.61615
 swisscharge CH-Flums Staatsstrasse,47.096255,9.353509
 swisscharge CH-Herisau Industriestrasse,47.38114,9.27745
@@ -22438,6 +22449,7 @@ AU Tonsley SA South Road,-35.008163,138.574993
 AU Waratah TAS Bischoff Hotel,-41.44293,145.52662
 BA Banja Luka Delta Planet,44.78049,17.20657
 BE Hasselt Corda Campus Kempische Steenweg 293,50.951484,5.353231,14
+BE Humbeek Molenstraat,50.9634,4.37065
 BE Rotselaar Belparts,50.938946,4.742856
 BY Minsk Мінск вуліца Алеся Гаруна,53.91996,27.44848
 CH Affoltern Blauer Elefant,47.27289,8.4388
