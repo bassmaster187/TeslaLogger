@@ -5490,6 +5490,7 @@ Supercharger US-Seattle WA - 1201 2nd Avenue (Pay to Park Floor P2),47.606359,-1
 Supercharger-V3 US-Seattle WA - NE Northgate Way (Floor 2),47.70663,-122.327324
 Supercharger US-Seattle WA - NW Ballard Way (Floor P0),47.662935,-122.375582
 Supercharger US-Seattle WA - Union Street (Valet & Pay to Park),47.610134,-122.332036
+Supercharger-V4 US-Seattle WA Meridian Ave N,47.70698,-122.3333
 Supercharger-V3 US-Sebastian FL,27.76787,-80.54963
 Supercharger-V3 US-Sebring FL,27.46589,-81.43422
 Supercharger US-Sedona AZ,34.77553,-111.76398
@@ -5679,6 +5680,7 @@ Supercharger US-Tucson AZ,32.0846,-110.80395
 Supercharger US-Tucson AZ - East Skyline Drive,32.325321,-110.931694
 Supercharger-V3 US-Tucson AZ West River Road,32.32196,-111.04493
 Supercharger US-Tucumcari NM,35.153945,-103.722726
+Supercharger-V3 US-Tukwila WA Southcenter Pkwy,47.44737,-122.26366
 Supercharger-V3 US-Tukwila WA Strander Boulevard,47.455432,-122.256036
 Supercharger-V3 US-Tulalip Bay WA,48.095561,-122.188333
 Supercharger-V3 US-Tully NY,42.800068,-76.121841
@@ -5980,6 +5982,8 @@ ABB IT-Nogaredo A22,45.901841,11.027177
 ABB IT-Nogaredo A22,45.902149,11.025974
 ABB IT-Rovereto Via S. Romedio,45.84856,11.0016
 ABB IT-San Giorgio Bigarello Via maestri del lavoro,45.166656,10.852428
+ABB LT-Aukštkeliai Pušyno g.,55.41194,22.8297
+ABB LT-Kuodaičiai Kuodaičių k,55.56873,22.1779
 ABB NZ-Mount Maunganui Maru Street,-37.665067,176.196996
 
 ABC AT-Ansfelden Carl-Anton-Carlone-Straße,48.209717,14.290248
@@ -7904,6 +7908,7 @@ ChargeGuru FR-Pontarlier Rue de la Libération,46.91187,6.34076,20
 ChargeHub AU-Noosa Heads QLD Noosa Dr,-26.39301,153.08946
 
 chargeIT DE-Coburg Arena,50.287087,10.980806
+chargeIT DE-Greifswald Walther-Rathenau-Straße,54.09027,13.40204
 chargeIT DE-Kaufbeuren,47.88613,10.638898,10
 chargeIT DE-Kist Sonnleite,49.73821,9.8407
 chargeIT DE-Königshofen,49.536723,9.741674
@@ -7955,6 +7960,7 @@ ChargePlace-Scotland GB-Ullapool W Shore St,57.89569,-5.16134
 
 ChargePoint AT-Anif Salzachtalstraße,47.726824,13.0607,8
 ChargePoint AT-Eugendorf Gewerbestraße,47.85806,13.13337
+ChargePoint AT-Feldbach Hauptplatz,46.95347,15.88858
 ChargePoint AT-Gleisdorf Hartberger Straße,47.11535,15.71116
 ChargePoint AT-Gratkorn Am Hartboden,47.120416,15.372291
 ChargePoint AT-Graz Schwarzer Weg,47.03054,15.42355
@@ -9058,6 +9064,7 @@ da-emobil AT-Walchensee Seestraße,47.590011,11.317232
 da-emobil AT-Westendorf Bergliftstraße,47.42796,12.21351
 da-emobil AT-Wiesing Dorf,47.40352,11.80361
 da-emobil AT-Wörgl Johann-Federer-Straße 24,47.48867,12.07343
+da-emobil AT-Zams Hauptstraße,47.16612,10.59034
 da-emobil AT-Zirl Zirlerberg,47.28164,11.22461
 da-emobil IT-Appiano Unterrainer Straße,46.49725,11.2577
 da-emobil IT-Curon Venosta Grafl Straße,46.80848,10.54025
@@ -9109,6 +9116,7 @@ Duferco IT-Genova Corso Andrea Podesta,44.40314,8.93908
 Duferco IT-Genova Via Filippo Turati,44.40833,8.92881
 Duferco IT-Rapallo Via Bartolomeo Maggiocco,44.35148,9.23364
 Duferco IT-Torino Via Parenzo,45.103057,7.646126
+Duferco IT-Uscio Via Crocetta,44.41144,9.16827
 Duferco IT-Vado Ligure Via Trieste,44.26627,8.43146
 
 e-con DE-Buchloe Neue Mitte,48.03518,10.71952
@@ -12785,7 +12793,7 @@ Eviny NO-Trondheim Solsiden Senter,63.43543,10.413
 Eviny NO-Valderøy Valderøyvegen,62.52914,6.11634,25
 Eviny NO-Ålesund Nedre Strandgate,62.469703,6.148216
 Eviny NO-Ålgård Ole Nielsens vei,58.77058,5.84483
-Eviny NO-Ørsta Melsvegen,62.19272,6.12448
+Eviny NO-Ørsta Melsvegen,62.1925,6.1245
 Eviny NO-Ørsta Vikeøyrane,62.19909,6.12311
 Eviny SE-Boden Lulevägen,65.81616,21.70918,25
 Eviny SE-Gällivare Sommarvägen,67.14815,20.66107
@@ -15120,7 +15128,6 @@ illwerke-vkw DE-Scheidegg Zollstraße,47.58031,9.8454
 
 im2 ES-Benitachell Polígono Pp Cds Encinas,38.71743,0.16928
 
-Inbalance LT-Antvėjai A1,55.22744,23.54653
 Inbalance LT-Daugėliškiai A1,55.22744,23.54653
 Inbalance LT-Paliūnė A1,55.22306,23.55755
 Inbalance LT-Pūstelninkai A6,55.1271,24.40353
@@ -15130,6 +15137,7 @@ incharge GR-Episkopiko Επισκοπικό A5,39.5451,20.85247
 incharge GR-Thermi Θέρμη Perikleous,40.56274,22.99353
 incharge GR-Thessaloniki Θεσσαλονίκη Monastiriou,40.66008,22.90082
 incharge GR-Volos Βόλος Larisis,39.36923,22.919
+incharge GR-Αριστερα A/D Korinthou Tripoleos,37.8627,22.84217
 
 Innocept DE-Köln Heinrichshofweg,51.040897,6.904807
 Innocept DE-Norden Osterstraße,53.60126,7.21781
@@ -17494,6 +17502,7 @@ Lidl HU-Tiszafüred Húszöles út,47.62336,20.74735
 Lidl HU-Veszprém,47.111508,17.926394
 Lidl IT-Calalzo di Cadore Calalzo Lozza,46.43756,12.3793
 Lidl IT-Peschiera del Garda,45.43475,10.680242
+Lidl LT-Elektrėnai Sabališkių g.,54.78936,24.6751
 Lidl LU-Schmëtt Huldange Troisvierges,50.181824,6.023547
 Lidl NL-Almere Daniël Goedkoopstraat,52.37545,5.29279
 Lidl NL-Weert Keulerstraat,51.24407,5.69604
@@ -17695,6 +17704,8 @@ mblty DE-Lehrte Straßburger Straße,52.385283,9.953135
 mblty DE-Magstadt Aichern,48.74423,8.94824
 mblty DE-Raststätte Göttingen West,51.49487,9.87619,10
 mblty DE-Raststätte Werratal,51.006859,10.180879
+
+MEGA DE-Monheim am Rhein Einkaufzentrum,51.0904,6.88902
 
 Megatel SI-Bled Prešernova cesta,46.36948,14.10986
 Megatel SI-Bovec Dvor,46.33196,13.54014
@@ -18480,6 +18491,8 @@ Nissan DE-Neustadt in Holstein Eutiner Straße,54.10199,10.799542
 Nissan US-Ardmore PA E Lancaster Ave,47.9302,-2.12802
 
 NLE NL-Lingehorst A2,51.91256,5.1807,20
+
+Nobil NO-Oslo-Gardermoen Lufthavn,60.18587,11.06897
 
 nonoxx-pro DE-Cochem Ravenestraße,50.150771,7.165315
 nonoxx-pro DE-Grömitz Am Strande,54.14459,10.95913
@@ -20566,6 +20579,7 @@ STAWAG DE-Aachen Annastraße,50.772714,6.080673
 STAWAG DE-Aachen Judengasse,50.775974,6.080608
 STAWAG DE-Aachen Krefelder Straße,50.790849,6.096747
 STAWAG DE-Aachen Kullenhofstraße,50.775174,6.045444
+STAWAG DE-Aachen Kurbrunnenstraße,50.7669,6.0967
 STAWAG DE-Aachen Lombardenstraße,50.782875,6.100832
 STAWAG DE-Aachen Mathieustraße,50.78911,6.049518
 STAWAG DE-Aachen Nirmer Straße,50.78133,6.16167
@@ -21938,6 +21952,7 @@ Volkswagen AT-Obervellach,46.93359,13.1965
 Volkswagen AT-Radstadt Salzburger Straße,47.38637,13.453
 Volkswagen AT-Salzburg Vogelweiderstraße,47.81569,13.05315
 Volkswagen AT-St. Andrä Framrach,46.74579,14.82316
+Volkswagen AT-Straßwalchen Gewerbegebiet S,47.9565,13.23677
 Volkswagen AT-Zell am Ziller Rohrerstraße,47.23557,11.88347
 Volkswagen CH-Cham Alte Steinhauserstrasse,47.18685,8.47367
 Volkswagen CH-Chur Rossbodenstrasse,46.85132,9.50497
@@ -22469,6 +22484,7 @@ Zunder ES-Villalpando Cam. de los Gallegos,41.82615,-5.37888,12
 ΔΕΗ-blue GR-Korinthos Κόρινθος NEOAK Isthmos,37.92577,22.97617
 ΔΕΗ-blue GR-Lamia Λαμίας Τάσου Ισαάκ,38.89955,22.44928
 ΔΕΗ-blue GR-Lefkada Λευκάδα Anatoliki Paralia Lefkadas,38.82974,20.71132
+ΔΕΗ-blue GR-Patra Πάτρα Palea EO Korinthou Patron,38.29132,21.78213
 ΔΕΗ-blue GR-Patras Πάτρα N.E.O. Patron - Athinon,38.2757,21.76228
 ΔΕΗ-blue GR-Preveza Πρέβεζα Igoumenitsas,38.97528,20.71955
 ΔΕΗ-blue GR-Serres Σέρρες EO Serron Dramas,41.08946,23.59834
@@ -22514,6 +22530,7 @@ AT Linz PLUSCITY,48.2428,14.23398
 AT Linz PLUSCITY,48.24345,14.23428,25
 AT Linz PLUSCITY,48.24397,14.2348,25
 AT Linz PLUSCITY,48.24458,14.23531,25
+AT Maria Rain Hotel Sonnenhof,46.57246,14.29168
 AT Maurach Seecamping Wimmer,47.43277,11.73445,70
 AT Mühldorf Wolf,47.89012,13.93895
 AT Parkplatz Straß,46.73086,15.64186
