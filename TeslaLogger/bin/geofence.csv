@@ -114,6 +114,7 @@ Supercharger AU-Hollydene,-32.447359,150.83232
 Supercharger AU-Horsham,-36.716125,142.193301
 Supercharger-V3 AU-Horsham VIC,-36.715843,142.196496
 Supercharger-V3 AU-Indooroopilly QLD,-27.499185,152.973652
+Supercharger-V4 AU-Kanica VIC,-36.37735,141.2369
 Supercharger-V3 AU-Karrinyup WA,-31.877272,115.776138
 Supercharger AU-Keith,-36.099082,140.355645
 Supercharger-V3 AU-Kirrawee NSW,-34.032401,151.073363
@@ -4090,6 +4091,7 @@ Supercharger US-Burlington WA,48.5097,-122.33866
 Supercharger-V3 US-Burlington WA Marketplace Dr,48.45128,-122.33985
 Supercharger-V4 US-Burlington WA Old Hwy 99 N,48.50935,-122.33787
 Supercharger-V3 US-Burney CA,40.92411,-121.62055
+Supercharger-V3 US-Busselton Prince St WA,-33.65,115.3418
 Supercharger US-Butte MT,45.98123,-112.50721
 Supercharger US-Buttonwillow CA,35.40015,-119.3979
 Supercharger-V3 US-Buttonwillow CA - Cal Club Rd (No Amenities),35.498433,-119.546824
@@ -7938,6 +7940,7 @@ ChargePlace-Scotland GB-Bowmore Isle of Islay The Square,55.75666,-6.288741
 ChargePlace-Scotland GB-Dunvegan Kilmuir Rd,57.43472,-6.57861
 ChargePlace-Scotland GB-Ellon A948,57.36744,-2.0413
 ChargePlace-Scotland GB-Gairloch Old Inn Road End,57.71298,-5.6796
+ChargePlace-Scotland GB-Inverness Drumnadrochit,57.33508,-4.48088
 ChargePlace-Scotland GB-Killin Main St,56.4642,-4.31924
 ChargePlace-Scotland GB-Kyle Douglas Row,57.28253,-5.71508
 ChargePlace-Scotland GB-Kyleakin Meuse Ln,57.27282,-5.73059
@@ -10157,6 +10160,7 @@ ElpeFuture GR-Ioannina Ιωάννινα Leof. Dodonis,39.64962,20.8472
 ElpeFuture GR-Kastoria Καστοριάς Epar.Od. Dispilios-Ampelokipi,40.466,21.3016
 ElpeFuture GR-Kozani Κοζάνη Larisis,39.36797,22.92143
 ElpeFuture GR-Makrichori Epar.Od. Larisas-Evaggelismou,39.81472,22.50856
+ElpeFuture GR-Nafplio Ναύπλιο Argois,37.57237,22.80716
 ElpeFuture GR-Velo Βέλου E.O. Korinthou Patron,37.9745,22.74162
 ElpeFuture GR-Veria Βέροια Stadiou,40.53804,22.202
 ElpeFuture GR-Δήμος Τρικκαίων Καρδίτσης,39.54456,21.77598
@@ -11411,6 +11415,7 @@ EnBW DE-Nördlingen Augsburger Straße,48.84313,10.50385
 EnBW DE-Nümbrecht,50.90389,7.54066
 EnBW DE-Nürnberg Bregenzer Straße,49.398242,11.175675
 EnBW DE-Nürnberg Eibach,49.39914,11.03835
+EnBW DE-Nürnberg Leyher Straße,49.45328,11.019
 EnBW DE-Nürnberg Sulzbacherstr.,49.457819,11.092877,30
 EnBW DE-Nürnberg Äußere Bayreuther Straße,49.475267,11.104242,10
 EnBW DE-Ober-Olm Jägerpfad,49.943287,8.191471
@@ -12630,6 +12635,7 @@ ESB IE-Bantry Harbour View Car Park,51.68172,-9.45705
 ESB IE-Bray Vevay Rd,53.19523,-6.1082
 ESB IE-Carrowbeg Castlebar Rd,53.80075,-9.51991
 ESB IE-Cashel Waller’s-Lot,52.5094,-7.87345
+ESB IE-Cork S Mall,51.89635,-8.47338
 ESB IE-Dublin Hollybank Rd,53.36689,-6.25632
 ESB IE-Dublin Port Promenade Rd,53.35388,-6.2125,25
 ESB IE-Falcarragh Strand Rd,55.13698,-8.1035
@@ -14403,6 +14409,7 @@ GardaUno IT-Limone sul Garda Via Lungolago Guglielmo Marconi,45.811562,10.793539
 GeniePoint GB-Eastbourne Hargreaves Rd,50.79685,0.2855
 GeniePoint GB-Newquay,50.44687,-5.0021
 GeniePoint GB-Petersfield Rams Walk,51.00511,-0.93741
+GeniePoint GB-Waterlooville Lakesmere Rd,50.90842,-1.00317
 
 GENOL AT-Mistelbach Wirtschaftspark,48.56421,16.63686
 
@@ -15134,6 +15141,7 @@ Inbalance LT-Pūstelninkai A6,55.1271,24.40353
 
 incharge GR-Argostoli Αργοστόλι G. Gaitanidi,38.1639,20.4968
 incharge GR-Episkopiko Επισκοπικό A5,39.5451,20.85247
+incharge GR-Komotini Κομοτηνης Merarchias Serron,41.11433,25.37845
 incharge GR-Thermi Θέρμη Perikleous,40.56274,22.99353
 incharge GR-Thessaloniki Θεσσαλονίκη Monastiriou,40.66008,22.90082
 incharge GR-Volos Βόλος Larisis,39.36923,22.919
@@ -16213,7 +16221,7 @@ Kaufland DE-Lohmar,50.839312,7.206288
 Kaufland DE-Lutherstadt Eisleben Hallesche Straße 77,51.523873,11.557884
 Kaufland DE-Lörrach,47.625919,7.673703
 Kaufland DE-Magdeburg Halberstädter Straße 182-186,52.107368,11.592481
-Kaufland DE-Magdeburg Lübecker Straße 122,52.154206,11.638545
+Kaufland DE-Magdeburg Lübecker Straße,52.15426,11.63758
 Kaufland DE-Mainz Haifa-Allee,49.968587,8.228829
 Kaufland DE-Mannheim Maybachstraße,49.503544,8.476409
 Kaufland DE-Marbach am Neckar,48.943393,9.266666
@@ -16364,7 +16372,7 @@ Kaufland HR-Zagreb Av. Većeslava Holjevca,45.76103,15.98611
 Kaufland HR-Čibača Sima Savinovića,42.63135,18.16289
 Kaufland HR-Šibenik Vukovarska ul.,43.72244,15.90648
 Kaufland PL-Brodnica,53.25931,19.39631
-Kaufland PL-Gdynia Morska,54.52951,18.50433
+Kaufland PL-Gdynia Morska,54.53,18.50442,70
 Kaufland PL-Sanok Królowej Bony,49.5667,22.20706
 Kaufland PL-Szczecin Andrzeja Struga,53.38489,14.65884
 Kaufland PL-Szczecin Floriana Krygiera,53.392323,14.498953
@@ -16451,6 +16459,7 @@ KELAG AT-St. Veit an der Glan Völkermarkter Straße,46.765281,14.369795
 KELAG AT-Velden Villacher Straße,46.6141,14.03883
 KELAG AT-Villach Maria-Gailer-Straße,46.60398,13.86929,12
 KELAG AT-Wien Gutheil-Schoder-Gasse,48.16241,16.3402
+KELAG AT-Winklern Winklern,46.8725,12.8788
 KELAG AT-Wolfsberg Gemmersdorfer Straße,46.81774,14.85132
 
 KH-Energie DE-Winterberg Am Eschenberg,51.24578,8.52863
@@ -17476,6 +17485,7 @@ Lidl HR-Makarska Ul. Europske zajednice,43.28849,17.02475
 Lidl HR-Poreč Ul. Mate Vlašića,45.229754,13.621817
 Lidl HR-Pula Labinska ul.,44.881645,13.864213
 Lidl HR-Pula Ulica Proštinske bune,44.862711,13.864765
+Lidl HR-Rijeka Radnička ul.,45.31686,14.47255
 Lidl HR-Split Ul. kralja Stjepana Držislava,43.5055,16.50692
 Lidl HR-Umag Ulica Poduzetnika,45.4314,13.530979
 Lidl HR-Zadar Benkovačka cesta,44.10375,15.26489
@@ -17598,6 +17608,7 @@ Linz AT-Linz Khevenhüllerstraße,48.30076,14.30124
 Linz AT-Linz Pleschinger Straße,48.32798,14.3077
 Linz AT-Linz Wiener Straße,48.28083,14.30952
 Linz AT-Linz Ziegeleistraße,48.29116,14.2749
+Linz AT-Marchtrenk Eichenstraße,48.19097,14.11876
 Linz AT-Mittertreffling Johann-Wöckinger-Straße,48.337237,14.367777
 Linz AT-Puchenau Golfplatzstraße,48.310791,14.233391
 Linz AT-Sierning Gewerbestraße,48.035646,14.314642
@@ -18294,6 +18305,7 @@ Neogy IT-Kurtinig Weinstraße,46.26909,11.22297
 Neogy IT-Marlengo Franz Innerhofer Straße,46.655659,11.14103
 Neogy IT-Meran Rennstallweg,46.65586,11.14929
 Neogy IT-Merano F.-Innerhofer-Straße,46.66734,11.16443
+Neogy IT-Monguelfo-Tesido Pfarrgasse,46.7578,12.10473
 Neogy IT-Montagna Dolomitenstraße,46.33299,11.30066
 Neogy IT-Partschins Wasserfallweg,46.684464,11.072104
 Neogy IT-Peschiera del Garda Via Venezia,45.43843,10.71188
@@ -18677,6 +18689,7 @@ OMV AT-Frauenhofen Wiener Straße,48.6654,15.6329
 OMV AT-Gföhl Langenloiser Straße,48.51218,15.51018
 OMV AT-Haag Straße zur Autobahn,48.11527,14.57095
 OMV AT-Korneuburg Wiener Straße,48.34058,16.33776
+OMV AT-Oberpullendorf Stoob-Süd,47.50965,16.50004
 OMV AT-Raststation Deutschfeistritz,47.20517,15.31583
 OMV AT-Raststation Stockerau,48.38056,16.2039
 OMV AT-Steyr Haager Straße,48.0551,14.44906
@@ -20147,6 +20160,7 @@ Shell DE-Euro Rastpark Knetzgau,49.98156,10.55557,25
 Shell DE-Falkenberg Liebenwerdaer Straße,51.57739,13.244613
 Shell DE-Filderstadt Echterdinger Straße,48.678336,9.192873,20
 Shell DE-Fischen im Allgäu Bahnhofstraße,47.45674,10.27093
+Shell DE-Frankenthal Wormser Straße,49.55047,8.35302
 Shell DE-Frankfurt am Main Mörfelder Landstraße,50.088866,8.669073
 Shell DE-Frankfurt am Main Niederräder Ufer,50.088479,8.63574
 Shell DE-Frankfurt Hanauer Landstraße,50.12249,8.74267
@@ -20557,6 +20571,8 @@ solid DE-Tauberbischofsheim,49.63035,9.66616
 solid DE-Wertheim Bahnhofstraße,49.76384,9.51153
 solid DE-Wunsiedel Rot-Kreuz-Straße,50.03931,11.99559
 
+Sonnenladen AT-St. Pantaleon Dorfstraße,48.21293,14.56515
+
 Sowatt FR-Échirolles Av. Victor Hugo,45.15128,5.70995,30
 
 SPBR1 FR-Bauduen Rue des Jardins,43.73247,6.17686
@@ -20573,6 +20589,7 @@ SSN DE-Schwerin Eckdrift,53.595251,11.394029
 Stark DE-Scharbeutz Bormwiese,54.05472,10.73083
 
 stations-e FR-Draveil Rue Ferdinand Buisson,48.67351,2.40768
+Stations-e FR-Orcières Rue des Ecrins,44.69695,6.32294
 
 STAWAG DE-Aachen Am Kraftversorgungsturm,50.78875,6.1117
 STAWAG DE-Aachen Annastraße,50.772714,6.080673
@@ -21426,6 +21443,7 @@ Threeforce DE-Weiterstadt Max-Planck Straße 3,49.898207,8.593697
 Threeforce DE-Wildeshausen Buchbinderstraße 1,52.887098,8.413097
 Threeforce DE-Wolfsburg Brandgehaege,52.369121,10.731178
 Threeforce DE-Wuppertal Unten Vorm Steeg,51.236613,7.096498
+Threeforce PL-Gdynia Morska,54.5287,18.5068
 Threeforce PL-Słubice Transportowa,52.33447,14.59868
 
 Thüga DE-Gaienhofen Im Kohlgarten,47.684483,8.983745
@@ -21644,6 +21662,7 @@ TotalEnergies NL-Vliedberg,51.484617,3.850016,80
 
 Trugo TR-Diliskelesi 735. Sk.,40.77284,29.52015
 Trugo TR-Mehmet Akif Ersoy Bağdat Caddesi,39.96176,32.76858
+Trugo TR-Nakkaş Kuzey Marmara Otoyolu,41.19358,28.5713
 
 Turmstrom AT-Graz Fabriksgasse,47.05927,15.42646
 Turmstrom AT-Hallein Salzachtalstraße,47.68229,13.10055
@@ -21867,6 +21886,8 @@ VBE DE-Lauenburg/Elbe Hamburger Straße,53.374094,10.554125
 VBH DE-Hoyerswerda Kamenzer Bogen,51.42739,14.235942
 
 Veefi AU-St Lucia QLD Walcott St,-27.49483,153.00886
+
+VEGA AL-Durrës Rruga Adria,41.3175,19.472
 
 vigoris DE-Zinnowitz Dr.-Wachsmann-Straße,54.08001,13.90632
 
@@ -22348,10 +22369,12 @@ ZES TR-Cedit Atatürk Bl,41.31972,36.33426
 ZES TR-Dörtyol Turgut Ozal,38.7897,30.45961
 ZES TR-Hıdırbeyli Aydın-İzmir Asfaltı Cad,37.87557,27.56099
 ZES TR-İbirler E881,39.75641,27.96217
+ZES TR-İpsala Sınır Kapısı,40.93227,26.33077
 ZES TR-Isparta Bahçelievler,37.78126,30.54464
 ZES TR-İstanbul Yönü Manisa Oksijen 375,38.4874,27.57555
 ZES TR-Kadriye Beylikler Cd.,36.87082,31.01624
 ZES TR-Mimarsinan Mah Mimar Sinan Cd.,41.08243,28.22407
+ZES TR-Poyrazköy Kuzey Marmara Otoyolu,41.19907,29.14628
 ZES TR-Sanayi Atatürk Blv.,37.78211,30.56433
 ZES TR-Savaştepe Karaçam,39.349632,27.629283
 ZES TR-Seyran Seyran Sk.,40.25261,28.4543
@@ -22400,6 +22423,7 @@ Zunder ES-Monesterio C. de los Carpinteros,38.08253,-6.25831
 Zunder ES-Rois Sar Galicia,42.77438,-8.65104
 Zunder ES-Santiago de Compostela Rúa de Miguel Ferro Caaveiro,42.88438,-8.51292
 Zunder ES-Villalpando Cam. de los Gallegos,41.82615,-5.37888,12
+Zunder ES-Zafra Plaza del Alcázar,38.4244,-6.41493
 
 Ísorka IS-Stykkishólmur Borgarbraut,65.07335,-22.72929
 Ísorka IS-Suðurland Arnberg Sveitarfélagið,63.94378,-21.00855
@@ -22791,6 +22815,7 @@ DE Porta Westfalica rococom,52.2324,8.91289
 DE Prichsenstadt Gewerbegebiet-Ost,49.81766,10.36377,70
 DE Putgarten Dorfstraße,54.67084,13.41001
 DE Rheydt New AG,51.157497,6.448055
+DE Rodenberg Gemeinschaftspraxis,52.312,9.35118
 DE Rostock Ost-West-Straße,54.14274,12.10252
 DE Roth Autohaus,49.245669,11.119321
 DE Röthenbach an der Pegnitz Girmscheid,49.4789,11.22415
@@ -22907,6 +22932,7 @@ RO Brașov Scanexpert,45.65745,25.58587
 RO Brașov Strada Poienelor,45.633184,25.63254
 RO București Splaiul Unirii,44.39593,26.20193
 RO Cluj-Napoca Strada Ion Meșter,46.75839,23.5593
+RO Cristian Hotel Sorin Mihai,45.63336,25.49198
 RO Oradea Pasajul Vulturul Negru,47.055133,21.93175
 RO Sibiu Piața Mică,45.79757,24.15138
 RO Săcele Strada George Moroianu,45.618203,25.698313
