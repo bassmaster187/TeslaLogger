@@ -3684,6 +3684,7 @@ Supercharger-V3 RO-Constanța,44.20366,28.63116,65
 Supercharger-V3 RO-Craiova,44.3291,23.77194
 Supercharger-V4 RO-Galati,45.451684,28.032639
 Supercharger-V4 RO-Iași,47.151152,27.601632
+Supercharger-V4 RO-Oradea,47.04343,21.8971
 Supercharger-V3 RO-Pitești,44.823586,24.909692,46
 Supercharger-V4 RO-Satu Mare,47.784422,22.845358
 Supercharger-V3 RO-Sibiu,45.775579,24.170674,36
@@ -5956,6 +5957,7 @@ A2A IT-Bergamo Via dell’ Industria,45.66799,9.664775
 A2A IT-Bergamo Via S. Lazzaro,45.69151,9.66174
 A2A IT-Brescia Via Corfù,45.52823,10.21191
 A2A IT-Castenedolo Via Sandro Pertini,45.484595,10.32268
+A2A IT-Como Via Asiago,45.83802,9.053
 A2A IT-Lecco Corso Martiri della Liberazione,45.850654,9.393834
 A2A IT-San Felice del Benaco Via Dietro Castello,45.58652,10.54727
 A2A IT-Truccazzano Via Rivoltana,45.48038,9.44681
@@ -10000,6 +10002,7 @@ Electric55 FR-Gap Bis Rue Carnot,44.561015,6.081755
 Electric55 FR-Grimaud Avenue de la Mer,43.274918,6.577813
 Electric55 FR-Grimaud D559,43.27965,6.57762
 
+ElectriEase IT-Area di servizio Bettole di Novi Est,44.7604,8.83855
 ElectriEase IT-Lignano Sabbiadoro Viale Europa,45.689271,13.13277
 
 Electrify-America US-Auburn Southbridge St,42.20223,-71.838
@@ -12228,6 +12231,7 @@ EnelX IT-Lucca Via Giacomo Puccini,43.84837,10.47272
 EnelX IT-L’Aquila Via Giuseppe Mezzanotte,42.35462,13.41443
 EnelX IT-Marina di Bibbona Via dei Cavalleggeri Nord,43.24556,10.53135
 EnelX IT-Masero Via Nazionale Cisa,44.227,9.96887
+EnelX IT-Maslianico Via Enrico Caronti,45.84096,9.0502
 EnelX IT-Massa Marittima Via Antonio Gramsci,43.04878,10.89348
 EnelX IT-Misterbianco Str. S. Giovanni Galermo,37.53442,15.0314
 EnelX IT-Moltrasio Via Durini,45.86007,9.1009
@@ -16406,7 +16410,6 @@ Kaufland RO-Iași,47.156939,27.624834
 Kaufland RO-Miercurea Ciuc,46.365867,25.797302
 Kaufland RO-Odorheiu Secuiesc,46.313455,25.30406
 Kaufland RO-Oneşti,46.254738,26.778289
-Kaufland RO-Oradea Calea Aradului,47.04343,21.89711
 Kaufland RO-Oradea Strada Czárán Gyula,47.04371,21.89857
 Kaufland RO-Orăștie Bulevardul Armatei,45.83931,23.18045
 Kaufland RO-Piatra Neamț,46.929792,26.360452
@@ -20906,18 +20909,7 @@ SW-München DE-München Maillingerstraße,48.14731,11.54332
 SW-München DE-München Marklandstraße,48.092533,11.604476
 SW-München DE-München Maximiliansplatz,48.1421,11.57331
 SW-München DE-München Maximilianstraße,48.139169,11.581335
-SW-München DE-München Nordendstraße,48.155483,11.575228
-SW-München DE-München Occamstraße,48.16313,11.59041
-SW-München DE-München Oslostraße,48.131542,11.68955,30
-SW-München DE-München Packenreiterstraße,48.16368,11.47536
-SW-München DE-München Ridlerstraße,48.13422,11.53218
-SW-München DE-München Schellingstraße,48.15481,11.55986
-SW-München DE-München Seeriederstraße,48.133953,11.602091,30
-SW-München DE-München Steinstraße,48.12911,11.59414
-SW-München DE-München Steubenplatz,48.151145,11.520079
-SW-München DE-München Winthirstraße,48.1566,11.52762
-SW-München DE-München Winzererstraße,48.16179,11.56209
-SW-Münster DE-Münster Kiesekamps Mühle,51.949318,7.641345
+SW-Münster DE-Münster Kiesekamps Mühle,51.94932,7.64135
 SW-Neu-Isenburg DE-Neu-Isenburg Alicestraße,50.050185,8.675374
 SW-Neu-Isenburg DE-Neu-Isenburg Dreiherrnsteinplatz,50.05883,8.75028
 SW-Neu-Isenburg DE-Neu-Isenburg Jahnstraße,50.048643,8.682858
@@ -21095,6 +21087,19 @@ swisscharge CH-Zürich Kalanderplatz,47.35688,8.52305
 swisscharge CH-Zürich Wehntalerstrasse,47.42039,8.50364
 
 Switch DE-Köln Hornstraße,50.955273,6.940532
+
+SWM DE-München Nordendstraße,48.15548,11.57523
+SWM DE-München Occamstraße,48.16313,11.5904
+SWM DE-München Oslostraße,48.13154,11.68955,30
+SWM DE-München Packenreiterstraße,48.16368,11.47536
+SWM DE-München Reginfriedstraße,48.11032,11.5778
+SWM DE-München Ridlerstraße,48.13422,11.53218
+SWM DE-München Schellingstraße,48.1548,11.55986
+SWM DE-München Seeriederstraße,48.13395,11.6021,30
+SWM DE-München Steinstraße,48.1291,11.59414
+SWM DE-München Steubenplatz,48.15114,11.52008
+SWM DE-München Winthirstraße,48.1566,11.52762
+SWM DE-München Winzererstraße,48.1618,11.5621
 
 SWN DE-Neuwied Bahnhof,50.43145,7.470972
 SWN DE-Neuwied Friedrichstr. 34,50.426515,7.461927
@@ -22795,8 +22800,10 @@ DE Norderstedt Oststraße,53.740318,10.016947
 DE Nürnberg AAM Metal Forming,49.47875,11.12848
 DE Nürnberg Am Tullnaupark,49.45044,11.10284
 DE Nürnberg Eggersheimer Straße,49.447788,11.010655
+DE Nürnberg Fab Lab,49.43756,10.99267
 DE Nürnberg Nordring,49.46928,11.0717
 DE Nürnberg Ramada Parkhotel,49.43649,11.10379
+DE Nürnberg TÜV,49.4318,11.03038
 DE Nürnberg Virnsberger Straße,49.448044,11.005672
 DE Oberlungwitz Sachsenring,50.79197,12.68798
 DE Ochtrup Designer Outlet,52.2114,7.19994
