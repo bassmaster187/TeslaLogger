@@ -5697,7 +5697,7 @@ Supercharger-V3 US-Tulalip Bay WA,48.095561,-122.188333
 Supercharger-V3 US-Tully NY,42.800068,-76.121841
 Supercharger-V3 US-Tulsa OK,36.05434,-96.00466
 Supercharger-V3 US-Tumwater WA,46.952976,-122.935158
-Supercharger-V4 US-Tumwater WA Kingswood Dr SW,46.99295,-122.92167
+Supercharger-V4 US-Tumwater WA Kingswood Dr SW,46.99313,-122.92144
 Supercharger US-Tupelo MS,34.311517,-88.70099
 Supercharger US-Turkey Lake FL,28.514876,-81.500512
 Supercharger-V3 US-Turlock CA,37.509278,-120.876381
@@ -9910,9 +9910,9 @@ Eichsfeldwerke DE-Heilbad Heiligenstadt Holzweg,51.374145,10.131659
 Eichsfeldwerke DE-Heilbad Heiligenstadt In der Leineaue,51.385032,10.14961
 Eichsfeldwerke DE-Heilbad Heiligenstadt Robert-Koch-Straße,51.376195,10.138767
 Eichsfeldwerke DE-Heilbad Heiligenstadt Wilhelmstraße,51.376988,10.144452
-Eichsfeldwerke DE-Leinefelde-Worbis Beethovenstraße,51.37512,10.324802
-Eichsfeldwerke DE-Leinefelde-Worbis Hausener Weg,51.414046,10.367031
-Eichsfeldwerke DE-Leinefelde-Worbis Scharfenstein,51.363291,10.266229
+Eichsfeldwerke DE-Leinefelde Beethovenstraße,51.37512,10.3248
+Eichsfeldwerke DE-Leinefelde Hausener Weg,51.41405,10.36703
+Eichsfeldwerke DE-Leinefelde Scharfenstein,51.3633,10.26623
 
 eins-energie DE-Annaberg-Buchholz Gewerbering,50.598644,13.019199
 eins-energie DE-Chemnitz Alfred-Neubert-Straße,50.786366,12.902672
@@ -10010,6 +10010,7 @@ Electra IT-Milano Piazza della Repubblica,45.47776,9.19555
 Electra IT-Modena Via Emilia Ovest,44.65001,10.85315,25
 Electra IT-Peschiera del Garda Via Tangenziale,45.43407,10.710375
 Electra IT-Portogruaro Via Prati Guori,45.79198,12.8152
+Electra IT-Sesto San Giovanni Viale Ercole Marelli,45.52774,9.22938
 Electra IT-Stezzano Via Guzzanica,45.64659,9.62873
 
 Electra-Avellana ES-Vilademuls Hotel Sausa,42.09476,2.89294
@@ -15545,7 +15546,7 @@ Ionity DE-Lechwiesen Nord,48.059266,10.846791
 Ionity DE-Lechwiesen Süd,48.058328,10.847694
 Ionity DE-Lehrter See Nord,52.38878,9.99604,30
 Ionity DE-Lehrter See Süd,52.38638,9.99925,30
-Ionity DE-Leinefelde-Worbis Ernemannstraße,51.390739,10.342552
+Ionity DE-Leinefelde Ernemannstraße,51.39074,10.34255
 Ionity DE-Lichtendorf Nord,51.468319,7.594014
 Ionity DE-Lichtendorf Süd,51.46802,7.59722,60
 Ionity DE-Linthe Westfalenstraße,52.160118,12.779906
@@ -15971,6 +15972,7 @@ IZIVIA FR-Saint-Malo Avenue de Launay Breton,48.6259,-1.9907
 IZIVIA FR-Saint-Malo Rue de la Grassinais,48.6219,-1.98666
 IZIVIA FR-Saint-Valery-sur-Somme Cavée Lévêque,50.17327,1.63742
 
+JET AT-Linz Freistädter Straße,48.3283,14.32136
 JET AT-Wien Laxenburger Straße,48.1358,16.35648
 JET DE-Bielefeld Eckendorfer Straße,52.03283,8.552652
 JET DE-Füssen Kemptener Straße,47.5686,10.6885
@@ -18209,6 +18211,7 @@ MVV DE-Limburgerhof Chenover Straße,49.423422,8.39396
 MVV DE-Mannheim Am Friedensplatz,49.477463,8.495918
 MVV DE-Mannheim E5,49.489556,8.462356
 MVV DE-Mannheim F 3,49.489147,8.464958
+MVV DE-Mannheim Friedrichsring,49.49186,8.4741
 MVV DE-Mannheim Fürther Straße,49.516766,8.539384
 MVV DE-Mannheim Heinrich-Wittkamp-Straße,49.501665,8.492776
 MVV DE-Mannheim Keplerstraße,49.47917,8.47489
@@ -19777,6 +19780,7 @@ reev CH-Lyssach Bernstrasse,47.07449,7.57053
 reev CH-Spiez Oberriedstrasse,46.890603,7.356605
 reev DE-Asbach-Bäumenheim Albanusstraße,48.69474,10.82682
 reev DE-Bad Driburg Brunnenstraße,51.73399,9.03522
+reev DE-Breitenworbis Auf dem Pfingstrasen,51.41292,10.43954
 reev DE-Erlangen Rathsbergerstraße,49.6112,11.01974
 reev DE-Gunzenhausen Industriestraße,49.12367,10.76928
 reev DE-Herzogenaurach Puma Way,49.57417,10.89853
@@ -19813,6 +19817,7 @@ Renovatio RO-Sibiu Veștem,45.700054,24.249888
 Renovatio RO-Târgu Mureș Strada Gheorghe Doja,46.51084,24.50876
 
 Repower CH-Uster Aathalstrasse,47.3454,8.74213
+Repower HR-Valbandon Dragonja,44.91627,13.80968
 Repower IT-Malcesine Via Gardesana,45.77346,10.81333
 
 Repsol ES-Alcorcón Camino de Leganes,40.32415,-3.847402
@@ -20158,6 +20163,7 @@ Shell DE-Bochum Herner Straße,51.518407,7.212834
 Shell DE-Bonn Endenicher Straße,50.732787,7.082075
 Shell DE-Braunschweig Hansestraße,52.310753,10.506453
 Shell DE-Braunschweig Münchenstraße,52.252208,10.492259
+Shell DE-Breitenworbis Auf dem Pfingstrasen,51.41238,10.43843
 Shell DE-Buchholz Steinbecker Straße,53.330204,9.877068
 Shell DE-Burg Magdeburger Chaussee,52.2594,11.841944,30
 Shell DE-Büdingen An der Saline,50.283806,9.108776
@@ -20409,6 +20415,7 @@ Skoda DE-Gelsenkirchen Ewaldstraße,51.57765,7.11335
 Smatrics AT-Altlengbach Steinhäusl,48.157892,15.941884
 Smatrics AT-Anif Salzachtalstraße,47.72713,13.06038,6
 Smatrics AT-Ansfelden Ikea-Platz,48.197307,14.249527
+Smatrics AT-Ansfelden Traunuferstraße,48.21153,14.275
 Smatrics AT-Bad Ischl Sulzbacherstraße,47.69079,13.62284
 Smatrics AT-Bad Voslau Flugfeldstraße,47.9661,16.239
 Smatrics AT-Bad Waltersdorf,47.18288,15.99365
@@ -20530,6 +20537,8 @@ Smatrics AT-Wiener Neudorf IZ-NÖ-Süd Straße,48.077225,16.330032
 Smatrics AT-Wiener Neustadt Gerasdorfer Gasse,47.805386,16.21233
 Smatrics AT-Wolfsberg Spanheimerstraße,46.83685,14.83941
 Smatrics AT-Wörgl Innsbrucker Straße,47.48192,12.05786
+Smatrics DE-Balingen Leibbrandstraße,48.24475,8.8772
+Smatrics DE-Eisenstadt Haidäcker-Park,47.8275,16.52437
 Smatrics DE-Heilbronn Weipertstraße,49.1488,9.2144
 Smatrics DE-Neuenstadt am Kocher Daimlerstraße,49.238657,9.341164
 Smatrics DE-Passau Messestraße,48.55925,13.41126
@@ -21296,10 +21305,10 @@ TEA HU-Polgár Ipari Park,47.84054,21.13145
 
 TEAG DE-Allendorf (Lumda) Am Gewerbepark,50.675,8.8113
 TEAG DE-Am Ettersberg Schwerstedter Straße,51.062259,11.250298
-TEAG DE-Amt Wachsenburg,50.888332,10.935136
 TEAG DE-Apolda Utenbacher Straße,51.023807,11.52331
 TEAG DE-Arnstadt Ichtershäuser Straße,50.847927,10.954495
 TEAG DE-Arnstadt Robert-Bosch-Straße,50.8599,10.94737
+TEAG DE-Autohof Am Erfurter Kreuz,50.88838,10.93515
 TEAG DE-Autohof Schleiz,50.55058,11.78792,30
 TEAG DE-Autohof Schleiz,50.55156,11.78998
 TEAG DE-Bad Berka Weimarische Straße,50.900692,11.282572
@@ -21344,11 +21353,11 @@ TEAG DE-Gera August-Bebel-Straße,50.849202,12.086012
 TEAG DE-Gera Globus,50.887423,12.13849
 TEAG DE-Geratal Gewerbepark,50.712499,10.829419
 TEAG DE-Gießen Altenburger Straße,50.609626,8.71598,40
-TEAG DE-Gießen Gottlieb-Daimler-Str.,50.582799,8.649173
+TEAG DE-Gießen Gottlieb-Daimler-Straße,50.5828,8.64917
 TEAG DE-Gießen Marburger Straße,50.600865,8.687025,40
 TEAG DE-Gotha Harjesstraße,50.928872,10.715105
 TEAG DE-Großbreitenbach Ilmenauer Straße,50.583654,10.996675
-TEAG DE-Grünberg Carl-Benz-Str.,50.60439,8.958433
+TEAG DE-Grünberg Carl-Benz-Straße,50.6044,8.95843
 TEAG DE-Göttingen Salinenweg,51.534998,9.908445
 TEAG DE-Haiger Hinterm Graben,50.742834,8.207157
 TEAG DE-Haiger Hohleichenrain,50.741687,8.225525
@@ -21362,7 +21371,7 @@ TEAG DE-Hildburghausen Wiesenstraße,50.422323,10.727413
 TEAG DE-Immelborn Salzunger Straße,50.79889,10.27141
 TEAG DE-Jena Dorfstraße,50.932567,11.653946
 TEAG DE-Jena GLOBUS Jena-Isserstedt,50.959032,11.509665
-TEAG DE-Jena Rudolstädter Str.,50.8958,11.583665
+TEAG DE-Jena Rudolstädter Straße,50.89578,11.58368
 TEAG DE-Kaltennordheim Feldabahnstraße,50.630046,10.158468
 TEAG DE-Kassel Harleshäuser Straße,51.326042,9.445198
 TEAG DE-Kaulsdorf Könitzer Straße,50.61729,11.42962
@@ -21372,7 +21381,7 @@ TEAG DE-Lahntal Sandhute,50.870244,8.744172
 TEAG DE-Lauterbach (Hessen) An der Gall,50.643535,9.387346
 TEAG DE-Leinefelde Konrad-Martin-Straße,51.384866,10.3238
 TEAG DE-Lich Carl-Benz-Ring,50.506769,8.829616
-TEAG DE-Magdala,50.900738,11.445971
+TEAG DE-Magdala Auf der Schanze,50.90078,11.44596
 TEAG DE-Mellingen Hainholzstraße,50.936441,11.389558
 TEAG DE-Mühlhausen /Thüringen Industriestraße,51.218889,10.453233
 TEAG DE-Mühlhausen /Thüringen Volkenröder Straße,51.218184,10.471258
@@ -21389,7 +21398,7 @@ TEAG DE-Ohrdruf Bahnhofstraße,50.826322,10.725306
 TEAG DE-Ohrdruf Suhler Straße,50.81464,10.72962
 TEAG DE-Orlamünde Saalstraße,50.774799,11.532565
 TEAG DE-Osterfeld Im Heidegrund Süd,51.039773,11.937764
-TEAG DE-Petersberg,50.969431,11.855047
+TEAG DE-Petersberg Eichenweg,50.96943,11.85505
 TEAG DE-Reichenbach Lengenfelder Straße,50.615149,12.31145
 TEAG DE-Reiskirchen Carl-Benz-Straße,50.5979,8.82288,25
 TEAG DE-Rudolstadt Gartenstraße,50.720788,11.349883
