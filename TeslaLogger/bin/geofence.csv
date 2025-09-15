@@ -174,7 +174,6 @@ Supercharger-V3 BE-Brugge,51.16989,3.19666
 Supercharger-V3 BE-Bruxelles Brussels,50.878701,4.37317
 Supercharger-V3 BE-Charleroi,50.452328,4.430355
 Supercharger-V4 BE-Couvin,50.083724,4.524027
-Supercharger-V4 BE-Diegem,50.884,4.44364
 Supercharger BE-Edegem,51.151055,4.432582
 Supercharger-V4 BE-Ghent,51.0181,3.7367
 Supercharger-V3 BE-Hasselt,50.951748,5.353142,17
@@ -2937,6 +2936,7 @@ Supercharger-V3 HU-Györ,47.63327,17.66098
 Supercharger-V4 HU-Kiskunfélegyháza,46.67579,19.8197
 Supercharger HU-Miskolc,48.058002,20.799201
 Supercharger-V3 HU-Obuda,47.561058,19.04932
+Supercharger-V4 HU-Pécs,46.06448,18.1824
 Supercharger-V3 HU-Sormás,46.46054,16.90676
 Supercharger HU-Szeged,46.274868,20.102464
 Supercharger-V3 HU-Szigetszentmiklós,47.383471,19.026911
@@ -3377,6 +3377,7 @@ Supercharger-V3 NL-Akersloot,52.54776,4.72287,70
 Supercharger-V4 NL-Almere,52.35816,5.25185
 Supercharger NL-Apeldoorn,52.178323,5.912639
 Supercharger-V3 NL-Apeldoorn Oost,52.204703,6.016104
+Supercharger-V4 NL-Arnhem,52.01587,5.92948
 Supercharger NL-Assen,52.9929,6.52447
 Supercharger NL-Badhoevedorp,52.329302,4.78487
 Supercharger-V4 NL-Best,51.490949,5.424566
@@ -9281,7 +9282,6 @@ E.ON DE-Berlin Schloßstrasse 1A,52.518924,13.295717
 E.ON DE-Berlin Sonnenallee 224,52.47153,13.456201
 E.ON DE-Berlin Treptower Straße 97,52.477757,13.447549
 E.ON DE-Berlin Wildenbruchplatz 1,52.483966,13.443618
-E.ON DE-Bielefeld,51.927961,8.529158
 E.ON DE-Bottrop Am Hauptbahnhof 1,51.509199,6.935654
 E.ON DE-Bottrop An der A2,51.539811,6.887362
 E.ON DE-Büsum Lehnsweg,54.13177,8.85542
@@ -9425,8 +9425,10 @@ E.ON DE-Raststätte Münsterland Ost,51.94222,7.55108,30
 E.ON DE-Raststätte Münsterland West,51.94554,7.54785,30
 E.ON DE-Raststätte Neustädter Bucht,54.06822,10.75688
 E.ON DE-Raststätte Neustädter Bucht,54.07086,10.75543
+E.ON DE-Raststätte Niedergassel,51.92796,8.52916
 E.ON DE-Raststätte Nürnberg-Feucht,49.3565,11.20164
 E.ON DE-Raststätte Nürnberg-Feucht,49.35728,11.20422
+E.ON DE-Raststätte Obergassel,51.93,8.53213
 E.ON DE-Raststätte Oberlausitz,51.19803,14.33023
 E.ON DE-Raststätte Oberlausitz,51.20015,14.32995
 E.ON DE-Raststätte Pentling,48.96006,12.09356
@@ -9608,6 +9610,7 @@ eborn FR-Menthon-Saint-Bernard Rte des Moulins,45.861665,6.197802
 eborn FR-Orgnac-l’Aven,44.31816,4.41391
 eborn FR-Saint-Didier-sous-Aubenas Chem. des Vignettes,44.61239,4.40904
 
+eCarUp AT-Gosau Hornspitzweg,47.56583,13.5202
 eCarUp AT-Neustift im Stubaital Mutterberg,47.01296,11.16042
 eCarUp AT-Radingdorf Betriebsstraße,48.35779,14.47635
 eCarUp CH-Aarau Buchserstrasse,47.391541,8.059656
@@ -10449,7 +10452,6 @@ EnBW DE-Biberach an der Riß Bahnhofstr.,48.100058,9.790165
 EnBW DE-Biberach an der Riß Jordanbad,48.07446,9.82151
 EnBW DE-Biberach an der Riß Marie-Curie-Straße,48.110723,9.778488
 EnBW DE-Biberach an der Riß Rollinstraße,48.094536,9.793076
-EnBW DE-Bielefeld Autobahnraststätte Obergassel,51.929958,8.532081
 EnBW DE-Bielefeld Detmolder Straße,51.996108,8.59518
 EnBW DE-Bielefeld Detmolder Straße,51.998085,8.586316
 EnBW DE-Bielefeld Detmolder Straße,52.001902,8.56918
@@ -11555,8 +11557,7 @@ EnBW DE-Raststätte Eifel West,50.06856,6.87994,20
 EnBW DE-Raststätte Goldbach Nord,53.00084,9.17945,20
 EnBW DE-Raststätte Goldbach Süd,52.99874,9.18113,20
 EnBW DE-Raststätte Göttingen West,51.49462,9.87613,20
-EnBW DE-Raststätte Hofoldinger Forst,47.9972,11.676
-EnBW DE-Raststätte Hofoldinger Forst Süd,47.99715,11.67605,20
+EnBW DE-Raststätte Hofoldinger Forst Süd,47.99715,11.67605
 EnBW DE-Raststätte Hohenlohe Nord,49.2071,9.63882,20
 EnBW DE-Raststätte Hohenlohe Süd,49.2053,9.64033,20
 EnBW DE-Raststätte im Hegau A81,47.86136,8.78631
@@ -18177,7 +18178,6 @@ MOVE CH-Raststätte Pieterlen,47.16888,7.35133
 MOVE CH-Rose de la Broye,46.83189,6.85792,20
 MOVE CH-Scuol Nairs,46.78842,10.26958
 MOVE CH-Spiez Bahnhofstrasse,46.68754,7.67882
-MOVE CH-Spiez Bahnhofstrasse,46.68756,7.67886
 MOVE CH-St. Gallen Steinachstrasse,47.43156,9.38649
 MOVE CH-St. Gallen Zürcherstrasse,47.40746,9.30225
 MOVE CH-Thusis Neudorfstrasse,46.69457,9.44086
@@ -20003,6 +20003,7 @@ Salzburg AT-Salzburg Alois-Schmiedbauer-Straße,47.810061,13.038407
 Salzburg AT-Salzburg Auerspergstraße,47.807178,13.040552
 Salzburg AT-Salzburg Bayerhamerstraße,47.812149,13.050424
 Salzburg AT-Salzburg Bräuhausstraße,47.79372,13.022693
+Salzburg AT-Salzburg Bundschuhstraße,47.81876,13.06588
 Salzburg AT-Salzburg Europastraße,47.8183,13.00622
 Salzburg AT-Salzburg Franz-Josef-Straße,47.807124,13.043518
 Salzburg AT-Salzburg Julius-Raab-Platz,47.808321,13.044126
@@ -22824,6 +22825,7 @@ DE Mainz Malakoff-Passage,49.9965,8.28127
 DE Mannheim SV Seckenheim,49.46796,8.5573
 DE Melle Hageböke,52.176211,8.367606
 DE Mölln VW Riemer,53.623707,10.678989
+DE Mönchengladbach SMS Campus,51.18596,6.42623
 DE München AF Automotive,48.18688,11.58993,30
 DE München Holiday Inn München Ost,48.13185,11.62799
 DE München Hotel Heigl,48.075613,11.513897
