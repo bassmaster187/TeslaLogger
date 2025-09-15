@@ -1467,8 +1467,7 @@ Supercharger CN-Sichuan - Maerkang Vienna Hotel,31.888896,102.240471
 Supercharger-V3 CN-Siping - Baotai Shopping Mall,43.176796,124.351562
 Supercharger-V3 CN-Songyuan - Fuyu Longxuan Hotel,44.979481,126.029665
 Supercharger-V3 CN-Songyuan - Jinzuan Mall,45.130901,124.831818
-Supercharger CN-Suining - Hampton by Hilton,30.531633,105.58974
-Supercharger-V3 CN-Suining - Hampton by Hilton 2,30.531633,105.58974
+Supercharger-V3 CN-Suining Hampton by Hilton,30.53163,105.58974
 Supercharger-V3 CN-Suizhou- Zhedong Chuyue International Hotel,31.722278,113.389967
 Supercharger-V3 CN-Suqian - Suqian Hengli International Hotel,33.958359,118.256332
 Supercharger-V3 CN-Suzhou - Holiday Inn Kunshan Suzhou,31.352802,120.954236
@@ -3178,7 +3177,6 @@ Supercharger-V3 JP-Tokyo - Ikebukuro,35.728081,139.707528
 Supercharger-V3 JP-Tokyo - Itabashi Maeno,35.770643,139.691757
 Supercharger JP-Tokyo - Marunouchi,35.684741,139.761122
 Supercharger JP-Tokyo - Odaiba,35.618009,139.776585
-Supercharger JP-Tokyo - Roppongi,35.659421,139.728597
 Supercharger-V3 JP-Tokyo - Roppongi P2,35.659421,139.728597
 Supercharger-V3 JP-Tokyo - Senju,35.763748,139.789383
 Supercharger-V3 JP-Tokyo - Setagaya Kinuta,35.636575,139.619472
@@ -8283,7 +8281,6 @@ CircleK SE-Göteborg Torpavallsgatan,57.72356,12.02531
 CircleK SE-Kiruna Industrivägen,67.84812,20.27537
 CircleK SE-Lund Magistratsvägen,55.72023,13.203808
 CircleK SE-Lycksele Umevägen,64.59021,18.69169
-CircleK SE-Malmö Derbyvägen,55.57868,13.06286
 CircleK SE-Nyköping Norrköpingsvägen,58.74967,16.986,15
 CircleK SE-Sigtuna Cederströms Slinga,59.60648,17.89644
 CircleK SE-Skellefteå Kågevägen,64.75814,20.9659
@@ -8396,7 +8393,7 @@ Citywatt DE-Ismaning Gutenbrgstraße,48.234505,11.683549
 Citywatt DE-Jüterbog Luckenwalder Straße 17,52.002823,13.08616
 Citywatt DE-Kamen Kamen Karree 3,51.571317,7.671473
 Citywatt DE-Kappel-Grafenhausen Fertighauswelt 1,48.27501,7.775809
-Citywatt DE-Karlsruhe Neureuter Straße,49.01906,8.35567
+Citywatt DE-Karlsruhe Neureuter Straße,49.01887,8.35563,30
 Citywatt DE-Kaufbeuren Gottlieb-Daimler-Straße 2,47.89777,10.646437
 Citywatt DE-Kirchenlamitz Weißenstädter Str. 79,50.14917,11.942044
 Citywatt DE-Kloster Lehnin Friedenstraße 13,52.31748,12.743904
@@ -12680,7 +12677,6 @@ ESWE DE-Idstein Limburger Straße,50.223519,8.267802
 ESWE DE-Wiesbaden Am Schloßpark,50.03909,8.23633
 ESWE DE-Wiesbaden Blücherstraße,50.08049,8.22484
 ESWE DE-Wiesbaden Hagenauer Straße,50.04779,8.2307
-ESWE DE-Wiesbaden Hasengartenstraße,50.08353,8.24501
 ESWE DE-Wiesbaden Hauptbahnhof Gartenfeldstraße,50.070716,8.245458
 ESWE DE-Wiesbaden Mainzer Straße,50.060553,8.254324
 ESWE DE-Wiesbaden Warmer Damm,50.08353,8.24501
@@ -14350,8 +14346,7 @@ FreeToX IT-Badia Nuova,44.15108,11.19367
 FreeToX IT-Bentivoglio Autostrada Bologna-Padova,44.621136,11.419777
 FreeToX IT-Bentivoglio Autostrada Bologna-Padova,44.622597,11.419838
 FreeToX IT-Brembo,45.63298,9.59957
-FreeToX IT-Brianza,45.57409,9.39333
-FreeToX IT-Brianza,45.57585,9.39384
+FreeToX IT-Brianza,45.5741,9.39333
 FreeToX IT-Brianza,45.57586,9.3938
 FreeToX IT-Campofilone Autostrada Adriatica,43.075062,13.842852
 FreeToX IT-Campofilone Autostrada Adriatica,43.075132,13.844134
@@ -15075,7 +15070,7 @@ IKEA DE-Kaarst,51.210033,6.640438
 IKEA DE-Kaarst,51.210824,6.639237
 IKEA DE-Kamen,51.570352,7.669566
 IKEA DE-Karlsruhe,49.00518,8.44129
-IKEA DE-Kassel,51.299967,9.471972
+IKEA DE-Kassel,51.27694,9.52612
 IKEA DE-Kiel Westring,54.313932,10.108454
 IKEA DE-Koblenz,50.381728,7.566886
 IKEA DE-Köln,50.862021,6.971621
@@ -17146,7 +17141,7 @@ Lidl DE-Jettingen-Scheppach Messerschmittstr. 3,48.40859,10.435209
 Lidl DE-Kaiserslautern Kurt-Schumacher-Straße,49.422988,7.748416
 Lidl DE-Kamenz Fichtestr. 2,51.272709,14.105661
 Lidl DE-Karlsruhe An der Trift,49.044397,8.393977
-Lidl DE-Karlsruhe Neureuter Straße,49.0191,8.35567
+Lidl DE-Karlsruhe Neureuter Straße,49.0191,8.35568,30
 Lidl DE-Kassel Kohlenstraße 75,51.308664,9.458531
 Lidl DE-Kassel-Unterneustadt Hafenstr. 5,51.314083,9.510045
 Lidl DE-Kaufbeuren,47.875244,10.627542
@@ -17965,7 +17960,7 @@ Mer SE-Laxå Revirvägen,58.98276,14.62493,25
 Mer SE-Linköping Nygårdsinfarten,58.43082,15.5844
 Mer SE-Ljungby Ringvägen,56.813133,13.906555
 Mer SE-Löddeköpinge Marknadsvägen,55.766646,12.990359,16
-Mer SE-Malmö Derbyvägen,55.57868,13.06286,25
+Mer SE-Malmö Derbyvägen,55.57868,13.06286
 Mer SE-Mjölby Sparregatan,58.32376,15.09222
 Mer SE-Norrköping Järngatan,58.618527,16.162364
 Mer SE-Nybro Norra Vägen,56.73614,15.934698
@@ -22498,7 +22493,6 @@ Zunder ES-Zafra Plaza del Alcázar,38.4244,-6.41493
 ÖAMTC AT-Neusiedl am See Rot-Kreuz-Gasse,47.96934,16.83777
 ÖAMTC AT-Teesdorf Triester Straße,47.96154,16.2734
 ÖAMTC AT-Traiskirchen Zubringerstraße,47.99383,16.26288
-ÖAMTC AT-Traiskirchen Zubringerstraße,48.03511,16.80851
 ÖAMTC AT-Völkermarkt Klagenfurter Straße,46.65781,14.61371
 ÖAMTC AT-Wien Hadikgasse,48.192959,16.278226,20
 ÖAMTC AT-Wien Wienerbergstraße,48.17084,16.3376
@@ -22802,7 +22796,6 @@ DE Ingolstadt IAV,48.78974,11.37989
 DE Jena Zeiss,50.91769,11.56612
 DE Kaiserslautern Smash-n-Dash,49.4295,7.66508
 DE Karlsruhe Atruvia,48.9952,8.44605
-DE Kassel Heinrich-Hertz-Straße,51.276943,9.526117
 DE Kettig Alterauge GmbH,50.405837,7.472896
 DE Kiel Koppelberg,54.40264,10.16808
 DE Kiel Lubinus Clinicum,54.35285,10.11714
