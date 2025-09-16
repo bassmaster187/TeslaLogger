@@ -5966,6 +5966,7 @@ A2A IT-Brescia Via Corfù,45.52823,10.21191
 A2A IT-Castenedolo Via Sandro Pertini,45.484595,10.32268
 A2A IT-Como Via Asiago,45.83802,9.053
 A2A IT-Lecco Corso Martiri della Liberazione,45.850654,9.393834
+A2A IT-Salò Via Maria Montessori,45.60188,10.51672
 A2A IT-San Felice del Benaco Via Dietro Castello,45.58652,10.54727
 A2A IT-Truccazzano Via Rivoltana,45.48038,9.44681
 
@@ -7411,6 +7412,7 @@ AVENCY DE-Wesel Rudolf-Diesel-Straße,51.66348,6.66397
 AVIA CH-Chur Rossbodenstrasse,46.85187,9.50544
 AVIA CH-Frauenfeld Zürcherstrasse,47.56279,8.90669
 AVIA CH-Kriens Luzernerstrasse,47.03439,8.28683
+AVIA CH-Lauterbrunnen Zuben,46.59728,7.9074
 AVIA CH-Niederbüren Staatsstrasse,47.46502,9.20127
 AVIA DE-Borken Ahauser Straße,51.852478,6.864004
 AVIA DE-Borken Boumannstraße,51.8497,6.84698
@@ -7827,6 +7829,7 @@ BS-ENERGY DE-Braunschweig Reichsstraße,52.266932,10.52223
 BS-ENERGY DE-Braunschweig Siegfriedstraße,52.287043,10.519884
 BS-ENERGY DE-Braunschweig Thüringenplatz,52.229463,10.533787
 BS-ENERGY DE-Braunschweig Werder,52.269819,10.523136
+BS-ENERGY DE-Gifhorn Torstraße,52.4887,10.54326
 
 Budimex PL-Siedlce plac Zdanowskiego,52.1624,22.27239
 
@@ -9158,6 +9161,7 @@ e-laden-Tirol AT-Kematen Sportplatzweg,47.260587,11.268672
 e-laden-Tirol AT-Kitzbühel Jochberger Straße,47.43815,12.40086
 e-laden-Tirol AT-Schönberg im Stubaital Europabrücke-Parkplatz,47.19827,11.39695
 
+E-MAXX DE-Birnbach Kölner Straße,50.7084,7.58354
 E-MAXX DE-Bodenheim Am Reichsritterstift,49.9311,8.30093
 E-MAXX DE-Braunfels Jahnstraße,50.51494,8.38597
 E-MAXX DE-Frickhofen Schulstraße,50.504932,8.027944
@@ -9991,20 +9995,25 @@ ELE DE-Gelsenkirchen Husemannstraße,51.50603,7.09896,20
 Electra BE-Auderghem Chaussée de Wavre,50.794779,4.478889
 Electra BE-Maasmechelen Koninginnelaan,50.98633,5.7015
 Electra BE-Zandhoven Liersebaan,51.198904,4.643527
+Electra ES-Sant Cugat del Vallès Av. de la Via Augusta,41.48288,2.05283
 Electra ES-Sant Cugat Shopping Center,41.48302,2.0529
 Electra FR-Aire de Arzens,43.21972,2.21619,30
+Electra FR-Aire de Bages,43.1137,2.9545
 Electra FR-Aire de Gigean,43.49355,3.7183
+Electra FR-Aire de Loupian-Georges Brassens,43.46382,3.6313
 Electra FR-Aire de Manzat A89,45.9568,2.9891
 Electra FR-Beaune Rte de Verdun,47.0095,4.85173
 Electra FR-Besançon Rue de Dole,47.21988,5.95489
 Electra FR-Boulazac Isle Manoire All. Jacques Duclos,45.18407,0.7744
 Electra FR-Brive-la-Gaillarde Rue Général Pierre Pouyade,45.14624,1.47475
+Electra FR-Les Tourrettes Rue de Berianne,44.66716,4.79446
 Electra FR-Morschwiller-le-Bas Rue de Mulhouse,47.73686,7.28618
 Electra FR-Nanterre Av. Pablo Picasso,48.89171,2.21374
 Electra FR-Rosny-sous-Bois Rue de Lisbonne,48.87797,2.47551
 Electra FR-Villebon-sur-Yvette Chem. de Briis,48.70423,2.25294
 Electra FR-Zac des Tulipes Rue de Montservon,48.968781,2.463222
 Electra IT-Affi Località Canove,45.55298,10.7811
+Electra IT-Fidenza Via Federico Fellini,44.88485,10.08787
 Electra IT-Lonato del Garda Via Battaglie,45.43199,10.51885
 Electra IT-Milano Piazza della Repubblica,45.47776,9.19555
 Electra IT-Modena Via Emilia Ovest,44.65001,10.85315,25
@@ -12264,8 +12273,10 @@ EnelX IT-Novara Via Pietro Generali,45.43348,8.60534
 EnelX IT-Olbia Piazzale Benedetto Brin,40.92353,9.50676
 EnelX IT-Olbia Via Bambini di Beslan,40.90811,9.51547,30
 EnelX IT-Olbia Via Basa,40.96083,9.491849
+EnelX IT-Oleggio Via Don G. Minzoni,45.59547,8.6353
 EnelX IT-Orta San Giulio Via Panoramica,45.79747,8.41471
 EnelX IT-Paese Via Monsignor Farina,756.0,12.12217
+EnelX IT-Palau Via Riva dei Lestrigoni,41.17803,9.38475
 EnelX IT-Palermo Via Marchese di Villabianca,38.139612,13.349534
 EnelX IT-Peschiera del Garda Via Venezia,45.44199,10.70614
 EnelX IT-Piazza Stazione Via Francesco Baracca,45.75498,8.56061
@@ -12287,6 +12298,7 @@ EnelX IT-Roma Viale dei Quattro Venti,41.8797,12.45856
 EnelX IT-Rovigo Viale Porta Adige,45.08557,11.78552
 EnelX IT-Saluzzo Via F. e G. Lattanzi,44.64589,7.50439
 EnelX IT-San Benedetto del Tronto Via della Liberazione,42.94108,13.88002
+EnelX IT-San Martino Via della Fontana,45.65856,8.48954
 EnelX IT-San Vincenzo Via Firenze,43.09,10.54203
 EnelX IT-San Vito Via Antonio Meucci,39.43443,9.55033
 EnelX IT-Sant’Ambrogio di Torino Piazza Repubblica,45.09813,7.36265
@@ -12296,6 +12308,7 @@ EnelX IT-Sassari Via Washington,40.710753,8.553156
 EnelX IT-Sasso Marconi Vle John F. Kennedy,44.39228,11.24684
 EnelX IT-Sassuolo V. Radici in Piano,44.5594,10.8017
 EnelX IT-Savignano sul Rubicone C. Colombo,44.15777,12.42902
+EnelX IT-Scopello Via Mera,45.7729,8.09582
 EnelX IT-Selva Candida,41.9579,12.38587
 EnelX IT-Serravalle Scrivia Via Novi,44.73201,8.84134
 EnelX IT-Siena Strada delle Grondaie,43.33021,11.32848
@@ -14449,6 +14462,7 @@ GGEW DE-Zwingenberg Melibokusstraße,49.721749,8.610705
 Glattwerk CH-Dübendorf Bettlistrasse,47.397961,8.624511
 
 GLS-Bank DE-Bochum Christstraße,51.47093,7.21924
+GLS-Bank DE-Gummersbach Am Alten Steg,51.03898,7.5911
 GLS-Bank DE-Mittweida Dreiwerdener Weg,50.97867,12.98227,25
 GLS-Bank DE-Scharbeutz Dorfstraße,54.0528,10.7505
 
@@ -18906,6 +18920,7 @@ OZECAR FR-Porto-Vecchio Avenue de Bastia,41.604613,9.276945
 Pair AT-Hall in Tirol Krippgasse,59.35777,17.9483
 
 Parkstrom DE-Amöneburg Manfred-Stumpf-Straße,50.774147,8.89373
+Parkstrom DE-Asbach Vorteil Center,50.65958,7.41956
 Parkstrom DE-Füssen Schäfflerstraße,47.57639,10.67267
 Parkstrom DE-Reiskirchen Freiherr-Vom-Stein-Straße,50.59773,8.82373,20
 Parkstrom DE-St. Ingbert Katharina-Loth-Straße,49.2781,7.10293
@@ -21603,6 +21618,8 @@ TotalEnergies FR-Aire De Lancon De Provence Ouest,43.589684,5.186405,80
 TotalEnergies FR-Aire De Lançon,43.58896,5.18936,30
 TotalEnergies FR-Aire de l’Aveyron,44.329345,3.079666,30
 TotalEnergies FR-Aire De Metz Saint Privat,49.179575,6.053394
+TotalEnergies FR-Aire de Meung-sur-Loire,47.8196,1.64183
+TotalEnergies FR-Aire de Meung-sur-Loire,47.8202,1.64043
 TotalEnergies FR-Aire de Mâcon La Salle,46.41875,4.86536
 TotalEnergies FR-Aire de Nîmes Marguerittes Nord,43.87547,4.45011
 TotalEnergies FR-Aire de Poitou Charentes,46.29759,-0.36964
@@ -21735,6 +21752,8 @@ Turmstrom AT-Wolfsberg Grazer Straße,46.846418,14.843636
 twl DE-Ludwigshafen am Rhein Pettenkoferstraße,49.48694,8.4252
 
 twn DE-Naumburg (Saale) Jakobsring,51.149859,11.814456
+
+TWS DE-Weingarten Gablerstraße,47.8078,9.63948
 
 Ultra-Fast SE-Varberg Gunnestorpsvägen,57.16941,12.276915,25
 
@@ -22260,9 +22279,11 @@ westenergie DE-Essen Kupferdreher Straße,51.39412,7.08314
 westenergie DE-Freudenberg Zum Kurpark,50.898648,7.875615
 westenergie DE-Holzwickede Kirchstraße,51.49896,7.61831,25
 westenergie DE-Mayschoß Eurodeplatz,50.51709,7.01987
+westenergie DE-Niederzier Breite Straße,50.88467,6.46367
 westenergie DE-Osnabrück Goethering,52.27425,8.05568
 westenergie DE-Quakenbrück Markt,52.67589,7.95732
 westenergie DE-Recklinghausen Bochumer Straße,51.58284,7.21179,20
+westenergie DE-Rheinbach Himmeroder Wall,50.62394,6.94935
 westenergie DE-Saffig Rauschermühlenstraße,50.387926,7.404623
 westenergie DE-Scharbeutz Am Bürgerhaus,54.02151,10.74924
 westenergie DE-Scharbeutz Strandallee,54.01225,10.76887
@@ -22990,6 +23011,7 @@ RO Cluj-Napoca Strada Ion Meșter,46.75839,23.5593
 RO Cristian Hotel Sorin Mihai,45.63336,25.49198
 RO Oradea Pasajul Vulturul Negru,47.055133,21.93175
 RO Sibiu Piața Mică,45.79757,24.15138
+RO Suceava Strada Universității,47.64444,26.244
 RO Săcele Strada George Moroianu,45.618203,25.698313
 RO Zalău Aleea Tineretului,47.19534,23.0595
 RS Београд Klinika Varis,44.82424,20.41634
