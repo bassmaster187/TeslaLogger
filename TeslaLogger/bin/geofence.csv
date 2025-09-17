@@ -2158,7 +2158,7 @@ Supercharger-V3 DE-Viernheim - Rhein-Neckar-Zentrum,49.52813,8.56601,30
 Supercharger-V4 DE-Villingen-Schwetzingen,48.070755,8.456838
 Supercharger-V4 DE-Vöhringen,48.284799,10.115988
 Supercharger-V4 DE-Waghäusel,49.2118,8.5258
-Supercharger-V3 DE-Waiblingen,48.821498,9.296802
+Supercharger-V3 DE-Waiblingen,48.82167,9.2972,60
 Supercharger-V3 DE-Waldlaubersheim,49.92401,7.82565
 Supercharger-V4 DE-Waltersdorf Am Rondell,52.368556,13.558913
 Supercharger-V4 DE-Waltershausen,50.90015,10.5653
@@ -2182,7 +2182,7 @@ Supercharger-V4 DE-Wiesbaden-Äppelallee,50.046184,8.219883
 Supercharger-V4 DE-Wildau,52.3136,13.60497,40
 Supercharger-V4 DE-Willich,51.279442,6.508057
 Supercharger-V4 DE-Wilnsdorf,50.8163,8.0864,90
-Supercharger-V4 DE-Windischeschenbach,49.80454,12.18425,20
+Supercharger-V4 DE-Windischeschenbach,49.80413,12.18416,22
 Supercharger-V3 DE Winsen (Luhe),53.35028,10.147426
 Supercharger-V3 DE-Wismar,53.879307,11.454047
 Supercharger-V3 DE-Wittenburg,53.507361,11.096852
@@ -2896,6 +2896,7 @@ Supercharger-V3 GB-Winchester,51.06729,-1.3
 Supercharger GB-Winchester Norton Park,51.16725,-1.32802
 Supercharger GB-Wokingham,51.42849,-0.898897
 Supercharger-V3 GB-Woodall Southbound,53.31617,-1.28096
+Supercharger-V4 GB-Wyberton,52.9551,-0.03298
 Supercharger-V3 GB-Wyboston,52.202314,-0.291534
 Supercharger GB-York,53.92417,-1.077908
 
@@ -3487,7 +3488,7 @@ Supercharger NO-Hernes,60.933109,11.676209
 Supercharger-V3 NO-Hitra,63.521397,9.109465
 Supercharger-V3 NO-Hjerkinn,62.22113,9.5449
 Supercharger NO-Hokksund,59.761033,9.905583
-Supercharger NO-Holmestrand,59.490174,10.294565
+Supercharger-V4 NO-Holmestrand,59.49017,10.29457
 Supercharger-V3 NO-Honningsvåg,70.999642,25.967133
 Supercharger NO-Hovden,59.561243,7.356849
 Supercharger NO-Innhavet,67.96235,15.92963,30
@@ -3781,7 +3782,7 @@ Supercharger-V4 SE-Nässjö,57.650685,14.736702
 Supercharger-V4 SE-Orsa,61.11675,14.62762
 Supercharger-V4 SE-Oskarshamn,57.263232,16.427816
 Supercharger-V4 SE-Piteå,65.235417,21.530925
-Supercharger SE-Puoltikasvaara,67.440201,21.115515
+Supercharger-V4 SE-Puoltikasvaara,67.4402,21.1155
 Supercharger-V4 SE-Riksgränsen,68.426588,18.12285
 Supercharger-V4 SE-Ronneby,56.23138,15.25778
 Supercharger SE-Skellefteå,64.76235,21.002864
@@ -6494,7 +6495,7 @@ Allego DE-Augsburg-Lechhausen Meraner Str. 36,48.386968,10.938608
 Allego DE-Aulendorf Poststr. 22,47.950563,9.642588
 Allego DE-Autohof Achern,48.64082,8.0375,12
 Allego DE-Autohof Bad Rappenau,49.21207,9.07756,15
-Allego DE-Autohof Bergler,49.80413,12.18416,20
+Allego DE-Autohof Bergler,49.80454,12.18425,22
 Allego DE-Autohof Halle-Tornau,51.5458,12.01418
 Allego DE-Autohof Homberg/Efze,51.00472,9.47935
 Allego DE-Autohof Lippetal,51.69575,7.96646,10
@@ -8570,6 +8571,7 @@ Clever DK-Thisted Østerbakken,56.95505,8.69685
 Clever DK-Tilst Agerøvej,56.182458,10.102735
 Clever DK-Vejle Føtex Østerbrogade,55.70893,9.54452
 Clever DK-Vejle Grønlandsvej,55.663733,9.54716
+Clever DK-Vejle Solkilde Alle,55.72382,9.58365
 Clever DK-Viborg Lundvej,56.45891,9.37403
 Clever DK-Vojens Sønderjyske Motorvej,55.2156,9.3719
 
@@ -9113,10 +9115,10 @@ deer DE-Steinheim an der Murr Burgunder Straße,48.982412,9.238815
 Denkfabrik-im-Grünen DE-Borken Dülmener Weg,51.84869,6.89636
 
 DEW DE-Dortmund Kleppingstraße,51.510315,7.468403
+DEW DE-Dortmund Kleppingstraße,51.51218,7.46815,25
 DEW DE-Dortmund Ostwall,51.510621,7.469531
+DEW DE-Dortmund Rosental,51.5115,7.46935
 DEW DE-Dortmund Wittbräucker Straße,51.43152,7.46896
-
-DEW21 DE-Dortmund Kleppingstraße,51.51218,7.46815,25
 
 DGV DE-Römhild Heurichstraße,50.398895,10.540541
 
@@ -12760,6 +12762,8 @@ evd DE-Dormagen Herrenweg,51.12369,6.85119
 evd DE-Dormagen Langemarkstraße,51.09337,6.83572
 evd DE-Dormagen Lübecker Straße,51.094089,6.81296
 evd DE-Dormagen Unter den Hecken,51.09368,6.84404
+
+Evergo DO-Santo Domingo Av. Lope de Vega,18.47947,-69.9315
 
 EvGateway US-Chugiak AK Birchwood Loop Rd,61.40312,-149.46762,20
 EvGateway US-Vernal UT S 500 E Ste 101,40.454329,-109.518367
@@ -18058,6 +18062,8 @@ MONACO-ON MC-Monaco Av. Princesse Grâce,43.74568,7.43203
 
 Monta AT-Burgfried Böhmer Straße,48.52589,14.29368
 Monta DE-Egling St2070,47.923998,11.488849
+Monta DE-Friedberg (Hessen) Ottostraße,50.34638,8.7547
+Monta DE-Friedberg (Hessen) Straßheimer Straße,50.32138,8.7395
 Monta DE-Hafenlohr Bahnhofstraße,49.86712,9.6031
 Monta DE-Karlsruhe Östliche Rheinbrückenstraße,49.0267,8.3475
 Monta DE-München Frankfurter Ring,48.18624,11.60598,25
@@ -19421,6 +19427,7 @@ Plan-Net-solar SI-Ljubljana Celovška cesta,46.09948,14.45996
 
 Plenitude IT-Bollate Via Pace,45.55967,9.13734
 Plenitude IT-Bologna Via Antoniotto Usodimare,44.51902,11.32701
+Plenitude IT-Bolzano Romstraße,46.48754,11.3432
 Plenitude IT-Canazei Strada Dolomites,46.47735,11.76895
 Plenitude IT-Formigine Via Giardini Nord,44.59819,10.8617
 Plenitude IT-Genova Via Piave,44.39352,8.95467
@@ -19615,6 +19622,8 @@ Powerdot PT-Vila do Conde Av. Gen. Humberto Delgado,41.36961,-8.74356
 Powerdot PT-Vila Nova de Gaia R. Delfim Lima,41.07625,-8.60161
 
 Powerland BE-Knokke-Heist Natiënlaan,51.327074,3.29579
+
+Powerstop IT-Ancona Via Girombelli Arnaldo,43.5434,13.51157
 
 Powy IT-Cesena Via Leopoldo Lucchi,44.143867,12.26004
 Powy IT-Levanto Passeggiata a Mare,44.17212,9.60635
@@ -21363,6 +21372,7 @@ TEAG DE-Erfurt Schmidstedter Flur,50.97429,11.06421,25
 TEAG DE-Erfurt Schwerborner Straße,51.012316,11.039763
 TEAG DE-Erfurt Weimarische Straße,50.97702,11.10642,25
 TEAG DE-Erfurt Zentrale,51.014927,11.041181
+TEAG DE-Friedberg (Hessen) Dorheim Am Hollerberg,50.35394,8.78652,70
 TEAG DE-Fritzlar Auf der Lache,51.120837,9.276721
 TEAG DE-Fritzlar Wolfhager Straße,51.136908,9.273618
 TEAG DE-Gebesee Robert-Koch-Straße,51.113131,10.933049
@@ -22141,6 +22151,7 @@ Volkswagen DE-Legden Neue Mühle,52.04106,7.09023
 Volkswagen DE-Leutkirch im Allgäu Im Ösch 8,47.796322,10.016311
 Volkswagen DE-Lohberg Lamer Straße,49.16966,13.09254
 Volkswagen DE-Luckenwalde Brandenburger Str. 36,52.095775,13.157239
+Volkswagen DE-Lübeck Grapengießerstraße,53.86154,10.63295
 Volkswagen DE-Lüchow Drawehner Straße,52.964914,11.148901
 Volkswagen DE-Magdeburg Werner-von-Siemens-Ring,52.080949,11.57926
 Volkswagen DE-Mechernich Heerstraße,50.58776,6.64976
@@ -22241,6 +22252,8 @@ Volvo IT-Milano Viale della Liberazione,45.48198,9.195
 Volvo IT-Roma Via Salaria,41.99307,12.51524
 Volvo NO-Tromsø Ringvegen,69.69097,19.00894
 
+Vonovia DE-Bochum Spelbergs Feld,51.45905,7.15482
+
 VSW DE-Bad Oldesloe Am Bürgerpark,53.81141,10.3709
 VSW DE-Bad Oldesloe Käthe-Kollwitz-Straße,53.80729,10.38258,30
 VSW DE-Bad Oldesloe Schützenstraße,53.81185,10.36447
@@ -22273,6 +22286,7 @@ Wenea ES-Autovía del Noroeste,41.13219,-4.77741
 Wenea ES-Curtis N-634,43.18162,-7.9678
 Wenea ES-Lugo Playa de Sacido,43.67723,-7.61381
 Wenea ES-Madrid Calle Roberto Domingo,40.43379,-3.66109
+Wenea ES-Madrid Salamanca Calle Velázquez,40.42925,-3.68368
 Wenea ES-Tapia de Casariego N-634,43.54202,-6.98357
 Wenea GB-Plymouth Somerset Pl,50.38157,-4.16068
 
@@ -22705,6 +22719,7 @@ CH Ronco sopra Ascona Via Cantonale,46.14813,8.73428
 CH Rothenburg Hotel Bären,47.093469,8.271122,8
 CH Russikon Im Berg,47.39687,8.77376
 CH Rümlang Riedmatt Center,47.46284,8.52536
+CH Schaffhausen Ernst Müller-Strasse,47.7191,8.66872
 CH Schlatt Kundelfingerhof,47.67734,8.70713
 CH Sevelen b_smart Motel,47.12479,9.49367
 CH Siebnen Multimotor Garage,47.17566,8.91328,25
@@ -22730,6 +22745,7 @@ DE Ascheberg Davert,51.79739,7.62373
 DE AU in der Hallertau Günzenhauser Straße,48.5479,11.72214
 DE Augsburg Messezentrum,48.33893,10.89059
 DE Aurich EEZ,53.496286,7.494351
+DE Aurich Ubbo-Emmius-Klinik,53.46903,7.50032
 DE Babensham ENERSYS,48.09008,12.31608
 DE Bad Birnbach Apart Hotel am Sonnenhügel,48.44348,13.08266
 DE Bad Doberan Grand Hotel Heiligendamm,54.143733,11.842857
@@ -22907,7 +22923,9 @@ DE Schliersee Die Kuh am See,47.71126,11.86701
 DE Schwarzheide Naundorfer Straße,51.47129,13.87011
 DE Schwerin Dreescher Werkstätten,53.56426,11.38108
 DE Schöneck IFA Hotel,50.38921,12.34454
+DE Sexau maxon motor,48.09012,7.89528
 DE Sierksdorf Hansa-Park,54.07358,10.77805
+DE Simonsberg Nordseecamping zum Seehund,54.45534,8.97188
 DE Sinzheim Landstraße,48.76556,8.16932
 DE Soest Münstermann,51.56228,8.14189
 DE Spalt Ferienhof Hanser,49.14644,10.91641
@@ -22927,6 +22945,7 @@ DE Westerhusen Bussardweg,53.40532,7.19795
 DE Wetzlar Gabelsbergerstraße,50.568909,8.508006
 DE Weyhe ffuss,53.01748,8.86264
 DE Witten Uni Witten/Herdecke Aktbau,51.44892,7.37712
+DE Wolfsburg Brackstedter Mühle,52.48473,10.77072
 DE Wolfsburg Karl-Ferdinand-Braun-Ring,52.42152,10.86141
 DE Worms Alzeyer Straße,49.63233,8.3457
 DE Wuppertal AWG Recyclinghof,51.225514,7.143682
