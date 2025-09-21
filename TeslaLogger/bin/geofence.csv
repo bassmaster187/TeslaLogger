@@ -3438,7 +3438,7 @@ Supercharger-V3 NL-Zuidbroek,53.16978,6.85344,60
 Supercharger NL-Zwolle,52.53204,6.15703
 
 Supercharger NO-Aksdal,59.423006,5.44306
-Supercharger-V3 NO-Aksdal South,59.421206,5.4435
+Supercharger-V3 NO-Aksdal South,59.42127,5.44324,70
 Supercharger-V3 NO-Alta,69.961145,23.232869
 Supercharger-V3 NO-Alvdal,62.11467,10.61603
 Supercharger-V3 NO-Arendal,58.467449,8.721617
@@ -7890,6 +7890,7 @@ Chargefox AU-Browns Plains QLD Browns Plains Rd,-27.663758,153.041055
 Chargefox AU-Bundall QLD Bundall Road,-28.001592,153.415261
 Chargefox AU-Childers QLD Crescent St,-25.23483,152.279169
 Chargefox AU-Coffs Harbour Drive Thru,-30.317669,153.089785
+Chargefox AU-Daylesford VIC Vincent St,-37.34293,144.14235
 Chargefox AU-Deakin ACT Denison Street,-35.31906,149.093679
 Chargefox AU-Esk QLD Pryde St,-27.23908,152.4203
 Chargefox AU-Euroa VIC Tarcombe Street,-36.742903,145.591134
@@ -10201,6 +10202,7 @@ eLoaded DE-Ulm Magirus-Deutz-Straße,48.3984,9.95808,70
 eLoaded DE-Zusmarshausen Am Innovationspark,48.407,10.59997,99
 
 Elocity PL-Bytom Konstytucji,50.3542,18.8761
+Elocity PL-Proszenie 1B,51.46094,19.78156
 Elocity PL-Siemianowice Śląskie Elizy Orzeszkowej,50.320105,19.010029
 Elocity PL-Warszawa Aleja Krakowska,52.17339,20.93957
 
@@ -14079,6 +14081,8 @@ Ewiva IT-Torri di Quartesolo VI Via Pola,45.50913,11.62935
 Ewiva IT-Tortona Strada Provinciale per Viguzzolo,44.907117,8.878633
 Ewiva IT-Valdera,43.64262,10.61749
 Ewiva IT-Valmontone Fashion District,41.7627,12.95579
+
+EWR DE-Lampertheim Weidweg,49.5919,8.45538
 
 ews DE-Bad Segeberg Hamburger Straße,53.93656,10.30329
 ews DE-Bad Segeberg Kurhausstraße,53.93783,10.30662,25
@@ -19823,6 +19827,7 @@ reev DE-Leidersbach Roßbacher Straße,49.878367,9.244406
 reev DE-Nürnberg Kontumazgarten,49.45316,11.06821
 reev DE-Rellingen Halstenbeker Weg,53.64324,9.8392
 reev DE-Rostock Lange Straße,54.0906,12.13646
+reev DE-Sehnde Kurt-Lau-Weg,52.31937,9.9654
 reev DE-Triefenstein Schulstraße,49.802428,9.582015
 reev DE-Wilhelmshaven Südstrand,53.51328,8.14338
 
@@ -21805,6 +21810,8 @@ Uno-X NO-Sandnes Hanamyrveien,58.85443,5.77135
 Uno-X NO-Tiller Kvenildsskogen,63.33372,10.36051
 Uno-X NO-Valderøy Valderøyvegen,62.529,6.11677,25
 
+Vannkraft NO-Leknes Skreda,68.15215,13.5118
+
 Vattenfall DE-Ahrensburg Reeshoop,53.68,10.2343
 Vattenfall DE-Aschersleben Heinrichstraße,51.754642,11.464478
 Vattenfall DE-Bad Driburg Lange Straße,51.737036,9.010439
@@ -22689,6 +22696,7 @@ AU Burnie TAS North Terrace,-41.04991,145.90733
 AU Hoppers Crossing VIC Pacific Werribee,-37.87656,144.681
 AU Kelvin Grove QLD Ring Rd,-27.45318,153.01699
 AU Kingswood NSW Western Sydney University,-33.76984,150.72923
+AU Melbourne VIC Flinders Street,-37.81595,144.97087
 AU Melbourne VIC Lonsdale St,-37.81036,144.9705
 AU Newstead QLD Gasworks Plaza,-27.4504,153.04424
 AU Point Cook VIC Stockland,-37.88427,144.73638
@@ -22889,6 +22897,7 @@ DE Machern Ringstraße,51.35571,12.57101
 DE Mainz Malakoff-Passage,49.9965,8.28127
 DE Mannheim SV Seckenheim,49.46796,8.5573
 DE Melle Hageböke,52.176211,8.367606
+DE Messe Galerie Fulda,50.5398,9.6379,170
 DE Mölln VW Riemer,53.623707,10.678989
 DE Mönchengladbach SMS Campus,51.18596,6.42623
 DE München AF Automotive,48.18688,11.58993,30
@@ -22993,6 +23002,7 @@ FI Tampere Hallilantie,61.4704,23.80405
 FR 68510 Sierentz Hyper U et Drive,47.66618,7.441494,10
 FR Disneyland Paris,48.86427,2.78954,99
 FR Disneyland Paris,48.87352,2.78475,60
+FR Le Grau-du-Roi Rue Amiot d’Inville,43.52418,4.1409
 GB Bedford Priory Business Park,52.12925,-0.42072
 GB London Westfield Hammersmith,51.50662,-0.22188
 HR Bale Camping Mon Perin,45.0154,13.71426
