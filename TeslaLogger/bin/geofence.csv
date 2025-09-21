@@ -6225,7 +6225,7 @@ Aldi DE-Harsewinkel Prozessionsweg,51.969768,8.221554
 Aldi DE-Heidelberg Im Schuhmachergewann,49.426216,8.639664,30
 Aldi DE-Heidelberg Kleingemünder Straße,49.41338,8.775348
 Aldi DE-Heidelberg Pleikartsförster Straße,49.37814,8.664138,30
-Aldi DE-Heilbronn Gaswerkstr.,49.150278,9.216667
+Aldi DE-Heilbronn Gaswerkstraße,49.15028,9.21667
 Aldi DE-Heilbronn Pfaffenstraße,49.18229,9.169471
 Aldi DE-Heilbronn Stuttgarter Straße,49.13355,9.226808
 Aldi DE-Heiligenroth Industriegebiet,50.448115,7.845324
@@ -6299,7 +6299,7 @@ Aldi DE-Leonberg,48.798462,8.999601
 Aldi DE-Leverkusen Syltstraße,51.0336,7.01075
 Aldi DE-Leverkusen-Fixheide Schlebuscher Straße,51.05,7.013389
 Aldi DE-Leverkusen-Opladen Bonner Straße,51.067417,6.990194
-Aldi DE-Lindau Von-Behring-Str.,47.550611,9.722111
+Aldi DE-Lindau Von-Behring-Straße,47.5506,9.7221
 Aldi DE-Linden Carl-Benz-Straße,50.538326,8.654354
 Aldi DE-Lorsch,49.65359,8.555596
 Aldi DE-Ludwigsburg,48.879803,9.218476,20
@@ -6363,13 +6363,13 @@ Aldi DE-Neuss Wolberostraße,51.20449,6.676
 Aldi DE-Neuss-Holzheim Maximilianstraße,51.163833,6.666167
 Aldi DE-Neuss-Weißenberg Normannenstraße,51.216806,6.682528
 Aldi DE-Niederwerrn Schweinfurter Straße,50.058361,10.188778
-Aldi DE-Nürnberg Geisseestr.,49.434974,11.041029
+Aldi DE-Nürnberg Geisseestraße,49.435,11.04104
 Aldi DE-Nürnberg Grolandstraße,49.465417,11.076167
 Aldi DE-Nürnberg Lübener Straße,49.410389,11.14,30
 Aldi DE-Nürnberg Münchenerstraße,49.40094,11.11705,30
 Aldi DE-Nürnberg Ostendstraße,49.456361,11.121444
-Aldi DE-Nürnberg Regensburgerstr.,49.435626,11.122648
-Aldi DE-Nürnberg Wiesbadenerstr.,49.522306,11.007037
+Aldi DE-Nürnberg Regensburgerstraße,49.43563,11.12265
+Aldi DE-Nürnberg Wiesbadener Straße,49.5223,11.00704
 Aldi DE-Nürnberg-Herpersdorf An der Radrunde,49.372028,11.081889
 Aldi DE-Oberasbach Kurt-Schumacher-Straße,49.4348,10.970972
 Aldi DE-Oberhausen Dorstener Straße,51.536713,6.880898
@@ -6578,7 +6578,7 @@ Allego DE-Bremen Erasmusstr. 12,53.090454,8.785677
 Allego DE-Bremen Hannoversche Str. 138,53.048887,8.891783
 Allego DE-Bremen Hermann-Ritter-Straße 101,53.077008,8.774573
 Allego DE-Bremen Kalmsweg 1,53.136474,8.739885
-Allego DE-Bremen Vahrer Str. 279,53.076474,8.881356
+Allego DE-Bremen Vahrer Straße,53.07644,8.88144
 Allego DE-Bremen Volkmannstraße,53.0577,8.808422
 Allego DE-Bremerhaven Am Grollhamm 2,53.525477,8.621723
 Allego DE-Bremerhaven Heinrich-Brauns-Str. 1,53.58656,8.6076
@@ -6781,7 +6781,7 @@ Allego DE-Hannover Schierholzstr. 59,52.400294,9.823056
 Allego DE-Hannover Spielhagenstraße,52.36414,9.76236,25
 Allego DE-Hannover-Laatzen Lüneburger Straße 3,52.29731,9.826047
 Allego DE-Heide Fritz-Thiedemann-Ring 40,54.17727,9.092317
-Allego DE-Heidelberg Henkel-Tereson-Str. 24,49.408115,8.651558
+Allego DE-Heidelberg Henkel-Tereson-Straße,49.40802,8.65156
 Allego DE-Heilbronn Imlinstraße,49.166131,9.216777
 Allego DE-Heiligenhaus Abtskücher Straße 37,51.336447,6.98825
 Allego DE-Heiligenhaus Erich-Ollenhauer Straße 44,51.325154,6.981685
@@ -6987,7 +6987,7 @@ Allego DE-Winsen Osttangente 210,53.350665,10.223448
 Allego DE-Wismar Kapitänspromenade 29-31,53.881171,11.439219
 Allego DE-Wittstock/Dosse Jägerstraße,53.0671,12.53304,6
 Allego DE-Wolfhagen Otto-Hahn-Str. 8,51.402576,9.186849
-Allego DE-Wolfsburg Braunschweiger Str. 204,52.401327,10.752018
+Allego DE-Wolfsburg Braunschweiger Straße,52.40133,10.75202
 Allego DE-Wolfsburg Westerlinge,52.42376,10.7321,11
 Allego DE-Wustermark Zur Döbritzer Heide,52.53352,12.99799,20
 Allego DE-Wyk auf Föhr Koogskuhl 2,54.6928,8.569154
@@ -8885,7 +8885,6 @@ Compleo DE-Friedberg Balthasar-Schaller-Straße,48.365139,10.950705
 Compleo DE-Friedrichshafen Eckenerstr.,47.65255,9.48451
 Compleo DE-Friedrichshafen Kornblumenstr.,47.668118,9.488056
 Compleo DE-Geisenheim Winkeler Str.,49.985174,7.969636
-Compleo DE-Gelsenkirchen Cranger Str.,51.575412,7.059827
 Compleo DE-Gelsenkirchen Kurt-Schumacher-Str.,51.523517,7.08852
 Compleo DE-Germersheim Hafenstr.,49.232119,8.369351
 Compleo DE-Gladbeck Schillerstr.,51.57499,6.99284
@@ -10247,6 +10246,8 @@ emobitaly IT-Bussolengo Strada Comunale dei Tre Castel,45.44861,10.88199
 
 emoti CH-Locarno Viale Al Lido,46.16292,8.80299
 
+Emscher-Lippe-Energie DE-Gelsenkirchen Cranger Straße,51.5754,7.05983
+
 En-Yakıt TR-Bucak Atilla,37.409444,30.54361
 
 EnBW CZ-Karlovy Vary,50.232775,12.8678
@@ -10449,7 +10450,7 @@ EnBW DE-Berkenthin Oldesloer Straße,53.7335,10.6372
 EnBW DE-Berlin Alt-Biesdorf,52.506843,13.565857
 EnBW DE-Berlin Alt-Biesdorf,52.534602,13.511335
 EnBW DE-Berlin B5 Burger King,52.505337,13.607021
-EnBW DE-Berlin Ellen-Epstein-Str. Hellweg,52.53627,13.35478
+EnBW DE-Berlin Ellen-Epstein-Straße,52.53653,13.3549
 EnBW DE-Berlin Gesundbrunnen-Center,52.549619,13.388672
 EnBW DE-Berlin Kurfürstendamm,52.49665,13.29148
 EnBW DE-Berlin Landsberger Allee Burger King,52.529401,13.458733
@@ -11255,7 +11256,7 @@ EnBW DE-Leutkirch im Allgäu Marktstr.,47.827853,10.023892
 EnBW DE-Leutkirch im Allgäu Ottmannshofer Straße,47.833906,10.025059
 EnBW DE-Leverkusen,51.034133,7.012254
 EnBW DE-Lichtenau,50.907996,12.976107
-EnBW DE-Lichtenfels Bamberger Str.,50.13441,11.04677
+EnBW DE-Lichtenfels Alte Bamberger Straße,50.1344,11.04677
 EnBW DE-Lichtenstein Allee,48.430273,9.254965
 EnBW DE-Lichtenstein Stettenstr.,48.440465,9.25371
 EnBW DE-Lilienthal,53.15586,8.91463
@@ -11466,7 +11467,7 @@ EnBW DE-Nümbrecht,50.90389,7.54066
 EnBW DE-Nürnberg Bregenzer Straße,49.398242,11.175675
 EnBW DE-Nürnberg Eibach,49.39914,11.03835
 EnBW DE-Nürnberg Leyher Straße,49.45328,11.019
-EnBW DE-Nürnberg Sulzbacherstr.,49.457819,11.092877,30
+EnBW DE-Nürnberg Sulzbacher Straße,49.45782,11.09288
 EnBW DE-Nürnberg Äußere Bayreuther Straße,49.475267,11.104242,10
 EnBW DE-Ober-Olm Jägerpfad,49.943287,8.191471
 EnBW DE-Oberau Werdenfelser Straße,47.554596,11.136363
@@ -11754,7 +11755,7 @@ EnBW DE-Schwendi Biberacher Str.,48.174909,9.974139
 EnBW DE-Schwentinental,54.288711,10.228724,30
 EnBW DE-Schwerin,53.597307,11.431819
 EnBW DE-Schwetzingen Bahnhofanlage,49.384752,8.577721
-EnBW DE-Schwetzingen Kolpingstr.,49.38013,8.574917
+EnBW DE-Schwetzingen Kolpingstraße,49.38016,8.57536
 EnBW DE-Schwetzingen Mannheimer Straße,49.39195,8.564649
 EnBW DE-Schwetzingen Marktplatz,49.407252,8.552851
 EnBW DE-Schwetzingen Odenwaldring,49.38138,8.58869
@@ -12027,7 +12028,7 @@ EnBW DE-Vaihingen an der Enz Franckstr.,48.931382,8.960179
 EnBW DE-Vaihingen an der Enz Hertzstr.,48.926931,8.966447
 EnBW DE-Vaihingen an der Enz Im Mühlkanal,48.931392,8.95571
 EnBW DE-Vallendar Hellenstraße,50.3986,7.61238
-EnBW DE-Veitsbronn Fürtherstr.,49.50469,10.89338
+EnBW DE-Veitsbronn Fürther Straße,49.5047,10.89338
 EnBW DE-Veringenstadt Im Städtle,48.178307,9.212785
 EnBW DE-Viernheim Wiesenstraße,49.544908,8.589202
 EnBW DE-Villingen-Schwenningen Auf Herdenen,48.076799,8.500723
@@ -13199,7 +13200,7 @@ EWE-GO DE-Chemnitz Dresdner Straße,50.846513,12.940299
 EWE-GO DE-Chemnitz Reichsstraße,50.827316,12.912528
 EWE-GO DE-Cloppenburg Bahnhofstraße,52.844876,8.052646
 EWE-GO DE-Cloppenburg Bether Straße,52.852107,8.053923
-EWE-GO DE-Cloppenburg Bürgermeister-Heukamp-Str.,52.846421,8.04103
+EWE-GO DE-Cloppenburg Bürgermeister-Heukamp-Straße,52.84642,8.04103
 EWE-GO DE-Cloppenburg Bürgermeister-Winkler-Str.,52.8444,8.0415
 EWE-GO DE-Cloppenburg Emsteker Straße,52.841286,8.064705
 EWE-GO DE-Cloppenburg Emsteker Straße,52.84203,8.05827,30
@@ -15667,7 +15668,7 @@ Ionity DE-Wittenburg Hagenower Chaussee,53.501819,11.087786,30
 Ionity DE-Wittlich Straßburgstraße,49.966871,6.942735
 Ionity DE-Wolfhagen Warburger Straße,51.402089,9.18423
 Ionity DE-Wolfsburg Allerpark,52.43771,10.809069
-Ionity DE-Wolfsburg Braunschweiger Str.,52.416656,10.783389
+Ionity DE-Wolfsburg Braunschweiger Straße,52.41666,10.7834
 Ionity DE-Wolfsburg Detmeroder Markt,52.392241,10.753713
 Ionity DE-Wolfsburg Forum AutoVision,52.424872,10.745689
 Ionity DE-Wolfsburg Wolfsburg Bürozentrum Nord,52.445204,10.78523
@@ -16162,7 +16163,7 @@ Kaufland DE-Berlin Pichelswerderstraße 6,52.5299,13.213127
 Kaufland DE-Berlin Prenzlauer Berg,52.533964,13.457147
 Kaufland DE-Berlin Residenzstraße,52.558806,13.372718
 Kaufland DE-Berlin Romain-Roland-Straße,52.564099,13.445691
-Kaufland DE-Berlin Rummelsburgerstr.,52.499526,13.496195
+Kaufland DE-Berlin Sewanstraße,52.49953,13.4962
 Kaufland DE-Berlin Tempelhof,52.468372,13.377201,20
 Kaufland DE-Berlin Wilhelmstraße 21-25,52.521375,13.186769
 Kaufland DE-Berlin-Wedding Müllerstraße,52.55326,13.345789
@@ -16190,7 +16191,7 @@ Kaufland DE-Dillingen an der Donau Johannes-Scheiffele-Straße 3-7,48.578666,10.
 Kaufland DE-Dillingen/Saar Daimlerstraße 4,49.36785,6.71343
 Kaufland DE-Dippoldiswalde Industriering,50.89744,13.69293
 Kaufland DE-Donauwörth Neurieder Weg 33,48.719803,10.761971
-Kaufland DE-Dortmund Bornstr.,51.528575,7.470953
+Kaufland DE-Dortmund Bornstraße,51.52857,7.47095
 Kaufland DE-Dortmund Luisenglück,51.477365,7.432908
 Kaufland DE-Dossenheim Gewerbestraße 19,49.454209,8.664673
 Kaufland DE-Dresden Borsbergstraße,51.044726,13.7809
@@ -16813,7 +16814,7 @@ Lidl AT-Wien Jedletzbergerstraße,48.17042,16.45824
 Lidl AT-Wien Laxenburgerstr.,48.163719,16.36824
 Lidl AT-Wien Leberstraße,48.176846,16.407076
 Lidl AT-Wien Linzer Straße,48.203644,16.240203
-Lidl AT-Wien Quadenstr.,48.237596,16.478042
+Lidl AT-Wien Quadenstraße,48.2376,16.47804
 Lidl AT-Wien Sagedergasse,48.162667,16.316008
 Lidl AT-Wiener Neustadt,47.830085,16.245312
 Lidl AT-Wieselburg,48.139019,15.138295
@@ -16904,7 +16905,7 @@ Lidl DE-Anzing,48.15883,11.854494
 Lidl DE-Arnsberg Ruhrstr. 68,51.402043,8.063842
 Lidl DE-Arnsdorf Stolpener Straße 14,51.097429,13.994374
 Lidl DE-Arnstorf Mariakirchner Str. 34,48.564333,12.824601
-Lidl DE-Aschaffenburg Spessartstr.,49.965614,9.154857
+Lidl DE-Aschaffenburg Spessartstraße,49.9656,9.15486
 Lidl DE-Augsburg Unterer Talweg 109,48.315045,10.890143
 Lidl DE-Backnang Weissacher Straße,48.93456,9.4472
 Lidl DE-Bad Camberg Beuerbacher Landstraße 1,50.29491,8.253665
@@ -16927,6 +16928,7 @@ Lidl DE-Bebra Hersfelder Str. 11,50.965771,9.79552
 Lidl DE-Bergen Gingster Chaussee 7,54.424375,13.414518
 Lidl DE-Berlin Buckower Damm,52.426346,13.435003
 Lidl DE-Berlin Curtiusstraße,52.44073,13.28946,30
+Lidl DE-Berlin Donaustraße,52.48092,13.43915
 Lidl DE-Berlin Einbecker Straße,52.509057,13.50636
 Lidl DE-Berlin Gervinusstraße,52.503379,13.300403
 Lidl DE-Berlin Großbeerenstraße 2,52.438638,13.379996
@@ -16949,10 +16951,10 @@ Lidl DE-Berlin Sonnenallee,52.475563,13.451759
 Lidl DE-Berlin Steglitzer Damm,52.449291,13.354343
 Lidl DE-Berlin Tempelhofer Damm 130,52.467909,13.38486
 Lidl DE-Berlin Vorarlberger Damm,52.470054,13.349763
+Lidl DE-Berlin Zeughofstraße,52.50117,13.43544
 Lidl DE-Berlin-Charlottenburg-Wilmersdorf Fürstenbrunner Weg,52.52033,13.28036
 Lidl DE-Berlin-Charlottenburg-Wilmersdorf Gervinusstr. 30,52.502652,13.297872
 Lidl DE-Berlin-Friedrichshain Markgrafendamm 25C,52.500489,13.465565
-Lidl DE-Berlin-Friedrichshain-Kreuzberg Zeughofstr. 23A,52.501165,13.435445
 Lidl DE-Berlin-Lichtenberg-HsH Indira-Gandhi-Str. 101,52.546526,13.468823
 Lidl DE-Berlin-Lichtenberg-HSH Ontarioseestr. 17,52.49477,13.523194
 Lidl DE-Berlin-Marzahn-Hellersdorf Havemannstraße 1,52.56976,13.569398
@@ -16962,7 +16964,6 @@ Lidl DE-Berlin-Mitte Prinzenallee 75-77,52.555014,13.383301
 Lidl DE-Berlin-Mitte Provinzstr. 30,52.565539,13.378414
 Lidl DE-Berlin-Mitte Quitzowstraße,52.535654,13.353115
 Lidl DE-Berlin-Mitte Reinickendorfer Straße,52.54904,13.36991
-Lidl DE-Berlin-Neukölln Donaustr. 96,52.481056,13.438636
 Lidl DE-Berlin-Neukölln Maybachufer,52.49206,13.43203
 Lidl DE-Berlin-Neukölln Späthstraße,52.453019,13.454059
 Lidl DE-Berlin-Pankow Bornholmer Str. 65,52.554356,13.400624
@@ -16995,7 +16996,7 @@ Lidl DE-Blomberg Alter Dreschplatz,51.94427,9.09735
 Lidl DE-Bochum Freudenbergstraße 6,51.496564,7.190714
 Lidl DE-Bochum Poststr. 70-72,51.503014,7.20294
 Lidl DE-Bochum-Hiltrop Wiescherstraße 6,51.516214,7.257199
-Lidl DE-Bockhorn Steinhauser Str. 25-29,53.397259,8.015537
+Lidl DE-Bockhorn Steinhauser Straße,53.39726,8.01554
 Lidl DE-Bonn-Beuel Maarstr. 48,50.737175,7.135172
 Lidl DE-Borchen Bahnhofstr. 1,51.661227,8.716383
 Lidl DE-Borna Lobstädter Straße 17,51.122239,12.488086
@@ -19023,7 +19024,7 @@ Pfalzwerke DE-Bechhofen Hauptstraße,49.349558,7.408635
 Pfalzwerke DE-Bellheim Hauptstraße,49.190707,8.282367
 Pfalzwerke DE-Bergkamen Geschwister-Scholl-Straße 1,51.617825,7.65665
 Pfalzwerke DE-Berlin Gradestr. 100,52.452671,13.422445
-Pfalzwerke DE-Berlin Großbeerenstraße 133,52.429856,13.377342
+Pfalzwerke DE-Berlin Großbeerenstraße,52.42985,13.37728
 Pfalzwerke DE-Berlin Malchower Chaussee 10,52.566866,13.474405
 Pfalzwerke DE-Berlin Michael-Brückner-Str. 25,52.453395,13.513555
 Pfalzwerke DE-Berlin Märkische Spitze,52.517427,13.543072,20
@@ -19134,7 +19135,7 @@ Pfalzwerke DE-Hagenbach Im Wooge 1,49.020806,8.242228
 Pfalzwerke DE-Halle Delitzscher Str. 54,51.478464,12.003064
 Pfalzwerke DE-Hamburg Amsinckstraße 73,53.542805,10.02649
 Pfalzwerke DE-Hamburg Deelböge 21,53.602848,9.988619
-Pfalzwerke DE-Hamburg-Eidelstedt Holsteiner Chaussee 49,53.614194,9.905872
+Pfalzwerke DE-Hamburg-Eidelstedt Holsteiner Chaussee,53.61415,9.90585
 Pfalzwerke DE-Hannover Bornumerstraße 19,52.358973,9.710803
 Pfalzwerke DE-Hatzenbühl Bleichstr.,49.112363,8.250566
 Pfalzwerke DE-Hauenstein Alte Bundesstraße,49.200069,7.836664
@@ -19149,7 +19150,7 @@ Pfalzwerke DE-Heppenheim Tiergartenstraße 5,49.637581,8.618088
 Pfalzwerke DE-Herbolzheim Konrad-Adenauer-Ring 5,48.218457,7.760414
 Pfalzwerke DE-Herbolzheim Seeweg 3,48.224117,7.765064
 Pfalzwerke DE-Herne Bochumer Str. 227,51.52049,7.21436
-Pfalzwerke DE-Herne Holsterhauser Str. 200,51.52937,7.201721
+Pfalzwerke DE-Herne Holsterhauser Straße,51.52937,7.20172
 Pfalzwerke DE-Herschweiler_Pettersheim Haupstraße,49.476556,7.345944
 Pfalzwerke DE-Herxheim am Berg Weisenheimer Straße,49.509833,8.178472
 Pfalzwerke DE-Hettenleidelheim Gaswerkstraße 16,49.542603,8.076477
@@ -19180,9 +19181,9 @@ Pfalzwerke DE-Kaiserslautern Mainzer Straße,49.45024,7.77976
 Pfalzwerke DE-Kallstadt Weinstraße 105,49.492583,8.175028
 Pfalzwerke DE-Kamen Zollpost 6,51.579696,7.671446
 Pfalzwerke DE-Kandel Gartenstraße,49.0811,8.19816,30
-Pfalzwerke DE-Kandel Nansenstraße 2,49.086203,8.210532
+Pfalzwerke DE-Kandel Nansenstraße,49.0862,8.21053
 Pfalzwerke DE-Karlsruhe Am Storrenacker 6,49.018677,8.460747
-Pfalzwerke DE-Karlsruhe Fritz-Haber-Straße 1,48.997929,8.356272
+Pfalzwerke DE-Karlsruhe Fritz-Haber-Straße,48.99787,8.35614
 Pfalzwerke DE-Karlsruhe Hermann-Höpker-Aschoff-Straße,49.053503,8.392744
 Pfalzwerke DE-Karlsruhe Theodor-Rehbock-Straße,49.00901,8.4376,30
 Pfalzwerke DE-Kassel Holländische Str. 59,51.32503,9.49999
@@ -19221,7 +19222,7 @@ Pfalzwerke DE-Lauterecken Saarbrücker Str. 9,49.656139,7.590722
 Pfalzwerke DE-Lauterecken Schlossgasse,49.649859,7.590681
 Pfalzwerke DE-Leimersheim Rheinstraße 39-42,49.125374,8.354502
 Pfalzwerke DE-Leipzig Chemnitzer Str. 6,51.301988,12.426125
-Pfalzwerke DE-Leipzig Dübener Landstraße 7,51.381365,12.387165
+Pfalzwerke DE-Leipzig Dübener Landstraße,51.38133,12.38712
 Pfalzwerke DE-Leipzig Richard Lehmann Straße 117,51.316316,12.396728
 Pfalzwerke DE-Limburgehof Landauer Str. 8,49.425713,8.395103
 Pfalzwerke DE-Limburgerhof Mühlweg,49.423667,8.379778
@@ -19233,12 +19234,12 @@ Pfalzwerke DE-Lohfelden Otto-Hahn-Straße 1-5,51.279552,9.528262
 Pfalzwerke DE-Lorsch Nibelungenstraße,49.65301,8.55477,30
 Pfalzwerke DE-Losheim am See Saarbrücker Str. 207,49.504527,6.76041
 Pfalzwerke DE-Ludwigsburg Wöhlerstraße,48.890405,9.152636
-Pfalzwerke DE-Ludwigsfelde Parkallee 36,52.319821,13.290886
+Pfalzwerke DE-Ludwigsfelde Parkallee,52.31986,13.29093
 Pfalzwerke DE-Ludwigshafen am Rhein Fritz-Trambauer-Straße,49.521777,8.413566
 Pfalzwerke DE-Ludwigshafen am Rhein René-Bohn-Straße 4,49.491802,8.426424
 Pfalzwerke DE-Ludwigshafen Hauptstraße 259,49.451641,8.424019
 Pfalzwerke DE-Ludwigshafen Industriestraße,49.488157,8.405766
-Pfalzwerke DE-Ludwigshafen Kurfürstenstraße 44,49.472439,8.44362
+Pfalzwerke DE-Ludwigshafen Kurfürstenstraße,49.47242,8.4437
 Pfalzwerke DE-Ludwigshafen Oderstraße,49.485373,8.354395
 Pfalzwerke DE-Ludwigshafen Oderstraße 1,49.489963,8.354774
 Pfalzwerke DE-Ludwigshafen Parkhaus Pfalzgrafenstraße,49.475745,8.453174
@@ -19289,8 +19290,8 @@ Pfalzwerke DE-Neuenburg am Rhein Max-Schweinlin-Straße 7,47.81023,7.56987
 Pfalzwerke DE-Neuenstein Kirchensaller Straße,49.212375,9.585415
 Pfalzwerke DE-Neuhofen Carl-Reiß-Straße 23,49.425308,8.416651
 Pfalzwerke DE-Neuhofen Rehbachstraße,49.419649,8.424282
-Pfalzwerke DE-Neustadt an der Weinstr. Le Quartier-Hornbach,49.340445,8.168134
 Pfalzwerke DE-Neustadt an der Weinstraße Adolf-Kolping-Straße,49.340612,8.160971
+Pfalzwerke DE-Neustadt an der Weinstraße Le Quartier-Hornbach,49.34024,8.16812
 Pfalzwerke DE-Neustadt an der Weinstraße Louis-Escande-Straße,49.338359,8.169238
 Pfalzwerke DE-Niederzier Industriestraße 19,50.845167,6.452244
 Pfalzwerke DE-Nußloch Walldorfer Straße 59,49.32011,8.687501
@@ -19307,9 +19308,9 @@ Pfalzwerke DE-Otterbach Hauptstraße 4,49.485638,7.739696
 Pfalzwerke DE-Otterbach Lauterhofstraße,49.481627,7.732119
 Pfalzwerke DE-Otterberg Hauptstraße 28,49.500916,7.77324
 Pfalzwerke DE-Ottersheim Waldstraße,49.19225,8.230333
-Pfalzwerke DE-Paderborn Wilfried-Finke-Allee 1,51.731553,8.718356
+Pfalzwerke DE-Paderborn Wilfried-Finke-Allee,51.73155,8.71836
 Pfalzwerke DE-Passau Stelzlhof 7,48.57832,13.414282
-Pfalzwerke DE-Petersberg Justus-Liebig-Straße 9,50.5538,9.727553
+Pfalzwerke DE-Petersberg Justus-Liebig-Straße,50.55377,9.7275
 Pfalzwerke DE-Pforzheim Schwenninger Straße,48.90565,8.65539,20
 Pfalzwerke DE-Philippsburg Am Freyersee,49.240163,8.462348
 Pfalzwerke DE-Pirmasens Bahnhofstraße 21-29,49.202014,7.601494
@@ -19448,6 +19449,7 @@ Plenitude IT-Livorno Viale della Libertà,43.53249,10.319
 Plenitude IT-Lorenzago di Cadore Via Centa,46.4806,12.458
 Plenitude IT-Meran Piavestraße,46.66628,11.15812
 Plenitude IT-Pioltello Viale S. Francesco,45.51327,9.3234
+Plenitude IT-Sadali Via Po,39.81252,9.27088
 Plenitude IT-San Miniato Via C. Pannocchia,43.68795,10.80601
 Plenitude IT-Sogliano al Rubicone Bivio Montepetra Bassa,43.93325,12.17774
 Plenitude IT-Venezia Via Orlanda,45.47933,12.27087
@@ -19936,6 +19938,8 @@ RoboCharge NL-Breskens Westlandstraat,51.39697,3.55573
 RoboCharge NL-Dalen Reindersdijk,52.67694,6.77534
 RoboCharge NL-Kamperland Golfslag,51.58942,3.6726
 
+RW-Bodensee DE-Langenargen Bleichweg,47.59338,9.5508
+
 Révéo FR-Gignac Parc d’Activité de Camalcé,43.64964,3.54682
 Révéo FR-Lavelanet Pl. Jeanne d’Arc,42.93532,1.8503,25
 Révéo FR-Vic-le-Fesq La Nouvelle,43.87091,4.09816
@@ -19974,7 +19978,7 @@ SachsenEnergie DE-Dresden Pirnaer Landstraße,51.011961,13.826652
 SachsenEnergie DE-Dresden Pirnaischer Platz,51.04868,13.74404
 SachsenEnergie DE-Dresden Pohlandplatz,51.043328,13.794957
 SachsenEnergie DE-Dresden Provianthofstraße,51.082555,13.759035
-SachsenEnergie DE-Dresden Reisewitzer Str.,51.043101,13.701073
+SachsenEnergie DE-Dresden Reisewitzer Straße,51.04314,13.70108
 SachsenEnergie DE-Dresden Sarrasanistraße,51.05783,13.74514
 SachsenEnergie DE-Dresden Scharfenberger Str.,51.072415,13.688326
 SachsenEnergie DE-Dresden Schiller Galerie,51.05142,13.80468
@@ -21195,7 +21199,7 @@ SWM DE-München Wirtstraße,48.1124,11.57758
 
 SWN DE-Neuwied Bahnhof,50.43145,7.470972
 SWN DE-Neuwied Friedrichstr. 34,50.426515,7.461927
-SWN DE-Neuwied Langendorfer Str. 82,50.431646,7.457583
+SWN DE-Neuwied Langendorfer Straße,50.43165,7.45758
 SWN DE-Neuwied Parkplatz Deichwelle,50.428121,7.460579
 SWN DE-Neuwied Stadtverwaltung,50.426064,7.467196
 SWN DE-Neuwied Zeppelinsweg 14,50.438716,7.475956
