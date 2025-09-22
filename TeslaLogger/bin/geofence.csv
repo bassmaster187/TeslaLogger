@@ -1656,27 +1656,27 @@ Supercharger CN-Xinyang - Wanjiahui,32.19194,114.134105
 Supercharger-V3 CN-Xinyang - Xinyang ZhongLe Park Hotel,32.141367,114.094341
 Supercharger-V3 CN-Xinyi- Xinyi Huating Water Street,34.352852,118.35257
 Supercharger-V3 CN-Xinzhou - Xinzhou Kailai Xinyue Shopping Plaza,38.42799,112.731047
-Supercharger CN-Xi’an - Chinlink International Center,34.353685,108.938323
-Supercharger-V3 CN-Xi’an - Daminggong Dimond Furniture,34.306062,108.972913
-Supercharger-V3 CN-Xi’an - G PARK,34.285034,108.915091
-Supercharger CN-Xi’an - Gaoxin Zhongda,34.222628,108.898682
-Supercharger CN-Xi’an - INCITY Plaza,34.294096,108.948044
-Supercharger-V3 CN-Xi’an - Intercontinental Hotel,34.340836,108.944788
-Supercharger CN-Xi’an - Jinhui International Square,34.24976,108.887825
-Supercharger-V3 CN-Xi’an - Lafonce Center,34.317916,108.934608
-Supercharger-V3 CN-Xi’an - Le Méridien Xian Chanba Xi’an,34.338828,109.015256
-Supercharger CN-Xi’an - Maike Center,34.1931,108.881203
-Supercharger CN-Xi’an - Radiance Global Plaza,34.182556,108.964633
-Supercharger CN-Xi’an - SKP,34.247151,108.950281
-Supercharger CN-Xi’an - Taihua Jinmao,34.225505,108.885398
-Supercharger-V3 CN-Xi’an - Wanhe City,34.279833,108.995318
-Supercharger-V3 CN-Xi’an - Wanzhong International Plaza,34.194956,108.988494
-Supercharger-V3 CN-Xi’an - Xinxing Plaza,34.260077,108.993629
-Supercharger CN-Xi’an - Xixian Wuyue Square,34.25267,108.823532
-Supercharger-V3 CN-Xi’an - Xi’an Cityon,34.337445,108.944288
-Supercharger CN-Xi’an - Xi’an Vanke Jinyu International,34.219583,108.89253
-Supercharger-V3 CN-Xi’an - Yuehui Plaza,34.263127,108.961762
-Supercharger CN-Xi’an-Sunshine World,34.168133,108.86819
+Supercharger CN-Xi’an Chinlink International Center,34.35368,108.93832
+Supercharger-V3 CN-Xi’an Daminggong Dimond Furniture,34.30606,108.9729
+Supercharger-V3 CN-Xi’an G PARK,34.28503,108.9151
+Supercharger CN-Xi’an Gaoxin Zhongda,34.22263,108.89868
+Supercharger CN-Xi’an INCITY Plaza,34.2941,108.94804
+Supercharger-V3 CN-Xi’an Intercontinental Hotel,34.34084,108.9448
+Supercharger CN-Xi’an Jinhui International Square,34.24976,108.88783
+Supercharger-V3 CN-Xi’an Lafonce Center,34.31792,108.9346
+Supercharger-V3 CN-Xi’an Le Méridien Xian Chanba Xi’an,34.33883,109.01526
+Supercharger CN-Xi’an Maike Center,34.1931,108.8812
+Supercharger CN-Xi’an Radiance Global Plaza,34.18256,108.96463
+Supercharger CN-Xi’an SKP,34.24715,108.95028
+Supercharger CN-Xi’an Sunshine World,34.16813,108.8682
+Supercharger CN-Xi’an Taihua Jinmao,34.2255,108.8854
+Supercharger-V3 CN-Xi’an Wanhe City,34.27983,108.99532
+Supercharger-V3 CN-Xi’an Wanzhong International Plaza,34.19496,108.9885
+Supercharger-V3 CN-Xi’an Xinxing Plaza,34.26008,108.99363
+Supercharger CN-Xi’an Xixian Wuyue Square,34.25267,108.82353
+Supercharger-V3 CN-Xi’an Xi’an Cityon,34.33745,108.9443
+Supercharger CN-Xi’an Xi’an Vanke Jinyu International,34.21958,108.89253
+Supercharger-V3 CN-Xi’an Yuehui Plaza,34.26313,108.96176
 Supercharger-V3 CN-Xuancheng - Xuancheng Maisha Square,30.93686,118.730644
 Supercharger CN-Xuchang - Zhongyuan International Hotel,34.035713,113.866806
 Supercharger CN-Xuzhou - Universal Harbor Outlets,34.269043,117.276025
@@ -9005,6 +9005,7 @@ Counties NZ-Pōkeno Market Street West,-37.245511,175.021008
 
 CSDD LT-Ādaži Rīgas gatve,57.07874,24.31775
 CSDD LV-Bauska Uzvaras iela,56.40552,24.1856
+CSDD LV-Iecava Rīgas iela,56.59294,24.19152
 CSDD LV-Jūrmala Ventspils šoseja,56.93048,23.5871
 CSDD LV-Liepāja Tirgus iela,56.51963,21.0147
 
@@ -10185,6 +10186,7 @@ Elinta LT-Kaunas Jonavos g.,54.90003,23.88745
 Elinta LT-Marijampolė Šv. Margaritos g.,54.55353,23.34648
 Elinta LT-Nida Taikos g.,55.30104,20.98653
 Elinta LT-Palanga Sporto g.,55.909,21.0691
+Elinta LT-Utena J. Basanavičiaus g.,55.49848,25.60102
 Elinta LT-Vievis Kauno g.,54.77287,24.81753
 
 eliso DE-Essen Bamlerstraße,51.47264,6.99121
@@ -12208,6 +12210,7 @@ EndesaX ES-Sevilla C. Ganímedes,37.43364,-5.96978
 EndesaX ES-Sevilla Centro Comercial Torre Sevilla,37.39177,-6.01042,20
 EndesaX ES-Toledo CM-4003,39.90517,-4.01739
 EndesaX ES-Torre del Mar El Ingenio,36.75579,-4.09886
+EndesaX ES-Valdemoro Av. de Andalucía,40.21003,-3.68104
 EndesaX ES-Área de Servicio Andamur Guarromán,38.14233,-3.72323,20
 
 Endolla-Barcelona ES-Barcelona Sant Martí,41.39334,2.20294
@@ -12499,6 +12502,7 @@ Energie-Steiermark AT-Spielberg Red Bull Ring,47.21907,14.76501
 Energie-Steiermark AT-Trieben Europastraße,47.48994,14.484885,20
 Energie-Steiermark AT-Unzmarkt Simon-Hafnerplatz,47.198231,14.445851,25
 Energie-Steiermark AT-Voitsberg von-Hötzendorf-Straße,47.05207,15.14186
+Energie-Steiermark AT-Wildon Kainachtalstraße,46.8867,15.50014
 
 Energie-Südbayern DE-Alling Hoflacher Straße,48.144636,11.301403
 Energie-Südbayern DE-Bad Füssing Rathausstraße,48.35153,13.31342
@@ -12780,6 +12784,7 @@ evd DE-Dormagen Langemarkstraße,51.09337,6.83572
 evd DE-Dormagen Lübecker Straße,51.094089,6.81296
 evd DE-Dormagen Unter den Hecken,51.09368,6.84404
 
+Evergo DO-Bonao Calle Duarte,18.99137,-70.4317
 Evergo DO-Santo Domingo Av. Lope de Vega,18.47947,-69.9315
 
 EvGateway US-Chugiak AK Birchwood Loop Rd,61.40312,-149.46762,20
@@ -14497,6 +14502,7 @@ GLS-Bank DE-Mittweida Dreiwerdener Weg,50.97867,12.98227,25
 GLS-Bank DE-Scharbeutz Dorfstraße,54.0528,10.7505
 
 Go-Eletric HR-Punat Puntica,45.02962,14.62886
+Go-Eletric IT-Longarone Via del Parco,46.26876,12.30383
 Go-Eletric IT-Nuoro Via Antonio Cambosu,40.333597,9.2731
 Go-Eletric IT-Parma Via Emilia Ovest,44.81003,10.2867
 Go-Eletric IT-Tavagnacco Via Ferrara,46.10484,13.19933
@@ -15070,6 +15076,7 @@ IECharge FR-Hagetmau Chemin De Labraouste,43.65471,-0.56668
 IECharge FR-Henrichemont Prairie des Gimonets,47.303759,2.545237
 IECharge FR-La Roche-sur-Yon La Vergne Babouin,46.633558,-1.413197
 IECharge FR-Mairy-Mainville Rue du Petit Mont,49.305955,5.854291
+IECharge FR-Pleumartin D3,46.74827,0.77992
 IECharge FR-Reims Av. Henri Farman,49.23747,4.06797
 IECharge FR-Rue Chem. des Joncs,50.26372,1.69225
 IECharge FR-Saint-Pierre-le-Moûtier D108,46.79767,3.11052
@@ -18034,6 +18041,8 @@ MNCA FR-Nice Rue Trachel,43.70642,7.26382
 MOBI.E PT-Aveiro Estrada Nacional,40.65115,-8.62016
 MOBI.E PT-Lagos Rua Rainha D. Leonor,37.10002,-8.68395
 
+Mobiflow BE-St. Vith Hardtstraße,50.29362,6.1046
+
 Mobilectric PT-Torres Vedras R. Leonel Trindade,39.10205,-9.25778
 
 Mobiliti HU-Budapest Hunyadi János utca,47.43517,19.03919
@@ -18598,6 +18607,7 @@ Norlys DK-Vejle Dandyvej,55.72603,9.58114
 Norlys DK-Viborg Feltbanen,56.45979,9.40111
 
 NOXO PL-Bełk Główna,50.13117,18.6888
+NOXO PL-Oświęcim Leszczyńskiej,50.0288,19.19825
 
 NRMA AU-Armidale NSW Marsh St,-30.51188,151.66967
 NRMA AU-Balranald NSW Market St,-34.63953,143.5647
@@ -19902,7 +19912,7 @@ Rheinenergie DE-Aachen Europaplatz,50.779498,6.106563
 Rheinenergie DE-Alsdorf Max-Planck-Straße,50.878092,6.185485
 Rheinenergie DE-Bergheim Kölner Straße,50.952166,6.64674
 Rheinenergie DE-Düren Felix-Wankel-Straße,50.780277,6.51072
-Rheinenergie DE-Hürth Rondorfer Straße,50.890186,6.909906
+Rheinenergie DE-Hürth Rondorfer Straße,50.8902,6.91084
 Rheinenergie DE-Hürth Severinusstraße,50.877908,6.887646
 Rheinenergie DE-Hürth Zum Komarhof,50.89506,6.9041
 Rheinenergie DE-Köln Aachener Straße,50.937066,6.91164
@@ -20981,6 +20991,7 @@ SW-Lübeck DE-Lübeck Mühlenstraße,53.86318,10.68676
 SW-Lübeck DE-Lübeck Priwallpromenade,53.95621,10.88116
 SW-Magdeburg DE-Magdeburg Am Blauen Bock,52.131331,11.63506
 SW-Magdeburg DE-Magdeburg Ernst-Reuter-Allee,52.13065,11.63851
+SW-Mainz DE-Groß-Gerau Hauptstraße,49.90885,8.4866
 SW-Mainz DE-Mainz Fischtorplatz,49.99971,8.27704
 SW-Mainz DE-Mainz Gleiwitzer Straße,49.9862,8.26455
 SW-Mainz DE-Mainz Wilhelm-Raabe-Straße,50.00335,8.21321
@@ -21803,6 +21814,7 @@ twl DE-Ludwigshafen am Rhein Pettenkoferstraße,49.48694,8.4252
 
 twn DE-Naumburg (Saale) Jakobsring,51.149859,11.814456
 
+TWS DE-Ravensburg Markdorfer Straße,47.76182,9.54092
 TWS DE-Weingarten Gablerstraße,47.8078,9.63948
 
 Ultra-Fast SE-Varberg Gunnestorpsvägen,57.16941,12.276915,25
@@ -22671,6 +22683,7 @@ AT Hartberg Hauptplatz,47.281412,15.968967,20
 AT Hinterriß Natur.Erlebnis.Hotel,47.47312,11.46734
 AT Hintertux Hotel Klausnerhof,47.11524,11.6812
 AT Hörsching Gasthof Mandorfer,48.2194,14.19332
+AT Innsbruck Rathaus Galerien,47.26567,11.39303
 AT Klagenfurt Richarg-Wagner-Straße,46.61872,14.30134
 AT Kottingbrunn SMARTplast,47.95858,16.25749,60
 AT Köflach Limonade Brantl,47.05386,15.07545
@@ -22822,6 +22835,7 @@ DE Chemnitz Hotel Plaza Inn,50.86356,12.85756
 DE Chemnitz Kauffahrtei,50.810677,12.905644
 DE Deggendorf Oberer Stadtplatz,48.83492,12.96209
 DE Deggendorf Wiesenstraße Stadthalle,48.83202,12.95688
+DE Dessau-Roßlau Friederikenplatz,51.83547,12.25213
 DE Dortmund adesso,51.50573,7.5274
 DE Dortmund Bielefelder Straße,51.51028,7.50429
 DE Dresden Am Brauhaus,51.06827,13.77956
@@ -22871,6 +22885,7 @@ DE Hanau Rondo,50.11238,8.89514
 DE Hannover A2 Center,52.42332,9.835401,10
 DE Hannover PZH IFA Uni,52.426875,9.618212
 DE Heidelberg Hauptbahnhof,49.40653,8.673993
+DE Heilbronn GALERIA,49.1399,9.2168
 DE Herten Hotel am Schlosspark,51.59454,7.12339
 DE Herzogenaurach adidas,49.57487,10.91723
 DE Herzogenaurach adidas,49.57654,10.91759
@@ -22907,6 +22922,7 @@ DE Lößnitz Johannisstraße,50.62807,12.73626
 DE Lübeck Flughafen,53.804405,10.699887
 DE Machern Ringstraße,51.35571,12.57101
 DE Mainz Malakoff-Passage,49.9965,8.28127
+DE Mannheim Hans-Thoma-Straße,49.47432,8.52856
 DE Mannheim SV Seckenheim,49.46796,8.5573
 DE Melle Hageböke,52.176211,8.367606
 DE Memmingen Spielarcaden,47.99888,10.15428,30
@@ -22924,6 +22940,7 @@ DE München Novotel City Arnulfpark,48.14552,11.53908
 DE München Otto-Hahn-Ring,48.09183,11.64876
 DE München Pariser Straße,48.127388,11.598612,60
 DE München Wacker Chemie,48.12366,11.6055
+DE Neuhaus Bahnstraße,49.82756,10.9239
 DE Neumünster Steenkoppel,54.0468,9.95665
 DE Neuss An der Skihalle,51.17069,6.649,20
 DE Neustadt in Holstein Campingplatz An der Düne,54.09368,10.8869
@@ -23006,6 +23023,7 @@ ES Colmenar Viejo P.º de la Ermita de Sta. Ana,40.65449,-3.76011
 ES Donostia Hotel ILUNION San Sebastián,43.31388,-2.00451
 ES Gandia,38.969986,-0.178789
 ES Jarandilla de la Vera Hotel Ruta Imperial,40.12739,-5.66586
+ES La Iglesuela del Cid C. Pilar,40.48023,-0.3171
 ES Madrid Alcobendas Calle del Pintor Murillo,40.542868,-3.648588
 ES Madrid Hotel Madrid Centro,40.423082,-3.709453
 ES Motril Elba Beach Hotel,36.72366,-3.53931
@@ -23066,7 +23084,6 @@ NO Trondheim SINTEF,63.4137,10.4101
 NZ Mount Maunganui Bayfair Shopping Centre,-37.67495,176.2245
 PL Best Western Plus Krakow Old Town,50.058091,19.941162
 PL Kraków Hyatt Place,50.06283,19.90943
-PL Oświęcim Hotel Imperiale,50.0288,19.19825
 PT Alcantarilha Sudoeste Retail Park,37.13211,-8.35923
 PT Almada Forum,38.65966,-9.17526
 PT Lisboa Hotel Hyatt Regency,38.6985,-9.18689
