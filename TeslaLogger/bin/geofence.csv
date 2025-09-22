@@ -5974,6 +5974,7 @@ A2A IT-Brescia Via Corfù,45.52823,10.21191
 A2A IT-Castenedolo Via Sandro Pertini,45.484595,10.32268
 A2A IT-Como Via Asiago,45.83802,9.053
 A2A IT-Lecco Corso Martiri della Liberazione,45.850654,9.393834
+A2A IT-Rovato Via del Commercio,45.5784,10.00983
 A2A IT-Salò Via Maria Montessori,45.60188,10.51672
 A2A IT-San Felice del Benaco Via Dietro Castello,45.58652,10.54727
 A2A IT-Truccazzano Via Rivoltana,45.48038,9.44681
@@ -9652,6 +9653,7 @@ eCarUp CH-Luzern Lidostrasse,47.05277,8.33521
 eCarUp CH-Meiringen Amthausgasse,46.72863,8.18568
 eCarUp CH-Minusio Via Rinaldo Simen,46.175928,8.820247
 eCarUp CH-Mitlödi Hauptstrasse,47.00818,9.07847
+eCarUp CH-Muri Marktstrasse,47.27457,8.337
 eCarUp CH-Münsingen Aeschistrasse,46.86993,7.56099
 eCarUp CH-Neuchâtel Quai Robert-Comtesse,46.99412,6.94237,25
 eCarUp CH-Neuenhof Zürcherstrasse,47.44729,8.3308
@@ -10183,6 +10185,7 @@ Elevat SI-Dolenjske Toplice Sokolski trg,45.7557,15.05995
 
 Elinta LT-Alytus Jotvingių g.,54.39597,24.0441
 Elinta LT-Kaunas Jonavos g.,54.90003,23.88745
+Elinta LT-Kėdainiai J. Basanavičiaus g.,55.28763,23.9742
 Elinta LT-Marijampolė Šv. Margaritos g.,54.55353,23.34648
 Elinta LT-Nida Taikos g.,55.30104,20.98653
 Elinta LT-Palanga Sporto g.,55.909,21.0691
@@ -10807,6 +10810,7 @@ EnBW DE-Florstadt In der Grobach,50.329966,8.934433
 EnBW DE-Florstadt Messeplatz,50.319379,8.859163
 EnBW DE-Forbach Landstr.,48.678597,8.358838
 EnBW DE-Forchtenberg,49.28979,9.56304
+EnBW DE-Frankenthal Mina-Karcher-Platz,49.53012,8.35213
 EnBW DE-Frankfurt am Main Hanauer Landstraße,50.131929,8.764669
 EnBW DE-Frankfurt am Main Victor-Slotosch-Straße,50.14383,8.74787
 EnBW DE-Frechen,50.912347,6.819812
@@ -12786,6 +12790,7 @@ evd DE-Dormagen Unter den Hecken,51.09368,6.84404
 
 Evergo DO-Bonao Calle Duarte,18.99137,-70.4317
 Evergo DO-Santo Domingo Av. Lope de Vega,18.47947,-69.9315
+Evergo DO-Santo Domingo Av. Winston Churchill,18.47352,-69.94274
 
 EvGateway US-Chugiak AK Birchwood Loop Rd,61.40312,-149.46762,20
 EvGateway US-Vernal UT S 500 E Ste 101,40.454329,-109.518367
@@ -14087,6 +14092,7 @@ Ewiva IT-Signoressa Via Ortigara,45.75491,12.0977
 Ewiva IT-Siniscola Via Luca Tanzi,40.57847,9.70321
 Ewiva IT-Termoli SS87 Sannitica,41.95958,14.99322
 Ewiva IT-Torri di Quartesolo VI Via Pola,45.50913,11.62935
+Ewiva IT-Tortolì Via G. Dessì,39.93167,9.65818
 Ewiva IT-Tortona Strada Provinciale per Viguzzolo,44.907117,8.878633
 Ewiva IT-Valdera,43.64262,10.61749
 Ewiva IT-Valmontone Fashion District,41.7627,12.95579
@@ -14331,6 +14337,7 @@ Fastned NL-Zuidwolde A28,52.67927,6.35898,30
 FastVolt MA-Bouskoura,33.48402,-7.62552
 FastVolt MA-Casablanca Douar A1,33.51118,-7.61033
 FastVolt MA-El Jadida R320,33.24448,-8.49037
+Fastvolt MA-Essaouira RN8,31.49597,-9.75507
 
 FDE80 FR-Ault Imp. Desmond,50.09962,1.44905
 FDE80 FR-Mers-les-Bains Rue du 4 Septembre,50.06333,1.38804
@@ -14340,6 +14347,7 @@ Feníe-Energía ES-Can Picafort Passeig Mallorca,39.76225,3.16273
 Fines BG-Blagoevgrad Благоевград Покровнишко шосе,41.99727,23.05968
 Fines BG-Gelemenovo Гелеменово,42.26823,24.3139
 Fines BG-Kostinbrod Poleto,42.79496,23.21518
+Fines BG-Tserovo Церово A1,42.3365,24.07986
 Fines BG-Драгичево Главен път Е79,42.6009,23.13062
 Fines BG-Летница,43.312113,25.07321
 Fines BG-Лозен Автомагистрала Тракия,42.632198,23.458115
@@ -14355,6 +14363,7 @@ Flo CA-Gloucester ON Ogilvie Rd,45.43582,-75.60518
 Flo CA-Vaudreuil-Dorion QC Bd Harwood,45.38008,-74.01859
 
 FOR-EV GB-Lochgilphead,56.02807,-5.42519
+FOR-EV GB-Oban Glengallan Rd,56.39633,-5.48957
 
 Fortizo GR-Rethymno Ρέθυμνο 28ης Οκτωβρίου,35.36514,24.48762
 
@@ -14542,6 +14551,7 @@ GOFAST CH-Rastplatz Oftringen Ost,47.316009,7.945185
 GOFAST CH-Rastplatz Sonnenberg,47.47169,7.78952
 GOFAST CH-Raststätte Gunzgen Nord,47.310148,7.831888
 GOFAST CH-Raststätte Gunzgen Süd,47.310231,7.847058
+GOFAST CH-Raststätte Kölliken,47.32326,8.0214
 GOFAST CH-Raststätte Kölliken,47.32361,8.02226
 GOFAST CH-Raststätte Thurau,47.45969,9.0929
 GOFAST CH-Raststätte Thurau,47.46087,9.09472
@@ -17313,7 +17323,7 @@ Lidl DE-Neumünster Fehmarnstraße 13,54.060662,9.97162
 Lidl DE-Neumünster Stoverweg,54.09863,9.98822
 Lidl DE-Neuss Ruhrstraße,51.16061,6.73812
 Lidl DE-Neustadt an der Weinstraße Martin-Luther-Straße,49.3561,8.15233,30
-Lidl DE-Neustadt an der Weinstraße Talstraße 14,49.350918,8.135957
+Lidl DE-Neustadt an der Weinstraße Talstraße,49.3507,8.13524
 Lidl DE-Neustadt Eutiner Straße 71,54.099253,10.794518
 Lidl DE-Neustadt in Sachsen,51.027728,14.214404
 Lidl DE-Neuwied-Niederbieber,50.463035,7.481873
@@ -19454,6 +19464,7 @@ PitPoint FR-Wittenheim Rue de Soultz,47.80996,7.31343,30
 
 Plan-Net-solar SI-Ljubljana Celovška cesta,46.09948,14.45996
 
+Plenitude IT-Abano Terme Via Monteortone,45.35475,11.77765
 Plenitude IT-Bollate Via Pace,45.55967,9.13734
 Plenitude IT-Bologna Via Antoniotto Usodimare,44.51902,11.32701
 Plenitude IT-Bolzano Romstraße,46.48754,11.3432
@@ -19808,6 +19819,7 @@ Recharge NO-Oslo Strømsveien,59.92517,10.84421
 Recharge NO-Røros Peder Hiortgata,62.57609,11.38022
 Recharge NO-Sola Solbergvegen,58.88156,5.65433
 Recharge NO-Svolvær Caroline Harveys vei,68.2394,14.56625
+Recharge NO-Svolvær Måseveien,68.2326,14.5311
 Recharge NO-Ålesund Blindheimsbreivika,62.44407,6.36612
 Recharge NO-Ålesund Nedre Klokkersundvegen,62.46672,6.24687
 Recharge SE-Askersund Södra Infarten,58.87979,14.8974,25
@@ -20779,6 +20791,7 @@ SW-Berlin DE-Berlin Markgrafendamm,52.49863,13.46539
 SW-Berlin DE-Berlin Schöneberger Straße,52.46425,13.33011,30
 SW-Berlin DE-Berlin Tile-Brügge-Weg,52.591593,13.292661
 SW-Berlin DE-Berlin Wansdorfer Platz,52.55774,13.20596
+SW-Berlin DE-Berlin Wörther Straße,52.53598,13.42054
 SW-Bernburg DE-Bernburg (Saale) Kalistraße,51.776338,11.737106
 SW-Bernburg DE-Bernburg (Saale) Karlsplatz,51.79421,11.74257
 SW-Bernburg DE-Bernburg (Saale) Kustrenaer Straße,51.78239,11.73624
@@ -22583,6 +22596,7 @@ Zunder ES-Zafra Plaza del Alcázar,38.4244,-6.41493
 ÖAMTC AT-Melk Am Wachauring,48.212382,15.32797
 ÖAMTC AT-Möderbrugg Hauptstraße,47.2805,14.48103
 ÖAMTC AT-Neusiedl am See Rot-Kreuz-Gasse,47.96934,16.83777
+ÖAMTC AT-Saalfelden am Steinernen Meer Hohlwegen,47.48715,12.82584
 ÖAMTC AT-Teesdorf Triester Straße,47.96154,16.2734
 ÖAMTC AT-Traiskirchen Zubringerstraße,47.99383,16.26288
 ÖAMTC AT-Völkermarkt Klagenfurter Straße,46.65781,14.61371
@@ -22930,6 +22944,7 @@ DE Messe Galerie Fulda,50.5398,9.6379,170
 DE Mölln VW Riemer,53.623707,10.678989
 DE Mönchengladbach SMS Campus,51.18596,6.42623
 DE München AF Automotive,48.18688,11.58993,30
+DE München Alphahaus,48.1302,11.5301
 DE München Holiday Inn München Ost,48.13185,11.62799
 DE München Hotel Heigl,48.075613,11.513897
 DE München Messe,48.13372,11.70692
@@ -23018,6 +23033,7 @@ DE Zeitz Martin-Planer-Straße,51.04626,12.15665
 DE Zwickau Kopernikusstraße,50.73138,12.47356
 ES Alcalá de Henares Jardín Botánico,40.50638,-3.34228
 ES Argómaniz Parador de Argómaniz,42.8679,-2.54123
+ES Badajoz Av. de Elvas,38.8852,-7.0218
 ES Brión Viaducto de Brión,42.86336,-8.6763
 ES Colmenar Viejo P.º de la Ermita de Sta. Ana,40.65449,-3.76011
 ES Donostia Hotel ILUNION San Sebastián,43.31388,-2.00451
@@ -23058,6 +23074,7 @@ IT Bollate Via S. Bernardo Pirelli,45.563026,9.147342
 IT Bruneck Intercable,46.80072,11.92867
 IT Ferrara Via Comacchio,44.8236,11.63573
 IT Forte dei Marmi UNA Hotels,43.95647,10.19551,15
+IT Kastelruth Hotel Plunger,46.5538,11.57996
 IT Kastelruth Silbernagl,46.54109,11.56496
 IT Lazise Camping Spiaggia D’Oro,45.49657,10.73528,200
 IT Livigno Alpen Village Hotel,46.52685,10.1372
