@@ -3518,7 +3518,7 @@ Supercharger-V4 NO-Lillehammer,61.13045,10.4349
 Supercharger-V3 NO-Lillehammer - Strandtorget,61.114584,10.447309
 Supercharger-V4 NO-Lillehammer Rosenlund,61.12746,10.45136
 Supercharger NO-Lillesand,58.23681,8.298785,40
-Supercharger-V4 NO-Lillesand Legdene,58.2398,8.29855,30
+Supercharger-V4 NO-Lillesand Legdene,58.2404,8.29852,30
 Supercharger-V4 NO-Lyngdal Handelspark,58.15564,7.10235
 Supercharger-V4 NO-Lyngdal Handelspark,58.15723,7.10562
 Supercharger NO-Lærdal,61.064751,7.510658
@@ -3950,6 +3950,7 @@ Supercharger US-Auburn WA,47.29803,-122.24873
 Supercharger US-Augusta GA - Belair Frontage Road,33.481707,-82.13021
 Supercharger-V4 US-Augusta Jimmie Dyess Pkwy,33.4798,-82.12867
 Supercharger US-Augusta ME,44.347861,-69.786019
+Supercharger-V4 US-Augusta ME Civic Center Dr,44.3488,-69.79553
 Supercharger-V3 US-Aurora IL - IL-59,41.767675,-88.206166
 Supercharger US-Austin TX,30.329202,-97.706266
 Supercharger US-Austin TX - Century Oaks Terrace (Floor 2),30.403355,-97.724276
@@ -6056,6 +6057,7 @@ ABP DE-Reiskirchen Siemensstraße,50.6002,8.81753
 
 ACCIONA ES-Ponts Carr. de La Seu d’Urgell,41.92283,1.19431
 ACCIONA ES-Ribeira Lugar Insuela,42.56999,-8.96743
+ACCIONA ES-Sanxenxo Rúa Virxe do Carme,42.40205,-8.82035
 
 Acea IT-Capena Via Tiberina,42.120239,12.590254
 Acea IT-Castel Gandolfo Via Spiaggia del Lago,41.75856,12.65374
@@ -12546,6 +12548,7 @@ energielenker DE-Tann (Rhön) Hauptstraße,50.628107,10.015746
 Energielösung DE-Bad Hersfeld Hainstrasse,50.865741,9.710786
 Energielösung DE-Bad Königshofen Schweinfurter Straße,50.296141,10.45911
 Energielösung DE-Bad Steben Äußere Steinbacher Straße,50.36334,11.6347
+Energielösung DE-Bayrischzell Bahnhofstraße,47.67506,12.01263
 Energielösung DE-Berching Gutenbergstraße,49.13919,11.45105
 Energielösung DE-Bichl Kocheler Straße,47.718359,11.413267
 Energielösung DE-Bischbrunn Straßlücke,49.873974,9.495719
@@ -15080,6 +15083,7 @@ Ignitis LT-Raseinių Gabšiai,55.3399,23.09851
 Ignitis LT-Rokiškis Respublikos g.,55.94649,25.58947
 Ignitis LT-Vilnius Birutės g.,54.692063,25.246066
 Ignitis LT-Vilnius Upės g.,54.69392,25.27507
+Ignitis LT-Vilnius Vikingų g.,54.6533,25.27893
 Ignitis LT-Šilagalys Panevėžio aplinkelis,55.67072,24.34852
 
 IKB AT-Innsbruck DEZ,47.26221,11.42823,25
@@ -17301,7 +17305,7 @@ Lidl DE-Neumarkt in der Oberpfalz Nürnberger Straße,49.28874,11.44408
 Lidl DE-Neumünster Fehmarnstraße 13,54.060662,9.97162
 Lidl DE-Neumünster Stoverweg,54.09863,9.98822
 Lidl DE-Neuss Ruhrstraße,51.16061,6.73812
-Lidl DE-Neustadt an der Weinstraße Martin-Luther-Straße 62,49.356236,8.153321
+Lidl DE-Neustadt an der Weinstraße Martin-Luther-Straße,49.3561,8.15233,30
 Lidl DE-Neustadt an der Weinstraße Talstraße 14,49.350918,8.135957
 Lidl DE-Neustadt Eutiner Straße 71,54.099253,10.794518
 Lidl DE-Neustadt in Sachsen,51.027728,14.214404
@@ -18200,6 +18204,7 @@ MOVE CH-Kreuzlingen Marktstrasse,47.64854,9.17301
 MOVE CH-Lenzerheide Clavadoiras,46.72279,9.55854
 MOVE CH-Liebefeld Kohlenweg,46.93203,7.42089
 MOVE CH-Meggen Luzernerstrasse,47.04564,8.37209
+MOVE CH-Montreux Rue du Théâtre,46.42946,6.91245
 MOVE CH-Münchenstein Weidenstrasse,47.51344,7.6161
 MOVE CH-Neuenhof Zürcherstrasse,47.450972,8.327305
 MOVE CH-Niedergösgen Hauptstrasse,47.37215,7.991561
@@ -20763,6 +20768,7 @@ SW-Berlin DE-Berlin Elsenstraße,52.4853,13.44923
 SW-Berlin DE-Berlin Markgrafendamm,52.49863,13.46539
 SW-Berlin DE-Berlin Schöneberger Straße,52.46425,13.33011,30
 SW-Berlin DE-Berlin Tile-Brügge-Weg,52.591593,13.292661
+SW-Berlin DE-Berlin Wansdorfer Platz,52.55774,13.20596
 SW-Bernburg DE-Bernburg (Saale) Kalistraße,51.776338,11.737106
 SW-Bernburg DE-Bernburg (Saale) Karlsplatz,51.79421,11.74257
 SW-Bernburg DE-Bernburg (Saale) Kustrenaer Straße,51.78239,11.73624
@@ -20820,6 +20826,7 @@ SW-Celle DE-Celle Hafenstraße,52.62608,10.07393
 SW-Celle DE-Celle Zur Hasselklink,52.653219,10.06909
 SW-Coesfeld DE-Borken Johanniterstraße,51.84275,6.86055
 SW-Coesfeld DE-Coesfeld Am Tüskenbach,51.93736,7.15691
+SW-Dachau DE-Dachau Burgfriedenstraße,48.25955,11.429
 SW-Dessau DE-Dessau-Roßlau Gropiusallee,51.83831,12.22681
 SW-Dillingen DE-Dillingen/Saar Mathildenstraße,49.34676,6.70933
 SW-Dinslaken DE-Dinslaken Am Neutor,51.563239,6.742098
@@ -22671,6 +22678,7 @@ AT Lannach Almrausch,46.95208,15.33205
 AT Lendorf Teccon,46.82732,13.4907
 AT Lendorf Teccon,46.82824,13.49121
 AT Linz Gstöttnerhofstraße,48.315009,14.283574
+AT Linz LentiaCity,48.31406,14.28314
 AT Linz Metro,48.24862,14.29475
 AT Linz PLUSCITY,48.2428,14.23398
 AT Linz PLUSCITY,48.24345,14.23428,25
@@ -22901,6 +22909,7 @@ DE Machern Ringstraße,51.35571,12.57101
 DE Mainz Malakoff-Passage,49.9965,8.28127
 DE Mannheim SV Seckenheim,49.46796,8.5573
 DE Melle Hageböke,52.176211,8.367606
+DE Memmingen Spielarcaden,47.99888,10.15428,30
 DE Messe Galerie Fulda,50.5398,9.6379,170
 DE Mölln VW Riemer,53.623707,10.678989
 DE Mönchengladbach SMS Campus,51.18596,6.42623
@@ -22958,6 +22967,7 @@ DE Schliersee Die Kuh am See,47.71126,11.86701
 DE Schwarzheide Naundorfer Straße,51.47129,13.87011
 DE Schwerin Dreescher Werkstätten,53.56426,11.38108
 DE Schöneck IFA Hotel,50.38921,12.34454
+DE Seesen Hotel Zum Alten Fritz,51.8894,10.16723
 DE Sexau maxon motor,48.09012,7.89528
 DE Sierksdorf Hansa-Park,54.07358,10.77805
 DE Simonsberg Nordseecamping zum Seehund,54.45534,8.97188
