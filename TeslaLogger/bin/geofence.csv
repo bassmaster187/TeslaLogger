@@ -101,6 +101,7 @@ Supercharger-V4 AU-Cooma NSW Sharp St,-36.23286,149.13216
 Supercharger-V3 AU-Dandenong VIC,-37.986068,145.218037
 Supercharger-V3 AU-Devonport TAS,-41.179917,146.367431
 Supercharger AU-Dubbo,-32.24995,148.609182
+Supercharger-V4 AU-Eastlakes NSW,-33.92444,151.21182
 Supercharger AU-Eaton WA,-33.31962,115.71702
 Supercharger AU-Euroa,-36.752887,145.573418
 Supercharger-V3 AU-Exeter NSW,-34.609254,150.229857
@@ -4217,6 +4218,7 @@ Supercharger-V3 US-Coalinga CA,36.25412,-120.23762
 Supercharger-V3 US-Coeur d’Alene ID,47.708891,-116.793937
 Supercharger US-Colby KS,39.362374,-101.054082
 Supercharger-V3 US-Colfax NC,36.09507,-79.994715
+Supercharger-V4 US-College Station TX,30.59985,-96.28912
 Supercharger-V3 US-College Station TX - Texas Avenue South,30.612892,-96.317329
 Supercharger-V3 US-Collinsville IL,38.673405,-90.013284
 Supercharger-V4 US-Colonial Heights VA,37.258028,-77.405884
@@ -5981,6 +5983,7 @@ A2A IT-Truccazzano Via Rivoltana,45.48038,9.44681
 
 AAE AT-Assling Thal-Aue,46.78325,12.66245
 AAE AT-Imst Rathausstraße,47.23954,10.73779
+AAE AT-Jenbach Achenseestraße,47.39318,11.772
 AAE AT-Jenbach Südtiroler Platz,47.39168,11.77201
 AAE AT-Kitzbühel Im Gries,47.44723,12.39186
 AAE AT-Kitzbühel Jochberger Straße,47.44414,12.398331
@@ -10156,6 +10159,7 @@ ELEN HR-Poreč Ul. Karla Huguesa,45.2246,13.59824
 ELEN HR-Požega Sokolova,45.33072,17.67491
 ELEN HR-Pula,44.83862,1383365.0
 ELEN HR-Pula Verudela,44.83859,13.83366
+ELEN HR-Rastovača,44.9064,15.61255
 ELEN HR-Rašćane Gornje,43.32073,17.16635,15
 ELEN HR-Rijeka Gomila,45.32812,14.442247
 ELEN HR-Rovinj Ul. Giordana Paliage,45.08565,13.63892
@@ -12954,6 +12958,7 @@ EVN AT-Waidhofen an der Ybbs Pocksteinerstraße,47.956449,14.777679
 EVN AT-Weitra Bahnhofstraße,48.70086,14.8977
 EVN AT-Wien Albert-Schweitzer-Gasse,48.207501,16.22199
 EVN AT-Wien Dommesgasse,48.17229,16.41517
+EVN AT-Wien Gotramgasse,48.2201,16.44554
 EVN AT-Wiener Neustadt Puchberger Straße,47.80452,16.21039,6
 EVN AT-Wiener Neustadt Puchberger Straße,47.80466,16.21039,8
 EVN AT-Wolkersdorf Julius Bittner Platz,48.3852,16.51515
@@ -13491,6 +13496,7 @@ EWE-GO DE-Jever Sophienstraße,53.568216,7.896066
 EWE-GO DE-Jever Theodor-Pekol-Platz,53.57291,7.906728
 EWE-GO DE-Jork Osterjork,53.533064,9.681771
 EWE-GO DE-Jüchen Neusser Straße,51.10303,6.53077
+EWE-GO DE-Jülich Rurauenstraße,50.924,6.34234
 EWE-GO DE-Kaarst Neersener Straße,51.217298,6.637961
 EWE-GO DE-Kall Werner-Schumacher-Straße,50.54997,6.57544
 EWE-GO DE-Kamp-Lintfort Prinzenstraße,51.508021,6.544007
@@ -16583,6 +16589,7 @@ Kople NO-Kirkenes Rådhussvingen,69.72876,30.04334
 Kople NO-Myre Storgata,68.91516,15.10068
 Kople NO-Rendalen Engerdalsveien,61.69506,11.21395
 Kople NO-Russenes Vestre Porsangerveien,70.47762,25.06666,25
+Kople NO-Sandnessjøen Sjøbergs gate,66.02265,12.63824
 Kople NO-Utskarpen Flostrandveien,66.29598,13.55068
 
 KOS IT-Varna Forch Straße,46.759149,11.63778,12
@@ -16941,7 +16948,7 @@ Lidl DE-Bad Schandau Dresdner Straße 15,50.92066,14.142974
 Lidl DE-Bad Schwalbach Bahnhofstraße,50.148812,8.083576
 Lidl DE-Bad Sobernheim Monzinger Straße 91,49.787273,7.638964
 Lidl DE-Bad Soden am Taunus Königsteiner Str. 44,50.14034,8.505394
-Lidl DE-Bad Vilbel Alte Frankfurter Str. 15,50.168374,8.729776
+Lidl DE-Bad Vilbel Alte Frankfurter Straße,50.16808,8.7293
 Lidl DE-Bad Wildungen Itzelstraße 34,51.119638,9.132902
 Lidl DE-Bamberg Laubanger,49.91161,10.87613
 Lidl DE-Barnstorf Niedersachsenweg 25,52.704732,8.492674
@@ -22900,6 +22907,7 @@ DE Hannover A2 Center,52.42332,9.835401,10
 DE Hannover PZH IFA Uni,52.426875,9.618212
 DE Heidelberg Hauptbahnhof,49.40653,8.673993
 DE Heilbronn GALERIA,49.1399,9.2168
+DE Heimstetten Feldkirchener Straße,48.1583,11.75436
 DE Herten Hotel am Schlosspark,51.59454,7.12339
 DE Herzogenaurach adidas,49.57487,10.91723
 DE Herzogenaurach adidas,49.57654,10.91759
