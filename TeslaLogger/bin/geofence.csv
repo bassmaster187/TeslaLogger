@@ -9201,6 +9201,7 @@ e-motum FR-Lucciana Airport of Bastia Poretta,42.54707,9.47971
 e-motum FR-Porto-Vecchio Rue Henri Frenay,41.60633,9.2779,30
 e-motum FR-Serra-di-Ferro Lieu-dit Porto Pollo,41.70757,8.79374
 e-motum FR-Vivario T20,42.16961,9.16584
+e-motum FR-Zonza RT10,41.69728,9.3465
 
 E-PROM RU-Владимир Большой проезд,56.11893,40.3652
 
@@ -10060,6 +10061,7 @@ Electrify-America US-Bridgewater NJ Promenade Blvd,40.56189,-74.55378
 Electrify-America US-Cedar City UT S Providence Center Dr,37.65477,-113.086737
 Electrify-America US-Cheektowaga NY Walden Ave,42.90934,-78.74461
 Electrify-America US-Clifton NJ Kingsland Rd,40.82432,-74.13654
+Electrify-America US-Denville NJ W Main St,40.89386,-74.47838
 Electrify-America US-East Brunswick NJ NJ-18,40.45773,-74.39928
 Electrify-America US-Fairfield NJ US-46 E,40.88971,-74.26992
 Electrify-America US-Flemington NJ US-202,40.49765,-74.85646
@@ -15873,7 +15875,7 @@ Ionity GB-Polmadie,55.837232,-4.242494
 Ionity GB-Stafford Spitfire Cl,52.83142,-2.13565
 Ionity HR-Gospić Budačka ul.,44.576994,15.392954
 Ionity HR-Kanfanar Okreti,45.111697,13.802624
-Ionity HR-Rašćane Gornje,43.32064,17.16625,15
+Ionity HR-Rašćane Gornje,43.3206,17.1662,15
 Ionity HR-Sop,45.78354,16.15155
 Ionity HR-Vrankovec,46.08676,15.91246
 Ionity HR-Zemunik Gornji Zadar Tromilja,44.114619,15.407588,25
@@ -16041,6 +16043,7 @@ IZIVIA FR-Saint-Valery-sur-Somme Cavée Lévêque,50.17327,1.63742
 
 JET AT-Linz Freistädter Straße,48.3283,14.32136
 JET AT-Wien Laxenburger Straße,48.1358,16.35648
+JET AT-Wiener Neustadt Puchberger Straße,47.8055,16.21124,30
 JET DE-Bielefeld Eckendorfer Straße,52.03283,8.552652
 JET DE-Füssen Kemptener Straße,47.5686,10.6885
 JET DE-Giengen an der Brenz Frostelstraße,48.610979,10.210743
@@ -18996,7 +18999,7 @@ Petrol HR-Kaštel Sućurac Cesta Franje Tuđmana,43.5479,16.41245
 Petrol HR-Poreč Kosinožići,45.239969,13.624335
 Petrol HR-Rovinj Ul. Braće Božić,45.07967,13.66187
 Petrol HR-Slavonski Brod Ul. Petra Svačića,45.16282,18.00911
-Petrol HR-Split Mall of Split,43.519,16.48308
+Petrol HR-Split Mall of Split,43.5188,16.48318
 Petrol HR-Trnbusi Mosor,43.49345,16.78422
 Petrol HR-Zagreb Ul. Vjenceslava Richtera,45.78206,15.98189
 Petrol ME-Podgorica Ilije Plamenca,42.43088,19.24341
@@ -20195,6 +20198,7 @@ Shell CH-Zürich Nüschelerstrasse,47.3722,8.53589
 Shell CH-Zürich Swiss Life Arena,47.39489,8.47978
 Shell CZ-Dolní Roveň D35,50.017922,15.975566
 Shell CZ-Praha Rych. kom. R6,50.156857,13.968542
+Shell CZ-Rakovice-Čimelice D4,49.48298,14.0636
 Shell CZ-Staré Město Košická,50.75921,15.05308
 Shell DE-Aachen Prager Ring,50.797538,6.108947
 Shell DE-Achim Margarete-Steiff Allee,53.019466,9.068053
@@ -22452,6 +22456,7 @@ Wien-Energie AT-Wien Breitenfelder Gasse,48.21412,16.34291
 Wien-Energie AT-Wien Breitenfurter Straße,48.14641,16.29639
 Wien-Energie AT-Wien Cumberlandstraße,48.19175,16.30988
 Wien-Energie AT-Wien Felberstraße,48.197281,16.335561
+Wien-Energie AT-Wien Grassigasse,48.1992,16.31122
 Wien-Energie AT-Wien Guglgasse,48.185265,16.421039
 Wien-Energie AT-Wien Handelskai,48.23439,16.39364
 Wien-Energie AT-Wien Hansenstraße,48.20625,16.35857
