@@ -6189,7 +6189,6 @@ Aldi DE-Düsseldorf Heerdter Landstraße,51.231167,6.711333
 Aldi DE-Düsseldorf Nürnberger Straße,51.171278,6.860667
 Aldi DE-Düsseldorf Paulsmühlenstraße,51.163983,6.880664
 Aldi DE-Eberbach Neuer Weg-Nord,49.47352,8.98602
-Aldi DE-Echterdingen,48.695676,9.168745
 Aldi DE-Eimeldingen Im Rebacker,47.62598,7.5996,30
 Aldi DE-Eisenberg (Pfalz) Am Gielbrunnen,49.55828,8.086
 Aldi DE-Eisingen,49.761243,9.845965,20
@@ -6305,6 +6304,7 @@ Aldi DE-Langen An der Winkelwiese,49.99493,8.67744
 Aldi DE-Langgöns,50.491746,8.655724
 Aldi DE-Laufenburg Laufenpark,47.565389,8.074583
 Aldi DE-Leichlingen Am Wallgraben,51.100851,7.013087
+Aldi DE-Leinfelden-Echterdingen Karlsruher Straße,48.6957,9.16876
 Aldi DE-Leipzig Holzhäuser Straße,51.31887,12.42483
 Aldi DE-Leonberg,48.798462,8.999601
 Aldi DE-Leverkusen Syltstraße,51.0336,7.01075
@@ -7018,6 +7018,7 @@ Allego FR-Bayeux Bd d’Eindhoven,49.28444,-0.70549,25
 Allego FR-Beaucaire Route de Nîmes,43.816978,4.614744
 Allego FR-Chalezeule Rte de Belfort,47.2629,6.0644,30
 Allego FR-Chalon-sur-Saône Rue de Paris,46.7986,4.84796,30
+Allego FR-Chalon-sur-Saône Rue Thomas Dumorey,46.77422,4.8589
 Allego FR-Champniers Rue de l’Auvent,45.6927,0.18157
 Allego FR-Châteauroux Rue Pierre Gaultier,46.80649,1.6979
 Allego FR-Fécamp Rue Charles Leborgne,49.75422,0.37236
@@ -7220,6 +7221,7 @@ ARAL DE-Autohof Schnaittach,49.56753,11.32699
 ARAL DE-Autohof Schwarmstedt,52.67352,9.68845
 ARAL DE-Autohof Soest-Ost,51.55337,8.15855
 ARAL DE-Autohof Wittenburg,53.5024,11.09788
+ARAL DE-Backnang Manfred-von-Ardenne-Allee,48.9591,9.42277
 ARAL DE-Bad Hersfeld Rudolf-Diesel-Straße,50.85213,9.72606,30
 ARAL DE-Bad Honnef Gewerbepark Dachsberg,50.646867,7.337694
 ARAL DE-Bautzen Kreckwitzer Straße,51.19029,14.45191
@@ -7234,6 +7236,7 @@ ARAL DE-Braunschweig Hildesheimer Straße,52.27199,10.4961
 ARAL DE-Bremen Osterholzer Heerstraße,53.05817,8.93889
 ARAL DE-Bremen Stapelfeldtstraße,53.11069,8.75425
 ARAL DE-Bremen Stapelfeldtstraße,53.1111,8.75315
+ARAL DE-Brüggen Klosterstraße,51.23784,6.18916
 ARAL DE-Celle Siedemeierkamp,52.600738,10.10726,25
 ARAL DE-Chemnitz Zschopauer Straße,50.8141,12.95464,30
 ARAL DE-Dasing Laimeringer Straße,48.390329,11.063984
@@ -7330,6 +7333,7 @@ ARAL DE-Radeberg Badstraße,51.131,13.91717
 ARAL DE-Raststätte Fuchsberg Nord,53.91063,11.75777
 ARAL DE-Raststätte Fuchsberg Süd,53.90907,11.75754
 ARAL DE-Raststätte Rüblingsheide,51.88854,13.83703
+ARAL DE-Rednitzhembach Rother Straße,49.29467,11.0826
 ARAL DE-Regen Bahnhofstraße,48.97001,13.13327
 ARAL DE-Regensburg Max-Planck-Straße,49.000213,12.148014,25
 ARAL DE-Reichenbach Goethestraße,50.622637,12.294304
@@ -7358,6 +7362,7 @@ ARAL DE-Warburg Paderborner Tor,51.49454,9.12634,25
 ARAL DE-Weimar Berkaer Straße,50.96082,11.3171
 ARAL DE-Winsen (Luhe) Max-Planck-Straße,53.339067,10.219588
 ARAL DE-Winterberg Am Hagenblech,51.20019,8.53027
+ARAL DE-Wolfsburg Heinrich-Nordhoff-Straße,52.42784,10.77516
 ARAL DE-Worms Mainzer Straße,49.65494,8.359737
 ARAL DE-Wunstorf Kolenfelder Straße,52.4173,9.44833
 ARAL DE-Wuppertal Uellendahler Straße,51.27606,7.15517
@@ -7640,7 +7645,6 @@ BP DE-Allershausen Schroßlacher Straße,48.428106,11.585223
 BP DE-Altdorf bei Nürnberg Nürnberger Straße,49.383969,11.34805
 BP DE-Arnstadt Lindenplatz,50.860322,10.96045
 BP DE-Augsburg Aindlinger Straße,48.392692,10.933418
-BP DE-Backnang Manfred-von-Ardenne-Allee 2,48.959211,9.423126
 BP DE-Bad Berka Weimarische Straße,50.904707,11.27835
 BP DE-Bad Tölz Sachsenkamer Straße,47.759645,11.57334
 BP DE-Bark Bockhorner Landstraße,53.918437,10.128499
@@ -7664,7 +7668,6 @@ BP DE-Bochum Königsallee,51.461087,7.220522
 BP DE-Bochum Lütgendortmunder Hellweg,51.494238,7.338955
 BP DE-Bochum Wittener Straße,51.47754,7.227761
 BP DE-Bockenem Oppelner Straße,52.001728,10.135291,10
-BP DE-Brüggen Klosterstraße 1,51.237843,6.189155
 BP DE-Coburg Ernst-Faber-Straße,50.24811,10.965753
 BP DE-Darmstadt Heinrichstraße,49.86768,8.682129
 BP DE-Dessau-Roßlau Junkersstraße,51.82599,12.214922
@@ -7815,7 +7818,6 @@ BP DE-Wesel Weseler Straße,51.638324,6.587322
 BP DE-Wetter (Hessen) An der Bleiche,50.904398,8.721228
 BP DE-Wiesbaden Berliner Straße,50.053831,8.300419
 BP DE-Wietmarschen Benzstraße,52.482153,7.217292
-BP DE-Wolfsburg,52.427795,10.775238
 BP DE-Wollin Im Gewerbegebiet,52.288976,12.463941
 BP DE-Wuppertal Nevigeser Straße,51.268683,7.126744
 BP DE-Wörth am Main Landstraße,49.79783,9.15649
@@ -8015,6 +8017,7 @@ ChargePoint AT-Graz Zanklstraße,47.09623,15.40694,25
 ChargePoint AT-Liezen Salzburger Straße,47.567576,14.232019,20
 ChargePoint AT-St. Johann in der Haide Rathstraße,47.280639,16.006366
 ChargePoint AT-Stattegg Dorfplatz,47.13736,15.41941
+ChargePoint AT-Steyr Haager Straße,49.2346,12.0852
 ChargePoint AT-Vasoldsberg Schemerlhöhe,47.057246,15.599613
 ChargePoint AU-Point Cook VIC Town Centre,-37.88419,144.73424
 ChargePoint BE-Groot-Bijgaarden,50.882,4.25334
@@ -8084,6 +8087,7 @@ ChargePoint DE-Friesoythe 1 Bürgermeister-Olberding-Straße,53.021811,7.882554
 ChargePoint DE-Fürth 90 Flugplatzstraße,49.501085,10.966131
 ChargePoint DE-Fürth Schwabacher Straße 382,49.443394,10.990433
 ChargePoint DE-Goslar Dörntener Str. 2a,51.924466,10.415264
+ChargePoint DE-Goslar Dörntener Straße,51.92614,10.41598
 ChargePoint DE-Gransee 13a Kraatzer Weg,53.003102,13.170179
 ChargePoint DE-Göppingen 22 Leonhard-Weiss-Straße,48.701008,9.670641
 ChargePoint DE-Göppingen 3 Heilbronner Str,48.695128,9.678871
@@ -8411,7 +8415,7 @@ Citywatt DE-Frammersbach Dorfstraße 73,50.06215,9.394378
 Citywatt DE-Freising Ismaninger Straße,48.383328,11.752929
 Citywatt DE-Friedrichshafen Lindauer Straße,47.646492,9.506528
 Citywatt DE-Fürstenzell Gruberfeld 1,48.527364,13.326498
-Citywatt DE-Germering Lise-Meitner-Straße 1,48.140629,11.370163
+Citywatt DE-Germering Lise-Meitner-Straße,48.14064,11.37
 Citywatt DE-Gestratz Am Winkelholz,47.639828,10.000418
 Citywatt DE-Gnarrenburg Giehler Straße 3,53.379917,8.960429
 Citywatt DE-Grafenau Finkenweg,48.860169,13.390628
@@ -8536,6 +8540,7 @@ Civitronic RO-Florești Strada Avram Iancu,46.75105,23.53291
 Claus-Heinemann DE-Braunschweig Hansestraße,52.3093,10.5107,20
 Claus-Heinemann DE-Erlangen Wetterkreuz,49.54286,11.02045
 Claus-Heinemann DE-Hannover Lathusenstraße,52.37963,9.79466
+Claus-Heinemann DE-Konstanz Line-Eid-Straße,47.67273,9.15738
 Claus-Heinemann DE-Neu-Ulm Memminger Straße,48.3881,10.00233
 Claus-Heinemann DE-Stuttgart Zettachring,48.71008,9.16984
 Claus-Heinemann DE-Weil am Rhein Zollstraße,47.59006,7.59363
@@ -9003,6 +9008,7 @@ Compleo DE-Wackersdorf Oskar-Von-Miller-Straße,49.318635,12.231857
 Compleo DE-Warburg Hüffertstraße,51.488403,9.139116
 Compleo DE-Weißenfels Drei Wege,51.198024,11.998329
 Compleo DE-Wertingen Augsburger Straße,48.55863,10.68955
+Compleo DE-Wiehl Zum Scherbusch,50.97636,7.5727
 Compleo DE-Winterberg Remmeswiese,51.200872,8.525441
 Compleo DE-Wipperfürth Gaulstr.,51.113593,7.406067
 Compleo DE-Wolfenbüttel Bahnhof,52.15985,10.532172
@@ -12345,6 +12351,7 @@ EnelX IT-Quartu Sant’Elena Viale Lungomore del Golfo,39.22908,9.21616
 EnelX IT-Ragusa Via G. di Vittorio,36.91492,14.72468
 EnelX IT-Ramiola,44.698924,10.090093
 EnelX IT-Ravenna Via Classicana,44.37624,12.2237
+EnelX IT-Reggio Emilia Piazza del Monte,44.69835,10.63127
 EnelX IT-Rho Via Alessandro Volta,45.52397,9.03807
 EnelX IT-Rodengo Saiano Via Girolamo Romanino,45.57499,10.12088
 EnelX IT-Roma Via Aosta,41.88327,12.51469
@@ -12779,6 +12786,7 @@ EV-Halle DE-Halle (Saale) Hansering,51.4811,11.97546
 EV-Leverkusen DE-Leverkusen Martin-Luther-Straße,51.03348,7.04619
 EV-Leverkusen DE-Leverkusen Paracelsusstraße,51.03254,7.02968
 eV-Now IT-Lainate Villoresi Est,45.55904,9.04173
+ev-point MD-Ruseni R2,46.88953,29.19423
 EV-Rudolstadt DE-Rudolstadt Albert-Lindner-Straße,50.71809,11.33546
 EV-Rudolstadt DE-Rudolstadt Oststraße,50.72088,11.35142
 EV-Rudolstadt DE-Rudolstadt Oststraße,50.72486,11.36791
@@ -12944,6 +12952,7 @@ EVN AT-Böheimkirchen Reith,48.187943,15.765036
 EVN AT-Eggenburg Grafenbergerstraße,48.643769,15.822473
 EVN AT-Grafenwörth Gewerbepark,48.41187,15.776
 EVN AT-Grimmenstein Wechselbundesstrasse,47.63344,16.13192
+EVN AT-Göllersdorf Hammerschmiedstraße,48.49825,16.11453
 EVN AT-Herzogenburg Traismauerstraße,48.290148,15.694952
 EVN AT-Horn Prager Straße,48.66136,15.65458
 EVN AT-Höbenbach Ortsstraße,48.35014,15.64742
@@ -17960,6 +17969,7 @@ Mer DE-Herrenberg Daimlerstraße,48.60211,8.87012
 Mer DE-Herrenberg Ohmstraße,48.58151,8.89322
 Mer DE-Höchstadt Fürther Straße,49.69597,10.80375
 Mer DE-Ingolstadt Bahnhofstraße,48.74542,11.43614
+Mer DE-Kaarst Hans-Dietrich-Genscher-Straße,51.21175,6.6395
 Mer DE-Kirchlengern Alfred-Krupp-Straße,52.182228,8.657717
 Mer DE-Kolbermoor Carl-Jordan-Straße,47.843179,12.063993
 Mer DE-Lahr Einsteinallee,48.35312,7.80768,30
@@ -18355,6 +18365,8 @@ N-ERGIE DE-Diespeck Bamberger Straße,49.601011,10.625432
 N-ERGIE DE-Dietenhofen Neustädter Straße,49.409091,10.680617
 N-ERGIE DE-Erlangen Langfeldstraße,49.57867,10.99245
 N-ERGIE DE-Erlangen Schuhstraße,49.59127,11.00875
+N-ERGIE DE-Georgensgmünd Bahnhofstraße,49.1835,11.01585
+N-ERGIE DE-Georgensgmünd Wiesenstraße,49.1837,11.01704
 N-ERGIE DE-Hilpoltstein Gredinger Straße,49.186627,11.194399
 N-ERGIE DE-Hilpoltstein Sperberstraße,49.192769,11.183355
 N-ERGIE DE-Hilpoltstein Zwingerstraße,49.1896,11.19099
@@ -20380,6 +20392,7 @@ Shell DE-Krefeld Diessemer Bruch,51.327372,6.590652
 Shell DE-Kämpfelbach-Ersingen Raiffeisenstraße,48.928995,8.647136
 Shell DE-Köln Venloer Straße,50.94559,6.927406
 Shell DE-Königsee Gewerbegebiet,50.667036,11.119127
+Shell DE-Königswinter Rheinallee,50.67082,7.1946
 Shell DE-Laatzen Karlsruher Straße,52.31788,9.79741,20
 Shell DE-Laatzen Oesseler Straße,52.27481,9.84779
 Shell DE-Laboe Brodersdorfer Weg,54.400685,10.22995
@@ -20696,7 +20709,6 @@ solid DE-Fürth Leyher Straße,49.460018,11.009195
 solid DE-Fürth Nürnberger Straße,49.46551,11.01121
 solid DE-Fürth Ottostraße,49.47108,10.98606
 solid DE-Fürth Schwabacher Straße,49.47066,10.98762
-solid DE-Georgensgmünd Wiesenstraße,49.18351,11.01585
 solid DE-Hallbergmoos Theresienstraße,48.32817,11.75231
 solid DE-Hersbruck Badstraße,47.57307,10.56608
 solid DE-Hersbruck Nürnberger Straße,49.50991,11.42507
@@ -22328,6 +22340,7 @@ Volkswagen DE-Wilster Dammfleth,53.9155,9.37845
 Volkswagen DE-Witzenhausen Bischhäuser Aue,51.34914,9.85064
 Volkswagen DE-Wolfsburg Autostadt,52.43169,10.79613
 Volkswagen DE-Wolfsburg Autostadt,52.43194,10.79804
+Volkswagen DE-Wuppertal Uellendahler Straße,51.2758,7.1532,20
 Volkswagen DE-Wurster Nordseeküste Speckenstraße,53.68739,8.57899
 Volkswagen DE-Wurzen Schiemannstraße 2,51.38532,12.739039
 Volkswagen DE-Würzburg Nürnberger Straße,49.79824,9.99119
@@ -22853,6 +22866,7 @@ DE Aurich EEZ,53.496286,7.494351
 DE Aurich Ubbo-Emmius-Klinik,53.46903,7.50032
 DE Babensham ENERSYS,48.09008,12.31608
 DE Bad Birnbach Apart Hotel am Sonnenhügel,48.44348,13.08266
+DE Bad Buchau Marktplatz,48.06537,9.60956
 DE Bad Doberan Grand Hotel Heiligendamm,54.143733,11.842857
 DE Bad Ems Therme,50.33317,7.71174
 DE Bad Kreuznach Leonardo Hotel,49.853,7.88291
@@ -22957,7 +22971,6 @@ DE Kiel Koppelberg,54.40264,10.16808
 DE Kiel Lubinus Clinicum,54.35285,10.11714
 DE Kißlegg Rempertshofen,47.8084,9.87838
 DE Koblenz Bardelebenstraße,50.358505,7.587261
-DE Konstanz Line-Eid-Straße,47.67295,9.15753
 DE Koserow Hotel Elisabeth,54.05156,14.00066
 DE Köln Brügelmannstraße 3,50.943937,6.985898
 DE Köln Neumarkt Passage,50.93734,6.9472
@@ -23168,6 +23181,7 @@ RO Oradea Pasajul Vulturul Negru,47.055133,21.93175
 RO Sibiu Piața Mică,45.79757,24.15138
 RO Suceava Strada Universității,47.64444,26.244
 RO Săcele Strada George Moroianu,45.618203,25.698313
+RO Târgu Jiu Strada Republicii,45.03113,23.2799
 RO Zalău Aleea Tineretului,47.19534,23.0595
 RS Београд Klinika Varis,44.82424,20.41634
 SE Gällivare Postgatan,67.13387,20.65995
