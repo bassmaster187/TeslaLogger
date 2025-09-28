@@ -397,6 +397,7 @@ LIMIT 1
                     {
                         if (fee["feeType"].ToString().Equals("CHARGING"))
                         {
+                            // cost per kWh
                             if (fee.ContainsKey("uom") && fee["uom"].ToString().Equals("kWh") || fee["uom"].ToString().Equals("kwh"))
                             {
                                 if (fee.ContainsKey("rateBase"))
@@ -417,6 +418,36 @@ LIMIT 1
                                         }
                                     }
                                 }
+                                if (fee.ContainsKey("pricingType")
+                                    && (fee["pricingType"].ToString().Equals("PAYMENT") ||
+                                        fee["pricingType"].ToString().Equals("CREDIT_PARTIAL_PAYMENT"))
+                                    && fee.ContainsKey("totalDue")
+                                    )
+                                {
+                                    if (double.TryParse(fee["totalDue"].ToString(Tools.ciEnUS), out double cost_for_charging_t))
+                                    {
+                                        if (double.IsNaN(cost_for_charging))
+                                        {
+                                            cost_for_charging = cost_for_charging_t;
+                                        }
+                                        else
+                                        {
+                                            cost_for_charging += cost_for_charging_t;
+                                        }
+                                    }
+                                }
+                                if (fee.ContainsKey("pricingType")
+                                    && (
+                                        fee["pricingType"].ToString().Equals("NO_CHARGE") // free supercharging
+                                        || fee["pricingType"].ToString().Equals("CREDIT") // charging cerdits
+                                        )
+                                    )
+                                {
+                                    freesuc = true;
+                                }
+                            }
+                            // cost per whatever
+                            else {                            
                                 if (fee.ContainsKey("pricingType")
                                     && (fee["pricingType"].ToString().Equals("PAYMENT") ||
                                         fee["pricingType"].ToString().Equals("CREDIT_PARTIAL_PAYMENT"))

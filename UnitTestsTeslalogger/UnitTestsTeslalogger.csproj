@@ -191,6 +191,7 @@
   <ItemGroup>
     <Content Include="testdata\ACCharging1.txt" />
     <Content Include="testdata\DrivingByGear.txt" />
+    <Content Include="testdata\goe.txt" />
     <Content Include="testdata\PluggedIn-NotCharging-Precondition.txt" />
     <Content Include="testdata\Route.txt" />
     <Content Include="testdata\shelly-em1-shelly.txt" />

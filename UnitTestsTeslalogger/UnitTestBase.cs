@@ -26,11 +26,11 @@ namespace UnitTestsTeslalogger
             Tools.SetThreadEnUS();
             long unixTimestamp = (long)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
             unixTimestamp *= 1000;
-            c.DbHelper.InsertPos(unixTimestamp.ToString(), 48.456691, 10.030241, 0, 0, 1, 0, 0, 0, 0, "0");
+            c.DbHelper.InsertPos(unixTimestamp.ToString(), 48.456691, 10.030241, 0, 0, 1, 0, 0, 0, 0, 0, "0");
             int startid = c.DbHelper.GetMaxPosid(true);
             c.DbHelper.StartDriveState(DateTime.Now);
 
-            c.DbHelper.InsertPos(unixTimestamp.ToString(), 35.677121, 139.751033, 0, 0, 2, 0, 0, 0, 0, "0");
+            c.DbHelper.InsertPos(unixTimestamp.ToString(), 35.677121, 139.751033, 0, 0, 2, 0, 0, 0, 0, 0, "0");
             int endid = c.DbHelper.GetMaxPosid(true);
             c.DbHelper.CloseDriveState(DateTime.Now);
         }
@@ -1170,19 +1170,19 @@ namespace UnitTestsTeslalogger
             var geofence = Geofence.GetInstance();
 
             var a = geofence.GetPOI(48.456708, 10.029897);
-            Assert.AreEqual(a.name, "⚡⚡ Supercharger DE-Ulm");
+            Assert.AreEqual(a.name, "⚡⚡⚡ Supercharger-V3 DE-Ulm");
 
             a = geofence.GetPOI(48.456616, 10.030200);
-            Assert.AreEqual(a.name, "⚡⚡ Supercharger DE-Ulm");
+            Assert.AreEqual(a.name, "⚡⚡⚡ Supercharger-V3 DE-Ulm");
 
             a = geofence.GetPOI(48.456790, 10.030014);
-            Assert.AreEqual(a.name, "⚡⚡ Supercharger DE-Ulm");
+            Assert.AreEqual(a.name, "⚡⚡⚡ Supercharger-V3 DE-Ulm");
 
             a = geofence.GetPOI(48.456691, 10.030241);
-            Assert.AreEqual(a.name, "⚡⚡ Supercharger DE-Ulm");
+            Assert.AreEqual(a.name, "⚡⚡⚡ Supercharger-V3 DE-Ulm");
 
             a = geofence.GetPOI(48.456888, 10.029635);
-            Assert.AreEqual(a.name, "EnBW DE-Ulm Seligweiler");
+            Assert.AreEqual(a.name, "EnBW DE-Rasthof Seligweiler");
         }
 
         [TestMethod]
