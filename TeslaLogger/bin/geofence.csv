@@ -7429,6 +7429,10 @@ autoSense CH-Zuchwil Langenfeldstrasse,47.20239,7.57139,25
 autostrom.plus DE-Midlum A27 West,53.72631,8.660925
 autostrom.plus DE-Rastanlage Hamwiede Nord,52.883,9.47446
 
+Autotechnik-Heinz-Müller DE-Elsdorf Max-Planck-Straße,50.94373,6.58332
+
+Avacon DE-Lüneburg Sankt-Ursula-Weg,53.24387,10.4057
+
 AVENCY DE-Cottbus Uhlandstraße,51.72415,14.33987
 AVENCY DE-Freiburg im Breisgau Breisacher Straße,48.00525,7.83407
 AVENCY DE-Seebach Schwarzwaldhochstraße,48.56158,8.22191
@@ -7580,6 +7584,8 @@ Berliner-SW DE-Berlin Tile-Brügge-Weg,52.5916,13.29266
 Berliner-SW DE-Berlin Wansdorfer Platz,52.55774,13.20596
 Berliner-SW DE-Berlin Wörther Straße,52.53598,13.42054
 
+Bertrandt DE-Tappenbeck Krümke,52.47788,10.74094
+
 Bestcharge LU-Huldang Ëlwen Stawelerstrooss,50.171658,6.025163
 Bestcharge LU-Remerschen Schengerwis,49.480006,6.364406
 Bestcharge LU-Wasserbillig Mertert Route de Wasserbillig,49.70674,6.48866
@@ -7620,6 +7626,7 @@ BMW DE-München Lemgostraße,48.191879,11.554574
 BMW DE-Oberschleißheim Mittenheimer Straße,48.2632,11.55755,30
 BMW DE-Offenbach Spessartring,50.08895,8.771535
 BMW DE-Unterschleißheim Röntgenstraße,48.28313,11.56757
+BMW DE-Wackersdorf Oskar-Von-Miller-Straße,49.31864,12.23186
 BMW DE-Wittenberg Dessauer Straße,51.8655,12.62283
 BMW DE-Würzburg Louis-Pasteur-Straße,49.7939,9.99685
 BMW DK-Aarhus Blomstervej,56.18134,10.12531
@@ -8144,6 +8151,7 @@ ChargePoint DE-Lübbecke 4 Am Zollamt,52.309882,8.633153
 ChargePoint DE-Lütjenburg Gildenplatz,54.29287,10.59362
 ChargePoint DE-Magdeburg Parchauer Straße 1h,52.199092,11.672448
 ChargePoint DE-Melle 8 Ochsenweg,52.21495,8.317147
+ChargePoint DE-Melle Maschweg,52.1931,8.35802
 ChargePoint DE-Montabaur Staufenbergallee,50.427142,7.820981
 ChargePoint DE-Mücheln (Geiseltal) 1B Bahnhofsiedlung,51.347096,11.75512
 ChargePoint DE-München Friedenstraße,48.125258,11.604903
@@ -8452,7 +8460,7 @@ Citywatt DE-Langenzenn Mühlsteig 57,49.486682,10.777252
 Citywatt DE-Lübbenau Robert-Koch-Straße 45 a-i,51.857952,13.963854
 Citywatt DE-Lüdenscheid Bräuckenstraße,51.218967,7.655518
 Citywatt DE-Mannheim Seckenheimer Landstraße 270,49.473727,8.53942
-Citywatt DE-Markleeberg Hauptstraße,51.271873,12.377137
+Citywatt DE-Markkleeberg Hauptstraße,51.27187,12.37714
 Citywatt DE-Memmingen Goldhoferstraße 5,47.999724,10.170694
 Citywatt DE-Michendorf Luckenwalder Straße 118,52.293612,13.049263
 Citywatt DE-Morbach Industriestraße 8,49.813513,7.134762
@@ -8873,16 +8881,12 @@ Comfortcharge DE-Zusmarshausen Arnulfstraße,48.39936,10.5991
 Comfortcharge DE-Zwickau Bülaustr.,50.715631,12.452783
 Comfortcharge DE-Zwickau Scheffelstraße,50.73374,12.5068
 
-Compleo DE-Ahrensburg Kurt-Fischer-Str.,53.683325,10.261508
 Compleo DE-Aichach Freisinger Straße,48.459446,11.148167
 Compleo DE-Arnsberg Niedereimerfeld,51.423124,8.034265
 Compleo DE-Augsburg Nürnberger Straße,48.413945,10.854807
 Compleo DE-Baar Aichacher Straße,48.587921,10.9607
 Compleo DE-Bad Lauchstädt Ahornstr.,51.385176,11.883146
-Compleo DE-Bad Oldesloe Lily-Braun Str.,53.802425,10.40283
-Compleo DE-Bad Salzuflen Uferstraße,52.066957,8.754559
 Compleo DE-Bad Saulgau Moosheimer Str.,48.02184,9.49616
-Compleo DE-Bannewitz An de Zschauke,51.001175,13.720209
 Compleo DE-Berlin Falkenseer Chaussee,52.548928,13.178883
 Compleo DE-Bielefeld Brockhagener Straße,51.987573,8.483534
 Compleo DE-Bielefeld Werningshof,52.039039,8.595272
@@ -8891,52 +8895,34 @@ Compleo DE-Borgentreich Zum Dreschplatz,51.542406,9.204267
 Compleo DE-Borna,51.127362,12.506541
 Compleo DE-Borna Gewerbepark Borna-Ost,51.134396,12.509869
 Compleo DE-Borsdorf Otto-von-Guericke-Str. 1,51.354464,12.542412
-Compleo DE-Bärenstein Sächsischer Platz,50.498622,13.028103
 Compleo DE-Chemnitz Chemnitztalstr.,50.858113,12.927023
-Compleo DE-Chemnitz-Röhrsdorf Ringstraße,50.865,12.864917
 Compleo DE-Dagebüll Nordseestraße,54.729107,8.693537
 Compleo DE-Detmold,51.941113,8.874645
 Compleo DE-Detmold Hornsche Str.,51.929538,8.886029
-Compleo DE-Dillingen/Saar Werkstraße,49.356662,6.734132
 Compleo DE-Dingolfing Karl-Dompert-Straße,48.643673,12.470234
 Compleo DE-Dingolfing Laaberstraße,48.640707,12.492255
 Compleo DE-Eibenstock Karlsbader Str.,50.492818,12.601901
 Compleo DE-Eisenach Stedtfelder Strasse,51.010193,10.260568
-Compleo DE-Elsdorf Max-Planck-Straße,50.94373,6.58332
-Compleo DE-Enge-Sande Lecker Straße,54.740504,8.955594
 Compleo DE-Falkenberg Mühlberger Straße,51.586557,13.235852
 Compleo DE-Freiberg Frauensteinerstr.,50.908212,13.363178
-Compleo DE-Freiberg Hornstraße,50.916412,13.347121
 Compleo DE-Friedberg,48.353209,10.980607
 Compleo DE-Friedberg Balthasar-Schaller-Straße,48.365139,10.950705
-Compleo DE-Friedrichshafen Kornblumenstr.,47.668118,9.488056
-Compleo DE-Geisenheim Winkeler Str.,49.985174,7.969636
 Compleo DE-Germersheim Hafenstr.,49.232119,8.369351
-Compleo DE-Glauchau Rudolf-Breitscheid-Straße,50.819662,12.550579
 Compleo DE-Gmund am Tegernsee Schwärzenbach,47.751908,11.755217
 Compleo DE-Graben Landsberger Straße,48.198828,10.854684
 Compleo DE-Grimma Wedniger Str.,51.256387,12.737225
-Compleo DE-Günzburg Siemensstraße,48.459915,10.27983
 Compleo DE-Haldensleben,52.291476,11.413304
-Compleo DE-Herzberg Wilhelm-Pieck-Ring,51.693026,13.228868
 Compleo DE-Hildburghausen Kaltenbronner Weg,50.421258,10.751844
-Compleo DE-Hoym Ascherslebener Straße,51.78514,11.32836
 Compleo DE-Idar - Oberstein Hauptstraße,49.71343,7.31209
 Compleo DE-Illertissen Industriestraße,48.206462,10.106154
 Compleo DE-Iserlohn Fingerhutsmühle,51.364622,7.612209
 Compleo DE-Iserlohn Mendener Straße,51.37518,7.704853
-Compleo DE-Iserlohn Seeuferstr.,51.387449,7.712014
 Compleo DE-Kabelsketal Industriestr.,51.443746,12.133108
 Compleo DE-Kaufering Viktor-Frankl-Straße,48.08022,10.85504
 Compleo DE-Kirchberg Hartmannsdorfer Straße,50.615402,12.529442
 Compleo DE-Kleinaitingen Rathausstraße,48.217945,10.842073
-Compleo DE-Klostermansfeld Bahnhofstr.,51.575588,11.494211
-Compleo DE-Kolkwitz Annahofer Graben,51.717874,14.288493
 Compleo DE-Konz Wilde Acht,49.695,6.56544
-Compleo DE-Krumbach (Schwaben) Erwin-Bosch-Ring,48.237185,10.373022
 Compleo DE-Landau Am Schänzel,49.209564,8.118001
-Compleo DE-Landsberg am Lech Sandauer Straße,48.05452,10.87698
-Compleo DE-Langenargen Untere Seestraße,47.598136,9.538098
 Compleo DE-Langenwetzendorf Am Daßlitzer Kreuz,50.683399,12.129596
 Compleo DE-Leipzig BMW-Allee,51.404114,12.448011
 Compleo DE-Leipzig Willy-Brandt-Platz,51.345222,12.384168
@@ -8947,30 +8933,21 @@ Compleo DE-Limbach-Oberfrohna Helenenstraße,50.858469,12.758069
 Compleo DE-Limbach-Oberfrohna Kreuzeiche 8,50.868012,12.773944
 Compleo DE-Lübben Lindenstraße,51.939174,13.893805
 Compleo DE-Lüneburg Reichenbachstraße,53.252825,10.410385
-Compleo DE-Lüneburg Sankt-Ursula-Weg,53.243815,10.405607
-Compleo DE-Markkleeberg Dietrich-Bonhoeffer-Platz,51.282955,12.369724
 Compleo DE-Markranstädt Markt 4,51.302059,12.220808
 Compleo DE-Marktredwitz Wölsauer Str.,50.00412,12.096919
 Compleo DE-Massen Turmstr.,51.634799,13.725131
-Compleo DE-Melle Maschweg,52.193087,8.35808
 Compleo DE-Melle Zur Femlinde,52.213052,8.273416
-Compleo DE-Meuselwitz Zeitzer Str. 45,51.047061,12.293332
 Compleo DE-Mittweida Schillerstr.,50.985574,12.972478
 Compleo DE-Moers,51.451477,6.638329
 Compleo DE-München Anton-Ditt-Bogen,48.191788,11.577537
 Compleo DE-München Hanauer Straße,48.178852,11.530204
 Compleo DE-München Petuelring,48.177162,11.560011
-Compleo DE-Neustadt am Rübenberge Leinstraße,52.51568,9.46239
-Compleo DE-Neustadt in Holstein Eutiner Straße,54.10096,10.7967
 Compleo DE-Neusäß,48.39446,10.8318
-Compleo DE-Niederdorf Chemnitzer Str. 69,50.722151,12.784234
 Compleo DE-Oberhausen Konrad-Adenauer-Allee,51.493189,6.861308
-Compleo DE-Oberlichtenau Auerswalder Str.,50.905717,12.962402
 Compleo DE-Papenburg Hauptkanal links,53.07757,7.39988
 Compleo DE-Peiting,47.79551,10.9239
 Compleo DE-Penzberg Fraunhoferstr.,47.74795,11.38513
 Compleo DE-Plauen Pausaer Str.,50.52069,12.114365
-Compleo DE-Radevormwald Heisenbergstraße,51.203088,7.378536
 Compleo DE-Regensburg,48.978594,12.169961
 Compleo DE-Regensburg Leibnizstraße,48.99874,12.167572
 Compleo DE-Reichenbach Alte Ziegelei,50.63979,12.32899
@@ -8981,26 +8958,20 @@ Compleo DE-Schrobenhausen Bürgermeister-Stocker-Ring,48.55904,11.26615
 Compleo DE-Schwerte Wittekindstraße,51.444067,7.572438
 Compleo DE-Schöneck Hohe Reuth 10,50.38891,12.34966
 Compleo DE-Speyer Bahnhofstraße,49.319518,8.430799
-Compleo DE-Stadtbergen Benzstraße,48.37908,10.84784
 Compleo DE-Stuhr Bremer Straße,53.028382,8.806111
 Compleo DE-Stuttgart-Zuffenhausen Schwieberdinger Str. 1 Bau 70,48.837913,9.153251
 Compleo DE-Suhl Auenstr.,50.608464,10.679893
-Compleo DE-Tappenbeck Krümke,52.477904,10.741048
 Compleo DE-Tarmstedt Bremer Landstraße,53.222489,9.076089
 Compleo DE-Trittau Zum,53.610193,10.409619
 Compleo DE-Türkheim Augsburger Straße,48.0699,10.64556
 Compleo DE-Unkel Bundesstraße,50.6024,7.22194
 Compleo DE-Vöhringen,48.27625,10.07704
-Compleo DE-Wackersdorf Oskar-Von-Miller-Straße,49.318635,12.231857
 Compleo DE-Warburg Hüffertstraße,51.488403,9.139116
 Compleo DE-Weißenfels Drei Wege,51.198024,11.998329
-Compleo DE-Wertingen Augsburger Straße,48.55863,10.68955
-Compleo DE-Wiehl Zum Scherbusch,50.97636,7.5727
 Compleo DE-Winterberg Remmeswiese,51.200872,8.525441
 Compleo DE-Wolfenbüttel Bahnhof,52.15985,10.532172
 Compleo DE-Wolfenbüttel Robert-Everlien-Platz,52.158728,10.539087
 Compleo DE-Wolfsburg Poststrasse,52.426676,10.783312
-Compleo DE-Wolfsburg Rathausstraße,52.419784,10.787315
 Compleo DE-Wolkenstein Hoflindenstraße,50.674456,13.123987
 Compleo DE-Wülfrath Am Diek,51.280363,7.033733
 Compleo DE-Zschopau Chemnitzer Str.,50.750228,13.068602
@@ -10116,6 +10087,7 @@ Electrify-Canada CA-Ottawa ON Coventry Rd,45.42069,-75.6517
 
 electrip BG-Kulata Кулата E79,41.38413,23.36178
 electrip BG-Студена Автомагистрала Струма,42.58385,23.11996,20
+electrip GR-Igoumenitsa Ηγουμενίτσα Leof. 49 Martiron,39.49733,20.26587
 electrip GR-Zografou Porto Elea Camping,40.16946,23.8646
 electrip HR-Jablanovec Zaprešićka Westgate,45.87226,15.827895
 electrip HR-Josipdol D23,45.18348,15.28681
@@ -12688,11 +12660,19 @@ ENTEGA DE-Weiterstadt LOOP5,49.89237,8.60564
 ENTEGA DE-Weiterstadt LOOP5,49.8931,8.60577
 
 enviaM DE-Bitterfeld-Wolfen Niels-Bohr-Straße,51.624576,12.307812
+enviaM DE-Chemnitz Ringstraße,50.865,12.86492
 enviaM DE-Großräschen Seestraße,51.57624,14.01016
 enviaM DE-Halle (Saale) Magdeburger Straße,51.48195,11.9827
+enviaM DE-Herzberg Wilhelm-Pieck-Ring,51.69303,13.22887
+enviaM DE-Hoym Ascherslebener Straße,51.78514,11.32836
+enviaM DE-Klostermansfeld Bahnhofstraße,51.5756,11.4942
+enviaM DE-Kolkwitz Annahofer Graben,51.71787,14.2885
 enviaM DE-Köthen (Anhalt) Dessauer Straße,51.764312,11.986108
 enviaM DE-Leuna NOVA,51.3461,12.17607
 enviaM DE-Limbach-Oberfrohna Johann-Esche-Straße,50.84695,12.78807
+enviaM DE-Markkleeberg Dietrich-Bonhoeffer-Platz,51.28296,12.36972
+enviaM DE-Meuselwitz Zeitzer Straße,51.04706,12.29333
+enviaM DE-Niederdorf Chemnitzer Straße,50.72212,12.7842
 enviaM DE-Oberlungwitz Am Sachsenring,50.789372,12.693952
 enviaM DE-Oberlungwitz Am Sachsenring,50.789727,12.6947
 enviaM DE-Thale Hexentanzplatz,51.73248,11.0273
@@ -12990,6 +12970,8 @@ EVN DE-Nordhausen Engelsburg,51.503143,10.793401
 EVN MK-Gevgelija Граничен Премин Богородица,41.13812,22.54435
 EVN MK-Negotino Неготино ул. Железничка бр.,41.4995,22.10018
 EVN MK-Skopje Скопје International Airport,41.9606,21.62992
+
+EVOASIS TW-Checheng Township Haikou Rd,22.0897,120.71585
 
 evolt GB-Wick River St,58.44194,-3.09191
 
@@ -15035,6 +15017,8 @@ Hrvatski-Telekom HR-Sveti Vid-Miholjice,45.13105,14.543484
 Hrvatski-Telekom HR-Zagreb Iločka ul.,45.79954,15.95982
 Hrvatski-Telekom HR-Zagreb Ul. Velimira Škorpika,45.80242,15.85505
 
+HUHN DE-Wiehl Zum Scherbusch,50.97636,7.5727
+
 Hyundai FR-Saint-Vigor-le-Grand Bd Winston Churchill,49.28375,-0.68734,30
 
 I2GO SE-Grums Nyängsgatan,59.36735,13.14465,15
@@ -16069,6 +16053,8 @@ IZIVIA FR-Saint-Malo Avenue de Launay Breton,48.6259,-1.9907
 IZIVIA FR-Saint-Malo Rue de la Grassinais,48.6219,-1.98666
 IZIVIA FR-Saint-Valery-sur-Somme Cavée Lévêque,50.17327,1.63742
 
+Jenny DE-Bad Oldesloe Lily-Braun Straße,53.80245,10.40282
+
 JET AT-Linz Freistädter Straße,48.3283,14.32136
 JET AT-Wien Laxenburger Straße,48.1358,16.35648
 JET AT-Wiener Neustadt Puchberger Straße,47.8055,16.21124,30
@@ -16582,6 +16568,7 @@ KELAG AT-Raststation Eben,47.4209,13.38188
 KELAG AT-Raststation Wörthersee,46.62995,14.09486,25
 KELAG AT-Saag Klagenfurter Straße,46.62277,14.07299
 KELAG AT-Spittal an der Drau Zernattostraße,46.79864,13.49021
+Kelag AT-St. Lorenzen im Lesachtal Gailtal Straße,46.70204,12.7797
 KELAG AT-St. Veit an der Glan Kalten Kellerstraße,46.765773,14.377244
 KELAG AT-St. Veit an der Glan Völkermarkter Straße,46.765281,14.369795
 KELAG AT-Velden Villacher Straße,46.6141,14.03883
@@ -16641,10 +16628,12 @@ KWMS AT-Finkenstein Strand-Nord,46.5723,13.93277
 KWMS AT-Fusch Ferleiten,47.168672,12.813372
 
 LADEFIX DE-Aue Wettinerstraße,50.586075,12.700782
+LADEFIX DE-Bannewitz An der Zschauke,51.00116,13.7202
 LADEFIX DE-Burgstädt Beethovenstrasse,50.912944,12.809113
 LADEFIX DE-Chemnitz Zwickauer Straße,50.816214,12.842483
 LADEFIX DE-Grüna Chemnitzer Straße,50.81093,12.787175
 LADEFIX DE-Limbach-Oberfrohna Helenenstraße,50.858479,12.775807
+LADEFIX DE-Oberlichtenau Auerswalder Straße,50.90572,12.9624
 LADEFIX DE-Stollberg Lutherstrasse,50.710134,12.777614
 
 Ladegrün DE-Arnstein Cancale-Platz,49.976265,9.967147
@@ -16691,12 +16680,16 @@ LEW DE-Deffingen,48.433701,10.292805,10
 LEW DE-Donauwörth Pflegstraße,48.719853,10.776058
 LEW DE-Friedberg Bäckerei Scharold,48.406461,10.952062,10
 LEW DE-Friedberg McDonald´s,48.407362,10.95251,10
+LEW DE-Günzburg Siemensstraße,48.45992,10.27983
 LEW DE-Herrsching Am Ländtbogen,47.989992,11.171137
 LEW DE-Jengen,48.003413,10.721623
 LEW DE-Krumbach,48.245095,10.361661,10
+LEW DE-Landsberg am Lech Sandauer Straße,48.05452,10.87695
 LEW DE-Pfaffenhausen,48.120746,10.457604
 LEW DE-Pforzen,47.933544,10.607971
+LEW DE-Stadtbergen Benzstraße,48.37898,10.84775
 LEW DE-Steingaden Kissingerstraße,47.702092,10.861947
+LEW DE-Wertingen Augsburger Straße,48.55863,10.68955
 LEW DE-Wertingen Marktplatz,48.563,10.68294,30
 
 LichtBlick DE-Andernach Am weißen Haus,50.418419,7.418061
@@ -17761,6 +17754,7 @@ LSW DE-Weyhausen Wolfsburger Straße,52.46196,10.72911
 LSW DE-Wolfsburg Franz-Liszt-Straße,52.41792,10.7283
 LSW DE-Wolfsburg Kettelerstraße,52.42338,10.79221
 LSW DE-Wolfsburg Klausenerstraße,52.38875,10.75416
+LSW DE-Wolfsburg Rathausstraße,52.41978,10.7873
 LSW DE-Wolfsburg Vogtlandweg,52.40914,10.75298
 LSW DE-Wolfsburg Willy-Brandt-Platz,52.42893,10.7858
 
@@ -19502,6 +19496,8 @@ Pfalzwerke DE-Würzburg Robert-Bunsen-Straße,49.797224,9.991293
 Pfalzwerke DE-Zweibrücken Londoner Bogen,49.230819,7.406062
 Pfalzwerke DE-Zweibrücken Wilkstraße,49.25174,7.34451
 
+Pirk DE-Radevormwald Heisenbergstraße,51.20315,7.37866
+
 PiteEnergi SE-Piteå Västra Kajvägen,65.31615,21.45845
 
 PitPoint FR-Marseille Esp. de la Tourette,43.2977,5.36413
@@ -20014,6 +20010,7 @@ RoboCharge NL-Dalen Reindersdijk,52.67694,6.77534
 RoboCharge NL-Kamperland Golfslag,51.58942,3.6726
 
 RW-Bodensee DE-Langenargen Bleichweg,47.59338,9.5508
+RW-Bodensee DE-Langenargen Untere Seestraße,47.59812,9.53808
 
 Révéo FR-Gignac Parc d’Activité de Camalcé,43.64964,3.54682
 Révéo FR-Lavelanet Pl. Jeanne d’Arc,42.93532,1.8503,25
@@ -20812,6 +20809,8 @@ SW-Aalen DE-Aalen Kocherstraße,48.817544,10.12691
 SW-Ahrensburg DE-Ahrensburg Vogteiweg,53.68595,10.23964
 SW-am-See DE-Friedrichshafen Eckenerstraße,47.65254,9.4846
 SW-am-See DE-Friedrichshafen Karlstraße,47.650315,9.478475
+SW-am-See DE-Friedrichshafen Kornblumenstraße,47.66812,9.48806
+SW-Annaberg-Buchholz DE-Bärenstein Sächsischer Platz,50.49862,13.0281
 SW-Augsburg DE-Augsburg Am Schwall,48.364907,10.903411
 SW-Augsburg DE-Augsburg Augsburger Straße,48.363827,10.874827
 SW-Augsburg DE-Augsburg Friedberger Straße,48.355436,10.948743
@@ -20826,6 +20825,7 @@ SW-Bad-Homburg DE-Bad Homburg Horexstraße,50.219575,8.621767
 SW-Bad-Pyrmont DE-Bad Pyrmont Bahnhofstraße,51.97901,9.26339
 SW-Bad-Reichenhall DE-Bad Reichenhall Kaiserplatz,47.72497,12.8786
 SW-Bad-Salzuflen DE-Bad Salzuflen Riesestraße,52.07824,8.75546
+SW-Bad-Salzuflen DE-Bad Salzuflen Uferstraße,52.06696,8.75456
 SW-Baden-Baden DE-Baden-Baden Ludwig-Wilhelm-Straße,48.755041,8.241229
 SW-Bamberg DE-Bamberg Forchheimer Straße,49.88007,10.91884
 SW-Bamberg DE-Bamberg Mußstraße,49.897828,10.877873
@@ -20895,6 +20895,7 @@ SW-Coesfeld DE-Coesfeld Am Tüskenbach,51.93736,7.15691
 SW-Dachau DE-Dachau Burgfriedenstraße,48.25955,11.429
 SW-Dessau DE-Dessau-Roßlau Gropiusallee,51.83831,12.22681
 SW-Dillingen DE-Dillingen/Saar Mathildenstraße,49.34676,6.70933
+SW-Dillingen DE-Dillingen/Saar Werkstraße,49.35666,6.73413
 SW-Dinslaken DE-Dinslaken Am Neutor,51.563239,6.742098
 SW-Ditzingen DE-Ditzingen Zeissstraße,48.822039,9.083255
 SW-Duisburg DE-Duisburg Bungertstraße,51.42802,6.75253
@@ -20931,6 +20932,7 @@ SW-Flensburg DE-Flensburg Batteriestraße,54.8047,9.429783
 SW-Flensburg DE-Flensburg Nordergraben,54.78729,9.43153
 SW-Forchheim DE-Forchheim Äußere Nürnberger Straße,49.704445,11.060294
 SW-Frankenthal DE-Frankenthal Jahnplatz,49.53048,8.35475
+SW-Freiberg DE-Freiberg Hornstraße,50.91645,13.34712
 SW-Freising DE-Freising Landshuter Straße,48.40651,11.75737
 SW-Freudenstadt DE-Freudenstadt Marktplatz,48.46556,8.41229
 SW-Gaggenau DE-Gaggenau Amalienbergstraße,48.79997,8.3181
@@ -20950,6 +20952,7 @@ SW-Gießen DE-Gießen Senckenbergstraße,50.587169,8.677625
 SW-Gießen DE-Gießen Stolzenmorgen,50.592705,8.721194,20
 SW-Gießen DE-Heuchelheim Linnpfad,50.584673,8.618095
 SW-Gießen DE-Pohlheim Ludwigstraße,50.534164,8.715051
+SW-Glauchau DE-Glauchau Rudolf-Breitscheid-Straße,50.81966,12.55058
 SW-Glauchau DE-Glauchau Sachsenallee,50.82716,12.5199
 SW-Gotha DE-Gotha Friedrichstraße,50.947563,10.709862
 SW-Greven DE-Greven Hinter der Lake,52.092794,7.608831
@@ -20981,6 +20984,7 @@ SW-Ilmenau DE-Ilmenau Bahndamm,50.684597,10.922379
 SW-Ilmenau DE-Ilmenau Mühlgraben,50.68395,10.91684
 SW-Ingolstadt DE-Ingolstadt Friedrichshofener Straße,48.772917,11.38598
 SW-Inzell DE-Inzell Traunsteiner Straße,47.76516,12.74745
+SW-Iserlohn DE-Iserlohn Seeuferstraße,51.38744,7.7119
 SW-Itzehoe DE-Itzehoe An der Post,53.92316,9.51562
 SW-Jena-Pößneck DE-Jena Dornburger Straße,50.943428,11.593738
 SW-Jena-Pößneck DE-Jena Eichplatz,50.928242,11.585432
@@ -21068,6 +21072,7 @@ SW-Neumünster DE-Neumünster Kuhberg,54.074778,9.984153
 SW-Neumünster DE-Neumünster Vicelinstraße,54.08174,9.98635
 SW-Neuruppin DE-Neuruppin Präsidentenstraße,52.92295,12.8037
 SW-Neuss DE-Neuss Holzheimer Weg,51.182733,6.682412
+SW-Neustadt DE-Neustadt am Rübenberge Leinstraße,52.51568,9.4624
 SW-Neustrelitz DE-Feldberg Weidendamm,53.33599,13.44183
 SW-Neustrelitz DE-Neustrelitz Am Bresebrink,53.28005,12.96672
 SW-Neustrelitz DE-Neustrelitz Am Kiefernwald,53.36156,13.09124,30
@@ -21077,6 +21082,7 @@ SW-Norden DE-Norden Heringstraße,53.591027,7.211188
 SW-Norderstedt DE-Norderstedt Am Hallenbad,53.68999,10.00121
 SW-Norderstedt DE-Norderstedt Beamtenlaufbahn,53.70653,9.99399
 SW-Norderstedt DE-Norderstedt Europaallee,53.685831,9.98865
+SW-Nordfriesland DE-Enge-Sande Lecker Straße,54.7401,8.95568
 SW-Nürtingen DE-Nürtingen Mühlstraße,48.628394,9.334268
 SW-Oberkirch DE-Oberkirch Hammermatt,48.53636,8.06422,30
 SW-Olching DE-Olching Gewerbering,48.22721,11.33506
@@ -21120,6 +21126,7 @@ SW-Stade DE-Stade Bremervörder Straße,53.59572,9.437753
 SW-Staßfurt DE-Autohof Brumby,51.897,11.6922,30
 SW-Steinburg DE-Itzehoe Klosterbrunnen,53.93629,9.51815
 SW-Stendal DE-Stendal Bruchweg,52.60838,11.86522
+SW-Stendal DE-Stendal Heerener Straße,52.58835,11.87177
 SW-Stendal DE-Tangermünde Gewerbepark,52.54992,11.95729
 SW-Stralsund DE-Altenkirchen Marktstraße,54.63305,13.34478
 SW-Stralsund DE-Kramerhof Grünhufer Bogen,54.321117,13.04887
@@ -21882,6 +21889,8 @@ TWS DE-Weingarten Gablerstraße,47.8078,9.63948
 
 Ultra-Fast SE-Varberg Gunnestorpsvägen,57.16941,12.276915,25
 
+Umweltanalytik-Kessel DE-Ahrensburg Kurt-Fischer-Straße,53.68333,10.2615
+
 UNI-ELEKTRO DE-Dresden Bamberger Straße,51.035756,13.710349
 
 Unified FI-Lahti Pasaasi,60.93526,25.62618
@@ -22063,6 +22072,7 @@ vaylens DE-Bodenheim Lange Ruthe,49.92572,8.32442,18
 vaylens DE-Bottrop Brauerstraße,51.52148,6.92796
 vaylens DE-Cottbus Thiemstraße,51.7487,14.32812
 vaylens DE-Friedrichshafen Eckenerstraße,47.65228,9.48248
+vaylens DE-Geisenheim Winkeler Straße,49.98517,7.96964
 vaylens DE-Gersthofen Porschestraße,48.40893,10.87172,20
 vaylens DE-Gescher Schüringsweg,51.9428,7.02548,30
 vaylens DE-Gladbeck Karl-Schneider-Straße,51.57298,6.97147,30
@@ -22070,6 +22080,7 @@ vaylens DE-Herne Am Neumarkt,51.5412,7.2245
 vaylens DE-Leuna NOVA,51.34505,12.17852
 vaylens DE-Lindlar Hausgrund,51.01835,7.2827
 vaylens DE-Mainz Budenheimer Straße (Juxplatz),50.00075,8.20496
+vaylens DE-Neustadt in Holstein Eutiner Straße,54.10096,10.7967
 vaylens DE-Oberhausen Centro,51.49124,6.87911
 vaylens DE-Plauen Rittergut,50.49175,12.0891
 vaylens DE-Schenefeld Achter de Weiden,53.60694,9.82984
@@ -22257,6 +22268,7 @@ Volkswagen DE-Kempten (Allgäu) Heisinger Str. 2,47.760395,10.332671
 Volkswagen DE-Kempten Johann-Abt-Straße,47.75343,10.32726
 Volkswagen DE-Kirchhain Niederrheinische Straße,50.824486,8.941306
 Volkswagen DE-Kirchzarten Zartener Straße,47.96978,7.95185
+Volkswagen DE-Krumbach (Schwaben) Erwin-Bosch-Ring,48.23718,10.37302
 Volkswagen DE-Kulmbach Leitenacker,50.100325,11.397027
 Volkswagen DE-Köln Fröbelstraße,50.94512,6.91674
 Volkswagen DE-Köln Robert-Perthel-Straße 65 - 69,50.989513,6.907349
