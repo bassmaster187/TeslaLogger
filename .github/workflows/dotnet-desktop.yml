@@ -58,6 +58,12 @@ jobs:
       Test_Project_Path: UnitTestsTeslalogger\UnitTestsTeslalogger.csproj                 # Replace with the path to your test project, i.e. MyWpfApp.Tests\MyWpfApp.Tests.csproj.
      
     steps:
+
+    - name: Remove .lock files
+      shell: pwsh
+      run: Remove-Item .git/refs/tags/*.lock -Force -ErrorAction SilentlyContinue
+
+
     - name: Checkout
       uses: actions/checkout@v3
       with:

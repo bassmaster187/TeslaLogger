@@ -7,16 +7,16 @@ You are responsible for the required and correct car configuration for TeslaLogg
 Theoreticaly each TeslaLogger update, that uses more signals than in your config defined, can couse missed data. Be aware of it.
 
 ## Purpose: ##
-You can use your own local server, with own car configs, other signal frequency and also utilize 10€/10$ account coupon that Tesla gives you in your developer account.
+You can use your own local server, with own car configs, other signal frequency and also utilize 10€/10$ account discount that Tesla gives you in your developer account.
 
 ## Requierments: ##
 Only local intances are supported (without authentification)!
 
 For more information: https://github.com/teslamotors/fleet-telemetry?tab=readme-ov-file#configuring-and-running-the-service
 
-- All needed keys, certifikates, car profiles etc. are available and functioning
-- Tesla Http Proxy running
-- Tesla Telemetry Server running
+- All needed keys, certificates, car profiles etc. are available and functioning
+- Tesla Http Proxy is running
+- Tesla Telemetry Server is running
 - Telemetry Server outputs via ZeroMQ protocol
 <details>
 
@@ -69,53 +69,55 @@ For more information: https://github.com/teslamotors/fleet-telemetry?tab=readme-
     "hostname": "telemetry.yourdomain.com",
     "port": 12345,
     "ca": "${ca_data}",
+    "prefer_typed": true,
     "fields": {
-      "PackVoltage": { "interval_seconds": 10 },
-      "PackCurrent": { "interval_seconds": 10 },
-      "ACChargingPower": { "interval_seconds": 10 },
-      "ACChargingEnergyIn" : { "interval_seconds": 60 },
-      "DCChargingPower": { "interval_seconds": 1 },
-      "DCChargingEnergyIn" : { "interval_seconds": 30 },
-      "ChargeLimitSoc": { "interval_seconds": 30 },
+      "PackVoltage": { "interval_seconds": 10, "resend_interval_seconds": 120, "minimum_delta": 0.5 },
+      "PackCurrent": { "interval_seconds": 10, "resend_interval_seconds": 120, "minimum_delta": 0.2 },
+      "ACChargingPower": { "interval_seconds": 10, "resend_interval_seconds": 120, "minimum_delta": 0.1 },
+      "ACChargingEnergyIn" : { "interval_seconds": 60, "resend_interval_seconds": 600, "minimum_delta": 0.1 },
+      "DCChargingPower": { "interval_seconds": 1, "resend_interval_seconds": 120, "minimum_delta": 0.1 },
+      "DCChargingEnergyIn" : { "interval_seconds": 30, "resend_interval_seconds": 120, "minimum_delta": 0.1},
+      "ChargeLimitSoc": { "interval_seconds": 30, "resend_interval_seconds": 86400, "minimum_delta": 1 },
       "FastChargerPresent": { "interval_seconds": 5 },
-      "Location": { "interval_seconds": 1 },
+      "Location": { "interval_seconds": 1, "minimum_delta": 3},
       "VehicleSpeed": { "interval_seconds": 1 },
-      "Gear": { "interval_seconds": 5 },
+      "Gear": { "interval_seconds": 5, "resend_interval_seconds": 120 },
       "EstBatteryRange": { "interval_seconds": 30 },
       "RatedRange": { "interval_seconds": 30 },
       "IdealBatteryRange": { "interval_seconds": 30 },
-      "Soc": { "interval_seconds": 15 },
-      "ModuleTempMax": { "interval_seconds": 60 },
+      "Soc": { "interval_seconds": 15, "resend_interval_seconds": 300, "minimum_delta": 0.1 },
+      "ModuleTempMax": { "interval_seconds": 60 , "minimum_delta": 0.1 },
       "NumModuleTempMax": { "interval_seconds": 60 },
-      "ModuleTempMin": { "interval_seconds": 60 },
+      "ModuleTempMin": { "interval_seconds": 60 , "minimum_delta": 0.1 },
       "NumModuleTempMin": { "interval_seconds": 60 },
       "NumBrickVoltageMax": { "interval_seconds": 60 },
-      "BrickVoltageMax": { "interval_seconds": 60 },
+      "BrickVoltageMax": { "interval_seconds": 60, "minimum_delta": 0.001 },
       "NumBrickVoltageMin": { "interval_seconds": 60 },
-      "BrickVoltageMin": { "interval_seconds": 60 },
+      "BrickVoltageMin": { "interval_seconds": 60, "minimum_delta": 0.001 },
       "Odometer": { "interval_seconds": 30 },
-      "EnergyRemaining": { "interval_seconds": 60 },
+      "EnergyRemaining": { "interval_seconds": 60, "minimum_delta": 0.1 },
       "TimeToFullCharge": { "interval_seconds": 60 },
-      "EstBatteryRange": { "interval_seconds": 60 },
+      "EstBatteryRange": { "interval_seconds": 60, "minimum_delta": 0.1 },
       "SentryMode": { "interval_seconds": 10 },
       "ChargeState": { "interval_seconds": 10 },
-      "DetailedChargeState": { "interval_seconds": 10 },
+      "DetailedChargeState": { "interval_seconds": 10, "resend_interval_seconds": 120 },
       "BatteryHeaterOn": { "interval_seconds": 10 },
-      "DoorState": { "interval_seconds": 10 },
-      "FdWindow": { "interval_seconds": 10 },
-      "FpWindow": { "interval_seconds": 10 },
-      "RdWindow": { "interval_seconds": 10 },
-      "RpWindow": { "interval_seconds": 10 },
-      "TpmsPressureFl": { "interval_seconds": 10 },
-      "TpmsPressureFr": { "interval_seconds": 10 },
-      "TpmsPressureRl": { "interval_seconds": 10 },
-      "TpmsPressureRr": { "interval_seconds": 10 },
+      "DoorState": { "interval_seconds": 10, "resend_interval_seconds": 300 },
+      "FdWindow": { "interval_seconds": 10, "resend_interval_seconds": 300 },
+      "FpWindow": { "interval_seconds": 10, "resend_interval_seconds": 300 },
+      "RdWindow": { "interval_seconds": 10, "resend_interval_seconds": 300 },
+      "RpWindow": { "interval_seconds": 10, "resend_interval_seconds": 300 },
+      "TpmsPressureFl": { "interval_seconds": 10, "resend_interval_seconds": 300, "minimum_delta": 0.01 },
+      "TpmsPressureFr": { "interval_seconds": 10, "resend_interval_seconds": 300, "minimum_delta": 0.01 },
+      "TpmsPressureRl": { "interval_seconds": 10, "resend_interval_seconds": 300, "minimum_delta": 0.01 },
+      "TpmsPressureRr": { "interval_seconds": 10, "resend_interval_seconds": 300, "minimum_delta": 0.01 },
+      "SpeedLimitMode": { "interval_seconds": 30 },
       "VehicleName": { "interval_seconds": 600 },
       "CarType": { "interval_seconds": 600 },
       "Trim": { "interval_seconds": 600 },
       "Version": { "interval_seconds": 600 },
-      "InsideTemp": { "interval_seconds": 60 },
-      "OutsideTemp": { "interval_seconds": 60 },
+      "InsideTemp": { "interval_seconds": 60, "minimum_delta": 0.1 },
+      "OutsideTemp": { "interval_seconds": 60, "minimum_delta": 0.1 },
       "Locked": { "interval_seconds": 5 },
       "ChargePortDoorOpen": { "interval_seconds": 10 },
       "PreconditioningEnabled": { "interval_seconds": 30 },
@@ -132,7 +134,14 @@ For more information: https://github.com/teslamotors/fleet-telemetry?tab=readme-
       "SoftwareUpdateExpectedDurationMinutes": { "interval_seconds": 600 },
       "SoftwareUpdateInstallationPercentComplete": { "interval_seconds": 600 },
       "SoftwareUpdateScheduledStartTime": { "interval_seconds": 600 },
-      "WiperHeatEnabled": { "interval_seconds": 60 }
+      "WiperHeatEnabled": { "interval_seconds": 10 },
+      "RouteTrafficMinutesDelay": { "interval_seconds": 10 },
+      "MilesToArrival": { "interval_seconds": 10 },
+      "MinutesToArrival": { "interval_seconds": 10 },
+      "OriginLocation": { "interval_seconds": 10 },
+      "DestinationLocation": { "interval_seconds": 10 },
+      "DestinationName": { "interval_seconds": 10 },
+      "ExpectedEnergyPercentAtTripArrival": { "interval_seconds": 10 }
     }
   }
 }
@@ -156,6 +165,9 @@ You need to know the local IPs and ports of the HTTP Proxy and Telemetry server
             </setting>
             <setting name="TelemetryServerType" serializeAs="String">
                 <value>ZMQ</value>
+            </setting>
+            <setting name="TelemetryClientID" serializeAs="String">
+                <value>xxxxxxxxxx-xxxxxx-xxxxx-xxxxxxxxx</value>
             </setting>
 ```
 </details>

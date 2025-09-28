@@ -166,10 +166,10 @@ namespace UnitTestsTeslalogger
             string ret = v.ToString();
             Console.WriteLine(ret);
 
-            Assert.AreEqual(544.41, kwh);
-            Assert.AreEqual(false, charging);
-            Assert.AreEqual(5755.34, utility_meter_kwh);
-            Assert.AreEqual("0.133.0", version);
+            Assert.AreEqual(2043.66, kwh);
+            Assert.AreEqual(true, charging);
+            Assert.AreEqual(1234.56, utility_meter_kwh);
+            Assert.AreEqual("0.207.5", version);
         }
 
         [TestMethod]
@@ -185,10 +185,10 @@ namespace UnitTestsTeslalogger
             string ret = v.ToString();
             Console.WriteLine(ret);
 
-            Assert.AreEqual(544.41, kwh);
-            Assert.AreEqual(false, charging);
-            Assert.AreEqual(5755.34, utility_meter_kwh);
-            Assert.AreEqual("0.133.0", version);
+            Assert.AreEqual(2043.66, kwh);
+            Assert.AreEqual(true, charging);
+            Assert.AreEqual(1234.56, utility_meter_kwh);
+            Assert.AreEqual("0.207.5", version);
         }
 
         [TestMethod]
@@ -207,7 +207,7 @@ namespace UnitTestsTeslalogger
             Assert.AreEqual(6716.148, kwh);
             Assert.AreEqual(false, charging);
             Assert.AreEqual(null, utility_meter_kwh);
-            Assert.AreEqual("0.133.0", version);
+            Assert.AreEqual("0.207.5", version);
         }
 
         [TestMethod]

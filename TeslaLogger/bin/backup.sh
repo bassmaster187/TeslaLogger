@@ -21,10 +21,10 @@ else
     mysqldump -uroot -pteslalogger  --single-transaction --routines --triggers teslalogger | gzip -9 > $SQLDUMP
 fi
 
-if test -f "/etc/teslalogger/my-backup.sh"; then
-	gzip -c /etc/teslalogger/geofence-private.csv > $GEOFENCE
-elif test -f "/etc/teslalogger/data/geofence-private.csv"; then 
+if test -f "/etc/teslalogger/data/geofence-private.csv"; then 
 	gzip -c /etc/teslalogger/data/geofence-private.csv > $GEOFENCE
+elif test -f "/etc/teslalogger/geofence-private.csv"; then
+	gzip -c /etc/teslalogger/geofence-private.csv > $GEOFENCE
 else
 	echo "No geofence-private.csv file found"
 fi
