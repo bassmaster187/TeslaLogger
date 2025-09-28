@@ -59,9 +59,10 @@ jobs:
      
     steps:
 
-    - name: Remove stale git lock files
-      run: |
-        rm -f .git/refs/tags/*.lock
+    - name: Remove .lock files
+      shell: pwsh
+      run: Remove-Item .git/refs/tags/*.lock -Force -ErrorAction SilentlyContinue
+
 
     - name: Checkout
       uses: actions/checkout@v3
