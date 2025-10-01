@@ -7030,6 +7030,7 @@ Allego FR-Chalon-sur-Saône Rue de Paris,46.7986,4.84796,30
 Allego FR-Chalon-sur-Saône Rue Thomas Dumorey,46.77422,4.8589
 Allego FR-Champniers Rue de l’Auvent,45.6927,0.18157
 Allego FR-Châteauroux Rue Pierre Gaultier,46.80649,1.6979
+Allego FR-Crêches-sur-Saône Bouchardes,46.25443,4.7915
 Allego FR-Fécamp Rue Charles Leborgne,49.75422,0.37236
 Allego FR-Golbey Rue du Général Leclerc,48.19105,6.42282
 Allego FR-Géant Casino Montpellier,43.588535,3.888928
@@ -7435,6 +7436,7 @@ Audi PL-Wrocław al. Karkonoska,51.06301,16.99938
 Audi RO-Râmnicu Vâlcea Strada Ştrandului,45.0732,24.34994
 
 AutoEnterprise UA-Kharkiv Харків Нетіченська набережна,49.98405,36.22405
+AutoEnterprise UA-Кочерів Vul. Kyyivsʹka,50.36167,29.34178
 AutoEnterprise UA-Ужгород Капушанська вулиця,48.61192,22.2644
 AutoEnterprise UA-Івано-Франківськ Угорники,48.91535,24.74944
 
@@ -7597,6 +7599,7 @@ Berliner-SW DE-Berlin Dresdener Straße,52.50097,13.41696
 Berliner-SW DE-Berlin Dudenstraße,52.4851,13.38405
 Berliner-SW DE-Berlin Elsenstraße,52.4853,13.44923
 Berliner-SW DE-Berlin Markgrafendamm,52.49863,13.4654
+Berliner-SW DE-Berlin Potsdamer Platz,52.51,13.3757
 Berliner-SW DE-Berlin Schöneberger Straße,52.46425,13.3301,30
 Berliner-SW DE-Berlin Tile-Brügge-Weg,52.5916,13.29266
 Berliner-SW DE-Berlin Wansdorfer Platz,52.55774,13.20596
@@ -8246,6 +8249,7 @@ ChargePoint US-Kalkaska MI US-131,44.74319,-85.17578
 ChargePoint US-Kanab UT N 100 E,37.04846,-112.52624
 ChargePoint US-Kawkawlin MI E Beaver Rd,43.66771,-84.01506
 ChargePoint US-Kearney NE W Talmadge Rd,40.674653,-99.093111
+ChargePoint US-Moab UT N 100 W,38.57783,-109.55246
 ChargePoint US-Monticello UT South Main Street,37.869552,-109.343464
 ChargePoint US-Okemah OK S Woody Guthrie St,35.42425,-96.29889
 ChargePoint US-Orem City Center,40.29809,-111.69376,120
@@ -9019,6 +9023,7 @@ CutPower DE-Sylt Kiarwai,54.902477,8.328275
 CutPower DE-Wilhelmshaven Ernst-Barlach-Straße,53.52719,8.064548
 
 da-emobil AT-Ansfelden Stelzhammerstraße,48.204409,14.259646
+da-emobil AT-Arnreit,48.52238,13.99455
 da-emobil AT-Braunau am Inn Industriezeile,48.24807,13.0638
 da-emobil AT-Breitenwang Kreckelmoosstraße,47.47977,10.73544
 da-emobil AT-Brunn am Gebirge Industriestraße,48.108443,16.30817
@@ -9097,6 +9102,7 @@ da-emobil AT-Zirl Zirlerberg,47.28164,11.22461
 da-emobil IT-Appiano Unterrainer Straße,46.49725,11.2577
 da-emobil IT-Curon Venosta Grafl Straße,46.80848,10.54025
 da-emobil IT-Glorenza Malserstraße,46.67234,10.55252
+da-emobil IT-Gomagoi Staatsstraße 38,46.57596,10.54062
 da-emobil IT-Laas Vinschgaustrasse,46.6179,10.6978
 da-emobil IT-Silandro Dammlplatz,46.62828,10.77693
 
@@ -12234,6 +12240,7 @@ Eneco DE-Landshut Wittstraße,48.53071,12.146114,30
 Eneco DE-Ludwigsburg Gänsfußallee,48.89199,9.17599
 Eneco DE-Pentling Hohengebrachinger Straße,48.97936,12.06739
 Eneco NL-Haarlem Emrikweg,52.39576,4.66413
+Eneco NL-Zoetermeer Zilverstraat,52.04378,4.50256
 
 Enefit EE-Jüri Harju maakond,59.358956,24.895166
 Enefit EE-Narva Tallinna mnt,59.37906,28.18792
@@ -12725,6 +12732,7 @@ ESARJ TR-Afyonkarahisar Merkez Dörtyol,38.793372,30.457982
 ESB GB-Belfast Lower Cres,54.58775,-5.93493
 ESB GB-Londonderry Waterside,54.99474,-7.30616
 ESB IE-Ballaghaderreen Market St,53.90212,-8.58408
+ESB IE-Ballycasheen Cork Rd,52.05977,-9.48086
 ESB IE-Ballyvoloon Park Ln,51.85285,-8.29555
 ESB IE-Bantry Harbour View Car Park,51.68172,-9.45705
 ESB IE-Bray Vevay Rd,53.19523,-6.1082
@@ -12737,6 +12745,7 @@ ESB IE-Falcarragh Strand Rd,55.13698,-8.1035
 ESB IE-Galway Headford Rd,53.2803,-9.04968
 ESB IE-Gortnaclohy Cork Rd,51.55377,-9.26242
 ESB IE-Kilgarve Athlone Road,53.32883,-8.1855
+ESB IE-Kilkenny Butt’s Green,52.6552,-7.25997
 ESB IE-Kilkenny Gaol Rd,52.64994,-7.25744
 ESB IE-Killarney Muckross Rd,52.053,-9.5071
 ESB IE-Killarney Plunkett St,52.05955,-9.50725
@@ -12744,6 +12753,7 @@ ESB IE-Letterkenny Kinnear Ln,54.95146,-7.73458
 ESB IE-Rathedmond Union Pl,54.2737,-8.48066
 ESB IE-Rochestown Rochestown Rd,51.87708,-8.3954
 ESB IE-Trim Off Castle Street,53.55391,-6.79228
+ESB IE-Waterford Butlerstown North,52.24127,-7.16982
 ESB IE-Waterford Parnell St,52.25879,-7.10867
 
 ESWE DE-Idstein Limburger Straße,50.223519,8.267802
@@ -12766,6 +12776,7 @@ etecnic ES-L’Espluga de Francolí Avinguda de Catalunya,41.39514,1.09843
 etecnic ES-Pamplona Av. de Navarra,42.78371,-1.63376
 etecnic ES-Ponts Avinguda Font de Valldans,41.91534,1.18544
 etecnic ES-Roses Carrer de la Riera Ginjolers,42.26355,3.17887
+etecnic ES-Salou Av. de Pau Casals,41.08414,1.1262
 etecnic ES-Sant Feliu de Guíxols Carrer de Cristòfol Colom,41.78139,3.03458
 etecnic ES-Santa Eulàlia de Ronçana Carrer Verge del Remei,41.64067,2.23259
 etecnic ES-Segorbe Av. Fray Luis Amigo,39.84834,-0.48888
@@ -12823,6 +12834,8 @@ Evergo DO-Bonao Calle Duarte,18.99137,-70.4317
 Evergo DO-Santo Domingo Av 27 de Febrero,18.47575,-69.91418
 Evergo DO-Santo Domingo Av. Lope de Vega,18.47947,-69.9315
 Evergo DO-Santo Domingo Av. Winston Churchill,18.47352,-69.94274
+
+Everters AT-Mühlgraben Oberweidau,47.67645,12.18296
 
 EvGateway US-Chugiak AK Birchwood Loop Rd,61.40312,-149.46762,20
 EvGateway US-Vernal UT S 500 E Ste 101,40.454329,-109.518367
@@ -14397,6 +14410,7 @@ Fines BG-Пролеша 8,42.783942,23.166997
 Fines BG-Русе бул. Христо Ботев,43.83214,25.97155
 Fines BG-Студена Автомагистрала Струма,42.58363,23.12,20
 Fines BG-Търговище Targovishte 4009,43.244632,26.54884
+Fines BG-Ясен Yasen,43.42648,24.50454
 
 Flo CA-Brownsburg QC Rte du Canton,45.63191,-74.39353
 Flo CA-Gloucester ON Ogilvie Rd,45.43582,-75.60518
@@ -15145,6 +15159,7 @@ IECharge FR-Vezin-le-Coquet Rue de la Belle Épine,48.1251,-1.75488
 Ignitis LT-Jonava Parko g.,55.07326,24.28165
 Ignitis LT-Klaipėda Baltijos pr.,55.68572,21.15422
 Ignitis LT-Liepāja Vētru iela,56.48325,21.00323
+Ignitis LT-Marijampolė Beržų g.,54.56668,23.36348
 Ignitis LT-Palanga Taikos g.,55.91943,21.07994
 Ignitis LT-Panevėžys Kniaudiškių g.,55.7273,24.33323
 Ignitis LT-Raseinių Gabšiai,55.3399,23.09851
@@ -16073,6 +16088,7 @@ IZIVIA FR-Avermes Zac Les Portes,46.59013,3.3305
 IZIVIA FR-Biscarrosse Av. de Laouadie,44.41094,-1.16763
 IZIVIA FR-Bordeaux Cr Charles Bricaud,44.88841,-0.56182
 IZIVIA FR-Bretteville-sur-Odon Av. du Fresne,49.16436,-0.42333,25
+IZIVIA FR-Béziers Avenue de la Voie Domitienne,43.3484,3.2506
 IZIVIA FR-Cournon-d’Auvergne Av. Maréchal Leclerc,45.73998,3.17278,30
 IZIVIA FR-Dunkerque Av. du Stade,51.03307,2.39317
 IZIVIA FR-Fécamp Bd de la République,49.75933,0.37653
@@ -16617,6 +16633,8 @@ KEW DE-Neunkirchen Margarethe-Bacher-Straße,49.34578,7.16772
 KH-Energie DE-Winterberg Am Eschenberg,51.24578,8.52863
 
 Kia BG-Sofia Gorublyane Mladost,42.636691,23.415721
+
+Kilowatt MA-CasablancaRoute de Bouskoura,33.48726,-7.63375
 
 KLC PT-Cambeses Avenida Fonte Cova,41.3002,-8.7061
 KLC PT-Canidelo R. Nova de Alvites,41.1276,-8.6508
@@ -17635,6 +17653,7 @@ Lidl FR-Vitrolles Av. Jean Monnet,43.42349,5.28486
 Lidl FR-Wissembourg All. des Peupliers Altenstadt,49.03075,7.95498
 Lidl GB-Witney New Cl Ln,51.7736,-1.4931
 Lidl GR-Anatoli Ανατολή Digeni Akrita,39.6278,20.8594
+Lidl GR-Iraklion Ηράκλειο Krinon,35.3142,25.1412
 Lidl GR-Kallithea Καλλιθέα Epar.Od. Paliouriou-Afitou,40.06055,23.43108
 Lidl GR-Lefkada Λευκάδα Ep.Od. Lefkadas,38.81592,20.7115
 Lidl GR-Limenas Thasou Λιμένας Θάσου Dimitriadou,40.74142,24.57825
@@ -19259,6 +19278,7 @@ Pfalzwerke DE-Heßheim Frankenthaler Straße,49.54404,8.31443
 Pfalzwerke DE-Hochspeyer Wiesenstraße 3,49.442894,7.896466
 Pfalzwerke DE-Hofheim am Taunus Nordring 5-9,50.092613,8.456858
 Pfalzwerke DE-Hohen Neuendorf Rosenstraße,52.709677,13.267081
+Pfalzwerke DE-Homburg Am Forum,49.31525,7.3337
 Pfalzwerke DE-Homburg Am Zunderbaum,49.33576,7.30758
 Pfalzwerke DE-Hoppegarten Bollensdorfer Weg 2-4,52.502188,13.665073
 Pfalzwerke DE-Horb am Neckar Kirschbäumle,48.458618,8.695732
@@ -19597,6 +19617,7 @@ Polenergia PL-Odolion Szosa Ciechocińska,52.870315,18.75093
 Polenergia PL-Studzianki,51.504996,19.877787
 Polenergia PL-Suwałki Dubowo Drugie,54.051199,22.893792
 
+Polyfazer CZ-Cheb Svatý Kříž,50.0468,12.34922
 Polyfazer CZ-Kosmonosy Boleslavská,50.43351,14.92516
 Polyfazer RO-Cornu de Jos DN1,45.148981,25.697431
 
@@ -20988,6 +21009,7 @@ SW-Freising DE-Freising Landshuter Straße,48.40626,11.7572
 SW-Freudenstadt DE-Freudenstadt Marktplatz,48.46556,8.41229
 SW-Gaggenau DE-Gaggenau Amalienbergstraße,48.79997,8.3181
 SW-Geesthacht DE-Großhansdorf Schaapkamp,52.39088,13.0629
+SW-Geesthacht DE-Großhansdorf Schaapkamp,53.66303,10.28667
 SW-Gießen DE-Biebertal Hofgut Schmitte,50.61385,8.604648
 SW-Gießen DE-Fernwald Oppenröder Straße,50.55498,8.78234
 SW-Gießen DE-Gießen Bachweg,50.568398,8.64745
@@ -21176,6 +21198,7 @@ SW-Speyer DE-Speyer Berliner Platz,49.32692,8.41754
 SW-Stade DE-Stade Bremervörder Straße,53.59572,9.437753
 SW-Staßfurt DE-Autohof Brumby,51.897,11.6922,30
 SW-Steinburg DE-Itzehoe Klosterbrunnen,53.93629,9.51815
+SW-Stendal DE-Osterburg (Altmark) Lindenstraße,52.78787,11.7555
 SW-Stendal DE-Stendal Bruchweg,52.60838,11.86522
 SW-Stendal DE-Stendal Heerener Straße,52.58835,11.87177
 SW-Stendal DE-Tangermünde Gewerbepark,52.54992,11.95729
@@ -22796,6 +22819,7 @@ Zunder ES-Zafra Plaza del Alcázar,38.4244,-6.41493
 ΔΕΗ-blue GR-Pyrgos Πύργος Patron,37.67883,21.42664
 ΔΕΗ-blue GR-Serres Σέρρες EO Serron Dramas,41.08946,23.59834
 ΔΕΗ-blue GR-Skala Σκάλα EO Monemvasias Krokeon,36.85426,22.67945
+ΔΕΗ-blue GR-Thessaloniki Θεσσαλονίκη Pontou,40.66503,22.85458
 
 Белоруснефть BY-Бараўлянскі сельскі Савет вуліца Міру,54.0048,27.65905
 Белоруснефть BY-Гродна вуліца Дзяржынскага,53.6946,23.83815
@@ -23108,7 +23132,7 @@ DE Nürnberg Eggersheimer Straße,49.447788,11.010655
 DE Nürnberg Fab Lab,49.43756,10.99267
 DE Nürnberg Nordring,49.46928,11.0717
 DE Nürnberg Ramada Parkhotel,49.43649,11.10379
-DE Nürnberg Sigmundstraße,49.44843,11.00677
+DE Nürnberg Sigmundstraße,49.44866,11.0067
 DE Nürnberg TÜV,49.4318,11.03038
 DE Nürnberg Virnsberger Straße,49.448044,11.005672
 DE Oberlungwitz Sachsenring,50.79197,12.68798
@@ -23189,6 +23213,7 @@ ES Valladolid Sercotel,41.6357,-4.74707
 ES València Cinemes ABC Park,39.46934,-0.3727
 FI Tampere Hallilantie,61.4704,23.80405
 FR 68510 Sierentz Hyper U et Drive,47.66618,7.441494,10
+FR Arras Rue Arthur Delétoille,52.52386,9.13167
 FR Bormes-les-Mimosas Camp du Domaine,43.11786,6.35212
 FR Disneyland Paris,48.86427,2.78954,99
 FR Disneyland Paris,48.87352,2.78475,60
