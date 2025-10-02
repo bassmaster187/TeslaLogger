@@ -1909,8 +1909,8 @@ Supercharger-V4 DE-Essen Haedenkampstraße,51.457373,6.983408,20
 Supercharger-V4 DE-Essen Süd,51.421386,6.961
 Supercharger-V3 DE-Feucht,49.36501,11.20753
 Supercharger-V4 DE-Forchheim,49.70775,11.06985
-Supercharger-V4 DE-Frankfurt (Main),50.1149,8.6815
 Supercharger-V4 DE-Frankfurt Am Flughafen,50.053239,8.5716
+Supercharger-V4 DE-Frankfurt am Main,50.1149,8.6815
 Supercharger-V3 DE-Frechen,50.91787,6.83338,36
 Supercharger-V4 DE-Freiburg-Gundelfingen,48.039366,7.861344
 Supercharger-V4 DE-Friedrichsdorf,50.25422,8.6438
@@ -8046,6 +8046,7 @@ ChargePoint AT-Graz Zanklstraße,47.09623,15.40694,25
 ChargePoint AT-Liezen Salzburger Straße,47.567576,14.232019,20
 ChargePoint AT-Längenfeld Unterlängenfeld,47.07213,10.96484
 ChargePoint AT-St. Johann in der Haide Rathstraße,47.280639,16.006366
+ChargePoint AT-St. Veit St.-Veiter-Straße,47.3316,13.16388
 ChargePoint AT-Stattegg Dorfplatz,47.13736,15.41941
 ChargePoint AT-Steyr Haager Straße,49.2346,12.0852
 ChargePoint AT-Vasoldsberg Schemerlhöhe,47.057246,15.599613
@@ -9707,6 +9708,7 @@ EDEKA DE-Bad Essen Hartmannstraße,52.310999,8.429603
 EDEKA DE-Bad Hersfeld Konrad-Zuse-Straße,50.86618,9.7171
 EDEKA DE-Bad Honnef Himberger Straße,50.651573,7.301564
 EDEKA DE-Bad Münder am Deister Hasselweg,52.236844,9.422222
+EDEKA DE-Bad Münstereifel Kölner Straße,50.56698,6.7627
 EDEKA DE-Bad Nenndorf Rodenberger Allee,52.32976,9.3694
 EDEKA DE-Barleben Breiteweg,52.19387,11.6233
 EDEKA DE-Barntrup Försterweg,51.98629,9.1346
@@ -17668,6 +17670,7 @@ Lidl HR-Poreč Ul. Mate Vlašića,45.229754,13.621817
 Lidl HR-Pula Labinska ul.,44.881645,13.864213
 Lidl HR-Pula Ulica Proštinske bune,44.862711,13.864765
 Lidl HR-Rijeka Radnička ul.,45.31686,14.47255
+Lidl HR-Rovinj Braće Božić,45.0796,13.65637
 Lidl HR-Split Ul. kralja Stjepana Držislava,43.5055,16.50692
 Lidl HR-Umag Ulica Poduzetnika,45.4314,13.530979
 Lidl HR-Zadar Benkovačka cesta,44.10375,15.26489
@@ -17788,6 +17791,7 @@ Linz AT-Linz Hauptstraße,48.3093,14.28322
 Linz AT-Linz Industriezeile,48.301408,14.319432
 Linz AT-Linz Khevenhüllerstraße,48.30076,14.30124
 Linz AT-Linz Pleschinger Straße,48.32798,14.3077
+Linz AT-Linz Promenade,48.3024,14.28504
 Linz AT-Linz Wiener Straße,48.28083,14.30952
 Linz AT-Linz Ziegeleistraße,48.29116,14.2749
 Linz AT-Marchtrenk Eichenstraße,48.19097,14.11876
@@ -22808,6 +22812,7 @@ Zunder ES-Zafra Plaza del Alcázar,38.4244,-6.41493
 ΔΕΗ-blue GR-Alexandroupoli Giannoutsou,40.86287,25.8765
 ΔΕΗ-blue GR-Amaliada Αμαλιάδα Antoniou Petralia,37.79132,21.3377
 ΔΕΗ-blue GR-Didymoticho Διδυμότειχο Orestiados,41.35326,26.50353
+ΔΕΗ-blue GR-Eleftherio Ελευθέριο Μοναστηρίου,40.66478,22.8962
 ΔΕΗ-blue GR-Ioannina Ιωάννινα Leof. Stavrou Niarchou,39.63374,20.85
 ΔΕΗ-blue GR-Kalamata Καλαμάτα Athinon,37.0433,22.09113
 ΔΕΗ-blue GR-Korinthos Κόρινθος NEOAK Isthmos,37.92577,22.97617
@@ -22871,6 +22876,7 @@ AT Parkplatz Straß,46.73086,15.64186
 AT Pasching Tractive,48.24068,14.2338
 AT Ratten HORN,47.472919,15.708816
 AT Schladming Europaplatz,47.39644,13.69552
+AT Sillian Sporthotel,46.74972,12.4337
 AT St. Veit an der Glan Karosserie Puck,46.75713,14.34241
 AT Tillmitsch Heidenstraße,46.81462,15.53379
 AT Villach Steinwenderstraße,46.61133,13.8421
@@ -23195,6 +23201,7 @@ DE Wuppertal AWG Recyclinghof,51.225514,7.143682
 DE Wuppertal Bergische Universität,51.23953,7.160973
 DE Wöbbelin KFZ-Service Braemer,53.39759,11.5145
 DE Zeitz Martin-Planer-Straße,51.04626,12.15665
+DE Zell Woppmannsberg,49.13515,12.42354
 DE Zwickau Kopernikusstraße,50.73138,12.47356
 ES Alcalá de Henares Jardín Botánico,40.50638,-3.34228
 ES Argómaniz Parador de Argómaniz,42.8679,-2.54123
