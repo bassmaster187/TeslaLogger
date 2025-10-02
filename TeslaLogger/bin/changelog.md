@@ -1,4 +1,4 @@
-# Version 1.63.8
+# Version 1.63.9
 - Settting for Extras/Dashboard. You can now upload your background image fot the dashboard and set the API key for openweather in a dialog. 
 - EVCC: fix for changed JSON shema since version 0.207
 
