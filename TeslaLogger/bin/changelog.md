@@ -1,3 +1,6 @@
+# Version 1.63.8
+- EVCC: fix for changed JSON shema since version 0.207
+
 # Version 1.63.7
 - Info about deprecated Docker. Please update to new Teslalogger Image: [LINK](https://github.com/bassmaster187/TeslaLogger/blob/master/docs/en/upgrade-to-net8-docker.md)
 
