@@ -3671,7 +3671,7 @@ Supercharger-V4 PL-Stryków,51.89258,19.5928
 Supercharger-V4 PL-Szczecin,53.381935,14.670539
 Supercharger PL-Trzebownisko,50.08925,22.04561,30
 Supercharger PL-Warsaw,52.20767,21.02924,30
-Supercharger-V4 PL-Warsaw Airport,52.170181,20.934483
+Supercharger-V4 PL-Warsaw Airport,52.17026,20.93586
 Supercharger-V4 PL-Wrocław,51.05185,16.97247
 Supercharger-V4 PL-Zaluski,52.514357,20.528801
 Supercharger-V3 PL-Ząbki,52.301924,21.088165
@@ -5280,7 +5280,7 @@ Supercharger-V3 US-Pompano Beach FL - North Federal Highway,26.275676,-80.098173
 Supercharger-V3 US-Pompano Beach FL Florida Turnpike Service Plaza,26.22652,-80.1824
 Supercharger-V3 US-Pompton Lakes NJ,41.007619,-74.294029
 Supercharger US-Poncha Springs CO,38.511369,-106.076097
-Supercharger-V3 US-Pooler GA,32.079646,-81.280912
+Supercharger-V3 US-Pooler GA,32.07963,-81.2812
 Supercharger-V3 US-Pooler GA - US-80,32.110758,-81.235803
 Supercharger-V3 US-Port Deposit MD,39.596,-76.073
 Supercharger US-Port Huron MI,42.99881,-82.428653
@@ -5592,7 +5592,7 @@ Supercharger US-Springfield OR - Kruse Way,44.08267,-123.037542
 Supercharger-V3 US-Springfield VA,38.77459,-77.17739
 Supercharger-V3 US-Springfield VA,38.77623,-77.17596
 Supercharger US-St. Augustine FL,29.924286,-81.416018
-Supercharger-V3 US-St. Augustine FL - Inman Road,29.91689,-81.40318
+Supercharger-V3 US-St. Augustine FL - Inman Road,29.91678,-81.4035
 Supercharger-V3 US-St. Augustine FL - World Commerce Pkwy,29.98287,-81.46499
 Supercharger US-St. Charles MO,38.78214,-90.532841
 Supercharger US-St. Charles MO - Beale Street,38.764741,-90.49338
@@ -14592,7 +14592,7 @@ GOFAST CH-Horgen Zugerstrasse,47.238158,8.611513
 GOFAST CH-Kloten Flughafenstrasse,47.448856,8.565796
 GOFAST CH-Köniz Könizstrasse,46.926113,7.416894
 GOFAST CH-Lyssach Kernenriedstrasse,47.07016,7.56645
-GOFAST CH-Melide Via Cantonale,45.954346,8.950505,6
+GOFAST CH-Melide Via Cantonale,45.95435,8.9505,4
 GOFAST CH-Mendrisio FoxTown Outlet,45.87583,8.97969
 GOFAST CH-Murten Grand Ferme,46.94009,7.14485
 GOFAST CH-Neuchatel Le Verger 1,47.021254,7.028924,8
@@ -16082,6 +16082,58 @@ Ionity SK-Dubnica nad Váhom Priemyselná,48.950906,18.150729
 Ionity SK-Senec,48.240666,17.360754
 Ionity SK-Zvolen Obchodná,48.58399,19.105417
 Ionity SK-Čaradice R1,48.355665,18.49675
+
+IONNA US-Abilene KS N Buckeye Ave,38.94154,-97.2135
+IONNA US-Apex NC N Salem Street,35.73444,-78.84934
+IONNA US-Ashland OR S Valley View Rd,42.22513,-122.74083
+IONNA US-Ashland VA N Washington Hwy,37.75883,-77.472
+IONNA US-Beaver UT 300 West,38.29287,-112.64638
+IONNA US-Belen NM S Main St,34.642,-106.78014
+IONNA US-Blue Springs MO NE Coronado,39.0261,-94.24915
+IONNA US-Bradenton FL 14th St. West,27.44737,-82.57627
+IONNA US-Brattleboro VT Putney Rd,42.88633,-72.55654
+IONNA US-Bridgeville PA Washington Pike,40.37595,-80.0987
+IONNA US-Carlin NV 10th St,40.71924,-116.1075
+IONNA US-Cherry Hill NJ Marlton Pike East,39.90638,-74.9741
+IONNA US-Corsicana TX I-45,32.04023,-96.44938
+IONNA US-Creswell OR N Mill Street,43.91853,-123.01715
+IONNA US-Daytona Beach FL W International Speedway Blvd,29.19163,-81.07506
+IONNA US-Festus MO West Gannon Dr,38.2098,-90.4019
+IONNA US-Forest Park GA Frontage Rd,33.61703,-84.3966
+IONNA US-Fort Pierce FL Selvitz Rd,27.37507,-80.36725
+IONNA US-Fruita CO Kokopelli Blvd,39.15076,-108.73747
+IONNA US-Garner NC NC-42,35.60538,-78.56672
+IONNA US-Gilman IL US-24,40.75143,-87.99898
+IONNA US-Goodland KS Commerce Rd,39.32593,-101.72686
+IONNA US-Grand Prairie TX S Carrier Pkwy,32.6729,-97.0062
+IONNA US-Houston TX Washington Ave,29.77288,-95.4248
+IONNA US-Janesville WI Morse St,42.7241,-88.99568
+IONNA US-Kutztown PA Golden Key Rd,40.5816,-75.70816
+IONNA US-Largo FL Missouri Ave. North,27.92874,-82.78857
+IONNA US-Lewisville TX S Stemmons Fwy,33.03747,-97.00196
+IONNA US-Limon CO Main St,39.26358,-103.6797
+IONNA US-Massillon OH Erie Ave SW,40.75785,-81.51547
+IONNA US-Middletown MD Middletown Pkwy,39.43734,-77.52907
+IONNA US-Obetz OH Alum Creek Dr,39.8786,-82.9313
+IONNA US-Orlando FL Palm Pkwy,28.39904,-81.48955
+IONNA US-Oviedo FL W Mitchell Hammock Rd,28.6547,-81.22327
+IONNA US-Pensacola FL N Davis Hwy,30.51848,-87.21385
+IONNA US-Plano TX N Central Expy,33.02783,-96.71117
+IONNA US-Portsmouth NH Woodbury Avenue,43.08905,-70.7923
+IONNA US-Reading MA Walkers Brook Dr,42.51857,-71.0948
+IONNA US-Reynoldsburg OH Brice Rd,39.92575,-82.8321
+IONNA US-Scranton PA Scranton Carbondale Highway,41.4633,-75.65076
+IONNA US-Springfield IL S Dirksen Pkwy,39.7615,-89.60653
+IONNA US-Springfield OH Titus Road,39.89597,-83.72013
+IONNA US-Valdosta GA Norman Dr,30.82437,-83.3179
+IONNA US-Vancouver WA SE 15th St,45.6096,-122.50264
+IONNA US-Vista CA Hacienda Dr,33.19304,-117.255
+IONNA US-WaKeeney KS S 1st St,39.01287,-99.891
+IONNA US-White Bear Lake MN White Bear Ave,45.03815,-93.01634
+IONNA US-Willcox AZ W Rex Allen Dr,32.26396,-109.84056
+IONNA US-Willoughby OH OH 306,41.63945,-81.37205
+IONNA US-Winnemucca NV Grass Valley Road,40.96083,-117.7359
+IONNA US-Winston-Salem NC Jonestown Rd,36.0783,-80.33486
 
 IZIVIA FR-Aire de Beaune Merceuil,46.96174,4.83868,25
 IZIVIA FR-Aire de Mâcon Saint-Albain,46.41939,4.86431,25
