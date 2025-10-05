@@ -9541,6 +9541,7 @@ E.ON DK-Ebeltoft Vestervej,56.1926,10.67051
 E.ON DK-Harte E20,55.5143,9.39947
 E.ON DK-Harte Syd Rasteplads,55.51194,9.3949
 E.ON DK-Helsingør Ny Kronborgvej,56.03927,12.61313
+E.ON DK-Herning Midtjyske Motorvej,56.03965,9.00487
 E.ON DK-Hurup Thy Idrætsvej,56.75326,8.4158
 E.ON DK-Kalbygaard Skov,56.1497,9.76691
 E.ON DK-Karlslunde Ost,55.560657,12.231491
@@ -10266,6 +10267,7 @@ EM1 DE-Winhöring Obere Hofmark,48.265377,12.651486
 
 EMB DE-Kleinmachnow An der Stammbahn,52.42014,13.22476
 EMB DE-Michendorf Michendorfer Gartenstraße,52.31406,13.02783
+EMB DE-Teltow Gerhart-Eisler-Straße,52.4019,13.2384
 
 Emobility-East DE-Drebach Straße der Jugend,50.67323,13.01824
 Emobility-East DE-Ehrenfriedersdorf Greifensteinstraße,50.6496,12.9285
@@ -12548,26 +12550,6 @@ Energie-Steiermark AT-Unzmarkt Simon-Hafnerplatz,47.198231,14.445851,25
 Energie-Steiermark AT-Voitsberg von-Hötzendorf-Straße,47.05207,15.14186
 Energie-Steiermark AT-Wildon Kainachtalstraße,46.8867,15.50014
 
-Energie-Südbayern DE-Alling Hoflacher Straße,48.144636,11.301403
-Energie-Südbayern DE-Bad Füssing Rathausstraße,48.35153,13.31342
-Energie-Südbayern DE-Dießen am Ammersee Reitstege,47.948736,11.107325
-Energie-Südbayern DE-Dingolfing Fischerei,48.631823,12.494977
-Energie-Südbayern DE-Dingolfing Rennstraße,48.629654,12.49485
-Energie-Südbayern DE-Dingolfing Wollerstraße,48.630458,12.499095
-Energie-Südbayern DE-Eching Sudetenstraße,48.30323,11.61678
-Energie-Südbayern DE-Ettal Linderhof,47.569589,10.95571
-Energie-Südbayern DE-Hausham Bahnhofstraße,47.75212,11.83882
-Energie-Südbayern DE-Irschenberg Wendling,47.827991,11.902965,10
-Energie-Südbayern DE-Irschenberg Wendling,47.828387,11.900902,10
-Energie-Südbayern DE-Mittenwald Dammkarstraße,47.440957,11.266573
-Energie-Südbayern DE-Mittenwald Schöttlkarstraße,47.44422,11.26471
-Energie-Südbayern DE-Pentling Ammerholz,48.97549,12.06498
-Energie-Südbayern DE-Plattling Werkstraße,48.78133,12.86139
-Energie-Südbayern DE-Schliersee Perfallstraße,47.73378,11.86134
-Energie-Südbayern DE-Sulzemoos Ohmstraße,48.280144,11.269269
-Energie-Südbayern DE-Vaterstetten Heimstettener Straße 1,48.1465,11.78153
-Energie-Südbayern DE-Vaterstetten Heimstettener Straße 2,48.14485,11.78412
-
 Energie360 CH-Amriswil Kirchstrasse,47.54755,9.2975
 Energie360 CH-Bachenbülach Bramenstrasse,47.50495,8.54024
 Energie360 CH-Dachsen Lauferstrasse,47.67491,8.61452
@@ -12748,6 +12730,26 @@ Eranovum ES-Valladolid Cam. Viejo de Simancas,41.62127,-4.75655
 
 ESARJ TR-Afyonkarahisar Merkez Dörtyol,38.793372,30.457982
 
+ESB DE-Alling Hoflacher Straße,48.14464,11.3014
+ESB DE-Bad Füssing Rathausstraße,48.35153,13.31342
+ESB DE-Dießen am Ammersee Reitstege,47.94874,11.10732
+ESB DE-Dingolfing Fischerei,48.63182,12.49498
+ESB DE-Dingolfing Rennstraße,48.62965,12.49485
+ESB DE-Dingolfing Wollerstraße,48.63046,12.4991
+ESB DE-Eching Sudetenstraße,48.30323,11.61678
+ESB DE-Ettal Linderhof,47.5696,10.9557
+ESB DE-Hausham Bahnhofstraße,47.75212,11.83882
+ESB DE-Irschenberg Wendling,47.828,11.90297,10
+ESB DE-Irschenberg Wendling,47.8284,11.9009,10
+ESB DE-Mittenwald Dammkarstraße,47.44096,11.26657
+ESB DE-Mittenwald Schöttlkarstraße,47.44422,11.2647
+ESB DE-Pentling Ammerholz,48.9755,12.06498
+ESB DE-Plattling Werkstraße,48.78133,12.8614
+ESB DE-Schliersee Perfallstraße,47.73378,11.86134
+ESB DE-Schönau am Königssee Seestraße,47.592,12.98805,64
+ESB DE-Sulzemoos Ohmstraße,48.28014,11.26927
+ESB DE-Vaterstetten Heimstettener Straße,48.14485,11.78412
+ESB DE-Vaterstetten Heimstettener Straße,48.1465,11.78153
 ESB GB-Belfast Lower Cres,54.58775,-5.93493
 ESB GB-Londonderry Waterside,54.99474,-7.30616
 ESB IE-Ballaghaderreen Market St,53.90212,-8.58408
@@ -13161,6 +13163,7 @@ EWE-GO DE-Beverstedt Schulstraße,53.435284,8.818481
 EWE-GO DE-Biberach an der Riß Leipzigstraße,48.08436,9.80163,25
 EWE-GO DE-Biedenkopf Georg-Kramer-Straße,50.90116,8.53598
 EWE-GO DE-Bielefeld Eckendorfer Straße,52.034643,8.564506
+EWE-GO DE-Bielefeld Hansestraße,51.95186,8.57324
 EWE-GO DE-Bispingen Horstfeldweg,53.100871,9.977802
 EWE-GO DE-Bitburg Bitburger Straße,49.962564,6.541886
 EWE-GO DE-Bitterfeld-Wolfen Krondorfer Straße,51.66709,12.25948
@@ -14451,6 +14454,8 @@ Fortum NO-Geiranger Gjorvahaugen,62.095088,7.211245
 Fortum NO-Sortland,68.704914,15.414759
 Fortum NO-Stavanger Dalsetveien,58.93358,5.73966
 Fortum SE-Karlskoga Norra Viaduktgatan,59.32518,14.52661,20
+
+Fraport DE-Frankfurt am Main Ladepark Terminal 1,50.04982,8.56167
 
 Fraunhofer DE-Berlin Gustav-Meyer-Allee,52.541473,13.385278
 Fraunhofer DE-Berlin Pascalstraße,52.523217,13.323841
@@ -16320,7 +16325,7 @@ Kaufland DE-Bergkamen An der Bummannsburg,51.651802,7.677461
 Kaufland DE-Berlin Bessemerstraße,52.461602,13.367149
 Kaufland DE-Berlin Buckower Chaussee,52.40959,13.38166
 Kaufland DE-Berlin Eichhorster Weg 96,52.603595,13.335526
-Kaufland DE-Berlin Goerzallee 195,52.417221,13.286431
+Kaufland DE-Berlin Goerzallee,52.41722,13.28643
 Kaufland DE-Berlin Grünhofer Weg,52.533887,13.188849
 Kaufland DE-Berlin Gutschmidtstraße,52.436452,13.447838
 Kaufland DE-Berlin Markthalle Alexanderplatz,52.522205,13.407149
@@ -16340,7 +16345,7 @@ Kaufland DE-Bietigheim-Bissingen,48.960939,9.130652
 Kaufland DE-Bitburg Kölner Straße 11,49.977525,6.526619
 Kaufland DE-Bocholt Welfenstraße,51.830765,6.611875
 Kaufland DE-Borna,51.109667,12.488381
-Kaufland DE-Bottrop Berliner Platz 8,51.522538,6.929221
+Kaufland DE-Bottrop Berliner Platz,51.5227,6.929
 Kaufland DE-Braunschweig Hamburger Straße 250,52.282839,10.520643
 Kaufland DE-Bremen Sebaldsbrücker Heerstraße,53.059644,8.892752
 Kaufland DE-Bretten,49.040267,8.690135
@@ -16421,7 +16426,7 @@ Kaufland DE-Höchstadt Rothenburger Straße 19,49.706632,10.799295
 Kaufland DE-Ilmenau,50.683092,10.919349
 Kaufland DE-Ilsfeld Robert-Mayer-Straße,49.058316,9.260743,30
 Kaufland DE-Ingolstadt Richard-Wagner-Straße 40,48.774508,11.398906
-Kaufland DE-Jena Naumburger Straße 57 a,50.951697,11.610572
+Kaufland DE-Jena Naumburger Straße,50.9514,11.61046
 Kaufland DE-Kamenz Willy-Muhle-Straße 25,51.269044,14.112453
 Kaufland DE-Karlsruhe Ortenbergstraße,48.991292,8.375308
 Kaufland DE-Kassel Franzgraben 40-42,51.321077,9.518043
@@ -16448,7 +16453,7 @@ Kaufland DE-Leipzig Dresdner Straße,51.33685,12.40447
 Kaufland DE-Leipzig Dresdner Straße,51.33763,12.404982
 Kaufland DE-Leipzig Georg-Schumann-Straße,51.37384,12.32908
 Kaufland DE-Leipzig Torgauer Straße,51.36845,12.45879
-Kaufland DE-Leipzig-Gohlis-Süd Georg-Schumann-Straße 105-109,51.362434,12.36236
+Kaufland DE-Leipzig-Gohlis-Süd Georg-Schumann-Straße,51.36212,12.36236
 Kaufland DE-Leonberg,48.797085,9.006616
 Kaufland DE-Lichtenfels,50.137785,11.074773
 Kaufland DE-Limbach-Oberfrohna Ostring 4,50.855587,12.784365
@@ -16548,7 +16553,7 @@ Kaufland DE-Sinzig Industriestraße,50.547126,7.259104
 Kaufland DE-Spaichingen Obere Wiesen 1,48.068576,8.749615
 Kaufland DE-Speyer Auestraße 22,49.333531,8.438537
 Kaufland DE-Spremberg An der Lusatia 1,51.557937,14.355854
-Kaufland DE-Stade Freiburger Straße 2,53.605005,9.476026
+Kaufland DE-Stade Freiburger Straße,53.605,9.47603
 Kaufland DE-Steinheim an der Murr,48.970356,9.267212
 Kaufland DE-Stolberg,50.763753,6.230912
 Kaufland DE-Stollberg Auer Straße,50.70643,12.75755
@@ -16556,13 +16561,13 @@ Kaufland DE-Straubing,48.87584,12.549114
 Kaufland DE-Strausberg Otto-Grotewohl-Ring 72,52.573861,13.897498
 Kaufland DE-Stuttgart,48.840477,9.229187
 Kaufland DE-Stuttgart Augsburger Straße 460,48.775645,9.257786
-Kaufland DE-Sulzbach-Rosenberg Krötenseestraße 1,49.496567,11.743532
+Kaufland DE-Sulzbach-Rosenberg Krötenseestraße,49.49642,11.74397
 Kaufland DE-Tettnang,47.662622,9.571466
 Kaufland DE-Torgau Turnierplatzweg 1,51.548071,12.997464
 Kaufland DE-Traunstein Theresienstraße 2,47.87185,12.637156
-Kaufland DE-Trier Aachener Straße 58,49.755022,6.624246
+Kaufland DE-Trier Aachener Straße,49.7551,6.62413
 Kaufland DE-Troisdorf Theodor-Heuss-Ring,50.81312,7.15604
-Kaufland DE-Tuttlingen Stockacher Straße 146,47.973943,8.827381
+Kaufland DE-Tuttlingen Stockacher Straße,47.97394,8.82738
 Kaufland DE-Tübingen Reutlinger Straße,48.51424,9.06691,60
 Kaufland DE-Uhingen,48.714102,9.56216
 Kaufland DE-Unterschleißheim Andreas-Danzer-Weg,48.28542,11.56127,70
@@ -22571,6 +22576,7 @@ Wenea ES-Tapia de Casariego N-634,43.54202,-6.98357
 Wenea GB-Plymouth Somerset Pl,50.38157,-4.16068
 
 westenergie DE-Arnsberg Hellefelder Straße,51.39494,8.06832
+westenergie DE-Bad Münstereifel Im Goldenen Tal,50.54676,6.763
 westenergie DE-Balve Sauerlandstraße,51.327951,7.86794
 westenergie DE-Bernkastel-Kues Damenweg,49.91434,7.06727
 westenergie DE-Erftstadt Fritz-Erler-Straße,50.81253,6.81435,30
@@ -23177,7 +23183,7 @@ DE Mannheim Sandhofer Straße,49.53383,8.47422
 DE Mannheim SV Seckenheim,49.46796,8.5573
 DE Melle Hageböke,52.176211,8.367606
 DE Memmingen Spielarcaden,47.99888,10.15428,30
-DE Messe Galerie Fulda,50.5398,9.6379,170
+DE Messe Galerie Fulda,50.5398,9.6379,175
 DE Much B56,50.90866,7.41652
 DE Muggensturm Hartmann,48.87886,8.27847
 DE Mölln VW Riemer,53.623707,10.678989
