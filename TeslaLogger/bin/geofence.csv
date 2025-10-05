@@ -3889,6 +3889,7 @@ Supercharger-V3 TR-Ilgaz Çankırı,40.90657,33.64522
 Supercharger-V3 TR-Istanbul Asia Garage Floor -2,41.003233,29.070793
 
 Supercharger-V3 TW-Nantou Caotun,23.9664,120.67746
+Supercharger-V3 TW-Tainan Hsinying,23.31127,120.28147
 Supercharger-V3 TW-Tainan Park 17,23.0981,120.28154
 
 Supercharger-V3 US-Abbott TX,31.898856,-97.090947
@@ -10059,6 +10060,7 @@ Electra IT-Milano Piazza della Repubblica,45.47776,9.19555
 Electra IT-Modena Via Emilia Ovest,44.65001,10.85315,25
 Electra IT-Montebello della Battaglia Via Mirabella,44.99876,9.07124
 Electra IT-Peschiera del Garda Via Tangenziale,45.43407,10.710375
+Electra IT-Pisa Via Darsena,43.70183,10.3861
 Electra IT-Portogruaro Via Prati Guori,45.79198,12.8152
 Electra IT-Sesto San Giovanni Viale Ercole Marelli,45.52774,9.22938
 Electra IT-Stezzano Via Guzzanica,45.64659,9.62873
@@ -10186,6 +10188,7 @@ ELEN HR-Rastovača,44.9064,15.61255
 ELEN HR-Rašćane Gornje,43.32073,17.16635,15
 ELEN HR-Rijeka Gomila,45.32812,14.442247
 ELEN HR-Rovinj Ul. Giordana Paliage,45.08565,13.63892
+ELEN HR-Rovinj Ul. Giosue Carduccia,45.08107,13.64122
 ELEN HR-Sava,45.10818,18.52378
 ELEN HR-Slatina Ul. bana Josipa Jelačića,45.70477,17.7043
 ELEN HR-Slavonski Brod Vukovarska ulica,45.154437,18.009099
@@ -15168,6 +15171,7 @@ iCharge HR-Rab Palit,44.76199,14.7582
 
 iCharging TW-Tainan City Rende Service Area,22.9063,120.26487
 iCharging TW-Tainan City Sinying Service Area,23.3407,120.31128
+iCharging TW-Xiluo Township Sun Yat-sen Fwy,23.78926,120.47902
 
 IECharge FR-Auriolles D126E1,44.74572,0.03547
 IECharge FR-Bléré Les Ouches,47.3107,0.96527
@@ -19198,7 +19202,7 @@ Pfalzwerke AT-Wien Stadlauer Straße,48.2302,16.45655
 Pfalzwerke AT-Wiener Neudorf IZ NÖ-Süd Straße,48.07306,16.32988
 Pfalzwerke DE-Achern Severinstraße 8,48.634319,8.06005
 Pfalzwerke DE-Adelsheim Untere Austraße 38,49.396887,9.393617
-Pfalzwerke DE-Ahrensfelde Rudolf-Diesel-Straße 6,52.607036,13.527031
+Pfalzwerke DE-Ahrensfelde Rudolf-Diesel-Straße,52.60704,13.52703
 Pfalzwerke DE-Albisheim Kirchgasse,49.650451,8.096974
 Pfalzwerke DE-Alfdorf Untere Schloßstraße 125,48.842199,9.729789
 Pfalzwerke DE-Allmendingen Marienstraße,48.324661,9.717438
@@ -19271,7 +19275,7 @@ Pfalzwerke DE-Donaueschingen Dürrheimer Straße 13,47.957868,8.503038
 Pfalzwerke DE-Dreieich Voltastraße,50.03076,8.70092
 Pfalzwerke DE-Dresden Dohnaer Straße,51.0066,13.78665
 Pfalzwerke DE-Dresden Hornbach,51.078828,13.689721
-Pfalzwerke DE-Dresden Rähnitzer Allee 10,51.126244,13.746215
+Pfalzwerke DE-Dresden Rähnitzer Allee,51.12624,13.7462
 Pfalzwerke DE-Dresden Tharandter Straße,51.01704,13.6712
 Pfalzwerke DE-Dudenhofen Speyerer Straße,49.31645,8.39327
 Pfalzwerke DE-Duisburg Düsseldorfer Straße,51.40829,6.767147
@@ -19455,10 +19459,10 @@ Pfalzwerke DE-Lübeck Lohgerberstraße,53.86137,10.62767
 Pfalzwerke DE-Lüneburg Bei der Keulahütte 1,53.260894,10.414869
 Pfalzwerke DE-Mackenbach Hauptstraße,49.474778,7.586778
 Pfalzwerke DE-Magdeburg Salbker Chaussee,52.08111,11.60829
-Pfalzwerke DE-Magdeburg Silberbergweg 2,52.166732,11.608087
+Pfalzwerke DE-Magdeburg Silberbergweg,52.16672,11.608
 Pfalzwerke DE-Maikammer Eulbuschgasse,49.308428,8.130896
 Pfalzwerke DE-Maikammer Johannes-Damm-Straße,49.30286,8.13225
-Pfalzwerke DE-Mainz Barcelona Allee 2,49.948247,8.260654
+Pfalzwerke DE-Mainz Barcelona-Allee,49.94825,8.2606
 Pfalzwerke DE-Mainz Wormser Straße,49.9819,8.30573
 Pfalzwerke DE-Mainz-Bretzenheim Am Schleifweg 5,49.966953,8.238487
 Pfalzwerke DE-Mandelbachtal Viechter Straße,49.21875,7.15713
@@ -19502,7 +19506,7 @@ Pfalzwerke DE-Oberotterbach Weinstraße 18b,49.070694,7.970333
 Pfalzwerke DE-Obrigheim Hauptstraße 15,49.590442,8.203165
 Pfalzwerke DE-Offenau Unter d. Kaiserpfalz 1,49.238291,9.166246
 Pfalzwerke DE-Offenburg Freiburger Straße,48.46944,7.93626
-Pfalzwerke DE-Oldenburg Edewechter Landstraße 149,53.125927,8.167025
+Pfalzwerke DE-Oldenburg Edewechter Landstraße,53.12593,8.16708
 Pfalzwerke DE-Oranienburg Straße am Globus,52.74641,13.18856,30
 Pfalzwerke DE-Osnabrück Hannoversche Straße,52.25721,8.09218
 Pfalzwerke DE-Oststeinbek Willinghuser Weg 3,53.54832,10.156449
@@ -19525,7 +19529,7 @@ Pfalzwerke DE-Ramstein-Miesenbach Am Koehlwäldchen 11,49.420543,7.562716
 Pfalzwerke DE-Rauenberg Frankenäcker,49.27317,8.69611,12
 Pfalzwerke DE-Remseck Am Holzbach,48.85559,9.247462
 Pfalzwerke DE-Rheinhausen Tannenbergerweg 1,48.233171,7.7146
-Pfalzwerke DE-Rheinstetten Hertzstraße 2,48.962734,8.280926
+Pfalzwerke DE-Rheinstetten Hertzstraße,48.96276,8.2809
 Pfalzwerke DE-Rheinstetten Nell-Breuning-Ring 25,48.980858,8.324621
 Pfalzwerke DE-Rhodt unter Riedburg Theresienstraße 200,49.274061,8.085377
 Pfalzwerke DE-Rhodt unter Rietburg Edesheimer Straße,49.26916,8.110406
@@ -19573,18 +19577,18 @@ Pfalzwerke DE-Thallichtenberg Burgstraße 12,49.556416,7.357916
 Pfalzwerke DE-Trier Nikoalus-Theis-Straße,49.742692,6.616888
 Pfalzwerke DE-Trippstadt Johanniskreuz 1a,49.337194,7.825778
 Pfalzwerke DE-Trippstadt Steiggasse,49.355533,7.770009
-Pfalzwerke DE-Tübingen Vor dem Großholz 2,48.52293,9.097251
+Pfalzwerke DE-Tübingen Vor dem Großholz,48.52293,9.09725
 Pfalzwerke DE-Ubstadt-Weiher Ubstadter Straße,49.171352,8.616869
 Pfalzwerke DE-Ulm Blaubeurer Straße 50,48.40152,9.970867
 Pfalzwerke DE-Ulm Hindenburgring 3,48.397635,9.976387
 Pfalzwerke DE-Unterhaching Grünwalder Weg,48.05638,11.59789
-Pfalzwerke DE-Untersiemau Strassäcker 4,50.19869,10.966362
+Pfalzwerke DE-Untersiemau Straßäcker,50.19866,10.96628
 Pfalzwerke DE-Uslar Wiesenstraße,51.66106,9.62997
 Pfalzwerke DE-Vaihingen an der Enz Stuttgarter Straße,48.92468,8.96997
 Pfalzwerke DE-Velbert Metallstraße,51.33942,7.05671
 Pfalzwerke DE-Velten Parkallee 10,52.670356,13.215876
 Pfalzwerke DE-Viernheim Mannheimer Straße,49.52775,8.56185
-Pfalzwerke DE-Vogelsdorf Frankfurter Chaussee 51,52.49684,13.748289
+Pfalzwerke DE-Vogelsdorf Frankfurter Chaussee,52.49687,13.74823
 Pfalzwerke DE-Völklingen Zechenstraße 8,49.249429,6.870992
 Pfalzwerke DE-Wacheinheim an der Weinstraße Friedelsheimer Straße,49.44198,8.1828
 Pfalzwerke DE-Wachenheim Am Alten Galgen 3,49.439567,8.192583
@@ -19611,19 +19615,19 @@ Pfalzwerke DE-Wiesbaden Friedrich-Bergius-Straße 21,50.050092,8.219975
 Pfalzwerke DE-Wiesbaden Hagenauer Straße,50.0486,8.2178,25
 Pfalzwerke DE-Wiesbaden Kurt-Hebach-Straße 1,50.019176,8.289311
 Pfalzwerke DE-Wiesloch Schloßstraße,49.301133,8.696401
-Pfalzwerke DE-Wildau Gewerbepark 1,52.316449,13.602708
+Pfalzwerke DE-Wildau Gewerbepark,52.31645,13.6027
 Pfalzwerke DE-Wilhelmshaven Heuweg 7,53.525975,8.060066
 Pfalzwerke DE-Winnweiler Schlossstraße,49.5705,7.853611
 Pfalzwerke DE-Wittlich Römerstraße 53,49.977148,6.889955
 Pfalzwerke DE-Wolfsburg Brandgehaege,52.36968,10.73464
 Pfalzwerke DE-Wolfsburg Brandgehaege 7,52.369479,10.726346
-Pfalzwerke DE-Wolfsburg Wolfsburger Landstraße 7,52.422358,10.725119
+Pfalzwerke DE-Wolfsburg Wolfsburger Landstraße,52.42236,10.72512
 Pfalzwerke DE-Wolfstein Im Tauchental 1,49.583528,7.606111
 Pfalzwerke DE-Worms Am Gallborn 5,49.654962,8.358205
 Pfalzwerke DE-Worms Bebelstraße,49.63594,8.34763
 Pfalzwerke DE-Worms Kolpingstraße 90,49.61404,8.330034
 Pfalzwerke DE-Wuppertal Hahnerberger Straße,51.21504,7.14706
-Pfalzwerke DE-Wuppertal Oberbergische Straße 201,51.244129,7.189583
+Pfalzwerke DE-Wuppertal Oberbergische Straße,51.2441,7.18962
 Pfalzwerke DE-Wächtersbach Industriestraße 50,50.247447,9.291881
 Pfalzwerke DE-Wörth Am Kühgrunddamm 4,49.040518,8.289016
 Pfalzwerke DE-Wörth am Rhein Cany-Barville-Straße,49.032385,8.287972
@@ -20012,6 +20016,7 @@ Recharge NO-Ålesund Blindheimsbreivika,62.44407,6.36612
 Recharge NO-Ålesund Nedre Klokkersundvegen,62.46672,6.24687
 Recharge SE-Askersund Södra Infarten,58.87979,14.8974,25
 Recharge SE-Bålsta Södra Bålstaleden,59.56022,17.54867
+Recharge SE-Falun Kolonnvägen,60.60726,15.6682
 Recharge SE-Gävle Fjärdingsvägen,60.64809,17.12218,25
 Recharge SE-Hedemora Callerholmsgatan,60.28399,15.99009
 Recharge SE-Hisings Backa Transportgatan,57.77324,12.0013
@@ -22888,6 +22893,7 @@ Zunder ES-Zafra Plaza del Alcázar,38.4244,-6.41493
 ΔΕΗ-blue GR-Amaliada Αμαλιάδα Antoniou Petralia,37.79132,21.3377
 ΔΕΗ-blue GR-Didymoticho Διδυμότειχο Orestiados,41.35326,26.50353
 ΔΕΗ-blue GR-Eleftherio Ελευθέριο Μοναστηρίου,40.66478,22.8962
+ΔΕΗ-blue GR-Giannouli Γιάννουλη EO Larisas Elassonas,39.6593,22.40466
 ΔΕΗ-blue GR-Ioannina Ιωάννινα Leof. Stavrou Niarchou,39.63374,20.85
 ΔΕΗ-blue GR-Kalamata Καλαμάτα Athinon,37.0433,22.09113
 ΔΕΗ-blue GR-Korinthos Κόρινθος NEOAK Isthmos,37.92577,22.97617
