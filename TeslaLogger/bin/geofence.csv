@@ -2391,11 +2391,13 @@ Supercharger-V3 FI-Joensuu,62.60113,29.78203
 Supercharger-V4 FI-Joroinen,62.17552,27.84038
 Supercharger-V3 FI-Jyväskylä,62.2144,25.72246
 Supercharger-V4 FI-Jämsä,61.87004,25.23529
+Supercharger-V3 FI-Kajaani,64.22304,27.7389
 Supercharger-V3 FI-Karesuvanto,68.450226,22.4814
 Supercharger-V4 FI-Keminmaa,65.79995,24.50417,30
 Supercharger-V3 FI-Kempele,64.901803,25.535398
 Supercharger FI-Kokkola,63.829282,23.148487
 Supercharger-V3 FI-Kuopio,62.820695,27.607985
+Supercharger-V3 FI-Kuusamo,65.95893,29.1566
 Supercharger-V3 FI-Kärsämäki,63.97403,25.76049,40
 Supercharger-V3 FI-Lappeenranta,61.052624,28.261424
 Supercharger-V3 FI-Levi,67.785892,24.818396
@@ -3745,7 +3747,7 @@ Supercharger-V3 SE-Halmstad,56.657389,12.907444
 Supercharger-V3 SE-Haninge,59.181049,18.16069
 Supercharger-V3 SE-Helsingborg,56.091739,12.765855
 Supercharger-V3 SE-Hogstorp,58.393321,11.758084
-Supercharger SE-Hudiksvall,61.714854,17.042692
+Supercharger-V3 SE-Hudiksvall,61.71492,17.0432,60
 Supercharger-V4 SE-Härnösand,62.635766,17.924149
 Supercharger-V4 SE-Håby,58.489523,11.621991
 Supercharger-V4 SE-Hörby,55.901133,13.730261
@@ -9407,11 +9409,8 @@ E.ON DE-Neumünster Polizei,54.07617,9.96679
 E.ON DE-Neumünster Wasbeker Straße,54.0706,9.94136,20
 E.ON DE-Neuss Langemarck,51.19906,6.71102
 E.ON DE-Norderstedt Stormarnstraße,53.709849,10.019158
-E.ON DE-Ober-Mörlen An der A5 Ost,50.356504,8.695419
-E.ON DE-Ober-Mörlen An der A5 West,50.356505,8.692354
 E.ON DE-Oelsnitz/Vogtland An der A72,50.433637,12.130535
 E.ON DE-Plauen An der A72,50.466056,12.184668
-E.ON DE-Pohlheim An der A5,50.52085,8.7555
 E.ON DE-Quickborn Ladepark HanseWerk,53.745537,9.942607
 E.ON DE-Rastanlage Fränkische Schweiz-Pegnitz,49.74842,11.51005
 E.ON DE-Rastanlage Fränkische Schweiz-Pegnitz,49.74854,11.5141
@@ -9456,6 +9455,7 @@ E.ON DE-Raststätte Kalbecker Forst,51.65179,6.19939
 E.ON DE-Raststätte Kalbecker Forst,51.6535,6.19771
 E.ON DE-Raststätte Königsforst,50.89756,7.1533
 E.ON DE-Raststätte Königsforst,50.89942,7.15213
+E.ON DE-Raststätte Limes West,50.52085,8.7555
 E.ON DE-Raststätte Lipperland,52.0719,8.6646
 E.ON DE-Raststätte Medenbach,50.0947,8.35239
 E.ON DE-Raststätte Medenbach,50.09694,8.35336
@@ -9487,6 +9487,8 @@ E.ON DE-Raststätte Vaterstetten,48.12341,11.75797
 E.ON DE-Raststätte Vaterstetten,48.12401,11.75949
 E.ON DE-Raststätte Ville,50.85725,6.80404
 E.ON DE-Raststätte Ville,50.85812,6.80658
+E.ON DE-Raststätte Wetterau Ost,50.3565,8.69542
+E.ON DE-Raststätte Wetterau West,50.3565,8.69235
 E.ON DE-Raststätte Wildeshausen,52.91384,8.42555
 E.ON DE-Raststätte Wildeshausen,52.91503,8.42557
 E.ON DE-Raststätte Würzburg,49.75085,9.96315
@@ -10421,7 +10423,7 @@ EnBW DE-Bad Krozingen Im Unteren Stollen,47.924674,7.70232
 EnBW DE-Bad Lauchstädt,51.385629,11.879428
 EnBW DE-Bad Lidl,47.553122,7.934753
 EnBW DE-Bad Marienberg (Westerwald) An der Lehmkaute,50.658286,7.966294
-EnBW DE-Bad Nauheim,50.361282,8.754899
+EnBW DE-Bad Nauheim Hubert-Vergölst-Straße,50.36128,8.7549
 EnBW DE-Bad Nenndorf Bückethaler Straße,52.33473,9.40125
 EnBW DE-Bad Oeynhausen,52.22735,8.82484
 EnBW DE-Bad Oldesloe,53.79843,10.4052
@@ -11270,7 +11272,7 @@ EnBW DE-Langenfeld (Rheinland),51.0964,6.94991
 EnBW DE-Langenhagen Westfalenstraße,52.44421,9.72232
 EnBW DE-Langenselbold Kinzigstraße,50.175099,9.044201
 EnBW DE-Langerwehe Eifelstraße,50.79928,6.40494
-EnBW DE-Langgöns,50.49304,8.655976
+EnBW DE-Langgöns Am Lindenbaum,50.49304,8.65598
 EnBW DE-Lauchheim Hauptstraße,48.871184,10.24152
 EnBW DE-Lauenau,52.27655,9.3523
 EnBW DE-Laupheim Claus-Graf-Stauffenberg-Straße,48.2302,9.88844
@@ -16287,10 +16289,13 @@ K-Lataus FI-Joensuu Linjatie,62.62878,29.70338
 K-Lataus FI-Kauhajoki Savikyläntie,62.43417,22.17694
 K-Lataus FI-Kotka Jumalniementie,60.505419,26.912911
 K-Lataus FI-Kouvola Tervasharjunkatu,60.87586,26.65345
+K-Lataus FI-Kuusamo Luomantie,65.95627,29.1614
 K-Lataus FI-Mäntsälä Sälinkääntie,60.63753,25.3162
+K-Lataus FI-Oulu Metsokankaantie,64.95716,25.52752
 K-Lataus FI-Paimio Jokipellontie,60.45541,22.67942
 K-Lataus FI-Pieksämäki Kukkaroniementie,62.302633,27.164518
 K-Lataus FI-Pirkkala Palmrothintie,61.46629,23.72235
+K-Lataus FI-Pori Lestikatu,61.4894,21.76598
 K-Lataus FI-Raisio Voudinkatu,60.49038,22.16946
 K-Lataus FI-Rovaniemi Pulkamontie,66.518583,25.754303
 K-Lataus FI-Savonlinna Kullervonkatu,61.8648,28.94042
@@ -19972,13 +19977,17 @@ Recharge FI-Lohja Hossanmäentie,60.292683,24.063171,30
 Recharge FI-Mikkeli Graanintie,61.685816,27.298638
 Recharge FI-Muonio Torniontie,67.95514,23.68342
 Recharge FI-Mäntsälä Pohjoinen Pikatie,60.67509,25.35296
+Recharge FI-Oulu Asemakyläntie,65.19582,25.41254
 Recharge FI-Pello Burmanintie,66.77562,23.96527
 Recharge FI-Pihtipudas Viitasaarentie,63.34772,25.60369,30
 Recharge FI-Pirkkala Palmrothintie,61.46403,23.71815
 Recharge FI-Pori Säästäjänkatu,61.47466,21.81611
+Recharge FI-Pudasjärvi Pietarilantie,65.37206,26.99357
 Recharge FI-Rautalampi Kuopiontie,62.62112,26.83679,30
 Recharge FI-Saariselkä Kiveliöntie,68.42256,27.40923
 Recharge FI-Sodankylä,67.431695,26.57509
+Recharge FI-Sodankylä Rovaniementie,67.4088,26.57278
+Recharge FI-Suomussalmi Jalonkaarre,64.88694,28.9136
 Recharge FI-Suonenjoki Ysitie,62.58637,27.05107
 Recharge FI-Tampere Kangasalantie,61.477127,23.873108
 Recharge FI-Tolosenmäki Joensuuntie,62.14238,30.04348
@@ -20019,6 +20028,7 @@ Recharge NO-Ålesund Blindheimsbreivika,62.44407,6.36612
 Recharge NO-Ålesund Nedre Klokkersundvegen,62.46672,6.24687
 Recharge SE-Askersund Södra Infarten,58.87979,14.8974,25
 Recharge SE-Bålsta Södra Bålstaleden,59.56022,17.54867
+Recharge SE-Emmaboda Stenvägen,56.6263,15.55243
 Recharge SE-Falun Kolonnvägen,60.60726,15.6682
 Recharge SE-Gävle Fjärdingsvägen,60.64809,17.12218,25
 Recharge SE-Hedemora Callerholmsgatan,60.28399,15.99009
@@ -22323,6 +22333,7 @@ Virta FI-Nurmes Kauppalan talo,63.54465,29.13302
 Virta FI-Outokumpu Kummunkatu,62.72675,29.01391
 Virta FI-Parkano Pahkalantie,62.00497,23.01036
 Virta FI-Pello Kolarintie,66.80841,23.99579,20
+Virta FI-Raahe Reiponkatu,64.68568,24.48113
 Virta FI-Raippaluoto Raippaluodontie,63.20691,21.46183
 Virta FI-Rauma Ottilantie,61.10116,21.50577
 Virta FI-Rovaniemi Lapinkävijäntie,66.50233,25.72143,20
@@ -23307,6 +23318,7 @@ ES Sant Cugat del Vallès Carrer de la Mina,41.47519,2.0818
 ES Valladolid Sercotel,41.6357,-4.74707
 ES València Cinemes ABC Park,39.46934,-0.3727
 FI Tampere Hallilantie,61.4704,23.80405
+FI Virttaa Alastaro Circuit,60.9717,22.6577
 FR 68510 Sierentz Hyper U et Drive,47.66618,7.441494,10
 FR Arras Rue Arthur Delétoille,52.52386,9.13167
 FR Bormes-les-Mimosas Camp du Domaine,43.11786,6.35212
@@ -23392,9 +23404,14 @@ RO Târgu Jiu Strada Republicii,45.03113,23.2799
 RO Zalău Aleea Tineretului,47.19534,23.0595
 RS Београд Klinika Varis,44.82424,20.41634
 SE Gällivare Postgatan,67.13387,20.65995
+SE Kalmar Ställplats Ölandsbron,56.6813,16.38104
+SE Malmö Clarion Hotel,55.60757,12.99393
+SE Malmö Quality Hotel View,55.5622,12.9762
 SE Mjölby Golfklubb,58.3071,15.10246
 SE Strömstad Nordby Köpcenter,59.06458,11.20858
 SE Tanumshede Tanum Shoppingcenter,58.72225,11.34893
+SE Tällberg Tällbergsgårdens Hotell,60.82317,14.99487
+SE Umeå U and Me Hotel,63.8245,20.26072
 SI Trojane,46.1881,14.88406
 SK Bratislava Staré Grunty,48.15059,17.0674
 TR Ayazmana Yeni Karakavak Cd.,37.75689,30.57905
