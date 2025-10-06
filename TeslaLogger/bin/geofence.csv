@@ -3715,9 +3715,10 @@ Supercharger-V4 RO-Targu Mures,46.509828,24.508961
 Supercharger-V3 RO-Timișoara,45.755132,21.232989,32
 Supercharger-V4 RO-Timișoara Calea Torontalului,45.77407,21.2116
 
-Supercharger RS-Aleksinac,43.528816,21.709413
-Supercharger-V3 RS-Belgrade,44.710056,20.561054
-Supercharger-V3 RS-Belgrade,44.712577,20.560231
+Supercharger RS-Aleksinac Алексинац,43.52883,21.70943
+Supercharger RS-Belgrad Београд,44.71006,20.56105
+Supercharger-V3 RS-Belgrad Београд AVA shopping,44.71258,20.56023
+Supercharger-V4 RS-Ražanj Ражањ,43.68232,21.5464
 
 Supercharger-V4 SE-Alingsås,57.924721,12.545965
 Supercharger SE-Arboga,59.426399,15.827282,40
@@ -7089,6 +7090,7 @@ AllgäuStrom DE-Oberstdorf Nebelhornstraße,47.40632,10.28486
 AllgäuStrom DE-Rückholz Hauptstraße,47.65906,10.53959
 
 alperia IT-Badia Str. Pedraces,46.60937,11.89464
+alperia IT-Bozen Sparkassenstraße,46.49797,11.3491
 alperia IT-Bressanone Via Brennero,46.71924,11.65616
 alperia IT-Brixen Campillstraße,46.7096,11.662063
 alperia IT-Brunico Kapuzinerplatz,46.7971,11.94016
@@ -9302,6 +9304,7 @@ E.ON DE-Berlin Fritz-Wildung-Strasse 26,52.483714,13.296252
 E.ON DE-Berlin Gabriele-Tergit-Promenade 1,52.508247,13.376583
 E.ON DE-Berlin Georgenstraße 47,52.520389,13.393959
 E.ON DE-Berlin Gertrud-Kolmar-Straße,52.51243,13.38052
+E.ON DE-Berlin Gertrud-Kolmar-Straße,52.51282,13.38068,50
 E.ON DE-Berlin Hasenholzener Allee 2,52.540672,13.574287
 E.ON DE-Berlin Heinrich-Roller-Straße 13,52.53006,13.42483
 E.ON DE-Berlin Höchste Straße 17,52.526235,13.426328
@@ -22046,6 +22049,8 @@ twn DE-Naumburg (Saale) Jakobsring,51.149859,11.814456
 TWS DE-Ravensburg Markdorfer Straße,47.76182,9.54092
 TWS DE-Weingarten Gablerstraße,47.8078,9.63948
 
+U-POWER TW-Hengchun Township Henggong Rd,21.99752,120.7424
+
 Ultra-Fast SE-Varberg Gunnestorpsvägen,57.16941,12.276915,25
 
 Umweltanalytik-Kessel DE-Ahrensburg Kurt-Fischer-Straße,53.68333,10.2615
@@ -22257,6 +22262,7 @@ VBH DE-Hoyerswerda Kamenzer Bogen,51.42739,14.235942
 Veefi AU-St Lucia QLD Walcott St,-27.49483,153.00886
 
 VEGA AL-Durrës Rruga Adria,41.3175,19.472
+VEGA AL-Vlora Rruga Enver Jaho,40.46504,19.4822
 
 vigoris DE-Zinnowitz Dr.-Wachsmann-Straße,54.08001,13.90632
 
