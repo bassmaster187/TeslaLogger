@@ -1,0 +1,1987 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": 42,
+  "links": [],
+  "liveNow": false,
+  "panels": [
+    {
+      "autoZoom": true,
+      "datasource": {
+        "type": "mysql",
+        "uid": "PC0C98BF192F75B00"
+      },
+      "defaultLayer": "OpenStreetMap",
+      "gridPos": {
+        "h": 23,
+        "w": 14,
+        "x": 0,
+        "y": 0
+      },
+      "id": 2,
+      "lineColor": "#1F60C4",
+      "links": [],
+      "maxDataPointDelta": 700,
+      "maxDataPoints": 50000,
+      "pointColor": "royalblue",
+      "scrollWheelZoom": true,
+      "showLayerChanger": true,
+      "targets": [
+        {
+          "alias": "",
+          "datasource": {
+            "type": "mysql",
+            "uid": "PC0C98BF192F75B00"
+          },
+          "editorMode": "code",
+          "format": "table",
+          "group": [
+            {
+              "params": [
+                "$__interval",
+                "none"
+              ],
+              "type": "time"
+            }
+          ],
+          "hide": false,
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "SELECT\r\n  $__time(datum),\r\n   lat,\r\n   lng,\r\n   0 as type,\r\n   null as address,\r\n   ap\r\n   FROM pos\r\nWHERE  $__timeFilter(datum) and carid = $Car\r\nUNION\r\n  SELECT UNIX_TIMESTAMP(pos.datum) as time_sec, lat, lng, 1 as type, concat('<b>',address, '</b><br>Date: ',pos.datum, '<br>Duration: ', TIMESTAMPDIFF(MINUTE, StartDate, EndDate) ,'min<br>Charged: ',charging.charge_energy_added, 'kWh<br>Max Power:', max_charger_power, 'kW') as address, 0 as ap FROM chargingstate join charging on endchargingid = charging.id join pos on chargingstate.Pos = pos.id\r\n  WHERE $__timeFilter(pos.datum) and chargingstate.CarID = $Car and (fast_charger_brand = 'Tesla' or address like '%Supercharger%')\r\nUNION\r\n  SELECT UNIX_TIMESTAMP(pos.datum) as time_sec, lat, lng, 2 as type, concat('<b>',address, '</b><br>Date: ',pos.datum, '<br>Duration: ', TIMESTAMPDIFF(MINUTE, StartDate, EndDate) ,'min<br>Charged: ',charging.charge_energy_added, 'kWh<br>Max Power:', max_charger_power, 'kW') as address, 0 as ap FROM chargingstate join charging on endchargingid = charging.id join pos on chargingstate.Pos = pos.id\r\n  WHERE $__timeFilter(pos.datum) and chargingstate.CarID = $Car \r\n  and ((fast_charger_brand is not null && fast_charger_brand not in ('Tesla') and fast_charger_present = 1 and address not like '%supercharger%') \r\n  or (fast_charger_present is null and max_charger_power > 25 and address not like '%supercharger%'))\r\nUNION\r\n  SELECT UNIX_TIMESTAMP(pos.datum) as time_sec, lat, lng, 3 as type, concat('<b>',address, '</b><br>Date: ',pos.datum, '<br>Duration: ', TIMESTAMPDIFF(MINUTE, StartDate, EndDate) ,'min<br>Charged: ',charging.charge_energy_added, 'kWh<br>Max Power:', max_charger_power, 'kW') as address, 0 as ap FROM chargingstate join charging on endchargingid = charging.id join pos on chargingstate.Pos = pos.id\r\n  WHERE $__timeFilter(pos.datum) and chargingstate.CarID = $Car and ((fast_charger_present = 0) or (fast_charger_present is null and max_charger_power < 25 and address not like '%supercharger%'))\r\nUNION\r\n  SELECT UNIX_TIMESTAMP(T1.time_sec) as time_sec, lat, lng, 4 as type, concat('<b>', address,'</b><br>Date: ',T1.time_sec, '<br>Duration: ', TIMESTAMPDIFF(MINUTE,T1.time_sec, T2.time_sec), 'min'), 0 as ap  FROM (\r\n\t    SELECT @rowid:=@rowid+1 as rowid, drivestate.EndDate as time_sec, lat, lng, 4 as type, address \r\n\t    FROM drivestate join pos on drivestate.EndPos = pos.id, (SELECT @rowid:=0) as init\r\n\t    WHERE $__timeFilter(drivestate.EndDate) and drivestate.CarID = $Car \r\n    ) T1 join \r\n    (\r\n\t    SELECT @rowid2:=@rowid2+1 as rowid, drivestate.StartDate as time_sec \r\n\t    FROM drivestate join pos on drivestate.EndPos = pos.id, (SELECT @rowid2:=0) as init\r\n\t    WHERE $__timeFilter(drivestate.EndDate) and drivestate.CarID = $Car \r\n    ) T2 on T1.rowid+1=T2.rowid\r\n\r\n ORDER BY time_sec ASC",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "lat"
+                ],
+                "type": "column"
+              },
+              {
+                "params": [
+                  "avg"
+                ],
+                "type": "aggregate"
+              },
+              {
+                "params": [
+                  "lat"
+                ],
+                "type": "alias"
+              }
+            ],
+            [
+              {
+                "params": [
+                  "lng"
+                ],
+                "type": "column"
+              },
+              {
+                "params": [
+                  "avg"
+                ],
+                "type": "aggregate"
+              },
+              {
+                "params": [
+                  "lat"
+                ],
+                "type": "alias"
+              }
+            ]
+          ],
+          "sql": {
+            "columns": [
+              {
+                "parameters": [],
+                "type": "function"
+              }
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          },
+          "table": "pos",
+          "timeColumn": "Datum",
+          "timeColumnType": "datetime",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        }
+      ],
+      "title": "Map",
+      "type": "pr0ps-trackmap-panel"
+    },
+    {
+      "datasource": {
+        "type": "mysql",
+        "uid": "PC0C98BF192F75B00"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "left",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "inspect": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "kWh"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 57
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Consumption100km"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 156
+              },
+              {
+                "id": "unit",
+                "value": "kwatth"
+              },
+              {
+                "id": "displayName",
+                "value": "kWh/100km"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "MinutesDC"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 110
+              },
+              {
+                "id": "displayName",
+                "value": "time DC"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "MinMinutesDC"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 123
+              },
+              {
+                "id": "unit",
+                "value": "m"
+              },
+              {
+                "id": "displayName",
+                "value": "min time DC"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "AVGMinutesDC"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 120
+              },
+              {
+                "id": "unit",
+                "value": "m"
+              },
+              {
+                "id": "displayName",
+                "value": "AVG time DC"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "MaxMinutesDC"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 123
+              },
+              {
+                "id": "unit",
+                "value": "m"
+              },
+              {
+                "id": "displayName",
+                "value": "max time DC"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "CountDC"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 80
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "MinutesAC"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 99
+              },
+              {
+                "id": "unit",
+                "value": "m"
+              },
+              {
+                "id": "displayName",
+                "value": "time AC"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "CountAC"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 85
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "kWh/100km"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 115
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "kWhDC"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 72
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "kWhAC"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 79
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "MinuteDiff"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "m"
+              },
+              {
+                "id": "displayName",
+                "value": "Total Time"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "MinutesAC"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "m"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "MinutesDC"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "m"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "AVG time DC"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 114
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "max time DC"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 112
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 10,
+        "x": 14,
+        "y": 0
+      },
+      "id": 4,
+      "links": [],
+      "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
+          "fields": [],
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "showHeader": true,
+        "sortBy": []
+      },
+      "pluginVersion": "10.0.1",
+      "targets": [
+        {
+          "alias": "",
+          "datasource": {
+            "type": "mysql",
+            "uid": "PC0C98BF192F75B00"
+          },
+          "editorMode": "code",
+          "format": "table",
+          "group": [],
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "SELECT       \r\n  sum(chargingstate.charge_energy_added) as kWh,\r\n  sum(case WHEN fast_charger_present = 1 or max_charger_power > 23 then chargingstate.charge_energy_added else null END) as kWhDC,\r\n  sum(case WHEN fast_charger_present = 1 or max_charger_power > 23 then NULL else chargingstate.charge_energy_added END) as kWhAC,\r\n\r\n  sum(chargingstate.charge_energy_added) / (SELECT max(odometer) - min(odometer) FROM pos WHERE  $__timeFilter(datum) and carid = $Car) * 100 as Consumption100km,\r\n  sum(case WHEN fast_charger_present = 1 or max_charger_power > 23 then TIMESTAMPDIFF(MINUTE, chargingstate.StartDate, chargingstate.EndDate) else null END) as MinutesDC,\r\n  min(case WHEN fast_charger_present = 1 or max_charger_power > 23 then TIMESTAMPDIFF(MINUTE, chargingstate.StartDate, chargingstate.EndDate) else null END) as MinMinutesDC,\r\n  avg(case WHEN fast_charger_present = 1 or max_charger_power > 23 then TIMESTAMPDIFF(MINUTE, chargingstate.StartDate, chargingstate.EndDate) else null END) as AVGMinutesDC,\r\n  max(case WHEN fast_charger_present = 1 or max_charger_power > 23 then TIMESTAMPDIFF(MINUTE, chargingstate.StartDate, chargingstate.EndDate) else null END) as MaxMinutesDC,\r\n  sum(case WHEN fast_charger_present = 1 or max_charger_power > 23 then 1 else 0 END) as CountDC,\r\n  sum(case WHEN fast_charger_present = 1 or max_charger_power > 23 then null else TIMESTAMPDIFF(MINUTE, chargingstate.StartDate, chargingstate.EndDate) END) as MinutesAC,\r\n  sum(case WHEN fast_charger_present = 1 or max_charger_power > 23 then 0 else 1 END) as CountAC,\r\n  sum(TIMESTAMPDIFF(MINUTE, chargingstate.StartDate, chargingstate.EndDate)) as MinuteDiff         \r\nFROM            charging inner JOIN chargingstate ON charging.id = chargingstate.StartChargingID \r\n                         LEFT OUTER JOIN\r\n                         charging AS charging_End ON chargingstate.EndChargingID = charging_End.id\r\nwhere $__timeFilter(chargingstate.StartDate) and chargingstate.EndChargingID - chargingstate.StartChargingID > 2\r\nand chargingstate.CarId = $Car \r\norder by StartDate desc",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "sql": {
+            "columns": [
+              {
+                "parameters": [],
+                "type": "function"
+              }
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          },
+          "timeColumn": "time",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        }
+      ],
+      "title": "Charging",
+      "transformations": [
+        {
+          "id": "merge",
+          "options": {
+            "reducers": []
+          }
+        }
+      ],
+      "type": "table"
+    },
+    {
+      "datasource": {
+        "type": "mysql",
+        "uid": "PC0C98BF192F75B00"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "left",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "inspect": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Cost100km"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 101
+              },
+              {
+                "id": "unit",
+                "value": "currencyEUR"
+              },
+              {
+                "id": "displayName",
+                "value": "100km"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "avgCostkWhDC"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 129
+              },
+              {
+                "id": "unit",
+                "value": "currencyEUR"
+              },
+              {
+                "id": "displayName",
+                "value": "AVG kWh DC"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "minCostkWhDC"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 129
+              },
+              {
+                "id": "unit",
+                "value": "currencyEUR"
+              },
+              {
+                "id": "displayName",
+                "value": "min kWh DC"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "maxCostkWhDC"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 139
+              },
+              {
+                "id": "unit",
+                "value": "currencyEUR"
+              },
+              {
+                "id": "displayName",
+                "value": "max kWh DC"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "minCostkWhAC"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 131
+              },
+              {
+                "id": "unit",
+                "value": "currencyEUR"
+              },
+              {
+                "id": "displayName",
+                "value": "min kWh AC"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Total"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 76
+              },
+              {
+                "id": "unit",
+                "value": "currencyEUR"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "avgCostkWh"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 109
+              },
+              {
+                "id": "unit",
+                "value": "currencyEUR"
+              },
+              {
+                "id": "displayName",
+                "value": "AVG kWh"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "avgCostkWhAC"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 130
+              },
+              {
+                "id": "unit",
+                "value": "currencyEUR"
+              },
+              {
+                "id": "displayName",
+                "value": "AVG kWh AC"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "maxCostkWhAC"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "currencyEUR"
+              },
+              {
+                "id": "displayName",
+                "value": "max kWh AC"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "max kWh DC"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 112
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "min kWh AC"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 110
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "min kWh DC"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 115
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 10,
+        "x": 14,
+        "y": 4
+      },
+      "id": 5,
+      "links": [],
+      "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
+          "fields": [],
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "showHeader": true,
+        "sortBy": []
+      },
+      "pluginVersion": "10.0.1",
+      "targets": [
+        {
+          "alias": "",
+          "datasource": {
+            "type": "mysql",
+            "uid": "PC0C98BF192F75B00"
+          },
+          "editorMode": "code",
+          "format": "table",
+          "group": [],
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "SELECT       \r\n  sum(cost_total) as Total,\r\n  sum(cost_total) / (SELECT max(odometer) - min(odometer) FROM pos WHERE  $__timeFilter(datum) and carid = $Car) * 100 as Cost100km,\r\n  sum(cost_total) / sum(chargingstate.charge_energy_added) as avgCostkWh,\r\n  sum(case WHEN fast_charger_present = 1 or max_charger_power > 23 then cost_total else 0 end) / \r\n  sum(case WHEN fast_charger_present = 1 or max_charger_power > 23 then chargingstate.charge_energy_added  else 0 end) as avgCostkWhDC,\r\n  min(case WHEN fast_charger_present = 1 or max_charger_power > 23 then cost_total / chargingstate.charge_energy_added else null end) minCostkWhDC,\r\n  max(case WHEN fast_charger_present = 1 or max_charger_power > 23 then cost_total / chargingstate.charge_energy_added else null end) maxCostkWhDC,\r\n  sum(case WHEN fast_charger_present = 1 or max_charger_power > 23 then 0 else cost_total end) / \r\n  sum(case WHEN fast_charger_present = 1 or max_charger_power > 23 then 0 else chargingstate.charge_energy_added end) as avgCostkWhAC,\r\n  min(case WHEN fast_charger_present = 1 or max_charger_power > 23 then null else cost_total / chargingstate.charge_energy_added end) minCostkWhAC,\r\n  max(case WHEN fast_charger_present = 1 or max_charger_power > 23 then null else cost_total / chargingstate.charge_energy_added end) maxCostkWhAC\r\n  \r\nFROM            charging inner JOIN chargingstate ON charging.id = chargingstate.StartChargingID \r\n                         LEFT OUTER JOIN\r\n                         charging AS charging_End ON chargingstate.EndChargingID = charging_End.id\r\nwhere $__timeFilter(chargingstate.StartDate) and chargingstate.EndChargingID - chargingstate.StartChargingID > 2\r\nand chargingstate.CarId = $Car \r\norder by StartDate desc",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "sql": {
+            "columns": [
+              {
+                "parameters": [],
+                "type": "function"
+              }
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          },
+          "timeColumn": "time",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        }
+      ],
+      "title": "Cost",
+      "transformations": [
+        {
+          "id": "merge",
+          "options": {
+            "reducers": []
+          }
+        }
+      ],
+      "type": "table"
+    },
+    {
+      "datasource": {
+        "type": "mysql",
+        "uid": "PC0C98BF192F75B00"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "left",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "inspect": false
+          },
+          "decimals": 2,
+          "displayName": "",
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "string"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "speed_max"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "max km/h"
+              },
+              {
+                "id": "unit",
+                "value": "locale"
+              },
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "type": "color-text"
+                }
+              },
+              {
+                "id": "custom.align",
+                "value": "right"
+              },
+              {
+                "id": "custom.width",
+                "value": 84
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "#d8d9da",
+                      "value": null
+                    },
+                    {
+                      "color": "rgba(237, 129, 40, 0.89)",
+                      "value": 151
+                    },
+                    {
+                      "color": "rgba(245, 54, 54, 0.9)",
+                      "value": 200
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "power_max"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "max PS"
+              },
+              {
+                "id": "unit",
+                "value": "locale"
+              },
+              {
+                "id": "custom.align"
+              },
+              {
+                "id": "custom.width",
+                "value": 66
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "avg_kmh"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Ø km/h"
+              },
+              {
+                "id": "unit",
+                "value": "locale"
+              },
+              {
+                "id": "custom.align"
+              },
+              {
+                "id": "custom.width",
+                "value": 73
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "kmDriven"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 87
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 10,
+        "x": 14,
+        "y": 8
+      },
+      "id": 8,
+      "links": [],
+      "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
+          "fields": [
+            "consumption_kWh",
+            "RangeDiff",
+            "km_diff",
+            "DurationMinutes"
+          ],
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "showHeader": true,
+        "sortBy": []
+      },
+      "pluginVersion": "10.0.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "mysql",
+            "uid": "PC0C98BF192F75B00"
+          },
+          "editorMode": "code",
+          "format": "table",
+          "group": [],
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "SELECT \n  round((SELECT max(odometer) - min(odometer) FROM pos WHERE  $__timeFilter(datum) and carid = $Car),1) as kmDriven,\n  max(speed_max) as speed_max, max(power_max) as power_max, (select sum(km_diff) / sum(DurationMinutes) * 60) as avg_kmh\nfrom trip WHERE \n  $__timeFilter(StartDate) and km_diff < 1000 and CarID = $Car \norder by StartDate desc\n",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "sql": {
+            "columns": [
+              {
+                "parameters": [],
+                "type": "function"
+              }
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          },
+          "timeColumn": "time",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        }
+      ],
+      "title": "Speed",
+      "transformations": [
+        {
+          "id": "merge",
+          "options": {
+            "reducers": []
+          }
+        }
+      ],
+      "type": "table"
+    },
+    {
+      "datasource": {
+        "type": "mysql",
+        "uid": "PC0C98BF192F75B00"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "left",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "inspect": false
+          },
+          "decimals": 1,
+          "displayName": "",
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "locale"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "maxKmDrivenPerCharge"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 191
+              },
+              {
+                "id": "unit",
+                "value": "lengthkm"
+              },
+              {
+                "id": "displayName",
+                "value": "max distance driven per charge"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "MaxCalculatedRangePerCharge"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 242
+              },
+              {
+                "id": "unit",
+                "value": "lengthkm"
+              },
+              {
+                "id": "displayName",
+                "value": "max projected range per charge"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "maxTripKm"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 105
+              },
+              {
+                "id": "unit",
+                "value": "lengthkm"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "minTripKm"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 101
+              },
+              {
+                "id": "unit",
+                "value": "lengthkm"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "avgTripKm"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "lengthkm"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "max distance driven per charge"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 236
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 10,
+        "x": 14,
+        "y": 12
+      },
+      "id": 9,
+      "links": [],
+      "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
+          "fields": [
+            "consumption_kWh",
+            "RangeDiff",
+            "km_diff",
+            "DurationMinutes"
+          ],
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "showHeader": true,
+        "sortBy": []
+      },
+      "pluginVersion": "10.0.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "mysql",
+            "uid": "PC0C98BF192F75B00"
+          },
+          "editorMode": "code",
+          "format": "table",
+          "group": [],
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "SELECT \n    max(EndOdometer - StartOdometer) AS maxKmDrivenPerCharge,\n    max((EndOdometer - StartOdometer) / (StartSOC - EndSOC) * 100) AS MaxCalculatedRangePerCharge,\n    (SELECT max(km_diff) from trip WHERE $__timeFilter(StartDate) and km_diff < 1000 and CarID = $Car ) as maxTripKm,\n    (SELECT min(km_diff) from trip WHERE $__timeFilter(StartDate) and km_diff < 1000 and CarID = $Car and km_diff > 10) as minTripKm,\n    (SELECT avg(km_diff) from trip WHERE $__timeFilter(StartDate) and km_diff < 1000 and CarID = $Car and km_diff > 10) as avgTripKm\nFROM\n    (SELECT \n        (@rowid1:=@rowid1 + 1) firstSeq,\n            # chargingstate.ID AS EndId,\n            chargingstate.EndDate AS StartTrip,\n            charging.battery_level AS StartSOC,\n            charging.ideal_battery_range_km AS StartRange,\n            pos.odometer AS StartOdometer     ,\n            wh_tr\n    FROM\n        charging\n    INNER JOIN chargingstate ON charging.id = chargingstate.EndChargingID\n    INNER JOIN cars on chargingstate.carid = cars.id\n    INNER JOIN pos ON chargingstate.pos = pos.id\n    JOIN (SELECT @rowid1:=0) a\n    WHERE $__timeFilter(chargingstate.StartDate) and chargingstate.CarID = $Car  and\n        TIMESTAMPDIFF(MINUTE, chargingstate.StartDate, chargingstate.EndDate) > 3  and chargingstate.EndChargingID - chargingstate.StartChargingID > 4\n    ORDER BY StartDate DESC) AS TEnd\n        JOIN\n    (SELECT \n        (@rowid2:=@rowid2 + 1) secondSeq,\n          #  chargingstate.ID AS StartId,\n            chargingstate.StartDate AS EndTrip,\n            charging.battery_level AS EndSOC,\n            charging.ideal_battery_range_km AS EndRange,\n            pos.odometer AS EndOdometer\n    FROM\n        charging\n    INNER JOIN chargingstate ON charging.id = chargingstate.StartChargingID\n    INNER JOIN pos ON chargingstate.pos = pos.id\n    JOIN (SELECT @rowid2:=0) a\n    WHERE $__timeFilter(chargingstate.StartDate) and chargingstate.CarID = $Car  and\n        TIMESTAMPDIFF(MINUTE, chargingstate.StartDate, chargingstate.EndDate) > 3  and chargingstate.EndChargingID - chargingstate.StartChargingID > 4\n    ORDER BY StartDate DESC) AS TStart ON TEnd.firstSeq = TStart.secondSeq + 1\n    where (EndOdometer - StartOdometer between 5 and 1000) and ((EndOdometer - StartOdometer) / (StartSOC - EndSOC)) < 10 and StartSOC > EndSOC and EndOdometer - StartOdometer > 20\norder by StartTrip desc",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "sql": {
+            "columns": [
+              {
+                "parameters": [],
+                "type": "function"
+              }
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          },
+          "timeColumn": "time",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        }
+      ],
+      "title": "Distance",
+      "transformations": [
+        {
+          "id": "merge",
+          "options": {
+            "reducers": []
+          }
+        }
+      ],
+      "type": "table"
+    },
+    {
+      "datasource": {
+        "type": "mysql",
+        "uid": "PC0C98BF192F75B00"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "left",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "inspect": false
+          },
+          "decimals": 0,
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "locale"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "kWh/100km"
+            },
+            "properties": [
+              {
+                "id": "decimals",
+                "value": 1
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "L gasoline / 100km"
+            },
+            "properties": [
+              {
+                "id": "decimals",
+                "value": 1
+              },
+              {
+                "id": "custom.width",
+                "value": 162
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "L diesel / 100km"
+            },
+            "properties": [
+              {
+                "id": "decimals",
+                "value": 1
+              },
+              {
+                "id": "custom.width",
+                "value": 145
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "L gasoline / 100km with solar"
+            },
+            "properties": [
+              {
+                "id": "decimals",
+                "value": 1
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "L diesel / 100km with solar"
+            },
+            "properties": [
+              {
+                "id": "decimals",
+                "value": 1
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "CO2 kg mix"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 117
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "CO2 g/km mix"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 135
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 10,
+        "x": 14,
+        "y": 16
+      },
+      "id": 3,
+      "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "showHeader": true,
+        "sortBy": []
+      },
+      "pluginVersion": "10.0.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "mysql",
+            "uid": "PC0C98BF192F75B00"
+          },
+          "editorMode": "code",
+          "format": "table",
+          "group": [],
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "select \nsum(CO2_Mix)/1000 as \"CO2 kg mix\", sum(CO2_Mix) / (max(odometer) - min(odometer)) as \"CO2 g/km mix\",\nsum(CO2_Mix) / (max(odometer) - min(odometer)) / 10 / 2.37 as \"L gasoline / 100km\",\nsum(CO2_Mix) / (max(odometer) - min(odometer)) / 10 / 2.65 as \"L diesel / 100km\",\n(select sum(case when co2_g_kWh > 0 then null else charge_energy_added end) from chargingstate where $__timeFilter(chargingstate.StartDate) and chargingstate.CarId = $Car) as missingCO2kWh\nfrom\n(\nSELECT co2_g_kWh,  \n\tCASE WHEN meter_vehicle_kwh_sum > meter_utility_kwh_sum THEN (select 1-(meter_utility_kwh_sum / meter_vehicle_kwh_sum)) else 0 END as PV_percent,\n\tcharge_energy_added, \n    charge_energy_added * (1-(select PV_percent)) as Grid, \n    charge_energy_added * (select PV_percent) as PV,\n\t(select Grid) * co2_g_kWh as CO2_Grid,\n    charge_energy_added * co2_g_kWh as CO2_Mix,\n    odometer\n\tFROM chargingstate join pos on chargingstate.pos = pos.id\n\twhere $__timeFilter(chargingstate.StartDate) and TIMESTAMPDIFF(MINUTE, chargingstate.StartDate, chargingstate.EndDate) > 3 and chargingstate.EndChargingID - chargingstate.StartChargingID > 4\nand chargingstate.CarId = $Car and odometer > 0\n\t) T",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "CarId"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "sql": {
+            "columns": [
+              {
+                "parameters": [],
+                "type": "function"
+              }
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          },
+          "table": "TPMS",
+          "timeColumn": "Datum",
+          "timeColumnType": "timestamp",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        }
+      ],
+      "title": "CO2",
+      "type": "table"
+    },
+    {
+      "datasource": {
+        "type": "mysql",
+        "uid": "PC0C98BF192F75B00"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "decimals": 1,
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "locale"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Höhe [m]"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "blue",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 10,
+        "w": 10,
+        "x": 14,
+        "y": 20
+      },
+      "id": 7,
+      "links": [],
+      "options": {
+        "legend": {
+          "calcs": [
+            "mean",
+            "max",
+            "min"
+          ],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "10.0.1",
+      "targets": [
+        {
+          "alias": "",
+          "datasource": {
+            "type": "mysql",
+            "uid": "PC0C98BF192F75B00"
+          },
+          "editorMode": "code",
+          "format": "time_series",
+          "group": [],
+          "hide": false,
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "SELECT   $__time(datum),  altitude as 'Höhe [m]'\r\nFROM  pos\r\nWHERE  $__timeFilter(datum) and CarID = $Car\r\nORDER BY  Datum ASC",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "id"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "sql": {
+            "columns": [
+              {
+                "parameters": [],
+                "type": "function"
+              }
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          },
+          "table": "charging",
+          "timeColumn": "Datum",
+          "timeColumnType": "timestamp",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        }
+      ],
+      "title": "Altitude",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "mysql",
+        "uid": "PC0C98BF192F75B00"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "km/h",
+            "axisPlacement": "auto",
+            "fillOpacity": 80,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineWidth": 1,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "decimals": 0,
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "light-green",
+                "value": null
+              },
+              {
+                "color": "green",
+                "value": 60
+              },
+              {
+                "color": "yellow",
+                "value": 100
+              },
+              {
+                "color": "#EF843C",
+                "value": 150
+              },
+              {
+                "color": "#E24D42",
+                "value": 200
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "total"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "percentunit"
+              },
+              {
+                "id": "decimals",
+                "value": 1
+              },
+              {
+                "id": "custom.axisLabel",
+                "value": ""
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 14,
+        "x": 0,
+        "y": 23
+      },
+      "id": 6,
+      "options": {
+        "barRadius": 0,
+        "barWidth": 0.97,
+        "colorByField": "kmh",
+        "fullHighlight": false,
+        "groupWidth": 0.7,
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": false
+        },
+        "orientation": "auto",
+        "showValue": "auto",
+        "stacking": "none",
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        },
+        "xField": "kmh",
+        "xTickLabelRotation": 0,
+        "xTickLabelSpacing": 0
+      },
+      "pluginVersion": "10.0.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "mysql",
+            "uid": "PC0C98BF192F75B00"
+          },
+          "editorMode": "code",
+          "format": "table",
+          "rawQuery": true,
+          "rawSql": "SELECT speed div 10 * 10 as kmh, count(*) / (select count(*) from pos where $__timeFilter(datum) and CarID = $Car) as total\r\nFROM pos \r\nwhere $__timeFilter(datum) and CarID = $Car\r\ngroup by speed div 10 \r\nhaving kmh >= 10",
+          "refId": "A",
+          "sql": {
+            "columns": [
+              {
+                "parameters": [],
+                "type": "function"
+              }
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          }
+        }
+      ],
+      "title": "Speed",
+      "type": "barchart"
+    },
+    {
+      "datasource": {
+        "type": "mysql",
+        "uid": "PC0C98BF192F75B00"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "axisSoftMax": 100,
+            "axisSoftMin": 0,
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "show": "points"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "blue",
+                "value": null
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "charger_power"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "kwatt"
+              },
+              {
+                "id": "custom.axisLabel",
+                "value": "Power"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "battery_level"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "percent"
+              },
+              {
+                "id": "custom.axisLabel",
+                "value": "SOC"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 15,
+        "w": 14,
+        "x": 0,
+        "y": 30
+      },
+      "id": 10,
+      "options": {
+        "dims": {
+          "exclude": [
+            "id"
+          ],
+          "x": "battery_level"
+        },
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": false
+        },
+        "series": [
+          {
+            "pointColor": {
+              "field": "color"
+            },
+            "x": "battery_level",
+            "y": "charger_power"
+          }
+        ],
+        "seriesMapping": "manual",
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "mysql",
+            "uid": "PC0C98BF192F75B00"
+          },
+          "editorMode": "code",
+          "format": "table",
+          "rawQuery": true,
+          "rawSql": "SELECT chargingstate.id * 100 as color, address, charger_power, charging.battery_level\r\nFROM teslalogger.charging \r\njoin chargingstate on charging.id between StartChargingID and EndChargingID \r\njoin pos on chargingstate.Pos = pos.id\r\nWHERE charging.CarID=$Car and $__timeFilter(charging.Datum) and chargingstate.CarID = $Car and $__timeFilter(chargingstate.StartDate)\r\norder by chargingstate.id, charging.id",
+          "refId": "A",
+          "sql": {
+            "columns": [
+              {
+                "parameters": [],
+                "type": "function"
+              }
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          }
+        }
+      ],
+      "title": "Charging Curves",
+      "type": "xychart"
+    }
+  ],
+  "refresh": "",
+  "schemaVersion": 38,
+  "style": "dark",
+  "tags": [],
+  "templating": {
+    "list": [
+      {
+        "current": {
+          "selected": false,
+          "text": "Lucy",
+          "value": "6"
+        },
+        "datasource": {
+          "type": "mysql",
+          "uid": "PC0C98BF192F75B00"
+        },
+        "definition": "select display_name as __text, id as __value from cars where length(vin) > 5 order by display_name",
+        "hide": 0,
+        "includeAll": false,
+        "label": "Fahrzeug",
+        "multi": false,
+        "name": "Car",
+        "options": [],
+        "query": "select display_name as __text, id as __value from cars where length(vin) > 5 order by display_name",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 1,
+        "type": "query"
+      }
+    ]
+  },
+  "time": {
+    "from": "2025-08-13T04:16:10.500Z",
+    "to": "2025-09-10T22:52:56.500Z"
+  },
+  "timepicker": {},
+  "timezone": "",
+  "title": "Jurney",
+  "uid": "c424c390-1abf-43ab-80df-9931c487ea8d",
+  "version": 48,
+  "weekStart": ""
+}
