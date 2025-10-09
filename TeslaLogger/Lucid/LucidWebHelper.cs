@@ -320,9 +320,19 @@ namespace TeslaLoggerNET8.Lucid
                                 if (car.TrimBadging != tempVariant)
                                 { 
                                     car.TrimBadging = tempVariant;
-                                    car.ModelName = "Lucid Air " + tempVariant;
-                                    car.WriteSettings();
-                                    car.webhelper.TaskerWakeupfile(true);
+                                    UpdateModelName();
+                                }
+                                break;
+
+                            case "model":
+                                string tempModel = value.Replace("MODEL_", "").ToLower();
+                                tempModel = tempModel.Replace("_", " ");
+                                tempModel = char.ToUpper(tempModel[0]) + tempModel.Substring(1);
+
+                                if (car.CarSpecialType != tempModel)
+                                {
+                                    car.CarSpecialType = tempModel;
+                                    UpdateModelName();
                                 }
                                 break;
 
@@ -367,6 +377,13 @@ namespace TeslaLoggerNET8.Lucid
                 InsertBatteryTemperatureData();
 
             car.CurrentJSON.CreateCurrentJSON();
+        }
+
+        private void UpdateModelName()
+        {
+            car.ModelName = "Lucid " + car.CarSpecialType + " " + car.TrimBadging;
+            car.WriteSettings();
+            car.webhelper.TaskerWakeupfile(true);
         }
 
         private void CalculatePower(long last_updated_ms_before, double kwhr_before)
