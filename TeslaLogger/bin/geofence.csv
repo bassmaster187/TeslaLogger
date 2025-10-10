@@ -5044,6 +5044,7 @@ Supercharger-V3 US-Monteagle TN,35.237604,-85.850886
 Supercharger US-Montecito CA,34.421817,-119.630766
 Supercharger-V3 US-Monterey CA,36.585864,-121.898411
 Supercharger-V3 US-Montgomery AL,32.36123,-86.16114
+Supercharger-V3 US-Montgomery PA,41.1868,-76.91408
 Supercharger-V3 US-Monticello MN,45.300998,-93.799256
 Supercharger-V3 US-Monticello NY,41.66662,-74.6716
 Supercharger-V3 US-Montrose CO,38.481221,-107.87638
@@ -6125,6 +6126,7 @@ AGROLA CH-Saint-Maurice Rte du Simplon,46.20708,7.00797
 AGROLA CH-Thusis Äussere Heinzenbergstrasse,46.71082,9.43587
 
 AGSM-AIM IT-Gardone Riviera Piazzale Amleto Fiorini,45.62053,10.56245
+AGSM-AIM IT-Gardone Riviera Via al Vittoriale,45.62362,10.5696
 
 AH-Beteiligung DE-Bremen Schwanengatt,53.08038,8.8011
 
@@ -8615,6 +8617,7 @@ Clever DK-Esbjerg John Tranums Vej,55.52122,8.54808
 Clever DK-Esbjerg Smedegade,55.465649,8.445509,30
 Clever DK-Faaborg Brønnersvej,55.10179,10.24039
 Clever DK-Fanø Hovedgaden,55.442367,8.399054
+Clever DK-Fanø Strandvejen,55.43838,8.3859
 Clever DK-Gilleleje Smidstrup Strandvej,56.11693,12.24052
 Clever DK-Gråsten Sundsnæs,54.9104,9.58843
 Clever DK-Gudenå,56.449,10.00198
@@ -10304,6 +10307,7 @@ EnBW CZ-Karlovy Vary,50.232775,12.8678
 EnBW DE-Aach,47.840881,8.852887
 EnBW DE-Aach Singener Straße,47.838983,8.860239
 EnBW DE-Aachen Stolberger Straße,50.77591,6.111827
+EnBW DE-Aachen Trierer Straße,50.75105,6.15668
 EnBW DE-Abensberg Straubinger Straße,48.81055,11.8601
 EnBW DE-Achern Fautenbacher Straße,48.6276,8.056921
 EnBW DE-Achern Güterhallenstraße,48.62889,8.06168
@@ -10399,7 +10403,6 @@ EnBW DE-Autohof Mendig,50.38231,7.26952,25
 EnBW DE-Autohof Nahetal,49.9256,7.93568,30
 EnBW DE-Autohof Northeim,51.73232,9.97211
 EnBW DE-Autohof Stuhr,53.01194,8.70454,30
-EnBW DE-Autohof Zorbau,51.1777,12.01094
 EnBW DE-Aying Römerstraße,47.94764,11.791601
 EnBW DE-Aßling Glonner Straße,47.99171,12.00092
 EnBW DE-Backnang Annonay-Straße,48.94685,9.4332
@@ -11348,6 +11351,7 @@ EnBW DE-Lünen Fressnapf,51.6066,7.50454
 EnBW DE-Lünen Penny,51.59754,7.43986
 EnBW DE-Lünen Rewe,51.608513,7.522452
 EnBW DE-Lüssow Ostseecenter,54.301457,13.022761
+EnBW DE-Lützen Hallesche Straße,51.1777,12.01094
 EnBW DE-Magdeburg Burger King,52.17681,11.627207
 EnBW DE-Magdeburg Mittagstraße,52.15277,11.62923
 EnBW DE-Mahlberg Ost,48.30916,7.79153,20
@@ -12355,7 +12359,7 @@ EnelX IT-Olbia Via Basa,40.96083,9.491849
 EnelX IT-Oleggio Via Don G. Minzoni,45.59547,8.6353
 EnelX IT-Oleggio Via Gallarate,45.5929,8.64723
 EnelX IT-Orta San Giulio Via Panoramica,45.79747,8.41471
-EnelX IT-Paese Via Monsignor Farina,756.0,12.12217
+EnelX IT-Paese Via Monsignor Farina,45.68576,12.12217
 EnelX IT-Palau Via Riva dei Lestrigoni,41.17803,9.38475
 EnelX IT-Palermo Via Marchese di Villabianca,38.139612,13.349534
 EnelX IT-Peschiera del Garda Via Venezia,45.44199,10.70614
@@ -20051,6 +20055,7 @@ Renovatio RO-Constanța Bulevardul Aurel Vlaicu,44.2006,28.60718
 Renovatio RO-Constanța Bulevardul Brătianu,44.17275,28.6361
 Renovatio RO-Constanța Str. Caraiman,44.15692,28.61589
 Renovatio RO-Constanța Str. Eliberării,44.17655,28.62382
+Renovatio RO-Cruceni A1,46.08028,21.32365
 Renovatio RO-Cruceni A1,46.08145,21.323674
 Renovatio RO-Drobeta-Turnu Severin Bulevardul Mihai Viteazul,44.63781,22.63344
 Renovatio RO-Focșani Calea Moldovei,45.69521,27.20324
@@ -20968,6 +20973,8 @@ STAWAG DE-Monschau Trierer Straße,50.573817,6.262871
 STAWAG DE-Simmerath In den Bremen,50.607278,6.309555
 
 Steinhoff DE-Bad Ems Silberau,50.33236,7.709039
+
+Stekerr BA-Jajce E761,44.33926,17.26402
 
 Stella DK-Ballerup Lautrupvang,55.73182,12.38906
 Stella DK-København Bernstorffsgade,55.66863,12.57199
@@ -22289,6 +22296,7 @@ Veefi AU-St Lucia QLD Walcott St,-27.49483,153.00886
 
 VEGA AL-Durrës Rruga Adria,41.3175,19.472
 VEGA AL-Lushnjë SH4,40.95494,19.68658
+VEGA AL-Shkodër Rruga Mbreti Gent,42.055,19.49925
 VEGA AL-Vlora Rruga Enver Jaho,40.46504,19.4822
 
 vigoris DE-Zinnowitz Dr.-Wachsmann-Straße,54.08001,13.90632
@@ -23100,6 +23108,7 @@ DE Bad Birnbach Apart Hotel am Sonnenhügel,48.44348,13.08266
 DE Bad Buchau Marktplatz,48.06537,9.60956
 DE Bad Doberan Grand Hotel Heiligendamm,54.143733,11.842857
 DE Bad Ems Therme,50.33317,7.71174
+DE Bad Griesbach im Rottal Hotel St. Wolfgang,48.4281,13.1832
 DE Bad Kreuznach Leonardo Hotel,49.853,7.88291
 DE Bad Münstereifel Bendenweg,50.574357,6.765263
 DE Bad Nauheim BioMarkt,50.3607,8.7538
