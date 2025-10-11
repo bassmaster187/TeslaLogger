@@ -2452,7 +2452,7 @@ Supercharger-V3 FR-Ajaccio,41.951864,8.792775
 Supercharger-V4 FR-Albaret-Sainte-Marie,44.8708,3.25304
 Supercharger-V3 FR-Albertville,45.65538,6.36566
 Supercharger-V3 FR-Albi,43.95773,2.154951
-Supercharger FR-Amiens,49.863492,2.27814
+Supercharger-V4 FR-Amiens,49.8635,2.27814
 Supercharger-V3 FR-Angers Espace Anjou,47.466441,-0.524568
 Supercharger-V3 FR-Angoulême,45.69448,0.17889,30
 Supercharger-V3 FR-Annecy - Seynod,45.877092,6.0879
@@ -2475,6 +2475,7 @@ Supercharger-V4 FR-Bayonne Ametzondo,43.481965,-1.445765
 Supercharger FR-Beaune,47.017319,4.83779
 Supercharger-V3 FR-Beaune Nord,47.04305,4.841536,60
 Supercharger-V3 FR-Beauvais,49.41024,2.11367
+Supercharger-V4 FR-Bergerac,44.8353,0.44774
 Supercharger FR-Bernin,45.265676,5.876448
 Supercharger-V4 FR-Besançon,47.216601,5.946474
 Supercharger FR-Besançon,47.234539,5.901153
@@ -2797,6 +2798,7 @@ Supercharger GB-Hilton Park Northbound,52.644021,-2.058587
 Supercharger GB-Hilton Park Southbound,52.644074,-2.054225
 Supercharger-V4 GB-Huddersfield,53.670968,-1.827989
 Supercharger-V4 GB-Hull,53.794878,-0.367221
+Supercharger-V4 GB-Ilkley,53.92893,-1.79466
 Supercharger GB-Inverness,57.481674,-4.225466
 Supercharger-V3 GB-Ipswich,52.084716,1.116459
 Supercharger GB-Keele Northbound,52.993,-2.2903
@@ -2946,6 +2948,7 @@ Supercharger HR-Vrgorac,43.20407,17.37387,25
 Supercharger-V4 HR-Zadar,44.11404,15.40714
 Supercharger-V4 HR-Zadar Westbound,44.11502,15.40623
 Supercharger HR-Zagreb,45.76705,16.23365
+Supercharger-V4 HR-Zagreb East,45.79404,16.15084
 Supercharger-V4 HR-Zagreb West,45.79553,15.85776
 
 Supercharger-V4 HU-Budapest Maglod,47.45916,19.33423
@@ -3648,6 +3651,7 @@ Supercharger-V3 NZ-Ruakura,-37.777419,175.345078
 Supercharger NZ-Sylvia Park,-36.913358,174.841418
 Supercharger-V3 NZ-Taihape,-39.67351,175.793023
 Supercharger NZ-Taupo,-38.692628,176.075996
+Supercharger-V4 NZ-Waipapa,-35.21,173.91876
 Supercharger-V3 NZ-Waitomo,-38.243643,175.183284
 Supercharger NZ-Whangarei,-35.72449,174.318696
 
@@ -5553,6 +5557,7 @@ Supercharger-V3 US-Shenandoah TX - Metropark Drive,30.194794,-95.45352
 Supercharger US-Sherburn MN,43.661514,-94.732824
 Supercharger US-Sheridan WY,44.804305,-106.955891
 Supercharger US-Sherman Oaks CA,34.156372,-118.468147
+Supercharger-V4 US-Shiloh IL,38.5725,-89.92746
 Supercharger-V3 US-Shirley NY,40.804826,-72.859741
 Supercharger-V4 US-Shoreline WA,47.7558,-122.34353
 Supercharger US-Shreveport LA,32.478711,-93.754368
@@ -9678,6 +9683,7 @@ eCarUp CH-Davos Postplatz,46.79338,9.82097
 eCarUp CH-Davos Seewiesenstrasse,46.813535,9.845873
 eCarUp CH-Domat/Ems Via la Val,46.83794,9.46568
 eCarUp CH-Däniken Aarefeldstrasse,47.360225,7.975905
+eCarUp CH-Eich Vogelsang,47.1611,8.17835
 eCarUp CH-Huttwil Schwende,47.1159,7.86762
 eCarUp CH-Kallnach Oberfeld,47.01769,7.23358
 eCarUp CH-Langenthal Farbgasse,47.20996,7.78932
@@ -11265,6 +11271,7 @@ EnBW DE-Laatzen Bauhaus,52.30806,9.8052
 EnBW DE-Laatzen Pettenkoferstraße,52.305513,9.812718
 EnBW DE-Lage Lange Straße,51.98974,8.79157
 EnBW DE-Lahnstein Am Rasenplatz,50.32301,7.60696
+EnBW DE-Lahnstein Brückenstraße,50.30577,7.60393
 EnBW DE-Lahr/Schwarzwald Dinglinger Hauptstraße,48.34192,7.84963
 EnBW DE-Lahr/Schwarzwald Im Götzmann,48.332978,7.846596
 EnBW DE-Landau an der Isar Fichtheimer Feld,48.65254,12.705311
@@ -17393,6 +17400,7 @@ Lidl DE-Ingolstadt Elisabethstraße,48.74025,11.43646,30
 Lidl DE-Ingolstadt Permoserstraße 81,48.769893,11.396025
 Lidl DE-Ingolstadt-Nord/Ost Goethestraße,48.77245,11.4445
 Lidl DE-Iserlohn Refflingser Straße,51.423813,7.671341
+Lidl DE-Ismaning Osterfeldstraße,48.23073,11.68564
 Lidl DE-Jettingen-Scheppach Messerschmittstraße,48.4086,10.4352
 Lidl DE-Kaiserslautern Kurt-Schumacher-Straße,49.422988,7.748416
 Lidl DE-Kamenz Fichtestraße,51.2727,14.10566
@@ -18260,6 +18268,7 @@ Mobilectric PT-Torres Vedras R. Leonel Trindade,39.10205,-9.25778
 Mobiliti HU-Budapest Hunyadi János utca,47.43517,19.03919
 Mobiliti HU-Budapest Pala utca,47.50099,19.03996
 Mobiliti HU-Budaörs Sport u.,47.45404,18.94302
+Mobiliti HU-Bük Európa út,47.38445,16.78345
 Mobiliti HU-Libás Strand Keszthely,46.7649,17.2658
 Mobiliti HU-Sopron Révai Miklós utca,47.69407,16.578
 Mobiliti HU-Szombathely Hollán Ernő utca,47.23032,16.61786
@@ -18399,6 +18408,7 @@ Morbihan FR-Vannes Rue Alain Gerbault,47.66539,-2.73089
 Move CH-Adliswil Rastplatz Aspholz,47.320717,8.534163
 MOVE CH-Au Hauptstrasse,47.43289,9.63415
 Move CH-Bern Hallerstrasse,46.95472,7.43838
+MOVE CH-Bern Klösterlistutz,46.94962,7.45947
 Move CH-Bern Murtenstrasse,46.952245,7.416746
 MOVE CH-Bern Ostermundigenstrasse,46.95499,7.47625
 MOVE CH-Bern Parkterrasse,46.94975,7.43825
@@ -18606,6 +18616,7 @@ Neogy IT-Brunico Via Andreas Hofer,46.80275,11.93864
 Neogy IT-Castelrotto - Kastelruth Seis Schlernstraße,46.540455,11.564826
 Neogy IT-Chiusa Schindergries,46.6389,11.56476
 Neogy IT-Dobbiaco Pustertaler Straße,46.72931,12.21911
+Neogy IT-Dorf Tirol Aichweg,46.68868,11.15756
 Neogy IT-Eppan an der Weinstraße Kalterer Straße,46.440278,11.25971
 Neogy IT-Kurtinig Weinstraße,46.26909,11.22297
 Neogy IT-Marlengo Franz Innerhofer Straße,46.655659,11.14103
@@ -20274,6 +20285,7 @@ Salzburg AT-Salzburg Bräuhausstraße,47.79372,13.022693
 Salzburg AT-Salzburg Bundschuhstraße,47.81876,13.06588
 Salzburg AT-Salzburg Europastraße,47.8183,13.00622
 Salzburg AT-Salzburg Franz-Josef-Straße,47.807124,13.043518
+Salzburg AT-Salzburg Josef-Preis-Allee,47.7946,13.0561
 Salzburg AT-Salzburg Julius-Raab-Platz,47.808321,13.044126
 Salzburg AT-Salzburg Kleßheimer Allee,47.809441,13.011603
 Salzburg AT-Salzburg Moosstraße,47.79747,13.03084
@@ -21780,8 +21792,6 @@ teamstrom DE-Otterndorf Cuxhavener Straße,53.806606,8.890619
 teamstrom DE-Rendsburg Friedrichstädter Straße,54.320145,9.626945
 teamstrom DE-Schleswig Marie-Curie-Straße,54.542193,9.581212
 
-teltis DE-Dresden Hugo-Junkers-Ring,51.130991,13.789917
-
 Tesla-Automation DE-Prüm,50.213633,6.44601
 Tesla-Automation DE-Prüm,50.214471,6.447547
 
@@ -22933,7 +22943,7 @@ Zunder ES-Zafra Plaza del Alcázar,38.4244,-6.41493
 ČEZ CZ-Šlovice Dobřany-Plzeň,49.67801,13.33039
 ČEZ CZ-Železná Ruda Javorská,49.13878,13.22761
 
-ΔΕΗ-blue GR-Alexandroupoli Giannoutsou,40.86287,25.8765
+ΔΕΗ-blue GR-Alexandroupoli Αλεξανδρούπολη Giannoutsou,40.86287,25.8765
 ΔΕΗ-blue GR-Amaliada Αμαλιάδα Antoniou Petralia,37.79132,21.3377
 ΔΕΗ-blue GR-Didymoticho Διδυμότειχο Orestiados,41.35326,26.50353
 ΔΕΗ-blue GR-Eleftherio Ελευθέριο Μοναστηρίου,40.66478,22.8962
@@ -22943,8 +22953,9 @@ Zunder ES-Zafra Plaza del Alcázar,38.4244,-6.41493
 ΔΕΗ-blue GR-Korinthos Κόρινθος NEOAK Isthmos,37.92577,22.97617
 ΔΕΗ-blue GR-Lamia Λαμίας Τάσου Ισαάκ,38.89955,22.44928
 ΔΕΗ-blue GR-Lefkada Λευκάδα Anatoliki Paralia Lefkadas,38.82974,20.71132
+ΔΕΗ-blue GR-Lefkada Λευκάδα Perifereiaki Odos,38.82698,20.7033
+ΔΕΗ-blue GR-Patra Πάτρα N.E.O. Patron - Athinon,38.2757,21.76228
 ΔΕΗ-blue GR-Patra Πάτρα Palea EO Korinthou Patron,38.29132,21.78213
-ΔΕΗ-blue GR-Patras Πάτρα N.E.O. Patron - Athinon,38.2757,21.76228
 ΔΕΗ-blue GR-Peta Πέτα Ag. Dimitrios Ionia Odos,39.15794,21.01325
 ΔΕΗ-blue GR-Pilea Πυλαία Γεωργικής Σχολής,40.55188,22.9845
 ΔΕΗ-blue GR-Preveza Πρέβεζα Igoumenitsas,38.97528,20.71955
@@ -23150,6 +23161,7 @@ DE Dortmund Bielefelder Straße,51.51028,7.50429
 DE Dresden Am Brauhaus,51.06827,13.77956
 DE Dresden Hauptbahnhof,51.040898,13.733033
 DE Dresden Hilti,51.07258,13.6838
+DE Dresden teltis,51.131,13.78992
 DE Duisburg DB Cargo,51.4078,6.79578
 DE Eching Hotel Höckmayr,48.29666,11.62049
 DE Ehningen Freizeitheim Südmähren,48.66413,8.946
