@@ -6,7 +6,7 @@ Supercharger-V3 AT-Asten,48.221323,14.406747
 Supercharger AT-Biberwier,47.372431,10.886093
 Supercharger AT-Bregenz,47.48866,9.74004
 Supercharger-V3 AT-Eberstalzell,48.03934,13.99163
-Supercharger-V4 AT-Eisenstadt,47.828321,16.521238
+Supercharger-V4 AT-Eisenstadt,47.82567,16.53187
 Supercharger AT-Flachau,47.354581,13.386174
 Supercharger-V4 AT-Gerasdorf,48.343266,16.464452
 Supercharger AT-Graz,47.037228,15.478646
@@ -1859,7 +1859,7 @@ Supercharger-V3 DE-Bonn - Bonner Bogen,50.71867,7.15184,66
 Supercharger-V4 DE-Bordesholm,54.18074,9.94337
 Supercharger-V3 DE-Braak,53.61803,10.23968
 Supercharger-V4 DE-Braunschweig (Globus),52.24359,10.51295,30
-Supercharger-V4 DE-Bremen,53.049614,8.820908
+Supercharger-V4 DE-Bremen,53.04964,8.82077
 Supercharger-V4 DE-Bremen-Osterholz (Cafe Del Sol),53.054,8.961
 Supercharger-V4 DE-Brinkum,53.02833,8.80876
 Supercharger-V4 DE-Bruchsal,49.13837,8.56242
@@ -4111,6 +4111,7 @@ Supercharger-V3 US-Brooklyn OH,41.422611,-81.75838
 Supercharger-V3 US-Brooksville FL,28.52267,-82.2301
 Supercharger-V3 US-Brownsville TX,25.950691,-97.487778
 Supercharger-V3 US-Brunswick GA,31.24598,-81.50176
+Supercharger-V4 US-Brunswick GA Warren Mason Blvd,31.21818,-81.52372
 Supercharger US-Brush CO,40.270918,-103.622235
 Supercharger-V3 US-Buckeye AZ,33.4428,-112.5569
 Supercharger-V4 US-Buellton CA McMurray Rd,34.61467,-120.18865
@@ -6119,6 +6120,7 @@ AgriSnellaad NL-Goes Hudsonweg,51.48319,3.89467,30
 AgriSnellaad NL-Kruiningen Weihoek,51.465069,4.029549
 AgriSnellaad NL-Middelburg Londensekaai,51.4977,3.61657
 AgriSnellaad NL-Middelburg Mortiereboulevard,51.48015,3.62581
+AgriSnellaad NL-Wemeldinge Oostelijke Kanaalweg,51.5097,4.006
 
 AGROLA CH-Bevaix Chem. des Maladières,46.92199,6.80843
 AGROLA CH-Chur Triststrasse,46.84516,9.50403
@@ -6616,7 +6618,7 @@ Allego DE-Bremen Auf der Hohwisch 42,53.066442,8.858019
 Allego DE-Bremen Erasmusstraße,53.09045,8.78568
 Allego DE-Bremen Hannoversche Straße,53.0489,8.89178
 Allego DE-Bremen Hermann-Ritter-Straße 101,53.077008,8.774573
-Allego DE-Bremen Kalmsweg 1,53.136474,8.739885
+Allego DE-Bremen Kalmsweg,53.13646,8.73994
 Allego DE-Bremen Vahrer Straße,53.07644,8.88144
 Allego DE-Bremen Volkmannstraße,53.0577,8.808422
 Allego DE-Bremerhaven Am Grollhamm 2,53.525477,8.621723
@@ -6640,7 +6642,7 @@ Allego DE-Cottbus Vom-Stein-Straße 38,51.73459,14.336792
 Allego DE-Cremlingen Im Moorbusche 103,52.254158,10.656138
 Allego DE-Cuxhaven Papenstraße,53.85121,8.715362
 Allego DE-Dallgow-Döberitz Döberitzer Weg 3,52.531463,13.083562
-Allego DE-Darmstadt Europaplatz 5,49.871864,8.625913
+Allego DE-Darmstadt Europaplatz,49.8719,8.62586
 Allego DE-Dasing McDonalds,48.391319,11.061767
 Allego DE-Datteln In den Hofwiesen,51.668877,7.348064
 Allego DE-Deggendorf Industriestraße,48.852438,12.962858
@@ -6703,7 +6705,7 @@ Allego DE-Essen Econova Allee,51.495532,6.954968
 Allego DE-Essen Einigkeitsstraße 9,51.42211,6.999659
 Allego DE-Essen Essen-Gladbecker Straße ggü. 16,51.464622,7.009226
 Allego DE-Essen Frankenstraße 54,51.428196,7.051579
-Allego DE-Essen Freiherr-von-Stein-Straße 204a,51.402989,7.007619
+Allego DE-Essen Freiherr-von-Stein-Straße,51.40305,7.00772
 Allego DE-Essen Frintroper Straße 444,51.475692,6.912435
 Allego DE-Essen Fritz-Schupp-Allee/Parkplatz A1,51.485113,7.044273
 Allego DE-Essen Frohnhauser Platz,51.446409,6.976862
@@ -6713,7 +6715,7 @@ Allego DE-Essen Grashofstraße 4,51.413281,6.991194
 Allego DE-Essen Grieperstraße 1,51.461767,6.973761
 Allego DE-Essen Grugahalle,51.431229,6.999253,15
 Allego DE-Essen Güterstraße 18,51.361183,6.947746
-Allego DE-Essen Haedenkampstraße 18,51.457686,6.98323,15
+Allego DE-Essen Haedenkampstraße,51.4577,6.98323,15
 Allego DE-Essen Heidhauser Straße 142,51.381933,7.022
 Allego DE-Essen Heidhauser Straße 257,51.374814,7.015815
 Allego DE-Essen Heinrich-Brauns-Straße 2,51.472718,6.948171
@@ -6800,7 +6802,7 @@ Allego DE-Halle/ Saale Berliner Straße 61,51.495797,12.010145
 Allego DE-Halstenbek Gärtnerstraße,53.62956,9.86717,25
 Allego DE-Hamburg Am Schiffbeker Berg 6a,53.542346,10.092252
 Allego DE-Hamburg Am Stadtrand 56a,53.592509,10.098453
-Allego DE-Hamburg An der Walddörferbahn 1,53.604277,10.116021
+Allego DE-Hamburg An der Walddörferbahn,53.6043,10.11616
 Allego DE-Hamburg Dehnhaide 57,53.579083,10.0466
 Allego DE-Hamburg Großmoorbogen 1,53.461175,10.011347
 Allego DE-Hamburg Heimfelder Straße,53.4607,9.94069,8
@@ -6879,7 +6881,7 @@ Allego DE-Kiel Langenfelde,54.41783,10.17048
 Allego DE-Kiel Tonberg,54.30154,10.13268
 Allego DE-Kirchheim an der Weinstraße Rosengartenweg 1,49.554129,8.184556
 Allego DE-Kleinostheim Saaläckerstraße,49.99454,9.0701,18
-Allego DE-Koblenz Carl-Zeiss-Straße 10,50.388186,7.558341
+Allego DE-Koblenz Carl-Zeiss-Straße,50.3882,7.55834
 Allego DE-Krefeld Hafelstraße 200,51.320819,6.600595
 Allego DE-Kulmbach E.-C.-Baumann-Straße,50.112551,11.446267
 Allego DE-Köln Frankfurter Straße,50.84768,7.09432
@@ -6909,7 +6911,7 @@ Allego DE-Lübeck Ratzeburger Allee 50,53.850496,10.703163
 Allego DE-Lübeck Zum Hafenplatz 1,53.940018,10.851833
 Allego DE-Lüneburg Auf den Blöcken 7,53.238867,10.461535
 Allego DE-Lüneburg Lilienthalstraße,53.23958,10.46026
-Allego DE-Mainz Barcelona-Allee 10,49.947684,8.256697
+Allego DE-Mainz Barcelona-Allee,49.94768,8.25667
 Allego DE-Mainz-Kastel Boelckestrasse 78,50.02051,8.291477
 Allego DE-Mannheim-Neckerau Morchfeldstraße,49.45478,8.5006
 Allego DE-Markranstädt Siemensstraße 30,51.31259,12.214987
@@ -7022,7 +7024,7 @@ Allego DE-Weiden in der Oberpfalz Dr.-Kilian-Straße,49.70002,12.15754
 Allego DE-Wenden Auf dem Ohl,50.99005,7.8412
 Allego DE-Wernigerode Halberstädter Straße,51.84753,10.81173
 Allego DE-Westerstede Leererstraße,53.28786,7.8928,30
-Allego DE-Wilhelmshaven Posener Straße 36-38,53.574008,8.094087
+Allego DE-Wilhelmshaven Posener Straße,53.57403,8.09406
 Allego DE-Winsen Osttangente 210,53.350665,10.223448
 Allego DE-Wismar Kapitänspromenade 29-31,53.881171,11.439219
 Allego DE-Wittstock/Dosse Jägerstraße,53.0671,12.53304,6
@@ -7030,7 +7032,7 @@ Allego DE-Wolfhagen Otto-Hahn-Straße,51.40258,9.18685
 Allego DE-Wolfsburg Braunschweiger Straße,52.40133,10.75202
 Allego DE-Wolfsburg Westerlinge,52.42376,10.7321,11
 Allego DE-Wustermark Zur Döbritzer Heide,52.53352,12.99799,20
-Allego DE-Wyk auf Föhr Koogskuhl 2,54.6928,8.569154
+Allego DE-Wyk auf Föhr Koogskuhl,54.6928,8.56922
 Allego DE-Wörrstadt Sophie-Opel-Straße,49.84006,8.14347,10
 Allego DE-Zella-Mehlis Industriestraße 14,50.642506,10.693424
 Allego DE-Übersee Bahnhofstraße 89,47.818892,12.496413
@@ -7649,6 +7651,7 @@ BEW DE-Wipperfürth Gaulstraße,51.11358,7.40603
 
 Bidirex DE-Auggen An der Sonnberghalle,47.79103,7.59245
 
+Blink BE-Antwerpen Luchtbal Noorderlaan,51.26346,4.41887
 Blink BE-Eupen Am Stadthaus,50.63238,6.02806
 Blink GB-Gateshead Hollinside Rd,54.95871,-1.67422,15
 Blink US-Salt Lake City UT S 300 W,40.73144,-111.90179
@@ -9554,6 +9557,7 @@ E.ON DE-Ziesar Raststätte Buckautal,52.250741,12.309279
 E.ON DE-Ziesar Raststätte Buckautal,52.252121,12.307933
 E.ON DE-Zolling Weinmoos,48.45216,11.76516
 E.ON DK-Aalborg Scheelsmindevej,57.022114,9.904073
+E.ON DK-Augustenborg Toftevej,54.9863,9.97885
 E.ON DK-Blankhøj,56.17523,10.06582
 E.ON DK-Christiansfeld Tyrstrup Vestervej 6 Kro,55.3598,9.4664
 E.ON DK-Ebeltoft Vestervej,56.1926,10.67051
@@ -10310,18 +10314,18 @@ Emscher-Lippe-Energie DE-Gladbeck Schillerstraße,51.57495,6.9929
 En-Yakıt TR-Bucak Atilla,37.409444,30.54361
 
 EnBW CZ-Karlovy Vary,50.232775,12.8678
-EnBW DE-Aach,47.840881,8.852887
 EnBW DE-Aach Singener Straße,47.838983,8.860239
+EnBW DE-Aach Singener Straße,47.84088,8.8529
 EnBW DE-Aachen Stolberger Straße,50.77591,6.111827
 EnBW DE-Aachen Trierer Straße,50.75105,6.15668
 EnBW DE-Abensberg Straubinger Straße,48.81055,11.8601
 EnBW DE-Achern Fautenbacher Straße,48.6276,8.056921
 EnBW DE-Achern Güterhallenstraße,48.62889,8.06168
-EnBW DE-Adelsheim,49.403861,9.390352
-EnBW DE-Adorf/Vogtland,50.315406,12.257208
+EnBW DE-Adelsheim Marktstraße,49.40386,9.39035
+EnBW DE-Adorf/Vogtland Karlsgasse,50.3154,12.2572
 EnBW DE-Aggertal Nord,50.951684,7.31797
 EnBW DE-Aggertal Süd,50.951804,7.320669
-EnBW DE-Aglasterhausen,49.347221,8.984141
+EnBW DE-Aglasterhausen Im oberen Tal,49.34722,8.98414
 EnBW DE-Ahaus Düwing Dyk,52.06971,6.98699
 EnBW DE-Ahaus Euronics,52.074865,6.996345
 EnBW DE-Ahaus Hellweg,52.068859,6.98517
@@ -10359,7 +10363,7 @@ EnBW DE-Alsfeld An der Au,50.7528,9.27807
 EnBW DE-Alsfeld Dirsröder Feld,50.738262,9.246298,40
 EnBW DE-Altdorf Am Aicher Feld,48.56611,12.100753
 EnBW DE-Altenkirchen (Westerwald) Bahnhofstraße,50.685665,7.638153
-EnBW DE-Altenstadt,50.289829,8.976441
+EnBW DE-Altenstadt Die Weidenbach,50.28983,8.97644
 EnBW DE-Althütte Im Steinhäusle,48.916147,9.568517
 EnBW DE-Altshausen,47.934959,9.538921
 EnBW DE-Altshausen Max-Planck-Straße,47.92453,9.53494
@@ -12568,6 +12572,7 @@ Energie-Steiermark AT-Raaba Dr. Auner Straße,47.026565,15.488085,25
 Energie-Steiermark AT-Schladming Pichl,47.38948,13.61102
 Energie-Steiermark AT-Schladming Salzburger-Siedlung,47.390759,13.658383,25
 Energie-Steiermark AT-Spielberg Red Bull Ring,47.21907,14.76501
+Energie-Steiermark AT-Straß in Steiermark Hauptstraße,46.72613,15.6289
 Energie-Steiermark AT-Trieben Europastraße,47.48994,14.484885,20
 Energie-Steiermark AT-Unzmarkt Simon-Hafnerplatz,47.198231,14.445851,25
 Energie-Steiermark AT-Voitsberg von-Hötzendorf-Straße,47.05207,15.14186
@@ -14649,6 +14654,7 @@ GOFAST CH-Nyon Chem. de la Fontaine,46.38794,6.2198
 GOFAST CH-Oberriet Rheinstrasse,47.31159,9.56189
 GOFAST CH-Oensingen Staadackerstraße,47.286896,7.718059
 GOFAST CH-Piotta-Quinto Area di Servizio Quinto,46.51532,8.66706
+GOFAST CH-Pollegio Via al Brenno,46.35914,8.95693
 GOFAST CH-Quarten Rastplatz Bergsboden,47.1124,9.2661
 GOFAST CH-Quarten Rastplatz Bergsboden,47.11332,9.267714
 GOFAST CH-Rastplatz Amsteg,46.78052,8.66795
@@ -16565,7 +16571,7 @@ Kaufland DE-Roth,49.249584,11.093543
 Kaufland DE-Rottenburg am Neckar Tübinger Straße,48.47328,8.93644
 Kaufland DE-Rottweil,48.149525,8.640342
 Kaufland DE-Rüsselsheim am Main Alzeyer Straße 11,49.983939,8.401156
-Kaufland DE-Salzwedel Karl-Marx-Straße 13,52.857506,11.151116
+Kaufland DE-Salzwedel Karl-Marx-Straße,52.85684,11.15006
 Kaufland DE-Sangerhausen,51.470027,11.294025
 Kaufland DE-Sankt Ingbert,49.281439,7.10554
 Kaufland DE-Schorndorf,48.807212,9.542599
@@ -22778,6 +22784,7 @@ Wirelane DE-Rechlin Boeker Landstrasse,53.355142,12.733578
 
 WISAG DE-Neuss Hammfelddamm,51.1952,6.71177
 
+WSW DE-Wuppertal Bromberger Straße,51.2773,7.18678
 WSW DE-Wuppertal Kasinostraße,51.257256,7.141509
 WSW DE-Wuppertal Mirker Straße,51.26625,7.14414
 WSW DE-Wuppertal Zentrale,51.27919,7.18726,30
@@ -23156,6 +23163,7 @@ DE Chemnitz Kauffahrtei,50.810677,12.905644
 DE Deggendorf Oberer Stadtplatz,48.83492,12.96209
 DE Deggendorf Wiesenstraße Stadthalle,48.83202,12.95688
 DE Dessau-Roßlau Friederikenplatz,51.83547,12.25213
+DE Dielheim Kolpigstraße,49.27938,8.77882
 DE Dortmund adesso,51.50573,7.5274
 DE Dortmund Bielefelder Straße,51.51028,7.50429
 DE Dresden Am Brauhaus,51.06827,13.77956
@@ -23201,6 +23209,7 @@ DE Hamburg Airport,53.63349,10.00702
 DE Hamburg Bargteheider Straße,53.60367,10.1456,15
 DE Hamburg Drehbahn,53.55704,9.98615
 DE Hamburg Hotel NH Hamburg Altona,53.56444,9.92108
+DE Hamburg Super 8 by Wyndham,53.5513,10.03152
 DE Hamburg-Niendorf METRO,53.6138,9.9646
 DE Hanau Luise-Kiesselbach-Straße,50.145427,8.935681
 DE Hanau Rondo,50.11238,8.89514
