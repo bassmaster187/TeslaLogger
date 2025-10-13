@@ -315,6 +315,7 @@ Supercharger-V3 CA-Napanee ON,44.262183,-76.963175
 Supercharger-V3 CA-Nepean ON - Robertson Road,45.321754,-75.835732
 Supercharger-V3 CA-New Minas NS,45.056682,-64.469861
 Supercharger-V3 CA-Niagara Falls ON,43.116773,-79.124108
+Supercharger-V3 CA-Niagara Falls ON Morrison St,43.10444,-79.11057
 Supercharger-V3 CA-Nipigon ON,49.017674,-88.308209
 Supercharger-V3 CA-North Battleford SK,52.791766,-108.303232
 Supercharger-V3 CA-North Bay ON,46.332433,-79.470684
@@ -2015,8 +2016,8 @@ Supercharger-V4 DE-Laucha,50.922513,10.5533
 Supercharger-V3 DE-Lauenau,52.2791,9.351,60
 Supercharger-V3 DE-Leer,53.25967,7.45557
 Supercharger-V3 DE-Lehre,52.31315,10.63488,30
-Supercharger-V4 DE-Leipzig Central,51.3465,12.39433
 Supercharger-V4 DE-Leipzig Sachsenpark,51.401142,12.39782,15
+Supercharger-V4 DE-Leipzig Zentrum,51.34682,12.39433
 Supercharger-V3 DE-Leipzig-Flughafen,51.40153,12.18123
 Supercharger-V4 DE-Leonberg,48.78523,9.01755
 Supercharger-V3 DE-Leonberg Glemseck,48.784561,9.019178
@@ -2638,6 +2639,7 @@ Supercharger-V4 FR-Pouilly-en-Auxois,47.248082,4.567647
 Supercharger-V4 FR-Quimper,48.01563,-4.081669
 Supercharger-V4 FR-Rambouillet,48.645223,1.845035
 Supercharger-V4 FR-Reims Est,49.240424,4.083909
+Supercharger-V4 FR-Reims la Neuvillette,49.2902,4.02756
 Supercharger-V3 FR-Reims-Tinqueux,49.25279,3.97586
 Supercharger FR-Rennes,48.082064,-1.68418
 Supercharger-V3 FR-Rennes Rue Jules Vallès,48.10361,-1.713985
@@ -6898,7 +6900,7 @@ Allego DE-Leonberg Breitwiesenstraße,48.78518,9.01743,5
 Allego DE-Leverkusen,51.024628,7.015235
 Allego DE-Leverkusen Borsigstraße,51.05405,7.01762,20
 Allego DE-Limburg Limburger Straße,50.39882,8.0799
-Allego DE-Linden Robert-Bosch-Straße 4b,50.537685,8.650627
+Allego DE-Linden Robert-Bosch-Straße,50.5377,8.65063
 Allego DE-Lingen Rheiner Straße,52.50704,7.32138
 Allego DE-Ludwigsfelde Zossener Landstraße,52.29293,13.27184
 Allego DE-Ludwigshafen Hoheloogstraße,49.45722,8.43144
@@ -7129,6 +7131,7 @@ alperia IT-Trento Via IV Novembre,46.10042,11.11308
 alperia IT-Vahrn Eisackstraße,46.73456,11.64812
 
 AMAG CH-Bern Wankdorffeldstrasse,46.96575,7.46638,30
+AMAG CH-Schinznach-Bad Aarauerstrasse,47.44775,8.16856
 AMAG CH-Winterthur Zürcherstrasse,47.485487,8.702153
 
 AMB CH-Bellinzona Via San Gottardo,46.208021,9.038333
@@ -12812,6 +12815,7 @@ ESWE DE-Wiesbaden Hagenauer Straße,50.04779,8.2307
 ESWE DE-Wiesbaden Hauptbahnhof Gartenfeldstraße,50.070716,8.245458
 ESWE DE-Wiesbaden Herderstraße,50.07368,8.2352
 ESWE DE-Wiesbaden Mainzer Straße,50.060553,8.254324
+ESWE DE-Wiesbaden Scharnhorststraße,50.0805,8.22606
 ESWE DE-Wiesbaden Warmer Damm,50.08353,8.24501
 
 etecnic ES-Amposta Avinguda Alcalde Palau,40.71241,0.57919
@@ -14849,6 +14853,7 @@ GreenWay HR-Zagreb Alfreda Nobela,45.79344,16.152967
 GreenWay PL-Biała Podlaska Warszawska,52.03398,23.06812
 GreenWay PL-Białystok Produkcyjna,53.16004,23.09569
 GreenWay PL-Bielany Wrocławskie Czekoladowa,51.04657,16.96132
+GreenWay PL-Bielany Wrocławskie Wrocławska,51.04505,16.97112
 GreenWay PL-Bielsko-Biała Leszczyńska,49.80343,19.04997
 GreenWay PL-Bolesławiec Lipiany,51.33801,15.63159
 GreenWay PL-Chromna E30,52.10826,22.38702
@@ -15100,6 +15105,7 @@ Holzverstromungsanlage DE-Diemelstadt Kupferkuhle,51.489568,9.009387
 HomE-of-Mobility DE-Wertheim Am Fuchsenacker,49.772349,9.585389,15
 
 HoryzontEV PL-Koszalin Gnieźnieńska,54.178136,16.197324
+HoryzontEV PL-Kraków Mirowska,50.03495,19.81922
 HoryzontEV PL-Piła al. Powstańców Wielkopolskich,53.168749,16.7705
 
 Hrvatski-Telekom HR-Bjelovar Trg Eugena Kvaternika,45.89827,16.8412
@@ -18463,6 +18469,8 @@ MOVE CH-Rastplatz Othmarsingen,47.402103,8.207312
 MOVE CH-Rastplatz Teufengraben,47.3332,7.8214
 Move CH-Raststätte Glarnerland,47.13802,9.05029,65
 MOVE CH-Raststätte Grauholz,46.99015,7.47513,30
+MOVE CH-Raststätte Herrlisberg Nord,47.22087,8.66146
+MOVE CH-Raststätte Herrlisberg Süd,47.21947,8.66166
 MOVE CH-Raststätte Pieterlen,47.16888,7.35133
 MOVE CH-Rose de la Broye,46.83189,6.85792,20
 MOVE CH-Scuol Nairs,46.78842,10.26958
@@ -18477,7 +18485,6 @@ MOVE CH-Vevey Place du Marché,46.45999,6.84166
 Move CH-Vilters-Wangs Bahnhofstrasse,47.03928,9.436954
 MOVE CH-Walzenhausen Bahnhof,47.45126,9.6011
 Move CH-Winterthur Technoramastrasse,47.511222,8.762276
-Move CH-Wädenswil Herrlisberg Süd,47.219473,8.66166
 MOVE CH-Zollikon Rotfluhstrasse,47.33831,8.57662
 MOVE CH-Zürich Allmendstrasse,47.34013,8.51943
 MOVE CH-Zürich Huttenstrasse,47.3793,8.55251
@@ -18644,6 +18651,7 @@ Neogy IT-Salò Via Zane,45.60472,10.51514
 Neogy IT-San Candido Peter Paul Rainer Straße,46.73295,12.27956
 Neogy IT-San Martino in Badia Str. Picolin,46.692556,11.892488
 Neogy IT-Selva di Val Gardena S.da Nives,46.55694,11.75878
+Neogy IT-Selva di Val Gardena Strada Meisules,46.55524,11.75567
 Neogy IT-Sexten Dolomitenstraße,46.69768,12.35656
 Neogy IT-Tiers Via San Giorgio,46.46632,11.52963
 Neogy IT-Tires Via S. Cipriano,46.47065,11.56102
@@ -19958,6 +19966,8 @@ Qwello SE-Stockholm Torkel Knutssonsgatan,59.32025,18.0564
 Ragde NO-Kristiansund Storgata,63.10824,7.7281
 
 Raiffeisenbank DE-Bad Homburg Werner-Reimers-Straße,50.216939,8.611279
+
+REA DE-Würselen Schumanstraße,50.809,6.15112
 
 Recharge FI-Hankasalmi Pieksämäentie,62.358295,26.573299
 Recharge FI-Jalasjärvi Seinäjoentie,62.511838,22.729751
@@ -22059,7 +22069,7 @@ TotalEnergies NL-Maarheeze,51.322493,5.593608,80
 TotalEnergies NL-Marwijk Kooy,52.334747,4.928432,80
 TotalEnergies NL-Oss Danenhoef,51.750247,5.560812,80
 TotalEnergies NL-Oudenhorst,52.050807,5.466399,80
-TotalEnergies NL-Palmpol,52.163056,5.53343,80
+TotalEnergies NL-Palmpol,52.16306,5.53343
 TotalEnergies NL-Papendrecht,51.846223,4.68115,80
 TotalEnergies NL-Poort Van Veghel,51.599527,5.516732,80
 TotalEnergies NL-Schiedam,51.930238,4.403939,80
@@ -22099,7 +22109,8 @@ TWS DE-Weingarten Gablerstraße,47.8078,9.63948
 
 U-POWER TW-Hengchun Township Henggong Rd,21.99752,120.7424
 
-Ultra-Fast SE-Varberg Gunnestorpsvägen,57.16941,12.276915,25
+UFC SE-Nyköping Bergshammarsvägen,58.74898,16.9807
+UFC SE-Varberg Gunnestorpsvägen,57.1694,12.2769
 
 Umweltanalytik-Kessel DE-Ahrensburg Kurt-Fischer-Straße,53.68333,10.2615
 
@@ -22351,6 +22362,7 @@ Virta DE-Kreuzwertheim Hasslocher Straße,49.769024,9.512555
 Virta DE-Lübbecke Rahdener Straße,52.31477,8.61591
 Virta DE-München Balanstraße,48.12122,11.59824
 Virta DE-München Maria-Probst-Straße,48.1912,11.58824
+Virta DE-München Maria-Probst-Straße,48.19134,11.58663
 Virta DE-Nidda Eisenried,50.416387,9.017287
 Virta DE-Reddeber Am Stadtweg,51.861832,10.80263
 Virta DE-Rostock Alte Dorfstraße,54.10095,12.18146
@@ -23309,6 +23321,7 @@ DE Pforzheim Deichlerweg,48.902,8.67445
 DE Pliezhausen Stuifenweg,48.56192,9.1883
 DE Porta Westfalica rococom,52.2324,8.91289
 DE Prichsenstadt Gewerbegebiet-Ost,49.81766,10.36377,70
+DE Prien am Chiemsee Cottage,47.84463,12.31332
 DE Putgarten Dorfstraße,54.67084,13.41001
 DE Rheydt New AG,51.157497,6.448055
 DE Rodenberg Gemeinschaftspraxis,52.312,9.35118
