@@ -90,6 +90,7 @@ Supercharger AU-Camberwell,-37.828482,145.056346
 Supercharger-V3 AU-Campbelltown NSW,-34.071544,150.807325
 Supercharger AU-Canberra,-35.294304,149.190322
 Supercharger-V3 AU-Cann River VIC,-37.565158,149.151873
+Supercharger-V3 AU-Carmila QLD,-21.90822,149.40973
 Supercharger AU-Central Coast,-33.310177,151.420578
 Supercharger AU-Clare Valley,-33.8485,138.618157
 Supercharger AU-Coffs Harbour,-30.281439,153.131666
@@ -18784,6 +18785,7 @@ NLE NL-Lingehorst A2,51.91256,5.1807,20
 Nobil NO-Oslo-Gardermoen Lufthavn,60.18587,11.06897
 
 nonoxx-pro DE-Cochem Ravenestraße,50.150771,7.165315
+nonoxx-pro DE-Grube Hauptstraße,54.23087,11.03578
 nonoxx-pro DE-Grömitz Am Strande,54.14459,10.95913
 nonoxx-pro DE-Itzehoe Portland-Cement-Straße,53.91445,9.51231
 nonoxx-pro DE-Itzehoe Wilhelm-Biel-Straße,53.926682,9.509129
@@ -18990,6 +18992,7 @@ OMV RS-Општина Дољевац,43.18246,21.8628
 OMV SI-Kozina Bazoviška cesta,45.60471,13.92928,12
 OMV SI-Počivališče Dravsko Polje,46.429,15.79448
 OMV SK-Dolný Hričov Majora Antona Matúška,49.23302,18.624219
+OMV SK-Poprad Matejovce Hlavná,49.07436,20.33
 
 ON IS-Akureyri Strandgata,65.68403,-18.08697
 ON IS-Borgarnes Digranesgata,64.54262,-21.9084
@@ -20074,6 +20077,8 @@ reev DE-Sehnde Kurt-Lau-Weg,52.31937,9.9654
 reev DE-Triefenstein Schulstraße,49.802428,9.582015
 reev DE-Wilhelmshaven Südstrand,53.51328,8.14338
 
+Regioladen DE-Willingen Sonnenweg,51.29618,8.6047
+
 Renovatio RO-Alexandria Strada București,43.97289,25.34527
 Renovatio RO-Arad DN69,46.129217,21.318144
 Renovatio RO-Bucuresti Soseaua Bucuresti-Ploiesti,45.789628,24.086114
@@ -20216,6 +20221,7 @@ SachsenEnergie DE-Dresden Hettnerstraße,51.031228,13.727208
 SachsenEnergie DE-Dresden Hofmühlenstraße,51.035002,13.705605
 SachsenEnergie DE-Dresden Langer Weg,50.999325,13.799299
 SachsenEnergie DE-Dresden Martin-Luther-Straße,51.06342,13.755204
+SachsenEnergie DE-Dresden Michaelisstraße,50.9958,13.79706
 SachsenEnergie DE-Dresden Mohnstraße,51.07785,13.7172
 SachsenEnergie DE-Dresden Omsewitzer Ring,51.046369,13.664205
 SachsenEnergie DE-Dresden Pillnitzer Landstraße,51.013911,13.863678
@@ -21494,6 +21500,7 @@ SWM DE-München Marklandstraße,48.09253,11.60448
 SWM DE-München Maximiliansplatz,48.1421,11.5733
 SWM DE-München Maximilianstraße,48.13917,11.58133
 SWM DE-München Nordendstraße,48.15548,11.57523
+SWM DE-München Nymphenburger Straße,48.15408,11.53367
 SWM DE-München Occamstraße,48.16313,11.5904
 SWM DE-München Oslostraße,48.13154,11.68955,30
 SWM DE-München Packenreiterstraße,48.16368,11.47536
@@ -23347,6 +23354,7 @@ DE Steyerberg Große Aue,52.56765,9.02182
 DE Stuhr Waschpark,52.99715,8.77165
 DE Stuttgart Flughafen,48.690548,9.19193
 DE Stuttgart Flughafen P12,48.691895,9.195894
+DE Stuttgart Gabler,48.82546,9.09124
 DE Stuttgart Pfaffenwaldring ARENA2036,48.748637,9.109677
 DE Trassenheide Waldhof Hotel,54.08789,13.8743
 DE Troisdorf Luxemburger Straße,50.819441,7.114892
