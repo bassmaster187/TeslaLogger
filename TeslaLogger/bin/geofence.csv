@@ -7293,6 +7293,7 @@ ARAL DE-Celle Siedemeierkamp,52.600738,10.10726,25
 ARAL DE-Chemnitz Zschopauer Straße,50.8141,12.95464,30
 ARAL DE-Dasing Laimeringer Straße,48.390329,11.063984
 ARAL DE-Dettelbach Mainfrankenpark,49.7784,10.06571
+ARAL DE-Dortmund Bärenbruch,51.5199,7.3727
 ARAL DE-Dortmund Schaphusstraße,51.57354,7.38715
 ARAL DE-Dresden Am Hellerhof,51.094515,13.735862
 ARAL DE-Dresden Bergstraße,51.02008,13.73055
@@ -7669,6 +7670,7 @@ Belib FR-Paris Rue Changarnier,48.84534,2.41142,30
 
 Berger DE-Dannstadt-Schauernheim Industriestraße,48.63547,8.05422
 
+Berliner-SW DE-Berlin Ackerstraße,52.5329,13.39545
 Berliner-SW DE-Berlin Breite Straße,52.45378,13.3277,30
 Berliner-SW DE-Berlin Dresdener Straße,52.50097,13.41696
 Berliner-SW DE-Berlin Dudenstraße,52.4851,13.38405
@@ -7947,6 +7949,8 @@ Bürger DE-Moosburg an der Isar Viehmarktplatz,48.466018,11.93983
 Camer IT-Lecce Via G. Marconi,40.351696,18.17437
 
 CanariasTeRecarga ES-Arona Puerto de Los Cristianos,28.04854,-16.72018
+
+CC-Cap-3000 FR-Saint-Laurent-du-Var Av. Eugène Donadeï,43.66068,7.19582
 
 CEPSA PT-Abrantes A23,39.48615,-8.15876
 
@@ -9250,6 +9254,7 @@ E-PROM RU-Владимир Большой проезд,56.11893,40.3652
 e-regio DE-Bad Münstereifel Sittardweg,50.54821,6.76232
 e-regio DE-Euskirchen Münsterstraße,50.64794,6.83385
 e-regio DE-Heimbach Schwammenauel,50.63302,6.44392
+e-regio DE-Kall Bahnhofstraße,50.53764,6.5554
 e-regio DE-Mechernich An d. Zikkurat,50.63219,6.6825
 e-regio DE-Mechernich Gartenstraße,50.590096,6.655214
 e-regio DE-Nettersheim Bahnhofstraße,50.490557,6.629605
@@ -9798,6 +9803,7 @@ EDEKA DE-Datteln Schachtstraße,51.634389,7.332081
 EDEKA DE-Dessau-Roßlau Heidestraße,51.806367,12.241669
 EDEKA DE-Dieburg Groß-Umstädter Straße,49.89739,8.84872
 EDEKA DE-Dortmund Nelkenstraße,51.4776,7.59982
+EDEKA DE-Dortmund Sölder Straße,51.4926,7.58697
 EDEKA DE-Dresden Dohnaer Straße,51.00862,13.78412
 EDEKA DE-Dresden Holbeinstraße,51.04902,13.76994
 EDEKA DE-Dülmen Auf dem Quellberg,51.84292,7.2943
@@ -11090,6 +11096,7 @@ EnBW DE-Heßdorf Im Gewerbepark,49.62664,10.92335
 EnBW DE-Hildesheim Albert-Einstein-Straße,52.15968,9.99433
 EnBW DE-Hildesheim Prevo,52.16312,9.97213
 EnBW DE-Hillesheim Kölner Straße,50.2997,6.67306
+EnBW DE-Himmelkron Kulmbacher Straße,50.0553,11.61275
 EnBW DE-Himmelpforten,53.61389,9.30104
 EnBW DE-Hirschaid,49.819734,11.000681
 EnBW DE-Hirschaid Amlingstadter Straße,49.828353,10.989954
@@ -11441,7 +11448,6 @@ EnBW DE-Minden Stiftsallee Penny,52.30731,8.89853
 EnBW DE-Mitterteich Ludwig-Erhard-Straße,49.93718,12.22148
 EnBW DE-Moers,51.450767,6.643424
 EnBW DE-Monheim am Rhein,51.104687,6.901614
-EnBW DE-Montabaur A3,50.447726,7.850374
 EnBW DE-Montabaur Penny,50.439367,7.831814
 EnBW DE-Moosburg an der Isar Degernpoint,48.471884,11.967242
 EnBW DE-Moosburg an der Isar Neue Industriestraße,48.476425,11.944236
@@ -11673,6 +11679,7 @@ EnBW DE-Raststätte Langen-Bergheim,50.24843,8.99398
 EnBW DE-Raststätte Langen-Bergheim,50.250597,8.994507
 EnBW DE-Raststätte Lüneburger Heide Ost,53.1093,9.984
 EnBW DE-Raststätte Lüneburger Heide West,53.10941,9.98134,20
+EnBW DE-Raststätte Montabaur Ost,50.44766,7.8503
 EnBW DE-Raststätte Waldmohr,49.37322,7.37428
 EnBW DE-Raststätte Wunnenstein Ost,49.0451,9.26597,20
 EnBW DE-Raststätte Wunnenstein West,49.04449,9.26187,12
@@ -12683,6 +12690,7 @@ EnergyVision BE-Oostende Torhoutsesteenweg,51.19837,2.90284
 Enerstock FR-Le Bosc A75,43.6883,3.35473,10
 
 ENGIE AU-Wynnum West QLD Wynnum Road,27.457805,153.154785
+ENGIE DE-Oberwiesenthal Karlsbader Straße,50.41882,12.9623
 ENGIE FR-Aire de Brumath,48.72363,7.69208
 ENGIE FR-Aire de Châtellerault Antran,46.90689,0.52255
 ENGIE FR-Aire de La Sentinelle,50.3407,3.46651
@@ -12860,6 +12868,7 @@ EV-Sylt DE-Sylt Maybachstraße,54.90665,8.3059
 
 EVB DE-Eisenach Adam-Opel-Straße,50.980301,10.297469
 EVB DE-Eisenach Hinter der Mauer,50.9763,10.31766
+EVB DE-Eisenach Sportpark,50.98334,10.309
 
 EVBox CH-Bern Riedbachstrasse,46.94621,7.37338
 EVBox CH-Egerkingen Hausimollstrasse,47.318099,7.802282
@@ -13378,6 +13387,7 @@ EWE-GO DE-Donauwörth An der Westspange,48.718231,10.761679
 EWE-GO DE-Dornum Bensjücher Weg,53.64925,7.424618
 EWE-GO DE-Dorsten Endelner Feld,51.7546,6.96378,25
 EWE-GO DE-Dorsten Europaplatz,51.657855,6.968666
+EWE-GO DE-Dortmund Brandschachtstraße,51.49337,7.36698
 EWE-GO DE-Dortmund Evinger Straße,51.546122,7.460192
 EWE-GO DE-Dortmund Werkmeisterstraße,51.524822,7.493616
 EWE-GO DE-Dorum Poststraße,53.6859,8.563896
@@ -14680,6 +14690,7 @@ GOFAST CH-Raststätte Kölliken,47.32326,8.0214
 GOFAST CH-Raststätte Kölliken,47.32361,8.02226
 GOFAST CH-Raststätte Thurau,47.45969,9.0929
 GOFAST CH-Raststätte Thurau,47.46087,9.09472
+GOFAST CH-Raststätte Thusis,46.7127,9.44595
 GOFAST CH-Raststätte Würenlos,47.43823,8.34658
 GOFAST CH-Raststätte Würenlos,47.43904,8.3481,60
 GOFAST CH-Rossens Rte de Montena,46.72121,7.0892,30
@@ -14696,7 +14707,6 @@ GOFAST CH-Sursee-Schenkon,47.1845,8.11184
 GOFAST CH-Taststätte Deitingen,47.22647,7.61731
 GOFAST CH-Tenero-Contra Via Lido,46.16983,8.85474
 GOFAST CH-Thal Burietstrasse,47.479466,9.579182
-GOFAST CH-Thusis Fürstenauerstrasse,46.712568,9.446106
 GOFAST CH-Walterswil Walterswilerstrasse,47.321778,7.964412
 GOFAST CH-Wattwil Rietwisstrasse,47.29549,9.09395
 GOFAST CH-Wettswil am Albis Moosstrasse,47.33446,8.45973
@@ -15717,6 +15727,7 @@ Ionity DE-Eching Dieselstraße,48.310848,11.646729
 Ionity DE-Eichenzell Rhönhof,50.48831,9.70852,20
 Ionity DE-Ellwangen Max-Eyth-Straße,48.95667,10.18367
 Ionity DE-Erfurt Dubliner Straße,51.012291,10.988088
+Ionity DE-Euro Rastpark Himmelkron,50.05586,11.6091
 Ionity DE-Frankenhöhe Nord,49.242629,10.352944
 Ionity DE-Frankenhöhe Süd,49.241155,10.356121
 Ionity DE-Friedberg Winterbruckenweg,48.40641,10.95235,35
@@ -15732,7 +15743,6 @@ Ionity DE-Harz West,51.928028,10.14173
 Ionity DE-Heiligengrabe Liebenthaler Dorfstraße,53.147521,12.398905
 Ionity DE-Hepberg A9 Köschinger Forst,48.837085,11.469313
 Ionity DE-Herne Holsterhauser Straße,51.52873,7.19984
-Ionity DE-Himmelkron,50.055972,11.609148
 Ionity DE-Hohenwarsleben,52.173898,11.49512,11
 Ionity DE-Holzkirchen Nord,47.892208,11.731279
 Ionity DE-Holzkirchen Süd,47.906573,11.717379
@@ -20091,6 +20101,7 @@ reev DE-Sehnde Kurt-Lau-Weg,52.31937,9.9654
 reev DE-Triefenstein Schulstraße,49.802428,9.582015
 reev DE-Wilhelmshaven Südstrand,53.51328,8.14338
 
+Regioladen DE-Radolfzell am Bodensee Unterdorfstraße,47.73986,9.00248
 Regioladen DE-Willingen Sonnenweg,51.29618,8.6047
 
 Renovatio RO-Alexandria Strada București,43.97289,25.34527
@@ -21223,6 +21234,7 @@ SW-Heidelberg DE-Heidelberg Vangerowstraße,49.4089,8.678841
 SW-Herne DE-Herne Grenzweg,51.54066,7.2076
 SW-Herten DE-Herten Herner Straße,51.58255,7.15027
 SW-Hilden DE-Hilden Am Lindenplatz,51.162629,6.940721
+SW-Hockenheim DE-Hockenheim Beethovenstraße,49.3112,8.54627
 SW-Huntetal DE-Diepholz Amelogenstraße,52.61202,8.37479
 SW-Husum DE-Husum Am Binnenhafen,54.47454,9.04984,20
 SW-Ilmenau DE-Ilmenau Bahndamm,50.684597,10.922379
@@ -22995,6 +23007,7 @@ Zunder ES-Zafra Plaza del Alcázar,38.4244,-6.41493
 ΔΕΗ-blue GR-Ioannina Ιωάννινα Leof. Stavrou Niarchou,39.63374,20.85
 ΔΕΗ-blue GR-Kalamata Καλαμάτα Athinon,37.0433,22.09113
 ΔΕΗ-blue GR-Korinthos Κόρινθος NEOAK Isthmos,37.92577,22.97617
+ΔΕΗ-blue GR-Ladochorion Λαδοχώριον Igoumenitsa Port,39.4882,20.25956
 ΔΕΗ-blue GR-Lamia Λαμίας Τάσου Ισαάκ,38.89955,22.44928
 ΔΕΗ-blue GR-Lefkada Λευκάδα Anatoliki Paralia Lefkadas,38.82974,20.71132
 ΔΕΗ-blue GR-Lefkada Λευκάδα Perifereiaki Odos,38.82698,20.7033
