@@ -2070,7 +2070,7 @@ Supercharger-V4 DE-Neu-Ulm,48.376918,10.006533
 Supercharger-V4 DE-Neuberg,50.18229,9.00755,90
 Supercharger-V4 DE-Neudrossenfeld,50.03775,11.4893,30
 Supercharger-V3 DE-Neumünster,54.07014,9.941467,32
-Supercharger-V4 DE-Neuss,51.200904,6.713603
+Supercharger-V4 DE-Neuss,51.20092,6.71383
 Supercharger-V4 DE-Neustadt an der Weinstraße (Globus),49.3408,8.16172
 Supercharger-V3 DE-Norden,53.61365,7.16718,37
 Supercharger-V3 DE-Northeim,51.731815,9.972845,35
@@ -5967,6 +5967,7 @@ Tesla Service Center DE-Hamburg,53.668606,9.99489
 Tesla Service Center DE-Holzgerlingen,48.63146,9.02684
 Tesla Service Center DE-Karlsruhe Rintheim,49.0091,8.44301
 Tesla Service Center DE-Kirchheim,48.15108,11.74895
+Tesla Service Center DE-Leipzig,51.33855,12.2989
 Tesla Service Center DE-Magdeburg,52.165,11.60307
 Tesla Service Center DE-Mannheim,49.44428,8.57507
 Tesla Service Center DE-München Parsdorf,48.147015,11.791306
@@ -7130,6 +7131,7 @@ alperia IT-San Candido Matthias-Schranzhofer-Straße,46.730626,12.278077
 alperia IT-San Cassiano Strada Micurà de Rü,46.57008,11.93346
 alperia IT-San Pancrazio Via Principale,46.58557,11.08785
 alperia IT-Sankt Ulrich Ortisei Streda Tresval,46.571392,11.677345
+alperia IT-Schenna Verdinserstraße,46.68736,11.18933
 alperia IT-Selva di Val Gardena Strada Plan de Gralba,46.5329,11.77192
 alperia IT-Sinigo Via Nazionale,46.63855,11.17511
 alperia IT-Sterzing Johann-Kofler-Straße,46.89296,11.43668
@@ -10104,6 +10106,7 @@ Electra IT-Pisa Via Darsena,43.70183,10.3861
 Electra IT-Portogruaro Via Prati Guori,45.79198,12.8152
 Electra IT-Sesto San Giovanni Viale Ercole Marelli,45.52774,9.22938
 Electra IT-Stezzano Via Guzzanica,45.64659,9.62873
+Electra LU-Schengen Schengerwis,49.47933,6.36605
 
 Electra-Avellana ES-Vilademuls Hotel Sausa,42.09476,2.89294
 
@@ -10412,6 +10415,7 @@ EnBW DE-Artern,51.375583,11.285147
 EnBW DE-Aschaffenburg Horchstraße,49.980702,9.118189
 EnBW DE-Aschersleben Güstener Straße,51.76425,11.4736
 EnBW DE-Aschersleben Hellweg,51.76777,11.484123
+EnBW DE-Aschheim Jedovnicestraße,48.16584,11.71983
 EnBW DE-Ascholding,47.890484,11.504948
 EnBW DE-Asperg Eglosheimer Straße,48.90461,9.143326
 EnBW DE-Asperg Markgröninger Straße,48.905712,9.133538
@@ -10427,6 +10431,7 @@ EnBW DE-Aurich,53.4704,7.45939
 EnBW DE-Autohof Bitterfeld,51.6363,12.19907
 EnBW DE-Autohof Burghaslach,49.73938,10.63744
 EnBW DE-Autohof Grabow,53.2982,11.53302,25
+EnBW DE-Autohof Härtensdorf,50.68048,12.59072,25
 EnBW DE-Autohof Kappel-Grafenhausen,48.28093,7.77691,25
 EnBW DE-Autohof Mendig,50.38231,7.26952,25
 EnBW DE-Autohof Nahetal,49.9256,7.93568,30
@@ -10587,12 +10592,12 @@ EnBW DE-Bobenheim-Roxheim Südring,49.581426,8.354434
 EnBW DE-Bobingen Königsbrunner Straße,48.26401,10.840595
 EnBW DE-Bocholt Dingdener Straße,51.822973,6.614089
 EnBW DE-Bocholt Hagebaumarkt,51.83766,6.595099
-EnBW DE-Bochum A40,51.476198,7.153262
 EnBW DE-Bochum Bauhaus,51.47385,7.13561
 EnBW DE-Bochum Castroper Hellweg,51.496796,7.257004
 EnBW DE-Bochum Hattinger Straße,51.46247,7.20351
 EnBW DE-Bochum Ottostraße,51.471637,7.1179
 EnBW DE-Bochum Riemker Straße,51.508187,7.191898
+EnBW DE-Bochum Vietingstraße,51.4762,7.15326
 EnBW DE-Bodelshausen Rottenburger Straße,48.3966,8.97138
 EnBW DE-Bodman-Ludwigshafen Seestrasse,47.800437,9.037903
 EnBW DE-Bondorf Am Römerfeld,48.5076,8.828301
@@ -10638,7 +10643,7 @@ EnBW DE-Buchen (Odenwald) Eberstadter Straße,49.52098,9.328713
 EnBW DE-Buchheim Römerweg,48.012089,8.986638
 EnBW DE-Buchholz in der Nordheide,53.286876,9.870791
 EnBW DE-Burgauer See,48.413506,10.429502
-EnBW DE-Burgdorf,52.459289,9.992835
+EnBW DE-Burgdorf Lise-Meitner-Straße,52.4593,9.99283
 EnBW DE-Burghausen Burgkirchener Straße,48.17735,12.82527
 EnBW DE-Burghausen OMV,48.174998,12.825153
 EnBW DE-Burgwedel Kokenhorststraße,52.48628,9.8453
@@ -10784,7 +10789,7 @@ EnBW DE-Eching Dieselstraße,48.3062,11.63432,20
 EnBW DE-Edertal,51.171853,9.106085
 EnBW DE-Edesheim Pfälzer Weinstraße Ost,49.270394,8.153854
 EnBW DE-Edesheim Pfälzer Weinstraße West,49.26986,8.151913
-EnBW DE-Edewecht,53.12326,8.085511
+EnBW DE-Edewecht Friedrichsfehner Straße,53.12354,8.08542
 EnBW DE-Edingen-Neckarhausen Hauptstraße,49.46408,8.60248
 EnBW DE-Edingen-Neckarhausen Mannheimer Straße,49.451323,8.603817
 EnBW DE-Egelsbach Kurt-Schumacher-Ring,49.961826,8.670718
@@ -11012,7 +11017,7 @@ EnBW DE-Günzburg Spielplatzstraße,48.433351,10.293138
 EnBW DE-Güstrow,53.815456,12.19278
 EnBW DE-Gütersloh,51.900867,8.404334
 EnBW DE-Haag in Oberbayern Gerberstraße,48.16432,12.167592
-EnBW DE-Haan,51.184379,6.983397
+EnBW DE-Haan Düsseldorfer Straße,51.18426,6.98352
 EnBW DE-Haar Münchenerstrasse,48.109114,11.7207
 EnBW DE-Hagen Bauhaus,51.3723,7.45822
 EnBW DE-Hagen Euronics,51.362535,7.558388
@@ -11377,7 +11382,7 @@ EnBW DE-Lübeck Penny,53.865476,10.721
 EnBW DE-Lübz,53.465291,12.041725
 EnBW DE-Lüchow (Wendland) Am Kleinbahnhof,52.964058,11.165428
 EnBW DE-Lüchow (Wendland) Rewe,52.96829,11.140597
-EnBW DE-Lüdenscheid,51.227946,7.60775
+EnBW DE-Lüdenscheid Hohe Steinert,51.22795,7.60775
 EnBW DE-Lüneburg,53.240271,10.461975
 EnBW DE-Lünen Fressnapf,51.6066,7.50454
 EnBW DE-Lünen Penny,51.59754,7.43986
@@ -11709,9 +11714,9 @@ EnBW DE-Reichenbach Marienstraße,48.71006,9.4627
 EnBW DE-Reichertshofen Logistikring,48.643398,11.520259
 EnBW DE-Reilingen Hockenheimer Straße,49.29527,8.57387
 EnBW DE-Reinfeld An der Autobahn,53.82391,10.50188,25
-EnBW DE-Rellingen,53.657268,9.81385
+EnBW DE-Rellingen Eichenstraße,53.65727,9.81385
 EnBW DE-Remagen Zeppelinstraße,50.56797,7.24677,25
-EnBW DE-Remscheid,51.180361,7.252722
+EnBW DE-Remscheid Trecknase,51.1805,7.25285
 EnBW DE-Renchtal Ost,48.562869,7.959164
 EnBW DE-Renchtal West,48.56299,7.955814
 EnBW DE-Rendsburg,54.31133,9.65467
@@ -11799,7 +11804,7 @@ EnBW DE-Schelklingen Ehinger Straße,48.37063,9.732524
 EnBW DE-Schelklingen Fabrikstraße,48.36483,9.7117
 EnBW DE-Schelklingen Müllergasse,48.374243,9.73298
 EnBW DE-Schemmerhofen Hauptstraße,48.17437,9.79393
-EnBW DE-Schenefeld,53.59906,9.843248
+EnBW DE-Schenefeld Altonaer Chaussee,53.59906,9.84325
 EnBW DE-Schlat Turnhallenstraße,48.65358,9.70697
 EnBW DE-Schleiden Hermann-Kattwinkel-Platz,50.571249,6.504384
 EnBW DE-Schleiz Gottfried-Piegler-Straße,50.54673,11.80337,16
@@ -11842,7 +11847,7 @@ EnBW DE-Schwarzenbach an der Saale Kirchenlamitzer Straße,50.217928,11.937074
 EnBW DE-Schwedt/Oder,53.068692,14.264561
 EnBW DE-Schweinfurt Rudolf-Diesel-Straße,50.03432,10.23673
 EnBW DE-Schwendi Biberacher Straße,48.1749,9.97414
-EnBW DE-Schwentinental,54.288711,10.228724,30
+EnBW DE-Schwentinental Klausdorfer Straße,54.2887,10.22872
 EnBW DE-Schwerin,53.597307,11.431819
 EnBW DE-Schwetzingen Bahnhofanlage,49.384752,8.577721
 EnBW DE-Schwetzingen Kolpingstraße,49.38016,8.57536
@@ -12072,7 +12077,7 @@ EnBW DE-Taunusstein Kleiststraße,50.139036,8.154933
 EnBW DE-Tennenbronn Hauptstraße,48.19064,8.35127
 EnBW DE-Tiefenbach Buchauer Straße,48.08835,9.65223
 EnBW DE-Titisee-Neustadt Freiburger Straße,47.923368,8.189472
-EnBW DE-Tornesch,53.71855,9.75894
+EnBW DE-Tornesch Lise-Meitner-Allee,53.71855,9.75894
 EnBW DE-Traben-Trarbach Neue Straße,49.957328,7.124324
 EnBW DE-Traunreut Waginger Straße,47.96071,12.61087
 EnBW DE-Traunstein Wimpasinger Straße,47.8495,12.630515
@@ -12210,9 +12215,8 @@ EnBW DE-Wiesloch Meßplatzstraße,49.29316,8.70153
 EnBW DE-Wietzendorf,52.944965,9.881729
 EnBW DE-Wildau,52.317991,13.605636
 EnBW DE-Wildberg Hohe Gasse,48.623846,8.746806
-EnBW DE-Wildenfels,50.680479,12.590721,25
 EnBW DE-Wildflecken,50.377087,9.914401
-EnBW DE-Wilhelmshaven,53.528539,8.088595
+EnBW DE-Wilhelmshaven Bismarckstraße,53.52854,8.0886
 EnBW DE-Wilhelmshaven Graudenzer Straße,53.570757,8.093617
 EnBW DE-Winningen Moseltal Ost,50.316545,7.498842
 EnBW DE-Winningen Moseltal West,50.317467,7.497907
@@ -13155,6 +13159,7 @@ EWE-GO DE-Aurich Marktplatz,53.470269,7.483993
 EWE-GO DE-Aurich Raiffeisen Straße,53.45752,7.49794
 EWE-GO DE-Aurich Westerlooger Straße,53.536224,7.598103
 EWE-GO DE-Aurich Zu den Norderstücken,53.500833,7.486206
+EWE-GO DE-Autohof Härtensdorf,50.68072,12.59116,15
 EWE-GO DE-Autohof Mendig,50.38202,7.26959,12
 EWE-GO DE-Autohof Nahetal,49.9252,7.93588,30
 EWE-GO DE-Autohof Pfalzfeld,50.11603,7.6002,25
@@ -14112,7 +14117,6 @@ EWE-GO DE-Wiesbaden Dotzheimer Straße,50.075896,8.209787
 EWE-GO DE-Wiesmoor Hauptstraße,53.400672,7.712459
 EWE-GO DE-Wiesmoor Kanalstr II,53.39487,7.70292
 EWE-GO DE-Wildau Gewerbepark,52.317064,13.602684,25
-EWE-GO DE-Wildenfels Arno-Schmidt-Straße,50.68072,12.59116,10
 EWE-GO DE-Wildeshausen Delmenhorster Straße,52.902775,8.444477
 EWE-GO DE-Wildeshausen Gildeplatz,52.896432,8.438846
 EWE-GO DE-Wildeshausen Glaner Straße,52.90179,8.416729
@@ -15070,6 +15074,7 @@ HEnW DE-Hamburg Hallerstraße,53.572822,9.99007
 HEnW DE-Hamburg Hammer Berg,53.55465,10.0653
 HEnW DE-Hamburg Harburger Rathausstraße,53.459,9.98118
 HEnW DE-Hamburg Heschredder,53.627,10.021765
+HEnW DE-Hamburg Jarrestraße,53.5842,10.02186
 HEnW DE-Hamburg Jenfelder Allee,53.58416,10.12586
 HEnW DE-Hamburg Kajen,53.545079,9.986546
 HEnW DE-Hamburg Kapstadtring,53.60299,10.027833
@@ -15339,6 +15344,7 @@ illwerke-vkw AT-Bregenz Landstraße,47.49162,9.73957
 illwerke-vkw AT-Bregenz Seestraße,47.50551,9.74837
 illwerke-vkw AT-Bregenz Weidachstraße,47.488331,9.740697,10
 illwerke-vkw AT-Bregenz Weidachstraße,47.488431,9.74042,10
+illwerke-vkw AT-Bregenz Wolfordstraße,47.49546,9.71397
 illwerke-vkw AT-Bürs Bremschlstraße,47.151734,9.81568
 illwerke-vkw AT-Damüls,47.27992,9.89147
 illwerke-vkw AT-Dornbirn Dr. Anton-Schneider-Straße,47.42386,9.74962
