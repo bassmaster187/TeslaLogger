@@ -129,6 +129,7 @@ Supercharger-V3 AU-Kojonup WA,-33.83748,117.1579
 Supercharger-V4 AU-Laverton VIC,-37.87177,144.7748
 Supercharger AU-Lucas VIC,-37.542964,143.784883
 Supercharger AU-Macquarie,-33.777782,151.12275
+Supercharger-V4 AU-Mansfield VIC,-37.06047,146.09837
 Supercharger AU-Maroochydore,-26.653878,153.087613
 Supercharger-V4 AU-Maryborough West QLD,-25.4878,152.66365
 Supercharger AU-Melbourne-Richmond,-37.831997,144.995807
@@ -2151,6 +2152,7 @@ Supercharger-V4 DE-Sulzbach (Taunus) MTZ,50.116696,8.530323,18
 Supercharger DE-Süderholz,54.09304,13.08592
 Supercharger-V4 DE-Süderholz-Grimmen,54.0933,13.08785,40
 Supercharger-V4 DE-Tiengen,47.98355,7.71917
+Supercharger-V4 DE-Trier,49.77216,6.65757
 Supercharger-V3 DE-Troisdorf,50.813668,7.107535
 Supercharger-V4 DE-Tuttlingen,47.9835,8.80347
 Supercharger-V3 DE-Türkheim,48.0425,10.61983,30
@@ -2747,6 +2749,7 @@ Supercharger-V4 GB-Cheshunt,51.720267,-0.037312
 Supercharger GB-Chorley,53.630562,-2.692578
 Supercharger GB-Colchester,51.88071,0.788574
 Supercharger-V4 GB-Craigavon,54.448966,-6.391254
+Supercharger-V4 GB-Cranage,53.21134,-2.37802
 Supercharger-V4 GB-Crick,52.352622,-1.160603
 Supercharger GB-Dartford,51.438052,0.26879
 Supercharger GB-Dartford,51.43848,0.26688
@@ -3904,6 +3907,7 @@ Supercharger-V4 TR-Cankaya Ankara,39.90963,32.77736
 Supercharger-V3 TR-Edirne,41.680352,26.582235
 Supercharger-V3 TR-Ilgaz Çankırı,40.90657,33.64522
 Supercharger-V3 TR-Istanbul Asia Garage Floor -2,41.003233,29.070793
+Supercharger-V4 TR-Kütahya,39.35863,30.0565
 Supercharger-V4 TR-Tekirdağ,40.98885,27.5772
 
 Supercharger-V3 TW-Nantou Caotun,23.9664,120.67746
@@ -10767,6 +10771,7 @@ EnBW DE-Dörzbach Max-Planck-Straße,49.38337,9.6958
 EnBW DE-Dülmen,51.813719,7.256831
 EnBW DE-Düren Fehlender Feld,50.828648,6.475577
 EnBW DE-Düren Shell,50.797546,6.476773
+EnBW DE-Düsseldorf Am Hülserhof,51.27553,6.80723
 EnBW DE-Düsseldorf Bauhaus,51.17937,6.85242
 EnBW DE-Düsseldorf Kölner Landstraße,51.18517,6.82107
 EnBW DE-Düsseldorf Reisholzer Bahnstraße,51.180278,6.852899
@@ -15757,6 +15762,7 @@ Ionity DE-Harz West,51.928028,10.14173
 Ionity DE-Heiligengrabe Liebenthaler Dorfstraße,53.147521,12.398905
 Ionity DE-Hepberg A9 Köschinger Forst,48.837085,11.469313
 Ionity DE-Herne Holsterhauser Straße,51.52873,7.19984
+Ionity DE-Herrenberg Hewlett-Packard-Straße,48.58196,8.89197
 Ionity DE-Hohenwarsleben,52.173898,11.49512,11
 Ionity DE-Holzkirchen Nord,47.892208,11.731279
 Ionity DE-Holzkirchen Süd,47.906573,11.717379
@@ -17304,6 +17310,7 @@ Lidl DE-Dortmund-Kirchlinde Kirchlinder Straße,51.52105,7.36855
 Lidl DE-Dransfeld Wolfshof 6,51.50339,9.76493
 Lidl DE-Dresden Großenhainer Straße 156,51.090894,13.723232
 Lidl DE-Dresden Hansastraße,51.072397,13.739734
+Lidl DE-Dresden Leipziger Straße,51.07422,13.72383
 Lidl DE-Dresden Schandauer Straße 22a,51.042656,13.786635
 Lidl DE-Dresden-Gorbitz Omsewitzer Ring 45,51.048926,13.662952
 Lidl DE-Dresden-Hellerau Ludwig-Kossuth-Straße,51.11706,13.74236
@@ -23097,6 +23104,7 @@ AT Pasching Tractive,48.24068,14.2338
 AT Ratten HORN,47.472919,15.708816
 AT Schladming Europaplatz,47.39644,13.69552
 AT Sillian Sporthotel,46.74972,12.4337
+AT St. Ulrich bei Steyr Landgasthof Mayr,48.02132,14.42347
 AT St. Veit an der Glan Karosserie Puck,46.75713,14.34241
 AT Tillmitsch Heidenstraße,46.81462,15.53379
 AT Villach Steinwenderstraße,46.61133,13.8421
