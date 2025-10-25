@@ -10089,6 +10089,7 @@ Electra FR-Aire de Bages,43.1137,2.9545
 Electra FR-Aire de Gigean,43.49355,3.7183
 Electra FR-Aire de Loupian-Georges Brassens,43.46382,3.6313
 Electra FR-Aire de Manzat A89,45.9568,2.9891
+Electra FR-Aire de Pia,42.75356,2.89313
 Electra FR-Beaune Rte de Verdun,47.0095,4.85173
 Electra FR-Besançon Rue de Dole,47.21988,5.95489
 Electra FR-Boulazac Isle Manoire All. Jacques Duclos,45.18407,0.7744
@@ -10165,6 +10166,7 @@ Electrify-America US-Seabrook NH Lafayette Rd,42.89365,-70.86579
 Electrify-America US-Secaucus NJ Park Plaza,40.79187,-74.04196
 Electrify-America US-Spanish Fork UT N Cyn Crk Pkwy,40.12416,-111.64038
 Electrify-America US-Stockton CA Trinity Pkwy,38.05094,-121.3758
+Electrify-America US-Sunnyvale CA Lawrence Expy,37.3838,-121.99527
 Electrify-America US-Waterloo NY NY-318,42.95572,-76.92106
 Electrify-America US-Waukee IA Grand Prairie Pkwy,41.574009,-93.852656
 Electrify-America US-Wayne NJ Valley Rd,40.93158,-74.22765
@@ -11072,6 +11074,7 @@ EnBW DE-Hasselhöhe West,53.330732,10.042978
 EnBW DE-Hattenhofen Schulgasse,48.66721,9.572248
 EnBW DE-Hattersheim Heddingheimer Straße,50.071677,8.474065,35
 EnBW DE-Hattingen,51.408083,7.195289
+EnBW DE-Hausen Forchheimer Straße,49.70106,11.04338
 EnBW DE-Hayingen Schulstraße,48.27756,9.47964
 EnBW DE-Haßloch Fritz-Karl-Henkel-Straße,49.37402,8.25881
 EnBW DE-Hechingen Badstraße,48.3612,8.957
@@ -12349,6 +12352,7 @@ EnelX IT-Candela localita la pescara,41.14506,15.52689
 EnelX IT-Castelfiorentino Via Cesare Pavese,43.602416,10.970405
 EnelX IT-Castelletto Ticino,45.712974,8.643274,40
 EnelX IT-Cecina Via Antonio Cederna,43.3134,10.53303
+EnelX IT-Cinisello Balsamo Via Robecco,45.55912,9.2251
 EnelX IT-Cisano sul Neva Via Benessea,44.06985,8.16872
 EnelX IT-Corsico Via Matteotti,45.43471,9.10822
 EnelX IT-Corvara in Badia Str. Col Alt,46.55274,11.87512
@@ -14815,7 +14819,7 @@ GreenCharge DE-Dillenburg Hauptstraße,50.739653,8.286996
 GreenCharge DE-Dortmund Färberstraße,51.579096,7.562445
 GreenCharge DE-Düren Nikolaus-Otto-Straße,50.780289,6.50529
 GreenCharge DE-Ebersbach-Neugersdorf Johann-Andreas-Schubert-Straße,50.998607,14.615993
-GreenCharge DE-Ebsdorfergrund/Heskem Am Energiepark,50.748757,8.834187
+GreenCharge DE-Ebsdorfergrund Am Energiepark,50.74876,8.8342,30
 GreenCharge DE-Erfurt August-Röbling-Straße,51.020565,11.010125
 GreenCharge DE-Esslingen Dornierstraße,48.717547,9.342327
 GreenCharge DE-Frankenberg Marburger Straße,51.051316,8.792297
@@ -17997,6 +18001,7 @@ M-Charge CH-Dietikon Bernstrasse,47.38439,8.39585
 M-Charge CH-Füllinsdorf Schönthal Einkaufszentrum,47.50298,7.72508
 M-Charge CH-Gretzenbach Oltnerstrasse,47.35979,7.98954
 M-Charge CH-Interlaken Lindenallee,46.68827,7.87685
+M-Charge CH-Konolfingen Thunstrasse,46.8762,7.62082
 M-Charge CH-La Chaux-de-Fonds Rue Daniel-Jeanrichard,47.10027,6.82698
 M-Charge CH-Rothrist Neue Aarburgerstrasse,47.31132,7.89489
 M-Charge CH-Sant’Antonino Via Serrai,46.1534,8.96325
@@ -20443,6 +20448,7 @@ Shell CA-Kanata ON Terry Fox Dr,45.3122,-75.93303
 Shell CH-Arosa Jöri-Jenny-Strasse,46.78256,9.68247
 Shell CH-Biel/Bienne Längfeldweg,47.16104,7.29813
 Shell CH-Brig-Glis Bielstrasse,46.30759,7.96506
+Shell CH-Chexbres Rte de la Corniche,46.4806,6.7737
 Shell CH-Galgenen Kantonsstrasse,47.18138,8.87888
 Shell CH-Gränichen Postweg,47.359844,8.097591
 Shell CH-Hinwil Wässeristrasse,47.30619,8.81806
@@ -21317,6 +21323,7 @@ SW-Leipzig DE-Leipzig Dortmunder Straße,51.365945,12.401899
 SW-Leipzig DE-Leipzig Friedrich-Ebert-Straße,51.338607,12.362264
 SW-Leipzig DE-Leipzig Goldschmidtstraße,51.335169,12.38933
 SW-Leipzig DE-Leipzig Handelsstraße,51.4007,12.40029
+SW-Leipzig DE-Leipzig Henriettenstraße,51.33243,12.32583
 SW-Leipzig DE-Leipzig Karl-Tauchnitz-Straße,51.330694,12.363159
 SW-Leipzig DE-Leipzig Ludwigsburger Straße,51.32047,12.29036
 SW-Leipzig DE-Leipzig Naunhofer Straße,51.31398,12.42138
@@ -21763,6 +21770,7 @@ TEAG DE-Butzbach Kaiserstraße,50.430837,8.668712
 TEAG DE-Coburg Niorter Straße,50.286432,10.984851
 TEAG DE-Drei Gleichen Wanderslebener Straße,50.872261,10.829578
 TEAG DE-Ebeleben Sondershäuser Straße,51.287906,10.742155
+TEAG DE-Ebsdorfergrund Am Energiepark,50.74836,8.83445,30
 TEAG DE-Eisenberg REWE,50.971078,11.883232
 TEAG DE-Elxleben Osterlange,51.05022,10.93743
 TEAG DE-Elxleben Witterdaer Straße,51.047596,10.946577
