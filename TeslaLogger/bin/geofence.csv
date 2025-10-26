@@ -123,6 +123,7 @@ Supercharger-V3 AU-Indooroopilly QLD,-27.499185,152.973652
 Supercharger-V4 AU-Kanica VIC,-36.37735,141.2369
 Supercharger-V3 AU-Karrinyup WA,-31.877272,115.776138
 Supercharger AU-Keith,-36.099082,140.355645
+Supercharger-V3 AU-Kilmore VIC,-37.2863,144.94744
 Supercharger-V3 AU-Kirrawee NSW,-34.032401,151.073363
 Supercharger AU-Knockrow,-28.749539,153.534722
 Supercharger-V3 AU-Kojonup WA,-33.83748,117.1579
@@ -2402,6 +2403,7 @@ Supercharger-V4 FI-Keminmaa,65.79995,24.50417,30
 Supercharger-V3 FI-Kempele,64.901803,25.535398
 Supercharger FI-Kokkola,63.829282,23.148487
 Supercharger-V3 FI-Kuopio,62.820695,27.607985
+Supercharger-V4 FI-Kuopio IKEA,62.8238,27.60816
 Supercharger-V3 FI-Kuusamo,65.95893,29.1566
 Supercharger-V3 FI-Kärsämäki,63.97403,25.76049,40
 Supercharger-V3 FI-Lappeenranta,61.052624,28.261424
@@ -3604,6 +3606,7 @@ Supercharger NO-Stjørdal,63.466385,10.918098
 Supercharger-V3 NO-Stord,59.77546,5.487
 Supercharger NO-Storjord,66.814045,15.401738
 Supercharger-V3 NO-Stryn,61.904677,6.7258
+Supercharger-V4 NO-Stryn Visnes,61.903,6.71774
 Supercharger-V4 NO-Støren,63.03688,10.29202
 Supercharger-V4 NO-Sunndalsøra,62.67312,8.56388
 Supercharger NO-Svolvær,68.23312,14.55962,25
@@ -3903,11 +3906,13 @@ Supercharger-V3 TR-Akhisar,38.930236,27.703596
 Supercharger-V3 TR-Ankara,39.949583,32.832923
 Supercharger-V4 TR-Beylikdüzü İstanbul,41.01997,28.62815
 Supercharger-V4 TR-Bolu,40.72398,31.46504
+Supercharger-V4 TR-Burdur,37.74588,30.31232
 Supercharger-V4 TR-Cankaya Ankara,39.90963,32.77736
 Supercharger-V3 TR-Edirne,41.680352,26.582235
 Supercharger-V3 TR-Ilgaz Çankırı,40.90657,33.64522
 Supercharger-V3 TR-Istanbul Asia Garage Floor -2,41.003233,29.070793
 Supercharger-V4 TR-Kütahya,39.35863,30.0565
+Supercharger-V4 TR-Sivrihisar,39.44167,31.52694
 Supercharger-V4 TR-Tekirdağ,40.98885,27.5772
 
 Supercharger-V3 TW-Nantou Caotun,23.9664,120.67746
@@ -8220,6 +8225,7 @@ ChargePoint DE-Melle Maschweg,52.1931,8.35802
 ChargePoint DE-Montabaur Staufenbergallee,50.427142,7.820981
 ChargePoint DE-Mücheln (Geiseltal) 1B Bahnhofsiedlung,51.347096,11.75512
 ChargePoint DE-München Friedenstraße,48.125258,11.604903
+ChargePoint DE-Münster Loddenheide,51.93873,7.6472
 ChargePoint DE-Neuss 4 Im Taubental,51.166856,6.758268
 ChargePoint DE-Nürnberg 14 Kressengartenstraße,49.449934,11.099394
 ChargePoint DE-Nürnberg 97 Flughafenstraße,49.493548,11.080217
@@ -19046,6 +19052,7 @@ OMV RS-Општина Дољевац,43.18246,21.8628
 OMV SI-Kozina Bazoviška cesta,45.60471,13.92928,12
 OMV SI-Počivališče Dravsko Polje,46.429,15.79448
 OMV SK-Dolný Hričov Majora Antona Matúška,49.23302,18.624219
+OMV SK-Košice Južná trieda,48.70012,21.26287
 OMV SK-Poprad Matejovce Hlavná,49.07436,20.33
 
 ON IS-Akureyri Strandgata,65.68403,-18.08697
@@ -20294,6 +20301,7 @@ SachsenEnergie DE-Dresden Scharfenberger Straße,51.0724,13.68833
 SachsenEnergie DE-Dresden Schiller Galerie,51.05142,13.80468
 SachsenEnergie DE-Dresden Waldschlößchenstraße,51.0684,13.77634
 SachsenEnergie DE-Dresden Wasaplatz,51.028264,13.759824
+SachsenEnergie DE-Dresden Washingtonstraße,51.08148,13.69085
 SachsenEnergie DE-Dresden Weißeritzstraße,51.056384,13.723257
 SachsenEnergie DE-Dresden Wilhelmine-Reichard-Ring,51.123775,13.764601
 SachsenEnergie DE-Ebersbach-Neugersdorf Adam-Ries-Straße,51.000994,14.616807
@@ -21029,6 +21037,8 @@ Sonnenladen AT-St. Pantaleon Dorfstraße,48.21293,14.56515
 
 Sowatt FR-Échirolles Av. Victor Hugo,45.15128,5.70995,30
 
+Sparki BE-Peer Deusterstraat,51.12284,5.47193
+
 SPBR1 FR-Bauduen Rue des Jardins,43.73247,6.17686
 
 Sperto DK-Spjald Ringkøbingvej,56.08623,8.50863
@@ -21590,6 +21600,7 @@ SWS DE-Speyer Fliederweg,49.34705,8.42597
 SWS DE-Speyer Schifferstadter Straße,49.34182,8.4289
 
 SWSZ DE-Zella-Mehlis Hollandsmühle,50.66646,10.68415
+SWSZ DE-Zella-Mehlis Talstraße,50.65668,10.65838
 
 SWU DE-Blaubeuren Ulmer Straße,48.40923,9.78906
 SWU DE-Neu-Ulm Glacis Galerie,48.393879,10.003906
