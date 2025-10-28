@@ -1969,7 +1969,7 @@ Supercharger-V3 DE-Hermsdorf,50.889889,11.871397,30
 Supercharger-V3 DE-Herne (Zurbrüggen),51.531182,7.209585
 Supercharger-V3 DE-Herrieden,49.257951,10.501761
 Supercharger-V3 DE-Herzsprung,53.06744,12.53322
-Supercharger-V4 DE-Hessisch Lichtenau,51.197891,9.745477,25
+Supercharger-V4 DE-Hessisch Lichtenau,51.19784,9.74687
 Supercharger DE-Hilden,51.191193,6.936986,30
 Supercharger-V3 DE-Hilden,51.19189,6.93536,80
 Supercharger-V4 DE-Hildesheim (Cafe Del Sol),52.15672,9.9727
@@ -4230,6 +4230,7 @@ Supercharger-V3 US-Chicopee MA,42.175294,-72.57787
 Supercharger US-Childress TX,34.432503,-100.218625
 Supercharger US-Childress TX,34.435278,-100.2319
 Supercharger-V3 US-Chillicothe OH,39.358367,-82.977389
+Supercharger-V4 US-Chilly-Mazarin,48.70648,2.29726
 Supercharger-V3 US-Chino Hills CA,34.002301,-117.730277
 Supercharger-V3 US-Chipley FL,30.75184,-85.55166
 Supercharger-V3 US-Chowchilla CA,37.12595,-120.24666
@@ -4985,6 +4986,7 @@ Supercharger-V3 US-McKinney TX,33.151856,-96.717094
 Supercharger-V3 US-McKinney TX - University Drive,33.217459,-96.657046
 Supercharger-V3 US-McLeansville NC,36.05622,-79.66013
 Supercharger US-Mebane NC,36.069852,-79.27005
+Supercharger-V4 US-Mebane NC Millstead Dr,36.06367,-79.3012
 Supercharger-V3 US-Mechanicsburg PA,40.194423,-76.992167
 Supercharger-V3 US-Mechanicsville VA,37.61338,-77.3288
 Supercharger-V3 US-Medford NJ,39.903772,-74.804296
@@ -5961,13 +5963,17 @@ Tesla Service Center CH-Möhlin,47.57728,7.841
 Tesla Service Center CH-Schlieren,47.40088,8.44
 Tesla Service Center CH-St. Gallen,47.41515,9.34021
 Tesla Service Center CH-Winterthur,47.49629,8.6981
+Tesla Service Center DE-Augsburg,48.40887,10.87295
 Tesla Service Center DE-Berlin,52.394091,13.542292
 Tesla Service Center DE-Bielefeld,51.9859,8.49605
+Tesla Service Center DE-Braunschweig,52.27962,10.49772
+Tesla Service Center DE-Bremen,53.09335,9.12287
 Tesla Service Center DE-Dortmund Holzwickede,51.51175,7.614
 Tesla Service Center DE-Dresden Kesseldorf,51.03637,13.59807
 Tesla Service Center DE-Duisburg,51.476498,6.794394
 Tesla Service Center DE-Düsseldorf,51.16438,6.85322
 Tesla Service Center DE-Düsseldorf Leerenfeld,51.215803,6.835745
+Tesla Service Center DE-Erfurt,50.9734,11.05225
 Tesla Service Center DE-Feldkirchen,48.145579,11.741758
 Tesla Service Center DE-Frankfurt am Main,50.13312,8.76548,56
 Tesla Service Center DE-Gettorf,54.40935,9.98353
@@ -9797,6 +9803,7 @@ EDEKA DE-Bernburg Gröbziger Straße,51.78841,11.75377
 EDEKA DE-Binz Vierte Straße,54.442268,13.568479
 EDEKA DE-Bissendorf Mindener Straße,52.261363,8.212064
 EDEKA DE-Bitterfeld-Wolfen Wittenberger Straße,51.62734,12.33776
+EDEKA DE-Blankenburg (Harz) Lerchenbreite,51.80646,10.94174,25
 EDEKA DE-Bocholt Dinxperloerstraße,51.85394,6.5938
 EDEKA DE-Bocholt Wigger Straße,51.86016,6.49928
 EDEKA DE-Bochum Wasserstraße,51.46386,7.23712
@@ -11398,6 +11405,7 @@ EnBW DE-Lüchow (Wendland) Am Kleinbahnhof,52.964058,11.165428
 EnBW DE-Lüchow (Wendland) Rewe,52.96829,11.140597
 EnBW DE-Lüdenscheid Hohe Steinert,51.22795,7.60775
 EnBW DE-Lüneburg,53.240271,10.461975
+EnBW DE-Lüneburg Auf der Höhe,53.238,10.3846
 EnBW DE-Lünen Fressnapf,51.6066,7.50454
 EnBW DE-Lünen Penny,51.59754,7.43986
 EnBW DE-Lünen Rewe,51.608513,7.522452
@@ -14317,6 +14325,7 @@ Fastned CH-Rastplatz Apfelwuhr,46.95782,9.54872
 Fastned CH-Rastplatz Suhr,47.380429,8.109053
 Fastned CH-Rastplatz Wileroltigen,46.96308,7.22631
 Fastned DE-Altmühltal,48.997562,11.375364
+Fastned DE-Autohof Herbolzheim,48.22694,7.7551,30
 Fastned DE-Autohof Paderborn-Mönkeloh,51.68356,8.72177,30
 Fastned DE-Bad Driburg Am Siedlerplatz,51.72076,9.01187
 Fastned DE-Bad Fallingbostel Gustaf-de-Laval-Straße,52.8531,9.692
@@ -14336,7 +14345,6 @@ Fastned DE-Giengen-Herbrechtingen,48.61561,10.20539
 Fastned DE-Gießen Ferniestraße,50.57151,8.68999
 Fastned DE-Gladbeck-Ellinghorst,51.5552,6.96951
 Fastned DE-Goldbach,49.993547,9.173447
-Fastned DE-Herbolzheim,48.22685,7.75509
 Fastned DE-Hermsdorf,50.889767,11.871964,18
 Fastned DE-Herzogenrath Bergerstraße,50.867964,6.098497
 Fastned DE-Hilden,51.19216,6.93613,15
@@ -14558,6 +14566,7 @@ FreeToX IT-Andria Autostrada Adriatica,41.250782,16.218906
 FreeToX IT-Andria Autostrada Adriatica,41.251829,16.220171
 FreeToX IT-Area di Lario,45.72902,9.02876
 FreeToX IT-Area di Lario,45.7299,9.02799
+FreeToX IT-Area di Servizio Flaminia,42.31666,12.4913
 FreeToX IT-Area di Servizio Garda,45.5411,10.7794
 FreeToX IT-Badia al Pino,43.40561,11.76381
 FreeToX IT-Badia al Pino,43.40796,11.76282
@@ -19908,6 +19917,7 @@ Powerdot FR-Russ Rue de la Creuse Fontaine,48.49343,7.25152
 Powerdot FR-Saint-Malo Imp. de la Peupleraie,48.62518,-1.99012,20
 Powerdot FR-Ussac Av. du Griffolet,45.1634,1.48153,30
 Powerdot FR-Valence Imp. des Auréats,44.90199,4.88327
+Powerdot PL-Bielany Wrocławskie Francuska,51.05217,16.9683
 Powerdot PL-Cieszyn Wierzbowa,49.75655,18.6395
 Powerdot PL-Gdańsk Gdańska,54.40236,18.63141
 Powerdot PL-Kraków Pawia,50.067976,19.946278
@@ -21339,6 +21349,7 @@ SW-Leipzig DE-Leipzig Ludwigsburger Straße,51.32047,12.29036
 SW-Leipzig DE-Leipzig Naunhofer Straße,51.31398,12.42138
 SW-Leipzig DE-Leipzig Paunsdorfer Allee,51.34847,12.47552
 SW-Leipzig DE-Leipzig Peterssteinweg,51.332325,12.374098
+SW-Leipzig DE-Leipzig Strelitzer Straße,51.37282,12.376
 SW-Leipzig DE-Leipzig Stötteritzer Straße,51.327502,12.4025
 SW-Leipzig DE-Leipzig Willy-Brandt-Platz,51.34499,12.37925
 SW-Leipzig DE-Leipzig Wilmar-Schwabe-Straße,51.341652,12.357869
@@ -22393,6 +22404,7 @@ vaylens DE-Lindlar Hausgrund,51.01835,7.2827
 vaylens DE-Mainz Budenheimer Straße (Juxplatz),50.00075,8.20496
 vaylens DE-Neustadt in Holstein Eutiner Straße,54.10096,10.7967
 vaylens DE-Oberhausen Centro,51.49124,6.87911
+vaylens DE-Osterfeld Pretzscher Straße,51.08398,11.9345
 vaylens DE-Plauen Rittergut,50.49175,12.0891
 vaylens DE-Schenefeld Achter de Weiden,53.60694,9.82984
 vaylens DE-Siegburg Luisenstraße,50.80902,7.19295
