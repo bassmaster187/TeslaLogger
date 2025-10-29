@@ -2344,6 +2344,7 @@ Supercharger ES-Mérida,38.921746,-6.375133
 Supercharger-V4 ES-Ocaña,39.93407,-3.4897
 Supercharger-V3 ES-Ondara,38.816859,0.022245
 Supercharger-V3 ES-Pamplona,42.783886,-1.630849,60
+Supercharger-V4 ES-Puebla de Sanabria,42.05826,-6.66216
 Supercharger ES-Reocín,43.355578,-4.09496
 Supercharger ES-Rivabellosa,42.701171,-2.91951
 Supercharger-V4 ES-Rivas Vaciamadrid,40.33593,-3.52432
@@ -2503,6 +2504,7 @@ Supercharger-V3 FR-Brest Gouesnou,48.430746,-4.470105
 Supercharger-V3 FR-Briançon,44.903824,6.630075
 Supercharger-V4 FR-Brive-la-Gaillarde,45.1672,1.4829
 Supercharger-V3 FR-Bron,45.72203,4.92364,40
+Supercharger-V4 FR-Brétigny-sur-Orge,48.59046,2.30087
 Supercharger FR-Buchelay,48.990144,1.671559
 Supercharger-V3 FR-Bègles,44.79372,-0.53282
 Supercharger-V3 FR-Béziers,43.33605,3.28392
@@ -2946,6 +2948,7 @@ Supercharger-V4 HR-Jasenice,44.24,15.5705
 Supercharger-V4 HR-Jasenice,44.2409,15.566
 Supercharger HR-Karlovac,45.51297,15.54748
 Supercharger-V4 HR-Krapina,46.13145,15.8869
+Supercharger-V4 HR-Otocac,44.89314,15.18408
 Supercharger-V4 HR-Otočac,44.89332,15.18395
 Supercharger HR-Senj,44.98932,14.89781
 Supercharger HR-Slavonski Brod,45.175219,18.063332
@@ -6366,6 +6369,7 @@ Aldi DE-Leverkusen-Fixheide Schlebuscher Straße,51.05,7.013389
 Aldi DE-Leverkusen-Opladen Bonner Straße,51.067417,6.990194
 Aldi DE-Lindau Von-Behring-Straße,47.5506,9.7221
 Aldi DE-Linden Carl-Benz-Straße,50.538326,8.654354
+Aldi DE-Lindlar Altenlinde,51.02676,7.3631
 Aldi DE-Lorsch,49.65359,8.555596
 Aldi DE-Ludwigsburg,48.879803,9.218476,20
 Aldi DE-Ludwigsburg Martin-Luther-Straße,48.891194,9.181389
@@ -6476,6 +6480,7 @@ Aldi DE-Sandhausen Gottlieb-Daimler-Straße,49.340389,8.667
 Aldi DE-Sankt Augustin Einsteinstraße,50.789384,7.1848
 Aldi DE-Sankt Augustin Im Mittelfeld,50.77784,7.230817
 Aldi DE-Satteldorf Industriestraße,49.180559,10.072113
+Aldi DE-Schalksmühle Hälverstraße,51.23674,7.5297
 Aldi DE-Schorndorf Waiblinger Straße,48.81336,9.52312
 Aldi DE-Schwabach Wolkersdorfer Hauptstraße,49.3655,11.03024
 Aldi DE-Schwegenheim Speyerer Straße,49.2733,8.3373
@@ -10095,6 +10100,7 @@ Electra AT-Linz Wankmüllerhofstraße,48.28068,14.30622
 Electra BE-Auderghem Chaussée de Wavre,50.794779,4.478889
 Electra BE-Maasmechelen Koninginnelaan,50.98633,5.7015
 Electra BE-Zandhoven Liersebaan,51.198904,4.643527
+Electra CH-Bern Mingerstrasse,46.9592,7.46917
 Electra ES-Sant Cugat del Vallès Av. de la Via Augusta,41.48288,2.05283
 Electra ES-Sant Cugat Shopping Center,41.48302,2.0529
 Electra FR-Aire de Arzens,43.21972,2.21619,30
@@ -10801,6 +10807,7 @@ EnBW DE-Ebersbach an der Fils Fritz-Kauffmann-Straße,48.714952,9.523914
 EnBW DE-Ebersbach an der Fils Ortsstraße,48.70821,9.55544
 EnBW DE-Ebersbach-Musbach Altshauser,47.953434,9.576016
 EnBW DE-Ebersberg Am Forst,48.096563,11.961209
+EnBW DE-Ebersdorf bei Coburg Frohnlacher Straße,50.21946,11.07475
 EnBW DE-Eberstadt Backhausgasse,49.178445,9.32095
 EnBW DE-Eberswalde,52.829875,13.830186
 EnBW DE-Ebhausen Nagolder Straße,48.5847,8.6762
@@ -12796,6 +12803,7 @@ EPO CH-Brugg Aarauerstrasse,47.46966,8.18951
 
 EQUANS NL-Amsterdam IJdoornlaan,52.41527,4.91168
 EQUANS NL-Nieuwegein Arsenaaldok,52.01317,5.1148
+EQUANS NL-Noordwijk Keplerlaan,52.21712,4.41993
 
 EQUAY PL-Gdańsk mjr. Henryka Sucharskiego,54.40323,18.68079
 EQUAY PL-Gdańsk Zamknięta,54.40017,18.678
@@ -12883,6 +12891,7 @@ etecnic ES-Vilanova i la Geltrú Carrer dels Escolapis,41.22233,1.72666
 etecnic ES-Vilanova i la Geltrú Passeig Marítim,41.21605,1.73325
 
 Eulektro DE-Berlin Platz der Luftbrücke,52.47765,13.3868
+Eulektro DE-Bremen Am Dobben,53.0781,8.82284
 Eulektro DE-Krefeld Odilia-Von-Goch-Strasse,51.36605,6.49727
 
 EV-Alzenau DE-Alzenau Burgstraße,50.08713,9.07415
@@ -18390,6 +18399,7 @@ MONACO-ON MC-Monaco Av. de la Madone,43.74066,7.42695
 MONACO-ON MC-Monaco Av. Princesse Grâce,43.74568,7.43203
 
 Monta AT-Burgfried Böhmer Straße,48.52589,14.29368
+Monta AT-Freistadt Galgenau,48.4892,14.4973
 Monta DE-Egling St2070,47.923998,11.488849
 Monta DE-Friedberg (Hessen) Ottostraße,50.34638,8.7547
 Monta DE-Friedberg (Hessen) Straßheimer Straße,50.32138,8.7395
@@ -20729,6 +20739,7 @@ Shell DE-Rampe Cambser Straße,53.68722,11.4883
 Shell DE-Rathenow Fehrbelliner Straße,52.60776,12.3389
 Shell DE-Remscheid Neuenkamper Straße,51.17677,7.21831
 Shell DE-Remscheid Willy-Brandt-Platz,51.177717,7.201177
+Shell DE-Renningen Dornierstraße,48.78104,8.93026
 Shell DE-Rheinberg An der Neuweide,51.53544,6.60586,30
 Shell DE-Rheinberg Xantener Straße,51.556207,6.588886
 Shell DE-Rheinstetten An der B36,48.954684,8.293244
@@ -21321,6 +21332,7 @@ SW-Kiel DE-Mönkeberg Am Eksol,54.348503,10.188428
 SW-Kiel DE-Schönberg Bürgermeister-Wiese-Straße,54.39314,10.37349
 SW-Klagenfurt AT-Klagenfurt 10.-Oktober-Straße,46.62162,14.30779
 SW-Klagenfurt AT-Klagenfurt Kardinalplatz,46.62392,14.31198
+SW-Klagenfurt AT-Klagenfurt Villacher Straße,46.62095,14.2631
 SW-Klagenfurt AT-Klagenfurt Völkermarkter Straße,46.62887,14.3501
 SW-Klagenfurt AT-Linden Höhe,46.60924,14.14439
 SW-Klagenfurt AT-Linden Pyramidenkogel,47.06746,14.87888
@@ -21595,6 +21607,7 @@ SWM DE-München Schellingstraße,48.1548,11.55986
 SWM DE-München Seeriederstraße,48.13395,11.6021,30
 SWM DE-München Steinstraße,48.1291,11.59414
 SWM DE-München Steubenplatz,48.15114,11.52008
+SWM DE-München Widenmayerstraße,48.14003,11.59346
 SWM DE-München Winthirstraße,48.1566,11.52762
 SWM DE-München Winzererstraße,48.1618,11.5621
 SWM DE-München Wirtstraße,48.1124,11.57758
