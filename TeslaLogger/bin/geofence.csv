@@ -3438,7 +3438,7 @@ Supercharger-V4 NL-Heerlen,50.893031,5.955571
 Supercharger-V3 NL-Hengelo,52.287275,6.773343
 Supercharger NL-Hoorn,52.65081,5.03883,32
 Supercharger-V3 NL-Horst,51.47005,6.05723
-Supercharger-V4 NL-Houten,52.0261,5.13789
+Supercharger-V4 NL-Houten,52.02602,5.13827
 Supercharger NL-Leiderdorp,52.16046,4.54913
 Supercharger-V3 NL-Leusden,52.14405,5.4169,35
 Supercharger-V3 NL-Maastricht,50.816519,5.725658
@@ -3560,6 +3560,7 @@ Supercharger NO-Mo i Rana,66.307489,14.152152
 Supercharger-V3 NO-Molde,62.73935,7.1998,30
 Supercharger NO-Mosjøen,65.834836,13.191673
 Supercharger NO-Mosjøen North,65.841941,13.188447,35
+Supercharger-V4 NO-Moss Kambo,59.46353,10.6887
 Supercharger NO-Narvik,68.436983,17.426014
 Supercharger NO-Nes i Ådal,60.58475,9.985092
 Supercharger-V3 NO-Nordfjordeid,61.912414,5.9805
@@ -3577,6 +3578,7 @@ Supercharger NO-Porsgrunn,59.122098,9.707564
 Supercharger-V4 NO-Porsgrunn Down Town,59.13588,9.64029
 Supercharger-V3 NO-Reine,67.934833,13.094056
 Supercharger-V4 NO-Rena,61.130829,11.375494
+Supercharger-V4 NO-Ringebu,61.53014,10.13524
 Supercharger-V4 NO-Risør,58.71974,9.22545
 Supercharger-V3 NO-Rjukan,59.88054,8.626
 Supercharger-V3 NO-Rudshøgda,60.910144,10.811751
@@ -6229,7 +6231,7 @@ Aldi DE-Dinslaken,51.560813,6.741382,20
 Aldi DE-Dormagen-Horrem Mathias-Giesen-Straße,51.094778,6.816278
 Aldi DE-Dormagen-Nievenheim An der Sausweide,51.120194,6.76875
 Aldi DE-Dresden Antonstraße,51.064586,13.745721
-ALDI DE-Dresden Tharandter Straße,51.03755,13.70437
+Aldi DE-Dresden Tharandter Straße,51.03755,13.70437
 Aldi DE-Duisburg Flutweg,51.4119,6.691913
 Aldi DE-Duisburg Rathausallee,51.3975,6.663528
 Aldi DE-Duisburg-Duissern Aakerfährstraße,51.440111,6.782694
@@ -7273,6 +7275,7 @@ ARAL DE-Ahrensfelde Mc-Donald’s-Straße,52.596628,13.600672
 ARAL DE-Aichtal Bertha-Benz-Straße,48.62964,9.23542,30
 ARAL DE-Allershausen Schroßlacher Straße,48.4281,11.58522
 ARAL DE-Auerswalder Blick,50.89344,12.94604,25
+ARAL DE-Autohof Bad Hersfeld,50.8625,9.72245
 ARAL DE-Autohof Bensheim,49.67298,8.5968
 ARAL DE-Autohof Beselich,50.46828,8.13836
 ARAL DE-Autohof Beselich,50.4689,8.1369
@@ -13829,6 +13832,7 @@ EWE-GO DE-Neustadt bei Coburg Mühlweg,50.339925,11.144648
 EWE-GO DE-Neustadt in Holstein Eutiner Straße,54.09996,10.794669
 EWE-GO DE-Neustadt-Glewe An der Autobahn,53.380474,11.628273
 EWE-GO DE-Neuwied Junkerstücke,50.442878,7.501109
+EWE-GO DE-Niederaula Jossastraße,50.77752,9.58623
 EWE-GO DE-Niederkrüchten Nollesweg,51.211755,6.135024
 EWE-GO DE-Nienburg Celler Straße,52.652883,9.21849
 EWE-GO DE-Norden Am Markt,53.593333,7.204553
@@ -17328,7 +17332,7 @@ Lidl DE-Deggendorf,48.847939,12.959208,20
 Lidl DE-Delmenhorst Bremer Straße 106,53.053937,8.649626
 Lidl DE-Denzlingen,48.067373,7.869201,20
 Lidl DE-Dippoldiswalde Alte Altenberger Straße,50.88874,13.66805
-Lidl DE-Doberlug-Kirchhain Bahnhofsallee 10,51.61899,13.559945
+Lidl DE-Doberlug-Kirchhain Bahnhofsallee,51.6192,13.56038
 Lidl DE-Dormagen Walhovener Straße,51.09842,6.84611
 Lidl DE-Dornstadt,48.461932,9.948493
 Lidl DE-Dortmund Markscheiderstraße 1,51.497246,7.538471
@@ -20567,6 +20571,7 @@ Shell DE-Büdingen An der Saline,50.283806,9.108776
 Shell DE-Bünde Osnabrücker Straße,52.19275,8.55764
 Shell DE-Bütow Röbeler Chaussee,53.3612,12.49684
 Shell DE-Büttelborn Im Mehlsee,49.903502,8.523951
+Shell DE-Calw Stuttgarter Straße,48.70817,8.76527
 Shell DE-Chemnitz Jagdschänkenstraße,50.81282,12.84174
 Shell DE-Coswig Dresdner Straße,51.12633,13.57197
 Shell DE-Coswig Rosslauer Straße,51.88446,12.43346
@@ -21915,6 +21920,7 @@ teamstrom DE-Osterrönfeld Kieler Straße,54.295861,9.70783
 teamstrom DE-Otterndorf Cuxhavener Straße,53.806606,8.890619
 teamstrom DE-Rendsburg Friedrichstädter Straße,54.320145,9.626945
 teamstrom DE-Schleswig Marie-Curie-Straße,54.542193,9.581212
+teamstrom DE-Waren (Müritz) Friedrich-Wilhelm-Raiffeisen-Straße,53.52054,12.71505
 
 Tesla-Automation DE-Prüm,50.213633,6.44601
 Tesla-Automation DE-Prüm,50.214471,6.447547
@@ -22291,6 +22297,7 @@ Vattenfall DE-Greifswald Loitzer Landstraße,54.081407,13.358983
 Vattenfall DE-Greifswald Warschauer Straße,54.091011,13.420449
 Vattenfall DE-Grünheide (Mark) Karl-Marx-Straße,52.420738,13.822789
 Vattenfall DE-Hamburg Alter Zollweg,53.614476,10.152721
+Vattenfall DE-Hamburg Fuhlsbüttler Straße,53.58927,10.0456
 Vattenfall DE-Havelberg Semmelweisstraße,52.829184,12.079387
 Vattenfall DE-Hemmoor Otto-Peschel-Straße,53.683782,9.15941
 Vattenfall DE-Hennigsdorf Rigaer Straße,52.650828,13.195944
@@ -23324,6 +23331,7 @@ DE Fulda becon,50.54747,9.67671
 DE Fürth Vacher Mühle,49.52555,10.96974
 DE Gießen Cursor,50.58493,8.64419,55
 DE Gladbeck SL Naturenergie,51.56883,6.95326
+DE Gommern Hotel Robinien-Hof,52.06783,11.81922
 DE Grafling Goldäcker,48.88746,12.97563
 DE Großharthau Am Schlosspark,51.10727,14.10977
 DE Grünberg Carl-Benz-Straße,50.60323,8.95896
@@ -23364,6 +23372,7 @@ DE Kißlegg Rempertshofen,47.8084,9.87838
 DE Koblenz Bardelebenstraße,50.358505,7.587261
 DE Koserow Hotel Elisabeth,54.05156,14.00066
 DE Köln Brügelmannstraße 3,50.943937,6.985898
+DE Köln Esser,51.03807,6.91592
 DE Köln Neumarkt Passage,50.93734,6.9472
 DE Köln Opladener Straße,50.939697,6.974031
 DE Laatzen Connox,52.30093,9.84123
