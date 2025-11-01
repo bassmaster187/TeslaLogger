@@ -94,6 +94,7 @@ Supercharger-V3 AU-Carmila QLD,-21.90822,149.40973
 Supercharger AU-Central Coast,-33.310177,151.420578
 Supercharger AU-Clare Valley,-33.8485,138.618157
 Supercharger AU-Coffs Harbour,-30.281439,153.131666
+Supercharger-V4 AU-Coffs Harbour NSW The Big Banana,-30.27393,153.13256
 Supercharger-V3 AU-Colac,-38.34132,143.59302
 Supercharger-V3 AU-Coogee WA,-32.103284,115.762164
 Supercharger-V4 AU-Coolac NSW,-34.92392,148.16587
@@ -107,6 +108,7 @@ Supercharger AU-Eaton WA,-33.31962,115.71702
 Supercharger AU-Euroa,-36.752887,145.573418
 Supercharger-V3 AU-Exeter NSW,-34.609254,150.229857
 Supercharger-V3 AU-Geelong,-38.06516,144.38244,25
+Supercharger-V4 AU-Geelong VIC,-38.17058,144.3924
 Supercharger-V4 AU-Glenorchy TAS,-42.8338,147.28526
 Supercharger AU-Gold Coast,-28.035361,153.427306
 Supercharger AU-Goulburn,-34.755597,149.720984
@@ -139,6 +141,7 @@ Supercharger-V3 AU-Moe VIC,-38.172989,146.259475
 Supercharger AU-Moonee Ponds VIC,-37.7658,144.92336
 Supercharger-V3 AU-Mornington VIC,-38.234331,145.051016
 Supercharger-V3 AU-Mount Gambier SA,-37.834977,140.802625
+Supercharger-V4 AU-Mt Gravatt QLD,-27.55692,153.08056
 Supercharger AU-Narooma,-36.223136,150.128346
 Supercharger-V3 AU-North Lakes QLD,-27.23948,153.01372
 Supercharger-V3 AU-Orange NSW,-33.283778,149.096
@@ -6124,6 +6127,7 @@ ACCIONA ES-Sanxenxo Rúa Virxe do Carme,42.40205,-8.82035
 
 Acea IT-Capena Via Tiberina,42.120239,12.590254
 Acea IT-Castel Gandolfo Via Spiaggia del Lago,41.75856,12.65374
+Acea IT-Roma Via Nicola Zabaglia,41.87706,12.47632
 
 Acemo DE-Aachen Dennewartstraße,50.78025,6.10439
 
@@ -6483,6 +6487,7 @@ Aldi DE-Sankt Augustin Einsteinstraße,50.789384,7.1848
 Aldi DE-Sankt Augustin Im Mittelfeld,50.77784,7.230817
 Aldi DE-Satteldorf Industriestraße,49.180559,10.072113
 Aldi DE-Schalksmühle Hälverstraße,51.23674,7.5297
+Aldi DE-Scheßlitz Bamberger Straße,49.97123,11.02453
 Aldi DE-Schorndorf Waiblinger Straße,48.81336,9.52312
 Aldi DE-Schwabach Wolkersdorfer Hauptstraße,49.3655,11.03024
 Aldi DE-Schwegenheim Speyerer Straße,49.2733,8.3373
@@ -12339,6 +12344,7 @@ EndesaX ES-Área de Servicio Andamur Guarromán,38.14233,-3.72323,20
 Endolla-Barcelona ES-Barcelona Sant Martí,41.39334,2.20294
 Endolla-Barcelona ES-Sarrià-Sant Gervasi Pg. de la Bonanova,41.40127,2.12263
 
+Eneco DE-Flintbek Eiderkamp,54.24047,10.06124
 Eneco DE-Kiel Alte Weide,54.33118,10.11332
 Eneco DE-Landshut Wittstraße,48.53071,12.146114,30
 Eneco DE-Ludwigsburg Gänsfußallee,48.89199,9.17599
@@ -14258,6 +14264,7 @@ Ewiva IT-Ragusa Via A. Moro,36.93044,14.70952
 Ewiva IT-Ragusa Via Aldo Moro,36.92952,14.69624
 Ewiva IT-Rescaldina Via Fratelli d’Italia,45.61144,8.9613
 Ewiva IT-Roma Corsa di Francia,41.944798,12.469523
+Ewiva IT-Roma Via Ostiense,41.86603,12.47995
 Ewiva IT-San Gimignano Piazzale Ludovico Quaroni,43.46259,11.04164
 Ewiva IT-San Lazzaro di Savena Via Cà Ricchi,44.47708,11.41638
 Ewiva IT-Settimo Torinese Via Torino,45.127265,7.736641
@@ -15438,6 +15445,14 @@ incharge GR-Thermi Θέρμη Perikleous,40.56274,22.99353
 incharge GR-Thessaloniki Θεσσαλονίκη Monastiriou,40.66008,22.90082
 incharge GR-Volos Βόλος Larisis,39.36923,22.919
 incharge GR-Αριστερα A/D Korinthou Tripoleos,37.8627,22.84217
+
+infra-fürth DE-Fürth Am Grünen Weg,49.484,10.94937
+infra-fürth DE-Fürth Fronmüllerstraße,49.45872,11.00136
+infra-fürth DE-Fürth Kurt-Scherzer-Straße,49.46827,10.95847
+infra-fürth DE-Fürth Leyher Straße,49.46002,11.0092
+infra-fürth DE-Fürth Nürnberger Straße,49.4655,11.0112
+infra-fürth DE-Fürth Ottostraße,49.47108,10.98606
+infra-fürth DE-Fürth Schwabacher Straße,49.47066,10.98762
 
 Innocept DE-Köln Heinrichshofweg,51.040897,6.904807
 Innocept DE-Norden Osterstraße,53.60126,7.21781
@@ -18493,11 +18508,11 @@ Morbihan FR-Plouharnel Rue du Préleran,47.59906,-3.11242,25
 Morbihan FR-Sarzeau,47.54678,-2.72131,25
 Morbihan FR-Vannes Rue Alain Gerbault,47.66539,-2.73089
 
-Move CH-Adliswil Rastplatz Aspholz,47.320717,8.534163
+MOVE CH-Adliswil Rastplatz Aspholz,47.32072,8.53416
 MOVE CH-Au Hauptstrasse,47.43289,9.63415
-Move CH-Bern Hallerstrasse,46.95472,7.43838
+MOVE CH-Bern Hallerstrasse,46.95472,7.43838
 MOVE CH-Bern Klösterlistutz,46.94962,7.45947
-Move CH-Bern Murtenstrasse,46.952245,7.416746
+MOVE CH-Bern Murtenstrasse,46.95224,7.41675
 MOVE CH-Bern Ostermundigenstrasse,46.95499,7.47625
 MOVE CH-Bern Parkterrasse,46.94975,7.43825
 MOVE CH-Bern Postgasshalde,46.94905,7.45203
@@ -18509,8 +18524,8 @@ MOVE CH-Bursins Relais de la Côte,46.44654,6.29763,30
 MOVE CH-Chavannes-de-Bogis Les Champs-Blancs,46.3348,6.16143
 MOVE CH-Dübendorf Ueberlandstrasse,47.4011,8.61986
 MOVE CH-Dübendorf Ueberlandstrasse,47.40352,8.61261
-Move CH-Egerkingen Ottnerstrasse,47.32181,7.79688
-Move CH-Fehraltorf Kirchgasse,47.386991,8.752738
+MOVE CH-Egerkingen Ottnerstrasse,47.3218,7.79688
+MOVE CH-Fehraltorf Kirchgasse,47.387,8.75274
 MOVE CH-Frauenfeld Juchstrasse,47.56778,8.90674
 MOVE CH-Gebenstorf Im Halt,47.48955,8.24565
 MOVE CH-Gotthard Nord,46.84816,8.63316,20
@@ -18539,12 +18554,12 @@ MOVE CH-Rastplatz Hexentobel,47.489812,8.9556
 MOVE CH-Rastplatz Inseli,47.15615,8.15664
 MOVE CH-Rastplatz Knutwil,47.18901,8.07671
 MOVE CH-Rastplatz Knutwil,47.19776,8.06461
-Move CH-Rastplatz Mumpf,47.54511,7.93207
-Move CH-Rastplatz Mumpf,47.54559,7.93211
+MOVE CH-Rastplatz Mumpf,47.5451,7.93207
+MOVE CH-Rastplatz Mumpf,47.5456,7.9321
 MOVE CH-Rastplatz Mühlematt,47.4284,7.80916
 MOVE CH-Rastplatz Othmarsingen,47.402103,8.207312
 MOVE CH-Rastplatz Teufengraben,47.3332,7.8214
-Move CH-Raststätte Glarnerland,47.13802,9.05029,65
+MOVE CH-Raststätte Glarnerland,47.13802,9.0503,65
 MOVE CH-Raststätte Grauholz,46.99015,7.47513,30
 MOVE CH-Raststätte Herrlisberg Nord,47.22087,8.66146
 MOVE CH-Raststätte Herrlisberg Süd,47.21947,8.66166
@@ -18559,9 +18574,9 @@ MOVE CH-Trubschachen Mühlestrasse,46.9202,7.84994
 MOVE CH-Uster Hallenbadweg,47.3604,8.72674
 MOVE CH-Uster Oberlandstrasse,47.3545,8.71526
 MOVE CH-Vevey Place du Marché,46.45999,6.84166
-Move CH-Vilters-Wangs Bahnhofstrasse,47.03928,9.436954
+MOVE CH-Vilters-Wangs Bahnhofstrasse,47.03928,9.43695
 MOVE CH-Walzenhausen Bahnhof,47.45126,9.6011
-Move CH-Winterthur Technoramastrasse,47.511222,8.762276
+MOVE CH-Winterthur Technoramastrasse,47.51122,8.76228
 MOVE CH-Zollikon Rotfluhstrasse,47.33831,8.57662
 MOVE CH-Zürich Allmendstrasse,47.34013,8.51943
 MOVE CH-Zürich Huttenstrasse,47.3793,8.55251
@@ -21013,12 +21028,6 @@ solid DE-Berg Schulplatz,47.9579,11.3633
 solid DE-Crailsheim Worthingtonstraße,49.13844,10.06729
 solid DE-Dinkelsbühl Mönchsrother Straße,49.06442,10.32575
 solid DE-Feucht Kapellenplatz,49.37743,11.21378
-solid DE-Fürth Fronmüllerstraße,49.45872,11.00136
-solid DE-Fürth Kurt-Scherzer-Straße,49.46827,10.95847
-solid DE-Fürth Leyher Straße,49.460018,11.009195
-solid DE-Fürth Nürnberger Straße,49.46551,11.01121
-solid DE-Fürth Ottostraße,49.47108,10.98606
-solid DE-Fürth Schwabacher Straße,49.47066,10.98762
 solid DE-Hallbergmoos Theresienstraße,48.32817,11.75231
 solid DE-Hersbruck Badstraße,47.57307,10.56608
 solid DE-Hersbruck Nürnberger Straße,49.50991,11.42507
@@ -21594,6 +21603,7 @@ SWM DE-München Ganghoferstraße,48.13458,11.53985
 SWM DE-München Gaßnerstraße,48.1546,11.509
 SWM DE-München Görresstraße,48.1563,11.55987
 SWM DE-München Haager Straße,48.12662,11.60837
+SWM DE-München Innere Wiener Straße,48.13334,11.59305
 SWM DE-München Josef-Lang-Straße,48.1499,11.47154
 SWM DE-München Josephsburgstraße,48.12634,11.63206
 SWM DE-München Kirchseeoner Straße,48.11556,11.6172
