@@ -7493,6 +7493,7 @@ ARAL DE-Worms Mainzer Straße,49.65494,8.359737
 ARAL DE-Wunstorf Kolenfelder Straße,52.4173,9.44833
 ARAL DE-Wuppertal Uellendahler Straße,51.27606,7.15517
 ARAL DE-Wörth an der Isar Siemensstraße,48.624791,12.323478
+ARAL DE-Würzburg Albert-Einstein-Straße,49.80853,9.88637
 
 Astor TR-Afyonkarahisar Merkez Dörtyol,38.793808,30.459705
 
@@ -7707,6 +7708,7 @@ Berliner-SW DE-Berlin Breite Straße,52.45378,13.3277,30
 Berliner-SW DE-Berlin Dresdener Straße,52.50097,13.41696
 Berliner-SW DE-Berlin Dudenstraße,52.4851,13.38405
 Berliner-SW DE-Berlin Elsenstraße,52.4853,13.44923
+Berliner-SW DE-Berlin Friedrichstraße,52.51122,13.38952
 Berliner-SW DE-Berlin Markgrafendamm,52.49863,13.4654
 Berliner-SW DE-Berlin Potsdamer Platz,52.51,13.3757
 Berliner-SW DE-Berlin Schöneberger Straße,52.46425,13.3301,30
@@ -13132,6 +13134,8 @@ EVN MK-Gevgelija Граничен Премин Богородица,41.13812,22.
 EVN MK-Negotino Неготино ул. Железничка бр.,41.4995,22.10018
 EVN MK-Skopje Скопје International Airport,41.9606,21.62992
 
+evo DE-Oberhausen CentrO-Promenade,51.4922,6.8806
+
 EVOASIS TW-Checheng Township Haikou Rd,22.0897,120.71585
 
 evolt GB-Wick River St,58.44194,-3.09191
@@ -13756,6 +13760,7 @@ EWE-GO DE-Lohne Kuestermeyerstraße,52.665836,8.23169
 EWE-GO DE-Lohne Meyerhofstraße,52.670174,8.235744
 EWE-GO DE-Lohne Vechtaer Straße,52.671428,8.234403
 EWE-GO DE-Lohr am Main Jahnstraße,50.001623,9.584881
+EWE-GO DE-Lottstetten Kreuzäcker,47.63062,8.582
 EWE-GO DE-Loxstedt Nelly Sachs Straße,53.442232,8.587099
 EWE-GO DE-Loxstedt Parkstraße,53.474057,8.652608
 EWE-GO DE-Ludwigsfelde Parkallee,52.308201,13.313212
@@ -16308,6 +16313,7 @@ IZIVIA FR-Saint-Valery-sur-Somme Cavée Lévêque,50.17327,1.63742
 Jenny DE-Bad Oldesloe Lily-Braun Straße,53.80245,10.40282
 
 JET AT-Linz Freistädter Straße,48.3283,14.32136
+JET AT-Villach Badstubenweg,46.63153,13.82448
 JET AT-Wien Laxenburger Straße,48.1358,16.35648
 JET AT-Wiener Neustadt Puchberger Straße,47.8055,16.21124,30
 JET DE-Bielefeld Eckendorfer Straße,52.03283,8.552652
@@ -18130,6 +18136,7 @@ MENNEKES DE-Kirchhundem Industriestraße,51.038666,7.997107
 MENNEKES DE-Langgöns Hauptstraße,50.461496,8.584555
 MENNEKES DE-Oberhausen Strauss Workwearstore,51.48891,6.88628,30
 MENNEKES DE-Trebbin Markt,52.21471,13.21384
+MENNEKES DE-Wangels Seestraße,54.3103,10.8019
 
 Mer AT-Allhaming Poststraße,48.15352,14.15817
 Mer AT-Ansfelden Haider Straße,48.211118,14.279784,25
@@ -19940,6 +19947,7 @@ Powerdot FR-Montpellier Av. de Palavas,43.58937,3.89273
 Powerdot FR-Montélimar Boulevard Charles André,44.525683,4.74468
 Powerdot FR-Monéteau Av. de Paris,47.843097,3.552494
 Powerdot FR-Pineuilh Av. du Maréchal Juin,44.84125,0.22747
+Powerdot FR-Pollestres Rue Ludovic Masse,42.64112,2.87618
 Powerdot FR-Pont-Croix Rue de la Liberté,48.0433,-4.49014
 Powerdot FR-Publier Rue du Cartheray,46.390846,6.525237
 Powerdot FR-Russ Rue de la Creuse Fontaine,48.49343,7.25152
@@ -19994,6 +20002,7 @@ PRE CZ-Praha Pobřežní,50.09345,14.43864
 PRE CZ-Praha Sokolovská,50.09873,14.46874
 PRE CZ-Praha Strakonická,50.01808,14.393
 PRE CZ-Praha U Kunratického lesa,50.02045,14.49873
+PRE CZ-Praha Zamenhofova Hlavní město,50.0748,14.53948
 PRE CZ-Praha Českomoravská,50.1041,14.49516
 PRE CZ-Trutnov Horská,50.56231,15.90863
 PRE CZ-Uherské Hradiště Tř. Maršála Malinovského,49.055996,17.467152
@@ -20297,6 +20306,7 @@ RW-Bodensee DE-Langenargen Untere Seestraße,47.59812,9.53808
 
 Révéo FR-Gignac Parc d’Activité de Camalcé,43.64964,3.54682
 Révéo FR-Lavelanet Pl. Jeanne d’Arc,42.93532,1.8503,25
+Révéo FR-Sainte-Marie-la-Mer Av. Mal de Lattre de Tassigny,42.7328,3.0358
 Révéo FR-Vic-le-Fesq La Nouvelle,43.87091,4.09816
 
 Saascharge CH-Kilchberg Schikoladenplatz,47.3183,8.55127
@@ -21593,6 +21603,7 @@ SWM DE-Moosburg Am Stadion,48.46653,11.92817,30
 SWM DE-Moosburg an der Isar Leinbergerstraße,48.46964,11.9377
 SWM DE-München Aschauer Straße,48.10393,11.6015
 SWM DE-München Bernhard-Wicki-Straße,48.1427,11.54775
+SWM DE-München Clemensstraße,48.16353,11.58365
 SWM DE-München Deroystraße,48.1458,11.54602
 SWM DE-München Eichendorffplatz,48.11286,11.52365
 SWM DE-München Englschalkinger Straße,48.15354,11.62022
@@ -22267,6 +22278,7 @@ Vattenfall DE-Berlin Blankenburger Straße,52.582832,13.412949
 Vattenfall DE-Berlin Dahlwitzer Straße,52.520994,13.647255
 Vattenfall DE-Berlin Erich-Weinert-Straße,52.547557,13.429905
 Vattenfall DE-Berlin Eschengraben,52.556475,13.42361
+Vattenfall DE-Berlin Forum Steglitz,52.46506,13.32536
 Vattenfall DE-Berlin Glienicker Weg,52.434177,13.556151
 Vattenfall DE-Berlin Gülzower Straße,52.514586,13.583544
 Vattenfall DE-Berlin Heckerdamm,52.539884,13.295679
