@@ -7,6 +7,7 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using Exceptionless;
+using HttpMultipartParser;
 
 namespace TeslaLogger
 {
@@ -607,13 +608,18 @@ namespace TeslaLogger
                         KVS.InsertOrUpdate("Geofence.OnlineUpdate.ETag", lastETag);
                     }
                     Logfile.Log($"Geofence.OnlineUpdate: update! (ETag: {lastETag})");
-                    using (var stream = response.Content.ReadAsStreamAsync().Result)
+                    using (Stream stream = response.Content.ReadAsStreamAsync().Result)
                     {
-                        using (var fs = new FileStream(FileManager.GetFilePath(TLFilename.GeofenceFilename), FileMode.Create, FileAccess.Write, FileShare.None, 8192, useAsync: true))
+                        using (FileStream fs = new FileStream(FileManager.GetFilePath(TLFilename.GeofenceFilename) + ".updated", FileMode.Create, FileAccess.Write, FileShare.None, 8192, useAsync: true))
                         {
                             stream.CopyToAsync(fs);
                             fs.FlushAsync();
                         }
+                    }
+                    Tools.DebugLog($"Geofence.updated: {new FileInfo(FileManager.GetFilePath(TLFilename.GeofenceFilename) + ".updated").Length} bytes");
+                    if (new FileInfo(FileManager.GetFilePath(TLFilename.GeofenceFilename) + ".updated").Length > 0)
+                    {
+                        Tools.CopyFile(FileManager.GetFilePath(TLFilename.GeofenceFilename) + ".updated", FileManager.GetFilePath(TLFilename.GeofenceFilename));
                     }
                 }
                 else
