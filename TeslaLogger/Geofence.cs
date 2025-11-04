@@ -580,7 +580,8 @@ namespace TeslaLogger
         }
 
         [MethodImpl(MethodImplOptions.Synchronized)]
-        internal void OnlineUpdate() {
+        internal void OnlineUpdate()
+        {
             Tools.DebugLog("Geofence.OnlineUpdate");
             string lastETag = null;
             if (KVS.Get("Geofence.OnlineUpdate.ETag", out string etag) == KVS.SUCCESS)

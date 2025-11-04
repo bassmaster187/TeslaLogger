@@ -603,6 +603,8 @@ namespace TeslaLogger
         {
             Thread GeofenceOnlineUpdater = new Thread(() =>
             {
+                // initially sleep 5min
+                Thread.Sleep(300000); // 5min
                 while (true)
                 {
                     Geofence.GetInstance().OnlineUpdate();
