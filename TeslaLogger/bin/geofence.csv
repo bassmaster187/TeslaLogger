@@ -2200,6 +2200,7 @@ Supercharger-V3 DE-Wismar,53.879307,11.454047
 Supercharger-V3 DE-Wittenburg,53.507361,11.096852
 Supercharger-V4 DE-Wittlich,49.96968,6.86169,32
 Supercharger-V4 DE-Wittlich (Globus),49.98189,6.9086
+Supercharger-V4 DE-Wittstock,53.15795,12.4551
 Supercharger-V4 DE-Wolfhagen,51.40358,9.18545
 Supercharger-V4 DE-Wolfsburg,52.423764,10.732424,20
 Supercharger-V3 DE-Woringen,47.92343,10.20888
@@ -2954,7 +2955,7 @@ Supercharger-V4 HR-Krapina,46.13145,15.8869
 Supercharger-V4 HR-Otocac,44.89314,15.18408
 Supercharger-V4 HR-Otočac,44.89332,15.18395
 Supercharger HR-Senj,44.98932,14.89781
-Supercharger HR-Slavonski Brod,45.175219,18.063332
+Supercharger-V4 HR-Slavonski Brod,45.1753,18.06326
 Supercharger HR-Split,43.58737,16.57636
 Supercharger-V4 HR-Varaždin,46.26376,16.37984
 Supercharger-V4 HR-Vrata Jadrana South,45.35516,14.35044
@@ -3055,6 +3056,7 @@ Supercharger-V4 IT-Imola,44.375448,11.732268
 Supercharger IT-Imperia,43.892498,8.039031
 Supercharger-V4 IT-Ivrea,45.446661,7.853005
 Supercharger-V4 IT-Lagonegro,40.13273,15.76296
+Supercharger-V4 IT-Livorno,43.54977,10.3396
 Supercharger-V4 IT-Lodi,45.27676,9.45862
 Supercharger IT-Magliano Sabina,42.372085,12.471703
 Supercharger-V3 IT-Mantua,45.086472,10.856081,30
@@ -3520,6 +3522,7 @@ Supercharger NO-Gulsvik,60.381223,9.609859
 Supercharger-V4 NO-Hafslo,61.30206,7.20836
 Supercharger-V4 NO-Haugesund-Raglamyr,59.39243,5.33027
 Supercharger-V4 NO-Hell Stjørdal,63.44772,10.91304
+Supercharger-V4 NO-Hellerudsletta,59.98392,10.977
 Supercharger-V4 NO-Hemsedal,60.862309,8.555466
 Supercharger NO-Hernes,60.933109,11.676209
 Supercharger-V3 NO-Hitra,63.521397,9.109465
@@ -3919,6 +3922,7 @@ Supercharger-V4 TR-Cankaya Ankara,39.90963,32.77736
 Supercharger-V3 TR-Edirne,41.680352,26.582235
 Supercharger-V3 TR-Ilgaz Çankırı,40.90657,33.64522
 Supercharger-V3 TR-Istanbul Asia Garage Floor -2,41.003233,29.070793
+Supercharger-V4 TR-Izmit Kocaeli,40.75495,29.94697
 Supercharger-V4 TR-Kütahya,39.35863,30.0565
 Supercharger-V4 TR-Sivrihisar,39.44167,31.52694
 Supercharger-V4 TR-Tekirdağ,40.98885,27.5772
@@ -12840,6 +12844,7 @@ ESB DE-Ettal Linderhof,47.5696,10.9557
 ESB DE-Hausham Bahnhofstraße,47.75212,11.83882
 ESB DE-Irschenberg Wendling,47.828,11.90297,10
 ESB DE-Irschenberg Wendling,47.8284,11.9009,10
+ESB DE-Krün In Elmau,47.46185,11.18738
 ESB DE-Mittenwald Dammkarstraße,47.44096,11.26657
 ESB DE-Mittenwald Schöttlkarstraße,47.44422,11.2647
 ESB DE-Pentling Ammerholz,48.9755,12.06498
@@ -16882,7 +16887,7 @@ Kople NO-Russenes Vestre Porsangerveien,70.47762,25.06666,25
 Kople NO-Sandnessjøen Sjøbergs gate,66.02265,12.63824
 Kople NO-Utskarpen Flostrandveien,66.29598,13.55068
 
-KOS IT-Varna Forch Straße,46.759149,11.63778,12
+Kostner IT-Varna Forch Straße,46.75915,11.63778,12
 
 Kraftwerke-Farchant DE-Farchant Am Gern,47.530109,11.109456
 
@@ -21141,6 +21146,8 @@ StromSpeicherMarkt DE-Freiburg im Breisgau Zähringer Straße,48.02204,7.85801
 StromTankstelle DE-Bad Hindelang Dorfstraße,47.50348,10.38436
 StromTankstelle DE-Waltenhofen Ahornweg,47.682945,10.308779
 
+Stöhr-Energie DE-Mainz Am Sportfeld,50.008,8.21067
+
 SVG DE-Merenberg Autohof Benzstraße,50.49926,8.18562
 
 SVO DE-Celle Mühlenstraße,52.62534,10.07727
@@ -21462,6 +21469,7 @@ SW-Roth DE-Roth Otto-Schrimpff-Straße,49.24323,11.09503
 SW-Roth DE-Roth Weinbergweg,49.23651,11.07639
 SW-Roth DE-Roth Willy-Supf-Platz,49.2488,11.09008
 SW-Rüsselsheim DE-Rüsselsheim am Main Am Sommerdamm,50.001808,8.42508
+SW-Saarlouis DE-Saarlouis Vaubanstraße,49.31447,6.74353
 SW-Schwarzenberg DE-Schwarzenberg Straße der Einheit,50.547186,12.787756
 SW-Schwerte DE-Schwerte Hörder Straße,51.46426,7.55803
 SW-SH DE-Schleswig Am Fabrikhof,54.51098,9.5843
@@ -22406,6 +22414,7 @@ Vattenfall NL-Capelle aan den IJssel Rivium 3e Straat,51.90978,4.5451
 Vattenfall NL-Duiven Nieuwgraaf,51.96724,5.98923
 Vattenfall NL-Geleen Rijksweg Zuid,50.9565,5.81353
 Vattenfall NL-Gronsveld Burg. Frans Cortenraadstraat,50.8125,5.72178
+Vattenfall NL-Olst Hooiberglaan,48.32864,11.7385
 Vattenfall NL-Roermond Wilhelminaplein,51.19662,5.99337
 Vattenfall NL-Rosmalen Burgemeester Burgerslaan,51.7194,5.33523
 Vattenfall NL-Schagen Grotewallerweg,52.78243,4.80893
@@ -22765,6 +22774,7 @@ Vonovia DE-Bochum Spelbergs Feld,51.45905,7.15482
 
 VSW DE-Bad Oldesloe Am Bürgerpark,53.81141,10.3709
 VSW DE-Bad Oldesloe Käthe-Kollwitz-Straße,53.80729,10.38258,30
+VSW DE-Bad Oldesloe Lübecker Straße,53.81164,10.38277
 VSW DE-Bad Oldesloe Schützenstraße,53.81185,10.36447
 VSW DE-Leezen Neversdorfer Straße,53.86533,10.25279
 VSW DE-Mölln Sitzkrüger Moor,53.6405,10.69506
