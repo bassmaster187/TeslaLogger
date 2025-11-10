@@ -1906,7 +1906,7 @@ Supercharger-V4 DE-Engen,47.855556,8.793436
 Supercharger-V3 DE-Erftstadt,50.79648,6.77994
 Supercharger-V4 DE-Erfurt,51.00903,10.99146
 Supercharger-V4 DE-Erfurt (Cafe Del Sol),50.9758,11.07463
-Supercharger-V4 DE-Erfurt-Linderbach (Globus),50.9768,11.10654
+Supercharger-V4 DE-Erfurt-Linderbach (Globus),50.9766,11.10654,25
 Supercharger-V4 DE-Erfurt-Mittelhausen (Globus),51.03487,11.00154
 Supercharger-V3 DE-Erharting,48.282664,12.554758
 Supercharger-V3 DE-Erlangen,49.544069,11.0287
@@ -10878,6 +10878,7 @@ EnBW DE-Erding Josef-Schwankl-Straße,48.305744,11.891107
 EnBW DE-Erftstadt Kölner Ring,50.80216,6.77995
 EnBW DE-Erftstadt Köttinger Straße,50.81344,6.809922,30
 EnBW DE-Erftstadt Zum Gänsgraben,50.83218,6.80204
+EnBW DE-Erfurt Weimarische Straße,50.9771,11.1058,25
 EnBW DE-Eriskirch Friedrichshafener Straße,47.633908,9.524435
 EnBW DE-Erkelenz Burger King,51.070307,6.302637
 EnBW DE-Erkelenz Penny,51.075638,6.305057
@@ -12889,6 +12890,7 @@ ESWE DE-Wiesbaden Hauptbahnhof Gartenfeldstraße,50.070716,8.245458
 ESWE DE-Wiesbaden Herderstraße,50.07368,8.2352
 ESWE DE-Wiesbaden Mainzer Straße,50.060553,8.254324
 ESWE DE-Wiesbaden Scharnhorststraße,50.0805,8.22606
+ESWE DE-Wiesbaden Siegfriedring,50.06073,8.26812
 ESWE DE-Wiesbaden Warmer Damm,50.08353,8.24501
 
 etecnic ES-Amposta Avinguda Alcalde Palau,40.71241,0.57919
@@ -17335,7 +17337,7 @@ Lidl DE-Bretten,49.03848,8.696475
 Lidl DE-Bruchköbel Keltenstraße,50.1772,8.91152
 Lidl DE-Bruchsal,49.121361,8.581972
 Lidl DE-Brüggen Borner Straße 78,51.245378,6.195312
-Lidl DE-Brühl-Badorf Steingasse 4,50.806877,6.899435
+Lidl DE-Brühl-Badorf Steingasse,50.80688,6.89944
 Lidl DE-Burgdorf Ostlandring 2a,52.445126,10.024391
 Lidl DE-Butzbach John-F-Kennedy-Straße,50.442566,8.663718,65
 Lidl DE-Buxtehude Harburger Straße 60-62,53.473894,9.713599
@@ -19330,7 +19332,7 @@ Pfalzwerke AT-St. Pölten Stifterstraße,48.183939,15.6151
 Pfalzwerke AT-Wels Gunskirchener Straße,48.148595,13.974621
 Pfalzwerke AT-Wien Stadlauer Straße,48.2302,16.45655
 Pfalzwerke AT-Wiener Neudorf IZ NÖ-Süd Straße,48.07306,16.32988
-Pfalzwerke DE-Achern Severinstraße 8,48.634319,8.06005
+Pfalzwerke DE-Achern Severinstraße,48.63427,8.06002
 Pfalzwerke DE-Adelsheim Untere Austraße 38,49.396887,9.393617
 Pfalzwerke DE-Ahrensfelde Rudolf-Diesel-Straße,52.60704,13.52703
 Pfalzwerke DE-Albisheim Kirchgasse,49.650451,8.096974
@@ -19397,7 +19399,7 @@ Pfalzwerke DE-Dahn Eybergstraße 1,49.143722,7.770667
 Pfalzwerke DE-Dahn Goethestraße 1,49.145712,7.776925
 Pfalzwerke DE-Dahn Weißenburgerstraße 16,49.14839,7.780064
 Pfalzwerke DE-Dannenfels Bastenhaus 1,49.640674,7.9184
-Pfalzwerke DE-Darmstadt Otto-Röhm-Straße 76,49.88975,8.640132
+Pfalzwerke DE-Darmstadt Otto-Röhm-Straße,49.88975,8.64013
 Pfalzwerke DE-Datteln Walter-Sauer-Straße,51.6209,7.32196
 Pfalzwerke DE-Dielheim Beethovenstraße 1,49.281743,8.725492
 Pfalzwerke DE-Dietzenbach Albert-Einstein-Straße,50.01432,8.79002
@@ -19426,7 +19428,7 @@ Pfalzwerke DE-Eschborn Elly-Beinhorn-Straße,50.13348,8.562
 Pfalzwerke DE-Essen Econova-Allee,51.494835,6.955067
 Pfalzwerke DE-Essingen In der Windblase 2,49.213957,8.181986
 Pfalzwerke DE-Essingen Schlossstraße,49.23467,8.17117
-Pfalzwerke DE-Esslingen am Neckar Dornierstraße 39,48.716578,9.355777
+Pfalzwerke DE-Esslingen am Neckar Dornierstraße,48.7165,9.3558
 Pfalzwerke DE-Fellbach Stuttgarter Straße 59,48.812303,9.266768
 Pfalzwerke DE-Forchheim Willy-Brandt-Allee,49.70676,11.06788,20
 Pfalzwerke DE-Forst an der Weinstraße Im Stift,49.425615,8.190871
@@ -19441,7 +19443,7 @@ Pfalzwerke DE-Freiburg im Breisgau St.-Erentrudis-Straße,47.967338,7.694853
 Pfalzwerke DE-Freiburg im Breisgau Tullastraße,48.02522,7.8475
 Pfalzwerke DE-Freinsheim Herxheimer Straße,49.50636,8.20708
 Pfalzwerke DE-Freudental Elsbeerenring,49.00596,9.0639
-Pfalzwerke DE-Fürth Industriestraße 1,49.658808,8.787278
+Pfalzwerke DE-Fürth Industriestraße,49.65887,8.78726
 Pfalzwerke DE-Fürth Magazinstraße,49.452376,11.001378
 Pfalzwerke DE-Gelsenkirchen Caubstraße,51.52761,7.0767
 Pfalzwerke DE-Gelsenkirchen Schwarzmühlenstraße,51.49744,7.08275
@@ -19549,11 +19551,11 @@ Pfalzwerke DE-Landau in der Pfalz Lotschstraße,49.209966,8.11238
 Pfalzwerke DE-Landau Lise-Meitner-Straße,49.19104,8.13187
 Pfalzwerke DE-Landsberg am Lech InCenter,48.05456,10.89114
 Pfalzwerke DE-Landsberg am Lech InCenter,48.0546,10.89288
-Pfalzwerke DE-Landsberg Mägdeberge 1,51.516735,12.062187
+Pfalzwerke DE-Landsberg Mägdeberge,51.51672,12.06217
 Pfalzwerke DE-Landstuhl Bahnhofstraße 82,49.415583,7.582056
 Pfalzwerke DE-Landstuhl Neugasse,49.408417,7.568861
 Pfalzwerke DE-Landstuhl Von-Richthofen-Straße,49.413917,7.569611
-Pfalzwerke DE-Laupheim Neue Welt 24,48.242323,9.86589
+Pfalzwerke DE-Laupheim Neue Welt,48.24232,9.8659
 Pfalzwerke DE-Lauterecken Saarbrücker Straße,49.65614,7.59072
 Pfalzwerke DE-Lauterecken Schlossgasse,49.649859,7.590681
 Pfalzwerke DE-Leimersheim Rheinstraße 39-42,49.125374,8.354502
@@ -19565,7 +19567,7 @@ Pfalzwerke DE-Limburgerhof Mühlweg,49.423667,8.379778
 Pfalzwerke DE-Limburgerhof Speyerer Straße,49.42345,8.39025
 Pfalzwerke DE-Lingenfeld Humboldtstraße,49.245611,8.346056
 Pfalzwerke DE-Linkenheim-Hochstetten Karlsruher Straße,49.1295,8.4173
-Pfalzwerke DE-Lippstadt Am Mondschein 24,51.675003,8.372113
+Pfalzwerke DE-Lippstadt Am Mondschein,51.67497,8.37194
 Pfalzwerke DE-Lohfelden Otto-Hahn-Straße 1-5,51.279552,9.528262
 Pfalzwerke DE-Lorsch Nibelungenstraße,49.65301,8.55477,30
 Pfalzwerke DE-Losheim am See Saarbrücker Straße,49.50453,6.7604
@@ -19629,7 +19631,7 @@ Pfalzwerke DE-Neuhofen Rehbachstraße,49.419649,8.424282
 Pfalzwerke DE-Neustadt an der Weinstraße Adolf-Kolping-Straße,49.340612,8.160971
 Pfalzwerke DE-Neustadt an der Weinstraße Le Quartier-Hornbach,49.34024,8.16812
 Pfalzwerke DE-Neustadt an der Weinstraße Louis-Escande-Straße,49.338359,8.169238
-Pfalzwerke DE-Niederzier Industriestraße 19,50.845167,6.452244
+Pfalzwerke DE-Niederzier Industriestraße,50.84518,6.45232
 Pfalzwerke DE-Nußloch Walldorfer Straße 59,49.32011,8.687501
 Pfalzwerke DE-Oberhausen Brammenring,51.48903,6.8884,40
 Pfalzwerke DE-Oberotterbach Weinstraße 18b,49.070694,7.970333
@@ -19675,6 +19677,7 @@ Pfalzwerke DE-Römerberg Am Weberplatz,49.294402,8.410423
 Pfalzwerke DE-Römerberg Viehdriftstraße 106,49.279613,8.405252
 Pfalzwerke DE-Saarbrücken Käthe-Kollwitz-Straße 16,49.237191,6.960204
 Pfalzwerke DE-Saarbrücken Mainzer Straße,49.2263,7.033
+Pfalzwerke DE-Saarbrücken Mainzer Straße,49.22664,7.03078
 Pfalzwerke DE-Saarbrücken Uni-Campus Nord,49.25806,7.042692
 Pfalzwerke DE-Saarlouis Schanzenstraße,49.32436,6.750188,30
 Pfalzwerke DE-Sandhausen Hauptstraße 208,49.348589,8.654037
@@ -19709,7 +19712,7 @@ Pfalzwerke DE-Trippstadt Johanniskreuz 1a,49.337194,7.825778
 Pfalzwerke DE-Trippstadt Steiggasse,49.355533,7.770009
 Pfalzwerke DE-Tübingen Vor dem Großholz,48.52293,9.09725
 Pfalzwerke DE-Ubstadt-Weiher Ubstadter Straße,49.171352,8.616869
-Pfalzwerke DE-Ulm Blaubeurer Straße 50,48.40152,9.970867
+Pfalzwerke DE-Ulm Blaubeurer Straße,48.40153,9.9709
 Pfalzwerke DE-Ulm Hindenburgring,48.3976,9.9764
 Pfalzwerke DE-Unterhaching Grünwalder Weg,48.05638,11.59789
 Pfalzwerke DE-Untersiemau Straßäcker,50.19866,10.96628
@@ -19763,7 +19766,7 @@ Pfalzwerke DE-Wörth Am Kühgrunddamm 4,49.040518,8.289016
 Pfalzwerke DE-Wörth am Rhein Cany-Barville-Straße,49.032385,8.287972
 Pfalzwerke DE-Wörth am Rhein Hanns-Martin-Schleyer Straße,49.05111,8.25314
 Pfalzwerke DE-Wörth am Rhein Marktstraße,49.052111,8.253056
-Pfalzwerke DE-Würzburg Am Handelshof 9,49.81609,9.981392
+Pfalzwerke DE-Würzburg Am Handelshof,49.81616,9.9814
 Pfalzwerke DE-Würzburg Robert-Bunsen-Straße,49.797224,9.991293
 Pfalzwerke DE-Zweibrücken Londoner Bogen,49.230819,7.406062
 Pfalzwerke DE-Zweibrücken Wilkstraße,49.25174,7.34451
@@ -20080,6 +20083,7 @@ Qelo HR-Labin Štrmac,45.11895,14.11928
 
 Qovoltis FR-Les Ulis Rue de la Réunion,48.68259,2.20282
 
+Qwello DE-Berlin Scherenbergstraße,52.55057,13.41987
 Qwello DE-Leipzig Cöthner Straße,51.36438,12.36952
 Qwello SE-Stockholm Torkel Knutssonsgatan,59.32025,18.0564
 
@@ -20184,6 +20188,7 @@ reev DE-Asbach-Bäumenheim Albanusstraße,48.69474,10.82682
 reev DE-Bad Driburg Brunnenstraße,51.73399,9.03522
 reev DE-Breitenworbis Auf dem Pfingstrasen,51.41292,10.43954
 reev DE-Erlangen Rathsbergerstraße,49.6112,11.01974
+reev DE-Garmisch-Partenkirchen Zugspitzstraße,47.48703,11.07057
 reev DE-Gunzenhausen Industriestraße,49.12367,10.76928
 reev DE-Herzogenaurach Puma Way,49.57417,10.89853
 reev DE-Landsberg am Lech Otto-Lilienthal-Straße,48.066515,10.860823
@@ -22926,6 +22931,7 @@ Wien-Energie AT-Wien Sagedergasse,48.161,16.31936
 Wien-Energie AT-Wien Schiffmühlenstraße,48.22264,16.42653
 Wien-Energie AT-Wien Schillingstraße,48.25957,16.46992
 Wien-Energie AT-Wien Schnirchgasse,48.19426,16.41093
+Wien-Energie AT-Wien Schweglerstraße,48.19753,16.32864
 Wien-Energie AT-Wien Schönbrunner Straße,48.1831,16.32767,25
 Wien-Energie AT-Wien Schüttauplatz,48.22693,16.42402
 Wien-Energie AT-Wien Seestadt Seepark,48.22447,16.50411
