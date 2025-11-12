@@ -62,7 +62,7 @@ Supercharger-V4 AT-Völkermarkt,46.682274,14.679134
 Supercharger-V4 AT-Wels,48.145889,13.975208
 Supercharger-V4 AT-Wels Welas Park,48.180313,14.063536,19
 Supercharger-V4 AT-Wien,48.193045,16.27707
-Supercharger-V4 AT-Wien City,48.16837,16.34863
+Supercharger-V4 AT-Wien City,48.16753,16.34786
 Supercharger-V3 AT-Wien Gewerbepark Stadlau,48.24713,16.46436
 Supercharger AT-Wien Tech Park Vienna,48.15725,16.33404
 Supercharger AT-Wiener Neustadt,47.80469,16.21082
@@ -162,6 +162,7 @@ Supercharger-V3 AU-Tenterfield NSW,-29.057293,152.01888
 Supercharger AU-Toowoomba,-27.578061,151.946674
 Supercharger-V3 AU-Tuggeranong ACT,-35.41575,149.066
 Supercharger-V3 AU-Tuggeranong ACT,-35.417617,149.067019
+Supercharger-V4 AU-Tully QLD,-17.93486,145.92433
 Supercharger-V3 AU-Tweed Heads NSW,-28.173921,153.545101
 Supercharger-V3 AU-Warrnambool VIC,-38.38127,142.51929
 Supercharger AU-Warrnambool VIC Princes Hwy,-38.38529,142.53364
@@ -3485,6 +3486,7 @@ Supercharger NO-Aurland,60.89871,7.21127
 Supercharger-V3 NO-Bamble,58.9713,9.51278,15
 Supercharger-V3 NO-Bamble,58.971497,9.512768,15
 Supercharger-V3 NO-Beitostølen,61.248495,8.901559
+Supercharger-V4 NO-Bergen Hop,60.32655,5.34043
 Supercharger NO-Berkåk,62.831921,10.009978,40
 Supercharger-V4 NO-Bjorli,62.25666,8.21131
 Supercharger-V4 NO-Bjorli Arne Barmans Veg,62.25852,8.208
@@ -7331,10 +7333,12 @@ ARAL DE-Dasing Laimeringer Straße,48.390329,11.063984
 ARAL DE-Dettelbach Mainfrankenpark,49.7784,10.06571
 ARAL DE-Dortmund Bärenbruch,51.5199,7.3727
 ARAL DE-Dortmund Schaphusstraße,51.57354,7.38715
+ARAL DE-Dortmund Westfalendamm,51.50403,7.49803
 ARAL DE-Dresden Am Hellerhof,51.094515,13.735862
 ARAL DE-Dresden Bergstraße,51.02008,13.73055
 ARAL DE-Dresden Hamburger Straße,51.0627,13.68007
 ARAL DE-Dresden Werftstraße,51.06913,13.6902
+ARAL DE-Duderstadt Gewerbepark Euzenberg,51.5105,10.24067
 ARAL DE-Dummerstorf Manfred-Roth-Straße,54.021956,12.230515
 ARAL DE-Dätgen Grotwisch,54.180523,9.944185,25
 ARAL DE-Dölbau Geltestraße,51.47653,12.08645
@@ -7357,6 +7361,7 @@ ARAL DE-Fürstenwalde/Spree Friedenstraße,52.33575,14.07316
 ARAL DE-Gießen Schiffenberger Weg,50.57404,8.68484
 ARAL DE-Gifhorn Eyßelheideweg,52.46251,10.54027,25
 ARAL DE-Gladenbach Kirchbergstraße,50.769,8.58466
+ARAL DE-Greifswald Koitenhäger Landstraße,54.08125,13.42894
 ARAL DE-Gremsdorf Gewerbepark,49.6987,10.85436
 ARAL DE-Grimma Hengstbergstraße,51.256,12.72606
 ARAL DE-Groß-Bieberau Bahnhofstraße,49.807,8.82528
@@ -7381,6 +7386,7 @@ ARAL DE-Hannover Am Leineufer,52.418344,9.636081
 ARAL DE-Hannover Göttinger Chaussee,52.3459,9.7167
 ARAL DE-Hannover Hans-Böckler-Allee,52.37148,9.77404,30
 ARAL DE-Hannover Messeschnellweg,52.32924,9.81231,30
+ARAL DE-Hannover Vahrenwalder Straße,52.40527,9.73593
 ARAL DE-Haren An der Autobahn,52.75549,7.16425,25
 ARAL DE-Heinersdorf,52.378134,13.311807
 ARAL DE-Henstedt-Ulzburg Rudolf-Diesel-Straße,53.80384,9.9387
@@ -7394,6 +7400,7 @@ ARAL DE-Hoppegarten Altlandsberger Chaussee,52.54408,13.646934
 ARAL DE-Hürth Luxemburger Straße,50.89448,6.90494
 ARAL DE-Ingersleben Zuckerfabrik,52.2093,11.13276
 ARAL DE-Ingolstadt Fauststraße,48.740105,11.435138
+ARAL DE-Ingolstadt Schollstraße,48.7752,11.45917
 ARAL DE-Isselburg Dekkers Waide,51.81782,6.44393
 ARAL DE-Jena,50.877065,11.621512
 ARAL DE-Kammerstein An der Autobahn,49.31125,11.00232,70
@@ -7407,6 +7414,7 @@ ARAL DE-Koblenz Andernacher Straße,50.378477,7.582793,25
 ARAL DE-Koblenz Schlachthofstraße,50.362645,7.574207
 ARAL DE-Kodersdorf Siedlerweg,51.225889,14.902267
 ARAL DE-Konstanz Opelstraße,47.6758,9.15276
+ARAL DE-Kressbronn am Bodensee Linderhof,47.6076,9.5868
 ARAL DE-Köln Am Verteilerkreis,50.89209,6.96649,25
 ARAL DE-Königs Wusterhausen Robert-Guthmann-Straße,52.31449,13.66345
 ARAL DE-Königslutter Autohof,52.311549,10.823469
@@ -7421,6 +7429,7 @@ ARAL DE-Leipzig Max-Liebermann-Straße,51.37607,12.37766
 ARAL DE-Leipzig Maximilianallee,51.38563,12.38978
 ARAL DE-Leuna Nordpark,51.3475,12.17536
 ARAL DE-Lübeck Fackenburger Allee,53.870645,10.669914
+ARAL DE-Lüdenscheid Werdohler Landstraße,51.2282,7.6509
 ARAL DE-Lüneburg Hamburger Straße,53.27531,10.40151
 ARAL DE-Lützen Hallesche Straße,51.177342,12.009336
 ARAL DE-Magdeburg Salbker Chaussee,52.08248,11.60274
@@ -7446,6 +7455,7 @@ ARAL DE-Neuenkirchen-Vörden,52.491559,8.0783
 ARAL DE-Niederdorf Neue Schichtstraße,50.7248,12.77875
 ARAL DE-Nürnberg Münchenerstraße,49.40135,11.11612,30
 ARAL DE-Oberhausen Teutoburger Straße,51.51713,6.85725
+ARAL DE-Obernburg am Main Miltenberger Straße,49.83723,9.14408
 ARAL DE-Obertshausen Im Birkengrund,50.0625,8.83033
 ARAL DE-Oldenburg Ammerländer Heerstraße,53.14358,8.1919,35
 ARAL DE-Osterwieck Lüttgenröder Straße,51.968578,10.699633
@@ -7475,6 +7485,7 @@ ARAL DE-Schweinfurt West,50.06198,10.1453,30
 ARAL DE-Schwerin,53.600345,11.465313
 ARAL DE-Seevetal Jesteburger Straße,53.38251,9.97902,25
 ARAL DE-Sittensen Stader Straße,53.2888,9.50743
+ARAL DE-Soltau Gottlieb-Daimler-Straße,52.9969,9.92123
 ARAL DE-Stadtallendorf Daimler-Straße,50.83488,9.037868
 ARAL DE-Staßfurt Am Heidfuchsberg,51.896302,11.692
 ARAL DE-Steinsfeld Baukreativstraße,49.44486,10.2506
@@ -7495,6 +7506,7 @@ ARAL DE-Wolfsburg Heinrich-Nordhoff-Straße,52.42784,10.77516
 ARAL DE-Wollin Im Gewerbegebiet,52.28898,12.46394
 ARAL DE-Worms Mainzer Straße,49.65494,8.359737
 ARAL DE-Wunstorf Kolenfelder Straße,52.4173,9.44833
+ARAL DE-Wuppertal Nevigeser Straße,51.26868,7.12674
 ARAL DE-Wuppertal Uellendahler Straße,51.27606,7.15517
 ARAL DE-Wörth an der Isar Siemensstraße,48.624791,12.323478
 ARAL DE-Würzburg Albert-Einstein-Straße,49.80853,9.88637
@@ -7814,8 +7826,6 @@ BP DE-Dietzenbach Elisabeth-Selbert-Straße,50.01332,8.79405
 BP DE-Dietzhölztal Storchweg,50.834682,8.325993
 BP DE-Dortmund Flughafenstraße,51.549116,7.538578
 BP DE-Dortmund Rheinlanddamm,51.499476,7.471573
-BP DE-Dortmund Westfalendamm,51.504057,7.498477
-BP DE-Duderstadt Gewerbepark Euzenberg,51.510505,10.240672
 BP DE-Duisburg Friedrich-Ebert-Straße,51.405114,6.712324
 BP DE-Eislingen/Fils Stuttgarter Straße,48.696351,9.690648
 BP DE-Emmerich am Rhein Marie-Curie-Straße,51.84198,6.275056
@@ -7835,11 +7845,9 @@ BP DE-Geesthacht Geesthachter Straße,53.439831,10.365795
 BP DE-Geislingen an der Steige Schillerstraße 34,48.609518,9.842633
 BP DE-Gelsenkirchen Gewerkenstraße,51.519659,7.082324
 BP DE-Gladbeck Hermannstraße,51.574721,6.981985
-BP DE-Greifswald Koitenhäger Landstraße,54.081248,13.428943
 BP DE-Großhansdorf Sieker Landstraße,53.644633,10.278368
 BP DE-Hagen Hagener Straße,51.386465,7.477907
 BP DE-Hamm Hammer Straße,51.690016,7.775152
-BP DE-Hannover Vahrenwalder Straße,52.40515,9.735858
 BP DE-Hemmingen Freiherr-von-Varnbüler-Straße,48.864851,9.039397
 BP DE-Herford Röntgenstraße,52.061311,8.644352
 BP DE-Hessisch Lichtenau Leipziger Straße,51.198117,9.74601,20
@@ -7849,7 +7857,6 @@ BP DE-Hofgeismar Grebensteiner Straße,51.481432,9.38993
 BP DE-Horb am Neckar Bildechinger Steige,48.45527,8.699629
 BP DE-Höxter Albaxer Straße,51.786734,9.387784
 BP DE-Ingelheim am Rhein Konrad-Adenauer-Straße,49.979082,8.054044
-BP DE-Ingolstadt Schollstraße,48.775199,11.459173
 BP DE-Iserlohn Baarstraße,51.400379,7.697761
 BP DE-Jülich Neusser Straße,50.928056,6.365766
 BP DE-Kaltenkirchen Kieler Straße,53.840768,9.947625
@@ -7858,7 +7865,6 @@ BP DE-Kerken Umgehungsstraße,51.442739,6.414219
 BP DE-Kerpen Erftstraße,50.911672,6.683405
 BP DE-Kirchhain Sonnenallee,50.82377,8.944448
 BP DE-Kolbermoor Aiblinger Au,47.851146,12.017452
-BP DE-Kressbronn am Bodensee Linderhof,47.60761,9.586792
 BP DE-Kreuztal Hagener Straße,50.961375,7.988984
 BP DE-Köln Bergisch Gladbacher Straße,50.967782,7.034807
 BP DE-Köln Kölner Straße,50.903592,7.020729
@@ -7870,7 +7876,6 @@ BP DE-Langenhagen Vahrenwalder Straße,52.423851,9.732302
 BP DE-Lehre In den Lohbalken,52.310834,10.634943
 BP DE-Leverkusen Solinger Straße,51.056073,6.953897
 BP DE-Luckau Autobahn,51.911746,13.796516
-BP DE-Lüdenscheid Werdohler Landstraße,51.22821,7.650945
 BP DE-Magdeburg Jerichower Straße,52.131938,11.665659
 BP DE-Mannheim Brandenburger Straße,49.511984,8.529924
 BP DE-Mayen Kelberger Straße,50.325661,7.213521
@@ -7889,7 +7894,6 @@ BP DE-Neuss Bergheimer Straße,51.181253,6.688381
 BP DE-Niederwinkling Industriestraße,48.893933,12.800573
 BP DE-Norden Bahnhofstraße,53.58828,7.21853
 BP DE-Nürnberg Erlanger Straße,49.474162,11.064742
-BP DE-Obernburg am Main Miltenberger Straße,49.83721,9.14403
 BP DE-Osnabrück Alte Poststraße,52.276945,8.055264
 BP DE-Osnabrück Pagenstecherstraße,52.289396,8.028853
 BP DE-Oyten Oyterdamm,53.057411,8.967182
@@ -7904,7 +7908,6 @@ BP DE-Sankt Ingbert Saarbrücker Straße,49.275611,7.110575
 BP DE-Schackendorf BAB,53.960054,10.260901
 BP DE-Schweinfurt Willi-Kaidel-Straße,50.054058,10.194942
 BP DE-Schönfeld Königsbrücker Straße,51.295416,13.730064
-BP DE-Soltau Gottlieb-Daimler-Straße,52.996895,9.921231
 BP DE-Sprockhövel Wittener Straße,51.340392,7.289735
 BP DE-Stendal Arneburger Straße,52.616963,11.868436
 BP DE-Straubing Aiterhofener Straße,48.872765,12.630852
@@ -7917,7 +7920,6 @@ BP DE-Wesel Weseler Straße,51.638324,6.587322
 BP DE-Wetter (Hessen) An der Bleiche,50.904398,8.721228
 BP DE-Wiesbaden Berliner Straße,50.053831,8.300419
 BP DE-Wietmarschen Benzstraße,52.482153,7.217292
-BP DE-Wuppertal Nevigeser Straße,51.268683,7.126744
 BP DE-Wörth am Main Landstraße,49.79783,9.15649
 BP DE-Zwickau Leipziger Straße,50.742861,12.488611
 BP GB-Ashington Woodhorn Ln,55.18314,-1.54601
@@ -9274,6 +9276,7 @@ E-MAXX DE-Birnbach Kölner Straße,50.7084,7.58354
 E-MAXX DE-Bodenheim Am Reichsritterstift,49.9311,8.30093
 E-MAXX DE-Braunfels Jahnstraße,50.51494,8.38597
 E-MAXX DE-Frickhofen Schulstraße,50.504932,8.027944
+E-MAXX DE-Gau-Bischofsheim Schulstraße,49.9131,8.27624
 E-MAXX DE-Harxheim Gerbstedterstraße,49.90317,8.276746
 E-MAXX DE-Limburg Limburgerstraße,50.403889,8.0675
 
@@ -11294,6 +11297,7 @@ EnBW DE-Kißlegg Friedrich-List-Straße,47.77017,9.891592
 EnBW DE-Kißlegg Kirchstraße,47.75704,9.9134
 EnBW DE-Kleinheubach In der Seehecke,49.71393,9.21628
 EnBW DE-Kleinraststätte Ehrenberg,51.26562,7.24524,20
+EnBW DE-Klipphausen Am Bahndamm,51.0621,13.5206
 EnBW DE-Klötze,52.62939,11.15578
 EnBW DE-Knittlingen Brettener Straße,49.02565,8.7589
 EnBW DE-Koblenz An der Römervilla,50.381636,7.563319,20
@@ -12614,6 +12618,7 @@ Energie-Oberösterreich AT-Bad Ischl Götzstraße,47.71369,13.62392
 Energie-Oberösterreich AT-Liezen Gesäusestraße,47.55972,14.25383,40
 Energie-Oberösterreich AT-Linz Böhmerwaldstraße,48.29257,14.29,25
 Energie-Oberösterreich AT-Linz Energiestraße,48.29268,14.29067,25
+Energie-Oberösterreich AT-Ternberg Alois-Derfler-Straße,47.94635,14.36008
 
 energie-schwaben DE-Augsburg Bayerstraße,48.343625,10.884503
 
@@ -17649,6 +17654,7 @@ Lidl DE-Nördlingen Hofer Straße 10,48.858032,10.505455
 Lidl DE-Nörten-Hardenberg,51.624651,9.937396
 Lidl DE-Nörvenich,50.807616,6.654059
 Lidl DE-Oberhausen Dorstener Straße,51.523159,6.864312
+Lidl DE-Oberhausen Mülheimer Straße,51.46545,6.86543
 Lidl DE-Oberhausen Teutoburger Straße,51.52021,6.89322
 Lidl DE-Oberkirch Hammermatt 2,48.536471,8.062956
 Lidl DE-Oberviechtach,49.454113,12.41054
@@ -18816,7 +18822,6 @@ NewMotion DE-Hamburg Amsinckstrasse,53.543193,10.021751
 NewMotion DE-Hamburg Bremer Straße,53.45187,9.9712
 NewMotion DE-Hamburg Friedrich-Ebert-Damm,53.589533,10.100344
 NewMotion DE-Hamburg Hohe-Schaar-Straße,53.48002,9.98067
-NewMotion DE-Hannover Wülfeler Straße,52.338114,9.812848
 NewMotion DE-Hassloch Richard-Sang-Straße,49.378684,8.251626
 NewMotion DE-Hemmingen Göttinger Straße,52.309462,9.733592
 NewMotion DE-Hinterweidenthal Kaltenbach B,49.200433,7.74813
@@ -20688,6 +20693,7 @@ Shell DE-Handewitt Lecker Chaussee,54.777991,9.325299
 Shell DE-Hannover Groß-Buchholzer Straße,52.39748,9.79427
 Shell DE-Hannover Langenforther Straße,52.424367,9.781866
 Shell DE-Hannover Schulenburger Landstraße,52.40863,9.7079
+Shell DE-Hannover Wülfeler Straße,52.3381,9.81285
 Shell DE-Heidelberg Im Breitspiel,49.35942,8.68758,25
 Shell DE-Heppenheim (Bergstraße) Ludwigstraße,49.6374,8.64145
 Shell DE-Herrenberg Ohmstraße,48.580791,8.893934
@@ -20765,6 +20771,7 @@ Shell DE-Niendorf Schönberger Land A20,53.814735,10.878575
 Shell DE-Niendorf Schönberger Land A20,53.815758,10.878049
 Shell DE-Nürnberg Frankenstraße,49.43093,11.10084
 Shell DE-Oberhausen Kirchhellener Straße,51.538,6.86398
+Shell DE-Offenbach am Main Strahlenbergerstraße,50.10652,8.73257
 Shell DE-Offenburg Burdastraße,48.464005,7.928641
 Shell DE-Offenburg Freiburger Straße,48.475505,7.941003
 Shell DE-Oranienburg Lehnitzstraße,52.74586,13.25379
@@ -23100,6 +23107,7 @@ Zunder ES-Zafra Plaza del Alcázar,38.4244,-6.41493
 ČEZ CZ-Ostrovačice Veveří,49.21547,16.40952
 ČEZ CZ-Plzeň,49.74205,13.39345
 ČEZ CZ-Plzeň Písecká,49.7018,13.42816
+ČEZ CZ-Plzeň Radčická,49.74917,13.37022
 ČEZ CZ-Praha 10-Vršovice Eden,50.06724,14.46928
 ČEZ CZ-Praha 18 Veselská,50.13836,14.49908
 ČEZ CZ-Praha Bělohorská,50.07717,14.34079
