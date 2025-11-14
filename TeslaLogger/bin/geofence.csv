@@ -1916,7 +1916,7 @@ Supercharger-V4 DE-Eschborn Ginnheimer Straße,50.14098,8.58076
 Supercharger-V4 DE-Eschweiler,50.818063,6.260647
 Supercharger-V4 DE-Essen Haedenkampstraße,51.457373,6.983408,20
 Supercharger-V4 DE-Essen Süd,51.421386,6.961
-Supercharger-V3 DE-Feucht,49.36501,11.20753
+Supercharger-V3 DE-Feucht,49.36498,11.20717,60
 Supercharger-V4 DE-Forchheim,49.70775,11.06985
 Supercharger-V4 DE-Frankfurt Am Flughafen,50.053239,8.5716
 Supercharger-V4 DE-Frankfurt am Main,50.1149,8.6815
@@ -2042,7 +2042,7 @@ Supercharger-V4 DE Lübeck (Cafe del Sol),53.881288,10.660194
 Supercharger-V4 DE-Lübeck Moisling,53.912554,10.732506
 Supercharger-V4 DE-Lünen (Cafe Del Sol),51.60468,7.5262
 Supercharger-V3 DE-Magdeburg,52.210632,11.670302
-Supercharger-V4 DE-Magdeburg Florapark,52.1605,11.608187
+Supercharger-V4 DE-Magdeburg Olvenstedter Graseweg,52.1592,11.6075
 Supercharger-V4 DE-Magdeburg Urban,52.16068,11.6082
 Supercharger-V4 DE-Maintal (Globus),50.12982,8.8685
 Supercharger-V4 DE-Mainz,49.9814,8.28052
@@ -2309,7 +2309,6 @@ Supercharger-V3 ES-Fuenlabrada,40.29812,-3.82097
 Supercharger ES-Getafe,40.290389,-3.696302
 Supercharger-V4 ES-Gibraleón,37.36364,-6.9599
 Supercharger ES-Girona,41.998411,2.817295
-Supercharger-V4 ES-Girona West,41.96565,2.78075
 Supercharger ES-Granada,37.181805,-3.928417
 Supercharger-V4 ES-Granada Calle Menéndez Pelayo,37.14378,-3.60556
 Supercharger ES-Guarromán,38.143021,-3.722848
@@ -2356,6 +2355,7 @@ Supercharger-V4 ES-Rivas Vaciamadrid,40.33593,-3.52432
 Supercharger-V3 ES-Sagunto,39.67293,-0.26609
 Supercharger-V3 ES-Salamanca,40.945571,-5.639382
 Supercharger-V4 ES-Sallent,41.78974,1.89786
+Supercharger-V4 ES-Salt,41.96565,2.78075
 Supercharger-V3 ES-San José de la Rinconada,37.44024,-5.88562
 Supercharger-V3 ES-San Pedro del Pinatar,37.82323,-0.80975
 Supercharger-V4 ES-Sant Cugat,41.4981,2.07269
@@ -2700,7 +2700,7 @@ Supercharger-V4 FR-Thiais,48.75476,2.37308
 Supercharger-V4 FR-Tossiat,46.14409,5.28248,60
 Supercharger FR-Toulouse,43.769238,1.361623
 Supercharger-V3 FR-Tournus,46.577333,4.899973,55
-Supercharger-V4 FR-Tours,47.375525,0.669961
+Supercharger-V4 FR-Tours,47.37548,0.67016
 Supercharger-V4 FR-Treillières,47.27984,-1.59572
 Supercharger-V4 FR-Val-de-Meuse,47.99145,5.51278
 Supercharger-V4 FR-Val-de-Reuil,49.2488,1.18286
@@ -3723,7 +3723,7 @@ Supercharger-V4 PT-Leiria,39.73154,-8.82492
 Supercharger-V4 PT-Lisboa,38.7554,-9.19085
 Supercharger-V4 PT-Lisboa West,38.70952,-9.33099
 Supercharger-V3 PT-Loulé,37.097586,-7.997867
-Supercharger PT-Mealhada,40.37306,-8.4805
+Supercharger-V4 PT-Mealhada,40.37307,-8.4804
 Supercharger PT-Montemor-o-Novo,38.645545,-8.24781
 Supercharger-V4 PT-Portimão,37.14658,-8.54285
 Supercharger-V4 PT-Porto,41.11799,-8.62318
@@ -10312,6 +10312,7 @@ Elinta LT-Vievis Kauno g.,54.77287,24.81753
 
 eliso DE-Essen Bamlerstraße,51.47264,6.99121
 eliso DE-Magdeburg Eisvogelstrasse,52.13951,11.58802
+Eliso DE-Mannheim Seckenheimer Landstraße,49.4745,8.53765
 
 ELLA AT-Gemeinde Imst Brennbichl,47.221079,10.75213
 ELLA AT-Holzing Betriebsgebiet,48.13927,15.13758,20
@@ -10872,7 +10873,7 @@ EnBW DE-Engelskirchen Hüttenstraße,50.9927,7.45972
 EnBW DE-Engstingen Kirchstraße,48.3868,9.28415
 EnBW DE-Engstingen Reutlinger Straße,48.38521,9.29783
 EnBW DE-Eningen Max-Planck-Straße,48.4775,9.2428
-EnBW DE-Ennepetal,51.29724,7.357822
+EnBW DE-Ennepetal Neustraße,51.2972,7.35818
 EnBW DE-Ensdorf Gustav-Stresemann-Straße,49.289638,6.784319
 EnBW DE-Eppingen Wilhelmstraße,49.13714,8.90832
 EnBW DE-Erbach Brühlstraße,48.3286,9.88144
@@ -12918,6 +12919,7 @@ etecnic ES-Vilanova i la Geltrú Passeig Marítim,41.21605,1.73325
 
 Eulektro DE-Berlin Platz der Luftbrücke,52.47765,13.3868
 Eulektro DE-Bremen Am Dobben,53.0781,8.82284
+Eulektro DE-Bremen Johann-Jacobs-Straße,53.08656,8.7837
 Eulektro DE-Krefeld Odilia-Von-Goch-Strasse,51.36605,6.49727
 
 EV-Alzenau DE-Alzenau Burgstraße,50.08713,9.07415
@@ -13794,6 +13796,7 @@ EWE-GO DE-Lüdinghausen Valve,51.76691,7.45978
 EWE-GO DE-Lüneburg Bei der Pferdehütte,53.27546,10.403972
 EWE-GO DE-Lünen Engelswiese,51.61613,7.52748
 EWE-GO DE-Magdeburg Berliner Chaussee,52.130172,11.677928
+EWE-GO DE-Magdeburg Lübecker Straße,52.15,11.63932
 EWE-GO DE-Magdeburg Werner-von-Siemens-Ring,52.07965,11.58167
 EWE-GO DE-Mainz Haifa-Allee,49.969414,8.229145
 EWE-GO DE-Mainz Rheinallee,50.02362,8.23437
@@ -15199,6 +15202,8 @@ Hochtief DE-Bad Rappenau Bonfelder Straße,49.21051,9.07285
 
 Holiday-Vital-Resort DE-Großenbrode Strandstraße,54.362833,11.085097
 
+Holy DE-Metzingen Ulmer Straße,48.5371,9.28463
+
 Holzverstromungsanlage DE-Diemelstadt Kupferkuhle,51.489568,9.009387
 
 HomE-of-Mobility DE-Wertheim Am Fuchsenacker,49.772349,9.585389,15
@@ -15816,6 +15821,7 @@ Ionity DE-Eichenzell Rhönhof,50.48831,9.70852,20
 Ionity DE-Ellwangen Max-Eyth-Straße,48.95667,10.18367
 Ionity DE-Erfurt Dubliner Straße,51.012291,10.988088
 Ionity DE-Euro Rastpark Himmelkron,50.05586,11.6091
+Ionity DE-Feucht Wendelsteiner Straße,49.36565,11.20737,20
 Ionity DE-Frankenhöhe Nord,49.242629,10.352944
 Ionity DE-Frankenhöhe Süd,49.241155,10.356121
 Ionity DE-Friedberg Winterbruckenweg,48.40641,10.95235,35
@@ -16679,7 +16685,7 @@ Kaufland DE-Rheda-Wiedenbrück Bahnhofstraße 36,51.852895,8.287195
 Kaufland DE-Rheinfelden,47.575442,7.798298
 Kaufland DE-Riegelsberg Saarbrücker Straße 262,49.322677,6.939136
 Kaufland DE-Ritterhude Rosenhügel,53.17991,8.70903
-Kaufland DE-Rosenheim Kufsteiner Straße 124,47.838391,12.120908
+Kaufland DE-Rosenheim Kufsteiner Straße,47.8376,12.121
 Kaufland DE-Rosenheim Äußere Münchener Straße 100,47.847333,12.090766
 Kaufland DE-Rostock Pütterweg,54.076824,12.121358
 Kaufland DE-Roth,49.249584,11.093543
@@ -18092,6 +18098,7 @@ Mainova DE-Frankfurt am Main Europa-Allee,50.10837,8.628456
 Mainova DE-Frankfurt am Main Gräfstraße,50.121224,8.651965
 Mainova DE-Frankfurt am Main Heerstraße,50.14492,8.606483
 Mainova DE-Frankfurt am Main Heinrich-Lanz-Allee,50.190584,8.652075
+Mainova DE-Frankfurt am Main Klapperfeldstraße,50.1156,8.69083
 Mainova DE-Frankfurt am Main Kuhwaldstraße,50.117119,8.640922
 Mainova DE-Frankfurt am Main Lange Meile,50.191245,8.638627
 Mainova DE-Frankfurt am Main Ludwig-Erhard-Anlage,50.112048,8.642547
@@ -18155,6 +18162,7 @@ Mer AT-Ansfelden Haider Straße,48.211118,14.279784,25
 Mer AT-Ansfelden Traunuferstraße,48.2162,14.28099
 Mer AT-Bad Waltersdorf Thermenweg,47.18158,15.99518
 Mer AT-Brunn am Gebirge Wienerstraße,48.112659,16.30259,30
+Mer AT-Bürs Hauptstraße,47.15134,9.81456
 Mer AT-Deutsch-Wagram Dammstraße,48.30325,16.57714
 Mer AT-Deutschlandsberg Laßnitzstraße,46.8243,15.2362
 Mer AT-Ebreichsdorf Betriebsring,47.983231,16.396287
@@ -23349,6 +23357,7 @@ DE Bünde Zimmerstraße,52.20636,8.592
 DE Chemnitz Florian-Geyer-Straße,50.81895,12.91394
 DE Chemnitz Hotel Plaza Inn,50.86356,12.85756
 DE Chemnitz Kauffahrtei,50.810677,12.905644
+DE Coburg Brose,50.24952,10.9644
 DE Deggendorf Oberer Stadtplatz,48.83492,12.96209
 DE Deggendorf Wiesenstraße Stadthalle,48.83202,12.95688
 DE Dessau-Roßlau Friederikenplatz,51.83547,12.25213
@@ -23358,6 +23367,7 @@ DE Dortmund Bielefelder Straße,51.51028,7.50429
 DE Dresden Am Brauhaus,51.06827,13.77956
 DE Dresden Hauptbahnhof,51.040898,13.733033
 DE Dresden Hilti,51.07258,13.6838
+DE Dresden Hotel Bellevue,51.05857,13.73892
 DE Dresden teltis,51.131,13.78992
 DE Duisburg DB Cargo,51.4078,6.79578
 DE Eching Hotel Höckmayr,48.29666,11.62049
