@@ -10312,7 +10312,7 @@ Elinta LT-Vievis Kauno g.,54.77287,24.81753
 
 eliso DE-Essen Bamlerstraße,51.47264,6.99121
 eliso DE-Magdeburg Eisvogelstrasse,52.13951,11.58802
-Eliso DE-Mannheim Seckenheimer Landstraße,49.4745,8.53765
+eliso DE-Mannheim Seckenheimer Landstraße,49.4745,8.53765
 
 ELLA AT-Gemeinde Imst Brennbichl,47.221079,10.75213
 ELLA AT-Holzing Betriebsgebiet,48.13927,15.13758,20
@@ -18786,106 +18786,6 @@ NEW-Energie DE-Erkelenz-Ost Alfred-Wirth-Straße,51.07953,6.33352
 NEW-Energie DE-Mönchengladbach-Nord Kaldenkirchener Straße,51.2259,6.43064
 NEW-Energie DE-Viersen Kreisarchiv,51.25342,6.353129
 
-NewMotion DE-Ahrensfelde Karower Weg,52.601114,13.514322
-NewMotion DE-Aschaffenburg Schillerstraße,49.98698,9.1402
-NewMotion DE-Bad Segeberg Ziegelstraße,53.946743,10.303729
-NewMotion DE-Berlin Am Juliusturm,52.536643,13.22178
-NewMotion DE-Berlin Askanierring,52.54766,13.19431
-NewMotion DE-Berlin Buchberger Straße,52.50713,13.4862
-NewMotion DE-Berlin Gerichtstrasse,52.543034,13.378302
-NewMotion DE-Berlin Glienicker Straße,52.43807,13.5636
-NewMotion DE-Berlin Hermsdorfer Damm,52.615874,13.300828
-NewMotion DE-Berlin Hultschiner Damm,52.48624,13.60406
-NewMotion DE-Berlin Jülicher Straße,52.554718,13.392017
-NewMotion DE-Berlin Maerkische Allee,52.521295,13.540666
-NewMotion DE-Berlin Mariendorfer Damm,52.436121,13.38851
-NewMotion DE-Berlin Marienfelder Chaussee,52.42102,13.426173
-NewMotion DE-Berlin Oranienburger Straße,52.589907,13.334708
-NewMotion DE-Berlin Revaler Straße,52.506,13.45985
-NewMotion DE-Berlin Rummelsburger Landstraße,52.480664,13.502368
-NewMotion DE-Berlin Scharnweberstrasse,52.567748,13.309254
-NewMotion DE-Berlin Skalitzer Straße,52.499211,13.433126
-NewMotion DE-Bochum Bernecker Straße,51.452367,7.224979
-NewMotion DE-Bremerhaven Frederikshavener Straße,53.4972,8.62492
-NewMotion DE-Chemnitz Otto-Thörner Straße,50.80845,12.9698
-NewMotion DE-Crailsheim Werner-von-Siemens-Strasse,49.141101,10.085099
-NewMotion DE-Dahlwitz-Hoppegarten Lindenallee,52.515371,13.6695
-NewMotion DE-Dormagen Düsseldorfer Straße,51.133679,6.803495
-NewMotion DE-Duisburg Moerser Straße,51.44935,6.70124
-NewMotion DE-Döbeln Mastener Strasse,51.122326,13.101093
-NewMotion DE-Düsseldorf Karlsruher Straße,51.19754,6.841547
-NewMotion DE-Düsseldorf Kölner Landstraße,51.193695,6.81333
-NewMotion DE-Düsseldorf Münsterstraße,51.252735,6.801829
-NewMotion DE-Eisenberg Jenaer Straße,50.97117,11.87557
-NewMotion DE-Enzberg-Mühlacker B,48.933677,8.804939
-NewMotion DE-Freiburg Habsburger Strasse,48.010631,7.85494
-NewMotion DE-Gera Ronneburger Strasse,50.881248,12.120393
-NewMotion DE-Gernsheim Robert-Bunsen-Straße,49.7694,8.49582
-NewMotion DE-Gochsheim Schweinfurter Strasse,50.021876,10.274728
-NewMotion DE-Graefenroda Waldstrasse,50.748188,10.811839
-NewMotion DE-Großschirma Leipziger Straße,50.98726,13.27456
-NewMotion DE-Göppingen Heiningerstrasse,48.695946,9.664917
-NewMotion DE-Hamburg Ahrensburger Straße,53.578119,10.093346
-NewMotion DE-Hamburg Amsinckstrasse,53.543193,10.021751
-NewMotion DE-Hamburg Bremer Straße,53.45187,9.9712
-NewMotion DE-Hamburg Friedrich-Ebert-Damm,53.589533,10.100344
-NewMotion DE-Hamburg Hohe-Schaar-Straße,53.48002,9.98067
-NewMotion DE-Hassloch Richard-Sang-Straße,49.378684,8.251626
-NewMotion DE-Hemmingen Göttinger Straße,52.309462,9.733592
-NewMotion DE-Hinterweidenthal Kaltenbach B,49.200433,7.74813
-NewMotion DE-Hockenheim Max-Planck-Strasse,49.311163,8.558715
-NewMotion DE-Illertissen Memminger Straße,48.21724,10.103
-NewMotion DE-Kahl am Main Aschaffenburger Strasse,50.063387,9.004958
-NewMotion DE-Kirchberg Schneeberger Straße,50.622718,12.531217
-NewMotion DE-Kirchheim Unter Teck Dettinger Straße,48.6419,9.45237
-NewMotion DE-Koeln Heidestraße,50.858564,7.098947
-NewMotion DE-Krefeld Glockenspitz,51.336732,6.604345
-NewMotion DE-Köln Rösrather Straße,50.920718,7.092956
-NewMotion DE-Lambsheim Mühltorstraße,49.509695,8.285538
-NewMotion DE-Landau Weissenburger Str,49.185341,8.113813
-NewMotion DE-Langenau Am Kiesgräble,48.493015,10.108013
-NewMotion DE-Ludwigshafen Edigheimer Straße,49.52626,8.39855
-NewMotion DE-Ludwigshafen Val-Bauer-Str,49.479074,8.426231
-NewMotion DE-Lünen Kurt-Schumacher-Straße,51.6067,7.52568
-NewMotion DE-Mannheim Normannenstraße,49.49902,8.55693
-NewMotion DE-Merseburg Amtshäuser Strasse,51.35887,12.017598
-NewMotion DE-Merzig Merziger Straße,49.441972,6.622722
-NewMotion DE-Monheim Heinrich-Hertz-Straße,51.115728,6.905965
-NewMotion DE-Müllheim Schliengener Straße,47.80883,7.60618
-NewMotion DE-Nettetal Steyler Straße,51.326318,6.178172
-NewMotion DE-Nuernberg Erlenstegenstrasse,49.46899,11.12944
-NewMotion DE-Oberhausen Centroallee,51.48728,6.875931
-NewMotion DE-Oberhausen-Rheinhausen Weiherweg,49.265928,8.478046
-NewMotion DE-Osnabrück Sutthauser Straße,52.249262,8.037469
-NewMotion DE-Pirna Remscheider Straße,50.952642,13.957052
-NewMotion DE-Plochingen Esslinger Straße,48.715688,9.413767
-NewMotion DE-Quickborn Friedrichsgaber Straße,53.749886,9.934539
-NewMotion DE-Rheinau-Freistett Baron-Kückh-Straße,48.661867,7.937931
-NewMotion DE-Russelsheim Rugbyring,49.987111,8.402375
-NewMotion DE-Saarbrücken Provinzialstrasse,49.205096,7.055637
-NewMotion DE-Salzgitter Kampstrasse,52.14686,10.322179
-NewMotion DE-Salzgitter Vor dem Dorfe,52.140317,10.33574
-NewMotion DE-Schleusingen Suhler Strasse,50.519344,10.7544
-NewMotion DE-Schwielowsee Hauffstraße,52.36334,12.97203
-NewMotion DE-Schönefeld Wassmannsdorfer,52.367875,13.46732
-NewMotion DE-Solingen Landwehr,51.131561,6.997389
-NewMotion DE-Stade Harsefelder Strasse,53.584879,9.471977
-NewMotion DE-Straelen Wankumer Straße,51.43224,6.27425
-NewMotion DE-Stuttgart Burgstallstrasse,48.755683,9.141706
-NewMotion DE-Stuttgart Neckartalstrasse,48.819245,9.226927
-NewMotion DE-Sulzbach a.d. Murr Milchstraße,49.004417,9.503938
-NewMotion DE-Syke Nienburger Strasse,52.911474,8.828416
-NewMotion DE-Ulm Blaubeurer Straße,48.400956,9.95564
-NewMotion DE-Velten Rosa-Luxemburg-Strasse,52.684872,13.181666
-NewMotion DE-Waldsee Schlichtstraße,49.405271,8.435716
-NewMotion DE-Wendlingen Heinrich-Otto-Straße,48.67426,9.37177
-NewMotion DE-Wolfsburg Braunschweiger Strasse,52.412062,10.782458
-NewMotion DE-Wolfsburg Nordsteimker Strasse,52.417674,10.80511
-NewMotion DE-Wuppertal Obere Lichtenplatzer Straße,51.24882,7.1923
-NewMotion DE-Wuppertal Schmiedestraße,51.30812,7.2523
-NewMotion DE-Wörrstadt Friedrich-Ebert-Straße,49.845298,8.112766
-NewMotion DE-Zarrentin am Schaalsee Hauptstraße,53.55196,10.915517
-NewMotion DE-Zossen Stubenrauchstraße,52.227392,13.444821
 NewMotion HU-Vecsés Ferihegyi repülőtérre vezető út,47.417512,19.254757
 NewMotion NL-Maarssen Industrieweg,52.12747,5.03937
 
@@ -20561,8 +20461,10 @@ Shell CZ-Rakovice-Čimelice D4,49.48298,14.0636
 Shell CZ-Staré Město Košická,50.75921,15.05308
 Shell DE-Aachen Prager Ring,50.797538,6.108947
 Shell DE-Achim Margarete-Steiff Allee,53.019466,9.068053
+Shell DE-Ahrensfelde Karower Weg,52.6011,13.51432
 Shell DE-Andernach Rasselsteinstraße,50.433135,7.426765
 Shell DE-Angermünde Prenzlauer Straße,53.026547,13.995819
+Shell DE-Aschaffenburg Schillerstraße,49.98698,9.1402
 Shell DE-Asperg Ludwigsburger Straße,48.89717,9.1541
 Shell DE-Autohof Georgswerder,53.51856,10.02174
 Shell DE-Autohof Herzsprung,53.06798,12.53331,20
@@ -20574,6 +20476,7 @@ Shell DE-Bad Kreuznach Bosenheimer Straße,49.849195,7.897201
 Shell DE-Bad Liebenwerda Heinrich-Heine-Straße,51.524149,13.405714
 Shell DE-Bad Rappenau Raiffeisenstraße,49.23668,9.09831,25
 Shell DE-Bad Saulgau Platzstraße,48.00651,9.51345
+Shell DE-Bad Segeberg Ziegelstraße,53.94674,10.30373
 Shell DE-Bakum Harmerstraße,52.7259,8.17816
 Shell DE-Bamberg Heinrichsdamm,49.88479,10.90287
 Shell DE-Bamberg Schützenstraße,49.89069,10.89397
@@ -20582,22 +20485,38 @@ Shell DE-Bayreuth Ritter-von-Langheinrich-Straße,49.96278,11.6111,10
 Shell DE-Beelitz Trebbiner Straße,52.234862,12.980057
 Shell DE-Berg Sieggrubenstraße,50.372,11.787795
 Shell DE-Berlin Alt-Kaulsdorf,52.505561,13.588271
+Shell DE-Berlin Am Juliusturm,52.53664,13.22178
+Shell DE-Berlin Askanierring,52.54766,13.1943
 Shell DE-Berlin Bahnhofstraße,52.38694,13.4079
 Shell DE-Berlin Bergstraße,52.458056,13.338333
+Shell DE-Berlin Buchberger Straße,52.50713,13.4862
 Shell DE-Berlin Bundesallee,52.492737,13.331541
+Shell DE-Berlin Gerichtstraße,52.54303,13.3783
+Shell DE-Berlin Glienicker Straße,52.43807,13.5636
 Shell DE-Berlin Gotlindestraße,52.518338,13.496618
+Shell DE-Berlin Hermsdorfer Damm,52.61587,13.30083
 Shell DE-Berlin Hohenzollerndamm,52.48856,13.30673,30
+Shell DE-Berlin Hultschiner Damm,52.48624,13.60406
 Shell DE-Berlin Jülicher Straße,52.55278,13.3918
+Shell DE-Berlin Jülicher Straße,52.55472,13.39202
 Shell DE-Berlin Konrad-Wolf-Straße,52.5434,13.49052
 Shell DE-Berlin Kulmseestraße,52.513349,13.553718,25
 Shell DE-Berlin Königsberger Straße,52.42963,13.32225
+Shell DE-Berlin Maerkische Allee,52.5213,13.54067
 Shell DE-Berlin Manteuffelstraße,52.4647,13.37716
+Shell DE-Berlin Mariendorfer Damm,52.43612,13.3885
+Shell DE-Berlin Marienfelder Chaussee,52.42102,13.42617
+Shell DE-Berlin Oranienburger Straße,52.5899,13.3347
 Shell DE-Berlin Oranienburger Straße,52.595867,13.332407
 Shell DE-Berlin Oranienstraße,52.5041,13.40818
 Shell DE-Berlin Prenzlauer Promenade,52.57228,13.429115
+Shell DE-Berlin Revaler Straße,52.506,13.45985
 Shell DE-Berlin Rothenbachstraße,52.571728,13.429514,25
 Shell DE-Berlin Rudower Straße,52.4362,13.46528
+Shell DE-Berlin Rummelsburger Landstraße,52.48066,13.50237
+Shell DE-Berlin Scharnweberstraße,52.56775,13.30925
 Shell DE-Berlin Schwarzer Weg,52.52979,13.37724
+Shell DE-Berlin Skalitzer Straße,52.4992,13.43313
 Shell DE-Berlin Tempelhofer Weg,52.45845,13.425514
 Shell DE-Berlin Wollankstraße,52.56603,13.3949
 Shell DE-Biberach an der Riß Leipzigstraße,48.083975,9.800668
@@ -20605,6 +20524,7 @@ Shell DE-Biberach an der Riß Ulmer Straße,48.1079,9.801522,30
 Shell DE-Bielefeld Artur-Ladebeck-Straße,52.01065,8.5192
 Shell DE-Bielefeld Eckendorfer Straße,52.033108,8.55645
 Shell DE-Blankenburg Lerchenbreite,51.8061,10.9433,25
+Shell DE-Bochum Bernecker Straße,51.45237,7.22498
 Shell DE-Bochum Herner Straße,51.518407,7.212834
 Shell DE-Bonn Endenicher Straße,50.732787,7.082075
 Shell DE-Braunschweig Hans-Sommer-Straße,52.2773,10.54958
@@ -20613,6 +20533,7 @@ Shell DE-Braunschweig Münchenstraße,52.252208,10.492259
 Shell DE-Braunschweig Thiedestraße,52.2207,10.50206
 Shell DE-Breitenworbis Auf dem Pfingstrasen,51.41238,10.43843
 Shell DE-Bremen Osterholzer Herrstraße,53.05777,8.96248
+Shell DE-Bremerhaven Frederikshavener Straße,53.4972,8.62492
 Shell DE-Broderstorf Mecklenburger Straße,54.0808,12.213
 Shell DE-Buchholz Steinbecker Straße,53.330204,9.877068
 Shell DE-Burg Magdeburger Chaussee,52.2594,11.841944,30
@@ -20622,10 +20543,13 @@ Shell DE-Bütow Röbeler Chaussee,53.3612,12.49684
 Shell DE-Büttelborn Im Mehlsee,49.903502,8.523951
 Shell DE-Calw Stuttgarter Straße,48.70817,8.76527
 Shell DE-Chemnitz Jagdschänkenstraße,50.81282,12.84174
+Shell DE-Chemnitz Otto-Thörner Straße,50.80845,12.9698
 Shell DE-Coswig Dresdner Straße,51.12633,13.57197
 Shell DE-Coswig Rosslauer Straße,51.88446,12.43346
 Shell DE-Cottbus Hermannstraße,51.76312,14.34862
 Shell DE-Cottbus Turower Straße,51.724955,14.321162
+Shell DE-Crailsheim Werner-von-Siemens-Straße,49.1411,10.0851
+Shell DE-Dahlwitz-Hoppegarten Lindenallee,52.51537,13.6695
 Shell DE-Darmstadt Rüdesheimer Straße,49.853213,8.644191
 Shell DE-Dasing Laimeringer Straße,48.389921,11.066027
 Shell DE-Deizisau Seewiesenweg,48.715078,9.3777
@@ -20633,6 +20557,7 @@ Shell DE-Dessau-Roßlau Kiefernweg,51.889534,12.272161
 Shell DE-Dietzenbach Justus-von-Liebig-Straße,50.00282,8.79405
 Shell DE-Dillenburg Frankfurter Straße,50.73567,8.29052
 Shell DE-Dogern Schnötstraße,47.61413,8.1828
+Shell DE-Dormagen Düsseldorfer Straße,51.13368,6.8035
 Shell DE-Dormagen Hamburger Straße,51.090437,6.811746
 Shell DE-Dorsten Freudenbergstraße,51.7022,6.9298
 Shell DE-Dortmund Bornstraße,51.530938,7.474047
@@ -20640,11 +20565,18 @@ Shell DE-Dortmund Ruhrallee,51.496467,7.468238
 Shell DE-Drebach Bahnhofstraße,50.70305,13.0562
 Shell DE-Dresden Hansastraße,51.08112,13.73973
 Shell DE-Dresden Washingtonstraße,51.067278,13.688885
+Shell DE-Duisburg Moerser Straße,51.44935,6.70124
+Shell DE-Döbeln Mastener Straße,51.12233,13.1011
 Shell DE-Düsseldorf Auf’m Hennekamp,51.20235,6.7809
+Shell DE-Düsseldorf Karlsruher Straße,51.19754,6.84155
+Shell DE-Düsseldorf Kölner Landstraße,51.1937,6.81333
+Shell DE-Düsseldorf Münsterstraße,51.25274,6.80183
 Shell DE-Eggersdorf Landhausstraße,52.539595,13.828408
+Shell DE-Eisenberg Jenaer Straße,50.97117,11.87557
 Shell DE-Ellwangen An der Jagst,48.967372,10.127059
 Shell DE-Emmelshausen Trinkbornstraße,50.15952,7.58926
 Shell DE-Empfingen Robert-Bosch-Straße,48.386633,8.72245
+Shell DE-Enzberg-Mühlacker Kanalstraße,48.93368,8.80494
 Shell DE-Erkelenz Krefelder Straße,51.083111,6.312259
 Shell DE-Erkrath Max-Planck-Straße,51.20019,6.938561
 Shell DE-Eschborn Zeilsheimer Weg,50.13965,8.56456
@@ -20660,6 +20592,7 @@ Shell DE-Frankenthal Wormser Straße,49.55047,8.35302
 Shell DE-Frankfurt am Main Mörfelder Landstraße,50.088866,8.669073
 Shell DE-Frankfurt am Main Niederräder Ufer,50.088479,8.63574
 Shell DE-Frankfurt Hanauer Landstraße,50.12249,8.74267
+Shell DE-Freiburg Habsburger Straße,48.01063,7.85494
 Shell DE-Freiburg Tullastraße,48.022309,7.849648
 Shell DE-Fulda Frankfurter Straße,50.53008,9.67685
 Shell DE-Fürstenwalde Trebuser Straße,52.368808,14.059818
@@ -20668,14 +20601,20 @@ Shell DE-Gelsenkirchen Willy-Brandt-Allee,51.548725,7.074277
 Shell DE-Gemünden Wernfelder Straße,50.04907,9.70276
 Shell DE-Genshagen Parkallee,52.309319,13.313377
 Shell DE-Gera Johannes-R.-Becher-Straße,50.896154,12.085452
+Shell DE-Gera Ronneburger Straße,50.88125,12.1204
+Shell DE-Gernsheim Robert-Bunsen-Straße,49.7694,8.49582
 Shell DE-Geschendorf Dorfstraße,53.92218,10.45442
 Shell DE-Gießen Schiffenberger Weg,50.572413,8.690782,30
 Shell DE-Ginsheim-Gustavsburg Am Alten Fährhaus,49.997365,8.313622
+Shell DE-Gochsheim Schweinfurter Straße,50.02188,10.27473
 Shell DE-Goldberg Plauer Chaussee,53.58347,12.09037
+Shell DE-Graefenroda Waldstraße,50.7482,10.81184
 Shell DE-Gransee Oranienburger Straße,52.99846,13.15477
 Shell DE-Greifswald Lomonossowallee,54.08214,13.40495
 Shell DE-Großräschen IFA-Park,51.591101,14.012752
+Shell DE-Großschirma Leipziger Straße,50.98726,13.27456
 Shell DE-Gräfenroda Waldstraße,50.74706,10.81125
+Shell DE-Göppingen Heiningerstraße,48.69595,9.66492
 Shell DE-Göttingen Kasseler Landstraße,51.528722,9.891816
 Shell DE-Haldensleben Neuhaldenslebener Straße,52.263256,11.422978
 Shell DE-Halle (Saale) Berliner Straße,51.495807,12.011496
@@ -20683,10 +20622,15 @@ Shell DE-Halle (Saale) Carl-Robert-Straße,51.502186,11.967847
 Shell DE-Halle (Saale) Krausenstraße,51.48793,11.9822
 Shell DE-Hallstadt Laubanger,49.914152,10.866446,30
 Shell DE-Haltern Recklinghäuser Straße,51.73258,7.187
+Shell DE-Hamburg Ahrensburger Straße,53.57812,10.09335
 Shell DE-Hamburg Alsterkrugchaussee,53.62142,10.0097
+Shell DE-Hamburg Amsinckstraße,53.5432,10.02175
 Shell DE-Hamburg Bramfelder Chaussee,53.62213,10.08385
+Shell DE-Hamburg Bremer Straße,53.45187,9.9712
 Shell DE-Hamburg Cuxhavener Straße,53.472487,9.847752
+Shell DE-Hamburg Friedrich-Ebert-Damm,53.58953,10.10034
 Shell DE-Hamburg Harksheider Straße,53.66263,10.07897
+Shell DE-Hamburg Hohe-Schaar-Straße,53.48002,9.98067
 Shell DE-Hamburg Jüthornstraße,53.56687,10.07544
 Shell DE-Hamburg Königstraße,53.54875,9.94406
 Shell DE-Hamburg Ladenbeker Furtweg,53.497335,10.1805
@@ -20702,19 +20646,25 @@ Shell DE-Hannover Groß-Buchholzer Straße,52.39748,9.79427
 Shell DE-Hannover Langenforther Straße,52.424367,9.781866
 Shell DE-Hannover Schulenburger Landstraße,52.40863,9.7079
 Shell DE-Hannover Wülfeler Straße,52.3381,9.81285
+Shell DE-Hassloch Richard-Sang-Straße,49.37868,8.25163
 Shell DE-Heidelberg Im Breitspiel,49.35942,8.68758,25
+Shell DE-Hemmingen Göttinger Straße,52.30946,9.7336
 Shell DE-Heppenheim (Bergstraße) Ludwigstraße,49.6374,8.64145
 Shell DE-Herrenberg Ohmstraße,48.580791,8.893934
 Shell DE-Hilden Walder Straße,51.16815,6.98386
+Shell DE-Hinterweidenthal Kaltenbach,49.20043,7.74813
 Shell DE-Hirschaid Pickelstraße,49.817,10.99175
+Shell DE-Hockenheim Max-Planck-Straße,49.31116,8.5587
 Shell DE-Hohen Neuendorf Berliner Straße,52.66007,13.28714
 Shell DE-Holzgerlingen Hohenzollernstraße,48.645835,9.011346
 Shell DE-Homburg Richard-Wagner-Straße,49.323795,7.333623
 Shell DE-Husum Robert-Koch-Straße,54.49308,9.08512
 Shell DE-Hösbach Industriestraße,50.00602,9.221178
+Shell DE-Illertissen Memminger Straße,48.21724,10.103
 Shell DE-Ingelheim Herman-Bopp-Straße 1,49.986976,8.02829
 Shell DE-Isernhagen Opelstraße,52.424286,9.837596
 Shell DE-Itzehoe Lindenstraße,53.933044,9.482901
+Shell DE-Kahl am Main Aschaffenburger Straße,50.0634,9.00496
 Shell DE-Kahl am Main Aschaffenburger Straße,50.06579,9.00561
 Shell DE-Kaltenkirchen Kieler Straße,53.840978,9.948871,40
 Shell DE-Kamen Karree,51.568119,7.674458
@@ -20722,18 +20672,23 @@ Shell DE-Karlsdorf-Neuthard Im Entenfang,49.135209,8.527083
 Shell DE-Karlsfeld Münchner Straße,48.22449,11.46856
 Shell DE-Kiel Hamburger Chaussee,54.30102,10.10846
 Shell DE-Kiel Konrad-Adenauer-Damm,54.30085,10.14448
+Shell DE-Kirchberg Schneeberger Straße,50.62272,12.53122
 Shell DE-Kirchentellinsfurt Kusterdinger Straße,48.5322,9.138
 Shell DE-Kirchheim,50.834221,9.574422,30
+Shell DE-Kirchheim Unter Teck Dettinger Straße,48.6419,9.45237
 Shell DE-Kitzingen Repperndorfer Straße,49.73912,10.15256
 Shell DE-Kleinostheim Kardinal-Faulhaber-Straße,50.00863,9.05644
 Shell DE-Koblenz Friedrich-Mohr-Straße,50.380548,7.576939
 Shell DE-Kraftsdorf Am Rüdersdorfer Wege,50.895948,11.979361
 Shell DE-Kranichfeld Erfurter Straße,50.860908,11.207079
 Shell DE-Krefeld Diessemer Bruch,51.327372,6.590652
+Shell DE-Krefeld Glockenspitz,51.33673,6.60435
 Shell DE-Kronau Am Autobahnzubringer,49.2244,8.6118
 Shell DE-Kämpfelbach-Ersingen Raiffeisenstraße,48.928995,8.647136
 Shell DE-Köln Godorfer Hauptstraße,50.85312,6.97578
+Shell DE-Köln Heidestraße,50.85856,7.09895
 Shell DE-Köln Hugo-Eckener-Straße,50.97727,6.8955
+Shell DE-Köln Rösrather Straße,50.92072,7.09296
 Shell DE-Köln Venloer Straße,50.94559,6.927406
 Shell DE-Königsee Gewerbegebiet,50.667036,11.119127
 Shell DE-Königswinter Rheinallee,50.67082,7.1946
@@ -20741,17 +20696,23 @@ Shell DE-Laatzen Karlsruher Straße,52.31788,9.79741,20
 Shell DE-Laatzen Oesseler Straße,52.27481,9.84779
 Shell DE-Laboe Brodersdorfer Weg,54.400685,10.22995
 Shell DE-Laichingen Rudolf-Diesel-Straße,48.4945,9.71073
+Shell DE-Lambsheim Mühltorstraße,49.5097,8.28554
+Shell DE-Landau in der Pfalz Weißenburger Straße,49.18534,8.1138
 Shell DE-Langen Mörfelder Landstraße,49.9931,8.65198
+Shell DE-Langenau Am Kiesgräble,48.493,10.108
 Shell DE-Lehrte Niedersachsenstraße,52.360835,10.120525
 Shell DE-Leipzig Poserstraße,51.353145,12.421334
 Shell DE-Leipzig Torgauerstraße,51.3655,12.45633
 Shell DE-Lohne (Oldenburg) Von-Siemens-Straße,52.6579,8.1698,15
+Shell DE-Ludwigshafen Edigheimer Straße,49.52626,8.39855
+Shell DE-Ludwigshafen Val-Bauer-Straße,49.47907,8.42623
 Shell DE-Löffingen Studerstraße,47.8862,8.36108
 Shell DE-Lörrach Wiesentalstraße,47.624416,7.657931
 Shell DE-Lübeck Brandenbaumer Landstraße,53.85804,10.73456
 Shell DE-Lübeck Padelügger Weg,53.8562,10.6362
 Shell DE-Lüdenscheid Paulmannshoeher Straße,51.20782,7.65594
 Shell DE-Lüneburg Erbstorfer Landstraße,53.26198,10.4257
+Shell DE-Lünen Kurt-Schumacher-Straße,51.6067,7.52568
 Shell DE-Lützow Gadebuscher Straße,53.65906,11.171057
 Shell DE-Magdeburg Lunochodstraße,52.091036,11.611697
 Shell DE-Maintal Am Kreuzstein,50.146054,8.807924
@@ -20759,15 +20720,21 @@ Shell DE-Mainz An der Ochsenwiese,49.997371,8.209414
 Shell DE-Mainz Dagobertstraße,49.995284,8.28056
 Shell DE-Mainz Geschwister-Scholl-Straße,49.9806,8.2696
 Shell DE-Mainz Obere Kreuzstraße,50.01434,8.21833
+Shell DE-Mannheim Normannenstraße,49.49902,8.55693
 Shell DE-Mayen Koblenzer Straße,50.32757,7.24182
+Shell DE-Merseburg Amtshäuser Straße,51.35887,12.0176
+Shell DE-Merzig Merziger Straße,49.44197,6.62272
 Shell DE-Metzingen Maienwaldstraße,48.53218,9.27677
 Shell DE-Mildenau Gewerbegebiet Nord,50.599666,13.062688
 Shell DE-Mittenwalde Dahmestraße,52.26344,13.57168
+Shell DE-Monheim Heinrich-Hertz-Straße,51.11573,6.90597
 Shell DE-Mönchengladbach Korschenbroicher Straße,51.195097,6.451595
+Shell DE-Müllheim im Markgräflerland Schliengener Straße,47.80883,7.60618
 Shell DE-München Verdistraße,48.16515,11.46703
 Shell DE-Naumburg (Saale) Weißenfelser Straße,51.149755,11.816097
 Shell DE-Neckarsulm Kanalstraße,49.18806,9.21861
 Shell DE-Nettetal Leuther Straße,51.329475,6.211252
+Shell DE-Nettetal Steyler Straße,51.32632,6.17817
 Shell DE-Neubrandenburg Sattelplatz,53.570053,13.262006
 Shell DE-Neuenstein-Aua Im Biegen,50.912754,9.576859
 Shell DE-Neukirchen-Vluyn Inneboltstraße,51.433875,6.545475,35
@@ -20777,25 +20744,33 @@ Shell DE-Neustadt an der Weinstraße Mußbacher Landstraße,49.359249,8.151119
 Shell DE-Neuwied Berggärtenstraße,50.4434,7.46784
 Shell DE-Niendorf Schönberger Land A20,53.814735,10.878575
 Shell DE-Niendorf Schönberger Land A20,53.815758,10.878049
+Shell DE-Nürnberg Erlenstegenstraße,49.469,11.12944
 Shell DE-Nürnberg Frankenstraße,49.43093,11.10084
+Shell DE-Oberhausen Centroallee,51.48728,6.87593
 Shell DE-Oberhausen Kirchhellener Straße,51.538,6.86398
+Shell DE-Oberhausen-Rheinhausen Weiherweg,49.26593,8.47805
 Shell DE-Offenbach am Main Strahlenbergerstraße,50.10652,8.73257
 Shell DE-Offenburg Burdastraße,48.464005,7.928641
 Shell DE-Offenburg Freiburger Straße,48.475505,7.941003
 Shell DE-Oranienburg Lehnitzstraße,52.74586,13.25379
 Shell DE-Osnabrück Professor-Porsche-Straße,52.301747,7.949302
+Shell DE-Osnabrück Sutthauser Straße,52.24926,8.03747
 Shell DE-Ostfildern Felix Wankelstraße,48.713486,9.308548,30
 Shell DE-Pegau Leipziger Vorstadt,51.164861,12.264046
 Shell DE-Petershagen Mierwerder Weg,52.519062,13.769699
 Shell DE-Pinneberg Rellinger Straße,53.64822,9.82095
 Shell DE-Pirna Kirchweg,50.993139,13.910069
+Shell DE-Pirna Remscheider Straße,50.95264,13.95705
+Shell DE-Plochingen Esslinger Straße,48.7157,9.41377
 Shell DE-Potsdam Fritz-Zubeil-Straße,52.381683,13.100285
 Shell DE-Potsdam Potsdamer Straße,52.41464,13.02336
+Shell DE-Quickborn Friedrichsgaber Straße,53.7499,9.93454
 Shell DE-Rampe Cambser Straße,53.68722,11.4883
 Shell DE-Rathenow Fehrbelliner Straße,52.60776,12.3389
 Shell DE-Remscheid Neuenkamper Straße,51.17677,7.21831
 Shell DE-Remscheid Willy-Brandt-Platz,51.177717,7.201177
 Shell DE-Renningen Dornierstraße,48.78104,8.93026
+Shell DE-Rheinau-Freistett Baron-Kückh-Straße,48.66187,7.93793
 Shell DE-Rheinberg An der Neuweide,51.53544,6.60586,30
 Shell DE-Rheinberg Xantener Straße,51.556207,6.588886
 Shell DE-Rheinstetten An der B36,48.954684,8.293244
@@ -20804,45 +20779,70 @@ Shell DE-Rosbach vor der Höhe Raiffeisenstraße,50.29546,8.6859
 Shell DE-Rostock Hermannstraße,54.084464,12.134265
 Shell DE-Rostock Lorenzstraße,54.10987,12.1683
 Shell DE-Rutesheim Magarete-Steiff-Straße,48.81094,8.9272
+Shell DE-Rüsselsheim Rugbyring,49.9871,8.40237
+Shell DE-Saarbrücken Provinzialstraße,49.2051,7.05564
 Shell DE-Salzbergen Holsterfeld,52.325323,7.42935
+Shell DE-Salzgitter Kampstraße,52.14686,10.32218
+Shell DE-Salzgitter Vor dem Dorfe,52.14032,10.33574
 Shell DE-Samtens Bergener Straße,54.36164,13.30786
+Shell DE-Schleusingen Suhler Straße,50.51934,10.7544
 Shell DE-Schwarzheide Schipkauer Straße,51.28146,13.52063
 Shell DE-Schwarzheide Schipkauer Straße,51.47068,13.86845
 Shell DE-Schwerin Friedrich-Engels-Straße,53.59861,11.431833
+Shell DE-Schwielowsee Hauffstraße,52.36334,12.97203
+Shell DE-Schönefeld Wassmannsdorfer,52.36787,13.46732
 Shell DE-Schüttorf Nordring,52.328758,7.246593
 Shell DE-Seevetal Glüsinger Straße,53.417957,10.019943
 Shell DE-Sittensen Hansestraße,53.29361,9.50537
+Shell DE-Solingen Landwehr,51.13156,6.9974
 Shell DE-Speyer Dudenhofer Straße,49.318241,8.421414
 Shell DE-St. Peter-Ording Maleens Knoll,54.31634,8.60448,25
 Shell DE-St. Peter-Ording Schulstraße,54.30681,8.63652
+Shell DE-Stade Harsefelder Straße,53.58488,9.47198
 Shell DE-Steinen Gewerbestraße,47.6407,7.74658
 Shell DE-Stockach Messkircher Straße,47.85843,9.00436
 Shell DE-Stollberg Auerstraße,50.712433,12.761577
+Shell DE-Straelen Wankumer Straße,51.43224,6.27425
+Shell DE-Stuttgart Burgstallstraße,48.75568,9.1417
 Shell DE-Stuttgart Feuerbacher-Tal-Straße,48.80404,9.15482
 Shell DE-Stuttgart Industristraße,48.72315,9.12602
+Shell DE-Stuttgart Neckartalstraße,48.81925,9.22693
 Shell DE-Stuttgart Neckartalstraße,48.824935,9.219017
 Shell DE-Stuttgart Obere Weinsteige,48.75376,9.171834
 Shell DE-Stuttgart Pforzheimer Straße,48.81442,9.1239
+Shell DE-Sulzbach a.d. Murr Milchstraße,49.00442,9.50394
+Shell DE-Syke Nienburger Straße,52.91147,8.82842
 Shell DE-Templin Zehdenicker Straße,53.10342,13.47735
 Shell DE-Tuttlingen Trossinger Straße,47.98896,8.792607
+Shell DE-Ulm Blaubeurer Straße,48.40096,9.95564
 Shell DE-Unterschleißheim Münchner Ring,48.2721,11.5912
 Shell DE-Velten Rosa-Luxemburg-Straße,52.678259,13.165712
+Shell DE-Velten Rosa-Luxemburg-Straße,52.68487,13.18167
 Shell DE-Vöhringen Memminger Straße,48.276764,10.079436
 Shell DE-Waiblingen Mayenner Straße,48.825379,9.30886
+Shell DE-Waldsee Schlichtstraße,49.40527,8.43572
 Shell DE-Walzbachtal Wössinger Straße,49.01768,8.598392
 Shell DE-Waren Strelitzer Straße,53.51902,12.71677
 Shell DE-Wedemark Hessenweg,52.55275,9.77781
 Shell DE-Weida Neustädter Straße,50.777695,12.04717
 Shell DE-Weilerbach Danziger Straße,49.477217,7.63979
+Shell DE-Wendlingen Heinrich-Otto-Straße,48.67426,9.37177
 Shell DE-Westerland Trift,54.904609,8.310817
 Shell DE-Witzhave Möllner Landstraße,53.56657,10.33128
 Shell DE-Wolfhagen Warburgerstraße,51.4028,9.183616,30
 Shell DE-Wolfsburg Braunschweiger Straße,52.4005,10.75168,30
+Shell DE-Wolfsburg Braunschweiger Straße,52.41206,10.78246
 Shell DE-Wolfsburg Heinrich-Nordhoff Straße,52.42613,10.76856
+Shell DE-Wolfsburg Nordsteimker Straße,52.41767,10.8051
 Shell DE-Wunstorf Hannoversche Straße,52.426128,9.455037
+Shell DE-Wuppertal Obere Lichtenplatzer Straße,51.24882,7.1923
+Shell DE-Wuppertal Schmiedestraße,51.30812,7.2523
+Shell DE-Wörrstadt Friedrich-Ebert-Straße,49.8453,8.11277
 Shell DE-Wülfrath Hohdahlsfeld,51.300285,7.062605
 Shell DE-Würselen Hauptstraße,50.8165,6.15489
 Shell DE-Würzburg Schweinfurter Straße,49.79918,9.94646
+Shell DE-Zarrentin am Schaalsee Hauptstraße,53.55196,10.91552
+Shell DE-Zossen Stubenrauchstraße,52.2274,13.44482
 Shell DE-Ötigheim Händelstraße,48.8884,8.2443
 Shell DE-Übach-Palenberg Rörmonderstraße,50.912861,6.137814
 Shell DK-Brøndby Roskildevej,55.66906,12.4374
@@ -23433,6 +23433,7 @@ DE Kerpen Am Falder,50.88094,6.69084
 DE Kettig Alterauge GmbH,50.405837,7.472896
 DE Kiel Koppelberg,54.40264,10.16808
 DE Kiel Lubinus Clinicum,54.35285,10.11714
+DE Kirchheimbolanden Kahlenbergring,49.65786,8.00947
 DE Kißlegg Rempertshofen,47.8084,9.87838
 DE Koblenz Bardelebenstraße,50.358505,7.587261
 DE Koserow Hotel Elisabeth,54.05156,14.00066
