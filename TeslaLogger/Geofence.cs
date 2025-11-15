@@ -611,10 +611,15 @@ namespace TeslaLogger
                     Logfile.Log($"Geofence.OnlineUpdate: update! (ETag: {lastETag})");
                     using (Stream stream = response.Content.ReadAsStreamAsync().Result)
                     {
-                        using (FileStream fs = new FileStream(FileManager.GetFilePath(TLFilename.GeofenceFilename) + ".updated", FileMode.Create, FileAccess.Write, FileShare.None, 8192, useAsync: true))
+                        using (FileStream fs = new FileStream(FileManager.GetFilePath(TLFilename.GeofenceFilename) + ".updated", FileMode.Create, FileAccess.Write, FileShare.None, 8192, useAsync: false))
                         {
-                            stream.CopyToAsync(fs);
-                            fs.FlushAsync();
+                            byte[] buffer = new byte[8192];
+                            int bytesRead;
+
+                            while ((bytesRead = stream.Read(buffer, 0, buffer.Length)) > 0)
+                            {
+                                fs.Write(buffer, 0, bytesRead);
+                            }
                         }
                     }
                     Tools.DebugLog($"Geofence.updated: {new FileInfo(FileManager.GetFilePath(TLFilename.GeofenceFilename) + ".updated").Length} bytes");
