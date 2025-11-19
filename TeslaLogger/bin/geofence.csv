@@ -6681,7 +6681,7 @@ Allego DE-Chemnitz Hilbersdorfer Straße,50.84776,12.93764
 Allego DE-Coburg Niorter Straße,50.28727,10.98534
 Allego DE-Cottbus Harnischdorfer Straße,51.716093,14.336277
 Allego DE-Cottbus Vom-Stein-Straße 38,51.73459,14.336792
-Allego DE-Cremlingen Im Moorbusche 103,52.254158,10.656138
+Allego DE-Cremlingen Im Moorbusche,52.25396,10.65615
 Allego DE-Cuxhaven Papenstraße,53.85121,8.715362
 Allego DE-Dallgow-Döberitz Döberitzer Weg 3,52.531463,13.083562
 Allego DE-Darmstadt Europaplatz,49.8719,8.62586
@@ -6749,9 +6749,9 @@ Allego DE-Essen Essen-Gladbecker Straße ggü. 16,51.464622,7.009226
 Allego DE-Essen Frankenstraße 54,51.428196,7.051579
 Allego DE-Essen Freiherr-von-Stein-Straße,51.40305,7.00772
 Allego DE-Essen Frintroper Straße 444,51.475692,6.912435
-Allego DE-Essen Fritz-Schupp-Allee/Parkplatz A1,51.485113,7.044273
 Allego DE-Essen Frohnhauser Platz,51.446409,6.976862
 Allego DE-Essen Frohnhauser Straße 366,51.448426,6.963185
+Allego DE-Essen Gelsenkirchener Straße,51.48502,7.04438
 Allego DE-Essen Gerichtsstraße 13,51.473696,6.953811
 Allego DE-Essen Grashofstraße 4,51.413281,6.991194
 Allego DE-Essen Grieperstraße 1,51.461767,6.973761
@@ -7215,6 +7215,7 @@ amperio DE-Bitterfeld-Wolfen Leipziger Straße,51.663565,12.274729
 amperio DE-Braunschweig Bültenweg,52.28187,10.53726
 amperio DE-Bünde Borriesstraße,52.206753,8.584826
 amperio DE-Cham Badstraße,49.220704,12.669799
+amperio DE-Düren Kreuzauer Straße,50.77058,6.49198
 amperio DE-Engelskirchen Albertsthal,50.986861,7.389502
 amperio DE-Eschborn Praunheimer Straße,50.140735,8.578049
 amperio DE-Filderstadt Gottlieb-Manz-Straße,48.685164,9.215359
@@ -10326,7 +10327,6 @@ eLoaded DE-Neusäß Richard-Wagner-Straße,48.3897,10.83564
 eLoaded DE-Ulm Magirus-Deutz-Straße,48.3984,9.95808,70
 eLoaded DE-Zusmarshausen Am Innovationspark,48.407,10.59997,99
 
-Elocity PL-Bytom Konstytucji,50.3542,18.8761
 Elocity PL-Proszenie 1B,51.46094,19.78156
 Elocity PL-Siemianowice Śląskie Elizy Orzeszkowej,50.320105,19.010029
 Elocity PL-Warszawa Aleja Krakowska,52.17339,20.93957
@@ -12898,6 +12898,7 @@ ESWE DE-Wiesbaden Mainzer Straße,50.060553,8.254324
 ESWE DE-Wiesbaden Scharnhorststraße,50.0805,8.22606
 ESWE DE-Wiesbaden Siegfriedring,50.06073,8.26812
 ESWE DE-Wiesbaden Warmer Damm,50.08353,8.24501
+ESWE DE-Wiesbaden Wilfried-Ries-Straße,50.1023,8.19127
 
 etecnic ES-Amposta Avinguda Alcalde Palau,40.71241,0.57919
 etecnic ES-Calafell Ctra. Sanatori,41.1897,1.56753
@@ -14316,6 +14317,7 @@ EXP HU-Budapest Alkotmány u.,47.507498,19.050478
 
 eze DE-Berlin Brentanostraße,52.4646,13.309
 eze DE-Frankfurt am Main Luxemburgerallee,50.119729,8.711134
+eze DE-Hamburg Mittelweg,53.57307,9.9939
 eze DE-Stuttgart Liststraße,48.76381,9.17615
 eze DE-Stuttgart Salzäckerstraße,48.725108,9.152714
 
@@ -14586,6 +14588,7 @@ Fortum NO-Stavanger Dalsetveien,58.93358,5.73966
 Fortum SE-Karlskoga Norra Viaduktgatan,59.32518,14.52661,20
 
 Fraport DE-Frankfurt am Main Ladepark Terminal 1,50.04982,8.56167
+Fraport DE-Frankfurt am Main Parkhaus Terminal 1,50.0508,8.56686
 
 Fraunhofer DE-Berlin Gustav-Meyer-Allee,52.541473,13.385278
 Fraunhofer DE-Berlin Pascalstraße,52.523217,13.323841
@@ -15005,7 +15008,6 @@ GreenWay PL-Poznań Torowa,52.36853,16.9882
 GreenWay PL-Promna-Kolonia E77,51.69861,20.929
 GreenWay PL-Przyłęk,52.33899,16.10809
 GreenWay PL-Płońsk Dalanówek,52.58943,20.45227
-GreenWay PL-Radomsko Portowa,51.084151,19.379532
 GreenWay PL-Rogów Opolski Posiłek,50.523265,17.918112
 GreenWay PL-Ryki Warszawska,51.63974,21.91308
 GreenWay PL-Sieradz Wojska Polskiego,51.59701,18.72545
@@ -15477,6 +15479,7 @@ incharge GR-Αριστερα A/D Korinthou Tripoleos,37.8627,22.84217
 infra-fürth DE-Fürth Am Grünen Weg,49.484,10.94937
 infra-fürth DE-Fürth Europaallee,49.453,11.00065,30
 infra-fürth DE-Fürth Fronmüllerstraße,49.45872,11.00136
+infra-fürth DE-Fürth Hintere Straße,49.49244,10.94087
 infra-fürth DE-Fürth Kurt-Scherzer-Straße,49.46827,10.95847
 infra-fürth DE-Fürth Leyher Straße,49.46002,11.0092
 infra-fürth DE-Fürth Moststraße,49.47295,10.9922
@@ -16122,6 +16125,8 @@ Ionity HU-Balatonkeresztúr,46.68544,17.37948,30
 Ionity HU-Bábolna (dir. Budapest),47.680553,17.976528
 Ionity HU-Kajászó (dir. Balaton),47.307602,18.744217
 Ionity HU-Kecskemét Felsőcsalános tanya,46.8885,19.60394
+Ionity HU-Mezőkeresztes Geleji pihenő,47.8427,20.7451,25
+Ionity HU-Mezőkeresztes Geleji pihenő,47.8431,20.7418,25
 Ionity HU-Szigetszentmiklós,47.380371,19.055785
 Ionity IE-Athlone,53.400721,-7.827948
 Ionity IE-Cashel,52.50884,-7.87441
@@ -17915,7 +17920,7 @@ Lidl HU-Budapest Pesti út,47.48459,19.229407
 Lidl HU-Budapest Üllői út,47.446502,19.170256
 Lidl HU-Békéscsaba,46.670835,21.106397
 Lidl HU-Debrecen Derék utca,47.52529,21.59766
-Lidl HU-Eger Rákóczi Ferenc utca,47.92543,20.36861
+Lidl HU-Eger Rákóczi Ferenc utca,47.92543,20.3686,25
 Lidl HU-Nyíregyháza,47.969311,21.737894
 Lidl HU-Pécs,46.071135,18.205811
 Lidl HU-Siófok Zamárdi u.,46.90013,18.0285
@@ -18149,6 +18154,7 @@ MENNEKES DE-Aurich Hoheberger Weg,53.47972,7.5194
 MENNEKES DE-Aurich Hoheberger Weg,53.57451,8.08942
 MENNEKES DE-Bad Karlshafen Kurpromenade,51.64673,9.45703
 MENNEKES DE-Dietzhölztal Hauptstraße,50.836391,8.305669,43
+MENNEKES DE-Düsseldorf Kleiner Torfbruch,51.1994,6.88598
 MENNEKES DE-Hallstadt Michelinstraße,49.92353,10.89014
 MENNEKES DE-Hallstadt Michelinstraße,49.92418,10.89017
 MENNEKES DE-Kirchhundem Industriestraße,51.038666,7.997107
@@ -18298,6 +18304,7 @@ Mer DE-Roding Jahnstraße,49.19814,12.51743
 Mer DE-Rötz Bräumeisterweg,49.34001,12.535231
 Mer DE-Schönefeld Am Rondell,52.36765,13.5588
 Mer DE-Sengenthal Schlierfer Holz,49.22485,11.45632
+Mer DE-Simbach am Inn Münchner Straße,48.26083,13.00742
 Mer DE-Sindelfingen Hanns-Martin-Schleyer-Straße,48.70028,9.00603
 Mer DE-Straubing Donaugasse,48.88545,12.57574
 Mer DE-Tank- und Rastanlage Marienborn,52.21504,11.07967
@@ -18399,7 +18406,9 @@ Mobiliti HU-Budapest Hunyadi János utca,47.43517,19.03919
 Mobiliti HU-Budapest Pala utca,47.50099,19.03996
 Mobiliti HU-Budaörs Sport u.,47.45404,18.94302
 Mobiliti HU-Bük Európa út,47.38445,16.78345
+Mobiliti HU-Eger Rákóczi út,47.92552,20.36946,25
 Mobiliti HU-Libás Strand Keszthely,46.7649,17.2658
+Mobiliti HU-Mezőkeresztes Geleji pihenő,47.84182,20.74432,25
 Mobiliti HU-Sopron Révai Miklós utca,47.69407,16.578
 Mobiliti HU-Szombathely Hollán Ernő utca,47.23032,16.61786
 Mobiliti HU-Székesfehérvár M7 autópálya,47.17743,18.4763
@@ -18609,6 +18618,9 @@ MOVE CH-Zollikon Rotfluhstrasse,47.33831,8.57662
 MOVE CH-Zürich Allmendstrasse,47.34013,8.51943
 MOVE CH-Zürich Huttenstrasse,47.3793,8.55251
 
+MOYA PL-Bytom Konstytucji,50.3542,18.8761
+MOYA PL-Podlas Trasa Bohaterów Bitwy Warszawskiej,51.73577,20.2306
+MOYA PL-Radomsko Portowa,51.08415,19.37953
 MOYA PL-Suwałki Poddubówek,54.047425,22.888365
 
 msu DE-Hasselfelde Blauvogel,51.67625,10.83572
@@ -19205,6 +19217,8 @@ Partino CH-Baden Im Graben,47.47198,8.30879
 
 PC-TANK LU-Grevenmacher Copal,49.676433,6.427323
 PC-TANK LU-Niederanven Route de Trèves,49.643667,6.220377
+
+Penny HU-Győr Szabadrév u.,47.70007,17.64142
 
 Petro-Canada CA-Gatineau QC Mnt Paiement,45.48985,-75.67584
 
@@ -21683,6 +21697,7 @@ SWSZ DE-Zella-Mehlis Hollandsmühle,50.66646,10.68415
 SWSZ DE-Zella-Mehlis Talstraße,50.65668,10.65838
 
 SWU DE-Blaubeuren Ulmer Straße,48.40923,9.78906
+SWU DE-Blaustein Lise-Meitner-Straße,48.42057,9.9355
 SWU DE-Neu-Ulm Glacis Galerie,48.393879,10.003906
 SWU DE-Neu-Ulm Maximilianstraße,48.396345,10.001586
 SWU DE-Ulm Albert-Einstein-Allee,48.42245,9.94695
@@ -22841,6 +22856,7 @@ westenergie DE-Essen Kupferdreher Straße,51.39412,7.08314
 westenergie DE-Freudenberg Zum Kurpark,50.898648,7.875615
 westenergie DE-Holzwickede Kirchstraße,51.49896,7.61831,25
 westenergie DE-Mayschoß Eurodeplatz,50.51709,7.01987
+westenergie DE-Niederzier Am Mühlenteich,50.8757,6.42
 westenergie DE-Niederzier Breite Straße,50.88467,6.46367
 westenergie DE-Osnabrück Goethering,52.27425,8.05568
 westenergie DE-Quakenbrück Markt,52.67589,7.95732
@@ -23480,6 +23496,7 @@ DE München Novotel City Arnulfpark,48.14552,11.53908
 DE München Otto-Hahn-Ring,48.09183,11.64876
 DE München Pariser Straße,48.127388,11.598612,60
 DE München Wacker Chemie,48.12366,11.6055
+DE Neu-Ulm Insel,48.39625,9.9989
 DE Neuhaus Bahnstraße,49.82756,10.9239
 DE Neumünster Steenkoppel,54.0468,9.95665
 DE Neuss An der Skihalle,51.17069,6.649,20
@@ -23527,6 +23544,7 @@ DE Schipkau Lausitzring,51.53347,13.92388
 DE Schliersee Die Kuh am See,47.71126,11.86701
 DE Schwarzheide Naundorfer Straße,51.47129,13.87011
 DE Schwerin Dreescher Werkstätten,53.56426,11.38108
+DE Schwäbisch Hall Optima,49.1142,9.78874
 DE Schöneck IFA Hotel,50.38921,12.34454
 DE Seesen Hotel Zum Alten Fritz,51.8894,10.16723
 DE Sexau maxon motor,48.09012,7.89528
@@ -23600,6 +23618,7 @@ HR Pula Max City,44.86114,13.82345
 HR Punat Falkensteiner Hotel Park,45.02029,14.62807
 HR Viškovci Ul. Grobljanska,45.34562,18.43044
 HU Budapest Gizella utca,47.50983,19.0995
+HU Budapest Kempinski Hotel Corvinus,47.49693,19.05196
 HU Budapest Omega,47.46799,19.16747,60
 HU Bük Park Hotel Bükfürdő,47.37853,16.78599
 HU Kecskemét Four Points by Sheraton,46.89802,19.67362
