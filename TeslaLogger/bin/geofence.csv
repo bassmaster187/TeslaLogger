@@ -7418,6 +7418,7 @@ ARAL DE-Konstanz Opelstraße,47.6758,9.15276
 ARAL DE-Kressbronn am Bodensee Linderhof,47.6076,9.5868
 ARAL DE-Köln Am Verteilerkreis,50.89209,6.96649,25
 ARAL DE-Königs Wusterhausen Robert-Guthmann-Straße,52.31449,13.66345
+ARAL DE-Königsbrunn Messerschmittring,48.2555,10.87443
 ARAL DE-Königslutter Autohof,52.311549,10.823469
 ARAL DE-Könnern,51.69016,11.767012
 ARAL DE-Ladbergen,52.146616,7.735806
@@ -12608,6 +12609,7 @@ Energie-Burgenland AT-Gols Hauptplatz,47.898,16.90799
 Energie-Burgenland AT-Güssing Europastraße,47.080799,16.319972
 Energie-Burgenland AT-Güssing Grazerstraße,47.049267,16.321636
 Energie-Burgenland AT-Jennersdorf Technologiepark,46.93741,16.14894
+Energie-Burgenland AT-Lutzmannsburg Thermenstraße,47.46572,16.65758
 Energie-Burgenland AT-Markt Allhau Industrieweg,47.27679,16.08671
 Energie-Burgenland AT-Neusiedl am See Seegelände,47.92979,16.83728
 Energie-Burgenland AT-Oberwart Europastraße,47.288,16.18658
@@ -12951,6 +12953,7 @@ EVBox FR-Vendays-Montalivet Avenue de l’Europe,45.34798,-1.1494
 EVBox IT-St. Vigilio Corso Lanz,46.7006,11.92962
 EVBox NL-Enschede Strootsweg,52.22154,6.83426
 EVBox NL-Hoofddorp Taurus Avenue,52.28694,4.70725
+EVBox NL-Scherpenzeel Industrielaan,52.083,5.4762
 EVBox NL-Vriezenveen De Zuivering,52.40457,6.63523
 EVBox NO-Nordli Doktor Brønns vei,64.4632,13.59228
 
@@ -16978,6 +16981,7 @@ LEW DE-Günzburg Siemensstraße,48.45992,10.27983
 LEW DE-Herrsching Am Ländtbogen,47.989992,11.171137
 LEW DE-Jengen,48.003413,10.721623
 LEW DE-Krumbach,48.245095,10.361661,10
+LEW DE-Königsbrunn Heimgartenstraße,48.26842,10.88766
 LEW DE-Landsberg am Lech Sandauer Straße,48.05452,10.87695
 LEW DE-Pfaffenhausen,48.120746,10.457604
 LEW DE-Pforzen,47.933544,10.607971
@@ -17773,7 +17777,7 @@ Lidl DE-Teltow Oderstraße,52.40108,13.24754
 Lidl DE-Tinnum,54.901206,8.329495
 Lidl DE-Torgau Warschauer Straße 9B,51.558911,12.990818
 Lidl DE-Triberg Nußbacher Straße 2,48.138028,8.240732
-Lidl DE-Troisdorf Frankfurter Straße 93,50.813746,7.175793
+Lidl DE-Troisdorf Frankfurter Straße,50.81348,7.17613
 Lidl DE-Tönisvorst,51.319875,6.504465,10
 Lidl DE-Türkheim Merowingerstraße,48.055522,10.633209
 Lidl DE-Ubstadt-Weiher Ubstadter Straße 34,49.171632,8.618013
@@ -17821,7 +17825,7 @@ Lidl DE-Wolgast Chausseestraße,54.050158,13.76777
 Lidl DE-Worpswede Osterweder Straße,53.22679,8.92874,25
 Lidl DE-Wuppertal Am Diek 105,51.286386,7.229402
 Lidl DE-Wuppertal Bissingstraße,51.233322,7.0759
-Lidl DE-Wuppertal Nevigeser Straße 170,51.274403,7.122577
+Lidl DE-Wuppertal Nevigeser Straße,51.27457,7.12356
 Lidl DE-Wuppertal Otto-Hausmann-Ring,51.2573,7.1078
 Lidl DE-Wurster Nordseeküste Oderstraße 2-4,53.777589,8.6126
 Lidl DE-Wörth am Rhein Kühgrunddamm 2,49.040866,8.288019
@@ -18072,6 +18076,7 @@ M-Charge CH-Davos Promenade,46.80155,9.83283
 M-Charge CH-Dietikon Bernstrasse,47.38439,8.39585
 M-Charge CH-Füllinsdorf Schönthal Einkaufszentrum,47.50298,7.72508
 M-Charge CH-Gretzenbach Oltnerstrasse,47.35979,7.98954
+M-Charge CH-Huttwil Bernstrasse,47.11363,7.84024
 M-Charge CH-Interlaken Lindenallee,46.68827,7.87685
 M-Charge CH-Konolfingen Thunstrasse,46.8762,7.62082
 M-Charge CH-La Chaux-de-Fonds Rue Daniel-Jeanrichard,47.10027,6.82698
@@ -18796,6 +18801,7 @@ Neste FI-Lapinlahti Kuopiontie,63.348083,27.413686
 
 NEW-Energie DE-Erkelenz-Ost Alfred-Wirth-Straße,51.07953,6.33352
 NEW-Energie DE-Mönchengladbach-Nord Kaldenkirchener Straße,51.2259,6.43064
+NEW-Energie DE-Viersen Heidweg,51.28635,6.3623
 NEW-Energie DE-Viersen Kreisarchiv,51.25342,6.353129
 
 NewMotion HU-Vecsés Ferihegyi repülőtérre vezető út,47.417512,19.254757
@@ -19704,6 +19710,8 @@ PiteEnergi SE-Piteå Västra Kajvägen,65.31615,21.45845
 
 PitPoint FR-Marseille Esp. de la Tourette,43.2977,5.36413
 PitPoint FR-Wittenheim Rue de Soultz,47.80996,7.31343,30
+
+PKP PL-Wrocław Marszałka Józefa Piłsudskiego,51.09902,17.03853
 
 Plan-Net-solar SI-Ljubljana Celovška cesta,46.09948,14.45996
 
@@ -21198,6 +21206,7 @@ SW-am-See DE-Friedrichshafen Eckenerstraße,47.65254,9.4846
 SW-am-See DE-Friedrichshafen Karlstraße,47.650315,9.478475
 SW-am-See DE-Friedrichshafen Kornblumenstraße,47.66812,9.48806
 SW-Annaberg-Buchholz DE-Bärenstein Sächsischer Platz,50.49862,13.0281
+SW-Aschaffenburg DE-Aschaffenburg Neue Glattbacher Straße,49.98592,9.15096
 SW-Augsburg DE-Augsburg Am Schwall,48.364907,10.903411
 SW-Augsburg DE-Augsburg Augsburger Straße,48.363827,10.874827
 SW-Augsburg DE-Augsburg Friedberger Straße,48.355436,10.948743
@@ -21626,6 +21635,7 @@ swisscharge CH-Thyon Rte de Thyon,46.18192,7.37222
 swisscharge CH-Turbenthal St. Gallerstrasse,47.43509,8.85069
 swisscharge CH-Täsch Kantonstrasse,46.069563,7.776482
 swisscharge CH-Volketswil Grabenwisstrasse,47.38327,8.6694
+swisscharge CH-Volketswil Industriestrasse,47.38204,8.66955
 swisscharge CH-Wallisellen Neue Winterthurerstrasse,47.408937,8.594655,40
 swisscharge CH-Weinfelden Dufourstrasse,47.56737,9.08987
 swisscharge CH-Wettingen Zentralstrasse,47.46364,8.32551
