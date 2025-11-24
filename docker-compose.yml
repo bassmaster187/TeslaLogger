@@ -108,7 +108,7 @@ services:
       
   # watchtower updates label "teslalogger-stack" only
   watchtower:
-    image: containrrr/watchtower
+    image: nickfedor/watchtower:latest
     container_name: teslalogger-watchtower
     restart: always
     volumes:
