@@ -1,4 +1,4 @@
-﻿using MySql.Data.MySqlClient;
+using MySql.Data.MySqlClient;
 using MySqlX.XDevAPI.Relational;
 using Npgsql;
 using System;
@@ -22,30 +22,97 @@ namespace Teslamate_Import
         static void Main(string[] args)
         {
             Tools.Log(0, "***** Teslamate Import " + System.Reflection.Assembly.GetExecutingAssembly().GetName().Version + " Started *****");
+            
+            var importModes = new HashSet<string>(args, StringComparer.OrdinalIgnoreCase);
+
+            if (importModes.Count == 0)
+            {
+                DisplayHelp();
+                return;
+            }
+
             try
             {
-                Tools.Log(0,"Teslamate DB:" + pgConnectionString);
-                Tools.Log(0,"Teslalogger DB:" + DBConnectionstring);
+                bool importAll = importModes.Contains("--all");
+
+                if (importAll)
+                {
+                    Tools.Log(0, "Running all imports based on --all flag.");
+                }
+                else
+                {
+                    Tools.Log(0, "Running specified imports: " + string.Join(", ", args));
+                }
+
+                Tools.Log(0, "Teslamate DB:" + pgConnectionString);
+                Tools.Log(0, "Teslalogger DB:" + DBConnectionstring);
 
                 AlterTables();
 
                 firstTeslaloggerData = GetFirstTeslaloggerData();
                 Tools.Log(0, "First Teslalogger Data: " + firstTeslaloggerData.ToString());
 
-                CopyPositions();
-                CopyTrips();
-                CopyCharging();
-                CopyChargingStates();
-                CopyCarVersion();
-                CopyGeofence();
+                if (importAll || importModes.Contains("--positions"))
+                {
+                    CopyPositions();
+                }
+
+                if (importAll || importModes.Contains("--trips"))
+                {
+                    CopyTrips();
+                }
+
+                if (importAll || importModes.Contains("--charging"))
+                {
+                    CopyCharging();
+                    CopyChargingStates();
+                }
+
+                if (importAll || importModes.Contains("--car-version"))
+                {
+                    CopyCarVersion();
+                }
+
+                if (importAll || importModes.Contains("--states"))
+                {
+                    CopyStates();
+                }
+
+                if (importAll || importModes.Contains("--tpms"))
+                {
+                    CopyTPMS();
+                }
+
+                if (importAll || importModes.Contains("--geofence"))
+                {
+                    CopyGeofence();
+                }
             }
             catch (Exception ex)
             {
-                Tools.Log(0,ex.ToString());
+                Tools.Log(0, ex.ToString());
             }
 
             Tools.Log(0, "***** Teslamate Import " + System.Reflection.Assembly.GetExecutingAssembly().GetName().Version + " Finish *****");
         }
+
+        private static void DisplayHelp()
+        {
+            Console.WriteLine("Teslamate-Import Usage:");
+            Console.WriteLine("  Teslamate-Import.exe [mode]");
+            Console.WriteLine();
+            Console.WriteLine("Modes:");
+            Console.WriteLine("  --all            Imports all available data (positions, trips, charging, etc.).");
+            Console.WriteLine("  --positions      Imports only position data.");
+            Console.WriteLine("  --trips          Imports only trip data.");
+            Console.WriteLine("  --charging       Imports charging sessions and detailed charging data.");
+            Console.WriteLine("  --car-version    Imports car software version history.");
+            Console.WriteLine("  --states         Imports vehicle state history (online, asleep, etc.).");
+            Console.WriteLine("  --tpms           Imports tire pressure data.");
+            Console.WriteLine("  --geofence       Imports geofence locations to geofence-private.csv.");
+            Console.WriteLine();
+        }
+
 
         private static void CopyTrips()
         {
@@ -68,8 +135,8 @@ namespace Teslamate_Import
                             {
                                 id = (int)dr["id"];
 
-                                using (var cmdTL = new MySqlCommand(@"INSERT INTO drivestate (StartDate, StartPos, EndDate, EndPos, outside_temp_avg, speed_max, power_max, power_min, power_avg, import, CarID) 
-                                    VALUES(@StartDate, @StartPos, @EndDate, @EndPos, @outside_temp_avg, @speed_max, @power_max, @power_min, @power_avg, 3, @CarID);", conTL))
+                                using (var cmdTL = new MySqlCommand(@"INSERT INTO drivestate (StartDate, StartPos, EndDate, EndPos, outside_temp_avg, speed_max, power_max, power_min, power_avg, import, CarID, meters_up, meters_down) 
+                                    VALUES(@StartDate, @StartPos, @EndDate, @EndPos, @outside_temp_avg, @speed_max, @power_max, @power_min, @power_avg, 3, @CarID, @meters_up, @meters_down);", conTL))
                                 {
                                     int carid = Convert.ToInt32(dr["Car_ID"]);
 
@@ -96,6 +163,10 @@ namespace Teslamate_Import
                                     cmdTL.Parameters.AddWithValue("@power_avg", GetPowerAVGfromPos(StartPosId, EndPosId));
 
                                     cmdTL.Parameters.AddWithValue("@CarID", carid);
+
+                                    cmdTL.Parameters.AddWithValue("@meters_up", dr["ascent"]);
+                                    cmdTL.Parameters.AddWithValue("@meters_down", dr["descent"]);
+
                                     cmdTL.ExecuteNonQuery();
                                 }
 
@@ -166,6 +237,158 @@ namespace Teslamate_Import
             }
         }
 
+        private static void CopyStates()
+        {
+            ExecuteNonQuery(@"delete from state where import = 3");
+
+            int id = 0;
+
+            using (var con = new NpgsqlConnection(pgConnectionString))
+            {
+                con.Open();
+                using (NpgsqlCommand cmd = new NpgsqlCommand("select * from states order by id", con))
+                {
+                    using (var conTL = new MySqlConnection(DBConnectionstring))
+                    {
+                        conTL.Open();
+                        NpgsqlDataReader dr = cmd.ExecuteReader();
+                        while (dr.Read())
+                        {
+                            try
+                            {
+                                id = (int)dr["id"];
+
+                                using (var cmdTL = new MySqlCommand(@"INSERT INTO state (StartDate, EndDate, state, StartPos, EndPos, CarID, import) 
+                                    VALUES(@StartDate, @EndDate, @state, @StartPos, @EndPos, @CarID, 3);", conTL))
+                                {
+                                    int carid = Convert.ToInt32(dr["car_id"]);
+
+                                    DateTime Date = (DateTime)dr["start_date"];
+                                    if (Date >= firstTeslaloggerData)
+                                    {
+                                        Tools.Log(id, "First Teslalogger Data reached. Import skipped!");
+                                        break;
+                                    }
+                                    
+                                    cmdTL.Parameters.AddWithValue("@StartDate", dr["start_date"]);
+                                    cmdTL.Parameters.AddWithValue("@EndDate", dr["end_date"]);
+                                    cmdTL.Parameters.AddWithValue("@state", dr["state"]);
+                                    
+                                    int? StartPosId = GetPosId(dr["start_date"] as DateTime?, carid);
+                                    int? EndPosId = GetPosId(dr["end_date"] as DateTime?, carid);
+
+                                    cmdTL.Parameters.AddWithValue("@StartPos", StartPosId);
+                                    cmdTL.Parameters.AddWithValue("@EndPos", EndPosId);
+                                    
+                                    cmdTL.Parameters.AddWithValue("@CarID", carid);
+                                    cmdTL.ExecuteNonQuery();
+                                }
+
+                                if (id % 100 == 0)
+                                {
+                                    Tools.Log(id, "State " + dr["start_date"].ToString());
+                                }
+                            }
+                            catch (Exception ex)
+                            {
+                                Tools.Log(id, "State " + ex.ToString());
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        private static void CopyTPMS()
+        {
+            ExecuteNonQuery(@"delete from TPMS where import = 3");
+
+            int id = 0;
+
+            using (var con = new NpgsqlConnection(pgConnectionString))
+            {
+                con.Open();
+                using (NpgsqlCommand cmd = new NpgsqlCommand("select id, date, car_id, tpms_pressure_fl, tpms_pressure_fr, tpms_pressure_rl, tpms_pressure_rr from positions where tpms_pressure_fl is not null or tpms_pressure_fr is not null or tpms_pressure_rl is not null or tpms_pressure_rr is not null order by id", con))
+                {
+                    cmd.CommandTimeout = 600;
+                    using (var conTL = new MySqlConnection(DBConnectionstring))
+                    {
+                        conTL.Open();
+                        NpgsqlDataReader dr = cmd.ExecuteReader();
+                        while (dr.Read())
+                        {
+                            try
+                            {
+                                id = (int)dr["id"];
+                                int carid = Convert.ToInt32(dr["car_id"]);
+                                DateTime Date = (DateTime)dr["date"];
+
+                                if (Date >= firstTeslaloggerData)
+                                {
+                                    Tools.Log(id, "First Teslalogger Data reached. Import skipped!");
+                                    break;
+                                }
+
+                                // FL
+                                if (dr["tpms_pressure_fl"] != DBNull.Value)
+                                {
+                                    using (var cmdTL = new MySqlCommand(@"INSERT INTO TPMS (CarId, Datum, TireId, Pressure, import) VALUES (@CarId, @Datum, 0, @Pressure, 3) ON DUPLICATE KEY UPDATE Pressure = VALUES(Pressure);", conTL))
+                                    {
+                                        cmdTL.Parameters.AddWithValue("@CarId", carid);
+                                        cmdTL.Parameters.AddWithValue("@Datum", Date);
+                                        cmdTL.Parameters.AddWithValue("@Pressure", dr["tpms_pressure_fl"]);
+                                        cmdTL.ExecuteNonQuery();
+                                    }
+                                }
+                                // FR
+                                if (dr["tpms_pressure_fr"] != DBNull.Value)
+                                {
+                                    using (var cmdTL = new MySqlCommand(@"INSERT INTO TPMS (CarId, Datum, TireId, Pressure, import) VALUES (@CarId, @Datum, 1, @Pressure, 3) ON DUPLICATE KEY UPDATE Pressure = VALUES(Pressure);", conTL))
+                                    {
+                                        cmdTL.Parameters.AddWithValue("@CarId", carid);
+                                        cmdTL.Parameters.AddWithValue("@Datum", Date);
+                                        cmdTL.Parameters.AddWithValue("@Pressure", dr["tpms_pressure_fr"]);
+                                        cmdTL.ExecuteNonQuery();
+                                    }
+                                }
+                                // RL
+                                if (dr["tpms_pressure_rl"] != DBNull.Value)
+                                {
+                                    using (var cmdTL = new MySqlCommand(@"INSERT INTO TPMS (CarId, Datum, TireId, Pressure, import) VALUES (@CarId, @Datum, 2, @Pressure, 3) ON DUPLICATE KEY UPDATE Pressure = VALUES(Pressure);", conTL))
+                                    {
+                                        cmdTL.Parameters.AddWithValue("@CarId", carid);
+                                        cmdTL.Parameters.AddWithValue("@Datum", Date);
+                                        cmdTL.Parameters.AddWithValue("@Pressure", dr["tpms_pressure_rl"]);
+                                        cmdTL.ExecuteNonQuery();
+                                    }
+                                }
+                                // RR
+                                if (dr["tpms_pressure_rr"] != DBNull.Value)
+                                {
+                                    using (var cmdTL = new MySqlCommand(@"INSERT INTO TPMS (CarId, Datum, TireId, Pressure, import) VALUES (@CarId, @Datum, 3, @Pressure, 3) ON DUPLICATE KEY UPDATE Pressure = VALUES(Pressure);", conTL))
+                                    {
+                                        cmdTL.Parameters.AddWithValue("@CarId", carid);
+                                        cmdTL.Parameters.AddWithValue("@Datum", Date);
+                                        cmdTL.Parameters.AddWithValue("@Pressure", dr["tpms_pressure_rr"]);
+                                        cmdTL.ExecuteNonQuery();
+                                    }
+                                }
+
+                                if (id % 500 == 0)
+                                {
+                                    Tools.Log(id, "TPMS " + Date.ToString());
+                                }
+                            }
+                            catch (Exception ex)
+                            {
+                                Tools.Log(id, "TPMS " + ex.ToString());
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
         private static decimal GetPowerAVGfromPos(int? startPosId, int? endPosId)
         {
             using (var conTL = new MySqlConnection(DBConnectionstring))
@@ -204,8 +427,8 @@ namespace Teslamate_Import
                             {
                                 id = (int)dr["id"];
 
-                                using (var cmdTL = new MySqlCommand(@"INSERT INTO chargingstate (StartDate, EndDate, UnplugDate, Pos, charge_energy_added, StartChargingID, EndChargingID, conn_charge_cable, fast_charger_brand, fast_charger_type, fast_charger_present, import, max_charger_power, cost_total, cost_per_session, CarID) 
-                                VALUES(@StartDate, @EndDate, @UnplugDate, @Pos, @charge_energy_added, @StartChargingID, @EndChargingID, @conn_charge_cable, @fast_charger_brand, @fast_charger_type, @fast_charger_present, 3, @max_charger_power, @cost_total, @cost_per_session, @CarID);", conTL))
+                                using (var cmdTL = new MySqlCommand(@"INSERT INTO chargingstate (StartDate, EndDate, UnplugDate, Pos, charge_energy_added, StartChargingID, EndChargingID, conn_charge_cable, fast_charger_brand, fast_charger_type, fast_charger_present, import, max_charger_power, CarID, cost_kwh_meter_invoice, cost_per_kwh) 
+                                VALUES(@StartDate, @EndDate, @UnplugDate, @Pos, @charge_energy_added, @StartChargingID, @EndChargingID, @conn_charge_cable, @fast_charger_brand, @fast_charger_type, @fast_charger_present, 3, @max_charger_power, @CarID, @cost_kwh_meter_invoice, @cost_per_kwh);", conTL))
                                 {
                                     int carid = Convert.ToInt32(dr["Car_ID"]);
 
@@ -237,10 +460,45 @@ namespace Teslamate_Import
 
                                     cmdTL.Parameters.AddWithValue("@max_charger_power", GetMaxChargerPower(StartId, EndId));
 
-                                    cmdTL.Parameters.AddWithValue("@cost_total", dr["cost"]);
-                                    cmdTL.Parameters.AddWithValue("@cost_per_session", dr["cost"]);
-
                                     cmdTL.Parameters.AddWithValue("@CarID", dr["Car_ID"]);
+                                    cmdTL.Parameters.AddWithValue("@cost_kwh_meter_invoice", dr["charge_energy_used"]);
+                                    
+                                    decimal? costPerKwh = null;
+                                    int? geofenceId = dr["geofence_id"] as int?;
+                                    costPerKwh = GetCostPerUnitFromGeofence(geofenceId);
+
+                                    if (costPerKwh == null)
+                                    {
+                                        decimal? cost = dr["cost"] as decimal?;
+                                        if (cost.HasValue && cost > 0)
+                                        {
+                                            decimal? chargeEnergyUsed = dr["charge_energy_used"] as decimal?;
+                                            if (chargeEnergyUsed.HasValue && chargeEnergyUsed > 0)
+                                            {
+                                                costPerKwh = cost / chargeEnergyUsed;
+                                            if (costPerKwh.HasValue)
+                                            {
+                                                costPerKwh = Math.Round(costPerKwh.Value, 2, MidpointRounding.AwayFromZero);
+                                            }
+                                            
+                                            }
+                                            else
+                                            {
+                                                decimal? chargeEnergyAdded = dr["charge_energy_added"] as decimal?;
+                                                if (chargeEnergyAdded.HasValue && chargeEnergyAdded > 0)
+                                                {
+                                                    costPerKwh = cost / chargeEnergyAdded;
+                                                if (costPerKwh.HasValue)
+                                                {
+                                                    costPerKwh = Math.Round(costPerKwh.Value, 2, MidpointRounding.AwayFromZero);
+                                                }
+                                                }
+                                            }
+                                        }
+                                    }
+
+                                    cmdTL.Parameters.AddWithValue("@cost_per_kwh", costPerKwh ?? 0);
+
                                     cmdTL.ExecuteNonQuery();
                                 }
 
@@ -258,6 +516,29 @@ namespace Teslamate_Import
                 }
             }
         }
+
+        private static decimal? GetCostPerUnitFromGeofence(int? geofenceId)
+        {
+            if (geofenceId == null)
+                return null;
+
+            using (var con = new NpgsqlConnection(pgConnectionString))
+            {
+                con.Open();
+                using (NpgsqlCommand cmd = new NpgsqlCommand("SELECT cost_per_unit FROM geofences WHERE id = @id", con))
+                {
+                    cmd.Parameters.AddWithValue("@id", geofenceId);
+                    object result = cmd.ExecuteScalar();
+                    if (result != null && result != DBNull.Value)
+                    {
+                        return Convert.ToDecimal(result);
+                    }
+                }
+            }
+
+            return null;
+        }
+
 
         private static double GetMaxChargerPower(int startId, int endId)
         {
@@ -597,7 +878,7 @@ namespace Teslamate_Import
 
         private static void AlterTables()
         {
-            String[] tables = new String[] { "car_version", "charging", "chargingstate", "drivestate", "pos", "state" };
+            String[] tables = new String[] { "car_version", "charging", "chargingstate", "drivestate", "pos", "state", "TPMS" };
             foreach (var table in tables)
             {
                 try
