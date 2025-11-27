@@ -1,12 +1,12 @@
 {
     "position": 2.5,
-    "label": "Tutorial",
+    "label": "Installation",
     "collapsible": true,
     "collapsed": false,
     "className": "red",
     "link": {
       "type": "generated-index",
-      "title": "Tutorial overview"
+      "title": "Installation"
     },
     "customProps": {
       "description": "This description can be used in the swizzled DocCard"
