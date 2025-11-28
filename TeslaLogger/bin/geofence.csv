@@ -5413,7 +5413,7 @@ Supercharger US-Riverview FL,27.79129,-82.33292
 Supercharger-V3 US-Riverview FL - Highway 301 South,27.85865,-82.32695
 Supercharger-V3 US-Roanoke VA,37.29937,-79.89395
 Supercharger US-Robbinsdale MN,45.020419,-93.327556
-Supercharger US-Robbinsville NJ,40.194296,-74.594546
+Supercharger US-Robbinsville NJ,40.1941,-74.59536
 Supercharger-V3 US-Robertsdale AL,30.6336,-87.6756
 Supercharger-V3 US-Rochelle IL,41.916855,-89.068768
 Supercharger US-Rochester MN,44.006249,-92.470914
@@ -7852,6 +7852,7 @@ Berliner-SW DE-Berlin Elsenstraße,52.4853,13.44923
 Berliner-SW DE-Berlin Friedrichstraße,52.51122,13.38952
 Berliner-SW DE-Berlin Markgrafendamm,52.49863,13.4654
 Berliner-SW DE-Berlin Potsdamer Platz,52.51,13.3757
+Berliner-SW DE-Berlin Schlüterstraße,52.50568,13.31752
 Berliner-SW DE-Berlin Schöneberger Straße,52.46425,13.3301,30
 Berliner-SW DE-Berlin Tile-Brügge-Weg,52.5916,13.29266
 Berliner-SW DE-Berlin Wansdorfer Platz,52.55774,13.20596
@@ -9258,6 +9259,7 @@ Duferco IT-Vado Ligure Via Trieste,44.26627,8.43146
 
 e-con DE-Buchloe Neue Mitte,48.03518,10.71952
 e-con DE-Isny Am Bühlberg,47.70359,10.04971
+e-con DE-Memmingen Zeissweg,47.96655,10.18286
 e-con DE-Nesselwang Füssener Straße,47.62031,10.5068
 e-con DE-Sonthofen Rudolf-Diesel-Straße,47.52355,10.26885
 e-con DE-Sulzberg Kemptener Straße,47.66286,10.34527
@@ -12622,6 +12624,8 @@ Energie-Burgenland AT-Markt Allhau Industrieweg,47.27679,16.08671
 Energie-Burgenland AT-Neusiedl am See Seegelände,47.92979,16.83728
 Energie-Burgenland AT-Oberwart Europastraße,47.288,16.18658
 Energie-Burgenland AT-Steinberg-Dörfl Burgenland Straße,47.489749,16.494049
+
+Energie-Graz DE-Graz Schützenhofgasse,47.06908,15.45915
 
 Energie-Klagenfurt AT-Klagenfurt 8.-Mai-Straße,46.62319,14.3072
 
@@ -21156,6 +21160,7 @@ Stark DE-Scharbeutz Bormwiese,54.05472,10.73083
 
 stations-e FR-Draveil Rue Ferdinand Buisson,48.67351,2.40768
 Stations-e FR-Orcières Rue des Ecrins,44.69695,6.32294
+Stations-e FR-Saverne Rue de la Gare,48.74336,7.3605
 
 STAWAG DE-Aachen Am Kraftversorgungsturm,50.78875,6.1117
 STAWAG DE-Aachen Annastraße,50.772714,6.080673
@@ -21433,6 +21438,7 @@ SW-Landshut DE-Landshut Isargestade,48.53986,12.15252
 SW-Langen DE-Langen Liebigstraße,49.994277,8.65773
 SW-Lauf DE-Lauf an der Pegnitz Eckertstraße,49.50715,11.28489
 SW-LB DE-Ludwigsburg Brenzstraße,48.892324,9.182775
+SW-LB DE-Ludwigsburg Karl-Haußmann-Straße,48.88928,9.16427
 SW-LE DE-Leinfelden-Echterdingen Häuserwiesenstraße,48.704338,9.118296
 SW-Leipzig DE-Leipzig Am Sportforum,51.34374,12.353
 SW-Leipzig DE-Leipzig Bornaische Straße,51.29683,12.385
@@ -23499,6 +23505,8 @@ DE Mainz Malakoff-Passage,49.9965,8.28127
 DE Mannheim Hans-Thoma-Straße,49.47432,8.52856
 DE Mannheim Sandhofer Straße,49.53383,8.47422
 DE Mannheim SV Seckenheim,49.46796,8.5573
+DE Marsberg KRAFTWERK,51.45467,8.83673
+DE Meerbusch KYOCERA,51.2854,6.61067
 DE Melle Hageböke,52.176211,8.367606
 DE Memmingen Spielarcaden,47.99888,10.15428,30
 DE Messe Galerie Fulda,50.5398,9.6379,175
