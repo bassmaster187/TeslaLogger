@@ -1,4 +1,6 @@
+Supercharger-V4 AE-Abu Dhabi,24.48695,54.35777
 Supercharger-V4 AE-Abu Dhabi Tesla Center,24.50805,54.59213
+Supercharger-V4 AE-Dubai Silicon Oasis,25.1142,55.38794
 
 Supercharger-V4 AT-Amstetten,48.13232,14.84104
 Supercharger-V4 AT-Ansfelden,48.195342,14.249553
@@ -31,7 +33,7 @@ Supercharger AT-Lermoos,47.395975,10.887217
 Supercharger AT-Liezen,47.55937,14.252606
 Supercharger-V4 AT-Linz,48.322309,14.290139
 Supercharger-V4 AT-Meggenhofen,48.18346,13.78649
-Supercharger-V4 AT-Melk,48.214,15.34837
+Supercharger-V4 AT-Melk,48.21438,15.34943
 Supercharger-V3 AT-Niederndorf,47.648995,12.197759
 Supercharger-V4 AT-Parndorf,47.979209,16.844067,30
 Supercharger-V4 AT-Pasching-PlusCity,48.244939,14.234211
@@ -207,7 +209,7 @@ Supercharger-V3 BE-Zaventem,50.869908,4.502047
 
 Supercharger BG-Plovdiv,42.14452,24.76887
 Supercharger-V3 BG-Sofia,42.65777,23.313598
-Supercharger-V4 BG-Sofia Bulgaria Mall,42.66414,23.28866
+Supercharger-V4 BG-Sofia София Bulgaria Mall,42.66414,23.28866
 
 Supercharger CA-Abbotsford BC - Mount Lehman Road Supercharger,49.059056,-122.377021
 Supercharger CA-Aulac NB,45.871352,-64.280378
@@ -2185,7 +2187,7 @@ Supercharger-V3 DE-Wernberg-Köblitz,49.53217,12.13505,30
 Supercharger-V4 DE-Wertheim,49.77084,9.5759
 Supercharger-V3 DE-Wertheim-Almosenberg,49.772295,9.587571
 Supercharger-V3 DE-Wertheim-Almosenberg,49.772417,9.58423
-Supercharger-V4 DE-Werther,51.48677,10.74383
+Supercharger-V4 DE-Werther,51.48627,10.74315
 Supercharger-V4 DE-Wesel (Globus),51.6629,6.66488
 Supercharger-V3 DE-Wetzlar,50.55282,8.53276,35
 Supercharger-V4 DE-Weyarn,47.86531,11.79069,60
@@ -2340,6 +2342,7 @@ Supercharger-V4 ES-Mallorca,39.63303,2.73329
 Supercharger ES-Manzanares,39.006325,-3.383318
 Supercharger-V4 ES-Marbella East,36.49539,-4.77634
 Supercharger-V4 ES-Marmolejo,38.0289,-4.16625
+Supercharger-V4 ES-Merida Autovia Ruta de la Plata,38.85914,-6.3643
 Supercharger-V4 ES-Monesterio,38.08435,-6.25729
 Supercharger ES-Murcia,38.038172,-1.149343
 Supercharger-V4 ES-Málaga,36.654784,-4.480178
@@ -2407,6 +2410,7 @@ Supercharger-V3 FI-Kajaani,64.22304,27.7389
 Supercharger-V3 FI-Karesuvanto,68.450226,22.4814
 Supercharger-V4 FI-Keminmaa,65.79995,24.50417,30
 Supercharger-V3 FI-Kempele,64.901803,25.535398
+Supercharger-V4 FI-Kesälahti,61.90494,29.81244
 Supercharger FI-Kokkola,63.829282,23.148487
 Supercharger-V3 FI-Kuopio,62.820695,27.607985
 Supercharger-V4 FI-Kuopio IKEA,62.8238,27.60816
@@ -2416,6 +2420,7 @@ Supercharger-V3 FI-Lappeenranta,61.052624,28.261424
 Supercharger-V3 FI-Levi,67.785892,24.818396
 Supercharger-V3 FI-Lohja,60.29249,24.06216
 Supercharger-V3 FI-Mikkeli,61.688444,27.280711
+Supercharger-V4 FI-Mäntsälä,60.6251,25.29016
 Supercharger FI-Paimio,60.442961,22.605621
 Supercharger-V3 FI-Pello,66.80876,23.99627,20
 Supercharger-V4 FI-Pori,61.49468,21.798
@@ -2553,7 +2558,7 @@ Supercharger-V4 FR-Dieppe,49.905637,1.078212
 Supercharger-V3 FR-Dijon,47.271754,5.043424
 Supercharger-V3 FR-Dinan,48.444752,-2.068308
 Supercharger-V4 FR-Domancy,45.91063,6.6575
-Supercharger-V4 FR-Dreux,48.747839,1.362707
+Supercharger-V4 FR-Dreux,48.7496,1.35074
 Supercharger-V3 FR-Dunkerque,51.00515,2.28115,40
 Supercharger-V3 FR-Englos,50.629871,2.970873
 Supercharger FR-Eurotunnel Flexiplus Lounge,50.929973,1.813182
@@ -2840,6 +2845,7 @@ Supercharger-V4 GB-London Colliers Wood,51.4133,-0.17535
 Supercharger-V3 GB-London Gateway,51.63036,-0.26354
 Supercharger GB-London North Greenwich,51.50245,-0.00175
 Supercharger-V3 GB-London Sidcup,51.4128,0.13426
+Supercharger-V4 GB-London Waddon,51.3717,-0.11685
 Supercharger-V4 GB-London Wellington Rd,42.93384,-81.2229
 Supercharger GB-London-Brent Cross,51.57753,-0.223753
 Supercharger GB-London-Canary Wharf,51.504346,-0.016146
@@ -2915,7 +2921,6 @@ Supercharger-V3 GB-Trentham,52.96302,-2.196439
 Supercharger-V3 GB-Trumpington,52.16824,0.109177
 Supercharger-V4 GB-Tyndrum,56.43844,-4.710994
 Supercharger GB-Uxbridge,51.54567,-0.47437
-Supercharger-V4 GB-Waddon,51.371687,-0.116853
 Supercharger-V4 GB-Wallasey,53.412539,-3.073522
 Supercharger GB-Warrington,53.339515,-2.569358
 Supercharger GB-Warwick Northbound,52.216118,-1.504695
@@ -3025,6 +3030,7 @@ Supercharger-V3 IT-Brescia,45.53229,10.16487
 Supercharger-V4 IT-Brescia East,45.507582,10.226131
 Supercharger-V3 IT-Bressanone,46.75903,11.63837,40
 Supercharger-V3 IT-Brindisi,40.619822,17.902674
+Supercharger-V4 IT-Busto Arsizio,45.63453,8.83602
 Supercharger IT-Campogalliano,44.686638,10.851342
 Supercharger IT-Carsoli Oricola,42.08216,13.06037
 Supercharger-V3 IT-Casalecchio di Reno,44.483936,11.268521
@@ -3541,6 +3547,7 @@ Supercharger-V3 NO-Karasjok,69.471888,25.509338
 Supercharger-V3 NO-Kautokeino,69.020412,23.048909
 Supercharger-V3 NO-Kløfta,60.079517,11.149442
 Supercharger-V3 NO-Kristiansand,58.177107,8.135951
+Supercharger-V4 NO-Kristiansand Sydinga by Max Burger,58.18865,8.15498
 Supercharger-V4 NO-Kristiansund,63.12109,7.74136
 Supercharger-V4 NO-Krokstad,59.75784,9.99325
 Supercharger NO-Lampeland,59.836224,9.579221
@@ -3567,6 +3574,7 @@ Supercharger-V4 NO-Mo i Rana,66.3061,14.15112
 Supercharger NO-Mo i Rana,66.307489,14.152152
 Supercharger-V3 NO-Molde,62.73935,7.1998,30
 Supercharger NO-Mosjøen,65.834836,13.191673
+Supercharger-V4 NO-Mosjøen Halsøysenteret,65.8626,13.1977
 Supercharger NO-Mosjøen North,65.841941,13.188447,35
 Supercharger-V4 NO-Moss Kambo,59.46353,10.6887
 Supercharger NO-Narvik,68.436983,17.426014
@@ -3915,6 +3923,7 @@ Supercharger-V3 SK-Košice,48.695151,21.235604
 Supercharger-V3 SK-Trenčín,48.8643,18.022992,30
 Supercharger SK-Zvolen,48.6274,19.10354,30
 
+Supercharger-V4 TR-Afyonkarahisar Asiye Sultan Blv.,38.7547,30.55634
 Supercharger-V3 TR-Akhisar,38.930236,27.703596
 Supercharger-V3 TR-Ankara,39.949583,32.832923
 Supercharger-V4 TR-Beylikdüzü İstanbul,41.01997,28.62815
@@ -6475,6 +6484,7 @@ Aldi DE-Raubling Friedrich-Fuckel-Straße,47.791528,12.113111
 Aldi DE-Rauenberg Frankenäcker,49.27325,8.69579,13
 Aldi DE-Regensburg Johann-Hösl-Straße,48.99457,12.11154
 Aldi DE-Rehlingen Im Dürrfeldslach,49.372306,6.68625
+Aldi DE-Reichshof Falkenweg,50.94155,7.74992
 Aldi DE-Reiskirchen,50.598204,8.824546,20
 Aldi DE-Remseck am Neckar Neckaraue,48.88777,9.27235
 Aldi DE-Reutlingen Föhrstraße,48.502283,9.207886,20
@@ -6520,7 +6530,7 @@ Aldi DE-Tübingen Wohlboldstraße,48.500428,9.054183
 Aldi DE-Ulm,48.400669,9.971991
 Aldi DE-Undenheim Staatsrat-Schwamb-Straße,49.841307,8.239378
 Aldi DE-Unkel Am Hohen Weg,50.594556,7.217889
-Aldi DE-Unterhaching,48.059676,11.633342,20
+Aldi DE-Unterhaching Kirchlandweg,48.05966,11.63335
 Aldi DE-Unterschleißheim Carl-von-Linde-Straße,48.28225,11.568417
 Aldi DE-Vellmar Zum Feldlager,51.3522,9.4671
 Aldi DE-Waldbronn Talstraße,48.930056,8.4738
@@ -7396,6 +7406,7 @@ ARAL DE-Freiburg im Breisgau Engesserstraße,48.01914,7.84286
 ARAL DE-Freisen Baumholderstraße,49.5546,7.25614
 ARAL DE-Fritzlar Gießener Straße,51.12054,9.27854
 ARAL DE-Fürstenwalde/Spree Friedenstraße,52.33575,14.07316
+ARAL DE-Fürstenzell Doktorweg,48.52384,13.31837
 ARAL DE-Garching bei München Schleißheimer Straße,48.25052,11.6068
 ARAL DE-Gau-Algesheim Rheinstraße,49.96462,8.0177
 ARAL DE-Geesthacht Geesthachter Straße,53.43983,10.3658
@@ -18281,6 +18292,7 @@ Mer DE-Genthin Geschwister-Scholl-Straße,52.4086,12.16215
 Mer DE-Grammow Raststätte Lindholz,54.054634,12.630382
 Mer DE-Herrenberg Daimlerstraße,48.60211,8.87012
 Mer DE-Herrenberg Ohmstraße,48.58151,8.89322
+Mer DE-Hofheim am Taunus Am Wandersmann,50.0596,8.37336
 Mer DE-Höchstadt Fürther Straße,49.69597,10.80375
 Mer DE-Ingolstadt Bahnhofstraße,48.74542,11.43614
 Mer DE-Kaarst Hans-Dietrich-Genscher-Straße,51.21175,6.6395
@@ -21530,7 +21542,8 @@ SW-Roth DE-Roth Willy-Supf-Platz,49.2488,11.09008
 SW-Rüsselsheim DE-Rüsselsheim am Main Am Sommerdamm,50.001808,8.42508
 SW-Saarlouis DE-Saarlouis Vaubanstraße,49.31447,6.74353
 SW-Schwarzenberg DE-Schwarzenberg Straße der Einheit,50.547186,12.787756
-SW-Schwerte DE-Schwerte Hörder Straße,51.46426,7.55803
+SW-Schwerte DE-Schwerte Hörder Straße,51.4641,7.55826,20
+SW-Schwerte DE-Schwerte Waldstraße,51.464,7.55893,20
 SW-SH DE-Schleswig Am Fabrikhof,54.51098,9.5843
 SW-SH DE-Schleswig Lattenkamp,54.530127,9.529554
 SW-Soest DE-Ense Schlotweg,51.50952,7.99751
