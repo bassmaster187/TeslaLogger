@@ -4066,6 +4066,7 @@ Supercharger-V3 US-Beavercreek OH,39.775871,-84.075844
 Supercharger-V3 US-Beaverton OR,45.501107,-122.809638
 Supercharger-V3 US-Bee Cave TX,30.30525,-97.941571
 Supercharger-V3 US-Bel Air MD,39.56919,-76.35363
+Supercharger-V4 US-Bel Air MD Tobin Xing,39.48897,-76.25627
 Supercharger-V3 US-Belgrade MT,45.77317,-111.198921
 Supercharger-V3 US-Bell CA - 4416 Gage Avenue,33.977815,-118.188883
 Supercharger US-Bellefonte PA,40.913553,-77.737799
@@ -8378,6 +8379,7 @@ CircleK BE-Kalken E17,51.0705,3.91987
 CircleK BE-Kalken E17,51.07132,3.92131
 CircleK CA-South Lancaster ON County Rd 2,45.13459,-74.49369
 CircleK DE-Autohof Alsfeld Pfefferhöhe,50.73306,9.24198,30
+CircleK DE-Autohof Leuna,51.26892,11.97765
 CircleK DE-Autohof Tennenlohe,49.54523,11.03028
 CircleK DE-Bad Hersfeld Carl-Benz-Straße,50.8582,9.72247
 CircleK DE-Berlin Heerstraße,52.516789,13.179936
@@ -8510,8 +8512,6 @@ Circuit-électrique CA-Trois-Pistoles QC Rte 132,48.10599,-69.20825
 Circuit-électrique CA-Trois-Rivières QC Rue Vachon,46.36964,-72.55564
 Circuit-électrique CA-Val-d’Or QC Trans-Canada Hwy,48.07222,-77.38275
 Circuit-électrique CA-Yamachiche QC Rte Ste Anne,46.26185,-72.87645,15
-
-CirkleK DE-Autohof Leuna,51.26892,11.97765
 
 City-Concept DE-Leipzig Elsterstraße,51.34026,12.3645
 
@@ -10183,7 +10183,7 @@ ElectriEase IT-Lignano Sabbiadoro Viale Europa,45.689271,13.13277
 
 Electrify-America US-Auburn Southbridge St,42.20223,-71.838
 Electrify-America US-Battle Mountain NV W Front St,40.648148,-116.942909
-Electrify-America US-Bridgeport Main St,38.255155,-119.232015
+Electrify-America US-Bridgeport CA Main St,38.25516,-119.23202
 Electrify-America US-Bridgewater NJ Promenade Blvd,40.56189,-74.55378
 Electrify-America US-Cedar City UT S Providence Center Dr,37.65477,-113.086737
 Electrify-America US-Cheektowaga NY Walden Ave,42.90934,-78.74461
@@ -10197,6 +10197,7 @@ Electrify-America US-Genoa OH Blue Heron Service Plaza,41.491074,-83.366741,15
 Electrify-America US-Genoa OH Wyandot Service Plaza,41.489613,-83.370481,15
 Electrify-America US-Glenwood Springs CO W Meadows,39.55609,-107.34478
 Electrify-America US-Grand Junction CO Independent Ave,39.08233,-108.58331
+Electrify-America US-Hyattsville MD East-West Hwy,38.9686,-76.95432
 Electrify-America US-King of Prussia PA N Gulph Rd,40.08564,-75.38862
 Electrify-America US-Lincoln NE 110 NW 20th Street,40.814286,-96.749142
 Electrify-America US-Livermore CA Holmes St,37.66114,-121.78095
@@ -10207,7 +10208,7 @@ Electrify-America US-Milpitas CA Milpitas Square,37.4229,-121.91826
 Electrify-America US-Moorestown NJ Nixon Dr,39.93885,-74.96448
 Electrify-America US-North Platte NE S Dewey St,41.12047,-100.75946
 Electrify-America US-Ogallala NE Pony Express Ln,41.11276,-101.71856
-Electrify-America US-Pleasanton Johnson Dr,37.70109,-121.91811
+Electrify-America US-Pleasanton CA Johnson Dr,37.7011,-121.9181
 Electrify-America US-Plymouth Meeting PA W Germantown Pike,40.11699,-75.27937
 Electrify-America US-Pompton Plains NJ Route 23 North,40.96869,-74.28467
 Electrify-America US-Rocky Hill CT Silas Deane Hwy,41.67497,-72.6502
@@ -13422,7 +13423,7 @@ EWE-GO DE-Butjadingen Strandallee,53.581733,8.37335
 EWE-GO DE-Butjadingen-Tossens Nordseeallee,53.576541,8.249842
 EWE-GO DE-Butzbach Griedeler Straße,50.43585,8.68087
 EWE-GO DE-Buxtehude Lüneburger Schanze,53.4618,9.69557
-EWE-GO DE-Bösel Bahnhof Straße,53.00481,7.952996
+EWE-GO DE-Bösel Bahnhofstraße,53.0048,7.95297
 EWE-GO DE-Bückeburg Kreuzbreite,52.26567,9.07128
 EWE-GO DE-Büdelsdorf Am Ahlmannkai,54.3094,9.66411
 EWE-GO DE-Bünde Blankensteinstraße,52.197517,8.567737
@@ -18758,6 +18759,7 @@ naturenergie DE-Feldberg (Schwarzwald) Feldbergstraße,47.868403,8.09578
 naturenergie DE-Gottmadingen Bahnhofstraße,47.735763,8.775906
 naturenergie DE-Hartheim am Rhein Schulstraße,47.933903,7.630829
 naturenergie DE-Immendingen Schwarzwaldstraße,47.9349,8.719447
+naturenergie DE-Konstanz Bücklestraße,47.67733,9.16818
 naturenergie DE-Konstanz Maybachstraße,47.677233,9.151265
 naturenergie DE-Laufenburg Stadtweg,47.564897,8.07737
 naturenergie DE-Löffingen Obere Hauptstraße,47.8851,8.351578
@@ -19002,6 +19004,7 @@ OK DK-Hurup Thy Bredgade,56.74983,8.4218
 OK DK-Hvide Sande Parallelvej,56.01775,8.1238
 OK DK-Højby Stationsvej,55.90937,11.60065
 OK DK-Juelsminde Rousthøjs Alle,55.70952,10.0102
+OK DK-Langeskov Hvedetoften,55.35218,10.56403
 OK DK-Løkken Industrivej,57.37333,9.72812,15
 OK DK-Løkken Jyllandsgade,57.36906,9.71458
 OK DK-Malling Bredgade,56.04013,10.19327
@@ -21334,6 +21337,7 @@ SW-Düsseldorf DE-Düsseldorf Kreuzstraße,51.22168,6.783
 SW-Düsseldorf DE-Düsseldorf Lippestraße,51.21578,6.75865
 SW-Düsseldorf DE-Düsseldorf Mercedesstraße,51.252518,6.793809
 SW-Düsseldorf DE-Düsseldorf Pariser Straße,51.2317,6.73477
+SW-Düsseldorf DE-Düsseldorf Schloßparkstraße,51.16296,6.86697
 SW-Düsseldorf DE-Düsseldorf Schloßstraße,51.24258,6.78986
 SW-Düsseldorf DE-Düsseldorf Südring,51.200067,6.768847
 SW-Elmshorn DE-Elmshorn Ernst-Abbe-Straße,53.744336,9.699227
@@ -21647,6 +21651,7 @@ swisscharge CH-Herisau Industriestrasse,47.38114,9.27745
 swisscharge CH-Hinwil Gossauerstrasse,47.29897,8.83834
 swisscharge CH-Höri Wehntalerstrasse,47.50919,8.51281
 swisscharge CH-Kerzers Bahnhofplatz,46.97416,7.193385
+swisscharge CH-Kloten Flughafen Zürich Parkhaus P6,47.45265,8.56597
 swisscharge CH-Landquart Tardisstrasse,46.96057,9.55465
 swisscharge CH-Lauerz Husmatt,47.035831,8.579183
 swisscharge CH-Lupfig Hauserstrasse,47.449639,8.215266
