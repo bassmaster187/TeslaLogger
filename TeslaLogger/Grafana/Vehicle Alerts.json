@@ -18,7 +18,6 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 42,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -85,6 +84,16 @@
               {
                 "id": "displayName",
                 "value": "Name"
+              },
+              {
+                "id": "links",
+                "value": [
+                  {
+                    "targetBlank": true,
+                    "title": "",
+                    "url": "https://tesware.net/alerts/model3/${__data.fields.Name}"
+                  }
+                ]
               }
             ]
           },
@@ -322,6 +331,6 @@
   "timezone": "",
   "title": "Fahrzeug Fehler",
   "uid": "d188aada-81cf-475b-82e3-7c87795ea3e5",
-  "version": 18,
+  "version": 19,
   "weekStart": ""
 }
