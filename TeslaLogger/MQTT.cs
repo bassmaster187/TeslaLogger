@@ -13,6 +13,8 @@ using Org.BouncyCastle.Utilities.Encoders;
 using System.Web;
 using static uPLibrary.Networking.M2Mqtt.MqttClient;
 using System.Security.Cryptography.X509Certificates;
+using uPLibrary.Networking.M2Mqtt.Exceptions;
+using System.Net.Sockets;
 
 namespace TeslaLogger
 {
@@ -441,6 +443,30 @@ namespace TeslaLogger
                 connecting = false;
                 System.Threading.Thread.Sleep(60000);
 
+            }
+            catch (MqttConnectionException cex)
+            {
+                if (cex.InnerException is SocketException se)
+                {
+                    if (se.ErrorCode == 10060)
+                    {
+                        Logfile.Log("MQTT: Connection Error: Connection timed out");
+                        connecting = false;
+                        System.Threading.Thread.Sleep(60000);
+                        return false;
+                    }
+                    else if (se.ErrorCode == 10061)
+                    {
+                        Logfile.Log("MQTT: Connection Error: Connection refused");
+                        connecting = false;
+                        System.Threading.Thread.Sleep(60000);
+                        return false;
+                    }
+                }
+
+                Logfile.Log("MQTT: ConnectionCheck Exeption: " + cex.ToString());
+                connecting = false;
+                System.Threading.Thread.Sleep(60000);
             }
             catch (Exception ex)
             {

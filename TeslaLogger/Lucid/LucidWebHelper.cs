@@ -150,6 +150,7 @@ namespace TeslaLoggerNET8.Lucid
             if (!string.IsNullOrEmpty(error))
             {
                 lastNewData = DateTime.UtcNow.AddMinutes(1);
+                car.Log("LucidAPIError: " + error);
                 return;
             }
 
