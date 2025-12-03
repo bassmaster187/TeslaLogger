@@ -78,7 +78,7 @@ select.newJourney {width: 500px;}
 
                 { "render": function(data, type, row, meta){
                     if(type === 'display'){
-                        return GetGrafanaLink(row, "RG_DxSmgk", row["name"], "&var-Charger=ON");
+                        return GetGrafanaLink(row, "c424c390-1abf-43ab-80df-9931c487ea8d", row["name"], "&var-Charger=ON");
                     }
 
                     return row["name"];
