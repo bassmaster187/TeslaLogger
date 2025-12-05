@@ -1820,7 +1820,7 @@ Supercharger-V4 CZ-Praha Štěrboholy,50.07136,14.54087
 Supercharger-V4 CZ-Vestec,49.99022,14.49048,60
 Supercharger-V4 CZ-Čestlice,50.00247,14.57338
 
-Supercharger-V4 DE-Aachen Tivoli,50.79633,6.10506
+Supercharger-V4 DE-Aachen Tivoli,50.7967,6.10364
 Supercharger-V4 DE-Achern,48.64145,8.03749
 Supercharger-V4 DE Achim-Ost,53.018479,9.07028
 Supercharger-V4 DE-Aichstetten,47.88056,10.04004,65
@@ -1886,7 +1886,6 @@ Supercharger-V3 DE-Denkendorf,48.707,9.306556
 Supercharger-V4 DE-Denkendorf in Bayern,48.9342,11.46544
 Supercharger-V4 DE-Dettelbach,49.77883,10.06864
 Supercharger-V4 DE-Dietmannsried,47.811457,10.303146,28
-Supercharger-V4 DE-Dorfen,48.25917,12.15832
 Supercharger-V4 DE-Dormagen,51.09335,6.80953
 Supercharger-V4 DE-Dortmund-Nord,51.530488,7.471507
 Supercharger-V4 DE-Dresden Elbepark,51.08535,13.6936,30
@@ -2150,7 +2149,6 @@ Supercharger-V3 DE Sittensen,53.287441,9.508025,40
 Supercharger-V4 DE-Soest,51.5669,8.1304
 Supercharger-V3 DE Solingen,51.130189,6.995972
 Supercharger-V3 DE-Soltau-Ost,52.9834,9.925491,40
-Supercharger-V4 DE-Staßfurt,51.89702,11.6919
 Supercharger-V4 DE-Stralsund,54.302,13.09609
 Supercharger-V4 DE Stuckenborstel,53.116895,9.204895
 Supercharger-V4 DE-Stuttgart-Weilimdorf,48.8217,9.0927
@@ -5060,8 +5058,8 @@ Supercharger US-Milford CT Boston Post Road,41.23809,-73.03619
 Supercharger-V3 US-Mill Hall PA (No Amenities),41.02523,-77.52444
 Supercharger-V3 US-Millen GA,32.803669,-81.948534
 Supercharger US-Milpitas CA,37.434845,-121.891405
-Supercharger US-Milpitas CA - Great Mall,37.413524,-121.898362
 Supercharger-V3 US-Milpitas CA - South Abbott Avenue,37.425363,-121.914536
+Supercharger US-Milpitas CA Great Mall Dr,37.41327,-121.89785,25
 Supercharger US-Miner MO,36.89355,-89.53404
 Supercharger-V3 US-Minneapolis MN,45.004669,-93.228356
 Supercharger-V3 US-Minnetonka MN,44.970401,-93.447213
@@ -6214,6 +6212,7 @@ Aldi DE-Bad Camberg Beuerbacher Landstraße,50.29626,8.25414
 Aldi DE-Bad Dürrheim Carl-Friedrich-Benz-Straße,48.03221,8.52767
 Aldi DE-Bad Homburg Justus-von-Liebig-Straße,50.219156,8.614675
 Aldi DE-Bad Kissingen Im Lindes,50.183117,10.076449
+Aldi DE-Bad Kreuznach Schwabenheimer Weg,49.84827,7.88593
 Aldi DE-Bad Münstereifel Trierer Straße,50.549227,6.762653
 Aldi DE-Bad Nauheim Hubert-Vergölst-Straße,50.3625,8.75657
 Aldi DE-Bad Neustadt an der Saale Borsigstraße,50.33289,10.2285
@@ -7129,6 +7128,7 @@ Allego NL-Hengelo Bornsestraat,52.28699,6.77462,20
 Allego NL-Hoorn Westfriese Parkweg,52.65111,5.03843,12
 Allego NL-Leiderdorp Persant Snoepweg,52.16095,4.54955,20
 Allego NL-Lisse Clusiusstraat,52.266,4.55718
+Allego NL-Lisse Mendeldreef,52.26538,4.55384
 Allego NL-Meerkerk,51.89981,4.98278,12
 Allego NL-Nieuwegein Waterliniedok A27,52.01124,5.12244
 Allego NL-Paukenweg Middelburg,51.48,3.6368,15
@@ -7305,6 +7305,7 @@ ARAL DE-Autohof Bad Hersfeld,50.8625,9.72245
 ARAL DE-Autohof Bensheim,49.67298,8.5968
 ARAL DE-Autohof Beselich,50.46828,8.13836
 ARAL DE-Autohof Beselich,50.4689,8.1369
+ARAL DE-Autohof Brumby,51.8963,11.692
 ARAL DE-Autohof Dachsberg,50.6478,7.33438,12
 ARAL DE-Autohof Geseke,51.59753,8.51556,30
 ARAL DE-Autohof Herrieden,49.25872,10.5015,25
@@ -7609,7 +7610,6 @@ ARAL DE-Sittensen Stader Straße,53.2888,9.50743
 ARAL DE-Soltau Gottlieb-Daimler-Straße,52.9969,9.92123
 ARAL DE-Sprockhövel Wittener Straße,51.3404,7.28974
 ARAL DE-Stadtallendorf Daimler-Straße,50.83488,9.037868
-ARAL DE-Staßfurt Am Heidfuchsberg,51.896302,11.692
 ARAL DE-Steinsfeld Baukreativstraße,49.44486,10.2506
 ARAL DE-Stendal Arneburger Straße,52.61696,11.86844
 ARAL DE-Straubing Aiterhofener Straße,48.87277,12.63085
@@ -7883,6 +7883,7 @@ Bidirex DE-Auggen An der Sonnberghalle,47.79103,7.59245
 Blink BE-Antwerpen Luchtbal Noorderlaan,51.26346,4.41887
 Blink BE-Eupen Am Stadthaus,50.63238,6.02806
 Blink GB-Gateshead Hollinside Rd,54.95871,-1.67422,15
+Blink US-Ephrata PA Long Ave,40.20475,-76.15506
 Blink US-Salt Lake City UT S 300 W,40.73144,-111.90179
 
 Bluecharge PT-Loulé Av. Algarve,37.10202,-7.99971
@@ -10181,6 +10182,7 @@ Electric55 FR-Grimaud D559,43.27965,6.57762
 ElectriEase IT-Area di servizio Bettole di Novi Est,44.7604,8.83855
 ElectriEase IT-Lignano Sabbiadoro Viale Europa,45.689271,13.13277
 
+Electrify-America US-Albany NY Washington Ave Ext,42.69452,-73.84832
 Electrify-America US-Auburn Southbridge St,42.20223,-71.838
 Electrify-America US-Battle Mountain NV W Front St,40.648148,-116.942909
 Electrify-America US-Bridgeport CA Main St,38.25516,-119.23202
@@ -10203,6 +10205,7 @@ Electrify-America US-Lincoln NE 110 NW 20th Street,40.814286,-96.749142
 Electrify-America US-Livermore CA Holmes St,37.66114,-121.78095
 Electrify-America US-Marlborough MA Boston Post Rd W,42.33831,-71.58996
 Electrify-America US-Mesquite NV Pioneer Blvd,36.8065,-114.10701
+Electrify-America US-Milpitas CA Great Mall Dr,37.41362,-121.89817,25
 Electrify-America US-Milpitas CA Milpitas Square,37.42224,-121.91788
 Electrify-America US-Milpitas CA Milpitas Square,37.4229,-121.91826
 Electrify-America US-Moorestown NJ Nixon Dr,39.93885,-74.96448
@@ -10256,6 +10259,7 @@ electrip IT-Rho Via Castelli Fiorenza,45.52648,9.04572
 Elektro-Keßler DE-Kißlegg Dürren,47.7301,9.88056,28
 
 Elektrum LT-Kaunas Islandijos pl.,54.93426,23.9657
+Elektrum LT-Klaipėda Dvaro g.,55.719,21.2941
 Elektrum LV-Liepāja Jūras iela,56.51114,21.00933
 Elektrum LV-Lubāna Tilta iela,56.9024,26.72048
 
@@ -10884,6 +10888,7 @@ EnBW DE-Elztal Nord,50.266916,7.224769
 EnBW DE-Elztal Süd,50.265633,7.227239
 EnBW DE-Emerkingen Bachstraße,48.216755,9.65799
 EnBW DE-Emmendingen Schwarzwaldstraße,48.11688,7.8505
+EnBW DE-Empfingen Im Auchtert,48.38593,8.72005
 EnBW DE-Ems-Vechte Ost,52.52832,7.199853
 EnBW DE-Ems-Vechte-West,52.527915,7.196439,10
 EnBW DE-Emstek Süd-Allee,52.81372,8.19392
@@ -11010,6 +11015,7 @@ EnBW DE-Gammertingen Norma,48.246655,9.222877
 EnBW DE-Ganderkesee Hasbruch Nord,53.055795,8.501284
 EnBW DE-Ganderkesee Hasbruch Süd,53.054386,8.50156
 EnBW DE-Garbsen Nord-West-Zentrum,52.42547,9.59616
+EnBW DE-Garching an der Alz Am Binderfeld,48.12526,12.57323
 EnBW DE-Gardelegen,52.515686,11.401561
 EnBW DE-Gau-Bickelheim Rheinhessenblick,49.83532,7.9975,15
 EnBW DE-Gebhardshain,50.749648,7.822524
@@ -15491,8 +15497,11 @@ illwerke-vkw DE-Scheidegg Zollstraße,47.58031,9.8454
 im2 ES-Benitachell Polígono Pp Cds Encinas,38.71743,0.16928
 
 Inbalance LT-Daugėliškiai A1,55.22744,23.54653
+Inbalance LT-Kaunas Partizanų g.,54.92957,23.97882
 Inbalance LT-Paliūnė A1,55.22306,23.55755
+Inbalance LT-Pikelių A1,55.4646,22.68514
 Inbalance LT-Pūstelninkai A6,55.1271,24.40353
+Inbalance LT-Velžiai Ežero g.,55.7735,23.6653
 
 incharge GR-Argostoli Αργοστόλι G. Gaitanidi,38.1639,20.4968
 incharge GR-Episkopiko Επισκοπικό A5,39.5451,20.85247
@@ -17455,12 +17464,12 @@ Lidl DE-Fehmarn Landkirchener Weg,54.4427,11.18101,25
 Lidl DE-Flensburg Friesische Straße,54.778179,9.416116
 Lidl DE-Flensburg Zur Bleiche,54.771023,9.433328
 Lidl DE-Frankenberg (Eder) Siegener Straße 5,51.05543,8.78791
+Lidl DE-Frankfurt am Main August-Schanz-Straße,50.1621,8.6856
 Lidl DE-Frankfurt Berner Straße,50.19369,8.656451
 Lidl DE-Frankfurt Niederrad,50.084076,8.629857
 Lidl DE-Frankfurt-Griesheim Elektronstraße,50.09603,8.59886
 Lidl DE-Frankfurt-Nied Oeserstraße,50.108,8.5873
 Lidl DE-Frankfurt-Unterliederbach Sossenheimer Weg 67,50.114607,8.544561
-Lidl DE-Frankfurt/Main-Preungesheim August-Schanz-Straße 60-64,50.162091,8.685589
 Lidl DE-Frechen,50.923133,6.817081
 Lidl DE-Frechen Dr.-Gottfried-Cremer-Allee 22,50.90932,6.825172
 Lidl DE-Freiburg im Breisgau,47.986351,7.834224
@@ -20288,6 +20297,7 @@ Saascharge CH-Schlieren Freiestrasse,47.39589,8.44676
 
 SachsenEnergie DE-Altenberg Dresdner Straße,50.7648,13.7553
 SachsenEnergie DE-Bad Schandau Dresdner Straße,50.91842,14.1495
+SachsenEnergie DE-Bad Schandau Schmilka,50.89258,14.22932
 SachsenEnergie DE-Bannewitz Hauptstraße,50.965145,13.711756
 SachsenEnergie DE-Bautzen Schliebenstraße,51.18155,14.414924
 SachsenEnergie DE-Dippoldiswalde Obertorplatz,50.895903,13.669594
@@ -21286,6 +21296,7 @@ SW-Bonn DE-Bonn Clemens-August-Straße,50.72128,7.087729,30
 SW-Bonn DE-Bonn Emil-Nolde-Straße,50.714982,7.119913
 SW-Bonn DE-Bonn Endenicher Allee,50.72655,7.08031
 SW-Bonn DE-Bonn Engeltalstraße,50.739483,7.102649,30
+SW-Bonn DE-Bonn Euskirchener Straße,50.72383,7.0667
 SW-Bonn DE-Bonn Franz-Lohe-Straße,50.71791,7.11148
 SW-Bonn DE-Bonn Gottfried-Claren-Straße,50.73851,7.11749
 SW-Bonn DE-Bonn Hans-Böckler-Straße,50.7386,7.12267
@@ -21464,6 +21475,7 @@ SW-Leipzig DE-Leipzig Friedrich-Ebert-Straße,51.338607,12.362264
 SW-Leipzig DE-Leipzig Goldschmidtstraße,51.335169,12.38933
 SW-Leipzig DE-Leipzig Handelsstraße,51.4007,12.40029
 SW-Leipzig DE-Leipzig Henriettenstraße,51.33243,12.32583
+SW-Leipzig DE-Leipzig Hohe Straße,51.32982,12.3726
 SW-Leipzig DE-Leipzig Karl-Tauchnitz-Straße,51.330694,12.363159
 SW-Leipzig DE-Leipzig Ludwigsburger Straße,51.32047,12.29036
 SW-Leipzig DE-Leipzig Naunhofer Straße,51.31398,12.42138
