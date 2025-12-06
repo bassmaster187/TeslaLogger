@@ -6044,6 +6044,7 @@ Tesla Service Center US-Raleigh NC,35.86326,-78.71514
 Tesla Service Center US-Tulsa,36.076867,-95.83393
 
 800Volt DE-Dresden Sternstraße,51.074709,13.698399
+800Volt DE-Oberwiesenthal Annaberger Straße,50.42024,12.97692
 
 A2A IT-Bergamo Via dell’ Industria,45.66799,9.664775
 A2A IT-Bergamo Via S. Lazzaro,45.69151,9.66174
@@ -9982,6 +9983,7 @@ EDEKA DE-Peine Lindenstraße,52.31923,10.228867
 EDEKA DE-Peine Woltorfer Straße,52.298531,10.272038
 EDEKA DE-Penzberg Grube,47.7575,11.3828
 EDEKA DE-Petershagen Lessingstraße,52.530234,13.792365
+EDEKA DE-Pinneberg Saarlandstraße,53.65352,9.7914
 EDEKA DE-Randersacker Am Sonnenstuhl,49.75312,9.98715
 EDEKA DE-Ransbach-Baumbach Pleurtuit-Straße,50.46398,7.72463
 EDEKA DE-Ratingen Am Sandbach,51.295869,6.830408
@@ -10192,6 +10194,7 @@ Electrify-America US-Cheektowaga NY Walden Ave,42.90934,-78.74461
 Electrify-America US-Clifton NJ Kingsland Rd,40.82432,-74.13654
 Electrify-America US-Denville NJ W Main St,40.89386,-74.47838
 Electrify-America US-East Brunswick NJ NJ-18,40.45773,-74.39928
+Electrify-America US-Edison NJ U.S. Rte 1,40.5116,-74.3848
 Electrify-America US-Fairfield NJ US-46 E,40.88971,-74.26992
 Electrify-America US-Flemington NJ US-202,40.49765,-74.85646
 Electrify-America US-Fort Morgan CO Barlow Rd,40.26132,-103.77123
@@ -10503,6 +10506,7 @@ EnBW DE-Autohof Burghaslach,49.73938,10.63744
 EnBW DE-Autohof Grabow,53.2982,11.53302,25
 EnBW DE-Autohof Härtensdorf,50.68048,12.59072,25
 EnBW DE-Autohof Kappel-Grafenhausen,48.28093,7.77691,25
+EnBW DE-Autohof Lehre,52.31305,10.6354,10
 EnBW DE-Autohof Mendig,50.38231,7.26952,25
 EnBW DE-Autohof Nahetal,49.9256,7.93568,30
 EnBW DE-Autohof Northeim,51.73232,9.97211
@@ -15138,6 +15142,7 @@ Helen FI-Mäyry Seinäjoentie,62.76815,23.52667
 
 HEnW DE-Grömitz Rathausplatz,54.150844,10.958223
 HEnW DE-Hamburg Alter Fischmarkt,53.548537,9.997061
+HEnW DE-Hamburg Am Beckerkamp,53.49727,10.20954
 HEnW DE-Hamburg Auf dem Königslande,53.581129,10.079097
 HEnW DE-Hamburg Banksstraße,53.544676,10.012287
 HEnW DE-Hamburg Barmbeker Markt,53.5808,10.0418
@@ -15371,6 +15376,8 @@ Ignitis LT-Vilnius Birutės g.,54.692063,25.246066
 Ignitis LT-Vilnius Upės g.,54.69392,25.27507
 Ignitis LT-Vilnius Vikingų g.,54.6533,25.27893
 Ignitis LT-Šilagalys Panevėžio aplinkelis,55.67072,24.34852
+
+iHunt-EV RO-București Calea Ion Zăvoi,44.50375,26.08545
 
 IKB AT-Innsbruck DEZ,47.26221,11.42823,25
 IKB AT-Innsbruck Salurner Straße,47.262477,11.397359
@@ -19769,6 +19776,8 @@ Plenitude IT-Sogliano al Rubicone Bivio Montepetra Bassa,43.93325,12.17774
 Plenitude IT-Venezia Via Orlanda,45.47933,12.27087
 Plenitude IT-Villesse Località Maranuz,45.86488,13.4326
 
+Plug2Go MD-Cimişlia Strada Suveranităţii,46.5237,28.78623
+
 Plugit FI-Joensuu Kuurnankatu,62.61789,29.77164
 Plugit FI-Kangasniemi Otto Mannisen tie,61.9898,26.64419
 Plugit FI-Kokkola Kahvitie,63.825859,23.163124
@@ -20269,6 +20278,7 @@ rhenag DE-Siegburg Wilhelm-Ostwald-Straße,50.792783,7.221005,30
 RhönEnergie DE-Fulda Johannisstraße,50.54231,9.66554
 RhönEnergie DE-Fulda Pacelliallee,50.54639,9.70328
 RhönEnergie DE-Fulda Unterm Heilig Kreuz,50.55199,9.67682
+RhönEnergie DE-Gersfeld (Rhön) Wasserkuppe,50.4982,9.94722
 
 RICARICA IT-Livorno Via Giovanni Gelati,43.530357,10.325833
 
@@ -21887,6 +21897,7 @@ TankE DE-Leichlingen (Rheinland) Im Brückerfeld,51.10284,7.0134
 TankE DE-Lohmar Frouardplatz,50.84154,7.21141
 TankE DE-Papenburg Hauptkanal Rechts,53.08572,7.38764
 TankE DE-Plüderhausen Hauptstraße,48.79453,9.60114
+TankE DE-Potsdam Hegelallee,52.404,13.05597
 TankE DE-Pulheim In den Benden,51.014301,6.749043
 TankE DE-Pulheim Siemensstraße,50.99094,6.81916
 TankE DE-Pulheim Velderhof,51.042104,6.758879
@@ -23664,6 +23675,7 @@ FR Bormes-les-Mimosas Camp du Domaine,43.11786,6.35212
 FR Disneyland Paris,48.86427,2.78954,99
 FR Disneyland Paris,48.87352,2.78475,60
 FR Le Grau-du-Roi Rue Amiot d’Inville,43.52418,4.1409
+FR Miserey-Salines Hotel Besançon Valentin,47.28056,5.987
 FR Vallon-Pont-d’Arc Camping la Rouviere,44.37503,4.42185
 GB Bedford Priory Business Park,52.12925,-0.42072
 GB London Westfield Hammersmith,51.50662,-0.22188
