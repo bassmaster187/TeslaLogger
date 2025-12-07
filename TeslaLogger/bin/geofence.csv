@@ -1889,7 +1889,7 @@ Supercharger-V4 DE-Dietmannsried,47.811457,10.303146,28
 Supercharger-V4 DE-Dormagen,51.09335,6.80953
 Supercharger-V4 DE-Dortmund-Nord,51.530488,7.471507
 Supercharger-V4 DE-Dresden Elbepark,51.08535,13.6936,30
-Supercharger-V4 DE-Dresden Kaufpark,50.995,13.8003
+Supercharger-V4 DE-Dresden Kaufpark,50.99643,13.79827
 Supercharger-V4 DE-Duisburg,51.481697,6.809756
 Supercharger-V3 DE-Düsseldorf - Ando Campus,51.2516,6.79466
 Supercharger-V4 DE-Düsseldorf Lierenfeld,51.21326,6.8244
@@ -2351,7 +2351,7 @@ Supercharger-V3 ES-Ondara,38.816859,0.022245
 Supercharger-V3 ES-Pamplona,42.783886,-1.630849,60
 Supercharger-V4 ES-Puebla de Sanabria,42.05826,-6.66216
 Supercharger ES-Reocín,43.355578,-4.09496
-Supercharger ES-Rivabellosa,42.701171,-2.91951
+Supercharger-V3 ES-Rivabellosa,42.70117,-2.9195
 Supercharger-V4 ES-Rivas Vaciamadrid,40.33593,-3.52432
 Supercharger-V3 ES-Sagunto,39.67293,-0.26609
 Supercharger-V3 ES-Salamanca,40.945571,-5.639382
@@ -16407,6 +16407,7 @@ JOLT AU-Camp Hill QLD Samuel St,-27.50044,153.0761
 JOLT AU-Camp Hill QLD Thomas St,-27.50088,153.07722
 JOLT AU-Carindale QLD Old Cleveland Road,-27.502193,153.116708
 JOLT AU-ellyville Ridge NSW Merriville Rd,-33.7004,150.92833
+JOLT AU-Rouse Hill NSW Panmure St,-33.6833,150.91655
 JOLT DE-Augsburg Donauwörther Straße,48.401023,10.880912
 JOLT DE-Augsburg Landsberger Straße,48.311517,10.906945
 JOLT DE-Berlin Berliner Straße,52.435571,13.266034
@@ -16598,6 +16599,7 @@ Kaufland DE-Fürstenwalde/Spree Juri-Gagarin-Straße 32,52.377976,14.079854
 Kaufland DE-Geisenfeld Bajuwarenstraße 4,48.740601,11.633491
 Kaufland DE-Geislingen an der Steige Neuwiesenstraße,48.6112,9.80713
 Kaufland DE-Gera Schleizer Straße 36-39,50.847564,12.066425
+Kaufland DE-Geretsried Bayerwaldstraße,47.88293,11.46073
 Kaufland DE-Gerlingen Weilimdorfer Straße 93,48.807665,9.075957
 Kaufland DE-Germersheim Mainzer Straße,49.22863,8.367557
 Kaufland DE-Giengen an der Brenz,48.621067,10.250653
@@ -18221,6 +18223,7 @@ Mer AT-Eisenstadt Handelsstraße,47.828805,16.531741
 Mer AT-Feldkirchen in Kärnten Gurktalerstraße,46.73119,14.09518
 Mer AT-Frauenhofen Wiener Straße,48.66573,15.63357
 Mer AT-Gmunden Aubauerstraße,47.93097,13.78547
+Mer AT-Graz Lauzilgasse,47.04517,15.43038
 Mer AT-Graz Plüddemanngasse,47.06405,15.465
 Mer AT-Haag am Hausruck Geierau,48.19952,13.64239
 Mer AT-Hohenems Diepoldsauer Straße,47.373721,9.675551
@@ -20285,6 +20288,8 @@ RICARICA IT-Livorno Via Giovanni Gelati,43.530357,10.325833
 Rifil SE-Arlöv Gullrisvägen,55.614023,13.10072,30
 
 Rloaded DE-Leipheim Albert-Einstein-Straße,48.44706,10.240232
+
+Road DE-Mettmann Marie-Curie-Straße,51.25046,6.9513
 
 RoboCharge NL-Biervliet Middenweg,51.326131,3.667839
 RoboCharge NL-Breskens Westlandstraat,51.39697,3.55573
@@ -22592,6 +22597,7 @@ Vimmerby-Energi SE-Vimmerby Västra Tullportsgatan,57.66819,15.8544,25
 
 Vinschgauer-Energie IT-Prad am Stilfserjoch Kreuzweg,46.61733,10.58917
 
+VIOCON DE-Arnbruck Zellertalstraße,49.1279,12.99593
 VIOCON DE-Schönberg Maukenreuth,48.82422,13.34283
 
 Vion IT-Martello Ennewasser,46.5711,10.79594
