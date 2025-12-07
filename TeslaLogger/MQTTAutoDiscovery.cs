@@ -104,6 +104,7 @@ namespace TeslaLogger
             autoDiscovery["time_to_full_charge"]["discovery_active"] = "true";
             autoDiscovery["time_to_full_charge"]["type"] = "sensor";
             autoDiscovery["time_to_full_charge"]["name"] = "Time to full charge";
+            autoDiscovery["time_to_full_charge"]["unit"] = "h";
             autoDiscovery["time_to_full_charge"]["class"] = "duration";
 
             autoDiscovery["car_version"] = new Dictionary<string, string>();
