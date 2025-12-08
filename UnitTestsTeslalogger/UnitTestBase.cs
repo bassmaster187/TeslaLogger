@@ -37,6 +37,24 @@ namespace UnitTestsTeslalogger
 
 
         [TestMethod]
+        public void Car_Cyberbeast()
+        {
+            Car c = new Car(0, "", "", 0, "", DateTime.Now, "", "", "", "", "", "", "", null, false);
+            WebHelper wh = c.webhelper;
+
+            MemoryCache.Default.Remove("GetAvgMaxRage_0");
+            wh.car.CarType = "cybertruck";
+            wh.car.CarSpecialType = "founder";
+            wh.car.TrimBadging = "cyberbeast";
+            wh.car.Vin = "7G2CEHEE7RAxxxxxx";
+            wh.UpdateEfficiency();
+
+            Assert.AreEqual("Cyberbeast", wh.car.ModelName);
+            Assert.AreEqual(0.256, wh.car.WhTR);
+        }
+
+
+        [TestMethod]
         public void Car_S85D()
         {
             Car c = new Car(0, "", "", 0, "", DateTime.Now, "", "", "", "", "", "", "", null, false);
