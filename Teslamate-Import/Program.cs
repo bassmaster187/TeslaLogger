@@ -332,7 +332,7 @@ namespace Teslamate_Import
                                 // FL
                                 if (dr["tpms_pressure_fl"] != DBNull.Value)
                                 {
-                                    using (var cmdTL = new MySqlCommand(@"INSERT INTO TPMS (CarId, Datum, TireId, Pressure, import) VALUES (@CarId, @Datum, 0, @Pressure, 3) ON DUPLICATE KEY UPDATE Pressure = VALUES(Pressure);", conTL))
+                                    using (var cmdTL = new MySqlCommand(@"INSERT INTO TPMS (CarId, Datum, TireId, Pressure, import) VALUES (@CarId, @Datum, 1, @Pressure, 3) ON DUPLICATE KEY UPDATE Pressure = VALUES(Pressure);", conTL))
                                     {
                                         cmdTL.Parameters.AddWithValue("@CarId", carid);
                                         cmdTL.Parameters.AddWithValue("@Datum", Date);
@@ -343,7 +343,7 @@ namespace Teslamate_Import
                                 // FR
                                 if (dr["tpms_pressure_fr"] != DBNull.Value)
                                 {
-                                    using (var cmdTL = new MySqlCommand(@"INSERT INTO TPMS (CarId, Datum, TireId, Pressure, import) VALUES (@CarId, @Datum, 1, @Pressure, 3) ON DUPLICATE KEY UPDATE Pressure = VALUES(Pressure);", conTL))
+                                    using (var cmdTL = new MySqlCommand(@"INSERT INTO TPMS (CarId, Datum, TireId, Pressure, import) VALUES (@CarId, @Datum, 2, @Pressure, 3) ON DUPLICATE KEY UPDATE Pressure = VALUES(Pressure);", conTL))
                                     {
                                         cmdTL.Parameters.AddWithValue("@CarId", carid);
                                         cmdTL.Parameters.AddWithValue("@Datum", Date);
@@ -354,7 +354,7 @@ namespace Teslamate_Import
                                 // RL
                                 if (dr["tpms_pressure_rl"] != DBNull.Value)
                                 {
-                                    using (var cmdTL = new MySqlCommand(@"INSERT INTO TPMS (CarId, Datum, TireId, Pressure, import) VALUES (@CarId, @Datum, 2, @Pressure, 3) ON DUPLICATE KEY UPDATE Pressure = VALUES(Pressure);", conTL))
+                                    using (var cmdTL = new MySqlCommand(@"INSERT INTO TPMS (CarId, Datum, TireId, Pressure, import) VALUES (@CarId, @Datum, 3, @Pressure, 3) ON DUPLICATE KEY UPDATE Pressure = VALUES(Pressure);", conTL))
                                     {
                                         cmdTL.Parameters.AddWithValue("@CarId", carid);
                                         cmdTL.Parameters.AddWithValue("@Datum", Date);
@@ -365,7 +365,7 @@ namespace Teslamate_Import
                                 // RR
                                 if (dr["tpms_pressure_rr"] != DBNull.Value)
                                 {
-                                    using (var cmdTL = new MySqlCommand(@"INSERT INTO TPMS (CarId, Datum, TireId, Pressure, import) VALUES (@CarId, @Datum, 3, @Pressure, 3) ON DUPLICATE KEY UPDATE Pressure = VALUES(Pressure);", conTL))
+                                    using (var cmdTL = new MySqlCommand(@"INSERT INTO TPMS (CarId, Datum, TireId, Pressure, import) VALUES (@CarId, @Datum, 4, @Pressure, 3) ON DUPLICATE KEY UPDATE Pressure = VALUES(Pressure);", conTL))
                                     {
                                         cmdTL.Parameters.AddWithValue("@CarId", carid);
                                         cmdTL.Parameters.AddWithValue("@Datum", Date);
