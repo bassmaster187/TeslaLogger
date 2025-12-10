@@ -6598,6 +6598,7 @@ Allego DE-Autohof Homberg/Efze,51.00472,9.47935
 Allego DE-Autohof Lippetal,51.69575,7.96646,10
 Allego DE-Autohof Malsfeld,51.08686,9.4855,10
 Allego DE-Autohof Mühldorf,48.27258,12.5501,6
+Allego DE-Autohof Münchberg,50.20277,11.77692,6
 Allego DE-Autohof Neuberg,50.18212,9.00688,11
 Allego DE-Autohof Neuberg,50.18262,9.00701,10
 Allego DE-Autohof Schkeuditz,51.39959,12.19164,20
@@ -6935,6 +6936,7 @@ Allego DE-Kiel Tonberg,54.30154,10.13268
 Allego DE-Kirchheim an der Weinstraße Rosengartenweg 1,49.554129,8.184556
 Allego DE-Kleinostheim Saaläckerstraße,49.99454,9.0701,18
 Allego DE-Koblenz Carl-Zeiss-Straße,50.3882,7.55834
+Allego DE-Korbach Briloner Landstraße,51.28314,8.84854
 Allego DE-Krefeld Hafelstraße 200,51.320819,6.600595
 Allego DE-Kulmbach E.-C.-Baumann-Straße,50.112551,11.446267
 Allego DE-Köln Frankfurter Straße,50.84768,7.09432
@@ -6979,7 +6981,6 @@ Allego DE-Moosburg Degernpoint,48.47157,11.96496,30
 Allego DE-Mönchengladbach Lemkuhlenweg,51.20985,6.46721,30
 Allego DE-Mücke Gottesrain,50.645495,8.990112,10
 Allego DE-Mülheim/Ruhr Weseler Straße,51.433,6.84397
-Allego DE-Münchberg Autohof,50.20277,11.77692,6
 Allego DE-München Bodenseestraße 209,48.143433,11.429782
 Allego DE-München Mies-van-der-Rohe-Straße,48.176966,11.591523
 Allego DE-Münster Weseler Straße,51.92793,7.5879
@@ -10194,6 +10195,7 @@ Electrify-America US-Cheektowaga NY Walden Ave,42.90934,-78.74461
 Electrify-America US-Clifton NJ Kingsland Rd,40.82432,-74.13654
 Electrify-America US-Denville NJ W Main St,40.89386,-74.47838
 Electrify-America US-East Brunswick NJ NJ-18,40.45773,-74.39928
+Electrify-America US-East Palo Alto CA E Bayshore Rd,37.45995,-122.13873
 Electrify-America US-Edison NJ U.S. Rte 1,40.5116,-74.3848
 Electrify-America US-Fairfield NJ US-46 E,40.88971,-74.26992
 Electrify-America US-Flemington NJ US-202,40.49765,-74.85646
@@ -10209,8 +10211,7 @@ Electrify-America US-Livermore CA Holmes St,37.66114,-121.78095
 Electrify-America US-Marlborough MA Boston Post Rd W,42.33831,-71.58996
 Electrify-America US-Mesquite NV Pioneer Blvd,36.8065,-114.10701
 Electrify-America US-Milpitas CA Great Mall Dr,37.41362,-121.89817,25
-Electrify-America US-Milpitas CA Milpitas Square,37.42224,-121.91788
-Electrify-America US-Milpitas CA Milpitas Square,37.4229,-121.91826
+Electrify-America US-Milpitas CA Milpitas Square,37.42257,-121.91807,60
 Electrify-America US-Moorestown NJ Nixon Dr,39.93885,-74.96448
 Electrify-America US-North Platte NE S Dewey St,41.12047,-100.75946
 Electrify-America US-Ogallala NE Pony Express Ln,41.11276,-101.71856
@@ -10883,8 +10884,6 @@ EnBW DE-Elchingen Nersinger Straße,48.44865,10.09753
 EnBW DE-Ellhofen Am Autobahnkreuz,49.143115,9.309893,20
 EnBW DE-Ellhofen Am Autobahnkreuz,49.143602,9.308801,25
 EnBW DE-Ellwangen (Jagst) Doktor-Adolf-Schneider-Straße,48.95421,10.169293
-EnBW DE-Ellwangen (Jagst) Rasthof Ellwanger Berge Ost,48.984851,10.196098
-EnBW DE-Ellwangen (Jagst) Rasthof Ellwanger Berge West,48.983091,10.193419
 EnBW DE-Ellwangen Unterer Brühl,48.96882,10.127694
 EnBW DE-Elmshorn Am Eiskeller,53.74618,9.66117,30
 EnBW DE-Elsterwerda Lauchhammer Straße,51.46577,13.53433
@@ -11760,6 +11759,8 @@ EnBW DE-Raststätte Denkendorf Nord,48.693856,9.303734,15
 EnBW DE-Raststätte Dollenberg,50.68836,8.29598,15
 EnBW DE-Raststätte Eifel Ost,50.07005,6.88108,20
 EnBW DE-Raststätte Eifel West,50.06856,6.87994,20
+EnBW DE-Raststätte Ellwanger Berge Ost,48.98485,10.1961
+EnBW DE-Raststätte Ellwanger Berge West,48.98314,10.1935
 EnBW DE-Raststätte Goldbach Nord,53.00084,9.17945,20
 EnBW DE-Raststätte Goldbach Süd,52.99874,9.18113,20
 EnBW DE-Raststätte Göttingen West,51.49462,9.87613,20
@@ -12707,6 +12708,7 @@ Energie360 CH-Muri Luzernerstrasse,47.27255,8.34238
 Energie360 CH-Reinach Obere Stumpenbachstrasse,47.2518,8.18216
 Energie360 CH-Risch-Rotkreuz Suurstoffi,47.14442,8.43908
 Energie360 CH-Schönenwerd Gösgerstrasse,47.373598,8.00148
+Energie360 CH-Spreitenbach Türliackerstrasse,47.42403,8.36786
 Energie360 CH-Tenero-Contra Centro,46.1747,8.85588
 Energie360 CH-Villeneuve Centre Commercial Rocville,46.38673,6.92994
 Energie360 CH-Winterthur Brauerstrasse,47.50643,8.72864
@@ -12884,6 +12886,7 @@ ESB DE-Dingolfing Rennstraße,48.62965,12.49485
 ESB DE-Dingolfing Wollerstraße,48.63046,12.4991
 ESB DE-Eching Sudetenstraße,48.30323,11.61678
 ESB DE-Ettal Linderhof,47.5696,10.9557
+ESB DE-Finsing Hauptstraße,48.22104,11.80228
 ESB DE-Hausham Bahnhofstraße,47.75212,11.83882
 ESB DE-Irschenberg Wendling,47.828,11.90297,10
 ESB DE-Irschenberg Wendling,47.8284,11.9009,10
@@ -13020,6 +13023,7 @@ EVgo US-Castro Valley CA Castro Valley Blvd,37.6949,-122.07639
 EVgo US-Daly City CA Southgate Ave,37.69989,-122.48358
 EVgo US-Hollister CA McCray St,36.85278,-121.3973
 EVgo US-Leesylvania VA Potomac Town Pl,38.62978,-77.28907,15
+EVgo US-Mountain View CA E Middlefield Rd,37.39756,-122.06185
 EVgo US-San Diego CA Clairemont Mesa Blvd,32.83474,-117.18805
 EVgo US-San Francisco CA Market Street,37.76849,-122.427274
 EVgo US-Wynnewood PA E Wynnewood Rd,40.00008,-75.27319
@@ -14737,7 +14741,9 @@ Freshmile FR-Rousset Av. Georges Vacher,43.46506,5.60861,30
 Freshmile FR-Saint-Lô Les Cinq Chemins,49.09908,-1.08084
 Freshmile FR-Soufflenheim Rue de Drusenheim,48.81953,7.96402
 
-GALP PT-Alcobaça R. Gen. Humberto Delgado,39.55967,-8.97808
+Galp PT-Alcobaça R. Gen. Humberto Delgado,39.55967,-8.97808
+Galp PT-Aveiras de Cima Área de Serviço,39.124,-8.90713
+Galp PT-Palmela Área de Serviço,38.58486,-8.93078
 Galp PT-Vouzela A25 / IP5,40.686186,-8.232199
 
 GardaUno IT-Limone sul Garda Via Lungolago Guglielmo Marconi,45.811562,10.793539
@@ -21522,6 +21528,7 @@ SW-Mainz DE-Mainz Wilhelm-Raabe-Straße,50.00335,8.21321
 SW-Merseburg DE-Merseburg Querfurter Straße,51.37147,11.98317
 SW-Mosbach DE-Mosbach Martin-Butzer-Straße,49.35044,9.14211
 SW-Munster-Bispingen DE-Munster Aussiger Straße,52.98662,10.08471
+SW-Mühlheim DE-Mühlheim am Main Lämmerspieler Straße,50.11652,8.83896
 SW-Mülheim DE-Mülheim am Main Ringstraße,50.121276,8.830682
 SW-Münster DE-Münster Kiesekamps Mühle,51.94932,7.64135
 SW-Neu-Isenburg DE-Neu-Isenburg Alicestraße,50.050185,8.675374
@@ -22457,6 +22464,7 @@ Vattenfall DE-Lieberose Cottbuser Straße,51.982343,14.299287
 Vattenfall DE-Limbach-Oberfrohna Kleines Dörfchen,50.862223,12.760907
 Vattenfall DE-Lohne (Oldenburg) Meyerhofstraße,52.667564,8.235439
 Vattenfall DE-Lübeck Mecklenburger Straße,53.888183,10.787175
+Vattenfall DE-Lüneburg Neue Sülze,53.24828,10.40408
 Vattenfall DE-Meldorf Zingelstraße,54.08942,9.079484
 Vattenfall DE-Melsungen Pfieffewiesen,51.10778,9.56068
 Vattenfall DE-Müncheberg Bergstraße,52.506703,14.133121
@@ -23678,6 +23686,7 @@ FI Virttaa Alastaro Circuit,60.9717,22.6577
 FR 68510 Sierentz Hyper U et Drive,47.66618,7.441494,10
 FR Arras Rue Arthur Delétoille,52.52386,9.13167
 FR Bormes-les-Mimosas Camp du Domaine,43.11786,6.35212
+FR Chaumont-sur-Tharonne Château de l’Epilly,47.57794,1.95515
 FR Disneyland Paris,48.86427,2.78954,99
 FR Disneyland Paris,48.87352,2.78475,60
 FR Le Grau-du-Roi Rue Amiot d’Inville,43.52418,4.1409
