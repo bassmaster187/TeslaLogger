@@ -67,7 +67,7 @@ Supercharger-V4 AT-Wien,48.193045,16.27707
 Supercharger-V4 AT-Wien City,48.16753,16.34786
 Supercharger-V3 AT-Wien Gewerbepark Stadlau,48.24713,16.46436
 Supercharger AT-Wien Tech Park Vienna,48.15725,16.33404
-Supercharger AT-Wiener Neustadt,47.80469,16.21082
+Supercharger-V4 AT-Wiener Neustadt,47.8047,16.21082,75
 Supercharger-V4 AT-Zeltweg,47.194056,14.722814
 
 Supercharger-V3 AU-Abbotsford VIC,-37.80941,144.99568
@@ -2516,7 +2516,7 @@ Supercharger-V4 FR-Brétigny-sur-Orge,48.59046,2.30087
 Supercharger FR-Buchelay,48.990144,1.671559
 Supercharger-V3 FR-Bègles,44.79372,-0.53282
 Supercharger-V3 FR-Béziers,43.33605,3.28392
-Supercharger-V4 FR-Béziers Urban,43.347648,3.25435
+Supercharger-V4 FR-Béziers Rue Zenobe Gramme,43.34794,3.25557
 Supercharger FR-Caen,49.16398,-0.424802
 Supercharger-V3 FR-Caen Saint-Contest,49.20081,-0.39906
 Supercharger FR-Cagnes-sur-Mer,43.66636,7.12473
@@ -11837,6 +11837,7 @@ EnBW DE-Rostock Vitalis Zentrum,54.134323,12.069867
 EnBW DE-Rot an der Rot Biberacher Straße,47.9753,9.94034
 EnBW DE-Rot an der Rot Klosterhof,48.013527,10.031169
 EnBW DE-Rotenburg an der Fulda Zum Güterbahnhof,50.997985,9.733989
+EnBW DE-Roth Nürnberger Straße,49.25306,11.08572
 EnBW DE-Rothenburg ob der Tauber Bahnhofstraße,49.377905,10.19109
 EnBW DE-Rottenacker Schulstraße,48.23237,9.684
 EnBW DE-Rottenburg am Neckar Hirschauer Straße,48.500524,8.970213
@@ -15796,6 +15797,7 @@ Ionity AT-St. Lorenzen im Mürztal,47.46875,15.34432,25
 Ionity AT-St. Valentin,48.19637,14.52835,16
 Ionity AT-Steinhäusl,48.157839,15.940398
 Ionity AT-Trieben Europastraße,47.490228,14.485408,30
+Ionity AT-Ybbs an der Donau Bergland Center,48.1611,15.10712
 Ionity BE-Bierset,50.651848,5.473755
 Ionity BE-Froyennes North,50.619572,3.338944
 Ionity BE-Froyennes South,50.619058,3.341152
@@ -19931,6 +19933,7 @@ Porsche SI-Ljubljana Bravničarjeva ulica,46.08414,14.48063
 Powerdot ES-Alcasar Carrer París,38.71645,0.14068
 Powerdot ES-Ciudad Real Carr. de Porzuna,38.99175,-3.9355
 Powerdot ES-Finestrat C Rei Jaume I,38.53487,-0.1729
+Powerdot ES-Jerez de La Frontera C. Holanda,36.67196,-6.15267
 Powerdot ES-Salamanca Av. de los Cipreses,40.97742,-5.64855
 Powerdot ES-Vilafranca del Penedès Carrer Pla del Viver,41.33542,1.68243
 Powerdot FR-Bergerac Rue du Tounet,44.83547,0.45136,30
@@ -22455,6 +22458,7 @@ Vattenfall DE-Havelberg Semmelweisstraße,52.829184,12.079387
 Vattenfall DE-Hemmoor Otto-Peschel-Straße,53.683782,9.15941
 Vattenfall DE-Hennigsdorf Rigaer Straße,52.650828,13.195944
 Vattenfall DE-Heringsdorf Lindenstraße,53.93816,14.1867
+Vattenfall DE-Herzberg (Elster) Leipziger Straße,51.69252,13.22938
 Vattenfall DE-Hinte Gewerbestraße,53.409537,7.199437
 Vattenfall DE-Horn-Bad Meinberg Bahnhofstraße,51.876825,8.955302
 Vattenfall DE-Ihlow 2. Kompanieweg,53.406519,7.439554
@@ -23308,6 +23312,7 @@ AT Linz PLUSCITY,48.2428,14.23398
 AT Linz PLUSCITY,48.24345,14.23428,25
 AT Linz PLUSCITY,48.24397,14.2348,25
 AT Linz PLUSCITY,48.24458,14.23531,25
+AT Ludesch RB Service,47.17824,9.7777
 AT Maria Rain Hotel Sonnenhof,46.57246,14.29168
 AT Maurach Seecamping Wimmer,47.43277,11.73445,70
 AT Mühldorf Wolf,47.89012,13.93895
@@ -23378,6 +23383,7 @@ CH Knonau Dollägerten,47.22587,8.45925
 CH Laax Via Principala,46.80573,9.2575
 CH Lenzerheide Hotel La Palanca,46.72523,9.54805
 CH Lostorf Vogt,47.3855,7.953
+CH Mollis Flugplatz,47.07917,9.06692
 CH Moosseedorf Shoppyland,47.017507,7.492498
 CH Nendaz Green Motion Charging Station Rte des Ecluses,46.182368,7.291183,10
 CH Niederönz Bystronic,47.19139,7.69379
@@ -23601,6 +23607,7 @@ DE Nürnberg TÜV,49.4318,11.03038
 DE Nürnberg Virnsberger Straße,49.448044,11.005672
 DE Oberlungwitz Sachsenring,50.79197,12.68798
 DE Ochtrup Designer Outlet,52.2114,7.19994
+DE Ochtrup GGM Gastro International,52.19587,7.15473
 DE Offenbach am Main Feldstraße,50.09994,8.76783
 DE Offenbach Betriebshof OVB,50.102554,8.778845,20
 DE Offenbach Honda,50.08437,8.839102
@@ -23753,6 +23760,7 @@ PT Alcantarilha Sudoeste Retail Park,37.13211,-8.35923
 PT Almada Forum,38.65966,-9.17526
 PT Lisboa Hotel Hyatt Regency,38.6985,-9.18689
 PT Lisboa R. Rodrigues de Faria,38.70234,-9.17877
+PT Sagres Hotel Memmo Baleeira,37.01107,-8.93215
 PT Setúbal Instituto Politécnico,38.52318,-8.83927
 RO Arad Ibis Styles Hotel,46.20323,21.24786,15
 RO Brașov Bulevardul Gării,45.66043,25.613542
