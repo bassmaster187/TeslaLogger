@@ -2527,6 +2527,11 @@ namespace TeslaLogger
                     return;
                 }
             }
+            else if (car.TrimBadging == "cyberbeast")
+            {
+                WriteCarSettings("0.256", "Cyberbeast");
+                return;
+            }
             else if (car.CarType == "LUCID")
             {
                 if (car.TrimBadging == "PURE")

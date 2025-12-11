@@ -671,7 +671,9 @@
             "CO2 kg",
             "LadezeitStunden"
           ],
-          "reducer": ["sum"],
+          "reducer": [
+            "sum"
+          ],
           "show": true
         },
         "showHeader": true,
@@ -698,7 +700,9 @@
           "select": [
             [
               {
-                "params": ["CarId"],
+                "params": [
+                  "CarId"
+                ],
                 "type": "column"
               }
             ]
@@ -891,7 +895,9 @@
         "footer": {
           "countRows": false,
           "fields": "",
-          "reducer": ["sum"],
+          "reducer": [
+            "sum"
+          ],
           "show": false
         },
         "showHeader": true,
@@ -909,7 +915,9 @@
           "select": [
             [
               {
-                "params": ["value"],
+                "params": [
+                  "value"
+                ],
                 "type": "column"
               }
             ]
@@ -1076,7 +1084,9 @@
         "footer": {
           "countRows": false,
           "fields": "",
-          "reducer": ["sum"],
+          "reducer": [
+            "sum"
+          ],
           "show": false
         },
         "showHeader": true,
@@ -1094,7 +1104,9 @@
           "select": [
             [
               {
-                "params": ["value"],
+                "params": [
+                  "value"
+                ],
                 "type": "column"
               }
             ]
@@ -1174,7 +1186,9 @@
         "justifyMode": "auto",
         "orientation": "horizontal",
         "reduceOptions": {
-          "calcs": ["sum"],
+          "calcs": [
+            "sum"
+          ],
           "fields": "",
           "values": false
         },
@@ -1192,7 +1206,9 @@
           "select": [
             [
               {
-                "params": ["id"],
+                "params": [
+                  "id"
+                ],
                 "type": "column"
               }
             ]
@@ -1266,7 +1282,9 @@
         "justifyMode": "auto",
         "orientation": "horizontal",
         "reduceOptions": {
-          "calcs": ["sum"],
+          "calcs": [
+            "sum"
+          ],
           "fields": "",
           "values": false
         },
@@ -1284,7 +1302,9 @@
           "select": [
             [
               {
-                "params": ["id"],
+                "params": [
+                  "id"
+                ],
                 "type": "column"
               }
             ]
@@ -1358,7 +1378,9 @@
         "justifyMode": "auto",
         "orientation": "horizontal",
         "reduceOptions": {
-          "calcs": ["lastNotNull"],
+          "calcs": [
+            "lastNotNull"
+          ],
           "fields": "",
           "values": false
         },
@@ -1376,7 +1398,9 @@
           "select": [
             [
               {
-                "params": ["id"],
+                "params": [
+                  "id"
+                ],
                 "type": "column"
               }
             ]
@@ -1450,7 +1474,9 @@
         "justifyMode": "auto",
         "orientation": "horizontal",
         "reduceOptions": {
-          "calcs": ["sum"],
+          "calcs": [
+            "sum"
+          ],
           "fields": "",
           "values": false
         },
@@ -1468,7 +1494,9 @@
           "select": [
             [
               {
-                "params": ["id"],
+                "params": [
+                  "id"
+                ],
                 "type": "column"
               }
             ]
@@ -1542,7 +1570,9 @@
         "justifyMode": "auto",
         "orientation": "horizontal",
         "reduceOptions": {
-          "calcs": ["sum"],
+          "calcs": [
+            "sum"
+          ],
           "fields": "",
           "values": false
         },
@@ -1560,7 +1590,9 @@
           "select": [
             [
               {
-                "params": ["id"],
+                "params": [
+                  "id"
+                ],
                 "type": "column"
               }
             ]
@@ -1635,7 +1667,9 @@
         "justifyMode": "auto",
         "orientation": "horizontal",
         "reduceOptions": {
-          "calcs": ["sum"],
+          "calcs": [
+            "sum"
+          ],
           "fields": "",
           "values": false
         },
@@ -1653,7 +1687,9 @@
           "select": [
             [
               {
-                "params": ["id"],
+                "params": [
+                  "id"
+                ],
                 "type": "column"
               }
             ]
@@ -1745,7 +1781,9 @@
           "select": [
             [
               {
-                "params": ["id"],
+                "params": [
+                  "id"
+                ],
                 "type": "column"
               }
             ]
@@ -1865,7 +1903,9 @@
         "justifyMode": "auto",
         "orientation": "horizontal",
         "reduceOptions": {
-          "calcs": ["sum"],
+          "calcs": [
+            "sum"
+          ],
           "fields": "",
           "values": false
         },
@@ -1883,7 +1923,9 @@
           "select": [
             [
               {
-                "params": ["id"],
+                "params": [
+                  "id"
+                ],
                 "type": "column"
               }
             ]
@@ -1957,7 +1999,9 @@
         "justifyMode": "auto",
         "orientation": "horizontal",
         "reduceOptions": {
-          "calcs": ["sum"],
+          "calcs": [
+            "sum"
+          ],
           "fields": "",
           "values": false
         },
@@ -1975,7 +2019,9 @@
           "select": [
             [
               {
-                "params": ["id"],
+                "params": [
+                  "id"
+                ],
                 "type": "column"
               }
             ]
@@ -2049,7 +2095,9 @@
         "justifyMode": "auto",
         "orientation": "horizontal",
         "reduceOptions": {
-          "calcs": ["sum"],
+          "calcs": [
+            "sum"
+          ],
           "fields": "",
           "values": false
         },
@@ -2067,7 +2115,9 @@
           "select": [
             [
               {
-                "params": ["id"],
+                "params": [
+                  "id"
+                ],
                 "type": "column"
               }
             ]
@@ -2161,7 +2211,9 @@
         "footer": {
           "countRows": false,
           "fields": "",
-          "reducer": ["sum"],
+          "reducer": [
+            "sum"
+          ],
           "show": false
         },
         "showHeader": false,
@@ -2184,7 +2236,9 @@
           "select": [
             [
               {
-                "params": ["id"],
+                "params": [
+                  "id"
+                ],
                 "type": "column"
               }
             ]
@@ -2276,7 +2330,9 @@
         "justifyMode": "auto",
         "orientation": "horizontal",
         "reduceOptions": {
-          "calcs": ["sum"],
+          "calcs": [
+            "sum"
+          ],
           "fields": "/^val$/",
           "values": false
         },
@@ -2294,7 +2350,9 @@
           "select": [
             [
               {
-                "params": ["id"],
+                "params": [
+                  "id"
+                ],
                 "type": "column"
               }
             ]
@@ -2369,7 +2427,9 @@
         "justifyMode": "auto",
         "orientation": "horizontal",
         "reduceOptions": {
-          "calcs": ["sum"],
+          "calcs": [
+            "sum"
+          ],
           "fields": "/^val$/",
           "values": false
         },
@@ -2387,7 +2447,9 @@
           "select": [
             [
               {
-                "params": ["id"],
+                "params": [
+                  "id"
+                ],
                 "type": "column"
               }
             ]
@@ -2461,7 +2523,9 @@
         "justifyMode": "auto",
         "orientation": "horizontal",
         "reduceOptions": {
-          "calcs": ["sum"],
+          "calcs": [
+            "sum"
+          ],
           "fields": "",
           "values": false
         },
@@ -2480,7 +2544,9 @@
           "select": [
             [
               {
-                "params": ["id"],
+                "params": [
+                  "id"
+                ],
                 "type": "column"
               }
             ]
@@ -2554,7 +2620,9 @@
         "justifyMode": "auto",
         "orientation": "horizontal",
         "reduceOptions": {
-          "calcs": ["sum"],
+          "calcs": [
+            "sum"
+          ],
           "fields": "",
           "values": false
         },
@@ -2572,7 +2640,9 @@
           "select": [
             [
               {
-                "params": ["id"],
+                "params": [
+                  "id"
+                ],
                 "type": "column"
               }
             ]
@@ -2596,6 +2666,148 @@
       "datasource": {
         "type": "mysql",
         "uid": "000000001"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "axisSoftMax": 100,
+            "axisSoftMin": 0,
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "show": "points"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "blue",
+                "value": null
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "charger_power"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "kwatt"
+              },
+              {
+                "id": "custom.axisLabel",
+                "value": "Power"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "battery_level"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "percent"
+              },
+              {
+                "id": "custom.axisLabel",
+                "value": "SOC"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 15,
+        "w": 18,
+        "x": 0,
+        "y": 22
+      },
+      "id": 25,
+      "options": {
+        "dims": {
+          "exclude": [
+            "id"
+          ],
+          "x": "battery_level"
+        },
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": false
+        },
+        "series": [
+          {
+            "pointColor": {
+              "field": "color"
+            },
+            "x": "battery_level",
+            "y": "charger_power"
+          }
+        ],
+        "seriesMapping": "manual",
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "mysql",
+            "uid": "PC0C98BF192F75B00"
+          },
+          "editorMode": "code",
+          "format": "table",
+          "rawQuery": true,
+          "rawSql": "SELECT chargingstate.id * 100 as color, address, charger_power, charging.battery_level\r\nFROM teslalogger.charging \r\njoin chargingstate on charging.id between StartChargingID and EndChargingID \r\njoin pos on chargingstate.Pos = pos.id\r\nWHERE charging.CarID=$Car and $__timeFilter(charging.Datum) and chargingstate.CarID = $Car and $__timeFilter(chargingstate.StartDate) and max_charger_power > 48\r\norder by chargingstate.id, charging.id",
+          "refId": "A",
+          "sql": {
+            "columns": [
+              {
+                "parameters": [],
+                "type": "function"
+              }
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          }
+        }
+      ],
+      "title": "Charging Curves",
+      "type": "xychart"
+    },
+    {
+      "datasource": {
+        "type": "mysql",
+        "uid": "PC0C98BF192F75B00"
       },
       "fieldConfig": {
         "defaults": {
@@ -2646,7 +2858,9 @@
         "justifyMode": "auto",
         "orientation": "horizontal",
         "reduceOptions": {
-          "calcs": ["sum"],
+          "calcs": [
+            "sum"
+          ],
           "fields": "",
           "values": false
         },
@@ -2664,7 +2878,9 @@
           "select": [
             [
               {
-                "params": ["id"],
+                "params": [
+                  "id"
+                ],
                 "type": "column"
               }
             ]
@@ -2685,7 +2901,7 @@
       "type": "stat"
     }
   ],
-  "refresh": false,
+  "refresh": "",
   "schemaVersion": 38,
   "style": "dark",
   "tags": [],
@@ -2737,11 +2953,21 @@
       "2h",
       "1d"
     ],
-    "time_options": ["5m", "15m", "1h", "6h", "12h", "24h", "2d", "7d", "30d"]
+    "time_options": [
+      "5m",
+      "15m",
+      "1h",
+      "6h",
+      "12h",
+      "24h",
+      "2d",
+      "7d",
+      "30d"
+    ]
   },
   "timezone": "",
   "title": "Ladestatistik",
   "uid": "Y4Ptihzgk",
-  "version": 37,
+  "version": 38,
   "weekStart": ""
 }
