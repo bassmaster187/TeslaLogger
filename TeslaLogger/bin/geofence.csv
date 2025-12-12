@@ -2270,7 +2270,7 @@ Supercharger-V4 EE-Tartu,58.35802,26.67992
 
 Supercharger-V4 ES-A Coruña,43.35014,-8.42818
 Supercharger-V4 ES-Agoncillo,42.43118,-2.28134
-Supercharger ES-Aguadulce,37.256871,-4.986068
+Supercharger-V4 ES-Aguadulce,37.25678,-4.9861
 Supercharger-V4 ES-Aguilar de Campoo,42.78933,-4.24664
 Supercharger ES-Albacete,39.134675,-2.039013
 Supercharger-V4 ES-Albacete Campollano,39.02847,-1.88675
@@ -2283,7 +2283,7 @@ Supercharger-V4 ES-Alicante,38.35333,-0.47224
 Supercharger ES-Almaraz,39.791562,-5.695512,30
 Supercharger-V4 ES-Antas,37.21338,-1.89739
 Supercharger-V3 ES-Antequera,37.113318,-4.566764
-Supercharger ES-Aranda de Duero,41.623235,-3.687739
+Supercharger-V4 ES-Aranda de Duero,41.62322,-3.68768
 Supercharger ES-Ariza,41.313192,-2.002201
 Supercharger-V4 ES-Atalaya del Cañavate,39.5387,-2.25446,30
 Supercharger-V3 ES-Barakaldo MegaPark,43.293842,-3.005063
@@ -2309,7 +2309,7 @@ Supercharger-V3 ES-Fuenlabrada,40.29812,-3.82097
 Supercharger ES-Getafe,40.290389,-3.696302
 Supercharger-V4 ES-Gibraleón,37.36364,-6.9599
 Supercharger ES-Girona,41.998411,2.817295
-Supercharger ES-Granada,37.181805,-3.928417
+Supercharger-V4 ES-Granada,37.18176,-3.9284
 Supercharger-V4 ES-Granada Calle Menéndez Pelayo,37.14378,-3.60556
 Supercharger ES-Guarromán,38.143021,-3.722848
 Supercharger-V4 ES-Hellín,38.49631,-1.63673,30
@@ -2337,7 +2337,7 @@ Supercharger-V4 ES-Madrid East,40.44618,-3.58843
 Supercharger-V4 ES-Madrid Urban,40.42198,-3.72064
 Supercharger-V4 ES-Majadahonda,40.489738,-3.898333
 Supercharger-V4 ES-Mallorca,39.63303,2.73329
-Supercharger ES-Manzanares,39.006325,-3.383318
+Supercharger-V4 ES-Manzanares,39.00633,-3.3833
 Supercharger-V4 ES-Marbella East,36.49539,-4.77634
 Supercharger-V4 ES-Marmolejo,38.0289,-4.16625
 Supercharger-V4 ES-Merida Autovia Ruta de la Plata,38.85914,-6.3643
@@ -2668,7 +2668,7 @@ Supercharger-V4 FR-Roissy-en-France,48.989828,2.515358
 Supercharger FR-Rouen,49.388964,1.059818
 Supercharger-V4 FR-Rouvignies,50.33655,3.45612
 Supercharger-V4 FR-Roye,49.709434,2.773117
-Supercharger-V4 FR-Ruffec,46.03452,0.1803
+Supercharger-V4 FR-Ruffec,46.0348,0.1804
 Supercharger FR-Rungis,48.754432,2.35103
 Supercharger-V4 FR-Saint-André-de-Cubzac,45.012192,-0.424949
 Supercharger FR-Saint-Brieuc,48.493466,-2.72263
@@ -6593,6 +6593,7 @@ Allego DE-Aulendorf Poststraße,47.95056,9.6426
 Allego DE-Autohof Achern,48.64082,8.0375,12
 Allego DE-Autohof Bad Rappenau,49.21207,9.07756,15
 Allego DE-Autohof Bergler,49.80454,12.18425,22
+Allego DE-Autohof Gießen-Lützellinden,50.52955,8.6071
 Allego DE-Autohof Halle-Tornau,51.5458,12.01418
 Allego DE-Autohof Homberg/Efze,51.00472,9.47935
 Allego DE-Autohof Lippetal,51.69575,7.96646,10
@@ -6835,7 +6836,6 @@ Allego DE-Gelnhausen Lützelhäuser Weg,50.188206,9.185957,20
 Allego DE-Gelsenkirchen Cranger Straße 160,51.569111,7.079642
 Allego DE-Gera Bieblach,50.897956,12.100849
 Allego DE-Gera Otto-Hahn-Straße 2,50.902142,12.109625
-Allego DE-Gießen Rheinfelser Straße 101,50.529552,8.607037
 Allego DE-Gifhorn Eyßelheideweg,52.46269,10.53969,25
 Allego DE-Goslar Carl-Zeiß-Straße,51.931756,10.409653
 Allego DE-Goslar Marienburger Straße,51.931146,10.432146
@@ -18916,6 +18916,7 @@ NRMA AU-Gunnedah NSW Kepreotes Carpark,-30.97787,150.251115
 NRMA AU-Hay NSW Moppett St,-34.50888,144.84284
 NRMA AU-Holbrook NSW Prospect St,-35.71758,147.3178
 NRMA AU-Jindabyne NSW Kalkite St,-36.41607,148.61984
+NRMA AU-Lakes Entrance VIC Mechanics St,-37.88048,147.986
 NRMA AU-Lithgow Eskbank Street,-33.481156,150.158872
 NRMA AU-Lithgow Tank Street,-33.47806,150.161091
 NRMA AU-Mildura VIC Orange Ave,-34.18897,142.16256
