@@ -162,6 +162,7 @@ Supercharger AU-Tamworth NSW,-31.101649,150.917126
 Supercharger-V3 AU-Taree NSW,-31.90786,152.461795
 Supercharger-V3 AU-Tenterfield NSW,-29.057293,152.01888
 Supercharger AU-Toowoomba,-27.578061,151.946674
+Supercharger-V3 AU-Traralgon,-38.1928,146.52684
 Supercharger-V3 AU-Tuggeranong ACT,-35.41575,149.066
 Supercharger-V3 AU-Tuggeranong ACT,-35.417617,149.067019
 Supercharger-V4 AU-Tully QLD,-17.93486,145.92433
@@ -2092,7 +2093,7 @@ Supercharger-V4 DE Oberhausen Bero Zentrum,51.47575,6.841856
 Supercharger-V3 DE-Oberhonnefeld,50.56278,7.52512
 Supercharger-V4 DE-Oberkrämer,52.70812,13.106
 Supercharger-V4 DE-Obertshausen,50.075294,8.8577
-Supercharger-V4 DE-Offenbach,50.089134,8.761034
+Supercharger-V4 DE-Offenbach,50.08887,8.76088
 Supercharger-V3 DE-Offenburg,48.469907,7.931822
 Supercharger-V4 DE Offenburg Wilhelm-Röntgen-Straße,48.473203,7.92516
 Supercharger-V4 DE-Oldenburg in Holstein,54.2871,10.87714
@@ -2281,7 +2282,7 @@ Supercharger-V3 ES-Aldaia,39.47147,-0.48592
 Supercharger-V3 ES-Algeciras,36.135157,-5.461652
 Supercharger-V4 ES-Alicante,38.35333,-0.47224
 Supercharger ES-Almaraz,39.791562,-5.695512,30
-Supercharger-V4 ES-Antas,37.21338,-1.89739
+Supercharger-V4 ES-Antas,37.2137,-1.89826
 Supercharger-V3 ES-Antequera,37.113318,-4.566764
 Supercharger-V4 ES-Aranda de Duero,41.62322,-3.68768
 Supercharger ES-Ariza,41.313192,-2.002201
@@ -2699,7 +2700,7 @@ Supercharger FR-Strasbourg,48.53407,7.70201
 Supercharger-V4 FR-Sénas,43.741478,5.088358
 Supercharger-V4 FR-Taverny,49.025854,2.198438
 Supercharger-V4 FR-Terville,49.347684,6.125626
-Supercharger-V4 FR-Thiais,48.75476,2.37308
+Supercharger-V4 FR-Thiais,48.75465,2.37306
 Supercharger-V4 FR-Tossiat,46.14409,5.28248,60
 Supercharger FR-Toulouse,43.769238,1.361623
 Supercharger-V3 FR-Tournus,46.577333,4.899973,55
@@ -7869,6 +7870,7 @@ Berliner-SW DE-Berlin Potsdamer Platz,52.51,13.3757
 Berliner-SW DE-Berlin Schlüterstraße,52.50568,13.31752
 Berliner-SW DE-Berlin Schöneberger Straße,52.46425,13.3301,30
 Berliner-SW DE-Berlin Tile-Brügge-Weg,52.5916,13.29266
+Berliner-SW DE-Berlin Transvaalstraße,52.55132,13.34067
 Berliner-SW DE-Berlin Wansdorfer Platz,52.55774,13.20596
 Berliner-SW DE-Berlin Wörther Straße,52.53598,13.42054
 
@@ -10391,6 +10393,7 @@ EMB DE-Michendorf Michendorfer Gartenstraße,52.31406,13.02783
 EMB DE-Teltow Gerhart-Eisler-Straße,52.4019,13.2384
 
 Emobility-East DE-Drebach Straße der Jugend,50.67323,13.01824
+Emobility-East DE-Drebach Venusberger Hauptstraße,50.69864,13.0175
 Emobility-East DE-Ehrenfriedersdorf Greifensteinstraße,50.6496,12.9285
 Emobility-East DE-Johanngeorgenstadt Eibenstocker Straße,50.43339,12.71038
 Emobility-East DE-Mittenwald Obermarkt,47.441255,11.261307
@@ -14525,6 +14528,7 @@ Fastned NL-Hazeldonk-Oost,51.497862,4.743228
 Fastned NL-Hazeldonk-West,51.50025,4.74074,30
 Fastned NL-Heerde Het Veen A50,52.395969,6.0132
 Fastned NL-Heeze Meelakkers,51.40385,5.53798
+Fastned NL-Hellevliet,52.0815,4.98245
 Fastned NL-Hendriksbos,52.363044,5.76797
 Fastned NL-Her Goor,51.321341,5.219179
 Fastned NL-Het Anker A2,51.0574,5.82517,30
@@ -20345,7 +20349,7 @@ SachsenEnergie DE-Dresden Hettnerstraße,51.031228,13.727208
 SachsenEnergie DE-Dresden Hofmühlenstraße,51.035002,13.705605
 SachsenEnergie DE-Dresden Langer Weg,50.999325,13.799299
 SachsenEnergie DE-Dresden Martin-Luther-Straße,51.06342,13.755204
-SachsenEnergie DE-Dresden Michaelisstraße,50.9958,13.79706
+SachsenEnergie DE-Dresden Michaelisstraße,50.99557,13.79718
 SachsenEnergie DE-Dresden Mohnstraße,51.07785,13.7172
 SachsenEnergie DE-Dresden Omsewitzer Ring,51.046369,13.664205
 SachsenEnergie DE-Dresden Pillnitzer Landstraße,51.013911,13.863678
@@ -21605,6 +21609,7 @@ SW-Stendal DE-Stendal Heerener Straße,52.58835,11.87177
 SW-Stendal DE-Tangermünde Gewerbepark,52.54992,11.95729
 SW-Stralsund DE-Altenkirchen Marktstraße,54.63305,13.34478
 SW-Stralsund DE-Kramerhof Grünhufer Bogen,54.321117,13.04887
+SW-Stralsund DE-Stralsund Frankenwall,54.31076,13.09177
 SW-Stralsund DE-Stralsund Fährwall,54.31797,13.09151
 SW-Stralsund DE-Stralsund Greifswalder Chaussee,54.299996,13.093987
 SW-Stralsund DE-Stralsund Gustower Weg,54.27096,13.11507
@@ -23019,6 +23024,7 @@ Wien-Energie AT-Flughafen Wien Schwechat,48.126,16.5653
 Wien-Energie AT-Guntramsdorf Rathaus Viertel,48.0489,16.31272
 Wien-Energie AT-Leobersdorf Portugieserstrasse,47.93226,16.20056,55
 Wien-Energie AT-Traiskirchen Tribuswinkel Neurißgasse,47.991227,16.275386
+Wien-Energie AT-Vösendorf SCS Ostring,48.10857,16.3193
 Wien-Energie AT-Wien Amerlingstraße,48.19703,16.35125
 Wien-Energie AT-Wien Antonigasse,48.2225,16.33746
 Wien-Energie AT-Wien Austria Center,48.23459,16.41352
@@ -23678,6 +23684,7 @@ ES Altafulla May Boutique Hotel,41.13483,1.37994
 ES Argómaniz Parador de Argómaniz,42.8679,-2.54123
 ES Badajoz Av. de Elvas,38.8852,-7.0218
 ES Brión Viaducto de Brión,42.86336,-8.6763
+ES Ciudadela Hotel NH Campo Cartagena,37.61243,-0.97657
 ES Colmenar Viejo P.º de la Ermita de Sta. Ana,40.65449,-3.76011
 ES Donostia Hotel ILUNION San Sebastián,43.31388,-2.00451
 ES Gandia,38.969986,-0.178789
