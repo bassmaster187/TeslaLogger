@@ -1830,6 +1830,7 @@ Supercharger-V3 DE-Alsfeld,50.734,9.24143
 Supercharger-V3 DE-Altdorf bei Nürnberg,49.381627,11.344434,40
 Supercharger-V3 DE-Augsburg,48.3989,10.86816
 Supercharger-V4 DE-Augsburg-Haunstetten,48.297555,10.899144
+Supercharger-V4 DE-Bad Camberg,50.29506,8.254
 Supercharger-V4 DE-Bad Dürrheim,48.03618,8.531306
 Supercharger-V3 DE-Bad Oeynhausen,52.21293,8.81407,55
 Supercharger-V4 DE-Bad Rappenau,49.21191,9.07711,30
@@ -8398,6 +8399,7 @@ CircleK DE-Görlitz Bahnhofstraße,51.145881,14.983866
 CircleK DE-Hamburg Aluminiumstraße,53.51743,9.89043
 CircleK DE-Hamburg Cuxhavener Straße,53.47317,9.84674
 CircleK DE-Hamburg/ Moorfleet Andreas- Meyer- Straße,53.514264,10.089733
+CircleK DE-Hanau Rodgaustraße,50.11674,8.92926
 CircleK DE-Hirschberg Goldbeckstraße,49.507949,8.636984,20
 CircleK DE-Ibbenbüren Münsterstraße,52.258724,7.711672
 CircleK DE-Karlsruhe Erlachseeweg,48.98565,8.44717
@@ -13337,6 +13339,7 @@ EWE-GO DE-Bispingen Horstfeldweg,53.100871,9.977802
 EWE-GO DE-Bitburg Bitburger Straße,49.962564,6.541886
 EWE-GO DE-Bitterfeld-Wolfen Krondorfer Straße,51.66709,12.25948
 EWE-GO DE-Blankenburg Lerchenbreite,51.80637,10.94257,25
+EWE-GO DE-Blankenheim Mülheimer Heide,50.4508,6.6705
 EWE-GO DE-Bochum Dorstener Straße,51.509154,7.190543,10
 EWE-GO DE-Bochum Harpener Hellweg,51.494124,7.262308
 EWE-GO DE-Bockhorn Am Markt,53.393614,8.013657
@@ -17309,7 +17312,7 @@ Lidl DE-Arnstorf Mariakirchner Straße,48.56433,12.8246
 Lidl DE-Aschaffenburg Spessartstraße,49.9656,9.15486
 Lidl DE-Augsburg Unterer Talweg 109,48.315045,10.890143
 Lidl DE-Backnang Weissacher Straße,48.93456,9.4472
-Lidl DE-Bad Camberg Beuerbacher Landstraße 1,50.29491,8.253665
+Lidl DE-Bad Camberg Beuerbacher Landstraße,50.2952,8.2533
 Lidl DE-Bad Driburg Mühlenstraße,51.7331,9.02327
 Lidl DE-Bad Dürkheim Bruchstraße,49.46866,8.20154
 Lidl DE-Bad Fallingbostel Düshorner Straße 16,52.863599,9.687641
@@ -21399,6 +21402,7 @@ SW-Flensburg DE-Flensburg Batteriestraße,54.8047,9.429783
 SW-Flensburg DE-Flensburg Nordergraben,54.78729,9.43153
 SW-Forchheim DE-Forchheim Äußere Nürnberger Straße,49.704445,11.060294
 SW-Frankenthal DE-Frankenthal Jahnplatz,49.53048,8.35475
+SW-Freiberg DE-Freiberg Geschwister-Scholl-Straße,50.92135,13.3429
 SW-Freiberg DE-Freiberg Hornstraße,50.91645,13.34712
 SW-Freising DE-Freising Landshuter Straße,48.40626,11.7572
 SW-Freudenstadt DE-Freudenstadt Marktplatz,48.46556,8.41229
