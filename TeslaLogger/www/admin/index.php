@@ -171,7 +171,11 @@ else
 			$('#battery_level').text(jsonData["battery_level"]);
 			if (jsonData["car_version"]) {
 				var car_version = jsonData["car_version"];
-				car_version = car_version.substring(0,car_version.lastIndexOf(" "));
+
+				var hashpos = car_version.lastIndexOf(" ");
+				if (hashpos > 0)
+					car_version = car_version.substring(0, hashpos);
+				
 				$('#car_version').text(car_version);
 				$('#car_version_link').attr("href", "https://www.notateslaapp.com/software-updates/version/"+ car_version +"/release-notes");
 			}
