@@ -2258,7 +2258,7 @@ Supercharger-V3 DK-Rødovre Centrum,55.678498,12.456973
 Supercharger-V4 DK-Rønde,56.31607,10.42473
 Supercharger-V3 DK-Slagelse,55.38794,11.3618,36
 Supercharger-V4 DK-Struer,56.48013,8.58672
-Supercharger-V4 DK-Svenstrup J,56.9528,9.86551
+Supercharger-V4 DK-Svenstrup J,56.9528,9.8661
 Supercharger-V4 DK-Søndervig,56.120534,8.12218
 Supercharger-V3 DK-Taastrup-City 2,55.642954,12.274819
 Supercharger-V4 DK-Vejle South,55.664329,9.550989,30
@@ -4446,7 +4446,7 @@ Supercharger-V3 US-El Dorado KS,37.765733,-96.982574
 Supercharger US-El Paso TX,31.883934,-106.583629
 Supercharger-V3 US-El Portal CA,37.679316,-119.762721
 Supercharger-V3 US-Elgin IL,42.014679,-88.335115
-Supercharger-V3 US-Elizabeth NJ,40.662724,-74.173334
+Supercharger-V3 US-Elizabeth NJ,40.66277,-74.1735
 Supercharger-V3 US-Elizabethtown KY,37.671614,-85.845564
 Supercharger-V3 US-Elk Grove CA - 7119 Elk Grove Blvd,38.409166,-121.418858
 Supercharger-V3 US-Elk Grove CA - Elk Grove Blvd,38.40944,-121.39094
@@ -7006,6 +7006,7 @@ Allego DE-Osnabrück Mittelburgstraße,52.27573,8.07396
 Allego DE-Ottersberg Posthausen,53.057561,9.165869,12
 Allego DE-Overath Großbernsau 2,50.939581,7.293598
 Allego DE-Oyten Hauptstraße,53.06006,9.01809,25
+Allego DE-Paderborn Frankfurter Weg,51.70552,8.72332
 Allego DE-Paderborn Frankfurter Weg 35,51.696749,8.734701
 Allego DE-Panketal Dorfstraße,52.621152,13.542544,25
 Allego DE-Passau Regensburger Straße,48.57448,13.41495
@@ -10199,6 +10200,7 @@ Electrify-America US-Denville NJ W Main St,40.89386,-74.47838
 Electrify-America US-East Brunswick NJ NJ-18,40.45773,-74.39928
 Electrify-America US-East Palo Alto CA E Bayshore Rd,37.45995,-122.13873
 Electrify-America US-Edison NJ U.S. Rte 1,40.5116,-74.3848
+Electrify-America US-Elizabeth NJ Kapkowski Rd,40.66237,-74.1733
 Electrify-America US-Fairfield NJ US-46 E,40.88971,-74.26992
 Electrify-America US-Flemington NJ US-202,40.49765,-74.85646
 Electrify-America US-Fort Morgan CO Barlow Rd,40.26132,-103.77123
@@ -12833,6 +12835,7 @@ ensev DE-Bad Nauheim Schwalheimer Straße,50.356686,8.749915
 ensev DE-Varel Bockhorner Straße,53.393638,8.093035
 
 ENTEGA DE-Büttelborn Im Mehlsee,49.902926,8.523264
+Entega DE-Darmstadt Dornheimer Weg,49.8749,8.62508
 ENTEGA DE-Darmstadt Frankfurter Straße,49.886491,8.651784
 ENTEGA DE-Darmstadt Kasinostraße,49.88339,8.64826,30
 ENTEGA DE-Groß-Umstadt Georg-August-Zinn-Straße,49.872049,8.914015
@@ -17015,7 +17018,6 @@ LAKD LT-Pasiekos Europos g,54.31857,23.13653
 LAKD LT-Ukmergė Ežero g.,55.31461,24.77988
 
 Last-Mile-Solutions BE-Oostende Horthlaan,51.21772,2.88755
-Last-Mile-Solutions DE-Darmstadt Dornheimer Weg,49.874904,8.625082
 Last-Mile-Solutions DE-Langenau Hindenburgstraße,48.4959,10.11905
 Last-Mile-Solutions DE-Lorsch Lindenstraße,49.659077,8.567135
 Last-Mile-Solutions DE-Sinzig Bahnhofstraße,50.556655,7.217666
