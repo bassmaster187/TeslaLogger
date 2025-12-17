@@ -9249,6 +9249,7 @@ Denkfabrik-im-Grünen DE-Borken Dülmener Weg,51.84869,6.89636
 DEW DE-Dortmund Kleppingstraße,51.510315,7.468403
 DEW DE-Dortmund Kleppingstraße,51.51218,7.46815,25
 DEW DE-Dortmund Ostwall,51.510621,7.469531
+DEW DE-Dortmund Rodenbergstraße,51.49406,7.55234
 DEW DE-Dortmund Rosental,51.5115,7.46935
 DEW DE-Dortmund Wittbräucker Straße,51.43152,7.46896
 
@@ -10589,6 +10590,7 @@ EnBW DE-Balingen Mühlsteigstraße,48.30817,8.87413
 EnBW DE-Baltmannsweiler Hauptstraße,48.75904,9.45256
 EnBW DE-Baltmannsweiler Marktplatz,48.742327,9.449027
 EnBW DE-Bamberg Hallstadter Straße,49.910431,10.881153
+EnBW DE-Bamberg Laubanger,49.91074,10.87457
 EnBW DE-Barbing Neutraublinger Str,49.001262,12.197158
 EnBW DE-Barsinghausen,52.305809,9.467864
 EnBW DE-Barsinghausen Wilhelm-Heß-Straße,52.307114,9.455312
@@ -12717,6 +12719,7 @@ Energie360 CH-Schönenwerd Gösgerstrasse,47.373598,8.00148
 Energie360 CH-Spreitenbach Türliackerstrasse,47.42403,8.36786
 Energie360 CH-Tenero-Contra Centro,46.1747,8.85588
 Energie360 CH-Villeneuve Centre Commercial Rocville,46.38673,6.92994
+Energie360 CH-Wettingen Tägipark,47.4587,8.32862
 Energie360 CH-Winterthur Brauerstrasse,47.50643,8.72864
 Energie360 CH-Winterthur Rudolf-Diesel-Strasse,47.49452,8.757345
 Energie360 CH-Zürich Giessereistrasse,47.38972,8.51807
@@ -21554,6 +21557,7 @@ SW-Neumünster DE-Neumünster Vicelinstraße,54.08174,9.98635
 SW-Neuruppin DE-Neuruppin Präsidentenstraße,52.92295,12.8037
 SW-Neuss DE-Neuss Holzheimer Weg,51.182733,6.682412
 SW-Neustadt DE-Neustadt am Rübenberge Leinstraße,52.51568,9.4624
+SW-Neustadt DE-Neustadt an der Orla Ernst-Thälmann-Straße,50.73614,11.74803
 SW-Neustrelitz DE-Feldberg Weidendamm,53.33599,13.44183
 SW-Neustrelitz DE-Neustrelitz Am Bresebrink,53.28005,12.96672
 SW-Neustrelitz DE-Neustrelitz Am Kiefernwald,53.36156,13.09124,30
@@ -23333,6 +23337,7 @@ AT Parkplatz Straß,46.73086,15.64186
 AT Pasching Tractive,48.24068,14.2338
 AT Ratten HORN,47.472919,15.708816
 AT Schladming Europaplatz,47.39644,13.69552
+AT Schruns Hotel Alpenrose,47.0758,9.92396
 AT Sillian Sporthotel,46.74972,12.4337
 AT St. Ulrich bei Steyr Landgasthof Mayr,48.02132,14.42347
 AT St. Veit an der Glan Karosserie Puck,46.75713,14.34241
