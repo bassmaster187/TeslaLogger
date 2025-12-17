@@ -270,6 +270,11 @@ namespace TeslaLogger
                     {
                         Allcars.Add(this);
                     }
+                    else
+                    {
+                        if (CarInDB > 0)
+                            Log("manual token refresh needed -> car inactive !!!");
+                    }
 
                     if (this is TeslaLoggerNET8.Lucid.LucidCar)
                     {

@@ -41,6 +41,8 @@ namespace TeslaLoggerNET8.Lucid
         private double max_cell_temp_db;
         private double min_cell_temp_db;
         private bool isDoorLocked;
+        private DateTime lastCapacity_kwhr = DateTime.MinValue;
+        private DateTime lastBatteryHealthLevel = DateTime.MinValue;
 
         internal LucidWebHelper(LucidCar car) : base(car)
         {
@@ -354,6 +356,24 @@ namespace TeslaLoggerNET8.Lucid
                                     isDoorLocked = Locked;
                                     car.teslaAPIState.AddValue("locked", "bool", isDoorLocked, Tools.ToUnixTime(DateTime.UtcNow), "vehicle_state");
                                     car.Log($"Lock: {isDoorLocked}");
+                                }
+                                break;
+                            case "capacity_kwhr":
+                                if (lastCapacity_kwhr.AddHours(24) < DateTime.Now)
+                                {
+                                    lastCapacity_kwhr = DateTime.Now;
+                                    double capacity_kwhr = double.Parse(value, CultureInfo.InvariantCulture);
+                                    car.DbHelper.InsertCan(71, capacity_kwhr); // Nominal full pack
+                                    car.Log($"Battery Capacity: {capacity_kwhr} kWh");
+                                }
+                                break;
+                            case "battery_health_level":
+                                if (lastBatteryHealthLevel.AddHours(24) < DateTime.Now)
+                                {
+                                    lastBatteryHealthLevel = DateTime.Now;
+                                    double battery_health_level = double.Parse(value, CultureInfo.InvariantCulture);
+                                    car.DbHelper.InsertCan(1000, battery_health_level); // Battery Health Level / SOH
+                                    car.Log($"Battery Health Level / SOH: {battery_health_level}");
                                 }
                                 break;
 

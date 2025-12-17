@@ -7463,5 +7463,32 @@ ORDER BY startdate", con))
             }
             return 0;
         }
+
+        internal void InsertCan(int id, double val)
+        {
+            try
+            {
+                using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+                {
+                    con.Open();
+                    using (MySqlCommand cmd = new MySqlCommand(@"INSERT INTO can
+                        (datum, id,val,CarID)
+                        VALUES
+                        (@datum, @id, @val, @carid)", con))
+                    {
+                        cmd.Parameters.AddWithValue("@datum", DateTime.Now);
+                        cmd.Parameters.AddWithValue("@id", id);
+                        cmd.Parameters.AddWithValue("@val", val);
+                        cmd.Parameters.AddWithValue("@carid", car.CarInDB);
+                        _ = SQLTracer.TraceNQ(cmd, out _);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logfile.Log(ex.ToString());
+                ex.ToExceptionless().Submit();
+            }
+        }
     }
 }
