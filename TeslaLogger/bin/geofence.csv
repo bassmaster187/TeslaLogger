@@ -6029,6 +6029,7 @@ Tesla Service Center FR-Dardilly,45.808203,4.765263
 Tesla Service Center FR-Lyon,45.785156,4.787735
 Tesla Service Center FR-Nantes,47.248375,-1.622089
 Tesla Service Center FR-Paris,48.869945,2.320863
+Tesla Service Center HR-Zagreb,45.8073,15.85843
 Tesla Service Center IT-Milano,45.4287,9.323609
 Tesla Service Center IT-Padua,45.389244,11.948497
 Tesla Service Center LU-Luxembourg,49.589429,6.140689
@@ -6353,7 +6354,7 @@ Aldi DE-Kirchheim unter Teck Dettinger Straße,48.6365,9.4525
 Aldi DE-Kirchheimbolanden Woogmorgen,49.66025,8.021083
 Aldi DE-Kirkel Konrad-Zuse-Straße,49.302722,7.263639
 Aldi DE-Kirrweiler Staatsstraße,49.289976,8.14087
-Aldi DE-Koblenz-Moselweiß,50.357783,7.575242
+Aldi DE-Koblenz Moselweißer Straße,50.35785,7.5756
 Aldi DE-Konstanz Oberlohnstraße,47.674667,9.158111
 Aldi DE-Krefeld Hafelstraße,51.323613,6.605946,10
 Aldi DE-Krefeld Neue Ritterstraße,51.3285,6.5864
@@ -7541,7 +7542,7 @@ ARAL DE-Meißen Großenhainer Straße,51.16561,13.48611
 ARAL DE-Meißen Hochuferstraße,51.1691,13.47132
 ARAL DE-Mellingen Aralallee,50.93442,11.38942
 ARAL DE-Menden (Sauerland) Fröndenberger Straße,51.46817,7.76905
-ARAL DE-Merklingen,48.516282,9.759379
+ARAL DE-Merklingen Nellinger Straße,48.51628,9.75938,32
 ARAL DE-Minden Ringstraße,52.29963,8.91035
 ARAL DE-Moers Römerstraße,51.44393,6.66104
 ARAL DE-Montabaur Alleestraße,50.44021,7.83036,20
@@ -9183,6 +9184,7 @@ da-emobil AT-Matrei in Osttirol Seblas,46.989725,12.544702
 da-emobil AT-Mauer Südlandstraße,48.102048,14.822834
 da-emobil AT-Mayrhofen Durster Straße,47.16854,11.86701
 da-emobil AT-Mieders Stubaital Straße,47.15973,11.36791
+da-emobil AT-Neustift im Stubaital Ranalter Straße,47.08135,11.2698
 da-emobil AT-Neustift Stubaitalstraße,47.11037,11.30883
 da-emobil AT-Niederndorf,47.648726,12.197558,10
 da-emobil AT-Oberhart Voralpenkreuz,48.06658,14.033971
@@ -9377,6 +9379,7 @@ E.ON CZ-Lovosice Siřejovická,50.50625,14.05232
 E.ON CZ-Ostrovačice Veveří,49.218186,16.412659
 E.ON CZ-Plzeň 3-Jižní Předměstí Sukova,49.729641,13.362791
 E.ON CZ-Praha Fajtlova,50.092559,14.290787
+E.ON CZ-Sulejovice-Lovosice Siřejovická,50.50452,14.0513
 E.ON CZ-Uherský Brod Močidla,49.02558,17.66029
 E.ON CZ-Zličín Sárská,50.05235,14.29565
 E.ON CZ-Čestlice Obchodní,50.00274,14.57362,5
@@ -13871,7 +13874,7 @@ EWE-GO DE-Meißen Fabrikstraße,51.164993,13.489314
 EWE-GO DE-Melle Industriestraße,52.190412,8.352793
 EWE-GO DE-Menden Hämmerstraße,51.450727,7.752865
 EWE-GO DE-Mering Hertzstraße,48.273707,10.97776
-EWE-GO DE-Merklingen Industriestraße,48.514611,9.758305
+EWE-GO DE-Merklingen Industriestraße,48.51454,9.7584
 EWE-GO DE-Mettmann Rudolf-Diesel-Straße,51.25339,6.95167
 EWE-GO DE-Michelstadt Stadtring,49.687594,9.004981
 EWE-GO DE-Minden Lübbecker Straße,52.278228,8.902649
@@ -15291,6 +15294,8 @@ Hrvatski-Telekom HR-Zagreb Iločka ul.,45.79954,15.95982
 Hrvatski-Telekom HR-Zagreb Ul. Velimira Škorpika,45.80242,15.85505
 
 HUHN DE-Wiehl Zum Scherbusch,50.97636,7.5727
+
+Hummel DE-Merklingen Nellinger Straße,48.51633,9.75865,20
 
 Hyundai FR-Saint-Vigor-le-Grand Bd Winston Churchill,49.28375,-0.68734,30
 
@@ -17302,6 +17307,7 @@ Lidl CZ-Štětí Cihelná,50.456211,14.371034
 Lidl DE-Aachen Peliserkerstraße,50.779213,6.11259
 Lidl DE-Aalen,48.828215,10.113684
 Lidl DE-Abensberg Straubinger Straße 14,48.813231,11.851397
+Lidl DE-Adenau Im Broel,50.38,6.94634
 Lidl DE-Albstadt,48.209824,9.019217
 Lidl DE-Altdorf Kristallstraße 2,48.546078,12.09451
 Lidl DE-Altenmelle,52.192974,8.353423
@@ -21146,6 +21152,7 @@ Smatrics DE-Uelzen Zum Neuen Gehege,53.00528,10.60348
 Smatrics IT-Vahrn-Varna Forch Straße,46.760248,11.637929
 
 Smopi DE-Markdorf Rathausplatz,47.72002,9.39153,30
+Smopi DE-Merklingen Industriestraße,48.51514,9.75867,20
 Smopi DE-Weinsberg Am Autobahnkreuz,49.143791,9.308555,15
 
 SolarHub AU-Mitchell ACT Flemington Rd,-35.21779,149.14409
