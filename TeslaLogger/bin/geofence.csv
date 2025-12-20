@@ -1840,7 +1840,7 @@ Supercharger-V3 DE-Barsbüttel,53.578295,10.193266
 Supercharger-V4 DE-Bautzen,51.18878,14.45457
 Supercharger-V3 DE-Bayreuth,49.9626,11.61055,95
 Supercharger-V4 DE-Beelitz,52.26678,12.92225
-Supercharger-V3 DE-Bensheim,49.6723,8.6022
+Supercharger-V3 DE-Bensheim,49.6724,8.6022
 Supercharger-V3 DE-Berchtesgaden,47.626949,13.000833
 Supercharger-V3 DE-Bergkamen,51.6495,7.67112
 Supercharger-V3 DE-Berlin - APCOA ALEXA,52.51938,13.41608
@@ -8598,7 +8598,7 @@ Citywatt DE-Langenhorn Redlingsweg,54.685991,8.929536
 Citywatt DE-Langenzenn Mühlsteig 57,49.486682,10.777252
 Citywatt DE-Lübbenau Robert-Koch-Straße 45 a-i,51.857952,13.963854
 Citywatt DE-Lüdenscheid Bräuckenstraße,51.218967,7.655518
-Citywatt DE-Mannheim Seckenheimer Landstraße 270,49.473727,8.53942
+Citywatt DE-Mannheim Seckenheimer Landstraße,49.47368,8.53935
 Citywatt DE-Markkleeberg Hauptstraße,51.27187,12.37714
 Citywatt DE-Memmingen Goldhoferstraße 5,47.999724,10.170694
 Citywatt DE-Michendorf Luckenwalder Straße 118,52.293612,13.049263
@@ -9872,7 +9872,7 @@ EDEKA DE-Bremen Rockwinkeler Heerstraße,53.089163,8.933304
 EDEKA DE-Bremen Stockholmer Straße,53.17708,8.71741
 EDEKA DE-Bremerhaven Schiffdorfer Chaussee,53.530873,8.603505
 EDEKA DE-Bruchköbel Bahnhofstraße,50.18399,8.92312
-EDEKA DE-Burgbernheim Bergeler Straße,49.4485,10.3305
+EDEKA DE-Burgbernheim Bergeler Straße,49.44846,10.3312
 EDEKA DE-Burgwedel Hauptstraße,52.508707,9.926592
 EDEKA DE-Butjadingen Butjadinger Straße,53.5764,8.35895
 EDEKA DE-Büdelsdorf Hollerstraße,54.313773,9.675719
@@ -11839,6 +11839,7 @@ EnBW DE-Ringsheim Rathausplatz,48.246225,7.778481
 EnBW DE-Ringsheim Ruster Straße,48.248539,7.772509
 EnBW DE-Rodenbach Am Aueweg,50.15035,9.029481
 EnBW DE-Rodewisch,50.54117,12.394837
+EnBW DE-Roding Further Staße,49.19676,12.5229
 EnBW DE-Ronnenberg Chemnitzer Straße,52.34464,9.66909
 EnBW DE-Rosbach vor der Höhe Carl-Benz-Straße,50.293838,8.69545
 EnBW DE-Rosenfeld Bickelsberger Straße,48.28673,8.72234
@@ -12730,6 +12731,8 @@ Energie360 CH-Winterthur Brauerstrasse,47.50643,8.72864
 Energie360 CH-Winterthur Rudolf-Diesel-Strasse,47.49452,8.757345
 Energie360 CH-Zürich Giessereistrasse,47.38972,8.51807
 
+Energiedienst DE-Bad Dürrheim Huberstraße,48.01617,8.5339
+
 energielenker DE-Ahaus Siemensstraße,52.078459,7.02965
 energielenker DE-Bünde Borriesstraße,52.205629,8.581234
 energielenker DE-Dülmen Lüdinghauser Straße,51.82235,7.2851
@@ -12838,6 +12841,7 @@ Eniwa CH-Oberentfelden Industriestrasse,47.34996,8.05137
 ensev DE-Bad Nauheim Benekestraße,50.37228,8.74884
 ensev DE-Bad Nauheim Ernst-Ludwig-Ring,50.3626,8.73994
 ensev DE-Bad Nauheim Frankfurter Straße,50.37223,8.7434
+ensev DE-Bad Nauheim Im Kirschgarten,50.39504,8.74788
 ensev DE-Bad Nauheim Ludwigstraße,50.36836,8.7438
 ensev DE-Bad Nauheim Parkstraße,50.365533,8.734777
 ensev DE-Bad Nauheim Schwalheimer Straße,50.356686,8.749915
@@ -12977,6 +12981,7 @@ Eulektro DE-Berlin Platz der Luftbrücke,52.47765,13.3868
 Eulektro DE-Bremen Am Dobben,53.0781,8.82284
 Eulektro DE-Bremen Johann-Jacobs-Straße,53.08656,8.7837
 Eulektro DE-Krefeld Odilia-Von-Goch-Strasse,51.36605,6.49727
+Eulektro DE-Stuhr Delmenhorster Straße,52.99375,8.76883
 
 EV-Alzenau DE-Alzenau Burgstraße,50.08713,9.07415
 EV-Beckum DE-Beckum Bauknechtstraße,51.77246,8.03242
@@ -14449,6 +14454,7 @@ Fastned DE-Giengen-Herbrechtingen,48.61561,10.20539
 Fastned DE-Gießen Ferniestraße,50.57151,8.68999
 Fastned DE-Gladbeck-Ellinghorst,51.5552,6.96951
 Fastned DE-Goldbach,49.993547,9.173447
+Fastned DE-Hausach Hauptstraße,48.28368,8.16406
 Fastned DE-Hermsdorf,50.889767,11.871964,18
 Fastned DE-Herzogenrath Bergerstraße,50.867964,6.098497
 Fastned DE-Hilden,51.19216,6.93613,15
@@ -18539,6 +18545,7 @@ Monta DE-Friedberg (Hessen) Straßheimer Straße,50.32138,8.7395
 Monta DE-Hafenlohr Bahnhofstraße,49.86712,9.6031
 Monta DE-Karlsruhe Östliche Rheinbrückenstraße,49.0267,8.3475
 Monta DE-München Frankfurter Ring,48.18624,11.60598,25
+Monta DE-Reiskirchen Freiherr-Vom-Stein-Straße,50.59772,8.8237,25
 Monta DK-Billund Ellehammers Alle,55.731321,9.135699
 Monta DK-Hemmet Kirkehøjvej,55.84966,8.28102
 Monta DK-Ribe Rosen Alle,55.33093,8.77153
@@ -19254,6 +19261,7 @@ OVAG DE-Linden Bahnhofstraße,50.527581,8.66136
 OVAG DE-Mücke Rathausgasse,50.647031,9.031254
 OVAG DE-Münzenberg Am Bürgerplatz,50.460459,8.729734
 OVAG DE-Münzenberg Burgweg,50.450737,8.778897
+OVAG DE-Münzenberg Butzbacher Straße,50.45752,8.73333
 OVAG DE-Nidda Am Bahnhof,50.410511,8.99842
 OVAG DE-Nidda Forststraße,50.419068,8.939689
 OVAG DE-Nidda Hinter dem Brauhaus,50.414892,9.009485
@@ -19290,7 +19298,6 @@ Pair AT-Hall in Tirol Krippgasse,59.35777,17.9483
 Parkstrom DE-Amöneburg Manfred-Stumpf-Straße,50.774147,8.89373
 Parkstrom DE-Asbach Vorteil Center,50.65958,7.41956
 Parkstrom DE-Füssen Schäfflerstraße,47.57639,10.67267
-Parkstrom DE-Reiskirchen Freiherr-Vom-Stein-Straße,50.59773,8.82373,20
 Parkstrom DE-St. Ingbert Katharina-Loth-Straße,49.2781,7.10293
 Parkstrom DE-Tecklenburg Borchelts Weg,52.22645,7.74716
 
@@ -23054,6 +23061,7 @@ Wien-Energie AT-Wien Breite Gasse,48.20365,16.35691
 Wien-Energie AT-Wien Breitenfelder Gasse,48.21412,16.34291
 Wien-Energie AT-Wien Breitenfurter Straße,48.14641,16.29639
 Wien-Energie AT-Wien Cumberlandstraße,48.19175,16.30988
+Wien-Energie AT-Wien Erdberger Lände,48.2021,16.40033
 Wien-Energie AT-Wien Felberstraße,48.197281,16.335561
 Wien-Energie AT-Wien Grassigasse,48.1992,16.31122
 Wien-Energie AT-Wien Guglgasse,48.185265,16.421039
