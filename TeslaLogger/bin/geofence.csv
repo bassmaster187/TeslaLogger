@@ -2133,7 +2133,7 @@ Supercharger-V4 DE-Saarbrücken Innenstadt,49.23915,6.97825
 Supercharger-V4 DE-Sangerhausen,51.45055,11.30448,30
 Supercharger-V3 DE-Satteldorf,49.1811,10.06915,35
 Supercharger-V3 DE-Schierling,48.838255,12.119171,30
-Supercharger-V4 DE-Schipkau,51.536571,13.911
+Supercharger-V4 DE-Schipkau,51.5367,13.91035
 Supercharger-V3 DE-Schleiz,50.54614,11.8033,60
 Supercharger-V4 DE-Schorndorf,48.8169,9.5383
 Supercharger-V4 DE-Schwaig,49.48155,11.196833
@@ -10238,6 +10238,7 @@ Electrify-America US-San Mateo CA De Anza Blvd,37.52044,-122.33814
 Electrify-America US-San Ramon CA Crow Canyon Pl,37.7804,-121.9734
 Electrify-America US-Santa Clara CA Stevens Creek Blvd,37.32682,-121.9435
 Electrify-America US-Santa Maria CA Betteravia Rd,34.92243,-120.43305
+Electrify-America US-Santa Rosa NM NM-156,34.94715,-104.63828
 Electrify-America US-Scarborough ME Gallery Blvd,43.62297,-70.34495
 Electrify-America US-Scipio UT Frontage Road,39.25552,-112.11646
 Electrify-America US-Seabrook NH Lafayette Rd,42.89365,-70.86579
@@ -10245,6 +10246,7 @@ Electrify-America US-Secaucus NJ Park Plaza,40.79187,-74.04196
 Electrify-America US-Spanish Fork UT N Cyn Crk Pkwy,40.12416,-111.64038
 Electrify-America US-Stockton CA Trinity Pkwy,38.05094,-121.3758
 Electrify-America US-Sunnyvale CA Lawrence Expy,37.3838,-121.99527
+Electrify-America US-Sweetwater TX NE Georgia Ave,32.45292,-100.394
 Electrify-America US-Waterloo NY NY-318,42.95572,-76.92106
 Electrify-America US-Waukee IA Grand Prairie Pkwy,41.574009,-93.852656
 Electrify-America US-Wayne NJ Valley Rd,40.93158,-74.22765
@@ -11526,6 +11528,7 @@ EnBW DE-Meersburg Schützenstraße,47.6967,9.27095
 EnBW DE-Meersburg Unteruhldinger Straße,47.69533,9.265586
 EnBW DE-Mehrstetten Marktplatz,48.376376,9.566052
 EnBW DE-Meine Am Marktplatz,52.38044,10.53664
+EnBW DE-Meinerzhagen Darmcher Weg,51.10156,7.67968
 EnBW DE-Meitingen Euronics,48.556197,10.851761,10
 EnBW DE-Meitingen Nord,48.557666,10.852404,20
 EnBW DE-Mellingen Hainholzstraße,50.93753,11.39008
@@ -17329,6 +17332,7 @@ Lidl DE-Arnsberg Ruhrstraße,51.40204,8.06384
 Lidl DE-Arnsdorf Stolpener Straße 14,51.097429,13.994374
 Lidl DE-Arnstorf Mariakirchner Straße,48.56433,12.8246
 Lidl DE-Aschaffenburg Spessartstraße,49.9656,9.15486
+Lidl DE-Augsburg Eichleitnerstraße,48.3465,10.88616
 Lidl DE-Augsburg Unterer Talweg 109,48.315045,10.890143
 Lidl DE-Backnang Weissacher Straße,48.93456,9.4472
 Lidl DE-Bad Camberg Beuerbacher Landstraße,50.2952,8.2533
@@ -18212,6 +18216,7 @@ MB DE-Ludwigsfelde Gottlieb-Daimler-Straße,52.32867,13.273
 MB DE-Mannheim Gottlieb-Daimler-Straße,49.475862,8.495459
 MB DE-Mayen Polcher Straße,50.31949,7.23297,25
 MB DE-Obing Wasserburger Straße,48.00251,12.40044
+MB DE-Sindelfingen Käsbrünnlestraße,48.6952,9.00088
 MB DE-Stuttgart Siemensstraße,48.81003,9.180705,15
 MB US-Waller TX US 290 Frontage Rd,30.07166,-95.9309
 
@@ -19786,6 +19791,8 @@ Pfalzwerke DE-Würzburg Robert-Bunsen-Straße,49.797224,9.991293
 Pfalzwerke DE-Zweibrücken Londoner Bogen,49.230819,7.406062
 Pfalzwerke DE-Zweibrücken Wilkstraße,49.25174,7.34451
 
+Pilot-Flying US-Lubbock TX 4th St,33.5932,-101.8408
+
 Pirk DE-Radevormwald Heisenbergstraße,51.20315,7.37866
 
 PiteEnergi SE-Piteå Västra Kajvägen,65.31615,21.45845
@@ -20424,6 +20431,7 @@ Salzburg AT-Bad Hofgastein Weitmoserstraße,47.15729,13.10638
 Salzburg AT-Bruck Kaprunerstraße,47.28744,12.81005
 Salzburg AT-Burgfried Kletzlgutweg,47.68496,13.10582
 Salzburg AT-Eugendorf Alte Wiener Straße,47.87038,13.14118
+Salzburg AT-Faistenau Am Lindenplatz,47.77813,13.23277
 Salzburg AT-Flachau Flachauer Straße,47.3535,13.39418
 Salzburg AT-Flachau Flachauer Straße,47.35444,13.39315
 Salzburg AT-Fuschl am See Kirchenstraße,47.79478,13.302881
