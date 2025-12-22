@@ -8012,7 +8012,7 @@ BundK DE-Winsen/Luhe Lüneburger Straße,53.352199,10.227263
 
 Béa FR-Plélan-le-Grand Rue des Korrigans,48.00597,-2.08934,30
 
-Bürger DE-Moosburg an der Isar Viehmarktplatz,48.466018,11.93983
+Bürgerwerke DE-Sinzig Bahnhofstraße,50.55664,7.21767
 
 Camer IT-Lecce Via G. Marconi,40.351696,18.17437
 
@@ -11848,6 +11848,7 @@ EnBW DE-Rosbach vor der Höhe Carl-Benz-Straße,50.293838,8.69545
 EnBW DE-Rosenfeld Bickelsberger Straße,48.28673,8.72234
 EnBW DE-Rosenfeld Mömpelgardgasse,48.287172,8.724745
 EnBW DE-Rosenheim,47.843389,12.08216
+EnBW DE-Rosenheim Isarstraße,47.84155,12.12542
 EnBW DE-Rostock Bauhaus,54.107096,12.057097
 EnBW DE-Rostock CITTI-PARK,54.123267,12.074382
 EnBW DE-Rostock Vitalis Zentrum,54.134323,12.069867
@@ -15785,6 +15786,7 @@ Inselwerke DE-Altwarp Am Hafen,53.73832,14.27014
 Inselwerke DE-Eggesin Am Bahnhof,53.68164,14.07322
 Inselwerke DE-Heidelberg Palo-Alto-Platz,49.393917,8.674213,25
 Inselwerke DE-Heringsdorf Delbrückstraße,53.9551,14.1678
+Inselwerke DE-Moosburg an der Isar Stadtwaldstraße,48.466,11.93984
 Inselwerke DE-Sinsheim Badewelt,49.236665,8.884034
 Inselwerke DE-Trassenheide Forststraße,54.0888,13.87249
 Inselwerke DE-Waren (Müritz) Strandstraße,53.51214,12.686
@@ -17040,7 +17042,6 @@ LAKD LT-Ukmergė Ežero g.,55.31461,24.77988
 Last-Mile-Solutions BE-Oostende Horthlaan,51.21772,2.88755
 Last-Mile-Solutions DE-Langenau Hindenburgstraße,48.4959,10.11905
 Last-Mile-Solutions DE-Lorsch Lindenstraße,49.659077,8.567135
-Last-Mile-Solutions DE-Sinzig Bahnhofstraße,50.556655,7.217666
 Last-Mile-Solutions NL-Zaltbommel Hogeweg,51.79801,5.25662
 
 LeasePlan IT-Calenzano Via Vittorio Emanuele,43.84885,11.17142
@@ -18705,6 +18706,7 @@ MOVE CH-Walzenhausen Bahnhof,47.45126,9.6011
 MOVE CH-Winterthur Technoramastrasse,47.51122,8.76228
 MOVE CH-Zollikon Rotfluhstrasse,47.33831,8.57662
 MOVE CH-Zürich Allmendstrasse,47.34013,8.51943
+MOVE CH-Zürich Gessnerallee,47.37416,8.5337
 MOVE CH-Zürich Huttenstrasse,47.3793,8.55251
 
 MOYA PL-Bytom Konstytucji,50.3542,18.8761
@@ -18920,7 +18922,7 @@ nonoxx-pro DE-Neustadt in Holstein Klosterstraße,54.10878,10.812887
 Norlys DK-Gilleleje Alfavej,56.12646,12.30511
 Norlys DK-Hjørring Frederikshavnsvej,57.45557,10.00555
 Norlys DK-Hvide Sande Kirksvej,55.86376,8.18126
-Norlys DK-Kliplev Industripark,54.93976,9.38029,25
+Norlys DK-Kliplev Industripark,54.93976,9.3803,18
 Norlys DK-København Hans Knudsens Pl.,55.7127,12.56131
 Norlys DK-Løkken Jyllandsgade,57.36825,9.71188
 Norlys DK-Ringkøbing Nordre Ringvej,56.10142,8.27418
@@ -19064,6 +19066,7 @@ OK DK-Hurup Thy Bredgade,56.74983,8.4218
 OK DK-Hvide Sande Parallelvej,56.01775,8.1238
 OK DK-Højby Stationsvej,55.90937,11.60065
 OK DK-Juelsminde Rousthøjs Alle,55.70952,10.0102
+OK DK-Kliplev Industripark,54.94003,9.38028,20
 OK DK-Langeskov Hvedetoften,55.35218,10.56403
 OK DK-Løkken Industrivej,57.37333,9.72812,15
 OK DK-Løkken Jyllandsgade,57.36906,9.71458
@@ -19124,6 +19127,7 @@ OMV SI-Počivališče Dravsko Polje,46.429,15.79448
 OMV SK-Dolný Hričov Majora Antona Matúška,49.23302,18.624219
 OMV SK-Košice Južná trieda,48.70012,21.26287
 OMV SK-Poprad Matejovce Hlavná,49.07436,20.33
+OMV SK-Púchov Vsetínska cesta,49.1285,18.30397
 
 ON IS-Akureyri Strandgata,65.68403,-18.08697
 ON IS-Borgarnes Digranesgata,64.54262,-21.9084
@@ -22412,6 +22416,8 @@ Turmstrom AT-Wien Absberggasse,48.17137,16.3886
 Turmstrom AT-Wien Breitenfurter Straße,48.13784,16.25742
 Turmstrom AT-Wien Prager Straße,48.27683,16.38798
 Turmstrom AT-Wolfsberg Grazer Straße,46.846418,14.843636
+
+TW-Ludwigshafen DE-Ludwigshafen am Rhein Bremserstraße,49.49135,8.4243
 
 twl DE-Ludwigshafen am Rhein Pettenkoferstraße,49.48694,8.4252
 
