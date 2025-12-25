@@ -104,3 +104,5 @@ TeslaLogger/bin/encryption.txt
 /OSMMapGenerator/.vs
 /TeslaLogger/.vs
 .vscode/settings.json
+/TLUpdate/.vs
+/UnitTestsTeslalogger/.vs
