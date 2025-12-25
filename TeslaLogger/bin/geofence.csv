@@ -7612,7 +7612,7 @@ ARAL DE-Schwegenheim Im breiten Pfuhl,49.272272,8.33897
 ARAL DE-Schweinfurt Straßburgstraße,50.0215,10.21636,60
 ARAL DE-Schweinfurt West,50.06198,10.1453,30
 ARAL DE-Schweinfurt Willi-Kaidel-Straße,50.05406,10.19494
-ARAL DE-Schwerin,53.600345,11.465313
+ARAL DE-Schwerin An d. Crivitzer Ch,53.60034,11.4653
 ARAL DE-Schönfeld Königsbrücker Straße,51.29542,13.73006
 ARAL DE-Seevetal Jesteburger Straße,53.38251,9.97902,25
 ARAL DE-Sittensen Stader Straße,53.2888,9.50743
@@ -8317,6 +8317,7 @@ ChargePoint DE-Schöngeising Gusso-Reuss-Straße 12,48.14604,11.204441
 ChargePoint DE-Sebnitz 72 Schandauer Straße,50.967752,14.254259
 ChargePoint DE-Sindelfingen Benzstraße,48.70229,8.98307
 ChargePoint DE-Sindelfingen Calwer Straße,48.70551,8.99053
+ChargePoint DE-Sindelfingen Niederer Wasen,48.6921,8.9765
 ChargePoint DE-Spelle 5 Dreierwalder Straße,52.358486,7.477058
 ChargePoint DE-Spenge 25 Industriestraße,52.144729,8.49627
 ChargePoint DE-Speyer 2 Geibstraße,49.314394,8.446451
@@ -9162,6 +9163,7 @@ da-emobil AT-Fiss Fisser Straße,47.05341,10.61294
 da-emobil AT-Gleisdorf Mühlgasse,47.098969,15.713098
 da-emobil AT-Graz Feldkirchner Straße,47.01073,15.41195,25
 da-emobil AT-Graz Frachtengasse,47.0284,15.43241
+da-emobil AT-Graz Leechgasse,47.07774,15.4559
 da-emobil AT-Graz Puntigamer Straße,47.03198,15.44156
 da-emobil AT-Großarl Marktstraße,47.240061,13.199945
 da-emobil AT-Hall in Tirol Brockenweg,47.27967,11.51271
@@ -14796,6 +14798,7 @@ GETEC DE-Bremen Waterfront,53.11118,8.74851
 GETEC DE-Böblingen Herrenberger Straße,48.67686,8.97468
 
 GGEW DE-Lampertheim Wilhelmstraße,49.594666,8.469086,30
+GGEW DE-Lorsch Lindenstraße,49.65908,8.56714
 GGEW DE-Zwingenberg Melibokusstraße,49.721749,8.610705
 
 Glattwerk CH-Dübendorf Bettlistrasse,47.397961,8.624511
@@ -17048,7 +17051,6 @@ LAKD LT-Ukmergė Ežero g.,55.31461,24.77988
 
 Last-Mile-Solutions BE-Oostende Horthlaan,51.21772,2.88755
 Last-Mile-Solutions DE-Langenau Hindenburgstraße,48.4959,10.11905
-Last-Mile-Solutions DE-Lorsch Lindenstraße,49.659077,8.567135
 Last-Mile-Solutions NL-Zaltbommel Hogeweg,51.79801,5.25662
 
 LeasePlan IT-Calenzano Via Vittorio Emanuele,43.84885,11.17142
@@ -18238,6 +18240,8 @@ mblty DE-Raststätte Göttingen West,51.49487,9.87619,10
 mblty DE-Raststätte Kraichgau Nord,49.2442,8.87885
 mblty DE-Raststätte Kraichgau Süd,49.2409,8.87956
 mblty DE-Raststätte Werratal,51.006859,10.180879
+
+medl DE-Mülheim an der Ruhr Bergstraße,51.42844,6.8724
 
 MEGA DE-Monheim am Rhein Einkaufzentrum,51.0904,6.88902
 
@@ -21651,6 +21655,7 @@ SW-Speyer DE-Speyer Berliner Platz,49.32692,8.41754
 SW-Stade DE-Stade Bremervörder Straße,53.59572,9.437753
 SW-Staßfurt DE-Autohof Brumby,51.897,11.6922,30
 SW-Steinburg DE-Itzehoe Klosterbrunnen,53.93629,9.51815
+SW-Stendal DE-Käthen K1056,52.56825,11.6632
 SW-Stendal DE-Osterburg (Altmark) Lindenstraße,52.78787,11.7555
 SW-Stendal DE-Stendal Bruchweg,52.60838,11.86522
 SW-Stendal DE-Stendal Heerener Straße,52.58835,11.87177
@@ -22460,6 +22465,7 @@ Uno-X NO-Valderøy Valderøyvegen,62.529,6.11677,25
 Vannkraft NO-Leknes Skreda,68.15215,13.5118
 
 Vattenfall DE-Ahrensburg Reeshoop,53.68,10.2343
+Vattenfall DE-Albstadt Kientenstraße,48.21047,9.01636
 Vattenfall DE-Aschersleben Heinrichstraße,51.754642,11.464478
 Vattenfall DE-Bad Driburg Lange Straße,51.737036,9.010439
 Vattenfall DE-Bad Saarow Pieskower Straße,52.291963,14.063649
@@ -23257,6 +23263,7 @@ Zunder ES-Zafra Plaza del Alcázar,38.4244,-6.41493
 
 ČEZ CZ-Beroun Obchodní,49.95654,14.0596
 ČEZ CZ-Bečov nad Teplou Karlovarská,50.09306,12.84122
+ČEZ CZ-Boskovice Rovná,49.4909,16.64158
 ČEZ CZ-Boží Dar-Ostrov nad Ohří,50.40959,12.92865
 ČEZ CZ-Dvůr Králové nad Labem Listopadu,50.42716,15.81725
 ČEZ CZ-Děčín,50.77002,14.20725
