@@ -2044,8 +2044,7 @@ Supercharger-V4 DE Lübeck (Cafe del Sol),53.881288,10.660194
 Supercharger-V4 DE-Lübeck Moisling,53.912554,10.732506
 Supercharger-V4 DE-Lünen (Cafe Del Sol),51.60468,7.5262
 Supercharger-V3 DE-Magdeburg,52.210632,11.670302
-Supercharger-V4 DE-Magdeburg Olvenstedter Graseweg,52.1592,11.6075
-Supercharger-V4 DE-Magdeburg Urban,52.16068,11.6082
+Supercharger-V4 DE-Magdeburg Florapark,52.15917,11.60737
 Supercharger-V4 DE-Maintal (Globus),50.12982,8.8685
 Supercharger-V4 DE-Mainz,49.9814,8.28052
 Supercharger-V4 DE-Malsfeld,51.0875,9.48563,62
@@ -5659,6 +5658,7 @@ Supercharger-V3 US-Springfield VA,38.77623,-77.17596
 Supercharger US-St. Augustine FL,29.924286,-81.416018
 Supercharger-V3 US-St. Augustine FL - Inman Road,29.91678,-81.4035
 Supercharger-V3 US-St. Augustine FL - World Commerce Pkwy,29.98287,-81.46499
+Supercharger-V4 US-St. Augustine FL FL-16,29.9155,-81.41338
 Supercharger US-St. Charles MO,38.78214,-90.532841
 Supercharger US-St. Charles MO - Beale Street,38.764741,-90.49338
 Supercharger-V3 US-St. George SC,33.195509,-80.599848
@@ -8029,6 +8029,7 @@ Charge-and-GO RS-Beograd Novosadski put bb,44.865776,20.345872
 Charge-and-GO RS-Dobanovci Добановци Maršala Tita,44.8146,20.25192
 Charge-and-GO RS-Leskovac Лесковац Петра Цакића,42.99974,21.9532
 Charge-and-GO RS-Novi Sad E75,45.276042,19.921247
+Charge-and-GO RS-Sombor Сомбор Štrosmajerova,45.7643,19.1251
 Charge-and-GO RS-Subotica Segedinski put,46.100506,19.697765
 Charge-and-GO RS-Čačak Konjevići,43.903191,20.398646
 
@@ -12655,14 +12656,6 @@ Energa PL-Gdańsk aleja Grunwaldzka,54.40231,18.5708
 Energa PL-Koszalin Jana Pawła II,54.2065,16.18583
 Energa PL-Słupsk plac Zwycięstwa,54.46441,17.0281
 
-Energie AT-Braunau am Inn Auf der Haiden,48.25001,13.04723
-Energie AT-Ebensee Im Gemeindeamt,47.81263,13.7743
-Energie AT-Grieskirchen Manglburg,48.234117,13.825708
-Energie AT-Mattighofen Römerstraße,48.10713,13.1483
-Energie AT-Schwanenstadt Stadtplatz,48.05457,13.77367
-Energie AT-Schärding Karl-Gruber-Straße,48.44838,13.43813
-Energie AT-Vöcklabruck Varena,48.00303,13.66992
-
 Energie-Architektur DE-Leipzig Gießerstraße,51.32458,12.32733,30
 
 Energie-Burgenland AT-Eisenstadt Ruster Straße,47.83533,16.52882
@@ -12682,10 +12675,18 @@ Energie-Graz DE-Graz Schützenhofgasse,47.06908,15.45915
 Energie-Klagenfurt AT-Klagenfurt 8.-Mai-Straße,46.62319,14.3072
 
 Energie-Oberösterreich AT-Bad Ischl Götzstraße,47.71369,13.62392
+Energie-Oberösterreich AT-Braunau am Inn Auf der Haiden,48.25,13.04723
+Energie-Oberösterreich AT-Ebensee Im Gemeindeamt,47.81263,13.7743
+Energie-Oberösterreich AT-Grieskirchen Manglburg,48.23412,13.8257
 Energie-Oberösterreich AT-Liezen Gesäusestraße,47.55972,14.25383,40
 Energie-Oberösterreich AT-Linz Böhmerwaldstraße,48.29257,14.29,25
 Energie-Oberösterreich AT-Linz Energiestraße,48.29268,14.29067,25
+Energie-Oberösterreich AT-Mattighofen Römerstraße,48.10713,13.1483
+Energie-Oberösterreich AT-Schwanenstadt Stadtplatz,48.05457,13.77367
+Energie-Oberösterreich AT-Schärding Karl-Gruber-Straße,48.44838,13.43813
+Energie-Oberösterreich AT-St. Georgen im Attergau Am See-Ring,47.92918,13.50163,15
 Energie-Oberösterreich AT-Ternberg Alois-Derfler-Straße,47.94635,14.36008
+Energie-Oberösterreich AT-Vöcklabruck Varena,48.00303,13.66992
 
 energie-schwaben DE-Augsburg Bayerstraße,48.343625,10.884503
 
@@ -12713,6 +12714,7 @@ Energie-Steiermark AT-Laßnitzhöhe Hauptstraße,47.0768,15.5825
 Energie-Steiermark AT-Leibnitz Wasserwerkstraße,46.79607,15.55699
 Energie-Steiermark AT-Lieboch Radlstraße,46.956961,15.346721,25
 Energie-Steiermark AT-Passail Fladnitzer Straße,47.27958,15.50633
+Energie-Steiermark AT-Passail Markt,47.2824,15.5153
 Energie-Steiermark AT-Prutz Moosweg,47.071719,10.66437,25
 Energie-Steiermark AT-Raaba Dr. Auner Straße,47.026565,15.488085,25
 Energie-Steiermark AT-Schladming Pichl,47.38948,13.61102
@@ -20031,6 +20033,8 @@ Powerdot PT-Serpa R. da Eira de São Pedro,37.94067,-7.60388
 Powerdot PT-Vila do Conde Av. Gen. Humberto Delgado,41.36961,-8.74356
 Powerdot PT-Vila Nova de Gaia R. Delfim Lima,41.07625,-8.60161
 
+PowerFlex US-Mountain View CA California St,37.39176,-122.0811
+
 Powerland BE-Knokke-Heist Natiënlaan,51.327074,3.29579
 
 Powerstop IT-Ancona Via Girombelli Arnaldo,43.5434,13.51157
@@ -21002,6 +21006,7 @@ Shell GB-Dunblane A9 Southbound,56.22521,-3.91543
 Shell GB-Durham High St,54.79479,-1.5209
 Shell GB-Saint Columb Kingsley Village,50.37871,-4.9422,20
 Shell GB-Saltash A38,50.40724,-4.35294
+Shell HU-Baja Dózsa György út,46.19455,18.95076
 Shell HU-Budapest Könyves Kálmán körút,47.4706,19.08696
 Shell HU-Pécs Budai Vám utca,46.083554,18.270951
 Shell HU-Siófok Vak Bottyán u.,46.89286,18.05578
@@ -21601,6 +21606,7 @@ SW-Neu-Isenburg DE-Neu-Isenburg Dreiherrnsteinplatz,50.05883,8.75028
 SW-Neu-Isenburg DE-Neu-Isenburg Jahnstraße,50.048643,8.682858
 SW-Neu-Isenburg DE-Neu-Isenburg Offenbacher Straße,50.05211,8.71451
 SW-Neumünster DE-Heiligenstedten Juliankadamm,53.934643,9.469525
+SW-Neumünster DE-Neumünster Brüggemannstraße,54.06736,9.9966
 SW-Neumünster DE-Neumünster Kuhberg,54.074778,9.984153
 SW-Neumünster DE-Neumünster Vicelinstraße,54.08174,9.98635
 SW-Neuruppin DE-Neuruppin Präsidentenstraße,52.92295,12.8037
@@ -22745,6 +22751,7 @@ Virta FI-Vaasa Kiitokaari,63.05324,21.71852,30
 Virta FI-Vaasa Laivakatu,63.10321,21.62373
 Virta FR-Reichstett Boulevard des Enseignes,48.65242,7.73073
 Virta FR-Saintes Rue de la Côte de Beauté,45.746659,-0.669742
+Virta HU-Budapest Erzsébet krt.,47.49892,19.07007
 Virta IS-Akureyri Gleráreyrar,65.68835,-18.10166
 Virta SE-Gävle Geodetgatan,60.64035,17.14678
 Virta SE-Höör Frostavallsvägen,55.93715,13.55393
