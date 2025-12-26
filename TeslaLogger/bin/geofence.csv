@@ -5412,6 +5412,7 @@ Supercharger US-Richmond VA,37.529808,-77.353916
 Supercharger-V3 US-Richmond VA - South Providence Road,37.49607,-77.54725
 Supercharger-V3 US-Ridgefield WA,45.81775,-122.68288
 Supercharger-V3 US-Ridgeland SC,32.485331,-80.978079
+Supercharger-V4 US-Ridgeland SC E Main St,32.47923,-80.97413
 Supercharger-V3 US-Rifle CO,39.522784,-107.774284
 Supercharger-V3 US-Ripley WV,38.82226,-81.72453
 Supercharger-V3 US-Ripon CA,37.747058,-121.142215
@@ -7388,7 +7389,6 @@ ARAL DE-Duderstadt Gewerbepark Euzenberg,51.5105,10.24067
 ARAL DE-Duisburg Friedrich-Ebert-Straße,51.4051,6.71232
 ARAL DE-Dummerstorf Manfred-Roth-Straße,54.021956,12.230515
 ARAL DE-Dätgen Grotwisch,54.180523,9.944185,25
-ARAL DE-Dölbau Geltestraße,51.47653,12.08645
 ARAL DE-Düren Nordstraße,50.83242,6.45867
 ARAL DE-Düsseldorf Lütticher Straße,51.23985,6.7441
 ARAL DE-Düsseldorf Lütticher Straße,51.2419,6.74325
@@ -7483,6 +7483,7 @@ ARAL DE-Iserlohn Baarstraße,51.40038,7.69776
 ARAL DE-Isselburg Dekkers Waide,51.81782,6.44393
 ARAL DE-Jena,50.877065,11.621512
 ARAL DE-Jülich Neusser Straße,50.92806,6.36577
+ARAL DE-Kabelsketal Geltestraße,51.47663,12.0859,60
 ARAL DE-Kaltenkirchen Kieler Straße,53.84077,9.94763
 ARAL DE-Kammerstein An der Autobahn,49.31125,11.00232,70
 ARAL DE-Kassel Druseltalstraße,51.30714,9.44717
@@ -10853,6 +10854,7 @@ EnBW DE-Dortmund Zillestraße,51.4731,7.486265
 EnBW DE-Dotternhausen Robert-Koch-Straße,48.2326,8.7943
 EnBW DE-Dresden Tschirnhausstraße,50.997173,13.79755
 EnBW DE-Duisburg Hellweg,51.466263,6.787954
+EnBW DE-Duisburg Rathausallee,51.39773,6.66053
 EnBW DE-Duisburg Rewe,51.426134,6.668349
 EnBW DE-Dunningen Hauptstraße,48.21227,8.50535
 EnBW DE-Dutenhofen Globus,50.56044,8.60787
@@ -12570,6 +12572,7 @@ EnelX IT-Varese Via Fratelli de Grandi,45.79545,8.84256
 EnelX IT-Venegono Inferiore Via Fratelli Kennedy,45.72929,8.88755
 EnelX IT-Ventimiglia Passeggiata Marconi,43.79037,7.59995
 EnelX IT-Verona C.so Milano,45.44403,10.96555
+EnelX IT-Viareggio Largo Risorgimento,43.86924,10.2595
 EnelX IT-Vicenza Piazzale della Stazione,45.54146,11.53924
 EnelX IT-Vicolungo The Style Outlets,45.46958,8.4586
 EnelX IT-Vieste Via Alessandro Manzoni,41.8815,16.17355
@@ -12848,6 +12851,8 @@ Enio AT-Rudersdorf Teichweg,47.04537,16.12217
 
 Eniwa CH-Buchs Industriestrasse,47.392681,8.064548
 Eniwa CH-Oberentfelden Industriestrasse,47.34996,8.05137
+
+ENNI DE-Großhansdorf Wöhrendamm,53.6527,10.28236
 
 ensev DE-Bad Nauheim Benekestraße,50.37228,8.74884
 ensev DE-Bad Nauheim Ernst-Ludwig-Ring,50.3626,8.73994
@@ -20130,6 +20135,8 @@ Qwello DE-Berlin Scherenbergstraße,52.55057,13.41987
 Qwello DE-Leipzig Cöthner Straße,51.36438,12.36952
 Qwello SE-Stockholm Torkel Knutssonsgatan,59.32025,18.0564
 
+r-loaded DE-Leipheim Albert-Einstein-Straße,48.44706,10.24017
+
 Ragde NO-Kristiansund Storgata,63.10824,7.7281
 
 Raiffeisenbank DE-Bad Homburg Werner-Reimers-Straße,50.216939,8.611279
@@ -20346,8 +20353,6 @@ RhönEnergie DE-Gersfeld (Rhön) Wasserkuppe,50.4982,9.94722
 RICARICA IT-Livorno Via Giovanni Gelati,43.530357,10.325833
 
 Rifil SE-Arlöv Gullrisvägen,55.614023,13.10072,30
-
-Rloaded DE-Leipheim Albert-Einstein-Straße,48.44706,10.240232
 
 Road DE-Mettmann Marie-Curie-Straße,51.25046,6.9513
 
@@ -20847,7 +20852,7 @@ Shell DE-Löffingen Studerstraße,47.8862,8.36108
 Shell DE-Lörrach Wiesentalstraße,47.624416,7.657931
 Shell DE-Lübeck Brandenbaumer Landstraße,53.85804,10.73456
 Shell DE-Lübeck Padelügger Weg,53.8562,10.6362
-Shell DE-Lüdenscheid Paulmannshoeher Straße,51.20782,7.65594
+Shell DE-Lüdenscheid Paulmannshöher Straße,51.20782,7.65594
 Shell DE-Lüneburg Erbstorfer Landstraße,53.26198,10.4257
 Shell DE-Lünen Kurt-Schumacher-Straße,51.6067,7.52568
 Shell DE-Lützow Gadebuscher Straße,53.65906,11.171057
@@ -20902,6 +20907,7 @@ Shell DE-Plochingen Esslinger Straße,48.7157,9.41377
 Shell DE-Potsdam Fritz-Zubeil-Straße,52.381683,13.100285
 Shell DE-Potsdam Potsdamer Straße,52.41464,13.02336
 Shell DE-Quickborn Friedrichsgaber Straße,53.7499,9.93454
+Shell DE-Radebeul Meißner Straße,51.11904,13.59875
 Shell DE-Rampe Cambser Straße,53.68722,11.4883
 Shell DE-Rathenow Fehrbelliner Straße,52.60776,12.3389
 Shell DE-Remscheid Neuenkamper Straße,51.17677,7.21831
@@ -21897,6 +21903,7 @@ TankE DE-Köln Butzweilerstraße,50.94166,7.0098
 TankE DE-Köln Butzweilerstraße,50.98095,6.89722
 TankE DE-Köln Christrosenweg,50.874653,7.05661
 TankE DE-Köln Dagobertstraße,50.9483,6.957764
+TankE DE-Köln Dreisamweg,50.98522,7.03503
 TankE DE-Köln Dülkenstraße,50.89046,7.05297
 TankE DE-Köln Esserstraße,50.930366,6.996549
 TankE DE-Köln Etzelstraße,50.97883,6.93193
