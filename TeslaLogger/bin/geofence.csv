@@ -2966,6 +2966,7 @@ Supercharger HR-Senj,44.98932,14.89781
 Supercharger-V4 HR-Slavonski Brod,45.1753,18.06326
 Supercharger HR-Split,43.58737,16.57636
 Supercharger-V4 HR-Varaždin,46.26376,16.37984
+Supercharger-V4 HR-Vrata Jadrana North,45.35582,14.35072
 Supercharger-V4 HR-Vrata Jadrana South,45.35516,14.35044
 Supercharger HR-Vrgorac,43.20407,17.37387,25
 Supercharger-V4 HR-Zadar,44.11404,15.40714
@@ -7016,7 +7017,7 @@ Allego DE-Oberschleißheim Mittenheimer Straße,48.2579,11.5581
 Allego DE-Offenburg Schutterwälder Straße 2,48.464964,7.931835
 Allego DE-Oldenburg Posthalterweg,53.16134,8.17273
 Allego DE-Oldenburg Stubbenweg,53.18047,8.22845
-Allego DE-Osnabrück Hannoversche Straße 70,52.260406,8.076756
+Allego DE-Osnabrück Hannoversche Straße,52.2604,8.07672
 Allego DE-Osnabrück Mittelburgstraße,52.27573,8.07396
 Allego DE-Ottersberg Posthausen,53.057561,9.165869,12
 Allego DE-Overath Großbernsau 2,50.939581,7.293598
@@ -8638,7 +8639,7 @@ Citywatt DE-Oberhaching Ödenpullach 3,47.992629,11.552467
 Citywatt DE-Oberpframmern Am Soiherweg 6,48.020709,11.819057
 Citywatt DE-Oberschneiding Siebenkofen,48.808722,12.637126
 Citywatt DE-Ortenburg Gewerbegebiet 1,48.522709,13.235173
-Citywatt DE-Osnabrück Oldenburger Landstraße 1,52.303713,8.035557
+Citywatt DE-Osnabrück Oldenburger Landstraße,52.30375,8.03525
 Citywatt DE-Ostseeheilbad Zingst Am Fressenbruch,54.440985,12.660566
 Citywatt DE-Paderborn Walter-Schrader-Weg,51.716534,8.807572
 Citywatt DE-Passau Fürstenzeller Straße 39,48.560791,13.363148
@@ -9801,6 +9802,7 @@ eCarUp CH-Davos Seewiesenstrasse,46.813535,9.845873
 eCarUp CH-Domat/Ems Via la Val,46.83794,9.46568
 eCarUp CH-Däniken Aarefeldstrasse,47.360225,7.975905
 eCarUp CH-Eich Vogelsang,47.1611,8.17835
+eCarUp CH-Flims Via Nova,46.83297,9.28274
 eCarUp CH-Huttwil Schwende,47.1159,7.86762
 eCarUp CH-Kallnach Oberfeld,47.01769,7.23358
 eCarUp CH-Langenthal Farbgasse,47.20996,7.78932
@@ -12981,6 +12983,7 @@ ESB IE-Waterford Parnell St,52.25879,-7.10867
 
 ESWE DE-Idstein Limburger Straße,50.223519,8.267802
 ESWE DE-Wiesbaden Am Schloßpark,50.03909,8.23633
+ESWE DE-Wiesbaden Bismarckring,50.0797,8.22974
 ESWE DE-Wiesbaden Blücherstraße,50.08049,8.22484
 ESWE DE-Wiesbaden Hagenauer Straße,50.04779,8.2307
 ESWE DE-Wiesbaden Hauptbahnhof Gartenfeldstraße,50.070716,8.245458
@@ -15398,6 +15401,7 @@ Iberdrola ES-Sabadell Carr. de Bellaterra,41.5115,2.10673
 Iberdrola ES-Salamanca P.º de la Estación,40.96914,-5.65686
 Iberdrola ES-Salamanca Rector Esperabe,40.958977,-5.665269
 Iberdrola ES-San Fulgencio Calle del Mar,38.11762,-0.65714
+Iberdrola ES-San Fulgencio Calle Mar Cantabrico,38.1191,-0.65704
 Iberdrola ES-San Sebastián de los Reyes Gta. de Antonio Gaudí,40.55808,-3.61263
 Iberdrola ES-Santa Magdalena de Polpís Carrer Alcalà,40.35538,0.30139
 Iberdrola ES-Siero Langreo,43.38049,-5.69989
@@ -17636,7 +17640,7 @@ Lidl DE-Hoya Auf dem Kuhkamp,52.81046,9.13744
 Lidl DE-Hoyerswerda Schulstraße,51.43798,14.2379
 Lidl DE-Höxter Lütmarser Straße 76,51.773981,9.360177
 Lidl DE-Hürth Luxemburger Straße,50.89371,6.90339
-Lidl DE-Ibbenbüren Osnabrücker Straße 97,52.289117,7.72726
+Lidl DE-Ibbenbüren Osnabrücker Straße,52.28893,7.7273
 Lidl DE-Idstein,50.2289,8.264687
 Lidl DE-Illingen Hofäckerstraße 3,48.954131,8.912032
 Lidl DE-Ingolstadt Am Hochfeldweg 5,48.705405,11.423386
@@ -17796,7 +17800,7 @@ Lidl DE-Oranienburg Berliner Straße 49,52.74822,13.236639
 Lidl DE-Oschersleben,52.028896,11.247636
 Lidl DE-Osnabrück Hannoversche Straße 19,52.265123,8.065501
 Lidl DE-Osnabrück Hans-Wunderlich-Straße 2,52.267027,8.001444
-Lidl DE-Osnabrück-Dodesheide Mönkedieckstraße 11-13,52.299187,8.061235
+Lidl DE-Osnabrück Mönkedieckstraße,52.29966,8.06136
 Lidl DE-Overath-Vilkerath Steinhauser Auel 1,50.964021,7.322632
 Lidl DE-Paderborn Neuhäuser Straße,51.72883,8.73118
 Lidl DE-Papenburg Karl-Hillers-Straße,53.07857,7.38835
@@ -18281,6 +18285,7 @@ MENNEKES DE-Hallstadt Michelinstraße,49.92353,10.89014
 MENNEKES DE-Hallstadt Michelinstraße,49.92418,10.89017
 MENNEKES DE-Kirchhundem Industriestraße,51.038666,7.997107
 MENNEKES DE-Langgöns Hauptstraße,50.461496,8.584555
+MENNEKES DE-Lüneburg Bastionstraße,53.2514,10.4026
 MENNEKES DE-Oberhausen Strauss Workwearstore,51.48891,6.88628,30
 MENNEKES DE-Trebbin Markt,52.21471,13.21384
 MENNEKES DE-Wangels Seestraße,54.3103,10.8019
@@ -18431,6 +18436,7 @@ Mer DE-Schönefeld Am Rondell,52.36765,13.5588
 Mer DE-Sengenthal Schlierfer Holz,49.22485,11.45632
 Mer DE-Simbach am Inn Münchner Straße,48.26083,13.00742
 Mer DE-Sindelfingen Hanns-Martin-Schleyer-Straße,48.70028,9.00603
+Mer DE-Straubing Aiterhofener Straße,48.87,12.6293
 Mer DE-Straubing Donaugasse,48.88545,12.57574
 Mer DE-Tank- und Rastanlage Marienborn,52.21504,11.07967
 Mer DE-Tegernheim Von-Heyden-Straße,49.02354,12.16184
@@ -20258,6 +20264,7 @@ RED-E US-Elk Rapids MI Ames St,44.89894,-85.401
 
 reev CH-Lyssach Bernstrasse,47.07449,7.57053
 reev CH-Spiez Oberriedstrasse,46.890603,7.356605
+reev DE-Alpirsbach Aischbachstraße,48.34458,8.40428
 reev DE-Asbach-Bäumenheim Albanusstraße,48.69474,10.82682
 reev DE-Bad Driburg Brunnenstraße,51.73399,9.03522
 reev DE-Berlin MOA Bogen,52.53207,13.34538
@@ -21070,6 +21077,7 @@ SIEG63 FR-Le Cendre Allée des Marronniers,45.72343,3.18947
 
 Siemens CH-Zug Theilerstrasse,47.17931,8.51369
 Siemens CH-Zug Theilerstrasse,47.17988,8.51457
+Siemens CH-Zürich Freilagerstrasse,47.37937,8.49184
 Siemens DE-Nürnberg Humboldtstraße,49.438403,11.0753
 
 SIGEIF FR-Rosny-sous-Bois Rue Claude Pernès,48.873,2.48731
@@ -21525,6 +21533,7 @@ SW-Hattingen DE-Hattingen Im Bruchfeld,51.39674,7.17966,30
 SW-Heidelberg DE-Heidelberg Alte Eppelheimer Straße,49.406414,8.681353,30
 SW-Heidelberg DE-Heidelberg Friedrich-Ebert-Platz,49.408875,8.698372
 SW-Heidelberg DE-Heidelberg Vangerowstraße,49.4089,8.678841
+SW-Heidelberg DE-Heidelberg Zeppelinstraße,49.42322,8.6847
 SW-Herne DE-Herne Grenzweg,51.54066,7.2076
 SW-Herten DE-Herten Herner Straße,51.58255,7.15027
 SW-Hilden DE-Hilden Am Lindenplatz,51.162629,6.940721
@@ -21661,6 +21670,7 @@ SW-Reichenbach DE-Reichenbach Rotschauer Straße,50.61884,12.30149
 SW-Rheine DE-Rheine Heiliggeistplatz,52.279418,7.439916
 SW-Rheine DE-Rheine Schultenstraße,52.296243,7.419707
 SW-Riesa DE-Riesa Dr.-Schneider-Straße,51.301571,13.309787
+SW-Rostock DE-Graal-Müritz Zarnesweg,54.25036,12.2271
 SW-Rostock DE-Rostock August-Bebel-Straße,54.085661,12.134546
 SW-Rostock DE-Rostock Timmermannsstrat,54.08476,12.19241
 SW-Rostock DE-Rostock Warnowufer,54.09352,12.11827
