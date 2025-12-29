@@ -54,7 +54,7 @@ Supercharger AT-St. Valentin,48.19652,14.52755
 Supercharger-V4 AT-St. Veit an der Glan,46.730391,14.37859
 Supercharger-V4 AT-Steyr,48.049589,14.414486
 Supercharger-V4 AT-Stockerau,48.38855,16.18087
-Supercharger-V4 AT-Stumm,47.28995,11.88771,25
+Supercharger-V4 AT-Stumm,47.28995,11.8877
 Supercharger-V4 AT-Suben,48.394466,13.426544
 Supercharger-V4 AT-Trieben,47.49214,14.48394
 Supercharger AT-Villach,46.604193,13.869091
@@ -210,7 +210,7 @@ Supercharger-V3 BE-Zaventem,50.869908,4.502047
 
 Supercharger BG-Plovdiv,42.14452,24.76887
 Supercharger-V3 BG-Sofia,42.65777,23.313598
-Supercharger-V4 BG-Sofia София Bulgaria Mall,42.66414,23.28866
+Supercharger-V4 BG-Sofia София Bulgaria Boulevard,42.66372,23.28946
 
 Supercharger CA-Abbotsford BC - Mount Lehman Road Supercharger,49.059056,-122.377021
 Supercharger CA-Aulac NB,45.871352,-64.280378
@@ -3121,7 +3121,7 @@ Supercharger-V3 IT-Sarzana - La Spezia,44.11745,9.94575,35
 Supercharger-V3 IT-Serravalle Scrivia,44.735607,8.839653
 Supercharger-V4 IT-Settimo Torinese,45.127435,7.737372
 Supercharger-V4 IT-Sinigo,46.634373,11.176173
-Supercharger IT-Sondrio,46.16463,9.67732,30
+Supercharger IT-Sondrio,46.16463,9.67732
 Supercharger IT-Tarquinia,42.183306,11.788161
 Supercharger-V4 IT-Telgate,45.633205,9.852077
 Supercharger-V3 IT-Teramo,42.68275,13.7601
@@ -3824,7 +3824,7 @@ Supercharger-V3 SE-Ludvika,60.1518,15.19179
 Supercharger-V4 SE-Luleå,65.590269,22.147879
 Supercharger-V3 SE-Lycksele,64.596066,18.674414
 Supercharger-V4 SE-Länsjärv,66.65169,22.18229
-Supercharger SE-Löddeköpinge,55.766399,12.990671
+Supercharger-V4 SE-Löddeköpinge,55.76623,12.9908
 Supercharger-V4 SE-Malmö,55.597923,13.096359
 Supercharger-V4 SE-Malmö,55.612989,13.104019
 Supercharger-V3 SE-Malung,60.68532,13.71368
@@ -7176,6 +7176,7 @@ AllgäuStrom DE-Oberstdorf Hauptstraße,47.41037,10.27727
 AllgäuStrom DE-Oberstdorf Nebelhornstraße,47.40632,10.28486
 AllgäuStrom DE-Rückholz Hauptstraße,47.65906,10.53959
 
+alperia IT-Ahrntal Via San Giacomo,47.00958,12.0121
 alperia IT-Badia Str. Pedraces,46.60937,11.89464
 alperia IT-Bozen Sparkassenstraße,46.49797,11.3491
 alperia IT-Bressanone Via Brennero,46.71924,11.65616
@@ -9769,6 +9770,7 @@ EAM DE-Stadtallendorf Niederkleiner Straße,50.824003,9.01499
 EAM DE-Vellmar Holländische Straße,51.362485,9.456369
 EAM DE-Wabern Reiherwaldweg,51.09553,9.353367
 EAM DE-Weimar (Lahn) Herborner Straße,50.76247,8.739391
+EAM DE-Willingen Mühlenkopfstraße,51.28017,8.61917
 
 easy4you CH-Chur Bahnhofplatz,46.85433,9.53124
 easy4you CH-Leuk Kantonsstrasse,46.3088,7.65131
@@ -10371,6 +10373,7 @@ Elinta LT-Palanga Sporto g.,55.909,21.0691
 Elinta LT-Utena J. Basanavičiaus g.,55.49848,25.60102
 Elinta LT-Vievis Kauno g.,54.77287,24.81753
 
+eliso DE-Celle Zur Hasselklink,52.65246,10.06868
 eliso DE-Essen Bamlerstraße,51.47264,6.99121
 eliso DE-Magdeburg Eisvogelstrasse,52.13951,11.58802
 eliso DE-Mannheim Seckenheimer Landstraße,49.4745,8.53765
@@ -16955,6 +16958,7 @@ Kaufland SK-Nitra Zlatomoravecká,48.318215,18.116295
 Kaufland SK-Senec Brezová,48.22463,17.403691
 Kaufland SK-Trnava Trstínska cesta,48.387152,17.574667
 
+Kauland DE-Bitterfeld-Wolfen Bismarckstraße,51.6185,12.31912
 Kauland DE-Paderborn Riemekestraße,51.7154,8.7399
 
 KEBA AT-Döbriach Strandweg,46.77193,13.64591
@@ -18381,6 +18385,7 @@ Mer DE-Eltville am Rhein Kiliansring,50.025141,8.117298
 Mer DE-Freiburg im Breisgau Hermann-Mitsch-Straße,48.02817,7.83394
 Mer DE-Furtwangen im Schwarzwald Allmendstraße,48.04978,8.21279
 Mer DE-Genthin Geschwister-Scholl-Straße,52.4086,12.16215
+Mer DE-Gladenbach Jakob-Heuser-Straße,50.7572,8.57802
 Mer DE-Grammow Raststätte Lindholz,54.054634,12.630382
 Mer DE-Herrenberg Daimlerstraße,48.60211,8.87012
 Mer DE-Herrenberg Ohmstraße,48.58151,8.89322
@@ -21695,6 +21700,7 @@ SW-Stralsund DE-Stralsund Fährwall,54.31797,13.09151
 SW-Stralsund DE-Stralsund Greifswalder Chaussee,54.299996,13.093987
 SW-Stralsund DE-Stralsund Gustower Weg,54.27096,13.11507
 SW-Strausberg DE-Strausberg Herrenseeallee,52.55756,13.87258
+SW-Stuttgart DE-Gerlingen Hauptstraße,48.79803,9.06156,20
 SW-Stuttgart DE-Stuttgart Hedelfinger Straße,48.769774,9.248443
 SW-Treuchtlingen DE-Treuchtlingen Fischergasse,48.95573,10.9098
 SW-Trier DE-Trier Am Gillenbach,49.76767,6.6242
@@ -22658,7 +22664,7 @@ Vattenfall SE-Trollhättan Anes väg,58.31365,12.3074
 Vattenfall SE-Täby Ytterbyvägen,59.434309,18.066909
 Vattenfall SE-Vännäsby Företagsvägen,63.91963,19.82843
 Vattenfall SE-Västervik Rest area Botorpström,57.661834,16.447212
-Vattenfall SE-Ystad Militärvägen,55.43444,13.83964
+Vattenfall SE-Ystad Militärvägen,55.43444,13.83964,30
 Vattenfall SE-Åsele Adamsgatan,64.163412,17.347031
 
 vaylens DE-Aue-Bad Schlema Lessingstraße,50.58633,12.69702
@@ -23027,6 +23033,7 @@ Wenea GB-Plymouth Somerset Pl,50.38157,-4.16068
 
 westenergie DE-Arnsberg Hellefelder Straße,51.39494,8.06832
 westenergie DE-Bad Münstereifel Im Goldenen Tal,50.54676,6.763
+westenergie DE-Bad Münstereifel Schleidtalstraße,50.55966,6.76558
 westenergie DE-Balve Sauerlandstraße,51.327951,7.86794
 westenergie DE-Bernkastel-Kues Damenweg,49.91434,7.06727
 westenergie DE-Erftstadt Fritz-Erler-Straße,50.81253,6.81435,30
