@@ -2259,7 +2259,7 @@ Supercharger-V3 DK-Slagelse,55.38794,11.3618,36
 Supercharger-V4 DK-Struer,56.48013,8.58672
 Supercharger-V4 DK-Svenstrup J,56.9528,9.8661
 Supercharger-V4 DK-Søndervig,56.120534,8.12218
-Supercharger-V3 DK-Taastrup-City 2,55.642954,12.274819
+Supercharger-V3 DK-Taastrup,55.6428,12.27477
 Supercharger-V4 DK-Vejle South,55.664329,9.550989,30
 Supercharger-V4 DK-Viborg,56.45287,9.44938
 Supercharger-V4 DK-Viby J,56.116693,10.120822
@@ -6507,6 +6507,7 @@ Aldi DE-Remseck am Neckar Neckaraue,48.88777,9.27235
 Aldi DE-Reutlingen Föhrstraße,48.502283,9.207886,20
 Aldi DE-Reutlingen Heubergstraße,48.512494,9.217845,20
 Aldi DE-Reutlingen Karl-Henschel-Straße,48.495184,9.158096,20
+Aldi DE-Rosdorf Rischenweg,51.50855,9.91017
 Aldi DE-Roth Bortenmacherstraße,49.247074,11.120772
 Aldi DE-Rotheidlen,47.731574,9.698803,20
 Aldi DE-Rottenburg am Neckar Gartenstraße,48.473359,8.946082
@@ -6552,6 +6553,7 @@ Aldi DE-Unterschleißheim Carl-von-Linde-Straße,48.28225,11.568417
 Aldi DE-Vellmar Zum Feldlager,51.3522,9.4671
 Aldi DE-Waldbronn Talstraße,48.930056,8.4738
 Aldi DE-Wangen im Allgäu Siemensstraße,47.697325,9.823498
+Aldi DE-Weferlingen Wilhelm-Suder-Straße,52.30924,11.05066
 Aldi DE-Weil-Friedlingen Alte Straße,47.599361,7.599056
 Aldi DE-Weilimdorf,48.821298,9.098822
 Aldi DE-Werl An der Bundesbahn,51.558759,7.913796
@@ -10806,6 +10808,7 @@ EnBW DE-Cottbus Shell,51.760922,14.347983
 EnBW DE-Crailsheim Gartenstraße,49.13515,10.0753
 EnBW DE-Crailsheim In den Kistenwiesen,49.14256,10.073901
 EnBW DE-Cuxhaven,53.875698,8.688591
+EnBW DE-Cuxhaven Brockeswalder Chaussee,53.85912,8.6702
 EnBW DE-Cuxhaven Grodener Chaussee,53.85242,8.7126
 EnBW DE-Dannenberg Develangring,53.09108,11.08817,25
 EnBW DE-Darmstadt Otto-Röhm-Straße,49.887562,8.645011
@@ -10873,6 +10876,7 @@ EnBW DE-Duisburg Hellweg,51.466263,6.787954
 EnBW DE-Duisburg Rathausallee,51.39773,6.66053
 EnBW DE-Duisburg Rewe,51.426134,6.668349
 EnBW DE-Dunningen Hauptstraße,48.21227,8.50535
+EnBW DE-Durmersheim Malscher Straße,48.9241,8.27156
 EnBW DE-Dutenhofen Globus,50.56044,8.60787
 EnBW DE-Dußlingen Hindenburgplatz,48.4515,9.0548
 EnBW DE-Dätgen,54.180464,9.943138
@@ -11936,6 +11940,7 @@ EnBW DE-Schenefeld Altonaer Chaussee,53.59906,9.84325
 EnBW DE-Schlat Turnhallenstraße,48.65358,9.70697
 EnBW DE-Schleiden Hermann-Kattwinkel-Platz,50.571249,6.504384
 EnBW DE-Schleiz Gottfried-Piegler-Straße,50.54673,11.80337,16
+EnBW DE-Schliersee Dürnbachstraße,47.7033,11.87856
 EnBW DE-Schmalkalden,50.722717,10.446059
 EnBW DE-Schmallenberg MAC Outlet,51.18383,8.319568
 EnBW DE-Schmallenberg Weststraße,51.1522,8.28137
@@ -12685,6 +12690,7 @@ Energie-Burgenland AT-Neusiedl am See Seegelände,47.92979,16.83728
 Energie-Burgenland AT-Oberwart Europastraße,47.288,16.18658
 Energie-Burgenland AT-Steinberg-Dörfl Burgenland Straße,47.489749,16.494049
 
+Energie-Graz DE-Graz Lendkai,47.07588,15.4319
 Energie-Graz DE-Graz Schützenhofgasse,47.06908,15.45915
 
 Energie-Klagenfurt AT-Klagenfurt 8.-Mai-Straße,46.62319,14.3072
@@ -12949,6 +12955,7 @@ ESB DE-Mittenwald Dammkarstraße,47.44096,11.26657
 ESB DE-Mittenwald Schöttlkarstraße,47.44422,11.2647
 ESB DE-Pentling Ammerholz,48.9755,12.06498
 ESB DE-Plattling Werkstraße,48.78133,12.8614
+ESB DE-Pöcking Lindenberg,47.96382,11.28963
 ESB DE-Schliersee Perfallstraße,47.73378,11.86134
 ESB DE-Schönau am Königssee Seestraße,47.592,12.98805,64
 ESB DE-Sulzemoos Ohmstraße,48.28014,11.26927
@@ -13207,6 +13214,7 @@ EVN AT-Kematen an der Ybbs 35. Straße,48.03756,14.77816
 EVN AT-Korneuburg Girakstraße,48.36066,16.32724
 EVN AT-Korneuburg Laaer Straße,48.35026,16.33878
 EVN AT-Krems an der Donau Flughafenstraße,48.44614,15.62969
+EVN AT-Krems an der Donau Philosophensteig,48.4083,15.58502
 EVN AT-Krems an der Donau Steiner Donaulände,48.40407,15.59108
 EVN AT-Leobendorf Hammerschmied-Straße,48.360036,16.310463
 EVN AT-Mank Bahnhofstraße,48.1119,15.34337
@@ -15864,7 +15872,7 @@ Ionity AT-St. Lorenzen im Mürztal,47.46875,15.34432,25
 Ionity AT-St. Valentin,48.19637,14.52835,16
 Ionity AT-Steinhäusl,48.157839,15.940398
 Ionity AT-Trieben Europastraße,47.490228,14.485408,30
-Ionity AT-Ybbs an der Donau Bergland Center,48.1611,15.10712
+Ionity AT-Ybbs an der Donau Bergland Center,48.1611,15.10712,30
 Ionity BE-Bierset,50.651848,5.473755
 Ionity BE-Froyennes North,50.619572,3.338944
 Ionity BE-Froyennes South,50.619058,3.341152
@@ -16275,7 +16283,7 @@ Ionity IT-Potenza,40.63193,15.81358
 Ionity IT-Rinovo Nord,43.9592,8.13416
 Ionity IT-Roma A1,42.13721,12.60234
 Ionity IT-Scarlino,42.958526,10.81659
-Ionity IT-Sevegliano Via E. Mattei,45.889144,13.313646,15
+Ionity IT-Sevegliano Via E. Mattei,45.8891,13.31338,40
 Ionity IT-Trento,46.08704,11.1111
 Ionity IT-Valdichiana Outlet Village,43.22381,11.80217
 Ionity IT-Versilia Est,43.9292,10.22384
@@ -18329,7 +18337,7 @@ Mer AT-Wien Hietzinger Kai,48.19169,16.27922,20
 Mer AT-Wien Seestadtstraße,48.21591,16.50534,30
 Mer AT-Wien Triester Straße,48.16546,16.34595
 Mer AT-Wiener Neustadt Nikolaus-August-Otto-Straße,47.843871,16.246763
-Mer AT-Ybbs Bergland Center,48.160658,15.106513
+Mer AT-Ybbs an der Donau Bergland Center,48.16066,15.1065,30
 Mer AT-Zell am See Prof.-F.-Porsche-Straße,47.29585,12.79571
 Mer AT-Zwettl Andre Freyskorn Straße,48.60187,15.18669
 Mer DE-Abensberg Max Bronold Straße,48.813818,11.845554
@@ -19481,6 +19489,7 @@ Pfalzwerke DE-Dresden Tharandter Straße,51.01704,13.6712
 Pfalzwerke DE-Dudenhofen Speyerer Straße,49.31645,8.39327
 Pfalzwerke DE-Duisburg Düsseldorfer Straße,51.40829,6.767147
 Pfalzwerke DE-Durmersheim Alois-Bastian-Straße,48.922361,8.262482
+Pfalzwerke DE-Düsseldorf Königsberger Straße,51.21715,6.82468
 Pfalzwerke DE-Ebertsheim Eisenberger Straße,49.56761,8.105409
 Pfalzwerke DE-Edenkoben Luitpoldstraße 73,49.285712,8.138145
 Pfalzwerke DE-Edenkoben Weinstraße,49.2794,8.12585
@@ -20385,6 +20394,7 @@ RICARICA IT-Livorno Via Giovanni Gelati,43.530357,10.325833
 
 Rifil SE-Arlöv Gullrisvägen,55.614023,13.10072,30
 
+Road DE-Kühlungsborn Hermannstraße,54.1487,11.7309
 Road DE-Mettmann Marie-Curie-Straße,51.25046,6.9513
 
 RoboCharge NL-Biervliet Middenweg,51.326131,3.667839
@@ -20833,6 +20843,7 @@ Shell DE-Holzgerlingen Hohenzollernstraße,48.645835,9.011346
 Shell DE-Homburg Richard-Wagner-Straße,49.323795,7.333623
 Shell DE-Husum Robert-Koch-Straße,54.49308,9.08512
 Shell DE-Hösbach Industriestraße,50.00602,9.221178
+Shell DE-Hürth Eschweilerstraße,50.87284,6.88888
 Shell DE-Illertissen Memminger Straße,48.21724,10.103
 Shell DE-Ingelheim Herman-Bopp-Straße 1,49.986976,8.02829
 Shell DE-Isernhagen Opelstraße,52.424286,9.837596
@@ -22169,7 +22180,7 @@ TEAG DE-Wurzen Dresdener Straße,51.365748,12.747015
 TEAG DE-Zella-Mehlis An der Quelle,50.64378,10.68513,14
 TEAG DE-Zeulenroda-Triebes Am Waldstadion,50.661353,11.995857
 
-team-Emobility DE-Köln Heumarkt,50.93514,6.9618
+team-Emobility DE-Köln Heumarkt,50.93537,6.96162
 team-Emobility DE-Langenhagen Maritimstraße,52.46,9.6979
 team-Emobility DE-Ulm Basteistraße Maritim,48.400378,10.005348
 
@@ -23784,6 +23795,7 @@ DE Westerhusen Bussardweg,53.40532,7.19795
 DE Wetzlar Gabelsbergerstraße,50.568909,8.508006
 DE Weyhe ffuss,53.01748,8.86264
 DE Weßling Torqeedo,48.08415,11.29147
+DE Willingen Landhotel Henkenhof,51.2835,8.66188
 DE Witten Uni Witten/Herdecke Altbau,51.44892,7.37712
 DE Wolfsburg Brackstedter Mühle,52.48473,10.77072
 DE Wolfsburg Karl-Ferdinand-Braun-Ring,52.42152,10.86141
