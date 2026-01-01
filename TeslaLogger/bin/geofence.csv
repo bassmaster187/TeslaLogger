@@ -4935,6 +4935,7 @@ Supercharger-V3 US-Lost Hills CA,35.616816,-119.656042
 Supercharger US-Louisville KY,38.211971,-85.673251
 Supercharger-V3 US-Louisville KY - Preston Highway,38.11187,-85.677328
 Supercharger-V3 US-Louisville KY - Towne Center Drive,38.29953,-85.55535
+Supercharger-V4 US-Louisville KY Taylorsville Rd,38.21596,-85.59372
 Supercharger US-Loveland CO,40.441433,-104.991188
 Supercharger US-Lovelock NV,40.179476,-118.472197
 Supercharger US-Lowell AR,36.255397,-94.152674
@@ -9355,6 +9356,7 @@ e-motum FR-Zonza RT10,41.69728,9.3465
 E-PROM RU-Владимир Большой проезд,56.11893,40.3652
 
 e-regio DE-Bad Münstereifel Sittardweg,50.54821,6.76232
+e-regio DE-Euskirchen Jülicher Ring,50.66898,6.7843
 e-regio DE-Euskirchen Münsterstraße,50.64794,6.83385
 e-regio DE-Heimbach Schwammenauel,50.63302,6.44392
 e-regio DE-Kall Bahnhofstraße,50.53764,6.5554
@@ -10427,6 +10429,8 @@ EM1 DE-Winhöring Obere Hofmark,48.265377,12.651486
 EMB DE-Kleinmachnow An der Stammbahn,52.42014,13.22476
 EMB DE-Michendorf Michendorfer Gartenstraße,52.31406,13.02783
 EMB DE-Teltow Gerhart-Eisler-Straße,52.4019,13.2384
+
+EMC AT-Hinterstoder Hutterer Böden,47.67916,14.1693
 
 Emobility-East DE-Drebach Straße der Jugend,50.67323,13.01824
 Emobility-East DE-Drebach Venusberger Hauptstraße,50.69864,13.0175
@@ -12718,6 +12722,7 @@ Energie-Steiermark AT-Fürstenfeld Neudorf,47.0792,15.95799
 Energie-Steiermark AT-Gleisdorf Grazer Straße,47.10576,15.69806
 Energie-Steiermark AT-Graz Conrad-von-Hötzendorf-Straße,47.04806,15.45359,30
 Energie-Steiermark AT-Graz Elisabethstraße,47.07782,15.46253
+Energie-Steiermark AT-Graz Kaiser-Franz-Josef-Kai,47.07198,15.43587
 Energie-Steiermark AT-Graz Kärntner Straße,47.06085,15.42101
 Energie-Steiermark AT-Graz Körblergasse,47.08783,15.43954
 Energie-Steiermark AT-Graz Lazarettgürtel,47.06007,15.42925
@@ -14242,6 +14247,7 @@ EWE-GO DE-Waldlaubersheim Auf Dem Stein,49.92438,7.82602,20
 EWE-GO DE-Walsrode Ebbinger Straße,52.871463,9.583708
 EWE-GO DE-Walsrode Große Schneede,52.84927,9.55503
 EWE-GO DE-Wangerland Andelweg,53.686663,8.005401
+EWE-GO DE-Wangerland Bismarckstraße,53.66245,7.91782
 EWE-GO DE-Wangerland Bäderstraße,53.63463,8.01677
 EWE-GO DE-Wangerland Lange Straße,53.6262,8.029538
 EWE-GO DE-Wangerland Mellumweg,53.704126,8.024118
@@ -18135,6 +18141,7 @@ Lidl SI-Postojna Reška cesta,45.77068,14.19829,15
 Lidl SI-Sežana Partizanska c.,45.70506,13.85846
 Lidl SI-Slovenj Gradec Ronkova ulica,46.50471,15.08905
 Lidl SK-Galanta Esterházyovcov,48.194772,17.735124
+Lidl SK-Hurbanovo Komárňanská,47.8804,18.19605
 Lidl SK-Komárno,47.7645,18.094663
 Lidl SK-Senec Boldocká cesta,48.2232,17.40432
 Lidl SK-Šaca Železiarenská,48.62793,21.17197
@@ -18621,6 +18628,7 @@ MOON AT-Feldkirchen Flughafenstraße,46.996772,15.445322
 MOON AT-Herzogenburg Wiener Straße,48.281063,15.716759
 MOON AT-Hollabrunn Gewerbering,48.57998,16.07557
 MOON AT-Köflach Grazerstraße,47.062856,15.088075
+MOON AT-Lachtal Wiesenbauerboden Weg,47.25127,14.36236
 MOON AT-Mistelbach Ernstbrunnerstraße,48.557928,16.562185
 MOON AT-Neusiedl Josef Kamper Straße,47.971205,16.853501
 MOON AT-Pöllan Gewerbepark,46.696503,13.644015
@@ -20170,6 +20178,7 @@ Qelo HR-Labin Štrmac,45.11895,14.11928
 
 Qovoltis FR-Les Ulis Rue de la Réunion,48.68259,2.20282
 
+Qwello DE-Berlin Genter Straße,52.54898,13.35145
 Qwello DE-Berlin Scherenbergstraße,52.55057,13.41987
 Qwello DE-Leipzig Cöthner Straße,51.36438,12.36952
 Qwello SE-Stockholm Torkel Knutssonsgatan,59.32025,18.0564
@@ -23634,6 +23643,7 @@ DE Gießen Cursor,50.58493,8.64419,55
 DE Gladbeck SL Naturenergie,51.56883,6.95326
 DE Gommern Hotel Robinien-Hof,52.06783,11.81922
 DE Grafling Goldäcker,48.88746,12.97563
+DE Grafschaft-Ringen Wunderlich,50.58067,7.0999
 DE Großharthau Am Schlosspark,51.10727,14.10977
 DE Grünberg Carl-Benz-Straße,50.60323,8.95896
 DE Grünheide Gigafactory,52.39133,13.78861,120
