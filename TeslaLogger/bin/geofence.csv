@@ -56,7 +56,7 @@ Supercharger-V4 AT-Steyr,48.049589,14.414486
 Supercharger-V4 AT-Stockerau,48.38855,16.18087
 Supercharger-V4 AT-Stumm,47.28995,11.8877
 Supercharger-V4 AT-Suben,48.394466,13.426544
-Supercharger-V4 AT-Trieben,47.49214,14.48394
+Supercharger-V4 AT-Trieben,47.49212,14.48363
 Supercharger AT-Villach,46.604193,13.869091
 Supercharger-V3 AT-Villach-Ost,46.60166,13.88302
 Supercharger-V4 AT-Villach-West,46.6309,13.82584
@@ -1973,7 +1973,7 @@ Supercharger-V4 DE-Herborn,50.67534,8.279983,40
 Supercharger-V4 DE-Herford,52.12684,8.67533
 Supercharger-V3 DE-Hermsdorf,50.889889,11.871397,30
 Supercharger-V3 DE-Herne (Zurbrüggen),51.531182,7.209585
-Supercharger-V3 DE-Herrieden,49.257951,10.501761
+Supercharger-V3 DE-Herrieden,49.25805,10.50213,60
 Supercharger-V3 DE-Herzsprung,53.06744,12.53322
 Supercharger-V4 DE-Hessisch Lichtenau,51.19784,9.74687
 Supercharger DE-Hilden,51.191193,6.936986,30
@@ -4227,6 +4227,7 @@ Supercharger-V3 US-Chandler AZ,33.319172,-111.896566
 Supercharger US-Channelview TX,29.784662,-95.110606
 Supercharger US-Chantilly VA,38.913606,-77.486836
 Supercharger-V3 US-Chapel Hill NC,35.9701,-79.06405
+Supercharger-V3 US-Charleston SC,32.7983,-80.02923
 Supercharger US-Charleston WV,38.35475,-81.642864
 Supercharger-V3 US-Charlotte NC - Metropolitan Avenue (Floor P6),35.212827,-80.835269
 Supercharger-V3 US-Charlotte NC - Northlake Centre Parkway,35.3473,-80.85936
@@ -4759,6 +4760,7 @@ Supercharger-V3 US-Jacksonville FL - City Center Boulevard,30.47966,-81.63759
 Supercharger US-Jacksonville FL - Gate Parkway,30.253438,-81.537149
 Supercharger-V3 US-Jacksonville FL - Phillips Hwy,30.266153,-81.617074
 Supercharger-V3 US-Jacksonville FL - Wilson Boulevard,30.27125,-81.75611
+Supercharger-V4 US-Jacksonville FL Blanding Blvd,30.20414,-81.739
 Supercharger US-Jacksonville FL County Road,30.06028,-81.51404
 Supercharger-V4 US-Jacksonville FL Gate Parkway,30.288709,-81.464672
 Supercharger-V3 US-Jacksonville NC,34.776308,-77.414072
@@ -5598,6 +5600,7 @@ Supercharger-V3 US-Sebastian FL,27.76787,-80.54963
 Supercharger-V3 US-Sebring FL,27.46589,-81.43422
 Supercharger US-Sedona AZ,34.77553,-111.76398
 Supercharger-V3 US-Seekonk MA,41.799212,-71.33078
+Supercharger-V4 US-Seffner FL,27.9806,-82.30274
 Supercharger-V4 US-Selinsgrove PA,40.84082,-76.83794
 Supercharger-V3 US-Selma CA,36.576394,-119.630755
 Supercharger US-Sequim WA,48.071434,-123.074271
@@ -18056,6 +18059,7 @@ Lidl HU-Budapest Üllői út,47.446502,19.170256
 Lidl HU-Békéscsaba,46.670835,21.106397
 Lidl HU-Debrecen Derék utca,47.52529,21.59766
 Lidl HU-Eger Rákóczi Ferenc utca,47.92543,20.3686,25
+Lidl HU-Gyula Szent István u.,46.63577,21.2814
 Lidl HU-Nyíregyháza,47.969311,21.737894
 Lidl HU-Pécs,46.071135,18.205811
 Lidl HU-Siófok Zamárdi u.,46.90013,18.0285
@@ -20064,6 +20068,7 @@ Powerdot PL-Leszno Niepodległości,51.846245,16.588073
 Powerdot PL-Poznań Jana Brzechwy,52.411869,16.832071
 Powerdot PL-Płońsk Pułtuska,52.624744,20.387515
 Powerdot PL-Ustronie Morskie Kolejowa,54.203002,15.749827
+Powerdot PL-Wieliczka Tadeusza Kościuszki,49.98872,20.0416
 Powerdot PL-Żagań Księżnej Żaganny,51.61755,15.31173
 Powerdot PT-Amadora Estr. do Monte da Cabreira,38.72754,-9.21128
 Powerdot PT-Braga R. Padre Alfredo José de Sousa,41.57004,-8.42799
@@ -20330,6 +20335,7 @@ Renovatio RO-Târgu Mureș Strada Gheorghe Doja,46.51084,24.50876
 
 Repower CH-Uster Aathalstrasse,47.3454,8.74213
 Repower HR-Valbandon Dragonja,44.91627,13.80968
+Repower IT-Lignano Sabbiadoro Lungomare Alberto Kechler,45.66518,13.10994
 Repower IT-Malcesine Via Gardesana,45.77346,10.81333
 
 Repsol ES-Alcorcón Camino de Leganes,40.32415,-3.847402
@@ -23285,6 +23291,7 @@ ZSE SK-Poprad Námestie svätého Egídia,49.05319,20.29827
 ZSE SK-Poprad Spišská Sobota,49.06078,20.30695
 ZSE SK-Rimavská Sobota Košická cesta,48.392075,20.003666
 ZSE SK-Senec Trnavská,48.23,17.40271
+ZSE SK-Senica Obchodná,48.68664,17.3654
 ZSE SK-Žilina-Solinky Prielohy,49.19491,18.73937
 
 Zunder ES-Burgos C. del Carmen,42.33681,-3.70531
@@ -23666,6 +23673,7 @@ DE Heidelberg Hauptbahnhof,49.40653,8.673993
 DE Heilbronn GALERIA,49.1399,9.2168
 DE Heimstetten Feldkirchener Straße,48.1583,11.75436
 DE Herten Hotel am Schlosspark,51.59454,7.12339
+DE Herzberg (Elster) Arnsnesta,51.73835,13.1752
 DE Herzogenaurach adidas,49.57487,10.91723
 DE Herzogenaurach adidas,49.57654,10.91759
 DE Herzogenaurach Ofall,49.57061,10.87566
