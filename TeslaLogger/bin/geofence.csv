@@ -426,6 +426,7 @@ Supercharger-V3 CH-Bulle,46.625016,7.037488
 Supercharger CH-Bussigny,46.556699,6.561557
 Supercharger-V3 CH-Cadenazzo,46.15204,8.93711,25
 Supercharger-V4 CH-Crissier,46.553863,6.567755
+Supercharger-V4 CH-Crissier,46.55484,6.57084
 Supercharger CH-Dietikon,47.417961,8.39656
 Supercharger CH-Dietlikon,47.413095,8.616785
 Supercharger CH-Egerkingen,47.327028,7.805489
@@ -1937,7 +1938,7 @@ Supercharger-V4 DE-Gera,50.887811,12.136461,35
 Supercharger-V4 DE-Germersheim,49.2272,8.3732
 Supercharger-V4 DE-Gießen,50.5884,8.7079
 Supercharger-V4 DE-Gigafactory Berlin-Brandenburg,52.391408,13.796028
-Supercharger-V4 DE Gilching,48.093998,11.282514
+Supercharger-V4 DE Gilching,48.094,11.2825,55
 Supercharger-V4 DE-Gramschatzer Wald,49.91202,10.00176,30
 Supercharger-V4 DE-Gramschatzer Wald,49.91224,10.00073,30
 Supercharger-V3 DE-Greding,49.04188,11.34298
@@ -9484,6 +9485,7 @@ E.ON DE-Essen Langenbergerstraße 482d,51.457152,7.013515
 E.ON DE-Essen Nockwinkel 73-63,51.428139,7.073583
 E.ON DE-Essen Rellinghauser Straße,51.44819,7.01391
 E.ON DE-Essen Schulte-Hinsel Str 5,51.429608,7.076575
+E.ON DE-Fehmarn Bahnhofstraße,54.44044,11.19412
 E.ON DE-Fehmarn Zur Westmole,54.50374,11.22497
 E.ON DE-Flensburg Schleswiger Straße,54.772387,9.435507
 E.ON DE-Frechen An der A4,50.928246,6.777771
@@ -10413,7 +10415,7 @@ ElpeFuture GR-Velo Βέλου E.O. Korinthou Patron,37.9745,22.74162
 ElpeFuture GR-Veria Βέροια Stadiou,40.53804,22.202
 ElpeFuture GR-Δήμος Τρικκαίων Καρδίτσης,39.54456,21.77598
 
-Elwateg DE-Emstek Otto-Hahn-Straße,52.82918,8.11697
+Elwateg DE-Emstek Otto-Hahn-Straße,52.82854,8.11726
 
 EM1 DE-Ahrensburg Am Postwald,53.6767,10.241641
 EM1 DE-Altötting Bahnhofstraße,48.222672,12.674143
@@ -12411,6 +12413,7 @@ EnBW DE-Zeven,53.27713,9.293374
 EnBW DE-Zimmern o.R. Hauptstraße,48.16692,8.59312
 EnBW DE-Zirndorf Albert-Einstein-Straße,49.44567,10.95122
 EnBW DE-Zirndorf Rothenburger Straße,49.434987,10.959788
+EnBW DE-Zittau Äußere Weberstraße,50.89863,14.7832
 EnBW DE-Zolling Am Sägewerk,48.448558,11.764789
 EnBW DE-Zweibrücken Gottlieb-Daimler-Straße,49.248134,7.351535
 EnBW DE-Zwickau Hellweg,50.753058,12.481222
@@ -12699,6 +12702,7 @@ Energie-Burgenland AT-Steinberg-Dörfl Burgenland Straße,47.489749,16.494049
 
 Energie-Graz DE-Graz Lendkai,47.07588,15.4319
 Energie-Graz DE-Graz Schützenhofgasse,47.06908,15.45915
+Energie-Graz DE-Graz Wiener Straße,47.0951,15.4052
 
 Energie-Klagenfurt AT-Klagenfurt 8.-Mai-Straße,46.62319,14.3072
 
@@ -12772,6 +12776,7 @@ Energie360 CH-Spreitenbach Türliackerstrasse,47.42403,8.36786
 Energie360 CH-Tenero-Contra Centro,46.1747,8.85588
 Energie360 CH-Villeneuve Centre Commercial Rocville,46.38673,6.92994
 Energie360 CH-Wettingen Tägipark,47.4587,8.32862
+Energie360 CH-Wilderswil Mittelweg,46.66654,7.8717
 Energie360 CH-Winterthur Brauerstrasse,47.50643,8.72864
 Energie360 CH-Winterthur Rudolf-Diesel-Strasse,47.49452,8.757345
 Energie360 CH-Zürich Giessereistrasse,47.38972,8.51807
@@ -13611,6 +13616,7 @@ EWE-GO DE-Emmerich am Rhein Reeser Straße,51.8324,6.2649
 EWE-GO DE-Emsbüren Paxtonstraße,52.359452,7.261589
 EWE-GO DE-Emsdetten Grevener Damm,52.16376,7.54534
 EWE-GO DE-Emstek Am Markt,52.83403,8.15509
+EWE-GO DE-Emstek Otto-Hahn-Straße,52.82918,8.11697
 EWE-GO DE-Emstek Sülzbührener Straße,52.811277,8.216443,25
 EWE-GO DE-Emstek Sülzbührener Straße,52.811505,8.215764,25
 EWE-GO DE-Engen Jahnstraße,47.856172,8.791991
@@ -14107,6 +14113,7 @@ EWE-GO DE-Reinfeld An der Autobahn,53.823342,10.502326,30
 EWE-GO DE-Reiskirchen Carl-Benz-Straße,50.59837,8.82213,25
 EWE-GO DE-Reitrain Tegernseer Straße,47.685448,11.758489
 EWE-GO DE-Rennerod Gewerbestraße,50.59885,8.064161
+EWE-GO DE-Reutlingen Am Heilbrunnen,48.5021,9.21552
 EWE-GO DE-Rhauderfehn 1. Südwieke,53.13563,7.57352
 EWE-GO DE-Rhauderfehn Hagiusring,53.134308,7.57252
 EWE-GO DE-Rhauderfehn Im Gewerbegebiet,53.14579,7.562601
@@ -15080,6 +15087,7 @@ GreenWay PL-Biała Podlaska Warszawska,52.03398,23.06812
 GreenWay PL-Białystok Produkcyjna,53.16004,23.09569
 GreenWay PL-Bielany Wrocławskie Czekoladowa,51.04657,16.96132
 GreenWay PL-Bielany Wrocławskie Wrocławska,51.04505,16.97112
+GreenWay PL-Bielany Wrocławskie Wrocławska,51.0467,16.97087
 GreenWay PL-Bielsko-Biała Leszczyńska,49.80343,19.04997
 GreenWay PL-Bolesławiec Lipiany,51.33801,15.63159
 GreenWay PL-Chromna E30,52.10826,22.38702
@@ -15553,6 +15561,7 @@ illwerke-vkw AT-Damüls,47.27992,9.89147
 illwerke-vkw AT-Dornbirn Dr. Anton-Schneider-Straße,47.42386,9.74962
 illwerke-vkw AT-Dornbirn Grabenweg,47.41633,9.74044
 illwerke-vkw AT-Dornbirn Messestraße,47.41163,9.71053
+illwerke-vkw AT-Dornbirn Messestraße,47.41202,9.71338
 illwerke-vkw AT-Dornbirn Schwefel,47.42965,9.74112
 illwerke-vkw AT-Dornbirn Sparkassenplatz,47.41488,9.74086
 illwerke-vkw AT-Egg Pfister,47.42779,9.89642
@@ -18629,6 +18638,7 @@ Monta SE-Mölndal Åby Arenaväg,57.6488,12.00263
 MOON AT-Bärnbach Packer Straße,47.054591,15.137164
 MOON AT-Bärnbach Packer Straße,47.054634,15.136206
 MOON AT-Feldkirchen Flughafenstraße,46.996772,15.445322
+MOON AT-Graz Wasserwerkgasse,47.10162,15.4155
 MOON AT-Herzogenburg Wiener Straße,48.281063,15.716759
 MOON AT-Hollabrunn Gewerbering,48.57998,16.07557
 MOON AT-Köflach Grazerstraße,47.062856,15.088075
@@ -18726,6 +18736,7 @@ MOVE CH-Ilanz/Glion Via Mulin,46.77485,9.2095
 MOVE CH-Inwil Raststätte Sankt Katharina,47.118701,8.375826
 MOVE CH-Inwil Raststätte Sankt Katharina,47.11965,8.3742
 MOVE CH-Kreuzlingen Marktstrasse,47.64854,9.17301
+MOVE CH-Lantsch/Lenz Alp Bual,46.69194,9.56005
 MOVE CH-Lenzerheide Clavadoiras,46.72279,9.55854
 MOVE CH-Liebefeld Kohlenweg,46.93203,7.42089
 MOVE CH-Meggen Luzernerstrasse,47.04564,8.37209
@@ -21390,6 +21401,7 @@ SW-am-See DE-Friedrichshafen Karlstraße,47.650315,9.478475
 SW-am-See DE-Friedrichshafen Kornblumenstraße,47.66812,9.48806
 SW-Annaberg-Buchholz DE-Bärenstein Sächsischer Platz,50.49862,13.0281
 SW-Aschaffenburg DE-Aschaffenburg Neue Glattbacher Straße,49.98592,9.15096
+SW-Augsburg DE-Augsburg Am Messezentrum,48.34012,10.89208
 SW-Augsburg DE-Augsburg Am Schwall,48.364907,10.903411
 SW-Augsburg DE-Augsburg Augsburger Straße,48.363827,10.874827
 SW-Augsburg DE-Augsburg Friedberger Straße,48.355436,10.948743
@@ -23192,6 +23204,7 @@ Wien-Energie AT-Wien Schönbrunner Straße,48.1831,16.32767,25
 Wien-Energie AT-Wien Schüttauplatz,48.22693,16.42402
 Wien-Energie AT-Wien Seestadt Seepark,48.22447,16.50411
 Wien-Energie AT-Wien Senefeldergasse,48.17185,16.37475
+Wien-Energie AT-Wien Simmeringer Hauptstraße,48.15543,16.44125
 Wien-Energie AT-Wien Spittelauer Lände,48.23271,16.36037
 Wien-Energie AT-Wien U-Bahn-Bogen,48.217703,16.342094,60
 Wien-Energie AT-Wien Waldmüllergasse,48.23295,16.37685
