@@ -4275,6 +4275,7 @@ Supercharger US-Cincinnati OH Marburg Avenue,39.162848,-84.426498
 Supercharger US-Cisco TX,32.374516,-99.00665
 Supercharger-V3 US-City of Industry CA - Gale Avenue,33.994565,-117.900358
 Supercharger US-Clare MI,43.820301,-84.766746
+Supercharger-V3 US-Clark NJ,40.62752,-74.3015
 Supercharger-V3 US-Clarksburg NJ,40.157971,-74.429527
 Supercharger US-Claymont DE,39.81808,-75.457775
 Supercharger-V3 US-Claymont DE Philadelphia Pike,39.79466,-75.46953
@@ -6195,6 +6196,7 @@ AGROLA CH-Illnau-Effretikon Kempttalstrasse,47.41511,8.72068
 AGROLA CH-Laupen Murtenstrasse,46.90664,7.2357
 AGROLA CH-Matzingen St. Gallerstrasse,47.515133,8.936507
 AGROLA CH-Murten Freiburgstrasse,46.91822,7.11171
+AGROLA CH-Reichenbach im Kandertal Hauptstrasse,46.62064,7.68618
 AGROLA CH-Saint-Maurice Rte du Simplon,46.20708,7.00797
 AGROLA CH-Thusis Äussere Heinzenbergstrasse,46.71082,9.43587
 
@@ -10249,6 +10251,7 @@ Electrify-America US-Hyattsville MD East-West Hwy,38.9686,-76.95432
 Electrify-America US-King of Prussia PA N Gulph Rd,40.08564,-75.38862
 Electrify-America US-Lincoln NE 110 NW 20th Street,40.814286,-96.749142
 Electrify-America US-Livermore CA Holmes St,37.66114,-121.78095
+Electrify-America US-Manchester CT Buckland Hills Dr,41.80718,-72.53938
 Electrify-America US-Marlborough MA Boston Post Rd W,42.33831,-71.58996
 Electrify-America US-Mesquite NV Pioneer Blvd,36.8065,-114.10701
 Electrify-America US-Milpitas CA Great Mall Dr,37.41362,-121.89817,25
@@ -10831,6 +10834,7 @@ EnBW DE-Delbrück,51.759986,8.561964
 EnBW DE-Delmenhorst,53.044929,8.670837
 EnBW DE-Denkendorf Furtstraße,48.69386,9.31833
 EnBW DE-Denkendorf Mühlhaldenstraße,48.70108,9.3084
+EnBW DE-Denkendorf Rechbergstraße,48.70298,9.3133
 EnBW DE-Denkingen Auf dem Klippeneck,48.105998,8.755135
 EnBW DE-Denkingen Hauptstraße,48.1088,8.7358
 EnBW DE-Dessau-Roßlau Am Eichengarten,51.82083,12.30109,25
@@ -11498,6 +11502,7 @@ EnBW DE-Lorsch Ost,49.644328,8.554109
 EnBW DE-Lorsch West,49.643044,8.551967
 EnBW DE-Loßburg Freudenstädter Straße,48.420334,8.444033
 EnBW DE-Loßburg Hauptstraße,48.41414,8.45013
+EnBW DE-Luckau Rietweg,51.85388,13.72795
 EnBW DE-Ludwigsburg Heinkelstraße,48.920951,9.149329
 EnBW DE-Ludwigshafen am Rhein Industriestraße,49.486286,8.416976
 EnBW DE-Ludwigshafen am Rhein Knollstraße,49.475371,8.441141
@@ -16996,6 +17001,7 @@ KEBA AT-Matrei in Osttirol Europastraße,46.99073,12.54342
 
 KELAG AT-Arnoldstein Dreiländereck,46.57118,13.69732
 KELAG AT-Flattach Kleindorf,46.93568,13.11005
+KELAG AT-Griffen Gewerbestraße,46.69613,14.7362,25
 KELAG AT-Haimburg IGP Süd Völkermarkt,46.68216,14.67627
 KELAG AT-Kammern Pyhrn Autobahn,47.386094,14.899993
 KELAG AT-Klagenfurt Arnulfplatz,46.620712,14.310094
@@ -20921,6 +20927,7 @@ Shell DE-Lübeck Brandenbaumer Landstraße,53.85804,10.73456
 Shell DE-Lübeck Padelügger Weg,53.8562,10.6362
 Shell DE-Lüdenscheid Paulmannshöher Straße,51.20782,7.65594
 Shell DE-Lüneburg Erbstorfer Landstraße,53.26198,10.4257
+Shell DE-Lüneburg Scharnhorststraße,53.22986,10.40342
 Shell DE-Lünen Kurt-Schumacher-Straße,51.6067,7.52568
 Shell DE-Lützow Gadebuscher Straße,53.65906,11.171057
 Shell DE-Magdeburg Lunochodstraße,52.091036,11.611697
@@ -21749,6 +21756,7 @@ SW-Strausberg DE-Strausberg Herrenseeallee,52.55756,13.87258
 SW-Stuttgart DE-Gerlingen Hauptstraße,48.79803,9.06156,20
 SW-Stuttgart DE-Stuttgart Hedelfinger Straße,48.769774,9.248443
 SW-Treuchtlingen DE-Treuchtlingen Fischergasse,48.95573,10.9098
+SW-Trier DE-Konz Am Markt,49.698,6.57217
 SW-Trier DE-Trier Am Gillenbach,49.76767,6.6242
 SW-Trier DE-Trier Ostallee,49.75595,6.65058
 SW-Troisdorf DE-Troisdorf Echternacher Straße,50.819357,7.113497
@@ -23735,6 +23743,7 @@ DE Messe Galerie Fulda,50.5398,9.6379,175
 DE Much B56,50.90866,7.41652
 DE Muggensturm Hartmann,48.87886,8.27847
 DE Mölln VW Riemer,53.623707,10.678989
+DE Mönchengladbach Franz-Brandts-Allee,51.1949,6.4225
 DE Mönchengladbach SMS Campus,51.18596,6.42623
 DE München AF Automotive,48.18688,11.58993,30
 DE München Alphahaus,48.1302,11.5301
