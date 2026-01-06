@@ -525,7 +525,7 @@ else
 	  <tr><td><b><?php t("Distance"); ?>:</b></td><td><span id="trip_distance">---</span> <span id="lt_trip_distance_km"><?php t("km"); ?></span></td></tr>
 	  <tr><td><b><?php t("Consumption"); ?>:</b></td><td><span id="trip_kwh">---</span> <?php t("kWh"); ?></td></tr>
 	  <tr><td><b><?php t("Ø Consumption"); ?>:</b></td><td><span id="trip_avg_kwh">---</span> <span id="lt_whkm"><?php t("Wh/km"); ?></span></td></tr>
-	  <tr><td><b><?php t("Max km/h"); ?>:</b></td><td><span id="max_speed">---</span> <?php t("km/h"); ?></span> </td></tr>
+	  <tr><td><b><?php t("Max km/h"); ?>:</b></td><td><span id="max_speed">---</span> <span id='lt_kmh'><?php t("km/h"); ?></span> </td></tr>
   </table>
   </div>
 
