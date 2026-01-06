@@ -5200,7 +5200,7 @@ Supercharger-V3 US-North Aurora IL,41.8034,-88.3711
 Supercharger-V3 US-North Babylon NY,40.739671,-73.318902
 Supercharger-V3 US-North Bend WA,47.467842,-121.716462
 Supercharger-V3 US-North Bend WA Premium Outlets,47.49078,-121.79653
-Supercharger-V3 US-North Bergen NJ,40.774821,-74.033869
+Supercharger-V3 US-North Bergen NJ,40.7755,-74.03466
 Supercharger-V3 US-North Bergen NJ - John F. Kennedy Boulevard,40.773883,-74.038139
 Supercharger US-North Bethesda MD (Floor P6),39.050207,-77.1163
 Supercharger-V3 US-North Branch MN,45.510881,-92.990626
@@ -11110,6 +11110,7 @@ EnBW DE-Giengen an der Brenz,48.617663,10.252562
 EnBW DE-Gießen Bauhaus,50.571779,8.685916
 EnBW DE-Gießen Marburger Straße,50.5941,8.68164
 EnBW DE-Gießen Stefan-Bellof-Straße,50.57515,8.7118
+EnBW DE-Gifhorn Braunschweiger Straße,52.47795,10.54488
 EnBW DE-Glauchau,50.839764,12.541133
 EnBW DE-Glinde Berliner Straße,53.54651,10.23234
 EnBW DE-Goldene Bremm Nord,49.2095,6.966424
@@ -11976,6 +11977,7 @@ EnBW DE-Schramberg Seedorfer Straße,48.2691,8.4861
 EnBW DE-Schramberg Wittumweg,48.225125,8.421925
 EnBW DE-Schriesheim Bismarckstraße,49.47604,8.66193
 EnBW DE-Schrozberg Bahnhofstraße,49.34676,9.97475
+EnBW DE-Schwaig bei Nürnberg Diepersdorfer Straße,49.46888,11.20865
 EnBW DE-Schwaigern Frizstraße,49.14,9.05617
 EnBW DE-Schwaigern Jahnstraße,49.13243,9.01326
 EnBW DE-Schwaigern Kirchstraße,49.14206,9.05792
@@ -12761,6 +12763,7 @@ Energie-Steiermark AT-Straß in Steiermark Hauptstraße,46.72613,15.6289
 Energie-Steiermark AT-Trieben Europastraße,47.48994,14.484885,20
 Energie-Steiermark AT-Unzmarkt Simon-Hafnerplatz,47.198231,14.445851,25
 Energie-Steiermark AT-Voitsberg von-Hötzendorf-Straße,47.05207,15.14186
+Energie-Steiermark AT-Weiz Energiestraße,47.2043,15.63538
 Energie-Steiermark AT-Wildon Kainachtalstraße,46.8867,15.50014
 
 Energie360 CH-Amriswil Kirchstrasse,47.54755,9.2975
@@ -13265,6 +13268,7 @@ EVN AT-Wien Albert-Schweitzer-Gasse,48.207501,16.22199
 EVN AT-Wien Dommesgasse,48.17229,16.41517
 EVN AT-Wien Gotramgasse,48.2201,16.44554
 EVN AT-Wien Linzer Straße,48.20324,16.24355
+EVN AT-Wiener Neustadt Günser Straße,47.8022,16.24043
 EVN AT-Wiener Neustadt Puchberger Straße,47.80452,16.21039,6
 EVN AT-Wiener Neustadt Puchberger Straße,47.80466,16.21039,8
 EVN AT-Wolkersdorf Julius Bittner Platz,48.3852,16.51515
@@ -17310,6 +17314,7 @@ Lidl AT-Wien Linzer Straße,48.203644,16.240203
 Lidl AT-Wien Quadenstraße,48.2376,16.47804
 Lidl AT-Wien Sagedergasse,48.162667,16.316008
 Lidl AT-Wiener Neustadt,47.830085,16.245312
+Lidl AT-Wiener Neustadt Neudörfler Straße,47.8069,16.26348
 Lidl AT-Wieselburg,48.139019,15.138295
 Lidl AT-Ybbs,48.17549,15.083871
 Lidl BE-Antwerpen Weerstandlaan,51.18611,4.37063
@@ -18352,6 +18357,7 @@ Mer AT-Rum Kaplanstraße,47.27711,11.4562
 Mer AT-Schlitters Gewerbegebiet Nord,47.38126,11.8331
 Mer AT-Schwechat Franz Schubert-Straße,48.13824,16.47846
 Mer AT-Spital am Semmering McDonald´s Straße,47.6028,15.71945
+Mer AT-Spittal an der Drau Villacher Straße,46.78712,13.52383
 Mer AT-Steyr Haratzmüllerstraße,48.042574,14.4354
 Mer AT-Steyr Marlen-Haushofer-Straße,48.055112,14.422656
 Mer AT-Telfs Untermarktstraße,47.307807,11.076695
