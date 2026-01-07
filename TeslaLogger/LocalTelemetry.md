@@ -99,6 +99,7 @@ For more information: https://github.com/teslamotors/fleet-telemetry?tab=readme-
       "TimeToFullCharge": { "interval_seconds": 60 },
       "EstBatteryRange": { "interval_seconds": 60, "minimum_delta": 0.1 },
       "SentryMode": { "interval_seconds": 10 },
+      "ServiceMode": { "interval_seconds": 10 },
       "ChargeState": { "interval_seconds": 10 },
       "DetailedChargeState": { "interval_seconds": 10, "resend_interval_seconds": 120 },
       "BatteryHeaterOn": { "interval_seconds": 10 },
