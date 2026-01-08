@@ -84,7 +84,7 @@ Angefordert [A]=Requested [A]
 Pilot [A]=Pilot [A]
 
 #Vampir Drain Monatsstatistik.json
-Vampir Drain Monatsstatistik=Vampir Drain Monthly Statistics
+Vampir Drain Monatsstatistik=Vampire Drain Monthly Statistics
 TR mi Verlust=TR mi Lost
 kWh Verlust=kWh Lost
 Eur Verlust=Eur Lost
@@ -121,13 +121,15 @@ Trip Top Ziele=Trip Top Destinations
 Letzte Fahrt=Last Trip
 Ø Dauer Min=Ø Duration Min
 Ø Verbrauch kWh/100km=Ø Consumption kWh/100km
+Ø Verbrauch Wh/mi=Ø Consumption Wh/mi
 Ø Verbraucht kWh=Ø Consumed kWh
 Anzahl Trips=Trips Count
 Anzahl=Count
 Fahrzeug=Vehicle
+Ziel=Destination
 
 #Vampir Drain.json
-Vampir Drain=Vampir Drain
+Vampir Drain=Vampire Drain
 Standby Stunden=Standby Hours
 Standby=Standby
 TR km Verlust=TR km Lost
@@ -150,6 +152,14 @@ Online=Online
 
 #Verbrauchsstatistik.json
 Verbrauchsstatistik=Consumption Statistics
+Verbrauch Monatsmittel [Wh/mi]=Monthly Avg Consumption [Wh/mi]
+Verbrauch Monatsmittel [kWh]=Monthly Avg Consumption [kWh]
+Außentemperatur Monatsmittel [°C]=Outside Temp Monthly Avg  [°C]
+Außentemperatur Monatsmittel [°F]=Outside Temp Monthly Avg  [°F]
+Verbrauch Tagesmittel [Wh/mi]=Daily Avg Consumption [Wh/mi]
+Verbrauch Tagesmittel [kWh]=Daily Avg Consumption [kWh]
+Außentemperatur Tagesmittel [°C]=Outside Temp Daily Avg [°C]
+Außentemperatur Tagesmittel [°F]=Outside Temp Daily Avg [°F]
 
 #Visited.json
 Visited=Visited
@@ -341,9 +351,10 @@ Strecke [km]=Distance [km]
 Strecke [mi]=Distance [mi]
 Verbrauch [kWh]=Consumed kWh
 Ø Verbrauch [kWh]=Avg. Consumption kWh
+Ø Verbrauch [Wh/mi]=Consumption Wh/mi
 Anzahl Trips=Trips Count
 Trip Monatsstatistik=Trip Monthly Statistics
-Trip Jahresstatistik="Trip Anual Statistics"
+Trip Jahresstatistik="Trip Annual Statistics"
 Jahr/Monat=Year/Month
 Zellspannungen 01-20 - ScanMyTesla="Cell Voltages 01–20 — ScanMyTesla"
 Zellspannungen 21-40 - ScanMyTesla="Cell Voltages 21–40 — ScanMyTesla"

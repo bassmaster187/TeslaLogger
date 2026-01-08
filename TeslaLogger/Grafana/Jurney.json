@@ -195,10 +195,6 @@
                 "value": 156
               },
               {
-                "id": "unit",
-                "value": "kwatth"
-              },
-              {
                 "id": "displayName",
                 "value": "kWh/100km"
               }
