@@ -411,7 +411,14 @@ else
 		if (jsonData["SMTCellTempAvg"])
 		{
 			$('#CellTempRow').show();
-			$('#CellTemp').text(Math.round(jsonData["SMTCellTempAvg"] * 10)/10 + "°C");
+			if (TemperatureUnit == "fahrenheit")
+			{
+				$('#CellTemp').text(Math.round((jsonData["SMTCellTempAvg"] * 9/5 + 32) * 10)/10 + "°F");
+			}
+			else
+			{
+				$('#CellTemp').text(Math.round(jsonData["SMTCellTempAvg"] * 10)/10 + "°C");
+			}
 		}
 		else
 		{
