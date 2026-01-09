@@ -4078,6 +4078,7 @@ Supercharger-V3 US-Belgrade MT,45.77317,-111.198921
 Supercharger-V3 US-Bell CA - 4416 Gage Avenue,33.977815,-118.188883
 Supercharger US-Bellefonte PA,40.913553,-77.737799
 Supercharger US-Bellevue WA (Pay to Park Floor P1),47.610704,-122.20175
+Supercharger-V4 US-Bellmawr NJ,39.8656,-75.07968
 Supercharger-V3 US-Beltsville MD,39.027495,-76.91802
 Supercharger-V3 US-Bemidji MN,47.492032,-94.906976
 Supercharger US-Bend OR,44.035621,-121.30847
@@ -10700,7 +10701,7 @@ EnBW DE-Bielefeld Detmolder Straße,51.998085,8.586316
 EnBW DE-Bielefeld Detmolder Straße,52.001902,8.56918
 EnBW DE-Bielefeld Eckendorfer Straße,52.0329,8.55344
 EnBW DE-Bielefeld Hansestraße,51.95103,8.5726
-EnBW DE-Bielefeld Teutoburger Straße,52.0191,8.5446
+EnBW DE-Bielefeld Teutoburger Straße,52.02003,8.54342
 EnBW DE-Bienenbüttel Poststraße,53.141473,10.492502
 EnBW DE-Bietigheim Malscher Straße,48.91134,8.25102
 EnBW DE-Bietigheim Rastatter Straße,48.90952,8.25288
@@ -12413,6 +12414,7 @@ EnBW DE-Würzburg Nürnberger Straße,49.79388,10.00296
 EnBW DE-Zeitz Hainichener Dorfstraße,51.070322,12.12091
 EnBW DE-Zeitz Kaufland,51.037444,12.163286
 EnBW DE-Zeitz Zeitzer Straße,51.081589,12.108296
+EnBW DE-Zell (Mosel) Fliehburgstraße,50.02766,7.15698
 EnBW DE-Zell Göppinger Straße,48.64872,9.57552
 EnBW DE-Zella-Mehlis,50.64267,10.68121
 EnBW DE-Zeven,53.27713,9.293374
@@ -13223,6 +13225,7 @@ EVN AT-Brunn am Gebirge Johann Steinböck-Straße,48.105502,16.310296
 EVN AT-Böheimkirchen Hainfelder Straße,48.195251,15.764868
 EVN AT-Böheimkirchen Reith,48.187943,15.765036
 EVN AT-Eggenburg Grafenbergerstraße,48.643769,15.822473
+EVN AT-Eggenburg Pulkauerstraße,48.648,15.8231
 EVN AT-Ennsdorf Straße 3,48.22133,14.5061
 EVN AT-Grafenwörth Gewerbepark,48.41187,15.776
 EVN AT-Grimmenstein Wechselbundesstrasse,47.63344,16.13192
@@ -15078,6 +15081,7 @@ GreenMotion CH-Bad Zurzach Dr. Martin Erb-Strasse,47.5877,8.28931
 GreenMotion CH-Baden Stadtturmstrasse,47.475367,8.306511
 GreenMotion CH-Basel St. Alban-Graben,47.55386,7.593068,30
 GreenMotion CH-Bellinzona Vicolo Muggiasca,46.19065,9.02185
+GreenMotion CH-Brig-Glis Oberer Saltinadamm,46.3104,7.9922
 GreenMotion CH-Bulle Rue de Battentin,46.63339,7.04833
 GreenMotion CH-Chur Quaderstrasse,46.85243,9.53503
 GreenMotion CH-Chur Raschärenstrasse,46.846333,9.508211
@@ -18224,6 +18228,7 @@ Lyse NO-Stavanger Teaterveien,58.96581,5.73367
 
 M-Charge CH-Ascona Via Locarno,46.163299,8.774395
 M-Charge CH-Bern Zähringerstrasse,46.95563,7.43334
+M-Charge CH-Brig-Glis Simplon Center,46.30876,7.9697
 M-Charge CH-Buchs Bresteneggstrasse,47.384545,8.088484
 M-Charge CH-Bülach Süd Center Feldstrasse,47.510158,8.540257
 M-Charge CH-Chur Rheinfelsstrasse,46.85147,9.51294
@@ -20630,6 +20635,7 @@ Shell AT-Hornstein Neufelder Straße,47.87416,16.43207
 Shell AT-Maria Lanzendorf Wiener Straße,48.09911,16.41869
 Shell AT-Mistelbach Mitschastraße,48.56178,16.57714
 Shell AT-Neudörfl Hauptstraße,47.80113,16.27548
+Shell AT-Pernitz Hauptstraße,47.89666,15.966
 Shell AT-Raststation Ansfelden,48.21216,14.282
 Shell AT-Raststation Eben,47.42114,13.383
 Shell AT-Raststation Walserberg,47.76781,12.94826
@@ -21290,6 +21296,7 @@ solid DE-Bayreuth Albrecht-Dürer-Straße,49.94607,11.58297
 solid DE-Berg Schulplatz,47.9579,11.3633
 solid DE-Crailsheim Worthingtonstraße,49.13844,10.06729
 solid DE-Dinkelsbühl Mönchsrother Straße,49.06442,10.32575
+solid DE-Erlangen Mozartstraße,49.59178,11.0116
 solid DE-Feucht Kapellenplatz,49.37743,11.21378
 solid DE-Hallbergmoos Theresienstraße,48.32817,11.75231
 solid DE-Hersbruck Badstraße,47.57307,10.56608
@@ -23221,6 +23228,7 @@ Wien-Energie AT-Wien Simmeringer Hauptstraße,48.15543,16.44125
 Wien-Energie AT-Wien Spittelauer Lände,48.23271,16.36037
 Wien-Energie AT-Wien U-Bahn-Bogen,48.217703,16.342094,60
 Wien-Energie AT-Wien Waldmüllergasse,48.23295,16.37685
+Wien-Energie AT-Wien Wimbergergasse,48.20712,16.33878
 Wien-Energie AT-Wiener Neudorf Multiplex,48.103063,16.318812
 
 Wiiiz FR-Cannes Bd Général Vautrin,43.54863,7.03206
@@ -23320,6 +23328,7 @@ ZSE SK-Senec Trnavská,48.23,17.40271
 ZSE SK-Senica Obchodná,48.68664,17.3654
 ZSE SK-Žilina-Solinky Prielohy,49.19491,18.73937
 
+Zunder ES-Bormujos Salida,37.3752,-6.086
 Zunder ES-Burgos C. del Carmen,42.33681,-3.70531
 Zunder ES-Estepona Carr. de Cadiz,36.4344,-5.16039
 Zunder ES-Getafe Av. Juan Carlos I,40.2959,-3.74527
