@@ -425,7 +425,7 @@ Supercharger-V3 CH-Bern,46.943354,7.370676,30
 Supercharger-V3 CH-Bulle,46.625016,7.037488
 Supercharger CH-Bussigny,46.556699,6.561557
 Supercharger-V3 CH-Cadenazzo,46.15204,8.93711,25
-Supercharger-V4 CH-Crissier,46.55484,6.57084
+Supercharger-V4 CH-Crissier,46.5549,6.57073
 Supercharger CH-Dietikon,47.417961,8.39656
 Supercharger CH-Dietlikon,47.413095,8.616785
 Supercharger CH-Egerkingen,47.327028,7.805489
@@ -7383,6 +7383,7 @@ ARAL DE-Bochum Wittener Straße,51.47754,7.22776
 ARAL DE-Bockenem Oppelner Straße,52.00173,10.1353,10
 ARAL DE-Braunschweig Hansestraße,52.32218,10.47816,40
 ARAL DE-Braunschweig Hildesheimer Straße,52.27199,10.4961
+ARAL DE-Breitenburg Elmshorner Straße,51.38174,9.23693
 ARAL DE-Bremen Osterholzer Heerstraße,53.05817,8.93889
 ARAL DE-Bremen Stapelfeldtstraße,53.11069,8.75425
 ARAL DE-Bremen Stapelfeldtstraße,53.1111,8.75315
@@ -7790,6 +7791,8 @@ badenova DE-Freiburg im Breisgau Tullastraße,48.02848,7.843064
 badenova DE-Rust Europa-Park-Straße,48.260392,7.722832
 badenova DE-Rust Peter-Thumb-Straße,48.260141,7.725794
 badenova DE-Rust Roland-Mack-Ring,48.26212,7.7387
+
+BatteryFly BY-Minsk Мінск вуліца Ціміразева,53.93933,27.44224
 
 Bayernwerk DE-Heßdorf Hannberger Straße,49.62884,10.90561
 Bayernwerk DE-Kulmbach Oberhacken,50.10593,11.45829
@@ -9808,6 +9811,7 @@ eCarUp CH-Biel/Bienne Rue Franche,47.14165,7.24817
 eCarUp CH-Brig-Glis Industriestrasse,46.30743,7.96366
 eCarUp CH-Brunnen Parkstrasse,46.996563,8.606047
 eCarUp CH-Buchberg Lindenhof,47.5657,8.5579
+eCarUp CH-Davos Jules Ferdmann-Weg,46.79977,9.831
 eCarUp CH-Davos Postplatz,46.79338,9.82097
 eCarUp CH-Davos Seewiesenstrasse,46.813535,9.845873
 eCarUp CH-Domat/Ems Via la Val,46.83794,9.46568
@@ -12224,6 +12228,7 @@ EnBW DE-Tauberbischofsheim Am Wört,49.624901,9.6647
 EnBW DE-Taufkirchen,48.352605,12.129578,10
 EnBW DE-Taunusstein Kleiststraße,50.139036,8.154933
 EnBW DE-Tennenbronn Hauptstraße,48.19064,8.35127
+EnBW DE-Thiendorf Am Fiebig,51.29618,13.73516,25
 EnBW DE-Tiefenbach Buchauer Straße,48.08835,9.65223
 EnBW DE-Titisee-Neustadt Freiburger Straße,47.923368,8.189472
 EnBW DE-Tornesch Lise-Meitner-Allee,53.71855,9.75894
@@ -12610,6 +12615,7 @@ EnelX IT-Vallecrosia Via Roma,43.79103,7.64328
 EnelX IT-Varese Via Fratelli de Grandi,45.79545,8.84256
 EnelX IT-Venegono Inferiore Via Fratelli Kennedy,45.72929,8.88755
 EnelX IT-Ventimiglia Passeggiata Marconi,43.79037,7.59995
+EnelX IT-Verbania Vle Vittorio Tonolli,45.92524,8.5469
 EnelX IT-Verona C.so Milano,45.44403,10.96555
 EnelX IT-Viareggio Largo Risorgimento,43.86924,10.2595
 EnelX IT-Vicenza Piazzale della Stazione,45.54146,11.53924
@@ -13944,6 +13950,7 @@ EWE-GO DE-Marktredwitz Böttgerstraße,50.0134,12.09918
 EWE-GO DE-Marl Freerbruchstraße,51.644764,7.102951,25
 EWE-GO DE-Martfeld Hauptstraße,52.876632,9.062726
 EWE-GO DE-Massen-Niederlausitz Ludwig-Erhard-Straße,51.63656,13.73728
+EWE-GO DE-Mayen Koblenzer Straße,50.3267,7.2443
 EWE-GO DE-Meerane Hohe Straße,50.841761,12.44489,5
 EWE-GO DE-Meißen Fabrikstraße,51.164993,13.489314
 EWE-GO DE-Melle Industriestraße,52.190412,8.352793
@@ -15421,6 +15428,7 @@ Iberdrola ES-Huércal de Almería Ctra. Almería,36.87233,-2.44416
 Iberdrola ES-Jaca Av. Ntra. Sra. de la Victoria,42.56541,-0.56446
 Iberdrola ES-La Belga C. de los Hermanos Quirós Río,43.39067,-5.78135
 Iberdrola ES-La Franca Bo. las Arenas,43.38562,-4.57127
+Iberdrola ES-La Vall d’Uixó Carrer Aparadors,39.81482,-0.22978
 Iberdrola ES-Las Rozas de Madrid C. Cruces,40.48995,-3.87419
 Iberdrola ES-Leganés C. de Eduardo Torroja,40.31835,-3.74464
 Iberdrola ES-Los Barrios Av. Carlos Cano,36.17785,-5.49024
@@ -17322,6 +17330,7 @@ Lidl AT-Wiener Neustadt Neudörfler Straße,47.8069,16.26348
 Lidl AT-Wieselburg,48.139019,15.138295
 Lidl AT-Ybbs,48.17549,15.083871
 Lidl BE-Antwerpen Weerstandlaan,51.18611,4.37063
+Lidl BE-Buggenhout Kasteelstraat,51.01038,4.20476
 Lidl BE-Eupen Rue de Herbesthal,50.636237,6.021413
 Lidl BE-Hamme Veldstraat,51.093965,4.147137
 Lidl BE-Ixelles Rue Gray,50.833249,4.378596
@@ -23206,6 +23215,7 @@ Wien-Energie AT-Wien Hansenstraße,48.20625,16.35857
 Wien-Energie AT-Wien Innovationsstraße,48.16474,16.33359
 Wien-Energie AT-Wien Jörgerstraße,48.21776,16.33778
 Wien-Energie AT-Wien Khevenhüllerstraße,48.24674,16.30767
+Wien-Energie AT-Wien Klanggasse,48.22257,16.38217
 Wien-Energie AT-Wien Koberweingasse,48.20001,16.31728
 Wien-Energie AT-Wien Lerchenfelder Straße,48.2071,16.34592
 Wien-Energie AT-Wien Liesinger Platz,48.1356,16.28382
