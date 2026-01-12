@@ -1,5 +1,5 @@
 ﻿#Info
-INFO_important=
+INFO_important="Vikig information"
 INFO_FLEETAPI=
 INFO_RESTRICTED=
 INFO_VEHICLE_LOCATION=
@@ -9,7 +9,7 @@ INFO_DEPRECATED_DOCKER=
 Akku Trips=
 Start Trip=
 End Trip=
-Time=
+Time="Datum"
 StartSOC=
 EndSOC=
 SOC diff=
@@ -21,7 +21,7 @@ kmDiff=
 Max Range=
 Ø Verbrauch=
 Tage=
-Save=
+Save="Spara"
 
 #Degradation.json
 Degradation=
@@ -38,7 +38,7 @@ Ladehistorie=
 Startdatum=
 Enddatum=
 geladen kWh=
-km Stand=
+km Stand="Mätarställning"
 Adresse=
 TR km Start=
 TR km Ende=
