@@ -86,6 +86,8 @@ namespace TeslaLogger
                 GetAllCars();
 
                 InitNearbySuCService();
+
+                OnlineUpdateGeofenceInBackground();
             }
             catch (Exception ex)
             {
@@ -647,6 +649,24 @@ namespace TeslaLogger
                 Priority = ThreadPriority.BelowNormal
             };
             Housekeeper.Start();
+        }
+
+        internal static void OnlineUpdateGeofenceInBackground()
+        {
+            Thread GeofenceOnlineUpdater = new Thread(() =>
+            {
+                // initially sleep 5min
+                Thread.Sleep(300000); // 5min
+                while (true)
+                {
+                    Geofence.GetInstance().OnlineUpdate();
+                    Thread.Sleep(86400000); // 24h
+                }
+            })
+            {
+                Priority = ThreadPriority.BelowNormal
+            };
+            GeofenceOnlineUpdater.Start();
         }
 
         private static void ExitTeslaLogger(string _msg, int _exitcode = 0)

@@ -130,3 +130,5 @@ TeslaLogger/copy-bin-to-release(main).cmd
 TeslaLogger/delete-REDIRECTDOCKERTOHOST.cmd
 /mysql
 /invoices
+/TLUpdate/.vs
+/UnitTestsTeslalogger/.vs

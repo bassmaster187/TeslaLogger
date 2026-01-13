@@ -484,80 +484,73 @@ VALUES(
         {
             Available a = new Available();
 
-            string content = "{\"operationName\":\"GetSiteDetails\",\"query\":\"\\n    query GetSiteDetails($siteId: SiteIdInput!) {\\n  chargingNetwork {\\n    site(siteId: $siteId) {\\n      address {\\n        countryCode\\n      }\\n      chargerList {\\n        id\\n        label\\n        availability\\n      }\\n      holdAmount {\\n        amount\\n        currencyCode\\n      }\\n      maxPowerKw\\n      name\\n      programType\\n      publicStallCount\\n      trtId\\n      pricing {\\n        userRates {\\n          activePricebook {\\n            charging {\\n              ...ChargingRate\\n            }\\n            parking {\\n              ...ChargingRate\\n            }\\n            congestion {\\n              ...ChargingRate\\n            }\\n          }\\n        }\\n      }\\n    }\\n  }\\n}\\n    \\n    fragment ChargingRate on ChargingUserRate {\\n  uom\\n  rates\\n  buckets {\\n    start\\n    end\\n  }\\n  bucketUom\\n  currencyCode\\n  programType\\n  vehicleMakeType\\n  touRates {\\n    enabled\\n    activeRatesByTime {\\n      startTime\\n      endTime\\n      rates\\n    }\\n  }\\n}\\n    \",\"variables\":{\"siteId\":{\"byTrtId\":{\"trtId\":$SITEID$,\"programType\":\"PTSCH\",\"chargingExperience\":\"ADHOC\",\"locale\":\"en-US\"}}}}";
-            content = content.Replace("$SITEID$", trid.ToString());
+            string payload = "{\"operationName\":\"GetSiteDetails\",\"query\":\"\\n    query GetSiteDetails($siteId: SiteIdInput!) {\\n  chargingNetwork {\\n    site(siteId: $siteId) {\\n      address {\\n        countryCode\\n      }\\n      chargerList {\\n        id\\n        label\\n        availability\\n      }\\n      holdAmount {\\n        amount\\n        currencyCode\\n      }\\n      maxPowerKw\\n      name\\n      programType\\n      publicStallCount\\n      trtId\\n      pricing {\\n        userRates {\\n          activePricebook {\\n            charging {\\n              ...ChargingRate\\n            }\\n            parking {\\n              ...ChargingRate\\n            }\\n            congestion {\\n              ...ChargingRate\\n            }\\n          }\\n        }\\n      }\\n    }\\n  }\\n}\\n    \\n    fragment ChargingRate on ChargingUserRate {\\n  uom\\n  rates\\n  buckets {\\n    start\\n    end\\n  }\\n  bucketUom\\n  currencyCode\\n  programType\\n  vehicleMakeType\\n  touRates {\\n    enabled\\n    activeRatesByTime {\\n      startTime\\n      endTime\\n      rates\\n    }\\n  }\\n}\\n    \",\"variables\":{\"siteId\":{\"byTrtId\":{\"trtId\":$SITEID$,\"programType\":\"PTSCH\",\"chargingExperience\":\"ADHOC\",\"locale\":\"en-US\"}}}}";
+            payload = payload.Replace("$SITEID$", trid.ToString());
 
             var client = TeslaGuestHttpClient();
 
             using (var request = new HttpRequestMessage())
             {
-                using (var scontent = new StringContent(content, Encoding.UTF8, "application/json"))
+                using (var scontent = new StringContent(payload, Encoding.UTF8, "application/json"))
                 {
-                    string r = "";
-                    try
+                    var response = client.PostAsync("https://www.tesla.com/charging/guest/api/graphql?operationName=GetSiteDetails", scontent).Result;
+                    string content = response.Content.ReadAsStringAsync().Result;
+                    if (response.IsSuccessStatusCode)
                     {
-                        var result = client.PostAsync("https://www.tesla.com/charging/guest/api/graphql?operationName=GetSiteDetails", scontent).Result;
-                        r = result.Content.ReadAsStringAsync().Result;
-                    }
-                    catch (Exception ex)
-                    {
-                        System.Diagnostics.Debug.WriteLine(ex.ToString());
-                        throw;
-                    }
+                        dynamic j = JsonConvert.DeserializeObject(content);
+                        if (j?["data"] == null || j["errors"] != null)
+                        {
+                            Tools.DebugLog($"Unexpected GuestAPI response: {content}");
+                            return a;
+                        }
 
-                    dynamic j = JsonConvert.DeserializeObject(r);
-                    if (j?["data"] == null || j["errors"] != null)
-                    {
-                        Tools.DebugLog($"Unexpected GuestAPI response: {r}");
-                        return a;
-                    }
+                        dynamic site = j["data"]["chargingNetwork"]["site"];
+                        JArray chargers = site["chargerList"];
+                        //JArray chargerDetails = site["chargersAvailable"]["chargerDetails"];
 
-                    dynamic site = j["data"]["chargingNetwork"]["site"];
-                    JArray chargers = site["chargerList"];
-                    //JArray chargerDetails = site["chargersAvailable"]["chargerDetails"];
+                        string name = site["name"];
 
-                    string name = site["name"];
+                        a.total = chargers.Count;
 
-                    a.total = chargers.Count;
-
-                    foreach (dynamic charger in chargers)
-                    {
-                        string id = charger["id"];
-                        string label = charger["label"];
+                        foreach (dynamic charger in chargers)
+                        {
+                            string id = charger["id"];
+                            string label = charger["label"];
 
 
-                        string availability = charger["availability"];
-                        // System.Diagnostics.Debug.WriteLine($"Label: {label} availability: {availability}");
+                            string availability = charger["availability"];
+                            // System.Diagnostics.Debug.WriteLine($"Label: {label} availability: {availability}");
 
-                        if (availability == "CHARGER_AVAILABILITY_AVAILABLE")
-                            a.available++;
-                        else if (availability == "CHARGER_AVAILABILITY_OCCUPIED")
-                            a.occupied++;
-                        else if (availability == "CHARGER_AVAILABILITY_DOWN")
-                            a.down++;
-                        else if (availability == "CHARGER_AVAILABILITY_UNKNOWN")
-                            a.unknown++;
-                        else
-                            a.unhandled++;
+                            if (availability == "CHARGER_AVAILABILITY_AVAILABLE")
+                                a.available++;
+                            else if (availability == "CHARGER_AVAILABILITY_OCCUPIED")
+                                a.occupied++;
+                            else if (availability == "CHARGER_AVAILABILITY_DOWN")
+                                a.down++;
+                            else if (availability == "CHARGER_AVAILABILITY_UNKNOWN")
+                                a.unknown++;
+                            else
+                                a.unhandled++;
 
-                    }
+                        }
 
-                    if (!string.IsNullOrEmpty(name))
-                    {
-                        Tools.DebugLog($"#{car.CarInDB} Guest SuC: <{name}> <{a.available}> <{a.total}>");
+                        if (!string.IsNullOrEmpty(name))
+                        {
+                            Tools.DebugLog($"#{car.CarInDB} Guest SuC: <{name}> <{a.available}> <{a.total}>");
 
-                        ArrayList send = new ArrayList();
-                        Dictionary<string, object> sendKV = new Dictionary<string, object>();
-                        send.Add(sendKV);
-                        sendKV.Add("n", name);
-                        // sendKV.Add("lat", lat);
-                        // sendKV.Add("lng", lng);
-                        sendKV.Add("ts", DateTime.UtcNow.ToString("s", Tools.ciEnUS));
-                        sendKV.Add("a", a.available);
-                        sendKV.Add("t", a.total);
-                        sendKV.Add("kw", 0);
-                        sendKV.Add("m", "");
-                        ShareSuc(send, false, out _, out _);
+                            ArrayList send = new ArrayList();
+                            Dictionary<string, object> sendKV = new Dictionary<string, object>();
+                            send.Add(sendKV);
+                            sendKV.Add("n", name);
+                            // sendKV.Add("lat", lat);
+                            // sendKV.Add("lng", lng);
+                            sendKV.Add("ts", DateTime.UtcNow.ToString("s", Tools.ciEnUS));
+                            sendKV.Add("a", a.available);
+                            sendKV.Add("t", a.total);
+                            sendKV.Add("kw", 0);
+                            sendKV.Add("m", "");
+                            ShareSuc(send, false, out _, out _);
+                        }
                     }
                 }
             }
