@@ -96,7 +96,7 @@
         },
         {
           "$$hashKey": "object:3292",
-          "alias": "Ø Outside Temp C°",
+          "alias": "Ø Outside Temp °C",
           "align": "right",
           "colorMode": null,
           "colors": [

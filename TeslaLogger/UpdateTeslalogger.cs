@@ -1975,6 +1975,50 @@ PRIMARY KEY(id)
                             else if (f.EndsWith("Verbrauch.json", StringComparison.Ordinal))
                             {
                                 s = s.Replace("outside_temp as 'Außentemperatur [°C]'", "outside_temp * 9/5 + 32 as 'Außentemperatur [°F]'");
+                                s = s.Replace("inside_temp as 'Innentemperatur [°C]'", "inside_temp * 9/5 + 32 as 'Innentemperatur [°F]'");
+                                s = s.Replace("ModuleTempMin FROM", "Round(ModuleTempMin * 9/5 + 32,0) as ModuleTempMin FROM");
+                            }
+                            else if (f.EndsWith("Verbrauchsstatstik.json", StringComparison.Ordinal))
+                            {
+                                s = s.Replace("outside_temp_avg as 'Außentemperatur Monatsmittel [°C]'", "Round(outside_temp_avg * 9/5 + 32,1) as 'Außentemperatur Monatsmittel [°F]'");
+                                s = s.Replace("outside_temp_avg as 'Außentemperatur Tagesmittel [°C]'", "Round(outside_temp_avg * 9/5 + 32,1) as 'Außentemperatur Tagesmittel [°F]'");
+                            }
+                            else if (f.EndsWith("Speed Consumption.json", StringComparison.Ordinal))
+                            {
+                                s = s.Replace("avg(outside_temp)", "Round(avg(outside_temp) * 9/5 + 32,1)");
+                                s = s.Replace("Ø Outside Temp °C", "Ø Outside Temp °F");
+                            }
+                            else if (f.EndsWith("Status.json", StringComparison.Ordinal))
+                            {
+                                s = s.Replace("select outside_temp", "select Round(outside_temp * 9/5 + 32, 1)");
+                                s = s.Replace("SELECT val as", "select Round(val * 9/5 + 32, 1) as");
+                                s = s.Replace("SELECT moduleTempMin as", "select Round(moduleTempMin * 9/5 + 32, 1) as");
+                                s = s.Replace("celsius", "fahrenheit");
+
+                                // Cell Temp color thresholds
+                                s = s.Replace("\"max\": 60,\n          \"min\": 0", "\"max\": 140,\n          \"min\": 32");
+                                s = s.Replace("\"value\": 15", "\"value\": 60");
+                                s = s.Replace("\"value\": 40", "\"value\": 105");
+                                s = s.Replace("\"value\": 50", "\"value\": 125");
+
+                                // Outside Temp color thresholds
+                                s = s.Replace("\"max\": 45,\n          \"min\": 0", "\"max\": 115,\n          \"min\": 32");
+                                s = s.Replace("\"value\": 30", "\"value\": 85");
+                                s = s.Replace("\"color\": \"green\",\n                \"value\": 10", "\"color\": \"green\",\n                \"value\": 50");
+                            }
+                            else if (f.EndsWith("Timeline.json", StringComparison.Ordinal))
+                            {
+                                s = s.Replace("    outside_temp_avg", "    outside_temp_avg * 9/5 + 32 as outside_temp_avg");
+                            }
+                            else if (f.EndsWith("TPMS.json", StringComparison.Ordinal))
+                            {
+                                s = s.Replace("avg(outside_temp)", "avg(outside_temp) * 9/5 + 32");
+                                s = s.Replace("celsius", "fahrenheit");
+                            }
+                            else if (f.EndsWith("Trip Monatsstatistik.json", StringComparison.Ordinal))
+                            {
+                                s = s.Replace("as avg_outside_temp", "* 9/5 + 32 as avg_outside_temp");
+                                s = s.Replace("Ø °C", "Ø °F");
                             }
                         }
 
@@ -1991,7 +2035,7 @@ PRIMARY KEY(id)
                                 s = s.Replace("StartOdometer,", " StartOdometer / 1.609344 as StartOdometer,");
                                 s = s.Replace("EndOdometer,", " EndOdometer / 1.609344 as EndOdometer,");
                                 s = s.Replace("100 AS MaxRange", "100 / 1.609344 AS MaxRange");
-                                s = s.Replace("(EndOdometer - StartOdometer) * 100 AS AVGConsumption", "(EndOdometer/1.609344 - StartOdometer/1.609344) * 100 AS AVGConsumption");
+                                s = s.Replace("(EndOdometer - StartOdometer) * 100 AS AVGConsumption", "(EndOdometer - StartOdometer) * 1609.344 AS AVGConsumption");
 
                                 s = s.Replace("\"unit\": \"lengthkm\"", "\"unit\": \"lengthmi\"");
                                 s = s.Replace("\"kmDiff\"", "\"mi Diff\"");
@@ -2013,7 +2057,7 @@ PRIMARY KEY(id)
                             else if (f.EndsWith("Trip.json", StringComparison.Ordinal))
                             {
                                 s = s.Replace(" speed_max,", "speed_max / 1.609344 as speed_max,");
-                                s = s.Replace(" avg_consumption_kWh_100km,", " avg_consumption_kWh_100km * 1.609344 as avg_consumption_kWh_100km,");
+                                s = s.Replace(" avg_consumption_kWh_100km,", " avg_consumption_kWh_100km * 16.09344 as avg_consumption_kWh_100km,");
                                 s = s.Replace(" as avg_kmh", " / 1.609344 as avg_kmh");
                                 s = s.Replace(" km_diff,", " km_diff  / 1.609344 as km_diff,");
                                 s = s.Replace("StartRange - EndRange as RangeDiff", "(StartRange - EndRange) / 1.609344 as RangeDiff");
@@ -2042,14 +2086,107 @@ PRIMARY KEY(id)
                             else if (f.EndsWith("Verbrauch.json", StringComparison.Ordinal))
                             {
                                 s = s.Replace(" speed as 'Geschwindigkeit [km/h]'", " speed / 1.609344 as 'Geschwindigkeit [mph]'");
-                                s = s.Replace(" ideal_battery_range_km as 'Reichweite [km]'", " ideal_battery_range_km / 1.609344 as 'Reichweite [mi]'");
+                                s = s.Replace("battery_range_km as 'Reichweite [km]'", "battery_range_km / 1.609344 as 'Reichweite [mi]'");
+
+                                s = s.Replace("div 10 * 10 as kmh", "/ 1.609344 div 10 * 10 as mph");
+                                s = s.Replace("group by speed", "group by speed / 1.609344");
+                                s = s.Replace("having kmh >= 0", "having mph >= 0");
+                                s = s.Replace("\"colorByField\": \"kmh\"", "\"colorByField\": \"mph\"");
+                                s = s.Replace("\"xField\": \"kmh\"", "\"xField\": \"mph\"");
+                                s = s.Replace("\"axisLabel\": \"km/h\"", "\"axisLabel\": \"mph\"");
+
+                                s = s.Replace("odometer -", "(odometer -");
+                                s = s.Replace(") as km", ")) / 1.609344 as mi");
                             }
                             else if (f.EndsWith("Ladehistorie.json", StringComparison.Ordinal))
                             {
-                                s = s.Replace("ideal_battery_range_km ", "ideal_battery_range_km / 1.609344 ");
-
+                                s = s.Replace("battery_range_km ", "battery_range_km / 1.609344 ");
+                                s = s.Replace("pos.odometer", "pos.odometer / 1.609344 as odometer");
                                 s = s.Replace("\"TR km Start\"", "\"TR mi Start\"");
                                 s = s.Replace("\"TR km Ende\"", "\"TR mi Ende\"");
+                            }
+                            else if (f.EndsWith("km Stand.json", StringComparison.Ordinal))
+                            {
+                                s = s.Replace("odometer as value", "odometer / 1.609344 as value");
+                                s = s.Replace("[km]", "[mi]");
+                            }
+                            else if (f.EndsWith("Verbrauchsstatstik.json", StringComparison.Ordinal))
+                            {
+                                s = s.Replace("\"alias\": \"km Stand [km]\"", "\"alias\": \"mi Stand [mi]\"");
+                                s = s.Replace("odometer as 'km Stand [km]'", "odometer / 1.609344 as 'mi Stand [mi]'");
+                                s = s.Replace("AVG(avg_consumption_kWh_100km) as 'Verbrauch Monatsmittel [kWh]'", "AVG(avg_consumption_kWh_100km)* 16.09344 as 'Verbrauch Monatsmittel [Wh/mi]'");
+                                s = s.Replace("AVG(avg_consumption_kWh_100km) as 'Verbrauch Tagesmittel [kWh]'", "AVG(avg_consumption_kWh_100km)* 16.09344 as 'Verbrauch Tagesmittel [Wh/mi]'");
+                            }
+                            else if (f.EndsWith("Jurney.json", StringComparison.Ordinal))
+                            {
+                                s = s.Replace(" * 100 as Consumption100km", " * 1609.344 as Consumption100km");
+                                s = s.Replace(" * 100 as Cost100km", " * 160.9344 as Cost100km");
+                                s = s.Replace(" as kmDriven", " / 1.609344 as miDriven");
+                                s = s.Replace(" as speed_max", " / 1.609344 as speed_max");
+                                s = s.Replace(" as avg_kmh", " / 1.609344 as avg_kmh");
+                                s = s.Replace(" AS maxKmDrivenPerCharge", " / 1.609344 AS maxKmDrivenPerCharge");
+                                s = s.Replace(" AS MaxCalculatedRangePerCharge", " / 1.609344 AS MaxCalculatedRangePerCharge");
+                                s = s.Replace(" as maxTripKm", " / 1.609344 AS maxTripMi");
+                                s = s.Replace(" as minTripKm", " / 1.609344 AS minTripMi");
+                                s = s.Replace(" as avgTripKm", " / 1.609344 AS avgTripMi");
+                                s = s.Replace("SELECT speed div", "SELECT speed / 1.609344 div");
+                                s = s.Replace("group by speed", "group by speed / 1.609344");
+                                s = s.Replace("\"axisLabel\": \"km/h\"", "\"axisLabel\": \"mph\"");
+                                s = s.Replace("\"options\": \"avgTripKm\"", "\"options\": \"avgTripMi\"");
+                                s = s.Replace("\"options\": \"minTripKm\"", "\"options\": \"minTripMi\"");
+                                s = s.Replace("\"options\": \"kmDriven\"", "\"options\": \"miDriven\"");
+                                s = s.Replace("\"value\": \"lengthkm\"", "\"value\": \"lengthmi\"");
+                                s = s.Replace("\"value\": \"km/h\"", "\"value\": \"mph\"");
+                                s = s.Replace("\"value\": \"Ø km/h\"", "\"value\": \"Ø mph\"");
+                                s = s.Replace("\"value\": \"max km/h\"", "\"value\": \"max mph\"");
+                                s = s.Replace("\"value\": \"100km\"", "\"value\": \"100mi\"");
+                                s = s.Replace("\"value\": \"kWh/100km\"", "\"value\": \"Wh/mi\"");
+                            }
+                            else if (f.EndsWith("Speed Consumption.json", StringComparison.Ordinal))
+                            {
+                                s = s.Replace("min(speed)", "min(speed) / 1.609344");
+                                s = s.Replace("avg(speed)", "avg(speed) / 1.609344");
+                                s = s.Replace("max(speed)", "max(speed) / 1.609344");
+                                s = s.Replace("max(odometer) - min(odometer) as km)", "(max(odometer) - min(odometer)) / 1.609344 as km");
+                                s = s.Replace("* 100 as Verbrauch", "* 1609.344 as Verbrauch");
+                                s = s.Replace("group by odometer", "group by odometer / 1.609344");
+                                s = s.Replace("Speed km/h", "Speed mph");
+                                s = s.Replace("Consumption kWh", "Consumption Wh/mi");
+                                s = s.Replace("Min Distance [km]", "Min Distance [mi]");
+                            }
+                            else if (f.EndsWith("Status.json", StringComparison.Ordinal))
+                            {
+                                s = s.Replace("select ideal_battery_range_km", "select ideal_battery_range_km / 1.609344");
+                                s = s.Replace("select battery_range_km", "select battery_range_km / 1.609344");
+                                s = s.Replace("SELECT odometer", "SELECT odometer / 1.609344 as odometer");
+                                s = s.Replace("lengthkm", "lengthmi");
+                            }
+                            else if (f.EndsWith("Timeline.json", StringComparison.Ordinal))
+                            {
+                                s = s.Replace("TP1.odometer as odometer", "TP1.odometer / 1.609344 as odometer");
+                                s = s.Replace("pos.odometer as odometer", "pos.odometer / 1.609344 as odometer");
+                                s = s.Replace("\"km_diff\",", "\"mi_diff\",");
+                                s = s.Replace("null as km_diff", "null as mi_diff");
+                                s = s.Replace("    km_diff", "    km_diff / 1.609344 as mi_diff");
+                                s = s.Replace("TP2.odometer - TP1.odometer as km_diff", "(TP2.odometer - TP1.odometer) / 1.609344 as mi_diff");
+                                s = s.Replace("* -1 as RangeDiff", "/ -1.609344 as RangeDiff");
+                                s = s.Replace("charging_End.battery_range_km - charging.battery_range_km as RangeDiff", "(charging_End.battery_range_km - charging.battery_range_km) / 1.609344 as RangeDiff");
+                            }
+                            else if (f.EndsWith("Trip Monatsstatistik.json", StringComparison.Ordinal))
+                            {
+                                s = s.Replace("Strecke [km]", "Strecke [mi]");
+                                s = s.Replace("Ø Verbrauch [kWh]", "Ø Verbrauch [Wh/mi]");
+                                s = s.Replace("as sum_km", "/ 1.609344 as sum_km");
+                                s = s.Replace("* 100 as avg_consumption_kwh", "* 1609.344 as avg_consumption_kwh");
+                            }
+                            else if (f.EndsWith("Trip Top Destinations.json", StringComparison.Ordinal))
+                            {
+                                s = s.Replace("\"Ø km\"", "\"Ø mi\"");
+                                s = s.Replace("\"Ø km/h\"", "\"Ø mph\"");
+                                s = s.Replace("\"Ø Verbrauch kWh/100km\"", "\"Ø Verbrauch Wh/mi\"");
+                                s = s.Replace("AS avg_km_diff", "/ 1.609344 AS avg_km_diff");
+                                s = s.Replace("AS avg_kmh", "/ 1.609344 AS avg_kmh");
+                                s = s.Replace("AS avg_consumption_kWh_100km", "* 16.09344 AS avg_consumption_kWh_100km");
                             }
                         }
 
@@ -2142,7 +2279,9 @@ PRIMARY KEY(id)
                             {
                                 s = ReplaceTitleTag(s, "Verbrauchsstatistik", dictLanguage);
                                 s = ReplaceLanguageTags(s, new string[] {
-                                    "km Stand[km]","mi Stand [mi]","Verbrauch Monatsmittel [kWh]","Außentemperatur Monatsmittel [°C]","Außentemperatur Monatsmittel [°F]","Verbrauch Tagesmittel [kWh]","Außentemperatur Tagesmittel [°C]", "Außentemperatur Tagesmittel [°F]"
+                                    "km Stand[km]","mi Stand [mi]","Verbrauch Monatsmittel [kWh]","Verbrauch Monatsmittel [Wh/mi]","Außentemperatur Monatsmittel [°C]",
+                                    "Außentemperatur Monatsmittel [°F]","Verbrauch Tagesmittel [kWh]","Verbrauch Tagesmittel [Wh/mi]","Außentemperatur Tagesmittel [°C]",
+                                    "Außentemperatur Tagesmittel [°F]"
                                 }, dictLanguage, true);
                             }
                             else if (f.EndsWith("Visited.json", StringComparison.Ordinal))
@@ -2187,6 +2326,14 @@ PRIMARY KEY(id)
                                 s = ReplaceLanguageTags(s, new string[] {
                                     "Anzahl"
                                 }, dictLanguage, false);
+                            }
+                            else if (f.EndsWith("Trip Top Destinations.json", StringComparison.Ordinal))
+                            {
+                                s = ReplaceTitleTag(s, "Trip Top Ziele", dictLanguage);
+                                s = ReplaceLanguageTags(s, new string[] {
+                                    "Trip Top Ziele", "Letzte Fahrt", "Ø Dauer Min", "Ø Verbrauch kWh/100km", "Ø Verbraucht kWh",
+                                    "Anzahl Trips", "Anzahl", "Ziel", "Fahrzeug", "Ø Verbrauch Wh/mi"
+                                }, dictLanguage, true);
                             }
                             else if (f.EndsWith("Zellspannungen 01-20 - ScanMyTesla.json", StringComparison.Ordinal))
                             {
@@ -2257,7 +2404,8 @@ PRIMARY KEY(id)
                             {
                                 s = ReplaceTitleTag(s, "Trip Monatsstatistik", dictLanguage);
                                 s = ReplaceLanguageTags(s, new string[] {
-                                    "Jahr/Monat", "Fahrzeit [h]", "Strecke [km]", "Strecke [mi]", "Verbrauch [kWh]", "Ø Verbrauch [kWh]"
+                                    "Jahr/Monat", "Fahrzeit [h]", "Strecke [km]", "Strecke [mi]", "Verbrauch [kWh]", "Ø Verbrauch [kWh]",
+                                    "Trip Jahresstatistik", "Ø Verbrauch [Wh/mi]"
                                 }, dictLanguage, true);
                             }
                             else if (f.EndsWith("Alle Verbräuche -ScanMyTesla.json", StringComparison.Ordinal))

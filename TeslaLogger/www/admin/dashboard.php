@@ -31,6 +31,9 @@ else
 	<script src="static/jquery/jquery-1.12.4.js"></script>
 	<script>
 
+	var LengthUnit = "<?php echo($LengthUnit); ?>";
+	var TemperatureUnit = "<?php echo($TemperatureUnit); ?>";
+	var PowerUnit = "<?php echo($PowerUnit); ?>";
 	var nextGetWeather = 0;
 	var loc;
 
@@ -96,8 +99,12 @@ else
 		  dataType: "json"
 		  }).done(function( jsonData ) {
 			$('#display_name').text(jsonData["display_name"]);
-			$('#ideal_battery_range_km').text(jsonData["ideal_battery_range_km"].toFixed(0));
 			$('#battery_level').text(jsonData["battery_level"]);
+			
+			range = jsonData["ideal_battery_range_km"];
+			if (LengthUnit == "mile")
+				range /= 1.609344;
+			$('#ideal_battery_range_km').text(range.toFixed(0));
 
 			updateBat(jsonData["battery_level"]);
 
@@ -109,14 +116,27 @@ else
 			else if (jsonData["driving"])
 			{
 				$('#car_statusLabel').text("<?php t("Driving"); ?>:");
-				$('#car_status').text(jsonData["speed"] + " km/h / " + jsonData["power"]+"PS");
+				speedText = ""
+				if (LengthUnit == "mile")
+					speedText = Math.round(jsonData["speed"] / 1.609344) + " mph";
+				else
+					speedText = jsonData["speed"] + " km/h";
+				$('#car_status').text(speedText + " / " + jsonData["power"]+"PS");
 			}
 			else if (jsonData["online"])
 			{
 				var text = "<?php t("Online"); ?>";
 
 				if (jsonData["is_preconditioning"])
-					text = text + "<br><?php t("Preconditioning"); ?> "+ jsonData["inside_temperature"] +"°C";
+				{
+					tempString = ""
+					if (TemperatureUnit == "fahrenheit")
+						tempString = Round(jsonData["inside_temperature"] * 9/5 + 32) + " °F";
+					else
+						tempString = jsonData["inside_temperature"] + " °C";
+					
+					text = text + "<br><?php t("Preconditioning"); ?> "+ tempString;
+				}
 
 				if (jsonData["sentry_mode"])
 					text = text + "<br><?php t("Sentry Mode"); ?>";
@@ -302,9 +322,12 @@ if (file_exists("my_dashboard_jsonData.php"))
 					i++;
 				}
 			}
-
-			$('#temp').text(Math.round(minTemp) + "°C / " + Math.round(maxTemp) + "°C");
+			
 			$("#weather_icon").attr("src", "img/weather/" + weatherIcon);
+			if (TemperatureUnit == "fahrenheit")
+				$('#temp').text(Math.round(minTemp * 9/5 + 32) + "°F / " + Math.round(maxTemp * 9/5 + 32) + "°F");
+			else
+				$('#temp').text(Math.round(minTemp) + "°C / " + Math.round(maxTemp) + "°C");
 		}).error(function(error)
 		{
 			$('#temp').text(error.responseText);
@@ -505,7 +528,7 @@ if (file_exists("my_dashboard_jsonData.php"))
 <div id="panel">
 	  <div id="headline"><span id="display_name"> </span><span id="teslalogger">Teslalogger Dashboard</span></div>
 	  <div id="rangeline"><span id="batdiv"><img id="batimg" src="img/bat-icon.png"><img id="batimg_m" src="img/bat-icon-gr.png"><img id="batimg_end" src="img/bat-icon-end.png"></span>
-	  <span id="battery_level" style="">-</span><font id="percent">%</font> <span id="tilde">~</span> <span id="ideal_battery_range_km" style="">-</span><font id="km">km</font></div>
+	  <span id="battery_level" style="">-</span><font id="percent">%</font> <span id="tilde">~</span> <span id="ideal_battery_range_km" style="">-</span><font id="km"><?php echo $LengthUnit == "mile" ? "mi" : "km"; ?></font></div>
 	  <div id="car_statusLabel">-</div>
 	  <div id="car_status">-</div>
 	  <div id="error">
