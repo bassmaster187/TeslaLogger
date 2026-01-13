@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Net.Http;
 using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using Exceptionless;
+using HttpMultipartParser;
 
 namespace TeslaLogger
 {
@@ -575,6 +577,62 @@ namespace TeslaLogger
             double d3 = Math.Pow(Math.Sin((d2 - d1) / 2.0), 2.0) + (Math.Cos(d1) * Math.Cos(d2) * Math.Pow(Math.Sin(num2 / 2.0), 2.0));
 
             return 6376500.0 * (2.0 * Math.Atan2(Math.Sqrt(d3), Math.Sqrt(1.0 - d3)));
+        }
+
+        [MethodImpl(MethodImplOptions.Synchronized)]
+        internal void OnlineUpdate()
+        {
+            Tools.DebugLog("Geofence.OnlineUpdate");
+            string lastETag = null;
+            if (KVS.Get("Geofence.OnlineUpdate.ETag", out string etag) == KVS.SUCCESS)
+            {
+                lastETag = etag;
+            }
+            HttpClient client = new HttpClient();
+            string url = "https://raw.githubusercontent.com/bassmaster187/TeslaLogger/master/TeslaLogger/bin/geofence.csv";
+            using (var request = new HttpRequestMessage(HttpMethod.Get, url))
+            {
+                if (lastETag != null)
+                {
+                    request.Headers.TryAddWithoutValidation("If-None-Match", lastETag);
+                }
+                var response = client.SendAsync(request).Result;
+                if (response.StatusCode == System.Net.HttpStatusCode.NotModified)
+                {
+                    Logfile.Log($"Geofence.OnlineUpdate: no changes (ETag: {lastETag})");
+                }
+                else if (response.IsSuccessStatusCode)
+                {
+                    if (response.Headers.ETag != null)
+                    {
+                        lastETag = response.Headers.ETag.Tag;
+                        KVS.InsertOrUpdate("Geofence.OnlineUpdate.ETag", lastETag);
+                    }
+                    Logfile.Log($"Geofence.OnlineUpdate: update! (ETag: {lastETag})");
+                    using (Stream stream = response.Content.ReadAsStreamAsync().Result)
+                    {
+                        using (FileStream fs = new FileStream(FileManager.GetFilePath(TLFilename.GeofenceFilename) + ".updated", FileMode.Create, FileAccess.Write, FileShare.None, 8192, useAsync: false))
+                        {
+                            byte[] buffer = new byte[8192];
+                            int bytesRead;
+
+                            while ((bytesRead = stream.Read(buffer, 0, buffer.Length)) > 0)
+                            {
+                                fs.Write(buffer, 0, bytesRead);
+                            }
+                        }
+                    }
+                    Tools.DebugLog($"Geofence.updated: {new FileInfo(FileManager.GetFilePath(TLFilename.GeofenceFilename) + ".updated").Length} bytes");
+                    if (new FileInfo(FileManager.GetFilePath(TLFilename.GeofenceFilename) + ".updated").Length > 0)
+                    {
+                        Tools.CopyFile(FileManager.GetFilePath(TLFilename.GeofenceFilename) + ".updated", FileManager.GetFilePath(TLFilename.GeofenceFilename));
+                    }
+                }
+                else
+                {
+                    Logfile.Log($"Geofence.OnlineUpdate: error: {response.StatusCode}");
+                }
+            }
         }
 
     }
