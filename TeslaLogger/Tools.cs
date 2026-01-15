@@ -2368,6 +2368,70 @@ WHERE
                 ex.ToExceptionless().FirstCarUserID().Submit();
             }
         }
+
+        internal static double KmToMl(double km, int decimals = 3)
+        {
+            return Math.Round(km / 1.609344, decimals);
+        }
+
+        public static async Task RestartGrafanaServer()
+        {
+            try
+            {
+                if (!Tools.IsDocker())
+                {
+                    Tools.ExecMono("service", "grafana-server restart");
+                    return;
+                }
+                else
+                {
+#if NET8
+                    Logfile.Log("Restart Grafana Docker container via linux socket");
+
+                    string socketPath = "/var/run/docker.sock";
+
+                    var handler = new SocketsHttpHandler
+                    {
+                        ConnectCallback = async (context, cancellationToken) =>
+                        {
+                            var socket = new Socket(AddressFamily.Unix, SocketType.Stream, ProtocolType.Unspecified);
+                            var endpoint = new UnixDomainSocketEndPoint(socketPath);
+                            await socket.ConnectAsync(endpoint);
+                            return new NetworkStream(socket, ownsSocket: true);
+                        }
+                    };
+
+                    using var client = new HttpClient(handler);
+                    var requestUri = "http://localhost/containers/teslalogger-grafana/restart";
+
+                    var request = new HttpRequestMessage(HttpMethod.Post, requestUri);
+                    var response = await client.SendAsync(request);
+
+                    Console.WriteLine($"Status: {response.StatusCode}");
+                    var content = await response.Content.ReadAsStringAsync();
+                    Console.WriteLine($"Body: {content}");
+#endif
+                }
+            }
+            catch (HttpRequestException hre)
+            {
+                if (hre.Message.StartsWith("Cannot assign requested address"))
+                {
+                    Logfile.Log("Error restarting Grafana Docker container: Cannot assign requested address (localhost:80)");
+                    Logfile.Log("Error restarting Grafana Docker container: do you have the latest docker-compose.yml file??? Can't access docker socket!");
+                }
+                else
+                {
+                    Logfile.Log("Error restarting Grafana Docker container: " + hre.ToString());
+                    hre.ToExceptionless().FirstCarUserID().Submit();
+                }
+            }
+            catch (Exception ex)
+            {
+                Logfile.Log("Error restarting Grafana Docker container: " + ex.ToString());
+                ex.ToExceptionless().FirstCarUserID().Submit();
+            }
+        }
     }
 
     public static class EventBuilderExtension
