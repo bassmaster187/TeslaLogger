@@ -27,13 +27,15 @@ require("language.php");
 logger("restore_upload.php!");
 
 $target_dir = "uploads/";
+$originalfilename = $_FILES["fileToUpload"]["name"];
 $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
 $uploadOk = 1;
 $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
 // Check if image file is a actual image or fake image
 if(isset($_POST["submit"])) {
 	$file_name = $_FILES["fileToUpload"]["tmp_name"];
-    echo("filename:" . $file_name ." Size compressed:". filesize($file_name));
+    echo("filename:" . $file_name ." <br>Size compressed:". filesize($file_name));
+	echo("<br>Original filename:" . $originalfilename);
 	logger("Filesize compressed: ". filesize($file_name));
 	
 	rename($file_name, $file_name.".gz");
@@ -58,23 +60,58 @@ if(isset($_POST["submit"])) {
 	// Files are done, close files
 	fclose($out_file);
 	gzclose($file);
-	
-	echo("<br>filename:" . $out_file_name ." Size:". filesize($out_file_name));
-	
-	logger("Filesize decompressed: ". filesize($out_file_name));
-	
-	logger("Start Restore");
-	echo("<br>Start Restore:<br>");
-	$return_var = NULL;
-	$output = NULL;
 
-	if (file_exists("/tmp/teslalogger-DOCKER"))
-		$command = exec("/usr/bin/mysql -hdatabase -uroot -pteslalogger -Dteslalogger < /tmp/mybackup.sql", $output, $return_var);
+	if (strpos($originalfilename, "geofence-private") === 0)
+	{
+		echo("<br>Geofence-Private CSV file detected.<br>");
+		$csvtext = file_get_contents($out_file_name);
+		$url = GetTeslaloggerURL("writefile/geofence-private.csv");
+        echo file_get_contents($url, false, stream_context_create([
+        'http' => [
+                'method' => 'POST',
+                'user_agent' => 'PHP',
+                'header'  => "Content-type: application/x-www-form-urlencoded\r\nContent-Length: ".strlen($csvtext)."\r\n",
+                'content' => $csvtext
+        ]    
+        ]));
+	}
 	else
-		$command = exec("/usr/bin/mysql -uroot -pteslalogger -Dteslalogger < /tmp/mybackup.sql", $output, $return_var);
+	{
+		echo("<br>Decompressed file: <br>");
+		echo("<br>filename:" . $out_file_name ." Size:". filesize($out_file_name));
+		
+		logger("Filesize decompressed: ". filesize($out_file_name));
+		
+		logger("Start Restore");
+		echo("<br>Start Restore:<br>");
+		$return_var = NULL;
+		$output = NULL;
 
-	logger("Output from mysql: " . var_export($output));
-	echo("<br>Restore finished. Please Reboot!");	
+		if (file_exists("/tmp/teslalogger-DOCKER"))
+		{
+			echo("<br>Docker detected, using database host 'database'");
+			logger("Docker detected, using database host 'database'");
+			$command = exec("sed -i '/\\/\\*M!999999\\\\-/d' /tmp/mybackup.sql", $output, $return_var); // bug in mariaDB - removes special comment: enable sandbox mode
+
+			logger("start mysql restore");
+			$command = exec("/usr/bin/mysql -hdatabase -uroot -pteslalogger -Dteslalogger < /tmp/mybackup.sql", $output, $return_var);
+		}
+		else
+			$command = exec("/usr/bin/mysql -uroot -pteslalogger -Dteslalogger < /tmp/mybackup.sql", $output, $return_var);
+
+		logger("Output from mysql: " . var_export($output));
+		echo "<br>Output from mysql: <br>";
+		foreach ($output as $line) {
+			echo htmlspecialchars($line) . "<br>";
+		}
+		echo("<br>Restore finished. Please Reboot!");	
+	}
+	
+	if (file_exists($out_file_name))
+		unlink($out_file_name);
+
+	if (file_exists($file_name))
+		unlink($file_name);
 }
 ?>
 </div>

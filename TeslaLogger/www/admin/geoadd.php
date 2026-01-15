@@ -13,7 +13,8 @@ $sf = null;
 if (isset($id))
 {
 	$n = 0;
-	$fp = fopen("/etc/teslalogger/geofence-private.csv", "r+");
+	GetFileFromTeslaloggerAndWriteToTMP("geofence-private.csv");
+	$fp = fopen("/tmp/geofence-private.csv", "r+");
 
 	if ($fp === FALSE)
 	{

@@ -1,4 +1,5 @@
 <?PHP
+require_once("tools.php");
 $Text = $_POST["Text"];
 $lat = $_POST["lat"];
 $lng = $_POST["lng"];
@@ -11,7 +12,7 @@ $Text = str_replace(","," ",$Text);
 $radius = str_replace(",","",$radius);
 $flag = str_replace(",","",$flag);
 
-$filename = '/etc/teslalogger/geofence-private.csv';
+$filename = '/tmp/geofence-private.csv';
 
 $csvtext = "";
 $i = 0;
@@ -21,7 +22,7 @@ $fp = null;
 if (isset($id) && strlen($id) > 0)
 {
         $date = date("ymdhis");
-        copy($file, "/etc/teslalogger/geofence-private-$date.csv");
+        copy($filename, "/tmp/geofence-private-$date.csv");
 
         $fp = fopen($filename, "r+");
         while ($line = fgets($fp)) {
@@ -56,9 +57,33 @@ if (isset($id) && strlen($id) > 0)
         }
         fclose($fp);
         file_put_contents($filename, $csvtext);
+
+        $url = GetTeslaloggerURL("writefile/geofence-private.csv");
+        echo file_get_contents($url, false, stream_context_create([
+        'http' => [
+                'method' => 'POST',
+                'user_agent' => 'PHP',
+                'header'  => "Content-type: application/x-www-form-urlencoded\r\nContent-Length: ".strlen($csvtext)."\r\n",
+                'content' => $csvtext
+        ]    
+        ]));
 }
 else
+{
         file_put_contents($filename, $tmp, FILE_APPEND );
+
+        $csvtext = file_get_contents($filename);
+
+        $url = GetTeslaloggerURL("writefile/geofence-private.csv");
+        echo file_get_contents($url, false, stream_context_create([
+                'http' => [
+                        'method' => 'POST',
+                        'user_agent' => 'PHP',
+                        'header'  => "Content-type: application/x-www-form-urlencoded\r\nContent-Length: ".strlen($csvtext)."\r\n",
+                        'content' => $csvtext
+                ]    
+                ]));
+}
 
 // chmod('/etc/teslalogger/settings.json', 666);
 

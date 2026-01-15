@@ -96,7 +96,7 @@ function ShowInfo()
 		$("#NegativeButton").hide();
 	<?php
 	}
-	else if (!files_are_equal("/etc/teslalogger/changelog.md","/tmp/changelog.md"))
+	else if (!files_are_equal("/tmp/changelog_last.md","/tmp/changelog.md"))
 	{?>
 		$.get("changelog_plain.php").success(function(data){
 			$("#InfoText").html(data);

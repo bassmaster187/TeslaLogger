@@ -1,5 +1,47 @@
 <?PHP 
 
+checkHTaccess();
+
+function checkHTaccess()
+{
+    $htaccessPath = "/var/www/html/admin/.htaccess";
+    $htpasswdPath = "/tmp/.htpasswd";
+
+    if (filesize($htaccessPath) == 0 && file_exists($htpasswdPath))
+    {
+        error_log("TeslaLogger: .htaccess file is empty but .htpasswd exists - recreating .htaccess");
+        createHTAccess();
+    }
+}
+
+function createHTAccess()
+{
+
+    // Create .htaccess content
+    $htaccessContent = "AuthType Basic\n";
+    $htaccessContent .= "AuthName \"TeslaLogger Admin Panel\"\n";
+    $htaccessContent .= "AuthUserFile /tmp/.htpasswd\n";
+    $htaccessContent .= "Require valid-user\n";
+
+    // Try to write .htaccess file to admin directory
+    $htaccessPath = "/var/www/html/admin/.htaccess";
+    if (file_put_contents($htaccessPath, $htaccessContent) === false) {
+        error_log("TeslaLogger: Failed to write .htaccess file to " . $htaccessPath);
+        
+        // If that fails, write to tmp and try to copy
+        $tempHtaccessPath = "/tmp/.htaccess";
+        file_put_contents($tempHtaccessPath, $htaccessContent);
+        if (!copy($tempHtaccessPath, $htaccessPath)) {
+            error_log("TeslaLogger: Failed to copy .htaccess file from " . $tempHtaccessPath . " to " . $htaccessPath . ". Check permissions on /var/www/html/admin/");
+            throw new Exception("Could not write .htaccess file. Please check permissions on /var/www/html/admin/");
+        } else {
+            error_log("TeslaLogger: Successfully copied .htaccess file from temp location");
+        }
+    } else {
+        error_log("TeslaLogger: Successfully created .htaccess file");
+    }
+}
+
 function isRedirectDockerToHost()
 {
     return file_exists("REDIRECTDOCKERTOHOST");
@@ -36,9 +78,9 @@ function GetTeslaloggerHTTPPort()
 {
     $port = 5000;
 
-    if (file_exists("/etc/teslalogger/settings.json"))
+    if (file_exists("/tmp/settings.json"))
 	{
-		$content = file_get_contents("/etc/teslalogger/settings.json");
+		$content = file_get_contents("/tmp/settings.json");
 		$j = json_decode($content);
 		if (!empty($j->{"HTTPPort"})) 
             $port = $j->{"HTTPPort"};	
@@ -92,7 +134,14 @@ function setShareData($share)
 
 function JSONDatetoString($jsondate)
 {
+    if (empty($jsondate))
+        return "";
+        
     $ts = preg_replace( '/[^0-9]/', '', $jsondate);
+    if (empty($ts))
+        return "";
+        
+    $ts = intval($ts);
     $date = date("Y-m-d H:i:s", $ts / 1000);
     return $date;
 }
@@ -123,35 +172,36 @@ function startsWith( $haystack, $needle ) {
 
 function files_are_equal($a, $b)
 {
-  // Check if filesize is different
-  if(filesize($a) !== filesize($b))
-      return false;
+    // Check if filesize is different
+    if (filesize($a) !== filesize($b))
+        return false;
 
-  // Check if content is different
-  $ah = fopen($a, 'rb');
-  $bh = fopen($b, 'rb');
+    // Check if content is different
+    $ah = fopen($a, 'rb');
+    $bh = fopen($b, 'rb');
 
-  $result = true;
-  while(!feof($ah))
-  {
-    if(fread($ah, 8192) != fread($bh, 8192))
-    {
-      $result = false;
-      break;
+    if ($ah && $bh) {
+        $result = true;
+        while (feof($ah) !== false) {
+            if (fread($ah, 8192) != fread($bh, 8192)) {
+                $result = false;
+                break;
+            }
+        }
+
+        fclose($ah);
+        fclose($bh);
+
+        return $result;
     }
-  }
-
-  fclose($ah);
-  fclose($bh);
-
-  return $result;
+    return false;
 }
 
 function GetDefaultCarId()
 {
-    if (file_exists("/etc/teslalogger/settings.json"))
+    if (file_exists("/tmp/settings.json"))
     {
-        $json = file_get_contents("/etc/teslalogger/settings.json");
+        $json = file_get_contents("/tmp/settings.json");
         $json_data = json_decode($json,true);
 
         if (!empty($carid = $json_data["defaultcarid"]))

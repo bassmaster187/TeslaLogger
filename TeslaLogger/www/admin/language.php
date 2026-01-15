@@ -11,9 +11,10 @@ $Range = 'IR';
 
 $Display100pctEnable = "false";
 
-if (file_exists("/etc/teslalogger/settings.json"))
+GetFileFromTeslaloggerAndWriteToTMP("settings.json");
+if (file_exists("/tmp/settings.json"))
 {
-	$json = file_get_contents('/etc/teslalogger/settings.json');
+	$json = file_get_contents('/tmp/settings.json');
 	$json_data = json_decode($json,true);
 	$language = $json_data["Language"];
 	$TemperatureUnit = $json_data["Temperature"];
@@ -144,6 +145,21 @@ function get_text($t)
 
 function logger($t)
 {
+	if (isDocker())
+	{
+		$url = GetTeslaloggerURL("logger");
+
+		echo file_get_contents($url, false, stream_context_create([
+		'http' => [
+			'method' => 'POST',
+			'user_agent' => 'PHP',
+			'header'  => "Content-type: application/x-www-form-urlencoded\r\nContent-Length: ".strlen($t)."\r\n",
+			'content' => $t
+		]    
+		]));
+		return;
+	}
+
 	$logfile = "/etc/teslalogger/nohup.out";
 	$time = date("d.m.Y H:i:s", time());
 	$ret2 =	file_put_contents($logfile, $time . " : ". $t ."\r\n", FILE_APPEND);

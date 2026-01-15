@@ -93,11 +93,15 @@ if (!isset($_REQUEST["sleep"]) && isset($_REQUEST["lines"]))
 
 <div id="log" style="overflow: auto; height: 820px; max-width: 1260px;">
 <?PHP
+/*
 	$output  = shell_exec("tail -n$lines /etc/teslalogger/nohup.out");
 	if ($output === false) {
         // Handle the error
 		echo "error";
-    }
+    } */
+
+	$url = GetTeslaloggerURL("taillogfile/$lines");
+    $output = @file_get_contents($url);
 
 	$output = str_replace("Start update","<b>Start update</b>", $output);
 	$output = str_replace("End update","<b>End update</b>", $output);

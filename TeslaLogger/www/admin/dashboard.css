@@ -80,6 +80,97 @@ body {
 	color: #EAEAEA; 
 }
 
+.dialog {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	color: #EAEAEA;
+	background-color: #000000dd;
+    padding: 30px;
+	border-radius: 15px;
+	border: 2px solid #444;
+	z-index: 1000;
+	min-width: 300px;
+	text-align: center;
+}
+
+.dialog form {
+	margin-top: 20px;
+}
+
+.dialog input[type="file"] {
+	background-color: #333;
+	color: #EAEAEA;
+	border: 1px solid #555;
+	border-radius: 5px;
+	padding: 10px;
+	margin: 10px 0;
+	width: 100%;
+}
+
+.dialog input[type="text"] {
+	background-color: #333;
+	color: #EAEAEA;
+	border: 1px solid #555;
+	border-radius: 5px;
+	padding: 10px;
+	margin: 5px 0 15px 0;
+	width: 100%;
+	box-sizing: border-box;
+}
+
+.dialog input[type="text"]:focus {
+	border-color: #007ACC;
+	outline: none;
+}
+
+.dialog label {
+	display: block;
+	text-align: left;
+	color: #EAEAEA;
+	font-weight: bold;
+	margin-bottom: 5px;
+}
+
+.dialog button {
+	background-color: #007ACC;
+	color: white;
+	border: none;
+	border-radius: 5px;
+	padding: 10px 20px;
+	margin: 10px 5px;
+	cursor: pointer;
+	font-size: 16px;
+}
+
+.dialog button:hover {
+	background-color: #005A9E;
+}
+
+.dialog button[type="button"] {
+	background-color: #666;
+}
+
+.dialog button[type="button"]:hover {
+	background-color: #555;
+}
+
+#settings {
+	position: absolute;
+	right: 20px;
+	top: 20px;
+	color: #EAEAEA;
+	background-color: #00000030;
+    padding: 20px;
+	border-radius: 15px;
+}
+
+a {
+	color: #EAEAEA;
+	text-decoration: none;
+}
+
 #weekday, #date {
 	font-size: 30px; 
 }
