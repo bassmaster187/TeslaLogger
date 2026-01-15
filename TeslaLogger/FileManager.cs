@@ -19,7 +19,8 @@ namespace TeslaLogger
         NewCredentialsFilename,
         TeslaLoggerExeConfigFilename,
         GeocodeCache,
-        GeofenceRacingFilename
+        GeofenceRacingFilename,
+        EncryptionFilename
     }
 
     /// <summary>
@@ -48,11 +49,24 @@ namespace TeslaLogger
                 { TLFilename.GeofenceRacingFilename,    "geofence-racing.csv"},
                 { TLFilename.NewCredentialsFilename,    "new_credentials.json"},
                 { TLFilename.TeslaLoggerExeConfigFilename,"TeslaLogger.exe.config"},
-                { TLFilename.GeocodeCache,              "GeocodeCache.xml"}
+                { TLFilename.GeocodeCache,              "GeocodeCache.xml"},
+                { TLFilename.EncryptionFilename,        "encryption.txt"}
             };
 
         internal static string GetFilePath(TLFilename filename)
         {
+            if (filename == TLFilename.SettingsFilename || filename == TLFilename.EncryptionFilename || filename == TLFilename.GeofencePrivateFilename)
+            {
+                var p = GetExecutingPath();
+                p = p.Replace("Debug/net8.0/", "data/");
+                p = p.Replace("Debug\\net8.0\\", "data\\");
+
+                p = p.Replace("bin/data/", "data/");
+                p = p.Replace("bin\\data\\", "data\\");
+
+                return Path.Combine(p, Filenames[filename]);
+            }
+
             return Path.Combine(GetExecutingPath(), Filenames[filename]);
         }
 
@@ -195,6 +209,16 @@ namespace TeslaLogger
             }
 
             return _ExecutingPath;
+        }
+
+        public static string GetCmdUpdatedTxt()
+        {
+            if (Tools.RunOnLinux())
+            {
+                return "/etc/teslalogger/cmd_updated.txt";
+            }
+
+            return "cmd_updated.txt";
         }
     }
 }

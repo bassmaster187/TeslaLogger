@@ -1,3 +1,12 @@
+# Version 1.63.10
+- online update of geofence.csv
+- Nominal Full / SOH Pack Capacity in Dashboard Battery Degradation (Lucid Air)
+- CAC min / max in Dashboard Battery Degradation (ScanMyTesla)
+- Charging Curves in Dashboard Charging Statistics
+- Whole documentation now online instead of a PDF. You're welcome to contribute: [LINK](https://teslalogger.de/docs)
+- Link to description of Vehicle Alerts in Dashboard Vehicle Alerts
+- Support for Cybertruck / Cyberbeast
+
 # Version 1.63.9
 - EVCC: fix for changed JSON shema since version 0.207
 

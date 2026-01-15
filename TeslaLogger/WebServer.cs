@@ -199,8 +199,23 @@ namespace TeslaLogger
                 }
 
                 var url = request.Url;
-
-                if (url.Segments.Length == 3)
+                if (url.Segments.Length == 2)
+                {
+                    switch (url.Segments[1])
+                    {
+                        case "backup":
+                            Backup(response);
+                            return;
+                        case "logger":
+                            logger(request, response);
+                            return;
+                        case "restartgrafana":
+                            Tools.RestartGrafanaServer().Wait();
+                            WriteString(response, "ok");
+                            return;
+                    }
+                }
+                else if (url.Segments.Length == 3)
                 {
                     switch (url.Segments[1])
                     {
@@ -223,7 +238,18 @@ namespace TeslaLogger
                         case "updatedrivestatistics/":
                             UpdateDriveStatistics(response, url);
                             return;
+
+                        case "taillogfile/":
+                            Taillogfile(response, url);
+                            return;
+
                     }
+                }
+                
+                if (url.Segments.Length > 2 && url.Segments[1] == "lucid/")
+                {
+                    // TeslaLoggerNET8.Lucid.LucidWebServer.HandleRequest(url, request, response);
+                    return;
                 }
 
 
@@ -374,7 +400,7 @@ namespace TeslaLogger
                         Dev_DumpJSON(response, true);
                         break;
                     case bool _ when request.Url.LocalPath.Equals("/dev/dumpJSON/off", System.StringComparison.Ordinal):
-                        Dev_DumpJSON(response, false);
+                        Dev_DumpJSON(response, false); 
                         break;
                     case bool _ when request.Url.LocalPath.Equals("/dev/verbose/on", System.StringComparison.Ordinal):
                         Program.VERBOSE = true;
@@ -427,6 +453,60 @@ namespace TeslaLogger
             }
         }
 
+        private void Backup(HttpListenerResponse response)
+        {
+            Logfile.Log("Start Backup");
+            string ret = Tools.ExecMono("/bin/bash", "/etc/teslalogger/backup.sh");
+            WriteString(response, ret);
+        }
+
+        private void Taillogfile(HttpListenerResponse response, Uri url)
+        {
+            var lines = Convert.ToInt32(url.Segments[2].ToString());
+
+            var path = Logfile.Logfilepath;
+
+            string log = ReadEndTokens(path, lines, System.Text.Encoding.UTF8, "\n");
+            WriteString(response, log);
+        }
+
+        public static string ReadEndTokens(string path, Int64 numberOfTokens, Encoding encoding, string tokenSeparator)
+        {
+
+            int sizeOfChar = encoding.GetByteCount("\n");
+            byte[] buffer = encoding.GetBytes(tokenSeparator);
+
+
+            using (FileStream fs = new FileStream(path, FileMode.Open))
+            {
+                Int64 tokenCount = 0;
+                Int64 endPosition = fs.Length / sizeOfChar;
+
+                for (Int64 position = sizeOfChar; position < endPosition; position += sizeOfChar)
+                {
+                    fs.Seek(-position, SeekOrigin.End);
+                    fs.Read(buffer, 0, buffer.Length);
+
+                    if (encoding.GetString(buffer) == tokenSeparator)
+                    {
+                        tokenCount++;
+                        if (tokenCount == numberOfTokens)
+                        {
+                            byte[] returnBuffer = new byte[fs.Length - fs.Position];
+                            fs.Read(returnBuffer, 0, returnBuffer.Length);
+                            return encoding.GetString(returnBuffer);
+                        }
+                    }
+                }
+
+                // handle case where number of tokens in file is less than numberOfTokens
+                fs.Seek(0, SeekOrigin.Begin);
+                buffer = new byte[fs.Length];
+                fs.Read(buffer, 0, buffer.Length);
+                return encoding.GetString(buffer);
+            }
+        }
+
         private void UpdateDriveStatistics(HttpListenerResponse response, Uri url)
         {
             Logfile.Log("WebServer UpdateDriveStatistics. " + url.Segments[2].ToString());
@@ -467,6 +547,14 @@ namespace TeslaLogger
             }
         }
 
+        private void logger(HttpListenerRequest request, HttpListenerResponse response)
+        {
+            string data = GetDataFromRequestInputStream(request);
+            Logfile.Log(data);
+            System.Diagnostics.Debug.WriteLine("Logger: " + data);
+            WriteString(response, "ok");
+        }
+
         private void Admin_Writefile(HttpListenerRequest request, HttpListenerResponse response)
         {
             var u = request.Url;
@@ -492,14 +580,24 @@ namespace TeslaLogger
 
             if (filename == "settings.json")
                 p = FileManager.GetFilePath(TLFilename.SettingsFilename);
+            else if (filename == "geofence-private.csv")
+            {
+                p = FileManager.GetFilePath(TLFilename.GeofencePrivateFilename);
+            }
 
             System.Diagnostics.Debug.WriteLine("Webserver writefile: " + p);
+            Logfile.Log("Webserver writefile: " + p);
 
             if (File.Exists(p))
                 File.Delete(p);
 
             string data = GetDataFromRequestInputStream(request);
-                
+
+            var pd = Path.GetDirectoryName(p);
+            if (!Directory.Exists(pd))
+                Directory.CreateDirectory(pd);
+
+
             File.WriteAllText(p, data);
             WriteString(response, "ok");
             return;
@@ -547,6 +645,17 @@ namespace TeslaLogger
                 p = p.Replace(@"Debug\", "");
                 p = p.Replace(@"net8.0\", "");
             }
+
+            if (!File.Exists(p))
+            {
+                p = p.Replace(@"Debug/", "");
+                p = p.Replace(@"net8.0/", "");
+            }
+
+            if (filename == "settings.json")
+                p = FileManager.GetFilePath(TLFilename.SettingsFilename);
+            else if (filename == "geofence-private.csv")
+                p = FileManager.GetFilePath(TLFilename.GeofencePrivateFilename);
 
             System.Diagnostics.Debug.WriteLine("Webserver getfile: " + p);
 
@@ -2251,7 +2360,7 @@ DROP TABLE chargingstate_bak";
         {
             try
             {
-                string logfilePath = Path.Combine(FileManager.GetExecutingPath(), "nohup.out");
+                string logfilePath = Logfile.Logfilepath;
 
                 if (Directory.Exists("zip"))
                     Directory.Delete("zip", true);
@@ -2265,6 +2374,8 @@ DROP TABLE chargingstate_bak";
                 ZipFile.CreateFromDirectory("zip", "logfile.zip");
 
                 WriteFile(response, "logfile.zip");
+
+                File.Delete("zip/logfile.txt");
             }
             catch (Exception ex)
             {

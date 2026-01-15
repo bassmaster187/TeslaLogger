@@ -1,4 +1,8 @@
-﻿using System;
+﻿using Exceptionless;
+using MySql.Data.MySqlClient;
+using Newtonsoft.Json;
+using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
@@ -6,18 +10,15 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Net.Sockets;
 using System.Reflection;
 using System.Runtime.Caching;
 using System.Runtime.CompilerServices;
+using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
-using MySql.Data.MySqlClient;
-using Exceptionless;
-using Newtonsoft.Json;
-using System.Collections.Concurrent;
-using System.Security.Cryptography;
 
 namespace TeslaLogger
 {
@@ -53,6 +54,7 @@ namespace TeslaLogger
         public enum UpdateType { all, stable, none };
 
         internal static ConcurrentQueue<Tuple<DateTime, string>> debugBuffer = new ConcurrentQueue<Tuple<DateTime, string>>();
+        internal static bool dotnet8;
 
         public static void SetThreadEnUS()
         {
@@ -375,7 +377,7 @@ namespace TeslaLogger
             return GetMonoRuntimeVersion() != "NULL";
         }
 
-        public static void CopyFilesRecursively(DirectoryInfo source, DirectoryInfo target, string excludeFile = null)
+        public static void CopyFilesRecursively(DirectoryInfo source, DirectoryInfo target, string excludeFile = null, bool writeToLogfile = true)
         {
             if (source != null && target != null)
             {
@@ -395,7 +397,9 @@ namespace TeslaLogger
                         else
                         {
                             string p = Path.Combine(target.FullName, file.Name);
-                            Logfile.Log("Copy '" + file.FullName + "' to '" + p + "'");
+                            if (writeToLogfile)
+                                Logfile.Log("Copy '" + file.FullName + "' to '" + p + "'");
+
                             File.Copy(file.FullName, p, true);
                         }
                     }
@@ -414,6 +418,31 @@ namespace TeslaLogger
 
         internal static object VINDecoder(string vin, out int year, out string carType, out bool AWD, out bool MIC, out string battery, out string motor, out bool MIG)
         {
+            if (vin == null || vin == "")
+            {
+                year = 0;
+                carType = "";
+                AWD = false;
+                MIC = false;
+                battery = "";
+                motor = "";
+                MIG = false;
+                return "?";
+            }
+
+            if (vin.StartsWith("50E"))
+            {
+                year = 0;
+                carType = "";
+                AWD = false;
+                MIC = false;
+                battery = "";
+                motor = "";
+                MIG = false;
+                return LucidVINDecoder(vin, out year, out carType, out AWD, out MIC, out battery, out motor);
+            }
+
+
             year = 0;
             carType = "";
             AWD = false;
@@ -433,7 +462,7 @@ namespace TeslaLogger
                 if (dateCode > 73) // skip I
                 {
                     year--;
-                }
+                } 
                 if (dateCode > 79) // skip O
                 {
                     year--;
@@ -570,6 +599,108 @@ namespace TeslaLogger
             }
 
             return "?";
+        }
+
+        private static object LucidVINDecoder(string vin, out int year, out string carType, out bool aWD, out bool mIC, out string battery, out string motor)
+        {
+            aWD = true;
+            mIC = false;
+
+            carType = vin[3] == 'A' ? "Lucid Air" : "Lucid Gravity";
+            switch (vin[5])
+            {
+                case 'P':
+                    carType += " Pure";
+                    break;
+                case 'D':
+                    carType += " Dream";
+                    break;
+                case 'G':
+                    carType += " Grand Touring";
+                    break;
+                case 'T':
+                    carType += " Touring";
+                    break;
+                case 'S':
+                    carType += " Sapphire";
+                    break;
+                default:
+                    carType += " ???";
+                    break;
+
+            }
+
+            switch (vin[9])
+            {
+                case 'P':
+                    year = 2022;
+                    break;
+                case 'Q':
+                    year = 2023;
+                    break;
+                case 'R':
+                    year = 2024;
+                    break;
+                case 'S':
+                    year = 2025;
+                    break;
+                case 'T':
+                    year = 2026;
+                    break;
+                default:
+                    // unknown year
+                    year = 0;
+                    break;
+
+            }
+
+            battery = "NMC";
+            motor = "";
+
+            switch (vin[6])
+            {
+                case 'A':
+                    motor = "Dual Motor 828kw";
+                    break;
+                case 'B':
+                    motor = "Dual Motor 597kw";
+                    break;
+                case 'C':
+                    motor = "Dual Motor 695kw";
+                    break;
+                case 'D':
+                    motor = "Dual Motor 783kw";
+                    break;
+                case 'E':
+                    motor = "?";
+                    break;
+                case 'F':
+                    motor = "Dual Motor ???kw";
+                    break;
+                default:
+                    motor = "?";    
+                    break;
+            }
+
+            string market = "";
+
+            switch (vin[11])
+            {
+                case '0':
+                    market = "USA";
+                    break;
+                case '3':
+                    market = "Canada";
+                    break;
+                case '1':
+                    market = "Europe";
+                    break;
+                default:
+                    market = "?";
+                    break;
+            }
+
+            return carType + " / " + year +  " motor: " + motor + " market: " + market;
         }
 
         public static void CopyFile(string srcFile, string directory)
@@ -836,7 +967,7 @@ namespace TeslaLogger
 
             try
             {
-                if (!Tools.IsMono())
+                if (!Tools.RunOnLinux())
                 {
                     return "";
                 }
@@ -1232,6 +1363,11 @@ namespace TeslaLogger
                 Logfile.ExceptionWriter(ex, "IsUnitTest");
             }
             return false;
+        }
+
+        public static bool RunOnLinux()
+        {
+            return Environment.OSVersion.Platform == PlatformID.Unix;
         }
 
         public static bool IsDotnet8()
@@ -2170,6 +2306,70 @@ WHERE
         {
             return Math.Round(miles * 1.609344, decimals);
         }
+
+        internal static double KmToMl(double km, int decimals = 3)
+        {
+            return Math.Round(km / 1.609344, decimals);
+        }
+
+        public static async Task RestartGrafanaServer()
+        {
+            try
+            {
+                if (!Tools.IsDocker())
+                {
+                    Tools.ExecMono("service", "grafana-server restart");
+                    return;
+                }
+                else
+                {
+#if NET8
+                    Logfile.Log("Restart Grafana Docker container via linux socket");
+
+                    string socketPath = "/var/run/docker.sock";
+
+                    var handler = new SocketsHttpHandler
+                    {
+                        ConnectCallback = async (context, cancellationToken) =>
+                        {
+                            var socket = new Socket(AddressFamily.Unix, SocketType.Stream, ProtocolType.Unspecified);
+                            var endpoint = new UnixDomainSocketEndPoint(socketPath);
+                            await socket.ConnectAsync(endpoint);
+                            return new NetworkStream(socket, ownsSocket: true);
+                        }
+                    };
+
+                    using var client = new HttpClient(handler);
+                    var requestUri = "http://localhost/containers/teslalogger-grafana/restart";
+
+                    var request = new HttpRequestMessage(HttpMethod.Post, requestUri);
+                    var response = await client.SendAsync(request);
+
+                    Console.WriteLine($"Status: {response.StatusCode}");
+                    var content = await response.Content.ReadAsStringAsync();
+                    Console.WriteLine($"Body: {content}");
+#endif
+                }
+            }
+            catch (HttpRequestException hre)
+            {
+                if (hre.Message.StartsWith("Cannot assign requested address"))
+                {
+                    Logfile.Log("Error restarting Grafana Docker container: Cannot assign requested address (localhost:80)");
+                    Logfile.Log("Error restarting Grafana Docker container: do you have the latest docker-compose.yml file??? Can't access docker socket!");
+                }
+                else
+                {
+                    Logfile.Log("Error restarting Grafana Docker container: " + hre.ToString());
+                    hre.ToExceptionless().FirstCarUserID().Submit();
+                }
+            }
+            catch (Exception ex)
+            {
+                Logfile.Log("Error restarting Grafana Docker container: " + ex.ToString());
+                ex.ToExceptionless().FirstCarUserID().Submit();
+            }
+        }
     }
 
     public static class EventBuilderExtension
@@ -2302,7 +2502,7 @@ WHERE
         {
             try
             {
-                var path = "encryption.txt";
+                var path = FileManager.GetFilePath(TLFilename.EncryptionFilename);
 
                 if (!File.Exists(path))
                 {
