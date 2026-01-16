@@ -70,6 +70,18 @@ namespace TeslaLogger
             return Path.Combine(GetExecutingPath(), Filenames[filename]);
         }
 
+
+        public static string CorrectLogfilepath(string path)
+        {
+            if (!File.Exists(path))
+            {
+                if (!Tools.IsDocker() && !Tools.IsDockerNET8() && Tools.IsDotnet8())
+                    path = "/etc/teslalogger/nohup.out";
+            }
+
+            return path;
+        }
+
         internal static string GetFilePath(string filename)
         {
             return Path.Combine(GetExecutingPath(), filename);

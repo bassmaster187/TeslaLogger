@@ -3269,6 +3269,11 @@ namespace TeslaLogger
             string resultContent = "";
             try
             {
+                if (latitude == 0 && longitude == 0)
+                {
+                    return "";
+                }
+
                 if (!forceGeocoding)
                 {
                     Address a = null;

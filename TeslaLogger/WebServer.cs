@@ -465,21 +465,10 @@ namespace TeslaLogger
             var lines = Convert.ToInt32(url.Segments[2].ToString());
 
             var path = Logfile.Logfilepath;
-            path = CorrectLogfilepath(path);
+            path = FileManager.CorrectLogfilepath(path);
 
             string log = ReadEndTokens(path, lines, System.Text.Encoding.UTF8, "\n");
             WriteString(response, log);
-        }
-
-        private static string CorrectLogfilepath(string path)
-        {
-            if (!File.Exists(path))
-            {
-                if (!Tools.IsDocker() && !Tools.IsDockerNET8() && Tools.IsDotnet8())
-                    path = "/etc/teslalogger/nohup.out";
-            }
-
-            return path;
         }
 
         public static string ReadEndTokens(string path, Int64 numberOfTokens, Encoding encoding, string tokenSeparator)
@@ -2374,7 +2363,7 @@ DROP TABLE chargingstate_bak";
             {
                 string logfilePath = Logfile.Logfilepath;
 
-                logfilePath = CorrectLogfilepath(logfilePath);
+                logfilePath = FileManager.CorrectLogfilepath(logfilePath);
 
                 if (Directory.Exists("zip"))
                     Directory.Delete("zip", true);
