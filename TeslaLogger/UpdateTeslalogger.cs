@@ -41,7 +41,7 @@ namespace TeslaLogger
                 {
                     try
                     {
-                        done.Cancel();
+                        done?.Cancel();
                     }
                     catch (Exception) { }
                 }
@@ -1281,7 +1281,7 @@ PRIMARY KEY(id)
                 {
                     try
                     {
-                        done.Cancel();
+                        done?.Cancel();
                     }
                     catch (Exception) { }
                 }
@@ -1900,7 +1900,7 @@ PRIMARY KEY(id)
         {
             try
             {
-                if (Tools.IsMono() || Tools.IsDocker())
+                if (Tools.IsMono() || Tools.IsDocker() || Tools.IsDotnet8())
                 {
                     Tools.GrafanaSettings(out string power, out string temperature, out string length, out string language, out string URL_Admin, out string Range, out string URL_Grafana, out string defaultcar, out string defaultcarid);
 
