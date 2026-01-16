@@ -466,6 +466,12 @@ namespace TeslaLogger
 
             var path = Logfile.Logfilepath;
 
+            if (!File.Exists(path))
+            {
+                if (!Tools.IsDocker() && !Tools.IsDockerNET8() && Tools.IsDotnet8())
+                    path = "/etc/teslalogger/nohup.out";
+            }
+
             string log = ReadEndTokens(path, lines, System.Text.Encoding.UTF8, "\n");
             WriteString(response, log);
         }
