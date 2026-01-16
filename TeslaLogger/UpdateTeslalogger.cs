@@ -37,9 +37,17 @@ namespace TeslaLogger
         {
             try
             {
-                if (ComfortingMessages != null)
+                if (Tools.IsDotnet8())
                 {
-                    ComfortingMessages.Abort();
+                    try
+                    {
+                        done.Cancel();
+                    }
+                    catch (Exception) { }
+                }
+                else if (ComfortingMessages != null)
+                {
+                    ComfortingMessages.Abort(); 
                 }
             }
             catch (Exception ex)
@@ -1269,11 +1277,22 @@ PRIMARY KEY(id)
             if (File.Exists(FileManager.GetCmdUpdatedTxt()))
             {
                 Logfile.Log("Update skipped!");
-                try
+                if (Tools.IsDotnet8())
                 {
-                    ComfortingMessages.Abort();
+                    try
+                    {
+                        done.Cancel();
+                    }
+                    catch (Exception) { }
                 }
-                catch (Exception) { }
+                else
+                {
+                    try
+                    {
+                        ComfortingMessages.Abort();
+                    }
+                    catch (Exception) { }
+                }
                 return;
             }
 
