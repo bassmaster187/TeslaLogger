@@ -121,10 +121,10 @@ namespace TeslaLogger
         {
             try
             {
-                if (File.Exists("TESLALOGGERNET8"))
+                var net8version = Tools.GetNET8Version();
+                if (net8version?.Contains("8.") == true)
                 {
-                    var net8version = Tools.GetNET8Version();
-                    if (net8version?.Contains("8.") == true)
+                    if (File.Exists("TESLALOGGERNET8") || NET8TaskerToken())
                     {
                         Logfile.Log("Start Teslalogger.net8");
 
@@ -155,6 +155,20 @@ namespace TeslaLogger
             {
                 ex.ToExceptionless().FirstCarUserID().Submit();
                 Logfile.Log(ex.ToString());
+            }
+        }
+
+        private static bool NET8TaskerToken()
+        {
+            try
+            {
+                WaitForDB();
+                return DBHelper.NET8TaskerToken();
+            }
+            catch (Exception ex)
+            {
+                Logfile.Log("NET8TaskerToken: cannot connect to DB: " + ex.ToString());
+                return false;
             }
         }
 
@@ -499,7 +513,18 @@ namespace TeslaLogger
 
         private static void InitConnectToDB()
         {
-            for (int x = 1; x <= 30; x++) // try 30 times until DB is up and running
+            WaitForDB();
+
+            UpdateTeslalogger.Start();
+            _ = Task.Factory.StartNew(() =>
+            {
+                UpdateTeslalogger.UpdateGrafana();
+            }, CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
+        }
+
+        private static void WaitForDB()
+        {
+            for (int x = 1; x <= 300; x++) // try 30 times until DB is up and running
             {
                 try
                 {
@@ -524,11 +549,6 @@ namespace TeslaLogger
                     Thread.Sleep(15000);
                 }
             }
-
-            UpdateTeslalogger.Start();
-            _ = Task.Factory.StartNew(() => {
-                UpdateTeslalogger.UpdateGrafana();
-            }, CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
         }
 
         private static void InitCheckDocker()

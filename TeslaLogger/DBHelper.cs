@@ -1,20 +1,21 @@
-﻿using MySql.Data.MySqlClient;
+﻿using Exceptionless;
+using MySql.Data.MySqlClient;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.Common;
+using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
 using System.Net;
 using System.Runtime.Caching;
+using System.Runtime.InteropServices.ComTypes;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
-using Exceptionless;
-using Newtonsoft.Json;
-using System.Diagnostics;
-using System.Data.Common;
 using ZstdSharp.Unsafe;
 
 namespace TeslaLogger
@@ -7464,6 +7465,40 @@ ORDER BY startdate", con))
                 ex.ToExceptionless().Submit();
             }
             return 0;
+        }
+
+        public static bool NET8TaskerToken()
+        {
+            try
+            {
+                using (MySqlConnection con = new MySqlConnection(DBConnectionstring + ";Allow User Variables=True"))
+                {
+                    con.Open();
+                    using (MySqlCommand cmd = new MySqlCommand($@"SELECT tasker_hash FROM teslalogger.cars where left(tasker_hash,1) in (1)", con)) // 
+                    {
+                        using (MySqlDataReader dr = SQLTracer.TraceDR(cmd))
+                        {
+                            if (dr.Read())
+                            {
+                                Logfile.Log("NET8TaskerToken: true - " + dr.GetString(0));
+                                return true;
+                            }
+                            else
+                            {
+                                Logfile.Log("NET8TaskerToken: false");
+                                return false;
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logfile.Log(ex.ToString());
+                ex.ToExceptionless().Submit();
+            }
+            return false;
+
         }
     }
 }
