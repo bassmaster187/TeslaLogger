@@ -7474,7 +7474,7 @@ ORDER BY startdate", con))
                 using (MySqlConnection con = new MySqlConnection(DBConnectionstring + ";Allow User Variables=True"))
                 {
                     con.Open();
-                    using (MySqlCommand cmd = new MySqlCommand($@"SELECT tasker_hash FROM teslalogger.cars where left(tasker_hash,1) in (1)", con)) // 
+                    using (MySqlCommand cmd = new MySqlCommand($@"SELECT tasker_hash FROM teslalogger.cars where left(tasker_hash,1) in (1,2)", con)) // 
                     {
                         using (MySqlDataReader dr = SQLTracer.TraceDR(cmd))
                         {
