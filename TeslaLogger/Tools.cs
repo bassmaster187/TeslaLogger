@@ -1375,6 +1375,14 @@ namespace TeslaLogger
             return Environment.Version?.ToString()?.StartsWith("8.0") == true;
         }
 
+        public static bool IsRaspberry_NET8()
+        {
+            if (!Tools.IsDocker() && !Tools.IsDockerNET8() && Tools.IsDotnet8() && RunOnLinux())
+                return true;
+            
+            return false;
+        }
+
         public static bool IsDockerNET8()
         {
             try

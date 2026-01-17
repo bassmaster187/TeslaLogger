@@ -402,6 +402,7 @@ namespace TeslaLogger
         {
             TestEncryption();
             Logfile.Log("Path of settings.json: " + FileManager.GetFilePath(TLFilename.SettingsFilename));
+            Logfile.Log("Path of invoices: " + FileManager.GetInvoicePath());
 
             KeepOnlineMinAfterUsage = Tools.GetSettingsInt("KeepOnlineMinAfterUsage", ApplicationSettings.Default.KeepOnlineMinAfterUsage);
             SuspendAPIMinutes = Tools.GetSettingsInt("SuspendAPIMinutes", ApplicationSettings.Default.SuspendAPIMinutes);

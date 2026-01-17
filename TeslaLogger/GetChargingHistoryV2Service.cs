@@ -12,19 +12,19 @@ namespace TeslaLogger
 {
     internal class SuCSession
     {
-            internal SuCSession(dynamic jsonSession, Car car)
+        internal SuCSession(dynamic jsonSession, Car car)
         {
             string VIN;
             string sessionId;
             string siteLocationName;
             DateTime chargeStartDateTime;
             if (jsonSession != null
-     && jsonSession.ContainsKey("sessionId")
-     && jsonSession.ContainsKey("chargeStartDateTime")
-     && jsonSession.ContainsKey("siteLocationName")
-     && jsonSession.ContainsKey("fees")
-     && jsonSession.ContainsKey("vin")
-     )
+                 && jsonSession.ContainsKey("sessionId")
+                 && jsonSession.ContainsKey("chargeStartDateTime")
+                 && jsonSession.ContainsKey("siteLocationName")
+                 && jsonSession.ContainsKey("fees")
+                 && jsonSession.ContainsKey("vin")
+                 )
             {
                 VIN = jsonSession["vin"];
                 sessionId = jsonSession["sessionId"];
@@ -68,7 +68,8 @@ INSERT IGNORE INTO teslacharging SET
                     if (invoice.ContainsKey("contentId"))
                     {
                         // check if output directory exists, otherwise create
-                        string invoiceDir = Path.Combine(Logfile.GetExecutingPath(), "tesla_invoices");
+                        var invoiceDir = FileManager.GetInvoicePath();
+
                         if (!Directory.Exists(invoiceDir))
                         {
                             Directory.CreateDirectory(invoiceDir);

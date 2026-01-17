@@ -75,12 +75,22 @@ namespace TeslaLogger
         {
             if (!File.Exists(path))
             {
-                if (!Tools.IsDocker() && !Tools.IsDockerNET8() && Tools.IsDotnet8())
+                if (Tools.IsRaspberry_NET8())
                     path = "/etc/teslalogger/nohup.out";
             }
 
             return path;
         }
+
+        public static string GetInvoicePath()
+        {
+            string invoiceDir = Path.Combine(Logfile.GetExecutingPath(), "tesla_invoices");
+            if (Tools.IsRaspberry_NET8())
+                invoiceDir = "/etc/teslalogger/tesla_invoices";
+
+            return invoiceDir;
+        }
+
 
         internal static string GetFilePath(string filename)
         {
