@@ -111,6 +111,7 @@ Supercharger AU-Euroa,-36.752887,145.573418
 Supercharger-V3 AU-Exeter NSW,-34.609254,150.229857
 Supercharger-V3 AU-Geelong,-38.06516,144.38244,25
 Supercharger-V4 AU-Geelong VIC,-38.17058,144.3924
+Supercharger-V4 AU-Gin Gin QLD,-24.9896,151.95332
 Supercharger-V4 AU-Glenorchy TAS,-42.8338,147.28526
 Supercharger AU-Gold Coast,-28.035361,153.427306
 Supercharger AU-Goulburn,-34.755597,149.720984
@@ -139,22 +140,27 @@ Supercharger AU-Maroochydore,-26.653878,153.087613
 Supercharger-V4 AU-Maryborough West QLD,-25.4878,152.66365
 Supercharger AU-Melbourne-Richmond,-37.831997,144.995807
 Supercharger-V3 AU-Mildura VIC,-34.209468,142.139923
+Supercharger-V4 AU-Miranda NSW,-34.02716,151.11868
 Supercharger-V3 AU-Moe VIC,-38.172989,146.259475
 Supercharger AU-Moonee Ponds VIC,-37.7658,144.92336
 Supercharger-V3 AU-Mornington VIC,-38.234331,145.051016
 Supercharger-V3 AU-Mount Gambier SA,-37.834977,140.802625
-Supercharger-V4 AU-Mt Gravatt QLD,-27.55692,153.08056
+Supercharger-V3 AU-Mount Sheridan QLD,-16.9882,145.7403
 Supercharger AU-Narooma,-36.223136,150.128346
+Supercharger-V4 AU-Narrandera NSW,-34.7436,146.55433
 Supercharger-V3 AU-North Lakes QLD,-27.23948,153.01372
 Supercharger-V3 AU-Orange NSW,-33.283778,149.096
 Supercharger AU-Ovens,-36.587007,146.759301
+Supercharger-V4 AU-Palmview QLD,-26.75124,153.0466
 Supercharger-V4 AU-Parkes NSW,-33.141,148.17458
+Supercharger-V4 AU-Pokolbin NSW,-32.7736,151.3103
 Supercharger AU-Port Macquarie NSW,-31.4361,152.823582
 Supercharger-V3 AU-Raymond Terrace NSW,-32.763763,151.742331
 Supercharger-V3 AU-Rochedale QLD,-27.577783,153.113941
 Supercharger-V3 AU-Rockhampton QLD,-23.343362,150.521157
 Supercharger-V3 AU-Runaway Bay QLD,-27.912565,153.400769
 Supercharger-V3 AU-Shepparton VIC,-36.384356,145.400954
+Supercharger-V4 AU-Southern Cross WA,-31.23247,119.32737
 Supercharger-V3 AU-Springwood QLD,-27.61454,153.12638
 Supercharger-V3 AU-St Kilda VIC,-37.868187,144.980939
 Supercharger-V3 AU-Tailem Bend SA,-35.30396,139.50133
@@ -167,6 +173,7 @@ Supercharger-V3 AU-Tuggeranong ACT,-35.41575,149.066
 Supercharger-V3 AU-Tuggeranong ACT,-35.417617,149.067019
 Supercharger-V4 AU-Tully QLD,-17.93486,145.92433
 Supercharger-V3 AU-Tweed Heads NSW,-28.173921,153.545101
+Supercharger-V4 AU-Upper Mount Gravatt QLD,-27.55692,153.08056
 Supercharger-V3 AU-Warrnambool VIC,-38.38127,142.51929
 Supercharger AU-Warrnambool VIC Princes Hwy,-38.38529,142.53364
 Supercharger-V4 AU-Waterloo NSW,-33.8977,151.2137
@@ -2645,6 +2652,7 @@ Supercharger-V4 FR-Pannes,47.996054,2.673579
 Supercharger-V4 FR-Paris So Ouest,48.892815,2.29702
 Supercharger FR-Pau,43.332257,-0.358762
 Supercharger-V3 FR-Perigueux,45.152424,0.789938
+Supercharger-V4 FR-Phalsbourg,48.7728,7.24323
 Supercharger FR-Poitiers,46.670356,0.362651
 Supercharger-V3 FR-Poitiers Sud,46.547666,0.296006
 Supercharger-V4 FR-Pontarlier,46.909145,6.337706
@@ -7389,6 +7397,7 @@ ARAL DE-Bockenem Oppelner Straße,52.00173,10.1353,10
 ARAL DE-Braunschweig Hansestraße,52.32218,10.47816,40
 ARAL DE-Braunschweig Hildesheimer Straße,52.27199,10.4961
 ARAL DE-Breitenburg Elmshorner Straße,51.38174,9.23693
+ARAL DE-Breitenburg Elmshorner Straße,53.90597,9.50766
 ARAL DE-Bremen Osterholzer Heerstraße,53.05817,8.93889
 ARAL DE-Bremen Stapelfeldtstraße,53.11069,8.75425
 ARAL DE-Bremen Stapelfeldtstraße,53.1111,8.75315
@@ -7925,6 +7934,7 @@ Blink BE-Antwerpen Luchtbal Noorderlaan,51.26346,4.41887
 Blink BE-Eupen Am Stadthaus,50.63238,6.02806
 Blink GB-Gateshead Hollinside Rd,54.95871,-1.67422,15
 Blink US-Ephrata PA Long Ave,40.20475,-76.15506
+Blink US-Jasper AL Hwy 78 E,33.8367,-87.22796
 Blink US-Salt Lake City UT S 300 W,40.73144,-111.90179
 
 Bluecharge PT-Loulé Av. Algarve,37.10202,-7.99971
@@ -10249,6 +10259,7 @@ Electrify-America US-Cedar City UT S Providence Center Dr,37.65477,-113.086737
 Electrify-America US-Cheektowaga NY Walden Ave,42.90934,-78.74461
 Electrify-America US-Clifton NJ Kingsland Rd,40.82432,-74.13654
 Electrify-America US-Denville NJ W Main St,40.89386,-74.47838
+Electrify-America US-Douglasville GA Bill Arp Rd,33.7241,-84.76346
 Electrify-America US-East Brunswick NJ NJ-18,40.45773,-74.39928
 Electrify-America US-East Palo Alto CA E Bayshore Rd,37.45995,-122.13873
 Electrify-America US-Edison NJ U.S. Rte 1,40.5116,-74.3848
@@ -16182,7 +16193,7 @@ Ionity FR-Aire de Lyon Montluel,45.84373,5.06993,30
 Ionity FR-Aire de L’Île Rose,45.27699,5.62296,30
 Ionity FR-Aire de Montélimar,44.51382,4.7814,30
 Ionity FR-Aire de Montélimar,44.51508,4.78075,30
-Ionity FR-Aire de Montélimar Ouest,44.5165,4.78186
+Ionity FR-Aire de Montélimar,44.5165,4.78186,30
 Ionity FR-Aire de Mornas Village,44.19486,4.73275
 Ionity FR-Aire de Mâcon Saint-Albain,46.42086,4.865
 Ionity FR-Aire de Nemours,48.26386,2.72072
@@ -18309,9 +18320,13 @@ Mainova DE-Niedernhausen Idsteiner Straße,50.16321,8.313718
 Mainova DE-Schmitten im Taunus Kanonenstraße,50.269489,8.444861
 Mainova DE-Waldbrunn (Westerwald) In der Struth,50.51855,8.109852
 
+Malanka BY-Baranavichy Баранавічы вуліца Даменікана,53.15517,25.99325
 Malanka BY-Hrodna Гродна проспект Янки Купалы,53.65055,23.8537
+Malanka BY-Kobryn Кобрын M-1 60-й км,52.18147,24.36816
 Malanka BY-Minsk vulica Uladzislava Halubka,53.92613,27.44256
+Malanka BY-Minsk Мінск вуліца Шаранговіча,53.88286,27.45414
 Malanka BY-Minsk Мінск Камсамольская вуліца,53.89823,27.55616
+Malanka BY-Novyi Svet Новы Свет М-1 226,53.19055,26.0759,60
 
 MAN AT-Leopoldsdorf MAN-Straße,48.09976,16.39722
 
@@ -18326,6 +18341,7 @@ MB DE-Mayen Polcher Straße,50.31949,7.23297,25
 MB DE-Obing Wasserburger Straße,48.00251,12.40044
 MB DE-Sindelfingen Käsbrünnlestraße,48.6952,9.00088
 MB DE-Stuttgart Siemensstraße,48.81003,9.180705,15
+MB US-Leeds AL Buc-ee’s Blvd,33.54388,-86.5854
 MB US-Waller TX US 290 Frontage Rd,30.07166,-95.9309
 
 mblty DE-Anzing Gewerbepark,48.159306,11.853891
@@ -20508,6 +20524,7 @@ SachsenEnergie DE-Dresden Großenhainer Straße,51.077619,13.733088
 SachsenEnergie DE-Dresden Großenhainer Straße,51.084539,13.728181
 SachsenEnergie DE-Dresden Hettnerstraße,51.031228,13.727208
 SachsenEnergie DE-Dresden Hofmühlenstraße,51.035002,13.705605
+SachsenEnergie DE-Dresden Josephinenstraße,51.0462,13.72954
 SachsenEnergie DE-Dresden Langer Weg,50.999325,13.799299
 SachsenEnergie DE-Dresden Martin-Luther-Straße,51.06342,13.755204
 SachsenEnergie DE-Dresden Michaelisstraße,50.99557,13.79718
@@ -22574,6 +22591,7 @@ twl DE-Ludwigshafen am Rhein Pettenkoferstraße,49.48694,8.4252
 twn DE-Naumburg (Saale) Jakobsring,51.149859,11.814456
 
 TWS DE-Ravensburg Markdorfer Straße,47.76182,9.54092
+TWS DE-Ravensburg Marktstraße,47.77996,9.616
 TWS DE-Weingarten Gablerstraße,47.8078,9.63948
 
 U-POWER TW-Hengchun Township Henggong Rd,21.99752,120.7424
@@ -23142,6 +23160,7 @@ westenergie DE-Essen Kupferdreher Straße,51.39412,7.08314
 westenergie DE-Freudenberg Zum Kurpark,50.898648,7.875615
 westenergie DE-Holzwickede Kirchstraße,51.49896,7.61831,25
 westenergie DE-Mayschoß Eurodeplatz,50.51709,7.01987
+westenergie DE-Meppen Am Neuen Markt,52.6927,7.2896
 westenergie DE-Niederzier Am Mühlenteich,50.8757,6.42
 westenergie DE-Niederzier Breite Straße,50.88467,6.46367
 westenergie DE-Osnabrück Goethering,52.27425,8.05568
