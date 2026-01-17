@@ -70,16 +70,13 @@ namespace TeslaLogger
             return Path.Combine(GetExecutingPath(), Filenames[filename]);
         }
 
-
-        public static string CorrectLogfilepath(string path)
+        public static string GetLogfilePath()
         {
-            if (!File.Exists(path))
-            {
-                if (Tools.IsRaspberry_NET8())
-                    path = "/etc/teslalogger/nohup.out";
-            }
+            string logfilepath = Path.Combine(GetExecutingPath(), "nohup.out");
+            if (Tools.IsRaspberry_NET8())
+                logfilepath = "/etc/teslalogger/nohup.out";
 
-            return path;
+            return logfilepath;
         }
 
         public static string GetInvoicePath()

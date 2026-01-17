@@ -464,8 +464,7 @@ namespace TeslaLogger
         {
             var lines = Convert.ToInt32(url.Segments[2].ToString());
 
-            var path = Logfile.Logfilepath;
-            path = FileManager.CorrectLogfilepath(path);
+            var path = FileManager.GetLogfilePath();
 
             string log = ReadEndTokens(path, lines, System.Text.Encoding.UTF8, "\n");
             WriteString(response, log);
@@ -2361,9 +2360,7 @@ DROP TABLE chargingstate_bak";
         {
             try
             {
-                string logfilePath = Logfile.Logfilepath;
-
-                logfilePath = FileManager.CorrectLogfilepath(logfilePath);
+                string logfilePath = FileManager.GetLogfilePath();
 
                 if (Directory.Exists("zip"))
                     Directory.Delete("zip", true);

@@ -1713,8 +1713,7 @@ namespace TeslaLogger
         {
             try
             {
-                var nohup = Path.Combine(Logfile.GetExecutingPath(), "nohup.out");
-                nohup = FileManager.CorrectLogfilepath(nohup);
+                var nohup = FileManager.GetLogfilePath();
 
                 // check if nohup.out is bigger than 10MB
                 if (new FileInfo(nohup).Length > 10000000)
@@ -2048,7 +2047,7 @@ WHERE
                 _ = ExecMono("/usr/bin/du", "-sk " + Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "/Exception", true, true);
             }
 
-            var logfilePath = FileManager.CorrectLogfilepath(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "/logfile.log");
+            var logfilePath = FileManager.GetLogfilePath();
 
             if (File.Exists(logfilePath))
             {
