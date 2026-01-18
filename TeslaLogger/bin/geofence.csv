@@ -144,7 +144,7 @@ Supercharger-V4 AU-Miranda NSW,-34.02716,151.11868
 Supercharger-V3 AU-Moe VIC,-38.172989,146.259475
 Supercharger AU-Moonee Ponds VIC,-37.7658,144.92336
 Supercharger-V3 AU-Mornington VIC,-38.234331,145.051016
-Supercharger-V3 AU-Mount Gambier SA,-37.834977,140.802625
+Supercharger-V3 AU-Mount Gambier SA,-37.83474,140.8026
 Supercharger-V3 AU-Mount Sheridan QLD,-16.9882,145.7403
 Supercharger AU-Narooma,-36.223136,150.128346
 Supercharger-V4 AU-Narrandera NSW,-34.7436,146.55433
@@ -6284,6 +6284,7 @@ Aldi DE-Dierdorf Königsberger Straße,50.545225,7.635626
 Aldi DE-Dinslaken,51.560813,6.741382,20
 Aldi DE-Dormagen-Horrem Mathias-Giesen-Straße,51.094778,6.816278
 Aldi DE-Dormagen-Nievenheim An der Sausweide,51.120194,6.76875
+Aldi DE-Dortmund Schulte-Heuthaus-Straße,51.50762,7.38134
 Aldi DE-Dresden Antonstraße,51.064586,13.745721
 Aldi DE-Dresden Tharandter Straße,51.03755,13.70437
 Aldi DE-Duisburg Flutweg,51.4119,6.691913
@@ -10273,6 +10274,7 @@ Electrify-America US-Glenwood Springs CO W Meadows,39.55609,-107.34478
 Electrify-America US-Grand Junction CO Independent Ave,39.08233,-108.58331
 Electrify-America US-Hyattsville MD East-West Hwy,38.9686,-76.95432
 Electrify-America US-King of Prussia PA N Gulph Rd,40.08564,-75.38862
+Electrify-America US-Lawrenceville GA Sugarloaf Pkwy,33.97894,-84.08302
 Electrify-America US-Lincoln NE 110 NW 20th Street,40.814286,-96.749142
 Electrify-America US-Livermore CA Holmes St,37.66114,-121.78095
 Electrify-America US-Manchester CT Buckland Hills Dr,41.80718,-72.53938
@@ -10427,6 +10429,7 @@ eLoaded DE-Neusäß Richard-Wagner-Straße,48.3897,10.83564
 eLoaded DE-Ulm Magirus-Deutz-Straße,48.3984,9.95808,70
 eLoaded DE-Zusmarshausen Am Innovationspark,48.407,10.59997,99
 
+Elocity PL-Człuchów Średnia,53.665,17.3515
 Elocity PL-Proszenie 1B,51.46094,19.78156
 Elocity PL-Siemianowice Śląskie Elizy Orzeszkowej,50.320105,19.010029
 Elocity PL-Warszawa Aleja Krakowska,52.17339,20.93957
@@ -20204,6 +20207,7 @@ PROVIRIDIS FR-Puget-sur-Argens Bd du Commerce,43.448294,6.698967
 PROVIRIDIS FR-Rouvignies Voie Communale,50.3314,3.44793
 
 Präg DE-Augsburg Edisonstraße,48.3449,10.88517
+Präg DE-Balderschwange Dorf,47.4659,10.10245
 Präg DE-Weitnau Gewerbering,47.6416,10.11258
 
 Q1 DE-Bad Bentheim Hengeloer Straße,52.295911,7.099811
@@ -23287,7 +23291,6 @@ Wien-Energie AT-Wiener Neudorf Multiplex,48.103063,16.318812
 Wiiiz FR-Cannes Bd Général Vautrin,43.54863,7.03206
 Wiiiz FR-Grasse Pl. de la Buanderie,43.66096,6.9234,30
 
-Wirelane AT-Hof Kulmbacher Straße,50.32034,11.90445
 Wirelane DE-Achim Uphusener Dorfstraße,53.0282,8.97063
 Wirelane DE-Berlin Leipziger Straße,52.5107,13.4008
 Wirelane DE-Berlin Parkstraße,52.55471,13.45771
@@ -23296,6 +23299,7 @@ Wirelane DE-Cleebronn Erlebnispark-Tripsdrill-Straße,49.03484,9.0523
 Wirelane DE-Dresden Magdeburger Straße,51.057773,13.725728
 Wirelane DE-Erkrath Leibnizstraße,51.20487,6.96864
 Wirelane DE-Göttingen Erich-Schmidt-Weg,51.5146,9.94553
+Wirelane DE-Hof Kulmbacher Straße,50.32034,11.90445
 Wirelane DE-Maierhöfen Kirchweg,47.652397,10.050692
 Wirelane DE-Markt Schwaben Schloßplatz,48.19107,11.86771
 Wirelane DE-München Hansastraße,48.13178,11.52957
