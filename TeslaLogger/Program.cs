@@ -524,7 +524,7 @@ namespace TeslaLogger
 
         private static void WaitForDB()
         {
-            for (int x = 1; x <= 300; x++) // try 30 times until DB is up and running
+            for (int x = 1; x <= 300; x++) // try 300 times until DB is up and running
             {
                 try
                 {
@@ -538,7 +538,7 @@ namespace TeslaLogger
                         || ex.Message.Contains("Unable to connect to any of the specified MySQL hosts")
                         || ex.Message.Contains("Reading from the stream has failed."))
                     {
-                        Logfile.Log($"Wait for DB ({x}/30): Connection refused.");
+                        Logfile.Log($"Wait for DB ({x}/300): Connection refused.");
                     }
                     else
                     {
