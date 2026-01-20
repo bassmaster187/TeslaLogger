@@ -34,6 +34,7 @@ namespace TeslaLogger
         private static string _power = "hp";
         private static string _temperature = "celsius";
         private static string _length = "km";
+        private static string _pressure = "bar";
         private static string _language = "de";
         private static string _URL_Admin = "";
         private static string _URL_Grafana = "http://raspberry:3000/";
@@ -1120,7 +1121,7 @@ namespace TeslaLogger
             return UpdateType.all;
         }
 
-        internal static void GrafanaSettings(out string power, out string temperature, out string length, out string language, out string URL_Admin, out string Range, out string URL_Grafana, out string defaultcar, out string defaultcarid)
+        internal static void GrafanaSettings(out string power, out string temperature, out string length, out string pressure, out string language, out string URL_Admin, out string Range, out string URL_Grafana, out string defaultcar, out string defaultcarid)
         {
             TimeSpan ts = DateTime.UtcNow - lastGrafanaSettings;
             if (ts.TotalMinutes < 10)
@@ -1128,6 +1129,7 @@ namespace TeslaLogger
                 power = _power;
                 temperature = _temperature;
                 length = _length;
+                pressure = _pressure;
                 language = _language;
                 URL_Admin = _URL_Admin;
                 Range = _Range;
@@ -1140,6 +1142,7 @@ namespace TeslaLogger
             power = "hp";
             temperature = "celsius";
             length = "km";
+            pressure = "bar";
             language = "de";
             URL_Admin = "";
             Range = "IR";
@@ -1176,6 +1179,11 @@ namespace TeslaLogger
                 if (IsPropertyExist(j, "Length"))
                 {
                     length = j["Length"];
+                }
+
+                if (IsPropertyExist(j, "Pressure"))
+                {
+                    pressure = j["Pressure"];
                 }
 
                 if (IsPropertyExist(j, "Language"))
@@ -1226,6 +1234,7 @@ namespace TeslaLogger
                 _power = power;
                 _temperature = temperature;
                 _length = length;
+                _pressure = pressure;
                 _language = language;
                 _URL_Admin = URL_Admin;
                 _Range = Range;
