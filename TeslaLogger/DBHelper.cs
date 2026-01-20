@@ -7471,6 +7471,9 @@ ORDER BY startdate", con))
         {
             try
             {
+                return true;
+
+                /*
                 using (MySqlConnection con = new MySqlConnection(DBConnectionstring + ";Allow User Variables=True"))
                 {
                     con.Open();
@@ -7490,7 +7493,7 @@ ORDER BY startdate", con))
                             }
                         }
                     }
-                }
+                }*/
             }
             catch (Exception ex)
             {

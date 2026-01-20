@@ -124,7 +124,7 @@ namespace TeslaLogger
                 var net8version = Tools.GetNET8Version();
                 if (net8version?.Contains("8.") == true)
                 {
-                    if (File.Exists("TESLALOGGERNET8") || NET8TaskerToken())
+                    if (!File.Exists("NOTUSETESLALOGGERNET8") && NET8TaskerToken())
                     {
                         Logfile.Log("Start Teslalogger.net8");
 
@@ -162,8 +162,12 @@ namespace TeslaLogger
         {
             try
             {
-                WaitForDB();
-                return DBHelper.NET8TaskerToken();
+                return true;
+                
+                /*
+                    WaitForDB();
+                    return DBHelper.NET8TaskerToken();
+                */
             }
             catch (Exception ex)
             {
