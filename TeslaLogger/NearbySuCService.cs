@@ -563,12 +563,15 @@ VALUES(
             {
                 using (var scontent = new StringContent(content, Encoding.UTF8, "application/json"))
                 {
-                    var result = client.PostAsync("https://www.tesla.com/de_DE/charging/guest/api/graphql?operationName=getGuestChargingSiteDetails", scontent).Result;
+                    var url = "https://www.tesla.com/de_DE/charging/guest/api/graphql?operationName=getGuestChargingSiteDetails";
+                    var result = client.PostAsync(url, scontent).Result;
                     string r = result.Content.ReadAsStringAsync().Result;
 
                     dynamic j = JsonConvert.DeserializeObject(r);
-                    if (j?["data"] == null || j["errors"] != null)
+                    if (j?["data"]?["site"] == null || j["errors"] != null)
                     {
+                        Tools.DebugLog($"Unexpected GuestAPI request: url: {url}");
+                        Tools.DebugLog($"Unexpected GuestAPI request: body: {content}");
                         Tools.DebugLog($"Unexpected GuestAPI response: {r}");
                         return a;
                     }
