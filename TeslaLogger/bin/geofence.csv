@@ -4895,7 +4895,7 @@ Supercharger US-Leavenworth WA,47.598802,-120.65614
 Supercharger-V3 US-Leavenworth WA - US-2,47.755249,-120.740669
 Supercharger-V3 US-Lebanon IN,40.035072,-86.469577
 Supercharger US-Lee MA,42.296,-73.239208
-Supercharger-V3 US-Leeds AL,33.542762,-86.587744
+Supercharger-V3 US-Leeds AL,33.54376,-86.58864
 Supercharger US-Leesburg VA (Floor 2),39.089837,-77.526638
 Supercharger-V3 US-Leesburg VA - California Drive Northeast,39.10232,-77.52591
 Supercharger-V3 US-Leland NC,34.217654,-78.018849
@@ -10321,6 +10321,7 @@ electrip GR-Igoumenitsa Ηγουμενίτσα Leof. 49 Martiron,39.49733,20.265
 electrip GR-Zografou Porto Elea Camping,40.16946,23.8646
 electrip HR-Jablanovec Zaprešićka Westgate,45.87226,15.827895
 electrip HR-Josipdol D23,45.18348,15.28681
+electrip HR-Osijek Svilajska ul.,45.56092,18.63974
 electrip HR-Rijeka Osječka ul.,45.34167,14.42436
 electrip HR-Zagreb Oreškovićeva ulica,45.759464,15.98306
 electrip HR-Zagreb Ulica Velimira Škorpika,45.796794,15.859543
@@ -13140,10 +13141,12 @@ EVgo US-Daly City CA Southgate Ave,37.69989,-122.48358
 EVgo US-Hollister CA McCray St,36.85278,-121.3973
 EVgo US-Leesylvania VA Potomac Town Pl,38.62978,-77.28907,15
 EVgo US-Lubbock TX 4th St,33.59323,-101.84082
+EVgo US-Milpitas CA E Calaveras Blvd,37.43598,-121.8849
 EVgo US-Mountain View CA E Middlefield Rd,37.39758,-122.06192
 EVgo US-New Albany MS MS-15,34.46778,-89.00706
 EVgo US-San Diego CA Clairemont Mesa Blvd,32.83474,-117.18805
 EVgo US-San Francisco CA Market Street,37.76849,-122.427274
+EVgo US-Tallapoosa GA GA-100,33.6828,-85.2628
 EVgo US-Wynnewood PA E Wynnewood Rd,40.00008,-75.27319
 
 EVI DE-Hildesheim Kennedydamm,52.15576,9.95856
@@ -16616,6 +16619,7 @@ JOLT DE-München Baierbrunner Straße,48.097729,11.533162
 JOLT DE-München Chiemgaustraße,48.109406,11.608631
 JOLT DE-München Effnerstraße,48.16301,11.62444
 JOLT DE-München Einsteinstraße,48.137194,11.621147
+JOLT DE-München Neuherbergstraße,48.20888,11.56655
 JOLT DE-München Ungererstraße,48.166347,11.590417
 JOLT DE-München Würmtalstraße,48.115139,11.48057
 JOLT DE-Nürnberg Erlanger Straße,49.469836,11.067393
@@ -18396,6 +18400,7 @@ Mer AT-Graz Lauzilgasse,47.04517,15.43038
 Mer AT-Graz Plüddemanngasse,47.06405,15.465
 Mer AT-Haag am Hausruck Geierau,48.19952,13.64239
 Mer AT-Hohenems Diepoldsauer Straße,47.373721,9.675551
+Mer AT-Koblenz An der Römervilla,50.3809,7.56613
 Mer AT-Korneuburg Stockerauer Straße,48.35889,16.31184
 Mer AT-Leoben Am Tivoli,47.37651,15.08932
 Mer AT-Leobersdorf Europastraße,47.93148,16.20426
@@ -18678,6 +18683,7 @@ MONACO-ON MC-Monaco Av. Princesse Grâce,43.74568,7.43203
 
 Monta AT-Burgfried Böhmer Straße,48.52589,14.29368
 Monta AT-Freistadt Galgenau,48.4892,14.4973
+Monta BA-Doboj M-I 105,44.73326,18.09665
 Monta DE-Celle Hafenstraße,52.62695,10.0773
 Monta DE-Egling St2070,47.923998,11.488849
 Monta DE-Friedberg (Hessen) Ottostraße,50.34638,8.7547
@@ -18847,6 +18853,7 @@ MOVE CH-Zürich Gessnerallee,47.37416,8.5337
 MOVE CH-Zürich Huttenstrasse,47.3793,8.55251
 
 MOYA PL-Bytom Konstytucji,50.3542,18.8761
+MOYA PL-Chełmno al. Prawa Chełmińskiego,53.3409,18.46132
 MOYA PL-Podlas Trasa Bohaterów Bitwy Warszawskiej,51.73577,20.2306
 MOYA PL-Radomsko Portowa,51.08415,19.37953
 MOYA PL-Suwałki Poddubówek,54.047425,22.888365
@@ -21479,6 +21486,7 @@ SW-Augsburg DE-Augsburg Pilgerhausstraße,48.37041,10.90409
 SW-Augsburg DE-Augsburg Prinzregentenplatz,48.367934,10.889464
 SW-Augsburg DE-Augsburg Schwangaustraße,48.35326,10.94432
 SW-Augsburg DE-Augsburg Sebastianstraße,48.38104,10.89626
+SW-Bad-Aibling DE-Bad Aibling Rosenheimer Straße,47.85897,12.01413
 SW-Bad-Hersfeld DE-Bad Hersfeld Am Markt,50.86827,9.70616
 SW-Bad-Homburg DE-Bad Homburg Bahnhofsplatz,50.220598,8.622014
 SW-Bad-Homburg DE-Bad Homburg Horexstraße,50.219575,8.621767
@@ -24043,6 +24051,7 @@ TR Ayazmana Yeni Karakavak Cd.,37.75689,30.57905
 TR Sakarya Mareşal Fevzi Çakmak Blv.,38.78663,30.6053
 UA Cherkasy Gagarina St,49.438087,32.075958
 US Arkadelphia AR Iron Mountain Rd,34.22798,-93.11662
+US Austin TX Encino Trace,30.2428,-97.84612
 US Carlsbad CA Bressi Ranch,33.12324,-117.26577
 US Cupertino CA Apple Park,37.32924,-122.00997
 US Darmstadt St Joseph Avenue,38.1032,-87.59667
