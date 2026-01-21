@@ -11,6 +11,6 @@ Mit dem Button "Key Generieren" erzugt man einen API-Schlüssel.
 
 Diesen Schlüssel und den Benutzernamen gibt man im TeslaLogger ein:
 
-![BILD](/img/extras-wallbox-01.png)
+![BILD](/img/extras-scb-01.png)
 
 Beim nächsten Ladevorgang am Supercharger wird der Checkin automatisch ausgeführt.
