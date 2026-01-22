@@ -120,6 +120,7 @@ Supercharger AU-Gympie QLD,-26.18866,152.66164
 Supercharger AU-Harwood NSW,-29.427135,153.239242
 Supercharger-V3 AU-Hawthorn East VIC,-37.845272,145.042714
 Supercharger AU-Heatherbrae,-32.787812,151.727704
+Supercharger-V4 AU-Helidon,-27.54978,152.11555
 Supercharger-V3 AU-Holbrook NSW,-35.72284,147.3174
 Supercharger AU-Hollydene,-32.447359,150.83232
 Supercharger AU-Horsham,-36.716125,142.193301
@@ -1895,7 +1896,7 @@ Supercharger-V4 DE-Denkendorf in Bayern,48.9342,11.46544
 Supercharger-V4 DE-Dettelbach,49.77883,10.06864
 Supercharger-V4 DE-Dietmannsried,47.811457,10.303146,28
 Supercharger-V4 DE-Dormagen,51.09335,6.80953
-Supercharger-V4 DE-Dortmund-Nord,51.530488,7.471507
+Supercharger-V4 DE-Dortmund-Nord,51.5305,7.4716
 Supercharger-V4 DE-Dresden Elbepark,51.08535,13.6936,30
 Supercharger-V4 DE-Dresden Kaufpark,50.99643,13.79827
 Supercharger-V4 DE-Duisburg,51.481697,6.809756
@@ -2331,7 +2332,7 @@ Supercharger-V4 ES-Las Cabezas de San Juan,36.97632,-5.95989
 Supercharger-V4 ES-Las Rozas Village,40.51746,-3.90192
 Supercharger-V4 ES-Lerma,42.03767,-3.75473
 Supercharger-V4 ES-León Trobajo del Camino,42.591401,-5.619581
-Supercharger ES-Lleida,41.663959,0.605371,30
+Supercharger-V4 ES-Lleida,41.66397,0.6054,30
 Supercharger-V4 ES-Los Rios,38.19449,-3.67093
 Supercharger-V4 ES-Luarca,43.52944,-6.55736
 Supercharger ES-Lugo,43.03653,-7.568994
@@ -3027,6 +3028,7 @@ Supercharger-V3 IT-Adda Nord,45.511548,9.634876
 Supercharger-V3 IT-Adda Sud,45.510724,9.63624
 Supercharger-V3 IT-Affi,45.55129,10.78726
 Supercharger-V3 IT-Afragola - Napoli North,40.933331,14.357418
+Supercharger-V4 IT-Agrate Brianza,45.56748,9.36236
 Supercharger-V3 IT-Alessandria,44.916643,8.599638
 Supercharger-V4 IT-Andora,43.962592,8.142398
 Supercharger-V3 IT-Arese,45.561371,9.055905
@@ -3144,7 +3146,7 @@ Supercharger-V3 IT-Vado Ligure,44.265368,8.425217
 Supercharger-V3 IT-Valli di Carnia,46.368134,13.072854,30
 Supercharger-V4 IT-Varazze,44.35161,8.56544
 Supercharger IT-Verona,45.412326,10.970212
-Supercharger-V4 IT-Verona Viale delle Nazioni,45.398203,10.972369
+Supercharger-V4 IT-Verona Viale delle Nazioni,45.39817,10.97237
 Supercharger-V3 IT-Vicolungo,45.467553,8.462482
 Supercharger-V4 IT-Vogogna,46.024113,8.278526
 
@@ -3746,6 +3748,7 @@ Supercharger-V4 PT-Leiria,39.73154,-8.82492
 Supercharger-V4 PT-Lisboa,38.7554,-9.19085
 Supercharger-V4 PT-Lisboa West,38.70952,-9.33099
 Supercharger-V3 PT-Loulé,37.097586,-7.997867
+Supercharger-V4 PT-Matosinhos,41.2082,-8.6884
 Supercharger-V4 PT-Mealhada,40.37307,-8.4804
 Supercharger PT-Montemor-o-Novo,38.645545,-8.24781
 Supercharger-V4 PT-Portimão,37.14658,-8.54285
@@ -3948,7 +3951,7 @@ Supercharger-V4 TR-Cankaya Ankara,39.90963,32.77736
 Supercharger-V3 TR-Edirne,41.680352,26.582235
 Supercharger-V3 TR-Ilgaz Çankırı,40.90657,33.64522
 Supercharger-V3 TR-Istanbul Asia Garage Floor -2,41.003233,29.070793
-Supercharger-V4 TR-Izmit Kocaeli,40.75495,29.94697
+Supercharger-V4 TR-İzmit,40.75495,29.94697
 Supercharger-V4 TR-Keşan,40.8742,26.6419
 Supercharger-V4 TR-Kütahya,39.35863,30.0565
 Supercharger-V4 TR-Samsun,41.22493,36.43205
@@ -5746,6 +5749,7 @@ Supercharger-V3 US-Tallahassee FL - West Pensacola Street,30.441613,-84.31976
 Supercharger US-Tampa FL,27.965009,-82.402577
 Supercharger-V3 US-Tampa FL - East Bearss Avenue,28.08817,-82.45258
 Supercharger-V3 US-Tampa FL - North Dale Mabry Highway,27.949252,-82.505069
+Supercharger-V4 US-Tampa FL W Gandy Blvd,27.8928,-82.50476
 Supercharger US-Tampa FL West Swann Avenue,27.937192,-82.481136
 Supercharger US-Tannersville PA,41.045633,-75.312381
 Supercharger-V3 US-Tappahannock VA,37.90395,-76.8661
@@ -7482,6 +7486,7 @@ ARAL DE-Hamburg Nettelnburger Landweg,53.48673,10.184
 ARAL DE-Hamburg Osdorfer Landstraße,53.5714,9.87005
 ARAL DE-Hamburg Otto-Brenner-Straße,53.48988,10.01884
 ARAL DE-Hamburg Poppenbütteler Weg,53.64983,10.06468
+ARAL DE-Hamburg Stader Straße,53.4713,9.9238
 ARAL DE-Hamburg Stresemannstraße,53.56409,9.9258
 ARAL DE-Hamburg Wilhelm-Iwan-Ring,53.489885,10.114666
 ARAL DE-Hameln Fischbecker Landstraße,52.12086,9.33543
@@ -13301,6 +13306,7 @@ EVN AT-St. Pölten Stattersdorfer Hauptstraße,48.197377,15.64104
 EVN AT-Stockerau Horner Straße,48.38807,16.18479
 EVN AT-Tulln an der Donau Frauentorgasse,48.32718,16.05535
 EVN AT-Tulln an der Donau Langenlebarner Straße,48.32822,16.08246
+EVN AT-Vösendorf Schönbrunner Allee,48.12878,16.32716
 EVN AT-Waidhofen an der Ybbs Pocksteinerstraße,47.956449,14.777679
 EVN AT-Weitra Bahnhofstraße,48.70086,14.8977
 EVN AT-Wien Albert-Schweitzer-Gasse,48.207501,16.22199
@@ -15107,6 +15113,8 @@ GreenCharge DE-Waiblingen Stuttgarter Straße,48.822326,9.299561
 GreenCharge DE-Wilhelmshaven Arthur-Grunewald-Straße,53.57601,8.108136
 GreenCharge DE-Wolgast Leeraner Straße,54.046819,13.753355
 
+GreenCharging AD-Encamp Ctra. de Grau Roig,42.53236,1.6988
+
 GreenFlux BE-Anderlecht Westland Shopping,50.83877,4.28766
 GreenFlux IT-Pisa Via Fagiana,43.6884,10.43308
 GreenFlux NL-Almere Meindert Hobbemastraat,52.38353,5.25912
@@ -16528,6 +16536,7 @@ IZIVIA FR-Cournon-d’Auvergne Av. Maréchal Leclerc,45.73998,3.17278,30
 IZIVIA FR-Dunkerque Av. du Stade,51.03307,2.39317
 IZIVIA FR-Fécamp Bd de la République,49.75933,0.37653
 IZIVIA FR-Haudainville Bd de l’Europe,49.1406,5.40984
+IZIVIA FR-Lempdes Avenue de l’Europe,45.77636,3.18628
 IZIVIA FR-Lyon Rue Jean Marcuit,45.788684,4.814377
 IZIVIA FR-Moréac Karabude,47.89944,-2.83685
 IZIVIA FR-Munster Rue Hilti,48.044282,7.160577
@@ -18634,6 +18643,7 @@ Mobiliti HU-Budapest Pala utca,47.50099,19.03996
 Mobiliti HU-Budaörs Sport u.,47.45404,18.94302
 Mobiliti HU-Bük Európa út,47.38445,16.78345
 Mobiliti HU-Eger Rákóczi út,47.92552,20.36946,25
+Mobiliti HU-Kecskemét Kiskunfélegyházai út,46.86798,19.7184
 Mobiliti HU-Libás Strand Keszthely,46.7649,17.2658
 Mobiliti HU-Mezőkeresztes Geleji pihenő,47.84182,20.74432,25
 Mobiliti HU-Sopron Révai Miklós utca,47.69407,16.578
@@ -20523,6 +20533,7 @@ SachsenEnergie DE-Dresden Antonstraße,51.06474,13.7395
 SachsenEnergie DE-Dresden Bautzner Landstraße,51.061245,13.885264
 SachsenEnergie DE-Dresden Bertolt-Brecht-Allee,51.041008,13.780622
 SachsenEnergie DE-Dresden Bärensteiner Straße,51.039216,13.8055
+SachsenEnergie DE-Dresden Dornblüthstraße,51.0468,13.80243
 SachsenEnergie DE-Dresden Döbelner Straße,51.096491,13.719554
 SachsenEnergie DE-Dresden Elbepark,51.08501,13.69338,15
 SachsenEnergie DE-Dresden Fetscherplatz,51.045961,13.771425
@@ -23909,6 +23920,7 @@ DE Troisdorf Luxemburger Straße,50.819441,7.114892
 DE Vaihingen an der Enz Neuss,48.95526,8.98947
 DE Viernheim Rhein-Neckar-Zentrum,49.52588,8.56783
 DE Vilgertshofen Autoteile Zimmermann,47.96748,10.9188
+DE Walldorf Geschwister-Reiß-Straße,49.9962,8.57337
 DE Waltrop An der Zechenbahn,51.621852,7.430029
 DE Weimar Formen Cars,50.99536,11.33896
 DE Westerhusen Bussardweg,53.40532,7.19795
