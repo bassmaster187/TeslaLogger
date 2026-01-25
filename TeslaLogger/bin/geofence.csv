@@ -1826,7 +1826,7 @@ Supercharger CZ-Plzeň,49.72512,13.326045
 Supercharger-V4 CZ-Praha Zličín,50.05081,14.2952
 Supercharger-V4 CZ-Praha Štěrboholy,50.07136,14.54087
 Supercharger-V4 CZ-Vestec,49.99022,14.49048,60
-Supercharger-V4 CZ-Čestlice,50.00247,14.57338
+Supercharger-V4 CZ-Čestlice,50.00276,14.57302
 
 Supercharger-V4 DE-Aachen Tivoli,50.7967,6.10364
 Supercharger-V4 DE-Achern,48.64145,8.03749
@@ -2583,7 +2583,7 @@ Supercharger-V3 FR-Honfleur,49.414069,0.266165,55
 Supercharger-V4 FR-Ile Rousse,42.628838,8.923582
 Supercharger FR-La Léchère-les-Bains,45.51877,6.482522
 Supercharger-V4 FR-La Roche-sur-Yon,46.7013,-1.43193
-Supercharger-V4 FR-La Rochelle,46.17536,-1.16904
+Supercharger-V4 FR-La Rochelle,46.17492,-1.17015
 Supercharger FR-La Seyne-sur-Mer,43.121199,5.85086
 Supercharger-V4 FR-La Valette-du-Var,43.135869,6.003096
 Supercharger-V3 FR-Labouheyre,44.202799,-0.92682
@@ -3735,11 +3735,12 @@ Supercharger-V4 PL-Rumia,54.585732,18.37139
 Supercharger-V4 PL-Stryków,51.89258,19.5928
 Supercharger-V4 PL-Szczecin,53.381935,14.670539
 Supercharger PL-Trzebownisko,50.08925,22.04561,30
-Supercharger PL-Warsaw,52.20767,21.02924,30
-Supercharger-V4 PL-Warsaw Airport,52.17026,20.93586
+Supercharger-V4 PL-Warszawa Aleja Krakowska,52.17025,20.936
+Supercharger PL-Warszawa Belwederska,52.20767,21.02924
+Supercharger-V4 PL-Warszawa South,52.1661,21.01745
+Supercharger-V3 PL-Warszawa Ząbki,52.3019,21.08816
 Supercharger-V4 PL-Wrocław,51.05185,16.97247
 Supercharger-V4 PL-Zaluski,52.514357,20.528801
-Supercharger-V3 PL-Ząbki,52.301924,21.088165
 
 Supercharger-V4 PT-Alcantarilha,37.1506,-8.36443
 Supercharger PT-Alcácer do Sal,38.39183,-8.51381
@@ -8120,6 +8121,7 @@ Chargefox AU-Miami QLD Pacific Avenue,-28.062652,153.429713
 Chargefox AU-Miles QLD Dawson Street,-26.659249,150.187125
 Chargefox AU-Moe VIC Lloyd Street,-38.184363,146.237899
 Chargefox AU-Morningside QLD Wynnum Road,-27.467863,153.077776
+Chargefox AU-Naracoorte SA Robertson St,-36.95687,140.74374
 Chargefox AU-Nerang QLD Southport Nerang Rd,-27.984267,153.339332
 Chargefox AU-Pimpama QLD Heritage Park,-27.824783,153.292038
 Chargefox AU-Proserpine QLD Dobbins Ln,-20.40251,148.58159
@@ -13472,6 +13474,7 @@ EWE-GO DE-Blankenburg Lerchenbreite,51.80637,10.94257,25
 EWE-GO DE-Blankenheim Mülheimer Heide,50.4508,6.6705
 EWE-GO DE-Bochum Dorstener Straße,51.509154,7.190543,10
 EWE-GO DE-Bochum Harpener Hellweg,51.494124,7.262308
+EWE-GO DE-Bochum Stormstraße,51.47413,7.14906
 EWE-GO DE-Bockhorn Am Markt,53.393614,8.013657
 EWE-GO DE-Bonn Koblenzer Straße,50.678258,7.167694
 EWE-GO DE-Bonn Königswinterer Straße,50.734533,7.131715
@@ -16419,14 +16422,14 @@ Ionity PL-Kaszewy Kóscielne (Kutno),52.219064,19.461939
 Ionity PL-Koszalin Przemysłowa,54.20244,16.15838
 Ionity PL-MOP Mlynski Staw,50.67678,17.65736
 Ionity PL-MOP Mlynski Staw,50.67742,17.65086
+Ionity PL-MOP Niesułków,51.8975,19.7068
+Ionity PL-MOP Nowostawy,51.90042,19.7065
 Ionity PL-MOP Olsze,53.88682,18.63083
 Ionity PL-MOP Olsze,53.88925,18.63086
-Ionity PL-Poznan MOP Nowostawy,51.900409,19.706499,30
 Ionity PL-Poznań Bolesława Krzywoustego,52.352146,16.998626
 Ionity PL-Radomsko Portowa,51.082015,19.37508
 Ionity PL-Skawina Stanisława Chmielka,49.98933,19.83585
 Ionity PL-Tatary National Road,53.335569,20.436557
-Ionity PL-Warsaw MOP Nowostawy Dolne,51.897492,19.706819
 Ionity PL-Wierzbocice DW466,52.249889,17.821525
 Ionity PL-Zgorzelec Jędrzychowice DK94,51.176527,15.032709
 Ionity PL-Świecko,52.313054,14.641559
@@ -18344,7 +18347,8 @@ Mainova DE-Waldbrunn (Westerwald) In der Struth,50.51855,8.109852
 Malanka BY-Baranavichy Баранавічы вуліца Даменікана,53.15517,25.99325
 Malanka BY-Hrodna Гродна проспект Янки Купалы,53.65055,23.8537
 Malanka BY-Kobryn Кобрын M-1 60-й км,52.18147,24.36816
-Malanka BY-Minsk vulica Uladzislava Halubka,53.92613,27.44256
+Malanka BY-Minsk Мінск вуліца Някрасава,53.9356,27.58033
+Malanka BY-Minsk Мінск вуліца Уладзіслава Галубка,53.92613,27.44256
 Malanka BY-Minsk Мінск вуліца Шаранговіча,53.88286,27.45414
 Malanka BY-Minsk Мінск Камсамольская вуліца,53.89823,27.55616
 Malanka BY-Novyi Svet Новы Свет М-1 226,53.19055,26.0759,60
@@ -23322,6 +23326,7 @@ Wirelane DE-Berlin Parkstraße,52.55471,13.45771
 Wirelane DE-Bremen Robert-Hooke-Straße,53.11267,8.8561
 Wirelane DE-Cleebronn Erlebnispark-Tripsdrill-Straße,49.03484,9.0523
 Wirelane DE-Dresden Magdeburger Straße,51.057773,13.725728
+Wirelane DE-Erfurt Wilhelm-Busch-Straße,50.96817,11.04775
 Wirelane DE-Erkrath Leibnizstraße,51.20487,6.96864
 Wirelane DE-Göttingen Erich-Schmidt-Weg,51.5146,9.94553
 Wirelane DE-Hof Kulmbacher Straße,50.32034,11.90445
