@@ -1,7 +1,7 @@
 # This workflow will build a .NET project
 # For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-net
 
-name: .NET8 Release
+name: .NET8 Beta
 
 on:
   workflow_dispatch:
@@ -64,8 +64,7 @@ jobs:
         file: ./Dockerfile
         push: true
         tags: |
-          bassmaster187/teslalogger:latest
-          bassmaster187/teslalogger:${{ env.GIT_TAG }}
+          bassmaster187/teslalogger:beta
         platforms: linux/amd64,linux/arm64
 
     - name: Build and push Webserver
@@ -75,8 +74,7 @@ jobs:
         file: ./Dockerfile-Webserver
         push: true
         tags: | 
-          bassmaster187/teslalogger-webserver:latest
-          bassmaster187/teslalogger-webserver:${{ env.GIT_TAG }}
+          bassmaster187/teslalogger-webserver:beta
         platforms: linux/amd64,linux/arm64
     
     - name: Build and push Grafana
@@ -86,12 +84,5 @@ jobs:
         file: ./Dockerfile-Grafana
         push: true
         tags: | 
-          bassmaster187/teslalogger-grafana:latest
-          bassmaster187/teslalogger-grafana:${{ env.GIT_TAG }}
+          bassmaster187/teslalogger-grafana:beta
         platforms: linux/amd64,linux/arm64
-
-    - name: Update Docker Version via HTTP GET
-      run: |
-        curl -v "https://teslalogger.de/set_latest_teslalogger_docker_version.php?apikey=${{ secrets.APIKEY_DOCKER_VERSION}}&version=${{ env.GIT_TAG }}"
-
-
