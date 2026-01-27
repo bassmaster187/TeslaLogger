@@ -59,6 +59,15 @@ function isDockerNET8()
     return file_exists($dockerfile);
 }
 
+function isRaspberryNET8()
+{
+    exec('ps aux | grep "dotnet TeslaLoggerNET8.dll" | grep -v grep', $out);
+	if (strpos($out[0], 'dotnet TeslaLoggerNET8.dll') !== false)
+        return true;
+        
+    return false;
+}
+
 function GetFileFromTeslaloggerAndWriteToTMP($filename)
 {
     $url = GetTeslaloggerURL("getfile/$filename");
