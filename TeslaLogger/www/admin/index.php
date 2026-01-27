@@ -250,7 +250,17 @@ else
 				var text = "<?php t("Online"); ?>";
 
 				if (jsonData["is_preconditioning"])
-					text = text + "<br><?php t("Preconditioning"); ?> " + parseFloat(jsonData["inside_temperature"]).toFixed(1) +"°C";
+				{
+					text = text + "<br><?php t("Preconditioning"); ?> ";
+					if (TemperatureUnit == "fahrenheit")
+					{
+						text += (parseFloat(jsonData["inside_temperature"]) * 9/5 + 32).toFixed(1) + " °F";
+					}
+					else
+					{
+						text += parseFloat(jsonData["inside_temperature"]).toFixed(1) + " °C";
+					}
+				}
 
 				if (jsonData["sentry_mode"])
 					text = text + "<br><?php t("Sentry Mode"); ?>";

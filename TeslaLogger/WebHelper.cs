@@ -4723,7 +4723,8 @@ WHERE
             {
                 Tools.SetThreadEnUS();
 
-                Tools.GrafanaSettings(out string power, out string temperature, out string length, out string language, out string URL_Admin, out string Range, out _, out _, out _);
+                Tools.GrafanaSettings(out string power, out string temperature, out string length, out string pressure,
+				    out string language, out string URL_Admin, out string Range, out _, out _, out _);
 
                 TimeSpan ts = DateTime.Now - lastTaskerWakeupfile;
 
@@ -4767,6 +4768,7 @@ WHERE
                     { "pw", power },
                     { "temp", temperature },
                     { "le", length },
+                    { "pr", pressure },
                     { "ln", language },
 
                     { "CT", car.CarType },

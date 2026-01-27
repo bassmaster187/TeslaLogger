@@ -1792,7 +1792,9 @@ PRIMARY KEY(id)
                 DBHelper.ExecuteSQLQuery("DROP VIEW IF EXISTS `trip`");
                 string s = DBViews.Trip;
 
-                Tools.GrafanaSettings(out string power, out string temperature, out string length, out string language, out string URL_Admin, out string Range, out _, out _, out _);
+                Tools.GrafanaSettings(out string power, out string temperature, out string length, out string pressure, out string language,
+                    out string URL_Admin, out string Range, out _, out _, out _);
+
                 if (Range == "RR")
                 {
                     s = s.Replace("`pos_start`.`ideal_battery_range_km` AS `StartRange`,", "`pos_start`.`battery_range_km` AS `StartRange`,");
@@ -1807,6 +1809,7 @@ PRIMARY KEY(id)
                 ExceptionlessClient.Default.CreateFeatureUsage("Power_" + power).FirstCarUserID().Submit();
                 ExceptionlessClient.Default.CreateFeatureUsage("Temperature_" + temperature).FirstCarUserID().Submit();
                 ExceptionlessClient.Default.CreateFeatureUsage("Length_" + length).FirstCarUserID().Submit();
+                ExceptionlessClient.Default.CreateFeatureUsage("Pressure_" + pressure).FirstCarUserID().Submit();
                 ExceptionlessClient.Default.CreateFeatureUsage("Range_" + Range).FirstCarUserID().Submit();
             }
             catch (Exception ex)
@@ -1902,7 +1905,8 @@ PRIMARY KEY(id)
             {
                 if (Tools.IsMono() || Tools.IsDocker() || Tools.IsDotnet8())
                 {
-                    Tools.GrafanaSettings(out string power, out string temperature, out string length, out string language, out string URL_Admin, out string Range, out string URL_Grafana, out string defaultcar, out string defaultcarid);
+                    Tools.GrafanaSettings(out string power, out string temperature, out string length, out string pressure, out string language, out string URL_Admin,
+                        out string Range, out string URL_Grafana, out string defaultcar, out string defaultcarid);
 
                     Dictionary<string, string> dictLanguage = GetLanguageDictionary(language);
 
@@ -2206,6 +2210,30 @@ PRIMARY KEY(id)
                                 s = s.Replace("AS avg_km_diff", "/ 1.609344 AS avg_km_diff");
                                 s = s.Replace("AS avg_kmh", "/ 1.609344 AS avg_kmh");
                                 s = s.Replace("AS avg_consumption_kWh_100km", "* 16.09344 AS avg_consumption_kWh_100km");
+                            }
+                        }
+
+                        if (pressure == "psi")
+                        {
+                            //Logfile.Log("Convert to psi");
+
+                            if (f.EndsWith("Status.json", StringComparison.Ordinal))
+                            {
+                                s = s.Replace("pressure as text", "pressure * 14.50377378 as text");
+                                s = s.Replace("pressurebar", "pressurepsi");
+                            }
+                            else if (f.EndsWith("TPMS.json", StringComparison.Ordinal))
+                            {
+                                s = s.Replace("Pressure as", "Pressure * 14.50377378 as");
+                                s = s.Replace("\"decimals\": 4", "\"decimals\": 2");
+                                s = s.Replace("pressurebar", "pressurepsi");
+                            }
+                            else if (f.EndsWith("Trip.json", StringComparison.Ordinal))
+                            {
+                                s = s.Replace("TPMS_FL as", "TPMS_FL * 14.50377378 as");
+                                s = s.Replace("TPMS_FR as", "TPMS_FR * 14.50377378 as");
+                                s = s.Replace("TPMS_RL 'TPMS RL'", "TPMS_RL * 14.50377378 'TPMS RL'");
+                                s = s.Replace("TPMS_RR 'TPMS RR'", "TPMS_RR * 14.50377378 'TPMS RR'");
                             }
                         }
 
