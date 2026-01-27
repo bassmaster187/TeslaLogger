@@ -53,17 +53,9 @@ If there are updates of the subsystem, you have to get the latest docker-compose
 
 ```
 docker compose stop
-git fetch
-git reset --hard origin/master
-git checkout origin/master -- docker-compose.yml
-git checkout origin/master -- TeslaLogger/GrafanaConfig/datasource.yaml
-docker compose build
+wget https://raw.githubusercontent.com/bassmaster187/TeslaLogger/refs/heads/NET8/.env -O .env
+wget https://raw.githubusercontent.com/bassmaster187/TeslaLogger/refs/heads/NET8/docker-compose.yml -O docker-compose.yml
 docker compose up -d
-```
-
-If Grafana won't start after upgrade try to give it all permissions. 
-```
-chmod 777 TeslaLogger/GrafanaDB
 ```
 
 # Trouble shooting
@@ -71,7 +63,7 @@ chmod 777 TeslaLogger/GrafanaDB
 
 On slower devices like NAS devices, the init scripts of Teslalogger might not run successful during the first run. What you can do is restart the teslalogger_teslalogger_1 container after ~ 5 minutes. This should fix missing tables in the database and can easily be obsorved via the log files. Repeat a couple of times if required. A helpful command is:
 ```
-docker restart teslalogger_teslalogger_1 # or use the beginning of the container ID instead of the name, e.g. r2d2
+docker restart teslalogger
 ```
 
 2. Messed up container images or build caches
