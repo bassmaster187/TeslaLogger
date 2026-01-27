@@ -474,7 +474,25 @@ else
   </head>
   <body>
   <?php
-    echo(menu("Teslalogger"));
+	$teslaloggername = "Teslalogger";
+	if (isDockerNet8())
+		$teslaloggername = "Teslalogger Docker NET8";
+	else if (isDocker())
+		$teslaloggername = "Teslalogger <span style=color:red>Docker MONO</span>";
+	else if (isRaspberryNET8())
+	{
+		$teslaloggername = "Teslalogger NET8";
+	}
+	else
+	{
+		exec('lsb_release -cs', $out);
+		if (strpos($out[0], 'buster') !== false)
+			$teslaloggername = "Teslalogger <span style=color:red>MONO</span>"; // Buster with MONO
+		else
+			$teslaloggername = "Teslalogger <span style=color:red>MONO old</span>"; // old Raspberry with MONO (stretch)
+	}
+
+    echo(menu($teslaloggername));
 ?>
 
   <div id="content" style="max-width:1036px;">
