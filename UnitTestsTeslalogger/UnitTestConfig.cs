@@ -37,12 +37,12 @@ namespace UnitTestsTeslalogger
         {
             var filePath = FileManager.GetFilePath(TLFilename.SettingsFilename);
             File.WriteAllText(filePath, Program.GetDefaultConfigFileContent());
-            CheckSettings(-1, -1, -1, -1, 5000, true, false, false, Tools.UpdateType.all, "hp", "celsius", "en", "", "IR", "http://raspberry:3000/", "", "");
+            CheckSettings(-1, -1, -1, -1, 5000, true, false, false, Tools.UpdateType.all, "hp", "celsius", "bar", "en", "", "IR", "http://raspberry:3000/", "", "");
         }
 
         private static void CheckSettings(int endSleepingHour, int endSleepingMin, int startSleepingHour, int startSleepingMin, int httpPort, bool combineChargingStates,
-            bool useScanmyTesla, bool streamingPos, Tools.UpdateType onlineUpdates, string gPower, string gTemperature, string gLanguage, string gURLAdmin, string gRange,
-            string gURL_Grafana, string gDefaultcar, string gDefaultCarId)
+            bool useScanmyTesla, bool streamingPos, Tools.UpdateType onlineUpdates, string gPower, string gTemperature, string gPressure, string gLanguage, string gURLAdmin, 
+            string gRange, string gURL_Grafana, string gDefaultcar, string gDefaultCarId)
         {
             Tools.EndSleeping(out int hour, out int min);
             Assert.AreEqual(endSleepingHour, hour);
@@ -67,10 +67,11 @@ namespace UnitTestsTeslalogger
             var update = Tools.GetOnlineUpdateSettings();
             Assert.AreEqual(onlineUpdates, update);
 
-            Tools.GrafanaSettings(out string power, out string temperature, out string length, out string language, out string URL_Admin,
-                out string Range, out string URL_Grafana, out string defaultcar, out string defaultcarid);
+            Tools.GrafanaSettings(out string power, out string temperature, out string length, out string pressure, out string language,
+                out string URL_Admin, out string Range, out string URL_Grafana, out string defaultcar, out string defaultcarid);
             Assert.AreEqual(gPower, power);
             Assert.AreEqual(gTemperature, temperature);
+            Assert.AreEqual(gPressure, pressure);
             Assert.AreEqual(gLanguage, language);
             Assert.AreEqual(gURLAdmin, URL_Admin);
             Assert.AreEqual(gRange, Range);
@@ -94,7 +95,8 @@ namespace UnitTestsTeslalogger
             var filePath = FileManager.GetFilePath(TLFilename.SettingsFilename);
             File.Copy("../../settings-test1.json", filePath , true);
 
-            CheckSettings(2, 0, 0, 30, 5000, true, true, true, Tools.UpdateType.stable, "kw", "fahrenheit", "en", "http://chris8:8888/admin/", "RR", "http://chris8:3000/", "Two weeks", "1");
+            CheckSettings(2, 0, 0, 30, 5000, true, true, true, Tools.UpdateType.stable, "kw", "fahrenheit", "psi",
+                "en", "http://chris8:8888/admin/", "RR", "http://chris8:3000/", "Two weeks", "1");
         }
 
         [ClassCleanup()]

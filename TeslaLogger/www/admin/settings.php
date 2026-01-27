@@ -23,7 +23,7 @@ function CarsCombobox($cars, $selected)
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Teslalogger Settings V1.5</title>
+    <title>Teslalogger Settings V1.6</title>
 	<link rel="stylesheet" href="static/jquery/ui/1.12.1/themes/smoothness/jquery-ui.css">
 	<link rel="stylesheet" href="static/teslalogger_style.css?v=4">
 	<script src="static/jquery/jquery-1.12.4.js"></script>
@@ -90,6 +90,7 @@ function CarsCombobox($cars, $selected)
 			// Default Values for fresh install
 			echo ("$('#radio_kw').prop('checked', true);\r\n");
 			echo ("$('#radio_celsius').prop('checked', true);\r\n");
+			echo ("$('#radio_bar').prop('checked', true);\r\n");
 			echo ("$('#radio_km').prop('checked', true);\r\n");
 			echo ("$('#radio_en').prop('checked', true);\r\n");		
 			echo ("$('#radio_all').prop('checked', true);\r\n");
@@ -109,6 +110,7 @@ function CarsCombobox($cars, $selected)
 			$power = $j->{"Power"};
 			$Temperature = $j->{"Temperature"};
 			$Length = $j->{"Length"};
+			$Pressure = $j->{"Pressure"};
 			$Language = $j->{"Language"};
 			$URL_Admin = $j->{"URL_Admin"};
 			$URL_Grafana = $j->{"URL_Grafana"};
@@ -161,6 +163,11 @@ function CarsCombobox($cars, $selected)
 				echo ("$('#radio_mile').prop('checked', true);\r\n");
 			else
 				echo ("$('#radio_km').prop('checked', true);\r\n");
+
+			if ($Pressure == "psi")
+				echo ("$('#radio_psi').prop('checked', true);\r\n");
+			else
+				echo ("$('#radio_bar').prop('checked', true);\r\n");
 				
 			if(!empty($Language))
 				echo ("$('#Language').val('$Language');\r\n");
@@ -206,6 +213,7 @@ function CarsCombobox($cars, $selected)
 		Power: $("input:radio[name ='power']:checked").val(),
 		Temperature: $("input:radio[name ='Temperature']:checked").val(),
 		Length: $("input:radio[name ='Length']:checked").val(),
+		Pressure: $("input:radio[name ='Pressure']:checked").val(),
 		Language: $("#Language").find("option:selected").val(),
 		URL_Admin: $("#URL_Admin").val(),
 		URL_Grafana: $("#URL_Grafana").val(),
@@ -258,6 +266,7 @@ echo(menu("Settings"));
 	<tr><td valign="top"><b><?php t("Power"); ?>:</b></td><td class="TT"><input id="radio_hp" type="radio" value="hp" name="power" /> <label for="radio_hp"><?php t("PS"); ?></label><br><input id="radio_kw" type="radio" value="kw" name="power" /> <label for="radio_kw"><?php t("kW"); ?></label></td></tr>
 	<tr><td valign="top"><b><?php t("Temperature"); ?>:</b></td><td class="TT"><input id="radio_celsius" type="radio" value="celsius" name="Temperature"> <label for="radio_celsius"><?php t("Celsius"); ?></label><br><input id="radio_fahrenheit" type="radio" value="fahrenheit" name="Temperature"> <label for="radio_fahrenheit"><?php t("Fahrenheit"); ?></label></td></tr>
 	<tr><td valign="top"><b><?php t("Unit of length"); ?>:</b></td><td class="TT"><input id="radio_km" type="radio" value="km" name="Length"> <label for="radio_km"><?php t("km"); ?></label><br><input id="radio_mile" type="radio" value="mile" name="Length"> <label for="radio_mile"><?php t("mile"); ?></label></td></tr>
+	<tr><td valign="top"><b><?php t("Pressure unit"); ?>:</b></td><td class="TT"><input id="radio_bar" type="radio" value="bar" name="Pressure"> <label for="radio_bar"><?php t("bar"); ?></label><br><input id="radio_psi" type="radio" value="psi" name="Pressure"> <label for="radio_psi"><?php t("psi"); ?></label></td></tr>
 	<tr><td valign="top"><b><?php t("Range"); ?>:</b></td><td class="TT"><input id="radio_Ideal" type="radio" value="IR" name="Range"> <label for="radio_Ideal"><?php t("Ideal"); ?></label><br><input id="radio_Rated" type="radio" value="RR" name="Range"> <label for="radio_Rated"><?php t("Rated"); ?></label></td></tr>
 	<tr><td><b><?php t("Share data anonymously"); ?>:</b></td><td class="TT"><input id="checkboxSharedata" type="checkbox" value="sharedata"> <label for="checkboxSharedata"><?php t("Enable"); ?></label></td><td><img id="ShareDataHelp" src="img/icon-help-24.png" /></td></tr>
 	<tr><td valign="top"><b><?php t("Automatic updates"); ?>:</b></td><td class="TT"><input id="radio_all" type="radio" value="all" name="update"> <label for="radio_all"><?php t("All"); ?></label><br><input id="radio_stable" type="radio" value="stable" name="update"> <label for="radio_stable"><?php t("Stable"); ?></label><br><input id="radio_none" type="radio" value="none" name="update"> <label for="radio_none"><?php t("None"); ?></label></td></tr>

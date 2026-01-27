@@ -20,6 +20,7 @@ $Language = $_POST["Language"];
 $Power = $_POST["Power"];
 $Temperature = $_POST["Temperature"];
 $Length = $_POST["Length"];
+$Pressure = $_POST["Pressure"];
 $URL_Admin = $_POST["URL_Admin"];
 $URL_Grafana = $_POST["URL_Grafana"];
 $HTTPPort = $_POST["HTTPPort"];
@@ -37,6 +38,7 @@ $j = array('SleepTimeSpanStart' => $SleepTimeSpanStart,
 'Power' => $Power,
 'Temperature' => $Temperature,
 'Length' => $Length,
+'Pressure' => $Pressure,
 'Language' => $Language,
 'URL_Admin' =>$URL_Admin,
 'URL_Grafana' =>$URL_Grafana,

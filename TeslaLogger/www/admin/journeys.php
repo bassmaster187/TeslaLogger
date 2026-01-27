@@ -118,8 +118,14 @@ select.newJourney {width: 500px;}
                     if(type === 'display' || type === 'sort'){
                         var distance = row["distance"];
                         var consumption_kwh = row["consumption_kwh"];
-                        var avg_consumption = consumption_kwh / distance * 100 * <?= $LengthFactor ?>;
-						return type === "display" || type === "filter" ? avg_consumption.toLocaleString(loc,{maximumFractionDigits:1, minimumFractionDigits: 1}) : avg_consumption;
+                        var avg_consumption = consumption_kwh / distance;
+
+                        if ("<?= $LengthUnit ?>" == "mile")
+                            avg_consumption *= 1609.344;
+                        else
+                            avg_consumption *= 100;
+
+                        return type === "display" || type === "filter" ? avg_consumption.toLocaleString(loc,{maximumFractionDigits:1, minimumFractionDigits: 1}) : avg_consumption;
                     }
                     return row["charged_kwh"];
                 }},
@@ -391,7 +397,7 @@ select.newJourney {width: 500px;}
         <th><?php t("Start"); ?></th>
         <th><?php t("Target address"); ?></th>
         <th><?php t("End"); ?></th>
-        <th><?php t("Ø Consumption"); ?> <?php t("kWh"); ?></th>
+        <th><?php t("Ø Consumption"); ?> <?php if ($LengthUnit == "mile") t("Wh/mi"); else t("kWh"); ?></th>
         <th><?php t("Consumed kWh"); ?></th>
         <th><?php t("Charged kWh"); ?></th>
         <th><?php t("Drive time [h]"); ?></th>
