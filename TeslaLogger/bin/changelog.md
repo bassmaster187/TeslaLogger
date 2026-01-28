@@ -1,3 +1,13 @@
+# Version 1.63.11
+- BF: Cleanup Backup folder on Raspberry
+- Settings: Bar / PSI
+- Automatic switch to .NET 8 on Raspberry Pi installations
+
+# Changelog of newer versions apply only to Teslalogger installations with .NET 8! Mono installations won't get new features!
+- If you have an old Docker Image with Mono, please switch to the new Teslalogger .NET8 Image: [LINK](https://teslalogger.de/docs/installation/upgrade-to-net8-docker)
+- If you have an old Raspberry Pi installation with Mono, it should switch to .NET8 automatically. If not, please contact me: mail@teslalogger.de
+- If you have a very old Raspberry PI installation with Grafana version below 10, please contact me for a new image: mail@teslalogger.de
+
 # Version 1.63.10
 - online update of geofence.csv
 - Nominal Full / SOH Pack Capacity in Dashboard Battery Degradation (Lucid Air)
