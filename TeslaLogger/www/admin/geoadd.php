@@ -60,6 +60,7 @@ if (isset($id))
 	
 	<script src="static/jquery/jquery-1.12.4.js"></script>
 	<script src="static/jquery/ui/1.12.1/jquery-ui.js"></script>
+	<link rel='stylesheet' id='genericons-css'  href='static/genericons.css?ver=3.0.3' type='text/css' media='all' />
 	<script>	
 	var circle = null;
   $( function() {
@@ -369,7 +370,7 @@ if (isset($id))
     echo(menu("Geofencing"));
 ?>
 <div style="max-width: 1260px;">
-	<div style="float:left;">
+	<div style="float:left; margin: 5px;">
 		<div>
   			<h2 style="margin-top: 0px;"><?php t("Name & Position"); ?></h2>
 			<table>
