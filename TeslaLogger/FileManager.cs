@@ -1,8 +1,9 @@
-﻿using System;
+﻿using Exceptionless;
+using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Reflection;
 using System.Text;
-using Exceptionless;
 
 namespace TeslaLogger
 {
@@ -86,6 +87,15 @@ namespace TeslaLogger
                 invoiceDir = "/etc/teslalogger/tesla_invoices";
 
             return invoiceDir;
+        }
+
+        public static string GetBackupPath()
+        {
+            var path = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "backup");
+            if (Tools.IsRaspberry_NET8())
+                path = "/etc/teslalogger/backup";
+
+            return path;
         }
 
 

@@ -4768,7 +4768,7 @@ WHERE
                     { "pw", power },
                     { "temp", temperature },
                     { "le", length },
-                    { "pr", pressure },
+                    // { "pr", pressure },
                     { "ln", language },
 
                     { "CT", car.CarType },

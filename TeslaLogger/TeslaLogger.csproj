@@ -47,6 +47,11 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <!-- Für Self-Contained Deployment -->
+    <RuntimeIdentifiers>linux-x64;linux-arm;linux-arm64;win-x64</RuntimeIdentifiers>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="AsyncIO, Version=0.1.69.0, Culture=neutral, PublicKeyToken=44a94435bd6f33f8, processorArchitecture=MSIL">
       <HintPath>..\packages\AsyncIO.0.1.69\lib\net40\AsyncIO.dll</HintPath>

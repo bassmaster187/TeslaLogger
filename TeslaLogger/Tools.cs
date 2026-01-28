@@ -1792,7 +1792,8 @@ namespace TeslaLogger
                 return;
             }
 
-            DirectoryInfo di = new DirectoryInfo(Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "backup"));
+            var path = FileManager.GetBackupPath();
+            var di = new DirectoryInfo(path);
 
             if (di.Exists)
             {
@@ -1853,6 +1854,12 @@ namespace TeslaLogger
                     }
                 }
             }
+            else
+            {
+                Logfile.Log("Directory for Backup does not exist: " + path);
+            }
+
+
             if (filesFoundForDeletion)
             {
                 Logfile.Log($"Housekeeping: {countDeletedFiles} file(s) deleted in Backup directory, Free Disk Space now: {FreeDiskSpaceMB()} MB");
