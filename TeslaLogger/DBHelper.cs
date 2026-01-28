@@ -749,7 +749,7 @@ WHERE
         ON
             t1.carid = t2.carid AND t1.StartPos >= t2.StartPos AND t1.StartDate < t2.EndDate AND t1.id > t2.id
     ) AS T3
-)", 300);
+)", 3000);
                 sw.Stop();
 
                 Logfile.Log($"Deleted Duplicate Trips: {cnt} Time: {sw.ElapsedMilliseconds}ms");
