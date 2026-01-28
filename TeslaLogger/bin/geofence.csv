@@ -2292,7 +2292,7 @@ Supercharger ES-Almaraz,39.791562,-5.695512,30
 Supercharger-V4 ES-Antas,37.2137,-1.89826
 Supercharger-V3 ES-Antequera,37.113318,-4.566764
 Supercharger-V4 ES-Aranda de Duero,41.62322,-3.68768
-Supercharger ES-Ariza,41.313192,-2.002201
+Supercharger-V4 ES-Ariza,41.3132,-2.0022
 Supercharger-V4 ES-Atalaya del Cañavate,39.5387,-2.25446,30
 Supercharger-V3 ES-Barakaldo MegaPark,43.293842,-3.005063
 Supercharger-V4 ES-Barbastro Carretera de Huesca,42.033193,0.104275
@@ -2610,7 +2610,7 @@ Supercharger-V4 FR-Livry-Gargan,48.9276,2.5484
 Supercharger FR-Lorient,47.787895,-3.33147
 Supercharger-V4 FR-Loudéac,48.193224,-2.757943
 Supercharger-V4 FR-Luçon,46.46077,-1.13032
-Supercharger-V4 FR-Magnant,48.1807,4.4348
+Supercharger-V4 FR-Magnant,48.1808,4.4344
 Supercharger-V4 FR-Mandelieu-la-Napoule,43.53363,6.933
 Supercharger-V3 FR-Manosque,43.818865,5.796896
 Supercharger FR-Marne-la-Vallée,48.83079,2.678036
@@ -3743,7 +3743,7 @@ Supercharger-V4 PL-Wrocław,51.05185,16.97247
 Supercharger-V4 PL-Zaluski,52.514357,20.528801
 
 Supercharger-V4 PT-Alcantarilha,37.1506,-8.36443
-Supercharger PT-Alcácer do Sal,38.39183,-8.51381
+Supercharger-V4 PT-Alcácer do Sal,38.39183,-8.5138
 Supercharger-V4 PT-Fátima,39.63554,-8.68836
 Supercharger PT-Guarda,40.55898,-7.23102,60
 Supercharger-V4 PT-Guimarães,41.44843,-8.34233
@@ -6641,6 +6641,7 @@ Allego DE-Autohof Bergler,49.80454,12.18425,22
 Allego DE-Autohof Gießen-Lützellinden,50.52955,8.6071
 Allego DE-Autohof Halle-Tornau,51.5458,12.01418
 Allego DE-Autohof Homberg/Efze,51.00472,9.47935
+Allego DE-Autohof Lauenau,52.2787,9.35075,10
 Allego DE-Autohof Lippetal,51.69575,7.96646,10
 Allego DE-Autohof Malsfeld,51.08686,9.4855,10
 Allego DE-Autohof Mühldorf,48.27258,12.5501,6
@@ -6990,7 +6991,6 @@ Allego DE-Köln Frankfurter Straße 751,50.91764,7.04947
 Allego DE-Königs-Wusterhausen Karl-Marx-Straße,52.3125,13.65077
 Allego DE-Laatzen Hildesheimer Straße,52.31614,9.79094
 Allego DE-Lahr Einsteinallee,48.35387,7.80752,30
-Allego DE-Lauenau Hanomagstraße,52.27871,9.35075,10
 Allego DE-Lauf an der Pegnitz Industriestraße,49.502758,11.291502
 Allego DE-Leese Bahlweg,52.4939,9.12086
 Allego DE-Lehre In den Lohbalken,52.31339,10.63539,20
@@ -10774,7 +10774,7 @@ EnBW DE-Borken (Hessen) Alfred-Nobel-Straße,51.05216,9.2688
 EnBW DE-Bornheim,50.75324,7.015108
 EnBW DE-Bornheim Aarhusweg,50.79354,6.95835
 EnBW DE-Bornheim Donnerbachweg,50.76661,6.9479
-EnBW DE-Bottrop,51.511585,6.9349
+EnBW DE-Bottrop Essener Straße,51.51155,6.93496
 EnBW DE-Brackenheim Georg-Kohl-Straße,49.08256,9.06715
 EnBW DE-Brackenheim Hermann-Bauer-Straße,49.074242,9.06266
 EnBW DE-Brackenheim Neipperger Straße,49.08183,9.06147
@@ -12928,6 +12928,7 @@ ENGIE FR-Eurotunnel Le Shuttle Calai Coquelles,50.928381,1.811841
 ENGIE FR-Gujan-Mestras Av. des Loisirs,44.61606,-1.09648
 ENGIE FR-Meaux Av. de la Victoire,48.9581,2.90808,25
 ENGIE FR-Romagnieu Aire du Guiers A43,45.57821,5.633827
+ENGIE FR-Vineuil Rue Lavoisier,47.57376,1.36962
 ENGIE FR-Vitrac-sur-Montane Aire Corrèze,45.360055,1.937966
 ENGIE NL-Den Haag Van Bleiswijkstraat,52.09403,4.28025
 
@@ -12940,6 +12941,7 @@ Eniwa CH-Buchs Industriestrasse,47.392681,8.064548
 Eniwa CH-Oberentfelden Industriestrasse,47.34996,8.05137
 
 ENNI DE-Großhansdorf Wöhrendamm,53.6527,10.28236
+ENNI DE-Herten Doncaster Platz,51.5719,7.14502
 ENNI DE-Magdeburg Am Pfahlberg,52.18077,11.61684
 
 ensev DE-Bad Nauheim Benekestraße,50.37228,8.74884
@@ -13154,6 +13156,7 @@ EVgo US-Leesylvania VA Potomac Town Pl,38.62978,-77.28907,15
 EVgo US-Lubbock TX 4th St,33.59323,-101.84082
 EVgo US-Milpitas CA E Calaveras Blvd,37.43598,-121.8849
 EVgo US-Mountain View CA E Middlefield Rd,37.39758,-122.06192
+EVgo US-Mountain View CA N Rengstorff Ave,37.4112,-122.0935
 EVgo US-New Albany MS MS-15,34.46778,-89.00706
 EVgo US-San Diego CA Clairemont Mesa Blvd,32.83474,-117.18805
 EVgo US-San Francisco CA Market Street,37.76849,-122.427274
@@ -13310,8 +13313,10 @@ EVN AT-St. Pölten Ausstellungsstraße,48.20061,15.629955
 EVN AT-St. Pölten Pottenbrunner Hauptstraße,48.23851,15.69444
 EVN AT-St. Pölten Stattersdorfer Hauptstraße,48.197377,15.64104
 EVN AT-Stockerau Horner Straße,48.38807,16.18479
+EVN AT-Stockerau Rudolf-Hirsch-Straße,48.38117,16.23934
 EVN AT-Tulln an der Donau Frauentorgasse,48.32718,16.05535
 EVN AT-Tulln an der Donau Langenlebarner Straße,48.32822,16.08246
+EVN AT-Tulln an der Donau Staasdorfer Straße,48.32366,16.05867
 EVN AT-Vösendorf Schönbrunner Allee,48.12878,16.32716
 EVN AT-Waidhofen an der Ybbs Pocksteinerstraße,47.956449,14.777679
 EVN AT-Weitra Bahnhofstraße,48.70086,14.8977
@@ -14286,6 +14291,7 @@ EWE-GO DE-Tönisvorst Höhenhöfe,51.315114,6.476086
 EWE-GO DE-Tübingen Reutlinger Straße,48.51358,9.0712
 EWE-GO DE-Türkheim Schützenstraße,48.04346,10.62243,20
 EWE-GO DE-Uelzen Nordallee,52.986991,10.548136
+EWE-GO DE-Ungerhausen Gutenbergstraße,48.01914,10.27296
 EWE-GO DE-Unterhaching Grünwalder Weg,48.05674,11.60251
 EWE-GO DE-Unterschleißheim Max-Planck-Straße,48.28376,11.563751
 EWE-GO DE-Uplengen Alter Postweg,53.30787,7.75389
@@ -15548,6 +15554,7 @@ IKB AT-Innsbruck DEZ,47.26221,11.42823,25
 IKB AT-Innsbruck Salurner Straße,47.262477,11.397359
 IKB AT-Schönberg im Stubaital Europabrücke-Parkplatz,47.197433,11.397733
 
+IKEA AU-North Lakes QLD,-27.24362,153.01643
 IKEA AU-Slacks Creek QLD,-27.637344,153.135277
 IKEA CH-Dietlikon,47.41388,8.62275
 IKEA CH-Spreitenbach,47.42145,8.37653,75
@@ -18348,6 +18355,7 @@ Malanka BY-Baranavichy Баранавічы вуліца Даменікана,53
 Malanka BY-Hrodna Гродна проспект Янки Купалы,53.65055,23.8537
 Malanka BY-Kobryn Кобрын M-1 60-й км,52.18147,24.36816
 Malanka BY-Minsk Мінск вуліца Някрасава,53.9356,27.58033
+Malanka BY-Minsk Мінск вуліца Някрасава,53.93994,27.57222
 Malanka BY-Minsk Мінск вуліца Уладзіслава Галубка,53.92613,27.44256
 Malanka BY-Minsk Мінск вуліца Шаранговіча,53.88286,27.45414
 Malanka BY-Minsk Мінск Камсамольская вуліца,53.89823,27.55616
@@ -19528,6 +19536,7 @@ Pfalzwerke DE-Albisheim Kirchgasse,49.650451,8.096974
 Pfalzwerke DE-Alfdorf Untere Schloßstraße 125,48.842199,9.729789
 Pfalzwerke DE-Allmendingen Marienstraße,48.324661,9.717438
 Pfalzwerke DE-Altenglan Austraße,49.55056,7.46306
+Pfalzwerke DE-Altenkirchen Dammweg,50.6887,7.6452
 Pfalzwerke DE-Altrip Ludwigsplatz 2,49.432376,8.501782
 Pfalzwerke DE-Altötting Burghauser Straße,48.22152,12.69098
 Pfalzwerke DE-Angelbachtal Wusseldornstraße,49.23664,8.76692
@@ -22288,6 +22297,7 @@ TEAG DE-Rudolstadt Schwarzburger Chaussee,50.71355,11.320016
 TEAG DE-Schlüchtern Gartenstraße,50.352092,9.530945
 TEAG DE-Schmalkalden Hofstatt,50.720682,10.451872
 TEAG DE-Schmölln Rossmann,50.893006,12.332003
+TEAG DE-Schotten Parkstraße,50.50527,9.12772
 TEAG DE-Sinn Herborner Straße,50.658125,8.324428
 TEAG DE-Sonneborn Eberstädter Straße,50.996287,10.588121
 TEAG DE-Spangenberg Lochmühle,51.115864,9.661608
@@ -23494,6 +23504,7 @@ Zunder ES-Zafra Plaza del Alcázar,38.4244,-6.41493
 ČEZ CZ-Praha Visionary,50.10709,14.44206
 ČEZ CZ-Průhonice Za Dálnicí,50.00486,14.56333,30
 ČEZ CZ-Průhonice Za Dálnicí,50.00513,14.56391,30
+ČEZ CZ-Roudnice nad Labem Žižkova,50.40918,14.2391
 ČEZ CZ-Sokolov K. H. Borovského,50.17647,12.67644
 ČEZ CZ-Stráž nad Nisou,50.78364,15.0232
 ČEZ CZ-Trmice,50.64615,13.98688
@@ -23626,6 +23637,7 @@ BE Humbeek Molenstraat,50.9634,4.37065
 BE Rotselaar Belparts,50.938946,4.742856
 BY Minsk Мінск вуліца Алеся Гаруна,53.91996,27.44848
 BY Minsk Мінск Картленд,53.91144,27.52007
+BY Minsk Мінск ТЦ Грин Тайм,53.8615,27.63807
 CH Affoltern Blauer Elefant,47.27289,8.4388
 CH Arosa Brüggli,46.77581,9.6648
 CH Arosa Valsana Hotel,46.78388,9.68427
