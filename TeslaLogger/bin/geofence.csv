@@ -2029,7 +2029,7 @@ Supercharger-V4 DE-Köln Carlswerk,50.966078,7.014042
 Supercharger-V4 DE-Köln-Goltstein,50.9079,6.97083
 Supercharger-V3 DE-Kösching,48.811333,11.479899
 Supercharger-V4 DE Langenhagen,52.458282,9.716301
-Supercharger-V4 DE-Laucha,50.922513,10.5533
+Supercharger-V4 DE-Laucha,50.92246,10.55333,40
 Supercharger-V3 DE-Lauenau,52.2791,9.351,60
 Supercharger-V3 DE-Leer,53.25967,7.45557
 Supercharger-V3 DE-Lehre,52.31315,10.63488,30
@@ -2997,6 +2997,7 @@ Supercharger-V4 HU-Pécs,46.06448,18.1824
 Supercharger-V4 HU-Siófok,46.895,18.05783
 Supercharger-V3 HU-Sormás,46.46054,16.90676
 Supercharger HU-Szeged,46.274868,20.102464
+Supercharger-V4 HU-Szeged Rókus,46.26964,20.13825
 Supercharger-V3 HU-Szigetszentmiklós,47.383471,19.026911
 Supercharger-V3 HU-Székesfehérvár,47.149632,18.431349
 Supercharger-V4 HU-Tatabánya,47.59506,18.3869
@@ -3952,13 +3953,13 @@ Supercharger-V4 TR-Bolu,40.72398,31.46504
 Supercharger-V4 TR-Burdur,37.74588,30.31232
 Supercharger-V4 TR-Cankaya Ankara,39.90963,32.77736
 Supercharger-V3 TR-Edirne,41.680352,26.582235
+Supercharger-V4 TR-Eskişehir,39.445,31.56873
 Supercharger-V3 TR-Ilgaz Çankırı,40.90657,33.64522
 Supercharger-V3 TR-Istanbul Asia Garage Floor -2,41.003233,29.070793
 Supercharger-V4 TR-İzmit,40.75495,29.94697
 Supercharger-V4 TR-Keşan,40.8742,26.6419
 Supercharger-V4 TR-Kütahya,39.35863,30.0565
 Supercharger-V4 TR-Samsun,41.22493,36.43205
-Supercharger-V4 TR-Sivrihisar,39.44167,31.52694
 Supercharger-V4 TR-Tekirdağ,40.98885,27.5772
 Supercharger-V4 TR-Usak,38.67087,29.42435
 
@@ -6562,10 +6563,10 @@ Aldi DE-Sonthofen Oberstdorfer Straße,47.50879,10.27517
 Aldi DE-Stromberg Friedrichsheck,49.949028,7.786028
 Aldi DE-Stuttgart Adalbert-Stifter-Straße,48.835478,9.201225
 Aldi DE-Stuttgart Bottroper Straße,48.81756,9.214898,20
-Aldi DE-Stuttgart Feuerbach,48.811008,9.168364
 Aldi DE-Stuttgart Galileistraße,48.72103,9.119991,20
 Aldi DE-Stuttgart Galileistraße,48.72162,9.12018
 Aldi DE-Stuttgart Sophie-Tschorn-Straße,48.817315,9.23782
+Aldi DE-Stuttgart Stuttgarter Straße,48.81128,9.1682,62
 Aldi DE-Stuttgart Westbahnhof,48.769497,9.142045,20
 Aldi DE-Trier Zurmaiener Straße,49.773944,6.667306
 Aldi DE-Troidsorf Im Zehntfeld,50.809975,7.124924
@@ -8459,6 +8460,7 @@ CircleK DE-Hamburg Cuxhavener Straße,53.47317,9.84674
 CircleK DE-Hamburg/ Moorfleet Andreas- Meyer- Straße,53.514264,10.089733
 CircleK DE-Hanau Rodgaustraße,50.11674,8.92926
 CircleK DE-Hirschberg Goldbeckstraße,49.507949,8.636984,20
+CircleK DE-Hörsel Gewerbestraße,50.92268,10.55255,25
 CircleK DE-Ibbenbüren Münsterstraße,52.258724,7.711672
 CircleK DE-Karlsruhe Erlachseeweg,48.98565,8.44717
 CircleK DE-Kirchheim unter Teck Im Hag,48.64236,9.43332,30
@@ -9535,7 +9537,6 @@ E.ON DE-Greding An der A9,49.0415,11.353943
 E.ON DE-Grevenbroich An der A46,51.125661,6.602056
 E.ON DE-Grömitz Körnickerfeld,54.15191,10.9423
 E.ON DE-Gudow An der A24,53.520118,10.805807
-E.ON DE-Hagen,51.411443,7.498424
 E.ON DE-Hamburg Altenwerder Hauptdeich,53.51318,9.91662
 E.ON DE-Hamburg Alter Wall,53.5507,9.99067
 E.ON DE-Hamburg-Steilshoop Eichenlohweg,53.60836,10.04415
@@ -9625,6 +9626,7 @@ E.ON DE-Raststätte Kalbecker Forst,51.65179,6.19939
 E.ON DE-Raststätte Kalbecker Forst,51.6535,6.19771
 E.ON DE-Raststätte Königsforst,50.89756,7.1533
 E.ON DE-Raststätte Königsforst,50.89942,7.15213
+E.ON DE-Raststätte Lennhof,51.41133,7.49826
 E.ON DE-Raststätte Limes West,50.52085,8.7555
 E.ON DE-Raststätte Lipperland,52.0719,8.6646
 E.ON DE-Raststätte Medenbach,50.0947,8.35239
@@ -10212,6 +10214,7 @@ ElDrive RO-Brașov Strada Lacurilor,45.61709,25.64602
 ElDrive RO-Brașov Strada Lacurilor,45.64719,25.61946
 ElDrive RO-Fetești Strada Călărași,44.40452,27.83257
 ElDrive RO-Giurgiu DN5,43.90831,25.98683
+ElDrive RO-Hărman Strada Dorobanți,45.70247,25.69246
 ElDrive RO-Lehliu-Gară Str. Elefterie Papadisia,44.435903,26.856617
 
 ELE DE-Gelsenkirchen Husemannstraße,51.50603,7.09896,20
@@ -13090,6 +13093,7 @@ Eulektro DE-Berlin Platz der Luftbrücke,52.47765,13.3868
 Eulektro DE-Bremen Am Dobben,53.0781,8.82284
 Eulektro DE-Bremen Johann-Jacobs-Straße,53.08656,8.7837
 Eulektro DE-Krefeld Odilia-Von-Goch-Strasse,51.36605,6.49727
+Eulektro DE-Schwanewede Molkereiweg,53.23137,8.59024
 Eulektro DE-Stuhr Delmenhorster Straße,52.99375,8.76883
 
 EV-Alzenau DE-Alzenau Burgstraße,50.08713,9.07415
@@ -13325,6 +13329,7 @@ EVN AT-Wien Dommesgasse,48.17229,16.41517
 EVN AT-Wien Gotramgasse,48.2201,16.44554
 EVN AT-Wien Linzer Straße,48.20324,16.24355
 EVN AT-Wiener Neustadt Günser Straße,47.8022,16.24043
+EVN AT-Wiener Neustadt Neunkirchner Straße,47.80974,16.24378
 EVN AT-Wiener Neustadt Puchberger Straße,47.80452,16.21039,6
 EVN AT-Wiener Neustadt Puchberger Straße,47.80466,16.21039,8
 EVN AT-Wolkersdorf Julius Bittner Platz,48.3852,16.51515
@@ -17991,7 +17996,7 @@ Lidl DE-Stendal Erich-Weinert-Straße 23,52.597591,11.839927
 Lidl DE-Stolberg-Münsterbusch Ardennenstraße,50.76638,6.21844
 Lidl DE-Stutensee-Blankenloch Linkenheimer Straße,49.0801,8.46138
 Lidl DE-Stuttgart Hofener Straße,48.81485,9.226418
-Lidl DE-Stuttgart Stuttgarter Straße 32,48.811109,9.165555
+Lidl DE-Stuttgart Stuttgarter Straße,48.8111,9.16555
 Lidl DE-Sundern Settmecke Straße,51.32468,7.99925
 Lidl DE-Süderlügum Hauptstraße,54.8746,8.90885,30
 Lidl DE-Süßen Bühlstraße 17,48.679616,9.761024
@@ -18879,6 +18884,7 @@ MOVE CH-Zürich Allmendstrasse,47.34013,8.51943
 MOVE CH-Zürich Gessnerallee,47.37416,8.5337
 MOVE CH-Zürich Huttenstrasse,47.3793,8.55251
 
+MOYA PL-Brok Jana Pawła,52.70216,21.8477
 MOYA PL-Bytom Konstytucji,50.3542,18.8761
 MOYA PL-Chełmno al. Prawa Chełmińskiego,53.3409,18.46132
 MOYA PL-Podlas Trasa Bohaterów Bitwy Warszawskiej,51.73577,20.2306
@@ -20841,6 +20847,7 @@ Shell DE-Braunschweig Hansestraße,52.310753,10.506453
 Shell DE-Braunschweig Münchenstraße,52.252208,10.492259
 Shell DE-Braunschweig Thiedestraße,52.2207,10.50206
 Shell DE-Breitenworbis Auf dem Pfingstrasen,51.41238,10.43843
+Shell DE-Bremen Huchtinger Heerstraße,53.05817,8.73568
 Shell DE-Bremen Osterholzer Herrstraße,53.05777,8.96248
 Shell DE-Bremerhaven Frederikshavener Straße,53.4972,8.62492
 Shell DE-Broderstorf Mecklenburger Straße,54.0808,12.213
@@ -23292,6 +23299,7 @@ Wien-Energie AT-Wien Breitenfurter Straße,48.14641,16.29639
 Wien-Energie AT-Wien Cumberlandstraße,48.19175,16.30988
 Wien-Energie AT-Wien Erdberger Lände,48.2021,16.40033
 Wien-Energie AT-Wien Felberstraße,48.197281,16.335561
+Wien-Energie AT-Wien Getreidemarkt,48.2014,16.36422
 Wien-Energie AT-Wien Grassigasse,48.1992,16.31122
 Wien-Energie AT-Wien Guglgasse,48.185265,16.421039
 Wien-Energie AT-Wien Handelskai,48.23439,16.39364
@@ -23320,6 +23328,7 @@ Wien-Energie AT-Wien Seestadt Seepark,48.22447,16.50411
 Wien-Energie AT-Wien Senefeldergasse,48.17185,16.37475
 Wien-Energie AT-Wien Simmeringer Hauptstraße,48.15543,16.44125
 Wien-Energie AT-Wien Spittelauer Lände,48.23271,16.36037
+Wien-Energie AT-Wien Svetelskystraße,48.15467,16.46186
 Wien-Energie AT-Wien Sängergasse,48.1534,16.46803
 Wien-Energie AT-Wien U-Bahn-Bogen,48.217703,16.342094,60
 Wien-Energie AT-Wien Waldmüllergasse,48.23295,16.37685
@@ -23635,6 +23644,7 @@ BA Banja Luka Delta Planet,44.78049,17.20657
 BE Hasselt Corda Campus Kempische Steenweg 293,50.951484,5.353231,14
 BE Humbeek Molenstraat,50.9634,4.37065
 BE Rotselaar Belparts,50.938946,4.742856
+BY Minsk Мінск 3-і завулак Мажайскага,53.94296,27.5814
 BY Minsk Мінск вуліца Алеся Гаруна,53.91996,27.44848
 BY Minsk Мінск Картленд,53.91144,27.52007
 BY Minsk Мінск ТЦ Грин Тайм,53.8615,27.63807
