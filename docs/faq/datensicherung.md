@@ -2,15 +2,15 @@
 
 Einmal am Tag führt Teslalogger diverse Datensicherungsoperationen aus.
 Dabei werden täglich folgende Dateien erstellt:
-- mysqldump<datum>.gz
-- geofence-private<datum>.gz
+- mysqldump\<datum\>.gz
+- geofence-private\<datum\>.gz
 
 Einmal im Monat wird die folgende Datei erstellt:
-- logfile-<datum>.gz
+- logfile-\<datum\>.gz
 
 Einmal im Jahr wird die folgenden Dateien erstellt:
-- yeardump-<jahr>.gz
-- yeargeofence-<jahr>.gz
+- yeardump-\<jahr\>.gz
+- yeargeofence-\<jahr\>.gz
 
 Ab Februar 2026 wird den täglichen Dateien das Prefix "DAY-" vorangestellt und diese werden nach 31 Tagen wieder gelöscht, um ein Volllaufen des Speicherplatzes zu verhindern. Damit trotzdem ältere Daten verfügbar sind, wird am 1. jeden Monats anstelle dem Prefix "DAY-" das Prefix "MON-" genutzt. Die MON-Dateien werden nach einem Jahr gelöscht, wenn die "Year"-Daten erstellt wurden, die nie gelöscht werden. So stehen Jahressicherungen ohne Verfalldatum zur Verfügung und Monatssicherungen für ein Jahr, während Tagessicherungen für einen Montag verfügbar sind. Alte Backupdateien ohne Prefix werden nach 180 Tagen gelöscht.
 
