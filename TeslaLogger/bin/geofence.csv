@@ -2705,6 +2705,7 @@ Supercharger-V3 FR-Sisteron,44.22584,5.912426,30
 Supercharger FR-Sisteron,44.225891,5.913562,10
 Supercharger-V3 FR-Sisteron Val de Durance,44.236374,5.913113
 Supercharger FR-Strasbourg,48.53407,7.70201
+Supercharger-V4 FR-Séméac,43.2288,0.09604
 Supercharger-V4 FR-Sénas,43.741478,5.088358
 Supercharger-V4 FR-Taverny,49.025854,2.198438
 Supercharger-V4 FR-Terville,49.347684,6.125626
@@ -2922,6 +2923,7 @@ Supercharger-V4 GB-Sprucefield,54.491991,-6.068177
 Supercharger-V4 GB-St. Albans,51.75182,-0.2753
 Supercharger-V4 GB-Stanwell,51.442912,-0.474949
 Supercharger-V4 GB-Stevenage,51.901772,-0.208134
+Supercharger-V4 GB-Swansea,51.62068,-3.9135
 Supercharger-V3 GB-Swansea,51.67865,-3.9942
 Supercharger GB-Tebay Southbound,54.453473,-2.606108
 Supercharger GB-Telford,52.677334,-2.399552
@@ -3784,6 +3786,8 @@ Supercharger RS-Belgrad Београд,44.71006,20.56105
 Supercharger-V3 RS-Belgrad Београд AVA shopping,44.71258,20.56023
 Supercharger-V4 RS-Ražanj Ражањ,43.68232,21.5464
 
+Supercharger-V4 SA-Jeddah Al Ajawad Street,21.59353,39.22755
+
 Supercharger-V4 SE-Alingsås,57.924721,12.545965
 Supercharger SE-Arboga,59.426399,15.827282,40
 Supercharger-V4 SE-Arlandastad,59.608435,17.894453
@@ -3917,7 +3921,7 @@ Supercharger SE-Åre,63.3951,13.08778
 Supercharger-V3 SE-Åsarna,62.640554,14.37138
 Supercharger SE-Ödeshög,58.227173,14.668821
 Supercharger-V3 SE-Örebro,59.297677,15.206645,40
-Supercharger SE-Örnsköldsvik,63.29132,18.70648
+Supercharger-V4 SE-Örnsköldsvik,63.29132,18.70648
 Supercharger-V3 SE-Örnsköldsvik South,63.29038,18.704428,40
 Supercharger-V4 SE-Östersund,63.170327,14.69059
 Supercharger-V4 SE-Överkalix,66.323032,22.8479
@@ -3959,8 +3963,8 @@ Supercharger-V3 TR-Istanbul Asia Garage Floor -2,41.003233,29.070793
 Supercharger-V4 TR-İzmit,40.75495,29.94697
 Supercharger-V4 TR-Keşan,40.8742,26.6419
 Supercharger-V4 TR-Kütahya,39.35863,30.0565
-Supercharger-V4 TR-Samsun,41.22493,36.43205
 Supercharger-V4 TR-Tekirdağ,40.98885,27.5772
+Supercharger-V4 TR-Tekkeköy Samsun,41.22493,36.43205
 Supercharger-V4 TR-Usak,38.67087,29.42435
 
 Supercharger-V3 TW-Nantou Caotun,23.9664,120.67746
@@ -4232,7 +4236,7 @@ Supercharger US-Casa Grande AZ,32.87878,-111.68172
 Supercharger-V3 US-Castaic CA,34.45213,-118.61606
 Supercharger US-Catoosa OK,36.167589,-95.766032
 Supercharger-V3 US-Cayce SC,33.928145,-81.07838
-Supercharger US-Cedar City UT,37.605961,-113.1612
+Supercharger-V3 US-Cedar City UT,37.6059,-113.16115
 Supercharger-V3 US-Cedar Park TX,30.52569,-97.81918
 Supercharger-V3 US-Cedar Rapids IA,41.955992,-91.658776
 Supercharger US-Celebration FL,28.33142,-81.53258
@@ -5947,7 +5951,7 @@ Supercharger-V3 US-Wilkes-Barre Township PA,41.238665,-75.845822
 Supercharger US-Willcox AZ,32.270764,-109.84577
 Supercharger-V3 US-Williams CA - 6th Street,39.155735,-122.148923
 Supercharger-V3 US-Williamsburg VA,37.26641,-76.6767
-Supercharger US-Williamsport PA,41.232444,-77.020135
+Supercharger-V3 US-Williamsport PA,41.23243,-77.02022
 Supercharger-V3 US-Williston VT,44.448722,-73.107999
 Supercharger-V3 US-Wilmington DE Limestone Rd,39.72112,-75.65711
 Supercharger US-Wilmington NC,34.28842,-77.86971
@@ -6505,6 +6509,7 @@ Aldi DE-Nürnberg Münchenerstraße,49.40094,11.11705,30
 Aldi DE-Nürnberg Ostendstraße,49.456361,11.121444
 Aldi DE-Nürnberg Regensburgerstraße,49.43563,11.12265
 Aldi DE-Nürnberg Wiesbadener Straße,49.5223,11.00704
+Aldi DE-Nürnberg Äußere Sulzbacher Straße,49.4656,11.12353
 Aldi DE-Nürnberg-Herpersdorf An der Radrunde,49.372028,11.081889
 Aldi DE-Oberasbach Kurt-Schumacher-Straße,49.4348,10.970972
 Aldi DE-Oberhausen Dorstener Straße,51.536713,6.880898
@@ -9403,6 +9408,7 @@ e-regio DE-Kall Bahnhofstraße,50.53764,6.5554
 e-regio DE-Mechernich An d. Zikkurat,50.63219,6.6825
 e-regio DE-Mechernich Gartenstraße,50.590096,6.655214
 e-regio DE-Nettersheim Bahnhofstraße,50.490557,6.629605
+e-regio DE-Rheinbach Prümer Wall,50.62447,6.9471
 e-regio DE-Schleiden Blumenthaler Straße,50.52896,6.47713
 
 e-space GE-Argveta,42.14774,42.96571
@@ -9771,6 +9777,7 @@ E.ON SK-Beladice Čeladická,48.331752,18.267202
 E.ON SK-Bratislava Mlynské nivy,48.146676,17.126711
 E.ON SK-Ivachnová,49.09409,19.41935,30
 E.ON SK-Liptovský Mikuláš Kamenné pole,49.07817,19.6059
+E.ON SK-Martin Československej armády,49.07307,18.9119
 E.ON SK-Moldava nad Bodvou Rožňavská,48.608534,20.985711
 E.ON SK-Nitra Bratislavská,48.314424,18.06249
 E.ON SK-Sládkovičovo Fučíkova,48.197858,17.629469
@@ -10049,6 +10056,7 @@ EDEKA DE-Neumünster Gadelander Straße,54.05188,9.98977
 EDEKA DE-Neunkirchen Zeithstraße,50.87214,7.32502
 EDEKA DE-Neuss Schellbergstraße,51.16722,6.7347
 EDEKA DE-Nienburg/Weser Verdener Landstraße,52.653537,9.217964
+EDEKA DE-Nürnberg Thomas-Mann-Straße,49.414,11.1373
 EDEKA DE-Oberhausen Goldammerweg,51.52451,6.82454
 EDEKA DE-Oer-Erkenschwick Industriestraße,51.639,7.27763
 EDEKA DE-Otterndorf Marktstraße,53.80776,8.90621
@@ -15561,8 +15569,9 @@ Ignitis LT-Vilnius Upės g.,54.69392,25.27507
 Ignitis LT-Vilnius Vikingų g.,54.6533,25.27893
 Ignitis LT-Šilagalys Panevėžio aplinkelis,55.67072,24.34852
 
+iHunt RO-Târgu Mureș Strada Regele Ferdinand,46.53285,24.59213
+
 iHunt-EV RO-București Calea Ion Zăvoi,44.50375,26.08545
-iHunt-EV RO-Târgu Mureș Strada Regele Ferdinand,46.53285,24.59213
 
 IKB AT-Innsbruck DEZ,47.26221,11.42823,25
 IKB AT-Innsbruck Salurner Straße,47.262477,11.397359
@@ -16074,7 +16083,6 @@ Ionity DE-Hamminkeln,51.739103,6.59518
 Ionity DE-Harz Ost,51.926279,10.143238
 Ionity DE-Harz West,51.928028,10.14173
 Ionity DE-Heiligengrabe Liebenthaler Dorfstraße,53.147521,12.398905
-Ionity DE-Hepberg A9 Köschinger Forst,48.837085,11.469313
 Ionity DE-Herne Holsterhauser Straße,51.52873,7.19984
 Ionity DE-Herrenberg Hewlett-Packard-Straße,48.58196,8.89197
 Ionity DE-Hohenwarsleben,52.173898,11.49512,11
@@ -16087,7 +16095,6 @@ Ionity DE-Kamen Zollpost,51.576211,7.670176
 Ionity DE-Katzenfurt Süd,50.62033,8.363,16
 Ionity DE-Kirchheim,50.833283,9.573182
 Ionity DE-Kirchheim,50.833695,9.570777
-Ionity DE-Köschinger Forst Ost,48.836599,11.472234
 Ionity DE-Lechwiesen Nord,48.059266,10.846791
 Ionity DE-Lechwiesen Süd,48.058328,10.847694
 Ionity DE-Lehrter See Nord,52.38878,9.99604,30
@@ -16147,6 +16154,8 @@ Ionity DE-Raststätte Goldbach Nord,53.00056,9.17968,20
 Ionity DE-Raststätte Goldbach Süd,52.99833,9.18139,30
 Ionity DE-Raststätte Hohenlohe Nord,49.207,9.63934,20
 Ionity DE-Raststätte Hohenlohe Süd,49.20538,9.6398,20
+Ionity DE-Raststätte Köschinger Forst Ost,48.8366,11.47224
+Ionity DE-Raststätte Köschinger Forst West,48.83713,11.4693
 Ionity DE-Raststätte Lüneburger Heide Ost,53.11004,9.98406
 Ionity DE-Raststätte Lüneburger Heide West,53.10922,9.98197,30
 Ionity DE-Raststätte Reinhardshain,50.62186,8.89726,30
@@ -17318,6 +17327,7 @@ LichtBlick DE-Sindelfingen Flugfeld-Allee,48.689926,8.993832
 LichtBlick DE-St. Georgen Bahnhofstraße,48.12477,8.34137
 LichtBlick DE-Stalsund Koppelstraße,54.282629,13.085243
 LichtBlick DE-Staßfurt Lehrter Straße,51.85448,11.58218
+LichtBlick DE-Stein Albertus-Magnus-Straße,49.40712,11.00708
 LichtBlick DE-Sömmerda Parkweg,51.165103,11.117362
 LichtBlick DE-Theilheim Randersackerer Straße,49.7529,10.0162
 LichtBlick DE-Wackersdorf Gewerbepark,49.31158,12.15991
@@ -17512,7 +17522,7 @@ Lidl DE-Bad Wildungen Itzelstraße 34,51.119638,9.132902
 Lidl DE-Bamberg Laubanger,49.91161,10.87613
 Lidl DE-Barnstorf Niedersachsenweg 25,52.704732,8.492674
 Lidl DE-Bebra Hersfelder Straße,50.96577,9.79552
-Lidl DE-Bergen Gingster Chaussee 7,54.424375,13.414518
+Lidl DE-Bergen Gingster Chaussee,54.42434,13.41437
 Lidl DE-Berlin Buckower Damm,52.426346,13.435003
 Lidl DE-Berlin Curtiusstraße,52.44073,13.28946,30
 Lidl DE-Berlin Donaustraße,52.48092,13.43915
@@ -17792,6 +17802,7 @@ Lidl DE-Kirchen Jungenthaler Straße,50.81038,7.87174
 Lidl DE-Kirchhain Niederrheinische Straße,50.82475,8.93175
 Lidl DE-Kirchheim am Neckar Kreidlerstraße,49.03634,9.14442
 Lidl DE-Knittlingen,49.020952,8.750698
+Lidl DE-Koblenz Im Teichert,50.35772,7.61094
 Lidl DE-Korbach Arolser Landstraße,51.28132,8.87594
 Lidl DE-Korbach Medebacher Landstraße 23,51.270691,8.855864
 Lidl DE-Kremmen,52.764885,13.026831
@@ -18446,7 +18457,6 @@ Mer AT-Graz Lauzilgasse,47.04517,15.43038
 Mer AT-Graz Plüddemanngasse,47.06405,15.465
 Mer AT-Haag am Hausruck Geierau,48.19952,13.64239
 Mer AT-Hohenems Diepoldsauer Straße,47.373721,9.675551
-Mer AT-Koblenz An der Römervilla,50.3809,7.56613
 Mer AT-Korneuburg Stockerauer Straße,48.35889,16.31184
 Mer AT-Leoben Am Tivoli,47.37651,15.08932
 Mer AT-Leobersdorf Europastraße,47.93148,16.20426
@@ -18540,6 +18550,7 @@ Mer DE-Höchstadt Fürther Straße,49.69597,10.80375
 Mer DE-Ingolstadt Bahnhofstraße,48.74542,11.43614
 Mer DE-Kaarst Hans-Dietrich-Genscher-Straße,51.21175,6.6395
 Mer DE-Kirchlengern Alfred-Krupp-Straße,52.182228,8.657717
+Mer DE-Koblenz An der Römervilla,50.3809,7.56614
 Mer DE-Kolbermoor Carl-Jordan-Straße,47.843179,12.063993
 Mer DE-Lahr Einsteinallee,48.35312,7.80768,30
 Mer DE-Lam Arberstraße,49.19673,13.05185
@@ -23382,6 +23393,7 @@ WSW DE-Wuppertal Mirker Straße,51.26625,7.14414
 WSW DE-Wuppertal Zentrale,51.27919,7.18726,30
 
 WVV DE-Kist Sonnleite,49.73877,9.84222
+WVV DE-Reichenberg Georg-Heinrich-Appl-Straße,49.6881,9.9453
 WVV DE-Sommerhausen Jahnstraße,49.70852,10.02362
 WVV DE-Würzburg Leightonstraße,49.78672,9.98062
 WVV DE-Würzburg Pleichertorstraße,49.79891,9.92584
