@@ -10486,6 +10486,7 @@ EM1 DE-Traunstein Karl-Theodor-Platz,47.868377,12.648086
 EM1 DE-Winhöring Obere Hofmark,48.265377,12.651486
 
 EMB DE-Kleinmachnow An der Stammbahn,52.42014,13.22476
+EMB DE-Kleinmachnow August-Bebel-Platz,52.40468,13.21534
 EMB DE-Michendorf Michendorfer Gartenstraße,52.31406,13.02783
 EMB DE-Teltow Gerhart-Eisler-Straße,52.4019,13.2384
 
@@ -12946,6 +12947,8 @@ ENGIE FR-Romagnieu Aire du Guiers A43,45.57821,5.633827
 ENGIE FR-Vineuil Rue Lavoisier,47.57376,1.36962
 ENGIE FR-Vitrac-sur-Montane Aire Corrèze,45.360055,1.937966
 ENGIE NL-Den Haag Van Bleiswijkstraat,52.09403,4.28025
+
+Eni AT-Vorchdorf Asamerstraße,48.01096,13.92453
 
 Enio AT-Flughafen Wien Ausfahrtsstraße,48.124247,16.559234
 Enio AT-Korneuburg Laaer Straße,48.36037,16.34948
@@ -16526,6 +16529,7 @@ IONNA US-Daytona Beach FL W International Speedway Blvd,29.19163,-81.07506
 IONNA US-Festus MO West Gannon Dr,38.2098,-90.4019
 IONNA US-Forest Park GA Frontage Rd,33.61703,-84.3966
 IONNA US-Fort Pierce FL Selvitz Rd,27.37507,-80.36725
+IONNA US-Freehold Township NJ,40.20802,-74.3531
 IONNA US-Fruita CO Kokopelli Blvd,39.15076,-108.73747
 IONNA US-Garner NC NC-42,35.60538,-78.56672
 IONNA US-Gilman IL US-24,40.75143,-87.99898
@@ -22240,6 +22244,7 @@ TEAG DE-Bad Liebenstein Ruhlaer Straße,50.816667,10.35045
 TEAG DE-Bad Lobenstein Parkstraße,50.447951,11.640331
 TEAG DE-Bad Salzungen Leimbacher Straße,50.811864,10.206822
 TEAG DE-Bad Salzungen Platz an den Beeten,50.810207,10.220363
+TEAG DE-Bad Salzungen Untere Breite,50.81083,10.22093
 TEAG DE-Bad Salzungen Werrastraße,50.815174,10.228835
 TEAG DE-Barchfeld-Immelborn Salzunger Straße,50.795845,10.275135
 TEAG DE-Beeskow Ringstraße,52.172949,14.251796
@@ -23450,6 +23455,7 @@ ZSE SK-Bratislava Dunajská,48.1445,17.1142
 ZSE SK-Bratislava Jelačičova,48.156915,17.130352
 ZSE SK-Bratislava Námestie Franza Liszta,48.15626,17.1068
 ZSE SK-Bratislava Vazovova,48.15439,17.1176
+ZSE SK-Chocholná-Velčice Eurofuel,48.8703,17.95632
 ZSE SK-Košice Toryská,48.71565,21.23859
 ZSE SK-Matejovce Štefánikova,49.073022,20.328902
 ZSE SK-Pezinok Šenkvická cesta,48.29124,17.27924
