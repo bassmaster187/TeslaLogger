@@ -2429,6 +2429,7 @@ Supercharger-V3 FI-Lohja,60.29249,24.06216
 Supercharger-V3 FI-Mikkeli,61.688444,27.280711
 Supercharger-V4 FI-Mäntsälä,60.6251,25.29016
 Supercharger FI-Paimio,60.442961,22.605621
+Supercharger-V4 FI-Parkano,62.00557,23.00974
 Supercharger-V3 FI-Pello,66.80876,23.99627,20
 Supercharger-V4 FI-Pori,61.49468,21.798
 Supercharger-V4 FI-Porvoo,60.39293,25.61051
@@ -3744,7 +3745,7 @@ Supercharger PL-Warszawa Belwederska,52.20767,21.02924
 Supercharger-V4 PL-Warszawa South,52.1661,21.01745
 Supercharger-V3 PL-Warszawa Ząbki,52.3019,21.08816
 Supercharger-V4 PL-Wrocław,51.05185,16.97247
-Supercharger-V4 PL-Zaluski,52.514357,20.528801
+Supercharger-V4 PL-Załuski,52.51436,20.5288
 
 Supercharger-V4 PT-Alcantarilha,37.1506,-8.36443
 Supercharger-V4 PT-Alcácer do Sal,38.39183,-8.5138
@@ -7623,6 +7624,7 @@ ARAL DE-Neumarkt in der Oberpfalz Oberes Moos,49.25953,11.45867
 ARAL DE-Neuss Bergheimer Straße,51.18125,6.68838
 ARAL DE-Niederdorf Neue Schichtstraße,50.7248,12.77875
 ARAL DE-Niederwinkling Industriestraße,48.89393,12.80057
+ARAL DE-Niederzier Römerstraße,50.8664,6.43504
 ARAL DE-Norden Bahnhofstraße,53.58828,7.21853
 ARAL DE-Nürnberg Erlanger Straße,49.47416,11.06474
 ARAL DE-Nürnberg Münchenerstraße,49.40135,11.11612,30
@@ -9874,6 +9876,7 @@ eCarUp CH-Näfels Tschachenstrasse,47.0936,9.06822
 eCarUp CH-Rafz Badener Landstrasse,47.60951,8.53411
 eCarUp CH-Rapperswil-Jona Oberseestrasse,47.22377,8.82513
 eCarUp CH-Schwanden Bahnhofstrasse,46.99737,9.07774
+eCarUp CH-Sevelen Gärtlistrasse,47.12322,9.4916
 eCarUp CH-Thun Grabenstrasse,46.76209,7.627
 eCarUp CH-Untersiggenthal Landstrasse,47.49633,8.2682
 eCarUp CH-Volketswil Hölzliwisenstrasse,47.37835,8.679815
@@ -10236,6 +10239,7 @@ Electra BE-Auderghem Chaussée de Wavre,50.794779,4.478889
 Electra BE-Maasmechelen Koninginnelaan,50.98633,5.7015
 Electra BE-Zandhoven Liersebaan,51.198904,4.643527
 Electra CH-Bern Mingerstrasse,46.9592,7.46917
+Electra DE-Chemnitz Bergstraße,50.84327,12.90854
 Electra ES-Sant Cugat Shopping Center,41.48302,2.0529
 Electra FR-Aire de Arzens,43.21972,2.21619,30
 Electra FR-Aire de Bages,43.1137,2.9545
@@ -12581,6 +12585,7 @@ EnelX IT-Latisana Via Crosere,45.78654,13.00922
 EnelX IT-Lazise Via Gardesana,45.49592,10.73872,20
 EnelX IT-Lecce Stazione di Ricarica,40.353177,18.171802,10
 EnelX IT-Legnano Via Fabio Filzi,45.607315,8.927481
+EnelX IT-Legnano Via Monsignor Eugenio Gilardelli,45.59435,8.9201
 EnelX IT-Lipomo V. Statale per Lecco,45.79717,9.11861
 EnelX IT-Livorno Via Giovanni Gelati,43.52923,10.32936
 EnelX IT-Lucca Via Giacomo Puccini,43.84837,10.47272
@@ -12696,7 +12701,7 @@ enercity DE-Burgwedel Hannoversche Straße,52.491621,9.858397
 enercity DE-Hannover Am Kläperberg,52.390793,9.723145
 enercity DE-Hannover Archivstraße,52.369924,9.729604
 enercity DE-Hannover Badenstedter Straße,52.359904,9.679726
-enercity DE-Hannover Bandelstraße,52.361749,9.754247
+enercity DE-Hannover Bandelstraße,52.36175,9.75425,25
 enercity DE-Hannover Berckhusenstraße,52.373836,9.789096
 enercity DE-Hannover Braunstraße,52.373201,9.720251
 enercity DE-Hannover Davenstedter Straße,52.36693,9.69973
@@ -12734,6 +12739,7 @@ enercity DE-Hannover Rudolf-v.-Bennigsen Ufer,52.359542,9.742319
 enercity DE-Hannover Sahlkamp,52.41306,9.73455
 enercity DE-Hannover Schierholzstraße,52.400368,9.823762
 enercity DE-Hannover Schloßstraße,52.37133,9.7307
+enercity DE-Hannover Stephansplatz,52.362,9.75447,25
 enercity DE-Hannover Sutelstraße,52.40879,9.800892
 enercity DE-Hannover Tiergartenstraße,52.361444,9.828337
 enercity DE-Hannover Tiergartenstraße,52.36187,9.8324
@@ -12979,6 +12985,7 @@ ENTEGA DE-Darmstadt Frankfurter Straße,49.886491,8.651784
 ENTEGA DE-Darmstadt Kasinostraße,49.88339,8.64826,30
 ENTEGA DE-Groß-Umstadt Georg-August-Zinn-Straße,49.872049,8.914015
 ENTEGA DE-Michelstadt Am Festplatz,49.6794,9.00118
+ENTEGA DE-Mörlenbach Schmittgasse,49.59973,8.73696
 ENTEGA DE-Rödermark Am Schwimmbad,49.976334,8.803954,18
 ENTEGA DE-Weiterstadt LOOP5,49.89237,8.60564
 ENTEGA DE-Weiterstadt LOOP5,49.8931,8.60577
@@ -13218,6 +13225,7 @@ Evie AU-Warwick QLD Acacia Ave,-28.21725,152.03082
 Eviny DE-Bad Saulgau Platzstraße,48.00916,9.50906
 Eviny DE-Bad Windsheim Rothenburger Straße,49.498535,10.410445
 Eviny DE-Blaubeuren Württemberger Straße,48.4025,9.79016
+Eviny DE-Delitzsch Raiffeisenstraße,51.51217,12.33592
 Eviny DE-Düren Neusser Straße,50.842644,6.486259
 Eviny DE-Gaildorf Schmiedstraße,48.999267,9.772956
 Eviny DE-Halver Von-Vincke-Straße,51.189726,7.503823
@@ -16262,6 +16270,7 @@ Ionity FR-Auray Av. de l’Océan,47.66472,-3.00339,30
 Ionity FR-Autoport du Freney,45.1968,6.62308
 Ionity FR-Baie de Somme,50.16723,1.755877
 Ionity FR-Bernolsheim Rte de Brumath,48.74788,7.68647
+Ionity FR-Bessoncourt Zone des trois Couronnes,47.6425,6.91425
 Ionity FR-Blois Ménars,47.664023,1.387813
 Ionity FR-Blois Villerbon,47.665885,1.387757
 Ionity FR-Bois Guillerot,47.030917,5.10791
@@ -19710,7 +19719,7 @@ Pfalzwerke DE-Halle Delitzscher Straße,51.47846,12.00306
 Pfalzwerke DE-Hamburg Amsinckstraße 73,53.542805,10.02649
 Pfalzwerke DE-Hamburg Deelböge 21,53.602848,9.988619
 Pfalzwerke DE-Hamburg-Eidelstedt Holsteiner Chaussee,53.61415,9.90585
-Pfalzwerke DE-Hannover Bornumerstraße 19,52.358973,9.710803
+Pfalzwerke DE-Hannover Bornumer Straße,52.35897,9.7108
 Pfalzwerke DE-Hatzenbühl Bleichstraße,49.11236,8.25057
 Pfalzwerke DE-Hauenstein Alte Bundesstraße,49.200069,7.836664
 Pfalzwerke DE-Hauenstein Schulstraße,49.191417,7.855028
@@ -20901,6 +20910,7 @@ Shell DE-Dahlwitz-Hoppegarten Lindenallee,52.51537,13.6695
 Shell DE-Darmstadt Rüdesheimer Straße,49.853213,8.644191
 Shell DE-Dasing Laimeringer Straße,48.389921,11.066027
 Shell DE-Deizisau Seewiesenweg,48.715078,9.3777
+Shell DE-Delitzsch Leipziger Straße,51.51225,12.33742
 Shell DE-Dessau-Roßlau Kiefernweg,51.889534,12.272161
 Shell DE-Dietzenbach Justus-von-Liebig-Straße,50.00282,8.79405
 Shell DE-Dillenburg Frankfurter Straße,50.73567,8.29052
@@ -22405,7 +22415,6 @@ Threeforce DE-Lottstetten Industriestraße8,47.6339,8.5812
 Threeforce DE-Luhden Hainekamp 2,52.230441,9.087431
 Threeforce DE-Lübben Frankfurter Straße 82,51.948563,13.917748
 Threeforce DE-Lüneburg Zeppelinstraße 1 a,53.248117,10.467551
-Threeforce DE-Mörlenbach Schmittgasse 1,49.599732,8.736956
 Threeforce DE-München Eberwurzstraße,48.19744,11.55545
 Threeforce DE-Nordhorn Ernst-Heinkel-Straße 2,52.463691,7.161117
 Threeforce DE-Ober Mörlen Hasselhecker Straße,50.36392,8.692
@@ -23307,6 +23316,7 @@ Westfalen DE-Rheda-Wiedenbrück Bielefelderstraße,51.845972,8.320647
 Westfalen DE-Rheinbach Meckenheimer Straße,50.62501,6.960919
 Westfalen DE-Rödinghausen Osnabrücker Straße,52.20028,8.4567
 Westfalen DE-Schloß Holte-Stukenbrock Marienstraße,51.90263,8.61637
+Westfalen DE-Schloß Holte-Stukenbrock Marktweg,51.9068,8.6121
 Westfalen DE-Senden Münsterstraße,51.860353,7.492308
 Westfalen DE-Soest Arnsbergerstraße,51.560229,8.10422
 Westfalen DE-Steinfurt Carl-Benz-Straße,52.158601,7.319959
@@ -23876,6 +23886,7 @@ DE Köln Brügelmannstraße 3,50.943937,6.985898
 DE Köln Esser,51.03807,6.91592
 DE Köln Neumarkt Passage,50.93734,6.9472
 DE Köln Opladener Straße,50.939697,6.974031
+DE Köln smartvillage,50.96518,7.01527
 DE Laatzen Connox,52.30093,9.84123
 DE Langen (Hessen) esatus,49.987575,8.678133,35
 DE Leer Gaswerkstraße,53.23147,7.45039
