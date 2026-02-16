@@ -2103,7 +2103,7 @@ Supercharger-V4 DE-Oberkrämer,52.70812,13.106
 Supercharger-V4 DE-Obertshausen,50.075294,8.8577
 Supercharger-V4 DE-Offenbach,50.08887,8.76088
 Supercharger-V3 DE-Offenburg,48.469907,7.931822
-Supercharger-V4 DE Offenburg Wilhelm-Röntgen-Straße,48.473203,7.92516
+Supercharger-V4 DE Offenburg Wilhelm-Röntgen-Straße,48.47302,7.92473
 Supercharger-V4 DE-Oldenburg in Holstein,54.2871,10.87714
 Supercharger-V3 DE-Paderborn,51.710867,8.713883
 Supercharger-V3 DE-Panketal,52.620771,13.541551,40
@@ -8424,6 +8424,7 @@ ChargePoint US-Kalkaska MI US-131,44.74319,-85.17578
 ChargePoint US-Kanab UT N 100 E,37.04846,-112.52624
 ChargePoint US-Kawkawlin MI E Beaver Rd,43.66771,-84.01506
 ChargePoint US-Kearney NE W Talmadge Rd,40.674653,-99.093111
+ChargePoint US-Little Rock AR S Woodrow St,34.7446,-92.30585
 ChargePoint US-Moab UT N 100 W,38.57783,-109.55246
 ChargePoint US-Monticello UT South Main Street,37.869552,-109.343464
 ChargePoint US-Okemah OK S Woody Guthrie St,35.42425,-96.29889
@@ -10291,6 +10292,7 @@ Electrify-America US-Bridgeport CA Main St,38.25516,-119.23202
 Electrify-America US-Bridgewater NJ Promenade Blvd,40.56189,-74.55378
 Electrify-America US-Cedar City UT S Providence Center Dr,37.65477,-113.086737
 Electrify-America US-Cheektowaga NY Walden Ave,42.90934,-78.74461
+Electrify-America US-Clarksville AR Market St,35.4498,-93.4597
 Electrify-America US-Clifton NJ Kingsland Rd,40.82432,-74.13654
 Electrify-America US-Denville NJ W Main St,40.89386,-74.47838
 Electrify-America US-Douglasville GA Bill Arp Rd,33.7241,-84.76346
@@ -10300,6 +10302,7 @@ Electrify-America US-Edison NJ U.S. Rte 1,40.5116,-74.3848
 Electrify-America US-Elizabeth NJ Kapkowski Rd,40.66237,-74.1733
 Electrify-America US-Fairfield NJ US-46 E,40.88971,-74.26992
 Electrify-America US-Flemington NJ US-202,40.49765,-74.85646
+Electrify-America US-Forrest City AR Deaderick Rd,35.02916,-90.7946
 Electrify-America US-Fort Morgan CO Barlow Rd,40.26132,-103.77123
 Electrify-America US-Genoa OH Blue Heron Service Plaza,41.491074,-83.366741,15
 Electrify-America US-Genoa OH Wyandot Service Plaza,41.489613,-83.370481,15
@@ -10465,6 +10468,7 @@ eLoaded DE-Ulm Magirus-Deutz-Straße,48.3984,9.95808,70
 eLoaded DE-Zusmarshausen Am Innovationspark,48.407,10.59997,99
 
 Elocity PL-Człuchów Średnia,53.665,17.3515
+Elocity PL-Koszalin Zwycięstwa,54.1895,16.17147
 Elocity PL-Proszenie 1B,51.46094,19.78156
 Elocity PL-Siemianowice Śląskie Elizy Orzeszkowej,50.320105,19.010029
 Elocity PL-Warszawa Aleja Krakowska,52.17339,20.93957
@@ -12397,6 +12401,7 @@ EnBW DE-Weissach Leonberger Straße,48.83248,8.9123
 EnBW DE-Weissach Seitenstraße,48.834,8.91345
 EnBW DE-Weißwasser Sachsendamm,51.498174,14.62119
 EnBW DE-Wellendingen Schloßplatz,48.146975,8.701815
+EnBW DE-Welschbillig Op Kullert,49.8563,6.55467
 EnBW DE-Welzheim Kirchplatz,48.875362,9.634436
 EnBW DE-Wendelstein Rother Straße,49.3344,11.11436
 EnBW DE-Wendlingen am Neckar Am Marktplatz,48.671139,9.379444
@@ -13123,6 +13128,7 @@ etecnic ES-Vilanova i la Geltrú Passeig Marítim,41.21605,1.73325
 Eulektro DE-Berlin Platz der Luftbrücke,52.47765,13.3868
 Eulektro DE-Bremen Am Dobben,53.0781,8.82284
 Eulektro DE-Bremen Johann-Jacobs-Straße,53.08656,8.7837
+Eulektro DE-Bremen Werderstraße,53.07035,8.8071
 Eulektro DE-Krefeld Odilia-Von-Goch-Strasse,51.36605,6.49727
 Eulektro DE-Schwanewede Molkereiweg,53.23137,8.59024
 Eulektro DE-Stuhr Delmenhorster Straße,52.99375,8.76883
@@ -16710,6 +16716,7 @@ K-Lataus FI-Kauhajoki Savikyläntie,62.43417,22.17694
 K-Lataus FI-Kotka Jumalniementie,60.505419,26.912911
 K-Lataus FI-Kouvola Tervasharjunkatu,60.87586,26.65345
 K-Lataus FI-Kuusamo Luomantie,65.95627,29.1614
+K-Lataus FI-Lieksa Pielisentie,63.3182,30.0246
 K-Lataus FI-Mäntsälä Sälinkääntie,60.63753,25.3162
 K-Lataus FI-Oulu Metsokankaantie,64.95716,25.52752
 K-Lataus FI-Paimio Jokipellontie,60.45541,22.67942
@@ -22248,6 +22255,7 @@ TCB ES-Madrid Calle de Fuencarral,40.42963,-3.70251
 TCB ES-Navalmoral Autovía del Suroeste,39.873511,-5.549847
 
 TEA HU-Balatonalmádi Szabolcs u.,47.040134,18.019039
+TEA HU-Biatorbágy Premier Outlet,47.46586,18.88535
 TEA HU-Budapest Gyömrői utca,47.46422,19.15922,25
 TEA HU-Cegléd Hrsz,47.1851,19.93155
 TEA HU-Gyenesdiá Kereskedők útja,46.77272,17.276458
