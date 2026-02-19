@@ -4,6 +4,7 @@ services:
   teslalogger:
     build: docker/teslalogger/.
     restart: always
+    init: true
     volumes:
       - ./TeslaLogger/www:/var/www/html
       - ./TeslaLogger/bin:/etc/teslalogger
