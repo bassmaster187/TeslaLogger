@@ -140,6 +140,7 @@ Supercharger-V4 AU-Mansfield VIC,-37.06047,146.09837
 Supercharger AU-Maroochydore,-26.653878,153.087613
 Supercharger-V4 AU-Maryborough West QLD,-25.4878,152.66365
 Supercharger AU-Melbourne-Richmond,-37.831997,144.995807
+Supercharger-V4 AU-Merimbula NSW,-36.88574,149.90823
 Supercharger-V3 AU-Mildura VIC,-34.209468,142.139923
 Supercharger-V4 AU-Miranda NSW,-34.02716,151.11868
 Supercharger-V3 AU-Moe VIC,-38.172989,146.259475
@@ -2202,7 +2203,7 @@ Supercharger-V4 DE-Wiesbaden,50.05983,8.34516
 Supercharger-V4 DE-Wiesbaden (Globus),50.0566,8.34306
 Supercharger-V4 DE-Wiesbaden-Äppelallee,50.046184,8.219883
 Supercharger-V4 DE-Wildau,52.3136,13.60497,40
-Supercharger-V4 DE-Willich,51.279442,6.508057
+Supercharger-V4 DE-Willich,51.28124,6.50927
 Supercharger-V4 DE-Wilnsdorf,50.8163,8.0864,90
 Supercharger-V4 DE-Windischeschenbach,49.80413,12.18416,22
 Supercharger-V3 DE Winsen (Luhe),53.35028,10.147426
@@ -2659,7 +2660,7 @@ Supercharger-V4 FR-Phalsbourg,48.7728,7.24323
 Supercharger FR-Poitiers,46.670356,0.362651
 Supercharger-V3 FR-Poitiers Sud,46.547666,0.296006
 Supercharger-V4 FR-Pontarlier,46.909145,6.337706
-Supercharger-V4 FR-Porte-de-Savoie,45.503948,6.036777
+Supercharger-V4 FR-Porte-de-Savoie,45.50416,6.037
 Supercharger-V4 FR-Porto-Vecchio,41.570655,9.273817
 Supercharger-V4 FR-Pouilly-en-Auxois,47.248082,4.567647
 Supercharger-V4 FR-Quimper,48.01563,-4.081669
@@ -2790,6 +2791,7 @@ Supercharger GB-Dursley,51.656431,-2.434545
 Supercharger GB-Edinburgh,55.945361,-3.366667
 Supercharger-V3 GB-Edinburgh - Newbridge,55.933836,-3.407621
 Supercharger GB-Elveden,52.38641,0.664606
+Supercharger-V4 GB-Errol,56.42058,-3.22547
 Supercharger GB-Eurocentral,55.835903,-3.984203
 Supercharger-V3 GB-Exeter - Exeter Service Centre,50.693941,-3.512121
 Supercharger-V3 GB-Exeter Darts Farm,50.68617,-3.44997
@@ -3004,6 +3006,7 @@ Supercharger-V3 HU-Sormás,46.46054,16.90676
 Supercharger HU-Szeged,46.274868,20.102464
 Supercharger-V4 HU-Szeged Rókus,46.26964,20.13825
 Supercharger-V3 HU-Szigetszentmiklós,47.383471,19.026911
+Supercharger-V4 HU-Szombathely,47.2372,16.6549
 Supercharger-V3 HU-Székesfehérvár,47.149632,18.431349
 Supercharger-V4 HU-Tatabánya,47.59506,18.3869
 Supercharger-V3 HU-Törökbálint,47.43944,18.88963
@@ -9867,6 +9870,7 @@ eCarUp CH-Eich Vogelsang,47.1611,8.17835
 eCarUp CH-Flims Via Nova,46.83297,9.28274
 eCarUp CH-Huttwil Schwende,47.1159,7.86762
 eCarUp CH-Kallnach Oberfeld,47.01769,7.23358
+eCarUp CH-Kerns Stanserstrasse,46.9027,8.27776
 eCarUp CH-Langenthal Farbgasse,47.20996,7.78932
 eCarUp CH-Langenthal Talstrasse,47.21085,7.7859
 eCarUp CH-Luzern Lidostrasse,47.05277,8.33521
@@ -15697,6 +15701,7 @@ illwerke-vkw AT-Hall in Tirol Krippgasse,47.2826,11.50677
 illwerke-vkw AT-Hittisau Platz,47.45695,9.96042
 illwerke-vkw AT-Hittisau Platz,47.45838,9.95963
 illwerke-vkw AT-Hohenems Diepoldsauer Straße,47.374075,9.674825
+illwerke-vkw AT-Höchst Gartenstraße,47.4589,9.64587
 illwerke-vkw AT-Hörbranz Amerikaweg,47.54533,9.73745
 illwerke-vkw AT-Kappl Silvrettastraße,47.03906,10.33163
 illwerke-vkw AT-Krumbach Dorf,47.48366,9.93458
@@ -22212,7 +22217,7 @@ TankE DE-Köln Ottostraße,50.952359,6.923396
 TankE DE-Köln Peterstraße,50.93386,6.949753
 TankE DE-Köln Pfarrer-Maybaum-Weg,50.97614,7.0396
 TankE DE-Köln Pfarrer-Oermann-Platz,50.89377,7.07819
-TankE DE-Köln Picassoplatz RTL,50.94356,6.97309
+TankE DE-Köln Picassoplatz RTL,50.9439,6.9732,60
 TankE DE-Köln Prälat-van-Acken-Straße,50.925322,6.897056
 TankE DE-Köln Reiherstraße,50.874574,6.958476
 TankE DE-Köln Rosenstraße,50.926567,6.958534
