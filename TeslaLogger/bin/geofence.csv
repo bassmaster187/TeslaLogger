@@ -2203,7 +2203,7 @@ Supercharger-V4 DE-Wiesbaden,50.05983,8.34516
 Supercharger-V4 DE-Wiesbaden (Globus),50.0566,8.34306
 Supercharger-V4 DE-Wiesbaden-Äppelallee,50.046184,8.219883
 Supercharger-V4 DE-Wildau,52.3136,13.60497,40
-Supercharger-V4 DE-Willich,51.28124,6.50927
+Supercharger-V4 DE-Willich,51.2807,6.50876
 Supercharger-V4 DE-Wilnsdorf,50.8163,8.0864,90
 Supercharger-V4 DE-Windischeschenbach,49.80413,12.18416,22
 Supercharger-V3 DE Winsen (Luhe),53.35028,10.147426
@@ -2558,6 +2558,7 @@ Supercharger FR-Châlons-en-Champagne,48.991982,4.24532
 Supercharger FR-Châteauroux,46.863047,1.716028
 Supercharger-V4 FR-Claye-Souilly,48.946229,2.688222
 Supercharger-V4 FR-Clermont-Ferrand,45.78598,3.14158
+Supercharger-V4 FR-Coignières,48.75485,1.93472
 Supercharger-V3 FR-Colmar,48.1289,7.368817
 Supercharger-V4 FR-Colombe,45.396343,5.466685
 Supercharger-V3 FR-Dardilly,45.820165,4.760176
@@ -3001,7 +3002,7 @@ Supercharger-V4 HU-Kiskunfélegyháza,46.67579,19.8197
 Supercharger HU-Miskolc,48.058002,20.799201
 Supercharger-V3 HU-Obuda,47.561058,19.04932
 Supercharger-V4 HU-Pécs,46.06448,18.1824
-Supercharger-V4 HU-Siófok,46.895,18.05783
+Supercharger-V4 HU-Siófok,46.89487,18.05806
 Supercharger-V3 HU-Sormás,46.46054,16.90676
 Supercharger HU-Szeged,46.274868,20.102464
 Supercharger-V4 HU-Szeged Rókus,46.26964,20.13825
@@ -13152,6 +13153,8 @@ EV-Sylt DE-List Hafenstraße,55.019234,8.438824
 EV-Sylt DE-Sylt Andreas-Nielsen-Straße,54.909464,8.310061
 EV-Sylt DE-Sylt Maybachstraße,54.90665,8.3059
 
+evb DE-Butzbach Himmrichsweg,50.4378,8.67952
+evb DE-Butzbach Schloßstraße,50.43322,8.67153
 EVB DE-Eisenach Adam-Opel-Straße,50.980301,10.297469
 EVB DE-Eisenach Hinter der Mauer,50.9763,10.31766
 EVB DE-Eisenach Sportpark,50.98334,10.309
@@ -13183,6 +13186,8 @@ evd DE-Dormagen Herrenweg,51.12369,6.85119
 evd DE-Dormagen Langemarkstraße,51.09337,6.83572
 evd DE-Dormagen Lübecker Straße,51.094089,6.81296
 evd DE-Dormagen Unter den Hecken,51.09368,6.84404
+
+evDirect HU-Siófok Vak Bottyán u.,46.89508,18.05755,20
 
 Evergo DO-Bonao Calle Duarte,18.99137,-70.4317
 Evergo DO-Santo Domingo Av 27 de Febrero,18.47575,-69.91418
@@ -13326,6 +13331,7 @@ EVN AT-Eggenburg Pulkauerstraße,48.648,15.8231
 EVN AT-Ennsdorf Straße 3,48.22133,14.5061
 EVN AT-Grafenwörth Gewerbepark,48.41187,15.776
 EVN AT-Grimmenstein Wechselbundesstrasse,47.63344,16.13192
+EVN AT-Gänserndorf Neusiedler Straße,48.3351,16.71196
 EVN AT-Göllersdorf Hammerschmiedstraße,48.49825,16.11453
 EVN AT-Herzogenburg Traismauerstraße,48.290148,15.694952
 EVN AT-Horn Prager Straße,48.66136,15.65458
@@ -14767,6 +14773,7 @@ Fastned NL-Rosmalen Graafsebaan,51.70282,5.35835
 Fastned NL-Sandelingen-Oost,51.834753,4.620995
 Fastned NL-Scheiwijk Hoogblokland A27,51.871617,4.962894
 Fastned NL-Selnisse,51.49875,3.77227
+Fastned NL-Smokkelpad,52.4337,6.62864
 Fastned NL-Son Sonse Heide A50,51.535544,5.478894
 Fastned NL-Stadionweg,51.89654,4.539005
 Fastned NL-Streepland A16,51.69066,4.65763,25
@@ -14945,6 +14952,8 @@ Freshmile FR-Ploërmel Bd Laennec,47.93218,-2.38929
 Freshmile FR-Rousset Av. Georges Vacher,43.46506,5.60861,30
 Freshmile FR-Saint-Lô Les Cinq Chemins,49.09908,-1.08084
 Freshmile FR-Soufflenheim Rue de Drusenheim,48.81953,7.96402
+
+FSG DE-Leinfelden-Echterdingen Flughafenstraße,48.6936,9.19667
 
 Galp PT-Alcobaça R. Gen. Humberto Delgado,39.55967,-8.97808
 Galp PT-Aveiras de Cima Área de Serviço,39.124,-8.90713
@@ -15601,6 +15610,7 @@ Ignitis LT-Vilnius Vikingų g.,54.6533,25.27893
 Ignitis LT-Šilagalys Panevėžio aplinkelis,55.67072,24.34852
 
 iHunt-EV RO-București Calea Ion Zăvoi,44.50375,26.08545
+iHunt-EV RO-Sibiu Strada Ștefan cel Mare,45.7887,24.19364
 iHunt-EV RO-Târgu Mureș Strada Regele Ferdinand,46.53285,24.59213
 iHunt-EV RO-Șelimbăr Bulevardul Mihai Viteazul,45.77288,24.1629
 
@@ -17288,7 +17298,6 @@ LichtBlick DE-Bietigheim-Bissingen Schwarzwaldstraße,48.951294,9.121405
 LichtBlick DE-Binzen Konrad-Zuse-Straße,47.623705,7.610557
 LichtBlick DE-Bitburg Graf-Zeppelin-Straße,49.56572,6.32278
 LichtBlick DE-Buchen Hettinger Straße,49.52214,9.33259
-LichtBlick DE-Butzbach Himmrichsweg,50.437798,8.679525
 LichtBlick DE-Büchlberg Goldener Steig,48.653005,13.50688
 LichtBlick DE-Cham Rachelstraße,49.2284,12.67346
 LichtBlick DE-Dessau-Roßlau Wörlitzer Platz,51.841485,12.240192
@@ -21810,6 +21819,7 @@ SW-Landshut DE-Landshut Isargestade,48.53986,12.15252
 SW-Langen DE-Langen Liebigstraße,49.994277,8.65773
 SW-Lauf DE-Lauf an der Pegnitz Eckertstraße,49.50715,11.28489
 SW-LB DE-Ludwigsburg Brenzstraße,48.892324,9.182775
+SW-LB DE-Ludwigsburg Groenerstraße,48.8929,9.1729
 SW-LB DE-Ludwigsburg Karl-Haußmann-Straße,48.88928,9.16427
 SW-LE DE-Leinfelden-Echterdingen Häuserwiesenstraße,48.704338,9.118296
 SW-Leipzig DE-Leipzig Am Sportforum,51.34374,12.353
@@ -22404,6 +22414,7 @@ TEAG DE-Zeulenroda-Triebes Am Waldstadion,50.661353,11.995857
 team-Emobility DE-Köln Heumarkt,50.93537,6.96162
 team-Emobility DE-Langenhagen Maritimstraße,52.46,9.6979
 team-Emobility DE-Ulm Basteistraße Maritim,48.400378,10.005348
+team-Emobility DE-Waldkirch Schlettstadtallee,48.09416,7.95903
 
 teamstrom DE-Bad Oldesloe Hamburger Straße,53.803266,10.363653
 teamstrom DE-Flensburg Marie-Curie-Ring,54.763163,9.449304
@@ -24032,6 +24043,7 @@ DE Stuttgart Flughafen,48.690548,9.19193
 DE Stuttgart Flughafen P12,48.691895,9.195894
 DE Stuttgart Gabler,48.82546,9.09124
 DE Stuttgart Pfaffenwaldring ARENA2036,48.748637,9.109677
+DE Stuttgart Vector,48.82386,9.09775
 DE Trassenheide Waldhof Hotel,54.08789,13.8743
 DE Troisdorf Luxemburger Straße,50.819441,7.114892
 DE Vaihingen an der Enz Neuss,48.95526,8.98947
