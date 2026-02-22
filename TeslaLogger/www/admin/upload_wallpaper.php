@@ -50,6 +50,9 @@ if (!in_array($fileExtension, ['jpg', 'jpeg', 'png'])) {
 // Create wallpaper directory structure
 $wallpaperDir = "/tmp/teslalogger/wallpapers/$carid";
 
+if (!isDocker())
+    $wallpaperDir = "/var/www/html/admin/wallpapers/$carid";
+
 if (!file_exists($wallpaperDir)) {
     if (!mkdir($wallpaperDir, 0755, true)) {
         error_log("Failed to create wallpaper directory: $wallpaperDir");
