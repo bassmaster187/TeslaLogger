@@ -171,7 +171,7 @@ function sf(lat, lng, radius)
 
   </script>
 	</head>
-	<body style="padding-top: 5px; padding-left: 10px;">
+	<body>
 	<?php 
     include "menu.php";
     echo(menu("Geofencing"));
