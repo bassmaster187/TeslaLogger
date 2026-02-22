@@ -226,6 +226,7 @@ namespace TeslaLogger
         public string _access_type;
         public bool _virtual_key;
         internal bool vehicle_location = true;
+        internal DateTime lastSendDegradationData = DateTime.MinValue;
 
         [MethodImpl(MethodImplOptions.Synchronized)]
         internal TeslaAPIState GetTeslaAPIState() { return teslaAPIState; }
@@ -918,6 +919,7 @@ namespace TeslaLogger
                 {
                     RefreshToken();
                     UpdateTeslalogger.CheckForNewVersion();
+                    CheckSendDegradationData();
 
                     if (!FleetAPI)
                     {
@@ -1183,11 +1185,36 @@ namespace TeslaLogger
             }
         }
 
+        private void CheckSendDegradationData()
+        {
+            try
+            {
+                if (DateTime.Now.AddDays(-1) > lastSendDegradationData)
+                {
+                    if (Tools.IsShareData())
+                    {
+                        Task.Run(() =>
+                        {
+                            var sd = new ShareData(this);
+                            sd.SendDegradationData();
+                        });
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                SendException2Exceptionless(ex);
+                Logfile.Log(ex.ToString());
+            }
+        }
+
         // if offline, sleep 30000
         // loop until wackup file or back online, sleep 30000 in loop
         private void HandleState_Start()
         {
             RefreshToken();
+
+            CheckSendDegradationData();
 
             if (webhelper.scanMyTesla != null)
             {

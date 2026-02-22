@@ -457,6 +457,8 @@ ORDER BY
                 return;
             }
 
+            car.lastSendDegradationData = DateTime.Now;
+
             try
             {
                 int ProtocolVersion = 1;

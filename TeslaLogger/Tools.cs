@@ -1422,7 +1422,13 @@ namespace TeslaLogger
                     return File.Exists("/tmp/sharedata.txt");
                 }
 
-                string filepath = Path.Combine(FileManager.GetExecutingPath(), "sharedata.txt");
+                string filepath = Path.Combine("/etc/teslalogger", "sharedata.txt");
+                if (File.Exists(filepath))
+                {
+                    return true;
+                }
+
+                filepath = Path.Combine(FileManager.GetExecutingPath(), "sharedata.txt");
                 if (File.Exists(filepath))
                 {
                     return true;
