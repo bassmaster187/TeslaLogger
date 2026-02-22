@@ -12,7 +12,7 @@ if (isset($_REQUEST["carid"]))
 else
 {
 	$_SESSION["carid"] = $carid;
-}
+} 
 
 ?>
 <html lang="<?php echo $json_data["Language"]; ?>">
@@ -55,13 +55,24 @@ else
 				if (stripos($f,".") === 0)
 					continue;
 
-				if (stripos($f,".jpg") > 0 || stripos($f,".png") > 0)
+				if (file_exists("/tmp/wallpapers/".$carid."/".$f))
+				{
+					if (stripos($f,".jpg") > 0 || stripos($f,".png") > 0)
+					{
+						echo("$('#error').text('');\n");
+						echo("$('body').css('background-image','url(\"tmp/wallpapers/".$carid."/".$f. "\")');\n");
+						$wallpaperFound = true;
+						break;
+					}
+				}
+				else
 				{
 					echo("$('#error').text('');\n");
-					echo("$('body').css('background-image','url(\"tmp/wallpapers/".$carid."/".$f. "\")');\n");
+					echo("$('body').css('background-image','url(\"wallpapers/".$carid."/".$f. "\")');\n");
 					$wallpaperFound = true;
 					break;
 				}
+					
 			}
 			
 			if (!$wallpaperFound) {
