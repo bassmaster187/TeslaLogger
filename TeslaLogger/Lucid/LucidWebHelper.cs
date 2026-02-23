@@ -30,7 +30,7 @@ namespace TeslaLoggerNET8.Lucid
         private double longitude;
         private long last_updated_ms;
         private double kwhr;
-        private double kw;
+        private double PS;
         private double front_left_tire_pressure_bar;
         private double rear_left_tire_pressure_bar;
         private double front_right_tire_pressure_bar;
@@ -99,8 +99,8 @@ namespace TeslaLoggerNET8.Lucid
             if (justinsertdb || isDriving)
             {
                 var ts = Tools.ToUnixTime(DateTime.UtcNow) * 1000;
-                _ = SendDataToAbetterrouteplannerAsync(ts, battery_level, speed, false, kw, latitude, longitude);
-                int id = car.DbHelper.InsertPos(ts.ToString(), latitude, longitude, (int)Math.Round(speed), (decimal)kw, car.CurrentJSON.current_odometer, ideal_battery_range, ideal_battery_range, battery_level, car.CurrentJSON.current_inside_temperature, car.CurrentJSON.current_outside_temperature, elevation);
+                _ = SendDataToAbetterrouteplannerAsync(ts, battery_level, speed, false, PS, latitude, longitude);
+                int id = car.DbHelper.InsertPos(ts.ToString(), latitude, longitude, (int)Math.Round(speed), (decimal)PS, car.CurrentJSON.current_odometer, ideal_battery_range, ideal_battery_range, battery_level, car.CurrentJSON.current_inside_temperature, car.CurrentJSON.current_outside_temperature, elevation);
                 car.Log("Insert Pos " + id);
             }
             
@@ -415,12 +415,12 @@ namespace TeslaLoggerNET8.Lucid
 
             if (Math.Abs(p) < 1000)
             {
-                kw = p;
-                car.Log($"kwhr {kwhr} / kwhrdiff {kwhrdiff} / ms {ms} / p: {Math.Round(p, 1)} kW");
+                PS = p * 1.3596;
+                car.Log($"kwhr {kwhr} / kwhrdiff {kwhrdiff} / ms {ms} / p: {Math.Round(PS, 1)} PS");
             }
             else
             {
-                car.Log($"ERROR: kwhr {kwhr} / kwhrdiff {kwhrdiff} / ms {ms} / p: {Math.Round(p, 1)} kW");
+                car.Log($"ERROR: kwhr {kwhr} / kwhrdiff {kwhrdiff} / ms {ms} / p: {Math.Round(PS, 1)} PS");
             }
         }
 
