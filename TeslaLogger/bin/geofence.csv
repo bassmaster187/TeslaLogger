@@ -2142,7 +2142,7 @@ Supercharger-V4 DE-Saarbrücken Innenstadt,49.23915,6.97825
 Supercharger-V4 DE-Sangerhausen,51.45055,11.30448,30
 Supercharger-V3 DE-Satteldorf,49.1811,10.06915,35
 Supercharger-V3 DE-Schierling,48.838255,12.119171,30
-Supercharger-V4 DE-Schipkau,51.5367,13.91035
+Supercharger-V4 DE-Schipkau,51.53672,13.91027
 Supercharger-V3 DE-Schleiz,50.54614,11.8033,60
 Supercharger-V4 DE-Schorndorf,48.8169,9.5383
 Supercharger-V4 DE-Schwaig,49.48155,11.196833
@@ -7090,6 +7090,7 @@ Allego DE-Rostock Hagebaumarkt,54.099039,12.176245
 Allego DE-Rostock Handwerkstraße 1a,54.124824,12.074337
 Allego DE-Rostock Zum Südtor,54.13769,12.1143
 Allego DE-Saarbruecken Neumuehler Weg 83,49.205513,7.020785
+Allego DE-Saarbrücken Dr.-Tietz-Straße,49.23822,6.9599
 Allego DE-Saarbrücken Gasweg 1,49.240842,6.962856
 Allego DE-Salzkotten Geseker Straße,51.66723,8.59135,30
 Allego DE-Satteldorf Marco-Polo-Straße,49.18147,10.06946,15
@@ -11312,6 +11313,7 @@ EnBW DE-Hermaringen Robert-Bosch-Straße,48.590692,10.268147
 EnBW DE-Herne,51.538074,7.178124
 EnBW DE-Herrenberg Benzstraße,48.59915,8.87036
 EnBW DE-Herschbach Rheinstraße,50.56876,7.73684
+EnBW DE-Herscheid Neuer Weg,51.17783,7.74697
 EnBW DE-Hettstedt,51.646759,11.516185
 EnBW DE-Heuchelheim Rodheimer Straße,50.598473,8.627789
 EnBW DE-Heusenstamm Werner-von-Siemens-Straße,50.048875,8.800494
@@ -14654,6 +14656,7 @@ Fastned DE-Nersingen,48.41572,10.09919
 Fastned DE-Neudrossenfeld An der Autobahn,50.03775,11.490149,12
 Fastned DE-Pilsting,48.691977,12.673389
 Fastned DE-Plech Gewerbepark Schönthal,49.664281,11.470788,30
+Fastned DE-Rastplatz Vareler Wald,53.3911,8.1127
 Fastned DE-Rodgau Feldstraße,50.002422,8.88589
 Fastned DE-Rüdenhausen,49.768333,10.342153
 Fastned DE-Schmidgaden,49.43816,12.05377
@@ -17074,6 +17077,7 @@ Kaufland HR-Čibača Sima Savinovića,42.63135,18.16289
 Kaufland HR-Šibenik Vukovarska ul.,43.72244,15.90648
 Kaufland PL-Brodnica,53.25931,19.39631
 Kaufland PL-Gdynia Morska,54.53,18.50442,70
+Kaufland PL-Oleśnica Wspólna,51.2166,17.40412
 Kaufland PL-Sanok Królowej Bony,49.5667,22.20706
 Kaufland PL-Szczecin Andrzeja Struga,53.38489,14.65884
 Kaufland PL-Szczecin Floriana Krygiera,53.392323,14.498953
@@ -18424,6 +18428,7 @@ Mainova DE-Schmitten im Taunus Kanonenstraße,50.269489,8.444861
 Mainova DE-Waldbrunn (Westerwald) In der Struth,50.51855,8.109852
 
 Malanka BY-Baranavichy Баранавічы вуліца Даменікана,53.15517,25.99325
+Malanka BY-Hrodna Гродна вуліца Дубко,53.7022,23.83304
 Malanka BY-Hrodna Гродна вуліца Томіна,53.64967,23.83287
 Malanka BY-Hrodna Гродна проспект Янки Купалы,53.65055,23.8537
 Malanka BY-Kobryn Кобрын M-1 60-й км,52.18147,24.36816
@@ -18438,7 +18443,8 @@ Malanka BY-Minsk Мінск Нацыянальны Архіў Рэспублік
 Malanka BY-Minsk Мінск проезд Масюковщина,53.92608,27.4477
 Malanka BY-Minsk Мінск улица Космонавтов,53.8493,27.4555
 Malanka BY-Novyi Svet Новы Свет М-1 226,53.19055,26.0759,60
-Malanka BY-Posenichi Пасянічы M-10,52.17765,26.06033
+Malanka BY-Posenichi Посеничи M-10,52.17765,26.06033
+Malanka BY-Posenichi Посеничи M-10,52.1785,26.0583
 Malanka BY-Лидский район M-6,53.84464,25.18386
 Malanka BY-Шараи M-6,54.052,26.77017
 
@@ -21231,6 +21237,7 @@ Shell DE-Weida Neustädter Straße,50.777695,12.04717
 Shell DE-Weilerbach Danziger Straße,49.477217,7.63979
 Shell DE-Wendlingen Heinrich-Otto-Straße,48.67426,9.37177
 Shell DE-Westerland Trift,54.904609,8.310817
+Shell DE-Wiesbaden Äppelallee,50.04536,8.21715
 Shell DE-Witzhave Möllner Landstraße,53.56657,10.33128
 Shell DE-Wolfhagen Warburgerstraße,51.4028,9.183616,30
 Shell DE-Wolfsburg Braunschweiger Straße,52.4005,10.75168,30
@@ -22028,7 +22035,7 @@ swisscharge CH-Herisau Industriestrasse,47.38114,9.27745
 swisscharge CH-Hinwil Gossauerstrasse,47.29897,8.83834
 swisscharge CH-Höri Wehntalerstrasse,47.50919,8.51281
 swisscharge CH-Kerzers Bahnhofplatz,46.97416,7.193385
-swisscharge CH-Kloten Flughafen Zürich Parkhaus P6,47.45265,8.56597
+swisscharge CH-Kloten Flughafen Zürich Parkhaus P6,47.45277,8.56638
 swisscharge CH-Landquart Tardisstrasse,46.96057,9.55465
 swisscharge CH-Lauerz Husmatt,47.035831,8.579183
 swisscharge CH-Lupfig Hauserstrasse,47.449639,8.215266
@@ -23517,6 +23524,7 @@ ZSE SK-Bratislava Vazovova,48.15439,17.1176
 ZSE SK-Chocholná-Velčice Eurofuel,48.8703,17.95632
 ZSE SK-Košice Toryská,48.71565,21.23859
 ZSE SK-Matejovce Štefánikova,49.073022,20.328902
+ZSE SK-Petržalka Panónska cesta,48.10715,17.09742
 ZSE SK-Pezinok Šenkvická cesta,48.29124,17.27924
 ZSE SK-Piešťany A. Hlinku,48.59439,17.82519
 ZSE SK-Podunajské Biskupice,48.09495,17.21286
@@ -23738,8 +23746,10 @@ BE Humbeek Molenstraat,50.9634,4.37065
 BE Rotselaar Belparts,50.938946,4.742856
 BY Minsk Мінск 3-і завулак Мажайскага,53.94296,27.5814
 BY Minsk Мінск вуліца Алеся Гаруна,53.91996,27.44848
+BY Minsk Мінск вуліца Каліектарная,53.8999,27.5434
 BY Minsk Мінск вуліца Сямашкі,53.86197,27.49636
 BY Minsk Мінск Картленд,53.91144,27.52007
+BY Minsk Мінск Парк Цівалі,53.9114,27.46703
 BY Minsk Мінск ТЦ Грин Тайм,53.8615,27.63807
 CH Affoltern Blauer Elefant,47.27289,8.4388
 CH Arosa Brüggli,46.77581,9.6648
@@ -24137,6 +24147,7 @@ IT San Leonardo in Passiria Andreus Golf Lodge,46.77938,11.22864
 IT Sanremo Grand Hotel Des Anglais,43.81277,7.76474
 IT Sant’Anna Hotel La Griglia Lago Di Como,45.94034,9.11064
 IT Schenna Hotel Resmairhof,46.68697,11.18822
+IT Sterzing Seniorenwohnheim Wipptal,46.8979,11.42718
 IT Tiers Platschgolerhof,46.47067,11.5099
 IT Vahrn Mautstation Casello Bressanone-Val Pusteria,46.763952,11.643082,20
 IT Vizzola Ticino Pirelli,45.625684,8.677574
@@ -24190,6 +24201,7 @@ SE Tällberg Tällbergsgårdens Hotell,60.82317,14.99487
 SE Umeå U and Me Hotel,63.8245,20.26072
 SI Trojane,46.1881,14.88406
 SK Bratislava Staré Grunty,48.15059,17.0674
+SK Šurany Novozámocká,48.08723,18.16495
 TR Ayazmana Yeni Karakavak Cd.,37.75689,30.57905
 TR Sakarya Mareşal Fevzi Çakmak Blv.,38.78663,30.6053
 UA Cherkasy Gagarina St,49.438087,32.075958
