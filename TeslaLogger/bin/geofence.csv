@@ -1827,6 +1827,7 @@ Supercharger CZ-Plzeň,49.72512,13.326045
 Supercharger-V4 CZ-Praha Zličín,50.05081,14.2952
 Supercharger-V4 CZ-Praha Štěrboholy,50.07136,14.54087
 Supercharger-V4 CZ-Vestec,49.99022,14.49048,60
+Supercharger-V4 CZ-Zličín,50.04965,14.29318
 Supercharger-V4 CZ-Čestlice,50.00276,14.57302
 
 Supercharger-V4 DE-Aachen Tivoli,50.7967,6.10364
@@ -2381,6 +2382,7 @@ Supercharger-V4 ES-Torija,40.748006,-3.033348
 Supercharger-V4 ES-Torre del Mar,36.752408,-4.09659
 Supercharger ES-Torrent Northbound,39.400528,-0.491639,20
 Supercharger ES-Torrent Southbound,39.400668,-0.493125,20
+Supercharger-V4 ES-Torrent Toll-l’Alberca,39.42004,-0.50272
 Supercharger-V4 ES-Totana,37.77605,-1.45422
 Supercharger-V4 ES-Trujillo,39.56539,-5.83312
 Supercharger-V3 ES-Valdepeñas,38.779707,-3.388703
@@ -2561,6 +2563,7 @@ Supercharger-V4 FR-Clermont-Ferrand,45.78598,3.14158
 Supercharger-V4 FR-Coignières,48.75485,1.93472
 Supercharger-V3 FR-Colmar,48.1289,7.368817
 Supercharger-V4 FR-Colombe,45.396343,5.466685
+Supercharger-V4 FR-Cuers,43.2507,6.0955
 Supercharger-V3 FR-Dardilly,45.820165,4.760176
 Supercharger-V4 FR-Dardilly Nord,45.825082,4.761362
 Supercharger FR-Deauville,49.344809,0.096677
@@ -2697,6 +2700,7 @@ Supercharger-V3 FR-Saint-Louis,47.605065,7.543048
 Supercharger-V4 FR-Saint-Pardoux-l’Ortigier,45.306263,1.561602
 Supercharger-V3 FR-Saint-Parres,48.29339,4.13019,70
 Supercharger-V3 FR-Saint-Quentin,49.85898,3.253667
+Supercharger-V4 FR-Saint-Raphaël,43.43577,6.79273
 Supercharger FR-Saintes,45.750026,-0.661637
 Supercharger-V4 FR-Saintes Cours du Maréchal Leclerc,45.753763,-0.653268
 Supercharger-V3 FR-Salaise-sur-Sanne,45.327133,4.805307
@@ -3097,7 +3101,7 @@ Supercharger-V3 IT-Mantua,45.086472,10.856081,30
 Supercharger-V4 IT-Marina di Sibari,39.753241,16.464725
 Supercharger IT-Melegnano,45.34834,9.282206
 Supercharger IT-Mercato San Severino,40.771952,14.746048
-Supercharger-V4 IT-Mestre,45.511667,12.228635
+Supercharger-V4 IT-Mestre,45.5122,12.2299
 Supercharger-V4 IT-Metaponto Tavole Palatine,40.414429,16.816989
 Supercharger-V4 IT-Milan Carugate,45.54473,9.327561
 Supercharger-V3 IT-Milano Urban,45.478476,9.154914
