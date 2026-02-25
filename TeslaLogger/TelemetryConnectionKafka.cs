@@ -19,17 +19,24 @@ namespace TeslaLoggerNET8
         public TelemetryConnectionKafka(Car car) {
             lock (typeof(TelemetryConnectionKafka))
             {
-                if (instance == null)
+                try
                 {
-                    instance = this;
-                    Thread t = new Thread(() => run());
-                    t.Start();
-                }
+                    if (instance == null)
+                    {
+                        instance = this;
+                        Thread t = new Thread(() => run());
+                        t.Start();
+                    }
 
-                var parser = new TelemetryParser(car);
-                parser.InitFromDB();
-                parserDict.TryAdd(car.Vin, parser);
-                vins.Add(car.Vin);
+                    var parser = new TelemetryParser(car);
+                    parser.InitFromDB();
+                    parserDict.TryAdd(car.Vin, parser);
+                    vins.Add(car.Vin);
+                }
+                catch (Exception ex)
+                {
+                    Logfile.Log("Error initializing TelemetryConnectionKafka: " + ex.ToString());
+                }
             }
         }
 

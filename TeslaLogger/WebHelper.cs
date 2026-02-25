@@ -4471,6 +4471,9 @@ WHERE
             string resultContent = "";
             try
             {
+                if (String.IsNullOrEmpty(apiaddress))
+                    return "";
+
                 HttpClient httpclientgetChargingHistoryV2 = GethttpclientgetChargingHistoryV2();
                 using (var request = new HttpRequestMessage(HttpMethod.Get, new Uri($"{apiaddress}api/1/dx/charging/history?pageNo={pageNumber}{(!string.IsNullOrEmpty(vin)?"&vin="+vin:"")}")))
                 {
@@ -4938,6 +4941,12 @@ WHERE
             [MethodImpl(MethodImplOptions.Synchronized)]
             set
             {
+                if (value == "xxx")
+                {
+                    tesla_token = value;
+                    return;
+                }
+
                 tesla_token = StringCipher.Decrypt(value);
                 if (car.FleetAPI)
                 {
