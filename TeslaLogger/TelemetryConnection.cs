@@ -1,4 +1,5 @@
 ﻿using System;
+using TeslaLoggerNET8;
 
 namespace TeslaLogger
 {
@@ -11,6 +12,10 @@ namespace TeslaLogger
             if (ApplicationSettings.Default.TelemetryServerType == "ZMQ")
             {
                 return new TelemetryConnectionZMQ(car);
+            }
+            else if (ApplicationSettings.Default.TelemetryServerType == "KAFKA")
+            {
+                return new TelemetryConnectionKafka(car);
             }
             else
             {

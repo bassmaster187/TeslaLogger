@@ -1,0 +1,715 @@
+syntax = "proto3";
+
+package telemetry.vehicle_data;
+
+import "google/protobuf/timestamp.proto";
+
+option go_package = "github.com/teslamotors/fleet-telemetry/protos";
+
+enum Field {
+  Unknown = 0;
+  DriveRail = 1;
+  ChargeState = 2;
+  BmsFullchargecomplete = 3;
+  VehicleSpeed = 4;
+  Odometer = 5;
+  PackVoltage = 6;
+  PackCurrent = 7;
+  Soc = 8;
+  DCDCEnable = 9;
+  Gear = 10;
+  IsolationResistance = 11;
+  PedalPosition = 12;
+  BrakePedal = 13;
+  DiStateR = 14;
+  DiHeatsinkTR = 15;
+  DiAxleSpeedR = 16;
+  DiTorquemotor = 17;
+  DiStatorTempR = 18;
+  DiVBatR = 19;
+  DiMotorCurrentR = 20;
+  Location = 21;
+  GpsState = 22;
+  GpsHeading = 23;
+  NumBrickVoltageMax = 24;
+  BrickVoltageMax = 25;
+  NumBrickVoltageMin = 26;
+  BrickVoltageMin = 27;
+  NumModuleTempMax = 28;
+  ModuleTempMax = 29;
+  NumModuleTempMin = 30;
+  ModuleTempMin = 31;
+  RatedRange = 32;
+  Hvil = 33;
+  DCChargingEnergyIn = 34;
+  DCChargingPower = 35;
+  ACChargingEnergyIn = 36;
+  ACChargingPower = 37;
+  ChargeLimitSoc = 38;
+  FastChargerPresent = 39;
+  EstBatteryRange = 40;
+  IdealBatteryRange = 41;
+  BatteryLevel = 42;
+  TimeToFullCharge = 43;
+  ScheduledChargingStartTime = 44;
+  ScheduledChargingPending = 45;
+  ScheduledDepartureTime = 46;
+  PreconditioningEnabled = 47;
+  ScheduledChargingMode = 48;
+  ChargeAmps = 49;
+  ChargeEnableRequest = 50;
+  ChargerPhases = 51;
+  ChargePortColdWeatherMode = 52;
+  ChargeCurrentRequest = 53;
+  ChargeCurrentRequestMax = 54;
+  BatteryHeaterOn = 55;
+  NotEnoughPowerToHeat = 56;
+  SuperchargerSessionTripPlanner = 57;
+  DoorState = 58;
+  Locked = 59;
+  FdWindow = 60;
+  FpWindow = 61;
+  RdWindow = 62;
+  RpWindow = 63;
+  VehicleName = 64;
+  SentryMode = 65;
+  SpeedLimitMode = 66;
+  CurrentLimitMph = 67;
+  Version = 68;
+  TpmsPressureFl = 69;
+  TpmsPressureFr = 70;
+  TpmsPressureRl = 71;
+  TpmsPressureRr = 72;
+  SemitruckTpmsPressureRe1L0 = 73;  // Semi-truck only
+  SemitruckTpmsPressureRe1L1 = 74;  // Semi-truck only
+  SemitruckTpmsPressureRe1R0 = 75;  // Semi-truck only
+  SemitruckTpmsPressureRe1R1 = 76;  // Semi-truck only
+  SemitruckTpmsPressureRe2L0 = 77;  // Semi-truck only
+  SemitruckTpmsPressureRe2L1 = 78;  // Semi-truck only
+  SemitruckTpmsPressureRe2R0 = 79;  // Semi-truck only
+  SemitruckTpmsPressureRe2R1 = 80;  // Semi-truck only
+  TpmsLastSeenPressureTimeFl = 81;
+  TpmsLastSeenPressureTimeFr = 82;
+  TpmsLastSeenPressureTimeRl = 83;
+  TpmsLastSeenPressureTimeRr = 84;
+  InsideTemp = 85;
+  OutsideTemp = 86;
+  SeatHeaterLeft = 87;
+  SeatHeaterRight = 88;
+  SeatHeaterRearLeft = 89;
+  SeatHeaterRearRight = 90;
+  SeatHeaterRearCenter = 91;
+  AutoSeatClimateLeft = 92;
+  AutoSeatClimateRight = 93;
+  DriverSeatBelt = 94;
+  PassengerSeatBelt = 95;
+  DriverSeatOccupied = 96;
+  SemitruckPassengerSeatFoldPosition = 97;  // Semi-truck only
+  LateralAcceleration = 98;
+  LongitudinalAcceleration = 99;
+  Deprecated_2 = 100;
+  CruiseSetSpeed = 101;
+  LifetimeEnergyUsed = 102;
+  LifetimeEnergyUsedDrive = 103;
+  SemitruckTractorParkBrakeStatus = 104;  // Semi-truck only
+  SemitruckTrailerParkBrakeStatus = 105;  // Semi-truck only
+  BrakePedalPos = 106;
+  RouteLastUpdated = 107;
+  RouteLine = 108;
+  MilesToArrival = 109;
+  MinutesToArrival = 110;
+  OriginLocation = 111;
+  DestinationLocation = 112;
+  CarType = 113;
+  Trim = 114;
+  ExteriorColor = 115;
+  RoofColor = 116;
+  ChargePort = 117;
+  ChargePortLatch = 118;
+  Experimental_1 = 119;
+  Experimental_2 = 120;
+  Experimental_3 = 121;
+  Experimental_4 = 122;
+  GuestModeEnabled = 123;
+  PinToDriveEnabled = 124;
+  PairedPhoneKeyAndKeyFobQty = 125;
+  CruiseFollowDistance = 126;
+  AutomaticBlindSpotCamera = 127;
+  BlindSpotCollisionWarningChime = 128;
+  SpeedLimitWarning = 129;
+  ForwardCollisionWarning = 130;
+  LaneDepartureAvoidance = 131;
+  EmergencyLaneDepartureAvoidance = 132;
+  AutomaticEmergencyBrakingOff = 133;
+  LifetimeEnergyGainedRegen = 134;
+  DiStateF = 135;
+  DiStateREL = 136;
+  DiStateRER = 137;
+  DiHeatsinkTF = 138;
+  DiHeatsinkTREL = 139;
+  DiHeatsinkTRER = 140;
+  DiAxleSpeedF = 141;
+  DiAxleSpeedREL = 142;
+  DiAxleSpeedRER = 143;
+  DiSlaveTorqueCmd = 144;
+  DiTorqueActualR = 145;
+  DiTorqueActualF = 146;
+  DiTorqueActualREL = 147;
+  DiTorqueActualRER = 148;
+  DiStatorTempF = 149;
+  DiStatorTempREL = 150;
+  DiStatorTempRER = 151;
+  DiVBatF = 152;
+  DiVBatREL = 153;
+  DiVBatRER = 154;
+  DiMotorCurrentF = 155;
+  DiMotorCurrentREL = 156;
+  DiMotorCurrentRER = 157;
+  EnergyRemaining = 158;
+  ServiceMode = 159;
+  BMSState = 160;
+  GuestModeMobileAccessState = 161;
+  Deprecated_1 = 162;
+  DestinationName = 163;
+  DiInverterTR = 164;
+  DiInverterTF = 165;
+  DiInverterTREL = 166;
+  DiInverterTRER = 167;
+  Experimental_5 = 168;
+  Experimental_6 = 169;
+  Experimental_7 = 170;
+  Experimental_8 = 171;
+  Experimental_9 = 172;
+  Experimental_10 = 173;
+  Experimental_11 = 174;
+  Experimental_12 = 175;
+  Experimental_13 = 176;
+  Experimental_14 = 177;
+  Experimental_15 = 178;
+
+  // fields below here are always returned typed
+  // field 179 is first available in firmware version 2024.38
+
+  DetailedChargeState = 179;
+
+  // fields 180-183, 185-228 are first available in firmware version 2024.44.25
+  // field 184 is first available in firmware version 2024.44.32
+
+  CabinOverheatProtectionMode = 180;
+  CabinOverheatProtectionTemperatureLimit = 181;
+  CenterDisplay = 182;
+  ChargePortDoorOpen = 183;
+  ChargerVoltage = 184;
+  ChargingCableType = 185;
+  ClimateKeeperMode = 186;
+  DefrostForPreconditioning = 187;
+  DefrostMode = 188;
+  EfficiencyPackage = 189;
+  EstimatedHoursToChargeTermination = 190;
+  EuropeVehicle = 191;
+  ExpectedEnergyPercentAtTripArrival = 192;
+  FastChargerType = 193;
+  HomelinkDeviceCount = 194;
+  HomelinkNearby = 195;
+  HvacACEnabled = 196;
+  HvacAutoMode = 197;
+  HvacFanSpeed = 198;
+  HvacFanStatus = 199;
+  HvacLeftTemperatureRequest = 200;
+  HvacPower = 201;
+  HvacRightTemperatureRequest = 202;
+  HvacSteeringWheelHeatAuto = 203;
+  HvacSteeringWheelHeatLevel = 204;
+  OffroadLightbarPresent = 205;
+  PowershareHoursLeft = 206;
+  PowershareInstantaneousPowerKW = 207;
+  PowershareStatus = 208;
+  PowershareStopReason = 209;
+  PowershareType = 210;
+  RearDisplayHvacEnabled = 211;
+  RearSeatHeaters = 212;
+  RemoteStartEnabled = 213;
+  RightHandDrive = 214;
+  RouteTrafficMinutesDelay = 215;
+  SoftwareUpdateDownloadPercentComplete = 216;
+  SoftwareUpdateExpectedDurationMinutes = 217;
+  SoftwareUpdateInstallationPercentComplete = 218;
+  SoftwareUpdateScheduledStartTime = 219;
+  SoftwareUpdateVersion = 220;
+  TonneauOpenPercent = 221;
+  TonneauPosition = 222;
+  TonneauTentMode = 223;
+  TpmsHardWarnings = 224;
+  TpmsSoftWarnings = 225;
+  ValetModeEnabled = 226;
+  WheelType = 227;
+  WiperHeatEnabled = 228;
+
+  // fields 229-238 are first available in firmware version 2024.44.32
+
+  LocatedAtHome = 229;
+  LocatedAtWork = 230;
+  LocatedAtFavorite = 231;
+  SettingDistanceUnit = 232;
+  SettingTemperatureUnit = 233;
+  Setting24HourTime = 234;
+  SettingTirePressureUnit = 235;
+  SettingChargeUnit = 236;
+  ClimateSeatCoolingFrontLeft = 237;
+  ClimateSeatCoolingFrontRight = 238;
+}
+
+// ChargingState is deprecated and not used
+enum ChargingState {
+    ChargeStateUnknown = 0;
+    ChargeStateDisconnected = 1;
+    ChargeStateNoPower = 2;
+    ChargeStateStarting = 3;
+    ChargeStateCharging = 4;
+    ChargeStateComplete = 5;
+    ChargeStateStopped = 6;
+}
+
+enum DetailedChargeStateValue {
+    DetailedChargeStateUnknown = 0;
+    DetailedChargeStateDisconnected = 1;
+    DetailedChargeStateNoPower = 2;
+    DetailedChargeStateStarting = 3;
+    DetailedChargeStateCharging = 4;
+    DetailedChargeStateComplete = 5;
+    DetailedChargeStateStopped = 6;
+}
+
+// ShiftState are the gear options
+enum ShiftState {
+    ShiftStateUnknown = 0;
+    ShiftStateInvalid = 1;
+    ShiftStateP = 2;
+    ShiftStateR = 3;
+    ShiftStateN = 4;
+    ShiftStateD = 5;
+    ShiftStateSNA = 6;
+}
+
+// LocationValue is a Datum value type
+message LocationValue {
+  double latitude = 1;
+  double longitude = 2;
+}
+
+enum FollowDistance {
+    FollowDistanceUnknown = 0;
+    FollowDistance1 = 1;
+    FollowDistance2 = 2;
+    FollowDistance3 = 3;
+    FollowDistance4 = 4;
+    FollowDistance5 = 5;
+    FollowDistance6 = 6;
+    FollowDistance7 = 7;
+}
+
+enum ForwardCollisionSensitivity {
+  ForwardCollisionSensitivityUnknown = 0;
+  ForwardCollisionSensitivityOff = 1;
+  ForwardCollisionSensitivityLate = 2;
+  ForwardCollisionSensitivityAverage = 3;
+  ForwardCollisionSensitivityEarly = 4;
+}
+
+enum GuestModeMobileAccess {
+    GuestModeMobileAccessUnknown = 0;
+    GuestModeMobileAccessInit = 1;
+    GuestModeMobileAccessNotAuthenticated = 2;
+    GuestModeMobileAccessAuthenticated = 3;
+    GuestModeMobileAccessAbortedDriving = 4;
+    GuestModeMobileAccessAbortedUsingRemoteStart = 5;
+    GuestModeMobileAccessAbortedUsingBLEKeys = 6;
+    GuestModeMobileAccessAbortedValetMode = 7;
+    GuestModeMobileAccessAbortedGuestModeOff = 8;
+    GuestModeMobileAccessAbortedDriveAuthTimeExceeded = 9;
+    GuestModeMobileAccessAbortedNoDataReceived = 10;
+    GuestModeMobileAccessRequestingFromMothership = 11;
+    GuestModeMobileAccessRequestingFromAuthD = 12;
+    GuestModeMobileAccessAbortedFetchFailed = 13;
+    GuestModeMobileAccessAbortedBadDataReceived = 14;
+    GuestModeMobileAccessShowingQRCode = 15;
+    GuestModeMobileAccessSwipedAway = 16;
+    GuestModeMobileAccessDismissedQRCodeExpired = 17;
+    GuestModeMobileAccessSucceededPairedNewBLEKey = 18;
+}
+
+enum LaneAssistLevel {
+  LaneAssistLevelUnknown = 0;
+  LaneAssistLevelNone = 1;
+  LaneAssistLevelWarning = 2;
+  LaneAssistLevelAssist = 3;
+}
+
+enum ScheduledChargingModeValue {
+  ScheduledChargingModeUnknown = 0;
+  ScheduledChargingModeOff = 1;
+  ScheduledChargingModeStartAt = 2;
+  ScheduledChargingModeDepartBy = 3;
+}
+
+enum SentryModeState {
+    SentryModeStateUnknown = 0;
+    SentryModeStateOff = 1;
+    SentryModeStateIdle = 2;
+    SentryModeStateArmed = 3;
+    SentryModeStateAware = 4;
+    SentryModeStatePanic = 5;
+    SentryModeStateQuiet = 6;
+}
+
+enum SpeedAssistLevel {
+    SpeedAssistLevelUnknown = 0;
+    SpeedAssistLevelNone = 1;
+    SpeedAssistLevelDisplay = 2;
+    SpeedAssistLevelChime = 3;
+}
+
+enum BMSStateValue {
+    BMSStateUnknown = 0;
+    BMSStateStandby = 1;
+    BMSStateDrive = 2;
+    BMSStateSupport = 3;
+    BMSStateCharge = 4;
+    BMSStateFEIM = 5;
+    BMSStateClearFault = 6;
+    BMSStateFault = 7;
+    BMSStateWeld = 8;
+    BMSStateTest = 9;
+    BMSStateSNA = 10;
+}
+
+enum BuckleStatus {
+    BuckleStatusUnknown = 0;
+    BuckleStatusUnlatched = 1;
+    BuckleStatusLatched = 2;
+    BuckleStatusFaulted = 3;
+}
+
+enum CarTypeValue {
+    CarTypeUnknown = 0;
+    CarTypeModelS = 1;
+    CarTypeModelX = 2;
+    CarTypeModel3 = 3;
+    CarTypeModelY = 4;
+    CarTypeSemiTruck = 5;
+    CarTypeCybertruck = 6;
+}
+
+enum ChargePortValue {
+    ChargePortUnknown = 0;
+    ChargePortUS = 1;
+    ChargePortEU = 2;
+    ChargePortGB = 3;
+    ChargePortCCS = 4;
+}
+
+enum ChargePortLatchValue {
+    ChargePortLatchUnknown = 0;
+    ChargePortLatchSNA = 1;
+    ChargePortLatchDisengaged = 2;
+    ChargePortLatchEngaged = 3;
+    ChargePortLatchBlocking = 4;
+}
+
+message Doors {
+  bool DriverFront = 1;
+  bool PassengerFront = 2;
+  bool DriverRear = 3;
+  bool PassengerRear = 4;
+  bool TrunkFront = 5;
+  bool TrunkRear = 6;
+}
+
+enum DriveInverterState {
+    DriveInverterStateUnknown = 0;
+    DriveInverterStateUnavailable = 1;
+    DriveInverterStateStandby = 2;
+    DriveInverterStateFault = 3;
+    DriveInverterStateAbort = 4;
+    DriveInverterStateEnable = 5;
+}
+
+enum HvilStatus {
+    HvilStatusUnknown = 0;
+    HvilStatusFault = 1;
+    HvilStatusOK = 2;
+}
+
+enum WindowState {
+    WindowStateUnknown = 0;
+    WindowStateClosed = 1;
+    WindowStatePartiallyOpen = 2;
+    WindowStateOpened = 3;
+}
+
+enum SeatFoldPosition {
+    SeatFoldPositionUnknown = 0;
+    SeatFoldPositionSNA = 1;
+    SeatFoldPositionFaulted = 2;
+    SeatFoldPositionNotConfigured = 3;
+    SeatFoldPositionFolded = 4;
+    SeatFoldPositionUnfolded = 5;
+}
+
+enum TractorAirStatus {
+    TractorAirStatusUnknown = 0;
+    TractorAirStatusNotAvailable = 1;
+    TractorAirStatusError = 2;
+    TractorAirStatusCharged = 3;
+    TractorAirStatusBuildingPressureIntermediate = 4;
+    TractorAirStatusExhaustingPressureIntermediate = 5;
+    TractorAirStatusExhausted = 6;
+}
+
+enum TrailerAirStatus {
+    TrailerAirStatusUnknown = 0;
+    TrailerAirStatusSNA = 1;
+    TrailerAirStatusInvalid = 2;
+    TrailerAirStatusBobtailMode = 3;
+    TrailerAirStatusCharged = 4;
+    TrailerAirStatusBuildingPressureIntermediate = 5;
+    TrailerAirStatusExhaustingPressureIntermediate = 6;
+    TrailerAirStatusExhausted = 7;
+}
+
+enum HvacAutoModeState {
+  HvacAutoModeStateUnknown = 0;
+  HvacAutoModeStateOn = 1;
+  HvacAutoModeStateOverride = 2;
+}
+
+enum CabinOverheatProtectionModeState {
+  CabinOverheatProtectionModeStateUnknown = 0;
+  CabinOverheatProtectionModeStateOff = 1;
+  CabinOverheatProtectionModeStateOn = 2;
+  CabinOverheatProtectionModeStateFanOnly = 3;
+}
+
+enum ClimateOverheatProtectionTempLimit {
+  ClimateOverheatProtectionTempLimitUnknown = 0;
+  ClimateOverheatProtectionTempLimitHigh = 1;
+  ClimateOverheatProtectionTempLimitMedium = 2;
+  ClimateOverheatProtectionTempLimitLow = 3;
+}
+
+enum DefrostModeState {
+  DefrostModeStateUnknown = 0;
+  DefrostModeStateOff = 1;
+  DefrostModeStateNormal = 2;
+  DefrostModeStateMax = 3;
+  DefrostModeStateAutoDefog = 4;
+}
+
+enum ClimateKeeperModeState {
+  ClimateKeeperModeStateUnknown = 0;
+  ClimateKeeperModeStateOff = 1;
+  ClimateKeeperModeStateOn = 2;
+  ClimateKeeperModeStateDog = 3;
+  ClimateKeeperModeStateParty = 4;
+}
+
+enum HvacPowerState {
+  HvacPowerStateUnknown = 0;
+  HvacPowerStateOff = 1;
+  HvacPowerStateOn = 2;
+  HvacPowerStatePrecondition = 3;
+  HvacPowerStateOverheatProtect = 4;
+}
+
+enum FastCharger {
+  FastChargerUnknown = 0;
+  FastChargerSupercharger = 1;
+  FastChargerCHAdeMO = 2;
+  FastChargerGB = 3;
+  FastChargerACSingleWireCAN = 4;
+  FastChargerCombo = 5;
+  FastChargerMCSingleWireCAN = 6;
+  FastChargerOther = 7;
+  FastChargerSNA = 8;
+}
+
+enum CableType {
+  CableTypeUnknown = 0;
+  CableTypeIEC = 1;
+  CableTypeSAE = 2;
+  CableTypeGB_AC = 3;
+  CableTypeGB_DC = 4;
+  CableTypeSNA = 5;
+}
+
+enum TonneauTentModeState {
+  TonneauTentModeStateUnknown = 0;
+  TonneauTentModeStateInactive = 1;
+  TonneauTentModeStateMoving = 2;
+  TonneauTentModeStateFailed = 3;
+  TonneauTentModeStateActive = 4;
+}
+
+enum TonneauPositionState {
+  TonneauPositionStateUnknown = 0;
+  TonneauPositionStateInvalid = 1;
+  TonneauPositionStateClosed = 2;
+  TonneauPositionStatePartiallyOpen = 3;
+  TonneauPositionStateFullyOpen = 4;
+}
+
+enum PowershareState {
+  PowershareStateUnknown = 0;
+  PowershareStateInactive = 1;
+  PowershareStateHandshaking = 2;
+  PowershareStateInit = 3;
+  PowershareStateEnabled = 4;
+  PowershareStateEnabledReconnectingSoon = 5;
+  PowershareStateStopped = 6;
+}
+enum PowershareStopReasonStatus {
+  PowershareStopReasonStatusUnknown = 0;
+  PowershareStopReasonStatusNone = 1;
+  PowershareStopReasonStatusSOCTooLow = 2;
+  PowershareStopReasonStatusRetry = 3;
+  PowershareStopReasonStatusFault = 4;
+  PowershareStopReasonStatusUser = 5;
+  PowershareStopReasonStatusReconnecting = 6;
+  PowershareStopReasonStatusAuthentication = 7;
+}
+
+enum PowershareTypeStatus {
+  PowershareTypeStatusUnknown = 0;
+  PowershareTypeStatusNone = 1;
+  PowershareTypeStatusLoad = 2;
+  PowershareTypeStatusHome = 3;
+}
+
+enum DisplayState {
+  DisplayStateUnknown = 0;
+  DisplayStateOff = 1;
+  DisplayStateDim = 2;
+  DisplayStateAccessory = 3;
+  DisplayStateOn = 4;
+  DisplayStateDriving = 5;
+  DisplayStateCharging = 6;
+  DisplayStateLock = 7;
+  DisplayStateSentry = 8;
+  DisplayStateDog = 9;
+  DisplayStateEntertainment = 10;
+}
+
+enum DistanceUnit {
+  DistanceUnitUnknown = 0;
+  DistanceUnitMiles = 1;
+  DistanceUnitKilometers = 2;
+}
+
+enum TemperatureUnit {
+  TemperatureUnitUnknown = 0;
+  TemperatureUnitFahrenheit = 1;
+  TemperatureUnitCelsius = 2;
+}
+
+enum PressureUnit {
+  PressureUnitUnknown = 0;
+  PressureUnitPsi = 1;
+  PressureUnitBar = 2;
+}
+
+enum ChargeUnitPreference {
+  ChargeUnitUnknown = 0;
+  ChargeUnitDistance = 1;
+  ChargeUnitPercent = 2;
+}
+
+message TireLocation {
+  bool front_left = 1;
+  bool front_right = 2;
+  bool rear_left = 3;
+  bool rear_right = 4;
+
+  bool semi_middle_axle_left_2 = 5;
+  bool semi_middle_axle_right_2 = 6;
+  bool semi_rear_axle_left = 7;
+  bool semi_rear_axle_right = 8;
+  bool semi_rear_axle_left_2 = 9;
+  bool semi_rear_axle_right_2 = 10;
+}
+
+message Time {
+  int32 hour = 1;
+  int32 minute = 2;
+  int32 second = 3;
+}
+
+// Value is a dynamic Datum type.  Most Datums are strings and is the default format
+// Note: Fields may have their types updated with different software and vehicle
+// versions to optimize for precision or space
+message Value {
+  oneof value {
+    string string_value = 1;
+    int32 int_value = 2;
+    int64 long_value = 3;
+    float float_value = 4;
+    double double_value = 5;
+    bool boolean_value = 6;
+    LocationValue location_value = 7;
+    ChargingState charging_value = 8;
+    ShiftState shift_state_value = 9;
+    bool invalid = 10;
+    LaneAssistLevel lane_assist_level_value = 11;
+    ScheduledChargingModeValue scheduled_charging_mode_value = 12;
+    SentryModeState sentry_mode_state_value = 13;
+    SpeedAssistLevel speed_assist_level_value = 14;
+    BMSStateValue bms_state_value = 15;
+    BuckleStatus buckle_status_value = 16;
+    CarTypeValue car_type_value = 17;
+    ChargePortValue charge_port_value = 18;
+    ChargePortLatchValue charge_port_latch_value = 19;
+    Doors door_value = 21;
+    DriveInverterState drive_inverter_state_value = 22;
+    HvilStatus hvil_status_value = 23;
+    WindowState window_state_value = 24;
+    SeatFoldPosition seat_fold_position_value = 25;
+    TractorAirStatus tractor_air_status_value = 26;
+    FollowDistance follow_distance_value = 27;
+    ForwardCollisionSensitivity forward_collision_sensitivity_value = 28;
+    GuestModeMobileAccess guest_mode_mobile_access_value = 29;
+    TrailerAirStatus trailer_air_status_value = 30;
+    Time time_value = 31;
+    DetailedChargeStateValue detailed_charge_state_value = 32;
+    HvacAutoModeState hvac_auto_mode_value = 33;
+    CabinOverheatProtectionModeState cabin_overheat_protection_mode_value = 34;
+    ClimateOverheatProtectionTempLimit cabin_overheat_protection_temperature_limit_value = 35;
+    DefrostModeState defrost_mode_value = 36;
+    ClimateKeeperModeState climate_keeper_mode_value = 37;
+    HvacPowerState hvac_power_value = 38;
+    TireLocation tire_location_value = 39;
+    FastCharger fast_charger_value = 40;
+    CableType cable_type_value = 41;
+    TonneauTentModeState tonneau_tent_mode_value = 42;
+    TonneauPositionState tonneau_position_value = 43;
+    PowershareTypeStatus powershare_type_value = 44;
+    PowershareState powershare_state_value = 45;
+    PowershareStopReasonStatus powershare_stop_reason_value = 46;
+    DisplayState display_state_value = 47;
+    DistanceUnit distance_unit_value = 48;
+    TemperatureUnit temperature_unit_value = 49;
+    PressureUnit pressure_unit_value = 50;
+    ChargeUnitPreference charge_unit_preference_value = 51;
+  }
+}
+
+// Datum represents a single field and its value
+message Datum {
+  Field key = 1;
+  Value value = 2;
+}
+
+// Payload holds a collection of values, and may not have a vin
+message Payload {
+  repeated Datum data = 1;
+  google.protobuf.Timestamp created_at = 2;
+  string vin = 3;
+}

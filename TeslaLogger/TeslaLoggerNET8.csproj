@@ -37,6 +37,7 @@
     <None Include="www\admin\settings.php.bak" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\KafkaConnector\KafkaConnector.csproj" />
     <ProjectReference Include="..\Logfile\LogfileNET8.csproj" />
     <ProjectReference Include="..\OSMMapGenerator\OSMMapGeneratorNET8.csproj" />
     <ProjectReference Include="..\srtm\src\SRTM\SRTMNET8.csproj" />

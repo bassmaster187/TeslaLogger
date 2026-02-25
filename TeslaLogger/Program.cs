@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using System.Diagnostics;
 using TeslaLoggerNET8.Lucid;
+using TeslaLoggerNET8.Kafka;
 
 namespace TeslaLogger
 {
@@ -306,6 +307,7 @@ namespace TeslaLogger
                 double? wh_tr = r["wh_tr"] as double?;
                 string wheel_type = r["wheel_type"] as String ?? "";
                 bool raven = false;
+                bool isKafkaCar = false;
                 if (r["raven"] != DBNull.Value && Convert.ToInt32(r["raven"]) == 1)
                     raven = true;
 
@@ -316,6 +318,8 @@ namespace TeslaLogger
                 bool virtualKey = false;
                 if (r["virtualkey"] != DBNull.Value && Convert.ToInt32(r["virtualkey"]) == 1)
                     virtualKey = true;
+                else if (r["virtualkey"] != DBNull.Value && Convert.ToInt32(r["virtualkey"]) == 2)
+                    isKafkaCar = true;
 
                 string access_type = "";
                 if (r["access_type"] != DBNull.Value)
@@ -325,6 +329,10 @@ namespace TeslaLogger
                 if (car_type == "LUCID")
                 {
                     LucidCar car = new LucidCar(id, Name, Password, car_id_in_account, "LUCID", tesla_token_expire, Model_Name, car_type, car_special_type, car_trim_badging, display_name, vin, tasker_hash, wh_tr, fleetAPI, oldCarState, wheel_type);
+                }
+                else if (isKafkaCar)
+                {
+                    KafkaCar car = new (id, Name, Password, car_id_in_account, tesla_token, tesla_token_expire, Model_Name, car_type, car_special_type, car_trim_badging, display_name, vin, tasker_hash, wh_tr, fleetAPI, oldCarState, wheel_type);
                 }
                 else
                 {

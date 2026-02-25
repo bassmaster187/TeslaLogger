@@ -266,6 +266,11 @@ namespace TeslaLogger
                     // => replaced AddHours(-24) with AddDays(-21)
                     var manualTokenRefreshNeeded = TeslaTokenExpire > DateTime.MinValue && TeslaTokenExpire < DateTime.UtcNow.AddDays(-21);
 
+                    if (this is TeslaLoggerNET8.Kafka.KafkaCar)
+                    {
+                        manualTokenRefreshNeeded = false;
+                    }
+
                     // if we cannot refresh the token automatically, because the refresh token is expired, treat car as inactive.
                     if (CarInDB > 0 && !manualTokenRefreshNeeded)
                     {
@@ -281,6 +286,11 @@ namespace TeslaLogger
                     {
                         dbHelper = new LucidDBHelper((LucidCar)this);
                         webhelper = new LucidWebHelper((LucidCar)this);
+                    }
+                    else if (this is TeslaLoggerNET8.Kafka.KafkaCar)
+                    {
+                        dbHelper = new TeslaLoggerNET8.Kafka.KafkaDBHelper((TeslaLoggerNET8.Kafka.KafkaCar)this);
+                        webhelper = new TeslaLoggerNET8.Kafka.KafkaWebHelper((TeslaLoggerNET8.Kafka.KafkaCar)this);
                     }
                     else
                     {
@@ -573,7 +583,7 @@ namespace TeslaLogger
             }
         }
 
-        private void InitMeter()
+        virtual protected void InitMeter()
         {
             try
             {

@@ -422,6 +422,9 @@ namespace TeslaLogger
 
             if (car.FleetAPI)
             {
+                if (String.IsNullOrEmpty(refresh_token))
+                    return "";
+
                 if (!String.IsNullOrEmpty(ApplicationSettings.Default.TelemetryClientID))
                     return UpdateTeslaTokenFromRefreshTokenFromFleetAPIWithClientID(refresh_token);
 
@@ -5188,6 +5191,11 @@ WHERE
             try
             {
                 if (!car.FleetAPI)
+                {
+                    return false;
+                }
+
+                if (Tesla_token.Length < 10)
                 {
                     return false;
                 }

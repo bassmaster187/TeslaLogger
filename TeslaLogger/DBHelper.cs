@@ -5792,7 +5792,7 @@ WHERE
             return 0;
         }
 
-        public string UpdateCountryCode()
+        virtual public string UpdateCountryCode()
         {
             try
             {
@@ -6075,7 +6075,7 @@ LIMIT 5";
             return dt;
         }
 
-        public double GetVoltageAt50PercentSOC(out DateTime start, out DateTime ende)
+        virtual public double GetVoltageAt50PercentSOC(out DateTime start, out DateTime ende)
         {
             start = DateTime.MinValue;
             ende = DateTime.MinValue;
