@@ -22,5 +22,10 @@ namespace TeslaLoggerNET8.Kafka
         {
             return "";
         }
+
+        public override bool TaskerWakeupfile(bool force = false)
+        {
+            return true;
+        }
     }
 }

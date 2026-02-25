@@ -4725,7 +4725,7 @@ WHERE
         private volatile bool stopStreaming; // defaults to false;
         public DateTime? startRequestTimeout = null;
 
-        public bool TaskerWakeupfile(bool force = false)
+        virtual public bool TaskerWakeupfile(bool force = false)
         {
             try
             {
