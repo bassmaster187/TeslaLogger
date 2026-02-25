@@ -9294,6 +9294,7 @@ da-emobil AT-Spittal an der Drau Villacher Straße,46.792093,13.510538
 da-emobil AT-St. Johann im Pongau Bundesstraße,47.36924,13.20645
 da-emobil AT-St. Peter in der Au-Markt Dr.-Hans-Blank-Weg,48.04241,14.61183
 da-emobil AT-St. Pölten,48.177086,15.553222
+da-emobil AT-St. Pölten Mariazeller Straße,48.1911,15.61796
 da-emobil AT-Sölden Auweg,46.96721,11.00819
 da-emobil AT-Thalgau Oberdorfer Straße,47.84108,13.20886
 da-emobil AT-Tux Lanersbach,47.15631,11.72847
@@ -11364,6 +11365,7 @@ EnBW DE-Hutthurm Goldener Steig,48.666275,13.48433
 EnBW DE-Höhn Einkaufspark,50.61807,7.98197
 EnBW DE-Höhr-Grenzhausen Shell,50.442042,7.665583
 EnBW DE-Hückelhoven,51.052377,6.218845
+EnBW DE-Hückelhoven Schibsler Weg,51.0621,6.19374
 EnBW DE-Hüfingen Lindenpark,47.934041,8.497137
 EnBW DE-Hünxe Ost,51.636934,6.746968
 EnBW DE-Hünxe West,51.635723,6.74493
@@ -21380,7 +21382,7 @@ Smatrics AT-Graz Gaswerkstraße,47.06966,15.40186
 Smatrics AT-Graz Waltendorfer Hauptstraße,47.06654,15.46854
 Smatrics AT-Graz Weblinger Gürtel,47.03288,15.42375
 Smatrics AT-Grein Breitenangerstraße,48.22917,14.84565
-Smatrics AT-Griffen Gewerbestraße,46.69558,14.73695
+Smatrics AT-Griffen Gewerbestraße,46.69617,14.7374,25
 Smatrics AT-Haberl Gewerbepark,47.481074,16.091338
 Smatrics AT-Haus im Ennstal Ennsling,47.41225,13.7845
 Smatrics AT-Himmelreich Josef-Lindner-Straße,47.79414,12.9867,30
@@ -22548,6 +22550,7 @@ TIWAG AT-Maurach Achensee Straße,47.43052,11.73746
 TIWAG AT-Oberndorf in Tirol Bahnhofstraße,47.49937,12.38644
 TIWAG AT-Prutz Dorfstraße,47.068266,10.664093
 TIWAG AT-Ramsau im Zillertal Talstraße,47.20509,11.87104
+TIWAG AT-Ried im Oberinntal,47.05837,10.65735
 TIWAG AT-Ried im Zillertal Landstraße,47.30311,11.87286
 TIWAG AT-See Elis,47.086113,10.470062
 TIWAG AT-Seefeld in Tirol Rosshütte,47.33174,11.19918
@@ -22738,6 +22741,7 @@ Trugo TR-Mehmet Akif Ersoy Bağdat Caddesi,39.96176,32.76858
 Trugo TR-Nakkaş Kuzey Marmara Otoyolu,41.19358,28.5713
 
 Turmstrom AT-Graz Fabriksgasse,47.05927,15.42646
+Turmstrom AT-Griffen Gewerbestraße,46.69558,14.73695,25
 Turmstrom AT-Hallein Salzachtalstraße,47.68229,13.10055
 Turmstrom AT-Himmelreich Franz Brötzner Straße,47.79462,12.98701,30
 Turmstrom AT-Klaus an der Pyhrnbahn Steyrtal-Radweg,47.84527,14.17043
