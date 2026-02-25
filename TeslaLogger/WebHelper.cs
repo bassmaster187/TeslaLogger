@@ -582,7 +582,7 @@ namespace TeslaLogger
             }
         }
 
-        public string GetRegion()
+        virtual public string GetRegion()
         {
             try
             {

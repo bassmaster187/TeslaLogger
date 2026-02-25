@@ -56,7 +56,6 @@ namespace TeslaLoggerNET8
 
         public override void CloseConnection()
         {
-            queue.CompleteAdding();
         }
     }
 }

@@ -17,5 +17,10 @@ namespace TeslaLoggerNET8.Kafka
         {
             return "";
         }
+
+        public override string GetRegion()
+        {
+            return "";
+        }
     }
 }
