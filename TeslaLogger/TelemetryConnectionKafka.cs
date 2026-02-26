@@ -39,7 +39,7 @@ namespace TeslaLoggerNET8
                         });
                     }
 
-                    var parser = new TelemetryParser(car);
+                    parser = new TelemetryParser(car);
                     parser.InitFromDB();
                     parserDict.TryAdd(car.Vin, parser);
                     vins.Add(car.Vin);
