@@ -4,6 +4,7 @@ using Telemetry.VehicleAlerts;
 using Telemetry.VehicleData;
 using Telemetry.VehicleError;
 using Telemetry.VehicleMetrics;
+using TeslaLogger;
 
 namespace KafkaConnector
 {
@@ -56,7 +57,7 @@ namespace KafkaConnector
         public async Task RunAsync()
         {
             await Task.Delay(1000);
-            Console.WriteLine("*** Kafka Start consume ***");
+            Logfile.Log("*** Kafka Start consume ***");
             long msgcounter= 0;
 
             int lastLog = Environment.TickCount;
@@ -68,9 +69,9 @@ namespace KafkaConnector
                     var r = consumer.Consume(ct.Token);
                     msgcounter++;
 
-                    if (Environment.TickCount < lastLog)
+                    if (Environment.TickCount > lastLog)
                     {
-                        Console.WriteLine("Kafka Consume: " + msgcounter + " messages + / Queue: " + queue.Count);
+                        Logfile.Log("Kafka Consume: " + msgcounter + " messages + / Queue: " + queue.Count);
                         lastLog = Environment.TickCount + 30000;
                     }
 
@@ -120,11 +121,11 @@ namespace KafkaConnector
                 }
                 catch (OperationCanceledException ex2)
                 {
-                    Console.WriteLine("EventServerKafka Stop! " + ex2.ToString());
+                    Logfile.Log("EventServerKafka Stop! " + ex2.ToString());
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine(ex.ToString());
+                    Logfile.Log(ex.ToString());
                 }
             }
         }
@@ -150,7 +151,7 @@ namespace KafkaConnector
                         var topicsMetadata = metadata.Topics;
                         var topicNames = metadata.Topics.Select(a => a.Topic).ToList();
 
-                        Console.WriteLine("Topics received: " + String.Join(", ", topicNames));
+                        Logfile.Log("Topics received: " + String.Join(", ", topicNames));
 
                         SendTestmessage();
                         return;
@@ -158,7 +159,7 @@ namespace KafkaConnector
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine("Error getting topics: " + ex.ToString());
+                    Logfile.Log("Error getting topics: " + ex.ToString());
                 }
                 Thread.Sleep(5000);
             }
@@ -180,17 +181,17 @@ namespace KafkaConnector
                 var message = new Message<string, string> { Key = "PING", Value = "Ping from " + groupID + " Time: " + DateTime.Now.ToString() };
                 producer.Produce(topic, message, deliveryReport =>
                 {
-                    Console.WriteLine(" Delivery Report: " + deliveryReport.Error.ToString() + " / " + deliveryReport.Message.Value);
+                    Logfile.Log(" Delivery Report: " + deliveryReport.Error.ToString() + " / " + deliveryReport.Message.Value);
                 });
-                Console.WriteLine("Produce");
+                Logfile.Log("Produce");
                 Thread.Sleep(1000);
                 producer.Flush();
-                Console.WriteLine("Flush");
+                Logfile.Log("Flush");
                 Thread.Sleep(1000);
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.ToString());
+                Logfile.Log(ex.ToString());
             }
         }
 

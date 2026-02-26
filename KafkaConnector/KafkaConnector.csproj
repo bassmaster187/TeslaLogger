@@ -24,6 +24,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Logfile\LogfileNET8.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Protobuf Include="protos\vehicle_alert.proto" />
     <Protobuf Include="protos\vehicle_connectivity.proto" />
     <Protobuf Include="protos\vehicle_data.proto" />
