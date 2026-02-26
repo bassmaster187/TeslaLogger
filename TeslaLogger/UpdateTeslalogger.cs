@@ -30,7 +30,8 @@ namespace TeslaLogger
 
         internal static CancellationTokenSource done = new CancellationTokenSource();
 
-        private static Thread ComfortingMessages; // defaults to null;
+        private static Task ComfortingMessages; // defaults to null;
+        private static CancellationTokenSource comfortingMessagesCTS = new CancellationTokenSource();
         public static bool DownloadUpdateAndInstallStarted; // defaults to false;
 
         public static void StopComfortingMessagesThread()
@@ -47,7 +48,8 @@ namespace TeslaLogger
                 }
                 else if (ComfortingMessages != null)
                 {
-                    ComfortingMessages.Abort(); 
+                    comfortingMessagesCTS.Cancel();
+                    ComfortingMessages.Wait();
                 }
             }
             catch (Exception ex)
@@ -61,12 +63,12 @@ namespace TeslaLogger
         {
             // update may take quite a while, especially if we ALTER TABLEs
             // start a thread that puts comforting messages into the log
-            ComfortingMessages = new Thread(() =>
+            ComfortingMessages = Task.Run(async() =>
             {
                 Random rnd = new Random();
                 while (!done.IsCancellationRequested)
                 {
-                    Thread.Sleep(15000 + rnd.Next(15000));
+                    await Task.Delay(15000 + rnd.Next(15000), comfortingMessagesCTS.Token);
                     if (done.IsCancellationRequested)
                         break;
 
@@ -88,11 +90,7 @@ namespace TeslaLogger
                             break;
                     }
                 }
-            })
-            {
-                Priority = ThreadPriority.BelowNormal
-            };
-            ComfortingMessages.Start();
+            }, comfortingMessagesCTS.Token);
 
             try
             {
@@ -281,7 +279,7 @@ namespace TeslaLogger
                 }
 
 
-                timer = new System.Threading.Timer(FileChecker, null, 10000, 5000);
+                timer = new Timer(_ => _ = FileCheckerAsync(null), null, 10000, 5000);
 
                 Chmod("/var/www/html/admin/wallpapers", 777);
 
@@ -1289,7 +1287,8 @@ PRIMARY KEY(id)
                 {
                     try
                     {
-                        ComfortingMessages.Abort();
+                        comfortingMessagesCTS.Cancel();
+                        ComfortingMessages.Wait();
                     }
                     catch (Exception) { }
                 }
@@ -1732,7 +1731,7 @@ PRIMARY KEY(id)
             }
         }
 
-        private static void FileChecker(object state)
+        private static async Task FileCheckerAsync(object state)
         {
             try
             {
@@ -1771,8 +1770,8 @@ PRIMARY KEY(id)
                         Logfile.Log("ShareData turned on!");
 
                         ShareData sd = new ShareData(c);
-                        sd.SendAllChargingData();
-                        sd.SendDegradationData();
+                        await sd.SendAllChargingDataAsync();
+                        await sd.SendDegradationDataAsync();
                     }
                 }
 
@@ -2529,7 +2528,7 @@ PRIMARY KEY(id)
                         Tools.ExecMono("grafana-cli", "admin data-migration encrypt-datasource-passwords");
                     }
 
-                    Tools.RestartGrafanaServer();
+                    Tools.RestartGrafanaServer().Wait();
 
                     CopyLanguageFileToTimelinePanel(language);
 

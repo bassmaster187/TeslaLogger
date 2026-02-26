@@ -110,7 +110,7 @@ namespace TeslaLoggerNET8.Lucid
             return isDriving;
         }
 
-        public override bool IsCharging(bool justCheck = false, bool noMemcache = false)
+        public override async Task<bool> IsChargingAsync(bool justCheck = false, bool noMemcache = false)
         {
             GetNewData();
             var charging = charge_state == "CHARGE_STATE_CHARGING";

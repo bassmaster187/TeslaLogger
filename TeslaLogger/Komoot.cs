@@ -171,7 +171,7 @@ namespace TeslaLogger
                 }
             }
 
-            internal void DownloadTour(KomootLoginInfo kli)
+            internal async Task DownloadTourAsync(KomootLoginInfo kli)
             {
                 Logfile.Log($"#{kli.carID} Komoot: DownloadTour {tourID} ...");
                 using (HttpClient httpClient = new HttpClient())
@@ -181,7 +181,7 @@ namespace TeslaLogger
                     {
                         DateTime start = DateTime.UtcNow;
                         HttpResponseMessage result = httpClient.SendAsync(request).Result;
-                        DBHelper.AddMothershipDataToDBAsync("Komoot: DownloadTour", start, (int)result.StatusCode, kli.carID);
+                        await DBHelper.AddMothershipDataToDBAsync("Komoot: DownloadTour", start, (int)result.StatusCode, kli.carID);
                         if (result.IsSuccessStatusCode)
                         {
                             string resultContent = result.Content.ReadAsStringAsync().Result;
@@ -435,18 +435,18 @@ WHERE
         }
 
         // main loop
-        public void Run()
+        public async Task RunAsync()
         {
             try
             {
                 KomootLoginInfo kli = new KomootLoginInfo(carID, username, password, string.Empty, string.Empty);
                 while (true)
                 {
-                    Work(kli);
+                    await WorkAsync(kli);
                     for (int i = 0; i < 1000; i++)
                     {
                         if (workNow) { break; }
-                        Thread.Sleep((int)(((DateTime.Now.Hour >= 4 && DateTime.Now.Hour < 18) ? 0.5 : 1.0) * (double)interval));
+                        await Task.Delay((int)(((DateTime.Now.Hour >= 4 && DateTime.Now.Hour < 18) ? 0.5 : 1.0) * (double)interval));
                     }
                     workNow = false;
                 }
@@ -458,9 +458,9 @@ WHERE
             }
         }
 
-        private static void Work(KomootLoginInfo kli, bool dumpJSON = false)
+        private static async Task WorkAsync(KomootLoginInfo kli, bool dumpJSON = false)
         {
-            Login(kli);
+            await LoginAsync(kli);
             if (!kli.loginSuccessful)
             {
                 Logfile.Log($"#{kli.carID} Komoot: Login failed!");
@@ -468,10 +468,10 @@ WHERE
             else
             {
                 CurrentJSON.FromKVS(kli.carID);
-                Dictionary<long, KomootTour> tours = DownloadTours(kli, dumpJSON);
+                Dictionary<long, KomootTour> tours = await DownloadToursAsync(kli, dumpJSON);
                 if (tours.Count > 0)
                 {
-                    ParseTours(kli, tours, dumpJSON);
+                    await ParseToursAsync(kli, tours, dumpJSON);
                 }
                 else
                 {
@@ -481,7 +481,7 @@ WHERE
             Logfile.Log($"#{kli.carID} Komoot: done");
         }
 
-        private static void ParseTours(KomootLoginInfo kli, Dictionary<long, KomootTour> tours, bool dumpJSON = false)
+        private static async Task ParseToursAsync(KomootLoginInfo kli, Dictionary<long, KomootTour> tours, bool dumpJSON = false)
         {
             foreach (long tourid in tours.Keys.OrderBy(k => k))
             {
@@ -494,7 +494,7 @@ WHERE
                     continue;
                 }
                 // download tour to get source JSON
-                tour.DownloadTour(kli);
+                await tour.DownloadTourAsync(kli);
                 if (dumpJSON)
                 {
                     Logfile.Log($"#{kli.carID} Komoot: tour({tourid}) JSON:" + Environment.NewLine + tour.json);
@@ -1072,7 +1072,7 @@ VALUES (
             return posid;
         }
 
-        private static Dictionary<long, KomootTour> DownloadTours(KomootLoginInfo kli, bool dumpJSON = false)
+        private static async Task<Dictionary<long, KomootTour>> DownloadToursAsync(KomootLoginInfo kli, bool dumpJSON = false)
         {
             Logfile.Log($"#{kli.carID} Komoot: downloading tours ...");
             StringBuilder sb = new StringBuilder();
@@ -1088,8 +1088,8 @@ VALUES (
                     using (HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, new Uri(url)))
                     {
                         DateTime start = DateTime.UtcNow;
-                        HttpResponseMessage result = httpClient.SendAsync(request).Result;
-                        DBHelper.AddMothershipDataToDBAsync("Komoot: DownloadTours", start, (int)result.StatusCode, kli.carID);
+                        HttpResponseMessage result = await httpClient.SendAsync(request);
+                        await DBHelper.AddMothershipDataToDBAsync("Komoot: DownloadTours", start, (int)result.StatusCode, kli.carID);
                         if (result.IsSuccessStatusCode)
                         {
                             string resultContent = result.Content.ReadAsStringAsync().Result;
@@ -1332,7 +1332,7 @@ WHERE
             return false;
         }
 
-        private static KomootLoginInfo Login(KomootLoginInfo kli)
+        private static async Task<KomootLoginInfo> LoginAsync(KomootLoginInfo kli)
         {
             Logfile.Log($"#{kli.carID} Komoot: logging in as {kli.username} ...");
             using (HttpClient httpClient = new HttpClient())
@@ -1341,8 +1341,8 @@ WHERE
                 using (HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, new Uri($"https://api.komoot.de/v006/account/email/{kli.username}/")))
                 {
                     DateTime start = DateTime.UtcNow;
-                    HttpResponseMessage result = httpClient.SendAsync(request).Result;
-                    DBHelper.AddMothershipDataToDBAsync("Komoot: Login", start, (int)result.StatusCode, kli.carID);
+                    HttpResponseMessage result = await httpClient.SendAsync(request);
+                    await DBHelper.AddMothershipDataToDBAsync("Komoot: Login", start, (int)result.StatusCode, kli.carID);
                     if (result.IsSuccessStatusCode)
                     {
                         string resultContent = result.Content.ReadAsStringAsync().Result;

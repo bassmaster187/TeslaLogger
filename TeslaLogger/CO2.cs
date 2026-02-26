@@ -5,6 +5,7 @@ using Newtonsoft.Json;
 using System.IO;
 using Exceptionless;
 using Newtonsoft.Json.Linq;
+using System.Threading.Tasks;
 
 namespace TeslaLogger
 {
@@ -26,7 +27,7 @@ namespace TeslaLogger
         public double CrossBorderElectricityTrading = double.NaN;
         public double DayAheadAuction = double.NaN;
 
-        internal int GetData(string country, DateTime dateTime)
+        internal async Task<int> GetDataAsync(string country, DateTime dateTime)
         {
             country = country.Trim().ToLower();
             CrossBorderElectricityTrading = double.NaN;
@@ -62,7 +63,7 @@ namespace TeslaLogger
             if (File.Exists(path) && useCache)
                 content = File.ReadAllText(path);
             else
-                content = GetEnergyChartData(country, filename, writeCache);
+                content = await GetEnergyChartDataAsync(country, filename, writeCache);
 
             if (content == null)
                 throw new Exception("No Data for :" + path);
@@ -213,7 +214,7 @@ namespace TeslaLogger
             if (File.Exists(path))
                 content = File.ReadAllText(path);
             else
-                content = GetEnergyChartData(country, filename, writeCache);
+                content = GetEnergyChartDataAsync(country, filename, writeCache).Result;
 
             dynamic j = JsonConvert.DeserializeObject(content);
 
@@ -314,7 +315,7 @@ namespace TeslaLogger
             }
         }
 
-        public static string GetEnergyChartData(string country, string filename, Boolean writeCache)
+        public static async Task<string> GetEnergyChartDataAsync(string country, string filename, Boolean writeCache)
         {
             string resultContent = "";
            
@@ -330,7 +331,7 @@ namespace TeslaLogger
                 {
                     resultContent = client.DownloadString(url);
 
-                    DBHelper.AddMothershipDataToDBAsync("EnergyCharts", start, 0, 0);
+                    await DBHelper.AddMothershipDataToDBAsync("EnergyCharts", start, 0, 0);
 
                     Console.WriteLine("Download URL ok: " + url);
                 }

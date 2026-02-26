@@ -50,7 +50,7 @@ namespace UnitTestsTeslalogger
             c.dbHelper.InsertPosAsync(TelemetryParser.DateTimeToUTC_UnixTimestamp(dt).ToString(), 48.1850756, 9.9016996, 0, 0, 1000, 100, 100, 30, 20, 10, null);
 
             c.dbHelper.InsertCharging(TelemetryParser.DateTimeToUTC_UnixTimestamp(dt.AddSeconds(10)).ToString(), "30", "0", "11", 100, 100, "240", "2", "16", null, true, "16", "16");
-            c.dbHelper.StartChargingState(c.webhelper);
+            c.dbHelper.StartChargingStateAsync(c.webhelper);
 
             Console.WriteLine("ChargingStateID: " + c.dbHelper.GetMaxChargingstateId(out _, out _, out _, out _));
 
@@ -70,7 +70,7 @@ namespace UnitTestsTeslalogger
 
             c.dbHelper.InsertPosAsync(TelemetryParser.DateTimeToUTC_UnixTimestamp(dt.AddMinutes(60)).ToString(), 48.1850756, 9.9016996, 0, 0, 1000, 100, 100, 30, 20, 10, null); // same pos and same odometer
             c.dbHelper.InsertCharging(TelemetryParser.DateTimeToUTC_UnixTimestamp(dt.AddMinutes(61)).ToString(), "30", "0", "11", 100, 100, "240", "2", "16", null, true, "16", "16");
-            c.dbHelper.StartChargingState(c.webhelper);
+            c.dbHelper.StartChargingStateAsync(c.webhelper);
             Console.WriteLine("ChargingStateID: " + c.dbHelper.GetMaxChargingstateId(out _, out _, out _, out _));
 
 
@@ -102,7 +102,7 @@ namespace UnitTestsTeslalogger
             c.dbHelper.InsertPosAsync(TelemetryParser.DateTimeToUTC_UnixTimestamp(dt).ToString(), 48.1850756, 9.9016996, 0, 0, 1000, 100, 100, 30, 20, 10, null);
 
             c.dbHelper.InsertCharging(TelemetryParser.DateTimeToUTC_UnixTimestamp(dt.AddSeconds(10)).ToString(), "30", "0", "11", 100, 100, "240", "2", "16", null, true, "16", "16");
-            c.dbHelper.StartChargingState(c.webhelper);
+            c.dbHelper.StartChargingStateAsync(c.webhelper);
 
             Console.WriteLine("ChargingStateID: " + c.dbHelper.GetMaxChargingstateId(out _, out _, out _, out _));
 
@@ -122,7 +122,7 @@ namespace UnitTestsTeslalogger
 
             c.dbHelper.InsertPosAsync(TelemetryParser.DateTimeToUTC_UnixTimestamp(dt.AddMinutes(60)).ToString(), 48.1850756, 9.9016996, 0, 0, 1001, 100, 100, 30, 20, 10, null); // different odometer
             c.dbHelper.InsertCharging(TelemetryParser.DateTimeToUTC_UnixTimestamp(dt.AddMinutes(61)).ToString(), "30", "0", "11", 100, 100, "240", "2", "16", null, true, "16", "16");
-            c.dbHelper.StartChargingState(c.webhelper);
+            c.dbHelper.StartChargingStateAsync(c.webhelper);
             Console.WriteLine("ChargingStateID: " + c.dbHelper.GetMaxChargingstateId(out _, out _, out _, out _));
 
 

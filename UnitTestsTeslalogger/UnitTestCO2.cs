@@ -32,14 +32,14 @@ namespace UnitTestsTeslalogger
         [TestMethod]
         public void TestDEToday()
         {
-            int c = co2.GetData("de", DateTime.Now.AddHours(-4));
+            int c = co2.GetDataAsync("de", DateTime.Now.AddHours(-4));
             Assert.IsTrue(c > 100);
         }
 
         [TestMethod]
         public void TestFRToday()
         {
-            int c = co2.GetData("fr", DateTime.Now.AddHours(-4));
+            int c = co2.GetDataAsync("fr", DateTime.Now.AddHours(-4));
             Assert.IsTrue(c < 200);
         }
 
@@ -47,178 +47,178 @@ namespace UnitTestsTeslalogger
         [TestMethod]
         public void TestDE()
         {
-            int c = co2.GetData("de", dateTime);
+            int c = co2.GetDataAsync("de", dateTime);
             Assert.AreEqual(423, c, 10);
         }
 
         [TestMethod]
         public void TestDE_KW53() 
         {
-            int c = co2.GetData("de", new DateTime(2024,12,30,12,10,0));
+            int c = co2.GetDataAsync("de", new DateTime(2024,12,30,12,10,0));
             // Assert.AreEqual(91, c, 10);
         }
 
         [TestMethod]
         public void TestFR()
         {
-            int c = co2.GetData("fr", dateTime);
+            int c = co2.GetDataAsync("fr", dateTime);
             Assert.AreEqual(67, c, 10);
         }
 
         [TestMethod]
         public void TestCH()
         {
-            int c = co2.GetData("ch", dateTime);
+            int c = co2.GetDataAsync("ch", dateTime);
             Assert.AreEqual(153, c, 20);
         }
 
         [TestMethod]
         public void TestAT()
         {
-            int c = co2.GetData("at", dateTime);
+            int c = co2.GetDataAsync("at", dateTime);
             Assert.AreEqual(414, c, 20);
         }
 
         [TestMethod]
         public void TestIT()
         {
-            int c = co2.GetData("it", dateTime);
+            int c = co2.GetDataAsync("it", dateTime);
             Assert.AreEqual(500, c, 10);
         }
 
         [TestMethod]
         public void TestRO()
         {
-            int c = co2.GetData("ro", dateTime);
+            int c = co2.GetDataAsync("ro", dateTime);
             Assert.AreEqual(320, c, 10);
         }
 
         [TestMethod]
         public void TestPT()
         {
-            int c = co2.GetData("pt", dateTime);
+            int c = co2.GetDataAsync("pt", dateTime);
             Assert.AreEqual(125, c, 20);
         }
 
         [TestMethod]
         public void TestES()
         {
-            int c = co2.GetData("es", dateTime);
+            int c = co2.GetDataAsync("es", dateTime);
             Assert.AreEqual(140, c, 30);
         }
 
         [TestMethod]
         public void TestBE()
         {
-            int c = co2.GetData("be", dateTime);
+            int c = co2.GetDataAsync("be", dateTime);
             Assert.AreEqual(201, c, 20);
         }
         [TestMethod]
         public void TestDK()
         {
-            int c = co2.GetData("dk", dateTime);
+            int c = co2.GetDataAsync("dk", dateTime);
             Assert.AreEqual(209, c, 10);
         }
         [TestMethod]
         public void TestHR()
         {
-            int c = co2.GetData("hr", dateTime);
+            int c = co2.GetDataAsync("hr", dateTime);
             Assert.AreEqual(336, c, 35);
         }
         [TestMethod]
         public void TestCZ()
         {
-            int c = co2.GetData("cz", dateTime);
+            int c = co2.GetDataAsync("cz", dateTime);
             Assert.AreEqual(620, c, 10);
         }
         [TestMethod]
         public void TestHU()
         {
-            int c = co2.GetData("hu", dateTime);
+            int c = co2.GetDataAsync("hu", dateTime);
             Assert.AreEqual(317, c, 10);
         }
         [TestMethod]
         public void TestNL()
         {
-            int c = co2.GetData("nl", dateTime);
+            int c = co2.GetDataAsync("nl", dateTime);
             Assert.AreEqual(512, c, 10);
         }
         [TestMethod]
         public void TestNO()
         {
-            int c = co2.GetData("no", dateTime);
+            int c = co2.GetDataAsync("no", dateTime);
             Assert.AreEqual(47, c, 20);
         }
         [TestMethod]
         public void TestSI()
         {
-            int c = co2.GetData("si", dateTime);
+            int c = co2.GetDataAsync("si", dateTime);
             Assert.AreEqual(291, c, 10);
         }
         [TestMethod]
         public void TestSE()
         {
-            int c = co2.GetData("se", dateTime);
+            int c = co2.GetDataAsync("se", dateTime);
             Assert.AreEqual(69, c, 10);
         }
         [TestMethod]
         public void TestGB()
         {
-            int c = co2.GetData("gb", dateTime);
+            int c = co2.GetDataAsync("gb", dateTime);
             Assert.AreEqual(161, c, 10);
         }
         [TestMethod]
         public void TestUK()
         {
-            int c = co2.GetData("uk", dateTime);
+            int c = co2.GetDataAsync("uk", dateTime);
             Assert.AreEqual(161, c, 10);
         }
         [TestMethod]
         public void TestPL()
         {
-            int c = co2.GetData("pl", dateTime);
+            int c = co2.GetDataAsync("pl", dateTime);
             Assert.AreEqual(719, c, 20);
         }
 
         [TestMethod]
         public void TestFI()
         {
-            int c = co2.GetData("fi", dateTime);
+            int c = co2.GetDataAsync("fi", dateTime);
             Assert.AreEqual(171, c, 10);
         }
 
         [TestMethod]
         public void TestSK()
         {
-            int c = co2.GetData("sk", dateTime);
+            int c = co2.GetDataAsync("sk", dateTime);
             Assert.AreEqual(363, c, 20);
         }
 
         [TestMethod]
         public void TestBG()
         {
-            int c = co2.GetData("bg", dateTime);
+            int c = co2.GetDataAsync("bg", dateTime);
             Assert.AreEqual(641, c, 10);
         }
 
         [TestMethod]
         public void TestEE()
         {
-            int c = co2.GetData("ee", dateTime);
+            int c = co2.GetDataAsync("ee", dateTime);
             Assert.AreEqual(767, c, 130);
         }
 
         [TestMethod]
         public void TestLV()
         {
-            int c = co2.GetData("lv", dateTime);
+            int c = co2.GetDataAsync("lv", dateTime);
             Assert.AreEqual(490, c, 55);
         }
 
         [TestMethod]
         public void TestGR()
         {
-            int c = co2.GetData("gr", dateTime);
+            int c = co2.GetDataAsync("gr", dateTime);
             Assert.AreEqual(571, c, 20);
         }
 
@@ -236,7 +236,7 @@ namespace UnitTestsTeslalogger
 
             while (dt < dtEnde)
             {
-                int c = co2.GetData("de", dt);
+                int c = co2.GetDataAsync("de", dt);
                 dt = dt.AddMinutes(15);
                 if (co2.CrossBorderElectricityTrading > 0)
                     continue;

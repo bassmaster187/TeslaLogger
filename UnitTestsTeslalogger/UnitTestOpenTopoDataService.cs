@@ -26,7 +26,7 @@ namespace UnitTestsTeslalogger
 
             int count = 0;
 
-            OpenTopoDataService.RequestLocations(items, (long id, double elevation ) => {
+            OpenTopoDataService.RequestLocationsAsync(items, (long id, double elevation ) => {
                 count ++;
                 if (id == 0)
                     Assert.AreEqual(568, elevation);

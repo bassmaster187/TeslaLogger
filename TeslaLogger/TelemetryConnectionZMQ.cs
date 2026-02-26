@@ -43,7 +43,7 @@ namespace TeslaLogger
             parser = new TelemetryParser(car);
             parser.InitFromDB();
 
-            t = new Thread(() => { RunAsync(); });
+            t = new Thread(() => { RunAsync().Wait(); });
             t.Start();
         }
 

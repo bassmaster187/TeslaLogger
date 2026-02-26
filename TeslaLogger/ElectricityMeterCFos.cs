@@ -19,8 +19,8 @@ namespace TeslaLogger
 
         internal string get_dev_info;
 
-        Guid guid; // defaults to new Guid();
         static WebClient client;
+        Guid guid = Guid.NewGuid();
 
         public ElectricityMeterCFos(string host, string paramater)
         {

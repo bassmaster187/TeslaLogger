@@ -16,8 +16,8 @@ namespace TeslaLogger
         string loadpointcarname;
         internal string api_state;
 
-        Guid guid; // defaults to new Guid();
         static WebClient client; 
+        Guid guid = Guid.NewGuid();
 
         public ElectricityMeterEVCC(string host, string parameter)
         {

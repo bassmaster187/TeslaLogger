@@ -24,7 +24,7 @@ namespace TeslaLogger
         internal string mockup_grid;
         internal string mockup_hierarchy;
 
-        Guid guid; // defaults to new Guid();
+        Guid guid = Guid.NewGuid(); // defaults to new Guid();
         static WebClient client;
 
         public ElectricityMeterOpenWB2(string host, string parameter)

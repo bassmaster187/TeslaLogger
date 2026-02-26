@@ -50,26 +50,28 @@ namespace KafkaConnector
             Console.WriteLine("Kafka subscribe: " + String.Join(", ", subscribe));
             consumer.Subscribe(subscribe);
 
-            Thread thread = new Thread(() => { Run(); } );
-            thread.Start();
+            Task.Run(async () => {await RunAsync(); });
         }
 
-        public void Run()
+        public async Task RunAsync()
         {
-            Thread.Sleep(10000);
+            await Task.Delay(1000);
             Console.WriteLine("*** Kafka Start consume ***");
             long msgcounter= 0;
+
+            int lastLog = Environment.TickCount;
 
             while (!ct.IsCancellationRequested)
             {
                 try
                 {
-                    var r = consumer.Consume();
+                    var r = consumer.Consume(ct.Token);
                     msgcounter++;
 
-                    if (msgcounter % 1000 == 0)
+                    if (Environment.TickCount < lastLog)
                     {
                         Console.WriteLine("Kafka Consume: " + msgcounter + " messages + / Queue: " + queue.Count);
+                        lastLog = Environment.TickCount + 30000;
                     }
 
                     // Interlocked.Increment(ref Metrics.consume_counter);

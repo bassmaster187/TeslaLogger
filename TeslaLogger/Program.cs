@@ -152,7 +152,7 @@ namespace TeslaLogger
 
                         Thread.Sleep(5000);
 
-                        Thread.CurrentThread.Abort();
+                        Environment.Exit(0);
                     }
                 }
             }
@@ -225,16 +225,9 @@ namespace TeslaLogger
         {
             try
             {
-                
-                Thread threadNearbySuCService = new Thread(() =>
-                {
-                    NearbySuCService.GetSingleton().Run();
-                })
-                {
-                    Name = "NearbySuCServiceThread"
-                };
-                threadNearbySuCService.Start();
-                
+                Task.Run(async() => {                    
+                    await NearbySuCService.GetSingleton().Run();
+                });                
             }
             catch (Exception ex)
             {
@@ -270,13 +263,11 @@ namespace TeslaLogger
                 {
                     string komoot_vin = Komoot.CheckVIN(id, r["vin"].ToString());
                     Komoot _komoot = new Komoot(id, Name.Replace("KOMOOT:", string.Empty), Password);
-                    Thread komootThread = new Thread(() =>
+                    Task.Run(async() =>
                     {
-                        _komoot.Run();
+                        await _komoot.RunAsync();
                     });
-                    komootThread.Name = $"KomootThread_{id}";
                     Logfile.Log($"starting Komoot thread for ID {id} {Name.Replace("KOMOOT:", string.Empty)} <{komoot_vin}>");
-                    komootThread.Start();
                     return; // do not start a car thread for komoot "cars"
                 }
                 String tesla_token = r["tesla_token"] as String ?? "";
@@ -686,7 +677,7 @@ namespace TeslaLogger
                 DateTime start = DateTime.Now;
                 Logfile.Log("RunHousekeepingInBackground started");
                 Tools.Housekeeping();
-                DBHelper.UpdateCO2();
+                DBHelper.UpdateCO2Async().Wait();
                 GeocodeCache.Cleanup();
                 Logfile.Log("RunHousekeepingInBackground finished, took " + (DateTime.Now - start).TotalMilliseconds + "ms");
             })
@@ -758,15 +749,15 @@ namespace TeslaLogger
             }
 
 
-            Thread DBUpdater = new Thread(() =>
+            Task.Run(async () =>
             {
                 try
                 {
                     // wait for DB updates
                     while (!UpdateTeslalogger.done.IsCancellationRequested)
-                        Thread.Sleep(5000);
+                        await Task.Delay(5000);
 
-                    Thread.Sleep(30000);
+                    await Task.Delay(30000);
 
                     DateTime start = DateTime.Now;
                     Logfile.Log("UpdateDbInBackground started");
@@ -794,9 +785,9 @@ namespace TeslaLogger
                     {
                         Car c = Car.Allcars[x];
                         ShareData sd = new ShareData(c);
-                        sd.SendAllChargingData();
-                        sd.SendDegradationData();
-                        sd.SendAllDrivingData();
+                        await sd.SendAllChargingDataAsync();
+                        await sd.SendDegradationDataAsync();
+                        await sd.SendAllDrivingDataAsync();
                     }
 
                     DBHelper.UpdateCarIDNull();
@@ -827,12 +818,7 @@ namespace TeslaLogger
                     ex.ToExceptionless().FirstCarUserID().Submit();
                     Logfile.Log(ex.ToString());
                 }
-            })
-            {
-                Priority = ThreadPriority.BelowNormal
-            };
-            DBUpdater.Name = "DBUpdaterThread";
-            DBUpdater.Start();
+            });
         }
     }
 }

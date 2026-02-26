@@ -13,6 +13,7 @@ using Newtonsoft.Json.Linq;
 using System.Net.Http.Headers;
 using System.Net;
 using TeslaLoggerNET8.Lucid;
+using System.Threading.Tasks;
 
 namespace TeslaLogger
 {
@@ -35,17 +36,17 @@ namespace TeslaLogger
             return _NearbySuCService;
         }
 
-        public void Run()
+        public async Task Run()
         {
             // initially sleep 30 seconds to let the cars get from Start to Online
-            Thread.Sleep(30000);
+            await Task.Delay(30000);
             try
             {
                 while (true)
                 {
                     if (Tools.UseNearbySuCService())
                     {
-                        Work();
+                        await WorkAsync();
                         GetNextSuperchargerToCalculate();
                     }
 
@@ -60,7 +61,7 @@ namespace TeslaLogger
             }
         }
 
-        private void Work()
+        private async Task WorkAsync()
         {
             ArrayList send = new ArrayList();
 
@@ -273,9 +274,9 @@ namespace TeslaLogger
                         if (nextsuc)
                             suffix = "?nextsuc=1";
 
-                        HttpResponseMessage result = client.PostAsync(new Uri("http://teslalogger.de/share_supercharger2.php" + suffix), content).Result;
+                        HttpResponseMessage result = client.PostAsync(new Uri("http://teslalogger.de/share_supercharger2.php" + suffix), content).Result    ;
                         string r = result.Content.ReadAsStringAsync().Result;
-                        DBHelper.AddMothershipDataToDBAsync("teslalogger.de/share_supercharger.php", start, (int)result.StatusCode, 0);
+                        _ = DBHelper.AddMothershipDataToDBAsync("teslalogger.de/share_supercharger.php", start, (int)result.StatusCode, 0);
 
                         Tools.DebugLog("ShareSuc: " + Environment.NewLine + r);
 

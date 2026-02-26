@@ -3351,7 +3351,7 @@ LIMIT 1", con)
             }
         }
 
-        public void StartChargingState(WebHelper wh)
+        public async Task StartChargingStateAsync(WebHelper wh)
         {
             object meter_vehicle_kwh_start = DBNull.Value;
             object meter_utility_kwh_start = DBNull.Value;
@@ -3382,7 +3382,7 @@ LIMIT 1", con)
 
             if (car.FleetAPI)
             {
-                car.webhelper.IsCharging(); // insert a charging row in DB
+                await car.webhelper.IsChargingAsync(); // insert a charging row in DB
                 UpdatePosFromCurrentJSON(posid);
             }
 
@@ -3450,7 +3450,7 @@ VALUES(
             // Check for one minute if meter claims car is really not charging 
             if (v != null && v.IsCharging() != true)
             {
-                Task.Run(() =>
+                _ =Task.Run(async () =>
                 {
                     for (int x = 0; x < 10; x++)
                     {
@@ -3466,7 +3466,7 @@ VALUES(
 
                     using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
                     {
-                        con.Open();
+                        await con.OpenAsync();
                         using (MySqlCommand cmd = new MySqlCommand(@"
 UPDATE
     chargingstate
@@ -3477,16 +3477,16 @@ WHERE
     id = @id", con))
                         {
                             cmd.Parameters.AddWithValue("@id", chargingstateid);
-                            _ = SQLTracer.TraceNQ(cmd, out _);
+                            await cmd.ExecuteNonQueryAsync();
                         }
                     }
-                });
+                }, car.cts.Token);
             }
 
-            _ = Task.Factory.StartNew(() =>
+            _ = Task.Run(async () =>
             {
                 // give TL some time to enter charge state
-                Thread.Sleep(30000);
+                await Task.Delay(30000);
                 // try to update chargingstate.pos
                 // are we still charging?
                 car.Log($"StartChargingState Task start");
@@ -3495,7 +3495,7 @@ WHERE
                 if (car.GetCurrentState() == Car.TeslaState.Charge)
                 {
                     // now get a new entry in pos
-                    wh.IsDrivingAsync(true);
+                    await wh.IsDrivingAsync(true);
                     // get lat, lng from max pos id
                     int newPos = GetMaxPosidLatLng(out poslat, out poslng);
                     car.Log($"StartChargingState Task newPos: {newPos}");
@@ -3562,7 +3562,7 @@ WHERE
                 {
                     car.Log($"StartChargingState Task GetCurrentState(): {car.GetCurrentState()}");
                 }
-            }, CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
+            }, car.cts.Token);
         }
 
         public void CloseDriveState(DateTime EndDate)
@@ -5506,6 +5506,33 @@ WHERE
         }
 
         [SuppressMessage("Security", "CA2100:Review SQL queries for security vulnerabilities")]
+        public static async Task<int> ExecuteSQLQueryAsync(string sql, int timeout = 30)
+        {
+            try
+            {
+                using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+                {
+                    await con.OpenAsync();
+                    using (MySqlCommand cmd = new MySqlCommand(sql, con))
+                    {
+                        if (timeout != 30)
+                        {
+                            cmd.CommandTimeout = timeout;
+                        }
+                        return await cmd.ExecuteNonQueryAsync();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ex.ToExceptionless().FirstCarUserID().Submit();
+                Logfile.Log("Error in: " + sql);
+                Logfile.ExceptionWriter(ex, sql);
+                throw;
+            }
+        }
+
+        [SuppressMessage("Security", "CA2100:Review SQL queries for security vulnerabilities")]
         public static object ExecuteSQLScalar(string sql, int timeout = 30)
         {
             try
@@ -6721,7 +6748,7 @@ FROM
             return dt;
         }
 
-        internal static void UpdateCO2()
+        internal static async Task UpdateCO2Async()
         {
             try
             {
@@ -6782,7 +6809,7 @@ FROM
                                 calculateCountry = country;
                                 calculateDate = dateTime;
 
-                                int c = co2.GetData(country, dateTime);
+                                int c = await co2.GetDataAsync(country, dateTime);
                                 UpdateChargingStateCountryCO2(id, country, c);
 
                                 lastLat = lat;
@@ -6808,7 +6835,7 @@ FROM
                                     calculateCountry = lastCountry;
                                     calculateDate = dateTime;
 
-                                    int c = co2.GetData(lastCountry, dateTime);
+                                    int c = await co2.GetDataAsync(lastCountry, dateTime);
                                     if (c > 0)
                                     {
                                         UpdateChargingStateCountryCO2(id, lastCountry, c);

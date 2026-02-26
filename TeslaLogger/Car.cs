@@ -74,7 +74,7 @@ namespace TeslaLogger
         internal HFLMode GetHighFrequencyLoggingMode() { return highFrequencyLoggingMode; }
 
         protected Task loopTask;
-        protected CancellationTokenSource cts = new CancellationTokenSource();
+        internal CancellationTokenSource cts = new();
         private bool run = true;
 
         internal string TeslaName;
@@ -301,7 +301,7 @@ namespace TeslaLogger
 
                     if (CarInDB > 0 && !manualTokenRefreshNeeded)
                     {
-                        loopTask = Task.Run(() => { LoopAsync();});
+                        loopTask = Task.Run(async () => { await LoopAsync();});
 
                         if (VIN2DBCarID.ContainsKey(vin))
                             VIN2DBCarID.Remove(vin);
@@ -403,7 +403,7 @@ namespace TeslaLogger
                         switch (GetCurrentState())
                         {
                             case TeslaState.Start:
-                                HandleState_Start();
+                                await HandleState_StartAsync();
                                 break;
 
                             case TeslaState.Online:
@@ -411,11 +411,11 @@ namespace TeslaLogger
                                 break;
 
                             case TeslaState.Charge:
-                                HandleState_Charge();
+                                await HandleState_ChargeAsync();
                                 break;
 
                             case TeslaState.Sleep:
-                                HandleState_SleepAsync();
+                                await HandleState_SleepAsync();
                                 break;
 
                             case TeslaState.Drive:
@@ -423,7 +423,7 @@ namespace TeslaLogger
                                 break;
 
                             case TeslaState.GoSleep:
-                                HandleState_GoSleep();
+                                await HandleState_GoSleep();
                                 break;
 
                             case TeslaState.Park:
@@ -620,7 +620,7 @@ namespace TeslaLogger
             loopTask?.Wait();
         }
 
-        private void HandleState_GoSleep()
+        private async Task HandleState_GoSleep()
         {
             webhelper.ResetLastChargingState();
             bool KeepSleeping = true;
@@ -631,13 +631,14 @@ namespace TeslaLogger
                 while (KeepSleeping)
                 {
                     round++;
-                    Thread.Sleep(1000);
+                    
+                    await Task.Delay(1000, cts.Token);
                     if (File.Exists(FileManager.GetWakeupTeslaloggerPath(CarInDB)))
                     {
 
                         if (webhelper.DeleteWakeupFile())
                         {
-                            string wakeup = webhelper.Wakeup().Result;
+                            string wakeup = await webhelper.Wakeup();
                         }
 
                         KeepSleeping = false;
@@ -652,7 +653,7 @@ namespace TeslaLogger
                         {
                             if (webhelper.DeleteWakeupFile())
                             {
-                                string wakeup = webhelper.Wakeup().Result;
+                                string wakeup = await webhelper.Wakeup();
                             }
 
                             KeepSleeping = false;
@@ -722,7 +723,7 @@ namespace TeslaLogger
                 }
                 else
                 {
-                    if (webhelper.IsCharging(true))
+                    if (await webhelper.IsChargingAsync(true))
                     {
                         Log("Charging during Drive -> Finish Trip!!!");
                         DriveFinished();
@@ -759,14 +760,14 @@ namespace TeslaLogger
             }
             else
             {
-                webhelper.IsDrivingAsync(true); // insert a last position. Maybe the last one is too old
+                await webhelper.IsDrivingAsync(true); // insert a last position. Maybe the last one is too old
 
                 DriveFinished();
 
                 ShareData sd = new ShareData(this);
-                _ = Task.Factory.StartNew(() =>
+                _ = Task.Factory.StartNew(async () =>
                 {
-                    sd.SendAllChargingData();
+                    await sd.SendAllChargingDataAsync();
                 }, CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
             }
 
@@ -795,7 +796,7 @@ namespace TeslaLogger
                 int sleep = SleepInStateSleep / 250;
                 for (int x = 0; x < sleep; x++)
                 {
-                    await Task.Delay(250);
+                    await Task.Delay(250, cts.Token);
 
                     if (FleetAPI && telemetryParser?.IsOnline() == true)
                     {
@@ -809,13 +810,13 @@ namespace TeslaLogger
         }
 
         // sleep 10000 unless in highFrequencyLogging mode
-        private void HandleState_Charge()
+        private async Task HandleState_ChargeAsync()
         {
             {
-                if (!webhelper.IsCharging(false, IsHighFrequenceLoggingEnabled()))
+                if (!await webhelper.IsChargingAsync(false, IsHighFrequenceLoggingEnabled()))
                 {
                     SetCurrentState(TeslaState.Start);
-                    webhelper.IsDrivingAsync(true);
+                    await webhelper.IsDrivingAsync(true);
                 }
                 else
                 {
@@ -904,10 +905,10 @@ namespace TeslaLogger
                     DbHelper.StartDriveState(DateTime.Now);
                     SetCurrentState(TeslaState.Drive);
 
-                    Task.Run(() => webhelper.DeleteWakeupFile());
+                    _ = Task.Run(() => webhelper.DeleteWakeupFile());
                     return;
                 }
-                else if (webhelper.IsCharging(true))
+                else if (await webhelper.IsChargingAsync(true))
                 {
                     lastCarUsed = DateTime.Now;
                     Log("Charging");
@@ -916,8 +917,8 @@ namespace TeslaLogger
                         webhelper.scanMyTesla.FastMode(true);
                     }
 
-                    webhelper.IsDrivingAsync(true);
-                    DbHelper.StartChargingState(webhelper);
+                    await webhelper.IsDrivingAsync(true);
+                    await DbHelper.StartChargingStateAsync(webhelper);
                     SetCurrentState(TeslaState.Charge);
 
                     webhelper.DeleteWakeupFile();
@@ -982,7 +983,7 @@ namespace TeslaLogger
                             Log("Car is sleeping because of 408");
                             SetCurrentState(TeslaState.Sleep);
                             lastCarUsed = DateTime.Now;
-                            DbHelper.StartStateAsync("asleep");
+                            await DbHelper.StartStateAsync("asleep");
                         }
 
                         // wenn er 15 min online war und nicht geladen oder gefahren ist, dann muss man ihn die möglichkeit geben offline zu gehen
@@ -991,7 +992,7 @@ namespace TeslaLogger
                         {
                             SetCurrentState(TeslaState.Start);
 
-                            webhelper.IsDrivingAsync(true); // kurz bevor er schlafen geht, eine Positionsmeldung speichern und schauen ob standheizung / standklima / sentry läuft.
+                            await webhelper.IsDrivingAsync(true); // kurz bevor er schlafen geht, eine Positionsmeldung speichern und schauen ob standheizung / standklima / sentry läuft.
                             Address addr = Geofence.GetInstance().GetPOI(CurrentJSON.GetLatitude(), CurrentJSON.GetLongitude(), false);
                             if (!CanFallAsleep(out string reason))
                             {
@@ -1200,10 +1201,10 @@ namespace TeslaLogger
                 {
                     if (Tools.IsShareData())
                     {
-                        Task.Run(() =>
+                        Task.Run(async () =>
                         {
                             var sd = new ShareData(this);
-                            sd.SendDegradationData();
+                            await sd.SendDegradationDataAsync();
                         });
                     }
                 }
@@ -1217,7 +1218,7 @@ namespace TeslaLogger
 
         // if offline, sleep 30000
         // loop until wackup file or back online, sleep 30000 in loop
-        private void HandleState_Start()
+        private async Task HandleState_StartAsync()
         {
             RefreshToken();
 
@@ -1239,7 +1240,7 @@ namespace TeslaLogger
             {
                 if (ex.ErrorCode == -2147467259) // {"Duplicate entry 'xxx' for key 'ix_endpos'"}
                 {
-                    webhelper.IsDrivingAsync(true);
+                    await webhelper.IsDrivingAsync(true);
                     Log(ex.Message);
                 }
 
@@ -1260,9 +1261,9 @@ namespace TeslaLogger
                 if (FleetAPI && String.IsNullOrEmpty(FleetApiAddress))
                     webhelper.GetRegion();
 
-                webhelper.IsDrivingAsync(true);
+                await webhelper.IsDrivingAsync(true);
                 webhelper.ResetLastChargingState();
-                DbHelper.StartStateAsync(res);
+                await DbHelper.StartStateAsync(res);
                 DbHelper.CleanPasswort();
                 return;
             }
@@ -1270,19 +1271,20 @@ namespace TeslaLogger
             {
                 //Log(res);
                 SetCurrentState(TeslaState.Sleep);
-                DbHelper.StartStateAsync(res);
+                await DbHelper.StartStateAsync(res);
                 webhelper.ResetLastChargingState();
                 CurrentJSON.CreateCurrentJSON();
             }
             else if (res == "offline")
             {
                 //Log(res);
-                DbHelper.StartStateAsync(res);
+                await DbHelper.StartStateAsync(res);
                 CurrentJSON.CreateCurrentJSON();
 
                 while (true)
                 {
-                    Thread.Sleep(30000);
+                    await Task.Delay(30000, cts.Token);
+
                     string res2 = "";
 
                     lock (WebHelper.isOnlineLock)
@@ -1313,7 +1315,7 @@ namespace TeslaLogger
             {
                 SetCurrentState(TeslaState.Start);
                 Log("IS IN SERVICE");
-                Thread.Sleep(1000 * 60 * 30);
+                await Task.Delay(1000 * 60 * 30, cts.Token);
             }
             else
             {
@@ -1323,7 +1325,7 @@ namespace TeslaLogger
 
                 Log("Unhandled State: " + res);
 
-                Thread.Sleep(60000);
+                await Task.Delay(60000, cts.Token);
             }
         }
 
@@ -1432,9 +1434,9 @@ namespace TeslaLogger
 
                         // Every 10 Days send degradataion Data
                         ShareData sd = new ShareData(this);
-                        _ = Task.Factory.StartNew(() =>
+                        _ = Task.Factory.StartNew(async() =>
                         {
-                            sd.SendDegradationData();
+                            await sd.SendDegradationDataAsync();
                         }, CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
                     }
                     else
@@ -1547,10 +1549,10 @@ namespace TeslaLogger
             Match m = Regex.Match(_flagconfig, pattern);
             if (m.Success && m.Groups.Count == 3 && m.Groups[1].Captures.Count == 1 && m.Groups[2].Captures.Count == 1 && m.Groups[1].Captures[0].ToString().Contains(_oldState) && m.Groups[2].Captures[0].ToString().Contains(_newState))
             {
-                _ = Task.Factory.StartNew(() =>
+                _ = Task.Factory.StartNew(async () =>
                 {
                     Log("OpenChargePort ...");
-                    string result = webhelper.PostCommand("command/charge_port_door_open", null).Result;
+                    string result = await webhelper.PostCommand("command/charge_port_door_open", null);
                     Log("charge_port_door_open(): " + result);
                 }, CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
             }
@@ -1562,10 +1564,10 @@ namespace TeslaLogger
             Match m = Regex.Match(_flagconfig, pattern);
             if (m.Success && m.Groups.Count == 3 && m.Groups[1].Captures.Count == 1 && m.Groups[2].Captures.Count == 1 && m.Groups[1].Captures[0].ToString().Contains(_oldState) && m.Groups[2].Captures[0].ToString().Contains(_newState))
             {
-                _ = Task.Factory.StartNew(() =>
+                _ = Task.Factory.StartNew(async () =>
                 {
                     Log("EnableSentryMode ...");
-                    string result = webhelper.PostCommand("command/set_sentry_mode", "{\"on\":true}", true).Result;
+                    string result = await webhelper.PostCommand("command/set_sentry_mode", "{\"on\":true}", true);
                     Log("set_sentry_mode(): " + result);
                 }, CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
             }
@@ -1577,10 +1579,10 @@ namespace TeslaLogger
             Match m = Regex.Match(_flagconfig, pattern);
             if (m.Success && m.Groups.Count == 3 && m.Groups[1].Captures.Count == 1 && m.Groups[2].Captures.Count == 1 && m.Groups[1].Captures[0].ToString().Contains(_oldState) && m.Groups[2].Captures[0].ToString().Contains(_newState))
             {
-                _ = Task.Factory.StartNew(() =>
+                _ = Task.Factory.StartNew(async () =>
                 {
                     Log("DisableSentryMode ...");
-                    string result = webhelper.PostCommand("command/set_sentry_mode", "{\"on\":false}", true).Result;
+                    string result = await webhelper.PostCommand("command/set_sentry_mode", "{\"on\":false}", true);
                     Log("set_sentry_mode(): " + result);
                 }, CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
             }
@@ -1592,10 +1594,10 @@ namespace TeslaLogger
             Match m = Regex.Match(_flagconfig, pattern);
             if (m.Success && m.Groups.Count == 3 && m.Groups[1].Captures.Count == 1 && m.Groups[2].Captures.Count == 1 && m.Groups[1].Captures[0].ToString().Contains(_oldState) && m.Groups[2].Captures[0].ToString().Contains(_newState))
             {
-                _ = Task.Factory.StartNew(() =>
+                _ = Task.Factory.StartNew(async () =>
                 {
                     Log("ClimateOff ...");
-                    string result = webhelper.PostCommand("command/auto_conditioning_stop", null).Result;
+                    string result = await webhelper.PostCommand("command/auto_conditioning_stop", null);
                     Log("auto_conditioning_stop(): " + result);
                 }, CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
             }
@@ -1611,10 +1613,10 @@ namespace TeslaLogger
                 {
                     if (!LastSetChargeLimitAddressName.Equals(_addr.name, StringComparison.Ordinal))
                     {
-                        _ = Task.Factory.StartNew(() =>
+                        _ = Task.Factory.StartNew(async () =>
                         {
                             Log($"SetChargeLimit to {chargelimit} at '{_addr.name}' ...");
-                            string result = webhelper.PostCommand("command/set_charge_limit", "{\"percent\":" + chargelimit + "}", true).Result;
+                            string result = await webhelper.PostCommand("command/set_charge_limit", "{\"percent\":" + chargelimit + "}", true);
                             Log("set_charge_limit(): " + result);
                             LastSetChargeLimitAddressName = _addr.name;
                         }, CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
@@ -1631,7 +1633,7 @@ namespace TeslaLogger
             {
                 if (m.Groups[1].Captures[0] != null && int.TryParse(m.Groups[1].Captures[0].ToString(), out int chargelimit))
                 {
-                    _ = Task.Factory.StartNew(() =>
+                    _ = Task.Factory.StartNew(async () =>
                       {
                           // check if SoC < +occ value
                           if (teslaAPIState.GetInt("battery_level", out int battery_level) && battery_level < chargelimit)
@@ -1641,7 +1643,7 @@ namespace TeslaLogger
                           else // set chargelimit or fallback if teslaAPIState.GetInt fails
                           {
                               Log($"OnChargeComplete set charge limit to {chargelimit} at '{_addr.name}' ...");
-                              string result = webhelper.PostCommand("command/set_charge_limit", "{\"percent\":" + chargelimit + "}", true).Result;
+                              string result = await webhelper.PostCommand("command/set_charge_limit", "{\"percent\":" + chargelimit + "}", true);
                               Log("set_charge_limit(): " + result);
                               // reset LastSetChargeLimitAddressName so that +scl can set the charge limit again
                               LastSetChargeLimitAddressName = string.Empty;

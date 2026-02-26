@@ -17,11 +17,13 @@ namespace TeslaLogger
         private string token;
         private Thread thread;
         private bool fastmode; // defaults to false
-        private bool run = true;
         internal HttpClient httpclient_teslalogger_de;
         Car car;
 
         DateTime lastScanMyTeslaActive = DateTime.MinValue;
+
+        CancellationTokenSource cancellationTokenSource = new();
+        Task taskLoop;
 
         internal ScanMyTesla(Car c)
         {
@@ -30,9 +32,10 @@ namespace TeslaLogger
                 token = c.TaskerHash;
                 car = c;
 
-                thread = new Thread(new ThreadStart(Start));
-                thread.Name = "ScanMyTesla_" + car.CarInDB;
-                thread.Start();
+                taskLoop = Task.Run(async () =>
+                {
+                    await Start();
+                });
             }
         }
 
@@ -42,7 +45,7 @@ namespace TeslaLogger
             fastmode = fast;
         }
 
-        private void Start()
+        private async Task Start()
         {
             if (!Tools.UseScanMyTesla())
             {
@@ -59,11 +62,11 @@ namespace TeslaLogger
 
             string response = "";
 
-            while (run)
+            while (!cancellationTokenSource.IsCancellationRequested)
             {
                 try
                 {
-                    System.Threading.Thread.Sleep(5000);
+                    await Task.Delay(5000, cancellationTokenSource.Token);
 
                     if (!fastmode && response == "not found")
                     {
@@ -74,7 +77,7 @@ namespace TeslaLogger
                                 break;
                             }
 
-                            System.Threading.Thread.Sleep(100);
+                            await Task.Delay(100, cancellationTokenSource.Token);
                         }
                     }
 
@@ -122,14 +125,14 @@ namespace TeslaLogger
                     if (result.StatusCode == System.Net.HttpStatusCode.ServiceUnavailable)
                     {
                         car.CreateExeptionlessLog("ScanMyTesla", "GetDataFromWebservice Error Service Unavailable (503)", Exceptionless.Logging.LogLevel.Warn).Submit();
-                        car.Log("SMT: Error Service Unavailable (503)");
-                        System.Threading.Thread.Sleep(25000);
+                        car.Log("SMT: Error Service Unavailable (503)");                        
+                        await Task.Delay(25000);
                         return "ERROR: 503";
                     }
 
                     resultContent = await result.Content.ReadAsStringAsync().ConfigureAwait(true);
 
-                    DBHelper.AddMothershipDataToDBAsync("teslalogger.de/get_scanmytesla.php", start, (int)result.StatusCode, car.CarInDB);
+                    await DBHelper.AddMothershipDataToDBAsync("teslalogger.de/get_scanmytesla.php", start, (int)result.StatusCode, car.CarInDB);
 
                     if (resultContent == "not found")
                     {
@@ -141,7 +144,7 @@ namespace TeslaLogger
                         car.CreateExeptionlessLog("ScanMyTesla", "Too many connections", Exceptionless.Logging.LogLevel.Warn).Submit();
 
                         car.Log("SMT: Too many connections");
-                        Thread.Sleep(25000);
+                        await Task.Delay(25000);
                         return "Resource Limit Is Reached";
                     }
 
@@ -150,7 +153,7 @@ namespace TeslaLogger
                         car.CreateExeptionlessLog("ScanMyTesla", "Resource Limit Is Reached", Exceptionless.Logging.LogLevel.Warn).Submit();
 
                         car.Log("SMT: Resource Limit Is Reached");
-                        Thread.Sleep(25000);
+                        await Task.Delay(25000);
                         return "Resource Limit Is Reached";
                     }
 
@@ -265,14 +268,14 @@ namespace TeslaLogger
 
                     using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
                     {
-                        con.Open();
+                        await con.OpenAsync(cancellationTokenSource.Token);
 #pragma warning disable CA2100 // SQL-Abfragen auf Sicherheitsrisiken überprüfen
                         using (MySqlCommand cmd = new MySqlCommand(sb.ToString(), con))
 #pragma warning restore CA2100 // SQL-Abfragen auf Sicherheitsrisiken überprüfen
                         {
                             try
                             {
-                                _ = SQLTracer.TraceNQ(cmd, out _);
+                                await cmd.ExecuteNonQueryAsync(cancellationTokenSource.Token);
                             }
                             catch (MySqlException ex)
                             {
@@ -286,12 +289,12 @@ namespace TeslaLogger
                             {
                                 using (MySqlConnection con2 = new MySqlConnection(DBHelper.DBConnectionstring))
                                 {
-                                    con2.Open();
+                                    await con2.OpenAsync(cancellationTokenSource.Token);
                                     using (MySqlCommand cmd2 = new MySqlCommand("update cars set lastscanmytesla=@lastscanmytesla where id=@id", con2))
                                     {
                                         cmd2.Parameters.AddWithValue("@id", car.CarInDB);
                                         cmd2.Parameters.AddWithValue("@lastscanmytesla", DateTime.Now);
-                                        _ = SQLTracer.TraceNQ(cmd2, out _);
+                                        await cmd2.ExecuteReaderAsync(cancellationTokenSource.Token);
                                     }
                                 }
                             }
@@ -316,7 +319,7 @@ namespace TeslaLogger
                     car.CreateExceptionlessClient(ex).AddObject(resultContent, "ResultContent").Submit();
 
                 Logfile.ExceptionWriter(ex, resultContent);
-                Thread.Sleep(10000);
+                await Task.Delay(10000, cancellationTokenSource.Token);
             }
 
             return "NULL";
@@ -324,15 +327,15 @@ namespace TeslaLogger
 
         public void StopThread()
         {
-            run = false;
+            cancellationTokenSource.Cancel();
         }
 
         public void KillThread()
         {
             try
             {
-                thread?.Abort();
-                thread = null;
+                cancellationTokenSource.Cancel();
+                taskLoop.Wait();
             }
             catch (Exception ex)
             {

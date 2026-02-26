@@ -5,6 +5,7 @@ using System.Net.Http;
 using System.Collections.Generic;
 using Exceptionless;
 using Newtonsoft.Json;
+using System.Threading.Tasks;
 
 namespace TeslaLogger
 {
@@ -78,7 +79,7 @@ namespace TeslaLogger
                 if (queue.TryPopRange(items) > 0)
                 {
                     // build pipe separated query string for opentopodata.org
-                    RequestLocations(items, UpdateDB);
+                    RequestLocationsAsync(items, UpdateDB).Wait();
 
                     Thread.Sleep(90000); // sleep 90 seconds (safety marging)
                 }
@@ -95,7 +96,7 @@ namespace TeslaLogger
             _ = DBHelper.ExecuteSQLQuery($"UPDATE pos SET altitude = {elevation} WHERE id = {id}");
         }
 
-        internal static void RequestLocations(Tuple<long, double, double>[] items, RequestLocationsResponse response)
+        internal static async Task RequestLocationsAsync(Tuple<long, double, double>[] items, RequestLocationsResponse response)
         {
             string[] latlng = new string[items.Length];
             for (int i = 0; i < items.Length; i++)
@@ -112,9 +113,9 @@ namespace TeslaLogger
             {
                 client.DefaultRequestHeaders.Add("User-Agent", "C# App");
                 DateTime start = DateTime.UtcNow;
-                HttpResponseMessage result = client.GetAsync(new Uri(queryString)).Result;
-                resultContent = result.Content.ReadAsStringAsync().Result;
-                DBHelper.AddMothershipDataToDBAsync("OpenTopoData.Query", start, (int)result.StatusCode, 0);
+                HttpResponseMessage result = await client.GetAsync(new Uri(queryString));
+                resultContent = await result.Content.ReadAsStringAsync();
+                await DBHelper.AddMothershipDataToDBAsync("OpenTopoData.Query", start, (int)result.StatusCode, 0);
             }
             // parse result JSON
             if (!string.IsNullOrEmpty(resultContent))
