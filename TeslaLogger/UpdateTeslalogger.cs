@@ -1902,6 +1902,12 @@ PRIMARY KEY(id)
         {
             try
             {
+                if (Environment.GetEnvironmentVariable("SKIP_GRAFANA_UPDATE") == "true")
+                {
+                    Logfile.Log("SKIP_GRAFANA_UPDATE is set to true. Grafana update skipped.");
+                    return;
+                }
+
                 if (Tools.IsMono() || Tools.IsDocker() || Tools.IsDotnet8())
                 {
                     Tools.GrafanaSettings(out string power, out string temperature, out string length, out string pressure, out string language, out string URL_Admin,
