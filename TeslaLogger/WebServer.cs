@@ -251,6 +251,11 @@ namespace TeslaLogger
                     TeslaLoggerNET8.Lucid.LucidWebServer.HandleRequest(url, request, response);
                     return;
                 }
+                else if (url.Segments.Length > 2 && url.Segments[1] == "kafka/")
+                {
+                    TeslaLoggerNET8.Kafka.KafkaWebServer.HandleRequest(url, request, response);
+                    return;
+                }
 
 
                 switch (true)
