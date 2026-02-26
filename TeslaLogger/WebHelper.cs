@@ -112,6 +112,7 @@ namespace TeslaLogger
         internal int commandCounterCharging = 0;
         internal int commandcounterOnline = 0;
         int commandCounterDay = DateTime.UtcNow.Day;
+        static int lastGeocoding = Environment.TickCount;
 
         protected virtual void Dispose(bool disposing)
         {
@@ -3302,7 +3303,12 @@ namespace TeslaLogger
 
                 Tools.SetThreadEnUS();
 
-                Thread.Sleep(5000); // Sleep to not get banned by Nominatim
+                int elapsed = Environment.TickCount - lastGeocoding;
+                if (elapsed < 6000)
+                {
+                    await Task.Delay(6000 - elapsed);
+                }
+                lastGeocoding = Environment.TickCount;  
 
                 using (WebClient webClient = new WebClient())
                 {

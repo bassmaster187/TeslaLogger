@@ -5819,7 +5819,7 @@ WHERE
             return 0;
         }
 
-        virtual public string UpdateCountryCode()
+        virtual public async Task<string> UpdateCountryCodeAsync()
         {
             try
             {
@@ -5843,14 +5843,14 @@ WHERE
     )", con))
                     {
                         cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
-                        MySqlDataReader dr = SQLTracer.TraceDR(cmd);
-                        if (dr.Read())
+                        var dr = await cmd.ExecuteReaderAsync();
+                        if (await dr.ReadAsync())
                         {
                             double lat = Convert.ToDouble(dr[0], Tools.ciEnUS);
                             double lng = Convert.ToDouble(dr[1], Tools.ciEnUS);
                             dr.Close();
 
-                            WebHelper.ReverseGecocodingAsync(car, lat, lng, true, false).Wait();
+                            await WebHelper.ReverseGecocodingAsync(car, lat, lng, true, false);
                             return car.CurrentJSON.current_country_code;
                         }
                     }

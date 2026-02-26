@@ -319,7 +319,7 @@ ORDER BY
             }
         }
 
-        public void SendAllDrivingData()
+        public async Task SendAllDrivingDataAsync()
         {
             if (!shareData)
             {
@@ -371,7 +371,7 @@ ORDER BY
                     using (MySqlDataAdapter da = new MySqlDataAdapter(sql, DBHelper.DBConnectionstring))
                     {
                         da.SelectCommand.CommandTimeout = 600;
-                        SQLTracer.TraceDA(dt, da);
+                        await da.FillAsync(dt);
                         ms = Environment.TickCount - ms;
                         car.Log("ShareData: SELECT drivestate ms: " + ms);
 
@@ -408,8 +408,8 @@ ORDER BY
                                 {
 
                                     DateTime start = DateTime.UtcNow;
-                                    HttpResponseMessage result = client.PostAsync(new Uri("http://teslalogger.de/share_drivestate.php"), content).Result;
-                                    string r = result.Content.ReadAsStringAsync().Result;
+                                    HttpResponseMessage result = await client.PostAsync(new Uri("http://teslalogger.de/share_drivestate.php"), content);
+                                    string r = await result.Content.ReadAsStringAsync();
                                     _ = DBHelper.AddMothershipDataToDBAsync("teslalogger.de/share_drivestate.php", start, (int)result.StatusCode, car.CarInDB);
 
                                     //resultContent = result.Content.ReadAsStringAsync();
@@ -420,7 +420,7 @@ ORDER BY
                                         var ids = from myrow in dt.AsEnumerable() select myrow["hostid"];
                                         var l =  String.Join(",", ids.ToArray());
 
-                                        DBHelper.ExecuteSQLQuery($"update drivestate set export = {ProtocolVersion} where id in ({l})");
+                                        await DBHelper.ExecuteSQLQueryAsync($"update drivestate set export = {ProtocolVersion} where id in ({l})");
                                     }
 
                                     car.Log("ShareData: SendAllDrivingData end");
@@ -581,11 +581,6 @@ GROUP BY
                 car.Log("Error in ShareData:SendDegradationData " + ex.Message);
                 Logfile.WriteException(ex.ToString());
             }
-        }
-
-        internal async Task SendAllDrivingDataAsync()
-        {
-            throw new NotImplementedException();
         }
     }
 }

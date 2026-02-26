@@ -495,8 +495,8 @@ namespace TeslaLogger
                     Log("*** Using FLEET API ***");
                     CreateExeptionlessFeature("FleetAPI").Submit();
                 }
-                
 
+                var countryCode = DbHelper.UpdateCountryCodeAsync();
                 DbHelper.GetAvgConsumption(out this.sumkm, out this.avgkm, out this.kwh100km, out this.avgsocdiff, out this.maxkm);
 
                 if (!webhelper.RestoreToken())
@@ -540,7 +540,7 @@ namespace TeslaLogger
                     await webhelper.IsDrivingAsync(true);
                 }
 
-                Log("Country Code: " + DbHelper.UpdateCountryCode());
+                Log("Country Code: " + countryCode.Result);
                 CarVoltageAt50SOC = DbHelper.GetVoltageAt50PercentSOC(out DateTime startdate, out DateTime ende);
                 Log("Voltage at 50% SOC:" + CarVoltageAt50SOC + "V Date:" + startdate.ToString(Tools.ciEnUS));
 
@@ -707,7 +707,7 @@ namespace TeslaLogger
                     t = t / 100;
                     for (int x = 0; x < t; x++)
                     {
-                        Thread.Sleep(100);
+                        await Task.Delay(100, cts.Token);
                         if (FleetAPI && telemetryParser?.IsCharging == true)
                         {
                             Log("skip sleep because of telemetry is charging");
@@ -827,7 +827,7 @@ namespace TeslaLogger
                     }
                     else
                     {
-                        Thread.Sleep(10000); // 10000
+                        await Task.Delay(10000, cts.Token); // 10000
 
                         if (FleetAPI)
                         {
@@ -842,15 +842,15 @@ namespace TeslaLogger
                                 if (telemetryParser?.IsCharging == false)
                                     break;
 
-                                Thread.Sleep(1000);
+                                await Task.Delay(1000, cts.Token);
                             }                            
                         }
                         else
                         {
                             if (currentJSON.current_charger_power < 12)
-                                Thread.Sleep(50000);
+                                await Task.Delay(50000, cts.Token);
                             else
-                                Thread.Sleep(20000);
+                                await Task.Delay(20000, cts.Token);
 
                         }
                     }
@@ -953,7 +953,7 @@ namespace TeslaLogger
                     else if (FleetAPI && (CarType == "model3" || CarType == "modely" || CarType == "lychee" || CarType == "tamarind"))
                     {
                         // Log("API not suspended!");
-                        Thread.Sleep(1000);
+                        await Task.Delay(1000, cts.Token);
                         string res = "";
                         lock (WebHelper.isOnlineLock)
                         {
@@ -1086,7 +1086,7 @@ namespace TeslaLogger
                                             break;
                                         }
 
-                                        Thread.Sleep(1000 * 6); // sleep 6 seconds
+                                        await Task.Delay(1000 * 6, cts.Token); // sleep 6 seconds
                                     }
                                 }
                                 finally
@@ -1172,7 +1172,7 @@ namespace TeslaLogger
 
                         for (int s = 0; s < sleepduration / 500; s++)
                         {
-                            Thread.Sleep(500);
+                            await Task.Delay(500, cts.Token);
                             if (webhelper.DrivingOrChargingByStream)
                             {
                                 Log("Stop sleep by DrivingOrChargingByStream");
@@ -1357,10 +1357,10 @@ namespace TeslaLogger
 
             DbHelper.GetAvgConsumption(out this.sumkm, out this.avgkm, out this.kwh100km, out this.avgsocdiff, out this.maxkm);
 
-            Task.Run(() =>
+            Task.Run(async () =>
             {
                 var sd = new ShareData(this);
-                sd.SendAllDrivingData();
+                await sd.SendAllDrivingDataAsync();
             });
         }
 

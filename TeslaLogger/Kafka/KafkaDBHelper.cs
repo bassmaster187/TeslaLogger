@@ -16,7 +16,7 @@ namespace TeslaLoggerNET8.Kafka
         {
         }
 
-        public override string UpdateCountryCode()
+        public override async Task<string> UpdateCountryCodeAsync()
         {
             return "";
         }

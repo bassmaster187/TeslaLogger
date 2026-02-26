@@ -15,7 +15,6 @@ namespace TeslaLogger
     public class ScanMyTesla
     {
         private string token;
-        private Thread thread;
         private bool fastmode; // defaults to false
         internal HttpClient httpclient_teslalogger_de;
         Car car;
