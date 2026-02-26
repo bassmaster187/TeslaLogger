@@ -415,7 +415,7 @@ namespace TeslaLogger
                                 break;
 
                             case TeslaState.Sleep:
-                                HandleState_Sleep();
+                                HandleState_SleepAsync();
                                 break;
 
                             case TeslaState.Drive:
@@ -775,7 +775,7 @@ namespace TeslaLogger
 
         // if online, switch state and return
         // else sleep 10000
-        private void HandleState_Sleep()
+        private async Task HandleState_SleepAsync()
         {
             string res = "";
             lock (WebHelper.isOnlineLock)
@@ -788,14 +788,15 @@ namespace TeslaLogger
                 //Log(res);
                 SetCurrentState(TeslaState.Start);
 
-                webhelper.IsDrivingAsync(true); // Positionsmeldung in DB für Wechsel
+                await webhelper.IsDrivingAsync(true); // Positionsmeldung in DB für Wechsel
             }
             else
             {
                 int sleep = SleepInStateSleep / 250;
                 for (int x = 0; x < sleep; x++)
                 {
-                    Thread.Sleep(250);
+                    await Task.Delay(250);
+
                     if (FleetAPI && telemetryParser?.IsOnline() == true)
                     {
                         Log("skip sleep because of telemetry is online");

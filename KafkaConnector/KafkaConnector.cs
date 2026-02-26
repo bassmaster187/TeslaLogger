@@ -22,7 +22,7 @@ namespace KafkaConnector
             KafkaConnector.vins = vins;
 
             bootstrapServers = "kafka:9092";
-            groupID = "teslaloggeronline";
+            groupID = Environment.GetEnvironmentVariable("KAFKA_GROUP_ID") ?? "teslaloggeronlinedev";
             GetTopics();
 
             var cc = new ConsumerConfig
@@ -56,14 +56,22 @@ namespace KafkaConnector
 
         public void Run()
         {
-            Thread.Sleep(30000);
+            Thread.Sleep(10000);
             Console.WriteLine("*** Kafka Start consume ***");
+            long msgcounter= 0;
 
             while (!ct.IsCancellationRequested)
             {
                 try
                 {
                     var r = consumer.Consume();
+                    msgcounter++;
+
+                    if (msgcounter % 1000 == 0)
+                    {
+                        Console.WriteLine("Kafka Consume: " + msgcounter + " messages + / Queue: " + queue.Count);
+                    }
+
                     // Interlocked.Increment(ref Metrics.consume_counter);
 
                     // Log(r.Message.Key, "Kafka Consume");

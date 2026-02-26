@@ -26,7 +26,17 @@ namespace TeslaLoggerNET8
                     if (instance == null)
                     {
                         instance = this;
-                        Task.Run(() => runAsync(cts.Token));
+                        tQueue = Task.Run(async () =>
+                        {
+                            try
+                            {
+                                await RunAsync(cts.Token);
+                            }
+                            catch (Exception ex)
+                            {
+                                Logfile.Log("Error in TelemetryConnectionKafka RunAsync: " + ex);
+                            }
+                        });
                     }
 
                     var parser = new TelemetryParser(car);
@@ -41,7 +51,7 @@ namespace TeslaLoggerNET8
             }
         }
 
-        static async Task runAsync(CancellationToken token)    
+        static async Task RunAsync(CancellationToken token)
         {
             var kc = new KafkaConnector.KafkaConnector(ref queue, ref vins);
             

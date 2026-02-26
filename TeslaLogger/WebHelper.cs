@@ -4471,7 +4471,7 @@ WHERE
             string resultContent = "";
             try
             {
-                if (String.IsNullOrEmpty(apiaddress))
+                if (String.IsNullOrEmpty(apiaddress) || apiaddress == "KAFKA")
                     return "";
 
                 HttpClient httpclientgetChargingHistoryV2 = GethttpclientgetChargingHistoryV2();

@@ -1082,7 +1082,7 @@ WHERE
             {
                 using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
                 {
-                    con.OpenAsync();
+                    con.Open();
                     using (MySqlCommand cmd = new MySqlCommand("SELECT ABRP_token, ABRP_mode FROM cars where id = @CarID", con))
                     {
                         cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
