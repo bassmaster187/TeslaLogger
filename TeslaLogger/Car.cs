@@ -445,6 +445,14 @@ namespace TeslaLogger
                         webhelper.CheckRefreshToken();
 
                     }
+                    catch (TaskCanceledException tce)
+                    {
+                        if (!cts.IsCancellationRequested)
+                        {
+                            Log("LOOP: " + tce.ToString()); 
+                            SendException2Exceptionless(tce);
+                        }
+                    }
                     catch (Exception ex)
                     {
                         Log("LOOP: " + ex.ToString()); // xxx
@@ -460,7 +468,7 @@ namespace TeslaLogger
             {
                 string temp = ex.ToString();
 
-                if (!temp.Contains("ThreadAbortException"))
+                if (!temp.Contains("ThreadAbortException") && !temp.Contains("TaskCanceledException"))
                 {
                     SendException2Exceptionless(ex);
                     Log(temp);
@@ -617,7 +625,9 @@ namespace TeslaLogger
 
         public void ThreadJoin()
         {
+            Log("ThreadJoin start");
             loopTask?.Wait();
+            Log("ThreadJoin end");
         }
 
         private async Task HandleState_GoSleep()
