@@ -62,7 +62,7 @@ namespace UnitTestsTeslalogger
                 if (i == 7)
                     expectedACCharge = true; // PackCurrent: 16.8
 
-                telemetry.handleMessage(lines[i]);
+                telemetry.handleMessageAsync(lines[i]).Wait();
 
                 AssertStates(telemetry, i, lines[i]);
             }
@@ -88,7 +88,7 @@ namespace UnitTestsTeslalogger
                 if (i == 6)
                     expectedACCharge = true; // PackCurrent: 16.8
 
-                telemetry.handleMessage(lines[i]);
+                telemetry.handleMessageAsync(lines[i]).Wait();
 
                 AssertStates(telemetry, i, lines[i]);
             }
@@ -116,7 +116,7 @@ namespace UnitTestsTeslalogger
                 else if(i == 59)
                     expectedACCharge = false;
 
-                telemetry.handleMessage(lines[i]);
+                telemetry.handleMessageAsync(lines[i]).Wait();
 
                 AssertStates(telemetry, i, lines[i]);
             }
@@ -147,7 +147,7 @@ namespace UnitTestsTeslalogger
                 else if (i == 67)
                     expectedACCharge = false; // DetailedChargingState
 
-                telemetry.handleMessage(lines[i]);
+                telemetry.handleMessageAsync(lines[i]).Wait();
 
                 AssertStates(telemetry, i, lines[i]);
             }
@@ -172,7 +172,7 @@ namespace UnitTestsTeslalogger
                     expectedACCharge = true; // ACChargingPower: 3.2
 
 
-                telemetry.handleMessage(lines[i]);
+                telemetry.handleMessageAsync(lines[i]).Wait();
 
                 AssertStates(telemetry, i, lines[i]);
             }
@@ -198,7 +198,7 @@ namespace UnitTestsTeslalogger
                 else if (i == 202)
                     expectedDriving = true; // VehicleSpeed = 6.8
 
-                telemetry.handleMessage(lines[i]);
+                telemetry.handleMessageAsync(lines[i]).Wait();
 
                 if (i == 190)
                 {
@@ -226,7 +226,7 @@ namespace UnitTestsTeslalogger
                 if (i == 6)
                     expectedDCCharge = true; // DCChargingPower 7.3
 
-                telemetry.handleMessage(lines[i]);
+                telemetry.handleMessageAsync(lines[i]).Wait();
 
                 AssertStates(telemetry, i, lines[i]);
             }
@@ -252,7 +252,7 @@ namespace UnitTestsTeslalogger
                 if (i == 19)
                     expectedDCCharge = true; 
 
-                telemetry.handleMessage(lines[i]);
+                telemetry.handleMessageAsync(lines[i]).Wait();
 
                 AssertStates(telemetry, i, lines[i]);
             }
@@ -282,7 +282,7 @@ namespace UnitTestsTeslalogger
                 else if (i == 64)
                     expectedDriving = true; // VehicleSpeed = 0.62
 
-                telemetry.handleMessage(lines[i]);
+                telemetry.handleMessageAsync(lines[i]).Wait();
                 if (i == 15)
                 {
                     Assert.AreEqual(true, c.CurrentJSON.current_battery_heater);
@@ -316,7 +316,7 @@ namespace UnitTestsTeslalogger
                 else if (i == 38)
                     expectedDriving = false; // Gear: P
 
-                telemetry.handleMessage(lines[i]);
+                telemetry.handleMessageAsync(lines[i]).Wait();
                 AssertStates(telemetry, i, lines[i]);
             }
         }
@@ -339,7 +339,7 @@ namespace UnitTestsTeslalogger
                 else if (i == 6)
                     expectedDriving = false; // Gear: P
 
-                telemetry.handleMessage(lines[i]);
+                telemetry.handleMessageAsync(lines[i]).Wait();
                 AssertStates(telemetry, i, lines[i]);
             }
         }
@@ -362,7 +362,7 @@ namespace UnitTestsTeslalogger
                 else if (i == 37)
                     expectedDriving = false; // Gear: P
 
-                telemetry.handleMessage(lines[i]);
+                telemetry.handleMessageAsync(lines[i]).Wait();
                 AssertStates(telemetry, i, lines[i]);
             }
         }
@@ -379,7 +379,7 @@ namespace UnitTestsTeslalogger
 
             for (int i = 0; i < lines.Count; i++)
             {
-                telemetry.handleMessage(lines[i]);
+                telemetry.handleMessageAsync(lines[i]).Wait();
 
                 if (i == 0)
                     CheckDoors(c, false, false, false, false, false, false);
@@ -467,7 +467,7 @@ namespace UnitTestsTeslalogger
                     Assert.AreEqual(127, heading);
                 }
 
-                telemetry.handleMessage(lines[i]);
+                telemetry.handleMessageAsync(lines[i]).Wait();
                 AssertStates(telemetry, i, lines[i]);
             }
         }
@@ -485,7 +485,7 @@ namespace UnitTestsTeslalogger
 
             for (int i = 0; i < lines.Count; i++)
             {
-                telemetry.handleMessage(lines[i]);
+                telemetry.handleMessageAsync(lines[i]).Wait();
                 Assert.Inconclusive("Test skipped! Known problem");
                 // AssertStates(telemetry, i, lines[i]);
             }
@@ -504,7 +504,7 @@ namespace UnitTestsTeslalogger
 
             for (int i = 0; i < lines.Count; i++)
             {
-                telemetry.handleMessage(lines[i]);
+                telemetry.handleMessageAsync(lines[i]).Wait();
                 if (i == 0)
                 {
                     Assert.AreEqual(0, c.CurrentJSON.active_route_traffic_minutes_delay);
@@ -577,7 +577,7 @@ namespace UnitTestsTeslalogger
 
             for (int i = 0; i < lines.Count; i++)
             {
-                telemetry.handleMessage(lines[i]);
+                telemetry.handleMessageAsync(lines[i]).Wait();
                 if (i == 0)
                 {
                     Assert.AreEqual("", c.CurrentJSON.software_update_version);

@@ -73,7 +73,8 @@ namespace TeslaLogger
         private HFLMode highFrequencyLoggingMode = HFLMode.Ticks;
         internal HFLMode GetHighFrequencyLoggingMode() { return highFrequencyLoggingMode; }
 
-        protected Thread thread;
+        protected Task loopTask;
+        protected CancellationTokenSource cts = new CancellationTokenSource();
         private bool run = true;
 
         internal string TeslaName;
@@ -300,11 +301,7 @@ namespace TeslaLogger
 
                     if (CarInDB > 0 && !manualTokenRefreshNeeded)
                     {
-                        thread = new Thread(Loop)
-                        {
-                            Name = "Car_" + CarInDB
-                        };
-                        thread.Start();
+                        loopTask = Task.Run(() => { LoopAsync();});
 
                         if (VIN2DBCarID.ContainsKey(vin))
                             VIN2DBCarID.Remove(vin);
@@ -330,7 +327,7 @@ namespace TeslaLogger
             return -1; // -1 means error as CarID in database can only be a positive integer
         }
 
-        protected void Loop()
+        protected async Task LoopAsync()
         {
             try
             {
@@ -344,7 +341,7 @@ namespace TeslaLogger
                 {
                     CheckNewCredentials();
 
-                    InitStage3();
+                    await InitStage3Async();
 
                     if (ApplicationSettings.Default.UseTelemetryServer)
                     {
@@ -410,7 +407,7 @@ namespace TeslaLogger
                                 break;
 
                             case TeslaState.Online:
-                                HandleState_Online();
+                                await HandleState_OnlineAsync();
                                 break;
 
                             case TeslaState.Charge:
@@ -422,7 +419,7 @@ namespace TeslaLogger
                                 break;
 
                             case TeslaState.Drive:
-                                lastRacingPoint = HandleState_Drive(lastRacingPoint);
+                                lastRacingPoint = await HandleState_DriveAsync(lastRacingPoint);
                                 break;
 
                             case TeslaState.GoSleep:
@@ -431,17 +428,17 @@ namespace TeslaLogger
 
                             case TeslaState.Park:
                                 // this state is currently unused
-                                Thread.Sleep(5000);
+                                await Task.Delay(5000, cts.Token);
                                 break;
 
                             case TeslaState.WaitForSleep:
                                 // this state is currently unused
-                                Thread.Sleep(5000);
+                                await Task.Delay(5000, cts.Token);
                                 break;
 
                             default:
                                 Log("Main loop default reached with state: " + GetCurrentState().ToString());
-                                Thread.Sleep(30000);
+                                await Task.Delay(30000, cts.Token);
                                 break;
                         }
 
@@ -455,7 +452,7 @@ namespace TeslaLogger
                         SendException2Exceptionless(ex);
 
                         Logfile.ExceptionWriter(ex, "#" + CarInDB + ": main loop");
-                        Thread.Sleep(10000);
+                        await Task.Delay(10000, cts.Token);
                     }
                 }
             }
@@ -489,7 +486,7 @@ namespace TeslaLogger
             return true;
         }
 
-        private void InitStage3()
+        private async Task InitStage3Async()
         {
             try
             {
@@ -533,14 +530,14 @@ namespace TeslaLogger
                 DbHelper.GetEconomy_Wh_km(webhelper);
                 lock (WebHelper.isOnlineLock)
                 {
-                    string online = webhelper.IsOnline().Result;
+                    string online = webhelper.IsOnlineAsync().Result;
                 }
                 Log("Streamingtoken: " + Tools.ObfuscateString(webhelper.Tesla_Streamingtoken));
 
                 if (DbHelper.GetMaxPosid(false) == 0)
                 {
                     Log("Insert first Pos");
-                    webhelper.IsDriving(true);
+                    await webhelper.IsDrivingAsync(true);
                 }
 
                 Log("Country Code: " + DbHelper.UpdateCountryCode());
@@ -615,13 +612,12 @@ namespace TeslaLogger
             if (VIN2DBCarID.ContainsKey(vin))
                 VIN2DBCarID.Remove(vin);
 
-            thread.Abort();
+            cts.Cancel();
         }
 
         public void ThreadJoin()
         {
-            if (thread != null)
-                thread.Join();
+            loopTask?.Wait();
         }
 
         private void HandleState_GoSleep()
@@ -689,10 +685,10 @@ namespace TeslaLogger
         }
 
         // sleep for max 5 seconds
-        private Address HandleState_Drive(Address lastRacingPoint)
+        private async Task<Address> HandleState_DriveAsync(Address lastRacingPoint)
         {
             int t = Environment.TickCount;
-            if (webhelper.IsDriving())
+            if (await webhelper.IsDrivingAsync())
             {
                 lastCarUsed = DateTime.Now;
                 int SleepPosition = ApplicationSettings.Default.SleepPosition;
@@ -763,7 +759,7 @@ namespace TeslaLogger
             }
             else
             {
-                webhelper.IsDriving(true); // insert a last position. Maybe the last one is too old
+                webhelper.IsDrivingAsync(true); // insert a last position. Maybe the last one is too old
 
                 DriveFinished();
 
@@ -784,7 +780,7 @@ namespace TeslaLogger
             string res = "";
             lock (WebHelper.isOnlineLock)
             {
-                res = webhelper.IsOnline().Result;
+                res = webhelper.IsOnlineAsync().Result;
             }
 
             if (res == "online")
@@ -792,7 +788,7 @@ namespace TeslaLogger
                 //Log(res);
                 SetCurrentState(TeslaState.Start);
 
-                webhelper.IsDriving(true); // Positionsmeldung in DB für Wechsel
+                webhelper.IsDrivingAsync(true); // Positionsmeldung in DB für Wechsel
             }
             else
             {
@@ -818,7 +814,7 @@ namespace TeslaLogger
                 if (!webhelper.IsCharging(false, IsHighFrequenceLoggingEnabled()))
                 {
                     SetCurrentState(TeslaState.Start);
-                    webhelper.IsDriving(true);
+                    webhelper.IsDrivingAsync(true);
                 }
                 else
                 {
@@ -867,11 +863,11 @@ namespace TeslaLogger
         // else if car is charging, switch state and return
         // else if KeepOnlineMinAfterUsage is reached, sleep SuspendAPIMinutes minutes
         // else sleep 5000
-        private void HandleState_Online()
+        private async Task HandleState_OnlineAsync()
         {
             {
                 //if (webhelper.IsDriving() && DBHelper.currentJSON.current_speed > 0)
-                if (webhelper.IsDriving()
+                if (await webhelper.IsDrivingAsync()
                     && (webhelper.GetLastShiftState().Equals("R", StringComparison.Ordinal)
                         || webhelper.GetLastShiftState().Equals("N", StringComparison.Ordinal)
                         || webhelper.GetLastShiftState().Equals("D", StringComparison.Ordinal)
@@ -919,7 +915,7 @@ namespace TeslaLogger
                         webhelper.scanMyTesla.FastMode(true);
                     }
 
-                    webhelper.IsDriving(true);
+                    webhelper.IsDrivingAsync(true);
                     DbHelper.StartChargingState(webhelper);
                     SetCurrentState(TeslaState.Charge);
 
@@ -959,7 +955,7 @@ namespace TeslaLogger
                         string res = "";
                         lock (WebHelper.isOnlineLock)
                         {
-                            res = webhelper.IsOnline().Result;
+                            res = webhelper.IsOnlineAsync().Result;
                         }
                         if (res == "asleep")
                         {
@@ -985,7 +981,7 @@ namespace TeslaLogger
                             Log("Car is sleeping because of 408");
                             SetCurrentState(TeslaState.Sleep);
                             lastCarUsed = DateTime.Now;
-                            DbHelper.StartState("asleep");
+                            DbHelper.StartStateAsync("asleep");
                         }
 
                         // wenn er 15 min online war und nicht geladen oder gefahren ist, dann muss man ihn die möglichkeit geben offline zu gehen
@@ -994,7 +990,7 @@ namespace TeslaLogger
                         {
                             SetCurrentState(TeslaState.Start);
 
-                            webhelper.IsDriving(true); // kurz bevor er schlafen geht, eine Positionsmeldung speichern und schauen ob standheizung / standklima / sentry läuft.
+                            webhelper.IsDrivingAsync(true); // kurz bevor er schlafen geht, eine Positionsmeldung speichern und schauen ob standheizung / standklima / sentry läuft.
                             Address addr = Geofence.GetInstance().GetPOI(CurrentJSON.GetLatitude(), CurrentJSON.GetLongitude(), false);
                             if (!CanFallAsleep(out string reason))
                             {
@@ -1079,7 +1075,7 @@ namespace TeslaLogger
                                         }
 
                                         // check if car is already asleep/offline and we can break the loop
-                                        string online = webhelper.IsOnline().Result;
+                                        string online = webhelper.IsOnlineAsync().Result;
                                         Tools.DebugLog($"#{CarInDB} IsOnline():{online} x:{x}");
                                         if (online != null && (online.Equals("offline") || online.Equals("asleep")))
                                         {
@@ -1242,7 +1238,7 @@ namespace TeslaLogger
             {
                 if (ex.ErrorCode == -2147467259) // {"Duplicate entry 'xxx' for key 'ix_endpos'"}
                 {
-                    webhelper.IsDriving(true);
+                    webhelper.IsDrivingAsync(true);
                     Log(ex.Message);
                 }
 
@@ -1252,7 +1248,7 @@ namespace TeslaLogger
             string res = "";
             lock (WebHelper.isOnlineLock)
             {
-                res = webhelper.IsOnline().Result;
+                res = webhelper.IsOnlineAsync().Result;
             }
 
             lastCarUsed = DateTime.Now;
@@ -1263,9 +1259,9 @@ namespace TeslaLogger
                 if (FleetAPI && String.IsNullOrEmpty(FleetApiAddress))
                     webhelper.GetRegion();
 
-                webhelper.IsDriving(true);
+                webhelper.IsDrivingAsync(true);
                 webhelper.ResetLastChargingState();
-                DbHelper.StartState(res);
+                DbHelper.StartStateAsync(res);
                 DbHelper.CleanPasswort();
                 return;
             }
@@ -1273,14 +1269,14 @@ namespace TeslaLogger
             {
                 //Log(res);
                 SetCurrentState(TeslaState.Sleep);
-                DbHelper.StartState(res);
+                DbHelper.StartStateAsync(res);
                 webhelper.ResetLastChargingState();
                 CurrentJSON.CreateCurrentJSON();
             }
             else if (res == "offline")
             {
                 //Log(res);
-                DbHelper.StartState(res);
+                DbHelper.StartStateAsync(res);
                 CurrentJSON.CreateCurrentJSON();
 
                 while (true)
@@ -1290,7 +1286,7 @@ namespace TeslaLogger
 
                     lock (WebHelper.isOnlineLock)
                     {
-                        res2 = webhelper.IsOnline().Result;
+                        res2 = webhelper.IsOnlineAsync().Result;
                     }
 
                     if (res2 != "offline")
@@ -1794,7 +1790,7 @@ namespace TeslaLogger
             webhelper.StopStreaming();
             webhelper.scanMyTesla?.StopThread();
 
-            var t = new Thread(() =>
+            Task.Run(() =>
             {
                 for (int x = 0; x < waitSeconds; x++)
                 {
@@ -1813,8 +1809,6 @@ namespace TeslaLogger
                 }
 
             });
-            t.Name = "RestartThread_" + CarInDB;
-            t.Start();
 
             ExitCarThread(reason);
 

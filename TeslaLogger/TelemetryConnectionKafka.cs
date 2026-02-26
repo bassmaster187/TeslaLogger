@@ -15,6 +15,8 @@ namespace TeslaLoggerNET8
         static System.Collections.Concurrent.BlockingCollection<(string vin, string msg)> queue = new ();
         static System.Collections.Concurrent.ConcurrentDictionary<string, TelemetryParser> parserDict = new ();
         static HashSet<string> vins = new ();
+        static CancellationTokenSource cts = new CancellationTokenSource();
+        static Task tQueue;
 
         public TelemetryConnectionKafka(Car car) {
             lock (typeof(TelemetryConnectionKafka))
@@ -24,8 +26,7 @@ namespace TeslaLoggerNET8
                     if (instance == null)
                     {
                         instance = this;
-                        Thread t = new Thread(() => run());
-                        t.Start();
+                        Task.Run(() => runAsync(cts.Token));
                     }
 
                     var parser = new TelemetryParser(car);
@@ -40,17 +41,20 @@ namespace TeslaLoggerNET8
             }
         }
 
-        static void run()
+        static async Task runAsync(CancellationToken token)    
         {
             var kc = new KafkaConnector.KafkaConnector(ref queue, ref vins);
             
             System.Diagnostics.Debug.WriteLine("TelemetryConnectionKafka Loop");
-            foreach (var msg in queue.GetConsumingEnumerable())
+            foreach (var msg in queue.GetConsumingEnumerable(token))
             {
                 try
                 {
                     parserDict.TryGetValue(msg.vin, out var parser);
-                    parser?.handleMessage(msg.msg);
+                    if (parser != null)
+                    {
+                        await parser.handleMessageAsync(msg.msg);
+                    }
                 }
                 catch (Exception ex)
                 {

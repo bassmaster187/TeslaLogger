@@ -129,7 +129,7 @@ namespace TeslaLogger
 
                     resultContent = await result.Content.ReadAsStringAsync().ConfigureAwait(true);
 
-                    DBHelper.AddMothershipDataToDB("teslalogger.de/get_scanmytesla.php", start, (int)result.StatusCode, car.CarInDB);
+                    DBHelper.AddMothershipDataToDBAsync("teslalogger.de/get_scanmytesla.php", start, (int)result.StatusCode, car.CarInDB);
 
                     if (resultContent == "not found")
                     {

@@ -150,7 +150,7 @@ namespace TeslaLogger
                 data = Encoding.UTF8.GetString(ms.ToArray());
             }
 
-            parser.handleMessage(data);            
+            await parser.handleMessageAsync(data);            
         }
 
         private void ConnectToServer()

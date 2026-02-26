@@ -2512,7 +2512,7 @@ DROP TABLE chargingstate_bak";
 
                     c.webhelper.lastUpdateEfficiency = DateTime.Now.AddDays(-1);
                     string s = c.webhelper.Wakeup().Result;
-                    string io = c.webhelper.IsOnline().Result;
+                    string io = c.webhelper.IsOnlineAsync().Result;
 
                     c.webhelper.UpdateEfficiency();
 
@@ -2605,7 +2605,7 @@ DROP TABLE chargingstate_bak";
                     if (dumpJSON)
                     {
                         // get /vehicles at session start
-                        _ = car.webhelper.IsOnline().Result;
+                        _ = car.webhelper.IsOnlineAsync().Result;
                     }
                 }
             }

@@ -192,7 +192,7 @@ namespace TeslaLogger
             car.Log("*** FT: " + message);
         }
 
-        public void handleMessage(string resultContent)
+        public async Task handleMessageAsync(string resultContent)
         {
             try
             {
@@ -213,12 +213,12 @@ namespace TeslaLogger
                             Log("Car Online!");
 
                         lastMessageReceived = DateTime.UtcNow;
-                        InsertBatteryTable(jData, d, resultContent);
+                        InsertBatteryTableAsync(jData, d, resultContent);
                         InsertCruiseStateTable(jData, d, resultContent);
                         handleStatemachine(jData, d, resultContent);
                         InsertLocation(jData, d, resultContent);
                         InsertCharging(jData, d, resultContent);
-                        InsertStates(jData, d, resultContent);
+                        await InsertStatesAsync(jData, d, resultContent);
                     }
                 }
                 else if (j.ContainsKey("alerts"))
@@ -275,7 +275,7 @@ namespace TeslaLogger
 
 
 
-        private void InsertStates(dynamic j, DateTime d, string resultContent)
+        private async Task InsertStatesAsync(dynamic j, DateTime d, string resultContent)
         {
             using (MySqlCommand cmd = new MySqlCommand())
             {
@@ -302,7 +302,7 @@ namespace TeslaLogger
                             car.CurrentJSON.CreateCurrentJSON();
 
                             Log("Insert Location (SentryMode)");
-                            InsertLastLocation(d, false);
+                            await InsertLastLocationAsync(d, false);
                         }
                         else
                         {
@@ -311,7 +311,7 @@ namespace TeslaLogger
                             car.CurrentJSON.CreateCurrentJSON();
 
                             Log("Insert Location (SentryMode)");
-                            InsertLastLocation(d, false);
+                            await InsertLastLocationAsync(d, false);
                         }
                         car.CurrentJSON.CreateCurrentJSON();
                     }
@@ -332,7 +332,7 @@ namespace TeslaLogger
                         car.CurrentJSON.CreateCurrentJSON();
 
                         Log("Insert Location (Preconditioning)");
-                        InsertLastLocation(d, false);
+                        InsertLastLocationAsync(d, false);
                     }
                     else if (key == "OutsideTemp")
                     {
@@ -352,7 +352,7 @@ namespace TeslaLogger
                             car.CurrentJSON.CreateCurrentJSON();
 
                             Log("Insert Location (OutsideTemp)");
-                            InsertLastLocation(d, false);
+                            InsertLastLocationAsync(d, false);
                         }
                     }
                     else if (key == "InsideTemp")
@@ -373,7 +373,7 @@ namespace TeslaLogger
                             car.CurrentJSON.CreateCurrentJSON();
 
                             Log("Insert Location (InsideTemp)");
-                            InsertLastLocation(d, false);
+                            InsertLastLocationAsync(d, false);
                         }
                     }
                     else if (key == "TimeToFullCharge")
@@ -1278,7 +1278,7 @@ namespace TeslaLogger
 
                     Log("Insert Location" + (force ? " Force" : ""));
 
-                    InsertLastLocation(d, false);
+                    InsertLastLocationAsync(d, false);
                 }
             }
             catch (Exception ex)
@@ -1293,7 +1293,7 @@ namespace TeslaLogger
             return (long)(d.ToUniversalTime().Subtract(new DateTime(1970, 1, 1))).TotalSeconds * 1000;
         }
 
-        void InsertLastLocation(DateTime d, bool loggingPosId = true)
+        async Task InsertLastLocationAsync(DateTime d, bool loggingPosId = true)
         {
             try
             {
@@ -1307,11 +1307,11 @@ namespace TeslaLogger
                     var power = PrintPS();
 
                     if (IsCharging)
-                        _ = car.webhelper.SendDataToAbetterrouteplannerAsync(ts, car.CurrentJSON.current_battery_level, 0, true, lastChargingPower * -1.0, (double)latitude, (double)longitude);
+                        await car.webhelper.SendDataToAbetterrouteplannerAsync(ts, car.CurrentJSON.current_battery_level, 0, true, lastChargingPower * -1.0, (double)latitude, (double)longitude);
                     else
-                        _ = car.webhelper.SendDataToAbetterrouteplannerAsync(ts, lastSoc, (double)speed, false, (double)(power ?? 0), (double)latitude, (double)longitude);
+                        await car.webhelper.SendDataToAbetterrouteplannerAsync(ts, lastSoc, (double)speed, false, (double)(power ?? 0), (double)latitude, (double)longitude);
 
-                    lastposid = car.DbHelper.InsertPos(ts.ToString(), lastLatitude, lastLongitude, (int)speed.Value, power, lastOdometer, lastIdealBatteryRange, lastRatedRange, lastSoc, lastInsideTemp, lastOutsideTemp, "");
+                    lastposid = await car.DbHelper.InsertPosAsync(ts.ToString(), lastLatitude, lastLongitude, (int)speed.Value, power, lastOdometer, lastIdealBatteryRange, lastRatedRange, lastSoc, lastInsideTemp, lastOutsideTemp, "");
 
                     if (loggingPosId)
                     {
@@ -1543,7 +1543,7 @@ namespace TeslaLogger
             }
         }
 
-        private void InsertBatteryTable(dynamic j, DateTime date, string resultContent)
+        private async Task InsertBatteryTableAsync(dynamic j, DateTime date, string resultContent)
         {
             try
             {
@@ -1709,9 +1709,9 @@ namespace TeslaLogger
                             {
                                 using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
                                 {
-                                    con.Open();
+                                    await con.OpenAsync();
                                     cmd.Connection = con;
-                                    cmd.ExecuteNonQuery();
+                                    await cmd.ExecuteNonQueryAsync();
                                 }
                             }
                         }
@@ -1738,7 +1738,7 @@ namespace TeslaLogger
         private void StartDCCharging(DateTime date)
         {
             InsertFirstCharging(date);
-            InsertLastLocation(date);
+            InsertLastLocationAsync(date);
             dcCharging = true;
             if (!String.IsNullOrEmpty(car.SuCBingoUser) && !String.IsNullOrEmpty(car.SuCBingoApiKey))
             {
@@ -1750,7 +1750,7 @@ namespace TeslaLogger
         private void StartACCharging(DateTime date)
         {
             InsertFirstCharging(date);
-            InsertLastLocation(date);
+            InsertLastLocationAsync(date);
             acCharging = true;
         }
 
@@ -1808,7 +1808,7 @@ namespace TeslaLogger
                                         if (current > 2)
                                         {
                                             Log($"AC Charging  {current}A ***");
-                                            InsertLastLocation(date);
+                                            InsertLastLocationAsync(date);
                                             acCharging = true;
                                         }
                                     }
@@ -1876,7 +1876,7 @@ namespace TeslaLogger
                                 if (!Driving)
                                 {
                                     Log("Driving ***");
-                                    InsertFirstPos(date, 0);
+                                    InsertFirstPosAsync(date, 0);
                                     Driving = true;
                                 }
                             }
@@ -1927,7 +1927,7 @@ namespace TeslaLogger
                                     if (!Driving)
                                     {
                                         Log("Driving by speed ***");
-                                        InsertFirstPos(date, (int)speed);
+                                        InsertFirstPosAsync(date, (int)speed);
                                         Driving = true;
                                     }
                                 }
@@ -2039,14 +2039,14 @@ namespace TeslaLogger
 
         }
 
-        private void InsertFirstPos(DateTime date, int speed)
+        private async Task InsertFirstPosAsync(DateTime date, int speed)
         {
             long ts = DateTimeToUTC_UnixTimestamp(date);
 
             var power = PrintPS();
 
             if (databaseCalls)
-                lastposid = car.DbHelper.InsertPos(ts.ToString(), lastLatitude, lastLongitude, speed, power, lastOdometer, lastIdealBatteryRange, lastRatedRange, lastSoc, lastInsideTemp, lastOutsideTemp, "");
+                lastposid = await car.DbHelper.InsertPosAsync(ts.ToString(), lastLatitude, lastLongitude, speed, power, lastOdometer, lastIdealBatteryRange, lastRatedRange, lastSoc, lastInsideTemp, lastOutsideTemp, "");
 
             Log($"InsertFirstPos {date} ID: {lastposid}");
         }

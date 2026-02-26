@@ -330,7 +330,7 @@ namespace TeslaLogger
                 {
                     resultContent = client.DownloadString(url);
 
-                    DBHelper.AddMothershipDataToDB("EnergyCharts", start, 0, 0);
+                    DBHelper.AddMothershipDataToDBAsync("EnergyCharts", start, 0, 0);
 
                     Console.WriteLine("Download URL ok: " + url);
                 }

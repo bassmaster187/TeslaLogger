@@ -43,7 +43,7 @@ namespace TeslaLogger
             parser = new TelemetryParser(car);
             parser.InitFromDB();
 
-            t = new Thread(() => { Run(); });
+            t = new Thread(() => { RunAsync(); });
             t.Start();
         }
 
@@ -82,7 +82,7 @@ namespace TeslaLogger
             }
         }
 
-        private void Run()
+        private async Task RunAsync()
         {
             while (true)
             {
@@ -101,7 +101,7 @@ namespace TeslaLogger
                     {
                         Thread.Sleep(100);
                         NetMQMessage message = zmq.ReceiveMultipartMessage();
-                        parser.handleMessage(message[1].ConvertToString());
+                        await parser.handleMessageAsync(message[1].ConvertToString());
                     }
                 }
                 catch (Exception ex)

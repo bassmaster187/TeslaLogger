@@ -181,7 +181,7 @@ namespace TeslaLogger
                     {
                         DateTime start = DateTime.UtcNow;
                         HttpResponseMessage result = httpClient.SendAsync(request).Result;
-                        DBHelper.AddMothershipDataToDB("Komoot: DownloadTour", start, (int)result.StatusCode, kli.carID);
+                        DBHelper.AddMothershipDataToDBAsync("Komoot: DownloadTour", start, (int)result.StatusCode, kli.carID);
                         if (result.IsSuccessStatusCode)
                         {
                             string resultContent = result.Content.ReadAsStringAsync().Result;
@@ -1089,7 +1089,7 @@ VALUES (
                     {
                         DateTime start = DateTime.UtcNow;
                         HttpResponseMessage result = httpClient.SendAsync(request).Result;
-                        DBHelper.AddMothershipDataToDB("Komoot: DownloadTours", start, (int)result.StatusCode, kli.carID);
+                        DBHelper.AddMothershipDataToDBAsync("Komoot: DownloadTours", start, (int)result.StatusCode, kli.carID);
                         if (result.IsSuccessStatusCode)
                         {
                             string resultContent = result.Content.ReadAsStringAsync().Result;
@@ -1342,7 +1342,7 @@ WHERE
                 {
                     DateTime start = DateTime.UtcNow;
                     HttpResponseMessage result = httpClient.SendAsync(request).Result;
-                    DBHelper.AddMothershipDataToDB("Komoot: Login", start, (int)result.StatusCode, kli.carID);
+                    DBHelper.AddMothershipDataToDBAsync("Komoot: Login", start, (int)result.StatusCode, kli.carID);
                     if (result.IsSuccessStatusCode)
                     {
                         string resultContent = result.Content.ReadAsStringAsync().Result;
