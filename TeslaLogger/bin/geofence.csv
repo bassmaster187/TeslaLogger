@@ -4013,6 +4013,7 @@ Supercharger-V3 US-Jonesboro AR,35.79688,-90.73038
 Supercharger US-Little Rock AR,34.66155,-92.41047
 Supercharger US-Lowell AR,36.2554,-94.15267
 Supercharger-V3 US-Ozark AR,35.52384,-93.86356
+Supercharger-V4 US-Rogers AR,36.33605,-94.17536
 Supercharger-V3 US-Van Buren AR,35.45845,-94.35618
 
 Supercharger-V3 US-Buckeye AZ,33.4428,-112.5569
@@ -5172,6 +5173,7 @@ Supercharger-V3 US-Greenville NC,35.60505,-77.40007
 Supercharger-V3 US-Halifax NC,36.36605,-77.674
 Supercharger US-Henderson NC,36.32914,-78.44782
 Supercharger US-Hickory NC,35.70693,-81.29478
+Supercharger US-Hickory NC NVC 127,35.69226,-81.3571
 Supercharger-V4 US-Hope Mills NC,34.93664,-78.92262
 Supercharger-V3 US-Jacksonville NC,34.7763,-77.41407
 Supercharger-V3 US-Kernersville NC,36.0698,-80.112
@@ -5337,7 +5339,6 @@ Supercharger US-Hawthorne NV,38.5335,-118.6229
 Supercharger US-Henderson NV,35.97165,-114.9116
 Supercharger-V3 US-Henderson NV - Las Vegas Boulevard South,35.96384,-115.1677
 Supercharger-V3 US-Henderson NV - Paseo Verde Parkway (Floor 4),36.02293,-115.09
-Supercharger US-Hickory NC NVC 127,35.69226,-81.3571
 Supercharger US-Incline Village NV,39.2504,-119.94916
 Supercharger US-Las Vegas NV,35.62198,-105.20545
 Supercharger US-Las Vegas NV - Blvd South,36.0707,-115.1729
@@ -12940,6 +12941,7 @@ Energie360 CH-Wettingen Tägipark,47.4587,8.32862
 Energie360 CH-Wilderswil Mittelweg,46.66654,7.8717
 Energie360 CH-Winterthur Brauerstrasse,47.50643,8.72864
 Energie360 CH-Winterthur Rudolf-Diesel-Strasse,47.49452,8.75735
+Energie360 CH-Würenlingen Kuhgässlistrasse,47.52444,8.2441
 Energie360 CH-Zürich Giessereistrasse,47.38972,8.51807
 
 Energiedienst DE-Bad Dürrheim Huberstraße,48.01617,8.5339
@@ -19774,6 +19776,7 @@ Pfalzwerke DE-Datteln Walter-Sauer-Straße,51.6209,7.32196
 Pfalzwerke DE-Dielheim Beethovenstraße 1,49.28174,8.72549
 Pfalzwerke DE-Dietzenbach Albert-Einstein-Straße,50.01432,8.79002
 Pfalzwerke DE-Donaueschingen Dürrheimer Straße 13,47.95787,8.50304
+Pfalzwerke DE-Dortmund Borsigstraße,51.52735,7.4729
 Pfalzwerke DE-Dreieich Voltastraße,50.03076,8.70092
 Pfalzwerke DE-Dresden Dohnaer Straße,51.0066,13.78665
 Pfalzwerke DE-Dresden Hornbach,51.07883,13.68972
@@ -21205,6 +21208,7 @@ Shell DE-Lüneburg Erbstorfer Landstraße,53.26198,10.4257
 Shell DE-Lüneburg Scharnhorststraße,53.22986,10.40342
 Shell DE-Lünen Kurt-Schumacher-Straße,51.6067,7.52568
 Shell DE-Lützow Gadebuscher Straße,53.65906,11.17106
+Shell DE-Magdeburg Kümmelsberg,52.13903,11.5704
 Shell DE-Magdeburg Lunochodstraße,52.09104,11.6117
 Shell DE-Maintal Am Kreuzstein,50.14605,8.80792
 Shell DE-Mainz An der Ochsenwiese,49.99737,8.20941
@@ -21379,6 +21383,7 @@ Shell NL-Moldenheide A58,51.55459,4.91283,30
 Shell NL-Niederrohrdorf Holzrütistrasse,47.42312,8.30442
 Shell NL-Oirschot Rijksweg A58,51.49231,5.34927
 Shell NL-Oostburg Torenweidelaan,51.32573,3.48462
+Shell NL-Ouddorp Kabbelaarsbank,51.76013,3.85613
 Shell NL-Peulwijk-Oost A4,52.00931,4.31141,20
 Shell NL-Rotterdam Schiekade,51.92551,4.47812,25
 Shell NL-Winterswijk Europark,51.97298,6.70488
@@ -23797,6 +23802,7 @@ AT Mühldorf Wolf,47.89012,13.93895
 AT Parkplatz Straß,46.73086,15.64186
 AT Pasching Tractive,48.24068,14.2338
 AT Ratten HORN,47.47292,15.70882
+AT Reifnitz Zentrum,46.60658,14.18153
 AT Schladming Europaplatz,47.39644,13.69552
 AT Schruns Hotel Alpenrose,47.0758,9.92396
 AT Sillian Sporthotel,46.74972,12.4337
