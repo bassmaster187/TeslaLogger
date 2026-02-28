@@ -6840,7 +6840,7 @@ Allego DE-Emden Thüringer Straße,53.36323,7.16879
 Allego DE-Emsbüren Merianstraße,52.35959,7.26513,10
 Allego DE-Emsbüren Merianstraße,52.35964,7.26501,10
 Allego DE-Erftstadt Zunftstraße,50.79654,6.7809,25
-Allego DE-Erkrath Bergstraße 9,51.21311,6.96212
+Allego DE-Erkrath Bergstraße,51.21315,6.9621
 Allego DE-Erkrath Brechtstraße 37,51.20157,6.95895
 Allego DE-Erkrath Feldheider Straße 47,51.20071,6.93992
 Allego DE-Erkrath Gerberstraße,51.22277,6.90798
@@ -11212,6 +11212,7 @@ EnBW DE-Ganderkesee Hasbruch Süd,53.05439,8.50156
 EnBW DE-Garbsen Nord-West-Zentrum,52.42547,9.59616
 EnBW DE-Garching an der Alz Am Binderfeld,48.12526,12.57323
 EnBW DE-Gardelegen,52.51569,11.40156
+EnBW DE-Gartow Springstraße,53.0272,11.45427
 EnBW DE-Gau-Bickelheim Rheinhessenblick,49.83532,7.9975,15
 EnBW DE-Gebhardshain,50.74965,7.82252
 EnBW DE-Geestland Schmidtkuhlsweg,53.61684,8.59768
@@ -12879,6 +12880,7 @@ Energie-Oberösterreich AT-Wels Dalistraße,48.18405,14.02643
 
 energie-schwaben DE-Augsburg Bayerstraße,48.34363,10.8845
 
+Energie-Steiermark AT-Birkfeld Edelsee-Straße,47.3542,15.7009
 Energie-Steiermark AT-Brunn am Gebirge Kärntner Straße,47.33838,15.01062,25
 Energie-Steiermark AT-Feldkirchen bei Graz Bahnweg,47.01215,15.44031
 Energie-Steiermark AT-Fohnsdorf Arena am Waldfeld,47.18352,14.67929
@@ -12907,6 +12909,7 @@ Energie-Steiermark AT-Lieboch Radlstraße,46.95696,15.34672,25
 Energie-Steiermark AT-Passail Fladnitzer Straße,47.27958,15.50633
 Energie-Steiermark AT-Passail Markt,47.2824,15.5153
 Energie-Steiermark AT-Peggau Grazer Straße,47.2029,15.34546
+Energie-Steiermark AT-Pischelsdorf in der Steiermark Pischelsdorf,47.17216,15.80808
 Energie-Steiermark AT-Prutz Moosweg,47.07172,10.66437,25
 Energie-Steiermark AT-Pöllau bei Hartberg Pöllauberg,47.3045,15.8646
 Energie-Steiermark AT-Raaba Dr. Auner Straße,47.02656,15.48808,25
@@ -20262,7 +20265,7 @@ Porsche DE-Hannover Podbielskistraße,52.3967,9.76703
 Porsche DE-Hilzingen Untere Gießwiesen,47.7603,8.78961
 Porsche DE-Hockenheim Am Motodrom,49.3278,8.56476
 Porsche DE-Hockenheim Am Motodrom,49.32784,8.57003
-Porsche DE-Hockenheim Am Motodrom,49.32893,8.56634,90
+Porsche DE-Hockenheim Am Motodrom,49.32893,8.56634,110
 Porsche DE-Hofheim am Taunus Am Stegskreuz,50.0933,8.45473
 Porsche DE-Kaiserslautern Europaallee,49.45327,7.81616
 Porsche DE-Kempten Georg-Krug-Straße,47.7377,10.3374
