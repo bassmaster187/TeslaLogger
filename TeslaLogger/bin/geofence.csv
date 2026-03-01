@@ -16166,6 +16166,8 @@ Ionity DE-Autohof Geseke,51.59825,8.51547,30
 Ionity DE-Autohof Halle-Tornau,51.54513,12.01387,30
 Ionity DE-Autohof Homberg/Efze,51.0053,9.48134
 Ionity DE-Autohof Lippetal,51.69593,7.96615
+Ionity DE-Autohof Lutterberg,51.37034,9.63356,11
+Ionity DE-Autohof Lutterberg,51.37043,9.63373,11
 Ionity DE-Autohof Nahetal,49.92576,7.93674,30
 Ionity DE-Autohof Neumarkt,49.31296,11.47478,30
 Ionity DE-Autohof Oberkrämer,52.70977,13.10806
@@ -16230,8 +16232,6 @@ Ionity DE-Lichtendorf Süd,51.46802,7.59722,60
 Ionity DE-Linthe Westfalenstraße,52.16012,12.77991
 Ionity DE-Lonetal Ost,48.58425,10.17894,10
 Ionity DE-Lonetal West,48.58394,10.1756,11
-Ionity DE-Lutterberg,51.37034,9.63356,11
-Ionity DE-Lutterberg,51.37043,9.63373,11
 Ionity DE-Mahlberg Ost,48.30885,7.79153,15
 Ionity DE-Mahlberg West,48.30948,7.78885,15
 Ionity DE-Marl Herzlia-Allee,51.64452,7.10234
@@ -16527,7 +16527,7 @@ Ionity IT-Potenza,40.63193,15.81358
 Ionity IT-Rinovo Nord,43.9592,8.13416
 Ionity IT-Roma A1,42.13721,12.60234
 Ionity IT-Scarlino,42.95853,10.81659
-Ionity IT-Sevegliano Via E. Mattei,45.8891,13.31338,40
+Ionity IT-Sevegliano Via E. Mattei,45.88914,13.31365,15
 Ionity IT-Trento,46.08704,11.1111
 Ionity IT-Valdichiana Outlet Village,43.22381,11.80217
 Ionity IT-Versilia Est,43.9292,10.22384
@@ -21548,6 +21548,7 @@ Smatrics DE-Uelzen Hambrocker Straße,52.9638,10.56661
 Smatrics DE-Uelzen Holdenstedter Straße,52.92682,10.52791
 Smatrics DE-Uelzen Schnellenmarkt,52.96741,10.56119
 Smatrics DE-Uelzen Zum Neuen Gehege,53.00528,10.60348
+Smatrics IT-Sevegliano Via E. Mattei,45.88914,13.31365,15
 Smatrics IT-Vahrn-Varna Forch Straße,46.76025,11.63793
 
 Smopi DE-Markdorf Rathausplatz,47.72002,9.39153,30
@@ -23633,6 +23634,7 @@ ZSE SK-Žilina-Solinky Prielohy,49.19491,18.73937
 
 Zunder ES-Bormujos Salida,37.3752,-6.086
 Zunder ES-Burgos C. del Carmen,42.33681,-3.70531
+Zunder ES-Castrillo de la Guareña A-62,41.22742,-5.31823
 Zunder ES-Estepona Carr. de Cadiz,36.4344,-5.16039
 Zunder ES-Getafe Av. Juan Carlos I,40.2959,-3.74527
 Zunder ES-Gijon-Este C. de Luís Ortiz Berrocal,43.5247,-5.64128
