@@ -201,7 +201,7 @@ namespace TeslaLogger
 
         public static void StartOVMS()
         {
-            string OVMSClientPath = "/etc/teslalogger/OVMS/OVMS.exe";
+            string OVMSClientPath = "/etc/teslalogger/OVMS/OVMS.dll";
 
             try
             {
@@ -218,7 +218,7 @@ namespace TeslaLogger
                 {
                     proc.StartInfo.UseShellExecute = false;
                     proc.StartInfo.RedirectStandardOutput = true;
-                    proc.StartInfo.FileName = "mono";
+                    proc.StartInfo.FileName = "dotnet";
                     proc.StartInfo.Arguments = OVMSClientPath + " nodate";
 
                     proc.Start();
