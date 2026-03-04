@@ -48,11 +48,11 @@ jobs:
         name: Teslalogger
         path: TeslaLogger/bin/Debug/net8.0/TeslaLogger.dll
 
-    - name: Checkout OVMSLogger (net8)
+    - name: Checkout OVMSLogger (NET8)
       uses: actions/checkout@v3
       with:
         repository: bassmaster187/OVMSLogger
-        ref: net8
+        ref: NET8
         path: OVMSLogger
 
     - name: Restore OVMS dependencies
