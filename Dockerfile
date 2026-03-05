@@ -20,7 +20,7 @@ ENV PATH="/usr/share/dotnet:${PATH}"
 COPY lucidapi /etc/lucidapi
 COPY TeslaLogger/sqlschema.sql /etc/teslalogger/sqlschema
 COPY --chmod=777 TeslaLogger/bin /etc/teslalogger/
-COPY --chmod=777 OVMSLogger/OVMS/bin /etc/teslalogger/OVMS/
+COPY --chmod=777 OVMSLogger/OVMSLogger/bin /etc/teslalogger/OVMS/
 COPY TeslaLogger/Grafana /etc/teslalogger/git/TeslaLogger/Grafana
 COPY TeslaLogger/GrafanaConfig /etc/teslalogger/git/TeslaLogger/GrafanaConfig
 COPY TeslaLogger/GrafanaPlugins /etc/teslalogger/git/TeslaLogger/GrafanaPlugins
