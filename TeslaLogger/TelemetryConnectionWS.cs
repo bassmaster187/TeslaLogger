@@ -14,15 +14,15 @@ using Newtonsoft.Json.Linq;
 using System.Globalization;
 using Google.Protobuf.WellKnownTypes;
 
-namespace TeslaLogger
-{
-    class TelemetryConnectionWS : TelemetryConnection
+namespace TeslaLogger;
+
+class TelemetryConnectionWS : TelemetryConnection
     {
         private Car car;
-        Thread t;
+        // Thread t; // removed, using Tasks instead
         CancellationTokenSource cts = new CancellationTokenSource();
         ClientWebSocket ws = null;
-        Random r = new Random();
+        Random r = Random.Shared;
 
         bool connect;
 
@@ -41,8 +41,8 @@ namespace TeslaLogger
             parser = new TelemetryParser(car);
             parser.InitFromDB();
 
-            t = new Thread(() => { Run(); });
-            t.Start();
+            // launch async loop
+            _ = Task.Run(RunAsync);
          }
 
         public override void CloseConnection()
@@ -79,14 +79,14 @@ namespace TeslaLogger
             }
         }
 
-        private void Run()
+        private async Task RunAsync()
         {
             while (true)
             {
                 try
                 {
                     while (!connect)
-                        Thread.Sleep(1000);
+                        await Task.Delay(1000);
 
                     ConnectToServer();
 
@@ -97,8 +97,8 @@ namespace TeslaLogger
 
                     while (ws.State == WebSocketState.Open)
                     {
-                        Thread.Sleep(100);
-                        ReceiveAsync(ws).Wait();
+                        await Task.Delay(100);
+                        await ReceiveAsync(ws);
                     }
                 }
                 catch (Exception ex)
@@ -227,4 +227,3 @@ namespace TeslaLogger
             return ws.SendAsync(buffer, WebSocketMessageType.Text, true, cts.Token);
         }
     }
-}

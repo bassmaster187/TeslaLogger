@@ -15,28 +15,13 @@ using TeslaLoggerNET8.Lucid;
 namespace TeslaLogger
 {
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1031:Keine allgemeinen Ausnahmetypen abfangen", Justification = "<Pending>")]
-    internal class Car
+    internal partial class Car
     {
-        private TeslaState _currentState = TeslaState.Start;
-        internal TeslaState GetCurrentState() { return _currentState; }
-
         private Address lastRacingPoint; // defaults to null;
         internal WebHelper webhelper;
         internal TelemetryConnection telemetry;
         internal TelemetryParser telemetryParser;
 
-        internal enum TeslaState
-        {
-            Start,
-            Drive,
-            Park,
-            Charge,
-            Sleep,
-            WaitForSleep,
-            Online,
-            GoSleep,
-            Inactive
-        }
 
         // encapsulate state
         internal WebHelper GetWebHelper() { return webhelper; }
@@ -306,7 +291,7 @@ namespace TeslaLogger
                         if (VIN2DBCarID.ContainsKey(vin))
                             VIN2DBCarID.Remove(vin);
 
-                        VIN2DBCarID.Add(vin, CarInDB);
+                        VIN2DBCarID.TryAdd(vin, CarInDB);
                     }
                 }
                 catch (Exception ex)
@@ -1837,6 +1822,7 @@ namespace TeslaLogger
             _currentState = _newState;
         }
 
+        internal TeslaState GetCurrentState() => _currentState;
 
         private static void WriteMissingFile(double missingOdometer)
         {

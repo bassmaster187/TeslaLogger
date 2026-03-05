@@ -217,7 +217,7 @@ namespace TeslaLogger
                 
                 Init();
 
-                _ = Task.Factory.StartNew(() => WebHelper.UpdateAllPOIAddresses(), CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
+                _ = Task.Run(() => WebHelper.UpdateAllPOIAddresses());
             }
             finally
             {
@@ -585,8 +585,7 @@ namespace TeslaLogger
             return 6376500.0 * (2.0 * Math.Atan2(Math.Sqrt(d3), Math.Sqrt(1.0 - d3)));
         }
 
-        [MethodImpl(MethodImplOptions.Synchronized)]
-        internal void OnlineUpdate()
+        internal async Task OnlineUpdateAsync()
         {
             Tools.DebugLog("Geofence.OnlineUpdate");
             string lastETag = null;
@@ -594,7 +593,7 @@ namespace TeslaLogger
             {
                 lastETag = etag;
             }
-            HttpClient client = new HttpClient();
+            using HttpClient client = new HttpClient();
             string url = "https://raw.githubusercontent.com/bassmaster187/TeslaLogger/master/TeslaLogger/bin/geofence.csv";
             using (var request = new HttpRequestMessage(HttpMethod.Get, url))
             {
@@ -602,7 +601,7 @@ namespace TeslaLogger
                 {
                     request.Headers.TryAddWithoutValidation("If-None-Match", lastETag);
                 }
-                var response = client.SendAsync(request).Result;
+                var response = await client.SendAsync(request);
                 if (response.StatusCode == System.Net.HttpStatusCode.NotModified)
                 {
                     Logfile.Log($"Geofence.OnlineUpdate: no changes (ETag: {lastETag})");
@@ -615,19 +614,20 @@ namespace TeslaLogger
                         KVS.InsertOrUpdate("Geofence.OnlineUpdate.ETag", lastETag);
                     }
                     Logfile.Log($"Geofence.OnlineUpdate: update! (ETag: {lastETag})");
-                    using (Stream stream = response.Content.ReadAsStreamAsync().Result)
+                    using (Stream stream = await response.Content.ReadAsStreamAsync())
                     {
                         using (FileStream fs = new FileStream(FileManager.GetFilePath(TLFilename.GeofenceFilename) + ".updated", FileMode.Create, FileAccess.Write, FileShare.None, 8192, useAsync: false))
                         {
                             byte[] buffer = new byte[8192];
                             int bytesRead;
 
-                            while ((bytesRead = stream.Read(buffer, 0, buffer.Length)) > 0)
+                            while ((bytesRead = await stream.ReadAsync(buffer, 0, buffer.Length)) > 0)
                             {
                                 fs.Write(buffer, 0, bytesRead);
                             }
                         }
                     }
+                    // after writing file, log size and copy
                     Tools.DebugLog($"Geofence.updated: {new FileInfo(FileManager.GetFilePath(TLFilename.GeofenceFilename) + ".updated").Length} bytes");
                     if (new FileInfo(FileManager.GetFilePath(TLFilename.GeofenceFilename) + ".updated").Length > 0)
                     {

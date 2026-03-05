@@ -24,6 +24,9 @@ using System.Threading;
 using System.Threading.Tasks;
 using static TeslaLogger.Car;
 
+#nullable disable
+
+
 namespace TeslaLogger
 {
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1031:Keine allgemeinen Ausnahmetypen abfangen", Justification = "<Pending>")]
@@ -305,7 +308,7 @@ namespace TeslaLogger
         public static string ComputeSHA256Hash(string text)
         {
             string hashString;
-            using (var sha256 = SHA256Managed.Create())
+            using (var sha256 = SHA256.Create())
             {
                 var hash = sha256.ComputeHash(Encoding.Default.GetBytes(text));
                 hashString = ToHex(hash, false);

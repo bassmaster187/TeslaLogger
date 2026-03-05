@@ -16,15 +16,15 @@ using Google.Protobuf.WellKnownTypes;
 using NetMQ;
 using NetMQ.Sockets;
 
-namespace TeslaLogger
-{
-    internal class TelemetryConnectionZMQ : TelemetryConnection
+namespace TeslaLogger;
+
+internal class TelemetryConnectionZMQ : TelemetryConnection
     {
         private Car car;
-        Thread t;
+        //Thread t; // no longer used
         CancellationTokenSource cts = new CancellationTokenSource();
         SubscriberSocket zmq = new SubscriberSocket();
-        Random r = new Random();
+        Random r = Random.Shared;
 
         bool connect;
 
@@ -43,8 +43,8 @@ namespace TeslaLogger
             parser = new TelemetryParser(car);
             parser.InitFromDB();
 
-            t = new Thread(() => { RunAsync().Wait(); });
-            t.Start();
+            // schedule the async run loop
+            _ = Task.Run(RunAsync);
         }
 
         public override void CloseConnection()
@@ -89,7 +89,8 @@ namespace TeslaLogger
                 try
                 {
                     while (!connect)
-                        Thread.Sleep(1000);
+                        await Task.Delay(1000);
+
 
                     ConnectToServer();
 
@@ -99,7 +100,7 @@ namespace TeslaLogger
 
                     while (true)
                     {
-                        Thread.Sleep(100);
+                        await Task.Delay(100);
                         NetMQMessage message = zmq.ReceiveMultipartMessage();
                         await parser.handleMessageAsync(message[1].ConvertToString());
                     }
@@ -169,4 +170,3 @@ namespace TeslaLogger
             }
         }
     }
-}

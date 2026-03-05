@@ -145,25 +145,28 @@ namespace TeslaLogger
                 {
                     // insert first pos
                     firstPosition = new Position(lat, lng, alt, delta_t, double.IsNaN(speed) ? 0.0 : speed);
-                    positions.Add(delta_t, firstPosition);
+                    // TryAdd avoids exception if key somehow already exists
+                    positions.TryAdd(delta_t, firstPosition);
                     lastPosition = firstPosition;
-                }
-                // TODO: .net8 change to TryAdd for performance reasons
-                else if (!positions.ContainsKey(delta_t))
-                {
-                    Position newPosition = new Position(lat, lng, alt, delta_t, speed);
-                    newPosition.dist_km = newPosition.CalculateDistance(lastPosition);
-                    distance_calculated += newPosition.dist_km;
-                    if (double.IsNaN(speed))
-                    {
-                        newPosition.speed = newPosition.CalculateSpeed(lastPosition);
-                    }
-                    positions.Add(delta_t, newPosition);
-                    lastPosition = newPosition;
                 }
                 else
                 {
-                    Tools.DebugLog($"addPosition(lat:{lat}, lng:{lng}, alt:{alt}, delta_t:{delta_t}, speed:{speed} not added");
+                    // TryAdd also handles the "already present" case efficiently
+                    Position newPosition = new Position(lat, lng, alt, delta_t, speed);
+                    if (positions.TryAdd(delta_t, newPosition))
+                    {
+                        newPosition.dist_km = newPosition.CalculateDistance(lastPosition);
+                        distance_calculated += newPosition.dist_km;
+                        if (double.IsNaN(speed))
+                        {
+                            newPosition.speed = newPosition.CalculateSpeed(lastPosition);
+                        }
+                        lastPosition = newPosition;
+                    }
+                    else
+                    {
+                        Tools.DebugLog($"addPosition(lat:{lat}, lng:{lng}, alt:{alt}, delta_t:{delta_t}, speed:{speed} not added");
+                    }
                 }
                 if (startTS.AddMilliseconds(delta_t) > endTS)
                 {
@@ -180,11 +183,11 @@ namespace TeslaLogger
                     using (HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, new Uri($"https://api.komoot.de/v007/tours/{tourID}?_embedded=coordinates,way_types,surfaces,directions,participants,timeline&directions=v2&fields=timeline&format=coordinate_array&timeline_highlights_fields=tips,recommenders")))
                     {
                         DateTime start = DateTime.UtcNow;
-                        HttpResponseMessage result = httpClient.SendAsync(request).Result;
+                        HttpResponseMessage result = await httpClient.SendAsync(request);
                         await DBHelper.AddMothershipDataToDBAsync("Komoot: DownloadTour", start, (int)result.StatusCode, kli.carID);
                         if (result.IsSuccessStatusCode)
                         {
-                            string resultContent = result.Content.ReadAsStringAsync().Result;
+                            string resultContent = await result.Content.ReadAsStringAsync();
                             Logfile.Log($"#{kli.carID} Komoot: DownloadTour {tourID} done");
                             this.json = resultContent;
                         }
@@ -235,7 +238,7 @@ namespace TeslaLogger
                     int index = 0;
                     foreach (int posID in positions.Keys.OrderBy(k => k))
                     {
-                        positionKeys.Add(index, posID);
+                        positionKeys[index] = posID;
                         index += 1;
                     }
                     // compute first
@@ -284,7 +287,7 @@ namespace TeslaLogger
                     int index = 0;
                     foreach (int posID in positions.Keys.OrderBy(k => k))
                     {
-                        positionKeys.Add(index, posID);
+                        positionKeys[index] = posID;
                         index += 1;
                     }
                     for (index = 1; index < positionKeys.Count - 3; index++)
@@ -318,7 +321,7 @@ namespace TeslaLogger
                     int index = 0;
                     foreach (int posID in positions.Keys.OrderBy(k => k))
                     {
-                        positionKeys.Add(index, posID);
+                        positionKeys[index] = posID;
                         index += 1;
                     }
                     for (index = 1; index < positionKeys.Count - 2; index++)
@@ -1092,7 +1095,7 @@ VALUES (
                         await DBHelper.AddMothershipDataToDBAsync("Komoot: DownloadTours", start, (int)result.StatusCode, kli.carID);
                         if (result.IsSuccessStatusCode)
                         {
-                            string resultContent = result.Content.ReadAsStringAsync().Result;
+                            string resultContent = await result.Content.ReadAsStringAsync();
                             Tools.DebugLog($"#{kli.carID} Komoot: GetTours result: {resultContent.Length}");
                             if (dumpJSON)
                             {
@@ -1260,7 +1263,7 @@ VALUES (
                                             {
                                                 newTour.distance_m = double.Parse(tour["distance"].ToString());
                                             }
-                                            komootTours.Add(tourid, newTour);
+                                            komootTours.TryAdd(tourid, newTour);
                                         }
                                         else
                                         {
@@ -1345,7 +1348,7 @@ WHERE
                     await DBHelper.AddMothershipDataToDBAsync("Komoot: Login", start, (int)result.StatusCode, kli.carID);
                     if (result.IsSuccessStatusCode)
                     {
-                        string resultContent = result.Content.ReadAsStringAsync().Result;
+                        string resultContent = await result.Content.ReadAsStringAsync();
                         Tools.DebugLog($"#{kli.carID} Komoot: login result: {resultContent.Length}");
                         /* expected JSON
 {

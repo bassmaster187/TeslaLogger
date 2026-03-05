@@ -6,15 +6,19 @@ using System.Threading;
 using System.Text.RegularExpressions;
 using Exceptionless;
 using Newtonsoft.Json;
-using uPLibrary.Networking.M2Mqtt.Messages;
-using uPLibrary.Networking.M2Mqtt;
 using System.Linq;
 using Org.BouncyCastle.Utilities.Encoders;
 using System.Web;
-using static uPLibrary.Networking.M2Mqtt.MqttClient;
 using System.Security.Cryptography.X509Certificates;
-using uPLibrary.Networking.M2Mqtt.Exceptions;
 using System.Net.Sockets;
+
+// MQTTnet replaces the legacy M2Mqtt library
+using MQTTnet;
+using MQTTnet.Client;
+using MQTTnet.Client.Options;
+using MQTTnet.Protocol;
+
+#nullable disable
 
 namespace TeslaLogger
 {
@@ -32,6 +36,32 @@ namespace TeslaLogger
         ushort Publish(string topic, byte[] message, byte qosLevel, bool retain);
         byte Connect(string clientId, string username, string password, bool willRetain, byte willQosLevel, bool willFlag, string willTopic, string willMessage, bool cleanSession, ushort keepAlivePeriod);
         ushort Unsubscribe(string[] topics);
+    }
+
+    // compatibility types previously provided by M2Mqtt
+    public delegate void MqttMsgPublishEventHandler(object sender, MqttMsgPublishEventArgs e);
+
+    public class MqttMsgPublishEventArgs : EventArgs
+    {
+        public string Topic { get; set; }
+        public byte[] Message { get; set; }
+        public byte QosLevel { get; set; }
+        public bool Retain { get; set; }
+    }
+
+    public enum MqttSslProtocols
+    {
+        None = 0,
+        Tls = 1,
+        Tls11 = 2,
+        Tls12 = 3,
+        Tls13 = 4
+    }
+
+    public static class MqttMsgBase
+    {
+        public const byte QOS_LEVEL_AT_MOST_ONCE = 0;
+        public const byte QOS_LEVEL_AT_LEAST_ONCE = 1;
     }
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1031:Keine allgemeinen Ausnahmetypen abfangen", Justification = "<Pending>")]
@@ -106,7 +136,7 @@ namespace TeslaLogger
                     }
 
                     client.MqttMsgPublishReceived += Client_MqttMsgPublishReceived;
-                    new Thread(() => { MQTTConnectionHandler(client); }).Start();
+                    _ = Task.Run(() => MQTTConnectionHandler(client));
 
                     if (discoveryEnable && singletopics)
                     {
@@ -756,33 +786,82 @@ namespace TeslaLogger
 
     internal class MqttClientWrapper : IMqttClient
     {
-        private MqttClient _client;
+        private IMqttClient _client;
+        private string _brokerHost;
+        private int _brokerPort;
 
-        public bool IsConnected => _client.IsConnected;
+        public bool IsConnected => _client?.IsConnected ?? false;
 
-        public event MqttMsgPublishEventHandler MqttMsgPublishReceived
-        {
-            add => _client.MqttMsgPublishReceived += value;
-            remove => _client.MqttMsgPublishReceived -= value;
-        }
+        public event MqttMsgPublishEventHandler MqttMsgPublishReceived;
 
         public static IMqttClient CreateClient(string brokerHostName, int brokerPort, bool secure, X509Certificate caCert, X509Certificate clientCert, MqttSslProtocols sslProtocol)
         {
-            var result = new MqttClientWrapper
+            var wrapper = new MqttClientWrapper();
+            wrapper._brokerHost = brokerHostName;
+            wrapper._brokerPort = brokerPort;
+            var factory = new MqttFactory();
+            wrapper._client = factory.CreateMqttClient();
+            wrapper._client.UseApplicationMessageReceivedHandler(e =>
             {
-                _client = new MqttClient(brokerHostName, brokerPort, secure, caCert, clientCert, sslProtocol)
-            };
-            return result;
+                var args = new MqttMsgPublishEventArgs
+                {
+                    Topic = e.ApplicationMessage.Topic,
+                    Message = e.ApplicationMessage.Payload ?? Array.Empty<byte>(),
+                    QosLevel = (byte)e.ApplicationMessage.QualityOfServiceLevel,
+                    Retain = e.ApplicationMessage.Retain
+                };
+                wrapper.MqttMsgPublishReceived?.Invoke(wrapper, args);
+            });
+            return wrapper;
         }
 
         private MqttClientWrapper() { }
 
-        public byte Connect(string clientId, string username, string password, bool willRetain, byte willQosLevel, bool willFlag, string willTopic, string willMessage, bool cleanSession, ushort keepAlivePeriod) => _client.Connect(clientId, username, password, willRetain, willQosLevel, willFlag, willTopic, willMessage, cleanSession, keepAlivePeriod);
+        public byte Connect(string clientId, string username, string password, bool willRetain, byte willQosLevel, bool willFlag, string willTopic, string willMessage, bool cleanSession, ushort keepAlivePeriod)
+        {
+            var builder = new MqttClientOptionsBuilder()
+                .WithClientId(clientId)
+                .WithTcpServer(_brokerHost, _brokerPort);
 
-        public ushort Publish(string topic, byte[] message, byte qosLevel, bool retain) => _client.Publish(topic, message, qosLevel, retain);
+            if (!string.IsNullOrEmpty(username)) builder.WithCredentials(username, password);
+            builder.WithCleanSession(cleanSession);
+            builder.WithKeepAlivePeriod(TimeSpan.FromSeconds(keepAlivePeriod));
 
-        public ushort Subscribe(string[] topics, byte[] qosLevels) => _client.Subscribe(topics, qosLevels);
+            var options = builder.Build();
+            _client.ConnectAsync(options).GetAwaiter().GetResult();
+            return 0;
+        }
 
-        public ushort Unsubscribe(string[] topics) => _client.Unsubscribe(topics);
+        public ushort Publish(string topic, byte[] message, byte qosLevel, bool retain)
+        {
+            var appMsg = new MqttApplicationMessageBuilder()
+                .WithTopic(topic)
+                .WithPayload(message)
+                .WithQualityOfServiceLevel((MqttQualityOfServiceLevel)qosLevel)
+                .WithRetainFlag(retain)
+                .Build();
+            _client.PublishAsync(appMsg).GetAwaiter().GetResult();
+            return 0;
+        }
+
+        public ushort Subscribe(string[] topics, byte[] qosLevels)
+        {
+            var filters = new List<MqttTopicFilter>();
+            for (int i = 0; i < topics.Length; i++)
+            {
+                filters.Add(new MqttTopicFilterBuilder()
+                    .WithTopic(topics[i])
+                    .WithQualityOfServiceLevel((MqttQualityOfServiceLevel)qosLevels[i])
+                    .Build());
+            }
+            _client.SubscribeAsync(filters.ToArray()).GetAwaiter().GetResult();
+            return 0;
+        }
+
+        public ushort Unsubscribe(string[] topics)
+        {
+            _client.UnsubscribeAsync(topics).GetAwaiter().GetResult();
+            return 0;
+        }
     }
 }

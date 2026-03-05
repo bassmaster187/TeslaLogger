@@ -190,7 +190,7 @@ namespace TeslaLogger
                     dynamic settings = JsonConvert.DeserializeObject(mqttSettings);
                     if (settings["mqtt_host"] > 0)
                     {
-                        Thread mqttThread = new Thread(() =>
+                        Task.Run(() =>
                         {
                             try
                             {
@@ -201,11 +201,7 @@ namespace TeslaLogger
                                 ex.ToExceptionless().FirstCarUserID().Submit();
                                 Logfile.Log(ex.ToString());
                             }
-                        })
-                        {
-                            Name = "MqttThread"
-                        };
-                        mqttThread.Start(); 
+                        }); 
                     }
                 }
                 else
@@ -244,7 +240,8 @@ namespace TeslaLogger
                 foreach (DataRow r in dt.Rows)
                 {
                     StartCarThread(r);
-                    Thread.Sleep(500);
+                    // small throttle delay
+                    Task.Delay(500).GetAwaiter().GetResult();
                 }
                 dt.Clear();
             }
@@ -275,12 +272,7 @@ namespace TeslaLogger
                 {
                     if (!OVMSStarted)
                     {
-                        var ovmsThread = new Thread(() =>
-                        {
-                            Tools.StartOVMS();
-                        });
-                        ovmsThread.Name = "OVMSStartThread";
-                        ovmsThread.Start();
+                        Task.Run(() => Tools.StartOVMS());
                     }
 
                     OVMSStarted = true;
@@ -346,14 +338,7 @@ namespace TeslaLogger
 
             try
             {
-                Thread threadWebserver = new Thread(() =>
-                {
-                    webServer = new WebServer();
-                })
-                {
-                    Name = "WebserverThread"
-                };
-                threadWebserver.Start();
+                Task.Run(() => webServer = new WebServer());
             }
             catch (Exception ex)
             {
@@ -366,14 +351,7 @@ namespace TeslaLogger
         {
             try
             {
-                Thread threadTLStats = new Thread(() =>
-                {
-                    TLStats.run();
-                })
-                {
-                    Name = "TLStatsThread"
-                };
-                threadTLStats.Start();
+                Task.Run(() => TLStats.run());
             }
             catch (Exception ex)
             {
@@ -388,14 +366,7 @@ namespace TeslaLogger
             {
                 if (Tools.UseOpenTopoData())
                 {
-                    Thread threadOpenTopoDataService = new Thread(() =>
-                    {
-                        OpenTopoDataService.GetSingleton().Run();
-                    })
-                    {
-                        Name = "OpenTopoServiceThread"
-                    };
-                    threadOpenTopoDataService.Start();
+                    Task.Run(() => OpenTopoDataService.GetSingleton().Run());
                 }
                 else
                 {
@@ -667,42 +638,51 @@ namespace TeslaLogger
 
         internal static void RunHousekeepingInBackground()
         {
-            Thread Housekeeper = new Thread(() =>
+            // use a background task instead of a manual thread; allows awaiting async operations
+            _ = Task.Run(async () =>
             {
                 // wait for DB updates
-                while (!UpdateTeslalogger.done.IsCancellationRequested)
+                try
                 {
-                    Thread.Sleep(5000);
+                    while (!UpdateTeslalogger.done.IsCancellationRequested)
+                    {
+                        await Task.Delay(5000, UpdateTeslalogger.done.Token);
+                    }
                 }
+                catch (TaskCanceledException)
+                {
+                    // cancellation requested, continue to housekeeping
+                }
+
                 DateTime start = DateTime.Now;
                 Logfile.Log("RunHousekeepingInBackground started");
                 Tools.Housekeeping();
-                DBHelper.UpdateCO2Async().Wait();
+                await DBHelper.UpdateCO2Async();
                 GeocodeCache.Cleanup();
                 Logfile.Log("RunHousekeepingInBackground finished, took " + (DateTime.Now - start).TotalMilliseconds + "ms");
-            })
-            {
-                Priority = ThreadPriority.BelowNormal
-            };
-            Housekeeper.Start();
+            });
         }
 
         internal static void OnlineUpdateGeofenceInBackground()
         {
-            Thread GeofenceOnlineUpdater = new Thread(() =>
+            // use a background task instead of manual Thread so we can await async methods
+            _ = Task.Run(async () =>
             {
                 // initially sleep 5min
-                Thread.Sleep(300000); // 5min
+                await Task.Delay(TimeSpan.FromMinutes(5));
                 while (true)
                 {
-                    Geofence.GetInstance().OnlineUpdate();
-                    Thread.Sleep(86400000); // 24h
+                    try
+                    {
+                        await Geofence.GetInstance().OnlineUpdateAsync();
+                    }
+                    catch (Exception ex)
+                    {
+                        Logfile.ExceptionWriter(ex, "OnlineUpdateGeofenceInBackground");
+                    }
+                    await Task.Delay(TimeSpan.FromDays(1));
                 }
-            })
-            {
-                Priority = ThreadPriority.BelowNormal
-            };
-            GeofenceOnlineUpdater.Start();
+            });
         }
 
         private static void ExitTeslaLogger(string _msg, int _exitcode = 0)
@@ -715,14 +695,7 @@ namespace TeslaLogger
         {
             try
             {
-                Thread threadStaticMapService = new Thread(() =>
-                {
-                    StaticMapService.GetSingleton().Run();
-                })
-                {
-                    Name = "StaticMapServiceThread"
-                };
-                threadStaticMapService.Start();
+                Task.Run(() => StaticMapService.GetSingleton().Run());
             }
             catch (Exception ex)
             {

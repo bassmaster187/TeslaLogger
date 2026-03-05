@@ -4,7 +4,7 @@ namespace TeslaLogger
 {
     abstract class ElectricityMeterBase
     {
-        public static ElectricityMeterBase Instance(Car car)
+        public static ElectricityMeterBase? Instance(Car car)
         {
             var dr = DBHelper.GetCar(car.CarInDB);
             if (dr != null)
@@ -33,7 +33,7 @@ namespace TeslaLogger
         }
 
 
-        public static ElectricityMeterBase Instance(string type, string host, string paramater)
+        public static ElectricityMeterBase? Instance(string type, string host, string paramater)
         {
             if (type == "openwb")
                 return new ElectricityMeterOpenWB(host, paramater);

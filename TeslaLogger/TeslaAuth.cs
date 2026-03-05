@@ -11,14 +11,15 @@ using System.Threading.Tasks;
 using System.Threading;
 using System.Text;
 
-namespace TeslaLogger
+namespace TeslaLogger;
+
+public class TeslaAuth
 {
-    public class TeslaAuth
-    {
-        readonly string UserAgent = "TLV1";
-        readonly HttpClient client;
-        readonly LoginInfo loginInfo;
-        static readonly Random Random = new Random();
+    readonly string UserAgent = "TLV1";
+    readonly HttpClient client;
+    readonly LoginInfo loginInfo;
+    // use Random.Shared from .NET 6+ for thread-safe random
+    // (no need for lock)
 
         public enum TeslaAccountRegion
         {
@@ -42,11 +43,9 @@ namespace TeslaLogger
             // Technically this should include the characters '-', '.', '_', and '~'.  However let's
             // keep this simpler for now to avoid potential URL encoding issues.
             const string chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-            lock (Random)
-            {
-                return new string(Enumerable.Repeat(chars, length)
-                    .Select(s => s[Random.Next(s.Length)]).ToArray());
-            }
+            // Random.Shared is thread-safe
+            return new string(Enumerable.Repeat(chars, length)
+                    .Select(s => s[Random.Shared.Next(s.Length)]).ToArray());
         }
 
         HttpClient CreateHttpClient(TeslaAccountRegion region)
@@ -151,7 +150,7 @@ namespace TeslaLogger
             var result = await client.PostAsync(url + "oauth2/v3/token", content, cancellationToken);
             if (!result.IsSuccessStatusCode)
             {
-                var failureDetails = result.Content.ReadAsStringAsync().Result;
+                var failureDetails = await result.Content.ReadAsStringAsync();
                 var message = string.IsNullOrEmpty(result.ReasonPhrase) ? result.StatusCode.ToString() : result.ReasonPhrase;
                 message += " - " + failureDetails;
                 throw new Exception(message);
@@ -205,20 +204,19 @@ namespace TeslaLogger
         }
     }
 
-    internal class LoginInfo
+    internal record LoginInfo
     {
-        public string CodeVerifier { get; set; }
+        public string CodeVerifier { get; init; }
         public string CodeChallenge { get; set; }
-        public string State { get; set; }
-        public Dictionary<string, string> FormFields { get; set; }
+        public string State { get; init; }
+        public Dictionary<string, string> FormFields { get; init; } = new();
     }
 
-    public class Tokens
+    public record Tokens
     {
-        public string AccessToken { get; set; }
-        public string RefreshToken { get; set; }
-        public DateTimeOffset CreatedAt { get; set; }
-        public TimeSpan ExpiresIn { get; set; }
-        public string TokenType { get; set; }
+        public string AccessToken { get; init; }
+        public string RefreshToken { get; init; }
+        public DateTimeOffset CreatedAt { get; init; }
+        public TimeSpan ExpiresIn { get; init; }
+        public string TokenType { get; init; }
     }
-}

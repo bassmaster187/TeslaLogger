@@ -29,11 +29,13 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Logfile\LogfileNET8.csproj" />
+    <ProjectReference Include="..\TeslaLogger\TeslaLoggerNET8.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="M2Mqtt" Version="4.3.0" />
+    <!-- replaced legacy M2Mqtt with MQTTnet -->
+    <PackageReference Include="MQTTnet" Version="5.1.0.1559" />
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
     <PackageReference Include="System.Data.DataSetExtensions" Version="4.5.0" />
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
   </ItemGroup>
 </Project>

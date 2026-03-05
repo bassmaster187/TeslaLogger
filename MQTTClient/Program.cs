@@ -7,7 +7,8 @@ using System.Text;
 using System.Threading.Tasks;
 
 using TeslaLogger;
-using uPLibrary.Networking.M2Mqtt;
+
+#nullable disable
 
 namespace MQTTClient
 {
@@ -19,7 +20,7 @@ namespace MQTTClient
             int MQTTPort = MqttSettings.MQTT_BROKER_DEFAULT_PORT;
             bool subtopics = false;
 
-            MqttClient client = null;
+            IMqttClient client = null;
             try
             {
                 Logfile.Log("MQTT: MqttClient Version: " + System.Reflection.Assembly.GetExecutingAssembly().GetName().Version);
@@ -72,7 +73,7 @@ namespace MQTTClient
                     }
                 }
 
-                client = new MqttClient(Properties.Settings.Default.MQTTHost, MQTTPort, false, null, null, MqttSslProtocols.None);
+                client = MqttClientWrapper.CreateClient(Properties.Settings.Default.MQTTHost, MQTTPort, false, null, null, MqttSslProtocols.None);
 
                 if (Properties.Settings.Default.Name.Length > 0 && Properties.Settings.Default.Password.Length > 0)
                 {
@@ -131,7 +132,7 @@ namespace MQTTClient
                                 topic += "-" + car;
 
                             client.Publish(topic, Encoding.UTF8.GetBytes(lastjson[car]),
-                                uPLibrary.Networking.M2Mqtt.Messages.MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, true);
+                                MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, true);
                             
                             if(subtopics)
                             { 
@@ -139,7 +140,7 @@ namespace MQTTClient
                                 foreach(var keyvalue in topics)
                                 {
                                     client.Publish(topic + "/" + keyvalue.Key, Encoding.UTF8.GetBytes(keyvalue.Value ?? "NULL"),
-                                    uPLibrary.Networking.M2Mqtt.Messages.MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, true);
+                                    MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, true);
                                 }
                             }
                         }
