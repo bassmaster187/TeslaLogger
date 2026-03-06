@@ -2390,7 +2390,7 @@ Supercharger-V3 ES-Valdepeñas,38.779707,-3.388703
 Supercharger-V3 ES-Valencia Paterna,39.543,-0.45147
 Supercharger-V3 ES-Vigo,42.2206,-8.72507
 Supercharger-V4 ES-Vila-seca,41.096226,1.150441
-Supercharger-V4 ES-Villagonzalo Pedernales,42.28864,-3.70585
+Supercharger-V4 ES-Villagonzalo Pedernales,42.28794,-3.7073
 Supercharger-V4 ES-Villalpando,41.82636,-5.3789
 Supercharger-V4 ES-Villaquirán de los Infantes,42.220344,-3.998715
 Supercharger-V4 ES-Villar de Chinchilla,38.89854,-1.50344
@@ -2558,6 +2558,7 @@ Supercharger-V3 FR-Chatellerault,46.836112,0.541874
 Supercharger-V4 FR-Chauray,46.34023,-0.38417
 Supercharger-V3 FR-Cherbourg,49.60275,-1.602326
 Supercharger-V4 FR-Chilly-Mazarin,48.70648,2.29726
+Supercharger-V4 FR-Cholet,47.07922,-0.83434
 Supercharger FR-Châlons-en-Champagne,48.991982,4.24532
 Supercharger FR-Châteauroux,46.863047,1.716028
 Supercharger-V4 FR-Claye-Souilly,48.946229,2.688222
@@ -2605,6 +2606,7 @@ Supercharger-V4 FR-Le Cannet-des-Maures,43.392215,6.347909
 Supercharger-V3 FR-Le Chesnay (Top Floor),48.826925,2.118539
 Supercharger FR-Le Mans,48.041833,0.175342
 Supercharger-V3 FR-Le Mans - Saint-Saturnin,48.052932,0.166434
+Supercharger-V4 FR-Le Mans Rue des Frères Voisin,48.0328,0.17646
 Supercharger-V4 FR-Le Muy,43.476362,6.531602
 Supercharger-V3 FR-Le Touquet-Paris-Plage,50.521625,1.598625
 Supercharger-V4 FR-Les Clayes-sous-Bois,48.8251,1.96833
@@ -8725,6 +8727,7 @@ Citywatt DE-Kirchenlamitz Weißenstädter Straße,50.14917,11.94204
 Citywatt DE-Kloster Lehnin Friedenstraße 13,52.31748,12.7439
 Citywatt DE-Koblenz August-Thyssen-Straße 6,50.38884,7.55706
 Citywatt DE-Korschenbroich Mühlenstraße,51.19608,6.50005
+Citywatt DE-Kupferzell Im Greut,49.17768,9.69167
 Citywatt DE-Köfering Scheuererstraße 1a,48.9409,12.20082
 Citywatt DE-Lahr/Schwarzwald Im Götzmann,48.3342,7.84462
 Citywatt DE-Landau an der Isar Röntgenstraße 1,48.6902,12.70641
@@ -19456,6 +19459,7 @@ OMV AT-Feldkirchen in Kärnten 10.-Oktober-Straße,46.72298,14.09707
 OMV AT-Frauenhofen Wiener Straße,48.6654,15.6329
 OMV AT-Gföhl Langenloiser Straße,48.51218,15.51018
 OMV AT-Haag Straße zur Autobahn,48.11527,14.57095
+OMV AT-Herzogenburg St. Pöltner Straße,48.2791,15.69548
 OMV AT-Korneuburg Wiener Straße,48.34058,16.33776
 OMV AT-Oberpullendorf Stoob-Süd,47.50965,16.50004
 OMV AT-Raststation Deutschfeistritz,47.20517,15.31583
@@ -22205,6 +22209,7 @@ SWM DE-München Schellingstraße,48.1548,11.55986
 SWM DE-München Seeriederstraße,48.13395,11.6021,30
 SWM DE-München Steinstraße,48.1291,11.59414
 SWM DE-München Steubenplatz,48.15114,11.52008
+SWM DE-München Weyprechtstraße,48.20394,11.56544
 SWM DE-München Widenmayerstraße,48.14003,11.59346
 SWM DE-München Winthirstraße,48.1566,11.52762
 SWM DE-München Winzererstraße,48.1618,11.5621
