@@ -11286,6 +11286,7 @@ EnBW DE-Guben Karl-Marx-Straße,51.95679,14.70317
 EnBW DE-Gummersbach,50.98307,7.52804
 EnBW DE-Gundelsheim Tiefenbacher Straße,49.28515,9.1597
 EnBW DE-Gutenzell-Hürbel Reinstetter Straße,48.122,9.96095
+EnBW DE-Guxhagen Dörnhagener Straße,51.21132,9.4853
 EnBW DE-Gägelow Untere Straße,53.90317,11.38136
 EnBW DE-Gärtringen Hauptstraße,48.64213,8.90053
 EnBW DE-Gärtringen Nufringer Straße,48.62542,8.9235
@@ -12210,6 +12211,7 @@ EnBW DE-St. Leon-Rot,49.26729,8.61565
 EnBW DE-St. Leon-Rot Am St. Leoner See,49.28242,8.58414
 EnBW DE-St. Leon-Rot Dietmar Hopp Straße,49.2659,8.6145
 EnBW DE-St. Leon-Rot Opelstraße,49.2454,8.63677
+EnBW DE-St. Wendel Am Wirthembösch,49.46613,7.16236
 EnBW DE-Stade,53.60939,9.47915
 EnBW DE-Stade Rewe,53.58252,9.49983
 EnBW DE-Stadthagen Hagebaumarkt,52.33007,9.23168
@@ -15506,6 +15508,7 @@ HEnW DE-Hamburg Kieler Straße,53.60786,9.90578
 HEnW DE-Hamburg Kirchenweg,53.5555,10.01034
 HEnW DE-Hamburg Klaus-Groth-Straße,53.55547,10.03198
 HEnW DE-Hamburg Kleine Freiheit,53.55183,9.95628
+HEnW DE-Hamburg Lagerstraße,53.5624,9.96728
 HEnW DE-Hamburg Lange Straße,53.54729,9.95633
 HEnW DE-Hamburg Marienthaler Straße,53.56064,10.03831
 HEnW DE-Hamburg Martinistraße,53.58867,9.97512
@@ -20494,6 +20497,8 @@ r-loaded DE-Leipheim Albert-Einstein-Straße,48.44706,10.24017
 
 Ragde NO-Kristiansund Storgata,63.10824,7.7281
 
+Raiffeisen DE-Nottuln Beisenbusch,51.91063,7.39937,25
+
 Raiffeisenbank DE-Bad Homburg Werner-Reimers-Straße,50.21694,8.61128
 
 REA DE-Würselen Schumanstraße,50.809,6.15112
@@ -21964,6 +21969,7 @@ SW-Lübeck DE-Lübeck Herrenholz,53.85878,10.62665
 SW-Lübeck DE-Lübeck Musterbahn,53.86006,10.68538
 SW-Lübeck DE-Lübeck Mühlenstraße,53.86318,10.68676
 SW-Lübeck DE-Lübeck Priwallpromenade,53.95621,10.88116
+SW-Lübeck DE-Lübeck Vogteistraße,53.95876,10.86857
 SW-Magdeburg DE-Magdeburg Am Blauen Bock,52.13133,11.63506
 SW-Magdeburg DE-Magdeburg Ernst-Reuter-Allee,52.13065,11.63851
 SW-Mainz DE-Groß-Gerau Hauptstraße,49.90885,8.4866
@@ -22612,6 +22618,7 @@ TIUKKA FI-Kristinestad Vasavägen,62.29977,21.45304
 TIWAG AT-Going am Wilden Kaiser Marchstraße,47.51385,12.32458
 TIWAG AT-Gurgl Gurglerstraße,46.87023,11.02714
 TIWAG AT-Hainzenberg Talstraße,47.21142,11.87314
+TIWAG AT-Ischgl Silvrettastraße,47.0111,10.28846
 TIWAG AT-Jochberg Dorf,47.37709,12.41853
 TIWAG AT-Kaunertal Feichten,47.03149,10.74739
 TIWAG AT-Kirchberg im Tirol Hauptstraße,47.4485,12.31551
