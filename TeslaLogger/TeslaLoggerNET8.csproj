@@ -129,8 +129,7 @@
     <PackageReference Include="Microsoft.IO.RecyclableMemoryStream" Version="3.0.1" />
     <!-- MQTTnet replaces legacy M2Mqtt; the old package generated NU1701 warnings -->
     <PackageReference Include="Microsoft.VisualBasic" Version="10.3.0" />
-    <PackageReference Include="MQTTnet" Version="5.1.0.1559" />
-    <PackageReference Include="MQTTnet.Client" Version="2.0.2" />
+    <PackageReference Include="MQTTnet" Version="4.3.6.1152" />
     <PackageReference Include="MySql.Data" Version="9.6.0" />
     <PackageReference Include="NetMQ" Version="4.0.2.2" />
     <PackageReference Include="Portable.BouncyCastle" Version="1.9.0" />

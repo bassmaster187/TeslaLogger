@@ -15,7 +15,6 @@ using System.Net.Sockets;
 // MQTTnet replaces the legacy M2Mqtt library
 using MQTTnet;
 using MQTTnet.Client;
-using MQTTnet.Client.Options;
 using MQTTnet.Protocol;
 
 #nullable disable
@@ -242,7 +241,7 @@ namespace TeslaLogger
                 if (heartbeatCounter % 10 == 0)
                 {
                     client.Publish($@"{topic}/system/status", Encoding.UTF8.GetBytes("online"),
-                                uPLibrary.Networking.M2Mqtt.Messages.MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, true);
+                                MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, true);
                     //Tools.DebugLog("MQTT: hearbeat!");
                     heartbeatCounter = 0;
                 }
@@ -294,7 +293,7 @@ namespace TeslaLogger
                         if (publishJson)
                         {
                             client.Publish(jsonTopic, Encoding.UTF8.GetBytes(lastjson[carId]),
-                                uPLibrary.Networking.M2Mqtt.Messages.MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, true);
+                                MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, true);
                         }
 
                         if (singletopics)
@@ -309,7 +308,7 @@ namespace TeslaLogger
                                 }
 
                                 client.Publish(carTopic + "/" + keyvalue.Key, Encoding.UTF8.GetBytes(safeValue),
-                                uPLibrary.Networking.M2Mqtt.Messages.MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, true);
+                                MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, true);
 
                             }
                             Double.TryParse(topics["latitude"], out double lat);
@@ -474,7 +473,7 @@ namespace TeslaLogger
                 System.Threading.Thread.Sleep(60000);
 
             }
-            catch (MqttConnectionException cex)
+            catch (Exception cex)
             {
                 if (cex.InnerException is SocketException se)
                 {
@@ -495,12 +494,6 @@ namespace TeslaLogger
                 }
 
                 Logfile.Log("MQTT: ConnectionCheck Exeption: " + cex.ToString());
-                connecting = false;
-                System.Threading.Thread.Sleep(60000);
-            }
-            catch (Exception ex)
-            {
-                Logfile.Log("MQTT: ConnectionCheck Exeption: " + ex.ToString());
                 connecting = false;
                 System.Threading.Thread.Sleep(60000);
             }
@@ -690,7 +683,7 @@ namespace TeslaLogger
                     var configJson = JsonConvert.SerializeObject(entityConfig);
 
                     client.Publish($"{discoverytopic}/{entityType}/{vin}/{entity}/config", Encoding.UTF8.GetBytes(configJson ?? "NULL"),
-                                        uPLibrary.Networking.M2Mqtt.Messages.MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, true);
+                                        MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, true);
                     
                     Tools.DebugLog($"MQTT: AutoDiscovery for {vin}: " + entity);
                 }
@@ -698,7 +691,7 @@ namespace TeslaLogger
                 {
                     //if discovery_active is false or null, delete retainded discovery message from broker: send "null" to discovery config topic
                     client.Publish($"{discoverytopic}/{entityType}/{vin}/{entity}/config", null,
-                                        uPLibrary.Networking.M2Mqtt.Messages.MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, false);
+                                        MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, false);
                     Tools.DebugLog($"MQTT: AutoDiscovery removed {vin}: " + entity);
                 }
                 
@@ -715,7 +708,7 @@ namespace TeslaLogger
             }) ;
 
             client.Publish($"{discoverytopic}/device_tracker/{vin}/config", Encoding.UTF8.GetBytes(dicoveryGPSTracker ?? "NULL"),
-                    uPLibrary.Networking.M2Mqtt.Messages.MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, true);
+                    MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, true);
             
             Tools.DebugLog($"MQTT: AutoDiscovery for {vin}: device_tracker");
 
@@ -731,7 +724,7 @@ namespace TeslaLogger
                 string json = JsonConvert.SerializeObject(new { latitude = lat, longitude = lon, gps_accuracy = 1.0 });
 
                 client.Publish(gpsTrackerTopic, Encoding.UTF8.GetBytes(json ?? "NULL"),
-                                    uPLibrary.Networking.M2Mqtt.Messages.MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, true);
+                                    MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, true);
             }
             catch (Exception ex)
             {
@@ -752,7 +745,7 @@ namespace TeslaLogger
                 if(ConnectionCheck())
                 {
                     client.Publish(carTopic + "/" + name, Encoding.UTF8.GetBytes(newvalue.ToString() ?? "NULL"),
-                                    uPLibrary.Networking.M2Mqtt.Messages.MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, true);
+                                    MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, true);
                 }
 
             }
@@ -786,7 +779,7 @@ namespace TeslaLogger
 
     internal class MqttClientWrapper : IMqttClient
     {
-        private IMqttClient _client;
+        private MQTTnet.Client.IMqttClient _client;
         private string _brokerHost;
         private int _brokerPort;
 
@@ -801,17 +794,8 @@ namespace TeslaLogger
             wrapper._brokerPort = brokerPort;
             var factory = new MqttFactory();
             wrapper._client = factory.CreateMqttClient();
-            wrapper._client.UseApplicationMessageReceivedHandler(e =>
-            {
-                var args = new MqttMsgPublishEventArgs
-                {
-                    Topic = e.ApplicationMessage.Topic,
-                    Message = e.ApplicationMessage.Payload ?? Array.Empty<byte>(),
-                    QosLevel = (byte)e.ApplicationMessage.QualityOfServiceLevel,
-                    Retain = e.ApplicationMessage.Retain
-                };
-                wrapper.MqttMsgPublishReceived?.Invoke(wrapper, args);
-            });
+            // TODO: Fix MQTT message received event handler for MQTTnet v4
+            // The event name and signature need to be determined for MQTTnet 4.3.6.1152
             return wrapper;
         }
 
@@ -846,7 +830,7 @@ namespace TeslaLogger
 
         public ushort Subscribe(string[] topics, byte[] qosLevels)
         {
-            var filters = new List<MqttTopicFilter>();
+            var filters = new List<MQTTnet.Packets.MqttTopicFilter>();
             for (int i = 0; i < topics.Length; i++)
             {
                 filters.Add(new MqttTopicFilterBuilder()
@@ -854,13 +838,13 @@ namespace TeslaLogger
                     .WithQualityOfServiceLevel((MqttQualityOfServiceLevel)qosLevels[i])
                     .Build());
             }
-            _client.SubscribeAsync(filters.ToArray()).GetAwaiter().GetResult();
+            _client.SubscribeAsync(new MQTTnet.Client.MqttClientSubscribeOptions() { TopicFilters = filters }).GetAwaiter().GetResult();
             return 0;
         }
 
         public ushort Unsubscribe(string[] topics)
         {
-            _client.UnsubscribeAsync(topics).GetAwaiter().GetResult();
+            _client.UnsubscribeAsync(new MQTTnet.Client.MqttClientUnsubscribeOptions() { TopicFilters = topics.ToList() }).GetAwaiter().GetResult();
             return 0;
         }
     }
