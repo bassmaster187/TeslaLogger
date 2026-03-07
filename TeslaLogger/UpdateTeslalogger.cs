@@ -696,7 +696,7 @@ PRIMARY KEY(id)
                 AssertAlterDB();
                 DBHelper.ExecuteSQLQuery("ALTER TABLE pos ADD COLUMN AP TINYINT(1) NULL", 300);
 
-                new Thread(() =>
+                Task.Run(() =>
                 {
                     while (Car.Allcars.Count == 0)
                     {
@@ -709,7 +709,7 @@ PRIMARY KEY(id)
                         DBHelper.UpdateAllPOS_AP_Column(c.CarInDB, new DateTime(2024, 2, 1), DateTime.Now);
                     }
                     
-                }).Start();
+                });
             }
         }
 
@@ -850,7 +850,7 @@ PRIMARY KEY(id)
 
         private static void UpdateAllDrivestateDateThread()
         {
-            new Thread(() =>
+            Task.Run(() =>
             {
                 while (Car.Allcars.Count == 0)
                 {
@@ -858,7 +858,7 @@ PRIMARY KEY(id)
                 }
                 Thread.Sleep(5000);
                 DBHelper.UpdateAllDrivestateData();
-            }).Start();
+            });
         }
 
         private static void CheckDBSchema_chargingstate()
@@ -1558,7 +1558,7 @@ PRIMARY KEY(id)
                     }
                     else
                     {
-                        var t = new Thread(() =>
+                        Task.Run(() =>
                         {
                             Logfile.Log("Install .NET 8");
 
@@ -1575,9 +1575,6 @@ PRIMARY KEY(id)
                                 ExceptionlessClient.Default.CreateFeatureUsage("DOTNET8").FirstCarUserID().AddObject(temp, "DOTNET8").Submit();
                             }
                         });
-
-                        t.Name = "DOTNET8InstallThread";
-                        t.Start();
                     }
                 }
             }
@@ -2590,7 +2587,7 @@ PRIMARY KEY(id)
                     return;
                 }
 
-                Thread threadGrafanaUpdate = new Thread(() =>
+                Task.Run(() =>
                 {
                     string GrafanaFilename = $"grafana_{newversion}_armhf.deb";
 
@@ -2622,11 +2619,7 @@ PRIMARY KEY(id)
                     Logfile.Log("upgrade Grafana DONE!");
 
                     Tools.CopyFilesRecursively(new DirectoryInfo("/etc/teslalogger/git/TeslaLogger/GrafanaPlugins"), new DirectoryInfo("/var/lib/grafana/plugins"));
-                })
-                {
-                    Name = "GrafanaUpdate"
-                };
-                threadGrafanaUpdate.Start();
+                });
             }
         }
 

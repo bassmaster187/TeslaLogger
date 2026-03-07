@@ -1263,22 +1263,21 @@ namespace UnitTestsTeslalogger
             /*
             DBHelper.ExecuteSQLQuery("update cars set tesla_token = '', tesla_token_expire='2020-01-01' where id = 1");
             
-            Thread t = new Thread(() => Program.GetAllCars());
-            t.Start();
+            var t = Task.Run(() => Program.GetAllCars());
 
             for (int x = 0; x < 300; x++)
             {
                 string tt = DBHelper.ExecuteSQLScalar("Select tesla_token from cars where id=1").ToString();
                 if (tt.Length > 10)
                 {
-                    t.Abort();
+                    // Note: Task cancellation would be better here but keeping simple for commented code
                     return;
                 }
 
                 System.Threading.Thread.Sleep(1000);
             }
 
-            t.Abort();
+            // Note: Task cancellation would be better here but keeping simple for commented code
 
             Assert.Fail("could not get Auth Token from Refresh Token!");
             */
@@ -1290,22 +1289,21 @@ namespace UnitTestsTeslalogger
             /*
             DBHelper.ExecuteSQLQuery("update cars set tesla_token = '', refresh_token = '', tesla_token_expire='2020-01-01' where id = 1");
 
-            Thread t = new Thread(() => Program.GetAllCars());
-            t.Start();
+            var t = Task.Run(() => Program.GetAllCars());
 
             for (int x = 0; x < 300; x++)
             {
                 string tt = DBHelper.ExecuteSQLScalar("Select tesla_token from cars where id=1").ToString();
                 if (tt.Length > 10)
                 {
-                    t.Abort();
+                    // Note: Task cancellation would be better here but keeping simple for commented code
                     return;
                 }
 
                 System.Threading.Thread.Sleep(1000);
             }
 
-            t.Abort();
+            // Note: Task cancellation would be better here but keeping simple for commented code
 
             Assert.Fail("could not get Auth Token from Refresh Token!");
             */

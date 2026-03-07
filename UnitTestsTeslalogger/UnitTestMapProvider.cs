@@ -31,14 +31,10 @@ namespace UnitTestsTeslalogger
 
             var inst = StaticMapService.GetSingleton();
 
-            Thread threadStaticMapService = new Thread(() =>
+            var taskStaticMapService = Task.Run(() =>
             {
                 StaticMapService.GetSingleton().Run();
-            })
-            {
-                Name = "StaticMapServiceThread"
-            };
-            threadStaticMapService.Start();
+            });
 
             while (inst.GetQueueLength() > 0)
                 System.Threading.Thread.Sleep(500);
@@ -52,14 +48,10 @@ namespace UnitTestsTeslalogger
 
             var inst = StaticMapService.GetSingleton();
 
-            Thread threadStaticMapService = new Thread(() =>
+            var taskStaticMapService = Task.Run(() =>
             {
                 StaticMapService.GetSingleton().Run();
-            })
-            {
-                Name = "StaticMapServiceThread"
-            };
-            threadStaticMapService.Start();
+            });
 
             while (inst.GetQueueLength() > 0)
                 System.Threading.Thread.Sleep(500);
@@ -81,14 +73,10 @@ namespace UnitTestsTeslalogger
 
             var inst = StaticMapService.GetSingleton();
 
-            Thread threadStaticMapService = new Thread(() =>
+            var taskStaticMapService = Task.Run(() =>
             {
                 StaticMapService.GetSingleton().Run();
-            })
-            {
-                Name = "StaticMapServiceThread"
-            };
-            threadStaticMapService.Start();
+            });
 
             while (inst.GetQueueLength() > 0)
                 System.Threading.Thread.Sleep(500);
@@ -111,14 +99,10 @@ namespace UnitTestsTeslalogger
 
             var inst = StaticMapService.GetSingleton();
 
-            Thread threadStaticMapService = new Thread(() =>
+            var taskStaticMapService = Task.Run(() =>
             {
                 StaticMapService.GetSingleton().Run();
-            })
-            {
-                Name = "StaticMapServiceThread"
-            };
-            threadStaticMapService.Start();
+            });
 
             while (inst.GetQueueLength() > 0)
                 System.Threading.Thread.Sleep(500);
@@ -141,14 +125,10 @@ namespace UnitTestsTeslalogger
 
             var inst = StaticMapService.GetSingleton();
 
-            Thread threadStaticMapService = new Thread(() =>
+            var taskStaticMapService = Task.Run(() =>
             {
                 StaticMapService.GetSingleton().Run();
-            })
-            {
-                Name = "StaticMapServiceThread"
-            };
-            threadStaticMapService.Start();
+            });
 
             while (inst.GetQueueLength() > 0)
                 System.Threading.Thread.Sleep(500);
@@ -172,14 +152,10 @@ namespace UnitTestsTeslalogger
 
             var inst = StaticMapService.GetSingleton();
 
-            Thread threadStaticMapService = new Thread(() =>
+            var taskStaticMapService = Task.Run(() =>
             {
                 StaticMapService.GetSingleton().Run();
-            })
-            {
-                Name = "StaticMapServiceThread"
-            };
-            threadStaticMapService.Start();
+            });
 
             while (inst.GetQueueLength() > 0)
                 System.Threading.Thread.Sleep(500);
