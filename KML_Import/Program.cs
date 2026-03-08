@@ -200,7 +200,7 @@ namespace KML_Import
                 else
                     cmd.Parameters.AddWithValue("@ideal_battery_range_km", ideal_battery_range_km.ToString(ciEnUS));
 
-                if (outside_temp == null)
+                if (outside_temp is null)
                     cmd.Parameters.AddWithValue("@outside_temp", DBNull.Value);
                 else
                     cmd.Parameters.AddWithValue("@outside_temp", ((double)outside_temp).ToString(ciEnUS));
@@ -221,7 +221,7 @@ namespace KML_Import
                 else
                     cmd.Parameters.AddWithValue("@battery_level", battery_level.ToString());
 
-                if (inside_temp == null)
+                if (inside_temp is null)
                     cmd.Parameters.AddWithValue("@inside_temp", DBNull.Value);
                 else
                     cmd.Parameters.AddWithValue("@inside_temp", inside_temp);

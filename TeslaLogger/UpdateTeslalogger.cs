@@ -668,7 +668,7 @@ PRIMARY KEY(id)
                     using (MySqlCommand cmd = new MySqlCommand("SELECT datetime_precision FROM INFORMATION_SCHEMA.COLUMNS WHERE table_name = 'pos' AND COLUMN_NAME = 'datum' and TABLE_SCHEMA = 'teslalogger'", con))
                     {
                         MySqlDataReader dr = SQLTracer.TraceDR(cmd);
-                        if (dr.Read() && dr[0] != DBNull.Value)
+                        if (dr.Read() && dr[0] is not DBNull)
                         {
                             if (int.TryParse(dr[0].ToString(), out int datetime_precision))
                             {

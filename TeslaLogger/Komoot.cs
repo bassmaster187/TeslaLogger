@@ -871,7 +871,7 @@ WHERE
                         cmd.Parameters.AddWithValue("@carID", carID);
                         cmd.Parameters.AddWithValue("@StartDate", start);
                         MySqlDataReader dr = SQLTracer.TraceDR(cmd);
-                        if (dr.Read() && dr[0] != DBNull.Value)
+                        if (dr.Read() && dr[0] is not DBNull)
                         {
                             if (int.TryParse(dr[0].ToString(), out drivestateID))
                             {
@@ -946,7 +946,7 @@ LIMIT 1", con))
                         cmd.Parameters.AddWithValue("@CarID", carid);
                         cmd.Parameters.AddWithValue("@start", start);
                         MySqlDataReader dr = SQLTracer.TraceDR(cmd);
-                        if (dr.Read() && dr[0] != DBNull.Value)
+                        if (dr.Read() && dr[0] is not DBNull)
                         {
                             if (double.TryParse(dr[0].ToString(), out double odo))
                             {
@@ -1316,7 +1316,7 @@ WHERE
                     {
                         cmd.Parameters.AddWithValue("@tourID", tourID);
                         MySqlDataReader dr = SQLTracer.TraceDR(cmd);
-                        if (dr.Read() && dr[0] != DBNull.Value)
+                        if (dr.Read() && dr[0] is not DBNull)
                         {
                             if (long.TryParse(dr[0].ToString(), out long _))
                             {

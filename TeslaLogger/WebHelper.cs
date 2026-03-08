@@ -24,7 +24,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using static TeslaLogger.Car;
 
-#nullable disable
+#nullable enable
 
 
 namespace TeslaLogger

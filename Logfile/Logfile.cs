@@ -26,7 +26,7 @@ namespace TeslaLogger
         {
             get
             {
-                if (_logfilepath == null)
+                if (_logfilepath is null)
                 {
                     _logfilepath = Path.Combine(GetExecutingPath(), "nohup.out");
                 }
@@ -69,7 +69,7 @@ namespace TeslaLogger
         {
             try
             {
-                if (inhalt != null)
+                if (inhalt is not null)
                 {
                     if (inhalt.Contains("vehicle unavailable:"))
                     {
@@ -104,7 +104,7 @@ namespace TeslaLogger
                 }
 
                 string temp = "";
-                if (ex != null)
+                if (ex is not null)
                 {
                     temp = ex.ToString();
                 }
@@ -222,7 +222,7 @@ namespace TeslaLogger
         {
             try
             {
-                if (exception == null)
+                if (exception is null)
                 {
                     return "";
                 }

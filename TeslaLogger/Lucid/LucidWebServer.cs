@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 
-#nullable disable
+#nullable enable
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
 using System;

@@ -14,7 +14,7 @@ namespace TLUpdate
 
         public static void CopyFilesRecursively(DirectoryInfo source, DirectoryInfo target, string excludeFile = null)
         {
-            if (source != null && target != null)
+            if (source is not null && target is not null)
             {
                 try
                 {

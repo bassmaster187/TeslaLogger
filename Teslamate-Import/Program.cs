@@ -330,7 +330,7 @@ namespace Teslamate_Import
                                 }
 
                                 // FL
-                                if (dr["tpms_pressure_fl"] != DBNull.Value)
+                                if (dr["tpms_pressure_fl"] is not DBNull)
                                 {
                                     using (var cmdTL = new MySqlCommand(@"INSERT INTO TPMS (CarId, Datum, TireId, Pressure, import) VALUES (@CarId, @Datum, 1, @Pressure, 3) ON DUPLICATE KEY UPDATE Pressure = VALUES(Pressure);", conTL))
                                     {
@@ -341,7 +341,7 @@ namespace Teslamate_Import
                                     }
                                 }
                                 // FR
-                                if (dr["tpms_pressure_fr"] != DBNull.Value)
+                                if (dr["tpms_pressure_fr"] is not DBNull)
                                 {
                                     using (var cmdTL = new MySqlCommand(@"INSERT INTO TPMS (CarId, Datum, TireId, Pressure, import) VALUES (@CarId, @Datum, 2, @Pressure, 3) ON DUPLICATE KEY UPDATE Pressure = VALUES(Pressure);", conTL))
                                     {
@@ -352,7 +352,7 @@ namespace Teslamate_Import
                                     }
                                 }
                                 // RL
-                                if (dr["tpms_pressure_rl"] != DBNull.Value)
+                                if (dr["tpms_pressure_rl"] is not DBNull)
                                 {
                                     using (var cmdTL = new MySqlCommand(@"INSERT INTO TPMS (CarId, Datum, TireId, Pressure, import) VALUES (@CarId, @Datum, 3, @Pressure, 3) ON DUPLICATE KEY UPDATE Pressure = VALUES(Pressure);", conTL))
                                     {
@@ -363,7 +363,7 @@ namespace Teslamate_Import
                                     }
                                 }
                                 // RR
-                                if (dr["tpms_pressure_rr"] != DBNull.Value)
+                                if (dr["tpms_pressure_rr"] is not DBNull)
                                 {
                                     using (var cmdTL = new MySqlCommand(@"INSERT INTO TPMS (CarId, Datum, TireId, Pressure, import) VALUES (@CarId, @Datum, 4, @Pressure, 3) ON DUPLICATE KEY UPDATE Pressure = VALUES(Pressure);", conTL))
                                     {
@@ -467,7 +467,7 @@ namespace Teslamate_Import
                                     int? geofenceId = dr["geofence_id"] as int?;
                                     costPerKwh = GetCostPerUnitFromGeofence(geofenceId);
 
-                                    if (costPerKwh == null)
+                                    if (costPerKwh is null)
                                     {
                                         decimal? cost = dr["cost"] as decimal?;
                                         if (cost.HasValue && cost > 0)
@@ -519,7 +519,7 @@ namespace Teslamate_Import
 
         private static decimal? GetCostPerUnitFromGeofence(int? geofenceId)
         {
-            if (geofenceId == null)
+            if (geofenceId is null)
                 return null;
 
             using (var con = new NpgsqlConnection(pgConnectionString))
@@ -529,7 +529,7 @@ namespace Teslamate_Import
                 {
                     cmd.Parameters.AddWithValue("@id", geofenceId);
                     object result = cmd.ExecuteScalar();
-                    if (result != null && result != DBNull.Value)
+                    if (result is not null and not DBNull)
                     {
                         return Convert.ToDecimal(result);
                     }
@@ -559,7 +559,7 @@ namespace Teslamate_Import
 
         private static object GetChargingField(string column, DateTime? date, int carid)
         {
-            if (date == null)
+            if (date is null)
                 return null;
 
             using (var con = new NpgsqlConnection(pgConnectionString))
@@ -578,7 +578,7 @@ namespace Teslamate_Import
 
         private static object GetChargingIdStart(DateTime? date, int carid)
         {
-            if (date == null)
+            if (date is null)
                 return null;
 
             using (var conTL = new MySqlConnection(DBConnectionstring))
@@ -619,7 +619,7 @@ namespace Teslamate_Import
 
         private static int? GetPosId(DateTime? datetime, int carid)
         {
-            if (datetime == null)
+            if (datetime is null)
                 return null;
 
             using (var conTL = new MySqlConnection(DBConnectionstring))

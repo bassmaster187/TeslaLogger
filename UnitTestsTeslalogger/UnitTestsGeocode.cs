@@ -26,7 +26,7 @@ namespace UnitTestsTeslalogger
 
             var geofence = Geofence.GetInstance();
 
-            if (c == null)
+            if (c is null)
                 c = new Car(0, "", "", 0, "", DateTime.Now, "", "", "", "", "", "", "", null, false); 
 
             geofence = Geofence.GetInstance();
@@ -119,7 +119,7 @@ namespace UnitTestsTeslalogger
             String line;
             using (StreamReader file = new StreamReader(filename))
             {
-                while ((line = file.ReadLine()) != null)
+                while ((line = file.ReadLine()) is not null)
                 {
                     if (string.IsNullOrEmpty(line))
                         continue;

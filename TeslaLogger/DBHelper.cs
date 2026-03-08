@@ -1094,7 +1094,7 @@ WHERE
                     {
                         cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
                         MySqlDataReader dr = SQLTracer.TraceDR(cmd);
-                        while (dr.Read() && dr[0] != DBNull.Value)
+                        while (dr.Read() && dr[0] is not DBNull)
                         {
                             if (int.TryParse(dr[0].ToString(), out int id))
                             {
@@ -1146,7 +1146,7 @@ WHERE
                     {
                         cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
                         MySqlDataReader dr = SQLTracer.TraceDR(cmd);
-                        while (dr.Read() && dr[0] != DBNull.Value)
+                        while (dr.Read() && dr[0] is not DBNull)
                         {
                             if (int.TryParse(dr[0].ToString(), out int ChargingStateID)
                                 && DateTime.TryParse(dr[1].ToString(), out DateTime UnplugDate))
@@ -1521,7 +1521,7 @@ HAVING
                     {
                         cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
                         MySqlDataReader dr = SQLTracer.TraceDR(cmd);
-                        while (dr.Read() && dr[0] != DBNull.Value)
+                        while (dr.Read() && dr[0] is not DBNull)
                         {
                             if (int.TryParse(dr[0].ToString(), out int id))
                             {

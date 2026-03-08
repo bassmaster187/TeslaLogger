@@ -163,7 +163,7 @@ ORDER BY
                     {
                         cmd.Parameters.AddWithValue("@CarID", CarID);
                         MySqlDataReader dr = SQLTracer.TraceDR(cmd);
-                        while (dr.Read() && dr[0] != DBNull.Value)
+                        while (dr.Read() && dr[0] is not DBNull)
                         {
                             o.Add(new KeyValuePair<string, string>(dr[0].ToString(), dr[1].ToString() + " - " + dr[2].ToString()));
                         }
@@ -217,7 +217,7 @@ ORDER BY
                         cmd.Parameters.AddWithValue("@CarID", CarID);
                         cmd.Parameters.AddWithValue("@StartPosID", StartPosID);
                         MySqlDataReader dr = SQLTracer.TraceDR(cmd);
-                        while (dr.Read() && dr[0] != DBNull.Value)
+                        while (dr.Read() && dr[0] is not DBNull)
                         {
                             if (int.TryParse(dr[0].ToString(), out int id))
                             {
@@ -781,7 +781,7 @@ FROM
     journeys", con))
                     {
                         MySqlDataReader dr = SQLTracer.TraceDR(cmd);
-                        while (dr.Read() && dr[0] != DBNull.Value && int.TryParse(dr[0].ToString(), out int journeyID))
+                        while (dr.Read() && dr[0] is not DBNull && int.TryParse(dr[0].ToString(), out int journeyID))
                         {
                             UpdateJourney(journeyID);
                         }

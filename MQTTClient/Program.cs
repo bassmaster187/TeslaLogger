@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 using TeslaLogger;
 
-#nullable disable
+#nullable enable
 
 namespace MQTTClient
 {

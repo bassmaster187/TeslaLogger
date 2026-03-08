@@ -291,21 +291,21 @@ namespace TeslaLogger
                 string wheel_type = r["wheel_type"] as String ?? "";
                 bool raven = false;
                 bool isKafkaCar = false;
-                if (r["raven"] != DBNull.Value && Convert.ToInt32(r["raven"]) == 1)
+                if (r["raven"] is not DBNull && Convert.ToInt32(r["raven"]) == 1)
                     raven = true;
 
                 bool fleetAPI = false;
-                if (r["fleetAPI"] != DBNull.Value && Convert.ToInt32(r["fleetAPI"]) == 1)
+                if (r["fleetAPI"] is not DBNull && Convert.ToInt32(r["fleetAPI"]) == 1)
                     fleetAPI = true;
 
                 bool virtualKey = false;
-                if (r["virtualkey"] != DBNull.Value && Convert.ToInt32(r["virtualkey"]) == 1)
+                if (r["virtualkey"] is not DBNull && Convert.ToInt32(r["virtualkey"]) == 1)
                     virtualKey = true;
-                else if (r["virtualkey"] != DBNull.Value && Convert.ToInt32(r["virtualkey"]) == 2)
+                else if (r["virtualkey"] is not DBNull && Convert.ToInt32(r["virtualkey"]) == 2)
                     isKafkaCar = true;
 
                 string access_type = "";
-                if (r["access_type"] != DBNull.Value)
+                if (r["access_type"] is not DBNull)
                     access_type = r["access_type"].ToString();
 
 #pragma warning disable CA2000 // Objekte verwerfen, bevor Bereich verloren geht

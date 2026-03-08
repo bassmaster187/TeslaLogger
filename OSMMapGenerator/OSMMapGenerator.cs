@@ -92,7 +92,7 @@ namespace TeslaLogger
 
                         dynamic jsonResult = JsonConvert.DeserializeObject(json);
                         Dictionary<string, object> job = jsonResult.ToObject<Dictionary<string, object>>();
-                        if (job != null)
+                        if (job is not null)
                         {
                             int width = Convert.ToInt32(job["width"]);
                             int height = Convert.ToInt32(job["height"]);
@@ -285,7 +285,7 @@ namespace TeslaLogger
             {
                 using (SKBitmap tileImage = DownloadTile(tile.Item3, tile.Item4, tile.Item5))
                 {
-                    if (tileImage != null)
+                    if (tileImage is not null)
                     {
 
                         SKRectI box = new SKRectI(XtoPx(tile.Item1, x_center, width), YtoPx(tile.Item2, y_center, height), tileSize, tileSize);

@@ -17,7 +17,7 @@ using MQTTnet;
 using MQTTnet.Client;
 using MQTTnet.Protocol;
 
-#nullable disable
+#nullable enable
 
 namespace TeslaLogger
 {

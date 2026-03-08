@@ -23,7 +23,7 @@ namespace UnitTestsTeslalogger
 
             var geofence = Geofence.GetInstance();
 
-            if (c == null)
+            if (c is null)
                 c = new Car(0, "", "", 0, "", DateTime.Now, "", "", "", "", "", "", "", null, false);
 
             geofence = Geofence.GetInstance();
