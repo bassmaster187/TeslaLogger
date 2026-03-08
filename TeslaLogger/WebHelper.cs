@@ -341,7 +341,8 @@ namespace TeslaLogger
 
         HttpClient GetDefaultHttpClientForAuthentification()
         {
-            lock (httpClientLock)
+            httpClientLock.Wait();
+            try
             {
                 if (httpClientForAuthentification == null)
                 {
@@ -366,6 +367,10 @@ namespace TeslaLogger
                     // client.DefaultRequestHeaders.ConnectionClose = true;
                     httpClientForAuthentification.BaseAddress = new Uri(authHost);
                 }
+            }
+            finally
+            {
+                httpClientLock.Release();
             }
 
             return httpClientForAuthentification;
@@ -1470,7 +1475,8 @@ namespace TeslaLogger
 
         internal void GetAllVehicles(out string resultContent, out Newtonsoft.Json.Linq.JArray vehicles, bool throwExceptionOnUnauthorized, bool doNotCache = false)
         {
-            lock (getAllVehiclesLock)
+            getAllVehiclesLock.Wait();
+            try
             {
                 int accountid = 0;
                 lock (vehicles2Account)
@@ -1547,6 +1553,10 @@ namespace TeslaLogger
                 {
                     InsertVehicles2AccountFromVehiclesResponse(vehicles);
                 }
+            }
+            finally
+            {
+                getAllVehiclesLock.Release();
             }
         }
 

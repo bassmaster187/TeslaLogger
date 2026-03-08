@@ -187,10 +187,15 @@ namespace TeslaLogger
 
         internal static void WriteCurrentJsonFile(int CarID, string current_json)
         {
-            lock (SyncLock_WriteCurrentJsonFile)
+            SyncLock_WriteCurrentJsonFile.Wait();
+            try
             {
                 string filepath = Path.Combine(GetExecutingPath(), $"current_json_{CarID}.txt");
                 File.WriteAllText(filepath, current_json, Encoding.UTF8);
+            }
+            finally
+            {
+                SyncLock_WriteCurrentJsonFile.Release();
             }
         }
 

@@ -272,7 +272,8 @@ namespace TeslaLogger
 
         WebClient GetWebClient()
         {
-            lock (_webClientLock)
+            _webClientLock.Wait();
+            try
             {
                 if (_webClient == null)
                 {
@@ -282,6 +283,10 @@ namespace TeslaLogger
 
                     _webClient = webClient;
                 }
+            }
+            finally
+            {
+                _webClientLock.Release();
             }
 
             return _webClient;
