@@ -267,7 +267,8 @@ namespace TeslaLogger
 
         public bool GetBool(string name, out bool value, int maxage = 0)
         {
-            lock (TeslaAPIStateLock)
+            TeslaAPIStateLock.Wait();
+            try
             {
                 try
                 {
@@ -294,13 +295,18 @@ namespace TeslaLogger
                     Tools.DebugLog("Exception", ex);
                 }
             }
+            finally
+            {
+                TeslaAPIStateLock.Release();
+            }
             value = false;
             return false;
         }
 
         public bool GetInt(string name, out int value, int maxage = 0)
         {
-            lock (TeslaAPIStateLock)
+            TeslaAPIStateLock.Wait();
+            try
             {
                 try
                 {
@@ -329,11 +335,16 @@ namespace TeslaLogger
                 value = int.MinValue;
                 return false;
             }
+            finally
+            {
+                TeslaAPIStateLock.Release();
+            }
         }
 
         public bool GetDouble(string name, out double value, int maxage = 0)
         {
-            lock (TeslaAPIStateLock)
+            TeslaAPIStateLock.Wait();
+            try
             {
                 try
                 {
@@ -359,6 +370,10 @@ namespace TeslaLogger
                     car.CreateExceptionlessClient(ex).Submit();
                     Tools.DebugLog("Exception", ex);
                 }
+            }
+            finally
+            {
+                TeslaAPIStateLock.Release();
             }
             value = double.MinValue;
             return false;
