@@ -1261,7 +1261,8 @@ namespace TeslaLogger
 
         HttpClient GethttpclientTeslaNearbyChargingSites()
         {
-            lock (httpClientLock)
+            httpClientLock.Wait();
+            try
             {
                 if (httpClientTeslaChargingSites == null)
                 {
@@ -1275,13 +1276,19 @@ namespace TeslaLogger
                         httpClientTeslaChargingSites.Timeout = TimeSpan.FromSeconds(11);
                     }
                 }
-                return httpClientTeslaChargingSites;
             }
+            finally
+            {
+                httpClientLock.Release();
+            }
+
+            return httpClientTeslaChargingSites;
         }
 
         HttpClient GethttpclientgetChargingHistoryV2()
         {
-            lock (httpClientLock)
+            httpClientLock.Wait();
+            try
             {
                 if (httpClientGetChargingHistoryV2 == null)
                 {
@@ -1290,8 +1297,13 @@ namespace TeslaLogger
                     httpClientGetChargingHistoryV2.DefaultRequestHeaders.Add("Accept", "*/*");
                     httpClientGetChargingHistoryV2.Timeout = TimeSpan.FromSeconds(120);
                 }
-                return httpClientGetChargingHistoryV2;
             }
+            finally
+            {
+                httpClientLock.Release();
+            }
+
+            return httpClientGetChargingHistoryV2;
         }
 
         public virtual string GetVehicles()
@@ -5047,12 +5059,17 @@ WHERE
                 if (car.ABRPMode <= 0 || String.IsNullOrEmpty(car.ABRPToken))
                     return;
 
-                lock (httpClientLock)
+                httpClientLock.Wait();
+                try
                 {
                     if (httpClientABRP == null)
                     {
                         CreateHttpClientABRP();
                     }
+                }
+                finally
+                {
+                    httpClientLock.Release();
                 }
 
                 double speed_kmh = (int)Tools.MphToKmhRounded(speed_mph);
@@ -5111,10 +5128,15 @@ WHERE
                 if (ABRPtimeouts > 10)
                 {
                     ABRPtimeouts = 0;
-                    lock (httpClientLock)
+                    httpClientLock.Wait();
+                    try
                     {
                         httpClientABRP.Dispose();
                         CreateHttpClientABRP();
+                    }
+                    finally
+                    {
+                        httpClientLock.Release();
                     }
                 }
             }
@@ -5148,7 +5170,8 @@ WHERE
             {
                 DateTime start = DateTime.UtcNow;
 
-                lock (httpClientLock)
+                httpClientLock.Wait();
+                try
                 {
                     if (httpClientSuCBingo == null)
                     {
@@ -5159,6 +5182,10 @@ WHERE
 
                         Logfile.Log("SuperchargeBingo: initialized!");
                     }
+                }
+                finally
+                {
+                    httpClientLock.Release();
                 }
 
                 Dictionary<string, object> values = new Dictionary<string, object>
