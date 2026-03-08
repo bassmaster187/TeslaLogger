@@ -1819,7 +1819,7 @@ PRIMARY KEY(id)
 
         internal static Dictionary<string, string> GetLanguageDictionary(string language)
         {
-            Dictionary<string, string> ht = new Dictionary<string, string>();
+            Dictionary<string, string> ht = new();
             string filename = GetLanguageFilepath(language);
             string content = null;
 
@@ -1943,7 +1943,7 @@ PRIMARY KEY(id)
 
                     UpdateDBViews();
 
-                    List<String> dashboardlinks = new List<String>();
+                    List<String> dashboardlinks = new();
 
                     Tools.CopyFilesRecursively(new DirectoryInfo("/etc/teslalogger/git/TeslaLogger/Grafana"), new DirectoryInfo("/etc/teslalogger/tmp/Grafana"));
                     // changes to dashboards

@@ -73,7 +73,7 @@ namespace TeslaLogger
             this.lat = lat;
             this.lng = lng;
             this.radius = radius;
-            specialFlags = new Dictionary<SpecialFlags, string>();
+            specialFlags = new();
         }
 
         public override string ToString()

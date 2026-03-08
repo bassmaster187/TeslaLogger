@@ -85,7 +85,7 @@ namespace TeslaLogger
         private IMqttClient client;
 
         System.Collections.Generic.HashSet<string> allCars;
-        System.Collections.Generic.Dictionary<int, string> lastjson = new Dictionary<int, string>();
+        System.Collections.Generic.Dictionary<int, string> lastjson = new();
 
         private MQTT()
         {
@@ -526,7 +526,7 @@ namespace TeslaLogger
 
         private static HashSet<string> GetAllcars()
         {
-            HashSet<string> h = new HashSet<string>();
+            HashSet<string> h = new();
             string json = "";
 
             try
@@ -611,7 +611,7 @@ namespace TeslaLogger
                 if (active == "true")
                 {
 
-                    Dictionary<string, object> device = new Dictionary<string, object>
+                    Dictionary<string, object> device = new()
                 {
                    { "ids", vin },
                    { "mf", "Tesla" },
@@ -619,7 +619,7 @@ namespace TeslaLogger
                    { "name", name },
                    { "sw", sw }
                 };
-                    Dictionary<string, object> entityConfig = new Dictionary<string, object>
+                    Dictionary<string, object> entityConfig = new()
                 {
                    { "dev", device }
                 };
@@ -830,7 +830,7 @@ namespace TeslaLogger
 
         public ushort Subscribe(string[] topics, byte[] qosLevels)
         {
-            var filters = new List<MQTTnet.Packets.MqttTopicFilter>();
+            List<MQTTnet.Packets.MqttTopicFilter> filters = new();
             for (int i = 0; i < topics.Length; i++)
             {
                 filters.Add(new MqttTopicFilterBuilder()

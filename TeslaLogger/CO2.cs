@@ -11,7 +11,7 @@ namespace TeslaLogger
 {
     public class CO2
     {
-        HashSet<string> supportedCountries = new HashSet<string> { "at", "be", "bg", "ch", "cz", "de", "dk", "ee", "es", "fi", "fr", "gr", "hr", "hu", "it", "lu", "lv", "nl", "no", "pl", "pt" ,"ro", "se", "si", "sk", "uk" };
+        HashSet<string> supportedCountries = new() { "at", "be", "bg", "ch", "cz", "de", "dk", "ee", "es", "fi", "fr", "gr", "hr", "hu", "it", "lu", "lv", "nl", "no", "pl", "pt" ,"ro", "se", "si", "sk", "uk" };
         public bool useCache = true;
 
         static void Log(string msg) {

@@ -277,7 +277,7 @@ ORDER BY
 
             using (DataTable dt = new DataTable())
             {
-                List<object> l = new List<object>();
+                List<object> l = new();
 
                 using (MySqlDataAdapter da = new MySqlDataAdapter(sql, DBHelper.DBConnectionstring))
                 {
@@ -289,7 +289,7 @@ ORDER BY
 
                     foreach (DataRow dr in dt.Rows)
                     {
-                        Dictionary<string, object> d = new Dictionary<string, object>();
+                        Dictionary<string, object> d = new();
 
                         foreach (DataColumn col in dt.Columns)
                         {
@@ -378,7 +378,7 @@ ORDER BY
                         if (dt.Rows.Count == 0)
                             return;
 
-                        Dictionary<string, object> d1 = new Dictionary<string, object>
+                        Dictionary<string, object> d1 = new()
                         {
                             { "ProtocolVersion", ProtocolVersion },
                             { "TaskerToken", TaskerToken } // TaskerToken is the primary key and is used to make sure data won't be imported twice
@@ -389,7 +389,7 @@ ORDER BY
 
                         foreach (DataRow dr in dt.Rows)
                         {
-                            Dictionary<string, object> d = new Dictionary<string, object>();
+                            Dictionary<string, object> d = new();
                             foreach (DataColumn col in dt.Columns)
                             {
                                 d.Add(col.Caption, dr[col.Caption]);   
@@ -515,7 +515,7 @@ GROUP BY
                         ms = Environment.TickCount - ms;
                         car.Log("ShareData: SELECT degradation Data ms: " + ms);
 
-                        Dictionary<string, object> d1 = new Dictionary<string, object>
+                        Dictionary<string, object> d1 = new()
                 {
                     { "ProtocolVersion", ProtocolVersion },
                     { "TaskerToken", TaskerToken } // TaskerToken is the primary key and is used to make sure data won't be imported twice
@@ -526,7 +526,7 @@ GROUP BY
 
                         foreach (DataRow dr in dt.Rows)
                         {
-                            Dictionary<string, object> d = new Dictionary<string, object>();
+                            Dictionary<string, object> d = new();
                             foreach (DataColumn col in dt.Columns)
                             {
                                 if (col.Caption.EndsWith("Date", StringComparison.Ordinal))

@@ -269,7 +269,7 @@ namespace TeslaLogger
             int x_max = (int)(Math.Ceiling(x_center + (0.5 * width / tileSize)));
             int y_max = (int)(Math.Ceiling(y_center + (0.5 * height / tileSize)));
             // assemble all map tiles needed for the map
-            List<Tuple<int, int, int, int, int>> tiles = new List<Tuple<int, int, int, int, int>>();
+            List<Tuple<int, int, int, int, int>> tiles = new();
             for (int x = x_min; x < x_max; x++)
             {
                 for (int y = y_min; y < y_max; y++)

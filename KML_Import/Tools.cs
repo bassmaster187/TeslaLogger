@@ -13,7 +13,7 @@ namespace KML_Import
         {
             var inQuotes = false;
             var token = "";
-            var lines = new List<string>();
+            var lines = new();
             for (var i = 0; i < line.Length; i++)
             {
                 var ch = line[i];

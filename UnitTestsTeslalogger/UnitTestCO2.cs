@@ -282,7 +282,7 @@ namespace UnitTestsTeslalogger
 
             DateTime dateTime = new DateTime(2022, 12, 21, 22, 00, 00);
 
-            Dictionary<string,string> dic = new Dictionary<string,string>();
+            Dictionary<string,string> dic = new();
 
             if (System.IO.File.Exists(AddressCountryCacheFilename))
             {

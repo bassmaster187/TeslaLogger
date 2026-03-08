@@ -143,7 +143,7 @@ namespace TeslaLogger
 
         internal static int ABRPtimeouts; // defaults to 0;
 
-        static Dictionary<string, Account> vehicles2Account = new Dictionary<string, Account>();
+        static Dictionary<string, Account> vehicles2Account = new();
         static int nextAccountId = 1;
 
         object getAllVehiclesLock = new object();
@@ -451,7 +451,7 @@ namespace TeslaLogger
             try
             {
                 Log("Update Tesla Token From Refresh Token!");
-                var d = new Dictionary<string, string>();
+                Dictionary<string, string> d = new();
                 d.Add("grant_type", "refresh_token");
                 d.Add("client_id", "ownerapi");
                 d.Add("refresh_token", refresh_token);

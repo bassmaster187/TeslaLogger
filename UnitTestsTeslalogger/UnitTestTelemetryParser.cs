@@ -616,7 +616,7 @@ namespace UnitTestsTeslalogger
 
         List<string> LoadData(string path)
         {
-            List<string> data = new List<string>();
+            List<string> data = new();
             string[] lines = System.IO.File.ReadAllLines(path);
             foreach (string line in lines)
             {

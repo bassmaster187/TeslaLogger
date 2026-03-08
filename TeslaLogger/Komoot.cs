@@ -50,7 +50,7 @@ namespace TeslaLogger
             internal string json = "{}";
             internal DateTime endTS;
 
-            internal Dictionary<int, Position> positions = new Dictionary<int, Position>();
+            internal Dictionary<int, Position> positions = new();
             internal double odometer;
 
             public KomootTour(int carID, long tourid, string type, string sport, DateTime start)
@@ -234,7 +234,7 @@ namespace TeslaLogger
                 else if (this.positions.Count > 2)
                 {
                     // 3 or more positions
-                    Dictionary<int, int> positionKeys = new Dictionary<int, int>();
+                    Dictionary<int, int> positionKeys = new();
                     int index = 0;
                     foreach (int posID in positions.Keys.OrderBy(k => k))
                     {

@@ -52,7 +52,7 @@ namespace SRTM
                 Directory.CreateDirectory(dataDirectory);
 
             DataDirectory = dataDirectory;
-            DataCells = new List<ISRTMDataCell>();
+            DataCells = new();
         }
 
         /// <summary>
