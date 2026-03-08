@@ -25,7 +25,7 @@ namespace TeslaLogger
         private static Timer timer;
 
         private static DateTime lastTeslaLoggerVersionCheck = DateTime.UtcNow;
-        private static Object lastTeslaLoggerVersionCheckObj = new object();
+        private static System.Threading.SemaphoreSlim lastTeslaLoggerVersionCheckObj = new System.Threading.SemaphoreSlim(1, 1);
         internal static DateTime GetLastVersionCheck() { return lastTeslaLoggerVersionCheck; }
 
         internal static CancellationTokenSource done = new CancellationTokenSource();

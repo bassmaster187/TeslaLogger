@@ -156,7 +156,7 @@ namespace TeslaLogger
         public bool MIC { get => mIC; set => mIC = value; }
         public bool MIG { get => mIG; set => mIG = value; }
         public string Motor { get => motor; set => motor = value; }
-        public static object InitCredentialsLock { get => initCredentialsLock; set => initCredentialsLock = value; }
+        public static System.Threading.SemaphoreSlim InitCredentialsLock { get => initCredentialsLock; set => initCredentialsLock = value; }
         public double Sumkm { get => sumkm; set => sumkm = value; }
         internal string Access_type
         {
@@ -205,8 +205,8 @@ namespace TeslaLogger
         private string motor = "";
         internal bool waitForMFACode;
         internal bool waitForRecaptcha;
-        private static object initCredentialsLock = new object();
-        private static object _syncRoot = new object();
+        private static System.Threading.SemaphoreSlim initCredentialsLock = new System.Threading.SemaphoreSlim(1, 1);
+        private static System.Threading.SemaphoreSlim _syncRoot = new System.Threading.SemaphoreSlim(1, 1);
         internal bool FleetAPI;
         internal string FleetApiAddress = "";
         public string _access_type;

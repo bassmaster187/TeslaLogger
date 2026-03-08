@@ -183,7 +183,7 @@ namespace TeslaLogger
             return filecontent;
         }
 
-        private static object SyncLock_WriteCurrentJsonFile = new object();
+        private static System.Threading.SemaphoreSlim SyncLock_WriteCurrentJsonFile = new System.Threading.SemaphoreSlim(1, 1);
 
         internal static void WriteCurrentJsonFile(int CarID, string current_json)
         {

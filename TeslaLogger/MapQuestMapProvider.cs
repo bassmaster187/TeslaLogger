@@ -11,7 +11,7 @@ namespace TeslaLogger
     public class MapQuestMapProvider : StaticMapProvider
     {
         WebClient _webClient;
-        object _webClientLock = new object();
+        System.Threading.SemaphoreSlim _webClientLock = new System.Threading.SemaphoreSlim(1, 1);
         static bool invalidAppKey; // defaults to false;
 
 

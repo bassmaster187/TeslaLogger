@@ -27,7 +27,7 @@ namespace TeslaLogger
         private readonly Car car;
         private readonly MQTT mqtt;
         private bool dumpJSON;
-        private readonly object TeslaAPIStateLock = new object();
+        private readonly System.Threading.SemaphoreSlim TeslaAPIStateLock = new System.Threading.SemaphoreSlim(1, 1);
 
         internal bool DumpJSON {
             get => dumpJSON;

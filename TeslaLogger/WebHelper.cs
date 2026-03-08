@@ -105,7 +105,7 @@ namespace TeslaLogger
         private HttpClient httpClientTeslaAPI; // defaults to null;
         private HttpClient httpClientTeslaChargingSites; // defaults to null;
         private HttpClient httpClientGetChargingHistoryV2; // defaults to null;
-        private static object httpClientLock = new object();
+        private static System.Threading.SemaphoreSlim httpClientLock = new System.Threading.SemaphoreSlim(1, 1);
 
         DateTime lastRefreshToken = DateTime.MinValue;
         internal DateTime nextTeslaTokenFromRefreshToken = DateTime.Now.AddHours(1);
@@ -146,7 +146,7 @@ namespace TeslaLogger
         static Dictionary<string, Account> vehicles2Account = new();
         static int nextAccountId = 1;
 
-        object getAllVehiclesLock = new object();
+        System.Threading.SemaphoreSlim getAllVehiclesLock = new System.Threading.SemaphoreSlim(1, 1);
 
         internal int nearbySuCServiceFail; // defaults to 0;
         private int getChargingHistoryV2Fail; // defaults to 0;
@@ -1685,7 +1685,7 @@ namespace TeslaLogger
 
         private int unknownStateCounter; // defaults to 0;
 #pragma warning disable CA2211 // Nicht konstante Felder dürfen nicht sichtbar sein
-        public static object isOnlineLock = new object();
+        public static System.Threading.SemaphoreSlim isOnlineLock = new System.Threading.SemaphoreSlim(1, 1);
 #pragma warning restore CA2211 // Nicht konstante Felder dürfen nicht sichtbar sein
 
         public async virtual Task<string> IsOnlineAsync(bool returnOnUnauthorized = false)

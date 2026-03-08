@@ -118,18 +118,23 @@ namespace TeslaLogger
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1051:Sichtbare Instanzfelder nicht deklarieren", Justification = "<Pending>")]
     public class Geofence
     {
-        private static Object lockObj = new object();
+        private static System.Threading.SemaphoreSlim lockObj = new System.Threading.SemaphoreSlim(1, 1);
         private static Geofence _geofence; // Singleton
 
         public static Geofence GetInstance()
         {
-            lock (lockObj)
+            lockObj.Wait();
+            try
             {
-                if (_geofence == null)
+                if (_geofence is null)
                 {
                     _geofence = new Geofence(ApplicationSettings.Default.RacingMode);
                 }
                 return _geofence;
+            }
+            finally
+            {
+                lockObj.Release();
             }
         }
 
