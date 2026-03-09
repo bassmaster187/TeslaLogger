@@ -61,7 +61,8 @@ namespace TeslaLogger
 
         internal void AddValue(string name, string type, object value, long timestamp, string source)
         {
-            lock (TeslaAPIStateLock)
+            TeslaAPIStateLock.Wait();
+            try
             {
                 if (!storage.TryGetValue(name, out Dictionary<Key, object> _))
                 {
@@ -112,6 +113,10 @@ namespace TeslaLogger
                 }
                 storage[name][Key.Timestamp] = timestamp;
                 storage[name][Key.Source] = source;
+            }
+            finally
+            {
+                TeslaAPIStateLock.Release();
             }
         }
 
@@ -213,7 +218,8 @@ namespace TeslaLogger
 
         public bool GetState(string name, out Dictionary<Key, object> state, int maxage = 0)
         {
-            lock (TeslaAPIStateLock)
+            TeslaAPIStateLock.Wait();
+            try
             {
                 try
                 {
@@ -251,6 +257,10 @@ namespace TeslaLogger
                     { Key.ValueLastUpdate , long.MinValue },
                     { Key.Source , "undef" }
                 };
+            }
+            finally
+            {
+                TeslaAPIStateLock.Release();
             }
             return false;
         }
@@ -381,7 +391,8 @@ namespace TeslaLogger
 
         public bool GetString(string name, out string value, int maxage = 0)
         {
-            lock (TeslaAPIStateLock)
+            TeslaAPIStateLock.Wait();
+            try
             {
                 try
                 {
@@ -409,8 +420,12 @@ namespace TeslaLogger
                     Tools.DebugLog("Exception", ex);
                 }
                 value = string.Empty;
-                return false;
             }
+            finally
+            {
+                TeslaAPIStateLock.Release();
+            }
+            return false;
         }
 
         public bool ParseAPI(string JSON, string source)

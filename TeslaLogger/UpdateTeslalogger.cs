@@ -2932,7 +2932,8 @@ PRIMARY KEY(id)
 
         public static void CheckForNewVersion()
         {
-            lock (lastTeslaLoggerVersionCheckObj)
+            lastTeslaLoggerVersionCheckObj.Wait();
+            try
             {
                 try
                 {
@@ -3010,6 +3011,10 @@ PRIMARY KEY(id)
                     ex.ToExceptionless().FirstCarUserID().Submit();
                     Logfile.Log(ex.ToString());
                 }
+            }
+            finally
+            {
+                lastTeslaLoggerVersionCheckObj.Release();
             }
         }
 
