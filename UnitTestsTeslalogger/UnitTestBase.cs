@@ -1274,7 +1274,7 @@ namespace UnitTestsTeslalogger
                     return;
                 }
 
-                System.Threading.Thread.Sleep(1000);
+                await Task.Delay(1000);
             }
 
             // Note: Task cancellation would be better here but keeping simple for commented code
@@ -1284,7 +1284,7 @@ namespace UnitTestsTeslalogger
         }
 
         [TestMethod]
-        public void CreateAuthTokenWithoutRefreshToken()
+        public async Task CreateAuthTokenWithoutRefreshToken()
         {
             /*
             DBHelper.ExecuteSQLQuery("update cars set tesla_token = '', refresh_token = '', tesla_token_expire='2020-01-01' where id = 1");
@@ -1300,7 +1300,7 @@ namespace UnitTestsTeslalogger
                     return;
                 }
 
-                System.Threading.Thread.Sleep(1000);
+                await Task.Delay(1000);
             }
 
             // Note: Task cancellation would be better here but keeping simple for commented code

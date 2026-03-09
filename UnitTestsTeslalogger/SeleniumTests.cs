@@ -5,6 +5,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.IO;
 using System.Collections.ObjectModel;
 using System.Threading;
+using System.Threading.Tasks;
 
 namespace UnitTestsTeslalogger
 {
@@ -121,7 +122,7 @@ namespace UnitTestsTeslalogger
                 }
                 catch (NoAlertPresentException)
                 {
-                    Thread.Sleep(1000);
+                    Task.Delay(1000).GetAwaiter().GetResult();
                     continue;
                 }
             }

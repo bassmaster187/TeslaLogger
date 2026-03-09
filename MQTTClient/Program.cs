@@ -107,7 +107,7 @@ namespace MQTTClient
             {
                 try
                 {
-                    System.Threading.Thread.Sleep(1000);
+                    Task.Delay(1000).GetAwaiter().GetResult();
 
                     if (!client.IsConnected)
                     {
@@ -149,12 +149,12 @@ namespace MQTTClient
                 catch (WebException wex)
                 {
                     Logfile.Log(wex.Message);
-                    System.Threading.Thread.Sleep(60000);
+                    Task.Delay(60000).GetAwaiter().GetResult();
 
                 }
                 catch (Exception ex)
                 {
-                    System.Threading.Thread.Sleep(30000);
+                    Task.Delay(30000).GetAwaiter().GetResult();
                     Logfile.Log(ex.ToString());
                 }
             }
@@ -201,7 +201,7 @@ namespace MQTTClient
             catch (Exception ex)
             {
                 Logfile.Log(ex.Message);
-                System.Threading.Thread.Sleep(20000);
+                Task.Delay(20000).GetAwaiter().GetResult();
             }
 
             if (h.Count == 0)

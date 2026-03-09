@@ -4,6 +4,7 @@ using TeslaLogger;
 using MySql.Data.MySqlClient;
 using System.Data;
 using System.Runtime.ConstrainedExecution;
+using System.Threading.Tasks;
 
 namespace UnitTestsTeslalogger
 {
@@ -23,7 +24,7 @@ namespace UnitTestsTeslalogger
 
             while (UpdateTeslalogger.done.IsCancellationRequested == false)
             {
-                System.Threading.Thread.Sleep(100);
+                Task.Delay(100).GetAwaiter().GetResult();
             }
             c.Log("Update done!");
 

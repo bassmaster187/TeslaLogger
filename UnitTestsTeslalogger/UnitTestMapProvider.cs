@@ -25,7 +25,7 @@ namespace UnitTestsTeslalogger
         }
 
         [TestMethod]
-        public void CreateAllParkingMaps()
+        public async Task CreateAllParkingMaps()
         {
             StaticMapService.CreateAllParkingMaps();
 
@@ -37,12 +37,12 @@ namespace UnitTestsTeslalogger
             });
 
             while (inst.QueueLength > 0)
-                System.Threading.Thread.Sleep(500);
+                await Task.Delay(500);
 
         }
 
         [TestMethod]
-        public void CreateAllChargingMaps()
+        public async Task CreateAllChargingMaps()
         {
             StaticMapService.CreateAllChargingMaps();
 
@@ -54,13 +54,13 @@ namespace UnitTestsTeslalogger
             });
 
             while (inst.QueueLength > 0)
-                System.Threading.Thread.Sleep(500);
+                await Task.Delay(500);
 
         }
 
 
         [TestMethod]
-        public void CreateAllTripMaps()
+        public async Task CreateAllTripMaps()
         {
             ApplicationSettings.Default.Reload();
             var k = ApplicationSettings.Default.MapQuestKey;
@@ -79,12 +79,12 @@ namespace UnitTestsTeslalogger
             });
 
             while (inst.QueueLength > 0)
-                System.Threading.Thread.Sleep(500);
+                await Task.Delay(500);
 
         }
 
         [TestMethod]
-        public void CreateAllTripMapsMapQuest()
+        public async Task CreateAllTripMapsMapQuest()
         {
             if (String.IsNullOrEmpty(Settings.Default.MapQuestKey))
                 Assert.Inconclusive("No Settings for MapQuestKey");
@@ -105,12 +105,12 @@ namespace UnitTestsTeslalogger
             });
 
             while (inst.QueueLength > 0)
-                System.Threading.Thread.Sleep(500);
+                await Task.Delay(500);
 
         }
 
         [TestMethod]
-        public void CreateAllParkingMapsMapQuest()
+        public async Task CreateAllParkingMapsMapQuest()
         {
             if (String.IsNullOrEmpty(Settings.Default.MapQuestKey))
                 Assert.Inconclusive("No Settings for MapQuestKey");
@@ -131,13 +131,13 @@ namespace UnitTestsTeslalogger
             });
 
             while (inst.QueueLength > 0)
-                System.Threading.Thread.Sleep(500);
+                await Task.Delay(500);
 
 
         }
 
         [TestMethod]
-        public void CreateAllChargingMapsMapQuest()
+        public async Task CreateAllChargingMapsMapQuest()
         {
             if (String.IsNullOrEmpty(Settings.Default.MapQuestKey))
                 Assert.Inconclusive("No Settings for MapQuestKey");
@@ -158,7 +158,7 @@ namespace UnitTestsTeslalogger
             });
 
             while (inst.QueueLength > 0)
-                System.Threading.Thread.Sleep(500);
+                await Task.Delay(500);
         }
     }
 }
