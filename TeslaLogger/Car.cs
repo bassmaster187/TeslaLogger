@@ -737,7 +737,7 @@ namespace TeslaLogger
 
                 if (Geofence.GetInstance().RacingMode)
                 {
-                    Address a = Geofence.GetInstance().GetPOI(CurrentJSON.GetLatitude(), CurrentJSON.GetLongitude());
+                    Address a = Geofence.GetInstance().GetPOI(CurrentJSON.Latitude, CurrentJSON.Longitude);
                     if (a != null)
                     {
                         if (lastRacingPoint == null)
@@ -988,7 +988,7 @@ namespace TeslaLogger
                             SetCurrentState(TeslaState.Start);
 
                             await webhelper.IsDrivingAsync(true); // kurz bevor er schlafen geht, eine Positionsmeldung speichern und schauen ob standheizung / standklima / sentry läuft.
-                            Address addr = Geofence.GetInstance().GetPOI(CurrentJSON.GetLatitude(), CurrentJSON.GetLongitude(), false);
+                            Address addr = Geofence.GetInstance().GetPOI(CurrentJSON.Latitude, CurrentJSON.Longitude, false);
                             if (!CanFallAsleep(out string reason))
                             {
                                 Log($"Reason:{reason} prevents car to get sleep");
@@ -1450,7 +1450,7 @@ namespace TeslaLogger
                 telemetryParser.Driving = false;
 
             lastCarUsed = DateTime.Now;
-            Address addr = Geofence.GetInstance().GetPOI(CurrentJSON.GetLatitude(), CurrentJSON.GetLongitude(), false);
+            Address addr = Geofence.GetInstance().GetPOI(CurrentJSON.Latitude, CurrentJSON.Longitude, false);
             // process special flags for POI
             if (addr != null && addr.specialFlags != null && addr.specialFlags.Count > 0)
             {
@@ -1694,8 +1694,8 @@ namespace TeslaLogger
                 if (!FleetAPI)
                     _ = webhelper.GetOdometerAsync();
 
-                Tools.DebugLog($"#{CarInDB}:Start -> Online SendDataToAbetterrouteplannerAsync(utc:{Tools.ToUnixTime(DateTime.UtcNow) * 1000}, soc:{CurrentJSON.current_battery_level}, speed:0, charging:false, power:0, lat:{CurrentJSON.GetLatitude()}, lon:{CurrentJSON.GetLongitude()})");
-                _ = webhelper.SendDataToAbetterrouteplannerAsync(Tools.ToUnixTime(DateTime.UtcNow) * 1000, CurrentJSON.current_battery_level, 0, false, 0, CurrentJSON.GetLatitude(), CurrentJSON.GetLongitude());
+                Tools.DebugLog($"#{CarInDB}:Start -> Online SendDataToAbetterrouteplannerAsync(utc:{Tools.ToUnixTime(DateTime.UtcNow) * 1000}, soc:{CurrentJSON.current_battery_level}, speed:0, charging:false, power:0, lat:{CurrentJSON.Latitude}, lon:{CurrentJSON.Longitude})");
+                _ = webhelper.SendDataToAbetterrouteplannerAsync(Tools.ToUnixTime(DateTime.UtcNow) * 1000, CurrentJSON.current_battery_level, 0, false, 0, CurrentJSON.Latitude, CurrentJSON.Longitude);
             }
             // any -> Driving
             if (_oldState != TeslaState.Drive && _newState == TeslaState.Drive)
@@ -1712,7 +1712,7 @@ namespace TeslaLogger
             if (_oldState != TeslaState.Charge && _newState == TeslaState.Charge)
             {
                 // evaluate +hfl special flag
-                Address addr = Geofence.GetInstance().GetPOI(CurrentJSON.GetLatitude(), CurrentJSON.GetLongitude(), false);
+                Address addr = Geofence.GetInstance().GetPOI(CurrentJSON.Latitude, CurrentJSON.Longitude, false);
                 if (addr != null && addr.specialFlags != null && addr.specialFlags.Count > 0)
                 {
                     foreach (KeyValuePair<Address.SpecialFlags, string> flag in addr.specialFlags)
@@ -1744,7 +1744,7 @@ namespace TeslaLogger
             // driving -> any
             if (_oldState == TeslaState.Drive && _newState != TeslaState.Drive)
             {
-                Address addr = Geofence.GetInstance().GetPOI(CurrentJSON.GetLatitude(), CurrentJSON.GetLongitude(), false);
+                Address addr = Geofence.GetInstance().GetPOI(CurrentJSON.Latitude, CurrentJSON.Longitude, false);
                 if (addr != null && addr.specialFlags != null && addr.specialFlags.Count > 0)
                 {
                     foreach (KeyValuePair<Address.SpecialFlags, string> flag in addr.specialFlags)

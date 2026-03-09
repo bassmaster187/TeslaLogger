@@ -124,7 +124,7 @@ namespace TeslaLoggerNET8.Lucid
                 bool forceInsert = justCheck && charging; //force insert first charging point
 
                 car.Log("Insert Charging " + batteryLevel);
-                _ = SendDataToAbetterrouteplannerAsync(ts, car.CurrentJSON.current_battery_level, 0, true, charger_power, car.CurrentJSON.GetLatitude(), car.CurrentJSON.GetLongitude());
+                _ = SendDataToAbetterrouteplannerAsync(ts, car.CurrentJSON.current_battery_level, 0, true, charger_power, car.CurrentJSON.Latitude, car.CurrentJSON.Longitude);
                 car.DbHelper.InsertCharging(ts.ToString(), batteryLevel, charge_energy_added.ToString(), chargerPower,  (double)Tools.KmToMl(ideal_battery_range,1), (double)Tools.KmToMl(ideal_battery_range,1), "0", "0", "0", car.CurrentJSON.current_outside_temperature, forceInsert, "0", "0");
             }
 
@@ -190,11 +190,11 @@ namespace TeslaLoggerNET8.Lucid
                         switch (key)
                         {
                             case "latitude":
-                                car.CurrentJSON.SetLatitude(double.Parse(value, CultureInfo.InvariantCulture));
+                                car.CurrentJSON.Latitude = double.Parse(value, CultureInfo.InvariantCulture);
                                 latitude = double.Parse(value, CultureInfo.InvariantCulture);
                                 break;
                             case "longitude":
-                                car.CurrentJSON.SetLongitude(double.Parse(value, CultureInfo.InvariantCulture));
+                                car.CurrentJSON.Longitude = double.Parse(value, CultureInfo.InvariantCulture);
                                 longitude = double.Parse(value, CultureInfo.InvariantCulture);
                                 break;
                             case "elevation":

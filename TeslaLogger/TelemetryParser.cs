@@ -1149,7 +1149,7 @@ namespace TeslaLogger
                     
                 }
                 long ts = DateTimeToUTC_UnixTimestamp(d);
-                _ = car.webhelper.SendDataToAbetterrouteplannerAsync(ts, car.CurrentJSON.current_battery_level, 0, true, lastChargingPower * -1.0, car.CurrentJSON.GetLatitude(), car.CurrentJSON.GetLongitude());
+                _ = car.webhelper.SendDataToAbetterrouteplannerAsync(ts, car.CurrentJSON.current_battery_level, 0, true, lastChargingPower * -1.0, car.CurrentJSON.Latitude, car.CurrentJSON.Longitude);
             }
             Log($"Insert Charging TR: {lastIdealBatteryRange}km");
         }

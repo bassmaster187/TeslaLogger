@@ -36,7 +36,7 @@ namespace UnitTestsTeslalogger
                 StaticMapService.GetSingleton().Run();
             });
 
-            while (inst.GetQueueLength() > 0)
+            while (inst.QueueLength > 0)
                 System.Threading.Thread.Sleep(500);
 
         }
@@ -53,7 +53,7 @@ namespace UnitTestsTeslalogger
                 StaticMapService.GetSingleton().Run();
             });
 
-            while (inst.GetQueueLength() > 0)
+            while (inst.QueueLength > 0)
                 System.Threading.Thread.Sleep(500);
 
         }
@@ -78,7 +78,7 @@ namespace UnitTestsTeslalogger
                 StaticMapService.GetSingleton().Run();
             });
 
-            while (inst.GetQueueLength() > 0)
+            while (inst.QueueLength > 0)
                 System.Threading.Thread.Sleep(500);
 
         }
@@ -104,7 +104,7 @@ namespace UnitTestsTeslalogger
                 StaticMapService.GetSingleton().Run();
             });
 
-            while (inst.GetQueueLength() > 0)
+            while (inst.QueueLength > 0)
                 System.Threading.Thread.Sleep(500);
 
         }
@@ -130,7 +130,7 @@ namespace UnitTestsTeslalogger
                 StaticMapService.GetSingleton().Run();
             });
 
-            while (inst.GetQueueLength() > 0)
+            while (inst.QueueLength > 0)
                 System.Threading.Thread.Sleep(500);
 
 
@@ -157,7 +157,7 @@ namespace UnitTestsTeslalogger
                 StaticMapService.GetSingleton().Run();
             });
 
-            while (inst.GetQueueLength() > 0)
+            while (inst.QueueLength > 0)
                 System.Threading.Thread.Sleep(500);
         }
     }

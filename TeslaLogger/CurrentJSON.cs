@@ -322,24 +322,16 @@ namespace TeslaLogger
             }
         }
 
-        public double GetLatitude()
+        public double Latitude
         {
-            return latitude;
+            get => latitude;
+            set => latitude = value;
         }
 
-        public double GetLongitude()
+        public double Longitude
         {
-            return longitude;
-        }
-
-        public void SetLatitude(double lat)
-        {
-            latitude = lat;
-        }
-
-        public void SetLongitude(double lng)
-        {
-            longitude = lng;
+            get => longitude;
+            set => longitude = value;
         }
 
         internal void ToKVS()

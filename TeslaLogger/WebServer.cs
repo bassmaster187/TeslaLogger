@@ -2235,7 +2235,7 @@ DROP TABLE chargingstate_bak";
             Logfile.Log("Admin: OpenTopoDataQueue ...");
             if (Tools.UseOpenTopoData())
             {
-                double queue = OpenTopoDataService.GetSingleton().GetQueueLength();
+                double queue = OpenTopoDataService.GetSingleton().QueueLength;
                 // 100 pos every 2 Minutes
                 WriteString(response, $"OpenTopoData Queue contains {queue} positions. It will take approx {Math.Ceiling(queue / 100) * 2} minutes to process.");
             }
@@ -2730,7 +2730,7 @@ DROP TABLE chargingstate_bak";
                     case "set_charge_limit":
                         if (request.QueryString.Count == 1 && int.TryParse(string.Concat(request.QueryString.GetValues(0)), out int newChargeLimit))
                         {
-                            Address addr = Geofence.GetInstance().GetPOI(car.CurrentJSON.GetLatitude(), car.CurrentJSON.GetLongitude(), false);
+                            Address addr = Geofence.GetInstance().GetPOI(car.CurrentJSON.Latitude, car.CurrentJSON.Longitude, false);
                             if (addr != null)
                             {
                                 car.Log($"SetChargeLimit to {newChargeLimit} at '{addr.name}' ...");
@@ -2762,7 +2762,7 @@ DROP TABLE chargingstate_bak";
                     case "set_charging_amps":
                         if (request.QueryString.Count == 1 && int.TryParse(string.Concat(request.QueryString.GetValues(0)), out int newChargingAmps))
                         {
-                            Address addr = Geofence.GetInstance().GetPOI(car.CurrentJSON.GetLatitude(), car.CurrentJSON.GetLongitude(), false);
+                            Address addr = Geofence.GetInstance().GetPOI(car.CurrentJSON.Latitude, car.CurrentJSON.Longitude, false);
                             if (addr != null)
                             {
                                 car.Log($"SetChargingAmps to {newChargingAmps} at '{addr.name}' ...");

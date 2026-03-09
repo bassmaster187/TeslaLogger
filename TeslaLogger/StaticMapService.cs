@@ -86,10 +86,7 @@ namespace TeslaLogger
             return _StaticMapService;
         }
 
-        public int GetQueueLength()
-        {
-            return queue.Count;
-        }
+        public int QueueLength => queue.Count;
 
         public void Enqueue(int CarID, int startPosID, int endPosID, int width, int height, MapMode mode, MapSpecial special)
         {

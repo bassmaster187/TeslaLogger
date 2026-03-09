@@ -433,7 +433,7 @@ WHERE
 
             try
             {
-                car.webhelper.SendDataToAbetterrouteplannerAsync(Tools.ToUnixTime(DateTime.UtcNow) * 1000, car.CurrentJSON.current_battery_level, 0, true, car.CurrentJSON.current_power, car.CurrentJSON.GetLatitude(), car.CurrentJSON.GetLongitude()).Wait();
+                car.webhelper.SendDataToAbetterrouteplannerAsync(Tools.ToUnixTime(DateTime.UtcNow) * 1000, car.CurrentJSON.current_battery_level, 0, true, car.CurrentJSON.current_power, car.CurrentJSON.Latitude, car.CurrentJSON.Longitude).Wait();
 
                 if (car.ABRPMode == -1)
                     return false;
@@ -3263,12 +3263,12 @@ LIMIT 1", con)
 
                             if (dr["lat"] != DBNull.Value)
                             {
-                                car.CurrentJSON.SetLatitude(Convert.ToDouble(dr["lat"], Tools.ciEnUS));
+                                car.CurrentJSON.Latitude = Convert.ToDouble(dr["lat"], Tools.ciEnUS);
                             }
 
                             if (dr["lng"] != DBNull.Value)
                             {
-                                car.CurrentJSON.SetLongitude(Convert.ToDouble(dr["lng"], Tools.ciEnUS));
+                                car.CurrentJSON.Longitude = Convert.ToDouble(dr["lng"], Tools.ciEnUS);
                             }
                         }
                         dr.Close();
@@ -3720,7 +3720,7 @@ WHERE
                 return;
             }
             // wait until all pos altitude values are filled
-            while (OpenTopoDataService.GetSingleton().GetQueueLength() > 0)
+            while (OpenTopoDataService.GetSingleton().QueueLength > 0)
             {
                 Thread.Sleep(60000);
             }
