@@ -1242,7 +1242,7 @@ PRIMARY KEY(id)
             if (temp.Contains("<Directory /var/www/>"))
             {
                 string pattern = "(<Directory \\/var\\/www\\/>)(.+?)(AllowOverride [A-Za-z]+)(.+?)(<\\/Directory>)";
-                Regex r = new Regex(pattern, RegexOptions.Compiled | RegexOptions.Singleline);
+                Regex r = new(pattern, RegexOptions.Compiled | RegexOptions.Singleline);
                 var m = r.Match(temp);
                 if (!m.Success)
                 {
@@ -2552,7 +2552,7 @@ PRIMARY KEY(id)
         internal static string UpdateDatasourceUID(string s, string v)
         {
             string pattern = "(\\\"datasource\\\":\\s+{\\s+\\\"type\\\":\\s+\\\"mysql\\\",\\s+\\\"uid\\\":\\s+\\\")(.*?)(\\\")";
-            Regex r = new Regex(pattern, RegexOptions.Compiled | RegexOptions.Singleline);
+            Regex r = new(pattern, RegexOptions.Compiled | RegexOptions.Singleline);
             var m = r.Match(s);
             if (!m.Success)
             {
@@ -2726,7 +2726,7 @@ PRIMARY KEY(id)
                 if (name == null || name.Length == 0)
                     return s;
 
-                Regex regexAlias = new Regex("(templating.*\\\"text\\\":\\s\\\")(\\\".*?value\\\":\\s\\\")(.*?)(\\\")(.*?display_name)(.*?label\\\":\\s\\\")(.*?)(\\\")", RegexOptions.Singleline | RegexOptions.Multiline);
+                Regex regexAlias = new("(templating.*\\\"text\\\":\\s\\\")(\\\".*?value\\\":\\s\\\")(.*?)(\\\")(.*?display_name)(.*?label\\\":\\s\\\")(.*?)(\\\")", RegexOptions.Singleline | RegexOptions.Multiline);
                 var m = regexAlias.Match(s);
                 string ret = regexAlias.Replace(s, "${1}" + name + "${2}" + id + "${4}${5}${6}" + carLabel + "${8}");
                 return ret;
@@ -2768,7 +2768,7 @@ PRIMARY KEY(id)
         {
             try
             {
-                Regex regexAlias = new Regex("\\\"displayName\\\",\\s*\\\"value\\\":.*?\\\"(.+)\\\"");
+                Regex regexAlias = new("\\\"displayName\\\",\\s*\\\"value\\\":.*?\\\"(.+)\\\"");
 
                 MatchCollection matches = regexAlias.Matches(content);
 
@@ -2790,7 +2790,7 @@ PRIMARY KEY(id)
         {
             try
             {
-                Regex regexAlias = new Regex("\\\"alias\\\":.*?\\\"(.+)\\\"");
+                Regex regexAlias = new("\\\"alias\\\":.*?\\\"(.+)\\\"");
 
                 MatchCollection matches = regexAlias.Matches(content);
 
@@ -2816,7 +2816,7 @@ PRIMARY KEY(id)
                 return content;
             }
 
-            Regex regexAlias = new Regex("\\\"alias\\\":.*?\\\"" + v + "\\\"");
+            Regex regexAlias = new("\\\"alias\\\":.*?\\\"" + v + "\\\"");
             string replace = "\"alias\": \"" + dictLanguage[v] + "\"";
 
             return regexAlias.Replace(content, replace);
@@ -2830,7 +2830,7 @@ PRIMARY KEY(id)
                 return content;
             }
 
-            Regex regexAlias = new Regex("\\\"value\\\":.*?\\\"" + v + "\\\"");
+            Regex regexAlias = new("\\\"value\\\":.*?\\\"" + v + "\\\"");
             string replace = "\"value\": \"" + dictLanguage[v] + "\"";
 
             return regexAlias.Replace(content, replace);
@@ -2844,7 +2844,7 @@ PRIMARY KEY(id)
                 return content;
             }
 
-            Regex regexAlias = new Regex("\\\"name\\\":.*?\\\"" + v + "\\\"");
+            Regex regexAlias = new("\\\"name\\\":.*?\\\"" + v + "\\\"");
             string replace = "\"name\": \"" + dictLanguage[v] + "\"";
 
             return regexAlias.Replace(content, replace);
@@ -2858,7 +2858,7 @@ PRIMARY KEY(id)
                 return content;
             }
 
-            Regex regexAlias = new Regex("\\\"title\\\":.*?\\\"" + v + "\\\"");
+            Regex regexAlias = new("\\\"title\\\":.*?\\\"" + v + "\\\"");
             string replace = "\"title\": \"" + dictLanguage[v] + "\"";
 
             return regexAlias.Replace(content, replace);

@@ -391,9 +391,9 @@ namespace TeslaLogger
         {
             string pattern = "esm:([PRND]+)->([PRND]+)";
             Match m = Regex.Match(_flag, pattern);
-            if (m.Success && m.Groups.Count == 3 && m.Groups[1].Captures.Count == 1 && m.Groups[2].Captures.Count == 1)
+            if (m.Success && m.Groups.Count == 3)
             {
-                _addr.specialFlags.Add(Address.SpecialFlags.EnableSentryMode, m.Groups[1].Captures[0].ToString() + "->" + m.Groups[2].Captures[0].ToString());
+                _addr.specialFlags.Add(Address.SpecialFlags.EnableSentryMode, m.Groups[1].Value + "->" + m.Groups[2].Value);
             }
             else
             {
@@ -406,9 +406,9 @@ namespace TeslaLogger
         {
             string pattern = "dsm:([PRND]+)->([PRND]+)";
             Match m = Regex.Match(_flag, pattern);
-            if (m.Success && m.Groups.Count == 3 && m.Groups[1].Captures.Count == 1 && m.Groups[2].Captures.Count == 1)
+            if (m.Success && m.Groups.Count == 3)
             {
-                _addr.specialFlags.Add(Address.SpecialFlags.DisableSentryMode, m.Groups[1].Captures[0].ToString() + "->" + m.Groups[2].Captures[0].ToString());
+                _addr.specialFlags.Add(Address.SpecialFlags.DisableSentryMode, m.Groups[1].Value + "->" + m.Groups[2].Value);
             }
             else
             {
@@ -421,9 +421,9 @@ namespace TeslaLogger
         {
             string pattern = "cof:([PRND]+)->([PRND]+)";
             Match m = Regex.Match(_flag, pattern);
-            if (m.Success && m.Groups.Count == 3 && m.Groups[1].Captures.Count == 1 && m.Groups[2].Captures.Count == 1)
+            if (m.Success && m.Groups.Count == 3)
             {
-                _addr.specialFlags.Add(Address.SpecialFlags.ClimateOff, m.Groups[1].Captures[0].ToString() + "->" + m.Groups[2].Captures[0].ToString());
+                _addr.specialFlags.Add(Address.SpecialFlags.ClimateOff, m.Groups[1].Value + "->" + m.Groups[2].Value);
             }
             else
             {
@@ -441,9 +441,9 @@ namespace TeslaLogger
         {
             string pattern = "occ:([0-9]+)";
             Match m = Regex.Match(_flag, pattern);
-            if (m.Success && m.Groups.Count == 2 && m.Groups[1].Captures.Count == 1)
+            if (m.Success && m.Groups.Count == 2)
             {
-                _addr.specialFlags.Add(Address.SpecialFlags.OnChargeComplete, m.Groups[1].Captures[0].ToString());
+                _addr.specialFlags.Add(Address.SpecialFlags.OnChargeComplete, m.Groups[1].Value);
             }
         }
 
@@ -451,17 +451,17 @@ namespace TeslaLogger
         {
             string pattern = "scl:([0-9]+):A";
             Match m = Regex.Match(_flag, pattern);
-            if (m.Success && m.Groups.Count == 2 && m.Groups[1].Captures.Count == 1)
+            if (m.Success && m.Groups.Count == 2)
             {
-                _addr.specialFlags.Add(Address.SpecialFlags.SetChargeLimitOnArrival, m.Groups[1].Captures[0].ToString());
+                _addr.specialFlags.Add(Address.SpecialFlags.SetChargeLimitOnArrival, m.Groups[1].Value);
             }
             else
             {
                 pattern = "scl:([0-9]+)";
                 m = Regex.Match(_flag, pattern);
-                if (m.Success && m.Groups.Count == 2 && m.Groups[1].Captures.Count == 1)
+                if (m.Success && m.Groups.Count == 2)
                 {
-                    _addr.specialFlags.Add(Address.SpecialFlags.SetChargeLimit, m.Groups[1].Captures[0].ToString());
+                    _addr.specialFlags.Add(Address.SpecialFlags.SetChargeLimit, m.Groups[1].Value);
                 }
                 else
                 {
@@ -475,9 +475,9 @@ namespace TeslaLogger
         {
             string pattern = "hfl:([0-9]+)([a-z]{0,1})";
             Match m = Regex.Match(_flag, pattern);
-            if (m.Success && m.Groups.Count == 3 && m.Groups[1].Captures.Count == 1 && m.Groups[2].Captures.Count == 1)
+            if (m.Success && m.Groups.Count == 3)
             {
-                _addr.specialFlags.Add(Address.SpecialFlags.HighFrequencyLogging, m.Groups[1].Captures[0].ToString() + m.Groups[2].Captures[0].ToString());
+                _addr.specialFlags.Add(Address.SpecialFlags.HighFrequencyLogging, m.Groups[1].Value + m.Groups[2].Value);
             }
             else
             {
@@ -490,9 +490,9 @@ namespace TeslaLogger
         {
             string pattern = "ocp:([PRND]+)->([PRND]+)";
             Match m = Regex.Match(_flag, pattern);
-            if (m.Success && m.Groups.Count == 3 && m.Groups[1].Captures.Count == 1 && m.Groups[2].Captures.Count == 1)
+            if (m.Success && m.Groups.Count == 3)
             {
-                _addr.specialFlags.Add(Address.SpecialFlags.OpenChargePort, m.Groups[1].Captures[0].ToString() + "->" + m.Groups[2].Captures[0].ToString());
+                _addr.specialFlags.Add(Address.SpecialFlags.OpenChargePort, m.Groups[1].Value + "->" + m.Groups[2].Value);
             }
             else
             {
