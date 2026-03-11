@@ -45,7 +45,7 @@ namespace TeslaLogger
             
             ExternalLog(text);
 
-            string temp = DateTime.Now.ToString(ciDeDE) + " : " + text;
+            string temp = $"{DateTime.Now.ToString(ciDeDE)} : {text}";
 
             if (noDate)
                 temp = text;
@@ -199,7 +199,7 @@ namespace TeslaLogger
         {
             ExternalLog(temp);
 
-            string filename = "Exception/Exception_" + DateTime.Now.ToString("yyyyMMddHHmmssfff") + ".txt";
+            string filename = $"Exception/Exception_{DateTime.Now.ToString("yyyyMMddHHmmssfff")}.txt";
 
             string filepath = Path.Combine(GetExecutingPath(), filename);
 
@@ -291,7 +291,7 @@ namespace TeslaLogger
                 if (text.Contains("MySqlException (0x80004005): Too many connections"))
                     return;
 
-                text = "V:" + Assembly.GetEntryAssembly()?.GetName().Version + " - " + text;
+                text = $"V:{Assembly.GetEntryAssembly()?.GetName().Version} - {text}";
                 var c = httpclient_teslalogger_de;
 
                 UriBuilder b = new UriBuilder("https://teslalogger.de/log.php");
@@ -307,7 +307,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
-                Logfile.Log("Exception in ExternalLog " + ex.Message);
+                Logfile.Log($"Exception in ExternalLog {ex.Message}");
             }
             */
         }
