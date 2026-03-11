@@ -157,7 +157,7 @@ namespace TeslaLogger
                 response.ContentLength64 = fs.Length;
                 response.SendChunked = false;
                 response.ContentType = System.Net.Mime.MediaTypeNames.Application.Octet;
-                response.AddHeader("Content-disposition", "attachment; filename=" + filename);
+                response.AddHeader("Content-disposition", $"attachment; filename={filename}");
 
                 byte[] buffer = new byte[64 * 1024];
                 int read;
@@ -454,7 +454,7 @@ namespace TeslaLogger
             catch (Exception ex)
             {
                 ex.ToExceptionless().FirstCarUserID().Submit();
-                Logfile.Log($"WebServer Exception Localpath: {localpath}\r\n" + ex.ToString());
+                Logfile.Log($"WebServer Exception Localpath: {localpath}\r\n{ex}");
             }
         }
 
@@ -514,7 +514,7 @@ namespace TeslaLogger
 
         private void UpdateDriveStatistics(HttpListenerResponse response, Uri url)
         {
-            Logfile.Log("WebServer UpdateDriveStatistics. " + url.Segments[2].ToString());
+            Logfile.Log($"WebServer UpdateDriveStatistics. {url.Segments[2]}");
             using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
             {
                 con.Open();
@@ -556,7 +556,7 @@ namespace TeslaLogger
         {
             string data = GetDataFromRequestInputStream(request);
             Logfile.Log(data);
-            System.Diagnostics.Debug.WriteLine("Logger: " + data);
+            System.Diagnostics.Debug.WriteLine($"Logger: {data}");
             WriteString(response, "ok");
         }
 
@@ -567,7 +567,7 @@ namespace TeslaLogger
 
             bool allowedFiles = allowed_getfiles.Contains(filename);
 
-            System.Diagnostics.Debug.WriteLine("Webserver writefile: " + filename);
+            System.Diagnostics.Debug.WriteLine($"Webserver writefile: {filename}");
 
             if (!allowedFiles)
             {
@@ -590,8 +590,8 @@ namespace TeslaLogger
                 p = FileManager.GetFilePath(TLFilename.GeofencePrivateFilename);
             }
 
-            System.Diagnostics.Debug.WriteLine("Webserver writefile: " + p);
-            Logfile.Log("Webserver writefile: " + p);
+            System.Diagnostics.Debug.WriteLine($"Webserver writefile: {p}");
+            Logfile.Log($"Webserver writefile: {p}");
 
             if (File.Exists(p))
                 File.Delete(p);
@@ -635,7 +635,7 @@ namespace TeslaLogger
             bool allowedFiles = (filename.StartsWith("language-") && filename.EndsWith(".txt"))
                 || allowed_getfiles.Contains(filename);
 
-            System.Diagnostics.Debug.WriteLine("Webserver getfile: " + filename);
+            System.Diagnostics.Debug.WriteLine($"Webserver getfile: {filename}");
 
             if (!allowedFiles)
             {
@@ -662,7 +662,7 @@ namespace TeslaLogger
             else if (filename == "geofence-private.csv")
                 p = FileManager.GetFilePath(TLFilename.GeofencePrivateFilename);
 
-            System.Diagnostics.Debug.WriteLine("Webserver getfile: " + p);
+            System.Diagnostics.Debug.WriteLine($"Webserver getfile: {p}");
 
             if (File.Exists(p))
             {
@@ -689,7 +689,7 @@ namespace TeslaLogger
 
                 if (Tools.IsPropertyExist(r, "deactivatecar"))
                 {
-                    Logfile.Log("Set Car Inactive #" + id);
+                    Logfile.Log($"Set Car Inactive #{id}");
 
                     using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
                     {
@@ -756,7 +756,7 @@ WHERE
                             }
                             else
                             {
-                                WriteString(response, "{\"response\":{ \"value\":\"" + state[TeslaAPIState.Key.Value].ToString() + "\", \"timestamp\":" + state[TeslaAPIState.Key.Timestamp] + "} }", "application/json; charset=utf-8");
+                                WriteString(response, $"{{\"response\":{{ \"value\":\"{state[TeslaAPIState.Key.Value]}\", \"timestamp\":{state[TeslaAPIState.Key.Timestamp]}}}}}", "application/json; charset=utf-8");
                                 return;
                             }
                         }
@@ -1479,7 +1479,7 @@ DROP TABLE chargingstate_bak";
                         string error = j["error"] ?? "NULL";
                         string error_description = j["error_description"] ?? "NULL";
 
-                        responseString = "ERROR: " + error + " / Error Description: " + error_description;
+                        responseString = $"ERROR: {error} / Error Description: {error_description}";
 
                         Logfile.Log(responseString);
                         car.CreateExeptionlessLog("GetCarsFromAccount", responseString, Exceptionless.Logging.LogLevel.Fatal).Submit();
@@ -1489,7 +1489,7 @@ DROP TABLE chargingstate_bak";
                     }
                 }
 
-                Logfile.Log("Found " + vehicles.Count + " Vehicles");
+Logfile.Log($"Found {vehicles.Count} Vehicles");
 
                 var o = new List<object>();
                 o.Add(new KeyValuePair<string, string>("", "Please Select"));
@@ -1526,7 +1526,7 @@ DROP TABLE chargingstate_bak";
                         ccDisplayName = "";
                     }
 
-                    o.Add(new KeyValuePair<string, string>(ccVin.ToString(), "VIN: "+ ccVin + " / Name: " + ccDisplayName ));
+                    o.Add(new KeyValuePair<string, string>(ccVin.ToString(), $"VIN: {ccVin} / Name: {ccDisplayName}"));
                 }
 
                 responseString = JsonConvert.SerializeObject(o);
@@ -1660,7 +1660,7 @@ DROP TABLE chargingstate_bak";
                     if (File.Exists(file_htaccess))
                     {
                         File.Delete(file_htaccess);
-                        Logfile.Log("delete: " + file_htaccess);
+                        Logfile.Log($"delete: {file_htaccess}");
                         WriteString(response, "OK");
                         return;
                     }
@@ -1906,7 +1906,7 @@ DROP TABLE chargingstate_bak";
                 try
                 {
                     c = Car.GetCarByID(CarID);
-                    Logfile.Log("SuCBingoDev: lat=" + lat.ToString(Tools.ciEnUS) + " lng=" + lng.ToString(Tools.ciEnUS));
+                    Logfile.Log($"SuCBingoDev: lat={lat.ToString(Tools.ciEnUS)} lng={lng.ToString(Tools.ciEnUS)}");
                     if(c != null)
                     {
                         _ = Task.Factory.StartNew(() =>
@@ -2312,7 +2312,7 @@ DROP TABLE chargingstate_bak";
                                     {
                                         // convert date/time into GPX format (insert a "T")
                                         // 2020-01-30 09:19:55 --> 2020-01-30T09:19:55
-                                        string Date = Datum.ToString("yyyy-MM-dd", Tools.ciEnUS) + "T" + Datum.ToString("HH:mm:ss", Tools.ciEnUS);
+                                        string Date = $"{Datum:yyyy-MM-dd}"+"T"+$"{Datum:HH:mm:ss}";
                                         string alt = "";
                                         if (double.TryParse(dr[3].ToString(), out double altitude))
                                         {
@@ -2328,12 +2328,12 @@ DROP TABLE chargingstate_bak";
                                         {
                                             if (!DateLast.Equals("n/a", System.StringComparison.Ordinal))
                                             {
-                                                GPX.Append("</trkseg></trk>" + Environment.NewLine);
+                                            GPX.Append($"</trkseg></trk>{Environment.NewLine}");
                                             }
                                             DateLast = Date.Substring(0, 10);
-                                            GPX.Append($"<trk><name>{DateLast}</name><trkseg>" + Environment.NewLine);
+                                            GPX.Append($"<trk><name>{DateLast}</name><trkseg>{Environment.NewLine}");
                                         }
-                                        GPX.Append($"    <trkpt {Pos}>{alt}<time>{Date}</time>{name}</trkpt>" + Environment.NewLine);
+                                        GPX.Append($"    <trkpt {Pos}>{alt}<time>{Date}</time>{name}</trkpt>{Environment.NewLine}");
                                         PosLast = Pos;
                                     }
                                 }
@@ -2347,7 +2347,7 @@ DROP TABLE chargingstate_bak";
 ");
                     response.AddHeader("Content-Type", "application/gpx+xml; charset=utf-8");
                     response.AddHeader("Content-Disposition", "inline; filename=\"trip.gpx\"");
-                    Tools.DebugLog("GPX:" + Environment.NewLine + GPX.ToString());
+                    Tools.DebugLog($"GPX:{Environment.NewLine}{GPX}");
                     WriteString(response, GPX.ToString(), "application/gpx+xml");
                 }
                 else
@@ -2428,7 +2428,7 @@ DROP TABLE chargingstate_bak";
             if (c != null)
                 WriteString(response, c.Passwortinfo.ToString());
             else
-                WriteString(response, "CarId not found: " + id);
+                WriteString(response, $"CarId not found: {id}");
         }
 
         public static string GetDataFromRequestInputStream(HttpListenerRequest request)
@@ -2736,7 +2736,7 @@ DROP TABLE chargingstate_bak";
                                 car.Log($"SetChargeLimit to {newChargeLimit} at '{addr.name}' ...");
                                 car.LastSetChargeLimitAddressName = addr.name;
                             }
-                            responseText = car.webhelper.PostCommand("command/set_charge_limit", "{\"percent\":" + newChargeLimit + "}", true).Result;
+                            responseText = car.webhelper.PostCommand("command/set_charge_limit", $"{{\"percent\":{newChargeLimit}}}", true).Result;
                         }
                         break;
                     case "charge_start":
@@ -2768,7 +2768,7 @@ DROP TABLE chargingstate_bak";
                                 car.Log($"SetChargingAmps to {newChargingAmps} at '{addr.name}' ...");
                                 car.LastSetChargingAmpsAddressName = addr.name;
                             }
-                            responseText = await car.webhelper.PostCommand("command/set_charging_amps", "{\"charging_amps\":" + newChargingAmps + "}", true);
+                            responseText = await car.webhelper.PostCommand("command/set_charging_amps", $"{{\"charging_amps\":{newChargingAmps}}}", true);
                         }
                         break;
                     default:
@@ -2797,7 +2797,7 @@ DROP TABLE chargingstate_bak";
 
                 if (Tools.IsPropertyExist(r, "deletecar"))
                 {
-                    Logfile.Log("Delete Car #" + id);
+                    Logfile.Log($"Delete Car #{id}");
 
                     using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
                     {
@@ -2821,7 +2821,7 @@ DROP TABLE chargingstate_bak";
                 }
                 else if (Tools.IsPropertyExist(r, "reconnect"))
                 {
-                    Logfile.Log("reconnect Car #" + id);
+                    Logfile.Log($"reconnect Car #{id}");
 
                     using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
                     {
@@ -2899,7 +2899,7 @@ FROM
                                     cmd2.Parameters.AddWithValue("@tesla_name", email);
                                     cmd2.Parameters.AddWithValue("@tesla_password", password);
                                     cmd2.Parameters.AddWithValue("@vin", vin);
-                                    cmd2.Parameters.AddWithValue("@display_name", "Car " + newid);
+                                    cmd2.Parameters.AddWithValue("@display_name", $"Car {newid}");
                                     cmd2.Parameters.AddWithValue("@freesuc", freesuc ? 1 : 0);
                                     cmd2.Parameters.AddWithValue("@tesla_token", access_token);
                                     cmd2.Parameters.AddWithValue("@refresh_token", refresh_token);
@@ -2918,7 +2918,7 @@ FROM
                     }
                     else
                     {
-                        Logfile.Log("Update Password ID:" + id);
+                        Logfile.Log($"Update Password ID:{id}");
                         int dbID = Convert.ToInt32(id);
 
                         using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
@@ -2990,18 +2990,18 @@ FROM
                                 cmd2.Parameters.AddWithValue("@id", newid);
                                 cmd2.Parameters.AddWithValue("@tesla_name", login);
                                 cmd2.Parameters.AddWithValue("@tesla_password", password);
-                                cmd2.Parameters.AddWithValue("@tesla_token", "OVMS:" + carname);
+                                cmd2.Parameters.AddWithValue("@tesla_token", $"OVMS:{carname}");
                                 cmd2.Parameters.AddWithValue("@display_name", carname);
                                 _ = SQLTracer.TraceNQ(cmd2, out _);
 
-                                WriteString(response, "ID:" + newid);
+                                WriteString(response, $"ID:{newid}");
                             }
                         }
                     }
                 }
                 else
                 {
-                    Logfile.Log("Update Password ID:" + id);
+                    Logfile.Log($"Update Password ID:{id}");
                     int dbID = Convert.ToInt32(id);
 
                     using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
@@ -3013,7 +3013,7 @@ FROM
                             cmd.Parameters.AddWithValue("@id", dbID);
                             cmd.Parameters.AddWithValue("@tesla_name", login);
                             cmd.Parameters.AddWithValue("@tesla_password", password);
-                            cmd.Parameters.AddWithValue("@tesla_token", "OVMS:" + carname);
+                            cmd.Parameters.AddWithValue("@tesla_token", $"OVMS:{carname}");
                             cmd.Parameters.AddWithValue("@display_name", carname);
 
                             _ = SQLTracer.TraceNQ(cmd, out _);
@@ -3052,7 +3052,7 @@ FROM
                             }
                             else
                             {
-                                WriteString(response, "{\"response\":{ \"value\":\"" + state[TeslaAPIState.Key.Value].ToString() + "\", \"timestamp\":" + state[TeslaAPIState.Key.Timestamp] + "} }", "application/json; charset=utf-8");
+                                WriteString(response, $"{{\"response\":{{ \"value\":\"{state[TeslaAPIState.Key.Value]}\", \"timestamp\":{state[TeslaAPIState.Key.Timestamp]}}}}}", "application/json; charset=utf-8");
                                 return;
                             }
                         }
@@ -3115,7 +3115,7 @@ FROM
                         )
                     )
                 );
-                WriteString(response, "<html><head></head><body><table border=\"1\">" + string.Concat(geofence) + string.Concat(geofenceprivate) + "</table></body></html>", "text/html; charset=utf-8");
+                WriteString(response, $"<html><head></head><body><table border=\"1\">{string.Concat(geofence)}{string.Concat(geofenceprivate)}</table></body></html>", "text/html; charset=utf-8");
             }
             else
             {
@@ -3136,7 +3136,7 @@ FROM
                 {
                 "TLMemCacheKey.Housekeeping",
                 MemoryCache.Default.Get(Program.TLMemCacheKey.Housekeeping.ToString()) != null
-                    ? "AbsoluteExpiration: " + ((CacheItemPolicy)MemoryCache.Default.Get(Program.TLMemCacheKey.Housekeeping.ToString())).AbsoluteExpiration.ToString(Tools.ciEnUS)
+                    ? $"AbsoluteExpiration: {((CacheItemPolicy)MemoryCache.Default.Get(Program.TLMemCacheKey.Housekeeping.ToString())).AbsoluteExpiration.ToString(Tools.ciEnUS)}"
                     : "null"
                 },
             };
@@ -3166,7 +3166,7 @@ FROM
                     { $"Car #{car.CarInDB} WebHelper.lastUpdateEfficiency", car.GetWebHelper().lastUpdateEfficiency.ToString(Tools.ciEnUS) },
                     { $"Car #{car.CarInDB} TeslaAPIState", car.GetTeslaAPIState().ToString(true).Replace(Environment.NewLine, "<br />") },
                 };
-                string carHTMLtable = "<table>" + string.Concat(carvalues.Select(a => string.Format(Tools.ciEnUS, "<tr><td>{0}</td><td>{1}</td></tr>", a.Key, a.Value))) + "</table>";
+                string carHTMLtable = $"<table>{string.Concat(carvalues.Select(a => string.Format(Tools.ciEnUS, "<tr><td>{0}</td><td>{1}</td></tr>", a.Key, a.Value)))}</table>";
                 values.Add($"Car #{car.CarInDB}", carHTMLtable);
             }
 
@@ -3178,7 +3178,7 @@ FROM
             },*/
 
             IEnumerable<string> trs = values.Select(a => string.Format("<tr><td>{0}</td><td>{1}</td></tr>", a.Key, a.Value));
-            WriteString(response, "<html><head></head><body><table>" + string.Concat(trs) + "</table></body></html>", "text/html; charset=utf-8");
+            WriteString(response, $"<html><head></head><body><table>{string.Concat(trs)}</table></body></html>", "text/html; charset=utf-8");
         }
 
         private static void Debug_TeslaAPI(HttpListenerRequest request, HttpListenerResponse response)
@@ -3237,7 +3237,7 @@ FROM
 
                 // json = Tools.ConvertBase64toString("");
 
-                Logfile.Log("JSON: " + json);
+                Logfile.Log($"JSON: {json}");
 
                 dynamic j = JsonConvert.DeserializeObject(json);
 
@@ -3266,7 +3266,7 @@ FROM
                         cmd.Parameters.AddWithValue("@id", j["id"].Value);
                         int done = _ = SQLTracer.TraceNQ(cmd, out _);
 
-                        Logfile.Log("SetCost OK: " + done);
+                        Logfile.Log($"SetCost OK: {done}");
                         WriteString(response, "OK");
                     }
                 }
@@ -3307,7 +3307,7 @@ FROM
                 Logfile.Log(ex.ToString());
             }
 
-            Logfile.Log("JSON: " + responseString);
+            Logfile.Log($"JSON: {responseString}");
 
             WriteString(response, responseString, "application/json");
         }
@@ -3371,7 +3371,7 @@ FROM
                 Logfile.Log(ex.ToString());
             }
 
-            Tools.DebugLog("JSON: " + responseString);
+            Tools.DebugLog($"JSON: {responseString}");
 
             WriteString(response, responseString, "application/json");
         }
@@ -3583,7 +3583,7 @@ FROM
                 Logfile.Log(ex.ToString());
                 ex.ToExceptionless().FirstCarUserID().Submit();
             }
-            Tools.DebugLog("local file list: " + string.Join(",", fileList));
+            Tools.DebugLog($"local file list: {string.Join(",", fileList)}");
             StringBuilder html = new StringBuilder();
             html.Append(@"
 <html>
