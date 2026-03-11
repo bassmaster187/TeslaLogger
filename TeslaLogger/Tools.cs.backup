@@ -73,8 +73,8 @@ namespace TeslaLogger
         {
             try
             {
-                string msg = $"SQL{Environment.NewLine}{ExpandSQLCommand(cmd).Trim()}";
-                DebugLog($"{callerMemberName}: {msg}", null, prefix, callerFilePath, callerLineNumber);
+                string msg = "SQL" + Environment.NewLine + ExpandSQLCommand(cmd).Trim();
+                DebugLog($"{callerMemberName}: " + msg, null, prefix, callerFilePath, callerLineNumber);
             }
             catch (Exception ex)
             {
@@ -90,9 +90,9 @@ namespace TeslaLogger
                 string msg = "RAWSQL:";
                 for (int column = 0; column < dr.FieldCount; column++)
                 {
-                    msg += $"{(column == 0 ? "" : "|")}{dr.GetName(column)}<{dr.GetValue(column)}>";
+                    msg += (column == 0 ? "" : "|") + dr.GetName(column) + "<" + dr.GetValue(column) + ">";
                 }
-                DebugLog($"{callerMemberName}: {msg}", null, "", callerFilePath, callerLineNumber);
+                DebugLog($"{callerMemberName}: " + msg, null, "", callerFilePath, callerLineNumber);
             }
         }
 
@@ -247,7 +247,7 @@ namespace TeslaLogger
 
         public static void DebugLog(string text, Exception ex = null, string prefix = "", [CallerFilePath] string callerFilePath = null, [CallerLineNumber] int callerLineNumber = 0)
         {
-            string temp = $"DEBUG : {prefix}{text} ({Path.GetFileName(callerFilePath)}:{callerLineNumber})";
+            string temp = "DEBUG : " + prefix + text + " (" + Path.GetFileName(callerFilePath) + ":" + callerLineNumber + ")";
             AddToBuffer(temp);
             if (Program.VERBOSE)
             {
@@ -296,7 +296,7 @@ namespace TeslaLogger
                     int lineNum = frame.GetFileLineNumber();//get the line and column numbers
                     int colNum = frame.GetFileColumnNumber();
                     string className = ExtractBracketed(frame.GetMethod().ReflectedType.FullName);
-                    Logfile.Log($"{ThreadAndDateInfo}Exception: {className}.{methodName}, Ln {lineNum} Col {colNum}: {e.Message}");
+                    Logfile.Log(ThreadAndDateInfo + "Exception: " + className + "." + methodName + ", Ln " + lineNum + " Col " + colNum + ": " + e.Message);
                     if (lineNum + colNum > 0)
                         break; //exit the for loop if you have valid info. If not, try going up one frame...
                 }
@@ -306,7 +306,7 @@ namespace TeslaLogger
             {
                 ee.ToExceptionless().FirstCarUserID().Submit();
                 //Avoid any situation that the Trace is what crashes you application. While trace can log to a file. Console normally not output to the same place.
-                Logfile.Log($"Tracing exception in TraceException(Exception e){ee.Message}");
+                Logfile.Log("Tracing exception in TraceException(Exception e)" + ee.Message);
             }
         }
 
@@ -327,7 +327,7 @@ namespace TeslaLogger
         private static string ThreadAndDateInfo
         {
             //returns thread number and precise date and time.
-            get { return $"[{Thread.CurrentThread.ManagedThreadId} - {DateTime.Now.ToString("dd/MM HH:mm:ss.ffffff", Tools.ciEnUS)}] "; }
+            get { return "[" + Thread.CurrentThread.ManagedThreadId + " - " + DateTime.Now.ToString("dd/MM HH:mm:ss.ffffff", Tools.ciEnUS) + "] "; }
         }
 
         public static string GetMonoRuntimeVersion()
@@ -401,7 +401,7 @@ namespace TeslaLogger
                         {
                             string p = Path.Combine(target.FullName, file.Name);
                             if (writeToLogfile)
-                                Logfile.Log($"Copy '{file.FullName}' to '{p}'");
+                                Logfile.Log("Copy '" + file.FullName + "' to '" + p + "'");
 
                             File.Copy(file.FullName, p, true);
                         }
@@ -410,7 +410,7 @@ namespace TeslaLogger
                 catch (Exception ex)
                 {
                     ex.ToExceptionless().FirstCarUserID().Submit();
-                    Logfile.Log($"CopyFilesRecursively Exception: {ex}");
+                    Logfile.Log("CopyFilesRecursively Exception: " + ex.ToString());
                 }
             }
             else
@@ -703,20 +703,20 @@ namespace TeslaLogger
                     break;
             }
 
-            return $"{carType} / {year}  motor: {motor} market: {market}";
+            return carType + " / " + year +  " motor: " + motor + " market: " + market;
         }
 
         public static void CopyFile(string srcFile, string directory)
         {
             try
             {
-                Logfile.Log($"Copy '{srcFile}' to '{directory}'");
+                Logfile.Log("Copy '" + srcFile + "' to '" + directory + "'");
                 File.Copy(srcFile, directory, true);
             }
             catch (Exception ex)
             {
                 ex.ToExceptionless().FirstCarUserID().Submit();
-                Logfile.Log($"CopyFile Exception: {ex}");
+                Logfile.Log("CopyFile Exception: " + ex.ToString());
             }
         }
 
@@ -787,7 +787,7 @@ namespace TeslaLogger
                 string filePath = FileManager.GetFilePath(TLFilename.SettingsFilename);
                 if (!File.Exists(filePath))
                 {
-                    Logfile.Log($"settings file not found at {filePath}");
+                    Logfile.Log("settings file not found at " + filePath);
                     return httpport;
                 }
                 string json = File.ReadAllText(filePath);
@@ -817,7 +817,7 @@ namespace TeslaLogger
                 string filePath = FileManager.GetFilePath(TLFilename.SettingsFilename);
                 if (!File.Exists(filePath))
                 {
-                    Logfile.Log($"settings file not found at {filePath}");
+                    Logfile.Log("settings file not found at " + filePath);
                     return false;
                 }
                 string json = File.ReadAllText(filePath);
@@ -848,7 +848,7 @@ namespace TeslaLogger
                 string filePath = FileManager.GetFilePath(TLFilename.SettingsFilename);
                 if (!File.Exists(filePath))
                 {
-                    Logfile.Log($"settings file not found at {filePath}");
+                    Logfile.Log("settings file not found at " + filePath);
                     return false;
                 }
                 string json = File.ReadAllText(filePath);
@@ -878,7 +878,7 @@ namespace TeslaLogger
                 string filePath = FileManager.GetFilePath(TLFilename.SettingsFilename);
                 if (!File.Exists(filePath))
                 {
-                    Logfile.Log($"settings file not found at {filePath}");
+                    Logfile.Log("settings file not found at " + filePath);
                     return false;
                 }
                 string json = File.ReadAllText(filePath);
@@ -887,7 +887,7 @@ namespace TeslaLogger
                 {
                     if (bool.TryParse(j["StreamingPos"].ToString(), out bool streamingPos))
                     {
-                        Logfile.Log($"StreamingPos: {streamingPos}");
+                        Logfile.Log("StreamingPos: " + streamingPos);
                         _StreamingPos = streamingPos;
                         return streamingPos;
                     }
@@ -962,7 +962,7 @@ namespace TeslaLogger
         // https://docs.microsoft.com/de-de/dotnet/api/system.diagnostics.process.exitcode?view=netcore-3.1
         public static string ExecMono(string cmd, string param, bool logging = true, bool stderr2stdout = false, int timeout = 0)
         {
-            Logfile.Log($"Exec_mono: {cmd} {param}");
+            Logfile.Log("Exec_mono: " + cmd + " " + param);
 
             StringBuilder sb = new StringBuilder();
 
@@ -1005,7 +1005,7 @@ namespace TeslaLogger
 
                     if (logging && line.Length > 0)
                     {
-                        Logfile.Log($" {line}");
+                        Logfile.Log(" " + line);
                     }
 
                     sb.AppendLine(line);
@@ -1015,11 +1015,11 @@ namespace TeslaLogger
                     {
                         if (stderr2stdout)
                         {
-                            Logfile.Log($" {line}");
+                            Logfile.Log(" " + line);
                         }
                         else
                         {
-                            Logfile.Log($"Error: {line}");
+                            Logfile.Log("Error: " + line);
                         }
                     }
 
@@ -1029,10 +1029,10 @@ namespace TeslaLogger
             catch (Exception ex)
             {
                 ex.ToExceptionless().FirstCarUserID().Submit();
-                Logfile.Log($"Exception {cmd} {ex.Message}");
+                Logfile.Log("Exception " + cmd + " " + ex.Message);
                 return "Exception";
             }
-            return bTimeout ? $"Timeout! {sb}" : sb.ToString();
+            return bTimeout ? "Timeout! " + sb.ToString() : sb.ToString();
         }
 
         internal static string ObfuscateVIN(string input)
@@ -1743,7 +1743,7 @@ namespace TeslaLogger
                     }
                     var targetFile = Path.Combine(Path.Combine(Logfile.GetExecutingPath(), "logs"), $"nohup-{DateTime.UtcNow:yyyyMMddHHmmssfff}");
                     // copy to logs dir with timestamp
-                    ExecMono("/bin/cp", $"{nohup} {targetFile}");
+                    ExecMono("/bin/cp", nohup + " " + targetFile);
                     // gzip copied file
                     ExecMono("/bin/gzip", targetFile);
                     // empty nohup.out
@@ -1759,7 +1759,7 @@ namespace TeslaLogger
                         {
                             if ((DateTime.Now - fi.LastWriteTime).TotalDays > 90)
                             {
-                                Logfile.Log($"CleanupLogfile: delete {fi.FullName} ({fi.Length} bytes)");
+                                Logfile.Log("CleanupLogfile: delete " + fi.FullName + " (" + fi.Length + " bytes)");
                                 fi.Delete();
                             }
                         }
@@ -1828,7 +1828,7 @@ namespace TeslaLogger
                         {
                             try
                             {
-                                Logfile.Log($"Housekeeping: (rule: file older than {keepDays} days) delete file {fi.Name}");
+                                Logfile.Log($"Housekeeping: (rule: file older than {keepDays} days) delete file " + fi.Name);
                                 fi.Delete();
                                 filesFoundForDeletion = true;
                                 countDeletedFiles++;
@@ -1849,7 +1849,7 @@ namespace TeslaLogger
                         FileInfo fi = di.GetFiles().OrderBy(p => p.LastWriteTime).First<FileInfo>();
                         try
                         {
-                            Logfile.Log($"Housekeeping: (rule: at least 1024mb free) delete file {fi.Name}");
+                            Logfile.Log("Housekeeping: (rule: at least 1024mb free) delete file " + fi.Name);
                             fi.Delete();
                             filesFoundForDeletion = true;
                             countDeletedFiles++;
@@ -1864,7 +1864,7 @@ namespace TeslaLogger
             }
             else
             {
-                Logfile.Log($"Directory for Backup does not exist: {path}");
+                Logfile.Log("Directory for Backup does not exist: " + path);
             }
 
 
@@ -2054,7 +2054,7 @@ WHERE
                 Logfile.Log($"Housekeeping: {countDeletedFiles} file(s) deleted in Exception directory");
                 if (Directory.Exists(System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "/Exception"))
                 {
-                    ExecMono("/usr/bin/du", $"-sk {System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location)}/Exception", true, true);
+                    ExecMono("/usr/bin/du", "-sk " + System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "/Exception", true, true);
                 }
             }
         }
@@ -2064,18 +2064,18 @@ WHERE
             _ = ExecMono("/bin/df", "-k", true, true);
             if (Directory.Exists(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "/backup"))
             {
-                _ = ExecMono("/usr/bin/du", $"-sk {Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)}/backup", true, true);
+                _ = ExecMono("/usr/bin/du", "-sk " + Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "/backup", true, true);
             }
             if (Directory.Exists(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "/Exception"))
             {
-                _ = ExecMono("/usr/bin/du", $"-sk {Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)}/Exception", true, true);
+                _ = ExecMono("/usr/bin/du", "-sk " + Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "/Exception", true, true);
             }
 
             var logfilePath = FileManager.GetLogfilePath();
 
             if (File.Exists(logfilePath))
             {
-                _ = ExecMono("/usr/bin/du", $"-sk {logfilePath}", true, true);
+                _ = ExecMono("/usr/bin/du", "-sk " + logfilePath, true, true);
             }
         }
 
@@ -2168,7 +2168,7 @@ WHERE
                 string filePath = FileManager.GetFilePath(TLFilename.SettingsFilename);
                 if (!File.Exists(filePath))
                 {
-                    Logfile.Log($"settings file not found at {filePath}");
+                    Logfile.Log("settings file not found at " + filePath);
                     return days;
                 }
                 string json = File.ReadAllText(filePath);
@@ -2199,7 +2199,7 @@ WHERE
                 string filePath = FileManager.GetFilePath(TLFilename.SettingsFilename);
                 if (!File.Exists(filePath))
                 {
-                    Logfile.Log($"settings file not found at {filePath}");
+                    Logfile.Log("settings file not found at " + filePath);
                     return Default;
                 }
                 json = File.ReadAllText(filePath);
@@ -2212,7 +2212,7 @@ WHERE
             }
             catch (Exception ex)
             {
-                Logfile.Log($"GetSettingsInt:{name}\r\n{ex}");
+                Logfile.Log("GetSettingsInt:" + name + "\r\n" + ex.ToString());
 
                 ex.ToExceptionless().FirstCarUserID().AddObject(json, "JSON").Submit();
             }
@@ -2256,7 +2256,7 @@ WHERE
 
             try
             {
-                text = $"V:{Assembly.GetExecutingAssembly().GetName().Version} - {text}";
+                text = "V:" + Assembly.GetExecutingAssembly().GetName().Version + " - " + text;
                 var c = WebHelper.httpclient_teslalogger_de;
 
                 UriBuilder b = new UriBuilder("https://teslalogger.de/log.php");
@@ -2394,13 +2394,13 @@ WHERE
                 }
                 else
                 {
-                    Logfile.Log($"Error restarting Grafana Docker container: {hre}");
+                    Logfile.Log("Error restarting Grafana Docker container: " + hre.ToString());
                     hre.ToExceptionless().FirstCarUserID().Submit();
                 }
             }
             catch (Exception ex)
             {
-                Logfile.Log($"Error restarting Grafana Docker container: {ex}");
+                Logfile.Log("Error restarting Grafana Docker container: " + ex.ToString());
                 ex.ToExceptionless().FirstCarUserID().Submit();
             }
         }
@@ -2563,7 +2563,7 @@ WHERE
                 if (!String.IsNullOrEmpty(PassPhrase))
                 {
                     var encrypted = StringCipher.Encrypt(token, PassPhrase);
-                    token = $"encrypted:{encrypted}";
+                    token = "encrypted:" + encrypted;
                 }
 
                 return token;
@@ -2600,14 +2600,14 @@ WHERE
             }
             catch (CryptographicException ex)
             {
-                Logfile.Log($"Error in decryption!!!\r\n{ex}");
+                Logfile.Log("Error in decryption!!!\r\n" + ex.ToString());
                 ex.ToExceptionless().FirstCarUserID().Submit();
 
                 return "";
             }
             catch (Exception ex)
             {
-                Logfile.Log($"Error in decryption!!!\r\n{ex}");
+                Logfile.Log("Error in decryption!!!\r\n" + ex.ToString());
                 ex.ToExceptionless().FirstCarUserID().Submit();
             }
 
