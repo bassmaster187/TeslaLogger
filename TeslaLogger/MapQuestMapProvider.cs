@@ -3,6 +3,7 @@ using System.Data;
 using System.IO;
 using System.Net;
 using System.Text;
+using System.Threading.Tasks;
 using Exceptionless;
 
 namespace TeslaLogger
@@ -55,7 +56,7 @@ namespace TeslaLogger
                     Logfile.Log("Create File: " + filename);
                 }
 
-                System.Threading.Thread.Sleep(500);
+                Task.Delay(500).GetAwaiter().GetResult();
             }
             catch (Exception ex)
             {
@@ -114,7 +115,7 @@ namespace TeslaLogger
                     Logfile.Log("Create File: " + filename);
                 }
 
-                System.Threading.Thread.Sleep(500);
+                Task.Delay(500).GetAwaiter().GetResult();
             }
             catch (Exception ex)
             {
@@ -220,7 +221,7 @@ namespace TeslaLogger
                 Logfile.Log("Create File: " + filename);
                 
 
-                System.Threading.Thread.Sleep(1000);
+                Task.Delay(1000).GetAwaiter().GetResult();
             }
             catch (Exception ex)
             {

@@ -1368,7 +1368,7 @@ namespace TeslaLogger
 
                 if (response.ToString().Contains("not_found"))
                 {
-                    Thread.Sleep(10 * 60 * 1000);
+                    Task.Delay(10 * 60 * 1000).GetAwaiter().GetResult();
                 }
                 else if (response.ToString().Contains("token expired"))
                 {

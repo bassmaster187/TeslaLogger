@@ -178,7 +178,7 @@ namespace MQTTClient
                 catch (Exception ex)
                 {
                     Logfile.Log("GetAllCars: " + ex.Message);
-                    System.Threading.Thread.Sleep(20000);
+                    Task.Delay(20000).GetAwaiter().GetResult();
                 }
             }
 

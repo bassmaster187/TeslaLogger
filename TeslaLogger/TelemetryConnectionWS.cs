@@ -122,7 +122,7 @@ class TelemetryConnectionWS : TelemetryConnection
                     }
 
                     var s = r.Next(30000, 60000);
-                    Thread.Sleep(s);
+                    Task.Delay(s).GetAwaiter().GetResult();
                 }
             }
         }
@@ -180,13 +180,13 @@ class TelemetryConnectionWS : TelemetryConnection
                     else
                         car.CreateExceptionlessClient(ex2).Submit();
 
-                    Thread.Sleep(60000);
+                    Task.Delay(60000).GetAwaiter().GetResult();
                 }
                 else
                 {
                     Log("Connect to Telemetry Server (WS) Error: " + ex.Message);
                     car.CreateExceptionlessClient(ex).Submit();
-                    Thread.Sleep(60000);
+                    Task.Delay(60000).GetAwaiter().GetResult();
                 }
             }
         }

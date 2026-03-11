@@ -2001,7 +2001,7 @@ WHERE
                             con.Close();
                         }
                     }
-                    Thread.Sleep(1000);
+                    Task.Delay(1000).GetAwaiter().GetResult();
                 }
                 using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
                 {

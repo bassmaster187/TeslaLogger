@@ -700,9 +700,9 @@ PRIMARY KEY(id)
                 {
                     while (Car.Allcars.Count == 0)
                     {
-                        Thread.Sleep(1000);
+                        Task.Delay(1000).GetAwaiter().GetResult();
                     }
-                    Thread.Sleep(5000);
+                    Task.Delay(5000).GetAwaiter().GetResult();
                     for (int x=0; x<Car.Allcars.Count; x++)
                     {
                         Car c = Car.Allcars[x];
@@ -854,9 +854,9 @@ PRIMARY KEY(id)
             {
                 while (Car.Allcars.Count == 0)
                 {
-                    Thread.Sleep(1000);
+                    Task.Delay(1000).GetAwaiter().GetResult();
                 }
-                Thread.Sleep(5000);
+                Task.Delay(5000).GetAwaiter().GetResult();
                 DBHelper.UpdateAllDrivestateData();
             });
         }
@@ -1473,7 +1473,7 @@ PRIMARY KEY(id)
                             break;
                         }
                         Logfile.Log("Git failed. Retry in 30 sec!");
-                        System.Threading.Thread.Sleep(30000);
+                        Task.Delay(30000).GetAwaiter().GetResult();
                     }
                 }
 

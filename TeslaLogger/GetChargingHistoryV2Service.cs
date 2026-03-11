@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text.RegularExpressions;
 using System.Threading;
+using System.Threading.Tasks;
 using Exceptionless;
 using MySql.Data.MySqlClient;
 using Newtonsoft.Json;
@@ -185,7 +186,7 @@ INSERT IGNORE INTO teslacharging SET
             while (result != null && ParseJSON(result, car))
             {
                 resultPage++;
-                Thread.Sleep(2500); // wait a bit
+                Task.Delay(2500).GetAwaiter().GetResult(); // wait a bit
                 Tools.DebugLog($"GetChargingHistoryV2Service.LoadAll(#{car.CarInDB}) resultpage {resultPage}");
                 result = car.webhelper.GetChargingHistoryV2(car.Vin, resultPage).Result;
             }

@@ -4,6 +4,7 @@ using System.Data;
 using System.IO;
 using System.Text;
 using System.Threading;
+using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
 using static TeslaLogger.StaticMapProvider;
 using Exceptionless;
@@ -120,7 +121,7 @@ namespace TeslaLogger
                     }
                     else
                     {
-                        Thread.Sleep(1000);
+                        Task.Delay(1000).GetAwaiter().GetResult();
                     }
                 }
             }
@@ -158,11 +159,11 @@ namespace TeslaLogger
                                     dt.Dispose();
                                     if (_StaticMapProvider != null)
                                     {
-                                        Thread.Sleep(_StaticMapProvider.GetDelayMS());
+                                        Task.Delay(_StaticMapProvider.GetDelayMS());
                                     }
                                     else
                                     {
-                                        Thread.Sleep(1000);
+                                        Task.Delay(1000).GetAwaiter().GetResult();
                                     }
                                 }
                             }
@@ -189,11 +190,11 @@ namespace TeslaLogger
                             }
                             if (_StaticMapProvider != null)
                             {
-                                Thread.Sleep(_StaticMapProvider.GetDelayMS());
+                                Task.Delay(_StaticMapProvider.GetDelayMS());
                             }
                             else
                             {
-                                Thread.Sleep(1000);
+                                Task.Delay(1000).GetAwaiter().GetResult();
                             }
                         }
                     }

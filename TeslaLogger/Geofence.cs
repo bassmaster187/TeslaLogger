@@ -211,7 +211,7 @@ namespace TeslaLogger
                 DateTime dt = File.GetLastWriteTime(e.FullPath);
                 TimeSpan ts = DateTime.Now - dt;
 
-                Thread.Sleep(5000);
+                Task.Delay(5000).GetAwaiter().GetResult();
 
                 if (ts.TotalSeconds > 5)
                 {

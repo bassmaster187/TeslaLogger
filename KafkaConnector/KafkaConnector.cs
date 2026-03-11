@@ -1,5 +1,6 @@
 ﻿using Confluent.Kafka;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 using Telemetry.VehicleAlerts;
 using Telemetry.VehicleData;
 using Telemetry.VehicleError;
@@ -161,7 +162,7 @@ namespace KafkaConnector
                 {
                     Logfile.Log("Error getting topics: " + ex.ToString());
                 }
-                Thread.Sleep(5000);
+                Task.Delay(5000).GetAwaiter().GetResult();
             }
         }
 
@@ -184,10 +185,10 @@ namespace KafkaConnector
                     Logfile.Log(" Delivery Report: " + deliveryReport.Error.ToString() + " / " + deliveryReport.Message.Value);
                 });
                 Logfile.Log("Produce");
-                Thread.Sleep(1000);
+                Task.Delay(1000).GetAwaiter().GetResult();
                 producer.Flush();
                 Logfile.Log("Flush");
-                Thread.Sleep(1000);
+                Task.Delay(1000).GetAwaiter().GetResult();
             }
             catch (Exception ex)
             {

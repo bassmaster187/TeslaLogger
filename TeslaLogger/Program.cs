@@ -150,7 +150,7 @@ namespace TeslaLogger
                         p.StartInfo.UseShellExecute = false;
                         p.Start();
 
-                        Thread.Sleep(5000);
+                        Task.Delay(5000).GetAwaiter().GetResult();
 
                         Environment.Exit(0);
                     }
@@ -556,7 +556,7 @@ namespace TeslaLogger
                         Logfile.Log("DBCONNECTION " + ex.Message);
                     }
 
-                    Thread.Sleep(15000);
+                    Task.Delay(15000).GetAwaiter().GetResult();
                 }
             }
         }

@@ -1794,7 +1794,7 @@ namespace TeslaLogger
                 {
                     Logfile.Log("Restart carthread in " + (waitSeconds - x).ToString() + "sec");
 
-                    Thread.Sleep(1000);
+                    Task.Delay(1000).GetAwaiter().GetResult();
                 }
 
                 webhelper.scanMyTesla?.KillThread();

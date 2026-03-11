@@ -54,7 +54,7 @@ namespace TeslaLogger
                     }
                     else
                     {
-                        Thread.Sleep(30000); // sleep 30 seconds
+                        Task.Delay(30000).GetAwaiter().GetResult(); // sleep 30 seconds
                     }
                 }
             }
@@ -78,12 +78,12 @@ namespace TeslaLogger
                     // build pipe separated query string for opentopodata.org
                     RequestLocationsAsync(items, UpdateDB).Wait();
 
-                    Thread.Sleep(90000); // sleep 90 seconds (safety marging)
+                    Task.Delay(90000).GetAwaiter().GetResult(); // sleep 90 seconds (safety marging)
                 }
             }
             else
             {
-                Thread.Sleep(60000); // sleep 60 seconds
+                Task.Delay(60000).GetAwaiter().GetResult(); // sleep 60 seconds
             }
         }
         public delegate void RequestLocationsResponse(long id, double elevation);

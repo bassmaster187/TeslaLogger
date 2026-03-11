@@ -2,6 +2,7 @@
 using System.IO;
 using System.Net.Http;
 using System.Reflection;
+using System.Threading.Tasks;
 using System.Web;
 
 namespace TeslaLogger
@@ -74,31 +75,31 @@ namespace TeslaLogger
                     if (inhalt.Contains("vehicle unavailable:"))
                     {
                         Log("vehicle unavailable");
-                        System.Threading.Thread.Sleep(30000);
+                        Task.Delay(30000).GetAwaiter().GetResult();
                         return;
                     }
                     else if (inhalt.Contains("upstream internal error"))
                     {
                         Log("upstream internal error");
-                        System.Threading.Thread.Sleep(10000);
+                        Task.Delay(10000).GetAwaiter().GetResult();
                         return;
                     }
                     else if (inhalt.Contains("Connection refused"))
                     {
                         Log("Connection refused");
-                        System.Threading.Thread.Sleep(30000);
+                        Task.Delay(30000).GetAwaiter().GetResult();
                         return;
                     }
                     else if (inhalt.Contains("No route to host"))
                     {
                         Log("No route to host");
-                        System.Threading.Thread.Sleep(60000);
+                        Task.Delay(60000).GetAwaiter().GetResult();
                         return;
                     }
                     else if (inhalt.Contains("You have been temporarily blocked for making too many requests!"))
                     {
                         Log("temporarily blocked for making too many requests!");
-                        System.Threading.Thread.Sleep(30000);
+                        Task.Delay(30000).GetAwaiter().GetResult();
                         return;
                     }
                 }
@@ -114,55 +115,55 @@ namespace TeslaLogger
                 if (temp.Contains("The operation has timed out"))
                 {
                     Log(prefix + "HTTP Timeout");
-                    System.Threading.Thread.Sleep(15000);
+                    Task.Delay(15000).GetAwaiter().GetResult();
                     return;
                 }
                 if (inhalt.Contains("operation_timedout with 10s timeout for txid"))
                 {
                     Log(prefix + "Mothership Timeout");
-                    System.Threading.Thread.Sleep(20000);
+                    Task.Delay(20000).GetAwaiter().GetResult();
                     return;
                 }
                 if (inhalt.Contains("{\"response\":null,\"error\":\"not_found\",\"error_description\":\"\"}"))
                 {
                     Log(prefix + "Mothership response:null");
-                    System.Threading.Thread.Sleep(20000);
+                    Task.Delay(20000).GetAwaiter().GetResult();
                     return;
                 }
                 if (inhalt.Contains("502 Bad Gateway"))
                 {
                     Log(prefix + "Mothership 502 Bad Gateway");
-                    System.Threading.Thread.Sleep(30000);
+                    Task.Delay(30000).GetAwaiter().GetResult();
                     return;
                 }
                 else if (temp.Contains("Connection refused"))
                 {
                     Log(prefix + "Connection refused");
-                    System.Threading.Thread.Sleep(50000);
+                    Task.Delay(50000).GetAwaiter().GetResult();
                     return;
                 }
                 else if (temp.Contains("No such host is known"))
                 {
                     Log(prefix + "No such host is known");
-                    System.Threading.Thread.Sleep(50000);
+                    Task.Delay(50000).GetAwaiter().GetResult();
                     return;
                 }
                 else if (temp.Contains("Connection timed out"))
                 {
                     Log(prefix + "Connection timed out");
-                    System.Threading.Thread.Sleep(50000);
+                    Task.Delay(50000).GetAwaiter().GetResult();
                     return;
                 }
                 else if (temp.Contains("We're sorry, but something went wrong (500)"))
                 {
                     Log(prefix + "HTTP Error 500");
-                    System.Threading.Thread.Sleep(50000);
+                    Task.Delay(50000).GetAwaiter().GetResult();
                     return;
                 }
                 else if (temp.Contains("Connection reset by peer"))
                 {
                     Log(prefix + "Connection reset by peer");
-                    System.Threading.Thread.Sleep(30000);
+                    Task.Delay(30000).GetAwaiter().GetResult();
                     return;
                 }
                 else

@@ -1834,13 +1834,13 @@ HAVING
                 {
                     _ = Task.Factory.StartNew(() =>
                     {
-                        Thread.Sleep(600000 + random.Next(1000, 5000)); // sleep 10+rand minutes so that the invoice is ready
+                        Task.Delay(600000 + random.Next(1000, 5000)); // sleep 10+rand minutes so that the invoice is ready
                         if (GetChargingHistoryV2Service.LoadLatest(car))
                         {
                             if (GetChargingHistoryV2Service.SyncAll(car) == 0)
                             {
                                 // invoice not ready yet
-                                Thread.Sleep(3600000 + random.Next(1000, 5000)); // sleep 60+rand minutes so that the invoice is ready
+                                Task.Delay(3600000 + random.Next(1000, 5000)); // sleep 60+rand minutes so that the invoice is ready
                                 if (GetChargingHistoryV2Service.LoadLatest(car))
                                 {
                                     _ = GetChargingHistoryV2Service.SyncAll(car);
@@ -3395,7 +3395,7 @@ VALUES(
                         }
 
                         car.Log("Meter: Not Charging!");
-                        Thread.Sleep(6000);
+                        Task.Delay(6000).GetAwaiter().GetResult();
                     }
 
                     using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
@@ -3722,7 +3722,7 @@ WHERE
             // wait until all pos altitude values are filled
             while (OpenTopoDataService.GetSingleton().QueueLength > 0)
             {
-                Thread.Sleep(60000);
+                Task.Delay(60000).GetAwaiter().GetResult();
             }
             decimal meters_up = decimal.Zero;
             decimal meters_down = decimal.Zero;
@@ -6701,7 +6701,7 @@ FROM
                 var dt = GetAllChargingstates();
                 foreach (DataRow dr in dt.Rows)
                 {
-                    Thread.Sleep(10);
+                    Task.Delay(10).GetAwaiter().GetResult();
 
                     calculateCountry = "";
                     calculateDate = null;

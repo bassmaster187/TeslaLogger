@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.Text;
 using System.Threading;
+using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
 
 namespace TeslaLogger
@@ -37,11 +38,11 @@ namespace TeslaLogger
                     if (DateTime.Now.Minute % 30 == 0)
                     {
                         Logfile.Log(Dump());
-                        Thread.Sleep(60000); // sleep 60 seconds
+                        Task.Delay(60000).GetAwaiter().GetResult(); // sleep 60 seconds
                     }
                     else
                     {
-                        Thread.Sleep(30000); // sleep 30 seconds
+                        Task.Delay(30000).GetAwaiter().GetResult(); // sleep 30 seconds
                     }
                 }
             }

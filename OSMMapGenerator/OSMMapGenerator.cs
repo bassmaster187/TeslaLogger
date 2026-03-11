@@ -8,6 +8,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Net;
 using System.Threading;
+using System.Threading.Tasks;
 
 
 namespace TeslaLogger
@@ -75,7 +76,7 @@ namespace TeslaLogger
 
                 while (!Debugger.IsAttached)
                 {
-                    Thread.Sleep(100);
+                    Task.Delay(100).GetAwaiter().GetResult();
                 }*/
 
                 // Console.WriteLine("Start OSMMapGenerator args: " + args.Length);
