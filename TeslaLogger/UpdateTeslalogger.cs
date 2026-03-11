@@ -494,7 +494,7 @@ LIMIT 1", con))
             catch (Exception ex)
             {
                 ex.ToExceptionless().FirstCarUserID().Submit();
-                Logfile.Log("getLargestTableOrDBMB: " + ex.ToString());
+                Logfile.Log($"getLargestTableOrDBMB: {ex}");
             }
             return -1;
         }
@@ -551,9 +551,9 @@ LIMIT 1", con))
             catch (Exception ex)
             {
                 ex.ToExceptionless().FirstCarUserID().Submit();
-                Logfile.Log("CheckDBViews exception: " + ex.ToString());
+                Logfile.Log($"CheckDBViews exception: {ex}");
             }
-            Logfile.Log("CheckDBViews: trip " + (viewtrip.Equals("VIEW") ? "OK" : $"NOT OK: type {viewtrip}"));
+            Logfile.Log($"CheckDBViews: trip {(viewtrip.Equals("VIEW") ? "OK" : $"NOT OK: type {viewtrip}")}");
         }
 
         private static void CheckDBSchema_superchargerstate()
@@ -1255,7 +1255,7 @@ PRIMARY KEY(id)
                     if (m.Groups.Count > 3)
                         oldValue = m.Groups[3].Value;
 
-                    Logfile.Log("Apache Config changed! Old: " + oldValue);
+                    Logfile.Log($"Apache Config changed! Old: {oldValue}");
                 }
 
                 temp = r.Replace(temp, "$1$2AllowOverride All$4$5");
@@ -1297,7 +1297,7 @@ PRIMARY KEY(id)
 
             File.AppendAllText(FileManager.GetCmdUpdatedTxt(), DateTime.Now.ToLongTimeString());
             Logfile.Log("Start update");
-            ExceptionlessClient.Default.CreateLog("Install", "Start update from " + Assembly.GetExecutingAssembly().GetName().Version).Submit();
+            ExceptionlessClient.Default.CreateLog("Install", $"Start update from {Assembly.GetExecutingAssembly().GetName().Version}").Submit();
 
             if (Tools.IsDockerNET8())
             {
@@ -1341,7 +1341,7 @@ PRIMARY KEY(id)
                         if (ret == null)
                             ret = "NULL";
 
-                        ExceptionlessClient.Default.CreateLog("Install", "optipng: " + ret, Exceptionless.Logging.LogLevel.Warn).Submit();
+                        ExceptionlessClient.Default.CreateLog("Install", $"optipng: {ret}", Exceptionless.Logging.LogLevel.Warn).Submit();
                     }
                 }
 
@@ -1410,7 +1410,7 @@ PRIMARY KEY(id)
                 catch (Exception ex)
                 {
                     ex.ToExceptionless().FirstCarUserID().Submit();
-                    Logfile.Log("Exception during download from github: " + ex.ToString());
+                    Logfile.Log($"Exception during download from github: {ex}");
                     Logfile.ExceptionWriter(ex, "Exception during download from github");
                 }
 
@@ -1464,7 +1464,7 @@ PRIMARY KEY(id)
                 {
                     for (int x = 1; x < 10; x++)
                     {
-                        Logfile.Log("git clone: try " + x);
+                        Logfile.Log($"git clone: try {x}");
                         Tools.ExecMono("git", "clone --depth=1 --progress https://github.com/bassmaster187/TeslaLogger /etc/teslalogger/git/", true, true);
 
                         if (Directory.Exists("/etc/teslalogger/git/TeslaLogger/GrafanaPlugins"))
@@ -1571,7 +1571,7 @@ PRIMARY KEY(id)
                             var temp = Tools.GetNET8Version();
                             if (temp?.Contains("8.") == true)
                             {
-                                Logfile.Log(".NET 8 installed: " + temp);
+                                Logfile.Log($".NET 8 installed: {temp}");
                                 ExceptionlessClient.Default.CreateFeatureUsage("DOTNET8").FirstCarUserID().AddObject(temp, "DOTNET8").Submit();
                             }
                         });
@@ -1889,7 +1889,7 @@ PRIMARY KEY(id)
 
         private static string GetLanguageFilepath(string language)
         {
-            string filename = Path.Combine(FileManager.GetExecutingPath(), "language-" + language + ".txt");
+            string filename = Path.Combine(FileManager.GetExecutingPath(), $"language-{language}.txt");
             filename = filename.Replace("\\bin\\Debug", "\\bin");
             filename = filename.Replace("/Debug/net8.0", "");
             return filename;
@@ -1949,7 +1949,7 @@ PRIMARY KEY(id)
                     // changes to dashboards
                     foreach (string f in Directory.GetFiles("/etc/teslalogger/tmp/Grafana"))
                     {
-                        Logfile.Log("Update: " + f);
+                        Logfile.Log($"Update: {f}");
                         string s = File.ReadAllText(f);
                         // TODO s = s.Replace("TASKERTOKEN", wh.car.TaskerHash);
 
@@ -2241,7 +2241,7 @@ PRIMARY KEY(id)
 
                         if (language != "de")
                         {
-                            Logfile.Log("Convert to language: " + language);
+                            Logfile.Log($"Convert to language: {language}");
 
                             s = ReplaceAliasTags(s, dictLanguage);
                             s = ReplaceValuesTags(s, dictLanguage);
@@ -2473,7 +2473,7 @@ PRIMARY KEY(id)
                             }
                             else
                             {
-                                Logfile.Log("Title of " + f + " not translated!");
+                                Logfile.Log($"Title of {f} not translated!");
                             }
                         }
 
@@ -2504,7 +2504,7 @@ PRIMARY KEY(id)
                         s = UpdateDatasourceUID(s, DatasourceUID);
 
                         if (!title.Contains("ScanMyTesla") && !title.Contains("Zelltemperaturen") && !title.Contains("SOC ") && !title.Contains("Chargertype") && !title.Contains("Mothership"))
-                            dashboardlinks.Add(title + "|" + link);
+                            dashboardlinks.Add($"{title}|{link}");
 
                         File.WriteAllText(f, s);
                     }
@@ -2582,7 +2582,7 @@ PRIMARY KEY(id)
             {
                 if (!Tools.GetOsRelease().Contains("buster"))
                 {
-                    Logfile.Log("Grafana update suspended because of old OS:" + Tools.GetOsRelease());
+                    Logfile.Log($"Grafana update suspended because of old OS:{Tools.GetOsRelease()}");
                     ExceptionlessClient.Default.CreateFeatureUsage("Grafana update suspended").FirstCarUserID().Submit();
                     return;
                 }
@@ -2597,7 +2597,7 @@ PRIMARY KEY(id)
                         File.Delete(GrafanaFilename);
 
                     // use internal downloader
-                    string grafanaUrl = "https://dl.grafana.com/oss/release/grafana_" + newversion + "_armhf.deb";
+                    string grafanaUrl = $"https://dl.grafana.com/oss/release/grafana_{newversion}_armhf.deb";
                     string grafanaFile = $"grafana_{newversion}_armhf.deb";
                     if (!Tools.DownloadToFile(grafanaUrl, grafanaFile, 300, true).Result)
                     {
@@ -2608,7 +2608,7 @@ PRIMARY KEY(id)
 
                     if (File.Exists(GrafanaFilename))
                     {
-                        Logfile.Log(GrafanaFilename + " Sucessfully Downloaded -  Size:" + new FileInfo(GrafanaFilename).Length);
+                        Logfile.Log($"{GrafanaFilename} Sucessfully Downloaded -  Size:{new FileInfo(GrafanaFilename).Length}");
 
                         if (GrafanaVersion == "6.7.3") // first Raspberry PI4 install
                             Tools.ExecMono("dpkg", "-r grafana-rpi");
@@ -2683,7 +2683,7 @@ PRIMARY KEY(id)
                 if (File.Exists(languageFilepath))
                 {
                     
-                    Logfile.Log("Copy " + languageFilepath + " to " + TimeLinePanelLanguagePath);
+                    Logfile.Log($"Copy {languageFilepath} to {TimeLinePanelLanguagePath}");
                     File.Copy(languageFilepath, TimeLinePanelLanguagePath, true);
                 }
             }
@@ -2705,11 +2705,11 @@ PRIMARY KEY(id)
 
                 if (File.Exists(settingsFilepath))
                 {
-                    Logfile.Log("Copy " + settingsFilepath + " to " + TimeLinePanelSettingsPath);
+                    Logfile.Log($"Copy {settingsFilepath} to {TimeLinePanelSettingsPath}");
                     File.Copy(settingsFilepath, TimeLinePanelSettingsPath, true);
                 }
                 else
-                    Logfile.Log("Copy: " + settingsFilepath + " NOT FOUND!!!");
+                    Logfile.Log($"Copy: {settingsFilepath} NOT FOUND!!!");
 
             }
             catch (Exception ex)
@@ -2755,7 +2755,7 @@ PRIMARY KEY(id)
                     URL_Grafana += "/";
                 }
 
-                link = URL_Grafana + "d/" + uid + "/" + title;
+                link = $"{URL_Grafana}d/{uid}/{title}";
             }
             catch (Exception ex)
             {
@@ -2909,7 +2909,7 @@ PRIMARY KEY(id)
 
                 if (logging)
                 {
-                    Logfile.Log("chmod " + chmod + " " + filename);
+                    Logfile.Log($"chmod {chmod} {filename}");
                 }
 
                 using (System.Diagnostics.Process proc = new System.Diagnostics.Process
@@ -2926,7 +2926,7 @@ PRIMARY KEY(id)
             catch (Exception ex)
             {
                 ex.ToExceptionless().FirstCarUserID().Submit();
-                Logfile.Log("chmod " + filename + " " + ex.Message);
+                Logfile.Log($"chmod {filename} {ex.Message}");
             }
         }
 
@@ -2970,8 +2970,8 @@ PRIMARY KEY(id)
 
                             Logfile.Log("---------------------------------------------");
                             Logfile.Log(" *** New Version Detected *** ");
-                            Logfile.Log("Current Version: " + currentVersion);
-                            Logfile.Log("Online Version: " + online_version);
+                            Logfile.Log($"Current Version: {currentVersion}");
+                            Logfile.Log($"Online Version: {online_version}");
                             Logfile.Log("Start update!");
 
                             string cmd_updated = "/etc/teslalogger/cmd_updated.txt";
