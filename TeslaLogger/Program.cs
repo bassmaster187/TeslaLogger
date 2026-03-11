@@ -44,15 +44,15 @@ namespace TeslaLogger
                     ExceptionlessClient.Default.Configuration.ServerUrl = ApplicationSettings.Default.ExceptionlessServerUrl;
                     ExceptionlessClient.Default.Configuration.SetVersion(Assembly.GetExecutingAssembly().GetName().Version);
 
-                    ExceptionlessClient.Default.CreateLog("Program", "Start " + Assembly.GetExecutingAssembly().GetName().Version, Exceptionless.Logging.LogLevel.Info).FirstCarUserID().Submit();
+                    ExceptionlessClient.Default.CreateLog("Program", $"Start {Assembly.GetExecutingAssembly().GetName().Version}", Exceptionless.Logging.LogLevel.Info).FirstCarUserID().Submit();
                 }
                 catch (Exception ex)
                 {
                     Logfile.Log(ex.ToString());
                 }
 
-                Logfile.Log("Processname: " + System.Diagnostics.Process.GetCurrentProcess().ProcessName);
-                Logfile.Log("Run on Linux: " + Tools.RunOnLinux());
+                Logfile.Log($"Processname: {System.Diagnostics.Process.GetCurrentProcess().ProcessName}");
+                Logfile.Log($"Run on Linux: {Tools.RunOnLinux()}");
 
                 InitCheckNet8();
 
@@ -95,7 +95,7 @@ namespace TeslaLogger
                 Logfile.Log(ex.Message);
                 Logfile.ExceptionWriter(ex, "main loop");
                 Logfile.Log("Teslalogger Stopped!");
-                Tools.ExternalLog("Teslalogger Stopped! " + ex.ToString());
+                Tools.ExternalLog($"Teslalogger Stopped! {ex}");
 
                 ex.ToExceptionless().FirstCarUserID().Submit();
                 ExceptionlessClient.Default.ProcessQueueAsync();
@@ -176,7 +176,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
-                Logfile.Log("NET8TaskerToken: cannot connect to DB: " + ex.ToString());
+                Logfile.Log($"NET8TaskerToken: cannot connect to DB: {ex}");
                 return false;
             }
         }
@@ -328,7 +328,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
-                Logfile.Log(id + "# :" + ex.ToString());
+                Logfile.Log($"{id}# :{ex}");
             }
         }
 
@@ -397,28 +397,28 @@ namespace TeslaLogger
         private static void InitStage2()
         {
             TestEncryption();
-            Logfile.Log("Path of settings.json: " + FileManager.GetFilePath(TLFilename.SettingsFilename));
-            Logfile.Log("Path of invoices: " + FileManager.GetInvoicePath());
-            Logfile.Log("Path of nohup.out: " + FileManager.GetLogfilePath());
-            Logfile.Log("Path of backup folder: " + FileManager.GetBackupPath());
-            Logfile.Log("Path of Map Cache: " + FileManager.GetMapCachePath());
-            Logfile.Log("Path of SRTM Data: " + FileManager.GetSRTMDataPath());
+            Logfile.Log($"Path of settings.json: {FileManager.GetFilePath(TLFilename.SettingsFilename)}");
+            Logfile.Log($"Path of invoices: {FileManager.GetInvoicePath()}");
+            Logfile.Log($"Path of nohup.out: {FileManager.GetLogfilePath()}");
+            Logfile.Log($"Path of backup folder: {FileManager.GetBackupPath()}");
+            Logfile.Log($"Path of Map Cache: {FileManager.GetMapCachePath()}");
+            Logfile.Log($"Path of SRTM Data: {FileManager.GetSRTMDataPath()}");
 
             KeepOnlineMinAfterUsage = Tools.GetSettingsInt("KeepOnlineMinAfterUsage", ApplicationSettings.Default.KeepOnlineMinAfterUsage);
             SuspendAPIMinutes = Tools.GetSettingsInt("SuspendAPIMinutes", ApplicationSettings.Default.SuspendAPIMinutes);
 
-            Logfile.Log("Current Culture: " + Thread.CurrentThread.CurrentCulture.ToString());
-            Logfile.Log("Mono Runtime: " + Tools.GetMonoRuntimeVersion());
+            Logfile.Log($"Current Culture: {Thread.CurrentThread.CurrentCulture}");
+            Logfile.Log($"Mono Runtime: {Tools.GetMonoRuntimeVersion()}");
             ExceptionlessClient.Default.Configuration.DefaultData.Add("MonoRuntime", Tools.GetMonoRuntimeVersion());
             ExceptionlessClient.Default.Configuration.DefaultData.Add("OS", Tools.GetOsRelease());
 
-            Logfile.Log("Grafana Version: " + Tools.GetGrafanaVersion());
+            Logfile.Log($"Grafana Version: {Tools.GetGrafanaVersion()}");
             ExceptionlessClient.Default.Configuration.DefaultData.Add("GrafanaVersion", Tools.GetGrafanaVersion());
 
-            Logfile.Log("OS Version: " + Tools.GetOsVersion());
+            Logfile.Log($"OS Version: {Tools.GetOsVersion()}");
             ExceptionlessClient.Default.Configuration.DefaultData.Add("OSVersion", Tools.GetOsVersion());
 
-            Logfile.Log("Update Settings: " + Tools.GetOnlineUpdateSettings().ToString());
+            Logfile.Log($"Update Settings: {Tools.GetOnlineUpdateSettings()}");
             ExceptionlessClient.Default.Configuration.DefaultData.Add("UpdateSettings", Tools.GetOnlineUpdateSettings().ToString());
 
             try
@@ -430,13 +430,13 @@ namespace TeslaLogger
                 }
             } catch (Exception) { }
 
-            Logfile.Log("DBConnectionstring: " + DBHelper.GetDBConnectionstring(true));
+            Logfile.Log($"DBConnectionstring: {DBHelper.GetDBConnectionstring(true)}");
 
-            Logfile.Log("KeepOnlineMinAfterUsage: " + KeepOnlineMinAfterUsage);
-            Logfile.Log("SuspendAPIMinutes: " + SuspendAPIMinutes);
-            Logfile.Log("SleepPositions: " + ApplicationSettings.Default.SleepPosition);
-            Logfile.Log("UseScanMyTesla: " + Tools.UseScanMyTesla());
-            Logfile.Log("StreamingPos: " + Tools.StreamingPos());
+            Logfile.Log($"KeepOnlineMinAfterUsage: {KeepOnlineMinAfterUsage}");
+            Logfile.Log($"SuspendAPIMinutes: {SuspendAPIMinutes}");
+            Logfile.Log($"SleepPositions: {ApplicationSettings.Default.SleepPosition}");
+            Logfile.Log($"UseScanMyTesla: {Tools.UseScanMyTesla()}");
+            Logfile.Log($"StreamingPos: {Tools.StreamingPos()}");
             try
             {
                 long freeDiskSpaceMB = Tools.FreeDiskSpaceMB();
@@ -464,11 +464,11 @@ namespace TeslaLogger
             UpdateTeslalogger.Chmod("backup.sh", 777, false);
             UpdateTeslalogger.Chmod("TeslaLogger.exe", 755, false);
 
-            Logfile.Log("Runtime: " + Environment.Version.ToString());
-            Logfile.Log("TeslaLogger Version: " + Assembly.GetExecutingAssembly().GetName().Version);
-            Logfile.Log("Teslalogger Online Version: " + WebHelper.GetOnlineTeslaloggerVersion());
-            Logfile.Log("Logfile Version: " + Assembly.GetAssembly(typeof(Logfile)).GetName().Version);
-            Logfile.Log("SRTM Version: " + Assembly.GetAssembly(typeof(SRTM.SRTMData)).GetName().Version);
+            Logfile.Log($"Runtime: {Environment.Version}");
+            Logfile.Log($"TeslaLogger Version: {Assembly.GetExecutingAssembly().GetName().Version}");
+            Logfile.Log($"Teslalogger Online Version: {WebHelper.GetOnlineTeslaloggerVersion()}");
+            Logfile.Log($"Logfile Version: {Assembly.GetAssembly(typeof(Logfile)).GetName().Version}");
+            Logfile.Log($"SRTM Version: {Assembly.GetAssembly(typeof(SRTM.SRTMData)).GetName().Version}");
             try
             {
                 string versionpath = Path.Combine(FileManager.GetExecutingPath(), "VERSION");
@@ -484,10 +484,10 @@ namespace TeslaLogger
                 if (File.Exists("BRANCH"))
                 {
                     var branch = File.ReadAllText("BRANCH").Trim();
-                    Logfile.Log($"YOU ARE USING BRANCH: " + branch);
+                    Logfile.Log($"YOU ARE USING BRANCH: {branch}");
 
                     ExceptionlessClient.Default.Configuration.DefaultData.Add("Branch", branch);
-                    ExceptionlessClient.Default.CreateLog("Program", "BRANCH: " + branch, Exceptionless.Logging.LogLevel.Warn).FirstCarUserID().Submit(); ;
+                    ExceptionlessClient.Default.CreateLog("Program", $"BRANCH: {branch}", Exceptionless.Logging.LogLevel.Warn).FirstCarUserID().Submit(); ;
                 }
             }
             catch (Exception ex)
@@ -496,7 +496,7 @@ namespace TeslaLogger
                 ex.ToExceptionless().FirstCarUserID().Submit();
             }
 
-            Logfile.Log("OS: " + Tools.GetOsRelease());
+            Logfile.Log($"OS: {Tools.GetOsRelease()}");
         }
 
         static void TestEncryption()
@@ -538,8 +538,8 @@ namespace TeslaLogger
             {
                 try
                 {
-                    Logfile.Log("DB Version: " + DBHelper.GetVersion());
-                    Logfile.Log("Count Pos: " + DBHelper.CountPos()); // test the DBConnection
+                    Logfile.Log($"DB Version: {DBHelper.GetVersion()}");
+                    Logfile.Log($"Count Pos: {DBHelper.CountPos()}"); // test the DBConnection
                     break;
                 }
                 catch (Exception ex)
@@ -553,7 +553,7 @@ namespace TeslaLogger
                     else
                     {
                         ex.ToExceptionless().FirstCarUserID().Submit();
-                        Logfile.Log("DBCONNECTION " + ex.Message);
+                        Logfile.Log($"DBCONNECTION {ex.Message}");
                     }
 
                     Task.Delay(15000).GetAwaiter().GetResult();
@@ -578,11 +578,11 @@ namespace TeslaLogger
                     if (File.Exists(oldFilePath))
                     {
                         File.Move(oldFilePath, newFilePath);
-                        Logfile.Log("settings.json moved to :" + newFilePath);
+                        Logfile.Log($"settings.json moved to :{newFilePath}");
                     }
                     else
                     {
-                        Logfile.Log("Creating empty settings.json " + newFilePath);
+                        Logfile.Log($"Creating empty settings.json {newFilePath}");
                         File.AppendAllText(newFilePath, GetDefaultConfigFileContent());
                         UpdateTeslalogger.Chmod(newFilePath, 666);
                     }
@@ -659,7 +659,7 @@ namespace TeslaLogger
                 Tools.Housekeeping();
                 await DBHelper.UpdateCO2Async();
                 GeocodeCache.Cleanup();
-                Logfile.Log("RunHousekeepingInBackground finished, took " + (DateTime.Now - start).TotalMilliseconds + "ms");
+                Logfile.Log($"RunHousekeepingInBackground finished, took {(DateTime.Now - start).TotalMilliseconds}ms");
             });
         }
 
@@ -687,7 +687,7 @@ namespace TeslaLogger
 
         private static void ExitTeslaLogger(string _msg, int _exitcode = 0)
         {
-            Logfile.Log("Exit: " + _msg);
+            Logfile.Log($"Exit: {_msg}");
             Environment.Exit(_exitcode);
         }
 
@@ -708,7 +708,7 @@ namespace TeslaLogger
         {
             // Run only once a day per version
             string kvskey = "UpdateDbInBackground";
-            string check = DateTime.Now.ToString("yyyyMMdd") + "-" + Assembly.GetExecutingAssembly().GetName().Version.ToString();
+            string check = $"{DateTime.Now:yyyyMMdd}-{Assembly.GetExecutingAssembly().GetName().Version}";
 
             if (KVS.Get(kvskey, out string updateDbInBackground) == KVS.SUCCESS)
             {
@@ -781,7 +781,7 @@ namespace TeslaLogger
 
                     DBHelper.MigratePosOdometerNullValues();
 
-                    Logfile.Log("UpdateDbInBackground finished, took " + (DateTime.Now - start).TotalMilliseconds + "ms");
+                    Logfile.Log($"UpdateDbInBackground finished, took {(DateTime.Now - start).TotalMilliseconds}ms");
                     RunHousekeepingInBackground();
 
                     KVS.InsertOrUpdate(kvskey, check);
