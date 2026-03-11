@@ -714,7 +714,7 @@ namespace TeslaLogger
                                 .AddObject(result, "Result Content")
                                 .Submit();
                             car.Log(result);
-                            Thread.Sleep(30000);
+                            Task.Delay(30000).GetAwaiter().GetResult();
                             return "";
                         }
 
@@ -758,7 +758,7 @@ namespace TeslaLogger
                             .Submit();
 
                         Log("Error getting Access Token from Refreh Token: " + (int)response.StatusCode + " / " + response.StatusCode.ToString());
-                        Thread.Sleep(30000);
+                        Task.Delay(30000).GetAwaiter().GetResult();
                         return "";
                     }
                 }
@@ -772,7 +772,7 @@ namespace TeslaLogger
                 car.Log(ex.ToString());
                 car.CreateExceptionlessClient(ex).MarkAsCritical().Submit();
                 ExceptionlessClient.Default.ProcessQueueAsync();
-                Thread.Sleep(30000);
+                Task.Delay(30000).GetAwaiter().GetResult();
             }
 
             return "";
@@ -829,7 +829,7 @@ namespace TeslaLogger
                                 .AddObject(result, "Result Content")
                                 .Submit();
                             car.Log(result);
-                            Thread.Sleep(30000);
+                            Task.Delay(30000).GetAwaiter().GetResult();
                             return "";
                         }
 
@@ -873,7 +873,7 @@ namespace TeslaLogger
                             .Submit();
 
                         Log("Error getting Access Token from Refreh Token: " + (int)response.StatusCode + " / " + response.StatusCode.ToString());
-                        Thread.Sleep(30000);
+                        Task.Delay(30000).GetAwaiter().GetResult();
                         return "";
                     }
                 }
@@ -887,7 +887,7 @@ namespace TeslaLogger
                 car.Log(ex.ToString());
                 car.CreateExceptionlessClient(ex).MarkAsCritical().Submit();
                 ExceptionlessClient.Default.ProcessQueueAsync();
-                Thread.Sleep(30000);
+                Task.Delay(30000).GetAwaiter().GetResult();
             }
 
             return "";
@@ -988,7 +988,7 @@ namespace TeslaLogger
                     }
                     else
                     {
-                        Thread.Sleep(1000);
+                        Task.Delay(1000).GetAwaiter().GetResult();
 
                         if (streamThread != null)
                             Tools.DebugLog($"streamThread {streamThread.Name}:{streamThread.ManagedThreadId} state:{streamThread.ThreadState}");
@@ -1024,7 +1024,7 @@ namespace TeslaLogger
 
                 if (resultContent == INSERVICE)
                 {
-                    System.Threading.Thread.Sleep(10000);
+                    await Task.Delay(10000);
                     return false;
                 }
 
@@ -1050,7 +1050,7 @@ namespace TeslaLogger
                         Log("charging_state: vehicle unavailable");
                     }
 
-                    Thread.Sleep(10000);
+                    await Task.Delay(10000);
 
                     return lastCharging_State == "Charging";
                 }
@@ -1459,7 +1459,7 @@ namespace TeslaLogger
                         int sleep = random.Next(10000) + 10000;
                         Log("GetVehicles Error: Retry Later - Sleep " + sleep);
 
-                        Thread.Sleep(sleep);
+                        Task.Delay(sleep).GetAwaiter().GetResult();
                     }
                     else
                     {
@@ -1479,7 +1479,7 @@ namespace TeslaLogger
                             ex = ex.InnerException;
                         }
 
-                        Thread.Sleep(30000);
+                        Task.Delay(30000).GetAwaiter().GetResult();
                     }
                 }
             }
@@ -1785,21 +1785,21 @@ namespace TeslaLogger
                 if (resultContent == null || resultContent == "NULL")
                 {
                     Log("isOnline = NULL");
-                    Thread.Sleep(5000);
+                    Task.Delay(5000).GetAwaiter().GetResult();
                     return "NULL";
                 }
 
                 if (resultContent.Contains("upstream connect error or disconnect"))
                 {
                     Log("isOnline Result Content: " + resultContent);
-                    Thread.Sleep(5000);
+                    Task.Delay(5000).GetAwaiter().GetResult();
                     return "NULL";
                 }
 
                 if (resultContent.Contains("operation_timedout with 10s timeout"))
                 {
                     Log("isOnline: operation_timedout with 10s timeout");
-                    Thread.Sleep(20000);
+                    Task.Delay(20000).GetAwaiter().GetResult();
                     return "NULL";
                 }
 
@@ -1807,7 +1807,7 @@ namespace TeslaLogger
                 {
                     int sleep = random.Next(10000) + 10000;
                     Log("isOnline: Retry later - Sleep: " + sleep);
-                    Thread.Sleep(sleep);
+                    Task.Delay(sleep).GetAwaiter().GetResult();
                     return "NULL";
                 }
 
@@ -1815,7 +1815,7 @@ namespace TeslaLogger
                 {
                     int sleep = random.Next(10000) + 10000;
                     Log("isOnline: upstream internal error - Sleep: " + sleep);
-                    Thread.Sleep(sleep);
+                    Task.Delay(sleep).GetAwaiter().GetResult();
                     return "NULL";
                 }
 
@@ -1963,7 +1963,7 @@ namespace TeslaLogger
                         }
                         else
                         {
-                            Thread.Sleep(10000);
+                            Task.Delay(10000).GetAwaiter().GetResult();
                         }
 
                         unknownStateCounter++;
@@ -1993,7 +1993,7 @@ namespace TeslaLogger
                     if (ex is TaskCanceledException)
                     {
                         Log("IsOnline: TaskCanceledException");
-                        Thread.Sleep(1000);
+                        Task.Delay(1000).GetAwaiter().GetResult();
                     }
                     else
                     {
@@ -2010,7 +2010,7 @@ namespace TeslaLogger
                 if (ex is TaskCanceledException)
                 {
                     Log("IsOnline: TaskCanceledException");
-                    Thread.Sleep(1000);
+                    Task.Delay(1000).GetAwaiter().GetResult();
                 }
                 else
                 {
@@ -2050,7 +2050,7 @@ namespace TeslaLogger
 
                 if (resultContent2 == INSERVICE || resultContent2 == "NULL")
                 {
-                    System.Threading.Thread.Sleep(5000);
+                    Task.Delay(5000).GetAwaiter().GetResult();
                     return;
                 }
 
@@ -2811,7 +2811,7 @@ namespace TeslaLogger
                 if (resultContent == null || resultContent == "NULL" )
                 {
                     Log("IsDriving = NULL!");
-                    Thread.Sleep(10000);
+                    Task.Delay(10000).GetAwaiter().GetResult();
                 }
                 else
                 {
@@ -2846,31 +2846,31 @@ namespace TeslaLogger
                     if (inhalt.Contains("vehicle unavailable:"))
                     {
                         Log("vehicle unavailable");
-                        System.Threading.Thread.Sleep(5000);
+                        Task.Delay(5000).GetAwaiter().GetResult();
                         return;
                     }
                     else if (inhalt.Contains("upstream internal error"))
                     {
                         Log("upstream internal error");
-                        System.Threading.Thread.Sleep(10000);
+                        Task.Delay(10000).GetAwaiter().GetResult();
                         return;
                     }
                     else if (inhalt.Contains("Connection refused"))
                     {
                         Log("Connection refused");
-                        System.Threading.Thread.Sleep(30000);
+                        Task.Delay(30000).GetAwaiter().GetResult();
                         return;
                     }
                     else if (inhalt.Contains("No route to host"))
                     {
                         Log("No route to host");
-                        System.Threading.Thread.Sleep(60000);
+                        Task.Delay(60000).GetAwaiter().GetResult();
                         return;
                     }
                     else if (inhalt.Contains("You have been temporarily blocked for making too many requests!"))
                     {
                         Log("temporarily blocked for making too many requests!");
-                        System.Threading.Thread.Sleep(30000);
+                        Task.Delay(30000).GetAwaiter().GetResult();
                         return;
                     }
                 }
@@ -2922,7 +2922,7 @@ namespace TeslaLogger
                     // otherwise skip
                     if (!car.IsInService() && !car.CurrentJSON.current_falling_asleep && !(Tools.StreamingPos() && car.CurrentJSON.current_driving))
                     {
-                        Thread.Sleep(100);
+                        Task.Delay(100).GetAwaiter().GetResult();
                         continue;
                     }
 
@@ -2930,7 +2930,7 @@ namespace TeslaLogger
 
                     if (car.GetCurrentState() == Car.TeslaState.Sleep)
                     {
-                        Thread.Sleep(1000);
+                        Task.Delay(1000).GetAwaiter().GetResult();
                         continue;
                     }
 
@@ -2954,7 +2954,7 @@ namespace TeslaLogger
                     while (!stopStreaming && ws.State == System.Net.WebSockets.WebSocketState.Connecting)
                     {
                         System.Diagnostics.Debug.WriteLine("Connecting");
-                        Thread.Sleep(1000);
+                        Task.Delay(1000).GetAwaiter().GetResult();
                     }
 
                     ArraySegment<byte> bufferPing = new ArraySegment<byte>(Encoding.ASCII.GetBytes("PING"));
@@ -2967,7 +2967,7 @@ namespace TeslaLogger
 
                     while (!stopStreaming && ws.State == System.Net.WebSockets.WebSocketState.Open)
                     {
-                        Thread.Sleep(100);
+                        Task.Delay(100).GetAwaiter().GetResult();
                         var cts = new CancellationTokenSource(10000);
                         try
                         {
@@ -3028,7 +3028,7 @@ namespace TeslaLogger
 
                                                 while (!stopStreaming)
                                                 {
-                                                    Thread.Sleep(10000);
+                                                    Task.Delay(10000).GetAwaiter().GetResult();
 
                                                     if (lastTeslaToken != Tesla_token)
                                                     {
@@ -3059,7 +3059,7 @@ namespace TeslaLogger
                                                 }
                                                 car.Log("Exit streaming while loop wait for token refresh");
 
-                                                Thread.Sleep(10000);
+                                                Task.Delay(10000).GetAwaiter().GetResult();
                                             }
                                         }
                                         else
@@ -3087,7 +3087,7 @@ namespace TeslaLogger
                             }
                         }
 
-                        Thread.Sleep(10);
+                        Task.Delay(10).GetAwaiter().GetResult();
                         //ws.SendAsync(bufferPing, System.Net.WebSockets.WebSocketMessageType.Text, true, CancellationToken.None);
                         // Logfile.ExceptionWriter(null, r);
                     }
@@ -3102,7 +3102,7 @@ namespace TeslaLogger
                     DrivingOrChargingByStream = false;
                     System.Diagnostics.Debug.WriteLine(e.Message);
                     Log("Stream: Timeout");
-                    Thread.Sleep(10000);
+                    Task.Delay(10000).GetAwaiter().GetResult();
                 }
                 catch (AggregateException e)
                 {
@@ -3113,7 +3113,7 @@ namespace TeslaLogger
                             DrivingOrChargingByStream = false;
                             System.Diagnostics.Debug.WriteLine(e.Message);
                             Log("Stream: Timeout");
-                            Thread.Sleep(10000);
+                            Task.Delay(10000).GetAwaiter().GetResult();
                         }
                         else
                         {
@@ -3141,7 +3141,7 @@ namespace TeslaLogger
                     else if (ex.Message == "Vehicle is offline")
                     {
                         car.Log("Stream Data Error: Vehicle is offline");
-                        Thread.Sleep(30000);
+                        Task.Delay(30000).GetAwaiter().GetResult();
                     }
                     else
                     {
@@ -3156,7 +3156,7 @@ namespace TeslaLogger
                             SubmitExceptionlessClientWithResultContent(ex, resultContent);
                     }
 
-                    Thread.Sleep(10000);
+                    Task.Delay(10000).GetAwaiter().GetResult();
                 }
                 finally
                 {
@@ -3542,7 +3542,7 @@ namespace TeslaLogger
             {
                 Tools.SetThreadEnUS();
 
-                Thread.Sleep(5000); // Sleep to not get banned by Nominatim
+                await Task.Delay(5000); // Sleep to not get banned by Nominatim
 
                 using (WebClient webClient = new WebClient())
                 {
@@ -3608,7 +3608,7 @@ namespace TeslaLogger
                     SqlDataReader dr = cmd.ExecuteReader();
                     while (dr.Read())
                     {
-                        Thread.Sleep(10000); // Sleep to not get banned by Nominatim !
+                        Task.Delay(10000).GetAwaiter().GetResult(); // Sleep to not get banned by Nominatim !
 
                         double lat = (double)dr[0];
                         double lng = (double)dr[1];
@@ -3673,7 +3673,7 @@ namespace TeslaLogger
                     MySqlDataReader dr = SQLTracer.TraceDR(cmd);
                     while (dr.Read())
                     {
-                        Thread.Sleep(10000); // Sleep to not get banned by Nominatim !
+                        Task.Delay(10000).GetAwaiter().GetResult(); // Sleep to not get banned by Nominatim !
                         try
                         {
                             if (!(dr["Start_address"] != DBNull.Value && dr["Start_address"].ToString().Length > 0))
@@ -3726,7 +3726,7 @@ namespace TeslaLogger
                     MySqlDataReader dr = SQLTracer.TraceDR(cmd);
                     while (dr.Read())
                     {
-                        Thread.Sleep(10000); // Sleep to not get banned by Nominatim !
+                        Task.Delay(10000).GetAwaiter().GetResult(); // Sleep to not get banned by Nominatim !
                         try
                         {
                             int id = (int)dr[0];
@@ -3897,7 +3897,7 @@ WHERE
         {
             try
             {
-                Thread.Sleep(1);
+                Task.Delay(1).GetAwaiter().GetResult();
                 double lat = (double)dr["lat"];
                 double lng = (double)dr["lng"];
                 int id = (int)dr["id"];
@@ -4004,7 +4004,7 @@ WHERE
                 if (ex is TaskCanceledException)
                 {
                     Log("GetIdealBatteryRangekm: TaskCanceledException");
-                    Thread.Sleep(1000);
+                    Task.Delay(1000).GetAwaiter().GetResult();
                 }
                 else
                 {
@@ -4091,7 +4091,7 @@ WHERE
                 if (ex is TaskCanceledException)
                 {
                     Log("GetOdometerAsync: TaskCanceledException");
-                    Thread.Sleep(1000);
+                    await Task.Delay(1000);
                 }
                 else
                 {
@@ -4330,7 +4330,7 @@ WHERE
                             startRequestTimeout = DateTime.UtcNow;
 
                         Log("Result.Statuscode: " + (int)result.StatusCode + " (" + result.StatusCode.ToString() + ") cmd: " + cmd);
-                        Thread.Sleep(1000);
+                        Task.Delay(1000).GetAwaiter().GetResult();
                     }
                     else if (result.StatusCode == HttpStatusCode.NotFound)
                     {
@@ -4340,7 +4340,7 @@ WHERE
 
                         Log("Result.Statuscode: " + (int)result.StatusCode + " (" + result.StatusCode.ToString() + ") cmd: " + cmd + " Retry: " + HttpNotFoundCounter);
 
-                        Thread.Sleep(1000);
+                        Task.Delay(1000).GetAwaiter().GetResult();
 
                         if (HttpNotFoundCounter > 5)
                         {
@@ -4386,7 +4386,7 @@ WHERE
                         Log(l1 + l);
                         car.CurrentJSON.FatalError += " TooManyRequests";
                         car.CurrentJSON.CreateCurrentJSON();
-                        Thread.Sleep(sleep);
+                        Task.Delay(sleep).GetAwaiter().GetResult();
                         car.CurrentJSON.FatalError = car.CurrentJSON.FatalError.Replace(" TooManyRequests", "");
                         car.CurrentJSON.CreateCurrentJSON();
                     }
@@ -4590,7 +4590,7 @@ WHERE
             while (cacheValue != null)
             {
                 Log($"waiting ... another command is still running: {cacheValue.ToString()}");
-                Thread.Sleep(1000);
+                await Task.Delay(1000);
                 cacheValue = MemoryCache.Default.Get(cacheKey);
             }
             MemoryCache.Default.Add(cacheKey, cmd, DateTime.Now.AddSeconds(2.5));
