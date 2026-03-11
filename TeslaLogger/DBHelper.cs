@@ -139,7 +139,7 @@ WHERE
                     int MaxPosid = GetMaxPosid();
                     await CloseStateAsync(MaxPosid);
 
-                    car.Log("state: " + state);
+                    car.Log($"state: {state}");
 
                     using (MySqlCommand cmd = new MySqlCommand(@"
 INSERT
@@ -265,7 +265,7 @@ WHERE
                         cmd.Parameters.AddWithValue("@id", j["id"]);
                         int done = SQLTracer.TraceNQ(cmd, out _);
 
-                        Logfile.Log("SetCost OK: " + done);
+                        Logfile.Log($"SetCost OK: {done}");
                     }
                 }
             }
@@ -1461,7 +1461,7 @@ WHERE
         {
             try
             {
-                string cacheKey = "TPMS_" + TireId + "_" + car.CarInDB;
+                string cacheKey = $"TPMS_{TireId}_{car.CarInDB}";
                 object cacheValue = MemoryCache.Default.Get(cacheKey);
                 if (cacheValue != null)
                     return;
@@ -1567,7 +1567,7 @@ HAVING
                         cmd.Parameters.AddWithValue("@tesla_token_expire", car.webhelper.nextTeslaTokenFromRefreshToken);
                         int done = SQLTracer.TraceNQ(cmd, out _);
 
-                        car.Log("update tesla_token OK: " + done + " - " + car.webhelper.Tesla_token.Substring(0,20) + "xxxxxx");
+                        car.Log($"update tesla_token OK: {done} - {car.webhelper.Tesla_token.Substring(0, 20)}xxxxxx");
 
                         car.CreateExeptionlessLog("Tesla Token", "Update Tesla Token OK", Exceptionless.Logging.LogLevel.Info).Submit();
 
@@ -1618,7 +1618,7 @@ HAVING
 
                         int done = SQLTracer.TraceNQ(cmd, out _);
 
-                        car.Log("update tesla_token OK: " + done);
+                        car.Log($"update tesla_token OK: {done}");
                     }
                 }
             }
@@ -1685,7 +1685,7 @@ HAVING
                         cmd.Parameters.AddWithValue("@refresh_token", refresh_token);
                         int done = SQLTracer.TraceNQ(cmd, out _);
 
-                        car.Log("UpdateRefreshToken OK: " + done + " - " + refresh_token.Substring(0, 20) + "xxxxxxxx");
+                        car.Log($"UpdateRefreshToken OK: {done} - {refresh_token.Substring(0, 20)}xxxxxxxx");
                     }
                 }
             }
@@ -3301,7 +3301,7 @@ LIMIT 1", con)
                         meter_vehicle_kwh_start = v.GetVehicleMeterReading_kWh();
                         meter_utility_kwh_start = v.GetUtilityMeterReading_kWh();
 
-                        car.Log("Meter: " + v.ToString());
+                        car.Log($"Meter: {v}");
                     }
                 }
             }
@@ -3472,8 +3472,8 @@ WHERE
                         car.Log($"StartChargingState Task poslat: {poslat} poslng: {poslng}");
                     }
 
-                    Tools.DebugLog("fast_charger_present: " + wh.fast_charger_present.ToString());
-                    Tools.DebugLog("fast_charger_brand: " + wh.fast_charger_brand.ToString());
+                    Tools.DebugLog($"fast_charger_present: {wh.fast_charger_present}");
+                    Tools.DebugLog($"fast_charger_brand: {wh.fast_charger_brand}");
                     if (wh.fast_charger_present && wh.fast_charger_brand == "Tesla")
                     {
                         if (!String.IsNullOrEmpty(car.SuCBingoUser) && !String.IsNullOrEmpty(car.SuCBingoApiKey))
@@ -3501,7 +3501,7 @@ WHERE
 
         public void CloseDriveState(DateTime EndDate)
         {
-            car.Log("CloseDriveState EndDate: " + EndDate.ToString("yyyy-MM-dd HH:mm:ss", Tools.ciEnUS));
+            car.Log($"CloseDriveState EndDate: {EndDate:yyyy-MM-dd HH:mm:ss}");
 
 
             int StartPos = 0;
@@ -3951,7 +3951,7 @@ WHERE
                     {
                         if (new System.IO.FileInfo(f).Length < 100)
                         {
-                            Logfile.Log("Found Empty SRTM File: " + f);
+                            Logfile.Log($"Found Empty SRTM File: {f}");
 
                             System.IO.File.Delete(f);
                         }
@@ -4486,7 +4486,7 @@ WHERE
             if (!InsertDrivestate(now, posID)) // if starting a drive state is failing because of duplicate startposid, the pos will be duplicated and retry
             {
                 posID = (int)DBHelper.DuplicatePos(posID);
-                car.Log("DuplicatePos: " + posID);
+                car.Log($"DuplicatePos: {posID}");
                 if (posID > 0)
                     InsertDrivestate(now, posID);
             }
@@ -5392,7 +5392,7 @@ WHERE
                 using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
                 {
                     con.Open();
-                    using (MySqlCommand cmd = new MySqlCommand("SHOW COLUMNS FROM `" + table + "` LIKE '" + column + "';", con))
+                    using (MySqlCommand cmd = new MySqlCommand($"SHOW COLUMNS FROM `{table}` LIKE '{column}';", con))
                     {
                         MySqlDataReader dr = SQLTracer.TraceDR(cmd);
                         if (dr.Read())
@@ -5433,7 +5433,7 @@ WHERE
             catch (Exception ex)
             {
                 ex.ToExceptionless().FirstCarUserID().Submit();
-                Logfile.Log("Error in: " + sql);
+                Logfile.Log($"Error in: {sql}");
                 Logfile.ExceptionWriter(ex, sql);
                 throw;
             }
@@ -5460,7 +5460,7 @@ WHERE
             catch (Exception ex)
             {
                 ex.ToExceptionless().FirstCarUserID().Submit();
-                Logfile.Log("Error in: " + sql);
+                Logfile.Log($"Error in: {sql}");
                 Logfile.ExceptionWriter(ex, sql);
                 throw;
             }
@@ -5487,7 +5487,7 @@ WHERE
             catch (Exception ex)
             {
                 ex.ToExceptionless().FirstCarUserID().Submit();
-                Logfile.Log("Error in: " + sql);
+                Logfile.Log($"Error in: {sql}");
                 Logfile.ExceptionWriter(ex, sql);
                 throw;
             }
@@ -5597,7 +5597,7 @@ WHERE
 
         internal int GetScanMyTeslaSignalsLastWeek()
         {
-            string cacheKey = "GetScanMyTeslaSignalsLastWeek_" + car.CarInDB;
+            string cacheKey = $"GetScanMyTeslaSignalsLastWeek_{car.CarInDB}";
             object cacheValue = MemoryCache.Default.Get(cacheKey);
             if (cacheValue != null)
             {
@@ -5642,7 +5642,7 @@ WHERE
 
         internal int GetScanMyTeslaPacketsLastWeek()
         {
-            string cacheKey = "GetScanMyTeslaPacketsLastWeek_" + car.CarInDB;
+            string cacheKey = $"GetScanMyTeslaPacketsLastWeek_{car.CarInDB}";
             object cacheValue = MemoryCache.Default.Get(cacheKey);
             if (cacheValue != null)
             {
@@ -5692,7 +5692,7 @@ FROM
 
         public int GetAvgMaxRage()
         {
-            string cacheKey = "GetAvgMaxRage_" + car.CarInDB;
+            string cacheKey = $"GetAvgMaxRage_{car.CarInDB}";
             object cacheValue = MemoryCache.Default.Get(cacheKey);
             if (cacheValue != null)
             {
@@ -5945,7 +5945,7 @@ WHERE
             {
                 using (DataTable dt = new DataTable())
                 {
-                    string sql = @"
+                    string sql = $@"
 SELECT
     SUM(km_diff) AS sumkm,
     AVG(km_diff) AS avgkm,
@@ -5965,7 +5965,7 @@ ON
 WHERE
     km_diff BETWEEN 100 AND 800
     AND pos.battery_level IS NOT NULL
-    AND trip.carid = " + car.CarInDB;
+    AND trip.carid = {car.CarInDB};";
 
                     using (MySqlDataAdapter da = new MySqlDataAdapter(sql, DBConnectionstring))
                     {
@@ -6354,13 +6354,13 @@ CHANGE {columnname} {columnname} {columntype} CHARACTER SET utf8mb4 COLLATE utf8
                 {
                     StringBuilder migrationlog = new StringBuilder();
                     Logfile.Log("MigrateFloorRound() start");
-                    migrationlog.Append($"{DateTime.Now} MigrateFloorRound() start" + Environment.NewLine);
+                    migrationlog.Append($"{DateTime.Now} MigrateFloorRound() start{Environment.NewLine}");
 
                     // add indexes to speed up things
                     Logfile.Log("MigrateFloorRound() ADD INDEX speed");
-                    migrationlog.Append($"{DateTime.Now} ADD INDEX speed" + Environment.NewLine);
+                    migrationlog.Append($"{DateTime.Now} ADD INDEX speed{Environment.NewLine}");
                     int sqlresult = ExecuteSQLQuery("ALTER TABLE pos ADD INDEX idx_migration_speed (speed)", 6000);
-                    migrationlog.Append($"{DateTime.Now} sqlresult {sqlresult}" + Environment.NewLine);
+                    migrationlog.Append($"{DateTime.Now} sqlresult {sqlresult}{Environment.NewLine}");
 
                     // get max speed
 
@@ -6390,7 +6390,7 @@ FROM
                     }
 
                     Logfile.Log($"maxspeed_kmh: {maxspeed_kmh}");
-                    migrationlog.Append($"maxspeed_kmh: {maxspeed_kmh}" + Environment.NewLine);
+                    migrationlog.Append($"maxspeed_kmh: {maxspeed_kmh}{Environment.NewLine}");
 
                     // migrate floor round error for pos.speed
 
@@ -6402,7 +6402,7 @@ FROM
                         {
                             DateTime start = DateTime.Now;
                             Logfile.Log($"MigrateFloorRound(): speed {speed_floor} -> {speed_round}");
-                            migrationlog.Append($"{DateTime.Now} speed {speed_floor} -> {speed_round}" + Environment.NewLine);
+                            migrationlog.Append($"{DateTime.Now} speed {speed_floor} -> {speed_round}{Environment.NewLine}");
                             using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
                             {
                                 con.Open();
@@ -6418,7 +6418,7 @@ WHERE
                                     cmd.Parameters.Add("speedfloor", MySqlDbType.Int32).Value = speed_floor;
                                     int updated_rows = SQLTracer.TraceNQ(cmd, out _);
                                     Logfile.Log($" rows updated: {updated_rows} duration: {(DateTime.Now - start).TotalMilliseconds}ms");
-                                    migrationlog.Append($"{DateTime.Now} rows updated: {updated_rows} duration: {(DateTime.Now - start).TotalMilliseconds}ms" + Environment.NewLine);
+                                    migrationlog.Append($"{DateTime.Now} rows updated: {updated_rows} duration: {(DateTime.Now - start).TotalMilliseconds}ms{Environment.NewLine}");
                                 }
                                 con.Close();
                             }
@@ -6450,7 +6450,7 @@ WHERE
                                         DateTime start = DateTime.Now;
                                         c.DbHelper.UpdateDriveStatistics(startpos, endpos, false);
                                         c.Log($"UpdateDriveStatistics: {startpos} -> {endpos} duration: {(DateTime.Now - start).TotalMilliseconds}ms");
-                                        migrationlog.Append($"{DateTime.Now} {c.CarInDB}# UpdateDriveStatistics: {startpos} -> {endpos} duration: {(DateTime.Now - start).TotalMilliseconds}ms" + Environment.NewLine);
+                                        migrationlog.Append($"{DateTime.Now} {c.CarInDB}# UpdateDriveStatistics: {startpos} -> {endpos} duration: {(DateTime.Now - start).TotalMilliseconds}ms{Environment.NewLine}");
                                     }
                                 }
                             }
@@ -6459,18 +6459,18 @@ WHERE
 
                     // remove indexes
                     Logfile.Log("MigrateFloorRound() DROP INDEX speed");
-                    migrationlog.Append($"{DateTime.Now} DROP INDEX speed" + Environment.NewLine);
+                    migrationlog.Append($"{DateTime.Now} DROP INDEX speed{Environment.NewLine}");
                     sqlresult = ExecuteSQLQuery("ALTER TABLE pos DROP INDEX idx_migration_speed", 6000);
-                    migrationlog.Append($"{DateTime.Now} sqlresult {sqlresult}" + Environment.NewLine);
+                    migrationlog.Append($"{DateTime.Now} sqlresult {sqlresult}{Environment.NewLine}");
 
                     // cleanup DB files
                     Logfile.Log("MigrateFloorRound() REBUILD");
-                    migrationlog.Append($"{DateTime.Now} REBUILD" + Environment.NewLine);
+                    migrationlog.Append($"{DateTime.Now} REBUILD{Environment.NewLine}");
                     sqlresult = ExecuteSQLQuery("ALTER TABLE pos FORCE", 6000);
-                    migrationlog.Append($"{DateTime.Now} sqlresult {sqlresult}" + Environment.NewLine);
+                    migrationlog.Append($"{DateTime.Now} sqlresult {sqlresult}{Environment.NewLine}");
 
                     Logfile.Log("MigrateFloorRound() finished");
-                    migrationlog.Append($"{DateTime.Now} MigrateFloorRound() finished" + Environment.NewLine);
+                    migrationlog.Append($"{DateTime.Now} MigrateFloorRound() finished{Environment.NewLine}");
 
                     // persist that migration ran successful to prevent another run
                     File.WriteAllText(migrationstatusfile, migrationlog.ToString());
@@ -7221,7 +7221,7 @@ WHERE
                                 return false;
 
                             car.FleetApiAddress = url;
-                            car.Log("FleetApiAddress: " + url);
+                            car.Log($"FleetApiAddress: {url}");
                             return true;
                         }
                     }
@@ -7380,10 +7380,10 @@ ORDER BY startdate", con))
 
         internal static long DuplicatePos(int id)
         {
-             string sql = @"INSERT INTO `pos` (`Datum`,`lat`,`lng`,`speed`,`power`,`odometer`,`ideal_battery_range_km`,`address`,`outside_temp`,`altitude`,`battery_level`,`inside_temp`,`battery_heater`,`is_preconditioning`,`sentry_mode`,`battery_range_km`,`CarID`,`AP`) 
+             string sql = $@"INSERT INTO `pos` (`Datum`,`lat`,`lng`,`speed`,`power`,`odometer`,`ideal_battery_range_km`,`address`,`outside_temp`,`altitude`,`battery_level`,`inside_temp`,`battery_heater`,`is_preconditioning`,`sentry_mode`,`battery_range_km`,`CarID`,`AP`) 
                 select now() ,`lat`,`lng`,`speed`,`power`,`odometer`,`ideal_battery_range_km`,`address`,`outside_temp`,`altitude`,`battery_level`,`inside_temp`,`battery_heater`,`is_preconditioning`,`sentry_mode`,`battery_range_km`,`CarID`,`AP`
                 from pos
-                where id = " + id;
+                where id = {id};";
 
             using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
             {
@@ -7442,7 +7442,7 @@ ORDER BY startdate", con))
                         {
                             if (dr.Read())
                             {
-                                Logfile.Log("NET8TaskerToken: true - " + dr.GetString(0));
+                                Logfile.Log($"NET8TaskerToken: true - {dr.GetString(0)}");
                                 return true;
                             }
                             else
