@@ -161,7 +161,7 @@ namespace TeslaLogger
             catch (Exception ex)
             {
                 ex.ToExceptionless().FirstCarUserID().Submit();
-                Logfile.Log("MQTT: RunMqtt Exeption: " + ex.Message);
+                Logfile.Log($"MQTT: RunMqtt Exeption: {ex.Message}");
                 Tools.DebugLog("MQTT: RunMqtt Exception", ex);
             }
         }
@@ -270,7 +270,7 @@ namespace TeslaLogger
 
                     try
                     {
-                        temp = RetrieveJsonString($"http://localhost:{httpport}/currentjson/" + carId);
+                        temp = RetrieveJsonString($"http://localhost:{httpport}/currentjson/{carId}");
 
                     }
                     catch (WebException wex) when (wex.Response is HttpWebResponse httpResponse && httpResponse.StatusCode == HttpStatusCode.NotFound)
@@ -282,7 +282,7 @@ namespace TeslaLogger
                     }
                     catch (Exception ex)
                     {
-                        Logfile.Log("MQTT: CurrentJson Exeption: " + ex.Message);
+                        Logfile.Log($"MQTT: CurrentJson Exeption: {ex.Message}");
                         Tools.DebugLog("MQTT: CurrentJson Exception", ex);
                         // ex.ToExceptionless().FirstCarUserID().Submit();
                         Task.Delay(60000).GetAwaiter().GetResult(); //wait 60 seconds after exception
@@ -308,7 +308,7 @@ namespace TeslaLogger
                                     safeValue = "50";
                                 }
 
-                                client.Publish(carTopic + "/" + keyvalue.Key, Encoding.UTF8.GetBytes(safeValue),
+                                client.Publish($"{carTopic}/{keyvalue.Key}", Encoding.UTF8.GetBytes(safeValue),
                                 MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, true);
 
                             }
@@ -330,7 +330,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
-                Logfile.Log("MQTT: Work Exeption: " + ex.Message);
+                Logfile.Log($"MQTT: Work Exeption: {ex.Message}");
                 Tools.DebugLog("MQTT: Work Exception", ex);
                 ex.ToExceptionless().FirstCarUserID().Submit();
                 Task.Delay(60000).GetAwaiter().GetResult();
@@ -399,7 +399,7 @@ namespace TeslaLogger
                     }
                     catch (Exception ex)
                     {
-                        Logfile.Log("MQTT: Subcribe exeption: " + ex.Message);
+                        Logfile.Log($"MQTT: Subcribe exeption: {ex.Message}");
                         Tools.DebugLog("MQTT: PublishReceived Exception", ex);
                         Task.Delay(20000).GetAwaiter().GetResult();
                     }
@@ -407,7 +407,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
-                Logfile.Log("MQTT: PublishReceived Exeption: " + ex.ToString());
+                Logfile.Log($"MQTT: PublishReceived Exeption: {ex}");
                 Tools.DebugLog("MQTT: PublishReceived Exception", ex);
                 ex.ToExceptionless().FirstCarUserID().Submit();
             }
@@ -446,12 +446,12 @@ namespace TeslaLogger
                             Tools.DebugLog("MQTT: not connected, connecting = true");
                             if (user != null && password != null)
                             {
-                                Logfile.Log("MQTT: Connecting with credentials: " + host + ":" + port + " with ClientID: " + newClientId);
+                                Logfile.Log($"MQTT: Connecting with credentials: {host}:{port} with ClientID: {newClientId}");
                                 client.Connect(newClientId, user, password, false, 0, true, $@"{topic}/system/status", "offline", true, 30);
                             }
                             else
                             {
-                                Logfile.Log("MQTT: Connecting without credentials: " + host + ":" + port + " with ClientID: " + newClientId);
+                                Logfile.Log($"MQTT: Connecting without credentials: {host}:{port} with ClientID: {newClientId}");
                                 client.Connect(newClientId, null, null, false, 0, true, $@"{topic}/system/status", "offline", true, 30);
                             }
 
@@ -469,7 +469,7 @@ namespace TeslaLogger
             }
             catch (WebException wex)
             {
-                Logfile.Log("MQTT: ConnectionCheck WebExeption: " + wex.Message);
+                Logfile.Log($"MQTT: ConnectionCheck WebExeption: {wex.Message}");
                 connecting = false;
                 Task.Delay(60000).GetAwaiter().GetResult();
 
@@ -494,7 +494,7 @@ namespace TeslaLogger
                     }
                 }
 
-                Logfile.Log("MQTT: ConnectionCheck Exeption: " + cex.ToString());
+                Logfile.Log($"MQTT: ConnectionCheck Exeption: {cex}");
                 connecting = false;
                 Task.Delay(60000).GetAwaiter().GetResult();
             }
@@ -513,14 +513,14 @@ namespace TeslaLogger
                 }
                 catch (WebException wex)
                 {
-                    Logfile.Log("MQTT: MQTTConnectionHandler WebExeption: " + wex.Message);
+                    Logfile.Log($"MQTT: MQTTConnectionHandler WebExeption: {wex.Message}");
                     Task.Delay(60000).GetAwaiter().GetResult();
 
                 }
                 catch (Exception ex)
                 {
                     Task.Delay(30000).GetAwaiter().GetResult();
-                    Logfile.Log("MQTT: MQTTConnectionHandler Exeption: " + ex.ToString());
+                    Logfile.Log($"MQTT: MQTTConnectionHandler Exeption: {ex}");
                 }
             }
         }
@@ -536,7 +536,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
-                Logfile.Log("MQTT: GetAllCars: " + ex.Message);
+                Logfile.Log($"MQTT: GetAllCars: {ex.Message}");
                 ex.ToExceptionless().FirstCarUserID().Submit();
                 Task.Delay(20000).GetAwaiter().GetResult();
             }
@@ -560,14 +560,14 @@ namespace TeslaLogger
 
                     if (!String.IsNullOrEmpty(vin))
                     {
-                        Logfile.Log("MQTT: car found: " + display_name);
+                        Logfile.Log($"MQTT: car found: {display_name}");
                         h.Add(vin);
                     }
                 }
             }
             catch (Exception ex)
             {
-                Logfile.Log("MQTT: HashSet Exception: " + ex);
+                Logfile.Log($"MQTT: HashSet Exception: {ex}");
                 ex.ToExceptionless().FirstCarUserID().Submit();
                 Task.Delay(20000).GetAwaiter().GetResult();
             }
