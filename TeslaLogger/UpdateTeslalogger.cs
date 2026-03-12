@@ -2816,7 +2816,7 @@ PRIMARY KEY(id)
                 return content;
             }
 
-            Regex regexAlias = new($"\\\"alias\\\":.*?\\\"" + v + "\\\"";
+            Regex regexAlias = new($"\\\"alias\\\":.*?\\\"{v}\\\"");
             string replace = $"\"alias\": \"{dictLanguage[v]}\"";
 
             return regexAlias.Replace(content, replace);
@@ -2830,7 +2830,7 @@ PRIMARY KEY(id)
                 return content;
             }
 
-            Regex regexAlias = new($"\\\"value\\\":.*?\\\"" + v + "\\\"";
+            Regex regexAlias = new($"\\\"value\\\":.*?\\\"{v}\\\"");
             string replace = $"\"value\": \"{dictLanguage[v]}\"";
 
             return regexAlias.Replace(content, replace);
@@ -2844,7 +2844,7 @@ PRIMARY KEY(id)
                 return content;
             }
 
-            Regex regexAlias = new($"\\\"name\\\":.*?\\\"" + v + "\\\"";
+            Regex regexAlias = new($"\\\"name\\\":.*?\\\"{v}\\\"");
             string replace = $"\"name\": \"{dictLanguage[v]}\"";
 
             return regexAlias.Replace(content, replace);
@@ -2878,7 +2878,7 @@ PRIMARY KEY(id)
         {
             if (!dictLanguage.ContainsKey(v))
             {
-                Logfile.Log("Key '" + v + "' not Found in Translationfile!");
+                Logfile.Log($"Key '{v}' not Found in Translationfile!");
                 return content;
             }
 
@@ -2895,7 +2895,7 @@ PRIMARY KEY(id)
         private static string ReplaceLanguageTag(ref string content, string oldtext, string newtext)
         {
             content = content.Replace($"'{oldtext}'", $"'{newtext}'");
-            return content.Replace($"\"{ oldtext}\"", $"\"{newtext}\"");
+            return content.Replace($"\"{oldtext}\"", $"\"{newtext}\"");
         }
 
         public static void Chmod(string filename, int chmod, bool logging = true)
