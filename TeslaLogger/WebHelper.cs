@@ -1667,7 +1667,7 @@ namespace TeslaLogger
                     }
                 }
 
-                Logfile.Log("Car with VIN: " + car.Vin + " not found! Display Name: " + car.DisplayName);
+                Logfile.Log($"Car with VIN: {car.Vin} not found! Display Name: {car.DisplayName}");
 
                 // DBHelper.ExecuteSQLQuery("delete from cars where id = " + car.CarInDB); 
 
@@ -3120,7 +3120,7 @@ namespace TeslaLogger
                             if (!WebHelper.FilterNetworkoutage(ex))
                                 car.CreateExceptionlessClient(e).AddObject(resultContent, "ResultContent").Submit();
 
-                            Logfile.Log("Streaming Error: " + ex.Message);
+                            Logfile.Log($"Streaming Error: {ex.Message}");
                         }
 
                         return true;
@@ -3146,7 +3146,7 @@ namespace TeslaLogger
                     else
                     {
                         System.Diagnostics.Debug.WriteLine(ex.ToString());
-                        Logfile.Log("Streaming Error: " + ex.Message);
+                        Logfile.Log($"Streaming Error: {ex.Message}");
                         if (ex.InnerException != null)
                             Logfile.Log("Streaming Error: " + ex.InnerException.Message);
 
@@ -3503,12 +3503,12 @@ namespace TeslaLogger
                     if (!string.IsNullOrEmpty(ApplicationSettings.Default.MapQuestKey))
                     {
                         MapQuestCount++;
-                        Logfile.Log("Reverse geocoding by MapQuest: " + MapQuestCount);
+                        Logfile.Log($"Reverse geocoding by MapQuest: {MapQuestCount}");
                     }
                     else
                     {
                         NominatimCount++;
-                        Logfile.Log("Reverse geocoding by Nominatim: " + NominatimCount);
+                        Logfile.Log($"Reverse geocoding by Nominatim: {NominatimCount}");
                     }
 
                     return adresse;
@@ -3931,7 +3931,7 @@ WHERE
             catch (Exception ex)
             {
                 ex.ToExceptionless().FirstCarUserID().Submit();
-                Logfile.Log(" Exception in UpdateAllPOIAddresses: " + ex.Message);
+                Logfile.Log($" Exception in UpdateAllPOIAddresses: {ex.Message}");
             }
             return count;
         }
@@ -4884,7 +4884,7 @@ WHERE
                 car.CreateExceptionlessClient(ex).Submit();
                 Log("TaskerWakeupToken Exception: " + ex.Message);
                 ExceptionWriter(ex, "TaskerWakeupToken Exception");
-                Logfile.Log("TaskerWakeupToken Exception: " + ex.ToString());
+                Logfile.Log($"TaskerWakeupToken Exception: {ex.ToString()}");
             }
 
             return false;
@@ -5101,13 +5101,13 @@ WHERE
                     if (result.StatusCode == HttpStatusCode.Unauthorized)
                     {
                         string response = result.Content.ReadAsStringAsync().Result;
-                        Logfile.Log("SendDataToAbetterrouteplanner response: " + response);
+                        Logfile.Log($"SendDataToAbetterrouteplanner response: {response}");
                         car.ABRPMode = -1;
                     }
                     else if (result.StatusCode != HttpStatusCode.OK)
                     {
                         string response = result.Content.ReadAsStringAsync().Result;
-                        Logfile.Log("SendDataToAbetterrouteplanner response: " + response);
+                        Logfile.Log($"SendDataToAbetterrouteplanner response: {response}");
                     }
                     else if (result.StatusCode == HttpStatusCode.OK)
                     {
@@ -5223,10 +5223,10 @@ WHERE
                         }
                         else
                         {
-                            //Logfile.Log("SuperchargeBingo: Checkin not OK, response: " + response);
+                            //Logfile.Log($"SuperchargeBingo: Checkin not OK, response: {response}");
                             dynamic jsonResult = JsonConvert.DeserializeObject(response);
                             dynamic message = jsonResult["message"];
-                            Logfile.Log("SuperchargeBingo: Checkin Error: " + message);
+                            Logfile.Log($"SuperchargeBingo: Checkin Error: {message}");
                             Tools.DebugLog($"SuperchargeBingo error {json}");
                         }
                     }
