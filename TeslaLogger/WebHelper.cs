@@ -212,7 +212,7 @@ namespace TeslaLogger
 
                     if (reply.Contains("not found") || reply.Contains("never!"))
                     {
-                        Log("LastTaskerToken not found - Stop using fast TaskerToken request! Reply: " + reply);
+                        Log($"LastTaskerToken not found - Stop using fast TaskerToken request! Reply: {reply}");
                         car.UseTaskerToken = false;
                         return;
                     }
@@ -221,14 +221,14 @@ namespace TeslaLogger
                     var ts = DateTime.Now - dt;
                     if (ts.TotalDays > 2)
                     {
-                        Log("LastTaskerToken: " + reply + " Stop using fast TaskerToken request!");
+                        Log($"LastTaskerToken: {reply} Stop using fast TaskerToken request!");
                         car.UseTaskerToken = false;
                     }
                     else
                     {
                         if (!car.UseTaskerToken)
                         {
-                            Log("LastTaskerToken: " + reply + " Start using fast TaskerToken request!");
+                            Log($"LastTaskerToken: {reply} Start using fast TaskerToken request!");
                             car.UseTaskerToken = true;
                         }
                     }
@@ -276,14 +276,14 @@ namespace TeslaLogger
                     Tesla_token = car.Tesla_Token;
                     lastTokenRefresh = car.Tesla_Token_Expire;
 
-                    Log("Restore Token OK. Valid: " + car.Tesla_Token_Expire.ToString(Tools.ciEnUS));
+                    Log($"Restore Token OK. Valid: {car.Tesla_Token_Expire.ToString(Tools.ciEnUS)}");
                     return true;
 
                 /*
                 }
                 else
                 {
-                    Log("Restore Token too old! " + car.Tesla_Token_Expire.ToString(Tools.ciEnUS));
+                    Log($"Restore Token too old! {car.Tesla_Token_Expire.ToString(Tools.ciEnUS)}");
                 }*/
 
             }
@@ -291,7 +291,7 @@ namespace TeslaLogger
             {
                 car.CreateExceptionlessClient(ex).Submit();
 
-                Log("Error in RestoreToken: " + ex.Message);
+                Log($"Error in RestoreToken: {ex.Message}");
                 ex.ToExceptionless().SetUserIdentity(car.TaskerHash).Submit();
             }
 
@@ -414,7 +414,7 @@ namespace TeslaLogger
                     return "NULL";
                 }
 
-                Log("Error in GetTokenAsync: " + ex.Message);
+                Log($"Error in GetTokenAsync: {ex.Message}");
                 ExceptionWriter(ex, resultContent);
 
                 ex.ToExceptionless().SetUserIdentity(car.TaskerHash).AddObject(resultContent, "ResultContent").Submit();
@@ -489,7 +489,7 @@ namespace TeslaLogger
 
                             HttpStatusCode = (int)result.StatusCode;
 
-                            car.Log("HttpStatus: " + result.StatusCode.ToString());
+                            car.Log($"HttpStatus: {result.StatusCode}");
 
                             dynamic jsonResult = JsonConvert.DeserializeObject(resultContent);
 
@@ -498,8 +498,8 @@ namespace TeslaLogger
                                 string error = jsonResult["error"];
                                 string error_description = jsonResult["error_description"];
 
-                                car.Log("ResultContent UpdateTeslaTokenFromRefreshToken: " + resultContent);
-                                car.CreateExeptionlessLog("UpdateTeslaTokenFromRefreshToken", "Error: " + error, Exceptionless.Logging.LogLevel.Error)
+                                car.Log($"ResultContent UpdateTeslaTokenFromRefreshToken: {resultContent}");
+                                car.CreateExeptionlessLog("UpdateTeslaTokenFromRefreshToken", $"Error: {error}", Exceptionless.Logging.LogLevel.Error)
                                     .AddObject(error_description, "error_description")
                                     .AddObject(HttpStatusCode, "HttpStatusCode")
                                     .AddObject(resultContent, "resultContent")
@@ -526,7 +526,7 @@ namespace TeslaLogger
                                     nextTeslaTokenFromRefreshToken = t;
                                 }
 
-                                Log("access token expires: " + nextTeslaTokenFromRefreshToken.ToLocalTime());
+                                Log($"access token expires: {nextTeslaTokenFromRefreshToken.ToLocalTime()}");
                             }
 
                             SetNewAccessToken(Token);
@@ -587,7 +587,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
-                car.Log("SetNewAccessToken: " + ex.ToString());
+                car.Log($"SetNewAccessToken: {ex.ToString()}");
             }
         }
 
@@ -626,7 +626,7 @@ namespace TeslaLogger
                             }
 
                             car.FleetApiAddress = fleeturl;
-                            car.Log("FleetApiAddress: " + fleeturl);
+                            car.Log($"FleetApiAddress: {fleeturl}");
                             car.DbHelper.UpdateCarColumn("fleetAPIaddress", fleeturl);
                             return fleeturl;
                         }
@@ -643,7 +643,7 @@ namespace TeslaLogger
                         }
 
                         car.CreateExeptionlessLog("GetRegion", "Error", LogLevel.Fatal).AddObject((int)response.StatusCode + " / " + response.StatusCode.ToString(), "StatusCode").Submit();
-                        Log("Error getting Region: " + (int)response.StatusCode + " / " + response.StatusCode.ToString() + " result: " + result);
+                        Log($"Error getting Region: {(int)response.StatusCode} / {response.StatusCode} result: {result}");
                         return "";
                     }
                 }
@@ -1319,7 +1319,7 @@ namespace TeslaLogger
                     if (r1temp == null)
                     {
                         if (resultContent != null)
-                            car.Log("GetVehicles: " + resultContent);
+                            car.Log($"GetVehicles: {resultContent}");
 
                         car.CurrentJSON.FatalError = "Car not found!";
                         car.CurrentJSON.CreateCurrentJSON();
@@ -1330,7 +1330,7 @@ namespace TeslaLogger
                     /*
                     if (car.CarInAccount >= r1temp.Count)
                     {
-                        Log("Car # " + car.CarInAccount + " not exists!");
+                        Log($"Car # {car.CarInAccount} not exists!");
                         ListCarsInAccount(r1temp);
 
                         return "NULL";
@@ -1341,7 +1341,7 @@ namespace TeslaLogger
 
                     if (r2 == null)
                     {
-                        Log("Car VIN: " + car.Vin + " not exists!");
+                        Log($"Car VIN: {car.Vin} not exists!");
                         return "NULL";
                     }
 
@@ -1364,7 +1364,7 @@ namespace TeslaLogger
                     }
 
 
-                    Log("display_name: " + display_name);
+                    Log($"display_name: {display_name}");
 
                     /* TODO not needed anymore?
                     try
@@ -1378,7 +1378,7 @@ namespace TeslaLogger
                     */
 
                     string vin = r2["vin"].ToString();
-                    Log("vin: " + Tools.ObfuscateVIN(vin));
+                    Log($"vin: {Tools.ObfuscateVIN(vin)}");
 
                     if (car.Vin != vin)
                     {
@@ -1394,10 +1394,10 @@ namespace TeslaLogger
                     }
 
                     Tesla_id = r2["id"].ToString();
-                    Log("id: " + Tools.ObfuscateString(Tesla_id));
+                    Log($"id: {Tools.ObfuscateString(Tesla_id)}");
 
                     Tesla_vehicle_id = r2["vehicle_id"].ToString();
-                    Log("vehicle_id: " + Tools.ObfuscateString(Tesla_vehicle_id));
+                    Log($"vehicle_id: {Tools.ObfuscateString(Tesla_vehicle_id)}");
 
                     byte[] tempTasker = Encoding.UTF8.GetBytes(vin + car.TeslaName);
 
@@ -1429,7 +1429,7 @@ namespace TeslaLogger
                             CheckUseTaskerToken();
                         }
 
-                        Log("Tasker Config:\r\n Server Port: https://teslalogger.de\r\n Path: wakeup.php\r\n Attribute: t=" + car.TaskerHash);
+                        Log($"Tasker Config:\r\n Server Port: https://teslalogger.de\r\n Path: wakeup.php\r\n Attribute: t={car.TaskerHash}");
 
                         /*
                         try
@@ -1457,7 +1457,7 @@ namespace TeslaLogger
                     if (resultContent.IndexOf("Retry Later", StringComparison.OrdinalIgnoreCase) >= 0)
                     {
                         int sleep = random.Next(10000) + 10000;
-                        Log("GetVehicles Error: Retry Later - Sleep " + sleep);
+                        Log($"GetVehicles Error: Retry Later - Sleep {sleep}");
 
                         Task.Delay(sleep).GetAwaiter().GetResult();
                     }
@@ -1471,10 +1471,10 @@ namespace TeslaLogger
                         {
                             if (!(ex is AggregateException))
                             {
-                                Log("GetVehicles Error: " + ex.Message);
+                                Log($"GetVehicles Error: {ex.Message}");
                             }
                             else
-                                Log("GetVehicles Error: " + ex.Message);
+                                Log($"GetVehicles Error: {ex.Message}");
 
                             ex = ex.InnerException;
                         }
@@ -1791,7 +1791,7 @@ namespace TeslaLogger
 
                 if (resultContent.Contains("upstream connect error or disconnect"))
                 {
-                    Log("isOnline Result Content: " + resultContent);
+                    Log($"isOnline Result Content: {resultContent}");
                     Task.Delay(5000).GetAwaiter().GetResult();
                     return "NULL";
                 }
@@ -1806,7 +1806,7 @@ namespace TeslaLogger
                 if (resultContent.Contains("Retry later"))
                 {
                     int sleep = random.Next(10000) + 10000;
-                    Log("isOnline: Retry later - Sleep: " + sleep);
+                    Log($"isOnline: Retry later - Sleep: {sleep}");
                     Task.Delay(sleep).GetAwaiter().GetResult();
                     return "NULL";
                 }
@@ -1814,7 +1814,7 @@ namespace TeslaLogger
                 if (resultContent.Contains("upstream internal error"))
                 {
                     int sleep = random.Next(10000) + 10000;
-                    Log("isOnline: upstream internal error - Sleep: " + sleep);
+                    Log($"isOnline: upstream internal error - Sleep: {sleep}");
                     Task.Delay(sleep).GetAwaiter().GetResult();
                     return "NULL";
                 }
@@ -1850,7 +1850,7 @@ namespace TeslaLogger
 
                 if (response == null && resultContent?.Contains("not found") == true)
                 {
-                    Log("IsOnline response = NULL: " + resultContent);
+                    Log($"IsOnline response = NULL: {resultContent}");
 
                     car.CreateExeptionlessLog("WebHelper", "IsOnline:Not Found", Exceptionless.Logging.LogLevel.Warn).AddObject(resultContent, "resultContent").Submit();
                     car.Restart("IsOnline: not found", 0);
@@ -1931,7 +1931,7 @@ namespace TeslaLogger
                     {
                         if (car.Battery != battery[0])
                         {
-                            Log("Battery: " + battery[0] + " / " + car.Model);
+                            Log($"Battery: {battery[0]} / {car.Model}");
                             car.Battery = battery[0];
 
                             car.WriteSettings();
@@ -1948,7 +1948,7 @@ namespace TeslaLogger
                     }
                     else if (state == "unknown")
                     {
-                        Log("unknown state " + unknownStateCounter);
+                        Log($"unknown state {unknownStateCounter}");
 
                         ExceptionWriter(new Exception("unknown state"), resultContent);
 
@@ -1958,7 +1958,7 @@ namespace TeslaLogger
                         {
                             /*
                             string r = Wakeup().Result;
-                            Log("WakupResult: " + r);
+                            Log($"WakupResult: {r}");
                             */
                         }
                         else
@@ -2604,7 +2604,7 @@ namespace TeslaLogger
             // TODO eff in double
             if (car.ModelName != ModelName || car.WhTR.ToString(Tools.ciEnUS) != eff)
             {
-                Log("WriteCarSettings -> ModelName: " + ModelName + " eff: " + eff);
+                Log($"WriteCarSettings -> ModelName: {ModelName} eff: {eff}");
 
                 car.ModelName = ModelName;
                 car.WhTR = Convert.ToDouble(eff, Tools.ciEnUS);
@@ -2825,7 +2825,7 @@ namespace TeslaLogger
 
                     if (ts.TotalMinutes > 10)
                     {
-                        Log("No Valid IsDriving since 10min! (Exception: " + ex.GetType().ToString() + ")");
+                        Log($"No Valid IsDriving since 10min! (Exception: {ex.GetType()})");
                         SetLastShiftState("P");
                         return false;
                     }
@@ -3009,7 +3009,7 @@ namespace TeslaLogger
                                             }
                                             else
                                             {
-                                                car.Log("Stream Data Error: " + resultContent);
+                                                car.Log($"Stream Data Error: {resultContent}");
                                                 throw new Exception("unhandled vehicle_error: " + v);
                                             }
                                         }
@@ -3018,8 +3018,8 @@ namespace TeslaLogger
                                             string v = j["value"];
                                             if (v.Contains("Can't validate token"))
                                             {
-                                                Tools.DebugLog("StreamingAPI: " + v);
-                                                car.Log("StreamingApi: " + v);
+                                                Tools.DebugLog($"StreamingAPI: {v}");
+                                                car.Log($"StreamingApi: {v}");
 
                                                 // Suspend Streaming API
                                                 var lastToken = Tesla_Streamingtoken;
@@ -3064,7 +3064,7 @@ namespace TeslaLogger
                                         }
                                         else
                                         {
-                                            car.Log("Stream Data Error: " + resultContent);
+                                            car.Log($"Stream Data Error: {resultContent}");
                                             throw new Exception("unhandled error_type: " + error_type);
                                         }
                                         break;
@@ -3073,7 +3073,7 @@ namespace TeslaLogger
                                         StreamDataUpdate(value);
                                         break;
                                     default:
-                                        car.Log("unhandled: " + resultContent);
+                                        car.Log($"unhandled: {resultContent}");
                                         break;
                                 }
                             }
@@ -3136,7 +3136,7 @@ namespace TeslaLogger
                         vehicleDisconnectedCounter++;
 
                         if ((DateTime.UtcNow - lastStreamingAPIData).TotalSeconds > 180 || vehicleDisconnectedCounter % 10 == 0)
-                            car.Log("Stream Data Error: vehicle_disconnected " + vehicleDisconnectedCounter);
+                            car.Log($"Stream Data Error: vehicle_disconnected {vehicleDisconnectedCounter}");
                     }
                     else if (ex.Message == "Vehicle is offline")
                     {
@@ -3148,7 +3148,7 @@ namespace TeslaLogger
                         System.Diagnostics.Debug.WriteLine(ex.ToString());
                         Logfile.Log($"Streaming Error: {ex.Message}");
                         if (ex.InnerException != null)
-                            Logfile.Log("Streaming Error: " + ex.InnerException.Message);
+                            Logfile.Log($"Streaming Error: {ex.InnerException.Message}");
 
                         Logfile.ExceptionWriter(ex, line);
 
@@ -3202,7 +3202,7 @@ namespace TeslaLogger
 
             if (lastStreamingAPIShiftState != shift_state || (DateTime.UtcNow - lastStreamingAPILog).TotalSeconds > 30)
             {
-                Log("shift_state: " + shift_state + " Power: " + power + " Datetime: " + dt.ToString(Tools.ciDeDE));
+                Log($"shift_state: {shift_state} Power: {power} Datetime: {dt.ToString(Tools.ciDeDE)}");
                 lastStreamingAPILog = DateTime.UtcNow;
                 lastStreamingAPIShiftState = shift_state;
             }
@@ -3824,10 +3824,10 @@ DESC", con))
             catch (MySql.Data.MySqlClient.MySqlException mex)
             {
                 Tools.DebugLog(mex.ToString());
-                Tools.DebugLog("SQLState: <" + mex.SqlState + ">");
+                Tools.DebugLog($"SQLState: <{mex.SqlState}>");
                 foreach (var key in mex.Data.Keys)
                 {
-                    Tools.DebugLog("SQL Data key:<" + key + "> value:<" + mex.Data[key] + ">");
+                    Tools.DebugLog($"SQL Data key:<{key}> value:<{mex.Data[key]}>");
                 }
             }
             catch (Exception ex)
@@ -4040,7 +4040,7 @@ WHERE
                         if (sentry_mode != is_sentry_mode)
                         {
                             is_sentry_mode = sentry_mode;
-                            Log("sentry_mode: " + sentry_mode);
+                            Log($"sentry_mode: {sentry_mode}");
                         }
 
                         car.CurrentJSON.current_is_sentry_mode = sentry_mode;
@@ -4069,7 +4069,7 @@ WHERE
                     string car_version = vehicle_state["car_version"].ToString();
                     if (car.CurrentJSON.current_car_version != car_version)
                     {
-                        Log("Car Version: " + car_version);
+                        Log($"Car Version: {car_version}");
                         car.CurrentJSON.current_car_version = car_version;
 
                         car.DbHelper.SetCarVersion(car_version);
@@ -4162,7 +4162,7 @@ WHERE
                         {
                             car.CurrentJSON.current_battery_heater = (bool)battery_heater;
 
-                            Log("Battery heater: " + battery_heater);
+                            Log($"Battery heater: {battery_heater}");
                             car.CurrentJSON.CreateCurrentJSON();
 
                             // write into Database
@@ -4179,7 +4179,7 @@ WHERE
                 if (preconditioning != car.CurrentJSON.current_is_preconditioning)
                 {
                     car.CurrentJSON.current_is_preconditioning = preconditioning;
-                    Log("Preconditioning: " + preconditioning);
+                    Log($"Preconditioning: {preconditioning}");
                     car.CurrentJSON.CreateCurrentJSON();
 
                     // write into Database
@@ -4244,7 +4244,7 @@ WHERE
                     Tools.DebugLog($"GetCommand #{car.CarInDB} request: {adresse}");
                     HttpResponseMessage result = await httpClientTeslaAPI.SendAsync(request);
 
-                    car.Log("Command: " + cmd + " [" + commandCounter + "]");
+                    car.Log($"Command: {cmd} [{commandCounter}]");
 
                     if (result.IsSuccessStatusCode)
                     {
