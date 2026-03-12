@@ -5443,6 +5443,16 @@ WHERE
                     return false;
                 }
             }
+            catch (HttpRequestException httpEx)
+            {
+                httpEx.ToExceptionless().FirstCarUserID().Submit();
+                Logfile.Log($"BranchExists HTTP Error: {httpEx.Message}");
+            }
+            catch (JsonException jsonEx)
+            {
+                jsonEx.ToExceptionless().FirstCarUserID().Submit();
+                Logfile.Log($"BranchExists JSON Parse Error: {jsonEx.Message}");
+            }
             catch (Exception ex)
             {
                 ex.ToExceptionless().FirstCarUserID().Submit();
