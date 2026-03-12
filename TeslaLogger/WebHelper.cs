@@ -664,6 +664,16 @@ namespace TeslaLogger
                 System.Diagnostics.Debug.WriteLine("Thread Stop!");
                 car.CreateExceptionlessClient(ex).MarkAsCritical().Submit();
             }
+            catch (HttpRequestException httpEx)
+            {
+                car.Log($"HTTP Error in GetRegion: {httpEx.Message}");
+                car.CreateExceptionlessClient(httpEx).MarkAsCritical().Submit();
+            }
+            catch (JsonException jsonEx)
+            {
+                car.Log($"JSON Parse Error in GetRegion: {jsonEx.Message}");
+                car.CreateExceptionlessClient(jsonEx).MarkAsCritical().Submit();
+            }
             catch (Exception ex)
             {
                 car.Log(ex.ToString());
@@ -777,6 +787,20 @@ namespace TeslaLogger
             catch (ThreadAbortException)
             {
                 System.Diagnostics.Debug.WriteLine("Thread Stop!");
+            }
+            catch (HttpRequestException httpEx)
+            {
+                car.Log($"HTTP Error in UpdateTeslaTokenFromRefreshTokenFromFleetAPI: {httpEx.Message}");
+                car.CreateExceptionlessClient(httpEx).MarkAsCritical().Submit();
+                ExceptionlessClient.Default.ProcessQueueAsync();
+                Task.Delay(30000).GetAwaiter().GetResult();
+            }
+            catch (JsonException jsonEx)
+            {
+                car.Log($"JSON Parse Error in UpdateTeslaTokenFromRefreshTokenFromFleetAPI: {jsonEx.Message}");
+                car.CreateExceptionlessClient(jsonEx).MarkAsCritical().Submit();
+                ExceptionlessClient.Default.ProcessQueueAsync();
+                Task.Delay(30000).GetAwaiter().GetResult();
             }
             catch (Exception ex)
             {
@@ -892,6 +916,20 @@ namespace TeslaLogger
             catch (ThreadAbortException)
             {
                 System.Diagnostics.Debug.WriteLine("Thread Stop!");
+            }
+            catch (HttpRequestException httpEx)
+            {
+                car.Log($"HTTP Error in UpdateTeslaTokenFromRefreshTokenFromFleetAPIWithClientID: {httpEx.Message}");
+                car.CreateExceptionlessClient(httpEx).MarkAsCritical().Submit();
+                ExceptionlessClient.Default.ProcessQueueAsync();
+                Task.Delay(30000).GetAwaiter().GetResult();
+            }
+            catch (JsonException jsonEx)
+            {
+                car.Log($"JSON Parse Error in UpdateTeslaTokenFromRefreshTokenFromFleetAPIWithClientID: {jsonEx.Message}");
+                car.CreateExceptionlessClient(jsonEx).MarkAsCritical().Submit();
+                ExceptionlessClient.Default.ProcessQueueAsync();
+                Task.Delay(30000).GetAwaiter().GetResult();
             }
             catch (Exception ex)
             {
