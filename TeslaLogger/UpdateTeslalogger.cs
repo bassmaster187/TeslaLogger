@@ -294,7 +294,7 @@ namespace TeslaLogger
             catch (Exception ex)
             {
                 ex.ToExceptionless().FirstCarUserID().Submit();
-                Logfile.Log("Error in update: " + ex.ToString());
+                Logfile.Log($"Error in update: {ex}");
             }
             finally
             {
@@ -312,7 +312,7 @@ namespace TeslaLogger
             catch (Exception ex)
             {
                 ex.ToExceptionless().FirstCarUserID().Submit();
-                Logfile.Log("Error in update: " + ex.ToString());
+                Logfile.Log($"Error in update: {ex}");
             }
         }
 
@@ -1368,14 +1368,14 @@ PRIMARY KEY(id)
 
                     if (WebHelper.BranchExists(branch, out HttpStatusCode statusCode))
                     {
-                        Logfile.Log($"YOU ARE USING BRANCH: " + branch);
+                        Logfile.Log($"YOU ARE USING BRANCH: {branch}");
 
-                        GitHubURL = "https://github.com/bassmaster187/TeslaLogger/archive/refs/heads/" + branch + ".zip";
+                        GitHubURL = $"https://github.com/bassmaster187/TeslaLogger/archive/refs/heads/{branch}.zip";
                         master = branch;
                     }
                     else
                     {
-                        Logfile.Log($"BRANCH NOT EXIST: " + branch);
+                        Logfile.Log($"BRANCH NOT EXIST: {branch}");
 
                         if (statusCode == HttpStatusCode.NotFound)
                         {
@@ -1434,12 +1434,12 @@ PRIMARY KEY(id)
                             Logfile.Log($"unzip update package {updatepackage} to /etc/teslalogger/tmp/zip");
                             ZipFile.ExtractToDirectory(updatepackage, "/etc/teslalogger/tmp/zip");
                             // GitHub zip contains folder "TeslaLogger-master" so we have to move files around
-                            if (Directory.Exists("/etc/teslalogger/tmp/zip/TeslaLogger-" + master))
+                            if (Directory.Exists($"/etc/teslalogger/tmp/zip/TeslaLogger-{master}"))
                             {
-                                Logfile.Log($"move update files from /etc/teslalogger/tmp/zip/TeslaLogger-" + master + " to /etc/teslalogger/git");
+                                Logfile.Log($"move update files from /etc/teslalogger/tmp/zip/TeslaLogger-{master} to /etc/teslalogger/git");
                                 // Tools.ExecMono("mv", "/etc/teslalogger/tmp/zip/TeslaLogger-" + master + " /etc/teslalogger/git");
-                                Tools.CopyFilesRecursively(new DirectoryInfo("/etc/teslalogger/tmp/zip/TeslaLogger-" + master), new DirectoryInfo("/etc/teslalogger/git"), null, false);
-                                Directory.Delete("/etc/teslalogger/tmp/zip/TeslaLogger-" + master, true);
+                                Tools.CopyFilesRecursively(new DirectoryInfo($"/etc/teslalogger/tmp/zip/TeslaLogger-{master}"), new DirectoryInfo("/etc/teslalogger/git"), null, false);
+                                Directory.Delete($"/etc/teslalogger/tmp/zip/TeslaLogger-{master}", true);
 
                                 if (Directory.Exists("/etc/teslalogger/git/TeslaLogger/GrafanaPlugins"))
                                 {
@@ -1454,7 +1454,7 @@ PRIMARY KEY(id)
                     catch (Exception ex)
                     {
                         ex.ToExceptionless().FirstCarUserID().Submit();
-                        Logfile.Log("Exception during unzip of downloaded update package: " + ex.ToString());
+                        Logfile.Log($"Exception during unzip of downloaded update package: {ex}");
                         Logfile.ExceptionWriter(ex, "Exception during unzip of downloaded update package");
                     }
                 }
@@ -1801,12 +1801,12 @@ PRIMARY KEY(id)
 
                 DBHelper.ExecuteSQLQuery(s, 300);
 
-                ExceptionlessClient.Default.CreateFeatureUsage("Language_" + language).FirstCarUserID().Submit();
-                ExceptionlessClient.Default.CreateFeatureUsage("Power_" + power).FirstCarUserID().Submit();
-                ExceptionlessClient.Default.CreateFeatureUsage("Temperature_" + temperature).FirstCarUserID().Submit();
-                ExceptionlessClient.Default.CreateFeatureUsage("Length_" + length).FirstCarUserID().Submit();
-                ExceptionlessClient.Default.CreateFeatureUsage("Pressure_" + pressure).FirstCarUserID().Submit();
-                ExceptionlessClient.Default.CreateFeatureUsage("Range_" + Range).FirstCarUserID().Submit();
+                ExceptionlessClient.Default.CreateFeatureUsage($"Language_{language}").FirstCarUserID().Submit();
+                ExceptionlessClient.Default.CreateFeatureUsage($"Power_{power}").FirstCarUserID().Submit();
+                ExceptionlessClient.Default.CreateFeatureUsage($"Temperature_{temperature}").FirstCarUserID().Submit();
+                ExceptionlessClient.Default.CreateFeatureUsage($"Length_{length}").FirstCarUserID().Submit();
+                ExceptionlessClient.Default.CreateFeatureUsage($"Pressure_{pressure}").FirstCarUserID().Submit();
+                ExceptionlessClient.Default.CreateFeatureUsage($"Range_{Range}").FirstCarUserID().Submit();
             }
             catch (Exception ex)
             {
@@ -2394,7 +2394,7 @@ PRIMARY KEY(id)
                                 if (dictLanguage.ContainsKey("Zellspannung"))
                                 {
                                     for (int x = 1; x < 99; x++)
-                                        s = ReplaceLanguageTag(ref s, $"Zellspannung {x} [v]", dictLanguage["Zellspannung"] + " " + x + " [v]");
+                                        s = ReplaceLanguageTag(ref s, $"Zellspannung {x} [v]", $"{dictLanguage["Zellspannung"]} {x} [v]");
                                 }
                             }
                             else if (f.EndsWith("Zellspannungen 21-40 - ScanMyTesla.json", StringComparison.Ordinal))
@@ -2407,7 +2407,7 @@ PRIMARY KEY(id)
                                 if (dictLanguage.ContainsKey("Zellspannung"))
                                 {
                                     for (int x = 1; x < 99; x++)
-                                        s = ReplaceLanguageTag(ref s, $"Zellspannung {x} [v]", dictLanguage["Zellspannung"] + " " + x + " [v]");
+                                        s = ReplaceLanguageTag(ref s, $"Zellspannung {x} [v]", $"{dictLanguage["Zellspannung"]} {x} [v]");
                                 }
                             }
                             else if (f.EndsWith("Zellspannungen 41-60 - ScanMyTesla.json", StringComparison.Ordinal))
@@ -2420,7 +2420,7 @@ PRIMARY KEY(id)
                                 if (dictLanguage.ContainsKey("Zellspannung"))
                                 {
                                     for (int x = 1; x < 99; x++)
-                                        s = ReplaceLanguageTag(ref s, $"Zellspannung {x} [v]", dictLanguage["Zellspannung"] + " " + x + " [v]");
+                                        s = ReplaceLanguageTag(ref s, $"Zellspannung {x} [v]", $"{dictLanguage["Zellspannung"]} {x} [v]");
                                 }
                             }
                             else if (f.EndsWith("Zellspannungen 61-80 - ScanMyTesla.json", StringComparison.Ordinal))
@@ -2433,7 +2433,7 @@ PRIMARY KEY(id)
                                 if (dictLanguage.ContainsKey("Zellspannung"))
                                 {
                                     for (int x = 1; x < 99; x++)
-                                        s = ReplaceLanguageTag(ref s, $"Zellspannung {x} [v]", dictLanguage["Zellspannung"] + " " + x + " [v]");
+                                        s = ReplaceLanguageTag(ref s, $"Zellspannung {x} [v]", $"{dictLanguage["Zellspannung"]} {x} [v]");
                                 }
                             }
                             else if (f.EndsWith("Zellspannungen 81-99 - ScanMyTesla.json", StringComparison.Ordinal))
@@ -2446,7 +2446,7 @@ PRIMARY KEY(id)
                                 if (dictLanguage.ContainsKey("Zellspannung"))
                                 {
                                     for (int x = 1; x < 99; x++)
-                                        s = ReplaceLanguageTag(ref s, $"Zellspannung {x} [v]", dictLanguage["Zellspannung"] + " " + x + " [v]");
+                                        s = ReplaceLanguageTag(ref s, $"Zellspannung {x} [v]", $"{dictLanguage["Zellspannung"]} {x} [v]");
                                 }
                             }
                             else if (f.EndsWith("Trip Monatsstatistik.json", StringComparison.Ordinal))
@@ -2560,7 +2560,7 @@ PRIMARY KEY(id)
                 return s;
             }
 
-            s = r.Replace(s, "${1}" + v + "${3}");
+            s = r.Replace(s, $"${{1}}{v}${{3}}");
 
             return s;
         }
@@ -2728,7 +2728,7 @@ PRIMARY KEY(id)
 
                 Regex regexAlias = new("(templating.*\\\"text\\\":\\s\\\")(\\\".*?value\\\":\\s\\\")(.*?)(\\\")(.*?display_name)(.*?label\\\":\\s\\\")(.*?)(\\\")", RegexOptions.Singleline | RegexOptions.Multiline);
                 var m = regexAlias.Match(s);
-                string ret = regexAlias.Replace(s, "${1}" + name + "${2}" + id + "${4}${5}${6}" + carLabel + "${8}");
+                string ret = regexAlias.Replace(s, $"${{1}}{name}${{2}}{id}${{4}}${{5}}${{6}}{carLabel}${{8}}");
                 return ret;
             }
             catch (Exception ex)
@@ -2812,12 +2812,12 @@ PRIMARY KEY(id)
         {
             if (!dictLanguage.ContainsKey(v))
             {
-                Logfile.Log("Key '" + v + "' not Found in Translationfile! (Alias)");
+                Logfile.Log($"Key '{v}' not Found in Translationfile! (Alias)");
                 return content;
             }
 
-            Regex regexAlias = new("\\\"alias\\\":.*?\\\"" + v + "\\\"");
-            string replace = "\"alias\": \"" + dictLanguage[v] + "\"";
+            Regex regexAlias = new($"\\\"alias\\\":.*?\\\"" + v + "\\\"";
+            string replace = $"\"alias\": \"{dictLanguage[v]}\"";
 
             return regexAlias.Replace(content, replace);
         }
@@ -2826,12 +2826,12 @@ PRIMARY KEY(id)
         {
             if (!dictLanguage.ContainsKey(v))
             {
-                Logfile.Log("Key '" + v + "' not Found in Translationfile! (value)");
+                Logfile.Log($"Key '{v}' not Found in Translationfile! (value)");
                 return content;
             }
 
-            Regex regexAlias = new("\\\"value\\\":.*?\\\"" + v + "\\\"");
-            string replace = "\"value\": \"" + dictLanguage[v] + "\"";
+            Regex regexAlias = new($"\\\"value\\\":.*?\\\"" + v + "\\\"";
+            string replace = $"\"value\": \"{dictLanguage[v]}\"";
 
             return regexAlias.Replace(content, replace);
         }
@@ -2840,12 +2840,12 @@ PRIMARY KEY(id)
         {
             if (!dictLanguage.ContainsKey(v))
             {
-                Logfile.Log("Key '" + v + "' not Found in Translationfile! (name)");
+                Logfile.Log($"Key '{v}' not Found in Translationfile! (name)");
                 return content;
             }
 
-            Regex regexAlias = new("\\\"name\\\":.*?\\\"" + v + "\\\"");
-            string replace = "\"name\": \"" + dictLanguage[v] + "\"";
+            Regex regexAlias = new($"\\\"name\\\":.*?\\\"" + v + "\\\"";
+            string replace = $"\"name\": \"{dictLanguage[v]}\"";
 
             return regexAlias.Replace(content, replace);
         }
@@ -2854,12 +2854,12 @@ PRIMARY KEY(id)
         {
             if (!dictLanguage.ContainsKey(v))
             {
-                Logfile.Log("Key '" + v + "' not Found in Translationfile! (title)");
+                Logfile.Log($"Key '{v}' not Found in Translationfile! (title)");
                 return content;
             }
 
-            Regex regexAlias = new("\\\"title\\\":.*?\\\"" + v + "\\\"");
-            string replace = "\"title\": \"" + dictLanguage[v] + "\"";
+            Regex regexAlias = new($"\\\"title\\\":.*?\\\"" + v + "\\\"");
+            string replace = $"\"title\": \"{dictLanguage[v]}\"";
 
             return regexAlias.Replace(content, replace);
         }
@@ -2894,8 +2894,8 @@ PRIMARY KEY(id)
 
         private static string ReplaceLanguageTag(ref string content, string oldtext, string newtext)
         {
-            content = content.Replace("'" + oldtext + "'", "'" + newtext + "'");
-            return content.Replace("\"" + oldtext + "\"", "\"" + newtext + "\"");
+            content = content.Replace($"'{oldtext}'", $"'{newtext}'");
+            return content.Replace($"\"{ oldtext}\"", $"\"{newtext}\"");
         }
 
         public static void Chmod(string filename, int chmod, bool logging = true)
@@ -2918,7 +2918,7 @@ PRIMARY KEY(id)
                 })
                 {
                     proc.StartInfo.FileName = "chmod";
-                    proc.StartInfo.Arguments = chmod + " " + filename;
+                    proc.StartInfo.Arguments = $"{chmod} {filename}";
                     proc.Start();
                     proc.WaitForExit();
                 }
