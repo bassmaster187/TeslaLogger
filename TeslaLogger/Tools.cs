@@ -221,7 +221,7 @@ namespace TeslaLogger
                     proc.StartInfo.UseShellExecute = false;
                     proc.StartInfo.RedirectStandardOutput = true;
                     proc.StartInfo.FileName = "mono";
-                    proc.StartInfo.Arguments = OVMSClientPath + " nodate";
+                    proc.StartInfo.Arguments = $"{OVMSClientPath} nodate";
 
                     proc.Start();
 
@@ -2029,9 +2029,9 @@ WHERE
         {
             bool filesFoundForDeletion = false;
             int countDeletedFiles = 0;
-            if (Directory.Exists(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "/Exception"))
+            if (Directory.Exists($"{Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)}/Exception"))
             {
-                foreach (string fs in Directory.EnumerateFiles(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "/Exception"))
+                foreach (string fs in Directory.EnumerateFiles($"{Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)}/Exception"))
                 {
                     if ((DateTime.Now - File.GetLastWriteTime(fs)).TotalDays > 30)
                     {
@@ -2052,7 +2052,7 @@ WHERE
             if (filesFoundForDeletion)
             {
                 Logfile.Log($"Housekeeping: {countDeletedFiles} file(s) deleted in Exception directory");
-                if (Directory.Exists(System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "/Exception"))
+                if (Directory.Exists($"{System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location)}/Exception"))
                 {
                     ExecMono("/usr/bin/du", $"-sk {System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location)}/Exception", true, true);
                 }
@@ -2062,11 +2062,11 @@ WHERE
         internal static void LogDiskUsage()
         {
             _ = ExecMono("/bin/df", "-k", true, true);
-            if (Directory.Exists(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "/backup"))
+            if (Directory.Exists($"{Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)}/backup"))
             {
                 _ = ExecMono("/usr/bin/du", $"-sk {Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)}/backup", true, true);
             }
-            if (Directory.Exists(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "/Exception"))
+            if (Directory.Exists($"{Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)}/Exception"))
             {
                 _ = ExecMono("/usr/bin/du", $"-sk {Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)}/Exception", true, true);
             }
