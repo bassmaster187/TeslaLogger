@@ -86,12 +86,12 @@ namespace TeslaLogger
                 if (drivenAfterLastCharge > 0)
                 {
                     charge_energy_added = 0;
-                    Log("Driving after last charge: " + drivenAfterLastCharge + " km -> charge_energy_added = 0");
+                    Log($"Driving after last charge: {drivenAfterLastCharge} km -> charge_energy_added = 0");
                 }
                 else
                 {
                     charge_energy_added = _charge_energy_added;
-                    Log("charge_energy_added from DB: " + charge_energy_added);
+                    Log($"charge_energy_added from DB: {charge_energy_added}");
                 }
             }
             catch (Exception ex)
@@ -131,7 +131,7 @@ namespace TeslaLogger
                     {
                         Log("Stop Driving by timeout 30 minutes ***");
                         driving = false;
-                        Log("Parking time: " + lastDriving.ToString());
+                        Log($"Parking time: {lastDriving.ToString()}");
                         return false;
                     }
 
@@ -159,7 +159,7 @@ namespace TeslaLogger
             {
                 if (_acCharging != value)
                 {
-                    Log("ACCharging = " + value);
+                    Log($"ACCharging = {value}");
                     _acCharging = value;
                     handleACChargeChange?.Invoke(this, EventArgs.Empty);
                 }
@@ -189,7 +189,7 @@ namespace TeslaLogger
 
         void Log(string message)
         {
-            car.Log("*** FT: " + message);
+            car.Log($"*** FT: {message}");
         }
 
         public async Task handleMessageAsync(string resultContent)
@@ -247,16 +247,16 @@ namespace TeslaLogger
                             break;
                         case "ConfigAlreadySent":
                             string Config = j["Config"];
-                            Log("Config Already Sent: " + Config);
+                            Log($"Config Already Sent: {Config}");
                             break;
                         default:
-                            Log("Unhandled Teslalogger MSG: " + resultContent);
+                            Log($"Unhandled Teslalogger MSG: {resultContent}");
                             break;
                     }
                 }
                 else
                 {
-                    Log("Unhandled: " + resultContent);
+                    Log($"Unhandled: {resultContent}");
 
                     CheckDriving();
                     driving = false;
@@ -328,7 +328,7 @@ namespace TeslaLogger
                             preconditioning = true;
 
                         car.CurrentJSON.current_is_preconditioning = preconditioning;
-                        Log("Preconditioning: " + preconditioning);
+                        Log($"Preconditioning: {preconditioning}");
                         car.CurrentJSON.CreateCurrentJSON();
 
                         Log("Insert Location (Preconditioning)");
@@ -497,7 +497,7 @@ namespace TeslaLogger
                         if (bool.TryParse(v, out bool BatteryHeaterOn))
                         {
                             car.CurrentJSON.current_battery_heater = BatteryHeaterOn;
-                            Log("BatteryHeaterOn: " + BatteryHeaterOn);
+                            Log($"BatteryHeaterOn: {BatteryHeaterOn}");
                             car.CurrentJSON.CreateCurrentJSON();
                         }
                     }
@@ -516,7 +516,7 @@ namespace TeslaLogger
                         if (bool.TryParse(v, out bool preconditioning))
                         {
                             car.CurrentJSON.current_is_preconditioning = preconditioning;
-                            Log("Preconditioning: " + preconditioning);
+                            Log($"Preconditioning: {preconditioning}");
                             car.CurrentJSON.CreateCurrentJSON();
                         }
                     }
@@ -570,7 +570,7 @@ namespace TeslaLogger
                         {
                             if (car.DisplayName != v)
                             {
-                                Log("DisplayName: " + v);
+                                Log($"DisplayName: {v}");
                                 car.DisplayName = v;
                                 car.DbHelper.WriteCarSettings();
                             }
@@ -584,12 +584,12 @@ namespace TeslaLogger
                             v = v.ToLower();
                             if (car.TrimBadging != v)
                             {
-                                Log("Trim: " + v);
+                                Log($"Trim: {v}");
                                 car.TrimBadging = v;
                                 car.DbHelper.WriteCarSettings();
                                 car.webhelper.UpdateEfficiency();
 
-                                Log("Car Model Name: " + car.ModelName);
+                                Log($"Car Model Name: {car.ModelName}");
                             }
                         }
                     }
@@ -628,13 +628,13 @@ namespace TeslaLogger
 
                             if (car.CarType != v)
                             {
-                                Log("CarType: " + v);
+                                Log($"CarType: {v}");
                                 car.CarType = v;
                                 car.CarSpecialType = "base";
                                 car.DbHelper.WriteCarSettings();
                                 car.webhelper.UpdateEfficiency();
 
-                                Log("Car Model Name: " + car.ModelName);
+                                Log($"Car Model Name: {car.ModelName}");
                             }
                         }
                     }
@@ -645,7 +645,7 @@ namespace TeslaLogger
                         {
                             if (car.CurrentJSON.current_car_version != car_version)
                             {
-                                Log("Car Version: " + car_version);
+                                Log($"Car Version: {car_version}");
                                 car.CurrentJSON.current_car_version = car_version;
                                 car.CurrentJSON.CreateCurrentJSON();
 
@@ -785,7 +785,7 @@ namespace TeslaLogger
                             car.teslaAPIState.AddValue("rt", "int", 0, Tools.ToUnixTime(d), "vehicle_state");
                         }
 
-                        Log("XXXX DoorState:" + DoorState);
+                        Log($"XXXX DoorState:{DoorState}");
                         car.CurrentJSON.CreateCurrentJSON();
 
                     }
@@ -819,7 +819,7 @@ namespace TeslaLogger
                                 continue;
                             }
                         }
-                        Log("Window: " + key + " / " + Window);
+                        Log($"Window: {key} / {Window}");
                         if (!String.IsNullOrEmpty(Window))
                         {
                             int apistatevalue = 0;
@@ -865,7 +865,7 @@ namespace TeslaLogger
                             car.CurrentJSON.CreateCurrentJSON();
 
                         }
-                        Log("DetailedChargeState: " + DetailedChargeState);
+                        Log($"DetailedChargeState: {DetailedChargeState}");
 
                     }
                 }
@@ -880,7 +880,7 @@ namespace TeslaLogger
                 {
                     if (lastPackCurrent > 1 || lastDCChargingPower > 1)
                     {
-                        Log("Start DC Charging by DetailedChargeState Packcurrent: " + lastPackCurrent);
+                        Log($"Start DC Charging by DetailedChargeState Packcurrent: {lastPackCurrent}");
                         await StartDCChargingAsync(d);
                     }
                 }
@@ -888,7 +888,7 @@ namespace TeslaLogger
                 {
                     if (lastPackCurrent > 1 || ACChargingPower > 1)
                     {
-                        Log("Start AC Charging by DetailedChargeState Packcurrent: " + lastPackCurrent);
+                        Log($"Start AC Charging by DetailedChargeState Packcurrent: {lastPackCurrent}");
                         await StartACChargingAsync(d);
                     }
                 }
@@ -921,7 +921,7 @@ namespace TeslaLogger
                         if (double.TryParse(v1, NumberStyles.Any, CultureInfo.InvariantCulture, out ChargingEnergyIn))
                         {
                             ChargingEnergyIn = Math.Round(ChargingEnergyIn, 2);
-                            Log("charge_energy_added: " + charge_energy_added);
+                            Log($"charge_energy_added: {charge_energy_added}");
                             charge_energy_added = ChargingEnergyIn;
                         }
                     }
@@ -943,7 +943,7 @@ namespace TeslaLogger
 
                             if (!acCharging && lastChargeState == "Enable" && ACChargingPower > 0.1)
                             {
-                                Log("*** Start AC Charging - ACChargingPower: " + ACChargingPower);
+                                Log($"*** Start AC Charging - ACChargingPower: {ACChargingPower}");
                                 await StartACChargingAsync(d);
                             }
                         }
@@ -1315,7 +1315,7 @@ namespace TeslaLogger
 
                     if (loggingPosId)
                     {
-                        Log("Insert Last Location ID: " + lastposid);
+                        Log($"Insert Last Location ID: {lastposid}");
                     }
                 }
             }
@@ -1336,7 +1336,7 @@ namespace TeslaLogger
                 if (updated_vehicles == "1")
                 {
                     string cfg = j["Config"];
-                    Log("LoginRespone: OK / Config: " + cfg);
+                    Log($"LoginRespone: OK / Config: {cfg}");
                     return;
                 }
 
@@ -1362,7 +1362,7 @@ namespace TeslaLogger
                     }
                 }
 
-                Log("LoginRespone ERROR: " + response);
+                Log($"LoginRespone ERROR: {response}");
                 car.CurrentJSON.FatalError = "Telemetry Login Error!!! Check Logfile!";
                 car.CurrentJSON.CreateCurrentJSON();
 
@@ -1430,7 +1430,7 @@ namespace TeslaLogger
                             case "Service": aid = 2; break;
                             default:
                                 car.CreateExeptionlessLog("Telemetry audience unknown", s, Exceptionless.Logging.LogLevel.Error).Submit();
-                                Log("Audience unknown: " + s);
+                                Log($"Audience unknown: {s}");
                                 break;
                         }
 
@@ -1506,7 +1506,7 @@ namespace TeslaLogger
                                         break;
                                     default:
                                         state = -99;
-                                        Log("Unhandled Cruise State: " + v1);
+                                        Log($"Unhandled Cruise State: {v1}");
                                         car.CreateExeptionlessLog("CruiseStateUnhandled", v1, Exceptionless.Logging.LogLevel.Warn).Submit();
                                         break;
                                 }
@@ -1715,7 +1715,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
-                Log("Telemetry Error: " + ex.ToString());
+                Log($"Telemetry Error: {ex.ToString()}");
                 car.CreateExceptionlessClient(ex).AddObject(resultContent, "ResultContent").Submit();
             }
         }
@@ -1785,7 +1785,7 @@ namespace TeslaLogger
                                 if (lastChargeState != v1)
                                 {
                                     lastChargeState = v1;
-                                    Log("ChargeState " + lastChargeState);
+                                    Log($"ChargeState {lastChargeState}");
                                 }
 
                                 if (v1 == "Enable")
@@ -1830,7 +1830,7 @@ namespace TeslaLogger
                                 }
                                 else
                                 {
-                                    Log("unknown ChargeState: " + v1);
+                                    Log($"unknown ChargeState: {v1}");
                                 }
                             }
                         }
@@ -1876,7 +1876,7 @@ namespace TeslaLogger
                                 }
                             }
 
-                            Log("Gear: " + v1);
+                            Log($"Gear: {v1}");
 
                         }
                         else if (key == "VehicleSpeed")
@@ -1927,7 +1927,7 @@ namespace TeslaLogger
                                     }
                                 }
 
-                                Log("Speed: " + v1);
+                                Log($"Speed: {v1}");
                             }
                         }
                         else if (key == "FastChargerPresent")
@@ -2028,7 +2028,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
-                Log("Telemetry Error: " + ex.ToString());
+                Log($"Telemetry Error: {ex.ToString()}");
                 car.CreateExceptionlessClient(ex).AddObject(resultContent, "ResultContent").Submit();
             }
 
@@ -2089,11 +2089,11 @@ namespace TeslaLogger
                         return lastPackCurrent;
                     }
 
-                    Logfile.Log("*** FT: PackCurrent2 " + e2.ToString());
+                    Logfile.Log($"*** FT: PackCurrent2 {e2.ToString()}");
                     e2.ToExceptionless().FirstCarUserID().Submit();
                 }
 
-                Logfile.Log("*** FT: PackCurrent " + e.ToString());
+                Logfile.Log($"*** FT: PackCurrent {e.ToString()}");
                 e.ToExceptionless().FirstCarUserID().Submit();
             }
 
@@ -2107,7 +2107,7 @@ namespace TeslaLogger
                 var ts = DateTime.Now - lastDriving;
                 if (ts.TotalMinutes > 60)
                 {
-                    Log("Driving stop by speed " + lastDriving.ToString());
+                    Log($"Driving stop by speed {lastDriving.ToString()}");
                     Driving = false;
                 }
             }
