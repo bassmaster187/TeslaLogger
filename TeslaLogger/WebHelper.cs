@@ -596,6 +596,14 @@ namespace TeslaLogger
                                            // restart streaming thread with new token
                 RestartStreamThreadWithTask();
             }
+            catch (HttpRequestException httpEx)
+            {
+                car.Log($"SetNewAccessToken: HTTP Error: {httpEx.Message}");
+            }
+            catch (JsonException jsonEx)
+            {
+                car.Log($"SetNewAccessToken: JSON Parse Error: {jsonEx.Message}");
+            }
             catch (Exception ex)
             {
                 car.Log($"SetNewAccessToken: {ex.ToString()}");
@@ -4927,6 +4935,20 @@ WHERE
                     }
                 }
 
+            }
+            catch (HttpRequestException httpEx)
+            {
+                car.CreateExceptionlessClient(httpEx).Submit();
+                Log("TaskerWakeupToken HTTP Error: " + httpEx.Message);
+                ExceptionWriter(httpEx, "TaskerWakeupToken HTTP Error");
+                Logfile.Log($"TaskerWakeupToken HTTP Error: {httpEx.Message}");
+            }
+            catch (IOException ioEx)
+            {
+                car.CreateExceptionlessClient(ioEx).Submit();
+                Log("TaskerWakeupToken File I/O Error: " + ioEx.Message);
+                ExceptionWriter(ioEx, "TaskerWakeupToken File I/O Error");
+                Logfile.Log($"TaskerWakeupToken File I/O Error: {ioEx.Message}");
             }
             catch (Exception ex)
             {
