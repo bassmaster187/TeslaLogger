@@ -5847,12 +5847,12 @@ ORDER BY
 
             try
             {
-                using (MySqlDataAdapter da = new MySqlDataAdapter(@"
+                using (MySqlDataAdapter da = new MySqlDataAdapter($@"
                     SELECT
                         *
                     FROM
                         cars
-                    where id="+id, DBConnectionstring))
+                    where id={id}", DBConnectionstring))
                 {
                     _ = SQLTracer.TraceDA(dt, da);
                 }
@@ -7309,7 +7309,7 @@ WHERE
             {
                 Tools.SetThreadEnUS();
 
-                using (MySqlConnection con = new MySqlConnection(DBConnectionstring + ";Allow User Variables=True"))
+                using (MySqlConnection con = new MySqlConnection($"{DBConnectionstring};Allow User Variables=True"))
                 {
                     con.Open();
                     using (MySqlCommand cmd = new MySqlCommand(
@@ -7400,7 +7400,7 @@ ORDER BY startdate", con))
         {
             try
             {
-                using (MySqlConnection con = new MySqlConnection(DBConnectionstring + ";Allow User Variables=True"))
+                using (MySqlConnection con = new MySqlConnection($"{DBConnectionstring};Allow User Variables=True"))
                 {
                     con.Open();
                     using (MySqlCommand cmd = new MySqlCommand($@"SELECT max(odometer) - min(odometer)  
@@ -7433,7 +7433,7 @@ ORDER BY startdate", con))
                 return true;
 
                 /*
-                using (MySqlConnection con = new MySqlConnection(DBConnectionstring + ";Allow User Variables=True"))
+                using (MySqlConnection con = new MySqlConnection($"{DBConnectionstring};Allow User Variables=True"))
                 {
                     con.Open();
                     using (MySqlCommand cmd = new MySqlCommand($@"SELECT tasker_hash FROM teslalogger.cars where left(tasker_hash,1) in (1,2,3,4,5)", con)) // 
