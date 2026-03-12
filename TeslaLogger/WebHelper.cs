@@ -5211,6 +5211,18 @@ WHERE
                     }
                 }
             }
+            catch (HttpRequestException httpEx)
+            {
+                car.CreateExceptionlessClient(httpEx).Submit();
+                Logfile.Log($"SendDataToAbetterrouteplannerAsync HTTP Error: {httpEx.Message}");
+                Tools.DebugLog($"SendDataToAbetterrouteplannerAsync HTTP Error: {httpEx.Message}{Environment.NewLine}{httpEx.StackTrace}");
+            }
+            catch (JsonException jsonEx)
+            {
+                car.CreateExceptionlessClient(jsonEx).Submit();
+                Logfile.Log($"SendDataToAbetterrouteplannerAsync JSON Error: {jsonEx.Message}");
+                Tools.DebugLog($"SendDataToAbetterrouteplannerAsync JSON Error: {jsonEx.Message}{Environment.NewLine}{jsonEx.StackTrace}");
+            }
             catch (Exception ex)
             {
                 car.CreateExceptionlessClient(ex).Submit();
@@ -5303,6 +5315,18 @@ WHERE
                     }
 
                 }
+            }
+            catch (HttpRequestException httpEx)
+            {
+                Logfile.Log($"SuperchargeBingo HTTP Error: {httpEx.Message}");
+                car.SendException2Exceptionless(httpEx);
+                Tools.DebugLog($"SuperchargeBingo HTTP Error: {httpEx.Message}{Environment.NewLine}");
+            }
+            catch (JsonException jsonEx)
+            {
+                Logfile.Log($"SuperchargeBingo JSON Parse Error: {jsonEx.Message}");
+                car.SendException2Exceptionless(jsonEx);
+                Tools.DebugLog($"SuperchargeBingo JSON Error: {jsonEx.Message}{Environment.NewLine}");
             }
             catch (Exception ex)
             {
