@@ -1872,7 +1872,7 @@ PRIMARY KEY(id)
                         }
                         else
                         {
-                            ht.Add(key, key + " xxx");
+                            ht.Add(key, $"{key} xxx");
                         }
                     }
                 }
@@ -2858,7 +2858,7 @@ PRIMARY KEY(id)
                 return content;
             }
 
-            Regex regexAlias = new($"\\\"title\\\":.*?\\\"" + v + "\\\"");
+            Regex regexAlias = new($"\\\"title\\\":.*?\\\"{v}\\\"");
             string replace = $"\"title\": \"{dictLanguage[v]}\"";
 
             return regexAlias.Replace(content, replace);
