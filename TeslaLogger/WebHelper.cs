@@ -543,11 +543,22 @@ namespace TeslaLogger
             {
                 System.Diagnostics.Debug.WriteLine("Thread Stop!");
             }
+            catch (HttpRequestException httpEx)
+            {
+                car.Log($"HTTP Error: {httpEx.Message}");
+                car.CreateExeptionlessLog("UpdateTeslaTokenFromRefreshToken", $"HTTP Error: {httpEx.StatusCode}", Exceptionless.Logging.LogLevel.Error).AddObject(HttpStatusCode, "HTTP StatusCode").Submit();
+                car.CreateExceptionlessClient(httpEx).MarkAsCritical().Submit();
+            }
+            catch (JsonException jsonEx)
+            {
+                car.Log($"JSON Parse Error: {jsonEx.Message}");
+                car.CreateExeptionlessLog("UpdateTeslaTokenFromRefreshToken", $"JSON Error: {jsonEx.Message}", Exceptionless.Logging.LogLevel.Error).AddObject(resultContent, "ResultContent").Submit();
+                car.CreateExceptionlessClient(jsonEx).MarkAsCritical().Submit();
+            }
             catch (Exception ex)
             {
                 car.Log(ex.ToString());
                 Tools.DebugLog($"UpdateTeslaTokenFromRefreshToken: error parsing resultContent {resultContent}");
-                // car.ExternalLog("UpdateTeslaTokenFromRefreshToken: \r\nHTTP StatusCode: " + HttpStatusCode+ "\r\nresultContent: " + resultContent +"\r\n" + ex.ToString());
                 car.CreateExeptionlessLog("UpdateTeslaTokenFromRefreshToken", "Error getting access token", Exceptionless.Logging.LogLevel.Error).AddObject(HttpStatusCode, "HTTP StatusCode").AddObject(resultContent, "ResultContent").Submit();
                 car.CreateExceptionlessClient(ex).AddObject(HttpStatusCode, "HTTP StatusCode").AddObject(resultContent, "ResultContent").MarkAsCritical().Submit();
                 ExceptionlessClient.Default.ProcessQueueAsync();
