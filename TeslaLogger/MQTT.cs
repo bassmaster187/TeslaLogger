@@ -168,55 +168,70 @@ namespace TeslaLogger
 
         private void ParseSettings()
         {
-            if (KVS.Get("MQTTSettings", out string mqttSettingsJson) == KVS.SUCCESS)
+            try
             {
-                dynamic r = JsonConvert.DeserializeObject(mqttSettingsJson);
-                if (r["mqtt_host"] > 0)
+                if (KVS.Get("MQTTSettings", out string mqttSettingsJson) == KVS.SUCCESS)
                 {
-                    host = r["mqtt_host"];
+                    dynamic r = JsonConvert.DeserializeObject(mqttSettingsJson);
+                    if (r["mqtt_host"] > 0)
+                    {
+                        host = r["mqtt_host"];
+                    }
+                    else
+                    {
+                        Logfile.Log("MQTT: No host setting -> MQTT disabled! Check settings and reboot");
+                        return;
+                    }
+                    if (r["mqtt_port"] > 0)
+                    {
+                        port = (int)r["mqtt_port"];
+                    }
+                    if (r["mqtt_user"] > 0 && r["mqtt_passwd"] > 0)
+                    {
+                        user = r["mqtt_user"];
+                        password = r["mqtt_passwd"];
+                    }
+                    if (r["mqtt_topic"] > 0)
+                    {
+                        topic = r["mqtt_topic"];
+                    }
+                    if (r["mqtt_publishjson"] > 0)
+                    {
+                        publishJson = (bool)r["mqtt_publishjson"];
+                    }
+                    if (r["mqtt_singletopics"] > 0)
+                    {
+                        singletopics = (bool)r["mqtt_singletopics"];
+                    }
+                    if (r["mqtt_discoveryenable"] > 0)
+                    {
+                        discoveryEnable = (bool)r["mqtt_discoveryenable"];
+                    }
+                    if (r["mqtt_topic"] > 0)
+                    {
+                        discoverytopic = r["mqtt_discoverytopic"];
+                    }
+                    if (r["mqtt_clientid"] > 0)
+                    {
+                        clientid = r["mqtt_clientid"];
+                    }
+                    Logfile.Log("MQTT: Settings found");
                 }
                 else
                 {
-                    Logfile.Log("MQTT: No host setting -> MQTT disabled! Check settings and reboot");
-                    return;
+                    Logfile.Log("MQTT: Settings not found!");
                 }
-                if (r["mqtt_port"] > 0)
-                {
-                    port = (int)r["mqtt_port"];
-                }
-                if (r["mqtt_user"] > 0 && r["mqtt_passwd"] > 0)
-                {
-                    user = r["mqtt_user"];
-                    password = r["mqtt_passwd"];
-                }
-                if (r["mqtt_topic"] > 0)
-                {
-                    topic = r["mqtt_topic"];
-                }
-                if (r["mqtt_publishjson"] > 0)
-                {
-                    publishJson = (bool)r["mqtt_publishjson"];
-                }
-                if (r["mqtt_singletopics"] > 0)
-                {
-                    singletopics = (bool)r["mqtt_singletopics"];
-                }
-                if (r["mqtt_discoveryenable"] > 0)
-                {
-                    discoveryEnable = (bool)r["mqtt_discoveryenable"];
-                }
-                if (r["mqtt_topic"] > 0)
-                {
-                    discoverytopic = r["mqtt_discoverytopic"];
-                }
-                if (r["mqtt_clientid"] > 0)
-                {
-                    clientid = r["mqtt_clientid"];
-                }
-                Logfile.Log("MQTT: Settings found");
             }
-            else
+            catch (Newtonsoft.Json.JsonException jsonEx)
             {
+                Logfile.Log($"MQTT: JSON parse error in ParseSettings - {jsonEx.Message}");
+                jsonEx.ToExceptionless().FirstCarUserID().Submit();
+                Logfile.Log("MQTT: Settings not found!");
+            }
+            catch (Exception ex)
+            {
+                Logfile.Log($"MQTT: Error in ParseSettings - {ex.Message}");
+                ex.ToExceptionless().FirstCarUserID().Submit();
                 Logfile.Log("MQTT: Settings not found!");
             }
         }
