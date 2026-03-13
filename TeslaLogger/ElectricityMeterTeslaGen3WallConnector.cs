@@ -150,6 +150,11 @@ namespace TeslaLogger
 
                 return v;
             }
+            catch (JsonException ex)
+            {
+                ex.ToExceptionless().FirstCarUserID().Submit();
+                Logfile.ExceptionWriter(ex, j);
+            }
             catch (Exception ex)
             {
                 ex.ToExceptionless().FirstCarUserID().Submit();
@@ -174,6 +179,11 @@ namespace TeslaLogger
                 bool vehicle_connected = jsonResult["vehicle_connected"];
 
                 return vehicle_connected;
+            }
+            catch (JsonException ex)
+            {
+                ex.ToExceptionless().FirstCarUserID().Submit();
+                Logfile.ExceptionWriter(ex, j);
             }
             catch (Exception ex)
             {
@@ -200,6 +210,13 @@ namespace TeslaLogger
                 string key = "firmware_version";
                 string value = jsonResult[key];
                 return value;
+            }
+            catch (JsonException ex)
+            {
+                if (!WebHelper.FilterNetworkoutage(ex))
+                    ex.ToExceptionless().FirstCarUserID().AddObject(j,"json").Submit();
+
+                Logfile.Log(ex.ToString());
             }
             catch (Exception ex)
             {
