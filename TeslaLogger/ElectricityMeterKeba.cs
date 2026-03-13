@@ -64,6 +64,11 @@ namespace TeslaLogger
 
                 return (int) reportJson.State == 3;
             }
+            catch (JsonException ex)
+            {
+                ex.ToExceptionless().FirstCarUserID().Submit();
+                Logfile.Log(ex.ToString());
+            }
             catch (Exception ex)
             {
                 ex.ToExceptionless().FirstCarUserID().Submit();
@@ -92,6 +97,11 @@ namespace TeslaLogger
 
                 return (double) reportJson["E total"] / 10000.0;
             }
+            catch (JsonException ex)
+            {
+                ex.ToExceptionless().FirstCarUserID().Submit();
+                Logfile.Log(ex.ToString());
+            }
             catch (Exception ex)
             {
                 ex.ToExceptionless().FirstCarUserID().Submit();
@@ -114,6 +124,13 @@ namespace TeslaLogger
                 } while (reportJson.ID != 1);
 
                 return reportJson.Product + " / fw:" + reportJson.Firmware;
+            }
+            catch (JsonException ex)
+            {
+                if (!WebHelper.FilterNetworkoutage(ex))
+                    ex.ToExceptionless().FirstCarUserID().Submit();
+
+                Logfile.Log(ex.ToString());
             }
             catch (Exception ex)
             {
