@@ -184,6 +184,11 @@ namespace TeslaLogger
                         }
                         send.Clear();
                     }
+                    catch (Newtonsoft.Json.JsonException jsonEx)
+                    {
+                        car.CreateExceptionlessClient(jsonEx).AddObject(result, "ResultContent").Submit();
+                        Tools.DebugLog("NearbySuCService.Work: JSON parse error", jsonEx);
+                    }
                     catch (Exception ex)
                     {
                         car.CreateExceptionlessClient(ex).AddObject(result, "ResultContent").Submit();
@@ -196,54 +201,57 @@ namespace TeslaLogger
 
         private static void AddSuperchargerStateFleetAPI(string result, ArrayList send)
         {
-            dynamic jsonResult = JsonConvert.DeserializeObject(result);
-            if (jsonResult.ContainsKey("response"))
+            try
             {
-                dynamic response = jsonResult["response"];
-                if (response.ContainsKey("superchargers"))
+                dynamic jsonResult = JsonConvert.DeserializeObject(result);
+                if (jsonResult.ContainsKey("response"))
                 {
-                    foreach (dynamic suc in response["superchargers"])
+                    dynamic response = jsonResult["response"];
+                    if (response.ContainsKey("superchargers"))
                     {
-                        //Tools.DebugLog(new Tools.JsonFormatter(suc.ToString()).Format());
-                        if (suc.ContainsKey("available_stalls")
-                            && suc.ContainsKey("total_stalls")
-                            && suc.ContainsKey("name")
-                            && suc.ContainsKey("location")
-                            && suc["location"].ContainsKey("lat")
-                            && suc["location"].ContainsKey("long")
-                            )
+                        foreach (dynamic suc in response["superchargers"])
                         {
-                            string name = suc["name"].ToString();
-                            name = name.Replace("Tesla Supercharger", "").Trim();
-                            bool SuCfound = GetSuperchargerByName(name, out int sucID);
-                            double lat = suc["location"]["lat"];
-                            double lng = suc["location"]["long"];
-                            if (!SuCfound)
+                            //Tools.DebugLog(new Tools.JsonFormatter(suc.ToString()).Format());
+                            if (suc.ContainsKey("available_stalls")
+                                && suc.ContainsKey("total_stalls")
+                                && suc.ContainsKey("name")
+                                && suc.ContainsKey("location")
+                                && suc["location"].ContainsKey("lat")
+                                && suc["location"].ContainsKey("long")
+                                )
                             {
-                                // add new entry to supercharger list in DB
-                                sucID = AddNewSupercharger(name, lat, lng);
-                            }
-                            if (int.TryParse(suc["available_stalls"].ToString(), out int available_stalls))
-                            {
-                                if (int.TryParse(suc["total_stalls"].ToString(), out int total_stalls))
+                                string name = suc["name"].ToString();
+                                name = name.Replace("Tesla Supercharger", "").Trim();
+                                bool SuCfound = GetSuperchargerByName(name, out int sucID);
+                                double lat = suc["location"]["lat"];
+                                double lng = suc["location"]["long"];
+                                if (!SuCfound)
                                 {
+                                    // add new entry to supercharger list in DB
+                                    sucID = AddNewSupercharger(name, lat, lng);
+                                }
+                                if (int.TryParse(suc["available_stalls"].ToString(), out int available_stalls))
+                                {
+                                    if (int.TryParse(suc["total_stalls"].ToString(), out int total_stalls))
                                     {
-                                        Tools.DebugLog($"SuC: <{name}> <{available_stalls}> <{total_stalls}>");
-                                        if (total_stalls > 0)
                                         {
-                                            InsertIntoDB(sucID, available_stalls, total_stalls);
-                                            if (!ContainsSupercharger(send, name))
+                                            Tools.DebugLog($"SuC: <{name}> <{available_stalls}> <{total_stalls}>");
+                                            if (total_stalls > 0)
                                             {
-                                                Dictionary<string, object> sendKV = new Dictionary<string, object>();
-                                                send.Add(sendKV);
-                                                sendKV.Add("n", name);
-                                                sendKV.Add("lat", lat);
-                                                sendKV.Add("lng", lng);
-                                                sendKV.Add("ts", DateTime.UtcNow.ToString("s", Tools.ciEnUS));
-                                                sendKV.Add("a", available_stalls);
-                                                sendKV.Add("t", total_stalls);
-                                                sendKV.Add("kw", 0);
-                                                sendKV.Add("m", "");
+                                                InsertIntoDB(sucID, available_stalls, total_stalls);
+                                                if (!ContainsSupercharger(send, name))
+                                                {
+                                                    Dictionary<string, object> sendKV = new Dictionary<string, object>();
+                                                    send.Add(sendKV);
+                                                    sendKV.Add("n", name);
+                                                    sendKV.Add("lat", lat);
+                                                    sendKV.Add("lng", lng);
+                                                    sendKV.Add("ts", DateTime.UtcNow.ToString("s", Tools.ciEnUS));
+                                                    sendKV.Add("a", available_stalls);
+                                                    sendKV.Add("t", total_stalls);
+                                                    sendKV.Add("kw", 0);
+                                                    sendKV.Add("m", "");
+                                                }
                                             }
                                         }
                                     }
@@ -252,6 +260,16 @@ namespace TeslaLogger
                         }
                     }
                 }
+            }
+            catch (JsonException jsonEx)
+            {
+                Logfile.Log($"NearbySuCService: JSON parse error in AddSuperchargerStateFleetAPI - {jsonEx.Message}");
+                jsonEx.ToExceptionless().FirstCarUserID().Submit();
+            }
+            catch (Exception ex)
+            {
+                Logfile.Log($"NearbySuCService: Error in AddSuperchargerStateFleetAPI - {ex.Message}");
+                ex.ToExceptionless().FirstCarUserID().Submit();
             }
         }
 
