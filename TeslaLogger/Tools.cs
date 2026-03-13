@@ -1326,6 +1326,16 @@ namespace TeslaLogger
 
                 lastGrafanaSettings = DateTime.UtcNow;
             }
+            catch (IOException ioEx)
+            {
+                ioEx.ToExceptionless().AddObject(json, "JSON").AddObject(Tools.ConvertString2Base64(json), "JSON-Base64").Submit();
+                Logfile.Log($"IOException reading Grafana settings: {ioEx.ToString()}");
+            }
+            catch (JsonException jsonEx)
+            {
+                jsonEx.ToExceptionless().AddObject(json, "JSON").AddObject(Tools.ConvertString2Base64(json), "JSON-Base64").Submit();
+                Logfile.Log($"JSON parse error in Grafana settings: {jsonEx.ToString()}");
+            }
             catch (Exception ex)
             {
                 ex.ToExceptionless().AddObject(json, "JSON").AddObject(Tools.ConvertString2Base64(json), "JSON-Base64").Submit();
