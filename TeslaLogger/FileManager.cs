@@ -172,6 +172,12 @@ namespace TeslaLogger
             {
                 return string.Empty;
             }
+            catch (IOException ioEx)
+            {
+                ioEx.ToExceptionless().FirstCarUserID().Submit();
+                Logfile.Log($"RestoreToken IOException: {ioEx.Message}");
+                return string.Empty;
+            }
             catch (Exception e)
             {
                 e.ToExceptionless().FirstCarUserID().Submit();
