@@ -1333,6 +1333,11 @@ namespace TeslaLogger
                     }
                 }
             }
+            catch (HttpRequestException httpEx)
+            {
+                Log($"HTTP Error inserting location: {httpEx.ToString()}");
+                car.CreateExceptionlessClient(httpEx).Submit();
+            }
             catch (Exception ex)
             {
                 Log(ex.ToString());
