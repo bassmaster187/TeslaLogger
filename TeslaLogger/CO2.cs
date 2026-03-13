@@ -29,46 +29,48 @@ namespace TeslaLogger
 
         internal async Task<int> GetDataAsync(string country, DateTime dateTime)
         {
-            country = country.Trim().ToLower();
-            CrossBorderElectricityTrading = double.NaN;
-
-            if (country == "gb")
-                country = "uk";
-
-            if (!supportedCountries.Contains(country))
+            try
             {
-                SubmitExceptionlessLog("Country not supported: " + country);
-                return 0;
-            }
+                country = country.Trim().ToLower();
+                CrossBorderElectricityTrading = double.NaN;
 
-            Log("Country: " + country + " / Date: " + dateTime.ToString());
+                if (country == "gb")
+                    country = "uk";
 
-            string content = "";
+                if (!supportedCountries.Contains(country))
+                {
+                    SubmitExceptionlessLog("Country not supported: " + country);
+                    return 0;
+                }
 
-            int wi = GetWeekOfYear(dateTime);
-            int currentWeek = GetWeekOfYear(DateTime.Now);
-            bool writeCache = wi < currentWeek;
-            if (!writeCache)
-            {
-                if (DateTime.Now.Year != dateTime.Year)
-                    writeCache = true;
-            }
+                Log("Country: " + country + " / Date: " + dateTime.ToString());
 
-            string w = wi.ToString("D2");
-            int year = dateTime.Year;
+                string content = "";
 
-            string filename = $"week_{year}_{w}.json";
-            string path = $"EngergyChartData/{country}/{filename}";
+                int wi = GetWeekOfYear(dateTime);
+                int currentWeek = GetWeekOfYear(DateTime.Now);
+                bool writeCache = wi < currentWeek;
+                if (!writeCache)
+                {
+                    if (DateTime.Now.Year != dateTime.Year)
+                        writeCache = true;
+                }
 
-            if (File.Exists(path) && useCache)
-                content = File.ReadAllText(path);
-            else
-                content = await GetEnergyChartDataAsync(country, filename, writeCache);
+                string w = wi.ToString("D2");
+                int year = dateTime.Year;
 
-            if (content == null)
-                throw new Exception("No Data for :" + path);
+                string filename = $"week_{year}_{w}.json";
+                string path = $"EngergyChartData/{country}/{filename}";
 
-            dynamic j = JsonConvert.DeserializeObject(content);
+                if (File.Exists(path) && useCache)
+                    content = File.ReadAllText(path);
+                else
+                    content = await GetEnergyChartDataAsync(country, filename, writeCache);
+
+                if (content == null)
+                    throw new Exception("No Data for :" + path);
+
+                dynamic j = JsonConvert.DeserializeObject(content);
 
             Newtonsoft.Json.Linq.JArray unixtimes = j[0]["xAxisValues"];
 
@@ -183,40 +185,55 @@ namespace TeslaLogger
             Log("CO2 AVG: " + Math.Round(avgCO2) + " g/kWh\r\n\r\n");
 
             return (int)Math.Round(avgCO2,0);
+            }
+            catch (JsonException ex)
+            {
+                ex.ToExceptionless().FirstCarUserID().Submit();
+                SubmitExceptionlessLog("JsonException in GetDataAsync: " + ex.Message);
+                return 0;
+            }
+            catch (Exception ex)
+            {
+                ex.ToExceptionless().FirstCarUserID().Submit();
+                SubmitExceptionlessLog("Exception in GetDataAsync: " + ex.Message);
+                return 0;
+            }
         }
 
         private static void GetImport(string country, DateTime dateTime, ref double co2sum, ref double co2count)
         {
-            string content = "";
-
-            int wi = GetWeekOfYear(dateTime);
-            int currentWeek = GetWeekOfYear(DateTime.Now);
-            bool writeCache = wi < currentWeek;
-
-            if (!writeCache)
+            try
             {
-                if (DateTime.Now.Year != dateTime.Year)
-                    writeCache = true;
-            }
+                string content = "";
 
-            string w = wi.ToString("D2");
-            int year = dateTime.Year;
+                int wi = GetWeekOfYear(dateTime);
+                int currentWeek = GetWeekOfYear(DateTime.Now);
+                bool writeCache = wi < currentWeek;
 
-            if (w == "53")
-            {
-                year++;
-                w = "01";
-            }
+                if (!writeCache)
+                {
+                    if (DateTime.Now.Year != dateTime.Year)
+                        writeCache = true;
+                }
 
-            string filename = $"week_cbpf_saldo_{year}_{w}.json";
-            string path = $"EngergyChartData/{country}/{filename}";
+                string w = wi.ToString("D2");
+                int year = dateTime.Year;
 
-            if (File.Exists(path))
-                content = File.ReadAllText(path);
-            else
-                content = GetEnergyChartDataAsync(country, filename, writeCache).Result;
+                if (w == "53")
+                {
+                    year++;
+                    w = "01";
+                }
 
-            dynamic j = JsonConvert.DeserializeObject(content);
+                string filename = $"week_cbpf_saldo_{year}_{w}.json";
+                string path = $"EngergyChartData/{country}/{filename}";
+
+                if (File.Exists(path))
+                    content = File.ReadAllText(path);
+                else
+                    content = GetEnergyChartDataAsync(country, filename, writeCache).Result;
+
+                dynamic j = JsonConvert.DeserializeObject(content);
 
             Newtonsoft.Json.Linq.JArray unixtimes = j[0]["xAxisValues"];
 
@@ -312,6 +329,17 @@ namespace TeslaLogger
                 }
 
                 Log(String.Format("{0,-28}", name) + ": " + wert + "MW " + co2factor + "co2 g/kWh");
+            }
+            }
+            catch (JsonException ex)
+            {
+                ex.ToExceptionless().FirstCarUserID().Submit();
+                SubmitExceptionlessLog("JsonException in GetImport: " + ex.Message);
+            }
+            catch (Exception ex)
+            {
+                ex.ToExceptionless().FirstCarUserID().Submit();
+                SubmitExceptionlessLog("Exception in GetImport: " + ex.Message);
             }
         }
 
