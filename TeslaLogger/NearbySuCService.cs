@@ -298,6 +298,11 @@ namespace TeslaLogger
                     }
                 }
             }
+            catch (HttpRequestException httpEx)
+            {
+                httpEx.ToExceptionless().FirstCarUserID().Submit();
+                Tools.DebugLog("ShareSuc: HTTP error - " + httpEx.Message);
+            }
             catch (Exception ex)
             {
                 ex.ToExceptionless().FirstCarUserID().Submit();
@@ -473,6 +478,11 @@ VALUES(
                         GetGuestAvailability(c, trid);
                     }
                 }
+            }
+            catch (HttpRequestException httpEx)
+            {
+                httpEx.ToExceptionless().FirstCarUserID().Submit();
+                Tools.DebugLog("GetNextSuperchargerToCalculate: HTTP error - " + httpEx.Message);
             }
             catch (Exception ex)
             {
