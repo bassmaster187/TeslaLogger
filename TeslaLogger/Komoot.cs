@@ -587,7 +587,9 @@ WHERE
 
         private static void ParseTourJSON(KomootLoginInfo kli, long tourid, KomootTour tour)
         {
-            /* expected JSON
+            try
+            {
+                /* expected JSON
 {
 "id": 987654321,
 "type": "tour_recorded",
@@ -823,6 +825,17 @@ WHERE
                 }
                 sb.AppendLine();
                 Logfile.Log($"#{kli.carID} Komoot: parsing tours error - missing JSON contents" + sb.ToString() + tour.json);
+            }
+            }
+            catch (JsonException ex)
+            {
+                ex.ToExceptionless().FirstCarUserID().Submit();
+                Logfile.Log($"#{kli.carID} Komoot: ParseTourJSON JsonException - {ex}");
+            }
+            catch (Exception ex)
+            {
+                ex.ToExceptionless().FirstCarUserID().Submit();
+                Logfile.Log($"#{kli.carID} Komoot: ParseTourJSON Exception - {ex}");
             }
         }
 
@@ -1537,6 +1550,13 @@ ON DUPLICATE KEY UPDATE
                             }
                         }
                     }
+                }
+                catch (JsonException ex)
+                {
+                    ex.ToExceptionless().FirstCarUserID().Submit();
+                    Logfile.Log(ex.ToString());
+                    WebServer.WriteString(response, "not OK");
+                    return;
                 }
                 catch (Exception ex)
                 {
