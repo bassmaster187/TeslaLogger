@@ -209,6 +209,12 @@ namespace TeslaLogger
                     Logfile.Log("MQTT disabled (check settings)");
                 }
             }
+            catch (Newtonsoft.Json.JsonException jsonEx)
+            {
+                Logfile.Log($"Program: JSON parse error in InitMQTT - {jsonEx.Message}");
+                jsonEx.ToExceptionless().FirstCarUserID().Submit();
+                Logfile.Log(jsonEx.ToString());
+            }
             catch (Exception ex)
             {
                 ex.ToExceptionless().FirstCarUserID().Submit();
