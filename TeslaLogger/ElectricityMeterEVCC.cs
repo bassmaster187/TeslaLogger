@@ -151,6 +151,11 @@ namespace TeslaLogger
                 
 
             }
+            catch (Newtonsoft.Json.JsonException ex)
+            {
+                ex.ToExceptionless().FirstCarUserID().Submit();
+                Logfile.ExceptionWriter(ex, j);
+            }
             catch (Exception ex)
             {
                 ex.ToExceptionless().FirstCarUserID().Submit();
