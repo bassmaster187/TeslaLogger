@@ -107,6 +107,11 @@ namespace TeslaLogger
                     return null;
                 }
             }
+            catch (JsonException ex)
+            {
+                ex.ToExceptionless().FirstCarUserID().Submit();
+                Logfile.ExceptionWriter(ex, j);
+            }
             catch (Exception ex)
             {
                 ex.ToExceptionless().FirstCarUserID().Submit();
@@ -144,6 +149,11 @@ namespace TeslaLogger
                 {
                     return null;
                 }
+            }
+            catch (JsonException ex)
+            {
+                ex.ToExceptionless().FirstCarUserID().Submit();
+                Logfile.ExceptionWriter(ex, j);
             }
             catch (Exception ex)
             {
@@ -185,6 +195,11 @@ namespace TeslaLogger
                 }
 
             }
+            catch (JsonException ex)
+            {
+                ex.ToExceptionless().FirstCarUserID().Submit();
+                Logfile.ExceptionWriter(ex, j);
+            }
             catch (Exception ex)
             {
                 ex.ToExceptionless().FirstCarUserID().Submit();
@@ -205,6 +220,13 @@ namespace TeslaLogger
                 string value = jsonResult["params"]["version"];
 
                 return value;
+            }
+            catch (JsonException ex)
+            {
+                if (!WebHelper.FilterNetworkoutage(ex))
+                    ex.ToExceptionless().FirstCarUserID().Submit();
+
+                Logfile.ExceptionWriter(ex, j);
             }
             catch (Exception ex)
             {
