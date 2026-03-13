@@ -176,26 +176,39 @@ namespace TeslaLogger
 
             internal async Task DownloadTourAsync(KomootLoginInfo kli)
             {
-                Logfile.Log($"#{kli.carID} Komoot: DownloadTour {tourID} ...");
-                using (HttpClient httpClient = new HttpClient())
+                try
                 {
-                    httpClient.DefaultRequestHeaders.Add("Authorization", "Basic " + Convert.ToBase64String(Encoding.UTF8.GetBytes($"{kli.user_id}:{kli.token}")));
-                    using (HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, new Uri($"https://api.komoot.de/v007/tours/{tourID}?_embedded=coordinates,way_types,surfaces,directions,participants,timeline&directions=v2&fields=timeline&format=coordinate_array&timeline_highlights_fields=tips,recommenders")))
+                    Logfile.Log($"#{kli.carID} Komoot: DownloadTour {tourID} ...");
+                    using (HttpClient httpClient = new HttpClient())
                     {
-                        DateTime start = DateTime.UtcNow;
-                        HttpResponseMessage result = await httpClient.SendAsync(request);
-                        await DBHelper.AddMothershipDataToDBAsync("Komoot: DownloadTour", start, (int)result.StatusCode, kli.carID);
-                        if (result.IsSuccessStatusCode)
+                        httpClient.DefaultRequestHeaders.Add("Authorization", "Basic " + Convert.ToBase64String(Encoding.UTF8.GetBytes($"{kli.user_id}:{kli.token}")));
+                        using (HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, new Uri($"https://api.komoot.de/v007/tours/{tourID}?_embedded=coordinates,way_types,surfaces,directions,participants,timeline&directions=v2&fields=timeline&format=coordinate_array&timeline_highlights_fields=tips,recommenders")))
                         {
-                            string resultContent = await result.Content.ReadAsStringAsync();
-                            Logfile.Log($"#{kli.carID} Komoot: DownloadTour {tourID} done");
-                            this.json = resultContent;
-                        }
-                        else
-                        {
-                            Logfile.Log($"#{kli.carID} Komoot: DownloadTour{tourID} error: {result.StatusCode}");
+                            DateTime start = DateTime.UtcNow;
+                            HttpResponseMessage result = await httpClient.SendAsync(request);
+                            await DBHelper.AddMothershipDataToDBAsync("Komoot: DownloadTour", start, (int)result.StatusCode, kli.carID);
+                            if (result.IsSuccessStatusCode)
+                            {
+                                string resultContent = await result.Content.ReadAsStringAsync();
+                                Logfile.Log($"#{kli.carID} Komoot: DownloadTour {tourID} done");
+                                this.json = resultContent;
+                            }
+                            else
+                            {
+                                Logfile.Log($"#{kli.carID} Komoot: DownloadTour{tourID} error: {result.StatusCode}");
+                            }
                         }
                     }
+                }
+                catch (System.Net.Http.HttpRequestException httpEx)
+                {
+                    Logfile.Log($"#{kli.carID} Komoot: HTTP error in DownloadTourAsync - {httpEx.Message}");
+                    httpEx.ToExceptionless().FirstCarUserID().Submit();
+                }
+                catch (Exception ex)
+                {
+                    Logfile.Log($"#{kli.carID} Komoot: Error in DownloadTourAsync - {ex.Message}");
+                    ex.ToExceptionless().FirstCarUserID().Submit();
                 }
             }
 
