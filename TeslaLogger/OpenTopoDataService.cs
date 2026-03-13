@@ -95,57 +95,60 @@ namespace TeslaLogger
 
         internal static async Task RequestLocationsAsync(Tuple<long, double, double>[] items, RequestLocationsResponse response)
         {
-            string[] latlng = new string[items.Length];
-            for (int i = 0; i < items.Length; i++)
+            try
             {
-                latlng[i] = items[i].Item2.ToString(Tools.ciEnUS) + "," + items[i].Item3.ToString(Tools.ciEnUS);
-            }
-            string queryString = "https://api.opentopodata.org/v1/mapzen?locations=" + string.Join("|", latlng);
-            // query opentopodata.org API
-            string resultContent = string.Empty;
-            using (HttpClient client = new HttpClient
-            {
-                Timeout = TimeSpan.FromSeconds(11)
-            })
-            {
-                client.DefaultRequestHeaders.Add("User-Agent", "C# App");
-                DateTime start = DateTime.UtcNow;
-                HttpResponseMessage result = await client.GetAsync(new Uri(queryString));
-                resultContent = await result.Content.ReadAsStringAsync();
-                await DBHelper.AddMothershipDataToDBAsync("OpenTopoData.Query", start, (int)result.StatusCode, 0);
-            }
-            // parse result JSON
-            if (!string.IsNullOrEmpty(resultContent))
-            {
-                dynamic jr = JsonConvert.DeserializeObject(resultContent);
-                var jsonResult = jr.ToObject<Dictionary<string, object>>();
-                if (jsonResult != null)
+                string[] latlng = new string[items.Length];
+                for (int i = 0; i < items.Length; i++)
                 {
-                    if (((Dictionary<string, object>)jsonResult).ContainsKey("status")
-                        && ((Dictionary<string, object>)jsonResult)["status"].Equals("OK")
-                        && ((Dictionary<string, object>)jsonResult).ContainsKey("results"))
+                    latlng[i] = items[i].Item2.ToString(Tools.ciEnUS) + "," + items[i].Item3.ToString(Tools.ciEnUS);
+                }
+                string queryString = "https://api.opentopodata.org/v1/mapzen?locations=" + string.Join("|", latlng);
+                // query opentopodata.org API
+                string resultContent = string.Empty;
+                using (HttpClient client = new HttpClient
+                {
+                    Timeout = TimeSpan.FromSeconds(11)
+                })
+                {
+                    client.DefaultRequestHeaders.Add("User-Agent", "C# App");
+                    DateTime start = DateTime.UtcNow;
+                    HttpResponseMessage result = await client.GetAsync(new Uri(queryString));
+                    resultContent = await result.Content.ReadAsStringAsync();
+                    await DBHelper.AddMothershipDataToDBAsync("OpenTopoData.Query", start, (int)result.StatusCode, 0);
+                }
+                // parse result JSON
+                if (!string.IsNullOrEmpty(resultContent))
+                {
+                    dynamic jr = JsonConvert.DeserializeObject(resultContent);
+                    var jsonResult = jr.ToObject<Dictionary<string, object>>();
+                    if (jsonResult != null)
                     {
-                        dynamic objects = jsonResult["results"];
-                        foreach (dynamic result in objects)
+                        if (((Dictionary<string, object>)jsonResult).ContainsKey("status")
+                            && ((Dictionary<string, object>)jsonResult)["status"].Equals("OK")
+                            && ((Dictionary<string, object>)jsonResult).ContainsKey("results"))
                         {
-                            if (result.ContainsKey("elevation")
-                                && result.ContainsKey("location"))
+                            dynamic objects = jsonResult["results"];
+                            foreach (dynamic result in objects)
                             {
-                                if (double.TryParse(result["elevation"].ToString(Tools.ciEnUS), out double elevation)
-                                    && !double.IsNaN(elevation))
+                                if (result.ContainsKey("elevation")
+                                    && result.ContainsKey("location"))
                                 {
-                                    Dictionary<string, object> location = result["location"].ToObject<Dictionary<string, object>>();
-                                    if (location.ContainsKey("lat") && location.ContainsKey("lng"))
+                                    if (double.TryParse(result["elevation"].ToString(Tools.ciEnUS), out double elevation)
+                                        && !double.IsNaN(elevation))
                                     {
-                                        if (double.TryParse(location["lat"].ToString(), out double lat)
-                                            && double.TryParse(location["lng"].ToString(), out double lng))
+                                        Dictionary<string, object> location = result["location"].ToObject<Dictionary<string, object>>();
+                                        if (location.ContainsKey("lat") && location.ContainsKey("lng"))
                                         {
-                                            // find posID(s) in items
-                                            foreach (Tuple<long, double, double> item in items)
+                                            if (double.TryParse(location["lat"].ToString(), out double lat)
+                                                && double.TryParse(location["lng"].ToString(), out double lng))
                                             {
-                                                if (item.Item2 == lat && item.Item3 == lng)
+                                                // find posID(s) in items
+                                                foreach (Tuple<long, double, double> item in items)
                                                 {
-                                                    response(item.Item1, elevation);
+                                                    if (item.Item2 == lat && item.Item3 == lng)
+                                                    {
+                                                        response(item.Item1, elevation);
+                                                    }
                                                 }
                                             }
                                         }
@@ -155,6 +158,21 @@ namespace TeslaLogger
                         }
                     }
                 }
+            }
+            catch (JsonException jsonEx)
+            {
+                Logfile.Log($"OpenTopoDataService: JSON parse error in RequestLocationsAsync - {jsonEx.Message}");
+                jsonEx.ToExceptionless().FirstCarUserID().Submit();
+            }
+            catch (System.Net.Http.HttpRequestException httpEx)
+            {
+                Logfile.Log($"OpenTopoDataService: HTTP error in RequestLocationsAsync - {httpEx.Message}");
+                httpEx.ToExceptionless().FirstCarUserID().Submit();
+            }
+            catch (Exception ex)
+            {
+                Logfile.Log($"OpenTopoDataService: Error in RequestLocationsAsync - {ex.Message}");
+                ex.ToExceptionless().FirstCarUserID().Submit();
             }
         }
     }
