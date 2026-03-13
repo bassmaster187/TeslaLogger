@@ -713,6 +713,11 @@ namespace TeslaLogger
                 Logfile.Log($"Copy '{srcFile}' to '{directory}'");
                 File.Copy(srcFile, directory, true);
             }
+            catch (IOException ioEx)
+            {
+                ioEx.ToExceptionless().FirstCarUserID().Submit();
+                Logfile.Log($"CopyFile IOException: {ioEx}");
+            }
             catch (Exception ex)
             {
                 ex.ToExceptionless().FirstCarUserID().Submit();
@@ -772,6 +777,16 @@ namespace TeslaLogger
                     }
                 }
             }
+            catch (IOException ioEx)
+            {
+                ioEx.ToExceptionless().FirstCarUserID().AddObject(json, "JSON").Submit();
+                Logfile.Log($"IOException reading settings: {ioEx.ToString()}");
+            }
+            catch (JsonException jsonEx)
+            {
+                jsonEx.ToExceptionless().FirstCarUserID().AddObject(json, "JSON").Submit();
+                Logfile.Log($"JSON parse error in settings: {jsonEx.ToString()}");
+            }
             catch (Exception ex)
             {
                 ex.ToExceptionless().FirstCarUserID().AddObject(json, "JSON").Submit();
@@ -782,6 +797,7 @@ namespace TeslaLogger
         internal static int GetHttpPort()
         {
             int httpport = 5000; // default
+            string json = "";
             try
             {
                 string filePath = FileManager.GetFilePath(TLFilename.SettingsFilename);
@@ -790,7 +806,7 @@ namespace TeslaLogger
                     Logfile.Log($"settings file not found at {filePath}");
                     return httpport;
                 }
-                string json = File.ReadAllText(filePath);
+                json = File.ReadAllText(filePath);
                 dynamic j = JsonConvert.DeserializeObject(json);
                 if (IsPropertyExist(j, "HTTPPort"))
                 {
@@ -802,6 +818,16 @@ namespace TeslaLogger
                     }
                 }
             }
+            catch (IOException ioEx)
+            {
+                ioEx.ToExceptionless().FirstCarUserID().AddObject(json, "JSON").Submit();
+                Logfile.Log($"IOException reading HTTP port config: {ioEx.ToString()}");
+            }
+            catch (JsonException jsonEx)
+            {
+                jsonEx.ToExceptionless().FirstCarUserID().AddObject(json, "JSON").Submit();
+                Logfile.Log($"JSON parse error in HTTP port config: {jsonEx.ToString()}");
+            }
             catch (Exception ex)
             {
                 ex.ToExceptionless().FirstCarUserID().Submit();
@@ -812,6 +838,7 @@ namespace TeslaLogger
 
         internal static bool CombineChargingStates()
         {
+            string json = "";
             try
             {
                 string filePath = FileManager.GetFilePath(TLFilename.SettingsFilename);
@@ -820,7 +847,7 @@ namespace TeslaLogger
                     Logfile.Log($"settings file not found at {filePath}");
                     return false;
                 }
-                string json = File.ReadAllText(filePath);
+                json = File.ReadAllText(filePath);
                 dynamic j = JsonConvert.DeserializeObject(json);
                 if (IsPropertyExist(j, "CombineChargingStates"))
                 {
@@ -829,6 +856,16 @@ namespace TeslaLogger
                         return combineChargingStates;
                     }
                 }
+            }
+            catch (IOException ioEx)
+            {
+                ioEx.ToExceptionless().FirstCarUserID().AddObject(json, "JSON").Submit();
+                Logfile.Log($"IOException reading charging states config: {ioEx.ToString()}");
+            }
+            catch (JsonException jsonEx)
+            {
+                jsonEx.ToExceptionless().FirstCarUserID().AddObject(json, "JSON").Submit();
+                Logfile.Log($"JSON parse error in charging states config: {jsonEx.ToString()}");
             }
             catch (Exception ex)
             {
@@ -870,6 +907,7 @@ namespace TeslaLogger
 
         internal static bool StreamingPos()
         {
+            string json = "";
             try
             {
                 if (_StreamingPos != null)
@@ -881,7 +919,7 @@ namespace TeslaLogger
                     Logfile.Log($"settings file not found at {filePath}");
                     return false;
                 }
-                string json = File.ReadAllText(filePath);
+                json = File.ReadAllText(filePath);
                 dynamic j = JsonConvert.DeserializeObject(json);
                 if (IsPropertyExist(j, "StreamingPos"))
                 {
@@ -894,6 +932,16 @@ namespace TeslaLogger
                 }
 
                 Logfile.Log("StreamingPos not found in settings.json");
+            }
+            catch (IOException ioEx)
+            {
+                ioEx.ToExceptionless().FirstCarUserID().AddObject(json, "JSON").Submit();
+                Logfile.Log($"IOException reading streaming position config: {ioEx.ToString()}");
+            }
+            catch (JsonException jsonEx)
+            {
+                jsonEx.ToExceptionless().FirstCarUserID().AddObject(json, "JSON").Submit();
+                Logfile.Log($"JSON parse error in streaming position config: {jsonEx.ToString()}");
             }
             catch (Exception ex)
             {
@@ -950,6 +998,16 @@ namespace TeslaLogger
                 _startSleepingMinutes = startSleepingMinutes;
 
                 lastSleepingHourMinutsUpdated = DateTime.UtcNow;
+            }
+            catch (IOException ioEx)
+            {
+                ioEx.ToExceptionless().AddObject(json, "JSON").Submit();
+                Logfile.Log($"IOException reading sleep schedule: {ioEx.ToString()}");
+            }
+            catch (JsonException jsonEx)
+            {
+                jsonEx.ToExceptionless().AddObject(json, "JSON").Submit();
+                Logfile.Log($"JSON parse error in sleep schedule: {jsonEx.ToString()}");
             }
             catch (Exception ex)
             {
@@ -1057,6 +1115,7 @@ namespace TeslaLogger
 
         internal static bool UseScanMyTesla()
         {
+            string json = "";
             try
             {
                 if (ApplicationSettings.Default.UseScanMyTesla)
@@ -1071,13 +1130,23 @@ namespace TeslaLogger
                     return false;
                 }
 
-                string json = File.ReadAllText(filePath);
+                json = File.ReadAllText(filePath);
                 dynamic j = JsonConvert.DeserializeObject(json);
 
                 if (IsPropertyExist(j, "ScanMyTesla"))
                 {
                     return bool.Parse(j["ScanMyTesla"].ToString());
                 }
+            }
+            catch (IOException ioEx)
+            {
+                ioEx.ToExceptionless().FirstCarUserID().AddObject(json, "JSON").Submit();
+                Logfile.Log($"IOException reading ScanMyTesla config: {ioEx.ToString()}");
+            }
+            catch (JsonException jsonEx)
+            {
+                jsonEx.ToExceptionless().FirstCarUserID().AddObject(json, "JSON").Submit();
+                Logfile.Log($"JSON parse error in ScanMyTesla config: {jsonEx.ToString()}");
             }
             catch (Exception ex)
             {
@@ -1090,6 +1159,7 @@ namespace TeslaLogger
 
         internal static UpdateType GetOnlineUpdateSettings()
         {
+            string json = "";
             try
             {
                 string filePath = FileManager.GetFilePath(TLFilename.SettingsFilename);
@@ -1099,7 +1169,7 @@ namespace TeslaLogger
                     return UpdateType.all;
                 }
 
-                string json = File.ReadAllText(filePath);
+                json = File.ReadAllText(filePath);
                 dynamic j = JsonConvert.DeserializeObject(json);
 
                 if (IsPropertyExist(j, "update"))
@@ -1113,6 +1183,16 @@ namespace TeslaLogger
                         return UpdateType.stable;
                     }
                 }
+            }
+            catch (IOException ioEx)
+            {
+                ioEx.ToExceptionless().FirstCarUserID().AddObject(json, "JSON").Submit();
+                Logfile.Log($"IOException reading update settings: {ioEx.ToString()}");
+            }
+            catch (JsonException jsonEx)
+            {
+                jsonEx.ToExceptionless().FirstCarUserID().AddObject(json, "JSON").Submit();
+                Logfile.Log($"JSON parse error in update settings: {jsonEx.ToString()}");
             }
             catch (Exception ex)
             {
