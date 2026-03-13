@@ -1390,6 +1390,11 @@ namespace TeslaLogger
                     car.webhelper.GetToken();
                 }
             }
+            catch (JsonException jsonEx)
+            {
+                Log($"JSON Parse Error in handleLoginResponse: {jsonEx.Message}");
+                // Dynamic object access failure - response, updated_vehicles, etc.
+            }
             catch (Exception ex)
             {
                 Log(ex.ToString());
@@ -2040,6 +2045,11 @@ namespace TeslaLogger
                 CheckDriving();
 
             }
+            catch (JsonException jsonEx)
+            {
+                Log($"JSON Parse Error in telemetry data: {jsonEx.ToString()}");
+                car.CreateExceptionlessClient(jsonEx).AddObject(resultContent, "ResultContent").Submit();
+            }
             catch (Exception ex)
             {
                 Log($"Telemetry Error: {ex.ToString()}");
@@ -2083,6 +2093,54 @@ namespace TeslaLogger
                 
                 double? val = j.Value<double?>();
                 return val;
+            }
+            catch (JsonException jsonEx)
+            {
+                try
+                {
+                    string v = j.Value<string>();
+                    if (!String.IsNullOrEmpty(v))
+                    {
+                        v = v.Replace("\"", "");
+                        return Double.Parse(v, CultureInfo.InvariantCulture);
+                    }
+                }
+                catch (JsonException jsonEx2)
+                {
+                    var ts = date - lastPackCurrentDate;
+                    if (ts.TotalSeconds < 10)
+                    {
+                        return lastPackCurrent;
+                    }
+
+                    Logfile.Log($"*** FT: PackCurrent JSON Error: {jsonEx2.ToString()}");
+                    jsonEx2.ToExceptionless().FirstCarUserID().Submit();
+                }
+                catch (FormatException formatEx)
+                {
+                    var ts = date - lastPackCurrentDate;
+                    if (ts.TotalSeconds < 10)
+                    {
+                        return lastPackCurrent;
+                    }
+
+                    Logfile.Log($"*** FT: PackCurrent Format Error: {formatEx.ToString()}");
+                    formatEx.ToExceptionless().FirstCarUserID().Submit();
+                }
+                catch (Exception ex2)
+                {
+                    var ts = date - lastPackCurrentDate;
+                    if (ts.TotalSeconds < 10)
+                    {
+                        return lastPackCurrent;
+                    }
+
+                    Logfile.Log($"*** FT: PackCurrent2 {ex2.ToString()}");
+                    ex2.ToExceptionless().FirstCarUserID().Submit();
+                }
+
+                Logfile.Log($"*** FT: PackCurrent JSON Error: {jsonEx.ToString()}");
+                jsonEx.ToExceptionless().FirstCarUserID().Submit();
             }
             catch (Exception e)
             {
