@@ -1325,6 +1325,12 @@ VALUES (
             }
             return komootTours;
             }
+            catch (Newtonsoft.Json.JsonException jsonEx)
+            {
+                Logfile.Log($"#{kli.carID} Komoot: JSON error in DownloadToursAsync - {jsonEx.Message}");
+                jsonEx.ToExceptionless().FirstCarUserID().Submit();
+                return new Dictionary<long, KomootTour>();
+            }
             catch (System.Net.Http.HttpRequestException httpEx)
             {
                 Logfile.Log($"#{kli.carID} Komoot: HTTP error in DownloadToursAsync - {httpEx.Message}");
@@ -1444,6 +1450,12 @@ WHERE
                         }
                     }
                 }
+                return kli;
+            }
+            catch (Newtonsoft.Json.JsonException jsonEx)
+            {
+                Logfile.Log($"#{kli.carID} Komoot: JSON error in LoginAsync - {jsonEx.Message}");
+                jsonEx.ToExceptionless().FirstCarUserID().Submit();
                 return kli;
             }
             catch (System.Net.Http.HttpRequestException httpEx)
