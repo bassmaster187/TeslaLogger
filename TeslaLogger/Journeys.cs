@@ -136,20 +136,22 @@ CREATE TABLE journeys (
         internal static void JourneysCreateStart(HttpListenerRequest request, HttpListenerResponse response)
         {
             string data = WebServer.GetDataFromRequestInputStream(request);
-            dynamic r = JsonConvert.DeserializeObject(data);
-
-            int CarID = r["carid"];
-            Tools.DebugLog($"JourneysCreateStart CarID:{CarID}");
-
-            List<object> o = new List<object>();
-            o.Add(new KeyValuePair<string, string>("", "Please Select"));
-
             try
             {
-                using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+                dynamic r = JsonConvert.DeserializeObject(data);
+
+                int CarID = r["carid"];
+                Tools.DebugLog($"JourneysCreateStart CarID:{CarID}");
+
+                List<object> o = new List<object>();
+                o.Add(new KeyValuePair<string, string>("", "Please Select"));
+
+                try
                 {
-                    con.Open();
-                    using (MySqlCommand cmd = new MySqlCommand(@"
+                    using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+                    {
+                        con.Open();
+                        using (MySqlCommand cmd = new MySqlCommand(@"
 SELECT
     StartPosID,
     StartDate, 
@@ -160,48 +162,63 @@ WHERE
     CarID = @CarID
 ORDER BY
     StartDate desc", con))
-                    {
-                        cmd.Parameters.AddWithValue("@CarID", CarID);
-                        MySqlDataReader dr = SQLTracer.TraceDR(cmd);
-                        while (dr.Read() && dr[0] is not DBNull)
                         {
-                            o.Add(new KeyValuePair<string, string>(dr[0].ToString(), dr[1].ToString() + " - " + dr[2].ToString()));
+                            cmd.Parameters.AddWithValue("@CarID", CarID);
+                            MySqlDataReader dr = SQLTracer.TraceDR(cmd);
+                            while (dr.Read() && dr[0] is not DBNull)
+                            {
+                                o.Add(new KeyValuePair<string, string>(dr[0].ToString(), dr[1].ToString() + " - " + dr[2].ToString()));
+                            }
                         }
                     }
                 }
+                catch (Exception ex)
+                {
+                    ex.ToExceptionless().FirstCarUserID().Submit();
+                    Logfile.Log(ex.ToString());
+                }
+
+                string json = JsonConvert.SerializeObject(o);
+
+                WriteString(response, json);
+            }
+            catch (JsonException jsonEx)
+            {
+                Logfile.Log($"Journeys: JSON parse error in JourneysCreateStart - {jsonEx.Message}");
+                jsonEx.ToExceptionless().FirstCarUserID().Submit();
+                WriteString(response, "{}");
             }
             catch (Exception ex)
             {
+                Logfile.Log($"Journeys: Error in JourneysCreateStart - {ex.Message}");
                 ex.ToExceptionless().FirstCarUserID().Submit();
-                Logfile.Log(ex.ToString());
+                WriteString(response, "{}");
             }
-
-            string json = JsonConvert.SerializeObject(o);
-
-            WriteString(response, json);
         }
 
         internal static void JourneysCreateEnd(HttpListenerRequest request, HttpListenerResponse response)
         {
             string data = WebServer.GetDataFromRequestInputStream(request);
-            dynamic r = JsonConvert.DeserializeObject(data);
-
-            int CarID = r["carid"];
-            Tools.DebugLog($"JourneysCreateStart CarID:{CarID}");
-
-            List<object> o = new List<object>();
-            o.Add(new KeyValuePair<string, string>("", "Please Select"));
-
-
-            int StartPosID = Convert.ToInt32(r["StartPosID"]);
-            Tools.DebugLog($"JourneysCreateEnd CarID:{CarID} StartPosID:{StartPosID}");
-
             try
             {
-                using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+                dynamic r = JsonConvert.DeserializeObject(data);
+
+                int CarID = r["carid"];
+                Tools.DebugLog($"JourneysCreateStart CarID:{CarID}");
+
+                List<object> o = new List<object>();
+                o.Add(new KeyValuePair<string, string>("", "Please Select"));
+
+
+                int StartPosID = Convert.ToInt32(r["StartPosID"]);
+                Tools.DebugLog($"JourneysCreateEnd CarID:{CarID} StartPosID:{StartPosID}");
+
+                try
                 {
-                    con.Open();
-                    using (MySqlCommand cmd = new MySqlCommand(@"
+                    using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+                    {
+                        con.Open();
+                        using (MySqlCommand cmd = new MySqlCommand(@"
 SELECT
     EndPosID,
     EndDate, 
@@ -213,32 +230,45 @@ WHERE
     AND EndPosID > @StartPosID
 ORDER BY
     StartDate", con))
-                    {
-                        cmd.Parameters.AddWithValue("@CarID", CarID);
-                        cmd.Parameters.AddWithValue("@StartPosID", StartPosID);
-                        MySqlDataReader dr = SQLTracer.TraceDR(cmd);
-                        while (dr.Read() && dr[0] is not DBNull)
                         {
-                            if (int.TryParse(dr[0].ToString(), out int id))
+                            cmd.Parameters.AddWithValue("@CarID", CarID);
+                            cmd.Parameters.AddWithValue("@StartPosID", StartPosID);
+                            MySqlDataReader dr = SQLTracer.TraceDR(cmd);
+                            while (dr.Read() && dr[0] is not DBNull)
                             {
-                                o.Add(new KeyValuePair<string, string>(dr[0].ToString(), dr[1].ToString() + " - " + dr[2].ToString()));
+                                if (int.TryParse(dr[0].ToString(), out int id))
+                                {
+                                    o.Add(new KeyValuePair<string, string>(dr[0].ToString(), dr[1].ToString() + " - " + dr[2].ToString()));
+                                }
                             }
                         }
                     }
                 }
+                catch (Exception ex)
+                {
+                    ex.ToExceptionless().FirstCarUserID().Submit();
+                    Logfile.Log(ex.ToString());
+                }
+
+                // in: CarID, StartPosID
+                // out: CarID, StartPosID, EndPosId
+                // action: render End selection HTML
+
+                string json = JsonConvert.SerializeObject(o);
+                WriteString(response, json);
+            }
+            catch (JsonException jsonEx)
+            {
+                Logfile.Log($"Journeys: JSON parse error in JourneysCreateEnd - {jsonEx.Message}");
+                jsonEx.ToExceptionless().FirstCarUserID().Submit();
+                WriteString(response, "{}");
             }
             catch (Exception ex)
             {
+                Logfile.Log($"Journeys: Error in JourneysCreateEnd - {ex.Message}");
                 ex.ToExceptionless().FirstCarUserID().Submit();
-                Logfile.Log(ex.ToString());
+                WriteString(response, "{}");
             }
-
-            // in: CarID, StartPosID
-            // out: CarID, StartPosID, EndPosId
-            // action: render End selection HTML
-
-            string json = JsonConvert.SerializeObject(o);
-            WriteString(response, json);
         }
 
         internal static void JourneysCreateCreate(HttpListenerRequest request, HttpListenerResponse response)
