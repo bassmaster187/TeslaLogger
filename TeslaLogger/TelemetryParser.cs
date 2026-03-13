@@ -267,6 +267,10 @@ namespace TeslaLogger
                 }
 
             }
+            catch (JsonException jsonEx)
+            {
+                Log($"JSON Parse Error: {jsonEx.Message}");
+            }
             catch (Exception ex)
             {
                 Log(ex.ToString() + "\n" + resultContent);
@@ -460,6 +464,11 @@ namespace TeslaLogger
                             car.CurrentJSON.active_route_energy_at_arrival = v;
                             car.CurrentJSON.CreateCurrentJSON();
                         }
+                        catch (JsonException jsonEx)
+                        {
+                            jsonEx.ToExceptionless().Submit();
+                            Log($"JSON Parse Error in ExpectedEnergyPercentAtTripArrival: {jsonEx.Message}");
+                        }
                         catch (Exception ex)
                         {
                             ex.ToExceptionless().Submit();
@@ -475,6 +484,11 @@ namespace TeslaLogger
 
                             car.CurrentJSON.active_route_traffic_minutes_delay = v;
                             car.CurrentJSON.CreateCurrentJSON();
+                        }
+                        catch (JsonException jsonEx)
+                        {
+                            jsonEx.ToExceptionless().Submit();
+                            Log($"JSON Parse Error in RouteTrafficMinutesDelay: {jsonEx.Message}");
                         }
                         catch (Exception ex)
                         {
