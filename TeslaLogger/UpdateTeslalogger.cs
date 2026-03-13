@@ -1302,9 +1302,22 @@ PRIMARY KEY(id)
             if (Tools.IsDockerNET8())
             {
                 Logfile.Log("use Watchtower");
-                HttpClient client = new HttpClient();
-                client.DefaultRequestHeaders.Add("Authorization", "Bearer teslalogger");
-                client.GetAsync("http://watchtower:8080/v1/update").Wait();
+                try
+                {
+                    HttpClient client = new HttpClient();
+                    client.DefaultRequestHeaders.Add("Authorization", "Bearer teslalogger");
+                    client.GetAsync("http://watchtower:8080/v1/update").Wait();
+                }
+                catch (HttpRequestException ex)
+                {
+                    ex.ToExceptionless().FirstCarUserID().Submit();
+                    Logfile.ExceptionWriter(ex, "Failed to connect to Watchtower");
+                }
+                catch (Exception ex)
+                {
+                    ex.ToExceptionless().FirstCarUserID().Submit();
+                    Logfile.ExceptionWriter(ex, "Exception during Watchtower update");
+                }
                 return;
             }
             else if (Tools.IsMono() || Tools.IsDotnet8())
