@@ -98,6 +98,11 @@ namespace TeslaLogger
 
                 return (double?)(value1) / 1000.0;
             }
+            catch (JsonException ex)
+            {
+                ex.ToExceptionless().FirstCarUserID().Submit();
+                Logfile.ExceptionWriter(ex, j);
+            }
             catch (Exception ex)
             {
                 ex.ToExceptionless().FirstCarUserID().Submit();
@@ -118,6 +123,11 @@ namespace TeslaLogger
                 decimal value1 = jsonResult["emeters"][channel]["power"];
 
                 return value1 > 900;
+            }
+            catch (JsonException ex)
+            {
+                ex.ToExceptionless().FirstCarUserID().Submit();
+                Logfile.ExceptionWriter(ex, j);
             }
             catch (Exception ex)
             {
@@ -148,6 +158,13 @@ namespace TeslaLogger
                 string value = jsonResult[key];
 
                 return value;
+            }
+            catch (JsonException ex)
+            {
+                if (!WebHelper.FilterNetworkoutage(ex))
+                    ex.ToExceptionless().FirstCarUserID().Submit();
+
+                Logfile.ExceptionWriter(ex, j);
             }
             catch (Exception ex)
             {
