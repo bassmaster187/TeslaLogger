@@ -38,6 +38,10 @@ namespace MQTTClient
                         int.TryParse(Properties.Settings.Default.MQTTPort, out MQTTPort);
                         Logfile.Log("MQTT: Using user specific port: " + Properties.Settings.Default.MQTTPort);
                     }
+                    catch (FormatException formatEx)
+                    {
+                        Logfile.Log("MQTT Port format error: " + formatEx.Message);
+                    }
                     catch (Exception ex)
                     {
                         Logfile.Log(ex.Message);
@@ -66,6 +70,10 @@ namespace MQTTClient
                         {
                             Logfile.Log("MQTT: Subtopics enabled");
                         }
+                    }
+                    catch (FormatException formatEx)
+                    {
+                        Logfile.Log("MQTT Subtopics format error: " + formatEx.Message);
                     }
                     catch (Exception ex)
                     {
@@ -197,6 +205,11 @@ namespace MQTTClient
                         h.Add(id);
                     }
                 }
+            }
+            catch (JsonException jsonEx)
+            {
+                Logfile.Log("MQTT Cars JSON parse error: " + jsonEx.Message);
+                Task.Delay(20000).GetAwaiter().GetResult();
             }
             catch (Exception ex)
             {
