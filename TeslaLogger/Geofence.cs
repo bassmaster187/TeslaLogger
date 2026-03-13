@@ -592,57 +592,70 @@ namespace TeslaLogger
 
         internal async Task OnlineUpdateAsync()
         {
-            Tools.DebugLog("Geofence.OnlineUpdate");
-            string lastETag = null;
-            if (KVS.Get("Geofence.OnlineUpdate.ETag", out string etag) == KVS.SUCCESS)
+            try
             {
-                lastETag = etag;
-            }
-            using HttpClient client = new HttpClient();
-            string url = "https://raw.githubusercontent.com/bassmaster187/TeslaLogger/master/TeslaLogger/bin/geofence.csv";
-            using (var request = new HttpRequestMessage(HttpMethod.Get, url))
-            {
-                if (lastETag != null)
+                Tools.DebugLog("Geofence.OnlineUpdate");
+                string lastETag = null;
+                if (KVS.Get("Geofence.OnlineUpdate.ETag", out string etag) == KVS.SUCCESS)
                 {
-                    request.Headers.TryAddWithoutValidation("If-None-Match", lastETag);
+                    lastETag = etag;
                 }
-                var response = await client.SendAsync(request);
-                if (response.StatusCode == System.Net.HttpStatusCode.NotModified)
+                using HttpClient client = new HttpClient();
+                string url = "https://raw.githubusercontent.com/bassmaster187/TeslaLogger/master/TeslaLogger/bin/geofence.csv";
+                using (var request = new HttpRequestMessage(HttpMethod.Get, url))
                 {
-                    Logfile.Log($"Geofence.OnlineUpdate: no changes (ETag: {lastETag})");
-                }
-                else if (response.IsSuccessStatusCode)
-                {
-                    if (response.Headers.ETag != null)
+                    if (lastETag != null)
                     {
-                        lastETag = response.Headers.ETag.Tag;
-                        KVS.InsertOrUpdate("Geofence.OnlineUpdate.ETag", lastETag);
+                        request.Headers.TryAddWithoutValidation("If-None-Match", lastETag);
                     }
-                    Logfile.Log($"Geofence.OnlineUpdate: update! (ETag: {lastETag})");
-                    using (Stream stream = await response.Content.ReadAsStreamAsync())
+                    var response = await client.SendAsync(request);
+                    if (response.StatusCode == System.Net.HttpStatusCode.NotModified)
                     {
-                        using (FileStream fs = new FileStream(FileManager.GetFilePath(TLFilename.GeofenceFilename) + ".updated", FileMode.Create, FileAccess.Write, FileShare.None, 8192, useAsync: false))
+                        Logfile.Log($"Geofence.OnlineUpdate: no changes (ETag: {lastETag})");
+                    }
+                    else if (response.IsSuccessStatusCode)
+                    {
+                        if (response.Headers.ETag != null)
                         {
-                            byte[] buffer = new byte[8192];
-                            int bytesRead;
-
-                            while ((bytesRead = await stream.ReadAsync(buffer, 0, buffer.Length)) > 0)
+                            lastETag = response.Headers.ETag.Tag;
+                            KVS.InsertOrUpdate("Geofence.OnlineUpdate.ETag", lastETag);
+                        }
+                        Logfile.Log($"Geofence.OnlineUpdate: update! (ETag: {lastETag})");
+                        using (Stream stream = await response.Content.ReadAsStreamAsync())
+                        {
+                            using (FileStream fs = new FileStream(FileManager.GetFilePath(TLFilename.GeofenceFilename) + ".updated", FileMode.Create, FileAccess.Write, FileShare.None, 8192, useAsync: false))
                             {
-                                fs.Write(buffer, 0, bytesRead);
+                                byte[] buffer = new byte[8192];
+                                int bytesRead;
+
+                                while ((bytesRead = await stream.ReadAsync(buffer, 0, buffer.Length)) > 0)
+                                {
+                                    fs.Write(buffer, 0, bytesRead);
+                                }
                             }
                         }
+                        // after writing file, log size and copy
+                        Tools.DebugLog($"Geofence.updated: {new FileInfo(FileManager.GetFilePath(TLFilename.GeofenceFilename) + ".updated").Length} bytes");
+                        if (new FileInfo(FileManager.GetFilePath(TLFilename.GeofenceFilename) + ".updated").Length > 0)
+                        {
+                            Tools.CopyFile(FileManager.GetFilePath(TLFilename.GeofenceFilename) + ".updated", FileManager.GetFilePath(TLFilename.GeofenceFilename));
+                        }
                     }
-                    // after writing file, log size and copy
-                    Tools.DebugLog($"Geofence.updated: {new FileInfo(FileManager.GetFilePath(TLFilename.GeofenceFilename) + ".updated").Length} bytes");
-                    if (new FileInfo(FileManager.GetFilePath(TLFilename.GeofenceFilename) + ".updated").Length > 0)
+                    else
                     {
-                        Tools.CopyFile(FileManager.GetFilePath(TLFilename.GeofenceFilename) + ".updated", FileManager.GetFilePath(TLFilename.GeofenceFilename));
+                        Logfile.Log($"Geofence.OnlineUpdate: error: {response.StatusCode}");
                     }
                 }
-                else
-                {
-                    Logfile.Log($"Geofence.OnlineUpdate: error: {response.StatusCode}");
-                }
+            }
+            catch (System.Net.Http.HttpRequestException httpEx)
+            {
+                Logfile.Log($"Geofence: HTTP request error in OnlineUpdateAsync - {httpEx.Message}");
+                httpEx.ToExceptionless().FirstCarUserID().Submit();
+            }
+            catch (Exception ex)
+            {
+                Logfile.Log($"Geofence: Error in OnlineUpdateAsync - {ex.Message}");
+                ex.ToExceptionless().FirstCarUserID().Submit();
             }
         }
 
