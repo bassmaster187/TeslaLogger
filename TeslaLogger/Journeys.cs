@@ -273,27 +273,29 @@ ORDER BY
 
         internal static void JourneysCreateCreate(HttpListenerRequest request, HttpListenerResponse response)
         {
-            // in: CarID, StartPosID, EndPosId
-            // out: nothing
-            // action: create journey table entry, render result selection HTML
-            string data = WebServer.GetDataFromRequestInputStream(request);
-            dynamic r = JsonConvert.DeserializeObject(data);
-
-            int CarID = r["CarID"];
-            int StartPosID = Convert.ToInt32(r["StartPosID"]);
-            int EndPosID = Convert.ToInt32(r["EndPosID"]);
-            string name = r["name"];
-
-            Tools.DebugLog($"JourneysCreateCreate CarID:{CarID} StartPosID:{StartPosID} EndPosID:{EndPosID} name:{name}");
-            DataRow car = DBHelper.GetCar(CarID);
-            if (car != null && StartPosID < EndPosID && !string.IsNullOrEmpty(name))
+            try
             {
-                try
+                // in: CarID, StartPosID, EndPosId
+                // out: nothing
+                // action: create journey table entry, render result selection HTML
+                string data = WebServer.GetDataFromRequestInputStream(request);
+                dynamic r = JsonConvert.DeserializeObject(data);
+
+                int CarID = r["CarID"];
+                int StartPosID = Convert.ToInt32(r["StartPosID"]);
+                int EndPosID = Convert.ToInt32(r["EndPosID"]);
+                string name = r["name"];
+
+                Tools.DebugLog($"JourneysCreateCreate CarID:{CarID} StartPosID:{StartPosID} EndPosID:{EndPosID} name:{name}");
+                DataRow car = DBHelper.GetCar(CarID);
+                if (car != null && StartPosID < EndPosID && !string.IsNullOrEmpty(name))
                 {
-                    using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+                    try
                     {
-                        con.Open();
-                        using (MySqlCommand cmd = new MySqlCommand(@"
+                        using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+                        {
+                            con.Open();
+                            using (MySqlCommand cmd = new MySqlCommand(@"
 INSERT journeys (
     CarID,
     StartPosID,
@@ -306,14 +308,14 @@ VALUES (
     @EndPosID,
     @name
 )", con))
-                        {
-                            cmd.Parameters.AddWithValue("@CarID", CarID);
-                            cmd.Parameters.AddWithValue("@StartPosID", StartPosID);
-                            cmd.Parameters.AddWithValue("@EndPosID", EndPosID);
-                            cmd.Parameters.AddWithValue("@name", name);
-                            _ = SQLTracer.TraceNQ(cmd, out _);
-                        }
-                        using (MySqlCommand cmd = new MySqlCommand(@"
+                            {
+                                cmd.Parameters.AddWithValue("@CarID", CarID);
+                                cmd.Parameters.AddWithValue("@StartPosID", StartPosID);
+                                cmd.Parameters.AddWithValue("@EndPosID", EndPosID);
+                                cmd.Parameters.AddWithValue("@name", name);
+                                _ = SQLTracer.TraceNQ(cmd, out _);
+                            }
+                            using (MySqlCommand cmd = new MySqlCommand(@"
 SELECT
     Id
 FROM
@@ -325,23 +327,36 @@ WHERE
 ORDER BY
     Id DESC
 LIMIT 1", con))
-                        {
-                            cmd.Parameters.AddWithValue("@CarID", CarID);
-                            cmd.Parameters.AddWithValue("@StartPosID", StartPosID);
-                            cmd.Parameters.AddWithValue("@EndPosID", EndPosID);
-                            cmd.Parameters.AddWithValue("@name", name);
-                            int journeyId = (int)SQLTracer.TraceSc(cmd);
-                            UpdateJourney(journeyId);
+                            {
+                                cmd.Parameters.AddWithValue("@CarID", CarID);
+                                cmd.Parameters.AddWithValue("@StartPosID", StartPosID);
+                                cmd.Parameters.AddWithValue("@EndPosID", EndPosID);
+                                cmd.Parameters.AddWithValue("@name", name);
+                                int journeyId = (int)SQLTracer.TraceSc(cmd);
+                                UpdateJourney(journeyId);
+                            }
                         }
                     }
+                    catch (Exception ex)
+                    {
+                        ex.ToExceptionless().FirstCarUserID().Submit();
+                        Logfile.Log(ex.ToString());
+                    }
                 }
-                catch (Exception ex)
-                {
-                    ex.ToExceptionless().FirstCarUserID().Submit();
-                    Logfile.Log(ex.ToString());
-                }
+                WriteString(response, "OK");
             }
-            WriteString(response, "OK");
+            catch (Newtonsoft.Json.JsonException jsonEx)
+            {
+                Logfile.Log($"Journeys: JSON parse error in JourneysCreateCreate - {jsonEx.Message}");
+                jsonEx.ToExceptionless().FirstCarUserID().Submit();
+                WriteString(response, "{}");
+            }
+            catch (Exception ex)
+            {
+                Logfile.Log($"Journeys: Error in JourneysCreateCreate - {ex.Message}");
+                ex.ToExceptionless().FirstCarUserID().Submit();
+                WriteString(response, "{}");
+            }
         }
 
         private static void UpdateJourney(int journeyId)
@@ -625,12 +640,14 @@ WHERE
 
         internal static void JourneysList(HttpListenerRequest request, HttpListenerResponse response)
         {
-            string data = WebServer.GetDataFromRequestInputStream(request);
-            dynamic r = JsonConvert.DeserializeObject(data);
+            try
+            {
+                string data = WebServer.GetDataFromRequestInputStream(request);
+                dynamic r = JsonConvert.DeserializeObject(data);
 
-            int carid = r["carid"];
+                int carid = r["carid"];
 
-            string sql = $@"
+                string sql = $@"
 SELECT
     journeys.Id, 
     journeys.name,
@@ -657,7 +674,20 @@ FROM
 WHERE cars.Id = {carid}
 ORDER BY
     journeys.Id ASC";
-            WriteString(response, DBHelper.GetJQueryDataTableJSON(sql));
+                WriteString(response, DBHelper.GetJQueryDataTableJSON(sql));
+            }
+            catch (Newtonsoft.Json.JsonException jsonEx)
+            {
+                Logfile.Log($"Journeys: JSON parse error in JourneysList - {jsonEx.Message}");
+                jsonEx.ToExceptionless().FirstCarUserID().Submit();
+                WriteString(response, "{}");
+            }
+            catch (Exception ex)
+            {
+                Logfile.Log($"Journeys: Error in JourneysList - {ex.Message}");
+                ex.ToExceptionless().FirstCarUserID().Submit();
+                WriteString(response, "{}");
+            }
         }
 
         internal static void JourneysDelete(HttpListenerRequest request, HttpListenerResponse response)
@@ -713,34 +743,49 @@ WHERE
 
         internal static void JourneysDeleteDelete(HttpListenerRequest request, HttpListenerResponse response)
         {
-            string data = WebServer.GetDataFromRequestInputStream(request);
-            dynamic r = JsonConvert.DeserializeObject(data);
-
-            int journeyID = r["id"];
             try
             {
-                using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+                string data = WebServer.GetDataFromRequestInputStream(request);
+                dynamic r = JsonConvert.DeserializeObject(data);
+
+                int journeyID = r["id"];
+                try
                 {
-                    con.Open();
-                    using (MySqlCommand cmd = new MySqlCommand(@"
+                    using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+                    {
+                        con.Open();
+                        using (MySqlCommand cmd = new MySqlCommand(@"
 DELETE
 FROM
     journeys
 WHERE
     ID = @journeyID
 ", con))
-                    {
-                        cmd.Parameters.AddWithValue("@journeyID", journeyID);
-                        _ = SQLTracer.TraceNQ(cmd, out _);
+                        {
+                            cmd.Parameters.AddWithValue("@journeyID", journeyID);
+                            _ = SQLTracer.TraceNQ(cmd, out _);
+                        }
                     }
                 }
+                catch (Exception ex)
+                {
+                    ex.ToExceptionless().FirstCarUserID().Submit();
+                    Logfile.Log(ex.ToString());
+                }
+                WriteString(response, "OK");
+            }
+            catch (Newtonsoft.Json.JsonException jsonEx)
+            {
+                Logfile.Log($"Journeys: JSON parse error in JourneysDeleteDelete - {jsonEx.Message}");
+                jsonEx.ToExceptionless().FirstCarUserID().Submit();
+                WriteString(response, "{}");
             }
             catch (Exception ex)
             {
+                Logfile.Log($"Journeys: Error in JourneysDeleteDelete - {ex.Message}");
                 ex.ToExceptionless().FirstCarUserID().Submit();
-                Logfile.Log(ex.ToString());
+                WriteString(response, "{}");
             }
-            WriteString(response, "OK");
         }
 
         internal static void JourneysIndex(HttpListenerRequest _, HttpListenerResponse response)
