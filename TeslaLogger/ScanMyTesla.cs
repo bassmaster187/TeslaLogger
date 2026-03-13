@@ -312,6 +312,14 @@ namespace TeslaLogger
                 car.Log("Scanmytesla: Timeout");
                 Task.Delay(60000).GetAwaiter().GetResult();
             }
+            catch (Newtonsoft.Json.JsonException jsonEx)
+            {
+                if (!WebHelper.FilterNetworkoutage(jsonEx))
+                    car.CreateExceptionlessClient(jsonEx).AddObject(resultContent, "ResultContent").Submit();
+
+                Logfile.ExceptionWriter(jsonEx, resultContent);
+                await Task.Delay(10000, cancellationTokenSource.Token);
+            }
             catch (Exception ex)
             {
                 if (!WebHelper.FilterNetworkoutage(ex))
