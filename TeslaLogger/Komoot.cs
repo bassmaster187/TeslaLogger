@@ -1090,13 +1090,15 @@ VALUES (
 
         private static async Task<Dictionary<long, KomootTour>> DownloadToursAsync(KomootLoginInfo kli, bool dumpJSON = false)
         {
-            Logfile.Log($"#{kli.carID} Komoot: downloading tours ...");
-            StringBuilder sb = new StringBuilder();
-            sb.AppendLine();
-            Dictionary<long, KomootTour> komootTours = new Dictionary<long, KomootTour>();
-            bool nextPage = true;
-            string url = $"https://api.komoot.de/v007/users/{kli.user_id}/tours/";
-            while (nextPage)
+            try
+            {
+                Logfile.Log($"#{kli.carID} Komoot: downloading tours ...");
+                StringBuilder sb = new StringBuilder();
+                sb.AppendLine();
+                Dictionary<long, KomootTour> komootTours = new Dictionary<long, KomootTour>();
+                bool nextPage = true;
+                string url = $"https://api.komoot.de/v007/users/{kli.user_id}/tours/";
+                while (nextPage)
             {
                 using (HttpClient httpClient = new HttpClient())
                 {
@@ -1309,6 +1311,19 @@ VALUES (
                 }
             }
             return komootTours;
+            }
+            catch (System.Net.Http.HttpRequestException httpEx)
+            {
+                Logfile.Log($"#{kli.carID} Komoot: HTTP error in DownloadToursAsync - {httpEx.Message}");
+                httpEx.ToExceptionless().FirstCarUserID().Submit();
+                return new Dictionary<long, KomootTour>();
+            }
+            catch (Exception ex)
+            {
+                Logfile.Log($"#{kli.carID} Komoot: Error in DownloadToursAsync - {ex.Message}");
+                ex.ToExceptionless().FirstCarUserID().Submit();
+                return new Dictionary<long, KomootTour>();
+            }
         }
 
         private static bool TourIsAlreadyInDatabase(long tourID)
@@ -1350,20 +1365,22 @@ WHERE
 
         private static async Task<KomootLoginInfo> LoginAsync(KomootLoginInfo kli)
         {
-            Logfile.Log($"#{kli.carID} Komoot: logging in as {kli.username} ...");
-            using (HttpClient httpClient = new HttpClient())
+            try
             {
-                httpClient.DefaultRequestHeaders.Add("Authorization", "Basic " + Convert.ToBase64String(Encoding.UTF8.GetBytes($"{kli.username}:{kli.password}")));
-                using (HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, new Uri($"https://api.komoot.de/v006/account/email/{kli.username}/")))
+                Logfile.Log($"#{kli.carID} Komoot: logging in as {kli.username} ...");
+                using (HttpClient httpClient = new HttpClient())
                 {
-                    DateTime start = DateTime.UtcNow;
-                    HttpResponseMessage result = await httpClient.SendAsync(request);
-                    await DBHelper.AddMothershipDataToDBAsync("Komoot: Login", start, (int)result.StatusCode, kli.carID);
-                    if (result.IsSuccessStatusCode)
+                    httpClient.DefaultRequestHeaders.Add("Authorization", "Basic " + Convert.ToBase64String(Encoding.UTF8.GetBytes($"{kli.username}:{kli.password}")));
+                    using (HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, new Uri($"https://api.komoot.de/v006/account/email/{kli.username}/")))
                     {
-                        string resultContent = await result.Content.ReadAsStringAsync();
-                        Tools.DebugLog($"#{kli.carID} Komoot: login result: {resultContent.Length}");
-                        /* expected JSON
+                        DateTime start = DateTime.UtcNow;
+                        HttpResponseMessage result = await httpClient.SendAsync(request);
+                        await DBHelper.AddMothershipDataToDBAsync("Komoot: Login", start, (int)result.StatusCode, kli.carID);
+                        if (result.IsSuccessStatusCode)
+                        {
+                            string resultContent = await result.Content.ReadAsStringAsync();
+                            Tools.DebugLog($"#{kli.carID} Komoot: login result: {resultContent.Length}");
+                            /* expected JSON
 {
     "email": "abc@xyz.net",
     "username": "1234567890",
@@ -1387,34 +1404,47 @@ WHERE
     "password": "asdfasdfasdf"
 }
 						 */
-                        dynamic jsonResult = JsonConvert.DeserializeObject(resultContent);
-                        if (jsonResult.ContainsKey("user"))
-                        {
-                            dynamic jsonUser = jsonResult["user"];
-                            if (jsonUser.ContainsKey("displayname") && jsonResult.ContainsKey("username") && jsonResult.ContainsKey("password"))
+                            dynamic jsonResult = JsonConvert.DeserializeObject(resultContent);
+                            if (jsonResult.ContainsKey("user"))
                             {
-                                kli.user_id = jsonResult["username"];
-                                kli.token = jsonResult["password"];
-                                kli.loginSuccessful = true;
-                                Logfile.Log($"#{kli.carID} Komoot: logged in as {jsonUser["displayname"]}");
+                                dynamic jsonUser = jsonResult["user"];
+                                if (jsonUser.ContainsKey("displayname") && jsonResult.ContainsKey("username") && jsonResult.ContainsKey("password"))
+                                {
+                                    kli.user_id = jsonResult["username"];
+                                    kli.token = jsonResult["password"];
+                                    kli.loginSuccessful = true;
+                                    Logfile.Log($"#{kli.carID} Komoot: logged in as {jsonUser["displayname"]}");
+                                }
+                                else
+                                {
+                                    Logfile.Log($"#{kli.carID} Komoot: login failed - user JSON does not contain displayname");
+                                }
                             }
                             else
                             {
-                                Logfile.Log($"#{kli.carID} Komoot: login failed - user JSON does not contain displayname");
+                                Logfile.Log($"#{kli.carID} Komoot: login failed - JSON does not contain user");
                             }
                         }
                         else
                         {
-                            Logfile.Log($"#{kli.carID} Komoot: login failed - JSON does not contain user");
+                            Logfile.Log($"#{kli.carID} Komoot: login failed ({result.StatusCode})");
                         }
                     }
-                    else
-                    {
-                        Logfile.Log($"#{kli.carID} Komoot: login failed ({result.StatusCode})");
-                    }
                 }
+                return kli;
             }
-            return kli;
+            catch (System.Net.Http.HttpRequestException httpEx)
+            {
+                Logfile.Log($"#{kli.carID} Komoot: HTTP error in LoginAsync - {httpEx.Message}");
+                httpEx.ToExceptionless().FirstCarUserID().Submit();
+                return kli;
+            }
+            catch (Exception ex)
+            {
+                Logfile.Log($"#{kli.carID} Komoot: Error in LoginAsync - {ex.Message}");
+                ex.ToExceptionless().FirstCarUserID().Submit();
+                return kli;
+            }
         }
 
         internal static bool CanHandleRequest(HttpListenerRequest request)
