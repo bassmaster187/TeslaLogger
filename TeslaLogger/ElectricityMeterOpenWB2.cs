@@ -131,17 +131,29 @@ namespace TeslaLogger
 
                 return message;
             }
+            catch (Newtonsoft.Json.JsonException jsonEx)
+            {
+                Logfile.Log($"ElectricityMeterOpenWB2: JSON parse error in GetCurrentData - {jsonEx.Message}");
+                if (!WebHelper.FilterNetworkoutage(jsonEx))
+                    jsonEx.ToExceptionless().FirstCarUserID().Submit();
+
+                Logfile.Log(jsonEx.ToString());
+            }
+            catch (WebException wx)
+            {
+                if ((wx.Response as HttpWebResponse)?.StatusCode == HttpStatusCode.NotFound)
+                {
+                    Logfile.Log(wx.Message);
+                    return null;
+                }
+
+                if (!WebHelper.FilterNetworkoutage(wx))
+                    wx.ToExceptionless().FirstCarUserID().Submit();
+
+                Logfile.Log(wx.ToString());
+            }
             catch (Exception ex)
             {
-                if (ex is WebException wx)
-                {
-                    if ((wx.Response as HttpWebResponse)?.StatusCode == HttpStatusCode.NotFound)
-                    {
-                        Logfile.Log(wx.Message);
-                        return null;
-                    }
-
-                }
                 if (!WebHelper.FilterNetworkoutage(ex))
                     ex.ToExceptionless().FirstCarUserID().Submit();
 
