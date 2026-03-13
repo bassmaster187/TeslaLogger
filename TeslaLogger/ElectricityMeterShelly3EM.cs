@@ -94,6 +94,11 @@ namespace TeslaLogger
                 
                 return (double?)(value1 + value2 + value3)/1000.0;
             }
+            catch (Newtonsoft.Json.JsonException jsonEx)
+            {
+                jsonEx.ToExceptionless().FirstCarUserID().Submit();
+                Logfile.ExceptionWriter(jsonEx, j);
+            }
             catch (Exception ex)
             {
                 ex.ToExceptionless().FirstCarUserID().Submit();
@@ -117,6 +122,11 @@ namespace TeslaLogger
                 decimal watt_total = (value1 + value2 + value3);
 
                 return watt_total > 3000;
+            }
+            catch (Newtonsoft.Json.JsonException jsonEx)
+            {
+                jsonEx.ToExceptionless().FirstCarUserID().Submit();
+                Logfile.ExceptionWriter(jsonEx, j);
             }
             catch (Exception ex)
             {
@@ -147,6 +157,13 @@ namespace TeslaLogger
                 string value = jsonResult[key];
 
                 return value;
+            }
+            catch (Newtonsoft.Json.JsonException jsonEx)
+            {
+                if (!WebHelper.FilterNetworkoutage(jsonEx))
+                    jsonEx.ToExceptionless().FirstCarUserID().Submit();
+
+                Logfile.ExceptionWriter(jsonEx, j);
             }
             catch (Exception ex)
             {
