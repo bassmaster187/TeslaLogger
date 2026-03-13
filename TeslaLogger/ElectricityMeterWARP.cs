@@ -181,6 +181,11 @@ namespace TeslaLogger
 
                 return jsonResult["charger_state"] == 3 ? true : false;
             }
+            catch (JsonException ex)
+            {
+                ex.ToExceptionless().FirstCarUserID().Submit();
+                Logfile.ExceptionWriter(ex, evse_state);
+            }
             catch (Exception ex)
             {
                 ex.ToExceptionless().FirstCarUserID().Submit();
@@ -213,6 +218,11 @@ namespace TeslaLogger
                     return "";
 
                 return value;
+            }
+            catch (JsonException ex)
+            {
+                ex.ToExceptionless().FirstCarUserID().Submit();
+                Logfile.ExceptionWriter(ex, info_version);
             }
             catch (Exception ex)
             {
