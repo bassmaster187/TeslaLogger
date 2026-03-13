@@ -217,6 +217,11 @@ ORDER BY
                                     }
                                 }
                             }
+                            catch (HttpRequestException httpEx)
+                            {
+                                car.SendException2Exceptionless(httpEx);
+                                car.Log("ShareData: HTTP error - " + httpEx.Message);
+                            }
                             catch (Exception ex)
                             {
                                 car.SendException2Exceptionless(ex);
@@ -427,6 +432,11 @@ ORDER BY
                                 }
                             }
                         }
+                        catch (HttpRequestException httpEx)
+                        {
+                            car.SendException2Exceptionless(httpEx);
+                            car.Log("ShareData: HTTP error - " + httpEx.Message);
+                        }
                         catch (Exception ex)
                         {
                             car.SendException2Exceptionless(ex);
@@ -562,6 +572,11 @@ GROUP BY
                                     car.Log("ShareData: SendDegradationData end");
                                 }
                             }
+                        }
+                        catch (HttpRequestException httpEx)
+                        {
+                            car.SendException2Exceptionless(httpEx);
+                            car.Log("ShareData: HTTP error - " + httpEx.Message);
                         }
                         catch (Exception ex)
                         {
