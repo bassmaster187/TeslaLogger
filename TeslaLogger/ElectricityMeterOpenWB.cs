@@ -92,6 +92,11 @@ namespace TeslaLogger
 
                 return v;
             }
+            catch (JsonException ex)
+            {
+                ex.ToExceptionless().FirstCarUserID().Submit();
+                Logfile.ExceptionWriter(ex, j);
+            }
             catch (Exception ex)
             {
                 ex.ToExceptionless().FirstCarUserID().Submit();
@@ -115,6 +120,11 @@ namespace TeslaLogger
                 double v = Double.Parse(value, Tools.ciEnUS);
 
                 return v;
+            }
+            catch (JsonException ex)
+            {
+                ex.ToExceptionless().FirstCarUserID().Submit();
+                Logfile.ExceptionWriter(ex, j);
             }
             catch (Exception ex)
             {
@@ -140,6 +150,11 @@ namespace TeslaLogger
                 string value = jsonResult[key];
 
                 return value == "1";
+            }
+            catch (JsonException ex)
+            {
+                ex.ToExceptionless().FirstCarUserID().Submit();
+                Logfile.ExceptionWriter(ex, j);
             }
             catch (Exception ex)
             {
