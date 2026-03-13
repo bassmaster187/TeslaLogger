@@ -2757,6 +2757,12 @@ PRIMARY KEY(id)
 
                 link = $"{URL_Grafana}d/{uid}/{title}";
             }
+            catch (Newtonsoft.Json.JsonException jsonEx)
+            {
+                Logfile.Log($"UpdateTeslalogger: JSON parse error in GrafanaGetTitleAndLink - {jsonEx.Message}");
+                jsonEx.ToExceptionless().FirstCarUserID().Submit();
+                Logfile.ExceptionWriter(jsonEx, "");
+            }
             catch (Exception ex)
             {
                 ex.ToExceptionless().FirstCarUserID().Submit();
