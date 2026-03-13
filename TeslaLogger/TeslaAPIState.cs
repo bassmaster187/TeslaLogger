@@ -462,6 +462,13 @@ namespace TeslaLogger
                 if (!Tools.IsPropertyExist(jsonResult, "response") || string.IsNullOrEmpty(jsonResult["response"].ToString()))
                     return false;
             }
+            catch (Newtonsoft.Json.JsonException jsonEx)
+            {
+                car.CreateExceptionlessClient(jsonEx).Submit();
+                Tools.DebugLog("JsonException", jsonEx);
+                Tools.DebugLog("JSON: <" + JSON + ">");
+                return false;
+            }
             catch (ArgumentException aex)
             {
                 car.CreateExceptionlessClient(aex).Submit();
@@ -628,6 +635,11 @@ namespace TeslaLogger
                     }
                 }
                 return true;
+            }
+            catch (Newtonsoft.Json.JsonException jsonEx)
+            {
+                car.webhelper.SubmitExceptionlessClientWithResultContent(jsonEx, _JSON);
+                Tools.DebugLog("JsonException", jsonEx);
             }
             catch (Exception ex)
             {
@@ -812,9 +824,24 @@ namespace TeslaLogger
 
         private static Dictionary<string, object> ExtractResponse(string _JSON, string command)
         {
-            dynamic jsonResult = JsonConvert.DeserializeObject(_JSON);
-            Dictionary<string, object> r1 = jsonResult["response"][command].ToObject<Dictionary<string, object>>();
-            return r1;
+            try
+            {
+                dynamic jsonResult = JsonConvert.DeserializeObject(_JSON);
+                Dictionary<string, object> r1 = jsonResult["response"][command].ToObject<Dictionary<string, object>>();
+                return r1;
+            }
+            catch (JsonException jsonEx)
+            {
+                Logfile.Log($"TeslaAPIState: JsonException in ExtractResponse parsing {command}: {jsonEx.Message}");
+                jsonEx.ToExceptionless().FirstCarUserID().Submit();
+                throw;
+            }
+            catch (Exception ex)
+            {
+                Logfile.Log($"TeslaAPIState: Exception in ExtractResponse parsing {command}: {ex.Message}");
+                ex.ToExceptionless().FirstCarUserID().Submit();
+                throw;
+            }
         }
 
         private bool ParseDriveState(string _JSON)
