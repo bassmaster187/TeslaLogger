@@ -526,7 +526,9 @@ VALUES(
                     string content = response.Content.ReadAsStringAsync().Result;
                     if (response.IsSuccessStatusCode)
                     {
-                        dynamic j = JsonConvert.DeserializeObject(content);
+                        try
+                        {
+                            dynamic j = JsonConvert.DeserializeObject(content);
                         if (j?["data"] == null || j["errors"] != null)
                         {
                             Tools.DebugLog($"Unexpected GuestAPI response: {content}");
@@ -580,6 +582,17 @@ VALUES(
                             sendKV.Add("m", "");
                             ShareSuc(send, false, out _, out _);
                         }
+                        }
+                        catch (JsonException jsonEx)
+                        {
+                            Logfile.Log($"NearbySuCService: JSON error in GetGuestAvailability - {jsonEx.Message}");
+                            jsonEx.ToExceptionless().FirstCarUserID().Submit();
+                        }
+                        catch (Exception ex)
+                        {
+                            Logfile.Log($"NearbySuCService: Error in GetGuestAvailability - {ex.Message}");
+                            ex.ToExceptionless().FirstCarUserID().Submit();
+                        }
                     }
                 }
             }
@@ -603,7 +616,9 @@ VALUES(
                     var result = client.PostAsync("https://www.tesla.com/de_DE/charging/guest/api/graphql?operationName=getGuestChargingSiteDetails", scontent).Result;
                     string r = result.Content.ReadAsStringAsync().Result;
 
-                    dynamic j = JsonConvert.DeserializeObject(r);
+                    try
+                    {
+                        dynamic j = JsonConvert.DeserializeObject(r);
                     if (j?["data"] == null || j["errors"] != null)
                     {
                         Tools.DebugLog($"Unexpected GuestAPI response: {r}");
@@ -663,8 +678,18 @@ VALUES(
                         sendKV.Add("m", "");
                         ShareSuc(send, false, out _, out _);
                     }
+                    }
+                    catch (JsonException jsonEx)
+                    {
+                        Logfile.Log($"NearbySuCService: JSON error in GetGuestAvailabilityOld - {jsonEx.Message}");
+                        jsonEx.ToExceptionless().FirstCarUserID().Submit();
+                    }
+                    catch (Exception ex)
+                    {
+                        Logfile.Log($"NearbySuCService: Error in GetGuestAvailabilityOld - {ex.Message}");
+                        ex.ToExceptionless().FirstCarUserID().Submit();
+                    }
                 }
-            }
 
             return a;
         }
