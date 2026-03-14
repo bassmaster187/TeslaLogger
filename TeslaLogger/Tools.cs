@@ -782,7 +782,7 @@ namespace TeslaLogger
                 ioEx.ToExceptionless().FirstCarUserID().AddObject(json, "JSON").Submit();
                 Logfile.Log($"IOException reading settings: {ioEx.ToString()}");
             }
-            catch (JsonException jsonEx)
+            catch (Newtonsoft.Json.JsonException jsonEx)
             {
                 jsonEx.ToExceptionless().FirstCarUserID().AddObject(json, "JSON").Submit();
                 Logfile.Log($"JSON parse error in settings: {jsonEx.ToString()}");
@@ -823,7 +823,7 @@ namespace TeslaLogger
                 ioEx.ToExceptionless().FirstCarUserID().AddObject(json, "JSON").Submit();
                 Logfile.Log($"IOException reading HTTP port config: {ioEx.ToString()}");
             }
-            catch (JsonException jsonEx)
+            catch (Newtonsoft.Json.JsonException jsonEx)
             {
                 jsonEx.ToExceptionless().FirstCarUserID().AddObject(json, "JSON").Submit();
                 Logfile.Log($"JSON parse error in HTTP port config: {jsonEx.ToString()}");
@@ -862,7 +862,7 @@ namespace TeslaLogger
                 ioEx.ToExceptionless().FirstCarUserID().AddObject(json, "JSON").Submit();
                 Logfile.Log($"IOException reading charging states config: {ioEx.ToString()}");
             }
-            catch (JsonException jsonEx)
+            catch (Newtonsoft.Json.JsonException jsonEx)
             {
                 jsonEx.ToExceptionless().FirstCarUserID().AddObject(json, "JSON").Submit();
                 Logfile.Log($"JSON parse error in charging states config: {jsonEx.ToString()}");
@@ -938,7 +938,7 @@ namespace TeslaLogger
                 ioEx.ToExceptionless().FirstCarUserID().AddObject(json, "JSON").Submit();
                 Logfile.Log($"IOException reading streaming position config: {ioEx.ToString()}");
             }
-            catch (JsonException jsonEx)
+            catch (Newtonsoft.Json.JsonException jsonEx)
             {
                 jsonEx.ToExceptionless().FirstCarUserID().AddObject(json, "JSON").Submit();
                 Logfile.Log($"JSON parse error in streaming position config: {jsonEx.ToString()}");
@@ -1004,7 +1004,7 @@ namespace TeslaLogger
                 ioEx.ToExceptionless().AddObject(json, "JSON").Submit();
                 Logfile.Log($"IOException reading sleep schedule: {ioEx.ToString()}");
             }
-            catch (JsonException jsonEx)
+            catch (Newtonsoft.Json.JsonException jsonEx)
             {
                 jsonEx.ToExceptionless().AddObject(json, "JSON").Submit();
                 Logfile.Log($"JSON parse error in sleep schedule: {jsonEx.ToString()}");
@@ -1143,7 +1143,7 @@ namespace TeslaLogger
                 ioEx.ToExceptionless().FirstCarUserID().AddObject(json, "JSON").Submit();
                 Logfile.Log($"IOException reading ScanMyTesla config: {ioEx.ToString()}");
             }
-            catch (JsonException jsonEx)
+            catch (Newtonsoft.Json.JsonException jsonEx)
             {
                 jsonEx.ToExceptionless().FirstCarUserID().AddObject(json, "JSON").Submit();
                 Logfile.Log($"JSON parse error in ScanMyTesla config: {jsonEx.ToString()}");
@@ -1189,7 +1189,7 @@ namespace TeslaLogger
                 ioEx.ToExceptionless().FirstCarUserID().AddObject(json, "JSON").Submit();
                 Logfile.Log($"IOException reading update settings: {ioEx.ToString()}");
             }
-            catch (JsonException jsonEx)
+            catch (Newtonsoft.Json.JsonException jsonEx)
             {
                 jsonEx.ToExceptionless().FirstCarUserID().AddObject(json, "JSON").Submit();
                 Logfile.Log($"JSON parse error in update settings: {jsonEx.ToString()}");
@@ -1331,7 +1331,7 @@ namespace TeslaLogger
                 ioEx.ToExceptionless().AddObject(json, "JSON").AddObject(Tools.ConvertString2Base64(json), "JSON-Base64").Submit();
                 Logfile.Log($"IOException reading Grafana settings: {ioEx.ToString()}");
             }
-            catch (JsonException jsonEx)
+            catch (Newtonsoft.Json.JsonException jsonEx)
             {
                 jsonEx.ToExceptionless().AddObject(json, "JSON").AddObject(Tools.ConvertString2Base64(json), "JSON-Base64").Submit();
                 Logfile.Log($"JSON parse error in Grafana settings: {jsonEx.ToString()}");
