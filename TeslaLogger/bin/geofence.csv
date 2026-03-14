@@ -7902,6 +7902,7 @@ BatteryFly BY-Minsk Мінск вуліца Ціміразева,53.93933,27.442
 
 Bayernwerk DE-Heßdorf Hannberger Straße,49.62884,10.90561
 Bayernwerk DE-Kulmbach Oberhacken,50.10593,11.45829
+Bayernwerk DE-Teublitz Regensburger Straße,49.22158,12.0823
 Bayernwerk DE-Wassertrüdingen Münchener Straße,49.04716,10.60734
 
 BayWa DE-Augsburg Gubener Straße,48.38911,10.86463
@@ -10531,6 +10532,7 @@ Elinta LT-Vievis Kauno g.,54.77287,24.81753
 
 eliso DE-Celle Zur Hasselklink,52.65246,10.06868
 eliso DE-Essen Bamlerstraße,51.47264,6.99121
+eliso DE-Havelberg Uferstraße,52.82418,12.07148
 eliso DE-Magdeburg Eisvogelstrasse,52.13951,11.58802
 eliso DE-Mannheim Seckenheimer Landstraße,49.4745,8.53765
 
@@ -11126,7 +11128,7 @@ EnBW DE-Erlangen BAB A3 Aurach,49.58181,10.92685
 EnBW DE-Erlangen Hofmannstraße,49.59287,11.01452,10
 EnBW DE-Erlangen Karl-May-Straße,49.58171,10.93069
 EnBW DE-Erwitte,51.60625,8.33675
-EnBW DE-Eschborn Ginnheimer Straße,50.14132,8.58163,25
+EnBW DE-Eschborn Ginnheimer Straße,50.14132,8.58163,29
 EnBW DE-Eschelbronn Bahnhofstraße,49.3201,8.86804
 EnBW DE-Eschenbach In den Bühlgärten,48.65772,9.67371
 EnBW DE-Essen Aktienstraße,51.4623,6.9305
@@ -11725,6 +11727,7 @@ EnBW DE-Meersburg Unteruhldinger Straße,47.69533,9.26559
 EnBW DE-Mehrstetten Marktplatz,48.37638,9.56605
 EnBW DE-Meine Am Marktplatz,52.38044,10.53664
 EnBW DE-Meinerzhagen Darmcher Weg,51.10156,7.67968
+EnBW DE-Meinerzhagen Zum Eickenhahn,51.10615,7.65978
 EnBW DE-Meitingen Euronics,48.5562,10.85176,10
 EnBW DE-Meitingen Nord,48.55767,10.8524,20
 EnBW DE-Mellingen Hainholzstraße,50.93753,11.39008
@@ -12218,7 +12221,7 @@ EnBW DE-St. Leon-Rot,49.26729,8.61565
 EnBW DE-St. Leon-Rot Am St. Leoner See,49.28242,8.58414
 EnBW DE-St. Leon-Rot Dietmar Hopp Straße,49.2659,8.6145
 EnBW DE-St. Leon-Rot Opelstraße,49.2454,8.63677
-EnBW DE-St. Wendel Am Wirthembösch,49.46613,7.16236
+EnBW DE-St. Wendel Am Wirthembösch,49.46605,7.1624
 EnBW DE-Stade,53.60939,9.47915
 EnBW DE-Stade Rewe,53.58252,9.49983
 EnBW DE-Stadthagen Hagebaumarkt,52.33007,9.23168
@@ -19131,6 +19134,8 @@ MVV DE-Weinheim Höhnerweg,49.5574,8.6662
 MVV DE-Weinheim Höhnerweg,49.55815,8.65741,30
 MVV DE-Wietze Contistraße,52.65154,9.7464
 
+mwenergy DE-Willich Fadheiderstraße,51.27807,6.46744
+
 N-ERGIE DE-Abtswind Weinstraße,49.76958,10.37699
 N-ERGIE DE-Bad Steben Casinoplatz,50.36465,11.64551
 N-ERGIE DE-Burgthann Espenpark,49.31704,11.33897
@@ -22736,6 +22741,7 @@ TotalEnergies FR-Aire de Toul-Dommartin,48.65997,5.90812
 TotalEnergies FR-Aire de Toul-Dommartin,48.66073,5.90822
 TotalEnergies FR-Aire Des Volcans D Auvergne Saint Agoulin,46.05858,3.11231,80
 TotalEnergies FR-Aire Narbonne Vinassan Sud,43.21619,3.09248,80
+TotalEnergies FR-Brumath Av. de Strasbourg,48.70773,7.7102
 TotalEnergies FR-Bussy-Saint-Georges Aire De Ferrieres,48.82907,2.74231
 TotalEnergies FR-Bussy-Saint-Georges Aire De Ferrieres,48.82995,2.7454
 TotalEnergies FR-Dommartin-lès-Cuiseaux Aire du Poulet de Bresse,46.495,5.31134
@@ -22774,7 +22780,6 @@ TotalEnergies FR-Relais Des Brondillants Bron,45.73932,4.90509,80
 TotalEnergies FR-Relais Des Coquelicots,45.52452,4.29557,80
 TotalEnergies FR-Relais Fontbelleau,44.87366,-0.50616,80
 TotalEnergies FR-Relais Guidel Sud,47.82164,-3.46873,80
-TotalEnergies FR-Relais Herrenwald,48.70799,7.70979,80
 TotalEnergies FR-Relais La Bayanne,44.9997,5.00055,80
 TotalEnergies FR-Relais La Dentelle D’Alencon,48.45667,0.12534,80
 TotalEnergies FR-Relais Le Mont Saint Michel,48.5848,-1.32577,80
