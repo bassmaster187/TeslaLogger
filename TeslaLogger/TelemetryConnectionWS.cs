@@ -24,13 +24,13 @@ namespace TeslaLogger
         ClientWebSocket ws = null;
         Random r = new Random();
 
+        readonly string clientInstanceId = $"{Environment.MachineName}:{Environment.ProcessId}:{Guid.NewGuid():N}";
         bool connect;
 
         void Log(string message)
         {
-            car.Log("*** FT: " +  message);
+            car.Log("*** FT: " + message);
         }
-            
 
         public TelemetryConnectionWS(Car car)
         {
@@ -41,9 +41,11 @@ namespace TeslaLogger
             parser = new TelemetryParser(car);
             parser.InitFromDB();
 
+            Log($"Telemetry instance id: {clientInstanceId}");
+
             t = new Thread(() => { Run(); });
             t.Start();
-         }
+        }
 
         public override void CloseConnection()
         {
@@ -56,9 +58,10 @@ namespace TeslaLogger
                 connect = false;
                 cts.Cancel();
 
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
-                car.Log("Telemetry CloseConnection " +  ex.Message);
+                car.Log("Telemetry CloseConnection " + ex.Message);
             }
         }
 
@@ -117,7 +120,7 @@ namespace TeslaLogger
                     }
                     else
                     {
-                        Log("Telemetry Exception: " + ex.ToString());
+                        Log("Telemetry Exception: " + ex);
                         car.CreateExceptionlessClient(ex).Submit();
                     }
 
@@ -132,25 +135,24 @@ namespace TeslaLogger
             var buffer = new ArraySegment<byte>(new byte[1024]);
             WebSocketReceiveResult result;
 
-            String data;
+            string data;
 
-            using (System.IO.MemoryStream ms = new System.IO.MemoryStream())
+            using (MemoryStream ms = new MemoryStream())
             {
                 do
                 {
                     result = await socket.ReceiveAsync(buffer, cts.Token);
-                    ms.Write(buffer.Array, buffer.Offset, result.Count);
+                    ms.Write(buffer.Array!, buffer.Offset, result.Count);
                 } while (!result.EndOfMessage);
 
                 if (result.MessageType == WebSocketMessageType.Close)
-                    throw new Exception("CLOSE");
+                    throw new Exception($"CLOSE status={result.CloseStatus} desc={result.CloseStatusDescription ?? "<empty>"}");
 
-                ms.Seek(0, System.IO.SeekOrigin.Begin);
-
+                ms.Seek(0, SeekOrigin.Begin);
                 data = Encoding.UTF8.GetString(ms.ToArray());
             }
 
-            await parser.handleMessageAsync(data);            
+            await parser.handleMessageAsync(data);
         }
 
         private void ConnectToServer()
@@ -161,7 +163,7 @@ namespace TeslaLogger
                 ws.Dispose();
 
             ws = null;
-            
+
             try
             {
                 var cws = new ClientWebSocket();
@@ -174,8 +176,8 @@ namespace TeslaLogger
             {
                 if (ex is AggregateException ex2)
                 {
-                    Log("Connect to Telemetry Server (WS) Error: " + ex2.InnerException.Message);
-                    if (ex.InnerException != null)
+                    Log("Connect to Telemetry Server (WS) Error: " + ex2.InnerException?.Message);
+                    if (ex2.InnerException != null)
                         car.CreateExceptionlessClient(ex2.InnerException).Submit();
                     else
                         car.CreateExceptionlessClient(ex2).Submit();
@@ -213,17 +215,18 @@ namespace TeslaLogger
                     { "accesstoken", car.Tesla_Token},
                     { "regionurl", car.webhelper.apiaddress},
                     { "config", configname},
-                    { "version", Assembly.GetExecutingAssembly().GetName().Version.ToString()}
+                    { "version", Assembly.GetExecutingAssembly().GetName().Version.ToString() },
+                    { "client_instance_id", clientInstanceId }
                 };
 
             var jLogin = JsonConvert.SerializeObject(login);
             SendString(ws, jLogin);
         }
 
-        public Task SendString(ClientWebSocket ws, String data)
+        public Task SendString(ClientWebSocket ws, string data)
         {
             var encoded = Encoding.UTF8.GetBytes(data);
-            var buffer = new ArraySegment<Byte>(encoded, 0, encoded.Length);
+            var buffer = new ArraySegment<byte>(encoded, 0, encoded.Length);
             return ws.SendAsync(buffer, WebSocketMessageType.Text, true, cts.Token);
         }
     }
