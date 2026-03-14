@@ -549,7 +549,7 @@ namespace TeslaLogger
                 car.CreateExeptionlessLog("UpdateTeslaTokenFromRefreshToken", $"HTTP Error: {httpEx.StatusCode}", Exceptionless.Logging.LogLevel.Error).AddObject(HttpStatusCode, "HTTP StatusCode").Submit();
                 car.CreateExceptionlessClient(httpEx).MarkAsCritical().Submit();
             }
-            catch (JsonException jsonEx)
+            catch (Newtonsoft.Json.JsonException jsonEx)
             {
                 car.Log($"JSON Parse Error: {jsonEx.Message}");
                 car.CreateExeptionlessLog("UpdateTeslaTokenFromRefreshToken", $"JSON Error: {jsonEx.Message}", Exceptionless.Logging.LogLevel.Error).AddObject(resultContent, "ResultContent").Submit();
@@ -600,7 +600,7 @@ namespace TeslaLogger
             {
                 car.Log($"SetNewAccessToken: HTTP Error: {httpEx.Message}");
             }
-            catch (JsonException jsonEx)
+            catch (Newtonsoft.Json.JsonException jsonEx)
             {
                 car.Log($"SetNewAccessToken: JSON Parse Error: {jsonEx.Message}");
             }
@@ -677,7 +677,7 @@ namespace TeslaLogger
                 car.Log($"HTTP Error in GetRegion: {httpEx.Message}");
                 car.CreateExceptionlessClient(httpEx).MarkAsCritical().Submit();
             }
-            catch (JsonException jsonEx)
+            catch (Newtonsoft.Json.JsonException jsonEx)
             {
                 car.Log($"JSON Parse Error in GetRegion: {jsonEx.Message}");
                 car.CreateExceptionlessClient(jsonEx).MarkAsCritical().Submit();
@@ -803,7 +803,7 @@ namespace TeslaLogger
                 ExceptionlessClient.Default.ProcessQueueAsync();
                 Task.Delay(30000).GetAwaiter().GetResult();
             }
-            catch (JsonException jsonEx)
+            catch (Newtonsoft.Json.JsonException jsonEx)
             {
                 car.Log($"JSON Parse Error in UpdateTeslaTokenFromRefreshTokenFromFleetAPI: {jsonEx.Message}");
                 car.CreateExceptionlessClient(jsonEx).MarkAsCritical().Submit();
@@ -932,7 +932,7 @@ namespace TeslaLogger
                 ExceptionlessClient.Default.ProcessQueueAsync();
                 Task.Delay(30000).GetAwaiter().GetResult();
             }
-            catch (JsonException jsonEx)
+            catch (Newtonsoft.Json.JsonException jsonEx)
             {
                 car.Log($"JSON Parse Error in UpdateTeslaTokenFromRefreshTokenFromFleetAPIWithClientID: {jsonEx.Message}");
                 car.CreateExceptionlessClient(jsonEx).MarkAsCritical().Submit();
@@ -5217,7 +5217,7 @@ WHERE
                 Logfile.Log($"SendDataToAbetterrouteplannerAsync HTTP Error: {httpEx.Message}");
                 Tools.DebugLog($"SendDataToAbetterrouteplannerAsync HTTP Error: {httpEx.Message}{Environment.NewLine}{httpEx.StackTrace}");
             }
-            catch (JsonException jsonEx)
+            catch (Newtonsoft.Json.JsonException jsonEx)
             {
                 car.CreateExceptionlessClient(jsonEx).Submit();
                 Logfile.Log($"SendDataToAbetterrouteplannerAsync JSON Error: {jsonEx.Message}");
@@ -5322,7 +5322,7 @@ WHERE
                 car.SendException2Exceptionless(httpEx);
                 Tools.DebugLog($"SuperchargeBingo HTTP Error: {httpEx.Message}{Environment.NewLine}");
             }
-            catch (JsonException jsonEx)
+            catch (Newtonsoft.Json.JsonException jsonEx)
             {
                 Logfile.Log($"SuperchargeBingo JSON Parse Error: {jsonEx.Message}");
                 car.SendException2Exceptionless(jsonEx);
@@ -5448,7 +5448,7 @@ WHERE
                 httpEx.ToExceptionless().FirstCarUserID().Submit();
                 Logfile.Log($"BranchExists HTTP Error: {httpEx.Message}");
             }
-            catch (JsonException jsonEx)
+            catch (Newtonsoft.Json.JsonException jsonEx)
             {
                 jsonEx.ToExceptionless().FirstCarUserID().Submit();
                 Logfile.Log($"BranchExists JSON Parse Error: {jsonEx.Message}");
