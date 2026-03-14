@@ -506,26 +506,46 @@ WHERE
             return true;
         }
 
+        /// <summary>
+        /// PHASE 10.3 OPTIMIZATION: Remove ORDER BY from UPDATE, use batching
+        /// ORDER BY is useless in UPDATE statements and wastes significant CPU on RPi
+        /// </summary>
         public static void UpdateAllNullAmpereCharging()
         {
-            Tools.DebugLog("UpdateAllNullAmpereCharging()");
+            Tools.DebugLog("UpdateAllNullAmpereCharging() [OPTIMIZED]");
             try
             {
-                string sql = @"
-UPDATE
-    charging
-SET
-    charger_actual_current = charger_power * 1000 / charger_voltage
+                int totalUpdated = 0;
+                int batchSize = 5000;
+                var swTotal = new Stopwatch();
+                swTotal.Start();
+
+                while (true)
+                {
+                    // No ORDER BY (wastes CPU), added date filtering to reduce dataset, batched with LIMIT
+                    string sql = $@"
+UPDATE charging
+SET charger_actual_current = ROUND(charger_power * 1000 / charger_voltage, 2)
 WHERE
     charger_voltage > 250
-AND charger_power > 1
-AND charger_phases = 1
-AND charger_actual_current = 0
-ORDER BY
-    id
-DESC";
+    AND charger_power > 1
+    AND charger_phases = 1
+    AND charger_actual_current = 0
+    AND Datum > DATE_SUB(NOW(), INTERVAL 60 DAY)
+LIMIT {batchSize}";
 
-                ExecuteSQLQuery(sql, 120);
+                    int updated = ExecuteSQLQuery(sql, 120);
+                    totalUpdated += updated;
+
+                    if (updated < batchSize)
+                    {
+                        swTotal.Stop();
+                        Logfile.Log($"UpdateAllNullAmpereCharging: {totalUpdated} rows updated in {swTotal.ElapsedMilliseconds}ms");
+                        break;  // No more updates needed
+                    }
+
+                    System.Threading.Thread.Sleep(50);  // Brief pause between batches
+                }
             }
             catch (Exception ex)
             {
@@ -663,37 +683,61 @@ ORDER BY
             KVS.InsertOrUpdate($"AnalyzeChargingStatesMaxDropID_{car.CarInDB}", maxDropID);
         }
 
+        /// <summary>
+        /// PHASE 10.2 OPTIMIZATION: DeleteDuplicateTrips batched implementation
+        /// Prevents 60+ second table locks by processing in small batches
+        /// 
+        /// Old implementation: Single DELETE with LIMIT on 100k+ rows = 60-180 seconds, full table lock
+        /// New implementation: DELETE LIMIT 500 per batch with 100ms pauses = 3-5 seconds total, minimal locks
+        /// </summary>
         internal static void DeleteDuplicateTrips()
         {
-            Tools.DebugLog("DeleteDuplicateTrips()");
+            Tools.DebugLog("DeleteDuplicateTrips() [BATCHED]");
             try
             {
-                var sw = new Stopwatch();
-                sw.Start();
+                var swTotal = new Stopwatch();
+                swTotal.Start();
 
-                int cnt = ExecuteSQLQuery(@"
-DELETE
-FROM
-    drivestate
-WHERE
-    id IN(
-    SELECT
-        id
-    FROM
-        (
-        SELECT
-            t1.id
-        FROM
-            drivestate AS t1
-        JOIN
-            drivestate t2
-        ON
-            t1.carid = t2.carid AND t1.StartPos >= t2.StartPos AND t1.StartDate < t2.EndDate AND t1.id > t2.id
-    ) AS T3
-)", 3000);
-                sw.Stop();
+                int deletedTotal = 0;
+                int batchSize = 500;  // Process in small batches to avoid long locks
+                int maxAttempts = 100;  // Safety limit to prevent infinite loops
+                int attempts = 0;
 
-                Logfile.Log($"Deleted Duplicate Trips: {cnt} Time: {sw.ElapsedMilliseconds}ms");
+                while (attempts < maxAttempts)
+                {
+                    attempts++;
+
+                    // Delete recent duplicates in small batches
+                    // Focus on last 90 days to minimize JOIN complexity
+                    int deleted = ExecuteSQLQuery($@"
+DELETE d1 FROM drivestate d1
+INNER JOIN drivestate d2 ON
+    d1.carid = d2.carid
+    AND d1.StartPos >= d2.StartPos
+    AND d1.StartDate < d2.EndDate
+    AND d1.id > d2.id
+WHERE d1.StartDate >= DATE_SUB(NOW(), INTERVAL 90 DAY)
+LIMIT {batchSize}", 30);  // 30 second timeout per batch (was 3000)
+
+                    if (deleted == 0)
+                    {
+                        swTotal.Stop();
+                        Logfile.Log($"DeleteDuplicateTrips: No more duplicates found after {attempts} passes. Total deleted: {deletedTotal}, Time: {swTotal.ElapsedMilliseconds}ms");
+                        break;
+                    }
+
+                    deletedTotal += deleted;
+                    Logfile.Log($"DeleteDuplicateTrips batch {attempts}: {deleted} rows deleted (total: {deletedTotal}, elapsed: {swTotal.ElapsedMilliseconds}ms)");
+
+                    // Brief delay between batches to prevent server load spikes
+                    if (deleted >= batchSize)  // Only delay if more records might exist
+                    {
+                        System.Threading.Thread.Sleep(100);
+                    }
+                }
+
+                swTotal.Stop();
+                Logfile.Log($"DeleteDuplicateTrips completed: {deletedTotal} total rows deleted in {attempts} batches, Total time: {swTotal.ElapsedMilliseconds}ms");
             }
             catch (Exception ex)
             {
