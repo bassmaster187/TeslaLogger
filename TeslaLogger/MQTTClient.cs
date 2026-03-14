@@ -22,6 +22,11 @@ namespace TeslaLogger
                         return;
                     }
                 }
+                catch (Newtonsoft.Json.JsonException jsonEx)
+                {
+                    jsonEx.ToExceptionless().FirstCarUserID().Submit();
+                    Logfile.Log("MQTT: StartMQTTClient JsonException: " + jsonEx.ToString());
+                }
                 catch (Exception ex)
                 {
                     ex.ToExceptionless().FirstCarUserID().Submit();

@@ -37,10 +37,12 @@ namespace TeslaLoggerNET8.Lucid
 
         private static void SaveCar(Uri url, HttpListenerRequest request, HttpListenerResponse response)
         {
-            Logfile.Log("LucidSaveCar");
+            try
+            {
+                Logfile.Log("LucidSaveCar");
 
-            string istream = WebServer.GetDataFromRequestInputStream(request);
-            dynamic r = JsonConvert.DeserializeObject(istream);
+                string istream = WebServer.GetDataFromRequestInputStream(request);
+                dynamic r = JsonConvert.DeserializeObject(istream);
 
             string name = r["email"];
             string password = r["password"];
@@ -102,14 +104,29 @@ FROM
                     }
                 }
             }
+            }
+            catch (Newtonsoft.Json.JsonException jsonEx)
+            {
+                Logfile.Log($"Lucid: JSON parse error in SaveCar - {jsonEx.Message}");
+                Logfile.Log(jsonEx.ToString());
+                WebServer.WriteString(response, "Error: JSON");
+            }
+            catch (Exception ex)
+            {
+                Logfile.Log($"Lucid: Error in SaveCar - {ex.Message}");
+                Logfile.Log(ex.ToString());
+                WebServer.WriteString(response, "Error: " + ex.Message);
+            }
         }
 
         private static void GetAllCars(Uri url, HttpListenerRequest request, HttpListenerResponse response)
         {
-            Logfile.Log("LucidGetAllCars");
+            try
+            {
+                Logfile.Log("LucidGetAllCars");
 
-            string istream = WebServer.GetDataFromRequestInputStream(request);
-            dynamic r = JsonConvert.DeserializeObject(istream);
+                string istream = WebServer.GetDataFromRequestInputStream(request);
+                dynamic r = JsonConvert.DeserializeObject(istream);
 
             string name = r["email"];
             string password = r["password"];
@@ -169,6 +186,19 @@ FROM
 
             var json = JsonConvert.SerializeObject(data);
             WebServer.WriteString(response, json, "application/json");
+            }
+            catch (Newtonsoft.Json.JsonException jsonEx)
+            {
+                Logfile.Log($"Lucid: JSON parse error in GetAllCars - {jsonEx.Message}");
+                Logfile.Log(jsonEx.ToString());
+                WebServer.WriteString(response, "Error: JSON");
+            }
+            catch (Exception ex)
+            {
+                Logfile.Log($"Lucid: Error in GetAllCars - {ex.Message}");
+                Logfile.Log(ex.ToString());
+                WebServer.WriteString(response, "Error: " + ex.Message);
+            }
         }
 
         class LC

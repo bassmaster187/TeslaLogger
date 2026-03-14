@@ -229,12 +229,13 @@ VALUES(
                 Logfile.Log("SetCost");
 
                 string json = System.IO.File.ReadAllText(FileManager.GetSetCostPath);
-                dynamic j = JsonConvert.DeserializeObject(json);
-
-                using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+                try
                 {
-                    con.Open();
-                    using (MySqlCommand cmd = new MySqlCommand(@"
+                    dynamic j = JsonConvert.DeserializeObject(json);
+                    using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+                    {
+                        con.Open();
+                        using (MySqlCommand cmd = new MySqlCommand(@"
 UPDATE
     chargingstate
 SET
@@ -267,6 +268,12 @@ WHERE
 
                         Logfile.Log($"SetCost OK: {done}");
                     }
+                }
+                }
+                catch (Newtonsoft.Json.JsonException jsonEx)
+                {
+                    Logfile.Log($"DBHelper.SetCost: JSON parse error - {jsonEx.Message}");
+                    jsonEx.ToExceptionless().FirstCarUserID().Submit();
                 }
             }
             catch (Exception ex)
