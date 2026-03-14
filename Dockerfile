@@ -13,12 +13,14 @@ RUN mkdir -p /etc/teslalogger/sqlschema
 RUN mkdir -p /etc/teslalogger/git/TeslaLogger/Grafana
 RUN mkdir -p /etc/teslalogger/git/TeslaLogger/GrafanaConfig
 RUN mkdir -p /etc/teslalogger/git/TeslaLogger/GrafanaPlugins
+RUN mkdir -p /etc/teslalogger/OVMS
 
 ENV PATH="/usr/share/dotnet:${PATH}"
 
 COPY lucidapi /etc/lucidapi
 COPY TeslaLogger/sqlschema.sql /etc/teslalogger/sqlschema
-COPY --chmod=777 TeslaLogger/bin /etc/teslalogger/
+COPY --chmod=777 --exclude=TeslaLogger/bin/OVMS TeslaLogger/bin /etc/teslalogger/
+COPY --chmod=777 OVMSLogger/bin/Debug/net8.0 /etc/teslalogger/OVMS/
 COPY TeslaLogger/Grafana /etc/teslalogger/git/TeslaLogger/Grafana
 COPY TeslaLogger/GrafanaConfig /etc/teslalogger/git/TeslaLogger/GrafanaConfig
 COPY TeslaLogger/GrafanaPlugins /etc/teslalogger/git/TeslaLogger/GrafanaPlugins
