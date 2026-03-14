@@ -182,7 +182,7 @@ ORDER BY
 
                 WriteString(response, json);
             }
-            catch (JsonException jsonEx)
+            catch (Newtonsoft.Json.JsonException jsonEx)
             {
                 Logfile.Log($"Journeys: JSON parse error in JourneysCreateStart - {jsonEx.Message}");
                 jsonEx.ToExceptionless().FirstCarUserID().Submit();
@@ -257,7 +257,7 @@ ORDER BY
                 string json = JsonConvert.SerializeObject(o);
                 WriteString(response, json);
             }
-            catch (JsonException jsonEx)
+            catch (Newtonsoft.Json.JsonException jsonEx)
             {
                 Logfile.Log($"Journeys: JSON parse error in JourneysCreateEnd - {jsonEx.Message}");
                 jsonEx.ToExceptionless().FirstCarUserID().Submit();

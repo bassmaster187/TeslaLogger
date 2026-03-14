@@ -94,7 +94,7 @@ namespace TeslaLogger
 
                 return Double.Parse(value, Tools.ciEnUS);
             }
-            catch (JsonException ex)
+            catch (Newtonsoft.Json.JsonException ex)
             {
                 ex.ToExceptionless().FirstCarUserID().Submit();
                 Logfile.ExceptionWriter(ex, j);
@@ -124,7 +124,7 @@ namespace TeslaLogger
 
                 return Double.Parse(value, Tools.ciEnUS);
             }
-            catch (JsonException ex)
+            catch (Newtonsoft.Json.JsonException ex)
             {
                 ex.ToExceptionless().FirstCarUserID().Submit();
                 Logfile.ExceptionWriter(ex, j);
@@ -153,7 +153,7 @@ namespace TeslaLogger
 
 
             }
-            catch (JsonException ex)
+            catch (Newtonsoft.Json.JsonException ex)
             {
                 ex.ToExceptionless().FirstCarUserID().Submit();
                 Logfile.ExceptionWriter(ex, j);
@@ -182,7 +182,7 @@ namespace TeslaLogger
 
                 return fwversion;
             }
-            catch (JsonException ex)
+            catch (Newtonsoft.Json.JsonException ex)
             {
                 if (!WebHelper.FilterNetworkoutage(ex))
                     ex.ToExceptionless().FirstCarUserID().Submit();

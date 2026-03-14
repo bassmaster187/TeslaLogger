@@ -343,7 +343,7 @@ namespace TeslaLogger
 
                 UnsubscribeFromRemovedCars(cars.Except(allCars));
             }
-            catch (JsonException jsonEx)
+            catch (Newtonsoft.Json.JsonException jsonEx)
             {
                 Logfile.Log($"MQTT: Work JSON parse error: {jsonEx.Message}");
                 Tools.DebugLog("MQTT: Work JSON Exception", jsonEx);
@@ -587,7 +587,7 @@ namespace TeslaLogger
                     }
                 }
             }
-            catch (JsonException jsonEx)
+            catch (Newtonsoft.Json.JsonException jsonEx)
             {
                 Logfile.Log($"MQTT: Cars JSON parse error: {jsonEx.Message}");
                 jsonEx.ToExceptionless().FirstCarUserID().Submit();

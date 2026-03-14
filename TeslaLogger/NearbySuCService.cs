@@ -261,7 +261,7 @@ namespace TeslaLogger
                     }
                 }
             }
-            catch (JsonException jsonEx)
+            catch (Newtonsoft.Json.JsonException jsonEx)
             {
                 Logfile.Log($"NearbySuCService: JSON parse error in AddSuperchargerStateFleetAPI - {jsonEx.Message}");
                 jsonEx.ToExceptionless().FirstCarUserID().Submit();
@@ -583,7 +583,7 @@ VALUES(
                             ShareSuc(send, false, out _, out _);
                         }
                         }
-                        catch (JsonException jsonEx)
+                        catch (Newtonsoft.Json.JsonException jsonEx)
                         {
                             Logfile.Log($"NearbySuCService: JSON error in GetGuestAvailability - {jsonEx.Message}");
                             jsonEx.ToExceptionless().FirstCarUserID().Submit();
@@ -679,7 +679,7 @@ VALUES(
                         ShareSuc(send, false, out _, out _);
                     }
                     }
-                    catch (JsonException jsonEx)
+                    catch (Newtonsoft.Json.JsonException jsonEx)
                     {
                         Logfile.Log($"NearbySuCService: JSON error in GetGuestAvailabilityOld - {jsonEx.Message}");
                         jsonEx.ToExceptionless().FirstCarUserID().Submit();

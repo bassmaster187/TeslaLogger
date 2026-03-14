@@ -827,7 +827,7 @@ WHERE
                 Logfile.Log($"#{kli.carID} Komoot: parsing tours error - missing JSON contents" + sb.ToString() + tour.json);
             }
             }
-            catch (JsonException ex)
+            catch (Newtonsoft.Json.JsonException ex)
             {
                 ex.ToExceptionless().FirstCarUserID().Submit();
                 Logfile.Log($"#{kli.carID} Komoot: ParseTourJSON JsonException - {ex}");
@@ -1563,7 +1563,7 @@ ON DUPLICATE KEY UPDATE
                         }
                     }
                 }
-                catch (JsonException ex)
+                catch (Newtonsoft.Json.JsonException ex)
                 {
                     ex.ToExceptionless().FirstCarUserID().Submit();
                     Logfile.Log(ex.ToString());

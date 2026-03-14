@@ -92,7 +92,7 @@ namespace TeslaLogger
 
                 return v;
             }
-            catch (JsonException ex)
+            catch (Newtonsoft.Json.JsonException ex)
             {
                 ex.ToExceptionless().FirstCarUserID().Submit();
                 Logfile.ExceptionWriter(ex, j);
@@ -121,7 +121,7 @@ namespace TeslaLogger
 
                 return v;
             }
-            catch (JsonException ex)
+            catch (Newtonsoft.Json.JsonException ex)
             {
                 ex.ToExceptionless().FirstCarUserID().Submit();
                 Logfile.ExceptionWriter(ex, j);
@@ -151,7 +151,7 @@ namespace TeslaLogger
 
                 return value == "1";
             }
-            catch (JsonException ex)
+            catch (Newtonsoft.Json.JsonException ex)
             {
                 ex.ToExceptionless().FirstCarUserID().Submit();
                 Logfile.ExceptionWriter(ex, j);

@@ -159,7 +159,7 @@ namespace TeslaLogger
                     }
                 }
             }
-            catch (JsonException jsonEx)
+            catch (Newtonsoft.Json.JsonException jsonEx)
             {
                 Logfile.Log($"OpenTopoDataService: JSON parse error in RequestLocationsAsync - {jsonEx.Message}");
                 jsonEx.ToExceptionless().FirstCarUserID().Submit();

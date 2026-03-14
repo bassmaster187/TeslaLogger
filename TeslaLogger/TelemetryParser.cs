@@ -267,7 +267,7 @@ namespace TeslaLogger
                 }
 
             }
-            catch (JsonException jsonEx)
+            catch (Newtonsoft.Json.JsonException jsonEx)
             {
                 Log($"JSON Parse Error: {jsonEx.Message}");
             }
@@ -464,7 +464,7 @@ namespace TeslaLogger
                             car.CurrentJSON.active_route_energy_at_arrival = v;
                             car.CurrentJSON.CreateCurrentJSON();
                         }
-                        catch (JsonException jsonEx)
+                        catch (Newtonsoft.Json.JsonException jsonEx)
                         {
                             jsonEx.ToExceptionless().Submit();
                             Log($"JSON Parse Error in ExpectedEnergyPercentAtTripArrival: {jsonEx.Message}");
@@ -485,7 +485,7 @@ namespace TeslaLogger
                             car.CurrentJSON.active_route_traffic_minutes_delay = v;
                             car.CurrentJSON.CreateCurrentJSON();
                         }
-                        catch (JsonException jsonEx)
+                        catch (Newtonsoft.Json.JsonException jsonEx)
                         {
                             jsonEx.ToExceptionless().Submit();
                             Log($"JSON Parse Error in RouteTrafficMinutesDelay: {jsonEx.Message}");
@@ -1395,7 +1395,7 @@ namespace TeslaLogger
                     car.webhelper.GetToken();
                 }
             }
-            catch (JsonException jsonEx)
+            catch (Newtonsoft.Json.JsonException jsonEx)
             {
                 Log($"JSON Parse Error in handleLoginResponse: {jsonEx.Message}");
                 // Dynamic object access failure - response, updated_vehicles, etc.
@@ -2050,7 +2050,7 @@ namespace TeslaLogger
                 CheckDriving();
 
             }
-            catch (JsonException jsonEx)
+            catch (Newtonsoft.Json.JsonException jsonEx)
             {
                 Log($"JSON Parse Error in telemetry data: {jsonEx.ToString()}");
                 car.CreateExceptionlessClient(jsonEx).AddObject(resultContent, "ResultContent").Submit();
@@ -2099,7 +2099,7 @@ namespace TeslaLogger
                 double? val = j.Value<double?>();
                 return val;
             }
-            catch (JsonException jsonEx)
+            catch (Newtonsoft.Json.JsonException jsonEx)
             {
                 try
                 {
@@ -2110,7 +2110,7 @@ namespace TeslaLogger
                         return Double.Parse(v, CultureInfo.InvariantCulture);
                     }
                 }
-                catch (JsonException jsonEx2)
+                catch (Newtonsoft.Json.JsonException jsonEx2)
                 {
                     var ts = date - lastPackCurrentDate;
                     if (ts.TotalSeconds < 10)

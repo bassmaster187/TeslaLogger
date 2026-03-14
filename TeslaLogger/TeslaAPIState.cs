@@ -830,7 +830,7 @@ namespace TeslaLogger
                 Dictionary<string, object> r1 = jsonResult["response"][command].ToObject<Dictionary<string, object>>();
                 return r1;
             }
-            catch (JsonException jsonEx)
+            catch (Newtonsoft.Json.JsonException jsonEx)
             {
                 Logfile.Log($"TeslaAPIState: JsonException in ExtractResponse parsing {command}: {jsonEx.Message}");
                 jsonEx.ToExceptionless().FirstCarUserID().Submit();

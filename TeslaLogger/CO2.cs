@@ -186,7 +186,7 @@ namespace TeslaLogger
 
             return (int)Math.Round(avgCO2,0);
             }
-            catch (JsonException ex)
+            catch (Newtonsoft.Json.JsonException ex)
             {
                 ex.ToExceptionless().FirstCarUserID().Submit();
                 SubmitExceptionlessLog("JsonException in GetDataAsync: " + ex.Message);
@@ -331,7 +331,7 @@ namespace TeslaLogger
                 Log(String.Format("{0,-28}", name) + ": " + wert + "MW " + co2factor + "co2 g/kWh");
             }
             }
-            catch (JsonException ex)
+            catch (Newtonsoft.Json.JsonException ex)
             {
                 ex.ToExceptionless().FirstCarUserID().Submit();
                 SubmitExceptionlessLog("JsonException in GetImport: " + ex.Message);

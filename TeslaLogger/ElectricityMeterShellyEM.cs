@@ -98,7 +98,7 @@ namespace TeslaLogger
 
                 return (double?)(value1) / 1000.0;
             }
-            catch (JsonException ex)
+            catch (Newtonsoft.Json.JsonException ex)
             {
                 ex.ToExceptionless().FirstCarUserID().Submit();
                 Logfile.ExceptionWriter(ex, j);
@@ -124,7 +124,7 @@ namespace TeslaLogger
 
                 return value1 > 900;
             }
-            catch (JsonException ex)
+            catch (Newtonsoft.Json.JsonException ex)
             {
                 ex.ToExceptionless().FirstCarUserID().Submit();
                 Logfile.ExceptionWriter(ex, j);
@@ -159,7 +159,7 @@ namespace TeslaLogger
 
                 return value;
             }
-            catch (JsonException ex)
+            catch (Newtonsoft.Json.JsonException ex)
             {
                 if (!WebHelper.FilterNetworkoutage(ex))
                     ex.ToExceptionless().FirstCarUserID().Submit();

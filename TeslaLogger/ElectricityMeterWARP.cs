@@ -181,7 +181,7 @@ namespace TeslaLogger
 
                 return jsonResult["charger_state"] == 3 ? true : false;
             }
-            catch (JsonException ex)
+            catch (Newtonsoft.Json.JsonException ex)
             {
                 ex.ToExceptionless().FirstCarUserID().Submit();
                 Logfile.ExceptionWriter(ex, evse_state);
@@ -219,7 +219,7 @@ namespace TeslaLogger
 
                 return value;
             }
-            catch (JsonException ex)
+            catch (Newtonsoft.Json.JsonException ex)
             {
                 ex.ToExceptionless().FirstCarUserID().Submit();
                 Logfile.ExceptionWriter(ex, info_version);

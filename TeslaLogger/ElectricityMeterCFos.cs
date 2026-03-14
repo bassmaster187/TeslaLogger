@@ -107,7 +107,7 @@ namespace TeslaLogger
                     return null;
                 }
             }
-            catch (JsonException ex)
+            catch (Newtonsoft.Json.JsonException ex)
             {
                 ex.ToExceptionless().FirstCarUserID().Submit();
                 Logfile.ExceptionWriter(ex, j);
@@ -150,7 +150,7 @@ namespace TeslaLogger
                     return null;
                 }
             }
-            catch (JsonException ex)
+            catch (Newtonsoft.Json.JsonException ex)
             {
                 ex.ToExceptionless().FirstCarUserID().Submit();
                 Logfile.ExceptionWriter(ex, j);
@@ -195,7 +195,7 @@ namespace TeslaLogger
                 }
 
             }
-            catch (JsonException ex)
+            catch (Newtonsoft.Json.JsonException ex)
             {
                 ex.ToExceptionless().FirstCarUserID().Submit();
                 Logfile.ExceptionWriter(ex, j);
@@ -221,7 +221,7 @@ namespace TeslaLogger
 
                 return value;
             }
-            catch (JsonException ex)
+            catch (Newtonsoft.Json.JsonException ex)
             {
                 if (!WebHelper.FilterNetworkoutage(ex))
                     ex.ToExceptionless().FirstCarUserID().Submit();

@@ -64,7 +64,7 @@ namespace TeslaLogger
 
                 return (int) reportJson.State == 3;
             }
-            catch (JsonException ex)
+            catch (Newtonsoft.Json.JsonException ex)
             {
                 ex.ToExceptionless().FirstCarUserID().Submit();
                 Logfile.Log(ex.ToString());
@@ -97,7 +97,7 @@ namespace TeslaLogger
 
                 return (double) reportJson["E total"] / 10000.0;
             }
-            catch (JsonException ex)
+            catch (Newtonsoft.Json.JsonException ex)
             {
                 ex.ToExceptionless().FirstCarUserID().Submit();
                 Logfile.Log(ex.ToString());
@@ -125,7 +125,7 @@ namespace TeslaLogger
 
                 return reportJson.Product + " / fw:" + reportJson.Firmware;
             }
-            catch (JsonException ex)
+            catch (Newtonsoft.Json.JsonException ex)
             {
                 if (!WebHelper.FilterNetworkoutage(ex))
                     ex.ToExceptionless().FirstCarUserID().Submit();
