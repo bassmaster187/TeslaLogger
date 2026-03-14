@@ -129,6 +129,9 @@ namespace TeslaLogger
                 var net8version = Tools.GetNET8Version();
                 if (net8version?.Contains("8.") == true)
                 {
+#if NET8_0
+                    return;
+#endif
                     if (!File.Exists("NOTUSETESLALOGGERNET8") && NET8TaskerToken())
                     {
                         Logfile.Log("Start Teslalogger.net8");
@@ -247,7 +250,7 @@ namespace TeslaLogger
                     Thread.Sleep(500);
                 }
                 dt.Clear();
-            }
+            } 
         }
 
         internal static void StartCarThread(DataRow r, Car.TeslaState oldCarState = Car.TeslaState.Start)
