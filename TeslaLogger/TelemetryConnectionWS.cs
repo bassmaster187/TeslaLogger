@@ -130,7 +130,23 @@ namespace TeslaLogger
             }
         }
 
-        private async Task ReceiveAsync(WebSocket socket)
+        private void DisposeSocket()
+        {
+            try
+            {
+                ws?.Dispose();
+            }
+            catch (Exception ex)
+            {
+                Log("Error disposing websocket: " + ex.Message);
+            }
+            finally
+            {
+                ws = null;
+            }
+        }
+
+        private async Task<bool> ReceiveAsync(WebSocket socket)
         {
             var buffer = new ArraySegment<byte>(new byte[1024]);
             WebSocketReceiveResult result;
@@ -146,13 +162,30 @@ namespace TeslaLogger
                 } while (!result.EndOfMessage);
 
                 if (result.MessageType == WebSocketMessageType.Close)
-                    throw new Exception($"CLOSE status={result.CloseStatus} desc={result.CloseStatusDescription ?? "<empty>"}");
+                {
+                    Log($"CLOSE status={result.CloseStatus} desc={result.CloseStatusDescription ?? "<empty>"}");
+
+                    if (socket.State == WebSocketState.CloseReceived || socket.State == WebSocketState.Open)
+                    {
+                        try
+                        {
+                            await socket.CloseOutputAsync(WebSocketCloseStatus.NormalClosure, "CloseAck", CancellationToken.None);
+                        }
+                        catch (Exception ex)
+                        {
+                            Log("CloseOutputAsync failed: " + ex.Message);
+                        }
+                    }
+
+                    return false;
+                }
 
                 ms.Seek(0, SeekOrigin.Begin);
                 data = Encoding.UTF8.GetString(ms.ToArray());
             }
 
             await parser.handleMessageAsync(data);
+            return true;
         }
 
         private void ConnectToServer()
