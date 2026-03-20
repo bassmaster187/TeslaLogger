@@ -14660,6 +14660,8 @@ ews DE-Bad Segeberg Hamburger Straße,53.93656,10.30329
 ews DE-Bad Segeberg Kurhausstraße,53.93783,10.30662,25
 ews DE-Bad Segeberg Leopardstraße,53.9343,10.27481
 
+EWV DE-Simmerath Hövelchesweg,50.6257,6.38883
+
 EWZ CH-Zurüch Tramstrasse,47.40896,8.54905
 EWZ CH-Zürich Ausstellungsstrasse,47.38137,8.53724
 EWZ CH-Zürich Mythenquai,47.34879,8.534
@@ -16362,6 +16364,7 @@ Ionity ES-Casabermeja,36.89825,-4.42988
 Ionity ES-Cazalegas Polígono Sector III,39.98405,-4.73184
 Ionity ES-El Hidalgo,38.82457,-3.39686
 Ionity ES-Imarcoain,42.73238,-1.61873
+Ionity ES-Lleida Carrer Camí Vell,41.6499,0.56377
 Ionity ES-Madrid Campo de las Naciones,40.45863,-3.61661
 Ionity ES-Martin de Yeltes,40.76966,-6.28672
 Ionity ES-Merida,38.93395,-6.34305
@@ -23363,6 +23366,7 @@ Volkswagen DE-Sulingen Bassumer Straße,52.68711,8.7842
 Volkswagen DE-Timmendorfer Strand Vogelsang 6-8,53.98719,10.76981
 Volkswagen DE-Trier Monaiser Straße,49.7217,6.5908
 Volkswagen DE-Trossingen In Steppach 9-11,48.07604,8.624
+Volkswagen DE-Uelzen Oldenstädter Straße,52.9673,10.57612
 Volkswagen DE-Varel Am Tannenkamp 91,53.36886,8.12685
 Volkswagen DE-Vohenstrauß Altenstadter Straße,49.63073,12.33659
 Volkswagen DE-Waldshut-Tiengen,47.62817,8.26545
@@ -23665,6 +23669,7 @@ ziwa AT-Kottingbrunn August-Resch-Straße,47.95588,16.2188
 ZSE HR-Opatija Liburnijska ul.,45.3123,14.2856
 ZSE HU-Alacska pihenőhely,47.38406,19.28321
 ZSE SK-Bernolákovo Baničova,48.21102,17.26318
+ZSE SK-Blatná na Ostrove R7,48.0113,17.4559
 ZSE SK-Bratislava Bory Mall,48.20621,17.03329,75
 ZSE SK-Bratislava Dunajská,48.1445,17.1142
 ZSE SK-Bratislava Jelačičova,48.15691,17.13035
