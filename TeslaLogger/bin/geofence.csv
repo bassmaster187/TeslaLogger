@@ -12104,6 +12104,7 @@ EnBW DE-Sankt Goarshausen Nastätter Straße,50.15674,7.71444
 EnBW DE-Sankt Katharinen,50.60393,7.33096
 EnBW DE-Sarstedt Moorberg,52.23669,9.87448
 EnBW DE-Sasbach Marckolsheimer Straße,48.13994,7.61447
+EnBW DE-Satow Fritz-Reuter-Straße,53.99008,11.9005
 EnBW DE-Scheeßel,53.16141,9.47389
 EnBW DE-Schelklingen Ehinger Straße,48.37063,9.73252
 EnBW DE-Schelklingen Fabrikstraße,48.36483,9.7117
@@ -12597,7 +12598,6 @@ EnBW DE-Öhringen Meisterhausstraße,49.20465,9.5017
 EnBW DE-Öhringen Siemensstraße,49.20715,9.48089
 EnBW DE-Überlingen Lippersreuther Straße,47.77025,9.17272
 
-EndesaX ES- Santiago de Compostela Rúa do País Vasco,42.90992,-8.49245,20
 EndesaX ES-Aldeanueva del Camino N-630,40.26513,-5.91751
 EndesaX ES-Armilla Av. Fernando de los Ríos,37.15359,-3.61537
 EndesaX ES-Cdad. Quesada C. Vigo,38.0501,-0.72265
@@ -12611,11 +12611,13 @@ EndesaX ES-Miraflores de la Sierra C. del Río,40.81066,-3.76915
 EndesaX ES-Olivella Carrer del Aquari,41.29827,1.77906
 EndesaX ES-Ponts C-14,41.92108,1.19171
 EndesaX ES-Pozuelo de Alarcón C. Edgar Neville,40.39452,-3.7981
+EndesaX ES-Santiago de Compostela Rúa do País Vasco,42.90992,-8.49245,20
 EndesaX ES-Sevilla C. Ganímedes,37.43364,-5.96978
 EndesaX ES-Sevilla Centro Comercial Torre Sevilla,37.39177,-6.01042,20
 EndesaX ES-Toledo CM-4003,39.90517,-4.01739
 EndesaX ES-Torre del Mar El Ingenio,36.75579,-4.09886
 EndesaX ES-Valdemoro Av. de Andalucía,40.21003,-3.68104
+EndesaX ES-Zaragoza Calle García Arista,41.66024,-0.88065
 EndesaX ES-Área de Servicio Andamur Guarromán,38.14233,-3.72323,20
 
 Endolla-Barcelona ES-Barcelona Sant Martí,41.39334,2.20294
@@ -13453,6 +13455,7 @@ EVN AT-Maria Enzersdorf Südstadtzentrum,48.09522,16.31016
 EVN AT-Mistelbach Ernstbrunnerstraße,48.5607,16.56084
 EVN AT-Mistelbach Hüttendorfweg,48.56149,16.55836
 EVN AT-Perchtoldsdorf Mühlgasse,48.12359,16.29318
+EVN AT-Poysdorf Baumfeldstraße,48.65647,16.63133
 EVN AT-Pressbaum Hauptstraße,48.18037,16.07907
 EVN AT-Pressbaum Hauptstraße,48.18276,16.08919
 EVN AT-Purgstall an der Erlauf Ötscherlandstraße,48.05573,15.1395
@@ -18293,6 +18296,7 @@ Lidl FR-Le Boulou Carrer d’en Cavaillès,42.5336,2.84088
 Lidl FR-Lessay Rue du Ferrage,49.21243,-1.52619,30
 Lidl FR-Leucate Av. des Roseaux,42.8517,3.03419
 Lidl FR-Lille Rue Jacquard,50.6339,3.10272
+Lidl FR-Livron-sur-Drôme Av. Albert Mazade,44.77793,4.83274
 Lidl FR-L’Isle-sur-la-Sorgue Rte du Thor,43.91955,5.04048
 Lidl FR-Mont-de-Marsan Avenue du Maréchal Juin,43.90559,-0.47451
 Lidl FR-Munster Rue des Artisans,48.0425,7.15849,30
