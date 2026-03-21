@@ -10308,6 +10308,7 @@ Elbizz NL-Hilversum Bisonlaan,52.23422,5.14745
 
 ElDrive BG-Студена Автомагистрала Струма,42.5392,23.12914
 ElDrive LT-Vilnius Vikingų g.,54.64979,25.27977
+ElDrive RO-Brașov Bulevardul Gării,45.66146,25.61138
 ElDrive RO-Brașov Strada Egretei,45.6638,25.56452
 ElDrive RO-Brașov Strada Lacurilor,45.61709,25.64602
 ElDrive RO-Brașov Strada Lacurilor,45.64719,25.61946
@@ -11372,7 +11373,6 @@ EnBW DE-Heilbronn Charlottenstraße,49.13127,9.21847
 EnBW DE-Heilbronn Etzelstraße,49.153,9.21575
 EnBW DE-Heiligenberg Betenbrunner Straße,47.81855,9.31358
 EnBW DE-Heiligenhafen Am Strande,54.37467,10.98108
-EnBW DE-Heiligenroth,50.45435,7.87298
 EnBW DE-Heiligkreuzsteinach Rathausstraße,49.4858,8.79563
 EnBW DE-Helmstedt,52.24046,10.99581
 EnBW DE-Hemhofen Peter-Händel-Straße,49.69229,10.94335
@@ -11982,6 +11982,7 @@ EnBW DE-Raststätte Ellwanger Berge West,48.98314,10.1935
 EnBW DE-Raststätte Goldbach Nord,53.00084,9.17945,20
 EnBW DE-Raststätte Goldbach Süd,52.99874,9.18113,20
 EnBW DE-Raststätte Göttingen West,51.49462,9.87613,20
+EnBW DE-Raststätte Heiligenroth,50.4544,7.87324
 EnBW DE-Raststätte Hofoldinger Forst Süd,47.99715,11.67605
 EnBW DE-Raststätte Hohenlohe Nord,49.2071,9.63882,20
 EnBW DE-Raststätte Hohenlohe Süd,49.2053,9.64033,20
@@ -13276,6 +13277,7 @@ EVBox NO-Nordli Doktor Brønns vei,64.4632,13.59228
 EVconnect CA-Rockland ON Laurier St,45.53873,-75.3042
 EVconnect RO-Blejoi DN1A DN1B,44.97199,26.02152
 EVconnect RO-Brașov AFI,45.6504,25.6097
+EVconnect RO-Brașov Calea București,45.6252,25.64475
 EVconnect RO-Brașov Calea București,45.63239,25.63677,25
 EVconnect RO-Cluj-Napoca Str. Clinicilor,46.76657,23.58472
 EVconnect RO-Oradea Str. Tudor Vladimirescu,47.05777,21.92542
@@ -21998,6 +22000,7 @@ SW-Leipzig DE-Leipzig Willy-Brandt-Platz,51.34499,12.37925
 SW-Leipzig DE-Leipzig Wilmar-Schwabe-Straße,51.34165,12.35787
 SW-Leipzig DE-Leipzig Zschochersche Straße,51.32335,12.33082
 SW-Leipzig DE-Leipzig Zwickauer Straße,51.31366,12.39396,30
+SW-Lindau DE-Lindau (Bodensee) Zwanzigerstraße,47.54867,9.68708
 SW-Lindau DE-Lindau Bleichenweg,47.55373,9.6985
 SW-Lindau DE-Lindau Kemptener Straße,47.56494,9.70448
 SW-Lingen DE-Lingen (Ems) Kaiserstraße,52.52098,7.32436
@@ -24021,6 +24024,7 @@ DE Braunschweig Waller Weg SPIE,52.3099,10.4813
 DE Burgebrach Treppendorf,49.80174,10.73265
 DE Bünde Zimmerstraße,52.20636,8.592
 DE Chemnitz Florian-Geyer-Straße,50.81895,12.91394
+DE Chemnitz Galerie Roter Turm,50.83414,12.92047
 DE Chemnitz Hotel Plaza Inn,50.86356,12.85756
 DE Chemnitz Kauffahrtei,50.81068,12.90564
 DE Coburg Brose,50.24952,10.9644
