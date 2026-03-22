@@ -4976,6 +4976,7 @@ Supercharger-V3 US-Easton MD,38.7593,-76.06104
 Supercharger-V3 US-Edgewater MD,38.93618,-76.56736
 Supercharger-V3 US-Elkridge MD Montevideo Rd,39.17426,-76.77685
 Supercharger US-Frederick MD,39.38467,-77.40538
+Supercharger US-Frederick MD,39.38675,-77.40787
 Supercharger-V3 US-Frederick MD Ballenger Creek Pike,39.39256,-77.43862
 Supercharger US-Gaithersburg MD,39.11813,-77.2023
 Supercharger-V3 US-Gaithersburg MD Watkins Mill Rd,39.1585,-77.2226
@@ -8173,6 +8174,8 @@ Charge-Construct DE-Pleinfeld Bahnhofstraße,49.10752,10.9816
 
 Charge-ON DE-Raststätte Brokenlande,54.01328,9.93295,25
 
+Chargee CZ-Valašské Meziříčí Masarykova,49.49204,17.96265
+
 Chargefox AU-Airport West VIC Louis St,-37.71359,144.88545
 Chargefox AU-Altona VIC Civic Parade,-37.86342,144.83153
 Chargefox AU-Ballarat Central VIC Curtis St,-37.56129,143.86233
@@ -9927,6 +9930,7 @@ eborn FR-Saint-Didier-sous-Aubenas Chem. des Vignettes,44.61239,4.40904
 eCarUp AT-Gosau Hornspitzweg,47.56583,13.5202
 eCarUp AT-Neustift im Stubaital Mutterberg,47.01296,11.16042
 eCarUp AT-Radingdorf Betriebsstraße,48.35779,14.47635
+eCarUp AT-Sölden B186,46.95893,11.00896
 eCarUp CH-Aarau Buchserstrasse,47.39154,8.05966
 eCarUp CH-Aesch Therwilerstrasse,47.47936,7.59217
 eCarUp CH-Bern Westside,46.94515,7.37419
@@ -13433,7 +13437,7 @@ EVN AT-Böheimkirchen Hainfelder Straße,48.19525,15.76487
 EVN AT-Böheimkirchen Reith,48.18794,15.76504
 EVN AT-Eggenburg Grafenbergerstraße,48.64377,15.82247
 EVN AT-Eggenburg Pulkauerstraße,48.648,15.8231
-EVN AT-Eisenstadt Haidäckerstraße,47.82496,16.53193,25
+EVN AT-Eisenstadt Haidäckerstraße,47.825,16.532,25
 EVN AT-Ennsdorf Straße 3,48.22133,14.5061
 EVN AT-Grafenwörth Gewerbepark,48.41187,15.776
 EVN AT-Grimmenstein Wechselbundesstrasse,47.63344,16.13192
@@ -18400,6 +18404,7 @@ Lidl PT-Portimão R. Sidónio Pais,37.13418,-8.54622
 Lidl RO-Bacău,46.57448,26.93224
 Lidl RO-Baia Mare,47.64312,23.57132
 Lidl RO-Botoșani,47.7467,26.66804
+Lidl RO-Brașov Strada Poienelor,45.63287,25.6333,25
 Lidl RO-Brașov Șoseaua Cristianului,45.65846,25.56533
 Lidl RO-București Bulevardul Basarabia,44.43522,26.17297
 Lidl RO-București Bulevardul Iuliu Maniu,44.43455,25.99259
@@ -19847,6 +19852,7 @@ Pfalzwerke DE-Durmersheim Alois-Bastian-Straße,48.92236,8.26248
 Pfalzwerke DE-Düsseldorf Königsberger Straße,51.21715,6.82468
 Pfalzwerke DE-Ebertsheim Eisenberger Straße,49.56761,8.10541
 Pfalzwerke DE-Edenkoben Luitpoldstraße 73,49.28571,8.13814
+Pfalzwerke DE-Edenkoben Venninger Straße,49.28777,8.1452
 Pfalzwerke DE-Edenkoben Weinstraße,49.2794,8.12585
 Pfalzwerke DE-Edesheim Staatsstraße,49.2656,8.1341
 Pfalzwerke DE-Eich In der Hochgewann 1,49.74298,8.38463
@@ -20414,6 +20420,7 @@ Powerdot PL-Płońsk Pułtuska,52.62474,20.38752
 Powerdot PL-Ustronie Morskie Kolejowa,54.203,15.74983
 Powerdot PL-Wieliczka Tadeusza Kościuszki,49.98872,20.0416
 Powerdot PL-Żagań Księżnej Żaganny,51.61755,15.31173
+Powerdot PT-Amadora Estr. da Circunvalação,38.72544,-9.20863
 Powerdot PT-Amadora Estr. do Monte da Cabreira,38.72754,-9.21128
 Powerdot PT-Braga R. Padre Alfredo José de Sousa,41.57004,-8.42799
 Powerdot PT-Lisboa R. Jorge Barradas,38.75608,-9.20447
@@ -24353,7 +24360,7 @@ RO Brașov Calea Făgărașului,45.65914,25.56926
 RO Brașov RAT Rulmentul,45.68157,25.61481
 RO Brașov Regina Maria,45.64371,25.59957
 RO Brașov Scanexpert,45.65745,25.58587
-RO Brașov Strada Poienelor,45.63318,25.63254
+RO Brașov Strada Poienelor,45.63318,25.63254,25
 RO București Splaiul Unirii,44.39593,26.20193
 RO Cluj-Napoca Strada Ion Meșter,46.75839,23.5593
 RO Cristian Hotel Sorin Mihai,45.63336,25.49198
