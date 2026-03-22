@@ -6249,9 +6249,10 @@ ABC FI-Ähtäri Oikotie,62.54999,24.08735
 
 ABP DE-Reiskirchen Siemensstraße,50.6002,8.81753
 
-ACCIONA ES-Ponts Carr. de La Seu d’Urgell,41.92283,1.19431
-ACCIONA ES-Ribeira Lugar Insuela,42.56999,-8.96743
-ACCIONA ES-Sanxenxo Rúa Virxe do Carme,42.40205,-8.82035
+acciona ES-Mérida Av. de Portugal,38.9055,-6.36295
+acciona ES-Ponts Carr. de La Seu d’Urgell,41.92283,1.1943
+acciona ES-Ribeira Lugar Insuela,42.57,-8.96743
+acciona ES-Sanxenxo Rúa Virxe do Carme,42.40205,-8.82035
 
 Acea IT-Capena Via Tiberina,42.12024,12.59025
 Acea IT-Castel Gandolfo Via Spiaggia del Lago,41.75856,12.65374
@@ -15075,6 +15076,7 @@ Galp PT-Aveiras de Cima Área de Serviço,39.124,-8.90713
 Galp PT-Lagos Rua Infante Dom Henrique,37.11096,-8.6798
 Galp PT-Palmela Área de Serviço,38.58486,-8.93078
 Galp PT-Vouzela A25 / IP5,40.68619,-8.2322
+Galp PT-Área de Serviço de Montemor-o-Novo,38.61795,-8.07868
 
 GardaUno IT-Limone sul Garda Via Lungolago Guglielmo Marconi,45.81156,10.79354
 
@@ -16632,6 +16634,7 @@ Ionity PL-Zgorzelec Jędrzychowice DK94,51.17653,15.03271
 Ionity PL-Świecko,52.31305,14.64156
 Ionity PT-Almodovar L,37.53633,-8.18292
 Ionity PT-Almodovar O,37.53586,-8.18474
+Ionity PT-Marateca,38.57987,-8.67755
 Ionity PT-Área de Serviço de Barcelos,41.6054,-8.55102
 Ionity SE-Docksta Dockstavägen,63.05722,18.33733,30
 Ionity SE-Enköping,59.65339,17.08324
@@ -23097,6 +23100,7 @@ vaylens DE-Gescher Schüringsweg,51.9428,7.02548,30
 vaylens DE-Gladbeck Karl-Schneider-Straße,51.57298,6.97147,30
 vaylens DE-Herne Am Neumarkt,51.5412,7.2245
 vaylens DE-Konz Wilde Acht,49.695,6.56544
+vaylens DE-Legden Houlingort,52.02164,7.1164
 vaylens DE-Leuna NOVA,51.34505,12.17852
 vaylens DE-Lindlar Hausgrund,51.01835,7.2827
 vaylens DE-Mainz Budenheimer Straße (Juxplatz),50.00075,8.20496
