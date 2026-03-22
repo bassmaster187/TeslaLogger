@@ -84,6 +84,7 @@ Supercharger AU-Berry,-34.808254,150.636711
 Supercharger-V3 AU-Blaxland NSW,-33.745317,150.61057
 Supercharger-V3 AU-Bowen QLD,-20.001502,148.239084
 Supercharger-V3 AU-Box Hill VIC,-37.83792,145.134728
+Supercharger-V4 AU-Braybrook VIC,-37.77886,144.8518
 Supercharger-V3 AU-Brighton VIC,-37.907334,145.010996
 Supercharger AU-Brisbane-Fortitude Valley,-27.451699,153.040473
 Supercharger AU-Broadway,-33.882995,151.194332
@@ -152,6 +153,7 @@ Supercharger AU-Narooma,-36.223136,150.128346
 Supercharger-V4 AU-Narrandera NSW,-34.7436,146.55433
 Supercharger-V3 AU-North Lakes QLD,-27.23948,153.01372
 Supercharger-V3 AU-Orange NSW,-33.283778,149.096
+Supercharger-V4 AU-Osborne Park WA,-31.9096,115.81224
 Supercharger AU-Ovens,-36.587007,146.759301
 Supercharger-V4 AU-Palmview QLD,-26.75124,153.0466
 Supercharger-V4 AU-Parkes NSW,-33.141,148.17458
@@ -1887,6 +1889,7 @@ Supercharger-V4 DE-Bremen-Osterholz (Cafe Del Sol),53.054,8.961
 Supercharger-V4 DE-Brinkum,53.02833,8.80876
 Supercharger-V4 DE-Bruchsal,49.13837,8.56242
 Supercharger-V3 DE-Brunnthal,48.039686,11.661457
+Supercharger-V4 DE-Brühl,49.40987,8.5417
 Supercharger-V3 DE-Burgdorf,52.122717,10.229433,35
 Supercharger-V4 DE-Busdorf,54.47796,9.54494,40
 Supercharger-V3 DE-Böblingen,48.69138,9.00365,55
@@ -2568,6 +2571,7 @@ Supercharger-V4 FR-Clermont-Ferrand,45.78598,3.14158
 Supercharger-V4 FR-Coignières,48.75485,1.93472
 Supercharger-V3 FR-Colmar,48.1289,7.368817
 Supercharger-V4 FR-Colombe,45.396343,5.466685
+Supercharger-V4 FR-Cosne-Cours-sur-Loire,47.3837,2.91813
 Supercharger-V4 FR-Cuers,43.2507,6.0955
 Supercharger-V3 FR-Dardilly,45.820165,4.760176
 Supercharger-V4 FR-Dardilly Nord,45.825082,4.761362
@@ -2782,6 +2786,7 @@ Supercharger-V4 GB-Cannock,52.687759,-2.01457
 Supercharger-V3 GB-Cardiff,51.531534,-3.139834
 Supercharger-V4 GB-Carlisle,54.8949,-2.90716
 Supercharger-V3 GB-Carmarthen,51.858349,-4.3115
+Supercharger-V4 GB-Charnock Richard Southbound,53.63116,-2.6892
 Supercharger-V3 GB-Chelmsford,51.75766,0.47395
 Supercharger-V4 GB-Chepstow Newhouse,51.61967,-2.67552
 Supercharger-V4 GB-Cheshunt,51.720267,-0.037312
@@ -3788,7 +3793,7 @@ Supercharger-V4 RO-Buzău,45.164247,26.814282
 Supercharger-V3 RO-Cluj-Napoca Florești,46.753745,23.53266
 Supercharger-V3 RO-Constanța,44.20366,28.63116,65
 Supercharger-V3 RO-Craiova,44.3291,23.77194
-Supercharger-V4 RO-Galati,45.451684,28.032639
+Supercharger-V4 RO-Galati,45.45246,28.03385
 Supercharger-V4 RO-Iași,47.151152,27.601632
 Supercharger-V4 RO-Oradea,47.04343,21.8971
 Supercharger-V3 RO-Pitești,44.823586,24.909692,46
@@ -3983,7 +3988,7 @@ Supercharger-V4 TR-Keşan,40.8742,26.6419
 Supercharger-V4 TR-Kütahya,39.35863,30.0565
 Supercharger-V4 TR-Tekirdağ,40.98885,27.5772
 Supercharger-V4 TR-Tekkeköy Samsun,41.22493,36.43205
-Supercharger-V4 TR-Usak,38.67087,29.42435
+Supercharger-V4 TR-Uşak Merkez,38.67086,29.42427
 
 Supercharger-V3 TW-Nantou Caotun,23.9664,120.67746
 Supercharger-V3 TW-Tainan Hsinying,23.31127,120.28147
