@@ -1910,7 +1910,7 @@ Supercharger-V4 DE-Dresden Kaufpark,50.99643,13.79827
 Supercharger-V4 DE-Duisburg,51.481697,6.809756
 Supercharger-V3 DE-Düsseldorf - Ando Campus,51.2516,6.79466
 Supercharger-V4 DE-Düsseldorf Lierenfeld,51.21326,6.8244
-Supercharger-V4 DE-Ebersdorf bei Coburg,50.223548,11.052627,35
+Supercharger-V4 DE-Ebersdorf bei Coburg,50.2237,11.05285
 Supercharger-V3 DE-Eching,48.306431,11.634784
 Supercharger-V4 DE Eging am See,48.689644,13.212607
 Supercharger-V4 DE Eichenzell Rhönhof,50.487892,9.708998,40
@@ -2608,7 +2608,7 @@ Supercharger FR-Langon,44.542436,-0.253954
 Supercharger-V4 FR-Laval Changé,48.092995,-0.758749
 Supercharger-V3 FR-Laxou,48.691096,6.127684
 Supercharger-V3 FR-Le Bosc,43.68861,3.35415
-Supercharger-V4 FR-Le Cannet-des-Maures,43.392215,6.347909
+Supercharger-V4 FR-Le Cannet-des-Maures,43.39224,6.34767
 Supercharger-V3 FR-Le Chesnay (Top Floor),48.826925,2.118539
 Supercharger FR-Le Mans,48.041833,0.175342
 Supercharger-V3 FR-Le Mans - Saint-Saturnin,48.052932,0.166434
@@ -2649,7 +2649,7 @@ Supercharger-V4 FR-Montélimar,44.67632,4.79576
 Supercharger FR-Morlaix,48.57439,-3.85318
 Supercharger FR-Mougins,43.603668,7.011086
 Supercharger FR-Mulhouse,47.782016,7.388299
-Supercharger-V4 FR-Mulhouse 2,47.782778,7.387968
+Supercharger-V4 FR-Mulhouse Rue des Cévennes,47.782,7.38707
 Supercharger-V3 FR-Mundolsheim,48.65302,7.73188,40
 Supercharger FR-Mâcon,46.346653,4.849067
 Supercharger FR-Nancy,48.638215,6.184349
@@ -2717,7 +2717,7 @@ Supercharger-V3 FR-Salaise-sur-Sanne,45.327133,4.805307
 Supercharger FR-Sallanches,45.951545,6.62879
 Supercharger-V3 FR-Sallanches,45.952671,6.628494
 Supercharger-V4 FR-Sanilhac,45.136153,0.700637
-Supercharger-V4 FR-Scionzier,46.069504,6.551936
+Supercharger-V4 FR-Scionzier,46.07017,6.55105
 Supercharger FR-Senlis,49.20847,2.60672
 Supercharger-V3 FR-Sisteron,44.22584,5.912426,30
 Supercharger FR-Sisteron,44.225891,5.913562,10
@@ -3092,7 +3092,7 @@ Supercharger-V4 IT-Emilia-Romagna,44.434137,11.608923
 Supercharger-V4 IT-Enna,37.567516,14.402925
 Supercharger-V4 IT-Fabro,42.873612,12.021168
 Supercharger IT-Fano,43.802874,13.015345
-Supercharger-V4 IT-Fidenza,44.881891,10.094181
+Supercharger-V4 IT-Fidenza,44.8819,10.09415
 Supercharger IT-Firenze,43.810258,11.17798
 Supercharger-V4 IT-Firenze-Campi Bisenzio,43.848512,11.14426
 Supercharger-V4 IT-Fiume Veneto,45.945942,12.723972
@@ -8251,6 +8251,8 @@ chargeIT DE-Saarlouis,49.29029,6.75883,20
 chargeIT DE-Ungerhausen,48.01772,10.27006
 chargeIT SE-Bromma Ulvsundavägen,59.35631,17.94863
 
+Chargemaker DE-Frankfurt am Main Schneidwallgasse,50.10927,8.6757
+
 ChargeNet NZ-Blenheim Redwood Street,-41.51438,173.95967
 ChargeNet NZ-Bombay Mill Road,-37.19274,174.98365
 ChargeNet NZ-Fairlie Main Street,-44.10016,170.82943
@@ -8846,6 +8848,7 @@ Civitronic RO-Florești Strada Avram Iancu,46.75105,23.53291
 
 Claus-Heinemann DE-Braunschweig Hansestraße,52.3093,10.5107,20
 Claus-Heinemann DE-Erlangen Wetterkreuz,49.54286,11.02045
+Claus-Heinemann DE-Frankfurt am Main Heinrich-Lanz-Allee,50.1903,8.65114,20
 Claus-Heinemann DE-Hannover Lathusenstraße,52.37963,9.79466
 Claus-Heinemann DE-Konstanz Line-Eid-Straße,47.67273,9.15738
 Claus-Heinemann DE-Neu-Ulm Memminger Straße,48.3881,10.00233
@@ -9756,6 +9759,7 @@ E.ON DE-Raststätte Ostetal Nord,53.29976,9.53198,12
 E.ON DE-Raststätte Pentling,48.96006,12.09356
 E.ON DE-Raststätte Prignitz,53.11521,12.46908
 E.ON DE-Raststätte Prignitz,53.11528,12.46689
+E.ON DE-Raststätte Reinhardshain Süd,50.62218,8.8973,8
 E.ON DE-Raststätte Samerberg Nord,47.80283,12.17897,20
 E.ON DE-Raststätte Sauerland,51.22291,7.67015
 E.ON DE-Raststätte Sauerland,51.2231,7.66751
@@ -9775,7 +9779,6 @@ E.ON DE-Raststätte Wildeshausen,52.91503,8.42557
 E.ON DE-Raststätte Würzburg,49.75085,9.96315
 E.ON DE-Raststätte Würzburg,49.75579,9.95984
 E.ON DE-Reinfeld An der A1,53.8187,10.47952
-E.ON DE-Reinhardshain Süd,50.62218,8.89731,8
 E.ON DE-Remscheid An der A1,51.15812,7.22672
 E.ON DE-Rendsburg Kieler Straße,54.30758,9.68847
 E.ON DE-Rheinbach Peppenhoven Ost,50.64449,6.94215
@@ -14614,6 +14617,7 @@ EWE-SWB DE-Friesoythe,53.01486,7.85101
 EWE-SWB DE-Illertissen,48.21952,10.12672,10
 EWE-SWB DE-Marktrodach,50.25635,11.39746
 
+EWF DE-Bad Wildungen Ziergartenstraße,51.10975,9.0787
 EWF DE-Willingen (Upland) Zur Hoppecke,51.29154,8.60376
 
 EWII DK-Blåvand Tane Hedevej,55.55573,8.13747
@@ -15649,6 +15653,7 @@ I2GO SE-Grums Nyängsgatan,59.36735,13.14465,15
 
 IBC CH-Chur Waisenhausstrasse,46.87138,9.5436
 
+Iberdrola ES-A Gudiña Salida,42.02977,-7.1807
 Iberdrola ES-Adina Lugar Vinquiño,42.41601,-8.81282
 Iberdrola ES-Alicante Av. de Antonio Ramos Carratalá,38.36972,-0.4662
 Iberdrola ES-Antas C. Mojana,37.26061,-1.90026
@@ -15718,6 +15723,7 @@ Iberdrola ES-Villagonzalo Pedernales Av. Pedernales,42.30718,-3.70289
 Iberdrola ES-Villargordo del Cabriel C. Carretera,39.53628,-1.43862
 Iberdrola ES-Villaverde C. del Valle de Tobalina,40.33613,-3.7149
 Iberdrola ES-Xàbia Camí Cabanes,38.76542,0.18098
+Iberdrola ES-Área de Servicio Los Chopos,42.39172,-4.47483
 Iberdrola ES-Área de Servicio Valcarce,42.65917,-6.91402
 Iberdrola ES-Ávila Ctra. Burgohondo,40.64636,-4.70513
 Iberdrola PT-Caldas da Rainha R. Casal dos Barreiros,39.4171,-9.1516
@@ -16348,8 +16354,8 @@ Ionity DE-Raststätte Ohligser Heide Ost,51.15678,6.96483
 Ionity DE-Raststätte Ohligser Heide West,51.15808,6.96174
 Ionity DE-Raststätte Ostetal Nord,53.29998,9.53256,40
 Ionity DE-Raststätte Ostetal Süd,53.2991,9.5351
-Ionity DE-Raststätte Reinhardshain,50.62186,8.89726,30
-Ionity DE-Raststätte Reinhardshain,50.6229,8.89498,30
+Ionity DE-Raststätte Reinhardshain Nord,50.6229,8.89498,30
+Ionity DE-Raststätte Reinhardshain Süd,50.62186,8.89726,30
 Ionity DE-Raststätte Samerberg Nord,47.80282,12.17805
 Ionity DE-Raststätte Samerberg Süd,47.80123,12.17726,20
 Ionity DE-Raststätte Wunnenstein Ost,49.04541,9.26625,20
@@ -20445,6 +20451,7 @@ Powerdot PL-Żagań Księżnej Żaganny,51.61755,15.31173
 Powerdot PT-Amadora Estr. da Circunvalação,38.72544,-9.20863
 Powerdot PT-Amadora Estr. do Monte da Cabreira,38.72754,-9.21128
 Powerdot PT-Braga R. Padre Alfredo José de Sousa,41.57004,-8.42799
+Powerdot PT-Chaves Rua Fonte,41.76175,-7.48787
 Powerdot PT-Lisboa R. Jorge Barradas,38.75608,-9.20447
 Powerdot PT-Lourinhã Av. de Moçambique,39.24233,-9.30742
 Powerdot PT-Matosinhos Av. Arquitecto Fernando Távora,41.20983,-8.68266
@@ -23639,6 +23646,7 @@ Wirelane DE-Dresden Magdeburger Straße,51.05777,13.72573
 Wirelane DE-Erfurt Wilhelm-Busch-Straße,50.96817,11.04775
 Wirelane DE-Erkrath Leibnizstraße,51.20487,6.96864
 Wirelane DE-Göttingen Erich-Schmidt-Weg,51.5146,9.94553
+Wirelane DE-Heppenheim (Bergstraße) Wilhelmstraße,49.64144,8.6409
 Wirelane DE-Hof Kulmbacher Straße,50.32034,11.90445
 Wirelane DE-Maierhöfen Kirchweg,47.6524,10.05069
 Wirelane DE-Markt Schwaben Schloßplatz,48.19107,11.86771
@@ -23746,10 +23754,12 @@ Zunder ES-L’Ametlla del Vallès Calle Llerona Poligon,41.66448,2.26983
 Zunder ES-Mieres C. Rector Julio Rodríguez,43.24328,-5.77581
 Zunder ES-Monesterio C. de los Carpinteros,38.08253,-6.25831
 Zunder ES-Oviedo C. de Francisco Rodríguez García,43.3686,-5.8394
+Zunder ES-Pancorbo C. Poligono Cantarranas,42.6263,-3.11337
 Zunder ES-Rois Sar Galicia,42.77438,-8.65104
 Zunder ES-Santiago de Compostela Rúa de Miguel Ferro Caaveiro,42.88438,-8.51292
 Zunder ES-Villalpando Cam. de los Gallegos,41.82615,-5.37888,12
 Zunder ES-Zafra Plaza del Alcázar,38.4244,-6.41493
+Zunder ES-Área de servicio Quintanilla Norte,42.0224,-5.8536
 
 Ísorka IS-Stykkishólmur Borgarbraut,65.07335,-22.72929
 Ísorka IS-Suðurland Arnberg Sveitarfélagið,63.94378,-21.00855
