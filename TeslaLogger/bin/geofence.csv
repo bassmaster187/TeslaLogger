@@ -3059,7 +3059,6 @@ Supercharger-V4 IT-Andora,43.962592,8.142398
 Supercharger-V3 IT-Arese,45.561371,9.055905
 Supercharger-V4 IT-Arezzo,43.4368,11.7796
 Supercharger-V4 IT-Asti,44.905472,8.17778
-Supercharger-V4 IT-Avio,45.72908,10.937956
 Supercharger-V4 IT-Avio,45.73062,10.939
 Supercharger-V3 IT-Barberino di Mugello,43.984138,11.215742
 Supercharger-V3 IT-Bardonecchia,45.08248,6.7112
@@ -6256,6 +6255,7 @@ ABC FI-Ähtäri Oikotie,62.54999,24.08735
 
 ABP DE-Reiskirchen Siemensstraße,50.6002,8.81753
 
+acciona ES-Donostia / San Sebastián Garbera Bidea,43.3103,-1.94598
 acciona ES-Mérida Av. de Portugal,38.9055,-6.36295
 acciona ES-Ponts Carr. de La Seu d’Urgell,41.92283,1.1943
 acciona ES-Ribeira Lugar Insuela,42.57,-8.96743
@@ -13853,6 +13853,7 @@ EWE-GO DE-Dötlingen Rittrumer Kirchweg,52.93785,8.37914
 EWE-GO DE-Düren Im Großen Tal,50.83406,6.45885
 EWE-GO DE-Düren Rudolf-Diesel-Straße,50.78095,6.50861
 EWE-GO DE-Ebermannsdorf Messerschmittstraße,49.39652,11.98587
+EWE-GO DE-Ebersdorf bei Coburg Frankenring,50.22363,11.0519,29
 EWE-GO DE-Eching Strogenweg,48.48546,12.01444
 EWE-GO DE-Edewecht Friedrichsfehner Straße,53.12413,8.08539,20
 EWE-GO DE-Edewecht Hauptstraße,53.11717,7.96939
@@ -14979,6 +14980,8 @@ Fortum NO-Geiranger Gjorvahaugen,62.09509,7.21124
 Fortum NO-Sortland,68.70491,15.41476
 Fortum NO-Stavanger Dalsetveien,58.93358,5.73966
 Fortum SE-Karlskoga Norra Viaduktgatan,59.32518,14.52661,20
+
+Francis-Energy US-Fort Sumner NM Sumner Ave,34.47045,-104.2426
 
 Fraport DE-Frankfurt am Main Ladepark Terminal 1,50.04982,8.56167
 Fraport DE-Frankfurt am Main Parkhaus Terminal 1,50.0508,8.56686
@@ -22801,6 +22804,7 @@ TotalEnergies FR-Aire de Tardenois,49.12561,3.53789,30
 TotalEnergies FR-Aire de Tardenois,49.12688,3.53801,30
 TotalEnergies FR-Aire de Toul-Dommartin,48.65997,5.90812
 TotalEnergies FR-Aire de Toul-Dommartin,48.66073,5.90822
+TotalEnergies FR-Aire des Pyrénées A64,43.22958,-0.0784
 TotalEnergies FR-Aire Des Volcans D Auvergne Saint Agoulin,46.05858,3.11231,80
 TotalEnergies FR-Aire Narbonne Vinassan Sud,43.21619,3.09248,80
 TotalEnergies FR-Brumath Av. de Strasbourg,48.70773,7.7102
