@@ -843,11 +843,19 @@ namespace TeslaLogger
 
                             await CheckDetailedChargeStateAsync(d);
 
-                            if (IsCharging && DetailedChargeState == "DetailedChargeStateStopped")
+                            if (DetailedChargeState != "DetailedChargeStateCharging")
                             {
-                                Log("Stop Charging by DetailedChargeState");
-                                acCharging = false;
-                                dcCharging = false;
+                                if (acCharging)
+                                {
+                                    Log("Stop AC Charging by DetailedChargeState");
+                                    acCharging = false;
+                                }
+
+                                if (dcCharging)
+                                {
+                                    Log("Stop DC Charging by DetailedChargeState");
+                                    dcCharging = false;
+                                }
                             }
 
                             if (DetailedChargeState.Contains("DetailedChargeStateNoPower") ||
