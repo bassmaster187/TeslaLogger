@@ -103,7 +103,7 @@ namespace TeslaLogger
 
         private bool driving;
         private bool _acCharging;
-        private string lastDetailedChargeState;
+        private string lastDetailedChargeState = "";
 
         internal bool dcCharging
         {
@@ -1796,7 +1796,7 @@ namespace TeslaLogger
                                         Driving = false;
                                     }
 
-                                    if (!acCharging)
+                                    if (!acCharging && lastDetailedChargeState == "")
                                     {
                                         var current = PackCurrent(j, date);
 
@@ -1810,7 +1810,7 @@ namespace TeslaLogger
                                 }
                                 else if (v1 == "Idle")
                                 {
-                                    if (acCharging)
+                                    if (acCharging && lastDetailedChargeState == "")
                                     {
                                         Log("Stop AC Charging ***");
                                         acCharging = false;
