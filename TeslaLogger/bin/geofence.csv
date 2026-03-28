@@ -2650,6 +2650,7 @@ Supercharger FR-Morlaix,48.57439,-3.85318
 Supercharger FR-Mougins,43.603668,7.011086
 Supercharger FR-Mulhouse,47.782016,7.388299
 Supercharger-V4 FR-Mulhouse Rue des Cévennes,47.782,7.38707
+Supercharger-V4 FR-Mulhouse Rue des Cévennes,47.7821,7.3871
 Supercharger-V3 FR-Mundolsheim,48.65302,7.73188,40
 Supercharger FR-Mâcon,46.346653,4.849067
 Supercharger FR-Nancy,48.638215,6.184349
@@ -7173,6 +7174,7 @@ Allego DE-Schorfheide An der B167 6,52.84974,13.68662
 Allego DE-Schweinfurt Friedrich-Rätzer-Straße,50.0279,10.23788
 Allego DE-Schweitenkirchen,48.51068,11.58241,6
 Allego DE-Schweitenkirchen,48.51072,11.58235,6
+Allego DE-Schwerin Am Margaretenhof,53.66105,11.35785
 Allego DE-Seevetal,53.39664,10.04246
 Allego DE-Selbitz Stegenwaldhauser Straße,50.32474,11.78441,25
 Allego DE-Sereetz Sereetzer Feld,53.92697,10.72259,30
@@ -17328,6 +17330,7 @@ KELAG AT-Villach Maria-Gailer-Straße,46.60398,13.86929,12
 KELAG AT-Wien Gutheil-Schoder-Gasse,48.16241,16.3402
 KELAG AT-Winklern Winklern,46.8725,12.8788
 KELAG AT-Wolfsberg Gemmersdorfer Straße,46.81774,14.85132
+KELAG AT-Wörgl Salzburger Straße,47.48954,12.0727,40
 
 KEW DE-Neunkirchen Margarethe-Bacher-Straße,49.34578,7.16772
 
@@ -18727,6 +18730,7 @@ Mer DE-Autohof Fulda-Nord,50.58114,9.70631
 Mer DE-Bad Frankenhausen August-Bebel-Platz,51.35557,11.10224
 Mer DE-Bad Frankenhausen Fliederweg,51.35461,11.1172
 Mer DE-Bad Frankenhausen Kantor Bischoff Platz,51.35481,11.09776
+Mer DE-Bad Frankenhausen Seehäuser Straße,51.3447,11.11123
 Mer DE-Bad Füssing Rathausstraße,48.35075,13.31412
 Mer DE-Bad Griesbach Sagmühle,48.4168,13.175
 Mer DE-Bad Griesbach Thermalbadstraße,48.42927,13.18613
@@ -19079,7 +19083,8 @@ MOVE CH-Bern Waisenhausplatz,46.94997,7.44479
 MOVE CH-Bern Wölflistrasse,46.96581,7.4756
 MOVE CH-Bronschhofen Zürcherstrasse,47.46743,9.0284
 MOVE CH-Buchs Bahnhofstrasse,47.16713,9.4789
-MOVE CH-Bursins Relais de la Côte,46.44654,6.29763,30
+MOVE CH-Bursins Relais de la Côte direction Genève,46.44654,6.29763
+MOVE CH-Bursins Relais de la Côte direction Lausanne,46.44504,6.29787
 MOVE CH-Chavannes-de-Bogis Les Champs-Blancs,46.3348,6.16143
 MOVE CH-Dübendorf Ueberlandstrasse,47.4011,8.61986
 MOVE CH-Dübendorf Ueberlandstrasse,47.40352,8.61261
@@ -23066,6 +23071,7 @@ Vattenfall DE-Schwerin Dahlenweg,53.62759,11.37235
 Vattenfall DE-Schwerin Ratzeburger Straße,53.64854,11.35361
 Vattenfall DE-Schönebeck (Elbe) Am Stadtfeld,52.01372,11.72872
 Vattenfall DE-Seelow Berliner Straße,52.53257,14.3765
+Vattenfall DE-Sellin Friedrich-von-Hagenow-Straße,54.36583,13.70307
 Vattenfall DE-Stavenhagen Malchiner Straße,53.69993,12.90181
 Vattenfall DE-Stendal Tangermünder Straße,52.59868,11.86539
 Vattenfall DE-Stralsund Carl-Heydemann-Ring,54.31197,13.06954
