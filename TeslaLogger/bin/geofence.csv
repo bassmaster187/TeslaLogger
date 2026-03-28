@@ -2297,7 +2297,7 @@ Supercharger ES-Alcobendas,40.521575,-3.65606
 Supercharger-V3 ES-Aldaia,39.47147,-0.48592
 Supercharger-V3 ES-Algeciras,36.135157,-5.461652
 Supercharger-V4 ES-Alicante,38.35333,-0.47224
-Supercharger ES-Almaraz,39.791562,-5.695512,30
+Supercharger-V4 ES-Almaraz,39.7916,-5.6955,30
 Supercharger-V4 ES-Antas,37.2137,-1.89826
 Supercharger-V3 ES-Antequera,37.113318,-4.566764
 Supercharger-V4 ES-Aranda de Duero,41.62322,-3.68768
@@ -2406,7 +2406,7 @@ Supercharger-V4 ES-Zaragoza,41.62583,-1.0096
 Supercharger-V4 ES-Zaragoza East,41.6067,-0.69069
 Supercharger-V4 ES-Zaragoza Gran Casa,41.67028,-0.89014
 Supercharger-V4 ES-Zaragoza Travesía Jardines Reales,41.60742,-0.888
-Supercharger-V4 ES-Zestoa,43.26922,-2.27114
+Supercharger-V4 ES-Zestoa,43.26983,-2.27087
 
 Supercharger FI-Akaa,61.181106,23.885075
 Supercharger FI-Espoo,60.2145,24.65336,30
@@ -2582,7 +2582,7 @@ Supercharger-V3 FR-Dinan,48.444752,-2.068308
 Supercharger-V4 FR-Domancy,45.91063,6.6575
 Supercharger-V4 FR-Dreux,48.7496,1.35074
 Supercharger-V3 FR-Dunkerque,51.00515,2.28115,40
-Supercharger-V3 FR-Englos,50.62996,2.97086
+Supercharger-V4 FR-Englos,50.62996,2.97086
 Supercharger FR-Eurotunnel Flexiplus Lounge,50.929973,1.813182
 Supercharger-V4 FR-Falaise,48.907447,-0.20696
 Supercharger-V4 FR-Farébersviller,49.111647,6.855271
@@ -3090,7 +3090,7 @@ Supercharger-V4 IT-Eboli,40.605544,15.055318
 Supercharger-V4 IT-Emilia-Romagna,44.434137,11.608923
 Supercharger-V4 IT-Enna,37.567516,14.402925
 Supercharger-V4 IT-Fabro,42.873612,12.021168
-Supercharger IT-Fano,43.802874,13.015345
+Supercharger-V4 IT-Fano,43.80282,13.01542
 Supercharger-V4 IT-Fidenza,44.8819,10.09415
 Supercharger IT-Firenze,43.810258,11.17798
 Supercharger-V4 IT-Firenze-Campi Bisenzio,43.848512,11.14426
@@ -7232,6 +7232,7 @@ Allego FR-Anglet Centre Commercial,43.4904,-1.49698
 Allego FR-Avignon 162 Avenue Pierre Semard,43.9278,4.83464
 Allego FR-Avignon Rue Jean Marie Tjibaou,43.9279,4.79125
 Allego FR-Avranches Parc d activité de la Baie,48.65422,-1.34957
+Allego FR-Balaruc-le-Vieux Rue Tony Garnier,43.4628,3.6905
 Allego FR-Bayeux Bd d’Eindhoven,49.28444,-0.70549,25
 Allego FR-Beaucaire Route de Nîmes,43.81698,4.61474
 Allego FR-Chalezeule Rte de Belfort,47.2629,6.0644,30
@@ -16202,6 +16203,7 @@ Ionity BE-Vilvoorde Living Tomorrow Brussels,50.90881,4.38627
 Ionity BE-Wellin Rue de Dinant,50.07836,5.13191
 Ionity BE-Wetteren Noord,50.97074,3.84423
 Ionity BE-Wetteren Zuid,50.96946,3.84157
+Ionity BE-Zandhoven Liersebaan,51.2038,4.64736
 Ionity CH-Bellinzona Nord,46.2095,9.0266
 Ionity CH-Bellinzona Süd,46.18224,9.0018
 Ionity CH-Gossau Flawilerstrasse,47.41299,9.24069
@@ -16997,7 +16999,7 @@ Kaufland DE-Essen,51.47362,6.9997
 Kaufland DE-Essen-Borbeck,51.47313,6.9527
 Kaufland DE-Esslingen am Neckar,48.72423,9.35217
 Kaufland DE-Fellbach,48.81348,9.26649
-Kaufland DE-Feuchtwangen Dinkelsbühler Straße 34,49.16187,10.32704
+Kaufland DE-Feuchtwangen Dinkelsbühler Straße,49.16188,10.32634
 Kaufland DE-Frankfurt,50.13222,8.74936
 Kaufland DE-Frankfurt (Oder) Josef-Gesing-Straße,52.34893,14.52003
 Kaufland DE-Fredersdorf-Vogelsdorf,52.49736,13.74451
@@ -17135,7 +17137,7 @@ Kaufland DE-Pfungstadt,49.81387,8.61979
 Kaufland DE-Pirmasens Zweibrücker Straße,49.22627,7.5915
 Kaufland DE-Pirna Struppener Straße 11A,50.95756,13.95827
 Kaufland DE-Pocking Passauer Straße 160,48.41022,13.3329
-Kaufland DE-Potsdam Zeppelinstraße 132,52.38933,13.03053
+Kaufland DE-Potsdam Zeppelinstraße,52.38923,13.02986
 Kaufland DE-Radebeul,51.09958,13.6543
 Kaufland DE-Rastatt Rauentaler Straße,48.86083,8.23399
 Kaufland DE-Ravensburg,47.76778,9.60427
@@ -17574,6 +17576,7 @@ Lidl AT-Gänserndorf Neusiedler Straße,48.33465,16.71162,30
 Lidl AT-Götzis,47.34107,9.65254
 Lidl AT-Hall in Tirol,47.2776,11.49547
 Lidl AT-Hard,47.48118,9.68862
+Lidl AT-Hartberg Ferdinand-Leihs-Straße,47.28365,15.9876
 Lidl AT-Kapfenberg,47.45298,15.31557
 Lidl AT-Klagenfurt Ebentaler Straße,46.61406,14.33955
 Lidl AT-Klagenfurt Feldkirchner Straße,46.62962,14.3034
@@ -19523,6 +19526,7 @@ OKQ8 SE-Kiruna Österleden,67.84552,20.25424
 OKQ8 SE-Luleå Robertsviksgatan,65.59071,22.1485,20
 OKQ8 SE-Motala Vintergatan,58.5428,15.01357
 OKQ8 SE-Mönsterås Storgatan,57.05069,16.43983
+OKQ8 SE-Skillingaryd Åkaregatan,57.34984,14.09864
 OKQ8 SE-Sveg Vallarvägen,62.03467,14.36784
 OKQ8 SE-Tystberga Sillekrog,58.91809,17.36909,20
 OKQ8 SE-Vilhelmina Volgsjövägen,64.62213,16.66623
@@ -23091,6 +23095,7 @@ Vattenfall NL-Beuningen Hadrianussingel,51.85621,5.75153
 Vattenfall NL-Beverwijk Parallelweg,52.48031,4.66594
 Vattenfall NL-Breda Kruisvoort,51.58231,4.73088
 Vattenfall NL-Capelle aan den IJssel Rivium 3e Straat,51.90978,4.5451
+Vattenfall NL-Deventer Margijnenenk,52.26832,6.16457
 Vattenfall NL-Duiven Nieuwgraaf,51.96724,5.98923
 Vattenfall NL-Ermelo Anna van Saksenlaan,52.30418,5.62426
 Vattenfall NL-Geleen Rijksweg Zuid,50.9565,5.81353
@@ -23619,6 +23624,7 @@ Wien-Energie AT-Wien Ottakringer Straße,48.21346,16.32004
 Wien-Energie AT-Wien Perfektastraße,48.13719,16.29996
 Wien-Energie AT-Wien Raffaelgasse,48.23318,16.37169
 Wien-Energie AT-Wien Sagedergasse,48.161,16.31936
+Wien-Energie AT-Wien Schickgasse,48.2213,16.4572
 Wien-Energie AT-Wien Schiffmühlenstraße,48.22264,16.42653
 Wien-Energie AT-Wien Schillingstraße,48.25957,16.46992
 Wien-Energie AT-Wien Schnirchgasse,48.19426,16.41093
@@ -24259,7 +24265,9 @@ DE Schwarzheide Naundorfer Straße,51.47129,13.87011
 DE Schwerin Dreescher Werkstätten,53.56426,11.38108
 DE Schwäbisch Hall Optima,49.1142,9.78874
 DE Schöneck IFA Hotel,50.38921,12.34454
+DE Seehausen am Staffelsee Campingplatz,47.6847,11.17737
 DE Seesen Hotel Zum Alten Fritz,51.8894,10.16723
+DE Sexau Greiner ET,48.08793,7.89198
 DE Sexau maxon motor,48.09012,7.89528
 DE Sierksdorf Hansa-Park,54.07358,10.77805
 DE Simonsberg Nordseecamping zum Seehund,54.45534,8.97188
