@@ -3858,7 +3858,7 @@ Supercharger-V3 SE-Kristinehamn,59.31478,14.147392
 Supercharger SE-Krokom,63.328793,14.4301
 Supercharger-V4 SE-Kungens Kurva,59.270082,17.915231
 Supercharger-V4 SE-Kungsbacka,57.478787,12.080095
-Supercharger SE-Kungälv,57.858164,11.998272
+Supercharger-V4 SE-Kungälv,57.85816,11.99827
 Supercharger-V4 SE-Kåbdalis,66.145978,19.989626
 Supercharger SE-Lagan,57.028956,14.014744
 Supercharger-V4 SE-Laxå,58.982245,14.623561
@@ -3889,7 +3889,7 @@ Supercharger-V4 SE-Piteå,65.235417,21.530925
 Supercharger-V4 SE-Puoltikasvaara,67.4402,21.1155
 Supercharger-V4 SE-Riksgränsen,68.426588,18.12285
 Supercharger-V4 SE-Ronneby,56.23138,15.25778
-Supercharger SE-Skellefteå,64.76235,21.002864
+Supercharger-V4 SE-Skellefteå,64.76232,21.00264
 Supercharger-V3 SE-Sollentuna,59.496586,17.92444
 Supercharger-V4 SE-Stenungsund Central,58.06755,11.8182
 Supercharger SE-Stockholm,59.500743,17.927563
@@ -6175,6 +6175,8 @@ A2A IT-Rovato Via del Commercio,45.5784,10.00983
 A2A IT-Salò Via Maria Montessori,45.60188,10.51672
 A2A IT-San Felice del Benaco Via Dietro Castello,45.58652,10.54727
 A2A IT-Truccazzano Via Rivoltana,45.48038,9.44681
+
+Aachener-Parkhaus DE-Aachen Kullenhofstraße,50.77392,6.04575
 
 AAE AT-Assling Thal-Aue,46.78325,12.66245
 AAE AT-Imst Rathausstraße,47.23954,10.73779
@@ -8853,6 +8855,7 @@ Claus-Heinemann DE-Erlangen Wetterkreuz,49.54286,11.02045
 Claus-Heinemann DE-Frankfurt am Main Heinrich-Lanz-Allee,50.1903,8.65114,20
 Claus-Heinemann DE-Hannover Lathusenstraße,52.37963,9.79466
 Claus-Heinemann DE-Konstanz Line-Eid-Straße,47.67273,9.15738
+Claus-Heinemann DE-Mühlheim am Main Schillerstraße,50.1201,8.84734
 Claus-Heinemann DE-Neu-Ulm Memminger Straße,48.3881,10.00233
 Claus-Heinemann DE-Stuttgart Zettachring,48.71008,9.16984
 Claus-Heinemann DE-Weil am Rhein Zollstraße,47.59006,7.59363
@@ -9473,6 +9476,7 @@ e-laden-Tirol AT-Innsbruck Technikerstraße,47.2643,11.35063
 e-laden-Tirol AT-Kematen Sellrainer Straße,47.26152,11.26452
 e-laden-Tirol AT-Kematen Sportplatzweg,47.26059,11.26867
 e-laden-Tirol AT-Kitzbühel Jochberger Straße,47.43815,12.40086
+e-laden-Tirol AT-Oberau Wildschönau Kirchen,47.4441,12.05078
 e-laden-Tirol AT-Schönberg im Stubaital Europabrücke-Parkplatz,47.19827,11.39695
 
 E-MAXX DE-Birnbach Kölner Straße,50.7084,7.58354
@@ -17415,6 +17419,8 @@ Ladegrün DE-Stuttgart Frankenstraße,48.82541,9.17233
 Ladegrün DE-Süderholz Pommerndreieck,54.0941,13.0878,25
 Ladegrün DE-Uetze Marktstraße,52.46865,10.20433
 Ladegrün DE-Viernheim Heidelberger Straße,49.52831,8.57323
+
+Ladesonne DE-Buchholz (Aller) An der Autobahn,52.67374,9.68755,20
 
 LAKD LT-Biruliškės A1,54.92962,24.02116
 LAKD LT-Pasiekos Europos g,54.31857,23.13653
