@@ -69,6 +69,10 @@ namespace TeslaLogger
                 }
             })
             {
+                if (Tools.GetOsVersion().Contains("RPI4"))
+                {
+                    process.StartInfo.Environment["LD_PRELOAD"] = "/lib/arm-linux-gnueabihf/libuuid.so.1";
+                }
                 process.Start();
                 while (!process.StandardOutput.EndOfStream)
                 {
@@ -157,6 +161,10 @@ namespace TeslaLogger
                 }
             })
             {
+                if (Tools.GetOsVersion().Contains("RPI4"))
+                {
+                    process.StartInfo.Environment["LD_PRELOAD"] = "/lib/arm-linux-gnueabihf/libuuid.so.1";
+                }
                 process.Start();
                 while (!process.StandardOutput.EndOfStream)
                 {
@@ -217,6 +225,10 @@ namespace TeslaLogger
                 }
             })
             {
+                if (Tools.GetOsVersion().Contains("RPI4"))
+                {
+                    process.StartInfo.Environment["LD_PRELOAD"] = "/lib/arm-linux-gnueabihf/libuuid.so.1";
+                }
                 process.Start();
                 while (!process.StandardOutput.EndOfStream)
                 {
