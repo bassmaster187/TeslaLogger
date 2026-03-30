@@ -234,7 +234,7 @@ Supercharger-V3 CA-Bassano AB,50.791142,-112.450181
 Supercharger CA-Belleville ON,44.187879,-77.398851
 Supercharger-V3 CA-Berthierville QC,46.086273,-73.196499
 Supercharger-V3 CA-Blind River ON,46.185573,-82.926692
-Supercharger CA-Boisbriand QC,45.625717,-73.851067
+Supercharger-V3 CA-Boisbriand QC,45.6257,-73.85107
 Supercharger-V3 CA-Bracebridge ON,45.048704,-79.291804
 Supercharger-V3 CA-Brampton ON - Queen Street East,43.741375,-79.698903
 Supercharger-V3 CA-Brandon MB,49.86779,-99.960722
@@ -4845,6 +4845,7 @@ Supercharger US-Indianapolis IN - Capitol Avenue (Pay to Park Floor 1),39.76557,
 Supercharger-V3 US-Indianapolis IN - East 86th Street,39.91397,-86.13923
 Supercharger-V3 US-Indianapolis IN - East Southport Road,39.66603,-86.07597
 Supercharger-V3 US-Indianapolis IN S Service Road,39.69976,-86.3137
+Supercharger-V3 US-Indianapolis IN Waterway Blvd,39.7846,-86.18424
 Supercharger-V3 US-Kokomo IN,40.47528,-86.09943
 Supercharger US-Lafayette IN,40.41618,-86.81408
 Supercharger-V3 US-Lebanon IN,40.03507,-86.46958
@@ -4857,7 +4858,7 @@ Supercharger-V3 US-Richmond IN,39.86788,-84.88724
 Supercharger-V3 US-Rolling Prairie IN - S Knute Rockne Plaza,41.70522,-86.62326
 Supercharger-V3 US-Rolling Prairie IN - Wilbur Shaw Travel Plaza,41.7076,-86.62135
 Supercharger-V3 US-Shelbyville IN,39.55412,-85.77387
-Supercharger-V3 US-Speedway IN,39.80066,-86.27005
+Supercharger-V3 US-Speedway IN,39.80072,-86.27033
 Supercharger-V3 US-Spiceland IN,39.84798,-85.4195
 Supercharger US-Terre Haute IN,39.44334,-87.33172
 Supercharger-V3 US-Veedersburg IN,40.11304,-87.24752
@@ -10395,6 +10396,7 @@ ElectriEase IT-Area di servizio Bettole di Novi Est,44.7604,8.83855
 ElectriEase IT-Lignano Sabbiadoro Viale Europa,45.68927,13.13277
 
 Electrify-America US-Albany NY Washington Ave Ext,42.69452,-73.84832
+Electrify-America US-Auburn CA Auburn Ravine Rd,38.9225,-121.06033
 Electrify-America US-Auburn MA Southbridge St,42.20223,-71.838
 Electrify-America US-Battle Mountain NV W Front St,40.64815,-116.94291
 Electrify-America US-Bridgeport CA Main St,38.25516,-119.23202
