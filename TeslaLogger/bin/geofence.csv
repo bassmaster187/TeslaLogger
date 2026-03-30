@@ -2393,6 +2393,7 @@ Supercharger-V4 ES-Totana,37.77605,-1.45422
 Supercharger-V4 ES-Trujillo,39.56539,-5.83312
 Supercharger-V3 ES-Valdepeñas,38.779707,-3.388703
 Supercharger-V3 ES-Valencia Paterna,39.543,-0.45147
+Supercharger-V4 ES-Valladolid,41.6275,-4.7895
 Supercharger-V3 ES-Vigo,42.2206,-8.72507
 Supercharger-V4 ES-Vila-seca,41.096226,1.150441
 Supercharger-V4 ES-Villagonzalo Pedernales,42.28794,-3.7073
@@ -6697,6 +6698,7 @@ Allego BE-Brugge Sint-Pieterskaai,51.2203,3.21369
 Allego BE-Bruxelles Brussels Havenlaan,50.86502,4.3494
 Allego BE-Genk Thor Park,50.99755,5.53396
 Allego BE-Grimbergen Brusselsesteenweg,50.92776,4.36611,30
+Allego BE-Heusden-Zolder Snelwegstraat,51.00654,5.2715
 Allego BE-Middelkerke Diksmuidestraat,51.13986,2.86249
 Allego BE-Oostende Buskruitstraat,51.23624,2.92619
 Allego BE-Rotselaar E314,50.95144,4.79261
@@ -7279,6 +7281,7 @@ Allego NL-Venlo Nijmeegseweg,51.39538,6.17429,60
 Allego NL-Wassenaar Zijdeweg,52.10586,4.3599
 Allego NL-Zaltbommel Hogeweg,51.79655,5.2553,22
 Allego NL-Zurich N31,53.09901,5.38405
+Allego NL-Zwolle Simon van Slingelandtplein,52.52197,6.11095
 Allego SE-Arboga Burskapsvägen,59.42677,15.8286,25
 Allego SE-Gävle,60.64548,17.14623
 Allego SE-Helsingborg Landskronavägen,56.00127,12.74495
@@ -21529,6 +21532,7 @@ Smatrics AT-Altlengbach Steinhäusl,48.15789,15.94188
 Smatrics AT-Anif Salzachtalstraße,47.72713,13.06038,6
 Smatrics AT-Ansfelden Ikea-Platz,48.19731,14.24953
 Smatrics AT-Ansfelden Traunuferstraße,48.21153,14.275
+Smatrics AT-Arnoldstein Kärntner Straße,46.55007,13.69878
 Smatrics AT-Bad Ischl Sulzbacherstraße,47.69079,13.62284
 Smatrics AT-Bad Voslau Flugfeldstraße,47.9661,16.239
 Smatrics AT-Bad Waltersdorf,47.18288,15.99365
@@ -23120,6 +23124,7 @@ Vattenfall NL-Roermond Wilhelminaplein,51.19662,5.99337
 Vattenfall NL-Rosmalen Burgemeester Burgerslaan,51.7194,5.33523
 Vattenfall NL-Schagen Grotewallerweg,52.78243,4.80893
 Vattenfall NL-Sint Maartensvlotbrug Belkmerweg,52.78625,4.6982
+Vattenfall NL-Zwolle Zerboltstraat,52.5215,6.1101
 Vattenfall SE-Ammarnäs Strandvägen,65.95758,16.21079
 Vattenfall SE-Arlöv Vassvägen,55.61343,13.10277,20
 Vattenfall SE-Askersund Drottning Kristinas väg,58.88013,14.90865
@@ -23225,6 +23230,7 @@ Virta DE-München Balanstraße,48.12122,11.59824
 Virta DE-München Maria-Probst-Straße,48.1912,11.58824
 Virta DE-München Maria-Probst-Straße,48.19134,11.58663
 Virta DE-Nidda Eisenried,50.41639,9.01729
+Virta DE-Obernburg am Main Dieselstraße,49.8334,9.12625
 Virta DE-Reddeber Am Stadtweg,51.86183,10.80263
 Virta DE-Rostock Alte Dorfstraße,54.10095,12.18146
 Virta DE-Salzwedel Brunnenstraße,52.85815,11.14482
