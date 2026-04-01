@@ -6225,6 +6225,7 @@ ABC FI-Kankaanpää Asemakatu,61.81423,22.3759
 ABC FI-Kauhava Peltopassi,63.09122,23.05934
 ABC FI-Kimito Engelsbyvägen,60.16369,22.73586
 ABC FI-Kokkola Heinolankaari,63.83026,23.1467
+ABC FI-Kolari Jokijalantie,67.33547,23.82083
 ABC FI-Kristinestad Gamla Vasavägen,62.26183,21.4857
 ABC FI-Kristinestad Gamla Vasavägen,62.26227,21.48402
 ABC FI-Kuortti Mäyrätie,61.42196,26.4347
@@ -6751,7 +6752,7 @@ Allego DE-Bad Nauheim Georg-Scheller-Straße,50.3611,8.75273
 Allego DE-Bad Oeynhausen Werre-Park,52.21347,8.81468,18
 Allego DE-Bad Salzuflen Otto-Hahn-Straße,52.06558,8.75107
 Allego DE-Bad Sassendorf Schuetzenstraße,51.57904,8.1585
-Allego DE-Bad Segeberg Bahnhofstraße 13,53.93459,10.30725
+Allego DE-Bad Segeberg Bahnhofstraße,53.9346,10.3072
 Allego DE-Barkhausen Feldstraße 20,52.26068,8.90137
 Allego DE-Barsbüttel Bauhaus,53.57679,10.19448
 Allego DE-Barth Gewerbegebiet am Mastweg 8,54.35926,12.71101
@@ -14478,6 +14479,7 @@ EWE-GO DE-Syke Herrlichkeit,52.91471,8.82726
 EWE-GO DE-Sögel Am Markt,52.8404,7.52138
 EWE-GO DE-Sögel Clemenswerth,52.8366,7.53631
 EWE-GO DE-Süderlügum Hauptstraße,54.88319,8.90821
+EWE-GO DE-Süderlügum Hauptstraße,54.8836,8.90753
 EWE-GO DE-Tarmstedt Gartenstraße,53.2283,9.08253
 EWE-GO DE-Tarmstedt Hepstedter Straße,53.22787,9.07818
 EWE-GO DE-Tarmstedt KleineTrift,53.23091,9.08537
@@ -17194,6 +17196,7 @@ Kaufland DE-Strausberg Otto-Grotewohl-Ring 72,52.57386,13.8975
 Kaufland DE-Stuttgart,48.84048,9.22919
 Kaufland DE-Stuttgart Augsburger Straße 460,48.77564,9.25779
 Kaufland DE-Sulzbach-Rosenberg Krötenseestraße,49.49642,11.74397
+Kaufland DE-Teltow Potsdamer Straße,52.39677,13.23995
 Kaufland DE-Tettnang,47.66262,9.57147
 Kaufland DE-Torgau Turnierplatzweg 1,51.54807,12.99746
 Kaufland DE-Traunstein Theresienstraße 2,47.87185,12.63716
@@ -18985,6 +18988,7 @@ MONACO-ON MC-Monaco Av. Crovetto Frères,43.73306,7.41613
 MONACO-ON MC-Monaco Av. de la Madone,43.74066,7.42695
 MONACO-ON MC-Monaco Av. Princesse Grâce,43.74568,7.43203
 
+Monta AT-Berwang,47.40924,10.7445
 Monta AT-Burgfried Böhmer Straße,48.52589,14.29368
 Monta AT-Freistadt Galgenau,48.4892,14.4973
 Monta BA-Doboj Kolubarska,44.73326,18.09665
@@ -24428,6 +24432,7 @@ RO Brașov RAT Rulmentul,45.68157,25.61481
 RO Brașov Regina Maria,45.64371,25.59957
 RO Brașov Scanexpert,45.65745,25.58587
 RO Brașov Strada Poienelor,45.63318,25.63254,25
+RO Brașov Șoseaua Cristianului,45.65812,25.56304
 RO București Splaiul Unirii,44.39593,26.20193
 RO Cluj-Napoca Strada Ion Meșter,46.75839,23.5593
 RO Cristian Hotel Sorin Mihai,45.63336,25.49198
@@ -24459,6 +24464,7 @@ US Austin TX Encino Trace,30.2428,-97.84612
 US Carlsbad CA Bressi Ranch,33.12324,-117.26577
 US Cupertino CA Apple Park,37.32924,-122.00997
 US Darmstadt St Joseph Avenue,38.1032,-87.59667
+US Fairburn GA Senoia Rd,33.53822,-84.57576
 US Raleigh Spindle Court,35.71586,-78.68483
 US San Diego Scranton Road,32.89684,-117.20074
 US Stafford VA Richmond Hwy,38.47367,-77.39667
