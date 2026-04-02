@@ -10358,6 +10358,7 @@ Electra BE-Auderghem Chaussée de Wavre,50.79478,4.47889
 Electra BE-Maasmechelen Koninginnelaan,50.98633,5.7015
 Electra BE-Zandhoven Liersebaan,51.1989,4.64353
 Electra CH-Bern Mingerstrasse,46.9592,7.46917
+Electra CH-Zürich Förrlibuckstrasse,47.39168,8.5165
 Electra DE-Chemnitz Bergstraße,50.84327,12.90854
 Electra ES-Sant Cugat Shopping Center,41.48302,2.0529
 Electra FR-Aire de Arzens,43.21972,2.21619,30
@@ -12914,6 +12915,7 @@ Energie-Burgenland AT-Lutzmannsburg Thermenstraße,47.46572,16.65758
 Energie-Burgenland AT-Markt Allhau Industrieweg,47.27679,16.08671
 Energie-Burgenland AT-Neusiedl am See Seegelände,47.92979,16.83728
 Energie-Burgenland AT-Oberwart Europastraße,47.288,16.18658
+Energie-Burgenland AT-Podersdorf am See Strandgasse,47.85736,16.83003
 Energie-Burgenland AT-Steinberg-Dörfl Burgenland Straße,47.48975,16.49405
 
 Energie-Graz DE-Graz Lendkai,47.07588,15.4319
@@ -18948,6 +18950,7 @@ Mobiliti HU-Szombathely Hollán Ernő utca,47.23032,16.61786
 Mobiliti HU-Székesfehérvár M7 autópálya,47.17743,18.4763
 Mobiliti HU-Sárvár Várkerület utca,47.2521,16.93999
 
+Mobility HU-Ajka Petőfi Sándor utca,47.105,17.5608
 Mobility HU-Balatonkeresztúr,46.68503,17.37851,25
 Mobility HU-Budapest Airport,47.43157,19.26382
 Mobility HU-Debrecen Balmazújvárosi utca,47.54301,21.59421
@@ -22111,6 +22114,7 @@ SW-Neustrelitz DE-Neustrelitz Am Kiefernwald,53.36156,13.09124,30
 SW-Niestetal DE-Niestetal Heiligenröder Straße,51.31443,9.55512
 SW-Norden DE-Norden Dörper Weg,53.61142,7.15547
 SW-Norden DE-Norden Heringstraße,53.59103,7.21119
+SW-Norderney DE-Norderney Feldhausenstraße,53.70363,7.14907
 SW-Norderstedt DE-Norderstedt Am Hallenbad,53.68999,10.00121
 SW-Norderstedt DE-Norderstedt Beamtenlaufbahn,53.70653,9.99399
 SW-Norderstedt DE-Norderstedt Europaallee,53.68583,9.98865
@@ -24427,6 +24431,7 @@ PT Setúbal Instituto Politécnico,38.52318,-8.83927
 RO Arad Ibis Styles Hotel,46.20323,21.24786,15
 RO Brașov Benchmark,45.68106,25.51586
 RO Brașov Bulevardul Gării,45.66043,25.61354
+RO Brașov Business Park,45.63496,25.63894
 RO Brașov Calea Făgărașului,45.65914,25.56926
 RO Brașov RAT Rulmentul,45.68157,25.61481
 RO Brașov Regina Maria,45.64371,25.59957
