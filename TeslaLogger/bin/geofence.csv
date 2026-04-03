@@ -6552,7 +6552,6 @@ Aldi DE-Mönchengladbach Bröseweg,51.20797,6.44558
 Aldi DE-Mönchengladbach Hofstraße,51.18522,6.45186
 Aldi DE-Mönchengladbach Odenkirchener Straße,51.15406,6.4512
 Aldi DE-Mönchengladbach Stapper Weg,51.13817,6.44433
-Aldi DE-Mühlhausen - Ehingen Hohenkräher Brühl,47.8035,8.82486
 Aldi DE-Mühlhausen-Ehingen Hohenkräher Brühl,47.80072,8.82533
 Aldi DE-Mülheim an der Ruhr Düsseldorfer Straße,51.41166,6.86902
 Aldi DE-Mülheim an der Ruhr Essener Straße,51.42753,6.89903
@@ -8246,6 +8245,8 @@ ChargeGuru FR-Pontarlier Rue de la Libération,46.91187,6.34076,20
 
 ChargeHub AU-Noosa Heads QLD Noosa Dr,-26.39301,153.08946
 
+ChargeIn PL-Żnin-Wieś Aliantów,52.84956,17.69854
+
 chargeIT DE-Coburg Arena,50.28709,10.98081
 chargeIT DE-Greifswald Walther-Rathenau-Straße,54.09027,13.40204
 chargeIT DE-Kaufbeuren,47.88613,10.6389,10
@@ -8579,7 +8580,7 @@ CircleK DE-Kösching Ruppertswies,48.8111,11.47899,25
 CircleK DE-Löbau Weißenberger Straße,51.10303,14.67028
 CircleK DE-Mahlberg Alte Landstraße,48.2751,7.7863
 CircleK DE-Marktschorngast Am Christophsbühl,50.08216,11.66394
-CircleK DE-Mühlhausen /Thüringen Wendewehrstraße,51.21619,10.46334
+CircleK DE-Mühlhausen/Thüringen Wendewehrstraße,51.2162,10.46334
 CircleK DE-Nersingen An der Leibi,48.41608,10.10014
 CircleK DE-Neubrandenburg Woldegker Chaussee,53.34736,13.10818
 CircleK DE-Neubrandenburg Woldegker Straße,53.5564,13.31185
@@ -11819,9 +11820,9 @@ EnBW DE-Mössingen Zeppelinstraße,48.40418,9.03973
 EnBW DE-Mücke Flensungen,50.61673,9.02614
 EnBW DE-Mügeln Franz-Mehring-Straße,51.23614,13.03715
 EnBW DE-Mühlacker Heilbronner Straße,48.94265,8.81406
-EnBW DE-Mühlhausen Euronics,51.22307,10.45446
 EnBW DE-Mühlhausen-Rettigheim Malscher Straße,49.24041,8.69757
-EnBW DE-Mühlhausen/Thüringen Norma,51.20546,10.46897
+EnBW DE-Mühlhausen/Thüringen Ammersche Landstraße,51.22307,10.45446
+EnBW DE-Mühlhausen/Thüringen Rudolf-Breitscheid-Straße,51.20546,10.46897
 EnBW DE-Mühlheim an der Donau Alter Schulplatz,48.02267,8.88875
 EnBW DE-Mühlingen Hauptstraße,47.91288,9.01764
 EnBW DE-Mülheim an der Ruhr Lidl,51.43097,6.86094
@@ -11887,6 +11888,7 @@ EnBW DE-Nordkirchen,51.74231,7.51665
 EnBW DE-Northeim Penny,51.69847,9.99263
 EnBW DE-Nortorf,54.16497,9.85425
 EnBW DE-Nottuln,51.92722,7.36363
+EnBW DE-Nottuln Wellstraße,51.9097,7.39884
 EnBW DE-Nusplingen Marktplatz,48.13186,8.89148
 EnBW DE-Nußloch Allming,49.32616,8.68386
 EnBW DE-Nördlingen An der Reimlinger Mauer,48.84898,10.49276
@@ -13143,6 +13145,7 @@ ENTEGA DE-Darmstadt Frankfurter Straße,49.88649,8.65178
 ENTEGA DE-Darmstadt Kasinostraße,49.88339,8.64826,30
 ENTEGA DE-Groß-Umstadt Georg-August-Zinn-Straße,49.87205,8.91401
 ENTEGA DE-Michelstadt Am Festplatz,49.6794,9.00118
+ENTEGA DE-Modautal Buchteichweg,49.77014,8.73603
 ENTEGA DE-Mörlenbach Schmittgasse,49.59973,8.73696
 ENTEGA DE-Rödermark Am Schwimmbad,49.97633,8.80395,18
 ENTEGA DE-Weiterstadt LOOP5,49.89237,8.60564
@@ -21410,6 +21413,7 @@ Shell DE-Salzbergen Holsterfeld,52.32532,7.42935
 Shell DE-Salzgitter Kampstraße,52.14686,10.32218
 Shell DE-Salzgitter Vor dem Dorfe,52.14032,10.33574
 Shell DE-Samtens Bergener Straße,54.36164,13.30786
+Shell DE-Sankt Augustin Marie-Curie-Straße,50.79286,7.1769
 Shell DE-Schleusingen Suhler Straße,50.51934,10.7544
 Shell DE-Schwarzheide Schipkauer Straße,51.28146,13.52063
 Shell DE-Schwarzheide Schipkauer Straße,51.47068,13.86845
@@ -22030,6 +22034,7 @@ SW-Kiel DE-Kiel Tiefe Allee,54.32907,10.18977
 SW-Kiel DE-Kiel Wall,54.32142,10.14047
 SW-Kiel DE-Kiel Zur Helling,54.3137,10.13654
 SW-Kiel DE-Mönkeberg Am Eksol,54.3485,10.18843
+SW-Kiel DE-Schwentinental Mergenthalerstraße,54.28837,10.22054
 SW-Kiel DE-Schönberg Bürgermeister-Wiese-Straße,54.39314,10.37349
 SW-Klagenfurt AT-Klagenfurt 10.-Oktober-Straße,46.62162,14.30779
 SW-Klagenfurt AT-Klagenfurt Kardinalplatz,46.62392,14.31198
@@ -22601,9 +22606,9 @@ TEAG DE-Leinefelde Konrad-Martin-Straße,51.38487,10.3238
 TEAG DE-Lich Carl-Benz-Ring,50.50677,8.82962
 TEAG DE-Magdala Auf der Schanze,50.90078,11.44596
 TEAG DE-Mellingen Hainholzstraße,50.93644,11.38956
-TEAG DE-Mühlhausen /Thüringen Industriestraße,51.21889,10.45323
-TEAG DE-Mühlhausen /Thüringen Volkenröder Straße,51.21818,10.47126
-TEAG DE-Mühlhausen /Thüringen Wanfrieder Straße,51.20355,10.44146
+TEAG DE-Mühlhausen/Thüringen Industriestraße,51.2189,10.45323
+TEAG DE-Mühlhausen/Thüringen Volkenröder Straße,51.21818,10.47126
+TEAG DE-Mühlhausen/Thüringen Wanfrieder Straße,51.20355,10.44146
 TEAG DE-Nessetal Sonneborner Straße,50.99348,10.65575
 TEAG DE-Neuhaus am Rennweg Schwarzburger Straße,50.51409,11.14146
 TEAG DE-Neustadt (Hessen) Querallee,50.84908,9.11047
@@ -23029,6 +23034,7 @@ Vattenfall DE-Delitzsch Dübener Straße,51.53124,12.35516
 Vattenfall DE-Demmin Jarmener Straße,53.90595,13.05095
 Vattenfall DE-Diepholz Flöthestraße,52.60725,8.36603
 Vattenfall DE-Dresden Lindengasse,51.04169,13.74068
+Vattenfall DE-Eberswalde Eberswalder Straße,52.83794,13.73565
 Vattenfall DE-Eggersdorf Am Fuchsbau,52.53211,13.80711
 Vattenfall DE-Erfurt Gothaer Straße,50.96046,10.99164
 Vattenfall DE-Esens Auricher Straße,53.63117,7.6138
