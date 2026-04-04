@@ -6447,6 +6447,7 @@ Aldi DE-Heilbronn Gaswerkstraße,49.15028,9.21667
 Aldi DE-Heilbronn Pfaffenstraße,49.18229,9.16947
 Aldi DE-Heilbronn Stuttgarter Straße,49.13355,9.22681
 Aldi DE-Heiligenroth Industriegebiet,50.44812,7.84532
+Aldi DE-Herborn Konrad-Adenauer-Straße,50.67145,8.30778
 Aldi DE-Herrenberg Kalkofenstraße,48.59436,8.86057
 Aldi DE-Heusweiler Trierer Straße,49.34604,6.93443
 Aldi DE-Hilden Gerresheimer Straße,51.1765,6.92647
@@ -7065,6 +7066,7 @@ Allego DE-Kaltenkirchen Flottkamp,53.8337,9.96333
 Allego DE-Kamen Kamen Karree,51.57,7.6732
 Allego DE-Kappeln Glücksburger Straße,54.6586,9.94817
 Allego DE-Karlsruhe Windeckstraße,48.98915,8.37385
+Allego DE-Kassel Frankfurter Straße,51.289,9.47527
 Allego DE-Kehl Eugen-Ensslin-Straße,48.57924,7.80923
 Allego DE-Kerpen Kerpener Straße,50.89868,6.68284,30
 Allego DE-Kiel Edisonstraße,54.2778,10.16133
@@ -10840,6 +10842,7 @@ EnBW DE-Bentheimer Wald Süd,52.3125,7.04183
 EnBW DE-Berg bei Neumarkt in der Oberpfalz An der Staatsstraße,49.31733,11.45047
 EnBW DE-Bergheim,50.942,6.65236
 EnBW DE-Bergheim Fortuna-Nord-Straße,50.9888,6.67295
+EnBW DE-Bergheim Priamosstraße,50.93393,6.67213
 EnBW DE-Bergisch Gladbach Frankenforster Straße,50.95593,7.13843
 EnBW DE-Bergisch Gladbach Jakobstraße,50.99268,7.11866
 EnBW DE-Bergkamen,51.65099,7.67596
@@ -13120,6 +13123,7 @@ Enio AT-Flughafen Wien Ausfahrtsstraße,48.12425,16.55923
 Enio AT-Korneuburg Laaer Straße,48.36037,16.34948
 Enio AT-Möllbrücke Mölltal Straße,46.83754,13.37014
 Enio AT-Rudersdorf Teichweg,47.04537,16.12217
+Enio AT-Wolkersdorf im Weinviertel Johann-Galler-Straße,48.3671,16.51166
 
 Eniwa CH-Buchs Industriestrasse,47.39268,8.06455
 Eniwa CH-Oberentfelden Industriestrasse,47.34996,8.05137
@@ -13482,6 +13486,7 @@ EVN AT-Gänserndorf Neusiedler Straße,48.3351,16.71196
 EVN AT-Göllersdorf Hammerschmiedstraße,48.49825,16.11453
 EVN AT-Herzogenburg St. Pöltner Straße,48.27414,15.6927
 EVN AT-Herzogenburg Traismauerstraße,48.29015,15.69495
+EVN AT-Himberg bei Wien Hofer Straße,48.07175,16.45776
 EVN AT-Horn Prager Straße,48.66136,15.65458
 EVN AT-Höbenbach Ortsstraße,48.35014,15.64742
 EVN AT-Kematen an der Ybbs 35. Straße,48.03756,14.77816
@@ -13504,6 +13509,7 @@ EVN AT-Pressbaum Hauptstraße,48.18037,16.07907
 EVN AT-Pressbaum Hauptstraße,48.18276,16.08919
 EVN AT-Purgstall an der Erlauf Ötscherlandstraße,48.05573,15.1395
 EVN AT-Purgstall Erlauftalstraße,48.06599,15.13419
+EVN AT-Pöchlarn Anton Schlecker Straße,48.20445,15.21897
 EVN AT-Pöchlarn Manker Straße,48.19958,15.22043
 EVN AT-Roggendorf A1,48.19475,15.38373
 EVN AT-Schiltern Laabergstraße,48.51162,15.63226
@@ -15109,6 +15115,7 @@ Freshmile FR-Cornimont Rue du Daval,47.96273,6.83513
 Freshmile FR-Grenoble Rue Félix Esclangon,45.1939,5.70949
 Freshmile FR-La Bresse Rue des Proyes,48.00266,6.87361
 Freshmile FR-La Garde-Freinet Bd de l’Esplanade,43.31306,6.47156
+Freshmile FR-Mauguio Av. Jacqueline Auriol,43.5802,3.94972
 Freshmile FR-Nanteuil-le-Haudouin Rue de Paris,49.13604,2.80085,30
 Freshmile FR-Ostheim Pl. des Cigognes,48.15962,7.37125
 Freshmile FR-Ploërmel Bd Laennec,47.93218,-2.38929
@@ -17599,6 +17606,7 @@ Lidl AT-Götzis,47.34107,9.65254
 Lidl AT-Hall in Tirol,47.2776,11.49547
 Lidl AT-Hard,47.48118,9.68862
 Lidl AT-Hartberg Ferdinand-Leihs-Straße,47.28365,15.9876
+Lidl AT-Himberg bei Wien Gewerbestraße,48.0719,16.45617
 Lidl AT-Kapfenberg,47.45298,15.31557
 Lidl AT-Klagenfurt Ebentaler Straße,46.61406,14.33955
 Lidl AT-Klagenfurt Feldkirchner Straße,46.62962,14.3034
@@ -18647,6 +18655,7 @@ MAN AT-Leopoldsdorf MAN-Straße,48.09976,16.39722
 
 Mark-E DE-Hagen Bahnhofstraße,51.35983,7.46887
 
+MB AT-Parndorf Richard-Erlinger-Platz,47.9766,16.8551,20
 MB DE-Aurich Korbweidenstraße,53.45056,7.50673
 MB DE-Butzbach In der Alböhn,50.42942,8.68306
 MB DE-Hausen bei Würzburg Am Wiesenweg,49.91243,10.00036,15
@@ -21564,6 +21573,7 @@ Smatrics AT-Frastanz Feldkircher Straße,47.22467,9.61694
 Smatrics AT-Freistadt Linzer Straße,48.49918,14.50343
 Smatrics AT-Fürstenfeld Kirchenplatz,47.05055,16.07971
 Smatrics AT-Gemeinde Techelsberg am Wörther See Töschling,46.6347,14.1106
+Smatrics AT-Gerasdorf bei Wien Brünner Straße,48.33317,16.45644
 Smatrics AT-Grafenwörth Gewerbepark,48.41218,15.77737
 Smatrics AT-Gralla Gewerbepark,46.80576,15.56029
 Smatrics AT-Graz Conrad-von-Hötzendorf-Straße,47.05577,15.44823
@@ -21574,6 +21584,7 @@ Smatrics AT-Grein Breitenangerstraße,48.22917,14.84565
 Smatrics AT-Griffen Gewerbestraße,46.69617,14.7374,25
 Smatrics AT-Haberl Gewerbepark,47.48107,16.09134
 Smatrics AT-Haus im Ennstal Ennsling,47.41225,13.7845
+Smatrics AT-Himberg bei Wien Gutenhoferstraße,48.07275,16.45065
 Smatrics AT-Himmelreich Josef-Lindner-Straße,47.79414,12.9867,30
 Smatrics AT-Hochleithen Brünner Straße,48.4255,16.54814,20
 Smatrics AT-Hofstätten an der Raab,47.08224,15.73976
@@ -21619,8 +21630,10 @@ Smatrics AT-Raststätte Mondsee,47.83662,13.39498,20
 Smatrics AT-Salzburg Sterneckstraße,47.8097,13.05705
 Smatrics AT-Scheibbs Eisenwurzenstraße,48.01476,15.16084
 Smatrics AT-Schnann Gewerbezone,47.14915,10.37391
+Smatrics AT-Schwadorf bei Wien Industrie Strasse,48.077,16.59304
 Smatrics AT-Schwechat Brucker Bundesstrasse,48.13573,16.49193
 Smatrics AT-Siegendorf GZO-Fachmarktzentrum,47.77391,16.53005
+Smatrics AT-Spielberg Ring Rast Straße,47.20986,14.78348
 Smatrics AT-Spielberg Ring Rast Straße,47.21054,14.78435
 Smatrics AT-Spittal an der Drau Villacher Straße,46.7915,13.51312
 Smatrics AT-St. Gallen Markt,47.69265,14.61672
@@ -21635,6 +21648,7 @@ Smatrics AT-Stockerau Rudolf Diesel-Straße,48.38917,16.17985
 Smatrics AT-Stockerau Wienerstraße,48.3857,16.23564
 Smatrics AT-Strasshof an der Nordbahn,48.32138,16.66493
 Smatrics AT-Straßwalchen Neumarkterstraße,47.95842,13.23602
+Smatrics AT-Traiskirchen Süddruckgasse,47.98617,16.28915
 Smatrics AT-Trieben Industriepark,47.49297,14.48372
 Smatrics AT-Tulln an der Donau Frauentorgasse,48.32786,16.05458
 Smatrics AT-Villach Maria-Gailer-Straße,46.60538,13.86597
@@ -21653,6 +21667,7 @@ Smatrics AT-Wien Breitenfurter Straße,48.15051,16.30014
 Smatrics AT-Wien Franzosengraben,48.18601,16.41337
 Smatrics AT-Wien Gaudenzdorfer Gürtel,48.18769,16.33895
 Smatrics AT-Wien Gewerbeparkstraße,48.24603,16.46336
+Smatrics AT-Wien Jedletzbergerstraße,48.1684,16.4613
 Smatrics AT-Wien Laxenburger Straße,48.13606,16.3584
 Smatrics AT-Wien Lemböckgasse,48.13488,16.31049
 Smatrics AT-Wien Ludwig-von-Höhnel-Gasse,48.1596,16.38509
@@ -21662,8 +21677,7 @@ Smatrics AT-Wien Siemensstraße,48.27029,16.42264
 Smatrics AT-Wien Simmeringer Hauptstraße,48.14635,16.46083
 Smatrics AT-Wien Sverigestraße,48.25391,16.47219
 Smatrics AT-Wien Swatoschgasse,48.16644,16.41139
-Smatrics AT-Wiener Neudorf IZ-NÖ-Süd Straße,48.076,16.33072
-Smatrics AT-Wiener Neudorf IZ-NÖ-Süd Straße,48.07722,16.33003
+Smatrics AT-Wiener Neudorf IZ-NÖ-Süd Straße,48.0767,16.33054,110
 Smatrics AT-Wiener Neustadt Gerasdorfer Gasse,47.80539,16.21233
 Smatrics AT-Wolfsberg Spanheimerstraße,46.83685,14.83941
 Smatrics AT-Wörgl Innsbrucker Straße,47.48192,12.05786
@@ -22762,6 +22776,7 @@ Toka UA-Ужгород Zakarpats’ka St,48.63245,22.27886
 
 TotalEnergies BE-Brugge Zwijnstraat,51.20483,3.21549
 TotalEnergies BE-De Haan Christianaplein,51.2793,3.0343
+TotalEnergies BE-De Haan Leopold II-laan,51.30076,3.07835
 TotalEnergies BE-Heusden-Zolder,51.013,5.3332
 TotalEnergies BE-Jabbeke Vlamingveld,51.18532,3.10609
 TotalEnergies BE-Total Bierges E411 Dir Arlon,50.71784,4.58329,80
@@ -23626,7 +23641,11 @@ WEVG DE-Salzgitter Liebenhaller Straße,52.04621,10.37178
 
 Wien-Energie AT-Flughafen Wien Schwechat,48.126,16.5653
 Wien-Energie AT-Guntramsdorf Rathaus Viertel,48.0489,16.31272
+Wien-Energie AT-Hagenbrunn Sportplatzstraße,48.33717,16.4135
+Wien-Energie AT-Laxenburg Johannesplatz,48.066,16.35672
 Wien-Energie AT-Leobersdorf Portugieserstrasse,47.93226,16.20056,55
+Wien-Energie AT-Schwadorf bei Wien Brucker Straße,48.06854,16.5872
+Wien-Energie AT-Schwechat Concorde Business Park,48.13752,16.4941
 Wien-Energie AT-Traiskirchen Tribuswinkel Neurißgasse,47.99123,16.27539
 Wien-Energie AT-Vösendorf SCS Ostring,48.10857,16.3193
 Wien-Energie AT-Wien Amerlingstraße,48.19703,16.35125
@@ -23824,6 +23843,7 @@ Zunder ES-Área de servicio Quintanilla Norte,42.0224,-5.8536
 ÖAMTC AT-Möderbrugg Hauptstraße,47.2805,14.48103
 ÖAMTC AT-Neusiedl am See Rot-Kreuz-Gasse,47.96934,16.83777
 ÖAMTC AT-Saalfelden am Steinernen Meer Hohlwegen,47.48715,12.82584
+ÖAMTC AT-Schwechat Mannswörther Straße,48.14807,16.4861
 ÖAMTC AT-Teesdorf Triester Straße,47.96154,16.2734
 ÖAMTC AT-Traiskirchen Zubringerstraße,47.99383,16.26288
 ÖAMTC AT-Völkermarkt Klagenfurter Straße,46.65781,14.61371
