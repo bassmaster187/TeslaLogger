@@ -60,7 +60,7 @@ Supercharger-V4 AT-Trieben,47.49212,14.48363
 Supercharger AT-Villach,46.604193,13.869091
 Supercharger-V3 AT-Villach-Ost,46.60166,13.88302
 Supercharger-V4 AT-Villach-West,46.6309,13.82584
-Supercharger-V4 AT-Völkermarkt,46.682274,14.679134
+Supercharger-V4 AT-Völkermarkt,46.68227,14.67913,40
 Supercharger-V4 AT-Wels,48.145889,13.975208
 Supercharger-V4 AT-Wels Welas Park,48.180313,14.063536,19
 Supercharger-V4 AT-Wien,48.193045,16.27707
@@ -9879,6 +9879,7 @@ E.ON NO-Evje Verksvegen,58.58311,7.79784
 E.ON NO-Kløfta Kongsvingervegen,60.07771,11.14611
 E.ON NO-Lillesand Legdene,58.23974,8.29801,15
 E.ON NO-Vinterbro Sjøskogenveien,59.7378,10.76395
+E.ON RO-Brașov Str. Lebedei,45.66758,25.55973
 E.ON RO-Constanța Str. Azuro,44.19846,28.60674
 E.ON RO-Craiova Bulevardul 1 Mai,44.30259,23.7967
 E.ON SE-Arboga Burskapsvägen,59.42613,15.82931,15
@@ -10594,6 +10595,7 @@ eLoaded DE-Zusmarshausen Am Innovationspark,48.407,10.59997,99
 Elocity PL-Człuchów Średnia,53.665,17.3515
 Elocity PL-Koszalin Zwycięstwa,54.1895,16.17147
 Elocity PL-Kłaj Łężkowice,49.96867,20.30836
+Elocity PL-Mikołajki aleja Spacerowa,53.79954,21.5651
 Elocity PL-Proszenie 1B,51.46094,19.78156
 Elocity PL-Siemianowice Śląskie Elizy Orzeszkowej,50.3201,19.01003
 Elocity PL-Warszawa Aleja Krakowska,52.17339,20.93957
@@ -16206,6 +16208,7 @@ Ionity AT-Fürnitz Kärntner Straße,46.56675,13.80946
 Ionity AT-Golling,47.58478,13.15794
 Ionity AT-Grafenstein,46.63964,14.45139
 Ionity AT-Göttlesbrunn,48.05623,16.71197
+Ionity AT-Haimburg,46.6821,14.6784,16
 Ionity AT-Hochleithen Brünner Straße,48.4253,16.54773,20
 Ionity AT-Hohenems,47.36616,9.65917
 Ionity AT-Innerbraz,47.14091,9.92447
@@ -17341,7 +17344,6 @@ KEBA DE-Kalkhorst Am Park,53.99072,11.01166
 KELAG AT-Arnoldstein Dreiländereck,46.57118,13.69732
 KELAG AT-Flattach Kleindorf,46.93568,13.11005
 KELAG AT-Griffen Gewerbestraße,46.69613,14.7362,25
-KELAG AT-Haimburg IGP Süd Völkermarkt,46.68216,14.67627
 KELAG AT-Kammern Pyhrn Autobahn,47.38609,14.89999
 KELAG AT-Kitzbühel St. Johanner Straße,47.45708,12.38676
 KELAG AT-Klagenfurt Arnulfplatz,46.62071,14.31009
@@ -18741,6 +18743,7 @@ Mer AT-Steyr Marlen-Haushofer-Straße,48.05511,14.42266
 Mer AT-Telfs Untermarktstraße,47.30781,11.0767
 Mer AT-Tulln an der Donau Königstetter Straße,48.31984,16.08209
 Mer AT-Unterweitersdorf Radingdorf,48.35939,14.48012
+Mer AT-Völkermarkt IGP Süd,46.68216,14.67627,25
 Mer AT-Wien Hadikgasse,48.19301,16.27555,20
 Mer AT-Wien Hietzinger Kai,48.19169,16.27922,20
 Mer AT-Wien Seestadtstraße,48.21591,16.50534,30
@@ -19591,7 +19594,7 @@ OMV AT-Raststation Deutschfeistritz,47.20517,15.31583
 OMV AT-Raststation Stockerau,48.38056,16.2039
 OMV AT-St. Peter am Bichl Völkermarkter Straße,46.6297,14.35635
 OMV AT-Steyr Haager Straße,48.0551,14.44906
-OMV AT-Völkermarkt Packer Straße,46.68113,14.6783
+OMV AT-Völkermarkt Packer Straße,46.68113,14.6783,25
 OMV AT-Wien Groß-Enzersdorfer Straße,48.21678,16.4937
 OMV AT-Wien Laxenburger Straße,48.1466,16.36098
 OMV HU-Budapest Budaörsi út,47.46533,19.01394
@@ -24480,6 +24483,8 @@ RO Oradea Pasajul Vulturul Negru,47.05513,21.93175
 RO Sibiu Piața Mică,45.79757,24.15138
 RO Suceava Strada Universității,47.64444,26.244
 RO Săcele Strada George Moroianu,45.6182,25.69831
+RO Timișoara Strada Constantin Muşat,45.75907,21.22774
+RO Timișoara Urban Budget Hotel,45.75194,21.2415
 RO Târgu Jiu Strada Republicii,45.03113,23.2799
 RO Zalău Aleea Tineretului,47.19534,23.0595
 RS Београд Klinika Varis,44.82424,20.41634
