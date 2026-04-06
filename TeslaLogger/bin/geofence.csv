@@ -3572,6 +3572,7 @@ Supercharger-V3 NO-Grålum,59.297635,11.062809
 Supercharger-V3 NO-Gudvangen,60.87966,6.84578
 Supercharger NO-Gulsvik,60.381223,9.609859
 Supercharger-V4 NO-Hafslo,61.30206,7.20836
+Supercharger-V4 NO-Hallingby,60.27432,10.18757
 Supercharger-V4 NO-Haugesund-Raglamyr,59.39243,5.33027
 Supercharger-V4 NO-Hell Stjørdal,63.44772,10.91304
 Supercharger-V4 NO-Hellerudsletta,59.98392,10.977
@@ -12691,6 +12692,7 @@ Enefit LV-Cēsis Raunas iela,57.31243,25.27532
 EnelX IT-Adria Via Bortolina,45.06226,12.05158
 EnelX IT-Alba Parcheggio Conad,44.71616,8.03511
 EnelX IT-Alba Viale Torino,44.70342,8.0299
+EnelX IT-Alberobello Via Barsento,40.7854,17.23106
 EnelX IT-Alberobello Viale Luigi Einaudi,40.78587,17.24438
 EnelX IT-Alghero degli Artigiani,40.59242,8.28524
 EnelX IT-Alghero Str. Vicinale dell’Acquedotto,40.57039,8.33765
@@ -13335,6 +13337,7 @@ EVconnect RO-Brașov AFI,45.6504,25.6097
 EVconnect RO-Brașov Calea București,45.6252,25.64475
 EVconnect RO-Brașov Calea București,45.63239,25.63677,25
 EVconnect RO-Cluj-Napoca Str. Clinicilor,46.76657,23.58472
+EVconnect RO-Onești Calea Brașovului,46.23477,26.73834
 EVconnect RO-Oradea Str. Tudor Vladimirescu,47.05777,21.92542
 EVconnect RO-Târgu Mureș Strada Gheorghe Doja,46.53168,24.54948
 EVconnect US-Anchorage AK Electron Dr,61.1695,-149.91246
@@ -19024,6 +19027,7 @@ Monta DE-Friedberg (Hessen) Ottostraße,50.34638,8.7547
 Monta DE-Friedberg (Hessen) Straßheimer Straße,50.32138,8.7395
 Monta DE-Hafenlohr Bahnhofstraße,49.86712,9.6031
 Monta DE-Karlsruhe Östliche Rheinbrückenstraße,49.0267,8.3475
+Monta DE-Lich Gottlieb-Daimler-Straße,50.51113,8.82727
 Monta DE-München Frankfurter Ring,48.18624,11.60598,25
 Monta DE-Obersöchering Spatzenhausener Straße,47.73294,11.2143
 Monta DE-Reiskirchen Freiherr-Vom-Stein-Straße,50.59772,8.8237,25
@@ -19374,10 +19378,51 @@ Neste FI-Lapinlahti Kuopiontie,63.34808,27.41369
 
 NEUWOGES DE-Neubrandenburg Stargarder Straße,53.55854,13.2612
 
-NEW-Energie DE-Erkelenz-Ost Alfred-Wirth-Straße,51.07953,6.33352
-NEW-Energie DE-Mönchengladbach-Nord Kaldenkirchener Straße,51.2259,6.43064
-NEW-Energie DE-Viersen Heidweg,51.28635,6.3623
-NEW-Energie DE-Viersen Kreisarchiv,51.25342,6.35313
+NEW DE-Erkelenz Alfred-Wirth-Straße,51.07953,6.33352
+NEW DE-Erkelenz Gewerbestraße Süd,51.06985,6.30358
+NEW DE-Grevenbroich Am Bahndamm,51.1204,6.67705
+NEW DE-Grevenbroich Am Rübenacker,51.13208,6.61527
+NEW DE-Heinsberg Borsigstraße,51.06588,6.1124
+NEW DE-Jüchen Kölner Straße,51.0995,6.5087
+NEW DE-Jüchen Markt,51.09988,6.50296
+NEW DE-Jüchen Robert-Bosch-Straße,51.0994,6.5176
+NEW DE-Jülich Am Brainergy Park,50.9433,6.36796
+NEW DE-Krefeld Hülser Straße,51.34695,6.5438
+NEW DE-Krefeld Kleinewefersstraße,51.34784,6.5413
+NEW DE-Langenfeld (Rheinland) Hans-Böckler-Straße,51.1223,6.92417
+NEW DE-Moers Chemnitzer Straße,51.43732,6.64543
+NEW DE-Mönchengladbach Dahlener Straße,51.15794,6.41236
+NEW DE-Mönchengladbach Dünner Straße,51.22475,6.4697
+NEW DE-Mönchengladbach Engelblecker Straße,51.21734,6.4691
+NEW DE-Mönchengladbach Fliethstraße,51.19066,6.43994
+NEW DE-Mönchengladbach Heinz-Nixdorf-Straße,51.17185,6.39007
+NEW DE-Mönchengladbach Helmut-Grashoff-Straße,51.1752,6.3898
+NEW DE-Mönchengladbach Hennes-Weisweiler-Allee,51.17676,6.3845
+NEW DE-Mönchengladbach Hilderather Straße,51.148,6.35834
+NEW DE-Mönchengladbach Kaldenkirchener Straße,51.2259,6.43064
+NEW DE-Mönchengladbach Lockhütter Straße,51.22465,6.44784
+NEW DE-Mönchengladbach Marie-Bernays-Ring,51.1187,6.43616
+NEW DE-Mönchengladbach Neusser Straße,51.20358,6.4595
+NEW DE-Mönchengladbach Odenkirchener Straße,51.1575,6.44818
+NEW DE-Mönchengladbach Pastorenkamp,51.20148,6.34396
+NEW DE-Mönchengladbach Theodor-Heuss-Straße,51.1826,6.44604
+NEW DE-Mönchengladbach Viersener Straße,51.21853,6.41876
+NEW DE-Niederkrüchten Gewerbering,51.20864,6.18088
+NEW DE-Niederkrüchten Hochstraße,51.20197,6.21936
+NEW DE-Niederkrüchten Oberkrüchtener Weg,51.19643,6.2129
+NEW DE-Niederkrüchten Schulstraße,51.21257,6.163
+NEW DE-Schwalmtal Lüttelforst,51.19272,6.2431
+NEW DE-Schwalmtal Markt,51.2134,6.2726
+NEW DE-Viersen Albertstraße,51.25696,6.33213
+NEW DE-Viersen Freiheitsstraße,51.255,6.39817
+NEW DE-Viersen Grefrather Straße,51.29454,6.36472
+NEW DE-Viersen Heidweg,51.28635,6.3623
+NEW DE-Viersen Ransberg,51.25342,6.35313
+NEW DE-Viersen Viersener Straße,51.25438,6.34478
+NEW DE-Wassenberg Am Sportpark,51.09128,6.15135
+NEW DE-Wassenberg Küstersgäßchen,51.10043,6.1587
+NEW DE-Wassenberg Rothenbach,51.13908,6.12028
+NEW DE-Übach-Palenberg Marienstraße,50.92518,6.0934
 
 NewMotion HU-Vecsés Ferihegyi repülőtérre vezető út,47.41751,19.25476
 NewMotion NL-Maarssen Industrieweg,52.12747,5.03937
@@ -19402,6 +19447,7 @@ Nobil NO-Oslo-Gardermoen Lufthavn,60.18587,11.06897
 nonoxx-pro DE-Cochem Ravenestraße,50.15077,7.16531
 nonoxx-pro DE-Grube Hauptstraße,54.23087,11.03578
 nonoxx-pro DE-Grömitz Am Strande,54.14459,10.95913
+nonoxx-pro DE-Grömitz Gildestraße,54.14487,10.95546
 nonoxx-pro DE-Itzehoe Portland-Cement-Straße,53.91445,9.51231
 nonoxx-pro DE-Itzehoe Wilhelm-Biel-Straße,53.92668,9.50913
 nonoxx-pro DE-Neustadt in Holstein Dünenweg,54.08863,10.8611
@@ -22257,9 +22303,7 @@ SW-Wunstorf DE-Wunstorf Hagenburger Straße,52.42999,9.41939,25
 SW-Zweibrücken DE-Zweibrücken Gottlieb-Daimler-Straße,49.24923,7.3488
 SW-Zwickau DE-Zwickau Äußere Dresdner Straße,50.71728,12.50231
 
-SWARCO DE-Grömitz Gildestraße,54.14487,10.95546
-SWARCO DE-Lich Gottlieb-Daimler-Straße,50.51113,8.82727
-SWARCO GB-Gwynedd Marian Mawr enterprize park Dolgellau,52.74422,-3.88604
+Swarco GB-Gwynedd Marian Mawr enterprize park Dolgellau,52.74422,-3.88604
 
 swisscharge CH-Adlikon bei Regensdorf Breitestrasse,47.44873,8.46287
 swisscharge CH-Aesch Nordring,47.47904,7.59006
