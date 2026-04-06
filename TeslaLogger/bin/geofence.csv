@@ -9643,6 +9643,7 @@ E.ON DE-Eberswalde Eberswalder Straße 4,52.84004,13.76914
 E.ON DE-Elmshorn Ramskamp,53.74165,9.70775,15
 E.ON DE-Essen Altenessener Straße,51.51003,7.00742
 E.ON DE-Essen Brüsseler Platz,51.42514,6.9933,40
+E.ON DE-Essen Kennedyplatz,51.45572,7.01076,30
 E.ON DE-Essen Langenbergerstraße 482d,51.45715,7.01351
 E.ON DE-Essen Nockwinkel 73-63,51.42814,7.07358
 E.ON DE-Essen Rellinghauser Straße,51.44819,7.01391
@@ -11896,8 +11897,8 @@ EnBW DE-Nordhorn Stadtring,52.43743,7.06596
 EnBW DE-Nordkirchen,51.74231,7.51665
 EnBW DE-Northeim Penny,51.69847,9.99263
 EnBW DE-Nortorf,54.16497,9.85425
-EnBW DE-Nottuln,51.92722,7.36363
-EnBW DE-Nottuln Wellstraße,51.9097,7.39884
+EnBW DE-Nottuln Oststraße,51.92722,7.36363
+EnBW DE-Nottuln Wellstraße,51.90967,7.3988
 EnBW DE-Nusplingen Marktplatz,48.13186,8.89148
 EnBW DE-Nußloch Allming,49.32616,8.68386
 EnBW DE-Nördlingen An der Reimlinger Mauer,48.84898,10.49276
@@ -12690,6 +12691,7 @@ Enefit LV-Cēsis Raunas iela,57.31243,25.27532
 EnelX IT-Adria Via Bortolina,45.06226,12.05158
 EnelX IT-Alba Parcheggio Conad,44.71616,8.03511
 EnelX IT-Alba Viale Torino,44.70342,8.0299
+EnelX IT-Alberobello Viale Luigi Einaudi,40.78587,17.24438
 EnelX IT-Alghero degli Artigiani,40.59242,8.28524
 EnelX IT-Alghero Str. Vicinale dell’Acquedotto,40.57039,8.33765
 EnelX IT-Alghero Via Enrico Fermi,40.57382,8.32274
@@ -13416,6 +13418,7 @@ Eviny NO-Grimstad Odden,58.33743,8.59413
 Eviny NO-Haugesund Markedet,59.4108,5.27402
 Eviny NO-Hjerkinn Hjerkinnhusvegen,62.22133,9.54448,12
 Eviny NO-Hommelvik Svebergvegen,63.42106,10.7541
+Eviny NO-Kristiansund Kong Olav V’s gate,63.11155,7.7268
 Eviny NO-Kristiansund Kongens Plass,63.11042,7.72862
 Eviny NO-Larvik Yttersøveien,59.06794,10.04504
 Eviny NO-Leknes Idrettsgata,68.14509,13.61983
@@ -14287,7 +14290,7 @@ EWE-GO DE-Nordhorn Lingener Straße,52.4409,7.08449
 EWE-GO DE-Northeim Hillerser Straße,51.69069,9.9857
 EWE-GO DE-Northeim Von Menzel Straße,51.69259,9.98971
 EWE-GO DE-Nossen Augustusberg,51.03647,13.2982
-EWE-GO DE-Nottuln Beisenbusch,51.91092,7.39867,25
+EWE-GO DE-Nottuln Beisenbusch,51.91085,7.39866,25
 EWE-GO DE-Nördlingen Würzburger Straße,48.85452,10.48264
 EWE-GO DE-Nörten-Hardenberg Unter dem Pferdestiege,51.62915,9.92212
 EWE-GO DE-Nürnberg Heisterstraße,49.42803,11.06155
@@ -16075,7 +16078,6 @@ Innogy DE-Essen Hardenbergufer,51.39806,7.04793
 Innogy DE-Essen Humannstraße,51.44785,7.07707
 Innogy DE-Essen Huyssenallee,51.44944,7.01167
 Innogy DE-Essen Karolinger Strasse,51.47232,7.01832
-Innogy DE-Essen Kennedyplatz,51.45566,7.01086
 Innogy DE-Essen Kloster Straße,51.45808,7.01795
 Innogy DE-Essen Kopstadtplatz,51.45827,7.0109
 Innogy DE-Essen Kruppstraße,51.44645,6.99435
@@ -18696,6 +18698,7 @@ Megatel SI-Bovec Dvor,46.33196,13.54014
 MENNEKES DE-Aurich Hoheberger Weg,53.47972,7.5194
 MENNEKES DE-Aurich Hoheberger Weg,53.57451,8.08942
 MENNEKES DE-Bad Karlshafen Kurpromenade,51.64673,9.45703
+MENNEKES DE-Bad Wiessee Jägerstraße,47.7214,11.7127
 MENNEKES DE-Dietzhölztal Hauptstraße,50.83639,8.30567,43
 MENNEKES DE-Düsseldorf Kleiner Torfbruch,51.1994,6.88598
 MENNEKES DE-Hallstadt Michelinstraße,49.92353,10.89014
@@ -20728,6 +20731,7 @@ reev DE-Bad Driburg Brunnenstraße,51.73399,9.03522
 reev DE-Berlin MOA Bogen,52.53207,13.34538
 reev DE-Breitenworbis Auf dem Pfingstrasen,51.41292,10.43954
 reev DE-Erlangen Rathsbergerstraße,49.6112,11.01974
+reev DE-Essen Kennedyplatz,51.45633,7.01056,30
 reev DE-Garmisch-Partenkirchen Zugspitzstraße,47.48703,11.07057
 reev DE-Gunzenhausen Industriestraße,49.12367,10.76928
 reev DE-Herzogenaurach Puma Way,49.57417,10.89853
@@ -23076,6 +23080,7 @@ Vattenfall DE-Greifswald Warschauer Straße,54.09101,13.42045
 Vattenfall DE-Grünheide (Mark) Karl-Marx-Straße,52.42074,13.82279
 Vattenfall DE-Hamburg Alter Zollweg,53.61448,10.15272
 Vattenfall DE-Hamburg Fuhlsbüttler Straße,53.58927,10.0456
+Vattenfall DE-Hameln Klütstraße,52.1034,9.33647
 Vattenfall DE-Havelberg Semmelweisstraße,52.82918,12.07939
 Vattenfall DE-Hemmoor Otto-Peschel-Straße,53.68378,9.15941
 Vattenfall DE-Hennigsdorf Rigaer Straße,52.65083,13.19594
