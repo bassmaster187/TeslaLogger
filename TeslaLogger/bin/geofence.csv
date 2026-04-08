@@ -17613,6 +17613,7 @@ Lidl AT-Frastanz,47.22395,9.62014
 Lidl AT-Gleisdorf,47.11157,15.70823
 Lidl AT-Gmunden,47.92902,13.789
 Lidl AT-Graz,47.0994,15.41746
+Lidl AT-Graz Liebenauer Hauptstraße,47.03375,15.4634
 Lidl AT-Guntramsdorf Kammeringstraße,48.052,16.30759
 Lidl AT-Gänserndorf Neusiedler Straße,48.33465,16.71162,30
 Lidl AT-Götzis,47.34107,9.65254
@@ -19062,6 +19063,7 @@ MOON AT-Tarsdorf Weilhartstraße,48.07886,12.82685
 MOON AT-Umhausen Niederthai,47.12481,10.96205
 MOON AT-Wien Harry-Glück-Platz,48.16716,16.34891
 MOON AT-Wien Ketzergasse,48.13058,16.29811
+MOON CH-Nussbaumen Schulstrasse,47.48777,8.2926
 MOON DE-Anger Hauptstraße,47.79073,12.86924
 MOON DE-Augsburg Donaustraße 8,48.37555,10.9318
 MOON DE-Bad Kötzting Lehmgasse 14,49.17326,12.86503
@@ -20989,6 +20991,7 @@ SachsenEnergie DE-Weißwasser Karl-Liebknecht-Straße,51.5033,14.63698
 SachsenEnergie DE-Wilsdruff Markt,51.05138,13.53743
 SachsenEnergie DE-Wilthen St.-Barbara-Platz,51.09995,14.40026
 
+SalzachSonne AT-Kaltenbach Reisrachweg,47.28412,11.87503
 SalzachSonne AT-Mittersill Zeller Straße,47.28512,12.48996
 
 Salzburg AT-Altenmarkt im Pongau Sinnhub,47.38862,13.41269
@@ -22507,7 +22510,7 @@ TankE DE-Köln Halmstraße,50.95672,6.91333
 TankE DE-Köln Hammerschmidtstraße,50.87133,7.02152
 TankE DE-Köln Haselbergstraße,50.93817,6.92294
 TankE DE-Köln Haselnußweg,51.01099,6.90608
-TankE DE-Köln Holzmarkt,50.92982,6.96147
+TankE DE-Köln Holzmarkt,50.92982,6.96147,30
 TankE DE-Köln Honschaftsstraße,50.9799,7.03274
 TankE DE-Köln Iltisstraße,50.9639,6.91398
 TankE DE-Köln In der Kreuzau,50.90677,6.99392
@@ -23134,6 +23137,7 @@ Vattenfall DE-Herzberg (Elster) Leipziger Straße,51.69252,13.22938
 Vattenfall DE-Hinte Gewerbestraße,53.40954,7.19944
 Vattenfall DE-Horn-Bad Meinberg Bahnhofstraße,51.87682,8.9553
 Vattenfall DE-Ihlow 2. Kompanieweg,53.40652,7.43955
+Vattenfall DE-Köln Holzmarkt,50.93045,6.96176,30
 Vattenfall DE-Königs Wusterhausen Cottbuser Straße,52.28859,13.6282
 Vattenfall DE-Königs Wusterhausen Darwinbogen,52.30331,13.60112
 Vattenfall DE-Lieberose Cottbuser Straße,51.98234,14.29929
@@ -24420,6 +24424,7 @@ DE Wöbbelin KFZ-Service Braemer,53.39759,11.5145
 DE Zeitz Martin-Planer-Straße,51.04626,12.15665
 DE Zell Woppmannsberg,49.13515,12.42354
 DE Zwickau Kopernikusstraße,50.73138,12.47356
+DK Silkeborg Haderslevvej,56.17267,9.48722
 ES A Coruña ibis Styles,43.35274,-8.42286
 ES Alcalá de Henares Jardín Botánico,40.50638,-3.34228
 ES Altafulla May Boutique Hotel,41.13483,1.37994
