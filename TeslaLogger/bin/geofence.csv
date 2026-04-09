@@ -8762,7 +8762,7 @@ Citywatt DE-Karlsruhe Neureuter Straße,49.01887,8.35563,30
 Citywatt DE-Kaufbeuren Gottlieb-Daimler-Straße 2,47.89777,10.64644
 Citywatt DE-Kirchenlamitz Weißenstädter Straße,50.14917,11.94204
 Citywatt DE-Kloster Lehnin Friedenstraße 13,52.31748,12.7439
-Citywatt DE-Koblenz August-Thyssen-Straße 6,50.38884,7.55706
+Citywatt DE-Koblenz August-Thyssen-Straße,50.38893,7.557
 Citywatt DE-Korschenbroich Mühlenstraße,51.19608,6.50005
 Citywatt DE-Kupferzell Im Greut,49.17768,9.69167
 Citywatt DE-Köfering Scheuererstraße 1a,48.9409,12.20082
@@ -14789,6 +14789,7 @@ Fastned BE-Oostende luchthaven,51.20561,2.87116
 Fastned BE-Vielsalm Baraque de Fraiture,50.2487,5.73672
 Fastned BE-Vilvoorde Peutie E19,50.93625,4.47573
 Fastned BE-Vilvoorde Peutie E19,50.93837,4.47556
+Fastned BE-Walshoutem Noord E40,50.7161,5.0636
 Fastned BE-Zoersel Den Haan,51.24568,4.7039
 Fastned CH-Aire de Repos Le Pertit,46.43815,6.91593
 Fastned CH-Lenzburg Rastplatz A1,47.39279,8.16088
@@ -19408,7 +19409,7 @@ NEW DE-Mönchengladbach Kaldenkirchener Straße,51.2259,6.43064
 NEW DE-Mönchengladbach Lockhütter Straße,51.22465,6.44784
 NEW DE-Mönchengladbach Marie-Bernays-Ring,51.1187,6.43616
 NEW DE-Mönchengladbach Neusser Straße,51.20358,6.4595
-NEW DE-Mönchengladbach Odenkirchener Straße,51.1575,6.44818
+NEW DE-Mönchengladbach Odenkirchener Straße,51.1575,6.44806
 NEW DE-Mönchengladbach Pastorenkamp,51.20148,6.34396
 NEW DE-Mönchengladbach Theodor-Heuss-Straße,51.1826,6.44604
 NEW DE-Mönchengladbach Viersener Straße,51.21853,6.41876
@@ -24373,7 +24374,6 @@ DE Prien am Chiemsee Cottage,47.84463,12.31332
 DE Putgarten Dorfstraße,54.67084,13.41001
 DE Rammsee Holthagen,54.28236,10.07786
 DE Reilingen Wersauer Hof,49.2914,8.58365
-DE Rheydt New AG,51.1575,6.44806
 DE Rodenberg Gemeinschaftspraxis,52.312,9.35118
 DE Rosbach vor der Höhe Prema Service,50.30512,8.71478
 DE Rostock Ost-West-Straße,54.14274,12.10252
@@ -24481,6 +24481,7 @@ IT Anterselva di Mezzo,46.85817,12.10115
 IT Bollate Via S. Bernardo Pirelli,45.56303,9.14734
 IT Bruneck Intercable,46.80072,11.92867
 IT Ferrara Via Comacchio,44.8236,11.63573
+IT Firenze Viale Luigi Gori,43.79658,11.2059
 IT Forte dei Marmi UNA Hotels,43.95647,10.19551,15
 IT Kastelruth Hotel Plunger,46.5538,11.57996
 IT Kastelruth Silbernagl,46.54109,11.56496
