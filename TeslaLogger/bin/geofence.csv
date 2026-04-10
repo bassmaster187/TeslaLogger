@@ -214,7 +214,7 @@ Supercharger-V3 BE-Mons,50.456598,3.940289
 Supercharger-V3 BE-Namur,50.486021,4.797235
 Supercharger BE-Nivelles-Sud,50.5887,4.30809
 Supercharger BE-Remouchamps,50.483878,5.700335
-Supercharger-V4 BE-Stekene,51.23597,4.05948
+Supercharger-V4 BE-Stekene,51.236778,4.059228
 Supercharger-V4 BE-Verviers,50.59222,5.84853
 Supercharger-V3 BE-Wavre,50.70787,4.59855,60
 Supercharger-V3 BE-Zaventem,50.869908,4.502047
@@ -2454,7 +2454,7 @@ Supercharger FI-Vierumäki,61.112472,25.929927
 Supercharger-V3 FI-Ylöjärvi,61.556839,23.562433
 Supercharger FI-Äänekoski,62.516741,25.6913
 
-Supercharger-V4 FR-Abbeville,50.100299,1.858397
+Supercharger-V4 FR-Abbeville,50.09957,1.8573
 Supercharger-V3 FR-Agen,44.178043,0.629866
 Supercharger-V4 FR-Aime-la-Plagne,45.55313,6.64555
 Supercharger FR-Aire de Cambarette,43.423964,5.99017
@@ -2497,7 +2497,7 @@ Supercharger FR-Appoigny,47.853123,3.543243
 Supercharger-V4 FR-Arc-sur-Tille,47.34517,5.15745
 Supercharger FR-Archamps,46.136917,6.124306
 Supercharger-V4 FR-Argenton-sur-Creuse,46.573218,1.502358
-Supercharger-V4 FR-Artenay,48.08296,1.86474
+Supercharger-V3 FR-Artenay,48.082979,1.864693
 Supercharger-V4 FR-Artix,43.39288,-0.55552
 Supercharger-V4 FR-Arès,44.770683,-1.113638
 Supercharger-V4 FR-Aulnay-sous-Bois,48.957341,2.478283
@@ -2623,7 +2623,7 @@ Supercharger-V4 FR-Les Sables D’Olonne,46.51405,-1.77701
 Supercharger FR-Lille,50.5834,3.08986,30
 Supercharger FR-Limoges,45.867688,1.271166
 Supercharger-V3 FR-Limoges,45.870671,1.2684
-Supercharger-V4 FR-Limoges Avenue des Casseaux,45.8445,1.28852
+Supercharger-V4 FR-Limoges Centre,45.844611,1.287198
 Supercharger-V4 FR-Livry-Gargan,48.9276,2.5484
 Supercharger FR-Lorient,47.787895,-3.33147
 Supercharger-V4 FR-Loudéac,48.193224,-2.757943
@@ -3153,7 +3153,7 @@ Supercharger-V4 IT-Roma East,41.942448,12.643581
 Supercharger-V3 IT-Roma North,41.9697,12.540717
 Supercharger-V3 IT-Roma South West,41.815947,12.400934
 Supercharger-V4 IT-Ronchi dei Legionari,45.84032,13.48785
-Supercharger-V3 IT-Rovereto,45.8565,11.00178
+Supercharger-V3 IT-Rovereto,45.856559,11.001817
 Supercharger-V4 IT-Salerno,40.696161,14.832978
 Supercharger-V4 IT-San Benedetto del Tronto,42.896746,13.883599
 Supercharger-V4 IT-San Giovanni Teatino,42.39923,14.164
@@ -3797,7 +3797,6 @@ Supercharger-V4 RO-Buzău,45.164247,26.814282
 Supercharger-V3 RO-Cluj-Napoca Florești,46.753745,23.53266
 Supercharger-V3 RO-Constanța,44.20366,28.63116,65
 Supercharger-V3 RO-Craiova,44.3291,23.77194
-Supercharger-V4 RO-Drobeta Turnu Severin,44.63807,22.634
 Supercharger-V4 RO-Galati,45.45246,28.03385
 Supercharger-V4 RO-Iași,47.151152,27.601632
 Supercharger-V4 RO-Oradea,47.04343,21.8971
@@ -5837,7 +5836,7 @@ Supercharger US-Three Rivers TX,28.52162,-98.18582
 Supercharger US-Van Horn TX,31.03447,-104.86142
 Supercharger-V3 US-Vernon TX,34.16115,-99.29756
 Supercharger US-Victoria TX,28.76688,-96.97882
-Supercharger-V3 US-Waco TX,31.58216,-97.109
+Supercharger US-Waco TX,31.5822,-97.10905
 Supercharger-V3 US-Waller TX,30.07075,-95.93084
 Supercharger-V3 US-Waxahachie TX,32.42868,-96.8745
 Supercharger US-Webster TX,29.5193,-95.12205
@@ -6316,6 +6315,8 @@ AGSM-AIM IT-Gardone Riviera Via al Vittoriale,45.62362,10.5696
 AH-Beteiligung DE-Bremen Schwanengatt,53.08038,8.8011
 
 Ahrtal-Werke DE-Bad Neuenahr-Ahrweiler Hauptstraße,50.54598,7.13578
+
+Aimo NO-Oslo Innspurten,59.91584,10.8039
 
 Akzenta DE-Wuppertal Am Stationsgarten,51.23188,7.06907
 
@@ -7517,6 +7518,7 @@ ARAL DE-Bremen Osterholzer Heerstraße,53.05817,8.93889
 ARAL DE-Bremen Stapelfeldtstraße,53.11069,8.75425
 ARAL DE-Bremen Stapelfeldtstraße,53.1111,8.75315
 ARAL DE-Brüggen Klosterstraße,51.23784,6.18916
+ARAL DE-Bötzingen Schloßmattenstraße,48.06478,7.72197
 ARAL DE-Celle Siedemeierkamp,52.60074,10.10726,25
 ARAL DE-Chemnitz Zschopauer Straße,50.8141,12.95464,30
 ARAL DE-Coburg Ernst-Faber-Straße,50.2481,10.96575
@@ -17203,6 +17205,7 @@ Kaufland DE-Sangerhausen,51.47003,11.29402
 Kaufland DE-Schorndorf,48.8072,9.5426
 Kaufland DE-Schrobenhausen Augsburger Straße,48.55127,11.26406
 Kaufland DE-Schwaigern,49.13824,9.06466
+Kaufland DE-Schwarzenberg/Erzgebirge Karlsbader Straße,50.5395,12.78606
 Kaufland DE-Schweinfurt Hauptbahnhofstraße,50.0385,10.2187
 Kaufland DE-Schwetzingen,49.38544,8.5776
 Kaufland DE-Schwäbisch-Hall,49.105,9.70293
@@ -21885,6 +21888,7 @@ StromSpeicherMarkt DE-Freiburg im Breisgau Merianstraße,47.99983,7.85074
 StromSpeicherMarkt DE-Freiburg im Breisgau Sautierstraße,48.00389,7.85241
 StromSpeicherMarkt DE-Freiburg im Breisgau Wilhelmstraße,47.99357,7.84253
 StromSpeicherMarkt DE-Freiburg im Breisgau Zähringer Straße,48.02204,7.85801
+StromSpeicherMarkt DE-Tiengen Im Maierbrühl,47.98286,7.71916,20
 
 StromTankstelle DE-Bad Hindelang Dorfstraße,47.50348,10.38436
 StromTankstelle DE-Waltenhofen Ahornweg,47.68294,10.30878
@@ -22996,6 +23000,7 @@ TotalEnergies NL-Barendrecht,51.84526,4.50974,80
 TotalEnergies NL-Beverwijk,52.47571,4.65759,80
 TotalEnergies NL-Bijleveld,52.07984,4.97998,80
 TotalEnergies NL-Breda H2,51.58274,4.82739,80
+TotalEnergies NL-Callantsoog Kerkplein,52.83455,4.6939
 TotalEnergies NL-Capelle,51.95377,4.56316,80
 TotalEnergies NL-Delft Kruithuisweg,51.98742,4.35464,80
 TotalEnergies NL-Drunen Wachtpost 33,51.69761,5.16111,80
