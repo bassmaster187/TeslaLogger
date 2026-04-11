@@ -267,7 +267,7 @@ Supercharger CA-Drummondville QC,45.899101,-72.519329
 Supercharger-V3 CA-Dryden ON,49.785914,-92.810451
 Supercharger CA-Edmonton AB,53.48666,-113.51538
 Supercharger-V3 CA-Edmonton AB - Currents Drive Northwest,53.436342,-113.6104
-Supercharger CA-Edmonton AB AB Currents Drive Northwest,53.43634,-113.6104
+Supercharger CA-Edmonton AB Currents Drive Northwest,53.43634,-113.6104
 Supercharger-V3 CA-Edson AB,53.586299,-116.421393
 Supercharger CA-Enfield NS,44.927007,-63.536211
 Supercharger-V3 CA-Estevan SK,49.14487,-102.97847
@@ -282,7 +282,7 @@ Supercharger CA-Golden BC,51.313039,-116.973754
 Supercharger-V3 CA-Golden BC Highway 1,51.30975,-116.96876
 Supercharger-V3 CA-Golden BC Trans-Canada Hwy,51.31102,-116.96945
 Supercharger CA-Grimsby ON,43.20965,-79.60073
-Supercharger-V3 CA-Grimsby S Service Rd,43.20508,-79.59842
+Supercharger-V3 CA-Grimsby ON S Service Rd,43.20508,-79.59842
 Supercharger CA-Hamilton ON,43.21696,-79.864415
 Supercharger CA-Hope BC,49.378522,-121.442691
 Supercharger-V3 CA-Hope BC - Klassen Road,49.364075,-121.480472
@@ -328,8 +328,8 @@ Supercharger-V3 CA-Mississauga ON,43.59039,-79.57654
 Supercharger-V3 CA-Mississauga ON - Vega Boulevard,43.517883,-79.688454
 Supercharger CA-Mississauga ON - Winston Churchill Blvd.,43.598295,-79.786068
 Supercharger CA-Mont-Tremblant QC,46.11651,-74.57391
-Supercharger CA-Montreal QC - Cote Vertu Blvd. (Floor 1),45.500702,-73.707857
-Supercharger CA-Montreal QC – Rue Viger (Stationnement Payant Floor L1),45.507849,-73.559242
+Supercharger CA-Montreal QC Cote Vertu Blvd.,45.5007,-73.70786
+Supercharger CA-Montreal QC Rue Viger,45.50785,-73.55924
 Supercharger-V3 CA-Moose Jaw SK,50.404235,-105.534104
 Supercharger-V3 CA-Morris MB,49.344875,-97.364113
 Supercharger-V3 CA-Mount Forest ON,43.988176,-80.743106
@@ -364,7 +364,7 @@ Supercharger-V3 CA-Prince Albert SK,53.19947,-105.732171
 Supercharger-V3 CA-Prince George BC,53.890082,-122.771075
 Supercharger-V3 CA-Princeton BC,49.45797,-120.50624
 Supercharger-V3 CA-Quebec City QC Boulevard de l’Ormière,46.817684,-71.333572
-Supercharger-V3 CA-Quebec City Quebec - Boulevard des Gradins,46.840688,-71.277372
+Supercharger-V3 CA-Quebec City QC Boulevard des Gradins,46.8407,-71.27737
 Supercharger-V3 CA-Quesnel BC,52.966949,-122.440156
 Supercharger CA-Quispamsis NB,45.41751,-65.943243
 Supercharger-V3 CA-Québec City QC Rue de l’Hétrière,46.763282,-71.370705
@@ -374,7 +374,7 @@ Supercharger-V3 CA-Regina SK,50.442622,-104.532672
 Supercharger CA-Revelstoke BC,51.00967,-118.2189
 Supercharger-V3 CA-Revelstoke BC - Victoria Road,51.00205,-118.198738
 Supercharger CA-Richmond BC,49.169479,-123.138016
-Supercharger-V3 CA-Richmond Steveston Hwy,49.13279,-123.09472
+Supercharger-V3 CA-Richmond BC Steveston Hwy,49.1328,-123.09472
 Supercharger-V3 CA-Rimouski QC,48.435737,-68.524025
 Supercharger CA-Rivière-du-Loup QC,47.820207,-69.558775
 Supercharger CA-Rocky View AB,51.20355,-113.98975
@@ -397,14 +397,14 @@ Supercharger-V3 CA-Squamish BC - Commercial Way,49.722806,-123.152229
 Supercharger-V3 CA-Strathmore AB,51.03834,-113.3787
 Supercharger CA-Sudbury ON,46.4419,-81.004187
 Supercharger CA-Surrey BC,49.193049,-122.805555
-Supercharger-V3 CA-Surrey BC - 104 Avenue (Floor 1),49.192485,-122.786955
-Supercharger-V3 CA-Surrey BC - 152 Street,49.056384,-122.801449
-Supercharger-V3 CA-Surrey BC - 160th Street,49.044073,-122.778938
-Supercharger-V3 CA-Surrey BC - King George Boulevard,49.139609,-122.84503
+Supercharger-V3 CA-Surrey BC 104 Avenue,49.19248,-122.78696
+Supercharger-V3 CA-Surrey BC 152 Street,49.05638,-122.80145
+Supercharger-V3 CA-Surrey BC 160th Street,49.04407,-122.77894
+Supercharger-V3 CA-Surrey BC King George Boulevard,49.1396,-122.84503
 Supercharger-V3 CA-Swift Current SK,50.306121,-107.779001
 Supercharger-V3 CA-Terrace Bay ON,48.782934,-87.09986
 Supercharger-V3 CA-Thunder Bay ON,48.381856,-89.311627
-Supercharger CA-Toronto,43.74038,-79.3224
+Supercharger CA-Toronto ON,43.74038,-79.3224
 Supercharger CA-Toronto ON Bay Street,43.655,-79.38336
 Supercharger-V3 CA-Toronto ON Don Mills Road (Floor P2 P3),43.735706,-79.345965
 Supercharger-V3 CA-Toronto ON Lakeshore Boulevard W,43.632564,-79.411909
@@ -18464,6 +18464,7 @@ Lidl NL-Weert Keulerstraat,51.24407,5.69604
 Lidl NL-Zierikzee Haringvlietplein,51.65298,3.91038
 Lidl PL-Braniewo Królewiecka,54.38893,19.83462
 Lidl PL-Dąbrówka,52.37643,16.74248
+Lidl PL-Elbląg Jana Kochanowskiego,54.15564,19.42045
 Lidl PL-Giżycko Bohaterów Westerplatte,54.03546,21.77894
 Lidl PL-Kąty Wrocławskie Handlowa,51.0243,16.76048
 Lidl PL-Leszno,51.84837,16.58207
@@ -24452,6 +24453,7 @@ ES Donostia Hotel ILUNION San Sebastián,43.31388,-2.00451
 ES Gandia,38.96999,-0.17879
 ES Jarandilla de la Vera Hotel Ruta Imperial,40.12739,-5.66586
 ES La Iglesuela del Cid C. Pilar,40.48023,-0.3171
+ES Laguardia Hotel Pachico,42.55457,-2.5841
 ES Madrid Alcobendas Calle del Pintor Murillo,40.54287,-3.64859
 ES Madrid Hotel Madrid Centro,40.42308,-3.70945
 ES Motril Elba Beach Hotel,36.72366,-3.53931
