@@ -223,7 +223,7 @@ Supercharger BG-Plovdiv,42.14452,24.76887
 Supercharger-V3 BG-Sofia,42.65777,23.313598
 Supercharger-V4 BG-Sofia София Bulgaria Boulevard,42.66372,23.28946
 
-Supercharger CA-Abbotsford BC - Mount Lehman Road Supercharger,49.059056,-122.377021
+Supercharger CA-Abbotsford BC Mount Lehman Road,49.05906,-122.37702
 Supercharger CA-Aulac NB,45.871352,-64.280378
 Supercharger CA-Baie-Saint-Paul QC,47.435844,-70.506266
 Supercharger-V3 CA-Baldwin ON,46.285862,-81.774667
@@ -241,22 +241,22 @@ Supercharger-V3 CA-Brandon MB,49.86779,-99.960722
 Supercharger-V3 CA-Brantford ON,43.17214,-80.243925
 Supercharger CA-Brossard QC,45.44196,-73.440895
 Supercharger CA-Burlington ON,43.326276,-79.822231
-Supercharger-V3 CA-Burnaby BC (Pay to Park Floor P2),49.266748,-123.000377
+Supercharger-V3 CA-Burnaby BC,49.26675,-123.00038
 Supercharger-V3 CA-Cache Creek BC,50.811223,-121.324786
-Supercharger-V3 CA-Calgary AB - 130 Avenue SE,50.930935,-113.964815
+Supercharger-V3 CA-Calgary AB 130 Avenue SE,50.93093,-113.96482
 Supercharger CA-Cambridge ON,43.4091,-80.32548
 Supercharger CA-Canmore AB,51.10021,-115.35924
-Supercharger-V3 CA-Canmore AB - Bow Valley Trail,51.096274,-115.357001
+Supercharger-V3 CA-Canmore AB Bow Valley Trail,51.09627,-115.357
 Supercharger CA-Casselman ON,45.30455,-75.08181
 Supercharger-V3 CA-Castlegar BC,49.294955,-117.653463
-Supercharger-V3 CA-Charlottetown PEI,46.258814,-63.179871
+Supercharger-V3 CA-Charlottetown PE,46.2588,-63.17987
 Supercharger CA-Chicoutimi QC,48.401176,-71.062036
-Supercharger-V3 CA-Chilliwack BC - Luckakuck Way,49.141426,-121.96386
+Supercharger-V3 CA-Chilliwack BC Luckakuck Way,49.14172,-121.964
 Supercharger-V3 CA-Cobourg ON,43.969736,-78.203079
 Supercharger-V3 CA-Collingwood ON,44.508035,-80.238413
 Supercharger CA-Comber ON,42.23911,-82.55026
 Supercharger CA-Concord ON,43.827286,-79.539326
-Supercharger-V3 CA-Coquitlam BC - Lougheed Highway,49.2343,-122.862302
+Supercharger-V3 CA-Coquitlam BC Lougheed Highway,49.23427,-122.8623
 Supercharger CA-Cornwall ON,45.023651,-74.748071
 Supercharger-V3 CA-Cranbrook BC,49.524887,-115.752481
 Supercharger-V3 CA-Creston BC,49.11979,-116.52487
@@ -265,11 +265,12 @@ Supercharger-V3 CA-Deep River ON,46.099833,-77.49971
 Supercharger-V3 CA-Delta BC,49.08988,-123.078807
 Supercharger CA-Drummondville QC,45.899101,-72.519329
 Supercharger-V3 CA-Dryden ON,49.785914,-92.810451
-Supercharger CA-Edmonton AB (Floor 2A),53.486662,-113.515376
+Supercharger CA-Edmonton AB,53.48666,-113.51538
 Supercharger-V3 CA-Edmonton AB - Currents Drive Northwest,53.436342,-113.6104
+Supercharger CA-Edmonton AB AB Currents Drive Northwest,53.43634,-113.6104
 Supercharger-V3 CA-Edson AB,53.586299,-116.421393
 Supercharger CA-Enfield NS,44.927007,-63.536211
-Supercharger-V3 CA-Estevan SK,49.144875,-102.979425
+Supercharger-V3 CA-Estevan SK,49.14487,-102.97847
 Supercharger CA-Etobicoke ON,43.61392,-79.55415
 Supercharger-V3 CA-Exeter ON,43.362244,-81.480163
 Supercharger-V3 CA-Fernie BC,49.49832,-115.08103
@@ -278,7 +279,7 @@ Supercharger-V3 CA-Gananoque ON,44.337074,-76.150135
 Supercharger-V3 CA-Gaspé QC,48.824028,-64.474015
 Supercharger-V3 CA-Goderich ON,43.729593,-81.688262
 Supercharger CA-Golden BC,51.313039,-116.973754
-Supercharger-V3 CA-Golden BC - Highway 1,51.309749,-116.968758
+Supercharger-V3 CA-Golden BC Highway 1,51.30975,-116.96876
 Supercharger-V3 CA-Golden BC Trans-Canada Hwy,51.31102,-116.96945
 Supercharger CA-Grimsby ON,43.20965,-79.60073
 Supercharger-V3 CA-Grimsby S Service Rd,43.20508,-79.59842
@@ -307,6 +308,7 @@ Supercharger CA-Levis QC,46.730448,-71.268418
 Supercharger CA-Lincoln NB,45.851583,-66.560574
 Supercharger-V3 CA-Lloydminster AB,53.277147,-110.054194
 Supercharger-V3 CA-London ON,42.91734,-81.2086
+Supercharger-V4 CA-London ON,42.93648,-81.2826
 Supercharger-V3 CA-Madoc ON,44.512793,-77.481046
 Supercharger CA-Magog QC,45.28126,-72.18568
 Supercharger-V3 CA-Maple Creek SK,49.908418,-109.47246
@@ -403,14 +405,14 @@ Supercharger-V3 CA-Swift Current SK,50.306121,-107.779001
 Supercharger-V3 CA-Terrace Bay ON,48.782934,-87.09986
 Supercharger-V3 CA-Thunder Bay ON,48.381856,-89.311627
 Supercharger CA-Toronto,43.74038,-79.3224
-Supercharger CA-Toronto ON - Bay Street (Pay to Park Floor P2 & P3),43.654986,-79.38336
+Supercharger CA-Toronto ON Bay Street,43.655,-79.38336
 Supercharger-V3 CA-Toronto ON Don Mills Road (Floor P2 P3),43.735706,-79.345965
 Supercharger-V3 CA-Toronto ON Lakeshore Boulevard W,43.632564,-79.411909
 Supercharger-V3 CA-Trenton ON,44.130278,-77.579975
 Supercharger CA-Tsawwassen BC,49.04114,-123.082496
 Supercharger-V3 CA-Upsala ON,49.041776,-90.468545
-Supercharger CA-Vancouver BC - Burrard Street (Pay to Park Floor P3),49.287898,-123.115812
-Supercharger CA-Vancouver BC - Pacific Centre (Pay to Park Floor P2),49.282779,-123.11959
+Supercharger CA-Vancouver BC Burrard Street,49.2879,-123.1158
+Supercharger CA-Vancouver BC Pacific Centre,49.28278,-123.1196
 Supercharger-V3 CA-Vegreville AB,53.501977,-112.079236
 Supercharger-V3 CA-Vernon BC,50.289161,-119.260439
 Supercharger CA-Victoria BC (Floor L1),48.455846,-123.377174
@@ -11442,6 +11444,7 @@ EnBW DE-Herford,52.1314,8.65823
 EnBW DE-Heringen/Helme,51.44726,10.87378
 EnBW DE-Herleshausen Brandenburgstraße,51.00655,10.17584
 EnBW DE-Hermaringen Robert-Bosch-Straße,48.59069,10.26815
+EnBW DE-Hermsdorf Rodaer Straße,50.88564,11.84995
 EnBW DE-Herne,51.53807,7.17812
 EnBW DE-Herrenberg Benzstraße,48.59915,8.87036
 EnBW DE-Herschbach Rheinstraße,50.56876,7.73684
@@ -20360,6 +20363,7 @@ PKP PL-Wrocław Marszałka Józefa Piłsudskiego,51.09902,17.03853
 
 Plan-Net-solar SI-Ljubljana Celovška cesta,46.09948,14.45996
 
+Plenitude DE-Alsfeld An der Hessenhalle,50.7385,9.24728,40
 Plenitude IT-Abano Terme Via Monteortone,45.35475,11.77765
 Plenitude IT-Bollate Via Pace,45.55967,9.13734
 Plenitude IT-Bologna Via Antoniotto Usodimare,44.51902,11.32701
@@ -21606,6 +21610,7 @@ Shell TR-Horozluhan Yeni İstanbul Cd.,37.93425,32.511
 Shell TR-Karşıyaka/İzmir Soğukkuyu Anadolu Cd.,38.46806,27.1134
 Shell US-De Soto IA Guthrie St,41.53846,-94.01151
 
+SI-Energy DE-Grünberg Gießener Straße,50.59467,8.94673
 SI-Energy DE-Langgöns Sankt-Ulrich-Ring,50.49241,8.65891,20
 
 SIEG63 FR-Le Cendre Allée des Marronniers,45.72343,3.18947
@@ -22473,6 +22478,7 @@ Süwag DE-Allmersbach Allmersbacher Straße,48.9085,9.48495
 Süwag DE-Bad Ems Silberau,50.33259,7.70802
 Süwag DE-Eltville am Rhein Taunusstraße,50.02711,8.12039
 Süwag DE-Frankfurt Schützenbleiche,50.09654,8.54341
+Süwag DE-St. Goarshausen Bahnhofstraße,50.15535,7.71542
 
 Tango NL-Harderwijk Boekhorstlaan,52.33564,5.64287,20
 Tango NL-Steenbergen Koperslagerij,51.58852,4.30276
@@ -22672,7 +22678,7 @@ TEAG DE-Harztor Im Steinfeld,51.54238,10.76874
 TEAG DE-Harztor-Ilfeld Netzkater,51.60304,10.78543
 TEAG DE-Haunetal An den Lipperswiesen,50.77487,9.70048
 TEAG DE-Herborn Hüttenweg,50.68814,8.30609
-TEAG DE-Hermsdorf Rodaer Straße 72,50.88643,11.85018
+TEAG DE-Hermsdorf Rodaer Straße,50.88652,11.85012
 TEAG DE-Hildburghausen Häselriether Straße,50.42661,10.71216
 TEAG DE-Hildburghausen Wiesenstraße,50.42232,10.72741
 TEAG DE-Homberg (Efze) Ferdinand-Sauerbruch-Straße,51.02996,9.42206
