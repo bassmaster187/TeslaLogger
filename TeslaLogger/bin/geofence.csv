@@ -3769,7 +3769,7 @@ Supercharger-V4 PL-Warszawa Aleja Krakowska,52.17025,20.936
 Supercharger PL-Warszawa Belwederska,52.20767,21.02924
 Supercharger-V4 PL-Warszawa South,52.1661,21.01745
 Supercharger-V3 PL-Warszawa Ząbki,52.3019,21.08816
-Supercharger-V4 PL-Wrocław,51.05185,16.97247
+Supercharger-V4 PL-Wrocław,51.05228,16.9682
 Supercharger-V4 PL-Załuski,52.51436,20.5288
 
 Supercharger-V4 PT-Alcantarilha,37.1506,-8.36443
@@ -8035,6 +8035,7 @@ Berliner-SW DE-Berlin Elsenstraße,52.4853,13.44923
 Berliner-SW DE-Berlin Friedrichstraße,52.51122,13.38952
 Berliner-SW DE-Berlin Markgrafendamm,52.49863,13.4654
 Berliner-SW DE-Berlin Potsdamer Platz,52.51,13.3757
+Berliner-SW DE-Berlin Rankestraße,52.5029,13.33415
 Berliner-SW DE-Berlin Schlüterstraße,52.50568,13.31752
 Berliner-SW DE-Berlin Schöneberger Straße,52.46425,13.3301,30
 Berliner-SW DE-Berlin Tile-Brügge-Weg,52.5916,13.29266
@@ -10961,6 +10962,7 @@ EnBW DE-Braunsbach Marktplatz,49.19948,9.79235
 EnBW DE-Braunschweig Bauhaus,52.21515,10.53014
 EnBW DE-Braunschweig Hildesheimer Straße,52.27138,10.49719,30
 EnBW DE-Breitengüßbach,49.97335,10.87513
+EnBW DE-Breitengüßbach Gewerbepark,49.97305,10.8728
 EnBW DE-Bremen Burger King,53.05319,8.74211
 EnBW DE-Bremen Hemelinger Heerstraße,53.04659,8.8922
 EnBW DE-Bremen Hemmstraße,53.10048,8.81461,30
@@ -17909,7 +17911,7 @@ Lidl DE-Dresden Leipziger Straße,51.07422,13.72383
 Lidl DE-Dresden Schandauer Straße 22a,51.04266,13.78664
 Lidl DE-Dresden-Gorbitz Omsewitzer Ring 45,51.04893,13.66295
 Lidl DE-Dresden-Hellerau Ludwig-Kossuth-Straße,51.11706,13.74236
-Lidl DE-Dresden-Prohlis Georg-Palitzsch-Straße,51.0028,13.79464
+Lidl DE-Dresden-Prohlis Georg-Palitzsch-Straße,51.00245,13.7942
 Lidl DE-Dresden-Südvorstadt Budapester Straße,51.04155,13.7206
 Lidl DE-Dresden-Zschertnitz Südhöhe 38,51.0192,13.73751
 Lidl DE-Duisburg-Beeck Friedrich-Ebert-Straße,51.47155,6.7337
@@ -18460,6 +18462,7 @@ Lidl HU-Veszprém,47.11151,17.92639
 Lidl IT-Calalzo di Cadore Calalzo Lozza,46.43756,12.3793
 Lidl IT-Peschiera del Garda,45.43475,10.68024
 Lidl LT-Elektrėnai Sabališkių g.,54.78936,24.6751
+Lidl LU-Beggen Rue de Beggen,49.64655,6.13007
 Lidl LU-Schmëtt Huldange Troisvierges,50.18182,6.02355
 Lidl NL-Almere Daniël Goedkoopstraat,52.37545,5.29279
 Lidl NL-Weert Keulerstraat,51.24407,5.69604
@@ -20556,7 +20559,6 @@ Powerdot FR-Russ Rue de la Creuse Fontaine,48.49343,7.25152
 Powerdot FR-Saint-Malo Imp. de la Peupleraie,48.62518,-1.99012,20
 Powerdot FR-Ussac Av. du Griffolet,45.1634,1.48153,30
 Powerdot FR-Valence Imp. des Auréats,44.90199,4.88327
-Powerdot PL-Bielany Wrocławskie Francuska,51.05217,16.9683
 Powerdot PL-Cieszyn Wierzbowa,49.75655,18.6395
 Powerdot PL-Gdańsk Gdańska,54.40236,18.63141
 Powerdot PL-Kraków Pawia,50.06798,19.94628
@@ -23141,6 +23143,7 @@ Vattenfall DE-Esens Auricher Straße,53.63117,7.6138
 Vattenfall DE-Eutin Bürgermeister-Steenbock-Straße,54.13031,10.61728
 Vattenfall DE-Finsterwalde Langer Damm,51.62868,13.71401
 Vattenfall DE-Frankfurt (Oder) Markendorfer Straße,52.3421,14.52887
+Vattenfall DE-Frankfurt (Oder) Spartakusring,52.33324,14.53948
 Vattenfall DE-Frankfurt am Main Georg-Baumgarten-Straße,50.05441,8.5908
 Vattenfall DE-Fürstenwalde /Spree August-Bebel-Straße,52.3436,14.07335
 Vattenfall DE-Glinde Kaposvar-Spange,53.54523,10.22746
