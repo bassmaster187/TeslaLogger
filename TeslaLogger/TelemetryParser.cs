@@ -196,7 +196,12 @@ namespace TeslaLogger
         {
             try
             {
-                dynamic j = JsonConvert.DeserializeObject(resultContent);
+                JsonSerializerSettings serializerSettings = new()
+                {
+                    DateTimeZoneHandling = DateTimeZoneHandling.Local
+                };
+
+                dynamic j = JsonConvert.DeserializeObject(resultContent, serializerSettings);
 
                 if (j.ContainsKey("data"))
                 {
