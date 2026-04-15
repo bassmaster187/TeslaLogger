@@ -103,7 +103,7 @@ namespace TeslaLogger
 
         private bool driving;
         private bool _acCharging;
-        private string lastDetailedChargeState;
+        private string lastDetailedChargeState = "";
 
         internal bool dcCharging
         {
@@ -843,11 +843,19 @@ namespace TeslaLogger
 
                             await CheckDetailedChargeStateAsync(d);
 
-                            if (IsCharging && DetailedChargeState == "DetailedChargeStateStopped")
+                            if (DetailedChargeState != "DetailedChargeStateCharging")
                             {
-                                Log("Stop Charging by DetailedChargeState");
-                                acCharging = false;
-                                dcCharging = false;
+                                if (acCharging)
+                                {
+                                    Log("Stop AC Charging by DetailedChargeState");
+                                    acCharging = false;
+                                }
+
+                                if (dcCharging)
+                                {
+                                    Log("Stop DC Charging by DetailedChargeState");
+                                    dcCharging = false;
+                                }
                             }
 
                             if (DetailedChargeState.Contains("DetailedChargeStateNoPower") ||
@@ -1797,7 +1805,7 @@ namespace TeslaLogger
                                         Driving = false;
                                     }
 
-                                    if (!acCharging)
+                                    if (!acCharging && lastDetailedChargeState == "")
                                     {
                                         var current = PackCurrent(j, date);
 
@@ -1811,7 +1819,7 @@ namespace TeslaLogger
                                 }
                                 else if (v1 == "Idle")
                                 {
-                                    if (acCharging)
+                                    if (acCharging && lastDetailedChargeState == "")
                                     {
                                         Log("Stop AC Charging ***");
                                         acCharging = false;
