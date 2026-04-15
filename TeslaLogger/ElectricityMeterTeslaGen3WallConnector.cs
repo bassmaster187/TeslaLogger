@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Net;
+using System.Net.Http;
 using Exceptionless;
 using Newtonsoft.Json;
 
@@ -12,14 +13,11 @@ namespace TeslaLogger
         string parameter;
         internal int LP = 1;
 
-        static WebClient client;
+        static readonly HttpClient client = new HttpClient();
         internal string mockup_lifetime, mockup_version, mockup_vitals;
 
         public ElectricityMeterTeslaGen3WallConnector(string host, string parameter)
         {
-            if (client == null)
-                client = new WebClient();
-
             this.host = host;
             this.parameter = parameter;
         }
@@ -32,7 +30,7 @@ namespace TeslaLogger
                     return mockup_lifetime;
 
                 string url = host + "/api/1/lifetime";
-                string lastJSON = client.DownloadString(url);
+                string lastJSON = client.GetStringAsync(url).GetAwaiter().GetResult();
 
                 return lastJSON;
             }
@@ -64,7 +62,7 @@ namespace TeslaLogger
                     return mockup_vitals;
 
                 string url = host + "/api/1/vitals";
-                string lastJSON = client.DownloadString(url);
+                string lastJSON = client.GetStringAsync(url).GetAwaiter().GetResult();
 
                 return lastJSON;
             }
@@ -97,7 +95,7 @@ namespace TeslaLogger
                     return mockup_version;
 
                 string url = host + "/api/1/version";
-                string lastJSON = client.DownloadString(url);
+                string lastJSON = client.GetStringAsync(url).GetAwaiter().GetResult();
 
                 return lastJSON;
             }

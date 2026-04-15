@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
 using System.Runtime.Caching;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,17 +21,12 @@ namespace TeslaLogger
         internal string mockup_status, mockup_shelly;
 
         Guid guid; // defaults to new Guid();
-        static WebClient client;
+        static readonly HttpClient client = new HttpClient();
 
         public ElectricityMeterSmartEVSE3(string host, string paramater)
         {
             this.host = host;
             this.paramater = paramater;
-
-            if (client == null)
-            {
-                client = new WebClient();
-            }
         }
 
         string GetCurrentData()
@@ -51,7 +47,7 @@ namespace TeslaLogger
                 }
 
                 string url = host + "/settings";
-                string lastJSON = client.DownloadString(url);
+                string lastJSON = client.GetStringAsync(url).GetAwaiter().GetResult();
 
                 MemoryCache.Default.Add(cacheKey, lastJSON, DateTime.Now.AddSeconds(10));
                 return lastJSON;

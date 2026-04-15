@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
 using System.Runtime.Caching;
 using Exceptionless;
 using Newtonsoft.Json;
@@ -25,15 +26,10 @@ namespace TeslaLogger
         internal string mockup_hierarchy;
 
         Guid guid = Guid.NewGuid(); // defaults to new Guid();
-        static WebClient client;
+        static readonly HttpClient client = new HttpClient();
 
         public ElectricityMeterOpenWB2(string host, string parameter)
         {
-            if (client == null)
-            {
-                client = new WebClient();
-            }
-
             this.host = host;
             this.parameter = parameter;
 
@@ -103,7 +99,7 @@ namespace TeslaLogger
                 else
                 {
                     //real data
-                    lastJSON = client.DownloadString(url);
+                    lastJSON = client.GetStringAsync(url).GetAwaiter().GetResult();
                 }
 
                 dynamic jsonResult = JsonConvert.DeserializeObject(lastJSON);

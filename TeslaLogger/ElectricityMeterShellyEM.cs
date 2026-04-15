@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using System;
 using System.Net;
+using System.Net.Http;
 using System.Runtime.Caching;
 
 namespace TeslaLogger
@@ -20,7 +21,7 @@ namespace TeslaLogger
         int channel; // defaults to 0;
 
         Guid guid; // defaults to new Guid();
-        static WebClient client;
+        static readonly HttpClient client = new HttpClient();
 
         public ElectricityMeterShellyEM(string host, string paramater)
         {
@@ -29,11 +30,6 @@ namespace TeslaLogger
 
             if (paramater.IndexOf("C2", StringComparison.OrdinalIgnoreCase) >= 0)
                 channel = 1;
-
-            if (client == null)
-            {
-                client = new WebClient();
-            }
         }
 
         string GetCurrentData()
@@ -54,7 +50,7 @@ namespace TeslaLogger
                 }
 
                 string url = host + "/status";
-                string lastJSON = client.DownloadString(url);
+                string lastJSON = client.GetStringAsync(url).GetAwaiter().GetResult();
 
                 MemoryCache.Default.Add(cacheKey, lastJSON, DateTime.Now.AddSeconds(10));
                 return lastJSON;
@@ -136,7 +132,7 @@ namespace TeslaLogger
                 if (mockup_shelly == null)
                 {
                     string url = host + "/shelly";
-                    j = client.DownloadString(url);
+                    j = client.GetStringAsync(url).GetAwaiter().GetResult();
                 }
                 else
                 {

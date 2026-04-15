@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net;
+using System.Net.Http;
 using System.Runtime.Caching;
 using Exceptionless;
 using Newtonsoft.Json;
@@ -16,16 +17,11 @@ namespace TeslaLogger
         string loadpointcarname;
         internal string api_state;
 
-        static WebClient client; 
+        static readonly HttpClient client = new HttpClient();
         Guid guid = Guid.NewGuid();
 
         public ElectricityMeterEVCC(string host, string parameter)
         {
-            if (client == null)
-            {
-                client = new WebClient();
-            }
-
             this.host = host;
             this.parameter = parameter;
 
@@ -51,7 +47,7 @@ namespace TeslaLogger
                     return (string)o;
 
                 string url = host + "/api/state";
-                string lastJSON = client.DownloadString(url);
+                string lastJSON = client.GetStringAsync(url).GetAwaiter().GetResult();
 
                 MemoryCache.Default.Add(cacheKey, lastJSON, DateTime.Now.AddSeconds(10));
                 return lastJSON;

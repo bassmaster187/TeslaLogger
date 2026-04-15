@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net;
+using System.Net.Http;
 using System.Runtime.Caching;
 using Exceptionless;
 using Newtonsoft.Json;
@@ -19,18 +20,13 @@ namespace TeslaLogger
 
         internal string get_dev_info;
 
-        static WebClient client;
+        static readonly HttpClient client = new HttpClient();
         Guid guid = Guid.NewGuid();
 
         public ElectricityMeterCFos(string host, string paramater)
         {
             this.host = host;
             this.paramater = paramater;
-
-            if (client == null)
-            {
-                client = new WebClient();
-            }
         }
 
         string GetCurrentData()
@@ -51,7 +47,7 @@ namespace TeslaLogger
                 }
 
                 string url = host + "/cnf?cmd=get_dev_info";
-                string lastJSON = client.DownloadString(url);
+                string lastJSON = client.GetStringAsync(url).GetAwaiter().GetResult();
 
                 MemoryCache.Default.Add(cacheKey, lastJSON, DateTime.Now.AddSeconds(10));
                 return lastJSON;

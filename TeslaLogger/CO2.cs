@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using Newtonsoft.Json;
 using System.IO;
 using Exceptionless;
@@ -12,6 +14,7 @@ namespace TeslaLogger
     public class CO2
     {
         HashSet<string> supportedCountries = new HashSet<string> { "at", "be", "bg", "ch", "cz", "de", "dk", "ee", "es", "fi", "fr", "gr", "hr", "hu", "it", "lu", "lv", "nl", "no", "pl", "pt" ,"ro", "se", "si", "sk", "uk" };
+        private static readonly HttpClient httpClient = new HttpClient();
         public bool useCache = true;
 
         static void Log(string msg) {
@@ -318,46 +321,46 @@ namespace TeslaLogger
         public static async Task<string> GetEnergyChartDataAsync(string country, string filename, Boolean writeCache)
         {
             string resultContent = "";
-           
-            using (WebClient client = new WebClient())
+            DateTime start = DateTime.UtcNow;
+            string url = $"https://www.energy-charts.info/charts/power/data/{country}/{filename}";
+
+            try
             {
-                // week_2022_51.json
-
-                DateTime start = DateTime.UtcNow;
-                client.Headers["Accept"] = "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9";
-                client.Headers["User-Agent"] = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36";
-                string url = $"https://www.energy-charts.info/charts/power/data/{country}/{filename}";
-                try
+                using (var request = new HttpRequestMessage(HttpMethod.Get, url))
                 {
-                    resultContent = client.DownloadString(url);
+                    request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9"));
+                    request.Headers.UserAgent.ParseAdd("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36");
 
-                    await DBHelper.AddMothershipDataToDBAsync("EnergyCharts", start, 0, 0);
-
-                    Console.WriteLine("Download URL ok: " + url);
-                }
-                catch (Exception)
-                {
-                    System.Diagnostics.Debug.WriteLine("URL: " + url);
-                    throw;
+                    var response = await httpClient.SendAsync(request);
+                    response.EnsureSuccessStatusCode();
+                    resultContent = await response.Content.ReadAsStringAsync();
                 }
 
-                if (resultContent.Contains("Nuclear"))
+                await DBHelper.AddMothershipDataToDBAsync("EnergyCharts", start, 0, 0);
+                Console.WriteLine("Download URL ok: " + url);
+            }
+            catch (Exception)
+            {
+                System.Diagnostics.Debug.WriteLine("URL: " + url);
+                throw;
+            }
+
+            if (resultContent.Contains("Nuclear"))
+            {
+                if (!Directory.Exists("EngergyChartData"))
+                    Directory.CreateDirectory("EngergyChartData");
+
+                if (!Directory.Exists("EngergyChartData/" + country))
+                    Directory.CreateDirectory("EngergyChartData/" + country);
+
+                if (writeCache)
                 {
-                    if (!Directory.Exists("EngergyChartData"))
-                        Directory.CreateDirectory("EngergyChartData");
+                    string path = $"EngergyChartData/{country}/{filename}";
 
-                    if (!Directory.Exists("EngergyChartData/" + country))
-                        Directory.CreateDirectory("EngergyChartData/"+ country);
+                    if (File.Exists(path))
+                        File.Delete(path);
 
-                    if (writeCache)
-                    {
-                        string path = $"EngergyChartData/{country}/{filename}";
-
-                        if (File.Exists(path))
-                            File.Delete(path);
-
-                        File.WriteAllText(path, resultContent);
-                    }
+                    File.WriteAllText(path, resultContent);
                 }
             }
 

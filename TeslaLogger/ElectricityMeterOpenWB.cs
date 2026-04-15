@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Net;
+using System.Net.Http;
 using System.Runtime.Caching;
+using System.Threading.Tasks;
 using Exceptionless;
 using Newtonsoft.Json;
 
@@ -14,15 +16,10 @@ namespace TeslaLogger
         internal int LP = 1;
 
         Guid guid; // defaults to new Guid();
-        static WebClient client; 
+        static readonly HttpClient client = new HttpClient();
 
         public ElectricityMeterOpenWB(string host, string parameter)
         {
-            if (client == null)
-            {
-                client = new WebClient();
-            }
-
             this.host = host;
             this.parameter = parameter;
 
@@ -47,7 +44,7 @@ namespace TeslaLogger
                     return (string)o;
 
                 string url = host + "/openWB/web/api.php?get=all";
-                string lastJSON = client.DownloadString(url);
+                string lastJSON = client.GetStringAsync(url).GetAwaiter().GetResult();
 
                 MemoryCache.Default.Add(cacheKey, lastJSON, DateTime.Now.AddSeconds(10));
                 return lastJSON;
@@ -155,7 +152,7 @@ namespace TeslaLogger
             try
             {
                 string url = host + "/openWB/web/version?t="+new Guid().ToString();
-                string v = client.DownloadString(url).Trim();
+                string v = client.GetStringAsync(url).GetAwaiter().GetResult().Trim();
                 return v;
             }
             catch (Exception ex)

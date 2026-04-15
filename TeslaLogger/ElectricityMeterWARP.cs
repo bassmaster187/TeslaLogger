@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Net;
+using System.Net.Http;
 using System.Linq;
 using System.Runtime.Caching;
 using Exceptionless;
@@ -27,15 +28,10 @@ namespace TeslaLogger
         internal string mockup_grid_values;
 
 
-        static WebClient client;
+        static readonly HttpClient client = new HttpClient();
 
         public ElectricityMeterWARP(string host, string parameter)
         {
-            if (client == null)
-            {
-                client = new WebClient();
-            }
-
             this.host = host;
             this.parameter = parameter;
 
@@ -80,10 +76,10 @@ namespace TeslaLogger
                         return double.NaN;
 
                     string url1 = host + $"/meters/{gridMeterId}/value_ids";
-                    value_ids = client.DownloadString(url1).Trim();
+                    value_ids = client.GetStringAsync(url1).GetAwaiter().GetResult().Trim();
 
                     string url2 = host + $"/meters/{gridMeterId}/values";
-                    values = client.DownloadString(url2).Trim();
+                    values = client.GetStringAsync(url2).GetAwaiter().GetResult().Trim();
                 }
                 else
                 {
@@ -125,10 +121,10 @@ namespace TeslaLogger
                         return double.NaN;
 
                     string url1 = host + $"/meters/{wallboxMeterId}/value_ids";
-                    value_ids = client.DownloadString(url1).Trim();
+                    value_ids = client.GetStringAsync(url1).GetAwaiter().GetResult().Trim();
 
                     string url2 = host + $"/meters/{wallboxMeterId}/values";
-                    values = client.DownloadString(url2).Trim();
+                    values = client.GetStringAsync(url2).GetAwaiter().GetResult().Trim();
                 }
                 else
                 {
@@ -166,7 +162,7 @@ namespace TeslaLogger
                 if (mockup_evse_state == null && host != null)
                 {
                     string url = host + "/evse/state";
-                    evse_state = client.DownloadString(url).Trim();
+                    evse_state = client.GetStringAsync(url).GetAwaiter().GetResult().Trim();
                 }
                 else
                 {
@@ -198,7 +194,7 @@ namespace TeslaLogger
                 if (mockup_info_version == null && host != null)
                 {
                     string url = host + "/info/version";
-                    info_version = client.DownloadString(url).Trim();
+                    info_version = client.GetStringAsync(url).GetAwaiter().GetResult().Trim();
                 }
                 else
                 {

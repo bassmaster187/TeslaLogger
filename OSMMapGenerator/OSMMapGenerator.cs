@@ -6,8 +6,9 @@ using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
 using System.IO;
-using System.Net;
+using System.Net.Http;
 using System.Threading;
+using System.Threading.Tasks;
 
 
 namespace TeslaLogger
@@ -64,7 +65,7 @@ namespace TeslaLogger
         //private static SKFont drawFont12b = new SKFont(SKTypeface.FromFamilyName("SanSerif"), 12); // ccc FontStyle.Bold
         // ccc private static Pen thinWhitePen = new Pen(Color.White, 1);
 
-        public static void Main(string[] args)
+        public static async Task Main(string[] args)
         {
             try
             {
@@ -109,7 +110,7 @@ namespace TeslaLogger
                                 MapCachePath = "map-data";
 
                             if (debug) { Console.WriteLine($"OSMMapGenerator - DrawMap(width:{width}, height:{height}, zoom:{zoom}, x_center:{x_center}, y_center:{y_center}, mapmode:{mapmode})"); }
-                            SKBitmap map = DrawMap(width, height, zoom, x_center, y_center, mapmode);
+                            SKBitmap map = await DrawMap(width, height, zoom, x_center, y_center, mapmode);
                             if (job.ContainsKey("latlng"))
                             {
                                 DataTable coords = new DataTable();
@@ -248,11 +249,11 @@ namespace TeslaLogger
             return jobfilefound;
         }
 
-        private static SKBitmap DrawMap(int width, int height, int zoom, double x_center, double y_center, MapMode mode)
+        private static async Task<SKBitmap> DrawMap(int width, int height, int zoom, double x_center, double y_center, MapMode mode)
         {
             SKBitmap image = new SKBitmap(width, height);
             {
-                DrawMapLayer(image, width, height, x_center, y_center, zoom);
+                await DrawMapLayer(image, width, height, x_center, y_center, zoom);
                 if (mode == MapMode.Dark)
                 {
                     ApplyDarkMode(image);
@@ -262,7 +263,7 @@ namespace TeslaLogger
             return image;
         }
 
-        private static void DrawMapLayer(SKBitmap image, int width, int height, double x_center, double y_center, int zoom)
+        private static async Task DrawMapLayer(SKBitmap image, int width, int height, double x_center, double y_center, int zoom)
         {
             int x_min = (int)(Math.Floor(x_center - (0.5 * width / tileSize)));
             int y_min = (int)(Math.Floor(y_center - (0.5 * height / tileSize)));
@@ -283,7 +284,7 @@ namespace TeslaLogger
             }
             foreach (Tuple<int, int, int, int, int> tile in tiles)
             {
-                using (SKBitmap tileImage = DownloadTile(tile.Item3, tile.Item4, tile.Item5))
+                using (SKBitmap tileImage = await DownloadTile(tile.Item3, tile.Item4, tile.Item5))
                 {
                     if (tileImage != null)
                     {
@@ -746,7 +747,7 @@ namespace TeslaLogger
         }
         */
 
-        private static SKBitmap DownloadTile(int zoom, int tile_x, int tile_y)
+        private static async Task<SKBitmap> DownloadTile(int zoom, int tile_x, int tile_y)
         {
             string localMapCacheFilePath = Path.Combine(MapCachePath, $"{zoom}_{tile_x}_{tile_y}.png");
             if (debug) Console.WriteLine("localMapCacheFilePath:" + localMapCacheFilePath);
@@ -764,11 +765,11 @@ namespace TeslaLogger
                     if (debug) Console.WriteLine("Download:" + url);
                     try
                     {
-                        using (var wc = new WebClient())
+                        using (var httpClient = new HttpClient())
                         {
-                            wc.Headers["User-Agent"] = "TeslaLogger.OSMMapGenerator";
-                            wc.DownloadFile(url, localMapCacheFilePath);
-                            wc.Dispose();
+                            httpClient.DefaultRequestHeaders.UserAgent.ParseAdd("TeslaLogger.OSMMapGenerator");
+                            byte[] data = await httpClient.GetByteArrayAsync(url);
+                            await File.WriteAllBytesAsync(localMapCacheFilePath, data);
                         }
                     }
                     catch (Exception)
