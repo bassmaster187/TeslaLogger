@@ -536,9 +536,15 @@ namespace TeslaLogger
                 }
 
                 DbHelper.GetEconomy_Wh_km(webhelper);
-                lock (WebHelper.isOnlineLock)
+                string online;
+                await WebHelper.isOnlineLock.WaitAsync();
+                try
                 {
-                    string online = webhelper.IsOnlineAsync().Result;
+                    online = await webhelper.IsOnlineAsync();
+                }
+                finally
+                {
+                    WebHelper.isOnlineLock.Release();
                 }
                 Log("Streamingtoken: " + Tools.ObfuscateString(webhelper.Tesla_Streamingtoken));
 
@@ -789,9 +795,14 @@ namespace TeslaLogger
         private async Task HandleState_SleepAsync()
         {
             string res = "";
-            lock (WebHelper.isOnlineLock)
+            await WebHelper.isOnlineLock.WaitAsync();
+            try
             {
-                res = webhelper.IsOnlineAsync().Result;
+                res = await webhelper.IsOnlineAsync();
+            }
+            finally
+            {
+                WebHelper.isOnlineLock.Release();
             }
 
             if (res == "online")
@@ -965,9 +976,14 @@ namespace TeslaLogger
                         // Log("API not suspended!");
                         await Task.Delay(1000, cts.Token);
                         string res = "";
-                        lock (WebHelper.isOnlineLock)
+                        await WebHelper.isOnlineLock.WaitAsync();
+                        try
                         {
-                            res = webhelper.IsOnlineAsync().Result;
+                            res = await webhelper.IsOnlineAsync();
+                        }
+                        finally
+                        {
+                            WebHelper.isOnlineLock.Release();
                         }
                         if (res == "asleep")
                         {
@@ -1258,9 +1274,14 @@ namespace TeslaLogger
             }
 
             string res = "";
-            lock (WebHelper.isOnlineLock)
+            await WebHelper.isOnlineLock.WaitAsync();
+            try
             {
-                res = webhelper.IsOnlineAsync().Result;
+                res = await webhelper.IsOnlineAsync();
+            }
+            finally
+            {
+                WebHelper.isOnlineLock.Release();
             }
 
             lastCarUsed = DateTime.Now;
@@ -1297,9 +1318,14 @@ namespace TeslaLogger
 
                     string res2 = "";
 
-                    lock (WebHelper.isOnlineLock)
+                    await WebHelper.isOnlineLock.WaitAsync();
+                    try
                     {
-                        res2 = webhelper.IsOnlineAsync().Result;
+                        res2 = await webhelper.IsOnlineAsync();
+                    }
+                    finally
+                    {
+                        WebHelper.isOnlineLock.Release();
                     }
 
                     if (res2 != "offline")

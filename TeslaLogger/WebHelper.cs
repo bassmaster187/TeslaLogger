@@ -1682,7 +1682,7 @@ namespace TeslaLogger
 
         private int unknownStateCounter; // defaults to 0;
 #pragma warning disable CA2211 // Nicht konstante Felder dürfen nicht sichtbar sein
-        public static object isOnlineLock = new object();
+        public static SemaphoreSlim isOnlineLock = new SemaphoreSlim(1, 1);
 #pragma warning restore CA2211 // Nicht konstante Felder dürfen nicht sichtbar sein
 
         public async virtual Task<string> IsOnlineAsync(bool returnOnUnauthorized = false)
@@ -3308,18 +3308,16 @@ namespace TeslaLogger
                 {
                     await Task.Delay(6000 - elapsed);
                 }
-                lastGeocoding = Environment.TickCount;  
+                lastGeocoding = Environment.TickCount;
 
-                using (WebClient webClient = new WebClient())
+                using (HttpClient httpClient = new HttpClient())
                 {
 
-                    webClient.Headers.Add("User-Agent: TL 1.1");
-                    webClient.Encoding = Encoding.UTF8;
-
+                    httpClient.DefaultRequestHeaders.UserAgent.ParseAdd("TL 1.1");
+                    
                     url = !string.IsNullOrEmpty(ApplicationSettings.Default.MapQuestKey)
                         ? "http://www.mapquestapi.com/geocoding/v1/reverse"
                         : "http://nominatim.openstreetmap.org/reverse";
-
 
 
                     if (!string.IsNullOrEmpty(ApplicationSettings.Default.MapQuestKey))
@@ -3344,7 +3342,7 @@ namespace TeslaLogger
                     }
 
                     DateTime start = DateTime.UtcNow;
-                    resultContent = await webClient.DownloadStringTaskAsync(new Uri(url));
+                    resultContent = await httpClient.GetStringAsync(url);
                     if (car != null)
                     {
                         _ = DBHelper.AddMothershipDataToDBAsync("ReverseGeocoding", start, 0, car.CarInDB);
@@ -3519,11 +3517,10 @@ namespace TeslaLogger
 
                 Thread.Sleep(5000); // Sleep to not get banned by Nominatim
 
-                using (WebClient webClient = new WebClient())
+                using (HttpClient httpClient = new HttpClient())
                 {
 
-                    webClient.Headers.Add("User-Agent: TL 1.1");
-                    webClient.Encoding = Encoding.UTF8;
+                    httpClient.DefaultRequestHeaders.UserAgent.ParseAdd("TL 1.1");
 
                     url = "http://nominatim.openstreetmap.org/reverse";
 
@@ -3537,7 +3534,7 @@ namespace TeslaLogger
                     url += ".de";
 
                     DateTime start = DateTime.UtcNow;
-                    resultContent = await webClient.DownloadStringTaskAsync(new Uri(url));
+                    resultContent = await httpClient.GetStringAsync(url);
                     _ = DBHelper.AddMothershipDataToDBAsync("ReverseGeocoding", start, 0, 0);
 
                     dynamic jsonResult = JsonConvert.DeserializeObject(resultContent);
