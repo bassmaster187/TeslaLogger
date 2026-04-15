@@ -174,7 +174,7 @@ namespace TeslaLogger
         {
             if (!Driving && !acCharging && !dcCharging)
             {
-                if (OnlineTimeout() || lastPackCurrent == 0)
+                if (OnlineTimeout()) 
                     return false;
             }
 
@@ -1725,9 +1725,10 @@ namespace TeslaLogger
             if (lastPackVoltage == null)
                 return null;
 
-            var kw = lastPackVoltage * lastPackCurrent / 1000.0 * -1 * 1.3596;
-            Log($"lastPackVoltage: {lastPackVoltage:F1}V / lastPackCurrent: {lastPackCurrent:F1}A / Power: {kw:F1} PS");
-            return decimal.Round((decimal)kw, 1);
+            var PS = lastPackVoltage * lastPackCurrent / 1000.0 * -1 * 1.3596;
+            PS = PS * 0.9; // Wirkungsgrad
+            Log($"lastPackVoltage: {lastPackVoltage:F1}V / lastPackCurrent: {lastPackCurrent:F1}A / Power: {PS:F1} PS");
+            return decimal.Round((decimal)PS, 1);
         }
 
         private async Task StartDCChargingAsync(DateTime date)
