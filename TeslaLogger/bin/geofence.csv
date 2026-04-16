@@ -6103,7 +6103,7 @@ Tesla Service Center CA-Ottawa ON,45.27277,-75.80032
 Tesla Service Center CA-Québec,46.7959,-71.27943
 Tesla Service Center CA-Vancouver BC,49.26617,-123.08324
 Tesla Service Center CH-Bern,46.9587,7.47198,70
-Tesla Service Center CH-Cham,47.1917,8.45633
+Tesla Service Center CH-Cham,47.19165,8.4561
 Tesla Service Center CH-Meyrin,46.22363,6.05061
 Tesla Service Center CH-Möhlin,47.57728,7.841
 Tesla Service Center CH-Schlieren,47.40088,8.44
@@ -7134,8 +7134,8 @@ Allego DE-Neustadt-Glewe An der Autobahn,53.38087,11.62636
 Allego DE-Neustrelitz Am Kiefernwald,53.36118,13.0914,30
 Allego DE-Nienburg/Weser Im Meerbachbogen,52.63802,9.2209
 Allego DE-Nossen Im Industriegebiet,51.08274,13.27396,7
-Allego DE-Nürnberg - Höfen Sigmundstraße,49.44572,11.00774
 Allego DE-Nürnberg Nordring,49.4698,11.07008
+Allego DE-Nürnberg-Höfen Sigmundstraße,49.44572,11.00774
 Allego DE-Oberhausen Bahnhofstraße,51.51513,6.85294
 Allego DE-Oberhausen Max-Planck-Ring,51.48653,6.8574
 Allego DE-Oberhonnefeld Westerwaldpark,50.56238,7.52565,12
@@ -8710,8 +8710,8 @@ CityCharging NL-Sassenheim Menneweg,52.22424,4.52394
 
 Citywatt DE-Aalen Obere Bahnstraße,48.82815,10.07859
 Citywatt DE-Achern Oberacherner Straße 90,48.61262,8.08353
-Citywatt DE-Albstadt - Tailfingen Im Weglanger 11,48.24943,8.99449
 Citywatt DE-Albstadt Ebingertalstraße,48.21402,8.9705
+Citywatt DE-Albstadt-Tailfingen Im Weglanger,48.24943,8.9945
 Citywatt DE-Arnsberg Nelkenpfad 9,51.46111,7.98379
 Citywatt DE-Asbach Anton-Jaumann-Straße,48.6737,10.82326
 Citywatt DE-Augsburg Austraße 35,48.38996,10.88777
@@ -8792,7 +8792,7 @@ Citywatt DE-Neu Zauche Cottbuser Straße 17a,51.92555,14.09395
 Citywatt DE-Neufarn/Vaterstetten Münchener Straße 1,48.14834,11.82175
 Citywatt DE-Neuhaus am Rennweg Schwarzburger Straße 132,50.51994,11.14461
 Citywatt DE-Neumarkt i. d. Oberpfalz Blomenhofstraße,49.29983,11.4593
-Citywatt DE-Neumünster Kieler Straße 239 - 247,54.09233,9.98729
+Citywatt DE-Neumünster Kieler Straße,54.09233,9.9873
 Citywatt DE-Neustadt an der Weinstraße Chemnitzer Straße,49.3403,8.1581
 Citywatt DE-Neuwied Allensteiner Straße,50.43828,7.49349
 Citywatt DE-Neuötting Berliner Straße 24,48.24673,12.68812
@@ -9242,7 +9242,7 @@ Compleo DE-Graben Landsberger Straße,48.19883,10.85468
 Compleo DE-Grimma Wedniger Straße,51.2564,12.73723
 Compleo DE-Haldensleben,52.29148,11.4133
 Compleo DE-Hildburghausen Kaltenbronner Weg,50.42126,10.75184
-Compleo DE-Idar - Oberstein Hauptstraße,49.71343,7.31209
+Compleo DE-Idar-Oberstein Hauptstraße,49.71343,7.3121
 Compleo DE-Illertissen Industriestraße,48.20646,10.10615
 Compleo DE-Iserlohn Fingerhutsmühle,51.36462,7.61221
 Compleo DE-Iserlohn Mendener Straße,51.37518,7.70485
@@ -10254,7 +10254,7 @@ EDEKA DE-Wittingen Benitzer Straße,52.64505,10.86892
 EDEKA DE-Wolgast Chausseestraße,54.05123,13.76838
 EDEKA DE-Wrist Eken,53.92854,9.75124
 EDEKA DE-Wuppertal Albertstraße,51.26963,7.20943
-EDEKA DE-Zossen Gutstedtstraße,52.17,13.47159
+EDEKA DE-Zossen Gutstedtstraße,52.16976,13.47217
 
 EDP ES-Avilés Av. de Lugo,43.57515,-5.92896
 EDP ES-Bergara Urteaga kalea,43.10806,-2.40634
@@ -10272,6 +10272,8 @@ EDP PT-Nazaré R. Branco Martins,39.59227,-9.07302
 EDP PT-Peniche R. da Ponte Velha,39.36407,-9.37503
 
 EFFIA FR-Grenoble Rue de Belgrade,45.19212,5.72586
+
+Effo FO-Tórshavn Oyggjarvegur,62.1192,-6.98374,55
 
 EFL DE-Sinzig Schloß Ahrenthal,50.52073,7.24871
 
@@ -12640,6 +12642,7 @@ EnBW DE-Wörth an der Donau Im Gewerbepark,49.001,12.36548
 EnBW DE-Wülferode Ost,52.33312,9.86555
 EnBW DE-Wülferode West,52.33809,9.86385
 EnBW DE-Würselen Adenauerstraße,50.80618,6.15241
+EnBW DE-Würselen Schumanstraße,50.8075,6.15188
 EnBW DE-Würzburg Mainfrankenhöhe,49.82055,9.97913
 EnBW DE-Würzburg Nürnberger Straße,49.79388,10.00296
 EnBW DE-Zeitz Hainichener Dorfstraße,51.07032,12.12091
@@ -12995,7 +12998,7 @@ Energie-Steiermark AT-Graz Ragnitzstraße,47.07743,15.49161
 Energie-Steiermark AT-Graz Stattegger Straße,47.11022,15.42302
 Energie-Steiermark AT-Graz Weblinger Gürtel,47.03379,15.41456,8
 Energie-Steiermark AT-Graz Wiener Straße,47.10378,15.40171
-Energie-Steiermark AT-Hart bei Graz Industriestraße,47.04081,15.50833
+Energie-Steiermark AT-Hart bei Graz Industriestraße,47.04083,15.50867
 Energie-Steiermark AT-Judenburg Hauptplatz,47.16846,14.66107
 Energie-Steiermark AT-Kumberg Grazer Straße,47.14436,15.54908
 Energie-Steiermark AT-Laßnitzhöhe Hauptstraße,47.0768,15.5825
@@ -13122,7 +13125,6 @@ EnergyVision BE-Oostende Torhoutsesteenweg,51.19837,2.90284
 
 Enerstock FR-Le Bosc A75,43.6883,3.35473,10
 
-ENGIE AU-Wynnum West QLD Wynnum Road,27.45781,153.15479
 ENGIE DE-Oberwiesenthal Karlsbader Straße,50.41882,12.9623
 ENGIE FR-Aire de Brumath,48.72363,7.69208
 ENGIE FR-Aire de Châtellerault Antran,46.90689,0.52255
@@ -13995,6 +13997,7 @@ EWE-GO DE-Geseke Bürener Straße,51.59906,8.5154
 EWE-GO DE-Giesen Gutenbergstraße,52.16018,9.86677
 EWE-GO DE-Gifhorn Braunschweiger Straße,52.47047,10.54319
 EWE-GO DE-Gladbeck Rockwoolstraße,51.56652,6.96485
+EWE-GO DE-Gladenbach Wehrenbold-Straße,50.75656,8.57403
 EWE-GO DE-Glienicke Nohlstraße,52.63525,13.30791
 EWE-GO DE-Glinde Gutenbergstraße,53.52372,10.22853
 EWE-GO DE-Goch Höster Weg,51.6698,6.17129
@@ -14861,7 +14864,7 @@ Fastned DE-Wittenburg Zur Winterweilt,53.50762,11.0969,12
 Fastned DE-Wittstock,53.15744,12.45124
 Fastned DE-Wolpertshausen Birkichstraße,49.17071,9.86035
 Fastned FR-Achères-la-Forêt Aire d A6,48.36078,2.574
-Fastned FR-Aire de Gevrey - Chambertin Ouest,47.21672,5.00188,30
+Fastned FR-Aire de Gevrey-Chambertin Ouest,47.21672,5.00188,30
 Fastned FR-Aire de Keskastel,48.97201,7.06871
 Fastned FR-Aire de Keskastel,48.97473,7.06457
 Fastned FR-Aire de Pont,47.18608,5.3335
@@ -15070,6 +15073,8 @@ FreeToX IT-Area di Lario,45.72902,9.02876
 FreeToX IT-Area di Lario,45.7299,9.02799
 FreeToX IT-Area di Servizio Flaminia,42.31666,12.4913
 FreeToX IT-Area di Servizio Garda,45.5411,10.7794
+FreeToX IT-Area di servizio Valtrompia Nord,45.53256,10.1512
+FreeToX IT-Area di servizio Valtrompia Sud,45.53256,10.1484
 FreeToX IT-Badia al Pino,43.40561,11.76381
 FreeToX IT-Badia al Pino,43.40796,11.76282
 FreeToX IT-Badia Nuova,44.15108,11.19367
@@ -15115,8 +15120,6 @@ FreeToX IT-Povegliano,45.29688,10.89767
 FreeToX IT-Prenestina,41.88951,12.75833
 FreeToX IT-Prenestina,41.89144,12.75891
 FreeToX IT-Riccione Autostrada Adriatica,43.99441,12.61855
-FreeToX IT-Roncadelle A4 Torino - Trieste,45.53256,10.14839
-FreeToX IT-Roncadelle A4 Torino - Trieste,45.53256,10.15119
 FreeToX IT-San Giovanni Valdarno Autostrada del Sole,43.58291,11.52261
 FreeToX IT-Santa Croce Autostrada del Sole,41.23411,14.09177
 FreeToX IT-Sarni Arno,43.65052,11.46449
@@ -16276,8 +16279,6 @@ Ionity CZ-Pávov (dir. Brno),49.45381,15.59148
 Ionity CZ-Pávov (dir. Prague),49.4551,15.59327
 Ionity CZ-Turnov Průmyslová,50.59561,15.13121
 Ionity CZ-Čechtice,49.65828,15.12053
-Ionity DE-Aachener Land Nord,50.81772,6.21389,20
-Ionity DE-Aachener Land Süd,50.81731,6.21663
 Ionity DE-Aichstetten Am Waizenhof,47.88068,10.04109,30
 Ionity DE-Alsfeld Dirsröder Feld,50.73742,9.24489,40
 Ionity DE-Altdorf b. Nürnberg Nürnberger Straße,49.3833,11.34317
@@ -16384,6 +16385,8 @@ Ionity DE-Rastanlage Ohrenbach Ost,49.48555,10.21327,30
 Ionity DE-Rastanlage Ohrenbach West,49.4844,10.21195
 Ionity DE-Rasthof Gruibingen,48.60532,9.63281
 Ionity DE-Rastplatz Bad Camberg West,50.29989,8.23474,20
+Ionity DE-Raststätte Aachener Land Nord,50.81772,6.2139,20
+Ionity DE-Raststätte Aachener Land Süd,50.81736,6.21673
 Ionity DE-Raststätte Aalbek,54.09267,9.9291,25
 Ionity DE-Raststätte Brokenlande,54.01422,9.9333,20
 Ionity DE-Raststätte Bruchsal Ost,49.16265,8.57075,30
@@ -18997,6 +19000,7 @@ Mobiliti HU-Kecskemét Kiskunfélegyházai út,46.86798,19.7184
 Mobiliti HU-Libás Strand Keszthely,46.7649,17.2658
 Mobiliti HU-Mezőkeresztes Geleji pihenő,47.84182,20.74432,25
 Mobiliti HU-Pécs Lahti utca,46.04136,18.21444
+Mobiliti HU-Solt Törley Bálint utca,46.80096,19.00293
 Mobiliti HU-Sopron Révai Miklós utca,47.69407,16.578
 Mobiliti HU-Szigliget Kisfaludy utca,46.804,17.43427
 Mobiliti HU-Szombathely Hollán Ernő utca,47.23032,16.61786
@@ -19359,7 +19363,6 @@ Neogy IT-Braies St.Veit,46.70516,12.08684
 Neogy IT-Brixen Via Brennero,46.72275,11.6551,30
 Neogy IT-Brunico Nordring,46.80004,11.93291
 Neogy IT-Brunico Via Andreas Hofer,46.80275,11.93864
-Neogy IT-Castelrotto - Kastelruth Seis Schlernstraße,46.54046,11.56483
 Neogy IT-Chiusa Schindergries,46.6389,11.56476
 Neogy IT-Dobbiaco Pustertaler Straße,46.72931,12.21911
 Neogy IT-Dorf Tirol Aichweg,46.68868,11.15756
@@ -19383,6 +19386,7 @@ Neogy IT-Salurn Staatsstraße,46.24071,11.20838
 Neogy IT-Salò Via Zane,45.60472,10.51514
 Neogy IT-San Candido Peter Paul Rainer Straße,46.73295,12.27956
 Neogy IT-San Martino in Badia Str. Picolin,46.69256,11.89249
+Neogy IT-Seis Schlernstraße,46.54046,11.56483
 Neogy IT-Selva di Val Gardena S.da Nives,46.55694,11.75878
 Neogy IT-Selva di Val Gardena Strada Meisules,46.55524,11.75567
 Neogy IT-Sexten Dolomitenstraße,46.69768,12.35656
@@ -22086,6 +22090,7 @@ SW-Haan DE-Haan Bahnhof Gruiten,51.21512,7.00996
 SW-Haan DE-Haan Kaiserstraße,51.19363,7.01348
 SW-Haltern DE-Haltern am See Berghaltern,51.72662,7.16738
 SW-Hameln DE-Hameln Am Posthof,52.10489,9.35966
+SW-Hameln DE-Hameln Am Stockhof,52.1006,9.35493
 SW-Hameln DE-Hameln Bahnhofsplatz,52.10128,9.37431,25
 SW-Hameln DE-Hameln Erichstraße,52.10772,9.35551
 SW-Hameln DE-Hameln Kastanienwall,52.10577,9.36046
@@ -22806,7 +22811,7 @@ Threeforce DE-Ockenfels Burgstraße,50.57649,7.27291
 Threeforce DE-Papenburg An der Alten Werft 5,53.08637,7.38284
 Threeforce DE-Papenburg Friederikenstraße 100,53.07381,7.38259
 Threeforce DE-Papenburg Gerader Weg 3,53.07494,7.41327
-Threeforce DE-Papenburg Siemensstraße 19 - 21,53.0952,7.40551
+Threeforce DE-Papenburg Siemensstraße,53.0952,7.4055
 Threeforce DE-Pronsfeld Lünebacher Straße,50.1567,6.33892
 Threeforce DE-Selmsdorf Ihlenberg 1,53.87133,10.87722
 Threeforce DE-Steinbach Ts. Waldstraße 71,50.17764,8.56186
@@ -22863,6 +22868,7 @@ Toka UA-Ужгород Zakarpats’ka St,48.63245,22.27886
 
 TotalEnergies BE-Brugge Zwijnstraat,51.20483,3.21549
 TotalEnergies BE-De Haan Christianaplein,51.2793,3.0343
+TotalEnergies BE-De Haan Koninklijk Plein,51.27272,3.0338
 TotalEnergies BE-De Haan Leopold II-laan,51.30076,3.07835
 TotalEnergies BE-Heusden-Zolder,51.013,5.3332
 TotalEnergies BE-Jabbeke Vlamingveld,51.18532,3.10609
@@ -23226,7 +23232,7 @@ Vattenfall DE-Westoverledingen Ihrener Straße,53.16546,7.45495
 Vattenfall DE-Wildeshausen Westring,52.89272,8.41482
 Vattenfall DE-Wittstock/Dosse Polthierstraße,53.1563,12.48221
 Vattenfall DE-Zossen Gerichtstraße,52.2175,13.46945
-Vattenfall DE-Zossen Gutstedtstraße,52.1701,13.4715
+Vattenfall DE-Zossen Gutstedtstraße,52.17047,13.47152
 Vattenfall NL-Apeldoorn Lange Amerikaweg,52.17888,5.98485,30
 Vattenfall NL-Apeldoorn Schoutenveld,52.19044,5.99493
 Vattenfall NL-Beuningen Hadrianussingel,51.85621,5.75153
@@ -23490,7 +23496,7 @@ Volkswagen DE-Kirchzarten Zartener Straße,47.96978,7.95185
 Volkswagen DE-Krumbach (Schwaben) Erwin-Bosch-Ring,48.23718,10.37302
 Volkswagen DE-Kulmbach Leitenacker,50.10032,11.39703
 Volkswagen DE-Köln Fröbelstraße,50.94512,6.91674
-Volkswagen DE-Köln Robert-Perthel-Straße 65 - 69,50.98951,6.90735
+Volkswagen DE-Köln Robert-Perthel-Straße,50.9895,6.90735
 Volkswagen DE-Landsberg am Lech Graf-Zeppelin-Straße,48.06767,10.86096
 Volkswagen DE-Langenberg Wiedenbrücker Straße,51.78986,8.32097
 Volkswagen DE-Legden Neue Mühle,52.04106,7.09023
@@ -24013,7 +24019,7 @@ Zunder ES-Área de servicio Quintanilla Norte,42.0224,-5.8536
 ΔΕΗ-blue GR-Lamia Λαμίας Τάσου Ισαάκ,38.89955,22.44928
 ΔΕΗ-blue GR-Lefkada Λευκάδα Anatoliki Paralia Lefkadas,38.82974,20.71132
 ΔΕΗ-blue GR-Lefkada Λευκάδα Perifereiaki Odos,38.82698,20.7033
-ΔΕΗ-blue GR-Patra Πάτρα N.E.O. Patron - Athinon,38.2757,21.76228
+ΔΕΗ-blue GR-Patra Πάτρα N.E.O. Patron-Athinon,38.2757,21.76228
 ΔΕΗ-blue GR-Patra Πάτρα Palea EO Korinthou Patron,38.29132,21.78213
 ΔΕΗ-blue GR-Peta Πέτα Ag. Dimitrios Ionia Odos,39.15794,21.01325
 ΔΕΗ-blue GR-Pilea Πυλαία Γεωργικής Σχολής,40.55188,22.9845
@@ -24219,6 +24225,7 @@ DE Bietigheim-Bissingen Valeo,48.9456,9.13459
 DE Bilsen Jagdhaus Waldfrieden,53.75487,9.88139
 DE Bingen am Rhein Broadcast Solutions,49.9218,7.93451
 DE Bispingen Akzent Hotel Zur Grünen Eiche,53.11239,9.96096
+DE Bochum Voltavision,51.45132,7.2769,25
 DE Brake Wiechmanns Weserhotel,53.32659,8.4859
 DE Braunschweig IIM,52.27266,10.52604
 DE Braunschweig Waller Weg SPIE,52.3099,10.4813
@@ -24473,6 +24480,7 @@ ES València Cinemes ABC Park,39.46934,-0.3727
 FI Helsinki Mall of Tripla,60.19856,24.9307
 FI Tampere Hallilantie,61.4704,23.80405
 FI Virttaa Alastaro Circuit,60.9717,22.6577
+FO Klaksvík Faktorsvegur,62.23346,-6.5972
 FR 68510 Sierentz Hyper U et Drive,47.66618,7.44149,10
 FR Arras Rue Arthur Delétoille,52.52386,9.13167
 FR Bormes-les-Mimosas Camp du Domaine,43.11786,6.35212
