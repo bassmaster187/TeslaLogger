@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Data;
 using System.Drawing;
 using System.IO;
@@ -123,7 +123,7 @@ namespace TeslaLogger
                 // check file age
                 if (File.Exists(filename))
                 {
-                    if ((DateTime.UtcNow - File.GetCreationTimeUtc(filename)).TotalDays > days)
+                    if ((DateTime.UtcNow - File.GetLastWriteTimeUtc(filename)).TotalDays > days)
                     {
                         File.Delete(filename);
                         return true;
