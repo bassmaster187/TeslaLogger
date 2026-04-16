@@ -1,4 +1,4 @@
-﻿using Exceptionless;
+using Exceptionless;
 using System;
 using System.Data;
 using System.IO;
@@ -636,6 +636,19 @@ namespace TeslaLogger
                     {
                         Directory.CreateDirectory("/etc/teslalogger/Exception");
                         UpdateTeslalogger.Chmod("/etc/teslalogger/Exception", 777);
+                    }
+
+                    try
+                    {
+                        string watchtowerImage = Tools.GetDockerContainerImage("teslalogger-watchtower");
+                        if (!string.IsNullOrEmpty(watchtowerImage))
+                        {
+                            Logfile.Log("Watchtower Image: " + watchtowerImage);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Logfile.Log("Cannot get Watchtower image from Docker: " + ex.Message);
                     }
                 }
                 else

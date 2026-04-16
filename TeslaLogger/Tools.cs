@@ -1,4 +1,4 @@
-﻿using Exceptionless;
+using Exceptionless;
 using MySql.Data.MySqlClient;
 using Newtonsoft.Json;
 using System;
@@ -2401,6 +2401,44 @@ WHERE
                 Logfile.Log("Error restarting Grafana Docker container: " + ex.ToString());
                 ex.ToExceptionless().FirstCarUserID().Submit();
             }
+        }
+
+        public static string GetDockerContainerImage(string containerName)
+        {
+            try
+            {
+                string socketPath = "/var/run/docker.sock";
+
+                var handler = new SocketsHttpHandler
+                {
+                    ConnectCallback = async (context, cancellationToken) =>
+                    {
+                        var socket = new Socket(AddressFamily.Unix, SocketType.Stream, ProtocolType.Unspecified);
+                        var endpoint = new UnixDomainSocketEndPoint(socketPath);
+                        await socket.ConnectAsync(endpoint);
+                        return new NetworkStream(socket, ownsSocket: true);
+                    }
+                };
+
+                using var client = new HttpClient(handler);
+                var requestUri = $"http://localhost/containers/{containerName}/json";
+
+                var request = new HttpRequestMessage(HttpMethod.Get, requestUri);
+                var response = client.SendAsync(request).Result;
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var content = response.Content.ReadAsStringAsync().Result;
+                    var json = JsonConvert.DeserializeObject<dynamic>(content);
+                    return json?.Config?.Image?.ToString() ?? json?.Image?.ToString();
+                }
+            }
+            catch (Exception ex)
+            {
+                Logfile.Log("Error getting Docker container image: " + ex.Message);
+            }
+
+            return null;
         }
     }
 
