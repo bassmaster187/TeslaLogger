@@ -7598,6 +7598,7 @@ ARAL DE-Hamburg Langenhorner Chaussee,53.63884,10.0131
 ARAL DE-Hamburg Nettelnburger Landweg,53.48673,10.184
 ARAL DE-Hamburg Osdorfer Landstraße,53.5714,9.87005
 ARAL DE-Hamburg Otto-Brenner-Straße,53.48988,10.01884
+ARAL DE-Hamburg Pinneberger Straße,53.63247,9.9098
 ARAL DE-Hamburg Poppenbütteler Weg,53.64983,10.06468
 ARAL DE-Hamburg Stader Straße,53.4713,9.9238
 ARAL DE-Hamburg Stresemannstraße,53.56409,9.9258
@@ -7817,6 +7818,7 @@ Astor TR-Afyonkarahisar Merkez Dörtyol,38.79381,30.4597
 
 Atlante ES-Lliçà d’Amunt Carrer de la Matarranya,41.61834,2.2154
 Atlante ES-Lliçà d’Amunt Carrer de la Matarranya,62.47466,21.36138
+Atlante FR-Houssen Rue de Rosenkranz,48.12734,7.3647
 Atlante IT-Montaione Via Aldo Moro,43.55431,10.91143
 Atlante IT-Roma Via Giorgio Zoega,41.87423,12.43276
 Atlante IT-San Pietro di Cadore Piazza Tre Terze,46.57048,12.59099
@@ -10397,6 +10399,7 @@ Electra FR-Beaune Rte de Verdun,47.0095,4.85173
 Electra FR-Besançon Rue de Dole,47.21988,5.95489
 Electra FR-Boulazac Isle Manoire All. Jacques Duclos,45.18407,0.7744
 Electra FR-Brive-la-Gaillarde Rue Général Pierre Pouyade,45.14624,1.47475
+Electra FR-Houssen Rue du Rosenkranz,48.12777,7.3638
 Electra FR-Les Tourrettes Rue de Berianne,44.66716,4.79446
 Electra FR-Morschwiller-le-Bas Rue de Mulhouse,47.73686,7.28618
 Electra FR-Nanterre Av. Pablo Picasso,48.89171,2.21374
@@ -13358,6 +13361,7 @@ EVconnect RO-Cluj-Napoca Str. Clinicilor,46.76657,23.58472
 EVconnect RO-Onești Calea Brașovului,46.23477,26.73834
 EVconnect RO-Oradea Str. Tudor Vladimirescu,47.05777,21.92542
 EVconnect RO-Târgu Mureș Strada Gheorghe Doja,46.53168,24.54948
+EVconnect RO-Târgu Mureș Strada Ion Fiscuteanu,46.5281,24.5942
 EVconnect US-Anchorage AK Electron Dr,61.1695,-149.91246
 EVconnect US-Julesburg US-385,40.96592,-102.24704
 
@@ -13515,6 +13519,7 @@ EVN AT-Grafenwörth Gewerbepark,48.41187,15.776
 EVN AT-Grimmenstein Wechselbundesstrasse,47.63344,16.13192
 EVN AT-Gänserndorf Neusiedler Straße,48.3351,16.71196
 EVN AT-Göllersdorf Hammerschmiedstraße,48.49825,16.11453
+EVN AT-Harmannsdorf Kirchengasse,48.3917,16.37124
 EVN AT-Herzogenburg St. Pöltner Straße,48.27414,15.6927
 EVN AT-Herzogenburg Traismauerstraße,48.29015,15.69495
 EVN AT-Himberg bei Wien Hofer Straße,48.07175,16.45776
@@ -13563,6 +13568,7 @@ EVN AT-Wien Albert-Schweitzer-Gasse,48.2075,16.22199
 EVN AT-Wien Dommesgasse,48.17229,16.41517
 EVN AT-Wien Gotramgasse,48.2201,16.44554
 EVN AT-Wien Linzer Straße,48.20324,16.24355
+EVN AT-Wiener Neudorf IZ NÖ-Süd Straße,48.07747,16.32508
 EVN AT-Wiener Neustadt Günser Straße,47.8022,16.24043
 EVN AT-Wiener Neustadt Neunkirchner Straße,47.80974,16.24378
 EVN AT-Wiener Neustadt Puchberger Straße,47.80452,16.21039,6
@@ -19372,7 +19378,7 @@ Neogy IT-Marlengo Franz Innerhofer Straße,46.65566,11.14103
 Neogy IT-Meran Rennstallweg,46.65586,11.14929
 Neogy IT-Merano F.-Innerhofer-Straße,46.66734,11.16443
 Neogy IT-Monguelfo-Tesido Pfarrgasse,46.7578,12.10473
-Neogy IT-Montagna Dolomitenstraße,46.33299,11.30066
+Neogy IT-Montagna Via delle Dolomiti,46.333,11.30066
 Neogy IT-Partschins Wasserfallweg,46.68446,11.0721
 Neogy IT-Peschiera del Garda Via Venezia,45.43843,10.71188
 Neogy IT-Piazza Catena Riva del Garda,45.88338,10.83878
@@ -19567,7 +19573,6 @@ Numbat DE-Schrecksbach Kasseler Straße,50.84011,9.28761
 Numbat DE-Schweinfurt Gretel-Baumbach-Straße,50.05952,10.19158
 Numbat DE-Stutensee Fraunhoferstraße,49.07139,8.45244
 Numbat DE-Suhl-Lautenberg Linsenhoferstraße,50.61023,10.67291
-Numbat DE-Themar Meininger Straße,50.50689,10.61462
 Numbat DE-Unterspiesheim LAchbrunnenweg,49.94809,10.26202
 
 nvb DE-Bad Bentheim Am Bade,52.31788,7.16121
@@ -21779,7 +21784,7 @@ Smatrics DE-Uelzen Hambrocker Straße,52.9638,10.56661
 Smatrics DE-Uelzen Holdenstedter Straße,52.92682,10.52791
 Smatrics DE-Uelzen Schnellenmarkt,52.96741,10.56119
 Smatrics DE-Uelzen Zum Neuen Gehege,53.00528,10.60348
-Smatrics IT-Sevegliano Via E. Mattei,45.88914,13.31365,15
+Smatrics IT-Sevegliano Via E. Mattei,45.88907,13.31392,15
 Smatrics IT-Vahrn-Varna Forch Straße,46.76025,11.63793
 
 Smopi DE-Markdorf Rathausplatz,47.72002,9.39153,30
@@ -23778,6 +23783,7 @@ Wien-Energie AT-Wien Schickgasse,48.2213,16.4572
 Wien-Energie AT-Wien Schiffmühlenstraße,48.22264,16.42653
 Wien-Energie AT-Wien Schillingstraße,48.25957,16.46992
 Wien-Energie AT-Wien Schnirchgasse,48.19426,16.41093
+Wien-Energie AT-Wien Schottenfeldgasse,48.20246,16.3432
 Wien-Energie AT-Wien Schweglerstraße,48.19753,16.32864
 Wien-Energie AT-Wien Schönbrunner Straße,48.1831,16.32767,25
 Wien-Energie AT-Wien Schüttauplatz,48.22693,16.42402
@@ -23798,6 +23804,7 @@ Wiiiz FR-Cannes Bd Général Vautrin,43.54863,7.03206
 Wiiiz FR-Grasse Pl. de la Buanderie,43.66096,6.9234,30
 
 Wirelane DE-Achim Uphusener Dorfstraße,53.0282,8.97063
+Wirelane DE-Bad Sachsa Bismarckstraße,51.5993,10.54702
 Wirelane DE-Berlin Leipziger Straße,52.5107,13.4008
 Wirelane DE-Berlin Parkstraße,52.55471,13.45771
 Wirelane DE-Bremen Robert-Hooke-Straße,53.11267,8.8561
@@ -24427,6 +24434,7 @@ DE Simonsberg Nordseecamping zum Seehund,54.45534,8.97188
 DE Sinzheim Landstraße,48.76556,8.16932
 DE Soest Münstermann,51.56228,8.14189
 DE Spalt Ferienhof Hanser,49.14644,10.91641
+DE Speyer XAPI,49.3088,8.44202
 DE Steyerberg Große Aue,52.56765,9.02182
 DE Stuhr Waschpark,52.99715,8.77165
 DE Stuttgart Flughafen,48.69055,9.19193
