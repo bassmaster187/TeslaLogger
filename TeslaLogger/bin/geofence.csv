@@ -2246,7 +2246,7 @@ Supercharger-V3 DK-Frederikshavn,57.3892,10.51035
 Supercharger-V3 DK-Haverslev,56.78297,9.69094,30
 Supercharger DK-Haverslev,56.78349,9.69069,25
 Supercharger DK-Hedensted,55.786395,9.667926
-Supercharger-V4 DK-Herning,56.13491,9.00345
+Supercharger-V4 DK-Herning,56.13622,8.99887
 Supercharger-V4 DK-Hillerød,55.93262,12.25946
 Supercharger-V4 DK-Hjørring,57.45563,10.04071,42
 Supercharger DK-Hjørring,57.45569,10.04277
@@ -3094,7 +3094,7 @@ Supercharger IT-Dorno West,45.147743,8.990631,20
 Supercharger-V4 IT-Eboli,40.605544,15.055318
 Supercharger-V4 IT-Emilia-Romagna,44.434137,11.608923
 Supercharger-V4 IT-Enna,37.567516,14.402925
-Supercharger-V4 IT-Fabro,42.873612,12.021168
+Supercharger-V4 IT-Fabro,42.87392,12.0217
 Supercharger-V4 IT-Fano,43.80282,13.01542
 Supercharger-V4 IT-Fidenza,44.8819,10.09415
 Supercharger IT-Firenze,43.810258,11.17798
@@ -4709,6 +4709,7 @@ Supercharger-V3 US-West Palm Beach FL - Palm Beach Outlets,26.72627,-80.0875
 Supercharger-V3 US-Winter Garden FL,28.55216,-81.58403
 Supercharger-V3 US-Winter Park FL,28.60523,-81.36624
 Supercharger-V3 US-Yulee FL,30.62403,-81.6373
+Supercharger-V4 US-Yulee FL Daydream Ave,30.6232,-81.6403
 
 Supercharger US-Acworth GA,34.0758,-84.65233
 Supercharger-V3 US-Adairsville GA,34.3778,-84.91456
@@ -22658,9 +22659,11 @@ TEAG DE-Bad Salzungen Werrastraße,50.81517,10.22884
 TEAG DE-Barchfeld-Immelborn Salzunger Straße,50.79584,10.27514
 TEAG DE-Beeskow Ringstraße,52.17295,14.2518
 TEAG DE-Berga-Wünschendorf Poststraße,50.79527,12.09693
+TEAG DE-Biebertal Fellingshäuser Straße,50.62433,8.596
 TEAG DE-Blankenhain Rudolstädter Straße,50.85501,11.34273
 TEAG DE-Braunlage Hindenburgstraße,51.6643,10.66882
 TEAG DE-Breitungen Frauenbreitunger Weg,50.75931,10.32868
+TEAG DE-Buseck Schwarztorweg,50.62146,8.74938
 TEAG DE-Buseck Schützenweg,50.60715,8.77975
 TEAG DE-Butzbach Kaiserstraße,50.43084,8.66871
 TEAG DE-Coburg Niorter Straße,50.28643,10.98485
