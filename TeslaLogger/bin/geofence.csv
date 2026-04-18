@@ -2008,7 +2008,7 @@ Supercharger-V4 DE-Idar-Oberstein,49.73079,7.3934
 Supercharger-V3 DE-Illertissen,48.21882,10.127614,25
 Supercharger-V4 DE-Ingolstadt,48.774,11.38844
 Supercharger-V3 DE-Irschenberg,47.826678,11.898501
-Supercharger-V4 DE-Irschenberg Nord,47.82784,11.903
+Supercharger-V4 DE-Irschenberg Nord,47.82755,11.9031
 Supercharger-V3 DE-Irxleben,52.17062,11.48491,60
 Supercharger-V4 DE-Jettingen,48.41098,10.44051,40
 Supercharger-V4 DE-Kaiserslautern,49.459907,7.82141
@@ -11526,6 +11526,7 @@ EnBW DE-Ingolstadt Eriagstraße,48.74866,11.47034
 EnBW DE-Ingolstadt Goethestraße,48.77227,11.45188
 EnBW DE-Ingolstadt Isaak-Newton-Straße,48.78263,11.47863
 EnBW DE-Ingolstadt Siemensstraße,48.77877,11.43079
+EnBW DE-Irschenberg Wendling,47.82816,11.90287,25
 EnBW DE-Iserlohn,51.39581,7.69312
 EnBW DE-Isny im Allgäu Maierhöfener Straße,47.6825,10.04044
 EnBW DE-Isny im Allgäu Notre-Dame-de-Gravenchon-Straße,47.69239,10.04105
@@ -11789,7 +11790,7 @@ EnBW DE-Mechernich Hellweg,50.61813,6.6491
 EnBW DE-Meckenbeuren Max-Gutknecht-Straße,47.7087,9.601
 EnBW DE-Meckenheim,50.62705,7.01906
 EnBW DE-Meckesheim Schulstraße,49.3193,8.82115
-EnBW DE-Meerane,50.84163,12.44494,10
+EnBW DE-Meerane Hohe Straße,50.84148,12.4451,30
 EnBW DE-Meerbusch Rewe,51.23693,6.69412
 EnBW DE-Meerbusch Shell,51.2853,6.65962
 EnBW DE-Meersburg Am Stadtgraben,47.69506,9.27312
@@ -13243,8 +13244,7 @@ ESB DE-Eching Sudetenstraße,48.30323,11.61678
 ESB DE-Ettal Linderhof,47.5696,10.9557
 ESB DE-Finsing Hauptstraße,48.22104,11.80228
 ESB DE-Hausham Bahnhofstraße,47.75212,11.83882
-ESB DE-Irschenberg Wendling,47.828,11.90297,10
-ESB DE-Irschenberg Wendling,47.8284,11.9009,10
+ESB DE-Irschenberg Wendling,47.8284,11.9009
 ESB DE-Krün In Elmau,47.46185,11.18738
 ESB DE-Mittenwald Dammkarstraße,47.44096,11.26657
 ESB DE-Mittenwald Schöttlkarstraße,47.44422,11.2647
@@ -14258,7 +14258,7 @@ EWE-GO DE-Marl Freerbruchstraße,51.64476,7.10295,25
 EWE-GO DE-Martfeld Hauptstraße,52.87663,9.06273
 EWE-GO DE-Massen-Niederlausitz Ludwig-Erhard-Straße,51.63656,13.73728
 EWE-GO DE-Mayen Koblenzer Straße,50.3267,7.2443
-EWE-GO DE-Meerane Hohe Straße,50.84176,12.44489,5
+EWE-GO DE-Meerane Hohe Straße,50.84188,12.44464,30
 EWE-GO DE-Meißen Fabrikstraße,51.16499,13.48931
 EWE-GO DE-Melle Industriestraße,52.19041,8.35279
 EWE-GO DE-Menden Hämmerstraße,51.45073,7.75286
@@ -14293,7 +14293,7 @@ EWE-GO DE-Neu Wulmstorf An der Bahn,53.47335,9.78575
 EWE-GO DE-Neu Wulmstorf Schlepelsberg,53.37016,9.80078
 EWE-GO DE-Neubrandenburg Akeleiweg,53.51852,13.26083
 EWE-GO DE-Neuburg an der Donau Am Südpark,48.71999,11.17022
-EWE-GO DE-Neudrossenfeld An der Autobahn,50.03791,11.49021,10
+EWE-GO DE-Neudrossenfeld An der Autobahn,50.03805,11.49018,25
 EWE-GO DE-Neuenburg Ladestraße,53.38715,7.95203
 EWE-GO DE-Neuenburg Westerstederstraße,53.38613,7.95397
 EWE-GO DE-Neuenkirchen Hauptstraße,53.03231,9.70706
@@ -14862,7 +14862,7 @@ Fastned DE-Limburg Süd,50.38002,8.09275,30
 Fastned DE-Melle-West,52.19466,8.31641
 Fastned DE-Michelstadt Walther-Rathenau-Allee,49.69127,9.00318
 Fastned DE-Nersingen,48.41572,10.09919
-Fastned DE-Neudrossenfeld An der Autobahn,50.03775,11.49015,12
+Fastned DE-Neudrossenfeld An der Autobahn,50.0376,11.49004,25
 Fastned DE-Pilsting,48.69198,12.67339
 Fastned DE-Plech Gewerbepark Schönthal,49.66428,11.47079,30
 Fastned DE-Rastplatz Vareler Wald,53.3911,8.1127
