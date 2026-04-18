@@ -1897,7 +1897,7 @@ Supercharger-V3 DE-Böblingen,48.69138,9.00365,55
 Supercharger-V4 DE-Bühl,48.724669,8.110452
 Supercharger-V4 DE-Calw,48.70582,8.76548
 Supercharger-V4 DE-Chemnitz,50.864124,12.867845
-Supercharger-V4 DE-Cottbus,51.71617,14.351694
+Supercharger-V4 DE-Cottbus,51.71605,14.3521
 Supercharger-V4 DE-Darmstadt Kasinostraße,49.88314,8.64662
 Supercharger-V3 DE-Dasing,48.393731,11.070452
 Supercharger-V3 DE-Denkendorf,48.707,9.306556
@@ -2391,7 +2391,7 @@ Supercharger ES-Torrent Northbound,39.400528,-0.491639,20
 Supercharger ES-Torrent Southbound,39.400668,-0.493125,20
 Supercharger-V4 ES-Torrent Toll-l’Alberca,39.42004,-0.50272
 Supercharger-V4 ES-Totana,37.77605,-1.45422
-Supercharger-V4 ES-Trujillo,39.56539,-5.83312
+Supercharger-V4 ES-Trujillo,39.56505,-5.83237
 Supercharger-V3 ES-Valdepeñas,38.779707,-3.388703
 Supercharger-V3 ES-Valencia Paterna,39.543,-0.45147
 Supercharger-V4 ES-Valladolid,41.6275,-4.7895
@@ -2911,6 +2911,7 @@ Supercharger-V3 GB-Newark,53.081144,-0.806543
 Supercharger-V4 GB-Newcastle upon Tyne,55.0276,-1.50943
 Supercharger-V3 GB-Newmarket - Studlands Shopping Park,52.26224,0.39757
 Supercharger-V3 GB-Newport,51.60171,-2.93461
+Supercharger-V4 GB-Newport 2,51.6035,-2.9232
 Supercharger-V3 GB-Newport Pagnell Northbound,52.08235,-0.74848
 Supercharger GB-Newport Pagnell Southbound,52.08433,-0.74837
 Supercharger-V4 GB-Newtown,52.50252,-3.349306
@@ -2953,6 +2954,7 @@ Supercharger-V3 GB-Swansea,51.67865,-3.9942
 Supercharger GB-Tebay Southbound,54.453473,-2.606108
 Supercharger GB-Telford,52.677334,-2.399552
 Supercharger-V4 GB-Telford,52.71772,-2.52476
+Supercharger-V4 GB-Theale,51.4398,-1.07016
 Supercharger-V4 GB-Thorne,53.615719,-0.977078
 Supercharger-V3 GB-Thurrock,51.492427,0.271248
 Supercharger-V4 GB-Todhills,54.951707,-2.97733,30
@@ -3798,6 +3800,7 @@ Supercharger-V4 RO-Buzău,45.164247,26.814282
 Supercharger-V3 RO-Cluj-Napoca Florești,46.753745,23.53266
 Supercharger-V3 RO-Constanța,44.20366,28.63116,65
 Supercharger-V3 RO-Craiova,44.3291,23.77194
+Supercharger-V4 RO-Drobeta Turnu Severin,44.63807,22.634
 Supercharger-V4 RO-Galati,45.45246,28.03385
 Supercharger-V4 RO-Iași,47.151152,27.601632
 Supercharger-V4 RO-Oradea,47.04343,21.8971
@@ -3962,7 +3965,7 @@ Supercharger SI-Kozina,45.60492,13.928521
 Supercharger SI-Kozina,45.607449,13.931531
 Supercharger-V3 SI-Krško,45.93517,15.48299
 Supercharger-V4 SI-Ljubljana,46.05178,14.45206
-Supercharger-V4 SI-Ljubljana East,46.06345,14.54798
+Supercharger-V4 SI-Ljubljana East,46.06383,14.54842
 Supercharger SI-Maribor,46.53291,15.69981,55
 Supercharger-V4 SI-NovoMesto,45.797184,15.181046
 Supercharger-V4 SI-Postojna,45.77099,14.19772
@@ -10387,6 +10390,7 @@ Electra BE-Zandhoven Liersebaan,51.1989,4.64353
 Electra CH-Bern Mingerstrasse,46.9592,7.46917
 Electra CH-Zürich Förrlibuckstrasse,47.39168,8.5165
 Electra DE-Chemnitz Bergstraße,50.84327,12.90854
+Electra DE-Oberhausen Erlenstraße,51.516,6.82108
 Electra ES-Sant Cugat Shopping Center,41.48302,2.0529
 Electra FR-Aire de Arzens,43.21972,2.21619,30
 Electra FR-Aire de Bages,43.1137,2.9545
@@ -10684,8 +10688,6 @@ EnBW DE-Achern Fautenbacher Straße,48.6276,8.05692
 EnBW DE-Achern Güterhallenstraße,48.62889,8.06168
 EnBW DE-Adelsheim Marktstraße,49.40386,9.39035
 EnBW DE-Adorf/Vogtland Karlsgasse,50.3154,12.2572
-EnBW DE-Aggertal Nord,50.95168,7.31797
-EnBW DE-Aggertal Süd,50.9518,7.32067
 EnBW DE-Aglasterhausen Im oberen Tal,49.34722,8.98414
 EnBW DE-Ahaus Düwing Dyk,52.06971,6.98699
 EnBW DE-Ahaus Euronics,52.07487,6.99634
@@ -12038,6 +12040,8 @@ EnBW DE-Rasthof Ob der Tauber West,49.6267,9.72813
 EnBW DE-Rasthof Seligweiler,48.45686,10.0296,15
 EnBW DE-Rastplatz Bad Camberg Ost,50.30145,8.23656
 EnBW DE-Rastplatz Hohenstein,51.2902,6.80453
+EnBW DE-Raststätte Aggertal Nord,50.95162,7.318
+EnBW DE-Raststätte Aggertal Süd,50.95184,7.32062
 EnBW DE-Raststätte Bruchsal Ost,49.16299,8.57098,12
 EnBW DE-Raststätte Bruchsal West,49.16091,8.56703,8
 EnBW DE-Raststätte Denkendorf Nord,48.69386,9.30373,15
@@ -13194,7 +13198,7 @@ enviaM DE-Herzberg Wilhelm-Pieck-Ring,51.69303,13.22887
 enviaM DE-Hoym Ascherslebener Straße,51.78514,11.32836
 enviaM DE-Klostermansfeld Bahnhofstraße,51.5756,11.4942
 enviaM DE-Kolkwitz Annahofer Graben,51.71787,14.2885
-enviaM DE-Köthen (Anhalt) Dessauer Straße,51.76431,11.98611
+enviaM DE-Köthen (Anhalt) Dessauer Straße,51.7643,11.9861,30
 enviaM DE-Leuna NOVA,51.3461,12.17607
 enviaM DE-Limbach-Oberfrohna Johann-Esche-Straße,50.84695,12.78807
 enviaM DE-Markkleeberg Dietrich-Bonhoeffer-Platz,51.28296,12.36972
@@ -14165,6 +14169,7 @@ EWE-GO DE-Köln Venloer Straße,50.95803,6.90239
 EWE-GO DE-Köngen Christian-Eisele-Straße,48.67764,9.36613
 EWE-GO DE-Königsbrunn Haunstetter Straße,48.28967,10.89698
 EWE-GO DE-Königswinter Königswinterer Straße,50.68519,7.27479
+EWE-GO DE-Köthen (Anhalt) Dessauer Straße,51.76452,11.98663,30
 EWE-GO DE-Künzelsau Würzburger Straße,49.28892,9.67825
 EWE-GO DE-Laatzen Karlsruher Straße,52.31758,9.79743,20
 EWE-GO DE-Laatzen Kieler Straße,52.29618,9.82108
