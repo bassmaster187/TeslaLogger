@@ -6693,7 +6693,7 @@ Aldi DE-Wiesbaden-Dotzheim Am Hang,50.07933,8.20186
 Aldi DE-Wilhelmshaven Posener Straße,53.57357,8.08479
 Aldi DE-Wittlich Gottlieb-Daimler-Straße,49.98081,6.90328
 Aldi DE-Wolfsburg Alte Schulstraße,52.46387,10.85216
-Aldi DE-Wölfersheim-Berstadt Benzstraße,50.42206,8.85631
+Aldi DE-Wölfersheim Benzstraße,50.4221,8.85628
 Aldi DE-Wöllstein In der Krummgewann,49.82322,7.97459
 Aldi DE-Wörnitz,49.25937,10.24192
 Aldi DE-Zimmern ob Rottweil Raiffeisenstraße,48.17144,8.57428
@@ -13978,6 +13978,7 @@ EWE-GO DE-Friesoythe Großer-Kamp-Ost,53.02755,7.8539
 EWE-GO DE-Friesoythe Tecklenburger Straße,53.01848,7.862
 EWE-GO DE-Friesoythe Thüler Straße,53.01723,7.8586
 EWE-GO DE-Friesoythe Willlohstraße,53.02312,7.86322
+EWE-GO DE-Fritzlar Alte Wildunger Stra0e,51.12096,9.27645
 EWE-GO DE-Fürstenau Werner-von-Siemens-Straße,52.5146,7.68751
 EWE-GO DE-Fürstenwalde Alte Langewahler Chaussee,52.33733,14.07626
 EWE-GO DE-Gaggenau Murgtalstraße,48.82223,8.29544
@@ -14689,6 +14690,7 @@ EWE-SWB DE-Illertissen,48.21952,10.12672,10
 EWE-SWB DE-Marktrodach,50.25635,11.39746
 
 EWF DE-Bad Wildungen Ziergartenstraße,51.10975,9.0787
+EWF DE-Fritzlar Allee,51.1335,9.27287
 EWF DE-Willingen (Upland) Zur Hoppecke,51.29154,8.60376
 
 EWII DK-Blåvand Tane Hedevej,55.55573,8.13747
@@ -16863,6 +16865,7 @@ JET AT-Linz Freistädter Straße,48.3283,14.32136
 JET AT-Villach Badstubenweg,46.63153,13.82448
 JET AT-Wien Laxenburger Straße,48.1358,16.35648
 JET AT-Wiener Neustadt Puchberger Straße,47.8055,16.21124,30
+JET DE-Bayreuth Justus-Liebig-Straße,49.93345,11.5628
 JET DE-Bielefeld Eckendorfer Straße,52.03283,8.55265
 JET DE-Füssen Kemptener Straße,47.5686,10.6885
 JET DE-Giengen an der Brenz Frostelstraße,48.61098,10.21074
@@ -21871,6 +21874,8 @@ Spirii DE-Langballig Strandweg,54.8216,9.65523
 Spirii DK-Hanstholm Kai Lindbergs Gade,57.1178,8.5972
 Spirii DK-Nexø Toldbodgade,55.06235,15.13357
 
+Spreewald-Energy DE-Senftenberg Am Niemtscher Weg,51.49564,14.05136
+
 SSN DE-Schwerin Eckdrift,53.59525,11.39403
 
 Stark DE-Scharbeutz Bormwiese,54.05472,10.73083
@@ -21921,6 +21926,7 @@ StromTankstelle DE-Bad Hindelang Dorfstraße,47.50348,10.38436
 StromTankstelle DE-Waltenhofen Ahornweg,47.68294,10.30878
 
 Stöhr-Energie DE-Mainz Am Sportfeld,50.008,8.21067
+Stöhr-Energie DE-Mainz Bürgermeister-Alexander-Straße,50.0095,8.21775
 
 SVG DE-Merenberg Autohof Benzstraße,50.49926,8.18562
 
@@ -22685,7 +22691,7 @@ TEAG DE-Erfurt Schwerborner Straße,51.01232,11.03976
 TEAG DE-Erfurt Weimarische Straße,50.97702,11.10642,25
 TEAG DE-Erfurt Zentrale,51.01493,11.04118
 TEAG DE-Friedberg (Hessen) Dorheim Am Hollerberg,50.35394,8.78652,70
-TEAG DE-Fritzlar Auf der Lache,51.12084,9.27672
+TEAG DE-Fritzlar Auf der Lache,51.12152,9.27738
 TEAG DE-Fritzlar Wolfhager Straße,51.13691,9.27362
 TEAG DE-Gebesee Robert-Koch-Straße,51.11313,10.93305
 TEAG DE-Gebesee Siedlungsweg,51.10962,10.92961
@@ -22765,6 +22771,7 @@ TEAG DE-Weimar Lyonel-Feininger-Straße,50.9634,11.32008
 TEAG DE-Wetzlar Am Trauar,50.56126,8.48367
 TEAG DE-Wildeck Zum Dönges,50.95424,10.02163
 TEAG DE-Wurzen Dresdener Straße,51.36575,12.74701
+TEAG DE-Wölfersheim Industriestraße,50.42206,8.8563
 TEAG DE-Zella-Mehlis An der Quelle,50.64378,10.68513,14
 TEAG DE-Zeulenroda-Triebes Am Waldstadion,50.66135,11.99586
 
