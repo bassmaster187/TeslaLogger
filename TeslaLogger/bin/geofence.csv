@@ -2006,7 +2006,7 @@ Supercharger-V3 DE-Hilpoltstein,49.16096,11.26101,120
 Supercharger-V4 DE-Hirschberg,49.50738,8.63752,40
 Supercharger-V4 DE Hockenheim,49.33742,8.53313
 Supercharger-V4 DE-Hofheim am Taunus,50.05733,8.40944
-Supercharger DE-Hohenwarsleben,52.17406,11.49452
+Supercharger DE-Hohenwarsleben,52.17406,11.49452,40
 Supercharger-V3 DE-Holdorf,52.597843,8.11891
 Supercharger-V3 DE-Holzkirchen,47.881386,11.701631
 Supercharger-V4 DE-Holzkirchen Nord,47.890637,11.721419
@@ -6807,6 +6807,7 @@ Allego DE-Aachen Rotter Bruch,50.78113,6.1278
 Allego DE-Achim Fritz-Lieken-Eck,53.01666,9.03378
 Allego DE-Ahrensfelde Landsberger Chaussee,52.54864,13.59913
 Allego DE-Aichstetten,47.88045,10.0406,7
+Allego DE-Alsfeld An der Hessenhalle,50.73725,9.24722
 Allego DE-Altenburg,51.0087,12.45353
 Allego DE-Alzey Karl-Heinz-Kipp-Straße,49.74712,8.13765
 Allego DE-Ampfing Waldkraiburger Straße,48.2476,12.41208
@@ -11672,7 +11673,7 @@ EnBW DE-Kassel,51.34164,9.47934
 EnBW DE-Kassel Kronenackerstraße,51.27329,9.44196
 EnBW DE-Kastellaun Johann-Sebastian-Bach-Straße,50.06577,7.44404
 EnBW DE-Kastellaun Perlengasse,50.07247,7.44113
-EnBW DE-Katzenfurt Süd,50.62028,8.36336,10
+EnBW DE-Katzenfurt Süd,50.62028,8.36336,11
 EnBW DE-Kaufbeuren Apfeltranger Straße,47.87786,10.61475
 EnBW DE-Kavelstorf Zur Radewiese,54.0117,12.1998
 EnBW DE-Kehl Straßburger Straße,48.57677,7.81681
@@ -16405,11 +16406,7 @@ Ionity DE-Bayerischer Wald Süd,48.93104,12.70542
 Ionity DE-Bernau am Chiemsee Theodor-Sanne-Straße,47.81531,12.36654
 Ionity DE-Bochum,51.47408,7.15143
 Ionity DE-Bornheim Carl-Benz-Straße,50.76207,7.02958
-Ionity DE-Brohltal Ost,50.44047,7.22563
-Ionity DE-Brohltal West,50.44153,7.22398
 Ionity DE-Bruchsal Molzaustraße,49.14018,8.55867
-Ionity DE-Buddikate Ost,53.6944,10.32474
-Ionity DE-Buddikate West,53.69256,10.32043
 Ionity DE-Castrop Rauxel Grutholzallee,51.56634,7.31754
 Ionity DE-Delmenhorst Niedersachsendamm,53.03216,8.65478
 Ionity DE-Dettelbach Mainfrankenpark,49.77798,10.06877,30
@@ -16423,6 +16420,7 @@ Ionity DE-Ellwangen Max-Eyth-Straße,48.95667,10.18367
 Ionity DE-Erfurt Dubliner Straße,51.01229,10.98809
 Ionity DE-Euro Rastpark Guxhagen,51.20283,9.46872,30
 Ionity DE-Euro Rastpark Himmelkron,50.05586,11.6091
+Ionity DE-Euro Rastpark Hohenwarsleben,52.1739,11.49512,11
 Ionity DE-Feucht Wendelsteiner Straße,49.36565,11.20737,20
 Ionity DE-Frankenhöhe Nord,49.24263,10.35294
 Ionity DE-Frankenhöhe Süd,49.24115,10.35612
@@ -16439,7 +16437,6 @@ Ionity DE-Harz West,51.92803,10.14173
 Ionity DE-Heiligengrabe Liebenthaler Dorfstraße,53.14752,12.3989
 Ionity DE-Herne Holsterhauser Straße,51.52873,7.19984
 Ionity DE-Herrenberg Hewlett-Packard-Straße,48.58196,8.89197
-Ionity DE-Hohenwarsleben,52.1739,11.49512,11
 Ionity DE-Holzkirchen Nord,47.89221,11.73128
 Ionity DE-Holzkirchen Süd,47.90657,11.71738
 Ionity DE-Illertissen,48.21923,10.12784,25
@@ -16486,9 +16483,13 @@ Ionity DE-Rastplatz Bad Camberg West,50.29989,8.23474,20
 Ionity DE-Raststätte Aachener Land Nord,50.81772,6.2139,20
 Ionity DE-Raststätte Aachener Land Süd,50.81736,6.21673
 Ionity DE-Raststätte Aalbek,54.09267,9.9291,25
+Ionity DE-Raststätte Brohltal Ost,50.44047,7.22563
+Ionity DE-Raststätte Brohltal West,50.44153,7.22398
 Ionity DE-Raststätte Brokenlande,54.01422,9.9333,20
 Ionity DE-Raststätte Bruchsal Ost,49.16265,8.57075,30
 Ionity DE-Raststätte Bruchsal West,49.16115,8.56717,23
+Ionity DE-Raststätte Buddikate Ost,53.69417,10.3246,36
+Ionity DE-Raststätte Buddikate West,53.69256,10.32043
 Ionity DE-Raststätte Dammer Berge Ost,52.53915,8.11491,30
 Ionity DE-Raststätte Dammer Berge West,52.54077,8.1129,25
 Ionity DE-Raststätte Demminer Land,53.85567,13.33334,25
@@ -18965,6 +18966,7 @@ Mer DE-Paderborn Frankfurter Weg,51.69773,8.73246
 Mer DE-Passau Grünaustraße,48.57285,13.45445
 Mer DE-Pattensen Ludwig-Erhard-Straße,52.2686,9.77704
 Mer DE-Rastanlage Ohrenbach Ost,49.4857,10.21286,20
+Mer DE-Raststätte Buddikate Ost,53.6945,10.32498,10
 Mer DE-Raststätte Großenmoor,50.71214,9.66105
 Mer DE-Raststätte Großenmoor,50.71401,9.66115
 Mer DE-Raststätte Holmmoor Ost,53.71708,9.93998
@@ -19594,6 +19596,7 @@ Norlys DK-Viborg Feltbanen,56.45979,9.40111
 
 NOXO PL-Bełk Główna,50.13117,18.6888
 NOXO PL-Oświęcim Leszczyńskiej,50.0288,19.19825
+NOXO PL-Zator aleja 3 Maja,49.99902,19.41252
 
 NRMA AU-Armidale NSW Marsh St,-30.51188,151.66967
 NRMA AU-Balranald NSW Market St,-34.63953,143.5647
