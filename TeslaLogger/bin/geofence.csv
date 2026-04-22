@@ -6516,7 +6516,7 @@ Aldi DE-Frankfurt West-Höchster Straße,50.09194,8.50331
 Aldi DE-Frechen Aachener Straße,50.93707,6.77959
 Aldi DE-Freiburg Heckerstraße,47.98906,7.80017
 Aldi DE-Freiburg im Breisgau Basler Straße,47.98458,7.81953
-Aldi DE-Freiburg im Breisgau Tullastraße,48.0225,7.85101
+Aldi DE-Freiburg im Breisgau Tullastraße,48.0225,7.851
 Aldi DE-Freudenberg Weibeweg,50.90472,7.88667
 Aldi DE-Friedberg,48.40661,10.95126,10
 Aldi DE-Fußgönheim Am Weisenheimer Weg,49.46767,8.28628
@@ -7681,6 +7681,7 @@ ARAL DE-Halle (Saale) Dessauer Platz,51.49764,11.98223
 ARAL DE-Halle (Saale) Eislebener Chaussee,51.47139,11.90558
 ARAL DE-Hamburg Bremer Straße,53.4386,9.93612
 ARAL DE-Hamburg Dehnhaide,53.57945,10.04504
+ARAL DE-Hamburg Eiffestraße,53.55143,10.052
 ARAL DE-Hamburg Großmannstraße,53.53646,10.06487
 ARAL DE-Hamburg Langenhorner Chaussee,53.63884,10.0131
 ARAL DE-Hamburg Nettelnburger Landweg,53.48673,10.184
@@ -10895,7 +10896,6 @@ EnBW DE-Bad Kreuznach Bosenheimer Straße,49.84708,7.88475
 EnBW DE-Bad Kreuznach Mainzer Straße,49.85531,7.8968
 EnBW DE-Bad Krozingen Im Unteren Stollen,47.92467,7.70232
 EnBW DE-Bad Lauchstädt,51.38563,11.87943
-EnBW DE-Bad Lidl,47.55312,7.93475
 EnBW DE-Bad Marienberg (Westerwald) An der Lehmkaute,50.65829,7.96629
 EnBW DE-Bad Nauheim Hubert-Vergölst-Straße,50.36128,8.7549
 EnBW DE-Bad Nenndorf Bückethaler Straße,52.33473,9.40125
@@ -10918,6 +10918,7 @@ EnBW DE-Bad Schönborn Hermann-Löns-Straße,49.22514,8.65424
 EnBW DE-Bad Segeberg,53.92544,10.31909
 EnBW DE-Bad Sooden-Allendorf,51.26711,9.9702
 EnBW DE-Bad Staffelstein Lichtenfelser Straße,50.10461,11.00637
+EnBW DE-Bad Säckingen Tullastraße,47.55312,7.93475
 EnBW DE-Bad toom,47.55382,7.9305
 EnBW DE-Bad Urach Beim Tiergarten,48.49114,9.39753
 EnBW DE-Bad Urach Im Greuth,48.49193,9.40108
@@ -11943,8 +11944,8 @@ EnBW DE-Mühlhausen/Thüringen Ammersche Landstraße,51.22307,10.45446
 EnBW DE-Mühlhausen/Thüringen Rudolf-Breitscheid-Straße,51.20546,10.46897
 EnBW DE-Mühlheim an der Donau Alter Schulplatz,48.02267,8.88875
 EnBW DE-Mühlingen Hauptstraße,47.91288,9.01764
-EnBW DE-Mülheim an der Ruhr Lidl,51.43097,6.86094
 EnBW DE-Mülheim an der Ruhr Mannesmannallee,51.45742,6.88145,20
+EnBW DE-Mülheim an der Ruhr Weseler Straße,51.43097,6.86094
 EnBW DE-Mülheim-Kärlich In der Pützgewann,50.39712,7.51244,25
 EnBW DE-Münchberg August-Horch-Straße,50.20244,11.77964
 EnBW DE-Münchberg Theodor-Heuss-Straße,50.18976,11.7771
@@ -12082,6 +12083,7 @@ EnBW DE-Pfinztal Römerstraße 8,48.99332,8.54475
 EnBW DE-Pforzheim Konstanzer Straße,48.89893,8.66889
 EnBW DE-Pforzheim Nord,48.90802,8.7737,20
 EnBW DE-Pforzheim Rastatter Straße,48.89976,8.66728
+EnBW DE-Pfullingen Karl-von-Drais-Straße,48.4812,9.2305
 EnBW DE-Pfullingen Schloßstraße,48.46581,9.22172
 EnBW DE-Pfungstadt Ost,49.81211,8.57927
 EnBW DE-Pfungstadt West,49.81247,8.57696
@@ -17924,16 +17926,16 @@ Lidl DE-Berlin-Charlottenburg-Wilmersdorf Fürstenbrunner Weg,52.52033,13.28036
 Lidl DE-Berlin-Charlottenburg-Wilmersdorf Gervinusstraße,52.50265,13.29787
 Lidl DE-Berlin-Friedrichshain Markgrafendamm 25C,52.50049,13.46556
 Lidl DE-Berlin-Lichtenberg-HsH Indira-Gandhi-Straße,52.54653,13.46882
-Lidl DE-Berlin-LOntarioseestraße,52.49485,13.5233
-Lidl DE-Berlin-Marzahn-Hellersdorf Havemannstraße 1,52.56976,13.5694
-Lidl DE-Berlin-Marzahn-Hellersdorf Prötzeler Ring 8,52.54607,13.57538
-Lidl DE-Berlin-Marzahn-Hellersdorf Rastatter Straße 3,52.49029,13.60649
-Lidl DE-Berlin-Mitte Prinzenallee 75-77,52.55501,13.3833
+Lidl DE-Berlin-Marzahn-Hellersdorf Havemannstraße,52.56976,13.5694
+Lidl DE-Berlin-Marzahn-Hellersdorf Prötzeler Ring,52.54607,13.57538
+Lidl DE-Berlin-Marzahn-Hellersdorf Rastatter Straße,52.4903,13.6065
+Lidl DE-Berlin-Mitte Prinzenallee,52.555,13.3833
 Lidl DE-Berlin-Mitte Provinzstraße,52.56554,13.3784
 Lidl DE-Berlin-Mitte Quitzowstraße,52.53565,13.35312
 Lidl DE-Berlin-Mitte Reinickendorfer Straße,52.54904,13.36991
 Lidl DE-Berlin-Neukölln Maybachufer,52.49206,13.43203
 Lidl DE-Berlin-Neukölln Späthstraße,52.45302,13.45406
+Lidl DE-Berlin-Ontarioseestraße,52.49485,13.5233
 Lidl DE-Berlin-Pankow Bornholmer Straße,52.55436,13.40062
 Lidl DE-Berlin-Pankow Eldenaer Straße,52.5206,13.46824
 Lidl DE-Berlin-Pankow Grabbeallee 27/29,52.57389,13.39895
@@ -18026,7 +18028,7 @@ Lidl DE-Ebersdorf-Frohnlach Kellergasse 31/B 303,50.21431,11.08851
 Lidl DE-Eging am See Vilshofener Straße,48.7089,13.26247
 Lidl DE-Ehningen Bühlallee 2,48.66143,8.93892
 Lidl DE-Eisenach Clemdastraße,50.98042,10.32276
-Lidl DE-Eitorf Siegstraße 125,50.773,7.4633
+Lidl DE-Eitorf Siegstraße,50.773,7.4633
 Lidl DE-Ellwangen (Jagst) Haller Straße 73,48.97106,10.11968
 Lidl DE-Elsterwerda Schillerstraße,51.46437,13.52533
 Lidl DE-Emden-Constantia Teutonenstraße 1,53.36773,7.18845
@@ -21411,7 +21413,7 @@ Shell DE-Frankfurt am Main Mörfelder Landstraße,50.08887,8.66907
 Shell DE-Frankfurt am Main Niederräder Ufer,50.08848,8.63574
 Shell DE-Frankfurt Hanauer Landstraße,50.12249,8.74267
 Shell DE-Freiburg Habsburger Straße,48.01063,7.85494
-Shell DE-Freiburg Tullastraße,48.02231,7.84965
+Shell DE-Freiburg im Breisgau Tullastraße,48.0221,7.8503,30
 Shell DE-Fulda Frankfurter Straße,50.53008,9.67685
 Shell DE-Fürstenwalde Trebuser Straße,52.36881,14.05982
 Shell DE-Gau-Algesheim Rheinstraße,49.97166,8.02314,30
