@@ -2234,6 +2234,7 @@ Supercharger-V4 DE-Wustermark - Karls Erlebnis-Dorf,52.533747,12.997335,40
 Supercharger-V4 DE-Wörnitz,49.2605,10.24255
 Supercharger-V3 DE-Wörrstadt,49.84007,8.14423,53
 Supercharger-V3 DE-Wörth an der Isar,48.625626,12.320216
+Supercharger-V4 DE-Würzburg,49.76845,9.94014
 Supercharger-V3 DE-Zella-Mehlis,50.64359,10.68472
 Supercharger-V3 DE-Zusmarshausen,48.40787,10.59944,30
 Supercharger-V3 DE-Zweibrücken,49.230727,7.40817
@@ -2603,7 +2604,7 @@ Supercharger-V4 FR-Gallargues-le-Montueux,43.718654,4.180118
 Supercharger-V3 FR-Gap,44.569565,6.104458
 Supercharger-V4 FR-Gassin,43.263006,6.580338
 Supercharger-V4 FR-Goussainville,49.021048,2.467801
-Supercharger-V4 FR-Herblay,49.007172,2.169541
+Supercharger-V4 FR-Herblay,49.0063,2.1692
 Supercharger-V3 FR-Honfleur,49.414069,0.266165,55
 Supercharger-V4 FR-Ile Rousse,42.628838,8.923582
 Supercharger FR-La Léchère-les-Bains,45.51877,6.482522
@@ -2734,6 +2735,7 @@ Supercharger-V3 FR-Sisteron Val de Durance,44.236374,5.913113
 Supercharger FR-Strasbourg,48.53407,7.70201
 Supercharger-V4 FR-Séméac,43.2288,0.09604
 Supercharger-V4 FR-Sénas,43.741478,5.088358
+Supercharger-V4 FR-Tarbes,43.23512,0.04586
 Supercharger-V4 FR-Taverny,49.025854,2.198438
 Supercharger-V4 FR-Terville,49.347684,6.125626
 Supercharger-V4 FR-Thiais,48.75465,2.37306
@@ -3694,7 +3696,7 @@ Supercharger-V3 NO-Trondheim,63.441755,10.457297
 Supercharger-V4 NO-Trondheim Tiller,63.35446,10.37527
 Supercharger-V3 NO-Trysil,61.315993,12.264412
 Supercharger-V4 NO-Tvedestrand,58.62814,8.91712
-Supercharger-V4 NO-Tønsberg,59.27267,10.42835
+Supercharger-V4 NO-Tønsberg,59.27255,10.42854
 Supercharger-V3 NO-Varangerbotn,70.171763,28.555617
 Supercharger-V3 NO-Veggli,60.04024,9.15518
 Supercharger-V3 NO-Verdal,63.79299,11.489223
@@ -15319,6 +15321,7 @@ GOFAST CH-Embrach Hardhofstrasse,47.51642,8.59491
 GOFAST CH-Hendschinken Hornerstrasse,47.38967,8.20439
 GOFAST CH-Hinwil Wässeristrasse,47.30504,8.8239
 GOFAST CH-Horgen Zugerstrasse,47.23816,8.61151
+GOFAST CH-Ingenbohl Gätzlistrasse,47.00362,8.62
 GOFAST CH-Kloten Flughafenstrasse,47.44886,8.5658
 GOFAST CH-Köniz Könizstrasse,46.92611,7.41689
 GOFAST CH-Lyssach Kernenriedstrasse,47.07016,7.56645
@@ -23879,6 +23882,7 @@ Wien-Energie AT-Wien Klanggasse,48.22257,16.38217
 Wien-Energie AT-Wien Koberweingasse,48.20001,16.31728
 Wien-Energie AT-Wien Lerchenfelder Straße,48.2071,16.34592
 Wien-Energie AT-Wien Liesinger Platz,48.1356,16.28382
+Wien-Energie AT-Wien Linzer Straße,48.1919,16.31684
 Wien-Energie AT-Wien Margaretengürtel,48.18015,16.3521
 Wien-Energie AT-Wien Martinstraße,48.22019,16.34015
 Wien-Energie AT-Wien Montleartstraße,48.2109,16.30451
