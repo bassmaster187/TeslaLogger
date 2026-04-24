@@ -31,6 +31,7 @@ namespace TeslaLogger
         }
 
         private static WebServer webServer;
+        private static McpServer mcpServer;
         private static bool OVMSStarted; // defaults to false;
 
         private static void Main(string[] _)
@@ -67,6 +68,8 @@ namespace TeslaLogger
                 InitConnectToDB();
 
                 InitWebserver();
+
+                InitMcpServer();
 
                 InitOpenTopoDataService();
 
@@ -362,6 +365,20 @@ namespace TeslaLogger
             {
                 ex.ToExceptionless().FirstCarUserID().Submit();
                 Logfile.Log(ex.ToString());
+            }
+        }
+
+        private static void InitMcpServer()
+        {
+            try
+            {
+                mcpServer = new McpServer();
+                mcpServer.Start();
+            }
+            catch (Exception ex)
+            {
+                ex.ToExceptionless().FirstCarUserID().Submit();
+                Logfile.Log("MCP Server init error: " + ex.ToString());
             }
         }
 
