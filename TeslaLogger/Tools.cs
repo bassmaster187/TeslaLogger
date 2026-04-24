@@ -2470,7 +2470,7 @@ WHERE
                 }
 
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 // Logfile.Log(ex.ToString());
             }

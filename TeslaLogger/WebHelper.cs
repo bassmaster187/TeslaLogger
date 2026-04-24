@@ -399,7 +399,7 @@ namespace TeslaLogger
         public virtual string GetToken()
         {
             string resultContent = "";
-            MatchCollection m;
+            // MatchCollection m;
 
             try
             {

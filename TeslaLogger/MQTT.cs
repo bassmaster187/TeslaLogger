@@ -573,7 +573,7 @@ namespace TeslaLogger
             }
             string name = car.DisplayName;
             string sw = car.CurrentJSON.current_car_version;
-            string type = "sensor";
+            // string type = "sensor";
 
             foreach (string entity in MQTTAutoDiscovery.autoDiscovery.Keys)
             {
