@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Net;
+using System.Net.Http;
 using System.Threading;
 using System.Text.RegularExpressions;
 using Exceptionless;
@@ -37,6 +38,7 @@ namespace TeslaLogger
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1031:Keine allgemeinen Ausnahmetypen abfangen", Justification = "<Pending>")]
     internal class MQTT
     {
+        private static readonly HttpClient httpClient = new HttpClient();
         private static MQTT _Mqtt;
 
         private string clientid;
@@ -362,10 +364,7 @@ namespace TeslaLogger
                     string command = m.Groups[2].Captures[0].ToString();
                     try
                     {
-                        using (WebClient wc = new WebClient())
-                        {
-                            string json = wc.DownloadString($"http://localhost:{httpport}/command/{vin}/{command}?{msg}");
-                        }
+                        string json = httpClient.GetStringAsync($"http://localhost:{httpport}/command/{vin}/{command}?{msg}").GetAwaiter().GetResult();
                     }
                     catch (Exception ex)
                     {
@@ -739,18 +738,13 @@ namespace TeslaLogger
     internal class MQTTWebDownloader : IWebDownloader
     {
         private static IWebDownloader _instance;
+        private static readonly HttpClient httpClient = new HttpClient();
 
         public static IWebDownloader GetSingleton() => _instance ?? (_instance = new MQTTWebDownloader());
 
         public string DownloadString(string url)
         {
-            string json;
-            using (WebClient wc = new WebClient())
-            {
-                json = wc.DownloadString(url);
-            }
-
-            return json;
+            return httpClient.GetStringAsync(url).GetAwaiter().GetResult();
         }
     }
 

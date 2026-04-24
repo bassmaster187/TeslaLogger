@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -13,6 +14,8 @@ namespace MQTTClient
 {
     class Program
     {
+        private static readonly HttpClient httpClient = new HttpClient();
+
         static void Main(string[] args)
         {
             string clientid = "6333abad-51f4-430d-9ba5-0047602612d1";
@@ -116,11 +119,7 @@ namespace MQTTClient
 
                     foreach (int car in allCars)
                     {
-                        string temp = null;
-                        using (WebClient wc = new WebClient())
-                        {
-                            temp = wc.DownloadString("http://localhost:5000/currentjson/" + car);
-                        }
+                        string temp = httpClient.GetStringAsync("http://localhost:5000/currentjson/" + car).GetAwaiter().GetResult();
 
                         if (!lastjson.ContainsKey(car) || temp != lastjson[car])
                         {
@@ -168,11 +167,8 @@ namespace MQTTClient
             {
                 try
                 {
-                    using (WebClient wc = new WebClient())
-                    {
-                        json = wc.DownloadString("http://localhost:5000/getallcars");
-                        break;
-                    }
+                    json = httpClient.GetStringAsync("http://localhost:5000/getallcars").GetAwaiter().GetResult();
+                    break;
                 }
                 catch (Exception ex)
                 {

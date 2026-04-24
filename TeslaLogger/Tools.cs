@@ -1299,9 +1299,9 @@ namespace TeslaLogger
                     if (Tools.IsDocker())
                     {
                         string temp = null;
-                        using (WebClient wc = new WebClient())
+                        using (HttpClient httpClient = new HttpClient())
                         {
-                            temp = wc.DownloadString("http://grafana:3000/api/health");
+                            temp = httpClient.GetStringAsync("http://grafana:3000/api/health").GetAwaiter().GetResult();
                             dynamic j = JsonConvert.DeserializeObject(temp);
                             return j["version"];
                         }
@@ -1311,15 +1311,18 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
-                if (ex is WebException we)
+                if (ex is HttpRequestException hre)
                 {
-                    if (we.Status == WebExceptionStatus.NameResolutionFailure)
+                    if (hre.InnerException is SocketException se)
                     {
-                        return "NRF";
-                    }
-                    else if (we.Status == WebExceptionStatus.ConnectFailure)
-                    {
-                        return "CF";
+                        if (se.SocketErrorCode == SocketError.HostNotFound)
+                        {
+                            return "NRF";
+                        }
+                        else if (se.SocketErrorCode == SocketError.ConnectionRefused)
+                        {
+                            return "CF";
+                        }
                     }
                 }
 

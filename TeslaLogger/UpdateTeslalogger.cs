@@ -1397,10 +1397,11 @@ PRIMARY KEY(id)
                     {
                         File.Delete(updatepackage);
                     }
-                    using (WebClient wc = new WebClient())
+                    using (HttpClient httpClient = new HttpClient())
                     {
                         Logfile.Log($"downloading update package from {GitHubURL}");
-                        wc.DownloadFile(GitHubURL, updatepackage);
+                        byte[] zipBytes = httpClient.GetByteArrayAsync(GitHubURL).GetAwaiter().GetResult();
+                        File.WriteAllBytes(updatepackage, zipBytes);
                         Logfile.Log($"update package downloaded to {updatepackage}");
                         httpDownloadSuccessful = true;
 

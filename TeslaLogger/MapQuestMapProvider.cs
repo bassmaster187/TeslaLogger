@@ -2,6 +2,7 @@ using System;
 using System.Data;
 using System.IO;
 using System.Net;
+using System.Net.Http;
 using System.Text;
 using System.Threading;
 using Exceptionless;
@@ -11,8 +12,8 @@ namespace TeslaLogger
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1031:Keine allgemeinen Ausnahmetypen abfangen", Justification = "<Pending>")]
     public class MapQuestMapProvider : StaticMapProvider
     {
-        WebClient _webClient;
-        SemaphoreSlim _webClientLock = new SemaphoreSlim(1, 1);
+        HttpClient _httpClient;
+        SemaphoreSlim _httpClientLock = new SemaphoreSlim(1, 1);
         static bool invalidAppKey; // defaults to false;
 
 
@@ -45,28 +46,15 @@ namespace TeslaLogger
 
             try
             {
-                using (WebClient webClient = new WebClient())
-                {
-                    webClient.Headers.Add("User-Agent: TeslaLogger");
-                    webClient.Headers.Add("Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9");
+                if (!DownloadFile(url, filename))
+                    return;
 
-                    // Download the Web resource and save it into the current filesystem folder.
-                    webClient.DownloadFile(url, filename);
-
-                    Logfile.Log("Create File: " + filename);
-                }
+                Logfile.Log("Create File: " + filename);
 
                 System.Threading.Thread.Sleep(500);
             }
             catch (Exception ex)
             {
-                var wex = ex as WebException;
-                if (wex != null)
-                {
-                    if (IsInvalidAppKey(wex))
-                        return;
-                }
-
                 ex.ToExceptionless().FirstCarUserID().Submit();
 
                 System.Diagnostics.Debug.WriteLine(ex.ToString());
@@ -104,28 +92,15 @@ namespace TeslaLogger
 
             try
             {
-                using (WebClient webClient = new WebClient())
-                {
-                    webClient.Headers.Add("User-Agent: TeslaLogger");
-                    webClient.Headers.Add("Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9");
+                if (!DownloadFile(url, filename))
+                    return;
 
-                    // Download the Web resource and save it into the current filesystem folder.
-                    webClient.DownloadFile(url, filename);
-
-                    Logfile.Log("Create File: " + filename);
-                }
+                Logfile.Log("Create File: " + filename);
 
                 System.Threading.Thread.Sleep(500);
             }
             catch (Exception ex)
             {
-                var wex = ex as WebException;
-                if (wex != null)
-                {
-                    if (IsInvalidAppKey(wex))
-                        return;
-                }
-
                 ex.ToExceptionless().FirstCarUserID().Submit();
 
                 System.Diagnostics.Debug.WriteLine(ex.ToString());
@@ -213,11 +188,9 @@ namespace TeslaLogger
 
             try
             {
+                if (!DownloadFile(url, filename))
+                    return;
 
-                var webClient = GetWebClient();
-
-                // Download the Web resource and save it into the current filesystem folder.
-                webClient.DownloadFile(url, filename);
                 Logfile.Log("Create File: " + filename);
                 
 
@@ -225,13 +198,6 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
-                var wex = ex as WebException;
-                if (wex != null)
-                {
-                    if (IsInvalidAppKey(wex))
-                        return;
-                }
-
                 ex.ToExceptionless().FirstCarUserID().AddObject(coords?.Rows?.Count,"Coords Rows Count").Submit();
 
                 System.Diagnostics.Debug.WriteLine(ex.ToString());
@@ -240,27 +206,43 @@ namespace TeslaLogger
 
         }
 
-        private static bool IsInvalidAppKey(WebException ex)
+        private bool DownloadFile(string url, string filename)
+        {
+            using (var request = new HttpRequestMessage(HttpMethod.Get, url))
+            {
+                request.Headers.TryAddWithoutValidation("User-Agent", "TeslaLogger");
+                request.Headers.TryAddWithoutValidation("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9");
+
+                using (HttpResponseMessage response = GetHttpClient().SendAsync(request).GetAwaiter().GetResult())
+                {
+                    if (!response.IsSuccessStatusCode)
+                    {
+                        if (IsInvalidAppKey(response))
+                            return false;
+
+                        response.EnsureSuccessStatusCode();
+                    }
+
+                    byte[] fileBytes = response.Content.ReadAsByteArrayAsync().GetAwaiter().GetResult();
+                    File.WriteAllBytes(filename, fileBytes);
+                    return true;
+                }
+            }
+        }
+
+        private static bool IsInvalidAppKey(HttpResponseMessage response)
         {
             try
             {
-                if (ex.Status == WebExceptionStatus.ProtocolError)
+                if (response?.StatusCode == HttpStatusCode.Forbidden)
                 {
-                    HttpWebResponse exh = ex.Response as HttpWebResponse;
-                    if (exh != null && exh.StatusCode == HttpStatusCode.Forbidden)
-                    {
-                        using (Stream stream = ex.Response.GetResponseStream())
-                        {
-                            StreamReader reader = new StreamReader(stream, Encoding.UTF8);
-                            String responseString = reader.ReadToEnd();
+                    string responseString = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
 
-                            if (responseString == "The AppKey submitted with this request is invalid.")
-                            {
-                                invalidAppKey = true;
-                                Logfile.Log("MapQuest: " + responseString);
-                                return true;
-                            }
-                        }
+                    if (responseString == "The AppKey submitted with this request is invalid.")
+                    {
+                        invalidAppKey = true;
+                        Logfile.Log("MapQuest: " + responseString);
+                        return true;
                     }
                 }
             }
@@ -271,26 +253,25 @@ namespace TeslaLogger
             return false;
         }
 
-        WebClient GetWebClient()
+        HttpClient GetHttpClient()
         {
-            _webClientLock.Wait();
+            _httpClientLock.Wait();
             try
             {
-                if (_webClient == null)
+                if (_httpClient == null)
                 {
-                    var webClient = new MyWebClient();
-                    webClient.Headers.Add("User-Agent: TeslaLogger");
-                    webClient.Headers.Add("Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9");
-
-                    _webClient = webClient;
+                    _httpClient = new HttpClient
+                    {
+                        Timeout = TimeSpan.FromMinutes(3)
+                    };
                 }
             }
             finally
             {
-                _webClientLock.Release();
+                _httpClientLock.Release();
             }
 
-            return _webClient;
+            return _httpClient;
         }
 
         public override int GetDelayMS()
@@ -304,16 +285,6 @@ namespace TeslaLogger
                 return false;
 
             return true;
-        }
-
-        private class MyWebClient : WebClient
-        {
-            protected override WebRequest GetWebRequest(Uri uri)
-            {
-                WebRequest w = base.GetWebRequest(uri);
-                w.Timeout = (int)TimeSpan.FromMinutes(3).TotalMilliseconds;
-                return w;
-            }
         }
     }
 }

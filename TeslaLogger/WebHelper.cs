@@ -102,6 +102,7 @@ namespace TeslaLogger
         private HttpClient httpClientTeslaAPI; // defaults to null;
         private HttpClient httpClientTeslaChargingSites; // defaults to null;
         private HttpClient httpClientGetChargingHistoryV2; // defaults to null;
+        private HttpClient httpClientTasker; // defaults to null;
         private static readonly SemaphoreSlim httpClientLock = new SemaphoreSlim(1, 1);
 
         DateTime lastRefreshToken = DateTime.MinValue;
@@ -126,6 +127,7 @@ namespace TeslaLogger
                 httpClientTeslaAPI.Dispose();
                 httpClientTeslaChargingSites.Dispose();
                 httpClientGetChargingHistoryV2.Dispose();
+                httpClientTasker?.Dispose();
             }
             // Free native resources.
         }
@@ -201,33 +203,30 @@ namespace TeslaLogger
 
                 Log("CheckUseTaskerToken");
 
-                using (WebClient client = new WebClient())
+                DateTime start = DateTime.UtcNow;
+                reply = GetHttpClientTasker().GetStringAsync("https://teslalogger.de/tasker_date.php?t=" + car.TaskerHash).GetAwaiter().GetResult();
+                _ = DBHelper.AddMothershipDataToDBAsync("tasker_date.php", start, 200, car.CarInDB);
+
+                if (reply.Contains("not found") || reply.Contains("never!"))
                 {
-                    DateTime start = DateTime.UtcNow;
-                    reply = client.DownloadString("https://teslalogger.de/tasker_date.php?t=" + car.TaskerHash);
-                    _ = DBHelper.AddMothershipDataToDBAsync("tasker_date.php", start, 200, car.CarInDB);
+                    Log("LastTaskerToken not found - Stop using fast TaskerToken request! Reply: " + reply);
+                    car.UseTaskerToken = false;
+                    return;
+                }
 
-                    if (reply.Contains("not found") || reply.Contains("never!"))
+                DateTime dt = DateTime.Parse(reply, Tools.ciEnUS);
+                var ts = DateTime.Now - dt;
+                if (ts.TotalDays > 2)
+                {
+                    Log("LastTaskerToken: " + reply + " Stop using fast TaskerToken request!");
+                    car.UseTaskerToken = false;
+                }
+                else
+                {
+                    if (!car.UseTaskerToken)
                     {
-                        Log("LastTaskerToken not found - Stop using fast TaskerToken request! Reply: " + reply);
-                        car.UseTaskerToken = false;
-                        return;
-                    }
-
-                    DateTime dt = DateTime.Parse(reply, Tools.ciEnUS);
-                    var ts = DateTime.Now - dt;
-                    if (ts.TotalDays > 2)
-                    {
-                        Log("LastTaskerToken: " + reply + " Stop using fast TaskerToken request!");
-                        car.UseTaskerToken = false;
-                    }
-                    else
-                    {
-                        if (!car.UseTaskerToken)
-                        {
-                            Log("LastTaskerToken: " + reply + " Start using fast TaskerToken request!");
-                            car.UseTaskerToken = true;
-                        }
+                        Log("LastTaskerToken: " + reply + " Start using fast TaskerToken request!");
+                        car.UseTaskerToken = true;
                     }
                 }
             }
@@ -239,6 +238,24 @@ namespace TeslaLogger
                 if (!WebHelper.FilterNetworkoutage(ex))
                     car.CreateExceptionlessClient(ex).AddObject(reply, "Reply").Submit();
             }
+
+        HttpClient GetHttpClientTasker()
+        {
+            httpClientLock.Wait();
+            try
+            {
+                if (httpClientTasker == null)
+                {
+                    httpClientTasker = new HttpClient();
+                    httpClientTasker.Timeout = TimeSpan.FromSeconds(30);
+                }
+                return httpClientTasker;
+            }
+            finally
+            {
+                httpClientLock.Release();
+            }
+        }
         }
 
         internal string GetLastShiftState()
@@ -4908,16 +4925,16 @@ WHERE
             {
                 if (Tools.IsDockerNET8())
                 {
-                    using (WebClient wc = new WebClient())
+                    using (HttpClient httpClient = new HttpClient())
                     {
-                        contents = wc.DownloadString("https://teslalogger.de/latest_teslalogger_docker_version.txt");
+                        contents = httpClient.GetStringAsync("https://teslalogger.de/latest_teslalogger_docker_version.txt").GetAwaiter().GetResult();
                         return contents;
                     }
                 }
 
-                using (WebClient wc = new WebClient())
+                using (HttpClient httpClient = new HttpClient())
                 {
-                    contents = wc.DownloadString("https://raw.githubusercontent.com/bassmaster187/TeslaLogger/master/TeslaLogger/Properties/AssemblyInfo.cs");
+                    contents = httpClient.GetStringAsync("https://raw.githubusercontent.com/bassmaster187/TeslaLogger/master/TeslaLogger/Properties/AssemblyInfo.cs").GetAwaiter().GetResult();
                 }
 
                 Match m = regexAssemblyVersion.Match(contents);
@@ -4925,7 +4942,7 @@ WHERE
 
                 return version;
             }
-            catch (WebException wex)
+            catch (HttpRequestException wex)
             {
                 if (!WebHelper.FilterNetworkoutage(wex))
                     wex.ToExceptionless().AddObject(contents, "ResultContent").Submit();
