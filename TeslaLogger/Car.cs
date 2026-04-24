@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -171,7 +171,7 @@ namespace TeslaLogger
         public bool MIC { get => mIC; set => mIC = value; }
         public bool MIG { get => mIG; set => mIG = value; }
         public string Motor { get => motor; set => motor = value; }
-        public static object InitCredentialsLock { get => initCredentialsLock; set => initCredentialsLock = value; }
+        public static object InitCredentialsLock { get => initCredentialsLock; }
         public double Sumkm { get => sumkm; set => sumkm = value; }
         internal string Access_type
         {
@@ -220,8 +220,8 @@ namespace TeslaLogger
         private string motor = "";
         internal bool waitForMFACode;
         internal bool waitForRecaptcha;
-        private static object initCredentialsLock = new object();
-        private static object _syncRoot = new object();
+        private static readonly SemaphoreSlim initCredentialsLock = new SemaphoreSlim(1, 1);
+        private static readonly SemaphoreSlim _syncRoot = new SemaphoreSlim(1, 1);
         internal bool FleetAPI;
         internal string FleetApiAddress = "";
         public string _access_type;
@@ -236,10 +236,9 @@ namespace TeslaLogger
 
         public Car(int CarInDB, string TeslaName, string TeslaPasswort, int CarInAccount, string TeslaToken, DateTime TeslaTokenExpire, string ModelName, string cartype, string carspecialtype, string cartrimbadging, string displayname, string vin, string TaskerHash, double? WhTR, bool fleetAPI, TeslaState currentState = TeslaState.Start, string wheel_type = "")
         {
-            lock (_syncRoot)
+            _syncRoot.Wait();
+            try
             {
-                try
-                {
                     CurrentJSON = new CurrentJSON(this);
                     CurrentJSON.FromKVS();
                     teslaAPIState = new TeslaAPIState(this);
@@ -308,13 +307,16 @@ namespace TeslaLogger
 
                         VIN2DBCarID.Add(vin, CarInDB);
                     }
-                }
-                catch (Exception ex)
-                {
-                    SendException2Exceptionless(ex);
+            }
+            catch (Exception ex)
+            {
+                SendException2Exceptionless(ex);
 
-                    ExceptionDispatchInfo.Capture(ex).Throw();
-                }
+                ExceptionDispatchInfo.Capture(ex).Throw();
+            }
+            finally
+            {
+                _syncRoot.Release();
             }
         }
 
@@ -2304,3 +2306,4 @@ id = @carid", con))
         }
     }   
 }
+

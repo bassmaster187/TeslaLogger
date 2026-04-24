@@ -1,9 +1,10 @@
-﻿using Exceptionless;
+using Exceptionless;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using System.Text;
+using System.Threading;
 
 namespace TeslaLogger
 {
@@ -183,14 +184,19 @@ namespace TeslaLogger
             return filecontent;
         }
 
-        private static object SyncLock_WriteCurrentJsonFile = new object();
+        private static readonly SemaphoreSlim SyncLock_WriteCurrentJsonFile = new SemaphoreSlim(1, 1);
 
         internal static void WriteCurrentJsonFile(int CarID, string current_json)
         {
-            lock (SyncLock_WriteCurrentJsonFile)
+            SyncLock_WriteCurrentJsonFile.Wait();
+            try
             {
                 string filepath = Path.Combine(GetExecutingPath(), $"current_json_{CarID}.txt");
                 File.WriteAllText(filepath, current_json, Encoding.UTF8);
+            }
+            finally
+            {
+                SyncLock_WriteCurrentJsonFile.Release();
             }
         }
 

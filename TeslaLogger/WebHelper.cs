@@ -1,4 +1,4 @@
-﻿using Exceptionless;
+using Exceptionless;
 using Exceptionless.Logging;
 using MySql.Data.MySqlClient;
 using Newtonsoft.Json;
@@ -102,7 +102,7 @@ namespace TeslaLogger
         private HttpClient httpClientTeslaAPI; // defaults to null;
         private HttpClient httpClientTeslaChargingSites; // defaults to null;
         private HttpClient httpClientGetChargingHistoryV2; // defaults to null;
-        private static object httpClientLock = new object();
+        private static readonly SemaphoreSlim httpClientLock = new SemaphoreSlim(1, 1);
 
         DateTime lastRefreshToken = DateTime.MinValue;
         internal DateTime nextTeslaTokenFromRefreshToken = DateTime.Now.AddHours(1);
@@ -143,7 +143,7 @@ namespace TeslaLogger
         static Dictionary<string, Account> vehicles2Account = new Dictionary<string, Account>();
         static int nextAccountId = 1;
 
-        object getAllVehiclesLock = new object();
+        SemaphoreSlim getAllVehiclesLock = new SemaphoreSlim(1, 1);
 
         internal int nearbySuCServiceFail; // defaults to 0;
         private int getChargingHistoryV2Fail; // defaults to 0;
@@ -338,7 +338,8 @@ namespace TeslaLogger
 
         HttpClient GetDefaultHttpClientForAuthentification()
         {
-            lock (httpClientLock)
+            httpClientLock.Wait();
+            try
             {
                 if (httpClientForAuthentification == null)
                 {
@@ -363,6 +364,10 @@ namespace TeslaLogger
                     // client.DefaultRequestHeaders.ConnectionClose = true;
                     httpClientForAuthentification.BaseAddress = new Uri(authHost);
                 }
+            }
+            finally
+            {
+                httpClientLock.Release();
             }
 
             return httpClientForAuthentification;
@@ -1253,7 +1258,8 @@ namespace TeslaLogger
 
         HttpClient GethttpclientTeslaNearbyChargingSites()
         {
-            lock (httpClientLock)
+            httpClientLock.Wait();
+            try
             {
                 if (httpClientTeslaChargingSites == null)
                 {
@@ -1269,11 +1275,16 @@ namespace TeslaLogger
                 }
                 return httpClientTeslaChargingSites;
             }
+            finally
+            {
+                httpClientLock.Release();
+            }
         }
 
         HttpClient GethttpclientgetChargingHistoryV2()
         {
-            lock (httpClientLock)
+            httpClientLock.Wait();
+            try
             {
                 if (httpClientGetChargingHistoryV2 == null)
                 {
@@ -1283,6 +1294,10 @@ namespace TeslaLogger
                     httpClientGetChargingHistoryV2.Timeout = TimeSpan.FromSeconds(120);
                 }
                 return httpClientGetChargingHistoryV2;
+            }
+            finally
+            {
+                httpClientLock.Release();
             }
         }
 
@@ -1467,7 +1482,8 @@ namespace TeslaLogger
 
         internal void GetAllVehicles(out string resultContent, out Newtonsoft.Json.Linq.JArray vehicles, bool throwExceptionOnUnauthorized, bool doNotCache = false)
         {
-            lock (getAllVehiclesLock)
+            getAllVehiclesLock.Wait();
+            try
             {
                 int accountid = 0;
                 lock (vehicles2Account)
@@ -1544,6 +1560,10 @@ namespace TeslaLogger
                 {
                     InsertVehicles2AccountFromVehiclesResponse(vehicles);
                 }
+            }
+            finally
+            {
+                getAllVehiclesLock.Release();
             }
         }
 
@@ -5030,13 +5050,17 @@ WHERE
 
                 if (car.ABRPMode <= 0 || String.IsNullOrEmpty(car.ABRPToken))
                     return;
-
-                lock (httpClientLock)
+                await httpClientLock.WaitAsync();
+                try
                 {
                     if (httpClientABRP == null)
                     {
                         CreateHttpClientABRP();
                     }
+                }
+                finally
+                {
+                    httpClientLock.Release();
                 }
 
                 double speed_kmh = (int)Tools.MphToKmhRounded(speed_mph);
@@ -5095,10 +5119,15 @@ WHERE
                 if (ABRPtimeouts > 10)
                 {
                     ABRPtimeouts = 0;
-                    lock (httpClientLock)
+                    await httpClientLock.WaitAsync();
+                    try
                     {
                         httpClientABRP.Dispose();
                         CreateHttpClientABRP();
+                    }
+                    finally
+                    {
+                        httpClientLock.Release();
                     }
                 }
             }
@@ -5131,8 +5160,8 @@ WHERE
             try
             {
                 DateTime start = DateTime.UtcNow;
-
-                lock (httpClientLock)
+                await httpClientLock.WaitAsync();
+                try
                 {
                     if (httpClientSuCBingo == null)
                     {
@@ -5143,6 +5172,10 @@ WHERE
 
                         Logfile.Log("SuperchargeBingo: initialized!");
                     }
+                }
+                finally
+                {
+                    httpClientLock.Release();
                 }
 
                 Dictionary<string, object> values = new Dictionary<string, object>
@@ -5324,3 +5357,4 @@ WHERE
         public bool fleetAPI;
     }
 }
+

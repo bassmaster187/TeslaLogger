@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.IO;
@@ -25,7 +25,7 @@ namespace TeslaLogger
         private static Timer timer;
 
         private static DateTime lastTeslaLoggerVersionCheck = DateTime.UtcNow;
-        private static Object lastTeslaLoggerVersionCheckObj = new object();
+        private static readonly SemaphoreSlim lastTeslaLoggerVersionCheckObj = new SemaphoreSlim(1, 1);
         internal static DateTime GetLastVersionCheck() { return lastTeslaLoggerVersionCheck; }
 
         internal static CancellationTokenSource done = new CancellationTokenSource();
@@ -2939,7 +2939,8 @@ PRIMARY KEY(id)
 
         public static void CheckForNewVersion()
         {
-            lock (lastTeslaLoggerVersionCheckObj)
+            lastTeslaLoggerVersionCheckObj.Wait();
+            try
             {
                 try
                 {
@@ -3017,6 +3018,10 @@ PRIMARY KEY(id)
                     ex.ToExceptionless().FirstCarUserID().Submit();
                     Logfile.Log(ex.ToString());
                 }
+            }
+            finally
+            {
+                lastTeslaLoggerVersionCheckObj.Release();
             }
         }
 

@@ -1,4 +1,4 @@
-﻿using MySql.Data.MySqlClient;
+using MySql.Data.MySqlClient;
 using Newtonsoft.Json.Linq;
 using System;
 using System.CodeDom.Compiler;
@@ -305,10 +305,10 @@ namespace TeslaLoggerNET8.Lucid
                                 {
                                     DateTime d = DateTimeOffset.FromUnixTimeMilliseconds(tire_pressure_last_updated2 * 1000).DateTime;
                                     tire_pressure_last_updated = tire_pressure_last_updated2;
-                                    car.DbHelper.InsertTPMS(1, front_left_tire_pressure_bar, d);
-                                    car.DbHelper.InsertTPMS(2, front_right_tire_pressure_bar, d);
-                                    car.DbHelper.InsertTPMS(3, rear_left_tire_pressure_bar, d);
-                                    car.DbHelper.InsertTPMS(4, rear_right_tire_pressure_bar, d);
+                                    _ = car.DbHelper.InsertTPMSAsync(1, front_left_tire_pressure_bar, d);
+                                    _ = car.DbHelper.InsertTPMSAsync(2, front_right_tire_pressure_bar, d);
+                                    _ = car.DbHelper.InsertTPMSAsync(3, rear_left_tire_pressure_bar, d);
+                                    _ = car.DbHelper.InsertTPMSAsync(4, rear_right_tire_pressure_bar, d);
                                 }
                                 break;
 
@@ -570,3 +570,4 @@ namespace TeslaLoggerNET8.Lucid
         }
     }
 }
+

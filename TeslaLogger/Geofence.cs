@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net.Http;
@@ -118,18 +118,23 @@ namespace TeslaLogger
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1051:Sichtbare Instanzfelder nicht deklarieren", Justification = "<Pending>")]
     public class Geofence
     {
-        private static Object lockObj = new object();
+        private static readonly SemaphoreSlim lockObj = new SemaphoreSlim(1, 1);
         private static Geofence _geofence; // Singleton
 
         public static Geofence GetInstance()
         {
-            lock (lockObj)
+            lockObj.Wait();
+            try
             {
                 if (_geofence == null)
                 {
                     _geofence = new Geofence(ApplicationSettings.Default.RacingMode);
                 }
                 return _geofence;
+            }
+            finally
+            {
+                lockObj.Release();
             }
         }
 
@@ -503,15 +508,25 @@ namespace TeslaLogger
             int found = 0;
 
             // look for POI in geofence-private first
-            lock (geofencePrivateList)
+            lockObj.Wait();
+            try
             {
                 LookupPOIinList(geofencePrivateList, lat, lng, logDistance, brand, maxPower, ref ret, ref retDistance, ref found);
             }
+            finally
+            {
+                lockObj.Release();
+            }
             if (ret == null)
             {
-                lock (geofenceList)
+                lockObj.Wait();
+                try
                 {
                     LookupPOIinList(geofenceList, lat, lng, logDistance, brand, maxPower, ref ret, ref retDistance, ref found);
+                }
+                finally
+                {
+                    lockObj.Release();
                 }
             }
 
@@ -643,3 +658,4 @@ namespace TeslaLogger
 
     }
 }
+

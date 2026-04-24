@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.ConstrainedExecution;
@@ -11,6 +11,8 @@ namespace TeslaLoggerNET8
 {
     internal class TelemetryConnectionKafka : TelemetryConnection
     {
+
+	static readonly SemaphoreSlim kafkaLock = new SemaphoreSlim(1, 1);
         static TelemetryConnectionKafka instance = null;
         static System.Collections.Concurrent.BlockingCollection<(string vin, string msg)> queue = new ();
         static System.Collections.Concurrent.ConcurrentDictionary<string, TelemetryParser> parserDict = new ();
@@ -19,35 +21,37 @@ namespace TeslaLoggerNET8
         static Task tQueue;
 
         public TelemetryConnectionKafka(Car car) {
-            lock (typeof(TelemetryConnectionKafka))
+            kafkaLock.Wait();
+            try
             {
-                try
+                if (instance == null)
                 {
-                    if (instance == null)
+                    instance = this;
+                    tQueue = Task.Run(async () =>
                     {
-                        instance = this;
-                        tQueue = Task.Run(async () =>
+                        try
                         {
-                            try
-                            {
-                                await RunAsync(cts.Token);
-                            }
-                            catch (Exception ex)
-                            {
-                                Logfile.Log("Error in TelemetryConnectionKafka RunAsync: " + ex);
-                            }
-                        });
-                    }
+                            await RunAsync(cts.Token);
+                        }
+                        catch (Exception ex)
+                        {
+                            Logfile.Log("Error in TelemetryConnectionKafka RunAsync: " + ex);
+                        }
+                    });
+                }
 
-                    parser = new TelemetryParser(car);
-                    parser.InitFromDB();
-                    parserDict.TryAdd(car.Vin, parser);
-                    vins.Add(car.Vin);
-                }
-                catch (Exception ex)
-                {
-                    Logfile.Log("Error initializing TelemetryConnectionKafka: " + ex.ToString());
-                }
+                parser = new TelemetryParser(car);
+                parser.InitFromDB();
+                parserDict.TryAdd(car.Vin, parser);
+                vins.Add(car.Vin);
+            }
+            catch (Exception ex)
+            {
+                Logfile.Log("Error initializing TelemetryConnectionKafka: " + ex.ToString());
+            }
+            finally
+            {
+                kafkaLock.Release();
             }
         }
 
@@ -80,3 +84,4 @@ namespace TeslaLoggerNET8
         }
     }
 }
+

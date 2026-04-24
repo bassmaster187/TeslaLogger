@@ -1,8 +1,9 @@
-﻿using System;
+using System;
 using System.Data;
 using System.IO;
 using System.Net;
 using System.Text;
+using System.Threading;
 using Exceptionless;
 
 namespace TeslaLogger
@@ -11,7 +12,7 @@ namespace TeslaLogger
     public class MapQuestMapProvider : StaticMapProvider
     {
         WebClient _webClient;
-        object _webClientLock = new object();
+        SemaphoreSlim _webClientLock = new SemaphoreSlim(1, 1);
         static bool invalidAppKey; // defaults to false;
 
 
@@ -272,7 +273,8 @@ namespace TeslaLogger
 
         WebClient GetWebClient()
         {
-            lock (_webClientLock)
+            _webClientLock.Wait();
+            try
             {
                 if (_webClient == null)
                 {
@@ -282,6 +284,10 @@ namespace TeslaLogger
 
                     _webClient = webClient;
                 }
+            }
+            finally
+            {
+                _webClientLock.Release();
             }
 
             return _webClient;
@@ -311,3 +317,4 @@ namespace TeslaLogger
         }
     }
 }
+

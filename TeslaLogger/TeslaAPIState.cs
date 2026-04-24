@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading;
@@ -27,7 +27,7 @@ namespace TeslaLogger
         private readonly Car car;
         private readonly MQTT mqtt;
         private bool dumpJSON;
-        private readonly object TeslaAPIStateLock = new object();
+        private readonly SemaphoreSlim TeslaAPIStateLock = new SemaphoreSlim(1, 1);
 
         internal bool DumpJSON {
             get => dumpJSON;
@@ -61,7 +61,8 @@ namespace TeslaLogger
 
         internal void AddValue(string name, string type, object value, long timestamp, string source)
         {
-            lock (TeslaAPIStateLock)
+            TeslaAPIStateLock.Wait();
+            try
             {
                 if (!storage.TryGetValue(name, out Dictionary<Key, object> _))
                 {
@@ -112,6 +113,10 @@ namespace TeslaLogger
                 }
                 storage[name][Key.Timestamp] = timestamp;
                 storage[name][Key.Source] = source;
+            }
+            finally
+            {
+                TeslaAPIStateLock.Release();
             }
         }
 
@@ -213,7 +218,8 @@ namespace TeslaLogger
 
         public bool GetState(string name, out Dictionary<Key, object> state, int maxage = 0)
         {
-            lock (TeslaAPIStateLock)
+            TeslaAPIStateLock.Wait();
+            try
             {
                 try
                 {
@@ -252,6 +258,10 @@ namespace TeslaLogger
                     { Key.Source , "undef" }
                 };
             }
+            finally
+            {
+                TeslaAPIStateLock.Release();
+            }
             return false;
         }
 
@@ -267,7 +277,8 @@ namespace TeslaLogger
 
         public bool GetBool(string name, out bool value, int maxage = 0)
         {
-            lock (TeslaAPIStateLock)
+            TeslaAPIStateLock.Wait();
+            try
             {
                 try
                 {
@@ -294,13 +305,18 @@ namespace TeslaLogger
                     Tools.DebugLog("Exception", ex);
                 }
             }
+            finally
+            {
+                TeslaAPIStateLock.Release();
+            }
             value = false;
             return false;
         }
 
         public bool GetInt(string name, out int value, int maxage = 0)
         {
-            lock (TeslaAPIStateLock)
+            TeslaAPIStateLock.Wait();
+            try
             {
                 try
                 {
@@ -329,11 +345,16 @@ namespace TeslaLogger
                 value = int.MinValue;
                 return false;
             }
+            finally
+            {
+                TeslaAPIStateLock.Release();
+            }
         }
 
         public bool GetDouble(string name, out double value, int maxage = 0)
         {
-            lock (TeslaAPIStateLock)
+            TeslaAPIStateLock.Wait();
+            try
             {
                 try
                 {
@@ -360,13 +381,18 @@ namespace TeslaLogger
                     Tools.DebugLog("Exception", ex);
                 }
             }
+            finally
+            {
+                TeslaAPIStateLock.Release();
+            }
             value = double.MinValue;
             return false;
         }
 
         public bool GetString(string name, out string value, int maxage = 0)
         {
-            lock (TeslaAPIStateLock)
+            TeslaAPIStateLock.Wait();
+            try
             {
                 try
                 {
@@ -395,6 +421,10 @@ namespace TeslaLogger
                 }
                 value = string.Empty;
                 return false;
+            }
+            finally
+            {
+                TeslaAPIStateLock.Release();
             }
         }
 
@@ -1314,7 +1344,7 @@ namespace TeslaLogger
                     double pressure = (double)r2["tpms_pressure_"+Prefix];
                     DateTime dtPressure = DBHelper.UnixToDateTime((long)r2["tpms_last_seen_pressure_time_"+Prefix] * 1000);
                     //Tools.DebugLog($"Car{car.CarInDB} TPMS {Prefix}: {pressure} {dtPressure}");
-                    car.DbHelper.InsertTPMS(TireID, pressure, dtPressure);
+                    _ = car.DbHelper.InsertTPMSAsync(TireID, pressure, dtPressure);
                 }
             }
             catch (Exception ex)

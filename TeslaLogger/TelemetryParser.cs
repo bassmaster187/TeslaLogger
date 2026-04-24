@@ -1,4 +1,4 @@
-﻿using Exceptionless;
+using Exceptionless;
 using Google.Protobuf.WellKnownTypes;
 using MySql.Data.MySqlClient;
 using NetMQ;
@@ -546,19 +546,19 @@ namespace TeslaLogger
                                 switch (suffix)
                                 {
                                     case "Fl":
-                                        car.DbHelper.InsertTPMS(1, pressure, d);
+                                        _ = car.DbHelper.InsertTPMSAsync(1, pressure, d);
                                         car.CurrentJSON.tpms_pressure_fl = pressure;
                                         break;
                                     case "Fr":
-                                        car.DbHelper.InsertTPMS(2, pressure, d);
+                                        _ = car.DbHelper.InsertTPMSAsync(2, pressure, d);
                                         car.CurrentJSON.tpms_pressure_fr = pressure;
                                         break;
                                     case "Rl":
-                                        car.DbHelper.InsertTPMS(3, pressure, d);
+                                        _ = car.DbHelper.InsertTPMSAsync(3, pressure, d);
                                         car.CurrentJSON.tpms_pressure_rl = pressure;
                                         break;
                                     case "Rr":
-                                        car.DbHelper.InsertTPMS(4, pressure, d);
+                                        _ = car.DbHelper.InsertTPMSAsync(4, pressure, d);
                                         car.CurrentJSON.tpms_pressure_rr = pressure;
                                         break;
                                 }
@@ -2128,3 +2128,4 @@ namespace TeslaLogger
         }
     }
 }
+

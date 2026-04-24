@@ -1,4 +1,4 @@
-﻿using Exceptionless;
+using Exceptionless;
 using MySql.Data.MySqlClient;
 using Newtonsoft.Json;
 using System;
@@ -180,7 +180,7 @@ WHERE
 
             using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
             {
-                con.Open();
+                await con.OpenAsync();
 
                 using (MySqlCommand cmd1 = new MySqlCommand(@"
 SELECT
@@ -1523,7 +1523,7 @@ WHERE
             return tuple;
         }
 
-        internal void InsertTPMS(int TireId, double pressure, DateTime dtFL)
+        internal async Task InsertTPMSAsync(int TireId, double pressure, DateTime dtFL)
         {
             try
             {
@@ -1536,14 +1536,14 @@ WHERE
 
                 using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
                 {
-                    con.Open();
+                    await con.OpenAsync();
                     using (MySqlCommand cmd = new MySqlCommand(@"insert TPMS (CarID, Datum, TireID, Pressure) values (@CarID, @Datum, @TireID, @Pressure)", con))
                     {
                         cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
                         cmd.Parameters.AddWithValue("@Datum", dtFL);
                         cmd.Parameters.AddWithValue("@TireID", TireId);
                         cmd.Parameters.AddWithValue("@Pressure", pressure);
-                        cmd.ExecuteNonQuery();
+                        await cmd.ExecuteNonQueryAsync();
                     }
                 }
             }
@@ -5406,12 +5406,12 @@ LIMIT 1", con))
             {
                 con.Open();
                 using (MySqlCommand cmd = new MySqlCommand($@"
-SELECT
-    *
-FROM
-    information_schema.tables
-WHERE
-    table_name = '{table}'", con))
+                    SELECT
+                        *
+                    FROM
+                        information_schema.tables
+                    WHERE
+                        table_name = '{table}'", con))
                 {
                     MySqlDataReader dr = SQLTracer.TraceDR(cmd);
                     if (dr.Read())
@@ -7557,3 +7557,4 @@ ORDER BY startdate", con))
         }
     }
 }
+

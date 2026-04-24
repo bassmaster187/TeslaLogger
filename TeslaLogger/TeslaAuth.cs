@@ -1,4 +1,4 @@
-﻿using System.Web;
+using System.Web;
 using System;
 using System.Net.Http;
 using System.Security.Cryptography;
@@ -19,6 +19,8 @@ namespace TeslaLogger
         readonly HttpClient client;
         readonly LoginInfo loginInfo;
         static readonly Random Random = new Random();
+
+	static readonly SemaphoreSlim randomLock = new SemaphoreSlim(1, 1);
 
         public enum TeslaAccountRegion
         {
@@ -42,10 +44,15 @@ namespace TeslaLogger
             // Technically this should include the characters '-', '.', '_', and '~'.  However let's
             // keep this simpler for now to avoid potential URL encoding issues.
             const string chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-            lock (Random)
+            randomLock.Wait();
+            try
             {
                 return new string(Enumerable.Repeat(chars, length)
                     .Select(s => s[Random.Next(s.Length)]).ToArray());
+            }
+            finally
+            {
+                randomLock.Release();
             }
         }
 
