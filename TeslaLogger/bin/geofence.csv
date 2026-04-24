@@ -7328,7 +7328,7 @@ Allego DE-Zella-Mehlis Industriestraße,50.6425,10.69342
 Allego DE-Übersee Bahnhofstraße,47.8189,12.4964
 Allego DK-Holstebro Nyholmvej,56.37748,8.6201
 Allego DK-Odense Drejebænken,55.35404,10.4199
-Allego DK-Silkeborg Nordre Højmarksvej,56.1876,9.51025
+Allego DK-Silkeborg Nordre Højmarksvej,56.18728,9.5102,26
 Allego DK-Slagelse Idagårdsvej,55.3919,11.35248
 Allego DK-Vejle Godthåbsvej,55.66392,9.55016,20
 Allego FR-Aire de La Bruche,48.539,7.58042
@@ -7731,6 +7731,7 @@ ARAL DE-Isselburg Dekkers Waide,51.81782,6.44393
 ARAL DE-Jena,50.87707,11.62151
 ARAL DE-Jülich Neusser Straße,50.92806,6.36577
 ARAL DE-Kabelsketal Geltestraße,51.47663,12.0859,60
+ARAL DE-Kalefeld Hauptstraße,51.78762,10.06467
 ARAL DE-Kaltenkirchen Kieler Straße,53.84077,9.94763
 ARAL DE-Kassel Druseltalstraße,51.30714,9.44717
 ARAL DE-Kassel Leipziger Straße,51.30105,9.53337
@@ -9023,6 +9024,7 @@ Clever DK-Roskilde Stationscentret,55.63724,12.08278
 Clever DK-Rødekro Skånevej,55.0694,9.35293
 Clever DK-Rønne Østre Ringvej,55.0928,14.72983
 Clever DK-Silkeborg Borgergade,56.18367,9.54622
+Clever DK-Silkeborg Nordre Højmarksvej,56.18762,9.5103,26
 Clever DK-Silkeborg Torvet,56.16826,9.55104
 Clever DK-Skagen Christian Xs Vej,57.72364,10.59067
 Clever DK-Skærbæk Jernbanegade,55.15875,8.76943
@@ -11212,6 +11214,7 @@ EnBW DE-Düren Fehlender Feld,50.82865,6.47558
 EnBW DE-Düren Shell,50.79755,6.47677
 EnBW DE-Düsseldorf Am Hülserhof,51.27553,6.80723
 EnBW DE-Düsseldorf Bauhaus,51.17937,6.85242
+EnBW DE-Düsseldorf Kennedydamm,51.24713,6.77063
 EnBW DE-Düsseldorf Kölner Landstraße,51.18517,6.82107
 EnBW DE-Düsseldorf Reisholzer Bahnstraße,51.18028,6.8529
 EnBW DE-Ebelsbach,49.98487,10.6685
@@ -12708,6 +12711,7 @@ EnBW DE-Witten Aldi,51.43789,7.32517
 EnBW DE-Witten Shell,51.45222,7.32396
 EnBW DE-Wittenburg,53.50257,11.08753
 EnBW DE-Wittenburg Mühlenring,53.50206,11.08873,30
+EnBW DE-Wittenburg Rudolf-Diesel-Straße,53.50053,11.0977
 EnBW DE-Wittlich Friedrichstraße,49.99066,6.90636
 EnBW DE-Wittmund Euronics,53.58431,7.79908
 EnBW DE-Wittmund Hagebaumarkt,53.58252,7.79627
@@ -14744,6 +14748,7 @@ EWE-GO DE-Winsen (Luhe) Max-Planck-Straße,53.33913,10.21902
 EWE-GO DE-Winterberg Am Hagenblech,51.20096,8.53104
 EWE-GO DE-Wipperfürth Lenneper Straße,51.121,7.37709
 EWE-GO DE-Witten Dortmunder Straße,51.4423,7.35212
+EWE-GO DE-Wittenburg Rudolf-Diesel-Straße,53.49984,11.09694
 EWE-GO DE-Wittmund Am Markt,53.57388,7.78278
 EWE-GO DE-Wittmund-Carolinensiel Bahnhofstraße,53.69119,7.80789
 EWE-GO DE-Wolfenbüttel Gebrüder-Welger-Straße,52.16337,10.52182
