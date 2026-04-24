@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Net;
 using System.Net.Http;
 using System.Runtime.Caching;
@@ -156,3 +156,4 @@ namespace TeslaLogger
         }
     }
 }
+

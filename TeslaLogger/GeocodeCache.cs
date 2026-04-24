@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Data;
 using Exceptionless;
 using MySql.Data.MySqlClient;
@@ -182,3 +182,4 @@ WHERE
         }
     }
 }
+

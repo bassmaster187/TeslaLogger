@@ -1,4 +1,4 @@
-﻿namespace TeslaLogger
+namespace TeslaLogger
 {
     internal class DBViews
     {
@@ -51,3 +51,4 @@ VIEW `trip` AS
         ((`pos_end`.`odometer` - `pos_start`.`odometer`) > 0.1)";
     }
 }
+

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Data;
 using System.IO;
 using System.Runtime.CompilerServices;
@@ -176,3 +176,4 @@ namespace TeslaLogger
         }
     }
 }
+

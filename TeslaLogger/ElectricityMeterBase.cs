@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 namespace TeslaLogger
 {
@@ -101,3 +101,4 @@ namespace TeslaLogger
 
     }
 }
+

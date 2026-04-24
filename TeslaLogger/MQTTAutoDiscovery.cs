@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 
 namespace TeslaLogger
@@ -520,4 +520,5 @@ namespace TeslaLogger
 
     }
 }
+
 

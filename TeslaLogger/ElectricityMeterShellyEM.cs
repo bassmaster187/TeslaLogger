@@ -1,4 +1,4 @@
-﻿using Exceptionless;
+using Exceptionless;
 using Newtonsoft.Json;
 using System;
 using System.Net;
@@ -168,3 +168,4 @@ namespace TeslaLogger
         }
     }
 }
+

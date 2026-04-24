@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
 using System;
@@ -177,3 +177,4 @@ FROM
         }
     }
 }
+

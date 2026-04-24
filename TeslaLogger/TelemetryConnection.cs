@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using TeslaLoggerNET8;
 
 namespace TeslaLogger
