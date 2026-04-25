@@ -282,605 +282,602 @@ namespace TeslaLogger
 
         private async Task InsertStatesAsync(dynamic j, DateTime d, string resultContent)
         {
-            using (MySqlCommand cmd = new MySqlCommand())
+            foreach (dynamic jj in j)
             {
-                foreach (dynamic jj in j)
+                string key = jj["key"];
+                dynamic value = jj["value"];
+
+                if (key == "SentryMode")
                 {
-                    string key = jj["key"];
-                    dynamic value = jj["value"];
-
-                    if (key == "SentryMode")
+                    string v = value["stringValue"];
+                    if (v == null)
                     {
-                        string v = value["stringValue"];
+                        v = value["sentryModeStateValue"];
                         if (v == null)
-                        {
-                            v = value["sentryModeStateValue"];
-                            if (v == null)
-                            {
-                                continue;
-                            }
-                        }
-                        if (v.Contains("Armed"))
-                        {
-                            car.webhelper.is_sentry_mode = true;
-                            car.CurrentJSON.current_is_sentry_mode = true;
-                            car.CurrentJSON.CreateCurrentJSON();
-
-                            Log("Insert Location (SentryMode)");
-                            await InsertLastLocationAsync(d, false);
-                        }
-                        else
-                        {
-                            car.webhelper.is_sentry_mode = false;
-                            car.CurrentJSON.current_is_sentry_mode = false;
-                            car.CurrentJSON.CreateCurrentJSON();
-
-                            Log("Insert Location (SentryMode)");
-                            await InsertLastLocationAsync(d, false);
-                        }
-                        car.CurrentJSON.CreateCurrentJSON();
-                    }
-                    else if (key == "PreconditioningEnabled")
-                    {
-                        bool preconditioning = false;
-
-                        string v = value["stringValue"];
-                        if (v == "True")
-                            preconditioning = true;
-
-                        bool v1 = value["booleanValue"];
-                        if (v1)
-                            preconditioning = true;
-
-                        car.CurrentJSON.current_is_preconditioning = preconditioning;
-                        Log("Preconditioning: " + preconditioning);
-                        car.CurrentJSON.CreateCurrentJSON();
-
-                        Log("Insert Location (Preconditioning)");
-                        await InsertLastLocationAsync(d, false);
-                    }
-                    else if (key == "OutsideTemp")
-                    {
-                        string v = value["stringValue"];
-                        if (v == null)
-                        {
-                            v = value["doubleValue"];
-                            if (v == null)
-                            {
-                                continue;
-                            }
-                        }
-                        if (double.TryParse(v, NumberStyles.Any, CultureInfo.InvariantCulture, out double OutsideTemp))
-                        {
-                            lastOutsideTemp = OutsideTemp;
-                            car.CurrentJSON.current_outside_temperature = OutsideTemp;
-                            car.CurrentJSON.CreateCurrentJSON();
-
-                            Log("Insert Location (OutsideTemp)");
-                            await InsertLastLocationAsync(d, false);
-                        }
-                    }
-                    else if (key == "InsideTemp")
-                    {
-                        string v = value["stringValue"];
-                        if (v == null)
-                        {
-                            v = value["doubleValue"];
-                            if (v == null)
-                            {
-                                continue;
-                            }
-                        }
-                        if (double.TryParse(v, NumberStyles.Any, CultureInfo.InvariantCulture, out double InsideTemp))
-                        {
-                            lastInsideTemp = InsideTemp;
-                            car.CurrentJSON.current_inside_temperature = InsideTemp;
-                            car.CurrentJSON.CreateCurrentJSON();
-
-                            Log("Insert Location (InsideTemp)");
-                            await InsertLastLocationAsync(d, false);
-                        }
-                    }
-                    else if (key == "TimeToFullCharge")
-                    {
-                        string v = value["stringValue"];
-                        if (v == null)
-                        {
-                            v = value["doubleValue"];
-                            if (v == null)
-                            {
-                                continue;
-                            }
-                        }
-                        if (double.TryParse(v, NumberStyles.Any, CultureInfo.InvariantCulture, out double TimeToFullCharge))
-                        {
-                            car.CurrentJSON.current_time_to_full_charge = TimeToFullCharge;
-                            car.CurrentJSON.CreateCurrentJSON();
-                        }
-                    }
-                    else if (key == "ChargeLimitSoc")
-                    {
-                        string v = value["stringValue"];
-                        if (v == null)
-                        {
-                            v = value["intValue"];
-                            if (v == null)
-                            {
-                                continue;
-                            }
-                        }
-                        if (double.TryParse(v, NumberStyles.Any, CultureInfo.InvariantCulture, out double ChargeLimitSoc))
-                        {
-                            car.CurrentJSON.charge_limit_soc = (int)ChargeLimitSoc;
-                            car.CurrentJSON.CreateCurrentJSON();
-                        }
-                    }
-                    else if (key == "DestinationName")
-                    {
-                        string v = value["stringValue"];
-
-                        car.CurrentJSON.active_route_destination = v;
-                        car.CurrentJSON.CreateCurrentJSON();
-
-                    }
-                    else if (key == "MinutesToArrival")
-                    {
-                        string v = value["stringValue"];
-                        if (v == null)
-                        {
-                            v = value["doubleValue"];
-                            if (v == null)
-                            {
-                                continue;
-                            }
-                        }
-                        if (double.TryParse(v, NumberStyles.Any, CultureInfo.InvariantCulture, out double MinutesToArrival))
-                        {
-                            car.CurrentJSON.active_route_minutes_to_arrival = (int)MinutesToArrival;
-                            car.CurrentJSON.CreateCurrentJSON();
-                        }
-                    }
-                    else if (key == "MilesToArrival")
-                    {
-                        string v = value["stringValue"];
-                        if (v == null)
-                        {
-                            v = value["doubleValue"];
-                            if (v == null)
-                            {
-                                continue;
-                            }
-                        }
-                        if (double.TryParse(v, NumberStyles.Any, CultureInfo.InvariantCulture, out double MilesToArrival))
-                        {
-                            car.CurrentJSON.active_route_km_to_arrival = (long)(MilesToArrival * 1.609344);
-                            car.CurrentJSON.CreateCurrentJSON();
-                        }
-                    }
-                    else if (key == "ExpectedEnergyPercentAtTripArrival")
-                    {
-                        try
-                        {
-                            int? v = value["intValue"];
-                            car.CurrentJSON.active_route_energy_at_arrival = v;
-                            car.CurrentJSON.CreateCurrentJSON();
-                        }
-                        catch (Exception ex)
-                        {
-                            ex.ToExceptionless().Submit();
-                            Log(ex.ToString());
-                        }
-
-                    }
-                    else if (key == "RouteTrafficMinutesDelay")
-                    {
-                        try
-                        {
-                            double v = value["doubleValue"];
-
-                            car.CurrentJSON.active_route_traffic_minutes_delay = v;
-                            car.CurrentJSON.CreateCurrentJSON();
-                        }
-                        catch (Exception ex)
-                        {
-                            ex.ToExceptionless().Submit();
-                            Log(ex.ToString());
-                        }
-                    }
-                    else if (key == "BatteryHeaterOn")
-                    {
-                        string v = value["stringValue"];
-                        if (v == null)
-                        {
-                            v = value["booleanValue"];
-                            if (v == null)
-                            {
-                                continue;
-                            }
-                        }
-                        v = v.ToLower(CultureInfo.InvariantCulture);
-                        if (bool.TryParse(v, out bool BatteryHeaterOn))
-                        {
-                            car.CurrentJSON.current_battery_heater = BatteryHeaterOn;
-                            Log("BatteryHeaterOn: " + BatteryHeaterOn);
-                            car.CurrentJSON.CreateCurrentJSON();
-                        }
-                    }
-                    else if (key == "DefrostForPreconditioning")
-                    {
-                        string v = value["stringValue"];
-                        if (v == null)
-                        {
-                            v = value["booleanValue"];
-                            if (v == null)
-                            {
-                                continue;
-                            }
-                        }
-                        v = v.ToLower(CultureInfo.InvariantCulture);
-                        if (bool.TryParse(v, out bool preconditioning))
-                        {
-                            car.CurrentJSON.current_is_preconditioning = preconditioning;
-                            Log("Preconditioning: " + preconditioning);
-                            car.CurrentJSON.CreateCurrentJSON();
-                        }
-                    }
-                    else if (key.StartsWith("TpmsPressure"))
-                    {
-                        string suffix = key.Substring(key.Length - 2);
-                        string v = value["stringValue"];
-                        if (v == null)
-                        {
-                            v = value["doubleValue"];
-                            if (v == null)
-                            {
-                                continue;
-                            }
-                        }
-                        if (double.TryParse(v, NumberStyles.Any, CultureInfo.InvariantCulture, out double pressure))
-                        {
-                            pressure = Math.Round(pressure, 2);
-                            
-                            if (databaseCalls)
-                            {
-                                switch (suffix)
-                                {
-                                    case "Fl":
-                                        _ = car.DbHelper.InsertTPMSAsync(1, pressure, d);
-                                        car.CurrentJSON.tpms_pressure_fl = pressure;
-                                        break;
-                                    case "Fr":
-                                        _ = car.DbHelper.InsertTPMSAsync(2, pressure, d);
-                                        car.CurrentJSON.tpms_pressure_fr = pressure;
-                                        break;
-                                    case "Rl":
-                                        _ = car.DbHelper.InsertTPMSAsync(3, pressure, d);
-                                        car.CurrentJSON.tpms_pressure_rl = pressure;
-                                        break;
-                                    case "Rr":
-                                        _ = car.DbHelper.InsertTPMSAsync(4, pressure, d);
-                                        car.CurrentJSON.tpms_pressure_rr = pressure;
-                                        break;
-                                }
-                            }
-                            car.CurrentJSON.CreateCurrentJSON();
-                            car.teslaAPIState.AddValue("tpms_pressure_" + suffix.ToLower(), "double", value, Tools.ToUnixTime(d), "vehicle_state");
-                            
-                        }
-                    }
-                    else if (key == "VehicleName")
-                    {
-                        string v = value["stringValue"];
-                        if (!String.IsNullOrEmpty(v))
-                        {
-                            if (car.DisplayName != v)
-                            {
-                                Log("DisplayName: " + v);
-                                car.DisplayName = v;
-                                car.DbHelper.WriteCarSettings();
-                            }
-                        }
-                    }
-                    else if (key == "Trim")
-                    {
-                        string v = value["stringValue"];
-                        if (!String.IsNullOrEmpty(v))
-                        {
-                            v = v.ToLower();
-                            if (car.TrimBadging != v)
-                            {
-                                Log("Trim: " + v);
-                                car.TrimBadging = v;
-                                car.DbHelper.WriteCarSettings();
-                                car.webhelper.UpdateEfficiency();
-
-                                Log("Car Model Name: " + car.ModelName);
-                            }
-                        }
-                    }
-                    else if (key == "ServiceMode")
-                    {
-                        string v = value["stringValue"];
-                        if (v == null)
-                        {
-                            v = value["booleanValue"];
-                            if (v == null)
-                            {
-                                continue;
-                            }
-                        }
-                        v = v.ToLower(CultureInfo.InvariantCulture);
-                        if (bool.TryParse(v, out bool serviceMode))
-                        {
-                            car.teslaAPIState.AddValue("in_service", "int", serviceMode ? 1 : 0, Tools.ToUnixTime(d), "vehicle_state");
-                        }
-                    }
-                    else if (key == "CarType")
-                    {
-                        string v = value["stringValue"];
-                        if (v == null)
-                        {
-                            v = value["carTypeValue"];
-                            if (v == null)
-                            {
-                                continue;
-                            }
-                        }
-                        if (!String.IsNullOrEmpty(v))
-                        {
-                            v = v.Replace("CarType", "");
-                            v = v.ToLower();
-
-                            if (car.CarType != v)
-                            {
-                                Log("CarType: " + v);
-                                car.CarType = v;
-                                car.CarSpecialType = "base";
-                                car.DbHelper.WriteCarSettings();
-                                car.webhelper.UpdateEfficiency();
-
-                                Log("Car Model Name: " + car.ModelName);
-                            }
-                        }
-                    }
-                    else if (key == "Version")
-                    {
-                        string car_version = value["stringValue"];
-                        if (!String.IsNullOrEmpty(car_version))
-                        {
-                            if (car.CurrentJSON.current_car_version != car_version)
-                            {
-                                Log("Car Version: " + car_version);
-                                car.CurrentJSON.current_car_version = car_version;
-                                car.CurrentJSON.CreateCurrentJSON();
-
-                                car.DbHelper.SetCarVersion(car_version);
-
-                                car.webhelper.TaskerWakeupfile(true);
-                            }
-
-                        }
-                    }
-                    else if (key == "SoftwareUpdateInstallationPercentComplete")
-                    {
-                        string v1 = value["stringValue"];
-                        if (v1 == null)
-                        {
-                            v1 = value["intValue"];
-                            if (v1 == null)
-                            {
-                                continue;
-                            }
-                        }
-                        if (!int.TryParse(v1, NumberStyles.Any, CultureInfo.InvariantCulture, out int swUpdateInstalling))
                         {
                             continue;
                         }
-
-                        if (car.CurrentJSON.software_update_version != "")
-                        {
-
-                            if (swUpdateInstalling == 1)
-                            {
-                                car.teslaAPIState.AddValue("software_update.status", "string", "Available", Tools.ToUnixTime(d), "vehicle_state");
-                            }
-                            if (swUpdateInstalling == 3)
-                            {
-                                car.teslaAPIState.AddValue("software_update.status", "string", "Downloading", Tools.ToUnixTime(d), "vehicle_state");
-                            }
-                            if (swUpdateInstalling > 10)
-                            {
-                                car.teslaAPIState.AddValue("software_update.status", "string", "Installing", Tools.ToUnixTime(d), "vehicle_state");
-                            }
-                        }
-                        else
-                        {
-                            car.teslaAPIState.AddValue("software_update.status", "string", "", Tools.ToUnixTime(d), "vehicle_state");
-                        }
-                            car.CurrentJSON.CreateCurrentJSON();
-
                     }
-                    else if (key == "SoftwareUpdateVersion")
+                    if (v.Contains("Armed"))
                     {
-                        string version = value["stringValue"];
-                        if (!String.IsNullOrEmpty(version) && version != " " && version.Length > 4)
-                        {
-                            car.teslaAPIState.AddValue("software_update.version", "string", version, Tools.ToUnixTime(d), "vehicle_state");
-                        }
-                        else
-                        {
-                            car.teslaAPIState.AddValue("software_update.version", "string", "", Tools.ToUnixTime(d), "vehicle_state");
-                        }
-                        car.CurrentJSON.CreateCurrentJSON();
-                    }
-                    else if (key == "DoorState")
-                    {
-                        string DoorState = value["stringValue"];
-                        if (!String.IsNullOrEmpty(DoorState))
-                        {
-                            if (DoorState.Contains("DriverFront"))
-                                car.teslaAPIState.AddValue("df", "int", 1, Tools.ToUnixTime(d), "vehicle_state");
-                            else
-                                car.teslaAPIState.AddValue("df", "int", 0, Tools.ToUnixTime(d), "vehicle_state");
-
-                            if (DoorState.Contains("DriverRear"))
-                                car.teslaAPIState.AddValue("dr", "int", 1, Tools.ToUnixTime(d), "vehicle_state");
-                            else
-                                car.teslaAPIState.AddValue("dr", "int", 0, Tools.ToUnixTime(d), "vehicle_state");
-
-                            if (DoorState.Contains("PassengerFront"))
-                                car.teslaAPIState.AddValue("pf", "int", 1, Tools.ToUnixTime(d), "vehicle_state");
-                            else
-                                car.teslaAPIState.AddValue("pf", "int", 0, Tools.ToUnixTime(d), "vehicle_state");
-
-                            if (DoorState.Contains("PassengerRear"))
-                                car.teslaAPIState.AddValue("pr", "int", 1, Tools.ToUnixTime(d), "vehicle_state");
-                            else
-                                car.teslaAPIState.AddValue("pr", "int", 0, Tools.ToUnixTime(d), "vehicle_state");
-
-                            if (DoorState.Contains("TrunkFront"))
-                                car.teslaAPIState.AddValue("ft", "int", 1, Tools.ToUnixTime(d), "vehicle_state");
-                            else
-                                car.teslaAPIState.AddValue("ft", "int", 0, Tools.ToUnixTime(d), "vehicle_state");
-
-                            if (DoorState.Contains("TrunkRear"))
-                                car.teslaAPIState.AddValue("rt", "int", 1, Tools.ToUnixTime(d), "vehicle_state");
-                            else
-                                car.teslaAPIState.AddValue("rt", "int", 0, Tools.ToUnixTime(d), "vehicle_state");
-                        }
-                        else if (value is JObject obj && obj.ContainsKey("doorValue"))
-                        {
-                            Dictionary<string, string> doorMapping = new Dictionary<string, string>
-                            {
-                                { "DriverFront", "df" },
-                                { "PassengerFront", "pf" },
-                                { "DriverRear", "dr" },
-                                { "PassengerRear", "pr" },
-                                { "TrunkFront", "ft" },
-                                { "TrunkRear", "rt" }
-                            };
-
-                            JToken doors = obj["doorValue"];
-
-                            if (doors is JObject doorValues)
-                            {
-                                foreach (var dm in doorMapping) // close all doors
-                                    car.teslaAPIState.AddValue(dm.Value, "int", 0, Tools.ToUnixTime(d), "vehicle_state");
-
-                                foreach (var door in doorValues)
-                                {
-                                    string originalKey = door.Key;
-                                    bool isOpen = door.Value.ToObject<bool>();
-
-                                    // Übersetzung des Türnamens
-                                    if (doorMapping.TryGetValue(originalKey, out string shortKey))
-                                    {
-                                        car.teslaAPIState.AddValue(shortKey, "int", isOpen ? 1 : 0, Tools.ToUnixTime(d), "vehicle_state");
-                                    }
-                                }
-                            }
-                        }
-                        else
-                        {
-                            car.teslaAPIState.AddValue("df", "int", 0, Tools.ToUnixTime(d), "vehicle_state");
-                            car.teslaAPIState.AddValue("dr", "int", 0, Tools.ToUnixTime(d), "vehicle_state");
-                            car.teslaAPIState.AddValue("pf", "int", 0, Tools.ToUnixTime(d), "vehicle_state");
-                            car.teslaAPIState.AddValue("pr", "int", 0, Tools.ToUnixTime(d), "vehicle_state");
-                            car.teslaAPIState.AddValue("ft", "int", 0, Tools.ToUnixTime(d), "vehicle_state");
-                            car.teslaAPIState.AddValue("rt", "int", 0, Tools.ToUnixTime(d), "vehicle_state");
-                        }
-
-                        Log("XXXX DoorState:" + DoorState);
+                        car.webhelper.is_sentry_mode = true;
+                        car.CurrentJSON.current_is_sentry_mode = true;
                         car.CurrentJSON.CreateCurrentJSON();
 
+                        Log("Insert Location (SentryMode)");
+                        await InsertLastLocationAsync(d, false);
                     }
-                    else if (key == "Locked")
+                    else
                     {
-                        string v = value["stringValue"];
+                        car.webhelper.is_sentry_mode = false;
+                        car.CurrentJSON.current_is_sentry_mode = false;
+                        car.CurrentJSON.CreateCurrentJSON();
+
+                        Log("Insert Location (SentryMode)");
+                        await InsertLastLocationAsync(d, false);
+                    }
+                    car.CurrentJSON.CreateCurrentJSON();
+                }
+                else if (key == "PreconditioningEnabled")
+                {
+                    bool preconditioning = false;
+
+                    string v = value["stringValue"];
+                    if (v == "True")
+                        preconditioning = true;
+
+                    bool v1 = value["booleanValue"];
+                    if (v1)
+                        preconditioning = true;
+
+                    car.CurrentJSON.current_is_preconditioning = preconditioning;
+                    Log("Preconditioning: " + preconditioning);
+                    car.CurrentJSON.CreateCurrentJSON();
+
+                    Log("Insert Location (Preconditioning)");
+                    await InsertLastLocationAsync(d, false);
+                }
+                else if (key == "OutsideTemp")
+                {
+                    string v = value["stringValue"];
+                    if (v == null)
+                    {
+                        v = value["doubleValue"];
                         if (v == null)
                         {
-                            v = value["booleanValue"];
-                            if (v == null)
-                            {
-                                continue;
-                            }
-                        }
-                        v = v.ToLower(CultureInfo.InvariantCulture);
-                        if (bool.TryParse(v, out bool l))
-                        {
-                            car.teslaAPIState.AddValue("locked", "bool", l, Tools.ToUnixTime(d), "vehicle_state");
-                            car.CurrentJSON.CreateCurrentJSON();
+                            continue;
                         }
                     }
-                    else if (key.EndsWith("Window"))
+                    if (double.TryParse(v, NumberStyles.Any, CultureInfo.InvariantCulture, out double OutsideTemp))
                     {
-                        string apistatekey = key.ToLower().Insert(2, "_");
-                        string Window = value["stringValue"];
-                        if (Window == null)
-                        {
-                            Window = value["windowStateValue"];
-                            if (Window == null)
-                            {
-                                continue;
-                            }
-                        }
-                        Log("Window: " + key + " / " + Window);
-                        if (!String.IsNullOrEmpty(Window))
-                        {
-                            int apistatevalue = 0;
-                            if (Window.Contains("Open"))
-                                apistatevalue = 1;
+                        lastOutsideTemp = OutsideTemp;
+                        car.CurrentJSON.current_outside_temperature = OutsideTemp;
+                        car.CurrentJSON.CreateCurrentJSON();
 
-                            car.teslaAPIState.AddValue(apistatekey, "int", apistatevalue, Tools.ToUnixTime(d), "vehicle_state");
+                        Log("Insert Location (OutsideTemp)");
+                        await InsertLastLocationAsync(d, false);
+                    }
+                }
+                else if (key == "InsideTemp")
+                {
+                    string v = value["stringValue"];
+                    if (v == null)
+                    {
+                        v = value["doubleValue"];
+                        if (v == null)
+                        {
+                            continue;
                         }
-                        else
-                            car.teslaAPIState.AddValue(apistatekey, "int", 0, Tools.ToUnixTime(d), "vehicle_state");
+                    }
+                    if (double.TryParse(v, NumberStyles.Any, CultureInfo.InvariantCulture, out double InsideTemp))
+                    {
+                        lastInsideTemp = InsideTemp;
+                        car.CurrentJSON.current_inside_temperature = InsideTemp;
+                        car.CurrentJSON.CreateCurrentJSON();
 
+                        Log("Insert Location (InsideTemp)");
+                        await InsertLastLocationAsync(d, false);
+                    }
+                }
+                else if (key == "TimeToFullCharge")
+                {
+                    string v = value["stringValue"];
+                    if (v == null)
+                    {
+                        v = value["doubleValue"];
+                        if (v == null)
+                        {
+                            continue;
+                        }
+                    }
+                    if (double.TryParse(v, NumberStyles.Any, CultureInfo.InvariantCulture, out double TimeToFullCharge))
+                    {
+                        car.CurrentJSON.current_time_to_full_charge = TimeToFullCharge;
                         car.CurrentJSON.CreateCurrentJSON();
                     }
-                    else if (key == "DetailedChargeState")
+                }
+                else if (key == "ChargeLimitSoc")
+                {
+                    string v = value["stringValue"];
+                    if (v == null)
                     {
-                        string DetailedChargeState = value["detailedChargeStateValue"];
-
-                        if (!String.IsNullOrEmpty(DetailedChargeState))
+                        v = value["intValue"];
+                        if (v == null)
                         {
-                            lastDetailedChargeState = DetailedChargeState;
+                            continue;
+                        }
+                    }
+                    if (double.TryParse(v, NumberStyles.Any, CultureInfo.InvariantCulture, out double ChargeLimitSoc))
+                    {
+                        car.CurrentJSON.charge_limit_soc = (int)ChargeLimitSoc;
+                        car.CurrentJSON.CreateCurrentJSON();
+                    }
+                }
+                else if (key == "DestinationName")
+                {
+                    string v = value["stringValue"];
 
-                            await CheckDetailedChargeStateAsync(d);
+                    car.CurrentJSON.active_route_destination = v;
+                    car.CurrentJSON.CreateCurrentJSON();
 
-                            if (DetailedChargeState != "DetailedChargeStateCharging")
+                }
+                else if (key == "MinutesToArrival")
+                {
+                    string v = value["stringValue"];
+                    if (v == null)
+                    {
+                        v = value["doubleValue"];
+                        if (v == null)
+                        {
+                            continue;
+                        }
+                    }
+                    if (double.TryParse(v, NumberStyles.Any, CultureInfo.InvariantCulture, out double MinutesToArrival))
+                    {
+                        car.CurrentJSON.active_route_minutes_to_arrival = (int)MinutesToArrival;
+                        car.CurrentJSON.CreateCurrentJSON();
+                    }
+                }
+                else if (key == "MilesToArrival")
+                {
+                    string v = value["stringValue"];
+                    if (v == null)
+                    {
+                        v = value["doubleValue"];
+                        if (v == null)
+                        {
+                            continue;
+                        }
+                    }
+                    if (double.TryParse(v, NumberStyles.Any, CultureInfo.InvariantCulture, out double MilesToArrival))
+                    {
+                        car.CurrentJSON.active_route_km_to_arrival = (long)(MilesToArrival * 1.609344);
+                        car.CurrentJSON.CreateCurrentJSON();
+                    }
+                }
+                else if (key == "ExpectedEnergyPercentAtTripArrival")
+                {
+                    try
+                    {
+                        int? v = value["intValue"];
+                        car.CurrentJSON.active_route_energy_at_arrival = v;
+                        car.CurrentJSON.CreateCurrentJSON();
+                    }
+                    catch (Exception ex)
+                    {
+                        ex.ToExceptionless().Submit();
+                        Log(ex.ToString());
+                    }
+
+                }
+                else if (key == "RouteTrafficMinutesDelay")
+                {
+                    try
+                    {
+                        double v = value["doubleValue"];
+
+                        car.CurrentJSON.active_route_traffic_minutes_delay = v;
+                        car.CurrentJSON.CreateCurrentJSON();
+                    }
+                    catch (Exception ex)
+                    {
+                        ex.ToExceptionless().Submit();
+                        Log(ex.ToString());
+                    }
+                }
+                else if (key == "BatteryHeaterOn")
+                {
+                    string v = value["stringValue"];
+                    if (v == null)
+                    {
+                        v = value["booleanValue"];
+                        if (v == null)
+                        {
+                            continue;
+                        }
+                    }
+                    v = v.ToLower(CultureInfo.InvariantCulture);
+                    if (bool.TryParse(v, out bool BatteryHeaterOn))
+                    {
+                        car.CurrentJSON.current_battery_heater = BatteryHeaterOn;
+                        Log("BatteryHeaterOn: " + BatteryHeaterOn);
+                        car.CurrentJSON.CreateCurrentJSON();
+                    }
+                }
+                else if (key == "DefrostForPreconditioning")
+                {
+                    string v = value["stringValue"];
+                    if (v == null)
+                    {
+                        v = value["booleanValue"];
+                        if (v == null)
+                        {
+                            continue;
+                        }
+                    }
+                    v = v.ToLower(CultureInfo.InvariantCulture);
+                    if (bool.TryParse(v, out bool preconditioning))
+                    {
+                        car.CurrentJSON.current_is_preconditioning = preconditioning;
+                        Log("Preconditioning: " + preconditioning);
+                        car.CurrentJSON.CreateCurrentJSON();
+                    }
+                }
+                else if (key.StartsWith("TpmsPressure"))
+                {
+                    string suffix = key.Substring(key.Length - 2);
+                    string v = value["stringValue"];
+                    if (v == null)
+                    {
+                        v = value["doubleValue"];
+                        if (v == null)
+                        {
+                            continue;
+                        }
+                    }
+                    if (double.TryParse(v, NumberStyles.Any, CultureInfo.InvariantCulture, out double pressure))
+                    {
+                        pressure = Math.Round(pressure, 2);
+                        
+                        if (databaseCalls)
+                        {
+                            switch (suffix)
                             {
-                                if (acCharging)
-                                {
-                                    Log("Stop AC Charging by DetailedChargeState");
-                                    acCharging = false;
-                                }
+                                case "Fl":
+                                    _ = car.DbHelper.InsertTPMSAsync(1, pressure, d);
+                                    car.CurrentJSON.tpms_pressure_fl = pressure;
+                                    break;
+                                case "Fr":
+                                    _ = car.DbHelper.InsertTPMSAsync(2, pressure, d);
+                                    car.CurrentJSON.tpms_pressure_fr = pressure;
+                                    break;
+                                case "Rl":
+                                    _ = car.DbHelper.InsertTPMSAsync(3, pressure, d);
+                                    car.CurrentJSON.tpms_pressure_rl = pressure;
+                                    break;
+                                case "Rr":
+                                    _ = car.DbHelper.InsertTPMSAsync(4, pressure, d);
+                                    car.CurrentJSON.tpms_pressure_rr = pressure;
+                                    break;
+                            }
+                        }
+                        car.CurrentJSON.CreateCurrentJSON();
+                        car.teslaAPIState.AddValue("tpms_pressure_" + suffix.ToLower(), "double", value, Tools.ToUnixTime(d), "vehicle_state");
+                        
+                    }
+                }
+                else if (key == "VehicleName")
+                {
+                    string v = value["stringValue"];
+                    if (!String.IsNullOrEmpty(v))
+                    {
+                        if (car.DisplayName != v)
+                        {
+                            Log("DisplayName: " + v);
+                            car.DisplayName = v;
+                            car.DbHelper.WriteCarSettings();
+                        }
+                    }
+                }
+                else if (key == "Trim")
+                {
+                    string v = value["stringValue"];
+                    if (!String.IsNullOrEmpty(v))
+                    {
+                        v = v.ToLower();
+                        if (car.TrimBadging != v)
+                        {
+                            Log("Trim: " + v);
+                            car.TrimBadging = v;
+                            car.DbHelper.WriteCarSettings();
+                            car.webhelper.UpdateEfficiency();
 
-                                if (dcCharging)
-                                {
-                                    Log("Stop DC Charging by DetailedChargeState");
-                                    dcCharging = false;
-                                }
-                            }
+                            Log("Car Model Name: " + car.ModelName);
+                        }
+                    }
+                }
+                else if (key == "ServiceMode")
+                {
+                    string v = value["stringValue"];
+                    if (v == null)
+                    {
+                        v = value["booleanValue"];
+                        if (v == null)
+                        {
+                            continue;
+                        }
+                    }
+                    v = v.ToLower(CultureInfo.InvariantCulture);
+                    if (bool.TryParse(v, out bool serviceMode))
+                    {
+                        car.teslaAPIState.AddValue("in_service", "int", serviceMode ? 1 : 0, Tools.ToUnixTime(d), "vehicle_state");
+                    }
+                }
+                else if (key == "CarType")
+                {
+                    string v = value["stringValue"];
+                    if (v == null)
+                    {
+                        v = value["carTypeValue"];
+                        if (v == null)
+                        {
+                            continue;
+                        }
+                    }
+                    if (!String.IsNullOrEmpty(v))
+                    {
+                        v = v.Replace("CarType", "");
+                        v = v.ToLower();
 
-                            if (DetailedChargeState.Contains("DetailedChargeStateNoPower") ||
-                                DetailedChargeState.Contains("DetailedChargeStateStarting") ||
-                                DetailedChargeState.Contains("DetailedChargeStateCharging") ||
-                                DetailedChargeState.Contains("DetailedChargeStateComplete") ||
-                                DetailedChargeState.Contains("DetailedChargeStateStopped"))
-                            {
-                                car.CurrentJSON.current_plugged_in = true;
-                            }
-                            else
-                            {
-                                car.CurrentJSON.current_plugged_in = false;
-                            }
+                        if (car.CarType != v)
+                        {
+                            Log("CarType: " + v);
+                            car.CarType = v;
+                            car.CarSpecialType = "base";
+                            car.DbHelper.WriteCarSettings();
+                            car.webhelper.UpdateEfficiency();
+
+                            Log("Car Model Name: " + car.ModelName);
+                        }
+                    }
+                }
+                else if (key == "Version")
+                {
+                    string car_version = value["stringValue"];
+                    if (!String.IsNullOrEmpty(car_version))
+                    {
+                        if (car.CurrentJSON.current_car_version != car_version)
+                        {
+                            Log("Car Version: " + car_version);
+                            car.CurrentJSON.current_car_version = car_version;
                             car.CurrentJSON.CreateCurrentJSON();
 
+                            car.DbHelper.SetCarVersion(car_version);
+
+                            car.webhelper.TaskerWakeupfile(true);
                         }
-                        Log("DetailedChargeState: " + DetailedChargeState);
 
                     }
+                }
+                else if (key == "SoftwareUpdateInstallationPercentComplete")
+                {
+                    string v1 = value["stringValue"];
+                    if (v1 == null)
+                    {
+                        v1 = value["intValue"];
+                        if (v1 == null)
+                        {
+                            continue;
+                        }
+                    }
+                    if (!int.TryParse(v1, NumberStyles.Any, CultureInfo.InvariantCulture, out int swUpdateInstalling))
+                    {
+                        continue;
+                    }
+
+                    if (car.CurrentJSON.software_update_version != "")
+                    {
+
+                        if (swUpdateInstalling == 1)
+                        {
+                            car.teslaAPIState.AddValue("software_update.status", "string", "Available", Tools.ToUnixTime(d), "vehicle_state");
+                        }
+                        if (swUpdateInstalling == 3)
+                        {
+                            car.teslaAPIState.AddValue("software_update.status", "string", "Downloading", Tools.ToUnixTime(d), "vehicle_state");
+                        }
+                        if (swUpdateInstalling > 10)
+                        {
+                            car.teslaAPIState.AddValue("software_update.status", "string", "Installing", Tools.ToUnixTime(d), "vehicle_state");
+                        }
+                    }
+                    else
+                    {
+                        car.teslaAPIState.AddValue("software_update.status", "string", "", Tools.ToUnixTime(d), "vehicle_state");
+                    }
+                        car.CurrentJSON.CreateCurrentJSON();
+
+                }
+                else if (key == "SoftwareUpdateVersion")
+                {
+                    string version = value["stringValue"];
+                    if (!String.IsNullOrEmpty(version) && version != " " && version.Length > 4)
+                    {
+                        car.teslaAPIState.AddValue("software_update.version", "string", version, Tools.ToUnixTime(d), "vehicle_state");
+                    }
+                    else
+                    {
+                        car.teslaAPIState.AddValue("software_update.version", "string", "", Tools.ToUnixTime(d), "vehicle_state");
+                    }
+                    car.CurrentJSON.CreateCurrentJSON();
+                }
+                else if (key == "DoorState")
+                {
+                    string DoorState = value["stringValue"];
+                    if (!String.IsNullOrEmpty(DoorState))
+                    {
+                        if (DoorState.Contains("DriverFront"))
+                            car.teslaAPIState.AddValue("df", "int", 1, Tools.ToUnixTime(d), "vehicle_state");
+                        else
+                            car.teslaAPIState.AddValue("df", "int", 0, Tools.ToUnixTime(d), "vehicle_state");
+
+                        if (DoorState.Contains("DriverRear"))
+                            car.teslaAPIState.AddValue("dr", "int", 1, Tools.ToUnixTime(d), "vehicle_state");
+                        else
+                            car.teslaAPIState.AddValue("dr", "int", 0, Tools.ToUnixTime(d), "vehicle_state");
+
+                        if (DoorState.Contains("PassengerFront"))
+                            car.teslaAPIState.AddValue("pf", "int", 1, Tools.ToUnixTime(d), "vehicle_state");
+                        else
+                            car.teslaAPIState.AddValue("pf", "int", 0, Tools.ToUnixTime(d), "vehicle_state");
+
+                        if (DoorState.Contains("PassengerRear"))
+                            car.teslaAPIState.AddValue("pr", "int", 1, Tools.ToUnixTime(d), "vehicle_state");
+                        else
+                            car.teslaAPIState.AddValue("pr", "int", 0, Tools.ToUnixTime(d), "vehicle_state");
+
+                        if (DoorState.Contains("TrunkFront"))
+                            car.teslaAPIState.AddValue("ft", "int", 1, Tools.ToUnixTime(d), "vehicle_state");
+                        else
+                            car.teslaAPIState.AddValue("ft", "int", 0, Tools.ToUnixTime(d), "vehicle_state");
+
+                        if (DoorState.Contains("TrunkRear"))
+                            car.teslaAPIState.AddValue("rt", "int", 1, Tools.ToUnixTime(d), "vehicle_state");
+                        else
+                            car.teslaAPIState.AddValue("rt", "int", 0, Tools.ToUnixTime(d), "vehicle_state");
+                    }
+                    else if (value is JObject obj && obj.ContainsKey("doorValue"))
+                    {
+                        Dictionary<string, string> doorMapping = new Dictionary<string, string>
+                        {
+                            { "DriverFront", "df" },
+                            { "PassengerFront", "pf" },
+                            { "DriverRear", "dr" },
+                            { "PassengerRear", "pr" },
+                            { "TrunkFront", "ft" },
+                            { "TrunkRear", "rt" }
+                        };
+
+                        JToken doors = obj["doorValue"];
+
+                        if (doors is JObject doorValues)
+                        {
+                            foreach (var dm in doorMapping) // close all doors
+                                car.teslaAPIState.AddValue(dm.Value, "int", 0, Tools.ToUnixTime(d), "vehicle_state");
+
+                            foreach (var door in doorValues)
+                            {
+                                string originalKey = door.Key;
+                                bool isOpen = door.Value.ToObject<bool>();
+
+                                // Übersetzung des Türnamens
+                                if (doorMapping.TryGetValue(originalKey, out string shortKey))
+                                {
+                                    car.teslaAPIState.AddValue(shortKey, "int", isOpen ? 1 : 0, Tools.ToUnixTime(d), "vehicle_state");
+                                }
+                            }
+                        }
+                    }
+                    else
+                    {
+                        car.teslaAPIState.AddValue("df", "int", 0, Tools.ToUnixTime(d), "vehicle_state");
+                        car.teslaAPIState.AddValue("dr", "int", 0, Tools.ToUnixTime(d), "vehicle_state");
+                        car.teslaAPIState.AddValue("pf", "int", 0, Tools.ToUnixTime(d), "vehicle_state");
+                        car.teslaAPIState.AddValue("pr", "int", 0, Tools.ToUnixTime(d), "vehicle_state");
+                        car.teslaAPIState.AddValue("ft", "int", 0, Tools.ToUnixTime(d), "vehicle_state");
+                        car.teslaAPIState.AddValue("rt", "int", 0, Tools.ToUnixTime(d), "vehicle_state");
+                    }
+
+                    Log("XXXX DoorState:" + DoorState);
+                    car.CurrentJSON.CreateCurrentJSON();
+
+                }
+                else if (key == "Locked")
+                {
+                    string v = value["stringValue"];
+                    if (v == null)
+                    {
+                        v = value["booleanValue"];
+                        if (v == null)
+                        {
+                            continue;
+                        }
+                    }
+                    v = v.ToLower(CultureInfo.InvariantCulture);
+                    if (bool.TryParse(v, out bool l))
+                    {
+                        car.teslaAPIState.AddValue("locked", "bool", l, Tools.ToUnixTime(d), "vehicle_state");
+                        car.CurrentJSON.CreateCurrentJSON();
+                    }
+                }
+                else if (key.EndsWith("Window"))
+                {
+                    string apistatekey = key.ToLower().Insert(2, "_");
+                    string Window = value["stringValue"];
+                    if (Window == null)
+                    {
+                        Window = value["windowStateValue"];
+                        if (Window == null)
+                        {
+                            continue;
+                        }
+                    }
+                    Log("Window: " + key + " / " + Window);
+                    if (!String.IsNullOrEmpty(Window))
+                    {
+                        int apistatevalue = 0;
+                        if (Window.Contains("Open"))
+                            apistatevalue = 1;
+
+                        car.teslaAPIState.AddValue(apistatekey, "int", apistatevalue, Tools.ToUnixTime(d), "vehicle_state");
+                    }
+                    else
+                        car.teslaAPIState.AddValue(apistatekey, "int", 0, Tools.ToUnixTime(d), "vehicle_state");
+
+                    car.CurrentJSON.CreateCurrentJSON();
+                }
+                else if (key == "DetailedChargeState")
+                {
+                    string DetailedChargeState = value["detailedChargeStateValue"];
+
+                    if (!String.IsNullOrEmpty(DetailedChargeState))
+                    {
+                        lastDetailedChargeState = DetailedChargeState;
+
+                        await CheckDetailedChargeStateAsync(d);
+
+                        if (DetailedChargeState != "DetailedChargeStateCharging")
+                        {
+                            if (acCharging)
+                            {
+                                Log("Stop AC Charging by DetailedChargeState");
+                                acCharging = false;
+                            }
+
+                            if (dcCharging)
+                            {
+                                Log("Stop DC Charging by DetailedChargeState");
+                                dcCharging = false;
+                            }
+                        }
+
+                        if (DetailedChargeState.Contains("DetailedChargeStateNoPower") ||
+                            DetailedChargeState.Contains("DetailedChargeStateStarting") ||
+                            DetailedChargeState.Contains("DetailedChargeStateCharging") ||
+                            DetailedChargeState.Contains("DetailedChargeStateComplete") ||
+                            DetailedChargeState.Contains("DetailedChargeStateStopped"))
+                        {
+                            car.CurrentJSON.current_plugged_in = true;
+                        }
+                        else
+                        {
+                            car.CurrentJSON.current_plugged_in = false;
+                        }
+                        car.CurrentJSON.CreateCurrentJSON();
+
+                    }
+                    Log("DetailedChargeState: " + DetailedChargeState);
+
                 }
             }
         }
