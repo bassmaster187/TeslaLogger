@@ -52,6 +52,7 @@ namespace TeslaLogger
         double? latitude = null;
         double? longitude = null;
         double? speed = null;
+        bool reverse = false;
 
         double lastLatitude = 0;
         double lastLongitude = 0;
@@ -1242,7 +1243,7 @@ namespace TeslaLogger
                             {
                                 if (lastLatitude != 0 && lastLongitude != 0)
                                 {
-                                    double bearing = Tools.CalculateBearing(lastLatitude, lastLongitude, latitude.Value, longitude.Value);
+                                    double bearing = Tools.CalculateBearing(lastLatitude, lastLongitude, latitude.Value, longitude.Value, reverse);
                                     car.CurrentJSON.heading = (int)bearing;
                                 }
 
@@ -1865,6 +1866,15 @@ namespace TeslaLogger
                                     driving = false;
                                 }
                                 continue;
+                            }
+
+                            if (v1.EndsWith("D"))
+                            {
+                                reverse = false;
+                            }
+                            else if (v1.EndsWith("R"))
+                            {
+                                reverse = true;
                             }
 
                             if (v1.EndsWith("P"))

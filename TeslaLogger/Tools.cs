@@ -1500,7 +1500,7 @@ namespace TeslaLogger
         }
 
 
-        public static double CalculateBearing(double lat1, double lon1, double lat2, double lon2)
+        public static double CalculateBearing(double lat1, double lon1, double lat2, double lon2, bool reverse)
         {
             double dLon = ToRadians(lon2 - lon1);
             double lat1Rad = ToRadians(lat1);
@@ -1511,6 +1511,12 @@ namespace TeslaLogger
 
             double bearing = Math.Atan2(y, x);
             bearing = ToDegrees(bearing);
+
+            if(reverse)
+            {
+                bearing += 180;
+            }
+
             bearing = (bearing + 360) % 360; // Normalize to 0-360
 
             return bearing;
