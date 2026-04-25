@@ -2614,7 +2614,7 @@ Supercharger FR-La Seyne-sur-Mer,43.121199,5.85086
 Supercharger-V4 FR-La Valette-du-Var,43.135869,6.003096
 Supercharger-V3 FR-Labouheyre,44.202799,-0.92682
 Supercharger-V4 FR-Labège,43.549511,1.499973
-Supercharger FR-Langon,44.542436,-0.253954
+Supercharger-V4 FR-Langon,44.54248,-0.25392
 Supercharger-V4 FR-Laval Changé,48.092995,-0.758749
 Supercharger-V3 FR-Laxou,48.691096,6.127684
 Supercharger-V3 FR-Le Bosc,43.68861,3.35415
@@ -9681,7 +9681,6 @@ E.ON CZ-Čestlice Obchodní,50.00274,14.57362,5
 E.ON DE-Aachener Land,50.81714,6.21555,12
 E.ON DE-Aachener Land,50.81753,6.21413,10
 E.ON DE-Ahrensburg Kornkamp,53.68339,10.25765
-E.ON DE-Alsfeld An der A5,50.75979,9.35781
 E.ON DE-Ascheberg,51.77449,7.6394
 E.ON DE-Auetal An der A2,52.25749,9.30643
 E.ON DE-Augsburg Ab der A8,48.41263,10.91163
@@ -9738,7 +9737,6 @@ E.ON DE-Dannstadt An der A61,49.4103,8.33994
 E.ON DE-Dannstadt-Schauernheim An der A61,49.4102,8.34166
 E.ON DE-Dernbach An der A3,50.54842,7.58513
 E.ON DE-Distelrasen Nord,50.38857,9.53051
-E.ON DE-Dormagen An der A57,51.12548,6.7975
 E.ON DE-Dortmund Florianstraße,51.49834,7.4709
 E.ON DE-Dortmund Kleppingstraße,51.5117,7.46822
 E.ON DE-Dortmund Königswall 15,51.51658,7.45733
@@ -9818,6 +9816,7 @@ E.ON DE-Oelsnitz/Vogtland An der A72,50.43364,12.13054
 E.ON DE-Quickborn Ladepark HanseWerk,53.74554,9.94261
 E.ON DE-Rastanlage Fränkische Schweiz-Pegnitz,49.74842,11.51005
 E.ON DE-Rastanlage Fränkische Schweiz-Pegnitz,49.74854,11.5141
+E.ON DE-Rasthof Berfa,50.75976,9.35782
 E.ON DE-Rasthof Gruibingen,48.60597,9.63176
 E.ON DE-Rastplatz Bad Camberg West,50.30022,8.23456,20
 E.ON DE-Rastplatz Eichsfeld Nord,51.40398,10.41655
@@ -9849,6 +9848,7 @@ E.ON DE-Raststätte Gütersloh,51.86639,8.36953
 E.ON DE-Raststätte Hamburg-Stillhorn,53.48385,10.02427
 E.ON DE-Raststätte Hamburger Berge,53.42409,9.96305
 E.ON DE-Raststätte Hamburger Berge,53.42415,9.9664
+E.ON DE-Raststätte Hardtwald West,49.3501,8.63062
 E.ON DE-Raststätte Helmstedt,52.23243,11.0245
 E.ON DE-Raststätte Hohe Mark Ost,51.77193,7.17697
 E.ON DE-Raststätte Hohe Mark West,51.77208,7.1748
@@ -9877,6 +9877,7 @@ E.ON DE-Raststätte Münsterland West,51.94554,7.54785,30
 E.ON DE-Raststätte Neustädter Bucht,54.06822,10.75688
 E.ON DE-Raststätte Neustädter Bucht,54.07086,10.75543
 E.ON DE-Raststätte Niedergassel,51.92796,8.52916
+E.ON DE-Raststätte Nievenheim Ost,51.12548,6.7975
 E.ON DE-Raststätte Nürnberg-Feucht,49.3565,11.20164
 E.ON DE-Raststätte Nürnberg-Feucht,49.35728,11.20422
 E.ON DE-Raststätte Obergassel,51.93,8.53213
@@ -9916,7 +9917,6 @@ E.ON DE-Rostock Zum Südtor,54.13832,12.11406,20
 E.ON DE-Rothenburg ob der Tauber Laiblestraße,49.38173,10.18887
 E.ON DE-Sandersdorf-Brehna Raststätte Köckern,51.60728,12.18326
 E.ON DE-Sandersdorf-Brehna Raststätte Köckern,51.60902,12.1879
-E.ON DE-Sandhausen An der A5,49.35011,8.63062
 E.ON DE-Schellerten Hildesheimer Börde,52.1264,10.05105
 E.ON DE-Schellerten Hildesheimer Börde,52.12849,10.04995
 E.ON DE-Schenefeld Bürgermeister-Carstens-Ring,54.03677,9.47788
@@ -11119,6 +11119,7 @@ EnBW DE-Calberlah Hauptstraße,52.42,10.63297
 EnBW DE-Calw Bahnhofstraße,48.71312,8.74191
 EnBW DE-Calw Leibnizstraße,48.70536,8.76418
 EnBW DE-Castrop-Rauxel,51.58637,7.31609
+EnBW DE-Celle Heese,52.61764,10.05403
 EnBW DE-Chemnitz Chemnitzer Straße,50.78313,12.8968,20
 EnBW DE-Chemnitz Hellweg,50.80438,12.91227
 EnBW DE-Chemnitz Zschopauer Straße,50.81496,12.9542
@@ -11514,7 +11515,6 @@ EnBW DE-Hannover Am Leineufer,52.41463,9.64333,20
 EnBW DE-Hannover Rewe,52.33883,9.83251
 EnBW DE-Hannover Schulenburger Landstraße,52.41032,9.70682
 EnBW DE-Hardegsen,51.64926,9.83589
-EnBW DE-Hardtwald Ost,49.35101,8.63224
 EnBW DE-Harzgerode,51.64327,11.13962
 EnBW DE-Haslach im Kinzigtal Im Spießacker,48.27842,8.09269
 EnBW DE-Hasselhöhe West,53.33073,10.04298
@@ -12147,6 +12147,7 @@ EnBW DE-Raststätte Ellwanger Berge West,48.98314,10.1935
 EnBW DE-Raststätte Goldbach Nord,53.00084,9.17945,20
 EnBW DE-Raststätte Goldbach Süd,52.99874,9.18113,20
 EnBW DE-Raststätte Göttingen West,51.49462,9.87613,20
+EnBW DE-Raststätte Hardtwald Ost,49.351,8.63224
 EnBW DE-Raststätte Heiligenroth,50.4544,7.87324
 EnBW DE-Raststätte Hofoldinger Forst Süd,47.99715,11.67605
 EnBW DE-Raststätte Hohenlohe Nord,49.2071,9.63882,20
@@ -14853,6 +14854,7 @@ Ewiva IT-Valmontone Fashion District,41.7627,12.95579
 Ewiva IT-Vieste Via Dalmazia,41.88453,16.17352
 
 EWR DE-Lampertheim Weidweg,49.5919,8.45538
+EWR DE-Remscheid Auf dem Knapp,51.18246,7.23032
 EWR DE-Worms Am Bergkloster,49.63095,8.35662
 
 ews DE-Bad Segeberg Hamburger Straße,53.93656,10.30329
@@ -21969,6 +21971,7 @@ Sperto DK-Tarm Skolegade,55.90559,8.52399
 
 Spirii DE-Flensburg Lise-Meitner-Straße,54.76092,9.43731
 Spirii DE-Langballig Strandweg,54.8216,9.65523
+Spirii DK-Blåvand Blåvandvej,55.5563,8.1333
 Spirii DK-Hanstholm Kai Lindbergs Gade,57.1178,8.5972
 Spirii DK-Nexø Toldbodgade,55.06235,15.13357
 
@@ -23295,6 +23298,7 @@ Vattenfall DE-Limbach-Oberfrohna Kleines Dörfchen,50.86222,12.76091
 Vattenfall DE-Lohne (Oldenburg) Meyerhofstraße,52.66756,8.23544
 Vattenfall DE-Lübeck Mecklenburger Straße,53.88818,10.78717
 Vattenfall DE-Lüneburg Neue Sülze,53.24828,10.40408
+Vattenfall DE-Malchow Friedrich-Ebert-Straße,53.47683,12.42158
 Vattenfall DE-Meldorf Zingelstraße,54.08942,9.07948
 Vattenfall DE-Melsungen Pfieffewiesen,51.10778,9.56068
 Vattenfall DE-Müncheberg Bergstraße,52.5067,14.13312
