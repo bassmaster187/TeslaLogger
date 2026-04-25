@@ -849,6 +849,15 @@ namespace TeslaLogger
 
                         if (DetailedChargeState != "DetailedChargeStateCharging")
                         {
+                            if (IsCharging && charge_energy_added != null)
+                            {
+                                using (MySqlCommand cmd = new MySqlCommand())
+                                {
+                                    cmd.Parameters.AddWithValue("@charge_energy_added", charge_energy_added);
+                                    await InsertChargingAsync(d, cmd);
+                                }
+                            }
+
                             if (acCharging)
                             {
                                 Log("Stop AC Charging by DetailedChargeState");
