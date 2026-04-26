@@ -2731,7 +2731,7 @@ Supercharger-V4 FR-Scionzier,46.07017,6.55105
 Supercharger FR-Senlis,49.20847,2.60672
 Supercharger-V3 FR-Sisteron,44.22584,5.912426,30
 Supercharger FR-Sisteron,44.225891,5.913562,10
-Supercharger-V3 FR-Sisteron Val de Durance,44.236374,5.913113
+Supercharger-V4 FR-Sisteron Val de Durance,44.23637,5.9131
 Supercharger FR-Strasbourg,48.53407,7.70201
 Supercharger-V4 FR-Séméac,43.2288,0.09604
 Supercharger-V4 FR-Sénas,43.741478,5.088358
@@ -3479,61 +3479,61 @@ Supercharger MA-Tangier,35.66673,-5.96583
 
 Supercharger-V3 NL-Akersloot,52.54776,4.72287,70
 Supercharger-V4 NL-Almere,52.35816,5.25185
-Supercharger NL-Apeldoorn,52.178323,5.912639
-Supercharger-V3 NL-Apeldoorn Oost,52.204703,6.016104
+Supercharger NL-Apeldoorn,52.17832,5.91264
+Supercharger-V3 NL-Apeldoorn Oost,52.2047,6.0161
 Supercharger-V4 NL-Arnhem,52.01587,5.92948
 Supercharger NL-Assen,52.9929,6.52447
-Supercharger NL-Badhoevedorp,52.329302,4.78487
-Supercharger-V4 NL-Best,51.490949,5.424566
-Supercharger NL-Breda,51.577493,4.729968
-Supercharger NL-Breukelen,52.167169,4.98908
-Supercharger NL-Bunnik,52.061077,5.2055
-Supercharger-V3 NL-Deventer,52.233435,6.210287
-Supercharger NL-Dordrecht,51.774454,4.65301
+Supercharger NL-Badhoevedorp,52.3293,4.78487
+Supercharger-V4 NL-Best,51.49095,5.42457
+Supercharger NL-Breda,51.5775,4.72997
+Supercharger NL-Breukelen,52.16717,4.98908
+Supercharger NL-Bunnik,52.06108,5.2055
+Supercharger-V3 NL-Deventer,52.23344,6.2103
+Supercharger NL-Dordrecht,51.77445,4.653
 Supercharger-V3 NL-Drachten,53.10586,6.12966
-Supercharger-V3 NL-Duiven,51.95898,6.02051,30
-Supercharger-V4 NL-Eelderwolde,53.196271,6.51622
-Supercharger-V3 NL-Eemnes,52.23563,5.230221
+Supercharger-V3 NL-Duiven,51.95898,6.0205,30
+Supercharger-V4 NL-Eelderwolde,53.19627,6.51622
+Supercharger-V3 NL-Eemnes,52.23563,5.23022
 Supercharger NL-Eindhoven,51.40713,5.47958
-Supercharger NL-Emmeloord,52.727421,5.764693
-Supercharger-V3 NL-Emmen,52.724202,6.883345
-Supercharger-V4 NL-Enschede,52.20289,6.88875
-Supercharger-V4 NL-Gorinchem,51.841309,5.009061,35
-Supercharger NL-Gouda,52.022465,4.684526
+Supercharger NL-Emmeloord,52.72742,5.7647
+Supercharger-V3 NL-Emmen,52.7242,6.88335
+Supercharger-V4 NL-Enschede,52.2029,6.88875
+Supercharger-V4 NL-Gorinchem,51.8413,5.00906,35
+Supercharger NL-Gouda,52.02246,4.68453
 Supercharger-V4 NL-Haarlem,52.3694,4.64776,60
-Supercharger-V4 NL-Harderwijk,52.33594,5.64359,30
-Supercharger-V4 NL-Heerlen,50.893031,5.955571
-Supercharger-V3 NL-Hengelo,52.287275,6.773343
-Supercharger NL-Hoorn,52.65081,5.03883,32
+Supercharger-V4 NL-Harderwijk,52.33594,5.6436,30
+Supercharger-V4 NL-Heerlen,50.89303,5.95557
+Supercharger-V3 NL-Hengelo,52.28728,6.77334
+Supercharger NL-Hoorn,52.6508,5.03883,32
 Supercharger-V3 NL-Horst,51.47005,6.05723
 Supercharger-V4 NL-Houten,52.02602,5.13827
 Supercharger NL-Leiderdorp,52.16046,4.54913
 Supercharger-V3 NL-Leusden,52.14405,5.4169,35
-Supercharger-V3 NL-Maastricht,50.816519,5.725658
-Supercharger-V3 NL-Meerkerk,51.89949,4.98264,32
+Supercharger-V3 NL-Maastricht,50.81652,5.72566
+Supercharger-V3 NL-Meerkerk,51.8995,4.98264,32
 Supercharger-V3 NL-Meerkerk,51.89962,4.98346,32
-Supercharger-V3 NL-Middelburg,51.480275,3.636485,30
-Supercharger NL-Naarden,52.30858,5.141127
-Supercharger-V4 NL-Nieuwerkerk aan den IJssel,51.978425,4.618982
-Supercharger-V4 NL-Nootdorp,52.05265,4.40221
-Supercharger NL-Oosterhout,51.626423,4.869517
-Supercharger-V3 NL-Ridderkerk,51.867934,4.557695
-Supercharger-V3 NL-Rijswijk,52.048276,4.349078
-Supercharger-V4 NL-Roosendaal,51.566509,4.469844,60
+Supercharger-V3 NL-Middelburg,51.48027,3.63648,30
+Supercharger NL-Naarden,52.30858,5.14113
+Supercharger-V4 NL-Nieuwerkerk aan den IJssel,51.97843,4.61898
+Supercharger-V4 NL-Nootdorp,52.05265,4.4022
+Supercharger NL-Oosterhout,51.62642,4.86952
+Supercharger-V3 NL-Ridderkerk,51.86793,4.5577
+Supercharger-V3 NL-Rijswijk,52.04828,4.34908
+Supercharger-V4 NL-Roosendaal,51.5665,4.46984,60
 Supercharger NL-s-Hertogenbosch,51.7205,5.3334
-Supercharger-V3 NL-Sassenheim,52.213205,4.503374
-Supercharger-V3 NL-Schiedam,51.924841,4.372206
-Supercharger-V4 NL-Spier,52.81684,6.46249
-Supercharger-V3 NL-Tilburg,51.543084,5.111792
-Supercharger NL-Tilburg,51.606331,5.005621
-Supercharger-V3 NL-Uden,51.671308,5.60267
-Supercharger NL-Urmond,50.98941,5.781523
+Supercharger-V3 NL-Sassenheim,52.2132,4.50337
+Supercharger-V3 NL-Schiedam,51.92484,4.3722
+Supercharger-V4 NL-Spier,52.81684,6.4625
+Supercharger-V3 NL-Tilburg,51.54308,5.1118
+Supercharger NL-Tilburg,51.60633,5.00562
+Supercharger-V3 NL-Uden,51.6713,5.60267
+Supercharger NL-Urmond,50.9894,5.78152
 Supercharger-V4 NL-Venray,51.54712,5.99716
-Supercharger NL-Vuren,51.838827,5.090846
-Supercharger-V3 NL-Weert,51.28177,5.650989
-Supercharger-V3 NL-Wolvega,52.880495,6.021328
-Supercharger NL-Zaltbommel,51.79633,5.254778,30
-Supercharger NL-Zevenaar,51.940585,6.081817
+Supercharger NL-Vuren,51.83883,5.09085
+Supercharger-V3 NL-Weert,51.28177,5.651
+Supercharger-V3 NL-Wolvega,52.8805,6.02133
+Supercharger NL-Zaltbommel,51.79633,5.25478,30
+Supercharger NL-Zevenaar,51.94058,6.08182
 Supercharger-V3 NL-Zuidbroek,53.16978,6.85344,60
 Supercharger NL-Zwolle,52.53204,6.15703
 
@@ -3713,7 +3713,7 @@ Supercharger-V4 NO-Vågå,61.87008,9.10338
 Supercharger-V4 NO-Vøringsfossen,60.42519,7.24742
 Supercharger-V3 NO-Åfjord,63.959951,10.226023
 Supercharger-V3 NO-Ål,60.63013,8.563912
-Supercharger-V4 NO-Ålesund,62.472474,6.364452
+Supercharger-V4 NO-Ålesund,62.47248,6.3645
 Supercharger-V4 NO-Åmot Vinje,59.57013,7.99255
 Supercharger NO-Åndalsnes,62.55781,7.68544,60
 Supercharger-V3 NO-Åsane,60.472861,5.333181,80
@@ -6830,6 +6830,8 @@ Allego DE-Autohof Gießen-Lützellinden,50.52955,8.6071
 Allego DE-Autohof Halle-Tornau,51.5458,12.01418
 Allego DE-Autohof Homberg/Efze,51.00472,9.47935
 Allego DE-Autohof Lauenau,52.2787,9.35075,10
+Allego DE-Autohof Leipzig Flughafen,51.4015,12.18158,8
+Allego DE-Autohof Leipzig Flughafen,51.4016,12.18156,8
 Allego DE-Autohof Lippetal,51.69575,7.96646,10
 Allego DE-Autohof Malsfeld,51.08686,9.4855,10
 Allego DE-Autohof Mühldorf,48.27258,12.5501,6
@@ -7272,8 +7274,6 @@ Allego DE-Saarbrücken Gasweg,49.24084,6.96286
 Allego DE-Salzkotten Geseker Straße,51.66723,8.59135,30
 Allego DE-Satteldorf Marco-Polo-Straße,49.18147,10.06946,15
 Allego DE-Schipkau Senftenberger Straße,51.5358,13.91472
-Allego DE-Schkeuditz An der Autobahn,51.4015,12.18158,8
-Allego DE-Schkeuditz An der Autobahn,51.4016,12.18156,8
 Allego DE-Schoeneiche bei Berlin Kalkberger Straße,52.47264,13.73822
 Allego DE-Schorfheide An der B167,52.84974,13.68662
 Allego DE-Schweinfurt Friedrich-Rätzer-Straße,50.0279,10.23788
@@ -7838,6 +7838,7 @@ ARAL DE-Pulheim Sachsstraße,50.9576,6.8015
 ARAL DE-Radeberg Badstraße,51.131,13.91717
 ARAL DE-Radeburg Radeberger Straße,51.21393,13.73073
 ARAL DE-Radolfzell am Bodensee Eisenbahnstraße,47.7417,8.955
+ARAL DE-Rastow Ahornstraße,53.4388,11.49002
 ARAL DE-Raststätte Fuchsberg Nord,53.91063,11.75777
 ARAL DE-Raststätte Fuchsberg Süd,53.90907,11.75754
 ARAL DE-Raststätte Rüblingsheide,51.88854,13.83703
@@ -10116,6 +10117,7 @@ eCarUp CH-Thun Grabenstrasse,46.76209,7.627
 eCarUp CH-Untersiggenthal Landstrasse,47.49633,8.2682
 eCarUp CH-Volketswil Hölzliwisenstrasse,47.37835,8.67981
 eCarUp CH-Winterthur Hegmattenstrasse,47.51,8.76041
+eCarUp DE-Büsum Alte Dorfstraße,54.13218,8.85908
 eCarUp DE-Gerstetten Ludwig-Erhard-Straße,48.58969,10.12808,30
 eCarUp DE-Linden Konrad-Zuse-Straße,50.53575,8.65767
 eCarUp DE-Oberhof Tambacher Straße,50.70595,10.72258
@@ -15639,6 +15641,7 @@ GreenWay PL-Świnoujście Skandynawska,53.90239,14.27527
 GreenWay SK-Banská Bystrica Na Troskách,48.73114,19.13589
 GreenWay SK-Košice Moldavská cesta,48.70027,21.24055
 GreenWay SK-Košťany nad Turcom,49.03429,18.90843
+GreenWay SK-Nitra Mlyny,48.30657,18.0866
 GreenWay SK-Petržalka Einsteinova,48.13241,17.11004
 GreenWay SK-Piešťany Nitrianska,48.58818,17.83272
 GreenWay SK-Prešov Solivarská,48.98534,21.25332
@@ -22732,6 +22735,7 @@ TankE DE-Uslar Hans-Böckler-Straße,51.65965,9.65102
 TAURON PL-Balice Lotnisko,50.07157,19.79963
 TAURON PL-MOP Jonas Północ,51.24117,17.49964
 
+TCB ES-Berdún N-240,42.59956,-0.8573
 TCB ES-Madrid Calle de Fuencarral,40.42963,-3.70251
 TCB ES-Navalmoral Autovía del Suroeste,39.87351,-5.54985
 
