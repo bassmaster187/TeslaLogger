@@ -2176,7 +2176,7 @@ Supercharger-V4 DE-Stralsund,54.302,13.09609
 Supercharger-V4 DE Stuckenborstel,53.116895,9.204895
 Supercharger-V4 DE-Stuttgart-Weilimdorf,48.8217,9.0927
 Supercharger-V4 DE-Sulz-Vöhringen,48.34328,8.66314,70
-Supercharger-V4 DE-Sulzbach (Taunus) MTZ,50.116696,8.530323,18
+Supercharger-V4 DE-Sulzbach (Taunus) MTZ,50.1167,8.5303,18
 Supercharger DE-Süderholz,54.09304,13.08592
 Supercharger-V4 DE-Süderholz-Grimmen,54.0933,13.08785,40
 Supercharger-V4 DE-Tiengen,47.98355,7.71917
@@ -2622,7 +2622,7 @@ Supercharger-V4 FR-Le Cannet-des-Maures,43.39224,6.34767
 Supercharger-V3 FR-Le Chesnay (Top Floor),48.826925,2.118539
 Supercharger FR-Le Mans,48.041833,0.175342
 Supercharger-V4 FR-Le Mans Rue des Frères Voisin,48.0328,0.17646
-Supercharger-V4 FR-Le Muy,43.476362,6.531602
+Supercharger-V4 FR-Le Muy,43.47627,6.53228
 Supercharger-V3 FR-Le Touquet-Paris-Plage,50.521625,1.598625
 Supercharger-V4 FR-Les Clayes-sous-Bois,48.8251,1.96833
 Supercharger-V3 FR-Les Herbiers,46.889368,-1.032994
@@ -3680,6 +3680,7 @@ Supercharger-V4 NO-Slependen,59.87368,10.50276
 Supercharger NO-Solli,59.324292,10.954448
 Supercharger-V4 NO-Sortland,68.69684,15.4189
 Supercharger-V3 NO-Stavanger Central,58.972256,5.737381
+Supercharger-V4 NO-Stavanger Mariero,58.93432,5.74416
 Supercharger-V4 NO-Steinkjer,64.01279,11.4905
 Supercharger-V3 NO-Steinkjer,64.019388,11.491386
 Supercharger NO-Stjørdal,63.466385,10.918098
@@ -3745,6 +3746,7 @@ Supercharger-V3 NZ-Taihape,-39.67351,175.793023
 Supercharger NZ-Taupo,-38.692628,176.075996
 Supercharger-V4 NZ-Waipapa,-35.21,173.91876
 Supercharger-V3 NZ-Waitomo,-38.243643,175.183284
+Supercharger-V4 NZ-Whakatane,37.953,176.9658
 Supercharger NZ-Whangarei,-35.72449,174.318696
 
 Supercharger-V3 PL-Białystok,53.12458,23.16743,70
@@ -7290,7 +7292,7 @@ Allego DE-Straubing Ittlinger Straße,48.88534,12.61206
 Allego DE-Stuttgart Ulmer Straße,48.7784,9.2333
 Allego DE-Suhl Pfütschbergstraße,50.59016,10.7131
 Allego DE-Sulz-Vöhringen Eythstraße,48.34356,8.66355,10
-Allego DE-Sulzbach (Taunus) MTZ,50.11668,8.53082,17
+Allego DE-Sulzbach (Taunus) MTZ,50.1168,8.53075,25
 Allego DE-Teltow Mahlower Straße,52.39604,13.2799
 Allego DE-Teupitz Buchholzer Straße,52.12344,13.63808
 Allego DE-Trappenkamp Gablonzer Straße,54.04306,10.2137
@@ -18931,7 +18933,6 @@ Mer DE-Bergen Markt,54.41851,13.43338
 Mer DE-Bergen Raiffeisenplatz,47.8069,12.59143
 Mer DE-Bergen Weißachener Straße,47.80678,12.5859
 Mer DE-Berlin Blomberger Weg,52.59777,13.32421
-Mer DE-Berlin Grunewald An der A115,52.43397,13.19181
 Mer DE-Beyernaumburg Riestedterstrasse,51.47247,11.39231
 Mer DE-Blieskastel Auf Scharlen,49.23374,7.26979
 Mer DE-Blieskastel Florianstraße,49.24728,7.2591
@@ -18941,7 +18942,6 @@ Mer DE-Bodenmais Bahnhofstraße,49.06945,13.1012
 Mer DE-Bodenmais Ladestraße,49.07058,13.10194
 Mer DE-Boms Saulgauer Straße,47.97178,9.50715
 Mer DE-Bous Saarbrücker Straße,49.28195,6.78706
-Mer DE-Breitenbach Rasthaus Rimberg A5,50.793,9.47318
 Mer DE-Böbrach Öd,49.05143,13.01948
 Mer DE-Cham Mittelweg,49.20174,12.66474
 Mer DE-Deggendorf Hans-Obser-Straße,48.82834,12.95783
@@ -18952,7 +18952,6 @@ Mer DE-Freiburg im Breisgau Hermann-Mitsch-Straße,48.02817,7.83394
 Mer DE-Furtwangen im Schwarzwald Allmendstraße,48.04978,8.21279
 Mer DE-Genthin Geschwister-Scholl-Straße,52.4086,12.16215
 Mer DE-Gladenbach Jakob-Heuser-Straße,50.7572,8.57802
-Mer DE-Grammow Raststätte Lindholz,54.05463,12.63038
 Mer DE-Herrenberg Daimlerstraße,48.60211,8.87012
 Mer DE-Herrenberg Ohmstraße,48.58151,8.89322
 Mer DE-Hofheim am Taunus Am Wandersmann,50.0596,8.37336
@@ -18966,11 +18965,8 @@ Mer DE-Lahr Einsteinallee,48.35312,7.80768,30
 Mer DE-Lam Arberstraße,49.19673,13.05185
 Mer DE-Landsberg am Lech Am Penzinger Feld,48.0537,10.89018
 Mer DE-Landshut Watzmannstraße,48.5376,12.11976
-Mer DE-Lohfelden Kassel Ost,51.26823,9.52284
 Mer DE-Marktl Postmeisterstraße,48.2479,12.8349
 Mer DE-Meckenbeuren Wiesenweg,47.7013,9.55891
-Mer DE-Mörsdorf Raststätte Teufelstal,50.87573,11.80833
-Mer DE-Mörsdorf Raststätte Teufelstal,50.87738,11.8076
 Mer DE-Mühldorf am Inn Oderstraße,48.23489,12.54142
 Mer DE-Mühlenfließ Fläming West An der A9,52.13232,12.75021
 Mer DE-Nidda Eisenried,50.41725,9.0183
@@ -18979,15 +18975,22 @@ Mer DE-Paderborn Frankfurter Weg,51.69773,8.73246
 Mer DE-Passau Grünaustraße,48.57285,13.45445
 Mer DE-Pattensen Ludwig-Erhard-Straße,52.2686,9.77704
 Mer DE-Rastanlage Ohrenbach Ost,49.4857,10.21286,20
+Mer DE-Rasthaus Rimberg,50.793,9.47318
 Mer DE-Raststätte Buddikate Ost,53.6945,10.32498,10
 Mer DE-Raststätte Großenmoor,50.71214,9.66105
 Mer DE-Raststätte Großenmoor,50.71401,9.66115
+Mer DE-Raststätte Grunewald West,52.43397,13.1918
 Mer DE-Raststätte Holmmoor Ost,53.71708,9.93998
 Mer DE-Raststätte Holmmoor West,53.71668,9.9375
 Mer DE-Raststätte Hörselgau,50.91319,10.58634
 Mer DE-Raststätte Kammersteiner Land,49.30609,10.9687
+Mer DE-Raststätte Kassel Ost,51.2682,9.5228
+Mer DE-Raststätte Lindholz,54.05463,12.63038
 Mer DE-Raststätte Pippinger Flur,48.17096,11.44702
+Mer DE-Raststätte Recknitz-Ost,53.84126,12.29027
 Mer DE-Raststätte Samerberg Süd,47.80122,12.1767,20
+Mer DE-Raststätte Teufelstal Nord,50.87738,11.8076
+Mer DE-Raststätte Teufelstal Süd,50.87573,11.80833
 Mer DE-Raststätte Uttrichshausen,50.41804,9.73412
 Mer DE-Raststätte Uttrichshausen,50.41901,9.73739
 Mer DE-Regensburg Josef-Strauß-Allee,48.98908,12.08604
@@ -19020,7 +19023,7 @@ Mer DE-Weiding Bürgermeister-Holmeier-Platz,49.26568,12.75385
 Mer DE-Weingarten Durlacher Straße,49.046,8.5267
 Mer DE-Weisel Glück-Auf-Straße,50.11655,7.81284
 Mer DE-Weißenfels Osterfeld West,51.10461,11.95474
-Mer DE-Weißwasser /O.L. Sorauer Platz,51.49877,14.63419
+Mer DE-Weißwasser/Oberlausitz Sorauer Platz,51.49877,14.6342
 Mer DE-Wetzlar Hermannsteiner Straße,50.56712,8.49915
 Mer DE-Wiesenfelden Georgsplatz,49.04084,12.53892
 Mer DE-Windorf Gellert,48.62471,13.22201
