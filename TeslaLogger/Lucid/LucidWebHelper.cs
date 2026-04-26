@@ -473,6 +473,7 @@ namespace TeslaLoggerNET8.Lucid
 
         public static string PythonLucidAPI(string username, string password, string region, LucidCar? car, out string error)
         {
+            const int pythonTimeoutMs = 120000;
             int carid = 0;
             if (car != null)
                 carid = car.CarInDB;
@@ -514,9 +515,38 @@ namespace TeslaLoggerNET8.Lucid
                 {
                     if (process != null)
                     {
-                        string output = process.StandardOutput.ReadToEnd();
-                        error = process.StandardError.ReadToEnd();
+                        Task<string> outputTask = process.StandardOutput.ReadToEndAsync();
+                        Task<string> errorTask = process.StandardError.ReadToEndAsync();
+
+                        if (!process.WaitForExit(pythonTimeoutMs))
+                        {
+                            try
+                            {
+                                process.Kill(true);
+                            }
+                            catch
+                            {
+                                // ignore
+                            }
+
+                            process.WaitForExit();
+
+                            error = $"Python call timeout after {pythonTimeoutMs}ms";
+
+                            if (car != null)
+                                car.Log("LucidAPIError: " + error);
+                            else
+                                Logfile.Log("LucidAPIError: " + error);
+
+                            var ts = DateTime.UtcNow - start;
+                            _ = DBHelper.AddMothershipDataToDBAsync("LucidAPI", ts.TotalSeconds, 408, carid);
+                            return string.Empty;
+                        }
+
                         process.WaitForExit();
+
+                        string output = outputTask.GetAwaiter().GetResult();
+                        error = errorTask.GetAwaiter().GetResult();
 
                         // Console.WriteLine("Output:");
                         // Console.WriteLine(output);
@@ -547,7 +577,11 @@ namespace TeslaLoggerNET8.Lucid
             }
             catch (Exception ex)
             {
-                car.Log($"An error occurred: {ex.Message}");
+                if (car != null)
+                    car.Log($"An error occurred: {ex.Message}");
+                else
+                    Logfile.Log($"An error occurred: {ex.Message}");
+
                 var ts = DateTime.UtcNow - start;
                 _ = DBHelper.AddMothershipDataToDBAsync("LucidAPI", ts.TotalSeconds, 400, carid);
             }
