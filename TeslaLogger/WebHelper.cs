@@ -2580,33 +2580,49 @@ namespace TeslaLogger
             }
             else if (car.CarType == "LUCID")
             {
-                if (car.TrimBadging == "PURE")
+                if (car.CarSpecialType == "Gravity")
                 {
-                    if (year == 2025)
-                        WriteCarSettings("0.119", "Lucid Air PURE 2025");
+                    if (car.TrimBadging == "GRAND TOURING")
+                    {
+                        WriteCarSettings("0.134", "Lucid Gravity GRAND TOURING");
+                        return;
+                    }
                     else
-                        WriteCarSettings("0.134", "Lucid Air PURE");
-                    return;
-                }
-                else if (car.TrimBadging == "TOURING")
-                {
-                    WriteCarSettings("0.134", "Lucid Air TOURING");
-                    return;
-                }
-                else if (car.TrimBadging == "GRAND TOURING")
-                {
-                    WriteCarSettings("0.134", "Lucid Air GRAND TOURING");
-                    return;
-                }
-                else if (car.TrimBadging == "DREAM EDITION")
-                {
-                    WriteCarSettings("0.134", "Lucid Air DREAM EDITION");
-                    return;
+                    {
+                        WriteCarSettings("0.134", "Lucid Gravity");
+                        return;
+                    }
                 }
                 else
                 {
-                    car.WhTR = 134;
-                    car.WriteSettings();
+                    if (car.TrimBadging == "PURE")
+                    {
+                        if (year == 2025)
+                            WriteCarSettings("0.119", "Lucid Air PURE 2025");
+                        else
+                            WriteCarSettings("0.134", "Lucid Air PURE");
+                        return;
+                    }
+                    else if (car.TrimBadging == "TOURING")
+                    {
+                        WriteCarSettings("0.134", "Lucid Air TOURING");
+                        return;
+                    }
+                    else if (car.TrimBadging == "GRAND TOURING")
+                    {
+                        WriteCarSettings("0.134", "Lucid Air GRAND TOURING");
+                        return;
+                    }
+                    else if (car.TrimBadging == "DREAM EDITION")
+                    {
+                        WriteCarSettings("0.134", "Lucid Air DREAM EDITION");
+                        return;
+                    }
+                    else
+                    {
+                        car.WhTR = 134;
+                        car.WriteSettings();
+                    }
                 }
             }
         }

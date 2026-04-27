@@ -1092,6 +1092,25 @@ namespace UnitTestsTeslalogger
         }
 
         [TestMethod]
+        public void Car_Lucid_Gravity_GT()
+        {
+            Car c = new Car(0, "", "", 0, "", DateTime.Now, "", "", "", "", "", "", "", null, false);
+            WebHelper wh = c.webhelper;
+
+            MemoryCache.Default.Remove("GetAvgMaxRage_0");
+            MemoryCache.Default.Add("GetAvgMaxRage_0", 650, DateTime.Now.AddMinutes(1));
+            wh.car.Vin = "7UUG1GHL9TAXXXXXX";
+            wh.car.CarType = "LUCID";
+            wh.car.CarSpecialType = "Gravity";
+            wh.car.DBWhTR = 134;
+            wh.car.TrimBadging = "GRAND TOURING";
+            wh.UpdateEfficiency();
+
+            Assert.AreEqual("Lucid Gravity GRAND TOURING", wh.car.ModelName);
+            Assert.AreEqual(0.134, wh.car.WhTR);
+        }
+
+        [TestMethod]
         public void Car_Lucid_Air_pure_2025()
         {
             Car c = new Car(0, "", "", 0, "", DateTime.Now, "", "", "", "", "", "", "", null, false);

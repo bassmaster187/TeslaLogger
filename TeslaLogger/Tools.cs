@@ -431,7 +431,7 @@ namespace TeslaLogger
                 return "?";
             }
 
-            if (vin.StartsWith("50E"))
+            if (vin.StartsWith("50E") || vin.StartsWith("7UU"))
             {
                 year = 0;
                 carType = "";
