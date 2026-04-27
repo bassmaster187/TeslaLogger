@@ -132,3 +132,4 @@ TeslaLogger/delete-REDIRECTDOCKERTOHOST.cmd
 /invoices
 /TLUpdate/.vs
 /UnitTestsTeslalogger/.vs
+/TeslaLogger/bin/Debug/net8.0

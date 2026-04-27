@@ -61,6 +61,10 @@ namespace TeslaLogger
 
         internal void AddValue(string name, string type, object value, long timestamp, string source)
         {
+            bool runStateChange = false;
+            object oldValueForStateChange = null;
+            long oldTsForStateChange = timestamp;
+
             TeslaAPIStateLock.Wait();
             try
             {
@@ -90,8 +94,9 @@ namespace TeslaLogger
                                 )
                             {
                                 storage[name][Key.ValueLastUpdate] = timestamp;
-                                HandleStateChange(name, oldvalue, value, long.Parse(oldTS.ToString(), Tools.ciEnUS), timestamp);
-                                UpdateCurrentJson(name, value);
+                                runStateChange = true; // run state change outside of lock to avoid deadlocks
+                                oldValueForStateChange = oldvalue;
+                                _ = long.TryParse(oldTS.ToString(), Tools.ciEnUS, out oldTsForStateChange);
                             }
                         }
                     }
@@ -117,6 +122,19 @@ namespace TeslaLogger
             finally
             {
                 TeslaAPIStateLock.Release();
+            }
+
+            if (runStateChange)
+            {
+                try
+                {
+                    HandleStateChange(name, oldValueForStateChange, value, oldTsForStateChange, timestamp);
+                }
+                catch (Exception ex)
+                {
+                    car.CreateExceptionlessClient(ex).Submit();
+                    Tools.DebugLog("Exception", ex);
+                }
             }
         }
 
