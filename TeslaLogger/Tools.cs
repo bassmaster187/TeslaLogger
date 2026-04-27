@@ -63,7 +63,7 @@ namespace TeslaLogger
 
         public static long ToUnixTime(DateTime dateTime)
         {
-            return (long)(dateTime - new DateTime(1970, 1, 1)).TotalSeconds;
+            return new DateTimeOffset(dateTime).ToUnixTimeSeconds();
         }
 
         public static void DebugLog(MySqlCommand cmd, string prefix = "", [CallerFilePath] string callerFilePath = null, [CallerLineNumber] int callerLineNumber = 0, [CallerMemberName] string callerMemberName = null)

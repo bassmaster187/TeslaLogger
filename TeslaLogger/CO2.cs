@@ -71,7 +71,7 @@ namespace TeslaLogger
 
             Newtonsoft.Json.Linq.JArray unixtimes = j[0]["xAxisValues"];
 
-            long unixTimestamp = (long)(dateTime.ToUniversalTime().Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
+            long unixTimestamp = new DateTimeOffset(dateTime.ToUniversalTime()).ToUnixTimeSeconds();
             unixTimestamp *= 1000;
 
             int ix = 0;
@@ -219,7 +219,7 @@ namespace TeslaLogger
 
             Newtonsoft.Json.Linq.JArray unixtimes = j[0]["xAxisValues"];
 
-            long unixTimestamp = (long)(dateTime.ToUniversalTime().Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
+            long unixTimestamp = new DateTimeOffset(dateTime.ToUniversalTime()).ToUnixTimeSeconds();
             unixTimestamp *= 1000;
 
             int ix = 0;
