@@ -566,7 +566,7 @@ namespace UnitTestsTeslalogger
             wh.UpdateEfficiency();
 
             Assert.AreEqual("M3 LR FL", wh.car.ModelName);
-            Assert.AreEqual(0.126, wh.car.WhTR);
+            Assert.AreEqual(0.139, wh.car.WhTR);
 
             bool supportedByFleetTelemetry = c.SupportedByFleetTelemetry();
             Assert.IsTrue(supportedByFleetTelemetry);
