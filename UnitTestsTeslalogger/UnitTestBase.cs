@@ -551,6 +551,28 @@ namespace UnitTestsTeslalogger
         }
 
         [TestMethod]
+        public void Car_M3_LR_2021()
+        {
+            Car c = new Car(0, "", "", 0, "", DateTime.Now, "", "", "", "", "", "", "", null, false);
+            WebHelper wh = c.webhelper;
+
+            MemoryCache.Default.Remove("GetAvgMaxRage_0");
+            MemoryCache.Default.Add("GetAvgMaxRage_0", 531, DateTime.Now.AddMinutes(1));
+            wh.car.Vin = "LRW3E7EK2PCXXXXXX";
+            wh.car.CarType = ""; // sometimes empty !!!
+            wh.car.CarSpecialType = "base";
+            wh.car.TrimBadging = "74d";
+            wh.car.DBWhTR = 0.126;
+            wh.UpdateEfficiency();
+
+            Assert.AreEqual("M3 LR FL", wh.car.ModelName);
+            Assert.AreEqual(0.126, wh.car.WhTR);
+
+            bool supportedByFleetTelemetry = c.SupportedByFleetTelemetry();
+            Assert.IsTrue(supportedByFleetTelemetry);
+        }
+
+        [TestMethod]
         public void Car_S_75D()
         {
             Car c = new Car(0, "", "", 0, "", DateTime.Now, "", "", "", "", "", "", "", null, false);

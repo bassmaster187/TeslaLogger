@@ -2182,6 +2182,11 @@ namespace TeslaLogger
                     WriteCarSettings("0.132", "M3 LR RWD 2025");
                     return;
                 }
+                else if (car.TrimBadging == "74d" && year >= 2021)
+                {
+                    WriteCarSettings("0.139", "M3 LR FL");
+                    return;
+                }
 
                 int maxRange = car.DbHelper.GetAvgMaxRage();
                 if (maxRange > 430)
