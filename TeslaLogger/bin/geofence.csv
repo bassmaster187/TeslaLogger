@@ -2327,7 +2327,7 @@ Supercharger-V4 ES-Castellón,40.004563,-0.055856
 Supercharger-V4 ES-Caudete de las Fuentes,39.55247,-1.27216
 Supercharger-V4 ES-Cozvíjar,36.98688,-3.60613
 Supercharger-V4 ES-Córdoba,37.889848,-4.749685
-Supercharger ES-Cúllar,37.554031,-2.613944
+Supercharger-V4 ES-Cúllar,37.55407,-2.61382
 Supercharger-V4 ES-Darro,37.49307,-2.76319
 Supercharger-V3 ES-El Ejido,36.752381,-2.80533
 Supercharger-V4 ES-Estepona,36.45731,-5.06157
@@ -7660,6 +7660,7 @@ ARAL DE-Essen Karnaper Straße,51.51762,7.008
 ARAL DE-Essen Rellinghauser Straße,51.43488,7.03393
 ARAL DE-Ettenheim,48.27475,7.78517
 ARAL DE-Ettlingen Karlsruher Straße,48.958,8.40652
+ARAL DE-Fahrbinde Ahornstraße,53.43885,11.49004
 ARAL DE-Forchheim Am halben Weg,49.69832,11.06423
 ARAL DE-Frankfurt am Main Carl-Benz-Straße,50.121,8.7493
 ARAL DE-Frankfurt am Main Hanauer Landstraße,50.11276,8.7
@@ -7842,7 +7843,6 @@ ARAL DE-Pulheim Sachsstraße,50.9576,6.8015
 ARAL DE-Radeberg Badstraße,51.131,13.91717
 ARAL DE-Radeburg Radeberger Straße,51.21393,13.73073
 ARAL DE-Radolfzell am Bodensee Eisenbahnstraße,47.7417,8.955
-ARAL DE-Rastow Ahornstraße,53.4388,11.49002
 ARAL DE-Raststätte Fuchsberg Nord,53.91063,11.75777
 ARAL DE-Raststätte Fuchsberg Süd,53.90907,11.75754
 ARAL DE-Raststätte Rüblingsheide,51.88854,13.83703
@@ -7964,6 +7964,10 @@ Audi DE-Stuttgart Heilbronner Straße,48.81821,9.17639
 Audi DE-Zwickau Oskar-Arnold-Straße,50.70889,12.50292
 Audi PL-Wrocław al. Karkonoska,51.06301,16.99938
 Audi RO-Râmnicu Vâlcea Strada Ştrandului,45.0732,24.34994
+
+Autel US-Charlton MA Massachusetts Tpke Eastbound,42.14012,-72.02472
+Autel US-Charlton MA Massachusetts Tpke Westbound,42.15607,-71.9645
+Autel US-Natick MA E Mile Marker,42.31177,-71.3643
 
 AutoEnterprise UA-Kharkiv Харків Нетіченська набережна,49.98405,36.22405
 AutoEnterprise UA-Кочерів Vul. Kyyivsʹka,50.36167,29.34178
@@ -13575,7 +13579,7 @@ Eviny NO-Tau Fiskåvegen,59.06501,5.92098
 Eviny NO-Tjørhom Fv468,58.90725,6.85443
 Eviny NO-Tromsø Alti Nerstranda,69.6466,18.95452
 Eviny NO-Trondheim Solsiden Senter,63.43543,10.413
-Eviny NO-Valderøy Valderøyvegen,62.52914,6.11634,25
+Eviny NO-Valderøy Valderøyvegen,62.52917,6.11615,25
 Eviny NO-Ålesund Nedre Strandgate,62.4697,6.14822
 Eviny NO-Ålgård Ole Nielsens vei,58.77058,5.84483
 Eviny NO-Ørsta Melsvegen,62.1925,6.1245
@@ -20980,6 +20984,7 @@ Repsol ES-Altafulla N-340,41.14004,1.36536
 Repsol ES-Arroyo de la Encomienda Ctra. Salamanca,41.62276,-4.77373
 Repsol ES-Autovía del Noroeste,41.00997,-4.66524
 Repsol ES-Carbajosa de la Sagrada C. Segunda,40.93895,-5.65541
+Repsol ES-Jaca Av. Regimiento de Galicia,42.56675,-0.55444
 Repsol ES-La Atalaya,40.3767,-3.87472
 Repsol ES-Las Navas del Marqués,40.59497,-4.3332
 Repsol ES-Madrid C. de Alberto Aguilera,40.4294,-3.70856
@@ -22241,6 +22246,7 @@ SW-Hilden DE-Hilden Am Lindenplatz,51.16263,6.94072
 SW-Hockenheim DE-Hockenheim Beethovenstraße,49.3112,8.54627
 SW-Huntetal DE-Diepholz Amelogenstraße,52.61202,8.37479
 SW-Husum DE-Husum Am Binnenhafen,54.47454,9.04984,20
+SW-Husum DE-Westerhever Ahndelweg,54.38405,8.65416
 SW-Ilmenau DE-Ilmenau Bahndamm,50.6846,10.92238
 SW-Ilmenau DE-Ilmenau Mühlgraben,50.68395,10.91684
 SW-Ingolstadt DE-Ingolstadt Friedrichshofener Straße,48.77292,11.38598
@@ -22906,6 +22912,8 @@ teamstrom DE-Rendsburg Friedrichstädter Straße,54.32014,9.62694
 teamstrom DE-Schleswig Marie-Curie-Straße,54.54219,9.58121
 teamstrom DE-Waren (Müritz) Friedrich-Wilhelm-Raiffeisen-Straße,53.52054,12.71505
 
+Techem DE-Münster Cheruskerring,51.9753,7.62546
+
 Tesla-Automation DE-Prüm,50.21363,6.44601
 Tesla-Automation DE-Prüm,50.21447,6.44755
 
@@ -23235,7 +23243,7 @@ Uno-X NO-Evje Verksvegen,58.58297,7.7962
 Uno-X NO-Kristiansand Barstølveien,58.17814,8.13101
 Uno-X NO-Sandnes Hanamyrveien,58.85443,5.77135
 Uno-X NO-Tiller Kvenildsskogen,63.33372,10.36051
-Uno-X NO-Valderøy Valderøyvegen,62.529,6.11677,25
+Uno-X NO-Valderøy Valderøyvegen,62.5289,6.11704,30
 
 Vannkraft NO-Leknes Skreda,68.15215,13.5118
 
@@ -23448,7 +23456,9 @@ VBH DE-Hoyerswerda Kamenzer Bogen,51.42739,14.23594
 
 Veefi AU-St Lucia QLD Walcott St,-27.49483,153.00886
 
+VEGA AL-Aliban A2,40.59918,19.4768
 VEGA AL-Durrës Rruga Adria,41.3175,19.472
+VEGA AL-Elbasan Rruga Elbasan-Metalurgji,41.10214,20.05636
 VEGA AL-Lushnjë SH4,40.95494,19.68658
 VEGA AL-Shkodër Rruga Mbreti Gent,42.055,19.49925
 VEGA AL-Vlora Rruga Enver Jaho,40.46504,19.4822
@@ -24704,6 +24714,7 @@ RO Arad Ibis Styles Hotel,46.20323,21.24786,15
 RO Brașov Benchmark,45.68106,25.51586
 RO Brașov Bulevardul Gării,45.66043,25.61354
 RO Brașov Business Park,45.63496,25.63894
+RO Brașov Calea București,45.63035,25.63946
 RO Brașov Calea Făgărașului,45.65914,25.56926
 RO Brașov RAT Rulmentul,45.68157,25.61481
 RO Brașov Regina Maria,45.64371,25.59957
