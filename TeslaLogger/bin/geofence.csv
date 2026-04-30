@@ -9844,8 +9844,8 @@ E.ON DE-Raststätte Garbsen Süd,52.4212,9.56568
 E.ON DE-Raststätte Greding Ost,49.0415,11.35394
 E.ON DE-Raststätte Grundbergsee Nord,53.0909,9.17628
 E.ON DE-Raststätte Grundbergsee Süd,53.08812,9.177
-E.ON DE-Raststätte Gräfenhausen,49.94643,8.60814
-E.ON DE-Raststätte Gräfenhausen,49.94688,8.61122
+E.ON DE-Raststätte Gräfenhausen Ost,49.94688,8.61122
+E.ON DE-Raststätte Gräfenhausen West,49.94643,8.60814
 E.ON DE-Raststätte Gudow Süd,53.52012,10.8058
 E.ON DE-Raststätte Gütersloh,51.86491,8.36976
 E.ON DE-Raststätte Gütersloh,51.86639,8.36953
@@ -16100,6 +16100,7 @@ incharge GR-Argostoli Αργοστόλι G. Gaitanidi,38.1639,20.4968
 incharge GR-Episkopiko Επισκοπικό A5,39.5451,20.85247
 incharge GR-Komotini Κομοτηνης Merarchias Serron,41.11433,25.37845
 incharge GR-Megara Μέγαρα E94,37.99574,23.36553
+incharge GR-Parga Πάργα Epar. Od. Morfis-Anthousas,39.2854,20.467
 incharge GR-Thermi Θέρμη Perikleous,40.56274,22.99353
 incharge GR-Thessaloniki Θεσσαλονίκη Monastiriou,40.66008,22.90082
 incharge GR-Volos Βόλος Larisis,39.36923,22.919
@@ -17003,6 +17004,7 @@ JOLT DE-Augsburg Donauwörther Straße,48.40102,10.88091
 JOLT DE-Augsburg Landsberger Straße,48.31152,10.90695
 JOLT DE-Berlin Berliner Straße,52.43557,13.26603
 JOLT DE-Berlin Heerstraße,52.51476,13.18443
+JOLT DE-Berlin Leipziger Platz,52.5091,13.3792
 JOLT DE-Berlin Lichtenrader Damm,52.38802,13.40829
 JOLT DE-Berlin Nordring,52.56079,13.55067
 JOLT DE-Berlin Unter den Eichen,52.44553,13.29251
@@ -21743,6 +21745,7 @@ Shell NL-Oirschot Rijksweg A58,51.49231,5.34927
 Shell NL-Oostburg Torenweidelaan,51.32573,3.48462
 Shell NL-Ouddorp Kabbelaarsbank,51.76013,3.85613
 Shell NL-Peulwijk-Oost A4,52.00931,4.31141,20
+Shell NL-Rilland Valckenisseweg,51.42005,4.18673
 Shell NL-Rotterdam Schiekade,51.92551,4.47812,25
 Shell NL-Winterswijk Europark,51.97298,6.70488
 Shell NL-Workum Spoardyk,52.97395,5.45226
