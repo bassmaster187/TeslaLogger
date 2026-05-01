@@ -2292,6 +2292,7 @@ Supercharger-V4 DK-Vejle South,55.664329,9.550989,30
 Supercharger-V4 DK-Viborg,56.45287,9.44938
 Supercharger-V4 DK-Viby J,56.116693,10.120822
 
+Supercharger-V4 EE-Laagri alevik,59.34053,24.61158
 Supercharger-V4 EE-Pärnu,58.38766,24.50118
 Supercharger-V4 EE-Tallinn,59.44099,24.73431
 Supercharger-V4 EE-Tartu,58.35802,26.67992
@@ -2994,24 +2995,25 @@ Supercharger GB-York,53.92417,-1.077908
 
 Supercharger-V3 GR-Atalanti Αταλάντη East,38.6612,23.07388
 Supercharger-V3 GR-Atalanti Αταλάντη West,38.65883,23.07121
-Supercharger GR-Athens,38.034938,23.79096
+Supercharger GR-Athen Αθήνα,38.03503,23.79098
 Supercharger-V4 GR-Ioannina Ιωάννινα,39.60365,20.86215
+Supercharger-V4 GR-Kavala Καβάλα,40.94068,24.3833
 Supercharger-V3 GR-Larissa Λάρισα South,39.60536,22.44146
 Supercharger-V3 GR-Psathopyrgos Ψαθόπυργου North,38.32545,21.86835
 Supercharger-V3 GR-Psathopyrgos Ψαθόπυργου South,38.32438,21.86918
+Supercharger-V4 GR-Strymoniko Στρυμονικό,41.0433,23.31332
 Supercharger-V4 GR-Thessaloniki Θεσσαλονίκη,40.5547,22.99516
 
 Supercharger-V4 HR-Bačva,45.23919,13.71488
 Supercharger-V4 HR-Bačva,45.23939,13.71592
 Supercharger-V4 HR-Cvetković,45.65381,15.65603,60
 Supercharger-V4 HR-Gospić,44.5771,15.39341
-Supercharger-V4 HR-Janjče,44.75082,15.37355
-Supercharger-V4 HR-Janjče,44.75155,15.37485
+Supercharger-V4 HR-Janjče East,44.75155,15.37485
+Supercharger-V4 HR-Janjče West,44.75082,15.37355
 Supercharger-V4 HR-Jasenice,44.24,15.5705
 Supercharger-V4 HR-Jasenice,44.2409,15.566
 Supercharger HR-Karlovac,45.51297,15.54748
 Supercharger-V4 HR-Krapina,46.13145,15.8869
-Supercharger-V4 HR-Otocac,44.89314,15.18408
 Supercharger-V4 HR-Otočac,44.89332,15.18395
 Supercharger HR-Senj,44.98932,14.89781
 Supercharger-V4 HR-Slavonski Brod,45.1753,18.06326
@@ -18002,6 +18004,7 @@ Lidl DE-Bottrop Horster Straße,51.53351,6.95352
 Lidl DE-Brake Am Stadion 2,53.33129,8.45948
 Lidl DE-Bramsche Lindenstraße 64,52.41753,7.97609
 Lidl DE-Braunschweig Otto-von-Guericke-Straße,52.24529,10.5137
+Lidl DE-Bremen Hastedter Heerstraße,53.06896,8.8579
 Lidl DE-Bremen Hemmstraße,53.10107,8.81408,30
 Lidl DE-Bremervörde Alte Straße 35,53.48689,9.14105
 Lidl DE-Bretten,49.03848,8.69647
