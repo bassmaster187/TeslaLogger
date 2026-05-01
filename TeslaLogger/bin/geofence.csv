@@ -7848,6 +7848,7 @@ ARAL DE-Radolfzell am Bodensee Eisenbahnstraße,47.7417,8.955
 ARAL DE-Raststätte Fuchsberg Nord,53.91063,11.75777
 ARAL DE-Raststätte Fuchsberg Süd,53.90907,11.75754
 ARAL DE-Raststätte Rüblingsheide,51.88854,13.83703
+ARAL DE-Raststätte Schackendorf West,53.95964,10.2608
 ARAL DE-Raubling Rosenheimer Straße,47.8048,12.11988
 ARAL DE-Rednitzhembach Rother Straße,49.29467,11.0826
 ARAL DE-Regen Bahnhofstraße,48.97001,13.13327
@@ -7865,7 +7866,6 @@ ARAL DE-Saarbrücken Mainzer Straße,49.22561,7.03041,30
 ARAL DE-Saarlouis Metzer Straße,49.30546,6.74008
 ARAL DE-Sandersdorf-Brehna An der B 100,51.55376,12.19667
 ARAL DE-Sankt Ingbert Saarbrücker Straße,49.2756,7.11057
-ARAL DE-Schackendorf BAB,53.96005,10.2609
 ARAL DE-Schlüsselfeld Attelsdorf,49.74647,10.63388
 ARAL DE-Schuby Westring,54.51897,9.46454
 ARAL DE-Schwegenheim Im breiten Pfuhl,49.27227,8.33897
@@ -8721,7 +8721,6 @@ CircleK DE-Reiskirchen Bänningerstraße,50.59616,8.8181,25
 CircleK DE-Rheinberg Minkeldonk,51.53374,6.58057
 CircleK DE-Rösrath Oswald-von-Nell-Breuning-Straße,50.88453,7.18666
 CircleK DE-Schnaittach Juraleite,49.6188,11.40841
-CircleK DE-Schorfheide-Buckowsee BAB Ost,52.87292,13.69059
 CircleK DE-Schönefeld Elly-Beinhorn-Ring,52.37074,13.52692,25
 CircleK DE-Solms Mittelbiel,50.55196,8.4165
 CircleK DE-Solms Mittelbiel,50.55445,8.41235
@@ -9780,7 +9779,6 @@ E.ON DE-Heiligenhafen Industriestraße,54.365,11.00822,30
 E.ON DE-Höchstadt Parkplatz Engelgarten,49.70505,10.8025
 E.ON DE-Itzehoe Finanzamt,53.9265,9.52731
 E.ON DE-Kiel Feldstraße,54.33348,10.13862
-E.ON DE-Knüllwald BAB 7,51.03608,9.48958
 E.ON DE-Köln Boltensternstraße,50.98073,6.96859
 E.ON DE-Lahr/Schwarzwald Im Götzmann,48.33365,7.84502,20
 E.ON DE-Lechwiesen,48.05866,10.84867,30
@@ -9856,6 +9854,8 @@ E.ON DE-Raststätte Hamburger Berge,53.42409,9.96305
 E.ON DE-Raststätte Hamburger Berge,53.42415,9.9664
 E.ON DE-Raststätte Hansens Holz Nord,51.09095,13.23684
 E.ON DE-Raststätte Hardtwald West,49.3501,8.63062
+E.ON DE-Raststätte Harz West,51.92818,10.14192,15
+E.ON DE-Raststätte Hasselberg Ost,51.0362,9.48966
 E.ON DE-Raststätte Helmstedt,52.23243,11.0245
 E.ON DE-Raststätte Hermsdorfer Kreuz West,50.87494,11.84664
 E.ON DE-Raststätte Hohe Mark Ost,51.77193,7.17697
@@ -9948,7 +9948,6 @@ E.ON DE-Schenefeld Bürgermeister-Carstens-Ring,54.03677,9.47788
 E.ON DE-Schenefeld Kiebitzweg,53.60221,9.83605
 E.ON DE-Schondra A7 Ost,50.26758,9.88249
 E.ON DE-Schwarzenbek Hans-Koch-Ring,53.51264,10.49781
-E.ON DE-Seesen BAB7 Harz,51.92811,10.14181
 E.ON DE-Soltau Raststätte Wietzenbruch West,52.96127,9.89378
 E.ON DE-Söhlde Bürgermeister-Burgdorf-Straße,52.18946,10.227
 E.ON DE-Süderlügum Hauptstraße,54.88379,8.90898,20
@@ -11305,9 +11304,7 @@ EnBW DE-Eriskirch Friedrichshafener Straße,47.63391,9.52444
 EnBW DE-Erkelenz Burger King,51.07031,6.30264
 EnBW DE-Erkelenz Penny,51.07564,6.30506
 EnBW DE-Erkheim Eidlerholzstraße,48.02616,10.32854
-EnBW DE-Erlangen BAB A3 Aurach,49.58181,10.92685
 EnBW DE-Erlangen Hofmannstraße,49.59287,11.01452,10
-EnBW DE-Erlangen Karl-May-Straße,49.58171,10.93069
 EnBW DE-Erwitte,51.60625,8.33675
 EnBW DE-Eschborn Ginnheimer Straße,50.14132,8.58163,29
 EnBW DE-Eschelbronn Bahnhofstraße,49.3201,8.86804
@@ -12152,6 +12149,8 @@ EnBW DE-Rastplatz Bad Camberg Ost,50.30145,8.23656
 EnBW DE-Rastplatz Hohenstein,51.2902,6.80453
 EnBW DE-Raststätte Aggertal Nord,50.95162,7.318
 EnBW DE-Raststätte Aggertal Süd,50.95184,7.32062
+EnBW DE-Raststätte Aurach Nord,49.5817,10.9307
+EnBW DE-Raststätte Aurach Süd,49.5818,10.92685
 EnBW DE-Raststätte Bruchsal Ost,49.16299,8.57098,12
 EnBW DE-Raststätte Bruchsal West,49.16091,8.56703,8
 EnBW DE-Raststätte Denkendorf Nord,48.69386,9.30373,15
@@ -16463,7 +16462,6 @@ Ionity DE-Haidt Süd,49.77935,10.24649
 Ionity DE-Hallstadt Heganger,49.91381,10.86568
 Ionity DE-Hamminkeln,51.7391,6.59518
 Ionity DE-Harz Ost,51.92628,10.14324
-Ionity DE-Harz West,51.92803,10.14173
 Ionity DE-Heiligengrabe Liebenthaler Dorfstraße,53.14752,12.3989
 Ionity DE-Herne Holsterhauser Straße,51.52873,7.19984
 Ionity DE-Herrenberg Hewlett-Packard-Straße,48.58196,8.89197
@@ -16531,6 +16529,7 @@ Ionity DE-Raststätte Eifel Ost,50.07029,6.88066,20
 Ionity DE-Raststätte Eifel West,50.06832,6.88035,22
 Ionity DE-Raststätte Goldbach Nord,53.00056,9.17968,20
 Ionity DE-Raststätte Goldbach Süd,52.99833,9.18139,30
+Ionity DE-Raststätte Harz West,51.92774,10.1413
 Ionity DE-Raststätte Hohenlohe Nord,49.207,9.63934,20
 Ionity DE-Raststätte Hohenlohe Süd,49.20538,9.6398,20
 Ionity DE-Raststätte Köschinger Forst Ost,48.8366,11.47224
@@ -19603,6 +19602,7 @@ NLE NL-Lingehorst A2,51.91256,5.1807,20
 Nobil NO-Oslo-Gardermoen Lufthavn,60.18587,11.06897
 
 nonoxx-pro DE-Cochem Ravenestraße,50.15077,7.16531
+nonoxx-pro DE-Friedrichstadt Tönninger Straße,54.37233,9.09096
 nonoxx-pro DE-Grube Hauptstraße,54.23087,11.03578
 nonoxx-pro DE-Grömitz Am Strande,54.14459,10.95913
 nonoxx-pro DE-Grömitz Gildestraße,54.14487,10.95546
@@ -24618,6 +24618,7 @@ DE Wöbbelin KFZ-Service Braemer,53.39759,11.5145
 DE Zeitz Martin-Planer-Straße,51.04626,12.15665
 DE Zell Woppmannsberg,49.13515,12.42354
 DE Zwickau Kopernikusstraße,50.73138,12.47356
+DK Greve Marina Autocamper Plads,55.59358,12.35628
 DK Silkeborg Haderslevvej,56.17267,9.48722
 ES A Coruña ibis Styles,43.35274,-8.42286
 ES Alcalá de Henares Jardín Botánico,40.50638,-3.34228
