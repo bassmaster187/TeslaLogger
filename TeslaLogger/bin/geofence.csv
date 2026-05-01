@@ -214,6 +214,7 @@ Supercharger-V3 BE-Mons,50.4566,3.9403
 Supercharger-V3 BE-Namur,50.48602,4.79723
 Supercharger BE-Nivelles-Sud,50.5887,4.3081
 Supercharger BE-Remouchamps,50.48388,5.70033
+Supercharger-V4 BE-Stekene,51.2359,4.05943
 Supercharger-V4 BE-Stekene,51.23678,4.05923
 Supercharger-V4 BE-Verviers,50.59222,5.84853
 Supercharger-V3 BE-Wavre,50.70787,4.59855,60
@@ -7384,6 +7385,7 @@ Allego NL-Utrecht Meerndijk A12,52.0725,5.02687
 Allego NL-Veenendaal Bastion,52.0419,5.56792
 Allego NL-Venlo Nijmeegseweg,51.39538,6.1743,60
 Allego NL-Wassenaar Zijdeweg,52.10586,4.3599
+Allego NL-Westkapelle Abraham Calandplein,51.5278,3.43534
 Allego NL-Zaltbommel Hogeweg,51.79655,5.2553,22
 Allego NL-Zurich N31,53.099,5.38405
 Allego NL-Zwolle Simon van Slingelandtplein,52.52197,6.11095
@@ -8985,7 +8987,7 @@ Claus-Heinemann DE-Konstanz Line-Eid-Straße,47.67273,9.15738
 Claus-Heinemann DE-Mühlheim am Main Schillerstraße,50.1201,8.84734
 Claus-Heinemann DE-Neu-Ulm Memminger Straße,48.3881,10.00233
 Claus-Heinemann DE-Stuttgart Zettachring,48.71008,9.16984
-Claus-Heinemann DE-Weil am Rhein Zollstraße,47.59006,7.59363
+Claus-Heinemann DE-Weil am Rhein Zollstraße,47.59006,7.59363,20
 
 Clever DE-Fehmarn Mummendorfer Weg,54.44308,11.1784
 Clever DE-Osterrönfeld Kieler Strasse,54.29581,9.70711
@@ -20169,6 +20171,7 @@ Pfalzwerke DE-Freinsheim Herxheimer Straße,49.50636,8.20708
 Pfalzwerke DE-Freudental Elsbeerenring,49.00596,9.0639
 Pfalzwerke DE-Fürth Industriestraße,49.65887,8.78726
 Pfalzwerke DE-Fürth Magazinstraße,49.45238,11.00138
+Pfalzwerke DE-Garbsen Robert-Hesse-Straße,52.42725,9.62413
 Pfalzwerke DE-Gelsenkirchen Caubstraße,51.52761,7.0767
 Pfalzwerke DE-Gelsenkirchen Schwarzmühlenstraße,51.49744,7.08275
 Pfalzwerke DE-Gensingen Am Kieselberg,49.90376,7.92768
@@ -23914,6 +23917,7 @@ Wien-Energie AT-Wien Handelskai,48.23439,16.39364
 Wien-Energie AT-Wien Hansenstraße,48.20625,16.35857
 Wien-Energie AT-Wien Innovationsstraße,48.16474,16.33359
 Wien-Energie AT-Wien Jörgerstraße,48.21776,16.33778
+Wien-Energie AT-Wien Kaisermühlenstraße,48.22456,16.45186
 Wien-Energie AT-Wien Khevenhüllerstraße,48.24674,16.30767
 Wien-Energie AT-Wien Klanggasse,48.22257,16.38217
 Wien-Energie AT-Wien Koberweingasse,48.20001,16.31728
