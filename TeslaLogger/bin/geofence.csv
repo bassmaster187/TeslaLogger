@@ -202,7 +202,7 @@ Supercharger-V3 BE-Charleroi,50.45233,4.43035
 Supercharger-V4 BE-Couvin,50.08372,4.52403
 Supercharger-V4 BE-Diegem,50.88387,4.44367
 Supercharger BE-Edegem,51.15105,4.43258
-Supercharger-V4 BE-Ghent,51.0181,3.7367
+Supercharger-V4 BE-Gent,51.0181,3.7367
 Supercharger-V3 BE-Hasselt,50.95175,5.35314,17
 Supercharger-V3 BE-Heusden-Zolder,50.9934,5.2422
 Supercharger BE-Kortrijk,50.80565,3.27443
@@ -2002,7 +2002,7 @@ Supercharger-V3 DE-Herne (Zurbrüggen),51.531182,7.209585
 Supercharger-V3 DE-Herrieden,49.25805,10.50213,60
 Supercharger-V3 DE-Herzsprung,53.06744,12.53322
 Supercharger-V4 DE-Hessisch Lichtenau,51.19784,9.74687
-Supercharger DE-Hilden,51.191193,6.936986,30
+Supercharger DE-Hilden,51.1912,6.93666
 Supercharger-V3 DE-Hilden,51.19189,6.93536,80
 Supercharger-V4 DE-Hildesheim (Cafe Del Sol),52.15672,9.9727
 Supercharger-V3 DE-Hilpoltstein,49.16096,11.26101,120
@@ -13003,6 +13003,7 @@ enercity DE-Hannover Badenstedter Straße,52.3599,9.67973
 enercity DE-Hannover Bandelstraße,52.36175,9.75425,25
 enercity DE-Hannover Berckhusenstraße,52.37384,9.7891
 enercity DE-Hannover Braunstraße,52.3732,9.72025
+enercity DE-Hannover Davenstedter Straße,52.36457,9.6879
 enercity DE-Hannover Davenstedter Straße,52.36693,9.69973
 enercity DE-Hannover Eleonorenstraße,52.36754,9.71583
 enercity DE-Hannover Engelbosteler Damm,52.38197,9.72564
@@ -16274,7 +16275,7 @@ Innogy DE-Marl,51.66542,7.13075
 Innogy DE-Meitingen Raiffeisenstraße,48.54703,10.84788
 Innogy DE-Meißen Niederauer Straße,51.1674,13.5009
 Innogy DE-Memmingen,47.98555,10.17697
-Innogy DE-Mettmann Düsseldorfer Straße,51.252,6.9716
+Innogy DE-Mettmann Düsseldorfer Straße,51.25218,6.97137
 Innogy DE-Michendorf Zum Weiher,52.28361,13.02806
 Innogy DE-Möhnesee Hauptstraße,51.49678,8.12878
 Innogy DE-Mülheim an der Ruhr Mellinghofer Strasse,51.44998,6.88311
@@ -16961,6 +16962,7 @@ IZIVIA FR-Bretteville-sur-Odon Av. du Fresne,49.16436,-0.42333,25
 IZIVIA FR-Béziers Avenue de la Voie Domitienne,43.3484,3.2506
 IZIVIA FR-Cournon-d’Auvergne Av. Maréchal Leclerc,45.73998,3.17278,30
 IZIVIA FR-Dunkerque Av. du Stade,51.03307,2.39317
+IZIVIA FR-Déols Avenue Georges Hennequin,46.8519,1.7028
 IZIVIA FR-Fécamp Bd de la République,49.75933,0.37653
 IZIVIA FR-Haudainville Bd de l’Europe,49.1406,5.40984
 IZIVIA FR-Lempdes Avenue de l’Europe,45.77636,3.18628
@@ -18081,7 +18083,7 @@ Lidl DE-Essen-Rellinghausen Eisenbahnstraße,51.42733,7.04512,30
 Lidl DE-Essenbach Straubinger Straße,48.61426,12.22447
 Lidl DE-Euskirchen Roitzheimer Straße,50.6531,6.79902
 Lidl DE-Eutin,54.12898,10.62197
-Lidl DE-Fehmarn Landkirchener Weg,54.4427,11.18101,25
+Lidl DE-Fehmarn Landkirchener Weg,54.4427,11.181,30
 Lidl DE-Flensburg Friesische Straße,54.77818,9.41612
 Lidl DE-Flensburg Zur Bleiche,54.77102,9.43333
 Lidl DE-Frankenberg (Eder) Siegener Straße 5,51.05543,8.78791
