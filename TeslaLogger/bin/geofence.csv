@@ -4798,6 +4798,7 @@ Supercharger-V3 US-Newnan GA,33.39358,-84.75997
 Supercharger-V3 US-Peachtree Corners GA (Floor 1),33.97973,-84.2151
 Supercharger-V3 US-Pooler GA,32.07963,-81.2812
 Supercharger-V3 US-Pooler GA - US-80,32.11076,-81.2358
+Supercharger-V4 US-Richmond Hill GA,31.93212,-81.3231
 Supercharger-V3 US-Roswell GA,34.01916,-84.3129
 Supercharger-V3 US-Suwanee GA,34.03407,-84.05267
 Supercharger US-Tifton GA,31.44878,-83.53226
@@ -9820,7 +9821,7 @@ E.ON DE-Raststätte Am Biggenkopf,51.49857,8.98502
 E.ON DE-Raststätte Am Biggenkopf,51.49905,8.98633
 E.ON DE-Raststätte Am Kahlberg West,52.20756,13.60755
 E.ON DE-Raststätte Auerswalder Blick Nord,50.89356,12.9408
-E.ON DE-Raststätte Augsburg Ost,47.9092,7.5923
+E.ON DE-Raststätte Augsburg Ost,48.41263,10.91163
 E.ON DE-Raststätte Avus,52.50178,13.2772,25
 E.ON DE-Raststätte Baden-Baden West,48.8088,8.18106
 E.ON DE-Raststätte Bayerischer Wald Süd,48.93128,12.70603
@@ -10613,7 +10614,7 @@ Electrify-Canada CA-Mirabel QC Chemin Notre Dame,45.67124,-73.92006
 Electrify-Canada CA-Ottawa ON Coventry Rd,45.42069,-75.6517
 
 electrip BG-Kulata Кулата E79,41.38413,23.36178
-electrip BG-Студена Автомагистрала Струма,42.58385,23.11996,20
+electrip BG-Студена Автомагистрала Струма,42.58385,23.11996,15
 electrip GR-Igoumenitsa Ηγουμενίτσα Leof. 49 Martiron,39.49733,20.26587
 electrip GR-Zografou Porto Elea Camping,40.16946,23.8646
 electrip HR-Jablanovec Zaprešićka Westgate,45.87226,15.82789
@@ -15151,7 +15152,7 @@ Fines BG-Лозен Автомагистрала Тракия,42.63228,23.45935
 Fines BG-Марикостиново,41.43442,23.3337
 Fines BG-Пролеша 8,42.78394,23.167
 Fines BG-Русе бул. Христо Ботев,43.83214,25.97155
-Fines BG-Студена Автомагистрала Струма,42.58363,23.12,20
+Fines BG-Студена Автомагистрала Струма,42.58363,23.12,15
 Fines BG-Търговище Targovishte 4009,43.24463,26.54884
 Fines BG-Ясен Yasen,43.42648,24.50454
 
