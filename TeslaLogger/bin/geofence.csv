@@ -2409,7 +2409,7 @@ Supercharger-V4 ES-Valladolid,41.6275,-4.7895
 Supercharger-V3 ES-Vigo,42.2206,-8.72507
 Supercharger-V4 ES-Vila-seca,41.096226,1.150441
 Supercharger-V4 ES-Villagonzalo Pedernales,42.28794,-3.7073
-Supercharger-V4 ES-Villalpando,41.82636,-5.3789
+Supercharger-V4 ES-Villalpando,41.82593,-5.37975
 Supercharger-V4 ES-Villaquirán de los Infantes,42.2204,-3.9986
 Supercharger-V4 ES-Villar de Chinchilla,38.89854,-1.50344
 Supercharger-V4 ES-Villena,38.7287,-0.93814
@@ -2588,7 +2588,7 @@ Supercharger-V4 FR-Colombe,45.396343,5.466685
 Supercharger-V4 FR-Cosne-Cours-sur-Loire,47.3837,2.91813
 Supercharger-V4 FR-Cuers,43.2507,6.0955
 Supercharger-V3 FR-Dardilly,45.820165,4.760176
-Supercharger-V4 FR-Dardilly Nord,45.825082,4.761362
+Supercharger-V4 FR-Dardilly Nord,45.82503,4.76156
 Supercharger FR-Deauville,49.344809,0.096677
 Supercharger-V4 FR-Dieppe,49.905637,1.078212
 Supercharger-V3 FR-Dijon,47.271754,5.043424
@@ -3144,6 +3144,7 @@ Supercharger-V3 IT-Montenero di Bisaccia,42.06266,14.77868,55
 Supercharger IT-Morano Calabro,39.875989,16.065094
 Supercharger-V4 IT-Napoli West,40.836326,14.191578
 Supercharger-V4 IT-Nola,40.94808,14.48911
+Supercharger-V4 IT-Noventa di Piave,45.66716,12.53746
 Supercharger IT-Occhiobello,44.91887,11.59412,30
 Supercharger-V3 IT-Olbia,40.9069,9.515961
 Supercharger IT-Oristano,39.890044,8.599804
@@ -3548,7 +3549,7 @@ Supercharger-V3 NO-Aksdal South,59.42127,5.44324,70
 Supercharger-V3 NO-Alta,69.961145,23.232869
 Supercharger-V3 NO-Alvdal,62.11467,10.61603
 Supercharger-V3 NO-Arendal,58.467449,8.721617
-Supercharger NO-Arna,60.421924,5.46703
+Supercharger-V4 NO-Arna,60.42192,5.46703
 Supercharger NO-Aspøya,63.01153,7.9779,30
 Supercharger NO-Aurland,60.89871,7.21127
 Supercharger-V3 NO-Bamble,58.9713,9.51278,15
@@ -4003,6 +4004,7 @@ Supercharger-V4 TR-Beylikdüzü İstanbul,41.01997,28.62815
 Supercharger-V4 TR-Bolu,40.72398,31.46504
 Supercharger-V4 TR-Burdur,37.74588,30.31232
 Supercharger-V4 TR-Cankaya Ankara,39.90963,32.77736
+Supercharger-V4 TR-Cankaya Ankara 2,39.88323,32.8086
 Supercharger-V3 TR-Edirne,41.680352,26.582235
 Supercharger-V4 TR-Eskişehir,39.445,31.56873
 Supercharger-V3 TR-Ilgaz Çankırı,40.90657,33.64522
@@ -4010,6 +4012,7 @@ Supercharger-V4 TR-Isparta,37.91,30.31187
 Supercharger-V3 TR-Istanbul Asia Garage Floor -2,41.003233,29.070793
 Supercharger-V4 TR-İzmit,40.75495,29.94697
 Supercharger-V4 TR-Keşan,40.8742,26.6419
+Supercharger-V4 TR-Kırşehir,39.06696,34.37018
 Supercharger-V4 TR-Kütahya,39.35863,30.0565
 Supercharger-V4 TR-Tekirdağ,40.98885,27.5772
 Supercharger-V4 TR-Tekkeköy Samsun,41.22493,36.43205
@@ -5741,6 +5744,7 @@ Supercharger US-Greenville SC,34.82588,-82.30695
 Supercharger-V3 US-Greenville SC - Haywood Road,34.8483,-82.33945
 Supercharger-V3 US-Hardeeville SC,32.2705,-81.081
 Supercharger-V3 US-Lexington SC,33.9524,-81.23285
+Supercharger-V4 US-Manning SC,33.7025,-80.2376
 Supercharger US-Myrtle Beach SC,33.70464,-78.9252
 Supercharger-V3 US-North Augusta SC,33.56898,-81.93853
 Supercharger-V3 US-North Charleston SC,32.8725,-80.0154
@@ -7354,6 +7358,7 @@ Allego FR-Chalon-sur-Saône Rue de Paris,46.7986,4.84796,30
 Allego FR-Chalon-sur-Saône Rue Thomas Dumorey,46.77422,4.8589
 Allego FR-Champniers Rue de l’Auvent,45.6927,0.18157
 Allego FR-Châteauroux Rue Pierre Gaultier,46.8065,1.6979
+Allego FR-Coquelles Bd du Kent,50.93238,1.81056
 Allego FR-Crêches-sur-Saône Bouchardes,46.25443,4.7915
 Allego FR-Fécamp Rue Charles Leborgne,49.75422,0.37236
 Allego FR-Golbey Rue du Général Leclerc,48.19105,6.42282
@@ -16970,6 +16975,7 @@ IZIVIA FR-Lyon Rue Jean Marcuit,45.78868,4.81438
 IZIVIA FR-Moréac Karabude,47.89944,-2.83685
 IZIVIA FR-Munster Rue Hilti,48.04428,7.16058
 IZIVIA FR-Niort Avenue de la Rochelle,46.31262,-0.47891
+IZIVIA FR-Rethel D985,49.5211,4.37034
 IZIVIA FR-Rots Rue des Drapeaux,49.19807,-0.457
 IZIVIA FR-Roye Rue Colones Sorlin,49.70751,2.77407
 IZIVIA FR-Saint-Malo Avenue de Launay Breton,48.6259,-1.9907
@@ -18868,6 +18874,7 @@ MENNEKES DE-Kirchhundem Industriestraße,51.03867,7.99711
 MENNEKES DE-Langgöns Hauptstraße,50.4615,8.58455
 MENNEKES DE-Lüneburg Bastionstraße,53.2514,10.4026
 MENNEKES DE-Oberhausen Strauss Workwearstore,51.48891,6.88628,30
+MENNEKES DE-Schönwald im Schwarzwald Ludwig-Uhland-Straße,48.10188,8.20605
 MENNEKES DE-Trebbin Markt,52.21471,13.21384
 MENNEKES DE-Wangels Seestraße,54.3103,10.8019
 
@@ -19846,6 +19853,7 @@ OPG DE-Osnabrück Lengericher Landstraße,52.26159,8.00077
 
 Optimile BE-Drogenbos Mozartlaan,50.81151,4.30268
 Optimile BE-Grimbergen Kerkstraat,50.97294,4.3858
+Optimile BE-Kalfort Essendries,51.06306,4.3025
 Optimile BE-Welkenraedt Rue de l’Economie,50.64892,5.98901
 Optimile IT-Foligno Viale Quattro Novembre,42.9596,12.70847
 
@@ -22465,6 +22473,7 @@ SW-Wasserburg DE-Wasserburg am Inn Max-Emanuel-Platz,48.061,12.23495,25
 SW-Wedel DE-Wedel Strandbaddamm,53.57183,9.69632
 SW-Weilheim DE-Weilheim in Oberbayern Lohgasse,47.84052,11.13694
 SW-Weimar DE-Weimar Damaschkestraße,50.98012,11.30919
+SW-Weimar DE-Weimar Herrmann-Brill-Platz,50.98465,11.31625
 SW-Weimar DE-Weimar Industriestraße,50.99743,11.32458
 SW-Weinheim DE-Heidelberg Englerstraße,49.36553,8.68412
 SW-Weinstadt DE-Weinstadt Beutelsbacher Straße,48.80865,9.37536
