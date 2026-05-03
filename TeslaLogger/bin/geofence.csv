@@ -4693,6 +4693,7 @@ Supercharger-V3 US-Naples FL - Tarpon Bay Boulevard,26.27178,-81.73792
 Supercharger-V3 US-New Port Richey FL,28.21803,-82.7362
 Supercharger-V3 US-North Miami Beach FL,25.9067,-80.15824
 Supercharger US-Ocala FL,29.14093,-82.19403
+Supercharger-V4 US-Ocala FL SW College Rd,29.17392,-82.1583
 Supercharger-V3 US-Ocala FL West Silver Springs Boulevard,29.1853,-82.17742
 Supercharger-V3 US-Ochopee FL,26.17425,-80.85578
 Supercharger-V3 US-Odessa FL,28.19005,-82.61633
@@ -13870,6 +13871,7 @@ EWE-GO DE-Braunschweig Hansestraße,52.3087,10.51031
 EWE-GO DE-Bremen Achternrut,53.17497,8.61781
 EWE-GO DE-Bremen Altenwall,53.07207,8.80998
 EWE-GO DE-Bremen Am Rabenfeld,53.18169,8.62328
+EWE-GO DE-Bremen Am Wall,53.07913,8.8081
 EWE-GO DE-Bremen Am Wall,53.07996,8.80405
 EWE-GO DE-Bremen Bahnhofsplatz,53.08312,8.81212
 EWE-GO DE-Bremen Bennigsenstraße,53.07106,8.85763
@@ -18487,6 +18489,7 @@ Lidl DE-Winterberg Im Mühlengrund 1,51.19195,8.5306
 Lidl DE-Witten Westfalenstraße 110,51.44655,7.36597
 Lidl DE-Wittlich Kurfürstenstraße,49.98227,6.89985
 Lidl DE-Witzenhausen Laubenweg 5,51.34618,9.85485
+Lidl DE-Wolfenbüttel Neuer Weg,52.1747,10.5403
 Lidl DE-Wolgast Chausseestraße,54.05016,13.76777
 Lidl DE-Worpswede Osterweder Straße,53.22679,8.92874,25
 Lidl DE-Wuppertal Am Diek 105,51.28639,7.2294
@@ -21429,6 +21432,7 @@ Shell DE-Dormagen Hamburger Straße,51.09044,6.81175
 Shell DE-Dorsten Freudenbergstraße,51.7022,6.9298
 Shell DE-Dortmund Bornstraße,51.53094,7.47405
 Shell DE-Dortmund Ruhrallee,51.49647,7.46824
+Shell DE-Dortmund Schützenstraße,51.5272,7.45226
 Shell DE-Drebach Bahnhofstraße,50.70305,13.0562
 Shell DE-Dresden Hansastraße,51.08112,13.73973
 Shell DE-Dresden Washingtonstraße,51.06728,13.68889
@@ -23277,6 +23281,7 @@ Vattenfall DE-Beeskow Luchstraße,52.17469,14.24285
 Vattenfall DE-Berlin Allee der Kosmonauten,52.52509,13.52295
 Vattenfall DE-Berlin Am Gehrensee,52.57257,13.56457
 Vattenfall DE-Berlin Blankenburger Straße,52.58283,13.41295
+Vattenfall DE-Berlin Bornitzstraße,52.52035,13.48665
 Vattenfall DE-Berlin Dahlwitzer Straße,52.52099,13.64725
 Vattenfall DE-Berlin Erich-Weinert-Straße,52.54756,13.4299
 Vattenfall DE-Berlin Eschengraben,52.55647,13.42361
