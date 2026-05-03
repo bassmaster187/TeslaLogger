@@ -3806,7 +3806,7 @@ Supercharger-V4 PT-Mealhada,40.37307,-8.4804
 Supercharger PT-Montemor-o-Novo,38.645545,-8.24781
 Supercharger-V4 PT-Portimão,37.14658,-8.54285
 Supercharger-V4 PT-Porto,41.11799,-8.62318
-Supercharger PT-Ribeira de Pena,41.503392,-7.80134
+Supercharger PT-Ribeira de Pena,41.50364,-7.80145,60
 
 Supercharger-V4 RO-Arad,46.203169,21.248505
 Supercharger-V4 RO-Bacău,46.585946,26.954977
@@ -13339,6 +13339,7 @@ EPO CH-Amriswil Marktplatz,47.5455,9.29969
 EPO CH-Brugg Aarauerstrasse,47.46966,8.18951
 
 EQUANS NL-Amsterdam IJdoornlaan,52.41527,4.91168
+EQUANS NL-Emmen Weerdingerstraat,52.7887,6.89292
 EQUANS NL-Nieuwegein Arsenaaldok,52.01317,5.1148
 EQUANS NL-Noordwijk Keplerlaan,52.21712,4.41993
 EQUANS NL-Westkapelle De Bucksweg,51.51192,3.46253
@@ -13415,8 +13416,10 @@ ESWE DE-Wiesbaden Siegfriedring,50.06073,8.26812
 ESWE DE-Wiesbaden Warmer Damm,50.08353,8.24501
 ESWE DE-Wiesbaden Wilfried-Ries-Straße,50.1023,8.19127
 
+etecnic ES-Alberic Av. de la Muntanyeta,39.1198,-0.5243
 etecnic ES-Amposta Avinguda Alcalde Palau,40.71241,0.57919
 etecnic ES-Calafell Ctra. Sanatori,41.1897,1.56753
+etecnic ES-Cambrils Rambla de Jaume I,41.06716,1.064
 etecnic ES-Cambrils Sortida A-7,41.09041,1.09388
 etecnic ES-Figueres Carrer Torras i Bages,42.25978,2.96672
 etecnic ES-Figueres Plaça del President Josep Tarradellas,42.26903,2.96683
@@ -20698,6 +20701,7 @@ Powerdot ES-Salamanca Av. de los Cipreses,40.97742,-5.64855
 Powerdot ES-Vilafranca del Penedès Carrer Pla del Viver,41.33542,1.68243
 Powerdot FR-Bergerac Rue du Tounet,44.83547,0.45136,30
 Powerdot FR-Charmes Voie Carpini,48.35963,6.30408
+Powerdot FR-Concarneau Rue de Lanriec,47.86926,-3.89397
 Powerdot FR-Cosne-Cours-sur-Loire Rue des Minotiers,47.38305,2.91929
 Powerdot FR-Crolles Av. Ambroise Croizat,45.27204,5.88995
 Powerdot FR-Dijon Rue des Ardennes,47.35135,5.0696
@@ -22343,6 +22347,7 @@ SW-Leipzig DE-Leipzig Willy-Brandt-Platz,51.34499,12.37925
 SW-Leipzig DE-Leipzig Wilmar-Schwabe-Straße,51.34165,12.35787
 SW-Leipzig DE-Leipzig Zschochersche Straße,51.32335,12.33082
 SW-Leipzig DE-Leipzig Zwickauer Straße,51.31366,12.39396,30
+SW-Lengerich DE-Tecklenburg Am Weingarten,52.21902,7.8053
 SW-Lindau DE-Lindau (Bodensee) Zwanzigerstraße,47.54867,9.68708
 SW-Lindau DE-Lindau Bleichenweg,47.55373,9.6985
 SW-Lindau DE-Lindau Kemptener Straße,47.56494,9.70448
@@ -24642,6 +24647,7 @@ DK Greve Marina Autocamper Plads,55.59358,12.35628
 DK Silkeborg Haderslevvej,56.17267,9.48722
 ES A Coruña ibis Styles,43.35274,-8.42286
 ES Alcalá de Henares Jardín Botánico,40.50638,-3.34228
+ES Aldaia Plaça Constitució,39.46496,-0.46063
 ES Altafulla May Boutique Hotel,41.13483,1.37994
 ES Argómaniz Parador de Argómaniz,42.8679,-2.54123
 ES Badajoz Av. de Elvas,38.8852,-7.0218
@@ -24655,8 +24661,11 @@ ES La Iglesuela del Cid C. Pilar,40.48023,-0.3171
 ES Laguardia Hotel Pachico,42.55457,-2.5841
 ES Madrid Alcobendas Calle del Pintor Murillo,40.54287,-3.64859
 ES Madrid Hotel Madrid Centro,40.42308,-3.70945
+ES Marxuquera Camping La escalada Gandía,38.96322,-0.22855
 ES Motril Elba Beach Hotel,36.72366,-3.53931
+ES Málaga El Corte Inglés,36.71858,-4.4304
 ES Sant Cugat del Vallès Carrer de la Mina,41.47519,2.0818
+ES Sant Pere Pescador Camping La Ballena Alegre Costa Brava,42.15276,3.1117
 ES Valladolid Sercotel,41.6357,-4.74707
 ES València Cinemes ABC Park,39.46934,-0.3727
 FI Helsinki Mall of Tripla,60.19856,24.9307
