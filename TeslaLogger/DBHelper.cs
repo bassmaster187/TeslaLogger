@@ -4640,8 +4640,15 @@ WHERE
 
         public async Task<int> InsertPosAsync(string timestamp, double latitude, double longitude, int speed, decimal? power, double? odometer, double idealBatteryRangeKm, double batteryRangeKm, double batteryLevel, double? insideTemp, double? outsideTemp, string altitude)
         {
-            int posid = 0;
-            //double? inside_temp = car.CurrentJSON.current_inside_temperature;
+            int posid = int.MinValue; // default value to indicate invalid posid
+
+            if (latitude == 0 && longitude == 0)
+            {
+                Logfile.Log("InsertPosAsync: Latitude and Longitude are both 0, skipping insert.");
+                Tools.DebugLog("InsertPosAsync: Latitude and Longitude are both 0, skipping insert." + System.Environment.NewLine + (new StackTrace(true)));
+                return posid;
+            }
+
             using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
             {
                 await con.OpenAsync();
