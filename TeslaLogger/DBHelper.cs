@@ -4645,16 +4645,35 @@ WHERE
                 using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
                 {
                     await con.OpenAsync();
-                    using (MySqlCommand cmd = new MySqlCommand(@"
+                    int totalDeleted = 0;
+                    const int batchSize = 100; // Pro Batch 1000 Einträge löschen
+                    
+                    while (true)
+                    {
+                        using (MySqlCommand cmd = new MySqlCommand(@"
 DELETE FROM 
     pos
 WHERE   
     lat = 0 
-    AND lng = 0", con))
-                    {
-                        int rowsDeleted = SQLTracer.TraceNQ(cmd, out _);
-                        Logfile.Log($"RemoveInvalidPosEntriesAsync: Deleted {rowsDeleted} entries where lat = 0 and lng = 0.");
+    AND lng = 0
+LIMIT @batchSize", con))
+                        {
+                            cmd.Parameters.AddWithValue("@batchSize", batchSize);
+                            int rowsDeleted = SQLTracer.TraceNQ(cmd, out _);
+                            totalDeleted += rowsDeleted;
+                            
+                            if (rowsDeleted == 0)
+                            {
+                                // Keine weiteren Einträge zu löschen
+                                break;
+                            }
+                            
+                            // Kurze Pause zwischen Batches, um Lock-Konflikte zu minimieren
+                            await Task.Delay(100);
+                        }
                     }
+                    
+                    Logfile.Log($"RemoveInvalidPosEntriesAsync: Deleted {totalDeleted} entries where lat = 0 and lng = 0.");
                 }
             }
             catch (Exception ex)
