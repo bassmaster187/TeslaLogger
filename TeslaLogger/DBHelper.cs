@@ -4638,6 +4638,32 @@ WHERE
 
         int last_active_route_energy_at_arrival = int.MinValue;
 
+        internal static async Task RemoveInvalidPosEntriesAsync()
+        {
+            try
+            {
+                using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+                {
+                    await con.OpenAsync();
+                    using (MySqlCommand cmd = new MySqlCommand(@"
+DELETE FROM 
+    pos
+WHERE   
+    lat = 0 
+    AND lng = 0", con))
+                    {
+                        int rowsDeleted = SQLTracer.TraceNQ(cmd, out _);
+                        Logfile.Log($"RemoveInvalidPosEntriesAsync: Deleted {rowsDeleted} entries where lat = 0 and lng = 0.");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Tools.DebugLog($"Exception during RemoveInvalidPosEntriesAsync: {ex}");
+                Logfile.ExceptionWriter(ex, "Exception during RemoveInvalidPosEntriesAsync");
+            }        
+        }
+
         public async Task<int> InsertPosAsync(string timestamp, double latitude, double longitude, int speed, decimal? power, double? odometer, double idealBatteryRangeKm, double batteryRangeKm, double batteryLevel, double? insideTemp, double? outsideTemp, string altitude)
         {
             int posid = int.MinValue; // default value to indicate invalid posid
