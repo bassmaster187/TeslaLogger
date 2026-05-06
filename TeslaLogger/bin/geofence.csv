@@ -67,6 +67,7 @@ Supercharger-V4 AT-Wien,48.193045,16.27707
 Supercharger-V3 AT-Wien Gewerbepark Stadlau,48.24713,16.46436
 Supercharger AT-Wien Tech Park Vienna,48.15725,16.33404
 Supercharger-V4 AT-Wien Wienerberg,48.16753,16.34786
+Supercharger-V4 AT-Wiener Neudorf,48.10277,16.31827
 Supercharger-V4 AT-Wiener Neustadt,47.8047,16.21082,75
 Supercharger-V4 AT-Zeltweg,47.194056,14.722814
 
@@ -215,7 +216,6 @@ Supercharger-V3 BE-Namur,50.48602,4.79723
 Supercharger BE-Nivelles-Sud,50.5887,4.3081
 Supercharger BE-Remouchamps,50.48388,5.70033
 Supercharger-V4 BE-Stekene,51.2359,4.05943
-Supercharger-V4 BE-Stekene,51.23678,4.05923
 Supercharger-V4 BE-Verviers,50.59222,5.84853
 Supercharger-V3 BE-Wavre,50.70787,4.59855,60
 Supercharger-V3 BE-Zaventem,50.8699,4.50205
@@ -2992,7 +2992,7 @@ Supercharger GB-Wokingham,51.42849,-0.898897
 Supercharger-V3 GB-Woodall Southbound,53.31617,-1.28096
 Supercharger-V4 GB-Wyberton,52.9551,-0.03298
 Supercharger-V3 GB-Wyboston,52.202314,-0.291534
-Supercharger GB-York,53.92417,-1.077908
+Supercharger-V4 GB-York,53.92425,-1.078
 
 Supercharger-V3 GR-Atalanti Αταλάντη East,38.6612,23.07388
 Supercharger-V3 GR-Atalanti Αταλάντη West,38.65883,23.07121
@@ -3699,7 +3699,7 @@ Supercharger-V4 NO-Stryn Visnes,61.903,6.71774
 Supercharger-V4 NO-Støren,63.03688,10.29202
 Supercharger-V4 NO-Sunndalsøra,62.67312,8.56388
 Supercharger NO-Svolvær,68.23312,14.55962,25
-Supercharger-V3 NO-Svolvær,68.23879,14.56624,25
+Supercharger-V3 NO-Svolvær,68.2388,14.56624
 Supercharger NO-Sørkjosen,69.792498,20.93907
 Supercharger-V3 NO-Treungen,59.018753,8.52381
 Supercharger-V3 NO-Trondheim,63.441755,10.457297
@@ -10518,6 +10518,7 @@ Electra BE-Auderghem Chaussée de Wavre,50.79478,4.47889
 Electra BE-Maasmechelen Koninginnelaan,50.98633,5.7015
 Electra BE-Zandhoven Liersebaan,51.1989,4.64353
 Electra CH-Bern Mingerstrasse,46.9592,7.46917
+Electra CH-Rubigen Hunzigen,46.8916,7.54217,16
 Electra CH-Zürich Förrlibuckstrasse,47.39168,8.5165
 Electra DE-Chemnitz Bergstraße,50.84327,12.90854
 Electra DE-Oberhausen Erlenstraße,51.516,6.82108
@@ -12695,6 +12696,7 @@ EnBW DE-Wehingen Deilinger Straße,48.14898,8.7885
 EnBW DE-Wehr Im Hemmet,47.60864,7.9131
 EnBW DE-Weiden in der Oberpfalz Robert-Bosch-Straße,49.66344,12.14901
 EnBW DE-Weil am Rhein,47.59858,7.60339
+EnBW DE-Weil der Stadt Hauptstraße,48.76282,8.85508
 EnBW DE-Weilerswist,50.75169,6.84701
 EnBW DE-Weilheim an der Teck Im Stockach,48.62471,9.52721
 EnBW DE-Weimar REWE Center,51.00776,11.33357
@@ -14993,6 +14995,7 @@ Fastned DE-Egelsbach Kurt-Schumacher-Ring,49.96274,8.67328
 Fastned DE-Frankfurt am Main Eugen-Hartmann-Straße,50.14704,8.609
 Fastned DE-Friedberg,48.40745,10.95201
 Fastned DE-Fürth Hochstraße,49.48077,10.97588
+Fastned DE-Gelsenkirchen Sperberstraße,51.5852,7.03604
 Fastned DE-Giengen-Herbrechtingen,48.61561,10.20539
 Fastned DE-Gießen Ferniestraße,50.57151,8.68999
 Fastned DE-Gladbeck-Ellinghorst,51.5552,6.96951
@@ -17956,7 +17959,7 @@ Lidl DE-Bad Schandau Dresdner Straße,50.92104,14.14336
 Lidl DE-Bad Schwalbach Bahnhofstraße,50.14881,8.08358
 Lidl DE-Bad Sobernheim Monzinger Straße 91,49.78727,7.63896
 Lidl DE-Bad Soden am Taunus Königsteiner Straße,50.14034,8.5054
-Lidl DE-Bad Vilbel Alte Frankfurter Straße,50.16808,8.7293
+Lidl DE-Bad Vilbel Alte Frankfurter Straße,50.16808,8.7293,25
 Lidl DE-Bad Wildungen Itzelstraße 34,51.11964,9.1329
 Lidl DE-Bamberg Laubanger,49.91161,10.87613
 Lidl DE-Barnstorf Niedersachsenweg 25,52.70473,8.49267
@@ -20945,7 +20948,7 @@ Recharge NO-Oslo Ankerveien,59.96226,10.64281,30
 Recharge NO-Oslo Strømsveien,59.92517,10.84421
 Recharge NO-Røros Peder Hiortgata,62.57609,11.38022
 Recharge NO-Sola Solbergvegen,58.88156,5.65433
-Recharge NO-Svolvær Caroline Harveys vei,68.2394,14.56625
+Recharge NO-Svolvær Caroline Harveys vei,68.2394,14.56625,20
 Recharge NO-Svolvær Måseveien,68.2326,14.5311
 Recharge NO-Ålesund Blindheimsbreivika,62.44407,6.36612
 Recharge NO-Ålesund Nedre Klokkersundvegen,62.46672,6.24687
@@ -21703,7 +21706,7 @@ Shell DE-Solingen Landwehr,51.13156,6.9974
 Shell DE-Speyer Dudenhofer Straße,49.31824,8.42141
 Shell DE-St. Peter-Ording Maleens Knoll,54.31634,8.60448,25
 Shell DE-St. Peter-Ording Schulstraße,54.30681,8.63652
-Shell DE-St. Wendel Linxweilerstraße,49.4613,7.1565
+Shell DE-St. Wendel Linxweilerstraße,49.4613,7.15652
 Shell DE-Stade Harsefelder Straße,53.58488,9.47198
 Shell DE-Steinen Gewerbestraße,47.6407,7.74658
 Shell DE-Stockach Messkircher Straße,47.85843,9.00436
