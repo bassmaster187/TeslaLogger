@@ -4638,7 +4638,7 @@ WHERE
 
         int last_active_route_energy_at_arrival = int.MinValue;
 
-        internal static async Task RemoveInvalidPosEntriesAsync()
+                internal static async Task RemoveInvalidPosEntriesAsync()
         {
             try
             {
@@ -4646,7 +4646,7 @@ WHERE
                 {
                     await con.OpenAsync();
                     int totalDeleted = 0;
-                    const int batchSize = 100; // Pro Batch 1000 Einträge löschen
+                    const int batchSize = 100; // Delete 100 entries per batch
                     
                     while (true)
                     {
@@ -4664,11 +4664,11 @@ LIMIT @batchSize", con))
                             
                             if (rowsDeleted == 0)
                             {
-                                // Keine weiteren Einträge zu löschen
+                                // No more entries to delete
                                 break;
                             }
                             
-                            // Kurze Pause zwischen Batches, um Lock-Konflikte zu minimieren
+                            // Short pause between batches to minimize lock conflicts
                             await Task.Delay(100);
                         }
                     }
