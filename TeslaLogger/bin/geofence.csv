@@ -2605,7 +2605,7 @@ Supercharger-V4 FR-Figeac,44.606988,2.013952
 Supercharger-V4 FR-Fontaine-lès-Dijon,47.355721,5.0322
 Supercharger FR-Fontainebleau,48.349396,2.607344
 Supercharger-V4 FR-Franconville,48.988982,2.208563
-Supercharger-V4 FR-Gallargues-le-Montueux,43.718654,4.180118
+Supercharger-V4 FR-Gallargues-le-Montueux,43.71865,4.18012
 Supercharger-V3 FR-Gap,44.569565,6.104458
 Supercharger-V4 FR-Gassin,43.263006,6.580338
 Supercharger-V4 FR-Goussainville,49.021048,2.467801
@@ -2964,7 +2964,7 @@ Supercharger-V4 GB-Stanwell,51.442912,-0.474949
 Supercharger-V4 GB-Stevenage,51.901772,-0.208134
 Supercharger-V4 GB-Swansea,51.62068,-3.9135
 Supercharger-V3 GB-Swansea,51.67865,-3.9942
-Supercharger GB-Tebay Southbound,54.453473,-2.606108
+Supercharger-V3 GB-Tebay Southbound,54.45347,-2.6061
 Supercharger GB-Telford,52.677334,-2.399552
 Supercharger-V4 GB-Telford,52.71772,-2.52476
 Supercharger-V4 GB-Theale,51.4398,-1.07016
@@ -3106,7 +3106,7 @@ Supercharger-V4 IT-Cremona,45.144425,10.067014
 Supercharger IT-Cuneo,44.420795,7.550956
 Supercharger IT-Dorno Ost,45.147263,8.991257,20
 Supercharger IT-Dorno West,45.147743,8.990631,20
-Supercharger-V4 IT-Eboli,40.605544,15.055318
+Supercharger-V4 IT-Eboli,40.60554,15.05532
 Supercharger-V4 IT-Emilia-Romagna,44.434137,11.608923
 Supercharger-V4 IT-Enna,37.567516,14.402925
 Supercharger-V4 IT-Fabro,42.87392,12.0217
@@ -4711,6 +4711,7 @@ Supercharger-V3 US-Orlando FL - Millenia Plaza Way,28.49186,-81.4285
 Supercharger US-Orlando FL - North Alafaya Trail,28.55564,-81.19916
 Supercharger-V3 US-Orlando FL - Palm Parkway,28.38497,-81.50127
 Supercharger-V3 US-Orlando FL - South Orange Blossom Trail,28.44848,-81.3939
+Supercharger-V4 US-Orlando FL International Dr,28.46152,-81.46734
 Supercharger-V4 US-Orlando FL Palm Pkwy,28.40113,-81.4883
 Supercharger US-Orlando FL West Sand Lake Road,28.44972,-81.46615
 Supercharger-V3 US-Palm Beach Gardens FL,26.84026,-80.1039
@@ -5120,6 +5121,7 @@ Supercharger-V3 US-Bad Axe MI,43.82364,-83.00494
 Supercharger US-Bay City MI,43.6222,-83.93222
 Supercharger-V3 US-Benton Harbor MI,42.08242,-86.42404
 Supercharger US-Big Rapids MI,43.68953,-85.51548
+Supercharger-V4 US-Brighton MI,42.5401,-83.7886
 Supercharger US-Cadillac MI,44.28266,-85.40306
 Supercharger US-Clare MI,43.8203,-84.76675
 Supercharger-V3 US-Detroit MI,42.4464,-83.11892
@@ -6984,7 +6986,7 @@ Allego DE-Düsseldorf Kleinstraße,51.1685,6.8808
 Allego DE-Edingen-Neckarhausen Rosenstraße,49.45356,8.59
 Allego DE-Eichenzell Rhönhof,50.4886,9.7087,20
 Allego DE-Einbeck Walter-Poser-Straße,51.8188,9.85168
-Allego DE-Ellwangen Max-Eyth-Straße,48.95915,10.17337,8
+Allego DE-Ellwangen (Jagst) Max-Eyth-Straße,48.95915,10.17337,8
 Allego DE-Emden Thüringer Straße,53.36323,7.1688
 Allego DE-Emsbüren Merianstraße,52.3596,7.26513,10
 Allego DE-Emsbüren Merianstraße,52.35964,7.265,10
@@ -11294,6 +11296,7 @@ EnBW DE-Elchingen Nersinger Straße,48.44865,10.09753
 EnBW DE-Ellhofen Am Autobahnkreuz,49.14312,9.30989,20
 EnBW DE-Ellhofen Am Autobahnkreuz,49.1436,9.3088,25
 EnBW DE-Ellwangen (Jagst) Doktor-Adolf-Schneider-Straße,48.95421,10.16929
+EnBW DE-Ellwangen (Jagst) Max-Eyth-Straße,48.95717,10.18258
 EnBW DE-Ellwangen Unterer Brühl,48.96882,10.12769
 EnBW DE-Elmshorn Am Eiskeller,53.74618,9.66117,30
 EnBW DE-Elsterwerda Lauchhammer Straße,51.46577,13.53433
@@ -16136,6 +16139,7 @@ incharge GR-Parga Πάργα Epar. Od. Morfis-Anthousas,39.2854,20.467
 incharge GR-Thermi Θέρμη Perikleous,40.56274,22.99353
 incharge GR-Thessaloniki Θεσσαλονίκη Monastiriou,40.66008,22.90082
 incharge GR-Volos Βόλος Larisis,39.36923,22.919
+incharge GR-Vourvourou Βουρβουρού Περιμετρική Οδός Σιθωνίας,40.1911,23.8062
 incharge GR-Αριστερα A/D Korinthou Tripoleos,37.8627,22.84217
 
 infra-fürth DE-Fürth Am Grünen Weg,49.484,10.94937
@@ -16476,7 +16480,7 @@ Ionity DE-Donautal West,48.58942,13.36537
 Ionity DE-Dormagen Hamburger Straße,51.09327,6.80779
 Ionity DE-Eching Dieselstraße,48.31085,11.64673
 Ionity DE-Eichenzell Rhönhof,50.48831,9.70852,20
-Ionity DE-Ellwangen Max-Eyth-Straße,48.95667,10.18367
+Ionity DE-Ellwangen (Jagst) Max-Eyth-Straße,48.95663,10.18366
 Ionity DE-Erfurt Dubliner Straße,51.01229,10.98809
 Ionity DE-Euro Rastpark Guxhagen,51.20283,9.46872,30
 Ionity DE-Euro Rastpark Himmelkron,50.05586,11.6091
@@ -18372,6 +18376,7 @@ Lidl DE-Oschersleben,52.0289,11.24764
 Lidl DE-Osnabrück Hannoversche Straße 19,52.26512,8.0655
 Lidl DE-Osnabrück Hans-Wunderlich-Straße 2,52.26703,8.00144
 Lidl DE-Osnabrück Mönkedieckstraße,52.29966,8.06136
+Lidl DE-Ottobrunn Siemensstraße,48.06446,11.6531
 Lidl DE-Overath-Vilkerath Steinhauser Auel 1,50.96402,7.32263
 Lidl DE-Paderborn Neuhäuser Straße,51.72883,8.73118
 Lidl DE-Papenburg Karl-Hillers-Straße,53.07857,7.38835
@@ -21698,6 +21703,7 @@ Shell DE-Solingen Landwehr,51.13156,6.9974
 Shell DE-Speyer Dudenhofer Straße,49.31824,8.42141
 Shell DE-St. Peter-Ording Maleens Knoll,54.31634,8.60448,25
 Shell DE-St. Peter-Ording Schulstraße,54.30681,8.63652
+Shell DE-St. Wendel Linxweilerstraße,49.4613,7.1565
 Shell DE-Stade Harsefelder Straße,53.58488,9.47198
 Shell DE-Steinen Gewerbestraße,47.6407,7.74658
 Shell DE-Stockach Messkircher Straße,47.85843,9.00436
