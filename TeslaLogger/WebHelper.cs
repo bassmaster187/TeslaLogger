@@ -3699,7 +3699,7 @@ namespace TeslaLogger
                 WHERE
                     ((pos_end.odometer - pos_start.odometer) > 0.1) and (pos_start.address IS null or pos_end.address IS null or pos_start.address = '' or pos_end.address = '')", con))
                 {
-
+                    cmd.CommandTimeout = 600;    
                     MySqlDataReader dr = SQLTracer.TraceDR(cmd);
                     while (dr.Read())
                     {

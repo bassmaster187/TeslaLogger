@@ -331,14 +331,13 @@ namespace TeslaLogger
 
         protected async Task LoopAsync()
         {
-            bool initCredentialsLockTaken = false;
             try
             {
                 CurrentJSON.current_odometer = DbHelper.GetLatestOdometer();
                 CurrentJSON.CreateCurrentJSON();
 
                 if (ApplicationSettings.Default.InitCredentialsLock)
-                    Monitor.Enter(InitCredentialsLock, ref initCredentialsLockTaken);
+                    await initCredentialsLock.WaitAsync();
 
                 try
                 {
@@ -386,8 +385,8 @@ namespace TeslaLogger
                 }
                 finally
                 {
-                    if (initCredentialsLockTaken)
-                        Monitor.Exit(InitCredentialsLock);
+                    if (ApplicationSettings.Default.InitCredentialsLock)
+                        initCredentialsLock.Release();
                 }
 
                 _ = Task.Factory.StartNew(() =>
