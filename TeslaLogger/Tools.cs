@@ -2569,10 +2569,10 @@ WHERE
         private static byte[] Generate128BitsOfRandomEntropy()
         {
             var randomBytes = new byte[16]; // 16 Bytes will give us 128 bits.
-            using (var rngCsp = new RNGCryptoServiceProvider())
+            using (var rng = RandomNumberGenerator.Create())
             {
                 // Fill the array with cryptographically secure random bytes.
-                rngCsp.GetBytes(randomBytes);
+                rng.GetBytes(randomBytes);
             }
             return randomBytes;
         }
