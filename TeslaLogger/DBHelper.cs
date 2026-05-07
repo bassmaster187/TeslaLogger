@@ -4638,8 +4638,9 @@ WHERE
 
         int last_active_route_energy_at_arrival = int.MinValue;
 
-                internal static async Task RemoveInvalidPosEntriesAsync()
+        internal static async Task RemoveInvalidPosEntriesAsync()
         {
+            Logfile.Log("RemoveInvalidPosEntriesAsync: start");
             try
             {
                 using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
@@ -4681,6 +4682,7 @@ LIMIT @batchSize", con))
                 Tools.DebugLog($"Exception during RemoveInvalidPosEntriesAsync: {ex}");
                 Logfile.ExceptionWriter(ex, "Exception during RemoveInvalidPosEntriesAsync");
             }        
+            Logfile.Log("RemoveInvalidPosEntriesAsync: finished");
         }
 
         public async Task<int> InsertPosAsync(string timestamp, double latitude, double longitude, int speed, decimal? power, double? odometer, double idealBatteryRangeKm, double batteryRangeKm, double batteryLevel, double? insideTemp, double? outsideTemp, string altitude)
