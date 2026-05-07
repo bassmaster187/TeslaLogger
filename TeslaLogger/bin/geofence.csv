@@ -2459,6 +2459,7 @@ Supercharger-V4 FI-Porvoo,60.39293,25.61051
 Supercharger FI-Pyhtää,60.489054,26.554835
 Supercharger FI-Pyhäjärvi,63.716298,25.920103
 Supercharger-V3 FI-Rovaniemi,66.501765,25.723048
+Supercharger-V3 FI-Salo,60.41852,23.16233
 Supercharger-V3 FI-Sodankylä,67.419824,26.591239
 Supercharger-V4 FI-Tampere IKEA,61.45161,23.76986
 Supercharger-V4 FI-Vaasa,63.11251,21.65643
@@ -2908,6 +2909,7 @@ Supercharger-V4 GB-Macmerry Gladsmuir,55.951557,-2.882369
 Supercharger GB-Maidstone,51.286224,0.545783
 Supercharger-V4 GB-Manchester,53.461811,-2.285508
 Supercharger-V3 GB-Manchester - South,53.430305,-2.179438
+Supercharger-V4 GB-Manchester Ashton New Road,53.4821,-2.20388
 Supercharger-V3 GB-Manchester Trafford Centre,53.466824,-2.354047
 Supercharger-V3 GB-Mansfield - East Midlands Designer Outlet,53.10912,-1.31227
 Supercharger-V3 GB-Medway - Westbound,51.341559,0.611212
@@ -8008,6 +8010,8 @@ autoSense CH-Zuchwil Langenfeldstrasse,47.20239,7.57139,25
 
 autostrom.plus DE-Midlum A27 West,53.72631,8.66093
 autostrom.plus DE-Rastanlage Hamwiede Nord,52.883,9.47446
+autostrom.plus DE-Rastplatz Grüner Winkel Ost,50.60803,6.71138
+autostrom.plus DE-Rastplatz Grüner Winkel West,50.60813,6.7097
 
 Autotechnik-Heinz-Müller DE-Elsdorf Max-Planck-Straße,50.94373,6.58332
 
@@ -13316,6 +13320,7 @@ ensev DE-Bad Nauheim Im Kirschgarten,50.39504,8.74788
 ensev DE-Bad Nauheim Ludwigstraße,50.36836,8.7438
 ensev DE-Bad Nauheim Parkstraße,50.36553,8.73478
 ensev DE-Bad Nauheim Schwalheimer Straße,50.35669,8.74991
+ensev DE-Mücke Merlauer Straße,50.63393,9.03056
 ensev DE-Varel Bockhorner Straße,53.39364,8.09304
 
 ENTEGA DE-Büttelborn Im Mehlsee,49.90293,8.52326
@@ -16144,6 +16149,7 @@ incharge GR-Thessaloniki Θεσσαλονίκη Monastiriou,40.66008,22.90082
 incharge GR-Volos Βόλος Larisis,39.36923,22.919
 incharge GR-Vourvourou Βουρβουρού Περιμετρική Οδός Σιθωνίας,40.1911,23.8062
 incharge GR-Αριστερα A/D Korinthou Tripoleos,37.8627,22.84217
+incharge GR-Μάρμαρα Μύλος Εμπορικό Κέντρο,40.08784,23.80285
 
 infra-fürth DE-Fürth Am Grünen Weg,49.484,10.94937
 infra-fürth DE-Fürth Europaallee,49.453,11.00065,30
@@ -18503,6 +18509,7 @@ Lidl DE-Wendlingen Taläckerstraße,48.66628,9.37052
 Lidl DE-Werlte Hauptstraße 63-65,52.8521,7.68434
 Lidl DE-Westerkappeln Heerstraße 2,52.31452,7.87377
 Lidl DE-Westhausen Dr.-Rudolf-Schieber-Straße,48.87947,10.18574
+Lidl DE-Wetzlar Carolinenhütte,50.56743,8.50297
 Lidl DE-Weyhe Alte Hauptstraße 2,52.98155,8.84217
 Lidl DE-Wiesbaden,50.06032,8.33523
 Lidl DE-Wiesbaden Mainzer Straße,50.05679,8.25789
@@ -24190,6 +24197,7 @@ Zunder ES-Área de servicio Quintanilla Norte,42.0224,-5.8536
 ČEZ CZ-Plzeň Radčická,49.74917,13.37022
 ČEZ CZ-Praha 10-Vršovice Eden,50.06724,14.46928
 ČEZ CZ-Praha 18 Veselská,50.13836,14.49908
+ČEZ CZ-Praha 9 Clarion Congress Hotel,50.10935,14.50123
 ČEZ CZ-Praha Bělohorská,50.07717,14.34079
 ČEZ CZ-Praha Chodovská,50.05304,14.47363
 ČEZ CZ-Praha Corso Karlín,50.09175,14.45122
