@@ -4660,6 +4660,7 @@ WHERE
 LIMIT @batchSize", con))
                         {
                             cmd.Parameters.AddWithValue("@batchSize", batchSize);
+                            cmd.CommandTimeout = 600;    
                             int rowsDeleted = SQLTracer.TraceNQ(cmd, out _);
                             totalDeleted += rowsDeleted;
                             
