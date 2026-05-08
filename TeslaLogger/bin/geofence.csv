@@ -2458,6 +2458,7 @@ Supercharger-V4 FI-Pori,61.49468,21.798
 Supercharger-V4 FI-Porvoo,60.39293,25.61051
 Supercharger FI-Pyhtää,60.489054,26.554835
 Supercharger FI-Pyhäjärvi,63.716298,25.920103
+Supercharger-V4 FI-Raisio,60.4949,22.22567
 Supercharger-V3 FI-Rovaniemi,66.501765,25.723048
 Supercharger-V3 FI-Salo,60.41852,23.16233
 Supercharger-V3 FI-Sodankylä,67.419824,26.591239
@@ -3797,6 +3798,7 @@ Supercharger-V4 PL-Załuski,52.51436,20.5288
 
 Supercharger-V4 PT-Alcantarilha,37.1506,-8.36443
 Supercharger-V4 PT-Alcácer do Sal,38.39183,-8.5138
+Supercharger-V4 PT-Castelo Branco,39.80656,-7.51568
 Supercharger-V4 PT-Fátima,39.63554,-8.68836
 Supercharger PT-Guarda,40.55898,-7.23102,60
 Supercharger-V4 PT-Guimarães,41.44843,-8.34233
@@ -22292,6 +22294,7 @@ SW-Hameln DE-Hameln Am Stockhof,52.1006,9.35493
 SW-Hameln DE-Hameln Bahnhofsplatz,52.10128,9.37431,25
 SW-Hameln DE-Hameln Erichstraße,52.10772,9.35551
 SW-Hameln DE-Hameln Kastanienwall,52.10577,9.36046
+SW-Hamm DE-Hamm Karl-Koßmann-Straße,51.6863,7.8854
 SW-Harsewinkel DE-Harsewinkel Talstraße,51.96534,8.21957
 SW-Hattingen DE-Hattingen Bruchstraße,51.39433,7.17854
 SW-Hattingen DE-Hattingen Bruchstraße,51.39635,7.18262
@@ -22828,6 +22831,7 @@ TEA HU-Nyíregyháza Tünde utca,47.93709,21.74936
 TEA HU-Orosháza Dózsa György utca,46.5588,20.6732
 TEA HU-Polgár Ipari Park,47.84054,21.13145
 TEA HU-Siófok Jegenye sor,46.8841,18.0655
+TEA HU-Vértesszőlős Határ út,47.60354,18.38805
 
 TEAG DE-Allendorf (Lumda) Am Gewerbepark,50.675,8.8113
 TEAG DE-Am Ettersberg Schwerstedter Straße,51.06226,11.2503
@@ -23365,6 +23369,7 @@ Vattenfall DE-Gnoien Friedenstraße,53.97279,12.7069
 Vattenfall DE-Greifswald Anklamer Str,54.09151,13.39099
 Vattenfall DE-Greifswald Loitzer Landstraße,54.08141,13.35898
 Vattenfall DE-Greifswald Warschauer Straße,54.09101,13.42045
+Vattenfall DE-Großröhrsdorf Bandweberstraße,51.14528,14.02878
 Vattenfall DE-Grünheide (Mark) Karl-Marx-Straße,52.42074,13.82279
 Vattenfall DE-Hamburg Alter Zollweg,53.61448,10.15272
 Vattenfall DE-Hamburg Fuhlsbüttler Straße,53.58927,10.0456
