@@ -196,7 +196,7 @@ Supercharger-V4 BE-Antwerpen Central,51.21616,4.41022
 Supercharger-V3 BE-Arlon,49.64808,5.81917,60
 Supercharger-V4 BE-Bastogne,50.00237,5.7014
 Supercharger-V4 BE-Bertrix,49.86698,5.25037
-Supercharger-V4 BE-Braine,50.66155,4.38058
+Supercharger-V4 BE-Braine-l’Alleud,50.66158,4.38047
 Supercharger-V3 BE-Brugge,51.1699,3.19666
 Supercharger-V3 BE-Bruxelles Brussels,50.8787,4.37317
 Supercharger-V3 BE-Charleroi,50.45233,4.43035
@@ -4310,6 +4310,7 @@ Supercharger-V4 US-Los Angeles CA Santa Monica Blvd Diner,34.09095,-118.34243
 Supercharger US-Los Gatos CA,37.22984,-121.9794
 Supercharger-V3 US-Los Gatos CA - Los Gatos Boulevard,37.23698,-121.96214
 Supercharger-V3 US-Lost Hills CA,35.61682,-119.65604
+Supercharger-V4 US-Lost Hills CA Tesla Oasis,35.61818,-119.63843
 Supercharger-V3 US-Madera CA Avenue 7,36.85174,-119.95213
 Supercharger-V3 US-Malibu CA,34.0359,-118.6844
 Supercharger US-Malibu CA - Whole Foods and the Park,34.0369,-118.6865
@@ -4660,6 +4661,7 @@ Supercharger US-Aventura FL (Floor 1E),25.95948,-80.14237
 Supercharger-V4 US-Bartow FL,27.90707,-81.8427
 Supercharger-V3 US-Big Pine Key FL,24.6733,-81.3564
 Supercharger-V3 US-Boca Raton FL (Floor 2),26.36166,-80.13276
+Supercharger-V4 US-Boca Raton FL N Federal Hwy DBRL,26.37577,-80.0769
 Supercharger-V3 US-Boynton Beach FL,26.53195,-80.08852
 Supercharger US-Brandon FL,27.94064,-82.32348
 Supercharger-V3 US-Brooksville FL,28.52267,-82.2301
@@ -4850,6 +4852,7 @@ Supercharger-V3 US-Newnan GA,33.39358,-84.75997
 Supercharger-V3 US-Peachtree Corners GA (Floor 1),33.97973,-84.2151
 Supercharger-V3 US-Pooler GA,32.07963,-81.2812
 Supercharger-V3 US-Pooler GA - US-80,32.11076,-81.2358
+Supercharger-V4 US-Pooler GA Pooler Pkwy,32.13588,-81.25254
 Supercharger-V4 US-Richmond Hill GA,31.93212,-81.3231
 Supercharger-V3 US-Roswell GA,34.01916,-84.3129
 Supercharger-V3 US-Suwanee GA,34.03407,-84.05267
@@ -11924,7 +11927,7 @@ EnBW DE-Lübz,53.46529,12.04172
 EnBW DE-Lüchow (Wendland) Am Kleinbahnhof,52.96406,11.16543
 EnBW DE-Lüchow (Wendland) Rewe,52.96829,11.1406
 EnBW DE-Lüdenscheid Hohe Steinert,51.22795,7.60775
-EnBW DE-Lüneburg,53.24027,10.46198
+EnBW DE-Lüneburg Auf den Blöcken,53.24027,10.46198
 EnBW DE-Lüneburg Auf der Höhe,53.238,10.3846
 EnBW DE-Lünen Fressnapf,51.6066,7.50454
 EnBW DE-Lünen Penny,51.59754,7.43986
@@ -12468,6 +12471,7 @@ EnBW DE-Sipplingen In der Breite,47.79792,9.0904
 EnBW DE-Soest,51.55815,8.1339
 EnBW DE-Sondershausen,51.37044,10.85373
 EnBW DE-Sonnenbühl Parkplatz,48.41631,9.22149
+EnBW DE-Sottrum Carl-von-Linde-Straße,53.11672,9.20546,15
 EnBW DE-Spaichingen Europastraße,48.07586,8.73413
 EnBW DE-Spaichingen Hauptstraße,48.07351,8.7385
 EnBW DE-Spaichingen Sparkasse,48.0724,8.74062
@@ -18537,6 +18541,7 @@ Lidl DE-Völklingen-Fürstenhausen Zechenstraße,49.24763,6.86833
 Lidl DE-Wadgassen,49.25243,6.81806
 Lidl DE-Waiblingen,48.82613,9.305
 Lidl DE-Waldfischbach Haupstraße,49.2854,7.64828
+Lidl DE-Waldshut-Tiengen Hebelstraße,47.63058,8.26613
 Lidl DE-Warstein-Suttrop Alte Kreisstraße,51.45298,8.35988
 Lidl DE-Wassertrüdingen Am Krautgarten 1,49.04234,10.58879
 Lidl DE-Wedemark-Mellendorf Wedemarkstraße,52.54653,9.74427
