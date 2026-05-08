@@ -67,7 +67,7 @@ Supercharger-V4 AT-Wien,48.193045,16.27707
 Supercharger-V3 AT-Wien Gewerbepark Stadlau,48.24713,16.46436
 Supercharger AT-Wien Tech Park Vienna,48.15725,16.33404
 Supercharger-V4 AT-Wien Wienerberg,48.16753,16.34786
-Supercharger-V4 AT-Wiener Neudorf,48.10277,16.31827
+Supercharger-V4 AT-Wiener Neudorf,48.10255,16.31827
 Supercharger-V4 AT-Wiener Neustadt,47.8047,16.21082,75
 Supercharger-V4 AT-Zeltweg,47.194056,14.722814
 
@@ -2051,7 +2051,7 @@ Supercharger-V4 DE Langenhagen,52.458282,9.716301
 Supercharger-V4 DE-Laucha,50.92246,10.55333,40
 Supercharger-V3 DE-Lauenau,52.2791,9.351,60
 Supercharger-V3 DE-Leer,53.25967,7.45557
-Supercharger-V3 DE-Lehre,52.31315,10.63488,30
+Supercharger-V3 DE-Lehre,52.31318,10.63498,20
 Supercharger-V4 DE-Leipzig Rosa-Luxemburg-Straße,51.34682,12.39433
 Supercharger-V4 DE-Leipzig Sachsenpark,51.401142,12.39782,15
 Supercharger-V3 DE-Leipzig-Flughafen,51.40153,12.18123
@@ -6902,6 +6902,7 @@ Allego DE-Autohof Gießen-Lützellinden,50.52955,8.6071
 Allego DE-Autohof Halle-Tornau,51.5458,12.01418
 Allego DE-Autohof Homberg/Efze,51.00472,9.47935
 Allego DE-Autohof Lauenau,52.2787,9.35075,10
+Allego DE-Autohof Lehre,52.3134,10.6354,20
 Allego DE-Autohof Leipzig Flughafen,51.4015,12.18158,8
 Allego DE-Autohof Leipzig Flughafen,51.4016,12.18156,8
 Allego DE-Autohof Lippetal,51.69575,7.96646,10
@@ -7258,7 +7259,6 @@ Allego DE-Laatzen Hildesheimer Straße,52.31614,9.79094
 Allego DE-Lahr Einsteinallee,48.35387,7.80752,30
 Allego DE-Lauf an der Pegnitz Industriestraße,49.50276,11.2915
 Allego DE-Leese Bahlweg,52.4939,9.12086
-Allego DE-Lehre In den Lohbalken,52.3134,10.6354,20
 Allego DE-Lehrte Burgdorfer Straße,52.38722,9.97172
 Allego DE-Leonberg Breitwiesenstraße,48.78518,9.01743,5
 Allego DE-Leverkusen,51.02463,7.01523
@@ -10954,7 +10954,7 @@ EnBW DE-Autohof Grabow,53.2982,11.53302,25
 EnBW DE-Autohof Härtensdorf,50.68048,12.59072,25
 EnBW DE-Autohof Kappel-Grafenhausen,48.28093,7.77691,25
 EnBW DE-Autohof Koblenz Metternich,50.34714,7.50752,12
-EnBW DE-Autohof Lehre,52.31305,10.6354,10
+EnBW DE-Autohof Lehre,52.313,10.63568,30
 EnBW DE-Autohof Mendig,50.38231,7.26952,25
 EnBW DE-Autohof Nahetal,49.9256,7.93568,30
 EnBW DE-Autohof Northeim,51.73232,9.97211
@@ -11374,7 +11374,7 @@ EnBW DE-Erftstadt Zum Gänsgraben,50.83218,6.80204
 EnBW DE-Erfurt Weimarische Straße,50.9771,11.1058,25
 EnBW DE-Eriskirch Friedrichshafener Straße,47.63391,9.52444
 EnBW DE-Erkelenz Burger King,51.07031,6.30264
-EnBW DE-Erkelenz Penny,51.07564,6.30506
+EnBW DE-Erkelenz Neumühle,51.07472,6.30544
 EnBW DE-Erkheim Eidlerholzstraße,48.02616,10.32854
 EnBW DE-Erlangen Hofmannstraße,49.59287,11.01452,10
 EnBW DE-Erwitte,51.60625,8.33675
@@ -19080,6 +19080,7 @@ Mer DE-Mühldorf am Inn Oderstraße,48.23489,12.54142
 Mer DE-Mühlenfließ Fläming West An der A9,52.13232,12.75021
 Mer DE-Nidda Eisenried,50.41725,9.0183
 Mer DE-Nörten-Hardenberg Unter dem Pferdestiege,51.62989,9.92165
+Mer DE-Oldenburg Holler Landstraße,53.14017,8.2588
 Mer DE-Paderborn Frankfurter Weg,51.69773,8.73246
 Mer DE-Passau Grünaustraße,48.57285,13.45445
 Mer DE-Pattensen Ludwig-Erhard-Straße,52.2686,9.77704
@@ -20764,6 +20765,7 @@ Porsche HR-Zagreb Miroslava Miholića,45.76073,15.9828
 Porsche IT-Bologna Via Bruno Monterumici,44.50405,11.30875
 Porsche IT-Desenzano del Garda Via Faustinella,45.44909,10.51635
 Porsche LU-Howald Hesperange Rue Peternelchen,49.57568,6.13828
+Porsche MK-Radnjanska Радњанска Демир Капија,41.41577,22.22884
 Porsche PL-Katowice Kochłowicka,50.25476,18.9704
 Porsche SI-Ljubljana Bravničarjeva ulica,46.08414,14.48063
 
@@ -21414,6 +21416,7 @@ Shell DE-Aschaffenburg Schillerstraße,49.98698,9.1402
 Shell DE-Asperg Ludwigsburger Straße,48.89717,9.1541
 Shell DE-Autohof Georgswerder,53.51856,10.02174
 Shell DE-Autohof Herzsprung,53.06798,12.53331,20
+Shell DE-Autohof Lehre,52.31314,10.6346,12
 Shell DE-Autohof Ramstein,49.42368,7.55945
 Shell DE-Bad Belzig Brücker Landstraße,52.14454,12.60938
 Shell DE-Bad Doberan An der B105,54.10596,11.92831
@@ -24053,7 +24056,7 @@ Wien-Energie AT-Wien U-Bahn-Bogen,48.2177,16.34209,60
 Wien-Energie AT-Wien Waldmüllergasse,48.23295,16.37685
 Wien-Energie AT-Wien Wehrgasse,48.19592,16.35768
 Wien-Energie AT-Wien Wimbergergasse,48.20712,16.33878
-Wien-Energie AT-Wiener Neudorf Multiplex,48.10306,16.31881
+Wien-Energie AT-Wiener Neudorf Multiplex,48.10306,16.3188,20
 
 Wiiiz FR-Cannes Bd Général Vautrin,43.54863,7.03206
 Wiiiz FR-Grasse Pl. de la Buanderie,43.66096,6.9234,30
