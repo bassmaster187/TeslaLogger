@@ -2782,21 +2782,29 @@ Supercharger-V3 GB-Annesley,53.069104,-1.252649
 Supercharger GB-Aviemore,57.189774,-3.836206
 Supercharger-V3 GB-Banbury,52.073055,-1.341804
 Supercharger GB-Barnsley,53.489393,-1.486223
+Supercharger-V4 GB-Barnstaple,51.06176,-4.08108
 Supercharger-V4 GB-Batley,53.74484,-1.64273
 Supercharger-V3 GB-Belfast,54.583523,-5.960532
 Supercharger-V4 GB-Belfast 2,54.584952,-5.959096
 Supercharger-V4 GB-Bexley,51.44867,0.16134
+Supercharger-V4 GB-Billingshurst,51.0224,-0.46216
 Supercharger-V3 GB-Birch Eastbound,53.56834,-2.23337
+Supercharger-V3 GB-Birch Westbound,53.56754,-2.2294
 Supercharger GB-Birchanger Green,51.870767,0.196508
 Supercharger GB-Birchanger Green,51.871763,0.193506
 Supercharger GB-Birmingham,52.362924,-1.945572
 Supercharger-V3 GB-Birmingham - St Andrews,52.471621,-1.873908
+Supercharger-V4 GB-Blackburn,53.72755,-2.53576
+Supercharger-V4 GB-Blackburn Frontier,53.75348,-2.44035
 Supercharger-V3 GB-Blyth,53.386809,-1.059722
+Supercharger-V4 GB-Bradford,53.77045,-1.7505
 Supercharger-V3 GB-Braintree,51.852568,0.522422
 Supercharger-V4 GB-Bridgend,51.53251,-3.573568
 Supercharger-V3 GB-Bristol - Eastgate,51.47352,-2.564753
 Supercharger GB-Bristol Cribbs Causeway,51.526887,-2.59964
+Supercharger GB-Bristol Lysander Road Service Centre,51.5229,-2.60922
 Supercharger-V4 GB-Brora,58.012292,-3.848578
+Supercharger-V4 GB-Burnley Barracks,53.78836,-2.2616
 Supercharger GB-Burtonwood,53.417605,-2.639522
 Supercharger-V3 GB-Camborne,50.22756,-5.28
 Supercharger-V4 GB-Cambridge,52.256509,0.016594
@@ -2804,12 +2812,15 @@ Supercharger-V4 GB-Cannock,52.687759,-2.01457
 Supercharger-V3 GB-Cardiff,51.531534,-3.139834
 Supercharger-V4 GB-Carlisle,54.8949,-2.90716
 Supercharger-V3 GB-Carmarthen,51.858349,-4.3115
+Supercharger-V4 GB-Chapel-en-le-Frith Fickle Mermaid,53.33055,-1.90948
 Supercharger-V4 GB-Charnock Richard Southbound,53.63116,-2.6892
 Supercharger-V3 GB-Chelmsford,51.75766,0.47395
 Supercharger-V4 GB-Chepstow Newhouse,51.61967,-2.67552
 Supercharger-V4 GB-Cheshunt,51.720267,-0.037312
 Supercharger GB-Chorley,53.630562,-2.692578
+Supercharger-V4 GB-Cleckheaton,53.73566,-1.72137
 Supercharger GB-Colchester,51.88071,0.788574
+Supercharger-V4 GB-Colne,53.8537,-2.192
 Supercharger-V4 GB-Craigavon,54.448966,-6.391254
 Supercharger-V4 GB-Cranage,53.21134,-2.37802
 Supercharger-V4 GB-Crick,52.352622,-1.160603
@@ -2817,22 +2828,28 @@ Supercharger GB-Dartford,51.438052,0.26879
 Supercharger GB-Dartford,51.43848,0.26688
 Supercharger-V3 GB-Dartford Tesla Service Centre,51.453505,0.246775
 Supercharger GB-Derby,52.91831,-1.47197
+Supercharger-V4 GB-Doncaster Ogden Rd,53.5452,-1.08202
 Supercharger-V3 GB-Dorking,51.247,-0.33105
 Supercharger-V4 GB-Dover,51.125224,1.316863
 Supercharger GB-Dundee,56.466428,-3.062962
+Supercharger-V4 GB-Dungannon,54.4871,-6.75072
 Supercharger-V4 GB-Durham,54.727034,-1.528546
 Supercharger GB-Dursley,51.656431,-2.434545
 Supercharger GB-Edinburgh,55.945361,-3.366667
 Supercharger-V3 GB-Edinburgh - Newbridge,55.933836,-3.407621
+Supercharger-V4 GB-Elmswell,52.2318,0.89307
 Supercharger GB-Elveden,52.38641,0.664606
 Supercharger-V4 GB-Errol,56.42058,-3.22547
 Supercharger GB-Eurocentral,55.835903,-3.984203
 Supercharger-V3 GB-Exeter - Exeter Service Centre,50.693941,-3.512121
 Supercharger-V3 GB-Exeter Darts Farm,50.68617,-3.44997
 Supercharger-V3 GB-Exeter Sandygate Roundabout,50.715621,-3.464937
+Supercharger-V4 GB-Faversham,51.3055,0.90214
 Supercharger-V4 GB-Fernwood,53.048,-0.77838
 Supercharger-V3 GB-Ferrybridge,53.698625,-1.265508
+Supercharger-V4 GB-Finmere,51.9862,-1.0692
 Supercharger GB-Fleet,51.296156,-0.857274
+Supercharger GB-Fleet Southbound,51.2958,-0.85464
 Supercharger-V3 GB-Flimwell,51.05242,0.45474
 Supercharger-V3 GB-Flint Mountain,53.23223,-3.14202
 Supercharger-V4 GB-Folkestone,51.089496,1.123928
@@ -2852,6 +2869,7 @@ Supercharger-V4 GB-Gretna Caledonia Park,54.996828,-3.0596
 Supercharger GB-Gretna Green,55.0078,-3.083018
 Supercharger-V3 GB-Guildford,51.24964,-0.55946
 Supercharger-V4 GB-Guisborough,54.53542,-1.07487
+Supercharger-V4 GB-Haigh,53.5999,-1.54998
 Supercharger-V4 GB-Harlington,51.961749,-0.511626
 Supercharger-V3 GB-Harrogate,53.9624,-1.5285
 Supercharger-V4 GB-Hartlepool,54.64993,-1.2293
@@ -2865,8 +2883,10 @@ Supercharger-V3 GB-Heston - Eastbound,51.488858,-0.388922
 Supercharger-V3 GB-Heston - Westbound,51.488315,-0.395407
 Supercharger GB-Hilton Park Northbound,52.644021,-2.058587
 Supercharger GB-Hilton Park Southbound,52.644074,-2.054225
+Supercharger-V3 GB-Hopwood Park,52.3632,-1.94557
 Supercharger-V4 GB-Huddersfield,53.670968,-1.827989
 Supercharger-V4 GB-Hull,53.794878,-0.367221
+Supercharger-V4 GB-Huyton Beacon,53.39847,-2.81143
 Supercharger-V4 GB-Ilkley,53.92893,-1.79466
 Supercharger GB-Inverness,57.481674,-4.225466
 Supercharger-V3 GB-Ipswich,52.084716,1.116459
@@ -2876,11 +2896,13 @@ Supercharger-V3 GB-Kettering,52.386377,-0.696887
 Supercharger-V4 GB-Kidderminster,52.391128,-2.24804
 Supercharger-V4 GB-Kingston upon Thames,51.413021,-0.306297
 Supercharger-V3 GB-King’s Lynn,52.73522,0.414
+Supercharger-V4 GB-Knowsley Earlsfield,53.42797,-2.8258
 Supercharger-V4 GB-Knutsford Southbound,53.30118,-2.400336
 Supercharger-V3 GB-Larkhall,55.719943,-3.95388
 Supercharger GB-Leeds,53.732769,-1.585628
 Supercharger-V3 GB-Leeds - Whitehouse Street,53.784433,-1.532576
 Supercharger-V3 GB-Leicester,52.594811,-1.180124
+Supercharger-V4 GB-Leicester Beaumont Leys,52.66708,-1.16795
 Supercharger-V4 GB-Leicester Humberstone Road,52.6395,-1.1168
 Supercharger-V3 GB-Leigh Delamere - Westbound,51.510017,-2.156316
 Supercharger GB-Lifton,50.643377,-4.284553
@@ -2907,23 +2929,26 @@ Supercharger GB-London-Westfield London,51.507888,-0.221972
 Supercharger-V3 GB-Luton,51.871899,-0.397296
 Supercharger-V4 GB-Lymm,53.358573,-2.506133
 Supercharger-V4 GB-Macmerry Gladsmuir,55.951557,-2.882369
+Supercharger-V4 GB-Maghull Old Meadow,53.51367,-2.9102
 Supercharger GB-Maidstone,51.286224,0.545783
 Supercharger-V4 GB-Manchester,53.461811,-2.285508
 Supercharger-V3 GB-Manchester - South,53.430305,-2.179438
 Supercharger-V4 GB-Manchester Ashton New Road,53.4821,-2.20388
 Supercharger-V3 GB-Manchester Trafford Centre,53.466824,-2.354047
 Supercharger-V3 GB-Mansfield - East Midlands Designer Outlet,53.10912,-1.31227
-Supercharger-V3 GB-Medway - Westbound,51.341559,0.611212
 Supercharger-V3 GB-Medway Eastbound,51.34058,0.60854
+Supercharger-V3 GB-Medway Westbound,51.34156,0.6112
 Supercharger GB-Membury Eastbound,51.48391,-1.556821
 Supercharger GB-Membury Westbound,51.481293,-1.556196
 Supercharger-V3 GB-Merry Hill,52.48358,-2.112747
-Supercharger-V3 GB-Michaelwood,51.65588,-2.432036
+Supercharger-V3 GB-Michaelwood Northbound,51.65588,-2.43204
 Supercharger-V4 GB-Michaelwood Southbound,51.657195,-2.426898
 Supercharger-V4 GB-Middlesbrough Acklam Road,54.55964,-1.259646
 Supercharger-V4 GB-Middlesbrough Marton Road,54.571823,-1.22504
+Supercharger-V4 GB-Milton Keynes Merton Drive Service Centre,52.01384,-0.74558
 Supercharger-V4 GB-Moston,53.22634,-2.89374
 Supercharger-V3 GB-Newark,53.081144,-0.806543
+Supercharger-V3 GB-Newark A1 Slip Road,53.04817,-0.77824
 Supercharger-V4 GB-Newcastle upon Tyne,55.0276,-1.50943
 Supercharger-V3 GB-Newmarket - Studlands Shopping Park,52.26224,0.39757
 Supercharger-V3 GB-Newport,51.60171,-2.93461
@@ -2933,6 +2958,7 @@ Supercharger GB-Newport Pagnell Southbound,52.08433,-0.74837
 Supercharger-V4 GB-Newtown,52.50252,-3.349306
 Supercharger GB-North Greenwich,51.507022,0.015928
 Supercharger GB-Northampton,52.185729,-0.89127
+Supercharger-V3 GB-Northampton Service Centre,52.2425,-0.8341
 Supercharger-V3 GB-Norwich East,52.627571,1.383871
 Supercharger-V3 GB-Norwich Service Centre,52.656593,1.28759
 Supercharger-V3 GB-Nottingham - Service Centre,52.936032,-1.134447
@@ -2947,6 +2973,8 @@ Supercharger-V3 GB-Penhale,50.378223,-4.942544
 Supercharger GB-Perth,56.386,-3.4792
 Supercharger-V4 GB-Peterborough,52.54466,-0.30506
 Supercharger-V4 GB-Polmont,55.996577,-3.722955
+Supercharger-V4 GB-Portlethen,57.07633,-2.12223
+Supercharger-V4 GB-Preston Saddle Inn,53.78687,-2.7796
 Supercharger-V4 GB-Preston South,53.71897,-2.653739
 Supercharger-V4 GB-Rainton,54.83263,-1.47715
 Supercharger GB-Reading,51.420611,-0.988028
@@ -2954,19 +2982,26 @@ Supercharger-V3 GB-Reading - Katesgrove,51.438129,-0.968514
 Supercharger-V3 GB-Reading - Westbound,51.422766,-1.029052
 Supercharger-V4 GB-Rheged,54.646723,-2.781466
 Supercharger GB-Richmond,54.4421,-1.6713
+Supercharger-V3 GB-Rotherham,53.39692,-1.35208
 Supercharger-V3 GB-Rownhams Northbound,50.95813,-1.44806
 Supercharger-V3 GB-Rugby,52.409672,-1.250838
+Supercharger-V4 GB-Rugby J1,52.38608,-1.26036
 Supercharger GB-Sarn,51.535351,-3.577637
 Supercharger-V3 GB-Sevenoaks,51.302673,0.160995
 Supercharger GB-Sheffield,53.314145,-1.281904
-Supercharger-V4 GB-Solihull,52.37729,-1.79643
+Supercharger-V4 GB-Solihull,52.40033,-1.81783
+Supercharger-V4 GB-Solihull Service Center,52.3773,-1.79643
 Supercharger GB-South Mimms,51.687536,-0.223548
 Supercharger-V4 GB-Sprucefield,54.491991,-6.068177
 Supercharger-V4 GB-St. Albans,51.75182,-0.2753
 Supercharger-V4 GB-Stanwell,51.442912,-0.474949
 Supercharger-V4 GB-Stevenage,51.901772,-0.208134
+Supercharger-V3 GB-Stevenage Gridserve Electric Forecourt,51.88747,-0.2078
+Supercharger-V4 GB-Stowmarket,52.17933,1.0064
+Supercharger-V4 GB-Stowmarket Gun Cotton Way,52.18252,1.0186
 Supercharger-V4 GB-Swansea,51.62068,-3.9135
 Supercharger-V3 GB-Swansea,51.67865,-3.9942
+Supercharger-V4 GB-Swindon,51.565,-1.79664
 Supercharger-V3 GB-Tebay Southbound,54.45347,-2.6061
 Supercharger GB-Telford,52.677334,-2.399552
 Supercharger-V4 GB-Telford,52.71772,-2.52476
@@ -2978,9 +3013,12 @@ Supercharger-V3 GB-Tongham,51.22627,-0.72332
 Supercharger-V3 GB-Trentham,52.96302,-2.196439
 Supercharger-V3 GB-Trumpington,52.16824,0.109177
 Supercharger-V4 GB-Tyndrum,56.43844,-4.710994
+Supercharger-V4 GB-Uttoxeter,52.90756,-1.8562
 Supercharger GB-Uxbridge,51.54567,-0.47437
+Supercharger-V4 GB-Wakefield Calder Park,53.6522,-1.52346
 Supercharger-V4 GB-Wallasey,53.412539,-3.073522
 Supercharger GB-Warrington,53.339515,-2.569358
+Supercharger-V4 GB-Warton,53.7519,-2.88153
 Supercharger GB-Warwick Northbound,52.216118,-1.504695
 Supercharger GB-Warwick Southbound,52.219048,-1.50126
 Supercharger GB-Washington,54.887483,-1.558291
@@ -2988,6 +3026,7 @@ Supercharger-V4 GB-Washington Northbound,54.889688,-1.560204
 Supercharger-V4 GB-Washington Southbound,54.890431,-1.558326
 Supercharger-V4 GB-Welshpool,52.67286,-3.12183
 Supercharger-V4 GB-Wetherby,53.94565,-1.37059
+Supercharger-V4 GB-Wherstead,52.02545,1.13868
 Supercharger-V4 GB-Wickford,51.5937,0.5002
 Supercharger-V3 GB-Winchester,51.06729,-1.3
 Supercharger GB-Winchester Norton Park,51.16725,-1.32802
