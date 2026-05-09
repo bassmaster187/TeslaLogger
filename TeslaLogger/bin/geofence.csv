@@ -2218,7 +2218,7 @@ Supercharger-V4 DE-Wesel (Globus),51.6629,6.66488
 Supercharger-V3 DE-Wetzlar,50.55282,8.53276,35
 Supercharger-V4 DE-Weyarn,47.86531,11.79069,60
 Supercharger-V4 DE-Wiesbaden,50.05983,8.34516
-Supercharger-V4 DE-Wiesbaden (Globus),50.0566,8.34306
+Supercharger-V4 DE-Wiesbaden (Globus),50.05656,8.34247
 Supercharger-V4 DE-Wiesbaden-Äppelallee,50.046184,8.219883
 Supercharger-V4 DE-Wildau,52.3136,13.60497,40
 Supercharger-V4 DE-Willich,51.2807,6.50876
@@ -12784,6 +12784,7 @@ EnBW DE-Wetzlar Frankfurter Straße,50.54565,8.5294
 EnBW DE-Weyerbusch,50.71344,7.56089
 EnBW DE-Wiehl Wiesenstraße,50.94623,7.5502
 EnBW DE-Wiesbaden Erich-Ollenhauer-Straße,50.06192,8.21712
+EnBW DE-Wiesbaden Globus,50.05685,8.3438
 EnBW DE-Wiesbaden Otto-Wallach-Straße,50.04362,8.21706
 EnBW DE-Wiesloch Adelsförsterpfad,49.2948,8.667
 EnBW DE-Wiesloch In den Ziegelwiesen,49.2905,8.6648
@@ -19561,6 +19562,7 @@ naturenergie DE-Emmendingen Karl-Bautz-Straße,48.11807,7.84825
 naturenergie DE-Emmendingen Luisenstraße,48.1182,7.85246,30
 naturenergie DE-Emmendingen Rosenweg,48.10511,7.8612
 naturenergie DE-Emmingen-Liptingen Carl-Benz-Straße,47.93422,8.86004
+naturenergie DE-Feldberg (Schwarzwald) Dr.-Pilet-Spur,47.85892,8.036
 naturenergie DE-Feldberg (Schwarzwald) Feldbergstraße,47.8684,8.09578
 naturenergie DE-Gottmadingen Bahnhofstraße,47.73576,8.77591
 naturenergie DE-Hartheim am Rhein Schulstraße,47.9339,7.63083
@@ -20652,6 +20654,7 @@ Plug’N’Roll CH-Sennwald Simon Frick-Strasse,47.24549,9.51508
 
 Pluq DE-Baiersbronn Tonbachstraße,48.5378,8.35763
 
+Pod-Point GB-Bath Northgate St The Podium,51.3841,-2.35938
 Pod-Point GB-Newcastle upon Tyne Brunton Ln,55.01429,-1.66314
 Pod-Point GB-Perth Edinburgh Rd,56.38185,-3.43305
 Pod-Point GB-Sidcup Edgington Way,51.41367,0.12289
@@ -21345,6 +21348,8 @@ SDE22 FR-Fréhel All. des Acacias,48.63983,-2.40379,30
 
 Seat DE-Bochum Porschestraße,51.48671,7.19394
 Seat DE-Stade Harburger Straße,53.59029,9.48643
+
+SETEC RO-Târgoviște Strada Stelea,44.92906,25.46127
 
 SEV84 FR-Entrechaux Rte de Faucon,44.21866,5.14106
 
@@ -22868,6 +22873,7 @@ TCB ES-Navalmoral Autovía del Suroeste,39.87351,-5.54985
 TEA HU-Balatonalmádi Szabolcs u.,47.04013,18.01904
 TEA HU-Biatorbágy Premier Outlet,47.46586,18.88535
 TEA HU-Budapest Gyömrői utca,47.46422,19.15922,25
+TEA HU-Budapest Kerepesi út,47.499,19.09533
 TEA HU-Cegléd Hrsz,47.1851,19.93155
 TEA HU-Gyenesdiá Kereskedők útja,46.77272,17.27646
 TEA HU-Hort 60-as Fogado,47.68784,19.74166
@@ -23764,6 +23770,7 @@ Volkswagen DE-Köln Robert-Perthel-Straße,50.9895,6.90735
 Volkswagen DE-Landsberg am Lech Graf-Zeppelin-Straße,48.06767,10.86096
 Volkswagen DE-Langenberg Wiedenbrücker Straße,51.78986,8.32097
 Volkswagen DE-Legden Neue Mühle,52.04106,7.09023
+Volkswagen DE-Leipzig Schongauerstraße,51.3498,12.47112
 Volkswagen DE-Leutkirch im Allgäu Im Ösch 8,47.79632,10.01631
 Volkswagen DE-Lohberg Lamer Straße,49.16966,13.09254
 Volkswagen DE-Luckenwalde Brandenburger Straße,52.09578,13.15724
@@ -23997,6 +24004,7 @@ Westfalen DE-Soest Arnsbergerstraße,51.56023,8.10422
 Westfalen DE-Steinfurt Carl-Benz-Straße,52.1586,7.31996
 Westfalen DE-Steinhagen Haller Straße,52.02791,8.40876
 Westfalen DE-Stemwede Oppendorferstraße,52.45419,8.48156
+Westfalen DE-Wachtberg Töpferstraße,50.61283,7.0532
 Westfalen DE-Werne Fürstenhof,51.66941,7.63485
 
 WEVG DE-Salzgitter Karl-Scharfenberg-Straße,52.08809,10.37919
