@@ -3620,7 +3620,7 @@ Supercharger-V3 NO-Evenes,68.497406,16.702666
 Supercharger-V4 NO-Evje,58.58805,7.80838
 Supercharger-V3 NO-Fauske,67.258778,15.400971,20
 Supercharger-V4 NO-Flå,60.43072,9.45548
-Supercharger-V3 NO-Forus,58.897022,5.703734
+Supercharger-V3 NO-Forus,58.89702,5.70358
 Supercharger-V3 NO-Fåvang,61.454341,10.189257
 Supercharger-V4 NO-Førde,61.4485,5.88623
 Supercharger-V4 NO-Gardermoen,60.167301,11.152385
@@ -7063,6 +7063,7 @@ ABB NZ-Mount Maunganui Maru Street,-37.66507,176.197
 ABC AT-Ansfelden Carl-Anton-Carlone-Straße,48.20972,14.29025
 ABC FI-Alavus Piirantie,62.59289,23.60903,20
 ABC FI-Espoo Komeetankatu,60.16665,24.73444
+ABC FI-Eurajoki Kauppatie,61.20406,21.72708
 ABC FI-Forssa Matkailijankatu,60.82763,23.57226
 ABC FI-Hyvinkää Peltokuumolantie,60.61899,24.80656
 ABC FI-Hämeenlinna Paroistentie,61.01357,24.41754
@@ -11557,7 +11558,7 @@ EnBW DE-Ahrbrück An den Märkten,50.49256,6.98133
 EnBW DE-Ahrensburg Hamburger Straße,53.66885,10.2311
 EnBW DE-Ahrensfelde,52.5977,13.60176
 EnBW DE-Aichach Wittelsbacher Weg,48.4644,11.1399
-EnBW DE-Aichtal,48.62224,9.23787
+EnBW DE-Aichtal Waldenbucher Straße,48.62224,9.23787
 EnBW DE-Aichwald Alte Dorfstraße,48.74785,9.39392
 EnBW DE-Aichwald Beutelsbacher Straße,48.77938,9.39293
 EnBW DE-Aichwald Gartenstraße,48.7587,9.37752
@@ -11576,13 +11577,10 @@ EnBW DE-Aldingen Uhlandstraße,48.09655,8.70874
 EnBW DE-Alfdorf Gmünder Straße,48.83878,9.68933
 EnBW DE-Alfeld Vogelherd,49.41096,11.54418
 EnBW DE-Alfter Ziegelweg,50.7161,7.0259
-EnBW DE-Allendorf (Eder),51.02044,8.66614
 EnBW DE-Allendorf (Eder) Ringstraße,51.022,8.6638
 EnBW DE-Allensbach Hinnengasse,47.71346,9.06869
 EnBW DE-Allensbach Professor-Maier-Leibnitz-Straße,47.72399,9.07033
 EnBW DE-Allersberg Rother Straße,49.2509,11.22854
-EnBW DE-Allgäuer Tor Ost,47.84752,10.2829,20
-EnBW DE-Allgäuer Tor West,47.84819,10.28086,20
 EnBW DE-Alsfeld An der Au,50.7528,9.27807
 EnBW DE-Alsfeld Dirsröder Feld,50.73826,9.2463,40
 EnBW DE-Altdorf Am Aicher Feld,48.56611,12.10075
@@ -12015,9 +12013,9 @@ EnBW DE-Egelsbach Kurt-Schumacher-Ring,49.96183,8.67072
 EnBW DE-Eggenfelden Schellenbruckplatz,48.40038,12.74881
 EnBW DE-Eggenstein-Leopoldshafen Hermann-von-Helmholtz-Platz,49.09185,8.42848
 EnBW DE-Ehingen (Donau) Riedlinger Straße,48.28205,9.71233
+EnBW DE-Ehingen (Donau) Scheibengasse,48.28114,9.72008
+EnBW DE-Ehingen (Donau) Sternplatz,48.2836,9.72888
 EnBW DE-Ehingen Ortsteil Dächingen Bruder-Johannes-Straße,48.30994,9.61393
-EnBW DE-Ehingen Scheibengasse,48.28114,9.72008
-EnBW DE-Ehingen Sternplatz,48.28359,9.72888
 EnBW DE-Ehningen Gartenstraße,48.65996,8.94326
 EnBW DE-Eigeltingen Krumme Straße,47.85846,8.89687
 EnBW DE-Eisenberg (Pfalz) In den Geldäckern,49.55731,8.08085
@@ -12030,8 +12028,6 @@ EnBW DE-Ellwangen (Jagst) Max-Eyth-Straße,48.95717,10.18258
 EnBW DE-Ellwangen Unterer Brühl,48.96882,10.12769
 EnBW DE-Elmshorn Am Eiskeller,53.74618,9.66117,30
 EnBW DE-Elsterwerda Lauchhammer Straße,51.46577,13.53433
-EnBW DE-Elztal Nord,50.26692,7.22477
-EnBW DE-Elztal Süd,50.26563,7.22724
 EnBW DE-Emerkingen Bachstraße,48.21675,9.65799
 EnBW DE-Emmendingen Schwarzwaldstraße,48.11688,7.8505
 EnBW DE-Empfingen Im Auchtert,48.38593,8.72005
@@ -12902,6 +12898,8 @@ EnBW DE-Rastplatz Bad Camberg Ost,50.30145,8.23656
 EnBW DE-Rastplatz Hohenstein,51.2902,6.80453
 EnBW DE-Raststätte Aggertal Nord,50.95162,7.318
 EnBW DE-Raststätte Aggertal Süd,50.95184,7.32062
+EnBW DE-Raststätte Allgäuer Tor Ost,47.84752,10.2829,20
+EnBW DE-Raststätte Allgäuer Tor West,47.8482,10.28086,20
 EnBW DE-Raststätte Aurach Nord,49.5817,10.9307
 EnBW DE-Raststätte Aurach Süd,49.5818,10.92685
 EnBW DE-Raststätte Bruchsal Ost,49.16299,8.57098,12
@@ -12912,6 +12910,8 @@ EnBW DE-Raststätte Eifel Ost,50.07005,6.88108,20
 EnBW DE-Raststätte Eifel West,50.06856,6.87994,20
 EnBW DE-Raststätte Ellwanger Berge Ost,48.98485,10.1961
 EnBW DE-Raststätte Ellwanger Berge West,48.98314,10.1935
+EnBW DE-Raststätte Elztal Nord,50.26692,7.22477
+EnBW DE-Raststätte Elztal Süd,50.26563,7.22724
 EnBW DE-Raststätte Goldbach Nord,53.00084,9.17945,20
 EnBW DE-Raststätte Goldbach Süd,52.99874,9.18113,20
 EnBW DE-Raststätte Göttingen West,51.49462,9.87613,20
@@ -12922,7 +12922,7 @@ EnBW DE-Raststätte Heiligenroth,50.4544,7.87324
 EnBW DE-Raststätte Hofoldinger Forst Süd,47.99715,11.67605
 EnBW DE-Raststätte Hohenlohe Nord,49.2071,9.63882,20
 EnBW DE-Raststätte Hohenlohe Süd,49.2053,9.64033,20
-EnBW DE-Raststätte im Hegau A81,47.86136,8.78631
+EnBW DE-Raststätte im Hegau West,47.86136,8.7863
 EnBW DE-Raststätte Inntal,47.61084,12.20169
 EnBW DE-Raststätte Inntal,47.61265,12.20067
 EnBW DE-Raststätte Kaltenborn,51.28886,7.5726
@@ -15204,7 +15204,7 @@ EWE-GO DE-Northeim Von Menzel Straße,51.69259,9.98971
 EWE-GO DE-Nossen Augustusberg,51.03647,13.2982
 EWE-GO DE-Nottuln Beisenbusch,51.91085,7.39866,25
 EWE-GO DE-Nördlingen Würzburger Straße,48.85452,10.48264
-EWE-GO DE-Nörten-Hardenberg Unter dem Pferdestiege,51.62915,9.92212
+EWE-GO DE-Nörten-Hardenberg Unter dem Pferdestiege,51.62918,9.92212,30
 EWE-GO DE-Nürnberg Heisterstraße,49.42803,11.06155
 EWE-GO DE-Nürnberg Laufamholzstraße,49.46212,11.14101
 EWE-GO DE-Nürnberg Regensburger Straße,49.42748,11.14333
@@ -17260,7 +17260,7 @@ Ionity DE-Mönchengladbach Schleswiger Straße,51.19552,6.41265
 Ionity DE-Mühldorf am Inn Äußere Neumarkter Straße,48.26244,12.54266
 Ionity DE-Nempitz,51.29011,12.13755,6
 Ionity DE-Nempitz,51.29019,12.1376,7
-Ionity DE-Nörten-Hardenberg Unter dem Pferdestiege,51.62876,9.92229,40
+Ionity DE-Nörten-Hardenberg Unter dem Pferdestiege,51.62887,9.92238,30
 Ionity DE-Oberhausen Brammenring,51.48978,6.88792
 Ionity DE-Oberhonnefeld,50.56259,7.52784
 Ionity DE-Oelde In d. Geist,51.812,8.13102
@@ -19766,7 +19766,7 @@ Mer DE-Meckenbeuren Wiesenweg,47.7013,9.55891
 Mer DE-Mühldorf am Inn Oderstraße,48.23489,12.54142
 Mer DE-Mühlenfließ Fläming West An der A9,52.13232,12.75021
 Mer DE-Nidda Eisenried,50.41725,9.0183
-Mer DE-Nörten-Hardenberg Unter dem Pferdestiege,51.62989,9.92165
+Mer DE-Nörten-Hardenberg Unter dem Pferdestiege,51.62982,9.92164,30
 Mer DE-Oldenburg Holler Landstraße,53.14017,8.2588
 Mer DE-Paderborn Frankfurter Weg,51.69773,8.73246
 Mer DE-Passau Grünaustraße,48.57285,13.45445
@@ -21520,6 +21520,8 @@ Powy IT-Pisa Via Quarantola,43.70929,10.3954
 Powy IT-San Donà di Piave Via dei Laghi 38 Pittarello,45.64244,12.59396
 Powy IT-Silea Via Str. della Serenissima,45.64874,12.31085
 
+PPC RO-Miercurea Ciuc Strada Harghita,46.36307,25.79284
+
 PRE CZ-Herálec u Havlíčkova Brodu,49.51429,15.41789
 PRE CZ-Karlovy Vary Stará Kysibelská,50.23661,12.89776
 PRE CZ-Kladruby u Stříbra,49.70176,12.98846
@@ -23143,6 +23145,7 @@ SW-Munster-Bispingen DE-Munster Aussiger Straße,52.98662,10.08471
 SW-Mühlheim DE-Mühlheim am Main Lämmerspieler Straße,50.11652,8.83896
 SW-Mülheim DE-Mülheim am Main Ringstraße,50.12128,8.83068
 SW-Münster DE-Münster Kiesekamps Mühle,51.94932,7.64135
+SW-Münster DE-Münster Robert-Bosch-Straße,51.9371,7.63575
 SW-Neu-Isenburg DE-Neu-Isenburg Alicestraße,50.05018,8.67537
 SW-Neu-Isenburg DE-Neu-Isenburg Dreiherrnsteinplatz,50.05883,8.75028
 SW-Neu-Isenburg DE-Neu-Isenburg Jahnstraße,50.04864,8.68286
@@ -25247,6 +25250,7 @@ DE Grünheide Gigafactory,52.39156,13.79258
 DE Göppingen Hotel Hohenstaufen,48.70669,9.65513
 DE Gütersloh Arvato,51.88353,8.44304
 DE Gütersloh Arvato,51.88405,8.44351
+DE Halle (Saale) Triad Business Park,51.4819,12.00427
 DE Hamburg Airport,53.63239,10.00647
 DE Hamburg Airport,53.63349,10.00702
 DE Hamburg Bargteheider Straße,53.60367,10.1456,15
