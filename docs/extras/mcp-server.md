@@ -29,6 +29,7 @@ Claude Desktop runterladen:
 - In den Einstellungen von Claude Desktop zu Entwickler gehen
 - Config bearbeiten
 - mcpServer hinzufügen
+- Wenn auf dem System Node.js nicht installiert ist, dann muss man es nachinstallieren: https://nodejs.org/en/download
 - ganz wichtig: nach dem speichern der Config muss Claude Desktop beendet und neu gestartet werden!
 - Prompt für einen Funktionstest: "Wie viele Fahrzeuge habe ich im Teslalogger"
 
