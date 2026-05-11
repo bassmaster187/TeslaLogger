@@ -66,9 +66,12 @@ Supercharger-V4 AT-Wels Welas Park,48.180313,14.063536,19
 Supercharger-V4 AT-Wien,48.193045,16.27707
 Supercharger-V3 AT-Wien Gewerbepark Stadlau,48.24713,16.46436
 Supercharger AT-Wien Tech Park Vienna,48.15725,16.33404
+Supercharger AT-Wien Tech Park Vienna,48.15815,16.33424
+Supercharger AT-Wien Tech Park Vienna,48.1588,16.3353
 Supercharger-V4 AT-Wien Wienerberg,48.16753,16.34786
 Supercharger-V4 AT-Wiener Neudorf,48.10255,16.31827
 Supercharger-V4 AT-Wiener Neustadt,47.8047,16.21082,75
+Supercharger-V4 AT-Wiener Neustadt,47.8058,16.21137,15
 Supercharger-V4 AT-Zeltweg,47.194056,14.722814
 
 Supercharger-V3 AU-Abbotsford VIC,-37.8094,144.99568
@@ -448,6 +451,7 @@ Supercharger CH-Bussigny,46.5567,6.56156
 Supercharger-V3 CH-Cadenazzo,46.15204,8.9371,25
 Supercharger-V4 CH-Crissier,46.5549,6.57073
 Supercharger CH-Dietikon,47.41796,8.39656
+Supercharger CH-Dietikon,47.41846,8.39528
 Supercharger CH-Dietlikon,47.4131,8.6168
 Supercharger CH-Egerkingen,47.32703,7.8055
 Supercharger CH-Flüelen,46.91298,8.62283
@@ -471,6 +475,7 @@ Supercharger-V4 CH-Neuchâtel,47.01187,6.9965
 Supercharger-V3 CH-Obfelden,47.272,8.4378,28
 Supercharger-V4 CH-Oensingen,47.28883,7.72026
 Supercharger CH-Oftringen,47.3108,7.935,70
+Supercharger CH-Oftringen,47.31182,7.93447
 Supercharger-V4 CH-Opfikon,47.438,8.57244
 Supercharger-V3 CH-Pfäffikon SZ,47.1999,8.79443
 Supercharger CH-Pratteln,47.5247,7.6802
@@ -1865,6 +1870,7 @@ Supercharger-V3 DE-Barsbüttel,53.578295,10.193266
 Supercharger-V4 DE-Bautzen,51.18878,14.45457
 Supercharger-V3 DE-Bayreuth,49.9626,11.61055,95
 Supercharger-V4 DE-Beelitz,52.26678,12.92225
+Supercharger-V4 DE-Beelitz,52.26724,12.9087
 Supercharger-V3 DE-Bensheim,49.6724,8.6022
 Supercharger-V3 DE-Berchtesgaden,47.626949,13.000833
 Supercharger-V3 DE-Bergkamen,51.6495,7.67112
@@ -2028,6 +2034,8 @@ Supercharger-V3 DE-Kaltenkirchen,53.8462,9.9362,38
 Supercharger-V4 DE-Kamen,51.56978,7.67511,70
 Supercharger-V4 DE-Kappel-Grafenhausen,48.28135,7.77755
 Supercharger-V3 DE-Karlsruhe,48.99897,8.42859
+Supercharger-V3 DE-Karlsruhe,48.99897,8.4298
+Supercharger-V3 DE-Karlsruhe,48.99982,8.427
 Supercharger-V4 DE-Karlsruhe-Grünwinkel,49.00933,8.35364
 Supercharger-V3 DE-Kassel (Cafe del Sol),51.308679,9.545969
 Supercharger-V3 DE-Kassel (GALERIA),51.31331,9.493391
@@ -2056,6 +2064,7 @@ Supercharger-V3 DE-Lehre,52.31318,10.63498,20
 Supercharger-V4 DE-Leipzig Rosa-Luxemburg-Straße,51.34682,12.39433
 Supercharger-V4 DE-Leipzig Sachsenpark,51.401142,12.39782,15
 Supercharger-V3 DE-Leipzig-Flughafen,51.40153,12.18123
+Supercharger-V4 DE-Leonberg,48.78385,9.0171,60
 Supercharger-V4 DE-Leonberg,48.78523,9.01755
 Supercharger-V3 DE-Leonberg Glemseck,48.784561,9.019178
 Supercharger-V3 DE-Limburg - (Globus),50.398424,8.076242
@@ -2076,6 +2085,7 @@ Supercharger-V4 DE-Magdeburg Florapark,52.15917,11.60737
 Supercharger-V4 DE-Maintal (Globus),50.12982,8.8685
 Supercharger-V4 DE-Mainz,49.9814,8.28052
 Supercharger-V4 DE-Malsfeld,51.0875,9.48563,62
+Supercharger-V4 DE-Malsfeld,51.088,9.48354
 Supercharger-V4 DE-Mannheim,49.54824,8.45752
 Supercharger-V4 DE-Merenberg,50.49945,8.18538
 Supercharger-V3 DE-Merklingen,48.51637,9.75754,32
@@ -2087,6 +2097,8 @@ Supercharger-V3 DE-Motorworld München,48.196866,11.605312
 Supercharger-V4 DE-Motten,50.35562,9.75384
 Supercharger-V3 DE-Murr,48.95615,9.24545
 Supercharger-V4 DE-Mönchengladbach,51.144112,6.426722
+Supercharger-V3 DE-Mücke,50.63957,8.96542
+Supercharger-V3 DE-Mücke,50.64105,8.97418
 Supercharger-V3 DE-Mücke,50.645442,8.989816
 Supercharger-V4 DE-Mühldorf,48.27253,12.54963
 Supercharger-V4 DE Mülheim an der Ruhr,51.450248,6.91344
@@ -17870,6 +17882,7 @@ K-Lataus FI-Seinäjoki Suupohjantie,62.79292,22.79174
 K-Lataus FI-Seinäjoki Väinämöinen,62.79481,22.87574
 K-Lataus FI-Tampere Martinpojankatu,61.47641,23.83888
 K-Lataus FI-Tampere Mäentakusenkatu,61.49732,23.89059
+K-Lataus FI-Tampere Viinikankatu,61.47948,23.78065
 K-Lataus FI-Turku Hakakatu,60.45751,22.30789
 K-Lataus FI-Turku Kingelininkatu,60.44196,22.28485
 
