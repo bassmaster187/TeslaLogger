@@ -1,4 +1,5 @@
 # TeslaLogger MCP Server
+![BILD](Claude-Desktop-MCP.jpg)
 
 ## Überblick
 Der TeslaLogger MCP Server stellt Fahrzeugdaten als MCP-Tools bereit. Sie werden für KI-Chatbots oder andere Anwendungen über eine JSON-RPC 2.0 API zugänglich gemacht.
