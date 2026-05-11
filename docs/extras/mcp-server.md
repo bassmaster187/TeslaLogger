@@ -3,12 +3,74 @@
 ## Überblick
 Der TeslaLogger MCP Server stellt Fahrzeugdaten als MCP-Tools bereit. Sie werden für KI-Chatbots oder andere Anwendungen über eine JSON-RPC 2.0 API zugänglich gemacht.
 
+## Funktionstest
+Raspberries verwenden Port 5001 für den MCP Server. Als Test kann man im Browser eingeben:
+> http://raspberry:5001/
+
+Wenn alles klappt bekommt man als Ausgabe:
+> {"status":"ok","server":"TeslaLogger MCP Server","port":5001}
+
+Im Docker muss man den Port öffnen:
+````
+	ports:
+      - ${TESLALOGGER_PORT:-5010}:5000
+      - 5001:5001
+````
+
+
+
+
+## Chat-Client einrichten
+Als Beispiel mit Claude Desktop. 
+
+Claude Desktop runterladen:
+> https://claude.com/download
+
+- In den Einstellungen von Claude Desktop zu Entwickler gehen
+- Config bearbeiten
+- mcpServer hinzufügen
+- ganz wichtig: nach dem speichern der Config muss Claude Desktop beendet und neu gestartet werden!
+- Prompt für einen Funktionstest: "Wie viele Fahrzeuge habe ich im Teslalogger"
+
+```
+{
+  "mcpServers": {
+    "TeslaLogger": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "mcp-remote",
+        "http://raspberry:5001/mcp",
+        "--allow-http"
+      ]
+    }
+  },
+  "preferences": {
+    "coworkScheduledTasksEnabled": false,
+    "ccdScheduledTasksEnabled": false,
+    "coworkWebSearchEnabled": true,
+    "epitaxyPrefs": {
+      "starred-local-code-sessions": [],
+      "starred-cowork-spaces": [],
+      "starred-session-groups": [],
+      "dframe-local-slice": {
+        "pinnedOrder": [],
+        "customGroupAssignments": {},
+        "customGroupOrder": {}
+      }
+    },
+    "sidebarMode": "chat"
+  }
+}
+```
+
+
 ## Beispiel config für VS-Code `mcp.json`
 ```json
 {
 	"servers": {
 		"TeslaLogger mcp server": {
-			"url": "http://teslalogger-ip:5001/mcp",
+			"url": "http://raspberry:5001/mcp",
 			"type": "http"
 		}
 	},
@@ -16,11 +78,38 @@ Der TeslaLogger MCP Server stellt Fahrzeugdaten als MCP-Tools bereit. Sie werden
 }
 ```
 
-- Transport: Streamable HTTP (JSON-RPC 2.0 via `POST`)
-- Endpoint: `http://teslalogger-ip:5001/mcp` (Standard: `HTTPPort + 1`)
-- Health: `GET http://teslalogger-ip:5001/`
+# Test ob der MCP Server funktioniert:
+```
+curl -X POST http://raspberry:5001/mcp \
+  -H "Content-Type: application/json" \
+  -d '{
+    "jsonrpc":"2.0",
+    "id":1,
+    "method":"tools/list"
+  }'
 
-Der Server startet zusammen mit TeslaLogger.
+```
+Als Ausgabe kommen die Befehle, die der MCP Server kann:
+```
+{
+  "jsonrpc": "2.0",
+  "id": 1,
+  "result": {
+    "tools": [
+      {
+        "name": "get_vehicles",
+        "description": "Retrieve all vehicles from TeslaLogger. Returns ID, display name, VIN, model and status.",
+        "inputSchema": {
+          "type": "object",
+          "properties": {},
+          "required": []
+        }
+      },
+      {
+        "name": "get_trips",
+        "description": "Retrieve trips for a vehicle. Returns start/destination, distance, consumption, duration and temperatures. Use 'from'/'to' for a specific date range, or 'days' to look back from now.",
+...
+```
 
 ## Verfügbare Tools
 
