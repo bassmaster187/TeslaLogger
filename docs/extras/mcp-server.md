@@ -1,4 +1,4 @@
-# MCP Server
+# KI Chatbots / MCP Server
 ![BILD](/img/Claude-Desktop-MCP.jpg)
 
 ## Vorteile des MCP Servers
