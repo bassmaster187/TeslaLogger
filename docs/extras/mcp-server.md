@@ -1,10 +1,26 @@
 # MCP Server
 ![BILD](/img/Claude-Desktop-MCP.jpg)
 
-## Überblick
-Der TeslaLogger MCP Server stellt Fahrzeugdaten als MCP-Tools bereit. Sie werden für KI-Chatbots oder andere Anwendungen über eine JSON-RPC 2.0 API zugänglich gemacht.
+## Vorteile des MCP Servers
+Der TeslaLogger MCP Server verbindet deine lokal gespeicherten Fahrzeugdaten mit KI-Assistenten wie Claude oder anderen MCP-fähigen Anwendungen. Das bringt mehrere praktische Vorteile:
 
-## Funktionstest
+## Natürlichsprachliche Auswertung
+Statt SQL-Abfragen oder Grafana-Dashboards kannst du einfach in normaler Sprache fragen – z.B. „Wie viel habe ich diese Woche geladen?" oder „Zeig mir meine längsten Fahrten im letzten Monat." Der KI-Assistent übersetzt die Frage automatisch in den passenden Tool-Aufruf.
+
+## Datensouveränität – keine Cloud
+Alle Daten bleiben lokal auf deinem Raspberry Pi oder Docker-Host. Der MCP Server läuft im eigenen Netzwerk; es werden keine Fahrzeugdaten an externe Server übertragen. Die KI bekommt nur das, was du explizit abfragst.
+
+## Offenes Protokoll – viele Clients
+MCP (Model Context Protocol) ist ein offener Standard. Neben Claude Desktop funktioniert der TeslaLogger MCP Server mit jedem kompatiblen Client – z.B. VS Code mit Copilot, Cursor, oder eigenen Skripten. Die Konfiguration ist minimal (eine URL, kein API-Key).
+
+## Komplexe Analysen ohne Programmierkenntnisse
+Zusammenhänge, die in Grafana mehrere Dashboards erfordern würden, lassen sich per Chat auf einmal beantworten: „An welchen Tagen war mein Reifendruck niedrig und wie war gleichzeitig der Verbrauch?" – der Assistent kombiniert get_tpms und get_trips selbstständig.
+
+## Erweiterbar für eigene Workflows
+Da der Server eine Standard JSON-RPC 2.0 API bietet, lässt er sich auch in Automatisierungen (z.B. n8n, Home Assistant Automations, eigene Skripte) einbinden – nicht nur in Chat-Clients.
+
+
+# Funktionstest
 Raspberries verwenden Port 5001 für den MCP Server. Als Test kann man im Browser eingeben:
 > http://raspberry:5001/
 
