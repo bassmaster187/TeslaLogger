@@ -1885,6 +1885,7 @@ Supercharger DE-Bispingen,53.104326,9.981842
 Supercharger-V4 DE-Bispingen-Behringen,53.099305,9.977576
 Supercharger-V3 DE-Bissendorf,52.238354,8.162975
 Supercharger-V3 DE-Bitterfeld,51.63644,12.2008
+Supercharger-V3 DE-Blankenfelde-Mahlow,52.3088,13.4443,75
 Supercharger-V3 DE-Blankenfelde-Mahlow,52.3088,13.44431
 Supercharger-V4 DE-Bobenheim-Roxheim (Globus),49.58145,8.354
 Supercharger-V4 DE-Bochum,51.5068,7.192052
@@ -2216,7 +2217,10 @@ Supercharger-V3 DE-Wertheim-Almosenberg,49.772417,9.58423
 Supercharger-V4 DE-Werther,51.48627,10.74315
 Supercharger-V4 DE-Wesel (Globus),51.6629,6.66488
 Supercharger-V3 DE-Wetzlar,50.55282,8.53276,35
+Supercharger-V4 DE-Weyarn,47.8622,11.79416
 Supercharger-V4 DE-Weyarn,47.86531,11.79069,60
+Supercharger-V4 DE-Weyarn,47.8662,11.79284
+Supercharger-V4 DE-Weyarn,47.86636,11.79632
 Supercharger-V4 DE-Wiesbaden,50.05983,8.34516
 Supercharger-V4 DE-Wiesbaden (Globus),50.05656,8.34247
 Supercharger-V4 DE-Wiesbaden-Äppelallee,50.046184,8.219883
@@ -11610,8 +11614,8 @@ EnBW DE-Ansbach Vetterstraße,49.26215,10.58472
 EnBW DE-Apolda,51.0294,11.51674
 EnBW DE-Appenweier,48.53554,7.97447
 EnBW DE-Arnsberg,51.44402,7.96724
-EnBW DE-Arnstadt Hellweg,50.84929,10.95524
-EnBW DE-Arnstadt Netto,50.83133,10.96276
+EnBW DE-Arnstadt Angelhäuser Straße,50.8313,10.96274
+EnBW DE-Arnstadt Ichtershäuser Straße,50.8493,10.95523
 EnBW DE-Arnstein Hofriedplatz,49.9796,9.966
 EnBW DE-Artern,51.37558,11.28515
 EnBW DE-Aschaffenburg Horchstraße,49.9807,9.11819
@@ -13841,7 +13845,7 @@ Energie-Klagenfurt AT-Klagenfurt 8.-Mai-Straße,46.62319,14.3072
 Energie-Oberösterreich AT-Bad Ischl Götzstraße,47.71369,13.62392
 Energie-Oberösterreich AT-Braunau am Inn Auf der Haiden,48.25,13.04723
 Energie-Oberösterreich AT-Ebensee Im Gemeindeamt,47.81263,13.7743
-Energie-Oberösterreich AT-Gaisberg Mondseestra0e,47.84694,13.33982,25
+Energie-Oberösterreich AT-Gaisberg Mondseestraße,47.84694,13.33982,25
 Energie-Oberösterreich AT-Grieskirchen Manglburg,48.23412,13.8257
 Energie-Oberösterreich AT-Liezen Gesäusestraße,47.55972,14.25383,40
 Energie-Oberösterreich AT-Linz Böhmerwaldstraße,48.29257,14.29,25
@@ -14854,7 +14858,7 @@ EWE-GO DE-Friesoythe Großer-Kamp-Ost,53.02755,7.8539
 EWE-GO DE-Friesoythe Tecklenburger Straße,53.01848,7.862
 EWE-GO DE-Friesoythe Thüler Straße,53.01723,7.8586
 EWE-GO DE-Friesoythe Willlohstraße,53.02312,7.86322
-EWE-GO DE-Fritzlar Alte Wildunger Stra0e,51.12096,9.27645
+EWE-GO DE-Fritzlar Alte Wildunger Straße,51.12096,9.27645
 EWE-GO DE-Fürstenau Werner-von-Siemens-Straße,52.5146,7.68751
 EWE-GO DE-Fürstenwalde Alte Langewahler Chaussee,52.33733,14.07626
 EWE-GO DE-Gaggenau Murgtalstraße,48.82223,8.29544
@@ -17857,6 +17861,7 @@ K-Lataus FI-Oulu Metsokankaantie,64.95716,25.52752
 K-Lataus FI-Paimio Jokipellontie,60.45541,22.67942
 K-Lataus FI-Pieksämäki Kukkaroniementie,62.30263,27.16452
 K-Lataus FI-Pirkkala Palmrothintie,61.46629,23.72235
+K-Lataus FI-Pori Itäkeskuksenkaari,61.4531,21.8346
 K-Lataus FI-Pori Lestikatu,61.4894,21.76598
 K-Lataus FI-Raisio Voudinkatu,60.49038,22.16946
 K-Lataus FI-Rovaniemi Pulkamontie,66.51858,25.7543
@@ -17878,7 +17883,7 @@ Kaufland DE-Ahlen Kleiwellenfeld,51.73932,7.87764
 Kaufland DE-Ansbach,49.30556,10.58896
 Kaufland DE-Apolda Bernhard-Prager-Gasse,51.02527,11.5131
 Kaufland DE-Arnsberg Westring,51.4304,8.0109
-Kaufland DE-Arnstadt Alfred-Ley-Straße,50.8559,10.95576
+Kaufland DE-Arnstadt Alfred-Ley-Straße,50.85566,10.95655
 Kaufland DE-Aschaffenburg,49.96814,9.16543
 Kaufland DE-Augsburg Meraner Straße,48.38087,10.93287
 Kaufland DE-Augsburg Reichenberger Straße,48.36376,10.92918
