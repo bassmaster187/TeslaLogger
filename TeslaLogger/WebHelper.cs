@@ -4789,6 +4789,8 @@ WHERE
         private volatile bool stopStreaming; // defaults to false;
         public DateTime? startRequestTimeout = null;
 
+        public static string watchtower = "";
+
         virtual public bool TaskerWakeupfile(bool force = false)
         {
             try
@@ -4872,7 +4874,8 @@ WHERE
                     { "motor" , car.Motor } ,
                     { "wt" , car.wheel_type } ,
                     { "vin" , obfuscatedVin}, // just the first 11 chars of the vin will be sent. The serial number is truncated!
-                    { "NET8", Tools.IsDotnet8() ? "1" : "0"  }
+                    { "NET8", Tools.IsDotnet8() ? "1" : "0"  },
+                    { "watchtower", watchtower }
                 };
 
                 using (FormUrlEncodedContent content = new FormUrlEncodedContent(d))

@@ -661,6 +661,7 @@ namespace TeslaLogger
                         if (!string.IsNullOrEmpty(watchtowerImage))
                         {
                             Logfile.Log("Watchtower Image: " + watchtowerImage);
+                            WebHelper.watchtower = watchtowerImage;
                         }
                     }
                     catch (Exception ex)
