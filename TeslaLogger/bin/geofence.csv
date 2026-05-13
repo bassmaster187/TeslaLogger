@@ -2373,7 +2373,7 @@ Supercharger-V4 ES-León Trobajo del Camino,42.591401,-5.619581
 Supercharger-V4 ES-Lleida,41.66397,0.6054,30
 Supercharger-V4 ES-Los Rios,38.19449,-3.67093
 Supercharger-V4 ES-Luarca,43.52944,-6.55736
-Supercharger ES-Lugo,43.03653,-7.568994
+Supercharger-V3 ES-Lugo,43.03644,-7.56897
 Supercharger-V3 ES-Lugones,43.38917,-5.803684
 Supercharger-V4 ES-L´Aldea,40.75302,0.60642
 Supercharger-V4 ES-Láchar,37.19052,-3.83752
@@ -2742,7 +2742,7 @@ Supercharger-V3 FR-Saint-Louis,47.605065,7.543048
 Supercharger-V4 FR-Saint-Pardoux-l’Ortigier,45.306263,1.561602
 Supercharger-V3 FR-Saint-Parres,48.29339,4.13019,70
 Supercharger-V3 FR-Saint-Quentin,49.85898,3.253667
-Supercharger-V4 FR-Saint-Raphaël,43.43577,6.79273
+Supercharger-V4 FR-Saint-Raphaël,43.43516,6.793
 Supercharger-V4 FR-Saint-Saturnin,48.05297,0.1664
 Supercharger FR-Saintes,45.750026,-0.661637
 Supercharger-V4 FR-Saintes Cours du Maréchal Leclerc,45.753763,-0.653268
@@ -7084,6 +7084,7 @@ ABC FI-Forssa Matkailijankatu,60.82763,23.57226
 ABC FI-Hyvinkää Peltokuumolantie,60.61899,24.80656
 ABC FI-Hämeenlinna Paroistentie,61.01357,24.41754
 ABC FI-Inari Petsamontie,68.65909,27.54209
+ABC FI-Jaala Jaalantie,61.04897,26.48458
 ABC FI-Joensuu Koskikatu,62.60007,29.762
 ABC FI-Joensuu Marjalantie,62.63588,29.66556
 ABC FI-Juuka Karjalantie,63.24685,29.26564
@@ -17867,6 +17868,7 @@ K-Lataus FI-Kauhajoki Savikyläntie,62.43417,22.17694
 K-Lataus FI-Kotka Jumalniementie,60.50542,26.91291
 K-Lataus FI-Kouvola Tervasharjunkatu,60.87586,26.65345
 K-Lataus FI-Kuusamo Luomantie,65.95627,29.1614
+K-Lataus FI-Lahti Ajokatu,60.96525,25.6561
 K-Lataus FI-Lieksa Pielisentie,63.3182,30.0246
 K-Lataus FI-Mäntsälä Sälinkääntie,60.63753,25.3162
 K-Lataus FI-Oulu Metsokankaantie,64.95716,25.52752
@@ -21212,7 +21214,7 @@ Pfalzwerke DE-Sandhausen Hauptstraße 208,49.34859,8.65404
 Pfalzwerke DE-Sankt Martin Riedweg,49.29898,8.10686
 Pfalzwerke DE-Saulheim Marie-Curie-Ring,49.87613,8.16383
 Pfalzwerke DE-Schifferstadt Waldspitzweg 3,49.38316,8.39185
-Pfalzwerke DE-Schotten Am Vulkaneum,50.5048,9.1264
+Pfalzwerke DE-Schotten Am Vulkaneum,50.5048,9.1264,30
 Pfalzwerke DE-Schwabach Am Falbenholzweg,49.32114,11.04966
 Pfalzwerke DE-Schwegenheim Im Breiten Pfuhl,49.27203,8.33773
 Pfalzwerke DE-Schweigen-Rechtenbach An der Schmalwiese,49.04688,7.95477
@@ -21678,6 +21680,7 @@ Recharge FI-Tampere Kangasalantie,61.47713,23.87311
 Recharge FI-Tolosenmäki Joensuuntie,62.14238,30.04348
 Recharge FI-Tornio Teollisuuskatu,65.84393,24.18915
 Recharge FI-Turku Piiskakuja,60.48573,22.32255
+Recharge FI-Tuulos Tuulosentie,61.10657,24.8639
 Recharge FI-Vantaa Kirkkotie,60.27056,24.97444
 Recharge FI-Vantaa Maissikuja,60.27026,24.80469
 Recharge FI-Varkaus Käpykankaantie,62.30518,27.85627
@@ -25276,6 +25279,7 @@ DE Hamburg Drehbahn,53.55704,9.98615
 DE Hamburg Hotel NH Hamburg Altona,53.56444,9.92108
 DE Hamburg Super 8 by Wyndham,53.5513,10.03152
 DE Hamburg-Niendorf METRO,53.6138,9.9646
+DE Hameln Platzstraße,52.1018,9.35787
 DE Hanau Luise-Kiesselbach-Straße,50.14543,8.93568
 DE Hanau Rondo,50.11238,8.89514
 DE Hannover A2 Center,52.42332,9.8354,10
