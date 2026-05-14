@@ -3249,7 +3249,7 @@ Supercharger-V3 IT-Torri di Quartesolo,45.50851,11.62614
 Supercharger IT-Trento,46.11166,11.09172
 Supercharger-V4 IT-Udine,46.08703,13.179853
 Supercharger-V3 IT-Vado Ligure,44.265368,8.425217
-Supercharger-V3 IT-Valli di Carnia,46.368134,13.072854,30
+Supercharger-V3 IT-Valli di Carnia,46.36813,13.07285
 Supercharger-V4 IT-Varazze,44.35161,8.56544
 Supercharger IT-Verona,45.412326,10.970212
 Supercharger-V4 IT-Verona Viale delle Nazioni,45.39817,10.97237
@@ -3618,6 +3618,7 @@ Supercharger-V4 NO-Bergen Hop,60.32655,5.34043
 Supercharger NO-Berkåk,62.831921,10.009978,40
 Supercharger-V4 NO-Bjorli,62.25666,8.21131
 Supercharger-V4 NO-Bjorli Arne Barmans Veg,62.25852,8.208
+Supercharger NO-Blomsterdalen,60.28436,5.25347
 Supercharger-V4 NO-Bodø,67.28087,14.54252
 Supercharger-V3 NO-Brekkvasselv,64.847699,13.016144
 Supercharger-V3 NO-Brokelandsheia,58.82083,9.07327
@@ -3629,21 +3630,24 @@ Supercharger-V3 NO-Dombås,62.07465,9.12789
 Supercharger-V3 NO-Eggedal,60.246023,9.355252
 Supercharger NO-Eidfjord,60.467438,7.068209
 Supercharger NO-Eidsvoll Verk,60.31235,11.14523
+Supercharger NO-Eikelandsosen,60.2393,5.74978
 Supercharger NO-Elverum,60.88401,11.54148,60
 Supercharger-V3 NO-Elverum,60.887617,11.515327
 Supercharger-V4 NO-Etne,59.66373,5.94245
 Supercharger-V3 NO-Evenes,68.497406,16.702666
 Supercharger-V4 NO-Evje,58.58805,7.80838
 Supercharger-V3 NO-Fauske,67.258778,15.400971,20
+Supercharger NO-Finnsnes,69.23114,18.00375
 Supercharger-V4 NO-Flå,60.43072,9.45548
 Supercharger-V3 NO-Forus,58.89702,5.70358
+Supercharger NO-Fredrikstad,59.21152,10.94102
 Supercharger-V3 NO-Fåvang,61.454341,10.189257
 Supercharger-V4 NO-Førde,61.4485,5.88623
 Supercharger-V4 NO-Gardermoen,60.167301,11.152385
 Supercharger-V4 NO-Gjennestad,59.23039,10.27317
 Supercharger-V3 NO-Gjøvik,60.80091,10.69163,60
 Supercharger NO-Gol,60.70232,8.9862
-Supercharger NO-Gol West,60.697258,8.953551
+Supercharger-V3 NO-Gol West,60.69726,8.95355
 Supercharger-V3 NO-Gran,60.35444,10.5723
 Supercharger NO-Grong,64.464913,12.316532
 Supercharger-V3 NO-Grålum,59.297635,11.062809
@@ -3652,6 +3656,7 @@ Supercharger NO-Gulsvik,60.381223,9.609859
 Supercharger-V4 NO-Hafslo,61.30206,7.20836
 Supercharger-V4 NO-Hallingby,60.27432,10.18757
 Supercharger-V4 NO-Haugesund-Raglamyr,59.39243,5.33027
+Supercharger NO-Haukås,60.48447,5.3763
 Supercharger-V4 NO-Hell Stjørdal,63.44772,10.91304
 Supercharger-V4 NO-Hellerudsletta,59.98392,10.977
 Supercharger-V4 NO-Hemsedal,60.862309,8.555466
@@ -3745,6 +3750,8 @@ Supercharger-V4 NO-Skulestadmo Storrviki,60.65695,6.43733
 Supercharger-V4 NO-Slependen,59.87368,10.50276
 Supercharger NO-Solli,59.324292,10.954448
 Supercharger-V4 NO-Sortland,68.69684,15.4189
+Supercharger NO-Spydeberg Jaren,59.61764,11.00354
+Supercharger NO-Stadlandet,62.11994,5.31894
 Supercharger-V3 NO-Stavanger Central,58.972256,5.737381
 Supercharger-V4 NO-Stavanger Mariero,58.93432,5.74416
 Supercharger-V4 NO-Steinkjer,64.01279,11.4905
@@ -7095,6 +7102,7 @@ ABC FI-Kauhava Peltopassi,63.09122,23.05934
 ABC FI-Kimito Engelsbyvägen,60.16369,22.73586
 ABC FI-Kokkola Heinolankaari,63.83026,23.1467
 ABC FI-Kolari Jokijalantie,67.33547,23.82083
+ABC FI-Kouvola Käyrälammentie,60.88803,26.77703
 ABC FI-Kristinestad Gamla Vasavägen,62.26183,21.4857
 ABC FI-Kristinestad Gamla Vasavägen,62.26227,21.48402
 ABC FI-Kuortti Mäyrätie,61.42196,26.4347
@@ -8829,6 +8837,7 @@ BayWa DE-Weiden i.d.OPf. Untere Bauscherstraße,49.66255,12.15577
 
 be.energised AT-Bad Gleichenberg Grazer Straße,46.87108,15.90266
 be.energised AT-Fehring Radkersburger Straße,46.93569,16.00706
+be.energised AT-Gröbming Hauptstraße,47.44693,13.90146
 be.energised AT-Leitendorf Kärntner Straße,47.37304,15.08771
 be.energised AT-Maurach Dorfstraße,47.4228,11.75038
 be.energised AT-Prama Kaiserweg,47.51517,12.34594
@@ -9863,6 +9872,7 @@ Comfortcharge DE-Bonn Bonner Talweg,50.72208,7.1025
 Comfortcharge DE-Bonn Friedrich-Ebert-Allee,50.70812,7.12893
 Comfortcharge DE-Bonn Friesdorfer Straße,50.69196,7.13684
 Comfortcharge DE-Bonn Landgrabenweg,50.72353,7.13991
+Comfortcharge DE-Bonn Landgrabenweg,50.7247,7.1437
 Comfortcharge DE-Bremen Fernmeldeturm,53.09562,8.79138
 Comfortcharge DE-Bremen Hohle Straße,53.17372,8.62997
 Comfortcharge DE-Bremen Züricher Str,53.06699,8.94198
@@ -12072,7 +12082,7 @@ EnBW DE-Erfurt Weimarische Straße,50.9771,11.1058,25
 EnBW DE-Eriskirch Friedrichshafener Straße,47.63391,9.52444
 EnBW DE-Erkelenz Burger King,51.07031,6.30264
 EnBW DE-Erkelenz Neumühle,51.07472,6.30544
-EnBW DE-Erkheim Eidlerholzstraße,48.02616,10.32854
+EnBW DE-Erkheim Eidlerholzstraße,48.02624,10.3285,30
 EnBW DE-Erlangen Hofmannstraße,49.59287,11.01452,10
 EnBW DE-Erwitte,51.60625,8.33675
 EnBW DE-Eschborn Ginnheimer Straße,50.14132,8.58163,29
@@ -14364,6 +14374,7 @@ Eviny NO-Trondheim Solsiden Senter,63.43543,10.413
 Eviny NO-Valderøy Valderøyvegen,62.52917,6.11615,25
 Eviny NO-Ålesund Nedre Strandgate,62.4697,6.14822
 Eviny NO-Ålgård Ole Nielsens vei,58.77058,5.84483
+Eviny NO-Åndalsnes Øran Vest,62.5593,7.6816
 Eviny NO-Ørsta Melsvegen,62.1925,6.1245
 Eviny NO-Ørsta Vikeøyrane,62.19909,6.12311
 Eviny SE-Boden Lulevägen,65.81616,21.70918,25
@@ -18330,7 +18341,6 @@ KommEnergie DE-Puchheim Lindberghstraße,48.16122,11.3399
 Kople NO-Andenes Industriveien,69.3102,16.09894
 Kople NO-Bjerkvik Trollvikveien,68.55031,17.55251,30
 Kople NO-Evenskjer Tjeldsundbrua,68.62521,16.59053
-Kople NO-Finnsnes Sjøgata,69.23112,18.00356,60
 Kople NO-Gryllefjord Fv86,69.3633,17.05324
 Kople NO-Hammerfest Jernbanetrasken,70.66394,23.67754
 Kople NO-Havøysund Torget,70.99751,24.66085
@@ -18708,6 +18718,7 @@ Lidl DE-Bad Honnef,50.64698,7.31519
 Lidl DE-Bad Kreuznach Alzeyer Straße,49.84117,7.87173
 Lidl DE-Bad Laasphe Ludwig-Koch-Straße 7,50.92959,8.42391
 Lidl DE-Bad Lippspringe An der Weberei 2,51.77631,8.80549
+Lidl DE-Bad Rappenau Raiffeisenstraße,49.23705,9.09958
 Lidl DE-Bad Schandau Dresdner Straße,50.92104,14.14336
 Lidl DE-Bad Schwalbach Bahnhofstraße,50.14881,8.08358
 Lidl DE-Bad Sobernheim Monzinger Straße 91,49.78727,7.63896
@@ -19168,7 +19179,7 @@ Lidl DE-Rheine Elter Straße,52.26705,7.46246
 Lidl DE-Rhens Mainzer Straße,50.27735,7.62632
 Lidl DE-Rietberg Am Bahnhof 2,51.81818,8.43127
 Lidl DE-Rommerskirchen Mariannenpark 1,51.03212,6.69782
-Lidl DE-Rosdorf Rischenweg,51.509,9.9088,20
+Lidl DE-Rosdorf Rischenweg,51.509,9.90872,20
 Lidl DE-Rosenheim Chiemseestraße,47.85032,12.13673
 Lidl DE-Rosenheim Pichlmayrstraße 13,47.85563,12.10751
 Lidl DE-Rostock Hinrichsdorfer Straße,54.10768,12.15811
@@ -22121,6 +22132,7 @@ Shell CZ-Dolní Roveň D35,50.01792,15.97557
 Shell CZ-Praha Rych. kom. R6,50.15686,13.96854
 Shell CZ-Rakovice-Čimelice D4,49.48298,14.0636
 Shell CZ-Staré Město Košická,50.75921,15.05308
+Shell DE-Aachen Debyestraße,50.76008,6.154,40
 Shell DE-Aachen Prager Ring,50.79754,6.10895
 Shell DE-Achim Margarete-Steiff Allee,53.01947,9.06805
 Shell DE-Ahrensfelde Karower Weg,52.6011,13.51432
@@ -22244,6 +22256,7 @@ Shell DE-Emmelshausen Trinkbornstraße,50.15952,7.58926
 Shell DE-Empfingen Robert-Bosch-Straße,48.38663,8.72245
 Shell DE-Enzberg-Mühlacker Kanalstraße,48.93368,8.80494
 Shell DE-Erkelenz Krefelder Straße,51.08311,6.31226
+Shell DE-Erkheim Eidlerholzstraße,48.02585,10.32792,30
 Shell DE-Erkrath Max-Planck-Straße,51.20019,6.93856
 Shell DE-Eschborn Zeilsheimer Weg,50.13965,8.56456
 Shell DE-Essen Grenoblestraße,51.44616,7.08314,25
@@ -23695,7 +23708,7 @@ TEAG DE-Osterfeld Im Heidegrund Süd,51.03977,11.93776
 TEAG DE-Petersberg Eichenweg,50.96943,11.85505
 TEAG DE-Reichenbach Lengenfelder Straße,50.61515,12.31145
 TEAG DE-Reiskirchen Carl-Benz-Straße,50.5979,8.82288,25
-TEAG DE-Rosdorf Rischenweg,51.509,9.90922,20
+TEAG DE-Rosdorf Rischenweg,51.50906,9.90927,20
 TEAG DE-Rudolstadt Gartenstraße,50.72079,11.34988
 TEAG DE-Rudolstadt Schwarzburger Chaussee,50.71355,11.32002
 TEAG DE-Schlüchtern Gartenstraße,50.35209,9.53094
@@ -24127,7 +24140,7 @@ Vattenfall DE-Gnoien Friedenstraße,53.97279,12.7069
 Vattenfall DE-Greifswald Anklamer Str,54.09151,13.39099
 Vattenfall DE-Greifswald Loitzer Landstraße,54.08141,13.35898
 Vattenfall DE-Greifswald Warschauer Straße,54.09101,13.42045
-Vattenfall DE-Großröhrsdorf Bandweberstraße,51.14528,14.02878
+Vattenfall DE-Großröhrsdorf Bandweberstraße,51.1453,14.02882
 Vattenfall DE-Grünheide (Mark) Karl-Marx-Straße,52.42074,13.82279
 Vattenfall DE-Hamburg Alter Zollweg,53.61448,10.15272
 Vattenfall DE-Hamburg Fuhlsbüttler Straße,53.58927,10.0456
