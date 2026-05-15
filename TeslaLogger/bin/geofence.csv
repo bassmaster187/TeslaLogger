@@ -2162,6 +2162,7 @@ Supercharger-V3 DE-Reinfeld,53.8232,10.50352
 Supercharger-V4 DE-Reiskirchen,50.59563,8.818755,30
 Supercharger-V4 DE-Rhüden,51.9472,10.14027,30
 Supercharger-V3 DE-Rhüden,51.94732,10.14113,30
+Supercharger-V3 DE-Rhüden,51.96243,10.14058
 Supercharger-V4 DE-Ringsheim,48.25,7.76567,21
 Supercharger-V4 DE-Rosengarten,53.37879,9.89814
 Supercharger-V3 DE-Rosenheim,47.81716,12.1207,60
@@ -2233,7 +2234,7 @@ Supercharger-V4 DE-Weyarn,47.8622,11.79416
 Supercharger-V4 DE-Weyarn,47.86531,11.79069,60
 Supercharger-V4 DE-Weyarn,47.8662,11.79284
 Supercharger-V4 DE-Weyarn,47.86636,11.79632
-Supercharger-V4 DE-Wiesbaden,50.05983,8.34516
+Supercharger-V4 DE-Wiesbaden,50.05967,8.34556
 Supercharger-V4 DE-Wiesbaden (Globus),50.05656,8.34247
 Supercharger-V4 DE-Wiesbaden-Äppelallee,50.046184,8.219883
 Supercharger-V4 DE-Wildau,52.3136,13.60497,40
@@ -3095,7 +3096,7 @@ Supercharger-V4 HU-Kiskunfélegyháza,46.67579,19.8197
 Supercharger HU-Miskolc,48.058002,20.799201
 Supercharger-V3 HU-Obuda,47.561058,19.04932
 Supercharger-V4 HU-Pécs,46.06448,18.1824
-Supercharger-V4 HU-Siófok,46.89487,18.05806
+Supercharger-V4 HU-Siófok,46.895,18.05775
 Supercharger-V3 HU-Sormás,46.46054,16.90676
 Supercharger HU-Szeged,46.274868,20.102464
 Supercharger-V4 HU-Szeged Rókus,46.26964,20.13825
@@ -7558,7 +7559,7 @@ Aldi DE-Wetzendorf,49.49625,11.2622
 Aldi DE-Wiesbaden Hagenauer Straße,50.04816,8.21739,25
 Aldi DE-Wiesbaden Mainzer Straße,50.05716,8.257,30
 Aldi DE-Wiesbaden Rostocker Straße,50.08846,8.28972
-Aldi DE-Wiesbaden Siemensstraße,50.05902,8.33826,20
+Aldi DE-Wiesbaden Siemensstraße,50.05903,8.33827
 Aldi DE-Wiesbaden-Dotzheim Am Hang,50.07933,8.20186
 Aldi DE-Wilhelmshaven Posener Straße,53.57357,8.08479
 Aldi DE-Wittlich Gottlieb-Daimler-Straße,49.98081,6.90328
@@ -9463,7 +9464,6 @@ CircleK DE-Bad Hersfeld Carl-Benz-Straße,50.8582,9.72247
 CircleK DE-Berlin Heerstraße,52.51679,13.17994
 CircleK DE-Berlin Indira-Gandhi-Straße,52.54748,13.46841
 CircleK DE-Bruchköbel Römerstraße,50.17951,8.90924
-CircleK DE-Butzbach Griedeler Straße,50.43658,8.6817,40
 CircleK DE-Coswig Sandbreite,51.88895,12.40252
 CircleK DE-Diemelstadt Wrexer Teich,51.48886,9.00764
 CircleK DE-Egestorf Thaneberg,53.16128,10.06132
@@ -14275,8 +14275,6 @@ evd DE-Dormagen Langemarkstraße,51.09337,6.83572
 evd DE-Dormagen Lübecker Straße,51.09409,6.81296
 evd DE-Dormagen Unter den Hecken,51.09368,6.84404
 
-evDirect HU-Siófok Vak Bottyán u.,46.89508,18.05755,20
-
 Evergo DO-Bonao Calle Duarte,18.99137,-70.4317
 Evergo DO-Santo Domingo Av 27 de Febrero,18.47575,-69.91418
 Evergo DO-Santo Domingo Av. Lope de Vega,18.47947,-69.9315
@@ -17877,6 +17875,7 @@ K-Lataus FI-Espoo Isonniitynkuja,60.16267,24.70714
 K-Lataus FI-Joensuu Linjatie,62.62878,29.70338
 K-Lataus FI-Kauhajoki Savikyläntie,62.43417,22.17694
 K-Lataus FI-Kotka Jumalniementie,60.50542,26.91291
+K-Lataus FI-Kotka Koulukatu,60.4606,26.94025
 K-Lataus FI-Kouvola Tervasharjunkatu,60.87586,26.65345
 K-Lataus FI-Kuusamo Luomantie,65.95627,29.1614
 K-Lataus FI-Lahti Ajokatu,60.96525,25.6561
@@ -23872,6 +23871,7 @@ TotalEnergies DE-Berlin Storkower Straße,52.52756,13.45786,80
 TotalEnergies DE-Bochum Hattinger Straße,51.44558,7.1939
 TotalEnergies DE-Bochum Porschestraße,51.48711,7.1926
 TotalEnergies DE-Burgoberbach,49.24128,10.60811,80
+TotalEnergies DE-Butzbach Griedeler Straße,50.43658,8.6817
 TotalEnergies DE-Castrop-Rauxel Westring,51.5526,7.29446
 TotalEnergies DE-Drensteinfurt Am Ladestrang,51.70022,7.31748
 TotalEnergies DE-Emsbüren Paxtonstraße,52.3586,7.2612
