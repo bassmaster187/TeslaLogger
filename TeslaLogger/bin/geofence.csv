@@ -3676,7 +3676,7 @@ Supercharger NO-Jessheim,60.134425,11.161148
 Supercharger-V3 NO-Karasjok,69.471888,25.509338
 Supercharger-V3 NO-Kautokeino,69.020412,23.048909
 Supercharger-V3 NO-Kløfta,60.079517,11.149442
-Supercharger-V3 NO-Kristiansand,58.177107,8.135951
+Supercharger-V3 NO-Kristiansand,58.177,8.1361
 Supercharger-V4 NO-Kristiansand Sydinga by Max Burger,58.18865,8.15498
 Supercharger-V4 NO-Kristiansund,63.12109,7.74136
 Supercharger-V4 NO-Krokstad,59.75784,9.99325
@@ -7108,6 +7108,7 @@ ABC FI-Kristinestad Gamla Vasavägen,62.26183,21.4857
 ABC FI-Kristinestad Gamla Vasavägen,62.26227,21.48402
 ABC FI-Kuortti Mäyrätie,61.42196,26.4347
 ABC FI-Kurikka Oikotie,62.48609,22.75211
+ABC FI-Lappeenranta Kaakkoiskaari,61.0468,28.20834
 ABC FI-Lieksa Kalliokatu,63.32211,30.0082
 ABC FI-Mikkeli Hietakatu,61.67641,27.24274
 ABC FI-Padasjoki Tauluntie,61.34411,25.25049
@@ -10437,6 +10438,7 @@ e-space GE-Dapnari E692 Samtredia-Lanchkhuti-Grigoleti,42.10646,42.3255
 
 E-Totem FR-Beaune Route de Montagny Les Beaune,46.99832,4.85302
 E-Totem FR-Hyères Bd Marechal Juin,43.11503,6.10892
+E-Totem FR-Neuve-Église Rue de l’Ungersberg,48.33866,7.31606,25
 E-Totem FR-Robion Rte d’Avignon,43.86885,5.1341
 E-Totem FR-Saint-Genis-Pouilly Rue du Tiocan,46.2537,6.02658
 
@@ -19303,6 +19305,7 @@ Lidl DK-Ribe Saltgade,55.33221,8.76766
 Lidl DK-Rødovre Roskildevej,55.6713,12.45544
 Lidl ES-Sa Pobla Rda. Albufera,39.77564,3.0277
 Lidl ES-Sant Cugat del Vallès Av. de la Via Augusta,41.48727,2.06751
+Lidl ES-Son Moll Av. Juan Carlos I,39.70357,3.44525
 Lidl FI-Espoo Kukkaromäki,60.20847,24.63643
 Lidl FI-Espoo Kurjenkellontie,60.15892,24.70506
 Lidl FI-Heinola Kaivokatu,61.20482,26.03823,30
@@ -21285,7 +21288,7 @@ Pfalzwerke DE-Wermelskirchen Biberweg,51.13531,7.19623
 Pfalzwerke DE-Westhofen An der Brennerei 2,49.70358,8.25674
 Pfalzwerke DE-Wielsoch Dielheimer Straße 50,49.29712,8.71711
 Pfalzwerke DE-Wiesbaden Friedrich-Bergius-Straße,50.0501,8.22004
-Pfalzwerke DE-Wiesbaden Hagenauer Straße,50.0486,8.2178,25
+Pfalzwerke DE-Wiesbaden Hagenauer Straße,50.0486,8.2178,30
 Pfalzwerke DE-Wiesbaden Kurt-Hebach-Straße 1,50.01918,8.28931
 Pfalzwerke DE-Wiesloch Schloßstraße,49.30113,8.6964
 Pfalzwerke DE-Wildau Gewerbepark,52.31645,13.6027
@@ -21550,6 +21553,7 @@ Powy IT-Pisa Via Quarantola,43.70929,10.3954
 Powy IT-San Donà di Piave Via dei Laghi 38 Pittarello,45.64244,12.59396
 Powy IT-Silea Via Str. della Serenissima,45.64874,12.31085
 
+PPC RO-Brașov Bulevardul Griviței,45.68488,25.5858
 PPC RO-Miercurea Ciuc Strada Harghita,46.36307,25.79284
 
 PRE CZ-Herálec u Havlíčkova Brodu,49.51429,15.41789
