@@ -2579,6 +2579,7 @@ Supercharger-V4 FR-Cap d’Agde,43.298261,3.472025
 Supercharger-V3 FR-Carcassonne,43.20656,2.31078
 Supercharger-V4 FR-Carpiquet,49.19436,-0.4538
 Supercharger-V4 FR-Castelnaudary,43.29067,1.951629
+Supercharger-V4 FR-Castelnaudary,43.29416,1.95373
 Supercharger-V4 FR-Castets,43.870484,-1.137268
 Supercharger-V4 FR-Cesson,48.58453,2.604
 Supercharger-V3 FR-Chalon-sur-Saône,46.796267,4.835472
@@ -8577,7 +8578,7 @@ ARAL DE-Mannheim Frankenthaler Straße,49.55004,8.44993,20
 ARAL DE-Marburg Am Krekel,50.79398,8.76069,25
 ARAL DE-Mayen Kelberger Straße,50.32566,7.21352
 ARAL DE-Meißen Großenhainer Straße,51.16561,13.48611
-ARAL DE-Meißen Hochuferstraße,51.1691,13.47132
+ARAL DE-Meißen Hochuferstraße,51.16874,13.47177
 ARAL DE-Mellingen Aralallee,50.93442,11.38942
 ARAL DE-Menden (Sauerland) Fröndenberger Straße,51.46817,7.76905
 ARAL DE-Merklingen Nellinger Straße,48.51628,9.75938,32
@@ -10431,6 +10432,7 @@ e-regio DE-Mechernich Gartenstraße,50.5901,6.65521
 e-regio DE-Nettersheim Bahnhofstraße,50.49056,6.6296
 e-regio DE-Rheinbach Prümer Wall,50.62447,6.9471
 e-regio DE-Schleiden Blumenthaler Straße,50.52896,6.47713
+e-regio DE-Schleiden Vogelsang,50.58225,6.44766
 
 e-space GE-Argveta,42.14774,42.96571
 e-space GE-Batumi Tbel-Abuseridze St,41.63543,41.61645
@@ -21522,6 +21524,7 @@ Powerdot FR-Pont-Croix Rue de la Liberté,48.0433,-4.49014
 Powerdot FR-Publier Rue du Cartheray,46.39085,6.52524
 Powerdot FR-Russ Rue de la Creuse Fontaine,48.49343,7.25152
 Powerdot FR-Saint-Malo Imp. de la Peupleraie,48.62518,-1.99012,20
+Powerdot FR-Thann Rue du Général de Gaulle,47.8081,7.10573
 Powerdot FR-Ussac Av. du Griffolet,45.1634,1.48153,30
 Powerdot FR-Valence Imp. des Auréats,44.90199,4.88327
 Powerdot PL-Cieszyn Wierzbowa,49.75655,18.6395
@@ -23083,6 +23086,7 @@ SW-Heidelberg DE-Heidelberg Friedrich-Ebert-Platz,49.40888,8.69837
 SW-Heidelberg DE-Heidelberg Kirchheimer Weg,49.39446,8.67602
 SW-Heidelberg DE-Heidelberg Vangerowstraße,49.4089,8.67884
 SW-Heidelberg DE-Heidelberg Zeppelinstraße,49.42322,8.6847
+SW-Heidenheim DE-Rothenburg ob der Tauber Bezoldweg,49.3804,10.17887
 SW-Herne DE-Herne Grenzweg,51.54066,7.2076
 SW-Herten DE-Herten Herner Straße,51.58255,7.15027
 SW-Hilden DE-Hilden Am Lindenplatz,51.16263,6.94072
@@ -23201,7 +23205,7 @@ SW-Neuruppin DE-Neuruppin Präsidentenstraße,52.92295,12.8037
 SW-Neuss DE-Neuss Holzheimer Weg,51.18273,6.68241
 SW-Neustadt DE-Neustadt am Rübenberge Leinstraße,52.51568,9.4624
 SW-Neustadt DE-Neustadt an der Orla Ernst-Thälmann-Straße,50.73614,11.74803
-SW-Neustrelitz DE-Feldberg Weidendamm,53.33599,13.44183
+SW-Neustrelitz DE-Feldberg Weidendamm,53.33628,13.44224,55
 SW-Neustrelitz DE-Neustrelitz Am Bresebrink,53.28005,12.96672
 SW-Neustrelitz DE-Neustrelitz Am Kiefernwald,53.36156,13.09124,30
 SW-Niestetal DE-Niestetal Heiligenröder Straße,51.31443,9.55512
