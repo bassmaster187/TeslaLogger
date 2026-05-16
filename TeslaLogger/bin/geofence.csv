@@ -12881,8 +12881,6 @@ EnBW DE-Pforzheim Nord,48.90802,8.7737,20
 EnBW DE-Pforzheim Rastatter Straße,48.89976,8.66728
 EnBW DE-Pfullingen Karl-von-Drais-Straße,48.4812,9.2305
 EnBW DE-Pfullingen Schloßstraße,48.46581,9.22172
-EnBW DE-Pfungstadt Ost,49.81211,8.57927
-EnBW DE-Pfungstadt West,49.81247,8.57696
 EnBW DE-Philippsburg Rheinschanzinsel,49.25267,8.43718
 EnBW DE-Philippsburg Rote-Tor-Straße,49.23527,8.45423
 EnBW DE-Piding Lattenbergstraße,47.76424,12.90358,10
@@ -12963,6 +12961,11 @@ EnBW DE-Raststätte Lorsch West,49.64316,8.55194
 EnBW DE-Raststätte Lüneburger Heide Ost,53.1093,9.984
 EnBW DE-Raststätte Lüneburger Heide West,53.10941,9.98134,20
 EnBW DE-Raststätte Montabaur Ost,50.44766,7.8503
+EnBW DE-Raststätte Pfungstadt Ost,49.8121,8.57927
+EnBW DE-Raststätte Pfungstadt West,49.81247,8.57696
+EnBW DE-Raststätte Renchtal Ost,48.56287,7.95916
+EnBW DE-Raststätte Renchtal West,48.563,7.9558
+EnBW DE-Raststätte Sindelfinger Wald,48.74132,9.03332
 EnBW DE-Raststätte Soester Börde Nord,51.54836,8.13218
 EnBW DE-Raststätte Soester Börde Süd,51.5472,8.13345
 EnBW DE-Raststätte Waldmohr,49.37322,7.37428
@@ -12990,8 +12993,6 @@ EnBW DE-Reinfeld An der Autobahn,53.82391,10.50188,25
 EnBW DE-Rellingen Eichenstraße,53.65727,9.81385
 EnBW DE-Remagen Zeppelinstraße,50.56797,7.24677,25
 EnBW DE-Remscheid Trecknase,51.1805,7.25285
-EnBW DE-Renchtal Ost,48.56287,7.95916
-EnBW DE-Renchtal West,48.56299,7.95581
 EnBW DE-Rendsburg,54.31133,9.65467
 EnBW DE-Renningen Benzstraße,48.77742,8.93263
 EnBW DE-Reutlingen Am Echazufer,48.48443,9.22252
@@ -13172,7 +13173,6 @@ EnBW DE-Sindelfingen Leipziger Straße,48.7002,9.01735
 EnBW DE-Sindelfingen Neckarstraße,48.70307,9.00507
 EnBW DE-Sindelfingen Planiestraße,48.70812,9.00187
 EnBW DE-Sindelfingen Rößlesmühlestraße,48.7102,8.9961
-EnBW DE-Sindelfingen Sindelfinger Wald,48.74132,9.03332
 EnBW DE-Sindelfingen Sommerhofenstraße,48.72343,9.01417
 EnBW DE-Sindelfingen Vordere Halde,48.7178,9.0019
 EnBW DE-Singen (Hohentwiel) Hochwaldstraße,47.75374,8.86314
@@ -17891,6 +17891,7 @@ K-Lataus FI-Pieksämäki Kukkaroniementie,62.30263,27.16452
 K-Lataus FI-Pirkkala Palmrothintie,61.46629,23.72235
 K-Lataus FI-Pori Itäkeskuksenkaari,61.4531,21.8346
 K-Lataus FI-Pori Lestikatu,61.4894,21.76598
+K-Lataus FI-Puumala Satamatie,61.522,28.1761
 K-Lataus FI-Raisio Voudinkatu,60.49038,22.16946
 K-Lataus FI-Rovaniemi Pulkamontie,66.51858,25.7543
 K-Lataus FI-Savonlinna Kullervonkatu,61.8648,28.94042
@@ -19257,7 +19258,7 @@ Lidl DE-Völklingen-Fürstenhausen Zechenstraße,49.24763,6.86833
 Lidl DE-Wadgassen,49.25243,6.81806
 Lidl DE-Waiblingen,48.82613,9.305
 Lidl DE-Waldfischbach Haupstraße,49.2854,7.64828
-Lidl DE-Waldshut-Tiengen Hebelstraße,47.63058,8.26613
+Lidl DE-Waldshut-Tiengen Hebelstraße,47.63064,8.26633
 Lidl DE-Warstein-Suttrop Alte Kreisstraße,51.45298,8.35988
 Lidl DE-Wassertrüdingen Am Krautgarten 1,49.04234,10.58879
 Lidl DE-Wedemark-Mellendorf Wedemarkstraße,52.54653,9.74427
@@ -19336,6 +19337,7 @@ Lidl FR-La Ciotat Chem. de la Pépinière,43.18993,5.60227,25
 Lidl FR-Lamballe-Armor Rue des Prés Jouettes,48.48104,-2.49949
 Lidl FR-Lanvollon Rue des Fontaines,48.63301,-2.9774,30
 Lidl FR-Le Boulou Carrer d’en Cavaillès,42.5336,2.84088
+Lidl FR-Le Thillot Rue Jules Ferry,47.88518,6.76782
 Lidl FR-Lessay Rue du Ferrage,49.21243,-1.52619,30
 Lidl FR-Leucate Av. des Roseaux,42.8517,3.03419
 Lidl FR-Lille Rue Jacquard,50.6339,3.10272
@@ -20566,6 +20568,7 @@ NXT-50five NL-Amstelveen Asserring,52.28186,4.82767
 
 OK DK-Blåvand Hvidbjerg Strandvej,55.54646,8.13497
 OK DK-Dragør Krudttårnsvej,55.58369,12.64723
+OK DK-Fanø Stadionvej,55.44597,8.39747
 OK DK-Fredensborg Humlebækvej,55.96559,12.41031
 OK DK-Frederikshavn Hjørringvej,57.44663,10.50887
 OK DK-Hals Brogade,57.05659,10.37049
@@ -24599,6 +24602,8 @@ Volkswagen RO-Ghimbav Calea Brașovului,45.66277,25.51406
 Voltiva SE-Vetlanda Kyrkogatan,57.42667,15.09076
 Voltiva SE-Värnamo Malmövägen,57.16492,14.06426
 
+Voltrelli RO-București Bulevardul Iuliu Maniu,44.43632,25.97083
+
 Volvo IT-Bologna Via Stazione Roveri,44.49785,11.41068
 Volvo IT-Bolzano Autocity,46.47815,11.33449
 Volvo IT-Ferrara Via Eridano,44.84868,11.58975
@@ -25504,6 +25509,7 @@ FR Disneyland Paris,48.86427,2.78954,99
 FR Disneyland Paris,48.87352,2.78475,60
 FR Le Grau-du-Roi Rue Amiot d’Inville,43.52418,4.1409
 FR Miserey-Salines Hotel Besançon Valentin,47.28056,5.987
+FR Soultzmatt Hôtel La Vallée Noble,47.96885,7.21223
 FR Vallon-Pont-d’Arc Camping la Rouviere,44.37503,4.42185
 GB Bedford Priory Business Park,52.12925,-0.42072
 GB London Westfield Hammersmith,51.50662,-0.22188
