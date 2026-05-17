@@ -1834,6 +1834,8 @@ Supercharger CN-Zigong - Zigong Aegean,29.320648,104.766623
 Supercharger-V3 CN-Ziyang - Ziyang Mango,30.125097,104.631364
 Supercharger-V3 CN-Zunyi - Wuyue Plaza,27.650736,106.884223
 
+Supercharger-V4 CO-Bogotá,4.6671,-74.05363
+
 Supercharger-V4 CZ-Brno,49.13841,16.6307
 Supercharger-V4 CZ-Hradec Králové,50.1989,15.78265
 Supercharger CZ-Humpolec,49.52157,15.348
@@ -2532,7 +2534,7 @@ Supercharger-V4 FR-Argenton-sur-Creuse,46.573218,1.502358
 Supercharger-V3 FR-Artenay,48.082979,1.864693
 Supercharger-V4 FR-Artix,43.39288,-0.55552
 Supercharger-V4 FR-Arès,44.770683,-1.113638
-Supercharger-V4 FR-Aulnay-sous-Bois,48.957341,2.478283
+Supercharger-V4 FR-Aulnay-sous-Bois,48.9581,2.47744
 Supercharger-V3 FR-Avallon,47.502121,3.984249
 Supercharger-V3 FR-Avignon - Le Pontet,43.980584,4.879857
 Supercharger-V3 FR-Bailly-Romainvilliers,48.83597,2.79904
@@ -2954,7 +2956,6 @@ Supercharger-V4 GB-Manchester Ashton New Road,53.4821,-2.20388
 Supercharger-V3 GB-Manchester Trafford Centre,53.466824,-2.354047
 Supercharger-V3 GB-Mansfield - East Midlands Designer Outlet,53.10912,-1.31227
 Supercharger-V3 GB-Medway Eastbound,51.34058,0.60854
-Supercharger-V3 GB-Medway Westbound,51.34156,0.6112
 Supercharger-V3 GB-Medway Westbound,51.34185,0.60647
 Supercharger GB-Membury Eastbound,51.48391,-1.556821
 Supercharger GB-Membury Westbound,51.481293,-1.556196
@@ -5541,6 +5542,7 @@ Supercharger-V3 US-Rosedale MD,39.31204,-76.52492
 Supercharger-V4 US-Rosedale MD Pulaski Hwy,39.3362,-76.48135
 Supercharger US-Salisbury MD,38.40163,-75.5647
 Supercharger-V3 US-Salisbury MD - North Salisbury Boulevard,38.42094,-75.56598
+Supercharger-V4 US-Timonium MD,39.45588,-76.63653
 Supercharger-V3 US-Towson MD,39.39642,-76.57548
 Supercharger-V3 US-Urbana MD,39.32738,-77.3468
 Supercharger-V3 US-Waldorf MD,38.6303,-76.91915
@@ -5973,6 +5975,7 @@ Supercharger US-Henderson NV,35.97165,-114.9116
 Supercharger-V3 US-Henderson NV - Las Vegas Boulevard South,35.96384,-115.1677
 Supercharger-V3 US-Henderson NV - Paseo Verde Parkway (Floor 4),36.02293,-115.09
 Supercharger US-Incline Village NV,39.2504,-119.94916
+Supercharger-V4 US-Jean NV,35.7806,-115.33254
 Supercharger US-Las Vegas NV,35.62198,-105.20545
 Supercharger US-Las Vegas NV - Blvd South,36.0707,-115.1729
 Supercharger-V3 US-Las Vegas NV - East Sahara Avenue,36.14506,-115.10264
@@ -6088,6 +6091,7 @@ Supercharger-V3 US-Melville NY Walt Whitman Road,40.78456,-73.42093
 Supercharger-V3 US-Middletown NY,41.4424,-74.37647
 Supercharger-V3 US-Montauk NY,41.0359,-71.94382
 Supercharger-V3 US-Monticello NY,41.66662,-74.6716
+Supercharger-V4 US-Nanuet NY EVIO,41.09723,-74.01687
 Supercharger-V3 US-New Paltz NY,41.74383,-74.07013
 Supercharger US-New Rochelle NY,40.91278,-73.78146
 Supercharger US-New Rochelle NY (Pay to Park),40.9126,-73.77916
@@ -6513,6 +6517,7 @@ Supercharger-V3 US-College Station TX - Texas Avenue South,30.6129,-96.31733
 Supercharger US-Columbus TX,29.69013,-96.5376
 Supercharger-V3 US-Converse TX,29.4641,-98.28907
 Supercharger-V3 US-Corpus Christi TX,27.7103,-97.36928
+Supercharger-V4 US-Corpus Christi TX S Padre Island Dr,27.7069,-97.37282
 Supercharger US-Corsicana TX,32.0686,-96.44822
 Supercharger-V4 US-Cotulla TX,28.446,-99.2435
 Supercharger-V3 US-Dallas TX - Mountain Creek Parkway,32.67227,-96.96882
@@ -6632,6 +6637,7 @@ Supercharger US-South Padre Island TX,26.08113,-97.1615
 Supercharger US-Southlake TX,32.94364,-97.1339
 Supercharger-V4 US-Spring TX,30.05035,-95.43825
 Supercharger-V3 US-Spring TX - Spring Stuebner Road,30.08552,-95.44988
+Supercharger-V4 US-Spring TX Cypresswood Dr,30.0508,-95.43608
 Supercharger US-Sulphur Springs TX,33.13718,-95.6032
 Supercharger US-Sweetwater TX,32.451,-100.39285
 Supercharger-V3 US-Temple TX,31.13745,-97.3284,110
@@ -6914,6 +6920,7 @@ Supercharger-V3 US-Sturgeon Bay WI,44.82214,-87.40317
 Supercharger-V3 US-Tomah WI,44.0187,-90.5073
 Supercharger-V3 US-Waukesha WI,43.0227,-88.20286
 Supercharger US-Wausau WI,44.93123,-89.6619
+Supercharger-V4 US-Wisconsin Dells WI,43.62552,-89.78785
 
 Supercharger US-Charleston WV,38.35475,-81.64286
 Supercharger-V3 US-Fairmont WV,39.4718,-80.15367
