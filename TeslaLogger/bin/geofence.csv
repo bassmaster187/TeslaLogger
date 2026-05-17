@@ -7585,7 +7585,9 @@ Allego AT-Brunn am Gebirge Johann Steinböck-Straße,48.10617,16.31035
 Allego AT-Seiersberg-Pirka Werschweg,47.01013,15.4118
 Allego AT-Wien Albert-Schweitzer-Gasse,48.20742,16.21828
 Allego AT-Ybbs Bahnhofstraße,48.17316,15.08468
+Allego BE-Blankenberge Franchommelaan,51.31425,3.12188
 Allego BE-Brugge Sint-Pieterskaai,51.2203,3.2137
+Allego BE-Brugge Zeelaan,51.28682,3.19354
 Allego BE-Bruxelles Brussels Havenlaan,50.86502,4.3494
 Allego BE-Genk Thor Park,50.99755,5.53396
 Allego BE-Grimbergen Brusselsesteenweg,50.92776,4.3661,30
@@ -10384,6 +10386,7 @@ e-con DE-Sonthofen Rudolf-Diesel-Straße,47.52355,10.26885
 e-con DE-Sulzberg Kemptener Straße,47.66286,10.34527
 e-con DE-Wertach Grüntenseestraße,47.60182,10.41798
 
+E-Flux BE-Blankenberge Brugse Steenweg,51.30026,3.1466
 E-Flux BE-Chimay Rue Madeleine,50.03969,4.37741
 E-Flux BE-Middelkerke Steenovenstraat,51.17785,2.82741
 E-Flux DE-Bergisch Gladbach Stegerwaldstraße,50.95779,7.14514
@@ -11283,6 +11286,7 @@ ELE DE-Gelsenkirchen Husemannstraße,51.50603,7.09896,20
 Electra AT-Graz Kärntner Straße,47.0448,15.41478
 Electra AT-Linz Wankmüllerhofstraße,48.28068,14.30622
 Electra BE-Auderghem Chaussée de Wavre,50.79478,4.47889
+Electra BE-Blankenberge Polderlaan,51.31562,3.1471
 Electra BE-Maasmechelen Koninginnelaan,50.98633,5.7015
 Electra BE-Zandhoven Liersebaan,51.1989,4.64353
 Electra CH-Bern Mingerstrasse,46.9592,7.46917
@@ -12041,7 +12045,7 @@ EnBW DE-Eberswalde,52.82988,13.83019
 EnBW DE-Ebhausen Nagolder Straße,48.5847,8.6762
 EnBW DE-Ebhausen Rathausstraße,48.60538,8.6621
 EnBW DE-Eching Dieselstraße,48.3062,11.63432,20
-EnBW DE-Edertal,51.17185,9.10609
+EnBW DE-Edertal Lieschensruh,51.17178,9.10606
 EnBW DE-Edesheim Pfälzer Weinstraße Ost,49.27039,8.15385
 EnBW DE-Edesheim Pfälzer Weinstraße West,49.26986,8.15191
 EnBW DE-Edewecht Friedrichsfehner Straße,53.12354,8.08542
@@ -18632,11 +18636,13 @@ Lidl AT-Wiener Neustadt Stadionstraße,47.83026,16.24462
 Lidl AT-Wieselburg,48.13902,15.13829
 Lidl AT-Ybbs,48.17549,15.08387
 Lidl BE-Antwerpen Weerstandlaan,51.18611,4.37063
+Lidl BE-Blankenberge Brugse Steenweg,51.30135,3.14512
 Lidl BE-Buggenhout Kasteelstraat,51.01038,4.20476
 Lidl BE-Eupen Rue de Herbesthal,50.63624,6.02141
 Lidl BE-Hamme Veldstraat,51.09396,4.14714
 Lidl BE-Ixelles Rue Gray,50.83325,4.3786
 Lidl BE-Kapellen Antwerpsesteenweg,51.30147,4.43718
+Lidl BE-Knokke-Heist Knokkestraat,51.33885,3.2508
 Lidl BE-Meise Stationsstraat,50.94821,4.31511
 Lidl BE-Middelkerke Rietstraat,51.19225,2.83891
 Lidl BE-Sint-Niklaas Lamstraat,51.16635,4.15276
@@ -20669,6 +20675,8 @@ Opel DE-Heide Hamburger Straße,54.19764,9.11647
 OPG DE-Osnabrück Birkenallee,52.28083,7.95028
 OPG DE-Osnabrück Lengericher Landstraße,52.26159,8.00077
 
+Optimile BE-Blankenberge Ruitersstraat,51.30307,3.14224
+Optimile BE-Brugge Kielbankstraat,51.32928,3.20183
 Optimile BE-Drogenbos Mozartlaan,50.81151,4.30268
 Optimile BE-Grimbergen Kerkstraat,50.97294,4.3858
 Optimile BE-Kalfort Essendries,51.06306,4.3025
@@ -22832,6 +22840,7 @@ Sonnenladen AT-St. Pantaleon Dorfstraße,48.21293,14.56515
 Sowatt FR-Ambérieu-en-Bugey Les Terreaux,45.97257,5.3373
 Sowatt FR-Échirolles Av. Victor Hugo,45.15128,5.70995,30
 
+Sparki BE-Brugge Kustlaan,51.32836,3.19286
 Sparki BE-Peer Deusterstraat,51.12284,5.47193
 
 SPBR1 FR-Bauduen Rue des Jardins,43.73247,6.17686
@@ -25139,6 +25148,7 @@ AU Waratah TAS Bischoff Hotel,-41.44293,145.52662
 BA Banja Luka Delta Planet,44.78049,17.20657
 BE Hasselt Corda Campus Kempische Steenweg 293,50.95148,5.35323,14
 BE Humbeek Molenstraat,50.9634,4.37065
+BE Knokke-Heist Lippenslaan,51.35214,3.2891
 BE Rotselaar Belparts,50.93895,4.74286
 BY Minsk Мінск 3-і завулак Мажайскага,53.94296,27.5814
 BY Minsk Мінск вуліца Алеся Гаруна,53.91996,27.44848
