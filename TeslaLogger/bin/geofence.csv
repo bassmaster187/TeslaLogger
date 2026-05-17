@@ -2240,7 +2240,7 @@ Supercharger-V4 DE-Wiesbaden,50.05967,8.34556
 Supercharger-V4 DE-Wiesbaden (Globus),50.05656,8.34247
 Supercharger-V4 DE-Wiesbaden-Äppelallee,50.046184,8.219883
 Supercharger-V4 DE-Wildau,52.3136,13.60497,40
-Supercharger-V4 DE-Willich,51.2807,6.50876
+Supercharger-V4 DE-Willich,51.28072,6.50886,35
 Supercharger-V4 DE-Wilnsdorf,50.8163,8.0864,90
 Supercharger-V4 DE-Windischeschenbach,49.80413,12.18416,22
 Supercharger-V3 DE Winsen (Luhe),53.35028,10.147426
@@ -8584,7 +8584,7 @@ ARAL DE-Mainz Pariser Straße,49.9876,8.26705
 ARAL DE-Mainz Rheinallee,50.02697,8.22324
 ARAL DE-Mannheim Brandenburger Straße,49.51198,8.52992
 ARAL DE-Mannheim Frankenthaler Straße,49.55004,8.44993,20
-ARAL DE-Marburg Am Krekel,50.79398,8.76069,25
+ARAL DE-Marburg Am Krekel,50.794,8.7607
 ARAL DE-Mayen Kelberger Straße,50.32566,7.21352
 ARAL DE-Meißen Großenhainer Straße,51.16561,13.48611
 ARAL DE-Meißen Hochuferstraße,51.16874,13.47177
@@ -8871,6 +8871,7 @@ be.energised NL-Sneek Oude Oppenhuizerweg,53.02853,5.67214
 
 BeCharge AT-Pirching an der Raab Pirching,47.08947,15.73267
 BeCharge DE-Cottbus Hänchener Straße,51.72065,14.34302
+BeCharge DE-Staufenberg Siemensstraße,50.65494,8.73327
 BeCharge IT-Alba Adriatica Piazza Aldo Moro,42.83535,13.9307
 BeCharge IT-Albenga Regione Cime di Leca,44.06601,8.1763
 BeCharge IT-Aprica Corso Roma,46.15391,10.15319
@@ -9004,6 +9005,7 @@ Boostcharge BE-Roeselare Kwadestraat,50.91979,3.1722
 
 Bosch DE-Dresden Knappsdorfer Straße,51.12857,13.73866
 Bosch DE-Holzkirchen Bergfeldstraße,47.89338,11.72008
+Bosch DE-Lollar Justus-Kilian-Straße,50.6497,8.70232
 Bosch DE-Reutlingen Markwiesenstraße,48.49448,9.14251
 Bosch DE-Reutlingen Tübinger Straße,48.49753,9.18796,60
 Bosch DE-Salzgitter John-F.-Kennedy-Straße,52.13804,10.29485
@@ -10849,7 +10851,8 @@ EAM DE-Kassel Monteverdistraße,51.30414,9.43027
 EAM DE-Kirchen Bahnhofstraße,50.80629,7.88058
 EAM DE-Lahnau-Dorlar Beim Eberacker,50.57838,8.56657
 EAM DE-Lohfelden Alexander-von Humboldt-Straße,51.27173,9.52615,25
-EAM DE-Lollar Rothweg,50.64067,8.70059
+EAM DE-Lollar Rothweg,50.63954,8.704
+EAM DE-Lollar Rothweg,50.64067,8.7006
 EAM DE-Melsungen Nürnberger Straße,51.12032,9.53679
 EAM DE-Neuenstein Wiesenweg,50.91648,9.57092
 EAM DE-Niederaula Schlitzer Straße,50.79851,9.60135
@@ -11124,7 +11127,7 @@ EDEKA DE-Randersacker Am Sonnenstuhl,49.75312,9.98715
 EDEKA DE-Ransbach-Baumbach Pleurtuit-Straße,50.46398,7.72463
 EDEKA DE-Ratingen Am Sandbach,51.29587,6.83041
 EDEKA DE-Ratingen Homberger Straße,51.2951,6.86757
-EDEKA DE-Regensburg-Galgenberg Franz-Mayer-Straße,49.00112,12.105
+EDEKA DE-Regensburg Franz-Mayer-Straße,49.00082,12.10545
 EDEKA DE-Remlingen Parkstraße,52.11037,10.68009
 EDEKA DE-Schafflund Hauptstraße,54.76221,9.16934
 EDEKA DE-Schiffdorf Zum Feldkamp,53.52634,8.64643
@@ -11292,8 +11295,31 @@ Electra BE-Zandhoven Liersebaan,51.1989,4.64353
 Electra CH-Bern Mingerstrasse,46.9592,7.46917
 Electra CH-Rubigen Hunzigen,46.8916,7.54217,16
 Electra CH-Zürich Förrlibuckstrasse,47.39168,8.5165
+Electra DE-Bad Nenndorf Piepmühle,52.33528,9.40247
+Electra DE-Berlin Drontheimer Straße,52.55893,13.37657
+Electra DE-Berlin Gülzower Straße,52.515,13.58463
+Electra DE-Berlin Saatwinkler Damm,52.54743,13.30953
+Electra DE-Bielefeld Detmolder Straße,52.0015,8.5727
+Electra DE-Bischofsheim Am Schindberg,49.9766,8.37798
 Electra DE-Chemnitz Bergstraße,50.84327,12.90854
+Electra DE-Coburg Callenberger Straße,50.27017,10.95302
+Electra DE-Dasing Laimeringer Straße,48.39073,11.06417
+Electra DE-Dortmund Westfalendamm,51.50435,7.51502
+Electra DE-Dresden Gerichtsstraße,51.051,13.75132
+Electra DE-Germersheim Münchener Straße,49.22712,8.3729
+Electra DE-Gräfelfing Pasinger Straße,48.1256,11.44803
+Electra DE-Hemmoor Stader Straße,53.68228,9.17848
+Electra DE-Kaiserslautern Europaallee,49.4537,7.81485
+Electra DE-Kaiserslautern Von-Miller-Straße,49.43854,7.6588
+Electra DE-Leipzig Wittenberger Straße,51.35995,12.38622
+Electra DE-Magdeburg Schönebecker Straße,52.10104,11.6435
+Electra DE-München Rosenheimer Straße,48.1141,11.61388
+Electra DE-Neufahrn bei Freising Bajuwarenstraße,48.32907,11.69388
 Electra DE-Oberhausen Erlenstraße,51.516,6.82108
+Electra DE-Pforzheim Kieselbronner Straße,48.91092,8.7199
+Electra DE-Velbert Friedrichstraße,51.33157,7.0545
+Electra DE-Wilhelmshaven Ernst-Barlach-Straße,53.5274,8.06394
+Electra DE-Willich Akira-Okada-Straße,51.28037,6.50858,20
 Electra ES-Sant Cugat Shopping Center,41.48302,2.0529
 Electra FR-Aire de Arzens,43.21972,2.21619,30
 Electra FR-Aire de Bages,43.1137,2.9545
@@ -21479,7 +21505,7 @@ Porsche DE-Nürnberg Erlanger Straße,49.48535,11.0589
 Porsche DE-Offenburg Otto-Hahn-Straße,48.4831,7.9379
 Porsche DE-Oldenburg Nadorster Straße,53.1608,8.22354
 Porsche DE-Osnabrück Blumenhaller Weg,52.2646,8.00935
-Porsche DE-Pforzheim Kieselbronner Straße,48.9108,8.7198
+Porsche DE-Pforzheim Kieselbronner Straße,48.91043,8.7198
 Porsche DE-Plattling,48.78615,12.84785
 Porsche DE-Raubling Breiteicherstraße,47.80711,12.1164
 Porsche DE-Recklinghausen Schmalkalder Straße,51.5979,7.2463
@@ -22276,6 +22302,7 @@ Shell DE-Düsseldorf Auf’m Hennekamp,51.20235,6.7809
 Shell DE-Düsseldorf Karlsruher Straße,51.19754,6.84155
 Shell DE-Düsseldorf Kölner Landstraße,51.1937,6.81333
 Shell DE-Düsseldorf Münsterstraße,51.25274,6.80183
+Shell DE-Ebermannstadt Oberes Tor,49.7826,11.18988,25
 Shell DE-Eggersdorf Landhausstraße,52.53959,13.82841
 Shell DE-Eisenberg Jenaer Straße,50.97117,11.87557
 Shell DE-Ellwangen An der Jagst,48.96737,10.12706
@@ -23719,6 +23746,9 @@ TEAG DE-Leinefelde Konrad-Martin-Straße,51.38487,10.3238
 TEAG DE-Lich Carl-Benz-Ring,50.50677,8.82962
 TEAG DE-Lollar Am Alten Bahnhof,50.6506,8.70483
 TEAG DE-Magdala Auf der Schanze,50.90078,11.44596
+TEAG DE-Marburg Alte Kasseler Straße,50.82424,8.77443
+TEAG DE-Marburg Am Richtsberg,50.7938,8.7859
+TEAG DE-Marburg Temmlerstraße,50.7888,8.7648
 TEAG DE-Mellingen Hainholzstraße,50.93644,11.38956
 TEAG DE-Mühlhausen/Thüringen Industriestraße,51.2189,10.45323
 TEAG DE-Mühlhausen/Thüringen Volkenröder Straße,51.21818,10.47126
