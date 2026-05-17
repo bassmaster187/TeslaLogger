@@ -2578,7 +2578,6 @@ Supercharger FR-Calais - Eurotunnel Terminal,50.935031,1.812951
 Supercharger-V4 FR-Cap d’Agde,43.298261,3.472025
 Supercharger-V3 FR-Carcassonne,43.20656,2.31078
 Supercharger-V4 FR-Carpiquet,49.19436,-0.4538
-Supercharger-V4 FR-Castelnaudary,43.29067,1.951629
 Supercharger-V4 FR-Castelnaudary,43.29416,1.95373
 Supercharger-V4 FR-Castets,43.870484,-1.137268
 Supercharger-V4 FR-Cesson,48.58453,2.604
@@ -2956,6 +2955,7 @@ Supercharger-V3 GB-Manchester Trafford Centre,53.466824,-2.354047
 Supercharger-V3 GB-Mansfield - East Midlands Designer Outlet,53.10912,-1.31227
 Supercharger-V3 GB-Medway Eastbound,51.34058,0.60854
 Supercharger-V3 GB-Medway Westbound,51.34156,0.6112
+Supercharger-V3 GB-Medway Westbound,51.34185,0.60647
 Supercharger GB-Membury Eastbound,51.48391,-1.556821
 Supercharger GB-Membury Westbound,51.481293,-1.556196
 Supercharger-V3 GB-Merry Hill,52.48358,-2.112747
@@ -15801,10 +15801,10 @@ Fastned FR-Aire de Valmy,49.07374,4.79028
 Fastned FR-Aire de Villers-Bretonneux,49.8549,2.52375
 Fastned FR-Aire des Jonchets Les Récompenses,48.42865,2.93144
 Fastned FR-Aire d’Ambrussum Nord,43.71523,4.1334,30
+Fastned FR-Aire d’Ecot Sud,47.4405,6.7288
 Fastned FR-Aire-jardin des Causses du Lot,44.65791,1.56825,30
 Fastned FR-Dracé Aire de Dracé,46.14327,4.76785
 Fastned FR-Romagnieu Aire du Guiers A43,45.57763,5.63085
-Fastned FR-Écot A36,47.44049,6.72883
 Fastned GB-London Ramac Way,51.48714,0.02359
 Fastned GB-Newcastle upon Tyne Wellington St,54.97426,-1.62511
 Fastned GB-Whitley Bay Cromer Gardens,55.04968,-1.45075
