@@ -2026,7 +2026,7 @@ Supercharger-V4 DE-Holzkirchen Nord,47.890637,11.721419
 Supercharger-V4 DE-Idar-Oberstein,49.73079,7.3934
 Supercharger-V3 DE-Illertissen,48.21882,10.127614,25
 Supercharger-V4 DE-Ingolstadt,48.774,11.38844
-Supercharger-V3 DE-Irschenberg,47.826678,11.898501
+Supercharger-V3 DE-Irschenberg,47.82656,11.89837
 Supercharger-V4 DE-Irschenberg Nord,47.82755,11.9031
 Supercharger-V3 DE-Irxleben,52.17062,11.48491,60
 Supercharger-V4 DE-Jettingen,48.41098,10.44051,40
@@ -2686,7 +2686,7 @@ Supercharger FR-Mougins,43.603668,7.011086
 Supercharger FR-Mulhouse,47.782016,7.388299
 Supercharger-V4 FR-Mulhouse Rue des Cévennes,47.7821,7.3871
 Supercharger-V3 FR-Mundolsheim,48.65302,7.73188,40
-Supercharger FR-Mâcon,46.346653,4.849067
+Supercharger-V4 FR-Mâcon,46.34663,4.84906
 Supercharger FR-Nancy,48.638215,6.184349
 Supercharger-V3 FR-Nantes - Atlantis,47.225998,-1.62904
 Supercharger-V4 FR-Nanteuil-lès-Meaux,48.933868,2.880565
@@ -8355,6 +8355,7 @@ ARAL DE-Autohof Herrieden,49.25872,10.5015,25
 ARAL DE-Autohof Königslutter,52.31157,10.82343
 ARAL DE-Autohof Könnern,51.69016,11.767
 ARAL DE-Autohof Ladbergen,52.14658,7.73576
+ARAL DE-Autohof Merklingen,48.51628,9.75938,32
 ARAL DE-Autohof Mitterteich,49.93707,12.22777
 ARAL DE-Autohof Northeim,51.73105,9.97313,25
 ARAL DE-Autohof Oha,53.71797,9.75965,25
@@ -8590,7 +8591,6 @@ ARAL DE-Meißen Großenhainer Straße,51.16561,13.48611
 ARAL DE-Meißen Hochuferstraße,51.16874,13.47177
 ARAL DE-Mellingen Aralallee,50.93442,11.38942
 ARAL DE-Menden (Sauerland) Fröndenberger Straße,51.46817,7.76905
-ARAL DE-Merklingen Nellinger Straße,48.51628,9.75938,32
 ARAL DE-Minden Ringstraße,52.29963,8.91035
 ARAL DE-Moers Römerstraße,51.44393,6.66104
 ARAL DE-Montabaur Alleestraße,50.44021,7.83036,20
@@ -14257,7 +14257,7 @@ etecnic ES-Vilanova i la Geltrú Passeig Marítim,41.21605,1.73325
 
 Eulektro DE-Berlin Platz der Luftbrücke,52.47765,13.3868
 Eulektro DE-Bremen Am Dobben,53.0781,8.82284
-Eulektro DE-Bremen Johann-Jacobs-Straße,53.08656,8.7837
+Eulektro DE-Bremen Johann-Jacobs-Straße,53.08654,8.78372,30
 Eulektro DE-Bremen Werderstraße,53.07035,8.8071
 Eulektro DE-Krefeld Odilia-Von-Goch-Strasse,51.36605,6.49727
 Eulektro DE-Nohfelden Am Bostalsee,49.56124,7.0752
@@ -15605,6 +15605,7 @@ EWE-GO DE-Wittmund Am Markt,53.57388,7.78278
 EWE-GO DE-Wittmund-Carolinensiel Bahnhofstraße,53.69119,7.80789
 EWE-GO DE-Wolfenbüttel Gebrüder-Welger-Straße,52.16337,10.52182
 EWE-GO DE-Wolfenbüttel Im Sommerfeld,52.14564,10.5462
+EWE-GO DE-Wolfenbüttel Neuer Weg,52.1747,10.54008
 EWE-GO DE-Wolfratshausen Pfaffenrieder Straße,47.90047,11.42661
 EWE-GO DE-Wolfsburg Lerchenweg,52.42742,10.81116
 EWE-GO DE-Wolfsburg Westerlinge,52.42323,10.72963
@@ -16141,7 +16142,7 @@ GeniePoint GB-Waterlooville Lakesmere Rd,50.90842,-1.00317
 GENOL AT-Mistelbach Wirtschaftspark,48.56421,16.63686
 
 GETEC DE-Bremen AG-Weser-Straße,53.10963,8.75083
-GETEC DE-Bremen Konsul-Smidt-Straße,53.08661,8.78263
+GETEC DE-Bremen Konsul-Smidt-Straße,53.0866,8.78263,30
 GETEC DE-Bremen Waterfront,53.11118,8.74851
 GETEC DE-Böblingen Herrenberger Straße,48.67686,8.97468
 GETEC DE-St. Wendel Werschweilerstraße,49.4555,7.17803
@@ -19329,7 +19330,6 @@ Lidl DE-Winterberg Im Mühlengrund 1,51.19195,8.5306
 Lidl DE-Witten Westfalenstraße 110,51.44655,7.36597
 Lidl DE-Wittlich Kurfürstenstraße,49.98227,6.89985
 Lidl DE-Witzenhausen Laubenweg 5,51.34618,9.85485
-Lidl DE-Wolfenbüttel Neuer Weg,52.1747,10.5403
 Lidl DE-Wolgast Chausseestraße,54.05016,13.76777
 Lidl DE-Worpswede Osterweder Straße,53.22679,8.92874,25
 Lidl DE-Wuppertal Am Diek 105,51.28639,7.2294
@@ -20235,6 +20235,7 @@ MVV DE-Mannheim Heinrich-Wittkamp-Straße,49.50167,8.49278
 MVV DE-Mannheim Keplerstraße,49.47917,8.47489
 MVV DE-Mannheim Kolpingstraße,49.4877,8.48027
 MVV DE-Mannheim Lange Rötterstraße,49.49808,8.47895
+MVV DE-Mannheim Lüderitzstraße,49.41663,8.53383
 MVV DE-Mannheim M 6,49.48358,8.46826
 MVV DE-Mannheim Marie-Bernays-Platz,49.50541,8.5271
 MVV DE-Mannheim Meeräckerplatz,49.46922,8.47097
