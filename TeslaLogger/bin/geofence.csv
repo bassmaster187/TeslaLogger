@@ -14217,6 +14217,7 @@ EQUAY PL-Gdańsk Zamknięta,54.40017,18.678
 Eranovum ES-Arnuero Bo. el Hoyo,43.49455,-3.57265
 Eranovum ES-Daimús C.Assagador,38.97102,-0.15388
 Eranovum ES-Finestrat Avinguda País Valencià,38.53687,-0.17895
+Eranovum ES-Llanes Calle Camplengo,43.4234,-4.76898
 Eranovum ES-Valladolid Cam. Viejo de Simancas,41.62127,-4.75655
 
 ESARJ TR-Afyonkarahisar Merkez Dörtyol,38.79337,30.45798
@@ -14419,15 +14420,51 @@ Evie AU-Sutton Forest NSW Hume Hwy,-34.60721,150.2252
 Evie AU-Taree NSW Manning River Dr,-31.94332,152.47056
 Evie AU-Warwick QLD Acacia Ave,-28.21725,152.03082
 
+Eviny DE-Altdorf bei Nürnberg Prackenfelser Straße,49.38173,11.34405
+Eviny DE-Amberg Hirschauer Straße,49.4667,11.85252
+Eviny DE-Bad Oeynhausen Werrestraße,52.21703,8.80394
 Eviny DE-Bad Saulgau Platzstraße,48.00916,9.50906
 Eviny DE-Bad Windsheim Rothenburger Straße,49.49853,10.41044
+Eviny DE-Bayreuth Königsbergstraße,49.95517,11.60113
+Eviny DE-Berlin Breite Straße,52.57004,13.4043
 Eviny DE-Blaubeuren Württemberger Straße,48.4025,9.79016
 Eviny DE-Blaufelden Schrozberger Straße,49.3009,9.97626
+Eviny DE-Breisach am Rhein Zum Kaiserstuhl,48.03304,7.59303
+Eviny DE-Coesfeld Hansestraße,51.93866,7.166
+Eviny DE-Coswig Moritzburger Straße,51.13962,13.5933
 Eviny DE-Delitzsch Raiffeisenstraße,51.51217,12.33592
+Eviny DE-Delitzsch Sachsenstraße,51.5378,12.32392
 Eviny DE-Düren Neusser Straße,50.84264,6.48626
+Eviny DE-Elmshorn Hans-Böckler-Straße,53.74904,9.68374
+Eviny DE-Falkensee Seegefelder Straße,52.55174,13.12226
+Eviny DE-Feucht Wendelsteiner Straße,49.36475,11.2075
+Eviny DE-Freudenstadt Ludwig-Jahn-Straße,48.4703,8.41618
+Eviny DE-Fürth Seeackerstraße,49.49463,10.99558
+Eviny DE-Füssen Moosangerweg,47.5826,10.69945
 Eviny DE-Gaildorf Schmiedstraße,48.99927,9.77296
+Eviny DE-Garrel Nikolausdorfer Straße,52.96155,8.02814
+Eviny DE-Göppingen Schlater Straße,48.66883,9.69434
 Eviny DE-Halver Von-Vincke-Straße,51.18973,7.50382
+Eviny DE-Haslach im Kinzigtal Neue Eisenbahnstraße,48.27887,8.08734
+Eviny DE-Herzogenaurach Ohmstraße,49.57944,10.88706
+Eviny DE-Hof Wunsiedler Straße,50.30458,11.9164
+Eviny DE-Horn-Bad Meinberg Kampstraße,51.8748,8.94956
+Eviny DE-Illertissen Friedrich-Ebert-Straße,48.22366,10.09854
+Eviny DE-Kaufbeuren Sudetenstraße,47.89903,10.64328
+Eviny DE-Kornwestheim Leibnizstraße,48.86792,9.20123
+Eviny DE-Moers Klever Straße,51.45603,6.63687
+Eviny DE-Osterholz-Scharmbeck Am Pumpelberg,53.2326,8.77736
+Eviny DE-Pressath Eschenbacher Straße,49.76395,11.92007
+Eviny DE-Rotenburg (Wümme) Auf dem Rusch,53.11455,9.41434
+Eviny DE-Schwarmstedt Mönkeberg,52.68366,9.61405
+Eviny DE-Sonthofen Rudolf-Diesel-Straße,47.522,10.27005
+Eviny DE-Sulingen Am Bahnhof,52.68616,8.8131
+Eviny DE-Thurnau Bürgermeister-Kleinlein-Straße,50.02396,11.39073
 Eviny DE-Wassenberg Brabanter Straße,51.1018,6.1833
+Eviny DE-Werneck Mittlerer Weg,49.9793,10.0901
+Eviny DE-Wetzlar Westendstraße,50.54925,8.4738
+Eviny DE-Wismar Schweriner Straße,53.88543,11.46115
+Eviny DE-Übach-Palenberg Am Wasserturm,50.92494,6.11306
 Eviny DK-Odense Drejebænken,55.35313,10.42066,30
 Eviny NO-Andenes Falcksgate,69.32071,16.11931
 Eviny NO-Andenes Industriveien,69.30986,16.10034
@@ -18061,7 +18098,6 @@ Kaufland DE-Burgthann Espenpark,49.31682,11.34043
 Kaufland DE-Bühl Bühlertalstraße,48.69567,8.1459
 Kaufland DE-Bühl Güterstraße,48.6991,8.13236
 Kaufland DE-Chemnitz Chemnitzer Straße,50.78344,12.8965,20
-Kaufland DE-Coesfeld Hansestraße,51.93866,7.166
 Kaufland DE-Coswig Salzstraße,51.13325,13.58578
 Kaufland DE-Cottbus Hardenbergstraße,51.73445,14.33394
 Kaufland DE-Crailsheim,49.14015,10.03413
