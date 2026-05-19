@@ -1,3 +1,9 @@
+# Version 1.63.14 with AI Client Support!
+- AI clients like Claude Desktop can connect to TeslaLogger's MCP server. This opens up a wide range of new possibilities. More info: [LINK](https://teslalogger.de/docs/extras/mcp-server)
+- Support Lucid Gravity
+- Docker image contains now OVMS (Open Vehicle Monitoring System) client. If you have a car supported by OVMS, you can start logging it with TeslaLogger. More info: [LINK](https://github.com/bassmaster187/OVMSLogger#ovmslogger-beta)
+- Modernize code for .NET 8
+
 # Version 1.63.11
 - Power will be calculated from PackCurrent and PackVoltage from Fleet Telemetry
 - Support for Model 3 LR RWD 2025
