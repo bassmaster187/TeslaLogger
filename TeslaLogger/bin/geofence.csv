@@ -17915,20 +17915,44 @@ JET AT-Linz Freistädter Straße,48.3283,14.32136
 JET AT-Villach Badstubenweg,46.63153,13.82448
 JET AT-Wien Laxenburger Straße,48.1358,16.35648
 JET AT-Wiener Neustadt Puchberger Straße,47.8055,16.21124,30
+JET DE-Bad Doberan An der Krim,54.10828,11.91843
 JET DE-Bayreuth Justus-Liebig-Straße,49.93345,11.5628
+JET DE-Beckum Neubeckumer Straße,51.7698,8.04084
+JET DE-Berlin Michael-Brückner-Straße,52.4534,13.51356
+JET DE-Berlin Romain-Rolland-Straße,52.56452,13.447
 JET DE-Bielefeld Eckendorfer Straße,52.03283,8.55265
 JET DE-Füssen Kemptener Straße,47.5686,10.6885
+JET DE-Gelsenkirchen Schwarzmühlenstraße,51.4972,7.0827
 JET DE-Giengen an der Brenz Frostelstraße,48.61098,10.21074
-JET DE-Inning Bruckerstraße,48.08844,11.15136
-JET DE-Kaufbeuren Füssener Straße,47.87019,10.62947
+JET DE-Günzburg Lochfelbenstraße,48.4705,10.28384
+JET DE-Hagen Berliner Straße,51.3512,7.4424
+JET DE-Hamburg Amsinckstraße,53.5427,10.02637
+JET DE-Hamburg Steilshooper Allee,53.6086,10.0468
+JET DE-Hamburg Tangstedter Landstraße,53.67097,10.02613
+JET DE-Heiligenhaus Pinner Straße,51.32938,7.01042
+JET DE-Ingolstadt Am Hochfeldweg,48.7051,11.42215
+JET DE-Inning am Ammersee Bruckerstraße,48.08844,11.15136
+JET DE-Kaiserslautern Am Rangierbahnhof,49.43278,7.68092
+JET DE-Kaufbeuren Füssener Straße,47.8702,10.62947
+JET DE-Kelsterbach Dr.-Max-Fremery-Straße,50.05438,8.51434
 JET DE-Kleve Klever Ring,51.80045,6.13948
+JET DE-Laupheim Kässbohrerstraße,48.24145,9.8743
 JET DE-Leimen Im Hagen,49.35462,8.67892
 JET DE-Lübeck Krempelsdorfer Allee,53.8816,10.65808
-JET DE-Oberhausen Buschhausener Straße,51.47767,6.85201
+JET DE-Mainz Barcelona-Allee,49.9483,8.2606
+JET DE-Mainz Wormser Straße,49.98185,8.30583
+JET DE-Maulburg In der Teichmatt,47.64582,7.77023
+JET DE-Mülheim an der Ruhr Straßburger Allee,51.40367,6.87344
+JET DE-Neuötting An der Spitalau,48.25592,12.6945
+JET DE-Oberhausen Buschhausener Straße,51.47767,6.852
 JET DE-Oberhonnefeld Westerwaldpark,50.56214,7.5265,25
 JET DE-Sittensen Stader Straße,53.28765,9.50723,18
-
-JOE DE-Baindt Am Umspannwerk,47.8364,9.63332
+JET DE-Stuhr Delmenhorster Straße,53.00135,8.7047
+JET DE-Untersiemau Straßäcker,50.19866,10.9663
+JET DE-Viernheim Mannheimer Straße,49.5278,8.5619
+JET DE-Weil der Stadt Grabenstraße,48.7478,8.8663
+JET DE-Wuppertal Hahnerberger Straße,51.21505,7.14705
+JET DE-Wuppertal Heckinghauser Straße,51.27024,7.20754
 
 JOLT AU-Beecroft NSW Beecroft Road,-33.75053,151.0651
 JOLT AU-Camp Hill QLD Old Cleveland Road,-27.49394,153.08535
@@ -18020,6 +18044,8 @@ JOLT DE-Starnberg Münchner Straße,48.0022,11.3484
 JOLT DE-Stuttgart Aldinger Straße,48.8422,9.23234
 JOLT DE-Stuttgart Rotenwaldstraße,48.76777,9.14695
 JOLT DE-Stuttgart Siemensstraße,48.81135,9.17714
+
+Jöchle DE-Baindt Am Umspannwerk,47.8364,9.63332
 
 K-Lataus FI-Espoo Isonniitynkuja,60.16267,24.70714
 K-Lataus FI-Joensuu Linjatie,62.62878,29.70338
@@ -21056,9 +21082,7 @@ Pfalzwerke DE-Bergkamen Geschwister-Scholl-Straße 1,51.61783,7.65665
 Pfalzwerke DE-Berlin Gradestraße,52.45267,13.42244
 Pfalzwerke DE-Berlin Großbeerenstraße,52.42985,13.37728
 Pfalzwerke DE-Berlin Malchower Chaussee 10,52.56687,13.47441
-Pfalzwerke DE-Berlin Michael-Brückner-Straße,52.4534,13.51356
 Pfalzwerke DE-Berlin Märkische Spitze,52.51743,13.54307,20
-Pfalzwerke DE-Berlin Romain-Rolland-Straße,52.56446,13.4469
 Pfalzwerke DE-Berlin Schnellerstraße,52.4582,13.5085
 Pfalzwerke DE-Berlin-Bohnsdorf Grünbergallee,52.39866,13.54592,30
 Pfalzwerke DE-Bielefeld Detmolder Straße 246,52.00223,8.56053
@@ -21168,7 +21192,6 @@ Pfalzwerke DE-Gütersloh Hans-Böckler-Straße,51.8839,8.35435
 Pfalzwerke DE-Hagen Berliner Straße,51.351,7.44273
 Pfalzwerke DE-Hagenbach Im Wooge 1,49.02081,8.24223
 Pfalzwerke DE-Halle Delitzscher Straße,51.47846,12.00306
-Pfalzwerke DE-Hamburg Amsinckstraße 73,53.54281,10.02649
 Pfalzwerke DE-Hamburg Deelböge 21,53.60285,9.98862
 Pfalzwerke DE-Hamburg-Eidelstedt Holsteiner Chaussee,53.61415,9.90585
 Pfalzwerke DE-Hannover Bornumer Straße,52.35897,9.7108
@@ -21209,7 +21232,6 @@ Pfalzwerke DE-Jena Brüsseler Straße,50.87684,11.61864
 Pfalzwerke DE-Jockgrim Maximilianstraße 36,49.09458,8.28008
 Pfalzwerke DE-Jockgrim Untere Buchstraße,49.09424,8.2734
 Pfalzwerke DE-Kaiserslautern Am Opelkreisel 16,49.44342,7.70703
-Pfalzwerke DE-Kaiserslautern Am Rangierbahnhof 2,49.43276,7.68079
 Pfalzwerke DE-Kaiserslautern Am Turnerheim,49.44934,7.76986
 Pfalzwerke DE-Kaiserslautern Carl- Euler- Straße 6,49.43307,7.75341
 Pfalzwerke DE-Kaiserslautern Lauterstraße,49.44745,7.76734,30
@@ -21292,13 +21314,10 @@ Pfalzwerke DE-Magdeburg Salbker Chaussee,52.08111,11.60829
 Pfalzwerke DE-Magdeburg Silberbergweg,52.16672,11.608
 Pfalzwerke DE-Maikammer Eulbuschgasse,49.30843,8.1309
 Pfalzwerke DE-Maikammer Johannes-Damm-Straße,49.30286,8.13225
-Pfalzwerke DE-Mainz Barcelona-Allee,49.94825,8.2606
-Pfalzwerke DE-Mainz Wormser Straße,49.9819,8.30573
 Pfalzwerke DE-Mainz-Bretzenheim Am Schleifweg 5,49.96695,8.23849
 Pfalzwerke DE-Mandelbachtal Viechter Straße,49.21875,7.15713
 Pfalzwerke DE-Mannheim Alte Frankfurter Straße,49.52612,8.48418
 Pfalzwerke DE-Mannheim Relaisstraße,49.43729,8.52481
-Pfalzwerke DE-Maulburg In der Teichmatt 2,47.6458,7.77015
 Pfalzwerke DE-Maxdorf Heideweg 111,49.49853,8.28531
 Pfalzwerke DE-Maxdorf Im Reff 3,49.48343,8.30605
 Pfalzwerke DE-Maxdorf Langvic-Platz,49.4813,8.28365
@@ -21413,12 +21432,10 @@ Pfalzwerke DE-Ubstadt-Weiher Ubstadter Straße,49.17135,8.61687
 Pfalzwerke DE-Ulm Blaubeurer Straße,48.40153,9.9709
 Pfalzwerke DE-Ulm Hindenburgring,48.3976,9.9764
 Pfalzwerke DE-Unterhaching Grünwalder Weg,48.05638,11.59789
-Pfalzwerke DE-Untersiemau Straßäcker,50.19866,10.96628
 Pfalzwerke DE-Uslar Wiesenstraße,51.66106,9.62997
 Pfalzwerke DE-Vaihingen an der Enz Stuttgarter Straße,48.92468,8.96997
 Pfalzwerke DE-Velbert Metallstraße,51.33942,7.05671
 Pfalzwerke DE-Velten Parkallee 10,52.67036,13.21588
-Pfalzwerke DE-Viernheim Mannheimer Straße,49.52775,8.56185
 Pfalzwerke DE-Vogelsdorf Frankfurter Chaussee,52.49687,13.74823
 Pfalzwerke DE-Völklingen Zechenstraße 8,49.24943,6.87099
 Pfalzwerke DE-Wacheinheim an der Weinstraße Friedelsheimer Straße,49.44198,8.1828
@@ -21457,7 +21474,6 @@ Pfalzwerke DE-Wolfstein Im Tauchental 1,49.58353,7.60611
 Pfalzwerke DE-Worms Am Gallborn,49.65494,8.35826
 Pfalzwerke DE-Worms Bebelstraße,49.63594,8.34763
 Pfalzwerke DE-Worms Kolpingstraße 90,49.61404,8.33003
-Pfalzwerke DE-Wuppertal Hahnerberger Straße,51.21504,7.14706
 Pfalzwerke DE-Wuppertal Oberbergische Straße,51.2441,7.18962
 Pfalzwerke DE-Wächtersbach Industriestraße 50,50.24745,9.29188
 Pfalzwerke DE-Wörth Am Kühgrunddamm 4,49.04052,8.28902
