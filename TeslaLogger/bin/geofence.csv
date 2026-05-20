@@ -7031,7 +7031,7 @@ Tesla Service Center FR-Nantes,47.24838,-1.62209
 Tesla Service Center FR-Paris,48.86995,2.32086
 Tesla Service Center HR-Zagreb,45.8073,15.85843
 Tesla Service Center IT-Milano,45.4287,9.32361
-Tesla Service Center IT-Padua,45.38924,11.9485
+Tesla Service Center IT-Padova,45.38944,11.9502
 Tesla Service Center LU-Luxembourg,49.58943,6.14069
 Tesla Service Center NL-Amsterdam Zuid-Oost,52.31048,4.93618
 Tesla Service Center NL-Arnhem,51.965,6.00376
@@ -7040,6 +7040,7 @@ Tesla Service Center NL-Groningen,53.22297,6.61148
 Tesla Service Center NL-Rotterdam,51.86498,4.45695
 Tesla Service Center NL-Tilburg,51.60606,4.9964
 Tesla Service Center NO-Skodje,62.4922,6.60694
+Tesla Service Center NO-Tromsø,69.67652,18.9216
 Tesla Service Center PT-Porto,41.17775,-8.65087
 Tesla Service Center SI-Ljubljana,46.06265,14.55886
 Tesla Service Center US-Dublin CA,37.70252,-121.92467
@@ -7119,6 +7120,7 @@ ABC FI-Kurikka Oikotie,62.48609,22.75211
 ABC FI-Lappeenranta Kaakkoiskaari,61.0468,28.20834
 ABC FI-Lieksa Kalliokatu,63.32211,30.0082
 ABC FI-Mikkeli Hietakatu,61.67641,27.24274
+ABC FI-Nurmes Välitie,63.55288,29.0993
 ABC FI-Padasjoki Tauluntie,61.34411,25.25049
 ABC FI-Pirkkala Keisarinviitta,61.45161,23.64214
 ABC FI-Pori Eteläväylä,61.47811,21.75727
@@ -7133,6 +7135,7 @@ ABC FI-Riihimäki Voimalankatu,60.73167,24.77838
 ABC FI-Sastamala Taitajantie,61.47438,22.55598
 ABC FI-Savonlinna Suuri Savontie,61.8774,28.82845
 ABC FI-Seinäjoki Latvalantie,62.80388,22.87457
+ABC FI-Sotkamo Kidekuja,64.14082,28.29603
 ABC FI-Tampere Keskisenkatu,61.47371,23.87376
 ABC FI-Tampere Rieväkatu,61.49147,23.82044
 ABC FI-Tornio Oikokatu,65.84299,24.19724
@@ -10852,6 +10855,7 @@ E.ON NO-Vinterbro Sjøskogenveien,59.7378,10.76395
 E.ON RO-Brașov Str. Lebedei,45.66758,25.55973
 E.ON RO-Constanța Str. Azuro,44.19846,28.60674
 E.ON RO-Craiova Bulevardul 1 Mai,44.30259,23.7967
+E.ON RO-Măcin Strada Brăilei,45.24792,28.1275
 E.ON SE-Arboga Burskapsvägen,59.42613,15.82931,15
 E.ON SE-Arvidsjaur Skillnadsgatan,65.59324,19.1637
 E.ON SE-Bunkeflostrand Skånegårdsvägen,55.55939,12.93551,30
@@ -16887,6 +16891,8 @@ Ignitis LT-Vilnius Birutės g.,54.69206,25.24607
 Ignitis LT-Vilnius Upės g.,54.69392,25.27507
 Ignitis LT-Vilnius Vikingų g.,54.6533,25.27893
 Ignitis LT-Šilagalys Panevėžio aplinkelis,55.67072,24.34852
+
+iHunt RO-Brăila Șoseaua Focșani,45.28815,27.9331
 
 iHunt-EV RO-București Calea Ion Zăvoi,44.50375,26.08545
 iHunt-EV RO-Sibiu Strada Ștefan cel Mare,45.7887,24.19364
@@ -23657,6 +23663,7 @@ TankE DE-Berlin Turmstraße,52.52646,13.34446
 TankE DE-Bornheim Rathausstraße,50.75727,7.00444
 TankE DE-Brüggen St.-Barbara-Straße,51.25629,6.17423
 TankE DE-Dieburg Dieselstraße,49.91037,8.86199
+TankE DE-Korbach Nordring,51.28092,8.85835
 TankE DE-Köln Adolf-Kober-Straße,50.98231,6.99772
 TankE DE-Köln Agrippastraße,50.93312,6.95214
 TankE DE-Köln Am Donewald,51.00501,7.02705
@@ -24817,6 +24824,7 @@ Volkswagen RO-Ghimbav Calea Brașovului,45.66277,25.51406
 Voltiva SE-Vetlanda Kyrkogatan,57.42667,15.09076
 Voltiva SE-Värnamo Malmövägen,57.16492,14.06426
 
+Voltrelli RO-Balotești Calea Bucureşti,44.60634,26.086
 Voltrelli RO-București Bulevardul Iuliu Maniu,44.43632,25.97083
 
 Volvo IT-Bologna Via Stazione Roveri,44.49785,11.41068
