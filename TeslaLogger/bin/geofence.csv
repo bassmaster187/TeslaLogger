@@ -177,7 +177,6 @@ Supercharger-V3 AU-Taree NSW,-31.90786,152.4618
 Supercharger-V3 AU-Tenterfield NSW,-29.0573,152.01888
 Supercharger AU-Toowoomba,-27.57806,151.94667
 Supercharger-V3 AU-Traralgon,-38.1928,146.52684
-Supercharger-V3 AU-Tuggeranong ACT,-35.41575,149.066
 Supercharger-V3 AU-Tuggeranong ACT,-35.41762,149.06702
 Supercharger-V4 AU-Tully QLD,-17.93486,145.92433
 Supercharger-V3 AU-Tweed Heads NSW,-28.17392,153.5451
@@ -1835,6 +1834,7 @@ Supercharger-V3 CN-Ziyang - Ziyang Mango,30.125097,104.631364
 Supercharger-V3 CN-Zunyi - Wuyue Plaza,27.650736,106.884223
 
 Supercharger-V4 CO-Bogotá,4.6671,-74.05363
+Supercharger-V4 CO-Medellín,6.24022,-75.5867
 
 Supercharger-V4 CZ-Brno,49.13841,16.6307
 Supercharger-V4 CZ-Hradec Králové,50.1989,15.78265
@@ -2804,7 +2804,7 @@ Supercharger GB-Barnsley,53.489393,-1.486223
 Supercharger-V4 GB-Barnstaple,51.06176,-4.08108
 Supercharger-V4 GB-Batley,53.74484,-1.64273
 Supercharger-V3 GB-Belfast,54.583523,-5.960532
-Supercharger-V4 GB-Belfast 2,54.584952,-5.959096
+Supercharger-V4 GB-Belfast Service Center,54.58495,-5.9591
 Supercharger-V4 GB-Bexley,51.44867,0.16134
 Supercharger-V4 GB-Billingshurst,51.0224,-0.46216
 Supercharger-V3 GB-Birch Eastbound,53.56834,-2.23337
@@ -3840,7 +3840,7 @@ Supercharger PL-Katowice-E.Leclerc,50.220135,18.990248
 Supercharger PL-Kostomłoty,51.037361,16.584208
 Supercharger-V4 PL-Koszalin,54.21663,16.1143
 Supercharger-V3 PL-Kraków,50.027431,19.952651
-Supercharger-V4 PL-Kraków,50.08842,19.95343
+Supercharger-V4 PL-Kraków Opolska,50.0883,19.95314
 Supercharger-V4 PL-Legnica,51.184768,16.169004
 Supercharger-V3 PL-Lublin,51.2822,22.5703,30
 Supercharger-V3 PL-Lucmierz,51.88676,19.38437,40
@@ -5239,6 +5239,7 @@ Supercharger US-Boise ID,43.59225,-116.27943
 Supercharger-V3 US-Burley ID,42.5616,-113.7901
 Supercharger-V3 US-Coeur d’Alene ID,47.7089,-116.79394
 Supercharger US-Idaho Falls ID,43.48515,-112.05212
+Supercharger-V4 US-Jerome ID,42.71492,-114.51795
 Supercharger-V4 US-Lewiston ID,46.4008,-117.00744
 Supercharger-V4 US-McCall ID,44.9096,-116.1013
 Supercharger-V4 US-Mountain Home ID,43.1702,-115.74577
@@ -6197,6 +6198,7 @@ Supercharger-V3 US-West Unity OH - Indian Meadow Service Plaza,41.60485,-84.4069
 Supercharger-V3 US-West Unity OH Tiffin River Service Plaza,41.6037,-84.40883
 Supercharger-V4 US-Zanesville OH,39.94737,-81.99903
 
+Supercharger-V4 US-Antlers OK Francis Energy,34.23004,-95.62548
 Supercharger US-Ardmore OK,34.17925,-97.1656
 Supercharger-V4 US-Bartlesville OK Francis Energy,36.72432,-95.9343
 Supercharger-V4 US-Broken Arrow OK,36.06817,-95.78057
@@ -18122,71 +18124,93 @@ Kaufland CZ-Praha (Hrdlořezy),50.09246,14.49956,30
 Kaufland CZ-Praha (Kolbenova),50.10928,14.54455,30
 Kaufland DE-Aachen Breslauer Straße,50.78215,6.1247
 Kaufland DE-Aachen Vaalser Straße,50.7694,6.05824
-Kaufland DE-Aalen,48.83388,10.09546
+Kaufland DE-Aalen Julius-Bausch-Straße,48.83388,10.09546
 Kaufland DE-Ahaus Andreasstraße,52.06625,6.96476
 Kaufland DE-Ahlen Kleiwellenfeld,51.73932,7.87764
-Kaufland DE-Ansbach,49.30556,10.58896
+Kaufland DE-Altenburg Käthe-Kollwitz-Straße,50.98057,12.44226
+Kaufland DE-Ansbach Ritter-von-Lang-Allee,49.30556,10.58896
 Kaufland DE-Apolda Bernhard-Prager-Gasse,51.02527,11.5131
 Kaufland DE-Arnsberg Westring,51.4304,8.0109
 Kaufland DE-Arnstadt Alfred-Ley-Straße,50.85566,10.95655
-Kaufland DE-Aschaffenburg,49.96814,9.16543
+Kaufland DE-Aschaffenburg Würzburger Straße,49.96814,9.16543
+Kaufland DE-Aue-Bad Schlema Brünlasberg,50.5965,12.6791
 Kaufland DE-Augsburg Meraner Straße,48.38087,10.93287
 Kaufland DE-Augsburg Reichenberger Straße,48.36376,10.92918
 Kaufland DE-Backnang Industriestraße,48.93586,9.4458,25
 Kaufland DE-Backnang Sulzbacher Straße,48.96257,9.4314
-Kaufland DE-Bad Dürrheim,48.0305,8.52575
-Kaufland DE-Bad Friedrichshall,49.2304,9.21173
-Kaufland DE-Bad Nauheim,50.37986,8.73203
-Kaufland DE-Bad Neustadt,50.32575,10.22296
+Kaufland DE-Bad Dürrheim Dieselstraße,48.0305,8.52575
+Kaufland DE-Bad Friedrichshall Industriestraße,49.2304,9.21173
+Kaufland DE-Bad Nauheim Kettelerstraße,50.37986,8.73203
+Kaufland DE-Bad Neustadt a.d.Saale Meininger Straße,50.32575,10.22296
 Kaufland DE-Bad Oldesloe Ratzeburger Straße,53.80877,10.38852
-Kaufland DE-Bad Rappenau,49.2362,9.09676,60
+Kaufland DE-Bad Rappenau Raiffeisenstraße,49.2362,9.09676,60
+Kaufland DE-Bad Salzungen Bahnhofstraße,50.8144,10.22758
 Kaufland DE-Bad Saulgau,48.00756,9.51156
+Kaufland DE-Bad Segeberg Bahnhofstraße,53.9339,10.31105
+Kaufland DE-Bad Säckingen Schaffhauser Straße,47.55994,7.97233
 Kaufland DE-Bad Tölz Lenggrieser Straße,47.7538,11.56343
-Kaufland DE-Baden-Baden,48.78254,8.20803,20
+Kaufland DE-Baden-Baden Rheinstraße,48.78254,8.20803,20
+Kaufland DE-Bautzen Gesundbrunnenring,51.19176,14.44505
 Kaufland DE-Bayreuth Weiherstraße,49.96393,11.59974
-Kaufland DE-Bergheim,50.95284,6.6416
+Kaufland DE-Bergheim Hauptstraße,50.95284,6.6416
 Kaufland DE-Bergkamen An der Bummannsburg,51.6518,7.67746
+Kaufland DE-Berlin Am Juliusturm,52.53755,13.2189
 Kaufland DE-Berlin Bessemerstraße,52.4616,13.36715
 Kaufland DE-Berlin Buckower Chaussee,52.4096,13.38166
 Kaufland DE-Berlin Eichhorster Weg,52.6036,13.33553
 Kaufland DE-Berlin Goerzallee,52.41722,13.28643
 Kaufland DE-Berlin Grünhofer Weg,52.5339,13.18885
 Kaufland DE-Berlin Gutschmidtstraße,52.43645,13.44784
+Kaufland DE-Berlin Hauptstraße,52.5485,13.504
+Kaufland DE-Berlin Hermann-Blankenstein-Straße,52.52312,13.46258
+Kaufland DE-Berlin Karl-Liebknecht-Straße,52.52204,13.40774
 Kaufland DE-Berlin Markthalle Alexanderplatz,52.5222,13.40715
 Kaufland DE-Berlin Märkische Allee,52.53352,13.53828
+Kaufland DE-Berlin Müllerstraße,52.55326,13.3458
 Kaufland DE-Berlin Ollenhauerstraße,52.56743,13.32822
 Kaufland DE-Berlin Ostpreußendamm,52.4234,13.31234,40
 Kaufland DE-Berlin Pichelswerderstraße,52.5299,13.21313
-Kaufland DE-Berlin Prenzlauer Berg,52.53396,13.45715
 Kaufland DE-Berlin Residenzstraße,52.5588,13.37272
 Kaufland DE-Berlin Romain-Roland-Straße,52.5641,13.4457
 Kaufland DE-Berlin Sewanstraße,52.49953,13.4962
+Kaufland DE-Berlin Storkower Straße,52.53396,13.45715
 Kaufland DE-Berlin Tempelhof,52.46837,13.3772,20
 Kaufland DE-Berlin Wilhelmstraße,52.52137,13.18677
-Kaufland DE-Berlin-Wedding Müllerstraße,52.55326,13.3458
+Kaufland DE-Bernburg (Saale) Zepziger Weg,51.7792,11.75348
+Kaufland DE-Biberach an der Riß Obere Stegwiesen,48.12747,9.8024
 Kaufland DE-Bielefeld Gütersloher Straße,51.98683,8.486,20
 Kaufland DE-Bielefeld Schweriner Straße,52.0083,8.56298
-Kaufland DE-Bietigheim-Bissingen,48.96094,9.13065
+Kaufland DE-Bietigheim-Bissingen Talstraße,48.96094,9.13065
 Kaufland DE-Bitburg Kölner Straße,49.97752,6.52662
 Kaufland DE-Bitterfeld-Wolfen Bismarckstraße,51.6185,12.31912
+Kaufland DE-Blankenfelde-Mahlow Am Lückefeld,52.35733,13.4331
 Kaufland DE-Bocholt Welfenstraße,51.83076,6.61188
-Kaufland DE-Borna,51.10967,12.48838
+Kaufland DE-Bochum Ümminger Straße,51.4692,7.2934
+Kaufland DE-Borken Heidener Straße,51.84705,6.86307
+Kaufland DE-Borna Am Wilhelmschacht,51.10967,12.48838
 Kaufland DE-Bottrop Berliner Platz,51.5227,6.929
+Kaufland DE-Brandenburg an der Havel Brielower Landstraße,52.43302,12.54792
 Kaufland DE-Braunschweig Hamburger Straße,52.28284,10.52064
+Kaufland DE-Braunschweig Senefelderstraße,52.21602,10.5285
 Kaufland DE-Bremen Sebaldsbrücker Heerstraße,53.05964,8.89275
-Kaufland DE-Bretten,49.04027,8.69013
+Kaufland DE-Bremerhaven Bohmsiel,53.4915,8.60024
+Kaufland DE-Bremerhaven Pferdebade,53.57165,8.59925
+Kaufland DE-Bretten Diedelsheimer Höhe,49.04027,8.69013
 Kaufland DE-Burgstädt Mittweidaer Straße,50.9184,12.81465
 Kaufland DE-Burgthann Espenpark,49.31682,11.34043
 Kaufland DE-Bühl Bühlertalstraße,48.69567,8.1459
 Kaufland DE-Bühl Güterstraße,48.6991,8.13236
 Kaufland DE-Chemnitz Chemnitzer Straße,50.78344,12.8965,20
+Kaufland DE-Chemnitz Im Neefepark,50.8053,12.86162
 Kaufland DE-Coswig Salzstraße,51.13325,13.58578
 Kaufland DE-Cottbus Hardenbergstraße,51.73445,14.33394
-Kaufland DE-Crailsheim,49.14015,10.03413
+Kaufland DE-Crailsheim Haller Straße,49.14015,10.03413
 Kaufland DE-Dachau Danziger Straße,48.25872,11.46838
-Kaufland DE-Dallgow-Döberitz,52.53075,13.08
+Kaufland DE-Dallgow-Döberitz Döberitzer Weg,52.53075,13.08
+Kaufland DE-Delmenhorst Stedinger Straße,53.06164,8.63164
 Kaufland DE-Dillingen an der Donau Johannes-Scheiffele-Straße,48.57867,10.47816
 Kaufland DE-Dillingen/Saar Daimlerstraße,49.36785,6.71343
+Kaufland DE-Dingolfing Frontenhausener Straße,48.6301,12.49323
 Kaufland DE-Dippoldiswalde Industriering,50.89744,13.69293
 Kaufland DE-Donauwörth Neurieder Weg,48.7198,10.76197
 Kaufland DE-Dortmund Bornstraße,51.52857,7.47095
@@ -18195,129 +18219,181 @@ Kaufland DE-Dossenheim Gewerbestraße,49.4542,8.66467
 Kaufland DE-Dresden Borsbergstraße,51.04473,13.7809
 Kaufland DE-Dresden Kohlenstraße,51.01962,13.72232
 Kaufland DE-Duisburg Duisburger Straße,51.49654,6.76596
+Kaufland DE-Duisburg Kometenplatz,51.52516,6.74387
+Kaufland DE-Döbeln Schillerstraße,51.11945,13.12222
 Kaufland DE-Dörfles-Esbach Coburger Straße,50.27955,10.9894
+Kaufland DE-Düren Am Ellernbusch,50.7943,6.46803
 Kaufland DE-Düsseldorf Professor-Neyses-Platz,51.25115,6.7908
-Kaufland DE-Eppingen,49.13752,8.91546
-Kaufland DE-Erding,48.30533,11.8819
+Kaufland DE-Eberswalde Angermünder Straße,52.8494,13.7797
+Kaufland DE-Emmendingen Karl-Bautz-Straße,48.11757,7.848
+Kaufland DE-Eppingen Eisenbahnstraße,49.13752,8.91546
+Kaufland DE-Erding Dachauer Straße,48.30533,11.8819
 Kaufland DE-Erftstadt Gustav-Heinemann-Straße,50.80204,6.8133
-Kaufland DE-Erfurt,50.95566,11.06977
-Kaufland DE-Erlangen,49.59332,11.02618
-Kaufland DE-Essen,51.47362,6.9997
-Kaufland DE-Essen-Borbeck,51.47313,6.9527
-Kaufland DE-Esslingen am Neckar,48.72423,9.35217
-Kaufland DE-Fellbach,48.81348,9.2665
+Kaufland DE-Erfurt Kranichfelder Straße,50.95566,11.06977
+Kaufland DE-Ergolding Alte Regensburger Straße,48.55327,12.16205
+Kaufland DE-Erlangen Carl-Thiersch-Straße,49.59332,11.02618
+Kaufland DE-Eschweiler Auerbachstraße,50.82447,6.25152
+Kaufland DE-Essen Berthold-Beitz-Boulevard,51.47362,6.9997
+Kaufland DE-Essen Gerichtsstraße,51.47313,6.9527
+Kaufland DE-Esslingen am Neckar Alleenstraße,48.72423,9.35217
+Kaufland DE-Ettenheim Am Bahndamm,48.26078,7.80947
+Kaufland DE-Fellbach Stuttgarter Straße,48.81348,9.2665
 Kaufland DE-Feuchtwangen Dinkelsbühler Straße,49.16188,10.32634
+Kaufland DE-Forst (Lausitz) Promenade,51.74492,14.6465
+Kaufland DE-Frankenberg Jochen-Köhler-Straße,50.91373,13.02944
+Kaufland DE-Frankenthal (Pfalz) Wormser Straße,49.54662,8.35233
 Kaufland DE-Frankfurt (Oder) Josef-Gesing-Straße,52.34893,14.52003
 Kaufland DE-Frankfurt am Main Wächtersbacher Straße,50.13222,8.74936
-Kaufland DE-Fredersdorf-Vogelsdorf,52.49736,13.7445
+Kaufland DE-Fredersdorf-Vogelsdorf Frankfurter Chaussee,52.49736,13.7445
+Kaufland DE-Freiberg Bebelplatz,50.91396,13.33987
+Kaufland DE-Freiburg im Breisgau Waldkircher Straße,48.01272,7.8531
 Kaufland DE-Freilassing Verdistraße,47.84397,12.96913
 Kaufland DE-Friedberg Marquardtstraße,48.34824,10.99615
 Kaufland DE-Friedrichshafen Stockerholzstraße,47.6633,9.4336
 Kaufland DE-Fürstenwalde/Spree Alte Langewahler Chaussee,52.3363,14.07993
-Kaufland DE-Fürstenwalde/Spree Juri-Gagarin-Straße 32,52.37798,14.07985
+Kaufland DE-Fürstenwalde/Spree Juri-Gagarin-Straße,52.37798,14.07985
 Kaufland DE-Geisenfeld Bajuwarenstraße,48.7406,11.6335
 Kaufland DE-Geislingen an der Steige Neuwiesenstraße,48.6112,9.80713
 Kaufland DE-Gera Schleizer Straße,50.84756,12.06643
 Kaufland DE-Geretsried Bayerwaldstraße,47.88293,11.46073
 Kaufland DE-Gerlingen Weilimdorfer Straße,48.80767,9.07596
 Kaufland DE-Germersheim Mainzer Straße,49.22863,8.36756
-Kaufland DE-Giengen an der Brenz,48.62107,10.25065
-Kaufland DE-Gröbenzell,48.18647,11.3861
+Kaufland DE-Giengen an der Brenz Marktstraße,48.62107,10.25065
+Kaufland DE-Gotha Bürgeraue,50.9485,10.69584
+Kaufland DE-Großenhain Riesaer Straße,51.28852,13.49294
+Kaufland DE-Gröbenzell Danziger Straße,48.18647,11.3861
 Kaufland DE-Grünstadt Kirchheimer Straße,49.56122,8.1689
-Kaufland DE-Göppingen,48.70456,9.64703
+Kaufland DE-Guben Kaltenborner Damm,51.94008,14.70397
+Kaufland DE-Göppingen Stuttgarter Straße,48.70456,9.64703
 Kaufland DE-Görlitz Zittauer Straße,51.12686,14.98282
+Kaufland DE-Göttingen Große Breite,51.5607,9.92782
 Kaufland DE-Göttingen Kurze-Geismar-Straße,51.53136,9.93857
 Kaufland DE-Gütersloh Am Anger,51.8995,8.40172
 Kaufland DE-Halberstadt Braunschweiger Straße,51.89835,11.03923
 Kaufland DE-Halle (Saale) Magdeburger Chaussee,51.5225,11.9507
+Kaufland DE-Hamburg Bramfelder Dorfplatz,53.6121,10.07788
+Kaufland DE-Hamburg Eckhoffplatz,53.5918,9.87388
 Kaufland DE-Hamburg Helbingtwiete,53.5875,10.09552
+Kaufland DE-Hamburg Marktpassage,53.47046,9.8518
 Kaufland DE-Hamm Münsterstraße,51.70214,7.79865
 Kaufland DE-Hannover Bornumer Straße,52.35212,9.6948
-Kaufland DE-Hattingen,51.39772,7.18294
+Kaufland DE-Hannover Krepenstraße,52.40894,9.7104
+Kaufland DE-Hattingen Große Weilstraße,51.39772,7.18294
 Kaufland DE-Hauzenberg Florianstraße,48.65732,13.63044
-Kaufland DE-Hechingen,48.35413,8.97478
+Kaufland DE-Haßloch Hans-Böckler-Straße,49.34905,8.24657
+Kaufland DE-Hechingen Gammertinger Straße,48.35413,8.97478
 Kaufland DE-Hechingen Kaullastraße,48.37486,8.9614
 Kaufland DE-Heidelberg Eppelheimer Straße,49.40342,8.64624
+Kaufland DE-Heidenau Hauptstraße,50.97816,13.85445
 Kaufland DE-Heidenheim an der Brenz Aalener Straße,48.7138,10.16158
+Kaufland DE-Heidenheim an der Brenz Wilhelmstraße,48.68046,10.13026
 Kaufland DE-Heilbronn Neckargartacher Straße,49.1513,9.19608
 Kaufland DE-Heilbronn Olgastraße,49.13723,9.2086
 Kaufland DE-Heilbronn Stuttgarter Straße,49.12452,9.22345
+Kaufland DE-Heiligenhaus Velberter Straße,51.32864,6.99362
+Kaufland DE-Heiligenroth Industriestraße,50.4511,7.8526
 Kaufland DE-Heinsberg Humboldtstraße,51.0693,6.11122
 Kaufland DE-Herne Hauptstraße,51.52768,7.1596
+Kaufland DE-Herzberg Osterodaer Straße,51.69497,13.26085
+Kaufland DE-Hildesheim Römerring,52.15768,9.93796
 Kaufland DE-Hof Hans-Böckler-Straße,50.3072,11.918
 Kaufland DE-Hohen Neuendorf Schönfließerstraße,52.67182,13.2811
-Kaufland DE-Hoyerswerda Straße E 9,51.43124,14.28642
-Kaufland DE-Hussenhofen,48.80398,9.83954
-Kaufland DE-Höchstadt Rothenburger Straße,49.70663,10.7993
-Kaufland DE-Ilmenau,50.6831,10.91935
+Kaufland DE-Homburg Robert-Bosch-Straße,49.3315,7.33987
+Kaufland DE-Horb am Neckar Bahnhofplatz,48.44158,8.68623
+Kaufland DE-Hoyerswerda Straße E,51.43124,14.28642
+Kaufland DE-Höchstadt an der Aisch Rothenburger Straße,49.70663,10.7993
+Kaufland DE-Igersheim Hermann-von-Mittnacht-Straße,49.48647,9.81975
+Kaufland DE-Ilmenau Mühltor,50.6831,10.91935
 Kaufland DE-Ilsfeld Robert-Mayer-Straße,49.05832,9.26074,30
+Kaufland DE-Ingelheim am Rhein Nahering,49.98092,8.0294
 Kaufland DE-Ingolstadt Richard-Wagner-Straße,48.7745,11.3989
+Kaufland DE-Iserlohn Raiffeisenstraße,51.384,7.67433
 Kaufland DE-Jena Naumburger Straße,50.9514,11.61046
+Kaufland DE-Jettingen Heilbergstraße,48.5725,8.76238
+Kaufland DE-Jülich An der Leimkaul,50.9275,6.37196
 Kaufland DE-Kamenz Willy-Muhle-Straße,51.26904,14.11245
 Kaufland DE-Karlsruhe Ortenbergstraße,48.9913,8.3753
 Kaufland DE-Kassel Franzgraben,51.32108,9.51804
-Kaufland DE-Kaufbeuren,47.88428,10.63688
+Kaufland DE-Kaufbeuren Augsburger Straße,47.88428,10.63688
+Kaufland DE-Kerpen Sindorfer Straße,50.88015,6.69302
+Kaufland DE-Kiel Skandinaviendamm,54.32033,10.05207
 Kaufland DE-Kirchentellinsfurt Wannweiler Straße,48.52555,9.14433
+Kaufland DE-Kleve Flurstraße,51.79885,6.13844
 Kaufland DE-Kolkwitz Berliner Straße,51.75206,14.26137
 Kaufland DE-Konstanz Carl-Benz-Straße,47.67638,9.14964
 Kaufland DE-Konz Saar-Mosel-Platz,49.69888,6.57573
 Kaufland DE-Korbach Flechtdorfer Straße,51.27745,8.87
 Kaufland DE-Kreuztal Marburger Straße,50.9618,7.99448
+Kaufland DE-Kreuztal Marburger Straße,51.34566,6.53356
+Kaufland DE-Krumbach (Schwaben) Brühlstraße,48.24347,10.36726
 Kaufland DE-Kulmbach Albert-Ruckdeschel-Straße,50.11186,11.45638
 Kaufland DE-Köln Boltensternstraße,50.97253,6.97687
 Kaufland DE-Köln Frankfurter Straße,50.9589,7.01502
+Kaufland DE-Köln Gremberger Straße,50.9258,7.008
 Kaufland DE-Köln Ostmerheimer Straße,50.94176,7.051
 Kaufland DE-Königs Wusterhausen Luckenwalder Straße,52.2948,13.6207
 Kaufland DE-Königsbrunn Germanenstraße,48.28702,10.89103
+Kaufland DE-Köthen (Anhalt) Merziener Straße,51.7545,12.00186
 Kaufland DE-Künzelsau Bergstraße,49.27743,9.6839
+Kaufland DE-Laatzen Münchener Straße,52.31888,9.79313
 Kaufland DE-Lahr/Schwarzwald Offenburger Straße,48.34497,7.84133
+Kaufland DE-Landau a.d.Isar Straubinger Straße,48.68417,12.6917
 Kaufland DE-Leinefelde Bahnhofstraße,51.38775,10.32775
 Kaufland DE-Leipzig Anton-Zickmantel-Straße,51.3037,12.32307
 Kaufland DE-Leipzig Dresdner Straße,51.33685,12.40447
 Kaufland DE-Leipzig Dresdner Straße,51.33763,12.40498
 Kaufland DE-Leipzig Georg-Schumann-Straße,51.37384,12.32908
+Kaufland DE-Leipzig Kiewer Straße,51.32457,12.27528
 Kaufland DE-Leipzig Lindenauer Markt,51.3371,12.33644
 Kaufland DE-Leipzig Torgauer Straße,51.36845,12.4588
 Kaufland DE-Leipzig-Gohlis-Süd Georg-Schumann-Straße,51.36212,12.36236
-Kaufland DE-Leonberg,48.7971,9.00662
-Kaufland DE-Lichtenfels,50.1378,11.07477
+Kaufland DE-Leonberg Römerstraße,48.7971,9.00662
+Kaufland DE-Lichtenfels Robert-Koch-Straße,50.1378,11.07477
 Kaufland DE-Limbach-Oberfrohna Ostring,50.8556,12.78436
 Kaufland DE-Lindau (Bodensee) Heuriedweg,47.55432,9.71303
 Kaufland DE-Linthe Dorfstraße,52.15878,12.78475
 Kaufland DE-Lippstadt Planckstraße,51.65514,8.3456
-Kaufland DE-Lohmar,50.8393,7.2063
+Kaufland DE-Lohmar Walterscheid-Müller-Straße,50.8393,7.2063
+Kaufland DE-Ludwigsburg Schwieberdinger Straße,48.89038,9.16882
+Kaufland DE-Ludwigshafen am Rhein Prälat-Caire-Straße,49.4892,8.388
 Kaufland DE-Lutherstadt Eisleben Hallesche Straße,51.52387,11.55788
-Kaufland DE-Lörrach,47.62592,7.6737
+Kaufland DE-Lörrach Robert-Bosch-Straße,47.62592,7.6737
+Kaufland DE-Lüneburg Boecklerstraße,53.2734,10.4044
+Kaufland DE-Lünen Merschstraße,51.6155,7.52914
 Kaufland DE-Magdeburg Halberstädter Straße,52.10737,11.59248
 Kaufland DE-Magdeburg Lübecker Straße,52.15426,11.63758
 Kaufland DE-Mainz Haifa-Allee,49.9686,8.22883
 Kaufland DE-Mannheim Maybachstraße,49.50354,8.4764
-Kaufland DE-Marbach am Neckar,48.9434,9.26667
+Kaufland DE-Marbach am Neckar Rielingshäuser Straße,48.9434,9.26667
 Kaufland DE-Markt Schwaben Burgerfeld,48.19178,11.85156
 Kaufland DE-Marktredwitz Bayreuther Straße,50.01,12.07613
 Kaufland DE-Marl Lipper Weg,51.6635,7.1285
 Kaufland DE-Mayen Koblenzer Straße,50.326,7.24977
-Kaufland DE-Meerane,50.83573,12.44984
+Kaufland DE-Meerane Seiferitzer Allee,50.83573,12.44984
 Kaufland DE-Meiningen Werrastraße,50.55728,10.41343
+Kaufland DE-Memmingen Fraunhoferstraße,48.00414,10.16753
 Kaufland DE-Merseburg Querfurter Straße,51.3714,11.97673
-Kaufland DE-Metzingen,48.54106,9.27847
-Kaufland DE-Mittweida,50.99454,12.96435
+Kaufland DE-Metzingen Stuttgarter Straße,48.54106,9.27847
+Kaufland DE-Michelstadt Friedrich-Ebert-Straße,49.67666,9.001
+Kaufland DE-Mittweida Sonnenstraße,50.99454,12.96435
 Kaufland DE-Moers Römerstraße,51.455,6.65754
-Kaufland DE-Monheim,51.08735,6.88993
+Kaufland DE-Monheim Friedrichstraße,51.08735,6.88993
 Kaufland DE-Monschau Auf Beuel,50.57756,6.25718
 Kaufland DE-Moosburg an der Isar Degernpoint,48.46543,11.96342
 Kaufland DE-Mosbach Pfalzgraf-Otto-Straße,49.34072,9.12527
 Kaufland DE-Möckmühl Habichtshöfe,49.29753,9.37634
-Kaufland DE-Mödrath,50.88015,6.69302
-Kaufland DE-Möhringen,48.731,9.15035
 Kaufland DE-Mönchengladbach Aachener Straße,51.1829,6.41138
 Kaufland DE-Mönchengladbach Krefelder Straße,51.20815,6.45987
 Kaufland DE-Mönchengladbach Reyerhütte,51.192,6.45948
 Kaufland DE-Mühlhausen/Thüringen Papiermühlenweg,51.22404,10.4519
-Kaufland DE-Münchberg,50.19085,11.7834
-Kaufland DE-Nagold,48.54425,8.72843
+Kaufland DE-Mülheim-Kärlich Industriestraße,50.3958,7.53463
+Kaufland DE-Münchberg Stammbacher Straße,50.19085,11.7834
+Kaufland DE-München Berg-am-Lain-Straße,48.12968,11.6266
+Kaufland DE-Münsingen Hauptstraße,48.41027,9.50756
+Kaufland DE-Nagold Haiterbacher Straße,48.54425,8.72843
 Kaufland DE-Naila Dr.-Hans-Künzel-Straße,50.32357,11.7058
-Kaufland DE-Neckarsulm,49.17236,9.22224
+Kaufland DE-Naumburg (Saale) Weißenfelser Straße,51.14696,11.83287
+Kaufland DE-Neckarsulm Rötelstraße,49.17236,9.22224
 Kaufland DE-Neu-Ulm Memminger Straße,48.38557,10.00422
 Kaufland DE-Neubrandenburg Juri-Gagarin-Ring,53.55642,13.2936
 Kaufland DE-Neumarkt in der Oberpfalz Altdorfer Straße,49.29123,11.45927
@@ -18326,106 +18402,139 @@ Kaufland DE-Neuss Bataverstraße,51.23156,6.68666
 Kaufland DE-Neustadt an der Aisch Robert-Bosch-Straße,49.5813,10.63725
 Kaufland DE-Neustadt an der Donau Gewerbepark,48.7982,11.76134
 Kaufland DE-Neusäß Daimlerstraße,48.39424,10.82446
+Kaufland DE-Neuötting Nagelschmiedstraße,48.24128,12.70647
+Kaufland DE-Northeim Rückingsallee,51.70924,10.0023
 Kaufland DE-Nördlingen Raiffeisenstraße,48.85646,10.48054
 Kaufland DE-Nürnberg Dianaplatz,49.42692,11.0664
 Kaufland DE-Nürnberg Schwabacher Straße,49.43676,11.05117
-Kaufland DE-Oberasbach,49.43514,10.9677
+Kaufland DE-Oberasbach Rothenburger Straße,49.43514,10.9677
 Kaufland DE-Offenburg Marlener Straße,48.47,7.92518
 Kaufland DE-Offenburg Okenstrasse,48.48146,7.94686
 Kaufland DE-Oldenburg Stubbenweg,53.18344,8.22866
 Kaufland DE-Oppenheim Baumschulweg,49.84608,8.36167,30
+Kaufland DE-Oschersleben (Bode) Lüneburger Straße,52.02928,11.22854
+Kaufland DE-Osnabrück Carl-Fischer-Straße,52.2698,8.08198
+Kaufland DE-Osterode am Harz Herzberger Landstraße,51.71415,10.27448
 Kaufland DE-Paderborn Riemekestraße,51.7154,8.7399
 Kaufland DE-Parchim Friedrich-Wilhelm-Raiffeisen-Ring,53.41815,11.82174
+Kaufland DE-Passau Neuburger Straße,48.55807,13.4176
 Kaufland DE-Peißenberg Schongauer Straße,47.7935,11.06257
+Kaufland DE-Pfaffenhofen a.d.Ilm Joseph-Fraunhofer-Straße,48.53825,11.5132
 Kaufland DE-Pfaffenhofen an der Ilm Max-Weinberger-Straße,48.52974,11.5314
-Kaufland DE-Pforzheim,48.88625,8.66866
-Kaufland DE-Pfungstadt,49.81387,8.6198
+Kaufland DE-Pfarrkirchen Franz-Stelzenberger-Straße,48.41785,12.94145
+Kaufland DE-Pforzheim Am Mühlkanal,48.88625,8.66866
+Kaufland DE-Pfullingen Max-Eyth-Straße,48.47752,9.22786
+Kaufland DE-Pfungstadt Eberstädter Straße,49.81387,8.6198
 Kaufland DE-Pirmasens Zweibrücker Straße,49.22627,7.5915
 Kaufland DE-Pirna Struppener Straße,50.95756,13.95827
 Kaufland DE-Pocking Passauer Straße,48.41022,13.3329
 Kaufland DE-Potsdam Zeppelinstraße,52.38923,13.02986
-Kaufland DE-Radebeul,51.09958,13.6543
+Kaufland DE-Pulheim Farehamstraße,50.9989,6.80067
+Kaufland DE-Pößneck Saalfelder Straße,50.69385,11.58896
+Kaufland DE-Quedlinburg Badeborner Weg,51.7887,11.1585
+Kaufland DE-Radebeul Weintraubenstraße,51.09958,13.6543
 Kaufland DE-Rastatt Rauentaler Straße,48.86083,8.234
-Kaufland DE-Ravensburg,47.76778,9.60427
+Kaufland DE-Ravensburg Weißenauer Straße,47.76778,9.60427
 Kaufland DE-Rees Grüttweg,51.7674,6.38188
 Kaufland DE-Regensburg Hans-Hayder-Straße,49.03398,12.1111
-Kaufland DE-Rendsburg Schleswiger Chaussee,54.31997,9.63658
 Kaufland DE-Rendsburg Schleswiger Chaussee,54.32785,9.62625
 Kaufland DE-Rheda-Wiedenbrück Bahnhofstraße,51.8529,8.2872
-Kaufland DE-Rheinfelden,47.57544,7.7983
+Kaufland DE-Rheinfelden Großfeldstraße,47.57544,7.7983
 Kaufland DE-Riegelsberg Saarbrücker Straße,49.32268,6.93914
 Kaufland DE-Ritterhude Rosenhügel,53.1799,8.70903
+Kaufland DE-Rodewisch Zur Sternkoppel,50.5207,12.38603
 Kaufland DE-Rosenheim Kufsteiner Straße,47.8376,12.121
 Kaufland DE-Rosenheim Äußere Münchener Straße,47.84733,12.09077
 Kaufland DE-Rostock Pütterweg,54.07682,12.12136
-Kaufland DE-Roth,49.24958,11.09354
+Kaufland DE-Roth Friedrich-Wambsganz-Straße,49.24958,11.09354
 Kaufland DE-Rottenburg am Neckar Tübinger Straße,48.47328,8.93644
-Kaufland DE-Rottweil,48.14952,8.64034
+Kaufland DE-Rottweil Saline,48.14952,8.64034
 Kaufland DE-Rüsselsheim am Main Alzeyer Straße,49.98394,8.40116
 Kaufland DE-Salzwedel Karl-Marx-Straße,52.85684,11.15006
-Kaufland DE-Sangerhausen,51.47003,11.29402
-Kaufland DE-Schorndorf,48.8072,9.5426
+Kaufland DE-Sangerhausen Schützenplatz,51.47003,11.29402
+Kaufland DE-Schmalkalden Steinerne Wiese,50.72267,10.4479
+Kaufland DE-Schorndorf Lutherstraße,48.8072,9.5426
 Kaufland DE-Schrobenhausen Augsburger Straße,48.55127,11.26406
-Kaufland DE-Schwaigern,49.13824,9.06466
+Kaufland DE-Schwaigern Heilbronner Straße,49.13824,9.06466
+Kaufland DE-Schwalmstadt Osttangente,50.91262,9.19887
 Kaufland DE-Schwarzenberg/Erzgebirge Karlsbader Straße,50.5395,12.78606
+Kaufland DE-Schwedt /Oder Platz der Befreiung,53.0603,14.28368
 Kaufland DE-Schweinfurt Hauptbahnhofstraße,50.0385,10.2187
-Kaufland DE-Schwetzingen,49.38544,8.5776
-Kaufland DE-Schwäbisch-Hall,49.105,9.70293
+Kaufland DE-Schwetzingen Carl-Theodor-Straße,49.38544,8.5776
+Kaufland DE-Schwäbisch Gmünd Hauptstraße,48.80398,9.83954
+Kaufland DE-Schwäbisch-Hall Steinbeisweg,49.105,9.70293
+Kaufland DE-Seelow Diedersdorfer Straße,52.529,14.36586
 Kaufland DE-Siegburg Wilhelm-Ostwald-Straße,50.79277,7.22372
 Kaufland DE-Siegen Hagener Straße,50.88777,8.02853
 Kaufland DE-Sindelfingen Calwer Straße,48.7071,8.99733
 Kaufland DE-Sindelfingen Schwertstraße,48.70483,9.01817,60
-Kaufland DE-Sinsheim,49.24785,8.881
+Kaufland DE-Sinsheim Neulandstraße,49.24785,8.881
 Kaufland DE-Sinzig Industriestraße,50.54713,7.2591
+Kaufland DE-Sondershausen Frankenhäuser Straße,51.37067,10.88122
 Kaufland DE-Spaichingen Obere Wiesen,48.06858,8.74962
 Kaufland DE-Speyer Auestraße,49.33353,8.43854
 Kaufland DE-Spremberg An der Lusatia,51.55794,14.35585
-Kaufland DE-St. Ingbert,49.28144,7.10554
+Kaufland DE-St. Ingbert Grubenweg,49.28144,7.10554
 Kaufland DE-Stade Freiburger Straße,53.605,9.47603
-Kaufland DE-Steinheim an der Murr,48.97036,9.2672
-Kaufland DE-Stolberg,50.76375,6.2309
-Kaufland DE-Stollberg Auer Straße,50.70643,12.75755
-Kaufland DE-Straubing,48.87584,12.5491
+Kaufland DE-Staßfurt Hohenerxlebener Straße,51.85108,11.60745
+Kaufland DE-Steinheim an der Murr Steinbeisstraße,48.97036,9.2672
+Kaufland DE-Stolberg (Rheinland) Zweifaller Straße,50.76375,6.2309
+Kaufland DE-Stollberg/Erzgebirge Auer Straße,50.70643,12.75755
+Kaufland DE-Straubing Ittlinger Straße,48.88444,12.61336
+Kaufland DE-Straubing Otto-von-Dandl-Ring,48.87584,12.5491
 Kaufland DE-Strausberg Otto-Grotewohl-Ring,52.57386,13.8975
 Kaufland DE-Stuttgart Aldinger Straße,48.84048,9.2292
 Kaufland DE-Stuttgart Augsburger Straße,48.77564,9.2578
+Kaufland DE-Stuttgart Rembrandtstraße,48.731,9.15035
 Kaufland DE-Sulzbach-Rosenberg Krötenseestraße,49.49642,11.74397
 Kaufland DE-Teltow Potsdamer Straße,52.39677,13.23995
-Kaufland DE-Tettnang,47.66262,9.57147
+Kaufland DE-Tettnang Klausenburger Straße,47.66262,9.57147
+Kaufland DE-Thale Blankenburger Straße,51.75695,11.0417
 Kaufland DE-Torgau Turnierplatzweg,51.54807,12.99746
 Kaufland DE-Traunstein Theresienstraße,47.87185,12.63716
 Kaufland DE-Trier Aachener Straße,49.7551,6.62413
 Kaufland DE-Troisdorf Theodor-Heuss-Ring,50.81312,7.15604
+Kaufland DE-Tuttlingen Rudolf-Diesel-Straße,47.99422,8.82967
 Kaufland DE-Tuttlingen Stockacher Straße,47.97394,8.82738
 Kaufland DE-Tübingen Reutlinger Straße,48.51424,9.0669,60
-Kaufland DE-Uhingen,48.7141,9.56216
+Kaufland DE-Uhingen Bleichereistraße,48.7141,9.56216
 Kaufland DE-Unterschleißheim Andreas-Danzer-Weg,48.28542,11.56127,70
-Kaufland DE-Velbert,51.3358,7.04986
+Kaufland DE-Velbert Friedrichstraße,51.3358,7.04986
 Kaufland DE-Verden (Aller) Schulstraße,52.9527,9.2356
-Kaufland DE-Vilshofen an der Donau,48.60765,13.17078
+Kaufland DE-Vilshofen an der Donau Hösamer Feld,48.60765,13.17078
 Kaufland DE-Vöhringen Industriestraße,48.28792,10.078
-Kaufland DE-Völklingen,49.2433,6.84092
+Kaufland DE-Völklingen Hallerstraße,49.2433,6.84092
+Kaufland DE-Waiblingen Ruhrstraße,48.81752,9.3004
 Kaufland DE-Waldkraiburg Teplitzer Straße,48.20643,12.40742
-Kaufland DE-Waldshut-Tiengen,47.62395,8.21787
+Kaufland DE-Waldshut-Tiengen Brückenstraße,47.62395,8.21787
+Kaufland DE-Walsrode Heinrich-Hertz-Straße,52.86475,9.61482
 Kaufland DE-Weiden in der Oberpfalz Untere Bauscherstraße,49.6612,12.155
 Kaufland DE-Weilheim in Oberbayern Kaltenmoserstraße,47.8432,11.14996
-Kaufland DE-Weimar,50.96384,11.31116
+Kaufland DE-Weimar Humboldtstraße,50.96384,11.31116
+Kaufland DE-Weingarten Franz-Beer-Straße,47.7973,9.6246
 Kaufland DE-Weingarten Karlstraße,47.80726,9.64176
-Kaufland DE-Weinsberg,49.1503,9.29884
-Kaufland DE-Weiterstadt,49.90244,8.60882
-Kaufland DE-Weißenburg i.Bay,49.0271,10.9853,60
+Kaufland DE-Weinsberg Haller Straße,49.1503,9.29884
+Kaufland DE-Weiterstadt Rudolf-Diesel-Straße,49.90244,8.60882
+Kaufland DE-Weißenburg in Bayern Eichstätter Straße,49.0271,10.9853,60
 Kaufland DE-Weißenfels Max-Planck-Straße,51.18782,11.98175
-Kaufland DE-Wendelstein,49.33484,11.1149
+Kaufland DE-Wendelstein Rother Straße,49.33484,11.1149
 Kaufland DE-Wendlingen am Neckar Wertstraße,48.6727,9.36416
 Kaufland DE-Wernigerode Am Schreiberteich,51.8435,10.78094
 Kaufland DE-Wertheim Bismarckstraße,49.76712,9.50925
-Kaufland DE-Witten,51.4393,7.32936
+Kaufland DE-Wesel Rudolf-Diesel-Straße,51.66334,6.666
+Kaufland DE-Wilhelmshaven Friedenstraße,53.5353,8.1067
+Kaufland DE-Witten Annenstraße,51.44638,7.37015
+Kaufland DE-Witten Breite Straße,51.4393,7.32936
 Kaufland DE-Wolfsburg Brandgehaege,52.3703,10.72606
+Kaufland DE-Worms Mainzer Straße,49.65615,8.35938
 Kaufland DE-Wuppertal Kaiserstraße,51.23356,7.07472
 Kaufland DE-Würzburg Industriestraße,49.81242,9.97778
-Kaufland DE-Zimmern ob Rottweil,48.17118,8.57742
+Kaufland DE-Zeitz Schwarzer Weg,51.03632,12.12892
+Kaufland DE-Zimmern ob Rottweil Raiffeisenstraße,48.17118,8.57742
+Kaufland DE-Zwickau Bernhardstraße,50.7166,12.46282
 Kaufland DE-Zwickau Äußere Dresdner Straße,50.71937,12.52153
 Kaufland DE-Öhringen Haagweg,49.20212,9.5005
+Kaufland DE-Östringen Thomas-Howie-Straße,49.2144,8.69515
 Kaufland HR-Biograd na Moru,43.94525,15.45242
 Kaufland HR-Bjelovar Ulica Vlahe Paljetka,45.90275,16.8522
 Kaufland HR-Kutina Ul. kneza Ljudevita Posavskog,45.47607,16.7778
