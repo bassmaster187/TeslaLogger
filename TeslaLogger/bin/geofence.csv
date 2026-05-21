@@ -16895,6 +16895,7 @@ Iberdrola ES-Ávila Ctra. Burgohondo,40.64636,-4.70513
 Iberdrola PT-Caldas da Rainha R. Casal dos Barreiros,39.4171,-9.1516
 
 iCharge AL-Koplik E762,42.21535,19.45152
+iCharge AL-Tiranë Rruga e Kavajes,41.3285,19.81318
 iCharge HR-Rab Palit,44.76199,14.7582
 
 iCharging TW-Tainan City Rende Service Area,22.9063,120.26487
@@ -22120,32 +22121,32 @@ SachsenEnergie DE-Bad Schandau Dresdner Straße,50.91842,14.1495
 SachsenEnergie DE-Bad Schandau Schmilka,50.89258,14.22932
 SachsenEnergie DE-Bannewitz Hauptstraße,50.96514,13.71176
 SachsenEnergie DE-Bautzen Schliebenstraße,51.18155,14.41492
-SachsenEnergie DE-Dippoldiswalde Obertorplatz,50.8959,13.66959
-SachsenEnergie DE-Dresden Annenstraße,51.05031,13.73118
+SachsenEnergie DE-Dippoldiswalde Obertorplatz,50.8959,13.6696
+SachsenEnergie DE-Dresden Annenstraße,51.0503,13.73118
 SachsenEnergie DE-Dresden Antonstraße,51.06474,13.7395
 SachsenEnergie DE-Dresden Bautzner Landstraße,51.06124,13.88526
-SachsenEnergie DE-Dresden Bertolt-Brecht-Allee,51.04101,13.78062
+SachsenEnergie DE-Dresden Bertolt-Brecht-Allee,51.041,13.78062
 SachsenEnergie DE-Dresden Bärensteiner Straße,51.03922,13.8055
 SachsenEnergie DE-Dresden Dornblüthstraße,51.0468,13.80243
-SachsenEnergie DE-Dresden Döbelner Straße,51.09649,13.71955
-SachsenEnergie DE-Dresden Elbepark,51.08501,13.69338,15
+SachsenEnergie DE-Dresden Döbelner Straße,51.0965,13.71955
+SachsenEnergie DE-Dresden Elbepark,51.085,13.69338,15
 SachsenEnergie DE-Dresden Fetscherplatz,51.04596,13.77143
 SachsenEnergie DE-Dresden Fetscherstraße,51.06024,13.77667
-SachsenEnergie DE-Dresden Freiberger Straße,51.04971,13.72266
+SachsenEnergie DE-Dresden Freiberger Straße,51.0497,13.72266
 SachsenEnergie DE-Dresden Friedrich-List-Platz,51.03908,13.73264
-SachsenEnergie DE-Dresden Friedrichstraße,51.06034,13.71661
-SachsenEnergie DE-Dresden Gompitzer Höhe,51.03961,13.63116
-SachsenEnergie DE-Dresden Großenhainer Straße,51.07762,13.73309
+SachsenEnergie DE-Dresden Friedrichstraße,51.06034,13.7166
+SachsenEnergie DE-Dresden Gompitzer Höhe,51.0396,13.63116
+SachsenEnergie DE-Dresden Großenhainer Straße,51.07762,13.7331
 SachsenEnergie DE-Dresden Großenhainer Straße,51.08454,13.72818
-SachsenEnergie DE-Dresden Hettnerstraße,51.03123,13.72721
-SachsenEnergie DE-Dresden Hofmühlenstraße,51.035,13.70561
+SachsenEnergie DE-Dresden Hettnerstraße,51.03123,13.7272
+SachsenEnergie DE-Dresden Hofmühlenstraße,51.035,13.7056
 SachsenEnergie DE-Dresden Josephinenstraße,51.0462,13.72954
 SachsenEnergie DE-Dresden Langer Weg,50.99932,13.7993
 SachsenEnergie DE-Dresden Martin-Luther-Straße,51.06342,13.7552
 SachsenEnergie DE-Dresden Michaelisstraße,50.99557,13.79718
 SachsenEnergie DE-Dresden Mohnstraße,51.07785,13.7172
-SachsenEnergie DE-Dresden Omsewitzer Ring,51.04637,13.66421
-SachsenEnergie DE-Dresden Pillnitzer Landstraße,51.01391,13.86368
+SachsenEnergie DE-Dresden Omsewitzer Ring,51.04637,13.6642
+SachsenEnergie DE-Dresden Pillnitzer Landstraße,51.0139,13.86368
 SachsenEnergie DE-Dresden Pirnaer Landstraße,51.01196,13.82665
 SachsenEnergie DE-Dresden Pirnaischer Platz,51.04868,13.74404
 SachsenEnergie DE-Dresden Pohlandplatz,51.04333,13.79496
@@ -22154,35 +22155,39 @@ SachsenEnergie DE-Dresden Reisewitzer Straße,51.04314,13.70108
 SachsenEnergie DE-Dresden Sarrasanistraße,51.05783,13.74514
 SachsenEnergie DE-Dresden Scharfenberger Straße,51.0724,13.68833
 SachsenEnergie DE-Dresden Schiller Galerie,51.05142,13.80468
+SachsenEnergie DE-Dresden Waisenhausstraße,51.0464,13.73998
 SachsenEnergie DE-Dresden Waldschlößchenstraße,51.0684,13.77634
 SachsenEnergie DE-Dresden Wasaplatz,51.02826,13.75982
 SachsenEnergie DE-Dresden Washingtonstraße,51.08148,13.69085
 SachsenEnergie DE-Dresden Weißeritzstraße,51.05638,13.72326
 SachsenEnergie DE-Dresden Wilhelmine-Reichard-Ring,51.12378,13.7646
-SachsenEnergie DE-Ebersbach-Neugersdorf Adam-Ries-Straße,51.00099,14.61681
-SachsenEnergie DE-Großenhain Schillerstraße,51.29461,13.53385
+SachsenEnergie DE-Ebersbach-Neugersdorf Adam-Ries-Straße,51.001,14.6168
+SachsenEnergie DE-Großenhain Schillerstraße,51.2946,13.53385
+SachsenEnergie DE-Großröhrsdorf Bandweberstraße,51.14615,14.0263
 SachsenEnergie DE-Gröditz Hauptstraße,51.4095,13.44623
-SachsenEnergie DE-Görlitz Gottlieb-Daimler-Straße,51.18362,14.96261
-SachsenEnergie DE-Heidenau Platz der Freiheit,50.98079,13.86022
-SachsenEnergie DE-Jonsdorf Hans Schumacher Straße,50.85051,14.69177
+SachsenEnergie DE-Görlitz Gottlieb-Daimler-Straße,51.18362,14.9626
+SachsenEnergie DE-Heidenau Platz der Freiheit,50.9808,13.86022
+SachsenEnergie DE-Jonsdorf Hans Schumacher Straße,50.8505,14.69177
 SachsenEnergie DE-Klitten Zum Aussichtspunkt,51.36042,14.5628
 SachsenEnergie DE-Königstein Reißiger Platz,50.91904,14.075
 SachsenEnergie DE-Königswartha Hauptstraße,51.30987,14.32932
 SachsenEnergie DE-Laußnitz Am Bahnhof,51.24777,13.87918
 SachsenEnergie DE-Neustadt in Sachsen Rosengasse,51.02563,14.21698
-SachsenEnergie DE-Niesky Zinzendorfplatz,51.29339,14.82225
+SachsenEnergie DE-Niesky Zinzendorfplatz,51.2934,14.82225
 SachsenEnergie DE-Ostritz Markt,51.01517,14.9329
 SachsenEnergie DE-Pirna Dresdner Straße,50.95706,13.9156
 SachsenEnergie DE-Pirna Krietzschwitz,50.92978,13.9771
 SachsenEnergie DE-Pirna Struppener Straße,50.95706,13.95944
+SachsenEnergie DE-Radeberg Neratovicer Straße,51.10654,13.92048
 SachsenEnergie DE-Rothenburg / Oberlausitz Schlossplatz,51.3356,14.97055
 SachsenEnergie DE-Sebnitz Schandauer Straße,50.96937,14.27028
-SachsenEnergie DE-Stolpen Schützenhausstraße,51.05021,14.08745
+SachsenEnergie DE-Stolpen Schützenhausstraße,51.0502,14.08745
 SachsenEnergie DE-Strehla Markt,51.35248,13.22656
-SachsenEnergie DE-Thiendorf Am Fiebig,51.29539,13.73531
+SachsenEnergie DE-Thiendorf Am Fiebig,51.2954,13.7353
 SachsenEnergie DE-Weinböhla Dresdner Straße,51.16078,13.56324
 SachsenEnergie DE-Weinböhla Moritzburger Straße,51.16314,13.5973
 SachsenEnergie DE-Weißwasser Karl-Liebknecht-Straße,51.5033,14.63698
+SachsenEnergie DE-Wilsdruff Am Rittergut,51.05102,13.47787
 SachsenEnergie DE-Wilsdruff Markt,51.05138,13.53743
 SachsenEnergie DE-Wilthen St.-Barbara-Platz,51.09995,14.40026
 
