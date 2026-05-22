@@ -7137,6 +7137,7 @@ ABC FI-Riihimäki Voimalankatu,60.73167,24.77838
 ABC FI-Sastamala Taitajantie,61.47438,22.55598
 ABC FI-Savonlinna Suuri Savontie,61.8774,28.82845
 ABC FI-Seinäjoki Latvalantie,62.80388,22.87457
+ABC FI-Siikalatva Pulkkilantie,64.26493,25.86612
 ABC FI-Sotkamo Kidekuja,64.14082,28.29603
 ABC FI-Tampere Keskisenkatu,61.47371,23.87376
 ABC FI-Tampere Rieväkatu,61.49147,23.82044
@@ -9161,6 +9162,7 @@ Chargefox AU-Browns Plains QLD Browns Plains Rd,-27.66376,153.04106
 Chargefox AU-Bundall QLD Bundall Road,-28.00159,153.41526
 Chargefox AU-Childers QLD Crescent St,-25.23483,152.27917
 Chargefox AU-Coffs Harbour Drive Thru,-30.31767,153.08979
+Chargefox AU-Creswick VIC Albert St,-37.42247,143.89453
 Chargefox AU-Creswick VIC Midland Hwy,-37.44388,143.8901
 Chargefox AU-Daylesford VIC Vincent St,-37.34293,144.14235
 Chargefox AU-Deakin ACT Denison Street,-35.31906,149.09368
@@ -17386,107 +17388,95 @@ Ionity CZ-Pávov (dir. Brno),49.45381,15.59148
 Ionity CZ-Pávov (dir. Prague),49.4551,15.59327
 Ionity CZ-Turnov Průmyslová,50.59561,15.13121
 Ionity CZ-Čechtice,49.65828,15.12053
-Ionity DE-Aichstetten Am Waizenhof,47.88068,10.04109,30
-Ionity DE-Alsfeld Dirsröder Feld,50.73742,9.24489,40
+Ionity DE-Aichstetten Am Waizenhof,47.88068,10.0411,30
+Ionity DE-Alsfeld Dirsröder Feld,50.73742,9.2449,40
 Ionity DE-Altdorf b. Nürnberg Nürnberger Straße,49.3833,11.34317
-Ionity DE-Altenburger Land Nord,50.86066,12.30798
-Ionity DE-Altenburger Land Süd,50.85675,12.3132
-Ionity DE-Am Fichtenplan Nord,52.31818,13.49471
-Ionity DE-Am Fichtenplan Süd,52.31562,13.4947
-Ionity DE-Auetal Nord,52.2236,9.22142,20
-Ionity DE-Auetal Süd,52.22704,9.23243,20
-Ionity DE-Augsburg Ost,48.41161,10.9149
+Ionity DE-Apen Tiegelstraße,53.24694,7.7706
+Ionity DE-Autohof Berg,50.37238,11.78735
+Ionity DE-Autohof Bingen-Nahetal,49.92576,7.93674,30
 Ionity DE-Autohof Bitterfeld,51.63655,12.2004,15
-Ionity DE-Autohof Dachsberg,50.64759,7.33472,22
+Ionity DE-Autohof Dachsberg,50.6476,7.33472,22
 Ionity DE-Autohof Geseke,51.59825,8.51547,30
+Ionity DE-Autohof Gotha,50.89838,10.72563
 Ionity DE-Autohof Halle-Tornau,51.54513,12.01387,30
 Ionity DE-Autohof Homberg/Efze,51.0053,9.48134
 Ionity DE-Autohof Lippetal,51.69593,7.96615
 Ionity DE-Autohof Lutterberg,51.37034,9.63356,11
 Ionity DE-Autohof Lutterberg,51.37043,9.63373,11
-Ionity DE-Autohof Nahetal,49.92576,7.93674,30
 Ionity DE-Autohof Neumarkt,49.31296,11.47478,30
 Ionity DE-Autohof Oberkrämer,52.70977,13.10806
+Ionity DE-Autohof Porta Westfalica,52.21074,8.87155
 Ionity DE-Autohof Sangerhausen,51.45105,11.30513,15
 Ionity DE-Autohof Wernberg,49.53243,12.1349,12
-Ionity DE-Bayerischer Wald Nord,48.93175,12.70825
-Ionity DE-Bayerischer Wald Süd,48.93104,12.70542
-Ionity DE-Bernau am Chiemsee Theodor-Sanne-Straße,47.81531,12.36654
-Ionity DE-Bochum,51.47408,7.15143
+Ionity DE-Bernau am Chiemsee Theodor-Sanne-Straße,47.8153,12.36654
+Ionity DE-Bochum Dückerweg,51.47408,7.15143
 Ionity DE-Bornheim Carl-Benz-Straße,50.76207,7.02958
 Ionity DE-Bruchsal Molzaustraße,49.14018,8.55867
 Ionity DE-Castrop Rauxel Grutholzallee,51.56634,7.31754
 Ionity DE-Delmenhorst Niedersachsendamm,53.03216,8.65478
 Ionity DE-Dettelbach Mainfrankenpark,49.77798,10.06877,30
 Ionity DE-Dietmannsried Glaserstraße,47.8119,10.30294,30
-Ionity DE-Donautal Ost,48.58807,13.36667
-Ionity DE-Donautal West,48.58942,13.36537
-Ionity DE-Dormagen Hamburger Straße,51.09327,6.80779
+Ionity DE-Dormagen Hamburger Straße,51.09327,6.8078
 Ionity DE-Eching Dieselstraße,48.31085,11.64673
-Ionity DE-Eichenzell Rhönhof,50.48831,9.70852,20
+Ionity DE-Eichenzell Rhönhof,50.4883,9.70852,20
 Ionity DE-Ellwangen (Jagst) Max-Eyth-Straße,48.95663,10.18366
-Ionity DE-Erfurt Dubliner Straße,51.01229,10.98809
+Ionity DE-Erfurt Dubliner Straße,51.0123,10.9881
 Ionity DE-Euro Rastpark Guxhagen,51.20283,9.46872,30
 Ionity DE-Euro Rastpark Himmelkron,50.05586,11.6091
 Ionity DE-Euro Rastpark Hohenwarsleben,52.1739,11.49512,11
 Ionity DE-Feucht Wendelsteiner Straße,49.36565,11.20737,20
-Ionity DE-Frankenhöhe Nord,49.24263,10.35294
-Ionity DE-Frankenhöhe Süd,49.24115,10.35612
-Ionity DE-Friedberg Winterbruckenweg,48.40641,10.95235,35
+Ionity DE-Friedberg Winterbruckenweg,48.4064,10.95235,35
 Ionity DE-Friedrichshafen Am Flugplatz,47.67253,9.52302
 Ionity DE-Garching bei München Parkring,48.24932,11.63437
-Ionity DE-Großweitzschen Heiterer Blick,51.15369,13.11828
-Ionity DE-Haidt Nord,49.78085,10.2448
-Ionity DE-Haidt Süd,49.77935,10.24649
-Ionity DE-Hallstadt Heganger,49.91381,10.86568
-Ionity DE-Hamminkeln,51.7391,6.59518
-Ionity DE-Harz Ost,51.92628,10.14324
+Ionity DE-Großweitzschen Heiterer Blick,51.1537,13.11828
+Ionity DE-Hallstadt Heganger,49.9138,10.86568
+Ionity DE-Hamminkeln Weikenrott,51.7391,6.59518
 Ionity DE-Heiligengrabe Liebenthaler Dorfstraße,53.14752,12.3989
 Ionity DE-Herne Holsterhauser Straße,51.52873,7.19984
 Ionity DE-Herrenberg Hewlett-Packard-Straße,48.58196,8.89197
-Ionity DE-Holzkirchen Nord,47.89221,11.73128
-Ionity DE-Holzkirchen Süd,47.90657,11.71738
-Ionity DE-Illertissen,48.21923,10.12784,25
-Ionity DE-Jettingen-Scheppach Robert-Bosch-Straße,48.41231,10.44017
+Ionity DE-Illertissen Leitschäcker,48.21923,10.12784,25
+Ionity DE-Jettingen-Scheppach Robert-Bosch-Straße,48.4123,10.44017
 Ionity DE-Kaiserslautern Mainzer Straße,49.45635,7.79732
-Ionity DE-Kamen Zollpost,51.57621,7.67018
-Ionity DE-Kirchheim,50.83328,9.57318
-Ionity DE-Kirchheim,50.83369,9.57078
-Ionity DE-Lehrter See Nord,52.38878,9.99604,30
-Ionity DE-Lehrter See Süd,52.38638,9.99925,30
+Ionity DE-Kamen Zollpost,51.5762,7.67018
+Ionity DE-Kirchheim Hauptstraße,50.83328,9.57318
+Ionity DE-Kirchheim Hauptstraße,50.8337,9.57078
 Ionity DE-Leinefelde Ernemannstraße,51.39074,10.34255
-Ionity DE-Linthe Westfalenstraße,52.16012,12.77991
-Ionity DE-Lonetal Ost,48.58425,10.17894,10
-Ionity DE-Lonetal West,48.58394,10.1756,11
-Ionity DE-Mahlberg Ost,48.30885,7.79153,15
-Ionity DE-Mahlberg West,48.30948,7.78885,15
+Ionity DE-Linthe Westfalenstraße,52.16012,12.7799
 Ionity DE-Marl Herzlia-Allee,51.64452,7.10234
 Ionity DE-Meerane Hohe Straße,50.84076,12.44502
 Ionity DE-Memmingen Fraunhoferstraße,47.99943,10.15528
-Ionity DE-Merklingen Nellinger Straße,48.51639,9.75685,25
+Ionity DE-Merklingen Nellinger Straße,48.5164,9.75685,25
 Ionity DE-Mönchengladbach Schleswiger Straße,51.19552,6.41265
 Ionity DE-Mühldorf am Inn Äußere Neumarkter Straße,48.26244,12.54266
-Ionity DE-Nempitz,51.29011,12.13755,6
-Ionity DE-Nempitz,51.29019,12.1376,7
+Ionity DE-Nempitz An der Autobahn,51.2901,12.13755,6
+Ionity DE-Nempitz An der Autobahn,51.2902,12.1376,7
 Ionity DE-Nörten-Hardenberg Unter dem Pferdestiege,51.62887,9.92238,30
 Ionity DE-Oberhausen Brammenring,51.48978,6.88792
-Ionity DE-Oberhonnefeld,50.56259,7.52784
+Ionity DE-Oberhonnefeld Steinstraße,50.5626,7.52784
 Ionity DE-Oelde In d. Geist,51.812,8.13102
 Ionity DE-Paderborn Frankfurter Weg,51.70695,8.7227
 Ionity DE-Parsdorf Von-Myra-Straße,48.14535,11.79105
 Ionity DE-Pilsting,48.69253,12.67298
-Ionity DE-Polch Im Roten Tal,50.30688,7.30611
-Ionity DE-Porta Westfalica Zum Autohof,52.21074,8.87155
-Ionity DE-Quickborn Auf dem Halenberg,53.7428,9.94289,20
+Ionity DE-Polch Im Roten Tal,50.30688,7.3061
+Ionity DE-Quickborn Auf dem Halenberg,53.7428,9.9429,20
+Ionity DE-Rastanlage Auetal Nord,52.2236,9.22142,20
+Ionity DE-Rastanlage Auetal Süd,52.22704,9.23243,20
 Ionity DE-Rastanlage Neckarburg Ost,48.2062,8.6271,20
 Ionity DE-Rastanlage Neckarburg West,48.2059,8.62104,20
 Ionity DE-Rastanlage Ohrenbach Ost,49.48555,10.21327,30
 Ionity DE-Rastanlage Ohrenbach West,49.4844,10.21195
-Ionity DE-Rasthof Gruibingen,48.60532,9.63281
-Ionity DE-Rastplatz Bad Camberg West,50.29989,8.23474,20
+Ionity DE-Rasthof Gruibingen,48.60532,9.6328
+Ionity DE-Rastplatz Bad Camberg West,50.2999,8.23474,20
 Ionity DE-Raststätte Aachener Land Nord,50.81772,6.2139,20
 Ionity DE-Raststätte Aachener Land Süd,50.81736,6.21673
 Ionity DE-Raststätte Aalbek,54.09267,9.9291,25
+Ionity DE-Raststätte Altenburger Land Nord,50.86066,12.30798
+Ionity DE-Raststätte Altenburger Land Süd,50.85675,12.3132
+Ionity DE-Raststätte Am Fichtenplan Nord,52.31818,13.4947
+Ionity DE-Raststätte Am Fichtenplan Süd,52.31562,13.4947
+Ionity DE-Raststätte Augsburg Ost,48.4116,10.9149
+Ionity DE-Raststätte Bayerischer Wald Nord,48.93175,12.70825
+Ionity DE-Raststätte Bayerischer Wald Süd,48.93104,12.70542
 Ionity DE-Raststätte Brohltal Ost,50.44047,7.22563
 Ionity DE-Raststätte Brohltal West,50.44153,7.22398
 Ionity DE-Raststätte Brokenlande,54.01422,9.9333,20
@@ -17494,64 +17484,78 @@ Ionity DE-Raststätte Bruchsal Ost,49.16265,8.57075,30
 Ionity DE-Raststätte Bruchsal West,49.16115,8.56717,23
 Ionity DE-Raststätte Buddikate Ost,53.69417,10.3246,36
 Ionity DE-Raststätte Buddikate West,53.69256,10.32043
-Ionity DE-Raststätte Dammer Berge Ost,52.53915,8.11491,30
+Ionity DE-Raststätte Dammer Berge Ost,52.53915,8.1149,30
 Ionity DE-Raststätte Dammer Berge West,52.54077,8.1129,25
 Ionity DE-Raststätte Demminer Land,53.85567,13.33334,25
 Ionity DE-Raststätte Denkendorf Nord,48.69368,9.30332,25
 Ionity DE-Raststätte Dollenberg,50.68853,8.29568,15
+Ionity DE-Raststätte Donautal Ost,48.58807,13.36667
+Ionity DE-Raststätte Donautal West,48.58942,13.36537
 Ionity DE-Raststätte Dresdner Tor Nord,51.06325,13.57125,30
 Ionity DE-Raststätte Dresdner Tor Süd,51.06023,13.57196,30
-Ionity DE-Raststätte Eifel Ost,50.07029,6.88066,20
+Ionity DE-Raststätte Eifel Ost,50.0703,6.88066,20
 Ionity DE-Raststätte Eifel West,50.06832,6.88035,22
+Ionity DE-Raststätte Frankenhöhe Nord,49.24263,10.35294
+Ionity DE-Raststätte Frankenhöhe Süd,49.24115,10.35612
 Ionity DE-Raststätte Goldbach Nord,53.00056,9.17968,20
-Ionity DE-Raststätte Goldbach Süd,52.99833,9.18139,30
+Ionity DE-Raststätte Goldbach Süd,52.99833,9.1814,30
+Ionity DE-Raststätte Haidt Nord,49.78085,10.2448
+Ionity DE-Raststätte Haidt Süd,49.77935,10.2465
+Ionity DE-Raststätte Harz Ost,51.92628,10.14324
 Ionity DE-Raststätte Harz West,51.92774,10.1413
 Ionity DE-Raststätte Hohenlohe Nord,49.207,9.63934,20
 Ionity DE-Raststätte Hohenlohe Süd,49.20538,9.6398,20
+Ionity DE-Raststätte Holzkirchen Nord,47.8922,11.73128
+Ionity DE-Raststätte Holzkirchen Süd,47.90657,11.71738
 Ionity DE-Raststätte Katzenfurt Süd,50.62033,8.363,16
 Ionity DE-Raststätte Köschinger Forst Ost,48.8366,11.47224
 Ionity DE-Raststätte Köschinger Forst West,48.83713,11.4693
 Ionity DE-Raststätte Lechwiesen Nord,48.05927,10.8468
 Ionity DE-Raststätte Lechwiesen Süd,48.05833,10.8477
+Ionity DE-Raststätte Lehrter See Nord,52.38878,9.99604,30
+Ionity DE-Raststätte Lehrter See Süd,52.38638,9.99925,30
 Ionity DE-Raststätte Lichtendorf Nord,51.46832,7.594
 Ionity DE-Raststätte Lichtendorf Süd,51.46802,7.59722,60
+Ionity DE-Raststätte Lonetal Ost,48.58425,10.17894,10
+Ionity DE-Raststätte Lonetal West,48.58394,10.1756,11
 Ionity DE-Raststätte Lüneburger Heide Ost,53.11004,9.98406
 Ionity DE-Raststätte Lüneburger Heide West,53.10922,9.98197,30
+Ionity DE-Raststätte Mahlberg Ost,48.30885,7.79153,15
+Ionity DE-Raststätte Mahlberg West,48.30948,7.78885,15
 Ionity DE-Raststätte Ohligser Heide Ost,51.15678,6.96483
 Ionity DE-Raststätte Ohligser Heide West,51.15808,6.96174
 Ionity DE-Raststätte Ostetal Nord,53.29998,9.53256,40
 Ionity DE-Raststätte Ostetal Süd,53.2991,9.5351
 Ionity DE-Raststätte Reinhardshain Nord,50.6229,8.89498,30
 Ionity DE-Raststätte Reinhardshain Süd,50.62186,8.89726,30
+Ionity DE-Raststätte Remscheid Ost,51.1584,7.23033
 Ionity DE-Raststätte Riedener Wald Ost,49.9442,10.0201
 Ionity DE-Raststätte Riedener Wald West,49.94566,10.01673,24
 Ionity DE-Raststätte Samerberg Nord,47.80282,12.17805
 Ionity DE-Raststätte Samerberg Süd,47.80123,12.17726,20
-Ionity DE-Raststätte Wunnenstein Ost,49.04541,9.26625,20
+Ionity DE-Raststätte Spessart Nord,49.8983,9.39435
+Ionity DE-Raststätte Thüringer Wald Nord,50.72645,10.84163
+Ionity DE-Raststätte Thüringer Wald Süd,50.7247,10.84717
+Ionity DE-Raststätte Weiskirchen Süd,50.0547,8.90818
+Ionity DE-Raststätte Wunnenstein Ost,49.0454,9.26625,20
 Ionity DE-Raststätte Wunnenstein West,49.04422,9.26157,26
-Ionity DE-Remscheid Ost,51.15841,7.23033
 Ionity DE-Rosbach vor der Höhe Carl-Benz-Straße,50.29456,8.69915
 Ionity DE-Rostock Timmermannsstrat,54.08328,12.19232
-Ionity DE-Salzbergen,52.32615,7.43007
-Ionity DE-Schwabhausen,50.89838,10.72563
-Ionity DE-Spessart Nord,49.8983,9.39435
-Ionity DE-Thüringer Wald Nord,50.72645,10.84163
-Ionity DE-Thüringer Wald Süd,50.72471,10.84717
-Ionity DE-Weiskirchen Süd,50.05471,8.90818
-Ionity DE-Wenningstedt-Braderup (Sylt),54.93452,8.32987
-Ionity DE-Werneck Am Eschenbach,50.00319,10.11744,25
-Ionity DE-Wismar Am Ring,53.89322,11.51309
-Ionity DE-Wittenburg Hagenower Chaussee,53.50182,11.08779,30
+Ionity DE-Salzbergen Holsterfeld,52.32615,7.43007
+Ionity DE-Wenningstedt-Braderup (Sylt) Osterweg,54.93452,8.32987
+Ionity DE-Werneck Am Eschenbach,50.0032,10.11744,25
+Ionity DE-Wismar Am Ring,53.89322,11.5131
+Ionity DE-Wittenburg Hagenower Chaussee,53.50182,11.0878,30
 Ionity DE-Wittlich Straßburgstraße,49.96687,6.94273
-Ionity DE-Wolfhagen Warburger Straße,51.40209,9.18423
-Ionity DE-Wolfsburg Allerpark,52.43771,10.80907
+Ionity DE-Wolfhagen Warburger Straße,51.4021,9.18423
+Ionity DE-Wolfsburg Allerpark,52.4377,10.80907
 Ionity DE-Wolfsburg Braunschweiger Straße,52.41666,10.7834
-Ionity DE-Wolfsburg Detmeroder Markt,52.39224,10.75371
-Ionity DE-Wolfsburg Forum AutoVision,52.42487,10.74569
-Ionity DE-Wolfsburg Wolfsburg Bürozentrum Nord,52.4452,10.78523
+Ionity DE-Wolfsburg Bürozentrum Nord,52.4452,10.78523
+Ionity DE-Wolfsburg Detmeroder Markt,52.39224,10.7537
+Ionity DE-Wolfsburg Forum AutoVision,52.42487,10.7457
 Ionity DE-Wörrstadt Sophie-Opel-Straße,49.84012,8.14172
-Ionity DE-Zella-Mehlis An der Quelle,50.64452,10.68529,30
-Ionity DE-Überlingen Abigstraße,47.77514,9.18609
+Ionity DE-Zella-Mehlis An der Quelle,50.64452,10.6853,30
+Ionity DE-Überlingen Abigstraße,47.77514,9.1861
 Ionity DK-Aabenraa Egevej,55.06495,9.3661,20
 Ionity DK-Fredericia,55.53669,9.71778
 Ionity DK-Greve,55.58492,12.258
@@ -18094,6 +18098,7 @@ Jöchle DE-Baindt Am Umspannwerk,47.8364,9.63332
 
 K-Lataus FI-Espoo Isonniitynkuja,60.16267,24.70714
 K-Lataus FI-Joensuu Linjatie,62.62878,29.70338
+K-Lataus FI-Kalajoki Merenojantie,64.2608,23.95013
 K-Lataus FI-Kauhajoki Savikyläntie,62.43417,22.17694
 K-Lataus FI-Kotka Jumalniementie,60.50542,26.91291
 K-Lataus FI-Kotka Koulukatu,60.4606,26.94025
@@ -24970,6 +24975,7 @@ Volkswagen GR-Korinthos Κόρινθος Patron,37.9336,22.9094
 Volkswagen IT-Bolzano Vittorio-Lancia-Straße,46.48403,11.33679
 Volkswagen PL-Wrocław al. Karkonoska,51.05556,16.97776
 Volkswagen RO-Ghimbav Calea Brașovului,45.66277,25.51406
+Volkswagen RO-Suceava Bulevardul Sofia Vicoveanca,47.62286,26.238
 
 Voltiva SE-Vetlanda Kyrkogatan,57.42667,15.09076
 Voltiva SE-Värnamo Malmövägen,57.16492,14.06426
