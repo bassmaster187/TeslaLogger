@@ -2628,7 +2628,7 @@ Supercharger FR-Fontainebleau,48.349396,2.607344
 Supercharger-V4 FR-Franconville,48.988982,2.208563
 Supercharger-V4 FR-Gallargues-le-Montueux,43.71865,4.18012
 Supercharger-V3 FR-Gap,44.569565,6.104458
-Supercharger-V4 FR-Gassin,43.263006,6.580338
+Supercharger-V4 FR-Gassin,43.26302,6.58044
 Supercharger-V4 FR-Goussainville,49.021048,2.467801
 Supercharger-V4 FR-Herblay,49.0063,2.1692
 Supercharger-V3 FR-Honfleur,49.414069,0.266165,55
@@ -3780,7 +3780,7 @@ Supercharger-V3 NO-Veggli,60.04024,9.15518
 Supercharger-V3 NO-Verdal,63.79299,11.489223
 Supercharger-V3 NO-Vestby,59.602873,10.74125,60
 Supercharger-V3 NO-Vestnes,62.622437,7.089761
-Supercharger NO-Vikeså,58.631954,6.077949
+Supercharger-V4 NO-Vikeså,58.63192,6.07777
 Supercharger NO-Vinstra,61.59049,9.72166
 Supercharger-V3 NO-Vinstra,61.594523,9.726537
 Supercharger-V3 NO-Volda,62.14038,6.090307
@@ -4695,6 +4695,7 @@ Supercharger-V4 US-Sebastopol CA,38.40803,-122.83922
 Supercharger-V3 US-Selma CA,36.5764,-119.63075
 Supercharger US-Sherman Oaks CA,34.15637,-118.46815
 Supercharger-V3 US-Sherman Oaks CA Ventura Blvd,34.1569,-118.46754
+Supercharger-V4 US-Sierra Madre CA,34.1611,-118.05232
 Supercharger-V4 US-Signal Hill CA,33.80418,-118.16925
 Supercharger-V4 US-Simi Valley CA,34.28538,-118.71958
 Supercharger-V3 US-Simi Valley CA - Tierra Rejada Road,34.27213,-118.7973
@@ -5373,6 +5374,7 @@ Supercharger US-Goodland KS,39.32628,-101.72503
 Supercharger US-Hays KS,38.90054,-99.31933
 Supercharger-V3 US-Lawrence KS,39.01853,-95.13718
 Supercharger-V4 US-Lenexa KS,38.9724,-94.74206
+Supercharger-V4 US-Manhattan KS,39.1721,-96.6064
 Supercharger-V4 US-Mission KS,39.02,-94.66118
 Supercharger US-Mission KS,39.02043,-94.66227
 Supercharger-V3 US-Oakley KS,39.11877,-100.81227
@@ -5421,6 +5423,7 @@ Supercharger-V3 US-Ruston LA,32.54294,-92.62554
 Supercharger US-Shreveport LA,32.4787,-93.75437
 Supercharger US-Slidell LA,30.2664,-89.7599
 Supercharger-V3 US-Sulphur LA,30.21446,-93.37535
+Supercharger-V4 US-West Monroe LA,32.513,-92.1912
 
 Supercharger US-Auburn MA,42.2038,-71.83293
 Supercharger US-Boston MA - Allstate Road (Floor 6),42.3255,-71.06352
@@ -5497,6 +5500,7 @@ Supercharger-V4 US-Bel Air MD Tobin Xing,39.48897,-76.25627
 Supercharger-V3 US-Beltsville MD,39.0275,-76.91802
 Supercharger-V3 US-Bethesda MD - Elm Street (Pay to Park Floor 1),38.98207,-77.09804
 Supercharger-V3 US-Bowie MD,38.9563,-76.8249
+Supercharger-V4 US-Bowie MD Mitchellville Rd,38.95307,-76.72233
 Supercharger-V3 US-Brandywine MD,38.66435,-76.87625
 Supercharger-V3 US-California MD,38.30276,-76.52208
 Supercharger-V4 US-Camp Springs MD,38.80722,-76.90396
@@ -5728,7 +5732,7 @@ Supercharger-V3 US-Cary NC Bass Pro Lane,35.83148,-78.76894
 Supercharger-V3 US-Cary NC Tryon Rd,35.74514,-78.76224
 Supercharger-V3 US-Chapel Hill NC,35.9701,-79.06405
 Supercharger-V3 US-Charlotte NC - Metropolitan Avenue (Floor P6),35.21283,-80.83527
-Supercharger-V3 US-Charlotte NC - Northlake Centre Parkway,35.3473,-80.85936
+Supercharger-V3 US-Charlotte NC - Northlake Centre Parkway,35.34734,-80.85897,65
 Supercharger US-Charlotte NC - Toringdon Way,35.0691,-80.84212
 Supercharger-V4 US-Charlotte NC Panara Dr,35.36975,-80.73402
 Supercharger-V3 US-Charlotte NC Providence Road,35.06233,-80.77086
@@ -6169,6 +6173,7 @@ Supercharger-V3 US-Genoa OH - Blue Heron Service Plaza,41.49058,-83.36667,40
 Supercharger-V3 US-Genoa OH - Wyandot Service Plaza,41.49008,-83.37047,40
 Supercharger-V3 US-Girard OH,41.14937,-80.70065
 Supercharger US-Grove City OH,39.87718,-83.06342
+Supercharger-V4 US-Heath OH,40.03844,-82.43086
 Supercharger US-Lima OH,40.7267,-84.07195
 Supercharger US-Macedonia OH,41.31365,-81.51703
 Supercharger US-Maumee OH,41.5784,-83.6647
@@ -6601,6 +6606,7 @@ Supercharger-V3 US-Mathis TX,28.11112,-97.81836
 Supercharger US-McAllen TX,26.19845,-98.25982
 Supercharger-V3 US-McKinney TX,33.15186,-96.7171
 Supercharger-V3 US-McKinney TX - University Drive,33.21746,-96.65705
+Supercharger-V4 US-McKinney TX N Graves St,33.21604,-96.62732
 Supercharger-V3 US-Melissa TX,33.27033,-96.59296
 Supercharger US-Midland TX,31.9468,-102.14203
 Supercharger US-Nacogdoches TX,31.652,-94.6796
@@ -6628,6 +6634,7 @@ Supercharger-V3 US-Royse City TX,32.9792,-96.29636
 Supercharger US-San Antonio TX,29.54902,-98.5811
 Supercharger-V3 US-San Antonio TX - North Loop 1604 East,29.61034,-98.48907
 Supercharger-V4 US-San Antonio TX Broadway,29.4322,-98.48262
+Supercharger-V4 US-San Antonio TX Horizon Hill Blvd,29.50954,-98.5543
 Supercharger-V4 US-San Antonio TX West Loop 1604 North,29.5037,-98.69927
 Supercharger US-San Marcos TX,29.82764,-97.97956
 Supercharger US-Schertz TX,29.59838,-98.27598
@@ -6640,6 +6647,7 @@ Supercharger US-Southlake TX,32.94364,-97.1339
 Supercharger-V4 US-Spring TX,30.05035,-95.43825
 Supercharger-V3 US-Spring TX - Spring Stuebner Road,30.08552,-95.44988
 Supercharger-V4 US-Spring TX Cypresswood Dr,30.0508,-95.43608
+Supercharger-V4 US-Spring TX N Grand Pkwy,30.08826,-95.52107
 Supercharger US-Sulphur Springs TX,33.13718,-95.6032
 Supercharger US-Sweetwater TX,32.451,-100.39285
 Supercharger-V3 US-Temple TX,31.13745,-97.3284,110
@@ -7129,6 +7137,7 @@ ABC FI-Pori Eteläväylä,61.47811,21.75727
 ABC FI-Pori Itäkeskuksenkaari,61.4549,21.83949
 ABC FI-Pori Tikkulantie,61.4882,21.7518
 ABC FI-Porvoo Aleksanterinkaari,60.38702,25.65169
+ABC FI-Raahe Sotaplassintie,64.688,24.5659
 ABC FI-Raisio Piilipuunkatu,60.50545,22.15968
 ABC FI-Raseborg Järnvägsgatan,59.97863,23.44009
 ABC FI-Rauma Unajantie,61.09983,21.50543
@@ -9273,6 +9282,7 @@ ChargePoint AT-Graz Wiener Straße,47.10483,15.39975
 ChargePoint AT-Graz Zanklstraße,47.09623,15.40694,25
 ChargePoint AT-Liezen Salzburger Straße,47.56758,14.23202,20
 ChargePoint AT-Längenfeld Unterlängenfeld,47.07213,10.96484
+ChargePoint AT-Penningberg Penningbergstraße,47.43057,12.13627
 ChargePoint AT-St. Johann in der Haide Rathstraße,47.28064,16.00637
 ChargePoint AT-St. Veit St.-Veiter-Straße,47.3316,13.16388
 ChargePoint AT-Stattegg Dorfplatz,47.13736,15.41941
@@ -9509,6 +9519,7 @@ Chargy LU-Kirchberg Rue Richard Coudenhove-Kalergi,49.62658,6.1605
 Chargy LU-Mertert Aire de Wasserbillig,49.72764,6.48943
 Chargy LU-Roeser Aire de Berchem,49.5416,6.12076
 
+CircleK BE-Aire de Spy Nord,50.49564,4.70086
 CircleK BE-Heusden-Zolder,51.01293,5.3314
 CircleK BE-Kalken E17,51.0705,3.91987
 CircleK BE-Kalken E17,51.07132,3.92131
@@ -10966,6 +10977,8 @@ EAM DE-Willingen Mühlenkopfstraße,51.28017,8.61917
 easy4you CH-Chur Bahnhofplatz,46.85433,9.53124
 easy4you CH-Leuk Kantonsstrasse,46.3088,7.65131
 easy4you CH-Schaffhausen Kirchhofplatz,47.69649,8.63659
+
+EasyCharge FR-Besançon Rue Isenbart,47.2437,6.0247
 
 ebl CH-Liestal Mühlemattstrasse,47.47337,7.75931
 
@@ -13964,6 +13977,7 @@ enercity DE-Hannover Tiergartenstraße,52.36187,9.8324
 enercity DE-Hannover Von-Alten-Allee,52.36536,9.71784
 enercity DE-Hannover Wiehbergstraße,52.33566,9.76256
 enercity DE-Hannover Windaustraße,52.40637,9.73542
+enercity DE-Karlsruhe Südliche Hildapromenade,49.0113,8.38518
 enercity DE-Laatzen Karlsruher Straße,52.31764,9.79901,40
 enercity DE-Laatzen Lübecker Straße,52.29807,9.82712
 enercity DE-Langenhagen Flughafenstraße,52.46051,9.69639
@@ -18420,6 +18434,7 @@ Kaufland DE-Oppenheim Baumschulweg,49.84608,8.36167,30
 Kaufland DE-Oschersleben (Bode) Lüneburger Straße,52.02928,11.22854
 Kaufland DE-Osnabrück Carl-Fischer-Straße,52.2698,8.08198
 Kaufland DE-Osterode am Harz Herzberger Landstraße,51.71415,10.27448
+Kaufland DE-Paderborn Husener Straße,51.70335,8.76807
 Kaufland DE-Paderborn Riemekestraße,51.7154,8.7399
 Kaufland DE-Parchim Friedrich-Wilhelm-Raiffeisen-Ring,53.41815,11.82174
 Kaufland DE-Passau Neuburger Straße,48.55807,13.4176
@@ -20246,6 +20261,8 @@ Mer SE-Ystad Granatvägen,55.43818,13.79081,20
 Mer SE-Åre Björnenvägen,63.38654,13.15324
 
 Metropolis FR-Antony Av. du Général de Gaulle,48.76307,2.30663
+
+MFC FR-Coquelles Bd de l’Europe,50.93696,1.80845
 
 MFG GB-Billingham Coal Ln,54.62767,-1.3065
 MFG GB-Dover Hammond’s Garage,51.11795,1.30706
@@ -25789,6 +25806,7 @@ DE Ostbevern CANWAY,52.05011,7.84619
 DE Ottobrunn Panasonic,48.05244,11.65555
 DE Paderborn MBörso,51.74011,8.77091
 DE Parkplatz Staufenberg A7,51.34918,9.60625
+DE Peine Salzgitter Hotel,52.33934,10.2375
 DE Pettstadt Gemeinde,49.83073,10.9251
 DE Pforzheim Deichlerweg,48.902,8.67445
 DE Pliezhausen Stuifenweg,48.56192,9.1883
