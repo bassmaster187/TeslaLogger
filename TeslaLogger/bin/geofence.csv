@@ -2074,7 +2074,7 @@ Supercharger DE-Lutterberg alt,51.370977,9.633306,10
 Supercharger-V4 DE Lübeck (Cafe del Sol),53.881288,10.660194
 Supercharger-V4 DE-Lübeck Moisling,53.912554,10.732506
 Supercharger-V4 DE-Lünen (Cafe Del Sol),51.60468,7.5262
-Supercharger-V3 DE-Magdeburg,52.210632,11.670302
+Supercharger-V3 DE-Magdeburg,52.21074,11.67012
 Supercharger-V4 DE-Magdeburg Florapark,52.15917,11.60737
 Supercharger-V4 DE-Maintal (Globus),50.12982,8.8685
 Supercharger-V4 DE-Mainz,49.9814,8.28052
@@ -8381,8 +8381,7 @@ amperio DE-Zell Plänterstraße,50.01933,7.17678
 APCOA DE-Leipzig Petersstraße,51.33712,12.37369
 APCOA DE-München Berg am Laim Straße,48.12977,11.62437
 
-Applegreen GB-Leicester Welcome Break,52.6186,-1.20575
-
+Applegreen-Electric GB-Leicester Welcome Break,52.6186,-1.20575
 Applegreen-Electric GB-Newport Pagnell Welcome Break,52.0829,-0.7484,15
 Applegreen-Electric IE-Wicklow Service Area,53.04385,-6.08954
 Applegreen-Electric US-Phelps NY NY State Thruway,42.9588,-76.91741
@@ -9357,7 +9356,6 @@ ChargePoint DE-Dachau Fraunhoferstraße 5,48.26249,11.47404
 ChargePoint DE-Dannenberg Lüchower Straße,53.09273,11.08838,25
 ChargePoint DE-Darmstadt 100 Rheinstraße,49.86889,8.63222
 ChargePoint DE-Donauwörth Dr.-Ludwig-Bölkow-Straße,48.712,10.76157
-ChargePoint DE-Dortmund 99 Wittekindstraße,51.49625,7.44249
 ChargePoint DE-Dresden Wiener Platz 3,51.04235,13.73075
 ChargePoint DE-Düren 15 Bahnstraße,50.78947,6.46766
 ChargePoint DE-Düsseldorf 1 Mercedesstraße,51.2502,6.79929
@@ -9453,7 +9451,6 @@ ChargePoint DE-Mücheln (Geiseltal) 1B Bahnhofsiedlung,51.3471,11.75512
 ChargePoint DE-München Friedenstraße,48.12526,11.6049
 ChargePoint DE-Münster Loddenheide,51.93873,7.6472
 ChargePoint DE-Neuss 4 Im Taubental,51.16686,6.75827
-ChargePoint DE-Nürnberg 14 Kressengartenstraße,49.44993,11.09939
 ChargePoint DE-Nürnberg 97 Flughafenstraße,49.49355,11.08022
 ChargePoint DE-Nürnberg Kilianstraße,49.47382,11.09064
 ChargePoint DE-Nürnberg Stadenstraße,49.48265,11.13448
@@ -9559,6 +9556,7 @@ CircleK BE-Aire de Spy Nord,50.49564,4.70086
 CircleK BE-Heusden-Zolder,51.01293,5.3314
 CircleK BE-Kalken E17,51.0705,3.91987
 CircleK BE-Kalken E17,51.07132,3.92131
+CircleK BE-Tessenderlo-Ham E313,51.06997,5.14625
 CircleK CA-South Lancaster ON County Rd 2,45.13459,-74.49369
 CircleK DE-Autohof Alsfeld Pfefferhöhe,50.73306,9.24198,30
 CircleK DE-Autohof Aurach,49.2523,10.43386
@@ -12851,6 +12849,7 @@ EnBW DE-Mayen Polcher Straße,50.31913,7.23362,30
 EnBW DE-Mechernich Euronics,50.61881,6.65022
 EnBW DE-Mechernich Hellweg,50.61813,6.6491
 EnBW DE-Meckenbeuren Max-Gutknecht-Straße,47.7087,9.601
+EnBW DE-Meckenbeuren Oskar-Von-Miller-Platz,47.7011,9.55852,30
 EnBW DE-Meckenheim,50.62705,7.01906
 EnBW DE-Meckesheim Schulstraße,49.3193,8.82115
 EnBW DE-Meerane Hohe Straße,50.84148,12.4451,30
@@ -15533,7 +15532,7 @@ EWE-GO DE-Parsberg Im Grund,49.17624,11.7288
 EWE-GO DE-Pattensen Auf der Burg,52.26328,9.76461
 EWE-GO DE-Peine Dieselstraße,52.33819,10.24448
 EWE-GO DE-Pentling Ammerholz,48.97372,12.06445
-EWE-GO DE-Penzberg Seeshaupter Straße,47.76572,11.3593
+EWE-GO DE-Penzberg Seeshaupter Straße,47.76585,11.35907,30
 EWE-GO DE-Pewsum Schatthausstraße,53.43735,7.09516
 EWE-GO DE-Pfarrkirchen Südeinfahrt,48.41756,12.94561,30
 EWE-GO DE-Pforzheim Adolf-Seebacher-Straße,48.91042,8.71665
@@ -17459,7 +17458,7 @@ Ionity DE-Autohof Lutterberg,51.37043,9.63373,11
 Ionity DE-Autohof Neumarkt,49.31296,11.47478,30
 Ionity DE-Autohof Oberkrämer,52.70977,13.10806
 Ionity DE-Autohof Porta Westfalica,52.21074,8.87155
-Ionity DE-Autohof Sangerhausen,51.45105,11.30513,15
+Ionity DE-Autohof Sangerhausen,51.45105,11.30513,18
 Ionity DE-Autohof Wernberg,49.53243,12.1349,12
 Ionity DE-Bernau am Chiemsee Theodor-Sanne-Straße,47.8153,12.36654
 Ionity DE-Bochum Dückerweg,51.47408,7.15143
@@ -20021,15 +20020,40 @@ MAN AT-Leopoldsdorf MAN-Straße,48.09976,16.39722
 Mark-E DE-Hagen Bahnhofstraße,51.35983,7.46887
 
 MB AT-Parndorf Richard-Erlinger-Platz,47.9766,16.8551,20
+MB DE-Augsburg Haunstetter Straße,48.3471,10.90502
 MB DE-Aurich Korbweidenstraße,53.45056,7.50673
+MB DE-Autohof Cloppenburg,52.8272,8.00026,25
+MB DE-Autohof Mühldorf,48.27283,12.55063
+MB DE-Autohof Neuberg,50.18235,9.0081,20
+MB DE-Autohof Sangerhausen,51.45068,11.3053,18
+MB DE-Autohof Wernberg,49.53307,12.13475,25
+MB DE-Berlin Salzufer,52.5147,13.3305
 MB DE-Butzbach In der Alböhn,50.42942,8.68306
+MB DE-Dortmund Wittekindstraße,51.4962,7.4425
+MB DE-Erlangen Frauenauracher Straße,49.5762,10.96785
+MB DE-Essen Hans-Böckler-Straße,51.46104,6.99876
+MB DE-Hamburg Kollaustraße,53.61197,9.95362
 MB DE-Hausen bei Würzburg Am Wiesenweg,49.91243,10.00036,15
+MB DE-Herne Forellstraße,51.55406,7.20125
+MB DE-Kassel Sandershäuser Straße,51.3117,9.53352
+MB DE-Köln Goldammerweg,50.96618,6.86908
 MB DE-Ludwigsfelde Gottlieb-Daimler-Straße,52.32867,13.273
+MB DE-Magdeburg Glindenberger Weg,52.21046,11.6706,15
 MB DE-Mannheim Gottlieb-Daimler-Straße,49.47586,8.49546
-MB DE-Mayen Polcher Straße,50.31949,7.23297,25
-MB DE-Obing Wasserburger Straße,48.00251,12.40044
+MB DE-Mayen Polcher Straße,50.3195,7.23297,25
+MB DE-Münchberg August-Horch-Straße,50.20195,11.78056
+MB DE-Neufahrn b. Freising Bajuwarenstraße,48.32946,11.69272
+MB DE-Nürnberg Kressengartenstraße,49.44983,11.09942
+MB DE-Obing Wasserburger Straße,48.0025,12.40044
+MB DE-Ottersberg Posthausen,53.0614,9.16943
+MB DE-Penzberg Seeshaupter Straße,47.76554,11.3597,30
+MB DE-Schönefeld Hans-Grade-Allee,52.39584,13.5173
 MB DE-Sindelfingen Käsbrünnlestraße,48.6952,9.00088
 MB DE-Stuttgart Siemensstraße,48.81003,9.1807,15
+MB DE-Weißenfels Heinrich-Hertz-Straße,51.1874,11.98767
+MB DE-Weißensberg Beim Rothen-Kreuz,47.5922,9.7308
+MB DE-Wörnitz Hammerstatt,49.25922,10.24312,30
+MB DE-Würzburg Randersackerer Straße,49.77624,9.9405
 MB US-Leeds AL Buc-ee’s Blvd,33.54388,-86.5854
 MB US-Waller TX US 290 Frontage Rd,30.07166,-95.9309
 
@@ -20183,7 +20207,7 @@ Mer DE-Lam Arberstraße,49.19673,13.05185
 Mer DE-Landsberg am Lech Am Penzinger Feld,48.0537,10.89018
 Mer DE-Landshut Watzmannstraße,48.5376,12.11976
 Mer DE-Marktl Postmeisterstraße,48.2479,12.8349
-Mer DE-Meckenbeuren Wiesenweg,47.7013,9.55891
+Mer DE-Meckenbeuren Wiesenweg,47.7013,9.5589,25
 Mer DE-Mühldorf am Inn Oderstraße,48.23489,12.54142
 Mer DE-Mühlenfließ Fläming West An der A9,52.13232,12.75021
 Mer DE-Nidda Eisenried,50.41725,9.0183
