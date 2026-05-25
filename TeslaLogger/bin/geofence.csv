@@ -2657,7 +2657,7 @@ Supercharger FR-Marne-la-Vallée,48.83079,2.678036
 Supercharger-V3 FR-Marseille La Valentine,43.29433,5.4798,30
 Supercharger-V3 FR-Megève,45.87187,6.63077
 Supercharger-V4 FR-Mende,44.516001,3.479967
-Supercharger FR-Metz,49.216512,6.171239
+Supercharger-V4 FR-Metz,49.2165,6.17126
 Supercharger-V3 FR-Metz Sud,49.079621,6.10359
 Supercharger-V4 FR-Moisselles,49.04593,2.3357
 Supercharger FR-Mont-Saint-Michel,48.568171,-1.543283
@@ -7173,6 +7173,7 @@ ABC FI-Pori Tikkulantie,61.4882,21.7518
 ABC FI-Porvoo Aleksanterinkaari,60.38702,25.65169
 ABC FI-Raahe Sotaplassintie,64.688,24.5659
 ABC FI-Raisio Piilipuunkatu,60.50545,22.15968
+ABC FI-Ranua Keskustie,65.9285,26.51545
 ABC FI-Raseborg Järnvägsgatan,59.97863,23.44009
 ABC FI-Rauma Unajantie,61.09983,21.50543
 ABC FI-Riihimäki Kinturintie,60.75243,24.73482
@@ -24626,134 +24627,287 @@ Vannkraft NO-Leknes Skreda,68.15215,13.5118
 
 Vattenfall DE-Ahrensburg Reeshoop,53.68,10.2343
 Vattenfall DE-Albstadt Kientenstraße,48.21047,9.01636
+Vattenfall DE-Altenbeken Orthagen,51.74294,8.9494
+Vattenfall DE-Ammersbek Weg zu den Tannen,53.7092,10.2115
+Vattenfall DE-Angermünde Templiner Straße,53.02372,13.995
+Vattenfall DE-Aschendorf An den Bleicherkolken,53.04912,7.326
 Vattenfall DE-Aschersleben Heinrichstraße,51.75464,11.46448
+Vattenfall DE-Aurich Popenser Straße,53.46196,7.4924
+Vattenfall DE-Bad Driburg Erich-Klausener-Straße,51.72572,9.01856
 Vattenfall DE-Bad Driburg Lange Straße,51.73704,9.01044
+Vattenfall DE-Bad Kleinen Wismarsche Straße,53.77072,11.47227
+Vattenfall DE-Bad Lippspringe Detmolder Straße,51.77912,8.81022
+Vattenfall DE-Bad Oeynhausen Volmerdingsener Straße,52.25602,8.77974
+Vattenfall DE-Bad Oldesloe Ratzeburger Straße,53.8081,10.38742
 Vattenfall DE-Bad Saarow Pieskower Straße,52.29196,14.06365
-Vattenfall DE-Beeskow Luchstraße,52.17469,14.24285
-Vattenfall DE-Berlin Allee der Kosmonauten,52.52509,13.52295
+Vattenfall DE-Beelen Lilienweg,51.929,8.1247
+Vattenfall DE-Beeskow Luchstraße,52.1747,14.24285
+Vattenfall DE-Belgern Torgauer Straße,51.48163,13.11914
+Vattenfall DE-Berlin Allee der Kosmonauten,52.5251,13.52295
+Vattenfall DE-Berlin Alt-Heiligensee,52.61067,13.21512
 Vattenfall DE-Berlin Am Gehrensee,52.57257,13.56457
 Vattenfall DE-Berlin Blankenburger Straße,52.58283,13.41295
 Vattenfall DE-Berlin Bornitzstraße,52.52035,13.48665
-Vattenfall DE-Berlin Dahlwitzer Straße,52.52099,13.64725
+Vattenfall DE-Berlin Chemnitzer Straße,52.4982,13.57762
+Vattenfall DE-Berlin Dahlwitzer Straße,52.521,13.64725
+Vattenfall DE-Berlin Eichbuschallee,52.4715,13.47907
 Vattenfall DE-Berlin Erich-Weinert-Straße,52.54756,13.4299
-Vattenfall DE-Berlin Eschengraben,52.55647,13.42361
+Vattenfall DE-Berlin Eschengraben,52.55647,13.4236
 Vattenfall DE-Berlin Forum Steglitz,52.46506,13.32536
+Vattenfall DE-Berlin Fürstenwalder Allee,52.4381,13.69375
 Vattenfall DE-Berlin Glienicker Weg,52.43418,13.55615
-Vattenfall DE-Berlin Gülzower Straße,52.51459,13.58354
+Vattenfall DE-Berlin Gotthardstraße,52.5665,13.34554
+Vattenfall DE-Berlin Gülzower Straße,52.5146,13.58354
 Vattenfall DE-Berlin Heckerdamm,52.53988,13.29568
 Vattenfall DE-Berlin Kiefholzstraße,52.49135,13.45097
 Vattenfall DE-Berlin Köpenicker Straße,52.50244,13.56213
-Vattenfall DE-Berlin Malchower Weg,52.55469,13.50271
+Vattenfall DE-Berlin Louis-Lewin-Straße,52.5332,13.62258
+Vattenfall DE-Berlin Malchower Weg,52.5547,13.5027
+Vattenfall DE-Berlin Oranienburger Straße,52.58064,13.33314
+Vattenfall DE-Berlin Rosenthaler Weg,52.60814,13.42963
 Vattenfall DE-Berlin Rothenbachstraße,52.57132,13.43023
-Vattenfall DE-Berlin Segelfliegerdamm,52.44488,13.51059
+Vattenfall DE-Berlin Segelfliegerdamm,52.44488,13.5106
+Vattenfall DE-Berlin Sophie-Charlotten-Straße,52.51693,13.2865
 Vattenfall DE-Berlin Stahlheimer Straße,52.54817,13.41965
 Vattenfall DE-Berlin Straße vor Schönholz,52.57596,13.37936
-Vattenfall DE-Berlin Teichbergstraße,52.61786,13.48569
+Vattenfall DE-Berlin Teichbergstraße,52.61786,13.4857
 Vattenfall DE-Berlin Wolframstraße,52.45338,13.37817
-Vattenfall DE-Birkenwerder Birkenwerderstraße,52.68671,13.28249
-Vattenfall DE-Bismark Breite Straße,52.66196,11.55486
+Vattenfall DE-Bielefeld Berliner Straße,51.98336,8.50605
+Vattenfall DE-Bielefeld Eickumer Straße,52.09835,8.52995
+Vattenfall DE-Bielefeld Elverdisser Straße,52.0597,8.6183
+Vattenfall DE-Bielefeld Jöllenbecker Straße,52.0966,8.51286
+Vattenfall DE-Bielefeld Wertherstraße,52.04862,8.45596
+Vattenfall DE-Birkenwerder Birkenwerderstraße,52.6867,13.2825
+Vattenfall DE-Bischofswerda Kamenzer Straße,51.13478,14.17942
+Vattenfall DE-Bismark (Altmark) Breite Straße,52.66196,11.55486
 Vattenfall DE-Blankenfelde-Mahlow Ibsenstraße,52.35956,13.42427
+Vattenfall DE-Blankenfelde-Mahlow Jühnsdorfer Weg,52.3295,13.4086
+Vattenfall DE-Bockhorn Am Markt,53.39376,8.01334
 Vattenfall DE-Borna Sachsenallee,51.12427,12.4927
+Vattenfall DE-Brakel Ostheimer Straße,51.71525,9.19005
+Vattenfall DE-Bramsche Meyers Tannen,52.40216,7.99255
 Vattenfall DE-Brandenburg an der Havel Am Gleisdreieck,52.38735,12.40886
+Vattenfall DE-Brandenburg an der Havel Karl-Marx-Straße,52.41502,12.5381
+Vattenfall DE-Brandenburg an der Havel Ziesarer Landstraße,52.38144,12.5212
 Vattenfall DE-Brieselang Karl-Marx-Straße,52.58232,13.01264
+Vattenfall DE-Brüel Am Mühlenberg,53.73423,11.7191
+Vattenfall DE-Bunde Neuschanzer Straße,53.18304,7.26512
 Vattenfall DE-Bösel Friesoyther Straße,53.0058,7.95263
-Vattenfall DE-CB Leuthener Straße,51.74081,14.33216
+Vattenfall DE-Bünde Osnabrücker Straße,52.1928,8.5257
+Vattenfall DE-Chemnitz Limbacher Straße,50.83622,12.89487
+Vattenfall DE-Cloppenburg Cappelner Straße,52.84254,8.05346
+Vattenfall DE-Cottbus Leuthener Straße,51.7408,14.33216
 Vattenfall DE-Crimmitschau Leipziger Straße,50.8235,12.38762
+Vattenfall DE-Crivitz Goldberger Straße,53.57612,11.66172
 Vattenfall DE-Delitzsch Dübener Straße,51.53124,12.35516
 Vattenfall DE-Demmin Jarmener Straße,53.90595,13.05095
+Vattenfall DE-Demmin Stavenhagener Straße,53.8986,13.04114
+Vattenfall DE-Dessau-Roßlau Kornhausstraße,51.8476,12.2237
+Vattenfall DE-Detmold Elisabethstraße,51.93983,8.8668
+Vattenfall DE-Detmold Mohnweg,51.92406,8.83894
 Vattenfall DE-Diepholz Flöthestraße,52.60725,8.36603
-Vattenfall DE-Dresden Lindengasse,51.04169,13.74068
+Vattenfall DE-Dresden Industriestraße,51.09017,13.70673
+Vattenfall DE-Dresden Lindengasse,51.0417,13.74068
+Vattenfall DE-Dresden Pirnaer Landstraße,51.00968,13.8296
+Vattenfall DE-Dresden Prohliser Allee,51.0079,13.8023
 Vattenfall DE-Eberswalde Eberswalder Straße,52.83794,13.73565
-Vattenfall DE-Eggersdorf Am Fuchsbau,52.53211,13.80711
+Vattenfall DE-Eberswalde Freienwalder Straße,52.82803,13.8382
+Vattenfall DE-Edewecht Hauptstraße,53.13182,7.9867
+Vattenfall DE-Eggersdorf Am Fuchsbau,52.5321,13.8071
+Vattenfall DE-Eichwalde Zeuthener Straße,52.37665,13.64258
+Vattenfall DE-Enger Spenger Straße,52.14057,8.50877
 Vattenfall DE-Erfurt Gothaer Straße,50.96046,10.99164
 Vattenfall DE-Esens Auricher Straße,53.63117,7.6138
-Vattenfall DE-Eutin Bürgermeister-Steenbock-Straße,54.13031,10.61728
-Vattenfall DE-Finsterwalde Langer Damm,51.62868,13.71401
+Vattenfall DE-Eutin Bürgermeister-Steenbock-Straße,54.1303,10.61728
+Vattenfall DE-Falkensee Nauener Straße,52.58064,13.07353
+Vattenfall DE-Ferdinandshof Pasewalker Straße,53.66216,13.89866
+Vattenfall DE-Finsterwalde Langer Damm,51.62868,13.714
 Vattenfall DE-Frankfurt (Oder) Markendorfer Straße,52.3421,14.52887
 Vattenfall DE-Frankfurt (Oder) Spartakusring,52.33324,14.53948
-Vattenfall DE-Frankfurt am Main Georg-Baumgarten-Straße,50.05441,8.5908
+Vattenfall DE-Frankfurt am Main Georg-Baumgarten-Straße,50.0544,8.5908
+Vattenfall DE-Fredersdorf-Vogelsdorf Altlandsberger Chaussee,52.52693,13.762
+Vattenfall DE-Freiberg Chemnitzer Straße,50.91116,13.32402
 Vattenfall DE-Fürstenwalde /Spree August-Bebel-Straße,52.3436,14.07335
+Vattenfall DE-Gardelegen Hopfenstraße,52.51847,11.39735
+Vattenfall DE-Genthin Magdeburger Straße,52.398,12.14626
+Vattenfall DE-Georgsmarienhütte Ulmenstraße,52.20776,8.03754
+Vattenfall DE-Glandorf Füchtorfer Straße,52.07992,8.00023
 Vattenfall DE-Glinde Kaposvar-Spange,53.54523,10.22746
-Vattenfall DE-Gnoien Friedenstraße,53.97279,12.7069
-Vattenfall DE-Greifswald Anklamer Str,54.09151,13.39099
-Vattenfall DE-Greifswald Loitzer Landstraße,54.08141,13.35898
-Vattenfall DE-Greifswald Warschauer Straße,54.09101,13.42045
+Vattenfall DE-Gnoien Friedenstraße,53.9728,12.7069
+Vattenfall DE-Graben-Neudorf Heidelberger Straße,49.16254,8.49225
+Vattenfall DE-Greifswald Anklamer Str,54.0915,13.391
+Vattenfall DE-Greifswald Loitzer Landstraße,54.0814,13.35898
+Vattenfall DE-Greifswald Sandfuhr,54.07585,13.40666
+Vattenfall DE-Greifswald Warschauer Straße,54.091,13.42045
 Vattenfall DE-Großröhrsdorf Bandweberstraße,51.1453,14.02882
-Vattenfall DE-Grünheide (Mark) Karl-Marx-Straße,52.42074,13.82279
+Vattenfall DE-Grömitz Neustädter Straße,54.15277,10.95524
+Vattenfall DE-Grünheide (Mark) Karl-Marx-Straße,52.42074,13.8228
+Vattenfall DE-Güstrow Platz der Freundschaft,53.7784,12.1797
+Vattenfall DE-Gütersloh Spexarder Postweg,51.8809,8.39307
+Vattenfall DE-Hagenow Goethestraße,53.43502,11.2023
+Vattenfall DE-Halle (Saale) Böllberger Weg,51.46548,11.95367
+Vattenfall DE-Halle (Saale) Industriestraße,51.4366,11.974
+Vattenfall DE-Halle (Saale) Liebenauer Straße,51.46783,11.9777
+Vattenfall DE-Halle (Saale) Lieskauer Straße,51.50845,11.8816
+Vattenfall DE-Halle (Saale) Mötzlicher Straße,51.51407,11.96397
+Vattenfall DE-Halle (Westf.) Lange Straße,52.06294,8.3577
 Vattenfall DE-Hamburg Alter Zollweg,53.61448,10.15272
 Vattenfall DE-Hamburg Fuhlsbüttler Straße,53.58927,10.0456
 Vattenfall DE-Hameln Klütstraße,52.1034,9.33647
-Vattenfall DE-Havelberg Semmelweisstraße,52.82918,12.07939
-Vattenfall DE-Hemmoor Otto-Peschel-Straße,53.68378,9.15941
+Vattenfall DE-Havelberg Semmelweisstraße,52.82918,12.0794
+Vattenfall DE-Hemmoor Otto-Peschel-Straße,53.68378,9.1594
 Vattenfall DE-Hennigsdorf Rigaer Straße,52.65083,13.19594
+Vattenfall DE-Henstedt-Ulzburg Norderstedter Straße,53.78838,10.0011
 Vattenfall DE-Heringsdorf Lindenstraße,53.93816,14.1867
 Vattenfall DE-Herzberg (Elster) Leipziger Straße,51.69252,13.22938
+Vattenfall DE-Hesel Im Brink,53.29966,7.59443
+Vattenfall DE-Hilter am Teutoburger Wald Iburger Straße,52.18558,8.13947
 Vattenfall DE-Hinte Gewerbestraße,53.40954,7.19944
 Vattenfall DE-Horn-Bad Meinberg Bahnhofstraße,51.87682,8.9553
 Vattenfall DE-Ihlow 2. Kompanieweg,53.40652,7.43955
+Vattenfall DE-Ilsenburg (Harz) Am Steinkreis,51.84836,10.7376
+Vattenfall DE-Jarmen Müssentiner Weg,53.92327,13.332
+Vattenfall DE-Kiel Rendsburger Landstraße,53.07446,10.0919
+Vattenfall DE-Kleinmachnow Heidefeld,52.4003,13.20083
+Vattenfall DE-Koserow Hauptstraße,54.0464,14.00215
+Vattenfall DE-Krakow am See Stellwerkswiese,53.64828,12.26476
 Vattenfall DE-Köln Holzmarkt,50.93045,6.96176,30
-Vattenfall DE-Königs Wusterhausen Cottbuser Straße,52.28859,13.6282
-Vattenfall DE-Königs Wusterhausen Darwinbogen,52.30331,13.60112
-Vattenfall DE-Lieberose Cottbuser Straße,51.98234,14.29929
-Vattenfall DE-Limbach-Oberfrohna Kleines Dörfchen,50.86222,12.76091
+Vattenfall DE-Königs Wusterhausen Cottbuser Straße,52.2886,13.6282
+Vattenfall DE-Königs Wusterhausen Darwinbogen,52.3033,13.60112
+Vattenfall DE-Lalendorf Koppelweg,53.75877,12.38545
+Vattenfall DE-Lathen Große Straße,52.86066,7.31744
+Vattenfall DE-Leipzig Burgauenstraße,51.35484,12.30143
+Vattenfall DE-Leipzig Lützner Straße,51.31712,12.26657
+Vattenfall DE-Lieberose Cottbuser Straße,51.98234,14.2993
+Vattenfall DE-Limbach-Oberfrohna Kleines Dörfchen,50.86222,12.7609
 Vattenfall DE-Lohne (Oldenburg) Meyerhofstraße,52.66756,8.23544
+Vattenfall DE-Loitz Steintor,53.96923,13.12414
+Vattenfall DE-Lutherstadt Eisleben Freistraße,51.52985,11.54847
+Vattenfall DE-Lychen Zehdenicker Straße,53.20332,13.32106
+Vattenfall DE-Löcknitz Chausseestraße,53.4533,14.21807
+Vattenfall DE-Lübbecke Ravensberger Straße,52.30303,8.69237
 Vattenfall DE-Lübeck Mecklenburger Straße,53.88818,10.78717
+Vattenfall DE-Lübz Eisenbeissstraße,53.46228,12.02036
+Vattenfall DE-Lügde Schlesier Straße,51.96595,9.23472
 Vattenfall DE-Lüneburg Neue Sülze,53.24828,10.40408
+Vattenfall DE-Magdeburg Große Diesdorfer Straße,52.12874,11.5984
+Vattenfall DE-Magdeburg Milchweg,52.1655,11.62564
+Vattenfall DE-Malchin Teichstraße,53.74176,12.76578
 Vattenfall DE-Malchow Friedrich-Ebert-Straße,53.47683,12.42158
+Vattenfall DE-Meißen Dresdner Straße,51.1604,13.48422
 Vattenfall DE-Meldorf Zingelstraße,54.08942,9.07948
 Vattenfall DE-Melsungen Pfieffewiesen,51.10778,9.56068
+Vattenfall DE-Mirow Mühlenstraße,53.27248,12.8095
+Vattenfall DE-Munster Breloher Straße,53.00143,10.0895
 Vattenfall DE-Müncheberg Bergstraße,52.5067,14.13312
-Vattenfall DE-Neuenhagen Lindenstraße,52.53001,13.66911
+Vattenfall DE-München Arnulfstraße,48.14183,11.55997
+Vattenfall DE-Neubrandenburg Lindenstraße,53.5375,13.26258
+Vattenfall DE-Neubrandenburg Max-Adrion-Straße,53.57516,13.2791
+Vattenfall DE-Neuenhagen Lindenstraße,52.53,13.6691
+Vattenfall DE-Neumünster Altonaer Straße,54.06372,9.9855
+Vattenfall DE-Neuruppin Bütower Weg,52.92077,12.78635
+Vattenfall DE-Neustrelitz Karbe-Wagner-Straße,53.355,13.08707
+Vattenfall DE-Neustrelitz Zierker Straße,53.36685,13.05707
 Vattenfall DE-Neuzelle Waldstraße,52.09312,14.63412
-Vattenfall DE-Norden Gewerbestraße,53.60161,7.18448
+Vattenfall DE-Norden Gewerbestraße,53.6016,7.18448
 Vattenfall DE-Norderstedt Tangstedter Landstraße,53.68273,10.03177
 Vattenfall DE-Oberkrämer Lindenallee,52.71972,13.09943
+Vattenfall DE-Oldenburg (Oldb) Bremer Heerstraße,53.12483,8.24608
 Vattenfall DE-Oldenburg in Holstein Holsteiner Straße,54.291,10.88823
 Vattenfall DE-Oldenburg Posthalterweg,53.1596,8.17312
-Vattenfall DE-Panketal Neue Kärntner Straße,52.62938,13.52789
+Vattenfall DE-Oschersleben (Bode) Friedrichstraße,52.03276,11.23156
+Vattenfall DE-Osnabrück Mönkedieckstraße,52.29924,8.06066
+Vattenfall DE-Ostseebad Binz Proraer Chaussee,54.4034,13.60206
+Vattenfall DE-Panketal Neue Kärntner Straße,52.62938,13.5279
+Vattenfall DE-Papenburg Umländerwiek links,53.07573,7.4443
+Vattenfall DE-Parchim Westring,53.42636,11.82762
 Vattenfall DE-Pasewalk Bahnhofstraße,53.51353,13.98435
-Vattenfall DE-Potsdam Kaiser-Friedrich-Straße,52.40584,13.01089
+Vattenfall DE-Penzlin Bahnhofplatz,53.50705,13.08433
+Vattenfall DE-Pirna Königsteiner Straße,50.95854,13.93772
+Vattenfall DE-Potsdam Erich-Weinert-Straße,52.36432,13.09558
+Vattenfall DE-Potsdam Kaiser-Friedrich-Straße,52.40584,13.0109
 Vattenfall DE-Preetz Garnkorb,54.23586,10.28303
+Vattenfall DE-Prenzlau Neubrandenburger Straße,53.3175,13.8547
+Vattenfall DE-Pritzwalk Schwalbenweg,53.14888,12.15906
+Vattenfall DE-Putbus Am Mühlenberg,54.35215,13.46407
 Vattenfall DE-Quedlinburg Häuschenstraße,51.72764,11.13567
 Vattenfall DE-Quickborn Ulzburger Landstraße,53.74857,9.9579
-Vattenfall DE-Radeberg Dresdener Straße,51.1126,13.89819
-Vattenfall DE-Rangsdorf Kienitzer Straße,52.29488,13.43379
+Vattenfall DE-Radeberg Dresdener Straße,51.1126,13.8982
+Vattenfall DE-Rangsdorf Kienitzer Straße,52.29488,13.4338
+Vattenfall DE-Rathenow Bammer Landstraße,52.60326,12.35433
+Vattenfall DE-Ratzeburg Heinrich-Hertz-Straße,53.69933,10.74378
 Vattenfall DE-Rellingen Kellerstraße,53.63136,9.87292
+Vattenfall DE-Ribnitz-Damgarten Damgartener Chaussee,54.2432,12.4385
 Vattenfall DE-Riesa Berliner Straße,51.30735,13.29327
+Vattenfall DE-Rohrsen Am Büschen,52.70293,9.2413
+Vattenfall DE-Rostock Flaßkoppweg,54.08065,12.18715
 Vattenfall DE-Rostock Friedrichstraße,54.09174,12.12422
+Vattenfall DE-Rostock Johannes-Kepler-Straße,54.08775,12.0824
 Vattenfall DE-Rostock Martin-Andersen-Nexö-Ring,54.11888,12.05972
-Vattenfall DE-Rostock Ziolkowskistraße,54.07318,12.12311
-Vattenfall DE-Rostock Zum Laakkanal,54.15469,12.07263
-Vattenfall DE-Rövershagen Graal-Müritzer-Straße,54.17498,12.23699
-Vattenfall DE-Salzwedel Bahnhofstraße,52.85776,11.15731
+Vattenfall DE-Rostock Warnemünder Straße,54.19317,12.14754
+Vattenfall DE-Rostock Ziolkowskistraße,54.07318,12.1231
+Vattenfall DE-Rostock Zum Laakkanal,54.1547,12.07263
+Vattenfall DE-Rövershagen Graal-Müritzer-Straße,54.17498,12.237
+Vattenfall DE-Salzwedel Bahnhofstraße,52.85776,11.1573
+Vattenfall DE-Sassnitz Gerhart-Hauptmann-Ring,54.51186,13.6288
+Vattenfall DE-Scheeßel Mühlenstraße,53.16776,9.48078
 Vattenfall DE-Schildow Bahnhofstraße,52.63636,13.3741
-Vattenfall DE-Schwedt /Oder Julian-Marchlewski-Ring,53.06195,14.27556
-Vattenfall DE-Schwerin Dahlenweg,53.62759,11.37235
-Vattenfall DE-Schwerin Ratzeburger Straße,53.64854,11.35361
+Vattenfall DE-Schwaan Doberaner Straße,53.94388,12.0995
+Vattenfall DE-Schwedeneck Eckernförder Straße,54.4699,10.0731
+Vattenfall DE-Schwedt/Oder Julian-Marchlewski-Ring,53.06195,14.27556
+Vattenfall DE-Schwerin Alte Crivitzer Landstraße,53.5993,11.47643
+Vattenfall DE-Schwerin Blumenbrink,53.6033,11.42427
+Vattenfall DE-Schwerin Dohlenweg,53.6276,11.37235
+Vattenfall DE-Schwerin Karl-Kleinschmidt-Straße,53.59135,11.4029
+Vattenfall DE-Schwerin Ratzeburger Straße,53.64854,11.3536
+Vattenfall DE-Schönberg Dassower Straße,53.85452,10.9272
 Vattenfall DE-Schönebeck (Elbe) Am Stadtfeld,52.01372,11.72872
 Vattenfall DE-Seelow Berliner Straße,52.53257,14.3765
+Vattenfall DE-Seelow Küstriner Straße,52.53463,14.38252
 Vattenfall DE-Sellin Friedrich-von-Hagenow-Straße,54.36583,13.70307
-Vattenfall DE-Stavenhagen Malchiner Straße,53.69993,12.90181
-Vattenfall DE-Stendal Tangermünder Straße,52.59868,11.86539
+Vattenfall DE-Stavenhagen Malchiner Straße,53.69993,12.9018
+Vattenfall DE-Steimbke Altes Ölfeld,52.65462,9.40274
+Vattenfall DE-Stendal Stadtseeallee,52.60245,11.84685
+Vattenfall DE-Stendal Tangermünder Straße,52.59868,11.8654
 Vattenfall DE-Stralsund Carl-Heydemann-Ring,54.31197,13.06954
 Vattenfall DE-Stralsund Knieperdamm,54.32317,13.07952
 Vattenfall DE-Stralsund Richtenberger Chaussee,54.30145,13.06277
-Vattenfall DE-Stuhr Carl-Zeiss-Straße,53.02926,8.80011
+Vattenfall DE-Stuhr Carl-Zeiss-Straße,53.02926,8.8001
+Vattenfall DE-Sögel Wahner Straße,52.84388,7.51535
 Vattenfall DE-Südbrookmerland Koppelweg,53.49105,7.3607
+Vattenfall DE-Tangerhütte Rosa-Luxemburg-Straße,52.43456,11.80105
 Vattenfall DE-Templin Lychener Straße,53.12728,13.49143
 Vattenfall DE-Teterow Heinrich-von-Thünen-Straße,53.77036,12.57558
 Vattenfall DE-Teupitz Buchholzer Straße,52.13212,13.62035
+Vattenfall DE-Teutschenthal Hallesche Straße,51.45717,11.82282
+Vattenfall DE-Trassenheide Bahnhofstraße,54.08817,13.8626
+Vattenfall DE-Ueckermünde Chausseestraße,53.73256,14.02947
 Vattenfall DE-Uelzen Holdenstedter Straße,52.92605,10.52817
-Vattenfall DE-Uelzen Hugo-Steinfeld-Straße,52.99049,10.50517
+Vattenfall DE-Uelzen Hugo-Steinfeld-Straße,52.9905,10.50517
 Vattenfall DE-Uetersen Tornescher Weg,53.68983,9.68817
-Vattenfall DE-Upgant-Schott Widzel-Tom-Brook-Straße,53.52372,7.28419
-Vattenfall DE-Vechta Hauptstraße,52.78216,8.25841
-Vattenfall DE-Velten Lindenstraße,52.68582,13.18349
-Vattenfall DE-Wahlstedt Segeberger Straße,53.95273,10.21439
+Vattenfall DE-Upgant-Schott Widzel-Tom-Brook-Straße,53.52372,7.2842
+Vattenfall DE-Uplengen Ostertorstraße,53.30485,7.747
+Vattenfall DE-Varel Bürgermeister-Heidenreich-Straße,53.39576,8.1304
+Vattenfall DE-Vechta Falkenrotter Straße,52.732,8.26618
+Vattenfall DE-Vechta Hauptstraße,52.78216,8.2584
+Vattenfall DE-Velten Lindenstraße,52.68582,13.1835
+Vattenfall DE-Wacken Gehrn,54.0202,9.387
+Vattenfall DE-Wahlstedt Segeberger Straße,53.95273,10.2144
+Vattenfall DE-Walsrode Cordinger Straße,52.90488,9.62767
+Vattenfall DE-Weißenfels Naumburger Straße,51.19795,11.96368
 Vattenfall DE-Werlte Unfriedstraße,52.84954,7.65874
+Vattenfall DE-Wesenberg Mirower Chaussee,53.2807,12.96022
+Vattenfall DE-Westerstede Am Esch,53.2601,7.93157
 Vattenfall DE-Westoverledingen Ihrener Straße,53.16546,7.45495
 Vattenfall DE-Wildeshausen Westring,52.89272,8.41482
-Vattenfall DE-Wittstock/Dosse Polthierstraße,53.1563,12.48221
+Vattenfall DE-Wismar Begonienweg,53.87837,11.42815
+Vattenfall DE-Wismar Rudolf-Breitscheid-Straße,53.8985,11.42165
+Vattenfall DE-Wittenburg Pappelweg,53.503,11.0848
+Vattenfall DE-Wittstock/Dosse Polthierstraße,53.1563,12.4822
+Vattenfall DE-Woldegk Zur Ziegelei,53.46128,13.57834
+Vattenfall DE-Wolgast Dr.-Theodor-Neubauer-Straße,54.05146,13.76172
+Vattenfall DE-Wunstorf Leinenweberstraße,52.45377,9.35837
+Vattenfall DE-Zehdenick Marianne-Grunthal-Straße,52.9742,13.33133
 Vattenfall DE-Zossen Gerichtstraße,52.2175,13.46945
 Vattenfall DE-Zossen Gutstedtstraße,52.17047,13.47152
 Vattenfall NL-Apeldoorn Lange Amerikaweg,52.17888,5.98485,30
