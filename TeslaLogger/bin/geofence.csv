@@ -1989,7 +1989,7 @@ Supercharger-V4 DE-Hamm,51.6271,7.8429
 Supercharger-V4 DE-Hamm Werne,51.69805,7.67115
 Supercharger-V3 DE-Hanau,50.10494,8.9161
 Supercharger-V4 DE-Hanau (Cafe Del Sol),50.12462,8.9456
-Supercharger-V4 DE Hanau-West,50.11209,8.89609,25
+Supercharger-V4 DE Hanau-West,50.1121,8.8961
 Supercharger-V3 DE-Hannover,52.42322,9.83502,24
 Supercharger-V4 DE-Hannover Hannoversche Straße,52.43375,9.8642
 Supercharger-V4 DE-Harrislee,54.795,9.377717
@@ -8957,7 +8957,6 @@ be.energised DE-St. Ingbert Geistkircher Straße,49.27805,7.1802
 be.energised NL-Sneek Oude Oppenhuizerweg,53.02853,5.67214
 
 BeCharge AT-Pirching an der Raab Pirching,47.08947,15.73267
-BeCharge DE-Cottbus Hänchener Straße,51.72065,14.34302
 BeCharge DE-Staufenberg Siemensstraße,50.65494,8.73327
 BeCharge IT-Alba Adriatica Piazza Aldo Moro,42.83535,13.9307
 BeCharge IT-Albenga Regione Cime di Leca,44.06601,8.1763
@@ -21804,8 +21803,37 @@ PKP PL-Wrocław Marszałka Józefa Piłsudskiego,51.09902,17.03853
 Plan-Net-solar SI-Ljubljana Celovška cesta,46.09948,14.45996
 
 Plenitude CH-Delémont Rte de Porrentruy,47.3609,7.33547
+Plenitude DE-Ahrensfelde Blumberger Chaussee,52.5826,13.58773
 Plenitude DE-Alsfeld An der Hessenhalle,50.7385,9.24728,40
+Plenitude DE-Altenburg Leipziger Straße,51.0098,12.4536
+Plenitude DE-Autohof Gollhofen,49.58572,10.1761
+Plenitude DE-Bad Tölz Lenggrieser Straße,47.75338,11.56124
+Plenitude DE-Berlin Adlergestell,52.4323,13.5461
+Plenitude DE-Bogen Gewerbegebiet Bärndorf,48.9165,12.73132
+Plenitude DE-Bremen Vegesacker Straße,53.09743,8.78496
+Plenitude DE-Cham Further Straße,49.22273,12.67062
+Plenitude DE-Cottbus Hänchener Straße,51.72065,14.34302
+Plenitude DE-Ebermannsdorf Messerschmittstraße,49.39705,11.987
+Plenitude DE-Elsendorf Langweid,48.71648,11.80028
+Plenitude DE-Forchheim Bayreuther Straße,49.7152,11.07965
+Plenitude DE-Gersthofen Mercedesring,48.4368,10.86905
+Plenitude DE-Hagen im Bremischen Amtsplatz,53.35362,8.64208
+Plenitude DE-Hagen im Bremischen Weißenberg,53.3714,8.60192
+Plenitude DE-Hemsbach Hüttenfelder Straße,49.59278,8.63994
+Plenitude DE-Ingolstadt Am Hochfeldweg,48.70538,11.42122
+Plenitude DE-Ingolstadt Manchinger Straße,48.74606,11.46956
+Plenitude DE-Ingolstadt Römerstraße,48.776,11.4552
+Plenitude DE-Ismaning Münchener Straße,48.22337,11.66913
+Plenitude DE-Leipzig Paunsdorfer Straße,51.33884,12.44527
+Plenitude DE-Magdeburg An der Halberstädter Chaussee,52.08868,11.5679
 Plenitude DE-Magdeburg Olvenstedter Chaussee,52.14033,11.6007
+Plenitude DE-München Verdistraße,48.16454,11.4591
+Plenitude DE-München-Flughafen Erdinger Allee,48.3615,11.82192
+Plenitude DE-Obing Seeoner Straße,47.99965,12.40966
+Plenitude DE-Reichertshofen Obere Hauptstraße,48.6449,11.5135
+Plenitude DE-Riegel Leopoldstraße,48.15456,7.75523
+Plenitude DE-Thurnau Industriestraße,50.02157,11.4081
+Plenitude DE-Weiterstadt Rudolf-Diesel-Straße,49.8998,8.61568
 Plenitude IT-Abano Terme Via Monteortone,45.35475,11.77765
 Plenitude IT-Bollate Via Pace,45.55967,9.13734
 Plenitude IT-Bologna Via Antoniotto Usodimare,44.51902,11.32701
@@ -23558,6 +23586,7 @@ SW-Hameln DE-Hameln Bahnhofsplatz,52.10128,9.37431,25
 SW-Hameln DE-Hameln Erichstraße,52.10772,9.35551
 SW-Hameln DE-Hameln Kastanienwall,52.10577,9.36046
 SW-Hamm DE-Hamm Karl-Koßmann-Straße,51.6863,7.8854
+SW-Hanau DE-Hanau Rondo,50.11238,8.89514,25
 SW-Harsewinkel DE-Harsewinkel Talstraße,51.96534,8.21957
 SW-Hattingen DE-Hattingen Bruchstraße,51.39433,7.17854
 SW-Hattingen DE-Hattingen Bruchstraße,51.39635,7.18262
@@ -23976,7 +24005,7 @@ TankE DE-Bornheim Rathausstraße,50.75727,7.00444
 TankE DE-Brilon Möhnestraße,51.40928,8.5784
 TankE DE-Brüggen St.-Barbara-Straße,51.2563,6.17423
 TankE DE-Dieburg Dieselstraße,49.91037,8.862
-TankE DE-Korbach Nordring,51.28093,8.85834
+TankE DE-Korbach Nordring,51.28092,8.85835
 TankE DE-Köln Adolf-Kober-Straße,50.9823,6.99772
 TankE DE-Köln Agrippastraße,50.93312,6.95214
 TankE DE-Köln Am Donewald,51.005,7.02705
@@ -25324,7 +25353,30 @@ VSW DE-Ratzeburg Schloßwiese,53.69925,10.76584
 
 Wally’s US-Pontiac IL Holiday Rd,40.87077,-88.66856
 
+Walmart US-Bedford TX Hwy 121,32.86304,-97.10517
+Walmart US-Bentonville AR N Walton Blvd,36.3894,-94.21987
+Walmart US-Bentonville AR SE 14th St,36.35472,-94.171
+Walmart US-Bentonville AR SW Regional Airport Blvd,36.33676,-94.22337
+Walmart US-Checotah OK Paul Carr Dr,35.47036,-95.53597
+Walmart US-Colorado Springs CO Razorback Rd,38.95024,-104.8006
+Walmart US-Cross Roads TX US-380,33.22713,-96.98322
+Walmart US-Fort Worth TX Golden Triangle Blvd,32.93173,-97.2684
 Walmart US-Freehold NJ W Main St,40.24358,-74.2952
+Walmart US-Indian Land SC Charlotte Hwy,35.01087,-80.85097
+Walmart US-Lakeland FL Florida Ave S,28.0009,-81.958
+Walmart US-McAlester OK S George Nigh Expy,34.91806,-95.7416
+Walmart US-McKinney TX Redbud Blvd,33.2205,-96.62957
+Walmart US-Mesa AZ E McKellips Rd,33.45047,-111.73283
+Walmart US-Mesa AZ E Southern Ave,33.39245,-111.69837
+Walmart US-Mesa AZ S Greenfield Rd,33.3838,-111.7407
+Walmart US-Mesa AZ S Signal Butte Rd,33.38353,-111.59945
+Walmart US-Murphy TX W Farm To Market,33.01268,-96.6148
+Walmart US-North Richland Hills TX NE Loop 820,32.8417,-97.24765
+Walmart US-Oklahoma City OK W Memorial Rd,35.60454,-97.54694
+Walmart US-Plano TX N Central Expy,33.05686,-96.69687
+Walmart US-Rogers AR W Pauline Whitaker Pkwy,36.29612,-94.18657
+Walmart US-San Antonio TX Thousand Oaks Dr,29.55316,-98.40838
+Walmart US-Springdale AR Elm Springs Rd,36.195,-94.18522
 
 Wattif AT-Nauders Doktor-Tschiggfrey-Straße,46.88905,10.50173
 Wattif DE-Binz Forsthaus Prora,54.43456,13.55749
@@ -26009,7 +26061,6 @@ DE Hamburg Super 8 by Wyndham,53.5513,10.03152
 DE Hamburg-Niendorf METRO,53.6138,9.9646
 DE Hameln Platzstraße,52.1018,9.35787
 DE Hanau Luise-Kiesselbach-Straße,50.14543,8.93568
-DE Hanau Rondo,50.11238,8.89514
 DE Hannover A2 Center,52.42332,9.8354,10
 DE Hannover PZH IFA Uni,52.42688,9.61821
 DE Heidelberg Hauptbahnhof,49.40653,8.67399
