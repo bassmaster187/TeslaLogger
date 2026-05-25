@@ -2614,7 +2614,7 @@ Supercharger-V4 FR-Figeac,44.606988,2.013952
 Supercharger-V4 FR-Fontaine-lès-Dijon,47.355721,5.0322
 Supercharger FR-Fontainebleau,48.349396,2.607344
 Supercharger-V4 FR-Franconville,48.988982,2.208563
-Supercharger-V4 FR-Gallargues-le-Montueux,43.71865,4.18012
+Supercharger-V4 FR-Gallargues-le-Montueux,43.7184,4.1803
 Supercharger-V3 FR-Gap,44.569565,6.104458
 Supercharger-V4 FR-Gassin,43.26302,6.58044
 Supercharger-V4 FR-Goussainville,49.021048,2.467801
@@ -3781,7 +3781,7 @@ Supercharger NO-Skarnes,60.248841,11.743848
 Supercharger NO-Skei,61.575514,6.483532,30
 Supercharger NO-Skibotn,69.392448,20.268423
 Supercharger-V3 NO-Skien,59.206742,9.609061
-Supercharger NO-Skjåk,61.88317,8.267157
+Supercharger-V4 NO-Skjåk,61.88317,8.26694
 Supercharger NO-Skulestadmo,60.658297,6.436256
 Supercharger-V4 NO-Skulestadmo Storrviki,60.65695,6.43733
 Supercharger-V4 NO-Slependen,59.87368,10.50276
@@ -15520,7 +15520,7 @@ EWE-GO DE-Northeim Von Menzel Straße,51.69259,9.98971
 EWE-GO DE-Nossen Augustusberg,51.03647,13.2982
 EWE-GO DE-Nottuln Beisenbusch,51.91085,7.39866,25
 EWE-GO DE-Nördlingen Würzburger Straße,48.85452,10.48264
-EWE-GO DE-Nörten-Hardenberg Unter dem Pferdestiege,51.62918,9.92212,30
+EWE-GO DE-Nörten-Hardenberg Unter dem Pferdestiege,51.62918,9.92212,25
 EWE-GO DE-Nürnberg Heisterstraße,49.42803,11.06155
 EWE-GO DE-Nürnberg Laufamholzstraße,49.46212,11.14101
 EWE-GO DE-Nürnberg Regensburger Straße,49.42748,11.14333
@@ -17933,6 +17933,7 @@ Ionity NO-Rygge,59.3871,10.75119
 Ionity NO-Røldal,59.83325,6.81375
 Ionity NO-Sira,58.40599,6.62316
 Ionity NO-Skei,61.57535,6.4838,15
+Ionity NO-Skjåk Skeimoplassen,61.88244,8.26847
 Ionity NO-Ulvsvåg Hamarøyveien,68.11757,15.87238
 Ionity NO-Vik,60.08331,10.28706
 Ionity NO-Åndalsnes,62.55773,7.68738,40
@@ -21502,7 +21503,7 @@ Pfalzwerke DE-Hamburg Deelböge 21,53.60285,9.98862
 Pfalzwerke DE-Hamburg-Eidelstedt Holsteiner Chaussee,53.61415,9.90585
 Pfalzwerke DE-Hannover Bornumer Straße,52.35897,9.7108
 Pfalzwerke DE-Hatzenbühl Bleichstraße,49.11236,8.25057
-Pfalzwerke DE-Hauenstein Alte Bundesstraße,49.20007,7.83666
+Pfalzwerke DE-Hauenstein Alte Bundesstraße,49.20005,7.83664,25
 Pfalzwerke DE-Hauenstein Schulstraße,49.19142,7.85503
 Pfalzwerke DE-Haßmersheim Hölderlinstraße 1,49.30187,9.14059
 Pfalzwerke DE-Heidelberg Wieblinger Weg,49.41125,8.64674,30
@@ -21802,6 +21803,7 @@ PKP PL-Wrocław Marszałka Józefa Piłsudskiego,51.09902,17.03853
 
 Plan-Net-solar SI-Ljubljana Celovška cesta,46.09948,14.45996
 
+Plenitude CH-Delémont Rte de Porrentruy,47.3609,7.33547
 Plenitude DE-Alsfeld An der Hessenhalle,50.7385,9.24728,40
 Plenitude DE-Magdeburg Olvenstedter Chaussee,52.14033,11.6007
 Plenitude IT-Abano Terme Via Monteortone,45.35475,11.77765
@@ -23318,6 +23320,9 @@ Spreewald-Energy DE-Senftenberg Am Niemtscher Weg,51.49564,14.05136
 
 SSN DE-Schwerin Eckdrift,53.59525,11.39403
 
+SSW DE-St. Wendel Floriansweg,49.46283,7.1667
+
+Stark DE-Hauenstein Alte Bundesstraße,49.20005,7.83614,25
 Stark DE-Scharbeutz Bormwiese,54.05472,10.73083
 
 stations-e FR-Draveil Rue Ferdinand Buisson,48.67351,2.40768
@@ -23963,30 +23968,32 @@ Tango NL-Harderwijk Boekhorstlaan,52.33564,5.64287,20
 Tango NL-Steenbergen Koperslagerij,51.58852,4.30276
 
 TankE DE-Alsfeld An der Bleiche,50.74626,9.27492
-TankE DE-Alsfeld Jahnstraße,50.74674,9.26759
+TankE DE-Alsfeld Jahnstraße,50.74674,9.2676
+TankE DE-Alsfeld Landgraf-Hermann-Straße,50.75273,9.27277
 TankE DE-Bergisch Gladbach Hauptstraße,50.99213,7.1319
 TankE DE-Berlin Turmstraße,52.52646,13.34446
 TankE DE-Bornheim Rathausstraße,50.75727,7.00444
-TankE DE-Brüggen St.-Barbara-Straße,51.25629,6.17423
-TankE DE-Dieburg Dieselstraße,49.91037,8.86199
-TankE DE-Korbach Nordring,51.28092,8.85835
-TankE DE-Köln Adolf-Kober-Straße,50.98231,6.99772
+TankE DE-Brilon Möhnestraße,51.40928,8.5784
+TankE DE-Brüggen St.-Barbara-Straße,51.2563,6.17423
+TankE DE-Dieburg Dieselstraße,49.91037,8.862
+TankE DE-Korbach Nordring,51.28093,8.85834
+TankE DE-Köln Adolf-Kober-Straße,50.9823,6.99772
 TankE DE-Köln Agrippastraße,50.93312,6.95214
-TankE DE-Köln Am Donewald,51.00501,7.02705
-TankE DE-Köln Am Flutgraben,50.96453,7.03749
+TankE DE-Köln Am Donewald,51.005,7.02705
+TankE DE-Köln Am Flutgraben,50.96453,7.0375
 TankE DE-Köln Am Leuschhof,50.88053,7.08408
-TankE DE-Köln Am Malzbüchel,50.93439,6.95979
-TankE DE-Köln Am Römerhof,50.93723,6.86729
+TankE DE-Köln Am Malzbüchel,50.9344,6.9598
+TankE DE-Köln Am Römerhof,50.93723,6.8673
 TankE DE-Köln Am Schwanebitzer Hof,50.88247,7.08042
 TankE DE-Köln Am Südpark,50.8984,6.97583
-TankE DE-Köln An der Lenzwiese,50.92751,7.00113
-TankE DE-Köln Bachstelzenweg,50.96159,6.87253
+TankE DE-Köln An der Lenzwiese,50.9275,7.00113
+TankE DE-Köln Bachstelzenweg,50.9616,6.87253
 TankE DE-Köln Brüggener Straße,50.90526,6.93865
 TankE DE-Köln Brühler Straße,50.8992,6.95306
 TankE DE-Köln Buchheimer Straße,50.96258,7.0031
 TankE DE-Köln Butzweilerstraße,50.94166,7.0098
 TankE DE-Köln Butzweilerstraße,50.98095,6.89722
-TankE DE-Köln Christrosenweg,50.87465,7.05661
+TankE DE-Köln Christrosenweg,50.87465,7.0566
 TankE DE-Köln Dagobertstraße,50.9483,6.95776
 TankE DE-Köln Dreisamweg,50.98522,7.03503
 TankE DE-Köln Dülkenstraße,50.89046,7.05297
@@ -23994,74 +24001,83 @@ TankE DE-Köln Esserstraße,50.93037,6.99655
 TankE DE-Köln Etzelstraße,50.97883,6.93193
 TankE DE-Köln Europaring,50.93436,7.06065
 TankE DE-Köln Euskirchener Straße,50.9189,6.91827
+TankE DE-Köln Fichtenstraße,50.92586,6.87038
 TankE DE-Köln Geisbergstraße,50.90742,6.91963
-TankE DE-Köln Georgsplatz,50.93201,6.95786
+TankE DE-Köln Georgsplatz,50.932,6.95786
 TankE DE-Köln Geraer Straße,50.94174,7.02234
 TankE DE-Köln Gernsheimer Straße,50.93148,7.0382
-TankE DE-Köln Glashüttenstraße,50.887,7.06001
-TankE DE-Köln Gottesweg,50.91417,6.93289
+TankE DE-Köln Glashüttenstraße,50.887,7.06
+TankE DE-Köln Gotenring,50.93588,6.97818
+TankE DE-Köln Gottesweg,50.91417,6.9329
 TankE DE-Köln Hadersleber Straße,50.96362,6.91816
 TankE DE-Köln Halmstraße,50.95672,6.91333
 TankE DE-Köln Hammerschmidtstraße,50.87133,7.02152
 TankE DE-Köln Haselbergstraße,50.93817,6.92294
-TankE DE-Köln Haselnußweg,51.01099,6.90608
+TankE DE-Köln Haselnußweg,51.011,6.90608
+TankE DE-Köln Helmholtzstraße,50.95182,6.9065
 TankE DE-Köln Holzmarkt,50.92982,6.96147,30
 TankE DE-Köln Honschaftsstraße,50.9799,7.03274
 TankE DE-Köln Iltisstraße,50.9639,6.91398
 TankE DE-Köln In der Kreuzau,50.90677,6.99392
 TankE DE-Köln Kalk-Mülheimer Straße,50.94593,7.00174
-TankE DE-Köln Kapuzinerstraße,50.98361,6.94677
+TankE DE-Köln Kapuzinerstraße,50.9836,6.94677
 TankE DE-Köln Karl-Berbuer-Platz,50.92847,6.95693
 TankE DE-Köln Karl-Schüßler-Straße,50.92186,7.08745
-TankE DE-Köln Kierberger Straße,50.91009,6.94625
+TankE DE-Köln Kierberger Straße,50.9101,6.94625
 TankE DE-Köln Klingerstraße,50.88522,7.06267
 TankE DE-Köln Käulchensweg,50.91283,6.98783
-TankE DE-Köln Leichweg,50.90461,6.9496
+TankE DE-Köln Langenbergstraße,51.03492,6.8879
+TankE DE-Köln Leichweg,50.9046,6.9496
 TankE DE-Köln Liverpooler Platz,51.02097,6.89803
 TankE DE-Köln Lortzingplatz,50.93098,6.91165
 TankE DE-Köln Lucas-Cranach-Straße,50.88124,7.01517
-TankE DE-Köln Ludwig-Jahn-Straße,50.86996,6.84711
-TankE DE-Köln Lungengasse,50.93501,6.94617
-TankE DE-Köln Mainstraße,50.88551,6.99972
+TankE DE-Köln Ludwig-Jahn-Straße,50.86996,6.8471
+TankE DE-Köln Lungengasse,50.935,6.94617
+TankE DE-Köln Mainstraße,50.8855,6.99972
 TankE DE-Köln Mathias-Brüggen-Straße,50.98384,6.88505
 TankE DE-Köln Merheimer Straße,50.96102,6.9488
-TankE DE-Köln Merheimer Straße,50.97093,6.94641
-TankE DE-Köln Moses-Heß-Straße,50.98491,6.99677
+TankE DE-Köln Merheimer Straße,50.97093,6.9464
+TankE DE-Köln Moldaustraße,51.0262,6.89213
+TankE DE-Köln Montanusstraße,50.95763,7.01157
+TankE DE-Köln Moses-Heß-Straße,50.9849,6.99677
 TankE DE-Köln Neusser Straße,50.96314,6.9552,25
 TankE DE-Köln Neusser Wall,50.95584,6.96204
-TankE DE-Köln Neusser Wall,50.95609,6.96732
+TankE DE-Köln Neusser Wall,50.9561,6.96732
 TankE DE-Köln Nikolausstraße,50.92315,6.929
 TankE DE-Köln Olpener Straße,50.94618,7.06945
 TankE DE-Köln Otto-Gerig-Straße,50.92838,6.9771
 TankE DE-Köln Ottostraße,50.95236,6.9234
 TankE DE-Köln Peterstraße,50.93386,6.94975
 TankE DE-Köln Pfarrer-Maybaum-Weg,50.97614,7.0396
-TankE DE-Köln Pfarrer-Oermann-Platz,50.89377,7.07819
+TankE DE-Köln Pfarrer-Oermann-Platz,50.89377,7.0782
 TankE DE-Köln Picassoplatz RTL,50.9439,6.9732,60
 TankE DE-Köln Prälat-van-Acken-Straße,50.92532,6.89706
 TankE DE-Köln Reiherstraße,50.87457,6.95848
+TankE DE-Köln Rita-Maiburg-Straße,50.97973,6.89784
 TankE DE-Köln Rosenstraße,50.92657,6.95853
-TankE DE-Köln Salierring,50.92768,6.94431
+TankE DE-Köln Saalestraße,51.0268,6.89048
+TankE DE-Köln Salierring,50.92768,6.9443
 TankE DE-Köln Scheidemannstraße,50.97298,7.04252
-TankE DE-Köln Scheidtweilerstraße,50.93888,6.90681
-TankE DE-Köln Schiefersburger Weg,50.96905,6.93261
-TankE DE-Köln Schlösserstraße,50.95648,6.91601
-TankE DE-Köln Schwalbacher Straße,50.90989,6.94698
+TankE DE-Köln Scheidtweilerstraße,50.93888,6.9068
+TankE DE-Köln Schiefersburger Weg,50.96905,6.9326
+TankE DE-Köln Schlösserstraße,50.95648,6.916
+TankE DE-Köln Schwalbacher Straße,50.9099,6.94698
 TankE DE-Köln St. Sebastianusstraße,50.85664,7.0865
 TankE DE-Köln Stammheimer Straße,50.9649,6.97662
 TankE DE-Köln Steeger Straße,50.96418,7.01962
 TankE DE-Köln Sürther Marktplatz,50.86178,7.00788
-TankE DE-Köln Thorwaldsenstraße,50.93471,7.0272
-TankE DE-Köln Tiefentalstraße,50.97431,7.00984
+TankE DE-Köln Thorwaldsenstraße,50.9347,7.0272
+TankE DE-Köln Tiefentalstraße,50.9743,7.00984
 TankE DE-Köln Venloer Straße,50.95814,6.89898
-TankE DE-Köln Vorsterstraße,50.93879,7.00198
-TankE DE-Köln Walther-Rathenau-Straße,50.89152,6.99761
+TankE DE-Köln Vorsterstraße,50.9388,7.00198
+TankE DE-Köln Waldfriedstraße,50.97972,6.96367
+TankE DE-Köln Walther-Rathenau-Straße,50.89152,6.9976
 TankE DE-Köln Woensamstraße,50.93904,6.92232
-TankE DE-Köln Wupperplatz,50.99009,7.03328
+TankE DE-Köln Wupperplatz,50.9901,7.03328
 TankE DE-Köln Zum Gremberger Wäldchen,50.91552,7.00078
-TankE DE-Köln Zülpicher Straße,50.92151,6.92007
+TankE DE-Köln Zülpicher Straße,50.9215,6.92007
 TankE DE-Leichlingen (Rheinland) Im Brückerfeld,51.10284,7.0134
-TankE DE-Lohmar Frouardplatz,50.84154,7.21141
+TankE DE-Lohmar Frouardplatz,50.84154,7.2114
 TankE DE-Papenburg Hauptkanal Rechts,53.08572,7.38764
 TankE DE-Plüderhausen Hauptstraße,48.79453,9.60114
 TankE DE-Potsdam Hegelallee,52.404,13.05597
