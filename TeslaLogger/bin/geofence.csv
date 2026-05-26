@@ -2815,7 +2815,7 @@ Supercharger-V3 FR-Varennes-Vauzelles,47.02484,3.147264
 Supercharger-V4 FR-Varneville-Bretteville,49.64574,1.04575
 Supercharger-V3 FR-Verniolle,43.074792,1.640626
 Supercharger-V4 FR-Vesoul,47.631408,6.139914
-Supercharger-V4 FR-Vichy,46.11279,3.415589
+Supercharger-V4 FR-Vichy,46.11367,3.41604
 Supercharger FR-Vienne,45.58748,4.78751
 Supercharger-V3 FR-Vierzon,47.245991,2.069667
 Supercharger-V4 FR-Villabé,48.58604,2.44937
@@ -12170,6 +12170,7 @@ EnBW DE-Deißlingen Hirschstraße,48.12523,8.62578
 EnBW DE-Deißlingen Kehlhof,48.1134,8.6053
 EnBW DE-Delbrück,51.75999,8.56196
 EnBW DE-Delmenhorst,53.04493,8.67084
+EnBW DE-Delmenhorst Reinersweg,53.03947,8.67585
 EnBW DE-Denkendorf Furtstraße,48.69386,9.31833
 EnBW DE-Denkendorf Mühlhaldenstraße,48.70108,9.3084
 EnBW DE-Denkendorf Rechbergstraße,48.70298,9.3133
@@ -12512,6 +12513,7 @@ EnBW DE-Halle (Saale) Hellweg,51.44055,11.98462
 EnBW DE-Halle (Saale) Leipziger Chaussee,51.45609,12.0146
 EnBW DE-Hallstadt Biegenhofstraße,49.91779,10.86915
 EnBW DE-Haltern am See,51.73314,7.168
+EnBW DE-Hamburg Kieler Straße,53.57986,9.9356
 EnBW DE-Hamburg Maldfeldstraße,53.43046,9.93585,15
 EnBW DE-Hamburg Oberer Landweg,53.48955,10.18733
 EnBW DE-Hamburg Penny,53.58406,10.05808
@@ -16000,6 +16002,8 @@ Ewiva IT-Valdera,43.64262,10.61749
 Ewiva IT-Valmontone Fashion District,41.7627,12.95579
 Ewiva IT-Vieste Via Dalmazia,41.88453,16.17352
 
+EWO DE-Oberaudorf Naunspitzstraße,47.6484,12.17876
+
 EWR DE-Lampertheim Weidweg,49.5919,8.45538
 EWR DE-Remscheid Auf dem Knapp,51.18246,7.23032
 EWR DE-Worms Am Bergkloster,49.63095,8.35662
@@ -17890,6 +17894,7 @@ Ionity GB-Stafford Spitfire Cl,52.83142,-2.13565
 Ionity HR-Gospić Budačka ul.,44.57699,15.39295
 Ionity HR-Kanfanar Okreti,45.1117,13.80262
 Ionity HR-Rašćane Gornje,43.3206,17.1662,15
+Ionity HR-Rijeka Osječka ul.,45.34964,14.41835
 Ionity HR-Sop,45.78354,16.15155
 Ionity HR-Vrankovec,46.08676,15.91246
 Ionity HR-Zemunik Gornji Zadar Tromilja,44.11462,15.40759,25
@@ -19733,6 +19738,7 @@ Lidl DE-Tinnum,54.90121,8.32949
 Lidl DE-Torgau Warschauer Straße 9B,51.55891,12.99082
 Lidl DE-Triberg Nußbacher Straße 2,48.13803,8.24073
 Lidl DE-Troisdorf Frankfurter Straße,50.81348,7.17613
+Lidl DE-Tuttlingen Stockacher Straße,47.97312,8.8322
 Lidl DE-Tönisvorst Maysweg,51.31988,6.50446
 Lidl DE-Türkheim Merowingerstraße,48.05552,10.63321
 Lidl DE-Ubstadt-Weiher Ubstadter Straße 34,49.17163,8.61801
@@ -22145,8 +22151,50 @@ PROVIRIDIS FR-Manosque Av. Saint-Maurice,43.80127,5.81789
 PROVIRIDIS FR-Puget-sur-Argens Bd du Commerce,43.44829,6.69897
 PROVIRIDIS FR-Rouvignies Voie Communale,50.3314,3.44793
 
+Präg DE-Argenbühl Eisenharzer Weg,47.66526,9.93734
 Präg DE-Augsburg Edisonstraße,48.3449,10.88517
+Präg DE-Augsburg Friedberger Straße,48.3555,10.91947
+Präg DE-Babenhausen Auf der Wies,48.14255,10.2506
 Präg DE-Balderschwange Dorf,47.4659,10.10245
+Präg DE-Edling Am Gewerbering,48.05892,12.1707
+Präg DE-Fischach Hauptstraße,48.2898,10.65656
+Präg DE-Hohenfurch Kreuzstraße,47.8471,10.89834
+Präg DE-Kempten (Allgäu) Alpenstraße,47.71933,10.3137
+Präg DE-Kempten (Allgäu) Haubenschloßstraße,47.71875,10.31344
+Präg DE-Kempten (Allgäu) Illerdamm,47.72914,10.31903
+Präg DE-Kempten (Allgäu) Kotterner Straße,47.7197,10.3176
+Präg DE-Kempten (Allgäu) Magnusstraße,47.7089,10.33003
+Präg DE-Kempten (Allgäu) Robert-Weixler-Straße,47.73097,10.3019
+Präg DE-Kempten (Allgäu) Rottachstraße,47.7308,10.31556
+Präg DE-Kempten (Allgäu) Salzstraße,47.72438,10.31075
+Präg DE-Kempten (Allgäu) Wettmannsberger Weg,47.72872,10.3406
+Präg DE-Landsberg am Lech Waldheimer Straße,48.0396,10.8657
+Präg DE-Lautertal (Odenwald) Nibelungenstraße,49.71626,8.71177
+Präg DE-Leutkirch im Allgäu Haselburg,47.78863,10.04347
+Präg DE-Leutkirch im Allgäu In der Vorstadt,47.84477,9.94302
+Präg DE-Leutkirch im Allgäu Untere Grabenstraße,47.82526,10.02283
+Präg DE-Lindenberg im Allgäu Schillerstraße,47.60262,9.88776
+Präg DE-Marktoberdorf Kaufbeurener Straße,47.7803,10.618
+Präg DE-Maßbach Am Heidig,50.17424,10.28214
+Präg DE-Memmingen Bahnhofstraße,47.98152,10.18564
+Präg DE-Memmingen Bodenseestraße,47.98036,10.17455
+Präg DE-Memmingen Lisztstraße,47.996,10.19152
+Präg DE-Neuburg an der Donau Am Südpark,48.72005,11.17157
+Präg DE-Obergünzburg Oberer Markt,47.83898,10.4236
+Präg DE-Obergünzburg Öschweg,47.84425,10.41583
+Präg DE-Ottobeuren Johannes-Gutenberg-Straße,47.94464,10.30663
+Präg DE-Pforzen Am Moosberg,47.93436,10.60888
+Präg DE-Rammingen Tussenhauser Weg,48.07653,10.58162
+Präg DE-Scheidegg Bahnhofstraße,47.58485,9.85412
+Präg DE-Sulzberg See,47.68095,10.3308
+Präg DE-Sulzberg Sonthofener Straße,47.6604,10.35052
+Präg DE-Thannhausen Bahnhofstraße,48.29192,10.4631
+Präg DE-Thannhausen Frühmeßstraße,48.28372,10.46833
+Präg DE-Türkheim Maximilian-Philipp-Straße,48.0611,10.63888
+Präg DE-Ursberg Oberrohrer Straße,48.2734,10.4432
+Präg DE-Waltenhofen Bürgermeister-Dürheimer-Straße,47.62742,10.27755
+Präg DE-Weiler-Simmerberg Alte Salzstraße,47.5865,9.943
+Präg DE-Weiler-Simmerberg Jakob-Lang-Straße,47.58386,9.918
 Präg DE-Weitnau Gewerbering,47.6416,10.11258
 
 Q1 DE-Bad Bentheim Hengeloer Straße,52.29591,7.09981
