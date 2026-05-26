@@ -10367,7 +10367,6 @@ Compleo DE-Penzberg Fraunhoferstraße,47.74795,11.38513
 Compleo DE-Plauen Pausaer Straße,50.5207,12.11436
 Compleo DE-Regensburg,48.97859,12.16996
 Compleo DE-Regensburg Leibnizstraße,48.99874,12.16757
-Compleo DE-Reichenbach Alte Ziegelei,50.63979,12.32899
 Compleo DE-Rheinberg Xantener Straße,51.56479,6.57748
 Compleo DE-Saalfeld Am Cröstener Weg,50.65539,11.34378
 Compleo DE-Schrobenhausen Bahnhofstraße,48.5647,11.25911
@@ -10652,8 +10651,6 @@ E-Werk-Franz AT-Graz Andritzer Reichsstraße,47.10061,15.42549
 E-Werk-Franz AT-Graz Schöckelstraße,47.11821,15.43067
 E-Werk-Franz AT-Graz Viktor-Franz-Straße,47.08993,15.41302
 E-Werk-Franz AT-Thal Arnold Schwarzenegger Museum,47.07218,15.36271
-
-e-werk-Sachsenwald DE-Oststeinbek Willinghusener Weg,53.54591,10.15439
 
 E.Leclerc FR-Auxerre Rue des Prés Coulons,47.79698,3.58167
 
@@ -19994,8 +19991,6 @@ Liebevoll DE-Ratingen Auermühle,51.30633,6.8797
 
 LIFF EE-Pärnu Niidu tn,58.39297,24.54008
 
-likra DE-Sonneberg Köppelsdorfer Straße,50.35766,11.17416
-
 Linz AT-Ansfelden Traunuferstraße,48.21556,14.27953
 Linz AT-Freistadt Promenade,48.51337,14.50295
 Linz AT-Gmunden Druckereistraße,47.92534,13.78839
@@ -21050,42 +21045,50 @@ Numbat DE-Stutensee Fraunhoferstraße,49.07139,8.45244
 Numbat DE-Suhl-Lautenberg Linsenhoferstraße,50.61023,10.67291
 Numbat DE-Unterspiesheim LAchbrunnenweg,49.94809,10.26202
 
-nvb DE-Bad Bentheim Am Bade,52.31788,7.16121
+nvb DE-Bad Bentheim Am Bade,52.31788,7.1612
 nvb DE-Emlichheim Berliner Straße,52.6159,6.84503
 nvb DE-Emlichheim Burhook,52.6063,6.85193
-nvb DE-Emlichheim Hauptstraße,52.60597,6.84889
-nvb DE-Emlichheim Lägen Diek,52.60461,6.85409
-nvb DE-Geeste Am Rathaus,52.58998,7.22841
+nvb DE-Emlichheim Hauptstraße,52.60597,6.8489
+nvb DE-Emlichheim Lägen Diek,52.6046,6.8541
+nvb DE-Geeste Am Rathaus,52.58998,7.2284
 nvb DE-Itterbeck Hauptstraße,52.50408,6.80532
-nvb DE-Meppen Am Neuen Markt,52.6907,7.28969
+nvb DE-Meppen Am Neuen Markt,52.6907,7.2897
 nvb DE-Meppen Herzog-Arenberg-Straße,52.69517,7.29364
-nvb DE-Meppen Kleiststraße,52.69561,7.28454
-nvb DE-Meppen Lathener Straße,52.70693,7.29739
+nvb DE-Meppen Kleiststraße,52.6956,7.28454
+nvb DE-Meppen Lathener Straße,52.70693,7.2974
 nvb DE-Meppen Ludmillenstraße,52.68973,7.2925
 nvb DE-Meppen Nagelshof,52.69052,7.28496
+nvb DE-Meppen Teglinger Hauptstraße,52.65813,7.3438
+nvb DE-Neuenhaus Am Bahnhof,52.50196,6.9694
+nvb DE-Neuenhaus Frensdorfer Straße,52.47223,7.00713
+nvb DE-Neuenhaus Nordhorner Straße,52.49235,6.97994
 nvb DE-Nordhorn Albert-Schweitzer-Straße,52.44316,7.06454
-nvb DE-Nordhorn Am Sportpark,52.42406,7.08289
+nvb DE-Nordhorn Am Sportpark,52.42406,7.0829
+nvb DE-Nordhorn Am Strampel,52.43728,7.06062
 nvb DE-Nordhorn Bahnhofstraße,52.43283,7.06708
 nvb DE-Nordhorn Beinsstiege,52.43842,7.07097
-nvb DE-Nordhorn Bentheimer Straße,52.42479,7.07711
-nvb DE-Nordhorn Borkener Hof,52.4141,7.04439
+nvb DE-Nordhorn Bentheimer Straße,52.4248,7.0771
+nvb DE-Nordhorn Borkener Hof,52.4141,7.0444
 nvb DE-Nordhorn Deegfelder Weg,52.44954,7.07182
 nvb DE-Nordhorn Frensdorfer Ring,52.43093,7.06393
-nvb DE-Nordhorn Gildkamp,52.43899,7.07023
+nvb DE-Nordhorn Färbereistraße,52.43958,7.06268
+nvb DE-Nordhorn Gildkamp,52.439,7.07023
 nvb DE-Nordhorn Heideschulstraße,52.46168,7.15635
 nvb DE-Nordhorn Heseper Weg,52.43583,7.08146
 nvb DE-Nordhorn Immenweg,52.43446,7.10316
 nvb DE-Nordhorn Karl-Braun-Straße,52.4653,7.15624
-nvb DE-Nordhorn Kokenmühlenstraße,52.43309,7.07248
+nvb DE-Nordhorn Kokenmühlenstraße,52.4331,7.07248
 nvb DE-Nordhorn Lange Straße,52.43985,7.07045
 nvb DE-Nordhorn Mathildenstraße,52.4167,7.07435
-nvb DE-Nordhorn Neuenhauser Straße,52.43919,7.06659
-nvb DE-Nordhorn Nino-Allee,52.42659,7.0715
+nvb DE-Nordhorn Neuenhauser Straße,52.4392,7.0666
+nvb DE-Nordhorn Nino-Allee,52.4266,7.0715
+nvb DE-Nordhorn Osnabrücker Straße,52.42274,7.05773
 nvb DE-Nordhorn van-Delden-Straße,52.43346,7.06198
 nvb DE-Twist Am Hallenbad,52.64707,7.08898
+nvb DE-Twist Am Kanal,52.64827,7.0986
 nvb DE-Uelsen Itterbecker Straße,52.49457,6.88545
 nvb DE-Uelsen Kappenberghof,52.49562,6.88497
-nvb DE-Uelsen Neuenhauser Straße,52.49569,6.89032
+nvb DE-Uelsen Neuenhauser Straße,52.4957,6.89032
 nvb DE-Uelsen Zum Waldbad,52.4873,6.88495
 nvb DE-Wietmarschen Am Markt,52.51754,7.13284
 nvb DE-Wilsum Echtelerstraße,52.53992,6.83253
@@ -22370,7 +22373,35 @@ reev DE-Sehnde Kurt-Lau-Weg,52.31937,9.9654
 reev DE-Triefenstein Schulstraße,49.80243,9.58202
 reev DE-Wilhelmshaven Südstrand,53.51328,8.14338
 
+Regioladen DE-Bad Mergentheim Oskar-Weitbrecht-Weg,49.48655,9.7904
+Regioladen DE-Bad Mergentheim Zaisenmühlstraße,49.49303,9.76995
+Regioladen DE-Föritztal Steinräum,50.3435,11.21184
+Regioladen DE-Glinde Möllner Landstraße,53.5416,10.21174
+Regioladen DE-Glinde Wilhelm-Bergner-Straße,53.5317,10.22418
+Regioladen DE-Halberstadt Kühlinger Straße,51.89435,11.0542
+Regioladen DE-Lauda-Königshofen Deubacher Straße,49.54116,9.737
+Regioladen DE-Limburg an der Lahn Bahnhofsvorplatz,50.3852,8.06203
+Regioladen DE-Limburg an der Lahn Schiede,50.38863,8.05918
+Regioladen DE-Oststeinbek Willinghusener Weg,53.54586,10.15444
 Regioladen DE-Radolfzell am Bodensee Unterdorfstraße,47.73986,9.00248
+Regioladen DE-Radolfzell am Bodensee Zeppelinstraße,47.7443,8.9583
+Regioladen DE-Reichenbach im Vogtland Alte Ziegelei,50.63975,12.329
+Regioladen DE-Reinbek Am Ladenzentrum,53.5115,10.23567
+Regioladen DE-Reinbek Sachsenwaldstraße,53.52875,10.25167
+Regioladen DE-Sonneberg Ernst-Moritz-Arndt-Straße,50.35747,11.16354
+Regioladen DE-Sonneberg Friedrich-Ludwig-Jahn-Straße,50.348,11.16615
+Regioladen DE-Sonneberg Friesenstraße,50.35227,11.1661
+Regioladen DE-Sonneberg Köppelsdorfer Straße,50.3577,11.17413
+Regioladen DE-Sonneberg Marienstraße,50.36174,11.17674
+Regioladen DE-Sonneberg Neustadter Straße,50.35096,11.1549
+Regioladen DE-Sonneberg Schreberstraße,50.34455,11.16875
+Regioladen DE-Tauberbischofsheim Alte Wertheimer Straße,49.6304,9.6662
+Regioladen DE-Villingen-Schwenningen Auf der Lehr,48.06653,8.5356
+Regioladen DE-Villingen-Schwenningen Bahnhofstraße,48.05725,8.46478
+Regioladen DE-Villingen-Schwenningen Jakob-Kienzle-Straße,48.0615,8.53484
+Regioladen DE-Villingen-Schwenningen Pforzheimer Platz,48.06623,8.45966
+Regioladen DE-Villingen-Schwenningen Wilhelm-Binder-Straße,48.06388,8.45623
+Regioladen DE-Wentorf bei Hamburg Am Casinopark,53.48885,10.25357
 Regioladen DE-Willingen Sonnenweg,51.29618,8.6047
 Regioladen DE-Willingen Waldecker Straße,51.2932,8.6165
 
@@ -22432,12 +22463,26 @@ Repsol PT-Torres Vedras R. João Carlos Júnior,39.08217,-9.26058
 
 rEVcharge IT-Area di servizio Campogalliano Est,44.70354,10.84897
 
+REWAG DE-Cham Auf der Schanze,49.22065,12.66413
+REWAG DE-Cham Further Straße,49.22237,12.669
+REWAG DE-Cham Marktplatz,49.21843,12.66466
+REWAG DE-Cham Obere Regenstraße,49.2182,12.66822
+REWAG DE-Köfering Straßäcker,48.93296,12.20282
+REWAG DE-Neutraubling Pommernstraße,48.97726,12.18992
+REWAG DE-Obertraubling Am Schwindgraben,48.97157,12.17352
+REWAG DE-Pentling Hölkeringer Straße,48.98063,12.06428
 REWAG DE-Regensburg Bismarckplatz,49.01828,12.0893
-REWAG DE-Regensburg Greflingerstraße,49.01402,12.11851
+REWAG DE-Regensburg Dr.-Gessler-Straße,49.0043,12.06426
+REWAG DE-Regensburg Emmeramsplatz,49.0163,12.09342
+REWAG DE-Regensburg Franz-Mayer-Straße,49.0024,12.10147
+REWAG DE-Regensburg Greflingerstraße,49.01402,12.1185
 REWAG DE-Regensburg Im Gewerbepark,49.02983,12.12545
 REWAG DE-Regensburg Kirchmeierstraße,49.01118,12.06878
+REWAG DE-Regensburg Landshuterstraße,49.0032,12.12282
+REWAG DE-Regensburg Prüfeninger Straße,49.0134,12.05796
 REWAG DE-Regensburg Schwanenplatz,49.01842,12.10193
 REWAG DE-Regensburg Weichser Weg,49.02644,12.11542
+REWAG DE-Regenstauf Am Spangl,49.12192,12.12467
 
 Rheinenergie DE-Aachen Europaplatz,50.7795,6.10656
 Rheinenergie DE-Alsdorf Max-Planck-Straße,50.87809,6.18548
@@ -22469,10 +22514,13 @@ Rheinenergie DE-Köln Yitzhak-Rabin-Platz,50.93297,6.93879
 rhenag DE-Siegburg Bachstraße,50.79821,7.20391
 rhenag DE-Siegburg Wilhelm-Ostwald-Straße,50.79278,7.221,30
 
-RhönEnergie DE-Fulda Johannisstraße,50.54231,9.66554
-RhönEnergie DE-Fulda Pacelliallee,50.54639,9.70328
-RhönEnergie DE-Fulda Unterm Heilig Kreuz,50.55199,9.67682
+RhönEnergie DE-Fulda Johannisstraße,50.5423,9.66554
+RhönEnergie DE-Fulda Kreuzbergstraße,50.53826,9.69693
+RhönEnergie DE-Fulda Leipziger Straße,50.5701,9.6962
+RhönEnergie DE-Fulda Pacelliallee,50.5464,9.70328
+RhönEnergie DE-Fulda Unterm Heilig Kreuz,50.552,9.67682
 RhönEnergie DE-Gersfeld (Rhön) Wasserkuppe,50.4982,9.94722
+RhönEnergie DE-Neuhof Fuldaer Straße,50.45864,9.61928
 
 RICARICA IT-Livorno Via Giovanni Gelati,43.53036,10.32583
 
@@ -22655,8 +22703,6 @@ schneller-strom-tanken DE-Dachau Münchner Straße,48.2535,11.43987
 schneller-strom-tanken DE-Dillingen,48.57958,10.49633
 schneller-strom-tanken DE-Ehingen,48.28465,9.72151
 schneller-strom-tanken DE-Gießen Schiffenberger Weg,50.57056,8.69295
-schneller-strom-tanken DE-Herrsching,47.99821,11.17126
-schneller-strom-tanken DE-München Arnulfstraße,48.14213,11.55253
 schneller-strom-tanken DE-Niebüll Marktstraße,54.78816,8.82635
 schneller-strom-tanken DE-Oberstadion,48.18807,9.69108
 schneller-strom-tanken DE-Schelklingen,48.37563,9.73389
@@ -23194,8 +23240,14 @@ Shell TR-Horozluhan Yeni İstanbul Cd.,37.93425,32.511
 Shell TR-Karşıyaka/İzmir Soğukkuyu Anadolu Cd.,38.46806,27.1134
 Shell US-De Soto IA Guthrie St,41.53846,-94.01151
 
+SI-Energy DE-Epfenbach Hauptstraße,49.33774,8.9105
+SI-Energy DE-Grafschaft Im Kreuzerfeld,50.5698,7.08606
 SI-Energy DE-Grünberg Gießener Straße,50.59467,8.94673
-SI-Energy DE-Langgöns Sankt-Ulrich-Ring,50.49241,8.65891,20
+SI-Energy DE-Langgöns Sankt-Ulrich-Ring,50.4924,8.6589,20
+SI-Energy DE-Mötzingen Schloßgartenstraße,48.53397,8.77482
+SI-Energy DE-Weißensberg Lampertsweiler,47.5957,9.72537
+SI-Energy DE-Westheim (Pfalz) Schulstraße,49.24396,8.3236
+SI-Energy DE-Zwingenberg Alte Dorfstraße,49.4161,9.04172
 
 SIEG63 FR-Le Cendre Allée des Marronniers,45.72343,3.18947
 
@@ -23355,9 +23407,13 @@ Smatrics DE-Uelzen Zum Neuen Gehege,53.00528,10.60348
 Smatrics IT-Sevegliano Via E. Mattei,45.88907,13.31392,15
 Smatrics IT-Vahrn-Varna Forch Straße,46.76025,11.63793
 
+Smopi DE-Herrsching am Ammersee Bahnhofsplatz,47.9982,11.17126
+Smopi DE-Krailling Margaretenstraße,48.09702,11.41153
 Smopi DE-Markdorf Rathausplatz,47.72002,9.39153,30
 Smopi DE-Merklingen Industriestraße,48.51514,9.75867,20
-Smopi DE-Weinsberg Am Autobahnkreuz,49.14379,9.30856,15
+Smopi DE-München Arnulfstraße,48.14212,11.55253
+Smopi DE-Nürnberg Kurt-Triest-Straße,49.43086,11.04335
+Smopi DE-Weinsberg Am Autobahnkreuz,49.1438,9.30856,15
 
 SolarHub AU-Mitchell ACT Flemington Rd,-35.21779,149.14409
 
@@ -23366,7 +23422,6 @@ solid DE-Abenberg Im Gewerbegebiet,49.2356,10.95528
 solid DE-Abenberg Spalter Straße,49.24094,10.96251
 solid DE-Ansbach Am Stadion,49.30484,10.55933
 solid DE-Ansbach Rügländer Straße,49.31109,10.56878
-solid DE-Bad Mergentheim Bahnhof,49.49305,9.76998
 solid DE-Bad Mergentheim Oskar-Weitbrecht-Weg,49.48666,9.79011
 solid DE-Bad Staffelstein Am Kurpark,50.10828,10.99243
 solid DE-Bad Windsheim Illesheimer Straße,49.49613,10.40525
@@ -23412,7 +23467,6 @@ solid DE-Schwabach,49.32314,11.04267
 solid DE-Schwabach Am Falbenholzweg,49.32243,11.0516
 solid DE-Schwabach Angerstraße,49.32245,11.02853
 solid DE-Schwabach Eisentrautstraße,49.32789,11.02574
-solid DE-Tauberbischofsheim,49.63035,9.66616
 solid DE-Wertheim Bahnhofstraße,49.76384,9.51153
 solid DE-Wunsiedel Rot-Kreuz-Straße,50.03931,11.99559
 
