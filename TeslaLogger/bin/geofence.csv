@@ -16550,7 +16550,6 @@ GP-JOULE DE-Buttenwiesen Maierhof,48.61586,10.77393
 GP-JOULE DE-Büdelsdorf An den Reesenbetten,54.32198,9.69876
 GP-JOULE DE-Büsum Am Bauhof,54.1403,8.87727
 GP-JOULE DE-Castrop-Rauxel Herner Straße,51.55047,7.29613
-GP-JOULE DE-Eggebek Hauptstraße,54.62005,9.37619
 GP-JOULE DE-Eisenach Julius-Lippold-Straße,50.98439,10.31372
 GP-JOULE DE-Emmering Anton-Pendele-Straße,48.18871,11.27199
 GP-JOULE DE-Erfurt Mainzer Straße,51.00388,11.01488
@@ -16567,7 +16566,6 @@ GP-JOULE DE-Görlitz Rothenburger Landstraße,51.20282,14.99933
 GP-JOULE DE-Halstenbek Gärtnerstraße,53.63046,9.86315
 GP-Joule DE-Halstenbek Ostereschweg,53.63136,9.84621
 GP-JOULE DE-Hanau Christoph-Kolumbus-Straße,50.12494,8.95
-GP-JOULE DE-Handewitt Raiffeisenstraße,54.76976,9.32408
 GP-JOULE DE-Heide Fritz-Thiedemann-Ring,54.17631,9.09231
 GP-JOULE DE-Husum Bredstedter Straße,54.48606,9.04628
 GP-JOULE DE-Hutthurm Am Kreisel,48.66966,13.48459
@@ -16575,11 +16573,9 @@ GP-JOULE DE-Ingolstadt Friedrich-Ebert-Straße,48.7741,11.44368
 GP-JOULE DE-Jena Ebereschenstraße,50.88452,11.61735
 GP-JOULE DE-Joldelund Norderweg,54.65438,9.13835
 GP-JOULE DE-Kiel Winterbeker Weg,54.30932,10.1096
-GP-JOULE DE-Kropp Am Markt,54.4121,9.50829
 GP-JOULE DE-Laichingen Langestraße,48.47535,9.62684
 GP-JOULE DE-Langenargen Bildstock,47.60343,9.55193
 GP-JOULE DE-Langenhorn An der B 5,54.68591,8.95725
-GP-JOULE DE-Lüchow Seerauerstraße,52.97759,11.16427
 GP-JOULE DE-Magdeburg Berliner Chausee,52.13041,11.67917
 GP-JOULE DE-Marne Alter Kirchweg,53.95592,9.02261
 GP-JOULE DE-Nassenheide Teerofener Weg,52.81131,13.22343
@@ -16590,15 +16586,11 @@ GP-JOULE DE-Oberkrämer Im Gewerbepark,52.71128,13.11696
 GP-JOULE DE-Rellingen Am Dolmen,53.68109,9.79676
 GP-JOULE DE-Rendsburg Friesenstraße,54.31148,9.64449
 GP-JOULE DE-Reutlingen Carl-Zeiss-Straße,48.49974,9.15036
-GP-JOULE DE-Rostock Lise-Meitner-Ring,54.05972,12.11843
 GP-JOULE DE-Schwerin Grevesmühlener Straße,53.65206,11.3728
 GP-JOULE DE-Schwäbisch Gmünd Hauberweg,48.79854,9.78721
 GP-JOULE DE-St. Andreasberg Oderbrück-Süd,51.77493,10.55214
 GP-JOULE DE-Sulingen Vorwerker Heide,52.66983,8.7831
-GP-JOULE DE-Süderbrarup team Allee,54.63867,9.76061
 GP-JOULE DE-Upahl Grevesmühlener Straße,53.83009,11.21037
-GP-JOULE DE-Wanderup Husumer Straße,54.68675,9.32622
-GP-JOULE DE-Waren (Müritz) Strelitzer Straße,53.519,12.71356
 GP-JOULE DE-Westre Grenzstraße,54.88547,8.97637
 
 GreenCharge DE-Aalen Daimlerstraße,48.82569,10.0651
@@ -18355,7 +18347,7 @@ Kaufland DE-Bielefeld Gütersloher Straße,51.98683,8.486,20
 Kaufland DE-Bielefeld Schweriner Straße,52.0083,8.56298
 Kaufland DE-Bietigheim-Bissingen Talstraße,48.96094,9.13065
 Kaufland DE-Bitburg Kölner Straße,49.97752,6.52662
-Kaufland DE-Bitterfeld-Wolfen Bismarckstraße,51.6185,12.31912
+Kaufland DE-Bitterfeld-Wolfen Bismarckstraße,51.61827,12.31943,60
 Kaufland DE-Blankenfelde-Mahlow Am Lückefeld,52.35733,13.4331
 Kaufland DE-Bocholt Welfenstraße,51.83076,6.61188
 Kaufland DE-Bochum Ümminger Straße,51.4692,7.2934
@@ -22390,6 +22382,8 @@ Repsol ES-Villares de la Reina CR C-519,41.0049,-5.64922
 Repsol PT-Odivelas R. Alm. Gago Coutinho,38.805,-9.15803
 Repsol PT-Torres Vedras R. João Carlos Júnior,39.08217,-9.26058
 
+rEVcharge IT-Area di servizio Campogalliano Est,44.70354,10.84897
+
 REWAG DE-Regensburg Bismarckplatz,49.01828,12.0893
 REWAG DE-Regensburg Greflingerstraße,49.01402,12.11851
 REWAG DE-Regensburg Im Gewerbepark,49.02983,12.12545
@@ -23748,6 +23742,7 @@ SW-Mainz DE-Mainz Fischtorplatz,49.99971,8.27704
 SW-Mainz DE-Mainz Gleiwitzer Straße,49.9862,8.26455
 SW-Mainz DE-Mainz Wilhelm-Raabe-Straße,50.00335,8.21321
 SW-Merseburg DE-Merseburg Querfurter Straße,51.37147,11.98317
+SW-Mosbach DE-Mosbach Hohlweg,49.3291,9.10864
 SW-Mosbach DE-Mosbach Martin-Butzer-Straße,49.35044,9.14211
 SW-Munster-Bispingen DE-Munster Aussiger Straße,52.98662,10.08471
 SW-Mühlheim DE-Mühlheim am Main Lämmerspieler Straße,50.11652,8.83896
@@ -24382,21 +24377,72 @@ TEAG DE-Zella-Mehlis An der Quelle,50.64378,10.68513,14
 TEAG DE-Zeulenroda-Triebes Am Waldstadion,50.66135,11.99586
 TEAG DE-Zierenberg Vor Brakens Höhe,51.36764,9.2903
 
+team-Emobility DE-Achern Fautenbacher Straße,48.6278,8.05696
+team-Emobility DE-Albstadt Siegmaninger Str,48.20428,9.0466
+team-Emobility DE-Balingen Lange Straße,48.26083,8.85044
+team-Emobility DE-Bretten Melanchthonstraße,49.03885,8.69036
+team-Emobility DE-Bötzingen Allmendweg,48.06902,7.72393
+team-Emobility DE-Calw Stuttgarter Straße,48.70995,8.75922
+team-Emobility DE-Donaueschingen Rudolf-Diesel-Straße,47.9648,8.50767
+team-Emobility DE-Emmerthal An der Mühle,52.04817,9.3786
+team-Emobility DE-Esslingen am Neckar Dornierstraße,48.717,9.3521
+team-Emobility DE-Freiburg im Breisgau Hermann-Mitsch-Straße,48.02462,7.83822
+team-Emobility DE-Freiburg im Breisgau Lörracher Straße,47.98494,7.82613
+team-Emobility DE-Freudenstadt Gutenbergstraße,48.467,8.4403
+team-Emobility DE-Göppingen Bahnhofstrasse,48.70052,9.65234
+team-Emobility DE-Göppingen Dieselstrasse,48.6957,9.667
+team-Emobility DE-Göppingen Großeislinger Straße,48.7018,9.6656
+team-Emobility DE-Göppingen Jahnstraße,48.69783,9.6617
+team-Emobility DE-Horb am Neckar Geschwister Schollstraße,48.45238,8.69698
+team-Emobility DE-Horb am Neckar Weberstraße,48.4568,8.6971
+team-Emobility DE-Kehl Straßburger Straße,48.57638,7.81925
 team-Emobility DE-Köln Heumarkt,50.93537,6.96162
+team-Emobility DE-Lahr Dinglinger Hauptstraße,48.34083,7.85794
 team-Emobility DE-Langenhagen Maritimstraße,52.46,9.6979
+team-Emobility DE-Offenburg Schutterwälderstraße,48.46498,7.9309
+team-Emobility DE-Pfullingen Marktstraße,48.47238,9.22715
+team-Emobility DE-Reutlingen Emil-Adolff-Straße,48.49814,9.2006
+team-Emobility DE-Reutlingen Ernst-Abbe-Straße,48.49756,9.15278
+team-Emobility DE-Sinzheim In den Lissen,48.77312,8.16962
+team-Emobility DE-Tuttlingen Stockacher Straße,47.9736,8.8342
+team-Emobility DE-Tübingen Schaffhausenstraße,48.50963,9.0422
 team-Emobility DE-Ulm Basteistraße Maritim,48.40038,10.00535
+team-Emobility DE-Villingen-Schwenningen Auf Herdenen,48.07656,8.50025
 team-Emobility DE-Waldkirch Schlettstadtallee,48.09416,7.95903
 
+teamstrom DE-Amelinghausen Lüneburger Straße,53.12995,10.21708
 teamstrom DE-Bad Oldesloe Hamburger Straße,53.80327,10.36365
+teamstrom DE-Burg (Dithmarschen) Lindenstraße,53.9987,9.26233
+teamstrom DE-Eckernförde Rendsburger Straße,54.4511,9.8306
+teamstrom DE-Eggebek Hauptstraße,54.62005,9.3762
+teamstrom DE-Fehmarn Industriestraße,54.4449,11.18563
+teamstrom DE-Flensburg Apenrader Straße,54.804,9.4237
+teamstrom DE-Flensburg Auf dem Campus,54.77616,9.46013
 teamstrom DE-Flensburg Marie-Curie-Ring,54.76316,9.4493
-teamstrom DE-Handewitt Scandinavian-Park,54.77811,9.33609
+teamstrom DE-Gettorf Hasselrott,54.40583,9.9715
+teamstrom DE-Handewitt Raiffeisenstraße,54.76976,9.32408
+teamstrom DE-Handewitt Scandinavian-Park,54.7781,9.3361
+teamstrom DE-Harrislee Westerstraße,54.8036,9.3724
 teamstrom DE-Kappeln Eckernförder Straße,54.65752,9.94595
-teamstrom DE-Kronshagen Eckernförder Straße,54.33708,10.10561
+teamstrom DE-Kronshagen Eckernförder Straße,54.33708,10.1056
+teamstrom DE-Kropp Am Markt,54.4121,9.5083
+teamstrom DE-Lüchow (Wendland) Seerauer Straße,52.9776,11.16427
+teamstrom DE-Magdeburg Berliner Chausee,52.1302,11.6786
+teamstrom DE-Munster Zum Sprötzloh,52.98774,10.10913
+teamstrom DE-Niebüll Ostring,54.78346,8.85378
 teamstrom DE-Osterrönfeld Kieler Straße,54.29586,9.70783
-teamstrom DE-Otterndorf Cuxhavener Straße,53.80661,8.89062
+teamstrom DE-Otterndorf Cuxhavener Straße,53.8066,8.89062
 teamstrom DE-Rendsburg Friedrichstädter Straße,54.32014,9.62694
-teamstrom DE-Schleswig Marie-Curie-Straße,54.54219,9.58121
+teamstrom DE-Rostock Lise-Meitner-Ring,54.05972,12.11843
+teamstrom DE-Schleswig Marie-Curie-Straße,54.5422,9.5812
+teamstrom DE-Schortens Bohlswarfer Weg,53.53897,7.96752
+teamstrom DE-Stade Am Lohberg,53.5943,9.4232
+teamstrom DE-Sulingen Vorwerker Heide,52.66884,8.78253
+teamstrom DE-Süderbrarup team Allee,54.63867,9.7606
+teamstrom DE-Wahlstedt Kronsheider Straße,53.94595,10.20075
+teamstrom DE-Wanderup Husumer Straße,54.68675,9.32622
 teamstrom DE-Waren (Müritz) Friedrich-Wilhelm-Raiffeisen-Straße,53.52054,12.71505
+teamstrom DE-Waren (Müritz) Strelitzer Straße,53.519,12.71356
 
 Techem DE-Münster Cheruskerring,51.9753,7.62546
 
@@ -24459,8 +24505,9 @@ Thüga DE-Gaienhofen Im Kohlgarten,47.68448,8.98375
 Thüga DE-Gailingen Hauptstraße,47.6971,8.75416
 Thüga DE-Kandel Gartenstraße,49.08094,8.19673
 Thüga DE-Kandel Mittlere Ortsstraße,49.15636,8.2889
-Thüga DE-Schifferstadt Bahnhofstraße,49.3894,8.37199
-Thüga DE-Singen Hohgarten,47.76139,8.83299
+Thüga DE-Schifferstadt Bahnhofstraße,49.3894,8.372
+Thüga DE-Singen Güterstraße,47.7539,8.85488
+Thüga DE-Singen Hohgarten,47.7614,8.833
 Thüga DE-Singen Schaffhauser Straße,47.76204,8.82923
 Thüga DE-Singen Stockholzstraße,47.75353,8.85878
 
@@ -25098,8 +25145,17 @@ Vimmerby-Energi SE-Vimmerby Västra Tullportsgatan,57.66819,15.8544,25
 
 Vinschgauer-Energie IT-Prad am Stilfserjoch Kreuzweg,46.61733,10.58917
 
+VIOCON DE-Altötting Mühldorfer Straße,48.22682,12.6626
 VIOCON DE-Arnbruck Zellertalstraße,49.1279,12.99593
+VIOCON DE-Burghausen Burgkirchener Straße,48.16377,12.80657
+VIOCON DE-Freyung Zuppinger Straße,48.80532,13.54032
+VIOCON DE-Grafenau Spitalstraße,48.85422,13.39615
+VIOCON DE-Langenpreising Straßäcker,48.43264,11.98005
+VIOCON DE-Obernzell Erlautal,48.5654,13.57836
+VIOCON DE-Plattling Dr.-Wandinger-Straße,48.78626,12.84937
+VIOCON DE-Regen Gewerbestraße,48.98273,13.13035
 VIOCON DE-Schönberg Maukenreuth,48.82422,13.34283
+VIOCON DE-Zwiesel Frauenauer Straße,49.01364,13.24713
 
 Vion IT-Martello Ennewasser,46.5711,10.79594
 Vion IT-Sluderno Via Venosta,46.66406,10.58232
