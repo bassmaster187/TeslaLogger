@@ -19863,6 +19863,7 @@ Lidl FR-Varennes-sur-Seine Rte du Petit Fossard,48.36123,2.95788
 Lidl FR-Vendargues Av. des Bigos,43.65254,3.961,25
 Lidl FR-Vitrolles Av. Jean Monnet,43.42349,5.28486
 Lidl FR-Wissembourg All. des Peupliers Altenstadt,49.03075,7.95498
+Lidl GB-Hemel Hempstead White Hart Dr,51.7485,-0.45463
 Lidl GB-Witney New Cl Ln,51.7736,-1.4931
 Lidl GR-Anatoli Ανατολή Digeni Akrita,39.6278,20.8594
 Lidl GR-Chersonisos Χερσόνησος Palea EO Irakliou Agioi Nikolaoi,35.32236,25.38034
@@ -23757,6 +23758,7 @@ SW-Neu-Isenburg DE-Neu-Isenburg Alicestraße,50.05018,8.67537
 SW-Neu-Isenburg DE-Neu-Isenburg Dreiherrnsteinplatz,50.05883,8.75028
 SW-Neu-Isenburg DE-Neu-Isenburg Jahnstraße,50.04864,8.68286
 SW-Neu-Isenburg DE-Neu-Isenburg Offenbacher Straße,50.05211,8.71451
+SW-Neumünster DE-Büsum Dithmarscher Straße,54.13566,8.84445
 SW-Neumünster DE-Heiligenstedten Juliankadamm,53.93464,9.46953
 SW-Neumünster DE-Neumünster Brüggemannstraße,54.06736,9.9966
 SW-Neumünster DE-Neumünster Kuhberg,54.07478,9.98415
@@ -25427,9 +25429,15 @@ Walmart US-San Antonio TX Thousand Oaks Dr,29.55316,-98.40838
 Walmart US-Springdale AR Elm Springs Rd,36.195,-94.18522
 
 Wattif AT-Nauders Doktor-Tschiggfrey-Straße,46.88905,10.50173
-Wattif DE-Binz Forsthaus Prora,54.43456,13.55749
+Wattif DE-Braunschweig Schmalbachstraße,52.2989,10.5103
 Wattif DE-Landshut Bürgermeister-Zeiler-Straße,48.55596,12.20048
+Wattif DE-March Am Bahnhof,48.0478,7.78543
+Wattif DE-Oschatz Bahnhofsplatz,51.31048,13.10703
+Wattif DE-Oschatz Promenade,51.2993,13.107
+Wattif DE-Ostseebad Binz Forsthaus Prora,54.43456,13.5575
 Wattif DE-Putbus Fürst-Malte-Allee,54.34418,13.51208
+Wattif DE-Salzgitter Dr.-Wilhelm-Höck-Ring,52.18474,10.49187
+Wattif DE-Stavenhagen Werdohler Straße,53.68826,12.91644
 
 Wels-Strom AT-Kammer Reichersberg,48.31023,13.4195
 Wels-Strom AT-Wels Stelzhamerstraße,48.16155,14.0289
@@ -25438,9 +25446,13 @@ Wels-Strom AT-Wels Waidhausenstraße,48.14696,13.9763
 WEMAG DE-Bützow Vor dem Rühner Tor,53.84804,11.9769
 WEMAG DE-Dobbertin Goldberger Straße,53.62034,12.08215
 WEMAG DE-Lübz Am Fuchsberg,53.46397,12.04595
+WEMAG DE-Ostseebad Binz Proraer Allee,54.4149,13.59063
 WEMAG DE-Ostseebad Boltenhagen Zum Sportplatz,53.98187,11.19337
+WEMAG DE-Schwerin Am Fasanenhof,53.60765,11.3682
+WEMAG DE-Schwerin Am Grünen Tal,53.5971,11.44035
 WEMAG DE-Schwerin Obotritenring,53.63757,11.40482
 WEMAG DE-Schwerin Platz der Freiheit,53.63355,11.4029
+WEMAG DE-Schwerin Werkstraße,53.57242,11.38774
 WEMAG DE-Valluhn Am Heisterbusch,53.5089,10.84557
 
 Wenea ES-Almuradiel A-4,38.41779,-3.49883
@@ -25538,8 +25550,9 @@ Westfalen DE-Stemwede Oppendorferstraße,52.45419,8.48156
 Westfalen DE-Wachtberg Töpferstraße,50.61283,7.0532
 Westfalen DE-Werne Fürstenhof,51.66941,7.63485
 
-WEVG DE-Salzgitter Karl-Scharfenberg-Straße,52.08809,10.37919
-WEVG DE-Salzgitter Liebenhaller Straße,52.04621,10.37178
+WEVG DE-Salzgitter Joachim-Campe-Straße,52.1552,10.32506
+WEVG DE-Salzgitter Karl-Scharfenberg-Straße,52.0881,10.3792
+WEVG DE-Salzgitter Liebenhaller Straße,52.0462,10.37178
 
 Wien-Energie AT-Flughafen Wien Schwechat,48.126,16.5653
 Wien-Energie AT-Guntramsdorf Rathaus Viertel,48.0489,16.31272
@@ -25606,27 +25619,55 @@ Wiiiz FR-Cannes Bd Général Vautrin,43.54863,7.03206
 Wiiiz FR-Grasse Pl. de la Buanderie,43.66096,6.9234,30
 
 Wirelane DE-Achim Uphusener Dorfstraße,53.0282,8.97063
+Wirelane DE-Bad Mergentheim Dieselstraße,49.49522,9.76658
 Wirelane DE-Bad Sachsa Bismarckstraße,51.5993,10.54702
 Wirelane DE-Berlin Leipziger Straße,52.5107,13.4008
-Wirelane DE-Berlin Parkstraße,52.55471,13.45771
+Wirelane DE-Berlin Parkstraße,52.5547,13.4577
 Wirelane DE-Bremen Robert-Hooke-Straße,53.11267,8.8561
 Wirelane DE-Cleebronn Erlebnispark-Tripsdrill-Straße,49.03484,9.0523
 Wirelane DE-Dresden Magdeburger Straße,51.05777,13.72573
+Wirelane DE-Duisburg Fahrner Straße,51.5147,6.76584
+Wirelane DE-Düsseldorf Urdenbacher Allee,51.15272,6.8696
+Wirelane DE-Emmerich am Rhein Georg-Elser-Straße,51.848,6.23722
 Wirelane DE-Erfurt Wilhelm-Busch-Straße,50.96817,11.04775
 Wirelane DE-Erkrath Leibnizstraße,51.20487,6.96864
+Wirelane DE-Freudenstadt Rudolf-Diesel-Straße,48.46428,8.44572
+Wirelane DE-Garmisch-Partenkirchen Bankgasse,47.4929,11.08783
+Wirelane DE-Garmisch-Partenkirchen Hauptstr,47.49538,11.10398
+Wirelane DE-Garmisch-Partenkirchen Lagerhausstraße,47.49033,11.09933
+Wirelane DE-Garmisch-Partenkirchen Partnachstraße,47.49558,11.09665
+Wirelane DE-Garmisch-Partenkirchen Schnitzschulstraße,47.4933,11.107
+Wirelane DE-Garmisch-Partenkirchen Zugspitzstraße,47.4916,11.0844
 Wirelane DE-Göttingen Erich-Schmidt-Weg,51.5146,9.94553
+Wirelane DE-Hagenburg Lütgen Hagen,52.4253,9.3216
+Wirelane DE-Hamm Karl-Mecklenbrauck-Weg,51.68263,7.86165
 Wirelane DE-Heppenheim (Bergstraße) Wilhelmstraße,49.64144,8.6409
 Wirelane DE-Hof Kulmbacher Straße,50.32034,11.90445
-Wirelane DE-Maierhöfen Kirchweg,47.6524,10.05069
-Wirelane DE-Markt Schwaben Schloßplatz,48.19107,11.86771
+Wirelane DE-Lüdenscheid Kölner Str,51.21608,7.62664
+Wirelane DE-Lütetsburg Landstraße,53.60104,7.2532
+Wirelane DE-Maierhöfen Kirchweg,47.6524,10.0507
+Wirelane DE-Mainz Carl-Zeiss-Straße,49.963,8.26513
+Wirelane DE-Markt Schwaben Schloßplatz,48.19107,11.8677
+Wirelane DE-Marsberg Diemelbogen,51.45618,8.8485
+Wirelane DE-Marsberg Dütlingstalweg,51.45467,8.83673
 Wirelane DE-München Hansastraße,48.13178,11.52957
+Wirelane DE-Münster Schifffahrter Damm,51.98843,7.66284
 Wirelane DE-Neubiberg Bahnhofsplatz,48.07664,11.65948
-Wirelane DE-Neubiberg Äußere Hauptstrasse,48.07609,11.65941
-Wirelane DE-Ostseebad Boltenhagen Zum Hafen,53.97411,11.24561
+Wirelane DE-Neubiberg Äußere Hauptstrasse,48.0761,11.6594
+Wirelane DE-Nordenham Am Stadtpark,53.49255,8.46932
+Wirelane DE-Nümbrecht Lindchenweg,50.90585,7.54662
+Wirelane DE-Ostseebad Boltenhagen Zum Hafen,53.9741,11.2456
+Wirelane DE-Passau Schützenstraße,48.5895,13.49748
 Wirelane DE-Rechlin Boeker Landstrasse,53.35514,12.73358
+Wirelane DE-Salzgitter Leibnizstraße,52.1444,10.31454
+Wirelane DE-Stadthagen Hüttenstraße,52.3246,9.18564
+Wirelane DE-Wiehl Homburger Straße,50.94786,7.55052
+Wirelane DE-Wismar Störtebekerstraße,53.88437,11.43605
 Wirelane DE-Wittmund Friedrichsgroden,53.69792,7.8069
+Wirelane DE-Wuppertal Einern,51.3029,7.2149
 
 WISAG DE-Neuss Hammfelddamm,51.1952,6.71177
+WISAG DE-Warstein Wiebusch,51.4886,8.3537
 
 WSW DE-Wuppertal Bromberger Straße,51.2773,7.18678
 WSW DE-Wuppertal Kasinostraße,51.25726,7.14151
@@ -26158,7 +26199,6 @@ DE Mainz Malakoff-Passage,49.9965,8.28127
 DE Mannheim Hans-Thoma-Straße,49.47432,8.52856
 DE Mannheim Sandhofer Straße,49.53383,8.47422
 DE Mannheim SV Seckenheim,49.46796,8.5573
-DE Marsberg KRAFTWERK,51.45467,8.83673
 DE Meerbusch KYOCERA,51.2854,6.61067
 DE Melle Hageböke,52.17621,8.36761
 DE Memmingen Spielarcaden,47.99888,10.15428,30
