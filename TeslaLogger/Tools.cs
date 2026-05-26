@@ -1750,11 +1750,11 @@ namespace TeslaLogger
                     }
                     var targetFile = Path.Combine(Path.Combine(Logfile.GetExecutingPath(), "logs"), $"nohup-{DateTime.UtcNow:yyyyMMddHHmmssfff}");
                     // copy to logs dir with timestamp
-                    ExecMono("/bin/cp", nohup + " " + targetFile);
+                    CopyFile(nohup, targetFile);
                     // gzip copied file
                     ExecMono("/bin/gzip", targetFile);
                     // empty nohup.out
-                    ExecMono("/bin/sh", $"-c '/bin/echo > {nohup}'");
+                    File.WriteAllText(nohup, "");
                     // cleanup old logfile backups
                     // old means older than 90 days
                     DirectoryInfo di = new DirectoryInfo(LogDir);
