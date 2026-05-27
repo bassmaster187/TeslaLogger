@@ -9508,7 +9508,6 @@ ChargePoint DE-Gütersloh 24 Goethestraße,51.917,8.38577
 ChargePoint DE-Gütersloh 25 James-Watt-Straße,51.92073,8.40702
 ChargePoint DE-Gütersloh 48 Carl-Miele-Straße,51.91052,8.39659
 ChargePoint DE-Hallbergmoos Am Söldnermoos,48.32874,11.74045
-ChargePoint DE-Hanau Geleitstraße,50.10339,8.91826
 ChargePoint DE-Hansestadt Seehausen Märsche 2,52.97321,11.7368
 ChargePoint DE-Hauzenberg 5 Wastlmühlstraße,48.62785,13.6437
 ChargePoint DE-Heidbecker,53.58142,9.49552
@@ -9610,7 +9609,6 @@ ChargePoint DE-Wertheim Almosenberg,49.77633,9.57542,25
 ChargePoint DE-Wesseling 37-39 Industriestraße,50.83438,6.95135
 ChargePoint DE-Wilburgstetten 1 Karl-Ruf-Straße,49.01736,10.3974
 ChargePoint DE-Wilhelmshaven Bahnhofstraße,53.51964,8.10916
-ChargePoint DE-Wolfach Hausacher Straße,48.29094,8.21758
 ChargePoint DE-Wörthsee 11 Inninger Straße,48.0855,11.19936
 ChargePoint DE-Würzburg 10a Friedrichstraße,49.79716,9.91477
 ChargePoint GB-Morpeth New Market,55.16662,-1.69094
@@ -11314,7 +11312,6 @@ EDEKA DE-Langenberg Hauptstraße,51.77557,8.32245
 EDEKA DE-Langenhagen Stadtweg,52.44271,9.6686
 EDEKA DE-Lauenau Am Markt,52.2742,9.37
 EDEKA DE-Lebach-Thalexweiler Steinbacher Straße,49.44826,6.96455
-EDEKA DE-Leinefelde Herderstraße,51.3742,10.31794,60
 EDEKA DE-Leipzig Lindenthaler Hauptstraße,51.39018,12.3276
 EDEKA DE-Leipzig Wittenberger Straße,51.35973,12.38563
 EDEKA DE-Leverkusen Pommernstraße,51.06856,7.01415
@@ -11908,8 +11905,6 @@ EnBW DE-Altshausen Max-Planck-Straße,47.92453,9.53494
 EnBW DE-Altötting Fabrikstraße,48.22347,12.67064
 EnBW DE-Alzenau-Hörstein,50.04762,9.04729
 EnBW DE-Alzey,49.74933,8.13951
-EnBW DE-Am Hockenheimring Ost,49.317,8.57582,20
-EnBW DE-Am Hockenheimring West,49.32079,8.5679,20
 EnBW DE-Amberg,49.43681,11.85744
 EnBW DE-Amstetten,48.57853,9.87484
 EnBW DE-Amtzell,47.70799,9.74793
@@ -11939,8 +11934,6 @@ EnBW DE-Asperg Eglosheimer Straße,48.90461,9.14333
 EnBW DE-Asperg Markgröninger Straße,48.90571,9.13354
 EnBW DE-Attendorn Bergkuhle,51.14279,7.91004
 EnBW DE-Au i.d.Hallertau Mainburger Straße,48.56336,11.74033
-EnBW DE-Auetal Nord,52.22387,9.22171,20
-EnBW DE-Auetal Süd,52.22684,9.23287,20
 EnBW DE-Augsburg Donauwörther Straße,48.40472,10.87905
 EnBW DE-Augsburg Südtiroler Straße,48.38209,10.93831
 EnBW DE-Aulendorf Parkstraße,47.95434,9.63588
@@ -11961,7 +11954,6 @@ EnBW DE-Aying Römerstraße,47.94764,11.7916
 EnBW DE-Aßling Glonner Straße,47.99171,12.00092
 EnBW DE-Backnang Annonay-Straße,48.94685,9.4332
 EnBW DE-Backnang Bahnhofstraße,48.94329,9.42854
-EnBW DE-Bad Bellingen West,47.737,7.55067
 EnBW DE-Bad Bentheim Heinrich-Heine-Straße,52.3072,7.16686
 EnBW DE-Bad Berleburg Sählingstraße,51.0566,8.3945
 EnBW DE-Bad Bevensen Fritz-Reuter-Weg,53.075,10.5825
@@ -11993,7 +11985,6 @@ EnBW DE-Bad Oldesloe Lübecker Straße,53.81482,10.39254
 EnBW DE-Bad Pyrmont Bahnhofstraße,51.9805,9.26035
 EnBW DE-Bad Pyrmont Grießemer Straße,51.99,9.23471
 EnBW DE-Bad Reichenhall Reichenbachstraße,47.72332,12.87125
-EnBW DE-Bad Reichenhall Süd,47.76645,12.90291
 EnBW DE-Bad Sachsa,51.59353,10.55845
 EnBW DE-Bad Salzdetfurth Bodenburger Straße,52.05472,10.00362
 EnBW DE-Bad Salzuflen,52.06197,8.73728
@@ -12038,10 +12029,8 @@ EnBW DE-Bautzen Dresdener Straße,51.17956,14.411
 EnBW DE-Bayreuth Ludwig-Thoma-Straße,49.93318,11.56795,20
 EnBW DE-Bayreuth Spinnereistraße,49.95211,11.56712
 EnBW DE-Beckum Hellweg,51.77418,8.04067
-EnBW DE-Beckum Vellern Süd,51.79106,8.07393
 EnBW DE-Beimerstetten Heuweg,48.48036,9.98062
 EnBW DE-Bensheim Amperestraße,49.67195,8.59438
-EnBW DE-Bentheimer Wald Süd,52.3125,7.04183
 EnBW DE-Berg bei Neumarkt in der Oberpfalz An der Staatsstraße,49.31733,11.45047
 EnBW DE-Bergheim,50.942,6.65236
 EnBW DE-Bergheim Fortuna-Nord-Straße,50.9888,6.67295
@@ -12193,12 +12182,10 @@ EnBW DE-Böblingen Vaihinger Straße,48.6926,9.01374
 EnBW DE-Böblingen Waldburgstraße,48.689,9.02604
 EnBW DE-Bönen,51.59774,7.73998
 EnBW DE-Bönnigheim Burgplatz,49.04194,9.09082
-EnBW DE-Bühl Ost,48.75331,8.13168
 EnBW DE-Bühlertal Hauptstraße,48.6867,8.18747
 EnBW DE-Bünde Hellweg,52.18128,8.60741
 EnBW DE-Bünde Toom Baumarkt,52.19815,8.56571
 EnBW DE-Büsum,54.13756,8.87453
-EnBW DE-Büttelborn Süd,49.89256,8.54388,20
 EnBW DE-Calberlah Hauptstraße,52.42,10.63297
 EnBW DE-Calw Bahnhofstraße,48.71312,8.74191
 EnBW DE-Calw Leibnizstraße,48.70536,8.76418
@@ -12208,7 +12195,6 @@ EnBW DE-Chemnitz Chemnitzer Straße,50.78313,12.8968,20
 EnBW DE-Chemnitz Hellweg,50.80438,12.91227
 EnBW DE-Chemnitz Zschopauer Straße,50.81496,12.9542
 EnBW DE-Chemnitz Zwickauer Straße,50.82615,12.90692
-EnBW DE-Chiemsee Nord,47.83415,12.40279
 EnBW DE-Coesfeld Dreischkamp,51.92472,7.16075
 EnBW DE-Coesfeld Hagebaumarkt,51.92891,7.17121
 EnBW DE-Cottbus Burger King,51.71787,14.31807
@@ -12321,8 +12307,6 @@ EnBW DE-Ebhausen Nagolder Straße,48.5847,8.6762
 EnBW DE-Ebhausen Rathausstraße,48.60538,8.6621
 EnBW DE-Eching Dieselstraße,48.3062,11.63432,20
 EnBW DE-Edertal Lieschensruh,51.17178,9.10606
-EnBW DE-Edesheim Pfälzer Weinstraße Ost,49.27039,8.15385
-EnBW DE-Edesheim Pfälzer Weinstraße West,49.26986,8.15191
 EnBW DE-Edewecht Friedrichsfehner Straße,53.12354,8.08542
 EnBW DE-Edingen-Neckarhausen Hauptstraße,49.46408,8.60248
 EnBW DE-Edingen-Neckarhausen Mannheimer Straße,49.45132,8.60382
@@ -12348,8 +12332,6 @@ EnBW DE-Elsterwerda Lauchhammer Straße,51.46577,13.53433
 EnBW DE-Emerkingen Bachstraße,48.21675,9.65799
 EnBW DE-Emmendingen Schwarzwaldstraße,48.11688,7.8505
 EnBW DE-Empfingen Im Auchtert,48.38593,8.72005
-EnBW DE-Ems-Vechte Ost,52.52832,7.19985
-EnBW DE-Ems-Vechte-West,52.52792,7.19644,10
 EnBW DE-Emstek Süd-Allee,52.81372,8.19392
 EnBW DE-Endingen Freiburger,48.13836,7.70337
 EnBW DE-Endingen St.-Jakobs-Gässli,48.14234,7.70365
@@ -12510,16 +12492,12 @@ EnBW DE-Gießen Stefan-Bellof-Straße,50.57515,8.7118
 EnBW DE-Gifhorn Braunschweiger Straße,52.47795,10.54488
 EnBW DE-Glauchau,50.83976,12.54113
 EnBW DE-Glinde Berliner Straße,53.54651,10.23234
-EnBW DE-Goldene Bremm Nord,49.2095,6.96642
-EnBW DE-Goldene Bremm Süd,49.20764,6.96718
 EnBW DE-Goslar,51.93255,10.40968
 EnBW DE-Gottmadingen Kornblumenweg,47.73646,8.78699,30
 EnBW DE-Grasleben,52.30291,11.01355
 EnBW DE-Greding OMV,49.04387,11.34986,10
-EnBW DE-Greding West,49.04551,11.33762
 EnBW DE-Greifswald,54.08788,13.39879
 EnBW DE-Greiz,50.64171,12.19472
-EnBW DE-Grenzau Süd,50.43912,7.64743
 EnBW DE-Grevenbroich,51.08837,6.59322
 EnBW DE-Grevenbroich Ostwall,51.08942,6.59434
 EnBW DE-Grevesmühlen,53.86651,11.1833
@@ -12533,8 +12511,6 @@ EnBW DE-Groß-Zimmern Röntgenstraße,49.8811,8.81322
 EnBW DE-Großpösna,51.26725,12.49877
 EnBW DE-Großpösna,51.26757,12.49697
 EnBW DE-Großröhrsdorf,51.1546,14.02058
-EnBW DE-Grönegau Nord,52.19712,8.38556
-EnBW DE-Grönegau Süd,52.19617,8.386
 EnBW DE-Guben Gewerbestraße,51.95543,14.66345
 EnBW DE-Guben Karl-Marx-Straße,51.95679,14.70317
 EnBW DE-Gummersbach,50.98307,7.52804
@@ -12598,7 +12574,6 @@ EnBW DE-Hannover Schulenburger Landstraße,52.41032,9.70682
 EnBW DE-Hardegsen,51.64926,9.83589
 EnBW DE-Harzgerode,51.64327,11.13962
 EnBW DE-Haslach im Kinzigtal Im Spießacker,48.27842,8.09269
-EnBW DE-Hasselhöhe West,53.33073,10.04298
 EnBW DE-Hattenhofen Schulgasse,48.66721,9.57225
 EnBW DE-Hattersheim Heddingheimer Straße,50.07168,8.47406,35
 EnBW DE-Hattingen,51.40808,7.19529
@@ -12610,7 +12585,6 @@ EnBW DE-Hechingen Weilheimer Straße,48.34593,8.9543
 EnBW DE-Heide,54.19662,9.12871
 EnBW DE-Heidelberg Eppelheimer Straße,49.40675,8.65738
 EnBW DE-Heidelberg Sickingenstraße,49.38418,8.67966
-EnBW DE-Heidenfahrt Nord,50.0019,8.10796
 EnBW DE-Heilbronn Charlottenstraße,49.13127,9.21847
 EnBW DE-Heilbronn Etzelstraße,49.153,9.21575
 EnBW DE-Heiligenberg Betenbrunner Straße,47.81855,9.31358
@@ -12651,8 +12625,6 @@ EnBW DE-Hirschaid,49.81973,11.00068
 EnBW DE-Hirschaid Amlingstadter Straße,49.82835,10.98995
 EnBW DE-Hirschberg,50.42787,11.7957
 EnBW DE-Hochheim am Main Königsberger Ring,50.01355,8.34556
-EnBW DE-Hochwald Ost,49.69059,6.89947
-EnBW DE-Hochwald West,49.69018,6.89697
 EnBW DE-Hockenheim Speyerer Straße,49.33683,8.5334,25
 EnBW DE-Hof An der Michaelisbrücke,50.32245,11.92291
 EnBW DE-Hohenmölsen,51.16372,12.09349
@@ -12661,7 +12633,6 @@ EnBW DE-Hohenstein Im Dorf,48.34869,9.37539
 EnBW DE-Hohenwarsleben Amselweg,52.17536,11.49163,30
 EnBW DE-Hohenwarsleben Zum Raukler,52.17547,11.49519
 EnBW DE-Holdorf Zum Hansa Center,52.59792,8.1169,25
-EnBW DE-Holzkirchen Nord 3,47.89297,11.73005
 EnBW DE-Holzminden Bülte,51.84112,9.46541
 EnBW DE-Homberg (Efze),51.04075,9.39827
 EnBW DE-Homburg Saar Süd,49.3471,7.31283
@@ -12670,7 +12641,6 @@ EnBW DE-Horgenzell Gossetsweiler,47.79663,9.50558
 EnBW DE-Horgenzell Kornstraße,47.80298,9.4984
 EnBW DE-Hoyerswerda Kamenzer Bogen,51.42844,14.23687
 EnBW DE-Hoßkirch Hauptstraße,47.94023,9.44846
-EnBW DE-Hunsrück West,49.96334,7.76583
 EnBW DE-Hurlach Gewerbestraße,48.12758,10.83434
 EnBW DE-Husum Bredstedter Straße,54.4896,9.04556
 EnBW DE-Hutthurm Am Kreisel,48.66868,13.48394
@@ -12680,13 +12650,9 @@ EnBW DE-Höhr-Grenzhausen Shell,50.44204,7.66558
 EnBW DE-Hückelhoven,51.05238,6.21884
 EnBW DE-Hückelhoven Schibsler Weg,51.0621,6.19374
 EnBW DE-Hüfingen Lindenpark,47.93404,8.49714
-EnBW DE-Hünxe Ost,51.63693,6.74697
-EnBW DE-Hünxe West,51.63572,6.74493
 EnBW DE-Hürth Luxemburger Straße,50.88605,6.89667
 EnBW DE-Hüttenberg Im Dollenstück,50.52195,8.59057
 EnBW DE-Igersheim,49.48685,9.82083
-EnBW DE-Illertal Ost,48.12472,10.11212,20
-EnBW DE-Illertal West,48.1255,10.10963,20
 EnBW DE-Ilsfeld Porschestraße,49.05779,9.26709
 EnBW DE-Ilshofen Am Feuersee,49.16887,9.91751
 EnBW DE-Immendingen Am Freizeitzentrum,47.93409,8.71661
@@ -12705,8 +12671,6 @@ EnBW DE-Isny im Allgäu Notre-Dame-de-Gravenchon-Straße,47.69239,10.04105
 EnBW DE-Isny im Allgäu Unterer Grabenweg,47.69513,10.0404
 EnBW DE-Ispringen Bahnhofstraße,48.91548,8.6705
 EnBW DE-Ispringen Turnstraße,48.91356,8.66812
-EnBW DE-Jagsttal Ost,49.32295,9.41586,20
-EnBW DE-Jagsttal West,49.32402,9.41218
 EnBW DE-Jestetten Saarstrasse,47.65325,8.57431,30
 EnBW DE-Jestetten Schaffhauser Straße,47.65101,8.57226
 EnBW DE-Jungingen Märzengasse,48.32657,9.04171
@@ -12865,8 +12829,6 @@ EnBW DE-Lauterbach Schramberger Straße,48.22783,8.3476
 EnBW DE-Lebach Auf dem Graben,49.41046,6.89535
 EnBW DE-Lehrte Penny,52.35918,9.91292
 EnBW DE-Lehrte Rewe,52.3587,10.11896
-EnBW DE-Lehrter See Nord,52.3887,9.99658,10
-EnBW DE-Lehrter See Süd,52.38652,9.99854,20
 EnBW DE-Leimbach/ Bad Salzungen,50.82013,10.18298
 EnBW DE-Leimen Gottlieb-Daimler-Straße,49.3449,8.6789
 EnBW DE-Leinfelden-Echterdingen Messepiazza,48.694,9.19218
@@ -12891,14 +12853,11 @@ EnBW DE-Lichtenstein Stettenstraße,48.44047,9.2537
 EnBW DE-Lilienthal,53.15586,8.91463
 EnBW DE-Limbach Bundesstraße,49.45513,9.24711
 EnBW DE-Limburg Mundipharmastraße,50.39755,8.07557,30
-EnBW DE-Limburg Ost,50.39601,8.0775
 EnBW DE-Linden Gießener Pforte,50.5399,8.65023
 EnBW DE-Lingen (Ems),52.52558,7.34284
 EnBW DE-Linkenheim-Hochstetten Römeräcker,49.13707,8.42638
 EnBW DE-Linnich,50.98292,6.27463
 EnBW DE-Lippstadt,51.66056,8.36052
-EnBW DE-Lonetal Ost,48.58412,10.17875,10
-EnBW DE-Lonetal West,48.58405,10.17574,6
 EnBW DE-Loßburg Freudenstädter Straße,48.42033,8.44403
 EnBW DE-Loßburg Hauptstraße,48.41414,8.45013
 EnBW DE-Luckau Rietweg,51.85388,13.72795
@@ -12929,9 +12888,7 @@ EnBW DE-Lüssow Ostseecenter,54.30146,13.02276
 EnBW DE-Lützen Hallesche Straße,51.1777,12.01094
 EnBW DE-Magdeburg Burger King,52.17681,11.62721
 EnBW DE-Magdeburg Mittagstraße,52.15277,11.62923
-EnBW DE-Mahlberg Ost,48.30916,7.79153,20
 EnBW DE-Mahlberg Rathausplatz,48.28708,7.81229
-EnBW DE-Mahlberg West,48.30979,7.78886,20
 EnBW DE-Mahlstetten Lippachtalstraße,48.07444,8.8425
 EnBW DE-Mainburg Straßäcker,48.63234,11.77455
 EnBW DE-Mainz Geschwister-Scholl-Straße,49.97707,8.27053
@@ -12973,7 +12930,6 @@ EnBW DE-Meine Am Marktplatz,52.38044,10.53664
 EnBW DE-Meinerzhagen Darmcher Weg,51.10156,7.67968
 EnBW DE-Meinerzhagen Zum Eickenhahn,51.10615,7.65978
 EnBW DE-Meitingen Euronics,48.5562,10.85176,10
-EnBW DE-Meitingen Nord,48.55767,10.8524,20
 EnBW DE-Mellingen Hainholzstraße,50.93753,11.39008
 EnBW DE-Memmelsdorf Josef-Fösel-Straße,49.93794,10.9651
 EnBW DE-Memmingen Europastraße,47.99934,10.1532,15
@@ -13006,7 +12962,6 @@ EnBW DE-Moosburg an der Isar Degernpoint,48.47188,11.96724
 EnBW DE-Moosburg an der Isar Neue Industriestraße,48.47642,11.94424
 EnBW DE-Moringen,51.69273,9.86879
 EnBW DE-Morsbach,50.86368,7.7259
-EnBW DE-Mosel West,50.2663,7.51009
 EnBW DE-Much,50.90384,7.39639
 EnBW DE-Mudau Schloßauer Straße,49.535,9.20243
 EnBW DE-Mulfingen Hauptstraße,49.3409,9.80002
@@ -13054,7 +13009,6 @@ EnBW DE-Neckarsulm Urbanstraße,49.19196,9.2227
 EnBW DE-Nehren Kirchstraße,48.4329,9.06876
 EnBW DE-Nellingen Esslinger Straße,48.71416,9.3009
 EnBW DE-Nellingen In den Anlagen,48.71577,9.29462
-EnBW DE-Nentershausen Ost,50.42314,7.92839
 EnBW DE-Neu-Ulm Augsburger Straße,48.40118,10.02263
 EnBW DE-Neu-Ulm Euronics,48.3881,10.03596
 EnBW DE-Neu-Ulm Europastraße,48.38758,10.03316
@@ -13118,8 +13072,6 @@ EnBW DE-Oberndorf am Neckar Sägewerkstraße,48.29601,8.57572
 EnBW DE-Oberndorf Klosterstraße,48.29227,8.5747
 EnBW DE-Oberndorf Werkstraße,48.2857,8.57967
 EnBW DE-Obernheim Hauptstraße,48.1628,8.8604
-EnBW DE-Oberpfälzer Alb Süd,49.42281,11.68792
-EnBW DE-Oberpfälzer Alp Nord,49.42444,11.69038
 EnBW DE-Obrigheim Auweg,49.35179,9.09659
 EnBW DE-Ochsenhausen Bahnhof,48.07084,9.94745
 EnBW DE-Ochsenhausen Memminger Straße,48.06958,9.95364
@@ -13167,7 +13119,6 @@ EnBW DE-Pfarrkirchen Südeinfahrt,48.42138,12.94253
 EnBW DE-Pfinztal Römerstraße 28,48.99361,8.5408
 EnBW DE-Pfinztal Römerstraße 8,48.99332,8.54475
 EnBW DE-Pforzheim Konstanzer Straße,48.89893,8.66889
-EnBW DE-Pforzheim Nord,48.90802,8.7737,20
 EnBW DE-Pforzheim Rastatter Straße,48.89976,8.66728
 EnBW DE-Pfullingen Karl-von-Drais-Straße,48.4812,9.2305
 EnBW DE-Pfullingen Schloßstraße,48.46581,9.22172
@@ -13217,10 +13168,20 @@ EnBW DE-Raststätte Aggertal Nord,50.95162,7.318
 EnBW DE-Raststätte Aggertal Süd,50.95184,7.32062
 EnBW DE-Raststätte Allgäuer Tor Ost,47.84752,10.2829,20
 EnBW DE-Raststätte Allgäuer Tor West,47.8482,10.28086,20
+EnBW DE-Raststätte Am Hockenheimring Ost,49.317,8.57582,20
+EnBW DE-Raststätte Am Hockenheimring West,49.3208,8.5679,20
+EnBW DE-Raststätte Auetal Nord,52.22387,9.2217,20
+EnBW DE-Raststätte Auetal Süd,52.22684,9.23287,20
 EnBW DE-Raststätte Aurach Nord,49.5817,10.9307
 EnBW DE-Raststätte Aurach Süd,49.5818,10.92685
+EnBW DE-Raststätte Bad Bellingen West,47.737,7.55067
+EnBW DE-Raststätte Bad Reichenhall Süd,47.76645,12.9029
+EnBW DE-Raststätte Bentheimer Wald Süd,52.3125,7.04183
 EnBW DE-Raststätte Bruchsal Ost,49.16299,8.57098,12
 EnBW DE-Raststätte Bruchsal West,49.16091,8.56703,8
+EnBW DE-Raststätte Bühl Ost,48.7533,8.13168
+EnBW DE-Raststätte Büttelborn Süd,49.89256,8.54388,20
+EnBW DE-Raststätte Chiemsee Nord,47.83415,12.4028
 EnBW DE-Raststätte Denkendorf Nord,48.69386,9.30373,15
 EnBW DE-Raststätte Dollenberg,50.68836,8.29598,15
 EnBW DE-Raststätte Eifel Ost,50.07005,6.88108,20
@@ -13229,38 +13190,89 @@ EnBW DE-Raststätte Ellwanger Berge Ost,48.98485,10.1961
 EnBW DE-Raststätte Ellwanger Berge West,48.98314,10.1935
 EnBW DE-Raststätte Elztal Nord,50.26692,7.22477
 EnBW DE-Raststätte Elztal Süd,50.26563,7.22724
+EnBW DE-Raststätte Ems-Vechte Ost,52.52832,7.19985
+EnBW DE-Raststätte Ems-Vechte-West,52.52792,7.19644,10
 EnBW DE-Raststätte Goldbach Nord,53.00084,9.17945,20
 EnBW DE-Raststätte Goldbach Süd,52.99874,9.18113,20
+EnBW DE-Raststätte Goldene Bremm Nord,49.2095,6.96642
+EnBW DE-Raststätte Goldene Bremm Süd,49.20764,6.96718
+EnBW DE-Raststätte Greding West,49.0455,11.33762
+EnBW DE-Raststätte Grenzau Süd,50.43912,7.64743
+EnBW DE-Raststätte Grönegau Nord,52.19712,8.38556
+EnBW DE-Raststätte Grönegau Süd,52.19617,8.386
 EnBW DE-Raststätte Göttingen West,51.49462,9.87613,20
 EnBW DE-Raststätte Hardtwald Ost,49.351,8.63224
 EnBW DE-Raststätte Hasbruch Nord,53.05588,8.5013
 EnBW DE-Raststätte Hasbruch Süd,53.0544,8.50156
+EnBW DE-Raststätte Hasselhöhe West,53.33073,10.04298
+EnBW DE-Raststätte Heidenfahrt Nord,50.0019,8.10796
 EnBW DE-Raststätte Heiligenroth,50.4544,7.87324
+EnBW DE-Raststätte Hochwald Ost,49.6906,6.89947
+EnBW DE-Raststätte Hochwald West,49.69018,6.89697
 EnBW DE-Raststätte Hofoldinger Forst Süd,47.99715,11.67605
 EnBW DE-Raststätte Hohenlohe Nord,49.2071,9.63882,20
 EnBW DE-Raststätte Hohenlohe Süd,49.2053,9.64033,20
+EnBW DE-Raststätte Holzkirchen Nord,47.89297,11.73005
+EnBW DE-Raststätte Hunsrück West,49.96334,7.76583
+EnBW DE-Raststätte Huntetal Ost,53.04173,8.2212
+EnBW DE-Raststätte Huntetal West,53.0449,8.22008
+EnBW DE-Raststätte Hünxe Ost,51.63693,6.74697
+EnBW DE-Raststätte Hünxe West,51.63572,6.74493
+EnBW DE-Raststätte Illertal Ost,48.12472,10.11212,20
+EnBW DE-Raststätte Illertal West,48.1255,10.10963,20
 EnBW DE-Raststätte im Hegau West,47.86136,8.7863
 EnBW DE-Raststätte Inntal,47.61084,12.20169
 EnBW DE-Raststätte Inntal,47.61265,12.20067
+EnBW DE-Raststätte Jagsttal Ost,49.32295,9.41586,20
+EnBW DE-Raststätte Jagsttal West,49.32402,9.41218
 EnBW DE-Raststätte Kaltenborn,51.28886,7.5726
 EnBW DE-Raststätte Katzenfurt Süd,50.62028,8.36336,11
 EnBW DE-Raststätte Langen-Bergheim,50.24843,8.99398
 EnBW DE-Raststätte Langen-Bergheim,50.2506,8.99451
+EnBW DE-Raststätte Lehrter See Nord,52.3887,9.99658,10
+EnBW DE-Raststätte Lehrter See Süd,52.38652,9.99854,20
+EnBW DE-Raststätte Limburg Ost,50.396,8.0775
+EnBW DE-Raststätte Lonetal Ost,48.58412,10.17875,10
+EnBW DE-Raststätte Lonetal West,48.5841,10.17578,11
 EnBW DE-Raststätte Lorsch Ost,49.64436,8.55415
 EnBW DE-Raststätte Lorsch West,49.64316,8.55194
 EnBW DE-Raststätte Lüneburger Heide Ost,53.1093,9.984
 EnBW DE-Raststätte Lüneburger Heide West,53.10941,9.98134,20
+EnBW DE-Raststätte Mahlberg Ost,48.30916,7.79153,20
+EnBW DE-Raststätte Mahlberg West,48.3098,7.78886,20
 EnBW DE-Raststätte Montabaur Ost,50.44766,7.8503
+EnBW DE-Raststätte Mosel West,50.2663,7.5101
+EnBW DE-Raststätte Moseltal Ost,50.31654,7.49884
+EnBW DE-Raststätte Moseltal West,50.31747,7.4979
+EnBW DE-Raststätte Nentershausen Ost,50.42314,7.9284
+EnBW DE-Raststätte Oberpfälzer Alb Süd,49.4228,11.68792
+EnBW DE-Raststätte Oberpfälzer Alp Nord,49.42444,11.69038
+EnBW DE-Raststätte Pforzheim Nord,48.90802,8.7737,20
 EnBW DE-Raststätte Pfungstadt Ost,49.8121,8.57927
 EnBW DE-Raststätte Pfungstadt West,49.81247,8.57696
+EnBW DE-Raststätte Pfälzer Weinstraße Ost,49.2704,8.15385
+EnBW DE-Raststätte Pfälzer Weinstraße West,49.26986,8.1519
 EnBW DE-Raststätte Renchtal Ost,48.56287,7.95916
 EnBW DE-Raststätte Renchtal West,48.563,7.9558
+EnBW DE-Raststätte Ruraue Ost,50.9313,6.34048
+EnBW DE-Raststätte Rölvedermühle West,51.2881,7.56914
+EnBW DE-Raststätte Schönbuch Ost,48.6165,8.90857,20
+EnBW DE-Raststätte Schönbuch West,48.61452,8.90313,20
+EnBW DE-Raststätte Seevetal Ost,53.34827,10.03925
+EnBW DE-Raststätte Sessenhausen,50.52294,7.67515
+EnBW DE-Raststätte Siegerland Ost,50.8776,7.94575
+EnBW DE-Raststätte Siegerland West,50.87983,7.93543
 EnBW DE-Raststätte Sindelfinger Wald,48.74132,9.03332
 EnBW DE-Raststätte Soester Börde Nord,51.54836,8.13218
 EnBW DE-Raststätte Soester Börde Süd,51.5472,8.13345
+EnBW DE-Raststätte Vellern Süd,51.79106,8.07393
 EnBW DE-Raststätte Waldmohr,49.37322,7.37428
+EnBW DE-Raststätte Wonnegau Ost,49.64704,8.29344
+EnBW DE-Raststätte Wonnegau West,49.64455,8.29018
 EnBW DE-Raststätte Wunnenstein Ost,49.0451,9.26597,20
 EnBW DE-Raststätte Wunnenstein West,49.04449,9.26187,12
+EnBW DE-Raststätte Wülferode Ost,52.33312,9.86555
+EnBW DE-Raststätte Wülferode West,52.3381,9.86385
 EnBW DE-Ratzeburg Hagebaumarkt,53.69966,10.7412
 EnBW DE-Ratzeburg Penny,53.69123,10.7938
 EnBW DE-Rauenberg Wieslocher Straße,49.26657,8.70437
@@ -13332,13 +13344,11 @@ EnBW DE-Roßleben-Wiehe,51.29756,11.43423
 EnBW DE-Roßleben-Wiehe Am Bahnhof,51.29715,11.43501
 EnBW DE-Rudersberg Friedrich-Ebert-Straße,48.88612,9.52736
 EnBW DE-Ruppichteroth,50.84473,7.48878
-EnBW DE-Ruraue Ost,50.93131,6.34048
 EnBW DE-Rust Erich-Spoth-Straße,48.26316,7.73099
 EnBW DE-Rust Fischerstraße,48.2681,7.72494
 EnBW DE-Rutesheim Leonberger Straße,48.80814,8.94737
 EnBW DE-Rutesheim Pforzheimer Straße,48.81197,8.92208
 EnBW DE-Rödermark Ober-Rodener-Straße,49.9762,8.80324,25
-EnBW DE-Rölvedermühle West,51.2881,7.56914
 EnBW DE-Röthenbach an der Pegnitz Am Gewerbepark,49.47978,11.22504
 EnBW DE-Rüdesheim Am Wiesenberg,49.84583,7.82307
 EnBW DE-Rüdesheim Auf der Lach,49.97951,7.93419
@@ -13434,8 +13444,6 @@ EnBW DE-Schömberg Badstubengasse,48.21153,8.76001
 EnBW DE-Schönau Altneudorfer Straße,49.4612,8.80598
 EnBW DE-Schönau Bahnhofstraße,49.43075,8.81193
 EnBW DE-Schönau Marktplatz,49.43679,8.80927
-EnBW DE-Schönbuch Ost,48.6165,8.90857,20
-EnBW DE-Schönbuch West,48.61452,8.90313,20
 EnBW DE-Schönebeck (Elbe) Euronics,52.0169,11.73392
 EnBW DE-Schönebeck (Elbe) Netto,52.01724,11.73747
 EnBW DE-Schöningen,52.13817,10.97826
@@ -13443,15 +13451,11 @@ EnBW DE-Schöntal-Berlichingen Ziegeleistraße,49.32847,9.48906
 EnBW DE-Schöppenstedt Neue Straße,52.14249,10.77055
 EnBW DE-Seckach Eicholzheimer Straße,49.4431,9.335
 EnBW DE-Seesen,51.89668,10.18136
-EnBW DE-Seevetal Ost,53.34827,10.03925
 EnBW DE-Sehnde Peiner Straße,52.31597,9.97077
 EnBW DE-Seitingen-Oberflacht Zum Schachen,48.01794,8.72052
 EnBW DE-Selm,51.70842,7.45614
-EnBW DE-Sessenhausen West,50.52294,7.67515
 EnBW DE-Sexau Lörchstraße,48.09608,7.89988
 EnBW DE-Siegenburg Daßfeld,48.7584,11.8357
-EnBW DE-Siegerland Ost,50.8776,7.94575
-EnBW DE-Siegerland West,50.87983,7.93543
 EnBW DE-Siegsdorf Breslauer Straße,47.82871,12.63686
 EnBW DE-Sigmaringen Friedrich-List-Straße,48.08068,9.23549
 EnBW DE-Sindelfingen Feldbergstraße,48.72525,9.00896
@@ -13737,8 +13741,6 @@ EnBW DE-Wangen im Allgäu Liebigstraße,47.68411,9.82894
 EnBW DE-Wangen im Allgäu Ravensburger Straße,47.6949,9.82803
 EnBW DE-Wangen im Allgäu Scherrichmühlweg,47.6876,9.83841,10
 EnBW DE-Wangen im Allgäu Siemensstraße,47.69658,9.82277
-EnBW DE-Wardenburg Huntetal Ost,53.04173,8.22121
-EnBW DE-Wardenburg Huntetal West,53.04489,8.22008
 EnBW DE-Wasserburg am Inn Bernd-Motzkus-Straße,48.05045,12.22232
 EnBW DE-Wattenheim Rastanlage Pfalz,49.52749,8.07258
 EnBW DE-Wehingen Deilinger Straße,48.14898,8.7885
@@ -13775,6 +13777,7 @@ EnBW DE-Wertheim Almosenberg,49.77249,9.57944
 EnBW DE-Wesel,51.65332,6.60665
 EnBW DE-Wesseling Ahrstrasse,50.81182,6.99134
 EnBW DE-Wesseling Euronics,50.83081,6.96222
+EnBW DE-Westendorf Am Oberfeld,48.55767,10.8524,20
 EnBW DE-Westerburg Bahnhofstraße,50.56057,7.96972
 EnBW DE-Westerstede,53.26335,7.9418
 EnBW DE-Westhausen Baiershofener Straße,48.88329,10.17784
@@ -13795,8 +13798,6 @@ EnBW DE-Wildberg Hohe Gasse,48.62385,8.74681
 EnBW DE-Wildflecken,50.37709,9.9144
 EnBW DE-Wilhelmshaven Bismarckstraße,53.52854,8.0886
 EnBW DE-Wilhelmshaven Graudenzer Straße,53.57076,8.09362
-EnBW DE-Winningen Moseltal Ost,50.31654,7.49884
-EnBW DE-Winningen Moseltal West,50.31747,7.49791
 EnBW DE-Winterbach Ritterstraße,48.80463,9.47858
 EnBW DE-Wirges Bahnhofstraße,50.47247,7.79414
 EnBW DE-Wirges Samoborstraße,50.47264,7.78887
@@ -13818,8 +13819,6 @@ EnBW DE-Wolfsburg Ob. Tor,52.44958,10.83454
 EnBW DE-Wollin Im Gewerbegebiet,52.28829,12.46492
 EnBW DE-Wolpertshausen Kuno-Haberkern-Straße,49.16903,9.84812
 EnBW DE-Wolpertswende Kirchplatz,47.89446,9.61267
-EnBW DE-Wonnegau Ost,49.64704,8.29344
-EnBW DE-Wonnegau West,49.64455,8.29018
 EnBW DE-Worms Mainzer Straße,49.64475,8.36274
 EnBW DE-Worms Petrus-Dorn-Straße,49.64434,8.36313,20
 EnBW DE-Wuppertal Bauhaus,51.24568,7.18793
@@ -13835,8 +13834,6 @@ EnBW DE-Wyhl Pfarrgässle,48.16828,7.65069
 EnBW DE-Wächtersbach Main-Kinzig-Straße,50.25023,9.28937
 EnBW DE-Wörth am Rhein Maximilianstraße,49.0405,8.29287
 EnBW DE-Wörth an der Donau Im Gewerbepark,49.001,12.36548
-EnBW DE-Wülferode Ost,52.33312,9.86555
-EnBW DE-Wülferode West,52.33809,9.86385
 EnBW DE-Würselen Adenauerstraße,50.80618,6.15241
 EnBW DE-Würselen Schumanstraße,50.8075,6.15188
 EnBW DE-Würzburg Mainfrankenhöhe,49.82055,9.97913
@@ -16755,7 +16752,6 @@ GP-JOULE DE-Bad Herrenalb Ettlinger Straße,48.80534,8.44495
 GP-JOULE DE-Bad Vilbel Friedberger Straße,50.189,8.74103
 GP-JOULE DE-Beckum Unterberg II,51.72378,8.07053
 GP-JOULE DE-Bergisch Gladbach Siebenmorgen,50.95764,7.11585
-GP-JOULE DE-Berlin An der Schule,52.50612,13.61486
 GP-JOULE DE-Berlin Kniprodestraße,52.53379,13.44505
 GP-JOULE DE-Busdorf Schulstraße,54.4924,9.55343
 GP-JOULE DE-Busdorf Wittgenstein,54.47763,9.54545,15
@@ -16793,7 +16789,6 @@ GP-JOULE DE-Magdeburg Berliner Chausee,52.13041,11.67917
 GP-JOULE DE-Marne Alter Kirchweg,53.95592,9.02261
 GP-JOULE DE-Nassenheide Teerofener Weg,52.81131,13.22343
 GP-JOULE DE-Neufahrn bei München Ludwig-Erhard-Straße,48.31429,11.6522
-GP-JOULE DE-Neuwied Breslauer Straße,50.44074,7.48813
 GP-JOULE DE-Niebüll Ostring,54.78262,8.85151
 GP-JOULE DE-Oberkrämer Im Gewerbepark,52.71128,13.11696
 GP-JOULE DE-Rellingen Am Dolmen,53.68109,9.79676
@@ -16877,6 +16872,26 @@ GreenFlux BE-Anderlecht Westland Shopping,50.83877,4.28766
 GreenFlux IT-Pisa Via Fagiana,43.6884,10.43308
 GreenFlux NL-Almere Meindert Hobbemastraat,52.38353,5.25912
 GreenFlux NL-Amsterdam Sint Antoniesluis,52.36976,4.90089
+
+Greenman DE-Amorbach Krummwiese,49.64826,9.21956
+Greenman DE-Bad Lauchstädt Querfurter Straße,51.38915,11.86267
+Greenman DE-Berlin An der Schule,52.50614,13.6148
+Greenman DE-Berlin Weißenhöher Straße,52.50705,13.55898
+Greenman DE-Cloppenburg Max-Planck-Straße,52.83842,8.0726
+Greenman DE-Freyburg (Unstrut) Am Kirschweg,51.2238,11.77397
+Greenman DE-Geisa Rhönstraße,50.71385,9.95756
+Greenman DE-Hanau Geleitstraße,50.1034,8.91825
+Greenman DE-Hohen Neuendorf Schönfließer Straße,52.66693,13.29742
+Greenman DE-Homberg Kasseler Straße,51.0336,9.40006
+Greenman DE-Kemnath Bayreuther Straße,49.86854,11.88055
+Greenman DE-Leinefelde Herderstraße,51.3742,10.31794,60
+Greenman DE-Neuwied Breslauer Straße,50.4406,7.4881
+Greenman DE-Petersberg Magdeburger Chaussee,51.53222,11.93997
+Greenman DE-Plauen Äußere Reichenbacher Straße,50.49733,12.17038
+Greenman DE-Rodenbach Adolf-Reichwein-Straße,50.13934,9.02353
+Greenman DE-Suhl Würzburger Straße,50.60293,10.67817
+Greenman DE-Taucha Eilenburger Straße,51.38635,12.5066
+Greenman DE-Wolfach Hausacher Straße,48.29094,8.21758
 
 GreenMobility IT-Terlan Mebo,46.56361,11.21332
 
