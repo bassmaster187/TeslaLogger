@@ -1714,8 +1714,8 @@ PRIMARY KEY(id)
                 if (File.Exists(phpinipath))
                 {
                     string phpini = File.ReadAllText(phpinipath);
-                    string newphpini = Regex.Replace(phpini, "(post_max_size\\s*=)(.*)", "$1 150M");
-                    newphpini = Regex.Replace(newphpini, "(upload_max_filesize\\s*=)(.*)", "$1 150M");
+                    string newphpini = Regex.Replace(phpini, "(post_max_size\\s*=)(.*)", "$1 300M");
+                    newphpini = Regex.Replace(newphpini, "(upload_max_filesize\\s*=)(.*)", "$1 300M");
 
                     File.WriteAllText(phpinipath, newphpini);
 

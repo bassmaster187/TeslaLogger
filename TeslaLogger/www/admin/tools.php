@@ -7,7 +7,7 @@ function checkHTaccess()
     $htaccessPath = "/var/www/html/admin/.htaccess";
     $htpasswdPath = "/tmp/.htpasswd";
 
-    if (filesize($htaccessPath) == 0 && file_exists($htpasswdPath))
+    if ((!file_exists($htaccessPath) || filesize($htaccessPath) == 0) && file_exists($htpasswdPath))
     {
         error_log("TeslaLogger: .htaccess file is empty but .htpasswd exists - recreating .htaccess");
         createHTAccess();
