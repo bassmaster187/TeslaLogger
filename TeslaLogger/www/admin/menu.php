@@ -33,9 +33,7 @@ function menu($title, $prefix = "")
 	global $car_inactive;
 	global $vehicle_location;
 
-    $current_carid = $_SESSION["carid"];
-    if (!isset($current_carid))
-        $current_carid = GetDefaultCarId();
+    $current_carid = isset($_SESSION["carid"]) ? $_SESSION["carid"] : GetDefaultCarId();
 
 	GetFileFromTeslaloggerAndWriteToTMP("dashboardlinks.txt");
     $alldashboards = file_get_contents("/tmp/dashboardlinks.txt");
