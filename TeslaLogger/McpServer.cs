@@ -188,7 +188,7 @@ namespace TeslaLogger
                         serverInfo = new
                         {
                             name = "TeslaLogger",
-                            version = "1.0.0"
+                            version = "1.1.0"
                         }
                     });
 
@@ -329,6 +329,40 @@ namespace TeslaLogger
                         },
                         required = new[] { "car_id" }
                     }
+                },
+                new
+                {
+                    name = "get_tripsummary",
+                    description = "Retrieve aggregated trip totals for a vehicle grouped by month. Returns trip count, total distance, total consumption (kWh), average consumption per 100km, total duration, and average/max speed per month. Use 'from'/'to' for a specific date range, or 'days' to look back from now.",
+                    inputSchema = new
+                    {
+                        type = "object",
+                        properties = new
+                        {
+                            car_id = new { type = "integer", description = "Vehicle ID (from get_vehicles)" },
+                            days = new { type = "integer", description = "Number of days to look back from now (default: 7, ignored if 'from' is set)" },
+                            from = new { type = "string", description = "Start date/time in format yyyy-MM-dd or yyyy-MM-dd HH:mm:ss" },
+                            to = new { type = "string", description = "End date/time in format yyyy-MM-dd or yyyy-MM-dd HH:mm:ss (default: now)" }
+                        },
+                        required = new[] { "car_id" }
+                    }
+                },
+                new
+                {
+                    name = "get_chargesummary",
+                    description = "Retrieve aggregated charging totals for a vehicle grouped by month. Returns total kWh charged, total costs, session count, average cost per kWh, and average/max charging power per month. Use 'from'/'to' for a specific date range, or 'days' to look back from now.",
+                    inputSchema = new
+                    {
+                        type = "object",
+                        properties = new
+                        {
+                            car_id = new { type = "integer", description = "Vehicle ID (from get_vehicles)" },
+                            days = new { type = "integer", description = "Number of days to look back from now (default: 7, ignored if 'from' is set)" },
+                            from = new { type = "string", description = "Start date/time in format yyyy-MM-dd or yyyy-MM-dd HH:mm:ss" },
+                            to = new { type = "string", description = "End date/time in format yyyy-MM-dd or yyyy-MM-dd HH:mm:ss (default: now)" }
+                        },
+                        required = new[] { "car_id" }
+                    }
                 }
             };
         }
@@ -391,6 +425,22 @@ namespace TeslaLogger
                         if (carId <= 0) return ToolError(id, "car_id is required and must be > 0");
                         var (from, to) = ParseDateRange(arguments);
                         return ToolResult(id, GetTpms(carId, from, to));
+                    }
+
+                    case "get_tripsummary":
+                    {
+                        int carId = arguments["car_id"]?.Value<int>() ?? 0;
+                        if (carId <= 0) return ToolError(id, "car_id is required and must be > 0");
+                        var (from, to) = ParseDateRange(arguments);
+                        return ToolResult(id, GetTripSummary(carId, from, to));
+                    }
+
+                    case "get_chargesummary":
+                    {
+                        int carId = arguments["car_id"]?.Value<int>() ?? 0;
+                        if (carId <= 0) return ToolError(id, "car_id is required and must be > 0");
+                        var (from, to) = ParseDateRange(arguments);
+                        return ToolResult(id, GetChargeSummary(carId, from, to));
                     }
 
                     default:
@@ -474,7 +524,7 @@ SELECT
     pe.lat AS end_lat,
     pe.lng AS end_lng,
     ROUND(pe.odometer - ps.odometer, 2) AS distance_km,
-    ROUND((ps.ideal_battery_range_km - pe.ideal_battery_range_km) * c.wh_tr / 1000, 2) AS consumption_kWh,
+    ROUND((ps.ideal_battery_range_km - pe.ideal_battery_range_km) * c.wh_tr, 2) AS consumption_kWh,
     TIMESTAMPDIFF(MINUTE, ds.StartDate, ds.EndDate) AS duration_minutes,
     ds.outside_temp_avg,
     ds.speed_max,
@@ -752,6 +802,114 @@ ORDER BY HourBucket", con))
             }
 
             return JsonConvert.SerializeObject(tpms, Formatting.Indented);
+        }
+
+        private string GetTripSummary(int carId, DateTime from, DateTime to)
+        {
+            var summaries = new List<object>();
+            using (var con = new MySqlConnection(DBHelper.DBConnectionstring))
+            {
+                con.Open();
+                using (var cmd = new MySqlCommand(@"
+SELECT
+    DATE_FORMAT(ds.StartDate, '%Y-%m') AS `ym`,
+    COUNT(*) AS trips,
+    ROUND(SUM(pe.odometer - ps.odometer), 2) AS total_distance_km,
+    ROUND(SUM((ps.ideal_battery_range_km - pe.ideal_battery_range_km) * c.wh_tr), 2) AS total_consumption_kWh,
+    ROUND(AVG((ps.ideal_battery_range_km - pe.ideal_battery_range_km) * c.wh_tr / (pe.odometer - ps.odometer) * 100), 2) AS avg_consumption_per_100km,
+    ROUND(SUM(TIMESTAMPDIFF(MINUTE, ds.StartDate, ds.EndDate)), 0) AS total_minutes,
+    ROUND(AVG(ds.speed_max), 0) AS avg_speed_max,
+    MAX(ds.speed_max) AS max_speed,
+    ROUND(AVG(ds.outside_temp_avg), 1) AS avg_outside_temp
+FROM drivestate ds
+JOIN pos ps ON ds.StartPos = ps.id
+JOIN pos pe ON ds.EndPos = pe.id
+JOIN cars c ON c.id = ds.CarID
+WHERE ds.CarID = @carId
+  AND ds.StartDate >= @from
+  AND ds.StartDate <= @to
+  AND (pe.odometer - ps.odometer) > 0.1
+GROUP BY DATE_FORMAT(ds.StartDate, '%Y-%m')
+ORDER BY `ym`", con))
+                {
+                    cmd.Parameters.AddWithValue("@carId", carId);
+                    cmd.Parameters.AddWithValue("@from", from);
+                    cmd.Parameters.AddWithValue("@to", to);
+                    using (var dr = SQLTracer.TraceDR(cmd))
+                    {
+                        while (dr.Read())
+                        {
+                            summaries.Add(new
+                            {
+                                period = dr.GetString(0),
+                                trips = Convert.ToInt32(dr[1]),
+                                total_distance_km = Convert.ToDouble(dr[2]),
+                                total_consumption_kWh = Convert.ToDouble(dr[3]),
+                                avg_consumption_per_100km = dr.IsDBNull(4) ? (double?)null : Convert.ToDouble(dr[4]),
+                                total_minutes = Convert.ToInt32(dr[5]),
+                                avg_speed_max = dr.IsDBNull(6) ? (double?)null : Convert.ToInt32(dr[6]),
+                                max_speed = dr.IsDBNull(7) ? (int?)null : Convert.ToInt32(dr[7]),
+                                avg_outside_temp = dr.IsDBNull(8) ? (double?)null : Convert.ToDouble(dr[8])
+                            });
+                        }
+                    }
+                }
+            }
+
+            return JsonConvert.SerializeObject(summaries, Formatting.Indented);
+        }
+
+        private string GetChargeSummary(int carId, DateTime from, DateTime to)
+        {
+            var summaries = new List<object>();
+            using (var con = new MySqlConnection(DBHelper.DBConnectionstring))
+            {
+                con.Open();
+                using (var cmd = new MySqlCommand(@"
+SELECT
+    DATE_FORMAT(cs.StartDate, '%Y-%m') AS `ym`,
+    COUNT(*) AS sessions,
+    ROUND(SUM(cs.charge_energy_added), 2) AS total_kWh,
+    ROUND(SUM(cs.cost_total), 2) AS total_cost,
+    ROUND(AVG(cs.cost_per_kwh), 4) AS avg_cost_per_kWh,
+    ROUND(AVG(cs.cost_per_session), 2) AS avg_cost_per_session,
+    ROUND(SUM(cs.cost_idle_fee_total), 2) AS total_idle_fees,
+    ROUND(AVG(cs.max_charger_power), 1) AS avg_charger_power_kW,
+    MAX(cs.max_charger_power) AS max_charger_power_kW,
+    ROUND(SUM(TIMESTAMPDIFF(MINUTE, cs.StartDate, cs.EndDate)), 0) AS total_minutes
+FROM chargingstate cs
+WHERE cs.CarID = @carId
+  AND cs.StartDate >= @from
+  AND cs.StartDate <= @to
+GROUP BY DATE_FORMAT(cs.StartDate, '%Y-%m')
+ORDER BY `ym`", con))
+                {
+                    cmd.Parameters.AddWithValue("@carId", carId);
+                    cmd.Parameters.AddWithValue("@from", from);
+                    cmd.Parameters.AddWithValue("@to", to);
+                    using (var dr = SQLTracer.TraceDR(cmd))
+                    {
+                        while (dr.Read())
+                        {
+                            summaries.Add(new
+                            {
+                                period = dr.GetString(0),
+                                sessions = Convert.ToInt32(dr[1]),
+                                total_kWh = Convert.ToDouble(dr[2]),
+                                total_cost = dr.IsDBNull(3) ? (double?)null : Convert.ToDouble(dr[3]),
+                                avg_cost_per_kWh = dr.IsDBNull(4) ? (double?)null : Convert.ToDouble(dr[4]),
+                                avg_cost_per_session = dr.IsDBNull(5) ? (double?)null : Convert.ToDouble(dr[5]),
+                                total_idle_fees = dr.IsDBNull(6) ? (double?)null : Convert.ToDouble(dr[6]),
+                                avg_charger_power_kW = dr.IsDBNull(7) ? (double?)null : Convert.ToDouble(dr[7]),
+                                max_charger_power_kW = dr.IsDBNull(8) ? (double?)null : Convert.ToInt32(dr[8]),
+                                total_minutes = Convert.ToInt32(dr[9])
+                            });
+                        }
+                    }
+                }
+            }
+
+            return JsonConvert.SerializeObject(summaries, Formatting.Indented);
         }
 
         #endregion
