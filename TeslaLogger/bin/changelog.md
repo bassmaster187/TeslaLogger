@@ -1,3 +1,7 @@
+# Version 1.63.15
+- MCP Server: get_tripsummary and get_chargesummary for a given time range. This is especially useful for AI clients to get a quick summary of the last trip or charging session without the need to parse all the data points.
+- BF: Restore backup
+
 # Version 1.63.14 with AI Client Support!
 - AI clients like Claude Desktop can connect to TeslaLogger's MCP server. This opens up a wide range of new possibilities. More info: [LINK](https://teslalogger.de/docs/extras/mcp-server)
 - Support Lucid Gravity
