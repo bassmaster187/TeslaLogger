@@ -1911,6 +1911,7 @@ Supercharger-V3 DE-Braak,53.61803,10.23968
 Supercharger-V4 DE-Braunschweig (Globus),52.24359,10.51295,30
 Supercharger-V4 DE-Bremen,53.04964,8.82077
 Supercharger-V4 DE-Bremen-Osterholz (Cafe Del Sol),53.054,8.961
+Supercharger-V4 DE-Bremerhaven,53.52678,8.61944
 Supercharger-V4 DE-Brinkum,53.02833,8.80876
 Supercharger-V4 DE-Brinkum,53.02878,8.80705,25
 Supercharger-V4 DE-Bruchsal,49.13837,8.56242
@@ -2036,7 +2037,7 @@ Supercharger-V3 DE-Hilpoltstein,49.16096,11.26101,120
 Supercharger-V4 DE-Hirschberg,49.50738,8.63752,40
 Supercharger-V4 DE Hockenheim,49.33742,8.53313
 Supercharger-V4 DE-Hofheim am Taunus,50.05733,8.40944
-Supercharger DE-Hohenwarsleben,52.17406,11.49452,40
+Supercharger-V4 DE-Hohenwarsleben,52.17406,11.49452,40
 Supercharger-V3 DE-Holdorf,52.597843,8.11891
 Supercharger-V3 DE-Holzkirchen,47.881386,11.701631
 Supercharger-V4 DE-Holzkirchen Nord,47.890637,11.721419
@@ -2306,7 +2307,6 @@ Supercharger-V3 DK-Aalborg,57.004176,9.871407
 Supercharger DK-Aarhus,56.17802,10.138826
 Supercharger-V4 DK-Billund,55.732426,9.134642
 Supercharger-V4 DK-Blokhus,57.252351,9.582592
-Supercharger-V4 DK-Copenhagen,55.68184,12.53209
 Supercharger-V3 DK-Esbjerg,55.465749,8.44405,25
 Supercharger-V4 DK-Faaborg,55.10209,10.23156
 Supercharger-V3 DK-Fredericia,55.534407,9.717122
@@ -2324,6 +2324,7 @@ Supercharger-V3 DK-Kirke Såby,55.64015,11.830563
 Supercharger-V3 DK-Kliplev,54.940086,9.37887,40
 Supercharger-V3 DK-Kolding,55.512661,9.462733
 Supercharger-V4 DK-Korsør,55.35377,11.14115
+Supercharger-V4 DK-København,55.68184,12.5321
 Supercharger DK-Køge,55.489014,12.163153
 Supercharger-V4 DK-Lumsås,55.94219,11.50824
 Supercharger-V4 DK-Lyngby,55.7711,12.505377,60
@@ -2366,8 +2367,10 @@ Supercharger-V3 ES-Alcobendas,40.519701,-3.656799,60
 Supercharger ES-Alcobendas,40.521575,-3.65606
 Supercharger-V3 ES-Aldaia,39.47147,-0.48592
 Supercharger-V3 ES-Algeciras,36.135157,-5.461652
+Supercharger-V4 ES-Algemesí,39.2098,-0.41556
 Supercharger-V4 ES-Alicante,38.35333,-0.47224
 Supercharger-V4 ES-Almaraz,39.7916,-5.6955,30
+Supercharger-V4 ES-Almazán,41.47052,-2.52854
 Supercharger-V4 ES-Antas,37.2137,-1.89826
 Supercharger-V3 ES-Antequera,37.113318,-4.566764
 Supercharger-V4 ES-Aranda de Duero,41.62322,-3.68768
@@ -2435,6 +2438,7 @@ Supercharger-V4 ES-Mérida,38.8598,-6.36399
 Supercharger ES-Mérida,38.921746,-6.375133
 Supercharger-V4 ES-Ocaña,39.93407,-3.4897
 Supercharger-V3 ES-Ondara,38.816859,0.022245
+Supercharger-V4 ES-Oropesa,39.9198,-5.1842
 Supercharger-V3 ES-Pamplona,42.783886,-1.630849,60
 Supercharger-V4 ES-Puebla de Sanabria,42.05826,-6.66216
 Supercharger ES-Reocín,43.355578,-4.09496
@@ -2456,6 +2460,7 @@ Supercharger-V3 ES-Toledo,39.863257,-3.974064
 Supercharger ES-Tordesillas,41.516125,-4.943023
 Supercharger-V4 ES-Torija,40.748006,-3.033348
 Supercharger-V4 ES-Torre del Mar,36.752408,-4.09659
+Supercharger-V4 ES-Torredembarra,41.15004,1.39105
 Supercharger ES-Torrent Northbound,39.400528,-0.491639,20
 Supercharger ES-Torrent Southbound,39.400668,-0.493125,20
 Supercharger-V4 ES-Torrent Toll-l’Alberca,39.42004,-0.50272
@@ -2535,6 +2540,7 @@ Supercharger FR-Aire de Châteauvillain - Val Marnay,48.057341,4.959604
 Supercharger FR-Aire de la Baie de Somme,50.16734,1.75534
 Supercharger-V3 FR-Aire de la Vendée,46.573233,-1.11793
 Supercharger-V4 FR-Aire de Lafayette,45.371135,3.294451
+Supercharger-V4 FR-Aire de Langres-Noidant,47.8137,5.22438
 Supercharger-V3 FR-Aire de l’Abis,45.524989,5.976465
 Supercharger-V4 FR-Aire de l’Aveyron,44.329106,3.08039
 Supercharger FR-Aire de Manissieux,45.69848,4.977541
@@ -2559,6 +2565,7 @@ Supercharger-V3 FR-Ajaccio,41.951864,8.792775
 Supercharger-V4 FR-Albaret-Sainte-Marie,44.8708,3.25304
 Supercharger-V3 FR-Albertville,45.65538,6.36566
 Supercharger-V3 FR-Albi,43.95773,2.154951
+Supercharger-V4 FR-Alès,44.10953,4.10043
 Supercharger-V4 FR-Amiens,49.8635,2.27814
 Supercharger-V3 FR-Angers Espace Anjou,47.466441,-0.524568
 Supercharger-V3 FR-Angoulême,45.69448,0.17889,30
@@ -2627,6 +2634,7 @@ Supercharger-V3 FR-Chambray-Lès-Tours,47.325354,0.713727
 Supercharger FR-Chambéry,45.593128,5.898171
 Supercharger-V4 FR-Chambéry Nord,45.596817,5.895551
 Supercharger-V3 FR-Champfleury,49.204296,4.013196
+Supercharger-V4 FR-Chanteloup-en-Brie,48.85693,2.75205
 Supercharger FR-Chapelle sur Erdre,47.282771,-1.550008
 Supercharger FR-Charleville-Mézières,49.736834,4.744095
 Supercharger-V4 FR-Charolles,46.43886,4.30145
@@ -2664,6 +2672,7 @@ Supercharger-V4 FR-Figeac,44.606988,2.013952
 Supercharger-V4 FR-Fontaine-lès-Dijon,47.355721,5.0322
 Supercharger FR-Fontainebleau,48.349396,2.607344
 Supercharger-V4 FR-Franconville,48.988982,2.208563
+Supercharger-V4 FR-Férin,50.3424,3.09408
 Supercharger-V4 FR-Gallargues-le-Montueux,43.7184,4.1803
 Supercharger-V3 FR-Gap,44.569565,6.104458
 Supercharger-V4 FR-Gassin,43.26302,6.58044
@@ -2692,11 +2701,13 @@ Supercharger-V4 FR-Les Clayes-sous-Bois,48.8251,1.96833
 Supercharger-V3 FR-Les Herbiers,46.889368,-1.032994
 Supercharger-V4 FR-Les Pennes-Mirabeau,43.41473,5.2754
 Supercharger-V4 FR-Les Sables D’Olonne,46.51405,-1.77701
+Supercharger-V4 FR-Lexy,49.5134,5.73006
 Supercharger FR-Lille,50.5834,3.08986,30
 Supercharger FR-Limoges,45.867688,1.271166
 Supercharger-V3 FR-Limoges,45.870671,1.2684
 Supercharger-V4 FR-Limoges Centre,45.844611,1.287198
 Supercharger-V4 FR-Livry-Gargan,48.9276,2.5484
+Supercharger-V4 FR-Longueau,49.8761,2.36525
 Supercharger FR-Lorient,47.787895,-3.33147
 Supercharger-V4 FR-Loudéac,48.193224,-2.757943
 Supercharger-V4 FR-Luçon,46.46077,-1.13032
@@ -2815,6 +2826,7 @@ Supercharger-V4 FR-Valence Sud,44.90396,4.8801
 Supercharger-V3 FR-Vannes,47.677358,-2.803532
 Supercharger-V3 FR-Varennes-Vauzelles,47.02484,3.147264
 Supercharger-V4 FR-Varneville-Bretteville,49.64574,1.04575
+Supercharger-V4 FR-Vaux-sur-Mer,45.64706,-1.04888
 Supercharger-V3 FR-Verniolle,43.074792,1.640626
 Supercharger-V4 FR-Vesoul,47.631408,6.139914
 Supercharger-V4 FR-Vichy,46.11367,3.41604
@@ -2840,6 +2852,7 @@ Supercharger GB-Aviemore,57.189774,-3.836206
 Supercharger-V3 GB-Banbury,52.073055,-1.341804
 Supercharger GB-Barnsley,53.489393,-1.486223
 Supercharger-V4 GB-Barnstaple,51.06176,-4.08108
+Supercharger-V4 GB-Basingstoke,51.2796,-1.1016
 Supercharger-V4 GB-Batley,53.74484,-1.64273
 Supercharger-V3 GB-Belfast,54.583523,-5.960532
 Supercharger-V4 GB-Belfast Service Center,54.58495,-5.9591
@@ -3143,7 +3156,7 @@ Supercharger-V4 HU-Szeged Rókus,46.26964,20.13825
 Supercharger-V3 HU-Szigetszentmiklós,47.383471,19.026911
 Supercharger-V4 HU-Szombathely,47.2372,16.6549
 Supercharger-V3 HU-Székesfehérvár,47.149632,18.431349
-Supercharger-V4 HU-Tatabánya,47.59506,18.3869
+Supercharger-V4 HU-Tatabánya,47.60264,18.3873
 Supercharger-V3 HU-Törökbálint,47.43944,18.88963
 
 Supercharger-V3 IE-Athenry,53.30141,-8.76203
@@ -3153,8 +3166,11 @@ Supercharger IE-Castlebellingham Northbound,53.932462,-6.417717
 Supercharger IE-Castlebellingham Southbound,53.924106,-6.411373
 Supercharger-V3 IE-Cork Mahon Point Shopping Centre,51.88658,-8.3968
 Supercharger-V4 IE-Dublin,53.27393,-6.217773
+Supercharger-V4 IE-Dublin Blanchardstown,53.38453,-6.37115
 Supercharger-V3 IE-Enfield,53.406101,-6.838143
+Supercharger-V4 IE-Letterkenny,54.95045,-7.7129
 Supercharger-V4 IE-Longford,53.74114,-7.80391
+Supercharger-V4 IE-Mallow,52.13163,-8.64577
 Supercharger IE-Tralee,52.260703,-9.659141
 
 Supercharger-V4 IS-Akureyri,65.69741,-18.13922
@@ -3171,6 +3187,7 @@ Supercharger-V3 IS-Kirkjubæjarklaustur,63.789025,-18.052187
 Supercharger-V4 IS-Laugarvatn Efstidalur II,64.2425,-20.55058
 Supercharger-V3 IS-Staðarskáli,65.14475,-21.084813
 Supercharger-V3 IS-Vatnagardar,64.14496,-21.854711
+Supercharger-V4 IS-Vestmannaeyjar,63.4425,-20.27076
 Supercharger-V4 IS-Álfabakki,64.10455,-21.8612,60
 
 Supercharger-V3 IT-Adda Nord,45.511548,9.634876
@@ -3219,6 +3236,7 @@ Supercharger-V4 IT-Fidenza,44.8819,10.09415
 Supercharger IT-Firenze,43.810258,11.17798
 Supercharger-V4 IT-Firenze-Campi Bisenzio,43.848512,11.14426
 Supercharger-V4 IT-Fiume Veneto,45.945942,12.723972
+Supercharger-V4 IT-Foiano della Chiana,43.22732,11.8001
 Supercharger-V3 IT-Forlì,44.24304,12.081501,22
 Supercharger-V3 IT-Forte dei Marmi,43.95653,10.1946
 Supercharger-V3 IT-Genova North,44.470371,8.900865
@@ -3228,6 +3246,7 @@ Supercharger-V4 IT-Imola,44.375448,11.732268
 Supercharger IT-Imperia,43.892498,8.039031
 Supercharger-V4 IT-Ivrea,45.446661,7.853005
 Supercharger-V4 IT-Lagonegro,40.13273,15.76296
+Supercharger-V4 IT-Lecce,40.37623,18.1424
 Supercharger-V4 IT-Livorno,43.54977,10.3396
 Supercharger-V4 IT-Lodi,45.27676,9.45862
 Supercharger-V4 IT-L’Aquila,42.35998,13.3789
@@ -3681,6 +3700,7 @@ Supercharger-V3 NL-Tilburg,51.54308,5.1118
 Supercharger NL-Tilburg,51.60633,5.00562
 Supercharger-V3 NL-Uden,51.6713,5.60267
 Supercharger NL-Urmond,50.9894,5.78152
+Supercharger-V4 NL-Utrecht,52.10838,5.05323
 Supercharger-V4 NL-Venray,51.54712,5.99716
 Supercharger NL-Vuren,51.83883,5.09085
 Supercharger-V3 NL-Weert,51.28177,5.651
@@ -3772,6 +3792,7 @@ Supercharger NO-Lasses,59.037499,9.673879
 Supercharger NO-Lavik,61.103869,5.51268
 Supercharger NO-Leinstrand,63.32504,10.30449,55
 Supercharger-V3 NO-Leira,60.969163,9.29164
+Supercharger-V4 NO-Leirfjord,66.0647,12.93408
 Supercharger NO-Levanger,63.734517,11.281552
 Supercharger NO-Lier North,59.770663,10.26099
 Supercharger NO-Lier North,59.770833,10.262139
@@ -3920,6 +3941,7 @@ Supercharger-V4 PL-Górki Zachód,53.27008,22.12476
 Supercharger-V4 PL-Hruszowice,49.94696,23.02296
 Supercharger-V4 PL-Jasionka,50.112177,22.05805
 Supercharger PL-Katowice,50.254594,19.046594
+Supercharger-V4 PL-Katowice-Bytom,50.37824,18.88927
 Supercharger PL-Katowice-E.Leclerc,50.220135,18.990248
 Supercharger PL-Kostomłoty,51.037361,16.584208
 Supercharger-V4 PL-Koszalin,54.21663,16.1143
@@ -3964,7 +3986,7 @@ Supercharger PT-Ribeira de Pena,41.50364,-7.80145,60
 
 Supercharger-V4 RO-Arad,46.203169,21.248505
 Supercharger-V4 RO-Bacău,46.585946,26.954977
-Supercharger-V4 RO-Brașov,45.6721,25.6196
+Supercharger-V4 RO-Brașov,45.6717,25.61968
 Supercharger-V3 RO-București,44.47896,26.10331
 Supercharger-V3 RO-București Bulevardul Pierre de Coubertin,44.440992,26.154434
 Supercharger-V4 RO-București Militari,44.435974,25.957891
@@ -3979,6 +4001,7 @@ Supercharger-V4 RO-Oradea,47.04343,21.8971
 Supercharger-V3 RO-Pitești,44.823586,24.909692,46
 Supercharger-V4 RO-Satu Mare,47.784422,22.845358
 Supercharger-V3 RO-Sibiu,45.775579,24.170674,36
+Supercharger-V4 RO-Sibiu Strada Drumul Ocnei,45.8231,24.14433
 Supercharger-V4 RO-Targu Mures,46.509828,24.508961
 Supercharger-V3 RO-Timișoara,45.755132,21.232989,32
 Supercharger-V4 RO-Timișoara Calea Torontalului,45.77407,21.2116
@@ -4168,6 +4191,7 @@ Supercharger-V4 TR-İzmit,40.75495,29.94697
 Supercharger-V4 TR-Keşan,40.8742,26.6419
 Supercharger-V4 TR-Kırşehir,39.06696,34.37018
 Supercharger-V4 TR-Kütahya,39.35863,30.0565
+Supercharger-V4 TR-Muğla,37.32262,28.16507
 Supercharger-V4 TR-Tekirdağ,40.98885,27.5772
 Supercharger-V4 TR-Tekkeköy Samsun,41.22493,36.43205
 Supercharger-V4 TR-Uşak Merkez,38.67086,29.42427
@@ -17248,6 +17272,7 @@ Iberdrola PT-Caldas da Rainha R. Casal dos Barreiros,39.4171,-9.1516
 iCharge AL-Berat Rruga Baki Gjebrea,40.72775,19.9421
 iCharge AL-Koplik E762,42.21535,19.45152
 iCharge AL-Tiranë Rruga e Kavajes,41.3285,19.81318
+iCharge AL-Vlora Rruga Dush Strati,40.45718,19.48917
 iCharge HR-Rab Palit,44.76199,14.7582
 
 iCharging TW-Tainan City Rende Service Area,22.9063,120.26487
