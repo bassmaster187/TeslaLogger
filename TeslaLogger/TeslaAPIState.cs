@@ -222,7 +222,7 @@ namespace TeslaLogger
                         state = storage[name];
                         if (maxage != 0)
                         {
-                            long now = (long)DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1)).TotalMilliseconds;
+                            long now = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
                             if (long.TryParse(storage[name][Key.Timestamp].ToString(), out long ts) && now - ts > maxage)
                             {
                                 return false;
@@ -277,7 +277,7 @@ namespace TeslaLogger
                         {
                             if (maxage != 0)
                             {
-                                long now = (long)DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1)).TotalMilliseconds;
+                                long now = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
                                 if (long.TryParse(storage[name][Key.Timestamp].ToString(), out long ts) && now - ts > maxage)
                                 {
                                     value = false;
@@ -310,7 +310,7 @@ namespace TeslaLogger
                         {
                             if (maxage != 0)
                             {
-                                long now = (long)DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1)).TotalMilliseconds;
+                                long now = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
                                 if (long.TryParse(storage[name][Key.Timestamp].ToString(), out long ts) && now - ts > maxage)
                                 {
                                     value = int.MinValue;
@@ -343,7 +343,7 @@ namespace TeslaLogger
                         {
                             if (maxage != 0)
                             {
-                                long now = (long)DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1)).TotalMilliseconds;
+                                long now = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
                                 if (long.TryParse(storage[name][Key.Timestamp].ToString(), out long ts) && now - ts > maxage)
                                 {
                                     value = double.NaN;
@@ -376,7 +376,7 @@ namespace TeslaLogger
                         {
                             if (maxage != 0)
                             {
-                                long now = (long)DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1)).TotalMilliseconds;
+                                long now = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
                                 if (long.TryParse(storage[name][Key.Timestamp].ToString(), out long ts) && now - ts > maxage)
                                 {
                                     value = string.Empty;
@@ -1536,7 +1536,7 @@ namespace TeslaLogger
                     && long.TryParse(storage[key][Key.Timestamp].ToString(), out long ts) && ts != 0
                     && long.TryParse(storage[key][Key.ValueLastUpdate].ToString(), out long vlu) && vlu != 0)
                 {
-                    long now = (long)DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1)).TotalMilliseconds;
+                    long now = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
                     str += string.Concat($"{key} => v:[{storage[key][Key.Value]}] t:{storage[key][Key.Type]} s:{storage[key][Key.Source]} ts:{storage[key][Key.Timestamp]} now:{now} diff:{now - ts}ms vlu:{storage[key][Key.ValueLastUpdate]} now:{now} diff:{now - vlu}ms", Environment.NewLine);
                 }
                 else
@@ -1557,7 +1557,7 @@ namespace TeslaLogger
                     maxTS = (long)((maxTS < (long)storage[property][Key.Timestamp]) ? storage[property][Key.Timestamp] : maxTS);
                 }
             }
-            long now = (long)DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1)).TotalMilliseconds;
+            long now = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
             return maxTS > 0 ? now - maxTS : 0;
         }
 

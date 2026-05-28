@@ -1294,7 +1294,7 @@ namespace TeslaLogger
 
         public static long DateTimeToUTC_UnixTimestamp(DateTime d)
         {
-            return (long)(d.ToUniversalTime().Subtract(new DateTime(1970, 1, 1))).TotalSeconds * 1000;
+            return new DateTimeOffset(d.ToUniversalTime()).ToUnixTimeMilliseconds();
         }
 
         void InsertLastLocation(DateTime d, bool loggingPosId = true)

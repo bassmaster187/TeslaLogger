@@ -517,10 +517,7 @@ namespace TeslaFi_Import
 
         public static DateTime UnixToDateTime(long t)
         {
-            DateTime dt = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
-            dt = dt.AddMilliseconds(t);
-            dt = dt.ToLocalTime();
-            return dt;
+            return DateTimeOffset.FromUnixTimeMilliseconds(t).LocalDateTime;
 
         }
 

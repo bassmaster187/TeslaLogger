@@ -1100,7 +1100,7 @@ namespace TeslaLogger
                                 {
                                     Tools.DebugLog($"charging_state: {charging_state[TeslaAPIState.Key.Value]}");
                                     // check if charging_state value is not older than 1 minute
-                                    long now = (long)DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1)).TotalMilliseconds;
+                                    long now = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
                                     if (long.TryParse(charging_state[TeslaAPIState.Key.ValueLastUpdate].ToString(), out long valueLastUpdate))
                                     {
                                         Tools.DebugLog($"charging_state now {now} vlu {valueLastUpdate} diff {now - valueLastUpdate}");
@@ -1121,7 +1121,7 @@ namespace TeslaLogger
                                 if (GetTeslaAPIState().GetBool("charge_port_door_open", out bool bcharge_port_door_open) && bcharge_port_door_open)
                                 {
                                     //Tools.DebugLog($"charge_port_door_open: {charge_port_door_open[TeslaAPIState.Key.Value]}");
-                                    long now = (long)DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1)).TotalMilliseconds;
+                                    long now = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
                                     // check if charge_port_door_open value True is not older than 1 minute
                                     if (long.TryParse(charge_port_door_open[TeslaAPIState.Key.ValueLastUpdate].ToString(), out long valueLastUpdate))
                                     {

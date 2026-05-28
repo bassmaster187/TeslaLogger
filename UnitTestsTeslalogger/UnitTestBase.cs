@@ -24,8 +24,7 @@ namespace UnitTestsTeslalogger
             Car c = new Car(0, "", "", 0, "", DateTime.Now, "", "", "", "", "", "", "", null, false);
 
             Tools.SetThreadEnUS();
-            long unixTimestamp = (long)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
-            unixTimestamp *= 1000;
+            long unixTimestamp = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
             c.DbHelper.InsertPos(unixTimestamp.ToString(), 48.456691, 10.030241, 0, 0, 1, 0, 0, 0, 0, 0, "0");
             int startid = c.DbHelper.GetMaxPosid(true);
             c.DbHelper.StartDriveState(DateTime.Now);

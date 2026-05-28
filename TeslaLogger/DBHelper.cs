@@ -4939,7 +4939,7 @@ WHERE
                     if (charging_state[TeslaAPIState.Key.Value].ToString() == "Charging")
                     {
                         // check if charging_state value Charging is not older than 5 minutes
-                        long now = (long)DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1)).TotalMilliseconds;
+                        long now = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
                         if (long.TryParse(charging_state[TeslaAPIState.Key.ValueLastUpdate].ToString(), out long valueLastUpdate))
                         {
                             if (now - valueLastUpdate < 300000)
@@ -5125,10 +5125,7 @@ VALUES(
 
         public static DateTime UnixToDateTime(long t)
         {
-            DateTime dt = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
-            dt = dt.AddMilliseconds(t);
-            dt = dt.ToLocalTime();
-            return dt;
+            return DateTimeOffset.FromUnixTimeMilliseconds(t).LocalDateTime;
 
         }
 
