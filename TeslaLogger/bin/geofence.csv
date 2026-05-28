@@ -468,7 +468,7 @@ Supercharger CH-Maienfeld,47.00397,9.5258
 Supercharger CH-Martigny,46.1264,7.061
 Supercharger-V3 CH-Martigny,46.12743,7.06012
 Supercharger-V4 CH-Matran,46.78067,7.08842
-Supercharger CH-Melide,45.95423,8.9505
+Supercharger CH-Melide,45.954,8.95065
 Supercharger CH-Monte Ceneri,46.13924,8.90706
 Supercharger-V3 CH-Morbio Inferiore - Centro Serfontana,45.84432,9.016
 Supercharger-V4 CH-Murg,47.11214,9.2193
@@ -1921,7 +1921,6 @@ Supercharger-V3 DE-Burgdorf,52.122717,10.229433,35
 Supercharger-V4 DE-Busdorf,54.47796,9.54494,40
 Supercharger-V3 DE-Böblingen,48.69138,9.00365,55
 Supercharger-V4 DE-Bühl,48.724669,8.110452
-Supercharger-V4 DE-Calw,48.70582,8.76548
 Supercharger-V4 DE-Chemnitz,50.864124,12.867845
 Supercharger-V4 DE-Cottbus,51.71605,14.3521
 Supercharger-V4 DE-Darmstadt Kasinostraße,49.88314,8.64662
@@ -1986,8 +1985,7 @@ Supercharger-V4 DE-Germersheim,49.2272,8.3732
 Supercharger-V4 DE-Gießen,50.5884,8.7079
 Supercharger-V4 DE-Gigafactory Berlin-Brandenburg,52.3914,13.7962
 Supercharger-V4 DE Gilching,48.094,11.2825,55
-Supercharger-V4 DE-Gramschatzer Wald,49.91202,10.00176,30
-Supercharger-V4 DE-Gramschatzer Wald,49.91224,10.00073,30
+Supercharger-V4 DE-Gramschatzer Wald,49.9119,10.00105,70
 Supercharger-V3 DE-Greding,49.04188,11.34298
 Supercharger-V4 DE-Grünstadt (Globus),49.55723,8.18498
 Supercharger-V4 DE-Guxhagen,51.20223,9.4683
@@ -3180,7 +3178,7 @@ Supercharger IS-Fossvogur,64.117994,-21.899666
 Supercharger IS-Grafarholt,64.1244,-21.77683
 Supercharger-V4 IS-Hveragerði,63.9958,-21.19315
 Supercharger IS-Hvolsvöllur,63.75234,-20.235952
-Supercharger-V4 IS-Hólmavík,65.7011,-21.68605
+Supercharger-V4 IS-Hólmavík,65.70068,-21.68593
 Supercharger IS-Höfn,64.250137,-15.205539
 Supercharger-V4 IS-Keflavik,63.99698,-22.58424
 Supercharger-V3 IS-Kirkjubæjarklaustur,63.789025,-18.052187
@@ -3689,7 +3687,7 @@ Supercharger NL-Naarden,52.30858,5.14113
 Supercharger-V4 NL-Nieuwerkerk aan den IJssel,51.97843,4.61898
 Supercharger-V4 NL-Nootdorp,52.05265,4.4022
 Supercharger NL-Oosterhout,51.62642,4.86952
-Supercharger-V3 NL-Ridderkerk,51.86793,4.5577
+Supercharger-V3 NL-Ridderkerk,51.86764,4.55807
 Supercharger-V3 NL-Rijswijk,52.04828,4.34908
 Supercharger-V4 NL-Roosendaal,51.5665,4.46984,60
 Supercharger NL-s-Hertogenbosch,51.7205,5.3334
@@ -7745,6 +7743,7 @@ Allego DE-Autohof Achern,48.64082,8.0375,12
 Allego DE-Autohof Bad Rappenau,49.21207,9.07756,15
 Allego DE-Autohof Bergler,49.80454,12.18425,22
 Allego DE-Autohof Gießen-Lützellinden,50.52955,8.6071
+Allego DE-Autohof Gramschatzer Wald,49.91213,10.00157,8
 Allego DE-Autohof Halle-Tornau,51.5458,12.01418
 Allego DE-Autohof Homberg/Efze,51.00472,9.47935
 Allego DE-Autohof Lauenau,52.2787,9.35075,10
@@ -7996,7 +7995,6 @@ Allego DE-Gera Otto-Hahn-Straße,50.90214,12.10962
 Allego DE-Gifhorn Eyßelheideweg,52.4627,10.5397,25
 Allego DE-Goslar Carl-Zeiß-Straße,51.93176,10.40965
 Allego DE-Goslar Marienburger Straße,51.93115,10.43215
-Allego DE-Gramschatzer Wald,49.91213,10.00157,8
 Allego DE-Gramzow Schulzenstraße,53.2104,14.00443
 Allego DE-Grimma Hengstbergstraße,51.25534,12.72727,20
 Allego DE-Groß-Gerau Helvetiastraße,49.90884,8.5002
@@ -10652,6 +10650,75 @@ E-MAXX DE-Frickhofen Schulstraße,50.50493,8.02794
 E-MAXX DE-Gau-Bischofsheim Schulstraße,49.9131,8.27624
 E-MAXX DE-Harxheim Gerbstedterstraße,49.90317,8.27675
 E-MAXX DE-Limburg Limburgerstraße,50.40389,8.0675
+
+E-Merge DE-Aalen Daimlerstraße,48.8257,10.0651
+E-Merge DE-Bad Nenndorf Im Niedernfeld,52.34387,9.3837
+E-Merge DE-Bad Soden am Taunus Am Bahnhof,50.14244,8.5046
+E-Merge DE-Bergkamen Industriestraße,51.64265,7.67264
+E-Merge DE-Berlin Kantstraße,52.50574,13.32955
+E-Merge DE-Biedenkopf Am Bahnhof,50.90987,8.52965
+E-Merge DE-Biedenkopf Bachgrundstraße,50.9104,8.529
+E-Merge DE-Bonn Christian-Lassen-Straße,50.7525,7.05918
+E-Merge DE-Braunlage Herzog-Johann-Albrecht-Straße,51.72746,10.60852
+E-Merge DE-Bruchsal Stuttgarter Straße,49.09617,8.64202
+E-Merge DE-Cottbus Am Gewerbepark,51.70737,14.35276
+E-Merge DE-Cottbus Am Gewerbepark,51.70787,14.3534
+E-Merge DE-Cölbe Am Bürgerhaus,50.8837,8.83396
+E-Merge DE-Cölbe Friedhofstraße,50.85114,8.78244
+E-Merge DE-Cölbe Grüne Bette,50.8536,8.77717
+E-Merge DE-Cölbe Marburger Landstraße,50.85768,8.8237
+E-Merge DE-Cölbe Zimmermannstraße,50.84806,8.77656
+E-Merge DE-Dillenburg Hauptstraße,50.73965,8.287
+E-Merge DE-Dortmund Färberstraße,51.5791,7.56245
+E-Merge DE-Düren Nikolaus-Otto-Straße,50.7803,6.5053
+E-Merge DE-Ebersbach-Neugersdorf Johann-Andreas-Schubert-Straße,50.9986,14.616
+E-Merge DE-Ebsdorfergrund Am Energiepark,50.74876,8.8342,30
+E-Merge DE-Erfurt August-Röbling-Straße,51.02056,11.01013
+E-Merge DE-Esslingen Dornierstraße,48.71755,9.34233
+E-Merge DE-Frankenberg Marburger Straße,51.05132,8.7923
+E-Merge DE-Frankfurt am Main Alfred-Pfaff-Straße,50.13244,8.72912
+E-Merge DE-Frankfurt am Main Oeserstraße,50.10527,8.57454
+E-Merge DE-Fritzlar Bahnhofstraße,51.12425,9.22022
+E-Merge DE-Gelsenkirchen Emscherstraße,51.5445,7.07798
+E-Merge DE-Gelsenkirchen Willy-Brandt-Allee,51.54927,7.07803
+E-Merge DE-Gelsenkirchen Willy-Brandt-Allee,51.54978,7.07966
+E-Merge DE-Gemünden (Wohra) Grüsener Straße,50.979,8.97015
+E-Merge DE-Georgsmarienhütte Niedersachsenstraße,52.2191,8.06278
+E-Merge DE-Gladenbach Marktplatz,50.76972,8.58087
+E-Merge DE-Gladenbach Marktstraße,50.76846,8.5821
+E-Merge DE-Goslar Im Schleeke,51.91517,10.4509
+E-Merge DE-Groß-Gerau Schützenstraße,49.92304,8.48077
+E-Merge DE-Gägelow Marktstraße,53.90132,11.37936
+E-Merge DE-Göppingen Holzheimer Straße,48.69375,9.66667,30
+E-Merge DE-Hagen Am Ringofen,51.38623,7.44134
+E-Merge DE-Haiger Hauptstraße,50.74172,8.20686
+E-Merge DE-Halberstadt Am Sülzegraben,51.88337,11.0723
+E-Merge DE-Halstenbek Gewerbering,53.62623,9.86496
+E-Merge DE-Heilbronn Etzelstraße,49.15213,9.2153
+E-Merge DE-Heilbronn Im Neckargarten,49.15393,9.20125
+E-Merge DE-Herborn Sandweg,50.68138,8.30464
+E-Merge DE-Hille Lübbecker Straße,52.28736,8.79807
+E-Merge DE-Hückelhoven Am Landabsatz,51.05575,6.21727
+E-Merge DE-Ibbenbüren Weberstraße,52.27343,7.71116
+E-Merge DE-Jever Am Bullhamm,53.5823,7.90817
+E-Merge DE-Jever Schützenhofstraße,53.56393,7.88658
+E-Merge DE-Lahr Rainer-Haungs-Straße,48.3495,7.82332
+E-Merge DE-Lauf an der Pegnitz Faunberg,49.51674,11.31195
+E-Merge DE-Leer (Ostfriesland) Benzstraße,53.2677,7.4569
+E-Merge DE-Ludwigsburg Schwieberdingerstraße,48.8904,9.17047
+E-Merge DE-Lüdinghausen Ascheberger Straße,51.77294,7.46505
+E-Merge DE-Marburg Afföllerstraße,50.8328,8.7681
+E-Merge DE-Marburg Neue Kasseler Straße,50.83022,8.77194
+E-Merge DE-Meißen Niederauer Straße,51.16866,13.50155
+E-Merge DE-Niesky Jänkendorfer Straße,51.28697,14.81856
+E-Merge DE-Oberhausen Brammenring,51.48874,6.88747,30
+E-Merge DE-Röthenbach a.d.Pegnitz Am Gewerbepark,49.48002,11.2264
+E-Merge DE-Soest Werler Landstraße,51.5638,8.08624
+E-Merge DE-Stadtallendorf Aufbauplatz,50.82564,9.0127
+E-Merge DE-Usingen Weilburger Straße,50.34192,8.53046
+E-Merge DE-Waiblingen Stuttgarter Straße,48.82233,9.29956
+E-Merge DE-Wilhelmshaven Arthur-Grunewald-Straße,53.576,8.10814
+E-Merge DE-Wolgast Leeraner Straße,54.04682,13.75336
 
 e-mobi LV-Zilupe Stacijas iela,56.38975,28.117
 
@@ -14927,6 +14994,7 @@ evway IT-Moso In Passiria Timmelsjochstrasse,46.8311,11.16787
 evyve GB-Burton-on-Trent Second Ave,52.79575,-1.66826
 
 EVzen FR-Béziers Rue Zenobe Gramme,43.34748,3.25572,25
+EVzen FR-Laragne-Montéglin Av. de Provence,44.31307,5.82756
 EVzen FR-Sainte-Croix-en-Plaine Rue des Frères Peugeot,48.0215,7.37633
 
 EW-Mittelbaden DE-Kehl Richard-Wagner-Straße,48.56664,7.82065
@@ -14950,6 +15018,7 @@ EWE-GO DE-Albstadt Truchtelfinger Straße,48.22179,9.02682
 EWE-GO DE-Aldenhoven Kapuzinerstraße,50.8927,6.27505
 EWE-GO DE-Alfter Schöntalweg,50.71462,7.03029
 EWE-GO DE-Altenkirchen Philipp-Reis-Straße,50.68934,7.62357
+EWE-GO DE-Alzenau Daimlerstraße,50.08873,9.04783
 EWE-GO DE-Alzenau Emmy-Noether-Straße,50.09363,9.05675
 EWE-GO DE-Amberg Fuggerstraße,49.44434,11.8306
 EWE-GO DE-Andernach Hans-Julius-Ahlmann-Straße,50.4351,7.42402
@@ -16822,71 +16891,6 @@ GP-JOULE DE-Sulingen Vorwerker Heide,52.66983,8.7831
 GP-JOULE DE-Upahl Grevesmühlener Straße,53.83009,11.21037
 GP-JOULE DE-Westre Grenzstraße,54.88547,8.97637
 
-GreenCharge DE-Aalen Daimlerstraße,48.82569,10.0651
-GreenCharge DE-Bad Nenndorf Im Niedernfeld,52.34387,9.38371
-GreenCharge DE-Bergkamen Industriestraße,51.64265,7.67264
-GreenCharge DE-Berlin Kantstraße,52.50574,13.32955
-GreenCharge DE-Biedenkopf Am Bahnhof,50.90987,8.52965
-GreenCharge DE-Biedenkopf Bachgrundstraße,50.91041,8.52901
-GreenCharge DE-Bonn Christian-Lassen-Straße,50.7525,7.05918
-GreenCharge DE-Braunlage Herzog-Johann-Albrecht-Straße,51.72746,10.60852
-GreenCharge DE-Bruchsal Stuttgarter Straße,49.09617,8.64202
-GreenCharge DE-Cottbus Am Gewerbepark,51.70787,14.35341
-GreenCharge DE-Cölbe Am Bürgerhaus,50.8837,8.83396
-GreenCharge DE-Cölbe Friedhofstraße,50.85114,8.78244
-GreenCharge DE-Cölbe Grüne Bette,50.85359,8.77717
-GreenCharge DE-Cölbe Marburger Landstraße,50.85768,8.82371
-GreenCharge DE-Cölbe Zimmermannstraße,50.84806,8.77656
-GreenCharge DE-Dillenburg Hauptstraße,50.73965,8.287
-GreenCharge DE-Dortmund Färberstraße,51.5791,7.56245
-GreenCharge DE-Düren Nikolaus-Otto-Straße,50.78029,6.50529
-GreenCharge DE-Ebersbach-Neugersdorf Johann-Andreas-Schubert-Straße,50.99861,14.61599
-GreenCharge DE-Ebsdorfergrund Am Energiepark,50.74876,8.8342,30
-GreenCharge DE-Erfurt August-Röbling-Straße,51.02056,11.01013
-GreenCharge DE-Esslingen Dornierstraße,48.71755,9.34233
-GreenCharge DE-Frankenberg Marburger Straße,51.05132,8.7923
-GreenCharge DE-Frankfurt Alfred-Pfaff-Straße,50.13244,8.72912
-GreenCharge DE-Frankfurt am Main Oeserstraße,50.10527,8.57454
-GreenCharge DE-Fritzlar Bahnhofstraße,51.12425,9.22022
-GreenCharge DE-Gelsenkirchen Emscherstraße,51.54449,7.07798
-GreenCharge DE-Gelsenkirchen Willy-Brandt-Allee,51.54978,7.07966
-GreenCharge DE-Gemünden (Wohra) Grüsener Straße,50.97901,8.97015
-GreenCharge DE-Georgsmarienhütte Niedersachsenstraße,52.21909,8.06278
-GreenCharge DE-Gladenbach Marktplatz,50.76972,8.58087
-GreenCharge DE-Gladenbach Marktstraße,50.76846,8.58211
-GreenCharge DE-Goslar Im Schleeke,51.91517,10.45089
-GreenCharge DE-Groß-Gerau Schützenstraße,49.92304,8.48077
-GreenCharge DE-Gägelow Marktstraße,53.90132,11.37936
-GreenCharge DE-Göppingen Holzheimer Straße,48.69375,9.66667,30
-GreenCharge DE-Hagen Am Ringofen,51.38623,7.44134
-GreenCharge DE-Haiger Hauptstraße,50.74172,8.20686
-GreenCharge DE-Halberstadt Am Sülzegraben,51.88337,11.07231
-GreenCharge DE-Halstenbek Gewerbering,53.62623,9.86496
-GreenCharge DE-Heilbronn Etzelstraße,49.15213,9.2153
-GreenCharge DE-Heilbronn Im Neckargarten,49.15393,9.20125
-GreenCharge DE-Herborn Sandweg,50.68138,8.30464
-GreenCharge DE-Hille Lübbecker Straße,52.28736,8.79807
-GreenCharge DE-Hückelhoven Am Landabsatz,51.05575,6.21727
-GreenCharge DE-Ibbenbüren Weberstraße,52.27343,7.71116
-GreenCharge DE-Jever Am Bullhamm,53.5823,7.90817
-GreenCharge DE-Jever Schützenhofstraße,53.56393,7.88658
-GreenCharge DE-Lahr Rainer-Haungs-Straße,48.3495,7.82332
-GreenCharge DE-Lauf an der Pegnitz Faunberg,49.51674,11.31195
-GreenCharge DE-Leer (Ostfriesland) Benzstraße,53.26771,7.45689
-GreenCharge DE-Ludwigsburg Schwieberdingerstraße,48.8904,9.17047
-GreenCharge DE-Marburg Afföllerstraße,50.8328,8.76809
-GreenCharge DE-Marburg Neue Kasseler Straße,50.83022,8.77194
-GreenCharge DE-Meißen Niederauer Straße,51.16866,13.50155
-GreenCharge DE-Niesky Jänkendorfer Straße,51.28697,14.81856
-GreenCharge DE-Oberhausen Brammenring,51.48874,6.88747,30
-GreenCharge DE-Röthenbach a.d.Pegnitz Am Gewerbepark,49.48002,11.2264
-GreenCharge DE-Soest Werler Landstraße,51.56379,8.08624
-GreenCharge DE-Stadtallendorf Aufbauplatz,50.82564,9.01269
-GreenCharge DE-Usingen Weilburger Straße,50.34192,8.53046
-GreenCharge DE-Waiblingen Stuttgarter Straße,48.82233,9.29956
-GreenCharge DE-Wilhelmshaven Arthur-Grunewald-Straße,53.57601,8.10814
-GreenCharge DE-Wolgast Leeraner Straße,54.04682,13.75336
-
 GreenCharging AD-Encamp Ctra. de Grau Roig,42.53236,1.6988
 
 GreenFlux BE-Anderlecht Westland Shopping,50.83877,4.28766
@@ -17966,6 +17970,7 @@ Ionity DE-Wörrstadt Sophie-Opel-Straße,49.84012,8.14172
 Ionity DE-Zella-Mehlis An der Quelle,50.64452,10.6853,30
 Ionity DE-Überlingen Abigstraße,47.77514,9.1861
 Ionity DK-Aabenraa Egevej,55.06495,9.3661,20
+Ionity DK-Aurland Skulevegen,60.89943,7.21017
 Ionity DK-Fredericia,55.53669,9.71778
 Ionity DK-Greve,55.58492,12.258
 Ionity DK-Nyborg,55.30936,10.80483,30
@@ -18530,6 +18535,7 @@ K-Lataus FI-Rovaniemi Pulkamontie,66.51858,25.7543
 K-Lataus FI-Savonlinna Kullervonkatu,61.8648,28.94042
 K-Lataus FI-Seinäjoki Suupohjantie,62.79292,22.79174
 K-Lataus FI-Seinäjoki Väinämöinen,62.79481,22.87574
+K-Lataus FI-Sodankylä Haastajantie,67.41354,26.5871
 K-Lataus FI-Tampere Martinpojankatu,61.47641,23.83888
 K-Lataus FI-Tampere Mäentakusenkatu,61.49732,23.89059
 K-Lataus FI-Tampere Viinikankatu,61.47948,23.78065
@@ -21521,7 +21527,7 @@ Osprey GB-Penzance Land’s End,50.06543,-5.71258
 Osprey GB-Shoreham-by-Sea Brighton Rd,50.82788,-0.28857
 Osprey GB-Worthing Wykeham Rd,50.81345,-0.37944
 
-OV IS-Hólmavík við Höfðatún,65.70124,-21.68608
+OV IS-Hólmavík við Höfðatún,65.70124,-21.68608,20
 
 OVAG DE-Alsfeld Am Schnepfenhain,50.75037,9.26918
 OVAG DE-Alsfeld Hersfelderstraße,50.75132,9.27628
@@ -26322,8 +26328,6 @@ Zunder ES-Área de servicio Quintanilla Norte,42.0224,-5.8536
 
 Россети RU-Kolomno Коломно M-11,57.67978,34.22274
 Россети RU-Kolomno Коломно M-11,57.67985,34.2244
-
-﻿EWE-GO DE-Alzenau Daimlerstraße,50.08873,9.04783
 
 AT Alpenhotel Ammerwald,47.5257,10.84337
 AT Altentann Berg,47.89108,13.21846
