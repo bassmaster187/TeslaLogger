@@ -5447,9 +5447,9 @@ Supercharger-V3 US-Haubstadt IN,38.15976,-87.55204
 Supercharger-V3 US-Howe IN Ernie Pyle Travel Plaza,41.74493,-85.33012
 Supercharger-V3 US-Howe IN Ernie Pyle Travel Plaza,41.747,-85.32785
 Supercharger US-Indianapolis IN,39.7024,-86.07963
-Supercharger US-Indianapolis IN - Capitol Avenue (Pay to Park Floor 1),39.76557,-86.1611
-Supercharger-V3 US-Indianapolis IN - East 86th Street,39.91397,-86.13923
-Supercharger-V3 US-Indianapolis IN - East Southport Road,39.66603,-86.07597
+Supercharger US-Indianapolis IN Capitol Avenue,39.76544,-86.16122
+Supercharger-V3 US-Indianapolis IN E 86th St,39.9139,-86.1392
+Supercharger-V3 US-Indianapolis IN E Southport Rd,39.6651,-86.07613
 Supercharger-V3 US-Indianapolis IN S Service Road,39.69976,-86.3137
 Supercharger-V3 US-Indianapolis IN Waterway Blvd,39.7846,-86.18424
 Supercharger-V4 US-Jeffersonville IN,38.32773,-85.74514
@@ -14366,17 +14366,25 @@ ensev DE-Bad Nauheim Schwalheimer Straße,50.35669,8.74991
 ensev DE-Mücke Merlauer Straße,50.63393,9.03056
 ensev DE-Varel Bockhorner Straße,53.39364,8.09304
 
+ENTEGA DE-Babenhausen An der Stadtmauer,49.9624,8.9543
 ENTEGA DE-Büttelborn Im Mehlsee,49.90293,8.52326
 ENTEGA DE-Darmstadt Dornheimer Weg,49.8749,8.62508
 ENTEGA DE-Darmstadt Frankfurter Straße,49.88649,8.65178
 ENTEGA DE-Darmstadt Kasinostraße,49.88339,8.64826,30
+ENTEGA DE-Darmstadt Schulstraße,49.8706,8.65593
+ENTEGA DE-Einhausen In der Wolfshecke,49.6638,8.54357
+ENTEGA DE-Eppertshausen Kurt-Schumacher-Straße,49.9479,8.85062
+ENTEGA DE-Griesheim Groß-Gerauer Straße,49.86002,8.55526
 ENTEGA DE-Groß-Umstadt Georg-August-Zinn-Straße,49.87205,8.91401
 ENTEGA DE-Michelstadt Am Festplatz,49.6794,9.00118
 ENTEGA DE-Modautal Buchteichweg,49.77014,8.73603
 ENTEGA DE-Mörlenbach Schmittgasse,49.59973,8.73696
+ENTEGA DE-Mühltal Im Rosengarten,49.8406,8.69976
 ENTEGA DE-Rödermark Am Schwimmbad,49.97633,8.80395,18
+ENTEGA DE-Schaafheim Wilhelmstraße,49.9242,9.00292
 ENTEGA DE-Weiterstadt LOOP5,49.89237,8.60564
 ENTEGA DE-Weiterstadt LOOP5,49.8931,8.60577
+ENTEGA DE-Weiterstadt Max-Planck Straße,49.89808,8.59463
 
 enviaM DE-Bitterfeld-Wolfen Niels-Bohr-Straße,51.62458,12.30781
 enviaM DE-Chemnitz Ringstraße,50.865,12.86492
@@ -14540,16 +14548,29 @@ ESB IE-Trim Off Castle Street,53.55391,-6.79228
 ESB IE-Waterford Butlerstown North,52.24127,-7.16982
 ESB IE-Waterford Parnell St,52.25879,-7.10867
 
+ESWE DE-Geisenheim Rheinstraße,49.98042,7.96698
 ESWE DE-Idstein Limburger Straße,50.22352,8.2678
+ESWE DE-Idstein Weldertstraße,50.2229,8.25428
+ESWE DE-Königstein im Taunus Limburger Straße,50.19202,8.46427
+ESWE DE-Rüdesheim am Rhein Rheinstraße,49.97764,7.9194
+ESWE DE-Taunusstein Altensteiner Straße,50.14244,8.15996
+ESWE DE-Wiesbaden Am Hinkelhaus,50.11592,8.33264
 ESWE DE-Wiesbaden Am Schloßpark,50.03909,8.23633
+ESWE DE-Wiesbaden Bierstadter Straße,50.08283,8.26225
 ESWE DE-Wiesbaden Bismarckring,50.0797,8.22974
 ESWE DE-Wiesbaden Blücherstraße,50.08049,8.22484
+ESWE DE-Wiesbaden Flachstraße,50.08028,8.20458
 ESWE DE-Wiesbaden Hagenauer Straße,50.04779,8.2307
+ESWE DE-Wiesbaden Hasengartenstraße,50.06094,8.25813
 ESWE DE-Wiesbaden Hauptbahnhof Gartenfeldstraße,50.07072,8.24546
 ESWE DE-Wiesbaden Herderstraße,50.07368,8.2352
+ESWE DE-Wiesbaden Klarenthaler Straße,50.07972,8.22072
+ESWE DE-Wiesbaden Lessingstraße,50.0734,8.24705
+ESWE DE-Wiesbaden Luisenplatz,50.0779,8.24066
 ESWE DE-Wiesbaden Mainzer Straße,50.06055,8.25432
 ESWE DE-Wiesbaden Scharnhorststraße,50.0805,8.22606
 ESWE DE-Wiesbaden Siegfriedring,50.06073,8.26812
+ESWE DE-Wiesbaden Stielstraße,50.05,8.20084
 ESWE DE-Wiesbaden Warmer Damm,50.08353,8.24501
 ESWE DE-Wiesbaden Wilfried-Ries-Straße,50.1023,8.19127
 
@@ -20687,6 +20708,15 @@ MFG GB-Sowerby York Road,54.22878,-1.32917
 
 Midorion DE-Karlsruhe Parkplatz Karlsbad A8,48.94493,8.49432
 
+Milence DE-Himmelkron Frankenring,50.0516,11.62134
+Milence DE-Kirchberg an der Jagst Von-Humboldt-Straße,49.1751,9.9627
+Milence DE-Koblenz Im Sinderfeld,50.3502,7.5067
+Milence DE-Kraftsdorf Am Rüdersdorfer Wege,50.89503,11.9832
+Milence DE-Mogendorf Im Heidchen,50.48953,7.75348
+Milence DE-München Werner-Heisenberg-Allee,48.211,11.6196
+Milence DE-Oranienbaum-Wörlitz An der A 9,51.85247,12.34155
+Milence DE-Recklinghausen Blitzkuhlenstraße,51.5929,7.22212
+
 MNCA FR-Nice Rue Trachel,43.70642,7.26382
 
 MOBI.E PT-Aveiro Estrada Nacional,40.65115,-8.62016
@@ -24803,13 +24833,11 @@ Threeforce DE-Daun Rosenbergstraße,50.19687,6.82897
 Threeforce DE-Dörpen Industriestraße,52.97125,7.36132
 Threeforce DE-Dörpen Neudörpener Straße 48-52,52.96276,7.3436
 Threeforce DE-Dötlingen Wildeshauser Straße 34,52.90907,8.44045
-Threeforce DE-Einhausen In der Wolfshecke 1,49.6638,8.54357
 Threeforce DE-Emden Nesserlander Straße,53.35598,7.19462
 Threeforce DE-Ensch Moselstraße,49.82805,6.83444
 Threeforce DE-Esens Am Hafen 21a,53.67724,7.57568
 Threeforce DE-Füssen Enzensbergstraße,47.60933,10.6827
 Threeforce DE-Goch Reeser Straße,51.61694,6.21189
-Threeforce DE-Griesheim Groß-Gerauer Straße 1,49.86002,8.55526
 Threeforce DE-Hamburg Wesselblek 8,53.63939,10.0574
 Threeforce DE-Haren (Ems) Boschstraße 3,52.79657,7.21489
 Threeforce DE-Haselünne Heideweg 23,52.66536,7.39466
