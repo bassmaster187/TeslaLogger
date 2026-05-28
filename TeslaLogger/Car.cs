@@ -338,7 +338,10 @@ namespace TeslaLogger
                 CurrentJSON.CreateCurrentJSON();
 
                 if (ApplicationSettings.Default.InitCredentialsLock)
-                    Monitor.Enter(InitCredentialsLock, ref initCredentialsLockTaken);
+                {
+                    await initCredentialsLock.WaitAsync(cts.Token);
+                    initCredentialsLockTaken = true;
+                }
 
                 try
                 {
@@ -387,7 +390,7 @@ namespace TeslaLogger
                 finally
                 {
                     if (initCredentialsLockTaken)
-                        Monitor.Exit(InitCredentialsLock);
+                        initCredentialsLock.Release();
                 }
 
                 _ = Task.Factory.StartNew(() =>
