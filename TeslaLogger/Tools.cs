@@ -2293,7 +2293,11 @@ WHERE
         {
             try
             {
-                var ret = Tools.ExecMono("/home/cli/dotnet", "--info");
+                string ret = null;
+                if (IsDockerNET8())
+                    ret = Tools.ExecMono("/usr/bin/dotnet", "--info");
+                else
+                    ret = Tools.ExecMono("/home/cli/dotnet", "--info");
 
                 if (ret?.Contains("Version:") == true)
                 {
@@ -2301,7 +2305,7 @@ WHERE
                     if (m.Success)
                         return m.Groups[1].Value;
                 }
-            }
+                }
             catch (Exception ex)
             {
                 Logfile.Log(ex.ToString());

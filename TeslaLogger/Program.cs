@@ -457,7 +457,10 @@ namespace TeslaLogger
             SuspendAPIMinutes = Tools.GetSettingsInt("SuspendAPIMinutes", ApplicationSettings.Default.SuspendAPIMinutes);
 
             Logfile.Log("Current Culture: " + Thread.CurrentThread.CurrentCulture.ToString());
-            Logfile.Log("Mono Runtime: " + Tools.GetMonoRuntimeVersion());
+            
+            if (!Tools.IsDockerNET8())
+                Logfile.Log("Mono Runtime: " + Tools.GetMonoRuntimeVersion());
+
             ExceptionlessClient.Default.Configuration.DefaultData.Add("MonoRuntime", Tools.GetMonoRuntimeVersion());
             ExceptionlessClient.Default.Configuration.DefaultData.Add("OS", Tools.GetOsRelease());
 
