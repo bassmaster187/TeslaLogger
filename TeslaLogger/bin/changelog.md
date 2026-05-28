@@ -1,3 +1,6 @@
+# Version 1.63.16
+- Bugfixes
+
 # Version 1.63.15
 - MCP Server: get_tripsummary and get_chargesummary for a given time range. This is especially useful for AI clients to get a quick summary of the last trip or charging session without the need to parse all the data points.
 - BF: Restore backup
