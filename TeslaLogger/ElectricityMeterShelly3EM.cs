@@ -19,7 +19,10 @@ namespace TeslaLogger
         internal string mockup_status, mockup_shelly;
 
         Guid guid; // defaults to new Guid();
-        static readonly HttpClient client = new HttpClient();
+        static readonly HttpClient client = new HttpClient(new HttpClientHandler
+        {
+            ServerCertificateCustomValidationCallback = (p1, p2, p3, p4) => true
+        }, true);
 
         public ElectricityMeterShelly3EM(string host, string paramater)
         {

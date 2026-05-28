@@ -20,7 +20,10 @@ namespace TeslaLogger
 
         internal string get_dev_info;
 
-        static readonly HttpClient client = new HttpClient();
+        static readonly HttpClient client = new HttpClient(new HttpClientHandler
+        {
+            ServerCertificateCustomValidationCallback = (p1, p2, p3, p4) => true
+        }, true);
         Guid guid = Guid.NewGuid();
 
         public ElectricityMeterCFos(string host, string paramater)

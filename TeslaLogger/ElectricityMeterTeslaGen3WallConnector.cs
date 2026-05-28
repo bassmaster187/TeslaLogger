@@ -13,7 +13,10 @@ namespace TeslaLogger
         string parameter;
         internal int LP = 1;
 
-        static readonly HttpClient client = new HttpClient();
+        static readonly HttpClient client = new HttpClient(new HttpClientHandler
+        {
+            ServerCertificateCustomValidationCallback = (p1, p2, p3, p4) => true
+        }, true);
         internal string mockup_lifetime, mockup_version, mockup_vitals;
 
         public ElectricityMeterTeslaGen3WallConnector(string host, string parameter)
