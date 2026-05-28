@@ -28,7 +28,10 @@ namespace TeslaLogger
         internal string mockup_grid_values;
 
 
-        static readonly HttpClient client = new HttpClient();
+        static readonly HttpClient client = new HttpClient(new HttpClientHandler
+        {
+            ServerCertificateCustomValidationCallback = (p1, p2, p3, p4) => true
+        }, true);
 
         public ElectricityMeterWARP(string host, string parameter)
         {

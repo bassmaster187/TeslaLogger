@@ -15,8 +15,11 @@ namespace TeslaLogger
         string parameter;
         internal int LP = 1;
 
-        Guid guid; // defaults to new Guid();
-        static readonly HttpClient client = new HttpClient();
+       Guid guid; // defaults to new Guid();
+        static readonly HttpClient client = new HttpClient(new HttpClientHandler
+        {
+            ServerCertificateCustomValidationCallback = (p1, p2, p3, p4) => true
+        }, true);
 
         public ElectricityMeterOpenWB(string host, string parameter)
         {

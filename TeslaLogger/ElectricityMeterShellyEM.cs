@@ -21,7 +21,10 @@ namespace TeslaLogger
         int channel; // defaults to 0;
 
         Guid guid; // defaults to new Guid();
-        static readonly HttpClient client = new HttpClient();
+        static readonly HttpClient client = new HttpClient(new HttpClientHandler
+        {
+            ServerCertificateCustomValidationCallback = (p1, p2, p3, p4) => true
+        }, true);
 
         public ElectricityMeterShellyEM(string host, string paramater)
         {
