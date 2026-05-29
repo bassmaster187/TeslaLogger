@@ -1717,11 +1717,12 @@ namespace TeslaLogger
                     CleanupExceptionsDir();
                     // cleanup backup folder
                     CleanupBackupFolder();
+                    // cleanup log file nohup.out
                     CleanupLogfile();
                 }
                 else
                 {
-                CreateBackupForDocker();
+                    CreateBackupForDocker();
                 }
                 // cleanup database
                 CleanupDatabaseTableMothership();
