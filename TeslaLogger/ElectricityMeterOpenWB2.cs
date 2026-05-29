@@ -161,15 +161,15 @@ namespace TeslaLogger
                     //get grid meter id via hierarchy:
                     h = GetCurrentData("openWB/counter/get/hierarchy");
 
-                    if (String.IsNullOrEmpty(h))
-                        return double.NaN;
+                   if (String.IsNullOrEmpty(h))
+                        return null;
 
                     JArray jsonArray = JArray.Parse(h);
                     JToken firstCounter = jsonArray
                         .FirstOrDefault(item => (string)item["type"] == "counter");
 
                     if (string.IsNullOrEmpty(firstCounter["id"].ToString()))
-                        return double.NaN;
+                        return null;
 
                     gridmeterid = firstCounter["id"].ToString();
                 }
@@ -177,7 +177,7 @@ namespace TeslaLogger
                 j = GetCurrentData("openWB/counter/" + gridmeterid + "/get/imported");
                 
                 if (String.IsNullOrEmpty(j))
-                    return double.NaN;
+                    return null;
 
                 if (double.TryParse(j, out double value))
                 {
@@ -185,7 +185,7 @@ namespace TeslaLogger
                 }
                 else
                 {
-                    return double.NaN;
+                    return null;
                 }
 
             }
@@ -209,8 +209,8 @@ namespace TeslaLogger
                     //no charge point id provided, get first charge point id via hierarchy:
                     h = GetCurrentData("openWB/counter/get/hierarchy");
 
-                    if (String.IsNullOrEmpty(h))
-                        return double.NaN;
+                  if (String.IsNullOrEmpty(h))
+                        return null;
 
                     JToken cpEntry = JArray.Parse(h)
                         .Cast<JObject>()
@@ -219,7 +219,7 @@ namespace TeslaLogger
 
                     if (cpEntry == null)
                     {
-                        return double.NaN;
+                        return null;
                     }
 
                     chargepointid = cpEntry["id"].ToString();
@@ -228,7 +228,7 @@ namespace TeslaLogger
                 j = GetCurrentData("openWB/chargepoint/" + chargepointid + "/get/imported");
 
                 if (String.IsNullOrEmpty(j))
-                    return double.NaN;
+                    return null;
 
                 if (double.TryParse(j, out double value))
                 {
@@ -236,7 +236,7 @@ namespace TeslaLogger
                 }
                 else
                 {
-                    return double.NaN;
+                    return null;
                 }
 
             }
@@ -246,7 +246,7 @@ namespace TeslaLogger
                 Logfile.ExceptionWriter(ex, j);
             }
 
-            return double.NaN;
+            return null;
         }
 
         public override bool? IsCharging()
