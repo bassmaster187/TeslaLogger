@@ -2287,7 +2287,7 @@ Supercharger-V4 DE-Wittlich,49.96968,6.86169,32
 Supercharger-V4 DE-Wittlich (Globus),49.98189,6.9086
 Supercharger-V4 DE-Wittstock,53.15795,12.4551
 Supercharger-V4 DE-Wolfhagen,51.40358,9.18545
-Supercharger-V4 DE-Wolfsburg,52.423764,10.732424,20
+Supercharger-V4 DE-Wolfsburg,52.42373,10.73306
 Supercharger-V3 DE-Woringen,47.92343,10.20888
 Supercharger-V3 DE-Wuppertal,51.2825,7.25633
 Supercharger-V4 DE-Wustermark - Karls Erlebnis-Dorf,52.533747,12.997335,40
@@ -11710,6 +11710,7 @@ Electrify-America US-Milpitas CA Milpitas Square,37.42257,-121.91807,60
 Electrify-America US-Moorestown NJ Nixon Dr,39.93885,-74.96448
 Electrify-America US-North Platte NE S Dewey St,41.12047,-100.75946
 Electrify-America US-Ogallala NE Pony Express Ln,41.11276,-101.71856
+Electrify-America US-Orland Park IL Orland Square Dr,41.6171,-87.8483
 Electrify-America US-Pleasanton CA Johnson Dr,37.7011,-121.9181
 Electrify-America US-Plymouth Meeting PA W Germantown Pike,40.11699,-75.27937
 Electrify-America US-Pompton Plains NJ Route 23 North,40.96869,-74.28467
@@ -20094,6 +20095,7 @@ Lidl FR-Crolles Rue du Moulin,45.27482,5.88429,30
 Lidl FR-Dives-sur-Mer Rue Général de Gaulle,49.28573,-0.11027
 Lidl FR-Dol-de-Bretagne Rue de la Janaie,48.5524,-1.7239
 Lidl FR-Eauze Avenue des Pyrénées,43.8523,0.09705
+Lidl FR-Gérardmer Rue de la République,48.0756,6.87718
 Lidl FR-Jurançon Av. du 18 Juin,43.29089,-0.40521
 Lidl FR-La Ciotat Chem. de la Pépinière,43.18993,5.60227,25
 Lidl FR-Lamballe-Armor Rue des Prés Jouettes,48.48104,-2.49949
@@ -23553,6 +23555,7 @@ Smatrics AT-Bruck an der Mur Wiener Straße,47.42124,15.27429
 Smatrics AT-Brunn am Gebirge Brunner Straße,48.12217,16.2942
 Smatrics AT-Brunn am Gebirge Industriestraße,48.10959,16.30756
 Smatrics AT-Brunn am Gebirge Wienerstraße,48.11246,16.30006,30
+Smatrics AT-Burgfried Bürgermeisterstraße,47.68685,13.10866
 Smatrics AT-Deutsch-Wagram Promenadenweg,48.29512,16.55567
 Smatrics AT-Eisenstadt Mattersburger Straße,47.82993,16.51932
 Smatrics AT-Erlauf Erlaufstraße,48.07192,15.13749
@@ -23776,7 +23779,8 @@ SSW DE-St. Wendel Floriansweg,49.46283,7.1667
 Stark DE-Hauenstein Alte Bundesstraße,49.20005,7.83614,25
 Stark DE-Scharbeutz Bormwiese,54.05472,10.73083
 
-stations-e FR-Draveil Rue Ferdinand Buisson,48.67351,2.40768
+Stations-e FR-Draveil Rue Ferdinand Buisson,48.6735,2.40768
+Stations-e FR-Gérardmer Bd de la Jamagne,48.0782,6.88706
 Stations-e FR-Orcières Rue des Ecrins,44.69695,6.32294
 Stations-e FR-Saverne Rue de la Gare,48.74336,7.3605
 
