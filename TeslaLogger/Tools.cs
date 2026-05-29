@@ -1710,17 +1710,21 @@ namespace TeslaLogger
                 LogDiskUsage();
                 // log DB usage
                 LogDBUsage();
-                // cleanup Exceptions
-                CleanupExceptionsDir();
+                // cleanups that only work on RasPi
+                if (!IsDocker())
+                {
+                    // cleanup Exceptions
+                    CleanupExceptionsDir();
+                    // cleanup backup folder
+                    CleanupBackupFolder();
+                    CleanupLogfile();
+                }
+                else
+                {
+                CreateBackupForDocker();
+                }
                 // cleanup database
                 CleanupDatabaseTableMothership();
-                // cleanup backup folder
-                CleanupBackupFolder();
-
-                CreateBackupForDocker();
-
-                CleanupLogfile();
-
                 // run housekeeping regularly:
                 // - after 24h
                 // - but only if car is asleep, otherwise wait another hour
