@@ -52,7 +52,7 @@ Supercharger-V4 AT-Spittal an der Drau,46.78644,13.52195,70
 Supercharger AT-St. Anton,47.130092,10.269231
 Supercharger AT-St. Anton,47.131123,10.271497
 Supercharger AT-St. Anton,47.13404,10.2748
-Supercharger-V4 AT-St. Georgen,47.92887,13.50225
+Supercharger-V4 AT-St. Georgen,47.92887,13.50225,45
 Supercharger-V3 AT-St. Lorenzen im Mürztal,47.46898,15.34504,35
 Supercharger-V4 AT-St. Michael im Lungau,47.096663,13.632742
 Supercharger AT-St. Pölten,48.205769,15.618485
@@ -7121,6 +7121,7 @@ Tesla Service Center DE-Frankfurt am Main,50.13312,8.76548,56
 Tesla Service Center DE-Gettorf,54.40935,9.98353
 Tesla Service Center DE-Gießen,50.5733,8.70852
 Tesla Service Center DE-Hamburg,53.66861,9.99489
+Tesla Service Center DE-Hanau,50.1168,8.94095
 Tesla Service Center DE-Holzgerlingen,48.63146,9.02684
 Tesla Service Center DE-Karlsruhe Rintheim,49.0091,8.44301
 Tesla Service Center DE-Kirchheim,48.15108,11.74895
@@ -9635,6 +9636,7 @@ ChargePoint US-Okemah OK S Woody Guthrie St,35.42425,-96.29889
 ChargePoint US-Orem City Center,40.29809,-111.69376,120
 ChargePoint US-Price UT 50 N 100 E,39.60034,-110.8088
 ChargePoint US-Provo UT Sky Way,40.2147,-111.713
+ChargePoint US-Rantoul IL roadmeadow Rd,40.3071,-88.1792
 ChargePoint US-Salida CO Co Rd 105,38.52336,-105.98383
 ChargePoint US-Salt Lake City UT 1950 West,40.77384,-111.94773
 ChargePoint US-San Jose CA W San Carlos St,37.32322,-121.9057
@@ -10979,8 +10981,8 @@ E.ON DE-Raststätte Kalbecker Forst,51.6535,6.19771
 E.ON DE-Raststätte Kammersteiner Land Nord,49.30828,10.9687
 E.ON DE-Raststätte Köckern Ost,51.60902,12.1879
 E.ON DE-Raststätte Köckern West,51.60728,12.18326
-E.ON DE-Raststätte Königsforst,50.89756,7.1533
-E.ON DE-Raststätte Königsforst,50.89942,7.15213
+E.ON DE-Raststätte Königsforst Ost,50.89942,7.15213
+E.ON DE-Raststätte Königsforst West,50.89756,7.1533
 E.ON DE-Raststätte Lappwald Nord,52.22165,11.05374
 E.ON DE-Raststätte Lechwiesen Nord,48.0589,10.84572,30
 E.ON DE-Raststätte Lechwiesen Süd,48.05866,10.84867,30
@@ -13153,6 +13155,7 @@ EnBW DE-Olching Hermann-Böcker-Straße,48.22137,11.33034
 EnBW DE-Oldenburg Werrastraße,53.14136,8.25906
 EnBW DE-Oschersleben (Bode),52.02894,11.24823
 EnBW DE-Osnabrück,52.28922,8.03754
+EnBW DE-Osnabrück Benzstraße,52.30474,7.95594
 EnBW DE-Ostbevern,52.04382,7.84944
 EnBW DE-Osterburken Prof.-Schumacher-Straße,49.42866,9.42375
 EnBW DE-Osterburken Turmstraße,49.43096,9.42805
@@ -14386,6 +14389,8 @@ EnergieSüdwest DE-Landau in der Pfalz Wollmesheimer Höhe,49.1871,8.09324
 EnergyVision BE-Oostende Torhoutsesteenweg,51.19837,2.90284
 
 Enerstock FR-Le Bosc A75,43.6883,3.35473,10
+Enerstock FR-Soustons Rte de Tosse,43.74465,-1.33153
+Enerstock FR-Soustons Rte de Tosse,43.74492,-1.3324
 
 ENGIE DE-Oberwiesenthal Karlsbader Straße,50.41882,12.9623
 ENGIE FR-Aire de Brumath,48.72363,7.69208
@@ -14629,7 +14634,7 @@ ESWE DE-Wiesbaden Bismarckring,50.0797,8.22974
 ESWE DE-Wiesbaden Blücherstraße,50.08049,8.22484
 ESWE DE-Wiesbaden Flachstraße,50.08028,8.20458
 ESWE DE-Wiesbaden Hagenauer Straße,50.04779,8.2307
-ESWE DE-Wiesbaden Hasengartenstraße,50.06094,8.25813
+ESWE DE-Wiesbaden Hasengartenstraße,50.06075,8.25812
 ESWE DE-Wiesbaden Hauptbahnhof Gartenfeldstraße,50.07072,8.24546
 ESWE DE-Wiesbaden Herderstraße,50.07368,8.2352
 ESWE DE-Wiesbaden Klarenthaler Straße,50.07972,8.22072
@@ -17759,10 +17764,12 @@ Ionity AT-Kaiserwald,46.95924,15.38204
 Ionity AT-Klösterle,47.12907,10.06056
 Ionity AT-Meggenhofen Trappenhof,48.18382,13.78581,20
 Ionity AT-Meggenhofen Trappenhof,48.18383,13.78539,20
-Ionity AT-Nassereith,47.32749,10.81904,30
+Ionity AT-Nassereith An der Fernpaßbundesstraße,47.32658,10.81982,30
+Ionity AT-Nassereith An der Fernpaßbundesstraße,47.3275,10.81904,30
 Ionity AT-Parndorf Richard Erlinger Platz,47.97595,16.85438
 Ionity AT-Pinkafeld,47.37395,16.09384
 Ionity AT-Raststätte Mondsee,47.83664,13.39583,30
+Ionity AT-St. Georgen im Attergau Seeringstraße,47.9293,13.50095,30
 Ionity AT-St. Lorenzen im Mürztal,47.46875,15.34432,25
 Ionity AT-St. Valentin,48.19637,14.52835,16
 Ionity AT-Steinhäusl,48.15784,15.9404
@@ -19455,616 +19462,830 @@ Lidl CZ-Velká Chuchle,50.01909,14.39294,10
 Lidl CZ-Vyškov,49.27395,16.9916
 Lidl CZ-Zlín,49.21378,17.61436,10
 Lidl CZ-Štětí Cihelná,50.45621,14.37103
-Lidl DE-Aachen Peliserkerstraße,50.77921,6.11259
-Lidl DE-Aalen,48.82822,10.11368
-Lidl DE-Abensberg Straubinger Straße 14,48.81323,11.8514
+Lidl DE-Aachen Jülicher Straße,50.7902,6.11707
+Lidl DE-Aachen Peliserkerstraße,50.7792,6.1126
+Lidl DE-Aachen Reinhardstraße,50.76247,6.13727
+Lidl DE-Aachen Werkstraße,50.71216,6.1386
+Lidl DE-Aalen Ulmer Straße,48.82822,10.11368
+Lidl DE-Abensberg Straubinger Straße,48.81323,11.8514
+Lidl DE-Achern Fautenbacher Straße,48.62845,8.05992
 Lidl DE-Adenau Im Broel,50.38,6.94634
-Lidl DE-Albstadt,48.20982,9.01922
-Lidl DE-Altdorf Kristallstraße 2,48.54608,12.09451
-Lidl DE-Altenmelle,52.19297,8.35342
-Lidl DE-Amberg,49.44504,11.84262,10
-Lidl DE-Amorbach Krummwiese 1,49.64729,9.21977
-Lidl DE-Ampfing,48.25126,12.40977
-Lidl DE-Andernach Koblenzer Straße 33,50.43914,7.41087
-Lidl DE-Ankum Lindenstraße 1,52.54132,7.86722
+Lidl DE-Albstadt Theodor-Groz-Straße,48.20982,9.01922
+Lidl DE-Alsfeld Grünberger Straße,50.74373,9.25877
+Lidl DE-Altdorf Kristallstraße,48.54608,12.0945
+Lidl DE-Altenmelle Industriestraße,52.19297,8.35342
+Lidl DE-Amberg Infanteriestraße,49.44504,11.84262,10
+Lidl DE-Amorbach Krummwiese,49.6473,9.21977
+Lidl DE-Ampfing Industriestraße,48.25126,12.40977
+Lidl DE-Andernach Koblenzer Straße,50.43914,7.41087
+Lidl DE-Ankum Lindenstraße,52.54132,7.86722
 Lidl DE-Annweiler Industriestraße,49.2081,7.97862
-Lidl DE-Ansbach,49.29569,10.57022,20
-Lidl DE-Anzing,48.15883,11.85449
+Lidl DE-Ansbach Louis-Schmetzer-Straße,49.2957,10.57022,20
+Lidl DE-Anzing Erdinger Straße,48.15883,11.8545
 Lidl DE-Arnsberg Ruhrstraße,51.40204,8.06384
-Lidl DE-Arnsdorf Stolpener Straße 14,51.09743,13.99437
+Lidl DE-Arnsdorf Stolpener Straße,51.09743,13.99437
 Lidl DE-Arnstorf Mariakirchner Straße,48.56433,12.8246
 Lidl DE-Aschaffenburg Spessartstraße,49.9656,9.15486
 Lidl DE-Augsburg Eichleitnerstraße,48.3465,10.88616
-Lidl DE-Augsburg Unterer Talweg 109,48.31504,10.89014
+Lidl DE-Augsburg Reichenberger Straße,48.3622,10.92016
+Lidl DE-Augsburg Unterer Talweg,48.31504,10.89014
+Lidl DE-Babenhausen Krumbacher Straße,48.1455,10.25818
 Lidl DE-Backnang Weissacher Straße,48.93456,9.4472
 Lidl DE-Bad Camberg Beuerbacher Landstraße,50.2952,8.2533
 Lidl DE-Bad Driburg Mühlenstraße,51.7331,9.02327
 Lidl DE-Bad Dürkheim Bruchstraße,49.46866,8.20154
-Lidl DE-Bad Fallingbostel Düshorner Straße 16,52.8636,9.68764
-Lidl DE-Bad Honnef,50.64698,7.31519
+Lidl DE-Bad Essen Gartenstraße,52.3251,8.33704
+Lidl DE-Bad Fallingbostel Düshorner Straße,52.8636,9.68764
+Lidl DE-Bad Honnef Rottbitzer Straße,50.64698,7.3152
 Lidl DE-Bad Kreuznach Alzeyer Straße,49.84117,7.87173
-Lidl DE-Bad Laasphe Ludwig-Koch-Straße 7,50.92959,8.42391
-Lidl DE-Bad Lippspringe An der Weberei 2,51.77631,8.80549
+Lidl DE-Bad Laasphe Ludwig-Koch-Straße,50.9296,8.4239
+Lidl DE-Bad Lippspringe An der Weberei,51.7763,8.8055
+Lidl DE-Bad Marienberg (Westerwald) Jahnstraße,50.65743,7.96722
 Lidl DE-Bad Rappenau Raiffeisenstraße,49.23705,9.09958
+Lidl DE-Bad Rothenfelde Bahnhofstraße,52.11052,8.1733
 Lidl DE-Bad Schandau Dresdner Straße,50.92104,14.14336
-Lidl DE-Bad Schwalbach Bahnhofstraße,50.14881,8.08358
-Lidl DE-Bad Sobernheim Monzinger Straße 91,49.78727,7.63896
+Lidl DE-Bad Schwalbach Bahnhofstraße,50.1488,8.08358
+Lidl DE-Bad Sobernheim Monzinger Straße,49.78727,7.63896
 Lidl DE-Bad Soden am Taunus Königsteiner Straße,50.14034,8.5054
 Lidl DE-Bad Vilbel Alte Frankfurter Straße,50.16808,8.7293,25
-Lidl DE-Bad Wildungen Itzelstraße 34,51.11964,9.1329
-Lidl DE-Bamberg Laubanger,49.91161,10.87613
-Lidl DE-Barnstorf Niedersachsenweg 25,52.70473,8.49267
+Lidl DE-Bad Wildungen Itzelstraße,51.11964,9.1329
+Lidl DE-Bamberg Laubanger,49.9116,10.87613
+Lidl DE-Barnstorf Niedersachsenweg,52.70473,8.49267
 Lidl DE-Bebra Hersfelder Straße,50.96577,9.79552
-Lidl DE-Bergen Gingster Chaussee,54.42434,13.41437
+Lidl DE-Bedburg Wiesenstraße,50.99736,6.57084
+Lidl DE-Bergen auf Rügen Gingster Chaussee,54.42434,13.41437
+Lidl DE-Berlin Bergstraße,52.45843,13.33002
+Lidl DE-Berlin Bornholmer Straße,52.55436,13.40062
 Lidl DE-Berlin Buckower Damm,52.42635,13.435
+Lidl DE-Berlin Charlottenburger Chaussee,52.52642,13.24057
+Lidl DE-Berlin Clayallee,52.44186,13.26543
 Lidl DE-Berlin Curtiusstraße,52.44073,13.28946,30
 Lidl DE-Berlin Donaustraße,52.48092,13.43915
 Lidl DE-Berlin Einbecker Straße,52.50906,13.50636
+Lidl DE-Berlin Eldenaer Straße,52.5206,13.46824
+Lidl DE-Berlin Frankfurter Allee,52.5135,13.4754
+Lidl DE-Berlin Fürstenbrunner Weg,52.52033,13.28036
 Lidl DE-Berlin Gervinusstraße,52.50338,13.3004
-Lidl DE-Berlin Großbeerenstraße 2,52.43864,13.38
-Lidl DE-Berlin Gutschmidtstraße,52.43912,13.43781
-Lidl DE-Berlin Holzhauser Straße,52.58641,13.31588
+Lidl DE-Berlin Grabbeallee,52.5739,13.39895
+Lidl DE-Berlin Großbeerenstraße,52.43864,13.38
+Lidl DE-Berlin Gutschmidtstraße,52.43912,13.4378
+Lidl DE-Berlin Hauptstraße,52.48317,13.35122
+Lidl DE-Berlin Havemannstraße,52.56976,13.5694
+Lidl DE-Berlin Heerstraße,52.52797,13.12988
+Lidl DE-Berlin Holzhauser Straße,52.5864,13.31588
 Lidl DE-Berlin Hönower Straße,52.5135,13.61158
-Lidl DE-Berlin Kaiser-Wilhelm-Straße 127,52.44087,13.35285
+Lidl DE-Berlin Indira-Gandhi-Straße,52.54653,13.46882
+Lidl DE-Berlin Kaiser-Wilhelm-Straße,52.44087,13.35285
 Lidl DE-Berlin Kiefholzstraße,52.46462,13.48806
-Lidl DE-Berlin Kiefholzstraße,52.48399,13.46156
+Lidl DE-Berlin Kiefholzstraße,52.484,13.46156
+Lidl DE-Berlin Kniprodestraße,52.53487,13.44605
 Lidl DE-Berlin Köpenicker Straße,52.49207,13.56114
-Lidl DE-Berlin Lise-Meitner-Straße,52.52709,13.3066,20
-Lidl DE-Berlin Manteuffelstraße 24-25,52.45835,13.37577
-Lidl DE-Berlin Märkische Allee 276,52.55658,13.5545
+Lidl DE-Berlin Lise-Meitner-Straße,52.5271,13.3066,20
+Lidl DE-Berlin Mahlsdorfer Straße,52.5406,13.6387
+Lidl DE-Berlin Manteuffelstraße,52.45835,13.37577
+Lidl DE-Berlin Markgrafendamm,52.5005,13.46556
+Lidl DE-Berlin Markstraße,52.56173,13.36486
+Lidl DE-Berlin Marzahner Chaussee,52.52483,13.53346
+Lidl DE-Berlin Maybachufer,52.49206,13.43203
+Lidl DE-Berlin Märkische Allee,52.55658,13.5545
 Lidl DE-Berlin Nonnendammallee,52.53966,13.23284
-Lidl DE-Berlin Oberlandstraße,52.46489,13.4167,30
-Lidl DE-Berlin Prenzlauer Allee 93,52.5466,13.42887
+Lidl DE-Berlin Nuthestraße,52.39778,13.39175
+Lidl DE-Berlin Oberlandstraße,52.4649,13.4167,30
+Lidl DE-Berlin Ontarioseestraße,52.49535,13.52312
+Lidl DE-Berlin Pasewalker Straße,52.5938,13.43235
+Lidl DE-Berlin Pistoriusstraße,52.55613,13.4373
+Lidl DE-Berlin Prenzlauer Allee,52.5466,13.42887
+Lidl DE-Berlin Prenzlauer Promenade,52.56735,13.42807
+Lidl DE-Berlin Prinzenallee,52.555,13.3833
+Lidl DE-Berlin Provinzstraße,52.56554,13.3784
+Lidl DE-Berlin Prötzeler Ring,52.54607,13.57538
 Lidl DE-Berlin Quickborner Straße,52.60347,13.36748
-Lidl DE-Berlin Seegefelder Weg 391,52.54622,13.14284
+Lidl DE-Berlin Quitzowstraße,52.53565,13.35312
+Lidl DE-Berlin Rastatter Straße,52.4903,13.6065
+Lidl DE-Berlin Reinickendorfer Straße,52.54904,13.3699
+Lidl DE-Berlin Roedernallee,52.5857,13.3421
+Lidl DE-Berlin Roelckestraße,52.55045,13.43995
+Lidl DE-Berlin Seegefelder Weg,52.54622,13.14284
 Lidl DE-Berlin Sonnenallee,52.47556,13.45176
-Lidl DE-Berlin Steglitzer Damm,52.44929,13.35434
-Lidl DE-Berlin Tempelhofer Damm 130,52.46791,13.38486
+Lidl DE-Berlin Späthstraße,52.45302,13.45406
+Lidl DE-Berlin Steglitzer Damm,52.4493,13.35434
+Lidl DE-Berlin Säntisstraße,52.4189,13.39
+Lidl DE-Berlin Tempelhofer Damm,52.4679,13.38486
 Lidl DE-Berlin Vorarlberger Damm,52.47005,13.34976
+Lidl DE-Berlin Waldstraße,52.57672,13.32578
 Lidl DE-Berlin Zeughofstraße,52.50117,13.43544
-Lidl DE-Berlin-Charlottenburg-Wilmersdorf Fürstenbrunner Weg,52.52033,13.28036
-Lidl DE-Berlin-Charlottenburg-Wilmersdorf Gervinusstraße,52.50265,13.29787
-Lidl DE-Berlin-Friedrichshain Markgrafendamm 25C,52.50049,13.46556
-Lidl DE-Berlin-Lichtenberg-HsH Indira-Gandhi-Straße,52.54653,13.46882
-Lidl DE-Berlin-Marzahn-Hellersdorf Havemannstraße,52.56976,13.5694
-Lidl DE-Berlin-Marzahn-Hellersdorf Prötzeler Ring,52.54607,13.57538
-Lidl DE-Berlin-Marzahn-Hellersdorf Rastatter Straße,52.4903,13.6065
-Lidl DE-Berlin-Mitte Prinzenallee,52.555,13.3833
-Lidl DE-Berlin-Mitte Provinzstraße,52.56554,13.3784
-Lidl DE-Berlin-Mitte Quitzowstraße,52.53565,13.35312
-Lidl DE-Berlin-Mitte Reinickendorfer Straße,52.54904,13.36991
-Lidl DE-Berlin-Neukölln Maybachufer,52.49206,13.43203
-Lidl DE-Berlin-Neukölln Späthstraße,52.45302,13.45406
 Lidl DE-Berlin-Ontarioseestraße,52.49485,13.5233
-Lidl DE-Berlin-Pankow Bornholmer Straße,52.55436,13.40062
-Lidl DE-Berlin-Pankow Eldenaer Straße,52.5206,13.46824
-Lidl DE-Berlin-Pankow Grabbeallee 27/29,52.57389,13.39895
-Lidl DE-Berlin-Pankow Kniprodestraße,52.53487,13.44605
-Lidl DE-Berlin-Pankow Pasewalker Straße,52.5938,13.43235
-Lidl DE-Berlin-Pankow Pistoriusstraße,52.55613,13.4373
-Lidl DE-Berlin-Pankow Prenzlauer Promenade,52.56735,13.42807
-Lidl DE-Berlin-Pankow Roelckestraße,52.55045,13.43995
-Lidl DE-Berlin-Reinickendorf Marktstraße,52.56173,13.36486
-Lidl DE-Berlin-Reinickendorf Roedernallee,52.5857,13.34211
-Lidl DE-Berlin-Reinickendorf Waldstraße 19,52.57672,13.32578
-Lidl DE-Berlin-Spandau-Ruhleben Charlottenburger Chaussee 18,52.52642,13.24057
-Lidl DE-Berlin-Steglitz-Zehlendorf Bergstraße 86,52.45843,13.33002
-Lidl DE-Berlin-Steglitz-Zehlendorf Clayallee 278,52.44186,13.26543
-Lidl DE-Berlin-Tempelhof-Schöneberg Hauptstraße,52.48317,13.35122
-Lidl DE-Bernsdorf Am Ankerglasplatz 8,51.37574,14.07156
-Lidl DE-Besigheim,48.99992,9.14501
-Lidl DE-Biberach an der Riß,48.08152,9.80339,55
-Lidl DE-Biedenkopf Hospitalstraße,50.9058,8.53641
-Lidl DE-Bielefeld Babenhauser Straße 18,52.05924,8.51698
-Lidl DE-Bielefeld Oldentruper Straße 255,52.01221,8.59711
-Lidl DE-Bielefeld-Brackwede Kimbernstraße 1,51.98977,8.50715
-Lidl DE-Bietigheim-Bissingen,48.94953,9.14687
+Lidl DE-Bernsdorf Am Ankerglasplatz,51.37574,14.07156
+Lidl DE-Besigheim Robert-Bosch-Straße,48.99992,9.145
+Lidl DE-Betzdorf Wilhelmstraße,50.79614,7.86293
+Lidl DE-Biberach an der Riß Waldseer Straße,48.08152,9.8034,55
+Lidl DE-Biedenkopf Hospitalstraße,50.9058,8.5364
+Lidl DE-Bielefeld Babenhauser Straße,52.05924,8.51698
+Lidl DE-Bielefeld Henleinstraße,51.9538,8.57693
+Lidl DE-Bielefeld Kimbernstraße,51.98977,8.50715
+Lidl DE-Bielefeld Oldentruper Straße,52.0122,8.5971
+Lidl DE-Bietigheim-Bissingen Gustav-Rau-Straße,48.94953,9.14687
+Lidl DE-Bischberg Wasserwörth,49.91623,10.815
 Lidl DE-Bischofswerda Friedrich-List-Straße,51.11712,14.18858
-Lidl DE-Bitburg Saarstraße 37,49.9617,6.52311
-Lidl DE-Bitterfeld-Wolfen Friedensstraße 5,51.62788,12.32877
+Lidl DE-Bitburg Saarstraße,49.9617,6.5231
+Lidl DE-Bitterfeld-Wolfen Friedensstraße,51.62788,12.32877
+Lidl DE-Blaubeuren Zementwerkstraße,48.40226,9.78612
 Lidl DE-Blomberg Alter Dreschplatz,51.94427,9.09735
-Lidl DE-Bochum Freudenbergstraße 6,51.49656,7.19071
+Lidl DE-Bochum Freudenbergstraße,51.49656,7.1907
+Lidl DE-Bochum Lyrenstraße,51.48238,7.12853
 Lidl DE-Bochum Poststraße,51.503,7.20294
-Lidl DE-Bochum-Hiltrop Wiescherstraße 6,51.51621,7.2572
+Lidl DE-Bochum Wiescherstraße,51.5162,7.2572
 Lidl DE-Bockhorn Steinhauser Straße,53.39726,8.01554
-Lidl DE-Bonn-Beuel Maarstraße,50.73718,7.13517
+Lidl DE-Bonn Maarstraße,50.73718,7.13517
 Lidl DE-Borchen Bahnhofstraße,51.66123,8.71638
-Lidl DE-Borna Lobstädter Straße 17,51.12224,12.48809
-Lidl DE-Bottrop Horster Straße,51.53351,6.95352
-Lidl DE-Brake Am Stadion 2,53.33129,8.45948
-Lidl DE-Bramsche Lindenstraße 64,52.41753,7.97609
-Lidl DE-Braunschweig Otto-von-Guericke-Straße,52.24529,10.5137
+Lidl DE-Bordesholm Kieler Straße,54.17918,10.02716
+Lidl DE-Borken (Hessen) Am Bahnhof,50.05,9.2765
+Lidl DE-Borna Lobstädter Straße,51.12224,12.4881
+Lidl DE-Bottrop Horster Straße,51.5335,6.95352
+Lidl DE-Brake Am Stadion,53.3313,8.45948
+Lidl DE-Brakel Warburger Straße,51.7138,9.17982
+Lidl DE-Bramsche Lindenstraße,52.41753,7.9761
+Lidl DE-Braunschweig Otto-von-Guericke-Straße,52.2453,10.5137
+Lidl DE-Bremen Arsterdamm,53.03402,8.84503
 Lidl DE-Bremen Hastedter Heerstraße,53.06896,8.8579
 Lidl DE-Bremen Hemmstraße,53.10107,8.81408,30
-Lidl DE-Bremervörde Alte Straße 35,53.48689,9.14105
-Lidl DE-Bretten,49.03848,8.69647
+Lidl DE-Bremen Leher Heerstraße,53.1016,8.8839
+Lidl DE-Bremen Osterholzer Heerstraße,53.05763,8.94754
+Lidl DE-Bremen Stader Landstraße,53.1675,8.70358
+Lidl DE-Bremerhaven Heinrich-Brauns-Straße,53.58724,8.6084
+Lidl DE-Bremerhaven Twischlehe,53.57958,8.59734
+Lidl DE-Bremervörde Alte Straße,53.4869,9.14105
+Lidl DE-Bretten Melanchthonstraße,49.03848,8.69647
+Lidl DE-Brome Bahnhofstraße,52.60128,10.93764
 Lidl DE-Bruchköbel Keltenstraße,50.1772,8.91152
-Lidl DE-Bruchsal,49.12136,8.58197
-Lidl DE-Brüggen Borner Straße 78,51.24538,6.19531
-Lidl DE-Brühl-Badorf Steingasse,50.80688,6.89944
-Lidl DE-Burgdorf Ostlandring 2a,52.44513,10.02439
-Lidl DE-Butzbach John-F-Kennedy-Straße,50.44257,8.66372,65
-Lidl DE-Buxtehude Harburger Straße 60-62,53.47389,9.7136
-Lidl DE-Böblingen,48.6782,9.01255
+Lidl DE-Bruchsal Eisenbahnstraße,49.12136,8.58197
+Lidl DE-Brüggen Borner Straße,51.24538,6.1953
+Lidl DE-Brühl Steingasse,50.80688,6.89944
+Lidl DE-Buchen (Odenwald) F.-X.-Schmerbeck-Straße,49.5191,9.32427
+Lidl DE-Buchholz in der Nordheide Zimmererstraße,53.34458,9.8575
+Lidl DE-Burgdorf Ostlandring,52.44513,10.0244
+Lidl DE-Butzbach John-F.-Kennedy-Straße,50.44257,8.66372,65
+Lidl DE-Buxtehude Harburger Straße,53.4739,9.7136
+Lidl DE-Böblingen Rudolf-Diesel-Straße,48.6782,9.01255
+Lidl DE-Bönnigheim Erligheimer Straße,49.0337,9.09453
 Lidl DE-Büdelsdorf Konrad-Adenauer-Straße,54.32252,9.69215
+Lidl DE-Bühl Fridolin-Stiegler-Straße,48.70707,8.1298
+Lidl DE-Büren Bahnhofstraße,51.55805,8.55388
+Lidl DE-Bürstadt Weidenweg,49.6378,8.45092
 Lidl DE-Bützow Bahnhofstraße,53.84268,11.99675
-Lidl DE-Castrop-Rauxel Siemensstraße 13,51.57904,7.30728
-Lidl DE-Cham Rodinger Straße 4,49.20217,12.66147
-Lidl DE-Chemnitz Limbacher Straße 31,50.83852,12.90187
+Lidl DE-Calw Stuttgarter Straße,48.70763,8.7608
+Lidl DE-Castrop-Rauxel Herner Straße,51.5497,7.29325
+Lidl DE-Castrop-Rauxel Siemensstraße,51.57904,7.30728
+Lidl DE-Cham Rodinger Straße,49.20217,12.66147
+Lidl DE-Chemnitz Limbacher Straße,50.83852,12.90187
 Lidl DE-Chemnitz Paul-Bertz-Straße,50.80243,12.88655
-Lidl DE-Chemnitz-Lutherviertel Zschopauer Straße 184,50.81769,12.94483
+Lidl DE-Chemnitz Zschopauer Straße,50.8177,12.94483
 Lidl DE-Cloppenburg Emsteker Straße,52.84235,8.05782,30
-Lidl DE-Cloppenburg Warthestraße,52.83557,8.02429
-Lidl DE-Crailsheim Haller Straße 65,49.14203,10.0482
-Lidl DE-Cremlingen,52.2522,10.64048
-Lidl DE-Cuxhaven Grüner Weg 2,53.86935,8.7001
+Lidl DE-Cloppenburg Warthestraße,52.83557,8.0243
+Lidl DE-Colditz Wassergasse,51.12948,12.80396
+Lidl DE-Cottbus Sielower Landstraße,51.7722,14.32672
+Lidl DE-Crailsheim Haller Straße,49.14203,10.0482
+Lidl DE-Cremlingen Im Moorbusche,52.2522,10.64048
+Lidl DE-Cuxhaven Feldweg,53.87088,8.68644
+Lidl DE-Cuxhaven Grodener Chaussee,53.85165,8.71368
+Lidl DE-Cuxhaven Grüner Weg,53.86935,8.7001
+Lidl DE-Dallgow-Döberitz Wilmsstraße,52.54218,13.0635
 Lidl DE-Damme Hunteburger Straße,52.51878,8.2012
-Lidl DE-Deggendorf,48.84794,12.95921,20
-Lidl DE-Delmenhorst Bremer Straße 106,53.05394,8.64963
-Lidl DE-Denzlingen,48.06737,7.8692,20
+Lidl DE-Deggendorf Graflinger Straße,48.84794,12.9592,20
+Lidl DE-Delmenhorst Bremer Straße,53.05394,8.64963
+Lidl DE-Denzlingen Kronenstraße,48.06737,7.8692,20
+Lidl DE-Dillingen a.d.Donau Otto-Brenner-Straße,48.58427,10.47876
+Lidl DE-Dinslaken Gerhard-Malina-Straße,51.5674,6.74602
 Lidl DE-Dippoldiswalde Alte Altenberger Straße,50.88874,13.66805
 Lidl DE-Doberlug-Kirchhain Bahnhofsallee,51.6192,13.56038
-Lidl DE-Dormagen Walhovener Straße,51.09842,6.84611
-Lidl DE-Dornstadt,48.46193,9.94849
-Lidl DE-Dortmund Markscheiderstraße 1,51.49725,7.53847
-Lidl DE-Dortmund Märkische Straße 239,51.49695,7.48883
-Lidl DE-Dortmund-Husen Husener Straße 44,51.56001,7.59466
-Lidl DE-Dortmund-Kirchlinde Kirchlinder Straße,51.52105,7.36855
-Lidl DE-Dransfeld Wolfshof 6,51.50339,9.76493
-Lidl DE-Dresden Großenhainer Straße 156,51.09089,13.72323
+Lidl DE-Dorfen Haager Straße,48.26846,12.1556
+Lidl DE-Dormagen Walhovener Straße,51.09842,6.8461
+Lidl DE-Dornstadt Lerchenbergstraße,48.46193,9.9485
+Lidl DE-Dortmund Husener Straße,51.56,7.59466
+Lidl DE-Dortmund Kirchlinder Straße,51.52105,7.36855
+Lidl DE-Dortmund Markscheiderstraße,51.49725,7.53847
+Lidl DE-Dortmund Märkische Straße,51.49695,7.48883
+Lidl DE-Dransfeld Wolfshof,51.5034,9.76493
+Lidl DE-Dresden Budapester Straße,51.04155,13.7206
+Lidl DE-Dresden Georg-Palitzsch-Straße,51.00245,13.7942
+Lidl DE-Dresden Großenhainer Straße,51.0909,13.72323
 Lidl DE-Dresden Hansastraße,51.0724,13.73973
 Lidl DE-Dresden Leipziger Straße,51.07422,13.72383
-Lidl DE-Dresden Schandauer Straße 22a,51.04266,13.78664
-Lidl DE-Dresden-Gorbitz Omsewitzer Ring 45,51.04893,13.66295
-Lidl DE-Dresden-Hellerau Ludwig-Kossuth-Straße,51.11706,13.74236
-Lidl DE-Dresden-Prohlis Georg-Palitzsch-Straße,51.00245,13.7942
-Lidl DE-Dresden-Südvorstadt Budapester Straße,51.04155,13.7206
-Lidl DE-Dresden-Zschertnitz Südhöhe 38,51.0192,13.73751
-Lidl DE-Duisburg-Beeck Friedrich-Ebert-Straße,51.47155,6.7337
-Lidl DE-Duisburg-Marxloh Schulte-Marxloh-Straße,51.504,6.76512
-Lidl DE-Duisburg-Neudorf,51.42277,6.78111,20
-Lidl DE-Düren Monschauer Straße 10,50.79483,6.47085
-Lidl DE-Eberbach Neuer Weg-Nord 38,49.47181,8.98533
-Lidl DE-Ebersdorf-Frohnlach Kellergasse 31/B 303,50.21431,11.08851
+Lidl DE-Dresden Ludwig-Kossuth-Straße,51.11706,13.74236
+Lidl DE-Dresden Omsewitzer Ring,51.04893,13.66295
+Lidl DE-Dresden Schandauer Straße,51.04266,13.78664
+Lidl DE-Dresden Südhöhe,51.0192,13.7375
+Lidl DE-Duisburg Brückenstraße,51.41947,6.75125
+Lidl DE-Duisburg Duisburger Straße,51.49508,6.77042
+Lidl DE-Duisburg Friedrich-Ebert-Straße,51.47155,6.7337
+Lidl DE-Duisburg Koloniestraße,51.42277,6.7811,20
+Lidl DE-Duisburg Schulte-Marxloh-Straße,51.504,6.76512
+Lidl DE-Düren Monschauer Straße,50.79483,6.47085
+Lidl DE-Eberbach Neuer Weg-Nord,49.4718,8.98533
+Lidl DE-Ebersdorf b. Coburg Kellergasse,50.2143,11.0885
+Lidl DE-Eching Dieselstraße,48.31114,11.64662
+Lidl DE-Edewecht Hauptstraße,53.12173,7.97617
 Lidl DE-Eging am See Vilshofener Straße,48.7089,13.26247
-Lidl DE-Ehningen Bühlallee 2,48.66143,8.93892
+Lidl DE-Ehningen Bühlallee,48.66143,8.93892
 Lidl DE-Eisenach Clemdastraße,50.98042,10.32276
+Lidl DE-Eisenberg (Pfalz) In den Geldäckern,49.55725,8.08264
+Lidl DE-Eisenberg Jenaer Straße,50.97063,11.89313
 Lidl DE-Eitorf Siegstraße,50.773,7.4633
-Lidl DE-Ellwangen (Jagst) Haller Straße 73,48.97106,10.11968
+Lidl DE-Ellwangen (Jagst) Haller Straße,48.97106,10.11968
+Lidl DE-Elmshorn Hamburger Straße,53.74907,9.6913
 Lidl DE-Elsterwerda Schillerstraße,51.46437,13.52533
-Lidl DE-Emden-Constantia Teutonenstraße 1,53.36773,7.18845
+Lidl DE-Eltville am Rhein Weinhohle,50.0282,8.12288
+Lidl DE-Emden Teutonenstraße,53.36773,7.18845
 Lidl DE-Emmendingen Kollmarsreuter Straße,48.11152,7.86508
-Lidl DE-Erfde Heidkoppel 1,54.31112,9.33232
-Lidl DE-Erftstadt Herriger Straße 29,50.80016,6.76074
-Lidl DE-Erfurt Eislebener Straße,50.99186,11.02911
-Lidl DE-Eschborn Ginnheimer Straße,50.1407,8.5822,40
-Lidl DE-Eschborn Rudolf-Diesel-Straße,50.15062,8.5488
-Lidl DE-Eschweiler Auerbachstraße 17,50.82321,6.2507
-Lidl DE-Eschweiler Dürener Straße 278,50.81873,6.28837
+Lidl DE-Enger Lambernweg,52.1483,8.56257
+Lidl DE-Eppingen Tullastraße,49.1331,8.90337
+Lidl DE-Erding Anton-Huber-Straße,48.31005,11.8907
+Lidl DE-Erfde Heidkoppel,54.31112,9.33232
+Lidl DE-Erftstadt Herriger Straße,50.80016,6.76074
+Lidl DE-Erfurt Eislebener Straße,50.99186,11.0291
+Lidl DE-Eschborn/Taunus Ginnheimer Straße,50.1407,8.5822,40
+Lidl DE-Eschborn/Taunus Rudolf-Diesel-Straße,50.15062,8.5488
+Lidl DE-Eschenburg Im Seifen,50.7874,8.3205
+Lidl DE-Eschweiler Auerbachstraße,50.8232,6.2507
+Lidl DE-Eschweiler Dürener Straße,50.81873,6.28837
+Lidl DE-Esens Bahnhofstraße,53.63625,7.61165
+Lidl DE-Essen Altenessener Straße,51.49088,7.00982
+Lidl DE-Essen Eisenbahnstraße,51.42733,7.04512,30
 Lidl DE-Essen Eleonorastraße,51.4367,7.02376,25
 Lidl DE-Essen Gladbecker Straße,51.48704,6.9967
-Lidl DE-Essen Wolfsbankring 20,51.47307,6.95715
-Lidl DE-Essen-Altendorf Helenenstraße,51.4643,6.9824
-Lidl DE-Essen-Altenessen Altenessener Straße 289,51.49088,7.00982
-Lidl DE-Essen-Horst Ruhrau 42,51.44111,7.08702
-Lidl DE-Essen-Rellinghausen Eisenbahnstraße,51.42733,7.04512,30
+Lidl DE-Essen Hausackerstraße,51.44166,6.97776
+Lidl DE-Essen Helenenstraße,51.4643,6.9824
+Lidl DE-Essen Ruhrau,51.4411,7.08702
+Lidl DE-Essen Wolfsbankring,51.47307,6.95715
 Lidl DE-Essenbach Straubinger Straße,48.61426,12.22447
+Lidl DE-Esslingen am Neckar Stauffenbergstraße,48.73275,9.3237
+Lidl DE-Ettlingen Zehntwiesenstraße,48.94495,8.39388
 Lidl DE-Euskirchen Roitzheimer Straße,50.6531,6.79902
-Lidl DE-Eutin,54.12898,10.62197
+Lidl DE-Eutin Bürgermeister-Steenbock-Straße,54.12898,10.62197
+Lidl DE-Eutin Plöner Landstraße,54.12884,10.5792
 Lidl DE-Fehmarn Landkirchener Weg,54.4427,11.181,30
+Lidl DE-Feldberg (Schwarzwald) Ignaz-Gfell-Platz,47.86874,8.09662
 Lidl DE-Flensburg Friesische Straße,54.77818,9.41612
 Lidl DE-Flensburg Zur Bleiche,54.77102,9.43333
-Lidl DE-Frankenberg (Eder) Siegener Straße 5,51.05543,8.78791
+Lidl DE-Florstadt Am schwarzen Berg,50.3218,8.86956
+Lidl DE-Forst (Lausitz) Spremberger Straße,51.73678,14.6388
+Lidl DE-Frankenberg (Eder) Siegener Straße,51.05543,8.7879
 Lidl DE-Frankfurt am Main August-Schanz-Straße,50.1621,8.6856
-Lidl DE-Frankfurt Berner Straße,50.19369,8.65645
-Lidl DE-Frankfurt Niederrad,50.08408,8.62986
-Lidl DE-Frankfurt-Griesheim Elektronstraße,50.09603,8.59886
-Lidl DE-Frankfurt-Nied Oeserstraße,50.108,8.5873
-Lidl DE-Frankfurt-Unterliederbach Sossenheimer Weg 67,50.11461,8.54456
-Lidl DE-Frechen,50.92313,6.81708
-Lidl DE-Frechen Dr.-Gottfried-Cremer-Allee 22,50.90932,6.82517
-Lidl DE-Freiburg im Breisgau,47.98635,7.83422
-Lidl DE-Friedland Neubrandenburger Straße 8c,53.66381,13.5456
-Lidl DE-Friedrichroda Bahnhofstraße 38,50.86068,10.57678
+Lidl DE-Frankfurt am Main Berner Straße,50.1937,8.65645
+Lidl DE-Frankfurt am Main Elektronstraße,50.09603,8.59886
+Lidl DE-Frankfurt am Main Goldsteinstraße,50.08408,8.62986
+Lidl DE-Frankfurt am Main Oeserstraße,50.108,8.5873
+Lidl DE-Frankfurt am Main Sossenheimer Weg,50.1146,8.54456
+Lidl DE-Frechen Dr.-Gottfried-Cremer-Allee,50.90932,6.82517
+Lidl DE-Frechen Zedernweg,50.92313,6.81708
+Lidl DE-Freiburg im Breisgau Konrad-Goldmann-Straße,47.98635,7.83422
+Lidl DE-Freisen Bahnhofstraße,49.552,7.24058
+Lidl DE-Freising Karwendelring,48.41197,11.74114
+Lidl DE-Freyung Speltenbach,48.82202,13.54452
+Lidl DE-Friedland Neubrandenburger Straße,53.6638,13.5456
+Lidl DE-Friedrichroda Bahnhofstraße,50.86068,10.57678
 Lidl DE-Friedrichsdorf/Taunus Cheshamer Straße,50.25714,8.6488
-Lidl DE-Friesoythe Ellerbrocker Straße 1,53.01802,7.85645
+Lidl DE-Friesoythe Ellerbrocker Straße,53.01802,7.85645
 Lidl DE-Fritzlar Gießener Straße,51.1248,9.2813
 Lidl DE-Fürstenau Fröhlkingstraße,52.5133,7.6794
-Lidl DE-Fürstenfeldbruck Kurt-Huber-Ring 17,48.16055,11.22303
+Lidl DE-Fürstenfeldbruck Kurt-Huber-Ring,48.16055,11.22303
 Lidl DE-Füssen Abt-Hafner-Straße,47.58294,10.70148
+Lidl DE-Gaggenau Berliner Straße,48.7993,8.31683
 Lidl DE-Gaildorf Seestraße,49.00118,9.75918
-Lidl DE-Gardelegen,52.52736,11.38355
+Lidl DE-Garbsen Auf der Horst,52.42198,9.59467
+Lidl DE-Gardelegen Klammstieg,52.52736,11.38355
+Lidl DE-Garmisch-Partenkirchen Olympiastraße,47.49173,11.0951
+Lidl DE-Garrel Hauptstraße,52.95057,8.02785
+Lidl DE-Geestland Sieverner Straße,53.60998,8.59513
 Lidl DE-Gehrden Ronnenberger Straße,52.31457,9.60655
-Lidl DE-Gelsenkirchen Ulrichstraße 2A,51.55141,7.09273
-Lidl DE-Gelsenkirchen Wanner Straße 155,51.51542,7.12057
-Lidl DE-Gelsenkirchen-Buer-Süd Vinckestraße,51.57426,7.04666
-Lidl DE-Gelsenkirchen-Schalke Gewerkenstraße,51.52175,7.08603
-Lidl DE-Gera Straße des Bergmanns 10,50.89298,12.0841
-Lidl DE-Gera Straße des Friedens 32,50.86984,12.06906
-Lidl DE-Germering Industriestraße 19,48.13242,11.37906
-Lidl DE-Geseke Störmeder Straße 40,51.63954,8.49417
+Lidl DE-Gelsenkirchen Gewerkenstraße,51.52175,7.08603
+Lidl DE-Gelsenkirchen Hans-Böckler-Allee,51.51808,7.06832
+Lidl DE-Gelsenkirchen Ulrichstraße,51.5514,7.09273
+Lidl DE-Gelsenkirchen Vinckestraße,51.57426,7.04666
+Lidl DE-Gelsenkirchen Wanner Straße,51.51542,7.12057
+Lidl DE-Gemünden a. Main Ladestraße,50.04783,9.70503
+Lidl DE-Gera Straße des Bergmanns,50.89298,12.0841
+Lidl DE-Gera Straße des Friedens,50.86984,12.06906
+Lidl DE-Germering Industriestraße,48.13242,11.37906
+Lidl DE-Gernsbach Im Wörthgarten,48.7668,8.33243
+Lidl DE-Geseke Störmeder Straße,51.63954,8.49417
 Lidl DE-Gevelsberg Rosendahler Straße,51.31683,7.32367
-Lidl DE-Giengen an der Brenz Sundgaustraße 2,48.62047,10.23285
+Lidl DE-Giengen an der Brenz Robert-Bosch-Straße,48.62047,10.23285
 Lidl DE-Gießen Georg-Elser-Straße,50.58898,8.70792,25
 Lidl DE-Gießen Sudetenlandstraße,50.59462,8.68046
-Lidl DE-Gotha Schöne Allee 14,50.94535,10.7172
-Lidl DE-Graben-Neudorf,49.16607,8.49207
-Lidl DE-Greiz,50.65521,12.20703
+Lidl DE-Gilching Landsberger Straße,48.1038,11.29692
+Lidl DE-Gladbeck Roßheidestraße,51.55168,7.00282
+Lidl DE-Gladbeck Sandstraße,51.57436,6.9829
+Lidl DE-Gotha Schöne Allee,50.94535,10.7172
+Lidl DE-Graben-Neudorf Heidelberger Straße,49.16607,8.49207
+Lidl DE-Grafenau Vormbacherweg,48.8615,13.3933
+Lidl DE-Grasberg Kirchdamm,53.18493,8.98247
+Lidl DE-Greiz August-Bebel-Straße,50.6552,12.20703
+Lidl DE-Greven Saerbecker Straße,52.0973,7.61187
+Lidl DE-Gronau (Westf.) Königstraße,52.21852,7.00918
 Lidl DE-Großenlüder An der Aspe,50.58148,9.54297
 Lidl DE-Großräschen Freienhufener Straße,51.5861,14.0016
-Lidl DE-Grünberg Gießener Straße,50.59529,8.94752
+Lidl DE-Gräfenhainichen Bahnhofstraße,51.72842,12.4568
+Lidl DE-Grünberg Gießener Straße,50.5953,8.94752
 Lidl DE-Görlitz Reichenbacher Straße,51.14805,14.95015
-Lidl DE-Günzburg Violastraße,48.45122,10.26091
-Lidl DE-Güstrow,53.7777,12.17848
+Lidl DE-Günzburg Violastraße,48.45122,10.2609
+Lidl DE-Güstrow Platz der Freundschaft,53.7777,12.17848
+Lidl DE-Gütersloh Carl-Bertelsmann-Straße,51.9047,8.40447
 Lidl DE-Gütersloh Neuenkirchener Straße,51.89354,8.38123
 Lidl DE-Haan Düsseldorfer Straße,51.18664,6.9872
-Lidl DE-Hagen im Bremischen Amtsdamm 78,53.35852,8.65624
-Lidl DE-Hagen-Hohenlimburg Gotenweg 9,51.3638,7.55662
+Lidl DE-Hachenburg Koblenzer Straße,50.66238,7.81744
+Lidl DE-Hagen Gotenweg,51.3638,7.55662
+Lidl DE-Hagen im Bremischen Amtsdamm,53.35852,8.65624
 Lidl DE-Hainichen August-Bebel-Straße,50.96732,13.11958
-Lidl DE-Halle (Westfalen) Elsa-Brändström-Straße 1,52.05439,8.37309
-Lidl DE-Halle Krausenstraße,51.48757,11.9834
-Lidl DE-Halle Merseburger Straße,51.45576,11.984
-Lidl DE-Hallstadt Gundelsheimer Straße,49.93384,10.88281
+Lidl DE-Halberstadt Tschaikowskistraße,51.88896,11.06195
+Lidl DE-Halle (Saale) Krausenstraße,51.48757,11.9834
+Lidl DE-Halle (Salle) Merseburger Straße,51.45576,11.984
+Lidl DE-Halle (Westfalen) Elsa-Brändström-Straße,52.0544,8.3731
+Lidl DE-Hallstadt Gundelsheimer Straße,49.93384,10.8828
+Lidl DE-Haltern am See Münsterstraße,51.75085,7.19165
+Lidl DE-Halver Herpiner Weg,51.1878,7.508
 Lidl DE-Hambergen Hauptstraße,53.30804,8.83643
-Lidl DE-Hamburg Altonaer Straße 10,53.56383,9.96146
-Lidl DE-Hamburg Bahrenfelder Chaussee,53.5639,9.91411
+Lidl DE-Hamburg Altonaer Straße,53.56383,9.96146
+Lidl DE-Hamburg Bahrenfelder Chaussee,53.5639,9.9141
 Lidl DE-Hamburg Behringstraße,53.5572,9.90316
 Lidl DE-Hamburg Dehnhaide,53.57917,10.05085
-Lidl DE-Hamburg Kieler Straße,53.58531,9.93338
+Lidl DE-Hamburg Kieler Straße,53.5853,9.93338
+Lidl DE-Hamburg Manshardtstraße,53.55758,10.10094
 Lidl DE-Hamburg Notkestraße,53.57064,9.876
-Lidl DE-Hamburg Pinneberger Straße,53.63269,9.90808
+Lidl DE-Hamburg Osdorfer Landstraße,53.57042,9.87644
+Lidl DE-Hamburg Pinneberger Straße,53.6327,9.90808
+Lidl DE-Hamburg Poppenbütteler Chaussee,53.7047,10.10322
 Lidl DE-Hamburg Reinstorfweg,53.50118,9.9918
-Lidl DE-Hamburg-Duvenstedt Poppenbütteler Chaussee 35,53.7047,10.10322
-Lidl DE-Hamburg-Eidelstedt Kieler Straße,53.60097,9.91507
-Lidl DE-Hamburg-Horn Manshardtstraße,53.55758,10.10094
-Lidl DE-Hambühren,52.63393,9.96753
-Lidl DE-Hameln,52.10373,9.37561
-Lidl DE-Hameln Reimerdeskamp 9,52.119,9.35572
-Lidl DE-Hamm Ahlener Straße 75,51.70395,7.8297
-Lidl DE-Hammersbach,50.24282,8.99421
+Lidl DE-Hamburg Rönneburger Straße,53.44192,9.99264
+Lidl DE-Hambüren Ostlandstraße,52.63393,9.96753
+Lidl DE-Hameln Deisterstraße,52.10373,9.3756
+Lidl DE-Hameln Reimerdeskamp,52.119,9.35572
+Lidl DE-Hamm Ahlener Straße,51.70395,7.8297
+Lidl DE-Hammersbach Am Lachbach,50.24282,8.9942
+Lidl DE-Hanau Geleitstraße,50.10434,8.92092
+Lidl DE-Handewitt Wiesharder Straße,54.77308,9.32046
+Lidl DE-Hannover Berckhusenstraße,52.37718,9.7991
 Lidl DE-Hannover Dragonerstraße,52.39453,9.73932
-Lidl DE-Hannover Dresdener Straße 3,52.41094,9.75158
-Lidl DE-Hannover-Kleefeld Berckhusenstraße,52.37718,9.7991
-Lidl DE-Hauzenberg,48.65414,13.61979
+Lidl DE-Hannover Dresdener Straße,52.41094,9.75158
+Lidl DE-Hannover Hannelore-Kunze-Straße,52.33838,9.81358
+Lidl DE-Hattingen Zum Ludwigstal,51.3947,7.21627
+Lidl DE-Hauzenberg Josef-Greschniok-Straße,48.65414,13.6198
 Lidl DE-Hechingen Stettener Halde,48.35123,8.97638
-Lidl DE-Heddesheim Mitten im Feld 23,49.51196,8.60467
-Lidl DE-Heidenheim Am Sägewerk 7,48.68103,10.13138
-Lidl DE-Heilbronn,49.15248,9.2226
-Lidl DE-Heiligenhafen Industriestraße,54.3654,11.00785,30
-Lidl DE-Hennef Emil-Langen-Straße 2,50.77336,7.30111
+Lidl DE-Heddesheim Mitten im Feld,49.51196,8.60467
+Lidl DE-Heidelberg Heinrich-Fuchs-Straße,49.3796,8.67777
+Lidl DE-Heidenau Gabelsbergerstraße,50.97208,13.867
+Lidl DE-Heidenheim an der Brenz Am Sägewerk,48.68103,10.13138
+Lidl DE-Heidenheim an der Brenz In den Seewiesen,48.7018,10.16405
+Lidl DE-Heilbronn Neckarsulmer Straße,49.15248,9.2226
+Lidl DE-Heilbronn Sontheimer Landwehr,49.1263,9.20397
+Lidl DE-Heiligenhafen Sundweg,54.3654,11.00785,30
+Lidl DE-Hemmoor Otto-Peschel-Straße,53.68493,9.15847
+Lidl DE-Hennef (Sieg) Emil-Langen-Straße,50.77336,7.3011
+Lidl DE-Heppenheim (Bergstraße) Lilienthalstraße,49.64317,8.6321
+Lidl DE-Herford Ahmser Straße,52.10508,8.67828
 Lidl DE-Herne Holsterhauser Straße,51.52443,7.1862
-Lidl DE-Herne Roonstraße 14,51.54924,7.22031
+Lidl DE-Herne Roonstraße,51.54924,7.2203
 Lidl DE-Herne Südstraße,51.52077,7.21377
-Lidl DE-Herten Kaiserstraße 223,51.60288,7.15725
-Lidl DE-Herten-Westerholt Bahnhofstraße,51.60845,7.0835
-Lidl DE-Herzogenrath Rue de Plérin,50.87102,6.10286
+Lidl DE-Herten Bahnhofstraße,51.60845,7.0835
+Lidl DE-Herten Kaiserstraße,51.60288,7.15725
+Lidl DE-Herzogenrath Rue de Plerin,50.87102,6.10286
+Lidl DE-Hessisch Lichtenau Am Lohwasser,51.20732,9.71248
 Lidl DE-Hildesheim Frankenstraße,52.15584,9.96925
-Lidl DE-Holzminden Allersheimer Straße 38,51.83441,9.45983
-Lidl DE-Homburg,49.33248,7.33952
-Lidl DE-Hoppegarten,52.54059,13.63869
-Lidl DE-Horhausen Landblum 2,50.59295,7.52949
+Lidl DE-Holzminden Allersheimer Straße,51.8344,9.45983
+Lidl DE-Homburg Ostring,49.33248,7.33952
+Lidl DE-Horhausen Landblum,50.59295,7.5295
+Lidl DE-Horst (Holstein) Elmshorner Straße,53.8058,9.62545
 Lidl DE-Hoya Auf dem Kuhkamp,52.81046,9.13744
 Lidl DE-Hoyerswerda Schulstraße,51.43798,14.2379
-Lidl DE-Höxter Lütmarser Straße 76,51.77398,9.36018
-Lidl DE-Hürth Luxemburger Straße,50.89371,6.90339
+Lidl DE-Hude Dr.-Gustav-Thye-Straße,53.11187,8.45677
+Lidl DE-Höxter Lütmarser Straße,51.77398,9.36018
+Lidl DE-Hürth Luxemburger Straße,50.8937,6.9034
 Lidl DE-Ibbenbüren Osnabrücker Straße,52.28893,7.7273
-Lidl DE-Idstein,50.2289,8.26469
-Lidl DE-Illingen Hofäckerstraße 3,48.95413,8.91203
-Lidl DE-Ingolstadt Am Hochfeldweg 5,48.7054,11.42339
+Lidl DE-Idstein Limburger Straße,50.2289,8.2647
+Lidl DE-Illingen Hofäckerstraße,48.95413,8.91203
+Lidl DE-Ingolstadt Am Hochfeldweg,48.7054,11.4234
 Lidl DE-Ingolstadt Elisabethstraße,48.74025,11.43646,30
-Lidl DE-Ingolstadt Permoserstraße 81,48.76989,11.39602
-Lidl DE-Ingolstadt-Nord/Ost Goethestraße,48.77245,11.4445
-Lidl DE-Iserlohn Refflingser Straße,51.42381,7.67134
+Lidl DE-Ingolstadt Goethestraße,48.77245,11.4445
+Lidl DE-Ingolstadt Permoserstraße,48.7699,11.39602
+Lidl DE-Iserlohn Refflingser Straße,51.4238,7.67134
 Lidl DE-Ismaning Osterfeldstraße,48.23073,11.68564
+Lidl DE-Issum Vogt-von-Belle-Platz,51.53483,6.4316
+Lidl DE-Jestetten Schaffhauser Straße,47.6542,8.57624
 Lidl DE-Jettingen-Scheppach Messerschmittstraße,48.4086,10.4352
-Lidl DE-Kaiserslautern Kurt-Schumacher-Straße,49.42299,7.74842
+Lidl DE-Kaiserslautern Kurt-Schumacher-Straße,49.423,7.74842
 Lidl DE-Kamenz Fichtestraße,51.2727,14.10566
+Lidl DE-Kamp-Lintfort Prinzenstraße,51.50864,6.543
+Lidl DE-Karlsbad Draisstraße,48.9212,8.50166
 Lidl DE-Karlsruhe An der Trift,49.0444,8.39398
 Lidl DE-Karlsruhe Neureuter Straße,49.0191,8.35568,30
-Lidl DE-Kassel Kohlenstraße 75,51.30866,9.45853
-Lidl DE-Kassel-Unterneustadt Hafenstraße,51.31408,9.51004
-Lidl DE-Kaufbeuren,47.87524,10.62754
+Lidl DE-Karlsruhe Theodor-Rehbock-Straße,49.0088,8.43782
+Lidl DE-Kassel Hafenstraße,51.31408,9.51004
+Lidl DE-Kassel Kohlenstraße,51.30866,9.45853
+Lidl DE-Kaufbeuren Bahnhofstraße,47.87524,10.62754
+Lidl DE-Kaufering Kolpingstraße,48.0902,10.85682
 Lidl DE-Kehl Königsberger Straße,48.57723,7.8155
 Lidl DE-Kelheim Kelheimwinzerstraße,48.91758,11.89197
-Lidl DE-Kerpen Heerstraße 507,50.84537,6.78447
+Lidl DE-Kenzingen Klostermattenstraße,48.18658,7.76588
+Lidl DE-Kerpen Heerstraße,50.84537,6.78447
+Lidl DE-Kerpen Heerstraße,50.86763,6.74093
 Lidl DE-Kerpen Kerpener Straße,50.89882,6.68072
-Lidl DE-Kerpen-Türnich Heerstraße,50.86763,6.74093
+Lidl DE-Ketzin/Havel Nauener Straße,52.48186,12.84605
 Lidl DE-Kiel Kirchhofallee,54.31587,10.11893
-Lidl DE-Kiel-Elmschenhagen Preetzer Straße,54.29764,10.16919,30
-Lidl DE-Kiel-Russee Rendsburger Landstraße,54.30055,10.07273
+Lidl DE-Kiel Preetzer Straße,54.29764,10.1692,30
+Lidl DE-Kiel Rendsburger Landstraße,54.30055,10.07273
 Lidl DE-Kirchen Jungenthaler Straße,50.81038,7.87174
 Lidl DE-Kirchhain Niederrheinische Straße,50.82475,8.93175
 Lidl DE-Kirchheim am Neckar Kreidlerstraße,49.03634,9.14442
-Lidl DE-Knittlingen,49.02095,8.7507
+Lidl DE-Kirchheim unter Teck Stuttgarter Straße,48.65544,9.42998
+Lidl DE-Kleve Van-den-Bergh-Straße,51.7901,6.15422
+Lidl DE-Knittlingen Siemensstraße,49.02095,8.7507
 Lidl DE-Koblenz Im Teichert,50.35772,7.61094
 Lidl DE-Korbach Arolser Landstraße,51.28132,8.87594
-Lidl DE-Korbach Medebacher Landstraße 23,51.27069,8.85586
-Lidl DE-Kremmen,52.76488,13.02683
-Lidl DE-Kressbronn am Bodensee,47.60218,9.59079
+Lidl DE-Korbach Medebacher Landstraße,51.2707,8.85586
+Lidl DE-Korntal-Münchingen Weilimdorfer Straße,48.82665,9.11893
+Lidl DE-Krefeld Hafelsstraße,51.32243,6.6041
+Lidl DE-Kremmen Ruppinerstraße,52.76488,13.02683
+Lidl DE-Kressbronn am Bodensee Säntisstraße,47.60218,9.5908
 Lidl DE-Kriftel/Taunus Kapellenstraße,50.08176,8.45573
-Lidl DE-Kumhausen Schulstraße 1,48.50642,12.16024
-Lidl DE-Köln Dieselstraße 1,50.94732,6.84126
-Lidl DE-Köln Dieselstraße 1-3,50.94627,6.84145
-Lidl DE-Köln Friedrich-Naumann-Straße 1,50.89979,7.0754
+Lidl DE-Kumhausen Schulstraße,48.50642,12.16024
+Lidl DE-Köln Amsterdamer Straße,50.97942,6.96984
+Lidl DE-Köln Bonner Wall,50.91823,6.9524
+Lidl DE-Köln Dieselstraße,50.94627,6.84145
+Lidl DE-Köln Düsseldorfer Straße,50.97757,7.00206
+Lidl DE-Köln Elbeallee,51.0251,6.88954
+Lidl DE-Köln Emil-Hoffmann-Straße,50.86727,6.9905
+Lidl DE-Köln Friedrich-Naumann-Straße,50.8998,7.0754
 Lidl DE-Köln Karlsruher Straße,50.95052,7.00118
-Lidl DE-Köln Leyendeckerstraße 2A,50.95107,6.90811
-Lidl DE-Köln Neustadt Süd Bonner Wall 114-116,50.91823,6.95241
-Lidl DE-Köln Sebastianstraße 28-32,50.9834,6.96206
+Lidl DE-Köln Kasernenstraße,50.9407,7.01382
+Lidl DE-Köln Leyendeckerstraße,50.95107,6.9081
+Lidl DE-Köln Rhöndorfer Straße,50.91574,6.93482
+Lidl DE-Köln Rochusstraße,50.96546,6.9048
+Lidl DE-Köln Sebastianstraße,50.9834,6.96206
 Lidl DE-Köln Waffenschmidtstraße,51.00338,6.8739,20
-Lidl DE-Köln-Hahnwald Emil-Hoffmann-Straße,50.86727,6.9905
-Lidl DE-Köln-Mülheim Düsseldorfer Straße,50.97757,7.00206
-Lidl DE-Köln-Niehl Amsterdamer Straße 236b,50.97942,6.96984
-Lidl DE-Königsbach-Stein,48.96048,8.62159
-Lidl DE-Königswinter Im Mühlenbruch 9,50.7012,7.17845
+Lidl DE-Köln Widdersdorfer Straße,50.9471,6.8906
+Lidl DE-Königsbach-Stein Steiner Straße,48.96048,8.6216
+Lidl DE-Königswinter Im Mühlenbruch,50.7012,7.17845
 Lidl DE-Künzelsau Würzburger Straße,49.28844,9.6785
 Lidl DE-Lage Friedrich-Petri-Straße,51.99262,8.78968
 Lidl DE-Lahnstein Koblenzer Straße,50.32087,7.59938
 Lidl DE-Landau Wieslauterstraße,49.2017,8.12345
-Lidl DE-Landshut,48.5441,12.13548
-Lidl DE-Langerwehe Am vorderen Steinchen 4,50.81754,6.37483
-Lidl DE-Langgöns Sankt-Ulrich-Ring,50.49247,8.6579
+Lidl DE-Landshut Rupprechtstraße,48.5441,12.13548
+Lidl DE-Langerwehe Am vorderen Steinchen,50.81754,6.37483
+Lidl DE-Langgöns St. Ulrich Ring,50.49247,8.6579
+Lidl DE-Lastrup Ladestraße,52.79543,7.86012
 Lidl DE-Laubach Philipp-Reis-Straße,50.54348,8.9782
-Lidl DE-Lauenburg/Elbe Glüsinger Weg 1-7,53.37402,10.54793
+Lidl DE-Lauenburg/Elbe Glüsinger Weg,53.37402,10.54793
+Lidl DE-Lauingen (Donau) Werner-von-Siemens-Straße,48.57537,10.44667
+Lidl DE-Laupheim Ehinger Straße,48.2379,9.87872
 Lidl DE-Lauta Senftenberger Straße,51.46114,14.09772
-Lidl DE-Leegebruch Eichenallee,52.72434,13.18871
+Lidl DE-Leegebruch Eichenallee,52.72434,13.1887
 Lidl DE-Leer (Ostfriesland) Ubbo-Emmius-Straße,53.2301,7.44
-Lidl DE-Lehrte Burgdorfer Straße 72-80,52.38318,9.97568
-Lidl DE-Leingarten Eppinger Straße 20,49.14614,9.12049
+Lidl DE-Lehrte Burgdorfer Straße,52.38318,9.97568
+Lidl DE-Leingarten Eppinger Straße,49.14614,9.1205
 Lidl DE-Leipzig Hauschildstraße,51.33858,12.32328
 Lidl DE-Leipzig Margaretha-Rothe-Straße,51.29183,12.4277
 Lidl DE-Leipzig Theresienstraße,51.36048,12.38207
 Lidl DE-Leipzig Windscheidstraße,51.31377,12.36923
-Lidl DE-Leipzig Zschochersche Straße,51.32511,12.3356
-Lidl DE-Leipzig Zwickauer Straße,51.31031,12.39517
-Lidl DE-Leverkusen-Küppersteg Hardenbergstraße,51.0436,6.99222
-Lidl DE-Liebenwalde Berliner Straße 24,52.86897,13.39389
-Lidl DE-Liederbach/Taunus Hinter der Mühle 3,50.12194,8.47922
-Lidl DE-Limbach-Oberfrohna,50.85484,12.77829
+Lidl DE-Leipzig Zschochersche Straße,51.3251,12.3356
+Lidl DE-Leipzig Zwickauer Straße,51.3103,12.39517
+Lidl DE-Leverkusen Hardenbergstraße,51.0436,6.99222
+Lidl DE-Lichtenfels Mainau,50.1505,11.06655
+Lidl DE-Liebenwalde Berliner Straße,52.86897,13.3939
+Lidl DE-Liederbach/Taunus Hinter der Mühle,50.12194,8.47922
+Lidl DE-Limbach-Oberfrohna Chemnitzer Straße,50.85484,12.7783
 Lidl DE-Limburg Industriestraße,50.37583,8.05287
-Lidl DE-Lorch,48.79715,9.67489
-Lidl DE-Losheim am See,49.50665,6.75196
-Lidl DE-Loxstedt Parkstraße 4,53.47482,8.65136
+Lidl DE-Lindau (Bodensee) Kemptener Straße,47.55545,9.70507
+Lidl DE-Lindenberg i. Allgäu Staufner Straße,47.6012,9.89363
+Lidl DE-Lorch Maierhofstraße,48.79715,9.6749
+Lidl DE-Losheim am See Haagstraße,49.50665,6.75196
+Lidl DE-Loxstedt Parkstraße,53.47482,8.65136
 Lidl DE-Luckenwalde Schützenstraße,52.0979,13.17957
-Lidl DE-Löhne Alte Bünder Straße 16,52.19796,8.71481
-Lidl DE-Lörrach Weiler Straße 26,47.60398,7.65358
-Lidl DE-Lübeck Schwartauer Landstraße 6,53.88873,10.68677
-Lidl DE-Lüdenscheid Bräuckenstraße 6,51.21232,7.64713
-Lidl DE-Lüneburg,53.23742,10.41366
+Lidl DE-Lutherstadt Eisleben Hallesche Straße,51.52157,11.55666
+Lidl DE-Löhne Alte Bünder Straße,52.19796,8.7148
+Lidl DE-Lörrach Weiler Straße,47.60398,7.65358
+Lidl DE-Lübeck Schwartauer Landstraße,53.88873,10.68677
+Lidl DE-Lüdenscheid Bräuckenstraße,51.21232,7.64713
+Lidl DE-Lüneburg Harvey-Benjamin-Fuller-Straße,53.23742,10.41366
 Lidl DE-Lünen Bergstraße,51.60546,7.51483
-Lidl DE-Magdeburg,52.09792,11.6214
+Lidl DE-Magdeburg Berliner Chaussee,52.1288,11.6713
 Lidl DE-Magdeburg Rogätzer Straße,52.14735,11.65434
-Lidl DE-Magdeburg-Brückfeld Berliner Chaussee 48,52.12881,11.67131
+Lidl DE-Magdeburg Salbker Straße,52.09792,11.6214
 Lidl DE-Mainaschaff Johann-Dahlem-Straße,49.98744,9.08438,25
 Lidl DE-Mainz Alte Markthalle,50.02364,8.2219
-Lidl DE-Mainz Heilgkreuzweg,49.97591,8.28432
+Lidl DE-Mainz Heiligkreuzweg,49.9759,8.28432
+Lidl DE-Mainz Hochheimer Straße,50.00804,8.30318
 Lidl DE-Marktheidenfeld Georg-Mayr-Straße,49.8535,9.60108,30
-Lidl DE-Marktoberdorf Bahnhofstraße 28,47.77522,10.61417
-Lidl DE-Marktredwitz,50.00668,12.10728
-Lidl DE-Marl Bergstraße 223-225,51.65669,7.10098
+Lidl DE-Marktoberdorf Bahnhofstraße,47.77522,10.61417
+Lidl DE-Marktredwitz Wölsauer Straße,50.00668,12.10728
+Lidl DE-Marl Bergstraße,51.6567,7.10098
+Lidl DE-Maxhütte-Haidhof Nordgaustraße,49.19222,12.10237
+Lidl DE-Mayen Polcher Straße,50.3227,7.22835
 Lidl DE-Mechernich Feytalstraße,50.59117,6.6657
-Lidl DE-Meerane,50.84327,12.44467
-Lidl DE-Meitingen-Herbertshofen Ulrichstraße,48.52237,10.8577
-Lidl DE-Meldorf,54.09608,9.0655
-Lidl DE-Melle Spenger Straße 8,52.19976,8.45447
-Lidl DE-Menden-Lendringsen Zum Eisenwerk 3,51.41777,7.82744
-Lidl DE-Mindelheim Allgäuer Straße,48.04575,10.50611
-Lidl DE-Minden Königstraße 170 a,52.29194,8.88434
-Lidl DE-Minden Schwabenring 6,52.27516,8.88873
-Lidl DE-Moers,51.45627,6.63735,10
+Lidl DE-Meckenheim Hermann-Ehlers-Weg,50.6264,7.03768
+Lidl DE-Meerane Äußere Crimmitschauer Straße,50.84327,12.44467
+Lidl DE-Meitingen Ulrichstraße,48.52237,10.8577
+Lidl DE-Meldorf Altentreptower Straße,54.09608,9.0655
+Lidl DE-Melle Industriestraße,52.1932,8.35346
+Lidl DE-Melle Spenger Straße,52.19976,8.45447
+Lidl DE-Memmingen Woringer Straße,47.97178,10.18507
+Lidl DE-Menden (Sauerland) Zum Eisenwerk,51.41777,7.82744
+Lidl DE-Merzig Rieffstraße,49.43758,6.6324
+Lidl DE-Metzingen Max-Eyth-Straße,48.5441,9.27815
+Lidl DE-Meßstetten Im Grund,48.1784,8.95548
+Lidl DE-Mindelheim Allgäuer Straße,48.04575,10.5061
+Lidl DE-Minden Königstraße,52.29194,8.88434
+Lidl DE-Minden Schwabenring,52.27516,8.88873
+Lidl DE-Moers Hülsdonker Straße,51.45186,6.61052
+Lidl DE-Moers Klever Straße,51.45627,6.63735,10
 Lidl DE-Mudersbach Kölner Straße,50.8384,7.96436
-Lidl DE-Munster Kohlenbissener Grund 11,52.98896,10.10835
+Lidl DE-Munster Kohlenbissener Grund,52.98896,10.10835
 Lidl DE-Murrhardt Fornsbacher Straße,48.97836,9.58454
-Lidl DE-Mönchengladbach,51.16474,6.46077
-Lidl DE-Mönchengladbach Aachener Straße 699,51.17302,6.39816
-Lidl DE-Mönchengladbach-Giesenkirchen Konstantinstraße,51.1586,6.4808
-Lidl DE-Mönsheim Im Gödelmann 1,48.86936,8.85384
+Lidl DE-Mönchengladbach Aachener Straße,51.17302,6.39816
+Lidl DE-Mönchengladbach Konstantinstraße,51.1586,6.4808
+Lidl DE-Mönchengladbach Steinmetzstraße,51.1977,6.44235
+Lidl DE-Mönchengladbach Stockholtweg,51.16474,6.46077
+Lidl DE-Mönsheim Im Gödelmann,48.86936,8.85384
 Lidl DE-Mörfelden-Walldorf Gerauer Straße,49.96843,8.56142
-Lidl DE-Mühldorf am Inn,48.25157,12.51052
-Lidl DE-München Landsbergerstraße,48.14465,11.48948
-Lidl DE-München-Freiham Bodenseestraße 331,48.14115,11.41202
-Lidl DE-Münster An der Hiltruper Baumschule,51.90652,7.63311
+Lidl DE-Mühldorf am Inn Felix-Gebhardt-Straße,48.25157,12.51052
+Lidl DE-Mülheim-Kärlich Industriestraße,50.39532,7.5346
+Lidl DE-München Bodenseestraße,48.14115,11.41202
+Lidl DE-München Brunhamstraße,48.14122,11.42413
+Lidl DE-München Landsberger Straße,48.14465,11.48948
+Lidl DE-München Nailastraße,48.09035,11.6334
+Lidl DE-München Paul-Gerhardt-Allee,48.15306,11.4765
+Lidl DE-München Weihenstephaner Straße,48.13146,11.6248
+Lidl DE-Münster An der Hiltruper Baumschule,51.90652,7.6331
 Lidl DE-Münster Dorbaumstraße,51.99615,7.71108
+Lidl DE-Münster Friedrich-Ebert-Straße,51.9519,7.63275
 Lidl DE-Münster Hammer Straße,51.94294,7.62456
+Lidl DE-Münster Hiltruper Straße,51.91425,7.72266
 Lidl DE-Neckarsulm Hohenloher Straße,49.1826,9.22668
-Lidl DE-Neu-Anspach Rudolf-Diesel-Straße,50.30609,8.5122
+Lidl DE-Nettetal Poststraße,51.32622,6.19833
+Lidl DE-Neu-Anspach Rudolf-Diesel-Straße,50.3061,8.5122
 Lidl DE-Neu-Isenburg St. Florian-Straße,50.04968,8.7112
-Lidl DE-Neuhaus am Rennweg,50.50753,11.135
+Lidl DE-Neuburg a.d.Donau Am Südpark,48.71987,11.1716
+Lidl DE-Neuhaus am Rennweg Eisfelderstraße,50.50753,11.135
 Lidl DE-Neukirch/Lausitz Am Ostbahnhof,51.09233,14.3195
-Lidl DE-Neukirchen-Vluyn,51.43818,6.5371,10
+Lidl DE-Neukirchen-Vluyn Niederrheinallee,51.43818,6.5371,10
 Lidl DE-Neumarkt in der Oberpfalz Nürnberger Straße,49.28874,11.44408
-Lidl DE-Neumünster Fehmarnstraße 13,54.06066,9.97162
+Lidl DE-Neumünster Fehmarnstraße,54.06066,9.97162
 Lidl DE-Neumünster Stoverweg,54.09863,9.98822
-Lidl DE-Neuss Ruhrstraße,51.16061,6.73812
+Lidl DE-Neuss Ruhrstraße,51.1606,6.73812
 Lidl DE-Neustadt an der Weinstraße Martin-Luther-Straße,49.3561,8.15233,30
 Lidl DE-Neustadt an der Weinstraße Talstraße,49.3507,8.13524
-Lidl DE-Neustadt Eutiner Straße 71,54.09925,10.79452
-Lidl DE-Neustadt in Sachsen,51.02773,14.2144
-Lidl DE-Neuwied-Niederbieber,50.46303,7.48187
-Lidl DE-Neuötting Braumeisterstraße 5,48.24252,12.70963
+Lidl DE-Neustadt in Holstein Eutiner Straße,54.09925,10.79452
+Lidl DE-Neustadt in Sachsen Wilhelm-Kaulisch-Straße,51.02773,14.2144
+Lidl DE-Neuwied Aubachstraße,50.46303,7.48187
+Lidl DE-Neuötting Braumeisterstraße,48.24252,12.70963
 Lidl DE-Niederaichbach Luitpoldpark,48.62487,12.32107,30
-Lidl DE-Niederaula,50.80373,9.61394
-Lidl DE-Niederkassel Porzer Straße 75,50.83067,7.03035
-Lidl DE-Niedernhausen Platter Straße 11,50.15831,8.31418
-Lidl DE-Niederwürschnitz,50.72072,12.75531
-Lidl DE-Nittenau Industriestraße,49.20588,12.28492
-Lidl DE-Nordenham Atenser Allee 108,53.49895,8.47801
-Lidl DE-Nordhorn Heideweg 53,52.42009,7.08138
-Lidl DE-Nortorf,54.16527,9.8576
-Lidl DE-Nördlingen Hofer Straße 10,48.85803,10.50545
-Lidl DE-Nörten-Hardenberg,51.62465,9.9374
-Lidl DE-Nörvenich,50.80762,6.65406
-Lidl DE-Oberhausen Dorstener Straße,51.52316,6.86431
+Lidl DE-Niederaula Hersfelder Straße,50.80373,9.61394
+Lidl DE-Niederkassel Bahnhofstraße,50.79136,7.0547
+Lidl DE-Niederkassel Porzer Straße,50.83067,7.03035
+Lidl DE-Niedernhausen Platter Straße,50.1583,8.31418
+Lidl DE-Niederwürschnitz Stollberger Straße,50.72072,12.7553
+Lidl DE-Nienburg (Weser) Göttinger Straße,52.63384,9.22157
+Lidl DE-Nittenau Haidäckerweg,49.20588,12.28492
+Lidl DE-Nordenham Atenser Allee,53.49895,8.478
+Lidl DE-Nordhorn Heideweg,52.4201,7.08138
+Lidl DE-Nortorf Lohkamp,54.16527,9.8576
+Lidl DE-Nördlingen Augsburger Straße,48.84377,10.50663
+Lidl DE-Nördlingen Hofer Straße,48.85803,10.50545
+Lidl DE-Nörten-Hardenberg Göttinger Straße,51.62465,9.9374
+Lidl DE-Nörvenich Am Mittelweg,50.80762,6.65406
+Lidl DE-Nürnberg Julius-Loßmann-Straße,49.41622,11.0815
+Lidl DE-Ober-Ramstadt Bahnhofstraße,49.83407,8.7402
+Lidl DE-Oberhausen Bebelstraße,51.46692,6.83835
+Lidl DE-Oberhausen Dorstener Straße,51.52316,6.8643
 Lidl DE-Oberhausen Mülheimer Straße,51.46545,6.86543
-Lidl DE-Oberhausen Teutoburger Straße,51.52021,6.89322
-Lidl DE-Oberkirch Hammermatt 2,48.53647,8.06296
-Lidl DE-Oberviechtach,49.45411,12.41054
-Lidl DE-Ochsenfurt,49.66221,10.07479
+Lidl DE-Oberhausen Teutoburger Straße,51.5202,6.89322
+Lidl DE-Oberkirch Hammermatt,48.53647,8.06296
+Lidl DE-Oberviechtach Muracher Straße,49.4541,12.41054
 Lidl DE-Ochsenfurt Pestalozzistraße,49.66193,10.0736
 Lidl DE-Ochtendung Michelsbergstraße,50.353,7.39587
-Lidl DE-Oer-Erkenschwick An der Feuerwache 1,51.64104,7.2485
-Lidl DE-Offenau,49.23907,9.16746
-Lidl DE-Oldenburg-Donnerschwee Wehdestraße 10,53.15044,8.23805
-Lidl DE-Oldenburg-Wechloy Ammerländer Heerstraße 272,53.15681,8.17031
-Lidl DE-Oranienburg Berliner Straße 49,52.74822,13.23664
-Lidl DE-Oschersleben,52.0289,11.24764
-Lidl DE-Osnabrück Hannoversche Straße 19,52.26512,8.0655
-Lidl DE-Osnabrück Hans-Wunderlich-Straße 2,52.26703,8.00144
+Lidl DE-Oer-Erkenschwick An der Feuerwache,51.64104,7.2485
+Lidl DE-Offenau Talweg,49.23907,9.16746
+Lidl DE-Offenburg Freiburger Straße,48.4759,7.94097
+Lidl DE-Olbernhau Grünthaler Straße,50.65178,13.35368
+Lidl DE-Oldenburg Alexanderstraße,53.17756,8.1893
+Lidl DE-Oldenburg Ammerländer Heerstraße,53.1568,8.1703
+Lidl DE-Oldenburg Hundsmühler Straße,53.12134,8.19224
+Lidl DE-Oldenburg Wehdestraße,53.15044,8.23805
+Lidl DE-Oranienburg Berliner Straße,52.74822,13.23664
+Lidl DE-Oschersleben Anderslebener Straße,52.0289,11.24764
+Lidl DE-Osnabrück Hannoversche Straße,52.26512,8.0655
+Lidl DE-Osnabrück Hans-Wunderlich-Straße,52.26703,8.00144
+Lidl DE-Osnabrück Mindener Straße,52.27087,8.08646
 Lidl DE-Osnabrück Mönkedieckstraße,52.29966,8.06136
+Lidl DE-Osterholz-Scharmbeck Am Pumpelberg,53.23273,8.77586
 Lidl DE-Ottobrunn Siemensstraße,48.06446,11.6531
-Lidl DE-Overath-Vilkerath Steinhauser Auel 1,50.96402,7.32263
+Lidl DE-Overath Steinhauser Auel,50.96402,7.32263
 Lidl DE-Paderborn Neuhäuser Straße,51.72883,8.73118
 Lidl DE-Papenburg Karl-Hillers-Straße,53.07857,7.38835
-Lidl DE-Passau Lindau 9,48.5841,13.50019
-Lidl DE-Pattensen Göttinger Straße 11-13,52.26869,9.76411
-Lidl DE-Pegau Groitzscher Fußweg 1,51.1645,12.2629
-Lidl DE-Peißenberg Hochreuther Straße 4,47.78563,11.04951
-Lidl DE-Penzberg Grube,47.75649,11.38226
-Lidl DE-Pforzheim,48.88697,8.66217
-Lidl DE-Pforzheim Am Hauptgüterbahnhof 2-4,48.89644,8.71305
-Lidl DE-Pfungstadt Eberstädter Straße 134,49.80786,8.61092
-Lidl DE-Planegg,48.11022,11.43103
-Lidl DE-Plattling,48.78687,12.89507
-Lidl DE-Prenzlau Stettiner Straße 47,53.32149,13.86423
-Lidl DE-Pritzwalk Rostocker Straße,53.15829,12.17311
+Lidl DE-Passau Lindau,48.5841,13.5002
+Lidl DE-Pattensen Göttinger Straße,52.2687,9.7641
+Lidl DE-Pegau Groitzscher Fußweg,51.1645,12.2629
+Lidl DE-Peißenberg Hochreuther Straße,47.78563,11.0495
+Lidl DE-Penzberg Grube,47.7565,11.38226
+Lidl DE-Perleberg Berliner Straße,53.07135,11.87563
+Lidl DE-Pfarrkirchen Arno-Jacoby-Straße,48.41784,12.93977
+Lidl DE-Pforzheim Am Hauptgüterbahnhof,48.89644,8.71305
+Lidl DE-Pforzheim Arlingerstraße,48.88697,8.66217
+Lidl DE-Pfungstadt Eberstädter Straße,49.80786,8.61092
+Lidl DE-Planegg Behringstraße,48.11022,11.43103
+Lidl DE-Plattling Otto-Brindl-Straße,48.78687,12.89507
+Lidl DE-Potsdam Horstweg,52.3791,13.08582
+Lidl DE-Prenzlau Stettiner Straße,53.3215,13.86423
+Lidl DE-Pritzwalk Rostocker Straße,53.1583,12.1731
 Lidl DE-Putzbrunn Münchner Straße,48.08127,11.6926,20
-Lidl DE-Radebeul-Ost Meißner Straße,51.09798,13.69103
-Lidl DE-Radeburg Lindenweg 1,51.21521,13.73108
-Lidl DE-Rahden Eisenbahnstraße 20,52.42958,8.62278
-Lidl DE-Rain,48.68994,10.93347
-Lidl DE-Ransbach-Baumbach Rheinstraße 105,50.46121,7.72475
+Lidl DE-Radebeul Meißner Straße,51.09798,13.69103
+Lidl DE-Radeburg Lindenweg,51.2152,13.73108
+Lidl DE-Rahden Eisenbahnstraße,52.42958,8.62278
+Lidl DE-Rain Unterer Kirschbaumweg,48.68994,10.93347
+Lidl DE-Ransbach-Baumbach Rheinstraße,50.4612,7.72475
+Lidl DE-Rastatt Ettlinger Straße,48.8655,8.2224
 Lidl DE-Ravensburg Schützenstraße,47.79397,9.62222
 Lidl DE-Ravensburg Ulmer Straße,47.7871,9.60986
-Lidl DE-Recklinghausen Bochumer Straße 222,51.56555,7.20843
-Lidl DE-Recklinghausen Sachsenstraße 101B,51.60922,7.27319
-Lidl DE-Regensburg Donaustaufer Straße,49.02523,12.15003
-Lidl DE-Regensburg Merowinger Straße,48.9937,12.10572
+Lidl DE-Recklinghausen Bochumer Straße,51.56555,7.20843
+Lidl DE-Recklinghausen Sachsenstraße,51.60922,7.2732
+Lidl DE-Recklinghausen Ölpfad,51.62394,7.20898
+Lidl DE-Regensburg Merowingerstraße,48.9937,12.10572
+Lidl DE-Regensburg Metzgerweg,49.02523,12.15003
+Lidl DE-Reichenbach an der Fils Ulmer Straße,48.70973,9.46716
 Lidl DE-Remagen Zeppelinstraße,50.56812,7.24585
 Lidl DE-Remchingen Hauptstraße,48.95094,8.57006
-Lidl DE-Rendsburg Schleswiger Chaussee 37-39,54.31155,9.6461
-Lidl DE-Renningen,48.77738,8.93627
+Lidl DE-Remscheid Neuenkamper Straße,51.1768,7.21436
+Lidl DE-Rendsburg Schleswiger Chaussee,54.31155,9.6461
+Lidl DE-Renningen Industriestraße,48.77738,8.93627
 Lidl DE-Rheine Elter Straße,52.26705,7.46246
+Lidl DE-Rheine Otto-Bergmeyer-Straße,52.2752,7.4373
 Lidl DE-Rhens Mainzer Straße,50.27735,7.62632
-Lidl DE-Rietberg Am Bahnhof 2,51.81818,8.43127
-Lidl DE-Rommerskirchen Mariannenpark 1,51.03212,6.69782
+Lidl DE-Rietberg Am Bahnhof,51.81818,8.43127
+Lidl DE-Rommerskirchen Mariannenpark,51.03212,6.69782
 Lidl DE-Rosdorf Rischenweg,51.509,9.90872,20
 Lidl DE-Rosenheim Chiemseestraße,47.85032,12.13673
-Lidl DE-Rosenheim Pichlmayrstraße 13,47.85563,12.10751
-Lidl DE-Rostock Hinrichsdorfer Straße,54.10768,12.15811
+Lidl DE-Rosenheim Pichlmayrstraße,47.85563,12.1075
+Lidl DE-Rostock Hinrichsdorfer Straße,54.10768,12.1581
 Lidl DE-Rostock Satower Straße,54.07674,12.0999
-Lidl DE-Rostock Tschaikowskistraße,54.08759,12.08715
-Lidl DE-Rotenburg (Wümme) Brockeler Straße 1,53.12019,9.42554
+Lidl DE-Rostock Tschaikowskistraße,54.0876,12.08715
+Lidl DE-Rotenburg (Wümme) Am Kalandshof,53.09875,9.38237
+Lidl DE-Rotenburg (Wümme) Brockeler Straße,53.1202,9.42554
 Lidl DE-Rothenburg/Tauber Erlbacher Straße,49.37343,10.18767
 Lidl DE-Rottenburg am Neckar Graf-Bentzel-Straße,48.48047,8.94518
-Lidl DE-Rottenburg an der Laaber Landshuter Straße 88,48.69204,12.02809
-Lidl DE-Römerberg-Heiligenstein Lingenfelder Straße,49.28154,8.3936
+Lidl DE-Rottenburg an der Laaber Landshuter Straße,48.69204,12.0281
+Lidl DE-Römerberg Lingenfelder Straße,49.28154,8.3936
+Lidl DE-Rüdesheim Industriestraße,49.8451,7.82095
 Lidl DE-Saarbrücken Sulzbachtalstraße,49.27174,7.02186
-Lidl DE-Saarwellingen,49.35157,6.80725
-Lidl DE-Sassenberg,51.98195,8.03627
-Lidl DE-Saterland,53.10354,7.6745
-Lidl DE-Schafflund,54.76174,9.1917
-Lidl DE-Schladen Hermann-Müller-Straße,52.0209,10.55119
-Lidl DE-Schmelz,49.42879,6.84744
+Lidl DE-Saarburg Im Hagen,49.61303,6.55282
+Lidl DE-Saarwellingen Zur Breitwies,49.35157,6.80725
+Lidl DE-Salzhausen Bahnhofstraße,53.22618,10.16314
+Lidl DE-Sankt Peter-Ording Nordergeest,54.3059,8.64696
+Lidl DE-Sassenberg Schürenstraße,51.98195,8.03627
+Lidl DE-Saterland Hauptstraße,53.10354,7.6745
+Lidl DE-Schafflund Osterfeld,54.76174,9.1917
+Lidl DE-Schladen Hermann-Müller-Straße,52.0209,10.5512
+Lidl DE-Schlüchtern Gartenstraße,50.3554,9.53564
+Lidl DE-Schmelz Bettinger Straße,49.4288,6.84744
 Lidl DE-Schmelz Hoher Staden,49.4322,6.84484
-Lidl DE-Schramberg,48.23305,8.38041
-Lidl DE-Schwalbach,50.14422,8.53324
-Lidl DE-Schwalbach Ensdorfer Straße,49.30359,6.80192
-Lidl DE-Schwalmtal-Waldniel Roermonder Straße 5-7,51.21119,6.26826
-Lidl DE-Schwarzenbek Kerntangente 2,53.50443,10.48797
-Lidl DE-Schwedt/Oder Rosa-Luxemburg-Straße 42a,53.0655,14.26558
+Lidl DE-Schopfheim Auf der Gänsmatt,47.6466,7.8094
+Lidl DE-Schramberg Schiltachstraße,48.23305,8.3804
+Lidl DE-Schwalbach am Taunus Sulzbacher Straße,50.14422,8.53324
+Lidl DE-Schwalbach Ensdorfer Straße,49.3036,6.80192
+Lidl DE-Schwalmtal Roermonder Straße,51.2112,6.26826
+Lidl DE-Schwanewede Blumenthaler Straße,53.2249,8.5949
+Lidl DE-Schwarzenbek Kerntangente,53.50443,10.48797
+Lidl DE-Schwedt/Oder Rosa-Luxemburg-Straße,53.0655,14.26558
+Lidl DE-Schweich In den Schlimmfuhren,49.8191,6.74408
 Lidl DE-Schwelm Viktoriastraße,51.2885,7.28423
-Lidl DE-Schwelm Viktoriastraße 22,51.28842,7.28695
-Lidl DE-Schwetzingen,49.3905,8.57951
-Lidl DE-Schwieberdingen,48.8729,9.0866
-Lidl DE-Schöllkrippen Aschaffenburger Straße 56,50.08134,9.24485
-Lidl DE-Schönberg,53.85541,10.92689
-Lidl DE-Seevetal Fleestedter Ring 1,53.41001,9.99043
-Lidl DE-Senden,48.3337,10.03955
-Lidl DE-Senden Bulderner Straße 8,51.85743,7.48055
-Lidl DE-Sindelfingen Leonberger Straße 25,48.71567,9.00174
+Lidl DE-Schwetzingen Borsigstraße,49.3905,8.5795
+Lidl DE-Schwieberdingen Im Seelach,48.8729,9.0866
+Lidl DE-Schöllkrippen Aschaffenburger Straße,50.08134,9.24485
+Lidl DE-Schönberg Dassower Straße,53.8554,10.9269
+Lidl DE-Schönebeck (Elbe) Friedrichstraße,52.0132,11.73333
+Lidl DE-Schöneck Uferstraße,50.2034,8.83782
+Lidl DE-Seevetal Fleestedter Ring,53.41,9.99043
+Lidl DE-Seligenstadt Aschaffenburger Straße,50.03818,8.9868
+Lidl DE-Senden Berliner Straße,48.3337,10.03955
+Lidl DE-Senden Bulderner Straße,51.85743,7.48055
+Lidl DE-Sindelfingen Leonberger Straße,48.71567,9.00174
 Lidl DE-Sindelfingen Mahdentalstraße,48.70783,9.01853
-Lidl DE-Solingen-Wald Nümmener Feld 1,51.19188,7.06873
+Lidl DE-Sinsheim Froschwiesenweg,49.2412,8.90534
+Lidl DE-Solingen Nümmener Feld,51.19188,7.06873
+Lidl DE-Sonthofen Rudolf-Diesel-Straße,47.52257,10.2704
+Lidl DE-Sottrum Lienworth,53.11396,9.23047
+Lidl DE-Spaichingen Hauptstraße,48.07022,8.7468
 Lidl DE-Spangenberg Jahnstraße,51.1155,9.66245
-Lidl DE-St. Georgen,48.12302,8.33824
+Lidl DE-Spenge Lange Straße,52.1419,8.48212
+Lidl DE-St. Blasien Am Kugelrain,47.76463,8.12472
+Lidl DE-St. Georgen im Schwarzwald Industriestraße,48.12302,8.33824
 Lidl DE-St. Ingbert Im Stegbruch,49.28226,7.1569
-Lidl DE-St. Leon-Rot Im Schiff 28,49.26863,8.6141
+Lidl DE-St. Ingbert-Rohrbach Im Stegbruch,49.28012,7.15784
+Lidl DE-St. Leon-Rot Im Schiff,49.26863,8.6141
 Lidl DE-Stade Haddorfer Grenzweg,53.59805,9.42308
-Lidl DE-Stade-Haddorf Haddorfer Grenzweg 2,53.59579,9.42596
-Lidl DE-Staßfurt Förderstedter Straße 32,51.85327,11.59012
-Lidl DE-Stendal Erich-Weinert-Straße 23,52.59759,11.83993
-Lidl DE-Stolberg-Münsterbusch Ardennenstraße,50.76638,6.21844
-Lidl DE-Stutensee-Blankenloch Linkenheimer Straße,49.0801,8.46138
+Lidl DE-Stadtlohn Grabenstraße,51.99057,6.91403
+Lidl DE-Staßfurt Förderstedter Straße,51.85327,11.59012
+Lidl DE-Steinheim Lipper Tor,51.87756,9.0875
+Lidl DE-Stendal Erich-Weinert-Straße,52.5976,11.83993
+Lidl DE-Stolberg Ardennenstraße,50.76638,6.21844
+Lidl DE-Stralsund Heinrich-v.-Stephan-Straße,54.3272,13.06507
+Lidl DE-Stutensee Linkenheimer Straße,49.0801,8.46138
 Lidl DE-Stuttgart Hofener Straße,48.81485,9.22642
+Lidl DE-Stuttgart Rosensteinstraße,48.79866,9.19417
 Lidl DE-Stuttgart Stuttgarter Straße,48.8111,9.16555
+Lidl DE-Sulingen Nienburger Straße,52.68327,8.82257
 Lidl DE-Sundern Settmecke Straße,51.32468,7.99925
 Lidl DE-Süderlügum Hauptstraße,54.8746,8.90885,30
-Lidl DE-Süßen Bühlstraße 17,48.67962,9.76102
-Lidl DE-Taunusstein-Hahn Gottfried-Keller-Straße,50.1412,8.15656
-Lidl DE-Telgte Orkotten 46-48,51.98147,7.77513
+Lidl DE-Süßen Bühlstraße,48.67962,9.76102
+Lidl DE-Tarp Wanderuper Straße,54.66667,9.4
+Lidl DE-Taunusstein Gottfried-Keller-Straße,50.1412,8.15656
+Lidl DE-Tegernsee Schwaighofstraße,47.69912,11.76958
+Lidl DE-Telgte Orkotten,51.98147,7.77513
 Lidl DE-Teltow Oderstraße,52.40108,13.24754
-Lidl DE-Tinnum,54.90121,8.32949
-Lidl DE-Torgau Warschauer Straße 9B,51.55891,12.99082
-Lidl DE-Triberg Nußbacher Straße 2,48.13803,8.24073
+Lidl DE-Tinnum/Sylt Ost Kiarwai,54.9012,8.3295
+Lidl DE-Torgau Warschauer Straße,51.5589,12.99082
+Lidl DE-Tornesch Ohlenhoff,53.70128,9.72628
+Lidl DE-Triberg im Schwarzwald Nußbacher Straße,48.13803,8.24073
 Lidl DE-Troisdorf Frankfurter Straße,50.81348,7.17613
 Lidl DE-Tuttlingen Stockacher Straße,47.97312,8.8322
 Lidl DE-Tönisvorst Maysweg,51.31988,6.50446
-Lidl DE-Türkheim Merowingerstraße,48.05552,10.63321
-Lidl DE-Ubstadt-Weiher Ubstadter Straße 34,49.17163,8.61801
-Lidl DE-Uelzen,52.96804,10.57295
+Lidl DE-Türkheim Merowingerstraße,48.05552,10.6332
+Lidl DE-Ubstadt-Weiher Ubstadter Straße,49.17163,8.618
+Lidl DE-Uelzen Bernhard-Nigebur-Straße,52.96804,10.57295
+Lidl DE-Untergruppenbach Lerchenweg,49.08884,9.27164
 Lidl DE-Uslar Wiesenstraße,51.6606,9.6291
-Lidl DE-Vechta Oldenburger Straße 19-21,52.73297,8.28821
-Lidl DE-Vellmar Harleshäuser Straße 21,51.35536,9.44963
-Lidl DE-Verden Berliner Ring 1,52.92095,9.25139
-Lidl DE-Verl Westring 11,51.87882,8.49118
-Lidl DE-Villingen-Schwenningen Am Krebsgraben 4,48.06856,8.4501
-Lidl DE-Voerde (Niederrhein) Bahnhofstraße 143,51.60147,6.69788
+Lidl DE-Vechta Oldenburger Straße,52.73297,8.2882
+Lidl DE-Vellmar Harleshäuser Straße,51.35536,9.44963
+Lidl DE-Verden Berliner Ring,52.92095,9.2514
+Lidl DE-Verl Westring,51.87882,8.49118
+Lidl DE-Villingen-Schwenningen Am Krebsgraben,48.06856,8.4501
+Lidl DE-Vilsbiburg Frontenhausener Straße,48.45502,12.3642
+Lidl DE-Voerde (Niederrhein) Bahnhofstraße,51.60147,6.69788
+Lidl DE-Vreden Winterswyker Straße,52.03133,6.8214
 Lidl DE-Völklingen Am Hammergraben,49.23046,6.8285
-Lidl DE-Völklingen-Fürstenhausen Zechenstraße,49.24763,6.86833
-Lidl DE-Wadgassen,49.25243,6.81806
-Lidl DE-Waiblingen,48.82613,9.305
+Lidl DE-Völklingen Zechenstraße,49.24763,6.86833
+Lidl DE-Wadgassen Provinzialstraße,49.25243,6.81806
+Lidl DE-Waghäusel Bruchsaler Straße,49.2413,8.5383
+Lidl DE-Waiblingen Devizesstraße,48.82613,9.305
 Lidl DE-Waldfischbach Haupstraße,49.2854,7.64828
 Lidl DE-Waldshut-Tiengen Hebelstraße,47.63064,8.26633
-Lidl DE-Warstein-Suttrop Alte Kreisstraße,51.45298,8.35988
-Lidl DE-Wassertrüdingen Am Krautgarten 1,49.04234,10.58879
-Lidl DE-Wedemark-Mellendorf Wedemarkstraße,52.54653,9.74427
-Lidl DE-Weiden in der Oberpfalz,49.68375,12.16201
-Lidl DE-Weikersheim,49.48466,9.89741
+Lidl DE-Walzbachtal Wössinger Straße,49.01754,8.59946
+Lidl DE-Wangen im Allgäu Spinnerei,47.68035,9.82566
+Lidl DE-Warburg Paderborner Tor,51.49144,9.13528
+Lidl DE-Warendorf Bahnhofstraße,51.95175,7.9793
+Lidl DE-Warstein Alte Kreisstraße,51.45298,8.35988
+Lidl DE-Wassertrüdingen Am Krautgarten,49.04234,10.5888
+Lidl DE-Wedemark Wedemarkstraße,52.54653,9.74427
+Lidl DE-Wehr Im Hammer,47.63124,7.90506
+Lidl DE-Weiden i.d.OPf. Zur Centralwerkstätte,49.68375,12.162
+Lidl DE-Weikersheim August-Laukhuff-Straße,49.48466,9.8974
 Lidl DE-Weil der Stadt Siemensstraße,48.756,8.86905
-Lidl DE-Weilerbach Europastraße 3,49.47737,7.63694
+Lidl DE-Weilerbach Europastraße,49.47737,7.63694
 Lidl DE-Weilerswist Rudolf-Diesel-Straße,50.74922,6.84933
-Lidl DE-Weiterstadt Im Rödling 3,49.89825,8.59786
-Lidl DE-Wendlingen Taläckerstraße,48.66628,9.37052
-Lidl DE-Werlte Hauptstraße 63-65,52.8521,7.68434
-Lidl DE-Westerkappeln Heerstraße 2,52.31452,7.87377
+Lidl DE-Weiterstadt Im Rödling,49.89825,8.59786
+Lidl DE-Wendlingen am Neckar Taläckerstraße,48.66628,9.37052
+Lidl DE-Werlte Hauptstraße,52.8521,7.68434
+Lidl DE-Westerkappeln Heerstraße,52.31452,7.87377
+Lidl DE-Westerstede Lange Straße,53.2598,7.919
 Lidl DE-Westhausen Dr.-Rudolf-Schieber-Straße,48.87947,10.18574
 Lidl DE-Wetzlar Carolinenhütte,50.56743,8.50297
-Lidl DE-Weyhe Alte Hauptstraße 2,52.98155,8.84217
-Lidl DE-Wiesbaden,50.06032,8.33523
-Lidl DE-Wiesbaden Mainzer Straße,50.05679,8.25789
-Lidl DE-Wiesbaden-Bierstadt Rostocker Straße,50.08926,8.2902
-Lidl DE-Wilhelmshaven Hundertwasserallee,53.52941,8.06937
-Lidl DE-Wilhelmshaven Mitscherlichstraße,53.52797,8.10821
+Lidl DE-Wetzlar Hörnsheimer Eck,50.5386,8.5375
+Lidl DE-Weyhe Alte Hauptstraße,52.98155,8.84217
+Lidl DE-Wiesbaden An der Helling,50.02345,8.268
+Lidl DE-Wiesbaden Daimlerring,50.06032,8.33523
+Lidl DE-Wiesbaden Mainzer Straße,50.0568,8.2579
+Lidl DE-Wiesbaden Rostocker Straße,50.08926,8.2902
+Lidl DE-Wiesbaden Stegerwaldstraße,50.07055,8.1976
+Lidl DE-Wilhelmshaven Freiligrathstraße,53.54614,8.1185
+Lidl DE-Wilhelmshaven Hundertwasserallee,53.5294,8.06937
+Lidl DE-Wilhelmshaven Mitscherlichstraße,53.52797,8.1082
 Lidl DE-Wilhelmshaven Posener Straße,53.57306,8.08115
-Lidl DE-Wilhelmshaven-Neuengroden Freiligrathstraße 195,53.54614,8.11851
 Lidl DE-Wilsdruff Freiberger Straße,51.04192,13.54035
-Lidl DE-Windeck-Rosbach Rathausstraße,50.80492,7.6091
-Lidl DE-Winnenden Waiblinger Straße 44,48.87478,9.39105
-Lidl DE-Winterberg Im Mühlengrund 1,51.19195,8.5306
-Lidl DE-Witten Westfalenstraße 110,51.44655,7.36597
+Lidl DE-Windeck Rathausstraße,50.80492,7.6091
+Lidl DE-Winnenden Waiblinger Straße,48.87478,9.39105
+Lidl DE-Winterberg Im Mühlengrund,51.19195,8.5306
+Lidl DE-Witten Westfalenstraße,51.44655,7.36597
 Lidl DE-Wittlich Kurfürstenstraße,49.98227,6.89985
-Lidl DE-Witzenhausen Laubenweg 5,51.34618,9.85485
+Lidl DE-Witzenhausen Laubenweg,51.34618,9.85485
+Lidl DE-Wolfhagen Lynkerstraße,51.32682,9.17728
+Lidl DE-Wolfratshausen Margeritenstraße,47.9073,11.43108
 Lidl DE-Wolgast Chausseestraße,54.05016,13.76777
-Lidl DE-Worpswede Osterweder Straße,53.22679,8.92874,25
-Lidl DE-Wuppertal Am Diek 105,51.28639,7.2294
+Lidl DE-Worms Alzeyer Straße,49.63032,8.35155
+Lidl DE-Worpswede Osterweder Straße,53.2268,8.92874,25
+Lidl DE-Wuppertal Am Diek,51.2864,7.2294
 Lidl DE-Wuppertal Bissingstraße,51.23332,7.0759
 Lidl DE-Wuppertal Nevigeser Straße,51.27457,7.12356
 Lidl DE-Wuppertal Otto-Hausmann-Ring,51.2573,7.1078
-Lidl DE-Wurster Nordseeküste Oderstraße 2-4,53.77759,8.6126
-Lidl DE-Wörth am Rhein Kühgrunddamm 2,49.04087,8.28802
-Lidl DE-Wörth Ottstraße 50,49.05133,8.26348
-Lidl DE-Zeil am Main,50.01611,10.57786
-Lidl DE-Zella-Mehlis,50.65405,10.66284
-Lidl DE-Zwiesel,49.0056,13.22274
-Lidl DE-Überherrn Langwies 4,49.24948,6.69859
+Lidl DE-Wurster Nordseeküste Oderstraße,53.7776,8.6126
+Lidl DE-Wörth am Rhein Kühgrunddamm,49.04087,8.28802
+Lidl DE-Wörth am Rhein Ottstraße,49.05133,8.26348
+Lidl DE-Xanten Hagdornstraße,51.65632,6.44107
+Lidl DE-Zeil a. Main In den Sutten,50.0161,10.57786
+Lidl DE-Zella-Mehlis Talstraße,50.65405,10.66284
+Lidl DE-Zeven Kivinanstraße,53.2991,9.27544
+Lidl DE-Zweibrücken Pirmasenser Straße,49.2451,7.3634
+Lidl DE-Zwickau Leipziger Straße,50.73803,12.4902
+Lidl DE-Zwiesel Regener Straße,49.0056,13.22274
+Lidl DE-Übach-Palenberg Grenzweg,50.92477,6.09268
+Lidl DE-Überherrn Langwies,49.24948,6.6986
 Lidl DK-Aabenraa Langebro,55.03513,9.41653
 Lidl DK-Kastrup Amager Landevej,55.61818,12.62787
 Lidl DK-Ribe Saltgade,55.33221,8.76766
@@ -21152,7 +21373,9 @@ Neogy IT-Vipiteno Piazza Canonico Michael Gamper,46.89887,11.42921
 Neogy IT-Welschnofen Karerseestraße,46.43106,11.54429
 
 Neste FI-Hankasalmi Pieksämäentie,62.35762,26.57155
+Neste FI-Imatra Korvenkannantie,61.1864,28.74283
 Neste FI-Lapinlahti Kuopiontie,63.34808,27.41369
+Neste FI-Söderkulla Eriksnäsintie,60.28555,25.33138
 
 NEUWOGES DE-Neubrandenburg Stargarder Straße,53.55854,13.2612
 
@@ -22530,6 +22753,7 @@ Qovoltis FR-Les Ulis Rue de la Réunion,48.68259,2.20282
 Qwello DE-Berlin Genter Straße,52.54898,13.35145
 Qwello DE-Berlin Scherenbergstraße,52.55057,13.41987
 Qwello DE-Leipzig Cöthner Straße,51.36438,12.36952
+Qwello DE-Leverkusen Heinrich-Böll-Straße,51.05675,6.94513
 Qwello SE-Stockholm Torkel Knutssonsgatan,59.32025,18.0564
 
 r-loaded DE-Leipheim Albert-Einstein-Straße,48.44706,10.24017
@@ -24418,6 +24642,7 @@ SÜC DE-Coburg Zinkenwehr,50.2565,10.9607
 
 Süwag DE-Allmersbach Allmersbacher Straße,48.9085,9.48495
 Süwag DE-Bad Ems Silberau,50.33259,7.70802
+Süwag DE-Bad Schwalbach Heimbacher Straße,50.14904,8.0729
 Süwag DE-Eltville am Rhein Taunusstraße,50.02711,8.12039
 Süwag DE-Frankfurt Schützenbleiche,50.09654,8.54341
 Süwag DE-St. Goarshausen Bahnhofstraße,50.15535,7.71542
@@ -26905,3 +27130,4 @@ US Darmstadt St Joseph Avenue,38.1032,-87.59667
 US Fairburn GA Senoia Rd,33.53822,-84.57576
 US Raleigh Spindle Court,35.71586,-78.68483
 US San Diego Scranton Road,32.89684,-117.20074
+US Tinley Park IL N Creek Dr,41.55593,-87.79514
