@@ -9425,7 +9425,6 @@ ChargePoint AT-Graz Zanklstraße,47.09623,15.40694,25
 ChargePoint AT-Liezen Salzburger Straße,47.56758,14.23202,20
 ChargePoint AT-Längenfeld Unterlängenfeld,47.07213,10.96484
 ChargePoint AT-Penningberg Penningbergstraße,47.43057,12.13627
-ChargePoint AT-St. Johann in der Haide Rathstraße,47.28064,16.00637
 ChargePoint AT-St. Veit St.-Veiter-Straße,47.3316,13.16388
 ChargePoint AT-Stattegg Dorfplatz,47.13736,15.41941
 ChargePoint AT-Steyr Haager Straße,49.2346,12.0852
@@ -23252,7 +23251,6 @@ Shell AT-Strengberg Westautobahn A1,48.11462,14.66631
 Shell AT-Telfs Anton-Auer-Straße,47.30531,11.07466
 Shell AT-Wien Hadikgasse,48.19043,16.29395
 Shell AT-Wien Pfenninggeldgasse,48.2081,16.31364
-Shell AT-Wien Seestadtstraße,48.21661,16.50511
 Shell AT-Wien Wagramer Straße,48.26463,16.4545
 Shell BE-Berchem-Sainte-Agathe Av. Charles-Quint,50.87127,4.2932
 Shell CA-Kanata ON Terry Fox Dr,45.3122,-75.93303
@@ -23765,139 +23763,280 @@ SIGEIF FR-Rosny-sous-Bois Rue Claude Pernès,48.873,2.48731
 
 Skoda DE-Gelsenkirchen Ewaldstraße,51.57765,7.11335
 
-Smatrics AT-Altlengbach Steinhäusl,48.15789,15.94188
+Smatrics AT-Abtenau Schratten,47.57067,13.37578
+Smatrics AT-Altenmarkt an der Triesting,48.01548,15.99833
+Smatrics AT-Altlengbach Steinhäusl,48.1579,15.94188
 Smatrics AT-Anif Salzachtalstraße,47.72713,13.06038,6
-Smatrics AT-Ansfelden Ikea-Platz,48.19731,14.24953
+Smatrics AT-Ansfelden Ikea-Platz,48.1973,14.24953
 Smatrics AT-Ansfelden Traunuferstraße,48.21153,14.275
 Smatrics AT-Arnoldstein Kärntner Straße,46.55007,13.69878
-Smatrics AT-Bad Ischl Sulzbacherstraße,47.69079,13.62284
+Smatrics AT-Bad Ischl Sulzbacherstraße,47.6908,13.62284
+Smatrics AT-Bad Tatzmannsdorf Jormannsdorf,47.3464,16.22433
 Smatrics AT-Bad Voslau Flugfeldstraße,47.9661,16.239
+Smatrics AT-Bad Vöslau Industriestraße,47.97748,16.2204
 Smatrics AT-Bad Waltersdorf,47.18288,15.99365
-Smatrics AT-Blindenmarkt Felbering,48.12691,15.00879
+Smatrics AT-Baden Mühlgasse,48.0076,16.24757
+Smatrics AT-Berndorf bei Salzburg Gewerbestraße,48.0022,13.0697
+Smatrics AT-Bischofshofen Gasteiner Straße,47.4053,13.21997
+Smatrics AT-Bischofshofen Molkereistrasse,47.41027,13.21726
+Smatrics AT-Bleiburg Völkermarkter Straße,46.5935,14.7957
+Smatrics AT-Blindenmarkt Felbering,48.1269,15.0088
+Smatrics AT-Braunau am Inn Bauhofstraße,48.2435,13.04764
+Smatrics AT-Braunau am Inn Raitfeldstraße,48.25377,13.04393
+Smatrics AT-Breitenfurt bei Wien Hauptstraße,48.1358,16.19123
+Smatrics AT-Brixlegg Niederfeldweg,47.43702,11.88444
 Smatrics AT-Bruck an der Leitha Eco-Plus-Park 2.Straße,48.03385,16.80514
 Smatrics AT-Bruck an der Mur Grazer Straße,47.40817,15.2752
-Smatrics AT-Bruck an der Mur Wiener Straße,47.42124,15.27429
+Smatrics AT-Bruck an der Mur Wiener Straße,47.42124,15.2743
 Smatrics AT-Brunn am Gebirge Brunner Straße,48.12217,16.2942
-Smatrics AT-Brunn am Gebirge Industriestraße,48.10959,16.30756
+Smatrics AT-Brunn am Gebirge Industriestraße,48.1096,16.30756
 Smatrics AT-Brunn am Gebirge Wienerstraße,48.11246,16.30006,30
 Smatrics AT-Burgfried Bürgermeisterstraße,47.68685,13.10866
 Smatrics AT-Deutsch-Wagram Promenadenweg,48.29512,16.55567
+Smatrics AT-Eberndorf An der Bundesstraße,46.59153,14.6376
+Smatrics AT-Eberstalzell Solarstraße,48.0392,13.9912
+Smatrics AT-Eisenstadt Haidäcker-Park,47.82608,16.52315
 Smatrics AT-Eisenstadt Mattersburger Straße,47.82993,16.51932
-Smatrics AT-Erlauf Erlaufstraße,48.07192,15.13749
-Smatrics AT-Feldkirchen bei Graz,47.00912,15.44097,20
-Smatrics AT-Flachau Reitdorfer Straße,47.36239,13.38239
+Smatrics AT-Elixhausen Mattseer Landesstraße,47.86145,13.05945
+Smatrics AT-Elsbethen Haslachweg,47.74822,13.08537
+Smatrics AT-Ennsdorf Wirtschaftspark,48.22333,14.50994
+Smatrics AT-Erlauf Erlaufstraße,48.07192,15.1375
+Smatrics AT-Eugendorf Möbelstraße,47.85963,13.12655
+Smatrics AT-Eugendorf Römerstraße,47.8596,13.1249
+Smatrics AT-Feldkirchen an der Donau Gewerbepark,48.34934,14.06084
+Smatrics AT-Feldkirchen bei Graz Anton-Hermann-Straße,47.00912,15.44097,20
+Smatrics AT-Feldkirchen bei Graz Hans-Roth-Straße,47.00448,15.44244
+Smatrics AT-Feldkirchen in Kärnten Gewerbestraße,46.69364,14.12882
+Smatrics AT-Flachau Reitdorfer Straße,47.3624,13.3824
 Smatrics AT-Flughafen Wien Schwechat,48.12475,16.56365
 Smatrics AT-Frastanz Feldkircher Straße,47.22467,9.61694
 Smatrics AT-Freistadt Linzer Straße,48.49918,14.50343
-Smatrics AT-Fürstenfeld Kirchenplatz,47.05055,16.07971
+Smatrics AT-Fürstenfeld Grazer Platz,47.05165,16.0736
+Smatrics AT-Fürstenfeld Grazerstraße,47.0581,16.0675
+Smatrics AT-Fürstenfeld Kirchenplatz,47.05055,16.0797
+Smatrics AT-Gemeinde Bruck an der Leitha Eco-Plus-Park.Straße,48.03543,16.80745
+Smatrics AT-Gemeinde Imst Industriezone,47.21834,10.73354
 Smatrics AT-Gemeinde Techelsberg am Wörther See Töschling,46.6347,14.1106
 Smatrics AT-Gerasdorf bei Wien Brünner Straße,48.33317,16.45644
 Smatrics AT-Grafenwörth Gewerbepark,48.41218,15.77737
-Smatrics AT-Gralla Gewerbepark,46.80576,15.56029
+Smatrics AT-Gralla Gewerbepark,46.80576,15.5603
+Smatrics AT-Grambach Teslastraße,47.0179,15.5011
 Smatrics AT-Graz Conrad-von-Hötzendorf-Straße,47.05577,15.44823
 Smatrics AT-Graz Gaswerkstraße,47.06966,15.40186
 Smatrics AT-Graz Waltendorfer Hauptstraße,47.06654,15.46854
 Smatrics AT-Graz Weblinger Gürtel,47.03288,15.42375
 Smatrics AT-Grein Breitenangerstraße,48.22917,14.84565
+Smatrics AT-Grieskirchen Industriegelände,48.22667,13.8469
 Smatrics AT-Griffen Gewerbestraße,46.69617,14.7374,25
+Smatrics AT-Groß Gerungs Zwettler Straße,48.5726,14.96544
+Smatrics AT-Güttenbach Feldgasse,47.16296,16.30084
+Smatrics AT-Haag Steyrer Straße,48.0979,14.54002
 Smatrics AT-Haberl Gewerbepark,47.48107,16.09134
 Smatrics AT-Haus im Ennstal Ennsling,47.41225,13.7845
+Smatrics AT-Herzogenburg Winkelfeldgasse,48.262,15.69502
+Smatrics AT-Hilm Waidhofner Straße,48.02157,14.75764
 Smatrics AT-Himberg bei Wien Gutenhoferstraße,48.07275,16.45065
+Smatrics AT-Himmelreich Großmarktstraße,47.79125,12.987
 Smatrics AT-Himmelreich Josef-Lindner-Straße,47.79414,12.9867,30
 Smatrics AT-Hochleithen Brünner Straße,48.4255,16.54814,20
-Smatrics AT-Hofstätten an der Raab,47.08224,15.73976
-Smatrics AT-Horn Prager Straße,48.66451,15.63613
+Smatrics AT-Hofstätten an der Raab Gleisdorf Hofstätten,47.08224,15.73976
+Smatrics AT-Hollabrunn Wiener Straße,48.55064,16.07956
+Smatrics AT-Horitschon Hauptstraße,47.59143,16.539
+Smatrics AT-Horn Prager Straße,48.6645,15.63613
+Smatrics AT-Hörsching Welser-Heide-Straße,48.21353,14.1822
 Smatrics AT-Innsbruck Mitterweg,47.25796,11.3766
 Smatrics AT-Inzersdorf im Kremstal Gewerbestraße,47.92934,14.08614
-Smatrics AT-Judenburg Burggasse,47.17211,14.6322
+Smatrics AT-Judenburg Burggasse,47.1721,14.6322
 Smatrics AT-Kapfenberg Bahnstraße,47.44515,15.2929
-Smatrics AT-Kirchdorf an der Krems Gaisbauer-Straße,47.90022,14.12598
+Smatrics AT-Kemmelbach Gewerbestraße,48.14845,15.0832
+Smatrics AT-Kirchdorf an der Krems Dr.-Gaisbauer-Straße,47.90022,14.12598
 Smatrics AT-Kittsee Eisenstädter Straße,48.08576,17.04827
-Smatrics AT-Klagenfurt am Wörthersee Rosentaler Straße,46.60618,14.29861
-Smatrics AT-Klosterneuburg Wiener Straße,48.29811,16.33397
-Smatrics AT-Krems an der Donau Landersdorfer Straße,48.41681,15.62759
+Smatrics AT-Kitzbühel Hahnenkammstraße,47.44337,12.39015
+Smatrics AT-Klagenfurt am Wörthersee Ikea Platz,46.63995,14.3672
+Smatrics AT-Klagenfurt am Wörthersee Rosentaler Straße,46.60618,14.2986
+Smatrics AT-Klagenfurt Pischeldorfer Straße,46.63735,14.3317
+Smatrics AT-Klosterneuburg Wiener Straße,48.2981,16.33397
+Smatrics AT-Krems an der Donau Landersdorfer Straße,48.4168,15.6276
 Smatrics AT-Kufstein Rosenheimer Straße,47.59373,12.17693
 Smatrics AT-Laakirchen Schillerstraße,47.97684,13.82056
+Smatrics AT-Labuttendorf Otterweg,46.78694,15.64073
+Smatrics AT-Lamprechtshausen Bürmooser Straße,47.9911,12.945
 Smatrics AT-Landeck Bruggfeldstraße,47.14174,10.56122
-Smatrics AT-Liezen Gesäusestraße,47.56021,14.25278
+Smatrics AT-Langenrohr Europastraße,48.31852,16.01844
+Smatrics AT-Leobendorf Hammerschmied-Straße,48.3602,16.31016
+Smatrics AT-Leopoldsdorf bei Wien Hennersdorferstraße,48.11496,16.39736
+Smatrics AT-Liezen Gesäusestraße,47.5602,14.25278
+Smatrics AT-Lilienfeld Babenbergerstraße,48.01498,15.59594
+Smatrics AT-Linz Donaufeldstraße,48.32754,14.32314
+Smatrics AT-Linz Franzosenhausweg,48.24932,14.29373
 Smatrics AT-Linz Hafenstraße,48.3156,14.30173,25
 Smatrics AT-Linz Jägerstätterstraße,48.33573,14.30002
+Smatrics AT-Linz Kremplstraße,48.27405,14.31252
+Smatrics AT-Linz Poschacherstraße,48.28578,14.3103
 Smatrics AT-Linz Untere Donaulände,48.31337,14.29854
-Smatrics AT-Loosdorf Gewerbestraße,48.18981,15.4083
+Smatrics AT-Loosdorf Gewerbestraße,48.1898,15.4083
 Smatrics AT-Löbenau Forstauer Straße,47.37673,13.47542
 Smatrics AT-Malta Brandstatt,47.07872,13.34532
-Smatrics AT-Maria Enzersdorf Hauptstraße,48.09403,16.28239
+Smatrics AT-Maria Enzersdorf Hauptstraße,48.09403,16.2824
+Smatrics AT-Mattersburg Fachmarktzentrum,47.7302,16.41344
+Smatrics AT-Mattsee Passauer Straße,47.97402,13.1018
 Smatrics AT-Mauthausen Gewerbestraße,48.24162,14.54625
-Smatrics AT-Meggenhofen Trappenhof,48.18353,13.78561,16
-Smatrics AT-Meggenhofen Trappenhof,48.1836,13.78581,8
+Smatrics AT-Meggenhofen Trappenhof,48.18353,13.7856,16
+Smatrics AT-Meggenhofen Trappenhof,48.1836,13.7858,8
+Smatrics AT-Melk Weierbachweg,48.21387,15.3495
+Smatrics AT-Micheldorf Kollingerfeld,47.89022,14.12525
+Smatrics AT-Mittersill Zeller Straße,47.28423,12.48684
 Smatrics AT-Mödling Norbert Sprongl-Gasse,48.08738,16.28467
+Smatrics AT-Mühldorf bei Feldbach Gewerbepark,46.9498,15.91432
 Smatrics AT-Müllendorf Bahnstraße,47.83368,16.46186
+Smatrics AT-Mürzzuschlag Grazer Straße,47.60257,15.66857
+Smatrics AT-Neukirchen an der Enknach Florianistraße,48.18037,13.0481
 Smatrics AT-Neulengbach St. Christophener Straße,48.19145,15.89315
+Smatrics AT-Neumarkt in der Steiermark Wiener Straße,47.07914,14.42476
 Smatrics AT-Neusiedl am See Erwin-Schrödinger-Straße,47.97304,16.85098
 Smatrics AT-Neusiedl am See Wiener Straße,47.97314,16.84058
+Smatrics AT-Neußerling Neußerling,48.4225,14.15732
+Smatrics AT-Nußbach Gewerbestraße,47.97288,14.1709
+Smatrics AT-Oberaich Tulpenweg,47.39995,15.22867
+Smatrics AT-Oberwaltersdorf Badener Straße,47.97718,16.3205
 Smatrics AT-Oberwart Europastraße,47.28558,16.18527
 Smatrics AT-Oberwart Grazerstraße,47.28453,16.18613
+Smatrics AT-Oberwart Steinamangerer Straße,47.27462,16.2336
+Smatrics AT-Palting Mundenham,48.0069,13.12613
+Smatrics AT-Parndorf Designer Outlet Straße,47.98014,16.84822
 Smatrics AT-Parndorf Pannoniastraße,47.97577,16.85294
+Smatrics AT-Patergassen Wiedweg,46.81734,13.86123
 Smatrics AT-Perchtoldsdorf Donauwörther Straße,48.12422,16.26568
+Smatrics AT-Pettneu am Arlberg Schnann-Gewerbezone,47.1489,10.37376
+Smatrics AT-Petzenkirchen Kaiserstraße,48.14544,15.15165
+Smatrics AT-Pfaffing Frieding,48.02423,13.47262
+Smatrics AT-Pinggau Gewerbegebiet Süd,47.4255,16.0893
 Smatrics AT-Poggersdorf Wirtschaftspark,46.64183,14.44983
+Smatrics AT-Pottendorf Wiener Neustädter Straße,47.90882,16.3856
+Smatrics AT-Puchenau Weitenfeld,48.31183,14.22857
 Smatrics AT-Pöchlarn Heizwerkstraße,48.20246,15.22267
-Smatrics AT-Rastplatz Schottwien,47.64921,15.85833
+Smatrics AT-Rastplatz Schottwien,47.6492,15.85833
 Smatrics AT-Raststation Simmering,48.18156,16.44427
-Smatrics AT-Raststation Ybbs,48.15831,15.11238
+Smatrics AT-Raststation Ybbs,48.1583,15.11238
 Smatrics AT-Raststätte Mondsee,47.83662,13.39498,20
+Smatrics AT-Regau Hinterbuch,47.95455,13.7262
+Smatrics AT-Ried im Innkreis Braunauer Straße,48.20587,13.48058
+Smatrics AT-Ried im Innkreis Riedauer Straße,48.21785,13.49438
+Smatrics AT-Rohrbach Volksfeststraße,48.56696,13.98277
+Smatrics AT-Rum Siemensstraße,47.27292,11.44943
+Smatrics AT-Rutzenham Bergern,48.05534,13.70616
+Smatrics AT-Saalfelden am Steinernen Meer Färbergasse,47.42566,12.83965
+Smatrics AT-Salzburg Franz Brötzner Straße,47.79438,12.98657
 Smatrics AT-Salzburg Sterneckstraße,47.8097,13.05705
+Smatrics AT-Sankt Florian am Inn St. Florian am Inn,48.44187,13.44653
+Smatrics AT-Sankt Gilgen Konrad-Lesiak-Platz,47.7644,13.3641
+Smatrics AT-Sankt Martin im Sulmtal Aigen,46.76107,15.28615
+Smatrics AT-Sankt Michael im Lungau Gewerbestraße,47.09602,13.633
+Smatrics AT-Sankt Pantaleon Weilhartstraße,48.01858,12.853
+Smatrics AT-Sankt Peter am Bichl Völkermarkter Straße,46.6256,14.34046
 Smatrics AT-Scheibbs Eisenwurzenstraße,48.01476,15.16084
-Smatrics AT-Schnann Gewerbezone,47.14915,10.37391
+Smatrics AT-Schladming Pichlhof,47.39664,13.7043
+Smatrics AT-Schlierbach Sauternstraße,47.9489,14.11206
+Smatrics AT-Schnann Gewerbezone,47.14915,10.3739
 Smatrics AT-Schwadorf bei Wien Industrie Strasse,48.077,16.59304
 Smatrics AT-Schwechat Brucker Bundesstrasse,48.13573,16.49193
-Smatrics AT-Siegendorf GZO-Fachmarktzentrum,47.77391,16.53005
+Smatrics AT-Schwechat Möhringgasse,48.14158,16.482
+Smatrics AT-Sebersdorf Thermenweg,47.18242,15.99282
+Smatrics AT-Siegendorf GZO-Fachmarktzentrum,47.7739,16.53005
+Smatrics AT-Siezenheim Mielestraße,47.81418,12.9992
 Smatrics AT-Spielberg Ring Rast Straße,47.20986,14.78348
 Smatrics AT-Spielberg Ring Rast Straße,47.21054,14.78435
 Smatrics AT-Spittal an der Drau Villacher Straße,46.7915,13.51312
 Smatrics AT-St. Gallen Markt,47.69265,14.61672
-Smatrics AT-St. Georgen im Attergau Am See-Ring,47.92891,13.5043
+Smatrics AT-St. Georgen im Attergau Am See-Ring,47.9289,13.5043
+Smatrics AT-St. Johann in der Haide Rathstraße,47.28064,16.00637,25
 Smatrics AT-St. Marienkirchen Andiesen,48.3946,13.42787
-Smatrics AT-St. Pölten Anton Scheiblin-Gasse,48.18279,15.62002
-Smatrics AT-St. Pölten Karl Pfeffer-Gasse,48.18101,15.621
+Smatrics AT-St. Pölten Anton Scheiblin-Gasse,48.1828,15.62002
+Smatrics AT-St. Pölten Karl Pfeffer-Gasse,48.181,15.621
 Smatrics AT-St. Pölten Mariazeller Straße,48.18905,15.61896
+Smatrics AT-St. Pölten Mariazellerstraße,48.17936,15.61307
 Smatrics AT-St. Pölten Schulze Delitzsch-Straße,48.17943,15.61355
+Smatrics AT-St. Pölten St. Georgener Hauptstraße,48.13714,15.61388
+Smatrics AT-St. Veit an der Glan Blintendorf,46.73048,14.3783
+Smatrics AT-St. Veit Völkermarkter Straße,46.76615,14.37712
+Smatrics AT-Stadl-Paura Schiffsländea,48.08258,13.86093
+Smatrics AT-Steinach Brennerstraße,47.09924,11.46387
+Smatrics AT-Steyr Ennser Straße,48.05738,14.42012
 Smatrics AT-Steyr Kaserngasse,48.04847,14.41566
 Smatrics AT-Stockerau Rudolf Diesel-Straße,48.38917,16.17985
 Smatrics AT-Stockerau Wienerstraße,48.3857,16.23564
+Smatrics AT-Stoob Burgenland Straße,47.51374,16.48885
 Smatrics AT-Strasshof an der Nordbahn,48.32138,16.66493
+Smatrics AT-Straßburg Hauptstraße,46.89507,14.3375
 Smatrics AT-Straßwalchen Neumarkterstraße,47.95842,13.23602
+Smatrics AT-Ternitz Werkstraße,47.7141,16.03884
 Smatrics AT-Traiskirchen Süddruckgasse,47.98617,16.28915
+Smatrics AT-Traiskirchen Wiener Straße,48.02137,16.29814
+Smatrics AT-Traun Weidfeldstraße,48.23292,14.25015
 Smatrics AT-Trieben Industriepark,47.49297,14.48372
 Smatrics AT-Tulln an der Donau Frauentorgasse,48.32786,16.05458
+Smatrics AT-Tumeltsham Hannesgrub Süd,48.2172,13.49842
+Smatrics AT-Velden am Wörthersee Klagenfurter Straße,46.61804,14.05017
+Smatrics AT-Villach Egger Seeuferstraße,46.58784,13.93558
 Smatrics AT-Villach Maria-Gailer-Straße,46.60538,13.86597
-Smatrics AT-Villach Nikolaigasse,46.61523,13.85149
+Smatrics AT-Villach Nikolaigasse,46.61523,13.8515
+Smatrics AT-Villach Völkendorfer Straße,46.6118,13.83974
+Smatrics AT-Vogau Rebenland-Center-Straße,46.73922,15.6035
+Smatrics AT-Voitsberg Grazer Vorstadt,47.04703,15.156
+Smatrics AT-Vomp An der Leiten,47.35075,11.69783
+Smatrics AT-Vorchdorf Asamerstraße,48.01093,13.92335
 Smatrics AT-Vorchdorf Feldhamer Straße,48.01106,13.92058
-Smatrics AT-Völs Cytastraße,47.25907,11.32219
+Smatrics AT-Vorchdorf Peintal,47.9925,13.90068
+Smatrics AT-Vöcklabruck Max Planck-Straße,48.00405,13.67776
+Smatrics AT-Völkermarkt IGP Süd,46.68212,14.6781
+Smatrics AT-Völs Cytastraße,47.25907,11.3222
 Smatrics AT-Vösendorf Metro Platz,48.12495,16.3225
 Smatrics AT-Vösendorf Südring,48.10534,16.31576
 Smatrics AT-Vösendorf Triester Straße,48.13757,16.325
 Smatrics AT-Wals-Himmelreich Kasernenstraße,47.79245,12.98746
 Smatrics AT-Wels Ginzkeystraße,48.18005,14.06368,12
+Smatrics AT-Wels Mitterfeldstraße,48.18527,14.02665
 Smatrics AT-Westendorf Dorfstraße,47.4324,12.21656
+Smatrics AT-Wien Absberggasse,48.17114,16.38867
 Smatrics AT-Wien Bergmillergasse,48.19992,16.25553
 Smatrics AT-Wien Biedermanngasse,48.16396,16.31317
-Smatrics AT-Wien Breitenfurter Straße,48.15051,16.30014
-Smatrics AT-Wien Franzosengraben,48.18601,16.41337
-Smatrics AT-Wien Gaudenzdorfer Gürtel,48.18769,16.33895
+Smatrics AT-Wien Breitenfurter Straße,48.1505,16.30014
+Smatrics AT-Wien Brünner Straße,48.26744,16.40307
+Smatrics AT-Wien Brünner Straße,48.28167,16.41273
+Smatrics AT-Wien Franzosengraben,48.186,16.41337
+Smatrics AT-Wien Gaudenzdorfer Gürtel,48.1877,16.33895
 Smatrics AT-Wien Gewerbeparkstraße,48.24603,16.46336
+Smatrics AT-Wien Hadikgasse,48.1924,16.28026
+Smatrics AT-Wien Handelskai,48.21407,16.42133
+Smatrics AT-Wien Hauptstraße,48.20773,16.2319
+Smatrics AT-Wien Jedleseer Straße,48.25975,16.3888
 Smatrics AT-Wien Jedletzbergerstraße,48.1684,16.4613
+Smatrics AT-Wien Julius Ficker Straße,48.26582,16.45292
 Smatrics AT-Wien Laxenburger Straße,48.13606,16.3584
-Smatrics AT-Wien Lemböckgasse,48.13488,16.31049
-Smatrics AT-Wien Ludwig-von-Höhnel-Gasse,48.1596,16.38509
+Smatrics AT-Wien Lemböckgasse,48.13488,16.3105
+Smatrics AT-Wien Ludwig-von-Höhnel-Gasse,48.1596,16.3851
 Smatrics AT-Wien Margaretengürtel,48.17982,16.35095
-Smatrics AT-Wien Schönbrunner Schloßstraße,48.18551,16.31859
-Smatrics AT-Wien Siemensstraße,48.27029,16.42264
+Smatrics AT-Wien Muthgasse,48.2475,16.36808
+Smatrics AT-Wien Perfektastraße,48.13776,16.30066
+Smatrics AT-Wien Pilotengasse,48.21998,16.489
+Smatrics AT-Wien Prager Straße,48.27622,16.38808
+Smatrics AT-Wien Schönbrunner Schloßstraße,48.1855,16.3186
+Smatrics AT-Wien Seestadtstraße,48.2166,16.5051,30
+Smatrics AT-Wien Siemensstraße,48.2703,16.42264
 Smatrics AT-Wien Simmeringer Hauptstraße,48.14635,16.46083
-Smatrics AT-Wien Sverigestraße,48.25391,16.47219
-Smatrics AT-Wien Swatoschgasse,48.16644,16.41139
+Smatrics AT-Wien Speisinger Straße,48.16107,16.27805
+Smatrics AT-Wien Sverigestraße,48.2539,16.4722
+Smatrics AT-Wien Swatoschgasse,48.16644,16.4114
+Smatrics AT-Wien Wagramerstraße,48.2395,16.43162
+Smatrics AT-Wien Wienerbergstraße,48.17064,16.33932
+Smatrics AT-Wiener Neudorf Gewerbestraße,48.07764,16.3188
 Smatrics AT-Wiener Neudorf IZ-NÖ-Süd Straße,48.0767,16.33054,110
-Smatrics AT-Wiener Neustadt Gerasdorfer Gasse,47.80539,16.21233
-Smatrics AT-Wolfsberg Spanheimerstraße,46.83685,14.83941
+Smatrics AT-Wiener Neudorf Reisenbauer-Ringa,48.0879,16.3115
+Smatrics AT-Wiener Neustadt Gerasdorfer Gasse,47.8054,16.21233
+Smatrics AT-Wiener Neustadt Neunkirchner Straße,47.78184,16.1901
+Smatrics AT-Wiener Neustadt Wiener Straße,47.84544,16.24523
+Smatrics AT-Wolfsberg Grazer Straße,46.84614,14.8434
+Smatrics AT-Wolfsberg Spanheimerstraße,46.83685,14.8394
 Smatrics AT-Wörgl Innsbrucker Straße,47.48192,12.05786
 Smatrics DE-Balingen Leibbrandstraße,48.24475,8.8772
 Smatrics DE-Eisenstadt Haidäcker-Park,47.8275,16.52437
@@ -26610,7 +26749,6 @@ AT Tillmitsch Heidenstraße,46.81462,15.53379
 AT Villach Steinwenderstraße,46.61133,13.8421
 AT Voldöpp Länd,47.44385,11.87979
 AT Wels Messe,48.1522,14.01712
-AT Wien Billa Brünner Straße,48.26745,16.40295
 AT Wien Flughafen,48.12022,16.56285
 AT Wien Laxenburger Straße,48.1351,16.35504
 AT Wien NTT Global Data Centers,48.15949,16.34173
