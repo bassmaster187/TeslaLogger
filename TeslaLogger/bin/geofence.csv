@@ -2378,6 +2378,7 @@ Supercharger-V3 ES-Barakaldo MegaPark,43.293842,-3.005063
 Supercharger-V4 ES-Barbastro Carretera de Huesca,42.033193,0.104275
 Supercharger ES-Barcelona-L’Illa Diagonal,41.389402,2.134064
 Supercharger ES-Bembibre,42.623488,-6.453124
+Supercharger-V4 ES-Benacazón,37.3623,-6.2008
 Supercharger-V3 ES-Benavente,42.007749,-5.663257
 Supercharger ES-Burgos,42.312365,-3.704115
 Supercharger-V4 ES-Béjar,40.39425,-5.79187
@@ -2588,7 +2589,7 @@ Supercharger FR-Beaune,47.017319,4.83779
 Supercharger-V3 FR-Beaune Nord,47.04305,4.841536,60
 Supercharger-V3 FR-Beauvais,49.41024,2.11367
 Supercharger-V4 FR-Bergerac,44.8353,0.44774
-Supercharger FR-Bernin,45.265676,5.876448
+Supercharger-V4 FR-Bernin,45.26568,5.87645
 Supercharger-V4 FR-Besançon,47.216601,5.946474
 Supercharger FR-Besançon,47.234539,5.901153
 Supercharger-V3 FR-Beynost,45.823795,4.997733
@@ -2675,7 +2676,7 @@ Supercharger-V4 FR-Gallargues-le-Montueux,43.7184,4.1803
 Supercharger-V3 FR-Gap,44.569565,6.104458
 Supercharger-V4 FR-Gassin,43.26302,6.58044
 Supercharger-V4 FR-Goussainville,49.021048,2.467801
-Supercharger-V4 FR-Herblay,49.0063,2.1692
+Supercharger-V4 FR-Herblay-sur-Seine,49.0063,2.1692
 Supercharger-V3 FR-Honfleur,49.414069,0.266165,55
 Supercharger-V4 FR-Ile Rousse,42.628838,8.923582
 Supercharger FR-La Léchère-les-Bains,45.51877,6.482522
@@ -4293,6 +4294,7 @@ Supercharger-V3 US-Tempe AZ,33.37862,-111.96542
 Supercharger US-Tucson AZ,32.0846,-110.80395
 Supercharger US-Tucson AZ - East Skyline Drive,32.32532,-110.9317
 Supercharger-V4 US-Tucson AZ 95 W River Rd,32.29646,-110.9738
+Supercharger-V4 US-Tucson AZ E Ajo Way,32.17638,-110.94027
 Supercharger-V3 US-Tucson AZ West River Road,32.32196,-111.04493
 Supercharger US-Tusayan AZ Supercharger,35.96945,-112.1277
 Supercharger-V3 US-White Hills AZ,35.69957,-114.47648
@@ -4693,6 +4695,7 @@ Supercharger-V4 US-Sacramento CA Florin Rd,38.49695,-121.4322
 Supercharger-V3 US-Sacramento CA Freeport Blvd,38.53372,-121.49642
 Supercharger-V4 US-Saint Helena CA,38.50384,-122.46953
 Supercharger-V3 US-Salinas CA,36.7156,-121.654
+Supercharger-V4 US-Salinas CA Northridge Dr,36.71587,-121.6554
 Supercharger-V3 US-San Anselmo CA,37.98056,-122.56575
 Supercharger-V3 US-San Ardo CA,35.97477,-120.9006
 Supercharger US-San Bernardino CA,34.0841,-117.29938
@@ -4945,6 +4948,7 @@ Supercharger US-Loveland CO,40.44143,-104.9912
 Supercharger-V3 US-Montrose CO,38.48122,-107.87638
 Supercharger-V3 US-Monument CO,39.09246,-104.8519
 Supercharger-V3 US-Mountain Village CO,37.9333,-107.85457
+Supercharger-V4 US-Pagosa Springs CO,37.25585,-107.07733
 Supercharger-V3 US-Parachute CO,39.45258,-108.0459
 Supercharger US-Poncha Springs CO,38.51137,-106.0761
 Supercharger-V3 US-Pueblo CO,38.26703,-104.6094
@@ -6067,7 +6071,7 @@ Supercharger-V3 US-Milan NM,35.18302,-107.89813
 Supercharger-V4 US-Raton NM,36.88018,-104.4393
 Supercharger US-Santa Fe NM,35.6116,-106.03146
 Supercharger-V4 US-Santa Fe NM Cerrillos Rd,35.62773,-106.02582
-Supercharger US-Santa Rosa NM,34.94717,-104.64803
+Supercharger-V4 US-Santa Rosa NM,34.94708,-104.64804
 Supercharger-V3 US-Socorro NM,34.07176,-106.8932
 Supercharger-V4 US-Taos NM,36.4033,-105.5756
 Supercharger US-Truth or Consequences NM,33.15523,-107.25165
@@ -6323,6 +6327,7 @@ Supercharger-V4 US-Henryetta OK,35.44053,-95.97013
 Supercharger-V4 US-Jenks OK Francis Energy,36.02822,-95.96146
 Supercharger-V4 US-Lawton OK Francis Energy,34.6112,-98.38872
 Supercharger-V4 US-Muskogee OK Francis Energy,35.76757,-95.40344
+Supercharger-V4 US-Norman OK Chautauqua Ave Francis Energy,35.1815,-97.45112
 Supercharger-V3 US-Oklahoma City OK,35.4617,-97.6514
 Supercharger-V4 US-Oklahoma City OK N Lincoln Blvd Francis Energy,35.52566,-97.5038
 Supercharger-V3 US-Oklahoma City OK NE 36th St,35.50878,-97.5014
@@ -6532,6 +6537,7 @@ Supercharger-V3 US-Spartanburg SC,34.93652,-81.98282
 Supercharger-V3 US-St. George SC,33.1955,-80.59985
 Supercharger-V3 US-Summerton SC,33.58692,-80.35722
 Supercharger-V3 US-Walterboro SC,32.93214,-80.6927
+Supercharger-V4 US-Walterboro SC Cane Branch Rd,32.87825,-80.71842
 Supercharger-V3 US-Yemassee SC,32.6342,-80.87515
 
 Supercharger US-Custer SD,43.76692,-103.59533
@@ -6684,6 +6690,7 @@ Supercharger-V4 US-Houston TX 3333 Telephone Rd,29.71244,-95.31473
 Supercharger-V4 US-Houston TX Franklin St,29.7666,-95.36612
 Supercharger-V3 US-Houston TX Hempstead Hwy,29.913,-95.61584
 Supercharger-V3 US-Houston TX Queensbury Lane,29.77892,-95.5592
+Supercharger-V4 US-Houston TX S Sam Houston Pkwy E,29.6015,-95.26502
 Supercharger-V4 US-Houston TX Weslayan St,29.72268,-95.44293
 Supercharger-V3 US-Houston TX Westheimer Road,29.73707,-95.46457
 Supercharger US-Houston-North TX,29.9803,-95.42156
@@ -6741,7 +6748,7 @@ Supercharger-V3 US-Royse City TX,32.9792,-96.29636
 Supercharger US-San Antonio TX,29.54902,-98.5811
 Supercharger-V3 US-San Antonio TX - North Loop 1604 East,29.61034,-98.48907
 Supercharger-V4 US-San Antonio TX Broadway,29.4322,-98.48262
-Supercharger-V4 US-San Antonio TX Horizon Hill Blvd,29.50954,-98.5543
+Supercharger-V4 US-San Antonio TX Horizon Hill Blvd,29.50964,-98.55423
 Supercharger-V4 US-San Antonio TX West Loop 1604 North,29.5037,-98.69927
 Supercharger US-San Marcos TX,29.82764,-97.97956
 Supercharger US-Schertz TX,29.59838,-98.27598
@@ -6790,6 +6797,7 @@ Supercharger-V3 US-Draper UT,40.52655,-111.88615
 Supercharger-V4 US-Farr West UT,41.30748,-112.0217
 Supercharger US-Green River UT,38.99355,-110.14056
 Supercharger-V4 US-Green River UT Main St,38.995,-110.14772
+Supercharger-V4 US-Layton UT,41.05878,-111.95886
 Supercharger-V4 US-Logan UT,41.745,-111.83273
 Supercharger-V3 US-Midvale UT,40.62253,-111.86885
 Supercharger-V4 US-Midvale UT 700 W,40.62418,-111.91043
@@ -7071,6 +7079,8 @@ Supercharger US-Rawlins WY,41.79092,-107.21024
 Supercharger US-Rock Springs WY,41.5807,-109.26228
 Supercharger US-Sheridan WY,44.8043,-106.9559
 Supercharger US-Wheatland WY,42.07245,-104.96308
+
+Supercharger-V4 US-Burlington ON Appleby Line,43.40812,-79.8058
 
 Urbancharger US-Chicago IL North Broadway,41.93749,-87.64492
 Urbancharger US-Downey CA - Lakewood Boulevard,33.9535,-118.11281
@@ -11662,6 +11672,7 @@ Electra IT-Montebello della Battaglia Via Mirabella,44.99876,9.07124
 Electra IT-Peschiera del Garda Via Tangenziale,45.43407,10.71038
 Electra IT-Pisa Via Darsena,43.70183,10.3861
 Electra IT-Portogruaro Via Prati Guori,45.79198,12.8152
+Electra IT-Savignano sul Rubicone Piazza Cristoforo Colombo,44.15735,12.42982,30
 Electra IT-Sesto San Giovanni Viale Ercole Marelli,45.52774,9.22938
 Electra IT-Stezzano Via Guzzanica,45.64659,9.62873
 Electra LU-Schengen Schengerwis,49.47933,6.36605
@@ -14083,7 +14094,7 @@ EnelX IT-Sarni Tugo,44.48638,9.93942
 EnelX IT-Sassari Via Washington,40.71075,8.55316
 EnelX IT-Sasso Marconi Vle John F. Kennedy,44.39228,11.24684
 EnelX IT-Sassuolo V. Radici in Piano,44.5594,10.8017
-EnelX IT-Savignano sul Rubicone C. Colombo,44.15777,12.42902
+EnelX IT-Savignano sul Rubicone Piazza Cristoforo Colombo,44.15777,12.42902,30
 EnelX IT-Scopello Via Mera,45.7729,8.09582
 EnelX IT-Selva Candida,41.9579,12.38587
 EnelX IT-Serravalle Scrivia Via Novi,44.73201,8.84134
