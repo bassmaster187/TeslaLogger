@@ -1,26 +1,31 @@
+using Exceptionless;
+using Exceptionless.Logging;
+using Microsoft.AspNetCore.Authentication;
+using MySql.Data.MySqlClient;
+using MySqlX.XDevAPI.Common;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Text;
-using System.IO;
-using MySql.Data.MySqlClient;
-using System.Text.RegularExpressions;
-using System.Reflection;
-using System.Threading;
-using System.Net;
-using System.IO.Compression;
-using Exceptionless;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
 using System.Diagnostics;
+using System.IO;
+using System.IO.Compression;
+using System.Net;
 using System.Net.Http;
+using System.Reflection;
+using System.Text;
+using System.Text.RegularExpressions;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace TeslaLogger
 {
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1031:Keine allgemeinen Ausnahmetypen abfangen", Justification = "<Pending>")]
     internal class UpdateTeslalogger
     {
-        private const string cmd_restart_path = "/tmp/teslalogger-cmd-restart.txt";
+       private const string cmd_restart_path = "/tmp/teslalogger-cmd-restart.txt";
         private const string TPMSSchemaVersion = "TPMSSchemaVersion";
+        private const string WatchtowerAuthorizationToken = "Bearer teslalogger";
+        private const int WatchtowerTimeoutSeconds = 30;
         private static bool shareDataOnStartup; // defaults to false;
         private static Timer timer;
 
@@ -1267,7 +1272,7 @@ PRIMARY KEY(id)
             return temp;
         }
 
-        public static async void DownloadUpdateAndInstall()
+        public static async Task DownloadUpdateAndInstall()
         {
             DownloadUpdateAndInstallStarted = true;
             CheckNET8Installed();
@@ -1299,12 +1304,9 @@ PRIMARY KEY(id)
             Logfile.Log("Start update");
             ExceptionlessClient.Default.CreateLog("Install", "Start update from " + Assembly.GetExecutingAssembly().GetName().Version).Submit();
 
-            if (Tools.IsDockerNET8())
+           if (Tools.IsDockerNET8())
             {
-                Logfile.Log("use Watchtower");
-                HttpClient client = new HttpClient();
-                client.DefaultRequestHeaders.Add("Authorization", "Bearer teslalogger");
-                client.GetAsync("http://watchtower:8080/v1/update").Wait();
+                await WatchtowerUpdateAsync();
                 return;
             }
             else if (Tools.IsMono() || Tools.IsDotnet8())
@@ -1543,6 +1545,43 @@ PRIMARY KEY(id)
                     }
                 }
 
+            }
+        }
+
+        internal static async Task WatchtowerUpdateAsync()
+        {
+            try
+            {
+                Logfile.Log("use Watchtower");
+
+                using var client = new HttpClient();
+                var cts = new CancellationTokenSource(TimeSpan.FromSeconds(WatchtowerTimeoutSeconds));
+                client.DefaultRequestHeaders.Add("Authorization", WatchtowerAuthorizationToken);
+
+                var response = await client.PostAsync("http://watchtower:8080/v1/update", null, cts.Token);
+                var resultContent = await response.Content.ReadAsStringAsync(cts.Token);
+                Logfile.Log("Watchtower update response: " + resultContent);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    Logfile.Log("Watchtower update triggered successfully.");
+                    ExceptionlessClient.Default.CreateLog("Watchtower", "Update OK: " + resultContent).Submit();
+                }
+                else
+                {
+                    Logfile.Log("Watchtower update failed with status code: " + response.StatusCode);
+                    ExceptionlessClient.Default.CreateLog("Watchtower", $"Update failed: [{response.StatusCode}] - {resultContent}", LogLevel.Error).Submit();
+                }
+            }
+            catch (OperationCanceledException)
+            {
+                Logfile.Log("Watchtower update timed out after " + WatchtowerTimeoutSeconds + " seconds");
+                ExceptionlessClient.Default.CreateLog("Watchtower", $"Update timed out after {WatchtowerTimeoutSeconds}s", LogLevel.Error).Submit();
+            }
+            catch (Exception ex)
+            {
+                Logfile.Log("Watchtower update error: " + ex.Message);
+                ex.ToExceptionless().FirstCarUserID().Submit();
             }
         }
 
