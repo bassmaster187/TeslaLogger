@@ -2064,7 +2064,7 @@ Supercharger-V3 DE-Kleinostheim,49.993998,9.070655
 Supercharger-V4 DE-Kloster Lehnin,52.3478,12.76107
 Supercharger-V3 DE-Knetzgau,49.982399,10.555616
 Supercharger-V4 DE-Koblenz-Bubenheim (Globus),50.385984,7.553784
-Supercharger-V4 DE-Koblenz-Metternich,50.3463,7.5073
+Supercharger-V4 DE-Koblenz-Metternich,50.3461,7.50777
 Supercharger-V4 DE-Konstanz Lago,47.656219,9.176227
 Supercharger-V4 DE-Kornwestheim,48.86046,9.19826
 Supercharger-V4 DE-Krefeld,51.321583,6.6018
@@ -8159,7 +8159,7 @@ Allego DE-Oldenburg Posthalterweg,53.16134,8.17273
 Allego DE-Oldenburg Stubbenweg,53.18047,8.22845
 Allego DE-Osnabrück Hannoversche Straße,52.2604,8.07672
 Allego DE-Osnabrück Mittelburgstraße,52.27573,8.07396
-Allego DE-Ottersberg Posthausen,53.05756,9.16587,12
+Allego DE-Ottersberg Posthausen,53.05756,9.16587,10
 Allego DE-Overath Großbernsau,50.93958,7.2936
 Allego DE-Oyten Hauptstraße,53.06006,9.0181,25
 Allego DE-Paderborn Frankfurter Weg,51.69675,8.7347
@@ -8829,6 +8829,7 @@ ARAL DE-Wörth an der Isar Siemensstraße,48.62479,12.32348
 ARAL DE-Würzburg Albert-Einstein-Straße,49.80853,9.88637
 ARAL DE-Zwickau Leipziger Straße,50.74286,12.4886
 ARAL DE-Zwiesel Bärnzeller Straße,49.00113,13.22008
+ARAL LU-Schengen Rte du Vin,49.4756,6.3666
 
 Astor TR-Afyonkarahisar Merkez Dörtyol,38.79381,30.4597
 
@@ -11804,7 +11805,7 @@ ELEN HR-Požega Sokolova,45.33072,17.67491
 ELEN HR-Pula,44.83862,1383365.0
 ELEN HR-Pula Verudela,44.83859,13.83366
 ELEN HR-Rastovača,44.9064,15.61255
-ELEN HR-Rašćane Gornje,43.32073,17.16635,15
+ELEN HR-Rašćane Gornje,43.3208,17.1664,15
 ELEN HR-Rijeka Gomila,45.32812,14.44225
 ELEN HR-Rovinj Ul. Giordana Paliage,45.08565,13.63892
 ELEN HR-Rovinj Ul. Giosue Carduccia,45.08107,13.64122
@@ -13902,7 +13903,7 @@ EnBW DE-Wurzen,51.38171,12.73944
 EnBW DE-Wurzen Tedi,51.37072,12.74628
 EnBW DE-Wyhl Pfarrgässle,48.16828,7.65069
 EnBW DE-Wächtersbach Main-Kinzig-Straße,50.25023,9.28937
-EnBW DE-Wörth am Rhein Maximilianstraße,49.0405,8.29287
+EnBW DE-Wörth am Rhein Maximilianstraße,49.03957,8.2936
 EnBW DE-Wörth an der Donau Im Gewerbepark,49.001,12.36548
 EnBW DE-Würselen Adenauerstraße,50.80618,6.15241
 EnBW DE-Würselen Schumanstraße,50.8075,6.15188
@@ -14964,8 +14965,8 @@ EVN AT-Wien Linzer Straße,48.20324,16.24355
 EVN AT-Wiener Neudorf IZ NÖ-Süd Straße,48.07747,16.32508
 EVN AT-Wiener Neustadt Günser Straße,47.8022,16.24043
 EVN AT-Wiener Neustadt Neunkirchner Straße,47.80974,16.24378
-EVN AT-Wiener Neustadt Puchberger Straße,47.80452,16.21039,6
-EVN AT-Wiener Neustadt Puchberger Straße,47.80466,16.21039,8
+EVN AT-Wiener Neustadt Puchberger Straße,47.8045,16.2103,11
+EVN AT-Wiener Neustadt Puchberger Straße,47.80467,16.21036,11
 EVN AT-Wiener Neustadt Stadionstraße,47.82817,16.24952
 EVN AT-Wolkersdorf Julius Bittner Platz,48.3852,16.51515
 EVN AT-Ybbsitz Alte Poststraße,47.94852,14.89427
@@ -15887,8 +15888,7 @@ EWE-GO DE-Otterndorf Goethestraße,53.81084,8.89806
 EWE-GO DE-Otterndorf Raiffeisenstraße,53.8047,8.88068
 EWE-GO DE-Otterndorf Stader Straße,53.80932,8.9117
 EWE-GO DE-Ottersberg Grüne Straße,53.11129,9.14256
-EWE-GO DE-Ottersberg Posthausen,53.05757,9.16605,10
-EWE-GO DE-Ottersberg Posthausen,53.06058,9.17106
+EWE-GO DE-Ottersberg Posthausen,53.05758,9.16626,20
 EWE-GO DE-Overath Burghof,50.94263,7.2973
 EWE-GO DE-Paderborn Frankfurter Weg,51.70514,8.72442
 EWE-GO DE-Paderborn Paderborner Straße,51.7323,8.70486
@@ -17773,6 +17773,7 @@ Ionity AT-St. Lorenzen im Mürztal,47.46875,15.34432,25
 Ionity AT-St. Valentin,48.19637,14.52835,16
 Ionity AT-Steinhäusl,48.15784,15.9404
 Ionity AT-Trieben Europastraße,47.49023,14.48541,30
+Ionity AT-Wiener Neustadt Puchberger Straße,47.80468,16.20982,25
 Ionity AT-Ybbs an der Donau Bergland Center,48.1611,15.10712,30
 Ionity BE-Bierset,50.65185,5.47375
 Ionity BE-Froyennes North,50.61957,3.33894
@@ -18152,7 +18153,7 @@ Ionity GB-Polmadie,55.83723,-4.24249
 Ionity GB-Stafford Spitfire Cl,52.83142,-2.13565
 Ionity HR-Gospić Budačka ul.,44.57699,15.39295
 Ionity HR-Kanfanar Okreti,45.1117,13.80262
-Ionity HR-Rašćane Gornje,43.3206,17.1662,15
+Ionity HR-Rašćane Gornje,43.3205,17.16605,25
 Ionity HR-Rijeka Osječka ul.,45.34964,14.41835
 Ionity HR-Sop,45.78354,16.15155
 Ionity HR-Vrankovec,46.08676,15.91246
@@ -18387,7 +18388,7 @@ Jenny DE-Bad Oldesloe Lily-Braun Straße,53.80245,10.40282
 JET AT-Linz Freistädter Straße,48.3283,14.32136
 JET AT-Villach Badstubenweg,46.63153,13.82448
 JET AT-Wien Laxenburger Straße,48.1358,16.35648
-JET AT-Wiener Neustadt Puchberger Straße,47.8055,16.21124,30
+JET AT-Wiener Neustadt Puchberger Straße,47.8055,16.21124,20
 JET DE-Bad Doberan An der Krim,54.10828,11.91843
 JET DE-Bayreuth Justus-Liebig-Straße,49.93345,11.5628
 JET DE-Beckum Neubeckumer Straße,51.7698,8.04084
@@ -22339,10 +22340,13 @@ Pfalzwerke DE-Wörth Am Kühgrunddamm 4,49.04052,8.28902
 Pfalzwerke DE-Wörth am Rhein Cany-Barville-Straße,49.03238,8.28797
 Pfalzwerke DE-Wörth am Rhein Hanns-Martin-Schleyer Straße,49.05111,8.25314
 Pfalzwerke DE-Wörth am Rhein Marktstraße,49.05211,8.25306
+Pfalzwerke DE-Wörth am Rhein Maximilianstraße,49.03954,8.2948
 Pfalzwerke DE-Würzburg Am Handelshof,49.81616,9.9814
 Pfalzwerke DE-Würzburg Robert-Bunsen-Straße,49.79722,9.99129
 Pfalzwerke DE-Zweibrücken Londoner Bogen,49.23082,7.40606
 Pfalzwerke DE-Zweibrücken Wilkstraße,49.25174,7.34451
+
+Pilot-FlyingJ US-Hayti MO MO-84,36.22725,-89.72486
 
 Pirk DE-Radevormwald Heisenbergstraße,51.20315,7.37866
 
