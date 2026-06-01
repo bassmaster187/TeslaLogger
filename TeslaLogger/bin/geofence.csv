@@ -9591,7 +9591,8 @@ ChargePoint DE-Schorndorf 11/1 Gerberstraße,48.80473,9.51555
 ChargePoint DE-Schorndorf 40 Baumwasenstraße,48.80665,9.50994
 ChargePoint DE-Schwäbisch Gmünd 40 Im Benzfeld,48.80584,9.84713
 ChargePoint DE-Schwäbisch Gmünd Buchstraße 200,48.80103,9.83309
-ChargePoint DE-Schöneck/Vogtland Waldstraße 7,50.39494,12.34484
+ChargePoint DE-Schöneck/Vogtland Waldstraße,50.39435,12.3436
+ChargePoint DE-Schöneck/Vogtland Waldstraße,50.39494,12.34484
 ChargePoint DE-Schönefeld 61 Hans-Grade-Allee,52.39603,13.51707
 ChargePoint DE-Schöngeising Gusso-Reuss-Straße 12,48.14604,11.20444
 ChargePoint DE-Sebnitz 72 Schandauer Straße,50.96775,14.25426
@@ -10742,6 +10743,7 @@ e-motum FR-Calvi Rue Albert 1er,42.56798,8.7585,25
 e-motum FR-Corte Route d´Ajaccio,42.30187,9.15725
 e-motum FR-Ghisonaccia Av. du 9 Septembre,42.01729,9.40643
 e-motum FR-Lucciana Airport of Bastia Poretta,42.54707,9.47971
+e-motum FR-Piana,42.2382,8.6364
 e-motum FR-Porto-Vecchio Rue Henri Frenay,41.60633,9.2779,30
 e-motum FR-Serra-di-Ferro Lieu-dit Porto Pollo,41.70757,8.79374
 e-motum FR-Vivario T20,42.16961,9.16584
@@ -12570,7 +12572,7 @@ EnBW DE-Gießen Bauhaus,50.57178,8.68592
 EnBW DE-Gießen Marburger Straße,50.5941,8.68164
 EnBW DE-Gießen Stefan-Bellof-Straße,50.57515,8.7118
 EnBW DE-Gifhorn Braunschweiger Straße,52.47795,10.54488
-EnBW DE-Glauchau,50.83976,12.54113
+EnBW DE-Glauchau Waldenburger Straße,50.83976,12.54113
 EnBW DE-Glinde Berliner Straße,53.54651,10.23234
 EnBW DE-Goslar,51.93255,10.40968
 EnBW DE-Gottmadingen Kornblumenweg,47.73646,8.78699,30
@@ -17369,6 +17371,7 @@ iHunt-EV RO-Târgu Mureș Strada Regele Ferdinand,46.53285,24.59213
 iHunt-EV RO-Șelimbăr Bulevardul Mihai Viteazul,45.77288,24.1629
 
 IKB AT-Innsbruck DEZ,47.26221,11.42823,25
+IKB AT-Innsbruck Karl-Kapferer-Straße,47.27316,11.3965
 IKB AT-Innsbruck Salurner Straße,47.26248,11.39736
 IKB AT-Schönberg im Stubaital Europabrücke-Parkplatz,47.19743,11.39773
 
@@ -17780,6 +17783,7 @@ Ionity AT-Pinkafeld,47.37395,16.09384
 Ionity AT-Raststätte Mondsee,47.83664,13.39583,30
 Ionity AT-St. Georgen im Attergau Seeringstraße,47.9293,13.50095,30
 Ionity AT-St. Lorenzen im Mürztal,47.46875,15.34432,25
+Ionity AT-St. Pölten Severstraße,48.18004,15.6144
 Ionity AT-St. Valentin,48.19637,14.52835,16
 Ionity AT-Steinhäusl,48.15784,15.9404
 Ionity AT-Trieben Europastraße,47.49023,14.48541,30
@@ -20680,6 +20684,7 @@ mblty DE-Raststätte Göttingen West,51.49487,9.87619,10
 mblty DE-Raststätte Kraichgau Nord,49.2442,8.87885
 mblty DE-Raststätte Kraichgau Süd,49.2409,8.87956
 mblty DE-Raststätte Werratal,51.00686,10.18088
+mblty DE-Schnelldorf Rudolf-Diesel-Straße,49.1722,10.24142
 
 medl DE-Mülheim an der Ruhr Bergstraße,51.42844,6.8724
 
@@ -26266,6 +26271,7 @@ WEMAG DE-Bützow Vor dem Rühner Tor,53.84804,11.9769
 WEMAG DE-Dobbertin Goldberger Straße,53.62034,12.08215
 WEMAG DE-Lübz Am Fuchsberg,53.46397,12.04595
 WEMAG DE-Ostseebad Binz Proraer Allee,54.4149,13.59063
+WEMAG DE-Ostseebad Boltenhagen An der Weißen Wiek,53.9775,11.24128
 WEMAG DE-Ostseebad Boltenhagen Zum Sportplatz,53.98187,11.19337
 WEMAG DE-Schwerin Am Fasanenhof,53.60765,11.3682
 WEMAG DE-Schwerin Am Grünen Tal,53.5971,11.44035
