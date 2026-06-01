@@ -1,39 +1,28 @@
-<!DOCTYPE html>
 <?php
-require("language.php");
-?>
-<html lang="<?php echo $json_data["Language"]; ?>">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Teslalogger Restore</title>
-	<link rel="stylesheet" href="static/jquery/ui/1.12.1/themes/smoothness/jquery-ui.css">
-	<link rel="stylesheet" href="static/teslalogger_style.css?v=4">
-	<script src="static/jquery/jquery-1.12.4.js"></script>
-	<script src="static/jquery/ui/1.12.1/jquery-ui.js"></script>
-	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
-	<script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
-	<script>
-	
-	$( function() {
-		// $( "restorebutton" ).button();
-	
-	});
-    
+// Disable timeout for large file uploads
+set_time_limit(0);
 
-</script>
-<?php
+// Custom logger that doesn't block on HTTP
+function quick_logger($t) {
+    $logfile = "/etc/teslalogger/nohup.out";
+    if (file_exists("/tmp/teslalogger-DOCKER")) {
+        file_put_contents("/tmp/restore_debug.log", date("d.m.Y H:i:s") . " - " . $t . "\n", FILE_APPEND);
+        return;
+    }
+    file_put_contents($logfile, date("d.m.Y H:i:s") . " : RESTORE - ". $t ."\r\n", FILE_APPEND);
+}
 
-logger("restore_upload.php!");
+quick_logger("restore_upload.php!");
 
-$target_dir = "uploads/";
-$uploadOk = 1;
+header('Content-Type: application/json');
+header('Connection: close');
+header('Content-Encoding: none');
+header('X-Accel-Buffering: no');
 
-if(isset($_POST["submit"])) {
-    if (!isset($_FILES["fileToUpload"])) {
-        logger("Restore error: No fileToUpload in \$_FILES");
-        echo("Error: No file uploaded.<br>");
-    } elseif ($_FILES["fileToUpload"]["error"] !== UPLOAD_ERR_OK) {
+$session_id = "";
+
+if (isset($_FILES["fileToUpload"])) {
+    if ($_FILES["fileToUpload"]["error"] !== UPLOAD_ERR_OK) {
         $upload_errors = [
             UPLOAD_ERR_INI_SIZE => "Upload exceeds server limit (php.ini)",
             UPLOAD_ERR_FORM_SIZE => "Upload exceeds form limit",
@@ -44,126 +33,110 @@ if(isset($_POST["submit"])) {
             UPLOAD_ERR_EXTENSION => "A PHP extension stopped the upload"
         ];
         $err_msg = $upload_errors[$_FILES["fileToUpload"]["error"]] ?? "Unknown error (code: {$_FILES['fileToUpload']['error']})";
-        logger("Restore error: File upload failed - $err_msg");
-        echo("Error: File upload failed - $err_msg<br>");
+        quick_logger("Restore error: File upload failed - $err_msg");
+        echo json_encode(["error" => "File upload failed - $err_msg"]);
+        exit;
     } else {
         $originalfilename = $_FILES["fileToUpload"]["name"];
-        $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
-        $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
         $file_name = $_FILES["fileToUpload"]["tmp_name"];
 
-        logger("Restore: Uploading file: $originalfilename (" . filesize($file_name) . " bytes)");
-        echo("filename:" . $file_name ." <br>Size compressed:". filesize($file_name));
-        echo("<br>Original filename:" . $originalfilename);
-        logger("Filesize compressed: ". filesize($file_name));
+        quick_logger("Restore: Uploading file: $originalfilename (" . filesize($file_name) . " bytes)");
+        quick_logger("Restore: tmp_name: $file_name");
+
+        if (!file_exists($file_name)) {
+            quick_logger("Restore error: Temp file does not exist: $file_name");
+            echo json_encode(["error" => "Temp file does not exist."]);
+            exit;
+        }
 
         if (!rename($file_name, $file_name.".gz")) {
-            logger("Restore error: Failed to rename temp file to .gz");
-            echo("Error: Failed to process uploaded file.<br>");
+            quick_logger("Restore error: Failed to rename temp file to .gz");
+            echo json_encode(["error" => "Failed to process uploaded file."]);
             exit;
         }
 
         $file_name = $file_name.".gz";
 
-        // Raising this value may increase performance
-        $buffer_size = 4096; // read 4kb at a time
-        $out_file_name = "/tmp/mybackup.sql";
+        // Generate unique session ID
+        $session_id = "restore_" . uniqid() . "_" . time();
+        $progress_file = "/tmp/{$session_id}_progress.json";
+        $pid_file = "/tmp/{$session_id}_pid.txt";
 
-        // Open our files (in binary mode)
-        $file = gzopen($file_name, 'rb');
-        if (!$file) {
-            logger("Restore error: Failed to open gz file: $file_name");
-            echo("Error: Failed to open compressed file.<br>");
-            exit;
-        }
-        $out_file = fopen($out_file_name, 'wb');
-        if (!$out_file) {
-            logger("Restore error: Failed to create output file: $out_file_name");
-            echo("Error: Failed to create output file.<br>");
-            exit;
-        }
+        // Initialize progress file
+        file_put_contents($progress_file, json_encode([
+            "status" => "decompressing",
+            "progress" => 0,
+            "message" => "Decompressing backup file..."
+        ]));
 
-        // Keep repeating until the end of the input file
-        while(!gzeof($file)) {
-            // Read buffer-size bytes
-            // Both fwrite and gzread and binary-safe
-            fwrite($out_file, gzread($file, $buffer_size));
+        $out_file_name = "/tmp/{$session_id}.sql";
+
+        // Determine MySQL command
+        if (file_exists("/tmp/teslalogger-DOCKER")) {
+            $mysql_cmd = "/usr/bin/mysql -hdatabase -uroot -pteslalogger -Dteslalogger";
+        } else {
+            $mysql_cmd = "/usr/bin/mysql -uroot -pteslalogger -Dteslalogger";
         }
 
-        // Files are done, close files
-        fclose($out_file);
-        gzclose($file);
+        // Write the full restore script that does everything in background
+        $full_script = "/tmp/{$session_id}_full.sh";
+        
+        // Use single quotes for PHP variables to prevent shell interpolation
+        // Use $'...' syntax or escaped dollar signs for shell variables
+        $script_lines = [];
+        $script_lines[] = '#!/bin/bash';
+        $script_lines[] = '';
+        $script_lines[] = 'LOGFILE="/tmp/' . $session_id . '_log.txt"';
+        $script_lines[] = 'PROGRESS_FILE="/tmp/' . $session_id . '_progress.json"';
+        $script_lines[] = 'SQL_FILE="' . $out_file_name . '"';
+        $script_lines[] = 'GZ_FILE="' . $file_name . '"';
+        $script_lines[] = '';
+        $script_lines[] = '# Start decompression';
+        $script_lines[] = 'echo "Starting decompression..." >> "$LOGFILE"';
+        $script_lines[] = 'gunzip -c "$GZ_FILE" > "$SQL_FILE" 2>> "$LOGFILE"';
+        $script_lines[] = 'DECOMP_SIZE=$(wc -c < "$SQL_FILE")';
+        $script_lines[] = 'echo "Decompression complete. Size: $DECOMP_SIZE" >> "$LOGFILE"';
+        $script_lines[] = 'echo "{\"status\":\"ready\",\"progress\":10,\"message\":\"Decompression complete. File size: $DECOMP_SIZE bytes. Starting database restore...\"}" > "$PROGRESS_FILE"';
+        $script_lines[] = '';
+        $script_lines[] = '# Remove problematic MariaDB comments';
+        $script_lines[] = 'grep -v "/\\*M!999999" "$SQL_FILE" > "$SQL_FILE.tmp" && mv "$SQL_FILE.tmp" "$SQL_FILE"';
+        $script_lines[] = '';
+        $script_lines[] = '# Run MySQL restore';
+        $script_lines[] = 'echo "Starting MySQL restore..." >> "$LOGFILE"';
+        $script_lines[] = $mysql_cmd . ' < "$SQL_FILE" 2>> "$LOGFILE"';
+        $script_lines[] = 'RESULT=$?';
+        $script_lines[] = 'echo "MySQL restore finished with result: $RESULT" >> "$LOGFILE"';
+        $script_lines[] = '';
+        $script_lines[] = 'if [ $RESULT -eq 0 ]; then';
+        $script_lines[] = '  echo "{\"status\":\"completed\",\"progress\":100,\"message\":\"Restore completed successfully! Please reboot.\"}" > "$PROGRESS_FILE"';
+        $script_lines[] = 'else';
+        $script_lines[] = '  echo "{\"status\":\"error\",\"progress\":0,\"message\":\"Restore failed with exit code: $RESULT\"}" > "$PROGRESS_FILE"';
+        $script_lines[] = 'fi';
+        
+        $full_content = implode("\n", $script_lines) . "\n";
+        
+        file_put_contents($full_script, $full_content);
+        chmod($full_script, 0755);
 
-        logger("Decompression complete, output: $out_file_name (" . filesize($out_file_name) . " bytes)");
+        quick_logger("Restore: Script content:\n" . $full_content);
 
-        if (strpos($originalfilename, "geofence-private") === 0)
-        {
-            echo("<br>Geofence-Private CSV file detected.<br>");
-            $csvtext = file_get_contents($out_file_name);
-            if ($csvtext === false) {
-                logger("Restore error: Failed to read decompressed geofence file");
-                echo("Error: Failed to read decompressed file.<br>");
-                exit;
-            }
-            $url = GetTeslaloggerURL("writefile/geofence-private.csv");
-            logger("Restoring geofence-private.csv to: $url");
-            $result = file_get_contents($url, false, stream_context_create([
-            'http' => [
-                    'method' => 'POST',
-                    'user_agent' => 'PHP',
-                    'header'  => "Content-type: application/x-www-form-urlencoded\r\nContent-Length: ".strlen($csvtext)."\r\n",
-                    'content' => $csvtext
-            ]    
-            ]));
-            logger("Geofence restore result: " . var_export($result, true));
-        }
-        else
-        {
-            echo("<br>Decompressed file: <br>");
-            echo("<br>filename:" . $out_file_name ." Size:". filesize($out_file_name));
+        // Start the full restore script in background
+        exec("nohup bash $full_script > /tmp/{$session_id}_script_out.txt 2>&1 & echo \$!", $output, $return_var);
+        $background_pid = array_pop($output);
+        quick_logger("Restore: Background process PID: $background_pid, return var: $return_var");
 
-            logger("Filesize decompressed: ". filesize($out_file_name));
-
-            logger("Start Restore");
-            echo("<br>Start Restore:<br>");
-            $return_var = NULL;
-            $output = NULL;
-
-            if (file_exists("/tmp/teslalogger-DOCKER"))
-            {
-                echo("<br>Docker detected, using database host 'database'");
-                logger("Docker detected, using database host 'database'");
-                $sed_result = exec("sed -i '/\\/\\*M!999999\\\\-/d' /tmp/mybackup.sql", $sed_output, $sed_return); // bug in mariaDB - removes special comment: enable sandbox mode
-                logger("Sed command return: $sed_return");
-
-                logger("start mysql restore");
-                $command = exec("/usr/bin/mysql -hdatabase -uroot -pteslalogger -Dteslalogger < /tmp/mybackup.sql", $output, $return_var);
-                logger("MySQL restore return var: $return_var");
-            }
-            else {
-                $command = exec("/usr/bin/mysql -uroot -pteslalogger -Dteslalogger < /tmp/mybackup.sql", $output, $return_var);
-                logger("MySQL restore return var: $return_var");
-            }
-
-            logger("Output from mysql: " . var_export($output));
-            echo "<br>Output from mysql: <br>";
-            foreach ($output as $line) {
-                echo htmlspecialchars($line) . "<br>";
-            }
-            echo("<br>Restore finished. Please Reboot!");
-            logger("Restore completed successfully");
-        }
-
-        if (file_exists($out_file_name))
-            unlink($out_file_name);
-
+        // Clean up uploaded file immediately
         if (file_exists($file_name))
             unlink($file_name);
 
-        logger("Restore: Cleanup complete");
+        quick_logger("Restore: About to send response");
+        echo json_encode([
+            "session_id" => $session_id,
+            "status" => "started",
+            "message" => "Restore started in background."
+        ]);
+        quick_logger("Restore: Response sent");
+        exit;
     }
-} else {
-    logger("Restore: No submit received");
 }
 ?>
-</div>
