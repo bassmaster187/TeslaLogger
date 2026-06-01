@@ -1,21 +1,33 @@
 # TeslaLogger — Copilot Instructions
 
+## Repository
+- **Owner:** bassmaster187 · **Default branch:** `master`
+- **GitHub:** github.com/bassmaster187/TeslaLogger
+
 ## Platform & Stack
 - **Target:** Raspberry Pi 3B · ARM32 (ARMv7) · 1 GB RAM · SD card (slow I/O)
 - **Framework:** .NET 8 (`net8.0`) · C# 12 · nullable reference types enabled
 - **Solution:** `TeslaLoggerNET8.sln` (PRIMARY) · `TeslaLogger.sln` deprecated (.NET 4.8)
-- **Database:** MariaDB 10.3.39 (InnoDB, Dynamic row format)
+- **Database:** MariaDB 10.3.39 (InnoDB, Dynamic row format) on RasPi
+- **Database:** MariaDB 10.4.7 (InnoDB, Dynamic row format) on Docker
 - **Key packages:** Newtonsoft.Json, SkiaSharp (+ NativeAssets.Linux), MySql.Data, M2Mqtt, NetMQ, Exceptionless, Microsoft.AspNetCore.SystemWebAdapters
 - **External:** Grafana (docker), Apache Kafka (optional), Exceptionless (self-hosted), OpenStreetMap/MapQuest (optional)
 
 ## Project Structure
 ```
-TeslaLogger/          # Main app (TeslaLoggerNET8.csproj) — Program.cs, WebServer.cs, DBHelper.cs, Car.cs, MQTT*.cs, TelemetryConnection*.cs, ElectricityMeter*.cs, www/
-Logfile/              # Logging lib (LogfileNET8.csproj) — Logfile.cs
-OSMMapGenerator/      # Map tiles (OSMMapGeneratorNET8.csproj)
-srtm/src/SRTM/        # Elevation data (SRTMNET8.csproj) — SRTMData.cs
-KafkaConnector/       # Kafka integration
-TLNUnit/              # NUnit tests
+TeslaLogger/                    # Main app (TeslaLoggerNET8.csproj) — Program.cs, WebServer.cs, DBHelper.cs, Car.cs, MQTT*.cs, TelemetryConnection*.cs, ElectricityMeter*.cs, www/
+TeslaLogger/TeslaLogger.csproj  # DEPRECATED — .NET Framework 4.8
+Logfile/                        # Logging lib (LogfileNET8.csproj) — Logfile.cs
+OSMMapGenerator/                # Map tiles (OSMMapGeneratorNET8.csproj) — SkiaSharp
+srtm/src/SRTM/                  # Elevation data (SRTMNET8.csproj) — SRTMData.cs
+KafkaConnector/                 # Kafka + Protobuf integration (KafkaConnector.csproj) — Confluent.Kafka, .proto files
+UnitTestsTeslalogger/           # Tests (UnitTestsTeslaloggerNET8.csproj) — MSTest + NUnit + Selenium
+TLUpdate/                       # Self-update utility (TLUpdate.csproj)
+MQTTClient/                     # MQTT client lib (MQTTClientNET8.csproj)
+KML_Import/                     # KML import tool (KML_Import.csproj / KML_Import.sln)
+TeslaFi-Import/                 # TeslaFi data import (TeslaFi-Import.csproj / TeslaFi-Import.sln)
+Teslamate-Import/               # Teslamate data import (Teslamate-Import.csproj / Teslamate-Import.sln)
+MockServer/                     # Mock server for testing
 ```
 
 ## MariaDB — Local Access
@@ -48,6 +60,7 @@ TLNUnit/              # NUnit tests
 - Parameterized queries only (never string concatenation for SQL).
 - Standard pattern: `await using var conn = new MySqlConnection(...); await conn.OpenAsync(ct); await using var cmd = new MySqlCommand(sql, conn);`
 - Ensure indexes on queried columns. Avoid N+1 patterns.
+- Schema: `TeslaLogger/sqlschema.sql`
 
 ### Null Safety
 - Nullable reference types enabled. Use `?` for nullable returns, `??` for safe defaults.
@@ -60,7 +73,7 @@ TLNUnit/              # NUnit tests
 ### Security
 - Admin passwords: bcrypt or equivalent.
 - Tesla API tokens: encrypted at rest.
-- DB credentials: environment variables only.
+- DB credentials: environment variables only (`.env` file).
 - API commands: validate against whitelist (`AllowedTeslaAPICommands`).
 - File paths: validate to prevent directory traversal.
 - HTTP listener: bind to specific ports. No external exposure without reverse proxy.
@@ -69,6 +82,11 @@ TLNUnit/              # NUnit tests
 ### Error Handling & Logging
 - Wrap in try-catch, log with `Logfile.Log()` / Exceptionless. Never swallow exceptions silently.
 - Log levels: Error, Warning, Info, Debug, SQL.
+- Exception files written to `Exception/` folder.
+
+### Protobuf (KafkaConnector)
+- `.proto` files in `KafkaConnector/protos/` — use `Grpc.Tools` for code generation.
+- Topics: `vehicle_data`, `vehicle_alert`, `vehicle_metric`, `vehicle_connectivity`, `vehicle_error`.
 
 ## Naming & Style
 - Classes/methods: `PascalCase`. Fields: `_camelCase`. Constants: `PascalCase`. Interfaces: `IPascalCase`.
@@ -76,10 +94,13 @@ TLNUnit/              # NUnit tests
 - XML docs on public APIs. Inline comments for complex logic. TODO → GitHub issue ref.
 
 ## Testing
-- **Unit:** NUnit in `TLNUnit/`. Target >60% coverage on critical paths.
-- **Focus:** State machine (`Car.TeslaState`), data parsing, API command validation.
-- **Integration:** MariaDB test containers, MQTTnet mock, MockServer for Tesla API.
-- **Performance:** Memory leak checks, DB write throughput, concurrent connections.
+- **Framework:** Mixed — MSTest (`MSTest.TestAdapter`, `MSTest.TestFramework`) + NUnit (`NUnit3TestAdapter`) + Moq
+- **UI:** Selenium with ChromeDriver
+- **Test project:** `UnitTestsTeslalogger/UnitTestsTeslaloggerNET8.csproj`
+- **Focus:** State machine (`Car.TeslaState`), data parsing, API command validation
+- **Integration:** MariaDB test containers, MQTTnet mock, MockServer for Tesla API
+- **Performance:** Memory leak checks, DB write throughput, concurrent connections
+- **Test data:** `UnitTestsTeslalogger/testdata/`
 
 ## Build & Run
 ```bash
@@ -87,14 +108,21 @@ dotnet restore TeslaLoggerNET8.sln
 dotnet build TeslaLoggerNET8.sln -c Debug
 dotnet publish TeslaLogger/TeslaLoggerNET8.csproj -c Release -r linux-arm --self-contained false -o ./publish
 dotnet run --project TeslaLogger/TeslaLoggerNET8.csproj
-dotnet test TLNUnit/TLNUnit.csproj
+dotnet test UnitTestsTeslalogger/UnitTestsTeslaloggerNET8.csproj
 docker compose up -d
 ```
 
 ## Docker
-- Multi-stage build: `mcr.microsoft.com/dotnet/sdk:8.0` → `mcr.microsoft.com/dotnet/aspnet:8.0`
-- Services: teslalogger, mariadb:10.3, grafana:latest
-- Volume: `./data:/app/data`
+- **Base image:** `bassmaster187/teslalogger-base:1.0.0` (custom)
+- **Services (docker-compose.yml):**
+  - `teslalogger` — main app (`bassmaster187/teslalogger:latest`)
+  - `database` — MariaDB 10.4.7
+  - `grafana` — dashboards (`bassmaster187/teslalogger-grafana:latest`)
+  - `webserver` — reverse proxy (`bassmaster187/teslalogger-webserver:latest`)
+- **Entry point:** `dotnet ./TeslaLoggerNET8.dll`
+- **Volumes:** named volumes for data, SQL schema, Grafana dashboards/plugins
+- **Auto-update:** Watchtower labels on all containers
+- **Config:** `.env` file for ports, paths, timezone
 
 ## Architecture Decisions
 - **ADR-001:** .NET 8 LTS (ARM32 support, performance, reduced footprint)
