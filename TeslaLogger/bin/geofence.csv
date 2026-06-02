@@ -2029,6 +2029,7 @@ Supercharger-V3 DE-Herzsprung,53.06958,12.535
 Supercharger-V3 DE-Herzsprung,53.06984,12.53516
 Supercharger-V3 DE-Herzsprung,53.07247,12.52542
 Supercharger-V4 DE-Hessisch Lichtenau,51.19784,9.74687
+Supercharger-V3 DE-Hilden,51.19008,6.93787,25
 Supercharger DE-Hilden,51.1912,6.93666
 Supercharger-V3 DE-Hilden,51.19189,6.93536,80
 Supercharger-V4 DE-Hildesheim (Cafe Del Sol),52.15672,9.9727
@@ -7150,6 +7151,7 @@ Tesla Service Center DK-Kastrup,55.61472,12.61333
 Tesla Service Center DK-København,55.64863,12.56614
 Tesla Service Center FI-Helsinki-Vantaa,60.27046,24.87716
 Tesla Service Center FI-Raisio,60.49328,22.20386
+Tesla Service Center FI-Vantaa,60.28094,24.82127
 Tesla Service Center FR-Aix-en-Provence,43.47875,5.36547
 Tesla Service Center FR-Bordeaux Mérignac,44.83382,-0.67546
 Tesla Service Center FR-Dardilly,45.8082,4.76526
@@ -10257,7 +10259,6 @@ Comfortcharge DE-Königswinter Meerkatzstraße,50.6728,7.1939
 Comfortcharge DE-Landshut Siemensstr,48.55557,12.15257
 Comfortcharge DE-Langenhagen Alt Godshorn,52.43943,9.69739
 Comfortcharge DE-Langenhagen Veilchenstraße,52.44507,9.73178
-Comfortcharge DE-Leinefelde-Worbis Sommerbergstraße,51.41425,10.36358
 Comfortcharge DE-Leipzig Alte Burghausener Str,51.32182,12.26229
 Comfortcharge DE-Leipzig Brandenburger Straße,51.34697,12.38937
 Comfortcharge DE-Leipzig Druckereistraße,51.38125,12.31096
@@ -11528,10 +11529,10 @@ Eichsfeldwerke DE-Heilbad Heiligenstadt Wilhelmstraße,51.377,10.14445
 Eichsfeldwerke DE-Hessisch Lichtenau Poststraße,51.19847,9.72496
 Eichsfeldwerke DE-Leinefelde Bahnhofstraße,51.3883,10.32633
 Eichsfeldwerke DE-Leinefelde Beethovenstraße,51.37512,10.3248
-Eichsfeldwerke DE-Leinefelde Hausener Weg,51.41405,10.36703
 Eichsfeldwerke DE-Leinefelde Scharfenstein,51.3633,10.26623
 Eichsfeldwerke DE-Rosdorf Lange Straße,51.50463,9.8999
 Eichsfeldwerke DE-Witzenhausen Gelsterstraße,51.3418,9.86123
+Eichsfeldwerke DE-Worbis Hausener Weg,51.41406,10.36703
 
 eins-energie DE-Annaberg-Buchholz Gewerbering,50.59864,13.0192
 eins-energie DE-Chemnitz Alfred-Neubert-Straße,50.78637,12.90267
@@ -12027,10 +12028,12 @@ EnBW DE-Autohof Grabow,53.2982,11.53302,25
 EnBW DE-Autohof Härtensdorf,50.68048,12.59072,25
 EnBW DE-Autohof Kappel-Grafenhausen,48.28093,7.77691,25
 EnBW DE-Autohof Koblenz Metternich,50.34714,7.50752,12
+EnBW DE-Autohof Könnern,51.69217,11.76734
 EnBW DE-Autohof Lehre,52.313,10.63568,30
 EnBW DE-Autohof Mendig,50.38231,7.26952,25
 EnBW DE-Autohof Nahetal,49.9256,7.93568,30
 EnBW DE-Autohof Northeim,51.73232,9.97211
+EnBW DE-Autohof Soltau Süd,52.945,9.88168
 EnBW DE-Autohof Stuhr,53.01194,8.70454,30
 EnBW DE-Aying Römerstraße,47.94764,11.7916
 EnBW DE-Aßling Glonner Straße,47.99171,12.00092
@@ -12214,8 +12217,8 @@ EnBW DE-Brandis,51.32936,12.58768
 EnBW DE-Braunsbach Marktplatz,49.19948,9.79235
 EnBW DE-Braunschweig Bauhaus,52.21515,10.53014
 EnBW DE-Braunschweig Hildesheimer Straße,52.27138,10.49719,30
-EnBW DE-Breitengüßbach,49.97335,10.87513
 EnBW DE-Breitengüßbach Gewerbepark,49.97305,10.8728
+EnBW DE-Breitengüßbach Gewerbepark,49.97335,10.87513
 EnBW DE-Bremen Burger King,53.05319,8.74211
 EnBW DE-Bremen Hemelinger Heerstraße,53.04659,8.8922
 EnBW DE-Bremen Hemmstraße,53.10048,8.81461,30
@@ -12226,7 +12229,7 @@ EnBW DE-Bremerhaven,53.54537,8.59281
 EnBW DE-Bremerhaven Boschstraße,53.52124,8.6058
 EnBW DE-Bretten Am Viehmarkt,49.03597,8.70304
 EnBW DE-Bretten Melanchthonstraße,49.03838,8.69013
-EnBW DE-Brilon,51.40646,8.57568
+EnBW DE-Brilon Möhnestraße,51.40644,8.57568
 EnBW DE-Bruchsal Eschenweg,49.11072,8.56832
 EnBW DE-Bruchsal Kammerforststraße,49.13875,8.56123
 EnBW DE-Bruchsal Sötenerstraße,49.1286,8.6012
@@ -12359,8 +12362,8 @@ EnBW DE-Dunningen Hauptstraße,48.21227,8.50535
 EnBW DE-Durmersheim Malscher Straße,48.9241,8.27156
 EnBW DE-Dutenhofen Globus,50.56044,8.60787
 EnBW DE-Dußlingen Hindenburgplatz,48.4515,9.0548
-EnBW DE-Dätgen,54.18046,9.94314
-EnBW DE-Döbeln,51.11813,13.1475
+EnBW DE-Dätgen,54.18034,9.9431,40
+EnBW DE-Döbeln Richard-Köberlin-Straße,51.11813,13.1475
 EnBW DE-Dörzbach Marktplatz,49.38327,9.70837
 EnBW DE-Dörzbach Max-Planck-Straße,49.38337,9.6958
 EnBW DE-Dülmen,51.81372,7.25683
@@ -12868,15 +12871,14 @@ EnBW DE-Kyritz,52.95301,12.39707
 EnBW DE-Kämpfelbach Hauptstraße,48.94542,8.62375
 EnBW DE-Kämpfelbach Kelterstraße,48.9335,8.63434
 EnBW DE-Köln Aachener Straße,50.93751,6.84302
-EnBW DE-Köln Bauhaus,50.94274,6.99456
+EnBW DE-Köln Deutz-Kalker Straße,50.93717,6.9917
 EnBW DE-Köln Emmy-Noether-Straße,50.91763,6.84975,30
-EnBW DE-Köln Penny,50.97383,6.93269
-EnBW DE-Köln Shell,50.93717,6.99171
+EnBW DE-Köln Istanbulstraße,50.94274,6.99456
+EnBW DE-Köln Longericher Straße,50.97383,6.9327
 EnBW DE-Köln Theodor-Heuss-Straße,50.89772,7.07147
 EnBW DE-Köln Weinsbergstraße,50.9473,6.91203
 EnBW DE-Köngen Burgwiesen,48.67954,9.35537
 EnBW DE-Köngen Stöfflerplatz,48.68475,9.36312
-EnBW DE-Könnern,51.69217,11.76734
 EnBW DE-Köthen (Anhalt),51.75459,11.99923
 EnBW DE-Künzelsau Wertwiesen,49.28023,9.69253
 EnBW DE-Kürten Wipperfürther Straße,51.01998,7.24648,25
@@ -13120,7 +13122,7 @@ EnBW DE-Niederzier Rurbenden,50.84779,6.44731
 EnBW DE-Niesky Kollmer Straße,51.2861,14.81957,30
 EnBW DE-Norden,53.58279,7.22564
 EnBW DE-Norderstedt,53.72305,9.9974
-EnBW DE-Nordhausen,51.49671,10.78607
+EnBW DE-Nordhausen Reichsstraße,51.4967,10.78613
 EnBW DE-Nordhausen/Sundhausen,51.47366,10.80795
 EnBW DE-Nordheim Hauptstraße,49.10845,9.12824
 EnBW DE-Nordheim vor der Rhön,50.48244,10.18091
@@ -13875,7 +13877,6 @@ EnBW DE-Wiesbaden Otto-Wallach-Straße,50.04362,8.21706
 EnBW DE-Wiesloch Adelsförsterpfad,49.2948,8.667
 EnBW DE-Wiesloch In den Ziegelwiesen,49.2905,8.6648
 EnBW DE-Wiesloch Meßplatzstraße,49.29316,8.70153
-EnBW DE-Wietzendorf,52.94497,9.88173
 EnBW DE-Wildau,52.31799,13.60564
 EnBW DE-Wildberg Hohe Gasse,48.62385,8.74681
 EnBW DE-Wildflecken,50.37709,9.9144
@@ -18148,6 +18149,7 @@ Ionity GB-Alnwick Hawfinch Dr,55.39733,-1.6933
 Ionity GB-Baldock,52.01377,-0.203
 Ionity GB-Beaconsfield,51.58793,-0.62906
 Ionity GB-Blackburn,53.71349,-2.47704
+Ionity GB-Bournemouth Deansleigh Rd,50.74647,-1.81898
 Ionity GB-Cambridge A14,52.26968,-0.00982,25
 Ionity GB-Carlisle Kingstown Broadway,54.92771,-2.9503
 Ionity GB-Channel Gateway,51.09436,1.04677,30
@@ -19477,7 +19479,7 @@ Lidl CZ-Velká Chuchle,50.01909,14.39294,10
 Lidl CZ-Vyškov,49.27395,16.9916
 Lidl CZ-Zlín,49.21378,17.61436,10
 Lidl CZ-Štětí Cihelná,50.45621,14.37103
-Lidl DE-Aachen Jülicher Straße,50.7902,6.11707
+Lidl DE-Aachen Jülicher Straße,50.78977,6.1173
 Lidl DE-Aachen Peliserkerstraße,50.7792,6.1126
 Lidl DE-Aachen Reinhardstraße,50.76247,6.13727
 Lidl DE-Aachen Werkstraße,50.71216,6.1386
@@ -22333,6 +22335,7 @@ Pfalzwerke DE-Weisenheim am Berg Karl-Gayer-Straße,49.51147,8.155
 Pfalzwerke DE-Weisenheim am Sand Dr.-Welte-Straße 2,49.51936,8.24781
 Pfalzwerke DE-Wermelskirchen Biberweg,51.13531,7.19623
 Pfalzwerke DE-Westhofen An der Brennerei 2,49.70358,8.25674
+Pfalzwerke DE-Wetzlar Altenberger Straße,50.55977,8.4881
 Pfalzwerke DE-Wielsoch Dielheimer Straße 50,49.29712,8.71711
 Pfalzwerke DE-Wiesbaden Friedrich-Bergius-Straße,50.0501,8.22004
 Pfalzwerke DE-Wiesbaden Hagenauer Straße,50.0486,8.2178,30
@@ -22818,6 +22821,7 @@ Recharge FI-Tolosenmäki Joensuuntie,62.14238,30.04348
 Recharge FI-Tornio Teollisuuskatu,65.84393,24.18915
 Recharge FI-Turku Piiskakuja,60.48573,22.32255
 Recharge FI-Tuulos Tuulosentie,61.10657,24.8639
+Recharge FI-Utsjoki Utsjoentie,69.90585,27.02277
 Recharge FI-Vantaa Kirkkotie,60.27056,24.97444
 Recharge FI-Vantaa Maissikuja,60.27026,24.80469
 Recharge FI-Varkaus Käpykankaantie,62.30518,27.85627
