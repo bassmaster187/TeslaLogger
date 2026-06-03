@@ -2112,7 +2112,6 @@ Supercharger-V4 DE-Lübeck Moisling,53.912554,10.732506
 Supercharger-V4 DE-Lünen (Cafe Del Sol),51.60468,7.5262
 Supercharger-V3 DE-Magdeburg,52.21074,11.67012
 Supercharger-V4 DE-Magdeburg Florapark,52.15917,11.60737
-Supercharger-V4 DE-Maintal (Globus),50.12982,8.8685
 Supercharger-V4 DE-Mainz,49.9814,8.28052
 Supercharger-V4 DE-Malsfeld,51.07265,9.49043
 Supercharger-V4 DE-Malsfeld,51.0772,9.48813
@@ -8104,6 +8103,7 @@ Allego DE-Horneburg Am Poggenpohl,53.5041,9.59033
 Allego DE-Husum Deichstraße,54.47675,9.0426
 Allego DE-Hückelhoven Lohmühle,51.06075,6.19648
 Allego DE-Hünfeld Königsküppel,50.65967,9.67395
+Allego DE-Ibbenbüren Gutenbergstraße,52.25973,7.71486
 Allego DE-Ibbenbüren Maybachstraße,52.2591,7.70976
 Allego DE-Idar-Oberstein John-F.-Kennedy-Straße,49.70956,7.35597
 Allego DE-Iffeldorf Seeshaupter Straße,47.7862,11.3283
@@ -13077,6 +13077,7 @@ EnBW DE-Magdeburg Mittagstraße,52.15277,11.62923
 EnBW DE-Mahlberg Rathausplatz,48.28708,7.81229
 EnBW DE-Mahlstetten Lippachtalstraße,48.07444,8.8425
 EnBW DE-Mainburg Straßäcker,48.63234,11.77455
+EnBW DE-Maintal Industriestraße,50.1296,8.86823,40
 EnBW DE-Mainz Geschwister-Scholl-Straße,49.97707,8.27053
 EnBW DE-Mainz Max-Hufschmidt-Straße,49.97359,8.28841
 EnBW DE-Mainz Rheinallee,50.0288,8.22176
@@ -13292,8 +13293,7 @@ EnBW DE-Pasewalk Torgelower Straße,53.51472,14.0118
 EnBW DE-Passau Äußere Spitalhofstraße,48.57233,13.41324
 EnBW DE-Peine Celler Straße,52.33012,10.23349
 EnBW DE-Peine Wiesenstraße,52.31416,10.22846
-EnBW DE-Peine Wilhelm-Rausch-Straße,52.33985,10.24774,15
-EnBW DE-Peine Wilhelm-Rausch-Straße,52.33988,10.24802,15
+EnBW DE-Peine Wilhelm-Rausch-Straße,52.33956,10.24793
 EnBW DE-Penig,50.92169,12.71461
 EnBW DE-Pentling Ammerholz,48.97292,12.06534
 EnBW DE-Perl In der Dörrwiese,49.47452,6.37322
@@ -17158,6 +17158,7 @@ GreenWay PL-Świnoujście Skandynawska,53.90239,14.27527
 GreenWay SK-Banská Bystrica Na Troskách,48.73114,19.13589
 GreenWay SK-Košice Moldavská cesta,48.70027,21.24055
 GreenWay SK-Košťany nad Turcom,49.03429,18.90843
+GreenWay SK-Kútniky Töböréte,47.97506,17.6643
 GreenWay SK-Nitra Mlyny,48.30657,18.0866
 GreenWay SK-Petržalka Einsteinova,48.13241,17.11004
 GreenWay SK-Piešťany Nitrianska,48.58818,17.83272
