@@ -7555,6 +7555,30 @@ ORDER BY startdate", con))
                 ex.ToExceptionless().Submit();
             }
         }
-    }
+
+        internal static async Task<bool> IsMySQLGeneralLogEnabledAsync(CancellationToken ct = default)
+        {
+            try
+            {
+                await using var conn = new MySqlConnection(DBConnectionstring);
+                await conn.OpenAsync(ct);
+                await using var cmd = new MySqlCommand("SELECT @@global.general_log;", conn);
+                object? result = await cmd.ExecuteScalarAsync(ct);
+                return result switch
+                {
+                    int i => i == 1,
+                    bool b => b,
+                    _ => Convert.ToBoolean(result)
+                };
+            }
+            catch (Exception ex)
+            {
+                ex.ToExceptionless().FirstCarUserID().Submit();
+                Logfile.ExceptionWriter(ex, "IsGeneralLogEnabledAsync");
+                return false;
+            }
+        }
+
+    }    
 }
 
