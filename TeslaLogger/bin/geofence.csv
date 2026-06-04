@@ -3685,7 +3685,7 @@ Supercharger-V3 NL-Leusden,52.14405,5.4169,35
 Supercharger-V3 NL-Maastricht,50.81652,5.72566
 Supercharger-V3 NL-Meerkerk,51.8995,4.98264,32
 Supercharger-V3 NL-Meerkerk,51.89962,4.98346,32
-Supercharger-V3 NL-Middelburg,51.48027,3.63648,30
+Supercharger-V3 NL-Middelburg,51.4804,3.63615
 Supercharger NL-Naarden,52.30858,5.14113
 Supercharger-V4 NL-Nieuwerkerk aan den IJssel,51.97843,4.61898
 Supercharger-V4 NL-Nootdorp,52.05265,4.4022
@@ -7765,6 +7765,7 @@ Allego DE-Autohof Leipzig Flughafen,51.4015,12.18158,8
 Allego DE-Autohof Leipzig Flughafen,51.4016,12.18156,8
 Allego DE-Autohof Lippetal,51.69575,7.96646,10
 Allego DE-Autohof Malsfeld,51.08686,9.4855,10
+Allego DE-Autohof Mücke,50.64546,8.99023,15
 Allego DE-Autohof Mühldorf,48.27258,12.5501,6
 Allego DE-Autohof Münchberg,50.20275,11.777,6
 Allego DE-Autohof Neuberg,50.18212,9.00688,11
@@ -8194,7 +8195,6 @@ Allego DE-Minden Sollingweg,52.30882,8.84265
 Allego DE-Moosburg a.d.Isar Degernpoint,48.47157,11.96496,30
 Allego DE-Mönchengladbach Korschenbroicher Straße,51.19395,6.44938
 Allego DE-Mönchengladbach Lemkuhlenweg,51.20985,6.4672,30
-Allego DE-Mücke Gottesrain,50.6455,8.9901,10
 Allego DE-Mühlhausen/Thüringen Ammersche Landstraße,51.2211,10.45368
 Allego DE-Mülheim an der Ruhr Mannesmannallee,51.45103,6.8817
 Allego DE-Mülheim an der Ruhr Weseler Straße,51.433,6.84397
@@ -9547,20 +9547,15 @@ ChargePoint BE-Groot-Bijgaarden,50.882,4.25334
 ChargePoint CH-Davos Promenade,46.80706,9.83838
 ChargePoint CH-Giubiasco Viale Camillo Olgiati,46.18199,9.01791
 ChargePoint DE-Abensberg 13 Werkstraße,48.80768,11.8771
-ChargePoint DE-Achern Wilhelm-Schechter-Straße 15,48.62847,8.07108
 ChargePoint DE-Alsdorf 29A Carl-Zeiss-Straße,50.86967,6.18106
 ChargePoint DE-Augsburg 73 Haunstetter Str,48.34775,10.90594
 ChargePoint DE-Autohof Senden,51.90359,7.4893
 ChargePoint DE-Backnang Weissacher Straße,48.93568,9.44652,25
 ChargePoint DE-Bad Bergzabern Meßplatz,49.10053,7.9965
-ChargePoint DE-Bad Langensalza Mühlhäuser Landstraße 15,51.1118,10.63885
-ChargePoint DE-Bad Sooden-Allendorf Werrastraße 13,51.26415,9.97523
 ChargePoint DE-Bad Säckingen 6 Am Buchrain,47.55541,7.92799
 ChargePoint DE-Bamberg 38 Kronacher Straße,49.91868,10.90268
 ChargePoint DE-Baunatal Fuldastraße 1-5,51.22769,9.42735
-ChargePoint DE-Baunatal Porschestraße,51.26075,9.42497
 ChargePoint DE-Berge 45 Hauptstraße,52.62112,7.74976
-ChargePoint DE-Berghaupten Auf dem Grün 1,48.41643,7.98573
 ChargePoint DE-Berlin 212-1930 Salzufer,52.51538,13.3303
 ChargePoint DE-Berlin Willi-Schwabe-Straße,52.43233,13.53823
 ChargePoint DE-Bersenbrück 11 Ankumer Straße,52.55601,7.94295
@@ -9584,11 +9579,7 @@ ChargePoint DE-Ehningen Birkensee 1,48.65099,8.9453
 ChargePoint DE-Elchingen 3 Robert-Bosch-Straße,48.45313,10.10213
 ChargePoint DE-Engstingen 12 Meidelstetter Straße,48.3861,9.28743
 ChargePoint DE-Erbach 1 Am Graben,48.34061,9.81817
-ChargePoint DE-Erfurt Hermsdorfer Straße 2,50.9725,11.05792
-ChargePoint DE-Erfurt Holzlandstraße 4,50.97395,11.06191
-ChargePoint DE-Erfurt Rudolstädter Straße 19,50.97212,11.05429
 ChargePoint DE-Erfurt Schwerborner Straße 30c,51.01366,11.04034
-ChargePoint DE-Erfurt Vollbrachtstraße 14,51.00405,11.02527
 ChargePoint DE-Ergolding 32 Moosfeldstraße,48.56056,12.15791
 ChargePoint DE-Eschenlohe 12 Blauänger,47.61233,11.19419
 ChargePoint DE-Esslingen am Neckar 43 Alleenstraße,48.7247,9.34805
@@ -9599,7 +9590,6 @@ ChargePoint DE-Feldkirchen Otto-Lilienthal-Ring,48.14167,11.73714
 ChargePoint DE-Fellbach 102 Pestalozzistraße,48.82023,9.2739
 ChargePoint DE-Fellbach 68-70 Waiblinger Straße,48.81351,9.28227
 ChargePoint DE-Forst Karl-Wirth-Straße 100,49.15806,8.57384
-ChargePoint DE-Frankfurt am Main Hanauer Landstraße 295,50.11707,8.72711
 ChargePoint DE-Frankfurt am Main Heinrich-Lanz-Allee,50.1936,8.64226
 ChargePoint DE-Frankfurt am Main Schwarzwaldstraße 92,50.08341,8.65009
 ChargePoint DE-Freiburg im Breisgau Bismarckallee,47.99782,7.84307
@@ -9613,7 +9603,6 @@ ChargePoint DE-Goslar Dörntener Straße,51.92614,10.41598
 ChargePoint DE-Gransee 13a Kraatzer Weg,53.0031,13.17018
 ChargePoint DE-Göppingen 22 Leonhard-Weiss-Straße,48.70101,9.67064
 ChargePoint DE-Göppingen 3 Heilbronner Str,48.69513,9.67887
-ChargePoint DE-Göttingen Große Breite,51.55951,9.92986,25
 ChargePoint DE-Gütersloh 10 Dalkestraße,51.90148,8.37778
 ChargePoint DE-Gütersloh 24 Goethestraße,51.917,8.38577
 ChargePoint DE-Gütersloh 25 James-Watt-Straße,51.92073,8.40702
@@ -9636,12 +9625,9 @@ ChargePoint DE-Kaltenkirchen Borsigstrasse 7,53.82071,9.97759
 ChargePoint DE-Kamenz 94 Nordstraße,51.29938,14.09153
 ChargePoint DE-Kappeln Nordstraße 3,54.66522,9.92065
 ChargePoint DE-Kappelrodeck Binzigstraße 27,48.59769,8.11277
-ChargePoint DE-Kassel 167 Frankfurter Straße,51.29651,9.47984
 ChargePoint DE-Kassel Dresdener Straße 5,51.31265,9.51344
+ChargePoint DE-Kassel Frankfurter Straße,51.2965,9.47984
 ChargePoint DE-Kassel Frankfurter Straße 315,51.28209,9.46532
-ChargePoint DE-Kassel Leipziger Straße 228,51.29894,9.53737
-ChargePoint DE-Kassel Leipziger Straße 291b,51.2971,9.54218
-ChargePoint DE-Kassel Ochshäuser Straße 37,51.29861,9.53366
 ChargePoint DE-Kehl Am Läger 1,48.57476,7.81459
 ChargePoint DE-Kiel Gutenbergstraße,54.33315,10.11484,30
 ChargePoint DE-Kirchdorf an der Iller 23 Liebherrstraße,48.07766,10.13129
@@ -9689,7 +9675,6 @@ ChargePoint DE-Remscheid 17 Fritz-Reuter-Straße Bäckerei,51.19414,7.27069
 ChargePoint DE-Remshalden 37 Fellbacher Straße,48.8147,9.41531
 ChargePoint DE-Rheine 4 Carl-Zeiss-Straße,52.28784,7.48438
 ChargePoint DE-Satteldorf 2-3 Leonhard-Weiss-Straße,49.18135,10.07629
-ChargePoint DE-Schiltach Hauptstraße 74,48.29141,8.35218
 ChargePoint DE-Schorndorf 11/1 Gerberstraße,48.80473,9.51555
 ChargePoint DE-Schorndorf 40 Baumwasenstraße,48.80665,9.50994
 ChargePoint DE-Schwäbisch Gmünd 40 Im Benzfeld,48.80584,9.84713
@@ -9712,7 +9697,6 @@ ChargePoint DE-Ummendorf / Börde Meyendorffstraße 2,52.15592,11.18236
 ChargePoint DE-Velen Ostendorfer Straße,51.88374,6.9215
 ChargePoint DE-Waidhaus 7 Hauptstraße,49.64112,12.49361
 ChargePoint DE-Waldkraiburg 12 Zirndorfer Straße,48.21757,12.41586
-ChargePoint DE-Weimar Erfurter Straße 76,50.98123,11.30994
 ChargePoint DE-Weinstadt 1 Heerbergstraße,48.8143,9.35792
 ChargePoint DE-Weißenburg in Bayern 2 Treuchtlinger Straße,49.01932,10.96039
 ChargePoint DE-Wemding 1 Kehläcker,48.87155,10.70521
@@ -11104,8 +11088,8 @@ E.ON DE-Raststätte Lennhof,51.41133,7.49826
 E.ON DE-Raststätte Limes West,50.52085,8.7555
 E.ON DE-Raststätte Lipperland,52.0719,8.6646
 E.ON DE-Raststätte Lipperland Süd,52.0182,8.63508
-E.ON DE-Raststätte Medenbach,50.0947,8.35239
-E.ON DE-Raststätte Medenbach,50.09694,8.35336
+E.ON DE-Raststätte Medenbach Ost,50.09694,8.35336
+E.ON DE-Raststätte Medenbach West,50.0947,8.3524
 E.ON DE-Raststätte Mellrichstädter Höhe,50.42122,10.3509,30
 E.ON DE-Raststätte Mellrichstädter Höhe,50.42368,10.34998,30
 E.ON DE-Raststätte Michendorf Nord,52.30298,13.01724
@@ -11485,7 +11469,6 @@ EDEKA DE-Kevelaer Feldstraße,51.57975,6.2558
 EDEKA DE-Kevelaer Kevelaerer Straße,51.59794,6.2795
 EDEKA DE-Kiel Hamburger Chaussee,54.29949,10.10442
 EDEKA DE-Kirchlengern In der Mark,52.20762,8.65131
-EDEKA DE-Kleinmachnow Adolf-Grimme-Ring,52.40332,13.22101
 EDEKA DE-Köln Godorfer Haupstraße,50.8577,6.97468
 EDEKA DE-Köln Longericher Straße,50.99777,6.91372
 EDEKA DE-Kösching Ingolstädter Straße,48.80913,11.48145
@@ -14045,6 +14028,7 @@ EnBW DE-Öhringen Meisterhausstraße,49.20465,9.5017
 EnBW DE-Öhringen Siemensstraße,49.20715,9.48089
 EnBW DE-Überlingen Lippersreuther Straße,47.77025,9.17272
 
+EndesaX ES-Alcúdia Carrer de l’Estrella de Mar,39.84322,3.13
 EndesaX ES-Aldeanueva del Camino N-630,40.26513,-5.91751
 EndesaX ES-Armilla Av. Fernando de los Ríos,37.15359,-3.61537
 EndesaX ES-Cdad. Quesada C. Vigo,38.0501,-0.72265
@@ -14378,6 +14362,7 @@ Energie-Steiermark AT-Graz Weblinger Gürtel,47.03379,15.41456,8
 Energie-Steiermark AT-Graz Wiener Straße,47.10378,15.40171
 Energie-Steiermark AT-Hart bei Graz Industriestraße,47.04083,15.50867
 Energie-Steiermark AT-Judenburg Hauptplatz,47.16846,14.66107
+Energie-Steiermark AT-Judenburg Hugo-Wolf-Gasse,47.17172,14.64127
 Energie-Steiermark AT-Kumberg Grazer Straße,47.14436,15.54908
 Energie-Steiermark AT-Laßnitzhöhe Hauptstraße,47.0768,15.5825
 Energie-Steiermark AT-Leibnitz Wasserwerkstraße,46.79607,15.55699
@@ -15103,6 +15088,7 @@ evpass CH-Grindelwald Stutzgasse,46.6241,8.02103
 evpass CH-Martigny Rue d’Octodure,46.09823,7.07558
 evpass CH-Rorschacherberg Thalerstrasse,47.47408,9.51585
 evpass CH-St. Gallen Bildweiherstrasse,47.40445,9.30893
+evpass CH-Thônex Rte de Sous-Moulin,46.1902,6.1932
 
 EVPlus PL-Sieradz 1 Maja,51.57957,18.71439
 
@@ -15116,9 +15102,18 @@ EVzen FR-Béziers Rue Zenobe Gramme,43.34748,3.25572,25
 EVzen FR-Laragne-Montéglin Av. de Provence,44.31307,5.82756
 EVzen FR-Sainte-Croix-en-Plaine Rue des Frères Peugeot,48.0215,7.37633
 
+EW-Mittelbaden DE-Achern Wilhelm-Schechter-Straße,48.62847,8.07108
+EW-Mittelbaden DE-Berghaupten Auf dem Grün,48.41643,7.98573
+EW-Mittelbaden DE-Hausach In den Brachfelden,48.2865,8.18756
 EW-Mittelbaden DE-Kehl Richard-Wagner-Straße,48.56664,7.82065
+EW-Mittelbaden DE-Offenburg Bertha-von-Suttner-Straße,48.48178,7.95763
+EW-Mittelbaden DE-Offenburg Franz-Ludwig-Mersy-Straße,48.46655,7.95623
 EW-Mittelbaden DE-Offenburg Freiburger Straße,48.47176,7.93613
+EW-Mittelbaden DE-Renchen Straßburger Straße,48.59155,8.01715
 EW-Mittelbaden DE-Rheinmünster Victoria Boulevard,48.76877,8.08482
+EW-Mittelbaden DE-Schiltach Am Hohenstein,48.291,8.32488
+EW-Mittelbaden DE-Schiltach Hauptstraße,48.2914,8.35218
+EW-Mittelbaden DE-Schutterwald Hauptstraße,48.4531,7.8976
 
 EWA DE-Altenburg Teichpromenade,50.97736,12.43384
 
@@ -16831,6 +16826,7 @@ FreeToX IT-Vallata Autostrada dei Due Mari,41.06468,15.31426
 FreeToX IT-Vallata Autostrada dei Due Mari,41.06667,15.31595
 
 Freshmile FR-Bastelicaccia Lieu-dit Suaralta,41.92344,8.82471
+Freshmile FR-Calvi Route de l’Aéroport,42.52573,8.78915
 Freshmile FR-Colmar Av. de la Marne,48.07567,7.35393
 Freshmile FR-Cornimont Rue du Daval,47.96273,6.83513
 Freshmile FR-Grenoble Rue Félix Esclangon,45.1939,5.70949
@@ -16873,6 +16869,24 @@ GGEW DE-Lorsch Lindenstraße,49.65908,8.56714
 GGEW DE-Zwingenberg Melibokusstraße,49.72175,8.6107
 
 Glattwerk CH-Dübendorf Bettlistrasse,47.39796,8.62451
+
+Glinicke DE-Bad Langensalza Mühlhäuser Landstraße,51.1118,10.63885
+Glinicke DE-Bad Sooden-Allendorf Werrastraße,51.26415,9.97523
+Glinicke DE-Baunatal Porschestraße,51.26075,9.42497
+Glinicke DE-Bielefeld Bechterdisser Straße,52.0138,8.6192
+Glinicke DE-Erfurt Hermsdorfer Straße,50.9725,11.05792
+Glinicke DE-Erfurt Holzlandstraße,50.97395,11.0619
+Glinicke DE-Erfurt Rudolstädter Straße,50.97212,11.0543
+Glinicke DE-Erfurt Vollbrachtstraße,51.00405,11.02527
+Glinicke DE-Eschwege Hessenring,51.1778,10.03012
+Glinicke DE-Frankfurt am Main Hanauer Landstraße,50.11707,8.7271
+Glinicke DE-Göttingen Große Breite,51.5595,9.92986,25
+Glinicke DE-Kassel Königstor,51.31307,9.4775
+Glinicke DE-Kassel Leipziger Straße,51.2971,9.54218
+Glinicke DE-Kassel Leipziger Straße,51.29894,9.53737
+Glinicke DE-Kassel Ochshäuser Straße,51.2986,9.53366
+Glinicke DE-Weimar Erfurter Straße,50.98123,11.30994
+Glinicke DE-Witzenhausen Bischhäuser Aue,51.34897,9.85042
 
 Globus DE-Koblenz Jakob-Caspers-Straße,50.38538,7.55624
 
@@ -17840,10 +17854,16 @@ Innogy DE-Wolfenbüttel Am Wasserwerk,52.14917,10.54282
 Innogy DE-Wolfenbüttel Salzdahlumer Straße,52.1769,10.54756
 
 Inselwerke DE-Altwarp Am Hafen,53.73832,14.27014
+Inselwerke DE-Anklam Heider Straße,53.85582,13.6855
+Inselwerke DE-Anklam Rudolf-Diesel-Straße,53.83974,13.7124
 Inselwerke DE-Eggesin Am Bahnhof,53.68164,14.07322
 Inselwerke DE-Heidelberg Palo-Alto-Platz,49.39392,8.67421,25
 Inselwerke DE-Heringsdorf Delbrückstraße,53.9551,14.1678
+Inselwerke DE-Kleinmachnow Adolf-Grimme-Ring,52.40335,13.22105
+Inselwerke DE-Koserow Förster-Schrödter-Straße,54.05353,14.00186
+Inselwerke DE-Lohme Stubbenkammerstraße,54.5625,13.62558
 Inselwerke DE-Moosburg an der Isar Stadtwaldstraße,48.466,11.93984
+Inselwerke DE-Salzgitter Theodor-Heuss-Straße,52.13865,10.2865
 Inselwerke DE-Sinsheim Badewelt,49.23667,8.88403
 Inselwerke DE-Trassenheide Forststraße,54.0888,13.87249
 Inselwerke DE-Waren (Müritz) Strandstraße,53.51214,12.686
@@ -24581,6 +24601,7 @@ SW-Glauchau DE-Glauchau Sachsenallee,50.82716,12.5199
 SW-Gotha DE-Gotha Friedrichstraße,50.94756,10.70986
 SW-Greven DE-Greven Hinter der Lake,52.09279,7.60883
 SW-Gronau DE-Gronau Alfred-Dragstra-Platz,52.21157,7.02808
+SW-Gronau DE-Gronau Konrad-Adenauer-Straße,52.20814,7.0274
 SW-Görlitz DE-Görlitz Bismarckstraße,51.15398,14.98972
 SW-Görlitz DE-Görlitz Jüdenstraße,51.15784,14.98963
 SW-Görlitz DE-Görlitz Pomologische GartenStraße,51.14131,14.97656
