@@ -3732,7 +3732,6 @@ Supercharger-V3 NO-Brekkvasselv,64.847699,13.016144
 Supercharger-V3 NO-Brokelandsheia,58.82083,9.07327
 Supercharger-V4 NO-Brokelandsheia Øst,58.822296,9.077056
 Supercharger NO-Brumunddal,60.8782,10.92954
-Supercharger-V4 NO-Brønnøysund,65.48722,12.22787
 Supercharger NO-Bygland,58.827783,7.79531
 Supercharger-V3 NO-Dombås,62.07465,9.12789
 Supercharger-V3 NO-Eggedal,60.246023,9.355252
@@ -3842,6 +3841,7 @@ Supercharger NO-Rygge,59.387918,10.751439
 Supercharger-V3 NO-Rødberg,60.265975,8.947862
 Supercharger NO-Røldal,59.816824,6.752226
 Supercharger-V4 NO-Røros Plaassja,62.56631,11.37499
+Supercharger-V4 NO-Salhus Brønnøysund,65.48716,12.2279
 Supercharger NO-Sandane,61.778023,6.213188
 Supercharger-V3 NO-Sandefjord,59.179708,10.209267
 Supercharger-V4 NO-Sandnessjøen,66.02172,12.62984
@@ -6825,7 +6825,7 @@ Supercharger-V4 US-Washington UT,37.12738,-113.5257
 Supercharger-V4 US-West Valley City UT,40.71314,-112.02422
 
 Supercharger-V3 US-Abingdon VA,36.71248,-81.9293
-Supercharger US-Arlington VA (Pay to Park Floor 5),38.88748,-77.09296
+Supercharger US-Arlington VA,38.88748,-77.09296
 Supercharger-V4 US-Arlington VA Crystal Dr,38.85333,-77.04865
 Supercharger-V3 US-Ashburn VA,39.0091,-77.50224
 Supercharger-V4 US-Ashburn VA Van Metre Dr,39.02843,-77.5111
@@ -6834,23 +6834,21 @@ Supercharger-V3 US-Atkins VA,36.86447,-81.4335
 Supercharger-V3 US-Bealeton VA,38.6196,-77.80027
 Supercharger-V4 US-Bedford VA,37.33734,-79.55053
 Supercharger-V3 US-Bristol VA,36.62855,-82.14896
-Supercharger-V3 US-Bristol VA - Euclid Avenue,36.60174,-82.1912
+Supercharger-V3 US-Bristol VA Euclid Ave,36.6019,-82.19144
 Supercharger US-Chantilly VA,38.9136,-77.48684
 Supercharger US-Charlottesville VA,38.06738,-78.49338
 Supercharger-V3 US-Charlottesville VA - Proffit Road,38.13245,-78.43488
 Supercharger-V4 US-Charlottesville VA US-29,38.06897,-78.48348
 Supercharger-V3 US-Chesapeake VA,36.65758,-76.22478
 Supercharger US-Chester VA,37.367,-77.41656
-Supercharger-V4 US-Colonial Heights VA,37.25803,-77.40588
-Supercharger-V3 US-Colonial Heights VA,37.3055,-77.40843
+Supercharger-V3 US-Colonial Heights VA,37.3056,-77.40967
 Supercharger-V4 US-Colonial Heights VA 1270 Temple Ave,37.2546,-77.38398
-Supercharger-V4 US-Colonial Heights VA Temple Ave,37.2586,-77.40576
+Supercharger-V4 US-Colonial Heights VA Temple Ave,37.25803,-77.40588
 Supercharger-V4 US-Danville VA,36.58027,-79.34322
 Supercharger-V3 US-Exmore VA,37.516,-75.8316
 Supercharger-V3 US-Fairfax VA,38.85933,-77.35785
-Supercharger-V3 US-Fairfax VA - Fairfax Boulevard,38.86487,-77.2791
+Supercharger-V3 US-Fairfax VA Fairfax Blvd,38.8647,-77.2801
 Supercharger-V3 US-Falls Church VA,38.90205,-77.20418
-Supercharger-V3 US-Farmville VA - S Main Street,37.2718,-78.4018
 Supercharger-V3 US-Farmville VA S Main St,37.27185,-78.40144
 Supercharger-V4 US-Franconia VA,38.7651,-77.15348
 Supercharger US-Fredericksburg VA,38.22593,-77.50614
@@ -6861,11 +6859,11 @@ Supercharger US-Glen Allen VA,37.66985,-77.46168
 Supercharger-V3 US-Harrisonburg VA,38.42906,-78.85642
 Supercharger US-Haymarket VA,38.8151,-77.64273
 Supercharger-V3 US-Hopewell VA,37.27154,-77.31654
-Supercharger-V3 US-King George VA - Owens Drive,38.35352,-77.0486
-Supercharger US-Leesburg VA (Floor 2),39.08984,-77.52664
-Supercharger-V3 US-Leesburg VA - California Drive Northeast,39.10232,-77.5259
+Supercharger-V3 US-King George VA Owens Drive,38.35358,-77.04886
+Supercharger US-Leesburg VA,39.08968,-77.52632
+Supercharger-V3 US-Leesburg VA California Dr NE,39.10294,-77.52548
 Supercharger US-Lexington VA,37.79696,-79.41903
-Supercharger-V3 US-Lexington VA - East Nelson Street,37.77853,-79.43408
+Supercharger-V3 US-Lexington VA E Nelson St,37.77856,-79.43406
 Supercharger-V3 US-Lexington VA Hotel Dr,37.79828,-79.4182
 Supercharger-V3 US-Lynchburg VA,37.32496,-79.19005
 Supercharger-V3 US-Madison Heights VA,37.46605,-79.1177
@@ -6885,14 +6883,15 @@ Supercharger-V3 US-Petersburg VA Wagner Road,37.19063,-77.36632
 Supercharger-V3 US-Portsmouth VA,36.83745,-76.3057
 Supercharger-V3 US-Raphine VA,37.93026,-79.23448
 Supercharger-V3 US-Reston VA,38.94862,-77.3395
-Supercharger-V3 US-Reston VA - Sunset Hills Road,38.95617,-77.36494
+Supercharger-V3 US-Reston VA Sunset Hills Rd,38.956,-77.3654
 Supercharger US-Richmond VA,37.5298,-77.35392
-Supercharger-V3 US-Richmond VA - South Providence Road,37.49607,-77.54725
 Supercharger-V3 US-Richmond VA Forest Hill Ave,37.53734,-77.53168
+Supercharger-V4 US-Richmond VA N Arthur Ashe Blvd,37.57466,-77.465
+Supercharger-V3 US-Richmond VA S Providence Rd,37.49585,-77.54766
 Supercharger-V3 US-Roanoke VA,37.29937,-79.89395
 Supercharger-V4 US-Rustburg VA,37.25265,-79.18723
 Supercharger US-Salem VA,37.28943,-80.0798
-Supercharger-V3 US-South Boston VA - Philpott Road,36.6868,-78.90085
+Supercharger-V3 US-South Boston VA Philpott Rd,36.68664,-78.90084
 Supercharger US-South Hill VA,36.74853,-78.10353
 Supercharger-V3 US-Springfield VA,38.7746,-77.1774
 Supercharger-V3 US-Springfield VA,38.77623,-77.17596
@@ -6910,8 +6909,8 @@ Supercharger-V3 US-Tappahannock VA,37.90395,-76.8661
 Supercharger-V3 US-Tysons VA,38.91554,-77.22473
 Supercharger-V3 US-Vienna VA,38.89525,-77.2743
 Supercharger-V3 US-Virginia Beach VA,36.84092,-76.05565
-Supercharger-V3 US-Virginia Beach VA - Lynnhaven Parkway,36.7959,-76.10194
 Supercharger-V4 US-Virginia Beach VA General Booth Blvd,36.79425,-75.99395
+Supercharger-V3 US-Virginia Beach VA Lynnhaven Pkwy,36.79566,-76.1027
 Supercharger-V3 US-Williamsburg VA,37.2664,-76.6767
 Supercharger-V3 US-Winchester VA,39.18813,-78.12573
 Supercharger US-Woodbridge VA,38.64082,-77.29633
@@ -11148,8 +11147,8 @@ E.ON DE-Raststätte Siegburg,50.80668,7.21961,25
 E.ON DE-Raststätte Siegburg,50.80943,7.21999,25
 E.ON DE-Raststätte Steigerwald Süd,49.7307,10.72648
 E.ON DE-Raststätte Stolper Heide,52.6409,13.2441
-E.ON DE-Raststätte Tecklenburger Land,52.23114,7.87696
-E.ON DE-Raststätte Tecklenburger Land,52.23242,7.8808
+E.ON DE-Raststätte Tecklenburger Land Ost,52.23242,7.8808
+E.ON DE-Raststätte Tecklenburger Land West,52.23114,7.87696
 E.ON DE-Raststätte Trave,53.8187,10.47952
 E.ON DE-Raststätte Urbacher Wald,50.54842,7.58513
 E.ON DE-Raststätte Vaterstetten,48.12341,11.75797
@@ -13356,7 +13355,6 @@ EnBW DE-Raststätte Aggertal Süd,50.95184,7.32062
 EnBW DE-Raststätte Allgäuer Tor Ost,47.84752,10.2829,20
 EnBW DE-Raststätte Allgäuer Tor West,47.8482,10.28086,20
 EnBW DE-Raststätte Am Hockenheimring Ost,49.317,8.57582,20
-EnBW DE-Raststätte Am Hockenheimring West,49.3208,8.5679,20
 EnBW DE-Raststätte Auetal Nord,52.22387,9.2217,20
 EnBW DE-Raststätte Auetal Süd,52.22684,9.23287,20
 EnBW DE-Raststätte Aurach Nord,49.5817,10.9307
@@ -20785,6 +20783,7 @@ mblty DE-Grabenstätt Oberwinkl,47.8279,12.52106
 mblty DE-Lederhose Neuensorga,50.80324,11.89429
 mblty DE-Lehrte Straßburger Straße,52.38528,9.95313
 mblty DE-Magstadt Aichern,48.74423,8.94824
+mblty DE-Raststätte Am Hockenheimring West,49.3208,8.5679
 mblty DE-Raststätte Göttingen West,51.49487,9.87619,10
 mblty DE-Raststätte Kraichgau Nord,49.2442,8.87885
 mblty DE-Raststätte Kraichgau Süd,49.2409,8.87956
