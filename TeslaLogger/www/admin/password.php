@@ -377,7 +377,7 @@ echo $TeslaFleetURL;
 	<?php t("BA_FillOut"); ?> <a href="#" id="authlink" target="_blank">Tesla Logon.</a>
 <h2><?php t("BA_Step2"); ?></h2>
 <?php t("BA_CopyUrl"); ?><br>
-	<img src="img/auth_screenshot.png">
+	<img src="img/auth_screenshot.png?v=2">
 <h2><?php t("BA_Step3"); ?></h2>
 <?php t("BA_Paste"); ?>
 <input id="authresulturl"></input>
