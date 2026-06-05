@@ -219,9 +219,9 @@ The URL doesn't contain the expected format!="¡La URL no tiene el formato esper
 TeslaAuthApps="Obtenga un token de acceso y actualización con estas aplicaciones:"
 BA_Browser=En el {navegador} local (recomendado)
 BA_Read=Por favor, lea todos los pasos antes de continuar:
-BA_Logon="Haga clic en el siguiente enlace titulado <b>Inicio de sesión de Tesla</b> que abrirá una nueva pestaña/ventana para la página de inicio de sesión de autenticación de Tesla"
+BA_Logon="Haga clic en el enlace de abajo titulado <b>Tesla Logon</b> que abrirá una nueva pestaña para la página de inicio de sesión de Tesla. ¡Abra las herramientas de desarrollador (F12) en la pestaña Network!"
 BA_Auth="Inicie sesión con sus credenciales de Tesla y MFA si es necesario (Tesla los recordará si ha utilizado el enlace anteriormente)"
-BA_NotFound=Aparecerá el mensaje "Página no encontrada". Esto es normal.
+BA_NotFound=Verá: Verified Successfully. En la pestaña Network encontrará en algún lugar: callback?code=... fíltrelo si es necesario. Clic derecho y Copiar / Copiar URL.
 BA_URL="Pegue la URL de la página web a continuación. Los tokens se generarán a partir de un código temporal que contenga."
 BA_Invalid=Estos enlaces normalmente sólo funcionan una vez, por lo que si aparece un mensaje de error "Concesión no válida" o de otro tipo en nuestro sitio web, es posible que tenga que empezar de nuevo con el enlace Tesla Logon, que debería producir un nuevo enlace.
 BA_Logoff="Si quieres utilizar una cuenta diferente, tienes que desconectarte manualmente {¡aquí!}"

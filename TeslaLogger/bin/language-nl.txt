@@ -218,9 +218,9 @@ This isn't an auth link by Tesla!=Dit is geen auth link van Tesla!
 The URL doesn't contain the expected format!="De URL is niet in het verwachte formaat!"
 BA_Browser=In lokale {browser} (aanbevolen)
 BA_Read=Lees alle stappen voordat u verder gaat:
-BA_Logon=Klik op de onderstaande link <b>Tesla Logon</b> die een nieuw tabblad/venster zal openen voor de Tesla Authentication logon pagina.
+BA_Logon=Klik op de onderstaande link <b>Tesla Logon</b> die een nieuw tabblad zal openen voor de Tesla inlogpagina. Open de developer tools (F12) in het Network tabblad!
 BA_Auth=Log in met uw Tesla referenties en MFA indien nodig (Tesla zal deze onthouden als u de link eerder hebt gebruikt).
-BA_NotFound=Dit lijkt te resulteren in een "Page Not Found". Dit is normaal.
+BA_NotFound=U zult zien: Verified Successfully. In het Network tabblad vindt u ergens: callback?code=... filter erop indien nodig. Rechtsklik en Kopiëren / URL kopiëren.
 BA_URL="Kopieer de resulterende URL van die webpagina in het onderstaande formulier. In de URL staat een eenmalige, tijdelijke code die we kunnen gebruiken om tokens te genereren. Wij zullen deze voor u uit de link halen."
 BA_Invalid=Deze links werken meestal maar één keer, dus als er een "Invalid Grant" of andere foutmelding verschijnt op onze website moet u wellicht opnieuw beginnen met de Tesla Logon link die een nieuwe link zou moeten opleveren.
 BA_Logoff=Als u een ander account wilt gebruiken, moet u zich handmatig afmelden.
