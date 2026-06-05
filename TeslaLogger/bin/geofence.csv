@@ -2119,6 +2119,7 @@ Supercharger-V4 DE-Malsfeld,51.0875,9.48563,62
 Supercharger-V4 DE-Malsfeld,51.08797,9.4815
 Supercharger-V4 DE-Mannheim,49.54824,8.45752
 Supercharger-V4 DE-Merenberg,50.49945,8.18538
+Supercharger-V3 DE-Merklingen,48.51295,9.74973
 Supercharger-V3 DE-Merklingen,48.51637,9.75754,32
 Supercharger-V4 DE-Moers,51.44182,6.61183
 Supercharger-V4 DE-Moers (Cafe Del Sol),51.47548,6.63246
@@ -4176,6 +4177,7 @@ Supercharger-V3 SK-Trenčín,48.8643,18.022992,30
 Supercharger SK-Zvolen,48.6274,19.10354,30
 
 Supercharger-V4 TR-Afyonkarahisar Asiye Sultan Blv.,38.7547,30.55634
+Supercharger-V4 TR-Afyonkarahisar Dörtyol,38.79183,30.45374
 Supercharger-V3 TR-Akhisar,38.930236,27.703596
 Supercharger-V3 TR-Ankara,39.949583,32.832923
 Supercharger-V4 TR-Beylikdüzü İstanbul,41.01997,28.62815
@@ -4395,6 +4397,7 @@ Supercharger-V4 US-Citrus Heights CA,38.7092,-121.31373
 Supercharger-V3 US-City of Industry CA - Gale Avenue,33.99457,-117.90036
 Supercharger-V3 US-Clovis CA,36.83666,-119.69763
 Supercharger-V3 US-Coalinga CA,36.25412,-120.23762
+Supercharger-V4 US-Colfax CA,39.09484,-120.95197
 Supercharger-V3 US-Commerce CA,34.00693,-118.14955
 Supercharger US-Concord CA,37.9722,-122.05662
 Supercharger-V3 US-Concord CA - Diamond Blvd,37.9698,-122.0586
@@ -6249,7 +6252,7 @@ Supercharger-V3 US-Syosset NY - Jericho Turnpike,40.81044,-73.50567
 Supercharger US-Syracuse NY,43.10238,-76.1875
 Supercharger-V3 US-Syracuse NY - Destiny USA Drive,43.06725,-76.17497
 Supercharger-V4 US-Syracuse NY University Ave,43.0424,-76.13535
-Supercharger US-Tarrytown NY,41.0614,-73.83635
+Supercharger US-Tarrytown NY,41.0615,-73.8364
 Supercharger-V3 US-Tully NY,42.80007,-76.12184
 Supercharger US-Utica NY,43.11404,-75.2062
 Supercharger-V3 US-Valley Stream NY,40.66427,-73.72504
@@ -7178,6 +7181,7 @@ Tesla Service Center US-Raleigh NC,35.86326,-78.71514
 Tesla Service Center US-Tulsa,36.07687,-95.83393
 
 800Volt DE-Oberwiesenthal Annaberger Straße,50.42024,12.97692
+800Volt DE-Velbert Am Lindenkamp,51.32977,7.03714
 
 A2A IT-Bergamo Via dell’ Industria,45.66799,9.66478
 A2A IT-Bergamo Via S. Lazzaro,45.69151,9.66174
@@ -8758,6 +8762,7 @@ ARAL DE-Hoppegarten Altlandsberger Chaussee,52.54408,13.64693
 ARAL DE-Horb am Neckar Bildechinger Steige,48.45527,8.69963
 ARAL DE-Höxter Albaxer Straße,51.78673,9.38778
 ARAL DE-Hürth Luxemburger Straße,50.89448,6.90494
+ARAL DE-Illingen Saarbrücker Straße,49.38318,7.01143
 ARAL DE-Ingelheim am Rhein Konrad-Adenauer-Straße,49.97908,8.05404
 ARAL DE-Ingersleben Zuckerfabrik,52.2093,11.13276
 ARAL DE-Ingolstadt Fauststraße,48.7401,11.43514
@@ -12740,6 +12745,7 @@ EnBW DE-Hanau Kinzigbogen,50.14604,8.93272
 EnBW DE-Hannover Am Leineufer,52.41463,9.64333,20
 EnBW DE-Hannover Rewe,52.33883,9.83251
 EnBW DE-Hannover Schulenburger Landstraße,52.41032,9.70682
+EnBW DE-Harburg Hardauring,53.47813,9.88555
 EnBW DE-Hardegsen,51.64926,9.83589
 EnBW DE-Harzgerode,51.64327,11.13962
 EnBW DE-Haslach im Kinzigtal Im Spießacker,48.27842,8.09269
@@ -14483,6 +14489,8 @@ EnergieSüdwest DE-Landau in der Pfalz Im Justus,49.209,8.12507
 EnergieSüdwest DE-Landau in der Pfalz Johannes-Kopp-Straße,49.19198,8.13096
 EnergieSüdwest DE-Landau in der Pfalz Langstraße,49.1985,8.11056
 EnergieSüdwest DE-Landau in der Pfalz Wollmesheimer Höhe,49.1871,8.09324
+
+energis DE-Illingen Burgweg,49.3771,7.0539
 
 EnergyVision BE-Oostende Torhoutsesteenweg,51.19837,2.90284
 
@@ -16411,6 +16419,7 @@ Ewiva IT-Valdera,43.64262,10.61749
 Ewiva IT-Valmontone Fashion District,41.7627,12.95579
 Ewiva IT-Vieste Via Dalmazia,41.88453,16.17352
 
+EWO DE-Oberaudorf Bad-Trißl-Straße,47.6492,12.17077
 EWO DE-Oberaudorf Naunspitzstraße,47.6484,12.17876
 
 EWR DE-Lampertheim Weidweg,49.5919,8.45538
@@ -17230,6 +17239,7 @@ HEnW DE-Hamburg Am Beckerkamp,53.49727,10.20954
 HEnW DE-Hamburg Auf dem Königslande,53.58113,10.0791
 HEnW DE-Hamburg Banksstraße,53.54468,10.01229
 HEnW DE-Hamburg Barmbeker Markt,53.5808,10.0418
+HEnW DE-Hamburg Bauerberg,53.55044,10.07875
 HEnW DE-Hamburg Bei dem Neuen Krahn,53.54499,9.98831
 HEnW DE-Hamburg Bei St. Johannis,53.57048,9.99471
 HEnW DE-Hamburg Beim Berliner Tor,53.55311,10.024
@@ -17267,6 +17277,7 @@ HEnW DE-Hamburg Große Bergstraße,53.55224,9.93803
 HEnW DE-Hamburg Hallerstraße,53.57282,9.99007
 HEnW DE-Hamburg Hammer Berg,53.55465,10.0653
 HEnW DE-Hamburg Harburger Rathausstraße,53.459,9.98118
+HEnW DE-Hamburg Heiligengeistbrücke,53.5487,9.98657
 HEnW DE-Hamburg Heschredder,53.627,10.02177
 HEnW DE-Hamburg Jarrestraße,53.5842,10.02186
 HEnW DE-Hamburg Jenfelder Allee,53.58416,10.12586
@@ -17315,6 +17326,7 @@ HEnW DE-Hamburg Wielandstraße,53.56936,10.05503
 HEnW DE-Hamburg Wiesenhöfen,53.64879,10.16739
 HEnW DE-Hamburg Zeughausmarkt,53.54932,9.97475
 HEnW DE-Hamburg Zirkusweg,53.54836,9.96754
+HEnW DE-Harburg Hainholzweg,53.44986,9.9371
 
 Hermes-Flow RO-Brașov Calea București,45.63233,25.63805,25
 Hermes-Flow RO-Craiova Calea București,44.31282,23.82912
@@ -17443,6 +17455,7 @@ Iberdrola ES-Ávila Ctra. Burgohondo,40.64636,-4.70513
 Iberdrola PT-Caldas da Rainha R. Casal dos Barreiros,39.4171,-9.1516
 
 iCharge AL-Berat Rruga Baki Gjebrea,40.72775,19.9421
+iCharge AL-Durrës Autostrada Tirane,41.3344,19.48028
 iCharge AL-Koplik E762,42.21535,19.45152
 iCharge AL-Tiranë Rruga e Kavajes,41.3285,19.81318
 iCharge AL-Vlora Rruga Dush Strati,40.45718,19.48917
@@ -23270,6 +23283,7 @@ Rifil SE-Arlöv Gullrisvägen,55.61402,13.10072,30
 Road DE-Kühlungsborn Hermannstraße,54.1487,11.7309
 Road DE-Mettmann Marie-Curie-Straße,51.25046,6.9513
 
+RoboCharge DE-Nohfelden Lindenallee,49.5695,7.0838
 RoboCharge NL-Biervliet Middenweg,51.32613,3.66784
 RoboCharge NL-Breskens Westlandstraat,51.39697,3.55573
 RoboCharge NL-Dalen Reindersdijk,52.67694,6.77534
