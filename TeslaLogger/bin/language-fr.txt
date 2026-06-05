@@ -227,9 +227,9 @@ This isn't an auth link by Tesla!=Ce n'est pas un lien d'authentification de Tes
 The URL doesn't contain the expected format!="L'URL ne contient pas le format attendu !"
 BA_Browser=Dans le {navigateur} local (recommandé)
 BA_Read=Veuillez lire toutes les étapes avant de continuer :
-BA_Logon=Cliquez sur le lien ci-dessous intitulé <b>Connexion Tesla</b> qui ouvrira un nouvel onglet/fenêtre pour la page de connexion de l'authentification Tesla.
+BA_Logon=Cliquez sur le lien ci-dessous intitulé <b>Tesla Logon</b> qui ouvrira un nouvel onglet pour la page de connexion Tesla. Ouvrez les outils de développement (F12) dans l'onglet Network !
 BA_Auth=Connectez-vous en utilisant vos identifiants Tesla et votre MFA si nécessaire (Tesla s'en souviendra si vous avez déjà utilisé le lien).
-BA_NotFound=Il en résultera apparemment une "page non trouvée". C'est normal.
+BA_NotFound=Vous verrez : Verified Successfully. Dans l'onglet Network vous trouverez quelque part : callback?code=... filtrez-le si nécessaire. Clic droit et Copier / Copier l'URL.
 BA_URL="Copiez l'URL de cette page web dans le formulaire ci-dessous. L'URL contient un code unique et temporaire que nous pouvons utiliser pour générer des jetons. Nous l'extrairons pour vous du lien."
 BA_Invalid=Ces liens ne fonctionnent généralement qu'une seule fois. Si un message "Invalid Grant" ou un autre message d'erreur apparaît sur notre site web, vous devrez peut-être recommencer avec le lien Tesla Logon, ce qui devrait produire un nouveau lien.
 BA_Logoff=Si vous souhaitez utiliser un autre compte, vous devez vous déconnecter manuellement {ici!}.

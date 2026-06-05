@@ -127,9 +127,9 @@ Please select a vehicle=Bitte wählen Sie ein Fahrzeug aus
 TeslaAuthApps="Generiere ein Access- und Refresh-Token mit diesen Apps:"
 BA_Browser=Im lokalen {Browser}
 BA_Read=Bitte lesen Sie alle Schritte, bevor Sie fortfahren:
-BA_Logon=Klicken Sie auf den unten stehenden <b>Tesla Logon</b> Link, der einen neuen Tab für die Tesla-Anmeldeseite öffnet
+BA_Logon=Klicken Sie auf den unten stehenden <b>Tesla Logon</b> Link, der einen neuen Tab für die Tesla-Anmeldeseite öffnet. Öffnen sie die developer tools (F12) im Network Tab!
 BA_Auth=Melden Sie sich mit Ihren Tesla-Zugangsdaten und ggf. MFA an (Tesla merkt sich diese Daten, wenn Sie den Link schon einmal verwendet haben)
-BA_NotFound=Dies führt zu einer "Page Not Found" Seite. Das ist normal.
+BA_NotFound=Es kommt: Verified Successfully. Im Network Tab steht irgendwo: callback?code=... ggf danach filtern. Rechte Maustase und Copy / Copy URL.
 BA_URL="Kopieren Sie den Link dieser Webseite in das unten stehende Feld. Im Link ist ein einmaliger, temporärer Code enthalten, den wir zur Generierung von Token verwenden können. Wir werden diesen Code aus dem Link extrahieren."
 BA_Invalid=Diese Links funktionieren in der Regel nur einmal. Wenn also auf unserer Website die Meldung "Invalid Grant" oder eine andere Fehlermeldung erscheint, müssen Sie möglicherweise den Tesla-Logon-Link erneut aufrufen, der einen neuen Link erzeugen sollte.
 BA_Logoff=Wenn Sie ein anderes Konto verwenden möchten, müssen Sie sich {hier} manuell abmelden!

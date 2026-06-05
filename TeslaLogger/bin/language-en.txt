@@ -251,9 +251,9 @@ New car="New vehicle"
 TeslaAuthApps="Get an access- and refresh token with these apps:"
 BA_Browser=In local {browser}
 BA_Read=Please read all the steps before continuing:
-BA_Logon=Click on the link below titled <b>Tesla Logon</b> which will open a new tab/window for the Tesla Authentication logon page
+BA_Logon=Click on the link below titled <b>Tesla Logon</b> which will open a new tab for the Tesla login page. Open the developer tools (F12) in the Network tab!
 BA_Auth=Log on using your Tesla credentials and MFA if required (Tesla will remember these if you have used the link before)
-BA_NotFound=This will appear to result in a "Page Not Found". This is normal.
+BA_NotFound=You'll see: Verified Successfully. In the Network tab you'll find somewhere: callback?code=... filter for it if needed. Right-click and Copy / Copy URL.
 BA_URL="Paste the URL of the webpage below. Tokens will be generated from a temporary code in it."
 BA_Invalid=These links typically only work once, so if an "Invalid Grant" or other error message appears on our website you may need to start again with the Tesla Logon link which should produce a new link.
 BA_Logoff=If you want to use a different account, you have to manually log off {here!}

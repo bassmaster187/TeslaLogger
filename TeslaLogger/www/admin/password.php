@@ -237,20 +237,21 @@ $actual_link = (empty($_SERVER['HTTPS']) ? 'http' : 'https') . "://$_SERVER[HTTP
 	function GetTokensFromURL()
 	{
 		var url = $("#authresulturl").val();
+		var urlLower = url.toLowerCase();
 
-		if (!url.toLowerCase().startsWith('https://'))
+		if (!urlLower.startsWith('tesla://'))
 		{
 			alert("<?php t('This isn\'t a valid URL!'); ?>");
 			return;
 		}
 
-		if (!url.toLowerCase().startsWith('https://auth.tesla.'))
+		if (!urlLower.startsWith('tesla://auth'))
 		{
 			alert("<?php t('This isn\'t an auth link by Tesla!'); ?>");
 			return;
 		}
 
-		if (!url.toLowerCase().includes('code='))
+		if (!urlLower.includes('code='))
 		{
 			alert("<?php t('The URL doesn\'t contain the expected format!'); ?>");
 			return;
