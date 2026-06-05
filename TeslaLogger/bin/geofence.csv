@@ -8051,11 +8051,10 @@ Allego DE-Hamburg Am Stadtrand,53.5925,10.09845
 Allego DE-Hamburg An der Walddörferbahn,53.6043,10.11616
 Allego DE-Hamburg Bargteheider Straße,53.6036,10.1459
 Allego DE-Hamburg Dehnhaide,53.57908,10.0466
-Allego DE-Hamburg Eiffestraße,53.54984,10.06646
+Allego DE-Hamburg Eiffestraße,53.55,10.06556
 Allego DE-Hamburg Großmoorbogen,53.46117,10.01135
 Allego DE-Hamburg Heimfelder Straße,53.4607,9.9407,8
 Allego DE-Hamburg Julius-Vosseler-Straße,53.59385,9.94452
-Allego DE-Hamburg Maldfeldstraße,53.43027,9.93523,15
 Allego DE-Hamburg Weidestraße,53.58184,10.0276
 Allego DE-Hameln Zinngießerstraße,52.08456,9.34144
 Allego DE-Hamm Roemerstraße,51.6927,7.77686
@@ -8069,6 +8068,7 @@ Allego DE-Hannover Ohefeldweg,52.35757,9.8537
 Allego DE-Hannover Rendsburger Straße,52.41925,9.8324
 Allego DE-Hannover Schierholzstraße,52.4003,9.82306
 Allego DE-Hannover Spielhagenstraße,52.36414,9.76236,25
+Allego DE-Harburg Maldfeldstraße,53.43027,9.93523,15
 Allego DE-Hausen bei Würzburg Am Wiesenweg,49.91207,10.0013
 Allego DE-Heide Fritz-Thiedemann-Ring,54.17727,9.09232
 Allego DE-Heidelberg Henkel-Tereson-Straße,49.40802,8.65156
@@ -8685,6 +8685,7 @@ ARAL DE-Brüggen Klosterstraße,51.23784,6.18916
 ARAL DE-Brühl Kölnstraße,50.8452,6.91546
 ARAL DE-Buchholz (Aller) An der Autobahn,52.67193,9.6907
 ARAL DE-Buchholz in der Nordheide Dibberser Straße,53.3627,9.87312
+ARAL DE-Buchholz in der Nordheide Dibberser Straße,53.36302,9.87244
 ARAL DE-Burgthann Mimberger Straße,49.3515,11.30073
 ARAL DE-Bötzingen Schloßmattenstraße,48.06478,7.72197
 ARAL DE-Celle Braunschweiger Heerstraße,52.59516,10.1111
@@ -10196,7 +10197,7 @@ Citywatt DE-Germering Lise-Meitner-Straße,48.14064,11.37
 Citywatt DE-Gestratz Am Winkelholz,47.63983,10.00042
 Citywatt DE-Gnarrenburg Giehler Straße 3,53.37992,8.96043
 Citywatt DE-Grafenau Finkenweg,48.86017,13.39063
-Citywatt DE-Hamburg Maldfeldstraße,53.43046,9.93469,18
+Citywatt DE-Harburg Maldfeldstraße,53.43046,9.9347,18
 Citywatt DE-Heidenheim Am Kalkwerk,48.69484,10.17215
 Citywatt DE-Hemmingstedt Carl-Friedrich-Benz Straße 1,54.16515,9.08889
 Citywatt DE-Hofheim am Taunus Casteller Straße,50.05753,8.41005
@@ -11147,6 +11148,7 @@ E.ON DE-Dortmund Kleppingstraße,51.5117,7.46822
 E.ON DE-Dortmund Königswall 15,51.51658,7.45733
 E.ON DE-Duisburg Beecker Straße,51.48419,6.76378
 E.ON DE-Eberswalde Eberswalder Straße 4,52.84004,13.76914
+E.ON DE-Egestorf Buchenring,53.19443,10.0736
 E.ON DE-Elmshorn Ramskamp,53.74165,9.70775,15
 E.ON DE-Essen Altenessener Straße,51.51003,7.00742
 E.ON DE-Essen Brüsseler Platz,51.42514,6.9933,40
@@ -12922,7 +12924,6 @@ EnBW DE-Halle (Saale) Leipziger Chaussee,51.45609,12.0146
 EnBW DE-Hallstadt Biegenhofstraße,49.91779,10.86915
 EnBW DE-Haltern am See,51.73314,7.168
 EnBW DE-Hamburg Kieler Straße,53.57986,9.9356
-EnBW DE-Hamburg Maldfeldstraße,53.43046,9.93585,15
 EnBW DE-Hamburg Oberer Landweg,53.48955,10.18733
 EnBW DE-Hamburg Penny,53.58406,10.05808
 EnBW DE-Hamburg Shell,53.51541,10.08189
@@ -12944,6 +12945,7 @@ EnBW DE-Hannover Am Leineufer,52.41463,9.64333,20
 EnBW DE-Hannover Rewe,52.33883,9.83251
 EnBW DE-Hannover Schulenburger Landstraße,52.41032,9.70682
 EnBW DE-Harburg Hardauring,53.47813,9.88555
+EnBW DE-Harburg Maldfeldstraße,53.43046,9.93585,28
 EnBW DE-Hardegsen,51.64926,9.83589
 EnBW DE-Harzgerode,51.64327,11.13962
 EnBW DE-Haslach im Kinzigtal Im Spießacker,48.27842,8.09269
@@ -14542,6 +14544,9 @@ Energie-Oberösterreich AT-Ternberg Alois-Derfler-Straße,47.94635,14.36008
 Energie-Oberösterreich AT-Vöcklabruck Varena,48.00303,13.66992
 Energie-Oberösterreich AT-Wels Dalistraße,48.18405,14.02643
 
+Energie-SaarLorLux DE-Saarbrücken Europaallee,49.24212,6.98925
+Energie-SaarLorLux DE-Saarbrücken Europaallee,49.24293,6.99068
+
 energie-schwaben DE-Augsburg Bayerstraße,48.34363,10.8845
 
 Energie-Steiermark AT-Birkfeld Edelsee-Straße,47.3542,15.7009
@@ -14689,6 +14694,8 @@ EnergieSüdwest DE-Landau in der Pfalz Langstraße,49.1985,8.11056
 EnergieSüdwest DE-Landau in der Pfalz Wollmesheimer Höhe,49.1871,8.09324
 
 energis DE-Illingen Burgweg,49.3771,7.0539
+energis DE-Merchweiler Auf Pfuhlst,49.34622,7.04897
+energis DE-Nohfelden Am Seehafen,49.56493,7.06288
 
 EnergyVision BE-Oostende Torhoutsesteenweg,51.19837,2.90284
 
@@ -16640,6 +16647,7 @@ EXP HU-Budapest Alkotmány u.,47.5075,19.05048
 eze DE-Berlin Brentanostraße,52.4646,13.309
 eze DE-Frankfurt am Main Luxemburgerallee,50.11973,8.71113
 eze DE-Hamburg Mittelweg,53.57307,9.9939
+eze DE-Harburg Reeseberg,53.4465,9.99382
 eze DE-Stuttgart Liststraße,48.76381,9.17615
 eze DE-Stuttgart Salzäckerstraße,48.72511,9.15271
 
@@ -17454,6 +17462,7 @@ HEnW DE-Hamburg Daimlerstraße,53.55654,9.92131
 HEnW DE-Hamburg Dehnhaide,53.57909,10.04252
 HEnW DE-Hamburg Dorothea-Bernstein-Weg,53.57021,10.03361
 HEnW DE-Hamburg Drehbahn,53.55654,9.98456
+HEnW DE-Hamburg Düsternstraße,53.55,9.98422
 HEnW DE-Hamburg Eduard-Rhein-Ufer,53.5679,10.0161
 HEnW DE-Hamburg Eichenstraße,53.57776,9.95316
 HEnW DE-Hamburg Eichholz,53.54623,9.97301
@@ -17493,6 +17502,7 @@ HEnW DE-Hamburg Martinistraße,53.58867,9.97512
 HEnW DE-Hamburg Mendelssohnstraße,53.56378,9.90716
 HEnW DE-Hamburg Moosrosenweg,53.60321,10.06915
 HEnW DE-Hamburg Neue Rabenstraße,53.5606,9.99261
+HEnW DE-Hamburg Neue Straße,53.46256,9.97964
 HEnW DE-Hamburg Neuer Weg,53.48353,10.21139
 HEnW DE-Hamburg New-York-Ring,53.60217,10.01829
 HEnW DE-Hamburg Oesterleystraße,53.56069,9.81062
@@ -17506,6 +17516,7 @@ HEnW DE-Hamburg Robert-Koch-Straße,53.58744,9.98265
 HEnW DE-Hamburg Robert-Koch-Straße,53.59011,9.98591
 HEnW DE-Hamburg Rothenbaumchaussee,53.56769,9.98851
 HEnW DE-Hamburg Roßberg,53.56786,10.04949
+HEnW DE-Hamburg Sachsenfeld,53.5451,10.02232
 HEnW DE-Hamburg Schenefelder Landstraße,53.56665,9.8269
 HEnW DE-Hamburg Schloßstraße,53.57115,10.06531
 HEnW DE-Hamburg Schnackenburgallee,53.59127,9.90427
@@ -17520,12 +17531,16 @@ HEnW DE-Hamburg Tibarg,53.61892,9.95122
 HEnW DE-Hamburg Traberweg,53.59764,10.10183
 HEnW DE-Hamburg Uppenhof,53.64932,10.16269
 HEnW DE-Hamburg Wandsbeker Zollstraße,53.5748,10.07415
+HEnW DE-Hamburg Weimarer Straße,53.50785,9.98785
 HEnW DE-Hamburg Wexstraße,53.55139,9.98334
 HEnW DE-Hamburg Wielandstraße,53.56936,10.05503
 HEnW DE-Hamburg Wiesenhöfen,53.64879,10.16739
 HEnW DE-Hamburg Zeughausmarkt,53.54932,9.97475
 HEnW DE-Hamburg Zirkusweg,53.54836,9.96754
+HEnW DE-Harburg Bremer Straße,53.45314,9.9736
+HEnW DE-Harburg Bremer Straße,53.45773,9.98016
 HEnW DE-Harburg Hainholzweg,53.44986,9.9371
+HEnW DE-Harburg Veritaskai,53.4659,9.98893
 
 Hermes-Flow RO-Brașov Calea București,45.63233,25.63805,25
 Hermes-Flow RO-Craiova Calea București,44.31282,23.82912
@@ -24046,6 +24061,7 @@ Shell DE-Oranienburg Lehnitzstraße,52.74586,13.25379
 Shell DE-Osnabrück Professor-Porsche-Straße,52.30175,7.9493
 Shell DE-Osnabrück Sutthauser Straße,52.24926,8.03747
 Shell DE-Ostfildern Felix Wankelstraße,48.71349,9.30855,30
+Shell DE-Ottweiler Bliesstraße,49.408,7.16742
 Shell DE-Pegau Leipziger Vorstadt,51.16486,12.26405
 Shell DE-Petershagen Mierwerder Weg,52.51906,13.7697
 Shell DE-Pinneberg Rellinger Straße,53.64822,9.82095
