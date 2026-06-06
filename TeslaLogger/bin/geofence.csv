@@ -3140,7 +3140,7 @@ Supercharger HR-Vrgorac,43.20407,17.37387,25
 Supercharger-V4 HR-Zadar,44.11404,15.40714
 Supercharger-V4 HR-Zadar Westbound,44.11502,15.40623
 Supercharger HR-Zagreb,45.76705,16.23365
-Supercharger-V4 HR-Zagreb East,45.79404,16.15084
+Supercharger-V4 HR-Zagreb East,45.7939,16.15154
 Supercharger-V4 HR-Zagreb West,45.79553,15.85776
 
 Supercharger-V4 HU-Budapest Maglod,47.45916,19.33423
@@ -5785,6 +5785,7 @@ Supercharger-V3 US-Liberty MO,39.24588,-94.4486
 Supercharger US-Mehlville MO,38.50747,-90.32907
 Supercharger US-Miner MO,36.89355,-89.53404
 Supercharger-V3 US-Nevada MO,37.83688,-94.35118
+Supercharger-V4 US-Oak Grove MO,39.00826,-94.12826
 Supercharger US-Osage Beach MO,38.16165,-92.6058
 Supercharger US-Rolla MO,37.93994,-91.80164
 Supercharger-V3 US-Saint Louis MO,38.62015,-90.26058
@@ -9009,6 +9010,7 @@ ARAL DE-Oschatz Leipziger Straße,51.30395,13.09396
 ARAL DE-Osnabrück Alte Poststraße,52.27694,8.05526
 ARAL DE-Osnabrück Pagenstecherstraße,52.2894,8.02885
 ARAL DE-Osterwieck Lüttgenröder Straße,51.96858,10.69963
+ARAL DE-Ottobrunn An der Westumgehung,48.07266,11.65186
 ARAL DE-Oyten Oyterdamm,53.0574,8.96718
 ARAL DE-Paderborn Dubelohstraße,51.74533,8.73118
 ARAL DE-Peine Schwarzer Weg,52.3301,10.23483
@@ -14981,6 +14983,7 @@ etecnic ES-Vilanova i la Geltrú Passeig Marítim,41.21605,1.73325
 Eulektro DE-Berlin Platz der Luftbrücke,52.47765,13.3868
 Eulektro DE-Bremen Am Dobben,53.0781,8.82284
 Eulektro DE-Bremen Johann-Jacobs-Straße,53.08654,8.78372,30
+Eulektro DE-Bremen Knechtsand,53.05145,8.73595
 Eulektro DE-Bremen Werderstraße,53.07035,8.8071
 Eulektro DE-Krefeld Odilia-Von-Goch-Strasse,51.36605,6.49727
 Eulektro DE-Nohfelden Am Bostalsee,49.56124,7.0752
@@ -16781,6 +16784,7 @@ Fastned IT-Castenedolo Via Sandro Pertini,45.48482,10.32134
 Fastned NL-Aalscholver,52.43601,5.4249
 Fastned NL-Akermaat,52.49862,4.69879
 Fastned NL-Alblasserdam A15,51.85071,4.67979,30
+Fastned NL-Bad Nieuweschans Poort van Groningen,53.17835,7.21645
 Fastned NL-Beek Vossedal,50.9365,5.78356
 Fastned NL-Bisde A2,51.9117,5.17845,20
 Fastned NL-Bloemheuvel,52.04989,5.46155
@@ -20315,6 +20319,7 @@ Lidl DE-Leipzig Zschochersche Straße,51.3251,12.3356
 Lidl DE-Leipzig Zwickauer Straße,51.3103,12.39517
 Lidl DE-Leverkusen Hardenbergstraße,51.0436,6.99222
 Lidl DE-Lichtenfels Mainau,50.1505,11.06655
+Lidl DE-Lichtenfels Mainau,50.1509,11.06614
 Lidl DE-Liebenwalde Berliner Straße,52.86897,13.3939
 Lidl DE-Liederbach/Taunus Hinter der Mühle,50.12194,8.47922
 Lidl DE-Limbach-Oberfrohna Chemnitzer Straße,50.85484,12.7783
@@ -23333,6 +23338,7 @@ reev DE-Garmisch-Partenkirchen Zugspitzstraße,47.48703,11.07057
 reev DE-Gunzenhausen Industriestraße,49.12367,10.76928
 reev DE-Herzogenaurach Puma Way,49.57417,10.89853
 reev DE-Landsberg am Lech Otto-Lilienthal-Straße,48.06652,10.86082
+reev DE-Laubach Kirchgasse,50.5488,8.9552
 reev DE-Leidersbach Roßbacher Straße,49.87837,9.24441
 reev DE-Nürnberg Kontumazgarten,49.45316,11.06821
 reev DE-Rellingen Halstenbeker Weg,53.64324,9.8392
@@ -27639,6 +27645,7 @@ HR Njivice Ribarska obala,45.16496,14.54132
 HR Opatija Grand Hotel Adriatic,45.32693,14.29863
 HR Pula Max City,44.86114,13.82345
 HR Punat Falkensteiner Hotel Park,45.02029,14.62807
+HR Rogoznica Uvala Soline,43.53196,15.96058
 HR Viškovci Ul. Grobljanska,45.34562,18.43044
 HU Budapest Gizella utca,47.50983,19.0995
 HU Budapest Kempinski Hotel Corvinus,47.49693,19.05196
