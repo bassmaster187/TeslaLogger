@@ -237,20 +237,21 @@ $actual_link = (empty($_SERVER['HTTPS']) ? 'http' : 'https') . "://$_SERVER[HTTP
 	function GetTokensFromURL()
 	{
 		var url = $("#authresulturl").val();
+		var urlLower = url.toLowerCase();
 
-		if (!url.toLowerCase().startsWith('https://'))
+		if (!urlLower.startsWith('tesla://'))
 		{
 			alert("<?php t('This isn\'t a valid URL!'); ?>");
 			return;
 		}
 
-		if (!url.toLowerCase().startsWith('https://auth.tesla.'))
+		if (!urlLower.startsWith('tesla://auth'))
 		{
 			alert("<?php t('This isn\'t an auth link by Tesla!'); ?>");
 			return;
 		}
 
-		if (!url.toLowerCase().includes('code='))
+		if (!urlLower.includes('code='))
 		{
 			alert("<?php t('The URL doesn\'t contain the expected format!'); ?>");
 			return;
@@ -376,7 +377,7 @@ echo $TeslaFleetURL;
 	<?php t("BA_FillOut"); ?> <a href="#" id="authlink" target="_blank">Tesla Logon.</a>
 <h2><?php t("BA_Step2"); ?></h2>
 <?php t("BA_CopyUrl"); ?><br>
-	<img src="img/auth_screenshot.png">
+	<img src="img/auth_screenshot.png?v=2">
 <h2><?php t("BA_Step3"); ?></h2>
 <?php t("BA_Paste"); ?>
 <input id="authresulturl"></input>
