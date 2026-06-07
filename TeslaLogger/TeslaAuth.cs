@@ -33,7 +33,7 @@ namespace TeslaLogger
             loginInfo = new LoginInfo
             {
                 CodeVerifier = RandomString(86),
-                State = RandomString(20)
+                State = RandomString(16)
             };
             client = CreateHttpClient(TeslaAccountRegion.USA);
 
@@ -99,27 +99,34 @@ namespace TeslaLogger
         {
             byte[] code_challenge_SHA256 = ComputeSHA256HashInBytes(loginInfo.CodeVerifier);
             loginInfo.CodeChallenge = Base64UrlEncode(code_challenge_SHA256);
-
-            var b = new UriBuilder(client.BaseAddress + "/oauth2/v3/authorize") { Port = -1 };
+            
+            var authorizeUrl = new Uri(client.BaseAddress, "oauth2/v3/authorize");
+            var b = new UriBuilder(authorizeUrl) { Port = -1 };
 
             var q = HttpUtility.ParseQueryString(b.Query);
             q["client_id"] = "ownerapi";
             q["code_challenge"] = loginInfo.CodeChallenge;
             q["code_challenge_method"] = "S256";
-            q["redirect_uri"] = "https://auth.tesla.com/void/callback";
+            q["redirect_uri"] = "tesla://auth/callback";
             q["response_type"] = "code";
             q["scope"] = "openid email offline_access";
             q["state"] = loginInfo.State;
-            //q["locale"] = "en-US";
+            q["locale"] = "en-US";
+            q["prompt"] = "login";
             b.Query = q.ToString();
             return b.ToString();
         }
 
-        public async Task<Tokens> GetTokenAfterLoginAsync(string redirectUrl, CancellationToken cancellationToken = default)
+       public async Task<Tokens> GetTokenAfterLoginAsync(string redirectUrl, CancellationToken cancellationToken = default)
         {
-            // URL is something like https://auth.tesla.com/void/callback?code=b6a6a44dea889eb08cd8afe5adc16353662cc5d82ba0c6044c95b13d6f…"
-            var b = new UriBuilder(redirectUrl);
-            var q = HttpUtility.ParseQueryString(b.Query);
+            // URL is something like tesla://auth/callback?code=... or https://auth.tesla.com/void/callback?code=...
+            string query;
+            int qIndex = redirectUrl.IndexOf('?');
+            if (qIndex >= 0)
+                query = redirectUrl.Substring(qIndex + 1);
+            else
+                query = "";
+            var q = HttpUtility.ParseQueryString(query);
             var code = q["code"];
 
             // As of March 21 2022, this returns a bearer token.  No need to call ExchangeAccessTokenForBearerToken
@@ -145,7 +152,7 @@ namespace TeslaLogger
                 {"client_id", "ownerapi"},
                 {"code", code},
                 {"code_verifier", loginInfo.CodeVerifier},
-                {"redirect_uri", "https://auth.tesla.com/void/callback"},
+                {"redirect_uri", "tesla://auth/callback"},
                 //{"locale", "en-US" },
             };
 
@@ -154,7 +161,8 @@ namespace TeslaLogger
                 url = new Uri("https://auth.tesla.cn/");
 
             var content = new StringContent(body.ToString(Newtonsoft.Json.Formatting.None), Encoding.UTF8, "application/json");
-            var result = await client.PostAsync(url + "oauth2/v3/token", content, cancellationToken);
+            var tokenUrl = new Uri(url, "oauth2/v3/token");
+            var result = await client.PostAsync(tokenUrl, content, cancellationToken);
             if (!result.IsSuccessStatusCode)
             {
                 var failureDetails = result.Content.ReadAsStringAsync().Result;

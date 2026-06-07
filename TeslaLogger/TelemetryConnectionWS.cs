@@ -108,6 +108,10 @@ namespace TeslaLogger
                 {
                     if (!connect && ex.InnerException is TaskCanceledException)
                         System.Diagnostics.Debug.WriteLine("Telemetry Cancel OK");
+                    else if (IsRemoteCloseWithoutHandshake(ex, out string message))
+                    {
+                        Log(message);
+                    }
                     else if (ex.InnerException?.InnerException is System.Net.Sockets.SocketException se)
                     {
                         Log(se.Message);
@@ -128,6 +132,23 @@ namespace TeslaLogger
                     Thread.Sleep(s);
                 }
             }
+        }
+
+        private static bool IsRemoteCloseWithoutHandshake(Exception ex, out string message)
+        {
+            message = null;
+
+            var websocketException = ex as WebSocketException
+                ?? ex.InnerException as WebSocketException
+                ?? ex.InnerException?.InnerException as WebSocketException;
+
+            if (websocketException?.Message?.IndexOf("without completing the close handshake", StringComparison.OrdinalIgnoreCase) >= 0)
+            {
+                message = websocketException.Message;
+                return true;
+            }
+
+            return false;
         }
 
         private void DisposeSocket()

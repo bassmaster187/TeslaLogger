@@ -193,6 +193,51 @@ Liefert TPMS-Werte aus Tabelle `TPMS`, stündlich aggregiert.
 - `tpms_rl`
 - `tpms_rr`
 
+---
+
+### `get_tripsummary`
+Liefert aggregierte Fahrten-Zusammenfassungen für ein Fahrzeug, gruppiert nach Monat.
+
+**Parameter:**
+- `car_id` (required)
+- `from` (optional)
+- `to` (optional)
+- `days` (optional)
+
+**Rückgabe-Felder:**
+- `period` (z. B. `2025-01`)
+- `trips` (Anzahl Fahrten)
+- `total_distance_km` (Gesamtdistanz)
+- `total_consumption_kWh` (Gesamtverbrauch)
+- `avg_consumption_per_100km` (Durchschnittsverbrauch)
+- `total_minutes` (Gesamtfahrzeit in Minuten)
+- `avg_speed_max` (Durchschnitt der Maximalgeschwindigkeiten)
+- `max_speed` (Maximale Geschwindigkeit)
+- `avg_outside_temp` (Durchschnittliche Außentemperatur)
+
+---
+
+### `get_chargesummary`
+Liefert aggregierte Lade-Zusammenfassungen für ein Fahrzeug, gruppiert nach Monat.
+
+**Parameter:**
+- `car_id` (required)
+- `from` (optional)
+- `to` (optional)
+- `days` (optional)
+
+**Rückgabe-Felder:**
+- `period` (z. B. `2025-01`)
+- `sessions` (Anzahl Ladevorgänge)
+- `total_kWh` (Gesamt-ladung)
+- `total_cost` (Gesamtkosten)
+- `avg_cost_per_kWh` (Durchschnittspreis pro kWh)
+- `avg_cost_per_session` (Durchschnittspreis pro Ladevorgang)
+- `total_idle_fees` (Gesamte Leergebühren)
+- `avg_charger_power_kW` (Durchschnittsladeleistung)
+- `max_charger_power_kW` (Maximale Ladeleistung)
+- `total_minutes` (Gesamte Ladedauer in Minuten)
+
 ## Zeitfilter-Logik
 Alle Tools mit Zeitfilter nutzen dieselbe Logik:
 
