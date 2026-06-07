@@ -186,9 +186,9 @@ The URL doesn't contain the expected format!="Nettadressener ikke i forventet fo
 TeslaAuthApps="Hent gjenoppfrisking- og tilgangssymbol med følgende programmer:"
 BA_Browser="På enheten {browser}"
 BA_Read="Les alle stegene før du fortsetter:"
-BA_Logon="Klikk på lenken nedenfor med tittelen <b>Tesla-innloggng</b> som vil åpne en ny fane/vindu for Tesla identitetsbekreftelse-påloggingssiden."
+BA_Logon="Klikk på lenken nedenfor med tittelen <b>Tesla Logon</b> som vil åpne en ny fane for Tesla innloggingssiden. Åpne developer tools (F12) i Network-fanen!"
 BA_Auth=Logg på med Tesla-legitimasjon og MFA om nødvendig (Tesla husker disse hvis du har brukt lenken før).
-BA_NotFound="Dette ser ut til å resultere i «Fant ikke siden». Dette er normalt."
+BA_NotFound="Du vil se: Verified Successfully. I Network-fanen finner du et sted: callback?code=... filtrer etter det om nødvendig. Høyreklikk og Kopier / Kopier URL."
 BA_URL="Kopier den resulterende nettadressen til nettsiden inn i skjemaet nedenfor. Nettadressen inneholder en midlertidig engangskode vi kan bruke til å generere symboler. De pakkes ut for deg fra lenken."
 BA_Invalid="Disse lenkene fungerer vanligvis kun én gang, så hvis en «Ugyldig innvilgelse» eller annen feilmelding vises på nettstedet vårt, må du kanskje starte på nytt med Tesla Logon-lenken som skal gi en ny lenke."
 BA_Logoff=Hvis du vil bruke en annen konto, må du logge av manuelt {her!}

@@ -195,9 +195,9 @@ The URL doesn't contain the expected format!="O URL não contém o formato esper
 TeslaAuthApps="Pode utilizar as seguintes aplicações para obter um token de acesso e de actualização a partir do servidor Tesla:"
 BA_Browser=No local {browser} (recomendado)
 BA_Read=Por favor, leia todos os passos antes de continuar:
-BA_Logon=Clique no link abaixo intitulado <b>Tesla Logon</b> que abrirá um novo separador/janela para a página de logon do Tesla Authentication
+BA_Logon=Clique no link abaixo intitulado <b>Tesla Logon</b> que abrirá um novo separador para a página de login da Tesla. Abra as ferramentas de desenvolvedor (F12) na aba Network!
 BA_Auth=Inicie a sessão utilizando as suas credenciais Tesla e AMF se necessário (Tesla lembrar-se-á delas se já tiver utilizado a ligação antes)
-BA_NotFound=Isto parecerá resultar numa "Página Não Encontrada". Isto é normal.
+BA_NotFound=Verá: Verified Successfully. Na aba Network encontrará em algum lugar: callback?code=... filtre se necessário. Clique direito e Copiar / Copiar URL.
 BA_URL="Copie o URL resultante dessa página web para o formulário abaixo. Dentro do URL é um código temporário único que podemos utilizar para gerar fichas. Extrairemo-lo para si a partir da ligação."
 BA_Invalid=Estas ligações normalmente só funcionam uma vez, portanto, se uma "Invalid Grant" ou outra mensagem de erro aparecer no nosso sítio Web, poderá ter de começar novamente com a ligação Tesla Logon, que deverá produzir uma nova ligação.
 BA_Logoff=Se quiser usar uma conta diferente, tem de fazer o log off manualmente {aqui!}

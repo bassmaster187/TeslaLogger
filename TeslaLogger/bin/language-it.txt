@@ -220,9 +220,9 @@ This isn't an auth link by Tesla!=Questo non è un link di autorizzazione di Tes
 The URL doesn't contain the expected format!="L'URL non è nel formato previsto!"
 BA_Browser=Nel {browser} locale (consigliato)
 BA_Read=Leggere tutti i passaggi prima di continuare:
-BA_Logon=Cliccate sul link sottostante intitolato <b>Tesla Logon</b> che aprirà una nuova scheda/finestra per la pagina di logon di Tesla Authentication.
+BA_Logon=Cliccate sul link sottostante intitolato <b>Tesla Logon</b> che aprirà una nuova scheda per la pagina di accesso Tesla. Aprite gli strumenti di sviluppo (F12) nella scheda Network!
 BA_Auth=Accedere utilizzando le proprie credenziali Tesla e l'MFA, se richiesto (Tesla le ricorderà se si è già utilizzato il link in precedenza).
-BA_NotFound=Il risultato sarà una "Pagina non trovata". Questo è normale.
+BA_NotFound=Vedrete: Verified Successfully. Nella scheda Network troverete da qualche parte: callback?code=... filtratelo se necessario. Cliccate col tasto destro e Copia / Copia URL.
 BA_URL="Copia e incolla l'URL risultante della pagina web nel modulo sottostante. All'interno dell'URL è presente un codice temporaneo che possiamo utilizzare per generare i token. Lo estrarremo link."
 BA_Invalid=Questi collegamenti funzionano in genere una sola volta, quindi se sul nostro sito web appare un messaggio di errore del tipo "Concessione non valida" o altro, potrebbe essere necessario ricominciare con il collegamento Tesla Logon, che dovrebbe produrre un nuovo collegamento.
 BA_Logoff=Se si desidera utilizzare un altro account, è necessario disconnettersi manualmente {qui!}

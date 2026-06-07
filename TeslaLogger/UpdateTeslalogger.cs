@@ -1521,21 +1521,19 @@ PRIMARY KEY(id)
                         {
                             StartInfo = new ProcessStartInfo
                             {
-                                FileName = "/etc/teslalogger/TLUpdate.exe",
-                                UseShellExecute = false,
-                                RedirectStandardOutput = true,
+                                // Start via shell using nohup so the update process is detached
+                                 FileName = "/bin/bash",
+                                 Arguments = "-c \"nohup /etc/teslalogger/TLUpdate.exe >> /etc/teslalogger/nohup.out 2>&1 &\"",
+                                UseShellExecute = true,
                                 CreateNoWindow = true,
                                 WorkingDirectory = "/etc/teslalogger"
                             }
                         })
                         {
-                            Logfile.Log(" *** starting TLUpdate.exe now ***");
+                            Logfile.Log(" *** starting TLUpdate.exe now (detached, stdout -> /etc/teslalogger/nohup.out) ***");
                             process.Start();
-                            while (!process.StandardOutput.EndOfStream)
-                            {
-                                Logfile.Log(process.StandardOutput.ReadLine());
-                            }
-                            process.WaitForExit();
+                            
+                            Thread.Sleep(5*60*1000); // 5 minutes
                         }
                     }
                     catch (Exception ex)

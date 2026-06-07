@@ -220,9 +220,9 @@ The URL doesn't contain the expected format!="URL-adressen indeholder ikke det f
 TeslaAuthApps="Du kan bruge følgende apps til at få et adgangstoken"
 BA_Browser=I lokal {browser} (anbefales)
 BA_Read=Læs alle trinene, før du fortsætter:
-BA_Logon=Klik på linket nedenfor med titlen <b>Tesla Logon</b>, som åbner en ny fane/et nyt vindue til Tesla Authentication-logon-siden
+BA_Logon=Klik på linket nedenfor med titlen <b>Tesla Logon</b>, som åbner en ny fane til Tesla login-siden. Åbn developer tools (F12) i Network-fanen!
 BA_Auth=Log på med dine Tesla-oplysninger og MFA, hvis det er nødvendigt (Tesla husker disse oplysninger, hvis du har brugt linket før).
-BA_NotFound=Det ser ud til at resultere i en "Side ikke fundet". Dette er normalt.
+BA_NotFound=Du vil se: Verified Successfully. I Network-fanen finder du et sted: callback?code=... filtrér efter det hvis nødvendigt. Højreklik og Kopier / Kopier URL.
 BA_URL="Kopier URL'en til den pågældende webside ind i formularen nedenfor. I URL'en er der en midlertidig kode, som vi kan bruge til at generere tokens. Vi udtrækker den til dig fra linket."
 BA_Invalid=Disse links fungerer typisk kun én gang, så hvis der vises en "Invalid Grant"- eller anden fejlmeddelelse på vores websted, skal du muligvis starte forfra med Tesla Logon-linket, som burde give et nyt link.
 BA_Logoff=Hvis du vil bruge en anden konto, skal du logge af manuelt {her!}
