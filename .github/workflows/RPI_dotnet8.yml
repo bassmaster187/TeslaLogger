@@ -37,14 +37,14 @@ jobs:
     - name: Publish for Raspberry Pi (linux-arm64)
       run: dotnet publish TeslaLogger/TeslaLoggerNET8.csproj -c Debug -r linux-arm64 --no-self-contained -o ./TeslaLogger-master/TeslaLogger/bin/Debug/net8.0
 
-    - name: Copy additional directories
+    - name: Copy additional files
       run: |
         cp -r TeslaLogger/Grafana TeslaLogger-master/TeslaLogger/
         cp -r TeslaLogger/GrafanaConfig TeslaLogger-master/TeslaLogger/
         cp -r TeslaLogger/GrafanaDebug TeslaLogger-master/TeslaLogger/
         cp -r TeslaLogger/GrafanaPlugins TeslaLogger-master/TeslaLogger/
         cp -r TeslaLogger/www TeslaLogger-master/TeslaLogger/
-        cp TeslaLogger/bin TeslaLogger-master/TeslaLogger/bin/
+        cp -n TeslaLogger/bin/* TeslaLogger-master/TeslaLogger/bin/
 
     - name: Create ZIP
       run: |
