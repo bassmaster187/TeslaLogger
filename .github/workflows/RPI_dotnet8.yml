@@ -39,11 +39,11 @@ jobs:
 
     - name: Copy additional directories
       run: |
-        cp -r TeslaLogger/Grafana TeslaLogger-master/TeslaLogger/bin/Debug/net8.0/
-        cp -r TeslaLogger/GrafanaConfig TeslaLogger-master/TeslaLogger/bin/Debug/net8.0/
-        cp -r TeslaLogger/GrafanaDebug TeslaLogger-master/TeslaLogger/bin/Debug/net8.0/
-        cp -r TeslaLogger/GrafanaPlugins TeslaLogger-master/TeslaLogger/bin/Debug/net8.0/
-        cp -r TeslaLogger/www TeslaLogger-master/TeslaLogger/bin/Debug/net8.0/
+        cp -r TeslaLogger/Grafana TeslaLogger-master/TeslaLogger/
+        cp -r TeslaLogger/GrafanaConfig TeslaLogger-master/TeslaLogger/
+        cp -r TeslaLogger/GrafanaDebug TeslaLogger-master/TeslaLogger/
+        cp -r TeslaLogger/GrafanaPlugins TeslaLogger-master/TeslaLogger/
+        cp -r TeslaLogger/www TeslaLogger-master/TeslaLogger/
 
     - name: Create ZIP
       run: |
