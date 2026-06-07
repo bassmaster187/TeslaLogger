@@ -44,7 +44,7 @@ jobs:
         cp -r TeslaLogger/GrafanaDebug TeslaLogger-master/TeslaLogger/
         cp -r TeslaLogger/GrafanaPlugins TeslaLogger-master/TeslaLogger/
         cp -r TeslaLogger/www TeslaLogger-master/TeslaLogger/
-        cp TeslaLogger/bin/ TeslaLogger-master/TeslaLogger/bin/
+        cp TeslaLogger/bin TeslaLogger-master/TeslaLogger/bin/
 
     - name: Create ZIP
       run: |
