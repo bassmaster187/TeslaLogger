@@ -31,13 +31,16 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore TeslaLoggerNET8.sln
 
+    - name: Create output directory
+      run: mkdir -p TeslaLogger-master/TeslaLogger/bin/Debug/net8.0
+
     - name: Publish for Raspberry Pi (linux-arm64)
-      run: dotnet publish TeslaLogger/TeslaLoggerNET8.csproj -c Release -r linux-arm64 --self-contained -o ./publish/rpi
+      run: dotnet publish TeslaLogger/TeslaLoggerNET8.csproj -c Debug -r linux-arm64 --self-contained -o ./TeslaLogger-master/TeslaLogger/bin/Debug/net8.0
 
     - name: Create ZIP
       run: |
-        cd ./publish/rpi
-        zip -r ../../Teslalogger_RPi_${{ env.GIT_TAG }}.zip .
+        cd TeslaLogger-master
+        zip -r ../Teslalogger_RPi_${{ env.GIT_TAG }}.zip .
 
     - name: Upload artifact
       uses: actions/upload-artifact@v4
