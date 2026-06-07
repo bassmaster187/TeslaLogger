@@ -62,6 +62,7 @@ jobs:
         password: ${{ secrets.FTP_PASSWORD_TESLALOGGER_DE_UPLOADUSER }}
         source: "RPI-NET8.zip"
         target: "upload"
+        debug: true
 
     - name: Upload artifact
       uses: actions/upload-artifact@v4
