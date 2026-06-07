@@ -7397,6 +7397,7 @@ Aldi DE-Bottrop Horster Straße,51.52442,6.9324
 Aldi DE-Butzbach Am Keltenhof,50.42884,8.6848
 Aldi DE-Böblingen,48.68565,8.9934
 Aldi DE-Böblingen Süd Bahnhof,48.67753,9.01191
+Aldi DE-Büdingen Orleshäuser Straße,50.28388,9.1018
 Aldi DE-Bürstadt Mainstraße,49.65388,8.45237
 Aldi DE-Dannstadt Riedstraße,49.43428,8.31753
 Aldi DE-Darmstadt Eschollbrücker Straße,49.85989,8.63675
@@ -8563,6 +8564,7 @@ amperio DE-Pirna Am Felsenkeller,50.95813,13.94322
 amperio DE-Pulsnitz Dresdener Straße,51.17915,14.00324
 amperio DE-Rotenburg (Wümme) Therkornsberg,53.10392,9.42282
 amperio DE-Siegen Papierfabrik,50.87121,8.0073
+amperio DE-St. Wendel Leipziger Straße,49.4617,7.1523
 amperio DE-Stendal Lützowstraße,52.6057,11.8383
 amperio DE-Uslar Kurt-Schumacher-Straße,51.65655,9.65268
 amperio DE-Wolfsburg Maybachweg,52.42858,10.80123
@@ -9895,7 +9897,6 @@ ChargePoint DE-Sindelfingen Calwer Straße,48.70551,8.99053
 ChargePoint DE-Sindelfingen Niederer Wasen,48.6921,8.9765
 ChargePoint DE-Spelle 5 Dreierwalder Straße,52.35849,7.47706
 ChargePoint DE-Spenge 25 Industriestraße,52.14473,8.49627
-ChargePoint DE-Speyer 2 Geibstraße,49.31439,8.44645
 ChargePoint DE-St. Märgen Rathausplatz,48.007,8.09216
 ChargePoint DE-Tecklenburg 10 Wechter Straße,52.22104,7.74793
 ChargePoint DE-Trierweiler 12 Kiemstraße,49.77236,6.58319
@@ -10321,6 +10322,7 @@ Civitronic RO-Florești Strada Avram Iancu,46.75105,23.53291
 Claus-Heinemann DE-Braunschweig Hansestraße,52.3093,10.5107,20
 Claus-Heinemann DE-Erlangen Wetterkreuz,49.54286,11.02045
 Claus-Heinemann DE-Frankfurt am Main Heinrich-Lanz-Allee,50.1903,8.65114,20
+Claus-Heinemann DE-Gießen Adolph-Kolping-Straße,50.56506,8.6608
 Claus-Heinemann DE-Hannover Lathusenstraße,52.37963,9.79466
 Claus-Heinemann DE-Konstanz Line-Eid-Straße,47.67273,9.15738
 Claus-Heinemann DE-Mühlheim am Main Schillerstraße,50.1201,8.84734
@@ -12146,12 +12148,28 @@ Elinta LT-Palanga Sporto g.,55.909,21.0691
 Elinta LT-Utena J. Basanavičiaus g.,55.49848,25.60102
 Elinta LT-Vievis Kauno g.,54.77287,24.81753
 
+eliso DE-Biedenkopf Perfstraße,50.91193,8.46064
+eliso DE-Büdingen An der Kleibscheibe,50.27383,9.11425
+eliso DE-Büren Flughafenstraße,51.6106,8.62093
 eliso DE-Celle Zur Hasselklink,52.65246,10.06868
-eliso DE-Essen Bamlerstraße,51.47264,6.99121
+eliso DE-Essen Bamlerstraße,51.47264,6.9912
+eliso DE-Gedern Am alten Bahnhof,50.41937,9.19533
+eliso DE-Glauburg Glauberger Straße,50.32155,9.0126
+eliso DE-Greven Airportallee,52.12994,7.68998
 eliso DE-Großschweidnitz Ernst-Thälmann-Straße,51.07384,14.64685
 eliso DE-Havelberg Uferstraße,52.82418,12.07148
-eliso DE-Magdeburg Eisvogelstrasse,52.13951,11.58802
+eliso DE-Heilbronn Im Neckargarten,49.15488,9.20127
+eliso DE-Konstanz Carl-Benz-Straße,47.67702,9.14634
+eliso DE-Magdeburg Eisvogelstraße,52.1395,11.58802
 eliso DE-Mannheim Seckenheimer Landstraße,49.4745,8.53765
+eliso DE-Ottweiler Reiherswaldweg,49.3994,7.1606
+eliso DE-Papenburg Gutshofstraße,53.0691,7.41952
+eliso DE-Radolfzell am Bodensee Reute,47.7695,8.96537
+eliso DE-Rheinfelden (Baden) Großfeldstraße,47.57697,7.8057
+eliso DE-Starnberg Riedener Weg,48.00416,11.34584
+eliso DE-Waldmünchen Marktoberdorfer Straße,49.37105,12.70568
+eliso DE-Wartenberg Am Sportplatz,50.62447,9.4505
+eliso DE-Wolfsburg Heinenkamp,52.3704,10.7429
 
 ELLA AT-Gemeinde Imst Brennbichl,47.22108,10.75213
 ELLA AT-Holzing Betriebsgebiet,48.13927,15.13758,20
@@ -12353,7 +12371,7 @@ EnBW DE-Bad Kreuznach Mainzer Straße,49.85531,7.8968
 EnBW DE-Bad Krozingen Im Unteren Stollen,47.92467,7.70232
 EnBW DE-Bad Lauchstädt,51.38563,11.87943
 EnBW DE-Bad Marienberg (Westerwald) An der Lehmkaute,50.65829,7.96629
-EnBW DE-Bad Nauheim Hubert-Vergölst-Straße,50.36128,8.7549
+EnBW DE-Bad Nauheim Georg-Scheller-Straße,50.36128,8.7549
 EnBW DE-Bad Nenndorf Bückethaler Straße,52.33473,9.40125
 EnBW DE-Bad Oeynhausen,52.22735,8.82484
 EnBW DE-Bad Oldesloe,53.79843,10.4052
@@ -18060,7 +18078,6 @@ Innogy DE-Siegburg Am Turm,50.7925,7.22177,30
 Innogy DE-Siegburg Wilhelmstraße,50.79265,7.20563
 Innogy DE-Siegburg Zeithstraße,50.8021,7.21769
 Innogy DE-Soltau,52.98422,9.83861
-Innogy DE-Speyer,49.30385,8.44868
 Innogy DE-Sprockhövel Mühlenstraße,51.36854,7.25003
 Innogy DE-Stadtbergen Benzstraße,48.37606,10.84684
 Innogy DE-Stemwede Buchhofstraße,52.37372,8.45609
@@ -20952,6 +20969,7 @@ Maingau DE-Obertshausen Industriestraße,50.0698,8.85463
 
 Mainova DE-Bad Homburg Gluckensteinweg,50.2338,8.60891
 Mainova DE-Bad Soden am Taunus Am Schnittelberg,50.16046,8.48707
+Mainova DE-Bad Vilbel Am Südbahnhof,50.1784,8.73476
 Mainova DE-Flörsheim am Main Industriestraße,50.04078,8.44414
 Mainova DE-Frankfurt am Main Darmstädter Landstraße,50.08922,8.69144
 Mainova DE-Frankfurt am Main Europa-Allee,50.10837,8.62846
@@ -21578,9 +21596,6 @@ MOYA PL-Podlas Trasa Bohaterów Bitwy Warszawskiej,51.73577,20.2306
 MOYA PL-Radomsko Portowa,51.08415,19.37953
 MOYA PL-Suwałki Poddubówek,54.04742,22.88837
 
-msu DE-Hasselfelde Blauvogel,51.67625,10.83572
-msu DE-St. Wendel Leipziger Straße,49.4617,7.1523
-
 MVV DE-Brühl Anton-Langlotz-Straße,49.4074,8.53716
 MVV DE-Buchen In der vorderen Wanne,49.52668,9.3351
 MVV DE-Fehmarn Wulfener-Hals-Weg,54.4076,11.17437
@@ -21826,15 +21841,21 @@ NLE NL-Lingehorst A2,51.91256,5.1807,20
 
 Nobil NO-Oslo-Gardermoen Lufthavn,60.18587,11.06897
 
-nonoxx-pro DE-Cochem Ravenestraße,50.15077,7.16531
+nonoxx-pro DE-Bad Bramstedt Achtern Karkenbleeck,53.92026,9.88018
+nonoxx-pro DE-Bad Bramstedt Bleeck,53.91703,9.88274
+nonoxx-pro DE-Bornhöved Kieler Tor,54.07248,10.22842
+nonoxx-pro DE-Cochem Ravenestraße,50.15077,7.1653
 nonoxx-pro DE-Friedrichstadt Tönninger Straße,54.37233,9.09096
 nonoxx-pro DE-Grube Hauptstraße,54.23087,11.03578
-nonoxx-pro DE-Grömitz Am Strande,54.14459,10.95913
+nonoxx-pro DE-Grömitz Am Strande,54.1446,10.95913
 nonoxx-pro DE-Grömitz Gildestraße,54.14487,10.95546
-nonoxx-pro DE-Itzehoe Portland-Cement-Straße,53.91445,9.51231
+nonoxx-pro DE-Grömitz Pappelallee,54.14557,10.9636
+nonoxx-pro DE-Itzehoe Portland-Cement-Straße,53.91445,9.5123
 nonoxx-pro DE-Itzehoe Wilhelm-Biel-Straße,53.92668,9.50913
+nonoxx-pro DE-Linow Linowsee,53.1015,12.84903
 nonoxx-pro DE-Neustadt in Holstein Dünenweg,54.08863,10.8611
-nonoxx-pro DE-Neustadt in Holstein Klosterstraße,54.10878,10.81289
+nonoxx-pro DE-Neustadt in Holstein Klosterstraße,54.10878,10.8129
+nonoxx-pro DE-Wernigerode Halberstädter Straße,51.83823,10.79588
 
 Norlys DK-Gilleleje Alfavej,56.12646,12.30511
 Norlys DK-Hjørring Frederikshavnsvej,57.45557,10.00555
@@ -21902,7 +21923,6 @@ Numbat DE-Fulda Maberzeller Straße,50.5581,9.65823
 Numbat DE-Föritztal Hofwiese,50.31147,11.24251
 Numbat DE-Geisa Gartenweg,50.7146,9.95642
 Numbat DE-Gemünden a. Main Würzburger Straße,50.06289,9.67757
-Numbat DE-Gießen Adolph-Kolping-Straße,50.56506,8.6608
 Numbat DE-Hanau Heldenbergener Straße,50.14834,8.90784
 Numbat DE-Heilbad Heiligenstadt Brüsseler Straße,51.38602,10.13174
 Numbat DE-Herbsleben Anger,51.11954,10.84242
@@ -24726,6 +24746,7 @@ SW-Bielefeld DE-Bielefeld Föhrenstraße,51.97002,8.46355
 SW-Bielefeld DE-Bielefeld Otto-Brenner-Straße,52.00533,8.55944
 SW-Bielefeld DE-Bielefeld Schopketalweg,51.93301,8.61019
 SW-BK DE-Bad Kissingen Geschwister-Scholl-Platz,50.20659,10.08166
+SW-Blankenburg DE-Hasselfelde Blauvogel,51.67625,10.83572
 SW-Bochum DE-Bochum Blumenau,51.438,7.27965
 SW-Bochum DE-Bochum Dorstener Straße,51.5066,7.19202,20
 SW-Bochum DE-Bochum Hauptbahnhof,51.47871,7.2221
@@ -24995,6 +25016,13 @@ SW-Neustadt DE-Neustadt an der Orla Ernst-Thälmann-Straße,50.73614,11.74803
 SW-Neustrelitz DE-Feldberg Weidendamm,53.33628,13.44224,55
 SW-Neustrelitz DE-Neustrelitz Am Bresebrink,53.28005,12.96672
 SW-Neustrelitz DE-Neustrelitz Am Kiefernwald,53.36156,13.09124,30
+SW-Neuwied DE-Neuwied Augustastraße,50.43145,7.47097
+SW-Neuwied DE-Neuwied Auwiese,50.46728,7.46273
+SW-Neuwied DE-Neuwied Engerser Landstraße,50.42606,7.4672
+SW-Neuwied DE-Neuwied Friedrichstraße,50.42652,7.46193
+SW-Neuwied DE-Neuwied Langendorfer Straße,50.42812,7.46058
+SW-Neuwied DE-Neuwied Langendorfer Straße,50.43165,7.45758
+SW-Neuwied DE-Neuwied Zeppelinsweg,50.43872,7.47596
 SW-Niestetal DE-Niestetal Heiligenröder Straße,51.31443,9.55512
 SW-Norden DE-Norden Dörper Weg,53.61142,7.15547
 SW-Norden DE-Norden Heringstraße,53.59103,7.21119
@@ -25044,7 +25072,15 @@ SW-Soltau DE-Soltau Outlet,52.983,9.92525,10
 SW-Sondershausen DE-Sondershausen Erfurter Straße,51.36458,10.84462
 SW-Sondershausen DE-Sondershausen Schachtstraße,51.38774,10.84469
 SW-Speyer DE-Speyer Alte Ziegelei,49.32462,8.44693
+SW-Speyer DE-Speyer Auestraße,49.33312,8.44216
+SW-Speyer DE-Speyer Bahnhofstraße,49.31914,8.43033
 SW-Speyer DE-Speyer Berliner Platz,49.32692,8.41754
+SW-Speyer DE-Speyer Fliederweg,49.34705,8.42597
+SW-Speyer DE-Speyer Geibstraße,49.3144,8.44643
+SW-Speyer DE-Speyer Georg-Peter-Süß-Straße,49.30385,8.44862
+SW-Speyer DE-Speyer Iggelheimer Straße,49.3359,8.41057
+SW-Speyer DE-Speyer Kämmererstraße,49.31072,8.42465
+SW-Speyer DE-Speyer Schifferstadter Straße,49.34182,8.4289
 SW-Stade DE-Stade Bremervörder Straße,53.59572,9.43775
 SW-Staßfurt DE-Autohof Brumby,51.897,11.6922,30
 SW-Steinburg DE-Itzehoe Klosterbrunnen,53.93629,9.51815
@@ -25185,8 +25221,10 @@ SWM DE-Moosburg Am Stadion,48.46653,11.92817,30
 SWM DE-Moosburg an der Isar Leinbergerstraße,48.46964,11.9377
 SWM DE-München Aschauer Straße,48.10393,11.6015
 SWM DE-München Bernhard-Wicki-Straße,48.1427,11.54775
+SWM DE-München Claude-Lorrain-Straße,48.12026,11.57016
 SWM DE-München Clemensstraße,48.16353,11.58365
 SWM DE-München Deroystraße,48.1458,11.54602
+SWM DE-München Detmoldstraße,48.19266,11.56456
 SWM DE-München Eichendorffplatz,48.11286,11.52365
 SWM DE-München Englschalkinger Straße,48.15354,11.62022
 SWM DE-München Erika-Mann-Straße,48.1434,11.5373
@@ -25194,12 +25232,17 @@ SWM DE-München Feilitzschstraße,48.16104,11.58976,30
 SWM DE-München Friedrich-Hebbel-Straße,48.11063,11.52627
 SWM DE-München Ganghoferstraße,48.13458,11.53985
 SWM DE-München Gaßnerstraße,48.1546,11.509
+SWM DE-München Gollierstraße,48.13723,11.53433
+SWM DE-München Gustav-Mahler-Straße,48.20125,11.60278
 SWM DE-München Görresstraße,48.1563,11.55987
 SWM DE-München Haager Straße,48.12662,11.60837
 SWM DE-München Innere Wiener Straße,48.13334,11.59305
 SWM DE-München Josef-Lang-Straße,48.1499,11.47154
+SWM DE-München Joseph-Dollinger-Bogen,48.18578,11.6057
 SWM DE-München Josephsburgstraße,48.12634,11.63206
+SWM DE-München Kaflerstraße,48.14972,11.4578
 SWM DE-München Kirchseeoner Straße,48.11556,11.6172
+SWM DE-München Leopoldstraße,48.17114,11.5852
 SWM DE-München Maillingerstraße,48.1473,11.54332
 SWM DE-München Marklandstraße,48.09253,11.60448
 SWM DE-München Maximiliansplatz,48.1421,11.5733
@@ -25209,28 +25252,20 @@ SWM DE-München Nymphenburger Straße,48.15408,11.53367
 SWM DE-München Occamstraße,48.16313,11.5904
 SWM DE-München Oslostraße,48.13154,11.68955,30
 SWM DE-München Packenreiterstraße,48.16368,11.47536
+SWM DE-München Pariser Straße,48.12756,11.59897
 SWM DE-München Reginfriedstraße,48.11032,11.5778
 SWM DE-München Ridlerstraße,48.13422,11.53218
 SWM DE-München Schellingstraße,48.1548,11.55986
 SWM DE-München Seeriederstraße,48.13395,11.6021,30
+SWM DE-München Staffelseestraße,48.09215,11.50657
 SWM DE-München Steinstraße,48.1291,11.59414
 SWM DE-München Steubenplatz,48.15114,11.52008
+SWM DE-München Stolzhofstraße,48.12058,11.6839
 SWM DE-München Weyprechtstraße,48.20394,11.56544
 SWM DE-München Widenmayerstraße,48.14003,11.59346
 SWM DE-München Winthirstraße,48.1566,11.52762
 SWM DE-München Winzererstraße,48.1618,11.5621
 SWM DE-München Wirtstraße,48.1124,11.57758
-
-SWN DE-Neuwied Bahnhof,50.43145,7.47097
-SWN DE-Neuwied Friedrichstraße,50.42652,7.46193
-SWN DE-Neuwied Langendorfer Straße,50.43165,7.45758
-SWN DE-Neuwied Parkplatz Deichwelle,50.42812,7.46058
-SWN DE-Neuwied Stadtverwaltung,50.42606,7.4672
-SWN DE-Neuwied Zeppelinsweg 14,50.43872,7.47596
-SWN DE-Neuwied-Segendorf Auwiese 11,50.46728,7.46273
-
-SWS DE-Speyer Fliederweg,49.34705,8.42597
-SWS DE-Speyer Schifferstadter Straße,49.34182,8.4289
 
 SWSZ DE-Zella-Mehlis Hollandsmühle,50.66646,10.68415
 SWSZ DE-Zella-Mehlis Industriestraße,50.64377,10.68748
@@ -26406,7 +26441,7 @@ Virta DE-Deltin Großwalding Deggendorf,48.84952,12.98345
 Virta DE-Dortmund Flamingoweg,51.49789,7.47383
 Virta DE-Euskirchen Heinrich-Barth-Straße,50.6866,6.83745
 Virta DE-Fischen im Allgäu Bundesstraße,47.43159,10.26899
-Virta DE-Friedberg Frankfurter Straße,50.32855,8.75018
+Virta DE-Friedberg (Hessen) Frankfurter Straße,50.32855,8.75018
 Virta DE-Füssen Hiebelerstraße,47.57046,10.66862
 Virta DE-Füssen Kemptener Straße,47.56807,10.67092
 Virta DE-Füssen Kemptener Straße,47.56826,10.66927
