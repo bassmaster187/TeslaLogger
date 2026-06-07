@@ -1,0 +1,46 @@
+name: .NET8 RPI Release (arm64)
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    if: github.ref == 'refs/heads/NET8'
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: 8.0.x
+
+    - name: Get latest version tag
+      shell: bash
+      run: |
+        echo "GIT_TAG=$(git describe --tags --abbrev=0)" >> $GITHUB_ENV
+
+    - name: Show latest version tag
+      run: |
+        echo "GIT_TAG=${{ env.GIT_TAG }}"
+
+    - name: Restore dependencies
+      run: dotnet restore TeslaLoggerNET8.sln
+
+    - name: Publish for Raspberry Pi (linux-arm64)
+      run: dotnet publish TeslaLogger/TeslaLoggerNET8.csproj -c Release -r linux-arm64 --self-contained -o ./publish/rpi
+
+    - name: Create ZIP
+      run: |
+        cd ./publish/rpi
+        zip -r ../../Teslalogger_RPi_${{ env.GIT_TAG }}.zip .
+
+    - name: Upload artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: Teslalogger_RPi
+        path: Teslalogger_RPi_${{ env.GIT_TAG }}.zip
