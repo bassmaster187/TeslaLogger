@@ -8,62 +8,63 @@ namespace TLUpdate
 {
     public class Tools
     {
+        public static System.Globalization.CultureInfo ciDeDE = new System.Globalization.CultureInfo("de-DE");
         public Tools()
         {
         }
 
-        public static void CopyFilesRecursively(DirectoryInfo source, DirectoryInfo target, string excludeFile = null)
-        {
-            if (source != null && target != null)
-            {
-                try
-                {
-                    foreach (DirectoryInfo dir in source.GetDirectories())
-                    {
-                        CopyFilesRecursively(dir, target.CreateSubdirectory(dir.Name));
-                    }
+        public static void CopyFilesRecursively(DirectoryInfo source, DirectoryInfo target, params string[] excludeFiles)
+         {
+             if (source != null && target != null)
+             {
+                 try
+                 {
+                     foreach (DirectoryInfo dir in source.GetDirectories())
+                     {
+                         CopyFilesRecursively(dir, target.CreateSubdirectory(dir.Name), excludeFiles);
+                     }
 
-                    foreach (FileInfo file in source.GetFiles())
-                    {
-                        if (excludeFile != null && file.Name == excludeFile)
-                        {
-                            Console.WriteLine($" *** CopyFilesRecursively: skip {excludeFile}");
-                        }
-                        else
-                        {
-                            string p = Path.Combine(target.FullName, file.Name);
-                            Console.WriteLine(" *** Copy '" + file.FullName + "' to '" + p + "'");
-                            File.Copy(file.FullName, p, true);
-                        }
-                    }
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(" *** CopyFilesRecursively Exception: " + ex.ToString());
-                }
-            }
-            else
-            {
-                Console.WriteLine($" *** CopyFilesRecursively: source or target is null - source:{source} target:{target}");
-            }
-        }
+                     foreach (FileInfo file in source.GetFiles())
+                     {
+                         if (excludeFiles != null && Array.IndexOf(excludeFiles, file.Name) >= 0)
+                         {
+                             Tools.Log($" *** CopyFilesRecursively: skip {file.Name}");
+                         }
+                         else
+                         {
+                             string p = Path.Combine(target.FullName, file.Name);
+                             Tools.Log(" *** Copy '" + file.FullName + "' to '" + p + "'");
+                             File.Copy(file.FullName, p, true);
+                         }
+                     }
+                 }
+                 catch (Exception ex)
+                 {
+                     Tools.Log(" *** CopyFilesRecursively Exception: " + ex.ToString());
+                 }
+             }
+             else
+             {
+                 Tools.Log($" *** CopyFilesRecursively: source or target is null - source:{source} target:{target}");
+             }
+         }
 
         public static void CopyFile(string srcFile, string directory)
         {
             try
             {
-                Console.WriteLine(" *** Copy '" + srcFile + "' to '" + directory + "'");
+                Tools.Log(" *** Copy '" + srcFile + "' to '" + directory + "'");
                 File.Copy(srcFile, directory, true);
             }
             catch (Exception ex)
             {
-                Console.WriteLine(" *** CopyFile Exception: " + ex.ToString());
+                Tools.Log(" *** CopyFile Exception: " + ex.ToString());
             }
         }
 
         public static string ExecMono(string cmd, string param, bool logging = true, bool stderr2stdout = false, int timeout = 0)
         {
-            Console.WriteLine(" *** Exec_mono: " + cmd + " " + param);
+            Tools.Log(" *** Exec_mono: " + cmd + " " + param);
 
             StringBuilder sb = new StringBuilder();
 
@@ -106,7 +107,7 @@ namespace TLUpdate
 
                     if (logging && line.Length > 0)
                     {
-                        Console.WriteLine(" ***  " + line);
+                        Tools.Log(" ***  " + line);
                     }
 
                     sb.AppendLine(line);
@@ -116,11 +117,11 @@ namespace TLUpdate
                     {
                         if (stderr2stdout)
                         {
-                            Console.WriteLine(" ***  " + line);
+                            Tools.Log(" ***  " + line);
                         }
                         else
                         {
-                            Console.WriteLine(" *** Error: " + line);
+                            Tools.Log(" *** Error: " + line);
                         }
                     }
 
@@ -129,7 +130,7 @@ namespace TLUpdate
             }
             catch (Exception ex)
             {
-                Console.WriteLine(" *** Exception " + cmd + " " + ex.Message);
+                Tools.Log(" *** Exception " + cmd + " " + ex.Message);
                 return "Exception";
             }
             return bTimeout ? "Timeout! " + sb.ToString() : sb.ToString();
@@ -166,10 +167,17 @@ namespace TLUpdate
             }
             catch (Exception ex)
             {
-                Console.WriteLine(" *** Exception " + ex.Message);
+                Tools.Log(" *** Exception " + ex.Message);
             }
 
             return false;
+        }
+
+        public static void Log(string text)
+        {
+            string temp = DateTime.Now.ToString(ciDeDE) + " : " + text;
+
+            Console.WriteLine(temp);
         }
     }
 }

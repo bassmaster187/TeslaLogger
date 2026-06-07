@@ -8,29 +8,30 @@ namespace TLUpdate
     {
         static void Main(string[] _)
         {
-            Console.WriteLine(" *** TLUpdate MAIN " + Assembly.GetExecutingAssembly().GetName().Version + " ***");
+            Tools.Log(" *** TLUpdate MAIN " + Assembly.GetExecutingAssembly().GetName().Version + " ***");
             try
             {
-                Tools.CopyFilesRecursively(new DirectoryInfo("/etc/teslalogger/git/TeslaLogger/bin"), new DirectoryInfo("/etc/teslalogger"), "TeslaLogger.exe");
+                var exclude = new string[] { "TeslaLogger.exe", "TLUpdate.exe" };
+                Tools.CopyFilesRecursively(new DirectoryInfo("/etc/teslalogger/git/TeslaLogger/bin"), new DirectoryInfo("/etc/teslalogger"), exclude);
 
                 Tools.CopyFile("/etc/teslalogger/git/TeslaLogger/bin/TeslaLogger.exe", "/etc/teslalogger/TeslaLogger.exe");
 
-                Console.WriteLine(" *** End update");
+                Tools.Log(" *** End update");
 
                 if (Tools.IsDocker())
                 {
-                    Console.WriteLine(" *** Restarting ...");
+                    Tools.Log(" *** Restarting ...");
                     Environment.Exit(0);
                 }
                 else
                 {
-                    Console.WriteLine(" *** Rebooting ...");
+                    Tools.Log(" *** Rebooting ...");
                     Tools.ExecMono("reboot", "");
                 }
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.ToString());
+                Tools.Log(ex.ToString());
             }
         }
     }
