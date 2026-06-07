@@ -51,8 +51,20 @@ jobs:
         cd TeslaLogger-master
         zip -r ../Teslalogger_RPi_${{ env.GIT_TAG }}.zip .
 
+    - name: Rename ZIP
+      run: mv Teslalogger_RPi_${{ env.GIT_TAG }}.zip RPI-NET8.zip
+
+    - name: Upload via SFTP
+      uses: appleboy/scp-action@v1
+      with:
+        host: teslalogger.de
+        username: uploaduser
+        password: ${{ secrets.FTP_PASSWORD_TESLALOGGER_DE_UPLOADUSER }}
+        source: "RPI-NET8.zip"
+        target: "upload"
+
     - name: Upload artifact
       uses: actions/upload-artifact@v4
       with:
         name: Teslalogger_RPi
-        path: Teslalogger_RPi_${{ env.GIT_TAG }}.zip
+        path: RPI-NET8.zip
