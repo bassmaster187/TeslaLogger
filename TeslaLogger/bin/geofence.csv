@@ -10007,7 +10007,6 @@ CircleK DE-Hamburg/Moorfleet Andreas-Meyer-Straße,53.51426,10.08973
 CircleK DE-Hanau Rodgaustraße,50.11674,8.92926
 CircleK DE-Hirschberg an der Bergstraße Goldbeckstraße,49.50795,8.63698,20
 CircleK DE-Hohenlinden Josef-Neumeier-Straße,48.15584,11.9862
-CircleK DE-Hörsel Gewerbestraße,50.92268,10.55255,25
 CircleK DE-Ibbenbüren Münsterstraße,52.25872,7.71167
 CircleK DE-Idstein Wiesbadener Straße,50.21692,8.25418
 CircleK DE-Illertissen Leitschäcker,48.2195,10.1273
@@ -10017,7 +10016,7 @@ CircleK DE-Kirchheim unter Teck Im Hag,48.64236,9.43332,30
 CircleK DE-Krefeld Bruchfeld,51.34393,6.6284
 CircleK DE-Krefeld Nirostastraße,51.28918,6.55366
 CircleK DE-Kösching Ruppertswies,48.8111,11.479,25
-CircleK DE-Laucha Gewerbestraße,50.9229,10.55203
+CircleK DE-Laucha Gewerbestraße,50.92268,10.55255,25
 CircleK DE-Leipzig Rackwitzer Straße,51.3542,12.3948
 CircleK DE-Lohfelden Am Fieseler Werk,51.28656,9.5293
 CircleK DE-Löbau Weißenberger Straße,51.10303,14.67028
@@ -22505,7 +22504,7 @@ Pfalzwerke DE-Heppenheim (Bergstraße) Tiergartenstraße,49.63758,8.6181
 Pfalzwerke DE-Herbolzheim Konrad-Adenauer-Ring,48.2184,7.76045
 Pfalzwerke DE-Herbolzheim Seeweg,48.22412,7.76506
 Pfalzwerke DE-Hermeskeil Römerstraße,49.67753,6.95334
-Pfalzwerke DE-Hermsdorf Rodaer Straße,50.88715,11.0,849357
+Pfalzwerke DE-Hermsdorf Rodaer Straße,50.88715,11.84936
 Pfalzwerke DE-Herne Bochumer Straße,51.5205,7.21436
 Pfalzwerke DE-Herne Holsterhauser Straße,51.52937,7.20172
 Pfalzwerke DE-Herschweiler-Pettersheim Haupstraße,49.47656,7.34594
@@ -22527,7 +22526,7 @@ Pfalzwerke DE-Hösbach Siemensstraße,50.00734,9.22624
 Pfalzwerke DE-Hückelhoven Am Landabsatz,51.0562,6.21718
 Pfalzwerke DE-Hütschenhausen Hauptstraße,49.4221,7.49227
 Pfalzwerke DE-Ilbesheim Arzheimer Straße,49.18656,8.05178
-Pfalzwerke DE-Ingolstadt Am Hochfeldweg,48.70413,11.0,421831
+Pfalzwerke DE-Ingolstadt Am Hochfeldweg,48.70413,11.42183
 Pfalzwerke DE-Ingolstadt Manchinger Straße,48.74578,11.4681
 Pfalzwerke DE-Isernhagen Ernst-Grote-Straße,52.42825,9.84416
 Pfalzwerke DE-Jena Brüsseler Straße,50.87684,11.61864
@@ -22675,8 +22674,8 @@ Pfalzwerke DE-Neustadt an der Weinstraße Le Quartier-Hornbach,49.34024,8.16812
 Pfalzwerke DE-Neustadt an der Weinstraße Louis-Escande-Straße,49.33836,8.16924
 Pfalzwerke DE-Niederzier Industriestraße,50.84518,6.45232
 Pfalzwerke DE-Nußloch Walldorfer Straße,49.3201,8.6875
-Pfalzwerke DE-Nürnberg Geisseestraße,49.43472,11.0,043012
-Pfalzwerke DE-Nürnberg Trierer Straße,49.40463,11.0,112614
+Pfalzwerke DE-Nürnberg Geisseestraße,49.43472,11.043
+Pfalzwerke DE-Nürnberg Trierer Straße,49.40463,11.1126
 Pfalzwerke DE-Oberhausen Brammenring,51.48903,6.8884,40
 Pfalzwerke DE-Obernburg am Main Römerstraße,49.85188,9.1534
 Pfalzwerke DE-Oberotterbach Weinstraße,49.0707,7.97033
@@ -22704,7 +22703,7 @@ Pfalzwerke DE-Pirmasens Arnulfstraße,49.19296,7.5906
 Pfalzwerke DE-Pirmasens Bahnhofstraße,49.202,7.6015
 Pfalzwerke DE-Pirmasens Unterer Sommerwaldweg,49.2126,7.6182
 Pfalzwerke DE-Pirmasens Zweibrücker Straße,49.2242,7.5915
-Pfalzwerke DE-Planegg Lena-Christ-Straße,48.1138,11.0,452408
+Pfalzwerke DE-Planegg Lena-Christ-Straße,48.1138,11.4524
 Pfalzwerke DE-Plattling Dr.-Walter-Bruch-Straße,48.78828,12.89624
 Pfalzwerke DE-Platz Am Neuen Markt,49.44827,7.55392
 Pfalzwerke DE-Plochingen Filsallee,48.7027,9.43975,25
@@ -22744,7 +22743,7 @@ Pfalzwerke DE-Saulheim Marie-Curie-Ring,49.87613,8.16383
 Pfalzwerke DE-Schifferstadt Waldspitzweg,49.38316,8.39185
 Pfalzwerke DE-Schotten Am Vulkaneum,50.5048,9.1264,30
 Pfalzwerke DE-Schwabach Am Falbenholzweg,49.32114,11.04966
-Pfalzwerke DE-Schwedt/Oder Dammweg,53.06995,14.0,257279
+Pfalzwerke DE-Schwedt/Oder Dammweg,53.06995,14.25728
 Pfalzwerke DE-Schwegenheim Im Breiten Pfuhl,49.27203,8.33773
 Pfalzwerke DE-Schweigen-Rechtenbach An der Schmalwiese,49.04688,7.95477
 Pfalzwerke DE-Schweigen-Rechtenbach St. Urban-Platz,49.054,7.95614
@@ -22782,7 +22781,6 @@ Pfalzwerke DE-Ulm Blaubeurer Straße,48.40153,9.9709
 Pfalzwerke DE-Ulm Hindenburgring,48.3976,9.9764
 Pfalzwerke DE-Ulm Wielandstraße,48.40635,10.00575
 Pfalzwerke DE-Unterhaching Grünwalder Weg,48.05638,11.5979
-Pfalzwerke DE-Unterhaching Parkackerstraße,48.0564,11.0,597803
 Pfalzwerke DE-Uslar Wiesenstraße,51.66106,9.62997
 Pfalzwerke DE-Vaihingen an der Enz Stuttgarter Straße,48.92468,8.96997
 Pfalzwerke DE-Velbert Metallstraße,51.33942,7.0567
