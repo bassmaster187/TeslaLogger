@@ -55,14 +55,10 @@ jobs:
       run: mv Teslalogger_RPi_${{ env.GIT_TAG }}.zip RPI-NET8.zip
 
     - name: Upload via SFTP
-      uses: appleboy/scp-action@v1
-      with:
-        host: teslalogger.de
-        username: uploaduser
-        password: ${{ secrets.FTP_PASSWORD_TESLALOGGER_DE_UPLOADUSER }}
-        source: "RPI-NET8.zip"
-        target: "upload"
-        debug: true
+      env:
+        SSH_PASS: ${{ secrets.FTP_PASSWORD_TESLALOGGER_DE_UPLOADUSER }}
+      run: |
+        echo "$SSH_PASS" | sshpass scp -o StrictHostKeyChecking=no RPI-NET8.zip uploaduser@teslalogger.de:upload/
 
     - name: Upload artifact
       uses: actions/upload-artifact@v4
