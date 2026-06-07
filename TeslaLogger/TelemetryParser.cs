@@ -288,6 +288,15 @@ namespace TeslaLogger
                 string key = jj["key"];
                 dynamic value = jj["value"];
 
+                // Skip invalid values early
+
+                if (value.ContainsKey("invalid") && value["invalid"] == true)
+                {
+                    Log($"Invalid value for key: {key}");
+                    continue;
+                }
+                
+
                 if (key == "SentryMode")
                 {
                     string v = value["stringValue"];
@@ -653,9 +662,11 @@ namespace TeslaLogger
                             car.CurrentJSON.current_car_version = car_version;
                             car.CurrentJSON.CreateCurrentJSON();
 
-                            car.DbHelper.SetCarVersion(car_version);
-
-                            car.webhelper.TaskerWakeupfile(true);
+                            if (databaseCalls)
+                            {
+                                car.DbHelper.SetCarVersion(car_version);
+                                car.webhelper.TaskerWakeupfile(true);
+                            }
                         }
 
                     }
@@ -926,6 +937,10 @@ namespace TeslaLogger
                 {
                     string key = jj["key"];
                     dynamic value = jj["value"];
+
+                    // Skip invalid values early
+                    if (value.ContainsKey("invalid") && value["invalid"] == true)
+                        continue;
 
                     if (key == "ACChargingEnergyIn" && charge_energy_added == null)
                     {
@@ -1577,8 +1592,13 @@ namespace TeslaLogger
                         if (cols.Any(key.Equals))
                         {
 
-                            double d;
                             dynamic value = jj["value"];
+
+                            // Skip invalid values early
+                            if (value.ContainsKey("invalid") && value["invalid"] == true)
+                                continue;
+
+                            double d;
                             if (value.ContainsKey("stringValue"))
                             {
                                 string v1 = value["stringValue"];
@@ -1796,6 +1816,10 @@ namespace TeslaLogger
                     if (cols.Any(key.Contains))
                     {
                         dynamic value = jj["value"];
+
+                        // Skip invalid values early
+                        if (value.ContainsKey("invalid") && value["invalid"] == true)
+                            continue;
 
                         if (key == "ChargeState")
                         {
