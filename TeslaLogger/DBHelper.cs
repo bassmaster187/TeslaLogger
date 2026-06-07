@@ -4638,59 +4638,11 @@ WHERE
 
         int last_active_route_energy_at_arrival = int.MinValue;
 
-        internal static async Task RemoveInvalidPosEntriesAsync()
-        {
-            Logfile.Log("RemoveInvalidPosEntriesAsync: start");
-            try
-            {
-                using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
-                {
-                    await con.OpenAsync();
-                    int totalDeleted = 0;
-                    const int batchSize = 100; // Delete 100 entries per batch
-                    
-                    while (true)
-                    {
-                        using (MySqlCommand cmd = new MySqlCommand(@"
-DELETE FROM 
-    pos
-WHERE   
-    lat = 0 
-    AND lng = 0
-LIMIT @batchSize", con))
-                        {
-                            cmd.Parameters.AddWithValue("@batchSize", batchSize);
-                            cmd.CommandTimeout = 600;    
-                            int rowsDeleted = SQLTracer.TraceNQ(cmd, out _);
-                            totalDeleted += rowsDeleted;
-                            
-                            if (rowsDeleted == 0)
-                            {
-                                // No more entries to delete
-                                break;
-                            }
-                            
-                            // Short pause between batches to minimize lock conflicts
-                            await Task.Delay(100);
-                        }
-                    }
-                    
-                    Logfile.Log($"RemoveInvalidPosEntriesAsync: Deleted {totalDeleted} entries where lat = 0 and lng = 0.");
-                }
-            }
-            catch (Exception ex)
-            {
-                Tools.DebugLog($"Exception during RemoveInvalidPosEntriesAsync: {ex}");
-                Logfile.ExceptionWriter(ex, "Exception during RemoveInvalidPosEntriesAsync");
-            }        
-            Logfile.Log("RemoveInvalidPosEntriesAsync: finished");
-        }
-
         public async Task<int> InsertPosAsync(string timestamp, double latitude, double longitude, int speed, decimal? power, double? odometer, double idealBatteryRangeKm, double batteryRangeKm, double batteryLevel, double? insideTemp, double? outsideTemp, string altitude)
         {
             int posid = int.MinValue; // default value to indicate invalid posid
 
-            if (latitude == 0 && longitude == 0)
+            if (latitude == 0.0 && longitude == 0.0)
             {
                 Logfile.Log("InsertPosAsync: Latitude and Longitude are both 0, skipping insert.");
                 Tools.DebugLog("InsertPosAsync: Latitude and Longitude are both 0, skipping insert." + System.Environment.NewLine + (new StackTrace(true)));

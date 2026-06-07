@@ -715,7 +715,6 @@ namespace TeslaLogger
                 Logfile.Log("RunHousekeepingInBackground started");
                 Tools.Housekeeping();
                 DBHelper.UpdateCO2Async().Wait();
-                DBHelper.RemoveInvalidPosEntriesAsync().Wait();
                 GeocodeCache.Cleanup();
                 Logfile.Log("RunHousekeepingInBackground finished, took " + (DateTime.Now - start).TotalMilliseconds + "ms");
             })
