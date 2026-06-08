@@ -7699,12 +7699,12 @@ SELECT 1 FROM drivestate WHERE endpos = @posId LIMIT 1", con))
             }
         }
 
-internal static async Task<(bool found, double lat, double lng)> GetNextPosId(int posId)
-           {
+        internal static async Task<(bool found, double lat, double lng)> GetNextPosId(int posId)
+        {
             try
-               {
+            {
                 using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
-                   {
+                {
                     await con.OpenAsync();
                     using (MySqlCommand cmd = new MySqlCommand(@"
 SELECT
@@ -7726,23 +7726,70 @@ WHERE
 ORDER BY
     id ASC
 LIMIT 1", con))
-                       {
+                    {
                         cmd.Parameters.AddWithValue("@posId", posId);
                         using (var dr = await cmd.ExecuteReaderAsync())
-                           {
+                        {
                             if (await dr.ReadAsync())
-                               {
+                            {
                                 return (true, dr.GetDouble(0), dr.GetDouble(1));
-                               }
-                           }
-                       }
-                   }
-               }
+                            }
+                        }
+                    }
+                }
+            }
             catch (Exception ex)
-               {
+            {
                 Logfile.Log(ex.ToString());
                 ex.ToExceptionless().Submit();
-               }
+            }
+            return (false, 0.0, 0.0);
+        }
+        
+        internal static async Task<(bool found, double lat, double lng)> GetPrevPosId(int posId)
+        {
+            try
+            {
+                using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+                {
+                    await con.OpenAsync();
+                    using (MySqlCommand cmd = new MySqlCommand(@"
+SELECT
+    lat,
+    lng
+FROM
+    pos
+WHERE
+    id < @posId
+    AND carid = (
+        SELECT
+            carid
+        FROM
+            pos
+        WHERE
+            id = @posId
+        LIMIT 1
+      )
+ORDER BY
+    id ASC
+LIMIT 1", con))
+                    {
+                        cmd.Parameters.AddWithValue("@posId", posId);
+                        using (var dr = await cmd.ExecuteReaderAsync())
+                        {
+                            if (await dr.ReadAsync())
+                            {
+                                return (true, dr.GetDouble(0), dr.GetDouble(1));
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logfile.Log(ex.ToString());
+                ex.ToExceptionless().Submit();
+            }
             return (false, 0.0, 0.0);
         }
     }
