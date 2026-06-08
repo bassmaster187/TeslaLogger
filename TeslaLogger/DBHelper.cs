@@ -722,6 +722,68 @@ ORDER BY
             KVS.InsertOrUpdate($"AnalyzeChargingStatesMaxDropID_{car.CarInDB}", maxDropID);
         }
 
+        internal static async Task CleanupInvalidPosEntriesAsync()
+        {
+            Tools.DebugLog("CleanupInvalidPosEntriesAsync()");
+            try
+            {
+                List<int> posIds = new List<int>();
+                using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+                {
+                    await con.OpenAsync();
+                    using (MySqlCommand cmd = new MySqlCommand(@"
+SELECT
+    id
+FROM
+    pos
+WHERE
+    lat = 0
+    AND lng = 0
+ORDER BY
+    id", con))
+                    {
+                        cmd.CommandTimeout = 3600;
+                        using (var dr = await cmd.ExecuteReaderAsync())
+                        {
+                            while (await dr.ReadAsync())
+                            {
+                                if (dr[0] != DBNull.Value && int.TryParse(dr[0].ToString(), out int id))
+                                {
+                                    posIds.Add(id);
+                                }
+                            }
+                        }
+                    }
+                }
+
+                for (int i = 0; i < posIds.Count; i++)
+                {
+                    int posId = posIds[i];
+                    if (IsPosInChargingStateAsync(posId).Result == true)
+                    {
+                        Tools.DebugLog($"CleanupInvalidPosEntriesAsync: posId {posId} is in charging state");
+                    }
+                    else if (IsPosInDriveStateStartPosAsync(posId).Result == true)
+                    {
+                        Tools.DebugLog($"CleanupInvalidPosEntriesAsync: posId {posId} is in drive state as start pos");
+                    }
+                    else if (IsPosInDriveStateEndPosAsync(posId).Result == true)
+                    {
+                        Tools.DebugLog($"CleanupInvalidPosEntriesAsync: posId {posId} is in drive state as end pos");
+                    }
+                    else
+                    {
+                        Tools.DebugLog($"CleanupInvalidPosEntriesAsync: posId {posId} is not in use");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ex.ToExceptionless().FirstCarUserID().Submit();
+                Logfile.Log(ex.ToString());
+            }
+        }
+
         internal static void DeleteDuplicateTrips()
         {
             Tools.DebugLog("DeleteDuplicateTrips()");
@@ -1422,7 +1484,7 @@ WHERE
 ", con))
                         {
                             cmd.Parameters.AddWithValue("@chagingStateID", chargingstate);
-//                            Tools.DebugLog(cmd);
+                            //                            Tools.DebugLog(cmd);
                             MySqlDataReader dr = SQLTracer.TraceDR(cmd);
                             if (dr.Read())
                             {
@@ -1633,7 +1695,7 @@ HAVING
                         cmd.Parameters.AddWithValue("@tesla_token_expire", car.webhelper.nextTeslaTokenFromRefreshToken);
                         int done = SQLTracer.TraceNQ(cmd, out _);
 
-                        car.Log("update tesla_token OK: " + done + " - " + car.webhelper.Tesla_token.Substring(0,20) + "xxxxxx");
+                        car.Log("update tesla_token OK: " + done + " - " + car.webhelper.Tesla_token.Substring(0, 20) + "xxxxxx");
 
                         car.CreateExeptionlessLog("Tesla Token", "Update Tesla Token OK", Exceptionless.Logging.LogLevel.Info).Submit();
 
@@ -3433,7 +3495,7 @@ VALUES(
                         cmd.Parameters.AddWithValue("@fast_charger_brand", wh.fast_charger_brand);
                         cmd.Parameters.AddWithValue("@fast_charger_type", wh.fast_charger_type);
                         cmd.Parameters.AddWithValue("@conn_charge_cable", wh.conn_charge_cable);
-                        cmd.Parameters.AddWithValue("@fast_charger_present",fast_charger_present);
+                        cmd.Parameters.AddWithValue("@fast_charger_present", fast_charger_present);
                         cmd.Parameters.AddWithValue("@meter_vehicle_kwh_start", meter_vehicle_kwh_start);
                         cmd.Parameters.AddWithValue("@meter_utility_kwh_start", meter_utility_kwh_start);
                         cmd.Parameters.AddWithValue("@wheel_type", wh.car.wheel_type);
@@ -3450,7 +3512,7 @@ VALUES(
             // Check for one minute if meter claims car is really not charging 
             if (v != null && v.IsCharging() != true)
             {
-                _ =Task.Run(async () =>
+                _ = Task.Run(async () =>
                 {
                     for (int x = 0; x < 10; x++)
                     {
@@ -4497,7 +4559,7 @@ WHERE
                             try
                             {
                                 int StartPos = Convert.ToInt32(dr[0], Tools.ciEnUS);
-                                
+
                                 if (dr[1] == DBNull.Value) // unfinished trips won't be updated
                                     continue;
 
@@ -4548,7 +4610,7 @@ WHERE
 
             if (posID == 0)
                 posID = GetMaxPosid();
-            
+
             if (!InsertDrivestate(now, posID)) // if starting a drive state is failing because of duplicate startposid, the pos will be duplicated and retry
             {
                 posID = (int)DBHelper.DuplicatePos(posID);
@@ -4697,12 +4759,12 @@ VALUES(
                     cmd.Parameters.AddWithValue("@lat", latitude);
                     cmd.Parameters.AddWithValue("@lng", longitude);
                     cmd.Parameters.AddWithValue("@speed", (int)Tools.MphToKmhRounded(speed));
-                    
+
                     if (power == null)
                         cmd.Parameters.AddWithValue("@power", DBNull.Value);
                     else
                         cmd.Parameters.AddWithValue("@power", Convert.ToInt32(power * 1.35962M));
-                    
+
                     cmd.Parameters.AddWithValue("@odometer", odometer ?? (object)DBNull.Value);
 
                     if (idealBatteryRangeKm == -1)
@@ -4775,7 +4837,7 @@ VALUES(
                     try
                     {
                         car.CurrentJSON.current_speed = (int)(speed * 1.609344M);
-                        
+
                         if (power != null)
                             car.CurrentJSON.current_power = (int)(power * 1.35962M);
 
@@ -5108,25 +5170,25 @@ VALUES(
 
         public static int CalculatePhases(int power, int voltage, int current)
         {
-            if (power <= 0 || voltage <= 0 || current <= 0 )
+            if (power <= 0 || voltage <= 0 || current <= 0)
                 return 0;
 
-            int phases = Convert.ToInt32(Math.Truncate(Math.Truncate((power * 1000.0 + 500) / voltage / current))+0.3);
-            
+            int phases = Convert.ToInt32(Math.Truncate(Math.Truncate((power * 1000.0 + 500) / voltage / current)) + 0.3);
+
             if (phases > 3)
                 return 3;
 
             if (phases < 1)
                 return 1;
-            
+
             return phases;
         }
-        
+
         public static int CalculatePower(int voltage, int phases, int current)
         {
             if (voltage < 0 || phases < 1 || current < 1)
                 return 0;
-                       
+
             return phases * voltage * current;
         }
 
@@ -5474,7 +5536,8 @@ WHERE
                         }
                     }
                 }
-            } catch (MySqlException ex)
+            }
+            catch (MySqlException ex)
             {
                 if (ex.Number == 1146)  // Table doesn't exist
                     return false;
@@ -5872,22 +5935,22 @@ WHERE
             return "";
         }
 
-        public static DataTable GetCarsByTokenAge(bool descending=false)
+        public static DataTable GetCarsByTokenAge(bool descending = false)
         {
-            return GetCars($"tesla_token_expire {(descending?"DESC":"ASC")}");
+            return GetCars($"tesla_token_expire {(descending ? "DESC" : "ASC")}");
         }
 
         public static DataTable GetCars()
         {
             return GetCars("id");
         }
-        
+
         private static DataTable GetCars(string orderByCol)
         {
             DataTable dt = new DataTable();
 
             // defense against SQLInjection
-            if(!Regex.IsMatch(orderByCol, @"^\w+$"))
+            if (!Regex.IsMatch(orderByCol, @"^\w+$"))
             {
                 orderByCol = "id";
             }
@@ -5925,7 +5988,7 @@ ORDER BY
                         *
                     FROM
                         cars
-                    where id="+id, DBConnectionstring))
+                    where id=" + id, DBConnectionstring))
                 {
                     _ = SQLTracer.TraceDA(dt, da);
                 }
@@ -7290,7 +7353,7 @@ WHERE
                                 return false;
 
                             string url = dr[0].ToString();
-                            if (String.IsNullOrEmpty(url)) 
+                            if (String.IsNullOrEmpty(url))
                                 return false;
 
                             car.FleetApiAddress = url;
@@ -7322,7 +7385,7 @@ WHERE
                 var svStart = start.ToString("yyyy-MM-dd HH:mm:ss", Tools.ciEnUS);
                 var svEnd = end.ToString("yyyy-MM-dd HH:mm:ss", Tools.ciEnUS);
 
-                using (MySqlConnection con = new MySqlConnection(DBConnectionstring+ ";Allow User Variables=True"))
+                using (MySqlConnection con = new MySqlConnection(DBConnectionstring + ";Allow User Variables=True"))
                 {
                     con.Open();
                     using (MySqlCommand cmd = new MySqlCommand($@"select date, state from cruisestate
@@ -7346,7 +7409,7 @@ WHERE
                             {
                                 startstate = date;
                             }
-                            else if (startstate != null &&  state != 1)
+                            else if (startstate != null && state != 1)
                             {
                                 TimeSpan ts = date - (DateTime)startstate;
                                 double tssec = ts.TotalSeconds;
@@ -7367,7 +7430,8 @@ WHERE
                         }
                     }
                 }
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 Logfile.Log(ex.ToString());
                 ex.ToExceptionless().Submit();
@@ -7453,7 +7517,7 @@ ORDER BY startdate", con))
 
         internal static long DuplicatePos(int id)
         {
-             string sql = @"INSERT INTO `pos` (`Datum`,`lat`,`lng`,`speed`,`power`,`odometer`,`ideal_battery_range_km`,`address`,`outside_temp`,`altitude`,`battery_level`,`inside_temp`,`battery_heater`,`is_preconditioning`,`sentry_mode`,`battery_range_km`,`CarID`,`AP`) 
+            string sql = @"INSERT INTO `pos` (`Datum`,`lat`,`lng`,`speed`,`power`,`odometer`,`ideal_battery_range_km`,`address`,`outside_temp`,`altitude`,`battery_level`,`inside_temp`,`battery_heater`,`is_preconditioning`,`sentry_mode`,`battery_range_km`,`CarID`,`AP`) 
                 select now() ,`lat`,`lng`,`speed`,`power`,`odometer`,`ideal_battery_range_km`,`address`,`outside_temp`,`altitude`,`battery_level`,`inside_temp`,`battery_heater`,`is_preconditioning`,`sentry_mode`,`battery_range_km`,`CarID`,`AP`
                 from pos
                 where id = " + id;
@@ -7562,6 +7626,77 @@ ORDER BY startdate", con))
                 ex.ToExceptionless().Submit();
             }
         }
+
+        private static async Task<bool> IsPosInChargingStateAsync(int posId)
+        {
+            try
+            {
+                using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+                {
+                    await con.OpenAsync();
+                    using (MySqlCommand cmd = new MySqlCommand(@"
+SELECT 1 FROM chargingstate WHERE pos = @posId LIMIT 1", con))
+                    {
+                        cmd.Parameters.AddWithValue("@posId", posId);
+                        object? result = await cmd.ExecuteScalarAsync();
+                        return result != null && result != DBNull.Value;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logfile.Log(ex.ToString());
+                ex.ToExceptionless().Submit();
+                return false;
+            }
+        }
+
+        private static async Task<bool> IsPosInDriveStateStartPosAsync(int posId)
+        {
+            try
+            {
+                using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+                {
+                    await con.OpenAsync();
+                    using (MySqlCommand cmd = new MySqlCommand(@"
+SELECT 1 FROM drivestate WHERE startpos = @posId LIMIT 1", con))
+                    {
+                        cmd.Parameters.AddWithValue("@posId", posId);
+                        object? result = await cmd.ExecuteScalarAsync();
+                        return result != null && result != DBNull.Value;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logfile.Log(ex.ToString());
+                ex.ToExceptionless().Submit();
+                return false;
+            }
+        }
+
+        private static async Task<bool> IsPosInDriveStateEndPosAsync(int posId)
+        {
+            try
+            {
+                using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+                {
+                    await con.OpenAsync();
+                    using (MySqlCommand cmd = new MySqlCommand(@"
+SELECT 1 FROM drivestate WHERE endpos = @posId LIMIT 1", con))
+                    {
+                        cmd.Parameters.AddWithValue("@posId", posId);
+                        object? result = await cmd.ExecuteScalarAsync();
+                        return result != null && result != DBNull.Value;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logfile.Log(ex.ToString());
+                ex.ToExceptionless().Submit();
+                return false;
+            }
+        }
     }
 }
-
