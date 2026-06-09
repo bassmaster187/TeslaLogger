@@ -57,10 +57,13 @@ findet sich im Logfile so eine Fehlermeldung, dann muss man das docker-compose.y
 client version 1.25 is too old. Minimum supported API version is 1.44, please upgrade your client to a newer version“
 ```
 
-das geht am besten so:
+Manuelles Update:
 ```
 docker compose stop
 wget https://raw.githubusercontent.com/bassmaster187/TeslaLogger/refs/heads/NET8/docker-compose.yml -O docker-compose.yml
 docker compose pull
 docker compose up -d
 ```
+
+Passiert beim drücken auf Aktualisieren im Admin Panel gar nichts im Watchtower Log, dann kann es sein, dass man eine Version von Watchtower erwischt hat, die keine HTTP GET mehr akzeptiert. 
+Auch da bitte ein Manuelles Update starten. 
