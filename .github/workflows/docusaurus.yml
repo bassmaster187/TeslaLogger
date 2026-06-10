@@ -1,12 +1,7 @@
 name: Build and Deploy Docusaurus
 
 on:
-  push:
-    branches:
-      - master
-    paths:
-      - 'docs/**'
-      - 'docusaurus/**'
+  workflow_dispatch:
 
 jobs:
   build:
@@ -24,8 +19,8 @@ jobs:
           cache-dependency-path: docusaurus/package-lock.json
 
       - name: Install dependencies
-        working-directory: docusaurus
-        run: npm ci
+          working-directory: docusaurus
+          run: npm ci
 
       - name: Build
         working-directory: docusaurus
