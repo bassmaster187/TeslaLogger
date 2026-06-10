@@ -13,8 +13,8 @@ jobs:
           fetch-depth: 0
 
       - uses: actions/setup-node@v4
-         with:
-           node-version: 20
+        with:
+          node-version: 20
 
       - name: Install dependencies
         working-directory: docusaurus
@@ -30,25 +30,3 @@ jobs:
           name: docusaurus-build
           path: docusaurus/build
           retention-days: 30
-
-  # TODO: Später SCP Deploy aktivieren
-  # deploy-scp:
-  #   name: Deploy via SCP
-  #   needs: build
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - uses: actions/download-artifact@v4
-  #       with:
-  #         name: docusaurus-build
-  #         path: docusaurus/build
-  #     
-  #     - name: Deploy via SCP
-  #       uses: appleboy/scp-action@v0.1.7
-  #       with:
-  #         host: ${{ secrets.SCP_HOST }}
-  #         username: ${{ secrets.SCP_USERNAME }}
-  #         key: ${{ secrets.SCP_SSH_KEY }}
-  #         port: 22
-  #         source: "docusaurus/build/*"
-  #         target: "/path/to/remote/docs"
-  #         strip_components: 1
