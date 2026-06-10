@@ -32,7 +32,8 @@ jobs:
           name: docusaurus-build
           path: docusaurus/build
           retention-days: 30
-  # TODO: Spater SCP Deploy aktivieren
+
+  # TODO: Später SCP Deploy aktivieren
   # deploy-scp:
   #   name: Deploy via SCP
   #   needs: build
