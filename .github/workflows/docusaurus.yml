@@ -19,8 +19,8 @@ jobs:
           cache-dependency-path: docusaurus/package-lock.json
 
       - name: Install dependencies
-          working-directory: docusaurus
-          run: npm ci
+        working-directory: docusaurus
+        run: npm ci
 
       - name: Build
         working-directory: docusaurus
@@ -32,8 +32,7 @@ jobs:
           name: docusaurus-build
           path: docusaurus/build
           retention-days: 30
-
-  # TODO: Später SCP Deploy aktivieren
+  # TODO: Spater SCP Deploy aktivieren
   # deploy-scp:
   #   name: Deploy via SCP
   #   needs: build
