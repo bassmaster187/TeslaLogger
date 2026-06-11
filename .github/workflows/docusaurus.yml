@@ -16,6 +16,9 @@ jobs:
         with:
           node-version: 20
 
+      - name: Link docs folder
+        run: ln -s ../docs docusaurus/docs
+
       - name: Install dependencies
         working-directory: docusaurus
         run: npm install
@@ -28,5 +31,5 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: docusaurus-build
-          path: docusaurus/build 
+          path: docusaurus/build
           retention-days: 30
