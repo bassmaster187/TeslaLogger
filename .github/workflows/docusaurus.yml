@@ -48,13 +48,21 @@ jobs:
         env:
           SSH_PASS: ${{ secrets.FTP_PASSWORD_TESLALOGGER_DE_UPLOADUSER }}
         run: |
-          echo "$SSH_PASS" | sshpass scp -r -o StrictHostKeyChecking=no docusaurus/build/docs/* uploaduser@teslalogger.de:docs/
-          echo "$SSH_PASS" | sshpass scp -r -o StrictHostKeyChecking=no docusaurus/build/assets/* uploaduser@teslalogger.de:assets/
-          echo "$SSH_PASS" | sshpass scp -r -o StrictHostKeyChecking=no docusaurus/build/img/* uploaduser@teslalogger.de:img/
-          find docusaurus/build -maxdepth 1 -name "*.json" -exec scp -o StrictHostKeyChecking=no {} uploaduser@teslalogger.de:docs/rootdir/ \;
+          sshpass -p "$SSH_PASS" ssh -o StrictHostKeyChecking=no uploaduser@teslalogger.de "rm -rf ~/docs/* ~/docs/rootdir/*"
+          sshpass -p "$SSH_PASS" scp -r -o StrictHostKeyChecking=no docusaurus/build/docs/* uploaduser@teslalogger.de:docs/
+          sshpass -p "$SSH_PASS" ssh -o StrictHostKeyChecking=no uploaduser@teslalogger.de "rm -rf ~/assets/*"
+          sshpass -p "$SSH_PASS" scp -r -o StrictHostKeyChecking=no docusaurus/build/assets/* uploaduser@teslalogger.de:assets/
+          sshpass -p "$SSH_PASS" ssh -o StrictHostKeyChecking=no uploaduser@teslalogger.de "rm -rf ~/img/*"
+          sshpass -p "$SSH_PASS" scp -r -o StrictHostKeyChecking=no docusaurus/build/img/* uploaduser@teslalogger.de:img/
+          for f in docusaurus/build/*.json; do
+            if [ -f "$f" ]; then
+              sshpass -p "$SSH_PASS" scp -o StrictHostKeyChecking=no "$f" uploaduser@teslalogger.de:docs/rootdir/
+            fi
+          done
 
       - name: Upload English docs via SCP
         env:
           SSH_PASS: ${{ secrets.FTP_PASSWORD_TESLALOGGER_DE_UPLOADUSER }}
         run: |
-          echo "$SSH_PASS" | sshpass scp -r -o StrictHostKeyChecking=no docusaurus/build/en/* uploaduser@teslalogger.de:en/
+          sshpass -p "$SSH_PASS" ssh -o StrictHostKeyChecking=no uploaduser@teslalogger.de "rm -rf ~/en/*"
+          sshpass -p "$SSH_PASS" scp -r -o StrictHostKeyChecking=no docusaurus/build/en/* uploaduser@teslalogger.de:en/
