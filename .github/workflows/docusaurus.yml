@@ -48,13 +48,13 @@ jobs:
         env:
           SSH_PASS: ${{ secrets.FTP_PASSWORD_TESLALOGGER_DE_UPLOADUSER }}
         run: |
-          echo "$SSH_PASS" | sshpass scp -r -o StrictHostKeyChecking=no docusaurus/build/docs/* uploaduser@teslalogger.de:docs/
-          echo "$SSH_PASS" | sshpass scp -r -o StrictHostKeyChecking=no docusaurus/build/assets uploaduser@teslalogger.de:/assets/
-          echo "$SSH_PASS" | sshpass scp -r -o StrictHostKeyChecking=no docusaurus/build/img uploaduser@teslalogger.de:/img/
-          
+          echo "$SSH_PASS" | sshpass scp -v -r -o StrictHostKeyChecking=no docusaurus/build/docs/* uploaduser@teslalogger.de:docs/
+          echo "$SSH_PASS" | sshpass scp -v -r -o StrictHostKeyChecking=no docusaurus/build/assets uploaduser@teslalogger.de:assets/
+          echo "$SSH_PASS" | sshpass scp -v -r -o StrictHostKeyChecking=no docusaurus/build/img uploaduser@teslalogger.de:img/
+          find docusaurus/build -maxdepth 1 -name "*.json" -exec scp -v -o StrictHostKeyChecking=no {} uploaduser@teslalogger.de:docs/rootdir/ \;
 
       - name: Upload English docs via SCP
         env:
           SSH_PASS: ${{ secrets.FTP_PASSWORD_TESLALOGGER_DE_UPLOADUSER }}
         run: |
-          echo "$SSH_PASS" | sshpass scp -r -o StrictHostKeyChecking=no docusaurus/build/en/* uploaduser@teslalogger.de:en/
+          echo "$SSH_PASS" | sshpass scp -v -r -o StrictHostKeyChecking=no docusaurus/build/en/* uploaduser@teslalogger.de:en/
