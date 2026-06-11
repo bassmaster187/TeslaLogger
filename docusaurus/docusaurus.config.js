@@ -42,13 +42,13 @@ const config = {
       /** @type {import('@docusaurus/preset-classic').Options} */
       ({
         docs: {
-           sidebarPath: './sidebars.js',
-           exclude: ['**/en/**'],
-           // Please change this to your repo.
-           // Remove this to remove the "edit this page" links.
-           editUrl:
-             'https://github.com/bassmaster187/TeslaLogger/tree/master/',
-         },
+              routeBasePath: 'docs',
+              path: '../docs',
+              editUrl:
+                'https://github.com/bassmaster187/TeslaLogger/tree/master/docs/',
+              sidebarPath: './sidebars.js',
+              exclude: ['**/en/**'],
+            },
         blog: false,
         theme: {
           customCss: './src/css/custom.css',

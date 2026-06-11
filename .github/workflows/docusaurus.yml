@@ -16,9 +16,6 @@ jobs:
         with:
           node-version: 20
 
-      - name: Link docs folder
-        run: ln -s ../docs docusaurus/docs
-
       - name: Link static assets
         run: |
           mkdir -p docusaurus/static
