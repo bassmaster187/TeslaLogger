@@ -28,5 +28,5 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: docusaurus-build
-          path: docusaurus/build
+          path: docusaurus/build 
           retention-days: 30
