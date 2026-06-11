@@ -18,12 +18,12 @@ jobs:
 
       - name: Link static assets
         run: |
-          mkdir -p docusaurus/static
+          mkdir -p docusaurus/static 
           ln -s ../../img docusaurus/static/img
 
       - name: Copy English docs to i18n folder
-        run: |
-          mkdir -p docusaurus/i18n/en/docusaurus-plugin-content-docs/current
+        run: | 
+          mkdir -p docusaurus/i18n/en/docusaurus-plugin-content-docs/current 
           cp -r docs/en/* docusaurus/i18n/en/docusaurus-plugin-content-docs/current/ || true
 
       - name: Install dependencies
@@ -42,4 +42,4 @@ jobs:
           retention-days: 30
 
       - name: Local server hint
-        run: echo "To test locally, extract the artifact and run: python -m http.server 8000"  
+        run: echo "To test locally, extract the artifact and run python -m http.server 8000"
