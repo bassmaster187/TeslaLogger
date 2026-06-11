@@ -48,4 +48,4 @@ jobs:
         env:
           SSH_PASS: ${{ secrets.FTP_PASSWORD_TESLALOGGER_DE_UPLOADUSER }}
         run: |
-          echo "$SSH_PASS" | sshpass scp -r -o StrictHostKeyChecking=no docusaurus/build/* uploaduser@teslalogger.de:docs/
+          echo "$SSH_PASS" | sshpass scp -r -o StrictHostKeyChecking=no docusaurus/build/docs* uploaduser@teslalogger.de:docs/
