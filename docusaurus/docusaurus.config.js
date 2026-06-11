@@ -51,16 +51,7 @@ const config = {
                       return `https://github.com/bassmaster187/TeslaLogger/blob/master/docs/${locale}/${docPath}`;
                     },
               sidebarPath: './sidebars.js',
-              exclude: [
-                'en/co2.md',
-                'en/faq.md',
-                'en/Fleet_API.md',
-                'en/lucid-install.md',
-                'en/os_upgrade.md',
-                'en/rechnung.md',
-                'en/tesla-fleet-permission.md',
-                'en/upgrade-to-net8-docker.md'
-              ],
+              exclude: ['**/en/**'],
             },
         blog: false,
         theme: {
