@@ -60,6 +60,5 @@ jobs:
       - name: Upload English docs via SCP
         env:
           SSH_PASS: ${{ secrets.FTP_PASSWORD_TESLALOGGER_DE_UPLOADUSER }}
-        run: |
-          sshpass -p "$SSH_PASS" ssh -o StrictHostKeyChecking=no uploaduser@teslalogger.de "rm -rf ~/en/*"
+        run:
           sshpass -p "$SSH_PASS" scp -r -o StrictHostKeyChecking=no docusaurus/build/en/* uploaduser@teslalogger.de:en/
