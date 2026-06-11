@@ -29,21 +29,19 @@ const config = {
   // useful metadata like html lang. For example, if your site is Chinese, you
   // may want to replace "en" with "zh-Hans".
   i18n: {
-      defaultLocale: 'de',
-      locales: ['de', 'en'],
-      localeConfigs: {
-        de: {
-          htmlLang: 'de-DE',
-          locale: 'de',
-          label: 'Deutsch',
-        },
-        en: {
-          htmlLang: 'en-US',
-          locale: 'en',
-          label: 'English',
-        },
-      },
-    },
+       defaultLocale: 'de',
+       locales: ['de', 'en'],
+       localeConfigs: {
+         de: {
+           htmlLang: 'de-DE',
+           label: 'Deutsch',
+         },
+         en: {
+           htmlLang: 'en-US',
+           label: 'English',
+         },
+       },
+     },
 
    plugins: [
      [
