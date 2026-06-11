@@ -45,11 +45,11 @@ const config = {
               routeBasePath: 'docs',
               path: '../docs',
               editUrl: ({locale, versionDocsDirPath, docPath}) => {
-                if (locale === 'de') {
-                  return `https://github.com/bassmaster187/TeslaLogger/blob/master/docs/${docPath}`;
-                }
-                return `https://github.com/bassmaster187/TeslaLogger/blob/master/docusaurus/i18n/${locale}/docusaurus-plugin-content-docs/current/${docPath}`;
-              },
+                      if (locale === 'de') {
+                        return `https://github.com/bassmaster187/TeslaLogger/blob/master/docs/${docPath}`;
+                      }
+                      return `https://github.com/bassmaster187/TeslaLogger/blob/master/docs/${locale}/${docPath}`;
+                    },
               sidebarPath: './sidebars.js',
               exclude: [
                 'en/co2.md',
