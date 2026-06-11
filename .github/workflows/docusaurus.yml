@@ -42,21 +42,21 @@ jobs:
           retention-days: 30
 
       - name: Local server hint
-        run: echo "To test locally, extract the artifact and run python -m http.server 8000"
+        run: echo "To test locally, extract the artifact and run python -m http.server 8000" 
 
       - name: Upload German docs via SCP
-         env:
-           SSH_PASS: ${{ secrets.FTP_PASSWORD_TESLALOGGER_DE_UPLOADUSER }}
-         run: |
-           echo "$SSH_PASS" | sshpass scp -r -o StrictHostKeyChecking=no docusaurus/build/docs/* uploaduser@teslalogger.de:docs/
-           echo "$SSH_PASS" | sshpass scp -r -o StrictHostKeyChecking=no docusaurus/build/assets uploaduser@teslalogger.de:docs/
-           echo "$SSH_PASS" | sshpass scp -r -o StrictHostKeyChecking=no docusaurus/build/css uploaduser@teslalogger.de:docs/
-           echo "$SSH_PASS" | sshpass scp -r -o StrictHostKeyChecking=no docusaurus/build/js uploaduser@teslalogger.de:docs/
-           echo "$SSH_PASS" | sshpass scp -r -o StrictHostKeyChecking=no docusaurus/build/img uploaduser@teslalogger.de:docs/
-           echo "$SSH_PASS" | sshpass scp -r -o StrictHostKeyChecking=no docusaurus/build/index.html uploaduser@teslalogger.de:docs/
+        env:
+          SSH_PASS: ${{ secrets.FTP_PASSWORD_TESLALOGGER_DE_UPLOADUSER }}
+        run: |
+          echo "$SSH_PASS" | sshpass scp -r -o StrictHostKeyChecking=no docusaurus/build/docs/* uploaduser@teslalogger.de:docs/
+          echo "$SSH_PASS" | sshpass scp -r -o StrictHostKeyChecking=no docusaurus/build/assets uploaduser@teslalogger.de:docs/
+          echo "$SSH_PASS" | sshpass scp -r -o StrictHostKeyChecking=no docusaurus/build/css uploaduser@teslalogger.de:docs/
+          echo "$SSH_PASS" | sshpass scp -r -o StrictHostKeyChecking=no docusaurus/build/js uploaduser@teslalogger.de:docs/
+          echo "$SSH_PASS" | sshpass scp -r -o StrictHostKeyChecking=no docusaurus/build/img uploaduser@teslalogger.de:docs/
+          echo "$SSH_PASS" | sshpass scp -r -o StrictHostKeyChecking=no docusaurus/build/index.html uploaduser@teslalogger.de:docs/
 
-       - name: Upload English docs via SCP
-         env:
-           SSH_PASS: ${{ secrets.FTP_PASSWORD_TESLALOGGER_DE_UPLOADUSER }}
-         run: |
-           echo "$SSH_PASS" | sshpass scp -r -o StrictHostKeyChecking=no docusaurus/build/en/* uploaduser@teslalogger.de:en/
+      - name: Upload English docs via SCP
+        env:
+          SSH_PASS: ${{ secrets.FTP_PASSWORD_TESLALOGGER_DE_UPLOADUSER }}
+        run: |
+          echo "$SSH_PASS" | sshpass scp -r -o StrictHostKeyChecking=no docusaurus/build/en/* uploaduser@teslalogger.de:en/
