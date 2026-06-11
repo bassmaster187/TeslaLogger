@@ -19,6 +19,11 @@ jobs:
       - name: Link docs folder
         run: ln -s ../docs docusaurus/docs
 
+      - name: Link static assets
+        run: |
+          mkdir -p docusaurus/static
+          ln -s ../../img docusaurus/static/img
+
       - name: Install dependencies
         working-directory: docusaurus
         run: npm install
@@ -28,7 +33,7 @@ jobs:
         run: npm run build
 
       - name: Upload ZIP artifact
-        uses: actions/upload-artifact@v4 
+        uses: actions/upload-artifact@v4
         with:
           name: docusaurus-build
           path: docusaurus/build
