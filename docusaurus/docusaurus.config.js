@@ -13,10 +13,9 @@ const config = {
   favicon: 'img/favicon.ico',
 
   // Set the production url of your site here
-  url: 'https://teslalogger.de',
-  // Set the /<baseUrl>/ pathname under which your site is served
-  // For GitHub pages deployment, it is often '/<projectName>/'
-  baseUrl: '/',
+   url: 'https://teslalogger.de',
+   // Set the /<baseUrl>/ pathname under which your site is served
+   baseUrl: '/docs/',
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
@@ -30,11 +29,31 @@ const config = {
   // useful metadata like html lang. For example, if your site is Chinese, you
   // may want to replace "en" with "zh-Hans".
   i18n: {
-    defaultLocale: 'de',
-    locales: ['en','de'],
-  },
-  
-  plugins: [require.resolve('docusaurus-lunr-search')],
+      defaultLocale: 'de',
+      locales: ['de', 'en'],
+      localeConfigs: {
+        de: {
+          htmlLang: 'de-DE',
+          locale: 'de',
+          label: 'Deutsch',
+        },
+        en: {
+          htmlLang: 'en-US',
+          locale: 'en',
+          label: 'English',
+        },
+      },
+    },
+
+   plugins: [
+     [
+       'docusaurus-lunr-search',
+       {
+         languages: ['de', 'en'],
+         excludeSearchResultsPrefix: ['/en/docs/en/'],
+       },
+     ],
+   ],
   
   presets: [
     [
