@@ -59,8 +59,6 @@ const config = {
       /** @type {import('@docusaurus/preset-classic').Options} */
       ({
         docs: {
-               routeBasePath: 'docs',
-              path: '../docs',
               editUrl: ({locale, versionDocsDirPath, docPath}) => {
                       if (locale === 'de') {
                         return `https://github.com/bassmaster187/TeslaLogger/blob/master/docs/${docPath}`;

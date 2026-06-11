@@ -49,8 +49,9 @@ jobs:
           SSH_PASS: ${{ secrets.FTP_PASSWORD_TESLALOGGER_DE_UPLOADUSER }}
         run: |
           echo "$SSH_PASS" | sshpass scp -r -o StrictHostKeyChecking=no docusaurus/build/docs/* uploaduser@teslalogger.de:docs/
-          echo "$SSH_PASS" | sshpass scp -r -o StrictHostKeyChecking=no docusaurus/build/assets uploaduser@teslalogger.de:docs/
-          echo "$SSH_PASS" | sshpass scp -r -o StrictHostKeyChecking=no docusaurus/build/index.html uploaduser@teslalogger.de:docs/
+          echo "$SSH_PASS" | sshpass scp -r -o StrictHostKeyChecking=no docusaurus/build/assets uploaduser@teslalogger.de:/assets/
+          echo "$SSH_PASS" | sshpass scp -r -o StrictHostKeyChecking=no docusaurus/build/img uploaduser@teslalogger.de:/img/
+          
 
       - name: Upload English docs via SCP
         env:
