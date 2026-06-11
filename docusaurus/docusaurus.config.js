@@ -42,13 +42,22 @@ const config = {
       /** @type {import('@docusaurus/preset-classic').Options} */
       ({
         docs: {
-              routeBasePath: 'docs',
-              path: '../docs',
-              editUrl:
-                'https://github.com/bassmaster187/TeslaLogger/tree/master/docs/',
-              sidebarPath: './sidebars.js',
-              exclude: ['**/en/**'],
-            },
+            routeBasePath: 'docs',
+            path: '../docs',
+            editUrl:
+              'https://github.com/bassmaster187/TeslaLogger/tree/master/docs/',
+            sidebarPath: './sidebars.js',
+            exclude: [
+              'en/co2.md',
+              'en/faq.md',
+              'en/Fleet_API.md',
+              'en/lucid-install.md',
+              'en/os_upgrade.md',
+              'en/rechnung.md',
+              'en/tesla-fleet-permission.md',
+              'en/upgrade-to-net8-docker.md'
+            ],
+          },
         blog: false,
         theme: {
           customCss: './src/css/custom.css',
