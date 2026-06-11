@@ -43,3 +43,9 @@ jobs:
 
       - name: Local server hint
         run: echo "To test locally, extract the artifact and run python -m http.server 8000"
+
+      - name: Upload via SCP
+        env:
+          SSH_PASS: ${{ secrets.FTP_PASSWORD_TESLALOGGER_DE_UPLOADUSER }}
+        run: |
+          echo "$SSH_PASS" | sshpass scp -r -o StrictHostKeyChecking=no docusaurus/build/* uploaduser@teslalogger.de:docs/
