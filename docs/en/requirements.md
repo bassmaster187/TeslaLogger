@@ -12,3 +12,4 @@ On Amazon.de there is a corresponding kit, but in principle any Raspberry Pi 4 w
 In the Teslalogger shop, of course, there is a ready-made kit including a pre-flashed MicroSD card: [Link](https://teslalogger.de:8808/produkt/teslalogger/)
 
 ![IMAGE](/img/TeslaloggerRaspberryReady.jpg)
+ 
