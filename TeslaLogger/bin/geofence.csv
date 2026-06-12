@@ -2520,6 +2520,7 @@ Supercharger FI-Pyhäjärvi,63.716298,25.920103
 Supercharger-V4 FI-Raisio,60.4949,22.22567
 Supercharger-V3 FI-Rovaniemi,66.501765,25.723048
 Supercharger-V3 FI-Salo,60.41852,23.16233
+Supercharger-V4 FI-Seinäjoki,62.79306,22.79616
 Supercharger-V3 FI-Sodankylä,67.419824,26.591239
 Supercharger-V4 FI-Tampere IKEA,61.45161,23.76986
 Supercharger-V4 FI-Vaasa,63.11251,21.65643
@@ -4029,7 +4030,7 @@ Supercharger-V4 RO-Oradea,47.04343,21.8971
 Supercharger-V3 RO-Pitești,44.823586,24.909692,46
 Supercharger-V4 RO-Satu Mare,47.784422,22.845358
 Supercharger-V3 RO-Sibiu,45.775579,24.170674,36
-Supercharger-V4 RO-Sibiu Strada Drumul Ocnei,45.8231,24.14433
+Supercharger-V4 RO-Sibiu Calea Șurii Mari,45.8231,24.14433
 Supercharger-V4 RO-Targu Mures,46.509828,24.508961
 Supercharger-V3 RO-Timișoara,45.755132,21.232989,32
 Supercharger-V4 RO-Timișoara Calea Torontalului,45.77407,21.2116
@@ -6389,7 +6390,7 @@ Supercharger-V3 US-Oklahoma City OK,35.4617,-97.6514
 Supercharger-V4 US-Oklahoma City OK N Lincoln Blvd Francis Energy,35.52566,-97.5038
 Supercharger-V3 US-Oklahoma City OK NE 36th St,35.50878,-97.5014
 Supercharger-V4 US-Oklahoma City OK W Memorial Rd,35.6106,-97.57807
-Supercharger-V4 US-Owasso OK Francis Energy,36.2928,-95.83875
+Supercharger-V4 US-Owasso OK Francis Energy,36.29283,-95.83873
 Supercharger-V3 US-Perry OK,36.2893,-97.3261
 Supercharger-V4 US-Sand Springs OK Francis Energy,36.13458,-96.11197
 Supercharger-V4 US-Seiling OK Francis Energy,36.16726,-98.95532
@@ -15349,6 +15350,7 @@ EVN AT-Wien Dommesgasse,48.17229,16.41517
 EVN AT-Wien Gotramgasse,48.2201,16.44554
 EVN AT-Wien Linzer Straße,48.20324,16.24355
 EVN AT-Wiener Neudorf IZ NÖ-Süd Straße,48.07747,16.32508
+EVN AT-Wiener Neustadt Ferdinand-Graf-von-Zeppelin-Straße,47.8417,16.25966
 EVN AT-Wiener Neustadt Günser Straße,47.8022,16.24043
 EVN AT-Wiener Neustadt Neunkirchner Straße,47.80974,16.24378
 EVN AT-Wiener Neustadt Puchberger Straße,47.8045,16.2103,11
