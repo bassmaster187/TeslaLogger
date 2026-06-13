@@ -171,6 +171,7 @@ Supercharger AU-Macquarie,-33.77778,151.12275
 Supercharger-V4 AU-Mansfield VIC,-37.06047,146.09837
 Supercharger AU-Maroochydore,-26.65388,153.0876
 Supercharger-V4 AU-Maryborough West QLD,-25.4878,152.66365
+Supercharger-V4 AU-Mascot NSW,-33.92458,151.1914
 Supercharger AU-Melbourne-Richmond,-37.832,144.9958
 Supercharger-V4 AU-Merimbula NSW,-36.88574,149.90823
 Supercharger-V3 AU-Mildura VIC,-34.20947,142.13992
@@ -2170,7 +2171,7 @@ Supercharger-V4 DE-Nürnberg,49.46967,11.1018
 Supercharger-V3 DE-Oberhausen,51.485746,6.886665
 Supercharger-V4 DE Oberhausen Bero Zentrum,51.47575,6.841856
 Supercharger-V3 DE-Oberhonnefeld,50.56278,7.52512
-Supercharger-V4 DE-Oberkrämer,52.70812,13.106
+Supercharger-V4 DE-Oberkrämer,52.70916,13.10545
 Supercharger-V4 DE-Obertshausen,50.075294,8.8577
 Supercharger-V4 DE-Offenbach,50.08887,8.76088
 Supercharger-V3 DE-Offenburg,48.469907,7.931822
@@ -5689,6 +5690,7 @@ Supercharger US-Grasonville MD,38.9659,-76.22053
 Supercharger-V3 US-Grasonville MD - Hissey Road,38.9659,-76.1939
 Supercharger-V4 US-Greenbelt MD,38.99712,-76.89222
 Supercharger US-Hagerstown MD,39.60594,-77.7329
+Supercharger-V4 US-Hagerstown MD Cole Rd,39.6206,-77.7731
 Supercharger-V3 US-Hagerstown MD Venture Drive,39.6086,-77.7506
 Supercharger US-Halethorpe MD,39.2511,-76.66854
 Supercharger US-Hanover MD (Floor 3),39.15263,-76.74383
@@ -6117,6 +6119,7 @@ Supercharger-V3 US-Woodcliff Lake NJ,41.04138,-74.0748
 Supercharger-V4 US-Alamogordo NM,32.90048,-105.9563
 Supercharger US-Albuquerque NM,35.10856,-106.6127
 Supercharger-V3 US-Albuquerque NM - Louisiana Boulevard Northeast,35.10427,-106.566
+Supercharger-V4 US-Albuquerque NM 12th St NW,35.11112,-106.65593
 Supercharger-V4 US-Carlsbad NM,32.3917,-104.22046
 Supercharger-V3 US-Clayton NM,36.44944,-103.18193
 Supercharger US-Deming NM,32.28167,-107.76074
@@ -6824,8 +6827,7 @@ Supercharger-V4 US-Spring TX Cypresswood Dr,30.0508,-95.43608
 Supercharger-V4 US-Spring TX N Grand Pkwy,30.08826,-95.52107
 Supercharger US-Sulphur Springs TX,33.13718,-95.6032
 Supercharger US-Sweetwater TX,32.451,-100.39285
-Supercharger-V3 US-Temple TX,31.13745,-97.3284,110
-Supercharger-V4 US-Temple TX,31.13776,-97.32933
+Supercharger-V4 US-Temple TX,31.13745,-97.3284,110
 Supercharger-V3 US-Terrell TX,32.7174,-96.32314
 Supercharger US-Texarkana Nash TX,33.4523,-94.1311
 Supercharger US-Texarkana TX,33.4599,-94.07723
@@ -7397,7 +7399,7 @@ Ahrtal-Werke DE-Bad Neuenahr-Ahrweiler Hauptstraße,50.54598,7.13578
 
 Aimo NO-Oslo Innspurten,59.91584,10.8039
 
-Akzenta DE-Wuppertal Am Stationsgarten,51.23188,7.06907
+Akzenta DE-Wuppertal Am Stationsgarten,51.23188,7.06907,20
 
 Albatros DE-Kampen (Sylt) Strönwai,54.9559,8.3421,20
 Albatros DE-Westerland Andreas-Dirks-Straße,54.9088,8.30057
@@ -11161,6 +11163,7 @@ E.ON CZ-Vrchlabí Lánovská,50.62136,15.62393
 E.ON CZ-Zličín Sárská,50.05235,14.29565
 E.ON CZ-Čestlice Obchodní,50.00274,14.57362,5
 E.ON DE-Ahrensburg Kornkamp,53.68339,10.25765
+E.ON DE-Altwarmbüchen Opelstraße,52.42332,9.8354,10
 E.ON DE-Autohof Bremgarten,47.9092,7.5923
 E.ON DE-Autohof Geiselwind,49.7691,10.4708,9
 E.ON DE-Autohof Pfalzfeld,50.11537,7.59846,12
@@ -11826,6 +11829,7 @@ EDEKA DE-Wanzleben-Börde Gartenstraße,52.10359,11.29474
 EDEKA DE-Weil der Stadt Hermann-Schnaufer-Straße,48.74847,8.87325
 EDEKA DE-Wesendorf Gifhorner Straße,52.58987,10.5331
 EDEKA DE-Weyhausen Wolfsburger Straße,52.46364,10.71642
+EDEKA DE-Weyhe Kirchweyher Straße,52.98567,8.87004
 EDEKA DE-Wiesmoor Hauptstraße,53.41785,7.73905
 EDEKA DE-Wietzen Herrlichkeit,52.71085,9.07477
 EDEKA DE-Wilhelmshaven Flutstraße,53.57713,8.1118
@@ -14269,6 +14273,7 @@ EnBW DE-Wolpertshausen Kuno-Haberkern-Straße,49.16903,9.84812
 EnBW DE-Wolpertswende Kirchplatz,47.89446,9.61267
 EnBW DE-Worms Mainzer Straße,49.64475,8.36274
 EnBW DE-Worms Petrus-Dorn-Straße,49.64434,8.36313,20
+EnBW DE-Wuppertal Am Stationsgarten,51.23202,7.06976,40
 EnBW DE-Wuppertal Bauhaus,51.24568,7.18793
 EnBW DE-Wuppertal Hellweg,51.27535,7.15288
 EnBW DE-Wuppertal Schützenstraße,51.27933,7.1857
@@ -15102,6 +15107,7 @@ EVconnect RO-Blejoi DN1A DN1B,44.97199,26.02152
 EVconnect RO-Brașov AFI,45.6504,25.6097
 EVconnect RO-Brașov Calea București,45.6252,25.64475
 EVconnect RO-Brașov Calea București,45.63239,25.63677,25
+EVconnect RO-București Bulevardul Timișoara,44.4303,26.05052
 EVconnect RO-Cluj-Napoca Str. Clinicilor,46.76657,23.58472
 EVconnect RO-Onești Calea Brașovului,46.23477,26.73834
 EVconnect RO-Oradea Str. Tudor Vladimirescu,47.05777,21.92542
@@ -18709,6 +18715,7 @@ Ionity SE-Enköping,59.65339,17.08324
 Ionity SE-Gränna,58.00157,14.45022
 Ionity SE-Helsingborg,56.01699,12.75981,25
 Ionity SE-Hudiksvall,61.74251,17.07861
+Ionity SE-Jokkmokk Föreningsgatan,66.60754,19.828
 Ionity SE-Jävrebyn,65.14307,21.50461
 Ionity SE-Karlskrona,56.20643,15.64273,25
 Ionity SE-Karlstad,59.38093,13.46529
@@ -25720,7 +25727,6 @@ TEAG DE-Zeulenroda-Triebes Am Waldstadion,50.66135,11.99586
 TEAG DE-Zierenberg Vor Brakens Höhe,51.36764,9.2903
 
 team-Emobility DE-Achern Fautenbacher Straße,48.6278,8.05696
-team-Emobility DE-Albstadt Siegmaninger Str,48.20428,9.0466
 team-Emobility DE-Balingen Lange Straße,48.26083,8.85044
 team-Emobility DE-Bretten Melanchthonstraße,49.03885,8.69036
 team-Emobility DE-Bötzingen Allmendweg,48.06902,7.72393
@@ -26521,6 +26527,7 @@ Virta DE-Füssen Hiebelerstraße,47.57046,10.66862
 Virta DE-Füssen Kemptener Straße,47.56807,10.67092
 Virta DE-Füssen Kemptener Straße,47.56826,10.66927
 Virta DE-Günzburg Augsburger Straße,48.45264,10.28569
+Virta DE-Heustreu Wollbacher Straße,50.35424,10.2374
 Virta DE-Ichenhausen Weiler Weg,48.37573,10.31365
 Virta DE-Karlsruhe Wolfartsweierer Straße,48.99948,8.42831,12
 Virta DE-Kirchlengern Hüllerstraße,52.21746,8.63805
@@ -27549,7 +27556,6 @@ DE Hamburg Super 8 by Wyndham,53.5513,10.03152
 DE Hamburg-Niendorf METRO,53.6138,9.9646
 DE Hameln Platzstraße,52.1018,9.35787
 DE Hanau Luise-Kiesselbach-Straße,50.14543,8.93568
-DE Hannover A2 Center,52.42332,9.8354,10
 DE Hannover PZH IFA Uni,52.42688,9.61821
 DE Heidelberg Hauptbahnhof,49.40653,8.67399
 DE Heidenheim an der Brenz Maier,48.71004,10.1598
