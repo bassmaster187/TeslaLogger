@@ -29,7 +29,7 @@ namespace TeslaLogger
         public const string GitBranch = "${GIT_BRANCH}";
         public const string GitCommit = "${GIT_COMMIT}";
         public const string BuildDate = "${BUILD_DATE}";
-        public const string FullVersion = "${ASSEMBLY_VERSION}-${GIT_BRANCH}-${BUILD_DATE}";
+        public const string FullVersion = "-${GIT_BRANCH}-${GIT_COMMIT}-${BUILD_DATE}";
     }
 }
 EOF

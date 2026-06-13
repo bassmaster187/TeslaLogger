@@ -722,9 +722,9 @@ ORDER BY
             KVS.InsertOrUpdate($"AnalyzeChargingStatesMaxDropID_{car.CarInDB}", maxDropID);
         }
 
-        internal static async Task CleanupInvalidPosEntriesAsync()
+        internal static async Task CorrectInvalidPosEntriesAsync()
         {
-            Tools.DebugLog("CleanupInvalidPosEntriesAsync()");
+            Tools.DebugLog("CorrectInvalidPosEntriesAsync()");
             try
             {
                 List<int> posIds = new List<int>();
@@ -761,19 +761,19 @@ ORDER BY
                     int posId = posIds[i];
                     if (IsPosInChargingStateAsync(posId).Result == true)
                     {
-                        Tools.DebugLog($"CleanupInvalidPosEntriesAsync: posId {posId} is in charging state");
+                        Tools.DebugLog($"CorrectInvalidPosEntriesAsync: posId {posId} is in charging state");
                     }
                     else if (IsPosInDriveStateStartPosAsync(posId).Result == true)
                     {
-                        Tools.DebugLog($"CleanupInvalidPosEntriesAsync: posId {posId} is in drive state as start pos");
+                        Tools.DebugLog($"CorrectInvalidPosEntriesAsync: posId {posId} is in drive state as start pos");
                     }
                     else if (IsPosInDriveStateEndPosAsync(posId).Result == true)
                     {
-                        Tools.DebugLog($"CleanupInvalidPosEntriesAsync: posId {posId} is in drive state as end pos");
+                        Tools.DebugLog($"CorrectInvalidPosEntriesAsync: posId {posId} is in drive state as end pos");
                     }
                     else
                     {
-                        Tools.DebugLog($"CleanupInvalidPosEntriesAsync: posId {posId} is not in use");
+                        Tools.DebugLog($"CorrectInvalidPosEntriesAsync: posId {posId} is not in use");
                     }
                 }
             }
@@ -7714,6 +7714,7 @@ FROM
     pos
 WHERE
     id > @posId
+    AND (lat <> 0 AND lng <> 0)
     AND carid = (
         SELECT
             carid
@@ -7761,6 +7762,7 @@ FROM
     pos
 WHERE
     id < @posId
+    AND (lat <> 0 AND lng <> 0)
     AND carid = (
         SELECT
             carid
