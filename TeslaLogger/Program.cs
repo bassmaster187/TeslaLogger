@@ -43,9 +43,9 @@ namespace TeslaLogger
                     ExceptionlessClient.Default.Startup(ApplicationSettings.Default.ExceptionlessApiKey);
                     // ExceptionlessClient.Default.Configuration.UseFileLogger("exceptionless.log");
                     ExceptionlessClient.Default.Configuration.ServerUrl = ApplicationSettings.Default.ExceptionlessServerUrl;
-                    ExceptionlessClient.Default.Configuration.SetVersion(Assembly.GetExecutingAssembly().GetName().Version);
+                    ExceptionlessClient.Default.Configuration.SetVersion(BuildInfo.FullVersion);
 
-                    ExceptionlessClient.Default.CreateLog("Program", "Start " + Assembly.GetExecutingAssembly().GetName().Version, Exceptionless.Logging.LogLevel.Info).FirstCarUserID().Submit();
+                    ExceptionlessClient.Default.CreateLog("Program", $"Start {BuildInfo.FullVersion}", Exceptionless.Logging.LogLevel.Info).FirstCarUserID().Submit();
                 }
                 catch (Exception ex)
                 {
@@ -517,7 +517,7 @@ namespace TeslaLogger
             UpdateTeslalogger.Chmod("TeslaLogger.exe", 755, false);
 
             Logfile.Log("Runtime: " + Environment.Version.ToString());
-            Logfile.Log("TeslaLogger Version: " + Assembly.GetExecutingAssembly().GetName().Version);
+            Logfile.Log($"TeslaLogger Version: {BuildInfo.FullVersion}");
             Logfile.Log("Teslalogger Online Version: " + WebHelper.GetOnlineTeslaloggerVersion());
             Logfile.Log("Logfile Version: " + Assembly.GetAssembly(typeof(Logfile)).GetName().Version);
             Logfile.Log("SRTM Version: " + Assembly.GetAssembly(typeof(SRTM.SRTMData)).GetName().Version);
@@ -527,7 +527,7 @@ namespace TeslaLogger
                 if (Tools.RunOnLinux())
                     versionpath = "/etc/teslalogger/VERSION";
 
-                File.WriteAllText(versionpath, Assembly.GetExecutingAssembly().GetName().Version.ToString());
+                File.WriteAllText(versionpath, BuildInfo.FullVersion);
             }
             catch (Exception)
             { }
@@ -772,7 +772,7 @@ namespace TeslaLogger
         {
             // Run only once a day per version
             string kvskey = "UpdateDbInBackground";
-            string check = DateTime.Now.ToString("yyyyMMdd") + "-" + Assembly.GetExecutingAssembly().GetName().Version.ToString();
+                    string check = DateTime.Now.ToString("yyyyMMdd") + "-" + BuildInfo.FullVersion;
 
             if (KVS.Get(kvskey, out string updateDbInBackground) == KVS.SUCCESS)
             {
@@ -802,6 +802,7 @@ namespace TeslaLogger
                     DBHelper.UpdateElevationForAllPoints();
                     WebHelper.UpdateAllPOIAddresses();
                     DBHelper.DeleteDuplicateTrips();
+                    DBHelper.CorrectInvalidPosEntriesAsync().Wait();
 
                     for (int i = 0; i < Car.Allcars.Count; i++)
                     {
