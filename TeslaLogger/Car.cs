@@ -488,6 +488,8 @@ namespace TeslaLogger
 
         internal virtual bool SupportedByFleetTelemetry()
         {
+            return true;
+            /*
             string vindecoder = Tools.VINDecoder(vin, out int y, out string carType, out _, out _, out _, out _, out _).ToString();
             if (y >= 2021) // all cars from 2021 are supported
                 return true;
@@ -498,6 +500,7 @@ namespace TeslaLogger
             }
 
             return true;
+            */
         }
 
         private async Task InitStage3Async()
