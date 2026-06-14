@@ -2185,6 +2185,16 @@ Supercharger-V4 DE-Pfalzfeld,50.11565,7.59788,35
 Supercharger-V4 DE Pforzheim,48.905014,8.65431
 Supercharger-V4 DE Pfungstadt,49.815547,8.620279
 Supercharger-V3 DE-Piding,47.764,12.904551,27
+Supercharger-V3 DE-Piding,47.7642,12.90325,20
+Supercharger-V3 DE-Piding,47.76468,12.90412,20
+Supercharger-V3 DE-Piding,47.76485,12.90334,20
+Supercharger-V3 DE-Piding,47.76545,12.9044,20
+Supercharger-V3 DE-Piding,47.7665,12.91418
+Supercharger-V3 DE-Piding,47.76695,12.91928
+Supercharger-V3 DE-Piding,47.76724,12.92243
+Supercharger-V3 DE-Piding,47.76807,12.9331
+Supercharger-V3 DE-Piding,47.76825,12.93923
+Supercharger-V3 DE-Piding,47.76835,12.9443
 Supercharger-V3 DE-Plattling,48.7887,12.89745
 Supercharger-V3 DE-Plauen,50.4975,12.17024
 Supercharger-V3 DE-Posthausen,53.057581,9.165191,35
@@ -4098,7 +4108,6 @@ Supercharger SE-Krokom,63.328793,14.4301
 Supercharger-V4 SE-Kungens Kurva,59.270082,17.915231
 Supercharger-V4 SE-Kungsbacka,57.478787,12.080095
 Supercharger-V4 SE-Kungälv,57.85816,11.99827
-Supercharger-V4 SE-Kåbdalis,66.145978,19.989626
 Supercharger SE-Lagan,57.028956,14.014744
 Supercharger-V4 SE-Laxå,58.982245,14.623561
 Supercharger-V3 SE-Linköping,58.435438,15.590951
@@ -4115,7 +4124,7 @@ Supercharger-V3 SE-Malå,65.179347,18.746649
 Supercharger-V3 SE-Mantorp,58.36558,15.293993
 Supercharger-V3 SE-Mariestad,58.677066,13.815005
 Supercharger-V3 SE-Markaryd,56.444825,13.603916
-Supercharger SE-Mellbystrand,56.501606,12.95763
+Supercharger-V4 SE-Mellbystrand,56.5016,12.95763
 Supercharger-V4 SE-Mellerud,58.700124,12.450541
 Supercharger SE-Mora,61.005921,14.54418
 Supercharger-V3 SE-Nacka,59.31149,18.17496,30
@@ -12083,6 +12092,7 @@ Electrify-America US-Moorestown NJ Nixon Dr,39.93885,-74.96448
 Electrify-America US-North Platte NE S Dewey St,41.12047,-100.75946
 Electrify-America US-Ogallala NE Pony Express Ln,41.11276,-101.71856
 Electrify-America US-Orland Park IL Orland Square Dr,41.6171,-87.8483
+Electrify-America US-Placerville CA Sacramento St,38.72677,-120.80302
 Electrify-America US-Pleasanton CA Johnson Dr,37.7011,-121.9181
 Electrify-America US-Plymouth Meeting PA W Germantown Pike,40.11699,-75.27937
 Electrify-America US-Pompton Plains NJ Route 23 North,40.96869,-74.28467
@@ -13844,7 +13854,6 @@ EnBW DE-Schmalkalden,50.72272,10.44606
 EnBW DE-Schmallenberg MAC Outlet,51.18383,8.31957
 EnBW DE-Schmallenberg Weststraße,51.1522,8.28137
 EnBW DE-Schneeberg,50.59916,12.63562
-EnBW DE-Schongau,47.80819,10.87772
 EnBW DE-Schongau Tannenberger Straße,47.80744,10.87364
 EnBW DE-Schopfloch Dornstetter Straße,48.45944,8.54614
 EnBW DE-Schorndorf An der Mauer,48.80584,9.52385
@@ -19581,6 +19590,8 @@ kWatt SE-Kiruna Österleden,67.84465,20.25528
 KWMS AT-Finkenstein Strand-Nord,46.5723,13.93277
 KWMS AT-Fusch Ferleiten,47.16867,12.81337
 
+Laddmax SE-Kåbdalis Kronogård,66.1459,19.9905
+
 LADEFIX DE-Aue Wettinerstraße,50.58608,12.70078
 LADEFIX DE-Bannewitz An der Zschauke,51.00116,13.7202
 LADEFIX DE-Burgstädt Beethovenstrasse,50.91294,12.8091
@@ -19656,6 +19667,7 @@ LEW DE-Königsbrunn Heimgartenstraße,48.26842,10.88766
 LEW DE-Landsberg am Lech Sandauer Straße,48.05452,10.87695
 LEW DE-Pfaffenhausen,48.12075,10.4576
 LEW DE-Pforzen,47.93354,10.60797
+LEW DE-Schongau Burggener Straße,47.8082,10.87772
 LEW DE-Stadtbergen Benzstraße,48.37898,10.84775
 LEW DE-Steingaden Kissingerstraße,47.70209,10.86195
 LEW DE-Wertingen Augsburger Straße,48.55863,10.68955
@@ -24911,6 +24923,7 @@ SW-Elmshorn DE-Elmshorn Westerstraße,53.74806,9.64995
 SW-Emden DE-Emden Bahnhofsplatz,53.36856,7.19721
 SW-Emmendingen DE-Emmendingen Hebelstraße,48.12205,7.85041
 SW-Emmendingen DE-Emmendingen Karl-Bautz-Straße,48.11721,7.84847,30
+SW-Emsdetten DE-Emsdetten Alte Emsstraße,52.17802,7.53087
 SW-Erding DE-Erding Gruber Straße,48.1468,11.7887,20
 SW-Erfurt DE-Erfurt Binderslebener Landstraße,50.9733,10.9939
 SW-Erfurt DE-Erfurt Weimarische Straße,50.9727,11.04964
@@ -27489,6 +27502,7 @@ DE Brake Wiechmanns Weserhotel,53.32659,8.4859
 DE Braunschweig IIM,52.27266,10.52604
 DE Braunschweig Waller Weg SPIE,52.3099,10.4813
 DE Bruchköbel Gärtnerei Keim,50.18223,8.92325
+DE Brunnthal Am Golfplatz,48.02797,11.67644
 DE Burgebrach Treppendorf,49.80174,10.73265
 DE Bünde Zimmerstraße,52.20636,8.592
 DE Chemnitz Florian-Geyer-Straße,50.81895,12.91394
