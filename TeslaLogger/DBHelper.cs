@@ -762,14 +762,29 @@ ORDER BY
                     if (IsPosInChargingStateAsync(posId).Result == true)
                     {
                         Tools.DebugLog($"CorrectInvalidPosEntriesAsync: posId {posId} is in charging state");
+                        var (found, lat, lng) = await DBHelper.GetNextPosId(posId);
+                        if (found)
+                        {   
+                            Tools.DebugLog($"next valid posId has lat {lat} lng {lng}");
+                        }
                     }
                     else if (IsPosInDriveStateStartPosAsync(posId).Result == true)
                     {
                         Tools.DebugLog($"CorrectInvalidPosEntriesAsync: posId {posId} is in drive state as start pos");
+                        var (found, lat, lng) = await DBHelper.GetNextPosId(posId);
+                        if (found)
+                        {   
+                            Tools.DebugLog($"next valid posId has lat {lat} lng {lng}");
+                        }
                     }
                     else if (IsPosInDriveStateEndPosAsync(posId).Result == true)
                     {
                         Tools.DebugLog($"CorrectInvalidPosEntriesAsync: posId {posId} is in drive state as end pos");
+                        var (found, lat, lng) = await DBHelper.GetPrevPosId(posId);
+                        if (found)
+                        {   
+                            Tools.DebugLog($"prev valid posId has lat {lat} lng {lng}");
+                        }
                     }
                     else
                     {
