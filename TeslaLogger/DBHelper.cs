@@ -762,19 +762,19 @@ ORDER BY
                     if (IsPosInChargingStateAsync(posId).Result == true)
                     {
                         Tools.DebugLog($"CorrectInvalidPosEntriesAsync: posId {posId} is in charging state");
-                        var (found, lat, lng) = await DBHelper.GetNextPosId(posId);
+                        var (found, id, lat, lng) = await DBHelper.GetNextPosId(posId);
                         if (found)
                         {   
-                            Tools.DebugLog($"next valid posId has lat {lat} lng {lng}");
+                            Tools.DebugLog($"next valid posId {id} has lat {lat} lng {lng}");
                         }
                     }
                     else if (IsPosInDriveStateStartPosAsync(posId).Result == true)
                     {
                         Tools.DebugLog($"CorrectInvalidPosEntriesAsync: posId {posId} is in drive state as start pos");
-                        var (found, lat, lng) = await DBHelper.GetNextPosId(posId);
+                        var (found, id, lat, lng) = await DBHelper.GetNextPosId(posId);
                         if (found)
                         {   
-                            Tools.DebugLog($"next valid posId has lat {lat} lng {lng}");
+                            Tools.DebugLog($"next valid posId {id} has lat {lat} lng {lng}");
                         }
                     }
                     else if (IsPosInDriveStateEndPosAsync(posId).Result == true)
@@ -783,7 +783,7 @@ ORDER BY
                         var (found, lat, lng) = await DBHelper.GetPrevPosId(posId);
                         if (found)
                         {   
-                            Tools.DebugLog($"prev valid posId has lat {lat} lng {lng}");
+                            Tools.DebugLog($"prev valid posId {id} has lat {lat} lng {lng}");
                         }
                     }
                     else
@@ -7714,7 +7714,7 @@ SELECT 1 FROM drivestate WHERE endpos = @posId LIMIT 1", con))
             }
         }
 
-        internal static async Task<(bool found, double lat, double lng)> GetNextPosId(int posId)
+        internal static async Task<(bool found, long id, double lat, double lng)> GetNextPosId(int posId)
         {
             try
             {
@@ -7723,6 +7723,7 @@ SELECT 1 FROM drivestate WHERE endpos = @posId LIMIT 1", con))
                     await con.OpenAsync();
                     using (MySqlCommand cmd = new MySqlCommand(@"
 SELECT
+    id,
     lat,
     lng
 FROM
@@ -7748,7 +7749,7 @@ LIMIT 1", con))
                         {
                             if (await dr.ReadAsync())
                             {
-                                return (true, dr.GetDouble(0), dr.GetDouble(1));
+                                return (true, dr.GetLong(0), dr.GetDouble(1), dr.GetDouble(2));
                             }
                         }
                     }
@@ -7762,7 +7763,7 @@ LIMIT 1", con))
             return (false, 0.0, 0.0);
         }
         
-        internal static async Task<(bool found, double lat, double lng)> GetPrevPosId(int posId)
+        internal static async Task<(bool found, long id, double lat, double lng)> GetPrevPosId(int posId)
         {
             try
             {
@@ -7771,6 +7772,7 @@ LIMIT 1", con))
                     await con.OpenAsync();
                     using (MySqlCommand cmd = new MySqlCommand(@"
 SELECT
+    id,
     lat,
     lng
 FROM
@@ -7796,7 +7798,7 @@ LIMIT 1", con))
                         {
                             if (await dr.ReadAsync())
                             {
-                                return (true, dr.GetDouble(0), dr.GetDouble(1));
+                                return (true, dr.GetLong(0), dr.GetDouble(1), dr.GetDouble(2));
                             }
                         }
                     }
