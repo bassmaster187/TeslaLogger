@@ -6,10 +6,10 @@ namespace TeslaLogger
 {
     internal static class BuildInfo
     {
-        public const string Version = Assembly.GetExecutingAssembly().GetName().Version.ToString();
+        public const string Version = "unset";
         public const string GitBranch = "unknown";
         public const string GitCommit = "unknown";
         public const string BuildDate = "unknown";
-        public const string FullVersion = Assembly.GetExecutingAssembly().GetName().Version.ToString();
+        public const string FullVersion = "unset";
     }
 }
