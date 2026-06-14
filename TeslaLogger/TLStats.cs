@@ -70,7 +70,9 @@ namespace TeslaLogger
                     using (MySqlCommand cmd = new MySqlCommand(@"
 SELECT
   TABLE_NAME AS `Table`,
-  ROUND((DATA_LENGTH + INDEX_LENGTH) / 1024 / 1024) AS `Size (MB)`
+  ROUND((DATA_LENGTH + INDEX_LENGTH) / 1024 / 1024) AS `Size (MB)`,
+  ROUND((DATA_LENGTH) / 1024 / 1024) AS `Data (MB)`,
+  ROUND((INDEX_LENGTH) / 1024 / 1024) AS `Index (MB)`
 FROM
   information_schema.TABLES
 WHERE
@@ -84,7 +86,7 @@ DESC", con))
                         MySqlDataReader dr = SQLTracer.TraceDR(cmd);
                         while (dr.Read())
                         {
-                            _ = sb.Append($"  table {dr[0]} has {dr[1]}mb{Environment.NewLine}");
+                            _ = sb.Append($"  table {dr[0]} has {dr[1]}mb (data:{dr[2]} index:{dr[3]})Environment.NewLine}");
                         }
                     }
                 }
