@@ -517,7 +517,7 @@ namespace TeslaLogger
             UpdateTeslalogger.Chmod("TeslaLogger.exe", 755, false);
 
             Logfile.Log("Runtime: " + Environment.Version.ToString());
-            Logfile.Log($"TeslaLogger Version: {Assembly.GetExecutingAssembly().GetName().Version.ToString()} {BuildInfo.FullVersion}");
+            Logfile.Log($"TeslaLogger Version: {Assembly.GetExecutingAssembly().GetName().Version} {BuildInfo.FullVersion}");
             Logfile.Log("Teslalogger Online Version: " + WebHelper.GetOnlineTeslaloggerVersion());
             Logfile.Log("Logfile Version: " + Assembly.GetAssembly(typeof(Logfile)).GetName().Version);
             Logfile.Log("SRTM Version: " + Assembly.GetAssembly(typeof(SRTM.SRTMData)).GetName().Version);
