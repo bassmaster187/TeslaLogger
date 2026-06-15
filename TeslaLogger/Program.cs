@@ -802,7 +802,6 @@ namespace TeslaLogger
                     DBHelper.UpdateElevationForAllPoints();
                     WebHelper.UpdateAllPOIAddresses();
                     DBHelper.DeleteDuplicateTrips();
-                    DBHelper.CorrectInvalidPosEntriesAsync().Wait();
 
                     for (int i = 0; i < Car.Allcars.Count; i++)
                     {
