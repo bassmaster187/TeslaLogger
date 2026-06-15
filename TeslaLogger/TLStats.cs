@@ -3,7 +3,7 @@ using System.Diagnostics;
 using System.Text;
 using System.Threading;
 using MySql.Data.MySqlClient;
-
+using Exceptionless;
 namespace TeslaLogger
 {
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Globalization", "CA1303:Literale nicht als lokalisierte Parameter übergeben", Justification = "brauchen wir nicht")]
@@ -84,9 +84,15 @@ DESC", con))
                     {
                         cmd.Parameters.AddWithValue("@dbschema", DBHelper.Database);
                         MySqlDataReader dr = SQLTracer.TraceDR(cmd);
+                        bool firstLine = false;
                         while (dr.Read())
                         {
-                            _ = sb.Append($"  table {dr[0]} has {dr[1]}mb (data:{dr[2]} index:{dr[3]})Environment.NewLine}");
+                            if (firstLine == false)
+                            {
+                                ExceptionlessClient.Default.CreateLog("TLStats", $"largest table {dr[0]} has {dr[1]}mb (data:{dr[2]} index:{dr[3]})", Exceptionless.Logging.LogLevel.Info).FirstCarUserID().Submit();
+                            }
+                            firstLine = true;
+                            _ = sb.Append($"  table {dr[0]} has {dr[1]}mb (data:{dr[2]} index:{dr[3]}){Environment.NewLine}");
                         }
                     }
                 }

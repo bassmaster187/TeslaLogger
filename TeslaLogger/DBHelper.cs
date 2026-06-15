@@ -780,7 +780,7 @@ ORDER BY
                     else if (IsPosInDriveStateEndPosAsync(posId).Result == true)
                     {
                         Tools.DebugLog($"CorrectInvalidPosEntriesAsync: posId {posId} is in drive state as end pos");
-                        var (found, lat, lng) = await DBHelper.GetPrevPosId(posId);
+                        var (found, id, lat, lng) = await DBHelper.GetPrevPosId(posId);
                         if (found)
                         {   
                             Tools.DebugLog($"prev valid posId {id} has lat {lat} lng {lng}");
@@ -7714,7 +7714,7 @@ SELECT 1 FROM drivestate WHERE endpos = @posId LIMIT 1", con))
             }
         }
 
-        internal static async Task<(bool found, long id, double lat, double lng)> GetNextPosId(int posId)
+        internal static async Task<(bool found, int id, double lat, double lng)> GetNextPosId(int posId)
         {
             try
             {
@@ -7749,7 +7749,7 @@ LIMIT 1", con))
                         {
                             if (await dr.ReadAsync())
                             {
-                                return (true, dr.GetLong(0), dr.GetDouble(1), dr.GetDouble(2));
+                                return (true, dr.GetInt32(0), dr.GetDouble(1), dr.GetDouble(2));
                             }
                         }
                     }
@@ -7760,10 +7760,10 @@ LIMIT 1", con))
                 Logfile.Log(ex.ToString());
                 ex.ToExceptionless().Submit();
             }
-            return (false, 0.0, 0.0);
+            return (false, 0, 0.0, 0.0);
         }
         
-        internal static async Task<(bool found, long id, double lat, double lng)> GetPrevPosId(int posId)
+        internal static async Task<(bool found, int id, double lat, double lng)> GetPrevPosId(int posId)
         {
             try
             {
@@ -7798,7 +7798,7 @@ LIMIT 1", con))
                         {
                             if (await dr.ReadAsync())
                             {
-                                return (true, dr.GetLong(0), dr.GetDouble(1), dr.GetDouble(2));
+                                return (true, dr.GetInt32(0), dr.GetDouble(1), dr.GetDouble(2));
                             }
                         }
                     }
@@ -7809,7 +7809,7 @@ LIMIT 1", con))
                 Logfile.Log(ex.ToString());
                 ex.ToExceptionless().Submit();
             }
-            return (false, 0.0, 0.0);
+            return (false, 0, 0.0, 0.0);
         }
     }
 }
