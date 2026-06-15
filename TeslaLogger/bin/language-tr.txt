@@ -283,7 +283,7 @@ PF_HELP="Yardım"
 PF_PERMISSION="İzin"
 PF_OLDSX="Eski S/X"
 PF_HERE="Burada"
-PF_VKEY="Doğrulama Anahtarı"
+PF_VKEY="Üçüncü taraf sanal anahtar ayarlayın. Model S/X için 2021 model yılına kadar gerekli değil"
 PF_SUBSCRIPTION="Abonelik"
 
 #changecarname.php
