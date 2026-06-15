@@ -10824,6 +10824,8 @@ Compleo DE-Zwickau Uhdestraße,50.70933,12.50408
 Compleo DE-Zwingenberg Gießer Weg,49.72307,8.60184
 Compleo GB-Leeds Princes Exchange,53.7949,-1.54902
 
+Costco US-Rocklin CA Sierra College Blvd,38.80773,-121.20377
+
 Couche-Tard CA-Ange-Gardien QC Rte 235,45.36482,-72.93384
 Couche-Tard CA-Laval QC Autoroute 13,45.53401,-73.78806
 
@@ -15631,6 +15633,8 @@ evpass CH-Thônex Rte de Sous-Moulin,46.1902,6.1932
 
 EVPlus PL-Sieradz 1 Maja,51.57957,18.71439
 
+EVRange US-Truckee CA Northstar Dr,39.2871,-120.10713
+
 EVSC US-Cannon Beach OR Elk Creek Rd,45.88923,-123.95582
 
 evway IT-Moso In Passiria Timmelsjochstrasse,46.8311,11.16787
@@ -17665,7 +17669,7 @@ GreenWay PL-Ostróda Plebiscytowa,53.7103,19.97735
 GreenWay PL-Osła A4,51.30325,15.72714
 GreenWay PL-Piotrków Trybunalski Aleje Generała Władysława Sikorskiego,51.40484,19.66026
 GreenWay PL-Piotrków Trybunalski Aleje Generała Władysława Sikorskiego,51.40835,19.64718
-GreenWay PL-Piła Bydgoska,53.15137,16.76958
+GreenWay PL-Piła Bydgoska,53.15137,16.76958,30
 GreenWay PL-Poznań Torowa,52.36853,16.9882
 GreenWay PL-Promna-Kolonia E77,51.69861,20.929
 GreenWay PL-Przyłęk,52.33899,16.10809
@@ -18953,6 +18957,7 @@ Ionity PT-Almodovar L,37.53633,-8.18292
 Ionity PT-Almodovar O,37.53586,-8.18474
 Ionity PT-Marateca,38.57987,-8.67755
 Ionity PT-Área de Serviço de Barcelos,41.6054,-8.55102
+Ionity SE-Arvidsjaur Storgatan,65.58815,19.1904
 Ionity SE-Docksta Dockstavägen,63.05722,18.33733,30
 Ionity SE-Enköping,59.65339,17.08324
 Ionity SE-Gränna,58.00157,14.45022
@@ -18973,6 +18978,7 @@ Ionity SE-Norrköping Gröndalsgatan,58.57706,16.18131
 Ionity SE-Nyköping Stenbocksvägen,58.7717,17.02
 Ionity SE-Oskarshamn,57.2513,16.44875
 Ionity SE-Spekeröd,58.02474,11.84729
+Ionity SE-Storuman Blå vägen,65.0942,17.1159
 Ionity SE-Strömstad,58.91477,11.2594
 Ionity SE-Sundsvall,62.33874,17.3538
 Ionity SE-Sveg Ringvägen,62.03276,14.3677
@@ -23698,6 +23704,7 @@ reev DE-Nürnberg Kontumazgarten,49.45316,11.06821
 reev DE-Rellingen Halstenbeker Weg,53.64324,9.8392
 reev DE-Rostock Lange Straße,54.0906,12.13646
 reev DE-Sehnde Kurt-Lau-Weg,52.31937,9.9654
+reev DE-Todtnau Notschrei-Passhöhe,47.8758,7.91087
 reev DE-Triefenstein Schulstraße,49.80243,9.58202
 reev DE-Wilhelmshaven Südstrand,53.51328,8.14338
 
