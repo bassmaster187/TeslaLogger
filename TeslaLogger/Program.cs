@@ -386,14 +386,12 @@ namespace TeslaLogger
         {
             try
             {
-                Thread threadTLStats = new Thread(() =>
+                Task.Run(async () =>
                 {
-                    TLStats.run();
-                })
-                {
-                    Name = "TLStatsThread"
-                };
-                threadTLStats.Start();
+                    using var cts = new CancellationTokenSource();
+                    // CancellationToken will be triggered when the application shuts down
+                    await TLStats.RunAsync(cts.Token);
+                });
             }
             catch (Exception ex)
             {
