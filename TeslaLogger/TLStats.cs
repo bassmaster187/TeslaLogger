@@ -4,16 +4,22 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Exceptionless;
+using Microsoft.Extensions.Logging.Abstractions;
 using MySql.Data.MySqlClient;
+using TeslaLogger.Data.Abstractions;
+using TeslaLogger.Data.Implementations;
 
 namespace TeslaLogger
 {
     /// <summary>
     /// Periodically logs process statistics (thread count, memory usage, database table sizes).
+    /// Uses <see cref="IDbConnectionFactory"/> for database connections.
     /// </summary>
     public class TLStats
     {
         private static readonly Lazy<TLStats> _instance = new Lazy<TLStats>(() => new TLStats());
+        private static readonly Lazy<IDbConnectionFactory> _connectionFactory =
+            new Lazy<IDbConnectionFactory>(() => new DbConnectionFactory(NullLogger<DbConnectionFactory>.Instance, DBHelper.DBConnectionstring));
 
         private TLStats()
         {
@@ -32,12 +38,12 @@ namespace TeslaLogger
         {
             try
             {
-                Logfile.Log(Dump());
+                Logfile.Log(await DumpAsync(cancellationToken));
                 while (!cancellationToken.IsCancellationRequested)
                 {
                     if (DateTime.Now.Minute % 30 == 0)
                     {
-                        Logfile.Log(Dump());
+                        Logfile.Log(await DumpAsync(cancellationToken));
                         // sleep 55 minutes
                         await Task.Delay(3300000, cancellationToken).ConfigureAwait(false);
                     }
@@ -59,9 +65,11 @@ namespace TeslaLogger
         }
 
         /// <summary>
-        /// Collects process statistics and database table sizes.
+        /// Collects process statistics and database table sizes asynchronously.
         /// </summary>
-        internal static string Dump()
+        /// <param name="cancellationToken">Token to cancel the database query.</param>
+        /// <returns>Formatted statistics string.</returns>
+        internal static async Task<string> DumpAsync(CancellationToken cancellationToken = default)
         {
             var sb = new StringBuilder();
             sb.Append($"TeslaLogger process statistics{Environment.NewLine}");
@@ -78,8 +86,7 @@ namespace TeslaLogger
                 sb.Append($"StartTime: {process.StartTime}{Environment.NewLine}");
                 sb.Append($"Database sizes: DB {DBHelper.Database}{Environment.NewLine}");
 
-                using var con = new MySqlConnection(DBHelper.DBConnectionstring);
-                con.Open();
+                using var con = await _connectionFactory.Value.CreateConnectionAsync(cancellationToken);
                 using var cmd = new MySqlCommand(@"
 SELECT
   TABLE_NAME AS `Table`,
@@ -96,9 +103,9 @@ ORDER BY
 DESC", con);
                 cmd.Parameters.Add("@dbschema", MySqlDbType.VarChar, 64).Value = DBHelper.Database;
 
-                using var dr = SQLTracer.TraceDR(cmd);
+                using var dr = await cmd.ExecuteReaderAsync(cancellationToken);
                 var firstLine = false;
-                while (dr.Read())
+                while (await dr.ReadAsync(cancellationToken))
                 {
                     if (!firstLine)
                     {
