@@ -43,7 +43,7 @@ namespace TeslaLogger
                     ExceptionlessClient.Default.Startup(ApplicationSettings.Default.ExceptionlessApiKey);
                     // ExceptionlessClient.Default.Configuration.UseFileLogger("exceptionless.log");
                     ExceptionlessClient.Default.Configuration.ServerUrl = ApplicationSettings.Default.ExceptionlessServerUrl;
-                    ExceptionlessClient.Default.Configuration.SetVersion(BuildInfo.FullVersion);
+                    ExceptionlessClient.Default.Configuration.SetVersion(Assembly.GetExecutingAssembly().GetName().Version);
 
                     ExceptionlessClient.Default.CreateLog("Program", $"Start {BuildInfo.FullVersion}", Exceptionless.Logging.LogLevel.Info).FirstCarUserID().Submit();
                 }
