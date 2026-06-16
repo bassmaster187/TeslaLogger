@@ -22,7 +22,7 @@ namespace TeslaLogger
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1031:Keine allgemeinen Ausnahmetypen abfangen", Justification = "<Pending>")]
     internal class UpdateTeslalogger
     {
-       private const string cmd_restart_path = "/tmp/teslalogger-cmd-restart.txt";
+        private const string cmd_restart_path = "/tmp/teslalogger-cmd-restart.txt";
         private const string TPMSSchemaVersion = "TPMSSchemaVersion";
         private const string WatchtowerAuthorizationToken = "Bearer teslalogger";
         private const int WatchtowerTimeoutSeconds = 30;
@@ -68,7 +68,7 @@ namespace TeslaLogger
         {
             // update may take quite a while, especially if we ALTER TABLEs
             // start a thread that puts comforting messages into the log
-            ComfortingMessages = Task.Run(async() =>
+            ComfortingMessages = Task.Run(async () =>
             {
                 Random rnd = new Random();
                 while (!done.IsCancellationRequested)
@@ -177,67 +177,66 @@ namespace TeslaLogger
 
                 // start index update
 
-                _ = Task.Factory.StartNew(() =>
+                _ = Task.Run(async () =>
                 {
                     Logfile.Log("DBIndex Update (Task) started.");
-                    if (!DBHelper.IndexExists("can_ix2", "can"))
-                    {
-                        Logfile.Log("alter table can add index can_ix2 (id,carid,datum)");
-                        AssertAlterDB();
-                        DBHelper.ExecuteSQLQuery("alter table can add index can_ix2 (id,carid,datum)", 6000);
-                    }
-
-                    if (!DBHelper.IndexExists("chargingsate_ix_pos", "chargingstate"))
-                    {
-                        Logfile.Log("alter table chargingstate add index chargingsate_ix_pos (Pos)");
-                        AssertAlterDB();
-                        DBHelper.ExecuteSQLQuery("alter table chargingstate add index chargingsate_ix_pos (Pos)", 6000);
-                    }
-
-                    if (!DBHelper.IndexExists("ixAnalyzeChargingStates1", "chargingstate"))
-                    {
-                        Logfile.Log("ALTER TABLE chargingstate ADD INDEX ixAnalyzeChargingStates1 ...");
-                        AssertAlterDB();
-                        DBHelper.ExecuteSQLQuery("ALTER TABLE chargingstate ADD INDEX ixAnalyzeChargingStates1 (id, CarID, StartChargingID, EndChargingID)", 6000);
-                    }
-
-                    if (!DBHelper.IndexExists("idx_pos_CarID_id", "pos"))
-                    {
-                        Logfile.Log("alter table pos add index idx_pos_CarID_id (CarID, id)");      // used for: select max(id) from pos where CarID=?
-                        AssertAlterDB();
-                        DBHelper.ExecuteSQLQuery("alter table pos add index idx_pos_CarID_id (CarID, id)", 6000);
-                    }
-
-                    if (!DBHelper.IndexExists("idx_pos_CarID_datum", "pos"))
-                    {
-                        Logfile.Log("alter table pos add index idx_pos_CarID_datum (CarID, Datum)");
-                        AssertAlterDB();
-                        DBHelper.ExecuteSQLQuery("alter table pos add index idx_pos_CarID_datum (CarID, Datum)", 6000);
-                    }
-
-                    if (DBHelper.IndexExists("idx_pos_datum", "pos"))
-                    {
-                        Logfile.Log("alter table pos drop index if exists idx_pos_datum");
-                        AssertAlterDB();
-                        DBHelper.ExecuteSQLQuery("alter table pos drop index if exists idx_pos_datum", 600);
-                    }
-
-                    if (DBHelper.IndexExists("can_ix", "can"))
-                    {
-                        Logfile.Log("alter table can drop index if exists can_ix");
-                        AssertAlterDB();
-                        DBHelper.ExecuteSQLQuery("alter table can drop index if exists can_ix", 600);
-                    }
-
-                    if (!DBHelper.IndexExists("IX_charging_carid_datum", "charging"))
-                    {
-                        Logfile.Log("alter table charging add index IX_charging_carid_datum (CarId, Datum)");
-                        AssertAlterDB();
-                        DBHelper.ExecuteSQLQuery("alter table charging add index IX_charging_carid_datum (CarId, Datum)", 600);
-                    }
-
                     try
                     {
+                        if (!DBHelper.IndexExists("can_ix2", "can"))
+                        {
+                            Logfile.Log("alter table can add index can_ix2 (id,carid,datum)");
+                            AssertAlterDB();
+                            DBHelper.ExecuteSQLQuery("alter table can add index can_ix2 (id,carid,datum)", 6000);
+                        }
+
+                        if (!DBHelper.IndexExists("chargingsate_ix_pos", "chargingstate"))
+                        {
+                            Logfile.Log("alter table chargingstate add index chargingsate_ix_pos (Pos)");
+                            AssertAlterDB();
+                            DBHelper.ExecuteSQLQuery("alter table chargingstate add index chargingsate_ix_pos (Pos)", 6000);
+                        }
+
+                        if (!DBHelper.IndexExists("ixAnalyzeChargingStates1", "chargingstate"))
+                        {
+                            Logfile.Log("ALTER TABLE chargingstate ADD INDEX ixAnalyzeChargingStates1 ...");
+                            AssertAlterDB();
+                            DBHelper.ExecuteSQLQuery("ALTER TABLE chargingstate ADD INDEX ixAnalyzeChargingStates1 (id, CarID, StartChargingID, EndChargingID)", 6000);
+                        }
+
+                        if (!DBHelper.IndexExists("idx_pos_CarID_id", "pos"))
+                        {
+                            Logfile.Log("alter table pos add index idx_pos_CarID_id (CarID, id)");      // used for: select max(id) from pos where CarID=?
+                            AssertAlterDB();
+                            DBHelper.ExecuteSQLQuery("alter table pos add index idx_pos_CarID_id (CarID, id)", 6000);
+                        }
+
+                        if (!DBHelper.IndexExists("idx_pos_CarID_datum", "pos"))
+                        {
+                            Logfile.Log("alter table pos add index idx_pos_CarID_datum (CarID, Datum)");
+                            AssertAlterDB();
+                            DBHelper.ExecuteSQLQuery("alter table pos add index idx_pos_CarID_datum (CarID, Datum)", 6000);
+                        }
+
+                        if (DBHelper.IndexExists("idx_pos_datum", "pos"))
+                        {
+                            Logfile.Log("alter table pos drop index if exists idx_pos_datum");
+                            AssertAlterDB();
+                            DBHelper.ExecuteSQLQuery("alter table pos drop index if exists idx_pos_datum", 600);
+                        }
+
+                        if (DBHelper.IndexExists("can_ix", "can"))
+                        {
+                            Logfile.Log("alter table can drop index if exists can_ix");
+                            AssertAlterDB();
+                            DBHelper.ExecuteSQLQuery("alter table can drop index if exists can_ix", 600);
+                        }
+
+                        if (!DBHelper.IndexExists("IX_charging_carid_datum", "charging"))
+                        {
+                            Logfile.Log("alter table charging add index IX_charging_carid_datum (CarId, Datum)");
+                            AssertAlterDB();
+                            DBHelper.ExecuteSQLQuery("alter table charging add index IX_charging_carid_datum (CarId, Datum)", 600);
+                        }
 
                         if (!DBHelper.IndexExists("ix_startpos", "drivestate"))
                         {
@@ -273,8 +272,53 @@ namespace TeslaLogger
                     }
 
                     Logfile.Log("DBIndex Update (Task) finished.");
-                }, CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
-                // end index update
+
+                    // Long-running task starts after index update completes
+                    Logfile.Log("Pos Update Task started.");
+                    // this pos update is "nice to have" as it optimizes
+                    // the Visited Grafana Dashboard
+                    // as long as this task is not complete the Grafana Dashboard
+                    // will not work
+                    await Task.Run(() =>
+                    {
+                        if (!DBHelper.ColumnExists("pos", "pos_valid"))
+                        {
+                            Logfile.Log(@"ALTER TABLE pos
+ADD COLUMN pos_valid TINYINT(1)
+AS (
+    IF(
+        lat IS NOT NULL
+        AND lng IS NOT NULL
+        AND lat <> 0
+        AND lng <> 0,
+        1,
+        0
+    )
+) PERSISTENT");
+                            AssertAlterDB();
+                            DBHelper.ExecuteSQLQuery(@"ALTER TABLE pos
+ADD COLUMN pos_valid TINYINT(1)
+AS (
+    IF(
+        lat IS NOT NULL
+        AND lng IS NOT NULL
+        AND lat <> 0
+        AND lng <> 0,
+        1,
+        0
+    )
+) PERSISTENT", 0);
+                        }
+                        if (!DBHelper.IndexExists("idx_pos_CarID_datum_valid", "pos"))
+                        {
+                            Logfile.Log("CREATE INDEX idx_pos_CarID_datum_valid ON pos (CarID, datum, pos_valid)");
+                            AssertAlterDB();
+                            DBHelper.ExecuteSQLQuery("CREATE INDEX idx_pos_CarID_datum_valid ON pos (CarID, datum, pos_valid)", 0);
+                        }
+                    });
+                    Logfile.Log("Pos Update Task finished.");
+                });
+                // end index update and long running pos update
 
                 DBHelper.EnableMothership();
 
@@ -506,7 +550,7 @@ LIMIT 1", con))
 
         private static void CheckDBSchema_TPMS()
         {
-            
+
             if (!DBHelper.TableExists("TPMS"))
             {
                 string sql = @"CREATE TABLE `TPMS` (
@@ -563,7 +607,7 @@ LIMIT 1", con))
 
         private static void CheckDBSchema_superchargerstate()
         {
-            
+
             if (!DBHelper.TableExists("superchargerstate"))
             {
                 string sql = @"
@@ -579,12 +623,12 @@ PRIMARY KEY(id)
                 DBHelper.ExecuteSQLQuery(sql);
                 Logfile.Log("CREATE TABLE OK");
             }
-               
+
         }
 
         private static void CheckDBSchema_superchargers()
         {
-            
+
             if (!DBHelper.TableExists("superchargers"))
             {
                 string sql = @"
@@ -599,7 +643,7 @@ PRIMARY KEY(id)
                 DBHelper.ExecuteSQLQuery(sql);
                 Logfile.Log("CREATE TABLE OK");
             }
-                
+
         }
 
         private static void CheckDBSchema_candata()
@@ -609,7 +653,7 @@ PRIMARY KEY(id)
 
         private static void CheckDBSchema_state()
         {
-            InsertCarID_Column("state");   
+            InsertCarID_Column("state");
         }
 
         private static void CheckDBSchema_shiftstate()
@@ -708,12 +752,12 @@ PRIMARY KEY(id)
                         Thread.Sleep(1000);
                     }
                     Thread.Sleep(5000);
-                    for (int x=0; x<Car.Allcars.Count; x++)
+                    for (int x = 0; x < Car.Allcars.Count; x++)
                     {
                         Car c = Car.Allcars[x];
                         DBHelper.UpdateAllPOS_AP_Column(c.CarInDB, new DateTime(2024, 2, 1), DateTime.Now);
                     }
-                    
+
                 }).Start();
             }
         }
@@ -768,7 +812,7 @@ PRIMARY KEY(id)
 
         private static void CheckDBSchema_drivestate()
         {
-            
+
             if (!DBHelper.ColumnExists("drivestate", "outside_temp_avg"))
             {
                 Logfile.Log("ALTER TABLE drivestate ADD COLUMN outside_temp_avg DOUBLE NULL, ADD COLUMN speed_max INT NULL, ADD COLUMN power_max INT NULL, ADD COLUMN power_min INT NULL, ADD COLUMN power_avg DOUBLE NULL");
@@ -1028,7 +1072,7 @@ PRIMARY KEY(id)
                 DBHelper.ExecuteSQLQuery("ALTER TABLE charging ADD COLUMN charger_power_calc_w INT NULL", 600);
             }
 
-            InsertCarID_Column("charging"); 
+            InsertCarID_Column("charging");
         }
 
         private static void CheckDBSchema_car_version()
@@ -1218,7 +1262,7 @@ PRIMARY KEY(id)
                 DBHelper.ExecuteSQLQuery(@"ALTER TABLE `cars` ADD `access_type` varchar(20) NULL", 600);
             }
 
-            if (!DBHelper.ColumnExists("cars", "virtualkey")) 
+            if (!DBHelper.ColumnExists("cars", "virtualkey"))
             {
                 Logfile.Log("ALTER TABLE cars ADD Column virtualkey");
                 AssertAlterDB();
@@ -1304,7 +1348,7 @@ PRIMARY KEY(id)
             Logfile.Log("Start update");
             ExceptionlessClient.Default.CreateLog("Install", "Start update from " + Assembly.GetExecutingAssembly().GetName().Version).Submit();
 
-           if (Tools.IsDockerNET8())
+            if (Tools.IsDockerNET8())
             {
                 await WatchtowerUpdateAsync();
                 return;
@@ -1522,8 +1566,8 @@ PRIMARY KEY(id)
                             StartInfo = new ProcessStartInfo
                             {
                                 // Start via shell using nohup so the update process is detached
-                                 FileName = "/bin/bash",
-                                 Arguments = "-c \"nohup /etc/teslalogger/TLUpdate.exe >> /etc/teslalogger/nohup.out 2>&1 &\"",
+                                FileName = "/bin/bash",
+                                Arguments = "-c \"nohup /etc/teslalogger/TLUpdate.exe >> /etc/teslalogger/nohup.out 2>&1 &\"",
                                 UseShellExecute = true,
                                 CreateNoWindow = true,
                                 WorkingDirectory = "/etc/teslalogger"
@@ -1532,8 +1576,8 @@ PRIMARY KEY(id)
                         {
                             Logfile.Log(" *** starting TLUpdate.exe now (detached, stdout -> /etc/teslalogger/nohup.out) ***");
                             process.Start();
-                            
-                            Thread.Sleep(5*60*1000); // 5 minutes
+
+                            Thread.Sleep(5 * 60 * 1000); // 5 minutes
                         }
                     }
                     catch (Exception ex)
@@ -2612,11 +2656,11 @@ PRIMARY KEY(id)
 
             string GrafanaVersion = Tools.GetGrafanaVersion();
 
-            if (GrafanaVersion == "5.5.0-d3b39f39pre1" 
-                || GrafanaVersion == "6.3.5" 
-                || GrafanaVersion == "6.7.3" 
-                || GrafanaVersion == "7.2.0" 
-                || GrafanaVersion == "8.3.1" 
+            if (GrafanaVersion == "5.5.0-d3b39f39pre1"
+                || GrafanaVersion == "6.3.5"
+                || GrafanaVersion == "6.7.3"
+                || GrafanaVersion == "7.2.0"
+                || GrafanaVersion == "8.3.1"
                 || GrafanaVersion == "8.3.2"
                 || GrafanaVersion == "8.5.22"
                 )
@@ -2727,7 +2771,7 @@ PRIMARY KEY(id)
                 string languageFilepath = GetLanguageFilepath(language);
                 if (File.Exists(languageFilepath))
                 {
-                    
+
                     Logfile.Log("Copy " + languageFilepath + " to " + TimeLinePanelLanguagePath);
                     File.Copy(languageFilepath, TimeLinePanelLanguagePath, true);
                 }
