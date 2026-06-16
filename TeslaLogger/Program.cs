@@ -525,7 +525,7 @@ namespace TeslaLogger
                 if (Tools.RunOnLinux())
                     versionpath = "/etc/teslalogger/VERSION";
 
-                File.WriteAllText(versionpath, BuildInfo.FullVersion);
+                File.WriteAllText(versionpath, Assembly.GetExecutingAssembly().GetName().Version);
             }
             catch (Exception)
             { }
