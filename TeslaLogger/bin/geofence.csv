@@ -63,7 +63,10 @@ Supercharger AT-Liezen,47.55937,14.252606
 Supercharger-V4 AT-Linz,48.322309,14.290139
 Supercharger-V4 AT-Meggenhofen,48.18346,13.78649
 Supercharger-V4 AT-Melk,48.21438,15.34943
+Supercharger-V3 AT-Niederndorf,47.6473,12.19297
+Supercharger-V3 AT-Niederndorf,47.64823,12.19655
 Supercharger-V3 AT-Niederndorf,47.648995,12.197759
+Supercharger-V4 AT-Parndorf,47.9783,16.84495
 Supercharger-V4 AT-Parndorf,47.979209,16.844067,30
 Supercharger-V4 AT-Pasching-PlusCity,48.244939,14.234211
 Supercharger AT-Poysdorf,48.676534,16.623013
@@ -2175,6 +2178,7 @@ Supercharger-V4 DE-Obertshausen,50.075294,8.8577
 Supercharger-V4 DE-Offenbach,50.08887,8.76088
 Supercharger-V3 DE-Offenburg,48.469907,7.931822
 Supercharger-V4 DE Offenburg Wilhelm-Röntgen-Straße,48.47302,7.92473
+Supercharger-V4 DE Offenburg Wilhelm-Röntgen-Straße,48.4735,7.93157
 Supercharger-V4 DE-Oldenburg in Holstein,54.2871,10.87714
 Supercharger-V3 DE-Paderborn,51.710867,8.713883
 Supercharger-V3 DE-Panketal,52.620771,13.541551,40
@@ -3741,6 +3745,7 @@ Supercharger NL-Zwolle,52.53204,6.15703
 Supercharger NO-Aksdal,59.423006,5.44306
 Supercharger-V3 NO-Aksdal South,59.42127,5.44324,70
 Supercharger-V3 NO-Alta,69.961145,23.232869
+Supercharger-V3 NO-Alvdal,62.11437,10.6164,60
 Supercharger-V3 NO-Alvdal,62.11467,10.61603
 Supercharger-V3 NO-Arendal,58.467449,8.721617
 Supercharger-V4 NO-Arna,60.42192,5.46703
@@ -3752,7 +3757,7 @@ Supercharger-V3 NO-Beitostølen,61.248495,8.901559
 Supercharger-V4 NO-Bergen Hop,60.32655,5.34043
 Supercharger NO-Berkåk,62.831921,10.009978,40
 Supercharger-V4 NO-Bjorli,62.25666,8.21131
-Supercharger-V4 NO-Bjorli Arne Barmans Veg,62.25852,8.208
+Supercharger-V4 NO-Bjorli Arne Barmans Veg,62.25845,8.20738
 Supercharger NO-Blomsterdalen,60.28436,5.25347
 Supercharger-V4 NO-Bodø,67.28087,14.54252
 Supercharger-V3 NO-Brekkvasselv,64.847699,13.016144
@@ -3799,6 +3804,7 @@ Supercharger-V3 NO-Hitra,63.521397,9.109465
 Supercharger-V3 NO-Hjerkinn,62.22113,9.5449
 Supercharger NO-Hokksund,59.761033,9.905583
 Supercharger-V4 NO-Holmestrand,59.49017,10.29457
+Supercharger-V3 NO-Honningsvåg,70.9964,25.97624
 Supercharger-V3 NO-Honningsvåg,70.999642,25.967133
 Supercharger NO-Hovden,59.561243,7.356849
 Supercharger-V4 NO-Hønefoss,60.145,10.24908
@@ -6774,6 +6780,7 @@ Supercharger US-Leon Springs TX,29.66628,-98.63322
 Supercharger-V4 US-Lewisville TX,33.0105,-96.97016
 Supercharger US-Lindale TX,32.4707,-95.4506
 Supercharger-V3 US-Llano TX,30.75065,-98.6748
+Supercharger-V4 US-Longview TX,32.54827,-94.7262
 Supercharger-V4 US-Lorena TX,31.39435,-97.2076
 Supercharger-V3 US-Lubbock TX,33.52087,-101.96238
 Supercharger-V4 US-Lubbock TX University Ave,33.52775,-101.87107
@@ -12931,7 +12938,6 @@ EnBW DE-Essen Brembergstraße,51.4591,7.0813
 EnBW DE-Essen Donnerstraße,51.48766,6.93192
 EnBW DE-Essen Frankenstraße,51.42765,7.04828
 EnBW DE-Essen Frillendorfer Straße,51.4593,7.03773
-EnBW DE-Essen Gladbecker Straße,51.4869,6.9965
 EnBW DE-Essen Haedenkampstraße,51.45912,6.9826
 EnBW DE-Essen Heidhauser Straße,51.38418,7.0238
 EnBW DE-Essen Im Teelbruch,51.3803,6.93657
@@ -15460,8 +15466,10 @@ Eviny DE-Wetzlar Westendstraße,50.54925,8.4738
 Eviny DE-Wismar Schweriner Straße,53.88543,11.46115
 Eviny DE-Übach-Palenberg Am Wasserturm,50.92494,6.11306
 Eviny DK-Odense Drejebænken,55.35313,10.42066,30
+Eviny NO-Alvdal Steinsmosletta,62.11528,10.61603
 Eviny NO-Andenes Falcksgate,69.32071,16.11931
 Eviny NO-Andenes Industriveien,69.30986,16.10034
+Eviny NO-Bjorli Bjorlivegen,62.25894,8.2081,20
 Eviny NO-Geilo Vesleslåttvegen,60.5331,8.2084
 Eviny NO-Grimstad Odden,58.33743,8.59413
 Eviny NO-Haugesund Markedet,59.4108,5.27402
@@ -22059,6 +22067,7 @@ Neogy IT-Dobbiaco Pustertaler Straße,46.72931,12.21911
 Neogy IT-Dorf Tirol Aichweg,46.68868,11.15756
 Neogy IT-Eppan an der Weinstraße Kalterer Straße,46.44028,11.25971
 Neogy IT-Kurtinig Weinstraße,46.26909,11.22297
+Neogy IT-Laces Via Centrale,46.6213,10.86706
 Neogy IT-Marlengo Franz Innerhofer Straße,46.65566,11.14103
 Neogy IT-Meran Rennstallweg,46.65586,11.14929
 Neogy IT-Merano F.-Innerhofer-Straße,46.66734,11.16443
@@ -22183,6 +22192,7 @@ Norlys DK-Hvide Sande Kirksvej,55.86376,8.18126
 Norlys DK-Kliplev Industripark,54.93976,9.3803,18
 Norlys DK-København Hans Knudsens Pl.,55.7127,12.56131
 Norlys DK-Løkken Jyllandsgade,57.36825,9.71188
+Norlys DK-Odder Færgebyen,55.91223,10.25617
 Norlys DK-Ringkøbing Nordre Ringvej,56.10142,8.27418
 Norlys DK-Ringkøbing Sletten,56.11787,8.11566
 Norlys DK-Ringkøbing Vester Kær,56.09463,8.23612
@@ -25996,7 +26006,6 @@ team-Emobility DE-Kehl Straßburger Straße,48.57638,7.81925
 team-Emobility DE-Köln Heumarkt,50.93537,6.96162
 team-Emobility DE-Lahr Dinglinger Hauptstraße,48.34083,7.85794
 team-Emobility DE-Langenhagen Maritimstraße,52.46,9.6979
-team-Emobility DE-Offenburg Schutterwälderstraße,48.46498,7.9309
 team-Emobility DE-Pfullingen Marktstraße,48.47238,9.22715
 team-Emobility DE-Reutlingen Emil-Adolff-Straße,48.49814,9.2006
 team-Emobility DE-Reutlingen Ernst-Abbe-Straße,48.49756,9.15278
