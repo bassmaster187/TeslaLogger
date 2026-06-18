@@ -274,16 +274,24 @@ namespace TeslaLogger
                     Logfile.Log("DBIndex Update (Task) finished.");
 
                     // Long-running task starts after index update completes
-                    Logfile.Log("Pos Update Task started.");
                     // this pos update is "nice to have" as it optimizes
                     // the Visited Grafana Dashboard
                     // as long as this task is not complete the Grafana Dashboard
-                    // will not work
-                    await Task.Run(() =>
+                    // will not work            if (File.Exists(FileManager.GetCmdUpdatedTxt()))
                     {
-                        if (!DBHelper.ColumnExists("pos", "pos_valid"))
+
+                        await Task.Run(() =>
                         {
-                            Logfile.Log(@"ALTER TABLE pos
+                            Logfile.Log("Pos Update Task started.");
+                            if (File.Exists(FileManager.GetCmdUpdatedTxt()))
+                            {
+                                Logfile.Log("Update mode! Pos Update skipped!");
+                            }
+                            else
+                            {
+                                if (!DBHelper.ColumnExists("pos", "pos_valid"))
+                                {
+                                    Logfile.Log(@"ALTER TABLE pos
 ADD COLUMN pos_valid TINYINT(1)
 AS (
     IF(
@@ -295,8 +303,8 @@ AS (
         0
     )
 ) PERSISTENT");
-                            AssertAlterDB();
-                            DBHelper.ExecuteSQLQuery(@"ALTER TABLE pos
+                                    AssertAlterDB();
+                                    DBHelper.ExecuteSQLQuery(@"ALTER TABLE pos
 ADD COLUMN pos_valid TINYINT(1)
 AS (
     IF(
@@ -308,15 +316,17 @@ AS (
         0
     )
 ) PERSISTENT", 0);
-                        }
-                        if (!DBHelper.IndexExists("idx_pos_CarID_datum_valid", "pos"))
-                        {
-                            Logfile.Log("CREATE INDEX idx_pos_CarID_datum_valid ON pos (CarID, datum, pos_valid)");
-                            AssertAlterDB();
-                            DBHelper.ExecuteSQLQuery("CREATE INDEX idx_pos_CarID_datum_valid ON pos (CarID, datum, pos_valid)", 0);
-                        }
-                    });
-                    Logfile.Log("Pos Update Task finished.");
+                                }
+                                if (!DBHelper.IndexExists("idx_pos_CarID_datum_valid", "pos"))
+                                {
+                                    Logfile.Log("CREATE INDEX idx_pos_CarID_datum_valid ON pos (CarID, datum, pos_valid)");
+                                    AssertAlterDB();
+                                    DBHelper.ExecuteSQLQuery("CREATE INDEX idx_pos_CarID_datum_valid ON pos (CarID, datum, pos_valid)", 0);
+                                }
+                                Logfile.Log("Pos Update Task finished.");
+                            }
+                        });
+                    }
                 });
                 // end index update and long running pos update
 
@@ -1443,7 +1453,7 @@ PRIMARY KEY(id)
                     {
                         File.Delete(updatepackage);
                     }
-                    using (HttpClient httpClient = new HttpClient())
+                    using (HttpClient httpClient = new HttpClient() { Timeout = TimeSpan.FromMinutes(5) })
                     {
                         Logfile.Log($"downloading update package from {GitHubURL}");
                         byte[] zipBytes = httpClient.GetByteArrayAsync(GitHubURL).GetAwaiter().GetResult();
