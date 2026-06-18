@@ -1332,7 +1332,10 @@ namespace TeslaLogger
                     if (r1temp == null)
                     {
                         if (resultContent != null)
+                        {
                             car.Log("GetVehicles: " + resultContent);
+                            car.CreateExeptionlessLog("GetVehicles", resultContent, Exceptionless.Logging.LogLevel.Error).Submit();
+                        }
 
                         car.CurrentJSON.FatalError = "Car not found!";
                         car.CurrentJSON.CreateCurrentJSON();
