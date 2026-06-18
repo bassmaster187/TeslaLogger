@@ -87,7 +87,7 @@ Supercharger-V4 AT-St. Veit an der Glan,46.730391,14.37859
 Supercharger-V4 AT-Steyr,48.049589,14.414486
 Supercharger-V4 AT-Stockerau,48.38855,16.18087
 Supercharger-V4 AT-Stumm,47.28995,11.8877
-Supercharger-V4 AT-Suben,48.394466,13.426544
+Supercharger-V4 AT-Suben,48.3942,13.42622,30
 Supercharger-V4 AT-Trieben,47.49212,14.48363
 Supercharger AT-Villach,46.604193,13.869091
 Supercharger-V3 AT-Villach-Ost,46.60166,13.88302
@@ -1888,10 +1888,12 @@ Supercharger-V4 DE-Aachen Tivoli,50.7967,6.10364
 Supercharger-V4 DE-Achern,48.64145,8.03749
 Supercharger-V4 DE Achim-Ost,53.018479,9.07028
 Supercharger-V4 DE-Aichstetten,47.88056,10.04004,65
+Supercharger-V4 DE-Aichstetten,47.88354,10.04136
 Supercharger-V4 DE-Allensbach,47.7227,9.07233
 Supercharger-V4 DE-Allershausen,48.428631,11.583691
 Supercharger-V3 DE-Alsfeld,50.734,9.24143
 Supercharger-V3 DE-Altdorf bei Nürnberg,49.381627,11.344434,40
+Supercharger-V3 DE-Altdorf bei Nürnberg,49.38288,11.3437,20
 Supercharger-V3 DE-Augsburg,48.3989,10.86816
 Supercharger-V4 DE-Augsburg-Haunstetten,48.297555,10.899144
 Supercharger-V4 DE-Bad Camberg,50.29506,8.254
@@ -2080,6 +2082,8 @@ Supercharger-V4 DE-Kappel-Grafenhausen,48.28135,7.77755
 Supercharger-V3 DE-Karlsruhe,48.99897,8.4286
 Supercharger-V4 DE-Karlsruhe-Grünwinkel,49.00933,8.35364
 Supercharger-V4 DE-Karlsruhe-Grünwinkel,49.0149,8.34944
+Supercharger-V3 DE-Kassel (Cafe del Sol),51.308,9.54725,20
+Supercharger-V3 DE-Kassel (Cafe del Sol),51.3082,9.54642,20
 Supercharger-V3 DE-Kassel (Cafe del Sol),51.308679,9.545969
 Supercharger-V3 DE-Kassel (GALERIA),51.31331,9.493391
 Supercharger-V3 DE-Kaufering,48.08077,10.858599,30
@@ -2119,6 +2123,7 @@ Supercharger-V3 DE-Lippetal,51.69017,7.9641
 Supercharger-V3 DE-Lippetal,51.6957,7.96738,60
 Supercharger-V3 DE-Lippetal,51.69637,7.96702,20
 Supercharger-V3 DE-Lohfelden,51.27188,9.52688,25
+Supercharger-V3 DE-Lohne,52.63518,8.14712
 Supercharger-V3 DE-Lohne,52.65765,8.16915
 Supercharger-V3 DE-Ludwigshafen-Oggersheim,49.490475,8.352335
 Supercharger-V4 DE-Lutterberg,51.3701,9.63414,80
@@ -2274,6 +2279,7 @@ Supercharger-V3 DE-Wertheim-Almosenberg,49.772295,9.587571
 Supercharger-V3 DE-Wertheim-Almosenberg,49.772417,9.58423
 Supercharger-V4 DE-Werther,51.48627,10.74315
 Supercharger-V4 DE-Wesel (Globus),51.6629,6.66488
+Supercharger-V3 DE-Wetzlar,50.5472,8.52667,20
 Supercharger-V3 DE-Wetzlar,50.55282,8.53276,35
 Supercharger-V4 DE-Weyarn,47.8653,11.7907,60
 Supercharger-V4 DE-Wiesbaden,50.05967,8.34556
@@ -2699,7 +2705,7 @@ Supercharger-V4 FR-Le Cannet-des-Maures,43.39224,6.34767
 Supercharger-V3 FR-Le Chesnay (Top Floor),48.826925,2.118539
 Supercharger FR-Le Mans,48.041833,0.175342
 Supercharger-V4 FR-Le Mans Rue des Frères Voisin,48.0328,0.17646
-Supercharger-V4 FR-Le Muy,43.47627,6.53228
+Supercharger-V4 FR-Le Muy,43.47614,6.53194
 Supercharger-V3 FR-Le Touquet-Paris-Plage,50.521625,1.598625
 Supercharger-V4 FR-Les Clayes-sous-Bois,48.8251,1.96833
 Supercharger-V3 FR-Les Herbiers,46.889368,-1.032994
@@ -3844,6 +3850,7 @@ Supercharger-V3 NO-Maurset,60.410401,7.325072
 Supercharger-V4 NO-Mo i Rana,66.3061,14.15112
 Supercharger NO-Mo i Rana,66.307489,14.152152
 Supercharger-V3 NO-Molde,62.73935,7.1998,30
+Supercharger-V3 NO-Molde,62.73938,7.1984,20
 Supercharger NO-Mosjøen,65.834836,13.191673
 Supercharger-V4 NO-Mosjøen Halsøysenteret,65.8626,13.1977
 Supercharger NO-Mosjøen North,65.841941,13.188447,35
@@ -4223,8 +4230,8 @@ Supercharger-V4 SI-Postojna,45.77099,14.19772
 Supercharger-V3 SI-Slovenska Bistrica,46.383864,15.573771
 Supercharger-V3 SI-Žirovnica,46.40364,14.13052,30
 
-Supercharger SK-Bratislava,48.132138,17.108438
-Supercharger-V4 SK-Bratislava,48.16736,17.17884
+Supercharger SK-Bratislava Einsteinova,48.1322,17.1084
+Supercharger-V4 SK-Bratislava Ivanská cesta,48.16736,17.17884
 Supercharger SK-Demänová,49.054815,19.579253
 Supercharger-V3 SK-Košice,48.695151,21.235604
 Supercharger-V3 SK-Trenčín,48.8643,18.022992,30
@@ -10166,6 +10173,7 @@ CircleK NO-Evenes Bedringens vei,68.49635,16.70053
 CircleK NO-Fjellhamar Strømsveien,59.93377,10.98443
 CircleK NO-Geilo Lienvegen,60.53548,8.2206
 CircleK NO-Leknes Storgata,68.14874,13.61273
+CircleK NO-Molde Fannestrandvegen,62.7392,7.19896,20
 CircleK NO-Oslo Ankerveien,59.96261,10.64281,30
 CircleK NO-Oslo Lambertseterveien,59.87916,10.82013
 CircleK NO-Stavanger Petroleumsveien,58.89288,5.724
@@ -14258,7 +14266,7 @@ EnBW DE-Singen (Hohentwiel) Marie-Curie-Straße,47.75163,8.88602
 EnBW DE-Sinzheim Industriestraße,48.7739,8.1745
 EnBW DE-Sinzig Harbachstraße,50.54077,7.24795
 EnBW DE-Sipplingen In der Breite,47.79792,9.0904
-EnBW DE-Sittensen Stader Straße,53.28814,9.50764
+EnBW DE-Sittensen Stader Straße,53.28814,9.50764,30
 EnBW DE-Soest Seidenstückerweg,51.55815,8.1339
 EnBW DE-Solingen Friedenstraße,51.1516,7.0218
 EnBW DE-Solingen Löhdorfer Straße,51.1475,7.0183
@@ -15430,7 +15438,7 @@ Evie AU-Sutton Forest NSW Hume Hwy,-34.60721,150.2252
 Evie AU-Taree NSW Manning River Dr,-31.94332,152.47056
 Evie AU-Warwick QLD Acacia Ave,-28.21725,152.03082
 
-Eviny DE-Altdorf bei Nürnberg Prackenfelser Straße,49.38173,11.34405
+Eviny DE-Altdorf bei Nürnberg Prackenfelser Straße,49.38173,11.3438,20
 Eviny DE-Amberg Hirschauer Straße,49.4667,11.85252
 Eviny DE-Bad Oeynhausen Werrestraße,52.21703,8.80394
 Eviny DE-Bad Saulgau Platzstraße,48.00916,9.50906
@@ -18515,7 +18523,7 @@ Ionity CZ-Turnov Průmyslová,50.59561,15.13121
 Ionity CZ-Čechtice,49.65828,15.12053
 Ionity DE-Aichstetten Am Waizenhof,47.88068,10.0411,30
 Ionity DE-Alsfeld Dirsröder Feld,50.73742,9.2449,40
-Ionity DE-Altdorf b. Nürnberg Nürnberger Straße,49.3833,11.34317
+Ionity DE-Altdorf bei Nürnberg Nürnberger Straße,49.3833,11.34296
 Ionity DE-Apen Tiegelstraße,53.24694,7.7706
 Ionity DE-Autohof Berg,50.37238,11.78735
 Ionity DE-Autohof Bingen-Nahetal,49.92576,7.93674,30
@@ -20363,7 +20371,7 @@ Lidl DE-Colditz Wassergasse,51.12948,12.80396
 Lidl DE-Cottbus Sielower Landstraße,51.7722,14.32672
 Lidl DE-Crailsheim Haller Straße,49.14203,10.0482
 Lidl DE-Cremlingen Im Moorbusche,52.2522,10.64048
-Lidl DE-Cuxhaven Feldweg,53.87088,8.68644
+Lidl DE-Cuxhaven Feldweg,53.87128,8.68645
 Lidl DE-Cuxhaven Grodener Chaussee,53.85165,8.71368
 Lidl DE-Cuxhaven Grüner Weg,53.86935,8.7001
 Lidl DE-Dallgow-Döberitz Wilmsstraße,52.54218,13.0635
