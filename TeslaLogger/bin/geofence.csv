@@ -259,6 +259,7 @@ Supercharger-V4 BG-Sofia София Bulgaria Boulevard,42.66372,23.28946
 
 Supercharger-V4 CA-Abbotsford BC Delair Rd,49.0362,-122.26673
 Supercharger CA-Abbotsford BC Mount Lehman Road,49.05906,-122.37702
+Supercharger-V4 CA-Ajax ON,43.86395,-79.02317
 Supercharger CA-Aulac NB,45.871352,-64.280378
 Supercharger CA-Baie-Saint-Paul QC,47.435844,-70.506266
 Supercharger-V3 CA-Baldwin ON,46.285862,-81.774667
@@ -4488,6 +4489,7 @@ Supercharger-V4 US-Dunnigan CA County Rd 8,38.864,-121.9515
 Supercharger-V3 US-East Palo Alto CA East Bayshore Road,37.45943,-122.1377
 Supercharger-V3 US-Eastvale CA - Limonite Ave,33.9754,-117.55576
 Supercharger-V4 US-El Cajon CA,32.8266,-116.90128
+Supercharger-V4 US-El Cajon CA S Marshall Ave,32.7917,-116.97537
 Supercharger-V4 US-El Centro CA,32.76084,-115.5325
 Supercharger US-El Centro CA,32.7615,-115.53475
 Supercharger-V4 US-El Centro CA N Imperial Ave,32.81408,-115.5681
@@ -4629,6 +4631,7 @@ Supercharger-V3 US-Mariposa CA,37.48915,-119.97206
 Supercharger-V3 US-Martinez CA,37.993,-122.1213
 Supercharger-V3 US-Marysville CA,39.11113,-121.55652
 Supercharger-V4 US-McFarland CA,35.59992,-119.2097
+Supercharger-V4 US-McKinleyville CA,40.93385,-124.10117
 Supercharger US-Menifee CA,33.67964,-117.17375
 Supercharger US-Menlo Park CA,37.42394,-122.19852
 Supercharger-V3 US-Merced CA Martin Luther King Junior Way,37.2976,-120.48336
@@ -4877,6 +4880,7 @@ Supercharger-V4 US-South Lake Tahoe CA Emerald Bay Rd,38.9146,-120.00537
 Supercharger-V4 US-South Lake Tahoe CA Modesto Ave,38.94038,-119.97787
 Supercharger-V4 US-South Pasadena CA,34.1126,-118.15062
 Supercharger US-South San Francisco CA,37.65556,-122.40156
+Supercharger-V4 US-South San Francisco CA El Camino Real,37.64315,-122.42372
 Supercharger-V4 US-South San Francisco CA Oyster Point Blvd,37.6635,-122.39728
 Supercharger-V3 US-Stockton CA,37.98488,-121.33634
 Supercharger-V3 US-Stockton CA - East Morada Lane,38.0394,-121.2612
@@ -5345,6 +5349,7 @@ Supercharger-V3 US-Douglasville GA,33.72686,-84.7357
 Supercharger-V3 US-Dublin GA,32.4906,-82.9327
 Supercharger-V3 US-Duluth GA,34.00026,-84.16853
 Supercharger-V3 US-East Point GA,33.65865,-84.5008
+Supercharger-V4 US-Fairburn GA,33.5388,-84.57582
 Supercharger-V4 US-Fayetteville GA,33.47245,-84.44274
 Supercharger-V4 US-Fort Valley GA,32.58306,-83.74047
 Supercharger-V4 US-Greensboro GA,33.5415,-83.20624
@@ -5697,6 +5702,7 @@ Supercharger-V4 US-Greenbelt MD,38.99712,-76.89222
 Supercharger US-Hagerstown MD,39.60594,-77.7329
 Supercharger-V4 US-Hagerstown MD Cole Rd,39.6206,-77.7731
 Supercharger-V3 US-Hagerstown MD Venture Drive,39.6086,-77.7506
+Supercharger-V4 US-Halethorpe MD,39.2463,-76.67352
 Supercharger US-Halethorpe MD,39.2511,-76.66854
 Supercharger US-Hanover MD,39.15263,-76.74383
 Supercharger-V4 US-Jessup MD,39.14245,-76.76115
@@ -6799,6 +6805,7 @@ Supercharger-V3 US-New Boston TX,33.46976,-94.45452
 Supercharger-V3 US-New Braunfels TX,29.72705,-98.07957,60
 Supercharger-V3 US-New Caney TX,30.1316,-95.23727
 Supercharger-V3 US-North Richland Hills TX,32.90677,-97.1873
+Supercharger-V4 US-Odessa TX,31.82574,-102.35456
 Supercharger US-Ozona TX,30.70668,-101.19606
 Supercharger-V4 US-Paris TX,33.67294,-95.52034
 Supercharger US-Pecos TX,31.40035,-103.487
@@ -6893,6 +6900,7 @@ Supercharger-V4 US-Washington UT,37.12738,-113.5257
 Supercharger-V4 US-West Valley City UT,40.71314,-112.02422
 
 Supercharger-V3 US-Abingdon VA,36.71248,-81.9293
+Supercharger-V4 US-Alexandria VA,38.74335,-77.15998
 Supercharger US-Arlington VA,38.88748,-77.09296
 Supercharger-V4 US-Arlington VA Crystal Dr,38.85333,-77.04865
 Supercharger-V3 US-Ashburn VA,39.0091,-77.50224
@@ -9994,6 +10002,7 @@ ChargePoint US-Bellville OH State Route 97,40.64579,-82.543
 ChargePoint US-Bluff UT 455 W Main Street,37.28169,-109.56755
 ChargePoint US-Chicago W Zemke Blvd,41.99458,-87.8809
 ChargePoint US-East Lansing MI W Lake Lansing Rd,42.76255,-84.49879
+ChargePoint US-Fairburn GA Senoia Rd,33.53845,-84.5758
 ChargePoint US-Fruita CO N Elm St,39.15988,-108.73062
 ChargePoint US-Grand Junction CO Hwy 50,39.11486,-108.65296
 ChargePoint US-Gypsum CO Eldon Wilson Rd,39.63987,-106.91211
@@ -15517,7 +15526,7 @@ Eviny SE-Älmhult Silverdalsgatan,56.55652,14.1478,30
 Eviny SE-Östersund Arenavägen,63.19201,14.65214
 
 EVite CH-Affoltern am Albis Moosbachstrasse,47.2716,8.43876,16
-EVite CH-Baden Segelhof,47.45856,8.2785
+EVite CH-Baden Segelhof,47.45854,8.27847,25
 EVite CH-Berneck Obereggerstrasse,47.42573,9.60846
 
 EVL DE-Limburg Am Hammerberg,50.38009,8.07912
@@ -24991,6 +25000,7 @@ Stations-e FR-Saverne Rue de la Gare,48.74336,7.3605
 
 STAWAG DE-Aachen Am Kraftversorgungsturm,50.78875,6.1117
 STAWAG DE-Aachen Annastraße,50.77271,6.08067
+STAWAG DE-Aachen Hirschgraben,50.7791,6.08243
 STAWAG DE-Aachen Jesuitenstraße,50.77356,6.082
 STAWAG DE-Aachen Judengasse,50.77597,6.08061
 STAWAG DE-Aachen Krefelder Straße,50.79085,6.09675
@@ -28131,7 +28141,6 @@ US Austin TX Encino Trace,30.2428,-97.84612
 US Carlsbad CA Bressi Ranch,33.12324,-117.26577
 US Cupertino CA Apple Park,37.32924,-122.00997
 US Darmstadt St Joseph Avenue,38.1032,-87.59667
-US Fairburn GA Senoia Rd,33.53822,-84.57576
 US Raleigh Spindle Court,35.71586,-78.68483
 US San Diego Scranton Road,32.89684,-117.20074
 US Tinley Park IL N Creek Dr,41.55593,-87.79514
