@@ -18,6 +18,7 @@ using System.Net.Http.Headers;
 using System.Reflection;
 using System.Runtime.Caching;
 using System.Runtime.CompilerServices;
+using System.Security.Authentication;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -368,7 +369,8 @@ namespace TeslaLogger
                         CookieContainer = tokenCookieContainer,
                         AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate,
                         AllowAutoRedirect = false,
-                        UseCookies = true
+                        UseCookies = true,
+                        SslProtocols = SslProtocols.Tls13
                     };
 
                     httpClientForAuthentification = new HttpClient(handler);
@@ -481,7 +483,8 @@ namespace TeslaLogger
 
                 using (HttpClientHandler handler = new HttpClientHandler()
                 {
-                    AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate
+                    AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate,
+                    SslProtocols = SslProtocols.Tls13
                 })
                 {
 
@@ -530,22 +533,15 @@ namespace TeslaLogger
                             car.CreateExeptionlessLog("Tesla Token", "UpdateTeslaTokenFromRefreshToken Success", Exceptionless.Logging.LogLevel.Info).Submit();
                             string Token = jsonResult["access_token"];
 
-                            if (jsonResult.ContainsKey("expires_in"))
-                            {
-                                var t = DateTime.UtcNow.AddSeconds((int)(jsonResult["expires_in"])).AddHours(-2);
-                                if (t > DateTime.UtcNow.AddHours(1))
-                                    nextTeslaTokenFromRefreshToken = t;
-                                else
-                                {
-                                    t = DateTime.UtcNow.AddSeconds((int)(jsonResult["expires_in"]));
-                                    nextTeslaTokenFromRefreshToken = t;
-                                }
+                        if (jsonResult.ContainsKey("expires_in"))
+                        {
+                            var actualExpiry = DateTime.UtcNow.AddSeconds((int)(jsonResult["expires_in"]));
+                            nextTeslaTokenFromRefreshToken = actualExpiry.AddMinutes(-20);
 
-                                Log("access token expires: " + nextTeslaTokenFromRefreshToken.ToLocalTime());
+                            Log("access token expires: " + actualExpiry.ToLocalTime());
                             }
 
                             SetNewAccessToken(Token);
-
                             return Tesla_token;
 
 
@@ -736,27 +732,10 @@ namespace TeslaLogger
                         dynamic jsonResult = JsonConvert.DeserializeObject(result);
                         if (jsonResult.ContainsKey("expires_in"))
                         {
-                            var t = DateTime.UtcNow.AddSeconds((int)(jsonResult["expires_in"])).AddHours(-2);
-                            if (t > DateTime.UtcNow.AddHours(1))
-                                nextTeslaTokenFromRefreshToken = t;
-                            else
-                            {
-                                t = DateTime.UtcNow.AddSeconds((int)(jsonResult["expires_in"]));
-                                nextTeslaTokenFromRefreshToken = t;
-                            }
+                            var actualExpiry = DateTime.UtcNow.AddSeconds((int)(jsonResult["expires_in"]));
+                            nextTeslaTokenFromRefreshToken = actualExpiry.AddMinutes(-20);
 
-                            Log("access token expires: " + nextTeslaTokenFromRefreshToken.ToLocalTime());
-
-                            /*
-                            CacheItemPolicy policy = new CacheItemPolicy();
-                            policy.AbsoluteExpiration = DateTime.Now.AddSeconds((int)(jsonResult["expires_in"])).AddMinutes(-5);
-                            policy.RemovedCallback = new CacheEntryRemovedCallback((CacheEntryRemovedArguments _) =>
-                            {
-                                Tools.DebugLog($"#{car.CarInDB}: access token will expire in 5 minutes");
-                                UpdateTeslaTokenFromRefreshToken();
-                            });
-                            _ = MemoryCache.Default.Add("RefreshToken_" + car.CarInDB+ $"_{Environment.TickCount}", policy, policy);
-                            */
+                            Log("access token expires: " + actualExpiry.ToLocalTime());
                         }
                         string access_token = jsonResult["access_token"];
 
@@ -851,27 +830,10 @@ namespace TeslaLogger
                         dynamic jsonResult = JsonConvert.DeserializeObject(result);
                         if (jsonResult.ContainsKey("expires_in"))
                         {
-                            var t = DateTime.UtcNow.AddSeconds((int)(jsonResult["expires_in"])).AddHours(-2);
-                            if (t > DateTime.UtcNow.AddHours(1))
-                                nextTeslaTokenFromRefreshToken = t;
-                            else
-                            {
-                                t = DateTime.UtcNow.AddSeconds((int)(jsonResult["expires_in"]));
-                                nextTeslaTokenFromRefreshToken = t;
-                            }
+                            var actualExpiry = DateTime.UtcNow.AddSeconds((int)(jsonResult["expires_in"]));
+                            nextTeslaTokenFromRefreshToken = actualExpiry.AddMinutes(-20);
 
-                            Log("access token expires: " + nextTeslaTokenFromRefreshToken.ToLocalTime());
-
-                            /*
-                            CacheItemPolicy policy = new CacheItemPolicy();
-                            policy.AbsoluteExpiration = DateTime.Now.AddSeconds((int)(jsonResult["expires_in"])).AddMinutes(-5);
-                            policy.RemovedCallback = new CacheEntryRemovedCallback((CacheEntryRemovedArguments _) =>
-                            {
-                                Tools.DebugLog($"#{car.CarInDB}: access token will expire in 5 minutes");
-                                UpdateTeslaTokenFromRefreshToken();
-                            });
-                            _ = MemoryCache.Default.Add("RefreshToken_" + car.CarInDB+ $"_{Environment.TickCount}", policy, policy);
-                            */
+                            Log("access token expires: " + actualExpiry.ToLocalTime());
                         }
                         string access_token = jsonResult["access_token"];
 
@@ -1253,6 +1215,12 @@ namespace TeslaLogger
         [MethodImpl(MethodImplOptions.Synchronized)]
         HttpClient GetHttpClientTeslaAPI()
         {
+            if (nextTeslaTokenFromRefreshToken < DateTime.UtcNow)
+            {
+                Log($"#{car.CarInDB}: GetHttpClientTeslaAPI - Token expiring soon, refreshing proactively");
+                UpdateTeslaTokenFromRefreshToken();
+            }
+
             if (httpClientTeslaAPI == null)
             {
                 if (String.IsNullOrEmpty(Tesla_token) || Tesla_token == "NULL")
@@ -1260,7 +1228,10 @@ namespace TeslaLogger
                     car.Log("ERROR: Create HTTP Client with wrong Tesla Token!");
                 }
 
-                httpClientTeslaAPI = new HttpClient();
+                httpClientTeslaAPI = new HttpClient(new HttpClientHandler()
+                {
+                    SslProtocols = SslProtocols.Tls13
+                });
                 {
                     httpClientTeslaAPI.DefaultRequestHeaders.Add("x-tesla-user-agent", "TeslaApp/3.4.4-350/fad4a582e/android/8.1.0");
                     httpClientTeslaAPI.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (Linux; Android 8.1.0; Pixel XL Build/OPM4.171019.021.D1; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/68.0.3440.91 Mobile Safari/537.36");
@@ -4252,7 +4223,6 @@ WHERE
                 Log("*** FleetAPI no Datacalls allowed! ***");
                 return "";
             }
-
 
             string resultContent = "";
             try
