@@ -695,6 +695,30 @@ namespace UnitTestsTeslalogger
         }
 
         [TestMethod]
+        public void Raven1()
+        {
+            Car c = new Car(0, "", "", 0, "", DateTime.Now, "", "", "", "", "", "5YJSA7E27LF000000", "", null, false);
+
+            var telemetry = new TelemetryParser(c);
+            telemetry.databaseCalls = false;
+
+            var lines = LoadData("../../testdata/Raven1.txt");
+
+            Assert.IsFalse(c.Raven);
+
+            for (int i = 0; i < lines.Count; i++)
+            {
+                telemetry.handleMessageAsync(lines[i]).Wait();
+                if (i == 0)
+                {
+                    Assert.IsTrue(c.Raven);
+                    Assert.AreEqual(142.3,telemetry.lastIdealBatteryRange, 0.1);
+                }
+            }
+            Assert.AreEqual(142.3, telemetry.lastIdealBatteryRange, 0.1);
+        }
+
+        [TestMethod]
         public void InvalidValues()
         {
             Car c = new Car(0, "", "", 0, "", DateTime.Now, "", "", "", "", "", "5YJ3E7EA3LF700000", "", null, false);
@@ -712,6 +736,9 @@ namespace UnitTestsTeslalogger
 
         List<string> LoadData(string path)
         {
+            if (!System.IO.File.Exists(path))
+                path = "../" + path;
+
             List<string> data = new List<string>();
             string[] lines = System.IO.File.ReadAllLines(path);
             foreach (string line in lines)

@@ -1,0 +1,130 @@
+{ "data": [ { "key": "IdealBatteryRange", "value": { "doubleValue": 999 } }, { "key": "Odometer", "value": { "doubleValue": 63853.120582731695 } }, { "key": "TpmsPressureRr", "value": { "doubleValue": 3.450000051409006 } }, { "key": "RpWindow", "value": { "windowStateValue": "WindowStateClosed" } }, { "key": "Location", "value": { "locationValue": { "latitude": 50.774933, "longitude": 12.919885 } } }, { "key": "TpmsPressureFr", "value": { "doubleValue": 3.525000052526593 } }, { "key": "Gear", "value": { "shiftStateValue": "ShiftStateP" } }, { "key": "FpWindow", "value": { "windowStateValue": "WindowStateClosed" } }, { "key": "BatteryHeaterOn", "value": { "invalid": true } }, { "key": "NumBrickVoltageMin", "value": { "intValue": 58 } }, { "key": "ServiceMode", "value": { "booleanValue": false } }, { "key": "OutsideTemp", "value": { "doubleValue": 36.77876281738281 } }, { "key": "ChargeState", "value": { "stringValue": "Standby" } }, { "key": "ACChargingPower", "value": { "doubleValue": 0 } }, { "key": "Version", "value": { "stringValue": "2026.14.6" } }, { "key": "MinutesToArrival", "value": { "invalid": true } }, { "key": "CarType", "value": { "carTypeValue": "CarTypeModelS" } }, { "key": "DefrostForPreconditioning", "value": { "booleanValue": false } }, { "key": "Locked", "value": { "booleanValue": true } }, { "key": "PackCurrent", "value": { "doubleValue": -0.6000000089406967 } }, { "key": "ACChargingEnergyIn", "value": { "doubleValue": 0.11055555555555553 } }, { "key": "MilesToArrival", "value": { "invalid": true } }, { "key": "VehicleName", "value": { "stringValue": "Model S Long Range" } }, { "key": "FastChargerPresent", "value": { "booleanValue": false } }, { "key": "NumBrickVoltageMax", "value": { "intValue": 52 } }, { "key": "PackVoltage", "value": { "doubleValue": 346.6399922519922 } }, { "key": "TimeToFullCharge", "value": { "doubleValue": 4.133334010839462 } }, { "key": "RatedRange", "value": { "doubleValue": 88.40818833843421 } }, { "key": "PreconditioningEnabled", "value": { "booleanValue": false } }, { "key": "DestinationName", "value": { "invalid": true } }, { "key": "BrickVoltageMin", "value": { "doubleValue": 3.6060001712758094 } }, { "key": "Soc", "value": { "doubleValue": 26.48171500630517 } }, { "key": "RouteTrafficMinutesDelay", "value": { "doubleValue": 0 } }, { "key": "RdWindow", "value": { "windowStateValue": "WindowStateClosed" } }, { "key": "BrickVoltageMax", "value": { "doubleValue": 3.614000171655789 } }, { "key": "Trim", "value": { "stringValue": "100D" } }, { "key": "InsideTemp", "value": { "doubleValue": 38.00000116229057 } }, { "key": "TpmsPressureRl", "value": { "doubleValue": 3.450000051409006 } }, { "key": "IsolationResistance", "value": { "doubleValue": 1540 } }, { "key": "VehicleSpeed", "value": { "invalid": true } }, { "key": "DCChargingPower", "value": { "doubleValue": 0 } }, { "key": "DoorState", "value": { "doorValue": { } } }, { "key": "ChargeLimitSoc", "value": { "intValue": 80 } }, { "key": "ExpectedEnergyPercentAtTripArrival", "value": { "intValue": 23 } }, { "key": "DCChargingEnergyIn", "value": { "doubleValue": 0 } }, { "key": "TpmsPressureFl", "value": { "doubleValue": 3.5500000528991222 } }, { "key": "FdWindow", "value": { "windowStateValue": "WindowStateClosed" } }, { "key": "ModuleTempMin", "value": { "doubleValue": 42.5 } }, { "key": "DetailedChargeState", "value": { "detailedChargeStateValue": "DetailedChargeStateStopped" } }, { "key": "SentryMode", "value": { "sentryModeStateValue": "SentryModeStateOff" } } ], "createdAt": "2026-06-19T14:20:28.090644357Z", "vin": "5YJSA7E27LF000000" }
+
+{ "data": [ { "key": "Gear", "value": { "invalid": true } } ], "createdAt": "2026-06-19T14:21:30.591530512Z", "vin": "5YJSA7E27LF000000" }
+{ "data": [ { "key": "Gear", "value": { "shiftStateValue": "ShiftStateP" } } ], "createdAt": "2026-06-19T14:21:43.591584448Z", "vin": "5YJSA7E27LF000000" }
+{ "data": [ { "key": "InsideTemp", "value": { "doubleValue": 39.80000118911266 } } ], "createdAt": "2026-06-19T14:22:28.090876918Z", "vin": "5YJSA7E27LF000000" }
+{ "data": [ { "key": "Gear", "value": { "invalid": true } } ], "createdAt": "2026-06-19T14:22:50.591289065Z", "vin": "5YJSA7E27LF000000" }
+{ "data": [ { "key": "Gear", "value": { "shiftStateValue": "ShiftStateP" } } ], "createdAt": "2026-06-19T14:23:01.591625881Z", "vin": "5YJSA7E27LF000000" }
+{ "data": [ { "key": "ModuleTempMin", "value": { "doubleValue": 39 } } ], "createdAt": "2026-06-19T14:23:28.090784533Z", "vin": "5YJSA7E27LF000000" }
+{ "data": [ { "key": "Gear", "value": { "invalid": true } } ], "createdAt": "2026-06-19T14:24:11.590755295Z", "vin": "5YJSA7E27LF000000" }
+{ "data": [ { "key": "Gear", "value": { "shiftStateValue": "ShiftStateP" } } ], "createdAt": "2026-06-19T14:24:18.591548827Z", "vin": "5YJSA7E27LF000000" }
+{ "data": [ { "key": "OutsideTemp", "value": { "doubleValue": 38.5 } }, { "key": "InsideTemp", "value": { "doubleValue": 38.8000011742115 } } ], "createdAt": "2026-06-19T14:24:28.091517189Z", "vin": "5YJSA7E27LF000000" }
+
+{ "data": [ { "key": "Gear", "value": { "invalid": true } } ], "createdAt": "2026-06-19T14:25:21.593422539Z", "vin": "5YJSA7E27LF000000" }
+
+{ "data": [ { "key": "Gear", "value": { "shiftStateValue": "ShiftStateP" } } ], "createdAt": "2026-06-19T14:25:36.591317373Z", "vin": "5YJSA7E27LF000000" }
+{ "data": [ { "key": "ModuleTempMin", "value": { "doubleValue": 39.5 } }, { "key": "InsideTemp", "value": { "doubleValue": 39.20000118017197 } }, { "key": "NumBrickVoltageMax", "value": { "intValue": 50 } }, { "key": "NumBrickVoltageMin", "value": { "intValue": 58 } } ], "createdAt": "2026-06-19T14:26:28.090752031Z", "vin": "5YJSA7E27LF000000" }
+{ "data": [ { "key": "Gear", "value": { "invalid": true } } ], "createdAt": "2026-06-19T14:26:41.591790869Z", "vin": "5YJSA7E27LF000000" }
+{ "data": [ { "key": "OutsideTemp", "value": { "doubleValue": 40 } }, { "key": "InsideTemp", "value": { "doubleValue": 40.70000120252371 } } ], "createdAt": "2026-06-19T14:28:28.090854121Z", "vin": "5YJSA7E27LF000000" }
+{ "data": [ { "key": "Gear", "value": { "shiftStateValue": "ShiftStateP" } } ], "createdAt": "2026-06-19T14:28:49.590802312Z", "vin": "5YJSA7E27LF000000" }
+{ "data": [ { "key": "ModuleTempMin", "value": { "doubleValue": 39.5 } } ], "createdAt": "2026-06-19T14:29:28.091254816Z", "vin": "5YJSA7E27LF000000" }
+{ "data": [ { "key": "Gear", "value": { "invalid": true } } ], "createdAt": "2026-06-19T14:30:01.591114468Z", "vin": "5YJSA7E27LF000000" }
+{ "data": [ { "key": "Gear", "value": { "shiftStateValue": "ShiftStateP" } } ], "createdAt": "2026-06-19T14:30:05.591180696Z", "vin": "5YJSA7E27LF000000" }
+
+{ "data": [ { "key": "InsideTemp", "value": { "doubleValue": 41.50000121444464 } } ], "createdAt": "2026-06-19T14:30:28.090783606Z", "vin": "5YJSA7E27LF000000" }
+{ "data": [ { "key": "Gear", "value": { "invalid": true } } ], "createdAt": "2026-06-19T14:31:11.590811922Z", "vin": "5YJSA7E27LF000000" }
+{ "data": [ { "key": "Gear", "value": { "shiftStateValue": "ShiftStateP" } } ], "createdAt": "2026-06-19T14:31:22.591457001Z", "vin": "5YJSA7E27LF000000" }
+{ "data": [ { "key": "BrickVoltageMax", "value": { "doubleValue": 3.612000171560794 } } ], "createdAt": "2026-06-19T14:31:51.591502257Z", "vin": "5YJSA7E27LF000000" }
+{ "data": [ { "key": "InsideTemp", "value": { "doubleValue": 40.500001199543476 } }, { "key": "NumBrickVoltageMin", "value": { "intValue": 60 } }, { "key": "NumBrickVoltageMax", "value": { "intValue": 50 } }, { "key": "ModuleTempMin", "value": { "doubleValue": 39 } }, { "key": "OutsideTemp", "value": { "doubleValue": 39.5 } } ], "createdAt": "2026-06-19T14:32:28.091233101Z", "vin": "5YJSA7E27LF000000" }
+{ "data": [ { "key": "Gear", "value": { "invalid": true } } ], "createdAt": "2026-06-19T14:32:31.591290578Z", "vin": "5YJSA7E27LF000000" }
+{ "data": [ { "key": "Gear", "value": { "shiftStateValue": "ShiftStateP" } } ], "createdAt": "2026-06-19T14:32:37.591474865Z", "vin": "5YJSA7E27LF000000" }
+
+{ "data": [ { "key": "Gear", "value": { "invalid": true } } ], "createdAt": "2026-06-19T14:33:41.591386247Z", "vin": "5YJSA7E27LF000000" }
+
+{ "data": [ { "key": "Gear", "value": { "shiftStateValue": "ShiftStateP" } } ], "createdAt": "2026-06-19T14:33:54.591544310Z", "vin": "5YJSA7E27LF000000" }
+{ "data": [ { "key": "InsideTemp", "value": { "doubleValue": 41.9000012204051 } } ], "createdAt": "2026-06-19T14:34:28.091537238Z", "vin": "5YJSA7E27LF000000" }
+{ "data": [ { "key": "Gear", "value": { "invalid": true } } ], "createdAt": "2026-06-19T14:35:01.590615275Z", "vin": "5YJSA7E27LF000000" }
+{ "data": [ { "key": "Gear", "value": { "shiftStateValue": "ShiftStateP" } } ], "createdAt": "2026-06-19T14:35:11.590704927Z", "vin": "5YJSA7E27LF000000" }
+{ "data": [ { "key": "ModuleTempMin", "value": { "doubleValue": 38.5 } } ], "createdAt": "2026-06-19T14:35:28.091532977Z", "vin": "5YJSA7E27LF000000" }
+{ "data": [ { "key": "Gear", "value": { "invalid": true } } ], "createdAt": "2026-06-19T14:36:21.591547443Z", "vin": "5YJSA7E27LF000000" }
+{ "data": [ { "key": "OutsideTemp", "value": { "doubleValue": 40.5 } }, { "key": "InsideTemp", "value": { "doubleValue": 42.40000122785568 } } ], "createdAt": "2026-06-19T14:36:28.092260047Z", "vin": "5YJSA7E27LF000000" }
+{ "data": [ { "key": "Gear", "value": { "shiftStateValue": "ShiftStateP" } } ], "createdAt": "2026-06-19T14:36:29.591544943Z", "vin": "5YJSA7E27LF000000" }
+{ "data": [ { "key": "Gear", "value": { "invalid": true } } ], "createdAt": "2026-06-19T14:37:41.591174282Z", "vin": "5YJSA7E27LF000000" }
+{ "data": [ { "key": "Gear", "value": { "shiftStateValue": "ShiftStateP" } } ], "createdAt": "2026-06-19T14:37:46.590701002Z", "vin": "5YJSA7E27LF000000" }
+{ "data": [ { "key": "BrickVoltageMax", "value": { "doubleValue": 3.614000171655789 } } ], "createdAt": "2026-06-19T14:37:51.590670997Z", "vin": "5YJSA7E27LF000000" }
+
+{ "data": [ { "key": "ModuleTempMin", "value": { "doubleValue": 38.5 } }, { "key": "InsideTemp", "value": { "doubleValue": 42.90000123530626 } }, { "key": "NumBrickVoltageMax", "value": { "intValue": 50 } }, { "key": "NumBrickVoltageMin", "value": { "intValue": 60 } } ], "createdAt": "2026-06-19T14:38:28.090790917Z", "vin": "5YJSA7E27LF000000" }
+{ "data": [ { "key": "Gear", "value": { "invalid": true } } ], "createdAt": "2026-06-19T14:38:51.590823013Z", "vin": "5YJSA7E27LF000000" }
+
+{ "data": [ { "key": "Gear", "value": { "shiftStateValue": "ShiftStateP" } } ], "createdAt": "2026-06-19T14:39:00.591268215Z", "vin": "5YJSA7E27LF000000" }
+{ "data": [ { "key": "Gear", "value": { "invalid": true } } ], "createdAt": "2026-06-19T14:40:11.591317922Z", "vin": "5YJSA7E27LF000000" }
+{ "data": [ { "key": "Gear", "value": { "shiftStateValue": "ShiftStateP" } } ], "createdAt": "2026-06-19T14:40:14.590787361Z", "vin": "5YJSA7E27LF000000" }
+
+{ "data": [ { "key": "InsideTemp", "value": { "doubleValue": 41.9000012204051 } }, { "key": "IsolationResistance", "value": { "doubleValue": 1520 } }, { "key": "OutsideTemp", "value": { "doubleValue": 39.5 } } ], "createdAt": "2026-06-19T14:40:28.090981794Z", "vin": "5YJSA7E27LF000000" }
+{ "data": [ { "key": "Gear", "value": { "invalid": true } } ], "createdAt": "2026-06-19T14:41:21.591527915Z", "vin": "5YJSA7E27LF000000" }
+{ "data": [ { "key": "ModuleTempMin", "value": { "doubleValue": 39 } } ], "createdAt": "2026-06-19T14:41:28.090805560Z", "vin": "5YJSA7E27LF000000" }
+{ "data": [ { "key": "Gear", "value": { "shiftStateValue": "ShiftStateP" } } ], "createdAt": "2026-06-19T14:41:31.590619151Z", "vin": "5YJSA7E27LF000000" }
+
+{ "data": [ { "key": "BrickVoltageMin", "value": { "doubleValue": 3.6040001711808145 } } ], "createdAt": "2026-06-19T14:42:06.591019204Z", "vin": "5YJSA7E27LF000000" }
+{ "data": [ { "key": "Gear", "value": { "invalid": true } } ], "createdAt": "2026-06-19T14:42:41.591221877Z", "vin": "5YJSA7E27LF000000" }
+{ "data": [ { "key": "Gear", "value": { "shiftStateValue": "ShiftStateP" } } ], "createdAt": "2026-06-19T14:43:21.590637264Z", "vin": "5YJSA7E27LF000000" }
+{ "data": [ { "key": "BrickVoltageMax", "value": { "doubleValue": 3.612000171560794 } } ], "createdAt": "2026-06-19T14:43:51.591734826Z", "vin": "5YJSA7E27LF000000" }
+{ "data": [ { "key": "NumBrickVoltageMax", "value": { "intValue": 53 } }, { "key": "NumBrickVoltageMin", "value": { "intValue": 58 } } ], "createdAt": "2026-06-19T14:44:28.091011429Z", "vin": "5YJSA7E27LF000000" }
+{ "data": [ { "key": "Gear", "value": { "invalid": true } } ], "createdAt": "2026-06-19T14:44:31.590836040Z", "vin": "5YJSA7E27LF000000" }
+{ "data": [ { "key": "Gear", "value": { "shiftStateValue": "ShiftStateP" } } ], "createdAt": "2026-06-19T14:44:57.591489065Z", "vin": "5YJSA7E27LF000000" }
+{ "data": [ { "key": "Gear", "value": { "invalid": true } } ], "createdAt": "2026-06-19T14:46:01.591089741Z", "vin": "5YJSA7E27LF000000" }
+{ "data": [ { "key": "BrickVoltageMin", "value": { "doubleValue": 3.6060001712758094 } } ], "createdAt": "2026-06-19T14:48:06.590689224Z", "vin": "5YJSA7E27LF000000" }
+{ "data": [ { "key": "BrickVoltageMax", "value": { "doubleValue": 3.612000171560794 } } ], "createdAt": "2026-06-19T14:49:51.591761547Z", "vin": "5YJSA7E27LF000000" }
+{ "data": [ { "key": "NumBrickVoltageMax", "value": { "intValue": 50 } }, { "key": "NumBrickVoltageMin", "value": { "intValue": 58 } } ], "createdAt": "2026-06-19T14:50:28.090820243Z", "vin": "5YJSA7E27LF000000" }
+{ "data": [ { "key": "BrickVoltageMin", "value": { "doubleValue": 3.6060001712758094 } } ], "createdAt": "2026-06-19T14:54:06.591620295Z", "vin": "5YJSA7E27LF000000" }
+{ "data": [ { "key": "OutsideTemp", "value": { "invalid": true } } ], "createdAt": "2026-06-19T14:54:40.591781954Z", "vin": "5YJSA7E27LF000000" }
+{ "data": [ { "key": "ModuleTempMin", "value": { "doubleValue": 38 } } ], "createdAt": "2026-06-19T14:54:50.591450325Z", "vin": "5YJSA7E27LF000000" }
+{ "data": [ { "key": "InsideTemp", "value": { "doubleValue": 43.70000124722719 } } ], "createdAt": "2026-06-19T14:54:55.591550698Z", "vin": "5YJSA7E27LF000000" }
+{ "data": [ { "key": "BrickVoltageMax", "value": { "doubleValue": 3.612000171560794 } } ], "createdAt": "2026-06-19T14:55:51.591103218Z", "vin": "5YJSA7E27LF000000" }
+{ "data": [ { "key": "NumBrickVoltageMin", "value": { "intValue": 58 } }, { "key": "NumBrickVoltageMax", "value": { "intValue": 50 } } ], "createdAt": "2026-06-19T14:56:28.090889381Z", "vin": "5YJSA7E27LF000000" }
+{ "data": [ { "key": "InsideTemp", "value": { "doubleValue": 42.70000123232603 } } ], "createdAt": "2026-06-19T14:56:55.594820651Z", "vin": "5YJSA7E27LF000000" }
+{ "data": [ { "key": "Gear", "value": { "shiftStateValue": "ShiftStateP" } } ], "createdAt": "2026-06-19T14:56:59.593701573Z", "vin": "5YJSA7E27LF000000" }
+{ "data": [ { "key": "ModuleTempMin", "value": { "doubleValue": 38 } } ], "createdAt": "2026-06-19T14:57:50.591089508Z", "vin": "5YJSA7E27LF000000" }
+{ "data": [ { "key": "Gear", "value": { "invalid": true } } ], "createdAt": "2026-06-19T14:58:11.590986894Z", "vin": "5YJSA7E27LF000000" }
+{ "data": [ { "key": "OutsideTemp", "value": { "doubleValue": 40.5 } } ], "createdAt": "2026-06-19T14:58:40.591371610Z", "vin": "5YJSA7E27LF000000" }
+{ "data": [ { "key": "InsideTemp", "value": { "doubleValue": 42.90000123530626 } } ], "createdAt": "2026-06-19T14:58:55.590982066Z", "vin": "5YJSA7E27LF000000" }
+{ "data": [ { "key": "BrickVoltageMin", "value": { "doubleValue": 3.6060001712758094 } } ], "createdAt": "2026-06-19T15:00:06.591504586Z", "vin": "5YJSA7E27LF000000" }
+{ "data": [ { "key": "IsolationResistance", "value": { "doubleValue": 1540 } } ], "createdAt": "2026-06-19T15:00:28.090816986Z", "vin": "5YJSA7E27LF000000" }
+{ "data": [ { "key": "ModuleTempMin", "value": { "doubleValue": 38.5 } } ], "createdAt": "2026-06-19T15:00:50.591095183Z", "vin": "5YJSA7E27LF000000" }
+{ "data": [ { "key": "BrickVoltageMax", "value": { "doubleValue": 3.612000171560794 } } ], "createdAt": "2026-06-19T15:01:51.591502889Z", "vin": "5YJSA7E27LF000000" }
+{ "data": [ { "key": "NumBrickVoltageMin", "value": { "intValue": 60 } }, { "key": "NumBrickVoltageMax", "value": { "intValue": 52 } } ], "createdAt": "2026-06-19T15:02:28.091515343Z", "vin": "5YJSA7E27LF000000" }
+{ "data": [ { "key": "OutsideTemp", "value": { "doubleValue": 41 } } ], "createdAt": "2026-06-19T15:02:40.590681516Z", "vin": "5YJSA7E27LF000000" }
+{ "data": [ { "key": "ModuleTempMin", "value": { "doubleValue": 38 } } ], "createdAt": "2026-06-19T15:03:50.591227350Z", "vin": "5YJSA7E27LF000000" }
+{ "data": [ { "key": "BrickVoltageMin", "value": { "doubleValue": 3.6060001712758094 } } ], "createdAt": "2026-06-19T15:06:06.591058664Z", "vin": "5YJSA7E27LF000000" }
+{ "data": [ { "key": "OutsideTemp", "value": { "doubleValue": 40.5 } } ], "createdAt": "2026-06-19T15:06:40.590893413Z", "vin": "5YJSA7E27LF000000" }
+{ "data": [ { "key": "ModuleTempMin", "value": { "doubleValue": 38 } } ], "createdAt": "2026-06-19T15:06:50.591349889Z", "vin": "5YJSA7E27LF000000" }
+{ "data": [ { "key": "InsideTemp", "value": { "doubleValue": 41.9000012204051 } } ], "createdAt": "2026-06-19T15:06:52.590768607Z", "vin": "5YJSA7E27LF000000" }
+{ "data": [ { "key": "BrickVoltageMax", "value": { "doubleValue": 3.612000171560794 } } ], "createdAt": "2026-06-19T15:07:51.591166844Z", "vin": "5YJSA7E27LF000000" }
+{ "data": [ { "key": "NumBrickVoltageMax", "value": { "intValue": 50 } }, { "key": "NumBrickVoltageMin", "value": { "intValue": 60 } } ], "createdAt": "2026-06-19T15:08:28.090688999Z", "vin": "5YJSA7E27LF000000" }
+{ "data": [ { "key": "Gear", "value": { "shiftStateValue": "ShiftStateP" } } ], "createdAt": "2026-06-19T15:08:59.592791159Z", "vin": "5YJSA7E27LF000000" }
+{ "data": [ { "key": "ModuleTempMin", "value": { "doubleValue": 38 } } ], "createdAt": "2026-06-19T15:09:50.591132712Z", "vin": "5YJSA7E27LF000000" }
+{ "data": [ { "key": "Gear", "value": { "invalid": true } } ], "createdAt": "2026-06-19T15:10:11.590802748Z", "vin": "5YJSA7E27LF000000" }
+{ "data": [ { "key": "OutsideTemp", "value": { "doubleValue": 40.5 } } ], "createdAt": "2026-06-19T15:10:40.590909349Z", "vin": "5YJSA7E27LF000000" }
+{ "data": [ { "key": "BrickVoltageMin", "value": { "doubleValue": 3.6060001712758094 } } ], "createdAt": "2026-06-19T15:12:06.591489774Z", "vin": "5YJSA7E27LF000000" }
+{ "data": [ { "key": "ModuleTempMin", "value": { "doubleValue": 38 } } ], "createdAt": "2026-06-19T15:12:50.590701807Z", "vin": "5YJSA7E27LF000000" }
+
+{ "data": [ { "key": "BrickVoltageMax", "value": { "doubleValue": 3.612000171560794 } } ], "createdAt": "2026-06-19T15:13:51.591480033Z", "vin": "5YJSA7E27LF000000" }
+{ "data": [ { "key": "NumBrickVoltageMin", "value": { "intValue": 58 } }, { "key": "NumBrickVoltageMax", "value": { "intValue": 50 } } ], "createdAt": "2026-06-19T15:14:28.091937977Z", "vin": "5YJSA7E27LF000000" }
+{ "data": [ { "key": "OutsideTemp", "value": { "invalid": true } } ], "createdAt": "2026-06-19T15:14:40.591533900Z", "vin": "5YJSA7E27LF000000" }
+
+{ "data": [ { "key": "PackCurrent", "value": { "doubleValue": -8.900000132620335 } } ], "createdAt": "2026-06-19T15:14:45.591724868Z", "vin": "5YJSA7E27LF000000" }
+{ "data": [ { "key": "PackCurrent", "value": { "doubleValue": -0.10000000149011612 } } ], "createdAt": "2026-06-19T15:14:55.591623339Z", "vin": "5YJSA7E27LF000000" }
+{ "data": [ { "key": "ModuleTempMin", "value": { "doubleValue": 38 } } ], "createdAt": "2026-06-19T15:15:50.591229505Z", "vin": "5YJSA7E27LF000000" }
+
+
+{ "data": [ { "key": "BrickVoltageMin", "value": { "doubleValue": 3.6040001711808145 } } ], "createdAt": "2026-06-19T15:18:06.591341448Z", "vin": "5YJSA7E27LF000000" }
+{ "data": [ { "key": "OutsideTemp", "value": { "doubleValue": 40 } } ], "createdAt": "2026-06-19T15:18:40.591096935Z", "vin": "5YJSA7E27LF000000" }
+{ "data": [ { "key": "ModuleTempMin", "value": { "doubleValue": 38 } } ], "createdAt": "2026-06-19T15:18:50.591205874Z", "vin": "5YJSA7E27LF000000" }
+{ "data": [ { "key": "BrickVoltageMax", "value": { "doubleValue": 3.612000171560794 } } ], "createdAt": "2026-06-19T15:19:51.591201104Z", "vin": "5YJSA7E27LF000000" }
+{ "data": [ { "key": "NumBrickVoltageMax", "value": { "intValue": 50 } }, { "key": "NumBrickVoltageMin", "value": { "intValue": 58 } }, { "key": "IsolationResistance", "value": { "doubleValue": 1520 } } ], "createdAt": "2026-06-19T15:20:28.090816239Z", "vin": "5YJSA7E27LF000000" }
+{ "data": [ { "key": "Gear", "value": { "shiftStateValue": "ShiftStateP" } } ], "createdAt": "2026-06-19T15:21:01.591476738Z", "vin": "5YJSA7E27LF000000" }
+{ "data": [ { "key": "ModuleTempMin", "value": { "doubleValue": 38 } } ], "createdAt": "2026-06-19T15:21:50.591199130Z", "vin": "5YJSA7E27LF000000" }
+{ "data": [ { "key": "Gear", "value": { "invalid": true } } ], "createdAt": "2026-06-19T15:22:11.591546896Z", "vin": "5YJSA7E27LF000000" }
+{ "data": [ { "key": "OutsideTemp", "value": { "doubleValue": 40 } } ], "createdAt": "2026-06-19T15:22:40.591036718Z", "vin": "5YJSA7E27LF000000" }
+{ "data": [ { "key": "BrickVoltageMin", "value": { "doubleValue": 3.6060001712758094 } } ], "createdAt": "2026-06-19T15:24:06.590885494Z", "vin": "5YJSA7E27LF000000" }
+{ "data": [ { "key": "ModuleTempMin", "value": { "doubleValue": 37.5 } } ], "createdAt": "2026-06-19T15:24:50.590719162Z", "vin": "5YJSA7E27LF000000" }
+
+{ "data": [ { "key": "BrickVoltageMax", "value": { "doubleValue": 3.612000171560794 } } ], "createdAt": "2026-06-19T15:25:51.591178311Z", "vin": "5YJSA7E27LF000000" }
+{ "data": [ { "key": "NumBrickVoltageMax", "value": { "intValue": 50 } }, { "key": "NumBrickVoltageMin", "value": { "intValue": 58 } } ], "createdAt": "2026-06-19T15:26:28.090801270Z", "vin": "5YJSA7E27LF000000" }
+
+{ "data": [ { "key": "InsideTemp", "value": { "doubleValue": 42.90000123530626 } } ], "createdAt": "2026-06-19T15:26:33.590941136Z", "vin": "5YJSA7E27LF000000" }
+{ "data": [ { "key": "OutsideTemp", "value": { "doubleValue": 39.5 } } ], "createdAt": "2026-06-19T15:26:40.591036555Z", "vin": "5YJSA7E27LF000000" }
+{ "data": [ { "key": "ModuleTempMin", "value": { "doubleValue": 37.5 } } ], "createdAt": "2026-06-19T15:27:50.591055399Z", "vin": "5YJSA7E27LF000000" }
+{ "data": [ { "key": "PackCurrent", "value": { "doubleValue": -5.500000081956387 } } ], "createdAt": "2026-06-19T15:29:18.591142898Z", "vin": "5YJSA7E27LF000000" }
+{ "data": [ { "key": "PackCurrent", "value": { "doubleValue": -0.10000000149011612 } } ], "createdAt": "2026-06-19T15:29:28.591448588Z", "vin": "5YJSA7E27LF000000" }
+{ "data": [ { "key": "BrickVoltageMin", "value": { "doubleValue": 3.6040001711808145 } } ], "createdAt": "2026-06-19T15:30:06.590698001Z", "vin": "5YJSA7E27LF000000" }
