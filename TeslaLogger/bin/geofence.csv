@@ -1938,6 +1938,7 @@ Supercharger-V4 DE-Aichstetten,47.88056,10.04004,65
 Supercharger-V4 DE-Aichstetten,47.88354,10.04136
 Supercharger-V4 DE-Allensbach,47.7227,9.07233
 Supercharger-V4 DE-Allershausen,48.428631,11.583691
+Supercharger-V4 DE-Allershausen,48.4289,11.59107,20
 Supercharger-V3 DE-Alsfeld,50.734,9.24143
 Supercharger-V3 DE-Altdorf bei Nürnberg,49.381627,11.344434,40
 Supercharger-V3 DE-Altdorf bei Nürnberg,49.38288,11.3437,20
@@ -2017,7 +2018,9 @@ Supercharger-V4 DE Eichenzell Rhönhof,50.487892,9.708998,40
 Supercharger-V3 DE-Eimeldingen,47.62684,7.59946,65
 Supercharger-V4 DE-Eislingen,48.695886,9.686757
 Supercharger DE-Ellwangen,48.95584,10.18262,65
+Supercharger-V3 DE-Ellwangen - Hotel Montana,48.95863,10.17606,20
 Supercharger-V3 DE-Ellwangen - Hotel Montana,48.959163,10.173781
+Supercharger-V3 DE-Ellwangen - Hotel Montana,48.95917,10.17513,20
 Supercharger-V4 DE-Elmshorn,53.74173,9.70839,40
 Supercharger-V4 DE-Emsbüren,52.35934,7.26476
 Supercharger-V3 DE-Endsee,49.44515,10.24691
@@ -2196,7 +2199,10 @@ Supercharger-V4 DE-Moers (Cafe Del Sol),51.47548,6.63246
 Supercharger-V4 DE-Mogendorf,50.48297,7.74978
 Supercharger-V3 DE Montabaur,50.44355,7.83113,60
 Supercharger-V3 DE-Motorworld München,48.196866,11.605312
+Supercharger-V4 DE-Motten,50.33704,9.77467,20
+Supercharger-V4 DE-Motten,50.34918,9.7607,20
 Supercharger-V4 DE-Motten,50.35562,9.75384
+Supercharger-V4 DE-Motten,50.39417,9.65642,20
 Supercharger-V3 DE-Murr,48.95615,9.24545
 Supercharger-V4 DE-Mönchengladbach,51.144112,6.426722
 Supercharger-V3 DE-Mücke,50.64544,8.98982
@@ -8322,7 +8328,7 @@ Allego DE-Lüneburg Auf den Blöcken,53.23887,10.46153
 Allego DE-Lüneburg Lilienthalstraße,53.23958,10.46026
 Allego DE-Mainz Barcelona-Allee,49.94768,8.25667
 Allego DE-Mainz-Kastel Boelckestrasse,50.0205,8.29148
-Allego DE-Mannheim Amselstraße,49.54818,8.45787
+Allego DE-Mannheim Amselstraße,49.54818,8.45787,12
 Allego DE-Mannheim Morchfeldstraße,49.45478,8.5006
 Allego DE-Markranstädt Siemensstraße,51.3126,12.215
 Allego DE-Marktredwitz Wölsauer Straße,50.00467,12.10236
@@ -12752,7 +12758,7 @@ EnBW DE-Burghaslach An der Eichelfahrt,49.7399,10.6379
 EnBW DE-Burghausen Burgkirchener Straße,48.17735,12.82527
 EnBW DE-Burglengenfeld Im Naabtalpark,49.1916,12.0443
 EnBW DE-Burgstetten Neue Straße,48.924,9.37457
-EnBW DE-Burgwedel Kokenhorststraße,52.48628,9.8453
+EnBW DE-Burgwedel Kokenhorststraße,52.48628,9.8453,40
 EnBW DE-Burladingen Josef-Mayer-Straße,48.29198,9.09676
 EnBW DE-Burscheid Hauptstraße,51.0862,7.10445
 EnBW DE-Buttenheim Am Stauch,49.801,11.02352
@@ -13693,7 +13699,7 @@ EnBW DE-Mainz Max-Hufschmidt-Straße,49.9736,8.2884
 EnBW DE-Mainz Rheinallee,50.0288,8.22176
 EnBW DE-Malsch Letzenbergstraße,49.24575,8.6809
 EnBW DE-Malterdingen Vogtweg,48.16204,7.79472
-EnBW DE-Mannheim Amselstraße,49.54763,8.45683
+EnBW DE-Mannheim Amselstraße,49.5475,8.4568
 EnBW DE-Mannheim Bohnenbergerstraße,49.45437,8.514
 EnBW DE-Mannheim Frankenthaler Straße,49.55975,8.44296
 EnBW DE-Mannheim Gutenbergstraße,49.4973,8.49873
@@ -15977,7 +15983,7 @@ EWE-GO DE-Buchholz (Aller) An der Autobahn,52.67461,9.68796
 EWE-GO DE-Bunde Kirchring,53.18498,7.26795
 EWE-GO DE-Burg Magdeburger Chaussee,52.25886,11.84289
 EWE-GO DE-Burglengenfeld Regensburger Straße,49.19574,12.05919
-EWE-GO DE-Burgwedel Kokenhorststraße,52.48571,9.84458
+EWE-GO DE-Burgwedel Kokenhorststraße,52.4857,9.84458,40
 EWE-GO DE-Butjadingen Strandallee,53.58173,8.37335
 EWE-GO DE-Butjadingen-Tossens Nordseeallee,53.57654,8.24984
 EWE-GO DE-Butzbach Griedeler Straße,50.43585,8.68087
@@ -17967,6 +17973,7 @@ Holy DE-Metzingen Ulmer Straße,48.5371,9.28463
 
 Holzverstromungsanlage DE-Diemelstadt Kupferkuhle,51.48957,9.00939
 
+HomE-of-Mobility DE-Neu-Anspach Zeppelinstraße,50.30784,8.51674
 HomE-of-Mobility DE-Wertheim Am Fuchsenacker,49.77235,9.58539,15
 
 HoryzontEV PL-Koszalin Gnieźnieńska,54.17814,16.19732
@@ -18604,6 +18611,7 @@ Ionity DE-Bernau am Chiemsee Theodor-Sanne-Straße,47.8153,12.36654
 Ionity DE-Bochum Dückerweg,51.47408,7.15143
 Ionity DE-Bornheim Carl-Benz-Straße,50.76207,7.02958
 Ionity DE-Bruchsal Molzaustraße,49.14018,8.55867
+Ionity DE-Burgwedel Kokenhorststraße,52.4858,9.84595,40
 Ionity DE-Castrop Rauxel Grutholzallee,51.56634,7.31754
 Ionity DE-Delmenhorst Niedersachsendamm,53.03216,8.65478
 Ionity DE-Dettelbach Mainfrankenpark,49.77798,10.06877,30
@@ -19231,7 +19239,7 @@ JOLT DE-Dresden An der Dürren Heide,51.09396,13.6983
 JOLT DE-Dresden Heidestraße,51.08206,13.72638
 JOLT DE-Dresden Leipziger Straße,51.06513,13.73533
 JOLT DE-Dresden Meißner Landstraße,51.07966,13.65978
-JOLT DE-Dresden Washingtonstraße,51.07902,13.6906,10
+JOLT DE-Dresden Washingtonstraße,51.07892,13.69094,10
 JOLT DE-Duisburg Im Holtkamp,51.50365,6.7836
 JOLT DE-Düsseldorf Arnheimer Straße,51.3037,6.74052
 JOLT DE-Düsseldorf Bergische Landstraße,51.2457,6.8549
@@ -22729,7 +22737,7 @@ Pfalzwerke DE-Altenglan Austraße,49.55056,7.46306
 Pfalzwerke DE-Altenkirchen (Westerwald) Dammweg,50.6887,7.6452
 Pfalzwerke DE-Altrip Ludwigsplatz,49.43238,8.50178
 Pfalzwerke DE-Altötting Burghauser Straße,48.22152,12.69098
-Pfalzwerke DE-Angelbachtal Wusseldornstraße,49.23664,8.76692
+Pfalzwerke DE-Angelbachtal Wusseldornstraße,49.23664,8.76692,30
 Pfalzwerke DE-Annweiler am Trifels Landauer Straße,49.20572,7.97225
 Pfalzwerke DE-Annweiler Kurhausstraße,49.19092,7.97295
 Pfalzwerke DE-Annweiler Messplatz,49.20344,7.96437
@@ -22811,10 +22819,9 @@ Pfalzwerke DE-Dortmund Borsigstraße,51.52735,7.4729
 Pfalzwerke DE-Dortmund Emschertalstraße,51.50262,7.57895
 Pfalzwerke DE-Dreieich Voltastraße,50.03076,8.70092
 Pfalzwerke DE-Dresden Dohnaer Straße,51.0066,13.78665
-Pfalzwerke DE-Dresden Hornbach,51.07883,13.68972
 Pfalzwerke DE-Dresden Rähnitzer Allee,51.12624,13.7462
 Pfalzwerke DE-Dresden Tharandter Straße,51.01704,13.6712
-Pfalzwerke DE-Dresden Washingtonstraße,51.07846,13.69008
+Pfalzwerke DE-Dresden Washingtonstraße,51.07883,13.68972,40
 Pfalzwerke DE-Dudenhofen Speyerer Straße,49.31645,8.39327
 Pfalzwerke DE-Duisburg Düsseldorfer Straße,51.4083,6.76715
 Pfalzwerke DE-Duisburg Theodor-Heuss-Straße,51.4903,6.80662
@@ -22831,7 +22838,7 @@ Pfalzwerke DE-Eisenberg (Pfalz) Bahnhofstraße,49.55397,8.06907
 Pfalzwerke DE-Eisenberg (Pfalz) Hermann-Graf-Straße,49.5568,8.07227
 Pfalzwerke DE-Eisenberg (Pfalz) Schulstraße,49.563,8.07046
 Pfalzwerke DE-Ellerstadt Speyerer Straße,49.4634,8.26296
-Pfalzwerke DE-Emmendingen Karl-Friedrich-Straße,48.12813,7.8291
+Pfalzwerke DE-Emmendingen Karl-Friedrich-Straße,48.12812,7.82906,30
 Pfalzwerke DE-Enkenbach-Alsenborn Hauptstraße,49.4869,7.8976
 Pfalzwerke DE-Erharting Gewerbepark,48.27357,12.55296
 Pfalzwerke DE-Erlangen Zum Hutacker,49.57886,10.9645
