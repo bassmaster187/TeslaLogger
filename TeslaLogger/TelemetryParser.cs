@@ -46,7 +46,7 @@ namespace TeslaLogger
         public bool lastFastChargerPresent = false;
 
         public int lastposid = 0;
-        private double lastIdealBatteryRange;
+        internal double lastIdealBatteryRange;
         private double? lastOdometer;
         private double? lastOutsideTemp;
         private double? lastInsideTemp;
@@ -285,6 +285,12 @@ namespace TeslaLogger
                 {
                     string key = jj["key"];
                     dynamic value = jj["value"];
+
+                    if (value.ContainsKey("invalid") && value["invalid"] == true)
+                    {
+                        Log($"Invalid value for key: {key}");
+                        continue;
+                    }
 
                     if (key == "SentryMode")
                     {
@@ -909,6 +915,10 @@ namespace TeslaLogger
                 {
                     string key = jj["key"];
                     dynamic value = jj["value"];
+
+                    // Skip invalid values early
+                    if (value.ContainsKey("invalid") && value["invalid"] == true)
+                        continue;
 
                     if (key == "ACChargingEnergyIn" && charge_energy_added == null)
                     {
@@ -1568,6 +1578,10 @@ namespace TeslaLogger
 
                             double d;
                             dynamic value = jj["value"];
+                            // Skip invalid values early
+                            if (value.ContainsKey("invalid") && value["invalid"] == true)
+                                continue;
+
                             if (value.ContainsKey("stringValue"))
                             {
                                 string v1 = value["stringValue"];
@@ -1784,6 +1798,10 @@ namespace TeslaLogger
                     if (cols.Any(key.Contains))
                     {
                         dynamic value = jj["value"];
+
+                        // Skip invalid values early
+                        if (value.ContainsKey("invalid") && value["invalid"] == true)
+                            continue;
 
                         if (key == "ChargeState")
                         {

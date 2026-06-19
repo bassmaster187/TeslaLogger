@@ -193,7 +193,12 @@ namespace TeslaLogger
 
         private void Login()
         {
-            
+            if (car.webhelper != null && car.webhelper.nextTeslaTokenFromRefreshToken < DateTime.UtcNow)
+            {
+                Log("Token expiring soon, refreshing before Telemetry Server login");
+                car.webhelper.UpdateTeslaTokenFromRefreshToken();
+            }
+
             string configname = "";
             if (car.FleetAPI)
                 configname = "paid";

@@ -600,6 +600,52 @@ namespace UnitTestsTeslalogger
                 }
             }
         }
+        [TestMethod]
+        public void Raven1()
+        {
+            Car c = new Car(0, "", "", 0, "", DateTime.Now, "", "", "", "", "", "5YJSA7E27LF000000", "", null, false);
+
+            var telemetry = new TelemetryParser(c);
+            telemetry.databaseCalls = false;
+
+            var lines = LoadData("../../testdata/Raven1.txt");
+
+            Assert.IsFalse(c.Raven);
+
+            for (int i = 0; i < lines.Count; i++)
+            {
+                telemetry.handleMessage(lines[i]);
+                if (i == 0)
+                {
+                    Assert.IsTrue(c.Raven);
+                    Assert.AreEqual(142.3, telemetry.lastIdealBatteryRange, 0.1);
+                }
+            }
+            Assert.AreEqual(142.3, telemetry.lastIdealBatteryRange, 0.1);
+        }
+
+        [TestMethod]
+        public void Raven2()
+        {
+            Car c = new Car(0, "", "", 0, "", DateTime.Now, "", "", "", "", "", "5YJSA7E27LF000000", "", null, false);
+            c.Raven = true;
+
+            var telemetry = new TelemetryParser(c);
+            telemetry.databaseCalls = false;
+
+            var lines = LoadData("../../testdata/Raven2.txt");
+
+            for (int i = 0; i < lines.Count; i++)
+            {
+                telemetry.handleMessage(lines[i]);
+                if (i == 18)
+                {
+                    Assert.IsTrue(c.Raven);
+                    Assert.AreEqual(476.1, telemetry.lastIdealBatteryRange, 0.1);
+                }
+            }
+            Assert.AreEqual(476.1, telemetry.lastIdealBatteryRange, 0.1);
+        }
 
         private void AssertStates(TelemetryParser telemetry, int line, string content)
         {
