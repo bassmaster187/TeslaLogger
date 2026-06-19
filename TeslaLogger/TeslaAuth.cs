@@ -1,6 +1,7 @@
 ﻿using System.Web;
 using System;
 using System.Net.Http;
+using System.Security.Authentication;
 using System.Security.Cryptography;
 using System.Collections.Generic;
 using System.Linq;
@@ -56,7 +57,8 @@ namespace TeslaLogger
                 CookieContainer = new CookieContainer(),
                 AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate,
                 AllowAutoRedirect = false,
-                UseCookies = true
+                UseCookies = true,
+                SslProtocols = SslProtocols.Tls13
             };
 
             var client = new HttpClient(ch)
