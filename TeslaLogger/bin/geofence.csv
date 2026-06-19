@@ -36,6 +36,7 @@ Supercharger-V4 AT-Ansfelden,48.195342,14.249553
 Supercharger-V3 AT-Asten,48.22132,14.40675
 Supercharger AT-Biberwier,47.372431,10.886093
 Supercharger AT-Bregenz,47.48866,9.74004
+Supercharger AT-Bregenz,47.49556,9.73742,20
 Supercharger-V3 AT-Eberstalzell,48.03934,13.99163
 Supercharger-V4 AT-Eisenstadt,47.82567,16.53187
 Supercharger AT-Flachau,47.35466,13.38637,65
@@ -2103,6 +2104,8 @@ Supercharger-V3 DE-Köln Bonn Airport,50.883137,7.111943
 Supercharger-V4 DE-Köln Carlswerk,50.966078,7.014042
 Supercharger-V4 DE-Köln-Goltstein,50.9079,6.97083
 Supercharger-V3 DE-Kösching,48.811333,11.479899
+Supercharger-V3 DE-Kösching,48.81522,11.4692,25
+Supercharger-V3 DE-Kösching,48.81646,11.46776,25
 Supercharger-V4 DE Langenhagen,52.458282,9.716301
 Supercharger-V4 DE-Laucha,50.92246,10.55333,40
 Supercharger-V3 DE-Lauenau,52.2791,9.351,60
@@ -8862,7 +8865,7 @@ ARAL DE-Gera Siemensstraße,50.90697,12.06752
 ARAL DE-Gießen Schiffenberger Weg,50.57404,8.68484
 ARAL DE-Gifhorn Eyßelheideweg,52.4625,10.54027,25
 ARAL DE-Gilching Starnberger Weg,48.1067,11.2913
-ARAL DE-Gladbeck Hermannstraße,51.57472,6.98198
+ARAL DE-Gladbeck Hermannstraße,51.57472,6.98198,40
 ARAL DE-Gladenbach Kirchbergstraße,50.769,8.58466
 ARAL DE-Grafenberg Im Trieb,48.5676,9.314
 ARAL DE-Greifswald Koitenhäger Landstraße,54.08125,13.42894
@@ -10949,6 +10952,7 @@ da-emobil AT-Wiesing Dorf,47.40352,11.80361
 da-emobil AT-Wörgl Johann-Federer-Straße 24,47.48867,12.07343
 da-emobil AT-Zams Hauptstraße,47.16612,10.59034
 da-emobil AT-Zirl Zirlerberg,47.28164,11.22461
+da-emobil DE-Viersen Anne-Frank-Straße,51.2838,6.3784
 da-emobil IT-Appiano Unterrainer Straße,46.49725,11.2577
 da-emobil IT-Curon Venosta Grafl Straße,46.80848,10.54025
 da-emobil IT-Glorenza Malserstraße,46.67234,10.55252
@@ -11392,8 +11396,8 @@ E.ON DE-Raststätte Medenbach West,50.0947,8.3524
 E.ON DE-Raststätte Mellrichstädter Höhe,50.42122,10.3509,30
 E.ON DE-Raststätte Mellrichstädter Höhe,50.42368,10.34998,30
 E.ON DE-Raststätte Michendorf Nord,52.30298,13.01724
-E.ON DE-Raststätte Muldental,51.26075,12.70525
-E.ON DE-Raststätte Muldental,51.26194,12.7081
+E.ON DE-Raststätte Muldental Nord,51.26194,12.7081
+E.ON DE-Raststätte Muldental Süd,51.26075,12.70525
 E.ON DE-Raststätte Münsterland Ost,51.94222,7.55108,30
 E.ON DE-Raststätte Münsterland West,51.94554,7.54785,30
 E.ON DE-Raststätte Neustädter Bucht,54.06822,10.75688
@@ -20500,7 +20504,7 @@ Lidl DE-Gießen Georg-Elser-Straße,50.58898,8.70792,25
 Lidl DE-Gießen Sudetenlandstraße,50.59462,8.68046
 Lidl DE-Gilching Landsberger Straße,48.1038,11.29692
 Lidl DE-Gladbeck Roßheidestraße,51.55168,7.00282
-Lidl DE-Gladbeck Sandstraße,51.57436,6.9829
+Lidl DE-Gladbeck Sandstraße,51.5744,6.98253,15
 Lidl DE-Gotha Schöne Allee,50.94535,10.7172
 Lidl DE-Graben-Neudorf Heidelberger Straße,49.16607,8.49207
 Lidl DE-Grafenau Vormbacherweg,48.8615,13.3933
@@ -21281,6 +21285,7 @@ M-Charge CH-Füllinsdorf Schönthal Einkaufszentrum,47.50298,7.72508
 M-Charge CH-Gretzenbach Oltnerstrasse,47.3598,7.98954
 M-Charge CH-Huttwil Bernstrasse,47.11363,7.84024
 M-Charge CH-Interlaken Lindenallee,46.68827,7.87685
+M-Charge CH-Interlaken Rugenparkstrasse,46.68183,7.85233
 M-Charge CH-Konolfingen Thunstrasse,46.8762,7.62082
 M-Charge CH-La Chaux-de-Fonds Rue Daniel-Jeanrichard,47.10027,6.82698
 M-Charge CH-Rheinfelden Lindenstrasse,47.55543,7.79782
@@ -23608,6 +23613,8 @@ Qwello SE-Stockholm Torkel Knutssonsgatan,59.32025,18.0564
 
 r-loaded DE-Leipheim Albert-Einstein-Straße,48.44706,10.24017
 
+R3 FR-Luxeuil-les-Bains Rue des Martyrs de la Résistance,47.82293,6.38755
+
 Ragde NO-Kristiansund Storgata,63.10824,7.7281
 
 Raiffeisen DE-Nottuln Beisenbusch,51.91063,7.39937,25
@@ -25334,6 +25341,7 @@ SW-Lengerich DE-Tecklenburg Am Weingarten,52.21902,7.8053
 SW-Lindau DE-Lindau (Bodensee) Zwanzigerstraße,47.54867,9.68708
 SW-Lindau DE-Lindau Bleichenweg,47.55373,9.6985
 SW-Lindau DE-Lindau Kemptener Straße,47.56494,9.70448
+SW-Lindau DE-Wasserburg (Bodensee) Lindenplatz,47.57062,9.63792
 SW-Lingen DE-Lingen (Ems) Kaiserstraße,52.52098,7.32436
 SW-Lübeck DE-Ahrensburg An der Strusbek,53.68386,10.26659,25
 SW-Lübeck DE-Bad Segeberg Rosenstraße,53.92867,10.31561
