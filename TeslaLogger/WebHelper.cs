@@ -1,5 +1,6 @@
 using Exceptionless;
 using Exceptionless.Logging;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using MySql.Data.MySqlClient;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -1331,7 +1332,10 @@ namespace TeslaLogger
                     if (r1temp == null)
                     {
                         if (resultContent != null)
+                        {
                             car.Log("GetVehicles: " + resultContent);
+                            car.CreateExeptionlessLog("GetVehicles", resultContent, Exceptionless.Logging.LogLevel.Error).Submit();
+                        }
 
                         car.CurrentJSON.FatalError = "Car not found!";
                         car.CurrentJSON.CreateCurrentJSON();
@@ -5284,6 +5288,13 @@ WHERE
                 if (Tesla_token.Length < 10)
                 {
                     return false;
+                }
+
+                Tools.VINDecoder(car.Vin, out int year, out string carType, out bool _, out bool _, out string _, out string _, out bool _);
+                if (carType == "Model S" || carType == "Model X")
+                {
+                    if (year <= 2021)
+                        return true;
                 }
 
                 string json = "{\"vins\": [\"" + car.Vin + "\"]}";
