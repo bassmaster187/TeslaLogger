@@ -719,6 +719,29 @@ namespace UnitTestsTeslalogger
         }
 
         [TestMethod]
+        public void Raven2()
+        {
+            Car c = new Car(0, "", "", 0, "", DateTime.Now, "", "", "", "", "", "5YJSA7E27LF000000", "", null, false);
+            c.Raven = true;
+
+            var telemetry = new TelemetryParser(c);
+            telemetry.databaseCalls = false;
+
+            var lines = LoadData("../../testdata/Raven2.txt");
+
+            for (int i = 0; i < lines.Count; i++)
+            {
+                telemetry.handleMessageAsync(lines[i]).Wait();
+                if (i == 99999)
+                {
+                    Assert.IsTrue(c.Raven);
+                    Assert.AreEqual(142.3, telemetry.lastIdealBatteryRange, 0.1);
+                }
+            }
+            Assert.AreEqual(476.1, telemetry.lastIdealBatteryRange, 0.1);
+        }
+
+        [TestMethod]
         public void InvalidValues()
         {
             Car c = new Car(0, "", "", 0, "", DateTime.Now, "", "", "", "", "", "5YJ3E7EA3LF700000", "", null, false);
