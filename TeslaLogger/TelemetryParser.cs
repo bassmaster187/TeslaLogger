@@ -44,7 +44,7 @@ namespace TeslaLogger
         public bool lastFastChargerPresent = false;
 
         public int lastposid = 0;
-        private double lastIdealBatteryRange;
+        internal double lastIdealBatteryRange;
         private double? lastOdometer;
         private double? lastOutsideTemp;
         private double? lastInsideTemp;
@@ -1098,11 +1098,20 @@ namespace TeslaLogger
                         }
                         if (double.TryParse(v1, NumberStyles.Any, CultureInfo.InvariantCulture, out double IdealBatteryRange))
                         {
-                            lastIdealBatteryRange = Tools.MlToKm(IdealBatteryRange, 1);
-                            lastRatedRange = lastIdealBatteryRange;
-                            car.CurrentJSON.current_ideal_battery_range_km = lastIdealBatteryRange;
-                            car.CurrentJSON.current_battery_range_km = lastIdealBatteryRange;
-                            changed = true;
+                            if (IdealBatteryRange != 999)
+                            {
+                                SetIdealRange(IdealBatteryRange);
+                                changed = true;
+                            }
+                            else
+                            {
+                                if (!car.Raven)
+                                {
+                                    Log("Raven detected by IdealBatteryRange == 999");
+                                    car.Raven = true;
+                                    car.WriteSettings();
+                                }
+                            }
                         }
                     }
                     else if (key == "RatedRange")
@@ -1121,6 +1130,11 @@ namespace TeslaLogger
                             lastRatedRange = Tools.MlToKm(RatedRange, 1);
                             car.CurrentJSON.current_battery_range_km = lastRatedRange;
                             changed = true;
+
+                            if (car.Raven)
+                            {
+                                SetIdealRange(RatedRange);
+                            }
                         }
                     }
                 }
@@ -1135,6 +1149,14 @@ namespace TeslaLogger
                     await InsertChargingAsync(d, cmd);
                 }
             }
+        }
+
+        private void SetIdealRange(double IdealBatteryRange)
+        {
+            lastIdealBatteryRange = Tools.MlToKm(IdealBatteryRange, 1);
+            lastRatedRange = lastIdealBatteryRange;
+            car.CurrentJSON.current_ideal_battery_range_km = lastIdealBatteryRange;
+            car.CurrentJSON.current_battery_range_km = lastIdealBatteryRange;
         }
 
         private async Task InsertChargingAsync(DateTime d, MySqlCommand cmd)
