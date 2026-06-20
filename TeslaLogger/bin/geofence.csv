@@ -42,7 +42,7 @@ Supercharger-V4 AT-Eisenstadt,47.82567,16.53187
 Supercharger AT-Flachau,47.35466,13.38637,65
 Supercharger-V4 AT-Gerasdorf,48.343266,16.464452
 Supercharger AT-Graz,47.037228,15.478646
-Supercharger-V4 AT-Graz Center West,47.03348,15.41467,25
+Supercharger-V4 AT-Graz Center West,47.03348,15.41467,27
 Supercharger-V3 AT-Hall in Tirol,47.27339,11.47542
 Supercharger AT-Hall in Tirol,47.27689,11.46904
 Supercharger-V3 AT-Hartberg,47.281418,15.993699
@@ -561,7 +561,6 @@ Supercharger CH-Quinto,46.5152,8.67063
 Supercharger CH-Rubigen,46.89187,7.54277
 Supercharger CH-Schaffhausen,47.721,8.6467
 Supercharger-V4 CH-Signy,46.39692,6.20618
-Supercharger-V4 CH-Silvaplana,46.45584,9.791
 Supercharger-V4 CH-Spreitenbach,47.4223,8.36862
 Supercharger-V3 CH-St. Gallen,47.40833,9.30527,60
 Supercharger CH-St. Moritz,46.4968,9.84272
@@ -1953,7 +1952,7 @@ Supercharger-V4 DE-Bad Segeberg,53.93756,10.2974
 Supercharger-V4 DE-Bad Vilbel,50.16863,8.72895
 Supercharger-V3 DE-Baden-Baden,48.78364,8.19225
 Supercharger-V3 DE-Barsbüttel,53.578295,10.193266
-Supercharger-V4 DE-Bautzen,51.18878,14.45457
+Supercharger-V4 DE-Bautzen,51.18866,14.45457
 Supercharger-V3 DE-Bayreuth,49.9626,11.61055,95
 Supercharger-V4 DE-Beelitz,52.26678,12.92225
 Supercharger-V3 DE-Bensheim,49.6724,8.6022
@@ -2155,6 +2154,7 @@ Supercharger-V3 DE-Kerpen,50.897831,6.682291
 Supercharger-V4 DE-Kiel-Neumeiersdorf,54.28062,10.1337
 Supercharger-V3 DE-Kirchheim,50.8348,9.57443,35
 Supercharger-V4 DE-Kirchheim unter Teck,48.64135,9.4295
+Supercharger-V3 DE-Kleinostheim,49.99393,9.07173,20
 Supercharger-V3 DE-Kleinostheim,49.993998,9.070655
 Supercharger-V4 DE-Kloster Lehnin,52.3478,12.76107
 Supercharger-V3 DE-Knetzgau,49.982399,10.555616
@@ -2242,6 +2242,10 @@ Supercharger-V3 DE-Norden,53.61358,7.16703
 Supercharger-V3 DE-Northeim,51.731815,9.972845,35
 Supercharger-V3 DE-Nossen,51.08255,13.27406
 Supercharger-V3 DE-Nottuln,51.911341,7.398553,40
+Supercharger-V3 DE-Nörten-Hardenberg,51.62815,9.91763,20
+Supercharger-V3 DE-Nörten-Hardenberg,51.62896,9.92067,20
+Supercharger-V3 DE-Nörten-Hardenberg,51.62965,9.91693,20
+Supercharger-V3 DE-Nörten-Hardenberg,51.63207,9.90954,20
 Supercharger-V3 DE-Nörten-Hardenberg,51.632847,9.909942
 Supercharger DE-Nürburgring,50.335528,6.948887
 Supercharger-V3 DE-Nürburgring Motorsport Hotel,50.331256,6.945422
@@ -2298,6 +2302,7 @@ Supercharger-V3 DE-Schleiz,50.54614,11.8033,60
 Supercharger-V3 DE-Schleiz,50.54707,11.80633
 Supercharger-V4 DE-Schorndorf,48.8169,9.5383
 Supercharger-V4 DE-Schwaig,49.48155,11.196833
+Supercharger-V4 DE-Schwandorf (Globus),49.3141,12.15315,20
 Supercharger-V4 DE-Schwandorf (Globus),49.31446,12.14706
 Supercharger-V3 DE Schwarzheide,51.469478,13.869274
 Supercharger-V4 DE-Schweinfurt,50.0207,10.21528
@@ -3780,6 +3785,7 @@ Supercharger-V4 NL-Eelderwolde,53.19627,6.51622
 Supercharger-V3 NL-Eemnes,52.23563,5.23022
 Supercharger NL-Eindhoven,51.40584,5.4812
 Supercharger NL-Eindhoven,51.40713,5.47958
+Supercharger NL-Emmeloord,52.6596,5.462,20
 Supercharger NL-Emmeloord,52.72742,5.7647
 Supercharger-V3 NL-Emmen,52.7242,6.88335
 Supercharger-V4 NL-Enschede,52.2029,6.88875
@@ -4182,7 +4188,7 @@ Supercharger-V4 SE-Kläppen,61.034988,13.344751
 Supercharger-V3 SE-Kristianstad,56.02474,14.116383
 Supercharger-V4 SE-Kristianstad North,56.025142,14.195234
 Supercharger-V3 SE-Kristinehamn,59.31478,14.147392
-Supercharger SE-Krokom,63.328793,14.4301
+Supercharger-V4 SE-Krokom,63.3288,14.4301
 Supercharger-V4 SE-Kungens Kurva,59.270082,17.915231
 Supercharger-V4 SE-Kungsbacka,57.478787,12.080095
 Supercharger-V4 SE-Kungälv,57.85816,11.99827
@@ -13271,7 +13277,6 @@ EnBW DE-Hamburg Andreas-Meyer-Straße,53.5154,10.0819
 EnBW DE-Hamburg Bramfelder Chaussee,53.60355,10.07208
 EnBW DE-Hamburg Curslacker Neuer Deich,53.48247,10.20757
 EnBW DE-Hamburg Hardauring,53.4777,9.8845
-EnBW DE-Hamburg Holsteiner Chaussee,53.6205,9.91086
 EnBW DE-Hamburg Kamerbalken,53.5935,9.923
 EnBW DE-Hamburg Kieler Straße,53.57986,9.9356
 EnBW DE-Hamburg Krähenweg,53.63244,9.95538
@@ -13842,7 +13847,7 @@ EnBW DE-Münsingen Alter Seeburger Weg,48.41546,9.4904
 EnBW DE-Münsingen Biosphärenallee,48.41294,9.53483
 EnBW DE-Münsingen Uracher Straße,48.4139,9.49385
 EnBW DE-Münster Am Roggenkamp,51.9042,7.6741
-EnBW DE-Münster Haus Uhlenkotten,51.9923,7.5703
+EnBW DE-Münster Haus Uhlenkotten,51.9923,7.5703,20
 EnBW DE-Münster Westhoffstraße,51.98875,7.61024
 EnBW DE-Nassau Emser Straße,50.3168,7.79362
 EnBW DE-Nastätten Bahnhofstrasse,50.1994,7.8522
@@ -18591,6 +18596,7 @@ Ionity CH-Neuenkirch,47.11337,8.23233
 Ionity CH-Oftringen Nordstrasse,47.30405,7.9297
 Ionity CH-Rastplatz Heidiland,47.01172,9.51243,20
 Ionity CH-Raststätte Grauholz,46.99025,7.47613,30
+Ionity CH-Silvaplana Via Chantunela,46.45562,9.79077
 Ionity CZ-Beroun (dir. Prague),49.95581,14.06276
 Ionity CZ-Lovosice,50.51195,14.05277,12
 Ionity CZ-Nupaky,49.9844,14.60263
@@ -18627,7 +18633,7 @@ Ionity DE-Burgwedel Kokenhorststraße,52.4858,9.84595,40
 Ionity DE-Castrop Rauxel Grutholzallee,51.56634,7.31754
 Ionity DE-Delmenhorst Niedersachsendamm,53.03216,8.65478
 Ionity DE-Dettelbach Mainfrankenpark,49.77798,10.06877,30
-Ionity DE-Dietmannsried Glaserstraße,47.8119,10.30294,30
+Ionity DE-Dietmannsried Glaserstraße,47.8119,10.30294,27
 Ionity DE-Dormagen Hamburger Straße,51.09327,6.8078
 Ionity DE-Eching Dieselstraße,48.31085,11.64673
 Ionity DE-Eichenzell Rhönhof,50.4883,9.70852,20
@@ -24211,6 +24217,8 @@ Shell CH-Saanen Floraplatz,46.48999,7.25962
 Shell CH-Samedan Cho d’Punt,46.53114,9.87429
 Shell CH-Schlieren Wagistrasse,47.39814,8.46042
 Shell CH-Sierre Rte de Sion,46.28746,7.52065,25
+Shell CH-Silvaplana Via Aguagliöls,46.4773,9.81067
+Shell CH-Silvaplana Via dal Farrer,46.4597,9.7967
 Shell CH-St. Gallen Zürcherstrasse,47.40736,9.29425
 Shell CH-Vetroz Rte Cantonale,46.22513,7.29201
 Shell CH-Villars-sur-Ollon Avenue Centrale,46.29507,7.05568
