@@ -541,6 +541,7 @@ Supercharger-V3 CH-Landquart,46.9661,9.55265
 Supercharger-V3 CH-Locarno,46.16678,8.79603
 Supercharger-V3 CH-Lugano,45.97485,8.92798
 Supercharger CH-Lully,46.8323,6.85924,25
+Supercharger CH-Maienfeld,47.00348,9.5244,20
 Supercharger CH-Maienfeld,47.00397,9.5258
 Supercharger CH-Martigny,46.1264,7.061
 Supercharger-V3 CH-Martigny,46.12743,7.06012
@@ -1993,7 +1994,13 @@ Supercharger-V4 DE-Bruchsal,49.13837,8.56242
 Supercharger-V3 DE-Brunnthal,48.0397,11.66146
 Supercharger-V4 DE-Brühl,49.40987,8.5417
 Supercharger-V3 DE-Burgdorf,52.122717,10.229433,35
+Supercharger-V4 DE-Busdorf,54.47762,9.54597,20
 Supercharger-V4 DE-Busdorf,54.47796,9.54494,40
+Supercharger-V4 DE-Busdorf,54.47908,9.54654,20
+Supercharger-V4 DE-Busdorf,54.48165,9.54386,20
+Supercharger-V4 DE-Busdorf,54.48193,9.5319,20
+Supercharger-V4 DE-Busdorf,54.48227,9.5416,20
+Supercharger-V4 DE-Busdorf,54.48455,9.54545,20
 Supercharger-V3 DE-Böblingen,48.69138,9.00365,55
 Supercharger-V4 DE-Bühl,48.724669,8.110452
 Supercharger-V4 DE-Chemnitz,50.864124,12.867845
@@ -2026,6 +2033,7 @@ Supercharger-V4 DE-Emsbüren,52.35934,7.26476
 Supercharger-V3 DE-Endsee,49.44515,10.24691
 Supercharger-V4 DE-Engen,47.855556,8.793436
 Supercharger-V3 DE-Erftstadt,50.79648,6.77994
+Supercharger-V3 DE-Erftstadt,50.80255,6.78844
 Supercharger-V4 DE-Erfurt,51.00903,10.99146
 Supercharger-V4 DE-Erfurt (Cafe Del Sol),50.9758,11.07463
 Supercharger-V4 DE-Erfurt-Linderbach (Globus),50.9766,11.10654,25
@@ -2044,6 +2052,7 @@ Supercharger-V4 DE-Frankfurt am Main,50.1149,8.6815
 Supercharger-V3 DE-Frechen,50.91557,6.83478,30
 Supercharger-V3 DE-Frechen,50.91603,6.83817,30
 Supercharger-V3 DE-Frechen,50.91646,6.8343,10
+Supercharger-V3 DE-Frechen,50.91712,6.91066,10
 Supercharger-V3 DE-Frechen,50.91787,6.83338,36
 Supercharger-V4 DE-Freiburg-Gundelfingen,48.03967,7.86103
 Supercharger-V4 DE-Friedland,53.58662,13.41903
@@ -2096,6 +2105,7 @@ Supercharger-V3 DE-Hemsbach,49.593966,8.632465
 Supercharger-V4 DE-Hengersberg,48.76553,13.04663,45
 Supercharger-V4 DE-Heppenheim,49.63785,8.618
 Supercharger-V4 DE-Herbolzheim,48.22704,7.75368
+Supercharger-V4 DE-Herbolzheim,48.22802,7.74885,20
 Supercharger-V4 DE-Herborn,50.67534,8.279983,40
 Supercharger-V4 DE-Herford,52.12684,8.67533
 Supercharger-V3 DE-Hermsdorf,50.8899,11.8714,30
@@ -2154,6 +2164,7 @@ Supercharger-V4 DE-Konstanz Lago,47.656219,9.176227
 Supercharger-V4 DE-Kornwestheim,48.86046,9.19826
 Supercharger-V4 DE-Krefeld,51.321583,6.6018
 Supercharger-V3 DE-Köln Bonn Airport,50.883137,7.111943
+Supercharger-V4 DE-Köln Carlswerk,50.96566,7.01464,20
 Supercharger-V4 DE-Köln Carlswerk,50.966078,7.014042
 Supercharger-V4 DE-Köln-Goltstein,50.9079,6.97083
 Supercharger-V3 DE-Kösching,48.811333,11.479899
@@ -3958,7 +3969,6 @@ Supercharger NO-Skei,61.575514,6.483532,30
 Supercharger NO-Skibotn,69.392448,20.268423
 Supercharger-V3 NO-Skien,59.206742,9.609061
 Supercharger-V4 NO-Skjåk,61.88317,8.26694
-Supercharger NO-Skulestadmo,60.658297,6.436256
 Supercharger-V4 NO-Skulestadmo Storrviki,60.65695,6.43733
 Supercharger-V4 NO-Slependen,59.87368,10.50276
 Supercharger NO-Solli,59.324292,10.954448
@@ -3994,6 +4004,7 @@ Supercharger-V4 NO-Vikeså,58.63192,6.07777
 Supercharger NO-Vinstra,61.59049,9.72166
 Supercharger-V3 NO-Vinstra,61.594523,9.726537
 Supercharger-V3 NO-Volda,62.14038,6.090307
+Supercharger-V4 NO-Voss,60.6583,6.43634
 Supercharger-V4 NO-Voss Handelshus,60.63511,6.458006
 Supercharger-V4 NO-Vågå,61.87008,9.10338
 Supercharger-V4 NO-Vøringsfossen,60.42519,7.24742
@@ -4136,7 +4147,7 @@ Supercharger-V4 SE-Borås,57.713704,12.865398
 Supercharger-V4 SE-Charlottenberg,59.878214,12.291584
 Supercharger-V3 SE-Dorotea,64.26146,16.417819
 Supercharger SE-Edsbruk,57.98007,16.48249,30
-Supercharger SE-Enköping,59.659057,17.076919
+Supercharger-V4 SE-Enköping,59.65897,17.077,40
 Supercharger-V4 SE-Eskilstuna,59.388227,16.532384
 Supercharger SE-Falkenberg,56.931922,12.518628
 Supercharger-V4 SE-Falun,60.605638,15.628506
@@ -6746,6 +6757,7 @@ Supercharger-V4 US-Amarillo TX I-40,35.19182,-101.72226
 Supercharger-V4 US-Amarillo TX River Rd,35.2646,-101.83066
 Supercharger US-Arlington TX,32.75462,-97.08278
 Supercharger-V3 US-Arlington TX - East Bardin Road,32.6702,-97.11347
+Supercharger-V4 US-Arlington TX W Arbrook Blvd,32.68257,-97.1209
 Supercharger US-Austin TX,30.3292,-97.70627
 Supercharger-V3 US-Austin TX - FM 969,30.2547,-97.60646
 Supercharger-V3 US-Austin TX - Frontage Road,30.16288,-97.7921
@@ -16623,6 +16635,7 @@ EWE-GO DE-Otterndorf Raiffeisenstraße,53.8047,8.88068
 EWE-GO DE-Otterndorf Stader Straße,53.80932,8.9117
 EWE-GO DE-Ottersberg Grüne Straße,53.11129,9.14256
 EWE-GO DE-Ottersberg Posthausen,53.05758,9.16626,20
+EWE-GO DE-Ottersberg Posthausen,53.06062,9.1711
 EWE-GO DE-Overath Burghof,50.94263,7.2973
 EWE-GO DE-Paderborn Frankfurter Weg,51.70514,8.72442
 EWE-GO DE-Paderborn Paderborner Straße,51.7323,8.70486
@@ -17674,7 +17687,6 @@ Greenman DE-Kemnath Bayreuther Straße,49.86854,11.88055
 Greenman DE-Leinefelde Herderstraße,51.3742,10.31794,60
 Greenman DE-Neuwied Breslauer Straße,50.4406,7.4881
 Greenman DE-Petersberg Magdeburger Chaussee,51.53222,11.93997
-Greenman DE-Plauen Äußere Reichenbacher Straße,50.49733,12.17038
 Greenman DE-Rodenbach Adolf-Reichwein-Straße,50.13934,9.02353
 Greenman DE-Suhl Würzburger Straße,50.60293,10.67817
 Greenman DE-Taucha Eilenburger Straße,51.38635,12.5066
@@ -19047,6 +19059,7 @@ Ionity SE-Docksta Dockstavägen,63.05722,18.33733,30
 Ionity SE-Enköping,59.65339,17.08324
 Ionity SE-Gränna,58.00157,14.45022
 Ionity SE-Helsingborg,56.01699,12.75981,25
+Ionity SE-Hoting Storgatan,64.11177,16.2028
 Ionity SE-Hudiksvall,61.74251,17.07861
 Ionity SE-Jokkmokk Föreningsgatan,66.60754,19.828
 Ionity SE-Jävrebyn,65.14307,21.50461
@@ -27929,9 +27942,11 @@ DE Koblenz Bardelebenstraße,50.35851,7.58726
 DE Koserow Hotel Elisabeth,54.05156,14.00066
 DE Köln Brügelmannstraße 3,50.94394,6.9859
 DE Köln Esser,51.03807,6.91592
+DE Köln Hotel Pullman,50.94025,6.9453
 DE Köln Neumarkt Passage,50.93734,6.9472
 DE Köln Opladener Straße,50.9397,6.97403
 DE Köln smartvillage,50.96518,7.01527
+DE Köln TÜV Rheinland,50.92385,6.9918
 DE Laatzen Connox,52.30093,9.84123
 DE Langen (Hessen) esatus,49.98757,8.67813,35
 DE Leer Gaswerkstraße,53.23147,7.45039
@@ -28007,6 +28022,7 @@ DE Pettstadt Gemeinde,49.83073,10.9251
 DE Pforzheim Deichlerweg,48.902,8.67445
 DE Pliezhausen Stuifenweg,48.56192,9.1883
 DE Porta Westfalica rococom,52.2324,8.91289
+DE Porz TÜV Rheinland,50.9228,6.99474
 DE Prichsenstadt Gewerbegebiet-Ost,49.81766,10.36377,70
 DE Prien am Chiemsee Cottage,47.84463,12.31332
 DE Putgarten Dorfstraße,54.67084,13.41001
