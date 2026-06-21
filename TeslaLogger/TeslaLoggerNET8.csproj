@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <SccProjectName>
@@ -20,6 +20,23 @@
     <FileVersion>2.0.0.0</FileVersion>
     <EnableNETAnalyzers>True</EnableNETAnalyzers>
   </PropertyGroup>
+
+  <!-- Exclude static BuildInfo.cs on Linux/macOS (generated version in obj/ is used instead) -->
+  <ItemGroup Condition="'$(OS)' != 'Windows_NT'">
+    <Compile Remove="BuildInfo.cs" />
+  </ItemGroup>
+
+  <!-- Generate BuildInfo.cs with git branch and build date before compilation (Linux/macOS only) -->
+  <Target Name="GenerateBuildInfo" BeforeTargets="CoreCompile" DependsOnTargets="ResolveAssemblyReferences" Condition="'$(OS)' != 'Windows_NT'">
+    <PropertyGroup>
+      <ScriptPath>$(MSBuildThisFileDirectory)generate-buildinfo.sh</ScriptPath>
+      <BuildInfoCs>$(IntermediateOutputPath)BuildInfo.cs</BuildInfoCs>
+    </PropertyGroup>
+    <Exec Command="bash $(ScriptPath) $(AssemblyVersion) $(BuildInfoCs)" IgnoreExitCode="true" />
+    <ItemGroup>
+      <Compile Include="$(BuildInfoCs)" />
+    </ItemGroup>
+  </Target>
   <ItemGroup>
     <Compile Update="ApplicationSettings.Designer.cs">
       <AutoGen>True</AutoGen>

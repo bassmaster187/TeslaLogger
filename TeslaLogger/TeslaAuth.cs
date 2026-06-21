@@ -16,7 +16,6 @@ namespace TeslaLogger
 {
     public class TeslaAuth
     {
-        readonly string UserAgent = "TLV1";
         readonly HttpClient client;
         readonly LoginInfo loginInfo;
         static readonly Random Random = new Random();

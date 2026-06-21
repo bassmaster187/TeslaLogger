@@ -1710,17 +1710,22 @@ namespace TeslaLogger
                 LogDiskUsage();
                 // log DB usage
                 LogDBUsage();
-                // cleanup Exceptions
-                CleanupExceptionsDir();
+                // cleanups that only work on RasPi
+                if (!IsDocker())
+                {
+                    // cleanup Exceptions
+                    CleanupExceptionsDir();
+                    // cleanup backup folder
+                    CleanupBackupFolder();
+                    // cleanup log file nohup.out
+                    CleanupLogfile();
+                }
+                else
+                {
+                    CreateBackupForDocker();
+                }
                 // cleanup database
                 CleanupDatabaseTableMothership();
-                // cleanup backup folder
-                CleanupBackupFolder();
-
-                CreateBackupForDocker();
-
-                CleanupLogfile();
-
                 // run housekeeping regularly:
                 // - after 24h
                 // - but only if car is asleep, otherwise wait another hour
@@ -1750,11 +1755,11 @@ namespace TeslaLogger
                     }
                     var targetFile = Path.Combine(Path.Combine(Logfile.GetExecutingPath(), "logs"), $"nohup-{DateTime.UtcNow:yyyyMMddHHmmssfff}");
                     // copy to logs dir with timestamp
-                    ExecMono("/bin/cp", nohup + " " + targetFile);
+                    CopyFile(nohup, targetFile);
                     // gzip copied file
                     ExecMono("/bin/gzip", targetFile);
                     // empty nohup.out
-                    ExecMono("/bin/sh", $"-c '/bin/echo > {nohup}'");
+                    File.WriteAllText(nohup, "");
                     // cleanup old logfile backups
                     // old means older than 90 days
                     DirectoryInfo di = new DirectoryInfo(LogDir);
@@ -2573,10 +2578,10 @@ WHERE
         private static byte[] Generate128BitsOfRandomEntropy()
         {
             var randomBytes = new byte[16]; // 16 Bytes will give us 128 bits.
-            using (var rngCsp = new RNGCryptoServiceProvider())
+            using (var rng = RandomNumberGenerator.Create())
             {
                 // Fill the array with cryptographically secure random bytes.
-                rngCsp.GetBytes(randomBytes);
+                rng.GetBytes(randomBytes);
             }
             return randomBytes;
         }
