@@ -225,8 +225,12 @@ namespace TeslaLogger
                     if (car.IsParked() && !car.IsCharging())
                     {
                         Tools.DebugLog($"#{car.CarInDB}: TeslaAPIHandleStateChange {name} {oldvalue} ({oldTS}) -> {newvalue} ({newTS})");
-                        Tools.DebugLog($"TeslaAPIHandleStateChange {name} SendDataToAbetterrouteplannerAsync(utc:{newTS}, soc:{int.Parse(newvalue.ToString(), Tools.ciEnUS)}, speed:0, charging:false, power:0, lat:{car.CurrentJSON.GetLatitude()}, lon:{car.CurrentJSON.GetLongitude()})");
-                        _ = car.webhelper.SendDataToAbetterrouteplannerAsync(newTS, int.Parse(newvalue.ToString(), Tools.ciEnUS), 0, false, 0, car.CurrentJSON.GetLatitude(), car.CurrentJSON.GetLongitude());
+                        if (double.TryParse(newvalue.ToString(), out double batteryLevel) && batteryLevel >= 0 && batteryLevel <= 100)
+                        {
+                            int soc = (int)Math.Round(batteryLevel);
+                            Tools.DebugLog($"TeslaAPIHandleStateChange {name} SendDataToAbetterrouteplannerAsync(utc:{newTS}, soc:{soc}, speed:0, charging:false, power:0, lat:{car.CurrentJSON.GetLatitude()}, lon:{car.CurrentJSON.GetLongitude()})");
+                            _ = car.webhelper.SendDataToAbetterrouteplannerAsync(newTS, soc, 0, false, 0, car.CurrentJSON.GetLatitude(), car.CurrentJSON.GetLongitude());
+                        }
                     }
                     break;
                 default:

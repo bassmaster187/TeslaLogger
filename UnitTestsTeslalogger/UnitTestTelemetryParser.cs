@@ -732,10 +732,10 @@ namespace UnitTestsTeslalogger
             for (int i = 0; i < lines.Count; i++)
             {
                 telemetry.handleMessageAsync(lines[i]).Wait();
-                if (i == 99999)
+                if (i == 18)
                 {
                     Assert.IsTrue(c.Raven);
-                    Assert.AreEqual(142.3, telemetry.lastIdealBatteryRange, 0.1);
+                    Assert.AreEqual(476.1, telemetry.lastIdealBatteryRange, 0.1);
                 }
             }
             Assert.AreEqual(476.1, telemetry.lastIdealBatteryRange, 0.1);
