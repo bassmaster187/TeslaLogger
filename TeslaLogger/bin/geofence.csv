@@ -1961,7 +1961,10 @@ Supercharger-V3 DE-Barsbüttel,53.578295,10.193266
 Supercharger-V4 DE-Bautzen,51.18866,14.45457
 Supercharger-V3 DE-Bayreuth,49.9626,11.61055,95
 Supercharger-V4 DE-Beelitz,52.26678,12.92225
+Supercharger-V3 DE-Bensheim,49.66674,8.603,20
+Supercharger-V3 DE-Bensheim,49.67216,8.59767,20
 Supercharger-V3 DE-Bensheim,49.6724,8.6022
+Supercharger-V3 DE-Bensheim,49.67272,8.5981,20
 Supercharger-V3 DE-Berchtesgaden,47.626949,13.000833
 Supercharger-V3 DE-Bergkamen,51.6495,7.67112
 Supercharger-V3 DE-Berlin - APCOA ALEXA,52.51938,13.41608
@@ -2316,7 +2319,13 @@ Supercharger-V4 DE-Schwandorf (Globus),49.3141,12.15315,20
 Supercharger-V4 DE-Schwandorf (Globus),49.31446,12.14706
 Supercharger-V3 DE Schwarzheide,51.469478,13.869274
 Supercharger-V4 DE-Schweinfurt,50.0207,10.21528
+Supercharger-V4 DE-Schweitenkirchen,48.50476,11.59095
+Supercharger-V4 DE-Schweitenkirchen,48.5103,11.58447,20
 Supercharger-V4 DE-Schweitenkirchen,48.5107,11.58188,36
+Supercharger-V4 DE-Schweitenkirchen,48.51195,11.57893,20
+Supercharger-V4 DE-Schweitenkirchen,48.51228,11.57654,20
+Supercharger-V4 DE-Schweitenkirchen,48.51477,11.5829,20
+Supercharger-V4 DE-Schweitenkirchen,48.51683,11.58274,20
 Supercharger-V4 DE-Schwetzingen,49.413803,8.543361
 Supercharger-V3 DE-Schönefeld,52.388723,13.498047,30
 Supercharger-V4 DE-Siegen,50.85664,8.01141
@@ -3313,7 +3322,19 @@ Supercharger-V3 IT-Bergamo Dalmine,45.652304,9.61897
 Supercharger-V4 IT-Boara Pisani,45.119242,11.770724
 Supercharger-V4 IT-Bolzano,46.486219,11.335547
 Supercharger IT-Borca di Cadore,46.435592,12.222879
+Supercharger IT-Brennero,46.40167,11.30022,20
+Supercharger IT-Brennero,46.49277,11.3956,20
+Supercharger IT-Brennero,46.98952,11.4966,20
+Supercharger IT-Brennero,46.9901,11.49637,20
 Supercharger IT-Brennero,46.9954,11.5021,75
+Supercharger IT-Brennero,46.99566,11.5003,20
+Supercharger IT-Brennero,46.99788,11.50277,20
+Supercharger IT-Brennero,46.99946,11.50462,20
+Supercharger IT-Brennero,47.0007,11.5067,20
+Supercharger IT-Brennero,47.00142,11.50713,20
+Supercharger IT-Brennero,47.0033,11.50726,20
+Supercharger IT-Brennero,47.0081,11.5086,20
+Supercharger IT-Brennero,47.0082,11.50727,20
 Supercharger-V3 IT-Brescia,45.53229,10.16487
 Supercharger-V4 IT-Brescia Via della Volta,45.50645,10.23256
 Supercharger-V3 IT-Bressanone,46.75903,11.63837,40
@@ -4284,6 +4305,7 @@ Supercharger SE-Åre,63.3951,13.08778
 Supercharger-V3 SE-Åsarna,62.640554,14.37138
 Supercharger-V4 SE-Ödeshög,58.22717,14.66855
 Supercharger-V3 SE-Örebro,59.29758,15.20636
+Supercharger-V4 SE-Örnsköldsvik,63.29102,18.71057,20
 Supercharger-V4 SE-Örnsköldsvik,63.29132,18.70648
 Supercharger-V3 SE-Örnsköldsvik South,63.29038,18.704428,40
 Supercharger-V4 SE-Östersund,63.170327,14.69059
@@ -12238,6 +12260,7 @@ Electrify-Canada CA-Ottawa ON Coventry Rd,45.42069,-75.6517
 
 electrip BG-Dolni Dabnik Долни Дъбник Околовръстния път,43.3987,24.43386
 electrip BG-Kulata Кулата E79,41.38413,23.36178
+electrip BG-Sofia София Автомагистрала Европа,42.73433,23.37447
 electrip BG-Студена Автомагистрала Струма,42.58385,23.11996,15
 electrip GR-Igoumenitsa Ηγουμενίτσα Leof. 49 Martiron,39.49733,20.26587
 electrip GR-Zografou Porto Elea Camping,40.16946,23.8646
@@ -17151,8 +17174,7 @@ Fastned DE-Autohof Herbolzheim,48.22694,7.7551,30
 Fastned DE-Autohof Paderborn-Mönkeloh,51.68356,8.72177,30
 Fastned DE-Bad Driburg Am Siedlerplatz,51.72076,9.01187
 Fastned DE-Bad Fallingbostel Gustaf-de-Laval-Straße,52.8531,9.692
-Fastned DE-Benshe Berliner Ring,49.6818,8.60458
-Fastned DE-Bensheim Berliner Ring,49.68194,8.60388
+Fastned DE-Bensheim Berliner Ring,49.6818,8.60458
 Fastned DE-Bersteland Van der Valk Allee,51.949,13.78763,11
 Fastned DE-Blankenfelde-Mahlow Eschenweg,52.3092,13.44358,20
 Fastned DE-Bochum Kohlenstraße,51.47202,7.19216
@@ -17347,6 +17369,7 @@ FDE80 FR-Mers-les-Bains Rue du 4 Septembre,50.06333,1.38804
 Feníe-Energía ES-Can Picafort Passeig Mallorca,39.76225,3.16273
 
 Fines BG-Blagoevgrad Благоевград Покровнишко шосе,41.99727,23.05968
+Fines BG-Chuchuligovo Чучулигово Автомагистрала Струма,41.3973,23.3544
 Fines BG-Gelemenovo Гелеменово,42.26823,24.3139
 Fines BG-Kostinbrod Poleto,42.79496,23.21518
 Fines BG-Sofia София Dr. Peter Dertliev Blvrd,42.70983,23.25768
