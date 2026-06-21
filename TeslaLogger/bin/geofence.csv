@@ -35,6 +35,9 @@ Supercharger-V4 AT-Amstetten,48.13232,14.84104
 Supercharger-V4 AT-Ansfelden,48.195342,14.249553
 Supercharger-V3 AT-Asten,48.22132,14.40675
 Supercharger AT-Biberwier,47.372431,10.886093
+Supercharger AT-Bregenz,47.37574,9.67433,20
+Supercharger AT-Bregenz,47.37824,9.67397,20
+Supercharger AT-Bregenz,47.38006,9.67526,20
 Supercharger AT-Bregenz,47.48866,9.74004
 Supercharger AT-Bregenz,47.49556,9.73742,20
 Supercharger-V3 AT-Eberstalzell,48.03934,13.99163
@@ -72,6 +75,9 @@ Supercharger-V4 AT-Parndorf,47.979209,16.844067,30
 Supercharger-V4 AT-Pasching-PlusCity,48.244939,14.234211
 Supercharger AT-Poysdorf,48.676534,16.623013
 Supercharger-V3 AT-Rankweil,47.273,9.617555
+Supercharger-V3 AT-Rankweil,47.27413,9.61336,20
+Supercharger-V3 AT-Rankweil,47.35496,9.61875,20
+Supercharger-V3 AT-Rankweil,47.3569,9.61442,20
 Supercharger-V4 AT-Saalfelden,47.428445,12.840916
 Supercharger AT-Salzburg,47.727056,13.060672
 Supercharger-V3 AT-Salzburg Nord,47.836027,13.059075
@@ -2009,6 +2015,7 @@ Supercharger-V3 DE-Dasing,48.393731,11.070452
 Supercharger-V3 DE-Denkendorf,48.707,9.306556
 Supercharger-V4 DE-Denkendorf in Bayern,48.9342,11.46544
 Supercharger-V4 DE-Dettelbach,49.77883,10.06864
+Supercharger-V4 DE-Dettelbach,49.80983,9.96063,25
 Supercharger-V4 DE-Dietmannsried,47.811457,10.303146,28
 Supercharger-V4 DE-Dormagen,51.09335,6.80953
 Supercharger-V4 DE-Dortmund-Nord,51.5305,7.4716
@@ -2081,6 +2088,7 @@ Supercharger-V4 DE-Guxhagen,51.20223,9.4683
 Supercharger-V4 DE-Göttingen (Cafe del Sol),51.528354,9.887817
 Supercharger-V4 DE-Gützkow,53.94378,13.39698
 Supercharger-V4 DE-Hamburg,53.46099,9.94045,30
+Supercharger-V3 DE-Hamburg - EEZ,53.55952,9.94956,20
 Supercharger-V3 DE-Hamburg - EEZ,53.571606,9.860833
 Supercharger-V3 DE-Hamburg - Stillhorn,53.479701,10.02515
 Supercharger-V3 DE-Hamburg Lübecker Strasse,53.56276,10.03151
@@ -2224,6 +2232,7 @@ Supercharger-V3 DE-München - Die Hirschau,48.161505,11.602763
 Supercharger-V3 DE-München - OEZ,48.184494,11.532399
 Supercharger-V3 DE-München - Pasing Arcaden,48.14787,11.4651
 Supercharger-V3 DE-München - Pasing Arcaden,48.14826,11.46415,35
+Supercharger-V3 DE-München - Pasing Arcaden,48.14855,11.47034
 Supercharger-V3 DE-München - Sendling,48.105054,11.536857,30
 Supercharger-V4 DE-München Riem Arcaden,48.132573,11.689725,60
 Supercharger-V4 DE-München-Freiham,48.1353,11.4135
@@ -2283,6 +2292,7 @@ Supercharger-V3 DE-Regensburg - Ostenviertel,48.9998,12.14843,30
 Supercharger-V4 DE-Regensburg-Ost,48.99167,12.15307
 Supercharger-V4 DE-Regensburg-Ost,48.99477,12.15066
 Supercharger-V3 DE-Reichertshofen,48.645645,11.520604
+Supercharger-V3 DE-Reinfeld,53.6815,10.24815,20
 Supercharger-V3 DE-Reinfeld,53.8232,10.50352
 Supercharger-V4 DE-Reiskirchen,50.59563,8.818755,30
 Supercharger-V4 DE-Rhüden,51.9472,10.14027,30
@@ -9610,6 +9620,7 @@ Berger DE-Dannstadt-Schauernheim Industriestraße,48.63547,8.05422
 
 Berliner-SW DE-Berlin Ackerstraße,52.5329,13.39545
 Berliner-SW DE-Berlin Breite Straße,52.45378,13.3277,30
+Berliner-SW DE-Berlin Bänschstraße,52.51865,13.4624
 Berliner-SW DE-Berlin Dresdener Straße,52.50097,13.41696
 Berliner-SW DE-Berlin Dudenstraße,52.4851,13.38405
 Berliner-SW DE-Berlin Elsenstraße,52.4853,13.44923
@@ -12225,6 +12236,7 @@ Electrify-America US-Woodbury MN Hudson Rd,44.9457,-92.8987
 Electrify-Canada CA-Mirabel QC Chemin Notre Dame,45.67124,-73.92006
 Electrify-Canada CA-Ottawa ON Coventry Rd,45.42069,-75.6517
 
+electrip BG-Dolni Dabnik Долни Дъбник Околовръстния път,43.3987,24.43386
 electrip BG-Kulata Кулата E79,41.38413,23.36178
 electrip BG-Студена Автомагистрала Струма,42.58385,23.11996,15
 electrip GR-Igoumenitsa Ηγουμενίτσα Leof. 49 Martiron,39.49733,20.26587
@@ -12699,7 +12711,7 @@ EnBW DE-Bitterfeld-Wolfen Anhaltstraße,51.63867,12.30895
 EnBW DE-Blankenfelde-Mahlow Am Lückefeld,52.35917,13.43388
 EnBW DE-Blankenheim Ahrtal,50.3877,6.739
 EnBW DE-Blaustein Boschstraße,48.417,9.91896
-EnBW DE-Bobenheim-Roxheim Südring,49.58143,8.35443
+EnBW DE-Bobenheim-Roxheim Südring,49.58143,8.35443,20
 EnBW DE-Bobingen Königsbrunner Straße,48.264,10.8406
 EnBW DE-Bocholt Dingdener Straße,51.82297,6.6141
 EnBW DE-Bocholt Werther Straße,51.83766,6.5951
@@ -15612,6 +15624,7 @@ Eviny SE-Ramsele Storgatan,63.53912,16.46971
 Eviny SE-Sandöverken Hornöberget,62.80411,17.95201,30
 Eviny SE-Skellefteå Kronbodgatan,64.75571,20.91828
 Eviny SE-Sölvesborg Järnvägsgatan,56.04848,14.58137
+Eviny SE-Vilhelmina Volgsjövägen,64.6251,16.65518
 Eviny SE-Älmhult Silverdalsgatan,56.55652,14.1478,30
 Eviny SE-Östersund Arenavägen,63.19201,14.65214
 
@@ -23546,6 +23559,7 @@ Powy IT-Silea Via Str. della Serenissima,45.64874,12.31085
 
 PPC RO-Agigea Strada Dragoș Vodă,44.10462,28.6057
 PPC RO-Brașov Bulevardul Griviței,45.68488,25.5858
+PPC RO-Călugăreni DN5,44.09264,25.985
 PPC RO-Miercurea Ciuc Strada Harghita,46.36307,25.79284
 PPC RO-Miercurea Ciuc Strada Harghita,46.36767,25.77728
 PPC RO-Predeal Șoseaua Națională,45.47952,25.5645
@@ -25255,6 +25269,7 @@ SW-Duisburg DE-Duisburg Bungertstraße,51.42802,6.75253
 SW-Duisburg DE-Duisburg Bungertstraße,51.42897,6.75494
 SW-Düren DE-Düren Victor-Gollancz-Straße,50.80235,6.47972
 SW-Düsseldorf DE-Düsseldorf Berliner Allee,51.22035,6.78137
+SW-Düsseldorf DE-Düsseldorf Bonner Straße,51.164,6.85175,20
 SW-Düsseldorf DE-Düsseldorf Bonner Straße,51.16429,6.8526,20
 SW-Düsseldorf DE-Düsseldorf Cäcilie-Beuken-Straße,51.16334,6.87886
 SW-Düsseldorf DE-Düsseldorf Graf-Adolf-Platz,51.21838,6.77568
@@ -27871,6 +27886,7 @@ DE Dessau-Roßlau Friederikenplatz,51.83547,12.25213
 DE Dielheim Kolpigstraße,49.27938,8.77882
 DE Dortmund adesso,51.50573,7.5274
 DE Dortmund Bielefelder Straße,51.51028,7.50429
+DE Dortmund Kopenhagener Straße,51.50266,7.52456
 DE Dresden Am Brauhaus,51.06827,13.77956
 DE Dresden Hauptbahnhof,51.0409,13.73303
 DE Dresden Hilti,51.07258,13.6838
