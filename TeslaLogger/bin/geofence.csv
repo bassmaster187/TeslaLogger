@@ -2254,6 +2254,8 @@ Supercharger-V4 DE-Neuss,51.20092,6.71383
 Supercharger-V4 DE-Neustadt an der Weinstraße (Globus),49.3408,8.16172
 Supercharger-V3 DE-Norden,53.61358,7.16703
 Supercharger-V3 DE-Northeim,51.731815,9.972845,35
+Supercharger-V3 DE-Northeim,51.7321,9.97418,20
+Supercharger-V3 DE-Northeim,51.75016,10.0097,20
 Supercharger-V3 DE-Nossen,51.08255,13.27406
 Supercharger-V3 DE-Nottuln,51.911341,7.398553,40
 Supercharger-V3 DE-Nörten-Hardenberg,51.62815,9.91763,20
@@ -2310,6 +2312,7 @@ Supercharger-V3 DE-Rüsselsheim,49.96834,8.39035,36
 Supercharger-V4 DE Saarbrücken,49.208075,7.027059
 Supercharger-V4 DE-Saarbrücken Innenstadt,49.23915,6.97825
 Supercharger-V4 DE-Sangerhausen,51.45055,11.30448,30
+Supercharger-V3 DE-Satteldorf,49.18006,10.0693,20
 Supercharger-V3 DE-Satteldorf,49.1811,10.06915,35
 Supercharger-V3 DE-Schierling,48.838255,12.119171,30
 Supercharger-V4 DE-Schipkau,51.53672,13.91027
@@ -2366,6 +2369,9 @@ Supercharger-V4 DE-Waltershausen,50.90015,10.5653
 Supercharger-V3 DE-Weibersbrunn,49.93484,9.35315,65
 Supercharger-V4 DE-Weil am Rhein,47.58963,7.59322
 Supercharger-V4 DE-Weimar,50.93422,11.2898
+Supercharger-V4 DE-Weimar,50.97246,11.32774,20
+Supercharger-V4 DE-Weimar,50.98258,11.3376,20
+Supercharger-V4 DE-Weimar,50.99305,11.36668,20
 Supercharger-V4 DE-Weimar Nord,50.993,11.3317
 Supercharger-V4 DE-Weischlitz,50.43925,12.08933
 Supercharger-V3 DE-Weiterstadt,49.8968,8.6142,75
@@ -2395,7 +2401,17 @@ Supercharger-V4 DE-Wittlich (Globus),49.98189,6.9086
 Supercharger-V4 DE-Wittstock,53.15795,12.4551
 Supercharger-V4 DE-Wolfhagen,51.40358,9.18545
 Supercharger-V4 DE-Wolfsburg,52.42373,10.73306
+Supercharger-V3 DE-Woringen,47.9175,10.2263,20
+Supercharger-V3 DE-Woringen,47.9191,10.2236,20
+Supercharger-V3 DE-Woringen,47.92085,10.22064,20
+Supercharger-V3 DE-Woringen,47.9225,10.2179,20
 Supercharger-V3 DE-Woringen,47.92343,10.20888
+Supercharger-V3 DE-Woringen,47.92395,10.2098,20
+Supercharger-V3 DE-Woringen,47.9241,10.2154,20
+Supercharger-V3 DE-Woringen,47.9245,10.21057,20
+Supercharger-V3 DE-Woringen,47.9247,10.21152,20
+Supercharger-V3 DE-Woringen,47.92527,10.21205,20
+Supercharger-V3 DE-Woringen,47.92555,10.21314,20
 Supercharger-V3 DE-Wuppertal,51.2825,7.25633
 Supercharger-V4 DE-Wustermark - Karls Erlebnis-Dorf,52.533747,12.997335,40
 Supercharger-V4 DE-Wörnitz,49.2605,10.24255
@@ -7019,6 +7035,7 @@ Supercharger-V4 US-Scipio UT,39.25608,-112.11648
 Supercharger US-South Salt Lake City UT,40.72034,-111.88907
 Supercharger-V3 US-St. George UT,37.07748,-113.5843
 Supercharger US-St. George UT,37.1265,-113.60175
+Supercharger-V4 US-St. George UT S Pioneer Rd,37.03313,-113.60827
 Supercharger-V4 US-Taylorsville UT,40.6545,-111.93914
 Supercharger US-Tooele UT,40.6845,-112.26886
 Supercharger-V4 US-Toquerville UT,37.28015,-113.30465
@@ -20057,6 +20074,7 @@ LEW DE-Stadtbergen Benzstraße,48.37898,10.84775
 LEW DE-Steingaden Kissingerstraße,47.70209,10.86195
 LEW DE-Wertingen Augsburger Straße,48.55863,10.68955
 LEW DE-Wertingen Marktplatz,48.563,10.68294,30
+LEW DE-Woringen Bahnhofstraße,47.9238,10.20858,12
 
 LichtBlick DE-Andernach Am weißen Haus,50.41842,7.41806
 LichtBlick DE-Bad Fallingborstel Becklingr Straße,52.89747,9.77776
@@ -25451,6 +25469,7 @@ SW-Leipzig DE-Leipzig Brühl,51.34351,12.37544
 SW-Leipzig DE-Leipzig Dortmunder Straße,51.36595,12.4019
 SW-Leipzig DE-Leipzig Friedrich-Ebert-Straße,51.33861,12.36226
 SW-Leipzig DE-Leipzig Goldschmidtstraße,51.33517,12.38933
+SW-Leipzig DE-Leipzig Gustav-Kühn-Straße,51.3682,12.34077
 SW-Leipzig DE-Leipzig Handelsstraße,51.4007,12.40029
 SW-Leipzig DE-Leipzig Henriettenstraße,51.33243,12.32583
 SW-Leipzig DE-Leipzig Hohe Straße,51.32982,12.3726
@@ -26881,7 +26900,6 @@ vaylens DE-Osterfeld Pretzscher Straße,51.08398,11.9345
 vaylens DE-Plauen Rittergut,50.49175,12.0891
 vaylens DE-Schenefeld Achter de Weiden,53.60694,9.82984
 vaylens DE-Siegburg Luisenstraße,50.80902,7.19295
-vaylens DE-Woringen Bahnhofstraße,47.92379,10.20858,15
 vaylens DE-Überlingen Bahnhofstraße,47.76933,9.14949
 
 VBE DE-Lauenburg/Elbe Am Schüsselteich,53.37447,10.55071
