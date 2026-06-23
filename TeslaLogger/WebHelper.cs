@@ -1,6 +1,5 @@
 ﻿using Exceptionless;
 using Exceptionless.Logging;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
 using MySql.Data.MySqlClient;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
