@@ -6687,6 +6687,7 @@ FROM
             int newid = GetNextAvailableCarID();
             using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
             {
+                con.Open();
                 using (var cmd2 = new MySqlCommand("insert cars (id, tesla_name, tesla_password, tesla_carid, display_name, freesuc, tesla_token, refresh_token, vin, fleetAPI) values (@id, @tesla_name, @tesla_password, @tesla_carid, @display_name, @freesuc,  @tesla_token, @refresh_token, @vin, @fleetAPI)", con))
                 {
                     cmd2.Parameters.AddWithValue("@id", newid);

@@ -1124,7 +1124,7 @@ namespace TeslaLogger
 
                 if (cmd.Parameters.Count > 0 && IsCharging)
                 {
-                    InsertCharging(d, cmd);
+                    InsertChargingAsync(d, cmd).Wait();
                 }
             }
         }
@@ -1804,7 +1804,7 @@ namespace TeslaLogger
             using (MySqlCommand cmd = new MySqlCommand())
             {
                 cmd.Parameters.AddWithValue("@charge_energy_added", charge_energy_added);
-                InsertCharging(date, cmd);
+                InsertChargingAsync(date, cmd).Wait();
             }
         }
 

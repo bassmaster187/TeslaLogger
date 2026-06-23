@@ -600,6 +600,100 @@ namespace UnitTestsTeslalogger
                 }
             }
         }
+        
+        private void AssertStates(TelemetryParser telemetry, int line, string content)
+        {
+            Assert.AreEqual(expectedACCharge, telemetry.acCharging, $"\r\nLine: {line}\r\n" +content);
+            Assert.AreEqual(expectedDriving, telemetry.Driving, $"\r\nLine: {line}\r\n" + content);
+            Assert.AreEqual(expectedDCCharge, telemetry.dcCharging, $"\r\nLine: {line}\r\n" + content);
+        }
+
+        private void Telemetry_handleACChargeChange(object sender, EventArgs e)
+        {
+            TelemetryParser telemetryParser = (TelemetryParser)sender;
+            Assert.AreEqual(expectedACCharge, telemetryParser.acCharging);
+        }
+
+        [TestMethod]
+        public void TimestampParsing_ConsistentLocalTime_ShortTimestamp()
+        {
+            Car c = new Car(0, "", "", 0, "", DateTime.Now, "", "", "", "", "", "5YJ3E7EA3LF700000", "", null, false);
+
+            var telemetry = new TelemetryParser(c);
+            telemetry.databaseCalls = false;
+
+            string jsonWithShortTimestamp = @"{""data"":[{""key"":""DCChargingEnergyIn"", ""value"":{""doubleValue"":1.9999999552965164}}], ""createdAt"":""2026-04-02T23:49:18.190024Z"", ""vin"":""5YJ3E7EA3LF700000"", ""isResend"":false}";
+
+            telemetry.handleMessage(jsonWithShortTimestamp);
+
+            Assert.IsTrue(telemetry.lastMessageReceived > DateTime.MinValue);
+        }
+
+        [TestMethod]
+        public void TimestampParsing_ConsistentLocalTime_LongTimestamp()
+        {
+            Car c = new Car(0, "", "", 0, "", DateTime.Now, "", "", "", "", "", "5YJ3E7EA3LF700000", "", null, false);
+
+            var telemetry = new TelemetryParser(c);
+            telemetry.databaseCalls = false;
+
+            string jsonWithLongTimestamp = @"{""data"":[{""key"":""EstBatteryRange"", ""value"":{""doubleValue"":101.18083253102942}}, {""key"":""ChargerVoltage"", ""value"":{""doubleValue"":244.76099867373705}}, {""key"":""ACChargingEnergyIn"", ""value"":{""doubleValue"":2.1228333649660103}}, {""key"":""NumModuleTempMin"", ""value"":{""intValue"":10}}, {""key"":""TimeToFullCharge"", ""value"":{""doubleValue"":3.050000499933958}}], ""createdAt"":""2026-04-02T23:49:50.689564636Z"", ""vin"":""5YJ3E7EA3LF700000"", ""isResend"":false}";
+
+            telemetry.handleMessage(jsonWithLongTimestamp);
+
+            Assert.IsTrue(telemetry.lastMessageReceived > DateTime.MinValue);
+        }
+
+        [TestMethod]
+        public void TimestampParsing_VerifyLocalTimeZoneHandling()
+        {
+            Car c = new Car(0, "", "", 0, "", DateTime.Now, "", "", "", "", "", "5YJ3E7EA3LF700000", "", null, false);
+
+            var telemetry = new TelemetryParser(c);
+            telemetry.databaseCalls = false;
+
+            string jsonWithUTCTimestamp = @"{""data"":[{""key"":""Soc"", ""value"":{""doubleValue"":50.5}}], ""createdAt"":""2026-04-02T23:49:18.190024Z"", ""vin"":""5YJ3E7EA3LF700000"", ""isResend"":false}";
+
+            telemetry.handleMessage(jsonWithUTCTimestamp);
+
+            Assert.AreEqual(50.5, telemetry.lastSoc, 0.1);
+            Assert.IsTrue(telemetry.lastMessageReceived > DateTime.MinValue);
+        }
+
+        [TestMethod]
+        public void TimestampParsing_MultipleMessages_ConsistentBehavior()
+        {
+            Car c = new Car(0, "", "", 0, "", DateTime.Now, "", "", "", "", "", "5YJ3E7EA3LF700000", "", null, false);
+
+            var telemetry = new TelemetryParser(c);
+            telemetry.databaseCalls = false;
+
+            string[] jsonMessages = new string[]
+            {
+                @"{""data"":[{""key"":""DCChargingEnergyIn"", ""value"":{""doubleValue"":1.9999999552965164}}], ""createdAt"":""2026-04-02T23:49:18.190024Z"", ""vin"":""5YJ3E7EA3LF700000"", ""isResend"":false}",
+                @"{""data"":[{""key"":""EstBatteryRange"", ""value"":{""doubleValue"":101.18083253102942}}], ""createdAt"":""2026-04-02T23:49:50.689564636Z"", ""vin"":""5YJ3E7EA3LF700000"", ""isResend"":false}",
+                @"{""data"":[{""key"":""Soc"", ""value"":{""doubleValue"":75.0}}], ""createdAt"":""2026-04-03T00:15:30.123456789Z"", ""vin"":""5YJ3E7EA3LF700000"", ""isResend"":false}",
+                @"{""data"":[{""key"":""IdealBatteryRange"", ""value"":{""doubleValue"":250.5}}], ""createdAt"":""2026-04-03T01:00:00.9999999Z"", ""vin"":""5YJ3E7EA3LF700000"", ""isResend"":false}"
+            };
+
+            DateTime firstMessageTime = DateTime.MinValue;
+
+            for (int i = 0; i < jsonMessages.Length; i++)
+            {
+                telemetry.handleMessage(jsonMessages[i]);
+
+                if (i == 0)
+                {
+                    firstMessageTime = telemetry.lastMessageReceived;
+                }
+
+                Assert.IsTrue(telemetry.lastMessageReceived > DateTime.MinValue, $"Message {i} failed to update lastMessageReceived");
+            }
+
+            Assert.IsTrue(telemetry.lastMessageReceived >= firstMessageTime);
+            Assert.AreEqual(75.0, telemetry.lastSoc, 0.1);
+        }
+
         [TestMethod]
         public void Raven1()
         {
@@ -618,7 +712,7 @@ namespace UnitTestsTeslalogger
                 if (i == 0)
                 {
                     Assert.IsTrue(c.Raven);
-                    Assert.AreEqual(142.3, telemetry.lastIdealBatteryRange, 0.1);
+                    Assert.AreEqual(142.3,telemetry.lastIdealBatteryRange, 0.1);
                 }
             }
             Assert.AreEqual(142.3, telemetry.lastIdealBatteryRange, 0.1);
@@ -647,123 +741,6 @@ namespace UnitTestsTeslalogger
             Assert.AreEqual(476.1, telemetry.lastIdealBatteryRange, 0.1);
         }
 
-        private void AssertStates(TelemetryParser telemetry, int line, string content)
-        {
-            Assert.AreEqual(expectedACCharge, telemetry.acCharging, $"\r\nLine: {line}\r\n" +content);
-            Assert.AreEqual(expectedDriving, telemetry.Driving, $"\r\nLine: {line}\r\n" + content);
-            Assert.AreEqual(expectedDCCharge, telemetry.dcCharging, $"\r\nLine: {line}\r\n" + content);
-        }
-
-        private void Telemetry_handleACChargeChange(object sender, EventArgs e)
-        {
-            TelemetryParser telemetryParser = (TelemetryParser)sender;
-            Assert.AreEqual(expectedACCharge, telemetryParser.acCharging);
-        }
-
-        [TestMethod]
-        public void TimestampParsing_ConsistentLocalTime_ShortTimestamp()
-        {
-            Car c = new Car(0, "", "", 0, "", DateTime.Now, "", "", "", "", "", "5YJ3E7EA3LF700000", "", null, false);
-
-            var telemetry = new TelemetryParser(c);
-            telemetry.databaseCalls = false;
-
-            string jsonWithShortTimestamp = @"{""data"":[{""key"":""DCChargingEnergyIn"", ""value"":{""doubleValue"":1.9999999552965164}}], ""createdAt"":""2026-04-02T23:49:18.190024Z"", ""vin"":""5YJ3E7EA3LF700000"", ""isResend"":false}";
-
-            telemetry.handleMessageAsync(jsonWithShortTimestamp).Wait();
-
-            Assert.IsTrue(telemetry.lastMessageReceived > DateTime.MinValue);
-        }
-
-        [TestMethod]
-        public void TimestampParsing_ConsistentLocalTime_LongTimestamp()
-        {
-            Car c = new Car(0, "", "", 0, "", DateTime.Now, "", "", "", "", "", "5YJ3E7EA3LF700000", "", null, false);
-
-            var telemetry = new TelemetryParser(c);
-            telemetry.databaseCalls = false;
-
-            string jsonWithLongTimestamp = @"{""data"":[{""key"":""EstBatteryRange"", ""value"":{""doubleValue"":101.18083253102942}}, {""key"":""ChargerVoltage"", ""value"":{""doubleValue"":244.76099867373705}}, {""key"":""ACChargingEnergyIn"", ""value"":{""doubleValue"":2.1228333649660103}}, {""key"":""NumModuleTempMin"", ""value"":{""intValue"":10}}, {""key"":""TimeToFullCharge"", ""value"":{""doubleValue"":3.050000499933958}}], ""createdAt"":""2026-04-02T23:49:50.689564636Z"", ""vin"":""5YJ3E7EA3LF700000"", ""isResend"":false}";
-
-            telemetry.handleMessageAsync(jsonWithLongTimestamp).Wait();
-
-            Assert.IsTrue(telemetry.lastMessageReceived > DateTime.MinValue);
-        }
-
-        [TestMethod]
-        public void TimestampParsing_VerifyLocalTimeZoneHandling()
-        {
-            Car c = new Car(0, "", "", 0, "", DateTime.Now, "", "", "", "", "", "5YJ3E7EA3LF700000", "", null, false);
-
-            var telemetry = new TelemetryParser(c);
-            telemetry.databaseCalls = false;
-
-            string jsonWithUTCTimestamp = @"{""data"":[{""key"":""Soc"", ""value"":{""doubleValue"":50.5}}], ""createdAt"":""2026-04-02T23:49:18.190024Z"", ""vin"":""5YJ3E7EA3LF700000"", ""isResend"":false}";
-
-            telemetry.handleMessageAsync(jsonWithUTCTimestamp).Wait();
-
-            Assert.AreEqual(50.5, telemetry.lastSoc, 0.1);
-            Assert.IsTrue(telemetry.lastMessageReceived > DateTime.MinValue);
-        }
-
-        [TestMethod]
-        public void TimestampParsing_MultipleMessages_ConsistentBehavior()
-        {
-            Car c = new Car(0, "", "", 0, "", DateTime.Now, "", "", "", "", "", "5YJ3E7EA3LF700000", "", null, false);
-
-            var telemetry = new TelemetryParser(c);
-            telemetry.databaseCalls = false;
-
-            string[] jsonMessages = new string[]
-            {
-                @"{""data"":[{""key"":""DCChargingEnergyIn"", ""value"":{""doubleValue"":1.9999999552965164}}], ""createdAt"":""2026-04-02T23:49:18.190024Z"", ""vin"":""5YJ3E7EA3LF700000"", ""isResend"":false}",
-                @"{""data"":[{""key"":""EstBatteryRange"", ""value"":{""doubleValue"":101.18083253102942}}], ""createdAt"":""2026-04-02T23:49:50.689564636Z"", ""vin"":""5YJ3E7EA3LF700000"", ""isResend"":false}",
-                @"{""data"":[{""key"":""Soc"", ""value"":{""doubleValue"":75.0}}], ""createdAt"":""2026-04-03T00:15:30.123456789Z"", ""vin"":""5YJ3E7EA3LF700000"", ""isResend"":false}",
-                @"{""data"":[{""key"":""IdealBatteryRange"", ""value"":{""doubleValue"":250.5}}], ""createdAt"":""2026-04-03T01:00:00.9999999Z"", ""vin"":""5YJ3E7EA3LF700000"", ""isResend"":false}"
-            };
-
-            DateTime firstMessageTime = DateTime.MinValue;
-
-            for (int i = 0; i < jsonMessages.Length; i++)
-            {
-                telemetry.handleMessageAsync(jsonMessages[i]).Wait();
-                
-                if (i == 0)
-                {
-                    firstMessageTime = telemetry.lastMessageReceived;
-                }
-
-                Assert.IsTrue(telemetry.lastMessageReceived > DateTime.MinValue, $"Message {i} failed to update lastMessageReceived");
-            }
-
-            Assert.IsTrue(telemetry.lastMessageReceived >= firstMessageTime);
-            Assert.AreEqual(75.0, telemetry.lastSoc, 0.1);
-        }
-
-        [TestMethod]
-        public void Raven1()
-        {
-            Car c = new Car(0, "", "", 0, "", DateTime.Now, "", "", "", "", "", "5YJSA7E27LF000000", "", null, false);
-
-            var telemetry = new TelemetryParser(c);
-            telemetry.databaseCalls = false;
-
-            var lines = LoadData("../../testdata/Raven1.txt");
-
-            Assert.IsFalse(c.Raven);
-
-            for (int i = 0; i < lines.Count; i++)
-            {
-                telemetry.handleMessageAsync(lines[i]).Wait();
-                if (i == 0)
-                {
-                    Assert.IsTrue(c.Raven);
-                    Assert.AreEqual(142.3,telemetry.lastIdealBatteryRange, 0.1);
-                }
-            }
-            Assert.AreEqual(142.3, telemetry.lastIdealBatteryRange, 0.1);
-        }
-
         [TestMethod]
         public void InvalidValues()
         {
@@ -776,7 +753,7 @@ namespace UnitTestsTeslalogger
 
             DateTime firstMessageTime = DateTime.MinValue;
 
-            telemetry.handleMessageAsync(jsonMessage).Wait();
+            telemetry.handleMessage(jsonMessage);
             firstMessageTime = telemetry.lastMessageReceived;
         }
 
