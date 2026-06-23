@@ -2397,6 +2397,7 @@ Supercharger-V4 DE-Windischeschenbach,49.80413,12.18416,22
 Supercharger-V3 DE Winsen (Luhe),53.35028,10.147426
 Supercharger-V3 DE-Wismar,53.879307,11.454047
 Supercharger-V3 DE-Wittenburg,53.507361,11.096852
+Supercharger-V3 DE-Wittenburg,53.5084,11.09483,20
 Supercharger-V4 DE-Wittlich,49.96968,6.86169,32
 Supercharger-V4 DE-Wittlich (Globus),49.98189,6.9086
 Supercharger-V4 DE-Wittstock,53.15795,12.4551
@@ -3368,7 +3369,8 @@ Supercharger-V3 IT-Casalecchio di Reno,44.483936,11.268521
 Supercharger-V3 IT-Catania,37.551588,15.066693
 Supercharger IT-Cavaglià,45.389435,8.12998
 Supercharger-V4 IT-Ceprano,41.54423,13.51204
-Supercharger IT-Cerignola,41.306389,15.899738
+Supercharger-V4 IT-Cerignola,41.3064,15.89974
+Supercharger-V4 IT-Cerignola,41.30753,15.89878,20
 Supercharger-V3 IT-Chivasso,45.202455,7.896811
 Supercharger-V4 IT-Comacchio,44.693086,12.223085
 Supercharger-V4 IT-Conegliano,45.880166,12.317338
@@ -4259,11 +4261,11 @@ Supercharger-V4 SE-Malmö,55.612989,13.104019
 Supercharger-V3 SE-Malung,60.68532,13.71368
 Supercharger-V3 SE-Malå,65.179347,18.746649
 Supercharger-V3 SE-Mantorp,58.36558,15.293993
-Supercharger-V3 SE-Mariestad,58.677066,13.815005
+Supercharger-V3 SE-Mariestad,58.67712,13.81474
 Supercharger-V3 SE-Markaryd,56.444825,13.603916
 Supercharger-V4 SE-Mellbystrand,56.5016,12.95763
 Supercharger-V4 SE-Mellerud,58.700124,12.450541
-Supercharger SE-Mora,61.005921,14.54418
+Supercharger-V4 SE-Mora,61.00592,14.54418,36
 Supercharger-V3 SE-Nacka,59.31149,18.17496,30
 Supercharger-V4 SE-Norrköping,58.62191,16.15481
 Supercharger-V4 SE-Nynäshamn,58.912296,17.956868
@@ -5830,6 +5832,7 @@ Supercharger-V3 US-Chevy Chase MD (Floor L1),38.99592,-77.07613
 Supercharger-V3 US-Cockeysville MD,39.46512,-76.63367
 Supercharger-V3 US-Cumberland MD,39.64973,-78.77016
 Supercharger-V3 US-District Heights MD,38.86118,-76.91798
+Supercharger-V4 US-District Heights MD Donnell Dr,38.84987,-76.88663
 Supercharger-V3 US-Easton MD,38.7593,-76.06104
 Supercharger-V4 US-Easton MD Ocean Gtwy,38.78213,-76.06133
 Supercharger-V3 US-Edgewater MD,38.93618,-76.56736
@@ -19119,6 +19122,7 @@ Ionity PT-Almodovar O,37.53586,-8.18474
 Ionity PT-Marateca,38.57987,-8.67755
 Ionity PT-Área de Serviço de Barcelos,41.6054,-8.55102
 Ionity SE-Arvidsjaur Storgatan,65.58815,19.1904
+Ionity SE-Borlänge Mekanikergatan,60.47965,15.41908
 Ionity SE-Docksta Dockstavägen,63.05722,18.33733,30
 Ionity SE-Enköping,59.65339,17.08324
 Ionity SE-Gränna,58.00157,14.45022
@@ -19136,6 +19140,7 @@ Ionity SE-Malung Orrmyrvägen,60.687,13.72247
 Ionity SE-Mantorp,58.37214,15.2948
 Ionity SE-Mariestad Sandbäcksvägen,58.68557,13.84551,30
 Ionity SE-Mellerud Snickargatan,58.70585,12.45395
+Ionity SE-Mora Strandgatan,61.00563,14.54376,18
 Ionity SE-Norrköping Gröndalsgatan,58.57706,16.18131
 Ionity SE-Nyköping Stenbocksvägen,58.7717,17.02
 Ionity SE-Oskarshamn,57.2513,16.44875
@@ -25342,7 +25347,6 @@ SW-Emden DE-Emden Bahnhofsplatz,53.36856,7.19721
 SW-Emmendingen DE-Emmendingen Hebelstraße,48.12205,7.85041
 SW-Emmendingen DE-Emmendingen Karl-Bautz-Straße,48.11721,7.84847,30
 SW-Emsdetten DE-Emsdetten Alte Emsstraße,52.17802,7.53087
-SW-Erding DE-Erding Gruber Straße,48.1468,11.7887,20
 SW-Erfurt DE-Erfurt Binderslebener Landstraße,50.9733,10.9939
 SW-Erfurt DE-Erfurt Weimarische Straße,50.9727,11.04964
 SW-Erfurt DE-Erfurt Werner-Seelenbinder-Straße,50.95793,11.03698
