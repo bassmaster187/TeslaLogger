@@ -441,6 +441,7 @@ Supercharger-V3 CA-Orangeville ON,43.929134,-80.098855
 Supercharger-V3 CA-Osoyoos,49.03162,-119.46693
 Supercharger CA-Ottawa ON,45.42621,-75.69085
 Supercharger-V4 CA-Ottawa ON Campeau Dr,45.29803,-75.9399
+Supercharger-V4 CA-Ottawa ON St. Laurent Blvd,45.42585,-75.6372
 Supercharger CA-Owen Sound ON,44.574403,-80.912542
 Supercharger CA-Parry Sound ON,45.345659,-80.00706
 Supercharger-V3 CA-Paspebiac QC,48.027646,-65.259685
@@ -2449,7 +2450,7 @@ Supercharger-V3 DK-Kliplev,54.9392,9.37975,20
 Supercharger-V3 DK-Kliplev,54.93926,9.38233,20
 Supercharger-V3 DK-Kliplev,54.940086,9.37887,40
 Supercharger-V3 DK-Kolding,55.512661,9.462733
-Supercharger-V4 DK-Korsør,55.35377,11.14115
+Supercharger-V4 DK-Korsør,55.35237,11.14138
 Supercharger-V4 DK-København,55.68184,12.5321
 Supercharger DK-Køge,55.489014,12.163153
 Supercharger-V4 DK-Lumsås,55.94219,11.50824
@@ -4673,6 +4674,7 @@ Supercharger-V3 US-Fresno CA North Blackstone Avenue,36.8443,-119.78694
 Supercharger-V3 US-Fullerton CA,33.85968,-117.9217
 Supercharger-V4 US-Fullerton CA S Harbor Blvd,33.85667,-117.92497
 Supercharger-V3 US-Galt CA,38.2894,-121.30655
+Supercharger-V4 US-Garden Grove CA Valley View St,33.786,-118.0291
 Supercharger US-Gilroy CA,37.02445,-121.56535
 Supercharger-V4 US-Gilroy CA Arroyo Cir,37.01977,-121.56422
 Supercharger-V4 US-Gilroy CA Renz Ln,37.0068,-121.5507
@@ -8217,6 +8219,7 @@ Allego DE-Essen Wilhelm-Nieswandt-Allee,51.50354,7.00867
 Allego DE-Essen Winkhausstraße,51.49628,7.00775
 Allego DE-Ettlingen Am Hardtwald,48.95774,8.3784
 Allego DE-Euro Rastpark Guxhagen,51.20346,9.46858,30
+Allego DE-Euro Rastpark Jettingen-Scheppach,48.41106,10.43972,25
 Allego DE-Euro Rastpark Theeßen,52.23693,12.06005,30
 Allego DE-Feldkirchen Otto-Lilienthal-Ring,48.14115,11.73678
 Allego DE-Flensburg Fichtestraße,54.8019,9.4535
@@ -8335,7 +8338,6 @@ Allego DE-Ingolstadt Wankelstraße,48.74746,11.4725
 Allego DE-Isernhagen Lohner Weg,52.47447,9.85638
 Allego DE-Isernhagen Opelstraße,52.42667,9.83042
 Allego DE-Itzehoe,53.9593,9.49598,10
-Allego DE-Jettingen-Scheppach Robert-Bosch-Straße,48.41106,10.43972,25
 Allego DE-Kaiserslautern Mainzer Straße,49.45407,7.79133
 Allego DE-Kalefeld-Echte Hauptstraße,51.7879,10.0631
 Allego DE-Kaltenkirchen Auf dem Berge,53.84582,9.93588,12
@@ -8559,7 +8561,6 @@ Allego DE-Wentorf bei Hamburg Auf dem Ralande,53.48843,10.2704
 Allego DE-Wernigerode Halberstädter Straße,51.84753,10.81173
 Allego DE-Westerstede Leererstraße,53.28786,7.8928,30
 Allego DE-Wiesbaden Wiesbadener Landstraße,50.0356,8.25964
-Allego DE-Wildau Chausseestraße,52.31372,13.60537
 Allego DE-Wilhelmshaven Mühlenweg,53.52898,8.11642
 Allego DE-Wilhelmshaven Posener Straße,53.57403,8.09406
 Allego DE-Winsen Osttangente,53.35066,10.22345
@@ -10232,7 +10233,7 @@ CircleK DE-Hirschberg an der Bergstraße Goldbeckstraße,49.50795,8.63698,20
 CircleK DE-Hohenlinden Josef-Neumeier-Straße,48.15584,11.9862
 CircleK DE-Ibbenbüren Münsterstraße,52.25872,7.71167
 CircleK DE-Idstein Wiesbadener Straße,50.21692,8.25418
-CircleK DE-Illertissen Leitschäcker,48.2195,10.1273
+CircleK DE-Illertissen Leitschäcker,48.2195,10.1273,25
 CircleK DE-Ingolstadt Manchinger Straße,48.75288,11.4516
 CircleK DE-Karlsruhe Erlachseeweg,48.98565,8.44717
 CircleK DE-Kirchheim unter Teck Im Hag,48.64236,9.43332,30
@@ -16192,6 +16193,7 @@ EWE-GO DE-Essen Karnaper Straße,51.52564,7.0085
 EWE-GO DE-Essen Ruhrbruchshof,51.44546,7.0837
 EWE-GO DE-Esterwegen Hinterm Busch,53.00863,7.64335
 EWE-GO DE-Ettlingen Pforzheimer Straße,48.93748,8.41975
+EWE-GO DE-Euro Rastpark Jettingen-Scheppach,48.41217,10.44,25
 EWE-GO DE-Euro Rastpark Theeßen,52.23703,12.0594,30
 EWE-GO DE-Euskirchen Von-Siemens-Straße,50.65199,6.80562
 EWE-GO DE-Eutin Röntgenstraße,54.12317,10.63595
@@ -16382,7 +16384,7 @@ EWE-GO DE-Idar-Oberstein Fischbacher Straße,49.73857,7.40822
 EWE-GO DE-Ihlienworth Mühlenweg,53.73578,8.9154
 EWE-GO DE-Ihlienworth Zum Schönenfeld,53.73783,8.92779
 EWE-GO DE-Ihlow 1. Kompanieweg,53.4115,7.44033
-EWE-GO DE-Illertissen Leitschäcker,48.2194,10.12638
+EWE-GO DE-Illertissen Leitschäcker,48.21952,10.12672,12
 EWE-GO DE-Ilmenau Auf dem Mittelfeld,50.69141,10.9244
 EWE-GO DE-Ingolstadt Münchener Straße,48.73944,11.437
 EWE-GO DE-Ingolstadt Nürnberger Straße,48.77163,11.43506
@@ -16395,7 +16397,6 @@ EWE-GO DE-Jaderberg Vareler Straße,53.34067,8.18579
 EWE-GO DE-Jemgum Am Tief,53.31549,7.28106
 EWE-GO DE-Jemgum A’nt Splittland,53.31412,7.28484
 EWE-GO DE-Jemgum Hofstraße,53.26294,7.38374
-EWE-GO DE-Jettingen-Scheppach Robert-Bosch-Straße,48.4119,10.44058
 EWE-GO DE-Jever Adolf-Ahlers-Straße,53.57062,7.88933
 EWE-GO DE-Jever Alter Markt,53.57414,7.90516
 EWE-GO DE-Jever Am Bullhamm,53.58086,7.90757
@@ -17042,7 +17043,6 @@ EWE-GO DE-Überlingen Abigstraße,47.77452,9.18638
 
 EWE-SWB DE-Emden,53.3891,7.23049,20
 EWE-SWB DE-Friesoythe,53.01486,7.85101
-EWE-SWB DE-Illertissen,48.21952,10.12672,10
 EWE-SWB DE-Marktrodach,50.25635,11.39746
 
 EWF DE-Bad Wildungen Ziergartenstraße,51.10975,9.0787
@@ -18701,6 +18701,7 @@ Ionity DE-Erfurt Dubliner Straße,51.0123,10.9881
 Ionity DE-Euro Rastpark Guxhagen,51.20283,9.46872,30
 Ionity DE-Euro Rastpark Himmelkron,50.05586,11.6091
 Ionity DE-Euro Rastpark Hohenwarsleben,52.1739,11.49512,11
+Ionity DE-Euro Rastpark Jettingen-Scheppach,48.4123,10.44045,25
 Ionity DE-Feucht Wendelsteiner Straße,49.36565,11.20737,20
 Ionity DE-Friedberg Winterbruckenweg,48.4064,10.95235,35
 Ionity DE-Friedrichshafen Am Flugplatz,47.67253,9.52302
@@ -18712,7 +18713,6 @@ Ionity DE-Heiligengrabe Liebenthaler Dorfstraße,53.14752,12.3989
 Ionity DE-Herne Holsterhauser Straße,51.52873,7.19984
 Ionity DE-Herrenberg Hewlett-Packard-Straße,48.58196,8.89197
 Ionity DE-Illertissen Leitschäcker,48.21923,10.12784,25
-Ionity DE-Jettingen-Scheppach Robert-Bosch-Straße,48.4123,10.44017
 Ionity DE-Kaiserslautern Mainzer Straße,49.45635,7.79732
 Ionity DE-Kamen Zollpost,51.5762,7.67018
 Ionity DE-Kirchheim Hauptstraße,50.83328,9.57318
@@ -21698,6 +21698,7 @@ Mer DE-Lahr Einsteinallee,48.35312,7.80768,30
 Mer DE-Lam Arberstraße,49.19673,13.05185
 Mer DE-Landsberg am Lech Am Penzinger Feld,48.0537,10.89018
 Mer DE-Landshut Watzmannstraße,48.5376,12.11976
+Mer DE-Magdeburg Ebendorfer Chaussee,52.16668,11.61133
 Mer DE-Marktl Postmeisterstraße,48.2479,12.8349
 Mer DE-Meckenbeuren Wiesenweg,47.7013,9.5589,25
 Mer DE-Mühldorf am Inn Oderstraße,48.23489,12.54142
@@ -24799,7 +24800,6 @@ Smatrics AT-Brunn am Gebirge Wienerstraße,48.11246,16.30006,30
 Smatrics AT-Burgfried Bürgermeisterstraße,47.68685,13.10866
 Smatrics AT-Deutsch-Wagram Promenadenweg,48.29512,16.55567
 Smatrics AT-Eberndorf An der Bundesstraße,46.59153,14.6376
-Smatrics AT-Eberstalzell Solarstraße,48.0392,13.9912
 Smatrics AT-Eisenstadt Haidäcker-Park,47.82608,16.52315
 Smatrics AT-Eisenstadt Mattersburger Straße,47.82993,16.51932
 Smatrics AT-Elixhausen Mattseer Landesstraße,47.86145,13.05945
@@ -25255,6 +25255,7 @@ SW-Bielefeld DE-Bielefeld Am Lenkwerk,52.02864,8.55599
 SW-Bielefeld DE-Bielefeld Föhrenstraße,51.97002,8.46355
 SW-Bielefeld DE-Bielefeld Otto-Brenner-Straße,52.00533,8.55944
 SW-Bielefeld DE-Bielefeld Schopketalweg,51.93301,8.61019
+SW-Bitterfeld-Wolfen DE-Muldestausee Parkplatz Pegelturm Goitzsche,51.6383,12.35653
 SW-BK DE-Bad Kissingen Geschwister-Scholl-Platz,50.20659,10.08166
 SW-Blankenburg DE-Hasselfelde Blauvogel,51.67625,10.83572
 SW-Bochum DE-Bochum Blumenau,51.438,7.27965
