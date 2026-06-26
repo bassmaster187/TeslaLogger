@@ -2684,7 +2684,7 @@ Supercharger-V3 FR-Chambray-Lès-Tours,47.324854,0.713898
 Supercharger-V3 FR-Chambray-Lès-Tours,47.325354,0.713727
 Supercharger FR-Chambéry,45.593128,5.898171
 Supercharger-V4 FR-Chambéry Nord,45.596817,5.895551
-Supercharger-V3 FR-Champfleury,49.204296,4.013196
+Supercharger-V3 FR-Champfleury,49.2043,4.0131
 Supercharger-V4 FR-Chanteloup-en-Brie,48.85693,2.75205
 Supercharger FR-Chapelle sur Erdre,47.282771,-1.550008
 Supercharger FR-Charleville-Mézières,49.736834,4.744095
@@ -4266,6 +4266,8 @@ Supercharger-V3 SI-Krško,45.93517,15.48299
 Supercharger-V4 SI-Ljubljana,46.05178,14.45206
 Supercharger-V4 SI-Ljubljana East,46.06383,14.54842
 Supercharger SI-Maribor,46.53291,15.69981,55
+Supercharger SI-Maribor,46.54232,15.67867,20
+Supercharger SI-Maribor,46.55958,15.6871,20
 Supercharger-V4 SI-NovoMesto,45.797184,15.181046
 Supercharger-V4 SI-Postojna,45.77099,14.19772
 Supercharger-V3 SI-Slovenska Bistrica,46.383864,15.573771
@@ -4353,6 +4355,7 @@ Supercharger-V4 US-Alma AR,35.4845,-94.2241
 Supercharger-V3 US-Brinkley AR,34.90497,-91.20002
 Supercharger-V3 US-Hope AR,33.68074,-93.6068
 Supercharger-V3 US-Jonesboro AR,35.79688,-90.73038
+Supercharger-V4 US-Little Rock AR,34.6614,-92.4103
 Supercharger US-Little Rock AR,34.66155,-92.41047
 Supercharger US-Lowell AR,36.2554,-94.15267
 Supercharger-V4 US-North Little Rock AR,34.78068,-92.21815
@@ -6486,6 +6489,7 @@ Supercharger-V3 US-Coos Bay OR,43.36633,-124.2156
 Supercharger US-Detroit Lake OR,44.73704,-122.152
 Supercharger-V4 US-Eugene OR,44.06694,-123.0767
 Supercharger-V4 US-Fairview OR,45.53277,-122.44368
+Supercharger-V4 US-Florence OR,44.0073,-124.10196
 Supercharger US-Grants Pass OR,42.46093,-123.32412
 Supercharger-V3 US-Grants Pass OR Terry Lane,42.4368,-123.3004
 Supercharger-V4 US-Halsey OR,44.38816,-123.05757
@@ -6931,6 +6935,7 @@ Supercharger-V3 US-Cedar City UT,37.6059,-113.16115
 Supercharger-V4 US-Cedar City UT S Main St,37.65848,-113.07326
 Supercharger-V3 US-Draper UT,40.52655,-111.88615
 Supercharger-V4 US-Farr West UT,41.30748,-112.0217
+Supercharger-V4 US-Garden City UT Car Charging Pros,41.957,-111.39897
 Supercharger US-Green River UT,38.99355,-110.14056
 Supercharger-V4 US-Green River UT Main St,38.995,-110.14772
 Supercharger-V4 US-Kanab UT,37.04224,-112.52322
@@ -6948,6 +6953,7 @@ Supercharger US-Richfield UT,38.788,-112.08514
 Supercharger-V3 US-Richfield UT Technology Drive,38.7508,-112.10305
 Supercharger US-Salt Lake City UT,40.74646,-111.90057
 Supercharger-V3 US-Salt Lake City UT S 300 W,40.73012,-111.90175
+Supercharger-V4 US-Sandy UT Saini Charge,40.5884,-111.90928
 Supercharger-V4 US-Scipio UT,39.25608,-112.11648
 Supercharger US-South Salt Lake City UT,40.72034,-111.88907
 Supercharger-V3 US-St. George UT,37.07748,-113.5843
@@ -19052,6 +19058,7 @@ Ionity SE-Borlänge Mekanikergatan,60.47965,15.41908
 Ionity SE-Docksta Dockstavägen,63.05722,18.33733,30
 Ionity SE-Enköping,59.65339,17.08324
 Ionity SE-Gränna,58.00157,14.45022
+Ionity SE-Halmstad Stormgatan,56.66608,12.9066
 Ionity SE-Helsingborg,56.01699,12.75981,25
 Ionity SE-Hoting Storgatan,64.11177,16.2028
 Ionity SE-Hudiksvall,61.74251,17.07861
@@ -19061,6 +19068,7 @@ Ionity SE-Karlskrona,56.20643,15.64273,25
 Ionity SE-Karlstad,59.38093,13.46529
 Ionity SE-Kristianstad,56.02329,14.17383
 Ionity SE-Kungälv Älvebacken,57.8742,11.9663
+Ionity SE-Lagan Laganvägen,56.91843,13.97024
 Ionity SE-Malmö Vintrie,55.55624,12.95252,30
 Ionity SE-Malung Orrmyrvägen,60.687,13.72247
 Ionity SE-Mantorp,58.37214,15.2948
@@ -23537,14 +23545,15 @@ Powy IT-Pisa Via Quarantola,43.70929,10.3954
 Powy IT-San Donà di Piave Via dei Laghi 38 Pittarello,45.64244,12.59396
 Powy IT-Silea Via Str. della Serenissima,45.64874,12.31085
 
-PPC RO-Agigea Strada Dragoș Vodă,44.10462,28.6057
-PPC RO-Brașov Bulevardul Griviței,45.68488,25.5858
-PPC RO-Călugăreni DN5,44.09264,25.985
-PPC RO-Miercurea Ciuc Strada Harghita,46.36307,25.79284
-PPC RO-Miercurea Ciuc Strada Harghita,46.36767,25.77728
-PPC RO-Orțișoara DJ693,45.9697,21.29804
-PPC RO-Predeal Șoseaua Națională,45.47952,25.5645
-PPC RO-Târgu Secuiesc Strada 1 Decembrie 1918,45.99395,26.12133
+PPC-blue RO-Agigea Strada Dragoș Vodă,44.10462,28.6057
+PPC-blue RO-Brașov Bulevardul Griviței,45.68488,25.5858
+PPC-blue RO-Călugăreni DN5,44.09264,25.985
+PPC-blue RO-Miercurea Ciuc Strada Harghita,46.36307,25.79284
+PPC-blue RO-Miercurea Ciuc Strada Harghita,46.36767,25.77728
+PPC-blue RO-Orțișoara DJ693,45.9697,21.29804
+PPC-blue RO-Predeal Șoseaua Națională,45.47952,25.5645
+PPC-blue RO-Sibiu Calea Șurii Mari,45.8186,24.1493
+PPC-blue RO-Târgu Secuiesc Strada 1 Decembrie 1918,45.99395,26.12133
 
 PRE CZ-Herálec u Havlíčkova Brodu,49.51429,15.41789
 PRE CZ-Karlovy Vary Stará Kysibelská,50.23661,12.89776
