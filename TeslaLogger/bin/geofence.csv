@@ -300,7 +300,7 @@ Supercharger-V4 BE-Verviers,50.59222,5.84853
 Supercharger-V3 BE-Wavre,50.70787,4.59855,60
 Supercharger-V3 BE-Zaventem,50.8699,4.50205
 
-Supercharger BG-Plovdiv,42.14452,24.76887
+Supercharger BG-Plowdiw Пловдив,42.14452,24.76887
 Supercharger-V3 BG-Sofia,42.65777,23.313598
 Supercharger-V4 BG-Sofia София Bulgaria Boulevard,42.66372,23.28946
 
@@ -2017,6 +2017,10 @@ Supercharger-V4 DE-Eislingen,48.695886,9.686757
 Supercharger DE-Ellwangen,48.95584,10.18262,65
 Supercharger-V3 DE-Ellwangen - Hotel Montana,48.95916,10.17378
 Supercharger-V4 DE-Elmshorn,53.74173,9.70839,40
+Supercharger-V4 DE-Emsbüren,52.34278,7.25967,10
+Supercharger-V4 DE-Emsbüren,52.3504,7.25902,10
+Supercharger-V4 DE-Emsbüren,52.35492,7.2561,10
+Supercharger-V4 DE-Emsbüren,52.359,7.2628,10
 Supercharger-V4 DE-Emsbüren,52.35934,7.26476
 Supercharger-V3 DE-Endsee,49.44515,10.24691
 Supercharger-V4 DE-Engen,47.855556,8.793436
@@ -2052,6 +2056,8 @@ Supercharger-V3 DE-Gensingen,49.902135,7.92968,55
 Supercharger-V4 DE-Gera,50.887811,12.136461,35
 Supercharger-V4 DE-Germersheim,49.2272,8.3732
 Supercharger-V4 DE-Gießen,50.5884,8.7079
+Supercharger-V4 DE-Gießen,50.59304,8.71108,10
+Supercharger-V4 DE-Gießen,50.6005,8.7146,10
 Supercharger-V4 DE-Gigafactory Berlin-Brandenburg,52.3914,13.7962
 Supercharger-V4 DE Gilching,48.094,11.2825,55
 Supercharger-V4 DE-Gramschatzer Wald,49.9119,10.00105,70
@@ -2086,7 +2092,7 @@ Supercharger-V4 DE-Herbolzheim,48.22704,7.75368
 Supercharger-V4 DE-Herborn,50.67534,8.279983,40
 Supercharger-V4 DE-Herford,52.12684,8.67533
 Supercharger-V3 DE-Hermsdorf,50.8899,11.8714,30
-Supercharger-V3 DE-Herne (Zurbrüggen),51.531182,7.209585
+Supercharger-V3 DE-Herne (Zurbrüggen),51.53134,7.20983
 Supercharger-V3 DE-Herrieden,49.25805,10.50213,60
 Supercharger-V3 DE-Herzsprung,53.06744,12.53322
 Supercharger-V4 DE-Hessisch Lichtenau,51.19784,9.74687
@@ -2240,7 +2246,9 @@ Supercharger-V3 DE-Rhüden,51.94732,10.14113,30
 Supercharger-V4 DE-Ringsheim,48.25,7.76567,21
 Supercharger-V4 DE-Rosengarten,53.37879,9.89814
 Supercharger-V3 DE-Rosenheim,47.81716,12.1207,60
+Supercharger-V4 DE Rostock-Bentwisch,54.1043,12.1846,10
 Supercharger-V4 DE Rostock-Bentwisch,54.112772,12.192144
+Supercharger-V4 DE Rostock-Bentwisch,54.11544,12.17178,10
 Supercharger-V3 DE-Rüsselsheim,49.96834,8.39035,36
 Supercharger-V4 DE Saarbrücken,49.208075,7.027059
 Supercharger-V4 DE-Saarbrücken Innenstadt,49.23915,6.97825
@@ -4693,12 +4701,13 @@ Supercharger US-Menlo Park CA,37.42394,-122.19852
 Supercharger-V3 US-Merced CA Martin Luther King Junior Way,37.2976,-120.48336
 Supercharger-V4 US-Mill Valley CA,37.8979,-122.51438
 Supercharger US-Milpitas CA,37.43485,-121.8914
-Supercharger-V3 US-Milpitas CA - South Abbott Avenue,37.42536,-121.91454
-Supercharger-V4 US-Milpitas CA 20 S Abbott Ave,37.42827,-121.9138
 Supercharger-V4 US-Milpitas CA Barber Ct,37.42158,-121.91706
 Supercharger-V4 US-Milpitas CA Barber Ln,37.4194,-121.91516
 Supercharger-V4 US-Milpitas CA Dempsey Rd,37.4154,-121.87807
 Supercharger US-Milpitas CA Great Mall Dr,37.41327,-121.89785,25
+Supercharger-V3 US-Milpitas CA S Abbott Ave,37.42536,-121.91454
+Supercharger-V4 US-Milpitas CA S Abbott Ave,37.42827,-121.9138
+Supercharger-V4 US-Milpitas CA W Calaveras Blvd,37.42953,-121.9093
 Supercharger US-Mission Viejo CA,33.5572,-117.66776
 Supercharger US-Mission Viejo CA Crown Valley Parkway,33.56086,-117.6717
 Supercharger-V3 US-Mission Viejo CA Crown Valley Pkwy,33.5607,-117.67203
@@ -6312,6 +6321,7 @@ Supercharger-V4 US-Garden City NY Stewart Ave,40.73145,-73.60947
 Supercharger US-Glendale NY Cooper Av,40.70846,-73.8675
 Supercharger US-Glendale NY Cooper Ave,40.70796,-73.86717
 Supercharger-V4 US-Glenmont NY,42.62,-73.783
+Supercharger-V4 US-Grand Island NY PPR Energy,43.00854,-78.95082
 Supercharger US-Guilderland NY,42.68864,-73.85313
 Supercharger-V3 US-Hampton Bays NY,40.87794,-72.52103
 Supercharger-V3 US-Hancock NY,41.95596,-75.29448
@@ -6935,7 +6945,7 @@ Supercharger-V3 US-Cedar City UT,37.6059,-113.16115
 Supercharger-V4 US-Cedar City UT S Main St,37.65848,-113.07326
 Supercharger-V3 US-Draper UT,40.52655,-111.88615
 Supercharger-V4 US-Farr West UT,41.30748,-112.0217
-Supercharger-V4 US-Garden City UT Car Charging Pros,41.957,-111.39897
+Supercharger-V3 US-Garden City UT Car Charging Pros,41.957,-111.39897
 Supercharger US-Green River UT,38.99355,-110.14056
 Supercharger-V4 US-Green River UT Main St,38.995,-110.14772
 Supercharger-V4 US-Kanab UT,37.04224,-112.52322
@@ -7832,7 +7842,7 @@ Aldi DE-Tübingen Wohlboldstraße,48.50043,9.05418
 Aldi DE-Ulm,48.40067,9.97199
 Aldi DE-Undenheim Staatsrat-Schwamb-Straße,49.84131,8.23938
 Aldi DE-Unkel Am Hohen Weg,50.59456,7.21789
-Aldi DE-Unterhaching Kirchlandweg,48.05966,11.63335
+Aldi DE-Unterhaching Kirchlandweg,48.05967,11.6336
 Aldi DE-Unterschleißheim Carl-von-Linde-Straße,48.28225,11.56842
 Aldi DE-Vellmar Zum Feldlager,51.3522,9.4671
 Aldi DE-Waldbronn Talstraße,48.93006,8.4738
@@ -12090,6 +12100,7 @@ Electra DE-Dortmund Westfalendamm,51.50435,7.51502
 Electra DE-Dresden Gerichtsstraße,51.051,13.75132
 Electra DE-Germersheim Münchener Straße,49.22712,8.3729
 Electra DE-Gräfelfing Pasinger Straße,48.1256,11.44803
+Electra DE-Halle (Saale) Delitzscher Straße,51.479,11.9984
 Electra DE-Hemmoor Stader Straße,53.68228,9.17848
 Electra DE-Kaiserslautern Europaallee,49.4537,7.81485
 Electra DE-Kaiserslautern Von-Miller-Straße,49.43854,7.6588
@@ -14897,6 +14908,7 @@ enercity DE-Hannover Osterstraße,52.37025,9.74003
 enercity DE-Hannover Pfarrlandstraße,52.3745,9.70639
 enercity DE-Hannover Platz der Kaufleute,52.37593,9.75077
 enercity DE-Hannover Podbielskistraße,52.3983,9.77512
+enercity DE-Hannover Posthornstraße,52.36416,9.7153
 enercity DE-Hannover Robert-Enke-Platz,52.36129,9.73349
 enercity DE-Hannover Rudolf-v.-Bennigsen Ufer,52.35954,9.74232
 enercity DE-Hannover Sahlkamp,52.41306,9.73455
@@ -21535,6 +21547,7 @@ Mer AT-Ebreichsdorf Betriebsring,47.98323,16.39629
 Mer AT-Eisenstadt Handelsstraße,47.82881,16.53174
 Mer AT-Feldkirchen in Kärnten Gurktalerstraße,46.73119,14.09518
 Mer AT-Frauenhofen Wiener Straße,48.66573,15.63357
+Mer AT-Gleisdorf Europastraße,47.10868,15.70373
 Mer AT-Gmunden Aubauerstraße,47.93097,13.78547
 Mer AT-Graz Lauzilgasse,47.04517,15.43038
 Mer AT-Graz Plüddemanngasse,47.06405,15.465
@@ -23244,7 +23257,7 @@ Pfalzwerke DE-Wiesbaden Friedrich-Bergius-Straße,50.0501,8.22004
 Pfalzwerke DE-Wiesbaden Hagenauer Straße,50.0486,8.2178,30
 Pfalzwerke DE-Wiesbaden Kurt-Hebach-Straße,50.01918,8.2893
 Pfalzwerke DE-Wiesbaden Mainzer Straße,50.05735,8.25828
-Pfalzwerke DE-Wiesbaden Äppelallee,50.0457,8.22002
+Pfalzwerke DE-Wiesbaden Äppelallee,50.0457,8.22002,30
 Pfalzwerke DE-Wiesloch Dielheimer Straße,49.29712,8.7171
 Pfalzwerke DE-Wiesloch Schloßstraße,49.30113,8.6964
 Pfalzwerke DE-Wildau Gewerbepark,52.31645,13.6027
@@ -23446,7 +23459,7 @@ Porsche DE-Münster Weseler Straße,51.9248,7.57308
 Porsche DE-Nürnberg Erlanger Straße,49.48535,11.0589
 Porsche DE-Offenburg Otto-Hahn-Straße,48.48312,7.93715
 Porsche DE-Oldenburg Nadorster Straße,53.1608,8.22354
-Porsche DE-Osnabrück Blumenhaller Weg,52.2646,8.00935
+Porsche DE-Osnabrück Blumenhaller Weg,52.2642,8.00935
 Porsche DE-Pforzheim Kieselbronner Straße,48.91043,8.7198
 Porsche DE-Plattling,48.78615,12.84785
 Porsche DE-Raubling Breiteicherstraße,47.80711,12.1164
@@ -23552,6 +23565,7 @@ PPC-blue RO-Miercurea Ciuc Strada Harghita,46.36307,25.79284
 PPC-blue RO-Miercurea Ciuc Strada Harghita,46.36767,25.77728
 PPC-blue RO-Orțișoara DJ693,45.9697,21.29804
 PPC-blue RO-Predeal Șoseaua Națională,45.47952,25.5645
+PPC-blue RO-Reșița Calea Timișoarei,45.31416,21.87598
 PPC-blue RO-Sibiu Calea Șurii Mari,45.8186,24.1493
 PPC-blue RO-Târgu Secuiesc Strada 1 Decembrie 1918,45.99395,26.12133
 
@@ -24691,6 +24705,7 @@ Shell RO-Macun Bağdat Caddesi,39.96079,32.77047
 Shell TR-Horozluhan Yeni İstanbul Cd.,37.93425,32.511
 Shell TR-Karşıyaka/İzmir Soğukkuyu Anadolu Cd.,38.46806,27.1134
 Shell US-De Soto IA Guthrie St,41.53846,-94.01151
+Shell US-Houston TX Main St,29.76277,-95.36066
 
 SI-Energy DE-Epfenbach Hauptstraße,49.33774,8.9105
 SI-Energy DE-Grafschaft Im Kreuzerfeld,50.5698,7.08606
@@ -27399,6 +27414,8 @@ Wien-Energie AT-Wiener Neudorf Multiplex,48.10306,16.3188,20
 
 Wiiiz FR-Cannes Bd Général Vautrin,43.54863,7.03206
 Wiiiz FR-Grasse Pl. de la Buanderie,43.66096,6.9234,30
+
+Windenergie-Dipbach DE-Neubrunn Point,49.7321,9.67774
 
 Wirelane DE-Achim Uphusener Dorfstraße,53.0282,8.97063
 Wirelane DE-Bad Mergentheim Dieselstraße,49.49522,9.76658
