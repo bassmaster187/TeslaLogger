@@ -12076,6 +12076,7 @@ ElDrive RO-Brașov Strada Egretei,45.6638,25.56452
 ElDrive RO-Brașov Strada Lacurilor,45.61709,25.64602
 ElDrive RO-Brașov Strada Lacurilor,45.64719,25.61946
 ElDrive RO-Fetești Strada Călărași,44.40452,27.83257
+ElDrive RO-Giurgiu Bulevardul Academician Miron Nicolescu,43.90515,25.9736
 ElDrive RO-Giurgiu DN5,43.90831,25.98683
 ElDrive RO-Hărman Strada Dorobanți,45.70247,25.69246
 ElDrive RO-Lehliu-Gară Str. Elefterie Papadisia,44.4359,26.85662
@@ -14957,10 +14958,6 @@ Energie-Burgenland AT-Oberwart Europastraße,47.288,16.18658
 Energie-Burgenland AT-Podersdorf am See Strandgasse,47.85736,16.83003
 Energie-Burgenland AT-Steinberg-Dörfl Burgenland Straße,47.48975,16.49405
 
-Energie-Graz DE-Graz Lendkai,47.07588,15.4319
-Energie-Graz DE-Graz Schützenhofgasse,47.06908,15.45915
-Energie-Graz DE-Graz Wiener Straße,47.0951,15.4052
-
 Energie-Klagenfurt AT-Klagenfurt 8.-Mai-Straße,46.62319,14.3072
 
 Energie-Oberösterreich AT-Bad Ischl Götzstraße,47.71369,13.62392
@@ -14997,12 +14994,16 @@ Energie-Steiermark AT-Graz Kaiser-Franz-Josef-Kai,47.07198,15.43587
 Energie-Steiermark AT-Graz Kärntner Straße,47.06085,15.42101
 Energie-Steiermark AT-Graz Körblergasse,47.08783,15.43954
 Energie-Steiermark AT-Graz Lazarettgürtel,47.06007,15.42925
+Energie-Steiermark AT-Graz Lendkai,47.07588,15.4319
 Energie-Steiermark AT-Graz Leonhardgürtel,47.07456,15.45516
+Energie-Steiermark AT-Graz Mohsgasse,47.07225,15.41973
 Energie-Steiermark AT-Graz Neuholdaugasse,47.05678,15.43745,25
 Energie-Steiermark AT-Graz Puchstraße,47.03796,15.43971
 Energie-Steiermark AT-Graz Ragnitzstraße,47.07743,15.49161
+Energie-Steiermark AT-Graz Schützenhofgasse,47.06908,15.45915
 Energie-Steiermark AT-Graz Stattegger Straße,47.11022,15.42302
 Energie-Steiermark AT-Graz Weblinger Gürtel,47.03379,15.41456,8
+Energie-Steiermark AT-Graz Wiener Straße,47.0951,15.4052
 Energie-Steiermark AT-Graz Wiener Straße,47.10378,15.40171
 Energie-Steiermark AT-Hart bei Graz Industriestraße,47.04083,15.50867
 Energie-Steiermark AT-Judenburg Hauptplatz,47.16846,14.66107
@@ -18791,6 +18792,7 @@ Ionity DK-Fredericia,55.53669,9.71778
 Ionity DK-Greve,55.58492,12.258
 Ionity DK-Nyborg,55.30936,10.80483,30
 Ionity DK-Nørager,56.78283,9.6945,22
+Ionity DK-Ringsted Klosterparks Allé,55.4537,11.78615
 Ionity DK-Skanderborg,56.06812,9.97843
 Ionity DK-Vordingborg,54.99747,12.00088,30
 Ionity EE-Häädemeeste,58.07469,24.51278
@@ -19074,13 +19076,13 @@ Ionity PT-Área de Serviço de Barcelos,41.6054,-8.55102
 Ionity SE-Arvidsjaur Storgatan,65.58815,19.1904
 Ionity SE-Borlänge Mekanikergatan,60.47965,15.41908
 Ionity SE-Docksta Dockstavägen,63.05722,18.33733,30
-Ionity SE-Enköping,59.65339,17.08324
+Ionity SE-Enköping Malmagatan,59.65373,17.0837,30
 Ionity SE-Gränna,58.00157,14.45022
 Ionity SE-Halmstad Stormgatan,56.66608,12.9066
 Ionity SE-Helsingborg Ekslingan,56.0898,12.74578
 Ionity SE-Helsingborg Rusthållsgatan,56.017,12.7598,25
 Ionity SE-Hoting Storgatan,64.11177,16.2028
-Ionity SE-Hudiksvall,61.74251,17.07861
+Ionity SE-Hudiksvall Medskog norra,61.74218,17.07874
 Ionity SE-Jokkmokk Föreningsgatan,66.60754,19.828
 Ionity SE-Jävrebyn,65.14307,21.50461
 Ionity SE-Karlskrona,56.20643,15.64273,25
@@ -19090,19 +19092,19 @@ Ionity SE-Kungälv Älvebacken,57.8742,11.9663
 Ionity SE-Lagan Laganvägen,56.91843,13.97024
 Ionity SE-Malmö Vintrie,55.55624,12.95252,30
 Ionity SE-Malung Orrmyrvägen,60.687,13.72247
-Ionity SE-Mantorp,58.37214,15.2948
+Ionity SE-Mantorp Uljebergsvägen,58.37225,15.29425,30
 Ionity SE-Mariestad Sandbäcksvägen,58.68557,13.84551,30
 Ionity SE-Mellerud Snickargatan,58.70585,12.45395
 Ionity SE-Mora Strandgatan,61.00563,14.54376,18
 Ionity SE-Norrköping Gröndalsgatan,58.57706,16.18131
 Ionity SE-Nyköping Stenbocksvägen,58.7717,17.02
-Ionity SE-Oskarshamn,57.2513,16.44875
-Ionity SE-Spekeröd,58.02474,11.84729
+Ionity SE-Oskarshamn Åsavägen,57.25162,16.44863
+Ionity SE-Rastplats Spekeröd,58.02474,11.8473,30
 Ionity SE-Storuman Blå vägen,65.0942,17.1159
-Ionity SE-Strömstad,58.91477,11.2594
+Ionity SE-Strömstad Bastekärrsvägen,58.91483,11.25944,30
 Ionity SE-Sundsvall,62.33874,17.3538
 Ionity SE-Sveg Ringvägen,62.03276,14.3677
-Ionity SE-Södertälje,59.17525,17.64293
+Ionity SE-Södertälje Verkstadsvägen,59.17544,17.64257,30
 Ionity SE-Ulricehamn,57.81289,13.41947
 Ionity SE-Umeå Gräddvägen,63.85334,20.29989
 Ionity SE-Uppsala Takpannegatan,59.88546,17.66705,30
@@ -21771,6 +21773,7 @@ Mer SE-Malmö Derbyvägen,55.57868,13.06286
 Mer SE-Mjölby Sparregatan,58.32376,15.09222
 Mer SE-Norrköping Järngatan,58.61853,16.16236
 Mer SE-Nybro Norra Vägen,56.73614,15.9347
+Mer SE-Rastplats Spekeröd,58.02415,11.8469,30
 Mer SE-Solna Vallgatan,59.3795,18.01045
 Mer SE-Sundsvall Skepparegatan,62.3932,17.30567
 Mer SE-Vindeln Hökvägen,64.19781,19.72296
