@@ -1952,11 +1952,14 @@ Supercharger-V3 DE-Barsbüttel,53.578295,10.193266
 Supercharger-V4 DE-Bautzen,51.18866,14.45457
 Supercharger-V3 DE-Bayreuth,49.9626,11.61055,95
 Supercharger-V4 DE-Beelitz,52.26678,12.92225
+Supercharger-V4 DE-Beelitz,52.29608,12.9043,10
 Supercharger-V3 DE-Bensheim,49.6724,8.6022
 Supercharger-V3 DE-Berchtesgaden,47.626949,13.000833
 Supercharger-V3 DE-Bergkamen,51.6495,7.67112
 Supercharger-V3 DE-Berlin - APCOA ALEXA,52.51938,13.41608
 Supercharger-V3 DE-Berlin - EUREF-Campus,52.48055,13.35564,70
+Supercharger-V3 DE-Berlin - EUREF-Campus,52.48947,13.3403,10
+Supercharger-V3 DE-Berlin - EUREF-Campus,52.49095,13.33936,10
 Supercharger-V4 DE-Berlin Biesdorf,52.516516,13.543559
 Supercharger-V4 DE-Berlin Gesundbrunnen,52.54894,13.3765
 Supercharger-V4 DE-Berlin Mariendorfer Damm,52.42638,13.393089
@@ -1972,6 +1975,7 @@ Supercharger DE-Bispingen,53.104326,9.981842
 Supercharger-V4 DE-Bispingen-Behringen,53.099305,9.977576
 Supercharger-V3 DE-Bissendorf,52.238354,8.162975
 Supercharger-V3 DE-Bitterfeld,51.63644,12.2008
+Supercharger-V3 DE-Blankenfelde-Mahlow,52.30644,13.33576,10
 Supercharger-V3 DE-Blankenfelde-Mahlow,52.3088,13.4443
 Supercharger-V4 DE-Bobenheim-Roxheim (Globus),49.58145,8.354
 Supercharger-V4 DE-Bochum,51.5068,7.192052
@@ -2188,7 +2192,9 @@ Supercharger-V3 DE-München - Die Hirschau,48.161505,11.602763
 Supercharger-V3 DE-München - OEZ,48.184494,11.532399
 Supercharger-V3 DE-München - Pasing Arcaden,48.14787,11.4651
 Supercharger-V3 DE-München - Pasing Arcaden,48.14826,11.46415,35
+Supercharger-V3 DE-München - Sendling,48.1048,11.55343,10
 Supercharger-V3 DE-München - Sendling,48.105054,11.536857,30
+Supercharger-V3 DE-München - Sendling,48.1054,11.5377,10
 Supercharger-V4 DE-München Riem Arcaden,48.132573,11.689725,60
 Supercharger-V4 DE-München-Freiham,48.1353,11.4135
 Supercharger-V4 DE Münster,51.9922,7.57112
@@ -10069,8 +10075,8 @@ ChargePoint DE-Weinstadt 1 Heerbergstraße,48.8143,9.35792
 ChargePoint DE-Weißenburg in Bayern 2 Treuchtlinger Straße,49.01932,10.96039
 ChargePoint DE-Wemding 1 Kehläcker,48.87155,10.70521
 ChargePoint DE-Werlte Am Arenberge 1,52.84428,7.65418
-ChargePoint DE-Wertheim Almosenberg,49.77633,9.57542,25
 ChargePoint DE-Wertheim am Main Almosenberg,49.77407,9.57673
+ChargePoint DE-Wertheim am Main Almosenberg,49.77633,9.57542,25
 ChargePoint DE-Wesseling 37-39 Industriestraße,50.83438,6.95135
 ChargePoint DE-Wilburgstetten 1 Karl-Ruf-Straße,49.01736,10.3974
 ChargePoint DE-Wilhelmshaven Bahnhofstraße,53.51964,8.10916
@@ -19071,7 +19077,8 @@ Ionity SE-Docksta Dockstavägen,63.05722,18.33733,30
 Ionity SE-Enköping,59.65339,17.08324
 Ionity SE-Gränna,58.00157,14.45022
 Ionity SE-Halmstad Stormgatan,56.66608,12.9066
-Ionity SE-Helsingborg,56.01699,12.75981,25
+Ionity SE-Helsingborg Ekslingan,56.0898,12.74578
+Ionity SE-Helsingborg Rusthållsgatan,56.017,12.7598,25
 Ionity SE-Hoting Storgatan,64.11177,16.2028
 Ionity SE-Hudiksvall,61.74251,17.07861
 Ionity SE-Jokkmokk Föreningsgatan,66.60754,19.828
@@ -22067,6 +22074,7 @@ MVV DE-Mannheim Sandhofer Straße,49.54284,8.44821
 MVV DE-Mannheim Seckenheimer Hauptstraße,49.46509,8.56558
 MVV DE-Mannheim Werderstraße,49.48108,8.47829
 MVV DE-Mannheim Wilhelm-Varnholt-Allee,49.47186,8.5092
+MVV DE-Nettersheim-Engelgau Schwalbenweg,50.49834,6.675
 MVV DE-Schriesheim Carl-Benz-Straße,49.46473,8.66489
 MVV DE-Schriesheim Theodor-Körner-Straße,49.47279,8.66105
 MVV DE-Waghäusel Lorenz-Brentano-Allee,49.25002,8.5074
@@ -23564,9 +23572,10 @@ PPC-blue RO-Călugăreni DN5,44.09264,25.985
 PPC-blue RO-Miercurea Ciuc Strada Harghita,46.36307,25.79284
 PPC-blue RO-Miercurea Ciuc Strada Harghita,46.36767,25.77728
 PPC-blue RO-Orțișoara DJ693,45.9697,21.29804
+PPC-blue RO-Oțelu Roșu Strada Mihai Eminescu,45.51708,22.35214
 PPC-blue RO-Predeal Șoseaua Națională,45.47952,25.5645
 PPC-blue RO-Reșița Calea Timișoarei,45.31416,21.87598
-PPC-blue RO-Sibiu Calea Șurii Mari,45.8186,24.1493
+PPC-blue RO-Sibiu Calea Șurii Mari,45.8186,24.1492
 PPC-blue RO-Târgu Secuiesc Strada 1 Decembrie 1918,45.99395,26.12133
 
 PRE CZ-Herálec u Havlíčkova Brodu,49.51429,15.41789
@@ -23704,6 +23713,7 @@ Qelo HR-Labin Štrmac,45.11895,14.11928
 
 Qovoltis FR-Les Ulis Rue de la Réunion,48.68259,2.20282
 
+Qwello DE-Berlin Dresdener Straße,52.50642,13.41383
 Qwello DE-Berlin Genter Straße,52.54898,13.35145
 Qwello DE-Berlin Scherenbergstraße,52.55057,13.41987
 Qwello DE-Leipzig Cöthner Straße,51.36438,12.36952
@@ -27609,6 +27619,7 @@ Zunder ES-Área de servicio Quintanilla Norte,42.0224,-5.8536
 ČEZ CZ-Frýdek-Místek,49.6816,18.34713
 ČEZ CZ-Harrachov Nový Svět,50.78077,15.42034
 ČEZ CZ-Hradec Králové V. Nejedlého,50.21127,15.85235
+ČEZ CZ-Humpolec Okružní,49.5388,15.34595
 ČEZ CZ-Jablonec nad Nisou U Kostela,50.7393,15.16898
 ČEZ CZ-Jaroměř,50.34283,15.90409
 ČEZ CZ-Jenišov,50.22274,12.80526
