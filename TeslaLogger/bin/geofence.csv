@@ -4167,7 +4167,7 @@ Supercharger-V4 SE-Krokom,63.3288,14.4301
 Supercharger-V4 SE-Kungens Kurva,59.270082,17.915231
 Supercharger-V4 SE-Kungsbacka,57.478787,12.080095
 Supercharger-V4 SE-Kungälv,57.85816,11.99827
-Supercharger SE-Lagan,57.028956,14.014744
+Supercharger-V3 SE-Lagan,57.02886,14.01488
 Supercharger-V4 SE-Laxå,58.982245,14.623561
 Supercharger-V3 SE-Linköping,58.435438,15.590951
 Supercharger-V3 SE-Ljusdal,61.827747,16.094661
@@ -9874,6 +9874,18 @@ ChargeNet NZ-Waiouru State Highway,-39.48125,175.6697
 ChargeNet NZ-Ward State Highway 1,-41.82911,174.13093
 ChargeNet US-South San Francisco CA El Camino Real,37.6467,-122.42917
 
+ChargeOne DE-Braunschweig Hansestraße,52.3093,10.5107,20
+ChargeOne DE-Erlangen Wetterkreuz,49.54286,11.02045
+ChargeOne DE-Frankfurt am Main Heinrich-Lanz-Allee,50.1903,8.65114,20
+ChargeOne DE-Gießen Adolph-Kolping-Straße,50.56506,8.6608
+ChargeOne DE-Hannover Lathusenstraße,52.37963,9.79466
+ChargeOne DE-Konstanz Line-Eid-Straße,47.67273,9.15738
+ChargeOne DE-Mühlheim am Main Schillerstraße,50.1201,8.84734
+ChargeOne DE-Neu-Ulm Memminger Straße,48.3881,10.00233
+ChargeOne DE-Staufenberg Porstendorfer Straße,50.6572,8.73527
+ChargeOne DE-Stuttgart Zettachring,48.71008,9.16984
+ChargeOne DE-Weil am Rhein Zollstraße,47.59006,7.59363,20
+
 ChargePlace-Scotland GB-Achnasheen Bignold Place,57.57986,-5.07185
 ChargePlace-Scotland GB-Ballachulish W Highland Way,56.63232,-4.82829
 ChargePlace-Scotland GB-Bowmore Isle of Islay The Square,55.75666,-6.28874
@@ -10491,17 +10503,6 @@ Citywatt DE-Zirndorf Buchackerstraße 4,49.43834,10.9538
 Citywatt DE-Zwickau Maxhütte Gewerbering 15,50.70523,12.44601
 
 Civitronic RO-Florești Strada Avram Iancu,46.75105,23.53291
-
-Claus-Heinemann DE-Braunschweig Hansestraße,52.3093,10.5107,20
-Claus-Heinemann DE-Erlangen Wetterkreuz,49.54286,11.02045
-Claus-Heinemann DE-Frankfurt am Main Heinrich-Lanz-Allee,50.1903,8.65114,20
-Claus-Heinemann DE-Gießen Adolph-Kolping-Straße,50.56506,8.6608
-Claus-Heinemann DE-Hannover Lathusenstraße,52.37963,9.79466
-Claus-Heinemann DE-Konstanz Line-Eid-Straße,47.67273,9.15738
-Claus-Heinemann DE-Mühlheim am Main Schillerstraße,50.1201,8.84734
-Claus-Heinemann DE-Neu-Ulm Memminger Straße,48.3881,10.00233
-Claus-Heinemann DE-Stuttgart Zettachring,48.71008,9.16984
-Claus-Heinemann DE-Weil am Rhein Zollstraße,47.59006,7.59363,20
 
 Clever DE-Fehmarn Mummendorfer Weg,54.44308,11.1784
 Clever DE-Osterrönfeld Kieler Strasse,54.29581,9.70711
@@ -18792,6 +18793,7 @@ Ionity DK-Aabenraa Egevej,55.06495,9.3661,20
 Ionity DK-Aurland Skulevegen,60.89943,7.21017
 Ionity DK-Fredericia,55.53669,9.71778
 Ionity DK-Greve,55.58492,12.258
+Ionity DK-Korsør Energivej,55.35366,11.14102,15
 Ionity DK-Nyborg,55.30936,10.80483,30
 Ionity DK-Nørager,56.78283,9.6945,22
 Ionity DK-Ringsted Klosterparks Allé,55.4537,11.78615
@@ -18954,6 +18956,7 @@ Ionity GB-Channel Gateway,51.09436,1.04677,30
 Ionity GB-Chippenham,51.51385,-2.10977
 Ionity GB-Cobham,51.30539,-0.40678,30
 Ionity GB-Cullompton,50.86375,-3.38449
+Ionity GB-Edinburgh Wester Shawfair,55.90695,-3.10067
 Ionity GB-Gateshead Pinetree Way,54.95853,-1.67485,30
 Ionity GB-Gretna Green,55.00827,-3.08655
 Ionity GB-Leeds Knowsthorpe Ln,53.77322,-1.47379
@@ -25409,6 +25412,7 @@ SW-Kassel DE-Kassel Bosestraße,51.29997,9.47197
 SW-Kassel DE-Kassel Damaschkestraße,51.29644,9.48354
 SW-Kassel DE-Kassel Friedrichsplatz,51.31336,9.49513,30
 SW-Kiel DE-Flensburg Langberger Weg,54.77389,9.39517
+SW-Kiel DE-Holtenau Kanalstraße,54.36995,10.14207
 SW-Kiel DE-Kiel Am Seefischmarkt,54.32578,10.17976
 SW-Kiel DE-Kiel Antipper,54.3123,10.13718
 SW-Kiel DE-Kiel Herzog-Friedrich-Straße,54.3177,10.13083
