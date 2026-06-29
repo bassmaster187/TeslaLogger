@@ -8519,6 +8519,7 @@ Allego DE-Zwickau Äußere Schneeberger Straße,50.70693,12.4976
 Allego DE-Übersee Bahnhofstraße,47.8189,12.4964
 Allego DK-Holstebro Nyholmvej,56.37748,8.6201
 Allego DK-Odense Drejebænken,55.35404,10.4199
+Allego DK-Randers Neptunvej,56.4249,10.05983
 Allego DK-Silkeborg Nordre Højmarksvej,56.18728,9.5102,26
 Allego DK-Slagelse Idagårdsvej,55.3919,11.35248
 Allego DK-Vejle Godthåbsvej,55.66392,9.55016,20
@@ -17142,6 +17143,7 @@ Fastned BE-Vilvoorde Peutie E19,50.93837,4.47556
 Fastned BE-Walshoutem Noord E40,50.7161,5.0636
 Fastned BE-Zoersel Den Haan,51.24568,4.7039
 Fastned CH-Aire de Repos Le Pertit,46.43815,6.91593
+Fastned CH-Area di Sosta Lavorgo-Nord,46.44456,8.83343
 Fastned CH-Lenzburg Rastplatz A1,47.39279,8.16088
 Fastned CH-Rastplatz Apfelwuhr,46.95719,9.5475
 Fastned CH-Rastplatz Apfelwuhr,46.95782,9.54872
@@ -22184,10 +22186,10 @@ Neogy IT-Arco Via S. Pietro,45.91815,10.88713
 Neogy IT-Baveno Via Edelweiss,45.91414,8.50145
 Neogy IT-Bolzano Bozen Lorenz-Böhler-Straße,46.49983,11.3103
 Neogy IT-Bolzano Bozen Marco Polo Straße,46.47312,11.3261
+Neogy IT-Bolzano Bozen Via Giovanni Keplero,46.47163,11.3172
 Neogy IT-Bolzano Bozen Via Laurin,46.49804,11.3574
+Neogy IT-Bolzano Bozen Via Piave,46.49982,11.35846
 Neogy IT-Bolzano Bozen Via Resia,46.49308,11.31527
-Neogy IT-Bolzano Piavestraße,46.49982,11.35846
-Neogy IT-Bolzano Via Giovanni Keplero,46.47163,11.3172
 Neogy IT-Braies St.Veit,46.70516,12.08684
 Neogy IT-Brixen Via Brennero,46.72275,11.6551,30
 Neogy IT-Brunico Nordring,46.80004,11.93291
@@ -22728,6 +22730,8 @@ Partino CH-Baden Im Graben,47.47198,8.30879
 
 PC-TANK LU-Grevenmacher Copal,49.67643,6.42732
 PC-TANK LU-Niederanven Route de Trèves,49.64367,6.22038
+
+PEA-VOLTA TH-Chang Wat Tak Phahonyothin Rd,16.87884,99.12908
 
 Penny HU-Győr Szabadrév u.,47.70007,17.64142
 
@@ -23369,6 +23373,7 @@ Plugit FI-Kokkola Kahvitie,63.82586,23.16312
 Plugpoint RO-Arpașu de Sus Str. Prundul Arpasului,45.69848,24.61097
 Plugpoint RO-Piatra Neamț Bulevardul Decebal,46.93415,26.34845
 Plugpoint RO-Sighișoara Strada Nicolae Filipescu,46.22494,24.77605
+Plugpoint RO-Târgu Mureș Strada Gheorghe Doja,46.5099,24.51094
 
 Plug’N’Roll CH-Affoltern Raststätte My Stop,47.27141,8.43923,16
 Plug’N’Roll CH-Affoltern Raststätte My Stop,47.27171,8.43764,10
@@ -23572,6 +23577,7 @@ Powy IT-Silea Via Str. della Serenissima,45.64874,12.31085
 PPC-blue RO-Agigea Strada Dragoș Vodă,44.10462,28.6057
 PPC-blue RO-Brașov Bulevardul Griviței,45.68488,25.5858
 PPC-blue RO-Călugăreni DN5,44.09264,25.985
+PPC-blue RO-Deva Calea Zarandului,45.86127,22.92905
 PPC-blue RO-Miercurea Ciuc Strada Harghita,46.36307,25.79284
 PPC-blue RO-Miercurea Ciuc Strada Harghita,46.36767,25.77728
 PPC-blue RO-Orțișoara DJ693,45.9697,21.29804
@@ -27189,6 +27195,7 @@ Voltiva SE-Värnamo Malmövägen,57.16492,14.06426
 Voltrelli RO-Balotești Calea Bucureşti,44.60634,26.086
 Voltrelli RO-București Bulevardul Iuliu Maniu,44.43632,25.97083
 Voltrelli RO-Mihai Viteazu DN1,46.53177,23.7804,30
+Voltrelli RO-Târgu Mureș Strada Gheorghe Doja,46.5346,24.55583
 
 Volvo IT-Bologna Via Stazione Roveri,44.49785,11.41068
 Volvo IT-Bolzano Autocity,46.47815,11.33449
