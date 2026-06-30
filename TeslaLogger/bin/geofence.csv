@@ -1977,6 +1977,8 @@ Supercharger-V3 DE-Bissendorf,52.238354,8.162975
 Supercharger-V3 DE-Bitterfeld,51.63644,12.2008
 Supercharger-V3 DE-Blankenfelde-Mahlow,52.30644,13.33576,10
 Supercharger-V3 DE-Blankenfelde-Mahlow,52.3088,13.4443
+Supercharger-V3 DE-Blankenfelde-Mahlow,52.31183,13.44294,10
+Supercharger-V3 DE-Blankenfelde-Mahlow,52.3144,13.44607,10
 Supercharger-V4 DE-Bobenheim-Roxheim (Globus),49.58145,8.354
 Supercharger-V4 DE-Bochum,51.5068,7.192052
 Supercharger-V4 DE-Bochum (Cafe Del Sol),51.4591,7.13652
@@ -2159,7 +2161,7 @@ Supercharger-V3 DE-Limburg an der Lahn,50.38128,8.08996,60
 Supercharger-V4 DE-Lindau,47.548127,9.72566
 Supercharger-V3 DE-Linstow,53.618217,12.372581
 Supercharger-V3 DE-Lippetal,51.6957,7.96738,60
-Supercharger-V3 DE-Lohfelden,51.27188,9.52688,25
+Supercharger-V3 DE-Lohfelden,51.27188,9.52688,28
 Supercharger-V3 DE-Lohfelden,51.27204,9.52483,10
 Supercharger-V3 DE-Lohfelden,51.27206,9.52607,10
 Supercharger-V3 DE-Lohne,52.65765,8.16915
@@ -2193,7 +2195,7 @@ Supercharger-V3 DE-München - OEZ,48.184494,11.532399
 Supercharger-V3 DE-München - Pasing Arcaden,48.14787,11.4651
 Supercharger-V3 DE-München - Pasing Arcaden,48.14826,11.46415,35
 Supercharger-V3 DE-München - Sendling,48.1048,11.55343,10
-Supercharger-V3 DE-München - Sendling,48.105054,11.536857,30
+Supercharger-V3 DE-München - Sendling,48.10505,11.53686
 Supercharger-V3 DE-München - Sendling,48.1054,11.5377,10
 Supercharger-V4 DE-München Riem Arcaden,48.132573,11.689725,60
 Supercharger-V4 DE-München-Freiham,48.1353,11.4135
@@ -2225,7 +2227,9 @@ Supercharger-V4 DE Offenburg Wilhelm-Röntgen-Straße,48.47302,7.92473
 Supercharger-V4 DE-Oldenburg in Holstein,54.2871,10.87714
 Supercharger-V3 DE-Paderborn,51.710867,8.713883
 Supercharger-V3 DE-Panketal,52.620771,13.541551,40
-Supercharger-V3 DE-Peine,52.3404,10.24769
+Supercharger-V3 DE-Peine,52.33534,10.28605,10
+Supercharger-V3 DE-Peine,52.3404,10.2477
+Supercharger-V3 DE-Peine,52.35357,10.19365,10
 Supercharger-V3 DE-Pfaffenhofen,48.51838,11.562189
 Supercharger-V4 DE-Pfalzfeld,50.11565,7.59788,35
 Supercharger-V4 DE Pforzheim,48.905014,8.65431
@@ -5814,6 +5818,7 @@ Supercharger US-Augusta ME,44.34786,-69.78602
 Supercharger-V4 US-Augusta ME Civic Center Dr,44.3488,-69.79553
 Supercharger US-Baileyville ME,45.12327,-67.34746
 Supercharger-V3 US-Bethel ME,44.42472,-70.79733
+Supercharger-V4 US-Biddeford ME,43.47296,-70.51422
 Supercharger US-Brewer ME,44.77585,-68.73472
 Supercharger-V3 US-Ellsworth ME,44.53252,-68.40876
 Supercharger-V3 US-Falmouth ME,43.73333,-70.2951
@@ -7015,6 +7020,7 @@ Supercharger-V3 US-Fredericksburg VA - Jefferson Davis Highway,38.19418,-77.5075
 Supercharger-V4 US-Fredericksburg VA Falcon Dr,38.25,-77.49312
 Supercharger-V4 US-Fredericksburg VA Plank Rd,38.28992,-77.53846
 Supercharger-V4 US-Fredericksburg VA Warrenton Rd,38.3551,-77.51042
+Supercharger-V4 US-Gainesville VA Wawa,38.79248,-77.622
 Supercharger US-Glen Allen VA,37.66985,-77.46168
 Supercharger-V3 US-Harrisonburg VA,38.42906,-78.85642
 Supercharger US-Haymarket VA,38.8151,-77.64273
@@ -17489,6 +17495,8 @@ FreeToX IT-Torre Cerrano Autostrada Adriatica,42.53175,14.12434
 FreeToX IT-Vallata Autostrada dei Due Mari,41.06468,15.31426
 FreeToX IT-Vallata Autostrada dei Due Mari,41.06667,15.31595
 
+FREICON DE-Freiburg im Breisgau Riegeler Straße,47.98662,7.7823,25
+
 Freshmile FR-Bastelicaccia Lieu-dit Suaralta,41.92344,8.82471
 Freshmile FR-Calvi Route de l’Aéroport,42.52573,8.78915
 Freshmile FR-Colmar Av. de la Marne,48.07567,7.35393
@@ -23374,6 +23382,7 @@ Plugit FI-Kangasniemi Otto Mannisen tie,61.9898,26.64419
 Plugit FI-Kokkola Kahvitie,63.82586,23.16312
 
 Plugpoint RO-Arpașu de Sus Str. Prundul Arpasului,45.69848,24.61097
+Plugpoint RO-București Bulevardul 1 Mai,44.41776,26.03796,25
 Plugpoint RO-Piatra Neamț Bulevardul Decebal,46.93415,26.34845
 Plugpoint RO-Sighișoara Strada Nicolae Filipescu,46.22494,24.77605
 Plugpoint RO-Târgu Mureș Strada Gheorghe Doja,46.5099,24.51094
@@ -27738,7 +27747,7 @@ AT Hintertux Hotel Klausnerhof,47.11524,11.6812
 AT Hörsching Gasthof Mandorfer,48.2194,14.19332
 AT Innsbruck Rathaus Galerien,47.26567,11.39303
 AT Klagenfurt Richarg-Wagner-Straße,46.61872,14.30134
-AT Kottingbrunn SMARTplast,47.95858,16.25749,60
+AT Kottingbrunn SMARTplast,47.95847,16.2578,70
 AT Köflach Limonade Brantl,47.05386,15.07545
 AT Lannach Almrausch,46.95208,15.33205
 AT Lendorf Teccon,46.82732,13.4907
