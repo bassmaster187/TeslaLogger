@@ -18,7 +18,7 @@ Supercharger-V3 AE-Dubai Dubai Mall Za’abeel,25.1999,55.28185
 Supercharger-V3 AE-Dubai Mall of Emirates,25.11692,55.20276
 Supercharger-V3 AE-Dubai Mall of Emirates (Valet),25.1171,55.19902
 Supercharger-V3 AE-Dubai Meadows Village,25.06378,55.15678
-Supercharger-V4 AE-Dubai Silicon Oasis,25.1142,55.38794
+Supercharger-V4 AE-Dubai Nadd Hessa,25.1142,55.38794
 Supercharger-V3 AE-Dubai Wadi Al Safa,25.07948,55.3663
 Supercharger-V3 AE-Dubai Wafi City,25.23068,55.31858
 Supercharger-V3 AE-Fujairah,25.15736,56.35004
@@ -3090,9 +3090,10 @@ Supercharger-V4 GB-Moston,53.22634,-2.89374
 Supercharger-V3 GB-Newark,53.081144,-0.806543
 Supercharger-V3 GB-Newark A1 Slip Road,53.04817,-0.77824
 Supercharger-V4 GB-Newcastle upon Tyne,55.0276,-1.50943
-Supercharger-V3 GB-Newmarket - Studlands Shopping Park,52.26224,0.39757
+Supercharger-V4 GB-Newmarket Studlands Shopping Park,52.26224,0.39757
 Supercharger-V3 GB-Newport,51.60171,-2.93461
 Supercharger-V4 GB-Newport 2,51.6035,-2.9232
+Supercharger-V4 GB-Newport Chepstow Road,51.60405,-2.92083
 Supercharger-V3 GB-Newport Pagnell Northbound,52.08235,-0.74848
 Supercharger GB-Newport Pagnell Southbound,52.08433,-0.74837
 Supercharger-V4 GB-Newtown,52.50252,-3.349306
@@ -3190,6 +3191,7 @@ Supercharger-V4 GR-Thessaloniki Θεσσαλονίκη,40.5547,22.99516
 Supercharger-V4 HR-Bačva,45.23919,13.71488
 Supercharger-V4 HR-Bačva,45.23939,13.71592
 Supercharger-V4 HR-Cvetković,45.65381,15.65603,60
+Supercharger-V4 HR-Gospic,44.57727,15.39267
 Supercharger-V4 HR-Gospić,44.5771,15.39341
 Supercharger-V4 HR-Janjče East,44.75155,15.37485
 Supercharger-V4 HR-Janjče West,44.75082,15.37355
@@ -4308,8 +4310,6 @@ Supercharger-V3 TR-Ankara,39.949583,32.832923
 Supercharger-V4 TR-Beylikdüzü İstanbul,41.01997,28.62815
 Supercharger-V4 TR-Bolu,40.72398,31.46504
 Supercharger-V4 TR-Burdur,37.74588,30.31232
-Supercharger-V4 TR-Cankaya Ankara,39.90963,32.77736
-Supercharger-V4 TR-Cankaya Ankara 2,39.88323,32.8086
 Supercharger-V3 TR-Edirne,41.680352,26.582235
 Supercharger-V4 TR-Eskişehir,39.445,31.56873
 Supercharger-V3 TR-Ilgaz Çankırı,40.90657,33.64522
@@ -4323,6 +4323,8 @@ Supercharger-V4 TR-Muğla,37.32262,28.16507
 Supercharger-V4 TR-Tekirdağ,40.98885,27.5772
 Supercharger-V4 TR-Tekkeköy Samsun,41.22493,36.43205
 Supercharger-V4 TR-Uşak Merkez,38.67086,29.42427
+Supercharger-V4 TR-Çankaya Ankara,39.90963,32.77736
+Supercharger-V4 TR-Çankaya Ankara 2,39.88323,32.8086
 
 Supercharger-V3 TW-Nantou Caotun,23.9664,120.67746
 Supercharger-V3 TW-Tainan Hsinying,23.31127,120.28147
@@ -5891,6 +5893,7 @@ Supercharger-V3 US-Eagan MN,44.79518,-93.20555
 Supercharger-V4 US-Eden Prairie MN,44.8582,-93.42274
 Supercharger US-Hinckley MN,46.00986,-92.9299
 Supercharger-V3 US-Maple Grove MN,45.135,-93.47624
+Supercharger-V4 US-Medina MN Medina Ventures,45.052,-93.5614
 Supercharger-V3 US-Minneapolis MN,45.00467,-93.22836
 Supercharger-V3 US-Minnetonka MN,44.9704,-93.4472
 Supercharger-V3 US-Monticello MN,45.301,-93.79926
@@ -6917,6 +6920,7 @@ Supercharger-V4 US-Sealy TX,29.76882,-96.04748
 Supercharger US-Shamrock TX,35.22685,-100.2484
 Supercharger-V3 US-Shenandoah TX,30.1884,-95.4523
 Supercharger-V3 US-Shenandoah TX - Metropark Drive,30.1948,-95.45352
+Supercharger-V4 US-Sherman TX,33.68112,-96.61076
 Supercharger US-South Padre Island TX,26.08113,-97.1615
 Supercharger US-Southlake TX,32.94364,-97.1339
 Supercharger-V4 US-Spring TX,30.05035,-95.43825
@@ -14608,7 +14612,7 @@ EnBW DE-Windeck Rathausstraße,50.7986,7.6078
 EnBW DE-Winterbach Ritterstraße,48.80463,9.47858
 EnBW DE-Wirges Bahnhofstraße,50.47247,7.79414
 EnBW DE-Wirges Samoborstraße,50.47264,7.78887
-EnBW DE-Wischhafen Ziegelstraße,53.76793,9.32033
+EnBW DE-Wischhafen Ziegelstraße,53.76787,9.31952
 EnBW DE-Witten Annenstraße,51.44683,7.3741
 EnBW DE-Witten Bochumer Straße,51.45222,7.32396
 EnBW DE-Witten Herbeder Straße,51.4379,7.32517
