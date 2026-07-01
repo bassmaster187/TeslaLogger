@@ -193,7 +193,7 @@ namespace TeslaLogger
                 string origin = request.Headers["Origin"] ?? "*";
                 response.Headers["Access-Control-Allow-Origin"] = origin;
                 response.Headers["Access-Control-Allow-Methods"] = "GET, POST, PUT, DELETE, OPTIONS";
-                response.Headers["Access-Control-Allow-Headers"] = "Content-Type, Authorization, X-Requested-With";
+                response.Headers["Access-Control-Allow-Headers"] = "Content-Type, Authorization, X-Requested-With, X-User-Id";
                 response.Headers["Access-Control-Allow-Credentials"] = "true";
                 response.Headers["Access-Control-Max-Age"] = "86400";
 
@@ -2902,6 +2902,9 @@ DROP TABLE chargingstate_bak";
                     if (r["fleetAPI"] != null)
                          FleetAPI = r["fleetAPI"];
 
+                    // Get Keycloak user_sub from X-User-Id header
+                    string userSub = request.Headers["X-User-Id"]?.ToString() ?? "";
+
                     if (id == -1)
                     {
                         Logfile.Log("Insert Password");
@@ -2950,6 +2953,17 @@ FROM
                                     cmd2.Parameters.AddWithValue("@tesla_token_expire", DateTime.Now);
                                     cmd2.Parameters.AddWithValue("@fleetAPI", FleetAPI);
                                     _ = SQLTracer.TraceNQ(cmd2, out _);
+
+                                    // Grant user access to the newly created vehicle
+                                    if (!string.IsNullOrEmpty(userSub))
+                                    {
+                                        using (var cmdAccess = new MySqlCommand("INSERT IGNORE INTO user_vehicle_access (user_sub, car_id) VALUES (@user_sub, @car_id)", con))
+                                        {
+                                            cmdAccess.Parameters.AddWithValue("@user_sub", userSub);
+                                            cmdAccess.Parameters.AddWithValue("@car_id", newid);
+                                            _ = SQLTracer.TraceNQ(cmdAccess, out _);
+                                        }
+                                    }
 
                                     var dt = DBHelper.GetCarDT(Convert.ToInt32(newid));
                                     if (dt?.Rows?.Count > 0)
