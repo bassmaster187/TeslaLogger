@@ -189,6 +189,22 @@ namespace TeslaLogger
                 HttpListenerRequest request = context.Request;
                 HttpListenerResponse response = context.Response;
 
+                // CORS headers for frontend access
+                string origin = request.Headers["Origin"] ?? "*";
+                response.Headers["Access-Control-Allow-Origin"] = origin;
+                response.Headers["Access-Control-Allow-Methods"] = "GET, POST, PUT, DELETE, OPTIONS";
+                response.Headers["Access-Control-Allow-Headers"] = "Content-Type, Authorization, X-Requested-With, X-User-Id";
+                response.Headers["Access-Control-Allow-Credentials"] = "true";
+                response.Headers["Access-Control-Max-Age"] = "86400";
+
+                // Handle CORS preflight
+                if (request.HttpMethod == "OPTIONS")
+                {
+                    response.StatusCode = 204;
+                    response.Close();
+                    return;
+                }
+
                 if (request.Url.LocalPath != null)
                 {
                     localpath = request.Url.LocalPath;
@@ -360,8 +376,11 @@ namespace TeslaLogger
                     case bool _ when Regex.IsMatch(request.Url.LocalPath, @"/restart/[0-9]+"):
                         Restart(request, response);
                         break;
-                    case bool _ when Regex.IsMatch(request.Url.LocalPath, @"/decodecar/[0-9]+"):
+                   case bool _ when Regex.IsMatch(request.Url.LocalPath, @"/decodecar/[0-9]+"):
                         DecodeCar(request, response);
+                        break;
+                    case bool _ when Regex.IsMatch(request.Url.LocalPath, @"/checkvirtualkey/[0-9]+"):
+                        CheckVirtualKey(request, response);
                         break;
                     // Tesla API debug
                     case bool _ when Regex.IsMatch(request.Url.LocalPath, @"/debug/TeslaAPI/[0-9]+/.+"):
@@ -2586,6 +2605,31 @@ DROP TABLE chargingstate_bak";
             }
         }
 
+        private static void CheckVirtualKey(HttpListenerRequest request, HttpListenerResponse response)
+        {
+            Match m = Regex.Match(request.Url.LocalPath, @"/checkvirtualkey/([0-9]+)");
+            if (m.Success && m.Groups.Count == 2 && m.Groups[1].Captures.Count == 1)
+            {
+                _ = int.TryParse(m.Groups[1].Captures[0].ToString(), out int CarID);
+                Car c = Car.GetCarByID(CarID);
+
+                if (c == null)
+                {
+                    response.StatusCode = (int)HttpStatusCode.NotFound;
+                    WriteString(response, "Car not found");
+                    return;
+                }
+
+                bool result = c.webhelper.CheckVirtualKey() == true;
+                WriteString(response, result.ToString());
+            }
+            else
+            {
+                response.StatusCode = (int)HttpStatusCode.BadRequest;
+                WriteString(response, "Invalid car ID");
+            }
+        }
+
         private static void Admin_UpdateGrafana(HttpListenerRequest request, HttpListenerResponse response)
         {
             Tools.lastGrafanaSettings = DateTime.UtcNow.AddDays(-1);
@@ -2858,6 +2902,9 @@ DROP TABLE chargingstate_bak";
                     if (r["fleetAPI"] != null)
                          FleetAPI = r["fleetAPI"];
 
+                    // Get Keycloak user_sub from X-User-Id header
+                    string userSub = request.Headers["X-User-Id"]?.ToString() ?? "";
+
                     if (id == -1)
                     {
                         Logfile.Log("Insert Password");
@@ -2906,6 +2953,17 @@ FROM
                                     cmd2.Parameters.AddWithValue("@tesla_token_expire", DateTime.Now);
                                     cmd2.Parameters.AddWithValue("@fleetAPI", FleetAPI);
                                     _ = SQLTracer.TraceNQ(cmd2, out _);
+
+                                    // Grant user access to the newly created vehicle
+                                    if (!string.IsNullOrEmpty(userSub))
+                                    {
+                                        using (var cmdAccess = new MySqlCommand("INSERT IGNORE INTO user_vehicle_access (user_sub, car_id) VALUES (@user_sub, @car_id)", con))
+                                        {
+                                            cmdAccess.Parameters.AddWithValue("@user_sub", userSub);
+                                            cmdAccess.Parameters.AddWithValue("@car_id", newid);
+                                            _ = SQLTracer.TraceNQ(cmdAccess, out _);
+                                        }
+                                    }
 
                                     var dt = DBHelper.GetCarDT(Convert.ToInt32(newid));
                                     if (dt?.Rows?.Count > 0)
