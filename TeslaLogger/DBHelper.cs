@@ -110,6 +110,37 @@ namespace TeslaLogger
             mothershipEnabled = true;
         }
 
+        internal static string MySQLGeneralLogMode()
+        {
+            using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+            {
+                con.Open();
+                using (MySqlCommand cmd = new MySqlCommand("SHOW VARIABLES LIKE 'log_output';", con))
+                {
+                    using (MySqlDataReader dr = cmd.ExecuteReader())
+                    {
+                        if (dr.Read())
+                        {
+                            return dr[1].ToString();
+                        }
+                    }
+                }
+            }
+            return string.Empty;
+        }
+
+        internal static void SetMySQLLogMode(string mode)
+        {
+            using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+            {
+                con.Open();
+                using (MySqlCommand cmd = new MySqlCommand($"SET GLOBAL log_output = '{mode}';", con))
+                {
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
         public static void UpdateHTTPStatusCodes()
         {
             using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
@@ -5532,6 +5563,58 @@ WHERE
             }
         }
 
+        /// <summary>
+        /// Enables MariaDB's general_log at runtime (no restart required).
+        /// </summary>
+        [SuppressMessage("Security", "CA2100:Review SQL queries for security vulnerabilities")]
+        internal static void EnableMySQLGeneralLog()
+        {
+            try
+            {
+                using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+                {
+                    con.Open();
+                    using (MySqlCommand cmd = new MySqlCommand("SET GLOBAL general_log = 'ON';", con))
+                    {
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+                Logfile.Log("MariaDB general_log enabled.");
+            }
+            catch (Exception ex)
+            {
+                ex.ToExceptionless().FirstCarUserID().Submit();
+                Logfile.ExceptionWriter(ex, "EnableGeneralLog");
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Disables MariaDB's general_log at runtime (no restart required).
+        /// </summary>
+        [SuppressMessage("Security", "CA2100:Review SQL queries for security vulnerabilities")]
+        internal static void DisableMySQLGeneralLog()
+        {
+            try
+            {
+                using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+                {
+                    con.Open();
+                    using (MySqlCommand cmd = new MySqlCommand("SET GLOBAL general_log = 'OFF';", con))
+                    {
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+                Logfile.Log("MariaDB general_log disabled.");
+            }
+            catch (Exception ex)
+            {
+                ex.ToExceptionless().FirstCarUserID().Submit();
+                Logfile.ExceptionWriter(ex, "DisableGeneralLog");
+                throw;
+            }
+        }
+
         [SuppressMessage("Security", "CA2100:Review SQL queries for security vulnerabilities")]
         public static object ExecuteSQLScalar(string sql, int timeout = 30)
         {
@@ -7556,6 +7639,30 @@ ORDER BY startdate", con))
                 ex.ToExceptionless().Submit();
             }
         }
-    }
+
+        internal static async Task<bool> IsMySQLGeneralLogEnabledAsync(CancellationToken ct = default)
+        {
+            try
+            {
+                await using var conn = new MySqlConnection(DBConnectionstring);
+                await conn.OpenAsync(ct);
+                await using var cmd = new MySqlCommand("SELECT @@global.general_log;", conn);
+                object? result = await cmd.ExecuteScalarAsync(ct);
+                return result switch
+                {
+                    int i => i == 1,
+                    bool b => b,
+                    _ => Convert.ToBoolean(result)
+                };
+            }
+            catch (Exception ex)
+            {
+                ex.ToExceptionless().FirstCarUserID().Submit();
+                Logfile.ExceptionWriter(ex, "IsGeneralLogEnabledAsync");
+                return false;
+            }
+        }
+
+    }    
 }
 
