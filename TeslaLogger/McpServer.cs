@@ -53,7 +53,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
-                Logfile.Log($"MCP Server failed to bind to *:{_port}, trying localhost...");
+                Logfile.Log($"MCP Server failed to bind to *:{_port}, trying localhost... ({ex.Message})");
                 try
                 {
                     _listener = new HttpListener();

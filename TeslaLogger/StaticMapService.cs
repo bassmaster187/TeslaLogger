@@ -247,8 +247,7 @@ WHERE
                       CarID = @CarID
                       AND id >= @startID
                       AND id <= @endID
-                      AND lat <> 0
-                      AND lng <> 0
+                      AND pos_valid = 1
                     ORDER BY
                       Datum", DBHelper.DBConnectionstring))
                 {

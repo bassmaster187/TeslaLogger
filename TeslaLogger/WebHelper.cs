@@ -324,7 +324,7 @@ namespace TeslaLogger
         public static string ComputeSHA256Hash(string text)
         {
             string hashString;
-            using (var sha256 = SHA256Managed.Create())
+            using (var sha256 = SHA256.Create())
             {
                 var hash = sha256.ComputeHash(Encoding.Default.GetBytes(text));
                 hashString = ToHex(hash, false);
@@ -3674,7 +3674,7 @@ namespace TeslaLogger
                 WHERE
                     ((pos_end.odometer - pos_start.odometer) > 0.1) and (pos_start.address IS null or pos_end.address IS null or pos_start.address = '' or pos_end.address = '')", con))
                 {
-
+                    cmd.CommandTimeout = 600;    
                     MySqlDataReader dr = SQLTracer.TraceDR(cmd);
                     while (dr.Read())
                     {

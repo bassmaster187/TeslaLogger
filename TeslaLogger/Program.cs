@@ -45,7 +45,7 @@ namespace TeslaLogger
                     ExceptionlessClient.Default.Configuration.ServerUrl = ApplicationSettings.Default.ExceptionlessServerUrl;
                     ExceptionlessClient.Default.Configuration.SetVersion(Assembly.GetExecutingAssembly().GetName().Version);
 
-                    ExceptionlessClient.Default.CreateLog("Program", "Start " + Assembly.GetExecutingAssembly().GetName().Version, Exceptionless.Logging.LogLevel.Info).FirstCarUserID().Submit();
+                    ExceptionlessClient.Default.CreateLog("Program", $"Start {BuildInfo.FullVersion}", Exceptionless.Logging.LogLevel.Info).FirstCarUserID().Submit();
                 }
                 catch (Exception ex)
                 {
@@ -386,14 +386,12 @@ namespace TeslaLogger
         {
             try
             {
-                Thread threadTLStats = new Thread(() =>
+                Task.Run(async () =>
                 {
-                    TLStats.run();
-                })
-                {
-                    Name = "TLStatsThread"
-                };
-                threadTLStats.Start();
+                    using var cts = new CancellationTokenSource();
+                    // CancellationToken will be triggered when the application shuts down
+                    await TLStats.RunAsync(cts.Token);
+                });
             }
             catch (Exception ex)
             {
@@ -512,12 +510,12 @@ namespace TeslaLogger
         private static void InitStage1()
         {
             Tools.SetThreadEnUS();
-            UpdateTeslalogger.Chmod("nohup.out", 666, false);
+            UpdateTeslalogger.Chmod(FileManager.GetLogfilePath(), 666, false);
             UpdateTeslalogger.Chmod("backup.sh", 777, false);
             UpdateTeslalogger.Chmod("TeslaLogger.exe", 755, false);
 
             Logfile.Log("Runtime: " + Environment.Version.ToString());
-            Logfile.Log("TeslaLogger Version: " + Assembly.GetExecutingAssembly().GetName().Version);
+            Logfile.Log($"TeslaLogger Version: {Assembly.GetExecutingAssembly().GetName().Version} {BuildInfo.FullVersion}");
             Logfile.Log("Teslalogger Online Version: " + WebHelper.GetOnlineTeslaloggerVersion());
             Logfile.Log("Logfile Version: " + Assembly.GetAssembly(typeof(Logfile)).GetName().Version);
             Logfile.Log("SRTM Version: " + Assembly.GetAssembly(typeof(SRTM.SRTMData)).GetName().Version);
@@ -772,7 +770,7 @@ namespace TeslaLogger
         {
             // Run only once a day per version
             string kvskey = "UpdateDbInBackground";
-            string check = DateTime.Now.ToString("yyyyMMdd") + "-" + Assembly.GetExecutingAssembly().GetName().Version.ToString();
+                    string check = DateTime.Now.ToString("yyyyMMdd") + "-" + BuildInfo.FullVersion;
 
             if (KVS.Get(kvskey, out string updateDbInBackground) == KVS.SUCCESS)
             {
