@@ -101,6 +101,7 @@ Supercharger-V3 AT-Wien Gewerbepark Stadlau,48.24713,16.46436
 Supercharger AT-Wien Tech Park Vienna,48.15725,16.33404
 Supercharger-V4 AT-Wien Wienerberg,48.16753,16.34786
 Supercharger-V4 AT-Wiener Neudorf,48.10255,16.31827
+Supercharger-V4 AT-Wiener Neudorf,48.10677,16.3157,20
 Supercharger-V4 AT-Wiener Neustadt,47.8047,16.21082,75
 Supercharger-V4 AT-Zeltweg,47.194056,14.722814
 
@@ -1920,6 +1921,7 @@ Supercharger-V4 CO-Bogotá,4.6671,-74.05363
 Supercharger-V4 CO-Medellín,6.24022,-75.5867
 
 Supercharger-V4 CZ-Brno,49.13841,16.6307
+Supercharger-V4 CZ-Brno,49.152,16.62857,20
 Supercharger-V4 CZ-Hradec Králové,50.1989,15.78265
 Supercharger CZ-Humpolec,49.52157,15.348
 Supercharger-V4 CZ-Jamné,49.428188,15.701332
@@ -2586,7 +2588,7 @@ Supercharger FI-Paimio,60.442961,22.605621
 Supercharger-V4 FI-Parkano,62.00557,23.00974
 Supercharger-V3 FI-Pello,66.80876,23.99627,20
 Supercharger-V4 FI-Pori,61.49468,21.798
-Supercharger-V4 FI-Porvoo,60.39293,25.61051
+Supercharger-V4 FI-Porvoo,60.38822,25.60655
 Supercharger FI-Pyhtää,60.489054,26.554835
 Supercharger FI-Pyhäjärvi,63.716298,25.920103
 Supercharger-V4 FI-Raisio,60.4949,22.22567
@@ -12638,7 +12640,7 @@ EnBW DE-Bad Schussenried Wilhelm-Schussen-Straße,48.0065,9.6559
 EnBW DE-Bad Schwalbach Nikolaus-August-Otto-Straße,50.1489,8.03903
 EnBW DE-Bad Schönborn Hermann-Löns-Straße,49.22514,8.65424
 EnBW DE-Bad Segeberg Rosenstraße,53.92544,10.3191
-EnBW DE-Bad Sobernheim Kapellenstraße,49.78423,7.65415
+EnBW DE-Bad Sobernheim Kapellenstraße,49.78357,7.6542
 EnBW DE-Bad Soden-Salmünster Am Palmusacker,50.2704,9.37442
 EnBW DE-Bad Sooden-Allendorf Städtersweg,51.2671,9.9702
 EnBW DE-Bad Staffelstein Lichtenfelser Straße,50.1046,11.00637
@@ -13785,7 +13787,7 @@ EnBW DE-Markdorf Am Stadtgraben,47.7214,9.39205
 EnBW DE-Markdorf Bussenstraße,47.72152,9.38925
 EnBW DE-Markdorf Dornierstraße,47.71482,9.40267
 EnBW DE-Markdorf Eisenbahnstraße,47.7168,9.38935
-EnBW DE-Markkleeberg Nordstraße,51.28468,12.4272
+EnBW DE-Markkleeberg Nordstraße,51.28503,12.42672
 EnBW DE-Markt Indersdorf Hafnerstraße,48.34665,11.38188
 EnBW DE-Marktheidenfeld Am Schlossfeld,49.82256,9.54822
 EnBW DE-Marktheidenfeld Udo-Lermann-Straße,49.8529,9.61032
@@ -15457,6 +15459,7 @@ etecnic ES-Lleida Av. de Pinyana,41.62681,0.61062
 etecnic ES-Lleida Av. de Pinyana,41.62955,0.62118
 etecnic ES-L’Espluga de Francolí Avinguda de Catalunya,41.39514,1.09843
 etecnic ES-Pamplona Av. de Navarra,42.78371,-1.63376
+etecnic ES-Platja d’Alcúdia Carretera d’Artà,39.82038,3.1148
 etecnic ES-Ponts Avinguda Font de Valldans,41.91534,1.18544
 etecnic ES-Roses Carrer de la Riera Ginjolers,42.26355,3.17887
 etecnic ES-Salou Av. de Pau Casals,41.08414,1.1262
@@ -15685,6 +15688,8 @@ Eviny SE-Östersund Arenavägen,63.19201,14.65214
 EVite CH-Affoltern am Albis Moosbachstrasse,47.2716,8.43876,16
 EVite CH-Baden Segelhof,47.45854,8.27847,25
 EVite CH-Berneck Obereggerstrasse,47.42573,9.60846
+
+EVK AT-Mittelberg Walserstraße,47.32403,10.1554
 
 EVL DE-Limburg Am Hammerberg,50.38009,8.07912
 
@@ -18608,6 +18613,7 @@ InstaVolt GB-Gateshead Park Rd,54.96234,-1.58845
 InstaVolt GB-Haverfordwest Well Road,51.79198,-4.97905
 InstaVolt GB-Kendal Wainwrights Yard,54.32804,-2.74914
 InstaVolt GB-Newcastle upon Tyne Rotary Way,55.03616,-1.62728
+InstaVolt GB-Saltford Bath Road,51.40678,-2.46843
 InstaVolt GB-Scarborough Dunslow Rd,54.23699,-0.41788
 InstaVolt GB-Windermere The Old Station,54.37928,-2.90383
 Instavolt IS-Keflavík Courtyard Marriott Reykjavik Airport,63.99845,-22.58678
@@ -21951,6 +21957,7 @@ Monta DE-Lich Gottlieb-Daimler-Straße,50.51113,8.82727
 Monta DE-München Frankfurter Ring,48.18624,11.60598,25
 Monta DE-Obersöchering Spatzenhausener Straße,47.73294,11.2143
 Monta DE-Reiskirchen Freiherr-Vom-Stein-Straße,50.59772,8.8237,25
+Monta DE-Steingaden Wies,47.68232,10.89964
 Monta DE-Varel Panzerstraße,53.3973,8.12484
 Monta DK-Billund Ellehammers Alle,55.73132,9.1357
 Monta DK-Gudme Stærkærvej,55.14833,10.70874
@@ -24271,6 +24278,8 @@ schneller-strom-tanken DE-Villingen-Schwenningen,48.0609,8.45476
 Schüren DE-Hilden Mühlenbachweg,51.1707,6.95101
 
 SDE22 FR-Fréhel All. des Acacias,48.63983,-2.40379,30
+
+SDEM50 FR-Saint-James Rue Pendante,48.52377,-1.32027
 
 Seat DE-Bochum Porschestraße,51.48671,7.19394
 Seat DE-Stade Harburger Straße,53.59029,9.48643
