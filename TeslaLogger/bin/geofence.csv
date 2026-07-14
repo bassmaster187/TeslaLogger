@@ -2034,6 +2034,7 @@ Supercharger-V4 DE-Emsbüren,52.359,7.2628,10
 Supercharger-V4 DE-Emsbüren,52.35934,7.26476
 Supercharger-V3 DE-Endsee,49.44515,10.24691
 Supercharger-V4 DE-Engen,47.855556,8.793436
+Supercharger-V4 DE-Engen,47.85624,8.7937,20
 Supercharger-V3 DE-Erftstadt,50.79648,6.77994
 Supercharger-V4 DE-Erfurt,51.00903,10.99146
 Supercharger-V4 DE-Erfurt (Cafe Del Sol),50.9758,11.07463
@@ -3086,7 +3087,7 @@ Supercharger GB-Membury Eastbound,51.48391,-1.556821
 Supercharger GB-Membury Westbound,51.481293,-1.556196
 Supercharger-V3 GB-Merry Hill,52.48358,-2.112747
 Supercharger-V3 GB-Michaelwood Northbound,51.65588,-2.43204
-Supercharger-V4 GB-Michaelwood Southbound,51.657195,-2.426898
+Supercharger-V4 GB-Michaelwood Southbound,51.65775,-2.4259
 Supercharger-V4 GB-Middlesbrough Acklam Road,54.55964,-1.259646
 Supercharger-V4 GB-Middlesbrough Marton Road,54.571823,-1.22504
 Supercharger-V4 GB-Milton Keynes Merton Drive Service Centre,52.01384,-0.74558
@@ -18121,6 +18122,7 @@ Iberdrola ES-Bullas Ctra. de la Copa,38.05288,-1.66082
 Iberdrola ES-Cabo de Palos Es Paso,37.6276,-0.71011
 Iberdrola ES-Calp Carrer Ausias March,38.64616,0.05153
 Iberdrola ES-Calvarrasa de Abajo Crta de Madrid,40.94578,-5.55459
+Iberdrola ES-Capdepera Av. Juan Carlos I,39.70396,3.44655
 Iberdrola ES-Carbajosa de la Sagrada,40.94678,-5.64257
 Iberdrola ES-Conil de la Frontera Av. de la Música,36.28388,-6.08307
 Iberdrola ES-Cuenca Av. de los Reyes Católicos,40.0593,-2.13878
@@ -21195,9 +21197,9 @@ Lidl DK-Aabenraa Langebro,55.03513,9.41653
 Lidl DK-Kastrup Amager Landevej,55.61818,12.62787
 Lidl DK-Ribe Saltgade,55.33221,8.76766
 Lidl DK-Rødovre Roskildevej,55.6713,12.45544
+Lidl ES-Capdepera Av. Juan Carlos I,39.70357,3.44525
 Lidl ES-Sa Pobla Rda. Albufera,39.77564,3.0277
 Lidl ES-Sant Cugat del Vallès Av. de la Via Augusta,41.48727,2.06751
-Lidl ES-Son Moll Av. Juan Carlos I,39.70357,3.44525
 Lidl FI-Espoo Kukkaromäki,60.20847,24.63643
 Lidl FI-Espoo Kurjenkellontie,60.15892,24.70506
 Lidl FI-Heinola Kaivokatu,61.20482,26.03823,30
@@ -21352,6 +21354,7 @@ Lidl RO-Curtea de Argeș,45.14471,24.67318
 Lidl RO-Dumbrăvița,45.79191,21.23867
 Lidl RO-Focșani Aleea Parc,45.6787,27.18819
 Lidl RO-Focșani Piața Victoriei,45.69042,27.18148
+Lidl RO-Giurgiu Bulevardul Mihai Viteazul,43.89798,25.96282
 Lidl RO-Hațeg,45.6107,22.956
 Lidl RO-Iași Șos. Nicolina,47.14198,27.5795
 Lidl RO-Iași Șoseaua Moara de Foc,47.17309,27.55112
@@ -25614,6 +25617,7 @@ SW-Norderstedt DE-Norderstedt Am Hallenbad,53.68999,10.00121
 SW-Norderstedt DE-Norderstedt Beamtenlaufbahn,53.70653,9.99399
 SW-Norderstedt DE-Norderstedt Europaallee,53.68583,9.98865
 SW-Nordfriesland DE-Enge-Sande Lecker Straße,54.7401,8.95568
+SW-Nordfriesland DE-Niebüll Bahnhofstraße,54.78422,8.83263
 SW-Nürtingen DE-Nürtingen Mühlstraße,48.62839,9.33427
 SW-Oberkirch DE-Oberkirch Hammermatt,48.53636,8.06422,30
 SW-Olching DE-Olching Gewerbering,48.22721,11.33506
