@@ -3656,6 +3656,7 @@ Supercharger-V3 KR-Seoul-Daechi,37.507,127.0654
 Supercharger-V3 KR-Seoul-Episode Seocho,37.4897,127.0299
 Supercharger-V3 KR-Seoul-SangAm,37.5787,126.8946
 Supercharger-V3 KR-Shintanjin,36.42368,127.419685
+Supercharger-V4 KR-Siheung Expressway No.100 PanGyo,37.3832,126.85497
 Supercharger-V3 KR-Sokcho - Lotte Resort,38.180849,128.61186
 Supercharger-V3 KR-Sokcho-Hanwha Resort Seorak,38.208,128.5268
 Supercharger-V3 KR-Suncheon - Joryedong,34.9634,127.5257
@@ -3902,6 +3903,7 @@ Supercharger NO-Lavik,61.103869,5.51268
 Supercharger NO-Leinstrand,63.32504,10.30449,55
 Supercharger-V3 NO-Leira,60.969163,9.29164
 Supercharger-V4 NO-Leirfjord,66.0647,12.93408
+Supercharger-V4 NO-Lenkes,68.1451,13.6206
 Supercharger NO-Levanger,63.734517,11.281552
 Supercharger NO-Lier North,59.770663,10.26099
 Supercharger NO-Lier North,59.770833,10.262139
@@ -7003,7 +7005,8 @@ Supercharger US-Salt Lake City UT,40.74646,-111.90057
 Supercharger-V3 US-Salt Lake City UT S 300 W,40.73012,-111.90175
 Supercharger-V4 US-Sandy UT Saini Charge,40.5884,-111.90928
 Supercharger-V4 US-Scipio UT,39.25608,-112.11648
-Supercharger US-South Salt Lake City UT,40.72034,-111.88907
+Supercharger US-South Salt Lake City UT,40.72037,-111.88877
+Supercharger-V3 US-South Salt Lake UT S Main St,40.72437,-111.8909
 Supercharger-V3 US-St. George UT,37.07748,-113.5843
 Supercharger US-St. George UT,37.1265,-113.60175
 Supercharger-V4 US-St. George UT S Pioneer Rd,37.03313,-113.60827
@@ -25109,6 +25112,7 @@ Smatrics AT-Wiener Neustadt Wiener Straße,47.84544,16.24523
 Smatrics AT-Wolfsberg Grazer Straße,46.84614,14.8434
 Smatrics AT-Wolfsberg Spanheimerstraße,46.83685,14.8394
 Smatrics AT-Wörgl Innsbrucker Straße,47.48192,12.05786
+Smatrics CH-Unterbäch Kantonsstrasse,46.28755,7.8015
 Smatrics DE-Balingen Leibbrandstraße,48.24475,8.8772
 Smatrics DE-Eisenstadt Haidäcker-Park,47.8275,16.52437
 Smatrics DE-Heilbronn Weipertstraße,49.1488,9.2144
@@ -25683,6 +25687,7 @@ SW-Stralsund DE-Stralsund Fährwall,54.31797,13.09151
 SW-Stralsund DE-Stralsund Greifswalder Chaussee,54.3,13.09399
 SW-Stralsund DE-Stralsund Gustower Weg,54.27096,13.11507
 SW-Strausberg DE-Strausberg Herrenseeallee,52.55756,13.87258
+SW-Strausberg DE-Strausberg Lindenplatz,52.5789,13.88275
 SW-Stuttgart DE-Gerlingen Hauptstraße,48.79803,9.06156,20
 SW-Stuttgart DE-Stuttgart Hedelfinger Straße,48.76977,9.24844
 SW-Treuchtlingen DE-Treuchtlingen Fischergasse,48.95573,10.9098
@@ -27479,6 +27484,7 @@ Wien-Energie AT-Traiskirchen Tribuswinkel Neurißgasse,47.99123,16.27539
 Wien-Energie AT-Vösendorf SCS Ostring,48.10857,16.3193
 Wien-Energie AT-Wien Amerlingstraße,48.19703,16.35125
 Wien-Energie AT-Wien Antonigasse,48.2225,16.33746
+Wien-Energie AT-Wien Apollogasse,48.1979,16.34108
 Wien-Energie AT-Wien Austria Center,48.23459,16.41352
 Wien-Energie AT-Wien Beethovenplatz,48.20186,16.37725
 Wien-Energie AT-Wien Breite Gasse,48.20365,16.35691
@@ -27512,7 +27518,7 @@ Wien-Energie AT-Wien Schickgasse,48.2213,16.4572
 Wien-Energie AT-Wien Schiffmühlenstraße,48.22264,16.42653
 Wien-Energie AT-Wien Schillingstraße,48.25957,16.46992
 Wien-Energie AT-Wien Schnirchgasse,48.19426,16.41093
-Wien-Energie AT-Wien Schottenfeldgasse,48.20246,16.3432
+Wien-Energie AT-Wien Schottenfeldgasse,48.20246,16.3432,25
 Wien-Energie AT-Wien Schweglerstraße,48.19753,16.32864
 Wien-Energie AT-Wien Schönbrunner Straße,48.1831,16.32767,25
 Wien-Energie AT-Wien Schüttauplatz,48.22693,16.42402
@@ -27867,6 +27873,7 @@ AT Wels Messe,48.1522,14.01712
 AT Wien Flughafen,48.12022,16.56285
 AT Wien Heinrich-von-Buol-Gasse,48.26508,16.42383
 AT Wien Laxenburger Straße,48.1351,16.35504
+AT Wien macjingle,48.20218,16.3426,25
 AT Wien NTT Global Data Centers,48.15949,16.34173
 AT Wien WILD,48.26669,16.42352
 AT Wiener Neustadt Fachhochschule,47.83871,16.24843
