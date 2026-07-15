@@ -2894,6 +2894,7 @@ Supercharger FR-Toulouse,43.769238,1.361623
 Supercharger-V3 FR-Tournus,46.577333,4.899973,55
 Supercharger-V4 FR-Tours,47.37548,0.67016
 Supercharger-V4 FR-Treillières,47.27984,-1.59572
+Supercharger-V4 FR-Ussac,45.16718,1.48297
 Supercharger-V4 FR-Val-de-Meuse,47.99145,5.51278
 Supercharger-V4 FR-Val-de-Reuil,49.2488,1.18286
 Supercharger-V4 FR-Valence,44.91894,4.8781
@@ -8573,6 +8574,7 @@ Allego FR-Avranches Parc d activité de la Baie,48.65422,-1.34957
 Allego FR-Balaruc-le-Vieux Rue Tony Garnier,43.4628,3.6905
 Allego FR-Bayeux Bd d’Eindhoven,49.28444,-0.7055,25
 Allego FR-Beaucaire Route de Nîmes,43.81698,4.61474
+Allego FR-Brive-la-Gaillarde Rue Louis Taurisson,45.1454,1.48155
 Allego FR-Chalezeule Rte de Belfort,47.2629,6.0644,30
 Allego FR-Chalon-sur-Saône Rue de Paris,46.7986,4.84796,30
 Allego FR-Chalon-sur-Saône Rue Thomas Dumorey,46.77422,4.8589
@@ -14782,6 +14784,7 @@ EnelX IT-Barberino di Mugello Via del Lago,43.98206,11.2155,20
 EnelX IT-Bari Sardo Piazza Mercato,39.84293,9.64482
 EnelX IT-Bazzera,45.52535,12.25972
 EnelX IT-Bellano Via Martiri della Libertà,46.04078,9.2994
+EnelX IT-Bellano Via Venti Settembre,46.03982,9.30235
 EnelX IT-Bologna Via Marco Emilio Lepido,44.52117,11.26404
 EnelX IT-Bologna Via Stalingrado,44.51961,11.36264
 EnelX IT-Cagliari Viale Marconi,39.2255,9.12975
@@ -15725,7 +15728,7 @@ EVN AT-Eisenstadt Haidäckerstraße,47.825,16.532,25
 EVN AT-Ennsdorf Straße 3,48.22133,14.5061
 EVN AT-Grafenwörth Gewerbepark,48.41187,15.776
 EVN AT-Grimmenstein Wechselbundesstrasse,47.63344,16.13192
-EVN AT-Gänserndorf Neusiedler Straße,48.3351,16.71196
+EVN AT-Gänserndorf Neusiedler Straße,48.3351,16.71196,30
 EVN AT-Göllersdorf Hammerschmiedstraße,48.49825,16.11453
 EVN AT-Harmannsdorf Kirchengasse,48.3917,16.37124
 EVN AT-Herzogenburg St. Pöltner Straße,48.27414,15.6927
@@ -24019,6 +24022,7 @@ Repsol ES-Madrid CR M-301,40.36628,-3.65532
 Repsol ES-Madrid Moncloa-Aravaca,40.4609,-3.75761
 Repsol ES-Madrid P.º de la Castellana,40.44545,-3.69082
 Repsol ES-Madrid San Blas-Canillejas,40.44891,-3.56524
+Repsol ES-Manacor Via Palma,39.5778,3.21014
 Repsol ES-Murcia Av. Primero de Mayo,37.9875,-1.115
 Repsol ES-Ripollet B-141,41.50009,2.15096
 Repsol ES-Sabadell Carrer d’Urgell,41.56104,2.10075
