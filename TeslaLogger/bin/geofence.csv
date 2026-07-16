@@ -3251,6 +3251,7 @@ Supercharger-V3 IE-Enfield,53.406101,-6.838143
 Supercharger-V4 IE-Letterkenny,54.95045,-7.7129
 Supercharger-V4 IE-Longford,53.74114,-7.80391
 Supercharger-V4 IE-Mallow,52.13163,-8.64577
+Supercharger-V4 IE-Sligo,54.32865,-8.50272
 Supercharger IE-Tralee,52.260703,-9.659141
 
 Supercharger-V4 IN-Gurgaon DLF One Horizon Centre,28.45167,77.09706
@@ -3335,7 +3336,7 @@ Supercharger IT-Imperia,43.892498,8.039031
 Supercharger-V4 IT-Ivrea,45.446661,7.853005
 Supercharger-V4 IT-Lagonegro,40.13273,15.76296
 Supercharger-V4 IT-Lecce,40.37623,18.1424
-Supercharger-V4 IT-Livorno,43.54977,10.3396
+Supercharger-V4 IT-Livorno,43.5498,10.33986
 Supercharger-V4 IT-Lodi,45.27676,9.45862
 Supercharger-V4 IT-L’Aquila,42.35998,13.3789
 Supercharger IT-Magliano Sabina,42.372085,12.471703
@@ -4068,7 +4069,7 @@ Supercharger-V4 PL-Ostróda,53.68538,19.99991
 Supercharger-V4 PL-Piła,53.15074,16.77015
 Supercharger-V4 PL-Poznań,52.40033,16.89305
 Supercharger-V4 PL-Poznań Głogowska,52.3532,16.83784
-Supercharger PL-Radom,51.379569,21.125477
+Supercharger-V4 PL-Radom,51.37953,21.12552
 Supercharger-V4 PL-Rumia,54.585732,18.37139
 Supercharger-V4 PL-Stryków,51.89258,19.5928
 Supercharger-V4 PL-Szczecin,53.381935,14.670539
@@ -4522,6 +4523,7 @@ Supercharger-V3 US-Castaic CA,34.45213,-118.61606
 Supercharger US-Cerritos CA - Los Cerritos Center,33.86434,-118.09192
 Supercharger-V3 US-Chatsworth CA,34.23802,-118.5894
 Supercharger US-Chico CA,39.72664,-121.80243
+Supercharger-V4 US-Chino CA 12423 Central Ave,34.02757,-117.6882
 Supercharger-V4 US-Chino CA Central Ave,34.03325,-117.69027
 Supercharger-V4 US-Chino CA Pine Ave,33.95737,-117.62366
 Supercharger-V3 US-Chino Hills CA,34.0023,-117.73028
@@ -6650,6 +6652,7 @@ Supercharger-V4 US-New Castle PA,41.01412,-80.39777
 Supercharger-V4 US-Newburg PA,40.15218,-77.61212
 Supercharger-V4 US-Newtown PA,40.22825,-74.90337
 Supercharger US-North Huntingdon PA,40.31408,-79.6714
+Supercharger-V3 US-North Huntingdon PA Ronda Ct,40.31676,-79.68386
 Supercharger-V3 US-North Wales PA,40.21872,-75.2475
 Supercharger-V4 US-Philadelphia PA,39.96523,-75.1326
 Supercharger US-Philadelphia PA - Center City,39.95145,-75.15846
@@ -7156,6 +7159,7 @@ Supercharger-V4 US-Federal Way WA S 320th St,47.31488,-122.316
 Supercharger-V3 US-Forks WA,47.94305,-124.3853
 Supercharger-V3 US-George WA,47.08112,-119.86192
 Supercharger US-Issaquah WA,47.54745,-122.03972
+Supercharger-V4 US-Issaquah WA NW Gilman Blvd,47.54318,-122.04837
 Supercharger-V3 US-Kelso WA,46.14327,-122.8989
 Supercharger US-Kennewick WA,46.19857,-119.16218
 Supercharger-V3 US-Kirkland WA,47.70913,-122.18333
@@ -10571,6 +10575,7 @@ Clever DK-Gråsten Sundsnæs,54.9104,9.58843
 Clever DK-Gudenå,56.449,10.00198
 Clever DK-Herning Merkurvej,56.13552,8.99657
 Clever DK-Hjørring Bispetorv,57.45526,9.99397
+Clever DK-Kerteminde Martin Kolds Vej,55.45214,10.66218
 Clever DK-Kolding Skovvangen,55.51545,9.46155
 Clever DK-Køge Lyngvej,55.48672,12.15743
 Clever DK-Køge Servicevej,55.48925,12.1614
@@ -12135,6 +12140,7 @@ ElDrive RO-Târgu Mureș Strada Gheorghe Doja,46.52475,24.53758
 
 ELE DE-Gelsenkirchen Husemannstraße,51.50603,7.09896,20
 
+Electra AT-Amstetten Oiden,48.13345,14.83784
 Electra AT-Graz Kärntner Straße,47.0448,15.41478
 Electra AT-Linz Wankmüllerhofstraße,48.28068,14.30622
 Electra BE-Antwerpen Herentalsebaan,51.20978,4.4586
@@ -15018,6 +15024,7 @@ Energie-Burgenland AT-Podersdorf am See Strandgasse,47.85736,16.83003
 Energie-Burgenland AT-Steinberg-Dörfl Burgenland Straße,47.48975,16.49405
 
 Energie-Klagenfurt AT-Klagenfurt 8.-Mai-Straße,46.62319,14.3072
+Energie-Klagenfurt AT-St. Kanzian am Klopeiner See Schulstraße,46.60946,14.57465
 
 Energie-Oberösterreich AT-Bad Ischl Götzstraße,47.71369,13.62392
 Energie-Oberösterreich AT-Braunau am Inn Auf der Haiden,48.25,13.04723
@@ -23946,6 +23953,7 @@ reev DE-Todtnau Notschrei-Passhöhe,47.8758,7.91087
 reev DE-Triefenstein Schulstraße,49.80243,9.58202
 reev DE-Wilhelmshaven Südstrand,53.51328,8.14338
 
+Regioladen DE-Bad Mergentheim Hans-Heinrich-Ehrler-Platz,49.4896,9.77288
 Regioladen DE-Bad Mergentheim Oskar-Weitbrecht-Weg,49.48655,9.7904
 Regioladen DE-Bad Mergentheim Zaisenmühlstraße,49.49303,9.76995
 Regioladen DE-Föritztal Steinräum,50.3435,11.21184
