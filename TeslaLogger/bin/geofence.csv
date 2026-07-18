@@ -1928,6 +1928,7 @@ Supercharger-V4 CZ-Jamné,49.428188,15.701332
 Supercharger-V3 CZ-Kamenný Újezd,48.887754,14.436229
 Supercharger-V3 CZ-Lovosice,50.511713,14.052644,15
 Supercharger CZ-Olomouc,49.560857,17.262371
+Supercharger CZ-Olomouc,49.5617,17.2625,10
 Supercharger-V4 CZ-Ostrava,49.80018,18.22383
 Supercharger CZ-Plzeň,49.72512,13.326045
 Supercharger-V4 CZ-Praha Štěrboholy,50.07136,14.54087
@@ -2404,7 +2405,7 @@ Supercharger-V3 DK-Maribo,54.779188,11.477063,40
 Supercharger DK-Middelfart,55.511311,9.765029
 Supercharger-V4 DK-Nyborg,55.30884,10.80969,30
 Supercharger-V3 DK-Nykøbing Mors,56.786984,8.83028,25
-Supercharger-V4 DK-Næstved,55.2555,11.80294
+Supercharger-V4 DK-Næstved,55.25622,11.80634
 Supercharger DK-Nørre Alslev,54.899885,11.89693
 Supercharger-V3 DK-Odense,55.386324,10.426873
 Supercharger DK-Randers,56.43368,10.05541
@@ -7927,6 +7928,7 @@ Aldi DE-Öhringen Steinsfeldle,49.18992,9.49556
 Aldi HU-Győr Fehérvári út,47.68239,17.6557
 
 Allego AT-Brunn am Gebirge Johann Steinböck-Straße,48.10617,16.31035
+Allego AT-Ried im Innkreis Griesgasse,48.2063,13.48266
 Allego AT-Seiersberg-Pirka Werschweg,47.01013,15.4118
 Allego AT-Wien Albert-Schweitzer-Gasse,48.20742,16.21828
 Allego AT-Ybbs Bahnhofstraße,48.17316,15.08468
@@ -15015,6 +15017,8 @@ Energa PL-Gdańsk aleja Grunwaldzka,54.40231,18.5708
 Energa PL-Koszalin Jana Pawła II,54.2065,16.18583
 Energa PL-Słupsk plac Zwycięstwa,54.46441,17.0281
 
+Energie AT-Vöcklabruck Robert Kunz-Straße,48.0023,13.64898
+
 Energie-Architektur DE-Leipzig Gießerstraße,51.32458,12.32733,30
 
 Energie-Burgenland AT-Eisenstadt Ruster Straße,47.83533,16.52882
@@ -15469,6 +15473,7 @@ ESWE DE-Wiesbaden Stielstraße,50.05,8.20084
 ESWE DE-Wiesbaden Warmer Damm,50.08353,8.24501
 ESWE DE-Wiesbaden Wilfried-Ries-Straße,50.1023,8.19127
 
+etecnic AD-Pas de la Casa Port d’Envalira,42.53774,1.7276
 etecnic ES-Alberic Av. de la Muntanyeta,39.1198,-0.5243
 etecnic ES-Amposta Avinguda Alcalde Palau,40.71241,0.57919
 etecnic ES-Calafell Ctra. Sanatori,41.1897,1.56753
@@ -15748,6 +15753,7 @@ EVN AT-Harmannsdorf Kirchengasse,48.3917,16.37124
 EVN AT-Herzogenburg St. Pöltner Straße,48.27414,15.6927
 EVN AT-Herzogenburg Traismauerstraße,48.29015,15.69495
 EVN AT-Himberg bei Wien Hofer Straße,48.07175,16.45776
+EVN AT-Hollabrunn Theodor Körner-Gasse,48.56197,16.0793
 EVN AT-Horn Prager Straße,48.66136,15.65458
 EVN AT-Höbenbach Ortsstraße,48.35014,15.64742
 EVN AT-Kematen an der Ybbs 35. Straße,48.03756,14.77816
@@ -15802,6 +15808,7 @@ EVN AT-Wiener Neustadt Puchberger Straße,47.8045,16.2103,11
 EVN AT-Wiener Neustadt Puchberger Straße,47.80467,16.21036,11
 EVN AT-Wiener Neustadt Stadionstraße,47.82817,16.24952
 EVN AT-Wolkersdorf Julius Bittner Platz,48.3852,16.51515
+EVN AT-Ybbs an der Donau Bahnhofstraße,48.16822,15.08626
 EVN AT-Ybbsitz Alte Poststraße,47.94852,14.89427
 EVN AT-Zwettl Gartenstraße,48.60423,15.16982
 EVN DE-Nordhausen Engelsburg,51.50314,10.7934
@@ -18369,6 +18376,7 @@ illwerke-vkw AT-Schwarzenberg Hof,47.41395,9.85515
 illwerke-vkw AT-Sibratsgfäll Dorf,47.42786,10.03665
 illwerke-vkw AT-Silbertal Dorfstraße,47.09435,9.98052
 illwerke-vkw AT-Sulzberg Dorf,47.52106,9.91386,70
+illwerke-vkw AT-Vils Stegen,47.5495,10.6581
 illwerke-vkw AT-Wolfurt Brückenweg,47.48135,9.74314
 illwerke-vkw DE-Balderschwang Dorf,47.46599,10.10579
 illwerke-vkw DE-Lindenberg im Allgäu Sedanstraße,47.60273,9.88353
@@ -19892,6 +19900,7 @@ Kaufland HR-Kutina Ul. kneza Ljudevita Posavskog,45.47607,16.7778
 Kaufland HR-Makarska Ul. Stjepana Ivičevića,43.28502,17.02978
 Kaufland HR-Poreč Ul. Mate Vlašića,45.23206,13.6205
 Kaufland HR-Pula Ul. Jurja Žakna,44.87824,13.86323
+Kaufland HR-Rijeka Zametska ul.,45.34078,14.3991
 Kaufland HR-Rovinj Ulica Spinè,45.0893,13.65603
 Kaufland HR-Sesvete Bistrička ul.,45.8334,16.10836
 Kaufland HR-Trogir kneza Trpimira,43.5334,16.28098
@@ -21680,6 +21689,7 @@ Mer AT-Spittal an der Drau Villacher Straße,46.78712,13.52383
 Mer AT-St. Georgen im Attergau Am See-Ring,47.9301,13.5031
 Mer AT-Steyr Haratzmüllerstraße,48.04257,14.4354
 Mer AT-Steyr Marlen-Haushofer-Straße,48.05511,14.42266
+Mer AT-Straßwalchen Salzburgerstraße,47.96944,13.24756
 Mer AT-Telfs Untermarktstraße,47.30781,11.0767
 Mer AT-Tulln an der Donau Königstetter Straße,48.31984,16.08209
 Mer AT-Unterweitersdorf Radingdorf,48.35939,14.48012
@@ -21689,7 +21699,7 @@ Mer AT-Wien Hietzinger Kai,48.19169,16.27922,20
 Mer AT-Wien Seestadtstraße,48.21591,16.50534,30
 Mer AT-Wien Triester Straße,48.16546,16.34595
 Mer AT-Wiener Neustadt Nikolaus-August-Otto-Straße,47.84387,16.24676
-Mer AT-Ybbs an der Donau Bergland Center,48.16066,15.1065,30
+Mer AT-Ybbs an der Donau Bergland Center,48.16083,15.10636,30
 Mer AT-Zell am See Prof.-F.-Porsche-Straße,47.29585,12.79571
 Mer AT-Zwettl Andre Freyskorn Straße,48.60187,15.18669
 Mer DE-Abensberg Max Bronold Straße,48.81382,11.84555
@@ -24333,7 +24343,8 @@ Shell AT-Neudörfl Hauptstraße,47.80113,16.27548
 Shell AT-Pernitz Hauptstraße,47.89666,15.966
 Shell AT-Raststation Ansfelden,48.21216,14.282
 Shell AT-Raststation Eben,47.42114,13.383
-Shell AT-Raststation Walserberg,47.76781,12.94826
+Shell AT-Raststation Walserberg Nord,47.7687,12.9454
+Shell AT-Raststation Walserberg Süd,47.7678,12.94826
 Shell AT-Schwanenstadt Vor der Au,48.04781,13.78082,60
 Shell AT-Siegendorf Ödenburger Straße,47.77757,16.52619
 Shell AT-St. Marienkirchen Andiesen,48.39092,13.42519
