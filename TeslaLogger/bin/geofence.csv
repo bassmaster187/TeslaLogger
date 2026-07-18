@@ -183,7 +183,7 @@ Supercharger-V4 AU-Kanica VIC,-36.37735,141.2369
 Supercharger-V3 AU-Karrinyup WA,-31.87727,115.77614
 Supercharger AU-Keith SA,-36.09908,140.35565
 Supercharger-V3 AU-Kerang VIC,-35.7322,143.91998
-Supercharger-V4 AU-Kew NSW,-31.63426,152.72505
+Supercharger-V4 AU-Kew NSW,-31.63447,152.72556
 Supercharger-V4 AU-Keysborough VIC,-37.99243,145.1447
 Supercharger-V3 AU-Kilmore VIC,-37.2863,144.94744
 Supercharger-V3 AU-Kings Park WA,-31.95336,115.83908
@@ -3337,6 +3337,7 @@ Supercharger-V4 IT-Ivrea,45.446661,7.853005
 Supercharger-V4 IT-Lagonegro,40.13273,15.76296
 Supercharger-V4 IT-Lecce,40.37623,18.1424
 Supercharger-V4 IT-Livorno,43.5498,10.33986
+Supercharger-V4 IT-Livorno,43.5808,10.27943,20
 Supercharger-V4 IT-Lodi,45.27676,9.45862
 Supercharger-V4 IT-L’Aquila,42.35998,13.3789
 Supercharger IT-Magliano Sabina,42.372085,12.471703
@@ -3739,6 +3740,7 @@ Supercharger-V3 MX-Valladolid,20.7442,-88.23158
 Supercharger-V3 MX-Valle de Bravo,19.16325,-100.11288
 Supercharger-V3 MX-Villa Ahumada,30.6239,-106.5146
 Supercharger-V3 MX-Villa Hidalgo,22.51993,-100.6643
+Supercharger-V3 MX-Villahermosa,18.00208,-92.94702
 Supercharger-V3 MX-Zapopan,20.71017,-103.41263
 
 Supercharger-V3 MY-Alor Gajah Freeport A’Famosa,2.44434,102.2055
@@ -4541,6 +4543,7 @@ Supercharger-V4 US-Colfax CA,39.09484,-120.95197
 Supercharger-V3 US-Commerce CA,34.00693,-118.14955
 Supercharger US-Concord CA,37.9722,-122.05662
 Supercharger-V3 US-Concord CA - Diamond Blvd,37.9698,-122.0586
+Supercharger-V4 US-Concord CA Ygnacio Valley Rd,37.95087,-121.9572
 Supercharger-V3 US-Copperopolis CA,37.9728,-120.6534
 Supercharger US-Corning CA,39.92643,-122.1984
 Supercharger US-Corona CA,33.82638,-117.51538
@@ -6455,6 +6458,7 @@ Supercharger US-Cincinnati OH Marburg Avenue,39.16285,-84.4265
 Supercharger-V3 US-Columbus OH - Hilliard Rome Road,39.98357,-83.15064
 Supercharger US-Columbus OH Supercharger,39.97432,-83.0008
 Supercharger-V4 US-Cortland OH,41.27707,-80.77374
+Supercharger-V4 US-Dalton OH Pioneer Coffee,40.7958,-81.69623
 Supercharger US-Dayton OH,39.85862,-84.27693
 Supercharger-V4 US-Dayton OH N Springboro Pike,39.66992,-84.22026
 Supercharger US-Dublin OH,40.0932,-83.09226
@@ -7634,7 +7638,7 @@ Aldi DE-Emmerich am Rhein Moritz-von-Nassau-Straße,51.84653,6.23439
 Aldi DE-Emmerich Bahnhofstraße,51.83344,6.25211
 Aldi DE-Engstingen Keltenstraße,48.38982,9.29084
 Aldi DE-Erftstadt Köttinger Straße,50.8134,6.81141,30
-Aldi DE-Erlangen Gundstraße 2,49.58353,10.96523,10
+Aldi DE-Erlangen Gundstraße,49.58354,10.96522
 Aldi DE-Erlangen Henkestraße,49.59353,11.01814
 Aldi DE-Essen Am Luftschacht,51.46115,7.06619
 Aldi DE-Essenbach Daimlerstraße,48.58689,12.18961,20
@@ -8631,6 +8635,8 @@ Allego SE-Örkelljunga,56.28558,13.33716
 
 AllElectric HU-Kiskunfélegyháza X. körzet tanya,46.67529,19.82032,20
 AllElectric HU-Tolna Gém utca,46.42068,18.7591
+
+Allgäuer-Kraftwerke DE-Bolsterlang Hörnerstraße,47.46288,10.228
 
 AllgäuStrom DE-Fischen im Allgäu An der Breitach,47.42586,10.2659
 AllgäuStrom DE-Immenstadt Kirchsteige,47.56849,10.19071
@@ -12298,6 +12304,7 @@ electrip GR-Igoumenitsa Ηγουμενίτσα Leof. 49 Martiron,39.49733,20.265
 electrip GR-Zografou Porto Elea Camping,40.16946,23.8646
 electrip HR-Jablanovec Zaprešićka Westgate,45.87226,15.82789
 electrip HR-Josipdol D23,45.18348,15.28681
+electrip HR-Krnjak Budačka Rijeka,45.31045,15.6153
 electrip HR-Osijek Svilajska ul.,45.56092,18.63974
 electrip HR-Rijeka Osječka ul.,45.34167,14.42436
 electrip HR-Zagreb Oreškovićeva ulica,45.75946,15.98306
@@ -14070,7 +14077,7 @@ EnBW DE-Pfaffenhofen an der Ilm Joseph-Fraunhofer-Straße,48.53575,11.5137
 EnBW DE-Pfalzgrafenweiler Burgstraße,48.5249,8.56363
 EnBW DE-Pfarrkirchen Südeinfahrt,48.42138,12.94253
 EnBW DE-Pforzheim Karlsruher Straße,48.90233,8.659
-EnBW DE-Pforzheim Konstanzer Straße,48.89893,8.6689
+EnBW DE-Pforzheim Konstanzer Straße,48.89942,8.66962
 EnBW DE-Pforzheim Rastatter Straße,48.89976,8.66728
 EnBW DE-Pfullendorf Theuerbach,47.9237,9.2511
 EnBW DE-Pfullingen Karl-von-Drais-Straße,48.4812,9.2305
@@ -17265,6 +17272,7 @@ Fastned DE-Rastplatz Fuchsgrund Süd,52.21063,8.93348
 Fastned DE-Rastplatz Jalm,54.63654,9.44008
 Fastned DE-Rastplatz Löwenburg,52.21145,8.9318
 Fastned DE-Rastplatz Neufelder Heide,51.42335,6.5019
+Fastned DE-Rastplatz Uhry Nord,52.30654,10.8441
 Fastned DE-Rastplatz Vareler Wald,53.3911,8.1127
 Fastned DE-Raststätte Schweinfurt-West,50.06236,10.14527,30
 Fastned DE-Rodgau Feldstraße,50.00242,8.8859
@@ -19004,6 +19012,7 @@ Ionity FR-Poitiers Jaunay-Clan,46.70458,0.37127
 Ionity FR-Portes d’Angers (Sud),47.50047,-0.49057
 Ionity FR-Quintal Allée des Fontanelles,45.87564,6.06957
 Ionity FR-Rely,50.57309,2.37719
+Ionity FR-Roye Rue Colonel Sorlin,49.70823,2.7742,40
 Ionity FR-Saint Léger Est,45.6101,-0.59865
 Ionity FR-Saint-Pantaléon-de-Larche A89,45.1607,1.44086,20
 Ionity FR-Saint-Pantaléon-de-Larche A89,45.16109,1.44072,20
@@ -19285,7 +19294,7 @@ IZIVIA FR-Munster Rue Hilti,48.04428,7.16058
 IZIVIA FR-Niort Avenue de la Rochelle,46.31262,-0.47891
 IZIVIA FR-Rethel D985,49.5211,4.37034
 IZIVIA FR-Rots Rue des Drapeaux,49.19807,-0.457
-IZIVIA FR-Roye Rue Colones Sorlin,49.70751,2.77407
+IZIVIA FR-Roye Rue Colones Sorlin,49.7075,2.77407,40
 IZIVIA FR-Saint-Malo Avenue de Launay Breton,48.6259,-1.9907
 IZIVIA FR-Saint-Malo Rue de la Grassinais,48.6219,-1.98666
 IZIVIA FR-Saint-Valery-sur-Somme Cavée Lévêque,50.17327,1.63742
@@ -19581,7 +19590,7 @@ Kaufland DE-Ettenheim Am Bahndamm,48.26078,7.80947
 Kaufland DE-Fellbach Stuttgarter Straße,48.81348,9.2665
 Kaufland DE-Feuchtwangen Dinkelsbühler Straße,49.16188,10.32634
 Kaufland DE-Forst (Lausitz) Promenade,51.74492,14.6465
-Kaufland DE-Frankenberg Jochen-Köhler-Straße,50.91373,13.02944
+Kaufland DE-Frankenberg Jochen-Köhler-Straße,50.91374,13.0301
 Kaufland DE-Frankenthal (Pfalz) Wormser Straße,49.54662,8.35233
 Kaufland DE-Frankfurt (Oder) Josef-Gesing-Straße,52.34893,14.52003
 Kaufland DE-Frankfurt am Main Wächtersbacher Straße,50.13222,8.74936
@@ -24019,6 +24028,7 @@ Repower IT-Malcesine Via Gardesana,45.77346,10.81333
 Repsol ES-Alcorcón Camino de Leganes,40.32415,-3.8474
 Repsol ES-Altafulla N-340,41.14004,1.36536
 Repsol ES-Arroyo de la Encomienda Ctra. Salamanca,41.62276,-4.77373
+Repsol ES-Artà Carrer de Ciutat,39.68967,3.34694
 Repsol ES-Autovía del Noroeste,41.00997,-4.66524
 Repsol ES-Carbajosa de la Sagrada C. Segunda,40.93895,-5.65541
 Repsol ES-Jaca Av. Regimiento de Galicia,42.56675,-0.55444
@@ -26207,6 +26217,7 @@ TEAG DE-Petersberg Billerer Straße,50.55923,9.72693
 TEAG DE-Petersberg Eichenweg,50.96943,11.85505
 TEAG DE-Reichenbach Lengenfelder Straße,50.61515,12.31145
 TEAG DE-Reiskirchen Carl-Benz-Straße,50.5979,8.82288,25
+TEAG DE-Rockenberg Burgweg,50.42386,8.74087
 TEAG DE-Rosdorf Rischenweg,51.50906,9.90927,20
 TEAG DE-Rudolstadt Gartenstraße,50.72079,11.34988
 TEAG DE-Rudolstadt Schwarzburger Chaussee,50.71355,11.32002
