@@ -7216,6 +7216,7 @@ Supercharger US-Vancouver WA,45.72153,-122.66385
 Supercharger-V3 US-Vancouver WA - NE Vancouver Mall Drive,45.6596,-122.58353
 Supercharger-V3 US-Vancouver WA - Northeast Fourth Plain Boulevard,45.64564,-122.60148
 Supercharger-V4 US-Vancouver WA NE Andresen Rd,45.6382,-122.59894
+Supercharger-V4 US-Wenatchee WA,47.44216,-120.3264
 Supercharger-V4 US-Woodinville WA,47.75884,-122.15552
 Supercharger-V3 US-Yakima WA,46.60965,-120.49203
 Supercharger-V3 US-Yakima WA - East Yakima Avenue,46.6053,-120.48262
@@ -15000,6 +15001,7 @@ enercity DE-Hannover Sutelstraße,52.40879,9.80089
 enercity DE-Hannover Theaterstraße,52.37416,9.74346
 enercity DE-Hannover Tiergartenstraße,52.36144,9.82834
 enercity DE-Hannover Tiergartenstraße,52.36187,9.8324
+enercity DE-Hannover Volgersweg,52.3774,9.74527
 enercity DE-Hannover Von-Alten-Allee,52.36536,9.71784
 enercity DE-Hannover Wiehbergstraße,52.33566,9.76256
 enercity DE-Hannover Windaustraße,52.40637,9.73542
@@ -15736,6 +15738,7 @@ EVN AT-Amstetten Eggersdorfer Straße,48.12087,14.87444
 EVN AT-Amstetten Kupferstraße,48.11669,14.89228
 EVN AT-Amstetten Oiden,48.13194,14.8403,20
 EVN AT-Amstetten Otto-Schott-Straße,48.11753,14.91083
+EVN AT-Amstetten Waidhofner Straße,48.12153,14.86857
 EVN AT-Amstetten Ybbsstraße,48.11398,14.87068
 EVN AT-Bruck an der Leitha Eco-Plus-Park 4.Straße,48.03511,16.80851
 EVN AT-Brunn am Gebirge Johann Steinböck-Straße,48.1055,16.3103
@@ -15769,6 +15772,7 @@ EVN AT-Mank Schulstraße,48.11077,15.34099,30
 EVN AT-Mank Wieselburger Straße,48.11364,15.33695
 EVN AT-Maria Ellend Marienring,48.1091,16.68283
 EVN AT-Maria Enzersdorf Südstadtzentrum,48.09522,16.31016
+EVN AT-Melk Wiener Straße,48.22538,15.34864
 EVN AT-Mistelbach Ernstbrunnerstraße,48.5607,16.56084
 EVN AT-Mistelbach Hüttendorfweg,48.56149,16.55836
 EVN AT-Perchtoldsdorf Mühlgasse,48.12359,16.29318
@@ -15790,6 +15794,7 @@ EVN AT-St. Pölten Pottenbrunner Hauptstraße,48.23851,15.69444
 EVN AT-St. Pölten Stattersdorfer Hauptstraße,48.19738,15.64104
 EVN AT-Stockerau Horner Straße,48.38807,16.18479
 EVN AT-Stockerau Rudolf-Hirsch-Straße,48.38117,16.23934
+EVN AT-Traismauer Herzogenburger Straße,48.35283,15.73994
 EVN AT-Tulln an der Donau Frauentorgasse,48.32718,16.05535
 EVN AT-Tulln an der Donau Langenlebarner Straße,48.32822,16.08246
 EVN AT-Tulln an der Donau Staasdorfer Straße,48.32366,16.05867
@@ -17974,6 +17979,7 @@ HadSol DE-Bremen Fangturm,53.0792,8.79823,25
 
 Harz-Energie DE-Altenau Torfhaus,51.80391,10.53587
 Harz-Energie DE-Braunlage Am Amtsweg,51.73147,10.613
+Harz-Energie DE-Goslar Am Bocksberg,51.85706,10.34277
 Harz-Energie DE-Herzberg am Harz Osteroder Straße,51.6557,10.33391
 
 Helen FI-Espoo Piispansilta,60.16177,24.73858
@@ -22081,7 +22087,6 @@ Morbihan FR-Plouharnel Rue du Préleran,47.59906,-3.11242,25
 Morbihan FR-Sarzeau,47.54678,-2.72131,25
 Morbihan FR-Vannes Rue Alain Gerbault,47.66539,-2.73089
 
-MOVE CH-Adliswil Rastplatz Aspholz,47.32072,8.53416
 MOVE CH-Au Hauptstrasse,47.43289,9.63415
 MOVE CH-Bern Hallerstrasse,46.95472,7.43838
 MOVE CH-Bern Klösterlistutz,46.94962,7.45947
@@ -22119,6 +22124,7 @@ MOVE CH-Münchenstein Weidenstrasse,47.51344,7.6161
 MOVE CH-Neuenhof Zürcherstrasse,47.45097,8.32731
 MOVE CH-Niedergösgen Hauptstrasse,47.37215,7.99156
 MOVE CH-Pfäffikon Hochstrasse,47.36714,8.78277
+MOVE CH-Rastplatz Aspholz,47.3207,8.53417
 MOVE CH-Rastplatz Birrhard,47.42953,8.23598
 MOVE CH-Rastplatz Chilchbühl,47.14448,8.1836
 MOVE CH-Rastplatz Chölfeld,47.11504,7.57819
@@ -22133,6 +22139,7 @@ MOVE CH-Rastplatz Mumpf,47.5451,7.93207
 MOVE CH-Rastplatz Mumpf,47.5456,7.9321
 MOVE CH-Rastplatz Mühlematt,47.4284,7.80916
 MOVE CH-Rastplatz Othmarsingen,47.4021,8.20731
+MOVE CH-Rastplatz Stegen,47.53073,8.85218
 MOVE CH-Rastplatz Teufengraben,47.3332,7.8214
 MOVE CH-Raststätte Glarnerland,47.13802,9.0503,65
 MOVE CH-Raststätte Grauholz,46.99015,7.47513,30
@@ -27832,6 +27839,7 @@ Zunder ES-Área de servicio Quintanilla Norte,42.0224,-5.8536
 ΔΕΗ-blue GR-Lamia Λαμίας Τάσου Ισαάκ,38.89955,22.44928
 ΔΕΗ-blue GR-Lefkada Λευκάδα Anatoliki Paralia Lefkadas,38.82974,20.71132
 ΔΕΗ-blue GR-Lefkada Λευκάδα Perifereiaki Odos,38.82698,20.7033
+ΔΕΗ-blue GR-Nafpaktos Ναύπακτος Παπαφλέσσα,38.38783,21.81226
 ΔΕΗ-blue GR-Patra Πάτρα N.E.O. Patron-Athinon,38.2757,21.76228
 ΔΕΗ-blue GR-Patra Πάτρα Palea EO Korinthou Patron,38.29132,21.78213
 ΔΕΗ-blue GR-Peta Πέτα Ag. Dimitrios Ionia Odos,39.15794,21.01325
