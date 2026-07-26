@@ -2658,6 +2658,13 @@ namespace TeslaLogger
                 // Log("IsDriving");
 
                 Tools.SetThreadEnUS();
+                if (resultContent == null || resultContent == "NULL")
+                {
+                    Log("IsDriving = NULL!");
+                    Thread.Sleep(10000);
+                    return false;
+                }
+
                 dynamic jsonResult = JsonConvert.DeserializeObject(resultContent);
                 dynamic drive_state = jsonResult["response"]["drive_state"];
                 _ = long.TryParse(drive_state["timestamp"].ToString(), out long ts);
