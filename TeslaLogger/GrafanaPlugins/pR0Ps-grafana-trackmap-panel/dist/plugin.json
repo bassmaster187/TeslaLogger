@@ -22,7 +22,7 @@
       { "name": "Chose what map to display the data on", "path": "img/satellite-picker.jpg" }
     ],
     "version": "3.0.0",
-    "updated": "2026-08-03"
+    "updated": "2026-08-04"
   },
   "dependencies": {
     "grafanaDependency": ">=10.0.0",
