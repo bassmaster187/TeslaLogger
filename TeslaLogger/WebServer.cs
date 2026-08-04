@@ -680,6 +680,8 @@ namespace TeslaLogger
                 p = FileManager.GetFilePath(TLFilename.SettingsFilename);
             else if (filename == "geofence-private.csv")
                 p = FileManager.GetFilePath(TLFilename.GeofencePrivateFilename);
+            else if (filename == "dashboardlinks.txt")
+                p = "/etc/teslalogger/dashboardlinks.txt";
 
             System.Diagnostics.Debug.WriteLine("Webserver getfile: " + p);
 
