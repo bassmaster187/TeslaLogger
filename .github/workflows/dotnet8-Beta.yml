@@ -5,11 +5,13 @@ name: .NET8 Beta
 
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - 'NET8'
+      - 'NET8**'
   
 jobs:
   build:
-    if: github.ref == 'refs/heads/NET8'
-
     runs-on: ubuntu-latest
 
     steps:
