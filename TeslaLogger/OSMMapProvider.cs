@@ -65,6 +65,7 @@ namespace TeslaLogger
                     Arguments = arguments,
                     UseShellExecute = false,
                     RedirectStandardOutput = true,
+                    RedirectStandardError = true,
                     CreateNoWindow = true
                 }
             })
@@ -78,7 +79,16 @@ namespace TeslaLogger
                 {
                     Logfile.Log(process.StandardOutput.ReadLine());
                 }
+                string stderr = process.StandardError.ReadToEnd();
+                if (!string.IsNullOrEmpty(stderr))
+                {
+                    Logfile.Log("OSMMapGenerator stderr: " + stderr);
+                }
                 process.WaitForExit();
+                if (process.ExitCode != 0)
+                {
+                    Logfile.Log("OSMMapGenerator exited with code " + process.ExitCode);
+                }
             }
             if (File.Exists(tempfile))
             {
@@ -157,6 +167,7 @@ namespace TeslaLogger
                     Arguments = arguments,
                     UseShellExecute = false,
                     RedirectStandardOutput = true,
+                    RedirectStandardError = true,
                     CreateNoWindow = true
                 }
             })
@@ -170,7 +181,16 @@ namespace TeslaLogger
                 {
                     Logfile.Log(process.StandardOutput.ReadLine());
                 }
+                string stderr = process.StandardError.ReadToEnd();
+                if (!string.IsNullOrEmpty(stderr))
+                {
+                    Logfile.Log("OSMMapGenerator stderr: " + stderr);
+                }
                 process.WaitForExit();
+                if (process.ExitCode != 0)
+                {
+                    Logfile.Log("OSMMapGenerator exited with code " + process.ExitCode);
+                }
             }
             if (File.Exists(tempfile))
             {
@@ -221,6 +241,7 @@ namespace TeslaLogger
                     Arguments = arguments,
                     UseShellExecute = false,
                     RedirectStandardOutput = true,
+                    RedirectStandardError = true,
                     CreateNoWindow = true
                 }
             })
@@ -234,7 +255,16 @@ namespace TeslaLogger
                 {
                     Logfile.Log(process.StandardOutput.ReadLine());
                 }
+                string stderr = process.StandardError.ReadToEnd();
+                if (!string.IsNullOrEmpty(stderr))
+                {
+                    Logfile.Log("OSMMapGenerator stderr: " + stderr);
+                }
                 process.WaitForExit();
+                if (process.ExitCode != 0)
+                {
+                    Logfile.Log("OSMMapGenerator exited with code " + process.ExitCode);
+                }
             }
             if (File.Exists(tempfile))
             {
