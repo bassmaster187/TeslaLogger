@@ -1,56 +1,126 @@
 TrackMap Panel for Grafana
 ==========================
-A panel for [Grafana](https://grafana.com/) that visualizes GPS points as a line on an interactive map.
+A panel plugin for [Grafana](https://grafana.com/) that visualizes GPS points as a line on an
+interactive map.
+
+This plugin is written in **React + TypeScript** using the modern Grafana plugin SDK (it replaced the
+old AngularJS-based implementation, which was removed in Grafana 10).
 
 Features
 --------
-- Places a dot on the map at the current time as you mouse over other panels.
-- Zoom to a range of points by drawing a box by shift-clicking and dragging.
+- Places a dot on the map at the position of the vehicle for the time currently under the cursor as
+  you hover over other panels (crosshair). Requires *shared crosshair* to be enabled on the dashboard.
+- Zoom to a range of points by drawing a box with Shift-click and drag (also refines the dashboard
+  time range to the selected points).
 - Multiple map backgrounds: [OpenStreetMap](https://www.openstreetmap.org/),
   [OpenTopoMap](https://opentopomap.org/), and [Satellite imagery](https://www.esri.com/).
-- Track and dot colors can be customized in the options tab.
+- Track segments are coloured by autopilot state (blue = Autopilot / TACC, red = manual driving),
+  with an option to use a single custom colour instead.
+- Optional pins for points of interest (supercharger / AC charger / parking) with popup text.
+- Track, point and map options can be customized in the panel editor.
+
+Requirements
+------------
+- Grafana **>= 10.0**
+- The ability to load unsigned third-party plugins (set `GF_PLUGINS_ALLOW_LOADING_UNSIGNED_PLUGINS`
+  if needed).
 
 Screenshots
 -----------
-![Show current selection as a dot on the map](/public/plugins/pr0ps-trackmap-panel/img/topo-crosshair.jpg)
-![Zoom in by selecting a range of points](/public/plugins/pr0ps-trackmap-panel/img/topo-boxselect.jpg)
-![Chose what map to display the data on](/public/plugins/pr0ps-trackmap-panel/img/satellite-picker.jpg)
+![Show current selection as a dot on the map](img/topo-crosshair.jpg)
+![Zoom in by selecting a range of points](img/topo-boxselect.jpg)
+![Chose what map to display the data on](img/satellite-picker.jpg)
 
-Installation
-------------
-To use the latest version of this plugin, clone it into Grafana's plugin directory (you can find
-this path in Grafana's logs when it starts up) and run `git checkout releases`. You should now be
-able to select the "TrackMap" panel when adding a new panel to a Grafana dashboard. To use an
-earlier version use git to checkout an earlier commit on the `releases` branch.
+Data format
+-----------
+The plugin accepts GPS data in one of two formats.
 
-To use an unreleased version of the plugin or do development, you will need to manually build it
-from source.
+### 1. Table format (recommended)
+A single query that returns one row per GPS sample. The columns are mapped by name (or by position
+if not recognized). The expected/recommended columns:
 
-To build, [install npm](https://www.npmjs.com/get-npm), check out the master branch (or the commit
-you want to build) and run the following commands in the plugin's directory:
+| Column       | Description                                      |
+|--------------|--------------------------------------------------|
+| `time_sec`   | Timestamp (column 0 by default)                  |
+| `lat`        | Latitude  (detected by name, else column 1)      |
+| `lng` / `lon`| Longitude (detected by name, else column 2)      |
+| `type`       | Optional pin type (1..4, else no pin)            |
+| `text`       | Optional popup text for the pin                  |
+| `ap`         | Optional autopilot flag (1 = autopilot)          |
+
+Example for a MySQL/MariaDB data source:
+```sql
+SELECT
+  $__time(datum) AS time_sec,
+  lat,
+  lng,
+  0 AS type,
+  NULL AS text,
+  ap
+FROM pos
+WHERE $__timeFilter(datum)
+ORDER BY time_sec ASC
 ```
-npm install
-npm run build
+
+### 2. Series format
+Two (optionally three) time-series queries, returned by Grafana as separate series. The order of the
+queries matters: latitude first, then longitude, then (optionally) a third series for the pin type.
+
 ```
-
-This will build the currently checked out source into the `dist` folder for Grafana to use.
-
+A: SELECT $__time(timestamp) AS time, "latitude"  AS value FROM location WHERE $__timeFilter(timestamp) ORDER BY timestamp ASC
+B: SELECT $__time(timestamp) AS time, "longitude" AS value FROM location WHERE $__timeFilter(timestamp) ORDER BY timestamp ASC
+```
 
 Configuration
 -------------
-The plugin requires latitude and longitude measurements provided as floats in two separate fields
-formatted by Grafana as a "Time series". The order of the data returned by the query is required
-(latitude, then longitude) since the labels and tag names are not used.
+All options are available in the **Panel editor → Options**:
 
-For example, the following query has been tested using InfluxDB as a data source in the case where
-the `latitude` and `longitude` series are stored in the `location` measurement:
+- **Max data points** – not applied on the table format (all returned rows are drawn).
+- **Max data point time delta** – in seconds; `0` disables. Starts a new track when the gap between
+  two consecutive points is larger than this value.
+- **Auto zoom** – automatically fit the map to the data.
+- **Zoom with scroll wheel**
+- **Default map style** – `OpenStreetMap`, `OpenTopoMap`, or `Satellite`.
+- **Show layer changer** – let viewers switch the map style.
+- **Color by autopilot state** – colour segments red/blue by the `ap` flag (otherwise **Line color** is used).
+- **Line color / Point color** – custom colours.
+- **Field names (table format)** – override the column names used for time, latitude, longitude,
+  type, text and autopilot. Leave empty to use auto-detection / column position.
+- **Use table format** – force single-frame (table) parsing if auto-detection is not appropriate.
+
+Crosshair (hover dot)
+----------------------
+To show the vehicle's position dot while hovering over neighboring panels, enable **shared crosshair**
+on the dashboard: `Dashboard settings → Tooltip / Cursor → Shared crosshair`. This is stored in the
+dashboard JSON as `"graphTooltip": 1`. Without it, graph panels do not emit hover events.
+
+Build
+-----
+The plugin is built with the official [@grafana/create-plugin](https://grafana.com/developers/plugin-tools/)
+tooling (webpack + swc). Requires Node.js >= 20.
+
 ```
-SELECT median("latitude"), median("longitude") FROM "location" WHERE $timeFilter GROUP BY time($interval)
+npm install
+npm run build
+typecheck   # optional: npm run typecheck
 ```
 
-Because the plugin only cares about getting 2 series of data, it's also possible to use
-MySQL/MariaDB as a data source by using 2 queries like so:
+This builds the source into the `dist` folder for Grafana to load.
+
+Development / watch mode:
 ```
-A: SELECT "latitude" as value, $__time(timestamp) FROM "location" WHERE $__timeFilter(timestamp) ORDER BY timestamp ASC
-B: SELECT "longitude" as value, $__time(timestamp) FROM "location" WHERE $__timeFilter(timestamp) ORDER BY timestamp ASC
+npm run watch
 ```
+
+Deploying to a Dockerized Grafana
+---------------------------------
+`CopyToDocker - NET8.bat` copies the local `dist` folder into the Grafana container's plugin
+directory and restarts Grafana:
+
+```
+docker cp ./dist/. teslalogger-grafana:/var/lib/grafana/plugins/pR0Ps-grafana-trackmap-panel/dist/
+docker restart teslalogger-grafana
+```
+
+The script clears the target directory first and copies the contents directly into `dist` (it does
+not create a nested `dist/dist`, which Grafana would ignore).
