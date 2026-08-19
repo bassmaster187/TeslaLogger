@@ -1402,8 +1402,12 @@ PRIMARY KEY(id)
                     using (HttpClient httpClient = new HttpClient())
                     {
                         Logfile.Log($"downloading update package from {GitHubURL}");
-                        byte[] zipBytes = httpClient.GetByteArrayAsync(GitHubURL).GetAwaiter().GetResult();
-                        File.WriteAllBytes(updatepackage, zipBytes);
+                        using (CancellationTokenSource cts = new CancellationTokenSource(TimeSpan.FromMinutes(5)))
+                        using (Stream downloadStream = await httpClient.GetStreamAsync(GitHubURL, cts.Token))
+                        using (FileStream fileStream = new FileStream(updatepackage, FileMode.Create, FileAccess.Write, FileShare.None, 81920, useAsync: true))
+                        {
+                            await downloadStream.CopyToAsync(fileStream, 81920, cts.Token);
+                        }
                         Logfile.Log($"update package downloaded to {updatepackage}");
                         httpDownloadSuccessful = true;
 
