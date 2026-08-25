@@ -96,7 +96,16 @@ if(isset($_POST["submit"])) {
 
         logger("Decompression complete, output: $out_file_name (" . filesize($out_file_name) . " bytes)");
 
-        if (strpos($originalfilename, "geofence-private") === 0)
+        // Geofence backup files are created by backup.sh with a retention-class prefix:
+        //   DAY-geofence-private<date>.gz   (daily)
+        //   MON-geofence-private<date>.gz   (monthly, 1st of the month)
+        //   yeargeofence-<year>.gz          (yearly, Jan 1st)
+        //   geofence-private<date>.gz       (legacy, no prefix)
+        // Detect them regardless of the prefix (but never the project-managed geofence.csv).
+        $lowerName = strtolower($originalfilename);
+        $isGeofencePrivate = (strpos($lowerName, "geofence-private") !== false) || (strpos($lowerName, "yeargeofence-") === 0);
+
+        if ($isGeofencePrivate)
         {
             echo("<br>Geofence-Private CSV file detected.<br>");
             $csvtext = file_get_contents($out_file_name);
