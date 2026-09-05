@@ -99,7 +99,7 @@ Supercharger-V3 AT-Wien Gewerbepark Stadlau,48.24713,16.46436
 Supercharger AT-Wien Tech Park Vienna,48.15725,16.33404
 Supercharger-V4 AT-Wien Wienerberg,48.16753,16.34786
 Supercharger-V4 AT-Wiener Neudorf,48.10255,16.31827
-Supercharger-V4 AT-Wiener Neustadt,47.8047,16.21082,75
+Supercharger-V4 AT-Wiener Neustadt,47.8045,16.21104
 Supercharger-V4 AT-Zeltweg,47.194056,14.722814
 
 Supercharger-V3 AU-Abbotsford VIC,-37.8094,144.99568
@@ -553,7 +553,7 @@ Supercharger-V3 CH-Geneva Centre Balexert,46.219,6.11083,60
 Supercharger-V3 CH-Kempttahl,47.45188,8.70443
 Supercharger CH-Kriegstetten,47.17563,7.59883
 Supercharger-V3 CH-Kriens,47.01718,8.30134
-Supercharger-V3 CH-Landquart,46.9661,9.55265
+Supercharger-V3 CH-Landquart,46.96598,9.55265
 Supercharger-V3 CH-Locarno,46.16678,8.79603
 Supercharger-V3 CH-Lugano,45.97485,8.92798
 Supercharger CH-Lully,46.8323,6.85924,25
@@ -4244,7 +4244,7 @@ Supercharger SE-Sundsvall,62.398468,17.338902
 Supercharger-V3 SE-Sundsvall - West,62.395924,17.252204
 Supercharger-V4 SE-Sundsvall North,62.442858,17.345383
 Supercharger-V4 SE-Sunne,59.836857,13.150346
-Supercharger SE-Sveg,62.034484,14.366261
+Supercharger-V3 SE-Sveg,62.03448,14.36626
 Supercharger-V3 SE-Sälen,61.163666,13.203015
 Supercharger-V3 SE-Söderhamn,61.294919,17.020995
 Supercharger-V4 SE-Södertälje,59.187211,17.581081
@@ -11144,6 +11144,7 @@ CSDD LV-Bauska Uzvaras iela,56.40552,24.1856
 CSDD LV-Iecava Rīgas iela,56.59294,24.19152
 CSDD LV-Jūrkalne P111,57.01243,21.39165
 CSDD LV-Jūrmala Ventspils šoseja,56.93048,23.5871
+CSDD LV-Kolka noliktavas caurlaide,57.74293,22.58494
 CSDD LV-Liepāja Tirgus iela,56.51963,21.0147
 
 CutEnergy DE-Coesfeld Dreischkamp,51.92485,7.16114
@@ -12399,6 +12400,7 @@ Electra FR-Beaune Rte de Verdun,47.0095,4.85173
 Electra FR-Besançon Rue de Dole,47.21988,5.95489
 Electra FR-Boulazac Isle Manoire All. Jacques Duclos,45.18407,0.7744
 Electra FR-Brive-la-Gaillarde Rue Général Pierre Pouyade,45.14624,1.47475
+Electra FR-Canet-en-Roussillon Rue Eole,42.70038,3.021
 Electra FR-Houssen Rue du Rosenkranz,48.12777,7.3638
 Electra FR-Les Tourrettes Rue de Berianne,44.66716,4.79446
 Electra FR-Morschwiller-le-Bas Rue de Mulhouse,47.73686,7.28618
@@ -12906,7 +12908,7 @@ EnBW DE-Baltmannsweiler Hauptstraße,48.75904,9.45256
 EnBW DE-Baltmannsweiler Marktplatz,48.74233,9.44903
 EnBW DE-Bamberg Hallstadter Straße,49.91043,10.88115
 EnBW DE-Bamberg Laubanger,49.91074,10.87457
-EnBW DE-Barbing Neutraublinger Str,49.00126,12.19716
+EnBW DE-Barbing Neutraublinger Straße,49.00126,12.19724
 EnBW DE-Bardowick Schwarzer Weg,53.2864,10.395
 EnBW DE-Barsbüttel Rahlstedter Straße,53.57677,10.19454
 EnBW DE-Barsbüttel Rahlstedter Straße,53.57808,10.19377,25
@@ -14217,7 +14219,7 @@ EnBW DE-Neustadt (Wied) Hauptstraße,50.6226,7.43256
 EnBW DE-Neustadt an der Donau Gewerbepark,48.7977,11.7624
 EnBW DE-Neustadt an der Weinstraße Adolf-Kolping-Straße,49.3397,8.1599
 EnBW DE-Neustadt in Sachsen Wilhelm-Kaulisch-Straße,51.02744,14.219
-EnBW DE-Neutraubling Pommernstraße,48.98073,12.19266
+EnBW DE-Neutraubling Pommernstraße,48.98088,12.19226
 EnBW DE-Neuwied Allensteiner Straße,50.43812,7.49004
 EnBW DE-Neuwied Langendorfer Straße,50.42456,7.46377
 EnBW DE-Neuwied Neuwieder Straße,50.42553,7.53676
@@ -14351,7 +14353,7 @@ EnBW DE-Plauen Hans-Sachs-Straße,50.51536,12.12676
 EnBW DE-Plauen Morgenbergstraße,50.5137,12.12788
 EnBW DE-Plech Gewerbepark Schönthal,49.66355,11.47104,30
 EnBW DE-Plüderhausen Schulstraße,48.7935,9.60218
-EnBW DE-Pohlheim Alter Weg,50.53915,8.75388
+EnBW DE-Pohlheim Alter Weg,50.5391,8.7539
 EnBW DE-Polch Im Roten Tal,50.3077,7.305
 EnBW DE-Polch Vor Geisenach,50.30377,7.32794
 EnBW DE-Porta Westfalica Feldstraße,52.26012,8.90345
@@ -14510,7 +14512,7 @@ EnBW DE-Reichshof Hauptstraße,50.9163,7.6511
 EnBW DE-Reilingen Hockenheimer Straße,49.29527,8.57387
 EnBW DE-Reinfeld (Holstein) An der Autobahn,53.8239,10.50188,25
 EnBW DE-Rellingen Eichenstraße,53.65727,9.81385
-EnBW DE-Remagen Zeppelinstraße,50.56797,7.24677,25
+EnBW DE-Remagen Zeppelinstraße,50.5679,7.2468
 EnBW DE-Remscheid Trecknase,51.1805,7.25285
 EnBW DE-Remscheid Vieringhausen,51.1724,7.16014
 EnBW DE-Rendsburg Eckernförder Straße,54.31133,9.65467
@@ -15197,6 +15199,7 @@ EnelX IT-Verbania Vle Vittorio Tonolli,45.92524,8.5469
 EnelX IT-Verona C.so Milano,45.44403,10.96555
 EnelX IT-Viareggio Largo Risorgimento,43.86924,10.2595
 EnelX IT-Vicenza Piazzale della Stazione,45.54146,11.53924
+EnelX IT-Vico del Gargano Via del Risorgimento,41.89525,15.95937
 EnelX IT-Vicolungo The Style Outlets,45.46958,8.4586
 EnelX IT-Vieste Lungomare Europa,41.8922,16.1605
 EnelX IT-Vieste Via Alessandro Manzoni,41.8815,16.17355
@@ -15213,6 +15216,7 @@ EnerCharge AT-Gemeinde Imst Meraner Straße,47.2347,10.74274
 EnerCharge AT-Jenbach Bahnhofstraße,47.38765,11.77476
 EnerCharge AT-Millstatt Kaiser-Franz-Josef-Straße,46.8043,13.56783
 EnerCharge AT-Rauris Sportstraße,47.22981,12.99264
+EnerCharge AT-Tulln an der Donau Minoritenplatz,48.33242,16.05032
 EnerCharge AT-Untertauern,47.04436,12.85233
 EnerCharge DE-Darscheid Karl-Kaufmann-Straße,50.21318,6.8821
 EnerCharge DE-Südbrookmerland Auricher Straße,53.47623,7.40593
@@ -17662,7 +17666,7 @@ Ewiva IT-Roma Corsa di Francia,41.9448,12.46952
 Ewiva IT-Roma Via Ostiense,41.86603,12.47995
 Ewiva IT-San Gimignano Piazzale Ludovico Quaroni,43.46259,11.04164
 Ewiva IT-San Lazzaro di Savena Via Cà Ricchi,44.47708,11.41638
-Ewiva IT-Settimo Torinese Via Torino,45.12727,7.73664
+Ewiva IT-Settimo Torinese Via Torino,45.12727,7.73664,20
 Ewiva IT-Siena Via Fausto Coppi,43.33568,11.29656
 Ewiva IT-Signoressa Via Ortigara,45.75491,12.0977
 Ewiva IT-Siniscola Via Luca Tanzi,40.57847,9.70321
@@ -21826,6 +21830,7 @@ Lidl FI-Espoo Kukkaromäki,60.20847,24.63643
 Lidl FI-Espoo Kurjenkellontie,60.15892,24.70506
 Lidl FI-Heinola Kaivokatu,61.20482,26.03823,30
 Lidl FI-Helsinki Vanha talvitie,60.19205,24.97697
+Lidl FI-Joensuu Repokalliontie,62.5902,29.81232
 Lidl FI-Jyväskylä Akkalankuja,62.2376,25.81652
 Lidl FI-Jyväskylä Saarijärventie,62.29005,25.71637
 Lidl FI-Leppävirta Tarhurintie,62.49055,27.77095
@@ -23316,6 +23321,7 @@ OKQ8 SE-Motala Vintergatan,58.5428,15.01357
 OKQ8 SE-Mönsterås Storgatan,57.05069,16.43983
 OKQ8 SE-Skillingaryd Åkaregatan,57.34984,14.09864
 OKQ8 SE-Sveg Vallarvägen,62.03467,14.36784
+OKQ8 SE-Svenstavik Lillhallen,62.75282,14.4279
 OKQ8 SE-Tystberga Sillekrog,58.91809,17.36909,20
 OKQ8 SE-Vilhelmina Volgsjövägen,64.62213,16.66623
 OKQ8 SE-Värnamo Refugen,57.16263,14.07357,25
@@ -29277,6 +29283,7 @@ HR Korčula Šetalište Frana Kršinića,42.95898,17.13546
 HR Lozovac Nacional park Krka,43.79593,15.96867
 HR Njivice Ribarska obala,45.16496,14.54132
 HR Opatija Grand Hotel Adriatic,45.32693,14.29863
+HR Poreč Županića ul.,45.2275,13.59957
 HR Pula Max City,44.86114,13.82345
 HR Punat Falkensteiner Hotel Park,45.02029,14.62807
 HR Rogoznica Uvala Soline,43.53196,15.96058
