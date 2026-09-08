@@ -573,7 +573,7 @@ Supercharger-V4 CH-Opfikon,47.438,8.57244
 Supercharger-V3 CH-Pfäffikon SZ,47.1999,8.79443
 Supercharger CH-Pratteln,47.5247,7.6802
 Supercharger CH-Quinto,46.5152,8.67063
-Supercharger CH-Rubigen,46.89187,7.54277
+Supercharger CH-Rubigen,46.89203,7.54277
 Supercharger CH-Schaffhausen,47.721,8.6467
 Supercharger-V4 CH-Signy,46.39692,6.20618
 Supercharger-V4 CH-Silvaplana,46.45584,9.791
@@ -2244,6 +2244,8 @@ Supercharger-V3 DE-Offenburg,48.469907,7.931822
 Supercharger-V4 DE Offenburg Wilhelm-Röntgen-Straße,48.47302,7.92473
 Supercharger-V4 DE-Oldenburg in Holstein,54.2871,10.87714
 Supercharger-V3 DE-Paderborn,51.710867,8.713883
+Supercharger-V3 DE-Panketal,52.61302,13.53652,10
+Supercharger-V3 DE-Panketal,52.62042,13.5425,10
 Supercharger-V3 DE-Panketal,52.620771,13.541551,40
 Supercharger-V3 DE-Peine,52.3404,10.2477
 Supercharger-V3 DE-Pfaffenhofen,48.51838,11.562189
@@ -2351,7 +2353,7 @@ Supercharger-V3 DE Winsen (Luhe),53.35028,10.147426
 Supercharger-V3 DE-Wismar,53.879307,11.454047
 Supercharger-V3 DE-Wittenburg,53.50734,11.09647
 Supercharger-V4 DE-Wittlich,49.96968,6.86169,32
-Supercharger-V4 DE-Wittlich (Globus),49.98189,6.9086
+Supercharger-V4 DE-Wittlich (Globus),49.98187,6.90916
 Supercharger-V4 DE-Wittstock,53.15795,12.4551
 Supercharger-V4 DE-Wolfhagen,51.40358,9.18545
 Supercharger-V4 DE-Wolfsburg,52.42373,10.73306
@@ -2749,6 +2751,7 @@ Supercharger-V4 FR-Gassin,43.26302,6.58044
 Supercharger-V4 FR-Goussainville,49.021048,2.467801
 Supercharger-V4 FR-Herblay-sur-Seine,49.0063,2.1692
 Supercharger-V3 FR-Honfleur,49.414069,0.266165,55
+Supercharger FR-Houdemont,48.6383,6.18428
 Supercharger-V4 FR-Ile Rousse,42.628838,8.923582
 Supercharger FR-La Léchère-les-Bains,45.51877,6.482522
 Supercharger-V4 FR-La Roche-sur-Yon,46.7013,-1.43193
@@ -2807,7 +2810,6 @@ Supercharger FR-Mulhouse,47.782016,7.388299
 Supercharger-V4 FR-Mulhouse Rue des Cévennes,47.7821,7.3871
 Supercharger-V3 FR-Mundolsheim,48.653,7.7319
 Supercharger-V4 FR-Mâcon,46.34663,4.84906
-Supercharger FR-Nancy,48.638215,6.184349
 Supercharger-V3 FR-Nantes - Atlantis,47.225998,-1.62904
 Supercharger-V4 FR-Nanteuil-lès-Meaux,48.933868,2.880565
 Supercharger FR-Narbonne,43.16772,2.98587
@@ -3381,7 +3383,7 @@ Supercharger-V3 IT-Parma North,44.82108,10.336591
 Supercharger-V4 IT-Pavia,45.174482,8.997837
 Supercharger-V3 IT-Perugia South,43.046065,12.407881
 Supercharger-V4 IT-Pesaro,43.810948,13.015644
-Supercharger-V4 IT-Peschiera del Garda,45.42338,10.71074
+Supercharger-V4 IT-Peschiera del Garda,45.42316,10.71104
 Supercharger IT-Piacenza,45.039461,9.753871
 Supercharger-V4 IT-Piacenza 2,45.040054,9.751785
 Supercharger-V4 IT-Poggibonsi,43.469627,11.15474
@@ -8057,7 +8059,7 @@ Allego DE-Aachen Am Gut Wolf,50.79164,6.09875
 Allego DE-Aachen Debyestraße,50.75944,6.1533,15
 Allego DE-Aachen Rotter Bruch,50.78113,6.1278
 Allego DE-Achim Fritz-Lieken-Eck,53.01666,9.03378
-Allego DE-Ahrensfelde Landsberger Chaussee,52.54864,13.59913
+Allego DE-Ahrensfelde Landsberger Chaussee,52.5484,13.59974
 Allego DE-Aichstetten Am Waizenhof,47.88045,10.0406,7
 Allego DE-Alsfeld An der Hessenhalle,50.73725,9.24722
 Allego DE-Altenburg Leipziger Straße,51.0087,12.45353
@@ -11456,6 +11458,8 @@ e-regio DE-Rheinbach Prümer Wall,50.62447,6.9471
 e-regio DE-Schleiden An der Olef,50.51987,6.46587
 e-regio DE-Schleiden Blumenthaler Straße,50.52896,6.47713
 e-regio DE-Schleiden Vogelsang,50.58225,6.44766
+
+E-Shore IT-Corigliano d’Otranto Via Atene,40.15826,18.2532
 
 e-space GE-Argveta,42.14774,42.96571
 e-space GE-Batumi Tbel-Abuseridze St,41.63543,41.61645
@@ -14940,7 +14944,7 @@ EnBW DE-Witten Herbeder Straße,51.4379,7.32517
 EnBW DE-Wittenburg Mühlenring,53.50206,11.08873,30
 EnBW DE-Wittenburg Rudolf-Diesel-Straße,53.50053,11.0977
 EnBW DE-Wittlich Friedrichstraße,49.99066,6.90636
-EnBW DE-Wittlich Justus-von-Liebig-Straße,49.9808,6.9096
+EnBW DE-Wittlich Justus-von-Liebig-Straße,49.98203,6.90816,25
 EnBW DE-Wittmund Barghamm,53.5843,7.79908
 EnBW DE-Wittmund Eggelinger Straße,53.58252,7.79627
 EnBW DE-Wittstock/Dosse Uetersener Straße,53.15777,12.45602,30
@@ -15074,7 +15078,7 @@ EnelX IT-Castelfiorentino Via Cesare Pavese,43.60242,10.9704
 EnelX IT-Castelletto Ticino,45.71297,8.64327,40
 EnelX IT-Cecina Via Antonio Cederna,43.3134,10.53303
 EnelX IT-Cinisello Balsamo Via Robecco,45.55912,9.2251
-EnelX IT-Cisano sul Neva Via Benessea,44.06985,8.16872
+EnelX IT-Cisano sul Neva Via Benessea,44.06985,8.16872,25
 EnelX IT-Corsico Via Matteotti,45.43471,9.10822
 EnelX IT-Corvara in Badia Str. Col Alt,46.55274,11.87512
 EnelX IT-Cuorgnè Via Don Giovanni Minzoni,45.39019,7.64941
@@ -16801,7 +16805,7 @@ EWE-GO DE-Geestland Dorfmitte,53.67641,8.68278
 EWE-GO DE-Geestland Handelspark,53.62741,8.81012
 EWE-GO DE-Geldern Weseler Straße,51.52319,6.34643
 EWE-GO DE-Gelsenkirchen Grothusstraße,51.52164,7.0734
-EWE-GO DE-Gelsenkirchen Wickingstraße,51.5036,7.10804
+EWE-GO DE-Gelsenkirchen Wickingstraße,51.5036,7.10804,25
 EWE-GO DE-Georgsmarienhütte Klöcknerstraße,52.20612,8.05875
 EWE-GO DE-Germering Augsburger Straße,48.13903,11.37142
 EWE-GO DE-Germersheim Mainzer Straße,49.22721,8.37153
@@ -17631,6 +17635,7 @@ Ewiva IT-Castenedolo Tangenziale Est,45.46067,10.31911
 Ewiva IT-Castro Via di Mezzo,40.01016,18.42513
 Ewiva IT-Catania Asse dei Servizi,37.47216,15.05612
 Ewiva IT-Ciliegi Piazza Giorgio Amendola,43.66437,11.45661
+Ewiva IT-Cisano sul Neva Via Benessea,44.06945,8.16825,25
 Ewiva IT-Como Via Guido da Como,45.78552,9.06888
 Ewiva IT-Corsico Via Marchesi,45.42846,9.07902
 Ewiva IT-Creazzo Str. Padana Verso Verona,45.53139,11.50183
@@ -19593,6 +19598,7 @@ Ionity FR-Quintal Allée des Fontanelles,45.87564,6.06957
 Ionity FR-Rely,50.57309,2.37719
 Ionity FR-Roye Rue Colonel Sorlin,49.70823,2.7742,40
 Ionity FR-Saint Léger Est,45.6101,-0.59865
+Ionity FR-Saint-Aunès Accès Dépôt Orchestra,43.6508,3.9833
 Ionity FR-Saint-Pantaléon-de-Larche A89,45.1607,1.44086,20
 Ionity FR-Saint-Pantaléon-de-Larche A89,45.16109,1.44072,20
 Ionity FR-Saint-Rambert Est,45.27635,4.82803
@@ -22698,7 +22704,7 @@ Morbihan FR-Sarzeau,47.54678,-2.72131,25
 Morbihan FR-Vannes Rue Alain Gerbault,47.66539,-2.73089
 
 MOVE CH-Au Hauptstrasse,47.43289,9.63415
-MOVE CH-Basel Parkweg,47.5492,7.59347
+MOVE CH-Basel Parkweg,47.5492,7.59347,25
 MOVE CH-Bern Hallerstrasse,46.95472,7.43838
 MOVE CH-Bern Klösterlistutz,46.94962,7.45947
 MOVE CH-Bern Murtenstrasse,46.95224,7.41675
@@ -24208,6 +24214,7 @@ Plenitude IT-Pioltello Viale S. Francesco,45.51327,9.3234
 Plenitude IT-Sadali Via Po,39.81252,9.27088
 Plenitude IT-San Miniato Via C. Pannocchia,43.68795,10.80601
 Plenitude IT-Sogliano al Rubicone Bivio Montepetra Bassa,43.93325,12.17774
+Plenitude IT-Vasto Via dei Conti Ricci,42.11727,14.70177
 Plenitude IT-Venezia Via Orlanda,45.47933,12.27087
 Plenitude IT-Villesse Località Maranuz,45.86488,13.4326
 
@@ -24687,6 +24694,7 @@ Recharge SE-Karlskrona Vedeby gata,56.20413,15.64101
 Recharge SE-Kista Knarrarnäsgatan,59.40091,17.9496
 Recharge SE-Kungsängen Femstenavägen,59.49632,17.74264
 Recharge SE-Ljungby Ringvägen,56.81401,13.90533
+Recharge SE-Ljungskile Ljungs berg,58.22998,11.90934
 Recharge SE-Nyköping Hästvägen,58.76476,16.98988
 Recharge SE-Oskarshamn Södra Fabriksgatan,57.26369,16.43
 Recharge SE-Trollhättan Överby Köpcenter,58.31374,12.30868
@@ -26644,6 +26652,7 @@ swisscharge CH-Ascona Via Collegio,46.1556,8.77028
 swisscharge CH-Ascona Viale Monte Verità,46.15979,8.77411
 swisscharge CH-Basel Güterstrasse,47.54577,7.58799
 swisscharge CH-Basel Mülhauserstrasse,47.56872,7.58068
+swisscharge CH-Basel Parkweg,47.54945,7.59288,25
 swisscharge CH-Basel Signalstrasse,47.57033,7.60332
 swisscharge CH-Basel Vogesenstrasse,47.5699,7.5739
 swisscharge CH-Basel Zürcherstrasse,47.55502,7.61259
