@@ -3203,8 +3203,7 @@ Supercharger-V4 GR-Thessaloniki Θεσσαλονίκη,40.5547,22.99516
 
 Supercharger-V4 HR-Bačva,45.23919,13.71488
 Supercharger-V4 HR-Bačva,45.23939,13.71592
-Supercharger-V4 HR-Gospic,44.57727,15.39267
-Supercharger-V4 HR-Gospić,44.5771,15.39341
+Supercharger-V4 HR-Gospić,44.5771,15.3934,40
 Supercharger-V4 HR-Janjče East,44.75155,15.37485
 Supercharger-V4 HR-Janjče West,44.75082,15.37355
 Supercharger-V4 HR-Jasenice,44.24,15.5705
@@ -4361,6 +4360,7 @@ Supercharger-V4 TR-Çankaya Ankara,39.90963,32.77736
 Supercharger-V4 TR-Çankaya Ankara Çiğdem,39.88323,32.8086
 
 Supercharger-V3 TW-Nantou Caotun,23.9664,120.67746
+Supercharger-V4 TW-Taichung Guanqian Rd,24.1519,120.6637
 Supercharger-V3 TW-Tainan Hsinying,23.31127,120.28147
 Supercharger-V3 TW-Tainan Park 17,23.0981,120.28154
 
@@ -9476,6 +9476,7 @@ Astor TR-Çorum Çevre Yolu Blv,40.55195,34.92965
 
 Atlante ES-Lliçà d’Amunt Carrer de la Matarranya,41.61834,2.2154
 Atlante ES-Lliçà d’Amunt Carrer de la Matarranya,62.47466,21.36138
+Atlante FR-Aire de Nîmes Marguerittes Sud,43.8695,4.43968
 Atlante FR-Chalon-sur-Saône Rue René Cassin,46.77545,4.8648
 Atlante FR-Champniers Rte de la Braconne,45.69237,0.17505
 Atlante FR-Danjoutin Av. de la République,47.6247,6.86067
@@ -15048,6 +15049,7 @@ Enefit EE-Pärnu Ranna pst,58.37367,24.50322
 Enefit EE-Tallinn Marja tn,59.42299,24.69653
 Enefit EE-Tallinn Rävala pst,59.43377,24.75668
 Enefit EE-Tartu Sadama,58.37682,26.73498
+Enefit LV-Cēsis Gaujas iela,57.30672,25.25197
 Enefit LV-Cēsis Raunas iela,57.31243,25.27532
 
 EnelX IT-Adria Via Bortolina,45.06226,12.05158
@@ -19645,7 +19647,7 @@ Ionity GB-Peterborough,52.53266,-0.32065
 Ionity GB-Polmadie,55.83723,-4.24249
 Ionity GB-Stafford Spitfire Cl,52.83142,-2.13565
 Ionity GB-Stranraer Bellevilla Rd,54.9051,-5.02367
-Ionity HR-Gospić Budačka ul.,44.57699,15.39295
+Ionity HR-Gospić Budačka ul.,44.577,15.39295,20
 Ionity HR-Kanfanar Okreti,45.1117,13.80262
 Ionity HR-Rašćane Gornje,43.3205,17.16605,31
 Ionity HR-Rijeka Osječka ul.,45.34964,14.41835
@@ -24563,7 +24565,7 @@ Q1 DE-Hagen am Teutoburger Wald Höhenweg,52.19985,7.98911
 Q1 DE-Haste Hauptstraße,52.38037,9.39187
 Q1 DE-Herford Frühherrenstraße,52.11715,8.67482
 Q1 DE-Iffezheim Am Forlenspitzen,48.82322,8.16304
-Q1 DE-Leinefelde-Worbis Birkunger Straße,51.3768,10.3296
+Q1 DE-Leinefelde Birkunger Straße,51.3768,10.3296
 Q1 DE-Leipzig Torgauer Straße,51.35672,12.43737
 Q1 DE-Löwenberger Land Alte Grüneberger Landstraße,52.8224,13.21519
 Q1 DE-Magdeburg Am Großen Silberberg,52.1705,11.57076
