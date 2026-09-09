@@ -2128,7 +2128,7 @@ Supercharger-V4 DE-Idar-Oberstein,49.73079,7.3934
 Supercharger-V3 DE-Illertissen,48.21882,10.127614,25
 Supercharger-V4 DE-Ingolstadt,48.774,11.38844
 Supercharger-V3 DE-Irschenberg,47.82656,11.89837
-Supercharger-V4 DE-Irschenberg Wendling,47.82755,11.9031
+Supercharger-V4 DE-Irschenberg Wendling,47.82804,11.90373
 Supercharger-V3 DE-Irxleben,52.17062,11.4849,60
 Supercharger-V4 DE-Jena,50.89928,11.59295
 Supercharger-V4 DE-Jettingen,48.41098,10.44051,40
@@ -2332,7 +2332,7 @@ Supercharger-V4 DE-Weil am Rhein,47.58963,7.59322
 Supercharger-V4 DE-Weimar,50.93422,11.2898
 Supercharger-V4 DE-Weimar Nord,50.993,11.3317
 Supercharger-V4 DE-Weischlitz,50.43925,12.08933
-Supercharger-V3 DE-Weiterstadt,49.8968,8.6142,75
+Supercharger-V3 DE-Weiterstadt,49.8968,8.61413
 Supercharger-V4 DE-Werder,52.37866,12.86378
 Supercharger-V3 DE-Wernberg-Köblitz,49.53217,12.13505,30
 Supercharger-V4 DE-Wertheim,49.77084,9.5759
@@ -2392,7 +2392,7 @@ Supercharger-V3 DK-Kliplev,54.9401,9.37887,40
 Supercharger-V3 DK-Kolding,55.512661,9.462733
 Supercharger-V4 DK-Korsør,55.35237,11.14138
 Supercharger-V4 DK-København,55.68166,12.53123
-Supercharger DK-Køge,55.489014,12.163153
+Supercharger-V4 DK-Køge,55.489,12.16315
 Supercharger-V4 DK-Lumsås,55.94219,11.50824
 Supercharger-V4 DK-Lyngby,55.7711,12.505377,60
 Supercharger-V4 DK-Løkken,57.37292,9.7287
@@ -5242,6 +5242,7 @@ Supercharger US-Celebration FL,28.33142,-81.53258
 Supercharger-V4 US-Celebration FL Future Way,28.30295,-81.56868
 Supercharger-V3 US-Chipley FL,30.75184,-85.55166
 Supercharger-V3 US-Clearwater FL,28.013,-82.73624
+Supercharger-V4 US-Clearwater FL Gulf to Bay Blvd,27.95918,-82.7251
 Supercharger-V3 US-Clearwater FL US Hwy 19 N,27.91514,-82.72872
 Supercharger-V3 US-Crestview FL,30.73386,-86.56637
 Supercharger-V4 US-Crestview FL Cracker Barrel Dr,30.7246,-86.57188
@@ -7146,6 +7147,7 @@ Supercharger US-Lexington VA,37.79696,-79.41903
 Supercharger-V3 US-Lexington VA E Nelson St,37.77856,-79.43406
 Supercharger-V3 US-Lexington VA Hotel Dr,37.79828,-79.4182
 Supercharger-V3 US-Lynchburg VA,37.32496,-79.19005
+Supercharger-V4 US-Lynchburg VA Timberlake Rd,37.354,-79.2254
 Supercharger-V3 US-Madison Heights VA,37.46605,-79.1177
 Supercharger-V3 US-Madison VA,38.34615,-78.28603
 Supercharger-V3 US-Manassas VA,38.79372,-77.51527
@@ -7199,6 +7201,7 @@ Supercharger-V3 US-Woodbridge VA - Potomac Town Place,38.62924,-77.2894
 Supercharger-V4 US-Woodbridge VA Minnieville Rd,38.65937,-77.30006
 Supercharger-V3 US-Woodstock VA,38.86674,-78.5192
 Supercharger US-Wytheville VA,36.9457,-81.05456
+Supercharger-V4 US-Wytheville VA Lithia Rd,36.94918,-81.0567
 Supercharger-V4 US-Yorktown VA,37.16514,-76.46483
 
 Supercharger US-Bennington VT,42.88367,-73.19607
@@ -13343,7 +13346,7 @@ EnBW DE-Escheburg Lange Stücken,53.4718,10.3105
 EnBW DE-Eschelbronn Bahnhofstraße,49.3201,8.86804
 EnBW DE-Eschenbach In den Bühlgärten,48.65772,9.6737
 EnBW DE-Eschweiler Fichtenweg,50.7961,6.2323
-EnBW DE-Eschweiler Kölner Straße,50.8201,6.2988
+EnBW DE-Eschweiler Kölner Straße,50.82002,6.2967
 EnBW DE-Esens Herdetor,53.64647,7.60794
 EnBW DE-Essen Aktienstraße,51.4623,6.9305
 EnBW DE-Essen Berthold-Beitz-Boulevard,51.4735,7.00006
@@ -13399,7 +13402,7 @@ EnBW DE-Flintsbach am Inn Riedstraße,47.7309,12.11228
 EnBW DE-Florstadt In der Grobach,50.32997,8.93443
 EnBW DE-Florstadt Messeplatz,50.31938,8.85916
 EnBW DE-Forbach Landstraße,48.6786,8.35884
-EnBW DE-Forchheim Willy-Brandt-Allee,49.7077,11.07032
+EnBW DE-Forchheim Willy-Brandt-Allee,49.7077,11.07032,20
 EnBW DE-Frankenthal Mina-Karcher-Platz,49.53012,8.35213
 EnBW DE-Frankfurt (Oder) Nuhnenstraße,52.34132,14.50645
 EnBW DE-Frankfurt am Main Hanauer Landstraße,50.13193,8.76467
@@ -15665,7 +15668,7 @@ ESB DE-Hausham Bahnhofstraße,47.75212,11.83882
 ESB DE-Höhenkirchen-Siegertsbrunn Altlaufstraße,48.0238,11.71538
 ESB DE-Höhenkirchen-Siegertsbrunn Bahnhofplatz,48.01916,11.71957
 ESB DE-Höhenkirchen-Siegertsbrunn Bahnhofstraße,48.02013,11.7244
-ESB DE-Irschenberg Wendling,47.82816,11.90287,25
+ESB DE-Irschenberg Wendling,47.828,11.9028,25
 ESB DE-Isen Münchner Straße,48.20457,12.0531
 ESB DE-Kolbermoor An der Alten Spinnerei,47.8511,12.06014
 ESB DE-Krün In Elmau,47.46185,11.18738
@@ -18097,8 +18100,8 @@ FreeToX IT-Sarni Irpinia,40.92547,14.78316
 FreeToX IT-Sarni Irpinia,40.92667,14.78317
 FreeToX IT-Sarni Murge,41.09577,16.76978
 FreeToX IT-Sarni San Nicola,41.04906,14.32309
-FreeToX IT-Sarni Sangro,42.20005,14.5616
-FreeToX IT-Sarni Sangro,42.20058,14.56326
+FreeToX IT-Sarni Sangro Est,42.20058,14.56326
+FreeToX IT-Sarni Sangro Ovest,42.20005,14.5616
 FreeToX IT-Sarni Torre Fantine,41.90891,15.16854
 FreeToX IT-Sarni Torre Fantine,41.9097,15.16896
 FreeToX IT-Savignano sul Rubicone A14,44.11691,12.40897
@@ -21413,6 +21416,7 @@ Lidl DE-Ismaning Osterfeldstraße,48.23073,11.68564
 Lidl DE-Issum Vogt-von-Belle-Platz,51.53483,6.4316
 Lidl DE-Jestetten Schaffhauser Straße,47.6542,8.57624
 Lidl DE-Jettingen-Scheppach Messerschmittstraße,48.4086,10.4352
+Lidl DE-Jever Hooksweg,53.57598,7.90702
 Lidl DE-Kaiserslautern Kurt-Schumacher-Straße,49.423,7.74842
 Lidl DE-Kamenz Fichtestraße,51.2727,14.10566
 Lidl DE-Kamp-Lintfort Prinzenstraße,51.50864,6.543
@@ -25246,7 +25250,7 @@ Shell DE-Biberach an der Riß Ulmer Straße,48.1079,9.80152,30
 Shell DE-Bielefeld Artur-Ladebeck-Straße,52.01065,8.5192
 Shell DE-Bielefeld Eckendorfer Straße,52.03311,8.55645
 Shell DE-Blankenburg Lerchenbreite,51.8061,10.9433,25
-Shell DE-Bochum Bernecker Straße,51.45237,7.22498
+Shell DE-Bochum Bernecker Straße,51.4521,7.22464
 Shell DE-Bochum Herner Straße,51.51841,7.21283
 Shell DE-Bonn Endenicher Straße,50.73279,7.08207
 Shell DE-Braunschweig Hans-Sommer-Straße,52.2773,10.54958
