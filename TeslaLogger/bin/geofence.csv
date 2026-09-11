@@ -51,13 +51,14 @@ Supercharger-V4 AT-Imlau,47.461883,13.197916
 Supercharger-V4 AT-Imst,47.21872,10.73178
 Supercharger-V4 AT-Inning,48.18274,15.41735,10
 Supercharger-V4 AT-Inning,48.18362,15.41792
-Supercharger AT-Innsbruck,47.26502,11.42875
-Supercharger-V4 AT-Innsbruck DEZ,47.262763,11.428998
+Supercharger-V4 AT-Innsbruck,47.2543,11.41503,10
+Supercharger-V4 AT-Innsbruck,47.26502,11.42875
 Supercharger-V3 AT-Kalwang,47.422813,14.759271
 Supercharger AT-Kapfenberg,47.450188,15.317675
 Supercharger AT-Kitzbühel,47.459205,12.386105
 Supercharger-V4 AT-Klagenfurt,46.627228,14.344443
-Supercharger-V3 AT-Langkampfen,47.534597,12.092972
+Supercharger-V3 AT-Langkampfen,47.5258,12.07442,10
+Supercharger-V3 AT-Langkampfen,47.5347,12.09288
 Supercharger AT-Laßnitzhöhe,47.070925,15.578139
 Supercharger AT-Lermoos,47.394965,10.887519
 Supercharger AT-Lermoos,47.395975,10.887217
@@ -543,7 +544,7 @@ Supercharger CH-Beckenried,46.97143,8.45916
 Supercharger-V3 CH-Bern,46.94342,7.3706
 Supercharger-V3 CH-Bulle,46.62502,7.0375
 Supercharger CH-Bussigny,46.5567,6.56156
-Supercharger-V3 CH-Cadenazzo,46.15204,8.9371,25
+Supercharger-V3 CH-Cadenazzo,46.15204,8.9371,27
 Supercharger-V4 CH-Crissier,46.5549,6.57073
 Supercharger CH-Dietikon,47.41796,8.39656
 Supercharger CH-Dietlikon,47.4131,8.6168
@@ -2221,6 +2222,7 @@ Supercharger-V4 DE-Neckargemünd,49.3917,8.79687
 Supercharger-V4 DE-Nempitz,51.29005,12.1372,30
 Supercharger-V4 DE-Neu-Ulm,48.376918,10.006533
 Supercharger-V4 DE-Neuberg,50.1823,9.00755,90
+Supercharger-V4 DE-Neudrossenfeld,50.03762,11.49095,10
 Supercharger-V4 DE-Neudrossenfeld,50.03775,11.4893,30
 Supercharger-V3 DE-Neumünster,54.07014,9.94147,35
 Supercharger-V4 DE-Neuss,51.20092,6.71383
@@ -2291,7 +2293,7 @@ Supercharger-V4 DE-Schweinfurt,50.0207,10.21528
 Supercharger-V4 DE-Schweitenkirchen,48.5107,11.58188,36
 Supercharger-V4 DE-Schwetzingen,49.413803,8.543361
 Supercharger-V3 DE-Schönefeld,52.388723,13.498047,30
-Supercharger-V4 DE-Siegen,50.85664,8.01141
+Supercharger-V4 DE-Siegen,50.8568,8.011
 Supercharger-V4 DE-Simmern,49.98277,7.54717
 Supercharger-V3 DE-Sindelsdorf,47.728372,11.361923
 Supercharger-V3 DE Sittensen,53.287441,9.508025,40
@@ -2708,7 +2710,7 @@ Supercharger-V4 FR-Chambéry Nord,45.596817,5.895551
 Supercharger-V3 FR-Champfleury,49.20445,4.01287
 Supercharger-V4 FR-Chanteloup-en-Brie,48.85693,2.75205
 Supercharger FR-Chapelle sur Erdre,47.282771,-1.550008
-Supercharger FR-Charleville-Mézières,49.736834,4.744095
+Supercharger-V4 FR-Charleville-Mézières,49.73683,4.7441
 Supercharger-V4 FR-Charolles,46.4391,4.30167
 Supercharger-V3 FR-Chartres,48.44601,1.53902
 Supercharger-V4 FR-Chasse-sur-Rhône Sud,45.5738,4.81192
@@ -3316,7 +3318,7 @@ Supercharger-V3 IT-Bressanone,46.75903,11.63837,40
 Supercharger-V3 IT-Brindisi,40.619822,17.902674
 Supercharger-V4 IT-Busto Arsizio,45.63453,8.83602
 Supercharger IT-Campogalliano,44.686638,10.851342
-Supercharger IT-Carsoli Oricola,42.08216,13.06037
+Supercharger-V4 IT-Carsoli Oricola,42.08213,13.06034
 Supercharger-V3 IT-Casalecchio di Reno,44.483936,11.268521
 Supercharger-V3 IT-Catania,37.551588,15.066693
 Supercharger IT-Cavaglià,45.389435,8.12998
@@ -3362,7 +3364,7 @@ Supercharger-V4 IT-Metaponto Tavole Palatine,40.414429,16.816989
 Supercharger-V4 IT-Milan Carugate,45.54473,9.327561
 Supercharger-V3 IT-Milano Urban,45.478476,9.154914
 Supercharger IT-Modena,44.57426,10.9813
-Supercharger IT-Mogliano Veneto,45.58469,12.28721
+Supercharger-V3 IT-Mogliano Veneto,45.5847,12.2872
 Supercharger IT-Moncalieri,44.973333,7.730113
 Supercharger-V4 IT-Moncalieri Corso Savona,44.983348,7.707259
 Supercharger-V3 IT-Mondovì,44.419691,7.849982
@@ -5252,6 +5254,7 @@ Supercharger-V4 US-Dania Beach FL,26.0638,-80.16835
 Supercharger-V3 US-Davenport FL,28.25854,-81.59018
 Supercharger-V4 US-Davenport FL Grandview Pkwy,28.23267,-81.64245
 Supercharger-V3 US-Davie FL,26.0926,-80.24975
+Supercharger-V4 US-Davie FL S State Rd 7,26.06382,-80.20722
 Supercharger-V4 US-Davie FL Stirling Rd,26.04533,-80.23108
 Supercharger-V3 US-Daytona Beach FL,29.18347,-81.0788
 Supercharger-V3 US-Daytona Beach FL Gateway N Drive,29.22373,-81.10223
@@ -5488,6 +5491,7 @@ Supercharger-V4 US-Conyers GA,33.6551,-84.00593
 Supercharger-V3 US-Cordele GA,31.9636,-83.7664
 Supercharger-V4 US-Covington GA,33.60886,-83.82588
 Supercharger-V4 US-Cumming GA,34.18507,-84.14222
+Supercharger-V4 US-Dalton GA,34.75805,-85.00044
 Supercharger-V3 US-Decatur GA - East Ponce de Leon Avenue (Pay to Park),33.77612,-84.29556
 Supercharger-V3 US-Douglasville GA,33.72686,-84.7357
 Supercharger-V3 US-Dublin GA,32.4906,-82.9327
@@ -8167,7 +8171,7 @@ Allego DE-Brandenburg an der Havel Upstallstraße,52.43127,12.5343
 Allego DE-Braunschweig Hansestraße,52.31107,10.50298
 Allego DE-Braunschweig Hildesheimer Straße,52.27117,10.49655,30
 Allego DE-Braunschweig Münchenstraße,52.25524,10.49577
-Allego DE-Braunschweig Otto-von-Guericke-Straße,52.24393,10.51296,12
+Allego DE-Braunschweig Otto-von-Guericke-Straße,52.2439,10.51287,7
 Allego DE-Bredstedt Tondernsche Straße,54.62615,8.95896
 Allego DE-Bremen Alter Dorfweg,53.0474,8.74192
 Allego DE-Bremen Auf den Delben,53.1413,8.7137
@@ -9210,7 +9214,7 @@ ARAL DE-Kinding Enkeringer Straße,48.99882,11.37806
 ARAL DE-Kirchhain Sonnenallee,50.82377,8.94445
 ARAL DE-Kirchheimbolanden Bischheimer Straße,49.66845,8.01972
 ARAL DE-Kirchroth Bernauer Straße,48.94758,12.54527
-ARAL DE-Kleinostheim Aschaffenburger Straße,49.99504,9.0686,20
+ARAL DE-Kleinostheim Aschaffenburger Straße,49.995,9.0686
 ARAL DE-Knüllwald Hauptstraße,51.0067,9.4734
 ARAL DE-Koblenz Andernacher Straße,50.37848,7.5828,25
 ARAL DE-Koblenz Schlachthofstraße,50.36265,7.5742
@@ -9304,7 +9308,7 @@ ARAL DE-Nettetal An der Kleinbahn,51.32886,6.19574
 ARAL DE-Nettetal Kempener Straße,51.31078,6.29085
 ARAL DE-Nettetal Kölner Straße,51.31085,6.20526
 ARAL DE-Neu-Ulm Otto-Renner-Straße,48.38643,10.03497
-ARAL DE-Neudrossenfeld An der Autobahn,50.0373,11.49087
+ARAL DE-Neudrossenfeld An der Autobahn,50.0373,11.49087,25
 ARAL DE-Neuenkirchen-Vörden Hörster Heide,52.49156,8.0783
 ARAL DE-Neuhausen auf den Fildern Plieninger Straße,48.69122,9.2663
 ARAL DE-Neumarkt in der Oberpfalz Amberger Straße,49.28537,11.4659
@@ -9485,6 +9489,7 @@ Atlante FR-Champniers Rte de la Braconne,45.69237,0.17505
 Atlante FR-Danjoutin Av. de la République,47.6247,6.86067
 Atlante FR-Houssen Rue de Rosenkranz,48.12734,7.3647
 Atlante FR-Montluçon Rue de Pasquis,46.36828,2.5929
+Atlante IT-Area di Servizio Civita Nord,42.0677,13.0379
 Atlante IT-Montaione Via Aldo Moro,43.55431,10.91143
 Atlante IT-Montepulciano Ovest,43.13546,11.86467
 Atlante IT-Roma Via Giorgio Zoega,41.87423,12.43276
@@ -11192,6 +11197,7 @@ da-emobil AT-Heiterwang Oberdorf,47.43631,10.76691,25
 da-emobil AT-Höfen Gewerbegebiet,47.46644,10.68247
 da-emobil AT-Imst Gewerbepark,47.21834,10.74313
 da-emobil AT-Imst Langgasse,47.22767,10.74659
+da-emobil AT-Innsbruck Andechsstraße,47.26418,11.4274
 da-emobil AT-Innsbruck Fürstenweg,47.26235,11.37306
 da-emobil AT-Innsbruck Leopoldstraße,47.25437,11.39907
 da-emobil AT-Innsbruck Maximilianstraße,47.26281,11.39333
@@ -12350,6 +12356,7 @@ ELE DE-Gladbeck Schillerstraße,51.57495,6.9929
 Electra AT-Amstetten Oiden,48.13345,14.83784
 Electra AT-Graz Kärntner Straße,47.0448,15.41478
 Electra AT-Linz Wankmüllerhofstraße,48.28068,14.30622
+Electra AT-Loosdorf Gewerbestraße,48.1902,15.40952
 Electra AT-St. Johann im Pongau Bundesstraße,47.34954,13.19453
 Electra BE-Antwerpen Herentalsebaan,51.20978,4.4586
 Electra BE-Auderghem Chaussée de Wavre,50.79478,4.47889
@@ -14680,7 +14687,7 @@ EnBW DE-Selm Lüdinghausener Straße,51.70842,7.45614
 EnBW DE-Selters (Taunus) Am Schwimmbad,50.33413,8.23355
 EnBW DE-Siegburg Barbarastraße,50.8088,7.23027
 EnBW DE-Siegen Breitscheidstraße,50.9076,8.01143
-EnBW DE-Siegen Eiserfelder Straße,50.8575,8.0099
+EnBW DE-Siegen Eiserfelder Straße,50.85645,8.01217
 EnBW DE-Siegen Gosenbacher Hütte,50.85377,7.96298
 EnBW DE-Siegenburg Daßfeld,48.7584,11.8357
 EnBW DE-Siegsdorf Breslauer Straße,47.8287,12.63686
@@ -19356,7 +19363,7 @@ Ionity DE-Leinefelde Ernemannstraße,51.39074,10.34255
 Ionity DE-Marl Herzlia-Allee,51.64452,7.10234
 Ionity DE-Meerane Hohe Straße,50.84076,12.44502
 Ionity DE-Memmingen Fraunhoferstraße,47.99943,10.15528
-Ionity DE-Merklingen Nellinger Straße,48.5164,9.75685,25
+Ionity DE-Merklingen Nellinger Straße,48.5164,9.75685,24
 Ionity DE-Mönchengladbach Schleswiger Straße,51.19552,6.41265
 Ionity DE-Mühldorf am Inn Äußere Neumarkter Straße,48.26244,12.54266
 Ionity DE-Nempitz An der Autobahn,51.2901,12.13755,6
@@ -22460,7 +22467,6 @@ Mer DE-Weißenfels Osterfeld West,51.10461,11.95474
 Mer DE-Weißwasser/Oberlausitz Sorauer Platz,51.49877,14.6342
 Mer DE-Wetzlar Hermannsteiner Straße,50.56712,8.49915
 Mer DE-Wiesenfelden Georgsplatz,49.04084,12.53892
-Mer DE-Willich Akira-Okada-Straße,51.28047,6.50885
 Mer DE-Windorf Gellert,48.62471,13.22201
 Mer DE-Wörth an der Donau Straubinger Straße,48.99886,12.40554
 Mer DE-Zenting Schulgasse,48.7932,13.2552
@@ -26666,7 +26672,7 @@ swisscharge CH-Bellach Bielstrasse,47.21085,7.50298
 swisscharge CH-Bern Viktoriastrasse,46.9529,7.45755
 swisscharge CH-Bregaglia Str. Principale,46.34385,9.59221
 swisscharge CH-Buchs Edisonstrasse,47.39259,8.0659,25
-swisscharge CH-Cadenazzo Via Stazione,46.15203,8.93753,10
+swisscharge CH-Cadenazzo Via Stazione,46.15203,8.93753,8
 swisscharge CH-Chur Bahnhofplatz,46.85275,9.52874
 swisscharge CH-Chur Bahnhofplatz,46.85347,9.53044
 swisscharge CH-Chur Felsenaustrasse,46.85654,9.51356
