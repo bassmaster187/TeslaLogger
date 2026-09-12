@@ -540,7 +540,7 @@ Supercharger-V3 CH-Affoltern,47.27112,8.4397,30
 Supercharger-V4 CH-Airolo,46.52395,8.60168
 Supercharger-V4 CH-Arbedo-Castione,46.23268,9.04
 Supercharger-V4 CH-Avenches Milavy Centre,46.87735,7.03272
-Supercharger CH-Beckenried,46.97143,8.45916
+Supercharger CH-Beckenried,46.9711,8.45915
 Supercharger-V3 CH-Bern,46.94342,7.3706
 Supercharger-V3 CH-Bulle,46.62502,7.0375
 Supercharger CH-Bussigny,46.5567,6.56156
@@ -1997,7 +1997,7 @@ Supercharger-V4 DE-Bochum (Cafe Del Sol),51.4591,7.13652
 Supercharger-V3 DE-Bochum - Ruhr Park,51.49506,7.28483
 Supercharger-V4 DE-Bockenem,52.00238,10.135615
 Supercharger-V3 DE-Bonn - Bonner Bogen,50.71867,7.15184,66
-Supercharger-V4 DE-Bordesholm,54.18074,9.94337
+Supercharger-V4 DE-Bordesholm,54.18074,9.94337,25
 Supercharger-V3 DE-Braak,53.61803,10.23968
 Supercharger-V4 DE-Braunschweig (Globus),52.24359,10.51295,30
 Supercharger-V4 DE-Bremen,53.04964,8.82077
@@ -2269,6 +2269,7 @@ Supercharger-V4 DE-Raunheim,50.008171,8.435342
 Supercharger-V3 DE-Regensburg - Ostenviertel,48.9998,12.14843,30
 Supercharger-V4 DE-Regensburg-Ost,48.99477,12.15066
 Supercharger-V3 DE-Reichertshofen,48.645645,11.520604
+Supercharger-V3 DE-Reinfeld,53.8229,10.50267,10
 Supercharger-V3 DE-Reinfeld,53.8232,10.50352
 Supercharger-V4 DE-Reiskirchen,50.59563,8.81875,35
 Supercharger-V4 DE-Rhüden,51.9472,10.14027,30
@@ -2301,7 +2302,6 @@ Supercharger-V4 DE-Soest,51.5669,8.1304
 Supercharger-V3 DE Solingen,51.130189,6.995972
 Supercharger-V3 DE-Soltau-Ost,52.9834,9.925491,40
 Supercharger-V4 DE-Stralsund,54.302,13.09609
-Supercharger-V4 DE Stuckenborstel,53.116895,9.204895
 Supercharger-V4 DE-Stuttgart-Weilimdorf,48.8217,9.0927
 Supercharger-V4 DE-Sulz-Vöhringen,48.34328,8.66314,70
 Supercharger-V4 DE-Sulzbach (Taunus) MTZ,50.1167,8.5303,18
@@ -6576,6 +6576,7 @@ Supercharger-V4 US-Henryetta OK,35.44053,-95.97013
 Supercharger-V4 US-Henryetta OK Hornbeam Rd Francis Energy,35.43467,-96.0181
 Supercharger-V4 US-Jenks OK Francis Energy,36.02822,-95.96146
 Supercharger-V4 US-Lawton OK Francis Energy,34.6112,-98.38872
+Supercharger-V4 US-Midwest City OK E Reno Ave Francis Energy,35.46395,-97.40273
 Supercharger-V4 US-Midwest City OK Francis Energy,35.46753,-97.37188
 Supercharger-V4 US-Muskogee OK Francis Energy,35.76757,-95.40344
 Supercharger-V4 US-Norman OK Chautauqua Ave Francis Energy,35.1815,-97.45112
@@ -6954,12 +6955,14 @@ Supercharger-V3 US-Houston TX - 9633 Westheimer Road,29.736,-95.53857
 Supercharger-V3 US-Houston TX - Louetta Road,29.99713,-95.57532
 Supercharger US-Houston TX - Northwest Freeway,29.86728,-95.5381
 Supercharger-V4 US-Houston TX 3333 Telephone Rd,29.71244,-95.31473
+Supercharger-V4 US-Houston TX FM 1960,29.95952,-95.54968
 Supercharger-V4 US-Houston TX Franklin St,29.7666,-95.36612
 Supercharger-V3 US-Houston TX Hempstead Hwy,29.913,-95.61584
 Supercharger-V4 US-Houston TX Hwy 6 S,29.70547,-95.643
 Supercharger-V3 US-Houston TX Queensbury Lane,29.77892,-95.5592
 Supercharger-V4 US-Houston TX S Sam Houston Pkwy E,29.6015,-95.26502
 Supercharger-V4 US-Houston TX S Texas 6 Stealth Group,29.72495,-95.6443
+Supercharger-V4 US-Houston TX W Sam Houston Pkwy N ElectricSon,29.9199,-95.55545
 Supercharger-V4 US-Houston TX Weslayan St,29.72268,-95.44293
 Supercharger-V3 US-Houston TX Westheimer Road,29.73707,-95.46457
 Supercharger US-Houston-North TX,29.9803,-95.42156
@@ -7189,7 +7192,7 @@ Supercharger-V3 US-Sterling VA,38.97787,-77.41187
 Supercharger-V4 US-Sterling VA Russell Branch Pkwy,39.02828,-77.43564
 Supercharger-V3 US-Stoney Creek VA,36.978,-77.39502
 Supercharger US-Strasburg VA,39.00494,-78.3379
-Supercharger-V3 US-Suffolk VA,36.71693,-76.65664
+Supercharger-V3 US-Suffolk VA,36.7174,-76.65668
 Supercharger-V3 US-Tappahannock VA,37.90395,-76.8661
 Supercharger-V3 US-Tysons VA,38.91554,-77.22473
 Supercharger-V3 US-Vienna VA,38.89525,-77.2743
@@ -9482,10 +9485,12 @@ Astor TR-Çorum Çevre Yolu Blv,40.55195,34.92965
 Atlante ES-Lliçà d’Amunt Carrer de la Matarranya,41.61834,2.2154
 Atlante ES-Lliçà d’Amunt Carrer de la Matarranya,62.47466,21.36138
 Atlante FR-Aire de Nîmes Marguerittes Sud,43.8695,4.43968
+Atlante FR-Bessoncourt Avenue du Tilleul,47.64185,6.9204,30
 Atlante FR-Chalon-sur-Saône Rue René Cassin,46.77545,4.8648
 Atlante FR-Champniers Rte de la Braconne,45.69237,0.17505
 Atlante FR-Danjoutin Av. de la République,47.6247,6.86067
 Atlante FR-Houssen Rue de Rosenkranz,48.12734,7.3647
+Atlante FR-Limoges Rue de Toulouse,45.8117,1.2814
 Atlante FR-Montluçon Rue de Pasquis,46.36828,2.5929
 Atlante IT-Area di Servizio Civita Nord,42.0677,13.0379
 Atlante IT-Montaione Via Aldo Moro,43.55431,10.91143
@@ -10564,6 +10569,68 @@ CircleK SE-Solna Järva krog,59.38018,18.00905
 CircleK SE-Stavsjö Stavsjö trafikplats,58.7304,16.41052
 CircleK SE-Upplands Väsby Kapellvägen,59.51355,17.92023
 CircleK SE-Västerås Bergslagsvägen,59.63558,16.56038
+CircleK US-Alexandria MN Highway 29 S,45.8417,-95.38932,30
+CircleK US-Aurora CO S Potomac St,39.71152,-104.8279,30
+CircleK US-Bainbridge GA Dothan Rd,30.92008,-84.60206,30
+CircleK US-Baxter MN Dellwood Dr N,46.36975,-94.24288,30
+CircleK US-Berea KY Chestnut St,37.56795,-84.3066,30
+CircleK US-Bradenton FL State Route 64 E,27.4918,-82.48093,30
+CircleK US-Broomfield CO W Highway 287,39.92166,-105.09124,30
+CircleK US-Burnsville MN Nicollet Ave S,44.77756,-93.27946,30
+CircleK US-Cherry Valley IL S Perryville Rd,42.24248,-88.98008,30
+CircleK US-Colorado City CO S I-25,37.9614,-104.79417,30
+CircleK US-Columbus GA S Georgia Pkwy W,32.44395,-84.9717,30
+CircleK US-Conway SC US-501,33.8494,-79.06882,30
+CircleK US-Corona CA Cajalco Rd,33.82504,-117.5082,30
+CircleK US-Denver CO Tower Rd,39.81875,-104.7718,30
+CircleK US-Dobson NC Zephyr Rd,36.3954,-80.78508,30
+CircleK US-Dover NH Dover Point Rd,43.17392,-70.86177,30
+CircleK US-Ellensburg WA Canyon Rd,46.97737,-120.54253,30
+CircleK US-Escondido CA N Centre City Pkwy,33.197,-117.12367,30
+CircleK US-Fresno CA N Peach Ave,36.75795,-119.71742,30
+CircleK US-Gaffney SC Shelby Hwy,35.1075,-81.60318,30
+CircleK US-Gastonia NC N Chester St,35.2869,-81.18734,30
+CircleK US-Goodyear AZ W McDowell Rd,33.46395,-112.39302,30
+CircleK US-Hickory NC Highway 70 SE,35.70134,-81.2935,30
+CircleK US-Hilton Head Island SC Matthews Dr,32.21563,-80.702,30
+CircleK US-Irmo SC Broad River Rd,34.1002,-81.1784,30
+CircleK US-Jupiter FL W Indiantown Rd,26.9338,-80.0951,30
+CircleK US-Lancaster CA E Ave K,34.67467,-118.12977,30
+CircleK US-Longmont CO W I-25 Frontage Rd,40.16012,-104.98052,30
+CircleK US-Macon GA Bass Rd,32.92726,-83.73254,30
+CircleK US-Macon GA Hartley Bridge Rd,32.74348,-83.72527,30
+CircleK US-Mission Viejo CA Marguerite Pkwy,33.58486,-117.65934,30
+CircleK US-Monticello MN Oakwood Dr,45.29583,-93.80024,30
+CircleK US-Monument CO W Baptist Rd,39.05703,-104.84432,30
+CircleK US-Myrtle Beach SC George Bishop Pkwy,33.71502,-78.93724,30
+CircleK US-New Bern NC Hotel Dr,35.10423,-77.0819,30
+CircleK US-North Charleston SC Ashley Phosphate Rd,32.9355,-80.04394,30
+CircleK US-North Myrtle Beach SC Highway 17 S,33.82477,-78.68405,30
+CircleK US-Northlake TX I-35 W,33.02793,-97.2704,30
+CircleK US-Orlando FL E Colonial Dr,28.5646,-81.1866,30
+CircleK US-Orlando FL W Sand Lake Rd,28.44924,-81.47208,30
+CircleK US-Palm Desert CA Country Club Dr,33.75773,-116.3033,30
+CircleK US-Payson AZ S Beeline Hwy,34.22728,-111.32886,30
+CircleK US-Perris CA N Perris Blvd,33.80152,-117.2256,30
+CircleK US-Phoenix AZ N 67th Ave,33.46076,-112.20223,30
+CircleK US-Phoenix AZ W Anthem Way,33.86538,-112.13496,30
+CircleK US-Pine City MN 13 St SW,45.82192,-92.9813,30
+CircleK US-Richmond KY Amberley Way,37.73568,-84.32773,30
+CircleK US-Rochester MN Assisi Dr NW,44.04307,-92.4863,30
+CircleK US-Rock Hill SC Cherry Rd,34.976,-80.98313,30
+CircleK US-Salisbury NC Rowan Summit Dr,35.63118,-80.488,30
+CircleK US-San Antonio TX Se Loop 410,29.3224,-98.4322,30
+CircleK US-San Antonio TX US Highway 87 E,29.3988,-98.3879,30
+CircleK US-San Antonio TX Utsa Blvd,29.57464,-98.59575,30
+CircleK US-San Diego CA Camino Del Sur,32.95712,-117.1524,30
+CircleK US-St. Cloud MN Roosevelt Rd,45.49793,-94.15106,30
+CircleK US-St. Petersburg FL Roosevelt Blvd N,27.86838,-82.64662,30
+CircleK US-Valdosta GA W Hill Ave,30.8201,-83.31348,30
+CircleK US-Victorville CA Mojave Dr,34.52868,-117.31865,30
+CircleK US-Victorville CA Nisqualli Rd,34.4845,-117.33052,30
+CircleK US-Wenatchee WA Easy St,47.46825,-120.3349,30
+CircleK US-Willis TX Calvary Rd,30.4545,-95.494,30
+CircleK US-Wytheville VA E Lee Hwy,36.94682,-80.9504,30
 
 Circontrol AL-Bërzhitë Palmanova,41.24844,19.90376
 Circontrol AL-Tiranë Bajram Curri Blvd,41.32288,19.81224
@@ -10851,7 +10918,7 @@ Clever DK-Viborg Lundvej,56.45891,9.37403
 Clever DK-Vojens Sønderjyske Motorvej,55.2156,9.3719
 
 Cogelum-Citeos FR-Belfort All. de l’Option Française,47.63696,6.86008
-Cogelum-Citeos FR-Bessoncourt Av. du Tilleul,47.6419,6.91938
+Cogelum-Citeos FR-Bessoncourt Av. du Tilleul,47.6419,6.91938,30
 
 Comfortcharge DE-Altenburg,50.98672,12.44072
 Comfortcharge DE-Annaberg-Buchholz Straße der Freundschaft,50.58439,13.00657
@@ -24499,6 +24566,7 @@ Norlys DK-Sorø Ringstedvej,55.44096,11.56662
 Norlys DK-Ulfborg Vesterhavsgade,56.37364,8.11866
 Norlys DK-Vejle Dandyvej,55.72603,9.58114
 Norlys DK-Viborg Feltbanen,56.45979,9.40111
+Norlys DK-Vojens Sønderjyske Motorvej,55.21645,9.37204,30
 Norlys DK-Vordingborg Højgaardsvej,54.9978,12.0016,20
 
 NOXO PL-Bełk Główna,50.13117,18.6888
