@@ -2172,7 +2172,7 @@ Supercharger-V4 DE-Leipheim,48.43655,10.21295
 Supercharger-V4 DE-Leipzig Rosa-Luxemburg-Straße,51.34682,12.39433
 Supercharger-V4 DE-Leipzig Sachsenpark,51.401142,12.39782,15
 Supercharger-V3 DE-Leipzig-Flughafen,51.40153,12.18123
-Supercharger-V4 DE-Leonberg,48.78523,9.01755
+Supercharger-V4 DE-Leonberg,48.78497,9.01732
 Supercharger-V3 DE-Leonberg Glemseck,48.78456,9.01918
 Supercharger-V4 DE-Leverkusen,51.03636,7.00485
 Supercharger-V3 DE-Limburg - (Globus),50.398424,8.076242
@@ -2254,7 +2254,7 @@ Supercharger-V3 DE-Pfaffenhofen,48.51838,11.562189
 Supercharger-V4 DE-Pfalzfeld,50.11565,7.59788,35
 Supercharger-V4 DE Pforzheim,48.905014,8.65431
 Supercharger-V4 DE Pfungstadt,49.815547,8.620279
-Supercharger-V3 DE-Piding,47.764,12.90455,27
+Supercharger-V3 DE-Piding,47.7639,12.9047
 Supercharger-V3 DE-Plattling,48.7887,12.89745
 Supercharger-V3 DE-Plauen,50.4975,12.17024
 Supercharger-V3 DE-Posthausen,53.057581,9.165191,35
@@ -6907,6 +6907,7 @@ Supercharger-V3 US-Corpus Christi TX,27.7103,-97.36928
 Supercharger-V4 US-Corpus Christi TX S Padre Island Dr,27.7069,-97.37282
 Supercharger US-Corsicana TX,32.0686,-96.44822
 Supercharger-V4 US-Cotulla TX,28.446,-99.2435
+Supercharger-V4 US-Cuero TX The EVThing,29.0912,-97.28466
 Supercharger-V3 US-Dallas TX - Mountain Creek Parkway,32.67227,-96.96882
 Supercharger US-Dallas TX - North Central Expressway,32.88102,-96.7696
 Supercharger-V3 US-Dallas TX Belt Line Road,32.95016,-96.81857
@@ -7950,8 +7951,7 @@ Aldi DE-Perl Erlenweg,49.5193,6.37607
 Aldi DE-Petersberg,50.554,9.71266
 Aldi DE-Pforzheim,48.90263,8.66347
 Aldi DE-Pforzheim Schwarzwaldstraße,48.88668,8.69513
-Aldi DE-Piding,47.75726,12.89875
-Aldi DE-Piding Reichenhaller Straße,47.75694,12.89872
+Aldi DE-Piding Reichenhaller Straße,47.75726,12.89875
 Aldi DE-Plech Gewerbepark Schönthal,49.66286,11.47033,30
 Aldi DE-Pulheim Steinstraße,50.99533,6.80058
 Aldi DE-Putzbrunn Innstraße,48.08093,11.69185
@@ -9347,7 +9347,7 @@ ARAL DE-Peine Schwarzer Weg,52.3301,10.23483
 ARAL DE-Pforzheim Karlsruher Straße,48.90205,8.66104
 ARAL DE-Pforzheim Lochäckerstraße,48.9106,8.71832
 ARAL DE-Pfullendorf Überlinger Straße,47.9279,9.24292
-ARAL DE-Piding Lattenbergstraße,47.76412,12.90417,5
+ARAL DE-Piding Lattenbergstraße,47.76424,12.90407,12
 ARAL DE-Pirmasens Zweibrücker Straße,49.2142,7.59737
 ARAL DE-Plaidt Rathausstraße,50.39352,7.3849
 ARAL DE-Potsdam Potsdamer Straße,52.4195,13.01258
@@ -15627,7 +15627,7 @@ EnBW DE-Pfullingen Schloßstraße,48.4658,9.22172
 EnBW DE-Pfungstadt Mainstraße,49.8102,8.5882
 EnBW DE-Philippsburg Rheinschanzinsel,49.25267,8.43718
 EnBW DE-Philippsburg Rote-Tor-Straße,49.23527,8.45423
-EnBW DE-Piding Lattenbergstraße,47.76424,12.90358,10
+EnBW DE-Piding Lattenbergstraße,47.76435,12.90353,20
 EnBW DE-Piding Lattenbergstraße,47.76546,12.9053
 EnBW DE-Pirmasens Zweibrücker Straße,49.2147,7.59586
 EnBW DE-Plankstadt Am Festplatz,49.39615,8.59142
@@ -21643,7 +21643,7 @@ Intermarché FR-Riez Rte de Puimoisson,43.82255,6.09129
 
 Ionity AT-Amstetten Oiden,48.13138,14.84032
 Ionity AT-Angath Nord,47.51922,12.06553
-Ionity AT-Ansfelden Haider Straße,48.21098,14.27965,25
+Ionity AT-Ansfelden Haider Straße,48.2108,14.2798,30
 Ionity AT-Eberstalzell Solarstraße,48.03913,13.99065,30
 Ionity AT-Eisentratten,46.91994,13.57928
 Ionity AT-Flachau Wagrainer Straße,47.3624,13.38392
@@ -21936,6 +21936,7 @@ Ionity FR-Aire de Chartres-Gasville,48.46854,1.58001
 Ionity FR-Aire de Darvault,48.26407,2.72202
 Ionity FR-Aire de Giberville,49.16791,-0.27375
 Ionity FR-Aire de la Loire,45.85063,4.22629
+Ionity FR-Aire de la Vendée,46.57354,-1.118,20
 Ionity FR-Aire de Longvilliers,48.56591,1.98583
 Ionity FR-Aire de Lyon Montluel,45.84373,5.06993,30
 Ionity FR-Aire de L’Île Rose,45.27699,5.62296,30
@@ -22031,7 +22032,6 @@ Ionity FR-Taponas,46.13442,4.76684
 Ionity FR-Tavel Nord,44.00407,4.70363
 Ionity FR-Tavel Sud,43.99963,4.70019
 Ionity FR-Tours La Longue Vue,47.47574,0.77685
-Ionity FR-Vendée,46.57354,-1.11801
 Ionity FR-Veyre,45.66013,3.15353
 Ionity FR-Vidauban Sud,43.41369,6.45157,30
 Ionity FR-Village Catalan Est,42.57843,2.84699
@@ -24808,7 +24808,7 @@ MENNEKES DE-Trebbin Markt,52.21471,13.21384
 MENNEKES DE-Wangels Seestraße,54.3103,10.8019
 
 Mer AT-Allhaming Poststraße,48.15352,14.15817
-Mer AT-Ansfelden Haider Straße,48.21112,14.27978,25
+Mer AT-Ansfelden Haider Straße,48.21134,14.27975,30
 Mer AT-Ansfelden Traunuferstraße,48.2162,14.28099
 Mer AT-Bad Waltersdorf Thermenweg,47.18158,15.99518
 Mer AT-Brunn am Gebirge Wienerstraße,48.11266,16.30259,30
@@ -27418,6 +27418,7 @@ Rheinenergie DE-Köln Willy-Brandt-Platz,50.9394,6.98161
 Rheinenergie DE-Köln Yitzhak-Rabin-Platz,50.93297,6.93879
 
 RheiNet DE-Rheine Osnabrücker Straße,52.285,7.4609
+RheiNet DE-Rheine Surenburgstraße,52.2764,7.45467
 
 rhenag DE-Siegburg Bachstraße,50.79821,7.20391
 rhenag DE-Siegburg Wilhelm-Ostwald-Straße,50.79278,7.221,30
