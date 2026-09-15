@@ -96,6 +96,7 @@ Supercharger-V4 AT-Völkermarkt,46.68227,14.67913,40
 Supercharger-V4 AT-Wels,48.145889,13.975208
 Supercharger-V4 AT-Wels Welas Park,48.180313,14.063536,19
 Supercharger-V4 AT-Wien,48.193045,16.27707
+Supercharger-V4 AT-Wien,48.19337,16.27818,10
 Supercharger-V3 AT-Wien Gewerbepark Stadlau,48.24713,16.46436
 Supercharger AT-Wien Tech Park Vienna,48.15725,16.33404
 Supercharger-V4 AT-Wien Wienerberg,48.16753,16.34786
@@ -4312,6 +4313,7 @@ Supercharger-V3 SG-West Coast Plaza,1.3038,103.76668
 Supercharger-V4 SG-Westgate,1.33468,103.74296
 
 Supercharger-V4 SI-Grosuplje,45.96817,14.65767
+Supercharger-V4 SI-Koper,45.54067,13.73255,10
 Supercharger-V4 SI-Koper,45.5409,13.7356
 Supercharger SI-Kozina,45.60492,13.928521
 Supercharger SI-Kozina,45.607449,13.931531
@@ -5854,6 +5856,7 @@ Supercharger-V4 US-Frederick MD 5831 Buckeystown Pike,39.39542,-77.4088
 Supercharger-V3 US-Frederick MD Ballenger Creek Pike,39.39256,-77.43862
 Supercharger US-Gaithersburg MD,39.11813,-77.2023
 Supercharger-V3 US-Gaithersburg MD Watkins Mill Rd,39.1585,-77.2226
+Supercharger-V4 US-Glen Burnie MD,39.1421,-76.6487
 Supercharger US-Grasonville MD,38.9659,-76.22053
 Supercharger-V3 US-Grasonville MD - Hissey Road,38.9659,-76.1939
 Supercharger-V4 US-Greenbelt MD,38.99712,-76.89222
@@ -6091,6 +6094,7 @@ Supercharger-V3 US-Colfax NC,36.09507,-79.9947
 Supercharger-V4 US-Concord NC,35.3657,-80.71255
 Supercharger-V4 US-Dunn NC,35.29633,-78.5988
 Supercharger-V3 US-Durham NC,35.95302,-78.99096
+Supercharger-V3 US-Durham NC Fayetteville Rd,35.90362,-78.93708
 Supercharger US-Fayetteville NC,35.00974,-78.82233
 Supercharger-V3 US-Franklin NC,35.1639,-83.39294
 Supercharger-V3 US-Garner NC,35.60857,-78.56304
@@ -6578,6 +6582,7 @@ Supercharger-V4 US-Jenks OK Francis Energy,36.02822,-95.96146
 Supercharger-V4 US-Lawton OK Francis Energy,34.6112,-98.38872
 Supercharger-V4 US-Midwest City OK E Reno Ave Francis Energy,35.46395,-97.40273
 Supercharger-V4 US-Midwest City OK Francis Energy,35.46753,-97.37188
+Supercharger-V4 US-Moore OK Francis Energy,35.35028,-97.47778
 Supercharger-V4 US-Muskogee OK Francis Energy,35.76757,-95.40344
 Supercharger-V4 US-Norman OK Chautauqua Ave Francis Energy,35.1815,-97.45112
 Supercharger-V3 US-Oklahoma City OK,35.4617,-97.6514
@@ -7457,6 +7462,7 @@ Tesla Service Center FR-Paris,48.86995,2.32086
 Tesla Service Center HR-Zagreb,45.8073,15.85843
 Tesla Service Center IT-Milano,45.4287,9.32361
 Tesla Service Center IT-Padova,45.38944,11.9502
+Tesla Service Center IT-Roma Nord,41.97688,12.49442
 Tesla Service Center LU-Luxembourg,49.58943,6.14069
 Tesla Service Center NL-Amsterdam Zuid-Oost,52.31048,4.93618
 Tesla Service Center NL-Arnhem,51.965,6.00376
@@ -7817,6 +7823,7 @@ Aldi DE-Kelsterbach,50.05862,8.52109
 Aldi DE-Kerken Kenger Weg,51.4571,6.3799
 Aldi DE-Kerpen Stiftsstraße,50.86724,6.67484
 Aldi DE-Kirchentellinsfurt Wannweiler Straße,48.52728,9.14244
+Aldi DE-Kirchhain Frankfurter Straße,50.82625,8.91563
 Aldi DE-Kirchheim unter Teck,48.65261,9.45985
 Aldi DE-Kirchheim unter Teck Dettinger Straße,48.6365,9.4525
 Aldi DE-Kirchheimbolanden Woogmorgen,49.66025,8.02108
@@ -9493,8 +9500,9 @@ Atlante FR-Houssen Rue de Rosenkranz,48.12734,7.3647
 Atlante FR-Limoges Rue de Toulouse,45.8117,1.2814
 Atlante FR-Montluçon Rue de Pasquis,46.36828,2.5929
 Atlante IT-Area di Servizio Civita Nord,42.0677,13.0379
+Atlante IT-Area di Servizio Montepulciano Est,43.13596,11.8649
+Atlante IT-Area di Servizio Montepulciano Ovest,43.13546,11.86467
 Atlante IT-Montaione Via Aldo Moro,43.55431,10.91143
-Atlante IT-Montepulciano Ovest,43.13546,11.86467
 Atlante IT-Roma Via Giorgio Zoega,41.87423,12.43276
 Atlante IT-San Pietro di Cadore Piazza Tre Terze,46.57048,12.59099
 Atlante IT-Voghiera Via Alfieri Maserati,44.78968,11.72829
@@ -12517,6 +12525,7 @@ Electra DE-Detmold Klingenbergstraße,51.95144,8.854
 Electra DE-Dortmund Westfalendamm,51.50435,7.51502
 Electra DE-Dresden Gerichtsstraße,51.051,13.75132
 Electra DE-Germersheim Münchener Straße,49.22712,8.3729
+Electra DE-Gießen Schiffenberger Weg,50.5716,8.69202
 Electra DE-Gräfelfing Pasinger Straße,48.1256,11.44803
 Electra DE-Halle (Saale) Delitzscher Straße,51.479,11.9984
 Electra DE-Hemmoor Stader Straße,53.68228,9.17848
@@ -20457,6 +20466,8 @@ FreeToX IT-Area di Lario,45.72902,9.02876
 FreeToX IT-Area di Lario,45.7299,9.02799
 FreeToX IT-Area di Servizio Flaminia,42.31666,12.4913
 FreeToX IT-Area di Servizio Garda,45.5411,10.7794
+FreeToX IT-Area di Servizio Secchia Est,44.6623,10.85794
+FreeToX IT-Area di Servizio Secchia Ovest,44.66164,10.85486
 FreeToX IT-Area di servizio Valtrompia Nord,45.53256,10.1512
 FreeToX IT-Area di servizio Valtrompia Sud,45.53256,10.1484
 FreeToX IT-Badia al Pino,43.40561,11.76381
@@ -20493,8 +20504,6 @@ FreeToX IT-Melegnano Autostrada del Sole,45.32106,9.37533
 FreeToX IT-Melegnano Autostrada del Sole,45.32148,9.37721
 FreeToX IT-Milano Autostrada dei Laghi,45.76239,8.81088
 FreeToX IT-Milano Autostrada dei Laghi,45.76291,8.8096
-FreeToX IT-Modena Autostrada del Sole,44.66164,10.85486
-FreeToX IT-Modena Autostrada del Sole,44.6623,10.85794
 FreeToX IT-Novegro-Tregarezzo Airport,45.46183,9.27628
 FreeToX IT-Occimiano Autostrada dei Trafori,45.07467,8.51099
 FreeToX IT-Occimiano Autostrada dei Trafori,45.07481,8.5089
@@ -28826,7 +28835,7 @@ SW-BK DE-Bad Kissingen Geschwister-Scholl-Platz,50.20659,10.08166
 SW-Blankenburg DE-Hasselfelde Blauvogel,51.67625,10.83572
 SW-Blankenburg DE-Rübeland Blankenburger Straße,51.75467,10.84388
 SW-Bochum DE-Bochum Blumenau,51.438,7.27965
-SW-Bochum DE-Bochum Dorstener Straße,51.5066,7.19202,20
+SW-Bochum DE-Bochum Dorstener Straße,51.50648,7.19203,20
 SW-Bochum DE-Bochum Dr.-C.-Otto-Straße,51.42538,7.1603
 SW-Bochum DE-Bochum Hauptbahnhof,51.47871,7.2221
 SW-Bochum DE-Bochum Herner Straße,51.50987,7.21153
