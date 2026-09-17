@@ -4210,6 +4210,7 @@ Supercharger-V4 SE-Kungälv,57.85816,11.99827
 Supercharger-V3 SE-Lagan,57.02886,14.01488
 Supercharger-V4 SE-Laxå,58.982245,14.623561
 Supercharger-V3 SE-Linköping,58.435438,15.590951
+Supercharger-V4 SE-Ljungby,56.81435,13.9064
 Supercharger-V3 SE-Ljusdal,61.827747,16.094661
 Supercharger-V3 SE-Ludvika,60.1518,15.19179
 Supercharger-V4 SE-Luleå,65.590269,22.147879
@@ -4623,6 +4624,7 @@ Supercharger-V3 US-Elk Grove CA - 7119 Elk Grove Blvd,38.40917,-121.41886
 Supercharger-V3 US-Elk Grove CA - Elk Grove Blvd,38.40944,-121.39094
 Supercharger-V3 US-Emeryville CA,37.84044,-122.29403
 Supercharger-V3 US-Emeryville CA - Christie Ave,37.83752,-122.29514
+Supercharger-V4 US-Encinitas CA Birmingham Dr,33.02586,-117.27322
 Supercharger-V4 US-Encinitas CA N El Camino Real,33.0682,-117.26707
 Supercharger-V3 US-Escondido CA,33.12948,-117.08758
 Supercharger-V4 US-Escondido CA E Via Rancho Pkwy,33.07008,-117.0669
@@ -5257,6 +5259,7 @@ Supercharger-V4 US-Davenport FL Grandview Pkwy,28.23267,-81.64245
 Supercharger-V3 US-Davie FL,26.0926,-80.24975
 Supercharger-V4 US-Davie FL S State Rd 7,26.06382,-80.20722
 Supercharger-V4 US-Davie FL Stirling Rd,26.04533,-80.23108
+Supercharger-V4 US-Davie FL SW 64th Ave,26.09126,-80.22724
 Supercharger-V3 US-Daytona Beach FL,29.18347,-81.0788
 Supercharger-V3 US-Daytona Beach FL Gateway N Drive,29.22373,-81.10223
 Supercharger-V3 US-Daytona Beach FL Gateway North Dr,29.22327,-81.09972
@@ -5856,6 +5859,7 @@ Supercharger-V4 US-Frederick MD 5831 Buckeystown Pike,39.39542,-77.4088
 Supercharger-V3 US-Frederick MD Ballenger Creek Pike,39.39256,-77.43862
 Supercharger US-Gaithersburg MD,39.11813,-77.2023
 Supercharger-V3 US-Gaithersburg MD Watkins Mill Rd,39.1585,-77.2226
+Supercharger-V4 US-Germantown MD,39.19953,-77.25465
 Supercharger-V4 US-Glen Burnie MD,39.1421,-76.6487
 Supercharger US-Grasonville MD,38.9659,-76.22053
 Supercharger-V3 US-Grasonville MD - Hissey Road,38.9659,-76.1939
@@ -6890,6 +6894,7 @@ Supercharger-V4 US-Baytown TX,29.8016,-94.9979
 Supercharger-V3 US-Baytown TX,29.8016,-94.9986
 Supercharger-V3 US-Baytown TX N Hwy 146,29.7585,-94.92997
 Supercharger-V3 US-Bee Cave TX,30.30525,-97.94157
+Supercharger-V4 US-Bowie TX Victron Energy,33.57538,-97.89707
 Supercharger-V4 US-Brenham TX,30.14044,-96.3993
 Supercharger-V3 US-Brownsville TX,25.9507,-97.48778
 Supercharger-V4 US-Bryan TX,30.64252,-96.3502
@@ -7247,6 +7252,7 @@ Supercharger-V4 US-Coulee City WA,47.62155,-119.27956
 Supercharger US-Ellensburg WA,46.9769,-120.54167
 Supercharger-V3 US-Ellensburg WA - Canyon Road,46.97826,-120.54353
 Supercharger-V4 US-Ellensburg WA S Water St,46.99065,-120.55004
+Supercharger-V4 US-Elma WA,47.00545,-123.39037
 Supercharger-V3 US-Entiat WA,47.68453,-120.2072
 Supercharger-V3 US-Everett WA,47.90935,-122.22588
 Supercharger-V3 US-Federal Way WA,47.317,-122.3079
@@ -8728,6 +8734,7 @@ Allego FR-Saint-Jean-de-Luz Route de Bayonne,43.40505,-1.62823
 Allego FR-Saint-Louis Av. Général de Gaulle,47.58318,7.55722
 Allego FR-Thiais Rue du Luxembourg,48.75427,2.3734,8
 Allego FR-Venette Av. de l’Europe,49.40815,2.78088,30
+Allego FR-Vernon Bd Isambard,49.09016,1.47178
 Allego FR-Épinal Rue du Saut le Cerf,48.1974,6.4775
 Allego NL-De Koog Pelikaanweg,53.0817,4.76146
 Allego NL-Eelderwolde Borchsingel,53.19675,6.5161,30
@@ -8911,7 +8918,74 @@ APCOA DE-München Riem Arcaden,48.13233,11.69326
 Applegreen-Electric GB-Leicester Welcome Break,52.6186,-1.20575
 Applegreen-Electric GB-Newport Pagnell Welcome Break,52.0829,-0.7484,15
 Applegreen-Electric IE-Wicklow Service Area,53.04385,-6.08954
+Applegreen-Electric US-Amsterdam NY Service Rd,42.91474,-74.163,30
+Applegreen-Electric US-Bloomfield NJ Broad St,40.8363,-74.18092,30
+Applegreen-Electric US-Bloomfield NJ State Pkwy,40.8394,-74.17896,30
+Applegreen-Electric US-Bowmansville PA Tpke MM 289.9,40.20257,-76.0161,30
+Applegreen-Electric US-Branford CT 95 S,41.28654,-72.83464,30
+Applegreen-Electric US-Branford CT Branford Service Plaza N,41.28508,-72.83457,30
+Applegreen-Electric US-Broadview Heights OH Broadview Rd,41.29235,-81.6763,30
+Applegreen-Electric US-Broadview Heights OH E Edgerton Rd,41.29182,-81.67072,30
+Applegreen-Electric US-Cherry Hill NJ NJ Turnpike,39.8865,-75.00207,30
+Applegreen-Electric US-Chittenango NY Tag Rd NY State Thruway,43.09577,-75.8411,30
+Applegreen-Electric US-Clarence NY Ransom Rd,42.9529,-78.60317,30
+Applegreen-Electric US-Clifton Springs NY NY-96,42.97276,-77.17345,30
+Applegreen-Electric US-Corfu NY Indian Falls Rd,43.0119,-78.33038,30
+Applegreen-Electric US-Cumberland Center ME Marker 56 S,43.8179,-70.31996,30
+Applegreen-Electric US-Darien CT Darien Cl,41.08034,-73.46188,30
+Applegreen-Electric US-Darien CT West Ave,41.0678,-73.50357,30
+Applegreen-Electric US-East Brunswick NJ Turnpike Mile 8 N,40.41592,-74.44435,30
+Applegreen-Electric US-East Windsor NJ Turnpike Milepost 71.7 S,40.32247,-74.48687,30
+Applegreen-Electric US-Fairfield CT Connecticut Turnpike,41.14784,-73.25593,30
+Applegreen-Electric US-Fairfield CT Merritt Pkwy,41.219,-73.25653,30
+Applegreen-Electric US-Fairfield CT Merritt Pkwy,41.21903,-73.2557,30
+Applegreen-Electric US-Fairfield CT Round Hill Rd,41.1465,-73.25685,30
+Applegreen-Electric US-Frankfort NY Carder Lane Rd,43.076,-75.10292,30
+Applegreen-Electric US-Galloway NJ State Pkwy Milepost 41,39.471,-74.5293,30
+Applegreen-Electric US-Gray ME Marker 59 N,43.82426,-70.31996,30
+Applegreen-Electric US-Hamilton Township NJ New Jersey Turnpike,40.17566,-74.63,30
+Applegreen-Electric US-Hastings on Hudson NY York Thruway,40.985,-73.85296,30
+Applegreen-Electric US-Hunker PA New Stanton Plaza Rd,40.2061,-79.56548,30
+Applegreen-Electric US-Jim Thorpe PA Danner Rd,40.9698,-75.6313,30
+Applegreen-Electric US-Jim Thorpe PA Danner Rd,40.97084,-75.63097,30
+Applegreen-Electric US-Lawn PA 258.8 W,40.2081,-76.57506,30
+Applegreen-Electric US-Leroy NY Thruway Milepost 376 W,43.03113,-77.90847,30
+Applegreen-Electric US-Little Falls NY State Route 5S Mile Post 210W,43.01676,-74.80228,30
+Applegreen-Electric US-Little Falls NY Thruway Milepost 210 E,43.01617,-74.80412,30
+Applegreen-Electric US-Madison CT I-95,41.29057,-72.5796,30
+Applegreen-Electric US-Madison CT South St,41.29154,-72.5795,30
+Applegreen-Electric US-Malden-on-Hudson NY Northbound Milepost 103,42.11016,-73.95706,30
+Applegreen-Electric US-Middletown PA Turnpike MM 249.7 E,40.20982,-76.74388,30
+Applegreen-Electric US-Milford CT 95 N,41.24567,-73.00805,30
+Applegreen-Electric US-Milford CT Connecticut Turnpike,41.2466,-73.01007,30
+Applegreen-Electric US-Montvale NJ Gardon State Pkwy MM 172,41.04864,-74.06613,30
+Applegreen-Electric US-Mt. Laurel Township NJ NJ Turnpike,39.98077,-74.8872,30
+Applegreen-Electric US-New Baltimore NY 127 S NY State Thruway,42.42857,-73.80558,30
+Applegreen-Electric US-New Canaan CT Gerdes Rd,41.12006,-73.4807,30
+Applegreen-Electric US-Newark DE JFK Memorial Hwy,39.6627,-75.6905,30
+Applegreen-Electric US-Newburg PA Blue Mountain Plaza,40.16614,-77.59703,30
+Applegreen-Electric US-North Haven CT Upper State St,41.39788,-72.87056,30
+Applegreen-Electric US-Pattersonville NY Thruway Mile Post 168 W,42.8964,-74.09674,30
+Applegreen-Electric US-Pedricktown NJ Stumpy Rd,39.69803,-75.39597,30
+Applegreen-Electric US-Pedricktown NJ Turnpike Milepost 5 N,39.69557,-75.39706,30
 Applegreen-Electric US-Phelps NY NY State Thruway,42.9588,-76.91741
+Applegreen-Electric US-Planfield CT S Between Exits 32 & 35,41.75483,-71.87847,30
+Applegreen-Electric US-Plattekill NY - NYS Thruway NB,41.57765,-74.0854,30
+Applegreen-Electric US-Ridgefield NJ E New Jersey Turnpike,40.8227,-74.03108,30
+Applegreen-Electric US-Ruby NY Thruway Mile Post 96 S,42.0145,-73.99945,30
+Applegreen-Electric US-Schenectady NY Brookview Dr,42.7442,-73.91853,30
+Applegreen-Electric US-Scottsville NY Thruway Milepost 366 E,43.04116,-77.71584,30
+Applegreen-Electric US-Seacacus NJ State Pkwy Milepoost 151.3 S,40.7706,-74.06532,30
+Applegreen-Electric US-Somerset PA N Plaza Access Rd,39.99996,-79.0435,30
+Applegreen-Electric US-Sturbridge MA Route 15,42.071,-72.09766,30
+Applegreen-Electric US-Syracuse NY Tarbell Rd,43.091,-76.10404,30
+Applegreen-Electric US-Union NJ Vauxhall Rd,40.6987,-74.2525,30
+Applegreen-Electric US-Victor NY NY State Thruway,42.99916,-77.41338,30
+Applegreen-Electric US-Wall NJ State Pkwy Milepost 100,40.19746,-74.09904,30
+Applegreen-Electric US-Waterfall PA 172.3 E,40.05836,-78.08126,30
+Applegreen-Electric US-Waterfall PA 172.3 W,40.05902,-78.0824,30
+Applegreen-Electric US-Westmoreland NY NY State Thruway #233,43.12505,-75.4152,30
+Applegreen-Electric US-Woodbridge NJ Turnpike Milepost 92.9 N,40.55616,-74.26422,30
 
 ARAL DE-Aachen Friedrich-Ebert-Allee,50.7627,6.09695
 ARAL DE-Ahlen Beckumer Straße,51.76517,7.91214
@@ -12379,6 +12453,7 @@ EFL DE-Sinzig Schloß Ahrenthal,50.52073,7.24871
 
 EG-Chemnitz-Zwickau DE-Schneeberg Seminarstraße,50.59684,12.64
 EG-Hasbergen DE-Hasbergen Rheiner Landstraße,52.26617,7.96555
+EG-Wittmund DE-Wittmund Am Harlesiel,53.7063,7.80777
 EG-Wittmund DE-Wittmund Isums,53.5634,7.7845
 EG-Wittmund DE-Wittmund Kutterweg,53.68797,7.8006
 EG-Wittmund DE-Wittmund Osterstraße,53.57617,7.78456
@@ -21709,7 +21784,7 @@ Ionity CH-Neuenkirch,47.11337,8.23233
 Ionity CH-Oftringen Nordstrasse,47.30405,7.9297
 Ionity CH-Rastplatz Heidiland,47.01172,9.51243,20
 Ionity CH-Raststätte Grauholz,46.99025,7.47613,30
-Ionity CH-Silvaplana Via Chantunela,46.45562,9.79077
+Ionity CH-Silvaplana Via Chantunela,46.45562,9.79077,20
 Ionity CH-Wangen an der Aare Wangenstrasse,47.24042,7.65182
 Ionity CZ-Beroun (dir. Prague),49.95581,14.06276
 Ionity CZ-Lovosice,50.51195,14.05277,12
@@ -27322,7 +27397,7 @@ Renovatio RO-Constanța Str. Caraiman,44.15692,28.61589
 Renovatio RO-Constanța Str. Eliberării,44.17655,28.62382
 Renovatio RO-Cruceni A1,46.08028,21.32365
 Renovatio RO-Cruceni A1,46.08145,21.32367
-Renovatio RO-Drobeta-Turnu Severin Bulevardul Mihai Viteazul,44.63781,22.63344
+Renovatio RO-Drobeta-Turnu Severin Bulevardul Mihai Viteazul,44.6378,22.63344,15
 Renovatio RO-Focșani Calea Moldovei,45.69521,27.20324
 Renovatio RO-Focșani Calea Moldovei,45.70349,27.20373
 Renovatio RO-Focșani Str. Cuza Vodă,45.71043,27.19707
@@ -27890,6 +27965,7 @@ Shell DE-Autohof Georgswerder,53.51856,10.02174
 Shell DE-Autohof Herzsprung,53.06798,12.53331,20
 Shell DE-Autohof Lehre,52.31314,10.6346,12
 Shell DE-Autohof Ramstein,49.42368,7.55945
+Shell DE-Autohof Schlüchtern,50.38632,9.53113
 Shell DE-Bad Aibling Grassinger Straße,47.8699,11.99918
 Shell DE-Bad Belzig Brücker Landstraße,52.14454,12.60938
 Shell DE-Bad Doberan An der B105,54.10596,11.92831
@@ -30188,6 +30264,7 @@ TotalEnergies NL-Oudenhorst,52.05081,5.4664,80
 TotalEnergies NL-Palmpol,52.16306,5.53343
 TotalEnergies NL-Papendrecht,51.84622,4.68115,80
 TotalEnergies NL-Poort Van Veghel,51.59953,5.51673,80
+TotalEnergies NL-Schagen Schubertstraat,52.78935,4.79665
 TotalEnergies NL-Schiedam,51.93024,4.40394,80
 TotalEnergies NL-Vliedberg,51.48466,3.8497
 
