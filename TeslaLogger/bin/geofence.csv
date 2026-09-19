@@ -2009,6 +2009,8 @@ Supercharger-V4 DE-Brinkum,53.02833,8.80876
 Supercharger-V4 DE-Bruchsal,49.13837,8.56242
 Supercharger-V3 DE-Brunnthal,48.0397,11.66146
 Supercharger-V4 DE-Brühl,49.40987,8.5417
+Supercharger-V3 DE-Burgdorf,52.11978,10.2243,10
+Supercharger-V3 DE-Burgdorf,52.1221,10.22875,10
 Supercharger-V3 DE-Burgdorf,52.122717,10.229433,35
 Supercharger-V4 DE-Busdorf,54.47796,9.54494,40
 Supercharger-V3 DE-Böblingen,48.69138,9.00365,55
@@ -2218,7 +2220,7 @@ Supercharger-V3 DE-München - Pasing Arcaden,48.14826,11.46415,35
 Supercharger-V3 DE-München - Sendling,48.10505,11.53686
 Supercharger-V4 DE-München Riem Arcaden,48.132573,11.689725,60
 Supercharger-V4 DE-München-Freiham,48.1353,11.4135
-Supercharger-V4 DE Münster,51.9922,7.57112
+Supercharger-V4 DE Münster,51.9922,7.57112,40
 Supercharger-V4 DE-Neckargemünd,49.3917,8.79687
 Supercharger-V4 DE-Nempitz,51.29005,12.1372,30
 Supercharger-V4 DE-Neu-Ulm,48.376918,10.006533
@@ -6658,6 +6660,7 @@ Supercharger US-Springfield OR - Kruse Way,44.08267,-123.03754
 Supercharger-V3 US-Sutherlin OR,43.38688,-123.34157
 Supercharger US-The Dalles OR,45.61196,-121.20836
 Supercharger US-Tigard OR,45.45012,-122.7829
+Supercharger-V4 US-Tigard OR SW Pacific Hwy,45.44192,-122.751
 Supercharger-V3 US-Tillamook OR,45.48144,-123.84382
 Supercharger-V3 US-Troutdale OR,45.5431,-122.3897
 Supercharger-V4 US-Warrenton OR,46.16182,-123.90197
@@ -8098,6 +8101,7 @@ Allego DE-Aulendorf Poststraße,47.95056,9.6426
 Allego DE-Autohof Achern,48.64082,8.0375,12
 Allego DE-Autohof Bad Rappenau,49.21204,9.07762,15
 Allego DE-Autohof Bergler,49.80454,12.18425,22
+Allego DE-Autohof Crailsheim-Satteldorf,49.18147,10.06946,14
 Allego DE-Autohof Gießen-Lützellinden,50.52955,8.6071
 Allego DE-Autohof Gramschatzer Wald,49.91213,10.00157,8
 Allego DE-Autohof Halle-Tornau,51.5458,12.01418
@@ -8616,7 +8620,6 @@ Allego DE-Saarbrücken Neumuehler Weg,49.2055,7.0208
 Allego DE-Salzgitter Theodor-Heuss-Straße,52.1369,10.28623
 Allego DE-Salzkotten Geseker Straße,51.66723,8.59135,30
 Allego DE-Sankt Augustin Max-Planck-Straße,50.79046,7.1818
-Allego DE-Satteldorf Marco-Polo-Straße,49.18147,10.06946,15
 Allego DE-Schipkau Senftenberger Straße,51.5358,13.91472
 Allego DE-Schorfheide An der B167,52.84974,13.68662
 Allego DE-Schweinfurt Friedrich-Rätzer-Straße,50.0279,10.23788
@@ -9004,6 +9007,7 @@ ARAL DE-Augsburg Aindlinger Straße,48.3927,10.93342
 ARAL DE-Augsburg Inninger Straße,48.3102,10.89043
 ARAL DE-Aurich Emder Straße,53.47088,7.46785
 ARAL DE-Autohof Bad Hersfeld,50.8625,9.72245
+ARAL DE-Autohof Bad Rappenau,49.21083,9.06975
 ARAL DE-Autohof Bensheim,49.67298,8.5968
 ARAL DE-Autohof Berneck-Himmelkron,50.05475,11.62284
 ARAL DE-Autohof Beselich,50.46828,8.13836
@@ -9035,7 +9039,6 @@ ARAL DE-Bad Hersfeld Rudolf-Diesel-Straße,50.85213,9.72606,30
 ARAL DE-Bad Honnef Gewerbepark Dachsberg,50.64687,7.3377
 ARAL DE-Bad Iburg Mühlentor,52.15534,8.04332
 ARAL DE-Bad Mergentheim Max-Eyth-Straße,49.49715,9.76168
-ARAL DE-Bad Rappenau Wilhelm-Hauff-Straße,49.21083,9.06975
 ARAL DE-Bad Tölz Sachsenkamer Straße,47.75964,11.57334
 ARAL DE-Bark Bockhorner Landstraße,53.91844,10.1285
 ARAL DE-Baunatal Langenbergstraße,51.2561,9.4135
@@ -13874,8 +13877,59 @@ Electrify-America US-Yuba City CA Butte House Rd,39.14638,-121.63456,30
 Electrify-America US-Yuma AZ S. Yuma Palms Parkway,32.70484,-114.60718,30
 Electrify-America US-Zion Crossroads VA Market Street,37.97972,-78.21062,30
 
+Electrify-Canada CA-Abbotsford BC S Fraser Way,49.052,-122.32208,30
+Electrify-Canada CA-Amherst NS Albion Street South,45.80993,-64.20145,30
+Electrify-Canada CA-Barrie ON Mapleview Drive W,44.3332,-79.69172,30
+Electrify-Canada CA-Bedford NS Damascus Rd,44.75062,-63.6438,30
+Electrify-Canada CA-Brockville ON Parkedale Ave,44.6055,-75.69847,30
+Electrify-Canada CA-Burlington ON Fairview Street,43.3541,-79.7862,30
+Electrify-Canada CA-Calgary AB - 57Th Avenue Ne,51.107,-114.04206,30
+Electrify-Canada CA-Canmore AB Old Canmore Rd,51.08837,-115.34643,30
+Electrify-Canada CA-Cornwall ON 9th Street East,45.03008,-74.73192,30
+Electrify-Canada CA-Drummondville QC Boul st-Joseph,45.8906,-72.5127,30
+Electrify-Canada CA-Edmonton AB Current Dr NW,53.4356,-113.59868,30
+Electrify-Canada CA-Fredericton NB Riocan Ave,45.93,-66.65956,30
+Electrify-Canada CA-Golden BC Lafontaine Rd,51.3024,-116.9501,30
+Electrify-Canada CA-Grand Falls NB Chemin Madawaska,47.05685,-67.7512,30
+Electrify-Canada CA-Greenfield Park QC Taschereau Blvd,45.48216,-73.46335,30
+Electrify-Canada CA-Hamilton ON Queenston Road,43.2286,-79.77384,30
+Electrify-Canada CA-Hope BC Fort Street,49.3792,-121.44052,30
+Electrify-Canada CA-Kamloops BC Hillside Drive,50.65443,-120.37918,30
+Electrify-Canada CA-Kelowna BC Leckie Rd,49.88444,-119.42777,30
+Electrify-Canada CA-Kingston ON Princess St.,44.26005,-76.56913,30
+Electrify-Canada CA-Langley BC 64th Avenue,49.11914,-122.6625,30
+Electrify-Canada CA-Laval QC Blvd Le Corbusier,45.55943,-73.7264,30
+Electrify-Canada CA-London ON Wellington Road,42.93072,-81.22085,30
+Electrify-Canada CA-Merritt BC Forksdale Ave,50.1222,-120.7608,30
 Electrify-Canada CA-Mirabel QC Chemin Notre Dame,45.67124,-73.92006
+Electrify-Canada CA-Mont-Tremblant QC Rte 117,46.1178,-74.55672,30
+Electrify-Canada CA-Nanaimo BC Uplands Dr,49.22006,-124.03097,30
+Electrify-Canada CA-Oshawa ON Gibb St,43.8863,-78.87676,30
+Electrify-Canada CA-Osoyoos BC Main St,49.03477,-119.4759,30
+Electrify-Canada CA-Ottawa ON Carling Ave,45.37077,-75.77056,30
 Electrify-Canada CA-Ottawa ON Coventry Rd,45.42069,-75.6517
+Electrify-Canada CA-Owen Sound ON 16th Street E,44.5746,-80.91503,30
+Electrify-Canada CA-Quebec QC Rue Armand-Viau,46.81605,-71.33393,30
+Electrify-Canada CA-Quebec QC Rue De La Concorde,46.72918,-71.27564,30
+Electrify-Canada CA-Red Deer AB 52nd Avenue,52.289,-113.8181,30
+Electrify-Canada CA-Regina SK Victoria Ave E,50.44498,-104.55214,30
+Electrify-Canada CA-Repentigny QC Boul. Brien,45.74513,-73.45596,30
+Electrify-Canada CA-Revelstoke BC Track St W,51.00458,-118.20075,30
+Electrify-Canada CA-Saint John NB Westmorland Rd,45.30526,-66.02212,30
+Electrify-Canada CA-Salmon Arm BC 1151 - 10th Avenue SW,50.69453,-119.2969,30
+Electrify-Canada CA-Sarnia ON Exmouthst,42.98525,-82.35662,30
+Electrify-Canada CA-Sault Ste Marie ON Bay Street,46.51187,-84.33645,30
+Electrify-Canada CA-Scarborough ON Sheppard Ave,43.79084,-79.26032,30
+Electrify-Canada CA-Sherbrooke QC Boulevard Josaphat-Rancourt,45.4186,-71.96646,30
+Electrify-Canada CA-Squamish BC Glenalder Place,49.73886,-123.134,30
+Electrify-Canada CA-St. Hyacinthe QC Rue Martineau,45.64332,-72.97767,30
+Electrify-Canada CA-Tilbury ON Mill St E,42.2646,-82.4257,30
+Electrify-Canada CA-Toronto ON Steeles Avenue W Halton Hills,43.57647,-79.82757,30
+Electrify-Canada CA-Trois-Rivieres QC Boul. Des Forges,46.35204,-72.58084,30
+Electrify-Canada CA-Vaughan ON Centre St,43.81007,-79.4595,30
+Electrify-Canada CA-W Lethbridge AB Highlands Blvd W,49.69453,-112.8952,30
+Electrify-Canada CA-Welland ON Primeway Drive,43.0153,-79.22866,30
+Electrify-Canada CA-Woodstock NB Connell St,46.16858,-67.59827,30
 
 electrip BG-Dolni Dabnik Долни Дъбник Околовръстния път,43.3987,24.43386
 electrip BG-Kulata Кулата E79,41.38413,23.36178
@@ -16529,6 +16583,7 @@ EnelX IT-Roma Viale dei Quattro Venti,41.8797,12.45856
 EnelX IT-Rovigo Viale Porta Adige,45.08557,11.78552
 EnelX IT-Saluzzo Via F. e G. Lattanzi,44.64589,7.50439
 EnelX IT-San Benedetto del Tronto Via della Liberazione,42.94108,13.88002
+EnelX IT-San Giovanni Teatino IKEA,42.39618,14.16652
 EnelX IT-San Martino Via della Fontana,45.65856,8.48954
 EnelX IT-San Vincenzo Via Firenze,43.09,10.54203
 EnelX IT-San Vito Via Antonio Meucci,39.43443,9.55033
@@ -25604,6 +25659,7 @@ Neogy IT-Meran Rennstallweg,46.65586,11.14929
 Neogy IT-Merano F.-Innerhofer-Straße,46.66734,11.16443
 Neogy IT-Monguelfo-Tesido Pfarrgasse,46.7578,12.10473
 Neogy IT-Montagna Via delle Dolomiti,46.333,11.30066
+Neogy IT-Partschins Parcines Vinschgauer Straße Via Venosta,46.66767,11.05815
 Neogy IT-Partschins Wasserfallweg,46.68446,11.0721
 Neogy IT-Peschiera del Garda Via Venezia,45.43843,10.71188
 Neogy IT-Piazza Catena Riva del Garda,45.88338,10.83878
@@ -27211,6 +27267,7 @@ Qelo HR-Labin Štrmac,45.11895,14.11928
 
 Qovoltis FR-Les Ulis Rue de la Réunion,48.68259,2.20282
 
+Qwello DE-Berlin Aschaffenburger Straße,52.48957,13.339
 Qwello DE-Berlin Dresdener Straße,52.50642,13.41383
 Qwello DE-Berlin Genter Straße,52.54898,13.35145
 Qwello DE-Berlin Scherenbergstraße,52.55057,13.41987
@@ -27884,8 +27941,6 @@ SETEC RO-Târgoviște Strada Stelea,44.92907,25.46125
 
 SEV84 FR-Entrechaux Rte de Faucon,44.21866,5.14106
 
-Shell AT-Altgralla Phyrnautobahn-Gralla,46.83106,15.55284
-Shell AT-Altgralla Phyrnautobahn-Gralla,46.833,15.548
 Shell AT-Amstetten Otto-Schott-Straße,48.11633,14.91141
 Shell AT-Fürstenfeld Burgauer Straße,47.06547,16.07911
 Shell AT-Gaisberg Thalgaustraße,47.84683,13.3392,25
@@ -27901,6 +27956,8 @@ Shell AT-Neudörfl Hauptstraße,47.80113,16.27548
 Shell AT-Pernitz Hauptstraße,47.89666,15.966
 Shell AT-Raststation Ansfelden,48.21216,14.282
 Shell AT-Raststation Eben,47.42114,13.383
+Shell AT-Raststation Gralla Ost,46.83106,15.55284
+Shell AT-Raststation Gralla West,46.83295,15.5476
 Shell AT-Raststation Walserberg Nord,47.7687,12.9454
 Shell AT-Raststation Walserberg Süd,47.7678,12.94826
 Shell AT-Schwanenstadt Vor der Au,48.04781,13.78082,60
@@ -29519,6 +29576,7 @@ SWM DE-München Josephsburgstraße,48.12634,11.63206
 SWM DE-München Kaflerstraße,48.14972,11.4578
 SWM DE-München Kirchseeoner Straße,48.11556,11.6172
 SWM DE-München Leopoldstraße,48.17114,11.5852
+SWM DE-München Lilienstraße,48.1286,11.58572
 SWM DE-München Maillingerstraße,48.1473,11.54332
 SWM DE-München Marklandstraße,48.09253,11.60448
 SWM DE-München Maximiliansplatz,48.1421,11.5733
@@ -30119,6 +30177,7 @@ TotalEnergies DE-Barsinghausen,52.33315,9.41458,80
 TotalEnergies DE-Berlin,52.58205,13.43239,80
 TotalEnergies DE-Bochum Hattinger Straße,51.44558,7.1939
 TotalEnergies DE-Bochum Porschestraße,51.48711,7.1926
+TotalEnergies DE-Bruckmühl Heimatweg,47.8708,11.9538
 TotalEnergies DE-Castrop-Rauxel Westring,51.5526,7.29446
 TotalEnergies DE-Delitzsch Raiffeisenstraße,51.51195,12.33328
 TotalEnergies DE-Drensteinfurt Am Ladestrang,51.70022,7.31748
@@ -31722,6 +31781,7 @@ AT Wien macjingle,48.20218,16.3426,25
 AT Wien NTT Global Data Centers,48.15949,16.34173
 AT Wien WILD,48.26669,16.42352
 AT Wiener Neustadt Fachhochschule,47.83871,16.24843
+AT Zell am See AlpenParks Hotel,47.3218,12.79566
 AU Braddon ACT Mode3,-35.27255,149.13342
 AU Brisbane The Chocolate Factory,-27.40879,153.06116
 AU Browns Plains QLD Browns Plains Rd,-27.6637,153.03996
@@ -32233,6 +32293,7 @@ RO Timișoara Strada Constantin Muşat,45.75907,21.22774
 RO Timișoara Urban Budget Hotel,45.75194,21.2415
 RO Târgu Jiu Strada Republicii,45.03113,23.2799
 RO Zalău Aleea Tineretului,47.19534,23.0595
+RS Novi Pazar Нови Пазар Саве Ковачевића,43.15392,20.53234
 RS Београд Klinika Varis,44.82424,20.41634
 SE Gällivare Postgatan,67.13387,20.65995
 SE Kalmar Ställplats Ölandsbron,56.6813,16.38104
