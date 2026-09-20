@@ -90,7 +90,7 @@ Supercharger-V4 AT-Stumm,47.28995,11.8877
 Supercharger-V4 AT-Suben,48.3942,13.42622,30
 Supercharger-V4 AT-Trieben,47.49212,14.48363
 Supercharger AT-Villach,46.604193,13.869091
-Supercharger-V3 AT-Villach-Ost,46.60166,13.88302
+Supercharger-V3 AT-Villach-Ost,46.60175,13.88332
 Supercharger-V4 AT-Villach-West,46.6309,13.82584
 Supercharger-V4 AT-Völkermarkt,46.68227,14.67913,40
 Supercharger-V4 AT-Wels,48.145889,13.975208
@@ -2046,7 +2046,7 @@ Supercharger-V4 DE-Emsbüren,52.35934,7.26476
 Supercharger-V3 DE-Endsee,49.44515,10.24691
 Supercharger-V4 DE-Engen,47.855556,8.793436
 Supercharger-V4 DE-Engen,47.85624,8.7937,20
-Supercharger-V3 DE-Erftstadt,50.79648,6.77994
+Supercharger-V3 DE-Erftstadt,50.79653,6.77985
 Supercharger-V4 DE-Erfurt,51.00903,10.99146
 Supercharger-V4 DE-Erfurt (Cafe Del Sol),50.9758,11.07463
 Supercharger-V4 DE-Erfurt-Linderbach (Globus),50.9766,11.10654,25
@@ -6951,6 +6951,7 @@ Supercharger US-Fort Worth TX - North Freeway,33.02316,-97.279
 Supercharger US-Fort Worth TX - North Freeway,33.02332,-97.2793
 Supercharger US-Fort Worth TX - Whitmore Street,32.7582,-97.35374
 Supercharger-V4 US-Fort Worth TX North Freeway,32.86496,-97.3138
+Supercharger-V4 US-Fort Worth TX Tehama Ridge Pkwy,32.90392,-97.3217
 Supercharger-V4 US-Fredericksburg TX FBGTX,30.26978,-98.86645
 Supercharger-V4 US-Gainesville TX,33.63472,-97.15475
 Supercharger-V4 US-Galveston TX,29.28988,-94.8392
@@ -12194,6 +12195,7 @@ eCarUp CH-Sevelen Gärtlistrasse,47.12322,9.4916
 eCarUp CH-Thun Grabenstrasse,46.76209,7.627
 eCarUp CH-Untersiggenthal Landstrasse,47.49633,8.2682
 eCarUp CH-Volketswil Hölzliwisenstrasse,47.37835,8.67981
+eCarUp CH-Weggis Rigistrasse,47.03292,8.43544
 eCarUp CH-Winterthur Hegmattenstrasse,47.51,8.76041
 eCarUp DE-Büsum Alte Dorfstraße,54.13218,8.85908
 eCarUp DE-Gerstetten Ludwig-Erhard-Straße,48.58969,10.12808,30
@@ -12579,6 +12581,7 @@ Electra AT-Graz Kärntner Straße,47.0448,15.41478
 Electra AT-Linz Wankmüllerhofstraße,48.28068,14.30622
 Electra AT-Loosdorf Gewerbestraße,48.1902,15.40952
 Electra AT-St. Johann im Pongau Bundesstraße,47.34954,13.19453
+Electra AT-Villach Prossowitscher Straße,46.6019,13.8826,15
 Electra BE-Antwerpen Herentalsebaan,51.20978,4.4586
 Electra BE-Auderghem Chaussée de Wavre,50.79478,4.47889
 Electra BE-Blankenberge Polderlaan,51.31562,3.1471
@@ -12590,6 +12593,7 @@ Electra CH-Bern Mingerstrasse,46.9592,7.46917
 Electra CH-Crissier Chem. de l’Esparcette,46.5528,6.57224
 Electra CH-Rubigen Hunzigen,46.8916,7.54217,16
 Electra CH-Zürich Förrlibuckstrasse,47.39168,8.5165
+Electra DE-Autohof Gramschatzer Wald,49.9126,9.99987,18
 Electra DE-Bad Nenndorf Piepmühle,52.33528,9.40247
 Electra DE-Berlin Drontheimer Straße,52.55893,13.37657
 Electra DE-Berlin Gülzower Straße,52.515,13.58463
@@ -16018,7 +16022,7 @@ EnBW DE-Sangerhausen An der Stollenmühle,51.4671,11.27952
 EnBW DE-Sankt Augustin Johann-Quadt-Straße,50.78056,7.1483
 EnBW DE-Sankt Augustin Marie-Curie-Straße,50.7936,7.17595
 EnBW DE-Sankt Blasien Am Kugelrain,47.76465,8.12346
-EnBW DE-Sankt Goarshausen Nastätter Straße,50.15674,7.71444
+EnBW DE-Sankt Goarshausen Nastätter Straße,50.1571,7.7147
 EnBW DE-Sankt Katharinen Am Rennenberg,50.60393,7.33096
 EnBW DE-Sarstedt Moorberg,52.2367,9.87448
 EnBW DE-Sarstedt Voss-Straße,52.2296,9.8454
@@ -18887,6 +18891,7 @@ EVN DE-Nordhausen Engelsburg,51.50314,10.7934
 EVN MK-Gevgelija Граничен Премин Богородица,41.13812,22.54435
 EVN MK-Negotino Неготино ул. Железничка бр.,41.4995,22.10018
 EVN MK-Skopje Скопје International Airport,41.9606,21.62992
+EVN MK-Skopje Скопје Lazar Lichenoski,42.00082,21.43076
 
 evo DE-Oberhausen CentrO-Promenade,51.4922,6.8806
 
@@ -19010,7 +19015,7 @@ EWE-GO DE-Bad Zwischenahn Heideweg,53.1666,8.15593
 EWE-GO DE-Bad Zwischenahn Langenhof,53.18196,8.0026
 EWE-GO DE-Bad Zwischenahn Oldenburger Straße,53.18097,8.02277
 EWE-GO DE-Bad Zwischenahn Pastor-Schulze-Straße,53.18288,7.99843
-EWE-GO DE-Bad Zwischenahn Unter den Eichen,53.1836,8.01813
+EWE-GO DE-Bad Zwischenahn Unter den Eichen,53.18332,8.01784
 EWE-GO DE-Bad Zwischenahn Wilhelmstraße,53.18292,8.00226
 EWE-GO DE-Bakum Bahnhofstraße,52.73934,8.19203
 EWE-GO DE-Balingen Am Lindle,48.27607,8.85024
@@ -19273,6 +19278,7 @@ EWE-GO DE-Düren Im Großen Tal,50.83406,6.45885
 EWE-GO DE-Düren Rudolf-Diesel-Straße,50.78095,6.50861
 EWE-GO DE-Ebermannsdorf Messerschmittstraße,49.39652,11.98587
 EWE-GO DE-Ebersdorf bei Coburg Frankenring,50.22363,11.0519,29
+EWE-GO DE-Eberswalde Wilhelmstraße,52.83355,13.80782
 EWE-GO DE-Eching Strogenweg,48.48546,12.01444
 EWE-GO DE-Edewecht Friedrichsfehner Straße,53.12413,8.08539,20
 EWE-GO DE-Edewecht Hauptstraße,53.11717,7.96939
@@ -20263,6 +20269,7 @@ EXP HU-Budapest Alkotmány u.,47.5075,19.05048
 
 eze DE-Berlin Brentanostraße,52.4646,13.309
 eze DE-Frankfurt am Main Luxemburgerallee,50.11973,8.71113
+eze DE-Hamburg Lüttkamp,53.59112,9.87428,20
 eze DE-Hamburg Mittelweg,53.57307,9.9939
 eze DE-Harburg Reeseberg,53.4465,9.99382
 eze DE-Stuttgart Liststraße,48.76381,9.17615
@@ -22232,7 +22239,7 @@ Ionity IT-Brenner,47.00655,11.50668
 Ionity IT-Brugnato Ovest,44.22647,9.72971
 Ionity IT-Carpi,44.77544,10.86072
 Ionity IT-Ceriale Sud,44.08777,8.20626
-Ionity IT-Forlì,44.24285,12.08184,20
+Ionity IT-Forlì Piazzale della Cooperazione,44.24285,12.08184,19
 Ionity IT-Lecce Viale del Risorgimento,40.36254,18.15732
 Ionity IT-Les Îles de Brissogne,45.7361,7.40466
 Ionity IT-Les Îles de Brissogne,45.73734,7.40525
@@ -24866,6 +24873,7 @@ MB AT-Parndorf Richard-Erlinger-Platz,47.9766,16.8551,20
 MB DE-Augsburg Haunstetter Straße,48.3471,10.90502
 MB DE-Aurich Korbweidenstraße,53.45056,7.50673
 MB DE-Autohof Cloppenburg,52.8272,8.00026,25
+MB DE-Autohof Gramschatzer Wald,49.91243,10.00036,15
 MB DE-Autohof Mühldorf,48.27283,12.55063
 MB DE-Autohof Neuberg,50.18235,9.0081,20
 MB DE-Autohof Sangerhausen,51.45068,11.3053,18
@@ -24876,7 +24884,6 @@ MB DE-Dortmund Wittekindstraße,51.4962,7.4425
 MB DE-Erlangen Frauenauracher Straße,49.5762,10.96785
 MB DE-Essen Hans-Böckler-Straße,51.46104,6.99876
 MB DE-Hamburg Kollaustraße,53.61197,9.95362
-MB DE-Hausen bei Würzburg Am Wiesenweg,49.91243,10.00036,15
 MB DE-Herne Forellstraße,51.55406,7.20125
 MB DE-Kassel Sandershäuser Straße,51.3117,9.53352
 MB DE-Köln Goldammerweg,50.96618,6.86908
@@ -26889,6 +26896,7 @@ Plenitude IT-Pioltello Viale S. Francesco,45.51327,9.3234
 Plenitude IT-Sadali Via Po,39.81252,9.27088
 Plenitude IT-San Miniato Via C. Pannocchia,43.68795,10.80601
 Plenitude IT-Sogliano al Rubicone Bivio Montepetra Bassa,43.93325,12.17774
+Plenitude IT-Tonadico Via Roma,46.18182,11.83158
 Plenitude IT-Vasto Via dei Conti Ricci,42.11727,14.70177
 Plenitude IT-Venezia Via Orlanda,45.47933,12.27087
 Plenitude IT-Villesse Località Maranuz,45.86488,13.4326
@@ -29385,6 +29393,7 @@ SW-Stralsund DE-Stralsund Frankenwall,54.31076,13.09177
 SW-Stralsund DE-Stralsund Fährwall,54.31797,13.09151
 SW-Stralsund DE-Stralsund Greifswalder Chaussee,54.3,13.09399
 SW-Stralsund DE-Stralsund Gustower Weg,54.27096,13.11507
+SW-Stralsund DE-Zingst Seestraße 84,54.44073,12.67075
 SW-Strausberg DE-Strausberg Herrenseeallee,52.55756,13.87258
 SW-Strausberg DE-Strausberg Lindenplatz,52.5789,13.88275
 SW-Stuttgart DE-Gerlingen Hauptstraße,48.79803,9.06156,20
