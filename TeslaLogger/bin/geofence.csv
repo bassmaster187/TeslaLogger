@@ -382,6 +382,7 @@ Supercharger-V3 CA-Surrey BC King George Boulevard,49.1396,-122.84503
 Supercharger CA-Tsawwassen BC,49.04114,-123.082496
 Supercharger CA-Vancouver BC Burrard Street,49.2879,-123.1158
 Supercharger CA-Vancouver BC Pacific Centre,49.28278,-123.1196
+Supercharger-V4 CA-Vanderhoof BC,54.01498,-124.00852
 Supercharger-V3 CA-Vernon BC,50.289161,-119.260439
 Supercharger CA-Victoria BC,48.45585,-123.37717
 Supercharger-V3 CA-West Kelowna BC,49.880093,-119.53606
@@ -3296,6 +3297,7 @@ Supercharger-V3 IS-Staðarskáli,65.14475,-21.084813
 Supercharger-V3 IS-Vatnagardar,64.14496,-21.854711
 Supercharger-V4 IS-Vestmannaeyjabær,63.44277,-20.27188
 Supercharger-V4 IS-Álfabakki,64.1046,-21.8613
+Supercharger-V4 IS-Álfabakki,64.10518,-21.85563,10
 
 Supercharger-V3 IT-Adda Nord,45.511548,9.634876
 Supercharger-V3 IT-Adda Sud,45.510724,9.63624
@@ -5511,6 +5513,7 @@ Supercharger-V4 US-Greensboro GA,33.5415,-83.20624
 Supercharger-V4 US-Helen GA,34.69098,-83.7144
 Supercharger-V4 US-Johns Creek GA,34.06782,-84.1688
 Supercharger-V3 US-Kennesaw GA,34.01287,-84.56492
+Supercharger-V4 US-Kennesaw GA Ernest W Barrett Pkwy NW,34.0103,-84.573
 Supercharger US-Kingsland GA,30.7909,-81.6639
 Supercharger-V4 US-LaGrange GA,33.0417,-84.97228
 Supercharger-V4 US-Lake Park GA,30.68137,-83.21768
@@ -5750,6 +5753,7 @@ Supercharger-V4 US-Smiths Grove KY,37.03978,-86.21144
 Supercharger US-Alexandria LA,31.31214,-92.44688
 Supercharger US-Baton Rouge LA,30.4237,-91.1546
 Supercharger-V3 US-Baton Rouge LA - Highland Road,30.3489,-91.02812
+Supercharger-V4 US-Baton Rouge LA Millerville Rd,30.44017,-91.02297
 Supercharger-V3 US-Covington LA,30.44356,-90.14074
 Supercharger-V3 US-Iowa LA Henry’s Travel Plaza,30.2412,-92.92893
 Supercharger-V3 US-Lafayette LA,30.26566,-91.99363
@@ -6499,6 +6503,7 @@ Supercharger-V4 US-Smithtown NY,40.83227,-73.19498
 Supercharger US-Southampton NY,40.8922,-72.42664
 Supercharger-V3 US-Staten Island NY,40.61204,-74.15665
 Supercharger US-Staten Island NY - Veterans Road West,40.52703,-74.2312
+Supercharger-V4 US-Suffern NY EVIO,41.113,-74.1299
 Supercharger-V3 US-Syosset NY - Jericho Turnpike,40.81044,-73.50567
 Supercharger US-Syracuse NY,43.10238,-76.1875
 Supercharger-V3 US-Syracuse NY - Destiny USA Drive,43.06725,-76.17497
@@ -21537,6 +21542,7 @@ incharge GR-Thessaloniki Θεσσαλονίκη Monastiriou,40.66008,22.90082
 incharge GR-Volos Βόλος Larisis,39.36923,22.919
 incharge GR-Vourvourou Βουρβουρού Περιμετρική Οδός Σιθωνίας,40.1911,23.8062
 incharge GR-Αριστερα A/D Korinthou Tripoleos,37.8627,22.84217
+incharge GR-Λαγος Ξάνθης Κομοτηνής Ethniki Odos Xanthis Komotinis,41.12566,24.9043
 incharge GR-Μάρμαρα Μύλος Εμπορικό Κέντρο,40.08784,23.80285
 
 infra-fürth DE-Fürth Am Grünen Weg,49.484,10.94937
@@ -22730,6 +22736,7 @@ K-Lataus FI-Paimio Jokipellontie,60.45541,22.67942
 K-Lataus FI-Pieksämäki Kukkaroniementie,62.30263,27.16452
 K-Lataus FI-Pirkkala Palmrothintie,61.46629,23.72235
 K-Lataus FI-Pori Itäkeskuksenkaari,61.4531,21.8346
+K-Lataus FI-Pori Kiviaidantie,61.55985,21.61324
 K-Lataus FI-Pori Lestikatu,61.4894,21.76598
 K-Lataus FI-Puumala Satamatie,61.522,28.1761
 K-Lataus FI-Raisio Voudinkatu,60.49038,22.16946
@@ -25556,6 +25563,7 @@ N-ERGIE DE-Neusitz Schaffeldstraße,49.37484,10.23512
 N-ERGIE DE-Nürnberg Allersberger Straße,49.43809,11.09047
 N-ERGIE DE-Nürnberg Am Leonhardspark,49.4434,11.05623
 N-ERGIE DE-Nürnberg An der Ehrenhalle,49.43468,11.10958
+N-ERGIE DE-Nürnberg Deutschherrnstraße,49.45406,11.06355
 N-ERGIE DE-Nürnberg Fichtestraße,49.45853,11.10574,25
 N-ERGIE DE-Nürnberg Finkenbrunn,49.40932,11.07297
 N-ERGIE DE-Nürnberg Färberstraße,49.44793,11.07184
@@ -26843,6 +26851,8 @@ PitPoint FR-Wittenheim Rue de Soultz,47.80996,7.31343,30
 PKP PL-Wrocław Marszałka Józefa Piłsudskiego,51.09902,17.03853
 
 Plan-Net-solar SI-Ljubljana Celovška cesta,46.09948,14.45996
+
+Planitude IT-Asiago Via Lavarone,45.8738,11.50544
 
 Plenitude CH-Delémont Rte de Porrentruy,47.3609,7.33547
 Plenitude CH-Val Müstair San Roc,46.62792,10.3322
