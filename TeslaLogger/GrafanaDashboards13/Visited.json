@@ -1,173 +1,186 @@
 {
-  "annotations": {
-    "list": [
-      {
-        "$$hashKey": "object:598",
-        "builtIn": 1,
-        "datasource": "-- Grafana --",
+  "annotations": [
+    {
+      "kind": "AnnotationQuery",
+      "spec": {
+        "builtIn": true,
         "enable": true,
         "hide": true,
         "iconColor": "rgba(0, 211, 255, 1)",
-        "name": "Annotations & Alerts",
-        "target": {
-          "limit": 100,
-          "matchAny": false,
-          "tags": [],
-          "type": "dashboard"
+        "legacyOptions": {
+          "$$hashKey": "object:598"
         },
-        "type": "dashboard"
+        "name": "Annotations & Alerts",
+        "query": {
+          "datasource": {
+            "name": "grafana"
+          },
+          "group": "grafana",
+          "kind": "DataQuery",
+          "spec": {
+            "limit": 100,
+            "matchAny": false,
+            "tags": [],
+            "type": "dashboard"
+          },
+          "version": "v0"
+        }
       }
-    ]
-  },
+    }
+  ],
+  "cursorSync": "Off",
   "editable": true,
-  "fiscalYearStartMonth": 0,
-  "graphTooltip": 0,
-  "iteration": 1679494069660,
+  "elements": {
+    "panel-2": {
+      "kind": "Panel",
+      "spec": {
+        "data": {
+          "kind": "QueryGroup",
+          "spec": {
+            "queries": [
+              {
+                "kind": "PanelQuery",
+                "spec": {
+                  "hidden": false,
+                  "query": {
+                    "datasource": {
+                      "name": "PC0C98BF192F75B00"
+                    },
+                    "group": "mysql",
+                    "kind": "DataQuery",
+                    "spec": {
+                      "editorMode": "code",
+                      "format": "table",
+                      "group": [],
+                      "metricColumn": "none",
+                      "rawQuery": true,
+                      "rawSql": " SELECT\r\n  avg(UNIX_TIMESTAMP(datum)) as time_sec,\r\n   avg(lat),\r\n   avg(lng),\r\n   0 as type,\r\n   null as address, CarID\r\n   FROM pos\r\n   WHERE $__timeFilter(datum) and CarID in ($Car) and lat <> 0 AND lng <> 0\r\ngroup by CarID, UNIX_TIMESTAMP(datum) div $div\r\nUNION\r\n  SELECT UNIX_TIMESTAMP(pos.datum) as time_sec, lat, lng, 1 as type, concat('<b>',address, '</b><br>Date: ',pos.datum, '<br>Duration: ', TIMESTAMPDIFF(MINUTE, StartDate, EndDate) ,'min<br>Charged: ',charging.charge_energy_added, 'kWh<br>Max Power:', max_charger_power, 'kW<br><a href=\"d/BHhxFeZRz/laden?orgId=1&from=', UNIX_TIMESTAMP(StartDate)*1000,'&to=',UNIX_TIMESTAMP(EndDate)*1000,'&var-Car=',chargingstate.CarID,'\">[CHARGING]</a><br><a href=\"d/TSmNYvRRk/ladehistorie?orgId=1&var-Car=',chargingstate.CarID,'&var-Textfilter=',address,'&from=now-2y&to=now\">[CHARGINGHISTORY]</a>') as address, chargingstate.CarID FROM chargingstate join charging on endchargingid = charging.id join pos on chargingstate.Pos = pos.id\r\n  WHERE '$Charger' = 'ON' and $__timeFilter(pos.datum) and chargingstate.CarID in ($Car) and (fast_charger_brand = 'Tesla' or address like '%Supercharger%')\r\nUNION\r\n  SELECT UNIX_TIMESTAMP(pos.datum) as time_sec, lat, lng, \r\n  CASE \r\n    WHEN address LIKE '%ENBW%' THEN 6 \r\n    WHEN address LIKE '%Ionity%' THEN 5 \r\n    ELSE 2 \r\n  END as type\r\n  , concat('<b>',address, '</b><br>Date: ',pos.datum, '<br>Duration: ', TIMESTAMPDIFF(MINUTE, StartDate, EndDate) ,'min<br>Charged: ',charging.charge_energy_added, 'kWh<br>Max Power:', max_charger_power, 'kW<br><a href=\"d/BHhxFeZRz/laden?orgId=1&from=', UNIX_TIMESTAMP(StartDate)*1000,'&to=',UNIX_TIMESTAMP(EndDate)*1000,'&var-Car=',chargingstate.CarID,'\">[CHARGING]</a><br><a href=\"d/TSmNYvRRk/ladehistorie?orgId=1&var-Car=',chargingstate.CarID,'&var-Textfilter=',address,'&from=now-2y&to=now\">[CHARGINGHISTORY]</a>') as address, chargingstate.CarID FROM chargingstate join charging on endchargingid = charging.id join pos on chargingstate.Pos = pos.id\r\n  WHERE '$Charger' = 'ON' and $__timeFilter(pos.datum) and chargingstate.CarID in ($Car) \r\n  and ((fast_charger_brand is not null && fast_charger_brand not in ('Tesla') and (fast_charger_present = 1 or max_charger_power > 22) and address not like '%supercharger%') \r\n  or (fast_charger_present is null and max_charger_power > 25 and address not like '%supercharger%'))\r\n\r\n ORDER BY CarID, time_sec ASC",
+                      "select": [
+                        [
+                          {
+                            "params": [
+                              "id"
+                            ],
+                            "type": "column"
+                          }
+                        ]
+                      ],
+                      "sql": {
+                        "columns": [
+                          {
+                            "parameters": [],
+                            "type": "function"
+                          }
+                        ],
+                        "groupBy": [
+                          {
+                            "property": {
+                              "type": "string"
+                            },
+                            "type": "groupBy"
+                          }
+                        ],
+                        "limit": 50
+                      },
+                      "table": "charging",
+                      "timeColumn": "Datum",
+                      "timeColumnType": "timestamp",
+                      "where": [
+                        {
+                          "name": "$__timeFilter",
+                          "params": [],
+                          "type": "macro"
+                        }
+                      ]
+                    },
+                    "version": "v0"
+                  },
+                  "refId": "A"
+                }
+              }
+            ],
+            "queryOptions": {
+              "maxDataPoints": 500
+            },
+            "transformations": []
+          }
+        },
+        "description": "",
+        "id": 2,
+        "links": [],
+        "title": "MAP",
+        "vizConfig": {
+          "group": "pr0ps-trackmap-panel",
+          "kind": "VizConfig",
+          "spec": {
+            "fieldConfig": {
+              "defaults": {},
+              "overrides": []
+            },
+            "options": {
+              "apField": "",
+              "autoZoom": true,
+              "defaultLayer": "OpenStreetMap",
+              "latitudeField": "",
+              "lineColor": "red",
+              "longitudeField": "",
+              "maxDataPointDelta": 0,
+              "maxDataPoints": 500,
+              "pointColor": "royalblue",
+              "scrollWheelZoom": false,
+              "showLayerChanger": true,
+              "textField": "",
+              "timeField": "",
+              "typeField": "",
+              "useApColors": true,
+              "useTableFormat": false
+            }
+          },
+          "version": "3.0.0"
+        }
+      }
+    }
+  },
+  "layout": {
+    "kind": "GridLayout",
+    "spec": {
+      "items": [
+        {
+          "kind": "GridLayoutItem",
+          "spec": {
+            "element": {
+              "kind": "ElementReference",
+              "name": "panel-2"
+            },
+            "height": 23,
+            "width": 24,
+            "x": 0,
+            "y": 0
+          }
+        }
+      ]
+    }
+  },
   "links": [
     {
+      "asDropdown": false,
       "icon": "external link",
       "includeVars": true,
+      "keepTime": false,
       "tags": [],
+      "targetBlank": false,
       "title": "Admin Panel",
       "tooltip": "",
       "type": "link",
-      "url": "http://raspberry/admin/"
+      "url": "https://home.pogea.de:9443/admin/"
     }
   ],
   "liveNow": false,
-  "panels": [
-    {
-      "autoZoom": true,
-      "datasource": {
-        "type": "mysql",
-        "uid": "PC0C98BF192F75B00"
-      },
-      "defaultLayer": "OpenStreetMap",
-      "gridPos": {
-        "h": 23,
-        "w": 24,
-        "x": 0,
-        "y": 0
-      },
-      "id": 2,
-      "lineColor": "#1F60C4",
-      "links": [],
-      "maxDataPointDelta": 300,
-      "maxDataPoints": 500,
-      "pointColor": "royalblue",
-      "scrollWheelZoom": true,
-      "showLayerChanger": true,
-      "targets": [
-        {
-          "datasource": {
-            "type": "mysql",
-            "uid": "PC0C98BF192F75B00"
-          },
-          "format": "table",
-          "group": [],
-          "metricColumn": "none",
-          "rawQuery": true,
-          "rawSql": "SELECT\r\n  avg(UNIX_TIMESTAMP(datum)) as time_sec,\r\n   avg(lat),\r\n   avg(lng),\r\n   0 as type,\r\n   null as address, CarID\r\n   FROM pos\r\n   WHERE $__timeFilter(datum) and CarID in ($Car)\r\ngroup by CarID, UNIX_TIMESTAMP(datum) div 180\r\nUNION\r\n  SELECT UNIX_TIMESTAMP(pos.datum) as time_sec, lat, lng, 1 as type, concat('<b>',address, '</b><br>Date: ',pos.datum, '<br>Duration: ', TIMESTAMPDIFF(MINUTE, StartDate, EndDate) ,'min<br>Charged: ',charging.charge_energy_added, 'kWh<br>Max Power:', max_charger_power, 'kW<br><a href=\"d/BHhxFeZRz/laden?orgId=1&from=', UNIX_TIMESTAMP(StartDate)*1000,'&to=',UNIX_TIMESTAMP(EndDate)*1000,'&var-Car=',chargingstate.CarID,'\">[CHARGING]</a><br><a href=\"d/TSmNYvRRk/ladehistorie?orgId=1&var-Car=',chargingstate.CarID,'&var-Textfilter=',address,'&from=now-2y&to=now\">[CHARGINGHISTORY]</a>') as address, chargingstate.CarID FROM chargingstate join charging on endchargingid = charging.id join pos on chargingstate.Pos = pos.id\r\n  WHERE '$Charger' = 'ON' and $__timeFilter(pos.datum) and chargingstate.CarID in ($Car) and (fast_charger_brand = 'Tesla' or address like '%Supercharger%')\r\nUNION\r\n  SELECT UNIX_TIMESTAMP(pos.datum) as time_sec, lat, lng, 2 as type, concat('<b>',address, '</b><br>Date: ',pos.datum, '<br>Duration: ', TIMESTAMPDIFF(MINUTE, StartDate, EndDate) ,'min<br>Charged: ',charging.charge_energy_added, 'kWh<br>Max Power:', max_charger_power, 'kW<br><a href=\"d/BHhxFeZRz/laden?orgId=1&from=', UNIX_TIMESTAMP(StartDate)*1000,'&to=',UNIX_TIMESTAMP(EndDate)*1000,'&var-Car=',chargingstate.CarID,'\">[CHARGING]</a><br><a href=\"d/TSmNYvRRk/ladehistorie?orgId=1&var-Car=',chargingstate.CarID,'&var-Textfilter=',address,'&from=now-2y&to=now\">[CHARGINGHISTORY]</a>') as address, chargingstate.CarID FROM chargingstate join charging on endchargingid = charging.id join pos on chargingstate.Pos = pos.id\r\n  WHERE '$Charger' = 'ON' and $__timeFilter(pos.datum) and chargingstate.CarID in ($Car) \r\n  and ((fast_charger_brand is not null && fast_charger_brand not in ('Tesla') and fast_charger_present = 1 and address not like '%supercharger%') \r\n  or (fast_charger_present is null and max_charger_power > 25 and address not like '%supercharger%'))\r\n\r\n ORDER BY CarID, time_sec ASC",
-          "refId": "A",
-          "select": [
-            [
-              {
-                "params": [
-                  "id"
-                ],
-                "type": "column"
-              }
-            ]
-          ],
-          "table": "charging",
-          "timeColumn": "Datum",
-          "timeColumnType": "timestamp",
-          "where": [
-            {
-              "name": "$__timeFilter",
-              "params": [],
-              "type": "macro"
-            }
-          ]
-        }
-      ],
-      "title": "MAP",
-      "type": "pr0ps-trackmap-panel"
-    }
-  ],
-  "refresh": false,
-  "schemaVersion": 33,
-  "style": "dark",
+  "preload": false,
   "tags": [],
-  "templating": {
-    "list": [
-      {
-        "current": {
-          "selected": true,
-          "text": [
-            ""
-          ],
-          "value": [
-            "1"
-          ]
-        },
-        "datasource": {
-          "type": "mysql",
-          "uid": "PC0C98BF192F75B00"
-        },
-        "definition": "select display_name as __text, id as __value from cars where length(vin) > 5 order by display_name",
-        "hide": 0,
-        "includeAll": false,
-        "label": "",
-        "multi": true,
-        "name": "Car",
-        "options": [],
-        "query": "select display_name as __text, id as __value from cars where length(vin) > 5 order by display_name",
-        "refresh": 1,
-        "regex": "",
-        "skipUrlSync": false,
-        "sort": 1,
-        "tagValuesQuery": "",
-        "tagsQuery": "",
-        "type": "query",
-        "useTags": false
-      },
-      {
-        "current": {
-          "selected": false,
-          "text": "ON",
-          "value": "ON"
-        },
-        "hide": 0,
-        "includeAll": false,
-        "multi": false,
-        "name": "Charger",
-        "options": [
-          {
-            "$$hashKey": "object:1099",
-            "selected": true,
-            "text": "ON",
-            "value": "ON"
-          },
-          {
-            "$$hashKey": "object:1100",
-            "selected": false,
-            "text": "OFF",
-            "value": "OFF"
-          }
-        ],
-        "query": "ON,OFF",
-        "skipUrlSync": false,
-        "type": "custom"
-      }
-    ]
-  },
-  "time": {
-    "from": "now-5y",
-    "to": "now"
-  },
-  "timepicker": {
-    "refresh_intervals": [
+  "timeSettings": {
+    "autoRefresh": "",
+    "autoRefreshIntervals": [
       "5s",
       "10s",
       "30s",
@@ -179,21 +192,123 @@
       "2h",
       "1d"
     ],
-    "time_options": [
-      "5m",
-      "15m",
-      "1h",
-      "6h",
-      "12h",
-      "24h",
-      "2d",
-      "7d",
-      "30d"
-    ]
+    "fiscalYearStartMonth": 0,
+    "from": "now-6M",
+    "hideTimepicker": false,
+    "timezone": "browser",
+    "to": "now"
   },
-  "timezone": "",
   "title": "Visited",
-  "uid": "RG_DxSmgk",
-  "version": 2,
-  "weekStart": ""
+  "variables": [
+    {
+      "kind": "QueryVariable",
+      "spec": {
+        "allowCustomValue": true,
+        "current": {
+          "text": [
+            ""
+          ],
+          "value": [
+            "1"
+          ]
+        },
+        "definition": "select display_name as __text, id as __value from cars where length(vin) > 5 order by display_name",
+        "hide": "dontHide",
+        "includeAll": false,
+        "multi": true,
+        "name": "Car",
+        "options": [],
+        "query": {
+          "datasource": {
+            "name": "PC0C98BF192F75B00"
+          },
+          "group": "mysql",
+          "kind": "DataQuery",
+          "spec": {
+            "__legacyStringValue": "select display_name as __text, id as __value from cars where length(vin) > 5 order by display_name"
+          },
+          "version": "v0"
+        },
+        "refresh": "onDashboardLoad",
+        "regex": "",
+        "regexApplyTo": "value",
+        "skipUrlSync": false,
+        "sort": "alphabeticalAsc"
+      }
+    },
+    {
+      "kind": "CustomVariable",
+      "spec": {
+        "allowCustomValue": true,
+        "current": {
+          "text": "ON",
+          "value": "ON"
+        },
+        "hide": "dontHide",
+        "includeAll": false,
+        "multi": false,
+        "name": "Charger",
+        "options": [
+          {
+            "selected": true,
+            "text": "ON",
+            "value": "ON"
+          },
+          {
+            "selected": false,
+            "text": "OFF",
+            "value": "OFF"
+          }
+        ],
+        "query": "ON,OFF",
+        "skipUrlSync": false,
+        "valuesFormat": "csv"
+      }
+    },
+    {
+      "kind": "CustomVariable",
+      "spec": {
+        "allowCustomValue": true,
+        "current": {
+          "text": "180",
+          "value": "180"
+        },
+        "hide": "dontHide",
+        "includeAll": false,
+        "label": "Level of Detail",
+        "multi": false,
+        "name": "div",
+        "options": [
+          {
+            "selected": false,
+            "text": "180",
+            "value": "180"
+          },
+          {
+            "selected": false,
+            "text": "90",
+            "value": "90"
+          },
+          {
+            "selected": false,
+            "text": "60",
+            "value": "60"
+          },
+          {
+            "selected": true,
+            "text": "30",
+            "value": "30"
+          },
+          {
+            "selected": false,
+            "text": "15",
+            "value": "15"
+          }
+        ],
+        "query": "180,90,60,30,15",
+        "skipUrlSync": false,
+        "valuesFormat": "csv"
+      }
+    }
+  ]
 }
