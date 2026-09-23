@@ -1,0 +1,294 @@
+{
+  "annotations": {
+    "list": []
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "iteration": 1640268156253,
+  "links": [
+    {
+      "icon": "external link",
+      "includeVars": true,
+      "tags": [],
+      "title": "Admin Panel",
+      "tooltip": "",
+      "type": "link",
+      "url": "http://raspberry/admin/"
+    }
+  ],
+  "liveNow": false,
+  "panels": [
+    {
+      "datasource": {
+        "type": "mysql",
+        "uid": "PC0C98BF192F75B00"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "displayMode": "auto"
+          },
+          "decimals": 0,
+          "displayName": "",
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "locale"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Time"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Time"
+              },
+              {
+                "id": "unit",
+                "value": "time: YYYY-MM-DD HH:mm:ss"
+              },
+              {
+                "id": "custom.align"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "RangeLost"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "TR km Verlust"
+              },
+              {
+                "id": "unit",
+                "value": "locale"
+              },
+              {
+                "id": "decimals",
+                "value": 1
+              },
+              {
+                "id": "custom.align"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "kWh_lost"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "kWh Verlust"
+              },
+              {
+                "id": "unit",
+                "value": "locale"
+              },
+              {
+                "id": "decimals",
+                "value": 1
+              },
+              {
+                "id": "custom.align"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Eur_lost"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Eur Verlust"
+              },
+              {
+                "id": "unit",
+                "value": "currencyEUR"
+              },
+              {
+                "id": "decimals",
+                "value": 2
+              },
+              {
+                "id": "custom.align"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "SleepHours"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Standby Stunden"
+              },
+              {
+                "id": "unit",
+                "value": "locale"
+              },
+              {
+                "id": "decimals",
+                "value": 1
+              },
+              {
+                "id": "custom.align"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 15,
+        "w": 11,
+        "x": 0,
+        "y": 0
+      },
+      "id": 2,
+      "links": [],
+      "options": {
+        "footer": {
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": true
+        },
+        "showHeader": true
+      },
+      "pluginVersion": "8.3.2",
+      "targets": [
+        {
+          "format": "table",
+          "group": [],
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "select DATE_FORMAT(StartDate, '%Y / %m') as Monat, sum(RangeDiff) as RangeLost, sum(RangeDiff) * wh_tr as kWh_lost, sum(RangeDiff) * wh_tr * 0.30 as Eur_lost, sum(sleephours) as SleepHours from\n(\nSELECT T1.EndDate as StartDate, \nTP1.ideal_battery_range_km - (TP2.ideal_battery_range_km + (TP2.odometer - TP1.odometer)) as RangeDiff,\n(\n  SELECT sum(TIMESTAMPDIFF(MINUTE,StartDate,EndDate) / 60) FROM state where (state = 'asleep' or state = 'offline') and StartDate >= T1.EndDate and EndDate  <= T2.StartDate and EndDate > StartDate) as sleephours, wh_tr\n  FROM drivestate as T1 \n  join cars on cars.id = T1.CarId\n  left outer join drivestate as T2 on T1.id + 1 = T2.id \n  left outer Join pos as TP1 on T1.EndPos = TP1.id \n  left outer join pos as TP2 on T2.StartPos = TP2.id\n  where $__timeFilter(T1.EndDate) and T1.CarID =$Car and T2.CarID=$Car and TP1.ideal_battery_range_km - TP2.ideal_battery_range_km >= 0 and timestampdiff(MINUTE, T1.EndDate, T2.StartDate) > 60 and TP2.odometer - TP1.odometer < 1 and (TP2.odometer - TP1.odometer) >= 0\n) as td\ngroup by DATE_FORMAT(StartDate, '%Y-%m')",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "timeColumn": "time",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        }
+      ],
+      "title": "Vampir Drain Monatsstatistik",
+      "transformations": [
+        {
+          "id": "merge",
+          "options": {
+            "reducers": []
+          }
+        }
+      ],
+      "type": "table"
+    }
+  ],
+  "schemaVersion": 33,
+  "style": "dark",
+  "tags": [],
+  "templating": {
+    "list": [
+      {
+        "current": {
+          "selected": false,
+          "text": "Two weeks",
+          "value": "1"
+        },
+        "datasource": {
+          "type": "mysql",
+          "uid": "PC0C98BF192F75B00"
+        },
+        "definition": "select display_name as __text, id as __value from cars where length(vin) > 5 order by display_name",
+        "hide": 0,
+        "includeAll": false,
+        "label": "",
+        "multi": false,
+        "name": "Car",
+        "options": [],
+        "query": "select display_name as __text, id as __value from cars where length(vin) > 5 order by display_name",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 1,
+        "tagValuesQuery": "",
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      }
+    ]
+  },
+  "time": {
+    "from": "now-1y",
+    "to": "now"
+  },
+  "timepicker": {
+    "refresh_intervals": [
+      "5s",
+      "10s",
+      "30s",
+      "1m",
+      "5m",
+      "15m",
+      "30m",
+      "1h",
+      "2h",
+      "1d"
+    ],
+    "time_options": [
+      "5m",
+      "15m",
+      "1h",
+      "6h",
+      "12h",
+      "24h",
+      "2d",
+      "7d",
+      "30d"
+    ]
+  },
+  "timezone": "",
+  "title": "Vampir Drain Monatsstatistik",
+  "uid": "r2IKRuzRk",
+  "version": 214,
+  "weekStart": ""
+}

@@ -2069,9 +2069,10 @@ WHERE
         internal static void LogDiskUsage()
         {
             _ = ExecMono("/bin/df", "-k", true, true);
-            if (Directory.Exists(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "/backup"))
+            var backupPath = FileManager.GetBackupPath();
+            if (Directory.Exists(backupPath))
             {
-                _ = ExecMono("/usr/bin/du", "-sk " + Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "/backup", true, true);
+                _ = ExecMono("/usr/bin/du", "-sk " + backupPath, true, true);
             }
             if (Directory.Exists(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "/Exception"))
             {

@@ -1990,7 +1990,31 @@ PRIMARY KEY(id)
 
                     List<String> dashboardlinks = new List<String>();
 
-                    Tools.CopyFilesRecursively(new DirectoryInfo("/etc/teslalogger/git/TeslaLogger/Grafana"), new DirectoryInfo("/etc/teslalogger/tmp/Grafana"));
+                    // dashboards depend on the installed Grafana version:
+                    // Grafana 13 uses the new dashboards, everything else (incl. unknown version) uses the old ones
+                    string GrafanaVersion = Tools.GetGrafanaVersion();
+                    if (Tools.IsDocker())
+                    {
+                        // in Docker the Grafana container may not be up yet
+                        int retries = 0;
+                        while ((GrafanaVersion == "?" || GrafanaVersion == "NRF" || GrafanaVersion == "CF") && retries < 12)
+                        {
+                            retries++;
+                            Logfile.Log($"Grafana not reachable yet - waiting for version ({retries}/12)");
+                            Thread.Sleep(10000);
+                            GrafanaVersion = Tools.GetGrafanaVersion();
+                        }
+                    }
+                    Logfile.Log("Grafana version: " + GrafanaVersion);
+
+                    string grafanaDashboardsDir = "/etc/teslalogger/git/TeslaLogger/Grafana";
+                    if (GrafanaVersion.StartsWith("13.", StringComparison.Ordinal)
+                        && Directory.Exists("/etc/teslalogger/git/TeslaLogger/GrafanaDashboards13"))
+                        grafanaDashboardsDir = "/etc/teslalogger/git/TeslaLogger/GrafanaDashboards13";
+
+                    Logfile.Log("Copy dashboards from: " + grafanaDashboardsDir);
+
+                    Tools.CopyFilesRecursively(new DirectoryInfo(grafanaDashboardsDir), new DirectoryInfo("/etc/teslalogger/tmp/Grafana"));
                     // changes to dashboards
                     foreach (string f in Directory.GetFiles("/etc/teslalogger/tmp/Grafana"))
                     {
