@@ -13999,7 +13999,7 @@ ELEN HR-Motovun,45.33122,13.82498
 ELEN HR-Nadin-Sjever,44.06219,15.53119
 ELEN HR-Nova Gradiška Trg kralja Tomislava,45.25869,17.38101
 ELEN HR-Novalja Burin Bok,44.55254,14.89333
-ELEN HR-Odmorište Janjče Istok,44.7512,15.37522,16
+ELEN HR-Odmorište Janjče Istok,44.7512,15.37522,8
 ELEN HR-Odmorište Janjče Zapad,44.75127,15.3733,16
 ELEN HR-Odmorište Novoselec,45.63787,16.51281
 ELEN HR-Odmorište Pula istok,44.93352,13.891
@@ -16666,15 +16666,12 @@ EnerCharge AT-Untertauern,47.04436,12.85233
 EnerCharge DE-Darscheid Karl-Kaufmann-Straße,50.21318,6.8821
 EnerCharge DE-Südbrookmerland Auricher Straße,53.47623,7.40593
 
-enercity AG DE-Giesen Hannoversche Straße,52.2024,9.91574
-enercity AG DE-Hannover Waterloostraße,52.3682,9.73117
-enercity AG DE-Schleife Neustädter Straße,51.53532,14.52873
-enercity AG DE-Stadthagen Hüttenstraße,52.33073,9.18692
 enercity DE-Aerzen Königsförder Straße,52.05072,9.2612
 enercity DE-Barsinghausen Kirchstraße,52.30178,9.46102
 enercity DE-Berlin Albert-Einstein-Straße,52.43082,13.53708
 enercity DE-Burgdorf Poststraße,52.44592,10.00996
 enercity DE-Burgwedel Hannoversche Straße,52.49162,9.8584
+enercity DE-Giesen Hannoversche Straße,52.2024,9.91574
 enercity DE-Hannover Am Kläperberg,52.39079,9.72315
 enercity DE-Hannover Am Waterlooplatz,52.36517,9.7286
 enercity DE-Hannover Archivstraße,52.36992,9.7296
@@ -16727,6 +16724,7 @@ enercity DE-Hannover Tiergartenstraße,52.36144,9.82834
 enercity DE-Hannover Tiergartenstraße,52.36187,9.8324
 enercity DE-Hannover Volgersweg,52.3774,9.74527
 enercity DE-Hannover Von-Alten-Allee,52.36536,9.71784
+enercity DE-Hannover Waterloostraße,52.3682,9.73117
 enercity DE-Hannover Wiehbergstraße,52.33566,9.76256
 enercity DE-Hannover Windaustraße,52.40637,9.73542
 enercity DE-Karlsruhe Südliche Hildapromenade,49.0113,8.38518
@@ -16736,8 +16734,10 @@ enercity DE-Langenhagen Flughafenstraße,52.46051,9.69639
 enercity DE-Langenhagen Oertzeweg,52.43457,9.75665
 enercity DE-Oldenburg Ammerländer Heerstraße,53.1536,8.17388
 enercity DE-Sarstedt Steinstraße,52.23446,9.85121
+enercity DE-Schleife Neustädter Straße,51.53532,14.52873
 enercity DE-Seelze Am Kreuzweg,52.39573,9.58982
 enercity DE-Seelze Kastanienplatz,52.39726,9.63813
+enercity DE-Stadthagen Hüttenstraße,52.33073,9.18692
 
 Energa PL-Gdańsk aleja Grunwaldzka,54.40231,18.5708
 Energa PL-Koszalin Jana Pawła II,54.2065,16.18583
