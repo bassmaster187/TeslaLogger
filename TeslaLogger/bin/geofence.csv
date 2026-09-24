@@ -4727,6 +4727,7 @@ Supercharger-V4 US-Livermore CA Livermore Outlets Dr,37.6984,-121.83918
 Supercharger-V4 US-Livermore CA N Vasco Rd,37.71815,-121.7254
 Supercharger US-Livermore CA Supercharger,37.70034,-121.84094
 Supercharger-V3 US-Long Beach CA,33.7572,-118.10728
+Supercharger-V4 US-Long Beach CA Bixby Village Dr,33.77376,-118.1187
 Supercharger-V3 US-Long Beach CA E Anaheim St,33.78278,-118.18245
 Supercharger-V3 US-Long Beach CA Long Beach Blvd,33.87396,-118.2024
 Supercharger-V3 US-Long Pine CA,36.60062,-118.06234
@@ -4967,6 +4968,7 @@ Supercharger-V3 US-San Luis Obispo CA,35.26535,-120.67618
 Supercharger-V3 US-San Luis Obispo CA Higuera St,35.24808,-120.6713
 Supercharger-V3 US-San Luis Obispo CA Los Osos Valley Road,35.25376,-120.68422
 Supercharger-V3 US-San Marcos CA,33.13652,-117.1759
+Supercharger-V4 US-San Marcos CA S Las Posas Rd,33.14075,-117.1918
 Supercharger-V3 US-San Mateo CA - 1878 S Norfolk Street,37.55438,-122.29305
 Supercharger-V3 US-San Mateo CA - 2817 S El Camino Real,37.5415,-122.30242
 Supercharger-V3 US-San Mateo CA - 2940 South Norfolk Street,37.5438,-122.28547
@@ -6177,6 +6179,7 @@ Supercharger US-Gothenburg NE,40.91733,-100.17063
 Supercharger US-Grand Island NE,40.8299,-98.3797
 Supercharger US-Lincoln NE,40.86082,-96.67966
 Supercharger-V3 US-Lincoln NE - West O Street,40.81386,-96.728
+Supercharger-V4 US-Lincoln NE SW 48th St,40.81273,-96.78793
 Supercharger-V3 US-North Platte NE,41.1207,-100.76272
 Supercharger US-Ogallala NE,41.11647,-101.70942
 Supercharger-V3 US-Omaha NE,41.23366,-96.05242
@@ -6204,6 +6207,7 @@ Supercharger-V3 US-Avenel NJ,40.57703,-74.28748
 Supercharger US-Barnegat NJ,39.75924,-74.25347
 Supercharger US-Basking Ridge NJ,40.655,-74.52935
 Supercharger-V4 US-Bellmawr NJ,39.8656,-75.07968
+Supercharger-V4 US-Bellmawr NJ Edgewood Ave,39.86472,-75.1001
 Supercharger-V3 US-Berkeley Heights NJ,40.662,-74.41695
 Supercharger-V4 US-Blackwood NJ,39.7866,-75.0546
 Supercharger US-Boonton NJ,40.90748,-74.39794
@@ -6597,6 +6601,7 @@ Supercharger-V4 US-Midwest City OK E Reno Ave Francis Energy,35.46395,-97.40273
 Supercharger-V4 US-Midwest City OK Francis Energy,35.46753,-97.37188
 Supercharger-V4 US-Moore OK Francis Energy,35.35028,-97.47778
 Supercharger-V4 US-Muskogee OK Francis Energy,35.76757,-95.40344
+Supercharger-V4 US-Norman OK 24th Avenue Northwest,35.23508,-97.48124
 Supercharger-V4 US-Norman OK Chautauqua Ave Francis Energy,35.1815,-97.45112
 Supercharger-V3 US-Oklahoma City OK,35.4617,-97.6514
 Supercharger-V4 US-Oklahoma City OK N Lincoln Blvd Francis Energy,35.52566,-97.5038
@@ -8995,7 +9000,7 @@ Applegreen-Electric US-Victor NY NY State Thruway,42.99916,-77.41338,30
 Applegreen-Electric US-Wall NJ State Pkwy Milepost 100,40.19746,-74.09904,30
 Applegreen-Electric US-Waterfall PA 172.3 E,40.05836,-78.08126,30
 Applegreen-Electric US-Waterfall PA 172.3 W,40.05902,-78.0824,30
-Applegreen-Electric US-Westmoreland NY NY State Thruway #233,43.12505,-75.4152,30
+Applegreen-Electric US-Westmoreland NY NY State Thruway,43.12505,-75.4152,30
 Applegreen-Electric US-Woodbridge NJ Turnpike Milepost 92.9 N,40.55616,-74.26422,30
 
 ARAL DE-Aachen Friedrich-Ebert-Allee,50.7627,6.09695
@@ -12681,1266 +12686,1266 @@ Electric55 FR-Grimaud D559,43.27965,6.57762
 ElectriEase IT-Area di servizio Bettole di Novi Est,44.7604,8.83855
 ElectriEase IT-Lignano Sabbiadoro Viale Europa,45.68927,13.13277
 
-Electrify-America US-Aberdeen WA E Wishkah St,46.9753,-123.80674,30
-Electrify-America US-Abingdon MD Constant Friendship Blvd.,39.4634,-76.3151,30
-Electrify-America US-Afton NY Main St,42.22742,-75.52592,30
-Electrify-America US-Agoura Hills CA Kanan Rd,34.1546,-118.7571,30
-Electrify-America US-Alabaster AL Colonial Pkwy,33.23554,-86.80113,30
-Electrify-America US-Alameda CA 5th Street,37.78958,-122.28003,30
-Electrify-America US-Albany NY Orange Street,42.6532,-73.7481,30
+Electrify-America US-Aberdeen WA E Wishkah St,46.9753,-123.80674,32
+Electrify-America US-Abingdon MD Constant Friendship Blvd.,39.4634,-76.3151,32
+Electrify-America US-Afton NY Main St,42.22742,-75.52592,32
+Electrify-America US-Agoura Hills CA Kanan Rd,34.1546,-118.7571,32
+Electrify-America US-Alabaster AL Colonial Pkwy,33.23554,-86.80113,32
+Electrify-America US-Alameda CA 5th Street,37.78958,-122.28003,32
+Electrify-America US-Albany NY Orange Street,42.6532,-73.7481,32
 Electrify-America US-Albany NY Washington Ave Ext,42.69452,-73.84832
-Electrify-America US-Albany OR Goldfish Farm RD SE,44.62766,-123.04916,30
-Electrify-America US-Albert Lea MN E Main Street,43.65438,-93.33673,30
-Electrify-America US-Albertville MN Labeaux Ave Ne,45.2445,-93.66512,30
-Electrify-America US-Albuquerque NM Carlisle Blvd,35.11274,-106.60626,30
-Electrify-America US-Albuquerque NM Louisiana Blvd NE,35.10382,-106.5657,30
-Electrify-America US-Albuquerque NM Yale Blvd SE,35.07558,-106.62175,30
-Electrify-America US-Alexandria Bay NY NY Route 12,44.2986,-75.96478,30
-Electrify-America US-Alexandria LA Memorial Dr,31.28094,-92.45954,30
-Electrify-America US-Alexandria MN 50th Ave W,45.84646,-95.38148,30
-Electrify-America US-Alexandria VA Mt Vernon Ave,38.82137,-77.05766,30
-Electrify-America US-Alexandria VA N. Washington St,38.81116,-77.04632,30
-Electrify-America US-Alexandria VA Richmond Hwy.,38.74252,-77.0867,30
-Electrify-America US-Algonquin IL S Randall Rd,42.1693,-88.3367,30
-Electrify-America US-Allentown PA Tilghman St,40.59764,-75.52636,30
-Electrify-America US-Alpharetta GA North Point Parkway,34.03882,-84.30476,30
-Electrify-America US-Altamonte Springs FL West State Road 436,28.66394,-81.41802,30
-Electrify-America US-Altoona PA Frankstown Rd,40.47646,-78.3907,30
-Electrify-America US-Amarillo TX Westgate Pkwy.,35.18517,-101.94083,30
-Electrify-America US-Anaheim CA E Katella Ave,33.80387,-117.8916,30
-Electrify-America US-Anaheim CA N. Euclid St.,33.83683,-117.93954,30
-Electrify-America US-Anderson CA Balls Ferry Rd,40.45348,-122.28917,30
-Electrify-America US-Angelica NY Peacock Hill,42.3038,-78.01212,30
-Electrify-America US-Ann Arbor MI Waters Rd,42.2436,-83.7682,30
-Electrify-America US-Annapolis MD Generals Hwy,38.98946,-76.55072,30
-Electrify-America US-Anthem AZ W. Anthem Way,33.87042,-112.15362,30
-Electrify-America US-Aptos CA Seascape Village,36.95263,-121.87777,30
-Electrify-America US-Arcadia CA E. Live Oak Avenue,34.10725,-118.0244,30
-Electrify-America US-Arcadia CA South Baldwin Ave,34.13625,-118.0529,30
-Electrify-America US-Ardmore OK N. Commerce,34.19416,-97.14432,30
-Electrify-America US-Arlington MA Massachusetts Ave,42.41645,-71.15402,30
-Electrify-America US-Arlington TX E Lamar Blvd,32.7617,-97.0756,30
-Electrify-America US-Arvada CO Ralston Rd,39.80135,-105.1021,30
-Electrify-America US-Ashburn VA Red Rum drive,39.01715,-77.47913,30
-Electrify-America US-Asheville NC Hendersonville Rd,35.5142,-82.5258,30
-Electrify-America US-Asheville NC Patton Ave.,35.5912,-82.5816,30
-Electrify-America US-Atascadero CA El Camino Real,35.5133,-120.6982,30
-Electrify-America US-Athens AL US Hwy 72 E,34.78737,-86.95852,30
-Electrify-America US-Athens GA Atlanta Hwy,33.94135,-83.44118,30
-Electrify-America US-Atlanta GA Glenwood Ave SE,33.74184,-84.36063,30
-Electrify-America US-Atlanta GA Johnson Ferry Rd NE,33.89368,-84.331,30
-Electrify-America US-Atlanta GA Monroe Dr NE,33.80123,-84.3724,30
-Electrify-America US-Atlanta GA Peachtree Rd NE,33.8447,-84.36042,30
-Electrify-America US-AtWater CA Commerce Ave,37.34246,-120.61014,30
-Electrify-America US-Auburn AL S College St,32.57185,-85.4977,30
+Electrify-America US-Albany OR Goldfish Farm RD SE,44.62766,-123.04916,32
+Electrify-America US-Albert Lea MN E Main Street,43.65438,-93.33673,32
+Electrify-America US-Albertville MN Labeaux Ave Ne,45.2445,-93.66512,32
+Electrify-America US-Albuquerque NM Carlisle Blvd,35.11274,-106.60626,32
+Electrify-America US-Albuquerque NM Louisiana Blvd NE,35.10382,-106.5657,32
+Electrify-America US-Albuquerque NM Yale Blvd SE,35.07558,-106.62175,32
+Electrify-America US-Alexandria Bay NY NY Route 12,44.2986,-75.96478,32
+Electrify-America US-Alexandria LA Memorial Dr,31.28094,-92.45954,32
+Electrify-America US-Alexandria MN 50th Ave W,45.84646,-95.38148,32
+Electrify-America US-Alexandria VA Mt Vernon Ave,38.82137,-77.05766,32
+Electrify-America US-Alexandria VA N. Washington St,38.81116,-77.04632,32
+Electrify-America US-Alexandria VA Richmond Hwy.,38.74252,-77.0867,32
+Electrify-America US-Algonquin IL S Randall Rd,42.1693,-88.3367,32
+Electrify-America US-Allentown PA Tilghman St,40.59764,-75.52636,32
+Electrify-America US-Alpharetta GA North Point Parkway,34.03882,-84.30476,32
+Electrify-America US-Altamonte Springs FL West State Road 436,28.66394,-81.41802,32
+Electrify-America US-Altoona PA Frankstown Rd,40.47646,-78.3907,32
+Electrify-America US-Amarillo TX Westgate Pkwy.,35.18517,-101.94083,32
+Electrify-America US-Anaheim CA E Katella Ave,33.80387,-117.8916,32
+Electrify-America US-Anaheim CA N. Euclid St.,33.83683,-117.93954,32
+Electrify-America US-Anderson CA Balls Ferry Rd,40.45348,-122.28917,32
+Electrify-America US-Angelica NY Peacock Hill,42.3038,-78.01212,32
+Electrify-America US-Ann Arbor MI Waters Rd,42.2436,-83.7682,32
+Electrify-America US-Annapolis MD Generals Hwy,38.98946,-76.55072,32
+Electrify-America US-Anthem AZ W. Anthem Way,33.87042,-112.15362,32
+Electrify-America US-Aptos CA Seascape Village,36.95263,-121.87777,32
+Electrify-America US-Arcadia CA E. Live Oak Avenue,34.10725,-118.0244,32
+Electrify-America US-Arcadia CA South Baldwin Ave,34.13625,-118.0529,32
+Electrify-America US-Ardmore OK N. Commerce,34.19416,-97.14432,32
+Electrify-America US-Arlington MA Massachusetts Ave,42.41645,-71.15402,32
+Electrify-America US-Arlington TX E Lamar Blvd,32.7617,-97.0756,32
+Electrify-America US-Arvada CO Ralston Rd,39.80135,-105.1021,32
+Electrify-America US-Ashburn VA Red Rum drive,39.01715,-77.47913,32
+Electrify-America US-Asheville NC Hendersonville Rd,35.5142,-82.5258,32
+Electrify-America US-Asheville NC Patton Ave.,35.5912,-82.5816,32
+Electrify-America US-Atascadero CA El Camino Real,35.5133,-120.6982,32
+Electrify-America US-Athens AL US Hwy 72 E,34.78737,-86.95852,32
+Electrify-America US-Athens GA Atlanta Hwy,33.94135,-83.44118,32
+Electrify-America US-Atlanta GA Glenwood Ave SE,33.74184,-84.36063,32
+Electrify-America US-Atlanta GA Johnson Ferry Rd NE,33.89368,-84.331,32
+Electrify-America US-Atlanta GA Monroe Dr NE,33.80123,-84.3724,32
+Electrify-America US-Atlanta GA Peachtree Rd NE,33.8447,-84.36042,32
+Electrify-America US-AtWater CA Commerce Ave,37.34246,-120.61014,32
+Electrify-America US-Auburn AL S College St,32.57185,-85.4977,32
 Electrify-America US-Auburn CA Auburn Ravine Rd,38.9225,-121.06033
-Electrify-America US-Auburn Hills MI Baldwin Rd,42.7001,-83.30208,30
+Electrify-America US-Auburn Hills MI Baldwin Rd,42.7001,-83.30208,32
 Electrify-America US-Auburn MA Southbridge St,42.20223,-71.838
-Electrify-America US-Auburn WA Outlet Collection Way,47.29764,-122.24928,30
-Electrify-America US-Aurora CO Exposition Ave.,39.70318,-104.82568,30
-Electrify-America US-Aurora CO S Chambers Rd,39.6136,-104.81337,30
-Electrify-America US-Aurora CO South Aurora Parkway,39.60584,-104.7064,30
-Electrify-America US-Aurora IL North Route 59,41.76915,-88.20774,30
-Electrify-America US-Austin TX E 41st St,30.3006,-97.72175,30
-Electrify-America US-Avon OH Chester Rd,41.4678,-82.014,30
-Electrify-America US-Baker CA Baker Blvd,35.26226,-116.0811,30
-Electrify-America US-Bakerfield CA Mall View Rd,35.3946,-118.95152,30
-Electrify-America US-Bakersfield CA California Ave.,35.36755,-119.05085,30
-Electrify-America US-Bakersfield CA Mall View Rd,35.39458,-118.95603,30
-Electrify-America US-Bakersfield CA Ming Ave,35.34052,-119.10003,30
-Electrify-America US-Bakersfield CA San Dimas St,35.39353,-119.00862,30
-Electrify-America US-Bakersfield CA South Enos Lane,35.26653,-119.25296,30
-Electrify-America US-Bakersfield CA Stockdale Hwy,35.34897,-119.12582,30
-Electrify-America US-Bakersfield CA Stockdale Hwy,35.35377,-119.0432,30
-Electrify-America US-Bal Harbor FL Collins Ave,25.88724,-80.12614,30
-Electrify-America US-Baldwin Park CA Baldwin Park Blvd,34.0707,-117.97825,30
-Electrify-America US-Baltimore MD Whetstone Way,39.2681,-76.59963,30
-Electrify-America US-Barstow CA Montara Rd,34.88372,-116.9925,30
+Electrify-America US-Auburn WA Outlet Collection Way,47.29764,-122.24928,32
+Electrify-America US-Aurora CO Exposition Ave.,39.70318,-104.82568,32
+Electrify-America US-Aurora CO S Chambers Rd,39.6136,-104.81337,32
+Electrify-America US-Aurora CO South Aurora Parkway,39.60584,-104.7064,32
+Electrify-America US-Aurora IL North Route 59,41.76915,-88.20774,32
+Electrify-America US-Austin TX E 41st St,30.3006,-97.72175,32
+Electrify-America US-Avon OH Chester Rd,41.4678,-82.014,32
+Electrify-America US-Baker CA Baker Blvd,35.26226,-116.0811,32
+Electrify-America US-Bakerfield CA Mall View Rd,35.3946,-118.95152,32
+Electrify-America US-Bakersfield CA California Ave.,35.36755,-119.05085,32
+Electrify-America US-Bakersfield CA Mall View Rd,35.39458,-118.95603,32
+Electrify-America US-Bakersfield CA Ming Ave,35.34052,-119.10003,32
+Electrify-America US-Bakersfield CA San Dimas St,35.39353,-119.00862,32
+Electrify-America US-Bakersfield CA South Enos Lane,35.26653,-119.25296,32
+Electrify-America US-Bakersfield CA Stockdale Hwy,35.34897,-119.12582,32
+Electrify-America US-Bakersfield CA Stockdale Hwy,35.35377,-119.0432,32
+Electrify-America US-Bal Harbor FL Collins Ave,25.88724,-80.12614,32
+Electrify-America US-Baldwin Park CA Baldwin Park Blvd,34.0707,-117.97825,32
+Electrify-America US-Baltimore MD Whetstone Way,39.2681,-76.59963,32
+Electrify-America US-Barstow CA Montara Rd,34.88372,-116.9925,32
 Electrify-America US-Battle Mountain NV W Front St,40.64815,-116.94291
-Electrify-America US-Bay City MI Wilder Rd,43.62244,-83.93223,30
-Electrify-America US-Bayshore NY Sunrise Hwy,40.73685,-73.24514,30
-Electrify-America US-Bayside NY 41st Avenue,40.7637,-73.7695,30
-Electrify-America US-Beaver UT W 1400 N,38.29373,-112.65367,30
-Electrify-America US-Beaverton OR SW Beaverton Hillsdale Hwy.,45.48692,-122.7886,30
-Electrify-America US-Beaverton OR SW Walker Rd,45.51837,-122.8399,30
-Electrify-America US-Bedford PA Business 220,40.05353,-78.51045,30
-Electrify-America US-Belle Vernon PA Route 51 South.,40.186,-79.81747,30
-Electrify-America US-Bellevue WA Bellevue Wayne,47.61332,-122.20062,30
-Electrify-America US-Bellingham WA Lakeway Dr,48.74434,-122.463,30
-Electrify-America US-Bellingham WA W Bakerview Rd,48.78928,-122.5123,30
-Electrify-America US-Bellmead TX N Interstate 35 Frontage Rd,31.60156,-97.1051,30
-Electrify-America US-Belmont CA El Camino Real,37.5193,-122.27482,30
-Electrify-America US-Bend OR SW Pinebrook Blvd,44.02256,-121.31675,30
-Electrify-America US-Benson AZ S Prickly Pear Ave,31.9698,-110.31355,30
-Electrify-America US-Benton Harbor MI Pipestone Rd,42.08223,-86.42403,30
-Electrify-America US-Berkeley CA Heinz Ave,37.85394,-122.29073,30
-Electrify-America US-Bethesda MD Democracy Blvd,39.0249,-77.1487,30
-Electrify-America US-Billings MT Main St,45.80578,-108.4742,30
-Electrify-America US-Binghamton NY Industrial Park Drive,42.10126,-75.83634,30
-Electrify-America US-Binghamton NY South Washington,42.09037,-75.91355,30
-Electrify-America US-Bishop CA N Main Street,37.37344,-118.39384,30
-Electrify-America US-Bismarck ND State St,46.84352,-100.77384,30
-Electrify-America US-Blackwell OK W Doolin Ave,36.8105,-97.33654,30
-Electrify-America US-Blackwood NJ Premium Outlets Dr,39.78357,-75.05113,30
-Electrify-America US-Bloomfield NJ Belleville Ave #36,40.79687,-74.17895,30
-Electrify-America US-Bloomingdale IL S Gary Ave,41.9539,-88.1223,30
-Electrify-America US-Bloomington IL W Market St,40.4881,-89.04125,30
-Electrify-America US-Bloomsburg PA New Berwick Hwy,41.01228,-76.4116,30
-Electrify-America US-Boca Raton FL Glades Rd,26.36263,-80.13172,30
-Electrify-America US-Boise ID W. Overland Rd,43.59142,-116.2836,30
-Electrify-America US-Bolingbrook IL E Boughton Rd,41.7267,-88.0395,30
-Electrify-America US-Bonita Springs FL Saradrienne Ln,26.33058,-81.75838,30
-Electrify-America US-Boonville MO Main St,38.9501,-92.74092,30
-Electrify-America US-Bothell WA Bothell Everett Hwy.,47.80832,-122.20678,30
-Electrify-America US-Boulder CO 29th St,40.01844,-105.25708,30
-Electrify-America US-Bowie MD Emerald Way,38.9428,-76.737,30
-Electrify-America US-Bowling Green KY Corvette Dr.,37.0033,-86.37494,30
-Electrify-America US-Boynton Beach FL Old Boynton Beach Rd,26.53033,-80.0967,30
-Electrify-America US-Bozeman MT Catron St,45.71185,-111.06964,30
-Electrify-America US-Bradley IL N Kinzie Ave,41.15903,-87.849,30
-Electrify-America US-Braintree MA Granite Street,42.22253,-71.02225,30
-Electrify-America US-Brea CA Brea Mall Drive,33.91472,-117.88354,30
-Electrify-America US-Breaux Bridge LA Rees Street,30.293,-91.9122,30
-Electrify-America US-Brick NJ Route 70,40.0582,-74.1489,30
-Electrify-America US-Bridgehampton NY School Street,40.93502,-72.30366,30
+Electrify-America US-Bay City MI Wilder Rd,43.62244,-83.93223,32
+Electrify-America US-Bayshore NY Sunrise Hwy,40.73685,-73.24514,32
+Electrify-America US-Bayside NY 41st Avenue,40.7637,-73.7695,32
+Electrify-America US-Beaver UT W 1400 N,38.29373,-112.65367,32
+Electrify-America US-Beaverton OR SW Beaverton Hillsdale Hwy.,45.48692,-122.7886,32
+Electrify-America US-Beaverton OR SW Walker Rd,45.51837,-122.8399,32
+Electrify-America US-Bedford PA Business 220,40.05353,-78.51045,32
+Electrify-America US-Belle Vernon PA Route 51 South.,40.186,-79.81747,32
+Electrify-America US-Bellevue WA Bellevue Wayne,47.61332,-122.20062,32
+Electrify-America US-Bellingham WA Lakeway Dr,48.74434,-122.463,32
+Electrify-America US-Bellingham WA W Bakerview Rd,48.78928,-122.5123,32
+Electrify-America US-Bellmead TX N Interstate 35 Frontage Rd,31.60156,-97.1051,32
+Electrify-America US-Belmont CA El Camino Real,37.5193,-122.27482,32
+Electrify-America US-Bend OR SW Pinebrook Blvd,44.02256,-121.31675,32
+Electrify-America US-Benson AZ S Prickly Pear Ave,31.9698,-110.31355,32
+Electrify-America US-Benton Harbor MI Pipestone Rd,42.08223,-86.42403,32
+Electrify-America US-Berkeley CA Heinz Ave,37.85394,-122.29073,32
+Electrify-America US-Bethesda MD Democracy Blvd,39.0249,-77.1487,32
+Electrify-America US-Billings MT Main St,45.80578,-108.4742,32
+Electrify-America US-Binghamton NY Industrial Park Drive,42.10126,-75.83634,32
+Electrify-America US-Binghamton NY South Washington,42.09037,-75.91355,32
+Electrify-America US-Bishop CA N Main Street,37.37344,-118.39384,32
+Electrify-America US-Bismarck ND State St,46.84352,-100.77384,32
+Electrify-America US-Blackwell OK W Doolin Ave,36.8105,-97.33654,32
+Electrify-America US-Blackwood NJ Premium Outlets Dr,39.78357,-75.05113,32
+Electrify-America US-Bloomfield NJ Belleville Ave,40.79687,-74.17895,32
+Electrify-America US-Bloomingdale IL S Gary Ave,41.9539,-88.1223,32
+Electrify-America US-Bloomington IL W Market St,40.4881,-89.04125,32
+Electrify-America US-Bloomsburg PA New Berwick Hwy,41.01228,-76.4116,32
+Electrify-America US-Boca Raton FL Glades Rd,26.36263,-80.13172,32
+Electrify-America US-Boise ID W. Overland Rd,43.59142,-116.2836,32
+Electrify-America US-Bolingbrook IL E Boughton Rd,41.7267,-88.0395,32
+Electrify-America US-Bonita Springs FL Saradrienne Ln,26.33058,-81.75838,32
+Electrify-America US-Boonville MO Main St,38.9501,-92.74092,32
+Electrify-America US-Bothell WA Bothell Everett Hwy.,47.80832,-122.20678,32
+Electrify-America US-Boulder CO 29th St,40.01844,-105.25708,32
+Electrify-America US-Bowie MD Emerald Way,38.9428,-76.737,32
+Electrify-America US-Bowling Green KY Corvette Dr.,37.0033,-86.37494,32
+Electrify-America US-Boynton Beach FL Old Boynton Beach Rd,26.53033,-80.0967,32
+Electrify-America US-Bozeman MT Catron St,45.71185,-111.06964,32
+Electrify-America US-Bradley IL N Kinzie Ave,41.15903,-87.849,32
+Electrify-America US-Braintree MA Granite Street,42.22253,-71.02225,32
+Electrify-America US-Brea CA Brea Mall Drive,33.91472,-117.88354,32
+Electrify-America US-Breaux Bridge LA Rees Street,30.293,-91.9122,32
+Electrify-America US-Brick NJ Route 70,40.0582,-74.1489,32
+Electrify-America US-Bridgehampton NY School Street,40.93502,-72.30366,32
 Electrify-America US-Bridgeport CA Main St,38.25516,-119.23202
 Electrify-America US-Bridgewater NJ Promenade Blvd,40.56189,-74.55378
-Electrify-America US-Bristol PA Bath Rd,40.12696,-74.8816,30
-Electrify-America US-Bristol PA Bristol Pike,40.11764,-74.84468,30
-Electrify-America US-Bristol VA Lee Highway,36.63576,-82.12762,30
-Electrify-America US-Bristow OK W. Hwy 16,35.84323,-96.3958,30
-Electrify-America US-Broken Arrow OK E Hillside Drive,36.06593,-95.77624,30
-Electrify-America US-Brooklyn NY Rockaway Parkway,40.64618,-73.90273,30
-Electrify-America US-Broomall PA Springfield Rd,39.98317,-75.3757,30
-Electrify-America US-Broomfield CO West Flatiron Crossing Dr,39.93243,-105.1355,30
-Electrify-America US-Brunswick GA Altama Connector,31.21352,-81.4866,30
-Electrify-America US-Buckeye AZ S. Watson Rd,33.4359,-112.55934,30
-Electrify-America US-Buena Park CA Orangethorpe Avenue,33.85652,-118.00085,30
-Electrify-America US-Buford GA Buford Dr,34.06342,-83.98365,30
-Electrify-America US-Burbank CA N. Victory Place,34.1886,-118.3265,30
-Electrify-America US-Burbank CA Sherman Way,34.19998,-118.37007,30
-Electrify-America US-Burbank CA W Magnolia Blvd,34.16813,-118.3438,30
-Electrify-America US-Burke VA Burke Centre Pkwy,38.7989,-77.32094,30
-Electrify-America US-Burlington MA Burlington Mall Rd,42.48415,-71.2133,30
-Electrify-America US-Bushnell FL W C 48,28.6668,-82.1386,30
-Electrify-America US-Butte MT W. Browns Gulch RD.,46.00875,-112.6082,30
-Electrify-America US-Cabazon CA Seminole Dr.,33.92677,-116.8113,30
-Electrify-America US-Calhoun GA Belwood Rd,34.4617,-84.9185,30
-Electrify-America US-Camarillo CA Ventura Blvd,34.21794,-119.06452,30
-Electrify-America US-Cambridge OH Southgate Rd,39.98872,-81.57502,30
-Electrify-America US-Camillus NY Genesee Street,43.0341,-76.36475,30
-Electrify-America US-Canoga Park CA Topanga Canyon Blvd,34.19098,-118.60523,30
-Electrify-America US-Capistrano Beach CA Las Vegas,33.46535,-117.67922,30
-Electrify-America US-Carle Place NY Glen Cove Rd,40.7481,-73.61688,30
-Electrify-America US-Carlisle PA Harrisburg Pike,40.2218,-77.16318,30
-Electrify-America US-Carlsbad CA Paseo Del Norte,33.1282,-117.32123,30
-Electrify-America US-Carmel IN W Carmel Dr,39.97195,-86.15214,30
-Electrify-America US-Carson CA W. Sepulveda Blvd.,33.80912,-118.28686,30
-Electrify-America US-Cary NC Walnut Street,35.7586,-78.73923,30
-Electrify-America US-Casa Grande AZ E. Florence,32.87867,-111.71228,30
-Electrify-America US-Casey IL N RTE 49,39.31627,-87.98512,30
-Electrify-America US-Casper WY Wyoming Blvd SE,42.84764,-106.26338,30
-Electrify-America US-Castle Creek NY Castle Creek Rd,42.23186,-75.9172,30
-Electrify-America US-Castle Rock CO Founders Pkwy,39.40762,-104.85716,30
-Electrify-America US-Castro Valley CA Castro Valley Blvd.,37.6948,-122.08156,30
-Electrify-America US-Catonsville MD Edmondson Ave,39.2812,-76.72497,30
+Electrify-America US-Bristol PA Bath Rd,40.12696,-74.8816,32
+Electrify-America US-Bristol PA Bristol Pike,40.11764,-74.84468,32
+Electrify-America US-Bristol VA Lee Highway,36.63576,-82.12762,32
+Electrify-America US-Bristow OK W. Hwy 16,35.84323,-96.3958,32
+Electrify-America US-Broken Arrow OK E Hillside Drive,36.06593,-95.77624,32
+Electrify-America US-Brooklyn NY Rockaway Parkway,40.64618,-73.90273,32
+Electrify-America US-Broomall PA Springfield Rd,39.98317,-75.3757,32
+Electrify-America US-Broomfield CO West Flatiron Crossing Dr,39.93243,-105.1355,32
+Electrify-America US-Brunswick GA Altama Connector,31.21352,-81.4866,32
+Electrify-America US-Buckeye AZ S. Watson Rd,33.4359,-112.55934,32
+Electrify-America US-Buena Park CA Orangethorpe Avenue,33.85652,-118.00085,32
+Electrify-America US-Buford GA Buford Dr,34.06342,-83.98365,32
+Electrify-America US-Burbank CA N. Victory Place,34.1886,-118.3265,32
+Electrify-America US-Burbank CA Sherman Way,34.19998,-118.37007,32
+Electrify-America US-Burbank CA W Magnolia Blvd,34.16813,-118.3438,32
+Electrify-America US-Burke VA Burke Centre Pkwy,38.7989,-77.32094,32
+Electrify-America US-Burlington MA Burlington Mall Rd,42.48415,-71.2133,32
+Electrify-America US-Bushnell FL W C 48,28.6668,-82.1386,32
+Electrify-America US-Butte MT W. Browns Gulch RD.,46.00875,-112.6082,32
+Electrify-America US-Cabazon CA Seminole Dr.,33.92677,-116.8113,32
+Electrify-America US-Calhoun GA Belwood Rd,34.4617,-84.9185,32
+Electrify-America US-Camarillo CA Ventura Blvd,34.21794,-119.06452,32
+Electrify-America US-Cambridge OH Southgate Rd,39.98872,-81.57502,32
+Electrify-America US-Camillus NY Genesee Street,43.0341,-76.36475,32
+Electrify-America US-Canoga Park CA Topanga Canyon Blvd,34.19098,-118.60523,32
+Electrify-America US-Capistrano Beach CA Las Vegas,33.46535,-117.67922,32
+Electrify-America US-Carle Place NY Glen Cove Rd,40.7481,-73.61688,32
+Electrify-America US-Carlisle PA Harrisburg Pike,40.2218,-77.16318,32
+Electrify-America US-Carlsbad CA Paseo Del Norte,33.1282,-117.32123,32
+Electrify-America US-Carmel IN W Carmel Dr,39.97195,-86.15214,32
+Electrify-America US-Carson CA W. Sepulveda Blvd.,33.80912,-118.28686,32
+Electrify-America US-Cary NC Walnut Street,35.7586,-78.73923,32
+Electrify-America US-Casa Grande AZ E. Florence,32.87867,-111.71228,32
+Electrify-America US-Casey IL N RTE 49,39.31627,-87.98512,32
+Electrify-America US-Casper WY Wyoming Blvd SE,42.84764,-106.26338,32
+Electrify-America US-Castle Creek NY Castle Creek Rd,42.23186,-75.9172,32
+Electrify-America US-Castle Rock CO Founders Pkwy,39.40762,-104.85716,32
+Electrify-America US-Castro Valley CA Castro Valley Blvd.,37.6948,-122.08156,32
+Electrify-America US-Catonsville MD Edmondson Ave,39.2812,-76.72497,32
 Electrify-America US-Cedar City UT S Providence Center Dr,37.65477,-113.08674
-Electrify-America US-Cedar Park TX Lakeline Mall Dr,30.47135,-97.80378,30
-Electrify-America US-Centennial CO S University Blvd,39.57924,-104.96206,30
-Electrify-America US-Central Valley NY Red Apple Court,41.31402,-74.12405,30
-Electrify-America US-Chamberlain SD E King Street,43.77275,-99.31196,30
-Electrify-America US-Chambersburg PA Lincoln Way E,39.92637,-77.6289,30
-Electrify-America US-Champaign IL N Prospect Ave,40.1462,-88.25935,30
-Electrify-America US-Chandler AZ Premium Outlets Way,33.2868,-111.97225,30
-Electrify-America US-Chandler AZ South Alma School Rd,33.27598,-111.85946,30
-Electrify-America US-Chantilly VA Chantilly Shopping Center Chantilly,38.88847,-77.44386,30
-Electrify-America US-Charlotte Hall MD Three Notch Rd,38.50204,-76.77595,30
-Electrify-America US-Charlotte NC North Tryon Street,35.29555,-80.75655,30
-Electrify-America US-Charlotte NC Sharon Rd,35.1512,-80.83473,30
-Electrify-America US-Charlotte NC South King Dr,35.21313,-80.83336,30
-Electrify-America US-Charlottesville VA Connor Dr,38.12784,-78.4415,30
-Electrify-America US-Chattanooga TN Reggie White Blvd,35.03686,-85.31822,30
-Electrify-America US-Chattanooga TN Riverfront Pkwy,35.05548,-85.31517,30
-Electrify-America US-Chattanooga TN Volkswagen Dr,35.07656,-85.12907,30
+Electrify-America US-Cedar Park TX Lakeline Mall Dr,30.47135,-97.80378,32
+Electrify-America US-Centennial CO S University Blvd,39.57924,-104.96206,32
+Electrify-America US-Central Valley NY Red Apple Court,41.31402,-74.12405,32
+Electrify-America US-Chamberlain SD E King Street,43.77275,-99.31196,32
+Electrify-America US-Chambersburg PA Lincoln Way E,39.92637,-77.6289,32
+Electrify-America US-Champaign IL N Prospect Ave,40.1462,-88.25935,32
+Electrify-America US-Chandler AZ Premium Outlets Way,33.2868,-111.97225,32
+Electrify-America US-Chandler AZ South Alma School Rd,33.27598,-111.85946,32
+Electrify-America US-Chantilly VA Chantilly Shopping Center Chantilly,38.88847,-77.44386,32
+Electrify-America US-Charlotte Hall MD Three Notch Rd,38.50204,-76.77595,32
+Electrify-America US-Charlotte NC North Tryon Street,35.29555,-80.75655,32
+Electrify-America US-Charlotte NC Sharon Rd,35.1512,-80.83473,32
+Electrify-America US-Charlotte NC South King Dr,35.21313,-80.83336,32
+Electrify-America US-Charlottesville VA Connor Dr,38.12784,-78.4415,32
+Electrify-America US-Chattanooga TN Reggie White Blvd,35.03686,-85.31822,32
+Electrify-America US-Chattanooga TN Riverfront Pkwy,35.05548,-85.31517,32
+Electrify-America US-Chattanooga TN Volkswagen Dr,35.07656,-85.12907,32
 Electrify-America US-Cheektowaga NY Walden Ave,42.90934,-78.74461
-Electrify-America US-Cherry Hill NJ NJ-38,39.93478,-75.02644,30
-Electrify-America US-Chesterfield MO Outlet Blvd,38.67524,-90.66103,30
-Electrify-America US-Chestnut Hill MA Boylston Street,42.32364,-71.16873,30
-Electrify-America US-Cheyenne WY Dell Range Blvd,41.16148,-104.8009,30
-Electrify-America US-Chicago IL N Clybourn Ave,41.93003,-87.6761,30
-Electrify-America US-Chicago IL N Larrabee St,41.9042,-87.64352,30
-Electrify-America US-Chicago IL S Marshfield Ave,41.68394,-87.6629,30
-Electrify-America US-Chicago IL W 33rd Street,41.83555,-87.67318,30
-Electrify-America US-Chicago IL W Diversey Ave,41.9324,-87.71133,30
-Electrify-America US-Chicago IL W Jackson Blvd.,41.87757,-87.656,30
-Electrify-America US-Chico CA Broadway St,39.7276,-121.84033,30
-Electrify-America US-Chicopee MA Memorial Drive,42.17567,-72.57286,30
-Electrify-America US-Chino Hills CA Peyton Drive,34.0153,-117.74286,30
-Electrify-America US-Chipley FL Main St,30.7534,-85.54826,30
-Electrify-America US-Chubbuck ID Yellowstone Ave,42.90954,-112.4651,30
-Electrify-America US-Churchville NY S Main St,43.10348,-77.88358,30
-Electrify-America US-Cincinnati OH Geier Drive,39.16256,-84.42672,30
-Electrify-America US-Cincinnati OH Harrison Ave,39.1942,-84.6586,30
-Electrify-America US-Cincinnati OH Montgomery Rd,39.27275,-84.32953,30
-Electrify-America US-Citrus Heights CA Sunrise Blvd,38.67476,-121.27605,30
-Electrify-America US-Clackamas OR SE Sunny-side Rd,45.43203,-122.57103,30
-Electrify-America US-Clarion PA Perkins Rd.,41.18913,-79.39453,30
-Electrify-America US-Clarksburg MD Clarksburg Rd,39.22984,-77.28548,30
+Electrify-America US-Cherry Hill NJ NJ-38,39.93478,-75.02644,32
+Electrify-America US-Chesterfield MO Outlet Blvd,38.67524,-90.66103,32
+Electrify-America US-Chestnut Hill MA Boylston Street,42.32364,-71.16873,32
+Electrify-America US-Cheyenne WY Dell Range Blvd,41.16148,-104.8009,32
+Electrify-America US-Chicago IL N Clybourn Ave,41.93003,-87.6761,32
+Electrify-America US-Chicago IL N Larrabee St,41.9042,-87.64352,32
+Electrify-America US-Chicago IL S Marshfield Ave,41.68394,-87.6629,32
+Electrify-America US-Chicago IL W 33rd Street,41.83555,-87.67318,32
+Electrify-America US-Chicago IL W Diversey Ave,41.9324,-87.71133,32
+Electrify-America US-Chicago IL W Jackson Blvd.,41.87757,-87.656,32
+Electrify-America US-Chico CA Broadway St,39.7276,-121.84033,32
+Electrify-America US-Chicopee MA Memorial Drive,42.17567,-72.57286,32
+Electrify-America US-Chino Hills CA Peyton Drive,34.0153,-117.74286,32
+Electrify-America US-Chipley FL Main St,30.7534,-85.54826,32
+Electrify-America US-Chubbuck ID Yellowstone Ave,42.90954,-112.4651,32
+Electrify-America US-Churchville NY S Main St,43.10348,-77.88358,32
+Electrify-America US-Cincinnati OH Geier Drive,39.16256,-84.42672,32
+Electrify-America US-Cincinnati OH Harrison Ave,39.1942,-84.6586,32
+Electrify-America US-Cincinnati OH Montgomery Rd,39.27275,-84.32953,32
+Electrify-America US-Citrus Heights CA Sunrise Blvd,38.67476,-121.27605,32
+Electrify-America US-Clackamas OR SE Sunny-side Rd,45.43203,-122.57103,32
+Electrify-America US-Clarion PA Perkins Rd.,41.18913,-79.39453,32
+Electrify-America US-Clarksburg MD Clarksburg Rd,39.22984,-77.28548,32
 Electrify-America US-Clarksville AR Market St,35.4498,-93.4597
-Electrify-America US-Clarksville IN Veterans Pkwy,38.33054,-85.7588,30
-Electrify-America US-Clarksville TN Wilma Rudolph Blvd,36.5952,-87.2897,30
-Electrify-America US-Clermont FL Collina Terrace,28.54796,-81.66536,30
+Electrify-America US-Clarksville IN Veterans Pkwy,38.33054,-85.7588,32
+Electrify-America US-Clarksville TN Wilma Rudolph Blvd,36.5952,-87.2897,32
+Electrify-America US-Clermont FL Collina Terrace,28.54796,-81.66536,32
 Electrify-America US-Clifton NJ Kingsland Rd,40.82432,-74.13654
-Electrify-America US-Clive IA University Ave,41.6035,-93.75594,30
-Electrify-America US-Clovis CA Shaw Avenue,36.80783,-119.7032,30
-Electrify-America US-Coalville UT S. Main St,40.91674,-111.3983,30
-Electrify-America US-Cockeysville MD Shawan Rd,39.4965,-76.6556,30
-Electrify-America US-Cocoa FL Townsend Rd,28.3614,-80.79314,30
-Electrify-America US-Colby KS W Willow St.,39.36643,-101.0466,30
-Electrify-America US-College Park MD Baltimore Ave,39.02167,-76.92745,30
-Electrify-America US-College Station TX Texas Ave S,30.6102,-96.31417,30
-Electrify-America US-Collinsville IL Collinsville Crossing Blvd,38.67595,-90.01747,30
-Electrify-America US-Colton CA S. Mount Vernon Avenue,34.04963,-117.30764,30
-Electrify-America US-Columbia MD Dobbin Rd,39.19638,-76.81843,30
-Electrify-America US-Columbia SC Harbison Blvd,34.07505,-81.15237,30
-Electrify-America US-Columbus OH E Broad St,39.98217,-82.8221,30
-Electrify-America US-Columbus OH Ikea Way,40.1498,-82.96557,30
-Electrify-America US-Columbus OH West Point Plaza,39.98232,-83.14674,30
-Electrify-America US-Columbus TX Alleyton Rd S.,29.70854,-96.50384,30
-Electrify-America US-Commack NY Commack Rd,40.8075,-73.2938,30
-Electrify-America US-Commerce City CO E 104th Ave,39.8875,-104.813,30
-Electrify-America US-Commerce GA US Highway 441,34.24706,-83.45774,30
-Electrify-America US-Concord CA Clayton Rd.,37.95408,-121.96502,30
-Electrify-America US-Concord CA Willow Pass Rd,37.97853,-122.02915,30
-Electrify-America US-Concord NC Concord Mills Boulevard,35.3669,-80.72248,30
-Electrify-America US-Conshohocken PA Alan Wood Rd,40.0944,-75.30678,30
-Electrify-America US-Conyers GA Hwy 20 SE,33.6335,-84.01466,30
-Electrify-America US-Cookeville TN Sams Street,36.13346,-85.50762,30
-Electrify-America US-Copiague NY Sunrise Hwy,40.68853,-73.40535,30
-Electrify-America US-Coral Springs FL Coral Ridge Dr,26.3049,-80.2779,30
-Electrify-America US-Coral Springs FL Westview Dr,26.29727,-80.25345,30
-Electrify-America US-Cordele GA E 16th Ave,31.96344,-83.76263,30
-Electrify-America US-Cornelius OR N Adair St.,45.5215,-123.06802,30
-Electrify-America US-Corona CA California Ave,33.8563,-117.54037,30
-Electrify-America US-Corona CA McKinley St.,33.89045,-117.5187,30
-Electrify-America US-Costa Mesa CA S Coast Drive,33.6901,-117.91506,30
-Electrify-America US-Council Bluffs IA Manawa Centre Drive,41.2279,-95.84572,30
-Electrify-America US-Covina CA S Barranca Ave,34.07418,-117.881,30
-Electrify-America US-Covington WA SE 270th PL,47.3603,-122.10773,30
-Electrify-America US-Cranberry Township PA Freedom Rd,40.68598,-80.10595,30
-Electrify-America US-Crescent City CA East Washington Blvd,41.77408,-124.18975,30
-Electrify-America US-Culver City CA Sepulveda Blvd,33.98688,-118.3943,30
-Electrify-America US-Cypress CA Katella Avenue,33.8039,-118.0141,30
-Electrify-America US-Cypress TX Hempstead Rd,29.99882,-95.75573,30
-Electrify-America US-Dansville NY Franklin Plaza,42.56368,-77.71098,30
-Electrify-America US-Dartmouth MA N. Dartmouth Mall Rd,41.64247,-70.9905,30
-Electrify-America US-Dateland AZ Ave 64 E,32.79882,-113.54075,30
-Electrify-America US-Davenport FL Love’s Travel Shop,28.24366,-81.65724,30
-Electrify-America US-Davie FL S University Drive,26.0474,-80.25048,30
-Electrify-America US-Davis CA E Street,38.54566,-121.74202,30
-Electrify-America US-Daytona Beach FL W International Speedway Blvd,29.19505,-81.06385,30
-Electrify-America US-Deerfield Beach FL S Federal Hwy,26.302,-80.09195,30
-Electrify-America US-Delano CA Woollomes Ave,35.74582,-119.2448,30
-Electrify-America US-Dell MT Main Street,44.72538,-112.7008,30
-Electrify-America US-Delray Beach FL Linton BLvd,26.43834,-80.08558,30
-Electrify-America US-Deming NM E. Pine St,32.26934,-107.74734,30
-Electrify-America US-Denton TX W. University,33.23157,-97.16808,30
-Electrify-America US-Denver CO Airport Way,39.78044,-104.79612,30
-Electrify-America US-Denver CO E 1st Ave,39.71645,-104.95027,30
-Electrify-America US-Denver CO E 57th Ave,39.79994,-104.7709,30
-Electrify-America US-Denver CO Pena Boulevard,39.83876,-104.6702,30
-Electrify-America US-Denver CO Smith Rd.,39.77068,-104.89856,30
+Electrify-America US-Clive IA University Ave,41.6035,-93.75594,32
+Electrify-America US-Clovis CA Shaw Avenue,36.80783,-119.7032,32
+Electrify-America US-Coalville UT S. Main St,40.91674,-111.3983,32
+Electrify-America US-Cockeysville MD Shawan Rd,39.4965,-76.6556,32
+Electrify-America US-Cocoa FL Townsend Rd,28.3614,-80.79314,32
+Electrify-America US-Colby KS W Willow St.,39.36643,-101.0466,32
+Electrify-America US-College Park MD Baltimore Ave,39.02167,-76.92745,32
+Electrify-America US-College Station TX Texas Ave S,30.6102,-96.31417,32
+Electrify-America US-Collinsville IL Collinsville Crossing Blvd,38.67595,-90.01747,32
+Electrify-America US-Colton CA S. Mount Vernon Avenue,34.04963,-117.30764,32
+Electrify-America US-Columbia MD Dobbin Rd,39.19638,-76.81843,32
+Electrify-America US-Columbia SC Harbison Blvd,34.07505,-81.15237,32
+Electrify-America US-Columbus OH E Broad St,39.98217,-82.8221,32
+Electrify-America US-Columbus OH Ikea Way,40.1498,-82.96557,32
+Electrify-America US-Columbus OH West Point Plaza,39.98232,-83.14674,32
+Electrify-America US-Columbus TX Alleyton Rd S.,29.70854,-96.50384,32
+Electrify-America US-Commack NY Commack Rd,40.8075,-73.2938,32
+Electrify-America US-Commerce City CO E 104th Ave,39.8875,-104.813,32
+Electrify-America US-Commerce GA US Highway 441,34.24706,-83.45774,32
+Electrify-America US-Concord CA Clayton Rd.,37.95408,-121.96502,32
+Electrify-America US-Concord CA Willow Pass Rd,37.97853,-122.02915,32
+Electrify-America US-Concord NC Concord Mills Boulevard,35.3669,-80.72248,32
+Electrify-America US-Conshohocken PA Alan Wood Rd,40.0944,-75.30678,32
+Electrify-America US-Conyers GA Hwy 20 SE,33.6335,-84.01466,32
+Electrify-America US-Cookeville TN Sams Street,36.13346,-85.50762,32
+Electrify-America US-Copiague NY Sunrise Hwy,40.68853,-73.40535,32
+Electrify-America US-Coral Springs FL Coral Ridge Dr,26.3049,-80.2779,32
+Electrify-America US-Coral Springs FL Westview Dr,26.29727,-80.25345,32
+Electrify-America US-Cordele GA E 16th Ave,31.96344,-83.76263,32
+Electrify-America US-Cornelius OR N Adair St.,45.5215,-123.06802,32
+Electrify-America US-Corona CA California Ave,33.8563,-117.54037,32
+Electrify-America US-Corona CA McKinley St.,33.89045,-117.5187,32
+Electrify-America US-Costa Mesa CA S Coast Drive,33.6901,-117.91506,32
+Electrify-America US-Council Bluffs IA Manawa Centre Drive,41.2279,-95.84572,32
+Electrify-America US-Covina CA S Barranca Ave,34.07418,-117.881,32
+Electrify-America US-Covington WA SE 270th PL,47.3603,-122.10773,32
+Electrify-America US-Cranberry Township PA Freedom Rd,40.68598,-80.10595,32
+Electrify-America US-Crescent City CA East Washington Blvd,41.77408,-124.18975,32
+Electrify-America US-Culver City CA Sepulveda Blvd,33.98688,-118.3943,32
+Electrify-America US-Cypress CA Katella Avenue,33.8039,-118.0141,32
+Electrify-America US-Cypress TX Hempstead Rd,29.99882,-95.75573,32
+Electrify-America US-Dansville NY Franklin Plaza,42.56368,-77.71098,32
+Electrify-America US-Dartmouth MA N. Dartmouth Mall Rd,41.64247,-70.9905,32
+Electrify-America US-Dateland AZ Ave 64 E,32.79882,-113.54075,32
+Electrify-America US-Davenport FL Love’s Travel Shop,28.24366,-81.65724,32
+Electrify-America US-Davie FL S University Drive,26.0474,-80.25048,32
+Electrify-America US-Davis CA E Street,38.54566,-121.74202,32
+Electrify-America US-Daytona Beach FL W International Speedway Blvd,29.19505,-81.06385,32
+Electrify-America US-Deerfield Beach FL S Federal Hwy,26.302,-80.09195,32
+Electrify-America US-Delano CA Woollomes Ave,35.74582,-119.2448,32
+Electrify-America US-Dell MT Main Street,44.72538,-112.7008,32
+Electrify-America US-Delray Beach FL Linton BLvd,26.43834,-80.08558,32
+Electrify-America US-Deming NM E. Pine St,32.26934,-107.74734,32
+Electrify-America US-Denton TX W. University,33.23157,-97.16808,32
+Electrify-America US-Denver CO Airport Way,39.78044,-104.79612,32
+Electrify-America US-Denver CO E 1st Ave,39.71645,-104.95027,32
+Electrify-America US-Denver CO E 57th Ave,39.79994,-104.7709,32
+Electrify-America US-Denver CO Pena Boulevard,39.83876,-104.6702,32
+Electrify-America US-Denver CO Smith Rd.,39.77068,-104.89856,32
 Electrify-America US-Denville NJ W Main St,40.89386,-74.47838
-Electrify-America US-Deptford NJ Deptford Center Rd,39.83316,-75.0991,30
-Electrify-America US-Des Moines IA Merle Hay Rd,41.63984,-93.6971,30
-Electrify-America US-Diamond Bar CA Grand Avenue,34.00436,-117.82223,30
-Electrify-America US-Diamond Lake OR Resort Dr,43.17756,-122.1375,30
-Electrify-America US-Dolton IL Lincoln Ave,41.62338,-87.5827,30
-Electrify-America US-Dorchester MA Gallivan Boulevard,42.28473,-71.04638,30
+Electrify-America US-Deptford NJ Deptford Center Rd,39.83316,-75.0991,32
+Electrify-America US-Des Moines IA Merle Hay Rd,41.63984,-93.6971,32
+Electrify-America US-Diamond Bar CA Grand Avenue,34.00436,-117.82223,32
+Electrify-America US-Diamond Lake OR Resort Dr,43.17756,-122.1375,32
+Electrify-America US-Dolton IL Lincoln Ave,41.62338,-87.5827,32
+Electrify-America US-Dorchester MA Gallivan Boulevard,42.28473,-71.04638,32
 Electrify-America US-Douglasville GA Bill Arp Rd,33.7241,-84.76346
-Electrify-America US-Dover DE N Dupont Hwy,39.187,-75.5348,30
-Electrify-America US-Downey CA Apollo Way,33.9234,-118.128,30
-Electrify-America US-Draper UT Lone Peak Pkwy,40.532,-111.8959,30
-Electrify-America US-DuBois PA industrial Drive,41.12688,-78.73875,30
-Electrify-America US-Dulles VA Dulles Landing Dr,38.93505,-77.52265,30
-Electrify-America US-Duluth GA Steve Reynolds Blvd,33.96082,-84.14242,30
-Electrify-America US-Duluth MN N 50th Ave W,46.74067,-92.15902,30
-Electrify-America US-Dunnigan CA County Road 89,38.88232,-121.97246,30
-Electrify-America US-Eagan MN Eagan Outlets Pkwy,44.81487,-93.2174,30
+Electrify-America US-Dover DE N Dupont Hwy,39.187,-75.5348,32
+Electrify-America US-Downey CA Apollo Way,33.9234,-118.128,32
+Electrify-America US-Draper UT Lone Peak Pkwy,40.532,-111.8959,32
+Electrify-America US-DuBois PA industrial Drive,41.12688,-78.73875,32
+Electrify-America US-Dulles VA Dulles Landing Dr,38.93505,-77.52265,32
+Electrify-America US-Duluth GA Steve Reynolds Blvd,33.96082,-84.14242,32
+Electrify-America US-Duluth MN N 50th Ave W,46.74067,-92.15902,32
+Electrify-America US-Dunnigan CA County Road 89,38.88232,-121.97246,32
+Electrify-America US-Eagan MN Eagan Outlets Pkwy,44.81487,-93.2174,32
 Electrify-America US-East Brunswick NJ NJ-18,40.45773,-74.39928
-Electrify-America US-East Hartford CT E Main Street,41.76797,-72.64554,30
+Electrify-America US-East Hartford CT E Main Street,41.76797,-72.64554,32
 Electrify-America US-East Palo Alto CA E Bayshore Rd,37.45995,-122.13873
-Electrify-America US-East Point GA Cleveland Avenue,33.67975,-84.41572,30
-Electrify-America US-East Stroudsburg PA Lincoln Ave.,40.99116,-75.18282,30
-Electrify-America US-East Windsor NJ US 130,40.27293,-74.54102,30
-Electrify-America US-Eastland TX East Main Street,32.4033,-98.7929,30
-Electrify-America US-Eau Claire WI Gateway Dr,44.77477,-91.42838,30
-Electrify-America US-Edgewater CO Sheridan Blvd.,39.74583,-105.0548,30
-Electrify-America US-Edina MN York Ave S,44.8748,-93.322,30
+Electrify-America US-East Point GA Cleveland Avenue,33.67975,-84.41572,32
+Electrify-America US-East Stroudsburg PA Lincoln Ave.,40.99116,-75.18282,32
+Electrify-America US-East Windsor NJ US 130,40.27293,-74.54102,32
+Electrify-America US-Eastland TX East Main Street,32.4033,-98.7929,32
+Electrify-America US-Eau Claire WI Gateway Dr,44.77477,-91.42838,32
+Electrify-America US-Edgewater CO Sheridan Blvd.,39.74583,-105.0548,32
+Electrify-America US-Edina MN York Ave S,44.8748,-93.322,32
 Electrify-America US-Edison NJ U.S. Rte 1,40.5116,-74.3848
-Electrify-America US-Edwards CO Edwards Access Rd,39.64848,-106.58748,30
-Electrify-America US-Effingham IL Avenue of Mid-America,39.1384,-88.5713,30
-Electrify-America US-El Cajon CA Camino Canada,32.823,-116.90067,30
-Electrify-America US-El Cajon CA Fletcher Parkway,32.80797,-116.96808,30
-Electrify-America US-El Centro CA W. Main St,32.79327,-115.56768,30
-Electrify-America US-El Paso TX Gateway Blvd West,31.75204,-106.34095,30
+Electrify-America US-Edwards CO Edwards Access Rd,39.64848,-106.58748,32
+Electrify-America US-Effingham IL Avenue of Mid-America,39.1384,-88.5713,32
+Electrify-America US-El Cajon CA Camino Canada,32.823,-116.90067,32
+Electrify-America US-El Cajon CA Fletcher Parkway,32.80797,-116.96808,32
+Electrify-America US-El Centro CA W. Main St,32.79327,-115.56768,32
+Electrify-America US-El Paso TX Gateway Blvd West,31.75204,-106.34095,32
 Electrify-America US-Elizabeth NJ Kapkowski Rd,40.66237,-74.1733
-Electrify-America US-Elk Grove CA Elk Grove Blvd,38.41118,-121.39095,30
-Electrify-America US-Elko NV Mountian City Highway,40.8401,-115.79092,30
-Electrify-America US-Ellensburg WA Canyon Rd,46.9789,-120.54343,30
-Electrify-America US-Ellenton FL Factory Shops Blvd,27.53748,-82.5074,30
-Electrify-America US-Ellicott City MD North Ridge Rd,39.2822,-76.81933,30
-Electrify-America US-Elmhurst NY Queens Blvd.,40.73487,-73.87038,30
-Electrify-America US-Emeryville CA San Pablo Avenue,37.83268,-122.27974,30
-Electrify-America US-Emeryville CA Shellmound St,37.8289,-122.2913,30
-Electrify-America US-Emporia VA Market Drive,36.70684,-77.5461,30
-Electrify-America US-Encinitas CA North El Camino Real,33.04952,-117.25916,30
-Electrify-America US-Encino CA Ventura Blvd,34.16273,-118.52062,30
-Electrify-America US-Englewood CO Englewood Pkwy,39.65513,-104.98916,30
-Electrify-America US-Englewood CO S. Clinton St.,39.5937,-104.88263,30
-Electrify-America US-Ennis TX E Ennis Avenue,32.33207,-96.62012,30
-Electrify-America US-Erick OK N Sheb Wooley Ave.,35.22442,-99.86956,30
-Electrify-America US-Erie CO State Hwy 7,40.00247,-105.01135,30
-Electrify-America US-Erie PA Downs Drive,42.0523,-80.08185,30
-Electrify-America US-Escondido CA East Via Rancho Pkwy,33.07042,-117.06645,30
-Electrify-America US-Escondido CA W Felicita Ave,33.10314,-117.0744,30
-Electrify-America US-Essex Fenner CA Goffs Rd,34.81707,-115.18283,30
-Electrify-America US-Eugene OR W 11th Ave,44.0482,-123.14305,30
-Electrify-America US-Eureka CA Broadway Street,40.77697,-124.19025,30
-Electrify-America US-Evanston WY Yellow Creek Rd,41.25542,-110.9687,30
-Electrify-America US-Everett WA Hwy. 99,47.8935,-122.256,30
-Electrify-America US-Everett WA SE Everett Mall Way,47.9135,-122.2133,30
-Electrify-America US-Evergreen CO Bergen Pkwy,39.69335,-105.35702,30
-Electrify-America US-Evergreen Park IL S Western Ave,41.7251,-87.68338,30
-Electrify-America US-Fairfax VA Fair Oaks Mall,38.86422,-77.35563,30
-Electrify-America US-Fairfax VA Main St,38.85652,-77.33124,30
-Electrify-America US-Fairfax VA Old Lee Hwy,38.8617,-77.27574,30
+Electrify-America US-Elk Grove CA Elk Grove Blvd,38.41118,-121.39095,32
+Electrify-America US-Elko NV Mountian City Highway,40.8401,-115.79092,32
+Electrify-America US-Ellensburg WA Canyon Rd,46.9789,-120.54343,32
+Electrify-America US-Ellenton FL Factory Shops Blvd,27.53748,-82.5074,32
+Electrify-America US-Ellicott City MD North Ridge Rd,39.2822,-76.81933,32
+Electrify-America US-Elmhurst NY Queens Blvd.,40.73487,-73.87038,32
+Electrify-America US-Emeryville CA San Pablo Avenue,37.83268,-122.27974,32
+Electrify-America US-Emeryville CA Shellmound St,37.8289,-122.2913,32
+Electrify-America US-Emporia VA Market Drive,36.70684,-77.5461,32
+Electrify-America US-Encinitas CA North El Camino Real,33.04952,-117.25916,32
+Electrify-America US-Encino CA Ventura Blvd,34.16273,-118.52062,32
+Electrify-America US-Englewood CO Englewood Pkwy,39.65513,-104.98916,32
+Electrify-America US-Englewood CO S. Clinton St.,39.5937,-104.88263,32
+Electrify-America US-Ennis TX E Ennis Avenue,32.33207,-96.62012,32
+Electrify-America US-Erick OK N Sheb Wooley Ave.,35.22442,-99.86956,32
+Electrify-America US-Erie CO State Hwy 7,40.00247,-105.01135,32
+Electrify-America US-Erie PA Downs Drive,42.0523,-80.08185,32
+Electrify-America US-Escondido CA East Via Rancho Pkwy,33.07042,-117.06645,32
+Electrify-America US-Escondido CA W Felicita Ave,33.10314,-117.0744,32
+Electrify-America US-Essex Fenner CA Goffs Rd,34.81707,-115.18283,32
+Electrify-America US-Eugene OR W 11th Ave,44.0482,-123.14305,32
+Electrify-America US-Eureka CA Broadway Street,40.77697,-124.19025,32
+Electrify-America US-Evanston WY Yellow Creek Rd,41.25542,-110.9687,32
+Electrify-America US-Everett WA Hwy. 99,47.8935,-122.256,32
+Electrify-America US-Everett WA SE Everett Mall Way,47.9135,-122.2133,32
+Electrify-America US-Evergreen CO Bergen Pkwy,39.69335,-105.35702,32
+Electrify-America US-Evergreen Park IL S Western Ave,41.7251,-87.68338,32
+Electrify-America US-Fairfax VA Fair Oaks Mall,38.86422,-77.35563,32
+Electrify-America US-Fairfax VA Main St,38.85652,-77.33124,32
+Electrify-America US-Fairfax VA Old Lee Hwy,38.8617,-77.27574,32
 Electrify-America US-Fairfield NJ US-46 E,40.88971,-74.26992
-Electrify-America US-Fairfield TX Interstate 45 Frontage Rd,31.71802,-96.17613,30
-Electrify-America US-Fairview Heights IL St Clair Square,38.59558,-89.982,30
-Electrify-America US-Falls Church VA Arlington Blvd,38.86735,-77.14268,30
-Electrify-America US-Fayetteville NC Skibo Rd,35.0552,-78.9738,30
-Electrify-America US-Federal Way WA 16TH AVE S,47.2915,-122.3089,30
-Electrify-America US-Fernley NV E. Newlands Rd,39.6098,-119.21622,30
-Electrify-America US-Fincastle VA Brughs Mill Rd,37.45557,-79.83802,30
-Electrify-America US-Findley Lake NY NY-426,42.12847,-79.7414,30
-Electrify-America US-Firebaugh CA Thomas Conboy Avenue,36.86846,-120.463,30
-Electrify-America US-Firebaugh CA W Panoche Rd,36.6377,-120.6256,30
-Electrify-America US-Flagler CO CR-5,39.2873,-103.06136,30
-Electrify-America US-Flagstaff AZ E. Huntington. Rd.,35.19912,-111.6156,30
+Electrify-America US-Fairfield TX Interstate 45 Frontage Rd,31.71802,-96.17613,32
+Electrify-America US-Fairview Heights IL St Clair Square,38.59558,-89.982,32
+Electrify-America US-Falls Church VA Arlington Blvd,38.86735,-77.14268,32
+Electrify-America US-Fayetteville NC Skibo Rd,35.0552,-78.9738,32
+Electrify-America US-Federal Way WA 16TH AVE S,47.2915,-122.3089,32
+Electrify-America US-Fernley NV E. Newlands Rd,39.6098,-119.21622,32
+Electrify-America US-Fincastle VA Brughs Mill Rd,37.45557,-79.83802,32
+Electrify-America US-Findley Lake NY NY-426,42.12847,-79.7414,32
+Electrify-America US-Firebaugh CA Thomas Conboy Avenue,36.86846,-120.463,32
+Electrify-America US-Firebaugh CA W Panoche Rd,36.6377,-120.6256,32
+Electrify-America US-Flagler CO CR-5,39.2873,-103.06136,32
+Electrify-America US-Flagstaff AZ E. Huntington. Rd.,35.19912,-111.6156,32
 Electrify-America US-Flemington NJ US-202,40.49765,-74.85646
-Electrify-America US-Florence SC N Beltline Drive,34.1928,-79.82282,30
-Electrify-America US-Florida City FL S Dixie Hwy,25.45646,-80.47343,30
-Electrify-America US-Flushing NY 39th Avenue,40.76008,-73.8319,30
-Electrify-America US-Flushing NY College Point Blvd,40.7562,-73.8363,30
-Electrify-America US-Folsom CA Folsom Blvd.,38.64298,-121.18864,30
-Electrify-America US-Folsom CA Iron Point Rd,38.6439,-121.1343,30
-Electrify-America US-Folsom CA Palladio Pkwy,38.6476,-121.1207,30
-Electrify-America US-Foothill Ranch CA Towne Centre Drive,33.68106,-117.67077,30
+Electrify-America US-Florence SC N Beltline Drive,34.1928,-79.82282,32
+Electrify-America US-Florida City FL S Dixie Hwy,25.45646,-80.47343,32
+Electrify-America US-Flushing NY 39th Avenue,40.76008,-73.8319,32
+Electrify-America US-Flushing NY College Point Blvd,40.7562,-73.8363,32
+Electrify-America US-Folsom CA Folsom Blvd.,38.64298,-121.18864,32
+Electrify-America US-Folsom CA Iron Point Rd,38.6439,-121.1343,32
+Electrify-America US-Folsom CA Palladio Pkwy,38.6476,-121.1207,32
+Electrify-America US-Foothill Ranch CA Towne Centre Drive,33.68106,-117.67077,32
 Electrify-America US-Forrest City AR Deaderick Rd,35.02916,-90.7946
-Electrify-America US-Forsyth GA N Lee Street,33.04105,-83.94197,30
-Electrify-America US-Fort Lauderdale FL W Broward Blvd,26.12003,-80.17423,30
-Electrify-America US-Fort Lee NJ Main Street,40.8503,-73.96805,30
+Electrify-America US-Forsyth GA N Lee Street,33.04105,-83.94197,32
+Electrify-America US-Fort Lauderdale FL W Broward Blvd,26.12003,-80.17423,32
+Electrify-America US-Fort Lee NJ Main Street,40.8503,-73.96805,32
 Electrify-America US-Fort Morgan CO Barlow Rd,40.26132,-103.77123
-Electrify-America US-Fort Myers FL S Tamiami Trail,26.5435,-81.8691,30
-Electrify-America US-Fort Stockton TX W. Dickinson Blvd.,30.895,-102.9074,30
-Electrify-America US-Fort Wayne IN Illinois Rd,41.07283,-85.21818,30
-Electrify-America US-Fort Worth TX N Fwy,32.90092,-97.31928,30
-Electrify-America US-Fort Worth TX Reggis Ct,32.82385,-97.05928,30
-Electrify-America US-Fort Worth TX S University Dr,32.72812,-97.3643,30
-Electrify-America US-Foster City CA Chess Dr,37.56144,-122.27887,30
-Electrify-America US-Fountain CO Venetucci Blvd.,38.7691,-104.7831,30
-Electrify-America US-Fountain Valley CA Brookhurst St,33.70966,-117.95405,30
-Electrify-America US-Fowler CA West Fresno Street,36.6221,-119.68587,30
-Electrify-America US-Foxborough MA School Street,42.06408,-71.25148,30
-Electrify-America US-Franklin TN Mallory Ln.,35.94053,-86.81945,30
-Electrify-America US-Frederick MD Guilford Dr,39.39557,-77.4095,30
-Electrify-America US-Fredericksburg VA Spotsylvania Mall Dr,38.29396,-77.51235,30
-Electrify-America US-Fredonia NY Bennett Rd,42.4538,-79.31118,30
-Electrify-America US-Freehold NJ U.S. 9,40.2504,-74.29782,30
-Electrify-America US-Fremont CA Fremont Blvd.,37.56716,-122.02416,30
-Electrify-America US-Fremont CA Osgood Rd,37.51092,-121.94216,30
-Electrify-America US-Fresno CA E Shaw Ave,36.8059,-119.77423,30
-Electrify-America US-Fresno CA East Kings Canyon Rd,36.73682,-119.7212,30
-Electrify-America US-Fresno CA N Ingram Avenue,36.83835,-119.80214,30
-Electrify-America US-Fresno CA North First St,36.82196,-119.77134,30
-Electrify-America US-Fresno CA W Shaw Ave.,36.80933,-119.84913,30
-Electrify-America US-Fresno CA W. Clinton,36.77166,-119.8633,30
-Electrify-America US-Friendship NY Pennsylvania Ave,42.20258,-78.14575,30
-Electrify-America US-Frisco CO Summit Blvd,39.58664,-106.09525,30
-Electrify-America US-Frisco TX Ikea Drive,33.09386,-96.82127,30
-Electrify-America US-Fullerton CA W Malvern Ave,33.8781,-117.96153,30
-Electrify-America US-Gainesville FL SW Archer Rd,29.62058,-82.38437,30
-Electrify-America US-Gallup NM W Maloney Ave,35.52754,-108.77,30
-Electrify-America US-Garberville CA US 101,40.0098,-123.7901,30
-Electrify-America US-Garden Grove CA Euclid St,33.78777,-117.94144,30
-Electrify-America US-Gardena CA W. Redondo Beach Blvd.,33.88727,-118.31617,30
-Electrify-America US-Gaylord MI Meijer Dr,45.02526,-84.7222,30
-Electrify-America US-Geneseo IL E Bestor Dr,41.43266,-90.1571,30
+Electrify-America US-Fort Myers FL S Tamiami Trail,26.5435,-81.8691,32
+Electrify-America US-Fort Stockton TX W. Dickinson Blvd.,30.895,-102.9074,32
+Electrify-America US-Fort Wayne IN Illinois Rd,41.07283,-85.21818,32
+Electrify-America US-Fort Worth TX N Fwy,32.90092,-97.31928,32
+Electrify-America US-Fort Worth TX Reggis Ct,32.82385,-97.05928,32
+Electrify-America US-Fort Worth TX S University Dr,32.72812,-97.3643,32
+Electrify-America US-Foster City CA Chess Dr,37.56144,-122.27887,32
+Electrify-America US-Fountain CO Venetucci Blvd.,38.7691,-104.7831,32
+Electrify-America US-Fountain Valley CA Brookhurst St,33.70966,-117.95405,32
+Electrify-America US-Fowler CA West Fresno Street,36.6221,-119.68587,32
+Electrify-America US-Foxborough MA School Street,42.06408,-71.25148,32
+Electrify-America US-Franklin TN Mallory Ln.,35.94053,-86.81945,32
+Electrify-America US-Frederick MD Guilford Dr,39.39557,-77.4095,32
+Electrify-America US-Fredericksburg VA Spotsylvania Mall Dr,38.29396,-77.51235,32
+Electrify-America US-Fredonia NY Bennett Rd,42.4538,-79.31118,32
+Electrify-America US-Freehold NJ U.S. 9,40.2504,-74.29782,32
+Electrify-America US-Fremont CA Fremont Blvd.,37.56716,-122.02416,32
+Electrify-America US-Fremont CA Osgood Rd,37.51092,-121.94216,32
+Electrify-America US-Fresno CA E Shaw Ave,36.8059,-119.77423,32
+Electrify-America US-Fresno CA East Kings Canyon Rd,36.73682,-119.7212,32
+Electrify-America US-Fresno CA N Ingram Avenue,36.83835,-119.80214,32
+Electrify-America US-Fresno CA North First St,36.82196,-119.77134,32
+Electrify-America US-Fresno CA W Shaw Ave.,36.80933,-119.84913,32
+Electrify-America US-Fresno CA W. Clinton,36.77166,-119.8633,32
+Electrify-America US-Friendship NY Pennsylvania Ave,42.20258,-78.14575,32
+Electrify-America US-Frisco CO Summit Blvd,39.58664,-106.09525,32
+Electrify-America US-Frisco TX Ikea Drive,33.09386,-96.82127,32
+Electrify-America US-Fullerton CA W Malvern Ave,33.8781,-117.96153,32
+Electrify-America US-Gainesville FL SW Archer Rd,29.62058,-82.38437,32
+Electrify-America US-Gallup NM W Maloney Ave,35.52754,-108.77,32
+Electrify-America US-Garberville CA US 101,40.0098,-123.7901,32
+Electrify-America US-Garden Grove CA Euclid St,33.78777,-117.94144,32
+Electrify-America US-Gardena CA W. Redondo Beach Blvd.,33.88727,-118.31617,32
+Electrify-America US-Gaylord MI Meijer Dr,45.02526,-84.7222,32
+Electrify-America US-Geneseo IL E Bestor Dr,41.43266,-90.1571,32
 Electrify-America US-Genoa OH Blue Heron Service Plaza,41.49107,-83.36674,15
 Electrify-America US-Genoa OH Wyandot Service Plaza,41.48961,-83.37048,15
-Electrify-America US-Georgetown KY Osborne Way,38.23025,-84.5369,30
-Electrify-America US-Gig Harbor WA Point Fosdick Drive NW,47.30668,-122.58015,30
-Electrify-America US-Gilbert AZ S Market St,33.3043,-111.74273,30
-Electrify-America US-Gillette WY Camel Drive AKA EV,44.28153,-105.49096,30
-Electrify-America US-Gilroy CA Leavesley Rd,37.0243,-121.56286,30
-Electrify-America US-Girard OH Salt Springs Rd,41.14364,-80.72128,30
-Electrify-America US-Glen Allen VA Brook Rd,37.6739,-77.46163,30
-Electrify-America US-Glen Burnie MD Nolpark Ct,39.13363,-76.6335,30
-Electrify-America US-Glen Mills PA Hatton Dr,39.88178,-75.52848,30
-Electrify-America US-Glendale AZ N 83rd Ave,33.65174,-112.23514,30
-Electrify-America US-Glendale AZ North 95th Avenue,33.50927,-112.26593,30
-Electrify-America US-Glendale CA East Colorado St,34.14244,-118.2338,30
-Electrify-America US-Glendale CA San Fernando Rd,34.12608,-118.25597,30
-Electrify-America US-Glendale CO Leetsdale Rd,39.70916,-104.93322,30
-Electrify-America US-Glendive MT MT-16,47.11597,-104.7374,30
-Electrify-America US-Glenview IL Willow Rd,42.10326,-87.81453,30
+Electrify-America US-Georgetown KY Osborne Way,38.23025,-84.5369,32
+Electrify-America US-Gig Harbor WA Point Fosdick Drive NW,47.30668,-122.58015,32
+Electrify-America US-Gilbert AZ S Market St,33.3043,-111.74273,32
+Electrify-America US-Gillette WY Camel Drive AKA EV,44.28153,-105.49096,32
+Electrify-America US-Gilroy CA Leavesley Rd,37.0243,-121.56286,32
+Electrify-America US-Girard OH Salt Springs Rd,41.14364,-80.72128,32
+Electrify-America US-Glen Allen VA Brook Rd,37.6739,-77.46163,32
+Electrify-America US-Glen Burnie MD Nolpark Ct,39.13363,-76.6335,32
+Electrify-America US-Glen Mills PA Hatton Dr,39.88178,-75.52848,32
+Electrify-America US-Glendale AZ N 83rd Ave,33.65174,-112.23514,32
+Electrify-America US-Glendale AZ North 95th Avenue,33.50927,-112.26593,32
+Electrify-America US-Glendale CA East Colorado St,34.14244,-118.2338,32
+Electrify-America US-Glendale CA San Fernando Rd,34.12608,-118.25597,32
+Electrify-America US-Glendale CO Leetsdale Rd,39.70916,-104.93322,32
+Electrify-America US-Glendive MT MT-16,47.11597,-104.7374,32
+Electrify-America US-Glenview IL Willow Rd,42.10326,-87.81453,32
 Electrify-America US-Glenwood Springs CO W Meadows,39.55609,-107.34478
-Electrify-America US-Globe AZ E Ash Street,33.39377,-110.77735,30
-Electrify-America US-Goldens Bridge NY NY-138,41.294,-73.6748,30
-Electrify-America US-Goleta CA Market Place Drive,34.42866,-119.8726,30
-Electrify-America US-Grand Canyon Village AZ State Route 64,35.97475,-112.1271,30
-Electrify-America US-Grand Forks ND 32nd Ave,47.88877,-97.06767,30
-Electrify-America US-Grand Island NE S. Hwy 281,40.81642,-98.37956,30
+Electrify-America US-Globe AZ E Ash Street,33.39377,-110.77735,32
+Electrify-America US-Goldens Bridge NY NY-138,41.294,-73.6748,32
+Electrify-America US-Goleta CA Market Place Drive,34.42866,-119.8726,32
+Electrify-America US-Grand Canyon Village AZ State Route 64,35.97475,-112.1271,32
+Electrify-America US-Grand Forks ND 32nd Ave,47.88877,-97.06767,32
+Electrify-America US-Grand Island NE S. Hwy 281,40.81642,-98.37956,32
 Electrify-America US-Grand Junction CO Independent Ave,39.08233,-108.58331
-Electrify-America US-Grand Prairie TX Ikea Way,32.68928,-97.02354,30
-Electrify-America US-Grand Rapids MI Alpine Ave NW,43.00928,-85.6905,30
-Electrify-America US-Grants NM Robert Rd,35.12527,-107.82477,30
-Electrify-America US-Grants Pass OR NE Terry Ln,42.4358,-123.30214,30
-Electrify-America US-Grapevine TX Grapevine Mills Pkwy,32.9674,-97.04,30
-Electrify-America US-Greeley CO Center Place Drive,40.39503,-104.74446,30
-Electrify-America US-Green River UT East Maint Street,38.99578,-110.1617,30
-Electrify-America US-Greensboro NC Lawndale Dr,36.10484,-79.82007,30
-Electrify-America US-Greensboro NC W. Elmsley Street,36.00316,-79.79808,30
-Electrify-America US-Greenville AL Willow Ln,31.84996,-86.64626,30
-Electrify-America US-Greenville SC Woodruff Rd,34.82506,-82.28885,30
-Electrify-America US-Greenwood IN Marlin Dr,39.61063,-86.1605,30
-Electrify-America US-Greenwood Village CO S Yosemit Street,39.6258,-104.885,30
-Electrify-America US-Grosse Pointe Woods MI Mack Ave,42.42752,-82.90906,30
-Electrify-America US-Groveland CA CA-120,37.81756,-120.05887,30
-Electrify-America US-Grovetown GA Steiner Way,33.48077,-82.1969,30
-Electrify-America US-Gulfport MS Factory Shops Blv,30.43054,-89.09767,30
-Electrify-America US-Hackensack NJ Hackensack Ave,40.90456,-74.03008,30
-Electrify-America US-Hagerstown MD Walmart Drive,39.60018,-77.73218,30
-Electrify-America US-Half Moon Bay CA Main St,37.4621,-122.42984,30
-Electrify-America US-Hamilton NY Utica Street,42.8289,-75.54734,30
-Electrify-America US-Hammond LA Hammond Square Drive,30.48084,-90.4628,30
-Electrify-America US-Hancock NY W. Main Street,41.95615,-75.2944,30
-Electrify-America US-Hanover MD Arundel Mills Circle,39.15883,-76.72284,30
-Electrify-America US-Harrisburg PA Jonestown Rd,40.31125,-76.80616,30
-Electrify-America US-Harrisburg PA Lingestown Rd.,40.35247,-76.71466,30
-Electrify-America US-Hartsdale NY North Central Avenue,41.0322,-73.7871,30
-Electrify-America US-Hauppauge NY Motor Pkwy,40.80694,-73.23815,30
-Electrify-America US-Haymarket VA Trading Square,38.81883,-77.64618,30
-Electrify-America US-Hays KS Vine Street,38.90292,-99.31972,30
-Electrify-America US-Hayward CA Mission Blvd,37.64532,-122.0633,30
-Electrify-America US-Healdsburg CA Vine St,38.60976,-122.87287,30
-Electrify-America US-Helena MT N Montana Ave,46.621,-112.02073,30
-Electrify-America US-Hempstead NY Fulton Ave,40.706,-73.63095,30
-Electrify-America US-Henderson NC N Cooper Drive,36.33455,-78.4423,30
-Electrify-America US-Henderson NV Marks St,36.06208,-115.03353,30
-Electrify-America US-Henrietta NY West Henrietta Rd,43.04828,-77.6581,30
-Electrify-America US-Hercules CA San Pablo Ave,38.0148,-122.27165,30
-Electrify-America US-Hercules CA Sycamore Ave,38.0079,-122.2697,30
-Electrify-America US-Herkimer NY Marginal Rd.,43.01885,-74.99188,30
-Electrify-America US-Hermiston OR S hwy 207,45.7871,-119.3221,30
-Electrify-America US-Hermosa Beach CA Ardmore Ave,33.86583,-118.3953,30
-Electrify-America US-Hesperia CA Main Street,34.42454,-117.37148,30
-Electrify-America US-Heyburn ID ID 24,42.57256,-113.73045,30
-Electrify-America US-Hialeah FL NW 177th St,25.93414,-80.29527,30
-Electrify-America US-Highland CA Greenspot St.,34.11007,-117.19417,30
-Electrify-America US-Highland Park IL Saint Johns Ave,42.18758,-87.79876,30
-Electrify-America US-Highlands Ranch CO Business Center Dr,39.5617,-104.91247,30
-Electrify-America US-Highlands Ranch CO CPL Max Donahue Ln,39.54763,-105.00266,30
-Electrify-America US-Hillsboro OR NE Imbrie Dr,45.5512,-122.90134,30
-Electrify-America US-Hillsborough NC NC 86 S,36.0569,-79.07954,30
-Electrify-America US-Hodgkins IL Joliet Rd,41.78152,-87.86108,30
-Electrify-America US-Hollywood FL S State RD 7,26.0083,-80.20575,30
-Electrify-America US-Homewood IL S Halsted St,41.57095,-87.6358,30
-Electrify-America US-Honolulu HI Ke’eaumoku St,21.2961,-157.84157,30
-Electrify-America US-Hood River OR Wasco St.,45.7118,-121.5399,30
-Electrify-America US-Hope AR N Hervey St.,33.68172,-93.61562,30
-Electrify-America US-Horseheads NY Center Street,42.15816,-76.8266,30
-Electrify-America US-Houston TX East Freeway,29.76945,-95.1764,30
-Electrify-America US-Houston TX Yale Street,29.77322,-95.39982,30
-Electrify-America US-Howard WI Shawano Ave,44.53572,-88.07735,30
-Electrify-America US-Huber Heights OH Brandt Pike,39.86283,-84.0999,30
-Electrify-America US-Hudsonville MI 32nd Ave,42.8437,-85.86302,30
-Electrify-America US-Huntington Beach CA Adams Avenue,33.67103,-117.95475,30
-Electrify-America US-Huntington Beach CA Edinger Avenue,33.72977,-118.0267,30
-Electrify-America US-Huntington OR Washington Street W,44.35113,-117.2686,30
-Electrify-America US-Huntsville TX I-45 S,30.71455,-95.56978,30
-Electrify-America US-Huron CA S Lassen Ave,36.2071,-120.1008,30
-Electrify-America US-Hurst TX Melbourne Rd,32.8326,-97.1988,30
-Electrify-America US-Hyannis MA Iyannough Rd,41.6645,-70.29492,30
+Electrify-America US-Grand Prairie TX Ikea Way,32.68928,-97.02354,32
+Electrify-America US-Grand Rapids MI Alpine Ave NW,43.00928,-85.6905,32
+Electrify-America US-Grants NM Robert Rd,35.12527,-107.82477,32
+Electrify-America US-Grants Pass OR NE Terry Ln,42.4358,-123.30214,32
+Electrify-America US-Grapevine TX Grapevine Mills Pkwy,32.9674,-97.04,32
+Electrify-America US-Greeley CO Center Place Drive,40.39503,-104.74446,32
+Electrify-America US-Green River UT East Maint Street,38.99578,-110.1617,32
+Electrify-America US-Greensboro NC Lawndale Dr,36.10484,-79.82007,32
+Electrify-America US-Greensboro NC W. Elmsley Street,36.00316,-79.79808,32
+Electrify-America US-Greenville AL Willow Ln,31.84996,-86.64626,32
+Electrify-America US-Greenville SC Woodruff Rd,34.82506,-82.28885,32
+Electrify-America US-Greenwood IN Marlin Dr,39.61063,-86.1605,32
+Electrify-America US-Greenwood Village CO S Yosemit Street,39.6258,-104.885,32
+Electrify-America US-Grosse Pointe Woods MI Mack Ave,42.42752,-82.90906,32
+Electrify-America US-Groveland CA CA-120,37.81756,-120.05887,32
+Electrify-America US-Grovetown GA Steiner Way,33.48077,-82.1969,32
+Electrify-America US-Gulfport MS Factory Shops Blv,30.43054,-89.09767,32
+Electrify-America US-Hackensack NJ Hackensack Ave,40.90456,-74.03008,32
+Electrify-America US-Hagerstown MD Walmart Drive,39.60018,-77.73218,32
+Electrify-America US-Half Moon Bay CA Main St,37.4621,-122.42984,32
+Electrify-America US-Hamilton NY Utica Street,42.8289,-75.54734,32
+Electrify-America US-Hammond LA Hammond Square Drive,30.48084,-90.4628,32
+Electrify-America US-Hancock NY W. Main Street,41.95615,-75.2944,32
+Electrify-America US-Hanover MD Arundel Mills Circle,39.15883,-76.72284,32
+Electrify-America US-Harrisburg PA Jonestown Rd,40.31125,-76.80616,32
+Electrify-America US-Harrisburg PA Lingestown Rd.,40.35247,-76.71466,32
+Electrify-America US-Hartsdale NY North Central Avenue,41.0322,-73.7871,32
+Electrify-America US-Hauppauge NY Motor Pkwy,40.80694,-73.23815,32
+Electrify-America US-Haymarket VA Trading Square,38.81883,-77.64618,32
+Electrify-America US-Hays KS Vine Street,38.90292,-99.31972,32
+Electrify-America US-Hayward CA Mission Blvd,37.64532,-122.0633,32
+Electrify-America US-Healdsburg CA Vine St,38.60976,-122.87287,32
+Electrify-America US-Helena MT N Montana Ave,46.621,-112.02073,32
+Electrify-America US-Hempstead NY Fulton Ave,40.706,-73.63095,32
+Electrify-America US-Henderson NC N Cooper Drive,36.33455,-78.4423,32
+Electrify-America US-Henderson NV Marks St,36.06208,-115.03353,32
+Electrify-America US-Henrietta NY West Henrietta Rd,43.04828,-77.6581,32
+Electrify-America US-Hercules CA San Pablo Ave,38.0148,-122.27165,32
+Electrify-America US-Hercules CA Sycamore Ave,38.0079,-122.2697,32
+Electrify-America US-Herkimer NY Marginal Rd.,43.01885,-74.99188,32
+Electrify-America US-Hermiston OR S hwy 207,45.7871,-119.3221,32
+Electrify-America US-Hermosa Beach CA Ardmore Ave,33.86583,-118.3953,32
+Electrify-America US-Hesperia CA Main Street,34.42454,-117.37148,32
+Electrify-America US-Heyburn ID ID 24,42.57256,-113.73045,32
+Electrify-America US-Hialeah FL NW 177th St,25.93414,-80.29527,32
+Electrify-America US-Highland CA Greenspot St.,34.11007,-117.19417,32
+Electrify-America US-Highland Park IL Saint Johns Ave,42.18758,-87.79876,32
+Electrify-America US-Highlands Ranch CO Business Center Dr,39.5617,-104.91247,32
+Electrify-America US-Highlands Ranch CO CPL Max Donahue Ln,39.54763,-105.00266,32
+Electrify-America US-Hillsboro OR NE Imbrie Dr,45.5512,-122.90134,32
+Electrify-America US-Hillsborough NC NC 86 S,36.0569,-79.07954,32
+Electrify-America US-Hodgkins IL Joliet Rd,41.78152,-87.86108,32
+Electrify-America US-Hollywood FL S State RD 7,26.0083,-80.20575,32
+Electrify-America US-Homewood IL S Halsted St,41.57095,-87.6358,32
+Electrify-America US-Honolulu HI Ke’eaumoku St,21.2961,-157.84157,32
+Electrify-America US-Hood River OR Wasco St.,45.7118,-121.5399,32
+Electrify-America US-Hope AR N Hervey St.,33.68172,-93.61562,32
+Electrify-America US-Horseheads NY Center Street,42.15816,-76.8266,32
+Electrify-America US-Houston TX East Freeway,29.76945,-95.1764,32
+Electrify-America US-Houston TX Yale Street,29.77322,-95.39982,32
+Electrify-America US-Howard WI Shawano Ave,44.53572,-88.07735,32
+Electrify-America US-Huber Heights OH Brandt Pike,39.86283,-84.0999,32
+Electrify-America US-Hudsonville MI 32nd Ave,42.8437,-85.86302,32
+Electrify-America US-Huntington Beach CA Adams Avenue,33.67103,-117.95475,32
+Electrify-America US-Huntington Beach CA Edinger Avenue,33.72977,-118.0267,32
+Electrify-America US-Huntington OR Washington Street W,44.35113,-117.2686,32
+Electrify-America US-Huntsville TX I-45 S,30.71455,-95.56978,32
+Electrify-America US-Huron CA S Lassen Ave,36.2071,-120.1008,32
+Electrify-America US-Hurst TX Melbourne Rd,32.8326,-97.1988,32
+Electrify-America US-Hyannis MA Iyannough Rd,41.6645,-70.29492,32
 Electrify-America US-Hyattsville MD East-West Hwy,38.9686,-76.95432
-Electrify-America US-Idaho Falls ID S. Utah Ave,43.49262,-112.05057,30
-Electrify-America US-Independence MO E 39th St,39.04954,-94.3702,30
-Electrify-America US-Indianapolis IN E 96th Street,39.92702,-86.021,30
-Electrify-America US-Indianapolis IN E Washington St,39.77505,-85.96582,30
-Electrify-America US-Indianapolis IN Keystone Crossing,39.91554,-86.11005,30
-Electrify-America US-Indianapolis IN South Emerson Avenue,39.7002,-86.08414,30
-Electrify-America US-Indio CA Avenue 42,33.74143,-116.22888,30
-Electrify-America US-Inglewood CA Crenshaw Blvd,33.9293,-118.32674,30
-Electrify-America US-Irvine CA Irvine Blvd,33.71318,-117.7611,30
-Electrify-America US-Irvine CA Jeffrey Rd,33.69673,-117.7632,30
-Electrify-America US-Irvine CA Spectrum Center Dr,33.64812,-117.7439,30
-Electrify-America US-Island City OR Island Ave,45.33658,-118.05945,30
-Electrify-America US-Issaquah WA NW Gillman Blvd.,47.54187,-122.05203,30
-Electrify-America US-Jackson MS Hwy 18,32.2885,-90.27064,30
-Electrify-America US-Jackson TN Emporium Drive,35.66884,-88.85304,30
-Electrify-America US-Jacksonville FL Apex Trail Unit CS01,30.16944,-81.50505,30
-Electrify-America US-Jacksonville FL Southside Blvd,30.18337,-81.55227,30
-Electrify-America US-Jamestown ND 8th Ave SW,46.8804,-98.71766,30
-Electrify-America US-Jamestown NY E 2nd Street,42.11366,-79.2109,30
-Electrify-America US-Jenks OK East 103rd Street South,36.01607,-95.9639,30
-Electrify-America US-Jensen Beach FL NW Federal Hwy,27.2424,-80.27307,30
-Electrify-America US-Jersey City NJ Mall Dr,40.72806,-74.03922,30
-Electrify-America US-Joliet IL W Jefferson St,41.5206,-88.1411,30
-Electrify-America US-Junction TX Martinez St.,30.49207,-99.754,30
-Electrify-America US-Jurupa Valley CA Mission Boulevard & Pyrite,34.01135,-117.46173,30
-Electrify-America US-Kansas City MO Nichols Rd,39.04208,-94.593,30
-Electrify-America US-Kapolei HI Farrington Hwy,21.34102,-158.07505,30
-Electrify-America US-Katonah NY Katonah Ave,41.25582,-73.6833,30
-Electrify-America US-Katy TX Katy Malls Cir,29.7758,-95.8108,30
-Electrify-America US-Kearny NJ Harrison Ave,40.74863,-74.1363,30
-Electrify-America US-Kearny NJ Passaic Ave,40.76043,-74.16064,30
-Electrify-America US-Kelso WA Three Rivers Dr.,46.13988,-122.90126,30
-Electrify-America US-Kennesaw GA Cobb Place Boulevard NW,34.011,-84.57233,30
-Electrify-America US-Kennewick WA W 10th Ave,46.1979,-119.16303,30
-Electrify-America US-Kent OH Maplecrest Pkwy,41.10185,-81.3868,30
-Electrify-America US-Kent WA 4th. Ave. N.,47.3833,-122.23618,30
-Electrify-America US-Kerman CA South Madera Avenue,36.72212,-120.05975,30
-Electrify-America US-Kettleman City CA Hubert Way,35.989,-119.96014,30
-Electrify-America US-Key Largo FL Overseas Hwy,25.11336,-80.42188,30
-Electrify-America US-Key West FL Flagler Avenue,24.5612,-81.76375,30
+Electrify-America US-Idaho Falls ID S. Utah Ave,43.49262,-112.05057,32
+Electrify-America US-Independence MO E 39th St,39.04954,-94.3702,32
+Electrify-America US-Indianapolis IN E 96th Street,39.92702,-86.021,32
+Electrify-America US-Indianapolis IN E Washington St,39.77505,-85.96582,32
+Electrify-America US-Indianapolis IN Keystone Crossing,39.91554,-86.11005,32
+Electrify-America US-Indianapolis IN South Emerson Avenue,39.7002,-86.08414,32
+Electrify-America US-Indio CA Avenue 42,33.74143,-116.22888,32
+Electrify-America US-Inglewood CA Crenshaw Blvd,33.9293,-118.32674,32
+Electrify-America US-Irvine CA Irvine Blvd,33.71318,-117.7611,32
+Electrify-America US-Irvine CA Jeffrey Rd,33.69673,-117.7632,32
+Electrify-America US-Irvine CA Spectrum Center Dr,33.64812,-117.7439,32
+Electrify-America US-Island City OR Island Ave,45.33658,-118.05945,32
+Electrify-America US-Issaquah WA NW Gillman Blvd.,47.54187,-122.05203,32
+Electrify-America US-Jackson MS Hwy 18,32.2885,-90.27064,32
+Electrify-America US-Jackson TN Emporium Drive,35.66884,-88.85304,32
+Electrify-America US-Jacksonville FL Apex Trail Unit CS01,30.16944,-81.50505,32
+Electrify-America US-Jacksonville FL Southside Blvd,30.18337,-81.55227,32
+Electrify-America US-Jamestown ND 8th Ave SW,46.8804,-98.71766,32
+Electrify-America US-Jamestown NY E 2nd Street,42.11366,-79.2109,32
+Electrify-America US-Jenks OK East 103rd Street South,36.01607,-95.9639,32
+Electrify-America US-Jensen Beach FL NW Federal Hwy,27.2424,-80.27307,32
+Electrify-America US-Jersey City NJ Mall Dr,40.72806,-74.03922,32
+Electrify-America US-Joliet IL W Jefferson St,41.5206,-88.1411,32
+Electrify-America US-Junction TX Martinez St.,30.49207,-99.754,32
+Electrify-America US-Jurupa Valley CA Mission Boulevard & Pyrite,34.01135,-117.46173,32
+Electrify-America US-Kansas City MO Nichols Rd,39.04208,-94.593,32
+Electrify-America US-Kapolei HI Farrington Hwy,21.34102,-158.07505,32
+Electrify-America US-Katonah NY Katonah Ave,41.25582,-73.6833,32
+Electrify-America US-Katy TX Katy Malls Cir,29.7758,-95.8108,32
+Electrify-America US-Kearny NJ Harrison Ave,40.74863,-74.1363,32
+Electrify-America US-Kearny NJ Passaic Ave,40.76043,-74.16064,32
+Electrify-America US-Kelso WA Three Rivers Dr.,46.13988,-122.90126,32
+Electrify-America US-Kennesaw GA Cobb Place Boulevard NW,34.011,-84.57233,32
+Electrify-America US-Kennewick WA W 10th Ave,46.1979,-119.16303,32
+Electrify-America US-Kent OH Maplecrest Pkwy,41.10185,-81.3868,32
+Electrify-America US-Kent WA 4th. Ave. N.,47.3833,-122.23618,32
+Electrify-America US-Kerman CA South Madera Avenue,36.72212,-120.05975,32
+Electrify-America US-Kettleman City CA Hubert Way,35.989,-119.96014,32
+Electrify-America US-Key Largo FL Overseas Hwy,25.11336,-80.42188,32
+Electrify-America US-Key West FL Flagler Avenue,24.5612,-81.76375,32
 Electrify-America US-King of Prussia PA N Gulph Rd,40.08564,-75.38862
-Electrify-America US-Kingman AZ Stockton Hill Rd,35.22417,-114.03596,30
-Electrify-America US-Kingston NY Washington Ave,41.9369,-74.0262,30
-Electrify-America US-Kirkland WA NE 124th St,47.71142,-122.19086,30
-Electrify-America US-Kissimmee FL W Irlo Bronson Memorial Hwy,28.33138,-81.47043,30
-Electrify-America US-Kittery ME US-1,43.11713,-70.72796,30
-Electrify-America US-Knoxville TN Walbrook Drive,35.92626,-84.06107,30
-Electrify-America US-Kodak TN Outdoor Sportsman Pl,35.986,-83.61026,30
-Electrify-America US-Kyle TX Farm to Market 1626,30.01478,-97.8628,30
-Electrify-America US-La Crescenta CA Foothill Blvd.,34.23076,-118.2491,30
-Electrify-America US-La Mirada CA La Mirada Blvd.,33.8957,-118.00827,30
-Electrify-America US-Lacey WA Galaxy Dr. NE,47.05966,-122.772,30
-Electrify-America US-Lacey WA Sleater Kinney RD SE,47.04018,-122.8328,30
-Electrify-America US-Lacey WA Whitman Lane SE,46.99538,-122.8235,30
-Electrify-America US-Lafayette CO US Highway 287,40.00632,-105.1038,30
-Electrify-America US-Lafayette IN Commerce Dr,40.41454,-86.82607,30
-Electrify-America US-Laguna Niguel CA Alicia Pkwy,33.5282,-117.7167,30
-Electrify-America US-Lake Elsinore CA Central Avenue,33.69454,-117.3334,30
-Electrify-America US-Lake Grove NY Smith Haven Mall,40.86245,-73.12875,30
-Electrify-America US-Lake Mary FL W Lake Mary Blvd,28.75567,-81.34873,30
-Electrify-America US-Lake Oswego OR 4th St,45.42054,-122.66756,30
-Electrify-America US-Lake Stevens WA Market Place,47.99823,-122.10064,30
-Electrify-America US-Lake Zurich IL W Main St,42.19072,-88.1094,30
-Electrify-America US-Lakeland FL US Highway 98 N,28.09894,-81.97466,30
-Electrify-America US-Lancaster CA Valley Central Way,34.6908,-118.1728,30
-Electrify-America US-Lansdowne MD Washington Blvd,39.25242,-76.66823,30
-Electrify-America US-Lansing MI N Marketplace Blvd,42.7392,-84.6738,30
-Electrify-America US-LaQuinta CA Hwy 111,33.7098,-116.28597,30
-Electrify-America US-Las Vegas NV Arroyo Crossing Pkwy,36.0646,-115.24718,30
-Electrify-America US-Las Vegas NV E Bonanza Rd,36.17386,-115.09644,30
-Electrify-America US-Las Vegas NV E Flamingo Rd,36.11667,-115.09163,30
-Electrify-America US-Las Vegas NV Las Vegas Blvd S,36.05657,-115.16854,30
-Electrify-America US-Las Vegas NV S Grand Canyon Dr,36.1148,-115.31058,30
-Electrify-America US-Las Vegas NV S Las Vegas Blvd,36.11974,-115.1769,30
-Electrify-America US-Las Vegas NV S Maryland Pkwy,36.1157,-115.13926,30
-Electrify-America US-Las Vegas NV Sky Pointe Dr,36.28015,-115.2644,30
-Electrify-America US-Las Vegas NV W Cheyenne Avenue,36.2199,-115.32396,30
+Electrify-America US-Kingman AZ Stockton Hill Rd,35.22417,-114.03596,32
+Electrify-America US-Kingston NY Washington Ave,41.9369,-74.0262,32
+Electrify-America US-Kirkland WA NE 124th St,47.71142,-122.19086,32
+Electrify-America US-Kissimmee FL W Irlo Bronson Memorial Hwy,28.33138,-81.47043,32
+Electrify-America US-Kittery ME US-1,43.11713,-70.72796,32
+Electrify-America US-Knoxville TN Walbrook Drive,35.92626,-84.06107,32
+Electrify-America US-Kodak TN Outdoor Sportsman Pl,35.986,-83.61026,32
+Electrify-America US-Kyle TX Farm to Market 1626,30.01478,-97.8628,32
+Electrify-America US-La Crescenta CA Foothill Blvd.,34.23076,-118.2491,32
+Electrify-America US-La Mirada CA La Mirada Blvd.,33.8957,-118.00827,32
+Electrify-America US-Lacey WA Galaxy Dr. NE,47.05966,-122.772,32
+Electrify-America US-Lacey WA Sleater Kinney RD SE,47.04018,-122.8328,32
+Electrify-America US-Lacey WA Whitman Lane SE,46.99538,-122.8235,32
+Electrify-America US-Lafayette CO US Highway 287,40.00632,-105.1038,32
+Electrify-America US-Lafayette IN Commerce Dr,40.41454,-86.82607,32
+Electrify-America US-Laguna Niguel CA Alicia Pkwy,33.5282,-117.7167,32
+Electrify-America US-Lake Elsinore CA Central Avenue,33.69454,-117.3334,32
+Electrify-America US-Lake Grove NY Smith Haven Mall,40.86245,-73.12875,32
+Electrify-America US-Lake Mary FL W Lake Mary Blvd,28.75567,-81.34873,32
+Electrify-America US-Lake Oswego OR 4th St,45.42054,-122.66756,32
+Electrify-America US-Lake Stevens WA Market Place,47.99823,-122.10064,32
+Electrify-America US-Lake Zurich IL W Main St,42.19072,-88.1094,32
+Electrify-America US-Lakeland FL US Highway 98 N,28.09894,-81.97466,32
+Electrify-America US-Lancaster CA Valley Central Way,34.6908,-118.1728,32
+Electrify-America US-Lansdowne MD Washington Blvd,39.25242,-76.66823,32
+Electrify-America US-Lansing MI N Marketplace Blvd,42.7392,-84.6738,32
+Electrify-America US-LaQuinta CA Hwy 111,33.7098,-116.28597,32
+Electrify-America US-Las Vegas NV Arroyo Crossing Pkwy,36.0646,-115.24718,32
+Electrify-America US-Las Vegas NV E Bonanza Rd,36.17386,-115.09644,32
+Electrify-America US-Las Vegas NV E Flamingo Rd,36.11667,-115.09163,32
+Electrify-America US-Las Vegas NV Las Vegas Blvd S,36.05657,-115.16854,32
+Electrify-America US-Las Vegas NV S Grand Canyon Dr,36.1148,-115.31058,32
+Electrify-America US-Las Vegas NV S Las Vegas Blvd,36.11974,-115.1769,32
+Electrify-America US-Las Vegas NV S Maryland Pkwy,36.1157,-115.13926,32
+Electrify-America US-Las Vegas NV Sky Pointe Dr,36.28015,-115.2644,32
+Electrify-America US-Las Vegas NV W Cheyenne Avenue,36.2199,-115.32396,32
 Electrify-America US-Lawrenceville GA Sugarloaf Pkwy,33.97894,-84.08302
-Electrify-America US-Lawrenceville NJ Quakerbridge Mall,40.2887,-74.6806,30
-Electrify-America US-Layton UT N 700 W,41.085,-111.97937,30
-Electrify-America US-League City TX W. FM 646 Rd.,29.46933,-95.09116,30
-Electrify-America US-Leavenworth WA River Bend DR,47.59736,-120.64588,30
-Electrify-America US-Lebanon MO West Elm St,37.67072,-92.6649,30
-Electrify-America US-Lee MA Premium Outlets Boulevard,42.29522,-73.23414,30
-Electrify-America US-Leeds AL Buc-ee’s Blvd,33.54444,-86.5883,30
-Electrify-America US-Leesburg VA Fort Evans Road NE,39.10904,-77.53838,30
-Electrify-America US-Lewis NY Redmond Rd,44.2816,-73.53813,30
-Electrify-America US-Lexington NE Frontier St,40.74595,-99.74156,30
-Electrify-America US-Lincoln CA Dresden Dr,38.85526,-121.29604,30
-Electrify-America US-Lincoln NE NW 20th Street,40.8143,-96.74914,30
-Electrify-America US-Lincolnwood IL W Touhy Ave.,42.00976,-87.7118,30
-Electrify-America US-Little Rock AR Baseline Rd,34.66868,-92.37668,30
-Electrify-America US-Littleton CO S Wadsworth Blvd,39.56754,-105.0804,30
-Electrify-America US-Littleton CO W. Coal Mine Ave.,39.60833,-105.1489,30
-Electrify-America US-Live Oak TX Ikea-RBFCU Pkwy,29.5677,-98.3381,30
+Electrify-America US-Lawrenceville NJ Quakerbridge Mall,40.2887,-74.6806,32
+Electrify-America US-Layton UT N 700 W,41.085,-111.97937,32
+Electrify-America US-League City TX W. FM 646 Rd.,29.46933,-95.09116,32
+Electrify-America US-Leavenworth WA River Bend DR,47.59736,-120.64588,32
+Electrify-America US-Lebanon MO West Elm St,37.67072,-92.6649,32
+Electrify-America US-Lee MA Premium Outlets Boulevard,42.29522,-73.23414,32
+Electrify-America US-Leeds AL Buc-ee’s Blvd,33.54444,-86.5883,32
+Electrify-America US-Leesburg VA Fort Evans Road NE,39.10904,-77.53838,32
+Electrify-America US-Lewis NY Redmond Rd,44.2816,-73.53813,32
+Electrify-America US-Lexington NE Frontier St,40.74595,-99.74156,32
+Electrify-America US-Lincoln CA Dresden Dr,38.85526,-121.29604,32
+Electrify-America US-Lincoln NE NW 20th Street,40.8143,-96.74914,32
+Electrify-America US-Lincolnwood IL W Touhy Ave.,42.00976,-87.7118,32
+Electrify-America US-Little Rock AR Baseline Rd,34.66868,-92.37668,32
+Electrify-America US-Littleton CO S Wadsworth Blvd,39.56754,-105.0804,32
+Electrify-America US-Littleton CO W. Coal Mine Ave.,39.60833,-105.1489,32
+Electrify-America US-Live Oak TX Ikea-RBFCU Pkwy,29.5677,-98.3381,32
 Electrify-America US-Livermore CA Holmes St,37.66114,-121.78095
-Electrify-America US-Livermore CA Livermore Outlets Dr.,37.70005,-121.84093,30
-Electrify-America US-Livonia MI Middlebelt Rd,42.37917,-83.3295,30
-Electrify-America US-Lone Tree CO Lincoln Ave,39.5386,-104.88435,30
-Electrify-America US-Long Beach CA E Willow St,33.80365,-118.19147,30
-Electrify-America US-Longmont CO Main St,40.20397,-105.09973,30
-Electrify-America US-Loomis CA Sierra College Blvd.,38.8079,-121.20463,30
-Electrify-America US-Lordsburg NM Stagecoach Rd. 88045,32.3495,-108.74172,30
-Electrify-America US-Los Alamos CA Bell St,34.74434,-120.27643,30
-Electrify-America US-Los Angeles CA N Broadway,34.0633,-118.23718,30
-Electrify-America US-Los Angeles CA North Vine Street,34.08364,-118.32747,30
-Electrify-America US-Los Angeles CA Santa Monica Blvd,34.05794,-118.41993,30
-Electrify-America US-Los Angeles CA W 3rd ST,34.06854,-118.29112,30
-Electrify-America US-Los Angeles CA W Washington Blvd,33.99637,-118.42726,30
-Electrify-America US-Los Banos CA W Pacheco Blvd,37.05477,-120.87648,30
-Electrify-America US-Los Gatos CA N Santa Cruz Ave,37.22793,-121.98187,30
-Electrify-America US-Lost Hills CA CA-46,35.6154,-119.65834,30
-Electrify-America US-Louisville KY Dixie Hwy,38.113,-85.86135,30
-Electrify-America US-Louisville KY Towne Center Dr,38.29917,-85.55558,30
-Electrify-America US-Loveland CO Rocky Mountain Ave,40.40828,-105.00398,30
-Electrify-America US-Lovelock NV Dartmouth Avenue,40.18013,-118.47624,30
-Electrify-America US-Lumberton NC Fayetteville Rd,34.66506,-79.00666,30
-Electrify-America US-Lutz FL Grand Cypress Dr,28.19298,-82.39156,30
-Electrify-America US-Lynnwood WA Alderwood Mall Pkwy,47.832,-122.26733,30
-Electrify-America US-Madera CA W Cleveland Avenue,36.97527,-120.0818,30
-Electrify-America US-Madison WI Nakoosa Trail,43.11022,-89.31153,30
-Electrify-America US-Madisonville TX East Main St,30.95778,-95.89476,30
-Electrify-America US-Madras OR NE Cedar St.,44.64422,-121.1289,30
-Electrify-America US-Malibu CA Cross Creek Rd,34.03606,-118.68393,30
+Electrify-America US-Livermore CA Livermore Outlets Dr.,37.70005,-121.84093,32
+Electrify-America US-Livonia MI Middlebelt Rd,42.37917,-83.3295,32
+Electrify-America US-Lone Tree CO Lincoln Ave,39.5386,-104.88435,32
+Electrify-America US-Long Beach CA E Willow St,33.80365,-118.19147,32
+Electrify-America US-Longmont CO Main St,40.20397,-105.09973,32
+Electrify-America US-Loomis CA Sierra College Blvd.,38.8079,-121.20463,32
+Electrify-America US-Lordsburg NM Stagecoach Rd. 88045,32.3495,-108.74172,32
+Electrify-America US-Los Alamos CA Bell St,34.74434,-120.27643,32
+Electrify-America US-Los Angeles CA N Broadway,34.0633,-118.23718,32
+Electrify-America US-Los Angeles CA North Vine Street,34.08364,-118.32747,32
+Electrify-America US-Los Angeles CA Santa Monica Blvd,34.05794,-118.41993,32
+Electrify-America US-Los Angeles CA W 3rd ST,34.06854,-118.29112,32
+Electrify-America US-Los Angeles CA W Washington Blvd,33.99637,-118.42726,32
+Electrify-America US-Los Banos CA W Pacheco Blvd,37.05477,-120.87648,32
+Electrify-America US-Los Gatos CA N Santa Cruz Ave,37.22793,-121.98187,32
+Electrify-America US-Lost Hills CA CA-46,35.6154,-119.65834,32
+Electrify-America US-Louisville KY Dixie Hwy,38.113,-85.86135,32
+Electrify-America US-Louisville KY Towne Center Dr,38.29917,-85.55558,32
+Electrify-America US-Loveland CO Rocky Mountain Ave,40.40828,-105.00398,32
+Electrify-America US-Lovelock NV Dartmouth Avenue,40.18013,-118.47624,32
+Electrify-America US-Lumberton NC Fayetteville Rd,34.66506,-79.00666,32
+Electrify-America US-Lutz FL Grand Cypress Dr,28.19298,-82.39156,32
+Electrify-America US-Lynnwood WA Alderwood Mall Pkwy,47.832,-122.26733,32
+Electrify-America US-Madera CA W Cleveland Avenue,36.97527,-120.0818,32
+Electrify-America US-Madison WI Nakoosa Trail,43.11022,-89.31153,32
+Electrify-America US-Madisonville TX East Main St,30.95778,-95.89476,32
+Electrify-America US-Madras OR NE Cedar St.,44.64422,-121.1289,32
+Electrify-America US-Malibu CA Cross Creek Rd,34.03606,-118.68393,32
 Electrify-America US-Manchester CT Buckland Hills Dr,41.80718,-72.53938
-Electrify-America US-Manchester NH South Willow Street,42.95693,-71.43317,30
-Electrify-America US-Manchester TN Hillsboro Blvd,35.47422,-86.07977,30
-Electrify-America US-Manorville NY Wading River Rd,40.82474,-72.8071,30
-Electrify-America US-Mansfield OH Possum Run Rd,40.6909,-82.5093,30
-Electrify-America US-Manteca CA Spreckels Ave,37.79646,-121.1967,30
-Electrify-America US-Manteca CA W. Yosemite Ave,37.79826,-121.24627,30
-Electrify-America US-Marietta GA Cobb Pkwy S,33.9091,-84.48888,30
+Electrify-America US-Manchester NH South Willow Street,42.95693,-71.43317,32
+Electrify-America US-Manchester TN Hillsboro Blvd,35.47422,-86.07977,32
+Electrify-America US-Manorville NY Wading River Rd,40.82474,-72.8071,32
+Electrify-America US-Mansfield OH Possum Run Rd,40.6909,-82.5093,32
+Electrify-America US-Manteca CA Spreckels Ave,37.79646,-121.1967,32
+Electrify-America US-Manteca CA W. Yosemite Ave,37.79826,-121.24627,32
+Electrify-America US-Marietta GA Cobb Pkwy S,33.9091,-84.48888,32
 Electrify-America US-Marlborough MA Boston Post Rd W,42.33831,-71.58996
-Electrify-America US-Marlton NJ Rte 70 W,39.89586,-74.93017,30
-Electrify-America US-Martinez CA Alhambra Ave,37.9999,-122.1325,30
-Electrify-America US-McLean VA Tysons Corner Center,38.91694,-77.22058,30
-Electrify-America US-Medfield MA Main St,42.18623,-71.30522,30
-Electrify-America US-Medford NY Horseblock Rd,40.8262,-72.99036,30
-Electrify-America US-Medford OR Crater Lake Hwy,42.35268,-122.87142,30
-Electrify-America US-Memphis TN North Germantown Parkway,35.20177,-89.79382,30
-Electrify-America US-Memphis TN Poplar Ave,35.10216,-89.86232,30
-Electrify-America US-Mendota CA Quince Street,36.7545,-120.38275,30
-Electrify-America US-Mentor OH Reynolds Rd.,41.65984,-81.3765,30
-Electrify-America US-Merrimack NH Premium Outlet Blvd,42.82795,-71.49976,30
-Electrify-America US-Mesa AZ W Baseline Rd,33.38004,-111.8426,30
+Electrify-America US-Marlton NJ Rte 70 W,39.89586,-74.93017,32
+Electrify-America US-Martinez CA Alhambra Ave,37.9999,-122.1325,32
+Electrify-America US-McLean VA Tysons Corner Center,38.91694,-77.22058,32
+Electrify-America US-Medfield MA Main St,42.18623,-71.30522,32
+Electrify-America US-Medford NY Horseblock Rd,40.8262,-72.99036,32
+Electrify-America US-Medford OR Crater Lake Hwy,42.35268,-122.87142,32
+Electrify-America US-Memphis TN North Germantown Parkway,35.20177,-89.79382,32
+Electrify-America US-Memphis TN Poplar Ave,35.10216,-89.86232,32
+Electrify-America US-Mendota CA Quince Street,36.7545,-120.38275,32
+Electrify-America US-Mentor OH Reynolds Rd.,41.65984,-81.3765,32
+Electrify-America US-Merrimack NH Premium Outlet Blvd,42.82795,-71.49976,32
+Electrify-America US-Mesa AZ W Baseline Rd,33.38004,-111.8426,32
 Electrify-America US-Mesquite NV Pioneer Blvd,36.8065,-114.10701
-Electrify-America US-Miami FL N. Kendall Dr.,25.68933,-80.31092,30
-Electrify-America US-Miami FL NW 107th Ave,25.7853,-80.36582,30
-Electrify-America US-Miami FL NW 12th St,25.78477,-80.37838,30
-Electrify-America US-Miami FL NW 79th St.,25.84427,-80.25004,30
-Electrify-America US-Miami FL SW 136th St,25.64626,-80.3381,30
-Electrify-America US-Michigan City IN S Franklin Street,41.67383,-86.89188,30
-Electrify-America US-Middletown Township NJ NJ-35,40.3884,-74.0976,30
-Electrify-America US-Midland TX W. I-20,31.9737,-102.07174,30
-Electrify-America US-Midvale UT S 180 W,40.61893,-111.89714,30
-Electrify-America US-Miles City MT S Haynes Ave,46.3977,-105.82135,30
-Electrify-America US-Mill Valley CA Camino Alto,37.8939,-122.53033,30
-Electrify-America US-Millbury MA Worcester-Providence Turnpike,42.20028,-71.77966,30
-Electrify-America US-Millcreek UT S Wasatch Blvd.,40.68786,-111.79644,30
-Electrify-America US-Milpitas CA E Calaveras Blvd,37.43303,-121.8936,30
+Electrify-America US-Miami FL N. Kendall Dr.,25.68933,-80.31092,32
+Electrify-America US-Miami FL NW 107th Ave,25.7853,-80.36582,32
+Electrify-America US-Miami FL NW 12th St,25.78477,-80.37838,32
+Electrify-America US-Miami FL NW 79th St.,25.84427,-80.25004,32
+Electrify-America US-Miami FL SW 136th St,25.64626,-80.3381,32
+Electrify-America US-Michigan City IN S Franklin Street,41.67383,-86.89188,32
+Electrify-America US-Middletown Township NJ NJ-35,40.3884,-74.0976,32
+Electrify-America US-Midland TX W. I-20,31.9737,-102.07174,32
+Electrify-America US-Midvale UT S 180 W,40.61893,-111.89714,32
+Electrify-America US-Miles City MT S Haynes Ave,46.3977,-105.82135,32
+Electrify-America US-Mill Valley CA Camino Alto,37.8939,-122.53033,32
+Electrify-America US-Millbury MA Worcester-Providence Turnpike,42.20028,-71.77966,32
+Electrify-America US-Millcreek UT S Wasatch Blvd.,40.68786,-111.79644,32
+Electrify-America US-Milpitas CA E Calaveras Blvd,37.43303,-121.8936,32
 Electrify-America US-Milpitas CA Great Mall Dr,37.41362,-121.89817,25
 Electrify-America US-Milpitas CA Milpitas Square,37.42257,-121.91807,60
-Electrify-America US-Mishawaka IN Grape Rd,41.72124,-86.19083,30
-Electrify-America US-Mission Viejo CA Alicia Pkwy,33.60568,-117.689,30
-Electrify-America US-Mission Viejo CA Shops Blvd.,33.55726,-117.668,30
-Electrify-America US-Missoula MT Mullan Rd.,46.88442,-114.04056,30
-Electrify-America US-Moab UT N Hwy 191,38.60235,-109.57585,30
-Electrify-America US-Modesto CA Dale Rd,37.70606,-121.0503,30
-Electrify-America US-Mojave CA CA-58 BUS,35.04536,-118.156,30
-Electrify-America US-Monroe LA Pecanland Mall Dr,32.49903,-92.0708,30
-Electrify-America US-Monroe WA N Kelsey Street,47.86516,-121.97318,30
-Electrify-America US-Montauk NY South Euclid Ave,41.0359,-71.9435,30
-Electrify-America US-Montebello CA W. Via Campo,34.03107,-118.12404,30
-Electrify-America US-Monterey Park CA N Atlantic Blvd,34.066,-118.13393,30
-Electrify-America US-Montgomery AL Eastern Blvd,32.36606,-86.21456,30
-Electrify-America US-Montrose CO S Townsend Ave,38.4542,-107.86488,30
-Electrify-America US-Moore OK SW 19TH ST.,35.3217,-97.4938,30
+Electrify-America US-Mishawaka IN Grape Rd,41.72124,-86.19083,32
+Electrify-America US-Mission Viejo CA Alicia Pkwy,33.60568,-117.689,32
+Electrify-America US-Mission Viejo CA Shops Blvd.,33.55726,-117.668,32
+Electrify-America US-Missoula MT Mullan Rd.,46.88442,-114.04056,32
+Electrify-America US-Moab UT N Hwy 191,38.60235,-109.57585,32
+Electrify-America US-Modesto CA Dale Rd,37.70606,-121.0503,32
+Electrify-America US-Mojave CA CA-58 BUS,35.04536,-118.156,32
+Electrify-America US-Monroe LA Pecanland Mall Dr,32.49903,-92.0708,32
+Electrify-America US-Monroe WA N Kelsey Street,47.86516,-121.97318,32
+Electrify-America US-Montauk NY South Euclid Ave,41.0359,-71.9435,32
+Electrify-America US-Montebello CA W. Via Campo,34.03107,-118.12404,32
+Electrify-America US-Monterey Park CA N Atlantic Blvd,34.066,-118.13393,32
+Electrify-America US-Montgomery AL Eastern Blvd,32.36606,-86.21456,32
+Electrify-America US-Montrose CO S Townsend Ave,38.4542,-107.86488,32
+Electrify-America US-Moore OK SW 19TH ST.,35.3217,-97.4938,32
 Electrify-America US-Moorestown NJ Nixon Dr,39.93885,-74.96448
-Electrify-America US-Moreno Valley CA Iris Ave,33.8955,-117.18716,30
-Electrify-America US-Morro City CA Quintana Rd,35.36845,-120.8433,30
-Electrify-America US-Mount Vernon IL Davidson Ave,38.31026,-88.95806,30
-Electrify-America US-Mount Vernon MO W Mount Vernon Blvd,37.09273,-93.82565,30
-Electrify-America US-Mount Vernon WA Freeway Dr.,48.4424,-122.3442,30
-Electrify-America US-Mountain Home ID American Legion Blvd,43.13547,-115.66852,30
-Electrify-America US-Mountain View CA Showers Drive,37.40098,-122.10866,30
-Electrify-America US-Mt. Pleasant TX S. Jefferson Ave.,33.15135,-94.9693,30
-Electrify-America US-Muncy PA Muncy Creek Blvd.,41.21253,-76.76295,30
-Electrify-America US-Murrieta CA Murrieta Hot Springs Rd.,33.55405,-117.17677,30
-Electrify-America US-Murrieta CA Warm Springs Pkwy,33.60027,-117.1693,30
-Electrify-America US-Myrtle Beach SC Coastal Grand Cir,33.7047,-78.92472,30
-Electrify-America US-Napa CA Factory Stores Drive,38.29665,-122.30294,30
-Electrify-America US-Napa CA Riversound Way,38.25205,-122.27827,30
-Electrify-America US-Naples FL Collier Blvd,26.14908,-81.6875,30
-Electrify-America US-Nashua NH Daniel Webster Hwy,42.7009,-71.43926,30
-Electrify-America US-Nashville TN Abbott Martin Rd,36.10637,-86.8146,30
-Electrify-America US-Nashville TN East Thompson Lane,36.1098,-86.72716,30
-Electrify-America US-Nashville TN Opry Mills Dr,36.19967,-86.69252,30
-Electrify-America US-National City CA Highland Avenue,32.67507,-117.09773,30
-Electrify-America US-National City CA Plaza Bonita Rd,32.65716,-117.0645,30
-Electrify-America US-Needles CA Third St,34.83878,-114.6097,30
-Electrify-America US-New Bern NC Dr. M.L.K. Jr Blvd,35.10134,-77.09566,30
-Electrify-America US-New Braunfels TX Creekside Way,29.73094,-98.07492,30
-Electrify-America US-New Castle DE N. DuPont Hwy,39.70932,-75.56265,30
-Electrify-America US-New Rochelle NY Quaker Ridge Rd,40.94924,-73.7915,30
-Electrify-America US-New Stanton PA N. Center Ave.,40.219,-79.61038,30
-Electrify-America US-Newark CA Cedar Blvd,37.51923,-121.99236,30
-Electrify-America US-Newark NJ Ferry Street,40.7283,-74.15123,30
-Electrify-America US-Newburgh NY Route 300,41.49792,-74.07305,30
-Electrify-America US-Newport Beach CA Newport Center Dr.,33.61764,-117.87675,30
-Electrify-America US-Newport News VA Jefferson Ave.,37.1196,-76.50742,30
-Electrify-America US-Newport OR NW 25th Street,44.65562,-124.0535,30
-Electrify-America US-Niagara Falls NY Fashion Outlets Blvd,43.0975,-78.9824,30
-Electrify-America US-Niagara Falls NY Niagara Falls Blvd,43.08827,-78.98118,30
-Electrify-America US-Norfolk VA Ikea Way,36.87496,-76.2,30
-Electrify-America US-North Bend OR Virginia Ave,43.40588,-124.2363,30
-Electrify-America US-North Bend WA S. Fork Avenue,47.4913,-121.79356,30
-Electrify-America US-North Brunswick Township NJ Grand Ave,40.43678,-74.50423,30
-Electrify-America US-North Charleston SC Rivers Ave,32.9352,-80.037,30
-Electrify-America US-North Haven CT Universal Drive North,41.35647,-72.8725,30
-Electrify-America US-North Highland CA Watt Avenue,38.64967,-121.38488,30
-Electrify-America US-North Hudson NY Blue Ridge Rd,43.9512,-73.73324,30
-Electrify-America US-North Las Vegas NV E Craig Rd,36.2411,-115.1126,30
-Electrify-America US-North Miami Beach FL NE 163rd. St.,25.92712,-80.17042,30
+Electrify-America US-Moreno Valley CA Iris Ave,33.8955,-117.18716,32
+Electrify-America US-Morro City CA Quintana Rd,35.36845,-120.8433,32
+Electrify-America US-Mount Vernon IL Davidson Ave,38.31026,-88.95806,32
+Electrify-America US-Mount Vernon MO W Mount Vernon Blvd,37.09273,-93.82565,32
+Electrify-America US-Mount Vernon WA Freeway Dr.,48.4424,-122.3442,32
+Electrify-America US-Mountain Home ID American Legion Blvd,43.13547,-115.66852,32
+Electrify-America US-Mountain View CA Showers Drive,37.40098,-122.10866,32
+Electrify-America US-Mt. Pleasant TX S. Jefferson Ave.,33.15135,-94.9693,32
+Electrify-America US-Muncy PA Muncy Creek Blvd.,41.21253,-76.76295,32
+Electrify-America US-Murrieta CA Murrieta Hot Springs Rd.,33.55405,-117.17677,32
+Electrify-America US-Murrieta CA Warm Springs Pkwy,33.60027,-117.1693,32
+Electrify-America US-Myrtle Beach SC Coastal Grand Cir,33.7047,-78.92472,32
+Electrify-America US-Napa CA Factory Stores Drive,38.29665,-122.30294,32
+Electrify-America US-Napa CA Riversound Way,38.25205,-122.27827,32
+Electrify-America US-Naples FL Collier Blvd,26.14908,-81.6875,32
+Electrify-America US-Nashua NH Daniel Webster Hwy,42.7009,-71.43926,32
+Electrify-America US-Nashville TN Abbott Martin Rd,36.10637,-86.8146,32
+Electrify-America US-Nashville TN East Thompson Lane,36.1098,-86.72716,32
+Electrify-America US-Nashville TN Opry Mills Dr,36.19967,-86.69252,32
+Electrify-America US-National City CA Highland Avenue,32.67507,-117.09773,32
+Electrify-America US-National City CA Plaza Bonita Rd,32.65716,-117.0645,32
+Electrify-America US-Needles CA Third St,34.83878,-114.6097,32
+Electrify-America US-New Bern NC Dr. M.L.K. Jr Blvd,35.10134,-77.09566,32
+Electrify-America US-New Braunfels TX Creekside Way,29.73094,-98.07492,32
+Electrify-America US-New Castle DE N. DuPont Hwy,39.70932,-75.56265,32
+Electrify-America US-New Rochelle NY Quaker Ridge Rd,40.94924,-73.7915,32
+Electrify-America US-New Stanton PA N. Center Ave.,40.219,-79.61038,32
+Electrify-America US-Newark CA Cedar Blvd,37.51923,-121.99236,32
+Electrify-America US-Newark NJ Ferry Street,40.7283,-74.15123,32
+Electrify-America US-Newburgh NY Route 300,41.49792,-74.07305,32
+Electrify-America US-Newport Beach CA Newport Center Dr.,33.61764,-117.87675,32
+Electrify-America US-Newport News VA Jefferson Ave.,37.1196,-76.50742,32
+Electrify-America US-Newport OR NW 25th Street,44.65562,-124.0535,32
+Electrify-America US-Niagara Falls NY Fashion Outlets Blvd,43.0975,-78.9824,32
+Electrify-America US-Niagara Falls NY Niagara Falls Blvd,43.08827,-78.98118,32
+Electrify-America US-Norfolk VA Ikea Way,36.87496,-76.2,32
+Electrify-America US-North Bend OR Virginia Ave,43.40588,-124.2363,32
+Electrify-America US-North Bend WA S. Fork Avenue,47.4913,-121.79356,32
+Electrify-America US-North Brunswick Township NJ Grand Ave,40.43678,-74.50423,32
+Electrify-America US-North Charleston SC Rivers Ave,32.9352,-80.037,32
+Electrify-America US-North Haven CT Universal Drive North,41.35647,-72.8725,32
+Electrify-America US-North Highland CA Watt Avenue,38.64967,-121.38488,32
+Electrify-America US-North Hudson NY Blue Ridge Rd,43.9512,-73.73324,32
+Electrify-America US-North Las Vegas NV E Craig Rd,36.2411,-115.1126,32
+Electrify-America US-North Miami Beach FL NE 163rd. St.,25.92712,-80.17042,32
 Electrify-America US-North Platte NE S Dewey St,41.12047,-100.75946
-Electrify-America US-Northborough MA Otis Street,42.28407,-71.6554,30
-Electrify-America US-Novato CA Diablo Avenue,38.10244,-122.5706,30
-Electrify-America US-Novi MI Ingersol Dr,42.48204,-83.4726,30
-Electrify-America US-Oak Creek WI W Town Square Way,42.90008,-87.9142,30
-Electrify-America US-Oak Park IL W Roosevelt Rd,41.8653,-87.7916,30
-Electrify-America US-Oakhurst CA CA-41,37.32986,-119.65786,30
-Electrify-America US-Oakland CA East 18th Street,37.79966,-122.25313,30
-Electrify-America US-Oceanside CA Vista Way,33.18074,-117.3457,30
+Electrify-America US-Northborough MA Otis Street,42.28407,-71.6554,32
+Electrify-America US-Novato CA Diablo Avenue,38.10244,-122.5706,32
+Electrify-America US-Novi MI Ingersol Dr,42.48204,-83.4726,32
+Electrify-America US-Oak Creek WI W Town Square Way,42.90008,-87.9142,32
+Electrify-America US-Oak Park IL W Roosevelt Rd,41.8653,-87.7916,32
+Electrify-America US-Oakhurst CA CA-41,37.32986,-119.65786,32
+Electrify-America US-Oakland CA East 18th Street,37.79966,-122.25313,32
+Electrify-America US-Oceanside CA Vista Way,33.18074,-117.3457,32
 Electrify-America US-Ogallala NE Pony Express Ln,41.11276,-101.71856
-Electrify-America US-Ogden UT Wall Ave,41.22185,-111.9792,30
-Electrify-America US-Ojai CA W Ojai Ave,34.4421,-119.2585,30
-Electrify-America US-Oklahoma City OK N Pennsylvania Ave,35.61185,-97.54846,30
-Electrify-America US-Oklahoma City OK NW Expressway,35.52352,-97.54286,30
-Electrify-America US-Olancha CA Gills Station Rd,36.04726,-117.94563,30
-Electrify-America US-Old Fort NC Parker Padgett Rd,35.6376,-82.14347,30
-Electrify-America US-Olean NY W State St,42.07654,-78.4592,30
-Electrify-America US-Olympia WA Harrison Ave NW,47.04545,-122.93618,30
-Electrify-America US-Omaha NE W Center Rd,41.23512,-96.19386,30
-Electrify-America US-Oneonta NY NY-23,42.44734,-75.04848,30
-Electrify-America US-Ontario CA Ontario Mills Dr,34.07424,-117.54753,30
-Electrify-America US-Ooltewah TN Little Debbie Parkway,35.0825,-85.06368,30
-Electrify-America US-Orange CA City Blvd W,33.78024,-117.89244,30
-Electrify-America US-Orange CA N Tustin St,33.80336,-117.835,30
-Electrify-America US-Orange Cove CA 6th Street,36.62357,-119.31346,30
-Electrify-America US-Orangeburg NY Orangetown Rd,41.04588,-73.95284,30
-Electrify-America US-Orem UT S State St,40.29277,-111.69344,30
+Electrify-America US-Ogden UT Wall Ave,41.22185,-111.9792,32
+Electrify-America US-Ojai CA W Ojai Ave,34.4421,-119.2585,32
+Electrify-America US-Oklahoma City OK N Pennsylvania Ave,35.61185,-97.54846,32
+Electrify-America US-Oklahoma City OK NW Expressway,35.52352,-97.54286,32
+Electrify-America US-Olancha CA Gills Station Rd,36.04726,-117.94563,32
+Electrify-America US-Old Fort NC Parker Padgett Rd,35.6376,-82.14347,32
+Electrify-America US-Olean NY W State St,42.07654,-78.4592,32
+Electrify-America US-Olympia WA Harrison Ave NW,47.04545,-122.93618,32
+Electrify-America US-Omaha NE W Center Rd,41.23512,-96.19386,32
+Electrify-America US-Oneonta NY NY-23,42.44734,-75.04848,32
+Electrify-America US-Ontario CA Ontario Mills Dr,34.07424,-117.54753,32
+Electrify-America US-Ooltewah TN Little Debbie Parkway,35.0825,-85.06368,32
+Electrify-America US-Orange CA City Blvd W,33.78024,-117.89244,32
+Electrify-America US-Orange CA N Tustin St,33.80336,-117.835,32
+Electrify-America US-Orange Cove CA 6th Street,36.62357,-119.31346,32
+Electrify-America US-Orangeburg NY Orangetown Rd,41.04588,-73.95284,32
+Electrify-America US-Orem UT S State St,40.29277,-111.69344,32
 Electrify-America US-Orland Park IL Orland Square Dr,41.6171,-87.8483
-Electrify-America US-Orlando FL Eastgate Dr,28.48255,-81.4287,30
-Electrify-America US-Orlando FL S. Orange Blossom Trail,28.44832,-81.39505,30
-Electrify-America US-Orlando FL Vineland Ave,28.3904,-81.48956,30
-Electrify-America US-Ormond Beach FL W Granada Blvd,29.25815,-81.11366,30
-Electrify-America US-Oswego IL US-34,41.70053,-88.31163,30
-Electrify-America US-Owego NY Park Street,42.10215,-76.26353,30
-Electrify-America US-Owings Mills MD Reisterstown Rd,39.43344,-76.79797,30
-Electrify-America US-Oxford AL Plaza Ln,33.59962,-85.83407,30
-Electrify-America US-Oxnard CA N Oxnard Blvd,34.24334,-119.17812,30
-Electrify-America US-Oxon Hill MD Monument Ave #2,38.79958,-77.00374,30
-Electrify-America US-Ozona TX 14TH St.,30.70646,-101.20568,30
-Electrify-America US-Pacific Grove CA Forest Ave,36.60415,-121.92102,30
-Electrify-America US-Paducah KY Hinkleville Rd,37.07368,-88.6895,30
-Electrify-America US-Palatine IL E Dundee Rd,42.13837,-88.03073,30
-Electrify-America US-Palm Bay FL Malabar Rd,27.99906,-80.63623,30
-Electrify-America US-Palm Beach Gardens FL Lake Victoria Gardens Ave,26.85064,-80.09574,30
-Electrify-America US-Palm Desert CA Highway 111,33.7248,-116.40206,30
-Electrify-America US-Palm Springs CA S Palm Canyon Dr,33.8152,-116.54636,30
-Electrify-America US-Palo Alto CA Middlefield Rd,37.4184,-122.10945,30
-Electrify-America US-Palo Alto CA Stanford Shopping Center,37.44208,-122.16977,30
-Electrify-America US-Paramus NJ Garden State Plaza Blvd,40.91612,-74.07394,30
-Electrify-America US-Paramus NJ Rte 4,40.91528,-74.0535,30
-Electrify-America US-Parish NY E Main Street,43.40452,-76.11936,30
-Electrify-America US-Park City UT N Landmark Dr,40.72332,-111.5469,30
-Electrify-America US-Parker CO Cottonwood Drive,39.55948,-104.78377,30
-Electrify-America US-Parlier CA Mendocino Ave,36.60782,-119.54678,30
-Electrify-America US-Pasadena CA Union St,34.14662,-118.14963,30
-Electrify-America US-Paso Robles CA Spring Street,35.63035,-120.6921,30
-Electrify-America US-Patterson CA Sperry Ave,37.46225,-121.14128,30
-Electrify-America US-Payson AZ E Highway 260,34.24115,-111.318,30
-Electrify-America US-Peachtree City GA Highway 54,33.40037,-84.5987,30
-Electrify-America US-Peachtree Corners GA Town Center Blvd,33.9788,-84.2149,30
-Electrify-America US-Pearl City HI Kuala St,21.398,-157.97384,30
-Electrify-America US-Pearland TX Broadway St.,29.55706,-95.3841,30
-Electrify-America US-Pecos TX South Cedar St.,31.40316,-103.4845,30
-Electrify-America US-Pembroke Pines FL Pembroke Rd,25.9942,-80.30987,30
-Electrify-America US-Pensacola FL North Davis Highway,30.48798,-87.22417,30
-Electrify-America US-Perry UT S. Commerce Way,41.48497,-112.02923,30
-Electrify-America US-Petaluma CA Petaluma Blvd North,38.2574,-122.65127,30
-Electrify-America US-Phelps NY Old state Rd,42.94963,-76.9777,30
-Electrify-America US-Philadelphia PA Fox Street,40.01032,-75.17532,30
-Electrify-America US-Philadelphia PA Franklin Mills Cir,40.08775,-74.96445,30
-Electrify-America US-Philadelphia PA Oregon Ave,39.91828,-75.18597,30
-Electrify-America US-Philadelphia PA Ridge Ave,40.04502,-75.23167,30
-Electrify-America US-Philadelphia PA S Christopher Columbus Blvd,39.9164,-75.14202,30
-Electrify-America US-Philadelphia PA S Christopher Columbus Blvd,39.93282,-75.1439,30
-Electrify-America US-Phoenix AZ E Bell Rd,33.6412,-112.01054,30
-Electrify-America US-Phoenix AZ E Thomas Rd,33.4794,-111.98564,30
-Electrify-America US-Phoenixville PA Egypt Rd,40.13437,-75.45137,30
-Electrify-America US-Pico Rivera CA Washington Blvd,33.98645,-118.10495,30
-Electrify-America US-Pine City MN Evergreen Sq SW,45.81846,-92.979,30
-Electrify-America US-Pismo Beach CA Five Cities Drive,35.13685,-120.62936,30
-Electrify-America US-Pittsburg CA Railroad Ave,38.0117,-121.89065,30
-Electrify-America US-Pittsburgh PA Park Manor Blvd,40.45174,-80.16815,30
-Electrify-America US-Pittsburgh PA South Hills Village,40.34593,-80.05534,30
+Electrify-America US-Orlando FL Eastgate Dr,28.48255,-81.4287,32
+Electrify-America US-Orlando FL S. Orange Blossom Trail,28.44832,-81.39505,32
+Electrify-America US-Orlando FL Vineland Ave,28.3904,-81.48956,32
+Electrify-America US-Ormond Beach FL W Granada Blvd,29.25815,-81.11366,32
+Electrify-America US-Oswego IL US-34,41.70053,-88.31163,32
+Electrify-America US-Owego NY Park Street,42.10215,-76.26353,32
+Electrify-America US-Owings Mills MD Reisterstown Rd,39.43344,-76.79797,32
+Electrify-America US-Oxford AL Plaza Ln,33.59962,-85.83407,32
+Electrify-America US-Oxnard CA N Oxnard Blvd,34.24334,-119.17812,32
+Electrify-America US-Oxon Hill MD Monument Ave,38.79958,-77.00374,32
+Electrify-America US-Ozona TX 14TH St.,30.70646,-101.20568,32
+Electrify-America US-Pacific Grove CA Forest Ave,36.60415,-121.92102,32
+Electrify-America US-Paducah KY Hinkleville Rd,37.07368,-88.6895,32
+Electrify-America US-Palatine IL E Dundee Rd,42.13837,-88.03073,32
+Electrify-America US-Palm Bay FL Malabar Rd,27.99906,-80.63623,32
+Electrify-America US-Palm Beach Gardens FL Lake Victoria Gardens Ave,26.85064,-80.09574,32
+Electrify-America US-Palm Desert CA Highway 111,33.7248,-116.40206,32
+Electrify-America US-Palm Springs CA S Palm Canyon Dr,33.8152,-116.54636,32
+Electrify-America US-Palo Alto CA Middlefield Rd,37.4184,-122.10945,32
+Electrify-America US-Palo Alto CA Stanford Shopping Center,37.44208,-122.16977,32
+Electrify-America US-Paramus NJ Garden State Plaza Blvd,40.91612,-74.07394,32
+Electrify-America US-Paramus NJ Rte 4,40.91528,-74.0535,32
+Electrify-America US-Parish NY E Main Street,43.40452,-76.11936,32
+Electrify-America US-Park City UT N Landmark Dr,40.72332,-111.5469,32
+Electrify-America US-Parker CO Cottonwood Drive,39.55948,-104.78377,32
+Electrify-America US-Parlier CA Mendocino Ave,36.60782,-119.54678,32
+Electrify-America US-Pasadena CA Union St,34.14662,-118.14963,32
+Electrify-America US-Paso Robles CA Spring Street,35.63035,-120.6921,32
+Electrify-America US-Patterson CA Sperry Ave,37.46225,-121.14128,32
+Electrify-America US-Payson AZ E Highway 260,34.24115,-111.318,32
+Electrify-America US-Peachtree City GA Highway 54,33.40037,-84.5987,32
+Electrify-America US-Peachtree Corners GA Town Center Blvd,33.9788,-84.2149,32
+Electrify-America US-Pearl City HI Kuala St,21.398,-157.97384,32
+Electrify-America US-Pearland TX Broadway St.,29.55706,-95.3841,32
+Electrify-America US-Pecos TX South Cedar St.,31.40316,-103.4845,32
+Electrify-America US-Pembroke Pines FL Pembroke Rd,25.9942,-80.30987,32
+Electrify-America US-Pensacola FL North Davis Highway,30.48798,-87.22417,32
+Electrify-America US-Perry UT S. Commerce Way,41.48497,-112.02923,32
+Electrify-America US-Petaluma CA Petaluma Blvd North,38.2574,-122.65127,32
+Electrify-America US-Phelps NY Old state Rd,42.94963,-76.9777,32
+Electrify-America US-Philadelphia PA Fox Street,40.01032,-75.17532,32
+Electrify-America US-Philadelphia PA Franklin Mills Cir,40.08775,-74.96445,32
+Electrify-America US-Philadelphia PA Oregon Ave,39.91828,-75.18597,32
+Electrify-America US-Philadelphia PA Ridge Ave,40.04502,-75.23167,32
+Electrify-America US-Philadelphia PA S Christopher Columbus Blvd,39.9164,-75.14202,32
+Electrify-America US-Philadelphia PA S Christopher Columbus Blvd,39.93282,-75.1439,32
+Electrify-America US-Phoenix AZ E Bell Rd,33.6412,-112.01054,32
+Electrify-America US-Phoenix AZ E Thomas Rd,33.4794,-111.98564,32
+Electrify-America US-Phoenixville PA Egypt Rd,40.13437,-75.45137,32
+Electrify-America US-Pico Rivera CA Washington Blvd,33.98645,-118.10495,32
+Electrify-America US-Pine City MN Evergreen Sq SW,45.81846,-92.979,32
+Electrify-America US-Pismo Beach CA Five Cities Drive,35.13685,-120.62936,32
+Electrify-America US-Pittsburg CA Railroad Ave,38.0117,-121.89065,32
+Electrify-America US-Pittsburgh PA Park Manor Blvd,40.45174,-80.16815,32
+Electrify-America US-Pittsburgh PA South Hills Village,40.34593,-80.05534,32
 Electrify-America US-Placerville CA Sacramento St,38.72677,-120.80302
-Electrify-America US-Plantation FL West Broward Blvd,26.11524,-80.25318,30
-Electrify-America US-Plattsburgh NY Consumer Square,44.69408,-73.4853,30
-Electrify-America US-Plattsburgh NY Tom Miller Rd,44.70554,-73.5031,30
-Electrify-America US-Pleasant Hill CA Patterson Blvd.,37.93447,-122.07315,30
+Electrify-America US-Plantation FL West Broward Blvd,26.11524,-80.25318,32
+Electrify-America US-Plattsburgh NY Consumer Square,44.69408,-73.4853,32
+Electrify-America US-Plattsburgh NY Tom Miller Rd,44.70554,-73.5031,32
+Electrify-America US-Pleasant Hill CA Patterson Blvd.,37.93447,-122.07315,32
 Electrify-America US-Pleasanton CA Johnson Dr,37.7011,-121.9181
-Electrify-America US-Pleasanton CA Rosewood Drive,37.70068,-121.8844,30
-Electrify-America US-Pleasanton CA Santa Rita Rd,37.67564,-121.87458,30
-Electrify-America US-Plymouth MA Long Pond Rd,41.93312,-70.6572,30
+Electrify-America US-Pleasanton CA Rosewood Drive,37.70068,-121.8844,32
+Electrify-America US-Pleasanton CA Santa Rita Rd,37.67564,-121.87458,32
+Electrify-America US-Plymouth MA Long Pond Rd,41.93312,-70.6572,32
 Electrify-America US-Plymouth Meeting PA W Germantown Pike,40.11699,-75.27937
-Electrify-America US-Pompton Lakes NJ Wanaque Ave,41.00746,-74.29366,30
+Electrify-America US-Pompton Lakes NJ Wanaque Ave,41.00746,-74.29366,32
 Electrify-America US-Pompton Plains NJ Route 23 North,40.96869,-74.28467
-Electrify-America US-Pooler GA Pooler Parkway,32.14257,-81.24328,30
-Electrify-America US-Port Angeles WA E Kolonels Way,48.10993,-123.36134,30
-Electrify-America US-Port Charlotte FL Kings Hwy,27.02385,-82.04687,30
-Electrify-America US-Port Jefferson Station NY Nesconset Highway,40.92414,-73.0428,30
-Electrify-America US-Port Orange FL Dunlawton Ave,29.10887,-81.028,30
-Electrify-America US-Port Orchard WA SE Sedgwick Rd,47.50453,-122.6294,30
-Electrify-America US-Port St Lucie FL NW St Lucie West Blvd,27.314,-80.40313,30
-Electrify-America US-Portage MI S Westnedge Ave,42.21405,-85.58807,30
-Electrify-America US-Portland OR N Interstate Ave,45.5761,-122.67968,30
-Electrify-America US-Portland OR N Lombard St,45.58512,-122.73873,30
-Electrify-America US-Portland OR NE Cascades Pkwy,45.5727,-122.5546,30
-Electrify-America US-Portland OR NE Glisan St,45.52667,-122.596,30
-Electrify-America US-Portland OR SE Hawthorne Blvd,45.5135,-122.62406,30
-Electrify-America US-Portland OR SW Barbur Blvd,45.47058,-122.69156,30
-Electrify-America US-Potomac MD Falls Rd,39.0189,-77.20986,30
-Electrify-America US-Potomac MD Park Potomac Ave,39.06153,-77.1567,30
-Electrify-America US-Potsdam NY Maple Street,44.66645,-74.99042,30
-Electrify-America US-Pottstown PA W Lightcap Rd,40.23593,-75.57328,30
-Electrify-America US-Poulsbo WA Olhava Way NW,47.75648,-122.6605,30
-Electrify-America US-Poway CA Community Rd,32.9583,-117.03865,30
-Electrify-America US-Prescott AZ E Sheldon Street,34.5454,-112.4559,30
-Electrify-America US-Primm NV S Las Vegas Blvd,35.606,-115.38908,30
-Electrify-America US-Providence RI Silver Spring Street,41.8453,-71.41788,30
-Electrify-America US-Pueblo CO Eagleridge Blvd,38.3193,-104.61314,30
-Electrify-America US-Pulaski NY Maple Avenue,43.5664,-76.11468,30
-Electrify-America US-Puyallup WA S. Meridian,47.15598,-122.29757,30
-Electrify-America US-Quakertown PA John Fries Hwy,40.4369,-75.41437,30
-Electrify-America US-Quartzsite AZ S Quartzsite Blvd,33.65756,-114.24142,30
-Electrify-America US-Queens NY LaGuardia Airport Lot GP-1,40.77057,-73.87995,30
-Electrify-America US-Queens NY Place Between E & W Hangar Rd,40.65608,-73.8081,30
-Electrify-America US-Queensbury NY Quaker Rd,43.32945,-73.63052,30
-Electrify-America US-Queenstown MD Outlet Center Dr,38.98214,-76.15973,30
-Electrify-America US-Raleigh NC Brier Creek Pkwy,35.9036,-78.78692,30
-Electrify-America US-Raleigh NC Glenwood Ave,35.8573,-78.7036,30
-Electrify-America US-Raleigh NC Wake Towne Dr,35.82206,-78.62064,30
-Electrify-America US-Rancho Cordova CA International Dr,38.57994,-121.28856,30
-Electrify-America US-Rancho Santa Margarita CA Santa Margarita Parkway,33.64218,-117.59864,30
-Electrify-America US-Rapid Ciy SD Eglin St,44.09802,-103.18797,30
-Electrify-America US-Rawlins WY N Higley Blvd,41.7951,-107.2167,30
-Electrify-America US-Redlands CA E State St,34.05713,-117.17875,30
-Electrify-America US-Redmond WA 148th Avenue NE,47.63187,-122.14277,30
-Electrify-America US-Redmond WA NE 76th St.,47.6718,-122.10457,30
-Electrify-America US-Redmond WA NE Novelty Hill Rd,47.6995,-122.0257,30
-Electrify-America US-Reedly CA Corner of H and 12th Street,36.59518,-119.4506,30
-Electrify-America US-Reno NV Kietzke Ln,39.4844,-119.78932,30
-Electrify-America US-Reno NV W 7th St,39.5361,-119.86358,30
-Electrify-America US-Rensselaer NY 3rd Ave Ext,42.64567,-73.70022,30
-Electrify-America US-Renton WA N Landing Way,47.4972,-122.19924,30
-Electrify-America US-Renton WA SW 41st Street,47.4431,-122.22488,30
-Electrify-America US-Reston VA Edmund Halley Drive,38.95083,-77.35847,30
-Electrify-America US-Reston VA Sunset Hills Rd,38.95524,-77.369,30
-Electrify-America US-Richfield UT E. 1300 S,38.7478,-112.0863,30
-Electrify-America US-Richmond CA Blume Drive,37.98352,-122.31927,30
-Electrify-America US-Richmond CA Macdonald Ave,37.93182,-122.32935,30
-Electrify-America US-Richmond VA Brook Rd,37.63222,-77.45814,30
-Electrify-America US-Richmond VA Forest Hill Ave,37.53602,-77.528,30
-Electrify-America US-Richmondville NY NY-7,42.6419,-74.53896,30
-Electrify-America US-Ritzville WA Smittys Blvd.,47.11948,-118.3627,30
-Electrify-America US-Riverhead NY East Ave,40.91888,-72.66044,30
-Electrify-America US-Riverhead NY Old Country Rd,40.92394,-72.7091,30
-Electrify-America US-Riverside CA Magnolia Ave,33.90492,-117.46934,30
-Electrify-America US-Riverside CA Meridian Pkwy,33.91044,-117.28943,30
-Electrify-America US-Riverside CA University Avenue,33.98157,-117.3755,30
-Electrify-America US-Riverside CA Valley Springs Parkway,33.93972,-117.2856,30
-Electrify-America US-Rock Springs WY Foothill Blvd,41.58198,-109.26102,30
-Electrify-America US-Rockaway Park NY Beach 116th Street,40.58113,-73.8374,30
-Electrify-America US-Rockford IL Walton St,42.26657,-88.9783,30
-Electrify-America US-Rocklin CA Commons Drive,38.805,-121.20763,30
+Electrify-America US-Pooler GA Pooler Parkway,32.14257,-81.24328,32
+Electrify-America US-Port Angeles WA E Kolonels Way,48.10993,-123.36134,32
+Electrify-America US-Port Charlotte FL Kings Hwy,27.02385,-82.04687,32
+Electrify-America US-Port Jefferson Station NY Nesconset Highway,40.92414,-73.0428,32
+Electrify-America US-Port Orange FL Dunlawton Ave,29.10887,-81.028,32
+Electrify-America US-Port Orchard WA SE Sedgwick Rd,47.50453,-122.6294,32
+Electrify-America US-Port St Lucie FL NW St Lucie West Blvd,27.314,-80.40313,32
+Electrify-America US-Portage MI S Westnedge Ave,42.21405,-85.58807,32
+Electrify-America US-Portland OR N Interstate Ave,45.5761,-122.67968,32
+Electrify-America US-Portland OR N Lombard St,45.58512,-122.73873,32
+Electrify-America US-Portland OR NE Cascades Pkwy,45.5727,-122.5546,32
+Electrify-America US-Portland OR NE Glisan St,45.52667,-122.596,32
+Electrify-America US-Portland OR SE Hawthorne Blvd,45.5135,-122.62406,32
+Electrify-America US-Portland OR SW Barbur Blvd,45.47058,-122.69156,32
+Electrify-America US-Potomac MD Falls Rd,39.0189,-77.20986,32
+Electrify-America US-Potomac MD Park Potomac Ave,39.06153,-77.1567,32
+Electrify-America US-Potsdam NY Maple Street,44.66645,-74.99042,32
+Electrify-America US-Pottstown PA W Lightcap Rd,40.23593,-75.57328,32
+Electrify-America US-Poulsbo WA Olhava Way NW,47.75648,-122.6605,32
+Electrify-America US-Poway CA Community Rd,32.9583,-117.03865,32
+Electrify-America US-Prescott AZ E Sheldon Street,34.5454,-112.4559,32
+Electrify-America US-Primm NV S Las Vegas Blvd,35.606,-115.38908,32
+Electrify-America US-Providence RI Silver Spring Street,41.8453,-71.41788,32
+Electrify-America US-Pueblo CO Eagleridge Blvd,38.3193,-104.61314,32
+Electrify-America US-Pulaski NY Maple Avenue,43.5664,-76.11468,32
+Electrify-America US-Puyallup WA S. Meridian,47.15598,-122.29757,32
+Electrify-America US-Quakertown PA John Fries Hwy,40.4369,-75.41437,32
+Electrify-America US-Quartzsite AZ S Quartzsite Blvd,33.65756,-114.24142,32
+Electrify-America US-Queens NY LaGuardia Airport Lot GP-1,40.77057,-73.87995,32
+Electrify-America US-Queens NY Place Between E & W Hangar Rd,40.65608,-73.8081,32
+Electrify-America US-Queensbury NY Quaker Rd,43.32945,-73.63052,32
+Electrify-America US-Queenstown MD Outlet Center Dr,38.98214,-76.15973,32
+Electrify-America US-Raleigh NC Brier Creek Pkwy,35.9036,-78.78692,32
+Electrify-America US-Raleigh NC Glenwood Ave,35.8573,-78.7036,32
+Electrify-America US-Raleigh NC Wake Towne Dr,35.82206,-78.62064,32
+Electrify-America US-Rancho Cordova CA International Dr,38.57994,-121.28856,32
+Electrify-America US-Rancho Santa Margarita CA Santa Margarita Parkway,33.64218,-117.59864,32
+Electrify-America US-Rapid Ciy SD Eglin St,44.09802,-103.18797,32
+Electrify-America US-Rawlins WY N Higley Blvd,41.7951,-107.2167,32
+Electrify-America US-Redlands CA E State St,34.05713,-117.17875,32
+Electrify-America US-Redmond WA 148th Avenue NE,47.63187,-122.14277,32
+Electrify-America US-Redmond WA NE 76th St.,47.6718,-122.10457,32
+Electrify-America US-Redmond WA NE Novelty Hill Rd,47.6995,-122.0257,32
+Electrify-America US-Reedly CA Corner of H and 12th Street,36.59518,-119.4506,32
+Electrify-America US-Reno NV Kietzke Ln,39.4844,-119.78932,32
+Electrify-America US-Reno NV W 7th St,39.5361,-119.86358,32
+Electrify-America US-Rensselaer NY 3rd Ave Ext,42.64567,-73.70022,32
+Electrify-America US-Renton WA N Landing Way,47.4972,-122.19924,32
+Electrify-America US-Renton WA SW 41st Street,47.4431,-122.22488,32
+Electrify-America US-Reston VA Edmund Halley Drive,38.95083,-77.35847,32
+Electrify-America US-Reston VA Sunset Hills Rd,38.95524,-77.369,32
+Electrify-America US-Richfield UT E. 1300 S,38.7478,-112.0863,32
+Electrify-America US-Richmond CA Blume Drive,37.98352,-122.31927,32
+Electrify-America US-Richmond CA Macdonald Ave,37.93182,-122.32935,32
+Electrify-America US-Richmond VA Brook Rd,37.63222,-77.45814,32
+Electrify-America US-Richmond VA Forest Hill Ave,37.53602,-77.528,32
+Electrify-America US-Richmondville NY NY-7,42.6419,-74.53896,32
+Electrify-America US-Ritzville WA Smittys Blvd.,47.11948,-118.3627,32
+Electrify-America US-Riverhead NY East Ave,40.91888,-72.66044,32
+Electrify-America US-Riverhead NY Old Country Rd,40.92394,-72.7091,32
+Electrify-America US-Riverside CA Magnolia Ave,33.90492,-117.46934,32
+Electrify-America US-Riverside CA Meridian Pkwy,33.91044,-117.28943,32
+Electrify-America US-Riverside CA University Avenue,33.98157,-117.3755,32
+Electrify-America US-Riverside CA Valley Springs Parkway,33.93972,-117.2856,32
+Electrify-America US-Rock Springs WY Foothill Blvd,41.58198,-109.26102,32
+Electrify-America US-Rockaway Park NY Beach 116th Street,40.58113,-73.8374,32
+Electrify-America US-Rockford IL Walton St,42.26657,-88.9783,32
+Electrify-America US-Rocklin CA Commons Drive,38.805,-121.20763,32
 Electrify-America US-Rocky Hill CT Silas Deane Hwy,41.67497,-72.6502
-Electrify-America US-Rocky Mount NC N Old Carriage Rd,35.97208,-77.89565,30
-Electrify-America US-Rogers AR S Pleasant Crossing Blvd.,36.28078,-94.15126,30
-Electrify-America US-Rohnert Park CA Redwood Dr,38.36805,-122.71497,30
-Electrify-America US-Rolling Hills Estates CA Silver Spur Rd,33.77076,-118.3707,30
-Electrify-America US-Rosedale MD Petrie Way Rd,39.3369,-76.48964,30
-Electrify-America US-Rosedale NY Francis Lewis Blvd,40.66624,-73.73593,30
-Electrify-America US-Rosemead CA Valley Blvd,34.0799,-118.0757,30
-Electrify-America US-Rosemead CA Walnut Grove Ave,34.0509,-118.0836,30
-Electrify-America US-Roseville CA Baseline Rd,38.75254,-121.36754,30
-Electrify-America US-Roseville CA Eureka Rd,38.74662,-121.25076,30
-Electrify-America US-Roseville CA Galleria Blvd,38.77165,-121.27043,30
-Electrify-America US-Roseville CA Riverside Ave.,38.72787,-121.28907,30
-Electrify-America US-Roseville MI Little Mack Ave,42.5222,-82.90668,30
-Electrify-America US-Roswell GA Sandy Plains Rd,34.06355,-84.42402,30
-Electrify-America US-Round Rock TX N. I-35,30.56573,-97.69185,30
-Electrify-America US-Royal Palm Beach FL Okeechobee Blvd,26.71035,-80.20582,30
-Electrify-America US-Royse City TX I-30,32.96482,-96.34252,30
-Electrify-America US-Sacramento CA 4th Avenue,38.54908,-121.4275,30
-Electrify-America US-Sacramento CA Airport Blvd.,38.6779,-121.58925,30
-Electrify-America US-Sacramento CA Alhambra Blvd.,38.56462,-121.46848,30
-Electrify-America US-Sacramento CA Arden Way,38.59482,-121.38807,30
-Electrify-America US-Sacramento CA Arena Blvd.,38.64163,-121.5326,30
-Electrify-America US-Sacramento CA Center Parkway,38.43898,-121.41814,30
-Electrify-America US-Sacramento CA E Commerce Way,38.63972,-121.52168,30
-Electrify-America US-Sacramento CA Florin Rd,38.4982,-121.4342,30
-Electrify-America US-Sacramento CA Fulton Avenue,38.60037,-121.40186,30
-Electrify-America US-Sacramento CA L Street,38.57614,-121.48573,30
-Electrify-America US-Sacramento CA N. Freeway Blvd.,38.63995,-121.4992,30
-Electrify-America US-Sacramento CA Riverside Blvd.,38.56284,-121.49766,30
-Electrify-America US-Salem MA Highland Avenue,42.4953,-70.93425,30
-Electrify-America US-Salem NH Rockingham Park Blvd,42.7662,-71.2334,30
-Electrify-America US-Salem OR Lancaster Dr. NE,44.9655,-122.9853,30
-Electrify-America US-Salina KS N Ohio St.,38.84936,-97.59375,30
+Electrify-America US-Rocky Mount NC N Old Carriage Rd,35.97208,-77.89565,32
+Electrify-America US-Rogers AR S Pleasant Crossing Blvd.,36.28078,-94.15126,32
+Electrify-America US-Rohnert Park CA Redwood Dr,38.36805,-122.71497,32
+Electrify-America US-Rolling Hills Estates CA Silver Spur Rd,33.77076,-118.3707,32
+Electrify-America US-Rosedale MD Petrie Way Rd,39.3369,-76.48964,32
+Electrify-America US-Rosedale NY Francis Lewis Blvd,40.66624,-73.73593,32
+Electrify-America US-Rosemead CA Valley Blvd,34.0799,-118.0757,32
+Electrify-America US-Rosemead CA Walnut Grove Ave,34.0509,-118.0836,32
+Electrify-America US-Roseville CA Baseline Rd,38.75254,-121.36754,32
+Electrify-America US-Roseville CA Eureka Rd,38.74662,-121.25076,32
+Electrify-America US-Roseville CA Galleria Blvd,38.77165,-121.27043,32
+Electrify-America US-Roseville CA Riverside Ave.,38.72787,-121.28907,32
+Electrify-America US-Roseville MI Little Mack Ave,42.5222,-82.90668,32
+Electrify-America US-Roswell GA Sandy Plains Rd,34.06355,-84.42402,32
+Electrify-America US-Round Rock TX N. I-35,30.56573,-97.69185,32
+Electrify-America US-Royal Palm Beach FL Okeechobee Blvd,26.71035,-80.20582,32
+Electrify-America US-Royse City TX I-30,32.96482,-96.34252,32
+Electrify-America US-Sacramento CA 4th Avenue,38.54908,-121.4275,32
+Electrify-America US-Sacramento CA Airport Blvd.,38.6779,-121.58925,32
+Electrify-America US-Sacramento CA Alhambra Blvd.,38.56462,-121.46848,32
+Electrify-America US-Sacramento CA Arden Way,38.59482,-121.38807,32
+Electrify-America US-Sacramento CA Arena Blvd.,38.64163,-121.5326,32
+Electrify-America US-Sacramento CA Center Parkway,38.43898,-121.41814,32
+Electrify-America US-Sacramento CA E Commerce Way,38.63972,-121.52168,32
+Electrify-America US-Sacramento CA Florin Rd,38.4982,-121.4342,32
+Electrify-America US-Sacramento CA Fulton Avenue,38.60037,-121.40186,32
+Electrify-America US-Sacramento CA L Street,38.57614,-121.48573,32
+Electrify-America US-Sacramento CA N. Freeway Blvd.,38.63995,-121.4992,32
+Electrify-America US-Sacramento CA Riverside Blvd.,38.56284,-121.49766,32
+Electrify-America US-Salem MA Highland Avenue,42.4953,-70.93425,32
+Electrify-America US-Salem NH Rockingham Park Blvd,42.7662,-71.2334,32
+Electrify-America US-Salem OR Lancaster Dr. NE,44.9655,-122.9853,32
+Electrify-America US-Salina KS N Ohio St.,38.84936,-97.59375,32
 Electrify-America US-Salina UT South State Street,38.93164,-111.85423
-Electrify-America US-Salina UT UT-76,38.7547,-111.4185,30
-Electrify-America US-Salinas CA North Main St.,36.71885,-121.65052,30
-Electrify-America US-Salt Lake City UT South 300 West,40.72787,-111.89792,30
-Electrify-America US-San Antonio TX La Cantera Pkwy,29.6073,-98.59802,30
-Electrify-America US-San Clemente CA Avenida Pico,33.45483,-117.60665,30
-Electrify-America US-San Diego CA Bernardo Ctr Dr,33.01964,-117.0743,30
-Electrify-America US-San Diego CA Camino De La Plaza,32.54525,-117.0416,30
-Electrify-America US-San Diego CA Camino Del Rio N,32.76738,-117.14993,30
-Electrify-America US-San Diego CA College Ave.,32.74145,-117.05656,30
-Electrify-America US-San Diego CA Dennery Rd,32.58078,-117.03404,30
-Electrify-America US-San Diego CA Friars Rd,32.76783,-117.16438,30
-Electrify-America US-San Diego CA Friars Rd,32.7693,-117.16372,30
-Electrify-America US-San Diego CA La Jolla Village Dr,32.8685,-117.21186,30
-Electrify-America US-San Diego CA Midway Dr,32.75122,-117.2161,30
-Electrify-America US-San Diego CA Murphy Canyon Rd.,32.8046,-117.11514,30
-Electrify-America US-San Diego CA Penasquitos Dr,32.9777,-117.08845,30
-Electrify-America US-San Diego CA University Ave,32.74757,-117.12678,30
-Electrify-America US-San Diego CA University Ave,32.74802,-117.15775,30
-Electrify-America US-San Dimas CA W Arrow Hwy,34.10325,-117.82342,30
-Electrify-America US-San Francisco CA Harrison Street,37.77856,-122.40272,30
-Electrify-America US-San Francisco CA Mission Street,37.7429,-122.42203,30
-Electrify-America US-San Francisco CA Noriega St.,37.75397,-122.48867,30
-Electrify-America US-San Francisco CA Ocean Avenue,37.7324,-122.48944,30
-Electrify-America US-San Francisco CA Webster St.,37.78365,-122.4313,30
+Electrify-America US-Salina UT UT-76,38.7547,-111.4185,32
+Electrify-America US-Salinas CA North Main St.,36.71885,-121.65052,32
+Electrify-America US-Salt Lake City UT South 300 West,40.72787,-111.89792,32
+Electrify-America US-San Antonio TX La Cantera Pkwy,29.6073,-98.59802,32
+Electrify-America US-San Clemente CA Avenida Pico,33.45483,-117.60665,32
+Electrify-America US-San Diego CA Bernardo Ctr Dr,33.01964,-117.0743,32
+Electrify-America US-San Diego CA Camino De La Plaza,32.54525,-117.0416,32
+Electrify-America US-San Diego CA Camino Del Rio N,32.76738,-117.14993,32
+Electrify-America US-San Diego CA College Ave.,32.74145,-117.05656,32
+Electrify-America US-San Diego CA Dennery Rd,32.58078,-117.03404,32
+Electrify-America US-San Diego CA Friars Rd,32.76783,-117.16438,32
+Electrify-America US-San Diego CA Friars Rd,32.7693,-117.16372,32
+Electrify-America US-San Diego CA La Jolla Village Dr,32.8685,-117.21186,32
+Electrify-America US-San Diego CA Midway Dr,32.75122,-117.2161,32
+Electrify-America US-San Diego CA Murphy Canyon Rd.,32.8046,-117.11514,32
+Electrify-America US-San Diego CA Penasquitos Dr,32.9777,-117.08845,32
+Electrify-America US-San Diego CA University Ave,32.74757,-117.12678,32
+Electrify-America US-San Diego CA University Ave,32.74802,-117.15775,32
+Electrify-America US-San Dimas CA W Arrow Hwy,34.10325,-117.82342,32
+Electrify-America US-San Francisco CA Harrison Street,37.77856,-122.40272,32
+Electrify-America US-San Francisco CA Mission Street,37.7429,-122.42203,32
+Electrify-America US-San Francisco CA Noriega St.,37.75397,-122.48867,32
+Electrify-America US-San Francisco CA Ocean Avenue,37.7324,-122.48944,32
+Electrify-America US-San Francisco CA Webster St.,37.78365,-122.4313,32
 Electrify-America US-San Jose CA Alum Rock Ave,37.35826,-121.84266
 Electrify-America US-San Jose CA Berryessa Rd,37.38811,-121.85856
-Electrify-America US-San Jose CA Blossom Hill Rd.,37.24593,-121.88928,30
-Electrify-America US-San Jose CA Blossom Hill Rd.,37.25125,-121.86587,30
-Electrify-America US-San Jose CA Camden Ave,37.22184,-121.86325,30
-Electrify-America US-San Jose CA Cherry Ave,37.25933,-121.8708,30
+Electrify-America US-San Jose CA Blossom Hill Rd.,37.24593,-121.88928,32
+Electrify-America US-San Jose CA Blossom Hill Rd.,37.25125,-121.86587,32
+Electrify-America US-San Jose CA Camden Ave,37.22184,-121.86325,32
+Electrify-America US-San Jose CA Cherry Ave,37.25933,-121.8708,32
 Electrify-America US-San Jose CA Newhall Dr,37.35052,-121.923
-Electrify-America US-San Jose CA Saratoga Ave.,37.29978,-121.9817,30
-Electrify-America US-San Jose CA West Capitol Expressway,37.27544,-121.85435,30
-Electrify-America US-San Jose CA West San Carlos Street,37.32263,-121.91358,30
+Electrify-America US-San Jose CA Saratoga Ave.,37.29978,-121.9817,32
+Electrify-America US-San Jose CA West Capitol Expressway,37.27544,-121.85435,32
+Electrify-America US-San Jose CA West San Carlos Street,37.32263,-121.91358,32
 Electrify-America US-San Jose CA Zanker Road,37.39439,-121.92795
-Electrify-America US-San Leandro CA Davis Street,37.7158,-122.17714,30
-Electrify-America US-San Leandro CA E 14TH ST,37.72443,-122.15377,30
-Electrify-America US-San Luis Obispo CA Froom Ranch Way,35.2517,-120.6898,30
-Electrify-America US-San Marcos TX S Interstate 35,29.82676,-97.98034,30
+Electrify-America US-San Leandro CA Davis Street,37.7158,-122.17714,32
+Electrify-America US-San Leandro CA E 14TH ST,37.72443,-122.15377,32
+Electrify-America US-San Luis Obispo CA Froom Ranch Way,35.2517,-120.6898,32
+Electrify-America US-San Marcos TX S Interstate 35,29.82676,-97.98034,32
 Electrify-America US-San Mateo CA De Anza Blvd,37.52044,-122.33814
-Electrify-America US-San Mateo CA S El Camino Real,37.54004,-122.3029,30
+Electrify-America US-San Mateo CA S El Camino Real,37.54004,-122.3029,32
 Electrify-America US-San Ramon CA Crow Canyon Pl,37.7804,-121.9734
-Electrify-America US-Sandy OR SE 362nd Dr,45.40302,-122.2941,30
-Electrify-America US-Sandy Springs GA Roswell Rd,33.96184,-84.3647,30
-Electrify-America US-Sanger CA Indianola Avenue,36.70545,-119.5634,30
-Electrify-America US-Santa Ana CA E 17th Street,33.7606,-117.83594,30
-Electrify-America US-Santa Ana CA S. Bristol Street,33.70354,-117.88674,30
-Electrify-America US-Santa Ana CA W. McFadden Avenue,33.73662,-117.91635,30
-Electrify-America US-Santa Barbara CA State St.,34.44092,-119.7461,30
-Electrify-America US-Santa Barbara CA W Carrillo St,34.4208,-119.70308,30
+Electrify-America US-Sandy OR SE 362nd Dr,45.40302,-122.2941,32
+Electrify-America US-Sandy Springs GA Roswell Rd,33.96184,-84.3647,32
+Electrify-America US-Sanger CA Indianola Avenue,36.70545,-119.5634,32
+Electrify-America US-Santa Ana CA E 17th Street,33.7606,-117.83594,32
+Electrify-America US-Santa Ana CA S. Bristol Street,33.70354,-117.88674,32
+Electrify-America US-Santa Ana CA W. McFadden Avenue,33.73662,-117.91635,32
+Electrify-America US-Santa Barbara CA State St.,34.44092,-119.7461,32
+Electrify-America US-Santa Barbara CA W Carrillo St,34.4208,-119.70308,32
 Electrify-America US-Santa Clara CA Stevens Creek Blvd,37.32682,-121.9435
-Electrify-America US-Santa Clarita CA Kelly Johnson Pkwy.,34.4441,-118.57715,30
-Electrify-America US-Santa Cruz CA Front St,36.97447,-122.0241,30
-Electrify-America US-Santa Fe NM Herrera Dr,35.6184,-106.03192,30
+Electrify-America US-Santa Clarita CA Kelly Johnson Pkwy.,34.4441,-118.57715,32
+Electrify-America US-Santa Cruz CA Front St,36.97447,-122.0241,32
+Electrify-America US-Santa Fe NM Herrera Dr,35.6184,-106.03192,32
 Electrify-America US-Santa Maria CA Betteravia Rd,34.92243,-120.43305
-Electrify-America US-Santa Monica CA Santa Monica Boulevard,34.02725,-118.4815,30
-Electrify-America US-Santa Paula CA W Main St,34.345,-119.0804,30
-Electrify-America US-Santa Rosa CA Santa Rosa Plaza,38.4386,-122.71778,30
+Electrify-America US-Santa Monica CA Santa Monica Boulevard,34.02725,-118.4815,32
+Electrify-America US-Santa Paula CA W Main St,34.345,-119.0804,32
+Electrify-America US-Santa Rosa CA Santa Rosa Plaza,38.4386,-122.71778,32
 Electrify-America US-Santa Rosa NM NM-156,34.94715,-104.63828
-Electrify-America US-Santee CA Mission Gorge Rd.,32.84225,-116.98332,30
-Electrify-America US-Saraland AL Industrial Pkwy,30.8007,-88.0971,30
-Electrify-America US-Sarasota FL University Town Center Dr,27.38573,-82.452,30
-Electrify-America US-Saratoga Springs NY NY-50,43.09823,-73.7505,30
-Electrify-America US-Saugerties NY NY-212,42.08412,-73.96876,30
-Electrify-America US-Saugus MA Broadway,42.47204,-71.02366,30
+Electrify-America US-Santee CA Mission Gorge Rd.,32.84225,-116.98332,32
+Electrify-America US-Saraland AL Industrial Pkwy,30.8007,-88.0971,32
+Electrify-America US-Sarasota FL University Town Center Dr,27.38573,-82.452,32
+Electrify-America US-Saratoga Springs NY NY-50,43.09823,-73.7505,32
+Electrify-America US-Saugerties NY NY-212,42.08412,-73.96876,32
+Electrify-America US-Saugus MA Broadway,42.47204,-71.02366,32
 Electrify-America US-Scarborough ME Gallery Blvd,43.62297,-70.34495
-Electrify-America US-Schaumburg IL E Golf Rd,42.0524,-88.0445,30
-Electrify-America US-Schofield WI Schofield Avenue,44.9076,-89.59207,30
+Electrify-America US-Schaumburg IL E Golf Rd,42.0524,-88.0445,32
+Electrify-America US-Schofield WI Schofield Avenue,44.9076,-89.59207,32
 Electrify-America US-Scipio UT Frontage Road,39.25552,-112.11646
-Electrify-America US-Scottsdale AZ N Hayden Rd,33.67042,-111.90397,30
-Electrify-America US-Scranton PA N 8th Ave,41.41466,-75.6707,30
+Electrify-America US-Scottsdale AZ N Hayden Rd,33.67042,-111.90397,32
+Electrify-America US-Scranton PA N 8th Ave,41.41466,-75.6707,32
 Electrify-America US-Seabrook NH Lafayette Rd,42.89365,-70.86579
-Electrify-America US-Seal Beach CA Pacific Coast Hwy,33.74483,-118.0996,30
-Electrify-America US-Seal Beach CA Seal Beach Blvd,33.78155,-118.07304,30
-Electrify-America US-Seattle WA E Madison St,47.61388,-122.31477,30
-Electrify-America US-Seattle WA Lake City Way NE,47.72305,-122.29212,30
-Electrify-America US-Seattle WA NE 45th St,47.6615,-122.2964,30
-Electrify-America US-Seattle WA NE Northgate Way,47.70846,-122.3249,30
-Electrify-America US-Seattle WA NW 45th Street,47.6594,-122.36947,30
-Electrify-America US-Seattle WA Rainier Ave S,47.5229,-122.27066,30
-Electrify-America US-Seattle WA S Bailey St,47.54795,-122.31837,30
-Electrify-America US-Seattle WA W Mercer St,47.62482,-122.3583,30
+Electrify-America US-Seal Beach CA Pacific Coast Hwy,33.74483,-118.0996,32
+Electrify-America US-Seal Beach CA Seal Beach Blvd,33.78155,-118.07304,32
+Electrify-America US-Seattle WA E Madison St,47.61388,-122.31477,32
+Electrify-America US-Seattle WA Lake City Way NE,47.72305,-122.29212,32
+Electrify-America US-Seattle WA NE 45th St,47.6615,-122.2964,32
+Electrify-America US-Seattle WA NE Northgate Way,47.70846,-122.3249,32
+Electrify-America US-Seattle WA NW 45th Street,47.6594,-122.36947,32
+Electrify-America US-Seattle WA Rainier Ave S,47.5229,-122.27066,32
+Electrify-America US-Seattle WA S Bailey St,47.54795,-122.31837,32
+Electrify-America US-Seattle WA W Mercer St,47.62482,-122.3583,32
 Electrify-America US-Secaucus NJ Park Plaza,40.79187,-74.04196
-Electrify-America US-Sedona AZ Posse Grounds Rd,34.8704,-111.7854,30
-Electrify-America US-Seguin TX N State Highway 46,29.5816,-97.99286,30
-Electrify-America US-Selma CA E. Front Street,36.56817,-119.61246,30
-Electrify-America US-Selma CA Floral Avenue,36.57693,-119.63377,30
-Electrify-America US-Sewickley PA Mt Nebo Rd,40.55375,-80.11464,30
-Electrify-America US-Sheffield OH Detroit Rd,41.4269,-82.07973,30
-Electrify-America US-Sherman Oaks CA Ventura Blvd,34.14994,-118.43972,30
-Electrify-America US-Sherwood OR Sw Langer Farms Pkwy,45.36525,-122.8344,30
-Electrify-America US-Shoreline WA Aurora Ave N,47.76093,-122.34695,30
-Electrify-America US-Short Hills NJ Morris Turnpike,40.7381,-74.3638,30
-Electrify-America US-Show Low AZ N. 9th Street,34.25067,-110.03248,30
-Electrify-America US-Sicklerville NJ Cross Keys Rd,39.74633,-74.9946,30
-Electrify-America US-Silver Spring MD Veirs Mill Rd,39.0381,-77.05433,30
-Electrify-America US-Sioux City IA War Eagle Drive,42.494,-96.46192,30
-Electrify-America US-Sioux Falls SD N Granite Ln,43.60706,-96.76754,30
-Electrify-America US-Skaneatles NY Jordan Street,42.94785,-76.428,30
-Electrify-America US-Skokie IL Old Orchard Shopping Center,42.06173,-87.74697,30
-Electrify-America US-Smelterville ID Commerce Dr.,47.54414,-116.1854,30
-Electrify-America US-Smithfield NC Outlet Center Drive,35.50817,-78.31505,30
-Electrify-America US-Smyrna GA S Cobb Dr SE,33.8757,-84.5326,30
-Electrify-America US-Soledad CA Dela Rosa Sr St,36.415,-121.32015,30
-Electrify-America US-Solvang CA Old Mission Drive,34.5982,-120.13038,30
-Electrify-America US-Somerdale NJ Coopertowne Blvd,39.8541,-75.02287,30
-Electrify-America US-Somerville MA Canal Street,42.39426,-71.07787,30
-Electrify-America US-Sonoma CA W Napa St,38.29122,-122.4587,30
-Electrify-America US-South Gate CA Firestone Blvd.,33.95418,-118.18774,30
-Electrify-America US-South Lake Tahoe CA Lake Tahoe Blvd,38.94505,-119.9698,30
-Electrify-America US-South Pasadena CA El Centro St,34.11513,-118.1513,30
-Electrify-America US-Southold NY Main Rd,41.066,-72.42762,30
-Electrify-America US-Southwest Ranches FL Sheridan Street,26.0302,-80.35845,30
+Electrify-America US-Sedona AZ Posse Grounds Rd,34.8704,-111.7854,32
+Electrify-America US-Seguin TX N State Highway 46,29.5816,-97.99286,32
+Electrify-America US-Selma CA E. Front Street,36.56817,-119.61246,32
+Electrify-America US-Selma CA Floral Avenue,36.57693,-119.63377,32
+Electrify-America US-Sewickley PA Mt Nebo Rd,40.55375,-80.11464,32
+Electrify-America US-Sheffield OH Detroit Rd,41.4269,-82.07973,32
+Electrify-America US-Sherman Oaks CA Ventura Blvd,34.14994,-118.43972,32
+Electrify-America US-Sherwood OR Sw Langer Farms Pkwy,45.36525,-122.8344,32
+Electrify-America US-Shoreline WA Aurora Ave N,47.76093,-122.34695,32
+Electrify-America US-Short Hills NJ Morris Turnpike,40.7381,-74.3638,32
+Electrify-America US-Show Low AZ N. 9th Street,34.25067,-110.03248,32
+Electrify-America US-Sicklerville NJ Cross Keys Rd,39.74633,-74.9946,32
+Electrify-America US-Silver Spring MD Veirs Mill Rd,39.0381,-77.05433,32
+Electrify-America US-Sioux City IA War Eagle Drive,42.494,-96.46192,32
+Electrify-America US-Sioux Falls SD N Granite Ln,43.60706,-96.76754,32
+Electrify-America US-Skaneatles NY Jordan Street,42.94785,-76.428,32
+Electrify-America US-Skokie IL Old Orchard Shopping Center,42.06173,-87.74697,32
+Electrify-America US-Smelterville ID Commerce Dr.,47.54414,-116.1854,32
+Electrify-America US-Smithfield NC Outlet Center Drive,35.50817,-78.31505,32
+Electrify-America US-Smyrna GA S Cobb Dr SE,33.8757,-84.5326,32
+Electrify-America US-Soledad CA Dela Rosa Sr St,36.415,-121.32015,32
+Electrify-America US-Solvang CA Old Mission Drive,34.5982,-120.13038,32
+Electrify-America US-Somerdale NJ Coopertowne Blvd,39.8541,-75.02287,32
+Electrify-America US-Somerville MA Canal Street,42.39426,-71.07787,32
+Electrify-America US-Sonoma CA W Napa St,38.29122,-122.4587,32
+Electrify-America US-South Gate CA Firestone Blvd.,33.95418,-118.18774,32
+Electrify-America US-South Lake Tahoe CA Lake Tahoe Blvd,38.94505,-119.9698,32
+Electrify-America US-South Pasadena CA El Centro St,34.11513,-118.1513,32
+Electrify-America US-Southold NY Main Rd,41.066,-72.42762,32
+Electrify-America US-Southwest Ranches FL Sheridan Street,26.0302,-80.35845,32
 Electrify-America US-Spanish Fork UT N Cyn Crk Pkwy,40.12416,-111.64038
-Electrify-America US-Sparks NV E. Lincoln Way,39.53492,-119.71844,30
-Electrify-America US-Spencerport NY West Ave.,43.19102,-77.8022,30
-Electrify-America US-Spokane Valley WA E Broadway Ave,47.66565,-117.19014,30
-Electrify-America US-Spokane WA S Thor Street,47.65198,-117.36062,30
-Electrify-America US-Spring TX Sawdust Rd,30.1249,-95.4577,30
-Electrify-America US-Springfield IL Lejune Dr,39.74575,-89.64086,30
-Electrify-America US-Springfield MO E Primrose St,37.1509,-93.26386,30
-Electrify-America US-Springfield OR Gateway St,44.07104,-123.04522,30
-Electrify-America US-Springfield VA Springfield Mall,38.77602,-77.172,30
-Electrify-America US-St Louis Park MN W 16th St,44.9672,-93.3519,30
-Electrify-America US-St Peters MO Mid Rivers Mall,38.79804,-90.61597,30
-Electrify-America US-St Petersburg FL 22nd Ave N,27.79207,-82.73335,30
-Electrify-America US-St. Charles MO Veterans Memorial Parkway,38.78358,-90.52782,30
+Electrify-America US-Sparks NV E. Lincoln Way,39.53492,-119.71844,32
+Electrify-America US-Spencerport NY West Ave.,43.19102,-77.8022,32
+Electrify-America US-Spokane Valley WA E Broadway Ave,47.66565,-117.19014,32
+Electrify-America US-Spokane WA S Thor Street,47.65198,-117.36062,32
+Electrify-America US-Spring TX Sawdust Rd,30.1249,-95.4577,32
+Electrify-America US-Springfield IL Lejune Dr,39.74575,-89.64086,32
+Electrify-America US-Springfield MO E Primrose St,37.1509,-93.26386,32
+Electrify-America US-Springfield OR Gateway St,44.07104,-123.04522,32
+Electrify-America US-Springfield VA Springfield Mall,38.77602,-77.172,32
+Electrify-America US-St Louis Park MN W 16th St,44.9672,-93.3519,32
+Electrify-America US-St Peters MO Mid Rivers Mall,38.79804,-90.61597,32
+Electrify-America US-St Petersburg FL 22nd Ave N,27.79207,-82.73335,32
+Electrify-America US-St. Charles MO Veterans Memorial Parkway,38.78358,-90.52782,32
 Electrify-America US-St. Louis MO IKEA Way,38.63326,-90.2434
-Electrify-America US-St. Louis MO Olive Blvd,38.6764,-90.46235,30
-Electrify-America US-Stafford TX West Airport Blvd.,29.64283,-95.57278,30
-Electrify-America US-Stafford VA Garrisonville Rd,38.47234,-77.41656,30
-Electrify-America US-Stamford CT Summer St,41.0691,-73.54655,30
-Electrify-America US-State College PA Valley Vista Dr,40.81078,-77.92268,30
-Electrify-America US-Statesville NC Crossroads Dr,35.8101,-80.8733,30
-Electrify-America US-Staunton VA Richmond Ave C,38.13504,-79.04716,30
-Electrify-America US-Stephens City VA Fairfax Street,39.08198,-78.21676,30
-Electrify-America US-Sterling VA Dulles Plz,38.97793,-77.4259,30
-Electrify-America US-Stevenson Ranch CA Pico Canyon Rd,34.3838,-118.57355,30
-Electrify-America US-Stewartville MN 2nd Ave NE,43.87154,-92.48548,30
-Electrify-America US-Stockbridge GA Hudson Bridge Rd,33.5059,-84.23486,30
+Electrify-America US-St. Louis MO Olive Blvd,38.6764,-90.46235,32
+Electrify-America US-Stafford TX West Airport Blvd.,29.64283,-95.57278,32
+Electrify-America US-Stafford VA Garrisonville Rd,38.47234,-77.41656,32
+Electrify-America US-Stamford CT Summer St,41.0691,-73.54655,32
+Electrify-America US-State College PA Valley Vista Dr,40.81078,-77.92268,32
+Electrify-America US-Statesville NC Crossroads Dr,35.8101,-80.8733,32
+Electrify-America US-Staunton VA Richmond Ave C,38.13504,-79.04716,32
+Electrify-America US-Stephens City VA Fairfax Street,39.08198,-78.21676,32
+Electrify-America US-Sterling VA Dulles Plz,38.97793,-77.4259,32
+Electrify-America US-Stevenson Ranch CA Pico Canyon Rd,34.3838,-118.57355,32
+Electrify-America US-Stewartville MN 2nd Ave NE,43.87154,-92.48548,32
+Electrify-America US-Stockbridge GA Hudson Bridge Rd,33.5059,-84.23486,32
 Electrify-America US-Stockton CA Trinity Pkwy,38.05094,-121.3758
-Electrify-America US-Stockton CA West Lane,38.01914,-121.29534,30
-Electrify-America US-Stoneham MA Main Street,42.49453,-71.10252,30
-Electrify-America US-Stony Point NY RT 210,41.23062,-73.99935,30
-Electrify-America US-Stratford CT Barnum Ave Cutoff,41.19802,-73.12234,30
-Electrify-America US-Stuart FL S Kanner Hwy,27.1646,-80.2479,30
-Electrify-America US-Suisun City CA Walters Rd,38.24227,-121.98853,30
-Electrify-America US-Sullivan MO Park Ridge Rd,38.2222,-91.1552,30
-Electrify-America US-Sulphur LA N Cities Service Hwy,30.23358,-93.32685,30
-Electrify-America US-Sunnyside NY Queens Blvd,40.74345,-73.921,30
+Electrify-America US-Stockton CA West Lane,38.01914,-121.29534,32
+Electrify-America US-Stoneham MA Main Street,42.49453,-71.10252,32
+Electrify-America US-Stony Point NY RT 210,41.23062,-73.99935,32
+Electrify-America US-Stratford CT Barnum Ave Cutoff,41.19802,-73.12234,32
+Electrify-America US-Stuart FL S Kanner Hwy,27.1646,-80.2479,32
+Electrify-America US-Suisun City CA Walters Rd,38.24227,-121.98853,32
+Electrify-America US-Sullivan MO Park Ridge Rd,38.2222,-91.1552,32
+Electrify-America US-Sulphur LA N Cities Service Hwy,30.23358,-93.32685,32
+Electrify-America US-Sunnyside NY Queens Blvd,40.74345,-73.921,32
 Electrify-America US-Sunnyvale CA Lawrence Expy,37.3838,-121.99527
-Electrify-America US-Sunnyvale CA Moffett Park Dr,37.40684,-122.01636,30
-Electrify-America US-Superior CO Marshall Rd,39.95662,-105.17413,30
-Electrify-America US-Sutherlin OR W Central Ave,43.3868,-123.33938,30
-Electrify-America US-Suwanee GA Peachtree Pkwy,34.07,-84.16912,30
+Electrify-America US-Sunnyvale CA Moffett Park Dr,37.40684,-122.01636,32
+Electrify-America US-Superior CO Marshall Rd,39.95662,-105.17413,32
+Electrify-America US-Sutherlin OR W Central Ave,43.3868,-123.33938,32
+Electrify-America US-Suwanee GA Peachtree Pkwy,34.07,-84.16912,32
 Electrify-America US-Sweetwater TX NE Georgia Ave,32.45292,-100.394
-Electrify-America US-Syracuse NY 7th N St,43.09225,-76.16967,30
-Electrify-America US-Syracuse NY E Brighton Ave,43.01672,-76.13654,30
-Electrify-America US-Syracuse NY Erie Blvd,43.04606,-76.06693,30
-Electrify-America US-Tacoma WA S Union Ave.,47.23947,-122.48025,30
-Electrify-America US-Tallahassee FL Village Square Boulevard,30.51117,-84.24832,30
-Electrify-America US-Tampa FL Highwoods Preserve Parkway,28.13087,-82.3663,30
-Electrify-America US-Tampa FL N 22nd St,27.95355,-82.4337,30
-Electrify-America US-Tampa FL N Westshore Blvd,27.9623,-82.52146,30
-Electrify-America US-Tampa FL Temple Terrace Hwy,28.03205,-82.35538,30
-Electrify-America US-Temecula CA Madison Ave,33.52404,-117.16628,30
-Electrify-America US-Tempe AZ S. Arizona Mills Circle,33.37958,-111.9666,30
-Electrify-America US-Terre Haute IN State Rd 46,39.43795,-87.33582,30
-Electrify-America US-Tewksbury MA Main St,42.62363,-71.2673,30
-Electrify-America US-Thornton CO E 104th Ave,39.88452,-104.94438,30
-Electrify-America US-Thornton CO Grant St,39.87568,-104.98436,30
-Electrify-America US-Thornton CO Grant St,39.9458,-104.98402,30
-Electrify-America US-Thousand Oaks CA W Thousand Oaks Blvd,34.178,-118.877,30
-Electrify-America US-Tigard OR SW Dartmouth St.,45.43267,-122.75368,30
-Electrify-America US-Tinton Falls NJ Premium Outlets Blvd,40.22734,-74.09433,30
-Electrify-America US-Tomah WI W McCoy Blvd,44.01925,-90.50856,30
-Electrify-America US-Topeka KS SW Wanamaker Rd,39.03872,-95.76304,30
-Electrify-America US-Torrance CA Rolling Hills Rd,33.79022,-118.34122,30
-Electrify-America US-Torrance CA W Carson St.,33.83162,-118.3476,30
-Electrify-America US-Towson MD Southwick Dr,39.40594,-76.58172,30
-Electrify-America US-Tracy CA W Grant Line Rd,37.75304,-121.47246,30
-Electrify-America US-Trinidad CO Toupal Drive,37.1377,-104.52232,30
-Electrify-America US-Troy MI John R Rd,42.5345,-83.10508,30
-Electrify-America US-Truckee CA Deerfield Drive.,39.3196,-120.20852,30
-Electrify-America US-Trumbull CT Main Street,41.22895,-73.22394,30
-Electrify-America US-Tucker GA Lavista Rd,33.84567,-84.24504,30
-Electrify-America US-Tucson AZ W. Marana Center Blvd,32.3741,-111.1001,30
-Electrify-America US-Tucumcari NM South Mountain Rd,35.15833,-103.70173,30
-Electrify-America US-Tukwila WA Strander Blvd.,47.4557,-122.25738,30
-Electrify-America US-Tulalip WA Quil Ceda Blvd.,48.09546,-122.1869,30
-Electrify-America US-Tulare CA E. Prosperity Ave.,36.22745,-119.3292,30
-Electrify-America US-Tully NY Route 281,42.74797,-76.13435,30
-Electrify-America US-Turlock CA Fulkerth Rd,37.50834,-120.87274,30
-Electrify-America US-Tyrone PA Logan Ave,40.67624,-78.23657,30
-Electrify-America US-Union City CA Dyer Street,37.60423,-122.0686,30
-Electrify-America US-Union NJ Morris Ave,40.69536,-74.2665,30
-Electrify-America US-Upland CA W Foothill Blvd,34.10835,-117.661,30
-Electrify-America US-Upper Darby PA West Chester Pike,39.9657,-75.28085,30
-Electrify-America US-Vacaville CA Nut Tree Rd,38.3673,-121.95685,30
-Electrify-America US-Vacaville CA Quality Dr,38.38874,-121.938,30
-Electrify-America US-Valdosta GA Norman Dr.,30.8264,-83.31805,30
-Electrify-America US-Valencia CA Valencia Blvd,34.41362,-118.55725,30
-Electrify-America US-Valley Stream NY Green Acres Mall,40.662,-73.72316,30
-Electrify-America US-Van Horn TX E Broadway,31.04014,-104.82397,30
-Electrify-America US-Van Nuys CA Raymer Street,34.21338,-118.46044,30
-Electrify-America US-Vance AL Mercedes Dr,33.19015,-87.25145,30
-Electrify-America US-Vancouver WA NE HIGHWAY 99,45.6874,-122.6609,30
-Electrify-America US-Vancouver WA NE Vancouver Plaza Dr,45.64994,-122.59332,30
-Electrify-America US-Vancouver WA SE 192nd Ave.,45.61776,-122.47814,30
-Electrify-America US-Ventura CA E Main St,34.2693,-119.2498,30
-Electrify-America US-Ventura CA Telephone Rd,34.26524,-119.2107,30
-Electrify-America US-Vernal UT W and 25 S,40.45497,-109.53005,30
-Electrify-America US-Victor NY Commerce Dr,43.01855,-77.4383,30
-Electrify-America US-Victorville CA Mojave Dr,34.52898,-117.3308,30
-Electrify-America US-Vidor TX North Main Street,30.14292,-94.01403,30
-Electrify-America US-Vienna VA B Cornerside Blvd.,38.93018,-77.24553,30
-Electrify-America US-Villa Park IL South Route 83,41.87287,-87.96243,30
-Electrify-America US-Vinita OK S. 7th St.,36.63134,-95.14162,30
-Electrify-America US-Visalia CA W Riggin Ave,36.3569,-119.3647,30
-Electrify-America US-Vista CA Business Park Dr.,33.1367,-117.22793,30
-Electrify-America US-Vista CA E Vista Way,33.21948,-117.22498,30
-Electrify-America US-Vista CA Hacienda Dr,33.18395,-117.28463,30
-Electrify-America US-Vista CA Shadowridge Drive,33.16662,-117.2219,30
-Electrify-America US-Wagon Mound NM Old Highway 85,36.01036,-104.70736,30
-Electrify-America US-Wake Forest NC S. Main St.,35.95154,-78.53398,30
-Electrify-America US-Wall SD South Blvd,43.98713,-102.23848,30
-Electrify-America US-Walnut Creek CA Broadway Plaza,37.8966,-122.05708,30
-Electrify-America US-Walnut Creek CA Tice Valley Blvd,37.87853,-122.0731,30
-Electrify-America US-Walterboro SC Bells Highway,32.9332,-80.68932,30
-Electrify-America US-Washington DC Georgia Ave NW,38.96148,-77.0268,30
-Electrify-America US-Washington DC M St NW,38.905,-77.06406,30
-Electrify-America US-Washington UT W. Telegraph St.,37.12714,-113.51964,30
-Electrify-America US-Waterford CT Hartford Turnpike,41.38034,-72.15115,30
+Electrify-America US-Syracuse NY 7th N St,43.09225,-76.16967,32
+Electrify-America US-Syracuse NY E Brighton Ave,43.01672,-76.13654,32
+Electrify-America US-Syracuse NY Erie Blvd,43.04606,-76.06693,32
+Electrify-America US-Tacoma WA S Union Ave.,47.23947,-122.48025,32
+Electrify-America US-Tallahassee FL Village Square Boulevard,30.51117,-84.24832,32
+Electrify-America US-Tampa FL Highwoods Preserve Parkway,28.13087,-82.3663,32
+Electrify-America US-Tampa FL N 22nd St,27.95355,-82.4337,32
+Electrify-America US-Tampa FL N Westshore Blvd,27.9623,-82.52146,32
+Electrify-America US-Tampa FL Temple Terrace Hwy,28.03205,-82.35538,32
+Electrify-America US-Temecula CA Madison Ave,33.52404,-117.16628,32
+Electrify-America US-Tempe AZ S. Arizona Mills Circle,33.37958,-111.9666,32
+Electrify-America US-Terre Haute IN State Rd 46,39.43795,-87.33582,32
+Electrify-America US-Tewksbury MA Main St,42.62363,-71.2673,32
+Electrify-America US-Thornton CO E 104th Ave,39.88452,-104.94438,32
+Electrify-America US-Thornton CO Grant St,39.87568,-104.98436,32
+Electrify-America US-Thornton CO Grant St,39.9458,-104.98402,32
+Electrify-America US-Thousand Oaks CA W Thousand Oaks Blvd,34.178,-118.877,32
+Electrify-America US-Tigard OR SW Dartmouth St.,45.43267,-122.75368,32
+Electrify-America US-Tinton Falls NJ Premium Outlets Blvd,40.22734,-74.09433,32
+Electrify-America US-Tomah WI W McCoy Blvd,44.01925,-90.50856,32
+Electrify-America US-Topeka KS SW Wanamaker Rd,39.03872,-95.76304,32
+Electrify-America US-Torrance CA Rolling Hills Rd,33.79022,-118.34122,32
+Electrify-America US-Torrance CA W Carson St.,33.83162,-118.3476,32
+Electrify-America US-Towson MD Southwick Dr,39.40594,-76.58172,32
+Electrify-America US-Tracy CA W Grant Line Rd,37.75304,-121.47246,32
+Electrify-America US-Trinidad CO Toupal Drive,37.1377,-104.52232,32
+Electrify-America US-Troy MI John R Rd,42.5345,-83.10508,32
+Electrify-America US-Truckee CA Deerfield Drive.,39.3196,-120.20852,32
+Electrify-America US-Trumbull CT Main Street,41.22895,-73.22394,32
+Electrify-America US-Tucker GA Lavista Rd,33.84567,-84.24504,32
+Electrify-America US-Tucson AZ W. Marana Center Blvd,32.3741,-111.1001,32
+Electrify-America US-Tucumcari NM South Mountain Rd,35.15833,-103.70173,32
+Electrify-America US-Tukwila WA Strander Blvd.,47.4557,-122.25738,32
+Electrify-America US-Tulalip WA Quil Ceda Blvd.,48.09546,-122.1869,32
+Electrify-America US-Tulare CA E. Prosperity Ave.,36.22745,-119.3292,32
+Electrify-America US-Tully NY Route 281,42.74797,-76.13435,32
+Electrify-America US-Turlock CA Fulkerth Rd,37.50834,-120.87274,32
+Electrify-America US-Tyrone PA Logan Ave,40.67624,-78.23657,32
+Electrify-America US-Union City CA Dyer Street,37.60423,-122.0686,32
+Electrify-America US-Union NJ Morris Ave,40.69536,-74.2665,32
+Electrify-America US-Upland CA W Foothill Blvd,34.10835,-117.661,32
+Electrify-America US-Upper Darby PA West Chester Pike,39.9657,-75.28085,32
+Electrify-America US-Vacaville CA Nut Tree Rd,38.3673,-121.95685,32
+Electrify-America US-Vacaville CA Quality Dr,38.38874,-121.938,32
+Electrify-America US-Valdosta GA Norman Dr.,30.8264,-83.31805,32
+Electrify-America US-Valencia CA Valencia Blvd,34.41362,-118.55725,32
+Electrify-America US-Valley Stream NY Green Acres Mall,40.662,-73.72316,32
+Electrify-America US-Van Horn TX E Broadway,31.04014,-104.82397,32
+Electrify-America US-Van Nuys CA Raymer Street,34.21338,-118.46044,32
+Electrify-America US-Vance AL Mercedes Dr,33.19015,-87.25145,32
+Electrify-America US-Vancouver WA NE HIGHWAY 99,45.6874,-122.6609,32
+Electrify-America US-Vancouver WA NE Vancouver Plaza Dr,45.64994,-122.59332,32
+Electrify-America US-Vancouver WA SE 192nd Ave.,45.61776,-122.47814,32
+Electrify-America US-Ventura CA E Main St,34.2693,-119.2498,32
+Electrify-America US-Ventura CA Telephone Rd,34.26524,-119.2107,32
+Electrify-America US-Vernal UT W and 25 S,40.45497,-109.53005,32
+Electrify-America US-Victor NY Commerce Dr,43.01855,-77.4383,32
+Electrify-America US-Victorville CA Mojave Dr,34.52898,-117.3308,32
+Electrify-America US-Vidor TX North Main Street,30.14292,-94.01403,32
+Electrify-America US-Vienna VA B Cornerside Blvd.,38.93018,-77.24553,32
+Electrify-America US-Villa Park IL South Route 83,41.87287,-87.96243,32
+Electrify-America US-Vinita OK S. 7th St.,36.63134,-95.14162,32
+Electrify-America US-Visalia CA W Riggin Ave,36.3569,-119.3647,32
+Electrify-America US-Vista CA Business Park Dr.,33.1367,-117.22793,32
+Electrify-America US-Vista CA E Vista Way,33.21948,-117.22498,32
+Electrify-America US-Vista CA Hacienda Dr,33.18395,-117.28463,32
+Electrify-America US-Vista CA Shadowridge Drive,33.16662,-117.2219,32
+Electrify-America US-Wagon Mound NM Old Highway 85,36.01036,-104.70736,32
+Electrify-America US-Wake Forest NC S. Main St.,35.95154,-78.53398,32
+Electrify-America US-Wall SD South Blvd,43.98713,-102.23848,32
+Electrify-America US-Walnut Creek CA Broadway Plaza,37.8966,-122.05708,32
+Electrify-America US-Walnut Creek CA Tice Valley Blvd,37.87853,-122.0731,32
+Electrify-America US-Walterboro SC Bells Highway,32.9332,-80.68932,32
+Electrify-America US-Washington DC Georgia Ave NW,38.96148,-77.0268,32
+Electrify-America US-Washington DC M St NW,38.905,-77.06406,32
+Electrify-America US-Washington UT W. Telegraph St.,37.12714,-113.51964,32
+Electrify-America US-Waterford CT Hartford Turnpike,41.38034,-72.15115,32
 Electrify-America US-Waterloo NY NY-318,42.95572,-76.92106
-Electrify-America US-Watertown SD 9th Ave SE,44.8894,-97.08295,30
-Electrify-America US-Watkins Glen NY S Clute Park Drive,42.38546,-76.85774,30
-Electrify-America US-Watsonville CA Main St,36.91587,-121.77655,30
+Electrify-America US-Watertown SD 9th Ave SE,44.8894,-97.08295,32
+Electrify-America US-Watkins Glen NY S Clute Park Drive,42.38546,-76.85774,32
+Electrify-America US-Watsonville CA Main St,36.91587,-121.77655,32
 Electrify-America US-Waukee IA Grand Prairie Pkwy,41.57401,-93.85266
 Electrify-America US-Wayne NJ Valley Rd,40.93158,-74.22765
-Electrify-America US-Weatherford OK E Eagle Rd,35.52334,-98.68943,30
-Electrify-America US-West Allis WI S 108th Street,42.9958,-88.04572,30
-Electrify-America US-West Chester Township OH Ikea Way,39.3156,-84.4325,30
-Electrify-America US-West Fargo ND 13th Ave E,46.8631,-96.87987,30
-Electrify-America US-West Jordan UT S Redwood Rd,40.606,-111.94085,30
-Electrify-America US-West Lebanon NH Plainfield Rd,43.62543,-72.32365,30
-Electrify-America US-West Milwaukee WI W Greenfield Ave,43.01742,-87.9653,30
-Electrify-America US-West Sacramento CA Ikea Court,38.589,-121.55108,30
-Electrify-America US-West Unity OH Co Rd M-50,41.60305,-84.4086,30
-Electrify-America US-West Unity OH CO RD M-50,41.606,-84.40672,30
-Electrify-America US-West Valley City UT Constitution BLVD,40.69378,-111.95967,30
-Electrify-America US-West Wendover NV West Wendover Blvd,40.73943,-114.07745,30
-Electrify-America US-Westfield NY NY-5,42.3408,-79.59603,30
-Electrify-America US-Westlake Village CA Agoura Rd,34.1523,-118.8263,30
-Electrify-America US-Westminster CO North Sheridan Blvd,39.86435,-105.05244,30
-Electrify-America US-Westminster CO W. 136th Ave,39.94117,-104.99198,30
-Electrify-America US-Westworth Village TX Westworth Blvd,32.7543,-97.4307,30
-Electrify-America US-White Plains NY Chester Ave,41.0274,-73.76555,30
-Electrify-America US-Wichita KS E Kellogg Dr,37.6843,-97.24516,30
-Electrify-America US-Wildomar CA Hidden Springs Rd,33.5961,-117.2478,30
-Electrify-America US-Williams AZ W Cataract Lake Rd,35.25147,-112.1971,30
+Electrify-America US-Weatherford OK E Eagle Rd,35.52334,-98.68943,32
+Electrify-America US-West Allis WI S 108th Street,42.9958,-88.04572,32
+Electrify-America US-West Chester Township OH Ikea Way,39.3156,-84.4325,32
+Electrify-America US-West Fargo ND 13th Ave E,46.8631,-96.87987,32
+Electrify-America US-West Jordan UT S Redwood Rd,40.606,-111.94085,32
+Electrify-America US-West Lebanon NH Plainfield Rd,43.62543,-72.32365,32
+Electrify-America US-West Milwaukee WI W Greenfield Ave,43.01742,-87.9653,32
+Electrify-America US-West Sacramento CA Ikea Court,38.589,-121.55108,32
+Electrify-America US-West Unity OH Co Rd M-50,41.60305,-84.4086,32
+Electrify-America US-West Unity OH CO RD M-50,41.606,-84.40672,32
+Electrify-America US-West Valley City UT Constitution BLVD,40.69378,-111.95967,32
+Electrify-America US-West Wendover NV West Wendover Blvd,40.73943,-114.07745,32
+Electrify-America US-Westfield NY NY-5,42.3408,-79.59603,32
+Electrify-America US-Westlake Village CA Agoura Rd,34.1523,-118.8263,32
+Electrify-America US-Westminster CO North Sheridan Blvd,39.86435,-105.05244,32
+Electrify-America US-Westminster CO W. 136th Ave,39.94117,-104.99198,32
+Electrify-America US-Westworth Village TX Westworth Blvd,32.7543,-97.4307,32
+Electrify-America US-White Plains NY Chester Ave,41.0274,-73.76555,32
+Electrify-America US-Wichita KS E Kellogg Dr,37.6843,-97.24516,32
+Electrify-America US-Wildomar CA Hidden Springs Rd,33.5961,-117.2478,32
+Electrify-America US-Williams AZ W Cataract Lake Rd,35.25147,-112.1971,32
 Electrify-America US-Williamsburg IA W Evans St,41.69061,-92.00898
-Electrify-America US-Williamsburg KY KY-92,36.72056,-84.17,30
-Electrify-America US-Williamsburg VA Richmond Rd,37.3212,-76.73665,30
-Electrify-America US-Williamsport PA Maynard St,41.23487,-77.01836,30
-Electrify-America US-Willits CA S. Main Street,39.40408,-123.3501,30
-Electrify-America US-Willow Grove PA W. Moreland Dr,40.1416,-75.12297,30
-Electrify-America US-Willows CA Airport Rd,39.5255,-122.2186,30
-Electrify-America US-Wilmington NC Conservation Way,34.2444,-77.83103,30
-Electrify-America US-Wilsonville OR SW Boones Ferry Rd,45.29992,-122.7721,30
-Electrify-America US-Windsor Mill MD Milford Mill Rd,39.35423,-76.75832,30
-Electrify-America US-Winnemucca NV Potato Rd,40.95467,-117.74686,30
-Electrify-America US-Winslow AZ Mikes Pike St.,35.04197,-110.70177,30
-Electrify-America US-Winston-Salem NC Hanes Mall Boulevard,36.0681,-80.32015,30
-Electrify-America US-Woodbridge VA Potomac Mills Cir,38.6449,-77.29896,30
-Electrify-America US-Woodburn OR N Arney Rd,45.15742,-122.8759,30
+Electrify-America US-Williamsburg KY KY-92,36.72056,-84.17,32
+Electrify-America US-Williamsburg VA Richmond Rd,37.3212,-76.73665,32
+Electrify-America US-Williamsport PA Maynard St,41.23487,-77.01836,32
+Electrify-America US-Willits CA S. Main Street,39.40408,-123.3501,32
+Electrify-America US-Willow Grove PA W. Moreland Dr,40.1416,-75.12297,32
+Electrify-America US-Willows CA Airport Rd,39.5255,-122.2186,32
+Electrify-America US-Wilmington NC Conservation Way,34.2444,-77.83103,32
+Electrify-America US-Wilsonville OR SW Boones Ferry Rd,45.29992,-122.7721,32
+Electrify-America US-Windsor Mill MD Milford Mill Rd,39.35423,-76.75832,32
+Electrify-America US-Winnemucca NV Potato Rd,40.95467,-117.74686,32
+Electrify-America US-Winslow AZ Mikes Pike St.,35.04197,-110.70177,32
+Electrify-America US-Winston-Salem NC Hanes Mall Boulevard,36.0681,-80.32015,32
+Electrify-America US-Woodbridge VA Potomac Mills Cir,38.6449,-77.29896,32
+Electrify-America US-Woodburn OR N Arney Rd,45.15742,-122.8759,32
 Electrify-America US-Woodbury MN Hudson Rd,44.9457,-92.8987
-Electrify-America US-Woodinville WA NE Woodinville Duvall Rd,47.75414,-122.15115,30
-Electrify-America US-Woodridge IL 63rd St,41.7715,-88.03804,30
-Electrify-America US-Woodstock GA Highway 92,34.08667,-84.4823,30
-Electrify-America US-Woodstock VA W. Reservoir Rd,38.86963,-78.52963,30
-Electrify-America US-Worthington MN Hwy 59 N,43.63996,-95.59456,30
-Electrify-America US-Wrentham MA Premium Outlets Blvd,42.03938,-71.3495,30
-Electrify-America US-Wytheville VA North Fourth Street,36.9595,-81.0951,30
-Electrify-America US-Yakima WA East Chestnut Ave.,46.6025,-120.4792,30
-Electrify-America US-Yardley PA Big Oak Rd,40.19885,-74.8639,30
-Electrify-America US-Yorba Linda CA Yorba Linda Blvd.,33.8778,-117.75102,30
-Electrify-America US-York PA Arsenal Rd,39.9832,-76.72715,30
-Electrify-America US-Ypsilanti MI Ellsworth Rd,42.22952,-83.64926,30
-Electrify-America US-Yreka CA Fort Jones Rd,41.69938,-122.64512,30
-Electrify-America US-Yuba City CA Butte House Rd,39.14638,-121.63456,30
-Electrify-America US-Yuma AZ S. Yuma Palms Parkway,32.70484,-114.60718,30
-Electrify-America US-Zion Crossroads VA Market Street,37.97972,-78.21062,30
+Electrify-America US-Woodinville WA NE Woodinville Duvall Rd,47.75414,-122.15115,32
+Electrify-America US-Woodridge IL 63rd St,41.7715,-88.03804,32
+Electrify-America US-Woodstock GA Highway 92,34.08667,-84.4823,32
+Electrify-America US-Woodstock VA W. Reservoir Rd,38.86963,-78.52963,32
+Electrify-America US-Worthington MN Hwy 59 N,43.63996,-95.59456,32
+Electrify-America US-Wrentham MA Premium Outlets Blvd,42.03938,-71.3495,32
+Electrify-America US-Wytheville VA North Fourth Street,36.9595,-81.0951,32
+Electrify-America US-Yakima WA East Chestnut Ave.,46.6025,-120.4792,32
+Electrify-America US-Yardley PA Big Oak Rd,40.19885,-74.8639,32
+Electrify-America US-Yorba Linda CA Yorba Linda Blvd.,33.8778,-117.75102,32
+Electrify-America US-York PA Arsenal Rd,39.9832,-76.72715,32
+Electrify-America US-Ypsilanti MI Ellsworth Rd,42.22952,-83.64926,32
+Electrify-America US-Yreka CA Fort Jones Rd,41.69938,-122.64512,32
+Electrify-America US-Yuba City CA Butte House Rd,39.14638,-121.63456,32
+Electrify-America US-Yuma AZ S. Yuma Palms Parkway,32.70484,-114.60718,32
+Electrify-America US-Zion Crossroads VA Market Street,37.97972,-78.21062,32
 
-Electrify-Canada CA-Abbotsford BC S Fraser Way,49.052,-122.32208,30
-Electrify-Canada CA-Amherst NS Albion Street South,45.80993,-64.20145,30
-Electrify-Canada CA-Barrie ON Mapleview Drive W,44.3332,-79.69172,30
-Electrify-Canada CA-Bedford NS Damascus Rd,44.75062,-63.6438,30
-Electrify-Canada CA-Brockville ON Parkedale Ave,44.6055,-75.69847,30
-Electrify-Canada CA-Burlington ON Fairview Street,43.3541,-79.7862,30
-Electrify-Canada CA-Calgary AB - 57Th Avenue Ne,51.107,-114.04206,30
-Electrify-Canada CA-Canmore AB Old Canmore Rd,51.08837,-115.34643,30
-Electrify-Canada CA-Cornwall ON 9th Street East,45.03008,-74.73192,30
-Electrify-Canada CA-Drummondville QC Boul st-Joseph,45.8906,-72.5127,30
-Electrify-Canada CA-Edmonton AB Current Dr NW,53.4356,-113.59868,30
-Electrify-Canada CA-Fredericton NB Riocan Ave,45.93,-66.65956,30
-Electrify-Canada CA-Golden BC Lafontaine Rd,51.3024,-116.9501,30
-Electrify-Canada CA-Grand Falls NB Chemin Madawaska,47.05685,-67.7512,30
-Electrify-Canada CA-Greenfield Park QC Taschereau Blvd,45.48216,-73.46335,30
-Electrify-Canada CA-Hamilton ON Queenston Road,43.2286,-79.77384,30
-Electrify-Canada CA-Hope BC Fort Street,49.3792,-121.44052,30
-Electrify-Canada CA-Kamloops BC Hillside Drive,50.65443,-120.37918,30
-Electrify-Canada CA-Kelowna BC Leckie Rd,49.88444,-119.42777,30
-Electrify-Canada CA-Kingston ON Princess St.,44.26005,-76.56913,30
-Electrify-Canada CA-Langley BC 64th Avenue,49.11914,-122.6625,30
-Electrify-Canada CA-Laval QC Blvd Le Corbusier,45.55943,-73.7264,30
-Electrify-Canada CA-London ON Wellington Road,42.93072,-81.22085,30
-Electrify-Canada CA-Merritt BC Forksdale Ave,50.1222,-120.7608,30
+Electrify-Canada CA-Abbotsford BC S Fraser Way,49.052,-122.32208,32
+Electrify-Canada CA-Amherst NS Albion Street South,45.80993,-64.20145,32
+Electrify-Canada CA-Barrie ON Mapleview Drive W,44.3332,-79.69172,32
+Electrify-Canada CA-Bedford NS Damascus Rd,44.75062,-63.6438,32
+Electrify-Canada CA-Brockville ON Parkedale Ave,44.6055,-75.69847,32
+Electrify-Canada CA-Burlington ON Fairview Street,43.3541,-79.7862,32
+Electrify-Canada CA-Calgary AB - 57Th Avenue Ne,51.107,-114.04206,32
+Electrify-Canada CA-Canmore AB Old Canmore Rd,51.08837,-115.34643,32
+Electrify-Canada CA-Cornwall ON 9th Street East,45.03008,-74.73192,32
+Electrify-Canada CA-Drummondville QC Boul st-Joseph,45.8906,-72.5127,32
+Electrify-Canada CA-Edmonton AB Current Dr NW,53.4356,-113.59868,32
+Electrify-Canada CA-Fredericton NB Riocan Ave,45.93,-66.65956,32
+Electrify-Canada CA-Golden BC Lafontaine Rd,51.3024,-116.9501,32
+Electrify-Canada CA-Grand Falls NB Chemin Madawaska,47.05685,-67.7512,32
+Electrify-Canada CA-Greenfield Park QC Taschereau Blvd,45.48216,-73.46335,32
+Electrify-Canada CA-Hamilton ON Queenston Road,43.2286,-79.77384,32
+Electrify-Canada CA-Hope BC Fort Street,49.3792,-121.44052,32
+Electrify-Canada CA-Kamloops BC Hillside Drive,50.65443,-120.37918,32
+Electrify-Canada CA-Kelowna BC Leckie Rd,49.88444,-119.42777,32
+Electrify-Canada CA-Kingston ON Princess St.,44.26005,-76.56913,32
+Electrify-Canada CA-Langley BC 64th Avenue,49.11914,-122.6625,32
+Electrify-Canada CA-Laval QC Blvd Le Corbusier,45.55943,-73.7264,32
+Electrify-Canada CA-London ON Wellington Road,42.93072,-81.22085,32
+Electrify-Canada CA-Merritt BC Forksdale Ave,50.1222,-120.7608,32
 Electrify-Canada CA-Mirabel QC Chemin Notre Dame,45.67124,-73.92006
-Electrify-Canada CA-Mont-Tremblant QC Rte 117,46.1178,-74.55672,30
-Electrify-Canada CA-Nanaimo BC Uplands Dr,49.22006,-124.03097,30
-Electrify-Canada CA-Oshawa ON Gibb St,43.8863,-78.87676,30
-Electrify-Canada CA-Osoyoos BC Main St,49.03477,-119.4759,30
-Electrify-Canada CA-Ottawa ON Carling Ave,45.37077,-75.77056,30
+Electrify-Canada CA-Mont-Tremblant QC Rte 117,46.1178,-74.55672,32
+Electrify-Canada CA-Nanaimo BC Uplands Dr,49.22006,-124.03097,32
+Electrify-Canada CA-Oshawa ON Gibb St,43.8863,-78.87676,32
+Electrify-Canada CA-Osoyoos BC Main St,49.03477,-119.4759,32
+Electrify-Canada CA-Ottawa ON Carling Ave,45.37077,-75.77056,32
 Electrify-Canada CA-Ottawa ON Coventry Rd,45.42069,-75.6517
-Electrify-Canada CA-Owen Sound ON 16th Street E,44.5746,-80.91503,30
-Electrify-Canada CA-Quebec QC Rue Armand-Viau,46.81605,-71.33393,30
-Electrify-Canada CA-Quebec QC Rue De La Concorde,46.72918,-71.27564,30
-Electrify-Canada CA-Red Deer AB 52nd Avenue,52.289,-113.8181,30
-Electrify-Canada CA-Regina SK Victoria Ave E,50.44498,-104.55214,30
-Electrify-Canada CA-Repentigny QC Boul. Brien,45.74513,-73.45596,30
-Electrify-Canada CA-Revelstoke BC Track St W,51.00458,-118.20075,30
-Electrify-Canada CA-Saint John NB Westmorland Rd,45.30526,-66.02212,30
-Electrify-Canada CA-Salmon Arm BC 1151 - 10th Avenue SW,50.69453,-119.2969,30
-Electrify-Canada CA-Sarnia ON Exmouthst,42.98525,-82.35662,30
-Electrify-Canada CA-Sault Ste Marie ON Bay Street,46.51187,-84.33645,30
-Electrify-Canada CA-Scarborough ON Sheppard Ave,43.79084,-79.26032,30
-Electrify-Canada CA-Sherbrooke QC Boulevard Josaphat-Rancourt,45.4186,-71.96646,30
-Electrify-Canada CA-Squamish BC Glenalder Place,49.73886,-123.134,30
-Electrify-Canada CA-St. Hyacinthe QC Rue Martineau,45.64332,-72.97767,30
-Electrify-Canada CA-Tilbury ON Mill St E,42.2646,-82.4257,30
-Electrify-Canada CA-Toronto ON Steeles Avenue W Halton Hills,43.57647,-79.82757,30
-Electrify-Canada CA-Trois-Rivieres QC Boul. Des Forges,46.35204,-72.58084,30
-Electrify-Canada CA-Vaughan ON Centre St,43.81007,-79.4595,30
-Electrify-Canada CA-W Lethbridge AB Highlands Blvd W,49.69453,-112.8952,30
-Electrify-Canada CA-Welland ON Primeway Drive,43.0153,-79.22866,30
-Electrify-Canada CA-Woodstock NB Connell St,46.16858,-67.59827,30
+Electrify-Canada CA-Owen Sound ON 16th Street E,44.5746,-80.91503,32
+Electrify-Canada CA-Quebec QC Rue Armand-Viau,46.81605,-71.33393,32
+Electrify-Canada CA-Quebec QC Rue De La Concorde,46.72918,-71.27564,32
+Electrify-Canada CA-Red Deer AB 52nd Avenue,52.289,-113.8181,32
+Electrify-Canada CA-Regina SK Victoria Ave E,50.44498,-104.55214,32
+Electrify-Canada CA-Repentigny QC Boul. Brien,45.74513,-73.45596,32
+Electrify-Canada CA-Revelstoke BC Track St W,51.00458,-118.20075,32
+Electrify-Canada CA-Saint John NB Westmorland Rd,45.30526,-66.02212,32
+Electrify-Canada CA-Salmon Arm BC 1151 - 10th Avenue SW,50.69453,-119.2969,32
+Electrify-Canada CA-Sarnia ON Exmouthst,42.98525,-82.35662,32
+Electrify-Canada CA-Sault Ste Marie ON Bay Street,46.51187,-84.33645,32
+Electrify-Canada CA-Scarborough ON Sheppard Ave,43.79084,-79.26032,32
+Electrify-Canada CA-Sherbrooke QC Boulevard Josaphat-Rancourt,45.4186,-71.96646,32
+Electrify-Canada CA-Squamish BC Glenalder Place,49.73886,-123.134,32
+Electrify-Canada CA-St. Hyacinthe QC Rue Martineau,45.64332,-72.97767,32
+Electrify-Canada CA-Tilbury ON Mill St E,42.2646,-82.4257,32
+Electrify-Canada CA-Toronto ON Steeles Avenue W Halton Hills,43.57647,-79.82757,32
+Electrify-Canada CA-Trois-Rivieres QC Boul. Des Forges,46.35204,-72.58084,32
+Electrify-Canada CA-Vaughan ON Centre St,43.81007,-79.4595,32
+Electrify-Canada CA-W Lethbridge AB Highlands Blvd W,49.69453,-112.8952,32
+Electrify-Canada CA-Welland ON Primeway Drive,43.0153,-79.22866,32
+Electrify-Canada CA-Woodstock NB Connell St,46.16858,-67.59827,32
 
 electrip BG-Dolni Dabnik Долни Дъбник Околовръстния път,43.3987,24.43386
 electrip BG-Kulata Кулата E79,41.38413,23.36178
@@ -21316,6 +21321,7 @@ Iberdrola ES-L’Alfàs del Pi Camí Vell d’Altea,38.57253,-0.07583
 Iberdrola ES-Monesterio Camino del Culebrin Monesterio,38.02804,-6.22031
 Iberdrola ES-Murcia Av. de los Pinos,37.99716,-1.1384
 Iberdrola ES-Murcia C. los Nietos,37.96913,-1.1276
+Iberdrola ES-Málaga Paseo de Reding,36.72074,-4.41008
 Iberdrola ES-Níjar Carretera Iryda-Almeria,36.92395,-2.14953
 Iberdrola ES-Níjar Cortijo Sta. Olalla,36.92703,-2.1452
 Iberdrola ES-Ondara Av. Costa Blanca,38.8182,0.02444
@@ -22726,6 +22732,7 @@ K-Lataus FI-Espoo Isonniitynkuja,60.16267,24.70714
 K-Lataus FI-Joensuu Linjatie,62.62878,29.70338
 K-Lataus FI-Kalajoki Merenojantie,64.2608,23.95013
 K-Lataus FI-Kauhajoki Savikyläntie,62.43417,22.17694
+K-Lataus FI-Keuruu Tervantie,62.26034,24.6944
 K-Lataus FI-Kotka Jumalniementie,60.50542,26.91291
 K-Lataus FI-Kotka Koulukatu,60.4606,26.94025
 K-Lataus FI-Kouvola Tervasharjunkatu,60.87586,26.65345
@@ -24530,6 +24537,7 @@ Lidl FI-Espoo Kukkaromäki,60.20847,24.63643
 Lidl FI-Espoo Kurjenkellontie,60.15892,24.70506
 Lidl FI-Heinola Kaivokatu,61.20482,26.03823,30
 Lidl FI-Helsinki Vanha talvitie,60.19205,24.97697
+Lidl FI-Joensuu Linjatie,62.62915,29.70558
 Lidl FI-Joensuu Repokalliontie,62.5902,29.81232
 Lidl FI-Jyväskylä Akkalankuja,62.2376,25.81652
 Lidl FI-Jyväskylä Saarijärventie,62.29005,25.71637
@@ -26903,6 +26911,7 @@ Plenitude IT-Falcade Piazzale dello Sport,46.35567,11.87032
 Plenitude IT-Formigine Via Giardini Nord,44.59819,10.8617
 Plenitude IT-Genova Via Piave,44.39352,8.95467
 Plenitude IT-Livorno Viale della Libertà,43.53249,10.319
+Plenitude IT-Lorenzago di Cadore Strada Statale 52 Carnica,46.4637,12.48223
 Plenitude IT-Lorenzago di Cadore Via Centa,46.4806,12.458
 Plenitude IT-Marciana Via Delle Ginestre,42.78535,10.24545
 Plenitude IT-Meran Piavestraße,46.66628,11.15812
@@ -26911,6 +26920,7 @@ Plenitude IT-Sadali Via Po,39.81252,9.27088
 Plenitude IT-San Miniato Via C. Pannocchia,43.68795,10.80601
 Plenitude IT-Sogliano al Rubicone Bivio Montepetra Bassa,43.93325,12.17774
 Plenitude IT-Tonadico Via Roma,46.18182,11.83158
+Plenitude IT-Tramonti di Sotto Piazza Santa Croce,46.28498,12.7954
 Plenitude IT-Vasto Via dei Conti Ricci,42.11727,14.70177
 Plenitude IT-Venezia Via Orlanda,45.47933,12.27087
 Plenitude IT-Villesse Località Maranuz,45.86488,13.4326
@@ -29256,6 +29266,7 @@ SW-Leipzig DE-Leipzig Bornaische Straße,51.29683,12.385
 SW-Leipzig DE-Leipzig Brühl,51.34351,12.37544
 SW-Leipzig DE-Leipzig Dortmunder Straße,51.36595,12.4019
 SW-Leipzig DE-Leipzig Friedrich-Ebert-Straße,51.33861,12.36226
+SW-Leipzig DE-Leipzig Georg-Herwegh-Straße,51.39438,12.3845
 SW-Leipzig DE-Leipzig Goldschmidtstraße,51.33517,12.38933
 SW-Leipzig DE-Leipzig Gustav-Kühn-Straße,51.3682,12.34077
 SW-Leipzig DE-Leipzig Handelsstraße,51.4007,12.40029
@@ -29905,7 +29916,7 @@ TEAG DE-Großbreitenbach Ilmenauer Straße,50.58365,10.99667
 TEAG DE-Grünberg Carl-Benz-Straße,50.6044,8.95843
 TEAG DE-Göttingen Salinenweg,51.535,9.90845
 TEAG DE-Haiger Hinterm Graben,50.74283,8.20716
-TEAG DE-Haiger Hohleichenrain,50.74169,8.22552
+TEAG DE-Haiger Hohleichenrain,50.7423,8.22516
 TEAG DE-Hann. Münden Wiershäuser Weg,51.41793,9.67054
 TEAG DE-Harztor Im Steinfeld,51.54238,10.76874
 TEAG DE-Harztor-Ilfeld Netzkater,51.60304,10.78543
