@@ -34,6 +34,7 @@ namespace UnitTestsTeslalogger
         {
             DBHelper.ExecuteSQLQuery("DELETE FROM chargingstate where carid = 0");
             DBHelper.ExecuteSQLQuery("DELETE FROM charging where carid = 0");
+            DBHelper.ExecuteSQLQuery("DELETE FROM pos where carid = 0 AND address LIKE 'UnitTest%'");
         }
 
         [TestMethod]
@@ -142,6 +143,131 @@ namespace UnitTestsTeslalogger
             Assert.AreEqual(7.0, dt3.Rows[1]["charge_energy_added"]);
             Assert.AreEqual(dt.AddMinutes(61), dt3.Rows[1]["StartDate"]); // Start Date from charging (not from pos!)
             Assert.AreEqual(dt.AddMinutes(100), dt3.Rows[1]["EndDate"]);
+        }
+
+        [TestMethod]
+        public void ChargingStateLocationIsSuC_SuperchargerAddress_NullBrandType_True()
+        {
+            // Fleet API users: fast_charger_brand/fast_charger_type are NULL -> address fallback (#1752)
+            Car c = new Car(0, "", "", 0, "", DateTime.Now, "", "", "", "", "", "", "", null, false);
+            int posID = InsertTestPos("UnitTest Supercharger-V4 DE-Offenbach");
+            int chargingStateID = InsertTestChargingState(posID, null, null);
+
+            Assert.IsTrue(c.dbHelper.ChargingStateLocationIsSuC(chargingStateID));
+        }
+
+        [TestMethod]
+        public void ChargingStateLocationIsSuC_SuperchargerAddress_EmptyBrandType_True()
+        {
+            // Fleet API users: fast_charger_brand/fast_charger_type are '' (empty string) -> address fallback (#1752)
+            Car c = new Car(0, "", "", 0, "", DateTime.Now, "", "", "", "", "", "", "", null, false);
+            int posID = InsertTestPos("UnitTest Supercharger-V4 DE-Offenbach");
+            int chargingStateID = InsertTestChargingState(posID, "", "");
+
+            Assert.IsTrue(c.dbHelper.ChargingStateLocationIsSuC(chargingStateID));
+        }
+
+        [TestMethod]
+        public void ChargingStateLocationIsSuC_SuperchargerAddress_Lowercase_True()
+        {
+            // address match is case-insensitive
+            Car c = new Car(0, "", "", 0, "", DateTime.Now, "", "", "", "", "", "", "", null, false);
+            int posID = InsertTestPos("UnitTest supercharger-v4 de-offenbach");
+            int chargingStateID = InsertTestChargingState(posID, null, null);
+
+            Assert.IsTrue(c.dbHelper.ChargingStateLocationIsSuC(chargingStateID));
+        }
+
+        [TestMethod]
+        public void ChargingStateLocationIsSuC_HomeAddress_NullBrandType_False()
+        {
+            // no Supercharger address and no brand/type -> false
+            Car c = new Car(0, "", "", 0, "", DateTime.Now, "", "", "", "", "", "", "", null, false);
+            int posID = InsertTestPos("UnitTest Home");
+            int chargingStateID = InsertTestChargingState(posID, null, null);
+
+            Assert.IsFalse(c.dbHelper.ChargingStateLocationIsSuC(chargingStateID));
+        }
+
+        [TestMethod]
+        public void ChargingStateLocationIsSuC_HomeAddress_TeslaTesla_True()
+        {
+            // old behavior: brand/type check does not depend on the address
+            Car c = new Car(0, "", "", 0, "", DateTime.Now, "", "", "", "", "", "", "", null, false);
+            int posID = InsertTestPos("UnitTest Home");
+            int chargingStateID = InsertTestChargingState(posID, "Tesla", "Tesla");
+
+            Assert.IsTrue(c.dbHelper.ChargingStateLocationIsSuC(chargingStateID));
+        }
+
+        [TestMethod]
+        public void ChargingStateLocationIsSuC_HomeAddress_TeslaCombo_True()
+        {
+            Car c = new Car(0, "", "", 0, "", DateTime.Now, "", "", "", "", "", "", "", null, false);
+            int posID = InsertTestPos("UnitTest Home");
+            int chargingStateID = InsertTestChargingState(posID, "Tesla", "Combo");
+
+            Assert.IsTrue(c.dbHelper.ChargingStateLocationIsSuC(chargingStateID));
+        }
+
+        [TestMethod]
+        public void ChargingStateLocationIsSuC_HomeAddress_TeslaCCS_False()
+        {
+            // old behavior: only Tesla/Combo are valid fast_charger_type values
+            Car c = new Car(0, "", "", 0, "", DateTime.Now, "", "", "", "", "", "", "", null, false);
+            int posID = InsertTestPos("UnitTest Home");
+            int chargingStateID = InsertTestChargingState(posID, "Tesla", "CCS");
+
+            Assert.IsFalse(c.dbHelper.ChargingStateLocationIsSuC(chargingStateID));
+        }
+
+        [TestMethod]
+        public void ChargingStateLocationIsSuC_NoPos_TeslaTesla_True()
+        {
+            // LEFT JOIN: charging state without pos still matches on brand/type
+            Car c = new Car(0, "", "", 0, "", DateTime.Now, "", "", "", "", "", "", "", null, false);
+            int chargingStateID = InsertTestChargingState(null, "Tesla", "Tesla");
+
+            Assert.IsTrue(c.dbHelper.ChargingStateLocationIsSuC(chargingStateID));
+        }
+
+        [TestMethod]
+        public void ChargingStateLocationIsSuC_NoPos_NullBrandType_False()
+        {
+            Car c = new Car(0, "", "", 0, "", DateTime.Now, "", "", "", "", "", "", "", null, false);
+            int chargingStateID = InsertTestChargingState(null, null, null);
+
+            Assert.IsFalse(c.dbHelper.ChargingStateLocationIsSuC(chargingStateID));
+        }
+
+        private static int InsertTestPos(string address)
+        {
+            using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+            {
+                con.Open();
+                using (MySqlCommand cmd = new MySqlCommand("INSERT INTO pos (Datum, lat, lng, address, CarID) VALUES (now(3), 0, 0, @address, 0)", con))
+                {
+                    cmd.Parameters.AddWithValue("@address", address);
+                    cmd.ExecuteNonQuery();
+                    return (int)cmd.LastInsertedId;
+                }
+            }
+        }
+
+        private static int InsertTestChargingState(object posID, object brand, object type)
+        {
+            using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+            {
+                con.Open();
+                using (MySqlCommand cmd = new MySqlCommand("INSERT INTO chargingstate (StartDate, Pos, CarID, fast_charger_brand, fast_charger_type) VALUES (now(), @pos, 0, @brand, @type)", con))
+                {
+                    cmd.Parameters.AddWithValue("@pos", posID ?? DBNull.Value);
+                    cmd.Parameters.AddWithValue("@brand", brand ?? DBNull.Value);
+                    cmd.Parameters.AddWithValue("@type", type ?? DBNull.Value);
+                    cmd.ExecuteNonQuery();
+                    return (int)cmd.LastInsertedId;
+                }
+            }
         }
 
         private static DataTable GetChargingstates()

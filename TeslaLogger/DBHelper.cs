@@ -1991,22 +1991,33 @@ HAVING
                 using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
                 {
                     con.Open();
-                    using (MySqlCommand cmd = new MySqlCommand(@"
+using (MySqlCommand cmd = new MySqlCommand(@"
 SELECT
-  fast_charger_brand,
-  fast_charger_type
+  chargingstate.fast_charger_brand,
+  chargingstate.fast_charger_type,
+  pos.address
 FROM
   chargingstate
+LEFT JOIN pos ON chargingstate.pos = pos.id
 WHERE
-  CarID = @CarID
-  AND id = @referenceID", con))
+  chargingstate.CarID = @CarID
+  AND chargingstate.id = @referenceID", con))
                     {
                         cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
                         cmd.Parameters.AddWithValue("@referenceID", ChargingStateID);
                         MySqlDataReader dr = SQLTracer.TraceDR(cmd);
-                        if (dr.Read() && dr[0] != DBNull.Value && dr[1] != DBNull.Value)
+                        if (dr.Read())
                         {
-                            if (dr[0].ToString().Equals("Tesla", StringComparison.Ordinal) && (dr[1].ToString().Equals("Tesla", StringComparison.Ordinal) || dr[1].ToString().Equals("Combo", StringComparison.Ordinal)))
+                            // fast_charger_brand/fast_charger_type are empty for Fleet API users (#1752)
+                            bool isSuC = dr[0] != DBNull.Value && dr[1] != DBNull.Value
+                                && dr[0].ToString().Equals("Tesla", StringComparison.Ordinal)
+                                && (dr[1].ToString().Equals("Tesla", StringComparison.Ordinal) || dr[1].ToString().Equals("Combo", StringComparison.Ordinal));
+                            // fallback: Supercharger geofence address, prefix is set in Geofence.cs (#1752)
+                            if (!isSuC && dr[2] != DBNull.Value)
+                            {
+                                isSuC = dr[2].ToString().IndexOf("Supercharger", StringComparison.OrdinalIgnoreCase) >= 0;
+                            }
+                            if (isSuC)
                             {
                                 Tools.DebugLog("ChargingStateLocationIsSuC: true");
                                 return true;
