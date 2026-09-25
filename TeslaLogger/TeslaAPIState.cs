@@ -1367,6 +1367,22 @@ namespace TeslaLogger
                     DateTime dtPressure = DBHelper.UnixToDateTime((long)r2["tpms_last_seen_pressure_time_"+Prefix] * 1000);
                     //Tools.DebugLog($"Car{car.CarInDB} TPMS {Prefix}: {pressure} {dtPressure}");
                     _ = car.DbHelper.InsertTPMSAsync(TireID, pressure, dtPressure);
+                    switch (TireID)
+                    {
+                        case 1:
+                            car.CurrentJSON.tpms_pressure_fl = pressure;
+                            break;
+                        case 2:
+                            car.CurrentJSON.tpms_pressure_fr = pressure;
+                            break;
+                        case 3:
+                            car.CurrentJSON.tpms_pressure_rl = pressure;
+                            break;
+                        case 4:
+                            car.CurrentJSON.tpms_pressure_rr = pressure;
+                            break;
+                    }
+                    car.CurrentJSON.CreateCurrentJSON();
                 }
             }
             catch (Exception ex)
