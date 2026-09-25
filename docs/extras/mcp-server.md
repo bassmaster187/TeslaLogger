@@ -108,6 +108,24 @@ Als Ausgabe kommen die Befehle, die der MCP Server kann:
         }
       },
       {
+        "name": "get_current",
+        "description": "Retrieve the current live data of a vehicle (same data as the /currentjson/{id} endpoint). Use 'refresh' to force an immediate data update. Returns a JSON object with these fields: Status flags (boolean): charging, driving, online, sleeping, falling_asleep, plugged_in, charge_port_door_open, fast_charger_present, battery_heater, is_preconditioning, sentry_mode, locked. Battery/range: battery_level (percent 0-100), ideal_battery_range_km (km), battery_range_km (km), charge_limit_soc (percent), charge_energy_added (kWh since charge start). Charging: charger_power (kW), charger_power_calc_w (W), charger_voltage (V), charger_phases (count), charger_actual_current (A), charge_current_request (A), charge_rate_km (km/h range gain), time_to_full_charge (hours), fast_charger_brand (string, e.g. 'Supercharger'). Driving: speed (km/h), power (kW), heading (degrees 0-360), odometer (km). Current trip: trip_start (time HH:mm:ss), trip_start_dt (ISO 8601 UTC), trip_max_speed (km/h), trip_max_power (kW), trip_duration_sec (seconds), trip_distance (km), trip_kwh (kWh), trip_avg_kwh (Wh/km). Position: latitude, longitude (WGS84), state, country_code, display_name, car_version. Active route: active_route_destination (string), active_route_energy_at_arrival (kWh), active_route_km_to_arrival (km), active_route_minutes_to_arrival (minutes), active_route_traffic_minutes_delay (minutes), active_route_latitude, active_route_longitude. Temperatures: outside_temp (degrees C), inside_temperature (degrees C). Windows/doors: open_windows (count), open_doors (count), frunk (1 = open), trunk (1 = open). Software: software_update_status (string), software_update_version (string). TPMS (bar, only if the vehicle has TPMS): tpms_pressure_fl, tpms_pressure_fr, tpms_pressure_rl, tpms_pressure_rr. Geofence: TLGeofence (name string, '-' if none), TLGeofenceIsHome, TLGeofenceIsCharger, TLGeofenceIsWork (boolean). ScanMyTesla (only included if data was received recently): SMTCellTempAvg (degrees C), SMTCellMinV/SMTCellAvgV/SMTCellMaxV (V), SMTCellImbalance (mV), SMTBMSmaxCharge/SMTBMSmaxDischarge (A), SMTACChargeTotal/SMTDCChargeTotal (kWh), SMTNominalFullPack (kWh). Metadata: ts (ISO 8601 UTC timestamp of the data), FatalError (string, null if no error). Note: power is positive while driving/consuming, negative while regenerating/charging.",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "car_id": {
+              "type": "integer",
+              "description": "Vehicle ID (from get_vehicles)"
+            },
+            "refresh": {
+              "type": "boolean",
+              "description": "Force an immediate update of the current data (default: false)"
+            }
+          },
+          "required": ["car_id"]
+        }
+      },
+      {
         "name": "get_trips",
         "description": "Retrieve trips for a vehicle. Returns start/destination, distance, consumption, duration and temperatures. Use 'from'/'to' for a specific date range, or 'days' to look back from now.",
 ...
@@ -119,6 +137,33 @@ Als Ausgabe kommen die Befehle, die der MCP Server kann:
 Liefert alle Fahrzeuge.
 
 **Parameter:** keine
+
+---
+
+### `get_current`
+Liefert die aktuellen Live-Daten eines Fahrzeugs (derselbe Datenstand wie der Endpoint `/currentjson/{id}`). Enthält Status (online/fahrend/ladend/schlafend), Batterieladung und Reichweite, Ladedetails, Position, Geofence, aktuelle Fahrt und TPMS-Werte.
+
+**Parameter:**
+- `car_id` (required)
+- `refresh` (optional, `boolean`, Default `false`) – erzwingt eine sofortige Aktualisierung der Daten, bevor sie geliefert werden
+
+**Rückgabe-Felder (Auszug):**
+- Status (bool): `charging`, `driving`, `online`, `sleeping`, `falling_asleep`, `plugged_in`, `charge_port_door_open`, `fast_charger_present`, `battery_heater`, `is_preconditioning`, `sentry_mode`, `locked`
+- Batterie/Reichweite: `battery_level` (%), `ideal_battery_range_km` (km), `battery_range_km` (km), `charge_limit_soc` (%), `charge_energy_added` (kWh seit Ladebeginn)
+- Laden: `charger_power` (kW), `charger_power_calc_w` (W), `charger_voltage` (V), `charger_phases` (Anzahl), `charger_actual_current` (A), `charge_current_request` (A), `charge_rate_km` (km/h Reichweitengewinn), `time_to_full_charge` (Stunden), `fast_charger_brand` (z. B. `Supercharger`)
+- Fahren: `speed` (km/h), `power` (kW), `heading` (Grad 0–360), `odometer` (km)
+- Aktuelle Fahrt: `trip_start` (Uhrzeit `HH:mm:ss`), `trip_start_dt` (ISO 8601 UTC), `trip_max_speed` (km/h), `trip_max_power` (kW), `trip_duration_sec` (Sekunden), `trip_distance` (km), `trip_kwh` (kWh), `trip_avg_kwh` (Wh/km)
+- Position: `latitude`, `longitude` (WGS84), `state`, `country_code`, `display_name`, `car_version`
+- Route: `active_route_destination`, `active_route_energy_at_arrival` (kWh), `active_route_km_to_arrival` (km), `active_route_minutes_to_arrival` (Minuten), `active_route_traffic_minutes_delay` (Minuten), `active_route_latitude`, `active_route_longitude`
+- Temperaturen: `outside_temp` (°C), `inside_temperature` (°C)
+- Fenster/Türen: `open_windows` (Anzahl), `open_doors` (Anzahl), `frunk` (1 = offen), `trunk` (1 = offen)
+- Software: `software_update_status`, `software_update_version`
+- TPMS (bar, nur wenn vorhanden): `tpms_pressure_fl`, `tpms_pressure_fr`, `tpms_pressure_rl`, `tpms_pressure_rr`
+- Geofence: `TLGeofence` (Name, `-` wenn keiner), `TLGeofenceIsHome`, `TLGeofenceIsCharger`, `TLGeofenceIsWork` (bool)
+- ScanMyTesla (nur bei aktuellen Daten): `SMTCellTempAvg` (°C), `SMTCellMinV`/`SMTCellAvgV`/`SMTCellMaxV` (V), `SMTCellImbalance` (mV), `SMTBMSmaxCharge`/`SMTBMSmaxDischarge` (A), `SMTACChargeTotal`/`SMTDCChargeTotal` (kWh), `SMTNominalFullPack` (kWh)
+- Metadaten: `ts` (ISO 8601 UTC Zeitstempel der Daten), `FatalError` (string, `null` wenn kein Fehler)
+
+> Hinweis: `power` ist positiv beim Fahren/Verbrauchen und negativ beim Rekuperieren/Laden.
 
 ---
 
@@ -274,6 +319,22 @@ Beispiel-Logeintrag:
 	  "car_id": 1,
 	  "from": "2025-01-01 00:00:00",
 	  "to": "2025-01-31 23:59:59"
+	}
+  }
+}
+```
+
+## Beispiel-Request (get_current)
+```json
+{
+  "jsonrpc": "2.0",
+  "id": 3,
+  "method": "tools/call",
+  "params": {
+	"name": "get_current",
+	"arguments": {
+	  "car_id": 1,
+	  "refresh": true
 	}
   }
 }

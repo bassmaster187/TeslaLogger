@@ -188,7 +188,7 @@ namespace TeslaLogger
                         serverInfo = new
                         {
                             name = "TeslaLogger",
-                            version = "1.1.0"
+                            version = "1.2.0"
                         }
                     });
 
@@ -226,6 +226,36 @@ namespace TeslaLogger
                         type = "object",
                         properties = new { },
                         required = Array.Empty<string>()
+                    }
+                },
+                new
+                {
+                    name = "get_current",
+                    description = "Retrieve the current live data of a vehicle (same data as the /currentjson/{id} endpoint). Use 'refresh' to force an immediate data update. Returns a JSON object with these fields: " +
+                        "Status flags (boolean): charging, driving, online, sleeping, falling_asleep, plugged_in, charge_port_door_open, fast_charger_present, battery_heater, is_preconditioning, sentry_mode, locked. " +
+                        "Battery/range: battery_level (percent 0-100), ideal_battery_range_km (km), battery_range_km (km), charge_limit_soc (percent), charge_energy_added (kWh since charge start). " +
+                        "Charging: charger_power (kW), charger_power_calc_w (W), charger_voltage (V), charger_phases (count), charger_actual_current (A), charge_current_request (A), charge_rate_km (km/h range gain), time_to_full_charge (hours), fast_charger_brand (string, e.g. 'Supercharger'). " +
+                        "Driving: speed (km/h), power (kW), heading (degrees 0-360), odometer (km). " +
+                        "Current trip: trip_start (time HH:mm:ss), trip_start_dt (ISO 8601 UTC), trip_max_speed (km/h), trip_max_power (kW), trip_duration_sec (seconds), trip_distance (km), trip_kwh (kWh), trip_avg_kwh (Wh/km). " +
+                        "Position: latitude, longitude (WGS84), state, country_code, display_name, car_version. " +
+                        "Active route: active_route_destination (string), active_route_energy_at_arrival (kWh), active_route_km_to_arrival (km), active_route_minutes_to_arrival (minutes), active_route_traffic_minutes_delay (minutes), active_route_latitude, active_route_longitude. " +
+                        "Temperatures: outside_temp (degrees C), inside_temperature (degrees C). " +
+                        "Windows/doors: open_windows (count), open_doors (count), frunk (1 = open), trunk (1 = open). " +
+                        "Software: software_update_status (string), software_update_version (string). " +
+                        "TPMS (bar, only if the vehicle has TPMS): tpms_pressure_fl, tpms_pressure_fr, tpms_pressure_rl, tpms_pressure_rr. " +
+                        "Geofence: TLGeofence (name string, '-' if none), TLGeofenceIsHome, TLGeofenceIsCharger, TLGeofenceIsWork (boolean). " +
+                        "ScanMyTesla (only included if data was received recently): SMTCellTempAvg (degrees C), SMTCellMinV/SMTCellAvgV/SMTCellMaxV (V), SMTCellImbalance (mV), SMTBMSmaxCharge/SMTBMSmaxDischarge (A), SMTACChargeTotal/SMTDCChargeTotal (kWh), SMTNominalFullPack (kWh). " +
+                        "Metadata: ts (ISO 8601 UTC timestamp of the data), FatalError (string, null if no error). " +
+                        "Note: power is positive while driving/consuming, negative while regenerating/charging.",
+                    inputSchema = new
+                    {
+                        type = "object",
+                        properties = new
+                        {
+                            car_id = new { type = "integer", description = "Vehicle ID (from get_vehicles)" },
+                            refresh = new { type = "boolean", description = "Force an immediate update of the current data (default: false)" }
+                        },
+                        required = new[] { "car_id" }
                     }
                 },
                 new
@@ -379,6 +409,14 @@ namespace TeslaLogger
                     case "get_vehicles":
                         return ToolResult(id, GetVehicles());
 
+                    case "get_current":
+                    {
+                        int carId = arguments["car_id"]?.Value<int>() ?? 0;
+                        if (carId <= 0) return ToolError(id, "car_id is required and must be > 0");
+                        bool refresh = arguments["refresh"]?.Value<bool>() ?? false;
+                        return ToolResult(id, GetCurrent(carId, refresh));
+                    }
+
                     case "get_trips":
                     {
                         int carId = arguments["car_id"]?.Value<int>() ?? 0;
@@ -484,6 +522,29 @@ namespace TeslaLogger
                 }
             }
             return JsonConvert.SerializeObject(vehicles, Formatting.Indented);
+        }
+
+        private string GetCurrent(int carId, bool refresh)
+        {
+            if (refresh)
+            {
+                Car car = Car.GetCarByID(carId);
+                if (car != null)
+                {
+                    car.CurrentJSON.CreateCurrentJSON();
+                }
+            }
+
+            if (CurrentJSON.jsonStringHolder.TryGetValue(carId, out string json) && !string.IsNullOrEmpty(json))
+            {
+                try
+                {
+                    return JsonConvert.SerializeObject(JObject.Parse(json), Formatting.Indented);
+                }
+                catch (Exception) { }
+            }
+
+            return "{}";
         }
 
         private static (DateTime from, DateTime to) ParseDateRange(JObject arguments)
