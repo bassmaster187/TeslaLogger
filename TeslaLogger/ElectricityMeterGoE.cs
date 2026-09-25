@@ -80,11 +80,27 @@ namespace TeslaLogger
                 j = GetCurrentData();
 
                 dynamic jsonResult = JsonConvert.DeserializeObject(j);
-                string key = "whg";
-                string value = jsonResult[key];
 
-                double v = Double.Parse(value, Tools.ciEnUS);
-                v = v / (double)10.0;
+                // energy GRID in Wh since car connected
+                double? grid = GetDoubleValue(jsonResult, "whg");
+
+                // if grid energy is not reported (e.g. no go-e Controller data),
+                // calculate it from the energy balance: wh = whs + whb + whg + who
+                if (grid == null)
+                {
+                    double? total = GetDoubleValue(jsonResult, "wh");
+                    double? solar = GetDoubleValue(jsonResult, "whs");
+                    double? battery = GetDoubleValue(jsonResult, "whb");
+                    double? other = GetDoubleValue(jsonResult, "who");
+
+                    if (total != null && solar != null && battery != null && other != null)
+                        grid = total - solar - battery - other;
+                }
+
+                if (grid == null)
+                    return null;
+
+                double v = (double)grid / (double)10.0;
                 v = Math.Round(v, 1);
 
                 return v;
@@ -106,10 +122,10 @@ namespace TeslaLogger
                 j = GetCurrentData();
 
                 dynamic jsonResult = JsonConvert.DeserializeObject(j);
-                string key = "eto";
-                string value = jsonResult[key];
+                double? v = GetDoubleValue(jsonResult, "eto");
+                if (v == null)
+                    return null;
 
-                double v = Double.Parse(value, Tools.ciEnUS);
                 v = v / (double)10.0;
 
                 return v;
@@ -123,6 +139,29 @@ namespace TeslaLogger
             return null;
         }
 
+        private double? GetDoubleValue(dynamic jsonResult, string key)
+        {
+            try
+            {
+                string value = jsonResult[key];
+                if (value == null)
+                    return null;
+
+                if (string.IsNullOrEmpty(value))
+                    return null;
+
+                double d = Double.Parse(value, Tools.ciEnUS);
+                if (double.IsNaN(d) || d == double.PositiveInfinity || d == double.NegativeInfinity)
+                    return null;
+
+                return d;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
         public override bool? IsCharging()
         {
             string j = null;
@@ -133,6 +172,8 @@ namespace TeslaLogger
                 dynamic jsonResult = JsonConvert.DeserializeObject(j);
                 string key = "car";
                 string value = jsonResult[key];
+                if (value == null)
+                    return null;
 
                 return value == "2";
             }
@@ -155,6 +196,8 @@ namespace TeslaLogger
                 dynamic jsonResult = JsonConvert.DeserializeObject(j);
                 string key = "fwv";
                 string value = jsonResult[key];
+                if (value == null)
+                    return null;
 
                 return value;
             }

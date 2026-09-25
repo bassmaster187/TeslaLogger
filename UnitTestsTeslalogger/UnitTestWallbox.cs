@@ -116,6 +116,51 @@ namespace UnitTestsTeslalogger
         }
 
         [TestMethod]
+        public void GoEChargerWhgNull()
+        {
+            // when whg is null/missing (e.g. no go-e Controller data), the grid energy
+            // has to be calculated from the energy balance: wh = whs + whb + whg + who
+            var v = new ElectricityMeterGoE("", "");
+            v.status = "{\"wh\":10345.79032,\"whs\":8346.346299,\"whb\":1181.052861,\"whg\":null,\"who\":-0.064559537,\"fwv\":\"59.4\"}";
+
+            var utility_meter_kwh = v.GetUtilityMeterReading_kWh();
+            string ret = v.ToString();
+            Console.WriteLine(ret);
+
+            Assert.IsNotNull(utility_meter_kwh);
+            Assert.AreEqual(81.8, utility_meter_kwh);
+        }
+
+        [TestMethod]
+        public void GoEChargerWhgNaN()
+        {
+            // go-e returns NaN as string when the value is not available
+            var v = new ElectricityMeterGoE("", "");
+            v.status = "{\"wh\":10345.79032,\"whs\":8346.346299,\"whb\":1181.052861,\"whg\":\"NaN\",\"who\":-0.064559537,\"fwv\":\"59.4\"}";
+
+            var utility_meter_kwh = v.GetUtilityMeterReading_kWh();
+            string ret = v.ToString();
+            Console.WriteLine(ret);
+
+            Assert.IsNotNull(utility_meter_kwh);
+            Assert.AreEqual(81.8, utility_meter_kwh);
+        }
+
+        [TestMethod]
+        public void GoEChargerNoEnergyData()
+        {
+            // when no energy data at all is available, the result must be null (not NaN)
+            var v = new ElectricityMeterGoE("", "");
+            v.status = "{\"wh\":null,\"whs\":null,\"whb\":null,\"whg\":null,\"who\":null,\"fwv\":\"59.4\"}";
+
+            var utility_meter_kwh = v.GetUtilityMeterReading_kWh();
+            string ret = v.ToString();
+            Console.WriteLine(ret);
+
+            Assert.IsNull(utility_meter_kwh);
+        }
+
+        [TestMethod]
         public void CFos()
         {
             var v = new ElectricityMeterCFos("", "");
