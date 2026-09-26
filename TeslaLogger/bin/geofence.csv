@@ -2176,7 +2176,7 @@ Supercharger-V3 DE-Leer,53.25967,7.45557
 Supercharger-V3 DE-Lehre,52.31318,10.63498,20
 Supercharger-V4 DE-Leipheim,48.43655,10.21295
 Supercharger-V4 DE-Leipzig Rosa-Luxemburg-Straße,51.34682,12.39433
-Supercharger-V4 DE-Leipzig Sachsenpark,51.401142,12.39782,15
+Supercharger-V4 DE-Leipzig Sachsenpark,51.40114,12.39782,17
 Supercharger-V3 DE-Leipzig-Flughafen,51.40153,12.18123
 Supercharger-V4 DE-Leonberg,48.78497,9.01732
 Supercharger-V3 DE-Leonberg Glemseck,48.78456,9.01918
@@ -3315,7 +3315,7 @@ Supercharger-V4 IT-Avio,45.73062,10.939
 Supercharger-V3 IT-Barberino di Mugello,43.984138,11.215742
 Supercharger-V3 IT-Bardonecchia,45.08248,6.7112
 Supercharger-V3 IT-Bergamo Dalmine,45.652304,9.61897
-Supercharger-V4 IT-Boara Pisani,45.119242,11.770724
+Supercharger-V4 IT-Boara Pisani,45.11977,11.77123
 Supercharger-V4 IT-Bolzano,46.48622,11.33555
 Supercharger IT-Borca di Cadore,46.435592,12.222879
 Supercharger IT-Brennero,46.9954,11.5021,75
@@ -3960,6 +3960,7 @@ Supercharger NO-Norheimsund,60.372342,6.141213
 Supercharger-V3 NO-Notodden,59.566832,9.219062
 Supercharger NO-Nyborg,60.4841,5.3762
 Supercharger-V4 NO-Odda,60.065742,6.548997
+Supercharger-V4 NO-Olrud,60.83076,11.06716
 Supercharger-V3 NO-Oppdal,62.595821,9.688972
 Supercharger-V4 NO-Oppdal East,62.65681,9.88176
 Supercharger NO-Os,60.192788,5.4652
@@ -4082,7 +4083,7 @@ Supercharger-V4 PL-Górki Zachód,53.27008,22.12476
 Supercharger-V4 PL-Hruszowice,49.94696,23.02296
 Supercharger-V4 PL-Jasionka,50.112177,22.05805
 Supercharger PL-Katowice,50.254594,19.046594
-Supercharger-V4 PL-Katowice-Bytom,50.37824,18.88927
+Supercharger-V4 PL-Katowice-Bytom,50.37902,18.89007
 Supercharger PL-Katowice-E.Leclerc,50.220135,18.990248
 Supercharger PL-Kostomłoty,51.037361,16.584208
 Supercharger-V4 PL-Koszalin,54.21663,16.1143
@@ -4183,6 +4184,7 @@ Supercharger-V4 SE-Grums,59.36579,13.14527
 Supercharger-V4 SE-Gränna,57.92497,14.31982,30
 Supercharger SE-Gäddede,64.5065,14.1435
 Supercharger SE-Gävle,60.648513,17.120583
+Supercharger-V4 SE-Gävle Southbound,60.64926,17.11696
 Supercharger-V4 SE-Göteborg,57.747448,11.99263
 Supercharger-V3 SE-Göteborg Högsbo,57.65162,11.95112
 Supercharger-V3 SE-Halmstad,56.657389,12.907444
@@ -4211,7 +4213,7 @@ Supercharger-V4 SE-Kristianstad North,56.025142,14.195234
 Supercharger-V3 SE-Kristinehamn,59.31478,14.147392
 Supercharger-V4 SE-Krokom,63.3288,14.4301
 Supercharger-V4 SE-Kungens Kurva,59.270082,17.915231
-Supercharger-V4 SE-Kungsbacka,57.478787,12.080095
+Supercharger-V4 SE-Kungsbacka,57.479,12.08
 Supercharger-V4 SE-Kungälv,57.85816,11.99827
 Supercharger-V3 SE-Lagan,57.02886,14.01488
 Supercharger-V4 SE-Laxå,58.982245,14.623561
@@ -4292,7 +4294,7 @@ Supercharger-V4 SE-Ytterhogdal,62.1746,14.93747
 Supercharger-V4 SE-Ängelholm,56.254452,12.894906
 Supercharger-V4 SE-Åkersberga,59.487925,18.27068
 Supercharger-V3 SE-Ånge,62.537307,15.919596
-Supercharger SE-Åre,63.3951,13.08778
+Supercharger-V4 SE-Åre,63.3951,13.08778
 Supercharger-V3 SE-Åsarna,62.640554,14.37138
 Supercharger-V4 SE-Ödeshög,58.22717,14.66855
 Supercharger-V3 SE-Örebro,59.29758,15.20636
@@ -4370,6 +4372,7 @@ Supercharger-V4 TR-Uşak Merkez,38.67086,29.42427
 Supercharger-V4 TR-Çankaya Ankara,39.90963,32.77736
 Supercharger-V4 TR-Çankaya Ankara Çiğdem,39.88323,32.8086
 
+Supercharger-V4 TW-Kaohsiung Longhua N. St.,22.65013,120.3438
 Supercharger-V3 TW-Nantou Caotun,23.9664,120.67746
 Supercharger-V4 TW-Taichung Guanqian Rd,24.1519,120.6637
 Supercharger-V3 TW-Tainan Hsinying,23.31127,120.28147
@@ -7091,6 +7094,7 @@ Supercharger-V3 US-West Lake Hills TX,30.28977,-97.82747
 Supercharger-V4 US-West TX Eagle Travel Center,31.771,-97.10267
 Supercharger-V4 US-Wharton TX,29.3251,-96.1243
 Supercharger-V3 US-Wharton TX,29.32668,-96.12377
+Supercharger-V4 US-Wichita Falls TX,33.9272,-98.51234
 
 Supercharger-V3 US-Beaver UT - 525 W,38.2489,-112.6529,60
 Supercharger-V4 US-Beaver UT W 1425 N,38.29426,-112.6483
@@ -7401,6 +7405,7 @@ Supercharger US-Lusk WY,42.756,-104.45202
 Supercharger US-Rawlins WY,41.79092,-107.21024
 Supercharger US-Rock Springs WY,41.5807,-109.26228
 Supercharger US-Sheridan WY,44.8043,-106.9559
+Supercharger-V4 US-Thermopolis WY,43.65102,-108.211
 Supercharger US-Wheatland WY,42.07245,-104.96308
 
 Urbancharger US-Chicago IL North Broadway,41.93749,-87.64492
@@ -7432,6 +7437,7 @@ Tesla Service Center CA-Vancouver BC,49.26617,-123.08324
 Tesla Service Center CH-Bern,46.9587,7.47198,70
 Tesla Service Center CH-Cham,47.19165,8.4561
 Tesla Service Center CH-Meyrin,46.22363,6.05061
+Tesla Service Center CH-Möhlin,47.5682,7.8472
 Tesla Service Center CH-Möhlin,47.57728,7.841
 Tesla Service Center CH-Schlieren,47.40088,8.44
 Tesla Service Center CH-St. Gallen,47.41515,9.34021
@@ -7575,6 +7581,7 @@ ABC FI-Kuortti Mäyrätie,61.42196,26.4347
 ABC FI-Kurikka Oikotie,62.48609,22.75211
 ABC FI-Lappeenranta Kaakkoiskaari,61.0468,28.20834
 ABC FI-Lieksa Kalliokatu,63.32211,30.0082
+ABC FI-Länsi-Perho Hietaniementie,63.21572,24.4143
 ABC FI-Mikkeli Hietakatu,61.67641,27.24274
 ABC FI-Nurmes Välitie,63.55288,29.0993
 ABC FI-Padasjoki Tauluntie,61.34411,25.25049
@@ -10136,6 +10143,7 @@ Charge-and-GO RS-Beograd Novosadski put bb,44.86578,20.34587
 Charge-and-GO RS-Dobanovci Добановци Maršala Tita,44.8146,20.25192
 Charge-and-GO RS-Leskovac Лесковац Петра Цакића,42.99974,21.9532
 Charge-and-GO RS-Novi Sad E75,45.27604,19.92125
+Charge-and-GO RS-Pančevo Панчево Милоша Обреновића,44.86697,20.66028
 Charge-and-GO RS-Sombor Сомбор Štrosmajerova,45.7643,19.1251
 Charge-and-GO RS-Subotica Segedinski put,46.10051,19.69777
 Charge-and-GO RS-Čačak Konjevići,43.90319,20.39865
@@ -10738,43 +10746,522 @@ Circontrol LT-Druskininkai Vilniaus kl.,54.00962,24.02857
 Circontrol LT-Raubonys Via Baltica,56.1228,24.47106
 Circontrol RS-Bikovo Subotica,46.02045,19.73337
 
+Circuit-électrique CA-Acton Vale QC Rue de Roxton,45.63872,-72.56798,32
+Circuit-électrique CA-Alma QC Avenue du Pont Nord,48.56212,-71.63726,32
+Circuit-électrique CA-Alma QC Avenue du Pont Nord,48.6329,-71.6997,32
+Circuit-électrique CA-Alma QC Avenue du Pont Sud,48.52778,-71.65334,32
+Circuit-électrique CA-Amos QC 1ère Avenue Est,48.5711,-78.11,32
+Circuit-électrique CA-Amqui QC Boul. St-Benoit Ouest,48.46676,-67.43657,32
+Circuit-électrique CA-Amqui QC Boulevard Saint Benoît Est,48.46437,-67.42346,32
+Circuit-électrique CA-Amqui QC Québec 132 ouest,48.4755,-67.44043,32
 Circuit-électrique CA-Ange-Gardien QC Rte 235,45.36569,-72.93362
+Circuit-électrique CA-Anjou QC avenue Chaumont,45.61128,-73.54657,32
+Circuit-électrique CA-Anjou QC rue des Ormeaux,45.6113,-73546.0,32
+Circuit-électrique CA-Ascot Corner QC Québec 112,45.44836,-71.76626,32
+Circuit-électrique CA-Ayer’s Cliff QC rue Tyler,45.1678,-72.0388,32
+Circuit-électrique CA-Baie des Sables QC route 132,48.73907,-67.8604,32
+Circuit-électrique CA-Baie St-Paul QC Chemin de l’Équerre,47.44903,-70.52147,32
+Circuit-électrique CA-Baie Ste-Catherine QC Route de la Grande Alliance,48.10263,-69.72334,32
+Circuit-électrique CA-Baie-Comeau QC avenue Chapais,49.2207,-68.15446,32
+Circuit-électrique CA-Baie-Comeau QC Route 389 KM95,49.76754,-68.73596,32
+Circuit-électrique CA-Baie-Comeau QC Rue Nouvel,49.19705,-68.2649,32
+Circuit-électrique CA-Baie-johan-Beetz QC rue du du Nord,50.29102,-62.80464,32
+Circuit-électrique CA-Baie-Saint-Paul QC Boulevard Mgr de Laval,47.44977,-70.52102,32
+Circuit-électrique CA-Baie-Saint-Paul QC Chemin de l’Équerre,47.44842,-70.52152,32
+Circuit-électrique CA-Baie-Saint-Paul QC rue Forget,47.44044,-70.508,32
+Circuit-électrique CA-Baie-Trinité QC Québec 138,49.42267,-67.29952,32
+Circuit-électrique CA-Beauceville QC Boulevard Renault,46.2268,-70.7994,32
+Circuit-électrique CA-Beauharnois QC rue Ellice,45.31433,-73.87717,32
+Circuit-électrique CA-Beloeil QC Rue de l’Industrie,45.59642,-73.19647,32
+Circuit-électrique CA-Berthierville QC Avenue Gilles Villeneuve,46.08893,-73.19982,32
+Circuit-électrique CA-Berthierville QC Rue Gadoury,46.0885,-73.1931,32
+Circuit-électrique CA-Berthierville QC rue Giroux,46.08595,-73.19293,32
+Circuit-électrique CA-Boisbriand QC Boulevard du Faubourg,45.62302,-73.8482,32
+Circuit-électrique CA-Boisbriand QC Chemin de la Côte Nord,45.6442,-73.8699,32
+Circuit-électrique CA-Boisbriand QC Chemin de la Grande-Côte,45.61615,-73.81846,32
+Circuit-électrique CA-Boisbriand QC Desgrandes Tourelle,45.62993,-73.84882,32
+Circuit-électrique CA-Bonaventure QC Québec 132,48.0434,-65.4886,32
+Circuit-électrique CA-Boucherville QC Chemin du Lac,45.60393,-73.4477,32
+Circuit-électrique CA-Boucherville QC rue Albanel,45.60066,-73.4475,32
+Circuit-électrique CA-Boucherville QC rue Nobel,45.56946,-73.4429,32
 Circuit-électrique CA-Bromont QC Bd de Bromont,45.3344,-72.6489
+Circuit-électrique CA-Bromont QC Route Pierre Laporte,45.3357,-72.7033,32
+Circuit-électrique CA-Brossard QC boul Taschereau,45473.0,-73.4668,32
+Circuit-électrique CA-Brossard QC boul. Leduc,45.44598,-73.437,32
+Circuit-électrique CA-Brossard QC Boulevard Leduc,45.44314,-73.43618,32
+Circuit-électrique CA-Brossard QC Grande Allée,45.47323,-73.44182,32
 Circuit-électrique CA-Brownsburg QC Rue Principale,45.6219,-74.59369
+Circuit-électrique CA-Bécancour QC Boulevard Bécancour,46.39572,-72.291,32
+Circuit-électrique CA-Bécancour QC Boulevard de Port Royal,46.2919,-72.5402,32
+Circuit-électrique CA-Candiac QC boul. Taschereau,45.3995,-73.50558,32
+Circuit-électrique CA-Cantley QC chemin River,45.55123,-75.7835,32
+Circuit-électrique CA-Cantley QC Impasse des Étoiles,45.5519,-75.78343,32
+Circuit-électrique CA-Cap-aux-Meules QC chemin Principal,47.37544,-61.86995,32
+Circuit-électrique CA-Cap-Chat QC rue Notre-Dame E.,49.09847,-66.67792,32
+Circuit-électrique CA-Carleton-sur-Mer QC boulevard Perron,48.1015,-66.12156,32
+Circuit-électrique CA-Carleton-sur-Mer QC Boulevard Perron,48.10424,-66.12708,32
+Circuit-électrique CA-Casselman ON Rue Principale,45.30692,-75.0833,32
+Circuit-électrique CA-Causapscal QC rue Saint-Jacques N,48.35464,-67.2218,32
+Circuit-électrique CA-Chambly QC Boulevard de Périgny,45.45446,-73.30142,32
 Circuit-électrique CA-Chambly QC Rue Briand,45.41264,-73.31089
 Circuit-électrique CA-Chambord QC Rue Principale,48.43043,-72.06174
+Circuit-électrique CA-Chandler QC boul. René Lévesque Ouest,48.34933,-64.68395,32
+Circuit-électrique CA-Chandler QC Boulevard Rene Levesque Est,48.35148,-64.67245,32
+Circuit-électrique CA-Chapais QC Boulevard Springer,49.78194,-74.85383,32
+Circuit-électrique CA-Chartierville QC Rue Saint Jean Baptiste,45.29837,-71.2032,32
+Circuit-électrique CA-Chelsea QC Chemin Cross Loop,45.59754,-75.9012,32
+Circuit-électrique CA-Chibougamau QC 3e Rue,49.90476,-74.38568,32
+Circuit-électrique CA-Chibougamau QC 3ième rue,49.91323,-74.36026,32
+Circuit-électrique CA-Châteauguay QC Boulevard Saint-Jean-Baptiste,45.35715,-73.7169,32
+Circuit-électrique CA-Châteauguay QC Chemin de la Haute-Rivière,45.3447,-73.7544,32
 Circuit-électrique CA-Châteauguay QC Rue Marc-Laplante E,45.34567,-73.73373
+Circuit-électrique CA-Coaticook QC Rue de Barnston,45.13146,-71.81617,32
 Circuit-électrique CA-Coaticook QC Rue Laurence,45.13359,-71.80001
+Circuit-électrique CA-Coaticook QC rue Wellington,45.13312,-71.8034,32
+Circuit-électrique CA-Contrecoeur QC Route Marie-Victorin,45.84942,-73.24784,32
+Circuit-électrique CA-Contrecoeur QC Rue des Patriotes,45.84058,-73.23513,32
+Circuit-électrique CA-Cornwall ON Brookdale Avenue,45.02222,-74.74676,32
+Circuit-électrique CA-Coteau-du-Lac QC rue Georges-Jules-Beaudet,45.2935,-74.1746,32
+Circuit-électrique CA-Cowansville QC boul. Jean-Jacques-Bertrand,45.19012,-72.75137,32
+Circuit-électrique CA-Cowansville QC Boulevard Jean-Jacques-Bertrand,45.19028,-72.74862,32
+Circuit-électrique CA-Côte Saint-Luc QC Boulevard Cavendish,45.4781,-73.66286,32
+Circuit-électrique CA-Côte Saint-Luc QC Kingsley Road,45.46138,-73.6601,32
+Circuit-électrique CA-Danville QC route 116,45.7861,-72.0236,32
+Circuit-électrique CA-Daveluyville QC Autoroute Jean-Lesage Est,46.1851,-72.10623,32
+Circuit-électrique CA-Daveluyville QC rue Principale,46.1718,-72.1375,32
+Circuit-électrique CA-Deschaillons-sur-Saint-Laurent QC 16e Avenue,46.5556,-72.11724,32
 Circuit-électrique CA-Deschambault QC 2e Rang,46.64434,-71.99845
+Circuit-électrique CA-Deschambault-Grondines QC rue des Pins,46.63968,-71.99645,32
+Circuit-électrique CA-Dixville QC Chemin Parker,45.0672,-71.77008,32
+Circuit-électrique CA-Dolbeau-Mistassini QC Wallberg,48.8788,-72.22952,32
+Circuit-électrique CA-Donnacona QC Boulevard des Écureuils,46.68393,-71.7322,32
+Circuit-électrique CA-Donnacona QC Route 138,46.6814,-71.72956,32
 Circuit-électrique CA-Dorval QC Voie de Service N,45.48308,-73.78825
+Circuit-électrique CA-Drummondville QC boul St-Joseph,45.8963,-72.5169,32
+Circuit-électrique CA-Drummondville QC boul. St-Joseph,45.8989,-72.5257,32
+Circuit-électrique CA-Drummondville QC Boulevard Saint-Joseph,45.89417,-72.51575,32
+Circuit-électrique CA-Dégelis QC av. de l’Accueil,47.54372,-68.63125,32
+Circuit-électrique CA-East Angus QC rue de l’Hotel-de-Ville,45485.0,-71.6581,32
+Circuit-électrique CA-Eastman QC rue Lapointe,45.2996,-72.3155,32
+Circuit-électrique CA-Esprit-Saint QC Rue Des Érables,48.0672,-68.56295,32
+Circuit-électrique CA-Farnham QC rue Principale Ouest,45.28777,-72.994,32
+Circuit-électrique CA-Ferland-et-Boilleau QC route 381,48.18165,-70.84588,32
+Circuit-électrique CA-Fermont QC km 480 route 389,52.33603,-67.38637,32
+Circuit-électrique CA-Fermont QC Rue le Carrefour,52.79918,-67.09006,32
+Circuit-électrique CA-Forestville QC QC-138,48.72646,-69.09892,32
+Circuit-électrique CA-Forestville QC Québec 138,48.74292,-69.08692,32
+Circuit-électrique CA-Foster QC Chemin Lakeside,45.29325,-72.50097,32
+Circuit-électrique CA-Franklin QC route 202,45029.0,-73.9247,32
+Circuit-électrique CA-Gascons QC Québec 132,48.19356,-64.8641,32
+Circuit-électrique CA-Gaspé QC Boul. York,48.824,-64.47752,32
+Circuit-électrique CA-Gaspé QC Boulevard Renard Est,48.99457,-64.39746,32
+Circuit-électrique CA-Gaspé QC de la Marina,48.8273,-64.47827,32
+Circuit-électrique CA-Gatineau QC Avenue Lépine,45.57545,-75.40703,32
+Circuit-électrique CA-Gatineau QC boulevard Maloney Ouest,45.47466,-75.6965,32
+Circuit-électrique CA-Gatineau QC boulevard Maloney Ouest,45.4758,-75.69344,32
+Circuit-électrique CA-Gatineau QC Boulevard Saint-Joseph,45.4657,-75.73915,32
+Circuit-électrique CA-Gatineau QC Chemin Vanier,45.41402,-75.8083,32
+Circuit-électrique CA-Gatineau QC Rue Dollard,45.57825,-75.40786,32
+Circuit-électrique CA-Gatineau QC rue Laurier,45.42772,-75.7115,32
+Circuit-électrique CA-Gatineau QC Rue Principale,45.3964,-75.83665,32
+Circuit-électrique CA-Godbout QC Rue Pascal-Comeau,49.32188,-67.59475,32
+Circuit-électrique CA-Granby QC rue Denison E,45.3956,-72.71286,32
+Circuit-électrique CA-Granby QC Rue Denison Est,45.3929,-72.6823,32
+Circuit-électrique CA-Granby QC Rue Léo-Gendreau Nord,45.41944,-72.7655,32
+Circuit-électrique CA-Granby QC Rue Principale,45.4223,-72.79042,32
+Circuit-électrique CA-Granby QC rue Robitaille,45.3866,-72.7024,32
+Circuit-électrique CA-Grand-Remous QC Trans-Canada Highway,46.6219,-75.92,32
+Circuit-électrique CA-Grande-Vallée QC route de la Rivière,49.22484,-65.12727,32
+Circuit-électrique CA-Grande-Vallée QC Rue du Vieux Pont,49.22514,-65.12523,32
+Circuit-électrique CA-Grandes-Piles QC 5e Avenue,46.68815,-72.72683,32
+Circuit-électrique CA-Greenfield Park QC Boulevard Taschereau,45.4934,-73.4783,32
+Circuit-électrique CA-Grenville QC Rue Maple,45622.0,-74.5937,32
+Circuit-électrique CA-Harrington QC route 327,45.82843,-74.54797,32
+Circuit-électrique CA-Havre-St-Pierre QC Boulevard du Cométique,50.2445,-63.59134,32
+Circuit-électrique CA-Hawkesbury ON Main St E,45.61008,-74.60354,32
+Circuit-électrique CA-Huntingdon QC Rue Prince,45.08676,-74.17442,32
+Circuit-électrique CA-Hébertville QC Route d’Hébertville,48.38483,-71.68572,32
+Circuit-électrique CA-Joliette QC Entre le 391 et le 405 boul. Manseau,46.0252,-73.43845,32
+Circuit-électrique CA-Joliette QC Rue Beaudry Nord,46.02347,-73.4567,32
+Circuit-électrique CA-Joliette QC Rue Samuel-Racine,46.0217,-73.41252,32
+Circuit-électrique CA-Kanata ON Roland Michener Dr,45.308,-75.9094,32
+Circuit-électrique CA-Kazabazua QC route 105,45.9557,-76.0236,32
+Circuit-électrique CA-Kemptville ON Van Buren St,45.02308,-75.61953,32
 Circuit-électrique CA-Kiamika QC Rte 117,46.49968,-75.14528
+Circuit-électrique CA-Kirkland QC boul. St-Charles,45.44744,-73.85336,32
+Circuit-électrique CA-Kitcisakik QC La Vérendrye 38 intersections Route 117,47.65404,-77.26937,32
+Circuit-électrique CA-La Baie QC chemin St-Anicet Édifice 68,48.3379,-70.98987,32
+Circuit-électrique CA-La Doré QC Km 85,49.0007,-73.30738,32
+Circuit-électrique CA-La Doré QC Rue des Peupliers,48.71386,-72.64933,32
+Circuit-électrique CA-La Guadeloupe QC 14e Av,45.9617,-70.9375,32
+Circuit-électrique CA-La Malbaie QC Boulevard de Comporté,47.64606,-70.15065,32
+Circuit-électrique CA-La Malbaie QC boulevard de Comporté,47.6572,-70.15342,32
+Circuit-électrique CA-La Malbaie QC Boulevard de Comporté,47.6671,-70.16185,32
+Circuit-électrique CA-La Malbaie QC rue John Nairne,47.65268,-70.15043,32
+Circuit-électrique CA-La Patrie QC rue Notre-Dame O,45.40165,-71.25457,32
+Circuit-électrique CA-La Pocatière QC 1ère rue,47.36385,-70.0355,32
+Circuit-électrique CA-La Prairie QC Chemin de Saint-Jean,45.40982,-73.47495,32
+Circuit-électrique CA-La Sarre QC 2e Rue Est,48.7909,-79.1995,32
+Circuit-électrique CA-La Sarre QC 4e avenue Est,48.80662,-79.20435,32
+Circuit-électrique CA-La Tuque QC Boulevard Ducharme,47.4104,-72.7859,32
+Circuit-électrique CA-La Tuque QC Chemin de la Rivière Pierriche,48.0356,-73.15486,32
 Circuit-électrique CA-La Tuque QC Rue St Eugène,47.43841,-72.78122
 Circuit-électrique CA-Labelle QC Boulevard du Curé Labelle,46.28055,-74.73926
+Circuit-électrique CA-Lac-Bouchette QC Rue Principale,48.2555,-72.186,32
+Circuit-électrique CA-Lac-des-Écorces QC Boulevard Saint-François,46.55627,-75.34665,32
+Circuit-électrique CA-Lac-Etchemin QC Québec 277,46.4046,-70.52703,32
+Circuit-électrique CA-Lac-Mégantic QC Rue Graham,45.57527,-70.8814,32
+Circuit-électrique CA-Lac-Mégantic QC rue Québec-Central,45.5779,-70.88228,32
+Circuit-électrique CA-Lac-Pythonga QC km 330,47.04078,-76.53434,32
+Circuit-électrique CA-Lachenaie QC montée Dumais,45.70663,-73.57763,32
+Circuit-électrique CA-Lachine QC rue Victoria,45.4356,-73.6861,32
 Circuit-électrique CA-Lachute QC Av. Béthany,45.63658,-74.32746
+Circuit-électrique CA-Lachute QC Rue Principale,45.66525,-74.29474,32
+Circuit-électrique CA-Lambton QC rue de l’Aréna,45.83593,-71.08802,32
+Circuit-électrique CA-Lasalle QC Newman,45.4358,-73.62698,32
+Circuit-électrique CA-Laterrière QC Boul. Talbot,48.31672,-71.1346,32
+Circuit-électrique CA-Laurier Station QC Boulevard Laurier,46.54315,-71.62696,32
+Circuit-électrique CA-Laurier-Station QC Boulevard Laurier,46.53838,-71.637,32
+Circuit-électrique CA-Laval QC Autoroute 440,45.5628,-73.78305,32
+Circuit-électrique CA-Laval QC autoroute des Laurentides,45.5675,-73743.0,32
+Circuit-électrique CA-Laval QC Ave des Aristocrates,45.61357,-73.68036,32
 Circuit-électrique CA-Laval QC Bd Arthur-Sauvé,45.54771,-73.86507
+Circuit-électrique CA-Laval QC boul. Curé-Labelle,45.59078,-73.7878,32
+Circuit-électrique CA-Laval QC boul. des Laurentides,45.6359,-73.7543,32
+Circuit-électrique CA-Laval QC Boulevard de la Concorde E,45.60174,-73.6538,32
+Circuit-électrique CA-Laval QC Boulevard Saint-Elzéar Ouest,45.56977,-73.78124,32
+Circuit-électrique CA-Laval QC Desserte Sud Autoroute 440,45.56882,-73.76076,32
+Circuit-électrique CA-Laval QC montée Major,45.5595,-73.6842,32
+Circuit-électrique CA-Laval QC Rue Belgrand,45.61298,-73.6748,32
+Circuit-électrique CA-Laval QC Rue Cunard,45.58016,-73.73605,32
+Circuit-électrique CA-Laval QC Rue Marie-Uguay,45.6648,-73.5915,32
+Circuit-électrique CA-Lavaltrie QC Autoroute 40 Aire de service,45.89114,-73.34953,32
+Circuit-électrique CA-Lebel-sur-Quévillon QC Place Quévillon,49.05255,-76.97698,32
+Circuit-électrique CA-Les Escoumins QC Rue Saint Marcellin Ouest,48.34672,-69.40533,32
+Circuit-électrique CA-Les Éboulements QC Route du Fleuve,47.47826,-70.325,32
+Circuit-électrique CA-Longue-Pointe-de-Mingan QC Chemin du Roi,50.26946,-64.1428,32
+Circuit-électrique CA-Longueuil QC Boulevard Marie-Victorin,45.5683,-73.48708,32
+Circuit-électrique CA-Longueuil QC Boulevard Taschereau,45.4877,-73.47243,32
+Circuit-électrique CA-Longueuil QC chemin de la Savane,45.51303,-73.43158,32
+Circuit-électrique CA-Longueuil QC Rue Montcalm,45.50012,-73.48666,32
+Circuit-électrique CA-Longueuil QC Rue Saint-Charles Ouest,45.54014,-73.50886,32
+Circuit-électrique CA-Louiseville QC boul. Saint-Laurent Est,46.2611,-72.87806,32
+Circuit-électrique CA-Lévis QC Route du Président-Kennedy,46.77918,-71.15475,32
+Circuit-électrique CA-Lévis QC Route du Président-Kennedy,46.78778,-71.1669,32
+Circuit-électrique CA-Lévis QC Rte du Président Kennedy,46.79668,-71.1769,32
 Circuit-électrique CA-Lévis QC Rte Lagueux,46.67418,-71.34458
+Circuit-électrique CA-Lévis QC Rue Charles-Rodrigue,46.77864,-71.16992,32
+Circuit-électrique CA-Lévis QC Rue de Bernières,46.70922,-71.29474,32
+Circuit-électrique CA-Lévis QC rue de Courchevel,46.73145,-71.26335,32
 Circuit-électrique CA-L’Ange-Gardien QC,45.60877,-75.3955
+Circuit-électrique CA-L’Anse-Saint-Jean QC Route 170,48.19695,-70.2478,32
+Circuit-électrique CA-L’Assomption QC Rue Arboit,45.8229,-73.45046,32
+Circuit-électrique CA-L’Épiphanie QC Rue Leblanc,45.84854,-73.48715,32
 Circuit-électrique CA-L’Île-Perrot QC Grand Boulevard,45.39529,-73.95794
 Circuit-électrique CA-Magog QC Chem. Milletta,45.29109,-72.2131
+Circuit-électrique CA-Magog QC Chemin Milletta,45.29137,-72.21335,32
+Circuit-électrique CA-Magog QC rue Merry Sud,45.2661,-72.15533,32
+Circuit-électrique CA-Magog QC rue Principale Ouest,45.28107,-72.18543,32
+Circuit-électrique CA-Magog QC Rue Sherbrooke,45.27466,-72.13444,32
+Circuit-électrique CA-Malartic QC Rue Royale,48.14095,-78.1269,32
+Circuit-électrique CA-Manic-5 QC Route 389 km 214,50.6393,-68.73216,32
+Circuit-électrique CA-Manicouagan QC Route 389,51.32557,-68.12242,32
+Circuit-électrique CA-Maniwaki QC Rue Principale Sud,46.37675,-75.9826,32
+Circuit-électrique CA-Mansfield-et-Pontefract QC rue Herault,45.8482,-76.7291,32
+Circuit-électrique CA-Marieville QC Rue Claude-De Ramezay,45.43736,-73.16462,32
+Circuit-électrique CA-Marsoui QC Route Principale Ouest,49.21512,-66.07166,32
+Circuit-électrique CA-Mascouche QC Montée Masson,45.74225,-73.61047,32
+Circuit-électrique CA-Mascouche QC Rue Brien,45.7401,-73.5987,32
+Circuit-électrique CA-Maskinongé QC Autoroute 40,46.19544,-73.00448,32
+Circuit-électrique CA-Matagami QC Place du Commerce,49.7583,-77.62387,32
+Circuit-électrique CA-Matane QC Av St-Jérôme,48.84338,-67.5298,32
+Circuit-électrique CA-Matane QC avenue du Phare,48.84002,-67.56514,32
+Circuit-électrique CA-Matane QC Avenue du Phare Est,48.85214,-67.5078,32
+Circuit-électrique CA-Melbourne QC Rte 243,45.63602,-72.14407,32
+Circuit-électrique CA-Mercier QC Boulevard Saint-Jean-Baptiste,45.3374,-73.7285,32
+Circuit-électrique CA-Mirabel QC Boulevard Curé-Labelle,45.7055,-73.92915,32
+Circuit-électrique CA-Mont-Joli QC boul. Jacques-Cartier,48.59334,-68.20648,32
 Circuit-électrique CA-Mont-Laurier QC Bd Albiny Paquette,46.55078,-75.49239
+Circuit-électrique CA-Mont-Laurier QC boul. Albiny-Paquette,46.5511,-75.4807,32
+Circuit-électrique CA-Mont-Saint-Hilaire QC boulevard Wilfrid-Laurier,45.56177,-73.19092,32
+Circuit-électrique CA-Mont-Saint-Michel QC rue Gravel,46.78023,-75.33592,32
+Circuit-électrique CA-Mont-Tremblant QC Montée Ryan,46.1749,-74.60324,32
+Circuit-électrique CA-Mont-Tremblant QC Rte 117,46.132,-74.6133,32
 Circuit-électrique CA-Mont-Tremblant QC Rue de St Jovite,46.11852,-74.60036
+Circuit-électrique CA-Montcerf-Lytton QC route 117,46.73093,-76.07556,32
 Circuit-électrique CA-Montcerf-Lytton QC Rte 117,46.73103,-76.07591
+Circuit-électrique CA-Montebello QC B rue Notre-Dame,45.64995,-74.94287,32
+Circuit-électrique CA-Montmagny QC Boulevard Taché O,46.97988,-70.5681,32
+Circuit-électrique CA-Montmagny QC Chemin des Poirier,46.96918,-70.57888,32
+Circuit-électrique CA-Montmagny QC Chemin des Poirier,46.97144,-70.5757,32
+Circuit-électrique CA-Montmagny QC Chemin des Poirier,46.97508,-70.57125,32
 Circuit-électrique CA-Montmagny QC Rte Jean-Baptiste-Casault,46.9403,-70.65602
+Circuit-électrique CA-Montréal QC 6e Avenue,45.54842,-73.57535,32
+Circuit-électrique CA-Montréal QC A Ouimet,45.5122,-73.6784,32
+Circuit-électrique CA-Montréal QC Avenue Atwater,45.47872,-73.57675,32
+Circuit-électrique CA-Montréal QC Avenue Christophe Colomb,45.5533,-73.633,32
+Circuit-électrique CA-Montréal QC Avenue Querbes,45.51752,-73.59847,32
+Circuit-électrique CA-Montréal QC Avenue Van Horne,45.5094,-73.6247,32
+Circuit-électrique CA-Montréal QC Bd Maurice-Duplessis,45.65,-73.5619,32
+Circuit-électrique CA-Montréal QC Boulevard de l’Assomption,45.57527,-73.56185,32
+Circuit-électrique CA-Montréal QC Boulevard Lacordaire,45.58237,-73.5858,32
+Circuit-électrique CA-Montréal QC Boulevard LaSalle,45.46192,-73.56268,32
+Circuit-électrique CA-Montréal QC Boulevard Louis-H. La Fontaine,45.5983,-73.553,32
+Circuit-électrique CA-Montréal QC Boulevard Viau,45.57494,-73.59295,32
+Circuit-électrique CA-Montréal QC Chemin de la Côte-des-Neiges,45.49733,-73.62365,32
+Circuit-électrique CA-Montréal QC Rue Colbert,45.57425,-73.59566,32
 Circuit-électrique CA-Montréal QC Rue Hochelaga,45.56894,-73.53833
+Circuit-électrique CA-Montréal QC rue Jeanne-Mance,45507.0,-73.5654,32
+Circuit-électrique CA-Montréal QC rue Lajeunesse,45.55444,-73.666,32
+Circuit-électrique CA-Montréal QC rue Monk,45.4576,-73.5952,32
+Circuit-électrique CA-Montréal QC rue Ontario E,45554.0,-73.5409,32
+Circuit-électrique CA-Montréal QC Rue Sherbrooke Est,45.6546,-73.51046,32
+Circuit-électrique CA-Montréal-Est QC Rue Sainte-Julie,45.6311,-73.4952,32
+Circuit-électrique CA-Morin-Heights QC Chemin du Village,45.9039,-74.2465,32
+Circuit-électrique CA-Murdochville QC route 198,48.96063,-65.49222,32
+Circuit-électrique CA-Namur QC route 323,45.89752,-74.92076,32
 Circuit-électrique CA-Namur QC Route 323,45.89774,-74.92068
+Circuit-électrique CA-Napierville QC rue Saint-Jacques,45.1878,-73407.0,32
+Circuit-électrique CA-Natashquan QC Chemin d’en Haut,50.18608,-61.8227,32
+Circuit-électrique CA-Nepean ON Centrepointe Dr,45.34425,-75.76063,32
+Circuit-électrique CA-Neuville QC 2e Rang,46.72274,-71.60313,32
+Circuit-électrique CA-New Richmond QC boul. Perron Ouest,48.16117,-65.85714,32
+Circuit-électrique CA-New Richmond QC Route 132,48.1755,-65.8494,32
+Circuit-électrique CA-Nicolet QC Place du 21 Mars,46.22574,-72.61732,32
+Circuit-électrique CA-Normandin QC Avenue du Rocher,48.84105,-72.51797,32
+Circuit-électrique CA-Notre-Dame-de-la-Merci QC Montée de la Réserve,46.22547,-74.06014,32
+Circuit-électrique CA-Notre-Dame-du-Nord QC Rue de l’Église,47.59206,-79.48574,32
+Circuit-électrique CA-Oka QC Rue Notre Dame,45.46226,-74.08513,32
 Circuit-électrique CA-Orléans ON Jeanne D’Arc Blvd S,45.46652,-75.54387
+Circuit-électrique CA-Ormstown QC Québec 201,45.1183,-73.9872,32
+Circuit-électrique CA-Ottawa ON Clarence St,45.42983,-75.69132,32
+Circuit-électrique CA-Ottawa ON Fallowfield Rd,45.3001,-75.73282,32
+Circuit-électrique CA-Ottawa ON Somerset Street West,45.41143,-75.70647,32
+Circuit-électrique CA-Otter Lake QC Rue Tessier,45.85235,-76.43033,32
+Circuit-électrique CA-Otterburn Park QC chemin des Patriotes,45.5447,-73.2118,32
+Circuit-électrique CA-Papineauville QC Côte des Cascades,45.66235,-75.0204,32
+Circuit-électrique CA-Pasbébiac QC Boul. Gérard-D-Lévesque Est,48.02957,-65.24814,32
+Circuit-électrique CA-Percé QC Route 132,48.51945,-64.21596,32
+Circuit-électrique CA-Percé QC route 132 Ouest,48.52407,-64.21053,32
+Circuit-électrique CA-Petit-Saguenay QC Rue Dumas,48.20962,-70.06738,32
+Circuit-électrique CA-Piedmont QC rue Jean Adam,45.88993,-74.14574,32
+Circuit-électrique CA-Plessisville QC avenue Trudelle,46.21535,-71.77152,32
+Circuit-électrique CA-Plessisville QC Rue Saint Calixte,46.21827,-71.77177,32
+Circuit-électrique CA-Pohénégamook QC rue Principale,47.4571,-69.2406,32
+Circuit-électrique CA-Pointe-à-la-Croix QC boul. Perron Ouest,48.03275,-66.70405,32
+Circuit-électrique CA-Port Cartier QC Avenue Parent,50.02078,-66.87547,32
+Circuit-électrique CA-Port-Cartier QC Route Jacques Cartier,49.78078,-67.17142,32
+Circuit-électrique CA-Prescott ON Prescott Centre Dr,44.72156,-75.52285,32
+Circuit-électrique CA-Prévost QC Boulevard du Curé Labelle,45.85433,-74.06775,32
+Circuit-électrique CA-Péribonka QC Rue Édouard Niquet,48.7658,-72.04836,32
+Circuit-électrique CA-Quyon QC Rue de Clarendon,45.52092,-76.22937,32
+Circuit-électrique CA-Québec City QC Wilfrid-Hamel Boulevard,46.8163,-71.2498,32
 Circuit-électrique CA-Québec QC Bd Sainte-Anne,46.85222,-71.19588
+Circuit-électrique CA-Québec QC boul. des Galeries,46.82934,-71.29875,32
+Circuit-électrique CA-Québec QC boul. des Galeries,46.83175,-71.3003,32
+Circuit-électrique CA-Québec QC boul. Ste-Anne,46.85218,-71.19562,32
+Circuit-électrique CA-Québec QC boul. Versant Nord,46.79125,-71.28735,32
+Circuit-électrique CA-Québec QC Boulevard Henri-Bourassa,46.87974,-71.28626,32
+Circuit-électrique CA-Québec QC Boulevard Pie-XI Nord,46.8628,-71.42945,32
+Circuit-électrique CA-Québec QC Boulevard Pierre-Bertrand,46.83283,-71.2797,32
+Circuit-électrique CA-Québec QC Rue Bouvier,46.83743,-71.26925,32
+Circuit-électrique CA-Québec QC Rue Charles Albanel,46.76583,-71.37107,32
+Circuit-électrique CA-Québec QC Rue Cyrille-Duquet,46.79697,-71.27137,32
+Circuit-électrique CA-Québec QC Rue George-Muir,46.8959,-71.31533,32
+Circuit-électrique CA-Ragueneau QC route 138,49.07187,-68.47727,32
+Circuit-électrique CA-Rawdon QC Rue Queen,46.03927,-73.70264,32
+Circuit-électrique CA-Repentigny QC Boulevard Brien,45.7462,-73.46112,32
+Circuit-électrique CA-Repentigny QC Boulevard Iberville,45.77984,-73.41532,32
+Circuit-électrique CA-Richelieu QC ch. des Patriotes,45.41194,-73.24172,32
+Circuit-électrique CA-Richelieu QC Chemin des Patriotes,45.4119,-73.2407,32
+Circuit-électrique CA-Rigaud QC Chem. J.-René-Gauthier,45.47623,-74.28435,32
+Circuit-électrique CA-Rigaud QC Chemin J.-René-Gauthier,45.4784,-74.28684,32
+Circuit-électrique CA-Rimouski QC boul. de la Rivière,48.4376,-68.53582,32
+Circuit-électrique CA-Rimouski QC Boulevard Arthur-Buies Est,48.45266,-68.49354,32
+Circuit-électrique CA-Rimouski QC route 132 Est,48.37734,-68.6935,32
+Circuit-électrique CA-Rimouski QC rue Saint-Germain Ouest,48.4507,-68.52972,32
+Circuit-électrique CA-Rivière Beaudette QC rue Principale,45.21982,-74.32225,32
+Circuit-électrique CA-Rivière-au-Tonnerre QC route Jacques-Cartier,50.27607,-64.77507,32
+Circuit-électrique CA-Rivière-Beaudette QC Autoroute 20,45.2125,-74.3388,32
 Circuit-électrique CA-Rivière-du-Loup QC Bd Cartier,47.85189,-69.54327
+Circuit-électrique CA-Rivière-du-Loup QC boul Cartier,47.8515,-69.5398,32
+Circuit-électrique CA-Rivière-du-Loup QC Boul. Armand-Thériault,47.8259,-69.5494,32
+Circuit-électrique CA-Rivière-du-Loup QC Boulevard de l’Hôtel de Ville,47.82194,-69.55737,32
+Circuit-électrique CA-Rivière-du-Loup QC Rue Frontenac,47.82563,-69.53873,32
+Circuit-électrique CA-Rivière-du-Loup QC Rue Témiscouata,47.82255,-69.5125,32
 Circuit-électrique CA-Rivière-Rouge QC Rue L’Annonciation S,46.40136,-74.86661
+Circuit-électrique CA-Roberval QC boul de la Jeunesse,48.50385,-72.22746,32
+Circuit-électrique CA-Roberval QC Boul. St-Joseph,48.51826,-72.2223,32
+Circuit-électrique CA-Rockland ON County Road 17,45.54355,-75.3045,32
+Circuit-électrique CA-Rouyn-Noranda QC av Québec,48.24126,-79.02716,32
+Circuit-électrique CA-Rouyn-Noranda QC Avenue Larivière,48.22335,-78.99726,32
+Circuit-électrique CA-Rouyn-Noranda QC rue Rideau,47.91452,-79.24293,32
+Circuit-électrique CA-Sacré-Coeur QC Rue Principale Nord,48.23307,-69.80173,32
+Circuit-électrique CA-Saguenay QC 6e Avenue,48.33067,-70.881,32
+Circuit-électrique CA-Saguenay QC Boul. Talbot,48.38085,-71.0831,32
+Circuit-électrique CA-Saguenay QC Boulevard Harvey,48.41152,-71.23697,32
+Circuit-électrique CA-Saguenay QC rue du Plein air,48.37405,-71.09194,32
+Circuit-électrique CA-Saguenay QC Rue Gallichan,48.4033,-71.21625,32
+Circuit-électrique CA-Saguenay QC Rue Lafontaine,48.42943,-71.0594,32
+Circuit-électrique CA-Saint-Alexis-des-Monts QC rue Richard,46.4621,-73.1413,32
+Circuit-électrique CA-Saint-Ambroise QC rue du pont est,48.55348,-71.32188,32
+Circuit-électrique CA-Saint-Antonin QC Rue Principale,47.78284,-69.46455,32
+Circuit-électrique CA-Saint-Apollinaire QC Rue Laurier,46.61806,-71.51515,32
+Circuit-électrique CA-Saint-Apollinaire QC Rue Laurier,46.62015,-71.50844,32
+Circuit-électrique CA-Saint-Bernard-de-Lacolle QC Autoroute 15,45.04823,-73.45303,32
+Circuit-électrique CA-Saint-Bernard-de-Lacolle QC Chemin Guay,45.0158,-73.4521,32
+Circuit-électrique CA-Saint-Bruno-de-Montarville QC boul. Sir-Wilfrid-Laurier,45.5207,-73.3172,32
+Circuit-électrique CA-Saint-Constant QC boulevard Monchamp,45.3922,-73.5819,32
+Circuit-électrique CA-Saint-Donat-de-Montcalm QC rue Principale,46.32,-74.22305,32
+Circuit-électrique CA-Saint-Eustache QC Boulevard Arthur Sauvé,45.57627,-73.91472,32
+Circuit-électrique CA-Saint-Frédéric QC Rue de l’Hôtel-de-Ville,46.2975,-70.97078,32
+Circuit-électrique CA-Saint-Fulgence QC Rue du Saguenay,48.4494,-70.9023,32
+Circuit-électrique CA-Saint-Félicien QC boul. du Sacré Cœur,48.65528,-72.4495,32
+Circuit-électrique CA-Saint-Félix-de-Valois QC Rue Principale,46.16878,-73.42837,32
+Circuit-électrique CA-Saint-Gabriel-de-Brandon QC Rue Saint Gabriel,46.29104,-73.38085,32
+Circuit-électrique CA-Saint-Georges QC 1er Av.,46.1256,-70.6848,32
+Circuit-électrique CA-Saint-Georges QC 1re Avenue,46.12733,-70.68767,32
+Circuit-électrique CA-Saint-Germain-de-Grantham QC Boulevard Industriel,45.8593,-72.57848,32
+Circuit-électrique CA-Saint-Gédéon QC Rue du Pont,48.4794,-71.79133,32
+Circuit-électrique CA-Saint-Henri QC Route du Président-Kennedy,46.7035,-71.07518,32
+Circuit-électrique CA-Saint-Hippolyte QC Chemin des Hauteurs,45.9244,-74.02038,32
+Circuit-électrique CA-Saint-Hyacinthe QC Boulevard Choquette,45.62274,-72.95878,32
+Circuit-électrique CA-Saint-Hyacinthe QC rue Daniel-Johnson Ouest,45.63908,-72.96653,32
+Circuit-électrique CA-Saint-Jean-sur-Richelieu QC Boulevard du Séminaire Nord,45.32505,-73.26706,32
+Circuit-électrique CA-Saint-Jérôme QC Autoroute des Laurentides,45.8416,-74.0686,32
+Circuit-électrique CA-Saint-Jérôme QC Rue John F. Kennedy,45.76177,-74.0243,32
+Circuit-électrique CA-Saint-Jérôme QC rue Latour,45.7744,-73.9991,32
+Circuit-électrique CA-Saint-Lambert QC Rue Riverside,45.5073,-73.51857,32
+Circuit-électrique CA-Saint-Lambert-de-Lauzon QC Rue du Pont,46.5936,-71.20324,32
+Circuit-électrique CA-Saint-Lin Laurentides QC Rue Saint-Isidore,45.84366,-73.75774,32
+Circuit-électrique CA-Saint-Léonard-d’Aston QC Rang du Moulin Rouge,46.05817,-72.31315,32
+Circuit-électrique CA-Saint-Maxime-Du-Mont-Louis QC rue Principale,49.25266,-65.54236,32
+Circuit-électrique CA-Saint-Michel-des-Saints QC rue Brassard,46.6762,-73.91756,32
+Circuit-électrique CA-Saint-Nicolas QC Autoroute Jean-Lesage,46.69782,-71.2995,32
+Circuit-électrique CA-Saint-Nicolas QC Chemin Craig,46.67417,-71.34422,32
+Circuit-électrique CA-Saint-Ours QC Rue Immaculée-Conception,45.892,-73.14846,32
+Circuit-électrique CA-Saint-Pamphile QC route Elgin Nord,46.9696,-69.7911,32
+Circuit-électrique CA-Saint-Pascal QC rue Rochette,47.5303,-69.8195,32
+Circuit-électrique CA-Saint-Philippe QC chemin Sanguinet,45372.0,-73.4901,32
+Circuit-électrique CA-Saint-Raphaël QC Boulevard Saint-Pierre,46.79887,-70.75844,32
 Circuit-électrique CA-Saint-Roch-de-Mékinac QC Rte 155,46.8993,-72.92812
 Circuit-électrique CA-Saint-Roch-des-Aulnaies QC Rte de la Seigneurie,47.31757,-70.13887
+Circuit-électrique CA-Saint-Rémi QC Rue Notre Dame,45.26056,-73.61842,32
+Circuit-électrique CA-Saint-Sauveur QC chemin du Lac-Millette,45.8907,-74.1519,32
+Circuit-électrique CA-Saint-Sauveur QC Chemin du Lac-Millette,45.89525,-74.14788,32
+Circuit-électrique CA-Saint-Siméon QC rue Saint-Laurent,47.83767,-69.88172,32
+Circuit-électrique CA-Saint-Théophile QC rue Principale,45.9368,-70.4864,32
+Circuit-électrique CA-Saint-Tite QC Québec 153,46.73153,-72.57134,32
+Circuit-électrique CA-Sainte-Adèle QC Boulevard de Sainte-Adèle,45.97313,-74.17258,32
+Circuit-électrique CA-Sainte-Agathe-des-Monts QC route 117,46.0651,-74.3027,32
+Circuit-électrique CA-Sainte-Anne-De-Beaupré QC boul. Sainte-Anne,47.0196,-70.93277,32
+Circuit-électrique CA-Sainte-Anne-de-Beaupré QC Boulevard Sainte-Anne,47.0274,-70.9165,32
+Circuit-électrique CA-Sainte-Anne-de-la-Pérade QC 2e Av,46.57884,-72.22377,32
+Circuit-électrique CA-Sainte-Anne-de-la-Pérade QC Rue Marcotte,46.57153,-72.20526,32
+Circuit-électrique CA-Sainte-Anne-des-Monts-Tourelle QC Route du Parc,48.94682,-66.12116,32
+Circuit-électrique CA-Sainte-Catherine QC Boulevard des Écluses,45.38897,-73.5573,32
+Circuit-électrique CA-Sainte-Croix QC Rue Garneau,46.62014,-71.7424,32
+Circuit-électrique CA-Sainte-Eulalie QC rue des Bouleaux,46.11403,-72.25243,32
+Circuit-électrique CA-Sainte-Jeanne-d’Arc QC Route 169,48.85744,-72.09914,32
+Circuit-électrique CA-Sainte-Julie QC Boulevard Armand-Frappier,45.5815,-73.33008,32
+Circuit-électrique CA-Sainte-Julie QC Chemin du Fer à Cheval,45.57744,-73.32807,32
+Circuit-électrique CA-Sainte-Julie QC Rue Bombardier,45.57875,-73.30527,32
+Circuit-électrique CA-Sainte-Julienne QC Québec 125,46.00218,-73.72177,32
+Circuit-électrique CA-Sainte-Julienne QC route 125,45.95694,-73.70496,32
+Circuit-électrique CA-Sainte-Justine QC Québec 204,46.4021,-70.36054,32
+Circuit-électrique CA-Sainte-Rose-du-Nord QC rue du Quai,48.3881,-70.58777,32
+Circuit-électrique CA-Sainte-Sophie QC Boulevard Sainte Sophie,45.83204,-73.8821,32
+Circuit-électrique CA-Sainte-Thérèse QC Boulevard du Curé-Labelle,45.64833,-73.8407,32
+Circuit-électrique CA-Sainte-Émélie-de-l’Énergie QC rue Desrosiers,46.32342,-73.64206,32
+Circuit-électrique CA-Salaberry-de-Valleyfield QC boul. Monseigneur Langlois,45.26934,-74.13616,32
+Circuit-électrique CA-Sallaberry-de-Valleyfield QC Alexandre,45.2647,-74.1349,32
+Circuit-électrique CA-Scotstown QC chemin Victoria Ouest,45.5252,-71.2777,32
+Circuit-électrique CA-Senneterre QC 6e rue Ouest,48.38586,-77.24993,32
+Circuit-électrique CA-Sept-Îles QC Boulevard Laure,50.24386,-66.39703,32
+Circuit-électrique CA-Shannon QC rue Dubé Édifice 019,46.88803,-71.50482,32
+Circuit-électrique CA-Shawinigan QC Boulevard Hubert-Biermans,46.57488,-72.72014,32
+Circuit-électrique CA-Sherbrooke QC 12e avenue Nord,45.43373,-71.86985,32
 Circuit-électrique CA-Sherbrooke QC Bd de l’Université,45.3783,-71.92832
+Circuit-électrique CA-Sherbrooke QC Boul Bourque,45.37087,-71.99122,32
+Circuit-électrique CA-Sherbrooke QC boul. de Portland,45.40167,-71.9493,32
+Circuit-électrique CA-Sherbrooke QC Boulevard Industriel,45.3947,-71.9842,32
+Circuit-électrique CA-Sherbrooke QC Rue des Érables,45.4033,-71.94704,32
+Circuit-électrique CA-Sherbrooke QC Rue Galt Ouest,45.37573,-71.952,32
+Circuit-électrique CA-Sherbrooke QC Rue Laval,45.469,-71.95145,32
+Circuit-électrique CA-Sorel QC boul. Fiset,46.0349,-73.09128,32
+Circuit-électrique CA-Sorel-Tracy QC rue de Ramezay,46.04736,-73.1098,32
+Circuit-électrique CA-St-Alphonse-Rodriguez QC QC. 343,46.18325,-73.69625,32
+Circuit-électrique CA-St-Charles-sur-Richelieu QC chemin des Patriotes,45.68417,-73.18725,32
+Circuit-électrique CA-St-Damien de Buckland QC Rue Commerciale,46.62527,-70.65917,32
+Circuit-électrique CA-St-Hubert QC boul. Cousineau,45.5023,-73.4275,32
+Circuit-électrique CA-St-Jean-de-Matha QC Route Louis-Cyr,46.2252,-73.52715,32
+Circuit-électrique CA-St-Jean-sur-Richelieu QC Av Conrad-Gosselin,45.3247,-73.24837,32
+Circuit-électrique CA-St-Jean-sur-Richelieu QC rue Champlain,45.30856,-73.252,32
+Circuit-électrique CA-St-Joseph-de-Beauce QC avenue du Palais,46.30292,-70.87264,32
+Circuit-électrique CA-St-Jérôme QC boul.de la Salette,45.7904,-74.0533,32
+Circuit-électrique CA-St-Jérôme QC rue de Martigny Ouest,45.77964,-74.01675,32
+Circuit-électrique CA-St-Maxime-du-Mont-Louis QC 1ere Avenue Ouest,49.22884,-65.7352,32
+Circuit-électrique CA-St-Tite-des-Caps QC rue Leclerc,47.14082,-70.7693,32
+Circuit-électrique CA-Stanstead QC Autoroute 55,45.05895,-72.08208,32
+Circuit-électrique CA-Stanstead QC Chemin de Fairfax,45.02326,-72.0862,32
+Circuit-électrique CA-Ste-Agathe QC rue Principale,46.04345,-74.2663,32
+Circuit-électrique CA-Ste-Anne-des-Lacs QC rte 117,45.88398,-74.10248,32
+Circuit-électrique CA-Ste-Anne-des-Monts QC 1iere Avenue O,49.12948,-66.48703,32
+Circuit-électrique CA-Ste-Anne-des-Monts QC Blv Ste-Anne Ouest,49.12442,-66.49054,32
+Circuit-électrique CA-Ste-Foy QC avenue Jules-Verne,46.77863,-71.35086,32
+Circuit-électrique CA-Ste-Marie-de-Beauce QC Route Cameron,46.46915,-71.03794,32
+Circuit-électrique CA-Stoke QC Rue Principale,45.5299,-71.80822,32
+Circuit-électrique CA-Stoneham et Tewkesbury QC rte 175,47.5602,-71.23043,32
+Circuit-électrique CA-Stoneham-et-Tewkesbury QC 1re Avenue,46.98725,-71.36962,32
+Circuit-électrique CA-Stoneham-et-Tewkesbury QC Avenue Tewkesbury,46.98263,-71.36682,32
+Circuit-électrique CA-Stornoway QC Route 108 Est,45.7114,-71.15597,32
+Circuit-électrique CA-Sutton QC rue Principale Nord,45.1076,-72615.0,32
 Circuit-électrique CA-Tadoussac QC Rue des Jésuites,48.14334,-69.71912
+Circuit-électrique CA-Tadoussac QC Rue du Bateau Passeur,48.14913,-69.71546,32
+Circuit-électrique CA-Terrebonne QC Boulevard des Seigneurs,45.7035,-73.63914,32
+Circuit-électrique CA-Terrebonne QC Montée des Pionniers,45.7146,-73.51006,32
+Circuit-électrique CA-Terrebonne QC Pascal-Gagnon,45.7294,-73.6748,32
+Circuit-électrique CA-Thetford Mines QC Bd Frontenac E,46.1099,-71.30237,32
+Circuit-électrique CA-Thetford Mines QC rue King,46.0876,-71.30246,32
 Circuit-électrique CA-Thurso QC Rue Galipeau,45.59998,-75.24338
+Circuit-électrique CA-Thurso QC Rue Galipeau,45.60023,-75.24374,32
 Circuit-électrique CA-Trois-Pistoles QC Rte 132,48.10599,-69.20825
+Circuit-électrique CA-Trois-Pistoles QC Rue Jean-Rioux,48.1193,-69.16578,32
+Circuit-électrique CA-Trois-Rivières QC Boulevard Jean-XXIII,46.33324,-72.59048,32
+Circuit-électrique CA-Trois-Rivières QC Boulevard Sainte-Madeleine,46.36702,-72.50986,32
+Circuit-électrique CA-Trois-Rivières QC Rue Barkoff,46.3733,-72.55557,32
+Circuit-électrique CA-Trois-Rivières QC rue des Volontaires,46.34282,-72.54496,32
+Circuit-électrique CA-Trois-Rivières QC Rue Sainte Marguerite,46.34272,-72.55507,32
+Circuit-électrique CA-Trois-Rivières QC rue Vachon,46.36944,-72.55555,32
 Circuit-électrique CA-Trois-Rivières QC Rue Vachon,46.36964,-72.55564
+Circuit-électrique CA-Trois-Rivières QC rue Vachon,46.37043,-72.5548,32
+Circuit-électrique CA-Témiscaming QC Chemin Kipawa,46.72102,-79.09547,32
+Circuit-électrique CA-Témiscouata-sur-le-Lac QC Rue Commerciale Nord,47.6733,-68.87315,32
+Circuit-électrique CA-Témiscouata-sur-le-Lac QC Rue Commerciale Nord,47.6806,-68.87636,32
+Circuit-électrique CA-Val d’Or QC 2e Ave,48.10188,-77.7894,32
+Circuit-électrique CA-Val-des-Bois QC Québec 309,45.91542,-75.5929,32
+Circuit-électrique CA-Val-des-Sources QC 1ere avenue,45.77022,-71.92717,32
+Circuit-électrique CA-Val-d’Or QC 3e Avenue,48.09726,-77.82306,32
+Circuit-électrique CA-Val-d’Or QC 3e Avenue Est,48.09844,-77.75092,32
 Circuit-électrique CA-Val-d’Or QC Trans-Canada Hwy,48.07222,-77.38275
+Circuit-électrique CA-Valcourt QC Avenue des Cascades,45.49316,-72.3137,32
+Circuit-électrique CA-Vaudreuil-Dorion QC avenue St-Charles,45.4083,-74.03405,32
+Circuit-électrique CA-Vaudreuil-Dorion QC Boulevard de la Cité-des-Jeunes,45.41242,-74.02876,32
+Circuit-électrique CA-Venise-en-Québec QC ave. Venise Ouest,45.0837,-73.1506,32
+Circuit-électrique CA-Verdun QC Elgar,45.45662,-73.54604,32
+Circuit-électrique CA-Victoriaville QC Notre-Dame Ouest,46.0584,-71.9706,32
+Circuit-électrique CA-Victoriaville QC rue de Bigarré,46.05798,-71.956,32
+Circuit-électrique CA-Victoriaville QC rue Perreault,46.0582,-71955.0,32
+Circuit-électrique CA-Ville-Marie QC rue Sainte-Anne,47.33175,-79.43816,32
+Circuit-électrique CA-Villeroy QC Halte routière autoroute 20,46.3891,-71.8436,32
+Circuit-électrique CA-Villeroy QC Québec 265,46.37283,-71.85554,32
+Circuit-électrique CA-Warwick QC Route Saint-Albert,45.95045,-71.99756,32
+Circuit-électrique CA-Weedon QC Rue du Barrage,45.7592,-71406.0,32
+Circuit-électrique CA-Wendake QC Rue de la Faune,46.86165,-71.35613,32
+Circuit-électrique CA-Windsor QC rue Saint-Georges,45.5707,-72.0024,32
+Circuit-électrique CA-Woburn QC Rue Saint-Augustin,45.38496,-70.86372,32
 Circuit-électrique CA-Yamachiche QC Rte Ste Anne,46.26185,-72.87645,15
+Circuit-électrique CA-Yamaska QC Rue de Monseigneur Parenteau,46.00398,-72.91486,32
 
 City-Concept DE-Leipzig Elsterstraße,51.34026,12.3645
 
@@ -12808,7 +13295,7 @@ Electrify-America US-Brea CA Brea Mall Drive,33.91472,-117.88354,32
 Electrify-America US-Breaux Bridge LA Rees Street,30.293,-91.9122,32
 Electrify-America US-Brick NJ Route 70,40.0582,-74.1489,32
 Electrify-America US-Bridgehampton NY School Street,40.93502,-72.30366,32
-Electrify-America US-Bridgeport CA Main St,38.25516,-119.23202
+Electrify-America US-Bridgeport CA Main St,38.25516,-119.23202,20
 Electrify-America US-Bridgewater NJ Promenade Blvd,40.56189,-74.55378
 Electrify-America US-Bristol PA Bath Rd,40.12696,-74.8816,32
 Electrify-America US-Bristol PA Bristol Pike,40.11764,-74.84468,32
@@ -12983,13 +13470,13 @@ Electrify-America US-Eau Claire WI Gateway Dr,44.77477,-91.42838,32
 Electrify-America US-Edgewater CO Sheridan Blvd.,39.74583,-105.0548,32
 Electrify-America US-Edina MN York Ave S,44.8748,-93.322,32
 Electrify-America US-Edison NJ U.S. Rte 1,40.5116,-74.3848
-Electrify-America US-Edwards CO Edwards Access Rd,39.64848,-106.58748,32
+Electrify-America US-Edwards CO Edwards Access Rd,39.64848,-106.58748,20
 Electrify-America US-Effingham IL Avenue of Mid-America,39.1384,-88.5713,32
 Electrify-America US-El Cajon CA Camino Canada,32.823,-116.90067,32
 Electrify-America US-El Cajon CA Fletcher Parkway,32.80797,-116.96808,32
 Electrify-America US-El Centro CA W. Main St,32.79327,-115.56768,32
 Electrify-America US-El Paso TX Gateway Blvd West,31.75204,-106.34095,32
-Electrify-America US-Elizabeth NJ Kapkowski Rd,40.66237,-74.1733
+Electrify-America US-Elizabeth NJ Kapkowski Rd,40.66237,-74.1733,20
 Electrify-America US-Elk Grove CA Elk Grove Blvd,38.41118,-121.39095,32
 Electrify-America US-Elko NV Mountian City Highway,40.8401,-115.79092,32
 Electrify-America US-Ellensburg WA Canyon Rd,46.9789,-120.54343,32
@@ -13030,7 +13517,7 @@ Electrify-America US-Fernley NV E. Newlands Rd,39.6098,-119.21622,32
 Electrify-America US-Fincastle VA Brughs Mill Rd,37.45557,-79.83802,32
 Electrify-America US-Findley Lake NY NY-426,42.12847,-79.7414,32
 Electrify-America US-Firebaugh CA Thomas Conboy Avenue,36.86846,-120.463,32
-Electrify-America US-Firebaugh CA W Panoche Rd,36.6377,-120.6256,32
+Electrify-America US-Firebaugh CA W Panoche Rd,36.6374,-120.62542,32
 Electrify-America US-Flagler CO CR-5,39.2873,-103.06136,32
 Electrify-America US-Flagstaff AZ E. Huntington. Rd.,35.19912,-111.6156,32
 Electrify-America US-Flemington NJ US-202,40.49765,-74.85646
@@ -13274,7 +13761,7 @@ Electrify-America US-Little Rock AR Baseline Rd,34.66868,-92.37668,32
 Electrify-America US-Littleton CO S Wadsworth Blvd,39.56754,-105.0804,32
 Electrify-America US-Littleton CO W. Coal Mine Ave.,39.60833,-105.1489,32
 Electrify-America US-Live Oak TX Ikea-RBFCU Pkwy,29.5677,-98.3381,32
-Electrify-America US-Livermore CA Holmes St,37.66114,-121.78095
+Electrify-America US-Livermore CA Holmes St,37.66114,-121.78095,32
 Electrify-America US-Livermore CA Livermore Outlets Dr.,37.70005,-121.84093,32
 Electrify-America US-Livonia MI Middlebelt Rd,42.37917,-83.3295,32
 Electrify-America US-Lone Tree CO Lincoln Ave,39.5386,-104.88435,32
@@ -13449,7 +13936,6 @@ Electrify-America US-Palm Beach Gardens FL Lake Victoria Gardens Ave,26.85064,-8
 Electrify-America US-Palm Desert CA Highway 111,33.7248,-116.40206,32
 Electrify-America US-Palm Springs CA S Palm Canyon Dr,33.8152,-116.54636,32
 Electrify-America US-Palo Alto CA Middlefield Rd,37.4184,-122.10945,32
-Electrify-America US-Palo Alto CA Stanford Shopping Center,37.44208,-122.16977,32
 Electrify-America US-Paramus NJ Garden State Plaza Blvd,40.91612,-74.07394,32
 Electrify-America US-Paramus NJ Rte 4,40.91528,-74.0535,32
 Electrify-America US-Parish NY E Main Street,43.40452,-76.11936,32
@@ -13495,7 +13981,7 @@ Electrify-America US-Pleasanton CA Rosewood Drive,37.70068,-121.8844,32
 Electrify-America US-Pleasanton CA Santa Rita Rd,37.67564,-121.87458,32
 Electrify-America US-Plymouth MA Long Pond Rd,41.93312,-70.6572,32
 Electrify-America US-Plymouth Meeting PA W Germantown Pike,40.11699,-75.27937
-Electrify-America US-Pompton Lakes NJ Wanaque Ave,41.00746,-74.29366,32
+Electrify-America US-Pompton Lakes NJ Wanaque Ave,41.00746,-74.29366,16
 Electrify-America US-Pompton Plains NJ Route 23 North,40.96869,-74.28467
 Electrify-America US-Pooler GA Pooler Parkway,32.14257,-81.24328,32
 Electrify-America US-Port Angeles WA E Kolonels Way,48.10993,-123.36134,32
@@ -13668,7 +14154,7 @@ Electrify-America US-Saugus MA Broadway,42.47204,-71.02366,32
 Electrify-America US-Scarborough ME Gallery Blvd,43.62297,-70.34495
 Electrify-America US-Schaumburg IL E Golf Rd,42.0524,-88.0445,32
 Electrify-America US-Schofield WI Schofield Avenue,44.9076,-89.59207,32
-Electrify-America US-Scipio UT Frontage Road,39.25552,-112.11646
+Electrify-America US-Scipio UT Frontage Road,39.25552,-112.11646,20
 Electrify-America US-Scottsdale AZ N Hayden Rd,33.67042,-111.90397,32
 Electrify-America US-Scranton PA N 8th Ave,41.41466,-75.6707,32
 Electrify-America US-Seabrook NH Lafayette Rd,42.89365,-70.86579
@@ -20076,7 +20562,7 @@ EWE-GO DE-Weener Neue Feldstraße,53.16791,7.34947
 EWE-GO DE-Weener Osterstraße,53.16525,7.35655
 EWE-GO DE-Weener Schulstraße,53.16566,7.35243
 EWE-GO DE-Weilburg Viehweg,50.48114,8.29447
-EWE-GO DE-Weilerswist Parkallee,50.74791,6.85132
+EWE-GO DE-Weilerswist Parkallee,50.7479,6.85132,32
 EWE-GO DE-Weimar Berkaer Straße,50.95996,11.31607
 EWE-GO DE-Weingarten Argonnenstraße,47.81362,9.63634
 EWE-GO DE-Weinstadt Kalkofenstraße,48.81463,9.36358
@@ -20226,6 +20712,7 @@ Ewiva IT-La Spezia Via della Pianta,44.11218,9.84794
 Ewiva IT-Lainate Via Juan Manuel Fangio,45.56472,9.04596,20
 Ewiva IT-Livorno Viale Giovanni Boccaccio,43.53607,10.32351
 Ewiva IT-Loano Via Aurelia,44.13444,8.26283
+Ewiva IT-Loceri SP Lanusei S. Paolo,39.8542,9.57292
 Ewiva IT-Milano Via Benozzo Gozzoli,45.4514,9.09544
 Ewiva IT-Milazzo Via Arno,38.18799,15.26918
 Ewiva IT-Mogliano Veneto Via Bonfadini,45.58434,12.28791,20
@@ -20553,6 +21040,7 @@ Fines BG-Harmanli Харманли Коста Андреев,41.9255,25.9209
 Fines BG-Kostinbrod Poleto,42.79496,23.21518
 Fines BG-Sofia София Dr. Peter Dertliev Blvrd,42.70983,23.25768
 Fines BG-Tserovo Церово A1,42.3365,24.07986
+Fines BG-Varna Варна бул. Сливница,43.22093,27.89823
 Fines BG-Драгичево Главен път Е79,42.6009,23.13062
 Fines BG-Летница,43.31211,25.07321
 Fines BG-Лозен Автомагистрала Тракия,42.6322,23.45811
@@ -21321,6 +21809,7 @@ Iberdrola ES-L’Alfàs del Pi Camí Vell d’Altea,38.57253,-0.07583
 Iberdrola ES-Monesterio Camino del Culebrin Monesterio,38.02804,-6.22031
 Iberdrola ES-Murcia Av. de los Pinos,37.99716,-1.1384
 Iberdrola ES-Murcia C. los Nietos,37.96913,-1.1276
+Iberdrola ES-Málaga Av. de Valle-Inclán,36.72967,-4.44535
 Iberdrola ES-Málaga Paseo de Reding,36.72074,-4.41008
 Iberdrola ES-Níjar Carretera Iryda-Almeria,36.92395,-2.14953
 Iberdrola ES-Níjar Cortijo Sta. Olalla,36.92703,-2.1452
@@ -26918,6 +27407,7 @@ Plenitude IT-Meran Piavestraße,46.66628,11.15812
 Plenitude IT-Pioltello Viale S. Francesco,45.51327,9.3234
 Plenitude IT-Sadali Via Po,39.81252,9.27088
 Plenitude IT-San Miniato Via C. Pannocchia,43.68795,10.80601
+Plenitude IT-Sexten Waldheimweg,46.6927,12.3564
 Plenitude IT-Sogliano al Rubicone Bivio Montepetra Bassa,43.93325,12.17774
 Plenitude IT-Tonadico Via Roma,46.18182,11.83158
 Plenitude IT-Tramonti di Sotto Piazza Santa Croce,46.28498,12.7954
@@ -28445,6 +28935,7 @@ Shell DE-Waren Strelitzer Straße,53.51902,12.71677
 Shell DE-Wedemark Hessenweg,52.55275,9.77781
 Shell DE-Weida Neustädter Straße,50.7777,12.04717
 Shell DE-Weilerbach Danziger Straße,49.47722,7.63979
+Shell DE-Weilerswist Parkallee,50.74747,6.8515,32
 Shell DE-Wendlingen Heinrich-Otto-Straße,48.67426,9.37177
 Shell DE-Westerland Trift,54.90461,8.31082
 Shell DE-Wiesbaden Äppelallee,50.04536,8.21715
@@ -29675,6 +30166,7 @@ Süwag DE-Eltville am Rhein Taunusstraße,50.02711,8.12039
 Süwag DE-Frankfurt Schützenbleiche,50.09654,8.54341
 Süwag DE-St. Goarshausen Bahnhofstraße,50.15535,7.71542
 
+T-Carica IT-Agordo Via Valcozzena,46.28063,12.02547
 T-Carica IT-Caorle Strada Traghete,45.60448,12.8857
 
 Tango NL-Harderwijk Boekhorstlaan,52.33564,5.64287,20
