@@ -344,7 +344,8 @@ Supercharger CA-Golden BC,51.313039,-116.973754
 Supercharger-V3 CA-Golden BC Highway 1,51.30975,-116.96876
 Supercharger-V3 CA-Golden BC Trans-Canada Hwy,51.31102,-116.96945
 Supercharger CA-Hope BC,49.378522,-121.442691
-Supercharger-V3 CA-Hope BC - Klassen Road,49.364075,-121.480472
+Supercharger-V3 CA-Hope BC Klassen Rd,49.36347,-121.4787
+Supercharger-V4 CA-Hope BC Old Hope Princeton,49.3744,-121.42903
 Supercharger-V3 CA-Invermere BC,50.512653,-115.996016
 Supercharger CA-Kamloops BC,50.655429,-120.367554
 Supercharger-V3 CA-Kamloops BC - Notre Dame Drive,50.66339,-120.3514
@@ -2277,7 +2278,7 @@ Supercharger-V4 DE-Regensburg-Ost,48.99477,12.15066
 Supercharger-V3 DE-Reichertshofen,48.645645,11.520604
 Supercharger-V3 DE-Reinfeld,53.8229,10.50267,10
 Supercharger-V3 DE-Reinfeld,53.8232,10.50352
-Supercharger-V4 DE-Reiskirchen,50.59563,8.81875,35
+Supercharger-V4 DE-Reiskirchen,50.59572,8.81894
 Supercharger-V4 DE-Rhüden,51.9472,10.14027,30
 Supercharger-V3 DE-Rhüden,51.94732,10.14113,30
 Supercharger-V4 DE-Ringsheim,48.25,7.76567,21
@@ -2581,7 +2582,7 @@ Supercharger-V3 FI-Karesuvanto,68.450226,22.4814
 Supercharger-V4 FI-Keminmaa,65.79995,24.50417,30
 Supercharger-V3 FI-Kempele,64.901803,25.535398
 Supercharger-V4 FI-Kesälahti,61.9047,29.81272
-Supercharger FI-Kokkola,63.829282,23.148487
+Supercharger-V3 FI-Kokkola,63.82928,23.1485
 Supercharger-V3 FI-Kuopio,62.820695,27.607985
 Supercharger-V4 FI-Kuopio IKEA,62.8238,27.60816
 Supercharger-V3 FI-Kuusamo,65.95893,29.1566
@@ -3211,7 +3212,7 @@ Supercharger-V4 GR-Thessaloniki Θεσσαλονίκη,40.5547,22.99516
 
 Supercharger-V4 HR-Bačva,45.23919,13.71488
 Supercharger-V4 HR-Bačva,45.23939,13.71592
-Supercharger-V4 HR-Gospić,44.5771,15.3934,40
+Supercharger-V4 HR-Gospić,44.57745,15.3926
 Supercharger-V4 HR-Janjče East,44.75155,15.37485
 Supercharger-V4 HR-Janjče West,44.75082,15.37355
 Supercharger-V4 HR-Jasenice,44.24,15.5705
@@ -3321,7 +3322,7 @@ Supercharger IT-Borca di Cadore,46.435592,12.222879
 Supercharger IT-Brennero,46.9954,11.5021,75
 Supercharger-V3 IT-Brescia,45.53229,10.16487
 Supercharger-V4 IT-Brescia Via della Volta,45.50645,10.23256
-Supercharger-V3 IT-Bressanone,46.75903,11.63837,40
+Supercharger-V3 IT-Bressanone,46.75878,11.6377
 Supercharger-V3 IT-Brindisi,40.619822,17.902674
 Supercharger-V4 IT-Busto Arsizio,45.63453,8.83602
 Supercharger IT-Campogalliano,44.686638,10.851342
@@ -4764,6 +4765,7 @@ Supercharger-V4 US-Manteca CA,37.78557,-121.25185
 Supercharger-V3 US-Manteca CA - Spreckels Avenue,37.79583,-121.1977
 Supercharger US-Marin City CA Donahue Street,37.87255,-122.51036
 Supercharger-V3 US-Marina CA,36.6662,-121.81016
+Supercharger-V4 US-Marina CA Reservation Rd,36.68307,-121.7906
 Supercharger-V3 US-Marina Del Rey CA,33.9807,-118.44468
 Supercharger-V3 US-Mariposa CA,37.48915,-119.97206
 Supercharger-V3 US-Martinez CA,37.993,-122.1213
@@ -4890,6 +4892,7 @@ Supercharger US-Rowland Heights CA,33.9914,-117.92793
 Supercharger US-Sacramento CA,38.63793,-121.49703
 Supercharger-V3 US-Sacramento CA - Point West Way,38.60124,-121.4313
 Supercharger-V4 US-Sacramento CA 1610 J St,38.57767,-121.48484
+Supercharger-V4 US-Sacramento CA Arden Way,38.59474,-121.36422
 Supercharger US-Sacramento CA Arden Way,38.60327,-121.42828
 Supercharger-V4 US-Sacramento CA Broadway,38.54734,-121.45342
 Supercharger-V4 US-Sacramento CA Del Paso Rd,38.65557,-121.5246
@@ -7400,6 +7403,7 @@ Supercharger-V3 US-Evansville WY,42.84728,-106.21396
 Supercharger US-Gillette WY,44.29277,-105.5269
 Supercharger-V4 US-Gillette WY S Douglas Hwy,44.26993,-105.49552
 Supercharger US-Jackson WY,43.464,-110.7945
+Supercharger-V4 US-Lander WY,42.83487,-108.74068
 Supercharger US-Laramie WY,41.32512,-105.61813
 Supercharger US-Lusk WY,42.756,-104.45202
 Supercharger US-Rawlins WY,41.79092,-107.21024
@@ -7999,7 +8003,7 @@ Aldi DE-Rauenberg Frankenäcker,49.27325,8.69579,13
 Aldi DE-Regensburg Johann-Hösl-Straße,48.99457,12.11154
 Aldi DE-Rehlingen Im Dürrfeldslach,49.37231,6.68625
 Aldi DE-Reichshof Falkenweg,50.94155,7.74992
-Aldi DE-Reiskirchen Siemensstraße,50.5982,8.82456,25
+Aldi DE-Reiskirchen Siemensstraße,50.59847,8.82422
 Aldi DE-Remseck am Neckar Neckaraue,48.88777,9.27235
 Aldi DE-Reutlingen Föhrstraße,48.50228,9.20789,20
 Aldi DE-Reutlingen Heubergstraße,48.51249,9.21785,20
@@ -8557,6 +8561,7 @@ Allego DE-Meschede Jahnstraße,51.3555,8.28587
 Allego DE-Mettmann Marie-Curie-Straße,51.25224,6.95176
 Allego DE-Mindelheim,48.0353,10.50145
 Allego DE-Minden Sollingweg,52.30882,8.84265
+Allego DE-Monschau Am Handwerkerzentrum,50.57905,6.26287
 Allego DE-Moosburg a.d.Isar Degernpoint,48.47157,11.96496,30
 Allego DE-Mönchengladbach Korschenbroicher Straße,51.19395,6.44938
 Allego DE-Mönchengladbach Lemkuhlenweg,51.20985,6.4672,30
@@ -10958,8 +10963,7 @@ Circuit-électrique CA-L’Anse-Saint-Jean QC Route 170,48.19695,-70.2478,32
 Circuit-électrique CA-L’Assomption QC Rue Arboit,45.8229,-73.45046,32
 Circuit-électrique CA-L’Épiphanie QC Rue Leblanc,45.84854,-73.48715,32
 Circuit-électrique CA-L’Île-Perrot QC Grand Boulevard,45.39529,-73.95794
-Circuit-électrique CA-Magog QC Chem. Milletta,45.29109,-72.2131
-Circuit-électrique CA-Magog QC Chemin Milletta,45.29137,-72.21335,32
+Circuit-électrique CA-Magog QC Chemin Milletta,45.2911,-72.2131
 Circuit-électrique CA-Magog QC rue Merry Sud,45.2661,-72.15533,32
 Circuit-électrique CA-Magog QC rue Principale Ouest,45.28107,-72.18543,32
 Circuit-électrique CA-Magog QC Rue Sherbrooke,45.27466,-72.13444,32
@@ -10988,7 +10992,6 @@ Circuit-électrique CA-Mont-Saint-Michel QC rue Gravel,46.78023,-75.33592,32
 Circuit-électrique CA-Mont-Tremblant QC Montée Ryan,46.1749,-74.60324,32
 Circuit-électrique CA-Mont-Tremblant QC Rte 117,46.132,-74.6133,32
 Circuit-électrique CA-Mont-Tremblant QC Rue de St Jovite,46.11852,-74.60036
-Circuit-électrique CA-Montcerf-Lytton QC route 117,46.73093,-76.07556,32
 Circuit-électrique CA-Montcerf-Lytton QC Rte 117,46.73103,-76.07591
 Circuit-électrique CA-Montebello QC B rue Notre-Dame,45.64995,-74.94287,32
 Circuit-électrique CA-Montmagny QC Boulevard Taché O,46.97988,-70.5681,32
@@ -11019,7 +11022,6 @@ Circuit-électrique CA-Montréal QC Rue Sherbrooke Est,45.6546,-73.51046,32
 Circuit-électrique CA-Montréal-Est QC Rue Sainte-Julie,45.6311,-73.4952,32
 Circuit-électrique CA-Morin-Heights QC Chemin du Village,45.9039,-74.2465,32
 Circuit-électrique CA-Murdochville QC route 198,48.96063,-65.49222,32
-Circuit-électrique CA-Namur QC route 323,45.89752,-74.92076,32
 Circuit-électrique CA-Namur QC Route 323,45.89774,-74.92068
 Circuit-électrique CA-Napierville QC rue Saint-Jacques,45.1878,-73407.0,32
 Circuit-électrique CA-Natashquan QC Chemin d’en Haut,50.18608,-61.8227,32
@@ -11059,7 +11061,6 @@ Circuit-électrique CA-Québec City QC Wilfrid-Hamel Boulevard,46.8163,-71.2498,
 Circuit-électrique CA-Québec QC Bd Sainte-Anne,46.85222,-71.19588
 Circuit-électrique CA-Québec QC boul. des Galeries,46.82934,-71.29875,32
 Circuit-électrique CA-Québec QC boul. des Galeries,46.83175,-71.3003,32
-Circuit-électrique CA-Québec QC boul. Ste-Anne,46.85218,-71.19562,32
 Circuit-électrique CA-Québec QC boul. Versant Nord,46.79125,-71.28735,32
 Circuit-électrique CA-Québec QC Boulevard Henri-Bourassa,46.87974,-71.28626,32
 Circuit-électrique CA-Québec QC Boulevard Pie-XI Nord,46.8628,-71.42945,32
@@ -11138,7 +11139,6 @@ Circuit-électrique CA-Saint-Léonard-d’Aston QC Rang du Moulin Rouge,46.05817
 Circuit-électrique CA-Saint-Maxime-Du-Mont-Louis QC rue Principale,49.25266,-65.54236,32
 Circuit-électrique CA-Saint-Michel-des-Saints QC rue Brassard,46.6762,-73.91756,32
 Circuit-électrique CA-Saint-Nicolas QC Autoroute Jean-Lesage,46.69782,-71.2995,32
-Circuit-électrique CA-Saint-Nicolas QC Chemin Craig,46.67417,-71.34422,32
 Circuit-électrique CA-Saint-Ours QC Rue Immaculée-Conception,45.892,-73.14846,32
 Circuit-électrique CA-Saint-Pamphile QC route Elgin Nord,46.9696,-69.7911,32
 Circuit-électrique CA-Saint-Pascal QC rue Rochette,47.5303,-69.8195,32
@@ -11223,8 +11223,6 @@ Circuit-électrique CA-Terrebonne QC Montée des Pionniers,45.7146,-73.51006,32
 Circuit-électrique CA-Terrebonne QC Pascal-Gagnon,45.7294,-73.6748,32
 Circuit-électrique CA-Thetford Mines QC Bd Frontenac E,46.1099,-71.30237,32
 Circuit-électrique CA-Thetford Mines QC rue King,46.0876,-71.30246,32
-Circuit-électrique CA-Thurso QC Rue Galipeau,45.59998,-75.24338
-Circuit-électrique CA-Thurso QC Rue Galipeau,45.60023,-75.24374,32
 Circuit-électrique CA-Trois-Pistoles QC Rte 132,48.10599,-69.20825
 Circuit-électrique CA-Trois-Pistoles QC Rue Jean-Rioux,48.1193,-69.16578,32
 Circuit-électrique CA-Trois-Rivières QC Boulevard Jean-XXIII,46.33324,-72.59048,32
@@ -11232,9 +11230,8 @@ Circuit-électrique CA-Trois-Rivières QC Boulevard Sainte-Madeleine,46.36702,-7
 Circuit-électrique CA-Trois-Rivières QC Rue Barkoff,46.3733,-72.55557,32
 Circuit-électrique CA-Trois-Rivières QC rue des Volontaires,46.34282,-72.54496,32
 Circuit-électrique CA-Trois-Rivières QC Rue Sainte Marguerite,46.34272,-72.55507,32
-Circuit-électrique CA-Trois-Rivières QC rue Vachon,46.36944,-72.55555,32
 Circuit-électrique CA-Trois-Rivières QC Rue Vachon,46.36964,-72.55564
-Circuit-électrique CA-Trois-Rivières QC rue Vachon,46.37043,-72.5548,32
+Circuit-électrique CA-Trois-Rivières QC Rue Vachon,46.37043,-72.5548
 Circuit-électrique CA-Témiscaming QC Chemin Kipawa,46.72102,-79.09547,32
 Circuit-électrique CA-Témiscouata-sur-le-Lac QC Rue Commerciale Nord,47.6733,-68.87315,32
 Circuit-électrique CA-Témiscouata-sur-le-Lac QC Rue Commerciale Nord,47.6806,-68.87636,32
@@ -11450,7 +11447,7 @@ Clever DK-Faaborg Brønnersvej,55.10179,10.24039
 Clever DK-Fanø Hovedgaden,55.44237,8.39905
 Clever DK-Fanø Strandvejen,55.43838,8.3859
 Clever DK-Gilleleje Smidstrup Strandvej,56.11693,12.24052
-Clever DK-Gråsten Sundsnæs,54.9104,9.58843
+Clever DK-Gråsten Sundsnæs,54.91043,9.58785
 Clever DK-Gudenå,56.449,10.00198
 Clever DK-Herning Merkurvej,56.13552,8.99657
 Clever DK-Hjørring Bispetorv,57.45526,9.99397
@@ -14486,7 +14483,7 @@ ELEN HR-Nadin-Sjever,44.06219,15.53119
 ELEN HR-Nova Gradiška Trg kralja Tomislava,45.25869,17.38101
 ELEN HR-Novalja Burin Bok,44.55254,14.89333
 ELEN HR-Odmorište Janjče Istok,44.7512,15.37522,8
-ELEN HR-Odmorište Janjče Zapad,44.75127,15.3733,16
+ELEN HR-Odmorište Janjče Zapad,44.75132,15.3733,8
 ELEN HR-Odmorište Novoselec,45.63787,16.51281
 ELEN HR-Odmorište Pula istok,44.93352,13.891
 ELEN HR-Odmorište Pula zapad,44.9332,13.8896
@@ -15265,7 +15262,7 @@ EnBW DE-Eschborn Ginnheimer Straße,50.14132,8.58163,29
 EnBW DE-Escheburg Lange Stücken,53.4718,10.3105
 EnBW DE-Eschelbronn Bahnhofstraße,49.3201,8.86804
 EnBW DE-Eschenbach In den Bühlgärten,48.65772,9.6737
-EnBW DE-Eschweiler Fichtenweg,50.7961,6.2323
+EnBW DE-Eschweiler Fichtenweg,50.79558,6.23294
 EnBW DE-Eschweiler Kölner Straße,50.82002,6.2967
 EnBW DE-Esens Herdetor,53.64647,7.60794
 EnBW DE-Essen Aktienstraße,51.4623,6.9305
@@ -21038,9 +21035,12 @@ Fines BG-Chuchuligovo Чучулигово Автомагистрала Стру
 Fines BG-Gelemenovo Гелеменово,42.26823,24.3139
 Fines BG-Harmanli Харманли Коста Андреев,41.9255,25.9209
 Fines BG-Kostinbrod Poleto,42.79496,23.21518
+Fines BG-Shumen Шумен Пролетарска,43.25212,26.96247
+Fines BG-Sliven Сливен ул. Ст. Стамболов,42.67707,26.34336
 Fines BG-Sofia София Dr. Peter Dertliev Blvrd,42.70983,23.25768
 Fines BG-Tserovo Церово A1,42.3365,24.07986
 Fines BG-Varna Варна бул. Сливница,43.22093,27.89823
+Fines BG-Varna Варна ул. инженер Павлин Николов,43.21585,27.8739
 Fines BG-Драгичево Главен път Е79,42.6009,23.13062
 Fines BG-Летница,43.31211,25.07321
 Fines BG-Лозен Автомагистрала Тракия,42.6322,23.45811
@@ -21284,6 +21284,7 @@ GOFAST CH-Neuchatel Le Verger 1,47.02125,7.02892,8
 GOFAST CH-Nyon Chem. de la Fontaine,46.38794,6.2198
 GOFAST CH-Oberriet Rheinstrasse,47.31159,9.56189
 GOFAST CH-Oensingen Staadackerstraße,47.2869,7.71806
+GOFAST CH-Otelfingen Dammstrasse,47.45932,8.40206
 GOFAST CH-Piotta-Quinto Area di Servizio Quinto,46.51532,8.66706
 GOFAST CH-Pollegio Via al Brenno,46.35914,8.95693
 GOFAST CH-Quarten Rastplatz Bergsboden,47.1124,9.2661
@@ -23820,7 +23821,7 @@ Kople NO-Russenes Vestre Porsangerveien,70.47762,25.06666,25
 Kople NO-Sandnessjøen Sjøbergs gate,66.02265,12.63824
 Kople NO-Utskarpen Flostrandveien,66.29598,13.55068
 
-Kostner IT-Varna Forch Straße,46.75915,11.63778,12
+Kostner IT-Vahrn Forch Straße,46.75923,11.63814,12
 
 Kraftwerke-Farchant DE-Farchant Am Gern,47.53011,11.10946
 
@@ -26337,6 +26338,7 @@ nonoxx-pro DE-Wernigerode Halberstädter Straße,51.83823,10.79588
 
 Norlys DK-Billund Nordmarksvej,55.72828,9.13272
 Norlys DK-Gilleleje Alfavej,56.12646,12.30511
+Norlys DK-Gråsten Sundsnæs,54.91026,9.58935
 Norlys DK-Hirtshals Vestergade,57.58884,9.9577
 Norlys DK-Hjørring Frederikshavnsvej,57.45557,10.00555
 Norlys DK-Hvide Sande Kirksvej,55.86376,8.18126
@@ -29544,6 +29546,7 @@ SW-Coesfeld DE-Borken Johanniterstraße,51.84275,6.86055
 SW-Coesfeld DE-Coesfeld Am Tüskenbach,51.93736,7.15691
 SW-Dachau DE-Dachau Burgfriedenstraße,48.25955,11.429
 SW-Dachau DE-Dachau Münchner Straße,48.25333,11.44
+SW-Deggendorf DE-Deggendorf Westlicher Stadtgraben,48.835,12.9603
 SW-Dessau DE-Dessau-Roßlau Gropiusallee,51.83831,12.22681
 SW-Dillingen DE-Dillingen/Saar Mathildenstraße,49.34676,6.70933
 SW-Dillingen DE-Dillingen/Saar Werkstraße,49.35666,6.73413
