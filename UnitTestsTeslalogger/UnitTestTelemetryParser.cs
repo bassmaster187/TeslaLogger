@@ -757,6 +757,75 @@ namespace UnitTestsTeslalogger
             firstMessageTime = telemetry.lastMessageReceived;
         }
 
+        [TestMethod]
+        public void LoginRespone_TokenExpired_FiresTokenRefreshedEventAndCallsGetToken()
+        {
+            Car c = new Car(0, "", "", 0, "", DateTime.Now, "", "", "", "", "", "5YJ3E7EA3LF700000", "", null, false);
+
+            var telemetry = new TelemetryParser(c);
+            telemetry.databaseCalls = false;
+
+            var testWebHelper = new TestWebHelper(c);
+            c.webhelper = testWebHelper;
+
+            bool tokenRefreshedEventFired = false;
+            telemetry.handleTokenRefreshed += (sender, e) => { tokenRefreshedEventFired = true; };
+
+            string json = @"{ ""Teslalogger"": ""LoginRespone"", ""Response"": { ""updated_vehicles"": 0, ""error"": ""token expired (401)"" } }";
+
+            telemetry.handleMessageAsync(json).Wait();
+
+            Assert.IsTrue(testWebHelper.getTokenCalled, "GetToken() should be called when the login fails with token expired!");
+            Assert.IsTrue(tokenRefreshedEventFired, "handleTokenRefreshed event should be fired after token refresh!");
+            Assert.AreEqual("Telemetry Login Error!!! Check Logfile!", c.CurrentJSON.FatalError);
+        }
+
+        [TestMethod]
+        public void LoginRespone_Ok_DoesNotFireTokenRefreshedEvent()
+        {
+            Car c = new Car(0, "", "", 0, "", DateTime.Now, "", "", "", "", "", "5YJ3E7EA3LF700000", "", null, false);
+
+            var telemetry = new TelemetryParser(c);
+            telemetry.databaseCalls = false;
+
+            var testWebHelper = new TestWebHelper(c);
+            c.webhelper = testWebHelper;
+
+            bool tokenRefreshedEventFired = false;
+            telemetry.handleTokenRefreshed += (sender, e) => { tokenRefreshedEventFired = true; };
+
+            string json = @"{ ""Teslalogger"": ""LoginRespone"", ""Config"": ""paid3"", ""Response"": { ""updated_vehicles"": ""1"" } }";
+
+            telemetry.handleMessageAsync(json).Wait();
+
+            Assert.IsFalse(tokenRefreshedEventFired, "handleTokenRefreshed event should NOT be fired on successful login!");
+            Assert.IsFalse(testWebHelper.getTokenCalled, "GetToken() should not be called on successful login!");
+            Assert.AreEqual(null, c.CurrentJSON.FatalError);
+        }
+
+        [TestMethod]
+        public void LoginRespone_ConfigAlreadySent_DoesNotFireTokenRefreshedEvent()
+        {
+            Car c = new Car(0, "", "", 0, "", DateTime.Now, "", "", "", "", "", "5YJ3E7EA3LF700000", "", null, false);
+
+            var telemetry = new TelemetryParser(c);
+            telemetry.databaseCalls = false;
+
+            var testWebHelper = new TestWebHelper(c);
+            c.webhelper = testWebHelper;
+
+            bool tokenRefreshedEventFired = false;
+            telemetry.handleTokenRefreshed += (sender, e) => { tokenRefreshedEventFired = true; };
+
+            string json = @"{ ""Teslalogger"": ""ConfigAlreadySent"", ""Config"": ""paid3"" }";
+
+            telemetry.handleMessageAsync(json).Wait();
+
+            Assert.IsFalse(tokenRefreshedEventFired, "handleTokenRefreshed event should NOT be fired on ConfigAlreadySent!");
+            Assert.IsFalse(testWebHelper.getTokenCalled, "GetToken() should not be called on ConfigAlreadySent!");
+            Assert.AreEqual(null, c.CurrentJSON.FatalError);
+        }
+
         List<string> LoadData(string path)
         {
             if (!System.IO.File.Exists(path))
@@ -783,6 +852,21 @@ namespace UnitTestsTeslalogger
                 }
             }
             return data;
+        }
+    }
+
+    class TestWebHelper : WebHelper
+    {
+        public bool getTokenCalled = false;
+
+        internal TestWebHelper(Car car) : base(car)
+        {
+        }
+
+        public override string GetToken()
+        {
+            getTokenCalled = true;
+            return "test_token";
         }
     }
 }

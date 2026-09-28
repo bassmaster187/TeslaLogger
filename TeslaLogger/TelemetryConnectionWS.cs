@@ -24,8 +24,9 @@ namespace TeslaLogger
         ClientWebSocket ws = null;
         Random r = new Random();
 
-        readonly string clientInstanceId = $"{Environment.MachineName}:{Environment.ProcessId}:{Guid.NewGuid():N}";
+readonly string clientInstanceId = $"{Environment.MachineName}:{Environment.ProcessId}:{Guid.NewGuid():N}";
         bool connect;
+        bool relogin;
 
         void Log(string message)
         {
@@ -36,10 +37,11 @@ namespace TeslaLogger
         {
             this.car = car;
             if (car == null)
-                return;
+return;
 
             parser = new TelemetryParser(car);
             parser.InitFromDB();
+            parser.handleTokenRefreshed += (sender, e) => Relogin();
 
             Log($"Telemetry instance id: {clientInstanceId}");
 
@@ -63,7 +65,7 @@ namespace TeslaLogger
             {
                 car.Log("Telemetry CloseConnection " + ex.Message);
             }
-        }
+}
 
         public override void StartConnection()
         {
@@ -82,6 +84,14 @@ namespace TeslaLogger
             }
         }
 
+        public void Relogin()
+        {
+            Log("Relogin after token refresh");
+            relogin = true;
+            cts.Cancel();
+            cts = new CancellationTokenSource();
+        }
+
         private void Run()
         {
             while (true)
@@ -94,18 +104,34 @@ namespace TeslaLogger
                     ConnectToServer();
 
                     if (ws == null)
-                        continue;
+continue;
 
                     Login();
 
                     while (ws.State == WebSocketState.Open)
                     {
                         Thread.Sleep(100);
+
+                        if (relogin)
+                        {
+                            Log("Reconnect to Telemetry Server with new token");
+                            relogin = false;
+                            break;
+                        }
+
                         ReceiveAsync(ws).Wait();
                     }
-                }
+}
+
                 catch (Exception ex)
                 {
+                    if (relogin)
+                    {
+                        relogin = false;
+                        Log("Reconnect to Telemetry Server with new token");
+                        continue;
+                    }
+
                     if (!connect && ex.InnerException is TaskCanceledException)
                         System.Diagnostics.Debug.WriteLine("Telemetry Cancel OK");
                     else if (IsRemoteCloseWithoutHandshake(ex, out string message))

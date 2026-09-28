@@ -66,6 +66,7 @@ namespace TeslaLogger
         public bool databaseCalls = true;
 
         public event EventHandler handleACChargeChange;
+        public event EventHandler handleTokenRefreshed;
 
         internal TelemetryParser(Car c)
         {
@@ -1431,6 +1432,7 @@ namespace TeslaLogger
                 {
                     Log("Login Error: token expired!");
                     car.webhelper.GetToken();
+                    handleTokenRefreshed?.Invoke(this, EventArgs.Empty);
                 }
             }
             catch (Exception ex)
