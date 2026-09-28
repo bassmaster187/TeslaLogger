@@ -15,13 +15,13 @@ Supported by all Tesla vehicles.
 ![fleet-api-access](https://raw.githubusercontent.com/bassmaster187/TeslaLogger/master/img/fleet-api-access.png)
 
 ### Vehicle Command Proxy
-The Vehicle Command Proxy is not supported by Model S/X before model year 2021. These older vehicles continue to use the old Owners API for commands such as "turn on sentry mode". All other vehicles require a [Virtual Key](#virtual-keys) that you send to your car during the setup process.  
+The Vehicle Command Proxy works with Cybertruck, Semi, all Model 3/Y and all Model S/X from mid-2018 onwards. Older Model S/X only work if they have had an MCU2 retrofitted; vehicles without MCU2 continue to use the old Owners API for commands such as "turn on sentry mode". All supported vehicles require a [Virtual Key](#virtual-keys) that you send to your car during the setup process.  
 ![fleet-api-access-in-car](https://raw.githubusercontent.com/bassmaster187/TeslaLogger/master/img/fleet-api-access-in-car.jpeg)
 
 https://github.com/teslamotors/vehicle-command
 
 ### Fleet Telemetry Server
-The Fleet Telemetry Server is not supported by Model S/X before model year 2021. These additional features are only available on newer vehicles and you need a [Virtual Key](#virtual-keys) that you send to your car during the setup process. The access token must be created with an owner profile – a driver profile does not work. I was told that leased vehicles are currently not supported.
+The Fleet Telemetry Server works with Cybertruck, Semi, all Model 3/Y and all Model S/X from mid-2018 onwards. Older Model S/X only work if they have had an MCU2 retrofitted. You need a [Virtual Key](#virtual-keys) that you send to your car during the setup process. The access token must be created with an owner profile – a driver profile does not work. I was told that leased vehicles are currently not supported.
 
 https://github.com/teslamotors/fleet-telemetry
 

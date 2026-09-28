@@ -15,13 +15,13 @@ Unterstützt von allen Tesla-Fahrzeugen.
 ![fleet-api-access](https://raw.githubusercontent.com/bassmaster187/TeslaLogger/master/img/fleet-api-access.png)
 
 ### Vehicle Command Proxy
-Der Vehicle Command Proxy wird von Model S/X vor Baujahr 2021 nicht unterstützt. Diese älteren Fahrzeuge verwenden weiterhin die alte Owners API für Befehle wie „Wächtermodus einschalten“. Alle anderen Fahrzeuge benötigen einen [Virtuellen Schlüssel](#virtuelle-schlüssel), den du während des Einrichtungsprozesses an dein Auto sendest.  
+Der Vehicle Command Proxy funktioniert mit Cybertruck, Semi, allen Model 3/Y und allen Model S/X ab Mitte 2018. Ältere Model S/X funktionieren nur, wenn sie eine MCU2 nachgerüstet haben; Fahrzeuge ohne MCU2 verwenden weiterhin die alte Owners API für Befehle wie „Wächtermodus einschalten“. Alle unterstützten Fahrzeuge benötigen einen [Virtuellen Schlüssel](#virtuelle-schlüssel), den du während des Einrichtungsprozesses an dein Auto sendest.  
 ![fleet-api-access-in-car](https://raw.githubusercontent.com/bassmaster187/TeslaLogger/master/img/fleet-api-access-in-car.jpeg)
 
 https://github.com/teslamotors/vehicle-command
 
 ### Fleet Telemetry Server
-Der Fleet Telemetry Server wird von Model S/X vor Baujahr 2021 nicht unterstützt. Diese zusätzlichen Funktionen sind nur bei neueren Fahrzeugen verfügbar und du brauchst einen [Virtuellen Schlüssel](#virtuelle-schlüssel), den du während des Einrichtungsprozesses an dein Auto sendest. Das Zugriffstoken muss mit einem Besitzer-Profil erstellt werden – ein Fahrer-Profil funktioniert nicht. Mir wurde gesagt, dass Leasingfahrzeuge derzeit nicht unterstützt werden.
+Der Fleet Telemetry Server funktioniert mit Cybertruck, Semi, allen Model 3/Y und allen Model S/X ab Mitte 2018. Ältere Model S/X funktionieren nur, wenn sie eine MCU2 nachgerüstet haben. Du brauchst einen [Virtuellen Schlüssel](#virtuelle-schlüssel), den du während des Einrichtungsprozesses an dein Auto sendest. Das Zugriffstoken muss mit einem Besitzer-Profil erstellt werden – ein Fahrer-Profil funktioniert nicht. Mir wurde gesagt, dass Leasingfahrzeuge derzeit nicht unterstützt werden.
 
 https://github.com/teslamotors/fleet-telemetry
 
