@@ -1893,23 +1893,25 @@ HAVING
                 }
                 // calculate chargingstate.charge_energy_added from endchargingid - startchargingid
                 // this will also recalculate charge price
-                _ = RecalculateChargeEnergyAdded(openChargingState);
+_ = RecalculateChargeEnergyAdded(openChargingState);
 
                 // get tesla invoice for supercharger
                 if (ChargingStateLocationIsSuC(openChargingState))
                 {
                     _ = Task.Factory.StartNew(() =>
                     {
-                        Thread.Sleep(600000 + random.Next(1000, 5000)); // sleep 10+rand minutes so that the invoice is ready
-                        if (GetChargingHistoryV2Service.LoadLatest(car))
+                        // The invoice is usually not available when the session ends. It can take
+                        // minutes up to a few hours until Tesla has generated it, therefore retry
+                        // until the invoice file for this charging state exists (#1752).
+                        for (int retry = 0; retry < 12; retry++)
                         {
-                            if (GetChargingHistoryV2Service.SyncAll(car) == 0)
+                            Thread.Sleep(600000 + random.Next(1000, 5000)); // sleep 10+rand minutes so that the invoice is ready
+                            if (GetChargingHistoryV2Service.LoadLatest(car))
                             {
-                                // invoice not ready yet
-                                Thread.Sleep(3600000 + random.Next(1000, 5000)); // sleep 60+rand minutes so that the invoice is ready
-                                if (GetChargingHistoryV2Service.LoadLatest(car))
+                                _ = GetChargingHistoryV2Service.SyncAll(car);
+                                if (GetChargingHistoryV2Service.InvoiceForChargingStateExists(car, openChargingState))
                                 {
-                                    _ = GetChargingHistoryV2Service.SyncAll(car);
+                                    break;
                                 }
                             }
                         }

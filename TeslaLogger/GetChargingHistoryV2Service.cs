@@ -74,15 +74,8 @@ INSERT IGNORE INTO teslacharging SET
                         {
                             Directory.CreateDirectory(invoiceDir);
                         }
-                        // output file name
-                        if (siteLocationName.Contains(","))
-                        {
-                            string[] tokens = siteLocationName.Split(',');
-                            siteLocationName = tokens[0];
-                            Regex rgx = new Regex("[^a-zA-Z-]");
-                            siteLocationName = rgx.Replace(siteLocationName, "_");
-                        }
-                        string invoicePDF = Path.Combine(invoiceDir, $"{chargeStartDateTime.ToString("yyyy-MM-dd--HH-mm", Tools.ciEnUS)}--{siteLocationName}--{sessionId}.pdf");
+// output file name
+                        string invoicePDF = Path.Combine(invoiceDir, GetChargingHistoryV2Service.BuildInvoiceFilename(siteLocationName, chargeStartDateTime, sessionId));
                         // if file does not exist yet ...
                         if (!File.Exists(invoicePDF))
                         {
@@ -215,8 +208,82 @@ INSERT IGNORE INTO teslacharging SET
                 Tools.DebugLog($"GetChargingHistoryV2Service.LoadLatest(#{car.CarInDB}): 502 Bad Gateway");
                 return false;
             }
-            _ = ParseJSON(result, car);
+_ = ParseJSON(result, car);
             return true;
+        }
+
+        internal static string BuildInvoiceFilename(string siteLocationName, DateTime chargeStartDateTime, string sessionId)
+        {
+            if (siteLocationName.Contains(","))
+            {
+                string[] tokens = siteLocationName.Split(',');
+                siteLocationName = tokens[0];
+                Regex rgx = new Regex("[^a-zA-Z-]");
+                siteLocationName = rgx.Replace(siteLocationName, "_");
+            }
+            return $"{chargeStartDateTime.ToString("yyyy-MM-dd--HH-mm", Tools.ciEnUS)}--{siteLocationName}--{sessionId}.pdf";
+        }
+
+        internal static bool InvoiceForChargingStateExists(Car car, int chargingstateid)
+        {
+            try
+            {
+                string sessionId = string.Empty;
+                using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+                {
+                    con.Open();
+                    using (MySqlCommand cmd = new MySqlCommand(@"
+SELECT
+  chargingstate.sessionId
+FROM
+  chargingstate
+WHERE
+  chargingstate.CarID = @CarID
+  AND chargingstate.id = @chargingstateid", con))
+                    {
+                        cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
+                        cmd.Parameters.AddWithValue("@chargingstateid", chargingstateid);
+                        MySqlDataReader dr = SQLTracer.TraceDR(cmd);
+                        if (dr.Read() && dr[0] != DBNull.Value)
+                        {
+                            sessionId = dr[0].ToString();
+                        }
+                    }
+                }
+                if (sessionId.Length == 0)
+                {
+                    return false;
+                }
+                using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+                {
+                    con.Open();
+                    using (MySqlCommand cmd = new MySqlCommand(@"
+SELECT
+  siteLocationName,
+  chargeStartDateTime
+FROM
+  teslacharging
+WHERE
+  sessionId = @sessionId
+  AND VIN = @VIN", con))
+                    {
+                        cmd.Parameters.AddWithValue("@sessionId", sessionId);
+                        cmd.Parameters.AddWithValue("@VIN", car.Vin);
+                        MySqlDataReader dr = SQLTracer.TraceDR(cmd);
+                        if (dr.Read() && dr[0] != DBNull.Value && dr[1] != DBNull.Value && DateTime.TryParse(dr[1].ToString(), out DateTime chargeStartDateTime))
+                        {
+                            string invoicePDF = Path.Combine(FileManager.GetInvoicePath(), BuildInvoiceFilename(dr[0].ToString(), chargeStartDateTime, sessionId));
+                            return File.Exists(invoicePDF);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ex.ToExceptionless().FirstCarUserID().Submit();
+                Tools.DebugLog($"Exception during GetChargingHistoryV2Service.InvoiceForChargingStateExists(): {ex}");
+            }
+            return false;
         }
 
         internal static void CheckSchema()
