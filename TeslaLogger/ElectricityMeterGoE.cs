@@ -45,8 +45,20 @@ namespace TeslaLogger
                 if (o != null)
                     return (string)o;
 
-                string url = host + "/status";
+                // The full /status response is unreliable on some firmwares (see
+                // goecharger/go-eCharger-API-v2#170: "when i use the full data return
+                // then the response seems incomplete"). Use the filter parameter to
+                // request only the keys we need (also recommended by go-e for
+                // continuous polling).
+                string url = host + "/status?filter=wh,whg,whs,whb,who,eto,car,fwv";
                 string lastJSON = client.GetStringAsync(url).GetAwaiter().GetResult();
+
+                // fallback for old firmwares (< 051.4) that do not support the
+                // comma separated filter syntax: retry without filter parameter
+                if (!lastJSON.Contains("\"eto\"") && !lastJSON.Contains("\"car\""))
+                {
+                    lastJSON = client.GetStringAsync(host + "/status").GetAwaiter().GetResult();
+                }
 
                 MemoryCache.Default.Add(cacheKey, lastJSON, DateTime.Now.AddSeconds(10));
                 return lastJSON;
