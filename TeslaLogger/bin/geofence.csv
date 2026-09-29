@@ -4556,6 +4556,7 @@ Supercharger-V4 US-Camarillo CA,34.2168,-119.06643
 Supercharger-V4 US-Camarillo CA E Daily Dr,34.21838,-119.04555
 Supercharger-V3 US-Cameron Park CA,38.65562,-120.96554
 Supercharger-V4 US-Campbell CA,37.28583,-121.97744
+Supercharger-V4 US-Campbell CA E Hamilton Ave,37.29548,-121.94003
 Supercharger US-Carlsbad CA,33.08408,-117.26632
 Supercharger-V3 US-Carlsbad CA Paseo Del Norte,33.12477,-117.31925
 Supercharger-V3 US-Carson CA,33.83273,-118.25858
@@ -4701,10 +4702,11 @@ Supercharger-V4 US-Inglewood CA W Century Blvd,33.9451,-118.33468
 Supercharger-V4 US-Inglewood CA W Imperial Hwy,33.93077,-118.3277
 Supercharger-V3 US-Inyokern CA,35.64632,-117.81297,55
 Supercharger-V3 US-Irvine CA - Culver Drive,33.70692,-117.78524
-Supercharger-V3 US-Irvine CA - Walnut Ave,33.6906,-117.76924
 Supercharger-V3 US-Irvine CA Main St,33.6846,-117.85298
 Supercharger US-Irvine CA Michelson Dr,33.6734,-117.8453
 Supercharger-V3 US-Irvine CA Spectrum Center Dr,33.64775,-117.7392
+Supercharger-V3 US-Irvine CA Walnut Ave,33.6898,-117.76905
+Supercharger-V3 US-Irvine CA Walnut Ave,33.69137,-117.7699
 Supercharger-V3 US-Jackson CA,38.34807,-120.77674
 Supercharger-V4 US-Jurupa Valley CA,34.01256,-117.46048
 Supercharger-V3 US-Kettleman City CA,35.98624,-119.95747
@@ -4800,6 +4802,7 @@ Supercharger-V4 US-Morro Bay CA,35.36527,-120.84916
 Supercharger US-Mount Shasta CA,41.31013,-122.31756
 Supercharger US-Mount Shasta CA,41.31035,-122.31613
 Supercharger US-Mountain View CA,37.41542,-122.0769
+Supercharger-V3 US-Murrieta CA,33.5661,-117.21252
 Supercharger-V4 US-Murrieta CA Murrieta Hot Springs Rd,33.55376,-117.13972
 Supercharger US-Napa CA,38.23563,-122.26312
 Supercharger-V3 US-Napa CA - Bel Aire Plaza,38.3218,-122.30748
@@ -4913,6 +4916,7 @@ Supercharger-V3 US-San Bruno CA - San Bruno Ave,37.619,-122.4401
 Supercharger-V4 US-San Bruno CA San Bruno Ave,37.62588,-122.4256
 Supercharger US-San Carlos CA,37.50284,-122.24566
 Supercharger US-San Clemente CA,33.4371,-117.62677
+Supercharger-V3 US-San Clemente CA Av. Vista Hermosa,33.43794,-117.62607
 Supercharger-V3 US-San Clemente CA Avenida Vista Hermosa,33.4631,-117.60795
 Supercharger US-San Diego CA,32.90212,-117.1936
 Supercharger-V3 US-San Diego CA - Balboa Ave,32.81953,-117.1796
@@ -4988,6 +4992,7 @@ Supercharger US-San Ramon CA,37.76286,-121.9637
 Supercharger-V3 US-San Ramon CA - San Ramon Valley Boulevard,37.72315,-121.94434
 Supercharger-V4 US-San Ramon CA 18080 San Ramon Valley Blvd,37.75828,-121.9656
 Supercharger-V4 US-San Ramon CA Camino Ramon,37.76527,-121.95838
+Supercharger-V4 US-San Ramon CA San Ramon Valley Blvd,37.78165,-121.97967
 Supercharger-V3 US-Sand City CA,36.62208,-121.84422
 Supercharger US-Santa Ana CA,33.77583,-117.87204
 Supercharger-V4 US-Santa Ana CA 17th St,33.75932,-117.8565
@@ -5058,7 +5063,7 @@ Supercharger-V3 US-Truckee CA - Soaring Way,39.31992,-120.15588
 Supercharger-V4 US-Truckee CA Deerfield Dr,39.32283,-120.22577
 Supercharger-V3 US-Turlock CA,37.50928,-120.87638
 Supercharger-V4 US-Turlock CA Fulkerth Rd,37.50683,-120.881
-Supercharger-V3 US-Tustin CA,33.71087,-117.81728
+Supercharger-V3 US-Tustin CA,33.71115,-117.81667
 Supercharger-V3 US-Tustin CA - Flight Way,33.7039,-117.83727
 Supercharger-V3 US-Tustin CA - Red Hill Avenue,33.72826,-117.8217
 Supercharger-V4 US-Tustin CA El Camino Real,33.73022,-117.79772
@@ -9890,6 +9895,9 @@ BayWa DE-Schweinfurt Heini-Dittmar-Straße,50.03004,10.24076
 BayWa DE-Unna Massener Straße,51.53162,7.66366
 BayWa DE-Weiden in der Oberpfalz Untere Bauscherstraße,49.66255,12.15577
 
+BC-Hydro CA-Dease Lake BC Boulder St,58.43866,-129.98994
+BC-Hydro CA-New Hazelton BC 10 Ave,55.2465,-127.58185
+
 be.energised AT-Bad Gleichenberg Grazer Straße,46.87108,15.90266
 be.energised AT-Fehring Radkersburger Straße,46.93569,16.00706
 be.energised AT-Gröbming Hauptstraße,47.44693,13.90146
@@ -13412,7 +13420,7 @@ Electrify-America US-Cordele GA E 16th Ave,31.96344,-83.76263,32
 Electrify-America US-Cornelius OR N Adair St.,45.5215,-123.06802,32
 Electrify-America US-Corona CA California Ave,33.8563,-117.54037,32
 Electrify-America US-Corona CA McKinley St.,33.89045,-117.5187,32
-Electrify-America US-Costa Mesa CA S Coast Drive,33.6901,-117.91506,32
+Electrify-America US-Costa Mesa CA S Coast Drive,33.6901,-117.9153,32
 Electrify-America US-Council Bluffs IA Manawa Centre Drive,41.2279,-95.84572,32
 Electrify-America US-Covina CA S Barranca Ave,34.07418,-117.881,32
 Electrify-America US-Covington WA SE 270th PL,47.3603,-122.10773,32
@@ -13467,7 +13475,7 @@ Electrify-America US-Eau Claire WI Gateway Dr,44.77477,-91.42838,32
 Electrify-America US-Edgewater CO Sheridan Blvd.,39.74583,-105.0548,32
 Electrify-America US-Edina MN York Ave S,44.8748,-93.322,32
 Electrify-America US-Edison NJ U.S. Rte 1,40.5116,-74.3848
-Electrify-America US-Edwards CO Edwards Access Rd,39.64848,-106.58748,20
+Electrify-America US-Edwards CO Edwards Access Rd,39.64845,-106.5875,20
 Electrify-America US-Effingham IL Avenue of Mid-America,39.1384,-88.5713,32
 Electrify-America US-El Cajon CA Camino Canada,32.823,-116.90067,32
 Electrify-America US-El Cajon CA Fletcher Parkway,32.80797,-116.96808,32
@@ -17019,6 +17027,7 @@ EnelX IT-Firenze Viale Europa,43.75641,11.29959
 EnelX IT-Foiano della Chiana Valdichiana Outlet,43.22707,11.7993
 EnelX IT-Gagliano del Capo LE,39.83806,18.36647,15
 EnelX IT-Gallicano Via di Fondovalle,44.06505,10.44142
+EnelX IT-Galtellì Via Sandro Pertini,40.38164,9.60643
 EnelX IT-Gela Via Generale Cascino,37.06503,14.26126
 EnelX IT-Giardini-Naxos Viale Jannuzzo,37.81831,15.26601
 EnelX IT-Giulianova Via Galileo Galilei,42.768,13.95534
@@ -17768,6 +17777,8 @@ EVBox NL-Scherpenzeel Industrielaan,52.083,5.4762
 EVBox NL-Vriezenveen De Zuivering,52.40457,6.63523
 EVBox NL-Zeewolde Dasselaarweg,52.31192,5.54367
 EVBox NO-Nordli Doktor Brønns vei,64.4632,13.59228
+
+EVC CA-Meziadin Junction BC Stewart-Cassiar Hwy,56.09963,-129.30593
 
 EVconnect CA-Rockland ON Laurier St,45.53873,-75.3042
 EVconnect RO-Blejoi DN1A DN1B,44.97199,26.02152
@@ -21054,7 +21065,10 @@ Fines BG-Ясен Yasen,43.42648,24.50454
 
 Flo CA-Brownsburg QC Rte du Canton,45.63191,-74.39353
 Flo CA-Gloucester ON Ogilvie Rd,45.43582,-75.60518
+Flo CA-Marsh Lake YT Army Beach Dr,60.5597,-134.45145
 Flo CA-Vaudreuil-Dorion QC Bd Harwood,45.38008,-74.01859
+Flo CA-Watson Lake YT Frank Trail,60.06187,-128.71092
+Flo CA-Whitehorse YT 2nd Ave,60.72543,-135.0571
 
 FOR-EV GB-Lochgilphead,56.02807,-5.42519
 FOR-EV GB-Oban Glengallan Rd,56.39633,-5.48957
@@ -22416,7 +22430,7 @@ Ionity DE-Kaiserslautern Mainzer Straße,49.45635,7.79732
 Ionity DE-Kamen Zollpost,51.5762,7.67018
 Ionity DE-Kirchheim Hauptstraße,50.83328,9.57318
 Ionity DE-Kirchheim Hauptstraße,50.8337,9.57078
-Ionity DE-Konstanz Reichenaustraße,47.6749,9.15394
+Ionity DE-Konstanz Reichenaustraße,47.67468,9.1546
 Ionity DE-Leinefelde Ernemannstraße,51.39074,10.34255
 Ionity DE-Marl Herzlia-Allee,51.64452,7.10234
 Ionity DE-Meerane Hohe Straße,50.84076,12.44502
@@ -27645,6 +27659,7 @@ PPC-blue RO-Deva Calea Zarandului,45.86127,22.92905
 PPC-blue RO-Miercurea Ciuc Strada Harghita,46.36307,25.79284
 PPC-blue RO-Miercurea Ciuc Strada Harghita,46.36767,25.77728
 PPC-blue RO-Orțișoara DJ693,45.9697,21.29804
+PPC-blue RO-Otopeni Calea Bucureștilor,44.5544,26.06954
 PPC-blue RO-Otopeni Calea Bucureștilor,44.57314,26.07754
 PPC-blue RO-Oțelu Roșu Strada Mihai Eminescu,45.51708,22.35214
 PPC-blue RO-Predeal Șoseaua Națională,45.47952,25.5645
@@ -29934,6 +29949,7 @@ SW-Trier DE-Trier Ostallee,49.75595,6.65058
 SW-Troisdorf DE-Troisdorf Echternacher Straße,50.81936,7.1135
 SW-Troisdorf DE-Troisdorf Elsenplatz,50.8144,7.17178
 SW-Troisdorf DE-Troisdorf Heinkelstraße,50.81697,7.10835
+SW-Tübingen DE-Tübingen Eugenstraße,48.51376,9.06083
 SW-Uetersen DE-Uetersen Am Markt,53.68357,9.66573
 SW-Velbert DE-Velbert Friedrich-Ebert-Straße,51.34376,7.03301
 SW-Velbert DE-Velbert Friedrichstraße,51.33231,7.05583
