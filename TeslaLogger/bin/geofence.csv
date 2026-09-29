@@ -19419,7 +19419,42 @@ evpass CH-Widen Allmend,47.3671,8.36618
 
 EVPlus PL-Sieradz 1 Maja,51.57957,18.71439
 
+EVRange US-Avenal CA CA-33,35.89117,-120.04,32
+EVRange US-Brawley CA Main St,32.9786,-115.5386,32
+EVRange US-Calexico CA E 5th St,32.66993,-115.49237,32
+EVRange US-Calipatria CA W Main St,33.12536,-115.51552,32
+EVRange US-Carson City NV S Carson St S,39.1254,-119.77173,32
+EVRange US-Cerritos CA Piuma Ave,33.87898,-118.1045,32
+EVRange US-Chowchilla CA Robertson Blvd,37.0909,-120.29064,32
+EVRange US-Coleville CA US-395,38.5171,-119.4808,32
+EVRange US-Corona CA Serfas Club Dr,33.8796,-117.61373,32
+EVRange US-Denver CO E 64 Ave,39.81306,-104.77375,32
+EVRange US-El Centro CA N Imperial Ave,32.80323,-115.57052,32
+EVRange US-Eureka CA Broadway St,40.7902,-124.1798,32
+EVRange US-Fortuna CA Alamar Way,40.57897,-124.15305,32
+EVRange US-Gustine CA Gonzaga Rd,37.056,-121.0134,32
+EVRange US-Healdsburg CA Healdsburg Ave,38.6038,-122.86345,32
+EVRange US-Hopland CA US-101,38.9707,-123.1177,32
+EVRange US-Kettleman City CA Powers Dr,35.98645,-119.96107,32
+EVRange US-Lancaster CA W Ave D,34.78155,-118.1667,32
+EVRange US-Leggett CA Dr Thru Tree Rd,39.85075,-123.71713,32
+EVRange US-Long Beach CA E. Willow St,33.7998,-118.0884,32
+EVRange US-Los Banos CA E Pacheco Blvd,37.0583,-120.83235,32
+EVRange US-Miranda CA Ave of the Giants,40.235,-123.82416,32
+EVRange US-Orick CA US-101,41.2916,-124.0578,32
+EVRange US-Paso Robles CA Buena Vista Dr,35.64523,-120.67144,32
+EVRange US-Portola CA Commercial St,39.8069,-120.4691,32
+EVRange US-Reston VA Roger Bacon Dr,38.95094,-77.3347,32
+EVRange US-Salinas CA N Davis Rd,36.70888,-121.6671,32
+EVRange US-San Ysidro CA W. San Ysidro Blvd,32.55885,-117.05912,32
+EVRange US-Smith River CA US-101,41.93336,-124.16532,32
+EVRange US-Soledad CA H Dela Rosa Sr St,36.41596,-121.3208,32
+EVRange US-South San Francisco CA S. Airport Rd,37.6441,-122.40388,32
 EVRange US-Truckee CA Northstar Dr,39.2871,-120.10713
+EVRange US-Valencia CA The Old Rd,34.4301,-118.58976,32
+EVRange US-Whittier CA Workman Mill Rd,34.03325,-118.02098,32
+EVRange US-Willits CA S Main St,39.40295,-123.3506,32
+EVRange US-Yampa CO Moffat Ave,40.1501,-106.90802,32
 
 EVSC US-Cannon Beach OR Elk Creek Rd,45.88923,-123.95582
 
@@ -25392,6 +25427,13 @@ MAN AT-Leopoldsdorf MAN-Straße,48.09976,16.39722
 Mark-E DE-Hagen Bahnhofstraße,51.35983,7.46887
 
 MB AT-Parndorf Richard-Erlinger-Platz,47.9766,16.8551,20
+MB CA-Abbotsford BC Sumas Way,49.02536,-122.2661,32
+MB CA-Coquitlam BC Lougheed Hwy.,49.27544,-122.79285,32
+MB CA-Nanaimo BC Island Hwy,49.2347,-124.05076,32
+MB CA-Pentiction BC Lakeshore Dr W,49.50262,-119.59515,32
+MB CA-Pitt Meadows BC Lougheed Hwy,49.22993,-122.69215,32
+MB CA-Surrey BC BC-10,49.10525,-122.80173,32
+MB CA-Tsawwassen BC Canoe Pass Wy,49.03782,-123.09005,32
 MB DE-Augsburg Haunstetter Straße,48.3471,10.90502
 MB DE-Aurich Korbweidenstraße,53.45056,7.50673
 MB DE-Autohof Cloppenburg,52.8272,8.00026,25
@@ -25426,8 +25468,84 @@ MB DE-Weißenfels Heinrich-Hertz-Straße,51.1874,11.98767
 MB DE-Weißensberg Beim Rothen-Kreuz,47.5922,9.7308
 MB DE-Wörnitz Hammerstatt,49.25922,10.24312,30
 MB DE-Würzburg Randersackerer Straße,49.77624,9.9405
+MB US-Alpharetta GA Avalon Blvd,34.07223,-84.27463,32
+MB US-Ashburn VA Easthampton Plaza,39.05274,-77.45225,32
+MB US-Athens GA US-29,33.99502,-83.3352,32
+MB US-Augusta GA Crane Creek Dr,33.49742,-82.0795,32
+MB US-Austell GA East-West Connector,33.85636,-84.59537,32
+MB US-Austin TX Kramer Ln,30.3997,-97.72787,32
+MB US-Bangor ME Odlin Rd,44.78902,-68.8121,32
+MB US-Baytown TX East Fwy,29.80126,-95.0002,32
+MB US-Birmingham AL Summit Blvd,33.44455,-86.73145,32
+MB US-Braintree MA Forbes Rd,42.22104,-71.03022,32
+MB US-Calhoun GA Union Grove Rd SE,34.44127,-84.91515,32
+MB US-Cary NC O’Kelly Chapel Rd,35.8473,-78.8888,32
+MB US-Charlotte NC New Fashion Way,35.17118,-80.97176,32
+MB US-Charlotte NC West Park Dr,35.15783,-80.8887,32
+MB US-Chattanooga TN Hamilton Place Blvd,35.0322,-85.15993,32
+MB US-Clinton CT Killingworth Turnpike,41.2935,-72.53346,32
+MB US-Conyers GA Dogwood Dr SE,33.65362,-84.0026,32
+MB US-Conyers GA Highway 20 NE,33.6839,-83.99964,32
+MB US-Copley OH Heritage Center Dr,41.13486,-81.6589,32
+MB US-Delray Beach FL Lyons Rd,26.4558,-80.19073,32
+MB US-Denton TX South Interstate 35 East,33.18043,-97.1027,32
+MB US-Dickson TN Highway 46 S,36.0171,-87.33368,32
+MB US-Ellenton FL Factory Shops Blvd,27.53805,-82.50835,32
+MB US-Elmira NY Country Rd 64,42.15365,-76.87858,32
+MB US-Ennis TX Creechville Rd,32.3238,-96.6057,32
+MB US-Estero FL Fashion Dr,26.40163,-81.80926,32
+MB US-Farmington UT North Union Ave,40.98252,-111.90868,32
+MB US-Fishers IN Yard St,39.95477,-86.00048,32
+MB US-Fort Myers FL Daniels Pkwy,26.549,-81.80654,32
+MB US-Fredericksburg VA Spotsylvania Mall Dr,38.29285,-77.51158,32
+MB US-Gaffney SC Factory Shops Blvd,35.08324,-81.71218,32
+MB US-Greensboro NC Kathleen Ave,36.0852,-79.8362,32
+MB US-Hillsboro TX State Highway 77,32.04775,-97.08988,32
+MB US-Holyoke MA Whiting Farms Rd,42.1752,-72.64236,32
+MB US-Hyannis MA Iyannough Rd,41.6662,-70.29908,32
+MB US-Jonesboro GA Tara Blvd,33.57483,-84.37114,32
+MB US-Katy TX Katy Freeway,29.77803,-95.8453,32
+MB US-Kittery ME US-1,43.11487,-70.7305,32
+MB US-Kodak TN Buc-ee’s Blvd,35.98117,-83.6059,32
+MB US-Lansing MI Preyde Blvd,42.76442,-84.51727,32
+MB US-Lee MA Premium Outlet Blvd,42.29583,-73.23245,32
 MB US-Leeds AL Buc-ee’s Blvd,33.54388,-86.5854
+MB US-Locust Grove GA Market Place,33.35545,-84.122,32
+MB US-Luling TX U.S. 90,29.64973,-97.5945,32
+MB US-Madisonville TX Interstate 45,30.96476,-95.87894,32
+MB US-Manchester NH S Willow St,42.95682,-71.43384,32
+MB US-Melissa TX Central Expressway,33.27008,-96.59174,32
+MB US-Methuen MA Pleasant Valley St,42.74306,-71.16033,32
+MB US-New Braunfels TX Interstate 35,29.72747,-98.07697,32
+MB US-Norfolk VA Premium Outlets Blvd,36.88417,-76.1982,32
+MB US-North Charleston SC Centre Pointe Dr,32.87482,-80.0216,32
+MB US-North Fort Myers FL Hancock Bridge Pkwy,26.65242,-81.918,32
+MB US-North Haven CT Universal Dr,41.34874,-72.86948,32
+MB US-Orlando FL Tavistock Lakes Blvd,28.36642,-81.3041,32
+MB US-Orlando FL Vineland Ave,28.3882,-81.49394,32
+MB US-Peabody MA Newbury St,42.52605,-70.99476,32
+MB US-Phoenix OR South Pacific Hwy,42.28058,-122.82152,32
+MB US-Red Bluff CA Adobe Rd,40.1915,-122.23673,32
+MB US-Ridgefield WA N 56th Pl,45.81914,-122.68964,32
+MB US-Riverton UT West Kestrel Range Rd,40.5089,-111.99955,32
+MB US-Riverview FL Boyette Rd,27.85422,-82.31586,32
+MB US-Roseland NJ Eisenhower Parkway,40.81917,-74.32866,32
+MB US-Roswell GA W. Crossville Rd,34.0592,-84.38114,32
+MB US-Round Rock TX I 35 N Frontage Rd,30.56734,-97.6918,32
+MB US-Saco ME Industrial Park Rd,43.52516,-70.44557,32
+MB US-Savannah GA Abercorn St,31.99066,-81.12838,32
+MB US-South Windsor CT Evergreen Way,41.81398,-72.55535,32
+MB US-Springfield MO North Mulroy Rd,37.2521,-93.17956,32
+MB US-St Johnsbury VT US-5,44.40273,-72.0229,32
+MB US-Sunbury OH State Route 37 E,40.26543,-82.92012,32
+MB US-Tempe AZ E Rio Salado Pkwy,33.43364,-111.90583,32
+MB US-Terrell TX W. IH 20,32.71725,-96.32174,32
+MB US-Thornton CO Lincoln St,39.9564,-104.9838,32
+MB US-Venice FL Pinebrook Rd,27.1,-82.4181,32
 MB US-Waller TX US 290 Frontage Rd,30.07166,-95.9309
+MB US-Washington PA Old Mill Blvd,40.1885,-80.2209,32
+MB US-Wharton TX U.S. 59,29.32584,-96.12266,32
+MB US-Wrentham MA Premium Outlet Blvd,42.0402,-71.3501,32
 
 mblty DE-Anzing Gewerbepark,48.15931,11.85389
 mblty DE-Bad Fallingbostel Klaus-Seckel-Straße,52.89243,9.76779
