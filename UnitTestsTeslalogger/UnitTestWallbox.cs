@@ -11,6 +11,25 @@ namespace UnitTestsTeslalogger
     [TestClass]
     public class UnitTestWallbox
     {
+        static string ReadAllText(string relativePath)
+        {
+            if (System.IO.File.Exists(relativePath))
+                return System.IO.File.ReadAllText(relativePath);
+
+            string altPath = relativePath.Replace(@"..\..", "../../..");
+            if (System.IO.File.Exists(altPath))
+                return System.IO.File.ReadAllText(altPath);
+
+            altPath = relativePath.Replace(@"..\..\testdata\", "../../testdata/");
+            if (System.IO.File.Exists(altPath))
+                return System.IO.File.ReadAllText(altPath);
+
+            altPath = "../" + relativePath;
+            if (System.IO.File.Exists(altPath))
+                return System.IO.File.ReadAllText(altPath);
+
+            return System.IO.File.ReadAllText(relativePath);
+        }
 
         [TestMethod]
         public void OpenWBMeterLP1Param()
@@ -55,11 +74,11 @@ namespace UnitTestsTeslalogger
         {
             var v = new ElectricityMeterOpenWB2("", "");
 
-            v.mockup_version = System.IO.File.ReadAllText(@"..\..\testdata\openwb2_version.txt");
-            v.mockup_charge_state = System.IO.File.ReadAllText(@"..\..\testdata\openwb2_charge_state.txt");
-            v.mockup_charge_point = System.IO.File.ReadAllText(@"..\..\testdata\openwb2_cp.txt");
-            v.mockup_grid = System.IO.File.ReadAllText(@"..\..\testdata\openwb2_grid.txt");
-            v.mockup_hierarchy = System.IO.File.ReadAllText(@"..\..\testdata\openwb2_hierarchy_single_wb.txt");
+            v.mockup_version = ReadAllText(@"..\..\testdata\openwb2_version.txt");
+            v.mockup_charge_state = ReadAllText(@"..\..\testdata\openwb2_charge_state.txt");
+            v.mockup_charge_point = ReadAllText(@"..\..\testdata\openwb2_cp.txt");
+            v.mockup_grid = ReadAllText(@"..\..\testdata\openwb2_grid.txt");
+            v.mockup_hierarchy = ReadAllText(@"..\..\testdata\openwb2_hierarchy_single_wb.txt");
 
             double? kwh = v.GetVehicleMeterReading_kWh();
             var charging = v.IsCharging();
@@ -78,11 +97,11 @@ namespace UnitTestsTeslalogger
         {
             var v = new ElectricityMeterOpenWB2("", "");
 
-            v.mockup_version = System.IO.File.ReadAllText(@"..\..\testdata\openwb2_version.txt");
-            v.mockup_charge_state = System.IO.File.ReadAllText(@"..\..\testdata\openwb2_charge_state.txt");
-            v.mockup_charge_point = System.IO.File.ReadAllText(@"..\..\testdata\openwb2_cp.txt");
-            v.mockup_grid = System.IO.File.ReadAllText(@"..\..\testdata\openwb2_grid.txt");
-            v.mockup_hierarchy = System.IO.File.ReadAllText(@"..\..\testdata\openwb2_hierarchy_multiple_wb.txt");
+            v.mockup_version = ReadAllText(@"..\..\testdata\openwb2_version.txt");
+            v.mockup_charge_state = ReadAllText(@"..\..\testdata\openwb2_charge_state.txt");
+            v.mockup_charge_point = ReadAllText(@"..\..\testdata\openwb2_cp.txt");
+            v.mockup_grid = ReadAllText(@"..\..\testdata\openwb2_grid.txt");
+            v.mockup_hierarchy = ReadAllText(@"..\..\testdata\openwb2_hierarchy_multiple_wb.txt");
 
             double? kwh = v.GetVehicleMeterReading_kWh();
             var charging = v.IsCharging();
@@ -100,7 +119,7 @@ namespace UnitTestsTeslalogger
         public void GoECharger()
         {
             var v = new ElectricityMeterGoE("", "");
-            v.status = System.IO.File.ReadAllText(@"..\..\testdata\goe.txt");
+            v.status = ReadAllText(@"..\..\testdata\goe.txt");
 
             double? kwh = v.GetVehicleMeterReading_kWh();
             var charging = v.IsCharging();
@@ -164,7 +183,7 @@ namespace UnitTestsTeslalogger
         public void CFos()
         {
             var v = new ElectricityMeterCFos("", "");
-            v.get_dev_info = System.IO.File.ReadAllText(@"..\..\testdata\cfos.txt");
+            v.get_dev_info = ReadAllText(@"..\..\testdata\cfos.txt");
 
             double? kwh = v.GetVehicleMeterReading_kWh();
             var charging = v.IsCharging();
@@ -183,7 +202,7 @@ namespace UnitTestsTeslalogger
         public void SmartEVSE3()
         {
             var v = new ElectricityMeterSmartEVSE3("", "");
-            v.mockup_status = System.IO.File.ReadAllText(@"..\..\testdata\smartevse3.txt");
+            v.mockup_status = ReadAllText(@"..\..\testdata\smartevse3.txt");
 
             double? kwh = v.GetVehicleMeterReading_kWh();
             var charging = v.IsCharging();
@@ -202,7 +221,7 @@ namespace UnitTestsTeslalogger
         public void EVCC_Wallbox()
         {
             var v = new ElectricityMeterEVCC("", "Wallbox1");
-            v.api_state = System.IO.File.ReadAllText(@"..\..\testdata\evcc.txt");
+            v.api_state = ReadAllText(@"..\..\testdata\evcc.txt");
 
             double? kwh = v.GetVehicleMeterReading_kWh();
             var charging = v.IsCharging();
@@ -221,7 +240,7 @@ namespace UnitTestsTeslalogger
         public void EVCC_Vehicle()
         {
             var v = new ElectricityMeterEVCC("", "TestCar1");
-            v.api_state = System.IO.File.ReadAllText(@"..\..\testdata\evcc.txt");
+            v.api_state = ReadAllText(@"..\..\testdata\evcc.txt");
 
             double? kwh = v.GetVehicleMeterReading_kWh();
             var charging = v.IsCharging();
@@ -240,7 +259,7 @@ namespace UnitTestsTeslalogger
         public void EVCC_multiple()
         {
             var v = new ElectricityMeterEVCC("", "TestCar2");
-            v.api_state = System.IO.File.ReadAllText(@"..\..\testdata\evcc_multiple.txt");
+            v.api_state = ReadAllText(@"..\..\testdata\evcc_multiple.txt");
 
             double? kwh = v.GetVehicleMeterReading_kWh();
             var charging = v.IsCharging();
@@ -260,12 +279,12 @@ namespace UnitTestsTeslalogger
         {
             var v = new ElectricityMeterWARP("", "");
 
-            v.mockup_info_version = System.IO.File.ReadAllText(@"..\..\testdata\warp_infos_version.txt");
-            v.mockup_evse_state = System.IO.File.ReadAllText(@"..\..\testdata\warp_evse_state.txt");
-            v.mockup_wallbox_value_ids = System.IO.File.ReadAllText(@"..\..\testdata\warp_wallbox_value_ids.txt");
-            v.mockup_wallbox_values = System.IO.File.ReadAllText(@"..\..\testdata\warp_wallbox_values.txt");
-            v.mockup_grid_value_ids = System.IO.File.ReadAllText(@"..\..\testdata\warp_grid_value_ids.txt");
-            v.mockup_grid_values = System.IO.File.ReadAllText(@"..\..\testdata\warp_grid_values.txt");
+            v.mockup_info_version = ReadAllText(@"..\..\testdata\warp_infos_version.txt");
+            v.mockup_evse_state = ReadAllText(@"..\..\testdata\warp_evse_state.txt");
+            v.mockup_wallbox_value_ids = ReadAllText(@"..\..\testdata\warp_wallbox_value_ids.txt");
+            v.mockup_wallbox_values = ReadAllText(@"..\..\testdata\warp_wallbox_values.txt");
+            v.mockup_grid_value_ids = ReadAllText(@"..\..\testdata\warp_grid_value_ids.txt");
+            v.mockup_grid_values = ReadAllText(@"..\..\testdata\warp_grid_values.txt");
 
             double? kwh = v.GetVehicleMeterReading_kWh();
             var charging = v.IsCharging();
@@ -303,8 +322,8 @@ namespace UnitTestsTeslalogger
         public void ShellyEM_CEmpty()
         {
             var v = new ElectricityMeterShellyEM("", "");
-            v.mockup_status = System.IO.File.ReadAllText(@"..\..\testdata\shelly-em1-status.txt");
-            v.mockup_shelly = System.IO.File.ReadAllText(@"..\..\testdata\shelly-em1-shelly.txt");
+            v.mockup_status = ReadAllText(@"..\..\testdata\shelly-em1-status.txt");
+            v.mockup_shelly = ReadAllText(@"..\..\testdata\shelly-em1-shelly.txt");
 
             double? kwh = v.GetVehicleMeterReading_kWh();
             var chargign = v.IsCharging();
@@ -323,8 +342,8 @@ namespace UnitTestsTeslalogger
         public void ShellyEM_C1()
         {
             var v = new ElectricityMeterShellyEM("", "C1");
-            v.mockup_status = System.IO.File.ReadAllText(@"..\..\testdata\shelly-em1-status.txt");
-            v.mockup_shelly = System.IO.File.ReadAllText(@"..\..\testdata\shelly-em1-shelly.txt");
+            v.mockup_status = ReadAllText(@"..\..\testdata\shelly-em1-status.txt");
+            v.mockup_shelly = ReadAllText(@"..\..\testdata\shelly-em1-shelly.txt");
 
             double? kwh = v.GetVehicleMeterReading_kWh();
             var chargign = v.IsCharging();
@@ -343,8 +362,8 @@ namespace UnitTestsTeslalogger
         public void ShellyEM_C2()
         {
             var v = new ElectricityMeterShellyEM("", "C2");
-            v.mockup_status = System.IO.File.ReadAllText(@"..\..\testdata\shelly-em1-status.txt");
-            v.mockup_shelly = System.IO.File.ReadAllText(@"..\..\testdata\shelly-em1-shelly.txt");
+            v.mockup_status = ReadAllText(@"..\..\testdata\shelly-em1-status.txt");
+            v.mockup_shelly = ReadAllText(@"..\..\testdata\shelly-em1-shelly.txt");
 
             double? kwh = v.GetVehicleMeterReading_kWh();
             var chargign = v.IsCharging();
