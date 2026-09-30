@@ -3075,6 +3075,8 @@ Supercharger-V3 GB-London Gateway,51.63036,-0.26354
 Supercharger GB-London North Greenwich,51.50245,-0.00175
 Supercharger-V3 GB-London Park Royal,51.52673,-0.28348
 Supercharger-V3 GB-London Sidcup,51.4128,0.13426
+Supercharger GB-London Staples Corner,51.57318,-0.2266
+Supercharger GB-London Streatham High Street EV OTM,51.4199,-0.12768
 Supercharger-V4 GB-London Waddon,51.3717,-0.11685
 Supercharger-V4 GB-London Wellington Rd,42.93384,-81.2229
 Supercharger GB-London-Brent Cross,51.57753,-0.223753
@@ -4352,6 +4354,7 @@ Supercharger-V4 TH-Ratchaburi Global House,13.54733,99.80717
 Supercharger-V4 TR-Afyonkarahisar Asiye Sultan Blv.,38.7547,30.55634
 Supercharger-V4 TR-Afyonkarahisar Dörtyol,38.79183,30.45374
 Supercharger-V3 TR-Akhisar,38.930236,27.703596
+Supercharger-V4 TR-Amasya,40.86888,35.49667
 Supercharger-V3 TR-Ankara,39.949583,32.832923
 Supercharger-V4 TR-Beylikdüzü İstanbul,41.01997,28.62815
 Supercharger-V4 TR-Bolu,40.72398,31.46504
@@ -4373,6 +4376,7 @@ Supercharger-V4 TR-Uşak Merkez,38.67086,29.42427
 Supercharger-V4 TR-Çankaya Ankara,39.90963,32.77736
 Supercharger-V4 TR-Çankaya Ankara Çiğdem,39.88323,32.8086
 
+Supercharger-V4 TW-Changhua Lugong S. 1st Rd,24.07687,120.41194
 Supercharger-V4 TW-Kaohsiung Longhua N. St.,22.65013,120.3438
 Supercharger-V3 TW-Nantou Caotun,23.9664,120.67746
 Supercharger-V4 TW-Taichung Guanqian Rd,24.1519,120.6637
@@ -5632,6 +5636,7 @@ Supercharger-V4 US-Effingham IL,39.13887,-88.56185
 Supercharger-V3 US-Elgin IL,42.01468,-88.33512
 Supercharger-V3 US-Evanston IL,42.0501,-87.68493
 Supercharger US-Evergreen Park IL,41.7249,-87.68333
+Supercharger-V4 US-Evergreen Park IL,41.72532,-87.6837
 Supercharger-V3 US-Flossmoor IL,41.52884,-87.7093
 Supercharger-V3 US-Galesburg IL,40.94705,-90.33924
 Supercharger-V3 US-Gilman IL,40.752,-87.9963
@@ -6504,6 +6509,7 @@ Supercharger-V3 US-Parish NY,43.40864,-76.1143
 Supercharger-V4 US-Peru NY,44.5808,-73.52827
 Supercharger US-Plainview NY,40.7798,-73.45144
 Supercharger US-Plattsburgh NY,44.70453,-73.49176
+Supercharger-V4 US-Port Jefferson Station NY,40.9194,-73.04124
 Supercharger-V3 US-Potsdam NY,44.66723,-74.99035
 Supercharger US-Queens NY Queens Center,40.73504,-73.8706
 Supercharger-V4 US-Queens NY Springfield Blvd,40.68,-73.75382
@@ -6603,6 +6609,7 @@ Supercharger-V4 US-Chickasha OK Francis Energy,35.0325,-97.93308
 Supercharger-V4 US-Davis OK Francis Energy,34.50594,-97.17134
 Supercharger-V4 US-Edmond OK,35.6226,-97.4786
 Supercharger-V4 US-Elk City OK Francis Energy,35.4082,-99.37974
+Supercharger-V4 US-Enid OK Francis Energy,36.38954,-97.90765
 Supercharger-V4 US-Guthrie OK,35.88005,-97.39557
 Supercharger-V4 US-Henryetta OK,35.44053,-95.97013
 Supercharger-V4 US-Henryetta OK Hornbeam Rd Francis Energy,35.43467,-96.0181
@@ -20727,6 +20734,7 @@ EWII DK-Tim Vikkevej,56.25724,8.13505
 Ewiva IT-Alessandria Via Vecchia Torino,44.9153,8.59988,20
 Ewiva IT-Aprilia Via Aldo Moro,41.58686,12.64667
 Ewiva IT-Arcola Via della Repubblica,44.11604,9.91309
+Ewiva IT-Area di Servizio Serramendola Est,37.0595,15.22726
 Ewiva IT-Asti Corso Casale,44.91548,8.22732
 Ewiva IT-Bagnolo San Vito Via Marco Biagi,45.08582,10.85562
 Ewiva IT-Belforte Monferrato Via S. Colombano,44.62597,8.65543
@@ -21707,6 +21715,7 @@ HEnW DE-Hamburg Marienthaler Straße,53.56064,10.03831
 HEnW DE-Hamburg Martinistraße,53.58867,9.97512
 HEnW DE-Hamburg Mendelssohnstraße,53.56378,9.90716
 HEnW DE-Hamburg Moosrosenweg,53.60321,10.06915
+HEnW DE-Hamburg Nagelsweg,53.5475,10.01923
 HEnW DE-Hamburg Neue Rabenstraße,53.5606,9.99261
 HEnW DE-Hamburg Neue Straße,53.46256,9.97964
 HEnW DE-Hamburg Neuer Weg,53.48353,10.21139
@@ -22400,7 +22409,7 @@ Ionity CH-Neuenkirch,47.11337,8.23233
 Ionity CH-Oftringen Nordstrasse,47.30405,7.9297
 Ionity CH-Rastplatz Heidiland,47.01172,9.51243,20
 Ionity CH-Raststätte Grauholz,46.99025,7.47613,30
-Ionity CH-Silvaplana Via Chantunela,46.45562,9.79077,20
+Ionity CH-Silvaplana Via Chantunela,46.4556,9.79063,16
 Ionity CH-Wangen an der Aare Wangenstrasse,47.24042,7.65182
 Ionity CZ-Beroun (dir. Prague),49.95581,14.06276
 Ionity CZ-Lovosice,50.51195,14.05277,12
