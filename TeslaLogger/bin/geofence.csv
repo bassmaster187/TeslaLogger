@@ -2198,7 +2198,7 @@ Supercharger-V4 DE-Lünen (Cafe Del Sol),51.60468,7.5262
 Supercharger-V3 DE-Magdeburg,52.21074,11.67012,40
 Supercharger-V4 DE-Magdeburg Florapark,52.15917,11.60737
 Supercharger-V4 DE-Mainz,49.9814,8.28052
-Supercharger-V4 DE-Mainz Weberstraße,49.9753,8.28673
+Supercharger-V4 DE-Mainz Weisenau,49.9753,8.28673
 Supercharger-V4 DE-Malsfeld,51.0875,9.48563,62
 Supercharger-V4 DE-Mannheim,49.54824,8.45752
 Supercharger-V4 DE-Memmingen,47.9957,10.15867
@@ -3075,8 +3075,8 @@ Supercharger-V3 GB-London Gateway,51.63036,-0.26354
 Supercharger GB-London North Greenwich,51.50245,-0.00175
 Supercharger-V3 GB-London Park Royal,51.52673,-0.28348
 Supercharger-V3 GB-London Sidcup,51.4128,0.13426
-Supercharger GB-London Staples Corner,51.57318,-0.2266
-Supercharger GB-London Streatham High Street EV OTM,51.4199,-0.12768
+Supercharger-V4 GB-London Staples Corner,51.57318,-0.2266
+Supercharger-V4 GB-London Streatham High Street EV OTM,51.4199,-0.12768
 Supercharger-V4 GB-London Waddon,51.3717,-0.11685
 Supercharger-V4 GB-London Wellington Rd,42.93384,-81.2229
 Supercharger GB-London-Brent Cross,51.57753,-0.223753
@@ -3270,7 +3270,7 @@ Supercharger-V4 IE-Dublin Butterfield Ave,53.29566,-6.2984
 Supercharger-V3 IE-Enfield,53.406101,-6.838143
 Supercharger-V4 IE-Letterkenny,54.95045,-7.7129
 Supercharger-V4 IE-Limerick,52.6721,-8.5173
-Supercharger-V4 IE-Longford,53.74114,-7.80391
+Supercharger-V4 IE-Longford,53.74173,-7.80333
 Supercharger-V4 IE-Mallow,52.13163,-8.64577
 Supercharger-V4 IE-Sligo,54.32865,-8.50272
 Supercharger IE-Tralee,52.260703,-9.659141
@@ -4311,6 +4311,7 @@ Supercharger-V3 SG-Causeway Point,1.43605,103.78597
 Supercharger-V3 SG-Century Square,1.35246,103.94378
 Supercharger-V4 SG-Changi City Point,1.33462,103.96253
 Supercharger-V3 SG-City Square Mall,1.31144,103.8566
+Supercharger-V4 SG-Dunearn Village,1.33694,103.7841
 Supercharger-V3 SG-Katong V,1.30298,103.90337
 Supercharger-V3 SG-Millenia Walk,1.29284,103.8595
 Supercharger-V4 SG-One Holland V,1.31168,103.7948
@@ -4372,6 +4373,7 @@ Supercharger-V4 TR-Kütahya,39.35863,30.0565
 Supercharger-V4 TR-Muğla,37.32262,28.16507
 Supercharger-V4 TR-Tekirdağ,40.98885,27.5772
 Supercharger-V4 TR-Tekkeköy Samsun,41.22493,36.43205
+Supercharger-V4 TR-Trabzon,41.01036,39.71968
 Supercharger-V4 TR-Uşak Merkez,38.67086,29.42427
 Supercharger-V4 TR-Çankaya Ankara,39.90963,32.77736
 Supercharger-V4 TR-Çankaya Ankara Çiğdem,39.88323,32.8086
@@ -4455,6 +4457,7 @@ Supercharger-V3 US-Goodyear AZ,33.4622,-112.3569
 Supercharger-V3 US-Holbrook AZ,34.92298,-110.14555
 Supercharger-V3 US-Kayenta AZ,36.70748,-110.25285
 Supercharger US-Kingman AZ,35.1915,-114.06563
+Supercharger-V4 US-Kingman AZ E Fire Grounds Rd,35.19656,-113.9046
 Supercharger-V3 US-Kingman AZ West Andy Devine,35.18934,-114.05883
 Supercharger-V3 US-Mesa AZ,33.3802,-111.80567
 Supercharger-V4 US-Mesa AZ S Signal Butte Rd,33.39166,-111.5985
@@ -5692,6 +5695,7 @@ Supercharger-V3 US-Elkhart IN - Henry Schricker Travel Plaza,41.73255,-86.00293
 Supercharger-V3 US-Fair Oaks IN,41.011,-87.27632
 Supercharger-V4 US-Fair Oaks IN N 600 E,41.01117,-87.2769
 Supercharger US-Fishers IN,39.95766,-86.01614
+Supercharger-V4 US-Fishers IN Commercial Dr,39.95817,-86.01092
 Supercharger US-Fort Wayne IN,41.1384,-85.16333
 Supercharger-V3 US-Fort Wayne IN Illinois Road,41.07304,-85.21816
 Supercharger-V4 US-Fort Wayne IN Maysville Rd,41.13413,-85.0144
@@ -5911,6 +5915,7 @@ Supercharger-V3 US-North East MD - Pulaski Highway,39.61313,-75.9303
 Supercharger-V4 US-Nottingham MD,39.36525,-76.51963
 Supercharger-V3 US-Ocean City MD,38.33543,-75.10524
 Supercharger-V3 US-Ocean City MD - Ocean Gateway,38.339,-75.11905
+Supercharger-V4 US-Ocean City MD Stephen Decatur Hwy,38.32787,-75.11764
 Supercharger-V3 US-Owings Mills MD,39.4077,-76.78378
 Supercharger-V3 US-Port Deposit MD,39.596,-76.073
 Supercharger-V4 US-Potomac MD,39.04058,-77.1581
@@ -6157,6 +6162,7 @@ Supercharger-V3 US-Mocksville NC,35.91854,-80.5857
 Supercharger-V3 US-Mooresville NC,35.5868,-80.87282
 Supercharger-V4 US-Morehead City NC,34.7253,-76.7419
 Supercharger-V4 US-Morrisville NC,35.85578,-78.79558
+Supercharger-V4 US-Morrisville NC Morrisville Square ChargedEV,35.81987,-78.82917
 Supercharger US-Mt Airy NC,36.4588,-80.6367
 Supercharger-V3 US-Mt Airy NC Graceland Lane,36.48557,-80.7448
 Supercharger-V3 US-New Bern NC,35.10412,-77.08052
@@ -7212,6 +7218,7 @@ Supercharger-V4 US-Newport News VA Jefferson Ave,37.10046,-76.49263
 Supercharger US-Norfolk VA,36.8605,-76.2076
 Supercharger-V3 US-Norfolk VA E Virginia Beach Blvd,36.85652,-76.21953
 Supercharger-V3 US-Norfolk VA N Military Hwy,36.8974,-76.22643
+Supercharger-V4 US-Parksley VA,37.75738,-75.62243
 Supercharger-V4 US-Petersburg VA,37.1896,-77.37062
 Supercharger-V3 US-Petersburg VA Wagner Road,37.19063,-77.36632
 Supercharger-V3 US-Portsmouth VA,36.83745,-76.3057
@@ -17101,6 +17108,7 @@ EnelX IT-Saluzzo Via F. e G. Lattanzi,44.64589,7.50439
 EnelX IT-San Benedetto del Tronto Via della Liberazione,42.94108,13.88002
 EnelX IT-San Giovanni Teatino IKEA,42.39618,14.16652
 EnelX IT-San Martino Via della Fontana,45.65856,8.48954
+EnelX IT-San Teodoro Via del Tirreno,40.78142,9.67342
 EnelX IT-San Vincenzo Via Firenze,43.09,10.54203
 EnelX IT-San Vito Via Antonio Meucci,39.43443,9.55033
 EnelX IT-Sant’Ambrogio di Torino Piazza Repubblica,45.09813,7.36265
@@ -17114,6 +17122,7 @@ EnelX IT-Scopello Via Mera,45.7729,8.09582
 EnelX IT-Selva Candida,41.9579,12.38587
 EnelX IT-Serravalle Scrivia Via Novi,44.73201,8.84134
 EnelX IT-Siena Strada delle Grondaie,43.33021,11.32848
+EnelX IT-Siracusa Via Bengasi,37.06482,15.28616
 EnelX IT-Sommacampagna Piazza Carlo Alberto,45.4073,10.84025
 EnelX IT-Spilimbergo Via Udine,46.10212,12.90512
 EnelX IT-Stresa Piazza Marconi,45.88419,8.54132
