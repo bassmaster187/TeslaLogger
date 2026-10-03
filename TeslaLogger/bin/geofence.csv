@@ -344,7 +344,8 @@ Supercharger CA-Golden BC,51.313039,-116.973754
 Supercharger-V3 CA-Golden BC Highway 1,51.30975,-116.96876
 Supercharger-V3 CA-Golden BC Trans-Canada Hwy,51.31102,-116.96945
 Supercharger CA-Hope BC,49.378522,-121.442691
-Supercharger-V3 CA-Hope BC - Klassen Road,49.364075,-121.480472
+Supercharger-V3 CA-Hope BC Klassen Rd,49.36347,-121.4787
+Supercharger-V4 CA-Hope BC Old Hope Princeton,49.3744,-121.42903
 Supercharger-V3 CA-Invermere BC,50.512653,-115.996016
 Supercharger CA-Kamloops BC,50.655429,-120.367554
 Supercharger-V3 CA-Kamloops BC - Notre Dame Drive,50.66339,-120.3514
@@ -2197,7 +2198,7 @@ Supercharger-V4 DE-Lünen (Cafe Del Sol),51.60468,7.5262
 Supercharger-V3 DE-Magdeburg,52.21074,11.67012,40
 Supercharger-V4 DE-Magdeburg Florapark,52.15917,11.60737
 Supercharger-V4 DE-Mainz,49.9814,8.28052
-Supercharger-V4 DE-Mainz Weberstraße,49.9753,8.28673
+Supercharger-V4 DE-Mainz Weisenau,49.9753,8.28673
 Supercharger-V4 DE-Malsfeld,51.0875,9.48563,62
 Supercharger-V4 DE-Mannheim,49.54824,8.45752
 Supercharger-V4 DE-Memmingen,47.9957,10.15867
@@ -2277,9 +2278,8 @@ Supercharger-V4 DE-Regensburg-Ost,48.99477,12.15066
 Supercharger-V3 DE-Reichertshofen,48.645645,11.520604
 Supercharger-V3 DE-Reinfeld,53.8229,10.50267,10
 Supercharger-V3 DE-Reinfeld,53.8232,10.50352
-Supercharger-V4 DE-Reiskirchen,50.59563,8.81875,35
-Supercharger-V4 DE-Rhüden,51.9472,10.14027,30
-Supercharger-V3 DE-Rhüden,51.94732,10.14113,30
+Supercharger-V4 DE-Reiskirchen,50.59572,8.81894
+Supercharger-V4 DE-Rhüden,51.94716,10.14027,60
 Supercharger-V4 DE-Ringsheim,48.25,7.76567,21
 Supercharger-V4 DE-Rosengarten,53.37879,9.89814
 Supercharger-V3 DE-Rosenheim,47.81716,12.1207,60
@@ -2581,7 +2581,7 @@ Supercharger-V3 FI-Karesuvanto,68.450226,22.4814
 Supercharger-V4 FI-Keminmaa,65.79995,24.50417,30
 Supercharger-V3 FI-Kempele,64.901803,25.535398
 Supercharger-V4 FI-Kesälahti,61.9047,29.81272
-Supercharger FI-Kokkola,63.829282,23.148487
+Supercharger-V3 FI-Kokkola,63.82928,23.1485
 Supercharger-V3 FI-Kuopio,62.820695,27.607985
 Supercharger-V4 FI-Kuopio IKEA,62.8238,27.60816
 Supercharger-V3 FI-Kuusamo,65.95893,29.1566
@@ -3074,6 +3074,8 @@ Supercharger-V3 GB-London Gateway,51.63036,-0.26354
 Supercharger GB-London North Greenwich,51.50245,-0.00175
 Supercharger-V3 GB-London Park Royal,51.52673,-0.28348
 Supercharger-V3 GB-London Sidcup,51.4128,0.13426
+Supercharger-V4 GB-London Staples Corner,51.57318,-0.2266
+Supercharger-V4 GB-London Streatham High Street EV OTM,51.4199,-0.12768
 Supercharger-V4 GB-London Waddon,51.3717,-0.11685
 Supercharger-V4 GB-London Wellington Rd,42.93384,-81.2229
 Supercharger GB-London-Brent Cross,51.57753,-0.223753
@@ -3211,7 +3213,7 @@ Supercharger-V4 GR-Thessaloniki Θεσσαλονίκη,40.5547,22.99516
 
 Supercharger-V4 HR-Bačva,45.23919,13.71488
 Supercharger-V4 HR-Bačva,45.23939,13.71592
-Supercharger-V4 HR-Gospić,44.5771,15.3934,40
+Supercharger-V4 HR-Gospić,44.57745,15.3926
 Supercharger-V4 HR-Janjče East,44.75155,15.37485
 Supercharger-V4 HR-Janjče West,44.75082,15.37355
 Supercharger-V4 HR-Jasenice,44.24,15.5705
@@ -3267,7 +3269,7 @@ Supercharger-V4 IE-Dublin Butterfield Ave,53.29566,-6.2984
 Supercharger-V3 IE-Enfield,53.406101,-6.838143
 Supercharger-V4 IE-Letterkenny,54.95045,-7.7129
 Supercharger-V4 IE-Limerick,52.6721,-8.5173
-Supercharger-V4 IE-Longford,53.74114,-7.80391
+Supercharger-V4 IE-Longford,53.74173,-7.80333
 Supercharger-V4 IE-Mallow,52.13163,-8.64577
 Supercharger-V4 IE-Sligo,54.32865,-8.50272
 Supercharger IE-Tralee,52.260703,-9.659141
@@ -3321,7 +3323,7 @@ Supercharger IT-Borca di Cadore,46.435592,12.222879
 Supercharger IT-Brennero,46.9954,11.5021,75
 Supercharger-V3 IT-Brescia,45.53229,10.16487
 Supercharger-V4 IT-Brescia Via della Volta,45.50645,10.23256
-Supercharger-V3 IT-Bressanone,46.75903,11.63837,40
+Supercharger-V3 IT-Bressanone,46.75878,11.6377
 Supercharger-V3 IT-Brindisi,40.619822,17.902674
 Supercharger-V4 IT-Busto Arsizio,45.63453,8.83602
 Supercharger IT-Campogalliano,44.686638,10.851342
@@ -4308,6 +4310,7 @@ Supercharger-V3 SG-Causeway Point,1.43605,103.78597
 Supercharger-V3 SG-Century Square,1.35246,103.94378
 Supercharger-V4 SG-Changi City Point,1.33462,103.96253
 Supercharger-V3 SG-City Square Mall,1.31144,103.8566
+Supercharger-V4 SG-Dunearn Village,1.33694,103.7841
 Supercharger-V3 SG-Katong V,1.30298,103.90337
 Supercharger-V3 SG-Millenia Walk,1.29284,103.8595
 Supercharger-V4 SG-One Holland V,1.31168,103.7948
@@ -4351,6 +4354,7 @@ Supercharger-V4 TH-Ratchaburi Global House,13.54733,99.80717
 Supercharger-V4 TR-Afyonkarahisar Asiye Sultan Blv.,38.7547,30.55634
 Supercharger-V4 TR-Afyonkarahisar Dörtyol,38.79183,30.45374
 Supercharger-V3 TR-Akhisar,38.930236,27.703596
+Supercharger-V4 TR-Amasya,40.86888,35.49667
 Supercharger-V3 TR-Ankara,39.949583,32.832923
 Supercharger-V4 TR-Beylikdüzü İstanbul,41.01997,28.62815
 Supercharger-V4 TR-Bolu,40.72398,31.46504
@@ -4368,10 +4372,12 @@ Supercharger-V4 TR-Kütahya,39.35863,30.0565
 Supercharger-V4 TR-Muğla,37.32262,28.16507
 Supercharger-V4 TR-Tekirdağ,40.98885,27.5772
 Supercharger-V4 TR-Tekkeköy Samsun,41.22493,36.43205
+Supercharger-V4 TR-Trabzon,41.01036,39.71968
 Supercharger-V4 TR-Uşak Merkez,38.67086,29.42427
 Supercharger-V4 TR-Çankaya Ankara,39.90963,32.77736
 Supercharger-V4 TR-Çankaya Ankara Çiğdem,39.88323,32.8086
 
+Supercharger-V4 TW-Changhua Lugong S. 1st Rd,24.07687,120.41194
 Supercharger-V4 TW-Kaohsiung Longhua N. St.,22.65013,120.3438
 Supercharger-V3 TW-Nantou Caotun,23.9664,120.67746
 Supercharger-V4 TW-Taichung Guanqian Rd,24.1519,120.6637
@@ -4450,6 +4456,7 @@ Supercharger-V3 US-Goodyear AZ,33.4622,-112.3569
 Supercharger-V3 US-Holbrook AZ,34.92298,-110.14555
 Supercharger-V3 US-Kayenta AZ,36.70748,-110.25285
 Supercharger US-Kingman AZ,35.1915,-114.06563
+Supercharger-V4 US-Kingman AZ E Fire Grounds Rd,35.19656,-113.9046
 Supercharger-V3 US-Kingman AZ West Andy Devine,35.18934,-114.05883
 Supercharger-V3 US-Mesa AZ,33.3802,-111.80567
 Supercharger-V4 US-Mesa AZ S Signal Butte Rd,33.39166,-111.5985
@@ -4555,6 +4562,7 @@ Supercharger-V4 US-Camarillo CA,34.2168,-119.06643
 Supercharger-V4 US-Camarillo CA E Daily Dr,34.21838,-119.04555
 Supercharger-V3 US-Cameron Park CA,38.65562,-120.96554
 Supercharger-V4 US-Campbell CA,37.28583,-121.97744
+Supercharger-V4 US-Campbell CA E Hamilton Ave,37.29548,-121.94003
 Supercharger US-Carlsbad CA,33.08408,-117.26632
 Supercharger-V3 US-Carlsbad CA Paseo Del Norte,33.12477,-117.31925
 Supercharger-V3 US-Carson CA,33.83273,-118.25858
@@ -4700,10 +4708,11 @@ Supercharger-V4 US-Inglewood CA W Century Blvd,33.9451,-118.33468
 Supercharger-V4 US-Inglewood CA W Imperial Hwy,33.93077,-118.3277
 Supercharger-V3 US-Inyokern CA,35.64632,-117.81297,55
 Supercharger-V3 US-Irvine CA - Culver Drive,33.70692,-117.78524
-Supercharger-V3 US-Irvine CA - Walnut Ave,33.6906,-117.76924
 Supercharger-V3 US-Irvine CA Main St,33.6846,-117.85298
 Supercharger US-Irvine CA Michelson Dr,33.6734,-117.8453
 Supercharger-V3 US-Irvine CA Spectrum Center Dr,33.64775,-117.7392
+Supercharger-V3 US-Irvine CA Walnut Ave,33.6898,-117.76905
+Supercharger-V3 US-Irvine CA Walnut Ave,33.69137,-117.7699
 Supercharger-V3 US-Jackson CA,38.34807,-120.77674
 Supercharger-V4 US-Jurupa Valley CA,34.01256,-117.46048
 Supercharger-V3 US-Kettleman City CA,35.98624,-119.95747
@@ -4764,6 +4773,7 @@ Supercharger-V4 US-Manteca CA,37.78557,-121.25185
 Supercharger-V3 US-Manteca CA - Spreckels Avenue,37.79583,-121.1977
 Supercharger US-Marin City CA Donahue Street,37.87255,-122.51036
 Supercharger-V3 US-Marina CA,36.6662,-121.81016
+Supercharger-V4 US-Marina CA Reservation Rd,36.68307,-121.7906
 Supercharger-V3 US-Marina Del Rey CA,33.9807,-118.44468
 Supercharger-V3 US-Mariposa CA,37.48915,-119.97206
 Supercharger-V3 US-Martinez CA,37.993,-122.1213
@@ -4798,6 +4808,7 @@ Supercharger-V4 US-Morro Bay CA,35.36527,-120.84916
 Supercharger US-Mount Shasta CA,41.31013,-122.31756
 Supercharger US-Mount Shasta CA,41.31035,-122.31613
 Supercharger US-Mountain View CA,37.41542,-122.0769
+Supercharger-V3 US-Murrieta CA,33.5661,-117.21252
 Supercharger-V4 US-Murrieta CA Murrieta Hot Springs Rd,33.55376,-117.13972
 Supercharger US-Napa CA,38.23563,-122.26312
 Supercharger-V3 US-Napa CA - Bel Aire Plaza,38.3218,-122.30748
@@ -4890,6 +4901,7 @@ Supercharger US-Rowland Heights CA,33.9914,-117.92793
 Supercharger US-Sacramento CA,38.63793,-121.49703
 Supercharger-V3 US-Sacramento CA - Point West Way,38.60124,-121.4313
 Supercharger-V4 US-Sacramento CA 1610 J St,38.57767,-121.48484
+Supercharger-V4 US-Sacramento CA Arden Way,38.59474,-121.36422
 Supercharger US-Sacramento CA Arden Way,38.60327,-121.42828
 Supercharger-V4 US-Sacramento CA Broadway,38.54734,-121.45342
 Supercharger-V4 US-Sacramento CA Del Paso Rd,38.65557,-121.5246
@@ -4910,6 +4922,7 @@ Supercharger-V3 US-San Bruno CA - San Bruno Ave,37.619,-122.4401
 Supercharger-V4 US-San Bruno CA San Bruno Ave,37.62588,-122.4256
 Supercharger US-San Carlos CA,37.50284,-122.24566
 Supercharger US-San Clemente CA,33.4371,-117.62677
+Supercharger-V3 US-San Clemente CA Av. Vista Hermosa,33.43794,-117.62607
 Supercharger-V3 US-San Clemente CA Avenida Vista Hermosa,33.4631,-117.60795
 Supercharger US-San Diego CA,32.90212,-117.1936
 Supercharger-V3 US-San Diego CA - Balboa Ave,32.81953,-117.1796
@@ -4985,6 +4998,7 @@ Supercharger US-San Ramon CA,37.76286,-121.9637
 Supercharger-V3 US-San Ramon CA - San Ramon Valley Boulevard,37.72315,-121.94434
 Supercharger-V4 US-San Ramon CA 18080 San Ramon Valley Blvd,37.75828,-121.9656
 Supercharger-V4 US-San Ramon CA Camino Ramon,37.76527,-121.95838
+Supercharger-V4 US-San Ramon CA San Ramon Valley Blvd,37.78165,-121.97967
 Supercharger-V3 US-Sand City CA,36.62208,-121.84422
 Supercharger US-Santa Ana CA,33.77583,-117.87204
 Supercharger-V4 US-Santa Ana CA 17th St,33.75932,-117.8565
@@ -5055,7 +5069,7 @@ Supercharger-V3 US-Truckee CA - Soaring Way,39.31992,-120.15588
 Supercharger-V4 US-Truckee CA Deerfield Dr,39.32283,-120.22577
 Supercharger-V3 US-Turlock CA,37.50928,-120.87638
 Supercharger-V4 US-Turlock CA Fulkerth Rd,37.50683,-120.881
-Supercharger-V3 US-Tustin CA,33.71087,-117.81728
+Supercharger-V3 US-Tustin CA,33.71115,-117.81667
 Supercharger-V3 US-Tustin CA - Flight Way,33.7039,-117.83727
 Supercharger-V3 US-Tustin CA - Red Hill Avenue,33.72826,-117.8217
 Supercharger-V4 US-Tustin CA El Camino Real,33.73022,-117.79772
@@ -5624,6 +5638,7 @@ Supercharger-V4 US-Effingham IL,39.13887,-88.56185
 Supercharger-V3 US-Elgin IL,42.01468,-88.33512
 Supercharger-V3 US-Evanston IL,42.0501,-87.68493
 Supercharger US-Evergreen Park IL,41.7249,-87.68333
+Supercharger-V4 US-Evergreen Park IL,41.72532,-87.6837
 Supercharger-V3 US-Flossmoor IL,41.52884,-87.7093
 Supercharger-V3 US-Galesburg IL,40.94705,-90.33924
 Supercharger-V3 US-Gilman IL,40.752,-87.9963
@@ -5679,6 +5694,7 @@ Supercharger-V3 US-Elkhart IN - Henry Schricker Travel Plaza,41.73255,-86.00293
 Supercharger-V3 US-Fair Oaks IN,41.011,-87.27632
 Supercharger-V4 US-Fair Oaks IN N 600 E,41.01117,-87.2769
 Supercharger US-Fishers IN,39.95766,-86.01614
+Supercharger-V4 US-Fishers IN Commercial Dr,39.95817,-86.01092
 Supercharger US-Fort Wayne IN,41.1384,-85.16333
 Supercharger-V3 US-Fort Wayne IN Illinois Road,41.07304,-85.21816
 Supercharger-V4 US-Fort Wayne IN Maysville Rd,41.13413,-85.0144
@@ -5898,6 +5914,7 @@ Supercharger-V3 US-North East MD - Pulaski Highway,39.61313,-75.9303
 Supercharger-V4 US-Nottingham MD,39.36525,-76.51963
 Supercharger-V3 US-Ocean City MD,38.33543,-75.10524
 Supercharger-V3 US-Ocean City MD - Ocean Gateway,38.339,-75.11905
+Supercharger-V4 US-Ocean City MD Stephen Decatur Hwy,38.32787,-75.11764
 Supercharger-V3 US-Owings Mills MD,39.4077,-76.78378
 Supercharger-V3 US-Port Deposit MD,39.596,-76.073
 Supercharger-V4 US-Potomac MD,39.04058,-77.1581
@@ -6144,6 +6161,7 @@ Supercharger-V3 US-Mocksville NC,35.91854,-80.5857
 Supercharger-V3 US-Mooresville NC,35.5868,-80.87282
 Supercharger-V4 US-Morehead City NC,34.7253,-76.7419
 Supercharger-V4 US-Morrisville NC,35.85578,-78.79558
+Supercharger-V4 US-Morrisville NC Morrisville Square ChargedEV,35.81987,-78.82917
 Supercharger US-Mt Airy NC,36.4588,-80.6367
 Supercharger-V3 US-Mt Airy NC Graceland Lane,36.48557,-80.7448
 Supercharger-V3 US-New Bern NC,35.10412,-77.08052
@@ -6496,6 +6514,7 @@ Supercharger-V3 US-Parish NY,43.40864,-76.1143
 Supercharger-V4 US-Peru NY,44.5808,-73.52827
 Supercharger US-Plainview NY,40.7798,-73.45144
 Supercharger US-Plattsburgh NY,44.70453,-73.49176
+Supercharger-V4 US-Port Jefferson Station NY,40.9194,-73.04124
 Supercharger-V3 US-Potsdam NY,44.66723,-74.99035
 Supercharger US-Queens NY Queens Center,40.73504,-73.8706
 Supercharger-V4 US-Queens NY Springfield Blvd,40.68,-73.75382
@@ -6595,6 +6614,7 @@ Supercharger-V4 US-Chickasha OK Francis Energy,35.0325,-97.93308
 Supercharger-V4 US-Davis OK Francis Energy,34.50594,-97.17134
 Supercharger-V4 US-Edmond OK,35.6226,-97.4786
 Supercharger-V4 US-Elk City OK Francis Energy,35.4082,-99.37974
+Supercharger-V4 US-Enid OK Francis Energy,36.38954,-97.90765
 Supercharger-V4 US-Guthrie OK,35.88005,-97.39557
 Supercharger-V4 US-Henryetta OK,35.44053,-95.97013
 Supercharger-V4 US-Henryetta OK Hornbeam Rd Francis Energy,35.43467,-96.0181
@@ -6610,6 +6630,7 @@ Supercharger-V3 US-Oklahoma City OK,35.4617,-97.6514
 Supercharger-V4 US-Oklahoma City OK N Lincoln Blvd Francis Energy,35.52566,-97.5038
 Supercharger-V4 US-Oklahoma City OK N Western Ave JINYA Ramen Bar,35.54063,-97.529
 Supercharger-V3 US-Oklahoma City OK NE 36th St,35.50878,-97.5014
+Supercharger-V4 US-Oklahoma City OK S May Ave Francis Energy,35.36287,-97.56768
 Supercharger-V4 US-Oklahoma City OK W Memorial Rd,35.6106,-97.57807
 Supercharger-V4 US-Owasso OK Francis Energy,36.29283,-95.83873
 Supercharger-V3 US-Perry OK,36.2893,-97.3261
@@ -7197,6 +7218,7 @@ Supercharger-V4 US-Newport News VA Jefferson Ave,37.10046,-76.49263
 Supercharger US-Norfolk VA,36.8605,-76.2076
 Supercharger-V3 US-Norfolk VA E Virginia Beach Blvd,36.85652,-76.21953
 Supercharger-V3 US-Norfolk VA N Military Hwy,36.8974,-76.22643
+Supercharger-V4 US-Parksley VA,37.75738,-75.62243
 Supercharger-V4 US-Petersburg VA,37.1896,-77.37062
 Supercharger-V3 US-Petersburg VA Wagner Road,37.19063,-77.36632
 Supercharger-V3 US-Portsmouth VA,36.83745,-76.3057
@@ -7400,6 +7422,7 @@ Supercharger-V3 US-Evansville WY,42.84728,-106.21396
 Supercharger US-Gillette WY,44.29277,-105.5269
 Supercharger-V4 US-Gillette WY S Douglas Hwy,44.26993,-105.49552
 Supercharger US-Jackson WY,43.464,-110.7945
+Supercharger-V4 US-Lander WY,42.83487,-108.74068
 Supercharger US-Laramie WY,41.32512,-105.61813
 Supercharger US-Lusk WY,42.756,-104.45202
 Supercharger US-Rawlins WY,41.79092,-107.21024
@@ -7999,7 +8022,7 @@ Aldi DE-Rauenberg Frankenäcker,49.27325,8.69579,13
 Aldi DE-Regensburg Johann-Hösl-Straße,48.99457,12.11154
 Aldi DE-Rehlingen Im Dürrfeldslach,49.37231,6.68625
 Aldi DE-Reichshof Falkenweg,50.94155,7.74992
-Aldi DE-Reiskirchen Siemensstraße,50.5982,8.82456,25
+Aldi DE-Reiskirchen Siemensstraße,50.59847,8.82422
 Aldi DE-Remseck am Neckar Neckaraue,48.88777,9.27235
 Aldi DE-Reutlingen Föhrstraße,48.50228,9.20789,20
 Aldi DE-Reutlingen Heubergstraße,48.51249,9.21785,20
@@ -8557,6 +8580,7 @@ Allego DE-Meschede Jahnstraße,51.3555,8.28587
 Allego DE-Mettmann Marie-Curie-Straße,51.25224,6.95176
 Allego DE-Mindelheim,48.0353,10.50145
 Allego DE-Minden Sollingweg,52.30882,8.84265
+Allego DE-Monschau Am Handwerkerzentrum,50.57905,6.26287
 Allego DE-Moosburg a.d.Isar Degernpoint,48.47157,11.96496,30
 Allego DE-Mönchengladbach Korschenbroicher Straße,51.19395,6.44938
 Allego DE-Mönchengladbach Lemkuhlenweg,51.20985,6.4672,30
@@ -9885,6 +9909,9 @@ BayWa DE-Schweinfurt Heini-Dittmar-Straße,50.03004,10.24076
 BayWa DE-Unna Massener Straße,51.53162,7.66366
 BayWa DE-Weiden in der Oberpfalz Untere Bauscherstraße,49.66255,12.15577
 
+BC-Hydro CA-Dease Lake BC Boulder St,58.43866,-129.98994
+BC-Hydro CA-New Hazelton BC 10 Ave,55.2465,-127.58185
+
 be.energised AT-Bad Gleichenberg Grazer Straße,46.87108,15.90266
 be.energised AT-Fehring Radkersburger Straße,46.93569,16.00706
 be.energised AT-Gröbming Hauptstraße,47.44693,13.90146
@@ -10958,8 +10985,7 @@ Circuit-électrique CA-L’Anse-Saint-Jean QC Route 170,48.19695,-70.2478,32
 Circuit-électrique CA-L’Assomption QC Rue Arboit,45.8229,-73.45046,32
 Circuit-électrique CA-L’Épiphanie QC Rue Leblanc,45.84854,-73.48715,32
 Circuit-électrique CA-L’Île-Perrot QC Grand Boulevard,45.39529,-73.95794
-Circuit-électrique CA-Magog QC Chem. Milletta,45.29109,-72.2131
-Circuit-électrique CA-Magog QC Chemin Milletta,45.29137,-72.21335,32
+Circuit-électrique CA-Magog QC Chemin Milletta,45.2911,-72.2131
 Circuit-électrique CA-Magog QC rue Merry Sud,45.2661,-72.15533,32
 Circuit-électrique CA-Magog QC rue Principale Ouest,45.28107,-72.18543,32
 Circuit-électrique CA-Magog QC Rue Sherbrooke,45.27466,-72.13444,32
@@ -10988,7 +11014,6 @@ Circuit-électrique CA-Mont-Saint-Michel QC rue Gravel,46.78023,-75.33592,32
 Circuit-électrique CA-Mont-Tremblant QC Montée Ryan,46.1749,-74.60324,32
 Circuit-électrique CA-Mont-Tremblant QC Rte 117,46.132,-74.6133,32
 Circuit-électrique CA-Mont-Tremblant QC Rue de St Jovite,46.11852,-74.60036
-Circuit-électrique CA-Montcerf-Lytton QC route 117,46.73093,-76.07556,32
 Circuit-électrique CA-Montcerf-Lytton QC Rte 117,46.73103,-76.07591
 Circuit-électrique CA-Montebello QC B rue Notre-Dame,45.64995,-74.94287,32
 Circuit-électrique CA-Montmagny QC Boulevard Taché O,46.97988,-70.5681,32
@@ -11019,7 +11044,6 @@ Circuit-électrique CA-Montréal QC Rue Sherbrooke Est,45.6546,-73.51046,32
 Circuit-électrique CA-Montréal-Est QC Rue Sainte-Julie,45.6311,-73.4952,32
 Circuit-électrique CA-Morin-Heights QC Chemin du Village,45.9039,-74.2465,32
 Circuit-électrique CA-Murdochville QC route 198,48.96063,-65.49222,32
-Circuit-électrique CA-Namur QC route 323,45.89752,-74.92076,32
 Circuit-électrique CA-Namur QC Route 323,45.89774,-74.92068
 Circuit-électrique CA-Napierville QC rue Saint-Jacques,45.1878,-73407.0,32
 Circuit-électrique CA-Natashquan QC Chemin d’en Haut,50.18608,-61.8227,32
@@ -11059,7 +11083,6 @@ Circuit-électrique CA-Québec City QC Wilfrid-Hamel Boulevard,46.8163,-71.2498,
 Circuit-électrique CA-Québec QC Bd Sainte-Anne,46.85222,-71.19588
 Circuit-électrique CA-Québec QC boul. des Galeries,46.82934,-71.29875,32
 Circuit-électrique CA-Québec QC boul. des Galeries,46.83175,-71.3003,32
-Circuit-électrique CA-Québec QC boul. Ste-Anne,46.85218,-71.19562,32
 Circuit-électrique CA-Québec QC boul. Versant Nord,46.79125,-71.28735,32
 Circuit-électrique CA-Québec QC Boulevard Henri-Bourassa,46.87974,-71.28626,32
 Circuit-électrique CA-Québec QC Boulevard Pie-XI Nord,46.8628,-71.42945,32
@@ -11138,7 +11161,6 @@ Circuit-électrique CA-Saint-Léonard-d’Aston QC Rang du Moulin Rouge,46.05817
 Circuit-électrique CA-Saint-Maxime-Du-Mont-Louis QC rue Principale,49.25266,-65.54236,32
 Circuit-électrique CA-Saint-Michel-des-Saints QC rue Brassard,46.6762,-73.91756,32
 Circuit-électrique CA-Saint-Nicolas QC Autoroute Jean-Lesage,46.69782,-71.2995,32
-Circuit-électrique CA-Saint-Nicolas QC Chemin Craig,46.67417,-71.34422,32
 Circuit-électrique CA-Saint-Ours QC Rue Immaculée-Conception,45.892,-73.14846,32
 Circuit-électrique CA-Saint-Pamphile QC route Elgin Nord,46.9696,-69.7911,32
 Circuit-électrique CA-Saint-Pascal QC rue Rochette,47.5303,-69.8195,32
@@ -11223,8 +11245,6 @@ Circuit-électrique CA-Terrebonne QC Montée des Pionniers,45.7146,-73.51006,32
 Circuit-électrique CA-Terrebonne QC Pascal-Gagnon,45.7294,-73.6748,32
 Circuit-électrique CA-Thetford Mines QC Bd Frontenac E,46.1099,-71.30237,32
 Circuit-électrique CA-Thetford Mines QC rue King,46.0876,-71.30246,32
-Circuit-électrique CA-Thurso QC Rue Galipeau,45.59998,-75.24338
-Circuit-électrique CA-Thurso QC Rue Galipeau,45.60023,-75.24374,32
 Circuit-électrique CA-Trois-Pistoles QC Rte 132,48.10599,-69.20825
 Circuit-électrique CA-Trois-Pistoles QC Rue Jean-Rioux,48.1193,-69.16578,32
 Circuit-électrique CA-Trois-Rivières QC Boulevard Jean-XXIII,46.33324,-72.59048,32
@@ -11232,9 +11252,8 @@ Circuit-électrique CA-Trois-Rivières QC Boulevard Sainte-Madeleine,46.36702,-7
 Circuit-électrique CA-Trois-Rivières QC Rue Barkoff,46.3733,-72.55557,32
 Circuit-électrique CA-Trois-Rivières QC rue des Volontaires,46.34282,-72.54496,32
 Circuit-électrique CA-Trois-Rivières QC Rue Sainte Marguerite,46.34272,-72.55507,32
-Circuit-électrique CA-Trois-Rivières QC rue Vachon,46.36944,-72.55555,32
 Circuit-électrique CA-Trois-Rivières QC Rue Vachon,46.36964,-72.55564
-Circuit-électrique CA-Trois-Rivières QC rue Vachon,46.37043,-72.5548,32
+Circuit-électrique CA-Trois-Rivières QC Rue Vachon,46.37043,-72.5548
 Circuit-électrique CA-Témiscaming QC Chemin Kipawa,46.72102,-79.09547,32
 Circuit-électrique CA-Témiscouata-sur-le-Lac QC Rue Commerciale Nord,47.6733,-68.87315,32
 Circuit-électrique CA-Témiscouata-sur-le-Lac QC Rue Commerciale Nord,47.6806,-68.87636,32
@@ -11450,7 +11469,7 @@ Clever DK-Faaborg Brønnersvej,55.10179,10.24039
 Clever DK-Fanø Hovedgaden,55.44237,8.39905
 Clever DK-Fanø Strandvejen,55.43838,8.3859
 Clever DK-Gilleleje Smidstrup Strandvej,56.11693,12.24052
-Clever DK-Gråsten Sundsnæs,54.9104,9.58843
+Clever DK-Gråsten Sundsnæs,54.91043,9.58785
 Clever DK-Gudenå,56.449,10.00198
 Clever DK-Herning Merkurvej,56.13552,8.99657
 Clever DK-Hjørring Bispetorv,57.45526,9.99397
@@ -12592,6 +12611,7 @@ e1 IS-Borgarbyggð Baulan,64.6748,-21.66553
 e1 IS-Króksfjarðarnes Garpadalsvegur,65.45572,-21.91564
 e1 IS-Selfoss Eyravegur,63.93668,-21.00428
 e1 IS-Selfoss Skógarás,64.2789,-20.44442
+E1 IS-Snæfellsbær Vesturland Ólafsbraut,64.8944,-23.705
 e1 IS-Vík Sunnubraut,63.4171,-19.01157
 
 EAM DE-Bad Hersfeld Schlossplatz,50.87962,9.85586
@@ -13415,7 +13435,7 @@ Electrify-America US-Cordele GA E 16th Ave,31.96344,-83.76263,32
 Electrify-America US-Cornelius OR N Adair St.,45.5215,-123.06802,32
 Electrify-America US-Corona CA California Ave,33.8563,-117.54037,32
 Electrify-America US-Corona CA McKinley St.,33.89045,-117.5187,32
-Electrify-America US-Costa Mesa CA S Coast Drive,33.6901,-117.91506,32
+Electrify-America US-Costa Mesa CA S Coast Drive,33.6901,-117.9153,32
 Electrify-America US-Council Bluffs IA Manawa Centre Drive,41.2279,-95.84572,32
 Electrify-America US-Covina CA S Barranca Ave,34.07418,-117.881,32
 Electrify-America US-Covington WA SE 270th PL,47.3603,-122.10773,32
@@ -13470,7 +13490,7 @@ Electrify-America US-Eau Claire WI Gateway Dr,44.77477,-91.42838,32
 Electrify-America US-Edgewater CO Sheridan Blvd.,39.74583,-105.0548,32
 Electrify-America US-Edina MN York Ave S,44.8748,-93.322,32
 Electrify-America US-Edison NJ U.S. Rte 1,40.5116,-74.3848
-Electrify-America US-Edwards CO Edwards Access Rd,39.64848,-106.58748,20
+Electrify-America US-Edwards CO Edwards Access Rd,39.64845,-106.5875,20
 Electrify-America US-Effingham IL Avenue of Mid-America,39.1384,-88.5713,32
 Electrify-America US-El Cajon CA Camino Canada,32.823,-116.90067,32
 Electrify-America US-El Cajon CA Fletcher Parkway,32.80797,-116.96808,32
@@ -14486,7 +14506,7 @@ ELEN HR-Nadin-Sjever,44.06219,15.53119
 ELEN HR-Nova Gradiška Trg kralja Tomislava,45.25869,17.38101
 ELEN HR-Novalja Burin Bok,44.55254,14.89333
 ELEN HR-Odmorište Janjče Istok,44.7512,15.37522,8
-ELEN HR-Odmorište Janjče Zapad,44.75127,15.3733,16
+ELEN HR-Odmorište Janjče Zapad,44.75132,15.3733,8
 ELEN HR-Odmorište Novoselec,45.63787,16.51281
 ELEN HR-Odmorište Pula istok,44.93352,13.891
 ELEN HR-Odmorište Pula zapad,44.9332,13.8896
@@ -15265,7 +15285,7 @@ EnBW DE-Eschborn Ginnheimer Straße,50.14132,8.58163,29
 EnBW DE-Escheburg Lange Stücken,53.4718,10.3105
 EnBW DE-Eschelbronn Bahnhofstraße,49.3201,8.86804
 EnBW DE-Eschenbach In den Bühlgärten,48.65772,9.6737
-EnBW DE-Eschweiler Fichtenweg,50.7961,6.2323
+EnBW DE-Eschweiler Fichtenweg,50.79558,6.23294
 EnBW DE-Eschweiler Kölner Straße,50.82002,6.2967
 EnBW DE-Esens Herdetor,53.64647,7.60794
 EnBW DE-Essen Aktienstraße,51.4623,6.9305
@@ -17022,6 +17042,7 @@ EnelX IT-Firenze Viale Europa,43.75641,11.29959
 EnelX IT-Foiano della Chiana Valdichiana Outlet,43.22707,11.7993
 EnelX IT-Gagliano del Capo LE,39.83806,18.36647,15
 EnelX IT-Gallicano Via di Fondovalle,44.06505,10.44142
+EnelX IT-Galtellì Via Sandro Pertini,40.38164,9.60643
 EnelX IT-Gela Via Generale Cascino,37.06503,14.26126
 EnelX IT-Giardini-Naxos Viale Jannuzzo,37.81831,15.26601
 EnelX IT-Giulianova Via Galileo Galilei,42.768,13.95534
@@ -17088,6 +17109,7 @@ EnelX IT-Saluzzo Via F. e G. Lattanzi,44.64589,7.50439
 EnelX IT-San Benedetto del Tronto Via della Liberazione,42.94108,13.88002
 EnelX IT-San Giovanni Teatino IKEA,42.39618,14.16652
 EnelX IT-San Martino Via della Fontana,45.65856,8.48954
+EnelX IT-San Teodoro Via del Tirreno,40.78142,9.67342
 EnelX IT-San Vincenzo Via Firenze,43.09,10.54203
 EnelX IT-San Vito Via Antonio Meucci,39.43443,9.55033
 EnelX IT-Sant’Ambrogio di Torino Piazza Repubblica,45.09813,7.36265
@@ -17101,6 +17123,7 @@ EnelX IT-Scopello Via Mera,45.7729,8.09582
 EnelX IT-Selva Candida,41.9579,12.38587
 EnelX IT-Serravalle Scrivia Via Novi,44.73201,8.84134
 EnelX IT-Siena Strada delle Grondaie,43.33021,11.32848
+EnelX IT-Siracusa Via Bengasi,37.06482,15.28616
 EnelX IT-Sommacampagna Piazza Carlo Alberto,45.4073,10.84025
 EnelX IT-Spilimbergo Via Udine,46.10212,12.90512
 EnelX IT-Stresa Piazza Marconi,45.88419,8.54132
@@ -17192,6 +17215,7 @@ enercity DE-Hannover Krausenstraße,52.36206,9.74952
 enercity DE-Hannover Liebigstraße,52.39276,9.7558
 enercity DE-Hannover Lindener Marktplatz,52.36748,9.71458
 enercity DE-Hannover Luisenstraße,52.37442,9.74166,30
+enercity DE-Hannover Niemeyerstraße,52.36623,9.71442
 enercity DE-Hannover Nussriede,52.38941,9.81266
 enercity DE-Hannover Osterstraße,52.37025,9.74003
 enercity DE-Hannover Pfarrlandstraße,52.3745,9.70639
@@ -17771,6 +17795,8 @@ EVBox NL-Scherpenzeel Industrielaan,52.083,5.4762
 EVBox NL-Vriezenveen De Zuivering,52.40457,6.63523
 EVBox NL-Zeewolde Dasselaarweg,52.31192,5.54367
 EVBox NO-Nordli Doktor Brønns vei,64.4632,13.59228
+
+EVC CA-Meziadin Junction BC Stewart-Cassiar Hwy,56.09963,-129.30593
 
 EVconnect CA-Rockland ON Laurier St,45.53873,-75.3042
 EVconnect RO-Blejoi DN1A DN1B,44.97199,26.02152
@@ -19411,7 +19437,42 @@ evpass CH-Widen Allmend,47.3671,8.36618
 
 EVPlus PL-Sieradz 1 Maja,51.57957,18.71439
 
+EVRange US-Avenal CA CA-33,35.89117,-120.04,32
+EVRange US-Brawley CA Main St,32.9786,-115.5386,32
+EVRange US-Calexico CA E 5th St,32.66993,-115.49237,32
+EVRange US-Calipatria CA W Main St,33.12536,-115.51552,32
+EVRange US-Carson City NV S Carson St S,39.1254,-119.77173,32
+EVRange US-Cerritos CA Piuma Ave,33.87898,-118.1045,32
+EVRange US-Chowchilla CA Robertson Blvd,37.0909,-120.29064,32
+EVRange US-Coleville CA US-395,38.5171,-119.4808,32
+EVRange US-Corona CA Serfas Club Dr,33.8796,-117.61373,32
+EVRange US-Denver CO E 64 Ave,39.81306,-104.77375,32
+EVRange US-El Centro CA N Imperial Ave,32.80323,-115.57052,32
+EVRange US-Eureka CA Broadway St,40.7902,-124.1798,32
+EVRange US-Fortuna CA Alamar Way,40.57897,-124.15305,32
+EVRange US-Gustine CA Gonzaga Rd,37.056,-121.0134,32
+EVRange US-Healdsburg CA Healdsburg Ave,38.6038,-122.86345,32
+EVRange US-Hopland CA US-101,38.9707,-123.1177,32
+EVRange US-Kettleman City CA Powers Dr,35.98645,-119.96107,32
+EVRange US-Lancaster CA W Ave D,34.78155,-118.1667,32
+EVRange US-Leggett CA Dr Thru Tree Rd,39.85075,-123.71713,32
+EVRange US-Long Beach CA E. Willow St,33.7998,-118.0884,32
+EVRange US-Los Banos CA E Pacheco Blvd,37.0583,-120.83235,32
+EVRange US-Miranda CA Ave of the Giants,40.235,-123.82416,32
+EVRange US-Orick CA US-101,41.2916,-124.0578,32
+EVRange US-Paso Robles CA Buena Vista Dr,35.64523,-120.67144,32
+EVRange US-Portola CA Commercial St,39.8069,-120.4691,32
+EVRange US-Reston VA Roger Bacon Dr,38.95094,-77.3347,32
+EVRange US-Salinas CA N Davis Rd,36.70888,-121.6671,32
+EVRange US-San Ysidro CA W. San Ysidro Blvd,32.55885,-117.05912,32
+EVRange US-Smith River CA US-101,41.93336,-124.16532,32
+EVRange US-Soledad CA H Dela Rosa Sr St,36.41596,-121.3208,32
+EVRange US-South San Francisco CA S. Airport Rd,37.6441,-122.40388,32
 EVRange US-Truckee CA Northstar Dr,39.2871,-120.10713
+EVRange US-Valencia CA The Old Rd,34.4301,-118.58976,32
+EVRange US-Whittier CA Workman Mill Rd,34.03325,-118.02098,32
+EVRange US-Willits CA S Main St,39.40295,-123.3506,32
+EVRange US-Yampa CO Moffat Ave,40.1501,-106.90802,32
 
 EVSC US-Cannon Beach OR Elk Creek Rd,45.88923,-123.95582
 
@@ -20684,6 +20745,7 @@ EWII DK-Tim Vikkevej,56.25724,8.13505
 Ewiva IT-Alessandria Via Vecchia Torino,44.9153,8.59988,20
 Ewiva IT-Aprilia Via Aldo Moro,41.58686,12.64667
 Ewiva IT-Arcola Via della Repubblica,44.11604,9.91309
+Ewiva IT-Area di Servizio Serramendola Est,37.0595,15.22726
 Ewiva IT-Asti Corso Casale,44.91548,8.22732
 Ewiva IT-Bagnolo San Vito Via Marco Biagi,45.08582,10.85562
 Ewiva IT-Belforte Monferrato Via S. Colombano,44.62597,8.65543
@@ -20734,6 +20796,7 @@ Ewiva IT-Roma Corsa di Francia,41.9448,12.46952
 Ewiva IT-Roma Via Ostiense,41.86603,12.47995
 Ewiva IT-San Gimignano Piazzale Ludovico Quaroni,43.46259,11.04164
 Ewiva IT-San Lazzaro di Savena Via Cà Ricchi,44.47708,11.41638
+Ewiva IT-Santa Teresa Gallura Via la Marina,41.23485,9.1925
 Ewiva IT-Settimo Torinese Via Torino,45.12727,7.73664,20
 Ewiva IT-Siena Via Fausto Coppi,43.33568,11.29656
 Ewiva IT-Signoressa Via Ortigara,45.75491,12.0977
@@ -21038,9 +21101,12 @@ Fines BG-Chuchuligovo Чучулигово Автомагистрала Стру
 Fines BG-Gelemenovo Гелеменово,42.26823,24.3139
 Fines BG-Harmanli Харманли Коста Андреев,41.9255,25.9209
 Fines BG-Kostinbrod Poleto,42.79496,23.21518
+Fines BG-Shumen Шумен Пролетарска,43.25212,26.96247
+Fines BG-Sliven Сливен ул. Ст. Стамболов,42.67707,26.34336
 Fines BG-Sofia София Dr. Peter Dertliev Blvrd,42.70983,23.25768
 Fines BG-Tserovo Церово A1,42.3365,24.07986
 Fines BG-Varna Варна бул. Сливница,43.22093,27.89823
+Fines BG-Varna Варна ул. инженер Павлин Николов,43.21585,27.8739
 Fines BG-Драгичево Главен път Е79,42.6009,23.13062
 Fines BG-Летница,43.31211,25.07321
 Fines BG-Лозен Автомагистрала Тракия,42.6322,23.45811
@@ -21054,7 +21120,10 @@ Fines BG-Ясен Yasen,43.42648,24.50454
 
 Flo CA-Brownsburg QC Rte du Canton,45.63191,-74.39353
 Flo CA-Gloucester ON Ogilvie Rd,45.43582,-75.60518
+Flo CA-Marsh Lake YT Army Beach Dr,60.5597,-134.45145
 Flo CA-Vaudreuil-Dorion QC Bd Harwood,45.38008,-74.01859
+Flo CA-Watson Lake YT Frank Trail,60.06187,-128.71092
+Flo CA-Whitehorse YT 2nd Ave,60.72543,-135.0571
 
 FOR-EV GB-Lochgilphead,56.02807,-5.42519
 FOR-EV GB-Oban Glengallan Rd,56.39633,-5.48957
@@ -21284,6 +21353,7 @@ GOFAST CH-Neuchatel Le Verger 1,47.02125,7.02892,8
 GOFAST CH-Nyon Chem. de la Fontaine,46.38794,6.2198
 GOFAST CH-Oberriet Rheinstrasse,47.31159,9.56189
 GOFAST CH-Oensingen Staadackerstraße,47.2869,7.71806
+GOFAST CH-Otelfingen Dammstrasse,47.45932,8.40206
 GOFAST CH-Piotta-Quinto Area di Servizio Quinto,46.51532,8.66706
 GOFAST CH-Pollegio Via al Brenno,46.35914,8.95693
 GOFAST CH-Quarten Rastplatz Bergsboden,47.1124,9.2661
@@ -21657,6 +21727,7 @@ HEnW DE-Hamburg Marienthaler Straße,53.56064,10.03831
 HEnW DE-Hamburg Martinistraße,53.58867,9.97512
 HEnW DE-Hamburg Mendelssohnstraße,53.56378,9.90716
 HEnW DE-Hamburg Moosrosenweg,53.60321,10.06915
+HEnW DE-Hamburg Nagelsweg,53.5475,10.01923
 HEnW DE-Hamburg Neue Rabenstraße,53.5606,9.99261
 HEnW DE-Hamburg Neue Straße,53.46256,9.97964
 HEnW DE-Hamburg Neuer Weg,53.48353,10.21139
@@ -22350,7 +22421,7 @@ Ionity CH-Neuenkirch,47.11337,8.23233
 Ionity CH-Oftringen Nordstrasse,47.30405,7.9297
 Ionity CH-Rastplatz Heidiland,47.01172,9.51243,20
 Ionity CH-Raststätte Grauholz,46.99025,7.47613,30
-Ionity CH-Silvaplana Via Chantunela,46.45562,9.79077,20
+Ionity CH-Silvaplana Via Chantunela,46.4556,9.79063,16
 Ionity CH-Wangen an der Aare Wangenstrasse,47.24042,7.65182
 Ionity CZ-Beroun (dir. Prague),49.95581,14.06276
 Ionity CZ-Lovosice,50.51195,14.05277,12
@@ -22399,7 +22470,7 @@ Ionity DE-Euro Rastpark Guxhagen,51.20283,9.46872,30
 Ionity DE-Euro Rastpark Himmelkron,50.05586,11.6091
 Ionity DE-Euro Rastpark Hohenwarsleben,52.1739,11.49512,11
 Ionity DE-Euro Rastpark Jettingen-Scheppach,48.4123,10.44045,25
-Ionity DE-Feucht Wendelsteiner Straße,49.36565,11.20737,20
+Ionity DE-Feucht Wendelsteiner Straße,49.36567,11.20728,22
 Ionity DE-Friedberg Winterbruckenweg,48.4064,10.95235,35
 Ionity DE-Friedrichshafen Am Flugplatz,47.67253,9.52302
 Ionity DE-Garching bei München Parkring,48.24932,11.63437
@@ -22415,7 +22486,7 @@ Ionity DE-Kaiserslautern Mainzer Straße,49.45635,7.79732
 Ionity DE-Kamen Zollpost,51.5762,7.67018
 Ionity DE-Kirchheim Hauptstraße,50.83328,9.57318
 Ionity DE-Kirchheim Hauptstraße,50.8337,9.57078
-Ionity DE-Konstanz Reichenaustraße,47.6749,9.15394
+Ionity DE-Konstanz Reichenaustraße,47.67468,9.1546
 Ionity DE-Leinefelde Ernemannstraße,51.39074,10.34255
 Ionity DE-Marl Herzlia-Allee,51.64452,7.10234
 Ionity DE-Meerane Hohe Straße,50.84076,12.44502
@@ -22425,6 +22496,7 @@ Ionity DE-Mönchengladbach Schleswiger Straße,51.19552,6.41265
 Ionity DE-Mühldorf am Inn Äußere Neumarkter Straße,48.26244,12.54266
 Ionity DE-Nempitz An der Autobahn,51.2901,12.13755,6
 Ionity DE-Nempitz An der Autobahn,51.2902,12.1376,7
+Ionity DE-Niedernhausen Frankfurter Straße,50.1538,8.32403
 Ionity DE-Nörten-Hardenberg Unter dem Pferdestiege,51.62887,9.92238,30
 Ionity DE-Oberhausen Brammenring,51.48978,6.88792
 Ionity DE-Oberhonnefeld Steinstraße,50.5626,7.52784
@@ -23820,7 +23892,7 @@ Kople NO-Russenes Vestre Porsangerveien,70.47762,25.06666,25
 Kople NO-Sandnessjøen Sjøbergs gate,66.02265,12.63824
 Kople NO-Utskarpen Flostrandveien,66.29598,13.55068
 
-Kostner IT-Varna Forch Straße,46.75915,11.63778,12
+Kostner IT-Vahrn Forch Straße,46.75923,11.63814,12
 
 Kraftwerke-Farchant DE-Farchant Am Gern,47.53011,11.10946
 
@@ -25377,6 +25449,13 @@ MAN AT-Leopoldsdorf MAN-Straße,48.09976,16.39722
 Mark-E DE-Hagen Bahnhofstraße,51.35983,7.46887
 
 MB AT-Parndorf Richard-Erlinger-Platz,47.9766,16.8551,20
+MB CA-Abbotsford BC Sumas Way,49.02536,-122.2661,32
+MB CA-Coquitlam BC Lougheed Hwy.,49.27544,-122.79285,32
+MB CA-Nanaimo BC Island Hwy,49.2347,-124.05076,32
+MB CA-Pentiction BC Lakeshore Dr W,49.50262,-119.59515,32
+MB CA-Pitt Meadows BC Lougheed Hwy,49.22993,-122.69215,32
+MB CA-Surrey BC BC-10,49.10525,-122.80173,32
+MB CA-Tsawwassen BC Canoe Pass Wy,49.03782,-123.09005,32
 MB DE-Augsburg Haunstetter Straße,48.3471,10.90502
 MB DE-Aurich Korbweidenstraße,53.45056,7.50673
 MB DE-Autohof Cloppenburg,52.8272,8.00026,25
@@ -25411,8 +25490,84 @@ MB DE-Weißenfels Heinrich-Hertz-Straße,51.1874,11.98767
 MB DE-Weißensberg Beim Rothen-Kreuz,47.5922,9.7308
 MB DE-Wörnitz Hammerstatt,49.25922,10.24312,30
 MB DE-Würzburg Randersackerer Straße,49.77624,9.9405
+MB US-Alpharetta GA Avalon Blvd,34.07223,-84.27463,32
+MB US-Ashburn VA Easthampton Plaza,39.05274,-77.45225,32
+MB US-Athens GA US-29,33.99502,-83.3352,32
+MB US-Augusta GA Crane Creek Dr,33.49742,-82.0795,32
+MB US-Austell GA East-West Connector,33.85636,-84.59537,32
+MB US-Austin TX Kramer Ln,30.3997,-97.72787,32
+MB US-Bangor ME Odlin Rd,44.78902,-68.8121,32
+MB US-Baytown TX East Fwy,29.80126,-95.0002,32
+MB US-Birmingham AL Summit Blvd,33.44455,-86.73145,32
+MB US-Braintree MA Forbes Rd,42.22104,-71.03022,32
+MB US-Calhoun GA Union Grove Rd SE,34.44127,-84.91515,32
+MB US-Cary NC O’Kelly Chapel Rd,35.8473,-78.8888,32
+MB US-Charlotte NC New Fashion Way,35.17118,-80.97176,32
+MB US-Charlotte NC West Park Dr,35.15783,-80.8887,32
+MB US-Chattanooga TN Hamilton Place Blvd,35.0322,-85.15993,32
+MB US-Clinton CT Killingworth Turnpike,41.2935,-72.53346,32
+MB US-Conyers GA Dogwood Dr SE,33.65362,-84.0026,32
+MB US-Conyers GA Highway 20 NE,33.6839,-83.99964,32
+MB US-Copley OH Heritage Center Dr,41.13486,-81.6589,32
+MB US-Delray Beach FL Lyons Rd,26.4558,-80.19073,32
+MB US-Denton TX South Interstate 35 East,33.18043,-97.1027,32
+MB US-Dickson TN Highway 46 S,36.0171,-87.33368,32
+MB US-Ellenton FL Factory Shops Blvd,27.53805,-82.50835,32
+MB US-Elmira NY Country Rd 64,42.15365,-76.87858,32
+MB US-Ennis TX Creechville Rd,32.3238,-96.6057,32
+MB US-Estero FL Fashion Dr,26.40163,-81.80926,32
+MB US-Farmington UT North Union Ave,40.98252,-111.90868,32
+MB US-Fishers IN Yard St,39.95477,-86.00048,32
+MB US-Fort Myers FL Daniels Pkwy,26.549,-81.80654,32
+MB US-Fredericksburg VA Spotsylvania Mall Dr,38.29285,-77.51158,32
+MB US-Gaffney SC Factory Shops Blvd,35.08324,-81.71218,32
+MB US-Greensboro NC Kathleen Ave,36.0852,-79.8362,32
+MB US-Hillsboro TX State Highway 77,32.04775,-97.08988,32
+MB US-Holyoke MA Whiting Farms Rd,42.1752,-72.64236,32
+MB US-Hyannis MA Iyannough Rd,41.6662,-70.29908,32
+MB US-Jonesboro GA Tara Blvd,33.57483,-84.37114,32
+MB US-Katy TX Katy Freeway,29.77803,-95.8453,32
+MB US-Kittery ME US-1,43.11487,-70.7305,32
+MB US-Kodak TN Buc-ee’s Blvd,35.98117,-83.6059,32
+MB US-Lansing MI Preyde Blvd,42.76442,-84.51727,32
+MB US-Lee MA Premium Outlet Blvd,42.29583,-73.23245,32
 MB US-Leeds AL Buc-ee’s Blvd,33.54388,-86.5854
+MB US-Locust Grove GA Market Place,33.35545,-84.122,32
+MB US-Luling TX U.S. 90,29.64973,-97.5945,32
+MB US-Madisonville TX Interstate 45,30.96476,-95.87894,32
+MB US-Manchester NH S Willow St,42.95682,-71.43384,32
+MB US-Melissa TX Central Expressway,33.27008,-96.59174,32
+MB US-Methuen MA Pleasant Valley St,42.74306,-71.16033,32
+MB US-New Braunfels TX Interstate 35,29.72747,-98.07697,32
+MB US-Norfolk VA Premium Outlets Blvd,36.88417,-76.1982,32
+MB US-North Charleston SC Centre Pointe Dr,32.87482,-80.0216,32
+MB US-North Fort Myers FL Hancock Bridge Pkwy,26.65242,-81.918,32
+MB US-North Haven CT Universal Dr,41.34874,-72.86948,32
+MB US-Orlando FL Tavistock Lakes Blvd,28.36642,-81.3041,32
+MB US-Orlando FL Vineland Ave,28.3882,-81.49394,32
+MB US-Peabody MA Newbury St,42.52605,-70.99476,32
+MB US-Phoenix OR South Pacific Hwy,42.28058,-122.82152,32
+MB US-Red Bluff CA Adobe Rd,40.1915,-122.23673,32
+MB US-Ridgefield WA N 56th Pl,45.81914,-122.68964,32
+MB US-Riverton UT West Kestrel Range Rd,40.5089,-111.99955,32
+MB US-Riverview FL Boyette Rd,27.85422,-82.31586,32
+MB US-Roseland NJ Eisenhower Parkway,40.81917,-74.32866,32
+MB US-Roswell GA W. Crossville Rd,34.0592,-84.38114,32
+MB US-Round Rock TX I 35 N Frontage Rd,30.56734,-97.6918,32
+MB US-Saco ME Industrial Park Rd,43.52516,-70.44557,32
+MB US-Savannah GA Abercorn St,31.99066,-81.12838,32
+MB US-South Windsor CT Evergreen Way,41.81398,-72.55535,32
+MB US-Springfield MO North Mulroy Rd,37.2521,-93.17956,32
+MB US-St Johnsbury VT US-5,44.40273,-72.0229,32
+MB US-Sunbury OH State Route 37 E,40.26543,-82.92012,32
+MB US-Tempe AZ E Rio Salado Pkwy,33.43364,-111.90583,32
+MB US-Terrell TX W. IH 20,32.71725,-96.32174,32
+MB US-Thornton CO Lincoln St,39.9564,-104.9838,32
+MB US-Venice FL Pinebrook Rd,27.1,-82.4181,32
 MB US-Waller TX US 290 Frontage Rd,30.07166,-95.9309
+MB US-Washington PA Old Mill Blvd,40.1885,-80.2209,32
+MB US-Wharton TX U.S. 59,29.32584,-96.12266,32
+MB US-Wrentham MA Premium Outlet Blvd,42.0402,-71.3501,32
 
 mblty DE-Anzing Gewerbepark,48.15931,11.85389
 mblty DE-Bad Fallingbostel Klaus-Seckel-Straße,52.89243,9.76779
@@ -26337,6 +26492,7 @@ nonoxx-pro DE-Wernigerode Halberstädter Straße,51.83823,10.79588
 
 Norlys DK-Billund Nordmarksvej,55.72828,9.13272
 Norlys DK-Gilleleje Alfavej,56.12646,12.30511
+Norlys DK-Gråsten Sundsnæs,54.91026,9.58935
 Norlys DK-Hirtshals Vestergade,57.58884,9.9577
 Norlys DK-Hjørring Frederikshavnsvej,57.45557,10.00555
 Norlys DK-Hvide Sande Kirksvej,55.86376,8.18126
@@ -27643,6 +27799,7 @@ PPC-blue RO-Deva Calea Zarandului,45.86127,22.92905
 PPC-blue RO-Miercurea Ciuc Strada Harghita,46.36307,25.79284
 PPC-blue RO-Miercurea Ciuc Strada Harghita,46.36767,25.77728
 PPC-blue RO-Orțișoara DJ693,45.9697,21.29804
+PPC-blue RO-Otopeni Calea Bucureștilor,44.5544,26.06954
 PPC-blue RO-Otopeni Calea Bucureștilor,44.57314,26.07754
 PPC-blue RO-Oțelu Roșu Strada Mihai Eminescu,45.51708,22.35214
 PPC-blue RO-Predeal Șoseaua Națională,45.47952,25.5645
@@ -29544,6 +29701,7 @@ SW-Coesfeld DE-Borken Johanniterstraße,51.84275,6.86055
 SW-Coesfeld DE-Coesfeld Am Tüskenbach,51.93736,7.15691
 SW-Dachau DE-Dachau Burgfriedenstraße,48.25955,11.429
 SW-Dachau DE-Dachau Münchner Straße,48.25333,11.44
+SW-Deggendorf DE-Deggendorf Westlicher Stadtgraben,48.835,12.9603
 SW-Dessau DE-Dessau-Roßlau Gropiusallee,51.83831,12.22681
 SW-Dillingen DE-Dillingen/Saar Mathildenstraße,49.34676,6.70933
 SW-Dillingen DE-Dillingen/Saar Werkstraße,49.35666,6.73413
@@ -29931,6 +30089,7 @@ SW-Trier DE-Trier Ostallee,49.75595,6.65058
 SW-Troisdorf DE-Troisdorf Echternacher Straße,50.81936,7.1135
 SW-Troisdorf DE-Troisdorf Elsenplatz,50.8144,7.17178
 SW-Troisdorf DE-Troisdorf Heinkelstraße,50.81697,7.10835
+SW-Tübingen DE-Tübingen Eugenstraße,48.51376,9.06083
 SW-Uetersen DE-Uetersen Am Markt,53.68357,9.66573
 SW-Velbert DE-Velbert Friedrich-Ebert-Straße,51.34376,7.03301
 SW-Velbert DE-Velbert Friedrichstraße,51.33231,7.05583
@@ -30088,6 +30247,7 @@ SWM DE-München Erika-Mann-Straße,48.1434,11.5373
 SWM DE-München Feilitzschstraße,48.16104,11.58976,30
 SWM DE-München Friedrich-Hebbel-Straße,48.11063,11.52627
 SWM DE-München Ganghoferstraße,48.13458,11.53985
+SWM DE-München Ganghoferstraße,48.1379,11.5407
 SWM DE-München Gaßnerstraße,48.1546,11.509
 SWM DE-München Gollierstraße,48.13723,11.53433
 SWM DE-München Gustav-Mahler-Straße,48.20125,11.60278
@@ -32744,6 +32904,7 @@ HU Kecskemét Four Points by Sheraton,46.89802,19.67362
 HU Körmend Mjus,47.00862,16.5687
 ID AL-Shkodër Rruga vellezerit frasheri,42.0618,19.50112
 IE Seafield the westlodge hotel,51.67247,-9.4753
+IS Laugarfellsvegur Waterfall Circle,64.8855,-15.35145
 IT Anterselva di Mezzo,46.85817,12.10115
 IT Bollate Via S. Bernardo Pirelli,45.56303,9.14734
 IT Bolzano Bozen Gasthof Bad St. Isidor,46.48118,11.3841
