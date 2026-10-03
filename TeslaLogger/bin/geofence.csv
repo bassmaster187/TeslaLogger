@@ -2279,8 +2279,7 @@ Supercharger-V3 DE-Reichertshofen,48.645645,11.520604
 Supercharger-V3 DE-Reinfeld,53.8229,10.50267,10
 Supercharger-V3 DE-Reinfeld,53.8232,10.50352
 Supercharger-V4 DE-Reiskirchen,50.59572,8.81894
-Supercharger-V4 DE-Rhüden,51.9472,10.14027,30
-Supercharger-V3 DE-Rhüden,51.94732,10.14113,30
+Supercharger-V4 DE-Rhüden,51.94716,10.14027,60
 Supercharger-V4 DE-Ringsheim,48.25,7.76567,21
 Supercharger-V4 DE-Rosengarten,53.37879,9.89814
 Supercharger-V3 DE-Rosenheim,47.81716,12.1207,60
@@ -6631,6 +6630,7 @@ Supercharger-V3 US-Oklahoma City OK,35.4617,-97.6514
 Supercharger-V4 US-Oklahoma City OK N Lincoln Blvd Francis Energy,35.52566,-97.5038
 Supercharger-V4 US-Oklahoma City OK N Western Ave JINYA Ramen Bar,35.54063,-97.529
 Supercharger-V3 US-Oklahoma City OK NE 36th St,35.50878,-97.5014
+Supercharger-V4 US-Oklahoma City OK S May Ave Francis Energy,35.36287,-97.56768
 Supercharger-V4 US-Oklahoma City OK W Memorial Rd,35.6106,-97.57807
 Supercharger-V4 US-Owasso OK Francis Energy,36.29283,-95.83873
 Supercharger-V3 US-Perry OK,36.2893,-97.3261
@@ -12611,6 +12611,7 @@ e1 IS-Borgarbyggð Baulan,64.6748,-21.66553
 e1 IS-Króksfjarðarnes Garpadalsvegur,65.45572,-21.91564
 e1 IS-Selfoss Eyravegur,63.93668,-21.00428
 e1 IS-Selfoss Skógarás,64.2789,-20.44442
+E1 IS-Snæfellsbær Vesturland Ólafsbraut,64.8944,-23.705
 e1 IS-Vík Sunnubraut,63.4171,-19.01157
 
 EAM DE-Bad Hersfeld Schlossplatz,50.87962,9.85586
@@ -17214,6 +17215,7 @@ enercity DE-Hannover Krausenstraße,52.36206,9.74952
 enercity DE-Hannover Liebigstraße,52.39276,9.7558
 enercity DE-Hannover Lindener Marktplatz,52.36748,9.71458
 enercity DE-Hannover Luisenstraße,52.37442,9.74166,30
+enercity DE-Hannover Niemeyerstraße,52.36623,9.71442
 enercity DE-Hannover Nussriede,52.38941,9.81266
 enercity DE-Hannover Osterstraße,52.37025,9.74003
 enercity DE-Hannover Pfarrlandstraße,52.3745,9.70639
@@ -20794,6 +20796,7 @@ Ewiva IT-Roma Corsa di Francia,41.9448,12.46952
 Ewiva IT-Roma Via Ostiense,41.86603,12.47995
 Ewiva IT-San Gimignano Piazzale Ludovico Quaroni,43.46259,11.04164
 Ewiva IT-San Lazzaro di Savena Via Cà Ricchi,44.47708,11.41638
+Ewiva IT-Santa Teresa Gallura Via la Marina,41.23485,9.1925
 Ewiva IT-Settimo Torinese Via Torino,45.12727,7.73664,20
 Ewiva IT-Siena Via Fausto Coppi,43.33568,11.29656
 Ewiva IT-Signoressa Via Ortigara,45.75491,12.0977
@@ -22467,7 +22470,7 @@ Ionity DE-Euro Rastpark Guxhagen,51.20283,9.46872,30
 Ionity DE-Euro Rastpark Himmelkron,50.05586,11.6091
 Ionity DE-Euro Rastpark Hohenwarsleben,52.1739,11.49512,11
 Ionity DE-Euro Rastpark Jettingen-Scheppach,48.4123,10.44045,25
-Ionity DE-Feucht Wendelsteiner Straße,49.36565,11.20737,20
+Ionity DE-Feucht Wendelsteiner Straße,49.36567,11.20728,22
 Ionity DE-Friedberg Winterbruckenweg,48.4064,10.95235,35
 Ionity DE-Friedrichshafen Am Flugplatz,47.67253,9.52302
 Ionity DE-Garching bei München Parkring,48.24932,11.63437
@@ -22493,6 +22496,7 @@ Ionity DE-Mönchengladbach Schleswiger Straße,51.19552,6.41265
 Ionity DE-Mühldorf am Inn Äußere Neumarkter Straße,48.26244,12.54266
 Ionity DE-Nempitz An der Autobahn,51.2901,12.13755,6
 Ionity DE-Nempitz An der Autobahn,51.2902,12.1376,7
+Ionity DE-Niedernhausen Frankfurter Straße,50.1538,8.32403
 Ionity DE-Nörten-Hardenberg Unter dem Pferdestiege,51.62887,9.92238,30
 Ionity DE-Oberhausen Brammenring,51.48978,6.88792
 Ionity DE-Oberhonnefeld Steinstraße,50.5626,7.52784
@@ -30243,6 +30247,7 @@ SWM DE-München Erika-Mann-Straße,48.1434,11.5373
 SWM DE-München Feilitzschstraße,48.16104,11.58976,30
 SWM DE-München Friedrich-Hebbel-Straße,48.11063,11.52627
 SWM DE-München Ganghoferstraße,48.13458,11.53985
+SWM DE-München Ganghoferstraße,48.1379,11.5407
 SWM DE-München Gaßnerstraße,48.1546,11.509
 SWM DE-München Gollierstraße,48.13723,11.53433
 SWM DE-München Gustav-Mahler-Straße,48.20125,11.60278
@@ -32899,6 +32904,7 @@ HU Kecskemét Four Points by Sheraton,46.89802,19.67362
 HU Körmend Mjus,47.00862,16.5687
 ID AL-Shkodër Rruga vellezerit frasheri,42.0618,19.50112
 IE Seafield the westlodge hotel,51.67247,-9.4753
+IS Laugarfellsvegur Waterfall Circle,64.8855,-15.35145
 IT Anterselva di Mezzo,46.85817,12.10115
 IT Bollate Via S. Bernardo Pirelli,45.56303,9.14734
 IT Bolzano Bozen Gasthof Bad St. Isidor,46.48118,11.3841
