@@ -24,6 +24,9 @@ namespace TeslaLogger
 
         public ElectricityMeterGoE(string host, string paramater)
         {
+            host = host.TrimEnd('/');
+            if (host.EndsWith("/api", StringComparison.OrdinalIgnoreCase))
+                host = host.Substring(0, host.Length - 4);
             this.host = host;
             this.paramater = paramater;
         }
@@ -45,17 +48,23 @@ namespace TeslaLogger
                 if (o != null)
                     return (string)o;
 
-                // The full /status response is unreliable on some firmwares (see
-                // goecharger/go-eCharger-API-v2#170: "when i use the full data return
-                // then the response seems incomplete"). Use the filter parameter to
-                // request only the keys we need (also recommended by go-e for
-                // continuous polling).
-                string url = host + "/status?filter=wh,whg,whs,whb,who,eto,car,fwv";
-                string lastJSON = client.GetStringAsync(url).GetAwaiter().GetResult();
+                // New firmware (>= 60.x): /api/status?filter=...
+                // Old firmware:            /status
+                string lastJSON = "";
+                bool gotData = false;
 
-                // fallback for old firmwares (< 051.4) that do not support the
-                // comma separated filter syntax: retry without filter parameter
-                if (!lastJSON.Contains("\"eto\"") && !lastJSON.Contains("\"car\""))
+                try
+                {
+                    string newUrl = host + "/api/status?filter=wh,whg,whs,whb,who,eto,car,fwv";
+                    lastJSON = client.GetStringAsync(newUrl).GetAwaiter().GetResult();
+                    gotData = lastJSON.Contains("\"eto\"") || lastJSON.Contains("\"car\"") || lastJSON.Contains("\"whg\"");
+                }
+                catch (Exception)
+                {
+                    gotData = false;
+                }
+
+                if (!gotData)
                 {
                     lastJSON = client.GetStringAsync(host + "/status").GetAwaiter().GetResult();
                 }
@@ -112,8 +121,9 @@ namespace TeslaLogger
                 if (grid == null)
                     return null;
 
-                double v = (double)grid / (double)10.0;
-                v = Math.Round(v, 1);
+                double divisor = GetWhToKwhDivisor(jsonResult);
+                double v = (double)grid / divisor;
+                v = Math.Round(v, divisor >= 1000.0 ? 3 : 1);
 
                 return v;
             }
@@ -138,7 +148,7 @@ namespace TeslaLogger
                 if (v == null)
                     return null;
 
-                v = v / (double)10.0;
+                v = v / GetWhToKwhDivisor(jsonResult);
 
                 return v;
             }
@@ -149,6 +159,24 @@ namespace TeslaLogger
             }
 
             return null;
+        }
+
+        static double GetWhToKwhDivisor(dynamic jsonResult)
+        {
+            try
+            {
+                string fwv = jsonResult["fwv"];
+                if (fwv != null && !string.IsNullOrEmpty(fwv))
+                {
+                    string majorPart = fwv.Split('.')[0];
+                    if (double.TryParse(majorPart, out double majorVersion) && majorVersion >= 60.0)
+                        return 1000.0;
+                }
+            }
+            catch (Exception)
+            {
+            }
+            return 10.0;
         }
 
         private double? GetDoubleValue(dynamic jsonResult, string key)
