@@ -1964,7 +1964,7 @@ Supercharger-V3 DE-Alsfeld,50.734,9.24143
 Supercharger-V3 DE-Altdorf bei Nürnberg,49.38163,11.34443,40
 Supercharger-V3 DE-Augsburg,48.3989,10.86816
 Supercharger-V4 DE-Augsburg-Haunstetten,48.297555,10.899144
-Supercharger-V4 DE-Bad Camberg,50.29506,8.254
+Supercharger-V4 DE-Bad Camberg,50.29515,8.25427
 Supercharger-V4 DE-Bad Dürrheim,48.03618,8.531306
 Supercharger-V3 DE-Bad Oeynhausen,52.21293,8.81407,55
 Supercharger-V4 DE-Bad Rappenau,49.2119,9.0771,32
@@ -4325,13 +4325,17 @@ Supercharger-V3 SG-West Coast Plaza,1.3038,103.76668
 Supercharger-V4 SG-Westgate,1.33468,103.74296
 
 Supercharger-V4 SI-Grosuplje,45.96817,14.65767
+Supercharger-V4 SI-Koper,45.5376,13.7341,10
 Supercharger-V4 SI-Koper,45.54067,13.73255,10
 Supercharger-V4 SI-Koper,45.5409,13.7356
 Supercharger SI-Kozina,45.60492,13.928521
 Supercharger SI-Kozina,45.607449,13.931531
 Supercharger-V3 SI-Krško,45.93517,15.48299
+Supercharger-V4 SI-Ljubljana,46.026,14.43542,10
+Supercharger-V4 SI-Ljubljana,46.05154,14.4588,10
 Supercharger-V4 SI-Ljubljana,46.05178,14.45206
 Supercharger-V4 SI-Ljubljana,46.05205,14.45332,10
+Supercharger-V4 SI-Ljubljana,46.05306,14.45352,10
 Supercharger-V4 SI-Ljubljana East,46.06383,14.54842
 Supercharger SI-Maribor,46.5329,15.6998,55
 Supercharger-V4 SI-NovoMesto,45.797184,15.181046
@@ -7579,6 +7583,7 @@ ABB LT-Kuodaičiai Kuodaičių k,55.56873,22.1779
 ABB NZ-Mount Maunganui Maru Street,-37.66507,176.197
 
 ABC AT-Ansfelden Carl-Anton-Carlone-Straße,48.20972,14.29025
+ABC DK-Ringkøbing-Skjern Høgevej,56.08867,8.617
 ABC FI-Alavus Piirantie,62.59289,23.60903,20
 ABC FI-Espoo Komeetankatu,60.16665,24.73444
 ABC FI-Eurajoki Kauppatie,61.20406,21.72708
@@ -13060,6 +13065,8 @@ eins-energie DE-Zschopau Straubeweg,50.75683,13.06982
 eins-energie DE-Zwickau Georgenstraße,50.71893,12.49008
 
 EKO ME-Kotor Котор Put prvoborca,42.41934,18.76965
+
+Eko360 IT-Alcamo Via Ingham,37.98422,12.96453
 
 EKOEN PL-Nadarzyn Aleja Katowicka,52.07336,20.76802
 EKOEN PL-Warszawa Postępu,52.17818,20.9972
@@ -20754,6 +20761,7 @@ Ewiva IT-Bracciano Via Santa Lucia,42.08823,12.18323
 Ewiva IT-Calenzano Via Leonardo Da Vinci,43.86714,11.16467
 Ewiva IT-Campagnano di Roma Via della Mola Maggiorana,42.15344,12.36919
 Ewiva IT-Campi Bisenzio Via Salvador Allende,43.83068,11.14942
+Ewiva IT-Carini Strada Statale Ovest,38.17297,13.2164
 Ewiva IT-Castelfranco Emilia Via Emilia Ovest,44.60276,11.03142
 Ewiva IT-Castenedolo Tangenziale Est,45.46067,10.31911
 Ewiva IT-Castro Via di Mezzo,40.01016,18.42513
@@ -22459,7 +22467,7 @@ Ionity DE-Bruchsal Molzaustraße,49.14018,8.55867
 Ionity DE-Burgwedel Kokenhorststraße,52.4858,9.84595,40
 Ionity DE-Castrop Rauxel Grutholzallee,51.56634,7.31754
 Ionity DE-Delmenhorst Niedersachsendamm,53.03216,8.65478
-Ionity DE-Dettelbach Mainfrankenpark,49.77798,10.06877,30
+Ionity DE-Dettelbach Mainfrankenpark,49.7779,10.06858,30
 Ionity DE-Dietmannsried Glaserstraße,47.8119,10.30294,27
 Ionity DE-Dormagen Hamburger Straße,51.09327,6.8078
 Ionity DE-Eching Dieselstraße,48.31085,11.64673
@@ -25158,6 +25166,7 @@ Lidl FR-Vitrolles Av. Jean Monnet,43.42349,5.28486
 Lidl FR-Wissembourg All. des Peupliers Altenstadt,49.03075,7.95498
 Lidl GB-Hemel Hempstead White Hart Dr,51.7485,-0.45463
 Lidl GB-Witney New Cl Ln,51.7736,-1.4931
+Lidl GR-Amaliada Αμαλιάδας Antoniou Petralia,37.7878,21.3322
 Lidl GR-Anatoli Ανατολή Digeni Akrita,39.6278,20.8594
 Lidl GR-Chersonisos Χερσόνησος Palea EO Irakliou Agioi Nikolaoi,35.32236,25.38034
 Lidl GR-Iraklion Ηράκλειο Krinon,35.3142,25.1412
@@ -26642,6 +26651,7 @@ nvb DE-Wietmarschen Am Markt,52.51754,7.13284
 nvb DE-Wilsum Echtelerstraße,52.53992,6.83253
 
 NXT-50five NL-Amstelveen Asserring,52.28186,4.82767
+NXT-50five NL-Maastricht Frontensingel,50.85488,5.68435
 
 OK DK-Blåvand Hvidbjerg Strandvej,55.54646,8.13497
 OK DK-Dragør Krudttårnsvej,55.58369,12.64723
@@ -30668,6 +30678,7 @@ TEAG DE-Wasungen Riethstraße,50.6634,10.3645
 TEAG DE-Weida Scheunenweg,50.77443,12.05931
 TEAG DE-Weilburg An der Backstania,50.49054,8.25422
 TEAG DE-Weimar Lyonel-Feininger-Straße,50.9634,11.32008
+TEAG DE-Weimar Untergraben,50.98268,11.33055
 TEAG DE-Werra-Suhl-Tal Schwanengasse,50.94007,10.06903
 TEAG DE-Wetzlar Am Trauar,50.56126,8.48367
 TEAG DE-Wildeck Zum Dönges,50.95424,10.02163
