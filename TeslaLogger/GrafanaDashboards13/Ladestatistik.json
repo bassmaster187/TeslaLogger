@@ -695,7 +695,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "select  address, count(*) as Anzahl, max(StartDate) as LetzteLadung, sum(cost_total) as Cost, \r\n(\r\n  select sum(cost_total) / sum(chargingstate.charge_energy_added) as cost\r\n  FROM chargingstate join pos as pos2 on chargingstate.pos = pos2.id join charging on chargingstate.EndChargingID = charging.id\r\n  where pos2.address = T1.address and cost_total is not null and chargingstate.carid=$Car\r\n) as 'Ø Price / kWh', \r\n(\r\n  select sum(chargingstate.charge_energy_added) / sum(cost_kwh_meter_invoice) * 100 as eff\r\n  FROM chargingstate join pos as pos3 on chargingstate.pos = pos3.id join charging on chargingstate.EndChargingID = charging.id and chargingstate.carid=$Car\r\n  where pos3.address = T1.address and cost_kwh_meter_invoice is not null\r\n) as 'Eff', \r\nsum(charge_energy_added) as geladen_kWh, avg(charge_energy_added) as avg_geladen_kWh, sum(co2_g_kWh * charge_energy_added / 1000) as \"CO2 kg\" ,sum(charge_energy_added) / sum(MinuteDiff) * 60 as avg_kW, avg(End_battery_level) as AvgSOC, max(End_battery_level) as MaxSOC, sum(MinuteDiff) / 60 as LadezeitStunden, \r\navg(lat) as lat, avg(lng) as lng \r\nfrom \r\n(\r\nSELECT        pos.lat, pos.lng,cost_total, chargingstate.StartDate as StartDate, pos.address, \r\n              chargingstate.charge_energy_added, co2_g_kWh,\r\n              charging_End.ideal_battery_range_km AS EndSOC,\r\n              charging_End.battery_level as End_battery_level,\r\n              TIMESTAMPDIFF(MINUTE, chargingstate.StartDate, chargingstate.EndDate) as MinuteDiff\r\nFROM            charging inner JOIN chargingstate ON charging.id = chargingstate.StartChargingID INNER JOIN\r\n                         pos ON chargingstate.pos = pos.id \r\n                         LEFT OUTER JOIN\r\n                         charging AS charging_End ON chargingstate.EndChargingID = charging_End.id\r\nwhere $__timeFilter(chargingstate.StartDate) and TIMESTAMPDIFF(MINUTE, chargingstate.StartDate, chargingstate.EndDate) > 3 and chargingstate.EndChargingID - chargingstate.StartChargingID > 4  and chargingstate.carid=$Car\r\n) as T1\r\ngroup by address\r\norder by Anzahl desc",
+          "rawSql": "select  address, count(*) as Anzahl, max(StartDate) as LetzteLadung, sum(cost_total) as Cost, \r\n(\r\n  select sum(cost_total) / sum(chargingstate.charge_energy_added) as cost\r\n  FROM chargingstate join pos as pos2 on chargingstate.pos = pos2.id join charging on chargingstate.EndChargingID = charging.id\r\n  where pos2.address = T1.address and cost_total is not null and chargingstate.carid=$Car\r\n) as 'Ø Price / kWh', \r\n(\r\n  select sum(chargingstate.charge_energy_added) / sum(cost_kwh_meter_invoice) * 100 as eff\r\n  FROM chargingstate join pos as pos3 on chargingstate.pos = pos3.id join charging on chargingstate.EndChargingID = charging.id and chargingstate.carid=$Car\r\n  where pos3.address = T1.address and cost_kwh_meter_invoice is not null and chargingstate.charge_energy_added <= cost_kwh_meter_invoice\r\n) as 'Eff', \r\nsum(charge_energy_added) as geladen_kWh, avg(charge_energy_added) as avg_geladen_kWh, sum(co2_g_kWh * charge_energy_added / 1000) as \"CO2 kg\" ,sum(charge_energy_added) / sum(MinuteDiff) * 60 as avg_kW, avg(End_battery_level) as AvgSOC, max(End_battery_level) as MaxSOC, sum(MinuteDiff) / 60 as LadezeitStunden, \r\navg(lat) as lat, avg(lng) as lng \r\nfrom \r\n(\r\nSELECT        pos.lat, pos.lng,cost_total, chargingstate.StartDate as StartDate, pos.address, \r\n              chargingstate.charge_energy_added, co2_g_kWh,\r\n              charging_End.ideal_battery_range_km AS EndSOC,\r\n              charging_End.battery_level as End_battery_level,\r\n              TIMESTAMPDIFF(MINUTE, chargingstate.StartDate, chargingstate.EndDate) as MinuteDiff\r\nFROM            charging inner JOIN chargingstate ON charging.id = chargingstate.StartChargingID INNER JOIN\r\n                         pos ON chargingstate.pos = pos.id \r\n                         LEFT OUTER JOIN\r\n                         charging AS charging_End ON chargingstate.EndChargingID = charging_End.id\r\nwhere $__timeFilter(chargingstate.StartDate) and TIMESTAMPDIFF(MINUTE, chargingstate.StartDate, chargingstate.EndDate) > 3 and chargingstate.EndChargingID - chargingstate.StartChargingID > 4  and chargingstate.carid=$Car\r\n) as T1\r\ngroup by address\r\norder by Anzahl desc",
           "refId": "A",
           "select": [
             [
@@ -1848,6 +1848,168 @@
       "yaxis": {
         "align": false
       }
+    },
+    {
+      "datasource": {
+        "type": "mysql",
+        "uid": "PC0C98BF192F75B00"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "axisSoftMax": 100,
+            "axisSoftMin": 0,
+            "fillOpacity": 50,
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineWidth": 1,
+            "pointShape": "circle",
+            "pointSize": {
+              "fixed": 5
+            },
+            "pointStrokeWidth": 1,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "show": "points"
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "blue",
+                "value": null
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "charger_power"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "kwatt"
+              },
+              {
+                "id": "custom.axisLabel",
+                "value": "Power"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "battery_level"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "percent"
+              },
+              {
+                "id": "custom.axisLabel",
+                "value": "SOC"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 15,
+        "w": 18,
+        "x": 0,
+        "y": 22
+      },
+      "id": 25,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "mapping": "auto",
+        "series": [
+          {
+            "x": {
+              "matcher": {
+                "id": "byName",
+                "options": "battery_level"
+              }
+            },
+            "y": {
+              "matcher": {
+                "id": "byName",
+                "options": "charger_power"
+              }
+            }
+          }
+        ],
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "13.0.0",
+      "targets": [
+        {
+          "datasource": {
+            "type": "mysql",
+            "uid": "PC0C98BF192F75B00"
+          },
+          "editorMode": "code",
+          "format": "table",
+          "rawQuery": true,
+          "rawSql": "SELECT address, charger_power, charging.battery_level, chargingstate.id as csid\r\nFROM teslalogger.charging \r\njoin chargingstate on charging.id between StartChargingID and EndChargingID \r\njoin pos on chargingstate.Pos = pos.id\r\nWHERE charging.CarID=$Car and $__timeFilter(charging.Datum) and chargingstate.CarID = $Car and $__timeFilter(chargingstate.StartDate) and max_charger_power > 23\r\norder by chargingstate.id, charging.id",
+          "refId": "A",
+          "sql": {
+            "columns": [
+              {
+                "parameters": [],
+                "type": "function"
+              }
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          }
+        }
+      ],
+      "title": "Charging Curves",
+      "transformations": [
+        {
+          "id": "partitionByValues",
+          "options": {
+            "fields": [
+              "address"
+            ]
+          }
+        }
+      ],
+      "type": "xychart"
     },
     {
       "datasource": {

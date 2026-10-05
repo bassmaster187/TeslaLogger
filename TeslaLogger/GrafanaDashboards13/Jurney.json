@@ -1798,17 +1798,25 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "axisSoftMax": 100,
             "axisSoftMin": 0,
+            "fillOpacity": 50,
             "hideFrom": {
               "legend": false,
               "tooltip": false,
               "viz": false
             },
+            "lineWidth": 1,
+            "pointShape": "circle",
+            "pointSize": {
+              "fixed": 5
+            },
+            "pointStrokeWidth": 1,
             "scaleDistribution": {
               "type": "linear"
             },
@@ -1868,34 +1876,36 @@
       },
       "id": 10,
       "options": {
-        "dims": {
-          "exclude": [
-            "id"
-          ],
-          "x": "battery_level"
-        },
         "legend": {
           "calcs": [],
           "displayMode": "list",
           "placement": "bottom",
-          "showLegend": false
+          "showLegend": true
         },
+        "mapping": "auto",
         "series": [
           {
-            "pointColor": {
-              "field": "color"
+            "x": {
+              "matcher": {
+                "id": "byName",
+                "options": "battery_level"
+              }
             },
-            "x": "battery_level",
-            "y": "charger_power"
+            "y": {
+              "matcher": {
+                "id": "byName",
+                "options": "charger_power"
+              }
+            }
           }
         ],
-        "seriesMapping": "manual",
         "tooltip": {
+          "hideZeros": false,
           "mode": "single",
           "sort": "none"
         }
       },
-      "pluginVersion": "",
+      "pluginVersion": "13.0.0",
       "targets": [
         {
           "datasource": {
@@ -1905,7 +1915,7 @@
           "editorMode": "code",
           "format": "table",
           "rawQuery": true,
-          "rawSql": "SELECT chargingstate.id * 100 as color, address, charger_power, charging.battery_level\r\nFROM teslalogger.charging \r\njoin chargingstate on charging.id between StartChargingID and EndChargingID \r\njoin pos on chargingstate.Pos = pos.id\r\nWHERE charging.CarID=$Car and $__timeFilter(charging.Datum) and chargingstate.CarID = $Car and $__timeFilter(chargingstate.StartDate)\r\norder by chargingstate.id, charging.id",
+          "rawSql": "SELECT address, charger_power, charging.battery_level, chargingstate.id as csid\r\nFROM teslalogger.charging \r\njoin chargingstate on charging.id between StartChargingID and EndChargingID \r\njoin pos on chargingstate.Pos = pos.id\r\nWHERE charging.CarID=$Car and $__timeFilter(charging.Datum) and chargingstate.CarID = $Car and $__timeFilter(chargingstate.StartDate)\r\norder by chargingstate.id, charging.id",
           "refId": "A",
           "sql": {
             "columns": [
@@ -1927,6 +1937,16 @@
         }
       ],
       "title": "Charging Curves",
+      "transformations": [
+        {
+          "id": "partitionByValues",
+          "options": {
+            "fields": [
+              "address"
+            ]
+          }
+        }
+      ],
       "type": "xychart"
     }
   ],
