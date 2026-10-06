@@ -76,8 +76,7 @@ Supercharger AT-Salzburg,47.727056,13.060672
 Supercharger-V3 AT-Salzburg Nord,47.836027,13.059075
 Supercharger-V4 AT-Seefeld in Tirol,47.3252,11.19914
 Supercharger-V4 AT-Spittal an der Drau,46.78644,13.52195,70
-Supercharger AT-St. Anton,47.1301,10.26923
-Supercharger AT-St. Anton,47.13112,10.2715
+Supercharger-V4 AT-St. Anton am Arlberg,47.13112,10.2715
 Supercharger-V4 AT-St. Georgen,47.92887,13.50225,45
 Supercharger-V3 AT-St. Lorenzen im Mürztal,47.46898,15.34504,35
 Supercharger-V4 AT-St. Michael im Lungau,47.096663,13.632742
@@ -363,6 +362,7 @@ Supercharger-V4 CA-Nanaimo BC Turner Rd,49.22595,-124.03636
 Supercharger-V3 CA-North Vancouver BC Lonsdale Ave,49.32788,-123.07094
 Supercharger-V3 CA-Osoyoos BC,49.03162,-119.46693
 Supercharger-V3 CA-Penticton BC,49.496244,-119.61599
+Supercharger-V4 CA-Penticton BC Skaha Lake Rd,49.46174,-119.58812
 Supercharger-V3 CA-Prince George BC,53.890082,-122.771075
 Supercharger-V4 CA-Prince Rupert BC,54.31844,-130.31978
 Supercharger-V3 CA-Princeton BC,49.45797,-120.50624
@@ -2216,6 +2216,7 @@ Supercharger-V4 DE-Mönchengladbach Krefelder Straße,51.20683,6.4605
 Supercharger-V3 DE-Mücke,50.64544,8.98982
 Supercharger-V4 DE-Mühldorf,48.27253,12.54963
 Supercharger-V4 DE Mülheim an der Ruhr,51.450248,6.91344
+Supercharger-V3 DE-Münchberg-Nord,50.18885,11.76353,10
 Supercharger-V3 DE-Münchberg-Nord,50.20295,11.77665,30
 Supercharger-V3 DE-München - Die Hirschau,48.161505,11.602763
 Supercharger-V3 DE-München - OEZ,48.184494,11.532399
@@ -2287,6 +2288,7 @@ Supercharger-V4 DE Rostock-Bentwisch,54.11277,12.19214
 Supercharger-V3 DE-Rüsselsheim,49.96834,8.39035,36
 Supercharger-V4 DE Saarbrücken,49.208075,7.027059
 Supercharger-V4 DE-Saarbrücken Innenstadt,49.23915,6.97825
+Supercharger-V4 DE-Sangerhausen,51.42597,11.62797,10
 Supercharger-V4 DE-Sangerhausen,51.45055,11.30448,30
 Supercharger-V3 DE-Satteldorf,49.1811,10.06915,35
 Supercharger-V3 DE-Schierling,48.838255,12.119171,30
@@ -6307,7 +6309,7 @@ Supercharger-V4 US-Newark NJ,40.72755,-74.1504
 Supercharger-V3 US-Newark NJ - Lindbergh Road,40.69163,-74.1843
 Supercharger-V3 US-North Bergen NJ,40.7755,-74.03466
 Supercharger-V3 US-North Bergen NJ - John F. Kennedy Boulevard,40.77388,-74.03814
-Supercharger-V4 US-North Bergen NJ Tonnelle Ave,40.803,-74.01938
+Supercharger-V4 US-North Bergen NJ Tonnelle Ave,40.8034,-74.0194
 Supercharger US-North Brunswick NJ,40.44003,-74.50384
 Supercharger-V3 US-Ocean View NJ,39.17707,-74.73245
 Supercharger-V3 US-Old Bridge NJ,40.39067,-74.3395
@@ -10186,6 +10188,7 @@ Charge-ON DE-Raststätte Brokenlande,54.01328,9.93295,25
 
 chargecloud AT-Helpfau-Uttendorf Uttendorf,48.15444,13.11786
 
+Chargee CZ-Praha Jankovcova,50.10813,14.4533
 Chargee CZ-Valašské Meziříčí Masarykova,49.49204,17.96265
 
 Chargefox AU-Airport West VIC Louis St,-37.71359,144.88545
@@ -11926,6 +11929,7 @@ da-emobil AT-Eibiswald,46.68652,15.24323
 da-emobil AT-Eisenstadt Ruster Straße,47.82814,16.53035
 da-emobil AT-Eisenwang Enzersbergstraße,47.82239,13.2001
 da-emobil AT-Feldbach Hauptplatz,46.95393,15.88804
+da-emobil AT-Fieberbrunn Brunnau,47.47218,12.5521
 da-emobil AT-Fischbach Dorfstraße,47.44252,15.65058
 da-emobil AT-Fiss Fisser Straße,47.05341,10.61294
 da-emobil AT-Gleisdorf Mühlgasse,47.09897,15.7131
@@ -12497,6 +12501,7 @@ E.ON DE-Raststätte Rhön Ost,50.26758,9.8825
 E.ON DE-Raststätte Rhön West,50.2635,9.88106
 E.ON DE-Raststätte Riedener Wald West,49.94547,10.01636,20
 E.ON DE-Raststätte Rohnetal Nord,51.4352,11.42673
+E.ON DE-Raststätte Rohnetal Süd,51.43263,11.42314
 E.ON DE-Raststätte Ruraue West,50.9298,6.3373
 E.ON DE-Raststätte Samerberg Nord,47.80283,12.17897,20
 E.ON DE-Raststätte Sauerland,51.22291,7.67015
@@ -17112,6 +17117,7 @@ EnelX IT-Rodengo Saiano Via Girolamo Romanino,45.57499,10.12088
 EnelX IT-Roma Via Aosta,41.88327,12.51469
 EnelX IT-Roma Viale dei Quattro Venti,41.8797,12.45856
 EnelX IT-Rovigo Viale Porta Adige,45.08557,11.78552
+EnelX IT-Sala Consilina Piazza Rita Levi Montalcini,40.40688,15.57885
 EnelX IT-Saluzzo Via F. e G. Lattanzi,44.64589,7.50439
 EnelX IT-San Benedetto del Tronto Via della Liberazione,42.94108,13.88002
 EnelX IT-San Giovanni Teatino IKEA,42.39618,14.16652
@@ -20819,6 +20825,7 @@ Ewiva IT-Vieste Via Dalmazia,41.88453,16.17352
 Ewiva IT-Volta Cammino Via Nazionale,40.2963,15.64846
 
 EWO DE-Oberaudorf Bad-Trißl-Straße,47.6492,12.17077
+EWO DE-Oberaudorf Dorfstraße,47.66724,12.16926
 EWO DE-Oberaudorf Naunspitzstraße,47.6484,12.17876
 
 EWR DE-Lampertheim Weidweg,49.5919,8.45538
