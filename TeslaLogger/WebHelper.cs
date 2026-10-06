@@ -2478,7 +2478,14 @@ namespace TeslaLogger
                         }
                         else if (battery == "LFP")
                         {
-                            WriteCarSettings("0.142", "Y SR (MIG CATL)");
+                            if (year >= 2026)
+                            {
+                                WriteCarSettings("0.141", "Y SR (MIG CATL 2026+)");
+                            }
+                            else
+                            {
+                                WriteCarSettings("0.142", "Y SR (MIG CATL)");
+                            }
                             return;
                         }
                     }

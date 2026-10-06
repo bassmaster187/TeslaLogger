@@ -1022,6 +1022,32 @@ namespace UnitTestsTeslalogger
                 Assert.IsTrue(supportedByFleetTelemetry);
             }
         }
+        [TestMethod]
+        public void Car_Y_SR_CATL_64()
+        {
+            string[] VINSs = { "XP7YGCFR0TB" };
+
+            foreach (string vin in VINSs)
+            {
+                Car c = new Car(0, "", "", 0, "", DateTime.Now, "", "", "", "", "", "", "", null, false);
+                WebHelper wh = c.webhelper;
+
+                MemoryCache.Default.Remove("GetAvgMaxRage_0");
+                MemoryCache.Default.Add("GetAvgMaxRage_0", 520, DateTime.Now.AddMinutes(1));
+                wh.car.Vin = vin + "XXXXXX";
+                wh.car.CarType = "modely";
+                wh.car.CarSpecialType = "base";
+                wh.car.DBWhTR = 0.141;
+                wh.car.TrimBadging = "50";
+                wh.UpdateEfficiency();
+
+                Assert.AreEqual("Y SR (MIG CATL 2026+)", wh.car.ModelName);
+                Assert.AreEqual(0.141, wh.car.WhTR);
+
+                bool supportedByFleetTelemetry = c.SupportedByFleetTelemetry();
+                Assert.IsTrue(supportedByFleetTelemetry);
+            }
+        }
 
         [TestMethod]
         public void Car_Y_SR_MIC()
