@@ -289,9 +289,8 @@ namespace TeslaLogger
                 string key = jj["key"];
                 dynamic value = jj["value"];
 
-                // Skip invalid values early
-
-                if (value.ContainsKey("invalid") && value["invalid"] == true)
+                // Skip invalid values early, when it matters
+                if (key != "DestinationName" && value.ContainsKey("invalid") && value["invalid"] == true)
                 {
                     Log($"Invalid value for key: {key}");
                     continue;
