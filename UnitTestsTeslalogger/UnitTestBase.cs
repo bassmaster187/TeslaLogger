@@ -957,6 +957,73 @@ namespace UnitTestsTeslalogger
             bool supportedByFleetTelemetry = c.SupportedByFleetTelemetry();
             Assert.IsTrue(supportedByFleetTelemetry);
         }
+
+        [TestMethod]
+        public void Car_Y_LR_AWD_MIG_2022()
+        {
+            string[] VINSs = {
+                "XP7YGCEK9PB",
+                "XP7YGCEK1PB" };
+
+            foreach (string vin in VINSs)
+            {
+                Car c = new Car(0, "", "", 0, "", DateTime.Now, "", "", "", "", "", "", "", null, false);
+                WebHelper wh = c.webhelper;
+
+                MemoryCache.Default.Remove("GetAvgMaxRage_0");
+                MemoryCache.Default.Add("GetAvgMaxRage_0", 520, DateTime.Now.AddMinutes(1));
+                wh.car.Vin = vin + "XXXXXX";
+                wh.car.CarType = "modely";
+                wh.car.CarSpecialType = "base";
+                wh.car.DBWhTR = 0.148;
+                wh.car.TrimBadging = "74d";
+                wh.UpdateEfficiency();
+
+                Assert.AreEqual("Y LR AWD (MIG)", wh.car.ModelName);
+                Assert.AreEqual(0.148, wh.car.WhTR);
+
+                bool supportedByFleetTelemetry = c.SupportedByFleetTelemetry();
+                Assert.IsTrue(supportedByFleetTelemetry);
+            }
+        }
+
+        [TestMethod]
+        public void Car_Y_LR_AWD_MIG_2026()
+        {
+            string[] VINSs = {
+                "XP7YGCEK0TB",
+                "XP7YGCEK1TB",
+                "XP7YGCEK2TB",
+                "XP7YGCEK3TB",
+                "XP7YGCEK4TB",
+                "XP7YGCEK5TB",
+                "XP7YGCEK7TB",
+                "XP7YGCEK8TB",
+                "XP7YGCEK9TB",
+                "XP7YGCEKXTB" };
+
+            foreach (string vin in VINSs)
+            {
+                Car c = new Car(0, "", "", 0, "", DateTime.Now, "", "", "", "", "", "", "", null, false);
+                WebHelper wh = c.webhelper;
+
+                MemoryCache.Default.Remove("GetAvgMaxRage_0");
+                MemoryCache.Default.Add("GetAvgMaxRage_0", 560, DateTime.Now.AddMinutes(1));
+                wh.car.Vin = vin + "XXXXXX";
+                wh.car.CarType = "modely";
+                wh.car.CarSpecialType = "base";
+                wh.car.DBWhTR = 0.148;
+                wh.car.TrimBadging = "74d";
+                wh.UpdateEfficiency();
+
+                Assert.AreEqual("Y LR AWD (MIG 2026+)", wh.car.ModelName);
+                Assert.AreEqual(0.148, wh.car.WhTR);
+
+                bool supportedByFleetTelemetry = c.SupportedByFleetTelemetry();
+                Assert.IsTrue(supportedByFleetTelemetry);
+            }
+        }
+
         [TestMethod]
         public void Car_Y_SR_MIG_BYD()
         {

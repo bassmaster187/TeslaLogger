@@ -2433,20 +2433,25 @@ namespace TeslaLogger
                     {
                         if (year < 2022)
                         {
-                            WriteCarSettings("0.148", "Y LR AWD (MIC 2021)"); //LG 74kWh
+                            WriteCarSettings("0.148", "Y LR AWD (MIC 2021)"); //LG 5C M48 74kWh
                             return;
                         }
                         else
                         {
-                            WriteCarSettings("0.148", "Y LR AWD (MIC 2022)"); //LG 79kWh
+                            WriteCarSettings("0.148", "Y LR AWD (MIC 2022)"); //LG 5L M50F 79kWh
                             return;
                         }
                     }
                     else if (MIG)
-                    {
-                        WriteCarSettings("0.148", "Y LR AWD (MIG)");
-                        return;
-                    }
+                        if (year >= 2026)
+                        {
+                            WriteCarSettings("0.148", "Y LR AWD (MIG 2026+)"); //LG 5M M53 85kWh
+                        }
+                        else
+                        {
+                            WriteCarSettings("0.148", "Y LR AWD (MIG)");  //LG 5L M50F 79kWh
+                            return;
+                        }
                     else
                     {
                         WriteCarSettings("0.148", "Y LR AWD (US)");
@@ -2473,18 +2478,18 @@ namespace TeslaLogger
                     {
                         if (!AWD && car.Vin[6] == 'E' && (car.Vin[7] == 'S' || car.Vin[7] == 'J'))
                         {
-                            WriteCarSettings("0.142", "Y SR (MIG BYD)");
+                            WriteCarSettings("0.142", "Y SR (MIG BYD)"); //BYD 7C 60kWh
                             return;
                         }
                         else if (battery == "LFP")
                         {
                             if (year >= 2026)
                             {
-                                WriteCarSettings("0.141", "Y SR (MIG CATL 2026+)");
+                                WriteCarSettings("0.141", "Y SR (MIG CATL 2026+)"); //CATL 6M 64.5kWh
                             }
                             else
                             {
-                                WriteCarSettings("0.142", "Y SR (MIG CATL)");
+                                WriteCarSettings("0.142", "Y SR (MIG CATL)");  //CATL 6L 62kWh
                             }
                             return;
                         }
