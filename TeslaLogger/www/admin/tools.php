@@ -206,6 +206,21 @@ function files_are_equal($a, $b)
     return false;
 }
 
+function GetRequestProtocol()
+{
+    if (isset($_SERVER["HTTP_X_FORWARDED_PROTO"]))
+    {
+        $proto = strtolower(trim(explode(",", $_SERVER["HTTP_X_FORWARDED_PROTO"])[0]));
+        if ($proto == "http" || $proto == "https")
+            return $proto;
+    }
+
+    if (!empty($_SERVER["HTTPS"]) && $_SERVER["HTTPS"] != "off")
+        return "https";
+
+    return "http";
+}
+
 function GetDefaultCarId()
 {
     if (file_exists("/tmp/settings.json"))

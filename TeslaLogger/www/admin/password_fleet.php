@@ -3,7 +3,7 @@
 require "language.php";
 require_once "tools.php";
 
-$actual_link = (empty($_SERVER['HTTPS']) ? 'http' : 'https') . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+$actual_link = GetRequestProtocol() . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
 $actual_link = htmlspecialchars($actual_link, ENT_QUOTES, 'UTF-8');
 $actual_link = str_replace("&", "%26", $actual_link);
 ?>

@@ -3,7 +3,7 @@
 require("language.php");
 require_once("tools.php");
 
-$actual_link = (empty($_SERVER['HTTPS']) ? 'http' : 'https') . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+$actual_link = GetRequestProtocol() . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
 
 ?>
 <html lang="<?php echo $json_data["Language"]; ?>">
