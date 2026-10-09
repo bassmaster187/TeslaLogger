@@ -637,6 +637,7 @@ namespace TeslaLogger
             if (VIN2DBCarID.ContainsKey(vin))
                 VIN2DBCarID.Remove(vin);
 
+            telemetry?.StopConnection();
             cts.Cancel();
         }
 

@@ -65,7 +65,21 @@ return;
             {
                 car.Log("Telemetry CloseConnection " + ex.Message);
             }
-}
+        }
+
+        public override void StopConnection()
+        {
+            try
+            {
+                Log("Telemetry Server stop connection!");
+                connect = false;
+                cts.Cancel();
+            }
+            catch (Exception ex)
+            {
+                car.Log("Telemetry StopConnection " + ex.Message);
+            }
+        }
 
         public override void StartConnection()
         {
@@ -297,7 +311,7 @@ continue;
                     { "vin", vin},
                     { "token", car.TaskerHash},
                     { "FW", fw},
-                    { "accesstoken", car.Tesla_Token},
+                    { "accesstoken", car.Tesla_Token}, 
                     { "regionurl", car.webhelper.apiaddress},
                     { "config", configname},
                     { "version", Assembly.GetExecutingAssembly().GetName().Version.ToString() },

@@ -33,6 +33,11 @@ namespace TeslaLogger
 
         }
 
+        public virtual void StopConnection()
+        {
+
+        }
+
     }
 
 }

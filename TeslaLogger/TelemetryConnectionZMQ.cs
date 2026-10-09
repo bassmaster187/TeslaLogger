@@ -65,6 +65,20 @@ namespace TeslaLogger
             }
         }
 
+        public override void StopConnection()
+        {
+            try
+            {
+                Log("Telemetry Server stop connection!");
+                connect = false;
+                cts.Cancel();
+            }
+            catch (Exception ex)
+            {
+                car.Log("Telemetry StopConnection " + ex.Message);
+            }
+        }
+
         public override void StartConnection()
         {
             try
