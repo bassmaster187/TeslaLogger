@@ -2219,8 +2219,8 @@ namespace TeslaLogger
                 {
                     if (battery == "LFP")
                     {
-                        if (year == 2021 || car.DBWhTR > 0 && car.DBWhTR < 0.130)
-                            WriteCarSettings("0.127", "M3 SR+ LFP 2021");
+                        if (year >= 2021 || car.DBWhTR > 0 && car.DBWhTR < 0.130)
+                            WriteCarSettings("0.138", "M3 SR+ LFP 2021");
                         else
                             WriteCarSettings("0.133", "M3 SR+ LFP");
                     }
