@@ -3269,7 +3269,7 @@ Supercharger-V4 IE-Dublin,53.27393,-6.217773
 Supercharger-V4 IE-Dublin Blanchardstown,53.38453,-6.37115
 Supercharger-V4 IE-Dublin Butterfield Ave,53.29566,-6.2984
 Supercharger-V3 IE-Enfield,53.406101,-6.838143
-Supercharger-V4 IE-Letterkenny,54.95045,-7.7129
+Supercharger-V4 IE-Letterkenny,54.95108,-7.71333
 Supercharger-V4 IE-Limerick,52.6721,-8.5173
 Supercharger-V4 IE-Longford,53.74173,-7.80333
 Supercharger-V4 IE-Mallow,52.13163,-8.64577
@@ -4145,7 +4145,7 @@ Supercharger-V3 RO-Constanța,44.20366,28.63116,65
 Supercharger-V3 RO-Craiova,44.3291,23.77194
 Supercharger-V4 RO-Drobeta Turnu Severin,44.63807,22.634
 Supercharger-V4 RO-Galati,45.45246,28.03385
-Supercharger-V4 RO-Iași,47.151152,27.601632
+Supercharger-V4 RO-Iași,47.18603,27.4552
 Supercharger-V4 RO-Oradea,47.04343,21.8971
 Supercharger-V3 RO-Pitești,44.823586,24.909692,46
 Supercharger-V4 RO-Satu Mare,47.784422,22.845358
@@ -4308,6 +4308,7 @@ Supercharger-V4 SE-Östersund,63.170327,14.69059
 Supercharger-V4 SE-Överkalix,66.323032,22.8479
 Supercharger-V3 SE-Övertorneå,66.3832,23.65512
 
+Supercharger-V4 SG-Bedok Mall,1.32477,103.9294
 Supercharger-V3 SG-Causeway Point,1.43605,103.78597
 Supercharger-V3 SG-Century Square,1.35246,103.94378
 Supercharger-V4 SG-Changi City Point,1.33462,103.96253
@@ -5256,6 +5257,7 @@ Supercharger-V3 US-Rehoboth Beach DE - Coastal Highway,38.71656,-75.1098
 Supercharger-V3 US-Seaford DE,38.65932,-75.59383
 Supercharger-V3 US-Wilmington DE Limestone Rd,39.72112,-75.6571
 
+Supercharger-V4 US- St. Petersburg FL 4th St N,27.85047,-82.63804
 Supercharger-V3 US-Alachua FL,29.7975,-82.5017
 Supercharger US-Altamonte Springs FL,28.66452,-81.38194
 Supercharger-V3 US-Apopka FL,28.654,-81.46924
@@ -5377,6 +5379,7 @@ Supercharger-V4 US-Miami FL NW 183rd St,25.93844,-80.29784
 Supercharger-V4 US-Miami FL SW 124th Ave,25.6894,-80.39378
 Supercharger-V4 US-Miami FL SW 127th Ave,25.65397,-80.39966
 Supercharger-V4 US-Miami FL SW 177th Ave,25.76236,-80.48272
+Supercharger-V4 US-Miami FL SW 17th Ave,25.747,-80.22096
 Supercharger US-Miami FL SW 7th St,25.76747,-80.1923
 Supercharger-V3 US-Miami FL W Flagler St,25.76915,-80.32418
 Supercharger-V3 US-Miami Gardens FL - Northwest 183rd Street,25.93994,-80.24642
@@ -5436,6 +5439,7 @@ Supercharger-V3 US-Pompano Beach FL Florida Turnpike Service Plaza,26.22652,-80.
 Supercharger US-Port Orange FL,29.10853,-81.035
 Supercharger US-Port St. Lucie FL,27.3126,-80.40696
 Supercharger-V3 US-Port St. Lucie FL Florida’s Turnpike,27.3002,-80.3723
+Supercharger-V4 US-Port St. Lucie FL SW Tradition Pkwy,27.26407,-80.43217
 Supercharger-V3 US-Punta Gorda FL,26.89596,-82.01133
 Supercharger-V4 US-Punta Gorda FL Bermont Rd,26.94764,-82.0001
 Supercharger-V4 US-Punta Gorda FL Tamiami Trl,26.93915,-82.0532
@@ -5633,6 +5637,7 @@ Supercharger US-Chicago IL O’Hare,41.9986,-87.8882
 Supercharger US-Chicago IL S Canal St,41.86904,-87.64065
 Supercharger-V3 US-Chicago IL S Doty Ave W,41.6936,-87.6011
 Supercharger-V4 US-Chicago IL W Addison St,41.94463,-87.7015
+Supercharger-V4 US-Chicago IL W Peterson Ave,41.99148,-87.68228
 Supercharger-V3 US-Collinsville IL,38.6734,-90.01328
 Supercharger US-Country Club Hills IL,41.58515,-87.72154
 Supercharger-V4 US-Des Plaines IL,41.99914,-87.8841
@@ -6344,6 +6349,7 @@ Supercharger-V3 US-Trenton NJ Richard Stockton,40.17704,-74.63173
 Supercharger-V3 US-Union NJ,40.69584,-74.254
 Supercharger-V3 US-Westampton NJ Rancocas Road,40.00685,-74.86095
 Supercharger-V3 US-Woodbridge Township NJ,40.53635,-74.29802
+Supercharger-V4 US-Woodbridge Township NJ Woodbridge Center Dr,40.54958,-74.2977
 Supercharger-V3 US-Woodcliff Lake NJ,41.04138,-74.0748
 Supercharger-V4 US-Woodcliff Lake NJ Chestnut Ridge Rd,41.0438,-74.0721
 
@@ -7331,6 +7337,7 @@ Supercharger-V4 US-Prosser WA,46.21675,-119.78657
 Supercharger-V4 US-Puyallup WA,47.1587,-122.29364
 Supercharger-V3 US-Quincy WA,47.1034,-119.8335
 Supercharger-V4 US-Redmond WA,47.62863,-122.14083
+Supercharger-V4 US-Redmond WA 170th Ave NE Resound Energy,47.67043,-122.1148
 Supercharger-V3 US-Renton WA - Southwest 41st Street,47.44306,-122.22515
 Supercharger-V4 US-Richland WA,46.26403,-119.26534
 Supercharger-V3 US-Ridgefield WA,45.81775,-122.68288
@@ -7522,6 +7529,7 @@ Tesla Service Center IT-Milano,45.4287,9.32361
 Tesla Service Center IT-Padova,45.38944,11.9502
 Tesla Service Center IT-Roma Nord,41.97688,12.49442
 Tesla Service Center LU-Luxembourg,49.58943,6.14069
+Tesla Service Center NL- Tilburg,51.60633,5.00315
 Tesla Service Center NL-Amsterdam Zuid-Oost,52.31048,4.93618
 Tesla Service Center NL-Arnhem,51.965,6.00376
 Tesla Service Center NL-Den Haag,52.07044,4.38834
@@ -8868,6 +8876,7 @@ alperia IT-Trento Via IV Novembre,46.10042,11.11308
 alperia IT-Vahrn Eisackstraße,46.73456,11.64812
 
 AMAG CH-Bern Wankdorffeldstrasse,46.96575,7.46638,30
+AMAG CH-Maienfeld Industriestrasse,47.0015,9.52462,32
 AMAG CH-Schinznach-Bad Aarauerstrasse,47.44775,8.16856
 AMAG CH-Winterthur Zürcherstrasse,47.48549,8.70215
 
@@ -12766,7 +12775,8 @@ Ecotap DE-Nürnberg Lübener Straße,49.41036,11.13927,25
 Ecotap DE-Vogtsburg Badbergstraße,48.09542,7.66305
 Ecotap DE-Völklingen Rathausstraße,49.24724,6.84563
 Ecotap NL-Goes Goese Poort,51.5068,3.87532,30
-ecotap NL-Noordwelle Strandpark de Zeeuwse Kust,51.73626,3.8061
+Ecotap NL-Harderwijk Spaanderbank,53.0486,5.3893
+Ecotap NL-Noordwelle Strandpark de Zeeuwse Kust,51.73626,3.8061
 Ecotap NL-Vaals Drielandenpunt,50.75671,6.01888
 Ecotap NL-Wemeldinge Oostelijke Kanaalweg,51.51578,4.00752
 Ecotap NL-Wemeldinge Ruisweg,51.522,3.98018
@@ -27687,7 +27697,7 @@ Porsche AT-Salzburg Alpenstraße,47.76093,13.07259
 Porsche AT-Wien Leopoldauer Straße,48.26203,16.42422
 Porsche BG-София Запад,42.74402,23.23052
 Porsche CH-Feusisberg Firststrasse,47.19107,8.74261
-Porsche CH-Maienfeld Industriestrasse,47.00174,9.52374
+Porsche CH-Maienfeld Industriestrasse,47.0017,9.52375,32
 Porsche CH-Schlieren Bernstrasse,47.40219,8.44036
 Porsche CH-Unterengstringen In den Schanzen,47.40309,8.41761
 Porsche DE-Aschaffenburg Berliner Allee,49.9651,9.17218
@@ -27818,6 +27828,7 @@ Powerdot PL-Cieszyn Wierzbowa,49.75655,18.6395
 Powerdot PL-Gdańsk Gdańska,54.40236,18.63141
 Powerdot PL-Kraków Pawia,50.06798,19.94628
 Powerdot PL-Leszno Niepodległości,51.84625,16.58807
+Powerdot PL-Osinów Dolny Osinów Dolny,52.85175,14.1454
 Powerdot PL-Poznań Jana Brzechwy,52.41187,16.83207
 Powerdot PL-Płońsk Pułtuska,52.62474,20.38752
 Powerdot PL-Słubice Wrocławska,52.3482,14.5686
