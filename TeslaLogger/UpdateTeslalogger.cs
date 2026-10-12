@@ -2636,7 +2636,10 @@ PRIMARY KEY(id)
 
         private static void UpdateGrafanaVersion()
         {
-            string newversion = "10.0.1";
+            string newversion = "13.2.3";
+            string buildid = "36482603486";
+            // Raspberry Pi 3 / Pi 4 run 32-bit OS (armhf) -> ARMv7 package
+            string arch = "arm-7";
 
             string GrafanaVersion = Tools.GetGrafanaVersion();
 
@@ -2647,6 +2650,7 @@ PRIMARY KEY(id)
                 || GrafanaVersion == "8.3.1" 
                 || GrafanaVersion == "8.3.2"
                 || GrafanaVersion == "8.5.22"
+                || GrafanaVersion == "10.0.1"
                 )
             {
                 if (!Tools.GetOsRelease().Contains("buster"))
@@ -2656,44 +2660,76 @@ PRIMARY KEY(id)
                     return;
                 }
 
-                Thread threadGrafanaUpdate = new Thread(() =>
+                // Runs synchronously (no fire-and-forget thread): the caller must not run
+                // grafana-cli / restart against the SQLite DB while the package is still
+                // being installed, otherwise several writers hit grafana.db at once
+                // ("database is locked") and a migration can be left half-applied.
+                string GrafanaFilename = $"grafana_{newversion}_{buildid}_linux_{arch}.deb";
+
+                Logfile.Log($"upgrade Grafana to {newversion}!");
+
+                // Stop Grafana before touching the package so the old server (holding the
+                // SQLite grafana.db) is not running while dpkg installs the new one.
+                if (!Tools.IsDocker())
+                    StopGrafanaServerForUpdate();
+
+                if (File.Exists(GrafanaFilename))
+                    File.Delete(GrafanaFilename);
+
+                // use internal downloader
+                string grafanaUrl = $"https://dl.grafana.com/grafana/release/{newversion}/grafana_{newversion}_{buildid}_linux_{arch}.deb";
+                string grafanaFile = GrafanaFilename;
+                if (!Tools.DownloadToFile(grafanaUrl, grafanaFile, 300, true).Result)
                 {
-                    string GrafanaFilename = $"grafana_{newversion}_armhf.deb";
+                    // fallback to wget
+                    Logfile.Log($"fallback o wget to download {grafanaUrl}");
+                    Tools.ExecMono("wget", $"{grafanaUrl}  --show-progress");
+                }
 
-                    Logfile.Log($"upgrade Grafana to {newversion}!");
-
-                    if (File.Exists(GrafanaFilename))
-                        File.Delete(GrafanaFilename);
-
-                    // use internal downloader
-                    string grafanaUrl = "https://dl.grafana.com/oss/release/grafana_" + newversion + "_armhf.deb";
-                    string grafanaFile = $"grafana_{newversion}_armhf.deb";
-                    if (!Tools.DownloadToFile(grafanaUrl, grafanaFile, 300, true).Result)
-                    {
-                        // fallback to wget
-                        Logfile.Log($"fallback o wget to download {grafanaUrl}");
-                        Tools.ExecMono("wget", $"{grafanaUrl}  --show-progress");
-                    }
-
-                    if (File.Exists(GrafanaFilename))
-                    {
-                        Logfile.Log(GrafanaFilename + " Sucessfully Downloaded -  Size:" + new FileInfo(GrafanaFilename).Length);
-
-                        if (GrafanaVersion == "6.7.3") // first Raspberry PI4 install
-                            Tools.ExecMono("dpkg", "-r grafana-rpi");
-
-                        Tools.ExecMono("dpkg", $"-i --force-overwrite grafana_{newversion}_armhf.deb");
-                    }
-
-                    Logfile.Log("upgrade Grafana DONE!");
-
-                    Tools.CopyFilesRecursively(new DirectoryInfo("/etc/teslalogger/git/TeslaLogger/GrafanaPlugins"), new DirectoryInfo("/var/lib/grafana/plugins"));
-                })
+                if (File.Exists(GrafanaFilename))
                 {
-                    Name = "GrafanaUpdate"
-                };
-                threadGrafanaUpdate.Start();
+                    Logfile.Log(GrafanaFilename + " Sucessfully Downloaded -  Size:" + new FileInfo(GrafanaFilename).Length);
+
+                    if (GrafanaVersion == "6.7.3") // first Raspberry PI4 install
+                        Tools.ExecMono("dpkg", "-r grafana-rpi");
+
+                    Tools.ExecMono("dpkg", $"-i --force-overwrite {GrafanaFilename}");
+                }
+
+                Logfile.Log("upgrade Grafana DONE!");
+
+                // dpkg's postinst starts the new server, which runs the DB migrations.
+                // Stop it again so grafana-cli below runs on a free (not locked) DB and
+                // exactly one start happens at the end of the update.
+                if (!Tools.IsDocker())
+                    StopGrafanaServerForUpdate();
+
+                Tools.CopyFilesRecursively(new DirectoryInfo("/etc/teslalogger/git/TeslaLogger/GrafanaPlugins"), new DirectoryInfo("/var/lib/grafana/plugins"));
             }
+        }
+
+        // Stop the Grafana service and make sure no grafana server process is left, so the
+        // SQLite DB is never accessed by more than one process during the update.
+        private static void StopGrafanaServerForUpdate()
+        {
+            Logfile.Log("Stopping Grafana for update");
+            Tools.ExecMono("service", "grafana-server stop");
+
+            // Safety net: kill a stray server binary a clean service stop did not reach
+            // (e.g. an un-versioned grafana binary started outside the service).
+            // -x matches the process name "grafana" only, not "grafana-cli".
+            Tools.ExecMono("pkill", "-9 -x grafana");
+
+            // Wait until the server process is really gone (max ~30s) before touching the DB.
+            for (int i = 0; i < 30; i++)
+            {
+                string running = Tools.ExecMono("pgrep", "-x grafana", false);
+                if (string.IsNullOrWhiteSpace(running))
+                    break;
+                Thread.Sleep(1000);
+            }
+
+            Logfile.Log("Grafana stopped for update");
         }
 
         internal static string AllowUnsignedPlugins(string path, bool overwrite)
