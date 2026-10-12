@@ -1,3 +1,9 @@
+# Version 1.63.22
+- Grafana 13 update 
+- Trackmap Panel (React update for Grafana 13 compatibility) now with Ionity & EnBW icons
+- Journey, Charging, Consumption dashboards with Ionity/EnBW icons too
+- New go-E Wallbox support
+
 # Version 1.63.20.4
 - Model S/X up to model year 2021 with MCU2 are now also supported by the official Fleet API.
 
