@@ -1963,7 +1963,7 @@
         ],
         "tooltip": {
           "hideZeros": false,
-          "mode": "single",
+          "mode": "shared",
           "sort": "none"
         }
       },

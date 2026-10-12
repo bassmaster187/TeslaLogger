@@ -277,7 +277,7 @@
           "showLegend": true
         },
         "tooltip": {
-          "mode": "multi",
+          "mode": "shared",
           "sort": "none"
         }
       },

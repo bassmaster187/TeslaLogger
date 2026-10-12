@@ -135,7 +135,7 @@
           "placement": "right"
         },
         "tooltip": {
-          "mode": "multi",
+          "mode": "shared",
           "sort": "none"
         }
       },

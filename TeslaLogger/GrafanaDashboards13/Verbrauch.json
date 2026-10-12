@@ -670,7 +670,7 @@
         "showValue": "auto",
         "stacking": "none",
         "tooltip": {
-          "mode": "multi",
+          "mode": "shared",
           "sort": "none"
         },
         "xField": "kmh",

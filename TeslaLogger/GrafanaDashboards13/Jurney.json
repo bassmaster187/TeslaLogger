@@ -1581,7 +1581,7 @@
           "showLegend": true
         },
         "tooltip": {
-          "mode": "multi",
+          "mode": "shared",
           "sort": "none"
         }
       },
@@ -1746,7 +1746,7 @@
         "showValue": "auto",
         "stacking": "none",
         "tooltip": {
-          "mode": "multi",
+          "mode": "shared",
           "sort": "none"
         },
         "xField": "kmh",
@@ -1901,7 +1901,7 @@
         ],
         "tooltip": {
           "hideZeros": false,
-          "mode": "single",
+          "mode": "shared",
           "sort": "none"
         }
       },

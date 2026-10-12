@@ -242,7 +242,7 @@
         "showValue": "never",
         "stacking": "none",
         "tooltip": {
-          "mode": "single",
+          "mode": "shared",
           "sort": "none"
         },
         "xTickLabelRotation": 0,
