@@ -37,7 +37,7 @@
       "title": "Admin Panel",
       "tooltip": "",
       "type": "link",
-      "url": "https://home.pogea.de:9443/admin/"
+      "url": "http://raspberry/admin/"
     }
   ],
   "liveNow": false,
