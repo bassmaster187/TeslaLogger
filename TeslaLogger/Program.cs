@@ -1,5 +1,6 @@
 using Exceptionless;
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.IO;
 using System.Net;
@@ -483,6 +484,19 @@ namespace TeslaLogger
                         {
                             Logfile.Log("Grafana Version: " + version);
                             ExceptionlessClient.Default.Configuration.DefaultData["GrafanaVersion"] = version;
+
+                            // send the wakeup file so the server gets a data point with the correct version
+                            foreach (Car car in new List<Car>(Car.Allcars))
+                            {
+                                try
+                                {
+                                    car.webhelper.TaskerWakeupfile(true);
+                                }
+                                catch (Exception ex)
+                                {
+                                    Logfile.Log("TaskerWakeupfile after Grafana version: " + ex.Message);
+                                }
+                            }
                             return;
                         }
                     }
