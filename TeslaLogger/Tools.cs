@@ -1294,18 +1294,16 @@ namespace TeslaLogger
                 {
                     return File.ReadAllText(filename);
                 }
-                else
+
+                // no VERSION file (Docker or tarball install): fall back to the HTTP API.
+                // short timeout: a still starting Grafana may accept the connection but not answer.
+                string host = Tools.IsDocker() ? "grafana:3000" : "localhost:3000";
+                using (HttpClient httpClient = new HttpClient())
                 {
-                    if (Tools.IsDocker())
-                    {
-                        string temp = null;
-                        using (HttpClient httpClient = new HttpClient())
-                        {
-                            temp = httpClient.GetStringAsync("http://grafana:3000/api/health").GetAwaiter().GetResult();
-                            dynamic j = JsonConvert.DeserializeObject(temp);
-                            return j["version"];
-                        }
-                    }
+                    httpClient.Timeout = TimeSpan.FromSeconds(10);
+                    string temp = httpClient.GetStringAsync($"http://{host}/api/health").GetAwaiter().GetResult();
+                    dynamic j = JsonConvert.DeserializeObject(temp);
+                    return j["version"];
                 }
 
             }

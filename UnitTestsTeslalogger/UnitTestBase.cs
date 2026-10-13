@@ -10,7 +10,9 @@ using SRTM;
 using System.Web;
 
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System.Data;
+using System.Linq;
 using System.Security.Cryptography;
 
 namespace UnitTestsTeslalogger
@@ -1323,10 +1325,24 @@ namespace UnitTestsTeslalogger
             Assert.IsFalse(UpdateTeslalogger.UpdateNeeded("1.0.0.1", "1.0.0.0", Tools.UpdateType.none));
         }
 
+        private static string GetDashboardPath(string folder, string file)
+        {
+            // works from both bin\Debug (legacy) and bin\Debug\net8.0 (net8) output directories
+            string dir = AppContext.BaseDirectory;
+            for (int i = 0; i < 6 && dir != null; i++)
+            {
+                string candidate = System.IO.Path.Combine(dir, "TeslaLogger", folder, file);
+                if (System.IO.File.Exists(candidate))
+                    return candidate;
+                dir = System.IO.Path.GetDirectoryName(dir);
+            }
+            throw new System.IO.FileNotFoundException("Dashboard not found: " + folder + "/" + file);
+        }
+
         [TestMethod]
         public void ParseDashboard()
         {
-            string dashboard = System.IO.File.ReadAllText("../../../TeslaLogger/Grafana/Verbrauch.json");
+            string dashboard = System.IO.File.ReadAllText(GetDashboardPath("Grafana", "Verbrauch.json"));
             string title, uid, link;
             UpdateTeslalogger.GrafanaGetTitleAndLink(dashboard, "http://raspberry:3000/", out title, out uid, out link);
             Assert.AreEqual("Verbrauch", title);
@@ -1337,24 +1353,55 @@ namespace UnitTestsTeslalogger
         [TestMethod]
         public void UpdateDefaultCar()
         {
-            string dashboard = System.IO.File.ReadAllText("../../../TeslaLogger/Grafana/Verbrauch.json");
+            string dashboard = System.IO.File.ReadAllText(GetDashboardPath("Grafana", "Verbrauch.json"));
             dashboard = UpdateTeslalogger.UpdateDefaultCar(dashboard, "BATmobil", "2", "Fahrzeug");
 
             Assert.IsTrue(dashboard.Contains("\"text\": \"BATmobil\","));
             Assert.IsTrue(dashboard.Contains("\"label\": \"Fahrzeug\","));
 
 
-            dashboard = System.IO.File.ReadAllText("../../../TeslaLogger/Grafana/Trip.json");
+            dashboard = System.IO.File.ReadAllText(GetDashboardPath("Grafana", "Trip.json"));
             dashboard = UpdateTeslalogger.UpdateDefaultCar(dashboard, "BATmobil", "2", "Fahrzeug");
 
             Assert.IsTrue(dashboard.Contains("\"text\": \"BATmobil\","));
             Assert.IsTrue(dashboard.Contains("\"label\": \"Fahrzeug\","));
+
+            // new dashboards (Grafana 13) already have a value set
+            dashboard = System.IO.File.ReadAllText(GetDashboardPath("GrafanaDashboards13", "Verbrauch.json"));
+            dashboard = UpdateTeslalogger.UpdateDefaultCar(dashboard, "BATmobil", "2", "Fahrzeug");
+
+            Assert.IsTrue(dashboard.Contains("\"text\": \"BATmobil\","));
+            Assert.IsFalse(dashboard.Contains("\"text\": \"Tessi\""));
+            Assert.IsTrue(dashboard.Contains("\"label\": \"Fahrzeug\","));
+
+            // multi select variable with array values
+            dashboard = System.IO.File.ReadAllText(GetDashboardPath("GrafanaDashboards13", "Visited.json"));
+            dashboard = UpdateTeslalogger.UpdateDefaultCar(dashboard, "BATmobil", "2", "Fahrzeug");
+
+            JToken car = GetCarVariable(dashboard);
+            Assert.IsNotNull(car);
+            Assert.AreEqual("BATmobil", ((JArray)car["current"]["text"])[0].Value<string>());
+            Assert.AreEqual("2", ((JArray)car["current"]["value"])[0].Value<string>());
+
+            // includeAll variable keeps "All" as default (no single car selected)
+            string allCars = System.IO.File.ReadAllText(GetDashboardPath("GrafanaDashboards13", "Trip Top Destinations.json"));
+            Assert.AreEqual(allCars, UpdateTeslalogger.UpdateDefaultCar(allCars, "BATmobil", "2", "Fahrzeug"));
+
+            // dashboard without a car variable stays untouched
+            string noCar = System.IO.File.ReadAllText(GetDashboardPath("GrafanaDashboards13", "km Stand.json"));
+            Assert.AreEqual(noCar, UpdateTeslalogger.UpdateDefaultCar(noCar, "BATmobil", "2", "Fahrzeug"));
+        }
+
+        private static JToken GetCarVariable(string dashboard)
+        {
+            JArray list = (JArray)JObject.Parse(dashboard).SelectToken("templating.list");
+            return list.FirstOrDefault((JToken t) => t["name"]?.Value<string>() == "Car");
         }
 
         [TestMethod]
         public void UpdateDatasource()
         {
-            var dashboard = System.IO.File.ReadAllText("../../../TeslaLogger/Grafana/Trip.json");
+            var dashboard = System.IO.File.ReadAllText(GetDashboardPath("Grafana", "Trip.json"));
             dashboard = UpdateTeslalogger.UpdateDatasourceUID(dashboard, "000000001");
 
             Assert.IsTrue(dashboard.Contains("\"uid\": \"000000001\""));

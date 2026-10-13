@@ -464,8 +464,34 @@ namespace TeslaLogger
             ExceptionlessClient.Default.Configuration.DefaultData.Add("MonoRuntime", Tools.GetMonoRuntimeVersion());
             ExceptionlessClient.Default.Configuration.DefaultData.Add("OS", Tools.GetOsRelease());
 
-            Logfile.Log("Grafana Version: " + Tools.GetGrafanaVersion());
-            ExceptionlessClient.Default.Configuration.DefaultData.Add("GrafanaVersion", Tools.GetGrafanaVersion());
+            string grafanaVersion = Tools.GetGrafanaVersion();
+            Logfile.Log("Grafana Version: " + grafanaVersion);
+            ExceptionlessClient.Default.Configuration.DefaultData.Add("GrafanaVersion", grafanaVersion);
+
+            if (grafanaVersion == "?" || grafanaVersion == "NRF" || grafanaVersion == "CF")
+            {
+                // Grafana can take up to ~10 minutes to start (especially after an update on slow
+                // hardware like a Raspberry Pi), so fetch the real version in the background
+                // and update the Exceptionless data
+                Thread threadGrafanaVersion = new Thread(() =>
+                {
+                    for (int i = 1; i <= 40; i++)
+                    {
+                        Thread.Sleep(30000);
+                        string version = Tools.GetGrafanaVersion();
+                        if (version != "?" && version != "NRF" && version != "CF")
+                        {
+                            Logfile.Log("Grafana Version: " + version);
+                            ExceptionlessClient.Default.Configuration.DefaultData["GrafanaVersion"] = version;
+                            return;
+                        }
+                    }
+                })
+                {
+                    Name = "GrafanaVersionThread"
+                };
+                threadGrafanaVersion.Start();
+            }
 
             Logfile.Log("OS Version: " + Tools.GetOsVersion());
             ExceptionlessClient.Default.Configuration.DefaultData.Add("OSVersion", Tools.GetOsVersion());

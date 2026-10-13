@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authentication;
 using MySql.Data.MySqlClient;
 using MySqlX.XDevAPI.Common;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -1993,17 +1994,15 @@ PRIMARY KEY(id)
                     // dashboards depend on the installed Grafana version:
                     // Grafana 13 uses the new dashboards, everything else (incl. unknown version) uses the old ones
                     string GrafanaVersion = Tools.GetGrafanaVersion();
-                    if (Tools.IsDocker())
+                    // Grafana may not be up yet (in Docker the container, on a Raspberry Pi the
+                    // server after its post-update restart can take up to ~10 minutes)
+                    int retries = 0;
+                    while ((GrafanaVersion == "?" || GrafanaVersion == "NRF" || GrafanaVersion == "CF") && retries < 60)
                     {
-                        // in Docker the Grafana container may not be up yet
-                        int retries = 0;
-                        while ((GrafanaVersion == "?" || GrafanaVersion == "NRF" || GrafanaVersion == "CF") && retries < 12)
-                        {
-                            retries++;
-                            Logfile.Log($"Grafana not reachable yet - waiting for version ({retries}/12)");
-                            Thread.Sleep(10000);
-                            GrafanaVersion = Tools.GetGrafanaVersion();
-                        }
+                        retries++;
+                        Logfile.Log($"Grafana not reachable yet - waiting for version ({retries}/60)");
+                        Thread.Sleep(10000);
+                        GrafanaVersion = Tools.GetGrafanaVersion();
                     }
                     Logfile.Log("Grafana version: " + GrafanaVersion);
 
@@ -2832,13 +2831,54 @@ PRIMARY KEY(id)
         {
             try
             {
-                if (name == null || name.Length == 0)
+                if (name == null || name.Length == 0 || id == null || id.Length == 0)
                     return s;
 
-                Regex regexAlias = new Regex("(templating.*\\\"text\\\":\\s\\\")(\\\".*?value\\\":\\s\\\")(.*?)(\\\")(.*?display_name)(.*?label\\\":\\s\\\")(.*?)(\\\")", RegexOptions.Singleline | RegexOptions.Multiline);
-                var m = regexAlias.Match(s);
-                string ret = regexAlias.Replace(s, "${1}" + name + "${2}" + id + "${4}${5}${6}" + carLabel + "${8}");
-                return ret;
+                JObject j = JObject.Parse(s);
+
+                JToken list = j.SelectToken("templating.list");
+                if (!(list is JArray))
+                    return s;
+
+                bool changed = false;
+                foreach (JToken token in list)
+                {
+                    if (!(token is JObject variable) || variable["name"]?.Value<string>() != "Car")
+                        continue;
+
+                    // variables with an "All" option (e.g. "Trip Top Destinations") keep "All" as default
+                    if (variable["includeAll"]?.Value<bool?>() == true)
+                        continue;
+
+                    JObject current = variable["current"] as JObject;
+                    if (current == null)
+                    {
+                        current = new JObject();
+                        variable["current"] = current;
+                    }
+
+                    // keep the existing shape (single value or array, e.g. for multi select variables)
+                    if (current["text"] is JArray || current["value"] is JArray)
+                    {
+                        current["text"] = new JArray(name);
+                        current["value"] = new JArray(id);
+                    }
+                    else
+                    {
+                        current["text"] = name;
+                        current["value"] = id;
+                    }
+
+                    if (carLabel != null && carLabel.Length > 0)
+                        variable["label"] = carLabel;
+
+                    changed = true;
+                }
+
+                if (!changed)
+                    return s;
+
+                return j.ToString(Formatting.Indented);
             }
             catch (Exception ex)
             {
