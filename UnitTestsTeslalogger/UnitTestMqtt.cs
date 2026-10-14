@@ -26,6 +26,13 @@ namespace UnitTestsTeslalogger
             // need to set the static instance field to null via reflection, because each TestMethod requires a fresh MQTT instance
             var instanceFild = typeof(MQTT).GetField("_Mqtt", BindingFlags.Static | BindingFlags.NonPublic);
             instanceFild?.SetValue(null, null);
+
+            // Car instances created in a test accumulate in the static allcars list and leak into other tests
+            Car.Allcars.Clear();
+
+            // same for the static connecting flag
+            var connectingField = typeof(MQTT).GetField("connecting", BindingFlags.Static | BindingFlags.NonPublic);
+            connectingField?.SetValue(null, false);
         }
 
         [TestMethod]
@@ -68,6 +75,44 @@ namespace UnitTestsTeslalogger
             Assert.AreEqual(0, v3.Count);
 
             mqttClientMock.Verify(m => m.Unsubscribe(new[] { "teslalogger/command/5YJ3E7EB3KFXXXXXX/+" }), Times.Once);
+        }
+
+        [TestMethod]
+        public void Work_resubscribes_command_topics_after_reconnect()
+        {
+            var mqttClientMock = new Mock<IMqttClient>();
+            bool isConnected = false;
+            mqttClientMock.SetupGet(client => client.IsConnected).Returns(() => isConnected);
+
+            var webDownloaderMock = new Mock<IWebDownloader>();
+            var carsJson = "[{\"id\":1,\"display_name\":\"Testcar\",\"vin\":\"5YJ3E7EB3KFXXXXXX\",\"inactive\":null}]";
+            webDownloaderMock.Setup(m => m.DownloadString(s_AllCarsUrl)).Returns(carsJson);
+            webDownloaderMock.Setup(m => m.DownloadString(s_firstCarCurrentJson)).Returns("{}");
+
+            var f = typeof(MQTTWebDownloader).GetField("_instance", BindingFlags.Static | BindingFlags.NonPublic);
+            f.SetValue(null, webDownloaderMock.Object);
+
+            var mqtt = MQTT.GetSingleton();
+
+            var f2 = typeof(MQTT).GetField("client", BindingFlags.NonPublic | BindingFlags.Instance);
+            f2.SetValue(mqtt, mqttClientMock.Object);
+
+            Assert.IsNotNull(mqtt);
+
+            var c = new Car(1, "", "", 0, "", DateTime.MinValue, "", "", "", "", "", "5YJ3E7EB3KFXXXXXX", "", null, false);
+
+            // broker down: a connect is attempted, but nothing is subscribed
+            isConnected = false;
+            mqtt.Work();
+            mqttClientMock.Verify(m => m.Connect(It.IsAny<string>(), null, null, false, 0, true, "teslalogger/system/status", "offline", true, 30), Times.Once);
+            mqttClientMock.Verify(m => m.Subscribe(It.IsAny<string[]>(), It.IsAny<byte[]>()), Times.Never);
+
+            // broker back up: the reconnect uses cleanSession=true, so the command subscriptions must be restored
+            isConnected = true;
+            mqtt.Work();
+
+            // QOS_LEVEL_AT_MOST_ONCE = 0
+            mqttClientMock.Verify(m => m.Subscribe(new[] { "teslalogger/command/5YJ3E7EB3KFXXXXXX/+" }, new byte[] { 0 }), Times.Once);
         }
 
         [TestMethod]

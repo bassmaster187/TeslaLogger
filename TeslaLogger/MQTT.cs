@@ -95,17 +95,7 @@ namespace TeslaLogger
 
                 if (client.IsConnected)
                 {
-                    Logfile.Log("MQTT: Connected!");
-                    foreach (string vin in allCars)
-                    {
-
-                        client.Subscribe(new[] {
-                        $"{topic}/command/{vin}/+"
-                        },
-                            new[] {
-                            MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE
-                            });
-                    }
+                    SubscribeToCommands();
 
                     client.MqttMsgPublishReceived += Client_MqttMsgPublishReceived;
                     new Thread(() => { MQTTConnectionHandler(client); }).Start();
@@ -299,6 +289,9 @@ namespace TeslaLogger
                 allCars = GetAllcars();
 
                 UnsubscribeFromRemovedCars(cars.Except(allCars));
+
+                //sync the subscriptions with the new car list (also covers newly added cars)
+                SubscribeToCommands();
             }
             catch (Exception ex)
             {
@@ -317,6 +310,30 @@ namespace TeslaLogger
             }
 
             client.Unsubscribe(vinsToUnsubscribe.Select(vin => $"{topic}/command/{vin}/+").ToArray());
+        }
+
+        /// <summary>
+        /// Subscribe to the command topic of every car.
+        /// Must be called at startup and after every (re)connect, because the
+        /// reconnect uses cleanSession=true and the broker then discards all
+        /// previous subscriptions.
+        /// </summary>
+        private void SubscribeToCommands()
+        {
+            if (client == null || !client.IsConnected || allCars == null)
+            {
+                return;
+            }
+
+            foreach (string vin in allCars)
+            {
+                client.Subscribe(new[] {
+                    $"{topic}/command/{vin}/+"
+                    },
+                        new[] {
+                        MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE
+                        });
+            }
         }
 
         /// <summary>
@@ -365,12 +382,23 @@ namespace TeslaLogger
                     try
                     {
                         string json = httpClient.GetStringAsync($"http://localhost:{httpport}/command/{vin}/{command}?{msg}").GetAwaiter().GetResult();
+                        Tools.DebugLog($"MQTT: Command {command} for {vin}: {json}");
+                        try
+                        {
+                            //publish the response so home-automation setups can verify the command (e.q. vehicle unavailable)
+                            client.Publish($"{topic}/command/{vin}/{command}/result", Encoding.UTF8.GetBytes(json ?? "NULL"),
+                                MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE, false);
+                        }
+                        catch (Exception pex)
+                        {
+                            Logfile.Log("MQTT: PublishResult Exception: " + pex.Message);
+                            Tools.DebugLog("MQTT: PublishResult Exception", pex);
+                        }
                     }
                     catch (Exception ex)
                     {
                         Logfile.Log("MQTT: Subcribe exeption: " + ex.Message);
                         Tools.DebugLog("MQTT: PublishReceived Exception", ex);
-                        System.Threading.Thread.Sleep(20000);
                     }
                 }
             }
@@ -395,6 +423,7 @@ namespace TeslaLogger
                             connecting = false;
                             Tools.DebugLog("MQTT: connected, connecting = false");
                             Logfile.Log("MQTT: Connected!");
+                            SubscribeToCommands();
                         }
                         return true;
                     }
