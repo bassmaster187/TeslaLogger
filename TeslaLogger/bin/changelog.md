@@ -1,3 +1,6 @@
+# Version 1.63.22.2
+- Grafana 13.2.4 (Security Update)
+
 # Version 1.63.22
 - Grafana 13 update 
 - Trackmap Panel (React update for Grafana 13 compatibility) now with Ionity & EnBW icons
