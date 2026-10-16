@@ -54,7 +54,7 @@ Supercharger-V4 AT-Inning,48.18362,15.41792
 Supercharger-V4 AT-Innsbruck,47.2543,11.41503,10
 Supercharger-V4 AT-Innsbruck,47.26502,11.42875
 Supercharger-V3 AT-Kalwang,47.422813,14.759271
-Supercharger AT-Kapfenberg,47.450188,15.317675
+Supercharger-V4 AT-Kapfenberg,47.4502,15.31767
 Supercharger AT-Kitzbühel,47.459205,12.386105
 Supercharger-V4 AT-Klagenfurt,46.627228,14.344443
 Supercharger-V3 AT-Langkampfen,47.5258,12.07442,10
@@ -191,6 +191,7 @@ Supercharger AU-Knockrow NSW,-28.74954,153.53472
 Supercharger-V3 AU-Kojonup WA,-33.83748,117.1579
 Supercharger-V3 AU-Lancelin WA,-31.0205,115.33245
 Supercharger-V4 AU-Laverton VIC,-37.87177,144.7748
+Supercharger-V4 AU-Leichhardt NSW,-33.88703,151.15856
 Supercharger-V3 AU-Lucas VIC,-37.54296,143.78488
 Supercharger-V3 AU-Mackay QLD,-21.09684,149.15942
 Supercharger AU-Macquarie NSW,-33.77778,151.12275
@@ -582,7 +583,7 @@ Supercharger CH-Quinto,46.5152,8.67063
 Supercharger CH-Rubigen,46.89203,7.54277
 Supercharger CH-Schaffhausen,47.721,8.6467
 Supercharger-V4 CH-Signy,46.39692,6.20618
-Supercharger-V4 CH-Silvaplana,46.45584,9.791
+Supercharger-V4 CH-Silvaplana,46.45598,9.79122
 Supercharger-V4 CH-Spreitenbach,47.4223,8.36862
 Supercharger-V3 CH-St. Gallen,47.40833,9.30527,60
 Supercharger CH-St. Moritz,46.4968,9.84272
@@ -3838,7 +3839,6 @@ Supercharger-V3 NL-Sassenheim,52.2132,4.50337
 Supercharger-V3 NL-Schiedam,51.92484,4.3722
 Supercharger-V4 NL-Spier,52.81684,6.4625
 Supercharger-V3 NL-Tilburg,51.54308,5.1118
-Supercharger NL-Tilburg,51.60633,5.00562
 Supercharger-V3 NL-Uden,51.6713,5.60267
 Supercharger NL-Urmond,50.9894,5.78152
 Supercharger-V4 NL-Utrecht,52.10838,5.05323
@@ -4314,6 +4314,7 @@ Supercharger-V3 SG-Century Square,1.35246,103.94378
 Supercharger-V4 SG-Changi City Point,1.33462,103.96253
 Supercharger-V3 SG-City Square Mall,1.31144,103.8566
 Supercharger-V4 SG-Dunearn Village,1.33694,103.7841
+Supercharger-V4 SG-IMM,1.33606,103.74706
 Supercharger-V3 SG-Katong V,1.30298,103.90337
 Supercharger-V3 SG-Millenia Walk,1.29284,103.8595
 Supercharger-V4 SG-One Holland V,1.31168,103.7948
@@ -4356,6 +4357,7 @@ Supercharger SK-Zvolen,48.6274,19.10354,30
 Supercharger-V4 TH-Bangkok AIA Connect,13.76437,100.5701
 Supercharger-V4 TH-Chiangmai The Backyard Mahidol,18.76638,98.9888
 Supercharger-V4 TH-Chonburi Numchai,12.9341,100.90232
+Supercharger-V4 TH-Nakhon Ratchasima Ribs Mannn,14.6344,101.41115
 Supercharger-V4 TH-Ratchaburi Global House,13.54733,99.80717
 
 Supercharger-V4 TR-Afyonkarahisar Asiye Sultan Blv.,38.7547,30.55634
@@ -5160,6 +5162,7 @@ Supercharger-V4 US-Durango CO,37.2719,-107.88344
 Supercharger-V3 US-Edwards CO,39.64856,-106.58718
 Supercharger US-Estes Park CO (Pay to Park),40.38382,-105.51975
 Supercharger-V4 US-Frisco CO Summit Blvd,39.59114,-106.09686
+Supercharger-V4 US-Glendale CO,39.70868,-104.93867
 Supercharger US-Glenwood Springs CO,39.55272,-107.3402
 Supercharger US-Grand Junction CO,39.0908,-108.60437
 Supercharger-V4 US-Grand Junction CO Patterson Rd,39.09135,-108.5526
@@ -5342,6 +5345,7 @@ Supercharger US-Jacksonville FL County Road,30.06028,-81.51404
 Supercharger-V4 US-Jacksonville FL Edgewood Ave N,30.33674,-81.73217
 Supercharger-V4 US-Jacksonville FL Gate Parkway,30.2887,-81.46467
 Supercharger-V3 US-Jasper FL,30.44665,-82.9336
+Supercharger-V4 US-Key West FL,24.565,-81.77263
 Supercharger US-Kissimmee FL,28.3455,-81.6042
 Supercharger-V3 US-Kissimmee FL - West Osceola Parkway,28.34132,-81.41093
 Supercharger-V4 US-Kissimmee FL 5400 W Irlo Bronson Memorial Hwy,28.3325,-81.4989
@@ -5436,6 +5440,7 @@ Supercharger US-Plantation FL,26.1085,-80.25263
 Supercharger-V4 US-Pompano Beach FL,26.27553,-80.15282
 Supercharger-V3 US-Pompano Beach FL - North Federal Highway,26.27568,-80.09817
 Supercharger-V3 US-Pompano Beach FL Florida Turnpike Service Plaza,26.22652,-80.1824
+Supercharger-V4 US-Port Charlotte FL,27.01316,-82.14393
 Supercharger US-Port Orange FL,29.10853,-81.035
 Supercharger US-Port St. Lucie FL,27.3126,-80.40696
 Supercharger-V3 US-Port St. Lucie FL Florida’s Turnpike,27.3002,-80.3723
@@ -6900,6 +6905,7 @@ Supercharger-V3 US-Knoxville TN Powell,36.0529,-83.99335
 Supercharger-V4 US-Knoxville TN Ray Mears Blvd,35.92233,-84.04817
 Supercharger-V3 US-Kodak TN,35.9821,-83.605
 Supercharger US-Manchester TN,35.45926,-86.0571
+Supercharger-V4 US-Manchester TN Campground Rd,35.4574,-86.04783
 Supercharger-V3 US-Maryville TN Watkins Rd,35.75236,-83.9922
 Supercharger US-Memphis TN,35.09784,-89.859
 Supercharger-V3 US-Memphis TN North Germantown Parkway,35.20235,-89.7946
@@ -7529,13 +7535,13 @@ Tesla Service Center IT-Milano,45.4287,9.32361
 Tesla Service Center IT-Padova,45.38944,11.9502
 Tesla Service Center IT-Roma Nord,41.97688,12.49442
 Tesla Service Center LU-Luxembourg,49.58943,6.14069
-Tesla Service Center NL- Tilburg,51.60633,5.00315
 Tesla Service Center NL-Amsterdam Zuid-Oost,52.31048,4.93618
 Tesla Service Center NL-Arnhem,51.965,6.00376
 Tesla Service Center NL-Den Haag,52.07044,4.38834
 Tesla Service Center NL-Groningen,53.22297,6.61148
 Tesla Service Center NL-Rotterdam,51.86498,4.45695
 Tesla Service Center NL-Tilburg,51.60606,4.9964
+Tesla Service Center NL-Tilburg,51.60633,5.00315
 Tesla Service Center NO-Kristiansand,58.17786,8.13658
 Tesla Service Center NO-Skodje,62.4922,6.60694
 Tesla Service Center NO-Tromsø,69.67652,18.9216
@@ -10241,6 +10247,7 @@ Chargefox AU-Horsham VIC Baillie St,-36.71119,142.20202
 Chargefox AU-Ipswich QLD South St,-27.61623,152.75862
 Chargefox AU-Karuah NSW Tarean Road,-32.65385,151.96256
 Chargefox AU-Keith SA Dukes Hwy,-36.10488,140.36158
+Chargefox AU-Korumburra VIC Commercial St,-38.43287,145.82558
 Chargefox AU-Mackay QLD Gregory Street,-21.13933,149.18506
 Chargefox AU-Macquarie Park NSW Link Rd,-33.77551,151.10943
 Chargefox AU-Marlborough QLD Kunwarara Road,-22.82797,149.93254
@@ -10363,6 +10370,7 @@ ChargePoint AT-Steyr Haager Straße,49.2346,12.0852
 ChargePoint AT-Vasoldsberg Schemerlhöhe,47.05725,15.59961
 ChargePoint AU-Point Cook VIC Town Centre,-37.88419,144.73424
 ChargePoint BE-Groot-Bijgaarden,50.882,4.25334
+ChargePoint CA-Vancouver BC SE Marine Dr,49.21004,-123.09474
 ChargePoint CH-Davos Promenade,46.80706,9.83838
 ChargePoint CH-Giubiasco Viale Camillo Olgiati,46.18199,9.01791
 ChargePoint DE-Abensberg Werkstraße,48.80768,11.8771
@@ -12056,12 +12064,13 @@ deer DE-Steinheim an der Murr Burgunder Straße,48.98241,9.23882
 
 Denkfabrik-im-Grünen DE-Borken Dülmener Weg,51.84869,6.89636
 
-DEW DE-Dortmund Kleppingstraße,51.51031,7.4684
-DEW DE-Dortmund Kleppingstraße,51.51218,7.46815,25
-DEW DE-Dortmund Ostwall,51.51062,7.46953
-DEW DE-Dortmund Rodenbergstraße,51.49406,7.55234
-DEW DE-Dortmund Rosental,51.5115,7.46935
-DEW DE-Dortmund Wittbräucker Straße,51.43152,7.46896
+DEW21 DE-Dortmund Kleppingstraße,51.5103,7.4684,40
+DEW21 DE-Dortmund Kleppingstraße,51.51218,7.46815,25
+DEW21 DE-Dortmund Ostwall,51.51062,7.46953
+DEW21 DE-Dortmund Rodenbergstraße,51.49406,7.55234
+DEW21 DE-Dortmund Rosental,51.5115,7.46935
+DEW21 DE-Dortmund Südwall,51.5101,7.46738,30
+DEW21 DE-Dortmund Wittbräucker Straße,51.43152,7.46896
 
 DGV DE-Römhild Heurichstraße,50.3989,10.54054
 
@@ -12331,12 +12340,13 @@ E.ON DE-Berlin Schloßstrasse 1A,52.51892,13.29572
 E.ON DE-Berlin Sonnenallee 224,52.47153,13.4562
 E.ON DE-Berlin Treptower Straße 97,52.47776,13.44755
 E.ON DE-Berlin Wildenbruchplatz 1,52.48397,13.44362
+E.ON DE-Borna Magdeborner Straße,51.12713,12.51052
 E.ON DE-Bottrop Am Hauptbahnhof 1,51.5092,6.93565
 E.ON DE-Büsum Lehnsweg,54.13177,8.85542
 E.ON DE-Cuxhaven Grodener Chaussee,53.85418,8.70891,25
 E.ON DE-Donauwörth Artur-Proeller-Straße,48.71594,10.76093
 E.ON DE-Dortmund Florianstraße,51.49834,7.4709
-E.ON DE-Dortmund Kleppingstraße,51.5117,7.46822
+E.ON DE-Dortmund Kleppingstraße,51.5117,7.46822,30
 E.ON DE-Dortmund Königswall 15,51.51658,7.45733
 E.ON DE-Duisburg Beecker Straße,51.48419,6.76378
 E.ON DE-Eberswalde Eberswalder Straße 4,52.84004,13.76914
@@ -16288,7 +16298,7 @@ EnBW DE-Offenau Hauptstraße,49.24516,9.1638
 EnBW DE-Offenburg Schutterwälder Straße,48.46513,7.9311
 EnBW DE-Oftersheim Eichendorffstraße,49.36946,8.58253
 EnBW DE-Olching Hermann-Böcker-Straße,48.22137,11.33034
-EnBW DE-Oldenburg Alter Postweg,53.10275,8.20934
+EnBW DE-Oldenburg Alter Postweg,53.1034,8.21165
 EnBW DE-Oldenburg Werrastraße,53.14136,8.25906
 EnBW DE-Oschersleben (Bode) Anderslebener Straße,52.02894,11.24823
 EnBW DE-Osnabrück Benzstraße,52.30474,7.95594
@@ -19478,6 +19488,70 @@ evo DE-Oberhausen CentrO-Promenade,51.4922,6.8806
 EVOASIS TW-Checheng Township Haikou Rd,22.0897,120.71585
 
 evolt GB-Wick River St,58.44194,-3.09191
+
+EVOLV US-Antelope CA Antelope Rd,38.7044,-121.36412,32
+EVOLV US-Bakersfield CA Knudsen Dr,35.41462,-119.05964,32
+EVOLV US-Berkeley CA Marina Blvd,37.86965,-122.31586,32
+EVOLV US-Cameron Park CA Coach Ln,38.65734,-120.97236,32
+EVOLV US-Capitola CA 41st Ave,36.9701,-121.9653,32
+EVOLV US-Chico CA Notre Dame Blvd,39.71534,-121.7939,32
+EVOLV US-El Cajon CA E Main St,32.79716,-116.93282,32
+EVOLV US-Elk Grove CA Orchard Loop,38.45516,-121.40818,32
+EVOLV US-Fallbrook CA S Main Ave,33.37268,-117.2527,32
+EVOLV US-Folsom CA Montrose Dr,38.68125,-121.15893,32
+EVOLV US-Folsom CA Placerville Dr,38.64433,-121.11166,32
+EVOLV US-Fresno CA S G St,36.71634,-119.77783,32
+EVOLV US-Hanford CA N 11th Ave,36.32992,-119.65658,32
+EVOLV US-Irvine CA Jamboree Rd,33.67807,-117.84092,32
+EVOLV US-Jurupa Valley CA Mission Blvd,34.01194,-117.47983,32
+EVOLV US-Kettleman City CA Powers Dr,35.98686,-119.96175,32
+EVOLV US-Los Angeles CA San Pablo St,34.06246,-118.202,32
+EVOLV US-Los Osos CA Solano St,35.31622,-120.85326,32
+EVOLV US-Milpitas CA Jacklin Rd,37.44814,-121.88636,32
+EVOLV US-Moreno Valley CA Alessandro Blvd,33.9175,-117.2676,32
+EVOLV US-Oceanside CA Oceanside Blvd,33.18963,-117.3642,32
+EVOLV US-Pala CA CA-76,33.36416,-117.08742,32
+EVOLV US-Pala CA Pala Rd,33.36334,-117.08472,32
+EVOLV US-Paso Robles CA Theatre Dr,35.58277,-120.6981,32
+EVOLV US-Petaluma CA S McDowell Blvd,38.24838,-122.6257,32
+EVOLV US-Petaluma CA Water St,38.2354,-122.64046,32
+EVOLV US-Poway CA Poway Rd,32.95174,-117.06736,32
+EVOLV US-Redwood City CA Roosevelt Ave,37.46607,-122.2409,32
+EVOLV US-Redwood City CA Upton St,37.46708,-122.24195,32
+EVOLV US-Sacramento CA Clay St,38.61003,-121.43946,32
+EVOLV US-Sacramento CA River Plaza Dr,38.60568,-121.51053,32
+EVOLV US-Sacramento CA Truxel Rd,38.6268,-121.49904,32
+EVOLV US-Salida CA Sisk Rd,37.70945,-121.07824,32
+EVOLV US-San Bruno CA Huntington Ave,37.6277,-122.41073,32
+EVOLV US-San Diego CA Broadway Cir,32.71446,-117.16333,32
+EVOLV US-San Diego CA E Mission Bay Dr,32.77945,-117.2111,32
+EVOLV US-San Diego CA Palm Ave,32.5848,-117.03917,32
+EVOLV US-San Diego CA San Diego Ave,32.7452,-117.18717,32
+EVOLV US-San Diego CA Zion Ave,32.79318,-117.09925,32
+EVOLV US-San Jose CA N 1st St,37.37603,-121.91986,32
+EVOLV US-San Jose CA S White Rd,37.3582,-121.82046,32
+EVOLV US-San Luis Obispo CA Farmhouse Ln,35.23882,-120.6353,32
+EVOLV US-San Luis Obispo CA Monterey St,35.28722,-120.6534,32
+EVOLV US-San Marcos CA Civic Center Dr Ste 100,33.1407,-117.16055,32
+EVOLV US-Santa Clara CA Great America Pkwy,37.3917,-121.97712,32
+EVOLV US-Santa Clara CA Lakeside Dr,37.38402,-121.97855,32
+EVOLV US-Santa Maria CA E Main St,34.9535,-120.423,32
+EVOLV US-Saratoga CA 4th St,37.2574,-122.035,32
+EVOLV US-Seaside CA La Salle Ave,36.6169,-121.84162,32
+EVOLV US-Sebastopol CA Gravenstein Highway N,38.40622,-122.83832,32
+EVOLV US-Simi Valley CA E Los Angeles Ave,34.27132,-118.67776,32
+EVOLV US-South San Francisco CA Mission Rd,37.662,-122.43898,32
+EVOLV US-South San Francisco CA S Airport Blvd,37.64348,-122.40448,32
+EVOLV US-Stockton CA Pacific Ave,37.96983,-121.29977,32
+EVOLV US-Stockton CA Thornton Rd,38.03404,-121.33926,32
+EVOLV US-Temecula CA Village Rd,33.53784,-117.15444,32
+EVOLV US-Thousand Oaks CA E Thousand Oaks Blvd,34.17857,-118.87016,32
+EVOLV US-Valley Center CA Woods Valley Rd,33.20696,-117.01127,32
+EVOLV US-Watsonville CA Freedom Blvd,36.91548,-121.76037,32
+EVOLV US-West Sacramento CA Halyard Dr,38.57356,-121.55042,32
+EVOLV US-Windsor CA Brooks Rd S,38.5488,-122.8082,32
+EVOLV US-Woodland CA County Rd 99,38.69993,-121.7834,32
+EVOLV US-Yuba City CA Gray Ave,39.13992,-121.6295,32
 
 EVolve US-Geneva NY Seneca St,42.86574,-76.98376
 EVolve US-Watertown NY Arsenal Street,43.9792,-75.94643
@@ -27631,6 +27705,7 @@ Plenitude IT-Lorenzago di Cadore Strada Statale 52 Carnica,46.4637,12.48223
 Plenitude IT-Lorenzago di Cadore Via Centa,46.4806,12.458
 Plenitude IT-Marciana Via Delle Ginestre,42.78535,10.24545
 Plenitude IT-Meran Piavestraße,46.66628,11.15812
+Plenitude IT-Merano Goethestraße,46.67683,11.1493
 Plenitude IT-Pioltello Viale S. Francesco,45.51327,9.3234
 Plenitude IT-Sadali Via Po,39.81252,9.27088
 Plenitude IT-San Miniato Via C. Pannocchia,43.68795,10.80601
@@ -27956,6 +28031,7 @@ Präg DE-Ottobeuren Johannes-Gutenberg-Straße,47.94464,10.30663
 Präg DE-Pforzen Am Moosberg,47.93436,10.60888
 Präg DE-Rammingen Tussenhauser Weg,48.07653,10.58162
 Präg DE-Scheidegg Bahnhofstraße,47.58485,9.85412
+Präg DE-Schwangau König-Ludwig-Straße,47.5794,10.7412
 Präg DE-Sulzberg See,47.68095,10.3308
 Präg DE-Sulzberg Sonthofener Straße,47.6604,10.35052
 Präg DE-Thannhausen Bahnhofstraße,48.29192,10.4631
@@ -28014,6 +28090,7 @@ Q8 DK-Frederikshavn Søndergade,57.4177,10.52332
 Q8 DK-Kolding Vejlevej,55.5258,9.46393
 
 Qelo HR-Knin Ul. bana Ivana Paližne,44.05413,16.20964
+Qelo HR-Labin Pulska ul.,45.09763,14.115
 Qelo HR-Labin Štrmac,45.11895,14.11928
 
 Qovoltis FR-Les Ulis Rue de la Réunion,48.68259,2.20282
@@ -29682,6 +29759,7 @@ SW-Annaberg-Buchholz DE-Bärenstein Sächsischer Platz,50.49862,13.0281
 SW-Ansbach DE-Ansbach Am Stadion,49.30484,10.55933
 SW-Ansbach DE-Ansbach Rügländer Straße,49.3111,10.56878
 SW-Aschaffenburg DE-Aschaffenburg Neue Glattbacher Straße,49.98592,9.15096
+SW-Augsburg DE-Augsburg Am Alten Schlachthof,48.37175,10.92083
 SW-Augsburg DE-Augsburg Am Messezentrum,48.34012,10.89208
 SW-Augsburg DE-Augsburg Am Schwall,48.36491,10.90341
 SW-Augsburg DE-Augsburg Augsburger Straße,48.36383,10.87483
@@ -30421,6 +30499,7 @@ TankE DE-Bornheim Rathausstraße,50.75727,7.00444
 TankE DE-Brilon Möhnestraße,51.40928,8.5784
 TankE DE-Brüggen St.-Barbara-Straße,51.2563,6.17423
 TankE DE-Dieburg Dieselstraße,49.91037,8.862
+TankE DE-Fürth Friedrichstraße,49.47183,10.99017
 TankE DE-Korbach Nordring,51.28092,8.85835
 TankE DE-Köln Adolf-Kober-Straße,50.9823,6.99772
 TankE DE-Köln Agrippastraße,50.93312,6.95214
@@ -31553,6 +31632,7 @@ VIOCON DE-Schönberg Maukenreuth,48.82422,13.34283
 VIOCON DE-Zwiesel Frauenauer Straße,49.01364,13.24713
 
 Vion IT-Martello Ennewasser,46.5711,10.79594
+Vion IT-Senales Madonna di Senales,46.72404,10.8573
 Vion IT-Sluderno Via Venosta,46.66406,10.58232
 
 Virta AT-Bad Fischau Industriegebiet B21,47.83179,16.18603
