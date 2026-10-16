@@ -583,7 +583,7 @@ Supercharger CH-Quinto,46.5152,8.67063
 Supercharger CH-Rubigen,46.89203,7.54277
 Supercharger CH-Schaffhausen,47.721,8.6467
 Supercharger-V4 CH-Signy,46.39692,6.20618
-Supercharger-V4 CH-Silvaplana,46.45584,9.791
+Supercharger-V4 CH-Silvaplana,46.45598,9.79122
 Supercharger-V4 CH-Spreitenbach,47.4223,8.36862
 Supercharger-V3 CH-St. Gallen,47.40833,9.30527,60
 Supercharger CH-St. Moritz,46.4968,9.84272
@@ -3839,7 +3839,6 @@ Supercharger-V3 NL-Sassenheim,52.2132,4.50337
 Supercharger-V3 NL-Schiedam,51.92484,4.3722
 Supercharger-V4 NL-Spier,52.81684,6.4625
 Supercharger-V3 NL-Tilburg,51.54308,5.1118
-Supercharger NL-Tilburg,51.60633,5.00562
 Supercharger-V3 NL-Uden,51.6713,5.60267
 Supercharger NL-Urmond,50.9894,5.78152
 Supercharger-V4 NL-Utrecht,52.10838,5.05323
@@ -4358,6 +4357,7 @@ Supercharger SK-Zvolen,48.6274,19.10354,30
 Supercharger-V4 TH-Bangkok AIA Connect,13.76437,100.5701
 Supercharger-V4 TH-Chiangmai The Backyard Mahidol,18.76638,98.9888
 Supercharger-V4 TH-Chonburi Numchai,12.9341,100.90232
+Supercharger-V4 TH-Nakhon Ratchasima Ribs Mannn,14.6344,101.41115
 Supercharger-V4 TH-Ratchaburi Global House,13.54733,99.80717
 
 Supercharger-V4 TR-Afyonkarahisar Asiye Sultan Blv.,38.7547,30.55634
@@ -5345,6 +5345,7 @@ Supercharger US-Jacksonville FL County Road,30.06028,-81.51404
 Supercharger-V4 US-Jacksonville FL Edgewood Ave N,30.33674,-81.73217
 Supercharger-V4 US-Jacksonville FL Gate Parkway,30.2887,-81.46467
 Supercharger-V3 US-Jasper FL,30.44665,-82.9336
+Supercharger-V4 US-Key West FL,24.565,-81.77263
 Supercharger US-Kissimmee FL,28.3455,-81.6042
 Supercharger-V3 US-Kissimmee FL - West Osceola Parkway,28.34132,-81.41093
 Supercharger-V4 US-Kissimmee FL 5400 W Irlo Bronson Memorial Hwy,28.3325,-81.4989
@@ -5439,6 +5440,7 @@ Supercharger US-Plantation FL,26.1085,-80.25263
 Supercharger-V4 US-Pompano Beach FL,26.27553,-80.15282
 Supercharger-V3 US-Pompano Beach FL - North Federal Highway,26.27568,-80.09817
 Supercharger-V3 US-Pompano Beach FL Florida Turnpike Service Plaza,26.22652,-80.1824
+Supercharger-V4 US-Port Charlotte FL,27.01316,-82.14393
 Supercharger US-Port Orange FL,29.10853,-81.035
 Supercharger US-Port St. Lucie FL,27.3126,-80.40696
 Supercharger-V3 US-Port St. Lucie FL Florida’s Turnpike,27.3002,-80.3723
@@ -12062,12 +12064,13 @@ deer DE-Steinheim an der Murr Burgunder Straße,48.98241,9.23882
 
 Denkfabrik-im-Grünen DE-Borken Dülmener Weg,51.84869,6.89636
 
-DEW DE-Dortmund Kleppingstraße,51.51031,7.4684
-DEW DE-Dortmund Kleppingstraße,51.51218,7.46815,25
-DEW DE-Dortmund Ostwall,51.51062,7.46953
-DEW DE-Dortmund Rodenbergstraße,51.49406,7.55234
-DEW DE-Dortmund Rosental,51.5115,7.46935
-DEW DE-Dortmund Wittbräucker Straße,51.43152,7.46896
+DEW21 DE-Dortmund Kleppingstraße,51.5103,7.4684,40
+DEW21 DE-Dortmund Kleppingstraße,51.51218,7.46815,25
+DEW21 DE-Dortmund Ostwall,51.51062,7.46953
+DEW21 DE-Dortmund Rodenbergstraße,51.49406,7.55234
+DEW21 DE-Dortmund Rosental,51.5115,7.46935
+DEW21 DE-Dortmund Südwall,51.5101,7.46738,30
+DEW21 DE-Dortmund Wittbräucker Straße,51.43152,7.46896
 
 DGV DE-Römhild Heurichstraße,50.3989,10.54054
 
@@ -12343,7 +12346,7 @@ E.ON DE-Büsum Lehnsweg,54.13177,8.85542
 E.ON DE-Cuxhaven Grodener Chaussee,53.85418,8.70891,25
 E.ON DE-Donauwörth Artur-Proeller-Straße,48.71594,10.76093
 E.ON DE-Dortmund Florianstraße,51.49834,7.4709
-E.ON DE-Dortmund Kleppingstraße,51.5117,7.46822
+E.ON DE-Dortmund Kleppingstraße,51.5117,7.46822,30
 E.ON DE-Dortmund Königswall 15,51.51658,7.45733
 E.ON DE-Duisburg Beecker Straße,51.48419,6.76378
 E.ON DE-Eberswalde Eberswalder Straße 4,52.84004,13.76914
@@ -16295,7 +16298,7 @@ EnBW DE-Offenau Hauptstraße,49.24516,9.1638
 EnBW DE-Offenburg Schutterwälder Straße,48.46513,7.9311
 EnBW DE-Oftersheim Eichendorffstraße,49.36946,8.58253
 EnBW DE-Olching Hermann-Böcker-Straße,48.22137,11.33034
-EnBW DE-Oldenburg Alter Postweg,53.10275,8.20934
+EnBW DE-Oldenburg Alter Postweg,53.1034,8.21165
 EnBW DE-Oldenburg Werrastraße,53.14136,8.25906
 EnBW DE-Oschersleben (Bode) Anderslebener Straße,52.02894,11.24823
 EnBW DE-Osnabrück Benzstraße,52.30474,7.95594
@@ -27702,6 +27705,7 @@ Plenitude IT-Lorenzago di Cadore Strada Statale 52 Carnica,46.4637,12.48223
 Plenitude IT-Lorenzago di Cadore Via Centa,46.4806,12.458
 Plenitude IT-Marciana Via Delle Ginestre,42.78535,10.24545
 Plenitude IT-Meran Piavestraße,46.66628,11.15812
+Plenitude IT-Merano Goethestraße,46.67683,11.1493
 Plenitude IT-Pioltello Viale S. Francesco,45.51327,9.3234
 Plenitude IT-Sadali Via Po,39.81252,9.27088
 Plenitude IT-San Miniato Via C. Pannocchia,43.68795,10.80601
@@ -30495,6 +30499,7 @@ TankE DE-Bornheim Rathausstraße,50.75727,7.00444
 TankE DE-Brilon Möhnestraße,51.40928,8.5784
 TankE DE-Brüggen St.-Barbara-Straße,51.2563,6.17423
 TankE DE-Dieburg Dieselstraße,49.91037,8.862
+TankE DE-Fürth Friedrichstraße,49.47183,10.99017
 TankE DE-Korbach Nordring,51.28092,8.85835
 TankE DE-Köln Adolf-Kober-Straße,50.9823,6.99772
 TankE DE-Köln Agrippastraße,50.93312,6.95214
@@ -31627,6 +31632,7 @@ VIOCON DE-Schönberg Maukenreuth,48.82422,13.34283
 VIOCON DE-Zwiesel Frauenauer Straße,49.01364,13.24713
 
 Vion IT-Martello Ennewasser,46.5711,10.79594
+Vion IT-Senales Madonna di Senales,46.72404,10.8573
 Vion IT-Sluderno Via Venosta,46.66406,10.58232
 
 Virta AT-Bad Fischau Industriegebiet B21,47.83179,16.18603
