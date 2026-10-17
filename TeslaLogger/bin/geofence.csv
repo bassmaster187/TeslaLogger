@@ -19,6 +19,7 @@ Supercharger-V3 AE-Dubai Mall of Emirates,25.11692,55.20276
 Supercharger-V3 AE-Dubai Mall of Emirates (Valet),25.1171,55.19902
 Supercharger-V3 AE-Dubai Meadows Village,25.06378,55.15678
 Supercharger-V4 AE-Dubai Nadd Hessa,25.1142,55.38794
+Supercharger-V4 AE-Dubai Sheikh Zayed Road,25.12595,55.20916
 Supercharger-V3 AE-Dubai Wadi Al Safa,25.07948,55.3663
 Supercharger-V3 AE-Dubai Wafi City,25.23068,55.31858
 Supercharger-V3 AE-Fujairah,25.15736,56.35004
@@ -1945,7 +1946,7 @@ Supercharger-V4 CZ-Hradec Králové,50.1989,15.78265
 Supercharger CZ-Humpolec,49.52157,15.348
 Supercharger-V4 CZ-Jamné,49.428188,15.701332
 Supercharger-V3 CZ-Kamenný Újezd,48.887754,14.436229
-Supercharger-V4 CZ-Karlovy Vary,50.2188,12.8085
+Supercharger-V4 CZ-Karlovy Vary,50.2194,12.8085
 Supercharger-V3 CZ-Lovosice,50.511713,14.052644,15
 Supercharger CZ-Olomouc,49.56086,17.26237
 Supercharger-V4 CZ-Ostrava,49.80018,18.22383
@@ -1975,6 +1976,7 @@ Supercharger-V3 DE-Baden-Baden,48.78364,8.19225
 Supercharger-V3 DE-Barsbüttel,53.57834,10.19308,32
 Supercharger-V4 DE-Bautzen,51.18866,14.45457
 Supercharger-V3 DE-Bayreuth,49.9626,11.61055,95
+Supercharger-V3 DE-Bayreuth,50.08136,11.66512,10
 Supercharger-V4 DE-Beelitz,52.26678,12.92225
 Supercharger-V3 DE-Bensheim,49.6724,8.6022
 Supercharger-V3 DE-Berchtesgaden,47.626949,13.000833
@@ -2606,6 +2608,7 @@ Supercharger-V3 FI-Rovaniemi,66.501765,25.723048
 Supercharger-V3 FI-Salo,60.41852,23.16233
 Supercharger-V4 FI-Seinäjoki,62.79306,22.79616
 Supercharger-V3 FI-Sodankylä,67.419824,26.591239
+Supercharger-V4 FI-Tammisaari,59.9756,23.43823
 Supercharger-V4 FI-Tampere IKEA,61.45161,23.76986
 Supercharger-V4 FI-Vaasa,63.11251,21.65643
 Supercharger-V4 FI-Vantaa,60.2779,25.0822
@@ -3923,7 +3926,7 @@ Supercharger NO-Jessheim,60.134425,11.161148
 Supercharger-V3 NO-Karasjok,69.471888,25.509338
 Supercharger-V3 NO-Kautokeino,69.020412,23.048909
 Supercharger-V3 NO-Kløfta,60.079517,11.149442
-Supercharger-V4 NO-Kongsvinger,60.19696,11.9686
+Supercharger-V4 NO-Kongsvinger,60.19688,11.96813
 Supercharger-V3 NO-Kristiansand,58.177,8.1361
 Supercharger-V4 NO-Kristiansand Sydinga by Max Burger,58.18865,8.15498
 Supercharger-V4 NO-Kristiansund,63.12109,7.74136
@@ -4367,6 +4370,7 @@ Supercharger-V4 TR-Amasya,40.86888,35.49667
 Supercharger-V3 TR-Ankara,39.949583,32.832923
 Supercharger-V4 TR-Beylikdüzü İstanbul,41.01997,28.62815
 Supercharger-V4 TR-Bolu,40.72398,31.46504
+Supercharger-V4 TR-Bolu Merkez,40.73645,31.56815
 Supercharger-V4 TR-Burdur,37.74588,30.31232
 Supercharger-V3 TR-Edirne,41.680352,26.582235
 Supercharger-V4 TR-Eskişehir,39.445,31.56873
@@ -5995,6 +5999,7 @@ Supercharger-V3 US-Lansing MI - South Pennsylvania Avenue,42.66706,-84.54018
 Supercharger US-Livonia MI,42.37935,-83.3295
 Supercharger US-Ludington MI,43.95734,-86.3761
 Supercharger-V3 US-Mackinaw City MI,45.77223,-84.72645
+Supercharger-V4 US-Macomb MI M-59 Enterprises,42.62975,-82.91505
 Supercharger-V3 US-Marquette MI,46.55198,-87.47023
 Supercharger US-Marshall MI,42.29207,-84.96416
 Supercharger-V3 US-Michigan City MI,41.67382,-86.8909
@@ -6140,6 +6145,7 @@ Supercharger-V3 US-Charlotte NC Metropolitan Av,35.21283,-80.83527
 Supercharger-V4 US-Charlotte NC Panara Dr,35.36975,-80.73402
 Supercharger-V3 US-Charlotte NC Providence Road,35.06233,-80.77086
 Supercharger-V4 US-Charlotte NC S Tryon St,35.1446,-80.93166
+Supercharger-V4 US-Cherokee NC,35.46905,-83.30345
 Supercharger-V3 US-Clemmons NC,36.03052,-80.38114
 Supercharger-V3 US-Colfax NC,36.09507,-79.9947
 Supercharger-V4 US-Concord NC,35.3657,-80.71255
@@ -9643,6 +9649,7 @@ Astor TR-Çorum Çevre Yolu Blv,40.55195,34.92965
 Atlante ES-Lliçà d’Amunt Carrer de la Matarranya,41.61834,2.2154
 Atlante ES-Lliçà d’Amunt Carrer de la Matarranya,62.47466,21.36138
 Atlante FR-Aire de Nîmes Marguerittes Sud,43.8695,4.43968
+Atlante FR-Aire de Service du Chavanon,45.6222,2.45794
 Atlante FR-Bessoncourt Avenue du Tilleul,47.64185,6.9204,30
 Atlante FR-Chalon-sur-Saône Rue René Cassin,46.77545,4.8648
 Atlante FR-Champniers Rte de la Braconne,45.69237,0.17505
@@ -17410,6 +17417,7 @@ Energie-Steiermark AT-Wildon Kainachtalstraße,46.8867,15.50014
 
 Energie360 CH-Amriswil Kirchstrasse,47.54755,9.2975
 Energie360 CH-Bachenbülach Bramenstrasse,47.50495,8.54024
+Energie360 CH-Bachenbülach Grabenstrasse,47.50647,8.54135
 Energie360 CH-Dachsen Lauferstrasse,47.67491,8.61452
 Energie360 CH-Dietikon Silbernstrasse,47.41798,8.39301
 Energie360 CH-Dietlikon Industriestrasse,47.41257,8.6181,30
@@ -23264,6 +23272,7 @@ IZIVIA FR-Avermes Zac Les Portes,46.59013,3.3305
 IZIVIA FR-Biscarrosse Av. de Laouadie,44.41094,-1.16763
 IZIVIA FR-Bordeaux Cr Charles Bricaud,44.88841,-0.56182
 IZIVIA FR-Bretteville-sur-Odon Av. du Fresne,49.16436,-0.42333,25
+IZIVIA FR-Brive-la-Gaillarde Rue Ernest Simbille,45.14707,1.4819
 IZIVIA FR-Béziers Avenue de la Voie Domitienne,43.3484,3.2506
 IZIVIA FR-Cournon-d’Auvergne Av. Maréchal Leclerc,45.73998,3.17278,30
 IZIVIA FR-Dunkerque Av. du Stade,51.03307,2.39317
@@ -26464,6 +26473,7 @@ Neogy IT-Eppan an der Weinstraße Kalterer Straße,46.44028,11.25971
 Neogy IT-Kurtinig Weinstraße,46.26909,11.22297
 Neogy IT-Laces Via Centrale,46.6213,10.86706
 Neogy IT-Laces Via Nazionale,46.62225,10.86343
+Neogy IT-Lana Industriezone,46.63002,11.16718
 Neogy IT-Marlengo Franz Innerhofer Straße,46.65566,11.14103
 Neogy IT-Meran Rennstallweg,46.65586,11.14929
 Neogy IT-Merano F.-Innerhofer-Straße,46.66734,11.16443
