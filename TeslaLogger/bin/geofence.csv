@@ -6167,7 +6167,7 @@ Supercharger US-Hickory NC,35.70693,-81.29478
 Supercharger US-Hickory NC NVC 127,35.69226,-81.3571
 Supercharger-V4 US-Hope Mills NC,34.93664,-78.92262
 Supercharger-V3 US-Jacksonville NC,34.7763,-77.41407
-Supercharger-V4 US-Kenly NC,35.58102,-78.14584
+Supercharger-V4 US-Kenly NC,35.582,-78.14475
 Supercharger-V3 US-Kernersville NC,36.0698,-80.112
 Supercharger US-Kill Devil Hills NC,35.99345,-75.65082
 Supercharger-V3 US-Kinston NC,35.26076,-77.64967
@@ -7201,7 +7201,7 @@ Supercharger US-Charlottesville VA,38.06738,-78.49338
 Supercharger-V3 US-Charlottesville VA - Proffit Road,38.13245,-78.43488
 Supercharger-V4 US-Charlottesville VA US-29,38.06897,-78.48348
 Supercharger-V3 US-Chesapeake VA,36.65758,-76.22478
-Supercharger US-Chester VA,37.367,-77.41656
+Supercharger US-Chester VA,37.3673,-77.41694
 Supercharger-V3 US-Colonial Heights VA,37.3056,-77.40967
 Supercharger-V4 US-Colonial Heights VA 1270 Temple Ave,37.2546,-77.38398
 Supercharger-V4 US-Colonial Heights VA Temple Ave,37.25803,-77.40588
@@ -9665,6 +9665,7 @@ Atlante IT-Roma Via Giorgio Zoega,41.87423,12.43276
 Atlante IT-San Pietro di Cadore Piazza Tre Terze,46.57048,12.59099
 Atlante IT-Voghiera Via Alfieri Maserati,44.78968,11.72829
 Atlante PT-Albufeira R. do Estádio,37.09252,-8.24102
+Atlante PT-Bragança R. das Quintas da Seara,41.79338,-6.7214
 Atlante PT-Coruche Rua do Cortiço,38.96497,-8.5332
 Atlante PT-Pombal Estrada Nacional,39.97342,-8.7946
 Atlante PT-Porto R. dos Castanheiros,41.254,-8.70814
@@ -13024,6 +13025,7 @@ EDP PT-Lagos R. dos Passarinhos,37.10313,-8.70662
 EDP PT-Nazaré Largo Padre Silvestre,39.6063,-9.07394
 EDP PT-Nazaré R. Branco Martins,39.59227,-9.07302
 EDP PT-Peniche R. da Ponte Velha,39.36407,-9.37503
+EDP PT-Vila Real R. Madame Brouillard,41.2923,-7.73696
 
 EFFIA FR-Grenoble Rue de Belgrade,45.19212,5.72586
 
@@ -14705,6 +14707,7 @@ EMB DE-Teltow Gerhart-Eisler-Straße,52.4019,13.2384
 
 EMC AT-Hinterstoder Hutterer Böden,47.67916,14.1693
 
+Emobility-East DE-Crottendorf Am Gewerbegebiet,50.5055,12.92886
 Emobility-East DE-Drebach Straße der Jugend,50.67323,13.01824
 Emobility-East DE-Drebach Venusberger Hauptstraße,50.69864,13.0175
 Emobility-East DE-Ehrenfriedersdorf Greifensteinstraße,50.6496,12.9285
@@ -17031,6 +17034,7 @@ EndesaX ES-Loja C. Salar Vial-B,37.16023,-4.12436
 EndesaX ES-Los Barrios C. Océano Atlántico,36.1847,-5.42997
 EndesaX ES-Miraflores de la Sierra C. del Río,40.81066,-3.76915
 EndesaX ES-Olivella Carrer del Aquari,41.29827,1.77906
+EndesaX ES-Palencia Av. Brasilia,42.01176,-4.51935
 EndesaX ES-Ponts C-14,41.92108,1.19171
 EndesaX ES-Pozuelo de Alarcón C. Edgar Neville,40.39452,-3.7981
 EndesaX ES-Santiago de Compostela Rúa do País Vasco,42.90992,-8.49245,20
@@ -19661,7 +19665,7 @@ EWE-GO DE-Annaberg-Buchholz Chemnitzer Straße,50.59183,13.01108
 EWE-GO DE-Ansbach Nürnberger Straße,49.30286,10.58369
 EWE-GO DE-Apen Hauptstraße,53.21823,7.80557
 EWE-GO DE-Arnstadt Alfred-Ley-Straße,50.85646,10.95765
-EWE-GO DE-Aschaffenburg Berliner Allee,49.96563,9.17182
+EWE-GO DE-Aschaffenburg Berliner Allee,49.9657,9.17172,40
 EWE-GO DE-Aschersleben Güstener Straße,51.76735,11.48514
 EWE-GO DE-Aue Lößnitzer Straße,50.59624,12.70968
 EWE-GO DE-Auetal Altes Feld,52.23379,9.2469
@@ -27933,6 +27937,7 @@ Powerdot PT-Porto Rua de Anselmo Braamcamp,41.15396,-8.60093
 Powerdot PT-Serpa R. da Eira de São Pedro,37.94067,-7.60388
 Powerdot PT-Vila do Conde Av. Gen. Humberto Delgado,41.36961,-8.74356
 Powerdot PT-Vila Nova de Gaia R. Delfim Lima,41.07625,-8.60161
+Powerdot PT-Vila Nova de Gaia R. Martir São Sebastião,41.14437,-8.64172
 
 PowerFlex US-Mountain View CA California St,37.39176,-122.0811
 
@@ -30920,6 +30925,7 @@ Techem DE-Münster Cheruskerring,51.9753,7.62546
 
 Tesla-Automation DE-Prüm,50.21363,6.44601
 Tesla-Automation DE-Prüm,50.21447,6.44755
+Tesla-Automation DE-Reutlingen,48.5436,9.17142
 
 Threeforce DE-Aschendorf In der Emsmarsch 1-7,53.04906,7.32121
 Threeforce DE-Aurich Tjüchkampstraße 4A,53.44054,7.51588
@@ -32394,6 +32400,7 @@ ziwa AT-Kottingbrunn August-Resch-Straße,47.95588,16.2188
 
 ZSE HR-Opatija Liburnijska ul.,45.3123,14.2856
 ZSE HU-Alacska pihenőhely,47.38406,19.28321
+ZSE SK- Martin Pltníky,49.08572,18.92372
 ZSE SK-Banská Bystrica Na Troskách,48.7313,19.13586
 ZSE SK-Bernolákovo Baničova,48.21102,17.26318
 ZSE SK-Bratislava Bory Mall,48.20621,17.03329,75
@@ -32433,6 +32440,7 @@ Zunder ES-Elche C. las matas,38.25955,-0.7233
 Zunder ES-Estepona Carr. de Cadiz,36.4344,-5.16039
 Zunder ES-Getafe Av. Juan Carlos I,40.2959,-3.74527
 Zunder ES-Gijon-Este C. de Luís Ortiz Berrocal,43.5247,-5.64128
+Zunder ES-Hormilla Polígono Industrial Hormilla,42.43168,-2.76348
 Zunder ES-Langreo C. Aurelio Delbrouck,43.29529,-5.68416
 Zunder ES-Lleida Salida,41.66394,0.60495,12
 Zunder ES-Lloret de Mar Carrer Joan Miró,41.71372,2.83083
@@ -32447,6 +32455,7 @@ Zunder ES-Santiago de Compostela Rúa de Miguel Ferro Caaveiro,42.88438,-8.51292
 Zunder ES-Siero Autovía Ruta de la Plata,43.3912,-5.80157
 Zunder ES-Villalpando Cam. de los Gallegos,41.82615,-5.37888,12
 Zunder ES-Zafra Plaza del Alcázar,38.4244,-6.41493
+Zunder ES-Zaragoza Cam. de las Torres,41.6443,-0.87807
 Zunder ES-Área de servicio Quintanilla Norte,42.0224,-5.8536
 
 Ísorka IS-Patreksfjörður Vatnsfirði,65.57604,-23.16874
