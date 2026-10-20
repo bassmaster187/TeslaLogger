@@ -1292,7 +1292,7 @@ namespace TeslaLogger
 
                 if (File.Exists(filename))
                 {
-                    return File.ReadAllText(filename);
+                    return File.ReadAllText(filename).Trim();
                 }
 
                 // no VERSION file (Docker or tarball install): fall back to the HTTP API.
