@@ -2651,6 +2651,7 @@ Supercharger-V3 FR-Ajaccio,41.951864,8.792775
 Supercharger-V4 FR-Albaret-Sainte-Marie,44.8708,3.25304
 Supercharger-V3 FR-Albertville,45.65538,6.36566
 Supercharger-V3 FR-Albi,43.95773,2.154951
+Supercharger-V4 FR-Alès,44.10936,4.10055
 Supercharger-V4 FR-Alès,44.10953,4.10043
 Supercharger-V4 FR-Amiens,49.8635,2.27814
 Supercharger-V3 FR-Angers Espace Anjou,47.466441,-0.524568
@@ -3405,7 +3406,7 @@ Supercharger-V4 IT-Piacenza 2,45.040054,9.751785
 Supercharger-V4 IT-Poggibonsi,43.469627,11.15474
 Supercharger IT-Pollein,45.737122,7.372441
 Supercharger-V3 IT-Porto Sant’Elpidio,43.232404,13.749889
-Supercharger-V4 IT-Potenza,40.631634,15.834372
+Supercharger-V4 IT-Potenza,40.63136,15.8344
 Supercharger-V4 IT-Reggio Emilia,44.71645,10.63623
 Supercharger-V3 IT-Rimini,44.04066,12.589
 Supercharger-V4 IT-Roma,41.88447,12.606245
@@ -4360,6 +4361,7 @@ Supercharger SK-Zvolen,48.6274,19.10354,30
 Supercharger-V4 TH-Bangkok AIA Connect,13.76437,100.5701
 Supercharger-V4 TH-Chiangmai The Backyard Mahidol,18.76638,98.9888
 Supercharger-V4 TH-Chonburi Numchai,12.9341,100.90232
+Supercharger-V4 TH-Nakhon Pathom Global House,13.80255,100.00418
 Supercharger-V4 TH-Nakhon Ratchasima Ribs Mannn,14.6344,101.41115
 Supercharger-V4 TH-Ratchaburi Global House,13.54733,99.80717
 
@@ -4838,6 +4840,7 @@ Supercharger-V3 US-Northridge CA,34.23472,-118.55323
 Supercharger-V4 US-Northridge CA Reseda Blvd,34.2349,-118.53497
 Supercharger US-Novato CA,38.08973,-122.55177
 Supercharger-V4 US-Novato CA Diablo Ave,38.10263,-122.57052
+Supercharger-V4 US-Novato CA San Marin Dr,38.1223,-122.60424
 Supercharger-V3 US-Oakhurst CA,37.33468,-119.6461
 Supercharger-V4 US-Oakhurst CA CA-49,37.3332,-119.65628
 Supercharger-V3 US-Oakland CA - Hegenberger Rd,37.74646,-122.1954
@@ -5306,6 +5309,7 @@ Supercharger-V3 US-Daytona Beach FL Gateway North Dr,29.22327,-81.09972
 Supercharger-V4 US-Daytona Beach FL S Nova Rd,29.17772,-81.02757
 Supercharger-V4 US-Daytona Beach FL S Ridgewood Ave,29.20987,-81.0231
 Supercharger-V3 US-Deerfield Beach FL,26.31705,-80.11916
+Supercharger-V4 US-Deerfield Beach FL W Hillsboro Blvd,26.31927,-80.1524
 Supercharger US-DeFuniak Springs FL,30.72093,-86.1166
 Supercharger-V4 US-DeLand FL,28.99844,-81.30388
 Supercharger US-Delray Beach FL,26.4556,-80.1904
@@ -6509,6 +6513,7 @@ Supercharger-V3 US-Lake Grove NY,40.86304,-73.1283
 Supercharger-V3 US-Lake Placid NY,44.29512,-74.01072
 Supercharger-V4 US-Latham NY,42.76632,-73.75548
 Supercharger-V4 US-Latham NY Loudon Rd,42.7664,-73.75504
+Supercharger-V4 US-Latham NY Troy Schenectady Rd,42.7588,-73.76844
 Supercharger-V3 US-Malta NY,43.02605,-73.79134
 Supercharger US-Manhattan NY - Vesey Street (Valet & Pay to Park),40.7144,-74.01644
 Supercharger-V3 US-Manorville NY,40.87078,-72.79877
@@ -6819,6 +6824,7 @@ Supercharger-V4 US-Summerdale PA,40.3099,-76.92462
 Supercharger US-Tannersville PA,41.04563,-75.31238
 Supercharger-V4 US-Tannersville PA PA-611,41.0316,-75.30116
 Supercharger-V3 US-Washington PA,40.1873,-80.2294
+Supercharger-V4 US-Waynesburg PA,39.8978,-80.1345
 Supercharger-V3 US-Wilkes-Barre Township PA,41.23866,-75.84582
 Supercharger-V3 US-Williamsport PA,41.23243,-77.02022
 Supercharger-V4 US-Woodlyn PA,39.86983,-75.35314
@@ -7126,6 +7132,7 @@ Supercharger US-Three Rivers TX,28.52162,-98.18582
 Supercharger-V4 US-Tyler TX,32.44068,-95.13705
 Supercharger-V4 US-Tyler TX S SW Loop 323,32.3335,-95.33942
 Supercharger-V3 US-Uvalde TX,29.2117,-99.7773
+Supercharger-V4 US-Valley View TX Victron Energy,33.43664,-97.16418
 Supercharger US-Van Horn TX,31.03447,-104.86142
 Supercharger-V4 US-Van TX Victron Energy,32.50513,-95.64253
 Supercharger-V3 US-Vernon TX,34.16115,-99.29756
@@ -29085,6 +29092,7 @@ Shell DE-Kaltenkirchen Kieler Straße,53.84098,9.94887,40
 Shell DE-Kamen Karree,51.56812,7.67446
 Shell DE-Karlsdorf-Neuthard Im Entenfang,49.13521,8.52708
 Shell DE-Karlsfeld Münchner Straße,48.22449,11.46856
+Shell DE-Kempen Otto-Schott-Straße,51.37742,6.41503
 Shell DE-Kiel Hamburger Chaussee,54.30102,10.10846
 Shell DE-Kiel Konrad-Adenauer-Damm,54.30085,10.14448
 Shell DE-Kirchberg Schneeberger Straße,50.62272,12.53122
@@ -32400,7 +32408,6 @@ ziwa AT-Kottingbrunn August-Resch-Straße,47.95588,16.2188
 
 ZSE HR-Opatija Liburnijska ul.,45.3123,14.2856
 ZSE HU-Alacska pihenőhely,47.38406,19.28321
-ZSE SK- Martin Pltníky,49.08572,18.92372
 ZSE SK-Banská Bystrica Na Troskách,48.7313,19.13586
 ZSE SK-Bernolákovo Baničova,48.21102,17.26318
 ZSE SK-Bratislava Bory Mall,48.20621,17.03329,75
@@ -32412,6 +32419,7 @@ ZSE SK-Chocholná-Velčice Eurofuel,48.8703,17.95632
 ZSE SK-Dolný Kubín Aleja Slobody,49.21574,19.29915
 ZSE SK-Galanta Esterházyovcov,48.19894,17.73317
 ZSE SK-Košice Toryská,48.71565,21.23859
+ZSE SK-Martin Pltníky,49.08572,18.92372
 ZSE SK-Matejovce Štefánikova,49.07302,20.3289
 ZSE SK-Odpočívadlo Blatná na Ostrove Jug,48.0113,17.4559
 ZSE SK-Odpočívadlo Blatná na Ostrove Sever,48.0118,17.4604
