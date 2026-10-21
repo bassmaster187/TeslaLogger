@@ -451,7 +451,7 @@ namespace TeslaLogger
                 if (String.IsNullOrEmpty(refresh_token))
                     return "";
 
-                if (!String.IsNullOrEmpty(ApplicationSettings.Default.TelemetryClientID))
+                if (!String.IsNullOrEmpty(TelemetrySettings.TelemetryClientID))
                     return UpdateTeslaTokenFromRefreshTokenFromFleetAPIWithClientID(refresh_token);
 
                 return UpdateTeslaTokenFromRefreshTokenFromFleetAPI(refresh_token);
@@ -612,7 +612,7 @@ namespace TeslaLogger
                 }
 
                 HttpClient httpClientTeslaAPI = GetHttpClientTeslaAPI();
-                using (var request = new HttpRequestMessage(HttpMethod.Get, new Uri(ApplicationSettings.Default.TeslaHttpProxyURL + "/api/1/users/region")))
+                using (var request = new HttpRequestMessage(HttpMethod.Get, new Uri(TelemetrySettings.TeslaHttpProxyURL + "/api/1/users/region")))
                 {
                     request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", Tesla_token);
                     Tools.DebugLog($"GetRegion #{car.CarInDB} request: {request.RequestUri}");
@@ -796,7 +796,7 @@ namespace TeslaLogger
             {
                 new KeyValuePair<string, string>("refresh_token", refresh_token),
                 new KeyValuePair<string, string>("grant_type", "refresh_token"),
-                new KeyValuePair<string, string>("client_id", ApplicationSettings.Default.TelemetryClientID),
+                new KeyValuePair<string, string>("client_id", TelemetrySettings.TelemetryClientID),
             }))
                 {
 
@@ -4627,7 +4627,7 @@ WHERE
                 if (proxyServer)
                 {
                     car.Log("Use ProxyServer");
-                    url = ApplicationSettings.Default.TeslaHttpProxyURL + "/api/1/vehicles/" + car.Vin + "/" + cmd;
+                    url = TelemetrySettings.TeslaHttpProxyURL + "/api/1/vehicles/" + car.Vin + "/" + cmd;
                 }
                 else if (car.FleetAPI) // pre 2021 Model S / X
                 {
@@ -5291,7 +5291,7 @@ WHERE
                 {
                     Tools.SetThreadEnUS();
                     HttpClient httpClientTeslaAPI = GetHttpClientTeslaAPI();
-                    using (var request = new HttpRequestMessage(HttpMethod.Post, new Uri( ApplicationSettings.Default.TeslaHttpProxyURL + "/api/1/vehicles/fleet_status")))
+                    using (var request = new HttpRequestMessage(HttpMethod.Post, new Uri( TelemetrySettings.TeslaHttpProxyURL + "/api/1/vehicles/fleet_status")))
                     {
                         request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", Tesla_token);
                         request.Content = content;
