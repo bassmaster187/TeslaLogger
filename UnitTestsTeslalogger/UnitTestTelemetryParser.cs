@@ -781,6 +781,30 @@ namespace UnitTestsTeslalogger
         }
 
         [TestMethod]
+        public void LoginRespone_TokenExpired_TokenRefreshFails_DoesNotFireTokenRefreshedEvent()
+        {
+            Car c = new Car(0, "", "", 0, "", DateTime.Now, "", "", "", "", "", "5YJ3E7EA3LF700000", "", null, false);
+
+            var telemetry = new TelemetryParser(c);
+            telemetry.databaseCalls = false;
+            telemetry.tokenRefreshFailedBackoffMs = 0;
+
+            var testWebHelper = new TestWebHelper(c, failGetToken: true);
+            c.webhelper = testWebHelper;
+
+            bool tokenRefreshedEventFired = false;
+            telemetry.handleTokenRefreshed += (sender, e) => { tokenRefreshedEventFired = true; };
+
+            string json = @"{ ""Teslalogger"": ""LoginRespone"", ""Response"": { ""updated_vehicles"": 0, ""error"": ""token expired (401)"" } }";
+
+            telemetry.handleMessageAsync(json).Wait();
+
+            Assert.IsTrue(testWebHelper.getTokenCalled, "GetToken() should be called when the login fails with token expired!");
+            Assert.IsFalse(tokenRefreshedEventFired, "handleTokenRefreshed event should NOT be fired when the token refresh fails (no new token) - otherwise the client reconnects in a tight loop!");
+            Assert.AreEqual("Telemetry Login Error!!! Check Logfile!", c.CurrentJSON.FatalError);
+        }
+
+        [TestMethod]
         public void LoginRespone_Ok_DoesNotFireTokenRefreshedEvent()
         {
             Car c = new Car(0, "", "", 0, "", DateTime.Now, "", "", "", "", "", "5YJ3E7EA3LF700000", "", null, false);
@@ -859,14 +883,17 @@ namespace UnitTestsTeslalogger
     {
         public bool getTokenCalled = false;
 
-        internal TestWebHelper(Car car) : base(car)
+        bool failGetToken;
+
+        internal TestWebHelper(Car car, bool failGetToken = false) : base(car)
         {
+            this.failGetToken = failGetToken;
         }
 
         public override string GetToken()
         {
             getTokenCalled = true;
-            return "test_token";
+            return failGetToken ? "NULL" : "test_token";
         }
     }
 }

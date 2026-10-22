@@ -68,6 +68,10 @@ namespace TeslaLogger
         public event EventHandler handleACChargeChange;
         public event EventHandler handleTokenRefreshed;
 
+        internal int tokenRefreshFailedBackoffMs = 60 * 1000;
+        internal int tokenRefreshFailedBackoffMaxMs = 10 * 60 * 1000;
+        int tokenRefreshFailedRetryCount = 0;
+
         internal TelemetryParser(Car c)
         {
             car = c;
@@ -1392,6 +1396,7 @@ namespace TeslaLogger
                 
                 if (updated_vehicles == "1")
                 {
+                    tokenRefreshFailedRetryCount = 0;
                     string cfg = j["Config"];
                     Log("LoginRespone: OK / Config: " + cfg);
                     return;
@@ -1430,8 +1435,23 @@ namespace TeslaLogger
                 else if (response.ToString().Contains("token expired"))
                 {
                     Log("Login Error: token expired!");
-                    car.webhelper.GetToken();
-                    handleTokenRefreshed?.Invoke(this, EventArgs.Empty);
+                    string newToken = car.webhelper.GetToken();
+
+                    if (String.IsNullOrEmpty(newToken) || newToken == "NULL")
+                    {
+                        tokenRefreshFailedRetryCount++;
+                        int backoffMs = tokenRefreshFailedBackoffMs;
+                        for (int i = 1; i < tokenRefreshFailedRetryCount && backoffMs < tokenRefreshFailedBackoffMaxMs; i++)
+                            backoffMs = Math.Min(backoffMs * 2, tokenRefreshFailedBackoffMaxMs);
+
+                        Log("Token refresh failed! No relogin. Backoff " + backoffMs / 1000 + "s (retry " + tokenRefreshFailedRetryCount + ")");
+                        Thread.Sleep(backoffMs);
+                    }
+                    else
+                    {
+                        tokenRefreshFailedRetryCount = 0;
+                        handleTokenRefreshed?.Invoke(this, EventArgs.Empty);
+                    }
                 }
             }
             catch (Exception ex)
