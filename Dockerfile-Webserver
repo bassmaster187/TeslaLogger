@@ -1,4 +1,4 @@
-FROM php:8.2-apache-bookworm
+FROM php:8.5-apache-trixie
 
 # install packages
 RUN apt-get update && \
