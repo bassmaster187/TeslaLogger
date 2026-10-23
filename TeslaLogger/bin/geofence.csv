@@ -446,6 +446,7 @@ Supercharger-V3 CA-Kenora ON,49.759846,-94.473487
 Supercharger-V3 CA-Kincardine ON,44.171947,-81.616045
 Supercharger CA-Kingston ON,44.267265,-76.503148
 Supercharger-V3 CA-Kingston ON Dalton Avenue,44.2651,-76.50194
+Supercharger-V4 CA-Kingston ON Hwy 15,44.28504,-76.43396
 Supercharger-V3 CA-Kitchener ON,43.461431,-80.47259
 Supercharger-V3 CA-London ON,42.91734,-81.2086
 Supercharger-V4 CA-London ON,42.93648,-81.2826
@@ -4053,6 +4054,7 @@ Supercharger-V4 NO-Østerbø,60.82824,7.50721
 Supercharger-V4 NO-Øvre Årdal,61.30949,7.806812
 Supercharger NO-Øyer,61.243388,10.434378,26
 
+Supercharger-V4 NZ-Auckland South,-36.96952,174.78516
 Supercharger NZ-Auckland-Ponsonby,-36.858323,174.754391
 Supercharger-V3 NZ-Blenheim,-41.513001,173.960038
 Supercharger-V3 NZ-Bulls,-40.175596,175.384921
@@ -4455,6 +4457,7 @@ Supercharger-V3 US-Van Buren AR,35.45845,-94.35618
 
 Supercharger-V4 US-Avondale AZ,33.4632,-112.28165
 Supercharger-V3 US-Buckeye AZ,33.4428,-112.5569
+Supercharger-V4 US-Camp Verde AZ,34.58054,-111.88586
 Supercharger US-Casa Grande AZ,32.87878,-111.68172
 Supercharger-V3 US-Chandler AZ,33.31917,-111.89657
 Supercharger-V4 US-Chandler AZ E Pecos Rd,33.292,-111.82308
@@ -4504,6 +4507,7 @@ Supercharger-V4 US-Wellton AZ,32.6588,-114.14426
 Supercharger-V3 US-White Hills AZ,35.69957,-114.47648
 Supercharger US-Wickenburg AZ,33.97036,-112.73168
 Supercharger-V4 US-Wickenburg AZ W Wickenburg Wy,33.96476,-112.75026
+Supercharger-V4 US-Wikieup AZ,34.70345,-113.61168
 Supercharger US-Willcox AZ,32.27076,-109.84577
 Supercharger-V4 US-Williams AZ,35.2518,-112.19547
 Supercharger US-Yuma AZ,32.72655,-114.61915
@@ -5486,6 +5490,7 @@ Supercharger US-Tampa FL,27.965,-82.40258
 Supercharger-V3 US-Tampa FL - East Bearss Avenue,28.08817,-82.45258
 Supercharger-V3 US-Tampa FL - North Dale Mabry Highway,27.94925,-82.50507
 Supercharger-V3 US-Tampa FL East Bearss Ave,28.08855,-82.4521
+Supercharger-V4 US-Tampa FL N 30th St,28.0532,-82.4273
 Supercharger-V4 US-Tampa FL W Gandy Blvd,27.8928,-82.50476
 Supercharger-V4 US-Tampa FL W Hillsborough Ave,27.99518,-82.47815
 Supercharger US-Tampa FL West Swann Avenue,27.9372,-82.48114
@@ -7043,6 +7048,7 @@ Supercharger-V3 US-Houston TX Hempstead Hwy,29.913,-95.61584
 Supercharger-V4 US-Houston TX Hwy 6 S,29.70547,-95.643
 Supercharger-V3 US-Houston TX Queensbury Lane,29.77892,-95.5592
 Supercharger-V4 US-Houston TX S Sam Houston Pkwy E,29.6015,-95.26502
+Supercharger-V4 US-Houston TX S Sam Houston Pkwy W,29.64428,-95.53658
 Supercharger-V4 US-Houston TX S Texas 6 Stealth Group,29.72495,-95.6443
 Supercharger-V4 US-Houston TX W Sam Houston Pkwy N ElectricSon,29.9199,-95.55545
 Supercharger-V4 US-Houston TX Weslayan St,29.72268,-95.44293
@@ -14648,6 +14654,7 @@ eliso DE-Greven Airportallee,52.12994,7.68998
 eliso DE-Großschweidnitz Ernst-Thälmann-Straße,51.07384,14.64685
 eliso DE-Havelberg Uferstraße,52.82418,12.07148
 eliso DE-Heilbronn Im Neckargarten,49.15488,9.20127
+eliso DE-Herzberg (Elster) Leipziger Straße,51.69174,13.2272
 eliso DE-Konstanz Carl-Benz-Straße,47.67702,9.14634
 eliso DE-Magdeburg Eisvogelstraße,52.1395,11.58802
 eliso DE-Mannheim Seckenheimer Landstraße,49.4745,8.53765
@@ -17432,6 +17439,7 @@ Energie360 CH-Bachenbülach Grabenstrasse,47.50647,8.54135
 Energie360 CH-Dachsen Lauferstrasse,47.67491,8.61452
 Energie360 CH-Dietikon Silbernstrasse,47.41798,8.39301
 Energie360 CH-Dietlikon Industriestrasse,47.41257,8.6181,30
+Energie360 CH-Domat/Ems Via Nova,46.8372,9.45272
 Energie360 CH-Kreuzlingen Hauptstrasse,47.64798,9.17613
 Energie360 CH-Küsnacht Seestrasse,47.32716,8.57514
 Energie360 CH-Lenzerheide Voa Sporz,46.72872,9.55521
@@ -17609,7 +17617,7 @@ enviaM DE-Bitterfeld-Wolfen Niels-Bohr-Straße,51.62458,12.30781
 enviaM DE-Chemnitz Ringstraße,50.865,12.86492
 enviaM DE-Großräschen Seestraße,51.57624,14.01016
 enviaM DE-Halle (Saale) Magdeburger Straße,51.48195,11.9827
-enviaM DE-Herzberg Wilhelm-Pieck-Ring,51.69303,13.22887
+enviaM DE-Herzberg (Elster) Wilhelm-Pieck-Ring,51.69303,13.22887,32
 enviaM DE-Hoym Ascherslebener Straße,51.78514,11.32836
 enviaM DE-Klostermansfeld Bahnhofstraße,51.5756,11.4942
 enviaM DE-Kolkwitz Annahofer Graben,51.71787,14.2885
@@ -31394,7 +31402,7 @@ Vattenfall DE-Hemmoor Otto-Peschel-Straße,53.68378,9.1594
 Vattenfall DE-Hennigsdorf Rigaer Straße,52.65083,13.19594
 Vattenfall DE-Henstedt-Ulzburg Norderstedter Straße,53.78838,10.0011
 Vattenfall DE-Heringsdorf Lindenstraße,53.93816,14.1867
-Vattenfall DE-Herzberg (Elster) Leipziger Straße,51.69252,13.22938
+Vattenfall DE-Herzberg (Elster) Leipziger Straße,51.69252,13.22938,32
 Vattenfall DE-Hesel Im Brink,53.29966,7.59443
 Vattenfall DE-Hilter am Teutoburger Wald Iburger Straße,52.18558,8.13947
 Vattenfall DE-Hinte Gewerbestraße,53.40954,7.19944
