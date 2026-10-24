@@ -2033,7 +2033,7 @@ Supercharger-V4 DE-Denkendorf in Bayern,48.9342,11.46544
 Supercharger-V4 DE-Dettelbach,49.77883,10.06864
 Supercharger-V4 DE-Dietmannsried,47.811457,10.303146,28
 Supercharger-V4 DE-Dormagen,51.09335,6.80953
-Supercharger-V4 DE-Dortmund-Nord,51.5305,7.4716
+Supercharger-V4 DE-Dortmund-Nord,51.5305,7.4716,32
 Supercharger-V4 DE-Dresden Elbepark,51.08535,13.6936,30
 Supercharger-V4 DE-Dresden Kaufpark,50.99643,13.79827
 Supercharger-V4 DE-Duisburg,51.481697,6.809756
@@ -2314,6 +2314,7 @@ Supercharger-V4 DE-Soest,51.5669,8.1304
 Supercharger-V3 DE Solingen,51.130189,6.995972
 Supercharger-V3 DE-Soltau-Ost,52.9834,9.925491,40
 Supercharger-V4 DE-Stralsund,54.302,13.09609
+Supercharger-V4 DE-Stuckenborstel,53.11696,9.20492,40
 Supercharger-V4 DE-Stuttgart-Weilimdorf,48.8217,9.0927
 Supercharger-V4 DE-Sulz-Vöhringen,48.34328,8.66314,70
 Supercharger-V4 DE-Sulzbach (Taunus) MTZ,50.1167,8.5303,18
@@ -3261,7 +3262,7 @@ Supercharger-V4 HU-Szeged Rókus,46.26964,20.13825
 Supercharger-V3 HU-Szigetszentmiklós,47.383471,19.026911
 Supercharger-V4 HU-Szombathely,47.2372,16.6549
 Supercharger-V3 HU-Székesfehérvár,47.149632,18.431349
-Supercharger-V4 HU-Tatabánya,47.60264,18.3873
+Supercharger-V4 HU-Tatabánya,47.60354,18.38805
 Supercharger-V3 HU-Törökbálint,47.43944,18.88963
 Supercharger-V4 HU-Veszprém,47.08398,17.9258
 
@@ -7686,6 +7687,7 @@ ABC FI-Äänekoski Suonenjoentie,62.51672,25.68988,30
 
 ABP DE-Reiskirchen Siemensstraße,50.6002,8.81753
 
+acciona ES-Conil de la Frontera A-48,36.3099,-6.05706
 acciona ES-Donostia / San Sebastián Garbera Bidea,43.3103,-1.94598
 acciona ES-Mérida Av. de Portugal,38.9055,-6.36295
 acciona ES-Ponts Carr. de La Seu d’Urgell,41.92283,1.1943
@@ -8158,7 +8160,7 @@ Aldi HU-Győr Fehérvári út,47.68239,17.6557
 Allego AT-Brunn am Gebirge Johann Steinböck-Straße,48.10617,16.31035
 Allego AT-Ried im Innkreis Griesgasse,48.2063,13.48266
 Allego AT-Seiersberg-Pirka Werschweg,47.01013,15.4118
-Allego AT-Wien Albert-Schweitzer-Gasse,48.20742,16.21828
+Allego AT-Wien Albert-Schweitzer-Gasse,48.20742,16.21828,32
 Allego AT-Ybbs Bahnhofstraße,48.17316,15.08468
 Allego BE-Blankenberge Franchommelaan,51.31425,3.12188
 Allego BE-Brugge Sint-Pieterskaai,51.2203,3.2137
@@ -8277,7 +8279,7 @@ Allego DE-Bissendorf Zum Eistruper Feld,52.23774,8.16333,25
 Allego DE-Bitterfeld-Wolfen Friedensstraße,51.69488,12.26174
 Allego DE-Bochum Berliner Straße,51.46898,7.1324
 Allego DE-Bochum Rensingstraße,51.515,7.20995
-Allego DE-Bonn Clemensstraße,50.74708,7.12464
+Allego DE-Bonn Clemensstraße,50.74708,7.12464,32
 Allego DE-Bonn Godesberger Allee,50.6956,7.14228
 Allego DE-Boppard-Buchholz Bahnhof Buchholz,50.21222,7.5534
 Allego DE-Brandenburg an der Havel August-Sonntag-Straße,52.41523,12.50327
@@ -12637,7 +12639,7 @@ E.ON DK-Randers Gammel Århusvej,56.41283,10.07415
 E.ON DK-Rasteplads Harte Syd,55.51194,9.3949
 E.ON DK-Ringsted Nørretorv,55.45078,11.78904
 E.ON DK-Roskilde Schmeltz Pl.,55.63985,12.07869
-E.ON DK-Rømø Lakolk,55.14638,8.49568
+E.ON DK-Rømø Lakolk,55.14615,8.49622,60
 E.ON DK-Rønne Nordre Kystvej,55.10222,14.69239
 E.ON DK-Sjællands Odde Gnibenvej,55.98156,11.31192
 E.ON DK-Taastrup Mårkærvej,55.66029,12.28551
@@ -13178,6 +13180,7 @@ Electra AT-Linz Wankmüllerhofstraße,48.28068,14.30622
 Electra AT-Loosdorf Gewerbestraße,48.1902,15.40952
 Electra AT-St. Johann im Pongau Bundesstraße,47.34954,13.19453
 Electra AT-Villach Prossowitscher Straße,46.6019,13.8826,15
+Electra AT-Wien Albert-Schweitzer-Gasse,48.20757,16.2171,32
 Electra BE-Antwerpen Herentalsebaan,51.20978,4.4586
 Electra BE-Auderghem Chaussée de Wavre,50.79478,4.47889
 Electra BE-Blankenberge Polderlaan,51.31562,3.1471
@@ -22076,6 +22079,7 @@ Iberdrola ES-Área de Servicio Los Chopos,42.39172,-4.47483
 Iberdrola ES-Área de Servicio Valcarce,42.65917,-6.91402
 Iberdrola ES-Ávila Ctra. Burgohondo,40.64636,-4.70513
 Iberdrola PT-Caldas da Rainha R. Casal dos Barreiros,39.4171,-9.1516
+Iberdrola PT-Faro Av. Dr. Gordinho Moreira,37.02975,-7.94377
 
 iCharge AL-Berat Rruga Baki Gjebrea,40.72775,19.9421
 iCharge AL-Durrës Autostrada Tirane,41.3344,19.48028
@@ -23380,7 +23384,7 @@ JOLT DE-Berlin Lise-Meitner-Straße,52.52674,13.3065
 JOLT DE-Berlin Müllerstraße,52.55856,13.33822
 JOLT DE-Berlin Nordring,52.5608,13.55067
 JOLT DE-Berlin Unter den Eichen,52.44553,13.2925
-JOLT DE-Bonn Sankt Augustiner Straße,50.74687,7.12436
+JOLT DE-Bonn Sankt Augustiner Straße,50.74687,7.12436,32
 JOLT DE-Bremen Kattenturmer Heerstraße,53.04677,8.81872
 JOLT DE-Dachau Brucker Straße,48.25743,11.41948
 JOLT DE-Darmstadt Frankfurter Straße,49.88468,8.6523
@@ -27237,7 +27241,7 @@ Pfalzwerke DE-Dielheim Beethovenstraße,49.28174,8.7255
 Pfalzwerke DE-Dietzenbach Albert-Einstein-Straße,50.01432,8.79002
 Pfalzwerke DE-Donaueschingen Dürrheimer Straße,47.95787,8.50304
 Pfalzwerke DE-Donauwörth Dillinger Straße,48.71627,10.76757
-Pfalzwerke DE-Dortmund Bornstraße,51.53064,7.47245
+Pfalzwerke DE-Dortmund Bornstraße,51.53064,7.47245,32
 Pfalzwerke DE-Dortmund Borsigstraße,51.52735,7.4729
 Pfalzwerke DE-Dortmund Emschertalstraße,51.50262,7.57895
 Pfalzwerke DE-Dreieich Voltastraße,50.03076,8.70092
@@ -30670,7 +30674,6 @@ TEA HU-Nyíregyháza Tünde utca,47.93709,21.74936
 TEA HU-Orosháza Dózsa György utca,46.5588,20.6732
 TEA HU-Polgár Ipari Park,47.84054,21.13145
 TEA HU-Siófok Jegenye sor,46.8841,18.0655
-TEA HU-Vértesszőlős Határ út,47.60354,18.38805
 
 TEAG DE-Ahnatal Heckershäuser Straße,51.36798,9.39918
 TEAG DE-Allendorf (Lumda) Tulpenweg,50.675,8.8113
