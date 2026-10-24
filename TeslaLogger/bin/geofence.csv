@@ -2135,7 +2135,7 @@ Supercharger-V4 DE-Hofheim am Taunus,50.05733,8.40944
 Supercharger-V4 DE-Hohenwarsleben,52.17406,11.49452,40
 Supercharger-V3 DE-Holdorf,52.597843,8.11891
 Supercharger-V3 DE-Holzkirchen,47.881386,11.701631
-Supercharger-V4 DE-Holzkirchen Nord,47.890637,11.721419
+Supercharger-V4 DE-Holzkirchen Bergfeldstraße,47.89022,11.72186
 Supercharger-V4 DE-Idar-Oberstein,49.73079,7.3934
 Supercharger-V3 DE-Illertissen,48.21882,10.127614,25
 Supercharger-V4 DE-Ingolstadt,48.774,11.38844
@@ -4361,6 +4361,7 @@ Supercharger-V3 SK-Trenčín,48.8643,18.022992,30
 Supercharger SK-Zvolen,48.6274,19.10354,30
 
 Supercharger-V4 TH-Bangkok AIA Connect,13.76437,100.5701
+Supercharger-V4 TH-Bangkok Pearl,13.7786,100.54305
 Supercharger-V4 TH-Chiangmai The Backyard Mahidol,18.76638,98.9888
 Supercharger-V4 TH-Chonburi Numchai,12.9341,100.90232
 Supercharger-V4 TH-Nakhon Pathom Global House,13.80255,100.00418
@@ -4495,6 +4496,7 @@ Supercharger US-Scottsdale AZ - N. Scottsdale Road,33.62354,-111.92235
 Supercharger US-Scottsdale AZ - North Kierland Blvd.,33.623,-111.9295
 Supercharger-V4 US-Scottsdale AZ East Shea Boulevard,33.58353,-111.8939
 Supercharger US-Sedona AZ,34.77553,-111.76398
+Supercharger-V4 US-Surprise AZ,33.6379,-112.3949
 Supercharger-V3 US-Tacna AZ,32.69014,-113.95355
 Supercharger-V3 US-Tempe AZ,33.37862,-111.96542
 Supercharger US-Tucson AZ,32.0846,-110.80395
@@ -6259,6 +6261,7 @@ Supercharger-V3 US-West Lebanon NH,43.62333,-72.32574
 Supercharger-V3 US-Avenel NJ,40.57703,-74.28748
 Supercharger US-Barnegat NJ,39.75924,-74.25347
 Supercharger US-Basking Ridge NJ,40.655,-74.52935
+Supercharger-V4 US-Bedminster NJ,40.6473,-74.6391
 Supercharger-V4 US-Bellmawr NJ,39.8656,-75.07968
 Supercharger-V4 US-Bellmawr NJ Edgewood Ave,39.86472,-75.1001
 Supercharger-V3 US-Berkeley Heights NJ,40.662,-74.41695
@@ -6732,6 +6735,7 @@ Supercharger US-The Dalles OR,45.61196,-121.20836
 Supercharger US-Tigard OR,45.45012,-122.7829
 Supercharger-V4 US-Tigard OR SW Pacific Hwy,45.44192,-122.751
 Supercharger-V3 US-Tillamook OR,45.48144,-123.84382
+Supercharger-V4 US-Tillamook OR N Main Ave,45.47596,-123.84613
 Supercharger-V3 US-Troutdale OR,45.5431,-122.3897
 Supercharger-V4 US-Warrenton OR,46.16182,-123.90197
 Supercharger-V4 US-Wilsonville OR,45.33382,-122.7628
