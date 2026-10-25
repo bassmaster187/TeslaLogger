@@ -76,6 +76,19 @@ function ShowInfo()
 		$("#NegativeButton").click(function(){window.location.href='settings_share.php?a=no';});
 	<?php
 	}
+	else if (DockerComposeIsLatest() === false)
+	{?>
+		<?php
+		$t1=get_text("Please update to latest docker-compose.yml file. Check: {LINK}");
+		$t1=str_replace("{", "<a href='https://github.com/bassmaster187/TeslaLogger/blob/master/docker_setup.md#docker-update--upgrade'>", $t1);
+		$t1=str_replace("}", '</a>', $t1);
+		?>
+		$("#InfoText").html("<h1><?php echo $t1; ?></h1>");
+		$(".HeaderT").show();
+		$("#PositiveButton").click(function(){window.location.href='https://github.com/bassmaster187/TeslaLogger/blob/master/docker_setup.md#docker-update--upgrade';});
+		$("#NegativeButton").hide();
+	<?php
+	}
 	else if(isDocker() && GrafanaVersion() != "10.0.1" && !startsWith(GrafanaVersion(), "13."))
 	{?>
 		<?php

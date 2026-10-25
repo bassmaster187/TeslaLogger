@@ -174,6 +174,21 @@ function DatasourceUpdated()
     return false;
 }
 
+function DockerComposeIsLatest()
+{
+    if (!isDocker())
+        return null;
+
+    $result = GetFromTeslalogger("admin/dockercompose");
+    if ($result == "latest")
+        return true;
+    if ($result == "old")
+        return false;
+
+    // unknown (not in docker / socket unreachable)
+    return null;
+}
+
 function startsWith( $haystack, $needle ) {
     $length = strlen( $needle );
     return substr( $haystack, 0, $length ) === $needle;
