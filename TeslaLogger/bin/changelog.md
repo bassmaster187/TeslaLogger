@@ -1,3 +1,16 @@
+# Version 1.63.24
+- Please update docker-compose.yml: [LINK](https://github.com/bassmaster187/TeslaLogger/blob/master/docker_setup.md#docker-update--upgrade)
+- Watchtower cleanup: remove old images after update
+- Grafana doesn't forget settings of starred dashboards anymore (and other settings as well). Grafana.db is now persistend if you update docker-compose.yml
+
+# Version 1.63.23
+- Use PHP 8.5.12 to fix security issues. (PHP2SHELL vulnerability)
+- Use Debian Trixie
+
+# Version 1.63.22.3
+- BF: MQTT commands (teslalogger/command/...) were ignored after a reconnect to the MQTT broker, because the subscription was not restored (reconnect uses cleanSession=true)
+- MQTT: the command response is now published to teslalogger/command/<VIN>/<command>/result, so home-automation setups can verify the command (e.q. vehicle unavailable)
+
 # Version 1.63.22.2
 - Grafana 13.2.4 (Security Update)
 
