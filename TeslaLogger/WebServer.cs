@@ -2651,7 +2651,7 @@ DROP TABLE chargingstate_bak";
 
         private static void Admin_DockerCompose(HttpListenerRequest request, HttpListenerResponse response)
         {
-            var result = Tools.DockerComposeIsLatest().GetAwaiter().GetResult();
+            var result = Tools.DockerComposeIsLatest();
             if (result == null)
                 WriteString(response, "unknown");
             else if (result.Value)

@@ -2456,42 +2456,6 @@ WHERE
         static bool? _composeIsLatest;
         static DateTime _composeCheckTime = DateTime.MinValue;
 
-        public static async Task<bool?> GetDockerContainerExists(string containerName)
-        {
-            try
-            {
-                string socketPath = "/var/run/docker.sock";
-
-                var handler = new SocketsHttpHandler
-                {
-                    ConnectCallback = async (context, cancellationToken) =>
-                    {
-                        var socket = new Socket(AddressFamily.Unix, SocketType.Stream, ProtocolType.Unspecified);
-                        var endpoint = new UnixDomainSocketEndPoint(socketPath);
-                        await socket.ConnectAsync(endpoint);
-                        return new NetworkStream(socket, ownsSocket: true);
-                    }
-                };
-
-                using var client = new HttpClient(handler);
-                var request = new HttpRequestMessage(HttpMethod.Get, $"http://localhost/containers/{containerName}/json");
-                var response = await client.SendAsync(request);
-
-                if (response.StatusCode == HttpStatusCode.OK)
-                    return true;
-                if (response.StatusCode == HttpStatusCode.NotFound)
-                    return false;
-
-                // 4xx/5xx or other: can't determine, treat as unknown
-                return null;
-            }
-            catch (Exception ex)
-            {
-                Logfile.Log("Error checking Docker container existence: " + ex.Message);
-                return null;
-            }
-        }
-
         public const int LATEST_COMPOSE_VERSION = 1;
 
         public static int? DockerComposeVersion()
@@ -2501,34 +2465,30 @@ WHERE
             return int.TryParse(Environment.GetEnvironmentVariable("COMPOSE_VERSION"), out int version) ? version : (int?)null;
         }
 
-        public static async Task<bool?> DockerComposeIsLatest()
+        public static bool? DockerComposeIsLatest()
         {
-            // true = latest, false = outdated, null = unknown (not in docker / socket unreachable)
+            // true = latest, false = outdated, null = unknown (not in docker)
+            // The COMPOSE_VERSION env var is the source of truth: if it's not set,
+            // the compose file is outdated.
             if (!Tools.IsDocker())
                 return null;
 
             if (_composeIsLatest != null && (DateTime.UtcNow - _composeCheckTime).TotalMinutes < 10)
                 return _composeIsLatest;
 
-            // Primary check: the COMPOSE_VERSION environment variable (from the compose file)
             int? composeVersion = DockerComposeVersion();
-            if (composeVersion != null)
+            if (composeVersion == null)
+            {
+                _composeIsLatest = false;
+                _composeCheckTime = DateTime.UtcNow;
+                Logfile.Log("Docker compose check: COMPOSE_VERSION env var not set (outdated)");
+            }
+            else
             {
                 _composeIsLatest = composeVersion == LATEST_COMPOSE_VERSION;
                 _composeCheckTime = DateTime.UtcNow;
                 Logfile.Log("Docker compose check: version " + composeVersion +
                     (_composeIsLatest.Value ? " (latest)" : " (outdated, expected " + LATEST_COMPOSE_VERSION + ")"));
-            }
-            else
-            {
-                // Fallback: the watchtower container is the marker of the latest docker-compose.yml
-                bool? exists = await GetDockerContainerExists("teslalogger-watchtower");
-                if (exists != null)
-                {
-                    _composeIsLatest = exists;
-                    _composeCheckTime = DateTime.UtcNow;
-                    Logfile.Log("Docker compose check: watchtower container " + (exists.Value ? "present (latest)" : "missing (outdated)"));
-                }
             }
 
             return _composeIsLatest;
