@@ -1730,7 +1730,15 @@ namespace TeslaLogger
                     if (car.FleetAPI)
                     {
                         if (car.telemetryParser?.IsOnline() == true)
+                        {
+                            TimeSpan ts = DateTime.Now - lastUpdateEfficiency;
+                            if (ts.TotalMinutes > 240)
+                            {
+                                car.Log("CheckVehicleConfig() because lastUpdateEfficiency > 240 minutes");
+                                CheckVehicleConfig();
+                            }
                             return "online";
+                        }
                         else
                             return "asleep";
                     }

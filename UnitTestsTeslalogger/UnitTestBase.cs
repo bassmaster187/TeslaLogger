@@ -1124,7 +1124,7 @@ namespace UnitTestsTeslalogger
                 WebHelper wh = c.webhelper;
 
                 MemoryCache.Default.Remove("GetAvgMaxRage_0");
-                MemoryCache.Default.Add("GetAvgMaxRage_0", 520, DateTime.Now.AddMinutes(1));
+                MemoryCache.Default.Add("GetAvgMaxRage_0", 453, DateTime.Now.AddMinutes(1));
                 wh.car.Vin = vin + "XXXXXX";
                 wh.car.CarType = "modely";
                 wh.car.CarSpecialType = "base";
