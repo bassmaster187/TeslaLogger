@@ -6627,6 +6627,7 @@ Supercharger-V4 US-North Ridgeville OH,41.38437,-81.97654
 Supercharger-V4 US-Oregon OH,41.61752,-83.48202
 Supercharger-V4 US-Parma OH,41.36085,-81.6868
 Supercharger US-Polaris OH,40.14108,-82.98912
+Supercharger-V4 US-Reynoldsburg OH,39.93475,-82.79173
 Supercharger-V3 US-Rossford OH,41.54617,-83.59017
 Supercharger US-Sandusky OH,41.4098,-82.66397
 Supercharger-V3 US-Seville OH,41.03555,-81.8646
@@ -6878,6 +6879,7 @@ Supercharger-V3 US-North Charleston SC,32.8725,-80.0154
 Supercharger-V3 US-North Myrtle Beach SC,33.79908,-78.7474
 Supercharger-V3 US-Orangeburg SC,33.5523,-80.82764
 Supercharger-V4 US-Orangeburg SC Citadel Rd,33.556,-80.82305
+Supercharger-V4 US-Orangeburg SC Five Chop Rd Quick Pantry,33.4569,-80.73466
 Supercharger-V3 US-Piedmont SC,34.75714,-82.47425
 Supercharger-V4 US-Richburg SC,34.7444,-81.03337
 Supercharger-V3 US-Ridgeland SC,32.48533,-80.97808
@@ -7400,6 +7402,7 @@ Supercharger US-Vancouver WA,45.72153,-122.66385
 Supercharger-V3 US-Vancouver WA - NE Vancouver Mall Drive,45.6596,-122.58353
 Supercharger-V3 US-Vancouver WA - Northeast Fourth Plain Boulevard,45.64564,-122.60148
 Supercharger-V4 US-Vancouver WA NE Andresen Rd,45.6382,-122.59894
+Supercharger-V4 US-Walla Walla WA,46.03886,-118.36184
 Supercharger-V4 US-Wenatchee WA,47.44216,-120.3264
 Supercharger-V4 US-Woodinville WA,47.75884,-122.15552
 Supercharger-V3 US-Yakima WA,46.60965,-120.49203
@@ -8223,6 +8226,7 @@ Allego DE-Autohof Schleiz,50.55006,11.78816,30
 Allego DE-Autohof Thiersheim,50.074,12.0987,25
 Allego DE-Autohof Türkheim,48.0425,10.62036,10
 Allego DE-Autohof Wernberg,49.53222,12.13535,5
+Allego DE-Autohof Wikingerland,54.47672,9.54446,25
 Allego DE-Backnang Stuttgarter Straße,48.93662,9.43664
 Allego DE-Bad Doberan Am Mühlenfließ,54.11484,11.91053
 Allego DE-Bad Hersfeld Hünfelder Straße,50.85566,9.7227
@@ -8307,7 +8311,6 @@ Allego DE-Burgdorf Marktstraße,52.44637,10.01275
 Allego DE-Burgkunstadt In der Au,50.1365,11.24977
 Allego DE-Burglengenfeld Am Rodinger Berg,49.19378,12.057
 Allego DE-Burscheid Höhestraße,51.08448,7.1314
-Allego DE-Busdorf Wittgenstein,54.47672,9.54446,25
 Allego DE-Buxtehude Ostmoorweg,53.46715,9.72075
 Allego DE-Böblingen Hanns-Klemm-Straße,48.6836,8.992,30
 Allego DE-Bünde Wasserbreite,52.20215,8.5787
@@ -13179,6 +13182,7 @@ Electra AT-Graz Kärntner Straße,47.0448,15.41478
 Electra AT-Linz Wankmüllerhofstraße,48.28068,14.30622
 Electra AT-Loosdorf Gewerbestraße,48.1902,15.40952
 Electra AT-St. Johann im Pongau Bundesstraße,47.34954,13.19453
+Electra AT-St. Pölten Porschestraße,48.1728,15.6165
 Electra AT-Villach Prossowitscher Straße,46.6019,13.8826,15
 Electra AT-Wien Albert-Schweitzer-Gasse,48.20757,16.2171,32
 Electra BE-Antwerpen Herentalsebaan,51.20978,4.4586
@@ -21454,6 +21458,8 @@ GETEC DE-Böblingen Herrenberger Straße,48.67686,8.97468
 GETEC DE-Reiskirchen Freiherr-Vom-Stein-Straße,50.59772,8.8237,25
 GETEC DE-St. Wendel Werschweilerstraße,49.4555,7.17803
 
+GFX ES-Ciudad Real Calle Julio Melgar,38.9947,-3.9298
+
 GGEW DE-Lampertheim Wilhelmstraße,49.59467,8.46909,30
 GGEW DE-Lorsch Lindenstraße,49.65908,8.56714
 GGEW DE-Zwingenberg Melibokusstraße,49.72175,8.6107
@@ -21565,13 +21571,13 @@ Goldbeck DE-Dresden Prager Straße,51.0457,13.73602
 
 GOplusEAuto PL-Kraków Praska,50.04758,19.91431
 
+GP-JOULE DE-Autohof Wikingerland,54.47774,9.54572,25
 GP-JOULE DE-Bad Herrenalb Ettlinger Straße,48.80534,8.44495
 GP-JOULE DE-Bad Vilbel Friedberger Straße,50.189,8.74103
 GP-JOULE DE-Beckum Unterberg II,51.72378,8.07053
 GP-JOULE DE-Bergisch Gladbach Siebenmorgen,50.95764,7.11585
 GP-JOULE DE-Berlin Kniprodestraße,52.53379,13.44505
 GP-JOULE DE-Busdorf Schulstraße,54.4924,9.55343
-GP-JOULE DE-Busdorf Wittgenstein,54.47763,9.54545,15
 GP-JOULE DE-Buttenwiesen Maierhof,48.61586,10.77393
 GP-JOULE DE-Büdelsdorf An den Reesenbetten,54.32198,9.69876
 GP-JOULE DE-Büsum Am Bauhof,54.1403,8.87727
@@ -22068,6 +22074,7 @@ Iberdrola ES-San Fulgencio Calle Mar Cantabrico,38.1191,-0.65704
 Iberdrola ES-San Sebastián de los Reyes Gta. de Antonio Gaudí,40.55808,-3.61263
 Iberdrola ES-Santa Magdalena de Polpís Carrer Alcalà,40.35538,0.30139
 Iberdrola ES-Siero Langreo,43.38049,-5.69989
+Iberdrola ES-Tabernas Av Ricardo Fabregas,37.0575,-2.38714
 Iberdrola ES-València Av. del Professor López Piñero,39.4553,-0.3554
 Iberdrola ES-Vicálvaro C. Abad Juan Catalán,40.40491,-3.59152
 Iberdrola ES-Vilafranca del Penedès Carrer Font de les Graus,41.32973,1.67745
@@ -26875,6 +26882,7 @@ OMV AT-Haag Straße zur Autobahn,48.11527,14.57095
 OMV AT-Herzogenburg St. Pöltner Straße,48.2791,15.69548
 OMV AT-Korneuburg Wiener Straße,48.34058,16.33776
 OMV AT-Oberpullendorf Stoob-Süd,47.50965,16.50004
+OMV AT-Raststation Bad Fischau,47.83402,16.1819
 OMV AT-Raststation Deutschfeistritz,47.20517,15.31583
 OMV AT-Raststation Stockerau,48.38056,16.2039
 OMV AT-St. Peter am Bichl Völkermarkter Straße,46.6297,14.35635
@@ -28704,6 +28712,7 @@ SachsenEnergie DE-Wilsdruff Markt,51.05138,13.53743
 SachsenEnergie DE-Wilthen St.-Barbara-Platz,51.09995,14.40026
 SachsenEnergie DE-Zittau Äußere Weberstraße,50.89813,14.7939
 
+SalzachSonne AT-Eben am Achensee Buchauer Straße,47.4344,11.73414
 SalzachSonne AT-Kaltenbach Reisrachweg,47.28412,11.87503
 SalzachSonne AT-Mittersill Zeller Straße,47.28512,12.48996
 
@@ -31961,7 +31970,7 @@ Voltiva SE-Värnamo Malmövägen,57.16492,14.06426
 
 Voltrelli RO-Balotești Calea Bucureşti,44.60634,26.086
 Voltrelli RO-București Bulevardul Iuliu Maniu,44.43632,25.97083
-Voltrelli RO-Mihai Viteazu DN1,46.53177,23.7804,30
+Voltrelli RO-Mihai Viteazu DN1,46.53177,23.7804
 Voltrelli RO-Târgu Mureș Strada Gheorghe Doja,46.5346,24.55583
 
 Volvo IT-Bologna Via Stazione Roveri,44.49785,11.41068
