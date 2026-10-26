@@ -494,7 +494,7 @@ namespace TeslaLogger
                     {
                         client.Timeout = TimeSpan.FromSeconds(300);
                         ProductInfoHeaderValue userAgent = new ProductInfoHeaderValue("Teslalogger", Assembly.GetExecutingAssembly().GetName().Version.ToString());
-                        httpclient_teslalogger_de.DefaultRequestHeaders.UserAgent.ParseAdd(userAgent.ToString());
+                        client.DefaultRequestHeaders.UserAgent.ParseAdd(userAgent.ToString());
                         client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
                         client.DefaultRequestHeaders.Connection.Add("keep-alive");
 

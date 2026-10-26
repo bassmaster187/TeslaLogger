@@ -713,6 +713,20 @@ namespace TeslaLogger
                     {
                         Logfile.Log("Cannot get Watchtower image from Docker: " + ex.Message);
                     }
+
+                    switch (Tools.DockerComposeIsLatest())
+                    {
+                        case true:
+                            Logfile.Log("Docker compose file: UP-TO-DATE (version " + Tools.DockerComposeVersion() + ")");
+                            break;
+                        case false:
+                            int? composeVersion = Tools.DockerComposeVersion();
+                            Logfile.Log("Docker compose file: OUTDATED (version " + (composeVersion != null ? composeVersion.ToString() : "not set") + ", expected " + Tools.LATEST_COMPOSE_VERSION + ")");
+                            break;
+                        default:
+                            Logfile.Log("Docker compose file: unknown");
+                            break;
+                    }
                 }
                 else
                 {

@@ -22,6 +22,7 @@ services:
       - database
     environment:
       - TZ=${TZ:-Europe/Berlin}
+      - COMPOSE_VERSION=1
     ports:
       - ${TESLALOGGER_PORT:-5010}:5000
     labels:
@@ -61,7 +62,8 @@ services:
     image: bassmaster187/teslalogger-grafana:latest
     container_name: teslalogger-grafana
     restart: always
-    volumes: 
+    volumes:
+      - teslalogger-net8-grafanadata:/var/lib/grafana/
       - teslalogger-net8-grafanadashboards:/var/lib/grafana/dashboards/
       - teslalogger-net8-grafanaplugins:/var/lib/grafana/plugins/
     environment:
@@ -107,17 +109,23 @@ services:
       
       
   # watchtower updates label "teslalogger-stack" only
+  # The enable/scope labels let watchtower update itself (self-update);
+  # EPHEMERAL_SELF_UPDATE stops the old container before starting the new one
   watchtower:
     image: nickfedor/watchtower:latest
     container_name: teslalogger-watchtower
     restart: always
     volumes:
         - /var/run/docker.sock:/var/run/docker.sock
-    command: --debug --http-api-update --scope teslalogger-stack
+    command: --debug --http-api-update --cleanup --scope teslalogger-stack
     environment:
       - WATCHTOWER_HTTP_API_TOKEN=${WATCHTOWER_TOKEN}
       - WATCHTOWER_LABEL_ENABLE=true
       - WATCHTOWER_SCOPE=teslalogger-stack
+      - WATCHTOWER_EPHEMERAL_SELF_UPDATE=true
+    labels:
+      - com.centurylinklabs.watchtower.enable=${WATCHTOWER_ENABLE:-true}
+      - com.centurylinklabs.watchtower.scope=teslalogger-stack
       
       
 volumes:
@@ -126,3 +134,4 @@ volumes:
     teslalogger-net8-sqlschema:
     teslalogger-net8-grafanadashboards:
     teslalogger-net8-grafanaplugins:
+    teslalogger-net8-grafanadata:

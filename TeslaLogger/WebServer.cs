@@ -333,6 +333,9 @@ namespace TeslaLogger
                     case bool _ when request.Url.LocalPath.Equals("/admin/downloadlogs", System.StringComparison.Ordinal):
                         Admin_DownloadLogs(request, response);
                         break;
+                    case bool _ when request.Url.LocalPath.Equals("/admin/dockercompose", System.StringComparison.Ordinal):
+                        Admin_DockerCompose(request, response);
+                        break;
                     case bool _ when request.Url.LocalPath.Equals("/export/trip", System.StringComparison.Ordinal):
                         Admin_ExportTrip(request, response);
                         break;
@@ -2645,6 +2648,19 @@ DROP TABLE chargingstate_bak";
             // TODO copy what update.php does
             WriteString(response, "");
         }
+
+        private static void Admin_DockerCompose(HttpListenerRequest request, HttpListenerResponse response)
+        {
+            var result = Tools.DockerComposeIsLatest();
+            if (result == null)
+                WriteString(response, "unknown");
+            else if (result.Value)
+                WriteString(response, "latest");
+            else
+                WriteString(response, "old");
+        }
+
+
 
         private static void Dev_DumpJSON(HttpListenerResponse response, bool dumpJSON)
         {

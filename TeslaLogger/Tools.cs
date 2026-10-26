@@ -1292,7 +1292,7 @@ namespace TeslaLogger
 
                 if (File.Exists(filename))
                 {
-                    return File.ReadAllText(filename);
+                    return File.ReadAllText(filename).Trim();
                 }
 
                 // no VERSION file (Docker or tarball install): fall back to the HTTP API.
@@ -2451,6 +2451,47 @@ WHERE
             }
 
             return null;
+        }
+
+        static bool? _composeIsLatest;
+        static DateTime _composeCheckTime = DateTime.MinValue;
+
+        public const int LATEST_COMPOSE_VERSION = 1;
+
+        public static int? DockerComposeVersion()
+        {
+            // The version is set in the docker-compose.yml as an environment variable
+            // on the teslalogger service. Not present on outdated compose files.
+            return int.TryParse(Environment.GetEnvironmentVariable("COMPOSE_VERSION"), out int version) ? version : (int?)null;
+        }
+
+        public static bool? DockerComposeIsLatest()
+        {
+            // true = latest, false = outdated, null = unknown (not in docker)
+            // The COMPOSE_VERSION env var is the source of truth: if it's not set,
+            // the compose file is outdated.
+            if (!Tools.IsDocker())
+                return null;
+
+            if (_composeIsLatest != null && (DateTime.UtcNow - _composeCheckTime).TotalMinutes < 10)
+                return _composeIsLatest;
+
+            int? composeVersion = DockerComposeVersion();
+            if (composeVersion == null)
+            {
+                _composeIsLatest = false;
+                _composeCheckTime = DateTime.UtcNow;
+                Logfile.Log("Docker compose check: COMPOSE_VERSION env var not set (outdated)");
+            }
+            else
+            {
+                _composeIsLatest = composeVersion == LATEST_COMPOSE_VERSION;
+                _composeCheckTime = DateTime.UtcNow;
+                Logfile.Log("Docker compose check: version " + composeVersion +
+                    (_composeIsLatest.Value ? " (latest)" : " (outdated, expected " + LATEST_COMPOSE_VERSION + ")"));
+            }
+
+            return _composeIsLatest;
         }
     }
 

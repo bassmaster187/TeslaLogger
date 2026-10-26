@@ -349,6 +349,9 @@ namespace TeslaLogger
 
                     await InitStage3Async();
 
+                    if (!run)
+                        return;
+
                     if (ApplicationSettings.Default.UseTelemetryServer)
                     {
                         if (FleetAPI)
@@ -484,6 +487,7 @@ namespace TeslaLogger
             }
             finally
             {
+                telemetry?.StopConnection();
                 Log("*** Exit Loop !!!");
             }
         }
@@ -526,6 +530,7 @@ namespace TeslaLogger
                 if (webhelper.Tesla_token == "NULL")
                 {
                     ExitCarThread("Tesla_token == NULL");
+                    return;
                 }
 
                 LogToken();
@@ -533,6 +538,7 @@ namespace TeslaLogger
                 if (DBHelper.DBConnectionstring.Length == 0)
                 {
                     ExitCarThread("DBHelper.DBConnectionstring.Length == 0");
+                    return;
                 }
 
                 if (!DbHelper.GetRegion())
@@ -544,6 +550,7 @@ namespace TeslaLogger
                 if (webhelper.GetVehicles() == "NULL")
                 {
                     ExitCarThread("wh.GetVehicles() == NULL");
+                    return;
                 }
 
                 DbHelper.GetEconomy_Wh_km(webhelper);

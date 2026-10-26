@@ -58,6 +58,14 @@ wget https://raw.githubusercontent.com/bassmaster187/TeslaLogger/refs/heads/NET8
 docker compose up -d
 ```
 
+**Watchtower:**
+The Watchtower image (`nickfedor/watchtower`) is a third-party image and not updated by the Teslalogger update button.
+Newer versions of this setup file enable self-update (the Watchtower container is part of the stack it monitors), but in case it did not work, you can update the image to the latest version manually:
+```
+docker compose pull watchtower
+docker compose up -d watchtower
+```
+
 # Trouble shooting
 1. Init scripts like DB table setup not working
 
