@@ -481,82 +481,177 @@ VALUES(
             }
         }
 
-        Available GetGuestAvailability(Car car, int trid)
+        const string GuestSiteUrl = "https://www.tesla.com/de_de/charging/guest/site/{0}?type=sc";
+        const string GuestGraphQlUrl = "https://www.tesla.com/de_DE/charging/guest/api/graphql?operationName=GetSiteDetails";
+        const string GuestGraphQlUrlFallback = "https://www.tesla.com/charging/guest/api/graphql?operationName=GetSiteDetails";
+
+        internal Available GetGuestAvailability(Car car, int trid)
         {
             Available a = new Available();
 
-            string payload = "{\"operationName\":\"GetSiteDetails\",\"query\":\"\\n    query GetSiteDetails($siteId: SiteIdInput!) {\\n  chargingNetwork {\\n    site(siteId: $siteId) {\\n      address {\\n        countryCode\\n      }\\n      chargerList {\\n        id\\n        label\\n        availability\\n      }\\n      holdAmount {\\n        amount\\n        currencyCode\\n      }\\n      maxPowerKw\\n      name\\n      programType\\n      publicStallCount\\n      trtId\\n      pricing {\\n        userRates {\\n          activePricebook {\\n            charging {\\n              ...ChargingRate\\n            }\\n            parking {\\n              ...ChargingRate\\n            }\\n            congestion {\\n              ...ChargingRate\\n            }\\n          }\\n        }\\n      }\\n    }\\n  }\\n}\\n    \\n    fragment ChargingRate on ChargingUserRate {\\n  uom\\n  rates\\n  buckets {\\n    start\\n    end\\n  }\\n  bucketUom\\n  currencyCode\\n  programType\\n  vehicleMakeType\\n  touRates {\\n    enabled\\n    activeRatesByTime {\\n      startTime\\n      endTime\\n      rates\\n    }\\n  }\\n}\\n    \",\"variables\":{\"siteId\":{\"byTrtId\":{\"trtId\":$SITEID$,\"programType\":\"PTSCH\",\"chargingExperience\":\"ADHOC\",\"locale\":\"en-US\"}}}}";
+            string payload = "{\"operationName\":\"GetSiteDetails\",\"query\":\"\\n    query GetSiteDetails($siteId: SiteIdInput!) {\\n  chargingNetwork {\\n    site(siteId: $siteId) {\\n      address {\\n        countryCode\\n      }\\n      chargerList {\\n        id\\n        label\\n        availability\\n      }\\n      holdAmount {\\n        amount\\n        currencyCode\\n      }\\n      maxPowerKw\\n      name\\n      programType\\n      publicStallCount\\n      trtId\\n      pricing {\\n        userRates {\\n          activePricebook {\\n            charging {\\n              ...ChargingRate\\n            }\\n            parking {\\n              ...ChargingRate\\n            }\\n            congestion {\\n              ...ChargingRate\\n            }\\n          }\\n        }\\n      }\\n    }\\n  }\\n}\\n    \\n    fragment ChargingRate on ChargingUserRate {\\n  uom\\n  rates\\n  buckets {\\n    start\\n    end\\n  }\\n  bucketUom\\n  currencyCode\\n  programType\\n  vehicleMakeType\\n  touRates {\\n    enabled\\n    activeRatesByTime {\\n      startTime\\n      endTime\\n      rates\\n    }\\n  }\\n}\\n    \",\"variables\":{\"siteId\":{\"byTrtId\":{\"trtId\":$SITEID$,\"programType\":\"PTSCH\",\"chargingExperience\":\"ADHOC\",\"locale\":\"de-DE\"}}}}";
             payload = payload.Replace("$SITEID$", trid.ToString());
 
             var client = TeslaGuestHttpClient();
 
-            using (var request = new HttpRequestMessage())
+            // Tesla protects the guest API with Akamai Bot Manager. Load the
+            // site page first so the session receives the required cookies.
+            EnsureGuestSession(client, trid);
+
+            string content = PostGuestGraphQl(client, trid, payload, GuestGraphQlUrl, out string primaryError);
+            if (content == null)
             {
-                using (var scontent = new StringContent(payload, Encoding.UTF8, "application/json"))
+                EnsureGuestSession(client, trid, true);
+                content = PostGuestGraphQl(client, trid, payload, GuestGraphQlUrlFallback, out string fallbackError);
+                if (content == null)
                 {
-                    var response = client.PostAsync("https://www.tesla.com/charging/guest/api/graphql?operationName=GetSiteDetails", scontent).Result;
-                    string content = response.Content.ReadAsStringAsync().Result;
-                    if (response.IsSuccessStatusCode)
-                    {
-                        dynamic j = JsonConvert.DeserializeObject(content);
-                        if (j?["data"] == null || j["errors"] != null)
-                        {
-                            Tools.DebugLog($"Unexpected GuestAPI response: {content}");
-                            return a;
-                        }
-
-                        dynamic site = j["data"]["chargingNetwork"]["site"];
-                        JArray chargers = site["chargerList"];
-                        //JArray chargerDetails = site["chargersAvailable"]["chargerDetails"];
-
-                        string name = site["name"];
-
-                        a.total = chargers.Count;
-
-                        foreach (dynamic charger in chargers)
-                        {
-                            string id = charger["id"];
-                            string label = charger["label"];
-
-
-                            string availability = charger["availability"];
-                            // System.Diagnostics.Debug.WriteLine($"Label: {label} availability: {availability}");
-
-                            if (availability == "CHARGER_AVAILABILITY_AVAILABLE")
-                                a.available++;
-                            else if (availability == "CHARGER_AVAILABILITY_OCCUPIED")
-                                a.occupied++;
-                            else if (availability == "CHARGER_AVAILABILITY_DOWN")
-                                a.down++;
-                            else if (availability == "CHARGER_AVAILABILITY_UNKNOWN")
-                                a.unknown++;
-                            else
-                                a.unhandled++;
-
-                        }
-
-                        if (!string.IsNullOrEmpty(name))
-                        {
-                            Tools.DebugLog($"#{car.CarInDB} Guest SuC: <{name}> <{a.available}> <{a.total}>");
-
-                            ArrayList send = new ArrayList();
-                            Dictionary<string, object> sendKV = new Dictionary<string, object>();
-                            send.Add(sendKV);
-                            sendKV.Add("n", name);
-                            // sendKV.Add("lat", lat);
-                            // sendKV.Add("lng", lng);
-                            sendKV.Add("ts", DateTime.UtcNow.ToString("s", Tools.ciEnUS));
-                            sendKV.Add("a", a.available);
-                            sendKV.Add("t", a.total);
-                            sendKV.Add("kw", 0);
-                            sendKV.Add("m", "");
-                            ShareSuc(send, false, out _, out _);
-                        }
-                    }
+                    string message = $"GetGuestAvailability failed for trtId {trid}: {primaryError} | Fallback: {fallbackError}";
+                    Tools.DebugLog(message);
+                    car?.CreateExeptionlessLog("Guest SuC", message, Exceptionless.Logging.LogLevel.Error).Submit();
+                    return a;
                 }
             }
 
+            dynamic j = JsonConvert.DeserializeObject(content);
+            if (j?["data"] == null || j["errors"] != null)
+            {
+                string message = $"Unexpected GuestAPI response for trtId {trid}: {content}";
+                Tools.DebugLog(message);
+                car?.CreateExeptionlessLog("Guest SuC", message, Exceptionless.Logging.LogLevel.Warn).Submit();
+                return a;
+            }
+
+            dynamic site = j["data"]["chargingNetwork"]["site"];
+            JArray chargers = site["chargerList"];
+
+            string name = site["name"];
+
+            a.total = chargers.Count;
+
+            foreach (dynamic charger in chargers)
+            {
+                string id = charger["id"];
+                string label = charger["label"];
+
+
+                string availability = charger["availability"];
+                // System.Diagnostics.Debug.WriteLine($"Label: {label} availability: {availability}");
+
+                if (availability == "CHARGER_AVAILABILITY_AVAILABLE")
+                    a.available++;
+                else if (availability == "CHARGER_AVAILABILITY_OCCUPIED")
+                    a.occupied++;
+                else if (availability == "CHARGER_AVAILABILITY_DOWN")
+                    a.down++;
+                else if (availability == "CHARGER_AVAILABILITY_UNKNOWN")
+                    a.unknown++;
+                else
+                    a.unhandled++;
+
+            }
+
+            if (!string.IsNullOrEmpty(name))
+            {
+                Tools.DebugLog($"#{car.CarInDB} Guest SuC: <{name}> <{a.available}> <{a.total}>");
+
+                ArrayList send = new ArrayList();
+                Dictionary<string, object> sendKV = new Dictionary<string, object>();
+                send.Add(sendKV);
+                sendKV.Add("n", name);
+                // sendKV.Add("lat", lat);
+                // sendKV.Add("lng", lng);
+                sendKV.Add("ts", DateTime.UtcNow.ToString("s", Tools.ciEnUS));
+                sendKV.Add("a", a.available);
+                sendKV.Add("t", a.total);
+                sendKV.Add("kw", 0);
+                sendKV.Add("m", "");
+                ShareSuc(send, false, out _, out _);
+            }
+
             return a;
+        }
+
+        static string PostGuestGraphQl(HttpClient client, int trid, string payload, string url, out string error)
+        {
+            error = null;
+
+            try
+            {
+                using (var request = new HttpRequestMessage(HttpMethod.Post, url))
+                {
+                    request.Content = new StringContent(payload, Encoding.UTF8, "application/json");
+                    request.Headers.TryAddWithoutValidation("accept", "application/json, text/plain, */*");
+                    request.Headers.TryAddWithoutValidation("origin", "https://www.tesla.com");
+                    request.Headers.TryAddWithoutValidation("referer", string.Format(GuestSiteUrl, trid));
+                    request.Headers.TryAddWithoutValidation("x-async-request", "true");
+                    request.Headers.TryAddWithoutValidation("x-txid", Guid.NewGuid().ToString());
+                    request.Headers.TryAddWithoutValidation("sec-fetch-site", "same-origin");
+                    request.Headers.TryAddWithoutValidation("sec-fetch-mode", "cors");
+                    request.Headers.TryAddWithoutValidation("sec-fetch-dest", "empty");
+
+                    using (var response = client.Send(request))
+                    {
+                        string content = response.Content.ReadAsStringAsync().Result;
+                        if (response.IsSuccessStatusCode)
+                            return content;
+
+                        error = $"HTTP {(int)response.StatusCode}: {Truncate(content, 1000)}";
+                        Tools.DebugLog($"GuestAPI {url} returned {(int)response.StatusCode}: {content}");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                error = ex.ToString();
+                Tools.DebugLog($"GuestAPI {url} exception", ex);
+            }
+
+            return null;
+        }
+
+        static string Truncate(string value, int length)
+        {
+            if (string.IsNullOrEmpty(value) || value.Length <= length)
+                return value;
+
+            return value.Substring(0, length);
+        }
+
+        static DateTime _guestSessionCreated = DateTime.MinValue;
+        static readonly object _guestSessionLock = new object();
+
+        static void EnsureGuestSession(HttpClient client, int trid, bool force = false)
+        {
+            lock (_guestSessionLock)
+            {
+                if (!force && DateTime.UtcNow - _guestSessionCreated < TimeSpan.FromHours(6))
+                    return;
+
+                try
+                {
+                    using (var request = new HttpRequestMessage(HttpMethod.Get, string.Format(GuestSiteUrl, trid)))
+                    {
+                        request.Headers.TryAddWithoutValidation("accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8");
+                        request.Headers.TryAddWithoutValidation("referer", "https://www.tesla.com/de_de/charging");
+                        request.Headers.TryAddWithoutValidation("upgrade-insecure-requests", "1");
+                        request.Headers.TryAddWithoutValidation("sec-fetch-site", "none");
+                        request.Headers.TryAddWithoutValidation("sec-fetch-mode", "navigate");
+                        request.Headers.TryAddWithoutValidation("sec-fetch-dest", "document");
+                        request.Headers.TryAddWithoutValidation("sec-fetch-user", "?1");
+
+                        using (var response = client.Send(request))
+                        {
+                            _guestSessionCreated = DateTime.UtcNow;
+                            Tools.DebugLog($"GuestAPI session init: {(int)response.StatusCode}");
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    _guestSessionCreated = DateTime.MinValue;
+                    Tools.DebugLog("GuestAPI session init exception", ex);
+                }
+            }
         }
         /*
         Available GetGuestAvailabilityOld(Car c, int trid)
@@ -660,30 +755,23 @@ VALUES(
                 var ch = new HttpClientHandler
                 {
                     CookieContainer = new CookieContainer(),
-                    AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate,
+                    AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate | DecompressionMethods.Brotli,
                     AllowAutoRedirect = true,
-                    UseCookies = false
+                    UseCookies = true
                 };
 
                 var client = new HttpClient(ch)
                 {
                     BaseAddress = new Uri("https://www.tesla.com"),
-                    DefaultRequestHeaders =
-                {
-                    ConnectionClose = true,
-                    Accept = { new MediaTypeWithQualityHeaderValue("application/json") },
-                    }
+                    Timeout = TimeSpan.FromSeconds(20)
                 };
 
-                client.DefaultRequestHeaders.Add("accept", "application/json; charset=UTF-8");
-                client.DefaultRequestHeaders.Add("accept-language", "de-DE,de;q=0.9,en-US;q=0.8,en;q=0.7,es-ES;q=0.6,es;q=0.5,zh-CN;q=0.4,zh;q=0.3,fr;q=0.2");
-                // client.DefaultRequestHeaders.Add("cache-control", "no-cache");
-                // client.DefaultRequestHeaders.Add("pragma", "no-cache");
-                // client.DefaultRequestHeaders.Add("upgrade-insecure-requests", "1");
-                client.DefaultRequestHeaders.Add("user-agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36");
-                // client.DefaultRequestHeaders.Add("x-tesla-user-agent", "TeslaApp/4.19.5-1667/3a5d531cc3/android/27");
-
-                client.Timeout = TimeSpan.FromSeconds(20);
+                client.DefaultRequestHeaders.TryAddWithoutValidation("accept", "application/json, text/plain, */*");
+                client.DefaultRequestHeaders.TryAddWithoutValidation("accept-language", "de-DE,de;q=0.9,en-US;q=0.8,en;q=0.7");
+                client.DefaultRequestHeaders.TryAddWithoutValidation("user-agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36");
+                client.DefaultRequestHeaders.TryAddWithoutValidation("sec-ch-ua", "\"Not:A-Brand\";v=\"8\", \"Chromium\";v=\"156\", \"Google Chrome\";v=\"156\"");
+                client.DefaultRequestHeaders.TryAddWithoutValidation("sec-ch-ua-mobile", "?0");
+                client.DefaultRequestHeaders.TryAddWithoutValidation("sec-ch-ua-platform", "\"Windows\"");
 
                 _teslaGuestHttpClient = client;
             }
