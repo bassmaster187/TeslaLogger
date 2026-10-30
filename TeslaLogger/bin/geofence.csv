@@ -63,7 +63,7 @@ Supercharger-V3 AT-Langkampfen,47.5347,12.09288
 Supercharger AT-Laßnitzhöhe,47.070925,15.578139
 Supercharger-V4 AT-Lermoos,47.39496,10.88752
 Supercharger-V4 AT-Lermoos,47.39597,10.88722
-Supercharger AT-Liezen,47.55937,14.252606
+Supercharger AT-Liezen,47.55937,14.2526
 Supercharger-V4 AT-Linz Semmelweisstraße,48.30215,14.31032
 Supercharger-V4 AT-Meggenhofen,48.18346,13.78649
 Supercharger-V4 AT-Melk,48.21438,15.34943
@@ -352,6 +352,7 @@ Supercharger CA-Kamloops BC,50.655429,-120.367554
 Supercharger-V3 CA-Kamloops BC - Notre Dame Drive,50.66339,-120.3514
 Supercharger-V3 CA-Kamloops BC - Powwow Trail,50.68194,-120.29724
 Supercharger CA-Kelowna BC,49.885054,-119.427749
+Supercharger-V4 CA-Keremeos BC,49.20535,-119.826
 Supercharger-V3 CA-Langley BC,49.161995,-122.655641
 Supercharger-V3 CA-Maple Ridge BC,49.220633,-122.600909
 Supercharger CA-Merritt BC,50.123765,-120.750298
@@ -465,6 +466,7 @@ Supercharger-V3 CA-Niagara Falls ON Morrison St,43.10444,-79.11057
 Supercharger-V3 CA-Nipigon ON,49.017674,-88.308209
 Supercharger-V3 CA-North Bay ON,46.332433,-79.470684
 Supercharger CA-North York ON,43.776125,-79.344666
+Supercharger-V4 CA-Norwood ON,44.38488,-77.97722
 Supercharger-V3 CA-Oakville ON,43.440963,-79.693834
 Supercharger-V3 CA-Orangeville ON,43.929134,-80.098855
 Supercharger CA-Ottawa ON,45.42621,-75.69085
@@ -2110,6 +2112,7 @@ Supercharger-V4 DE-Hanau (Cafe Del Sol),50.12462,8.9456
 Supercharger-V4 DE Hanau-West,50.1121,8.8961
 Supercharger-V3 DE-Hannover,52.42322,9.83502,24
 Supercharger-V4 DE-Hannover Hannoversche Straße,52.43375,9.8642
+Supercharger-V4 DE-Hannover Südstadt-Bult,52.3663,9.76163
 Supercharger-V4 DE-Harrislee,54.795,9.377717
 Supercharger-V3 DE-Hattersheim - Globus,50.07111,8.4757
 Supercharger-V4 DE-Haßloch,49.3787,8.2523
@@ -3161,7 +3164,8 @@ Supercharger GB-Sheffield,53.314145,-1.281904
 Supercharger-V4 GB-Skipton EV OTM,53.96623,-2.0419
 Supercharger-V4 GB-Solihull,52.40033,-1.81783
 Supercharger-V4 GB-Solihull Service Center,52.3773,-1.79643
-Supercharger GB-South Mimms,51.687536,-0.223548
+Supercharger-V3 GB-South Mimms,51.68668,-0.22244
+Supercharger-V3 GB-South Mimms,51.68754,-0.22355
 Supercharger-V4 GB-Sprucefield,54.491991,-6.068177
 Supercharger-V4 GB-St. Albans,51.75182,-0.2753
 Supercharger-V4 GB-Stanwell,51.442912,-0.474949
@@ -3265,6 +3269,8 @@ Supercharger-V3 HU-Székesfehérvár,47.149632,18.431349
 Supercharger-V4 HU-Tatabánya,47.60354,18.38805
 Supercharger-V3 HU-Törökbálint,47.43944,18.88963
 Supercharger-V4 HU-Veszprém,47.08398,17.9258
+Supercharger-V4 HU-Zalaegerszeg,46.84185,16.8678
+Supercharger-V4 HU-Érd,47.37693,18.93643
 
 Supercharger-V3 IE-Athenry,53.30141,-8.76203
 Supercharger IE-Ballacolla,52.86704,-7.481818
@@ -5052,6 +5058,7 @@ Supercharger-V4 US-Sierra Madre CA,34.1611,-118.05232
 Supercharger-V4 US-Signal Hill CA,33.80418,-118.16925
 Supercharger-V4 US-Simi Valley CA,34.28538,-118.71958
 Supercharger-V3 US-Simi Valley CA - Tierra Rejada Road,34.27213,-118.7973
+Supercharger-V4 US-Simi Valley CA Cochran St,34.27933,-118.68953
 Supercharger-V3 US-Solana Beach CA,32.98653,-117.2717
 Supercharger-V3 US-Soledad CA - Front Street,36.43014,-121.3347
 Supercharger-V3 US-Soledad CA - H Dela Rosa Street,36.41847,-121.32
@@ -5253,6 +5260,7 @@ Supercharger US-West Hartford CT,41.72256,-72.76013
 Supercharger-V4 US-Willington CT,41.91933,-72.26098
 
 Supercharger-V3 US-Washington DC Idaho Avenue,38.93486,-77.0736
+Supercharger-V4 US-Washington DC Market St NE,38.92056,-76.95455
 Supercharger-V3 US-Washington DC Market Street NE,38.92225,-76.95334
 Supercharger US-Washington DC Wisconsin Ave NW,38.91585,-77.0673
 
@@ -5938,6 +5946,7 @@ Supercharger-V3 US-Joppatowne MD,39.4398,-76.34527
 Supercharger US-La Vale MD,39.63615,-78.84582
 Supercharger US-Laurel MD,39.0946,-76.85824
 Supercharger-V3 US-Laurel MD - Van Dusen Road,39.08188,-76.88885
+Supercharger-V4 US-Laurel MD 3470 Fort Meade Rd,39.1009,-76.81752
 Supercharger-V4 US-Laurel MD Baltimore Ave,39.07803,-76.86995
 Supercharger-V3 US-Laurel MD Fort Meade Road,39.09627,-76.84096
 Supercharger US-N Bethesda MD,39.0502,-77.1163
@@ -6683,6 +6692,7 @@ Supercharger-V4 US-Tulsa OK E Virgin Ct Solsource,36.18492,-95.88846
 Supercharger-V4 US-Tulsa OK S Memorial Dr Francis Energy,36.0181,-95.88504
 Supercharger US-Weatherford OK,35.53872,-98.66013
 
+Supercharger-V4 US-Albany OR,44.63952,-123.0676
 Supercharger-V3 US-Ashland OR,42.18273,-122.66276
 Supercharger US-Baker City OR,44.78307,-117.81242
 Supercharger US-Bandon OR,43.12193,-124.399
@@ -7213,6 +7223,7 @@ Supercharger-V4 US-Ashburn VA Van Metre Dr,39.02843,-77.5111
 Supercharger-V3 US-Ashland VA,37.74577,-77.4724
 Supercharger-V3 US-Atkins VA,36.86447,-81.4335
 Supercharger-V3 US-Bealeton VA,38.6196,-77.80027
+Supercharger-V4 US-Bealeton VA James Madison Hwy,38.62065,-77.80138
 Supercharger-V4 US-Bedford VA,37.33734,-79.55053
 Supercharger-V3 US-Bristol VA,36.62855,-82.14896
 Supercharger-V3 US-Bristol VA Euclid Ave,36.6019,-82.19144
@@ -7336,6 +7347,7 @@ Supercharger-V3 US-Chehalis WA,46.6797,-122.977
 Supercharger US-Cle Elum WA,47.18856,-120.90286
 Supercharger-V3 US-Cle Elum WA - West Davis Street,47.19524,-120.95615
 Supercharger-V4 US-Coulee City WA,47.62155,-119.27956
+Supercharger-V4 US-East Wenatchee WA EVODS,47.41047,-120.2912
 Supercharger US-Ellensburg WA,46.9769,-120.54167
 Supercharger-V3 US-Ellensburg WA - Canyon Road,46.97826,-120.54353
 Supercharger-V4 US-Ellensburg WA S Water St,46.99065,-120.55004
@@ -7416,6 +7428,7 @@ Supercharger-V3 US-Fond du Lac WI,43.79143,-88.48602
 Supercharger-V3 US-Glendale WI,43.1209,-87.91637
 Supercharger-V3 US-Greenfield WI,42.96003,-87.9872
 Supercharger US-Howard WI,44.53627,-88.07773
+Supercharger-V4 US-Hudson WI,44.96533,-92.72262
 Supercharger-V3 US-Janesville WI,42.7177,-88.9947
 Supercharger-V3 US-Kenosha WI,42.56902,-87.94715
 Supercharger US-La Crosse WI,43.87917,-91.18802
@@ -12684,6 +12697,7 @@ E.ON SK-Moldava nad Bodvou Rožňavská,48.60853,20.98571
 E.ON SK-Nitra Bratislavská,48.31442,18.06249
 E.ON SK-Sládkovičovo Fučíkova,48.19786,17.62947
 E.ON SK-Trenčín Belá,48.86455,18.02273,20
+E.ON SK-Tvrdošín Nová,49.32218,19.54386
 
 e1 IS-Borgarbyggð Baulan,64.6748,-21.66553
 e1 IS-Króksfjarðarnes Garpadalsvegur,65.45572,-21.91564
@@ -13039,6 +13053,7 @@ EDP ES-Cangas de Onís C. Picos de Europa,43.35243,-5.12602
 EDP ES-Cudillero N-632,43.55523,-6.16723
 EDP ES-Gijón C. Álvarez Garaya,43.54123,-5.66559
 EDP ES-Llanes La Arquera,43.40749,-4.75854
+EDP ES-Madrid C. Adolfo Bioy Casares,40.36924,-3.59905
 EDP ES-Medina del Campo Av. del V Centenario de Isabel la Católica,41.30142,-4.90906
 EDP ES-Siero Avenida Principal,43.41589,-5.79699
 EDP ES-Tapia de Casariego Pol. Ind. El Cortaficio,43.56184,-6.92298
@@ -17877,6 +17892,7 @@ EV-Rudolstadt DE-Rudolstadt Oststraße,50.72486,11.36791
 EV-Sylt DE-List Hafenstraße,55.01923,8.43882
 EV-Sylt DE-Sylt Andreas-Nielsen-Straße,54.90946,8.31006
 EV-Sylt DE-Sylt Maybachstraße,54.90665,8.3059
+EV-Sylt DE-Sylt-Westerland Elisabethstraße,54.90748,8.30096
 
 evb DE-Butzbach Himmrichsweg,50.4378,8.67952
 evb DE-Butzbach Schloßstraße,50.43322,8.6741
@@ -22136,6 +22152,7 @@ Ignitis LT-Šilagalys Panevėžio aplinkelis,55.67072,24.34852
 iHunt-EV RO-Brăila Șoseaua Focșani,45.28815,27.9331
 iHunt-EV RO-București Calea Ion Zăvoi,44.50375,26.08545
 iHunt-EV RO-București Prelungirea Ghencea,44.40924,25.9973
+iHunt-EV RO-Făgetu DN1A,45.13825,26.03068
 iHunt-EV RO-Sibiu Strada Ștefan cel Mare,45.7887,24.19364
 iHunt-EV RO-Târgu Mureș Strada Regele Ferdinand,46.53285,24.59213
 iHunt-EV RO-Șelimbăr Bulevardul Mihai Viteazul,45.77288,24.1629
@@ -23331,6 +23348,7 @@ IZIVIA FR-École-Valentin Rue de Franche-Comté,47.27614,5.9919
 Jenny DE-Bad Oldesloe Lily-Braun Straße,53.80245,10.40282
 
 JET AT-Linz Freistädter Straße,48.3283,14.32136
+JET AT-St. Pölten Mariazeller Straße,48.1898,15.61845,32
 JET AT-Villach Badstubenweg,46.63153,13.82448
 JET AT-Wien Laxenburger Straße,48.1358,16.35648
 JET AT-Wiener Neustadt Puchberger Straße,47.8055,16.21124,20
@@ -25586,6 +25604,7 @@ Mainova DE-Frankfurt am Main Gräfstraße,50.12122,8.65197
 Mainova DE-Frankfurt am Main Heerstraße,50.14492,8.60648
 Mainova DE-Frankfurt am Main Heinrich-Lanz-Allee,50.19058,8.65207
 Mainova DE-Frankfurt am Main Klapperfeldstraße,50.1156,8.69083
+Mainova DE-Frankfurt am Main Kornmarkt,50.11217,8.6799
 Mainova DE-Frankfurt am Main Kuhwaldstraße,50.11712,8.64092
 Mainova DE-Frankfurt am Main Lange Meile,50.19125,8.63863
 Mainova DE-Frankfurt am Main Ludwig-Erhard-Anlage,50.11205,8.64255
@@ -30382,6 +30401,7 @@ swisscharge CH-Basel Vogesenstrasse,47.5699,7.5739
 swisscharge CH-Basel Zürcherstrasse,47.55502,7.61259
 swisscharge CH-Bellach Bielstrasse,47.21085,7.50298
 swisscharge CH-Bern Viktoriastrasse,46.9529,7.45755
+swisscharge CH-Bilten Grabenstrasse,47.15424,9.0252
 swisscharge CH-Bregaglia Str. Principale,46.34385,9.59221
 swisscharge CH-Buchs Edisonstrasse,47.39259,8.0659,25
 swisscharge CH-Cadenazzo Via Stazione,46.15203,8.93753,8
@@ -32462,6 +32482,7 @@ ZSE SK-Žilina-Solinky Prielohy,49.19491,18.73937
 
 ZukunftsEnergie-Nordostbayern DE-Wunsiedel Rot-Kreuz-Straße,50.0393,11.9956
 
+Zunder ES-Aire de la Porte des Landes Est,44.36107,-0.8496
 Zunder ES-Aranga AC-151,43.21173,-8.05183
 Zunder ES-Aranguren PA-30,42.80046,-1.6115
 Zunder ES-Bormujos Salida,37.3752,-6.086
