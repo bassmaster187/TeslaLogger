@@ -68,5 +68,29 @@ namespace UnitTestsTeslalogger
             Assert.IsTrue(a.available + a.occupied + a.down + a.unknown + a.unhandled == a.total);
             Assert.IsTrue(a.available <= a.total);
         }
+
+        [TestMethod]
+        [Timeout(90000)]
+        public void GetGuestAvailability_UnreachableApi_ReturnsEmpty_Available()
+        {
+            Car c = CreateTestCar();
+
+            NearbySuCService.Available a = CallGetGuestAvailability(c, 1674);
+
+            if (a.total == 0)
+            {
+                // API error (e.g. 403/timeout): the method returns an empty Available, never throws
+                Assert.AreEqual(0, a.available);
+                Assert.AreEqual(0, a.occupied);
+                Assert.AreEqual(0, a.down);
+                Assert.AreEqual(0, a.unknown);
+                Assert.AreEqual(0, a.unhandled);
+            }
+            else
+            {
+                Assert.Inconclusive("Tesla guest API reachable - cannot verify error path");
+            }
+        }
     }
 }
+

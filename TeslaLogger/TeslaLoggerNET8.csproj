@@ -147,4 +147,19 @@
     <PackageReference Include="System.Reflection.Metadata" Version="8.0.0" />
     <PackageReference Include="System.Runtime.CompilerServices.Unsafe" Version="6.0.0" />
   </ItemGroup>
+  <ItemGroup>
+    <PackageDownload Include="CurlImpersonate" Version="[1.0.0]" />
+  </ItemGroup>
+  <Target Name="CopyCurlImpersonateNatives" AfterTargets="Build">
+    <ItemGroup>
+      <CurlImpersonateNativeFiles Include="$(NuGetPackageRoot)curlimpersonate/1.0.0/runtimes/**/native/*" />
+    </ItemGroup>
+    <Copy SourceFiles="@(CurlImpersonateNativeFiles)" DestinationFiles="@(CurlImpersonateNativeFiles->'$(OutputPath)runtimes/%(RecursiveDir)%(Filename)%(Extension)')" SkipUnchangedFiles="true" />
+  </Target>
+  <Target Name="CopyCurlImpersonateNativesPublish" AfterTargets="Publish">
+    <ItemGroup>
+      <CurlImpersonateNativeFiles Include="$(NuGetPackageRoot)curlimpersonate/1.0.0/runtimes/**/native/*" />
+    </ItemGroup>
+    <Copy SourceFiles="@(CurlImpersonateNativeFiles)" DestinationFiles="@(CurlImpersonateNativeFiles->'$(PublishDir)runtimes/%(RecursiveDir)%(Filename)%(Extension)')" SkipUnchangedFiles="true" />
+  </Target>
 </Project>

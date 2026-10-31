@@ -489,28 +489,50 @@ VALUES(
         {
             Available a = new Available();
 
-            string payload = "{\"operationName\":\"GetSiteDetails\",\"query\":\"\\n    query GetSiteDetails($siteId: SiteIdInput!) {\\n  chargingNetwork {\\n    site(siteId: $siteId) {\\n      address {\\n        countryCode\\n      }\\n      chargerList {\\n        id\\n        label\\n        availability\\n      }\\n      holdAmount {\\n        amount\\n        currencyCode\\n      }\\n      maxPowerKw\\n      name\\n      programType\\n      publicStallCount\\n      trtId\\n      pricing {\\n        userRates {\\n          activePricebook {\\n            charging {\\n              ...ChargingRate\\n            }\\n            parking {\\n              ...ChargingRate\\n            }\\n            congestion {\\n              ...ChargingRate\\n            }\\n          }\\n        }\\n      }\\n    }\\n  }\\n}\\n    \\n    fragment ChargingRate on ChargingUserRate {\\n  uom\\n  rates\\n  buckets {\\n    start\\n    end\\n  }\\n  bucketUom\\n  currencyCode\\n  programType\\n  vehicleMakeType\\n  touRates {\\n    enabled\\n    activeRatesByTime {\\n      startTime\\n      endTime\\n      rates\\n    }\\n  }\\n}\\n    \",\"variables\":{\"siteId\":{\"byTrtId\":{\"trtId\":$SITEID$,\"programType\":\"PTSCH\",\"chargingExperience\":\"ADHOC\",\"locale\":\"de-DE\"}}}}";
+            string payload = "{\"operationName\":\"GetSiteDetails\",\"query\":\"\\n    query GetSiteDetails($siteId: SiteIdInput!) {\\n  chargingNetwork {\\n    site(siteId: $siteId) {\\n      address {\\n        countryCode\\n      }\\n      chargerList {\\n        id\\n        label\\n        availability\\n      }\\n      holdAmount {\\n        amount\\n        currencyCode\\n      }\\n      maxPowerKw\\n      name\\n      programType\\n      publicStallCount\\n      trtId\\n      locationGUID\\n      pricing {\\n        userRates {\\n          activePricebook {\\n            charging {\\n              ...ChargingRate\\n            }\\n            parking {\\n              ...ChargingRate\\n            }\\n            congestion {\\n              ...ChargingRate\\n            }\\n          }\\n        }\\n      }\\n    }\\n  }\\n}\\n    \\n    fragment ChargingRate on ChargingUserRate {\\n  uom\\n  rates\\n  buckets {\\n    start\\n    end\\n  }\\n  bucketUom\\n  currencyCode\\n  programType\\n  vehicleMakeType\\n  touRates {\\n    enabled\\n    activeRatesByTime {\\n      startTime\\n      endTime\\n      rates\\n    }\\n  }\\n}\\n    \",\"variables\":{\"siteId\":{\"byTrtId\":{\"trtId\":$SITEID$,\"programType\":\"PTSCH\",\"chargingExperience\":\"ADHOC\",\"locale\":\"de-DE\"}}}}";
             payload = payload.Replace("$SITEID$", trid.ToString());
 
-            var client = TeslaGuestHttpClient();
+            if (IsGuestApiBlocked(out DateTime blockedUntil))
+            {
+                Tools.DebugLog($"GuestAPI blocked until {blockedUntil:u}, using OwnerAPI for trtId {trid}");
+                Available owner = GetGuestAvailabilityOwnerApi(car, trid, out string ownerError);
+                if (owner != null)
+                    return owner;
 
-            // Tesla protects the guest API with Akamai Bot Manager. Load the
-            // site page first so the session receives the required cookies.
-            EnsureGuestSession(client, trid);
+                Tools.DebugLog($"OwnerAPI fallback failed for trtId {trid}: {ownerError}");
+                ReportOwnerFallbackError(car, trid, ownerError);
+                return a;
+            }
 
-            string content = PostGuestGraphQl(client, trid, payload, GuestGraphQlUrl, out string primaryError);
+            string content = PostGuestGraphQl(trid, payload, GuestGraphQlUrl, out string primaryError, out bool primaryTransient);
+            if (content == null && !primaryTransient)
+            {
+                content = PostGuestGraphQl(trid, payload, GuestGraphQlUrlFallback, out string fallbackError, out bool fallbackTransient);
+                primaryError = $"{primaryError} | Fallback: {fallbackError}";
+                primaryTransient = fallbackTransient;
+            }
+
             if (content == null)
             {
-                EnsureGuestSession(client, trid, true);
-                content = PostGuestGraphQl(client, trid, payload, GuestGraphQlUrlFallback, out string fallbackError);
-                if (content == null)
+                if (primaryTransient)
+                    RegisterGuestApiBlock();
+
+                if (primaryTransient)
                 {
-                    string message = $"GetGuestAvailability failed for trtId {trid}: {primaryError} | Fallback: {fallbackError}";
-                    Tools.DebugLog(message);
-                    car?.CreateExeptionlessLog("Guest SuC", message, Exceptionless.Logging.LogLevel.Error).Submit();
-                    return a;
+                    Available owner = GetGuestAvailabilityOwnerApi(car, trid, out string ownerError);
+                    if (owner != null)
+                        return owner;
+
+                    primaryError = $"{primaryError} | OwnerAPI: {ownerError}";
                 }
+
+                string message = $"GetGuestAvailability failed for trtId {trid}: {primaryError}";
+                Tools.DebugLog(message);
+                car?.CreateExeptionlessLog("Guest SuC", message, Exceptionless.Logging.LogLevel.Error).Submit();
+                return a;
             }
+
+            ResetGuestApiBlock();
 
             dynamic j = JsonConvert.DeserializeObject(content);
             if (j?["data"] == null || j["errors"] != null)
@@ -525,80 +547,242 @@ VALUES(
             JArray chargers = site["chargerList"];
 
             string name = site["name"];
+            CacheTridLocationGuid(trid, site["locationGUID"]?.ToString());
 
             a.total = chargers.Count;
 
             foreach (dynamic charger in chargers)
             {
-                string id = charger["id"];
-                string label = charger["label"];
-
-
                 string availability = charger["availability"];
-                // System.Diagnostics.Debug.WriteLine($"Label: {label} availability: {availability}");
-
-                if (availability == "CHARGER_AVAILABILITY_AVAILABLE")
-                    a.available++;
-                else if (availability == "CHARGER_AVAILABILITY_OCCUPIED")
-                    a.occupied++;
-                else if (availability == "CHARGER_AVAILABILITY_DOWN")
-                    a.down++;
-                else if (availability == "CHARGER_AVAILABILITY_UNKNOWN")
-                    a.unknown++;
-                else
-                    a.unhandled++;
-
+                CountAvailability(availability, a);
             }
 
-            if (!string.IsNullOrEmpty(name))
-            {
-                Tools.DebugLog($"#{car.CarInDB} Guest SuC: <{name}> <{a.available}> <{a.total}>");
-
-                ArrayList send = new ArrayList();
-                Dictionary<string, object> sendKV = new Dictionary<string, object>();
-                send.Add(sendKV);
-                sendKV.Add("n", name);
-                // sendKV.Add("lat", lat);
-                // sendKV.Add("lng", lng);
-                sendKV.Add("ts", DateTime.UtcNow.ToString("s", Tools.ciEnUS));
-                sendKV.Add("a", a.available);
-                sendKV.Add("t", a.total);
-                sendKV.Add("kw", 0);
-                sendKV.Add("m", "");
-                ShareSuc(send, false, out _, out _);
-            }
+            ShareSucAvailability(car, name, a);
 
             return a;
         }
 
-        static string PostGuestGraphQl(HttpClient client, int trid, string payload, string url, out string error)
+        static void ShareSucAvailability(Car car, string name, Available a)
+        {
+            if (string.IsNullOrEmpty(name))
+                return;
+
+            Tools.DebugLog($"#{car.CarInDB} Guest SuC: <{name}> <{a.available}> <{a.total}>");
+
+            ArrayList send = new ArrayList();
+            Dictionary<string, object> sendKV = new Dictionary<string, object>();
+            send.Add(sendKV);
+            sendKV.Add("n", name);
+            sendKV.Add("ts", DateTime.UtcNow.ToString("s", Tools.ciEnUS));
+            sendKV.Add("a", a.available);
+            sendKV.Add("t", a.total);
+            sendKV.Add("kw", 0);
+            sendKV.Add("m", "");
+            ShareSuc(send, false, out _, out _);
+        }
+
+        static Available GetGuestAvailabilityOwnerApi(Car car, int trid, out string error)
         {
             error = null;
 
+            string token = car?.webhelper?.Tesla_token;
+            if (string.IsNullOrEmpty(token) || token == "NULL")
+            {
+                error = "no Tesla token available";
+                return null;
+            }
+
+            string locationGuid = GetCachedLocationGuid(trid);
+            string idType = locationGuid != null ? "LOCATION_GUID" : "SITE_ID";
+            string idValue = locationGuid ?? trid.ToString();
+
+            string payload = "{\"operationName\":\"getChargingSiteInformation\",\"query\":\"\\n    query getChargingSiteInformation($id: ChargingSiteIdentifierInputType!, $vehicleMakeType: ChargingVehicleMakeTypeEnum, $deviceCountry: String!, $deviceLanguage: String!) {\\n  charging {\\n    site(\\n      id: $id\\n      deviceCountry: $deviceCountry\\n      deviceLanguage: $deviceLanguage\\n      vehicleMakeType: $vehicleMakeType\\n    ) {\\n      siteStatic {\\n        name\\n        publicStallCount\\n        locationGUID\\n        trtId {\\n          value\\n        }\\n      }\\n      siteDynamic {\\n        chargersAvailable {\\n          value\\n        }\\n        chargerDetails {\\n          availability\\n        }\\n      }\\n    }\\n  }\\n}\\n    \",\"variables\":{\"id\":{\"id\":\"$SITEID$\",\"type\":\"$IDTYPE$\"},\"vehicleMakeType\":\"NON_TESLA\",\"deviceCountry\":\"DE\",\"deviceLanguage\":\"en\"}}";
+            payload = payload.Replace("$SITEID$", idValue).Replace("$IDTYPE$", idType);
+
+            string url = "https://akamai-apigateway-charging-ownership.tesla.com/graphql?deviceLanguage=en&deviceCountry=DE&ttpLocale=de_DE&vin=" + Uri.EscapeDataString(car.Vin ?? "") + "&operationName=getChargingSiteInformation";
+
             try
             {
-                using (var request = new HttpRequestMessage(HttpMethod.Post, url))
+                using (var client = new HttpClient())
                 {
-                    request.Content = new StringContent(payload, Encoding.UTF8, "application/json");
-                    request.Headers.TryAddWithoutValidation("accept", "application/json, text/plain, */*");
-                    request.Headers.TryAddWithoutValidation("origin", "https://www.tesla.com");
-                    request.Headers.TryAddWithoutValidation("referer", string.Format(GuestSiteUrl, trid));
-                    request.Headers.TryAddWithoutValidation("x-async-request", "true");
-                    request.Headers.TryAddWithoutValidation("x-txid", Guid.NewGuid().ToString());
-                    request.Headers.TryAddWithoutValidation("sec-fetch-site", "same-origin");
-                    request.Headers.TryAddWithoutValidation("sec-fetch-mode", "cors");
-                    request.Headers.TryAddWithoutValidation("sec-fetch-dest", "empty");
+                    client.Timeout = TimeSpan.FromSeconds(20);
+                    client.DefaultRequestHeaders.TryAddWithoutValidation("Authorization", "Bearer " + token);
+                    client.DefaultRequestHeaders.TryAddWithoutValidation("User-Agent", "okhttp/4.11.0");
+                    client.DefaultRequestHeaders.TryAddWithoutValidation("x-tesla-user-agent", "TeslaApp/4.44.5-3304/3a5d531cc3/android/27");
+                    client.DefaultRequestHeaders.TryAddWithoutValidation("Accept", "*/*");
 
-                    using (var response = client.Send(request))
+                    using (var content = new StringContent(payload, Encoding.UTF8, "application/json"))
+                    using (var response = client.PostAsync(url, content).Result)
                     {
-                        string content = response.Content.ReadAsStringAsync().Result;
-                        if (response.IsSuccessStatusCode)
-                            return content;
+                        string body = response.Content.ReadAsStringAsync().Result;
+                        if (!response.IsSuccessStatusCode)
+                        {
+                            error = $"OwnerAPI HTTP {(int)response.StatusCode}: {Truncate(body, 1000)}";
+                            Tools.DebugLog(error);
+                            return null;
+                        }
 
-                        error = $"HTTP {(int)response.StatusCode}: {Truncate(content, 1000)}";
-                        Tools.DebugLog($"GuestAPI {url} returned {(int)response.StatusCode}: {content}");
+                        JObject j = JsonConvert.DeserializeObject<JObject>(body);
+                        JToken site = j?["data"]?["charging"]?["site"];
+                        if (site == null)
+                        {
+                            error = $"OwnerAPI unexpected response: {Truncate(body, 1000)}";
+                            return null;
+                        }
+
+                        Available a = new Available();
+                        string name = site["siteStatic"]?["name"]?.ToString();
+                        string ownerLocationGuid = site["siteStatic"]?["locationGUID"]?.ToString();
+                        int ownerTrid = 0;
+                        if (int.TryParse(site["siteStatic"]?["trtId"]?["value"]?.ToString(), out ownerTrid))
+                        {
+                            if (ownerTrid != trid)
+                            {
+                                error = $"OwnerAPI returned trtId {ownerTrid} for requested trtId {trid}";
+                                return null;
+                            }
+
+                            CacheTridLocationGuid(ownerTrid, ownerLocationGuid);
+                        }
+
+                        CacheTridLocationGuid(trid, ownerLocationGuid);
+
+                        JArray chargers = site["siteDynamic"]?["chargerDetails"] as JArray;
+
+                        if (chargers == null || chargers.Count == 0)
+                        {
+                            error = $"OwnerAPI returned no charger details: {Truncate(body, 1000)}";
+                            return null;
+                        }
+
+                        a.total = chargers.Count;
+
+                        foreach (dynamic charger in chargers)
+                        {
+                            CountAvailability(charger["availability"]?.ToString(), a);
+                        }
+
+                        ShareSucAvailability(car, name, a);
+                        return a;
                     }
                 }
+            }
+            catch (Exception ex)
+            {
+                error = ex.ToString();
+                Tools.DebugLog("OwnerAPI exception", ex);
+                return null;
+            }
+        }
+
+        static void CountAvailability(string availability, Available a)
+        {
+            if (availability == "CHARGER_AVAILABILITY_AVAILABLE")
+                a.available++;
+            else if (availability == "CHARGER_AVAILABILITY_OCCUPIED")
+                a.occupied++;
+            else if (availability == "CHARGER_AVAILABILITY_DOWN")
+                a.down++;
+            else if (availability == "CHARGER_AVAILABILITY_UNKNOWN")
+                a.unknown++;
+            else
+                a.unhandled++;
+        }
+
+        static DateTime _ownerFallbackErrorReported = DateTime.MinValue;
+
+        static readonly object _tridLocationGuidLock = new object();
+        static Dictionary<int, string> _tridLocationGuids;
+
+        static string GetTridLocationGuidPath()
+        {
+            return System.IO.Path.Combine(FileManager.GetExecutingPath(), "trid_locationguid.json");
+        }
+
+        static Dictionary<int, string> LoadTridLocationGuids()
+        {
+            try
+            {
+                string path = GetTridLocationGuidPath();
+                if (System.IO.File.Exists(path))
+                    return JsonConvert.DeserializeObject<Dictionary<int, string>>(System.IO.File.ReadAllText(path)) ?? new Dictionary<int, string>();
+            }
+            catch (Exception ex)
+            {
+                Tools.DebugLog("Guest SuC cache load exception", ex);
+            }
+
+            return new Dictionary<int, string>();
+        }
+
+        static string GetCachedLocationGuid(int trid)
+        {
+            lock (_tridLocationGuidLock)
+            {
+                if (_tridLocationGuids == null)
+                    _tridLocationGuids = LoadTridLocationGuids();
+
+                return _tridLocationGuids.TryGetValue(trid, out string guid) ? guid : null;
+            }
+        }
+
+        static void CacheTridLocationGuid(int trid, string locationGuid)
+        {
+            if (trid <= 0 || string.IsNullOrEmpty(locationGuid))
+                return;
+
+            lock (_tridLocationGuidLock)
+            {
+                if (_tridLocationGuids == null)
+                    _tridLocationGuids = LoadTridLocationGuids();
+
+                if (_tridLocationGuids.TryGetValue(trid, out string existing) && existing == locationGuid)
+                    return;
+
+                _tridLocationGuids[trid] = locationGuid;
+
+                try
+                {
+                    System.IO.File.WriteAllText(GetTridLocationGuidPath(), JsonConvert.SerializeObject(_tridLocationGuids));
+                }
+                catch (Exception ex)
+                {
+                    Tools.DebugLog("Guest SuC cache save exception", ex);
+                }
+            }
+        }
+
+        static void ReportOwnerFallbackError(Car car, int trid, string error)
+        {
+            if (DateTime.UtcNow - _ownerFallbackErrorReported < TimeSpan.FromHours(6))
+                return;
+
+            _ownerFallbackErrorReported = DateTime.UtcNow;
+            string message = $"GetGuestAvailability OwnerAPI fallback failed for trtId {trid}: {error}";
+            car?.CreateExeptionlessLog("Guest SuC", message, Exceptionless.Logging.LogLevel.Error).Submit();
+        }
+
+        static string PostGuestGraphQl(int trid, string payload, string url, out string error, out bool transient)
+        {
+            error = null;
+            transient = false;
+
+            try
+            {
+                TeslaGuestCurl.Response response = TeslaGuestCurl.Post(url, payload, string.Format(GuestSiteUrl, trid));
+                if (!string.IsNullOrEmpty(response.Error))
+                {
+                    error = response.Error;
+                    Tools.DebugLog($"GuestAPI {url} exception: {response.Error}");
+                    return null;
+                }
+
+                if (response.StatusCode >= 200 && response.StatusCode < 300)
+                    return response.Body;
+
+                transient = response.StatusCode == 403 || response.StatusCode == 429 || response.StatusCode == 503;
+                error = $"HTTP {response.StatusCode}: {Truncate(response.Body, 1000)}";
+                Tools.DebugLog($"GuestAPI {url} returned {response.StatusCode}: {response.Body}");
             }
             catch (Exception ex)
             {
@@ -617,40 +801,37 @@ VALUES(
             return value.Substring(0, length);
         }
 
-        static DateTime _guestSessionCreated = DateTime.MinValue;
-        static readonly object _guestSessionLock = new object();
+        static DateTime _guestApiBlockedUntil = DateTime.MinValue;
+        static int _guestApiBlockCount = 0;
+        static readonly object _guestApiBlockLock = new object();
 
-        static void EnsureGuestSession(HttpClient client, int trid, bool force = false)
+        static bool IsGuestApiBlocked(out DateTime blockedUntil)
         {
-            lock (_guestSessionLock)
+            lock (_guestApiBlockLock)
             {
-                if (!force && DateTime.UtcNow - _guestSessionCreated < TimeSpan.FromHours(6))
-                    return;
+                blockedUntil = _guestApiBlockedUntil;
+                return DateTime.UtcNow < _guestApiBlockedUntil;
+            }
+        }
 
-                try
-                {
-                    using (var request = new HttpRequestMessage(HttpMethod.Get, string.Format(GuestSiteUrl, trid)))
-                    {
-                        request.Headers.TryAddWithoutValidation("accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8");
-                        request.Headers.TryAddWithoutValidation("referer", "https://www.tesla.com/de_de/charging");
-                        request.Headers.TryAddWithoutValidation("upgrade-insecure-requests", "1");
-                        request.Headers.TryAddWithoutValidation("sec-fetch-site", "none");
-                        request.Headers.TryAddWithoutValidation("sec-fetch-mode", "navigate");
-                        request.Headers.TryAddWithoutValidation("sec-fetch-dest", "document");
-                        request.Headers.TryAddWithoutValidation("sec-fetch-user", "?1");
+        static void RegisterGuestApiBlock()
+        {
+            lock (_guestApiBlockLock)
+            {
+                _guestApiBlockCount = Math.Min(_guestApiBlockCount + 1, 5);
+                int minutes = 30 * (1 << (_guestApiBlockCount - 1));
+                _guestApiBlockedUntil = DateTime.UtcNow.AddMinutes(minutes);
+                Tools.DebugLog($"GuestAPI blocked for {minutes} minutes (consecutive blocks: {_guestApiBlockCount})");
+            }
+        }
 
-                        using (var response = client.Send(request))
-                        {
-                            _guestSessionCreated = DateTime.UtcNow;
-                            Tools.DebugLog($"GuestAPI session init: {(int)response.StatusCode}");
-                        }
-                    }
-                }
-                catch (Exception ex)
-                {
-                    _guestSessionCreated = DateTime.MinValue;
-                    Tools.DebugLog("GuestAPI session init exception", ex);
-                }
+        static void ResetGuestApiBlock()
+        {
+            lock (_guestApiBlockLock)
+            {
+                _guestApiBlockCount = 0;
+                _guestApiBlockedUntil = DateTime.MinValue;
+                _ownerFallbackErrorReported = DateTime.MinValue;
             }
         }
         /*
@@ -745,38 +926,6 @@ VALUES(
             public int total = 0;
             public int down = 0;
             public int unknown = 0;
-        }
-
-        static HttpClient _teslaGuestHttpClient;
-        static HttpClient TeslaGuestHttpClient()
-        {
-            if (_teslaGuestHttpClient == null)
-            {
-                var ch = new HttpClientHandler
-                {
-                    CookieContainer = new CookieContainer(),
-                    AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate | DecompressionMethods.Brotli,
-                    AllowAutoRedirect = true,
-                    UseCookies = true
-                };
-
-                var client = new HttpClient(ch)
-                {
-                    BaseAddress = new Uri("https://www.tesla.com"),
-                    Timeout = TimeSpan.FromSeconds(20)
-                };
-
-                client.DefaultRequestHeaders.TryAddWithoutValidation("accept", "application/json, text/plain, */*");
-                client.DefaultRequestHeaders.TryAddWithoutValidation("accept-language", "de-DE,de;q=0.9,en-US;q=0.8,en;q=0.7");
-                client.DefaultRequestHeaders.TryAddWithoutValidation("user-agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36");
-                client.DefaultRequestHeaders.TryAddWithoutValidation("sec-ch-ua", "\"Not:A-Brand\";v=\"8\", \"Chromium\";v=\"156\", \"Google Chrome\";v=\"156\"");
-                client.DefaultRequestHeaders.TryAddWithoutValidation("sec-ch-ua-mobile", "?0");
-                client.DefaultRequestHeaders.TryAddWithoutValidation("sec-ch-ua-platform", "\"Windows\"");
-
-                _teslaGuestHttpClient = client;
-            }
-
-            return _teslaGuestHttpClient;
         }
     }
 }
