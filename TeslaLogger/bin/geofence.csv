@@ -5032,6 +5032,7 @@ Supercharger-V3 US-Sand City CA,36.62208,-121.84422
 Supercharger US-Santa Ana CA,33.77583,-117.87204
 Supercharger-V4 US-Santa Ana CA 17th St,33.75932,-117.8565
 Supercharger US-Santa Ana CA E 5th St,33.7487,-117.86556
+Supercharger-V4 US-Santa Ana CA N Grand Ave,33.77103,-117.85148
 Supercharger-V3 US-Santa Barbara CA,34.43997,-119.75318
 Supercharger-V3 US-Santa Barbara CA Anacapa St,34.41927,-119.69738
 Supercharger US-Santa Clara CA,37.39497,-121.9461
@@ -7260,6 +7261,7 @@ Supercharger-V3 US-Leesburg VA California Dr NE,39.10294,-77.52548
 Supercharger US-Lexington VA,37.79696,-79.41903
 Supercharger-V3 US-Lexington VA E Nelson St,37.77856,-79.43406
 Supercharger-V3 US-Lexington VA Hotel Dr,37.79828,-79.4182
+Supercharger-V4 US-Lorton VA,38.7008,-77.2209
 Supercharger-V3 US-Lynchburg VA,37.32496,-79.19005
 Supercharger-V4 US-Lynchburg VA Timberlake Rd,37.354,-79.2254
 Supercharger-V3 US-Madison Heights VA,37.46605,-79.1177
@@ -7618,6 +7620,7 @@ AAE AT-Kitzbühel Im Gries,47.44723,12.39186
 AAE AT-Kitzbühel Jochberger Straße,47.44414,12.39833
 AAE AT-Kötschach-Mauthen,46.67127,13.00102
 AAE AT-Rauris Seidlwinkl,47.11054,12.83251
+AAE AT-Schwaz Josef-Wopfner-Straße,47.3462,11.7083
 AAE AT-Seeboden Seepromenade,46.81602,13.51886
 AAE AT-Wolkersdorf Resselstraße,48.36876,16.5046
 
@@ -8464,7 +8467,7 @@ Allego DE-Frankfurt am Main Flughafen,50.02636,8.58726
 Allego DE-Frankfurt am Main Franklinstraße,50.11736,8.628
 Allego DE-Frankfurt am Main Goldsteinstraße,50.08404,8.61942
 Allego DE-Frankfurt am Main Thea-Rasche-Straße,50.05528,8.58736
-Allego DE-Frechen Europaallee,50.91624,6.8356
+Allego DE-Frechen Europaallee,50.9158,6.83518
 Allego DE-Freden (Leine) Winzenburger Straße,51.9262,9.902
 Allego DE-Fredersdorf-Vogelsdorf Frankfurter Chaussee,52.49842,13.74588
 Allego DE-Freiberg Frauensteiner Straße,50.9114,13.3577
@@ -11585,6 +11588,7 @@ Clever DK-Rødekro Skånevej,55.0694,9.35293
 Clever DK-Rønne Østre Ringvej,55.0928,14.72983
 Clever DK-Silkeborg Borgergade,56.18367,9.54622
 Clever DK-Silkeborg Nordre Højmarksvej,56.18762,9.5103,24
+Clever DK-Silkeborg Padborgvej,56.1714,9.4957
 Clever DK-Silkeborg Torvet,56.16826,9.55104
 Clever DK-Skagen Christian Xs Vej,57.72364,10.59067
 Clever DK-Skærbæk Jernbanegade,55.15875,8.76943
@@ -13218,6 +13222,7 @@ Electra DE-Berlin Gülzower Straße,52.515,13.58463
 Electra DE-Berlin Saatwinkler Damm,52.54743,13.30953
 Electra DE-Bielefeld Detmolder Straße,52.0015,8.5727
 Electra DE-Bischofsheim Am Schindberg,49.9766,8.37798
+Electra DE-Butzbach In der Alböhn,50.42942,8.68306
 Electra DE-Chemnitz Bergstraße,50.84327,12.90854
 Electra DE-Coburg Callenberger Straße,50.27017,10.95302
 Electra DE-Dasing Laimeringer Straße,48.3908,11.06438,30
@@ -13267,6 +13272,7 @@ Electra FR-Morschwiller-le-Bas Rue de Mulhouse,47.73686,7.28618
 Electra FR-Nanterre Av. Pablo Picasso,48.89171,2.21374
 Electra FR-Rosny-sous-Bois Rue de Lisbonne,48.87797,2.47551
 Electra FR-Villebon-sur-Yvette Chem. de Briis,48.70423,2.25294
+Electra FR-Villenave-d’Ornon Rue Salvador Dali,44.78404,-0.58747
 Electra FR-Zac des Tulipes Rue de Montservon,48.96878,2.46322
 Electra FR-Échirolles Rue de Comboire,45.15107,5.69677
 Electra IT-Affi Località Canove,45.55298,10.7811
@@ -18484,7 +18490,6 @@ EVGo US-Long Beach CA E Spring St,33.81104,-118.11755,30
 EVGo US-Long Beach CA N Bellflower Blvd,33.79383,-118.12393,30
 EVGo US-Long Island NY 36th Ave,40.75587,-73.92848,30
 EVGo US-Lordsburg NM Old Hwy 70,32.34214,-108.67822,30
-EVGo US-Lorton VA Lorton Market St,38.70096,-77.22085,30
 EVGo US-Los Alamitos CA Katella Ave,33.80228,-118.07166,30
 EVGo US-Los Altos CA Grant Rd,37.3419,-122.07096,30
 EVGo US-Los Angeles CA Beverly Blvd,34.07734,-118.3885,30
@@ -21478,7 +21483,7 @@ GFX ES-Ciudad Real Calle Julio Melgar,38.9947,-3.9298
 
 GGEW DE-Lampertheim Wilhelmstraße,49.59467,8.46909,30
 GGEW DE-Lorsch Lindenstraße,49.65908,8.56714
-GGEW DE-Zwingenberg Melibokusstraße,49.72175,8.6107
+GGEW DE-Zwingenberg Melibokusstraße,49.72175,8.6107,62
 
 Glattwerk CH-Dübendorf Bettlistrasse,47.39796,8.62451
 
@@ -25664,7 +25669,6 @@ MB DE-Autohof Neuberg,50.18235,9.0081,20
 MB DE-Autohof Sangerhausen,51.45068,11.3053,18
 MB DE-Autohof Wernberg,49.53307,12.13475,25
 MB DE-Berlin Salzufer,52.5147,13.3305
-MB DE-Butzbach In der Alböhn,50.42942,8.68306
 MB DE-Dortmund Wittekindstraße,51.4962,7.4425
 MB DE-Erlangen Frauenauracher Straße,49.5762,10.96785
 MB DE-Essen Hans-Böckler-Straße,51.46104,6.99876
@@ -26169,6 +26173,7 @@ Monta DK-Ringkøbing Torvegade,56.09063,8.23994
 Monta DK-Svendborg Ryttervej,55.0572,10.5787
 Monta DK-Vejers Strand Vejers Havvej,55.62547,8.12502
 Monta FR-Bonifacio Av. Sylvère Bohn,41.38904,9.16589
+Monta FR-Saint-Désert La Condemaine Rd,46.7532,4.719
 Monta GB-Newcastle upon Tyne Gosforth,55.0039,-1.61993
 Monta RO-Cocani A1,44.63711,25.90258
 Monta SE-Granö Beckasin,64.24773,19.30651
@@ -31134,6 +31139,7 @@ TotalEnergies FR-Aire de Meung-sur-Loire,47.8196,1.64183
 TotalEnergies FR-Aire de Meung-sur-Loire,47.8202,1.64043
 TotalEnergies FR-Aire de Mâcon La Salle,46.41875,4.86536
 TotalEnergies FR-Aire de Nîmes Marguerittes Nord,43.87547,4.45011
+TotalEnergies FR-Aire de Palombière,45.00178,0.03666
 TotalEnergies FR-Aire de Poitou Charentes,46.29759,-0.36964
 TotalEnergies FR-Aire De Ressons Est,49.52348,2.72219,80
 TotalEnergies FR-Aire de Solaize,45.65092,4.83542,30
@@ -32459,6 +32465,7 @@ ZSE SK-Bratislava Dunajská,48.1445,17.1142
 ZSE SK-Bratislava Jelačičova,48.15691,17.13035
 ZSE SK-Bratislava Námestie Franza Liszta,48.15626,17.1068
 ZSE SK-Bratislava Vazovova,48.15439,17.1176
+ZSE SK-Bytča Hlavná,49.22094,18.567
 ZSE SK-Chocholná-Velčice Eurofuel,48.8703,17.95632
 ZSE SK-Dolný Kubín Aleja Slobody,49.21574,19.29915
 ZSE SK-Galanta Esterházyovcov,48.19894,17.73317
