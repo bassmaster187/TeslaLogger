@@ -470,7 +470,7 @@ VALUES(
 
                     if (int.TryParse(resultContent, out int trid))
                     {
-                        GetGuestAvailability(c, trid);
+                        // GetGuestAvailability(c, trid); Doesn't work anymore
                     }
                 }
             }
