@@ -2138,7 +2138,7 @@ Supercharger-V4 DE-Hofheim am Taunus,50.05733,8.40944
 Supercharger-V4 DE-Hohenwarsleben,52.17406,11.49452,40
 Supercharger-V3 DE-Holdorf,52.597843,8.11891
 Supercharger-V3 DE-Holzkirchen,47.881386,11.701631
-Supercharger-V4 DE-Holzkirchen Bergfeldstraße,47.89022,11.72186
+Supercharger-V4 DE-Holzkirchen Bergfeldstraße,47.8903,11.72172
 Supercharger-V4 DE-Idar-Oberstein,49.73079,7.3934
 Supercharger-V3 DE-Illertissen,48.21882,10.127614,25
 Supercharger-V4 DE-Ingolstadt,48.774,11.38844
@@ -4380,6 +4380,7 @@ Supercharger-V4 TR-Afyonkarahisar Dörtyol,38.79183,30.45374
 Supercharger-V3 TR-Akhisar,38.930236,27.703596
 Supercharger-V4 TR-Amasya,40.86888,35.49667
 Supercharger-V3 TR-Ankara,39.949583,32.832923
+Supercharger-V4 TR-Antalya Konyaaltı,36.83402,30.59606
 Supercharger-V4 TR-Beylikdüzü İstanbul,41.01997,28.62815
 Supercharger-V4 TR-Bolu,40.72398,31.46504
 Supercharger-V4 TR-Bolu Merkez,40.73645,31.56815
@@ -13215,11 +13216,20 @@ Electra CH-Bern Mingerstrasse,46.9592,7.46917
 Electra CH-Crissier Chem. de l’Esparcette,46.5528,6.57224
 Electra CH-Rubigen Hunzigen,46.8916,7.54217,16
 Electra CH-Zürich Förrlibuckstrasse,47.39168,8.5165
+Electra DE-Augsburg Haunstetter Straße,48.3471,10.90502
+Electra DE-Aurich Korbweidenstraße,53.45056,7.50673
+Electra DE-Autohof Cloppenburg,52.8272,8.00026,25
+Electra DE-Autohof Gramschatzer Wald,49.91243,10.00036,15
 Electra DE-Autohof Gramschatzer Wald,49.9126,9.99987,18
+Electra DE-Autohof Mühldorf,48.27283,12.55063
+Electra DE-Autohof Neuberg,50.18235,9.0081,20
+Electra DE-Autohof Sangerhausen,51.45068,11.3053,18
+Electra DE-Autohof Wernberg,49.53307,12.13475,25
 Electra DE-Bad Nenndorf Piepmühle,52.33528,9.40247
 Electra DE-Berlin Drontheimer Straße,52.55893,13.37657
 Electra DE-Berlin Gülzower Straße,52.515,13.58463
 Electra DE-Berlin Saatwinkler Damm,52.54743,13.30953
+Electra DE-Berlin Salzufer,52.5147,13.3305
 Electra DE-Bielefeld Detmolder Straße,52.0015,8.5727
 Electra DE-Bischofsheim Am Schindberg,49.9766,8.37798
 Electra DE-Butzbach In der Alböhn,50.42942,8.68306
@@ -13228,30 +13238,54 @@ Electra DE-Coburg Callenberger Straße,50.27017,10.95302
 Electra DE-Dasing Laimeringer Straße,48.3908,11.06438,30
 Electra DE-Detmold Klingenbergstraße,51.95144,8.854
 Electra DE-Dortmund Westfalendamm,51.50435,7.51502
+Electra DE-Dortmund Wittekindstraße,51.4962,7.4425
 Electra DE-Dresden Gerichtsstraße,51.051,13.75132
+Electra DE-Erlangen Frauenauracher Straße,49.5762,10.96785
+Electra DE-Essen Hans-Böckler-Straße,51.46104,6.99876
 Electra DE-Germersheim Münchener Straße,49.22712,8.3729
 Electra DE-Gießen Schiffenberger Weg,50.5716,8.69202
 Electra DE-Gräfelfing Pasinger Straße,48.1256,11.44803
 Electra DE-Halle (Saale) Delitzscher Straße,51.479,11.9984
+Electra DE-Hamburg Kollaustraße,53.61197,9.95362
 Electra DE-Hemmoor Stader Straße,53.68228,9.17848
+Electra DE-Herne Forellstraße,51.55406,7.20125
 Electra DE-Kaiserslautern Europaallee,49.4537,7.81485
 Electra DE-Kaiserslautern Von-Miller-Straße,49.43854,7.6588
+Electra DE-Kassel Sandershäuser Straße,51.3117,9.53352
 Electra DE-Krefeld Hafelsstraße,51.3225,6.6049,25
+Electra DE-Köln Goldammerweg,50.96618,6.86908
 Electra DE-Leipzig Torgauer Straße,51.36623,12.4538
 Electra DE-Leipzig Wittenberger Straße,51.35995,12.38622
+Electra DE-Ludwigsfelde Gottlieb-Daimler-Straße,52.32867,13.273
 Electra DE-Lübeck Fackenburger Allee,53.8737,10.66733
+Electra DE-Magdeburg Glindenberger Weg,52.21046,11.6706,15
 Electra DE-Magdeburg Schönebecker Straße,52.10104,11.6435
+Electra DE-Mannheim Gottlieb-Daimler-Straße,49.47586,8.49546
+Electra DE-Mayen Polcher Straße,50.3195,7.23297,25
+Electra DE-Münchberg August-Horch-Straße,50.20195,11.78056
 Electra DE-München Rosenheimer Straße,48.1141,11.61388
+Electra DE-Neufahrn b. Freising Bajuwarenstraße,48.32946,11.69272
 Electra DE-Neufahrn bei Freising Bajuwarenstraße,48.32907,11.69388
 Electra DE-Nordhausen Gerhart-Hauptmann-Straße,51.5084,10.78197
+Electra DE-Nürnberg Kressengartenstraße,49.44983,11.09942
 Electra DE-Oberhausen Erlenstraße,51.516,6.82108
+Electra DE-Obing Wasserburger Straße,48.0025,12.40044
+Electra DE-Ottersberg Posthausen,53.0614,9.16943
 Electra DE-Peine Kunzendorfer Straße,52.33238,10.26
+Electra DE-Penzberg Seeshaupter Straße,47.76554,11.3597,30
 Electra DE-Pforzheim Kieselbronner Straße,48.91092,8.7199
+Electra DE-Schönefeld Hans-Grade-Allee,52.39584,13.5173
+Electra DE-Sindelfingen Käsbrünnlestraße,48.6952,9.00088
+Electra DE-Stuttgart Siemensstraße,48.81003,9.1807,15
 Electra DE-Velbert Friedrichstraße,51.33157,7.0545
+Electra DE-Weißenfels Heinrich-Hertz-Straße,51.1874,11.98767
+Electra DE-Weißensberg Beim Rothen-Kreuz,47.5922,9.7308
 Electra DE-Wenden Koblenzer Straße,50.9828,7.8465
 Electra DE-Wilhelmshaven Ernst-Barlach-Straße,53.5274,8.06394
 Electra DE-Willich Akira-Okada-Straße,51.28037,6.50858,20
 Electra DE-Witzenhausen Am Eschenbornrasen,51.33592,9.86256
+Electra DE-Wörnitz Hammerstatt,49.25922,10.24312,30
+Electra DE-Würzburg Randersackerer Straße,49.77624,9.9405
 Electra ES-Sant Cugat Shopping Center,41.48302,2.0529
 Electra FR-Aire de Arzens,43.21972,2.21619,30
 Electra FR-Aire de Bages,43.1137,2.9545
@@ -25660,39 +25694,6 @@ MB CA-Pentiction BC Lakeshore Dr W,49.50262,-119.59515,32
 MB CA-Pitt Meadows BC Lougheed Hwy,49.22993,-122.69215,32
 MB CA-Surrey BC BC-10,49.10525,-122.80173,32
 MB CA-Tsawwassen BC Canoe Pass Wy,49.03782,-123.09005,32
-MB DE-Augsburg Haunstetter Straße,48.3471,10.90502
-MB DE-Aurich Korbweidenstraße,53.45056,7.50673
-MB DE-Autohof Cloppenburg,52.8272,8.00026,25
-MB DE-Autohof Gramschatzer Wald,49.91243,10.00036,15
-MB DE-Autohof Mühldorf,48.27283,12.55063
-MB DE-Autohof Neuberg,50.18235,9.0081,20
-MB DE-Autohof Sangerhausen,51.45068,11.3053,18
-MB DE-Autohof Wernberg,49.53307,12.13475,25
-MB DE-Berlin Salzufer,52.5147,13.3305
-MB DE-Dortmund Wittekindstraße,51.4962,7.4425
-MB DE-Erlangen Frauenauracher Straße,49.5762,10.96785
-MB DE-Essen Hans-Böckler-Straße,51.46104,6.99876
-MB DE-Hamburg Kollaustraße,53.61197,9.95362
-MB DE-Herne Forellstraße,51.55406,7.20125
-MB DE-Kassel Sandershäuser Straße,51.3117,9.53352
-MB DE-Köln Goldammerweg,50.96618,6.86908
-MB DE-Ludwigsfelde Gottlieb-Daimler-Straße,52.32867,13.273
-MB DE-Magdeburg Glindenberger Weg,52.21046,11.6706,15
-MB DE-Mannheim Gottlieb-Daimler-Straße,49.47586,8.49546
-MB DE-Mayen Polcher Straße,50.3195,7.23297,25
-MB DE-Münchberg August-Horch-Straße,50.20195,11.78056
-MB DE-Neufahrn b. Freising Bajuwarenstraße,48.32946,11.69272
-MB DE-Nürnberg Kressengartenstraße,49.44983,11.09942
-MB DE-Obing Wasserburger Straße,48.0025,12.40044
-MB DE-Ottersberg Posthausen,53.0614,9.16943
-MB DE-Penzberg Seeshaupter Straße,47.76554,11.3597,30
-MB DE-Schönefeld Hans-Grade-Allee,52.39584,13.5173
-MB DE-Sindelfingen Käsbrünnlestraße,48.6952,9.00088
-MB DE-Stuttgart Siemensstraße,48.81003,9.1807,15
-MB DE-Weißenfels Heinrich-Hertz-Straße,51.1874,11.98767
-MB DE-Weißensberg Beim Rothen-Kreuz,47.5922,9.7308
-MB DE-Wörnitz Hammerstatt,49.25922,10.24312,30
-MB DE-Würzburg Randersackerer Straße,49.77624,9.9405
 MB US-Alpharetta GA Avalon Blvd,34.07223,-84.27463,32
 MB US-Ashburn VA Easthampton Plaza,39.05274,-77.45225,32
 MB US-Athens GA US-29,33.99502,-83.3352,32
@@ -29176,6 +29177,7 @@ Shell DE-Langenau Am Kiesgräble,48.493,10.108
 Shell DE-Langenfeld (Rheinland) Schneiderstraße,51.1199,6.96984
 Shell DE-Langenselbold Am Nesselbusch,50.17904,9.02107
 Shell DE-Lehrte Niedersachsenstraße,52.36084,10.12053
+Shell DE-Leipzig Merseburger Straße,51.34255,12.30745
 Shell DE-Leipzig Poserstraße,51.35314,12.42133
 Shell DE-Leipzig Torgauerstraße,51.3655,12.45633
 Shell DE-Lohne (Oldenburg) Von-Siemens-Straße,52.6579,8.1698,15
