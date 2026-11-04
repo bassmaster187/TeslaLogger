@@ -56,6 +56,8 @@ namespace TeslaLogger
         private static bool connecting;
         private static readonly object connectLock = new object();
         private bool discoveryPublished;
+        private bool wasConnected;
+        private DateTime lastConnectAttempt = DateTime.MinValue;
 
         private IMqttClient client;
 
@@ -421,9 +423,11 @@ namespace TeslaLogger
                 {
                     if (client.IsConnected)
                     {
-                        if (connecting)
+                        // (re)subscribe on every transition disconnected -> connected (cleanSession=true drops subscriptions)
+                        if (connecting || !wasConnected)
                         {
                             connecting = false;
+                            wasConnected = true;
                             Tools.DebugLog("MQTT: connected, connecting = false");
                             Logfile.Log("MQTT: Connected!");
                             OnConnected();
@@ -432,8 +436,11 @@ namespace TeslaLogger
                     }
                     else
                     {
-                        if (!connecting)
+                        wasConnected = false;
+                        // throttle connect attempts without blocking the caller
+                        if (!connecting && (DateTime.UtcNow - lastConnectAttempt).TotalSeconds >= 30)
                         {
+                            lastConnectAttempt = DateTime.UtcNow;
                             string newClientId;
                             if(clientid != null)
                             {
@@ -461,7 +468,6 @@ namespace TeslaLogger
                                 // connect refused (e.g. wrong credentials) without exception -> reset, otherwise no further reconnect is ever attempted
                                 connecting = false;
                                 Logfile.Log("MQTT: Connect failed!");
-                                System.Threading.Thread.Sleep(30000);
                             }
 
                             return false;
