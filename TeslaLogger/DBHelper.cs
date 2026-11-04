@@ -25,6 +25,8 @@ namespace TeslaLogger
     public class DBHelper
     {
         private static Dictionary<string, int> mothershipCommands = new Dictionary<string, int>();
+        private static readonly object mothershipCommandsLock = new object();
+        private static readonly System.Threading.SemaphoreSlim mothershipCommandsSemaphore = new System.Threading.SemaphoreSlim(1, 1);
         private static bool mothershipEnabled; // defaults to false
         private Car car;
         bool CleanPasswortDone; // defaults to false
@@ -40,7 +42,7 @@ namespace TeslaLogger
         private static string _DBConnectionstring = string.Empty;
         internal static string GetDBConnectionstring(bool obfuscate = false)
         {
-            if (!string.IsNullOrEmpty(_DBConnectionstring))
+            if (!string.IsNullOrEmpty(_DBConnectionstring) && !obfuscate)
             {
                 return _DBConnectionstring;
             }
@@ -250,10 +252,35 @@ VALUES(
             if (command.Contains(WebHelper.vehicle_data_everything))
                 command = command.Replace(WebHelper.vehicle_data_everything, "vehicle_data_everything");
 
-            if (!mothershipCommands.ContainsKey(command))
+            int commandid;
+            bool known;
+            lock (mothershipCommandsLock)
             {
-                await AddCommandToDBAsync(command);
-                await GetMothershipCommandsFromDBAsync();
+                known = mothershipCommands.TryGetValue(command, out commandid);
+            }
+            if (!known)
+            {
+                await mothershipCommandsSemaphore.WaitAsync();
+                try
+                {
+                    lock (mothershipCommandsLock)
+                    {
+                        known = mothershipCommands.ContainsKey(command);
+                    }
+                    if (!known)
+                    {
+                        await AddCommandToDBAsync(command);
+                        await GetMothershipCommandsFromDBAsync();
+                    }
+                }
+                finally
+                {
+                    mothershipCommandsSemaphore.Release();
+                }
+                lock (mothershipCommandsLock)
+                {
+                    commandid = mothershipCommands[command];
+                }
             }
             using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
             {
@@ -276,7 +303,7 @@ VALUES(
 )", con))
                 {
                     cmd.Parameters.AddWithValue("@ts", DateTime.Now);
-                    cmd.Parameters.AddWithValue("@commandid", mothershipCommands[command]);
+                    cmd.Parameters.AddWithValue("@commandid", commandid);
                     cmd.Parameters.AddWithValue("@duration", duration);
                     cmd.Parameters.AddWithValue("@httpcode", httpcode);
                     if (carid == 0 || carid == -1)
@@ -366,7 +393,7 @@ WHERE
     carid IS NULL", con))
                         {
                             cmd.CommandTimeout = 6000;
-                            _ = SQLTracer.TraceNQ(cmd, out _);
+                            rows = SQLTracer.TraceNQ(cmd, out _);
                         }
                     }
                     t = Environment.TickCount - t;
@@ -942,6 +969,7 @@ AND id <=(
                             maxid = (int)dr[0];
                             lastCEA = (double)dr[1];
                         }
+                        // segment end is the previous row of this car (charging.id is shared by all cars, so id - 1 may belong to another car)
                         // all rows
                         while (dr.Read())
                         {
@@ -955,7 +983,7 @@ AND id <=(
                                 (double)dr[1] < 0.5*/
                                 )
                             {
-                                segments.Add(new Tuple<int, int>(index, ((int)dr[0]) - 1));
+                                segments.Add(new Tuple<int, int>(index, maxid));
                                 index = ((int)dr[0]);
                             }
                             maxid = (int)dr[0];
@@ -1208,6 +1236,7 @@ WHERE
       drivestate
     WHERE
       EndDate IS NOT NULL
+      AND CarID = @CarID
   )", con))
                     {
                         cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
@@ -1715,14 +1744,17 @@ HAVING
                 await con.OpenAsync();
                 using (MySqlCommand cmd = new MySqlCommand("SELECT id, command FROM mothershipcommands", con))
                 {
-                    var dr = await cmd.ExecuteReaderAsync();
+                    using var dr = await cmd.ExecuteReaderAsync();
                     while (await dr.ReadAsync())
                     {
                         int id = Convert.ToInt32(dr["id"], Tools.ciDeDE);
                         string command = dr[1].ToString();
-                        if (!mothershipCommands.ContainsKey(command))
+                        lock (mothershipCommandsLock)
                         {
-                            mothershipCommands.Add(command, id);
+                            if (!mothershipCommands.ContainsKey(command))
+                            {
+                                mothershipCommands.Add(command, id);
+                            }
                         }
                     }
                 }
@@ -3053,7 +3085,8 @@ SELECT
 FROM
     information_schema.statistics
 WHERE
-    table_name = '{table}'
+    table_schema = DATABASE()
+    AND table_name = '{table}'
     AND INDEX_NAME ='{index}'", con))
                 {
                     MySqlDataReader dr = SQLTracer.TraceDR(cmd);
@@ -3222,7 +3255,7 @@ WHERE
                             int id = Convert.ToInt32(dr["id"], Tools.ciEnUS);
                             int StartChargingID = Convert.ToInt32(dr["StartChargingID"], Tools.ciEnUS);
                             int EndChargingID = Convert.ToInt32(dr["EndChargingID"], Tools.ciEnUS);
-                            int carid = dr["CarId"] as Int32? ?? 1;
+                            int carid = dr["CarId"] == DBNull.Value ? 1 : Convert.ToInt32(dr["CarId"], Tools.ciEnUS);
 
                             Car c = Car.GetCarByID(carid);
                             if (c != null)
@@ -4305,8 +4338,8 @@ WHERE
     id = @startPos", con))
                                             {
                                                 cmd3.Parameters.AddWithValue("@startPos", startPos);
-                                                cmd3.Parameters.AddWithValue("@ideal_battery_range_km", ideal_battery_range_km.ToString());
-                                                cmd3.Parameters.AddWithValue("@battery_level", battery_level.ToString());
+                                                cmd3.Parameters.AddWithValue("@ideal_battery_range_km", ideal_battery_range_km);
+                                                cmd3.Parameters.AddWithValue("@battery_level", battery_level);
                                                 _ = SQLTracer.TraceNQ(cmd3, out _);
 
                                                 car.Log($"Trip from {dt1} ideal_battery_range_km updated!");
@@ -4386,8 +4419,8 @@ WHERE
     id = @endpos", con))
                                             {
                                                 cmd3.Parameters.AddWithValue("@endpos", endPos);
-                                                cmd3.Parameters.AddWithValue("@ideal_battery_range_km", ideal_battery_range_km.ToString());
-                                                cmd3.Parameters.AddWithValue("@battery_level", battery_level.ToString());
+                                                cmd3.Parameters.AddWithValue("@ideal_battery_range_km", ideal_battery_range_km);
+                                                cmd3.Parameters.AddWithValue("@battery_level", battery_level);
                                                 _ = SQLTracer.TraceNQ(cmd3, out _);
 
                                                 car.Log($"Trip from {dt1} ideal_battery_range_km updated!");
@@ -5265,7 +5298,7 @@ LIMIT 1", con))
                             chargeStart = DateTime.Now;
                         }
 
-                        charge_energy_added = Convert.ToDouble(dr[2]);
+                        charge_energy_added = dr[2] == DBNull.Value ? (double?)null : Convert.ToDouble(dr[2], Tools.ciEnUS);
 
                         return Convert.ToInt32(dr[0], Tools.ciEnUS);
                     }
@@ -5424,7 +5457,8 @@ LIMIT 1", con))
                     FROM
                         information_schema.tables
                     WHERE
-                        table_name = '{table}'", con))
+                        table_schema = DATABASE()
+                        AND table_name = '{table}'", con))
                 {
                     MySqlDataReader dr = SQLTracer.TraceDR(cmd);
                     if (dr.Read())
@@ -5449,7 +5483,8 @@ SELECT
 FROM
     INFORMATION_SCHEMA.COLUMNS
 WHERE
-    table_name = '{table}'
+    table_schema = DATABASE()
+    AND table_name = '{table}'
     AND COLUMN_NAME = '{column}'", con))
                 {
                     MySqlDataReader dr = SQLTracer.TraceDR(cmd);
@@ -5990,7 +6025,7 @@ SELECT
 FROM
     cars
 WHERE
-    id = @id", DBConnectionstring))
+    vin = @vin", DBConnectionstring))
                     {
                         da.SelectCommand.Parameters.AddWithValue("@vin", vin);
                         _ = SQLTracer.TraceDA(dt, da);
@@ -6712,9 +6747,9 @@ FROM
 ) AS t", con))
                 {
                     object oid = SQLTracer.TraceSc(cmd);
-                    if (oid != null)
+                    if (oid != null && oid != DBNull.Value)
                     {
-                        newid = Convert.ToInt32(oid);
+                        newid = Convert.ToInt32(oid, Tools.ciEnUS);
                     }
                 }
             }
@@ -6754,10 +6789,12 @@ FROM
         {
             var dt = new DataTable();
 
-            MySqlDataAdapter da = new MySqlDataAdapter(@"SELECT chargingstate.id, StartDate, EndDate, address, lat, lng, charge_energy_added, country, co2_g_kWh
+            using (MySqlDataAdapter da = new MySqlDataAdapter(@"SELECT chargingstate.id, StartDate, EndDate, address, lat, lng, charge_energy_added, country, co2_g_kWh
                 FROM chargingstate join pos on chargingstate.pos = pos.id 
-                order by lat, lng", DBHelper.DBConnectionstring);
-            da.Fill(dt);
+                order by lat, lng", DBHelper.DBConnectionstring))
+            {
+                da.Fill(dt);
+            }
 
             return dt;
         }
@@ -7127,7 +7164,11 @@ FROM
     pos", con))
                         {
                             cmd.CommandTimeout = 6000;
-                            maxPosID = (int)SQLTracer.TraceSc(cmd);
+                            object maxid = SQLTracer.TraceSc(cmd);
+                            if (maxid != null && maxid != DBNull.Value)
+                            {
+                                maxPosID = Convert.ToInt32(maxid, Tools.ciEnUS);
+                            }
                         }
                     }
                 }
@@ -7389,64 +7430,62 @@ WHERE
             {
                 Tools.SetThreadEnUS();
 
-                using (MySqlConnection con = new MySqlConnection(DBConnectionstring + ";Allow User Variables=True"))
+                // read the cruisestate rows of this car in the time range ordered by date (uses PK CarID, date)
+                // and pair every row with its successor (previously done with user variables over the whole table)
+                List<Tuple<DateTime, object>> rows = new List<Tuple<DateTime, object>>();
+                using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
                 {
                     con.Open();
-                    using (MySqlCommand cmd = new MySqlCommand(
-@"SELECT 
-    T1.date AS startdate,
-    T1.state AS startstate,
-    T2.date AS enddate,
-    T2.state AS endstate
+                    using (MySqlCommand cmd = new MySqlCommand(@"
+SELECT
+    date,
+    state
 FROM
-    (SELECT 
-        (@rowid1:=@rowid1 + 1) T1rid, carid, date, state
-    FROM
-        cruisestate
-    JOIN (SELECT @rowid1:=0) a) T1
-        LEFT JOIN
-    (SELECT 
-        (@rowid2:=@rowid2 + 1) T2rid, date, state, carid
-    FROM
-        cruisestate
-    JOIN (SELECT @rowid2:=0) b) T2 ON T1.T1rid + 1 = T2.T2rid
+    cruisestate
 WHERE
-    T1.carid = @carid
-        AND T1.date BETWEEN @start AND @end
-        AND T2.date BETWEEN @start AND @end
-ORDER BY startdate", con))
+    CarID = @carid
+    AND date BETWEEN @start AND @end
+ORDER BY
+    date", con))
                     {
                         cmd.Parameters.AddWithValue("@carid", carid);
                         cmd.Parameters.AddWithValue("@start", start.ToString("yyyy-MM-dd HH:mm:ss", Tools.ciEnUS));
                         cmd.Parameters.AddWithValue("@end", end.ToString("yyyy-MM-dd HH:mm:ss", Tools.ciEnUS));
 
-                        var dr = cmd.ExecuteReader();
-                        while (dr.Read())
+                        using (MySqlDataReader dr = cmd.ExecuteReader())
                         {
-                            try
+                            while (dr.Read())
                             {
-                                using (MySqlConnection con2 = new MySqlConnection(DBConnectionstring))
-                                {
-                                    int state = Convert.ToInt32(dr["startstate"]);
-                                    DateTime startstate = (DateTime)dr["startdate"];
-                                    DateTime endstate = (DateTime)dr["enddate"];
+                                rows.Add(new Tuple<DateTime, object>((DateTime)dr["date"], dr["state"]));
+                            }
+                        }
+                    }
+                }
 
-                                    con2.Open();
-                                    using (MySqlCommand cmd2 = new MySqlCommand(@"update pos set ap=@ap where carid=@carid and datum between @start and @end", con2))
-                                    {
-                                        cmd2.Parameters.AddWithValue("@carid", carid);
-                                        cmd2.Parameters.AddWithValue("@ap", state);
-                                        cmd2.Parameters.AddWithValue("@start", startstate.ToString("yyyy-MM-dd HH:mm:ss", Tools.ciEnUS));
-                                        cmd2.Parameters.AddWithValue("@end", endstate.ToString("yyyy-MM-dd HH:mm:ss", Tools.ciEnUS));
-                                        cmd2.ExecuteNonQuery();
-                                    }
-                                }
-                            }
-                            catch (Exception ex)
+                using (MySqlConnection con2 = new MySqlConnection(DBConnectionstring))
+                {
+                    con2.Open();
+                    for (int i = 0; i < rows.Count - 1; i++)
+                    {
+                        try
+                        {
+                            int state = Convert.ToInt32(rows[i].Item2, Tools.ciEnUS);
+                            DateTime startstate = rows[i].Item1;
+                            DateTime endstate = rows[i + 1].Item1;
+
+                            using (MySqlCommand cmd2 = new MySqlCommand(@"update pos set ap=@ap where carid=@carid and datum between @start and @end", con2))
                             {
-                                Logfile.Log(ex.ToString());
-                                ex.ToExceptionless().FirstCarUserID().Submit();
+                                cmd2.Parameters.AddWithValue("@carid", carid);
+                                cmd2.Parameters.AddWithValue("@ap", state);
+                                cmd2.Parameters.AddWithValue("@start", startstate.ToString("yyyy-MM-dd HH:mm:ss", Tools.ciEnUS));
+                                cmd2.Parameters.AddWithValue("@end", endstate.ToString("yyyy-MM-dd HH:mm:ss", Tools.ciEnUS));
+                                cmd2.ExecuteNonQuery();
                             }
+                        }
+                        catch (Exception ex)
+                        {
+                            Logfile.Log(ex.ToString());
+                            ex.ToExceptionless().FirstCarUserID().Submit();
                         }
                     }
                 }
