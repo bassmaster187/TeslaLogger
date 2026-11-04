@@ -15,6 +15,7 @@ namespace TeslaLogger
     {
 
         private static OpenTopoDataService _OpenTopoDataService; // defaults to null;
+        private static readonly object singletonLock = new object();
 
         // store posID, lat, lng
         private readonly ConcurrentStack<Tuple<long, double, double>> queue = new ConcurrentStack<Tuple<long, double, double>>();
@@ -31,11 +32,14 @@ namespace TeslaLogger
 
         public static OpenTopoDataService GetSingleton()
         {
-            if (_OpenTopoDataService == null)
+            lock (singletonLock)
             {
-                _OpenTopoDataService = new OpenTopoDataService();
+                if (_OpenTopoDataService == null)
+                {
+                    _OpenTopoDataService = new OpenTopoDataService();
+                }
+                return _OpenTopoDataService;
             }
-            return _OpenTopoDataService;
         }
 
         public void Enqueue(long posID, double lat, double lng)
@@ -45,9 +49,10 @@ namespace TeslaLogger
 
         public void Run()
         {
-            try
+            while (true)
             {
-                while (true)
+                // a single failed request (e.g. timeout) must not terminate the service thread forever
+                try
                 {
                     // max 1000 requests per day
                     // 24hours divided by 1000 --> one request every 86,4 seconds, so try every 2 minutes (including safety margin)
@@ -60,11 +65,16 @@ namespace TeslaLogger
                         Thread.Sleep(30000); // sleep 30 seconds
                     }
                 }
-            }
-            catch (Exception ex)
-            {
-                ex.ToExceptionless().FirstCarUserID().Submit();
-                Tools.DebugLog("OpenTopoDataService: Exception", ex);
+                catch (ThreadAbortException)
+                {
+                    throw;
+                }
+                catch (Exception ex)
+                {
+                    ex.ToExceptionless().FirstCarUserID().Submit();
+                    Tools.DebugLog("OpenTopoDataService: Exception", ex);
+                    Thread.Sleep(90000); // keep request rate limit after a failed request
+                }
             }
         }
 
@@ -93,7 +103,7 @@ namespace TeslaLogger
         void UpdateDB(long id, double elevation)
         {
             // finally update DB
-            _ = DBHelper.ExecuteSQLQuery($"UPDATE pos SET altitude = {elevation} WHERE id = {id}");
+            _ = DBHelper.ExecuteSQLQuery($"UPDATE pos SET altitude = {elevation.ToString(Tools.ciEnUS)} WHERE id = {id}");
         }
 
         internal static async Task RequestLocationsAsync(Tuple<long, double, double>[] items, RequestLocationsResponse response)
@@ -113,9 +123,11 @@ namespace TeslaLogger
             {
                 client.DefaultRequestHeaders.Add("User-Agent", "C# App");
                 DateTime start = DateTime.UtcNow;
-                HttpResponseMessage result = await client.GetAsync(new Uri(queryString));
-                resultContent = await result.Content.ReadAsStringAsync();
-                await DBHelper.AddMothershipDataToDBAsync("OpenTopoData.Query", start, (int)result.StatusCode, 0);
+                using (HttpResponseMessage result = await client.GetAsync(new Uri(queryString)))
+                {
+                    resultContent = await result.Content.ReadAsStringAsync();
+                    await DBHelper.AddMothershipDataToDBAsync("OpenTopoData.Query", start, (int)result.StatusCode, 0);
+                }
             }
             // parse result JSON
             if (!string.IsNullOrEmpty(resultContent))
@@ -134,14 +146,14 @@ namespace TeslaLogger
                             if (result.ContainsKey("elevation")
                                 && result.ContainsKey("location"))
                             {
-                                if (double.TryParse(result["elevation"].ToString(Tools.ciEnUS), out double elevation)
+                                if (double.TryParse(result["elevation"].ToString(Tools.ciEnUS), System.Globalization.NumberStyles.Float, Tools.ciEnUS, out double elevation)
                                     && !double.IsNaN(elevation))
                                 {
                                     Dictionary<string, object> location = result["location"].ToObject<Dictionary<string, object>>();
                                     if (location.ContainsKey("lat") && location.ContainsKey("lng"))
                                     {
-                                        if (double.TryParse(location["lat"].ToString(), out double lat)
-                                            && double.TryParse(location["lng"].ToString(), out double lng))
+                                        if (double.TryParse(Convert.ToString(location["lat"], Tools.ciEnUS), System.Globalization.NumberStyles.Float, Tools.ciEnUS, out double lat)
+                                            && double.TryParse(Convert.ToString(location["lng"], Tools.ciEnUS), System.Globalization.NumberStyles.Float, Tools.ciEnUS, out double lng))
                                         {
                                             // find posID(s) in items
                                             foreach (Tuple<long, double, double> item in items)

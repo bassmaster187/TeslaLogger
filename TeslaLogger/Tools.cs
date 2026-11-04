@@ -984,6 +984,11 @@ namespace TeslaLogger
 
                     proc.Start();
 
+                    // read stdout/stderr asynchronously while waiting, otherwise the child process blocks
+                    // as soon as a pipe buffer is full and never exits (deadlock)
+                    Task<string> stdoutTask = proc.StandardOutput.ReadToEndAsync();
+                    Task<string> stderrTask = proc.StandardError.ReadToEndAsync();
+
                     do
                     {
                         if (!proc.HasExited)
@@ -999,7 +1004,7 @@ namespace TeslaLogger
                     }
                     while (!proc.WaitForExit(100));
 
-                    string line = proc.StandardOutput.ReadToEnd().Replace('\r', '\n');
+                    string line = stdoutTask.Result.Replace('\r', '\n');
 
                     if (logging && line.Length > 0)
                     {
@@ -1007,7 +1012,7 @@ namespace TeslaLogger
                     }
 
                     sb.AppendLine(line);
-                    line = proc.StandardError.ReadToEnd().Replace('\r', '\n');
+                    line = stderrTask.Result.Replace('\r', '\n');
 
                     if (logging && line.Length > 0)
                     {
@@ -2136,7 +2141,8 @@ WHERE
                         File.Decrypt(path);
                     }
                     FileInfo fileInfo = new FileInfo(path);
-                    HttpResponseMessage response = await httpClient.GetAsync(uri).ConfigureAwait(false);
+                    using (HttpResponseMessage response = await httpClient.GetAsync(uri).ConfigureAwait(false))
+                    {
                     _ = response.EnsureSuccessStatusCode();
                     using (Stream responseContentStream = await response.Content.ReadAsStreamAsync().ConfigureAwait(false))
                     {
@@ -2146,6 +2152,7 @@ WHERE
                             responseContentStream.CopyTo(outputFileStream);
                             outputFileStream.Close();
                         }
+                    }
                     }
                     return true;
                 }
@@ -2322,6 +2329,9 @@ WHERE
             var minutesperday = 1440;
             var remainminutes = minutesperday - min;
             var remainsecounds = remainminutes * 60;
+
+            if (remainingCommands <= 0)
+                return 10;
 
             var sleepPerCommand = remainsecounds / remainingCommands;
 

@@ -104,58 +104,58 @@ namespace TeslaLogger
 
                 // start schema update
 
-                KVS.CheckSchema();
-                DBHelper.EnableUTF8mb4();
+                RunSchemaStep("KVS.CheckSchema", KVS.CheckSchema);
+                RunSchemaStep("DBHelper.EnableUTF8mb4", DBHelper.EnableUTF8mb4);
 
-                CheckDBCharset();
+                RunSchemaStep("CheckDBCharset", CheckDBCharset);
 
-                CheckDBSchema_areaa();
+                RunSchemaStep("CheckDBSchema_areaa", CheckDBSchema_areaa);
 
-                CheckDBSchema_can();
+                RunSchemaStep("CheckDBSchema_can", CheckDBSchema_can);
 
-                CheckDBSchema_candata();
+                RunSchemaStep("CheckDBSchema_candata", CheckDBSchema_candata);
 
-                CheckDBSchema_cars();
+                RunSchemaStep("CheckDBSchema_cars", CheckDBSchema_cars);
 
-                CheckDBSchema_car_version();
+                RunSchemaStep("CheckDBSchema_car_version", CheckDBSchema_car_version);
 
-                CheckDBSchema_charging();
+                RunSchemaStep("CheckDBSchema_charging", CheckDBSchema_charging);
 
-                CheckDBSchema_chargingstate();
+                RunSchemaStep("CheckDBSchema_chargingstate", CheckDBSchema_chargingstate);
 
-                CheckDBSchema_drivestate();
+                RunSchemaStep("CheckDBSchema_drivestate", CheckDBSchema_drivestate);
 
-                CheckDBSchema_httpcodes();
+                RunSchemaStep("CheckDBSchema_httpcodes", CheckDBSchema_httpcodes);
 
-                Journeys.CheckSchema();
+                RunSchemaStep("Journeys.CheckSchema", Journeys.CheckSchema);
 
-                GeocodeCache.CheckSchema();
+                RunSchemaStep("GeocodeCache.CheckSchema", GeocodeCache.CheckSchema);
 
-                CheckDBSchema_mothership();
+                RunSchemaStep("CheckDBSchema_mothership", CheckDBSchema_mothership);
 
-                CheckDBSchema_mothershipcommands();
+                RunSchemaStep("CheckDBSchema_mothershipcommands", CheckDBSchema_mothershipcommands);
 
-                CheckDBSchema_pos();
+                RunSchemaStep("CheckDBSchema_pos", CheckDBSchema_pos);
 
-                CheckDBSchema_shiftstate();
+                RunSchemaStep("CheckDBSchema_shiftstate", CheckDBSchema_shiftstate);
 
-                CheckDBSchema_state();
+                RunSchemaStep("CheckDBSchema_state", CheckDBSchema_state);
 
-                CheckDBSchema_superchargers();
+                RunSchemaStep("CheckDBSchema_superchargers", CheckDBSchema_superchargers);
 
-                CheckDBSchema_superchargerstate();
+                RunSchemaStep("CheckDBSchema_superchargerstate", CheckDBSchema_superchargerstate);
 
-                CheckDBSchema_TPMS();
+                RunSchemaStep("CheckDBSchema_TPMS", CheckDBSchema_TPMS);
 
-                CheckDBSchema_Battery();
+                RunSchemaStep("CheckDBSchema_Battery", CheckDBSchema_Battery);
 
-                CheckDBSchema_Cruisestate();
+                RunSchemaStep("CheckDBSchema_Cruisestate", CheckDBSchema_Cruisestate);
 
-                CheckDBSchema_Alerts();
+                RunSchemaStep("CheckDBSchema_Alerts", CheckDBSchema_Alerts);
 
-                GetChargingHistoryV2Service.CheckSchema();
+                RunSchemaStep("GetChargingHistoryV2Service.CheckSchema", GetChargingHistoryV2Service.CheckSchema);
 
-                Komoot.CheckSchema();
+                RunSchemaStep("Komoot.CheckSchema", Komoot.CheckSchema);
 
                 Logfile.Log("DBSchema Update finished.");
 
@@ -319,6 +319,20 @@ namespace TeslaLogger
             {
                 ex.ToExceptionless().FirstCarUserID().Submit();
                 Logfile.Log("Error in update: " + ex.ToString());
+            }
+        }
+
+        // run each schema migration step on its own, so an exception in one step doesn't skip all subsequent steps (see #1568)
+        private static void RunSchemaStep(string name, Action step)
+        {
+            try
+            {
+                step();
+            }
+            catch (Exception ex)
+            {
+                ex.ToExceptionless().FirstCarUserID().AddObject(name, "SchemaStep").Submit();
+                Logfile.Log("Error in schema update step " + name + ": " + ex.ToString());
             }
         }
 
@@ -671,8 +685,9 @@ PRIMARY KEY(id)
                 using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
                 {
                     con.Open();
-                    using (MySqlCommand cmd = new MySqlCommand("SELECT datetime_precision FROM INFORMATION_SCHEMA.COLUMNS WHERE table_name = 'pos' AND COLUMN_NAME = 'datum' and TABLE_SCHEMA = 'teslalogger'", con))
+                    using (MySqlCommand cmd = new MySqlCommand("SELECT datetime_precision FROM INFORMATION_SCHEMA.COLUMNS WHERE table_name = 'pos' AND COLUMN_NAME = 'datum' and TABLE_SCHEMA = @dbschema", con))
                     {
+                        cmd.Parameters.AddWithValue("@dbschema", DBHelper.Database);
                         MySqlDataReader dr = SQLTracer.TraceDR(cmd);
                         if (dr.Read() && dr[0] != DBNull.Value)
                         {
@@ -1715,8 +1730,9 @@ PRIMARY KEY(id)
                 using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
                 {
                     con.Open();
-                    using (MySqlCommand cmd = new MySqlCommand("SELECT default_character_set_name FROM information_schema.SCHEMATA WHERE schema_name = 'teslalogger'; ", con))
+                    using (MySqlCommand cmd = new MySqlCommand("SELECT default_character_set_name FROM information_schema.SCHEMATA WHERE schema_name = @dbschema; ", con))
                     {
+                        cmd.Parameters.AddWithValue("@dbschema", DBHelper.Database);
                         MySqlDataReader dr = SQLTracer.TraceDR(cmd);
                         if (dr.Read())
                         {
@@ -1728,7 +1744,7 @@ PRIMARY KEY(id)
 
                                 Logfile.Log("Change database charset to utf8mb4");
                                 AssertAlterDB();
-                                using (var cmd2 = new MySqlCommand("ALTER DATABASE teslalogger CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci", con))
+                                using (var cmd2 = new MySqlCommand("ALTER DATABASE `" + DBHelper.Database + "` CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci", con))
                                 {
                                     _ = SQLTracer.TraceNQ(cmd2, out _);
                                 }
@@ -1975,10 +1991,10 @@ PRIMARY KEY(id)
                     Tools.ExecMono("mkdir", "/etc/teslalogger/tmp");
                     Tools.ExecMono("mkdir", "/etc/teslalogger/tmp/Grafana");
 
-                    if (!Directory.Exists("/etc/teslalogger/tmp"))
+                    if (!Directory.Exists("/etc/teslalogger/tmp/Grafana"))
                         Directory.CreateDirectory("/etc/teslalogger/tmp/Grafana");
 
-                    if (!Directory.Exists("/etc/teslalogger/tmp"))
+                    if (!Directory.Exists("/etc/teslalogger/tmp/Grafana"))
                         Directory.CreateDirectory("/etc/teslalogger/tmp/Grafana");
 
                     bool useNewTrackmapPanel = Directory.Exists("/var/lib/grafana/plugins/pR0Ps-grafana-trackmap-panel");
@@ -2966,7 +2982,7 @@ PRIMARY KEY(id)
                 return content;
             }
 
-            Regex regexAlias = new Regex("\\\"alias\\\":.*?\\\"" + v + "\\\"");
+            Regex regexAlias = new Regex("\\\"alias\\\":.*?\\\"" + Regex.Escape(v) + "\\\"");
             string replace = "\"alias\": \"" + dictLanguage[v] + "\"";
 
             return regexAlias.Replace(content, replace);
@@ -2980,7 +2996,7 @@ PRIMARY KEY(id)
                 return content;
             }
 
-            Regex regexAlias = new Regex("\\\"value\\\":.*?\\\"" + v + "\\\"");
+            Regex regexAlias = new Regex("\\\"value\\\":.*?\\\"" + Regex.Escape(v) + "\\\"");
             string replace = "\"value\": \"" + dictLanguage[v] + "\"";
 
             return regexAlias.Replace(content, replace);
@@ -2994,7 +3010,7 @@ PRIMARY KEY(id)
                 return content;
             }
 
-            Regex regexAlias = new Regex("\\\"name\\\":.*?\\\"" + v + "\\\"");
+            Regex regexAlias = new Regex("\\\"name\\\":.*?\\\"" + Regex.Escape(v) + "\\\"");
             string replace = "\"name\": \"" + dictLanguage[v] + "\"";
 
             return regexAlias.Replace(content, replace);
@@ -3008,7 +3024,7 @@ PRIMARY KEY(id)
                 return content;
             }
 
-            Regex regexAlias = new Regex("\\\"title\\\":.*?\\\"" + v + "\\\"");
+            Regex regexAlias = new Regex("\\\"title\\\":.*?\\\"" + Regex.Escape(v) + "\\\"");
             string replace = "\"title\": \"" + dictLanguage[v] + "\"";
 
             return regexAlias.Replace(content, replace);
