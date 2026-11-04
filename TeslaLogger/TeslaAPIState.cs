@@ -247,7 +247,8 @@ namespace TeslaLogger
                 {
                     if (storage.ContainsKey(name))
                     {
-                        state = storage[name];
+                        // return a copy, the caller reads it outside of the lock while AddValue may modify the stored dictionary
+                        state = new Dictionary<Key, object>(storage[name]);
                         if (maxage != 0)
                         {
                             long now = (long)DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1)).TotalMilliseconds;
@@ -289,9 +290,17 @@ namespace TeslaLogger
 
         public bool HasValue(string name)
         {
-            if (storage.ContainsKey(name) && storage[name].ContainsKey(Key.Type) && storage[name].ContainsKey(Key.Value))
+            TeslaAPIStateLock.Wait();
+            try
             {
-                return true;
+                if (storage.ContainsKey(name) && storage[name].ContainsKey(Key.Type) && storage[name].ContainsKey(Key.Value))
+                {
+                    return true;
+                }
+            }
+            finally
+            {
+                TeslaAPIStateLock.Release();
             }
 
             return false;
@@ -1598,6 +1607,9 @@ namespace TeslaLogger
         public string ToString(bool compareTs = false)
         {
             string str = string.Empty;
+            TeslaAPIStateLock.Wait();
+            try
+            {
             foreach (string key in storage.Keys)
             {
                 if (compareTs && storage[key][Key.Timestamp] != null
@@ -1612,18 +1624,31 @@ namespace TeslaLogger
                     str += string.Concat($"{key} => v:[{storage[key][Key.Value]}] t:{storage[key][Key.Type]} s:{storage[key][Key.Source]} ts:{storage[key][Key.Timestamp]}", Environment.NewLine);
                 }
             }
+            }
+            finally
+            {
+                TeslaAPIStateLock.Release();
+            }
             return str;
         }
 
         internal long GetTimestampAge(string source)
         {
             long maxTS = 0;
-            foreach (string property in storage.Keys)
+            TeslaAPIStateLock.Wait();
+            try
             {
-                if (string.IsNullOrEmpty(source) || source == property)
+                foreach (string property in storage.Keys)
                 {
-                    maxTS = (long)((maxTS < (long)storage[property][Key.Timestamp]) ? storage[property][Key.Timestamp] : maxTS);
+                    if (string.IsNullOrEmpty(source) || source == property)
+                    {
+                        maxTS = (long)((maxTS < (long)storage[property][Key.Timestamp]) ? storage[property][Key.Timestamp] : maxTS);
+                    }
                 }
+            }
+            finally
+            {
+                TeslaAPIStateLock.Release();
             }
             long now = (long)DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1)).TotalMilliseconds;
             return maxTS > 0 ? now - maxTS : 0;

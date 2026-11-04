@@ -875,7 +875,13 @@ namespace TeslaLogger
             Logfile.Log("SearchFornewCars");
             try
             {
-                foreach (KeyValuePair<string, Account> s in vehicles2Account)
+                List<KeyValuePair<string, Account>> accounts;
+                lock (vehicles2Account)
+                {
+                    accounts = vehicles2Account.ToList();
+                }
+
+                foreach (KeyValuePair<string, Account> s in accounts)
                 {
                     try
                     {
@@ -1218,6 +1224,8 @@ namespace TeslaLogger
             if (nextTeslaTokenFromRefreshToken < DateTime.UtcNow)
             {
                 Log($"#{car.CarInDB}: GetHttpClientTeslaAPI - Token expiring soon, refreshing proactively");
+                // throttle retries if the refresh fails (same as CheckRefreshToken); a successful refresh overwrites this value
+                nextTeslaTokenFromRefreshToken = DateTime.UtcNow.AddMinutes(5);
                 UpdateTeslaTokenFromRefreshToken();
             }
 
@@ -3383,18 +3391,18 @@ namespace TeslaLogger
                     if (!string.IsNullOrEmpty(ApplicationSettings.Default.MapQuestKey))
                     {
                         url += "?location=";
-                        url += latitude.ToString();
+                        url += latitude.ToString(Tools.ciEnUS);
                         url += ",";
-                        url += longitude.ToString();
+                        url += longitude.ToString(Tools.ciEnUS);
                         url += "&key=";
                         url += ApplicationSettings.Default.MapQuestKey;
                     }
                     else
                     {
                         url += "?format=jsonv2&lat=";
-                        url += latitude.ToString();
+                        url += latitude.ToString(Tools.ciEnUS);
                         url += "&lon=";
-                        url += longitude.ToString();
+                        url += longitude.ToString(Tools.ciEnUS);
                         url += "&email=mail";
                         url += "@";
                         url += "teslalogger";
@@ -3426,7 +3434,7 @@ namespace TeslaLogger
                         if (loc0.ContainsKey("adminArea1") && loc0["adminArea1Type"].ToString() == "Country")
                             country_code = loc0["adminArea1"].ToString().ToLower();
 
-                        if (country_code.Length > 0 && car != null)
+                        if (country_code.Length > 0 && car?.CurrentJSON != null)
                         {
                             car.CurrentJSON.current_country_code = country_code;
                             car.CurrentJSON.current_state = loc0.ContainsKey("adminArea3") ? loc0["adminArea3"].ToString() : "";
@@ -3476,7 +3484,7 @@ namespace TeslaLogger
                         if (r2.ContainsKey("country_code"))
                             country_code = r2["country_code"].ToString();
 
-                        if (country_code.Length > 0 && car != null)
+                        if (country_code.Length > 0 && car?.CurrentJSON != null)
                         {
                             car.CurrentJSON.current_country_code = country_code;
                             car.CurrentJSON.current_state = r2.ContainsKey("state") ? r2["state"].ToString() : "";
@@ -3585,9 +3593,9 @@ namespace TeslaLogger
                     url = "http://nominatim.openstreetmap.org/reverse";
 
                     url += "?format=jsonv2&lat=";
-                    url += latitude.ToString();
+                    url += latitude.ToString(Tools.ciEnUS);
                     url += "&lon=";
-                    url += longitude.ToString();
+                    url += longitude.ToString(Tools.ciEnUS);
                     url += "&email=mail";
                     url += "@";
                     url += "teslalogger";
@@ -4383,13 +4391,13 @@ WHERE
                     {
                         // Retry-After: time in seconds
                         Tools.DebugLog($"429: response Retry-After:{result.Headers.RetryAfter}");
-                        if (int.TryParse(result.Headers.RetryAfter.ToString(), out int sleep))
+                        if (int.TryParse(result.Headers.RetryAfter?.ToString(), out int sleep))
                         {
                             sleep = sleep * 1000;
                         }
                         else
                         {
-                            sleep = (random.Next(5000) + 60000) * 1000;
+                            sleep = random.Next(5000) + 60000;
                         }
                         string l1 = "Result.Statuscode: " + (int)result.StatusCode + " (" + result.StatusCode.ToString() + ") cmd: " + cmd + " Sleep: " + sleep + "ms";
                         string l = "";
@@ -4465,7 +4473,7 @@ WHERE
             try
             {
                 int fleetapi = car.FleetAPI ? 1 : 0;
-                HttpResponseMessage response = await  httpclient_teslalogger_de.GetAsync($"https://teslalogger.de/update-commandcounter2.php?token={car.TaskerHash}&drive={commandCounterDrive}&charging={commandCounterCharging}&online={commandcounterOnline}&fleetapi={fleetapi}");
+                using HttpResponseMessage response = await  httpclient_teslalogger_de.GetAsync($"https://teslalogger.de/update-commandcounter2.php?token={car.TaskerHash}&drive={commandCounterDrive}&charging={commandCounterCharging}&online={commandcounterOnline}&fleetapi={fleetapi}");
                 response.EnsureSuccessStatusCode();
                 string responseBody = await response.Content.ReadAsStringAsync();
                 Log($"UpdateTaskerToken: {responseBody}");
@@ -4643,35 +4651,53 @@ WHERE
                 }
 
                 DateTime start = DateTime.UtcNow;
-                using (HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, new Uri(url)))
+                for (int attempt = 0; attempt < 2; attempt++)
                 {
-                    request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", Tesla_token);
-                    if (_json)
+                    using (HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, new Uri(url)))
                     {
-                        request.Content = new StringContent(data);
-                    }
-                    else
-                    {
-                        request.Content = new StringContent("{}");
-                    }
-                    request.Content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
-                    HttpResponseMessage result = await httpClientTeslaAPI.SendAsync(request);
-                    resultContent = await result.Content.ReadAsStringAsync();
-                    _ = DBHelper.AddMothershipDataToDBAsync("PostCommand(" + cmd + ")", start, (int)result.StatusCode, car.CarInDB);
-                    int position = cmd.LastIndexOf('/');
-                    if (position > -1)
-                    {
-                        string command = cmd.Substring(position + 1);
-                        if (TeslaAPI_Commands.ContainsKey(command))
+                        request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", Tesla_token);
+                        if (_json)
                         {
-                            TeslaAPI_Commands.TryGetValue(command, out string drive_state);
-                            TeslaAPI_Commands.TryUpdate(command, resultContent, drive_state);
+                            request.Content = new StringContent(data);
                         }
                         else
                         {
-                            TeslaAPI_Commands.TryAdd(command, resultContent);
+                            request.Content = new StringContent("{}");
+                        }
+                        request.Content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+                        using HttpResponseMessage result = await httpClientTeslaAPI.SendAsync(request);
+                        resultContent = await result.Content.ReadAsStringAsync();
+                        _ = DBHelper.AddMothershipDataToDBAsync("PostCommand(" + cmd + ")", start, (int)result.StatusCode, car.CarInDB);
+
+                        // Fleet API: access token may have expired while the car was offline (no API calls) -> refresh once and resend (#1330)
+                        if (attempt == 0 && resultContent != null && resultContent.Contains("token expired"))
+                        {
+                            string oldToken = Tesla_token;
+                            car.Log("PostCommand: token expired -> refresh token and retry");
+                            UpdateTeslaTokenFromRefreshToken();
+                            if (!String.IsNullOrEmpty(Tesla_token) && Tesla_token != oldToken)
+                            {
+                                httpClientTeslaAPI = GetHttpClientTeslaAPI();
+                                start = DateTime.UtcNow;
+                                continue;
+                            }
+                        }
+                        int position = cmd.LastIndexOf('/');
+                        if (position > -1)
+                        {
+                            string command = cmd.Substring(position + 1);
+                            if (TeslaAPI_Commands.ContainsKey(command))
+                            {
+                                TeslaAPI_Commands.TryGetValue(command, out string drive_state);
+                                TeslaAPI_Commands.TryUpdate(command, resultContent, drive_state);
+                            }
+                            else
+                            {
+                                TeslaAPI_Commands.TryAdd(command, resultContent);
+                            }
                         }
                     }
+                    break;
                 }
 
                 car.Log("Response: " + resultContent);
@@ -4886,7 +4912,7 @@ WHERE
                     DateTime start = DateTime.UtcNow;
                     Task<HttpResponseMessage> resultTask = httpclient_teslalogger_de.PostAsync("http://teslalogger.de/wakefile.php", content);
 
-                    HttpResponseMessage result = resultTask.Result;
+                    using HttpResponseMessage result = resultTask.Result;
                     string resultContent = result.Content.ReadAsStringAsync().Result;
 
                     _ = DBHelper.AddMothershipDataToDBAsync("teslalogger.de/wakefile.php", start, (int)result.StatusCode, car.CarInDB);
@@ -5128,7 +5154,7 @@ WHERE
                 DateTime start = DateTime.UtcNow;
                 using (var content = new StringContent(json, System.Text.Encoding.UTF8, "application/json"))
                 {
-                    var result = await httpClientABRP.PostAsync("https://api.iternio.com/1/tlm/send?token=" + car.ABRPToken + "&tlm=" + json, null);
+                    using var result = await httpClientABRP.PostAsync("https://api.iternio.com/1/tlm/send?token=" + Uri.EscapeDataString(car.ABRPToken) + "&tlm=" + Uri.EscapeDataString(json), null);
 
                     _ = DBHelper.AddMothershipDataToDBAsync("SendDataToAbetterrouteplanner", start, (int)result.StatusCode, car.CarInDB);
                     if (result.StatusCode == HttpStatusCode.Unauthorized)
@@ -5233,7 +5259,7 @@ WHERE
                 using (var content = new StringContent(json, System.Text.Encoding.UTF8, "application/json"))
                 {
                     Tools.SetThreadEnUS();
-                    var result = await httpClientSuCBingo.PostAsync(new Uri("https://supercharge.bingo/v1.php/api/v1/checkin"), content).ConfigureAwait(false);
+                    using var result = await httpClientSuCBingo.PostAsync(new Uri("https://supercharge.bingo/v1.php/api/v1/checkin"), content).ConfigureAwait(false);
                     string response = await result.Content.ReadAsStringAsync().ConfigureAwait(false);
 
                     _ = DBHelper.AddMothershipDataToDBAsync("SuperchargeBingoCheckin()", start, (int)result.StatusCode, car.CarInDB);
@@ -5369,13 +5395,13 @@ WHERE
         {
             try
             {
-                HttpClient client = new HttpClient();
+                using HttpClient client = new HttpClient();
                 client.DefaultRequestHeaders.ConnectionClose = true;
                 ProductInfoHeaderValue userAgent = new ProductInfoHeaderValue("Teslalogger", Assembly.GetExecutingAssembly().GetName().Version.ToString());
                 client.DefaultRequestHeaders.UserAgent.Add(userAgent);
                 client.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue("(00000000; " + Thread.CurrentThread.ManagedThreadId + ")"));
 
-                var g = client.GetAsync("https://api.github.com/repos/bassmaster187/TeslaLogger/branches/" + branch).Result;
+                using var g = client.GetAsync("https://api.github.com/repos/bassmaster187/TeslaLogger/branches/" + branch).Result;
                 statusCode = g.StatusCode;
                 if (g.IsSuccessStatusCode)
                 {

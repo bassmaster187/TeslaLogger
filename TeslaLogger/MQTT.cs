@@ -54,6 +54,8 @@ namespace TeslaLogger
         private static int httpport = 5000;
         private static int heartbeatCounter;
         private static bool connecting;
+        private static readonly object connectLock = new object();
+        private bool discoveryPublished;
 
         private IMqttClient client;
 
@@ -90,28 +92,19 @@ namespace TeslaLogger
                 ParseSettings();
 
                 client = MqttClientWrapper.CreateClient(host, port, false, null, null, MqttSslProtocols.None);
+                // register handler before the first connect, otherwise commands are never processed if the initial connect fails
+                client.MqttMsgPublishReceived += Client_MqttMsgPublishReceived;
 
+                // subscriptions and discovery are done in ConnectionCheck -> OnConnected after every successful (re)connect
                 ConnectionCheck();
 
-                if (client.IsConnected)
-                {
-                    SubscribeToCommands();
-
-                    client.MqttMsgPublishReceived += Client_MqttMsgPublishReceived;
-                    new Thread(() => { MQTTConnectionHandler(client); }).Start();
-
-                    if (discoveryEnable && singletopics)
-                    {
-                        foreach (string vin in allCars)
-                        {
-                            PublishDiscovery(vin);
-                        }
-                    }
-                }
-                else
+                if (!client.IsConnected)
                 {
                     Logfile.Log("MQTT: Connection failed!");
                 }
+
+                // always start the connection handler, so a failed initial connect is retried as well
+                new Thread(() => { MQTTConnectionHandler(client); }).Start();
 
                 while (true)
                 {
@@ -167,7 +160,7 @@ namespace TeslaLogger
                 {
                     discoveryEnable = (bool)r["mqtt_discoveryenable"];
                 }
-                if (r["mqtt_topic"] > 0)
+                if (r["mqtt_discoverytopic"] > 0)
                 {
                     discoverytopic = r["mqtt_discoverytopic"];
                 }
@@ -248,6 +241,7 @@ namespace TeslaLogger
                         Tools.DebugLog("MQTT: CurrentJson Exception", ex);
                         // ex.ToExceptionless().FirstCarUserID().Submit();
                         System.Threading.Thread.Sleep(60000); //wait 60 seconds after exception
+                        continue;
                     }
 
                     if (!lastjson.ContainsKey(carId) || temp != lastjson[carId])
@@ -274,8 +268,8 @@ namespace TeslaLogger
                                 uPLibrary.Networking.M2Mqtt.Messages.MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, true);
 
                             }
-                            Double.TryParse(topics["latitude"], out double lat);
-                            Double.TryParse(topics["longitude"], out double lon);
+                            Double.TryParse(topics["latitude"], System.Globalization.NumberStyles.Float, System.Globalization.CultureInfo.InvariantCulture, out double lat);
+                            Double.TryParse(topics["longitude"], System.Globalization.NumberStyles.Float, System.Globalization.CultureInfo.InvariantCulture, out double lon);
                             PublichGPSTracker(vin, lat, lon);
                         }
 
@@ -412,6 +406,15 @@ namespace TeslaLogger
 
         private bool ConnectionCheck()
         {
+            // called from the Work loop and from MQTTConnectionHandler thread -> serialize connect attempts
+            lock (connectLock)
+            {
+                return ConnectionCheckInternal();
+            }
+        }
+
+        private bool ConnectionCheckInternal()
+        {
             try
             {
                 if (client != null)
@@ -423,7 +426,7 @@ namespace TeslaLogger
                             connecting = false;
                             Tools.DebugLog("MQTT: connected, connecting = false");
                             Logfile.Log("MQTT: Connected!");
-                            SubscribeToCommands();
+                            OnConnected();
                         }
                         return true;
                     }
@@ -451,6 +454,14 @@ namespace TeslaLogger
                             {
                                 Logfile.Log("MQTT: Connecting without credentials: " + host + ":" + port + " with ClientID: " + newClientId);
                                 client.Connect(newClientId, null, null, false, 0, true, $@"{topic}/system/status", "offline", true, 30);
+                            }
+
+                            if (!client.IsConnected)
+                            {
+                                // connect refused (e.g. wrong credentials) without exception -> reset, otherwise no further reconnect is ever attempted
+                                connecting = false;
+                                Logfile.Log("MQTT: Connect failed!");
+                                System.Threading.Thread.Sleep(30000);
                             }
 
                             return false;
@@ -503,6 +514,21 @@ namespace TeslaLogger
                 System.Threading.Thread.Sleep(60000);
             }
             return false;
+        }
+
+        // clean session is used -> subscriptions are lost on every reconnect; discovery is only published once
+        private void OnConnected()
+        {
+            SubscribeToCommands();
+
+            if (!discoveryPublished && discoveryEnable && singletopics && allCars != null)
+            {
+                foreach (string vin in allCars)
+                {
+                    PublishDiscovery(vin);
+                }
+                discoveryPublished = true;
+            }
         }
 
         private void MQTTConnectionHandler(IMqttClient client)
@@ -599,6 +625,7 @@ namespace TeslaLogger
             if (car == null)
             {
                 Logfile.Log($"MQTT: AutoDiscovery for {vin}: car {carId} not found or not active");
+                return;
             }
             string name = car.DisplayName;
             string sw = car.CurrentJSON.current_car_version;

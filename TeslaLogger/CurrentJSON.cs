@@ -191,10 +191,10 @@ namespace TeslaLogger
 
                 int open_windows = fd_window + fp_window + rd_window + rp_window;
                 int open_doors = 
-                    pf > 0 ? 1 :0 
-                    + pr > 0 ? 1 : 0
-                    + df > 0 ? 1 : 0
-                    + dr > 0 ? 1 : 0;
+                    (pf > 0 ? 1 :0) 
+                    + (pr > 0 ? 1 : 0)
+                    + (df > 0 ? 1 : 0)
+                    + (dr > 0 ? 1 : 0);
 
                 Dictionary<string, object> values = new Dictionary<string, object>
                 {
