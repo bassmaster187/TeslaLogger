@@ -157,7 +157,7 @@ namespace TeslaLogger
             File.WriteAllText(tempfile, JsonConvert.SerializeObject(job), Encoding.UTF8);
 
             GetOSMMapGeneratorFilename(out string fileName, out string arguments);
-            arguments += "-jobfile " + tempfile + (Program.VERBOSE ? " - debug" : "");
+            arguments += "-jobfile " + tempfile + (Program.VERBOSE ? " -debug" : "");
 
             using (Process process = new Process
             {
@@ -230,7 +230,7 @@ namespace TeslaLogger
 
             string tempfile = GetTempFileName();
             GetOSMMapGeneratorFilename(out string fileName, out string arguments);
-            arguments += "-jobfile " + tempfile + (Program.VERBOSE ? " - debug" : "");
+            arguments += "-jobfile " + tempfile + (Program.VERBOSE ? " -debug" : "");
 
             File.WriteAllText(tempfile, JsonConvert.SerializeObject(job), Encoding.UTF8);
             using (Process process = new Process
