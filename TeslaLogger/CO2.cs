@@ -49,16 +49,12 @@ namespace TeslaLogger
             string content = "";
 
             int wi = GetWeekOfYear(dateTime);
+            int year = GetWeekYear(dateTime);
             int currentWeek = GetWeekOfYear(DateTime.Now);
-            bool writeCache = wi < currentWeek;
-            if (!writeCache)
-            {
-                if (DateTime.Now.Year != dateTime.Year)
-                    writeCache = true;
-            }
+            int currentYear = GetWeekYear(DateTime.Now);
+            bool writeCache = year < currentYear || (year == currentYear && wi < currentWeek);
 
             string w = wi.ToString("D2");
-            int year = dateTime.Year;
 
             string filename = $"week_{year}_{w}.json";
             string path = $"EngergyChartData/{country}/{filename}";
@@ -182,6 +178,12 @@ namespace TeslaLogger
 
             GetImport(country, dateTime, ref co2sum, ref co2count);
 
+            if (co2count <= 0)
+            {
+                Log("CO2 AVG: no data");
+                return 0;
+            }
+
             double avgCO2 = co2sum / co2count;
             Log("CO2 AVG: " + Math.Round(avgCO2) + " g/kWh\r\n\r\n");
 
@@ -193,23 +195,12 @@ namespace TeslaLogger
             string content = "";
 
             int wi = GetWeekOfYear(dateTime);
+            int year = GetWeekYear(dateTime);
             int currentWeek = GetWeekOfYear(DateTime.Now);
-            bool writeCache = wi < currentWeek;
-
-            if (!writeCache)
-            {
-                if (DateTime.Now.Year != dateTime.Year)
-                    writeCache = true;
-            }
+            int currentYear = GetWeekYear(DateTime.Now);
+            bool writeCache = year < currentYear || (year == currentYear && wi < currentWeek);
 
             string w = wi.ToString("D2");
-            int year = dateTime.Year;
-
-            if (w == "53")
-            {
-                year++;
-                w = "01";
-            }
 
             string filename = $"week_cbpf_saldo_{year}_{w}.json";
             string path = $"EngergyChartData/{country}/{filename}";
@@ -331,7 +322,7 @@ namespace TeslaLogger
                     request.Headers.Accept.ParseAdd("text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9");
                     request.Headers.UserAgent.ParseAdd("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36");
 
-                    var response = await httpClient.SendAsync(request);
+                    using var response = await httpClient.SendAsync(request);
                     response.EnsureSuccessStatusCode();
                     resultContent = await response.Content.ReadAsStringAsync();
                 }
@@ -345,7 +336,7 @@ namespace TeslaLogger
                 throw;
             }
 
-            if (resultContent.Contains("Nuclear"))
+            if (resultContent.Contains("Nuclear") || (filename.StartsWith("week_cbpf_saldo_", StringComparison.Ordinal) && resultContent.Contains("xAxisValues")))
             {
                 if (!Directory.Exists("EngergyChartData"))
                     Directory.CreateDirectory("EngergyChartData");
@@ -367,12 +358,22 @@ namespace TeslaLogger
             return resultContent;
         }
 
+        // ISO 8601 week: the week (and its year) is determined by the Thursday of that week
+        // Calendar.GetWeekOfYear(FirstFourDayWeek) is not ISO 8601 compliant (e.g. 2024-12-30 -> 53 instead of 1)
+        static DateTime GetIsoWeekThursday(DateTime dt)
+        {
+            int daysFromMonday = ((int)dt.DayOfWeek + 6) % 7;
+            return dt.Date.AddDays(3 - daysFromMonday);
+        }
+
         public static int GetWeekOfYear(DateTime dt)
         {
-            System.Globalization.CultureInfo ci = new System.Globalization.CultureInfo("de-DE");
-            int w = ci.Calendar.GetWeekOfYear(dt, System.Globalization.CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday);
+            return (GetIsoWeekThursday(dt).DayOfYear - 1) / 7 + 1;
+        }
 
-            return w;
+        public static int GetWeekYear(DateTime dt)
+        {
+            return GetIsoWeekThursday(dt).Year;
         }
     }
 }

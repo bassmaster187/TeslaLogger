@@ -20,6 +20,7 @@ namespace TeslaLogger
         private static bool logwritten; // defaults to false;
         private readonly bool shareData; // defaults to false;
         readonly Car car;
+        private static readonly HttpClient shareDataHttpClient = new HttpClient() { Timeout = TimeSpan.FromSeconds(30) };
 
         public ShareData(Car car)
         {
@@ -192,14 +193,13 @@ ORDER BY
                             //string resultContent = "";
                             try
                             {
-                                using (HttpClient client = new HttpClient())
+                                HttpClient client = shareDataHttpClient;
                                 {
-                                    client.Timeout = TimeSpan.FromSeconds(30);
                                     using (StringContent content = new StringContent(json, Encoding.UTF8, "application/json"))
                                     {
 
                                         DateTime start = DateTime.UtcNow;
-                                        HttpResponseMessage result = await client.PostAsync(new Uri("http://teslalogger.de/share_charging.php"), content);
+                                        using HttpResponseMessage result = await client.PostAsync(new Uri("http://teslalogger.de/share_charging.php"), content);
                                         string r = await result.Content.ReadAsStringAsync();
                                         await DBHelper.AddMothershipDataToDBAsync("teslalogger.de/share_charging.php", start, (int)result.StatusCode, car.CarInDB);
 
@@ -401,14 +401,13 @@ ORDER BY
 
                         try
                         {
-                            using (HttpClient client = new HttpClient())
+                            HttpClient client = shareDataHttpClient;
                             {
-                                client.Timeout = TimeSpan.FromSeconds(30);
                                 using (StringContent content = new StringContent(json, Encoding.UTF8, "application/json"))
                                 {
 
                                     DateTime start = DateTime.UtcNow;
-                                    HttpResponseMessage result = await client.PostAsync(new Uri("http://teslalogger.de/share_drivestate.php"), content);
+                                    using HttpResponseMessage result = await client.PostAsync(new Uri("http://teslalogger.de/share_drivestate.php"), content);
                                     string r = await result.Content.ReadAsStringAsync();
                                     _ = DBHelper.AddMothershipDataToDBAsync("teslalogger.de/share_drivestate.php", start, (int)result.StatusCode, car.CarInDB);
 
@@ -545,14 +544,13 @@ GROUP BY
 
                         try
                         {
-                            using (HttpClient client = new HttpClient())
+                            HttpClient client = shareDataHttpClient;
                             {
-                                client.Timeout = TimeSpan.FromSeconds(30);
                                 using (StringContent content = new StringContent(json, Encoding.UTF8, "application/json"))
                                 {
 
                                     DateTime start = DateTime.UtcNow;
-                                    HttpResponseMessage result = await client.PostAsync(new Uri("http://teslalogger.de/share_degradation.php"), content);
+                                    using HttpResponseMessage result = await client.PostAsync(new Uri("http://teslalogger.de/share_degradation.php"), content);
                                     string r = await result.Content.ReadAsStringAsync();
                                     await DBHelper.AddMothershipDataToDBAsync("teslalogger.de/share_degradation.php", start, (int)result.StatusCode, car.CarInDB);
 
