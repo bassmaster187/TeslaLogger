@@ -232,7 +232,7 @@ namespace TeslaLogger
         [MethodImpl(MethodImplOptions.Synchronized)]
         internal TeslaAPIState GetTeslaAPIState() { return teslaAPIState; }
 
-        private static readonly Dictionary<string, int> VIN2DBCarID = new Dictionary<string, int>();
+        private static readonly System.Collections.Concurrent.ConcurrentDictionary<string, int> VIN2DBCarID = new System.Collections.Concurrent.ConcurrentDictionary<string, int>();
 
         public Car(int CarInDB, string TeslaName, string TeslaPasswort, int CarInAccount, string TeslaToken, DateTime TeslaTokenExpire, string ModelName, string cartype, string carspecialtype, string cartrimbadging, string displayname, string vin, string TaskerHash, double? WhTR, bool fleetAPI, TeslaState currentState = TeslaState.Start, string wheel_type = "")
         {
@@ -274,7 +274,10 @@ namespace TeslaLogger
                     // if we cannot refresh the token automatically, because the refresh token is expired, treat car as inactive.
                     if (CarInDB > 0 && !manualTokenRefreshNeeded)
                     {
-                        Allcars.Add(this);
+                        lock (Allcars)
+                        {
+                            Allcars.Add(this);
+                        }
                     }
                     else
                     {
@@ -302,10 +305,7 @@ namespace TeslaLogger
                     {
                         loopTask = Task.Run(async () => { await LoopAsync();});
 
-                        if (VIN2DBCarID.ContainsKey(vin))
-                            VIN2DBCarID.Remove(vin);
-
-                        VIN2DBCarID.Add(vin, CarInDB);
+                        VIN2DBCarID[vin] = CarInDB;
                     }
             }
             catch (Exception ex)
@@ -322,9 +322,9 @@ namespace TeslaLogger
 
         public static int GetCarIDFromVIN(string vin)
         {
-            if (VIN2DBCarID.ContainsKey(vin))
+            if (VIN2DBCarID.TryGetValue(vin, out int carID))
             {
-                return VIN2DBCarID[vin];
+                return carID;
             }
             return -1; // -1 means error as CarID in database can only be a positive integer
         }
@@ -639,10 +639,12 @@ namespace TeslaLogger
             Log("ExitCarThread: " + v);
             run = false;
             
-            Allcars.Remove(this);
+            lock (Allcars)
+            {
+                Allcars.Remove(this);
+            }
 
-            if (VIN2DBCarID.ContainsKey(vin))
-                VIN2DBCarID.Remove(vin);
+            VIN2DBCarID.TryRemove(vin, out _);
 
             telemetry?.StopConnection();
             cts.Cancel();
@@ -2056,11 +2058,13 @@ WHERE
 id = @carid", con))
                     {
                         cmd.Parameters.Add("@carid", MySqlDbType.UByte).Value = CarInDB;
-                        MySqlDataReader dr = SQLTracer.TraceDR(cmd);
-                        if (dr.Read() && dr[0] != null && dr[0] != DBNull.Value && int.TryParse(dr[0].ToString(), out int freesuc))
+                        using (MySqlDataReader dr = SQLTracer.TraceDR(cmd))
                         {
-                            Tools.DebugLog($"HasFreeSuC: {freesuc == 1}");
-                            return freesuc == 1;
+                            if (dr.Read() && dr[0] != null && dr[0] != DBNull.Value && int.TryParse(dr[0].ToString(), out int freesuc))
+                            {
+                                Tools.DebugLog($"HasFreeSuC: {freesuc == 1}");
+                                return freesuc == 1;
+                            }
                         }
                     }
                 }
