@@ -652,6 +652,7 @@ namespace TeslaLogger
             string dicoveryGPSTracker = JsonConvert.SerializeObject(new
             {
                 name = name,
+                uniq_id = $"{vin}_device_tracker",
                 json_attributes_topic = $"{topic}/car/{vin}/gps_tracker",
                 state_topic = $"{topic}/car/{vin}/TLGeofenceIsHome",
                 payload_home = "true",
