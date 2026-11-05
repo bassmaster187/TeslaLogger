@@ -3797,6 +3797,7 @@ Supercharger-V4 MY-Kuala Lumpur The Gardens Mall,3.11962,101.67647
 Supercharger-V3 MY-Kuantan Majlis Bandaraya Kuantan,3.7982,103.3218
 Supercharger-V4 MY-Penang Queensbay Mall,5.33302,100.3067
 Supercharger-V3 MY-Penang Sunway Carnival,5.39945,100.39827
+Supercharger-V4 MY-Petaling Jaya IPC,3.1562,101.61166
 Supercharger-V3 MY-Petaling Jaya Sunway Pyramid,3.07356,101.60725
 Supercharger-V4 MY-Puchong IOI Mall,3.04466,101.61854
 Supercharger-V4 MY-Putrajaya IOI City Mall,2.9698,101.71627
@@ -4335,6 +4336,7 @@ Supercharger-V3 SG-Orchard Central,1.3007,103.8396
 Supercharger-V4 SG-Raffles City,1.294,103.85308
 Supercharger-V4 SG-Sentosa Gateway,1.25704,103.82015
 Supercharger-V3 SG-Singapore Great World,1.293,103.83208
+Supercharger-V4 SG-Tampines Mall,1.35288,103.94488
 Supercharger-V3 SG-Tesla Centre Toa Payoh,1.34,103.85842
 Supercharger-V3 SG-The Star Vista,1.30692,103.7882
 Supercharger-V3 SG-Waterway Point,1.40646,103.90213
@@ -4597,6 +4599,7 @@ Supercharger-V3 US-Carlsbad CA Paseo Del Norte,33.12477,-117.31925
 Supercharger-V3 US-Carson CA,33.83273,-118.25858
 Supercharger-V4 US-Carson CA E Carson St,33.83343,-118.2601
 Supercharger-V3 US-Castaic CA,34.45213,-118.61606
+Supercharger-V4 US-Castaic CA 31783 Castaic Rd,34.49578,-118.62218
 Supercharger-V4 US-Castaic CA Castaic Rd,34.4991,-118.62436
 Supercharger US-Cerritos CA - Los Cerritos Center,33.86434,-118.09192
 Supercharger-V3 US-Chatsworth CA,34.23802,-118.5894
@@ -5665,6 +5668,7 @@ Supercharger US-Chicago IL N Columbus Dr,41.88646,-87.62026
 Supercharger US-Chicago IL N Columbus Dr,41.88673,-87.61978
 Supercharger US-Chicago IL N Halsted,41.90857,-87.6481
 Supercharger US-Chicago IL O’Hare,41.9986,-87.8882
+Supercharger-V4 US-Chicago IL S Ashland Ave EVGo,41.83788,-87.66497
 Supercharger US-Chicago IL S Canal St,41.86904,-87.64065
 Supercharger-V3 US-Chicago IL S Doty Ave W,41.6936,-87.6011
 Supercharger-V4 US-Chicago IL W Addison St,41.94463,-87.7015
@@ -7141,6 +7145,7 @@ Supercharger-V3 US-Shenandoah TX,30.1884,-95.4523
 Supercharger-V3 US-Shenandoah TX - Metropark Drive,30.1948,-95.45352
 Supercharger-V4 US-Sherman TX,33.68112,-96.61076
 Supercharger US-South Padre Island TX,26.08113,-97.1615
+Supercharger-V4 US-South Padre Island TX Padre Blvd,26.08394,-97.16444
 Supercharger US-Southlake TX,32.94364,-97.1339
 Supercharger-V4 US-Spring TX,30.05035,-95.43825
 Supercharger-V3 US-Spring TX - Spring Stuebner Road,30.08552,-95.44988
@@ -9678,7 +9683,7 @@ ARAL DE-Wülfrath Wilhelmstraße,51.2854,7.04682
 ARAL DE-Würselen Hauptstraße,50.80946,6.14394
 ARAL DE-Würzburg Albert-Einstein-Straße,49.80853,9.88637
 ARAL DE-Zwickau Leipziger Straße,50.74286,12.4886
-ARAL DE-Zwickau Marienthaler Straße,50.7207,12.4726
+ARAL DE-Zwickau Marienthaler Straße,50.72065,12.4733
 ARAL DE-Zwiesel Bärnzeller Straße,49.00113,13.22008
 ARAL LU-Schengen Rte du Vin,49.4756,6.3666
 
@@ -17408,6 +17413,7 @@ Energa PL-Gdańsk aleja Grunwaldzka,54.40231,18.5708
 Energa PL-Koszalin Jana Pawła II,54.2065,16.18583
 Energa PL-Słupsk plac Zwycięstwa,54.46441,17.0281
 
+Energie AT-Gmunden Dr.-Franz-Thomas-Straße,47.91353,13.78808
 Energie AT-Vöcklabruck Robert Kunz-Straße,48.0023,13.64898
 
 Energie-Architektur DE-Leipzig Gießerstraße,51.32458,12.32733,30
@@ -19783,6 +19789,7 @@ EWE-GO DE-Bad Kissingen Würzburger Straße,50.18697,10.07626
 EWE-GO DE-Bad Krozingen Freiburger Straße,47.92316,7.70833
 EWE-GO DE-Bad Mergentheim Max-Eyth-Straße,49.49545,9.76296
 EWE-GO DE-Bad Pyrmont Siemensstraße,51.97642,9.27835
+EWE-GO DE-Bad Rappenau Bonfelder Straße HOCHTIEF,49.2105,9.07285
 EWE-GO DE-Bad Salzdetfurth Ahnepaule,52.04706,10.00816
 EWE-GO DE-Bad Saulgau Herbertinger Straße,48.02102,9.48835
 EWE-GO DE-Bad Tölz Demmeljochstraße,47.74839,11.56584
@@ -20050,6 +20057,7 @@ EWE-GO DE-Dorum Westerbüttel,53.68856,8.56291
 EWE-GO DE-Drochtersen Am Sportplatz,53.70578,9.38239
 EWE-GO DE-Drochtersen Elbinsel Krautsand,53.75411,9.38491
 EWE-GO DE-Drochtersen Sietwender Straße,53.71066,9.38178
+EWE-GO DE-Duderstadt Adenauerring HOCHTIEF,51.51064,10.2725
 EWE-GO DE-Dummerstorf Manfred-Roth-Straße,54.0227,12.2314,30
 EWE-GO DE-Dätgen Grotwisch,54.1807,9.94444
 EWE-GO DE-Dörpen An der Düne,52.9675,7.33274
@@ -21057,6 +21065,7 @@ EWZ CH-Zürich Ueberlandstrasse,47.40464,8.5942
 EXP HU-Budapest Alkotmány u.,47.5075,19.05048
 
 eze DE-Berlin Brentanostraße,52.4646,13.309
+eze DE-Eimsbüttel Heinrich-Kock-Weg,53.59534,9.9714
 eze DE-Frankfurt am Main Luxemburgerallee,50.11973,8.71113
 eze DE-Hamburg Lüttkamp,53.59112,9.87428,20
 eze DE-Hamburg Mittelweg,53.57307,9.9939
@@ -21258,7 +21267,7 @@ Fastned NL-Het Veelsveld A1,52.28698,6.86097,30
 Fastned NL-Hoezaar,51.54884,4.52907
 Fastned NL-Hoge Kwel A7,52.85719,5.02147,20
 Fastned NL-Holten A1,52.25557,6.43712,25
-Fastned NL-Honswijck,52.32013,5.07784
+Fastned NL-Honswijck,52.32006,5.07832
 Fastned NL-Jutphaas,52.01767,5.06828
 Fastned NL-Keizershof A59,51.642,4.55664,25
 Fastned NL-Klarenbeek De Brink A50,52.17073,6.02585
@@ -22011,8 +22020,6 @@ Herzo-Energie DE-Herzogenaurach Olympiaring,49.57408,10.91576
 HEW DE-Hof Nailaer Straße,50.32128,11.90475
 
 HOBA DE-Waldkirch Industriestraße,48.08745,7.94643
-
-Hochtief DE-Bad Rappenau Bonfelder Straße,49.21051,9.07285
 
 Holiday-Vital-Resort DE-Großenbrode Strandstraße,54.36283,11.0851
 
