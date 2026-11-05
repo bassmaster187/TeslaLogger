@@ -39,12 +39,10 @@
   "liveNow": false,
   "panels": [
     {
-      "autoZoom": true,
       "datasource": {
         "type": "mysql",
         "uid": "PC0C98BF192F75B00"
       },
-      "defaultLayer": "OpenStreetMap",
       "gridPos": {
         "h": 22,
         "w": 22,
@@ -52,13 +50,7 @@
         "y": 0
       },
       "id": 4,
-      "lineColor": "#00000000",
       "links": [],
-      "maxDataPointDelta": 1,
-      "maxDataPoints": 500,
-      "pointColor": "royalblue",
-      "scrollWheelZoom": true,
-      "showLayerChanger": true,
       "targets": [
         {
           "alias": "",
@@ -112,7 +104,17 @@
         }
       ],
       "title": "Map",
-      "type": "pr0ps-trackmap-panel"
+      "type": "pr0ps-trackmap-panel",
+      "options": {
+        "autoZoom": true,
+        "defaultLayer": "OpenStreetMap",
+        "lineColor": "#00000000",
+        "maxDataPointDelta": 1,
+        "maxDataPoints": 500,
+        "pointColor": "royalblue",
+        "scrollWheelZoom": true,
+        "showLayerChanger": true
+      }
     },
     {
       "datasource": {

@@ -672,7 +672,6 @@
       }
     },
     {
-      "autoZoom": true,
       "datasource": "teslalogger",
       "gridPos": {
         "h": 22,
@@ -681,11 +680,14 @@
         "y": 0
       },
       "id": 4,
-      "lineColor": "red",
       "links": [],
-      "maxDataPoints": 50000,
-      "options": {},
-      "pointColor": "royalblue",
+      "options": {
+        "scrollWheelZoom": true,
+        "autoZoom": true,
+        "lineColor": "red",
+        "maxDataPoints": 50000,
+        "pointColor": "royalblue"
+      },
       "targets": [
         {
           "alias": "",
@@ -768,7 +770,7 @@
   "schemaVersion": 19,
   "style": "dark",
   "tags": [],
-   "templating": {
+  "templating": {
     "list": [
       {
         "allValue": null,

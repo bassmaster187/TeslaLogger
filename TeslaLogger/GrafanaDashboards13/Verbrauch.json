@@ -449,12 +449,10 @@
       }
     },
     {
-      "autoZoom": true,
       "datasource": {
         "type": "mysql",
         "uid": "PC0C98BF192F75B00"
       },
-      "defaultLayer": "OpenStreetMap",
       "gridPos": {
         "h": 19,
         "w": 12,
@@ -462,13 +460,7 @@
         "y": 0
       },
       "id": 4,
-      "lineColor": "#1F60C4",
       "links": [],
-      "maxDataPointDelta": 700,
-      "maxDataPoints": 50000,
-      "pointColor": "royalblue",
-      "scrollWheelZoom": true,
-      "showLayerChanger": true,
       "targets": [
         {
           "alias": "",
@@ -563,7 +555,17 @@
         }
       ],
       "title": "Map",
-      "type": "pr0ps-trackmap-panel"
+      "type": "pr0ps-trackmap-panel",
+      "options": {
+        "autoZoom": true,
+        "defaultLayer": "OpenStreetMap",
+        "lineColor": "#1F60C4",
+        "maxDataPointDelta": 700,
+        "maxDataPoints": 50000,
+        "pointColor": "royalblue",
+        "scrollWheelZoom": true,
+        "showLayerChanger": true
+      }
     },
     {
       "datasource": {

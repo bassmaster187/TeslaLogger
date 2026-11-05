@@ -33,20 +33,15 @@
         "y": 0
       },
       "id": 2,
-      "maxDataPoints": 50000,
       "options": {
-        "__angularMigration": {
-          "autoMigrateFrom": "pr0ps-trackmap-panel",
-          "originalOptions": {
-            "autoZoom": true,
-            "defaultLayer": "OpenStreetMap",
-            "lineColor": "#1F60C4",
-            "maxDataPointDelta": 700,
-            "pointColor": "royalblue",
-            "scrollWheelZoom": true,
-            "showLayerChanger": true
-          }
-        }
+        "maxDataPoints": 50000,
+        "scrollWheelZoom": true,
+        "autoZoom": true,
+        "defaultLayer": "OpenStreetMap",
+        "lineColor": "#1F60C4",
+        "maxDataPointDelta": 700,
+        "pointColor": "royalblue",
+        "showLayerChanger": true
       },
       "pluginVersion": "",
       "targets": [

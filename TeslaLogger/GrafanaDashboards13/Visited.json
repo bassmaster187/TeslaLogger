@@ -54,7 +54,6 @@
         "y": 0
       },
       "id": 2,
-      "maxDataPoints": 500,
       "options": {
         "apField": "",
         "autoZoom": true,
@@ -65,7 +64,7 @@
         "maxDataPointDelta": 0,
         "maxDataPoints": 500,
         "pointColor": "royalblue",
-        "scrollWheelZoom": false,
+        "scrollWheelZoom": true,
         "showLayerChanger": true,
         "textField": "",
         "timeField": "",
