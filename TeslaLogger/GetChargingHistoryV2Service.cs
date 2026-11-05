@@ -113,13 +113,13 @@ INSERT IGNORE INTO teslacharging SET
             if (json.ContainsKey("totalResults"))
             {
                 dynamic totalResults = json["totalResults"];
-                nextpage = (totalResults > 0);
                 if (totalResults > 0)
                 {
                     if (json.ContainsKey("data"))
                     {
                         dynamic data = json["data"];
                         if (data is JArray && data.Count > 0) {
+                            nextpage = true;
                             foreach (dynamic session in data)
                             {
                                 try
@@ -288,7 +288,8 @@ WHERE
 
         internal static void CheckSchema()
         {
-            try
+            // every step runs on its own, so a failing step does not skip the following ones (#1568)
+            CheckSchemaStep(() =>
             {
                 if (!DBHelper.ColumnExists("chargingstate", "cost_freesuc_savings_total"))
                 {
@@ -297,6 +298,9 @@ WHERE
                     DBHelper.ExecuteSQLQuery(@"ALTER TABLE `chargingstate` 
                     ADD COLUMN `cost_freesuc_savings_total` DOUBLE NULL DEFAULT NULL", 600);
                 }
+            });
+            CheckSchemaStep(() =>
+            {
                 if (!DBHelper.ColumnExists("chargingstate", "sessionId"))
                 {
                     Logfile.Log("ALTER TABLE chargingstate ADD Column sessionId");
@@ -304,17 +308,26 @@ WHERE
                     DBHelper.ExecuteSQLQuery(@"ALTER TABLE `chargingstate` 
                     ADD COLUMN `sessionId` VARCHAR(40) NULL DEFAULT NULL", 600);
                 }
+            });
+            CheckSchemaStep(() =>
+            {
                 // new JSON format and IDs with FleetAPI
                 if (DBHelper.ColumnExists("chargingstate", "chargeSessionId"))
                 {
                     Logfile.Log("ALTER TABLE chargingstate DROP COLUMN chargeSessionId");
                     DBHelper.ExecuteSQLQuery(@"ALTER TABLE chargingstate DROP COLUMN chargeSessionId", 600);
                 }
+            });
+            CheckSchemaStep(() =>
+            {
                 if (DBHelper.ColumnExists("teslacharging", "chargeSessionId"))
                 {
                     Logfile.Log("DROP TABLE teslacharging");
                     DBHelper.ExecuteSQLQuery(@"DROP TABLE teslacharging", 600);
                 }
+            });
+            CheckSchemaStep(() =>
+            {
                 if (!DBHelper.TableExists("teslacharging"))
                 {
                     string sql = @"
@@ -331,6 +344,14 @@ CREATE TABLE teslacharging (
                     DBHelper.ExecuteSQLQuery(sql);
                     Logfile.Log("CREATE TABLE teslacharging OK");
                 }
+            });
+        }
+
+        private static void CheckSchemaStep(Action step)
+        {
+            try
+            {
+                step();
             }
             catch (Exception ex)
             {
@@ -359,7 +380,7 @@ WHERE
     VIN = @VIN
 ORDER BY
     ABS(
-        chargeStartDateTime - @startDate
+        TIMESTAMPDIFF(SECOND, chargeStartDateTime, @startDate)
     )
 LIMIT 1
 ", con))
@@ -466,7 +487,7 @@ LIMIT 1
                         if (fee["feeType"].ToString().Equals("CHARGING"))
                         {
                             // cost per kWh
-                            if (fee.ContainsKey("uom") && fee["uom"].ToString().Equals("kWh") || fee["uom"].ToString().Equals("kwh"))
+                            if (fee.ContainsKey("uom") && (fee["uom"].ToString().Equals("kWh") || fee["uom"].ToString().Equals("kwh")))
                             {
                                 if (fee.ContainsKey("rateBase"))
                                 {
