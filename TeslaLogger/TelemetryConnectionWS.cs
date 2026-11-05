@@ -122,6 +122,7 @@ continue;
 
                     Login();
 
+                    bool reconnectNow = false;
                     while (ws.State == WebSocketState.Open)
                     {
                         Thread.Sleep(100);
@@ -130,11 +131,16 @@ continue;
                         {
                             Log("Reconnect to Telemetry Server with new token");
                             relogin = false;
+                            reconnectNow = true;
                             break;
                         }
 
                         ReceiveAsync(ws).Wait();
                     }
+
+                    // server closed the connection (e.g. Close frame after login): don't reconnect in a tight loop
+                    if (!reconnectNow)
+                        Thread.Sleep(r.Next(30000, 60000));
 }
 
                 catch (Exception ex)
@@ -258,9 +264,10 @@ continue;
 
             ws = null;
 
+            ClientWebSocket cws = null;
             try
             {
-                var cws = new ClientWebSocket();
+                cws = new ClientWebSocket();
                 Task tc = cws.ConnectAsync(new Uri(ApplicationSettings.Default.TelemetryServerURL), cts.Token);
                 tc.Wait();
 
@@ -268,6 +275,8 @@ continue;
             }
             catch (Exception ex)
             {
+                cws?.Dispose();
+
                 if (ex is AggregateException ex2)
                 {
                     Log("Connect to Telemetry Server (WS) Error: " + ex2.InnerException?.Message);
@@ -319,7 +328,7 @@ continue;
                 };
 
             var jLogin = JsonConvert.SerializeObject(login);
-            SendString(ws, jLogin);
+            SendString(ws, jLogin).Wait();
         }
 
         public Task SendString(ClientWebSocket ws, string data)

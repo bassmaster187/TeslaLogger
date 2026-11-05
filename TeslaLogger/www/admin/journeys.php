@@ -116,7 +116,8 @@ select.newJourney {width: 500px;}
                 {	className: 'dt-right',
 					"render": function(data, type, row, meta){
                     if(type === 'display' || type === 'sort'){
-                        var distance = row["distance"];
+                        // #1297: only use the distance of legs with consumption data, otherwise the average is too low
+                        var distance = row["distance_with_consumption"] || row["distance"];
                         var consumption_kwh = row["consumption_kwh"];
                         var avg_consumption = consumption_kwh / distance;
 
