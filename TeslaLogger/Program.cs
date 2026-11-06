@@ -60,6 +60,8 @@ namespace TeslaLogger
 
                 InitDebugLogging();
 
+                TelemetrySettings.LogOverrides();
+
                 InitStage1();
 
                 InitCheckDocker();
@@ -522,7 +524,7 @@ namespace TeslaLogger
                 }
             } catch (Exception) { }
 
-            Logfile.Log("DBConnectionstring: " + DBHelper.GetDBConnectionstring(true));
+            Logfile.Log("DBConnectionstring: " + DBHelper.GetDBConnectionstring(true) + " (source: " + (!string.IsNullOrWhiteSpace(Environment.GetEnvironmentVariable("DBConnectionstring")) ? "environment" : !string.IsNullOrEmpty(ApplicationSettings.Default.DBConnectionstring) ? "configuration" : "default") + ")");
 
             Logfile.Log("KeepOnlineMinAfterUsage: " + KeepOnlineMinAfterUsage);
             Logfile.Log("SuspendAPIMinutes: " + SuspendAPIMinutes);

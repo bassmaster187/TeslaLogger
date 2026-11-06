@@ -261,7 +261,7 @@ continue;
             try
             {
                 var cws = new ClientWebSocket();
-                Task tc = cws.ConnectAsync(new Uri(ApplicationSettings.Default.TelemetryServerURL), cts.Token);
+                Task tc = cws.ConnectAsync(new Uri(TelemetrySettings.TelemetryServerURL), cts.Token);
                 tc.Wait();
 
                 ws = cws;
