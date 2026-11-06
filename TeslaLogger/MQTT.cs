@@ -16,6 +16,7 @@ using static uPLibrary.Networking.M2Mqtt.MqttClient;
 using System.Security.Cryptography.X509Certificates;
 using uPLibrary.Networking.M2Mqtt.Exceptions;
 using System.Net.Sockets;
+using System.Reflection;
 
 namespace TeslaLogger
 {
@@ -33,6 +34,7 @@ namespace TeslaLogger
         ushort Publish(string topic, byte[] message, byte qosLevel, bool retain);
         byte Connect(string clientId, string username, string password, bool willRetain, byte willQosLevel, bool willFlag, string willTopic, string willMessage, bool cleanSession, ushort keepAlivePeriod);
         ushort Unsubscribe(string[] topics);
+        void Close();
     }
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1031:Keine allgemeinen Ausnahmetypen abfangen", Justification = "<Pending>")]
@@ -54,6 +56,7 @@ namespace TeslaLogger
         private static int httpport = 5000;
         private static int heartbeatCounter;
         private static bool connecting;
+        private static readonly object connectLock = new object();
 
         private IMqttClient client;
 
@@ -414,63 +417,65 @@ namespace TeslaLogger
         {
             try
             {
-                if (client != null)
-                {
-                    if (client.IsConnected)
-                    {
-                        if (connecting)
-                        {
-                            connecting = false;
-                            Tools.DebugLog("MQTT: connected, connecting = false");
-                            Logfile.Log("MQTT: Connected!");
-                            SubscribeToCommands();
-                        }
-                        return true;
-                    }
-                    else
-                    {
-                        if (!connecting)
-                        {
-                            string newClientId;
-                            if(clientid != null)
-                            {
-                                newClientId = clientid;
-                            }
-                            else
-                            {
-                                newClientId = Guid.NewGuid().ToString().Substring(0, 18);
-                            }
-                            connecting = true;
-                            Tools.DebugLog("MQTT: not connected, connecting = true");
-                            if (user != null && password != null)
-                            {
-                                Logfile.Log("MQTT: Connecting with credentials: " + host + ":" + port + " with ClientID: " + newClientId);
-                                client.Connect(newClientId, user, password, false, 0, true, $@"{topic}/system/status", "offline", true, 30);
-                            }
-                            else
-                            {
-                                Logfile.Log("MQTT: Connecting without credentials: " + host + ":" + port + " with ClientID: " + newClientId);
-                                client.Connect(newClientId, null, null, false, 0, true, $@"{topic}/system/status", "offline", true, 30);
-                            }
-
-                            return false;
-                            
-                        }
-                        return false;
-                    }
-                }
-                else 
+                if (client == null)
                 {
                     Logfile.Log("MQTT: ConnectionCheck client is null!");
                     return false;
                 }
+
+                if (client.IsConnected)
+                {
+                    if (connecting)
+                    {
+                        connecting = false;
+                        Tools.DebugLog("MQTT: connected, connecting = false");
+                        Logfile.Log("MQTT: Connected!");
+                        SubscribeToCommands();
+                    }
+                    return true;
+                }
+
+                lock (connectLock)
+                {
+                    if (client.IsConnected)
+                    {
+                        return true;
+                    }
+                    if (connecting)
+                    {
+                        return false;
+                    }
+                    connecting = true;
+                }
+
+                string newClientId = clientid ?? Guid.NewGuid().ToString().Substring(0, 18);
+                Tools.DebugLog("MQTT: not connected, connecting = true");
+
+                byte returnCode;
+                if (user != null && password != null)
+                {
+                    Logfile.Log("MQTT: Connecting with credentials: " + host + ":" + port + " with ClientID: " + newClientId);
+                    returnCode = client.Connect(newClientId, user, password, false, 0, true, $@"{topic}/system/status", "offline", true, 30);
+                }
+                else
+                {
+                    Logfile.Log("MQTT: Connecting without credentials: " + host + ":" + port + " with ClientID: " + newClientId);
+                    returnCode = client.Connect(newClientId, null, null, false, 0, true, $@"{topic}/system/status", "offline", true, 30);
+                }
+
+                if (returnCode != 0)
+                {
+                    Logfile.Log($"MQTT: Connection refused by broker (return code {returnCode}). Check host, port and credentials. Retrying in 60 seconds.");
+                    HandleConnectionFailure();
+                    return false;
+                }
+
+                return false;
             }
             catch (WebException wex)
             {
                 Logfile.Log("MQTT: ConnectionCheck WebExeption: " + wex.Message);
-                connecting = false;
-                System.Threading.Thread.Sleep(60000);
-
+                HandleConnectionFailure();
             }
             catch (MqttConnectionException cex)
             {
@@ -479,30 +484,41 @@ namespace TeslaLogger
                     if (se.ErrorCode == 10060)
                     {
                         Logfile.Log("MQTT: Connection Error: Connection timed out");
-                        connecting = false;
-                        System.Threading.Thread.Sleep(60000);
-                        return false;
                     }
                     else if (se.ErrorCode == 10061)
                     {
                         Logfile.Log("MQTT: Connection Error: Connection refused");
-                        connecting = false;
-                        System.Threading.Thread.Sleep(60000);
-                        return false;
                     }
                 }
 
                 Logfile.Log("MQTT: ConnectionCheck Exeption: " + cex.ToString());
-                connecting = false;
-                System.Threading.Thread.Sleep(60000);
+                HandleConnectionFailure();
             }
             catch (Exception ex)
             {
                 Logfile.Log("MQTT: ConnectionCheck Exeption: " + ex.ToString());
-                connecting = false;
-                System.Threading.Thread.Sleep(60000);
+                HandleConnectionFailure();
             }
             return false;
+        }
+
+        private void HandleConnectionFailure()
+        {
+            try
+            {
+                client?.Close();
+            }
+            catch (Exception ex)
+            {
+                Tools.DebugLog("MQTT: Close client Exception", ex);
+            }
+
+            connecting = false;
+
+            if (!Tools.IsUnitTest())
+            {
+                System.Threading.Thread.Sleep(60000);
+            }
         }
 
         private void MQTTConnectionHandler(IMqttClient client)
@@ -807,6 +823,34 @@ namespace TeslaLogger
         public ushort Subscribe(string[] topics, byte[] qosLevels) => _client.Subscribe(topics, qosLevels);
 
         public ushort Unsubscribe(string[] topics) => _client.Unsubscribe(topics);
+
+        public void Close()
+        {
+            try
+            {
+                FieldInfo isRunningField = typeof(MqttClient).GetField("isRunning", BindingFlags.Instance | BindingFlags.NonPublic);
+                bool isRunning = isRunningField != null && (bool)isRunningField.GetValue(_client);
+
+                if (!_client.IsConnected && !isRunning)
+                {
+                    return;
+                }
+
+                MethodInfo closeMethod = typeof(MqttClient).GetMethod("Close", BindingFlags.Instance | BindingFlags.NonPublic);
+                closeMethod?.Invoke(_client, null);
+            }
+            catch
+            {
+                try
+                {
+                    FieldInfo isRunningField = typeof(MqttClient).GetField("isRunning", BindingFlags.Instance | BindingFlags.NonPublic);
+                    isRunningField?.SetValue(_client, false);
+                }
+                catch
+                {
+                }
+            }
+        }
     }
 }
 
