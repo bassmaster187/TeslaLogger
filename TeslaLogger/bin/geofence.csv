@@ -506,6 +506,7 @@ Supercharger CA-Chicoutimi QC,48.401176,-71.062036
 Supercharger CA-Drummondville QC,45.899101,-72.519329
 Supercharger-V4 CA-Drummondville QC Bd Saint-Joseph,45.89298,-72.51577
 Supercharger-V3 CA-Gaspé QC,48.824028,-64.474015
+Supercharger-V4 CA-Gatineau QC,45.5016,-75.64207
 Supercharger-V3 CA-La Tuque QC,47.440008,-72.782723
 Supercharger-V3 CA-Lachenaie QC,45.727904,-73.510909
 Supercharger CA-Laval QC,45.57022,-73.7474
@@ -2947,6 +2948,7 @@ Supercharger GB-Aviemore,57.189774,-3.836206
 Supercharger-V3 GB-Banbury,52.073055,-1.341804
 Supercharger GB-Barnsley,53.489393,-1.486223
 Supercharger-V4 GB-Barnstaple,51.06176,-4.08108
+Supercharger-V4 GB-Basildon EV OTM,51.59206,0.4788
 Supercharger-V4 GB-Basingstoke,51.2796,-1.1016
 Supercharger-V4 GB-Batley,53.74484,-1.64273
 Supercharger-V3 GB-Belfast,54.583523,-5.960532
@@ -6356,6 +6358,7 @@ Supercharger-V3 US-North Bergen NJ,40.7755,-74.03466
 Supercharger-V3 US-North Bergen NJ - John F. Kennedy Boulevard,40.77388,-74.03814
 Supercharger-V4 US-North Bergen NJ Tonnelle Ave,40.8034,-74.0194
 Supercharger US-North Brunswick NJ,40.44003,-74.50384
+Supercharger-V4 US-North Brunswick Township NJ Milltown Rd,40.4657,-74.4507
 Supercharger-V3 US-Ocean View NJ,39.17707,-74.73245
 Supercharger-V3 US-Old Bridge NJ,40.39067,-74.3395
 Supercharger-V4 US-Old Bridge NJ US-9,40.37772,-74.3079
@@ -6972,6 +6975,7 @@ Supercharger-V4 US-Amarillo TX I-40,35.19182,-101.72226
 Supercharger-V4 US-Amarillo TX River Rd,35.2646,-101.83066
 Supercharger US-Arlington TX,32.75462,-97.08278
 Supercharger-V3 US-Arlington TX - East Bardin Road,32.6702,-97.11347
+Supercharger-V4 US-Arlington TX E Lamar Blvd,32.76055,-97.06987
 Supercharger-V4 US-Arlington TX W Arbrook Blvd,32.68257,-97.1209
 Supercharger US-Austin TX,30.3292,-97.70627
 Supercharger-V3 US-Austin TX - FM 969,30.2547,-97.60646
@@ -7108,6 +7112,7 @@ Supercharger-V4 US-McKinney TX N Graves St,33.21604,-96.62732
 Supercharger-V3 US-Melissa TX,33.27033,-96.59296
 Supercharger US-Midland TX,31.9468,-102.14203
 Supercharger-V4 US-Midlothian TX Victron Energy,32.45986,-96.94247
+Supercharger-V4 US-Mission TX,26.19586,-98.28382
 Supercharger US-Nacogdoches TX,31.652,-94.6796
 Supercharger-V4 US-Navasota TX,30.3771,-96.06814
 Supercharger-V3 US-New Boston TX,33.46976,-94.45452
@@ -7158,6 +7163,7 @@ Supercharger-V3 US-Terrell TX,32.7174,-96.32314
 Supercharger US-Texarkana Nash TX,33.4523,-94.1311
 Supercharger US-Texarkana TX,33.4599,-94.07723
 Supercharger-V4 US-Texas City TX,29.42815,-95.06415
+Supercharger-V4 US-The Colony TX,33.07903,-96.8624
 Supercharger US-Three Rivers TX,28.52162,-98.18582
 Supercharger-V4 US-Tyler TX,32.44068,-95.13705
 Supercharger-V4 US-Tyler TX S SW Loop 323,32.3335,-95.33942
@@ -12161,6 +12167,7 @@ Duferco IT-Vado Ligure Via Trieste,44.26627,8.43146
 e-con DE-Bodnegg Eichelstraße,47.73042,9.69902
 e-con DE-Buchloe Neue Mitte,48.03518,10.71952
 e-con DE-Isny Am Bühlberg,47.70359,10.04971
+e-con DE-Memmingen Rudolf-Diesel-Straße,48.00137,10.1692
 e-con DE-Memmingen Zeissweg,47.96655,10.18286
 e-con DE-Nesselwang Füssener Straße,47.62031,10.5068
 e-con DE-Sonthofen Rudolf-Diesel-Straße,47.52355,10.26885
@@ -21508,6 +21515,8 @@ Galp PT-Área de Serviço de Montemor-o-Novo,38.61795,-8.07868
 
 GardaUno IT-Limone sul Garda Via Lungolago Guglielmo Marconi,45.81156,10.79354
 
+Gemeinde-Unterhaching DE-Unterhaching Walter-Paetzmann-Straße,48.07135,11.61864
+
 GeniePoint GB-Eastbourne Hargreaves Rd,50.79685,0.2855
 GeniePoint GB-Newquay,50.44687,-5.0021
 GeniePoint GB-Petersfield Rams Walk,51.00511,-0.93741
@@ -22676,6 +22685,7 @@ Ionity DE-Aichstetten Am Waizenhof,47.88068,10.0411,30
 Ionity DE-Alsfeld Dirsröder Feld,50.73742,9.2449,40
 Ionity DE-Altdorf bei Nürnberg Nürnberger Straße,49.3833,11.34296
 Ionity DE-Apen Tiegelstraße,53.24694,7.7706
+Ionity DE-Aurach Leutershausener Straße,49.25053,10.42278
 Ionity DE-Autohof Berg,50.37238,11.78735
 Ionity DE-Autohof Bingen-Nahetal,49.92576,7.93674,30
 Ionity DE-Autohof Bitterfeld,51.63655,12.2004,15
@@ -29705,6 +29715,7 @@ Smatrics DE-Eisenstadt Haidäcker-Park,47.8275,16.52437
 Smatrics DE-Grammetal Steinbrüchenstraße,50.96643,11.2573
 Smatrics DE-Heilbronn Weipertstraße,49.1488,9.2144
 Smatrics DE-Leonberg Am Schlossberg,48.81627,9.0168
+Smatrics DE-Neckarsulm Stuttgarter Straße,49.2,9.23596
 Smatrics DE-Neuenstadt am Kocher Daimlerstraße,49.23866,9.34116
 Smatrics DE-Passau Messestraße,48.55925,13.41126
 Smatrics DE-Passau Regensburger Straße,48.57432,13.446
