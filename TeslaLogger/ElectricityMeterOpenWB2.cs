@@ -179,7 +179,7 @@ namespace TeslaLogger
                 if (String.IsNullOrEmpty(j))
                     return null;
 
-                if (double.TryParse(j, out double value))
+                if (double.TryParse(j, System.Globalization.NumberStyles.Float, System.Globalization.CultureInfo.InvariantCulture, out double value))
                 {
                     return value / 1000;
                 }
@@ -230,7 +230,7 @@ namespace TeslaLogger
                 if (String.IsNullOrEmpty(j))
                     return null;
 
-                if (double.TryParse(j, out double value))
+                if (double.TryParse(j, System.Globalization.NumberStyles.Float, System.Globalization.CultureInfo.InvariantCulture, out double value))
                 {
                     return value / 1000;
                 }

@@ -42,7 +42,7 @@ namespace TeslaLogger
                     return status;
                 }
 
-                string cacheKey = "goe_" + guid.ToString();
+                string cacheKey = "goe_" + host;
                 object o = MemoryCache.Default.Get(cacheKey);
 
                 if (o != null)
