@@ -974,6 +974,10 @@ WHERE
                 {
                     RestoreChargingCostsFromBackupCheckReceivedFile(ref errorText, fileName, ref sqlExtract);
                 }
+                else
+                {
+                    errorText = "no valid backup file received";
+                }
                 if (string.IsNullOrEmpty(errorText))
                 {
                     // INSERT statement extracted successfully, now extract CREATE TABLE
@@ -1185,10 +1189,18 @@ WHERE
                     }
                     using (StreamWriter writer = new StreamWriter(shellScript))
                     {
-                        writer.WriteLine($"/usr/bin/mysql {(Tools.IsDocker() ? "-hdatabase" : "")} -u{DBHelper.User} -p{DBHelper.Password} -D{DBHelper.Database}{(Tools.IsDocker() ? " -hdatabase" : "")} < {sqlCreate}");
-                        writer.WriteLine($"/usr/bin/mysql {(Tools.IsDocker() ? "-hdatabase" : "")} -u{DBHelper.User} -p{DBHelper.Password} -D{DBHelper.Database}{(Tools.IsDocker() ? " -hdatabase" : "")} < {sqlExtract}");
+                        writer.WriteLine($"/usr/bin/mysql {(Tools.IsDocker() ? "-hdatabase" : "")} -u{ShellQuote(DBHelper.User)} -p{ShellQuote(DBHelper.Password)} -D{ShellQuote(DBHelper.Database)}{(Tools.IsDocker() ? " -hdatabase" : "")} < {ShellQuote(sqlCreate)}");
+                        writer.WriteLine($"/usr/bin/mysql {(Tools.IsDocker() ? "-hdatabase" : "")} -u{ShellQuote(DBHelper.User)} -p{ShellQuote(DBHelper.Password)} -D{ShellQuote(DBHelper.Database)}{(Tools.IsDocker() ? " -hdatabase" : "")} < {ShellQuote(sqlExtract)}");
                     }
-                    Tools.ExecMono("/bin/bash", shellScript);
+                    try
+                    {
+                        Tools.ExecMono("/bin/bash", shellScript);
+                    }
+                    finally
+                    {
+                        // script contains the DB password in clear text
+                        File.Delete(shellScript);
+                    }
                     if (!DBHelper.TableExists("chargingstate_bak"))
                     {
                         errorText = "Database table chargingstate_bak does not exist";
@@ -1237,7 +1249,7 @@ DROP TABLE chargingstate_bak";
                 }
                 using (StreamWriter writer = new StreamWriter(shellScript))
                 {
-                    writer.WriteLine($"/bin/zcat {fileName} | sed -e '/CREATE TABLE `chargingstate`/,/;/!d' | sed -e s/chargingstate/chargingstate_bak/ > {sqlCreate}");
+                    writer.WriteLine($"/bin/zcat {ShellQuote(fileName)} | sed -e '/CREATE TABLE `chargingstate`/,/;/!d' | sed -e s/chargingstate/chargingstate_bak/ > {ShellQuote(sqlCreate)}");
                 }
                 Tools.ExecMono("/bin/bash", shellScript);
             }
@@ -1320,7 +1332,7 @@ DROP TABLE chargingstate_bak";
                             }
                             using (StreamWriter writer = new StreamWriter(shellScript))
                             {
-                                writer.WriteLine($"/bin/zcat {fileName} | grep 'INSERT INTO `chargingstate`' | sed -e s/chargingstate/chargingstate_bak/ > {sqlExtract}");
+                                writer.WriteLine($"/bin/zcat {ShellQuote(fileName)} | grep 'INSERT INTO `chargingstate`' | sed -e s/chargingstate/chargingstate_bak/ > {ShellQuote(sqlExtract)}");
                             }
                             Tools.ExecMono("/bin/bash", shellScript);
                         }
@@ -1359,6 +1371,23 @@ DROP TABLE chargingstate_bak";
             }
         }
 
+        internal static bool IsAllowedLocalBackupFile(string fileName)
+        {
+            if (string.IsNullOrEmpty(fileName) || !Regex.IsMatch(fileName, "^[A-Za-z0-9_./-]+$"))
+            {
+                return false;
+            }
+            string fullPath = Path.GetFullPath(fileName);
+            return fullPath.StartsWith("/etc/teslalogger/backup/", StringComparison.Ordinal)
+                && Path.GetFileName(fullPath).StartsWith("mysqldump", StringComparison.Ordinal);
+        }
+
+        // quote a value for use as a single argument in a bash script
+        internal static string ShellQuote(string value)
+        {
+            return "'" + (value ?? string.Empty).Replace("'", "'\\''") + "'";
+        }
+
         private static void RestoreChargingCostsFromBackupReceiveFile(HttpListenerRequest request, ref string fileName, ref bool removeFile)
         {
             Logfile.Log("RestoreChargingCostsFromBackupReceiveFile");
@@ -1379,6 +1408,12 @@ DROP TABLE chargingstate_bak";
                             {
                                 fileName = HttpUtility.UrlDecode(m.Groups[1].Captures[0].ToString());
                                 Logfile.Log($"restoreFromLocalFile -> {fileName}");
+                                // only backups offered by the admin page are allowed, the file name ends up in a shell script
+                                if (!IsAllowedLocalBackupFile(fileName))
+                                {
+                                    Logfile.Log($"restoreFromLocalFile: file not allowed: {fileName}");
+                                    fileName = string.Empty;
+                                }
                             }
                         }
                     }
