@@ -432,6 +432,9 @@ WHERE
                         MySqlDataReader dr = SQLTracer.TraceDR(cmd);
                         while (dr.Read())
                         {
+                            if (dr[0] == DBNull.Value || dr[1] == DBNull.Value) // e.g. ongoing charging session without EndDate
+                                continue;
+
                             DateTime d1 = (DateTime)dr[0];
                             DateTime d2 = (DateTime)dr[1];
                             TimeSpan ts = d1 - d2;
@@ -570,7 +573,9 @@ WHERE
 ", con))
                     {
                         cmd.Parameters.AddWithValue("@journeyID", journeyId);
-                        consumption_kWh = (double)SQLTracer.TraceSc(cmd);
+                        object oConsumption = SQLTracer.TraceSc(cmd);
+                        // SUM() is NULL if no leg has consumption data
+                        consumption_kWh = oConsumption == null || oConsumption == DBNull.Value ? 0 : Convert.ToDouble(oConsumption, Tools.ciEnUS);
                     }
                     using (MySqlCommand cmd = new MySqlCommand(@"
 UPDATE
@@ -613,6 +618,9 @@ SELECT
     journeys.drive_duration_minutes, 
     journeys.charge_duration_minutes,
     Round(tripEnd.EndKm - tripStart.StartKm,1) as distance, 
+    (
+	select round(sum(T2.km_diff),1) from trip as T2 where T2.CarID = cars.Id and T2.StartPosID >= journeys.StartPosID and T2.EndPosID <= journeys.EndPosID and T2.consumption_kWh is not null
+    ) as distance_with_consumption,
     (
 	select round(sum(charge_energy_added * co2_g_kWh) / 1000,1) from chargingstate as T1 where T1.CarID = cars.Id and T1.StartDate between tripStart.StartDate and tripEnd.EndDate
     ) as CO2kg,
