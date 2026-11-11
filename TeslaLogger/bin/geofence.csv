@@ -154,7 +154,7 @@ Supercharger-V3 AU-Devonport TAS,-41.17992,146.36743
 Supercharger AU-Dubbo NSW,-32.24995,148.60918
 Supercharger-V4 AU-Eastlakes NSW,-33.92444,151.21182
 Supercharger AU-Eaton WA,-33.31962,115.71702
-Supercharger AU-Euroa VIC,-36.7529,145.57342
+Supercharger-V4 AU-Euroa VIC,-36.7529,145.57342
 Supercharger-V3 AU-Exeter NSW,-34.60925,150.22986
 Supercharger-V3 AU-Forest Lodge NSW,-33.8765,151.178
 Supercharger AU-Fortitude Valley QLD,-27.4517,153.04047
@@ -327,6 +327,7 @@ Supercharger-V4 CA-Red Deer County AB Leva Ave,52.20873,-113.81515
 Supercharger CA-Rocky View AB,51.20355,-113.98975
 Supercharger-V3 CA-Strathmore AB,51.03834,-113.3787
 Supercharger-V3 CA-Vegreville AB,53.501977,-112.079236
+Supercharger-V4 CA-Wandering River AB,55.19615,-112.4723
 
 Supercharger-V4 CA-Abbotsford BC Delair Rd,49.0362,-122.26673
 Supercharger CA-Abbotsford BC Mount Lehman Road,49.05906,-122.37702
@@ -2826,6 +2827,7 @@ Supercharger-V3 FR-Montpellier,43.602398,3.919982,40
 Supercharger-V4 FR-Montélimar,44.67518,4.79573
 Supercharger-V4 FR-Montélimar,44.67632,4.79576
 Supercharger FR-Morlaix,48.57439,-3.85318
+Supercharger-V4 FR-Morschwiller,47.7378,7.28154
 Supercharger FR-Mougins,43.603668,7.011086
 Supercharger FR-Mulhouse,47.782016,7.388299
 Supercharger-V4 FR-Mulhouse Rue des Cévennes,47.7821,7.3871
@@ -3737,6 +3739,7 @@ Supercharger-V4 LT-Vilnius,54.70311,25.26424
 Supercharger-V3 LU-Luxembourg Urban,49.583756,6.124503
 Supercharger LU-Mënsbech,49.6409,6.27076
 
+Supercharger-V4 LV-Liepāja,56.51837,21.02395
 Supercharger LV-Rēzekne,56.514628,27.350956
 Supercharger-V3 LV-Rīga,56.924138,24.177005
 
@@ -4467,6 +4470,7 @@ Supercharger-V4 US-North Little Rock AR,34.78068,-92.21815
 Supercharger-V3 US-Ozark AR,35.52384,-93.86356
 Supercharger-V4 US-Rogers AR,36.33605,-94.17536
 Supercharger-V3 US-Van Buren AR,35.45845,-94.35618
+Supercharger-V4 US-West Memphis AR,35.16503,-90.1774
 
 Supercharger-V4 US-Avondale AZ,33.4632,-112.28165
 Supercharger-V3 US-Buckeye AZ,33.4428,-112.5569
@@ -5174,6 +5178,7 @@ Supercharger US-Boulder CO,40.0202,-105.25727
 Supercharger-V3 US-Boulder CO - 28th Street,40.03156,-105.25738
 Supercharger-V3 US-Brighton CO,39.97195,-104.74852
 Supercharger-V4 US-Brush CO,40.27092,-103.62224
+Supercharger-V4 US-Carbondale CO,39.40374,-107.22128
 Supercharger-V4 US-Castle Rock CO,39.40804,-104.86298
 Supercharger-V3 US-Centennial CO,39.56703,-104.87806
 Supercharger US-Colorado Springs CO,38.8375,-104.82486
@@ -5280,6 +5285,7 @@ Supercharger US-Lewes DE,38.74447,-75.15426
 Supercharger-V3 US-Middletown DE,39.47967,-75.72072
 Supercharger-V3 US-New Castle DE - Christiana Bypass,39.6651,-75.66706
 Supercharger-V3 US-New Castle DE - North Dupont Highway,39.7094,-75.5631
+Supercharger-V4 US-New Castle DE 1515 North Dupont Hwy,39.6931,-75.58026
 Supercharger-V3 US-New Castle DE Airport Rd,39.67722,-75.62795
 Supercharger-V3 US-New Castle DE New Castle Avenue,39.6955,-75.556
 Supercharger US-Newark DE,39.66347,-75.6902
@@ -6452,6 +6458,7 @@ Supercharger-V4 US-Las Vegas NV S Nellis Blvd,36.14482,-115.06352
 Supercharger-V4 US-Las Vegas NV S Town Center Dr,36.14604,-115.32717
 Supercharger-V3 US-Las Vegas NV Tivoli Village,36.16798,-115.28485
 Supercharger-V4 US-Las Vegas NV W Russell Rd,36.08667,-115.2105
+Supercharger-V4 US-Las Vegas NV W Skye Canyon Park Dr,36.31533,-115.30557
 Supercharger-V3 US-Las Vegas NV West Tropical Parkway,36.27157,-115.26544
 Supercharger-V3 US-Laughlin NV,35.15038,-114.57543
 Supercharger US-Lovelock NV,40.17948,-118.4722
@@ -7837,6 +7844,7 @@ Aldi DE-Bonn-Lannesdorf Drachenburgstraße,50.66767,7.18025
 Aldi DE-Bonn-Nordstadt Brühler Straße,50.74186,7.07247
 Aldi DE-Borken Heidener Straße,51.842,6.86653
 Aldi DE-Bottrop Horster Straße,51.52442,6.9324
+Aldi DE-Brakel Am Sudheimer Weg,51.71282,9.18033
 Aldi DE-Braunschweig Hannoversche Straße,52.27245,10.49405
 Aldi DE-Butzbach Am Keltenhof,50.42884,8.6848
 Aldi DE-Böblingen,48.68565,8.9934
@@ -9160,6 +9168,7 @@ ARAL DE-Autohof Schnaittach,49.56753,11.327
 ARAL DE-Autohof Schwabach West,49.31116,11.00208,75
 ARAL DE-Autohof Schwarmstedt,52.67352,9.68845
 ARAL DE-Autohof Soest Ost,51.55337,8.15855
+ARAL DE-Autohof Stadtallendorf,50.83488,9.03787
 ARAL DE-Autohof Wittenburg,53.5024,11.09788
 ARAL DE-Backnang Manfred-von-Ardenne-Allee,48.9591,9.42277
 ARAL DE-Bad Bentheim Athener Straße,52.32026,7.0676
@@ -9625,7 +9634,6 @@ ARAL DE-Sottrum Bremer Straße,53.11398,9.23144
 ARAL DE-Speyer Bahnhofstraße,49.32735,8.43007
 ARAL DE-Speyer Industriestraße,49.30964,8.44492
 ARAL DE-Sprockhövel Wittener Straße,51.3404,7.28974
-ARAL DE-Stadtallendorf Daimler-Straße,50.83488,9.03787
 ARAL DE-Stadtlauringen Lehmgrube,50.1831,10.3695
 ARAL DE-Steinsfeld Baukreativstraße,49.44486,10.2506
 ARAL DE-Stendal Arneburger Straße,52.61696,11.86844
@@ -12334,6 +12342,7 @@ E-Werk-Franz AT-Graz Viktor-Franz-Straße,47.08993,15.41302
 E-Werk-Franz AT-Thal Arnold Schwarzenegger Museum,47.07218,15.36271
 
 E.Leclerc FR-Auxerre Rue des Prés Coulons,47.79698,3.58167
+E.Leclerc FR-Sarlat-la-Canéda Av. de Madrazes,44.8756,1.2235
 
 E.ON CZ-Chomutov Černovická,50.45666,13.3936
 E.ON CZ-Dolní Dvořiště,48.64844,14.4534
@@ -15133,7 +15142,7 @@ EnBW DE-Bottrop Horster Straße,51.5357,6.9668
 EnBW DE-Brackenheim Georg-Kohl-Straße,49.08256,9.06715
 EnBW DE-Brackenheim Hermann-Bauer-Straße,49.07424,9.06266
 EnBW DE-Brackenheim Neipperger Straße,49.08183,9.06147
-EnBW DE-Brakel Warburger Straße,51.7069,9.1776
+EnBW DE-Brakel Warburger Straße,51.70704,9.17965
 EnBW DE-Bramsche Meyers Tannen,52.4008,7.9942
 EnBW DE-Bramsche Varusstrasse,52.3987,8.0211
 EnBW DE-Brand-Erbisdorf Großhartmannsdorfer Straße,50.85822,13.32053
@@ -15957,7 +15966,7 @@ EnBW DE-Kirchheim unter Teck Roßmarkt,48.6464,9.45217
 EnBW DE-Kirchheim unter Teck Untere Steinstraße,48.65046,9.4574
 EnBW DE-Kirchlengern Elsestraße,52.19283,8.63106
 EnBW DE-Kirchzarten Höllentalstraße,47.96194,7.987
-EnBW DE-Kitzingen Am Dreistock,49.7554,10.1766
+EnBW DE-Kitzingen Am Dreistock,49.75574,10.1782
 EnBW DE-Kißlegg Dürren,47.73053,9.88013,25
 EnBW DE-Kißlegg Friedrich-List-Straße,47.77017,9.8916
 EnBW DE-Kißlegg Kirchstraße,47.75704,9.9134
@@ -19782,6 +19791,7 @@ EWE-GO DE-Autohof Königslutter,52.31128,10.82518
 EWE-GO DE-Autohof Mendig,50.38202,7.26959,12
 EWE-GO DE-Autohof Nahetal,49.9252,7.93588,30
 EWE-GO DE-Autohof Pfalzfeld,50.11603,7.6002,25
+EWE-GO DE-Autohof Stadtallendorf,50.83357,9.0392
 EWE-GO DE-Aßlar Walbergraben,50.58404,8.48065
 EWE-GO DE-Backnang Wanne,48.93224,9.43907
 EWE-GO DE-Bad Bentheim Athener Straße,52.32124,7.06751
@@ -20769,7 +20779,6 @@ EWE-GO DE-Stade Altländer Straße,53.60198,9.48635
 EWE-GO DE-Stade Harburger Straße,53.58196,9.50056
 EWE-GO DE-Stadland Am Markt,53.40169,8.45503
 EWE-GO DE-Stadland Hauptstraße,53.45666,8.34696
-EWE-GO DE-Stadtallendorf Faudi-Straße,50.83357,9.03919
 EWE-GO DE-Stadtbergen Daimlerstraße,48.3768,10.84152
 EWE-GO DE-Stadthagen Jahnstraße,52.30994,9.19144
 EWE-GO DE-Steinfurt Carl-Benz-Straße,52.15925,7.32036
