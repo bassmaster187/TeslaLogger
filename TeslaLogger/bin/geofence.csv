@@ -289,7 +289,7 @@ Supercharger-V4 BE-Couvin,50.08372,4.52403
 Supercharger-V4 BE-Diegem,50.88387,4.44367
 Supercharger BE-Edegem,51.15105,4.43258
 Supercharger-V4 BE-Gent,51.0181,3.7367
-Supercharger-V3 BE-Hasselt,50.95175,5.35314,17
+Supercharger-V3 BE-Hasselt,50.95175,5.35314,20
 Supercharger-V3 BE-Heusden-Zolder,50.9934,5.2422
 Supercharger BE-Kortrijk,50.80565,3.27443
 Supercharger-V3 BE-Liège,50.67123,5.5434
@@ -460,6 +460,7 @@ Supercharger-V3 CA-Minden ON,44.931057,-78.715123
 Supercharger-V3 CA-Mississauga ON,43.59039,-79.57654
 Supercharger-V3 CA-Mississauga ON - Vega Boulevard,43.517883,-79.688454
 Supercharger CA-Mississauga ON - Winston Churchill Blvd.,43.598295,-79.786068
+Supercharger-V4 CA-Mississauga ON Credit View Rd,43.59975,-79.71005
 Supercharger-V3 CA-Mount Forest ON,43.988176,-80.743106
 Supercharger-V3 CA-Napanee ON,44.262183,-76.963175
 Supercharger-V3 CA-Nepean ON - Robertson Road,45.321754,-75.835732
@@ -4705,6 +4706,7 @@ Supercharger-V3 US-Fremont CA,37.49236,-121.94656
 Supercharger US-Fremont CA - 39201 Fremont Blvd,37.5447,-121.98368
 Supercharger-V3 US-Fremont CA - Civic Center Drive,37.555,-121.9742
 Supercharger-V3 US-Fremont CA - Pacific Commons Boulevard,37.50207,-121.96717
+Supercharger-V4 US-Fremont CA Blacow Rd,37.52258,-121.97033
 Supercharger-V3 US-Fremont CA Warm Springs Blvd,37.47647,-121.9212
 Supercharger US-Fresno CA,36.83437,-119.9094
 Supercharger-V3 US-Fresno CA - North Blackstone Avenue,36.8501,-119.79117
@@ -5797,6 +5799,7 @@ Supercharger-V3 US-Emporia KS,38.4146,-96.21688
 Supercharger-V4 US-Fort Scott KS Fort Scott DQ,37.81132,-94.70656
 Supercharger US-Goodland KS,39.32628,-101.72503
 Supercharger US-Hays KS,38.90054,-99.31933
+Supercharger-V4 US-Hays KS Vine St,38.87482,-99.31755
 Supercharger-V3 US-Lawrence KS,39.01853,-95.13718
 Supercharger-V4 US-Lenexa KS,38.9724,-94.74206
 Supercharger-V4 US-Manhattan KS,39.1721,-96.6064
@@ -9861,6 +9864,7 @@ autoSense CH-Dübendorf Giessenstrasse,47.40168,8.61012
 autoSense CH-Fislisbach Winkelstrasse,47.4414,8.29545
 autoSense CH-Sihlbrugg Zugerstrasse,47.21732,8.57623
 autoSense CH-Zuchwil Langenfeldstrasse,47.20239,7.57139,25
+autoSense LI-Vaduz Austrasse,47.12993,9.5234
 
 autostrom.plus DE-Bergkirchen Palsweiser Straße,48.2595,11.30058
 autostrom.plus DE-Bergkirchen Thaler Straße,48.25658,11.30096
@@ -9895,6 +9899,7 @@ autostrom.plus DE-Rastplatz Karthaus West,51.88134,7.34887
 autostrom.plus DE-Rastplatz Krempel Ost,53.71037,8.66426
 autostrom.plus DE-Rastplatz Kutzhof Nord,49.3526,6.9897
 autostrom.plus DE-Rastplatz Lau Brechte,52.22498,7.14002
+autostrom.plus DE-Rastplatz Leinetal Süd,51.40804,10.18112
 autostrom.plus DE-Rastplatz Logebachtal Ost,50.67548,7.29638
 autostrom.plus DE-Rastplatz Nadelöhr,50.90736,9.8811
 autostrom.plus DE-Rastplatz Olle Rheen Ost,53.0863,7.2419
@@ -14750,6 +14755,7 @@ eliso DE-Büdingen An der Kleibscheibe,50.27383,9.11425
 eliso DE-Büren Flughafenstraße,51.6106,8.62093
 eliso DE-Celle Zur Hasselklink,52.65246,10.06868
 eliso DE-Essen Bamlerstraße,51.47264,6.9912
+eliso DE-Friedberg Augsburger Straße,48.3562,10.9702
 eliso DE-Gedern Am alten Bahnhof,50.41937,9.19533
 eliso DE-Glauburg Glauberger Straße,50.32155,9.0126
 eliso DE-Greven Airportallee,52.12994,7.68998
@@ -19234,6 +19240,7 @@ Eviny DE-Hof Wunsiedler Straße,50.30458,11.9164
 Eviny DE-Horn-Bad Meinberg Kampstraße,51.8748,8.94956
 Eviny DE-Illertissen Friedrich-Ebert-Straße,48.22366,10.09854
 Eviny DE-Ingolstadt Frühlingstraße,48.76626,11.438
+Eviny DE-Kappeln Feldstraße,54.65942,9.93088
 Eviny DE-Kaufbeuren Sudetenstraße,47.89903,10.64328
 Eviny DE-Koblenz Konrad-Zuse-Straße,50.33634,7.56806
 Eviny DE-Kornwestheim Leibnizstraße,48.86792,9.20123
@@ -21218,6 +21225,7 @@ Fastned DE-Wittstock/Dosse Hamburgerstraße,53.15744,12.45124
 Fastned DE-Wolpertshausen Birkichstraße,49.1707,9.86035
 Fastned DK-Rasteplads Gudenå Vest,56.45,9.9981
 Fastned FR-Achères-la-Forêt Aire d A6,48.36078,2.574
+Fastned FR-Aire de Changis-sur-Marne,48.96465,3.0541
 Fastned FR-Aire de Gevrey-Chambertin Ouest,47.21672,5.00188,30
 Fastned FR-Aire de Keskastel,48.97201,7.06871
 Fastned FR-Aire de Keskastel,48.97473,7.06457
@@ -25873,6 +25881,7 @@ Mer AT-Ebreichsdorf Betriebsring,47.98323,16.39629
 Mer AT-Eisenstadt Handelsstraße,47.82881,16.53174
 Mer AT-Feldkirchen in Kärnten Gurktalerstraße,46.73119,14.09518
 Mer AT-Frauenhofen Wiener Straße,48.66573,15.63357
+Mer AT-Fürstenfeld Burgauer Straße,47.0657,16.07848,32
 Mer AT-Gleisdorf Europastraße,47.10868,15.70373
 Mer AT-Gmunden Aubauerstraße,47.93097,13.78547
 Mer AT-Graz Lauzilgasse,47.04517,15.43038
@@ -28883,7 +28892,7 @@ SETEC RO-Târgoviște Strada Stelea,44.92907,25.46125
 SEV84 FR-Entrechaux Rte de Faucon,44.21866,5.14106
 
 Shell AT-Amstetten Otto-Schott-Straße,48.11633,14.91141
-Shell AT-Fürstenfeld Burgauer Straße,47.06547,16.07911
+Shell AT-Fürstenfeld Burgauer Straße,47.06547,16.0791,32
 Shell AT-Gaisberg Thalgaustraße,47.84683,13.3392,25
 Shell AT-Gmünd Weitraer Straße,48.76844,14.98002
 Shell AT-Graz St. Peter Hauptstraße,47.05762,15.4708
@@ -30613,7 +30622,7 @@ TankE DE-Alsfeld Landgraf-Hermann-Straße,50.75273,9.27277
 TankE DE-Bergisch Gladbach Hauptstraße,50.99213,7.1319
 TankE DE-Berlin Turmstraße,52.52646,13.34446
 TankE DE-Bornheim Rathausstraße,50.75727,7.00444
-TankE DE-Brilon Möhnestraße,51.40928,8.5784
+TankE DE-Brilon Möhnestraße,51.41013,8.5783
 TankE DE-Brüggen St.-Barbara-Straße,51.2563,6.17423
 TankE DE-Dieburg Dieselstraße,49.91037,8.862
 TankE DE-Fürth Friedrichstraße,49.47183,10.99017
