@@ -1,15 +1,86 @@
 /*
  * Dashboard layout for admin/index.php.
  *
- * Shared design tokens and basic components (tl-page, tl-card, tl-alert, ...)
- * live in teslalogger_ui.css, which has to be loaded before this file.
+ * Loaded in addition to teslalogger_style.css, which still styles the header
+ * and navigation (menu.php) and all other admin pages.
  *
- * teslalogger_style.css is loaded as well and still styles the header and
- * navigation (menu.php) and all other admin pages.
+ * Do not use class names containing "content" or "site": the theme attaches
+ * clearfix pseudo elements to [class*="content"] and [class*="site"], which
+ * would turn into unwanted grid/flex items here.
  */
 
-/* map tiles are light images, so the map controls stay light in dark scheme */
+/* Design tokens -------------------------------------------------------------
+ *
+ * Every colour that differs between the two schemes is one of these variables.
+ * The light values are the default, the dark values replace them when the
+ * browser or operating system asks for a dark colour scheme. There is no
+ * switch on the page.
+ *
+ * To add another page later, move both blocks into a shared stylesheet and use
+ * the variables there as well (see UI-Changes-Fable5.2.md).
+ */
+
+:root {
+	--tl-bg: #f5f5f5;		/* page background, same value as the theme */
+	--tl-card: #ffffff;
+	--tl-border: #e3e5e8;
+	--tl-text: #1f2328;
+	--tl-muted: #636b74;
+	--tl-track: #e6e8eb;
+	--tl-link: #24890d;		/* same values as the theme */
+	--tl-link-hover: #41a62a;
+
+	--tl-accent: #24890d;
+	--tl-accent-strong: #1a6b09;
+	--tl-accent-soft: #e6f4e2;
+	--tl-info-strong: #0d4f9e;
+	--tl-info-soft: #e3f0fc;
+	--tl-warn: #e08a00;
+	--tl-danger: #c62828;
+	--tl-danger-strong: #b3261e;
+	--tl-danger-soft: #fdeaea;
+	--tl-neutral-strong: #4a525a;
+	--tl-neutral-soft: #eceef1;
+	--tl-switch-off: #8b939c;	/* track of a switch that is off, the thumb is white in both schemes */
+
+	--tl-icon-filter: none;	/* the car icons are black PNG files */
+	--tl-shadow: 0 1px 2px rgba(16, 24, 40, 0.06), 0 1px 3px rgba(16, 24, 40, 0.08);
+
+	--tl-radius: 12px;
+	--tl-gap: 16px;
+}
+
 @media (prefers-color-scheme: dark) {
+	:root {
+		color-scheme: dark;	/* dark scrollbars and form controls */
+
+		--tl-bg: #111315;
+		--tl-card: #1c1f24;
+		--tl-border: #2e333a;
+		--tl-text: #e6e8eb;
+		--tl-muted: #9aa3ad;
+		--tl-track: #30353c;
+		--tl-link: #6fcf58;
+		--tl-link-hover: #9be58a;
+
+		--tl-accent: #3fae24;
+		--tl-accent-strong: #7fd76a;
+		--tl-accent-soft: #1d3a17;
+		--tl-info-strong: #8ec2ff;
+		--tl-info-soft: #16304f;
+		--tl-warn: #f0a020;
+		--tl-danger: #e5534b;
+		--tl-danger-strong: #ff938c;
+		--tl-danger-soft: #45201f;
+		--tl-neutral-strong: #c3cad2;
+		--tl-neutral-soft: #2a2f36;
+		--tl-switch-off: #6b747e;
+
+		--tl-icon-filter: invert(1);
+		--tl-shadow: none;
+	}
+
+	/* map tiles are light images, so the map controls stay light as well */
 	.leaflet-container {
 		color-scheme: light;
 	}
@@ -22,12 +93,122 @@
 	}
 }
 
-/* Info box (filled by info.php) ------------------------------------------- */
+/* This stylesheet is only loaded by index.php, other pages keep the theme background */
+body {
+	background: var(--tl-bg);
+}
+
+.tl-page {
+	box-sizing: border-box;
+	color: var(--tl-text);
+	font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+	font-size: 15px;
+	line-height: 1.5;
+	max-width: 1260px; /* same as .site-header */
+	padding: var(--tl-gap);
+}
+
+.tl-page *,
+.tl-page *::before,
+.tl-page *::after {
+	box-sizing: border-box;
+}
+
+.tl-muted {
+	color: var(--tl-muted);
+}
+
+/* The theme link colours are too dark on a dark card. Leaflet and alerts keep their own. */
+.tl-page a:not(.leaflet-container a):not(.tl-alert a) {
+	color: var(--tl-link);
+}
+
+.tl-page a:not(.leaflet-container a):not(.tl-alert a):hover,
+.tl-page a:not(.leaflet-container a):not(.tl-alert a):active {
+	color: var(--tl-link-hover);
+}
+
+/* Cards and grid ---------------------------------------------------------- */
+
+.tl-grid {
+	display: grid;
+	gap: var(--tl-gap);
+	grid-template-columns: minmax(0, 1fr);
+	grid-template-areas:
+		"hero"
+		"details"
+		"trip"
+		"map";
+	transition: opacity 0.2s ease;
+}
+
+.tl-grid.is-stale {
+	opacity: 0.55;
+}
+
+.tl-card {
+	background: var(--tl-card);
+	border: 1px solid var(--tl-border);
+	border-radius: var(--tl-radius);
+	box-shadow: var(--tl-shadow);
+	min-width: 0;
+	padding: 16px 20px;
+}
+
+.tl-hero { grid-area: hero; }
+.tl-details { grid-area: details; }
+.tl-trip { grid-area: trip; }
+.tl-map-card { grid-area: map; }
+
+.tl-card-head {
+	align-items: center;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 4px 16px;
+	justify-content: space-between;
+	margin-bottom: 12px;
+}
+
+.tl-page .tl-card-title {
+	clear: none;
+	color: var(--tl-muted);
+	font-size: 13px;
+	font-weight: 600;
+	letter-spacing: 0.06em;
+	line-height: 1.4;
+	margin: 0 0 12px;
+	text-transform: uppercase;
+}
+
+.tl-card-head .tl-card-title {
+	margin-bottom: 0;
+}
+
+/* Alerts ------------------------------------------------------------------ */
+
+.tl-alert {
+	border-radius: 8px;
+	margin-bottom: 12px;
+	padding: 10px 14px;
+}
+
+.tl-alert-danger {
+	background: var(--tl-danger-soft);
+	color: var(--tl-danger-strong);
+}
+
+.tl-alert a {
+	color: inherit;
+	margin-left: 8px;
+	text-decoration: underline;
+}
 
 #conn_error {
 	font-weight: 600;
 	margin-bottom: var(--tl-gap);
 }
+
+/* Info box (filled by info.php) ------------------------------------------- */
 
 .tl-page .HeaderT {
 	margin-bottom: var(--tl-gap);
@@ -52,29 +233,6 @@
 	justify-content: flex-end;
 	margin-top: 12px;
 }
-
-/* Cards and grid ---------------------------------------------------------- */
-
-.tl-grid {
-	display: grid;
-	gap: var(--tl-gap);
-	grid-template-columns: minmax(0, 1fr);
-	grid-template-areas:
-		"hero"
-		"details"
-		"trip"
-		"map";
-	transition: opacity 0.2s ease;
-}
-
-.tl-grid.is-stale {
-	opacity: 0.55;
-}
-
-.tl-hero { grid-area: hero; }
-.tl-details { grid-area: details; }
-.tl-trip { grid-area: trip; }
-.tl-map-card { grid-area: map; }
 
 /* Hero: name, status, battery --------------------------------------------- */
 
