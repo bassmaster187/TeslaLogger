@@ -1,0 +1,617 @@
+/*
+ * Dashboard layout for admin/index.php.
+ *
+ * Loaded in addition to teslalogger_style.css, which still styles the header
+ * and navigation (menu.php) and all other admin pages.
+ *
+ * Do not use class names containing "content" or "site": the theme attaches
+ * clearfix pseudo elements to [class*="content"] and [class*="site"], which
+ * would turn into unwanted grid/flex items here.
+ */
+
+/* Design tokens -------------------------------------------------------------
+ *
+ * Every colour that differs between the two schemes is one of these variables.
+ * The light values are the default, the dark values replace them when the
+ * browser or operating system asks for a dark colour scheme. There is no
+ * switch on the page.
+ *
+ * To add another page later, move both blocks into a shared stylesheet and use
+ * the variables there as well (see UI-Changes-Fable5.2.md).
+ */
+
+:root {
+	--tl-bg: #f5f5f5;		/* page background, same value as the theme */
+	--tl-card: #ffffff;
+	--tl-border: #e3e5e8;
+	--tl-text: #1f2328;
+	--tl-muted: #636b74;
+	--tl-track: #e6e8eb;
+	--tl-link: #24890d;		/* same values as the theme */
+	--tl-link-hover: #41a62a;
+
+	--tl-accent: #24890d;
+	--tl-accent-strong: #1a6b09;
+	--tl-accent-soft: #e6f4e2;
+	--tl-info-strong: #0d4f9e;
+	--tl-info-soft: #e3f0fc;
+	--tl-warn: #e08a00;
+	--tl-danger: #c62828;
+	--tl-danger-strong: #b3261e;
+	--tl-danger-soft: #fdeaea;
+	--tl-neutral-strong: #4a525a;
+	--tl-neutral-soft: #eceef1;
+	--tl-switch-off: #8b939c;	/* track of a switch that is off, the thumb is white in both schemes */
+
+	--tl-icon-filter: none;	/* the car icons are black PNG files */
+	--tl-shadow: 0 1px 2px rgba(16, 24, 40, 0.06), 0 1px 3px rgba(16, 24, 40, 0.08);
+
+	--tl-radius: 12px;
+	--tl-gap: 16px;
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		color-scheme: dark;	/* dark scrollbars and form controls */
+
+		--tl-bg: #111315;
+		--tl-card: #1c1f24;
+		--tl-border: #2e333a;
+		--tl-text: #e6e8eb;
+		--tl-muted: #9aa3ad;
+		--tl-track: #30353c;
+		--tl-link: #6fcf58;
+		--tl-link-hover: #9be58a;
+
+		--tl-accent: #3fae24;
+		--tl-accent-strong: #7fd76a;
+		--tl-accent-soft: #1d3a17;
+		--tl-info-strong: #8ec2ff;
+		--tl-info-soft: #16304f;
+		--tl-warn: #f0a020;
+		--tl-danger: #e5534b;
+		--tl-danger-strong: #ff938c;
+		--tl-danger-soft: #45201f;
+		--tl-neutral-strong: #c3cad2;
+		--tl-neutral-soft: #2a2f36;
+		--tl-switch-off: #6b747e;
+
+		--tl-icon-filter: invert(1);
+		--tl-shadow: none;
+	}
+
+	/* map tiles are light images, so the map controls stay light as well */
+	.leaflet-container {
+		color-scheme: light;
+	}
+
+	/* block from teslalogger.de: the YouTube logo has dark lettering */
+	.tl-remote img[src*="youtube"] {
+		background: #fff;
+		border-radius: 4px;
+		padding: 2px 4px;
+	}
+}
+
+/* This stylesheet is only loaded by index.php, other pages keep the theme background */
+body {
+	background: var(--tl-bg);
+}
+
+.tl-page {
+	box-sizing: border-box;
+	color: var(--tl-text);
+	font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+	font-size: 15px;
+	line-height: 1.5;
+	max-width: 1260px; /* same as .site-header */
+	padding: var(--tl-gap);
+}
+
+.tl-page *,
+.tl-page *::before,
+.tl-page *::after {
+	box-sizing: border-box;
+}
+
+.tl-muted {
+	color: var(--tl-muted);
+}
+
+/* The theme link colours are too dark on a dark card. Leaflet and alerts keep their own. */
+.tl-page a:not(.leaflet-container a):not(.tl-alert a) {
+	color: var(--tl-link);
+}
+
+.tl-page a:not(.leaflet-container a):not(.tl-alert a):hover,
+.tl-page a:not(.leaflet-container a):not(.tl-alert a):active {
+	color: var(--tl-link-hover);
+}
+
+/* Cards and grid ---------------------------------------------------------- */
+
+.tl-grid {
+	display: grid;
+	gap: var(--tl-gap);
+	grid-template-columns: minmax(0, 1fr);
+	grid-template-areas:
+		"hero"
+		"details"
+		"trip"
+		"map";
+	transition: opacity 0.2s ease;
+}
+
+.tl-grid.is-stale {
+	opacity: 0.55;
+}
+
+.tl-card {
+	background: var(--tl-card);
+	border: 1px solid var(--tl-border);
+	border-radius: var(--tl-radius);
+	box-shadow: var(--tl-shadow);
+	min-width: 0;
+	padding: 16px 20px;
+}
+
+.tl-hero { grid-area: hero; }
+.tl-details { grid-area: details; }
+.tl-trip { grid-area: trip; }
+.tl-map-card { grid-area: map; }
+
+.tl-card-head {
+	align-items: center;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 4px 16px;
+	justify-content: space-between;
+	margin-bottom: 12px;
+}
+
+.tl-page .tl-card-title {
+	clear: none;
+	color: var(--tl-muted);
+	font-size: 13px;
+	font-weight: 600;
+	letter-spacing: 0.06em;
+	line-height: 1.4;
+	margin: 0 0 12px;
+	text-transform: uppercase;
+}
+
+.tl-card-head .tl-card-title {
+	margin-bottom: 0;
+}
+
+/* Alerts ------------------------------------------------------------------ */
+
+.tl-alert {
+	border-radius: 8px;
+	margin-bottom: 12px;
+	padding: 10px 14px;
+}
+
+.tl-alert-danger {
+	background: var(--tl-danger-soft);
+	color: var(--tl-danger-strong);
+}
+
+.tl-alert a {
+	color: inherit;
+	margin-left: 8px;
+	text-decoration: underline;
+}
+
+#conn_error {
+	font-weight: 600;
+	margin-bottom: var(--tl-gap);
+}
+
+/* Info box (filled by info.php) ------------------------------------------- */
+
+.tl-page .HeaderT {
+	margin-bottom: var(--tl-gap);
+	width: auto;
+}
+
+.tl-info h1 {
+	clear: none;
+	font-size: 20px;
+	line-height: 1.3;
+	margin: 0 0 8px;
+}
+
+.tl-info p {
+	margin-bottom: 12px;
+}
+
+.tl-info-actions {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+	justify-content: flex-end;
+	margin-top: 12px;
+}
+
+/* Hero: name, status, battery --------------------------------------------- */
+
+.tl-hero-head {
+	align-items: center;
+	display: flex;
+	gap: 12px;
+	justify-content: space-between;
+	min-height: 32px;
+}
+
+.tl-page .tl-hero-name {
+	clear: none;
+	font-size: 22px;
+	font-weight: 700;
+	line-height: 1.3;
+	margin: 0;
+	overflow-wrap: anywhere;
+}
+
+.tl-caricons {
+	align-items: center;
+	display: flex;
+	flex: none;
+	gap: 6px;
+}
+
+.tl-caricons .caricons {
+	filter: var(--tl-icon-filter);
+	float: none;
+	margin: 0;
+}
+
+.tl-hero-status {
+	align-items: flex-start;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 6px 12px;
+	margin-top: 8px;
+}
+
+.tl-badge {
+	align-items: center;
+	background: var(--tl-neutral-soft);
+	border-radius: 999px;
+	color: var(--tl-neutral-strong);
+	display: inline-flex;
+	flex: none;
+	font-size: 14px;
+	font-weight: 600;
+	gap: 8px;
+	line-height: 20px;
+	padding: 4px 12px;
+}
+
+.tl-badge:empty {
+	display: none;
+}
+
+.tl-badge::before {
+	background: currentColor;
+	border-radius: 50%;
+	content: "";
+	height: 8px;
+	width: 8px;
+}
+
+.tl-badge[data-state="online"],
+.tl-badge[data-state="charging"] {
+	background: var(--tl-accent-soft);
+	color: var(--tl-accent-strong);
+}
+
+.tl-badge[data-state="driving"] {
+	background: var(--tl-info-soft);
+	color: var(--tl-info-strong);
+}
+
+.tl-badge[data-state="error"],
+.tl-badge[data-state="inactive"] {
+	background: var(--tl-danger-soft);
+	color: var(--tl-danger-strong);
+}
+
+.tl-status-text {
+	line-height: 20px;
+	min-width: 0;
+	overflow-wrap: anywhere;
+	padding: 4px 0;
+}
+
+.tl-status-text:empty {
+	display: none;
+}
+
+.tl-badge[data-state="error"] + .tl-status-text {
+	color: var(--tl-danger-strong);
+}
+
+.tl-hero-numbers {
+	align-items: flex-end;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px 24px;
+	justify-content: space-between;
+	margin-top: 20px;
+}
+
+.tl-soc {
+	font-size: 56px;
+	font-variant-numeric: tabular-nums;
+	font-weight: 700;
+	letter-spacing: -0.02em;
+	line-height: 1;
+}
+
+.tl-soc-unit {
+	color: var(--tl-muted);
+	font-size: 24px;
+	font-weight: 600;
+	letter-spacing: 0;
+	margin-left: 4px;
+}
+
+.tl-range {
+	text-align: right;
+}
+
+.tl-range-value {
+	display: block;
+	font-size: 28px;
+	font-variant-numeric: tabular-nums;
+	font-weight: 600;
+	line-height: 1.15;
+}
+
+.tl-range-label {
+	color: var(--tl-muted);
+	display: block;
+	font-size: 13px;
+}
+
+.tl-battery {
+	background: var(--tl-track);
+	border-radius: 999px;
+	height: 14px;
+	margin-top: 12px;
+	overflow: hidden;
+	position: relative;
+}
+
+.tl-battery-fill {
+	background: var(--tl-accent);
+	border-radius: 999px;
+	height: 100%;
+	transition: width 0.4s ease;
+	width: 0;
+}
+
+.tl-battery.is-low .tl-battery-fill {
+	background: var(--tl-warn);
+}
+
+.tl-battery.is-critical .tl-battery-fill {
+	background: var(--tl-danger);
+}
+
+/* Charge limit, only shown while charging */
+.tl-battery-limit {
+	background: var(--tl-text);
+	bottom: 0;
+	margin-left: -1px;
+	opacity: 0.6;
+	position: absolute;
+	top: 0;
+	width: 3px;
+}
+
+/* Details list ------------------------------------------------------------ */
+
+.tl-page .tl-list {
+	margin: 0;
+}
+
+.tl-row {
+	align-items: baseline;
+	border-top: 1px solid var(--tl-border);
+	display: flex;
+	gap: 16px;
+	justify-content: space-between;
+	padding: 8px 0;
+}
+
+.tl-row:first-child {
+	border-top: 0;
+	padding-top: 0;
+}
+
+.tl-page .tl-row dt {
+	color: var(--tl-muted);
+	flex: none;
+	font-weight: 400;
+}
+
+.tl-page .tl-row dd {
+	font-variant-numeric: tabular-nums;
+	font-weight: 600;
+	margin: 0;
+	min-width: 0;
+	overflow-wrap: anywhere;
+	text-align: right;
+}
+
+.tl-row dd .tl-muted {
+	font-weight: 400;
+	white-space: nowrap;
+}
+
+/* Last trip ---------------------------------------------------------------- */
+
+.tl-trip-start {
+	font-size: 13px;
+}
+
+.tl-stats {
+	display: grid;
+	gap: 16px 12px;
+	grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+}
+
+.tl-stat-value {
+	display: block;
+	font-size: 22px;
+	font-variant-numeric: tabular-nums;
+	font-weight: 600;
+	line-height: 1.2;
+}
+
+.tl-stat-unit {
+	color: var(--tl-muted);
+	font-size: 13px;
+	font-weight: 400;
+}
+
+.tl-stat-label {
+	color: var(--tl-muted);
+	display: block;
+	font-size: 13px;
+}
+
+/* Map ---------------------------------------------------------------------- */
+
+.tl-map-card {
+	display: flex;
+	flex-direction: column;
+}
+
+#map {
+	border-radius: 8px;
+	flex: 1 1 auto;
+	min-height: 320px;
+	z-index: 0;
+}
+
+/* The theme styles every <button> green and uppercase; reset for the switch */
+.tl-page .tl-switch,
+.tl-page .tl-switch:hover,
+.tl-page .tl-switch:focus,
+.tl-page .tl-switch:active {
+	align-items: center;
+	background: none;
+	border: 0;
+	color: var(--tl-text);
+	cursor: pointer;
+	display: inline-flex;
+	font-family: inherit;
+	font-size: 14px;
+	font-weight: 500;
+	gap: 8px;
+	padding: 2px;
+	text-transform: none;
+}
+
+.tl-page .tl-switch:focus-visible {
+	outline: 2px solid var(--tl-accent);
+	outline-offset: 2px;
+}
+
+.tl-switch-track {
+	background: var(--tl-switch-off);
+	border-radius: 999px;
+	flex: none;
+	height: 20px;
+	position: relative;
+	transition: background 0.15s ease;
+	width: 36px;
+}
+
+.tl-switch-track::after {
+	background: #fff;
+	border-radius: 50%;
+	content: "";
+	height: 16px;
+	left: 2px;
+	position: absolute;
+	top: 2px;
+	transition: transform 0.15s ease;
+	width: 16px;
+}
+
+.tl-switch[aria-checked="true"] .tl-switch-track {
+	background: var(--tl-accent);
+}
+
+.tl-switch[aria-checked="true"] .tl-switch-track::after {
+	transform: translateX(16px);
+}
+
+/* Remote block from teslalogger.de ---------------------------------------- */
+
+.tl-remote {
+	display: flow-root;
+	margin-top: var(--tl-gap);
+}
+
+.tl-remote h1 {
+	clear: both;
+	font-size: 20px;
+	line-height: 1.3;
+	margin: 24px 0 8px;
+}
+
+.tl-remote h1:first-child {
+	margin-top: 0;
+}
+
+.tl-remote img {
+	max-width: 100%;
+}
+
+.tl-remote table {
+	max-width: 100%;
+}
+
+/* Breakpoints -------------------------------------------------------------- */
+
+@media (min-width: 900px) {
+	.tl-grid {
+		grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+		grid-template-areas:
+			"hero hero"
+			"details map"
+			"trip map";
+	}
+
+	#map {
+		min-height: 400px;
+	}
+}
+
+@media (max-width: 480px) {
+	.tl-page {
+		--tl-gap: 12px;
+	}
+
+	.tl-card {
+		padding: 14px 16px;
+	}
+
+	.tl-soc {
+		font-size: 48px;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.tl-grid,
+	.tl-battery-fill,
+	.tl-switch-track,
+	.tl-switch-track::after {
+		transition: none;
+	}
+}

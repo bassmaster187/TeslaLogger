@@ -40,6 +40,7 @@ else
     <title>Teslalogger</title>
 	<link rel="stylesheet" href="static/jquery/ui/1.12.1/themes/smoothness/jquery-ui.css">
 	<link rel="stylesheet" href="static/teslalogger_style.css?v=5">
+	<link rel="stylesheet" href="static/teslalogger_index.css?v=2">
 	<script src="static/jquery/jquery-1.12.4.js"></script>
 	<script src="static/jquery/ui/1.12.1/jquery-ui.js"></script>
 	<script src="static/jquery/jquery-migrate-1.4.1.min.js"></script>
@@ -64,6 +65,12 @@ else
 	var isDockerNet8 = <?php echo (isDockerNet8() ? "true" : "false"); ?>;
 
 	var Display100pctEnable = "<?php echo($Display100pctEnable); ?>";
+
+	var followCar = true;		// map keeps the car centered until the user drags the map
+	var lastPos = null;
+	var connFailSince = null;	// time of the first failed request in a row
+	var connLost = false;
+	var ageFormat = null;
 
 	var perfEntries = performance.getEntriesByType("navigation");
 	if (perfEntries && perfEntries.length > 0 && perfEntries[0].type === "back_forward") {
@@ -96,6 +103,14 @@ else
       })
     }).addTo(map);
 
+	// dragstart is only fired for user interaction, not for panTo()
+	map.on('dragstart', function() { setFollowCar(false); });
+	$('#follow_toggle').on('click', function() { setFollowCar(!followCar); });
+
+	// the map card grows with its neighbours, Leaflet has to be told about the new size
+	if (window.ResizeObserver)
+		new ResizeObserver(function() { map.invalidateSize(); }).observe(document.getElementById('map'));
+
 	var greenIcon = L.icon({iconUrl: 'img/marker-icon-green.png', shadowUrl: 'static/images/marker-shadow.png', iconAnchor:   [12, 40], popupAnchor:  [0, -25]});
 
 	if (navigator.languages != undefined) loc = navigator.languages[0];
@@ -119,6 +134,9 @@ else
 		  url: "current_json.php",
 		  dataType: "json"
 		  }).done(function( jsonData ) {
+			connFailSince = null;
+			setConnectionLost(false);
+
 			if ("ideal_battery_range_km" in jsonData && "battery_level" in jsonData && "battery_range_km" in jsonData && "odometer" in jsonData) {
 				if (LengthUnit == "mile")
 				{
@@ -181,30 +199,32 @@ else
 				$('#car_version_link').attr("href", "https://www.notateslaapp.com/software-updates/version/"+ car_version +"/release-notes");
 			}
 
+			var isCharging = false;
+
 			if (car_inactive)
 			{
-				$('#car_status').html("<font color='red'><?php t("Inactive"); ?></font>");
-				$('#car_statusLabel').text("<?php t("Status"); ?>:");
+				setCarStatus("inactive", "<?php t("Inactive"); ?>", "");
 				hideSMT();
 			}
 			else if (jsonData["FatalError"])
 			{
+				// FatalError may contain a link (HTML) from Teslalogger
+				var errortext = jsonData["FatalError"];
+
 				if (jsonData["FatalError"] == "missing_key")
 				{
-					var missingkeytext = "<?php t("FatalErrorMissingKey"); ?>";
-					missingkeytext = missingkeytext.replace("{LINK}", '<a href="https://www.tesla.com/_ak/teslalogger.de" target="_blank">LINK</a>');
-
-					$('#car_status').html('<font color="red">'+missingkeytext+'</font>');
+					errortext = "<?php t("FatalErrorMissingKey"); ?>";
+					errortext = errortext.replace("{LINK}", '<a href="https://www.tesla.com/_ak/teslalogger.de" target="_blank">LINK</a>');
 				}
-				else
-					$('#car_status').html("<font color='red'>"+ jsonData["FatalError"] +"</font>");
 
-				$('#car_statusLabel').html("<font color='red'><?php t("Fatal Error"); ?>: </font>");
-				
+				setCarStatus("error", "<?php t("Fatal Error"); ?>", errortext);
+
 				updateSMT(jsonData);
 			}
 			else if (jsonData["charging"])
 			{
+				isCharging = true;
+
 				var ttfc = jsonData["time_to_full_charge"];
 				var hour = parseInt(ttfc);
 				var minute = Math.round((ttfc - hour) *60);
@@ -214,15 +234,14 @@ else
 
 				var datetime = at.toLocaleTimeString(loc, { hour: '2-digit', minute: '2-digit' });
 
-				$('#car_statusLabel').text("<?php t("Charging"); ?>:");
-				$('#car_status').html(jsonData["charger_power"] + " kW / +" + jsonData["charge_energy_added"] + " kWh<br>" +
-                                        "<?php t("Done"); ?>: "+ hour +"h "+minute+"m <br><?php t("Done at"); ?>: " + datetime +  " / " + jsonData["charge_limit_soc"] +"%");
+				setCarStatus("charging", "<?php t("Charging"); ?>",
+					jsonData["charger_power"] + " kW / +" + jsonData["charge_energy_added"] + " kWh<br>" +
+					"<?php t("Done"); ?>: "+ hour +"h "+minute+"m <br><?php t("Done at"); ?>: " + datetime +  " / " + jsonData["charge_limit_soc"] +"%");
 
 				updateSMT(jsonData);
 			}
 			else if (jsonData["driving"])
 			{
-				$('#car_statusLabel').text("<?php t("Driving"); ?>:");
 				var str = "";
 				if (LengthUnit == "mile")
 					str = (jsonData["speed"]/ km2mls).toFixed(0) + " mph"
@@ -241,49 +260,58 @@ else
 					}
 				}
 
-				$('#car_status').html(str);
+				setCarStatus("driving", "<?php t("Driving"); ?>", str);
 
 				updateSMT(jsonData);
 			}
 			else if (jsonData["online"] && !jsonData["falling_asleep"])
 			{
-				var text = "<?php t("Online"); ?>";
+				var lines = [];
 
 				if (jsonData["is_preconditioning"])
-					text = text + "<br><?php t("Preconditioning"); ?> " + parseFloat(jsonData["inside_temperature"]).toFixed(1) +"°C";
+				{
+					var text = "<?php t("Preconditioning"); ?> ";
+					if (TemperatureUnit == "fahrenheit")
+					{
+						text += (parseFloat(jsonData["inside_temperature"]) * 9/5 + 32).toFixed(1) + " °F";
+					}
+					else
+					{
+						text += parseFloat(jsonData["inside_temperature"]).toFixed(1) + " °C";
+					}
+					lines.push(text);
+				}
 
 				if (jsonData["sentry_mode"])
-					text = text + "<br><?php t("Sentry Mode"); ?>";
+					lines.push("<?php t("Sentry Mode"); ?>");
 
 				if (jsonData["battery_heater"])
-					text = text + "<br><?php t("Battery Heater"); ?>";
+					lines.push("<?php t("Battery Heater"); ?>");
 
-				$('#car_statusLabel').text("<?php t("Status"); ?>:");
-				$('#car_status').html(text);
+				setCarStatus("online", "<?php t("Online"); ?>", lines.join("<br>"));
 
 				updateSMT(jsonData);
 			}
 			else if (jsonData["sleeping"])
 			{
-				$('#car_statusLabel').text("<?php t("Status"); ?>:");
-				$('#car_status').text("<?php t("Sleeping"); ?>");
+				setCarStatus("asleep", "<?php t("Sleeping"); ?>", "");
 
 				hideSMT();
 			}
 			else if (jsonData["falling_asleep"])
 			{
-				$('#car_statusLabel').text("<?php t("Status"); ?>:");
-				$('#car_status').text("<?php t("Falling asleep"); ?>");
+				setCarStatus("asleep", "<?php t("Falling asleep"); ?>", "");
 
 				hideSMT();
 			}
 			else
 			{
-				$('#car_statusLabel').text("<?php t("Status"); ?>:");
-				$('#car_status').text("<?php t("Offline"); ?>");
+				setCarStatus("offline", "<?php t("Offline"); ?>", "");
 
 				hideSMT();
 			}
+
+			updateBattery(jsonData, isCharging);
 
 			if (jsonData["trip_max_speed"] && jsonData["trip_avg_kwh"] && jsonData["trip_distance"]) {
 				if (LengthUnit == "mile")
@@ -312,6 +340,7 @@ else
 
 			var ts = new Date(Date.parse(jsonData["ts"]));
 			$("#last_update").text(ts.toLocaleTimeString(loc, { day: '2-digit', month: '2-digit', year: 'numeric' }));
+			$("#last_update_age").text(formatAge(ts));
 
 			var trip_duration_sec = jsonData["trip_duration_sec"];
 			var min = Math.floor(trip_duration_sec / 60);
@@ -366,13 +395,14 @@ else
 				
 
 			var p = L.latLng(parseFloat(jsonData["latitude"]), parseFloat(jsonData["longitude"]));
+			lastPos = p;
 
 			if (!mapInit)
 			{
 				map.setView(p, <?php echo getZoomLevel(); ?>);
 				mapInit = true;
 			}
-			else
+			else if (followCar)
 				map.panTo(p);
 
 			if (marker != null)
@@ -388,7 +418,83 @@ else
 
 			marker = L.marker(p, {icon : icon, rotationAngle: jsonData["heading"] });
 			marker.addTo(map);
+		}).fail(function() {
+			// a single failed request is ignored, the hint appears after 3 seconds without a valid answer
+			if (connFailSince === null)
+				connFailSince = Date.now();
+			else if (Date.now() - connFailSince >= 3000)
+				setConnectionLost(true);
 		});
+	}
+
+	function setCarStatus(state, label, detailsHtml)
+	{
+		$('#car_statusLabel').text(label).attr('data-state', state);
+		$('#car_status').html(detailsHtml);
+	}
+
+	function updateBattery(jsonData, isCharging)
+	{
+		var level = Number(jsonData["battery_level"]);
+		if (!("battery_level" in jsonData) || !isFinite(level))
+			return;
+
+		level = Math.max(0, Math.min(100, level));
+
+		$('#battery_fill').css('width', level + '%');
+		$('#battery_bar').attr('aria-valuenow', Math.round(level))
+			.toggleClass('is-critical', level <= 10)
+			.toggleClass('is-low', level > 10 && level <= 20);
+
+		var limit = Number(jsonData["charge_limit_soc"]);
+		if (isCharging && limit > 0 && limit <= 100)
+			$('#charge_limit_marker').css('left', limit + '%').show();
+		else
+			$('#charge_limit_marker').hide();
+	}
+
+	function setFollowCar(follow)
+	{
+		followCar = follow;
+		$('#follow_toggle').attr('aria-checked', follow ? 'true' : 'false');
+
+		if (follow && mapInit && lastPos != null)
+			map.panTo(lastPos);
+	}
+
+	function setConnectionLost(lost)
+	{
+		if (lost == connLost)
+			return;
+
+		connLost = lost;
+		$('#tl_grid').toggleClass('is-stale', lost);
+
+		if (lost)
+			$('#conn_error').show();
+		else
+			$('#conn_error').hide();
+	}
+
+	// "5 minutes ago" in the browser language, empty if the browser can't do it
+	function formatAge(date)
+	{
+		if (isNaN(date.getTime()) || !(window.Intl && Intl.RelativeTimeFormat))
+			return "";
+
+		if (ageFormat == null)
+			ageFormat = new Intl.RelativeTimeFormat(loc, { numeric: "auto" });
+
+		var sec = Math.max(0, Math.round((Date.now() - date.getTime()) / 1000));
+
+		if (sec < 60)
+			return "(" + ageFormat.format(0, "second") + ")";
+		if (sec < 3600)
+			return "(" + ageFormat.format(-Math.floor(sec / 60), "minute") + ")";
+		if (sec < 86400)
+			return "(" + ageFormat.format(-Math.floor(sec / 3600), "hour") + ")";
+
+		return "(" + ageFormat.format(-Math.floor(sec / 86400), "day") + ")";
 	}
 
 	function encodeHTML(dirtyString) {
@@ -485,33 +591,27 @@ else
     echo(menu($teslaloggername));
 ?>
 
-  <div id="content" style="max-width:1036px;">
+  <div id="content" class="tl-page">
   <div id="info">
-  <table class="HeaderT">
-	  <thead><td colspan="2" class="HeaderStyle"><?php t("Info"); ?></td></thead>
-	  <tr><td colspan="2"><span id="InfoText"></span></td></tr>
-	  <tr><td></td><td style="float:right;"><button id="NegativeButton"><?php t("No"); ?></button> <button id="PositiveButton"><?php t("Yes"); ?></button></td></tr>
-  </table>
+	<div class="HeaderT tl-card tl-info">
+		<h2 class="tl-card-title"><?php t("Info"); ?></h2>
+		<div id="InfoText"></div>
+		<div class="tl-info-actions"><button id="NegativeButton"><?php t("No"); ?></button> <button id="PositiveButton"><?php t("Yes"); ?></button></div>
+	</div>
   </div>
-  <div style="float:left;">
-  <table class="b1 THeader">
-	  <thead><td colspan="2" class="HeaderL HeaderStyle">
-	  	<?php t("Car Info"); ?> <span id="displayname">- <?= $display_name ?></span>
-	  		<img id="window_open" class="caricons" src="img/window_open.png" title="Open Window">
-			<img id="frunk_open"class="caricons" src="img/frunk_open.png" title="Frunk Open">
-			<img id="trunk_open"class="caricons" src="img/trunk_open.png" title="Trunk Open">
-			<img id="door_open"class="caricons" src="img/door_open.png" title="Door Open">
-			<img id="unlocked"class="caricons" src="img/unlocked.png" title="Unlocked">
-		</td>
-	  </thead>
+
+  <div id="conn_error" class="tl-alert tl-alert-danger" role="alert" style="display: none;"><?php t("No connection to Teslalogger"); ?></div>
+
+  <div id="tl_grid" class="tl-grid">
+	<section class="tl-card tl-hero">
 	  <?php
 	  	if ($carNeedFleetAPI)
-	  		echo("<tr><td><font color='red'><b>".get_text("FleetAPI")."</b></font></td><td><a href='password_fleet.php?id=$carid&vin=$carVIN'>".get_text("FleetAPIRequired")." ⚠️</a></td></tr>");
+	  		echo("<div class='tl-alert tl-alert-danger'><b>".get_text("FleetAPI")."</b><a href='password_fleet.php?id=$carid&vin=$carVIN'>".get_text("FleetAPIRequired")." ⚠️</a></div>");
 		else if ($carNeedSubscription)
 		{
 			?>
 			<!-- car need subscription -->
-			<tr id="subscriptioninfo" style='display: none;'><td><font color='red'><b><?php t("Subscription") ?></b></font></td><td><a href='https://buy.stripe.com/9AQaHNdU33k29Vu144?client_reference_id=<?=$carVIN?>'><?php t("SubscriptionRequired") ?>⚠️</a><br><a href="javascript:showInfoRestricted();">Funktion eingeschränkt⚠️</a></td></tr>
+			<div id="subscriptioninfo" class="tl-alert tl-alert-danger" style='display: none;'><b><?php t("Subscription") ?></b><a href='https://buy.stripe.com/9AQaHNdU33k29Vu144?client_reference_id=<?=$carVIN?>'><?php t("SubscriptionRequired") ?>⚠️</a><a href="javascript:showInfoRestricted();">Funktion eingeschränkt⚠️</a></div>
 			<script>
 				$(document).ready(function(){
 					$.ajax({
@@ -529,35 +629,70 @@ else
 		}
 	
 	  ?>
-	  <tr><td width="130px"><b><span id="car_statusLabel"></span></b></td><td width="180px"><span id="car_status"></span></td></tr>
-	  <tr id='CellTempRow'><td><b><?php t("Cell Temp"); ?>:</b></td><td><span id="CellTemp"></span></td></tr>
-	  <tr id='BMSMaxChargeRow'><td><b><?php t("Max Charge"); ?>:</b></td><td><span id="BMSMaxCharge"></span></td></tr>
-	  <tr id='BMSMaxDischargeRow'><td><b><?php t("Max Discharge"); ?>:</b></td><td><span id="BMSMaxDischarge"></span></td></tr>
-	  <tr id='CellImbalanceRow'><td><b><?php t("Cell Imbalance"); ?>:</b></td><td><span id="CellImbalance"></span></td></tr>
-	  <tr><td><b><?php t("Typical Range"); ?>:</b></td><td><span id="ideal_battery_range_km">---</span> / <span id="battery_level">---</span> %<span id="full_battery_range_km_span"><br>= <span id="full_battery_range_km">---</span> / 100 %</span>
-</td></tr>
-	  <tr><td><b><?php t("Odometer"); ?>:</b></td><td><span id="odometer">---</span></td></tr>
-	  <tr><td><b><?php t("Car Version"); ?>:</b></td><td><a href='' id="car_version_link" target="_blank" title="Release Notes"><span id="car_version"></a></span></td></tr>
-	  <tr><td><b><?php t("Last Update"); ?>:</b></td><td><span id="last_update">---</span></td></tr>
-	  <tr><td><b>Teslalogger:</b></td><td><?php checkForUpdates();?></td></tr>
-	  <tr id="SoftwareUpdateRow"><td><b><?php t("Software Update"); ?>:</b></td><td><span id="software_update"></span></td></tr>
-<!--  </table>
+		<div class="tl-hero-head">
+			<h2 class="tl-hero-name"><?= htmlspecialchars($display_name ?? "") ?></h2>
+			<div class="tl-caricons">
+				<img id="window_open" class="caricons" src="img/window_open.png" alt="Open Window" title="Open Window">
+				<img id="frunk_open" class="caricons" src="img/frunk_open.png" alt="Frunk Open" title="Frunk Open">
+				<img id="trunk_open" class="caricons" src="img/trunk_open.png" alt="Trunk Open" title="Trunk Open">
+				<img id="door_open" class="caricons" src="img/door_open.png" alt="Door Open" title="Door Open">
+				<img id="unlocked" class="caricons" src="img/unlocked.png" alt="Unlocked" title="Unlocked">
+			</div>
+		</div>
+		<div class="tl-hero-status">
+			<span id="car_statusLabel" class="tl-badge"></span>
+			<span id="car_status" class="tl-status-text"></span>
+		</div>
+		<div class="tl-hero-numbers">
+			<div class="tl-soc"><span id="battery_level">---</span><span class="tl-soc-unit">%</span></div>
+			<div class="tl-range">
+				<span class="tl-range-value" id="ideal_battery_range_km">---</span>
+				<span class="tl-range-label"><?php t("Typical Range"); ?><span id="full_battery_range_km_span" style="display: none;"> = <span id="full_battery_range_km">---</span> / 100 %</span></span>
+			</div>
+		</div>
+		<div id="battery_bar" class="tl-battery" role="progressbar" aria-label="<?php t("SOC"); ?>" aria-valuemin="0" aria-valuemax="100">
+			<div id="battery_fill" class="tl-battery-fill"></div>
+			<div id="charge_limit_marker" class="tl-battery-limit" style="display: none;"></div>
+		</div>
+	</section>
 
-  <table style="float:left;" class="THeader"> -->
-	  <thead><td colspan="2" class="HeaderL HeaderStyle"><?php t("Last Trip"); ?></td></thead>
-	  <tr><td width="130px"><b><?php t("Start"); ?>:</b></td><td width="180px"><span id="trip_start"></span></td></tr>
-	  <tr><td><b><?php t("Duration"); ?>:</b></td><td><span id="trip_duration_sec">---</span> <?php t("min"); ?></td></tr>
-	  <tr><td><b><?php t("Distance"); ?>:</b></td><td><span id="trip_distance">---</span> <span id="lt_trip_distance_km"><?php t("km"); ?></span></td></tr>
-	  <tr><td><b><?php t("Consumption"); ?>:</b></td><td><span id="trip_kwh">---</span> <?php t("kWh"); ?></td></tr>
-	  <tr><td><b><?php t("Ø Consumption"); ?>:</b></td><td><span id="trip_avg_kwh">---</span> <span id="lt_whkm"><?php t("Wh/km"); ?></span></td></tr>
-	  <tr><td><b><?php t("Max km/h"); ?>:</b></td><td><span id="max_speed">---</span> <span id='lt_kmh'><?php t("km/h"); ?></span> </td></tr>
-  </table>
+	<section class="tl-card tl-details">
+		<h2 class="tl-card-title"><?php t("Car Info"); ?></h2>
+		<dl class="tl-list">
+			<div class="tl-row"><dt><?php t("Odometer"); ?></dt><dd><span id="odometer">---</span></dd></div>
+			<div class="tl-row"><dt><?php t("Car Version"); ?></dt><dd><a href='' id="car_version_link" target="_blank" title="Release Notes"><span id="car_version"></span></a></dd></div>
+			<div class="tl-row" id="SoftwareUpdateRow" style="display: none;"><dt><?php t("Software Update"); ?></dt><dd><span id="software_update"></span></dd></div>
+			<div class="tl-row"><dt><?php t("Last Update"); ?></dt><dd><span id="last_update">---</span> <span id="last_update_age" class="tl-muted"></span></dd></div>
+			<div class="tl-row"><dt>Teslalogger</dt><dd><?php checkForUpdates();?></dd></div>
+			<div class="tl-row" id='CellTempRow' style="display: none;"><dt><?php t("Cell Temp"); ?></dt><dd><span id="CellTemp"></span></dd></div>
+			<div class="tl-row" id='BMSMaxChargeRow' style="display: none;"><dt><?php t("Max Charge"); ?></dt><dd><span id="BMSMaxCharge"></span></dd></div>
+			<div class="tl-row" id='BMSMaxDischargeRow' style="display: none;"><dt><?php t("Max Discharge"); ?></dt><dd><span id="BMSMaxDischarge"></span></dd></div>
+			<div class="tl-row" id='CellImbalanceRow' style="display: none;"><dt><?php t("Cell Imbalance"); ?></dt><dd><span id="CellImbalance"></span></dd></div>
+		</dl>
+	</section>
+
+	<section class="tl-card tl-trip">
+		<div class="tl-card-head">
+			<h2 class="tl-card-title"><?php t("Last Trip"); ?></h2>
+			<span class="tl-muted tl-trip-start"><?php t("Start"); ?>: <span id="trip_start"></span></span>
+		</div>
+		<div class="tl-stats">
+			<div><span class="tl-stat-value"><span id="trip_distance">---</span> <span class="tl-stat-unit" id="lt_trip_distance_km"><?php t("km"); ?></span></span><span class="tl-stat-label"><?php t("Distance"); ?></span></div>
+			<div><span class="tl-stat-value"><span id="trip_duration_sec">---</span> <span class="tl-stat-unit"><?php t("min"); ?></span></span><span class="tl-stat-label"><?php t("Duration"); ?></span></div>
+			<div><span class="tl-stat-value"><span id="trip_kwh">---</span> <span class="tl-stat-unit"><?php t("kWh"); ?></span></span><span class="tl-stat-label"><?php t("Consumption"); ?></span></div>
+			<div><span class="tl-stat-value"><span id="trip_avg_kwh">---</span> <span class="tl-stat-unit" id="lt_whkm"><?php t("Wh/km"); ?></span></span><span class="tl-stat-label"><?php t("Ø Consumption"); ?></span></div>
+			<div><span class="tl-stat-value"><span id="max_speed">---</span> <span class="tl-stat-unit" id='lt_kmh'><?php t("km/h"); ?></span></span><span class="tl-stat-label"><?php t("Max km/h"); ?></span></div>
+		</div>
+	</section>
+
+	<section class="tl-card tl-map-card">
+		<div class="tl-card-head">
+			<h2 class="tl-card-title"><?php t("Current Pos"); ?></h2>
+			<button type="button" id="follow_toggle" class="tl-switch" role="switch" aria-checked="true"><span class="tl-switch-track"></span><?php t("Follow vehicle"); ?></button>
+		</div>
+		<div id="map"></div>
+	</section>
   </div>
-
-  <table style="float:left;">
-	  <thead style="background-color:#d0d0d0; color:#000000;"><td colspan="2" style="font-weight:bold;"><?php t("Current Pos"); ?></td></thead>
-	  <tr><td width="680px"><div id="map" style="height: 400px; z-index:0;" /></td></tr>
-  </table>
 
   <?php
 
@@ -623,9 +758,19 @@ function getZoomLevel()
   global $language;
 
   if (isset($language) && strlen($language) > 1 && $language != "de")
-	echo(file_get_contents("https://teslalogger.de/teslalogger_content_index-".$language.".php", 0, stream_context_create(["http"=>["timeout"=>3]])));
+	$remoteinfo = file_get_contents("https://teslalogger.de/teslalogger_content_index-".$language.".php", 0, stream_context_create(["http"=>["timeout"=>3]]));
   else
-	echo(file_get_contents("https://teslalogger.de/teslalogger_content_index.php", 0, stream_context_create(["http"=>["timeout"=>3]])));
+	$remoteinfo = file_get_contents("https://teslalogger.de/teslalogger_content_index.php", 0, stream_context_create(["http"=>["timeout"=>3]]));
+
+  // no empty card if teslalogger.de is not reachable
+  if (!empty($remoteinfo))
+  {
+	// the remote file starts with a UTF-8 BOM, which would show up as an empty line at the top of the card
+	if (substr($remoteinfo, 0, 3) === "\xEF\xBB\xBF")
+		$remoteinfo = substr($remoteinfo, 3);
+
+	echo("<section class=\"tl-card tl-remote\">".$remoteinfo."</section>");
+  }
 
   ?>
   </div>
