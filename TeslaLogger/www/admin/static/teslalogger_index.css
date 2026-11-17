@@ -203,9 +203,10 @@ body {
 	text-decoration: underline;
 }
 
+/* The page is a grid (teslalogger_ui.css), the gap already provides the spacing */
+
 #conn_error {
 	font-weight: 600;
-	margin-bottom: var(--tl-gap);
 }
 
 /* Info box (filled by info.php) ------------------------------------------- */

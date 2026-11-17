@@ -4,6 +4,7 @@ docker cp .\www\admin\lucidpassword.php teslalogger-webserver:/var/www/html/admi
 docker cp .\www\admin\geoadd_write.php teslalogger-webserver:/var/www/html/admin/
 docker cp .\www\admin\geoadd.php teslalogger-webserver:/var/www/html/admin/
 docker cp .\www\admin\geofencing.php teslalogger-webserver:/var/www/html/admin/
+docker cp .\www\admin\journeys.php teslalogger-webserver:/var/www/html/admin/
 docker cp .\www\admin\logfile.php teslalogger-webserver:/var/www/html/admin/
 docker cp .\www\admin\tools.php teslalogger-webserver:/var/www/html/admin/
 docker cp .\www\admin\index.php teslalogger-webserver:/var/www/html/admin/

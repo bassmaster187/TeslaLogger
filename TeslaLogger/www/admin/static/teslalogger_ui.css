@@ -378,7 +378,156 @@ body {
 	color: #fff;
 	font-size: 12px;
 	font-weight: 700;
-	padding: 10px 30px 11px;
+		padding: 10px 30px 11px;
 	text-transform: uppercase;
 }
+
+/* Tables (DataTables) --------------------------------------------------------
+ * Shared by the restyled pages that show a DataTable (journeys.php).
+ * The table itself is drawn light by datatables.min.css; the theme rules for
+ * the th/td borders are rgba(0,0,0) and would disappear in the dark scheme,
+ * so they are realigned to the tokens here. The behaviour (sorting, paging,
+ * filter) stays as it is.
+ */
+
+.tl-page {
+	display: grid;
+	gap: var(--tl-gap);
+}
+
+.tl-table-card {
+	overflow: auto;
+}
+
+.tl-table-card table.dataTable {
+	border: none;
+}
+
+.tl-table-card table.dataTable thead>tr>th {
+	background: var(--tl-neutral-soft);
+	border: none;
+	border-bottom: 1px solid var(--tl-border);
+	color: var(--tl-muted);
+	font-size: 13px;
+	font-weight: 600;
+	letter-spacing: 0.04em;
+	padding: 10px 12px;
+	text-transform: uppercase;
+	white-space: nowrap;
+}
+
+.tl-table-card table.dataTable tbody tr {
+	border-bottom: 1px solid var(--tl-border);
+}
+
+.tl-table-card table.dataTable tbody tr:hover {
+	background: var(--tl-neutral-soft);
+}
+
+.tl-table-card table.dataTable td {
+	border: none;
+	padding: 8px 12px;
+}
+
+.tl-table-card .dataTables_wrapper {
+	color: var(--tl-text);
+	font-size: 13px;
+}
+
+.tl-table-card .dataTables_info {
+	color: var(--tl-muted);
+}
+
+@media (prefers-color-scheme: dark) {
+	.tl-table-card .dataTables_filter input,
+	.tl-table-card .dataTables_filter select {
+		background: var(--tl-card);
+		border-color: var(--tl-border);
+		color: var(--tl-text);
+	}
+
+	.tl-table-card .dataTables_wrapper .paginate_button,
+	.tl-table-card .dataTables_wrapper .paginate_button a {
+		background: var(--tl-neutral-soft);
+		border-color: var(--tl-border);
+		color: var(--tl-text);
+	}
+
+	.tl-table-card .dataTables_wrapper .paginate_button:hover a,
+	.tl-table-card .dataTables_wrapper .paginate_button:focus a {
+		background: var(--tl-track);
+		border-color: var(--tl-border);
+		color: var(--tl-text);
+		outline: none;
+	}
+
+	.tl-table-card .dataTables_wrapper .paginate_button.current a,
+	.tl-table-card .dataTables_wrapper .paginate_button.current a:hover {
+		background: var(--tl-accent-soft);
+		border-color: var(--tl-border);
+		color: var(--tl-accent-strong);
+	}
+
+	.tl-table-card .dataTables_wrapper .paginate_button.disabled,
+	.tl-table-card .dataTables_wrapper .paginate_button.disabled a {
+		background: var(--tl-neutral-soft);
+		border-color: var(--tl-border);
+		color: var(--tl-muted);
+	}
+}
+
+/* Filter form ----------------------------------------------------------------
+ * The same grid is used by logfile.php and settings.php (their local rules
+ * are identical, so they can be dropped when the files are touched next).
+ */
+
+.tl-form {
+	display: grid;
+	gap: 16px 24px;
+	grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+}
+
+.tl-form-item {
+	align-items: center;
+	display: flex;
+	gap: 12px;
+	justify-content: space-between;
+	min-width: 0;
+}
+
+.tl-form-item label {
+	color: var(--tl-muted);
+	font-size: 14px;
+	white-space: nowrap;
+}
+
+.tl-form-item input,
+.tl-form-item select {
+	min-width: 0;
+}
+
+.tl-form-actions {
+	justify-content: end;
+}
+
+.tl-form-item .tl-journey-input {
+	flex: 1;
+}
+
+.tl-journey-intro {
+	margin: 0 0 var(--tl-gap);
+}
+
+/* Journeys.php ----------------------------------------------------------------
+ * The page-specific parts live in the shared stylesheet (no separate
+ * teslalogger_journeys.css). The card classes are scoped so the rules
+ * cannot affect the other pages.
+ */
+
+.tl-journey-card {
+	overflow: auto;
+}
+
+.tl-journey-form {
+	overflow: auto;
 }

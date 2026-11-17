@@ -10,17 +10,13 @@ require_once("tools.php");
     <title><?php t("Journeys"); ?></title>
 	<link rel="stylesheet" href="static/jquery/ui/1.12.1/themes/smoothness/jquery-ui.css">
 	<link rel="stylesheet" href="static/teslalogger_style.css?v=4">
+	<link rel="stylesheet" href="static/teslalogger_ui.css?v=4">
 	<script src="static/jquery/jquery-1.12.4.js"></script>
 	<script src="static/jquery/ui/1.12.1/jquery-ui.js"></script>
-	<script src="jquery/jquery-migrate-1.4.1.min.js"></script>
+	<script src="static/jquery/jquery-migrate-1.4.1.min.js"></script>
 	<script src="static/jquery/datatables/1.13.4/datatables.min.js"></script>
 	<link rel='stylesheet' href="static/jquery/datatables/1.13.4/datatables.min.css">
 	<link rel='stylesheet' id='genericons-css'  href='static/genericons.css?ver=3.0.3' type='text/css' media='all' />
-
-<style>
-input.newJourney {width: 300px;}
-select.newJourney {width: 500px;}
-</style>
 
 <script>
     function escapeHtml(unsafe)
@@ -380,43 +376,67 @@ select.newJourney {width: 500px;}
 </script>
 </head>
 <body>
-<div>
 <?php
 	include "menu.php";
-	menu("Journeys");
+	echo(menu("Journeys"));
 ?>
-    <h1><?php t("Journeys"); ?></h1>
-    <p><?php t("TextJourneys"); ?></p>
+<div class="tl-page">
+	<div class="tl-page-head">
+		<h2 class="tl-page-title"><?php t("Journeys"); ?></h2>
+		<?php
+		$helpUrl = ($language == "de") ? "https://teslalogger.de/docs/extras/journeys/" : "https://teslalogger.de/en/docs/extras/journeys/";
+		?>
+		<a href="<?= $helpUrl ?>" target="_blank"><img src="img/icon-help-24.png" class="tl-help" /></a>
+	</div>
+	<p class="tl-journey-intro tl-muted"><?php t("TextJourneys"); ?></p>
 
-<table id="myDT">
-<thead>
-    <tr>
-        <th><?php t("ID"); ?></th>
-        <th><?php t("Journey"); ?></th>
-        <th><?php t("Start address"); ?></th>
-        <th><?php t("Start"); ?></th>
-        <th><?php t("Target address"); ?></th>
-        <th><?php t("End"); ?></th>
-        <th><?php t("Ø Consumption"); ?> <?php if ($LengthUnit == "mile") t("Wh/mi"); else t("kWh"); ?></th>
-        <th><?php t("Consumed kWh"); ?></th>
-        <th><?php t("Charged kWh"); ?></th>
-        <th><?php t("Drive time [h]"); ?></th>
-        <th><?php t("Charge time [h]"); ?></th>
-        <th><?php if ($LengthUnit == "mile") t("Distance [mi]"); else t("Distance [km]"); ?></th>
-        <th><?php t("Charging costs"); ?></th>
-        <th><?php echo str_replace("CO2","CO<sub>2</sub>",get_text("CO2 [kg]")); ?></th>
-        <th></th>
-    </tr>
-</thead>
-</table>
+	<div class="tl-card tl-journey-card">
+		<div class="tl-card-head">
+			<h2 class="tl-card-title"><?php t("Journeys"); ?></h2>
+		</div>
+		<table id="myDT">
+		<thead>
+			<tr>
+				<th><?php t("ID"); ?></th>
+				<th><?php t("Journey"); ?></th>
+				<th><?php t("Start address"); ?></th>
+				<th><?php t("Start"); ?></th>
+				<th><?php t("Target address"); ?></th>
+				<th><?php t("End"); ?></th>
+				<th><?php t("Ø Consumption"); ?> <?php if ($LengthUnit == "mile") t("Wh/mi"); else t("kWh"); ?></th>
+				<th><?php t("Consumed kWh"); ?></th>
+				<th><?php t("Charged kWh"); ?></th>
+				<th><?php t("Drive time [h]"); ?></th>
+				<th><?php t("Charge time [h]"); ?></th>
+				<th><?php if ($LengthUnit == "mile") t("Distance [mi]"); else t("Distance [km]"); ?></th>
+				<th><?php t("Charging costs"); ?></th>
+				<th><?php echo str_replace("CO2","CO<sub>2</sub>",get_text("CO2 [kg]")); ?></th>
+				<th></th>
+			</tr>
+		</thead>
+		</table>
+	</div>
 
-<h2><?php t("New Journey"); ?></h2>
-<table>
-    <tr><td><?php t("Journey name"); ?>:&nbsp;</td><td><input class="newJourney" id="name"></td></tr>
-    <tr><td><?php t("Start"); ?>: </td><td><select class="newJourney" id="start"><option><?php t("Please wait"); ?></option></select></td></tr>
-    <tr><td><?php t("End"); ?>: </td><td><select class="newJourney" id="end"><option><?php t("Please select start first"); ?></option></select></td></tr>
-    <tr><td></td><td><button id="btnSave"><?php t("Save"); ?></button></td></tr>
-</table>
+	<div class="tl-card tl-journey-form">
+		<h2 class="tl-card-title"><?php t("New Journey"); ?></h2>
+		<div class="tl-form">
+			<div class="tl-form-item">
+				<label for="name"><?php t("Journey name"); ?></label>
+				<input class="tl-journey-input" id="name">
+			</div>
+			<div class="tl-form-item">
+				<label for="start"><?php t("Start"); ?></label>
+				<select class="tl-journey-input" id="start"><option><?php t("Please wait"); ?></option></select>
+			</div>
+			<div class="tl-form-item">
+				<label for="end"><?php t("End"); ?></label>
+				<select class="tl-journey-input" id="end"><option><?php t("Please select start first"); ?></option></select>
+			</div>
+			<div class="tl-form-item tl-form-actions">
+				<button id="btnSave"><?php t("Save"); ?></button>
+			</div>
+		</div>
+	</div>
 </div>
 </body>
 </html>

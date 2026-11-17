@@ -14,6 +14,7 @@ Inhalt:
 - [Dark Mode](#dark-mode)
 - [Leitfaden: weitere Seiten auf Dark Mode umstellen](#leitfaden-weitere-seiten-auf-dark-mode-umstellen)
 - [Logfile: erste weitere Seite](#logfile-erste-weitere-seite)
+- [Stylesheet-Einteilung](#stylesheet-einteilung-entscheidung-17112026)
 - [Übersetzungen](#übersetzungen)
 - [Deployment in den Docker-Container](#deployment-in-den-docker-container)
 - [Test](#test)
@@ -25,12 +26,14 @@ Inhalt:
 | Datei | Änderung |
 |---|---|
 | `TeslaLogger/www/admin/index.php` | Markup auf Karten umgebaut, JavaScript erweitert |
-| `TeslaLogger/www/admin/static/teslalogger_ui.css` | neu, gemeinsame Design-Tokens und Basis-Komponenten (Karten, Überschriften, Alerts, Formular), wird von den umgestylten Seiten geladen |
+| `TeslaLogger/www/admin/static/teslalogger_ui.css` | gemeinsame Design-Tokens, Basis-Komponenten (Karten, Überschriften, Alerts, Formular) **und** die seiten-spezifischen Regeln der umgestylten Seiten (DataTables, `tl-form`), wird von allen umgestylten Seiten geladen (siehe [Stylesheet-Einteilung](#stylesheet-einteilung-entscheidung-17112026)) |
 | `TeslaLogger/www/admin/static/teslalogger_index.css` | nur noch Startseiten-spezifische Styles (Hero, Akkubalken, Karte, Switch), Tokens und Basis-Komponenten stehen jetzt in `teslalogger_ui.css` |
 | `TeslaLogger/bin/language-en.txt` | zwei neue Texte |
 | `TeslaLogger/bin/language-de.txt` | zwei neue Texte |
 | `TeslaLogger/www/admin/logfile.php` | Markup wie die Startseite (Karten, `tl-card-title`), Formular in einem Grid, `ui.css` geladen |
-| `TeslaLogger/www/admin/static/teslalogger_logfile.css` | neu, wird nur von `logfile.php` geladen: Seitenkopf, Log-Box, Fehler-Highlight über die Tokens |
+| `TeslaLogger/www/admin/static/teslalogger_logfile.css` | wird nur von `logfile.php` geladen: Seitenkopf, Log-Box, Fehler-Highlight über die Tokens |
+| `TeslaLogger/www/admin/journeys.php` | auf das Karten-Design umgebaut (Seitenkopf, Tabelle- und Formular-Karte, DataTables, nur `ui.css`), Hilfe-Icon |
+| `TeslaLogger/www/admin/static/teslalogger_journeys.css` | entfernt, die Regeln stehen jetzt in `teslalogger_ui.css` |
 
 `menu.php`, `info.php`, `tools.php` und `static/teslalogger_style.css` sind unverändert.
 
@@ -269,7 +272,8 @@ Die Zahlen stammen aus einer groben Textsuche im Verzeichnis `TeslaLogger/www/ad
 ### Vorgehen
 
 1. **Variablen auslagern.** Die beiden Blöcke `:root` und `@media (prefers-color-scheme: dark)` stehen in einer gemeinsamen Datei, die Werte dürfen nur an einer Stelle stehen.
-   - Diese gemeinsame Datei ist schon angelegt: `teslalogger_ui.css` (Tokens und die Basis-Komponenten `.tl-page`, `.tl-card`, `.tl-card-title`, `.tl-alert`, Formular). Neue Seiten laden sie direkt.
+    - Diese gemeinsame Datei ist schon angelegt: `teslalogger_ui.css` (Tokens und die Basis-Komponenten `.tl-page`, `.tl-card`, `.tl-card-title`, `.tl-alert`, Formular). Neue Seiten laden sie direkt.
+    - Seit der [Stylesheet-Einteilung](#stylesheet-einteilung-entscheidung-17112026) stehen auch die seiten-spezifischen Regeln in `teslalogger_ui.css` (als scoping-Wrapper), es gibt keine separate CSS-Datei pro Seite.
 2. **Nur umgestellte Seiten laden die Datei.** `color-scheme: dark` und der dunkle Hintergrund wirken auf die ganze Seite. Eine Seite, deren Inhalt noch helle feste Farben hat, würde sonst halb dunkel erscheinen.
 3. **Grundfarben der Seite setzen.** Auf einer umgestellten Seite müssen mindestens diese Theme-Werte durch Variablen ersetzt werden:
    - Hintergrund von `body`: `--tl-bg`
@@ -293,6 +297,28 @@ Die Zahlen stammen aus einer groben Textsuche im Verzeichnis `TeslaLogger/www/ad
 - Die gemeinsame Datei ist `teslalogger_ui.css`. Wenn alle Seiten umgestellt sind, können die Token-Blöcke direkt in `teslalogger_style.css` wandern.
 - Die nicht mehr benutzten Theme-Regeln können gelöscht werden.
 - Das Menü ist in beiden Schemata schwarz mit grünen Untermenüs und braucht keine Anpassung.
+
+## Stylesheet-Einteilung (Entscheidung, 17.11.2026)
+
+**Seiten-spezifische CSS-Dateien werden zusammengeführt in `teslalogger_ui.css`.**
+`teslalogger_ui.css` ist die gemeinsame Datei für Tokens, Basis-Komponenten (`.tl-page`,
+`.tl-card`, `.tl-card-title`, `.tl-alert`, Formular) **und** die seiten-spezifischen
+Regeln der umgestylten Seiten. Die Regeln werden über scoping-Wrapper gekapselt
+(`.tl-table-card`, `.tl-journey-card`), damit sie nicht auf andere Seiten auswirken.
+
+Begründung: eine separate Datei pro Seite (z. B. `teslalogger_journeys.css`) erzeugt
+einen zusätzlichen `docker cp`-Punkt, einen `?v=`-Cache-Key und einen zweiten Ort,
+der bei einer Änderung gepflegt werden muss. Die gemeinsame Datei wird einmal
+kopiert und einmal versioniert, und die Regeln bleiben über scoping kapselbar.
+
+- `journeys.php` lädt nur `teslalogger_ui.css?v=4` (statt `teslalogger_style.css`
+  + `teslalogger_journeys.css`); `teslalogger_journeys.css` ist gelöscht.
+- `logfile.php` und `index.php` laden die gemeinsame Datei weiterhin; ihre lokale
+  Duplikate der `.tl-form`/`.tl-page`-Regeln können beim nächsten Touch entfernt
+  werden, die Regeln sind jetzt identisch in `teslalogger_ui.css`.
+- Neue Seiten: `teslalogger_ui.css` (Token + Basis-Komponenten) + `teslalogger_style.css`
+  laden, die eigene Regeln als scoping-Wrapper (z. B. `.tl-xyz-card`) in
+  `teslalogger_ui.css` ablegen, und den `?v=` hochzahlen.
 
 ## Logfile: erste weitere Seite
 
