@@ -10,7 +10,7 @@ require_once("tools.php");
     <title><?php t("Journeys"); ?></title>
 	<link rel="stylesheet" href="static/jquery/ui/1.12.1/themes/smoothness/jquery-ui.css">
 	<link rel="stylesheet" href="static/teslalogger_style.css?v=4">
-	<link rel="stylesheet" href="static/teslalogger_ui.css?v=4">
+	<link rel="stylesheet" href="static/teslalogger_ui.css?v=5">
 	<script src="static/jquery/jquery-1.12.4.js"></script>
 	<script src="static/jquery/ui/1.12.1/jquery-ui.js"></script>
 	<script src="static/jquery/jquery-migrate-1.4.1.min.js"></script>
@@ -419,7 +419,7 @@ require_once("tools.php");
 
 	<div class="tl-card tl-journey-form">
 		<h2 class="tl-card-title"><?php t("New Journey"); ?></h2>
-		<div class="tl-form">
+		<div class="tl-journey-form">
 			<div class="tl-form-item">
 				<label for="name"><?php t("Journey name"); ?></label>
 				<input class="tl-journey-input" id="name">

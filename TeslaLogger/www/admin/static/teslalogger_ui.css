@@ -477,17 +477,17 @@ body {
 }
 
 /* Filter form ----------------------------------------------------------------
- * The same grid is used by logfile.php and settings.php (their local rules
- * are identical, so they can be dropped when the files are touched next).
+ * This grid is scoped to .tl-journey-form so it cannot leak into the other
+ * pages (settings.php, logfile.php, etc. that also use a plain .tl-form).
  */
 
-.tl-form {
+.tl-journey-form {
 	display: grid;
 	gap: 16px 24px;
 	grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
 }
 
-.tl-form-item {
+.tl-journey-form .tl-form-item {
 	align-items: center;
 	display: flex;
 	gap: 12px;
@@ -495,22 +495,22 @@ body {
 	min-width: 0;
 }
 
-.tl-form-item label {
+.tl-journey-form .tl-form-item label {
 	color: var(--tl-muted);
 	font-size: 14px;
 	white-space: nowrap;
 }
 
-.tl-form-item input,
-.tl-form-item select {
+.tl-journey-form .tl-form-item input,
+.tl-journey-form .tl-form-item select {
 	min-width: 0;
 }
 
-.tl-form-actions {
+.tl-journey-form .tl-form-actions {
 	justify-content: end;
 }
 
-.tl-form-item .tl-journey-input {
+.tl-journey-form .tl-form-item .tl-journey-input {
 	flex: 1;
 }
 
@@ -530,4 +530,83 @@ body {
 
 .tl-journey-form {
 	overflow: auto;
+}
+
+/* mqtt.php ------------------------------------------------------------------
+ * The page-specific parts live in the shared stylesheet (no separate
+ * teslalogger_mqtt.css). The classes are scoped to the MQTT page so they
+ * cannot affect the other pages.
+ */
+
+.tl-mqtt-info {
+	margin-bottom: 0;
+}
+
+.tl-mqtt-section {
+	color: var(--tl-muted);
+	font-size: 13px;
+	font-weight: 600;
+	letter-spacing: 0.06em;
+	text-transform: uppercase;
+	margin-bottom: 8px;
+}
+
+.tl-mqtt-list {
+	margin: 0;
+	padding-left: 20px;
+}
+
+.tl-mqtt-list li {
+	margin-bottom: 4px;
+}
+
+.tl-mqtt-list li:last-child {
+	margin-bottom: 0;
+}
+
+.tl-mqtt-note {
+	color: var(--tl-muted);
+	font-size: 14px;
+	margin-top: 12px;
+}
+
+/* Form: two columns, label above the input. All text fields are the same
+   full width of their column, so every box is identical. At full width two
+   sit side by side; on narrow screens it falls back to one column.
+   Self-contained grid (does not depend on a plain .tl-form rule). */
+
+.tl-mqtt-form {
+	display: grid;
+	gap: 16px 24px;
+	grid-template-columns: 1fr;
+}
+
+@media (min-width: 760px) {
+	.tl-mqtt-form {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+}
+
+.tl-mqtt-form .tl-form-item {
+	align-items: flex-start;
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+}
+
+.tl-mqtt-form .tl-form-item label {
+	color: var(--tl-muted);
+	font-size: 14px;
+	white-space: nowrap;
+}
+
+.tl-mqtt-form .tl-form-item .tl-mqtt-input {
+	width: 100%;
+}
+
+/* The switch is the same full width as the boxes: the label row spans the
+   whole row, the track stays small and aligned. */
+
+.tl-mqtt-form .tl-form-item .tl-switch {
+	width: 100%;
 }
