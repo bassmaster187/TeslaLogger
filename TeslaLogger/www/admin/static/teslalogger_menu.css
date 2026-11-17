@@ -70,17 +70,20 @@
 	justify-content: flex-end;
 }
 
-/* The confirm button is the red theme button, cancel keeps the theme button */
+/* The confirm button is the red theme button, cancel keeps the theme button.
+   Both share the same base style as the info dialog OK button (uppercase,
+   2px radius, 12px/700) so the dialogs look consistent. */
 
 .tl-dialog-ok {
 	background: var(--tl-danger);
 	border: 1px solid var(--tl-danger);
-	border-radius: 8px;
+	border-radius: 2px;
 	color: #fff;
 	cursor: pointer;
-	font-size: 14px;
-	font-weight: 600;
-	padding: 8px 16px;
+	font-size: 12px;
+	font-weight: 700;
+	padding: 10px 24px;
+	text-transform: uppercase;
 }
 
 .tl-dialog-ok:hover {
@@ -91,12 +94,13 @@
 .tl-dialog-cancel {
 	background: var(--tl-neutral-soft);
 	border: 1px solid var(--tl-neutral-strong);
-	border-radius: 8px;
+	border-radius: 2px;
 	color: var(--tl-text);
 	cursor: pointer;
-	font-size: 14px;
-	font-weight: 600;
-	padding: 8px 16px;
+	font-size: 12px;
+	font-weight: 700;
+	padding: 10px 24px;
+	text-transform: uppercase;
 }
 
 .tl-dialog-cancel:hover {

@@ -317,4 +317,68 @@ body {
 	display: block;
 	filter: var(--tl-icon-filter);
 }
+
+/* Info dialogs ---------------------------------------------------------------
+ * Help icons open a jQuery UI dialog. It is styled like a .tl-card so it
+ * works in both color schemes. The OK button keeps the theme green.
+ */
+
+.ui-dialog.ui-widget-content {
+	background: var(--tl-card);
+	border: 1px solid var(--tl-border);
+	border-radius: var(--tl-radius);
+	box-shadow: var(--tl-shadow);
+	padding: 0;
+}
+
+.ui-dialog .ui-dialog-titlebar {
+	align-items: center;
+	background: none;
+	border: 0;
+	border-bottom: 1px solid var(--tl-border);
+	border-radius: var(--tl-radius) var(--tl-radius) 0 0;
+	color: var(--tl-muted);
+	font-size: 13px;
+	font-weight: 600;
+	letter-spacing: 0.06em;
+	padding: 12px 20px;
+	text-transform: uppercase;
+}
+
+.ui-dialog .ui-dialog-titlebar-close {
+	border: 0;
+}
+
+.ui-dialog .ui-dialog-content {
+	color: var(--tl-text);
+	max-height: 65vh;
+	overflow: auto;
+	padding: 16px 20px;
+}
+
+.ui-dialog .ui-dialog-content h1 {
+	color: var(--tl-text);
+	font-size: 18px;
+	font-weight: 700;
+	line-height: 1.3;
+	margin: 0 0 12px;
+}
+
+.ui-dialog .ui-dialog-buttonpane {
+	background: none;
+	border: 0;
+	border-top: 1px solid var(--tl-border);
+	padding: 12px 20px;
+}
+
+.ui-dialog .ui-dialog-buttonpane button {
+	background: #24890d;
+	border: 0;
+	border-radius: 2px;
+	color: #fff;
+	font-size: 12px;
+	font-weight: 700;
+	padding: 10px 30px 11px;
+	text-transform: uppercase;
+}
 }

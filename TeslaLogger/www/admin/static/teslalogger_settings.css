@@ -245,10 +245,9 @@
 	margin-top: 0;
 }
 
-/* jQuery UI dialogs and the timepicker stay light, like the map tiles */
+/* The info dialog styles are in teslalogger_ui.css, shared by all restyled
+   pages. The timepicker stays light, like the map tiles */
 
-.ui-widget,
-.ui-dialog .ui-dialog-buttonpane,
 .ui-time-picker {
 	color-scheme: light;
 }

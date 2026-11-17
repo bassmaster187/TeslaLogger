@@ -97,8 +97,8 @@ function menu($title, $prefix = "")
 
     $ref = "?token=" . $tasker_token . "&ref=" . full_path()."&car=".$car;
 ?>
-<link rel="stylesheet" href="static/teslalogger_ui.css?v=2">
-<link rel="stylesheet" href="static/teslalogger_menu.css?v=1">
+<link rel="stylesheet" href="static/teslalogger_ui.css?v=3">
+<link rel="stylesheet" href="static/teslalogger_menu.css?v=2">
 <div id="tl_confirm_dialog" class="tl-dialog" hidden>
 	<div class="tl-dialog-card">
 		<h2 class="tl-dialog-title" id="tl_confirm_title"></h2>
