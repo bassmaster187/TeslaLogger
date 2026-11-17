@@ -525,3 +525,11 @@ TextRestore3=N'interrompez pas le processus de restauration de quelque manière 
 
 
 Letzte Fahrt="Dernier trajet"
+General=Général
+Units=Unités
+Data & Updates=Données et mises à jour
+Display=Affichage
+Integrations=Intégrations
+Time span=Période
+URL=URL
+Vehicle=Véhicule

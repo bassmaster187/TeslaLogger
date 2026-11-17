@@ -9,8 +9,10 @@ docker cp .\www\admin\tools.php teslalogger-webserver:/var/www/html/admin/
 docker cp .\www\admin\index.php teslalogger-webserver:/var/www/html/admin/
 docker cp .\www\admin\static\cockpit.css teslalogger-webserver:/var/www/html/admin/static/
 docker cp .\www\admin\static\teslalogger_ui.css teslalogger-webserver:/var/www/html/admin/static/
+docker cp .\www\admin\static\teslalogger_menu.css teslalogger-webserver:/var/www/html/admin/static/
 docker cp .\www\admin\static\teslalogger_index.css teslalogger-webserver:/var/www/html/admin/static/
 docker cp .\www\admin\static\teslalogger_logfile.css teslalogger-webserver:/var/www/html/admin/static/
+docker cp .\www\admin\static\teslalogger_style.css teslalogger-webserver:/var/www/html/admin/static/
 docker cp .\www\admin\static\teslalogger_changelog.css teslalogger-webserver:/var/www/html/admin/static/
 docker cp .\www\admin\changelog.php teslalogger-webserver:/var/www/html/admin/
 docker cp .\www\admin\menu.php teslalogger-webserver:/var/www/html/admin/
@@ -19,4 +21,6 @@ docker cp .\www\admin\language.php teslalogger-webserver:/var/www/html/admin/
 docker cp .\www\admin\changelogread.php teslalogger-webserver:/var/www/html/admin/
 docker cp .\www\admin\restore.php teslalogger-webserver:/var/www/html/admin/
 docker cp .\www\admin\restore_upload.php teslalogger-webserver:/var/www/html/admin/
+docker cp .\www\admin\settings.php teslalogger-webserver:/var/www/html/admin/
+docker cp .\www\admin\static\teslalogger_settings.css teslalogger-webserver:/var/www/html/admin/static/
 pause

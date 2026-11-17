@@ -599,3 +599,13 @@ startedAt=Start
 endedAt=End
 Häufigkeit=Frequency
 Fehler=Alerts
+
+#Settings.php
+General=General
+Units=Units
+Data & Updates=Data & Updates
+Display=Display
+URL=URL
+Integrations=Integrations
+Vehicle=Vehicle
+Time span=Time span

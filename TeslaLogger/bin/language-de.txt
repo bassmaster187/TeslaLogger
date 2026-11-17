@@ -599,3 +599,13 @@ min PS="Min. PS"
 Ladezeit [h]="Ladezeit [h]"
 KomootSettings="Komoot Einstellungen"
 KomootSettingsInfo="Benutzername (eMail) und Passwort für Ihr Komoot-Konto"
+
+#settings.php
+General=Allgemein
+Units=Einheiten
+Data & Updates=Daten & Updates
+Display=Anzeige
+URL=URL
+Integrations=Integrationen
+Vehicle=Fahrzeug
+Time span=Zeitraum

@@ -562,3 +562,11 @@ startedAt="Start"
 
 #Vehicle Alerts
 Fahrzeug Fehler="Kjøretøyvarsler"
+General=Generelt
+Units=Enheter
+Data & Updates=Data og oppdateringer
+Display=Visning
+Integrations=Integreringer
+Time span=Tidsrom
+URL=URL
+Vehicle=Kjøretøy
