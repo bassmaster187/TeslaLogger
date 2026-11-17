@@ -23,7 +23,8 @@ else
 	<link rel="apple-touch-icon" href="img/apple-touch-icon.png">
 	<title><?php t("CarNameTitle"); ?></title>
 	<link rel="stylesheet" href="static/jquery/ui/1.12.1/themes/smoothness/jquery-ui.css">
-	<link rel="stylesheet" href="static/teslalogger_style.css?v=4">
+	<link rel="stylesheet" href="static/teslalogger_style.css?v=5">
+	<link rel="stylesheet" href="static/teslalogger_ui.css?v=14">
 	<script src="static/jquery/jquery-1.12.4.js"></script>
 	<script src="static/jquery/ui/1.12.1/jquery-ui.js"></script>
 	<script src="jquery/jquery-migrate-1.4.1.min.js"></script>
@@ -74,17 +75,27 @@ else
     });
 </script>
 
-<div id="content" style="max-width:1036px;">
-<h1><?php t("CarNameTitle"); ?></h1>
-<?php t("TextCarName"); ?>
+<div class="tl-page">
+	<div class="tl-page-head">
+		<h2 class="tl-page-title"><?php t("CarNameTitle"); ?></h2>
+	</div>
+
+	<div class="tl-card">
+		<p class="tl-muted" style="margin-top:0;"><?php t("TextCarName"); ?></p>
+	</div>
+
+	<div class="tl-card tl-small-form-card">
+		<h2 class="tl-card-title"><?php t("RebootAfterSave"); ?></h2>
+		<div class="tl-form tl-small-form">
+			<div class="tl-form-item">
+				<label for="car_name"><?php t("CarName"); ?></label>
+				<input class="tl-small-input" id="car_name" value="<?= $car_name ?>"/>
+			</div>
+			<div class="tl-form-actions">
+				<button onClick="javascript:Save();"><?php t("Save"); ?></button>
+			</div>
+		</div>
+	</div>
 </div>
-<table>
-<tr>
-	<td><?php t("CarName"); ?>:</td><td><input id="car_name" size="40" value="<?= $car_name ?>"/></td>
-</tr>
-<h5><?php t("RebootAfterSave"); ?><h5>
-<tr>
-	<td></td><td><button onClick="javascript:Save();"><?php t("Save"); ?></button></td>
-</tr>
 </body>
 </html>

@@ -27,6 +27,12 @@ docker cp .\www\admin\changelogread.php teslalogger-webserver:/var/www/html/admi
 docker cp .\www\admin\restore.php teslalogger-webserver:/var/www/html/admin/
 docker cp .\www\admin\restore_upload.php teslalogger-webserver:/var/www/html/admin/
 docker cp .\www\admin\settings.php teslalogger-webserver:/var/www/html/admin/
+docker cp .\www\admin\abrp.php teslalogger-webserver:/var/www/html/admin/
+docker cp .\www\admin\adminpanelpassword.php teslalogger-webserver:/var/www/html/admin/
+docker cp .\www\admin\changecarname.php teslalogger-webserver:/var/www/html/admin/
+docker cp .\www\admin\chargingcost.php teslalogger-webserver:/var/www/html/admin/
+docker cp .\www\admin\ovms.php teslalogger-webserver:/var/www/html/admin/
+docker cp .\www\admin\password_info.php teslalogger-webserver:/var/www/html/admin/
 docker cp .\www\admin\static\teslalogger_settings.css teslalogger-webserver:/var/www/html/admin/static/
 docker cp .\www\admin\static\teslalogger_geofencing.css teslalogger-webserver:/var/www/html/admin/static/
 pause

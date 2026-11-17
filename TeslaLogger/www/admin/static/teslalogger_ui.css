@@ -755,3 +755,104 @@ body {
 	margin-left: auto;
 }
 
+/* chargingcost.php ------------------------------------------------------------
+ * A read-only info card (charger, date, duration, charged, efficiency) plus a
+ * calculation table and a total. Self-contained: does not depend on
+ * .tl-small-form or .tl-journey-form. */
+
+.tl-cs-info {
+	display: grid;
+	gap: 8px;
+}
+
+.tl-cs-info-row {
+	align-items: baseline;
+	display: flex;
+	gap: 12px;
+}
+
+.tl-cs-label {
+	color: var(--tl-muted);
+	min-width: 180px;
+	white-space: nowrap;
+}
+
+.tl-cs-calc {
+	display: grid;
+	gap: 12px;
+}
+
+.tl-cs-row {
+	align-items: baseline;
+	display: grid;
+	gap: 12px;
+	grid-template-columns: 180px 140px 1fr auto;
+}
+
+.tl-cs-row label {
+	color: var(--tl-muted);
+	font-size: 14px;
+	white-space: nowrap;
+}
+
+.tl-cs-row input {
+	min-width: 0;
+	text-align: right;
+	width: 100%;
+}
+
+.tl-cs-mid {
+	color: var(--tl-muted);
+}
+
+.tl-cs-sum {
+	font-variant-numeric: tabular-nums;
+	text-align: right;
+}
+
+.tl-cc-row {
+	align-items: center;
+	display: flex;
+	gap: 8px;
+	margin-top: 12px;
+}
+
+.tl-cs-total {
+	align-items: baseline;
+	border-top: 1px solid var(--tl-border);
+	display: grid;
+	gap: 12px;
+	font-weight: 600;
+	grid-template-columns: 180px 1fr auto auto;
+	margin-top: 16px;
+	padding-top: 16px;
+}
+
+.tl-cs-total-sum {
+	font-size: 18px;
+	text-align: right;
+}
+
+.tl-cs-total-cur {
+	min-width: 48px;
+}
+
+.tl-cs-actions {
+	align-items: center;
+	display: flex;
+	justify-content: flex-end;
+	margin-top: 16px;
+}
+
+@media (max-width: 640px) {
+	.tl-cs-row,
+	.tl-cs-total {
+		grid-template-columns: 1fr auto;
+	}
+
+	.tl-cs-row label,
+	.tl-cs-label {
+		min-width: 0;
+	}
+}
+
