@@ -187,7 +187,7 @@ else
 				$('#full_battery_range_km_span').hide();
 			}
 
-			$('#battery_level').text(jsonData["battery_level"]);
+			$('#battery_level').text(Number(jsonData["battery_level"]).toLocaleString(loc,{maximumFractionDigits:1, minimumFractionDigits: 1}));
 			if (jsonData["car_version"]) {
 				var car_version = jsonData["car_version"];
 

@@ -110,7 +110,7 @@ else
 		  dataType: "json"
 		  }).done(function( jsonData ) {
 			$('#display_name').text(jsonData["display_name"]);
-			$('#battery_level').text(jsonData["battery_level"]);
+			$('#battery_level').text(Number(jsonData["battery_level"]).toFixed(1));
 			
 			range = jsonData["ideal_battery_range_km"];
 			if (LengthUnit == "mile")
