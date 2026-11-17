@@ -571,3 +571,5 @@ Integrations=Integracje
 Time span=Zakres czasu
 URL=URL
 Vehicle=Pojazd
+New Geofence=Nowa geofence
+Edit Geofence=Edytuj geofence

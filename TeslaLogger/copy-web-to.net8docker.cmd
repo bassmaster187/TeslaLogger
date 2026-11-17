@@ -23,4 +23,5 @@ docker cp .\www\admin\restore.php teslalogger-webserver:/var/www/html/admin/
 docker cp .\www\admin\restore_upload.php teslalogger-webserver:/var/www/html/admin/
 docker cp .\www\admin\settings.php teslalogger-webserver:/var/www/html/admin/
 docker cp .\www\admin\static\teslalogger_settings.css teslalogger-webserver:/var/www/html/admin/static/
+docker cp .\www\admin\static\teslalogger_geofencing.css teslalogger-webserver:/var/www/html/admin/static/
 pause

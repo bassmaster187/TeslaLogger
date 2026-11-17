@@ -537,3 +537,5 @@ Integrations=Интеграции
 Time span=Период
 URL=URL
 Vehicle=Транспортное средство
+New Geofence=Новый геофенс
+Edit Geofence=Редактировать геофенс

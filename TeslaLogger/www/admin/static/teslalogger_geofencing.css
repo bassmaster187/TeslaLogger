@@ -1,0 +1,198 @@
+/*
+ * teslalogger_geofencing.css
+ *
+ * Loaded only by geofencing.php (see the <link> tag in the PHP file), after
+ * teslalogger_ui.css (tokens and basic components) and after
+ * teslalogger_style.css (theme, header and menu).
+ *
+ * The page follows the browser setting (prefers-color-scheme).
+ *
+ * Bump the ?v= in the <link> tag of geofencing.php after changes.
+ */
+
+/* Page layout ----------------------------------------------------------------
+ * The cards stack in a grid with the same gap as the start page uses
+ * (see .tl-grid in teslalogger_index.css).
+ */
+
+.tl-page {
+	display: grid;
+	gap: var(--tl-gap);
+}
+
+/* Layout: the location list on the left, the map on the right.
+   Stacks on narrow screens. */
+
+.tl-geo {
+	display: grid;
+	gap: var(--tl-gap);
+	grid-template-columns: 1fr;
+}
+
+@media (min-width: 760px) {
+	.tl-geo {
+		grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+	}
+}
+
+/* Location list ------------------------------------------------------------ */
+
+.tl-geo-list {
+	display: flex;
+	flex-direction: column;
+	overflow: auto;
+}
+
+/* The "New Geofence" button sits at the bottom of the list card */
+
+.tl-geo-new-btn {
+	margin-top: auto;
+}
+
+.tl-geo-items {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.tl-geo-items li {
+	align-items: center;
+	display: flex;
+	justify-content: space-between;
+	gap: 12px;
+	padding: 8px 0;
+	border-bottom: 1px solid var(--tl-border);
+}
+
+.tl-geo-items li:last-child {
+	border-bottom: 0;
+}
+
+.tl-geo-name {
+	color: var(--tl-text);
+	overflow-wrap: anywhere;
+}
+
+.tl-geo-actions {
+	display: flex;
+	gap: 8px;
+	flex: none;
+}
+
+.tl-geo-actions a {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 28px;
+	height: 28px;
+	color: var(--tl-muted);
+	transition: color 120ms ease;
+}
+
+.tl-geo-actions a:hover {
+	color: var(--tl-accent);
+}
+
+/* The genericons inherit the theme icon font, make them inherit the colour */
+
+.tl-geo-actions .genericon {
+	font-size: 18px;
+}
+
+/* The "New Geofence" button is a theme <button>, like the Save button
+   (green background, white text, uppercase) */
+
+/* The "New Geofence" button is a theme <button>, like the Save button
+   (green background, white text, uppercase) */
+
+/* ---------------------------------------------------------------------------
+ * Form (geoadd.php)
+ */
+
+.tl-geo-form {
+	overflow: auto;
+}
+
+.tl-geo-field {
+	margin-bottom: 12px;
+}
+
+.tl-geo-field label {
+	color: var(--tl-muted);
+	display: block;
+	font-size: 14px;
+	margin-bottom: 4px;
+}
+
+.tl-geo-field input {
+	width: 100%;
+}
+
+.tl-geo-flag-group {
+	margin-top: 16px;
+}
+
+.tl-geo-flag-group-title {
+	color: var(--tl-muted);
+	font-size: 13px;
+	font-weight: 600;
+	margin: 0 0 8px;
+	text-transform: uppercase;
+}
+
+.tl-geo-checkbox {
+	color: var(--tl-text);
+	cursor: pointer;
+	display: block;
+	font-size: 14px;
+	margin-bottom: 8px;
+}
+
+.tl-geo-checkbox input {
+	float: right;
+	margin: 0;
+}
+
+.tl-geo-row {
+	align-items: center;
+	color: var(--tl-text);
+	display: flex;
+	flex-wrap: wrap;
+	font-size: 14px;
+	gap: 4px;
+	margin-bottom: 8px;
+}
+
+.tl-geo-row input {
+	accent-color: var(--tl-accent);
+}
+
+/* The action buttons keep the theme colours (green save, red delete) */
+
+.tl-geo-actions-btn {
+	margin-top: 16px;
+}
+
+/* Map -----------------------------------------------------------------------
+ * The map is inside the card, like the start page "Current Pos" map.
+ */
+
+/* Two classes so it beats the .tl-card padding (menu.php re-loads ui.css) */
+
+.tl-card.tl-geo-map {
+	padding: 0;
+}
+
+.tl-geo-map #map {
+	border-radius: calc(var(--tl-radius) - 1px);
+	height: 400px;
+	min-height: 400px;
+	z-index: 0;
+}
+
+@media (min-width: 760px) {
+	.tl-geo-map #map {
+		height: 600px;
+		min-height: 600px;
+	}
+}

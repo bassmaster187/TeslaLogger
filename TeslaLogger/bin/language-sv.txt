@@ -594,3 +594,5 @@ Integrations=Integrationer
 Time span=Tidsperiod
 URL=URL
 Vehicle=Fordon
+New Geofence=Ny geofence
+Edit Geofence=Redigera geofence

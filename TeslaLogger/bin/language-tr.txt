@@ -594,3 +594,5 @@ Integrations=Entegrasyonlar
 Time span=Süre
 URL=URL
 Vehicle=Araç
+New Geofence=Yeni geofence
+Edit Geofence=Geofence düzenle

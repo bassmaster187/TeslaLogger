@@ -533,3 +533,5 @@ Integrations=Intégrations
 Time span=Période
 URL=URL
 Vehicle=Véhicule
+New Geofence=Nouveau geofence
+Edit Geofence=Modifier le geofence

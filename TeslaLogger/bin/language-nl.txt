@@ -552,3 +552,5 @@ Integrations=Integraties
 Time span=Tijdspan
 URL=URL
 Vehicle=Voertuig
+New Geofence=Nieuwe geofence
+Edit Geofence=Geofence bewerken

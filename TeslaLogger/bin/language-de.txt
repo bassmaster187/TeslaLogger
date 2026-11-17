@@ -609,3 +609,5 @@ URL=URL
 Integrations=Integrationen
 Vehicle=Fahrzeug
 Time span=Zeitraum
+New Geofence=Neuer Geofence
+Edit Geofence=Geofence bearbeiten

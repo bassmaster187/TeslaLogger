@@ -572,3 +572,5 @@ Integrations=集成
 Time span=时间段
 URL=URL
 Vehicle=车辆
+New Geofence=新的地理围栏
+Edit Geofence=编辑地理围栏

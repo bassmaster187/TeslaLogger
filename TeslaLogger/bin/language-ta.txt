@@ -593,3 +593,5 @@ Integrations=ஒருங்கிணைப்புகள்
 Time span=காலவெளி
 URL=URL
 Vehicle=வாகனம்
+New Geofence=புதிய ஜியோபேன்ஸ்
+Edit Geofence=ஜியோபேன்ஸ் திருத்த

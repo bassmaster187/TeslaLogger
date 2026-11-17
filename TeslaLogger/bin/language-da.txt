@@ -501,3 +501,5 @@ Integrations=Integrationer
 Time span=Tidsrum
 URL=URL
 Vehicle=Køretøj
+New Geofence=Ny geofence
+Edit Geofence=Rediger geofence

@@ -6,12 +6,14 @@ require_once("language.php");
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Teslalogger geofencing V1.1</title>
+    <title>Teslalogger <?php t("Geofence"); ?></title>
 	<link rel="stylesheet" href="static/jquery/ui/1.12.1/themes/smoothness/jquery-ui.css">
-	<link rel="stylesheet" href="static/teslalogger_style.css?v=4">
+	<link rel="stylesheet" href="static/teslalogger_style.css?v=5">
+	<link rel="stylesheet" href="static/teslalogger_ui.css?v=3">
+	<link rel="stylesheet" href="static/teslalogger_geofencing.css?v=5">
 	<link rel="stylesheet" href="static/leaflet/1.4.0/leaflet.css" />
 	<link rel="stylesheet" href="static/leaflet/1.4.0/MarkerCluster.css" />
-  	<link rel="stylesheet" href="static/leaflet/1.4.0/MarkerCluster.Default.css" />
+   	<link rel="stylesheet" href="static/leaflet/1.4.0/MarkerCluster.Default.css" />
 
    <!-- Make sure you put this AFTER Leaflet's CSS -->
 	<script src="static/leaflet/1.4.0/leaflet.js"></script>
@@ -21,9 +23,6 @@ require_once("language.php");
 	<script src="static/jquery/ui/1.12.1/jquery-ui.js"></script>
 	<script src="static/jquery/jquery-migrate-1.4.1.min.js"></script>
 	<link rel='stylesheet' id='genericons-css'  href='static/genericons.css?ver=3.0.3' type='text/css' media='all' />
-	<style>
-	.icon {font-size:30px; color: #2b2b2b; height: 40px; margin-right: 15px;}
-	</style>
 	<script>
 	var map = null;	
 	var greenIcon = null;
@@ -176,25 +175,49 @@ function sf(lat, lng, radius)
     include "menu.php";
     echo(menu("Geofencing"));
 ?>
-<div style="max-width: 1260px;">
-	<div style="height:800px; overflow: auto; float: left;">
-	<table id="locations">
-	<?PHP 
-	$id = 0;
-	usort($csv2, function ($a, $b) { return strcmp($a[4], $b[4]); });
-
-	foreach ($csv2 as $v)
-	{
-		echo("<tr><td>$v[0]</td><td><a href='geoadd.php?id=$v[3]'>");
-		echo('<span class="icon genericon genericon-edit" />');
-		echo("</a> <a href='javascript:sf($v[1],$v[2], $v[5]);'>");
-		echo('<span class="icon genericon genericon-search" />');
-		echo("</a></td></tr>\n");
-	}
-	?>
-	</table>
+<div class="tl-page">
+	<div class="tl-page-head">
+		<h2 class="tl-page-title"><?php t("Geofence"); ?></h2>
 	</div>
-	<div id="map" style="height:800px; max-width: 1260px; z-index:0;"></div>
+	<div class="tl-geo">
+		<div class="tl-card tl-geo-list">
+			<div class="tl-card-head">
+				<h2 class="tl-card-title"><?php t("Geofence"); ?></h2>
+				<?PHP
+				$helpUrl = ($language == "de") ? "https://teslalogger.de/docs/extras/geofence/" : "https://teslalogger.de/en/docs/extras/geofence/";
+				?>
+				<a href="<?= $helpUrl ?>" target="_blank"><img src="img/icon-help-24.png" class="tl-help" /></a>
+			</div>
+			<?PHP
+			usort($csv2, function ($a, $b) { return strcmp($a[4], $b[4]); });
+			?>
+			<ul class="tl-geo-items">
+			<?PHP
+			foreach ($csv2 as $v)
+			{
+				$name = htmlspecialchars($v[0]);
+				$lat = $v[1];
+				$lng = $v[2];
+				$radius = $v[5];
+				$id = $v[3];
+				?>
+				<li>
+					<span class="tl-geo-name"><?= $name ?></span>
+					<span class="tl-geo-actions">
+						<a href='geoadd.php?id=<?= $id ?>'><span class="genericon genericon-edit" /></a>
+						<a href='javascript:sf(<?= $lat ?>,<?= $lng ?>, <?= $radius ?>);'><span class="genericon genericon-search" /></a>
+					</span>
+				</li>
+				<?PHP
+			}
+			?>
+			</ul>
+			<button type="button" class="tl-geo-new-btn" onclick="window.location.href='geoadd.php';"><?php t("New Geofence"); ?></button>
+		</div>
+		<div class="tl-card tl-geo-map">
+			<div id="map"></div>
+		</div>
+	</div>
 </div>
 </body>
 </html>
