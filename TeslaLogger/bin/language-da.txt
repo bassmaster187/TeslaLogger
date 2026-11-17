@@ -171,6 +171,7 @@ Cell Imbalance=Ubalance i cellerne
 Software Update=Opdatering af software
 Consumption=Forbrug
 Ø Consumption="Ø Forbrug"
+Ø Speed="Ø Fart"
 min=min
 Wh/km=Wh/km
 km/h=km/t

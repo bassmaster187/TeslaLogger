@@ -350,6 +350,22 @@ else
 
 			$("#trip_duration_sec").text(min + ":" + sec);
 
+			// Ø speed = distance / duration, derived from the current trip data
+			if (trip_duration_sec > 0 && jsonData["trip_distance"] > 0)
+			{
+				var avg_speed = jsonData["trip_distance"] * 3600 / trip_duration_sec;
+
+				if (LengthUnit == "mile")
+				{
+					avg_speed /= km2mls;
+					$("#lt_kmh_avg").text("mph");
+				}
+
+				$("#trip_avg_speed").text(avg_speed.toFixed(0));
+			}
+			else
+				$("#trip_avg_speed").text("---");
+
 			if (jsonData["software_update_status"] && jsonData["software_update_status"].length > 0)
 			{
 				$("#SoftwareUpdateRow").show();
@@ -682,6 +698,7 @@ else
 			<div><span class="tl-stat-value"><span id="trip_kwh">---</span> <span class="tl-stat-unit"><?php t("kWh"); ?></span></span><span class="tl-stat-label"><?php t("Consumption"); ?></span></div>
 			<div><span class="tl-stat-value"><span id="trip_avg_kwh">---</span> <span class="tl-stat-unit" id="lt_whkm"><?php t("Wh/km"); ?></span></span><span class="tl-stat-label"><?php t("Ø Consumption"); ?></span></div>
 			<div><span class="tl-stat-value"><span id="max_speed">---</span> <span class="tl-stat-unit" id='lt_kmh'><?php t("km/h"); ?></span></span><span class="tl-stat-label"><?php t("Max km/h"); ?></span></div>
+			<div><span class="tl-stat-value"><span id="trip_avg_speed">---</span> <span class="tl-stat-unit" id="lt_kmh_avg"><?php t("km/h"); ?></span></span><span class="tl-stat-label"><?php t("Ø Speed"); ?></span></div>
 		</div>
 	</section>
 

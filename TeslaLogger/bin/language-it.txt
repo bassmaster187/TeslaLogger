@@ -173,6 +173,7 @@ Cell Imbalance=Squilibrio cellulare
 Software Update=Aggiornamento software
 Consumption=Consumo
 Ø Consumption="Consumo medio"
+Ø Speed="Velocità media"
 min=min
 Wh/km=Wh/km
 km/h=km/h

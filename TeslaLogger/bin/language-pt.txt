@@ -170,6 +170,7 @@ Software Update=Actualização de software
 min=min
 Consumption=Consumo
 Ø Consumption="Ø Consumo"
+Ø Speed="Ø Velocidade"
 kWh=kWh
 Wh/km=Wh/km
 Current Pos=Pos actuais

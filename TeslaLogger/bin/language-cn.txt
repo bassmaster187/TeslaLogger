@@ -173,6 +173,7 @@ Software Update=软件更新
 min=min
 Consumption=消费量
 Ø Consumption="平均能耗"
+Ø Speed="平均速度"
 Wh/km=Wh/km
 Please update to latest docker-compose.yml file. Check: {LINK}=请更新到最新的docker-compose.yml文件。检查：{LINK}
 

@@ -162,6 +162,7 @@ Software Update="Programvareoppgradering"
 min=min
 Consumption=Forbruk
 Ø Consumption="Gj. forbruk"
+Ø Speed="Gj. fart"
 Wh/km=Wh/km
 Current Pos="Nåværende pos."
 Please update to latest docker-compose.yml file. Check: {LINK}="Oppgrader til den nyeste docker-compose.yml-fil. Sjekk: {LINK}"

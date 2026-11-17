@@ -192,6 +192,7 @@ Cell Imbalance=
 Software Update=
 Consumption=
 Ø Consumption=
+Ø Speed=Med. hastighet
 Please update to latest docker-compose.yml file. Check: {LINK}=
 FatalErrorMissingKey=
 

@@ -173,6 +173,7 @@ Cell Imbalance=Desequilibrio celular
 Software Update=Actualización de software
 Consumption=Consumo
 Ø Consumption="Consumo promedio"
+Ø Speed="Velocidad promedio"
 Please update to latest docker-compose.yml file. Check: {LINK}=Por favor, actualice a la última docker-compose.yml archivo. Compruébelo: {LINK}
 
 #menu.php

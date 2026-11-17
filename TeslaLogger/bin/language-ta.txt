@@ -191,6 +191,7 @@ Cell Imbalance="செல் ஏற்றத்தாழ்வு"
 Software Update="மென்பொருள் புதுப்பிப்பு"
 Consumption="நுகர்வு"
 Ø Consumption="ஏ.வி.சி நுகர்வு"
+Ø Speed="சராசரி வேகம்"
 Please update to latest docker-compose.yml file. Check: {LINK}="அண்மைக் கால டோக்கர்-கம்ப்யூச்.ஒய்எம்எல் கோப்பிற்கு புதுப்பிக்கவும். சரிபார்க்கவும்: {LINK}"
 FatalErrorMissingKey="மெய்நிகர் விசை மிச்சிக்! <br> அமைவை முடிக்கவும்: {LINK} <br> மற்றும் டெச்லலசரை மறுதொடக்கம் செய்யுங்கள்."
 

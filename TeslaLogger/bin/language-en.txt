@@ -202,6 +202,7 @@ Cell Imbalance=Cell Imbalance
 Software Update=Software Update
 Consumption=Consumption
 Ø Consumption="Avg Consumption"
+Ø Speed="Avg Speed"
 Please update to latest docker-compose.yml file. Check: {LINK}=Please update to latest docker-compose.yml file. Check: {LINK}
 FatalErrorMissingKey=Virtual Key Missig!<br>Finish Setup at: {LINK}<br>And restart Teslalogger.
 Follow vehicle=Follow vehicle

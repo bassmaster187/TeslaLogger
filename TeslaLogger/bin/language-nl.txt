@@ -171,6 +171,7 @@ Cell Imbalance=Cel onbalans
 Software Update=Software-update
 Consumption=Verbruik
 Ø Consumption="Ø Gemiddelde Verbruik"
+Ø Speed="Gem. snelheid"
 min=min
 Wh/km=Wh/km
 km/h=km/h

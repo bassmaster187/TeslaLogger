@@ -199,6 +199,7 @@ Offline=не в сети
 Falling asleep=Засыпает
 Consumption=Потребление
 Ø Consumption="Ø Потребление"
+Ø Speed="Ø Скорость"
 Wh/km=Втч/км
 min=Мин
 kW=кВт

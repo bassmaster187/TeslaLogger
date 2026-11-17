@@ -191,6 +191,7 @@ Cell Imbalance="Hücre Dengesizliği"
 Software Update="Yazılım Güncelleme"
 Consumption="Tüketim"
 Ø Consumption="Ort. Tüketim"
+Ø Speed="Ort. Hız"
 Please update to latest docker-compose.yml file. Check: {LINK}="Lütfen en son docker-compose.yml dosyasını güncelleyin. Kontrol edin:{LINK}"
 FatalErrorMissingKey="Sanal Anahtar Eksik!<br>Kurulumu şu adreste tamamlayın: {LINK}<br>Ve Teslalogger'ı yeniden başlatın."
 

@@ -176,6 +176,7 @@ Cell Imbalance=Déséquilibre cellulaire
 Software Update=Mise à jour du logiciel
 Consumption=Consommation
 Ø Consumption="Ø Consommation"
+Ø Speed="Ø Vitesse"
 min=min
 kWh=kWh
 Wh/km=Wh/km

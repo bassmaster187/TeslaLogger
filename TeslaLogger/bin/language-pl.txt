@@ -184,6 +184,7 @@ Cell Imbalance=
 Software Update=
 Consumption=
 Ø Consumption=
+Ø Speed=Śr. prędkość
 Please update to latest docker-compose.yml file. Check: {LINK}=
 
 #menu.php

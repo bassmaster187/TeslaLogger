@@ -54,6 +54,7 @@ TextSuspendTeslalogger=Teslalogger wurde angehalten! Daten werden nicht geloggt!
 Typical Range=Reichweite
 Yes=Ja
 Ø Consumption="Ø Verbrauch"
+Ø Speed="Ø Geschwindigkeit"
 mi=mi
 min=min
 kWh=kWh
