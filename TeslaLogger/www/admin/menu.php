@@ -101,8 +101,8 @@ function menu($title, $prefix = "")
 <link rel="stylesheet" href="static/teslalogger_menu.css?v=1">
 <div id="tl_confirm_dialog" class="tl-dialog" hidden>
 	<div class="tl-dialog-card">
-		<h2 class="tl-dialog-title"><?php t("Restart confirmation"); ?></h2>
-		<p class="tl-dialog-text"><?php t("Do you really want to restart TeslaLogger?"); ?></p>
+		<h2 class="tl-dialog-title" id="tl_confirm_title"></h2>
+		<p class="tl-dialog-text" id="tl_confirm_question"></p>
 		<div class="tl-dialog-actions">
 			<button type="button" class="tl-dialog-cancel" id="tl_confirm_cancel"><?php t("Cancel"); ?></button>
 			<button type="button" class="tl-dialog-ok" id="tl_confirm_ok"><?php t("Yes"); ?></button>
@@ -140,10 +140,10 @@ function menu($title, $prefix = "")
 						<a href="<?php echo $prefix; ?>logfile.php"><?php t("Logfile"); ?></a>
 					</li>
 					<li id="menu-item-2" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-2">
-						<a href="javascript:confirmRestart('restartlogger.php', '<?php t("Restart TeslaLogger"); ?>')"><?php t("Restart"); ?></a>
+						<a href="javascript:confirmAction('<?php t("Restart confirmation"); ?>', '<?php t("Do you really want to restart TeslaLogger?"); ?>', 'restartlogger.php', '<?php t("Restart TeslaLogger"); ?>')"><?php t("Restart"); ?></a>
 					</li>
 					<li id="menu-item-3" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-3">
-						<a href="javascript:BackgroudRun('update.php', '<?php t("Reboot!"); ?>')"><?php t("Update"); ?></a>
+						<a href="javascript:confirmAction('<?php t("Update confirmation"); ?>', '<?php t("Do you really want to update TeslaLogger?"); ?>', 'update.php', '<?php t("Update TeslaLogger"); ?>')"><?php t("Update"); ?></a>
 					</li>
 					<li id="menu-item-7" class="page_item_has_children">
 						<a href="#"><?php t("Dashboards"); ?></a>
@@ -211,10 +211,21 @@ function menu($title, $prefix = "")
 	</div>
 </header>
 <script>
-function confirmRestart($target, $text, $reload)
+function confirmAction($title, $question, $target, $text, $reload)
   {
 		var dialog = document.getElementById('tl_confirm_dialog');
-		dialog.removeAttribute('hidden');
+
+		if (dialog)
+			dialog.removeAttribute('hidden');
+
+		var title = document.getElementById('tl_confirm_title');
+		var question = document.getElementById('tl_confirm_question');
+
+		if (title)
+			title.textContent = $title;
+
+		if (question)
+			question.textContent = $question;
 
 		document.getElementById('tl_confirm_ok').onclick = function()
 		{

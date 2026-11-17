@@ -456,6 +456,13 @@ Sleep Attempt=Tentativa de Sono
 #menu.php
 Logfile=ficheiro de registo
 Restart=Reiniciar
+Restart TeslaLogger=Reiniciar TeslaLogger
+Restart confirmation=Confirmação de reinício
+Do you really want to restart TeslaLogger?=Tem a certeza de que quer reiniciar TeslaLogger?
+Cancel=Cancelar
+Update confirmation=Confirmação de atualização
+Do you really want to update TeslaLogger?=Tem a certeza de que quer atualizar TeslaLogger?
+Update TeslaLogger=Atualizar TeslaLogger
 Dashboards=Painel de instrumentos
 Fleet Statistic=Estatísticas da Frota
 My Degradation=A Minha Degradação
