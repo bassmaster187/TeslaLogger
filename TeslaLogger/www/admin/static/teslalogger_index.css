@@ -497,58 +497,19 @@ body {
 	z-index: 0;
 }
 
-/* The theme styles every <button> green and uppercase; reset for the switch */
+/* The theme styles every <button> green and uppercase; reset for the switch.
+   The track and state styles are in teslalogger_ui.css, shared by all
+   restyled pages. */
 .tl-page .tl-switch,
 .tl-page .tl-switch:hover,
 .tl-page .tl-switch:focus,
 .tl-page .tl-switch:active {
-	align-items: center;
 	background: none;
 	border: 0;
 	color: var(--tl-text);
-	cursor: pointer;
-	display: inline-flex;
 	font-family: inherit;
-	font-size: 14px;
-	font-weight: 500;
-	gap: 8px;
 	padding: 2px;
 	text-transform: none;
-}
-
-.tl-page .tl-switch:focus-visible {
-	outline: 2px solid var(--tl-accent);
-	outline-offset: 2px;
-}
-
-.tl-switch-track {
-	background: var(--tl-switch-off);
-	border-radius: 999px;
-	flex: none;
-	height: 20px;
-	position: relative;
-	transition: background 0.15s ease;
-	width: 36px;
-}
-
-.tl-switch-track::after {
-	background: #fff;
-	border-radius: 50%;
-	content: "";
-	height: 16px;
-	left: 2px;
-	position: absolute;
-	top: 2px;
-	transition: transform 0.15s ease;
-	width: 16px;
-}
-
-.tl-switch[aria-checked="true"] .tl-switch-track {
-	background: var(--tl-accent);
-}
-
-.tl-switch[aria-checked="true"] .tl-switch-track::after {
-	transform: translateX(16px);
 }
 
 /* Remote block from teslalogger.de ---------------------------------------- */
@@ -609,9 +570,7 @@ body {
 
 @media (prefers-reduced-motion: reduce) {
 	.tl-grid,
-	.tl-battery-fill,
-	.tl-switch-track,
-	.tl-switch-track::after {
+	.tl-battery-fill {
 		transition: none;
 	}
 }

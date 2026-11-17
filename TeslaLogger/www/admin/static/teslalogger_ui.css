@@ -234,3 +234,87 @@ body {
 		border-color: var(--tl-neutral-strong);
 	}
 }
+
+/* Switch ---------------------------------------------------------------------
+ * Shared by the restyled pages. The start page renders a <button role="switch">
+ * (state via aria-checked), the other pages render a <label> wrapping a real
+ * checkbox (state via :checked). Both share the track.
+ */
+
+.tl-switch {
+	align-items: center;
+	cursor: pointer;
+	display: inline-flex;
+	font-size: 14px;
+	font-weight: 500;
+	gap: 8px;
+	white-space: nowrap;
+}
+
+.tl-switch input {
+	position: absolute;
+	opacity: 0;
+	width: 1px;
+	height: 1px;
+	margin: 0;
+}
+
+.tl-switch-track {
+	background: var(--tl-switch-off);
+	border-radius: 999px;
+	flex: none;
+	height: 20px;
+	position: relative;
+	transition: background 0.15s ease;
+	width: 36px;
+}
+
+.tl-switch-track::after {
+	background: #fff;
+	border-radius: 50%;
+	content: "";
+	height: 16px;
+	left: 2px;
+	position: absolute;
+	top: 2px;
+	transition: transform 0.15s ease;
+	width: 16px;
+}
+
+.tl-switch[aria-checked="true"] .tl-switch-track,
+.tl-switch input:checked + .tl-switch-track {
+	background: var(--tl-accent);
+}
+
+.tl-switch[aria-checked="true"] .tl-switch-track::after,
+.tl-switch input:checked + .tl-switch-track::after {
+	transform: translateX(16px);
+}
+
+.tl-switch:focus-visible,
+.tl-switch input:focus-visible + .tl-switch-track {
+	outline: 2px solid var(--tl-accent);
+	outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.tl-switch-track,
+	.tl-switch-track::after {
+		transition: none;
+	}
+}
+
+/* Help icons ------------------------------------------------------------------
+ * The help icon is a black PNG file, invert it in the dark scheme.
+ */
+
+.tl-help {
+	cursor: pointer;
+	filter: var(--tl-icon-filter);
+}
+
+.tl-help img {
+	display: block;
+	filter: var(--tl-icon-filter);
+}
+}

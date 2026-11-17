@@ -201,19 +201,8 @@
 	justify-content: flex-end;
 }
 
-/* Help icons -----------------------------------------------------------------
- * The help icon is a black PNG file, invert it in the dark scheme.
- */
-
-.tl-help {
-	cursor: pointer;
-	filter: var(--tl-icon-filter);
-}
-
-.tl-help img {
-	display: block;
-	filter: var(--tl-icon-filter);
-}
+/* The switch and help icon styles are in teslalogger_ui.css, shared by all
+   restyled pages. */
 
 /* Car cards ------------------------------------------------------------------
  * The per-car tasker cards are laid out in a grid, two columns when there is

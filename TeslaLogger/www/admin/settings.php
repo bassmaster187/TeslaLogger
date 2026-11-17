@@ -26,8 +26,8 @@ function CarsCombobox($cars, $selected)
     <title>Teslalogger Settings V1.6</title>
 	<link rel="stylesheet" href="static/jquery/ui/1.12.1/themes/smoothness/jquery-ui.css">
 	<link rel="stylesheet" href="static/teslalogger_style.css?v=5">
-	<link rel="stylesheet" href="static/teslalogger_ui.css?v=1">
-	<link rel="stylesheet" href="static/teslalogger_settings.css?v=8">
+	<link rel="stylesheet" href="static/teslalogger_ui.css?v=2">
+	<link rel="stylesheet" href="static/teslalogger_settings.css?v=9">
 	<script src="static/jquery/jquery-1.12.4.js"></script>
 	<script src="static/jquery/ui/1.12.1/jquery-ui.js"></script>
 	<script src="static/jquery/jquery-migrate-1.4.1.min.js"></script>
@@ -342,10 +342,13 @@ echo(menu("Settings"));
 			</div>
 			<div class="tl-section"><?php t("Data & Updates"); ?></div>
 			<div class="tl-form-item">
-				<span class="tl-label"><?php t("Share data anonymously"); ?></span>
+				<span class="tl-label"><?php t("Share data anonymously"); ?> <img id="ShareDataHelp" src="img/icon-help-24.png" class="tl-help" /></span>
 				<div class="tl-checkbox">
-					<input id="checkboxSharedata" type="checkbox" value="sharedata"> <label for="checkboxSharedata"><?php t("Enable"); ?></label>
-					<img id="ShareDataHelp" src="img/icon-help-24.png" class="tl-help" />
+					<label class="tl-switch">
+						<input id="checkboxSharedata" type="checkbox" value="sharedata">
+						<span class="tl-switch-track"></span>
+						<span><?php t("Enable"); ?></span>
+					</label>
 				</div>
 			</div>
 			<div class="tl-form-item">
@@ -365,7 +368,10 @@ echo(menu("Settings"));
 			<div class="tl-form-item">
 				<span class="tl-label"><?php t("Enable"); ?></span>
 				<div class="tl-checkbox">
-					<input id="checkboxSleep" type="checkbox" value="sleep">
+					<label class="tl-switch">
+						<input id="checkboxSleep" type="checkbox" value="sleep">
+						<span class="tl-switch-track"></span>
+					</label>
 				</div>
 			</div>
 			<div class="tl-form-item">
@@ -378,7 +384,11 @@ echo(menu("Settings"));
 			<div class="tl-form-item">
 				<span class="tl-label"><?php t("Show calc. 100% range"); ?></span>
 				<div class="tl-checkbox">
-					<input id="checkbox100pct" type="checkbox" value="100pct"> <label for="checkbox100pct"><?php t("Enable"); ?></label>
+					<label class="tl-switch">
+						<input id="checkbox100pct" type="checkbox" value="100pct">
+						<span class="tl-switch-track"></span>
+						<span><?php t("Enable"); ?></span>
+					</label>
 				</div>
 			</div>
 			<div class="tl-section"><?php t("URL"); ?></div>
@@ -400,17 +410,23 @@ echo(menu("Settings"));
 			</div>
 			<div class="tl-section"><?php t("Integrations"); ?></div>
 			<div class="tl-form-item">
-				<span class="tl-label"><?php t("ScanMyTesla integration"); ?></span>
+				<span class="tl-label"><?php t("ScanMyTesla integration"); ?> <a href="https://teslalogger.de/smt.php" target="_blank"><img src="img/icon-help-24.png" class="tl-help" /></a></span>
 				<div class="tl-checkbox">
-					<input id="checkboxScanMyTesla" type="checkbox" value="ScanMyTesla"> <label for="checkboxScanMyTesla"><?php t("Enable"); ?></label>
-					<a href="https://teslalogger.de/smt.php" target="_blank"><img src="img/icon-help-24.png" class="tl-help" /></a>
+					<label class="tl-switch">
+						<input id="checkboxScanMyTesla" type="checkbox" value="ScanMyTesla">
+						<span class="tl-switch-track"></span>
+						<span><?php t("Enable"); ?></span>
+					</label>
 				</div>
 			</div>
 			<div class="tl-form-item">
-				<span class="tl-label"><?php t("Position by StreamingAPI"); ?></span>
+				<span class="tl-label"><?php t("Position by StreamingAPI"); ?> <img id="StreamingPosHelp" src="img/icon-help-24.png" class="tl-help" /></span>
 				<div class="tl-checkbox">
-					<input id="StreamingPos" type="checkbox" value="StreamingPos"> <label for="StreamingPos"><?php t("Enable"); ?></label>
-					<img id="StreamingPosHelp" src="img/icon-help-24.png" class="tl-help" />
+					<label class="tl-switch">
+						<input id="StreamingPos" type="checkbox" value="StreamingPos">
+						<span class="tl-switch-track"></span>
+						<span><?php t("Enable"); ?></span>
+					</label>
 				</div>
 			</div>
 <?php
