@@ -9,13 +9,12 @@ require_once("tools.php");
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title><?php t("Wallbox"); ?></title>
 	<link rel="stylesheet" href="static/jquery/ui/1.12.1/themes/smoothness/jquery-ui.css">
-	<link rel="stylesheet" href="static/teslalogger_style.css?v=4">
+	<link rel="stylesheet" href="static/teslalogger_style.css?v=5">
+	<link rel="stylesheet" href="static/teslalogger_ui.css?v=9">
 	<script src="static/jquery/jquery-1.12.4.js"></script>
 	<script src="static/jquery/ui/1.12.1/jquery-ui.js"></script>
-	<script src="jquery/jquery-migrate-1.4.1.min.js"></script>
-	<script src="static/jquery/datatables/1.10.22/js/jquery.dataTables.min.js"></script>
+	<script src="static/jquery/jquery-migrate-1.4.1.min.js"></script>
 	<link rel='stylesheet' id='genericons-css'  href='static/genericons.css?ver=3.0.3' type='text/css' media='all' />
-	<link rel='stylesheet' href="static/jquery/datatables/1.10.22/css/jquery.dataTables.min.css">
 
 	<script>
 	<?php
@@ -43,8 +42,16 @@ require_once("tools.php");
 	
     function btn_test_click()
     {
-        if (!($("#host").val().startsWith("http://") || $("#host").val().startsWith("https://")))
+        var host = $("#host").val();
+
+        if (host == "")
+            return;
+
+        if (!(host.startsWith("http://") || host.startsWith("https://")))
+        {
             alert("Host must start with http:// or https://");
+            return;
+        }
 
         var url = "wallbox";
         console.log("url: " + url);
@@ -103,42 +110,67 @@ require_once("tools.php");
 </script>
 </head>
 <body>
-<div style="max-width: 1260px;">
 <?php 
 include "menu.php";
 menu("Wallbox Test");
 ?>
-<div>
-    <h1><?php t("Wallbox"); ?>:  <a href="https://github.com/bassmaster187/TeslaLogger/blob/master/wallbox.md"><img src="img/icon-help-24.png" class="pointer"/></a></h1>
-<div>
-<p><?php t("WallboxComment"); ?></p>
-<table>
-    <tr><td><?php t("Type"); ?>:</td><td>
-        <select name="type" id="type">
-        <option value=""></option>
-            <option value="cfos">cFos</option> 
-            <option value="go-e">Go e-Charger</option>    
-            <option value="openwb">Open WB</option>
-            <option value="openwb2">Open WB 2</option>
-            <option value="shelly3em">Shelly 3EM</option>
-            <option value="shellyem">Shelly EM</option>
-            <option value="smartevse3">SmartEVSE 3</option>
-            <option value="tesla-gen3">Tesla Wallbox Gen 3</option>
-            <option value="keba">Keba KeContact P30</option>
-            <option value="evcc">EVCC</option>
-            <option value="warp">WARP</option>
-        </select>
-        </td></tr>
-    <tr><td><?php t("Host"); ?>:</td><td><input id="host" type="text" /></td></tr>
-    <tr><td><?php t("Param"); ?>:</td><td><input id="param" type="text" /></td></tr>
-    <tr><td></td><td style="text-align: right;"><button onclick="btn_test_click();"><?php t("Test"); ?></td></tr>
-    <tr><td></td><td></td></tr>
-    <tr><td colspan=2><h1><?php t("Info"); ?>:</h1></td></tr>
-    <tr><td><?php t("Version"); ?>:</td><td><span id="Version"></td></span></tr>
-    <tr><td><?php t("Utility kWh"); ?>: </td><td><span id="Utility_kWh"></td></span></tr>
-    <tr><td><?php t("Vehicle kWh"); ?>: </td><td><span id="Vehicle_kWh"></td></span></tr>
-    <tr><td></td><td style="text-align: right;"><button onclick="btn_save_click();"><?php t("Save"); ?></td></tr>
-</table>
+<div class="tl-page">
+	<div class="tl-page-head">
+		<h2 class="tl-page-title"><?php t("Wallbox"); ?></h2>
+		<?php
+		$helpUrl = ($language == "de") ? "https://teslalogger.de/docs/extras/wallbox/" : "https://teslalogger.de/en/docs/extras/wallbox/";
+		?>
+		<a href="<?= $helpUrl ?>" target="_blank"><img src="img/icon-help-24.png" class="tl-help" /></a>
+		<div class="tl-actions">
+			<button onclick="btn_test_click();"><?php t("Test"); ?></button>
+			<button onclick="btn_save_click();"><?php t("Save"); ?></button>
+		</div>
+	</div>
+
+	<div class="tl-card">
+		<p class="tl-muted" style="margin-top:0;"><?php t("WallboxComment"); ?></p>
+		<img class="tl-wallbox-screenshot" src="https://teslalogger.de/assets/images/extras-wallbox-01-fd2c7e445905431c37ab6c06e50ca18a.png" alt="<?php t("Wallbox"); ?>" />
+	</div>
+
+	<div class="tl-card tl-wallbox-form-card">
+		<h2 class="tl-card-title"><?php t("Settings"); ?></h2>
+		<div class="tl-form tl-small-form">
+			<div class="tl-form-item">
+				<label for="type"><?php t("Type"); ?></label>
+				<select name="type" id="type">
+					<option value=""></option>
+					<option value="cfos">cFos</option>
+					<option value="go-e">Go e-Charger</option>
+					<option value="openwb">Open WB</option>
+					<option value="openwb2">Open WB 2</option>
+					<option value="shelly3em">Shelly 3EM</option>
+					<option value="shellyem">Shelly EM</option>
+					<option value="smartevse3">SmartEVSE 3</option>
+					<option value="tesla-gen3">Tesla Wallbox Gen 3</option>
+					<option value="keba">Keba KeContact P30</option>
+					<option value="evcc">EVCC</option>
+					<option value="warp">WARP</option>
+				</select>
+			</div>
+			<div class="tl-form-item">
+				<label for="host"><?php t("Host"); ?></label>
+				<input class="tl-small-input" id="host" type="text" />
+			</div>
+			<div class="tl-form-item">
+				<label for="param"><?php t("Param"); ?></label>
+				<input class="tl-small-input" id="param" type="text" />
+			</div>
+		</div>
+	</div>
+
+	<div class="tl-card">
+		<h2 class="tl-card-title"><?php t("Info"); ?></h2>
+		<div class="tl-row-list">
+			<div class="tl-row-list-item"><span class="tl-muted"><?php t("Version"); ?></span><span id="Version">-</span></div>
+			<div class="tl-row-list-item"><span class="tl-muted"><?php t("Utility kWh"); ?></span><span id="Utility_kWh">-</span></div>
+			<div class="tl-row-list-item"><span class="tl-muted"><?php t("Vehicle kWh"); ?></span><span id="Vehicle_kWh">-</span></div>
+		</div>
+	</div>
 </div>
 </body>
 </html>

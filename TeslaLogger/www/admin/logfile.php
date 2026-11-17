@@ -33,7 +33,7 @@ if (!isset($_REQUEST["sleep"]) && isset($_REQUEST["lines"]))
     <title>Teslalogger Logfile</title>
 	<link rel="stylesheet" href="static/jquery/ui/1.12.1/themes/smoothness/jquery-ui.css">
 	<link rel="stylesheet" href="static/teslalogger_style.css?v=4">
-	<link rel="stylesheet" href="static/teslalogger_ui.css?v=7">
+	<link rel="stylesheet" href="static/teslalogger_ui.css?v=9">
 	<link rel="stylesheet" href="static/teslalogger_logfile.css?v=3">
 	<script src="static/jquery/jquery-1.12.4.js"></script>
 	<script src="static/jquery/ui/1.12.1/jquery-ui.js"></script>

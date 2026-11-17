@@ -577,6 +577,42 @@ body {
 	width: 100%;
 }
 
+/* The type select also fills the column */
+
+.tl-small-form .tl-form-item select {
+	min-width: 0;
+	width: 100%;
+}
+
+/* Screenshot in the description (wallbox): a photo, so no icon filter */
+
+.tl-wallbox-screenshot {
+	border: 1px solid var(--tl-border);
+	border-radius: 8px;
+	display: block;
+	margin-top: 12px;
+	max-width: 100%;
+}
+
+/* A simple value list: label on the left, value on the right (wallbox info) */
+
+.tl-row-list {
+	display: grid;
+	gap: 10px;
+}
+
+.tl-row-list-item {
+	align-items: center;
+	display: flex;
+	justify-content: space-between;
+	gap: 16px;
+}
+
+.tl-row-list-item span:last-child {
+	font-variant-numeric: tabular-nums;
+	font-weight: 600;
+}
+
 /* mqtt.php ------------------------------------------------------------------
  * The page-specific parts live in the shared stylesheet (no separate
  * teslalogger_mqtt.css). The classes are scoped to the MQTT page so they
