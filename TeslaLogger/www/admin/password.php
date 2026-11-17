@@ -12,7 +12,8 @@ $actual_link = GetRequestProtocol() . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_UR
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title><?php t("Teslalogger Tesla Credentials"); ?></title>
 	<link rel="stylesheet" href="static/jquery/ui/1.12.1/themes/smoothness/jquery-ui.css">
-	<link rel="stylesheet" href="static/teslalogger_style.css?v=4">
+	<link rel="stylesheet" href="static/teslalogger_style.css?v=5">
+	<link rel="stylesheet" href="static/teslalogger_ui.css?v=12">
 	<script src="static/jquery/jquery-1.12.4.js"></script>
 	<script src="static/jquery/ui/1.12.1/jquery-ui.js"></script>
 	<script src="static/jquery/jquery-migrate-1.4.1.min.js"></script>
@@ -27,7 +28,7 @@ $actual_link = GetRequestProtocol() . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_UR
 	?>
 	$(document).ready(function(){
 		$('input[type="checkbox"]').on('click keyup keypress keydown', function (event) {
-    		if($(this).is('[readonly]')) { return false; }
+     		if($(this).is('[readonly]')) { return false; }
 		});
 
 		$("#cars").DataTable({
@@ -280,7 +281,6 @@ $actual_link = GetRequestProtocol() . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_UR
 </script>
 </head>
 <body>
-<div style="max-width: 1260px;">
 <?php
 include "menu.php";
 menu("Credentials");
@@ -299,15 +299,6 @@ menu("Credentials");
 	if (strpos($allcars, "not found!") === false)
 	{
 		$jcars = json_decode($allcars);
-		//var_dump($allcars);
-		//var_dump($jcars);
-
-		if ($jcars == NULL)
-		{
-			echo("<h1>JSON Parse Error!</h1>");
-			echo("JSON: ". htmlspecialchars($allcars));
-			return;
-		}
 	}
 
 if (isset($_REQUEST["id"]))
@@ -332,87 +323,109 @@ if (isset($_REQUEST["id"]))
 	}
 
 ?>
-<div>
-<h1><?php t("Please enter your Tesla account credentials"); ?>:</h1>
-<div id="dialog-TokenHelp" title="Info">
-<?php t("TeslaAuthApps"); ?>
-
-<h3><?php t("BA_ALLCARS"); ?>:</h3>
-<ul>
-<li><?php t("BA_FLEETAPI"); ?>: <a href="<?php 
-$TeslaFleetURL = str_replace("password.php", "password_fleet.php", $actual_link);
-echo $TeslaFleetURL;
-?>"><?php t("PF_LINK"); ?></a></li>
-</ul>
-<h3><?php t("BA_MODELSXOLD"); ?>:</h3>
-<ul>
-<li><?php
-	$t1=get_text("BA_Browser");
-	$t1=str_replace("{", '<a href="javascript:BrowserAuth();">', $t1);
-	$t1=str_replace("}", '</a>', $t1);
-	echo $t1;
-?></li>
-<li>Android: <a href="https://play.google.com/store/apps/details?id=net.leveugle.teslatokens">Tesla Tokens</a></li>
-<li>iOS: <a href="https://apps.apple.com/us/app/auth-app-for-tesla/id1552058613#?platform=iphone">Auth app for Tesla</a></li>
-</ul>
-<div style="display: none" id="browserauth">
-<hr>
-<h1><?php t("BA_Read"); ?></h1>
-<ul>
-<li><?php t("BA_Logon"); ?></li>
-<li><?php t("BA_Auth"); ?></li>
-<li><?php t("BA_NotFound"); ?></li>
-<li><?php t("BA_URL"); ?></li>
-<li><?php t("BA_Invalid"); ?></li>
-<li><?php
-	$t1=get_text("BA_Logoff");
-	$t1=str_replace("{", '<a href="https://www.tesla.com/teslaaccount/owner-xp/auth/logout?redirect=true&locale=en_US" target="_blank">', $t1);
-	$t1=str_replace("}", '</a>', $t1);
-	echo $t1;
-?></li>
-<li><?php t("BA_GetToken"); ?></li>
-<li><?php t("BA_SelectCar"); ?></li>
-</ul>
-<h2><?php t("BA_Step1"); ?></h2>
-	<?php t("BA_FillOut"); ?> <a href="#" id="authlink" target="_blank">Tesla Logon.</a>
-<h2><?php t("BA_Step2"); ?></h2>
-<?php t("BA_CopyUrl"); ?><br>
-	<img src="img/auth_screenshot.png?v=2">
-<h2><?php t("BA_Step3"); ?></h2>
-<?php t("BA_Paste"); ?>
-<input id="authresulturl"></input>
-<br>
-<button onclick="GetTokensFromURL();"><?php t("Get Tokens"); ?></button>
-<br><br>
-<hr>
+<div class="tl-page">
+<div class="tl-page-head">
+	<h2 class="tl-page-title"><?php t("Teslalogger Tesla Credentials"); ?></h2>
+	<img id="TokenHelp" src="img/icon-help-24.png" class="tl-help" />
+	<div class="tl-actions">
+	<button id="btnSave" style="visibility:collapse" onclick="save();"><?php t("Save"); ?></button>
+	</div>
 </div>
 
-<table>
-<tr><td><?php t("Access Token"); ?>:&nbsp;</td><td><input id="access_token" type="text" autocomplete="new-password"></td></tr>
-<tr><td><?php t("Refresh Token"); ?>:&nbsp;</td><td><input id="refresh_token" type="text" autocomplete="new-password"></td></tr>
+<div id="dialog-TokenHelp" class="tl-cards-wrap" title="Info">
+	<?php t("TeslaAuthApps"); ?>
 
-<tr><td colspan="2"><button onclick="CheckAccessToken();" style="float: right;"><?php t("OK"); ?></button></td></tr>
+	<div class="tl-card">
+		<h2 class="tl-card-title"><?php t("BA_ALLCARS"); ?>:</h2>
+		<ul>
+		<li><?php t("BA_FLEETAPI"); ?>: <a href="<?php
+$TeslaFleetURL = str_replace("password.php", "password_fleet.php", $actual_link);
+echo $TeslaFleetURL;
+ ?>"><?php t("PF_LINK"); ?></a></li>
+		</ul>
+	</div>
 
-<tr style='visibility:collapse'><td><b><?php t("Email"); ?>:&nbsp;</b></td><td><input id="email" type="text" autocomplete="new-password" value="<?php echo($email) ?>" <?php echo($disablecarid) ?>/></td></tr>
-<tr style='visibility:collapse'><td><?php t("Password"); ?>:&nbsp;</td><td><input id="password1" type="password" autocomplete="new-password" /></td></tr>
-<tr style='visibility:collapse'><td><?php t("Repeat Password"); ?>:&nbsp;</td><td><input id="password2" type="password" autocomplete="new-password" /></td></tr>
+	<div class="tl-card">
+		<h2 class="tl-card-title"><?php t("BA_MODELSXOLD"); ?>:</h2>
+		<ul>
+		<li><?php
+		$t1=get_text("BA_Browser");
+		$t1=str_replace("{", '<a href="javascript:BrowserAuth();">', $t1);
+		$t1=str_replace("}", '</a>', $t1);
+		echo $t1;
+	?></li>
+		<li>Android: <a href="https://play.google.com/store/apps/details?id=net.leveugle.teslatokens">Tesla Tokens</a></li>
+		<li>iOS: <a href="https://apps.apple.com/us/app/auth-app-for-tesla/id1552058613#?platform=iphone">Auth app for Tesla</a></li>
+		</ul>
+	</div>
 
-<tr><td><?php t("Car"); ?>:&nbsp;</td><td> <select id="carid" style="width: 100%;"></select><span id="vinlabel"></span></td></tr>
-<tr height="35px"><td><?php t("Free Supercharging"); ?>:&nbsp;</td><td><input id="freesuc" type="checkbox" <?= $freesuc ?> /></td></tr>
+	<div style="display: none" id="browserauth">
+		<div class="tl-card">
+			<h2 class="tl-card-title"><?php t("BA_Read"); ?></h2>
+			<ul>
+			<li><?php t("BA_Logon"); ?></li>
+			<li><?php t("BA_Auth"); ?></li>
+			<li><?php t("BA_NotFound"); ?></li>
+			<li><?php t("BA_URL"); ?></li>
+			<li><?php t("BA_Invalid"); ?></li>
+			<li><?php
+			$t1=get_text("BA_Logoff");
+			$t1=str_replace("{", '<a href="https://www.tesla.com/teslaaccount/owner-xp/auth/logout?redirect=true&locale=en_US" target="_blank">', $t1);
+			$t1=str_replace("}", '</a>', $t1);
+			echo $t1;
+			?></li>
+			<li><?php t("BA_GetToken"); ?></li>
+			<li><?php t("BA_SelectCar"); ?></li>
+			</ul>
+			<h2><?php t("BA_Step1"); ?></h2>
+			<?php t("BA_FillOut"); ?> <a href="#" id="authlink" target="_blank">Tesla Logon.</a>
+			<h2><?php t("BA_Step2"); ?></h2>
+			<?php t("BA_CopyUrl"); ?><br>
+			<img src="img/auth_screenshot.png?v=2">
+			<h2><?php t("BA_Step3"); ?></h2>
+			<?php t("BA_Paste"); ?>
+			<input id="authresulturl"></input>
+			<br>
+			<button onclick="GetTokensFromURL();"><?php t("Get Tokens"); ?></button>
+			<br><br>
+		</div>
+	</div>
 
-<tr><td>&nbsp;</td></tr>
-<!-- <tr><td colspan="2"><b>Or you can use Tesla Access Token &amp; Refresh Token to login:&nbsp;&nbsp;</b></td><td><img id="TokenHelp" src="img/icon-help-24.png" class="pointer"/></td></tr> -->
-<tr><td>&nbsp;</td></tr>
+	<div class="tl-card">
+		<h2 class="tl-card-title"><?php t("Please enter your Tesla account credentials"); ?>:</h2>
+		<div class="tl-form tl-small-form">
+			<div class="tl-form-item">
+				<label for="access_token"><?php t("Access Token"); ?></label>
+				<input class="tl-small-input" id="access_token" type="text" autocomplete="new-password"></div>
+			<div class="tl-form-item">
+				<label for="refresh_token"><?php t("Refresh Token"); ?></label>
+				<input class="tl-small-input" id="refresh_token" type="text" autocomplete="new-password"></div>
 
-<tr><td colspan="2">
-<?PHP
-if ($_REQUEST["id"] != -1)
-	{ ?><button id="deletebutton" onclick="deleteCar();" class="redbutton"><?php t("Delete"); ?></button>
-	<!-- &nbsp;<button onclick="reconnect();"><?php t("Reconnect"); ?></button>&nbsp; -->
-	<?PHP }
-?>
-<button id="btnSave" style='visibility:collapse' onclick="save();" style="float: right;"><?php t("Save"); ?></button></td></tr>
-</table>
+			<div class="tl-form-item" style="visibility:collapse">
+				<label><b><?php t("Email"); ?></b></label>
+				<input class="tl-small-input" id="email" type="text" autocomplete="new-password" value="<?php echo($email) ?>" <?php echo($disablecarid) ?>></div>
+			<div class="tl-form-item" style="visibility:collapse">
+				<label><?php t("Password"); ?></label>
+				<input class="tl-small-input" id="password1" type="password" autocomplete="new-password" /></div>
+			<div class="tl-form-item" style="visibility:collapse">
+				<label><?php t("Repeat Password"); ?></label>
+				<input class="tl-small-input" id="password2" type="password" autocomplete="new-password" /></div>
+
+			<div class="tl-form-item">
+				<label><?php t("Car"); ?></label>
+				<select id="carid" style="width: 100%;"></select><span id="vinlabel"></span></div>
+			<div class="tl-form-item">
+				<label for="freesuc"><?php t("Free Supercharging"); ?></label>
+				<label class="tl-switch"><input type="checkbox" id="freesuc" value="1" <?= $freesuc ?>><span class="tl-switch-track"></span></label>
+			</div>
+			<?php if ($_REQUEST["id"] != -1) { ?>
+			<div class="tl-form-actions">
+				<button id="deletebutton" onclick="deleteCar();" class="redbutton" style="margin-right:auto"><?php t("Delete"); ?></button>
+			</div>
+			<?php } ?>
+		</div>
+	</div>
+</div>
 </div>
 <?php
 }
@@ -420,108 +433,118 @@ else
 {
 	$tinfo = get_text("INFO_FLEETAPI");
 	$tinfo=str_replace("{LINK1}", "<a href='https://developer.tesla.com/docs/fleet-api/announcements#2024-11-27-pay-per-use-pricing' target='_blank'>Tesla Pay per use pricing</a>", $tinfo);
-	$tinfo=str_replace("{LINK2}", "<a href='https://digitalassets.tesla.com/tesla-contents/image/upload/Fleet-API-Agreement-EN.pdf' target='_blank'>Fleet API Agreement</a>", $tinfo);    
-?>
-<div>
-<h1><?php t("INFO_important"); ?>:</h1>
-<p><?php echo($tinfo); ?>:</p>
-<h1><?php t("Please choose your vehicle"); ?>:</h1>
-<table id="cars" class="">
-	<thead>
-		<tr>
-			<th><?php t("ID"); ?></th>
-			<th><?php t("Name"); ?></th>
-			<th><?php t("Model"); ?></th>
-			<th><?php t("VIN"); ?></th>
-			<th><?php t("Tasker Token"); ?></th>
-			<th><?php t("Aktiv"); ?></th>
-			<th style='text-align:center;'><?php t("Free SUC"); ?></th>
-			<th style='text-align:center;'>Fleet API</th>
-			<th style='text-align:center;'>Virtual Key</th>
-			<!-- <th style='text-align:center;'>Access Type</th> -->
-			<th style='text-align:center;'>Signal Counter</th>
-			<th style='text-align:center;'><?php t("Subscription"); ?></th>
-			<th><?php t("Edit"); ?></th>
-		</tr>
-	</thead>
-	<tbody>
-<?php
-		//var_dump($url);
-
-		foreach ($jcars as $k => $v) {
-			$display_name = $v->{"display_name"};
-			$tasker_token = $v->{"tasker_hash"};
-			$car = $v->{"model_name"};
-			$id = $v->{"id"};
-			$vin = $v->{"vin"};
-			$tesla_carid = $v->{"tesla_carid"};
-			$access_type = $v->{"access_type"};
-			$inactive = $v->{"inactive"} == 1;
-
-			$cartype = $v->{"car_type"};
-			$NeedSubscription = $v->{"SupportedByFleetTelemetry"} == "1";
-			
-			$freesuccheckbox = GetCheckbox($v->{"freesuc"});
-			$fleetAPICheckBox = "";
-			
-			if ($v->{"fleetAPI"} == "0" && $NeedSubscription)
-				$fleetAPICheckBox = "<a href='password_fleet.php?id=$id&vin=$carVIN'>".get_text("FleetAPIRequired")." ⚠️</a>";
-			else
-				$fleetAPICheckBox = GetCheckbox($v->{"fleetAPI"});
-
-			$virtualKeyCheckBox = GetCheckbox($v->{"virtualkey"});
-
-			$activeCheckBox = GetCheckbox(!$inactive);
-
-			echo("	<tr>\r\n");
-			echo("		<td>$id</td>\r\n");
-			echo("		<td>$display_name <a href='changecarname.php?carid=$id'>&#9998</a></td>\r\n");
-			echo("		<td>$car</td>\r\n");
-			echo("		<td>$vin</td>\r\n");
-			echo("		<td>$tasker_token</td>\r\n");
-			echo("		<td style='text-align:center;'>$activeCheckBox</td>\r\n");
-			echo("		<td style='text-align:center;'>$freesuccheckbox</td>\r\n");
-			echo("		<td style='text-align:center;'>$fleetAPICheckBox</td>\r\n");
-			echo("		<td style='text-align:center;'>$virtualKeyCheckBox</td>\r\n");
-			// echo("		<td style='text-align:center;'>$access_type</td>\r\n");
-			
-			echo("		<td style='text-align:center;'>");
-			if ($v->{"fleetAPI"} == "1")
-				echo(file_get_contents("https://teslalogger.de:4501/SignalCounter/$vin"));
-			echo("</td>\r\n");
-
-			echo("		<td style='text-align:center;'>");
-			if ($NeedSubscription && !$inactive)
-			{
-				$subscription = file_get_contents("https://teslalogger.de/stripe/subscription-check.php?vin=$vin");
-				
-				if (strpos($subscription, "current_period_end") > 0)
-				{
-					echo(GetCheckbox("1"));
-					echo("&nbsp;<a target='_blank' href='https://billing.stripe.com/p/login/8wMaGogxma56fGUdQQ'>". get_text("SubscribeManage") ."</a>");
-				}
-				else
-					echo("<a target='_blank' href='https://buy.stripe.com/9AQaHNdU33k29Vu144?client_reference_id=$vin'>⚠️ ". get_text("Subscribe") ."</a>");
-			}
-			echo("</td>\r\n");
-
-
-			echo("		<td><a href='password.php?id=$id&vin=$vin'>");
-			echo t("Edit");
-			echo("</a></td>\r\n");
-			echo("	</tr>\r\n");
-		}
+	$tinfo=str_replace("{LINK2}", "<a href='https://digitalassets.tesla.com/tesla-contents/image/upload/Fleet-API-Agreement-EN.pdf' target='_blank'>Fleet API Agreement</a>", $tinfo);
 	?>
-	</tbody>
-</table>
-<p></p>
-<button onclick="location.href='password.php?id=-1'"><?php t("New Tesla"); ?></button>
-<button onclick="location.href='lucidpassword.php?id=-1'"><?php t("New Lucid"); ?></button>
+<div class="tl-page">
+<div class="tl-page-head">
+	<h2 class="tl-page-title"><?php t("Teslalogger Tesla Credentials"); ?></h2>
+	<div class="tl-actions">
+		<button onClick="location.href='password.php?id=-1'"><?php t("New Tesla"); ?></button>
+		<button onClick="location.href='lucidpassword.php?id=-1'"><?php t("New Lucid"); ?></button>
+	</div>
+</div>
+
+<div class="tl-card">
+	<h2 class="tl-card-title"><?php t("INFO_important"); ?></h2>
+	<p class="tl-muted" style="margin-top:0;"><?php echo($tinfo); ?></p>
+</div>
+
+<div class="tl-card tl-table-card">
+	<h2 class="tl-card-title"><?php t("Please choose your vehicle"); ?></h2>
+	<table id="cars">
+		<thead>
+			<tr>
+				<th><?php t("ID"); ?></th>
+				<th><?php t("Name"); ?></th>
+				<th><?php t("Model"); ?></th>
+				<th><?php t("VIN"); ?></th>
+				<th><?php t("Tasker Token"); ?></th>
+				<th><?php t("Aktiv"); ?></th>
+				<th style='text-align:center;'><?php t("Free SUC"); ?></th>
+				<th style='text-align:center;'>Fleet API</th>
+				<th style='text-align:center;'>Virtual Key</th>
+				<!-- <th style='text-align:center;'>Access Type</th> -->
+				<th style='text-align:center;'>Signal Counter</th>
+				<th style='text-align:center;'><?php t("Subscription"); ?></th>
+				<th><?php t("Edit"); ?></th>
+			</tr>
+		</thead>
+		<tbody>
+<?php
+			//var_dump($url);
+
+			foreach ($jcars as $k => $v) {
+				$display_name = $v->{"display_name"};
+				$tasker_token = $v->{"tasker_hash"};
+				$car = $v->{"model_name"};
+				$id = $v->{"id"};
+				$vin = $v->{"vin"};
+				$tesla_carid = $v->{"tesla_carid"};
+				$access_type = $v->{"access_type"};
+				$inactive = $v->{"inactive"} == 1;
+
+				$cartype = $v->{"car_type"};
+				$NeedSubscription = $v->{"SupportedByFleetTelemetry"} == "1";
+				$carVIN = $vin;
+
+				$freesuccheckbox = GetCheckbox($v->{"freesuc"});
+				$fleetAPICheckBox = "";
+
+				if ($v->{"fleetAPI"} == "0" && $NeedSubscription)
+					$fleetAPICheckBox = "<a href='password_fleet.php?id=$id&vin=$carVIN'>".get_text("FleetAPIRequired")." ⚠️</a>";
+				else
+					$fleetAPICheckBox = GetCheckbox($v->{"fleetAPI"});
+
+				$virtualKeyCheckBox = GetCheckbox($v->{"virtualkey"});
+
+				$activeCheckBox = GetCheckbox(!$inactive);
+
+				echo("	<tr>\r\n");
+				echo("		<td>$id</td>\r\n");
+				echo("		<td>$display_name <a href='changecarname.php?carid=$id'>&#9998</a></td>\r\n");
+				echo("		<td>$car</td>\r\n");
+				echo("		<td>$vin</td>\r\n");
+				echo("		<td>$tasker_token</td>\r\n");
+				echo("		<td style='text-align:center;'>$activeCheckBox</td>\r\n");
+				echo("		<td style='text-align:center;'>$freesuccheckbox</td>\r\n");
+				echo("		<td style='text-align:center;'>$fleetAPICheckBox</td>\r\n");
+				echo("		<td style='text-align:center;'>$virtualKeyCheckBox</td>\r\n");
+				// echo("		<td style='text-align:center;'>$access_type</td>\r\n");
+
+				echo("		<td style='text-align:center;'>");
+				if ($v->{"fleetAPI"} == "1")
+					echo(file_get_contents("https://teslalogger.de:4501/SignalCounter/$vin"));
+				echo("</td>\r\n");
+
+				echo("		<td style='text-align:center;'>");
+				if ($NeedSubscription && !$inactive)
+				{
+					$subscription = file_get_contents("https://teslalogger.de/stripe/subscription-check.php?vin=$vin");
+
+					if (strpos($subscription, "current_period_end") > 0)
+					{
+						echo(GetCheckbox("1"));
+						echo("&nbsp;<a target='_blank' href='https://billing.stripe.com/p/login/8wMaGogxma56fGUdQQ'>". get_text("SubscribeManage") ."</a>");
+					}
+					else
+						echo("<a target='_blank' href='https://buy.stripe.com/9AQaHNdU33k29Vu144?client_reference_id=$vin'>⚠️ ". get_text("Subscribe") ."</a>");
+				}
+				echo("</td>\r\n");
+
+
+				echo("		<td><a href='password.php?id=$id&vin=$vin'>");
+				echo t("Edit");
+				echo("</a></td>\r\n");
+				echo("	</tr>\r\n");
+			}
+		?>
+		</tbody>
+	</table>
+</div>
 </div>
 <?php
 }
 ?>
-</div>
 
 <?php
 function GetCheckbox($v)
@@ -531,3 +554,6 @@ function GetCheckbox($v)
 
 	return '<input type="checkbox" readonly valign="center" />';	
 }
+?>
+</body>
+</html>

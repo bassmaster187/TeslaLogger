@@ -110,13 +110,21 @@ body {
 	color: var(--tl-muted);
 }
 
-/* The theme link colours are too dark on a dark card. Leaflet and alerts keep their own. */
-.tl-page a:not(.leaflet-container a):not(.tl-alert a) {
+/* The theme link colours are too dark on a dark card. Leaflet and alerts keep their own.
+   A jQuery-UI dialog moves its content out of .tl-page into body, so the link rule
+   must also cover the dialog. */
+.tl-page a:not(.leaflet-container a):not(.tl-alert a),
+.tl-cards-wrap a,
+.tl-pf-steps a {
 	color: var(--tl-link);
 }
 
 .tl-page a:not(.leaflet-container a):not(.tl-alert a):hover,
-.tl-page a:not(.leaflet-container a):not(.tl-alert a):active {
+.tl-page a:not(.leaflet-container a):not(.tl-alert a):active,
+.tl-cards-wrap a:hover,
+.tl-cards-wrap a:active,
+.tl-pf-steps a:hover,
+.tl-pf-steps a:active {
 	color: var(--tl-link-hover);
 }
 
@@ -584,6 +592,16 @@ body {
 	width: 100%;
 }
 
+/* A button row at the bottom of a form (lucidpassword, ...) */
+
+.tl-small-form .tl-form-actions {
+	align-items: center;
+	display: flex;
+	justify-content: flex-end;
+	gap: 12px;
+	margin-top: 8px;
+}
+
 /* Screenshot in the description (wallbox): a photo, so no icon filter */
 
 .tl-wallbox-screenshot {
@@ -691,3 +709,52 @@ body {
 .tl-mqtt-form .tl-form-item .tl-switch {
 	width: 100%;
 }
+
+/* Cards nested inside a wrapper (e.g. #dialog-TokenHelp) need their own
+   gap — .tl-page's grid gap only applies to direct children. */
+
+.tl-cards-wrap {
+	display: grid;
+	gap: var(--tl-gap);
+}
+
+/* password_fleet.php -------------------------------------------------------
+ * Numbered setup steps. Each step row is a flex row with a label,
+ * an optional input/select and an optional check mark (the check marks
+ * are written by JavaScript: checkauth, checkAT, checkRT, checkcar,
+ * checkfreesuc). Self-contained: does not depend on .tl-small-form. */
+
+.tl-pf-steps {
+	margin: 0;
+	padding-left: 20px;
+}
+
+.tl-pf-steps li {
+	margin-bottom: 10px;
+}
+
+.tl-pf-steps li:last-child {
+	margin-bottom: 0;
+}
+
+.tl-pf-field {
+	align-items: center;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px 16px;
+}
+
+.tl-pf-field > span {
+	white-space: nowrap;
+}
+
+.tl-pf-field input,
+.tl-pf-field select {
+	flex: 1;
+	min-width: 180px;
+}
+
+.tl-pf-check {
+	margin-left: auto;
+}
+
