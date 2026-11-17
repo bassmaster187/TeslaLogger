@@ -7,6 +7,7 @@ docker cp .\www\admin\geofencing.php teslalogger-webserver:/var/www/html/admin/
 docker cp .\www\admin\journeys.php teslalogger-webserver:/var/www/html/admin/
 docker cp .\www\admin\mqtt.php teslalogger-webserver:/var/www/html/admin/
 docker cp .\www\admin\komoot.php teslalogger-webserver:/var/www/html/admin/
+docker cp .\www\admin\superchargebingo.php teslalogger-webserver:/var/www/html/admin/
 docker cp .\www\admin\logfile.php teslalogger-webserver:/var/www/html/admin/
 docker cp .\www\admin\tools.php teslalogger-webserver:/var/www/html/admin/
 docker cp .\www\admin\index.php teslalogger-webserver:/var/www/html/admin/

@@ -532,6 +532,23 @@ body {
 	overflow: auto;
 }
 
+/* superchargebingo.php --------------------------------------------------------
+ * A numbered steps list for the Setup card. Self-contained.
+ */
+
+.tl-suc-steps {
+	margin: 0;
+	padding-left: 20px;
+}
+
+.tl-suc-steps li {
+	margin-bottom: 6px;
+}
+
+.tl-suc-steps li:last-child {
+	margin-bottom: 0;
+}
+
 /* komoot.php -----------------------------------------------------------------
  * A small form: single column, label above the input, all inputs are the same
  * full width. Self-contained grid (does not depend on a plain .tl-form rule).
