@@ -1,0 +1,110 @@
+/*
+ * teslalogger_menu.css
+ *
+ * Styles the confirmation dialog (restart confirmation) that menu.php outputs
+ * on every admin page.
+ *
+ * Loaded after teslalogger_ui.css (design tokens) and after
+ * teslalogger_style.css (theme, header and menu).
+ *
+ * Bump the ?v= in the <link> tag of menu.php after changes.
+ */
+
+/* The dialog is a centered overlay, the card is the same style as the
+   .tl-card cards on the restyled pages. */
+
+.tl-dialog {
+	align-items: center;
+	display: flex;
+	inset: 0;
+	justify-content: center;
+	position: fixed;
+	z-index: 9999;
+}
+
+/* display:flex above would override the hidden attribute, hide it again */
+
+.tl-dialog[hidden] {
+	display: none;
+}
+
+.tl-dialog::before {
+	background: rgba(0, 0, 0, 0.55);
+	content: "";
+	inset: 0;
+	position: absolute;
+}
+
+.tl-dialog-card {
+	background: var(--tl-card);
+	border: 1px solid var(--tl-border);
+	border-radius: var(--tl-radius);
+	box-shadow: var(--tl-shadow);
+	color: var(--tl-text);
+	font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+	font-size: 15px;
+	line-height: 1.5;
+	max-width: 420px;
+	min-width: 300px;
+	padding: 20px 24px;
+	position: relative;
+}
+
+.tl-dialog-title {
+	clear: none;
+	font-size: 18px;
+	font-weight: 700;
+	line-height: 1.3;
+	margin: 0 0 12px;
+}
+
+.tl-dialog-text {
+	color: var(--tl-text);
+	margin: 0 0 20px;
+}
+
+.tl-dialog-actions {
+	align-items: center;
+	display: flex;
+	gap: 12px;
+	justify-content: flex-end;
+}
+
+/* The confirm button is the red theme button, cancel keeps the theme button */
+
+.tl-dialog-ok {
+	background: var(--tl-danger);
+	border: 1px solid var(--tl-danger);
+	border-radius: 8px;
+	color: #fff;
+	cursor: pointer;
+	font-size: 14px;
+	font-weight: 600;
+	padding: 8px 16px;
+}
+
+.tl-dialog-ok:hover {
+	background: var(--tl-danger-strong);
+	border-color: var(--tl-danger-strong);
+}
+
+.tl-dialog-cancel {
+	background: var(--tl-neutral-soft);
+	border: 1px solid var(--tl-neutral-strong);
+	border-radius: 8px;
+	color: var(--tl-text);
+	cursor: pointer;
+	font-size: 14px;
+	font-weight: 600;
+	padding: 8px 16px;
+}
+
+.tl-dialog-cancel:hover {
+	background: var(--tl-track);
+}
+
+.tl-dialog-ok:focus-visible,
+.tl-dialog-cancel:focus-visible {
+	outline: 2px solid var(--tl-accent);
+	outline-offset: 2px;
+}

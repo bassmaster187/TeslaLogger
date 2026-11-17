@@ -181,6 +181,10 @@ Please update to latest docker-compose.yml file. Check: {LINK}=Aggiornare il fil
 #menu.php
 Logfile=File di log
 Restart=Ricomincia
+Restart TeslaLogger=Avvia di nuovo TeslaLogger
+Restart confirmation=Conferma di riavvio
+Do you really want to restart TeslaLogger?=Vuoi davvero riavviare TeslaLogger?
+Cancel=Annulla
 Update=Aggiornamento
 Dashboards=Cruscotto
 Fleet Statistic=Statistica della flotta

@@ -179,6 +179,10 @@ Please update to latest docker-compose.yml file. Check: {LINK}=请更新到最�
 #menu.php
 Logfile=日志
 Restart=重启
+Restart TeslaLogger=重启TeslaLogger
+Restart confirmation=重启确认
+Do you really want to restart TeslaLogger?=确定要重启TeslaLogger吗？
+Cancel=取消
 Update=升级
 Dashboards=仪表盘
 Fleet Statistic=车队统计

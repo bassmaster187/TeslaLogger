@@ -210,6 +210,10 @@ No connection to Teslalogger=No connection to Teslalogger
 #menu.php
 Logfile=Logfile
 Restart=Restart
+Restart TeslaLogger=Restart TeslaLogger
+Restart confirmation=Restart confirmation
+Do you really want to restart TeslaLogger?=Do you really want to restart TeslaLogger?
+Cancel=Cancel
 Update=Update
 Dashboards=Dashboards
 Fleet Statistic=Fleet Statistic

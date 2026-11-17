@@ -178,6 +178,10 @@ Please update to latest docker-compose.yml file. Check: {LINK}=Por favor, actual
 #menu.php
 Logfile=Fichero de log
 Restart=Reiniciar
+Restart TeslaLogger=Reiniciar TeslaLogger
+Restart confirmation=Confirmación de reinicio
+Do you really want to restart TeslaLogger?=¿Seguro que quieres reiniciar TeslaLogger?
+Cancel=Cancelar
 Update=Actualizar
 Dashboards="Cuadro de mandos"
 Fleet Statistic=Estadísticas de Flota

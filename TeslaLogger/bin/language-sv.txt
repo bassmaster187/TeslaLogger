@@ -198,6 +198,10 @@ FatalErrorMissingKey=
 #menu.php
 Logfile=
 Restart=
+Restart TeslaLogger=Starta om TeslaLogger
+Restart confirmation=Bekräftelse av omstart
+Do you really want to restart TeslaLogger?=Vill du verkligen starta om TeslaLogger?
+Cancel=Avbryt
 Update=
 Dashboards=
 Fleet Statistic=

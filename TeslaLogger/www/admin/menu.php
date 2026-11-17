@@ -97,6 +97,18 @@ function menu($title, $prefix = "")
 
     $ref = "?token=" . $tasker_token . "&ref=" . full_path()."&car=".$car;
 ?>
+<link rel="stylesheet" href="static/teslalogger_ui.css?v=1">
+<link rel="stylesheet" href="static/teslalogger_menu.css?v=1">
+<div id="tl_confirm_dialog" class="tl-dialog" hidden>
+	<div class="tl-dialog-card">
+		<h2 class="tl-dialog-title"><?php t("Restart confirmation"); ?></h2>
+		<p class="tl-dialog-text"><?php t("Do you really want to restart TeslaLogger?"); ?></p>
+		<div class="tl-dialog-actions">
+			<button type="button" class="tl-dialog-cancel" id="tl_confirm_cancel"><?php t("Cancel"); ?></button>
+			<button type="button" class="tl-dialog-ok" id="tl_confirm_ok"><?php t("Yes"); ?></button>
+		</div>
+	</div>
+</div>
 <header id="masthead" class="site-header" role="banner">
     <div class="header-main">
         <h1 class="site-title"><a href="<?php echo $prefix; ?>index.php?carid=<?=$current_carid?>" rel="home"><img src="logo.jpg" alt="Logo"> <?PHP echo(t($title)); ?></a></h1>
@@ -128,7 +140,7 @@ function menu($title, $prefix = "")
 						<a href="<?php echo $prefix; ?>logfile.php"><?php t("Logfile"); ?></a>
 					</li>
 					<li id="menu-item-2" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-2">
-						<a href="javascript:BackgroudRun('restartlogger.php', '<?php t("Reboot!"); ?>')"><?php t("Restart"); ?></a>
+						<a href="javascript:confirmRestart('restartlogger.php', '<?php t("Restart TeslaLogger"); ?>')"><?php t("Restart"); ?></a>
 					</li>
 					<li id="menu-item-3" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-3">
 						<a href="javascript:BackgroudRun('update.php', '<?php t("Reboot!"); ?>')"><?php t("Update"); ?></a>
@@ -199,6 +211,34 @@ function menu($title, $prefix = "")
 	</div>
 </header>
 <script>
+function confirmRestart($target, $text, $reload)
+  {
+		var dialog = document.getElementById('tl_confirm_dialog');
+		dialog.removeAttribute('hidden');
+
+		document.getElementById('tl_confirm_ok').onclick = function()
+		{
+			closeConfirmDialog();
+			BackgroudRun($target, $text, $reload);
+		};
+
+		document.getElementById('tl_confirm_cancel').onclick = closeConfirmDialog;
+  }
+
+function closeConfirmDialog()
+  {
+		var dialog = document.getElementById('tl_confirm_dialog');
+
+		if (dialog)
+			dialog.setAttribute('hidden', '');
+  }
+
+document.addEventListener('keydown', function(e)
+{
+	if (e.key == 'Escape')
+		closeConfirmDialog();
+});
+
 function BackgroudRun($target, $text, $reload=false)
   {
 	  $.ajax($target, {

@@ -197,6 +197,10 @@ FatalErrorMissingKey="மெய்நிகர் விசை மிச்ச�
 #menu.php
 Logfile="லாக்ஃபைல்"
 Restart="மறுதொடக்கம்"
+Restart TeslaLogger="TeslaLogger மீண்டும் தொடக்கம்"
+Restart confirmation="மறுதொடக்கம் உறுதிப்படுத்தல்"
+Do you really want to restart TeslaLogger?="TeslaLogger மீண்டும் தொடக்கம் செய்ய விரும்புகிறீர்களா?"
+Cancel="ரத்து"
 Update="புதுப்பிப்பு"
 Dashboards="டாச்போர்டுகள்"
 Fleet Statistic="கடற்படை புள்ளிவிவரங்கள்"

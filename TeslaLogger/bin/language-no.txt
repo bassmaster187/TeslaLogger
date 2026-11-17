@@ -425,6 +425,10 @@ Sleep Attempt=Søvnforsøk
 #menu.php
 Logfile="Loggfil"
 Restart=Start på nytt
+Restart TeslaLogger=Start på nytt TeslaLogger
+Restart confirmation=Startbekreftelse
+Do you really want to restart TeslaLogger?=Vil du virkelig starte på nytt TeslaLogger?
+Cancel=Avbryt
 Dashboards="Oversikt"
 Fleet Statistic=Flåtestatistikk
 My Degradation="Min. forringelse"
