@@ -1,0 +1,236 @@
+/*
+ * teslalogger_ui.css
+ *
+ * Design tokens and the basic page components that all restyled admin pages
+ * share (index.php, logfile.php, ...).
+ *
+ * Loaded in addition to teslalogger_style.css, which still styles the header
+ * and navigation (menu.php) and all other admin pages.
+ *
+ * Do not use class names containing "content" or "site": the theme attaches
+ * clearfix pseudo elements to [class*="content"] and [class*="site"], which
+ * would turn into unwanted grid/flex items here.
+ *
+ * To add another page, include this stylesheet and use the classes and
+ * variables below (see UI-Changes-Fable5.2.md).
+ */
+
+/* Design tokens -------------------------------------------------------------
+ *
+ * Every colour that differs between the two schemes is one of these variables.
+ * The light values are the default, the dark values replace them when the
+ * browser or operating system asks for a dark colour scheme. There is no
+ * switch on the page.
+ */
+
+:root {
+	--tl-bg: #f5f5f5;		/* page background, same value as the theme */
+	--tl-card: #ffffff;
+	--tl-border: #e3e5e8;
+	--tl-text: #1f2328;
+	--tl-muted: #636b74;
+	--tl-track: #e6e8eb;
+	--tl-link: #24890d;		/* same values as the theme */
+	--tl-link-hover: #41a62a;
+
+	--tl-accent: #24890d;
+	--tl-accent-strong: #1a6b09;
+	--tl-accent-soft: #e6f4e2;
+	--tl-info-strong: #0d4f9e;
+	--tl-info-soft: #e3f0fc;
+	--tl-warn: #e08a00;
+	--tl-danger: #c62828;
+	--tl-danger-strong: #b3261e;
+	--tl-danger-soft: #fdeaea;
+	--tl-neutral-strong: #4a525a;
+	--tl-neutral-soft: #eceef1;
+	--tl-switch-off: #8b939c;	/* track of a switch that is off, the thumb is white in both schemes */
+
+	--tl-icon-filter: none;	/* the car icons are black PNG files */
+	--tl-shadow: 0 1px 2px rgba(16, 24, 40, 0.06), 0 1px 3px rgba(16, 24, 40, 0.08);
+
+	--tl-radius: 12px;
+	--tl-gap: 16px;
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		color-scheme: dark;	/* dark scrollbars and form controls */
+
+		--tl-bg: #111315;
+		--tl-card: #1c1f24;
+		--tl-border: #2e333a;
+		--tl-text: #e6e8eb;
+		--tl-muted: #9aa3ad;
+		--tl-track: #30353c;
+		--tl-link: #6fcf58;
+		--tl-link-hover: #9be58a;
+
+		--tl-accent: #3fae24;
+		--tl-accent-strong: #7fd76a;
+		--tl-accent-soft: #1d3a17;
+		--tl-info-strong: #8ec2ff;
+		--tl-info-soft: #16304f;
+		--tl-warn: #f0a020;
+		--tl-danger: #e5534b;
+		--tl-danger-strong: #ff938c;
+		--tl-danger-soft: #45201f;
+		--tl-neutral-strong: #c3cad2;
+		--tl-neutral-soft: #2a2f36;
+		--tl-switch-off: #6b747e;
+
+		--tl-icon-filter: invert(1);
+		--tl-shadow: none;
+	}
+}
+
+/* Page base ----------------------------------------------------------------- */
+
+body {
+	background: var(--tl-bg);
+}
+
+.tl-page {
+	box-sizing: border-box;
+	color: var(--tl-text);
+	font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+	font-size: 15px;
+	line-height: 1.5;
+	max-width: 1260px; /* same as .site-header */
+	padding: var(--tl-gap);
+}
+
+.tl-page *,
+.tl-page *::before,
+.tl-page *::after {
+	box-sizing: border-box;
+}
+
+.tl-muted {
+	color: var(--tl-muted);
+}
+
+/* The theme link colours are too dark on a dark card. Leaflet and alerts keep their own. */
+.tl-page a:not(.leaflet-container a):not(.tl-alert a) {
+	color: var(--tl-link);
+}
+
+.tl-page a:not(.leaflet-container a):not(.tl-alert a):hover,
+.tl-page a:not(.leaflet-container a):not(.tl-alert a):active {
+	color: var(--tl-link-hover);
+}
+
+/* Cards and heads ----------------------------------------------------------- */
+
+.tl-card {
+	background: var(--tl-card);
+	border: 1px solid var(--tl-border);
+	border-radius: var(--tl-radius);
+	box-shadow: var(--tl-shadow);
+	min-width: 0;
+	padding: 16px 20px;
+}
+
+.tl-card-head {
+	align-items: center;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 4px 16px;
+	justify-content: space-between;
+	margin-bottom: 12px;
+}
+
+.tl-page .tl-card-title {
+	clear: none;
+	color: var(--tl-muted);
+	font-size: 13px;
+	font-weight: 600;
+	letter-spacing: 0.06em;
+	line-height: 1.4;
+	margin: 0 0 12px;
+	text-transform: uppercase;
+}
+
+.tl-card-head .tl-card-title {
+	margin-bottom: 0;
+}
+
+/* Page header ----------------------------------------------------------------
+ * Shared by the restyled pages that have a title and a title row (logfile.php,
+ * changelog.php).
+ */
+
+.tl-page-head {
+	align-items: baseline;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+	justify-content: space-between;
+}
+
+.tl-page-title {
+	clear: none;
+	font-size: 22px;
+	font-weight: 700;
+	line-height: 1.3;
+	margin: 0;
+}
+
+.tl-download {
+	font-weight: 600;
+}
+
+/* Alerts -------------------------------------------------------------------- */
+
+.tl-alert {
+	border-radius: 8px;
+	margin-bottom: 12px;
+	padding: 10px 14px;
+}
+
+.tl-alert-danger {
+	background: var(--tl-danger-soft);
+	color: var(--tl-danger-strong);
+}
+
+.tl-alert a {
+	color: inherit;
+	margin-left: 8px;
+	text-decoration: underline;
+}
+
+/* Forms ---------------------------------------------------------------------
+ *
+ * The theme draws its own inputs on a light background. On a restyled page
+ * they are aligned to the tokens: the same border in both schemes and, in
+ * dark, a dark background with a native dark focus ring. The green submit
+ * buttons (input[type="submit"]) and the red buttons keep the theme colours,
+ * which work on both schemes.
+ */
+
+.tl-page input,
+.tl-page select,
+.tl-page textarea {
+	border-color: var(--tl-border);
+}
+
+.tl-page input[type="checkbox"],
+.tl-page input[type="radio"] {
+	accent-color: var(--tl-accent);
+}
+
+@media (prefers-color-scheme: dark) {
+	.tl-page input:not([type="checkbox"]):not([type="radio"]),
+	.tl-page select,
+	.tl-page textarea {
+		background-color: var(--tl-card);
+		border-color: var(--tl-border);
+		color: var(--tl-text);
+	}
+
+	.tl-page input:focus,
+	.tl-page select:focus,
+	.tl-page textarea:focus {
+		border-color: var(--tl-neutral-strong);
+	}
+}
