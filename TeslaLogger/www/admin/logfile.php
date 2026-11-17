@@ -116,8 +116,7 @@ if (!isset($_REQUEST["sleep"]) && isset($_REQUEST["lines"]))
 		<div class="tl-card-head">
 			<h2 class="tl-card-title"><?php t("Logfile"); ?></h2>
 		</div>
-		<div id="log" class="tl-log">
-<?PHP
+		<div id="log" class="tl-log"><?PHP
 	$url = GetTeslaloggerURL("taillogfile/$lines");
     $output = @file_get_contents($url);
 
@@ -219,10 +218,10 @@ if (!isset($_REQUEST["sleep"]) && isset($_REQUEST["lines"]))
 	}
 
 	$output = preg_replace("/[\r\n]{2,}/", "\n", $output); // unnecessary new lines
-
-	echo nl2br($output);
-?>
-		</div>
+	// white-space: pre-wrap renders real line breaks, so nl2br() would double
+	// every line: convert them to <br> without keeping the line break
+	echo str_replace("\r\n", "<br>", str_replace("\n", "<br>", $output));
+?>		</div>
 	</div>
  </div>
 </body>
