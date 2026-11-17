@@ -532,6 +532,34 @@ body {
 	overflow: auto;
 }
 
+/* komoot.php -----------------------------------------------------------------
+ * A small form: single column, label above the input, all inputs are the same
+ * full width. Self-contained grid (does not depend on a plain .tl-form rule).
+ */
+
+.tl-small-form {
+	display: grid;
+	gap: 16px 24px;
+	grid-template-columns: 1fr;
+}
+
+.tl-small-form .tl-form-item {
+	align-items: flex-start;
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+}
+
+.tl-small-form .tl-form-item label {
+	color: var(--tl-muted);
+	font-size: 14px;
+	white-space: nowrap;
+}
+
+.tl-small-form .tl-small-input {
+	width: 100%;
+}
+
 /* mqtt.php ------------------------------------------------------------------
  * The page-specific parts live in the shared stylesheet (no separate
  * teslalogger_mqtt.css). The classes are scoped to the MQTT page so they
