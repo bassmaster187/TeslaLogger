@@ -515,6 +515,7 @@ body {
 }
 
 .tl-journey-form .tl-form-actions {
+	grid-column: 1 / -1;
 	justify-content: end;
 }
 
@@ -531,10 +532,6 @@ body {
  * teslalogger_journeys.css). The card classes are scoped so the rules
  * cannot affect the other pages.
  */
-
-.tl-journey-card {
-	overflow: auto;
-}
 
 .tl-journey-form {
 	overflow: auto;
