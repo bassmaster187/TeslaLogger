@@ -270,8 +270,9 @@ $actual_link = GetRequestProtocol() . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_UR
 				return;
 			}
 
-			$("#browserauth").hide();
-			$("html,body").scrollTop(0);
+		$("#browserauth").hide();
+		$("#cardcredentials").show();
+		$("html,body").scrollTop(0);
 			$("#access_token").val(obj.AccessToken);
 			$("#refresh_token").val(obj.RefreshToken);
 			CheckAccessToken();
@@ -354,8 +355,8 @@ echo $TeslaFleetURL;
 		$t1=str_replace("}", '</a>', $t1);
 		echo $t1;
 	?></li>
-		<li>Android: <a href="https://play.google.com/store/apps/details?id=net.leveugle.teslatokens">Tesla Tokens</a></li>
-		<li>iOS: <a href="https://apps.apple.com/us/app/auth-app-for-tesla/id1552058613#?platform=iphone">Auth app for Tesla</a></li>
+		<!-- li>Android: <a href="https://play.google.com/store/apps/details?id=net.leveugle.teslatokens">Tesla Tokens</a></li>
+		<li>iOS: <a href="https://apps.apple.com/us/app/auth-app-for-tesla/id1552058613#?platform=iphone">Auth app for Tesla</a></li -->
 		</ul>
 	</div>
 
@@ -391,7 +392,11 @@ echo $TeslaFleetURL;
 		</div>
 	</div>
 
+	<?php if ($_REQUEST["id"] == -1) { ?>
+	<div class="tl-card" id="cardcredentials" style="display:none">
+	<?php } else { ?>
 	<div class="tl-card">
+	<?php } ?>
 		<h2 class="tl-card-title"><?php t("Please enter your Tesla account credentials"); ?>:</h2>
 		<div class="tl-form tl-small-form">
 			<div class="tl-form-item">
