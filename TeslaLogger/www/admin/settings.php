@@ -27,7 +27,7 @@ function CarsCombobox($cars, $selected)
 	<link rel="stylesheet" href="static/jquery/ui/1.12.1/themes/smoothness/jquery-ui.css">
 	<link rel="stylesheet" href="static/teslalogger_style.css?v=5">
 	<link rel="stylesheet" href="static/teslalogger_ui.css?v=14">
-	<link rel="stylesheet" href="static/teslalogger_settings.css?v=12">
+	<link rel="stylesheet" href="static/teslalogger_settings.css?v=13">
 	<script src="static/jquery/jquery-1.12.4.js"></script>
 	<script src="static/jquery/ui/1.12.1/jquery-ui.js"></script>
 	<script src="static/jquery/jquery-migrate-1.4.1.min.js"></script>
@@ -242,9 +242,6 @@ echo(menu("Settings"));
 <div class="tl-page">
 	<div class="tl-page-head">
 		<h2 class="tl-page-title"><?php t("Settings"); ?></h2>
-		<div class="tl-actions">
-			<button onclick="save();"><?php t("Save"); ?></button>
-		</div>
 	</div>
 
 	<div class="tl-card">
@@ -442,6 +439,9 @@ echo(menu("Settings"));
 			<div class="tl-form-item">
 				<label for="defaultcar" class="tl-label"><?php t("Main Car"); ?></label>
 				<?PHP CarsCombobox($jcars, $defaultcar); ?>
+			</div>
+			<div class="tl-form-actions">
+				<button onclick="save();"><?php t("Save"); ?></button>
 			</div>
 		</div>
 	</div>

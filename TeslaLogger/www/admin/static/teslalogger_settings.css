@@ -194,10 +194,11 @@
 	}
 }
 
-/* Save button, the page header keeps the theme button colours (green,
-   readable on both schemes) */
+/* Save button at the bottom right of the settings card, spanning both
+   columns (label column and setting column) */
 
-.tl-actions {
+.tl-form--settings .tl-form-actions {
+	grid-column: 1 / -1;
 	display: flex;
 	justify-content: flex-end;
 }
