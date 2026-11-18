@@ -27,7 +27,7 @@ function CarsCombobox($cars, $selected)
 	<link rel="stylesheet" href="static/jquery/ui/1.12.1/themes/smoothness/jquery-ui.css">
 	<link rel="stylesheet" href="static/teslalogger_style.css?v=5">
 	<link rel="stylesheet" href="static/teslalogger_ui.css?v=14">
-	<link rel="stylesheet" href="static/teslalogger_settings.css?v=11">
+	<link rel="stylesheet" href="static/teslalogger_settings.css?v=12">
 	<script src="static/jquery/jquery-1.12.4.js"></script>
 	<script src="static/jquery/ui/1.12.1/jquery-ui.js"></script>
 	<script src="static/jquery/jquery-migrate-1.4.1.min.js"></script>
@@ -347,7 +347,6 @@ echo(menu("Settings"));
 					<label class="tl-switch">
 						<input id="checkboxSharedata" type="checkbox" value="sharedata">
 						<span class="tl-switch-track"></span>
-						<span><?php t("Enable"); ?></span>
 					</label>
 				</div>
 			</div>
@@ -387,7 +386,6 @@ echo(menu("Settings"));
 					<label class="tl-switch">
 						<input id="checkbox100pct" type="checkbox" value="100pct">
 						<span class="tl-switch-track"></span>
-						<span><?php t("Enable"); ?></span>
 					</label>
 				</div>
 			</div>
@@ -415,7 +413,6 @@ echo(menu("Settings"));
 					<label class="tl-switch">
 						<input id="checkboxScanMyTesla" type="checkbox" value="ScanMyTesla">
 						<span class="tl-switch-track"></span>
-						<span><?php t("Enable"); ?></span>
 					</label>
 				</div>
 			</div>
@@ -425,7 +422,6 @@ echo(menu("Settings"));
 					<label class="tl-switch">
 						<input id="StreamingPos" type="checkbox" value="StreamingPos">
 						<span class="tl-switch-track"></span>
-						<span><?php t("Enable"); ?></span>
 					</label>
 				</div>
 			</div>

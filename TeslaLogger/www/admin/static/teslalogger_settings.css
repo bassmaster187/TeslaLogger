@@ -112,8 +112,9 @@
 .tl-radio-group {
 	align-items: center;
 	background: var(--tl-bg);
-	display: flex;
-	flex-wrap: wrap;
+	display: grid;
+	grid-auto-flow: column;
+	grid-auto-columns: 1fr;
 	border: 1px solid var(--tl-border);
 	border-radius: var(--tl-radius);
 	padding: 3px;
