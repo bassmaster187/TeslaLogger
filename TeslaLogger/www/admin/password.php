@@ -536,7 +536,7 @@ else
 		?>
 		</tbody>
 	</table>
-	<div class="tl-form-actions" style="display:flex; justify-content:flex-start; margin-top:16px;">
+	<div class="tl-form-actions" style="display:flex; justify-content:flex-start; gap:12px; margin-top:16px;">
 		<button onClick="location.href='password.php?id=-1'"><?php t("New Tesla"); ?></button>
 		<button onClick="location.href='lucidpassword.php?id=-1'"><?php t("New Lucid"); ?></button>
 	</div>
