@@ -13,7 +13,7 @@ $actual_link = GetRequestProtocol() . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_UR
     <title><?php t("Teslalogger Tesla Credentials"); ?></title>
 	<link rel="stylesheet" href="static/jquery/ui/1.12.1/themes/smoothness/jquery-ui.css">
 	<link rel="stylesheet" href="static/teslalogger_style.css?v=5">
-	<link rel="stylesheet" href="static/teslalogger_ui.css?v=14">
+	<link rel="stylesheet" href="static/teslalogger_ui.css?v=17">
 	<script src="static/jquery/jquery-1.12.4.js"></script>
 	<script src="static/jquery/ui/1.12.1/jquery-ui.js"></script>
 	<script src="static/jquery/jquery-migrate-1.4.1.min.js"></script>
@@ -36,19 +36,6 @@ $actual_link = GetRequestProtocol() . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_UR
 			bFilter: false,
 			paging: false,
 			info: false
-		});
-
-		$("#TokenHelp").click(function() {
-			$("#dialog-TokenHelp").dialog({
-				resizable: false,
-				width: "auto",
-				modal: true,
-				buttons: {
-					"OK": function() {
-					$( this ).dialog( "close" );
-					}
-				}
-				});
 		});
 
 		if (dbid > 0)
@@ -103,8 +90,6 @@ $actual_link = GetRequestProtocol() . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_UR
 		}
 
 		var d = {
-					email: $("#email").val(),
-					password: $("#password1").val(),
 					carid: teslacarid,
 					id: dbid,
 					freesuc: $("#freesuc").is(':checked'),
@@ -327,10 +312,6 @@ if (isset($_REQUEST["id"]))
 <div class="tl-page">
 <div class="tl-page-head">
 	<h2 class="tl-page-title"><?php t("Teslalogger Tesla Credentials"); ?></h2>
-	<img id="TokenHelp" src="img/icon-help-24.png" class="tl-help" />
-	<div class="tl-actions">
-	<button id="btnSave" style="visibility:collapse" onclick="save();"><?php t("Save"); ?></button>
-	</div>
 </div>
 
 <div id="dialog-TokenHelp" class="tl-cards-wrap" title="Info">
@@ -406,16 +387,6 @@ echo $TeslaFleetURL;
 				<label for="refresh_token"><?php t("Refresh Token"); ?></label>
 				<input class="tl-small-input" id="refresh_token" type="text" autocomplete="new-password"></div>
 
-			<div class="tl-form-item" style="visibility:collapse">
-				<label><b><?php t("Email"); ?></b></label>
-				<input class="tl-small-input" id="email" type="text" autocomplete="new-password" value="<?php echo($email) ?>" <?php echo($disablecarid) ?>></div>
-			<div class="tl-form-item" style="visibility:collapse">
-				<label><?php t("Password"); ?></label>
-				<input class="tl-small-input" id="password1" type="password" autocomplete="new-password" /></div>
-			<div class="tl-form-item" style="visibility:collapse">
-				<label><?php t("Repeat Password"); ?></label>
-				<input class="tl-small-input" id="password2" type="password" autocomplete="new-password" /></div>
-
 			<div class="tl-form-item">
 				<label><?php t("Car"); ?></label>
 				<select id="carid" style="width: 100%;"></select><span id="vinlabel"></span></div>
@@ -423,11 +394,12 @@ echo $TeslaFleetURL;
 				<label for="freesuc"><?php t("Free Supercharging"); ?></label>
 				<label class="tl-switch"><input type="checkbox" id="freesuc" value="1" <?= $freesuc ?>><span class="tl-switch-track"></span></label>
 			</div>
-			<?php if ($_REQUEST["id"] != -1) { ?>
 			<div class="tl-form-actions">
+				<?php if ($_REQUEST["id"] != -1) { ?>
 				<button id="deletebutton" onclick="deleteCar();" class="redbutton" style="margin-right:auto"><?php t("Delete"); ?></button>
+				<?php } ?>
+				<button id="btnSave" style="visibility:collapse" onclick="save();"><?php t("Save"); ?></button>
 			</div>
-			<?php } ?>
 		</div>
 	</div>
 </div>

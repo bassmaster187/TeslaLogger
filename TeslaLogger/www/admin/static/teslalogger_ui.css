@@ -113,18 +113,18 @@ body {
 /* The theme link colours are too dark on a dark card. Leaflet and alerts keep their own.
    A jQuery-UI dialog moves its content out of .tl-page into body, so the link rule
    must also cover the dialog. */
-.tl-page a:not(.leaflet-container a):not(.tl-alert a),
-.tl-cards-wrap a,
-.tl-pf-steps a {
+.tl-page a:not(.leaflet-container a):not(.tl-alert a):not(.tl-youtube-logo),
+.tl-cards-wrap a:not(.tl-youtube-logo),
+.tl-pf-steps a:not(.tl-youtube-logo) {
 	color: var(--tl-link);
 }
 
-.tl-page a:not(.leaflet-container a):not(.tl-alert a):hover,
-.tl-page a:not(.leaflet-container a):not(.tl-alert a):active,
-.tl-cards-wrap a:hover,
-.tl-cards-wrap a:active,
-.tl-pf-steps a:hover,
-.tl-pf-steps a:active {
+.tl-page a:not(.leaflet-container a):not(.tl-alert a):not(.tl-youtube-logo):hover,
+.tl-page a:not(.leaflet-container a):not(.tl-alert a):not(.tl-youtube-logo):active,
+.tl-cards-wrap a:not(.tl-youtube-logo):hover,
+.tl-cards-wrap a:not(.tl-youtube-logo):active,
+.tl-pf-steps a:not(.tl-youtube-logo):hover,
+.tl-pf-steps a:not(.tl-youtube-logo):active {
 	color: var(--tl-link-hover);
 }
 
@@ -743,6 +743,27 @@ body {
 
 .tl-pf-field > span {
 	white-space: nowrap;
+}
+
+/* A full-width line inside a pf field, so consecutive text lines stack */
+
+.tl-pf-line {
+	width: 100%;
+	white-space: normal;
+}
+
+/* Inline YouTube logo. The wordmark uses currentColor, so it follows the
+   theme text colour (white on dark, dark on light) and stays readable. */
+
+.tl-youtube-logo {
+	align-items: center;
+	color: var(--tl-text);
+	display: inline-flex;
+	gap: 2px;
+}
+
+.tl-youtube-logo svg {
+	display: block;
 }
 
 .tl-pf-field input,

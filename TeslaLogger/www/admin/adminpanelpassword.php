@@ -60,7 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
     <title><?php t("Teslalogger Tesla Credentials"); ?></title>
 	<link rel="stylesheet" href="static/jquery/ui/1.12.1/themes/smoothness/jquery-ui.css">
 	<link rel="stylesheet" href="static/teslalogger_style.css?v=5">
-	<link rel="stylesheet" href="static/teslalogger_ui.css?v=14">
+	<link rel="stylesheet" href="static/teslalogger_ui.css?v=17">
 	<script src="static/jquery/jquery-1.12.4.js"></script>
 	<script src="static/jquery/ui/1.12.1/jquery-ui.js"></script>
 	<script src="jquery/jquery-migrate-1.4.1.min.js"></script>
