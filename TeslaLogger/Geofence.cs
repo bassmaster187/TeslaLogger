@@ -146,6 +146,8 @@ namespace TeslaLogger
 
         private static int FSWCounter;
 
+        private static readonly HttpClient httpClientOnlineUpdate = new HttpClient();
+
         private Geofence(bool RacingMode)
         {
             _RacingMode = RacingMode;
@@ -174,9 +176,13 @@ namespace TeslaLogger
 
         internal void Init()
         {
+            // read into new sets and swap the references afterwards, so that GetPOI / WebServer never
+            // enumerate a list that is being cleared and refilled concurrently (FileSystemWatcher / OnlineUpdate)
             if (File.Exists(FileManager.GetFilePath(TLFilename.GeofenceRacingFilename)) && _RacingMode)
             {
-                ReadGeofenceFile(geofenceList, FileManager.GetFilePath(TLFilename.GeofenceRacingFilename));
+                SortedSet<Address> newGeofenceList = new SortedSet<Address>(new AddressByLatLng());
+                ReadGeofenceFile(newGeofenceList, FileManager.GetFilePath(TLFilename.GeofenceRacingFilename));
+                geofenceList = newGeofenceList;
                 RacingMode = true;
 
                 Logfile.Log("*** RACING MODE ***");
@@ -184,7 +190,9 @@ namespace TeslaLogger
             else
             {
                 RacingMode = false;
-                ReadGeofenceFile(geofenceList, FileManager.GetFilePath(TLFilename.GeofenceFilename));
+                SortedSet<Address> newGeofenceList = new SortedSet<Address>(new AddressByLatLng());
+                ReadGeofenceFile(newGeofenceList, FileManager.GetFilePath(TLFilename.GeofenceFilename));
+                geofenceList = newGeofenceList;
                 Logfile.Log("Geofence: addresses inserted from geofence.csv: " + geofenceList.Count);
                 if (!File.Exists(FileManager.GetFilePath(TLFilename.GeofencePrivateFilename)))
                 {
@@ -193,7 +201,9 @@ namespace TeslaLogger
                 }
 
                 UpdateTeslalogger.Chmod(FileManager.GetFilePath(TLFilename.GeofencePrivateFilename), 666);
-                ReadGeofenceFile(geofencePrivateList, FileManager.GetFilePath(TLFilename.GeofencePrivateFilename));
+                SortedSet<Address> newGeofencePrivateList = new SortedSet<Address>(new AddressByLatLng());
+                ReadGeofenceFile(newGeofencePrivateList, FileManager.GetFilePath(TLFilename.GeofencePrivateFilename));
+                geofencePrivateList = newGeofencePrivateList;
             }
 
             Logfile.Log("Geofence: addresses inserted from geofence-private.csv: " + geofencePrivateList.Count);
@@ -223,6 +233,12 @@ namespace TeslaLogger
                 Init();
 
                 _ = Task.Factory.StartNew(() => WebHelper.UpdateAllPOIAddresses(), CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
+            }
+            catch (Exception ex)
+            {
+                // unhandled exceptions in FileSystemWatcher callbacks would terminate the process
+                ex.ToExceptionless().FirstCarUserID().Submit();
+                Logfile.Log("Fsw_Changed: " + ex.ToString());
             }
             finally
             {
@@ -537,7 +553,14 @@ namespace TeslaLogger
         {
             double range = 0.2; // apprx 10km
 
-            foreach (Address p in list)
+            // only enumerate addresses within the latitude range instead of scanning all addresses with a smaller latitude
+            SortedSet<Address> view = list;
+            if (!double.IsNaN(lat) && list.Count > 0)
+            {
+                view = list.GetViewBetween(new Address(null, lat - range, double.MinValue, 0), new Address(null, lat + range, double.MaxValue, 0));
+            }
+
+            foreach (Address p in view)
             {
                 if (p.lat - range > lat)
                 {
@@ -609,7 +632,7 @@ namespace TeslaLogger
             {
                 lastETag = etag;
             }
-            HttpClient client = new HttpClient();
+            HttpClient client = httpClientOnlineUpdate;
             string url = "https://raw.githubusercontent.com/bassmaster187/TeslaLogger/master/TeslaLogger/bin/geofence.csv";
             using (var request = new HttpRequestMessage(HttpMethod.Get, url))
             {
@@ -617,7 +640,9 @@ namespace TeslaLogger
                 {
                     request.Headers.TryAddWithoutValidation("If-None-Match", lastETag);
                 }
-                var response = client.SendAsync(request).Result;
+                HttpResponseMessage response = client.SendAsync(request).Result;
+                using (response)
+                {
                 if (response.StatusCode == System.Net.HttpStatusCode.NotModified)
                 {
                     Logfile.Log($"Geofence.OnlineUpdate: no changes (ETag: {lastETag})");
@@ -652,6 +677,7 @@ namespace TeslaLogger
                 else
                 {
                     Logfile.Log($"Geofence.OnlineUpdate: error: {response.StatusCode}");
+                }
                 }
             }
         }
