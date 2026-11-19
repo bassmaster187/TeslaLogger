@@ -80,7 +80,7 @@ namespace TeslaLogger
                         }
                     }
 
-                    response = GetDataFromWebservice().Result;
+                    response = await GetDataFromWebservice();
                     if (response.StartsWith("not found", StringComparison.Ordinal)
                         || response.StartsWith("ERROR:", StringComparison.Ordinal)
                         || response.Contains("Resource Limit Is Reached"))
@@ -91,6 +91,10 @@ namespace TeslaLogger
                     {
                         InsertData(response);
                     }
+                }
+                catch (OperationCanceledException) when (cancellationTokenSource.IsCancellationRequested)
+                {
+                    break;
                 }
                 catch (Exception ex)
                 {
@@ -119,7 +123,7 @@ namespace TeslaLogger
                 {
 
                     DateTime start = DateTime.UtcNow;
-                    HttpResponseMessage result = await httpclient_teslalogger_de.PostAsync(new Uri("http://teslalogger.de/get_scanmytesla.php"), content).ConfigureAwait(true);
+                    using HttpResponseMessage result = await httpclient_teslalogger_de.PostAsync(new Uri("http://teslalogger.de/get_scanmytesla.php"), content).ConfigureAwait(true);
 
                     if (result.StatusCode == System.Net.HttpStatusCode.ServiceUnavailable)
                     {
@@ -189,6 +193,12 @@ namespace TeslaLogger
 
                     foreach (KeyValuePair<string, object> line in kv)
                     {
+                        // key is concatenated into the SQL statement: only accept numeric CAN ids
+                        if (line.Value == null || !int.TryParse(line.Key, out _))
+                        {
+                            continue;
+                        }
+
                         if (line.Value.ToString().Contains("Infinity") || line.Value.ToString().Contains("NaN"))
                         {
                             continue;
@@ -265,6 +275,11 @@ namespace TeslaLogger
                         sb.Append(")");
                     }
 
+                    if (first) // no valid values -> "INSERT ... VALUES " would be invalid SQL
+                    {
+                        return "insert ok [0] " + d.ToString(Tools.ciEnUS);
+                    }
+
                     using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
                     {
                         await con.OpenAsync(cancellationTokenSource.Token);
@@ -293,7 +308,7 @@ namespace TeslaLogger
                                     {
                                         cmd2.Parameters.AddWithValue("@id", car.CarInDB);
                                         cmd2.Parameters.AddWithValue("@lastscanmytesla", DateTime.Now);
-                                        await cmd2.ExecuteReaderAsync(cancellationTokenSource.Token);
+                                        await cmd2.ExecuteNonQueryAsync(cancellationTokenSource.Token);
                                     }
                                 }
                             }
@@ -306,7 +321,7 @@ namespace TeslaLogger
                 }
                 
             }
-            catch (TaskCanceledException)
+            catch (TaskCanceledException) when (!cancellationTokenSource.IsCancellationRequested)
             {
                 car.CreateExeptionlessLog("ScanMyTesla", "Timeout", Exceptionless.Logging.LogLevel.Warn).Submit();
                 car.Log("Scanmytesla: Timeout");

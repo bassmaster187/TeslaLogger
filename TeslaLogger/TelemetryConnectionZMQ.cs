@@ -111,10 +111,20 @@ namespace TeslaLogger
                         continue;
 
 
-                    while (true)
+                    // poll with timeout, so Close/StopConnection (connect = false) really stops receiving
+                    while (connect)
                     {
                         Thread.Sleep(100);
-                        NetMQMessage message = zmq.ReceiveMultipartMessage();
+                        NetMQMessage message = null;
+                        if (!zmq.TryReceiveMultipartMessage(TimeSpan.FromSeconds(1), ref message))
+                            continue;
+
+                        if (message.FrameCount < 2)
+                        {
+                            Log("Unexpected message with " + message.FrameCount + " frame(s)");
+                            continue;
+                        }
+
                         await parser.handleMessageAsync(message[1].ConvertToString());
                     }
                 }
@@ -154,9 +164,10 @@ namespace TeslaLogger
 
             zmq = null;
 
+            SubscriberSocket zmqsubscriber = null;
             try
             {
-                var zmqsubscriber = new SubscriberSocket();
+                zmqsubscriber = new SubscriberSocket();
                 zmqsubscriber.Connect(ApplicationSettings.Default.TelemetryServerURL);
                 zmqsubscriber.Subscribe("");
 
@@ -164,9 +175,11 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
+                zmqsubscriber?.Dispose();
+
                 if (ex is AggregateException ex2)
                 {
-                    Log("Connect to Telemetry Server (ZQM) Error: " + ex2.InnerException.Message);
+                    Log("Connect to Telemetry Server (ZQM) Error: " + ex2.InnerException?.Message);
                     if (ex.InnerException != null)
                         car.CreateExceptionlessClient(ex2.InnerException).Submit();
                     else
