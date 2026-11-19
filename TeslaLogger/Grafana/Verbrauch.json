@@ -104,6 +104,23 @@
         "type": "mysql",
         "uid": "000000001"
       },
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Höhe [m]"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "locale"
+              }
+            ]
+          }
+        ]
+      },
       "fill": 0,
       "fillGradient": 0,
       "gridPos": {
@@ -779,6 +796,6 @@
   "timezone": "",
   "title": "Verbrauch",
   "uid": "zm7wN6Zgz",
-  "version": 153,
+  "version": 154,
   "weekStart": ""
 }
