@@ -154,7 +154,7 @@ namespace TeslaLogger
                         {
                             using (DataTable dt = TripToCoords((TripRequest)request))
                             {
-                                if (dt != null & dt.Rows.Count > 1)
+                                if (dt != null && dt.Rows.Count > 1)
                                 {
                                     _StaticMapProvider.CreateTripMap(dt, width, height, request.Mode, request.Special, filename);
                                     dt.Clear();
@@ -408,9 +408,9 @@ ORDER BY
             switch (type)
             {
                 case MapType.Charge:
-                    return "C-" + lat + "-" + lng + ".png";
+                    return "C-" + lat.ToString(Tools.ciEnUS) + "-" + lng.ToString(Tools.ciEnUS) + ".png";
                 case MapType.Park:
-                    return "P-" + lat + "-" + lng + ".png";
+                    return "P-" + lat.ToString(Tools.ciEnUS) + "-" + lng.ToString(Tools.ciEnUS) + ".png";
                 case MapType.Trip:
                     break;
                 default:

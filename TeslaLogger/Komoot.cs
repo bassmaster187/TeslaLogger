@@ -212,6 +212,11 @@ namespace TeslaLogger
                 {
                     distance_computed_km += positions[posID].dist_km;
                 }
+                if (double.IsNaN(distance_m) || distance_computed_km <= 0.0)
+                {
+                    Tools.DebugLog($"Tour {tourID} no distance correction possible distance_m:{distance_m} distance_computed_km:{distance_computed_km}");
+                    return;
+                }
                 double correction_factor = distance_m / 1000 / distance_computed_km;
                 Tools.DebugLog($"Tour {tourID} correction_factor:{correction_factor}");
                 foreach (int posID in positions.Keys.OrderBy(k => k))
@@ -293,9 +298,9 @@ namespace TeslaLogger
                         Position currP1 = positions[positionKeys[index]];
                         Position currP2 = positions[positionKeys[index + 1]];
                         Position nextP = positions[positionKeys[index + 2]];
-                        double acceleration1 = ((currP1.speed - prevP.speed) / 3.6) / ((currP1.delta_t - prevP.delta_t) / 1000);
-                        double acceleration2 = ((currP2.speed - currP1.speed) / 3.6) / ((currP2.delta_t - currP1.delta_t) / 1000);
-                        double acceleration3 = ((nextP.speed - currP2.speed) / 3.6) / ((nextP.delta_t - currP2.delta_t) / 1000);
+                        double acceleration1 = ((currP1.speed - prevP.speed) / 3.6) / ((currP1.delta_t - prevP.delta_t) / 1000.0);
+                        double acceleration2 = ((currP2.speed - currP1.speed) / 3.6) / ((currP2.delta_t - currP1.delta_t) / 1000.0);
+                        double acceleration3 = ((nextP.speed - currP2.speed) / 3.6) / ((nextP.delta_t - currP2.delta_t) / 1000.0);
                         //Tools.DebugLog($"speed:{prevP.speed}->{currP1.speed}->{currP2.speed}->{nextP.speed} acceleration1:{acceleration1}m/s acceleration2:{acceleration2}m/s acceleration3:{acceleration3}m/s ");
                         if (acceleration1 > 1.1 && Math.Abs(acceleration2) < 0.5 && acceleration3 < -1.1)
                         {
@@ -326,8 +331,8 @@ namespace TeslaLogger
                         Position prevP = positions[positionKeys[index - 1]];
                         Position currP = positions[positionKeys[index]];
                         Position nextP = positions[positionKeys[index + 1]];
-                        double acceleration1 = ((currP.speed - prevP.speed) / 3.6) / ((currP.delta_t - prevP.delta_t) / 1000);
-                        double acceleration2 = ((nextP.speed - currP.speed) / 3.6) / ((nextP.delta_t - currP.delta_t) / 1000);
+                        double acceleration1 = ((currP.speed - prevP.speed) / 3.6) / ((currP.delta_t - prevP.delta_t) / 1000.0);
+                        double acceleration2 = ((nextP.speed - currP.speed) / 3.6) / ((nextP.delta_t - currP.delta_t) / 1000.0);
                         //Tools.DebugLog($"speed:{prevP.speed}->{currP.speed}->{nextP.speed} acceleration1:{acceleration1}m/s acceleration2:{acceleration2}m/s");
                         if (acceleration1 > 1.1 && acceleration2 < -1.1)
                         {
@@ -442,7 +447,15 @@ WHERE
                 KomootLoginInfo kli = new KomootLoginInfo(carID, username, password, string.Empty, string.Empty);
                 while (true)
                 {
-                    await WorkAsync(kli);
+                    try
+                    {
+                        await WorkAsync(kli);
+                    }
+                    catch (Exception ex)
+                    {
+                        ex.ToExceptionless().FirstCarUserID().Submit();
+                        Logfile.Log($"#{carID} Komoot: Exception " + ex.ToString());
+                    }
                     for (int i = 0; i < 1000; i++)
                     {
                         if (workNow) { break; }
@@ -557,11 +570,11 @@ WHERE
         {
             CurrentJSON.jsonStringHolder[kli.carID] = $@"{{
     ""sleeping"": true,
-    ""odometer"": {tour.odometer},
+    ""odometer"": {tour.odometer.ToString(System.Globalization.CultureInfo.InvariantCulture)},
     ""ts"": ""{tour.endTS.ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ssZ")}"",
-    ""latitude"": {tour.lastPosition.lat},
-    ""longitude"": {tour.lastPosition.lng},
-    ""heading"": {tour.lastPosition.heading},
+    ""latitude"": {tour.lastPosition.lat.ToString(System.Globalization.CultureInfo.InvariantCulture)},
+    ""longitude"": {tour.lastPosition.lng.ToString(System.Globalization.CultureInfo.InvariantCulture)},
+    ""heading"": {tour.lastPosition.heading.ToString(System.Globalization.CultureInfo.InvariantCulture)},
     ""trip_start_dt"": ""{tour.startTS.ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ssZ")}"",
     ""trip_duration_sec"": ""{(int)(tour.endTS-tour.startTS).TotalSeconds}"",
     ""locked"": true
@@ -1256,7 +1269,7 @@ VALUES (
                                         if (Int64.TryParse(tour["id"].ToString(), out long tourid) && DateTime.TryParse(tour["date"].ToString(), out DateTime _))
                                         {
                                             KomootTour newTour = new KomootTour(kli.carID, tourid, tour["type"].ToString(), tour["sport"].ToString(), DateTime.Parse(tour["date"].ToString()).ToLocalTime());
-                                            if (tour.ContainsKey("id") && double.TryParse(tour["distance"].ToString(), out double _))
+                                            if (tour.ContainsKey("distance") && double.TryParse(tour["distance"].ToString(), out double _))
                                             {
                                                 newTour.distance_m = double.Parse(tour["distance"].ToString());
                                             }
@@ -1279,7 +1292,7 @@ VALUES (
                             }
                             // komoot responds with the newest tour as first tour
                             // check if we already have this and skip next pages
-                            if (TourIsAlreadyInDatabase(komootTours.Keys.Max())) {
+                            if (komootTours.Count > 0 && TourIsAlreadyInDatabase(komootTours.Keys.Max())) {
                                 Tools.DebugLog($"Tour {komootTours.Keys.Max()} is already in the database");
                                 Logfile.Log($"#{kli.carID} Komoot: no new tours");
                                 nextPage = false;
@@ -1288,6 +1301,8 @@ VALUES (
                         else
                         {
                             Logfile.Log($"#{kli.carID} Komoot: download error: {result.StatusCode}");
+                            // do not retry the same URL in an endless loop
+                            nextPage = false;
                         }
                     }
                 }

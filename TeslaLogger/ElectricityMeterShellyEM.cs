@@ -44,7 +44,7 @@ namespace TeslaLogger
                     return mockup_status;
                 }
 
-                string cacheKey = "EM_" + guid.ToString();
+                string cacheKey = "EM_" + host;
                 object o = MemoryCache.Default.Get(cacheKey);
 
                 if (o != null)

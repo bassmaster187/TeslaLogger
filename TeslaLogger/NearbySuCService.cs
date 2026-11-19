@@ -255,6 +255,8 @@ namespace TeslaLogger
             }
         }
 
+        private static readonly HttpClient shareSucHttpClient = new HttpClient() { Timeout = TimeSpan.FromSeconds(30) };
+
         private static void ShareSuc(ArrayList send, bool nextsuc, out double requestlat, out double requestlng)
         {
             requestlat = 0;
@@ -264,9 +266,8 @@ namespace TeslaLogger
             {
                 string json = JsonConvert.SerializeObject(send);
 
-                using (HttpClient client = new HttpClient())
+                HttpClient client = shareSucHttpClient;
                 {
-                    client.Timeout = TimeSpan.FromSeconds(30);
                     using (StringContent content = new StringContent(json, Encoding.UTF8, "application/json"))
                     {
                         DateTime start = DateTime.UtcNow;
@@ -274,7 +275,7 @@ namespace TeslaLogger
                         if (nextsuc)
                             suffix = "?nextsuc=1";
 
-                        HttpResponseMessage result = client.PostAsync(new Uri("http://teslalogger.de/share_supercharger2.php" + suffix), content).Result    ;
+                        using HttpResponseMessage result = client.PostAsync(new Uri("http://teslalogger.de/share_supercharger2.php" + suffix), content).Result;
                         string r = result.Content.ReadAsStringAsync().Result;
                         _ = DBHelper.AddMothershipDataToDBAsync("teslalogger.de/share_supercharger.php", start, (int)result.StatusCode, 0);
 
@@ -465,7 +466,7 @@ VALUES(
                     Car c = Car.Allcars[0];
                     HttpClient client = c.webhelper.httpclient_teslalogger_de;
 
-                    HttpResponseMessage result = client.GetAsync("https://teslalogger.de:8089/GetNextSuperchargerToCalculate").Result;
+                    using HttpResponseMessage result = client.GetAsync("https://teslalogger.de:8089/GetNextSuperchargerToCalculate").Result;
                     var resultContent = result.Content.ReadAsStringAsync().Result;
 
                     if (int.TryParse(resultContent, out int trid))

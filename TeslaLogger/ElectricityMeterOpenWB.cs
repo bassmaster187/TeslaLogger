@@ -40,7 +40,7 @@ namespace TeslaLogger
         {
             try
             {
-                string cacheKey = "openwb_" + guid.ToString();
+                string cacheKey = "openwb_" + host;
                 object o = MemoryCache.Default.Get(cacheKey);
 
                 if (o != null)
@@ -154,7 +154,7 @@ namespace TeslaLogger
         {
             try
             {
-                string url = host + "/openWB/web/version?t="+new Guid().ToString();
+                string url = host + "/openWB/web/version?t="+Guid.NewGuid().ToString();
                 string v = client.GetStringAsync(url).GetAwaiter().GetResult().Trim();
                 return v;
             }
