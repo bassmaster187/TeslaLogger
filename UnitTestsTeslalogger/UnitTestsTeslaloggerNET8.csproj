@@ -36,6 +36,7 @@
     <PackageReference Include="Exceptionless" Version="6.0.3" />
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.9.0" />
+    <PackageReference Include="Microsoft.Playwright.MSTest" Version="1.65.1" />
     <PackageReference Include="Microsoft.VisualBasic" Version="10.3.0" />
     <PackageReference Include="moq" Version="4.20.72" />
     <PackageReference Include="M2MqttDotnetCore" Version="1.1.0" />

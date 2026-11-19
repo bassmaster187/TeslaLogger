@@ -217,6 +217,10 @@ else
 					errortext = "<?php t("FatalErrorMissingKey"); ?>";
 					errortext = errortext.replace("{LINK}", '<a href="https://www.tesla.com/_ak/teslalogger.de" target="_blank">LINK</a>');
 				}
+				else if (jsonData["FatalError"] == "max_configs")
+				{
+					errortext = "<?php t("FatalErrorMaxConfigs"); ?>";
+				}
 
 				setCarStatus("error", "<?php t("Fatal Error"); ?>", errortext);
 

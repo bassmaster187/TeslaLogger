@@ -596,3 +596,4 @@ URL=URL
 Vehicle=Fordon
 New Geofence=Ny geofence
 Edit Geofence=Redigera geofence
+FatalErrorMaxConfigs=För många tredjepartsappar är kopplade till detta fordon!<br>Ta bort en app från fordonet och starta om Teslalogger.

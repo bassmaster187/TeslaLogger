@@ -574,3 +574,4 @@ URL=URL
 Vehicle=车辆
 New Geofence=新的地理围栏
 Edit Geofence=编辑地理围栏
+FatalErrorMaxConfigs=与该车辆关联的第三方应用过多！<br>请从车辆中移除一个应用，然后重新启动 Teslalogger。

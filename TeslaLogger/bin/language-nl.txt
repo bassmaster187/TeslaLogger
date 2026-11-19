@@ -554,3 +554,4 @@ URL=URL
 Vehicle=Voertuig
 New Geofence=Nieuwe geofence
 Edit Geofence=Geofence bewerken
+FatalErrorMaxConfigs=Te veel apps van derden gekoppeld aan dit voertuig!<br>Verwijder een app van het voertuig en herstart Teslalogger.

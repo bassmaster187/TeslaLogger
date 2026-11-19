@@ -596,3 +596,4 @@ URL=URL
 Vehicle=Araç
 New Geofence=Yeni geofence
 Edit Geofence=Geofence düzenle
+FatalErrorMaxConfigs=Bu araçla çok fazla üçüncü taraf uygulama bağlantılı!<br>Araçtan bir uygulamayı kaldırın ve Teslalogger'ı yeniden başlatın.

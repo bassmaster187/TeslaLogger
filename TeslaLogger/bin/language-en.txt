@@ -205,6 +205,7 @@ Consumption=Consumption
 Ø Speed="Avg Speed"
 Please update to latest docker-compose.yml file. Check: {LINK}=Please update to latest docker-compose.yml file. Check: {LINK}
 FatalErrorMissingKey=Virtual Key Missig!<br>Finish Setup at: {LINK}<br>And restart Teslalogger.
+FatalErrorMaxConfigs=Too many third-party apps linked to this vehicle!<br>Remove an app from the vehicle and restart Teslalogger.
 Follow vehicle=Follow vehicle
 No connection to Teslalogger=No connection to Teslalogger
 

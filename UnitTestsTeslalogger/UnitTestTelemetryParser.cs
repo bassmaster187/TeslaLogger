@@ -850,6 +850,43 @@ namespace UnitTestsTeslalogger
             Assert.AreEqual(null, c.CurrentJSON.FatalError);
         }
 
+        [TestMethod]
+        public void LoginRespone_MaxConfigs_SetsFatalErrorForMatchingVin()
+        {
+            Car c = new Car(0, "", "", 0, "", DateTime.Now, "", "", "", "", "", "5YJ3E7EA3LFXXXXXX", "", null, false);
+
+            var telemetry = new TelemetryParser(c);
+            telemetry.databaseCalls = false;
+
+            var testWebHelper = new TestWebHelper(c);
+            c.webhelper = testWebHelper;
+
+            string json = @"{ ""Teslalogger"": ""LoginRespone"", ""Response"": { ""updated_vehicles"": 0, ""skipped_vehicles"": { ""missing_key"": [], ""unsupported_hardware"": [], ""unsupported_firmware"": [], ""max_configs"": [ ""5YJ3E7EA3LFXXXXXX"" ] } } }";
+
+            telemetry.handleMessageAsync(json).Wait();
+
+            Assert.AreEqual("max_configs", c.CurrentJSON.FatalError);
+            Assert.IsFalse(testWebHelper.getTokenCalled, "GetToken() should not be called for max_configs!");
+        }
+
+        [TestMethod]
+        public void LoginRespone_MaxConfigs_OtherVin_KeepsGenericFatalError()
+        {
+            Car c = new Car(0, "", "", 0, "", DateTime.Now, "", "", "", "", "", "5YJ3E7EA3LFYYYYYY", "", null, false);
+
+            var telemetry = new TelemetryParser(c);
+            telemetry.databaseCalls = false;
+
+            var testWebHelper = new TestWebHelper(c);
+            c.webhelper = testWebHelper;
+
+            string json = @"{ ""Teslalogger"": ""LoginRespone"", ""Response"": { ""updated_vehicles"": 0, ""skipped_vehicles"": { ""max_configs"": [ ""5YJ3E7EA3LFXXXXXX"" ] } } }";
+
+            telemetry.handleMessageAsync(json).Wait();
+
+            Assert.AreEqual("Telemetry Login Error!!! Check Logfile!", c.CurrentJSON.FatalError);
+        }
+
         List<string> LoadData(string path)
         {
             if (!System.IO.File.Exists(path))

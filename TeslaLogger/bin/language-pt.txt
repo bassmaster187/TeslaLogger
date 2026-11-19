@@ -506,3 +506,4 @@ URL=URL
 Vehicle=Veículo
 New Geofence=Novo geofence
 Edit Geofence=Editar geofence
+FatalErrorMaxConfigs=Demasiadas aplicações de terceiros associadas a este veículo!<br>Remova uma aplicação do veículo e reinicie o Teslalogger.

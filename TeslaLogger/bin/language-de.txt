@@ -62,6 +62,7 @@ Wh/km=Wh/km
 km/h=km/h
 Please update to latest docker-compose.yml file. Check: {LINK}=Bitte aktualisieren Sie auf die neueste docker-compose.yml-Datei. Prüfen: {LINK}
 FatalErrorMissingKey=Virtual Key nicht gefunden!<br>Installation fortsetzen: {LINK}<br>Dann Teslalogger neu starten.
+FatalErrorMaxConfigs=Zu viele Drittanbieter-Apps mit diesem Fahrzeug verknüpft!<br>Entfernen Sie eine App aus dem Fahrzeug und starten Sie Teslalogger neu.
 Follow vehicle=Fahrzeug folgen
 No connection to Teslalogger=Keine Verbindung zum Teslalogger
 

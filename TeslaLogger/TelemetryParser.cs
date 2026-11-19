@@ -1387,6 +1387,20 @@ namespace TeslaLogger
             }
         }
 
+        private bool IsSkippedForVin(dynamic vinArray)
+        {
+            if (vinArray is JArray array)
+            {
+                foreach (dynamic vin in array)
+                {
+                    if (vin?.ToString() == car.Vin)
+                        return true;
+                }
+            }
+
+            return false;
+        }
+
         private void handleLoginResponse(dynamic j)
         {
             try
@@ -1406,21 +1420,20 @@ namespace TeslaLogger
 
                 if (skipped_vehicles != null)
                 {
-                    dynamic missing_key = skipped_vehicles["missing_key"];
-
-                    if (missing_key is JArray arrayMissing_key)
+                    if (IsSkippedForVin(skipped_vehicles["missing_key"]))
                     {
-                        if (arrayMissing_key?.Count == 1)
-                        {
-                            dynamic mkvin = arrayMissing_key[0];
-                            if (mkvin?.ToString() == car.Vin)
-                            {
-                                Log("LoginRespone: missing_key");
-                                car.CurrentJSON.FatalError = "missing_key";
-                                car.CurrentJSON.CreateCurrentJSON();
-                                return;
-                            }
-                        }
+                        Log("LoginRespone: missing_key");
+                        car.CurrentJSON.FatalError = "missing_key";
+                        car.CurrentJSON.CreateCurrentJSON();
+                        return;
+                    }
+
+                    if (IsSkippedForVin(skipped_vehicles["max_configs"]))
+                    {
+                        Log("LoginRespone: max_configs");
+                        car.CurrentJSON.FatalError = "max_configs";
+                        car.CurrentJSON.CreateCurrentJSON();
+                        return;
                     }
                 }
 
