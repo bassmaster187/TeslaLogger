@@ -42,19 +42,20 @@ namespace TeslaLogger
         {
             if (!string.IsNullOrEmpty(_DBConnectionstring))
             {
-                return _DBConnectionstring;
+                return obfuscate ? GetConnectionDescription(_DBConnectionstring) : _DBConnectionstring;
             }
-            string DBConnectionstring = "";
-            if (string.IsNullOrEmpty(ApplicationSettings.Default.DBConnectionstring))
+            string DBConnectionstring = Environment.GetEnvironmentVariable("DBConnectionstring");
+            if (string.IsNullOrWhiteSpace(DBConnectionstring))
+            {
+                DBConnectionstring = ApplicationSettings.Default.DBConnectionstring;
+            }
+
+            if (string.IsNullOrEmpty(DBConnectionstring))
             {
                 if (Tools.IsDocker())
                     DBConnectionstring = "Server=database;Database=teslalogger;Uid=root;Password=teslalogger;CharSet=utf8mb4;";
                 else
                     DBConnectionstring = "Server=127.0.0.1;Database=teslalogger;Uid=root;Password=teslalogger;CharSet=utf8mb4;";
-            }
-            else
-            {
-                DBConnectionstring = ApplicationSettings.Default.DBConnectionstring;
             }
 
             if (DBConnectionstring.ToLower(Tools.ciEnUS).Contains("charset="))
@@ -87,18 +88,16 @@ namespace TeslaLogger
             Database = dBConnectionStringBuilder["database"].ToString();
             User = dBConnectionStringBuilder["uid"].ToString();
             Password = dBConnectionStringBuilder["password"].ToString();
-            if (obfuscate && DBConnectionstring.ToLower(Tools.ciEnUS).Contains("password="))
-            {
-                Match m = Regex.Match(DBConnectionstring.ToLower(Tools.ciEnUS), "password=(.+?);");
-                if (m.Success && m.Groups.Count == 2 && m.Groups[1].Captures.Count == 1)
-                {
-                    return DBConnectionstring.ToLower(Tools.ciEnUS).Replace(string.Concat("password=", m.Groups[1].Captures[0].ToString()), string.Concat("password=", Tools.ObfuscateString(m.Groups[1].Captures[0].ToString())));
-                }
-            }
             _DBConnectionstring = DBConnectionstring;
-            return _DBConnectionstring;
+            return obfuscate ? GetConnectionDescription(_DBConnectionstring) : _DBConnectionstring;
         }
 
+        private static string GetConnectionDescription(string connectionString)
+        {
+            var builder = new MySqlConnectionStringBuilder(connectionString);
+            // Only log connection metadata; omit passwords and other sensitive options.
+            return $"Server={builder.Server};Port={builder.Port};Database={builder.Database};Uid={builder.UserID};Password=***;CharSet={builder.CharacterSet};";
+        }
         internal DBHelper(Car car)
         {
             this.car = car;

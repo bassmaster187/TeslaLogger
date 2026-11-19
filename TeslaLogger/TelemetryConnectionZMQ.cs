@@ -157,7 +157,7 @@ namespace TeslaLogger
             try
             {
                 var zmqsubscriber = new SubscriberSocket();
-                zmqsubscriber.Connect(ApplicationSettings.Default.TelemetryServerURL);
+                zmqsubscriber.Connect(TelemetrySettings.TelemetryServerURL);
                 zmqsubscriber.Subscribe("");
 
                 zmq = zmqsubscriber;
