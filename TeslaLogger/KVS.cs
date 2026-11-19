@@ -40,7 +40,7 @@ CREATE TABLE kvs(
 ) ENGINE = InnoDB CHARSET = utf8mb4 COLLATE utf8mb4_unicode_ci;");
                     Logfile.Log("CREATE TABLE OK");
                 }
-                if (DBHelper.ColumnExists("kvs", "longvalue"))
+                if (!DBHelper.ColumnExists("kvs", "longvalue"))
                 {
                     Logfile.Log("ALTER TABLE kvs ADD longvalue BIGINT NULL");
                     UpdateTeslalogger.AssertAlterDB();
@@ -500,7 +500,7 @@ DELETE FROM
 WHERE
     id = @key", con))
                     {
-                        cmd.Parameters.AddWithValue("@id", key);
+                        cmd.Parameters.AddWithValue("@key", key);
                         int rowsAffected = SQLTracer.TraceNQ(cmd, out _);
                         if (rowsAffected == 1) // DELETE
                         {

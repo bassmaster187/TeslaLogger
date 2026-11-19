@@ -54,15 +54,17 @@ namespace TeslaLogger
             _ = sb.Append($"TeslaLogger process statistics{Environment.NewLine}");
             try
             {
-                var tcount = System.Diagnostics.Process.GetCurrentProcess().Threads.Count;
+                using (Process proc = Process.GetCurrentProcess())
+                {
+                    var tcount = proc.Threads.Count;
 
-                Process proc = Process.GetCurrentProcess();
-                _ = sb.Append($"Thread count:        {tcount,12}{Environment.NewLine}");
-                _ = sb.Append($"WorkingSet64:        {proc.WorkingSet64,12}{Environment.NewLine}");
-                _ = sb.Append($"PeakWorkingSet64:    {proc.PeakWorkingSet64,12}{Environment.NewLine}");
-                _ = sb.Append($"PrivateMemorySize64: {proc.PrivateMemorySize64,12}{Environment.NewLine}");
-                _ = sb.Append($"VirtualMemorySize64: {proc.VirtualMemorySize64,12}{Environment.NewLine}");
-                _ = sb.Append($"StartTime: {proc.StartTime}{Environment.NewLine}");
+                    _ = sb.Append($"Thread count:        {tcount,12}{Environment.NewLine}");
+                    _ = sb.Append($"WorkingSet64:        {proc.WorkingSet64,12}{Environment.NewLine}");
+                    _ = sb.Append($"PeakWorkingSet64:    {proc.PeakWorkingSet64,12}{Environment.NewLine}");
+                    _ = sb.Append($"PrivateMemorySize64: {proc.PrivateMemorySize64,12}{Environment.NewLine}");
+                    _ = sb.Append($"VirtualMemorySize64: {proc.VirtualMemorySize64,12}{Environment.NewLine}");
+                    _ = sb.Append($"StartTime: {proc.StartTime}{Environment.NewLine}");
+                }
                 _ = sb.Append($"Database sizes: DB {DBHelper.Database}{Environment.NewLine}");
                 using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
                 {

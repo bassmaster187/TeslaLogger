@@ -14,7 +14,7 @@ namespace TeslaLogger
 
         internal static MySqlDataReader TraceDR(MySqlCommand cmd, [CallerFilePath] string callerFilePath = null, [CallerLineNumber] int callerLineNumber = 0)
         {
-            string prefix = "(SQL" + ++ID + ") ";
+            string prefix = "(SQL" + Interlocked.Increment(ref ID) + ") ";
             if (Program.SQLTRACE == false)
             {
                 return cmd.ExecuteReader();
@@ -47,7 +47,7 @@ namespace TeslaLogger
 
         internal static int TraceNQ(MySqlCommand cmd, out long lastInsertedId, [CallerFilePath] string callerFilePath = null, [CallerLineNumber] int callerLineNumber = 0)
         {
-            string prefix = "(SQL" + ++ID + ") ";
+            string prefix = "(SQL" + Interlocked.Increment(ref ID) + ") ";
             if (Program.SQLTRACE == false)
             {
                 int rowsAffected = cmd.ExecuteNonQuery();
@@ -83,7 +83,7 @@ namespace TeslaLogger
 
         internal static object TraceSc(MySqlCommand cmd, [CallerFilePath] string callerFilePath = null, [CallerLineNumber] int callerLineNumber = 0)
         {
-            string prefix = "(SQL" + ++ID + ") ";
+            string prefix = "(SQL" + Interlocked.Increment(ref ID) + ") ";
             if (Program.SQLTRACE == false)
             {
                 return cmd.ExecuteScalar();
@@ -116,7 +116,7 @@ namespace TeslaLogger
 
         internal static int TraceDA(DataTable dt, MySqlDataAdapter da, [CallerFilePath] string callerFilePath = null, [CallerLineNumber] int callerLineNumber = 0)
         {
-            string prefix = "(SQL" + ++ID + ") ";
+            string prefix = "(SQL" + Interlocked.Increment(ref ID) + ") ";
             if (Program.SQLTRACE == false)
             {
                 return da.Fill(dt);
@@ -150,7 +150,8 @@ namespace TeslaLogger
 
         private static void Analyze(MySqlCommand cmd, string prefix, TimeSpan ts)
         {
-            if (cmd.CommandText.Trim().ToUpper(Tools.ciEnUS).Substring(0, 12).Contains("SELECT"))
+            string commandText = cmd.CommandText.Trim().ToUpper(Tools.ciEnUS);
+            if (commandText.Substring(0, Math.Min(12, commandText.Length)).Contains("SELECT"))
             {
                 using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
                 {

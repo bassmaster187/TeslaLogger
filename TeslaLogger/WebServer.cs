@@ -158,6 +158,9 @@ namespace TeslaLogger
                 response.SendChunked = false;
                 response.ContentType = System.Net.Mime.MediaTypeNames.Application.Octet;
                 response.AddHeader("Content-disposition", "attachment; filename=" + filename);
+                // status must be set before the first write, headers are sent with the first write
+                response.StatusCode = (int)HttpStatusCode.OK;
+                response.StatusDescription = "OK";
 
                 byte[] buffer = new byte[64 * 1024];
                 int read;
@@ -172,8 +175,6 @@ namespace TeslaLogger
                     bw.Close();
                 }
 
-                response.StatusCode = (int)HttpStatusCode.OK;
-                response.StatusDescription = "OK";
                 response.OutputStream.Close();
             }
         }
@@ -181,11 +182,10 @@ namespace TeslaLogger
         private void OnContext(object o)
         {
             string localpath = "";
+            HttpListenerContext context = o as HttpListenerContext;
 
             try
             {
-                HttpListenerContext context = o as HttpListenerContext;
-
                 HttpListenerRequest request = context.Request;
                 HttpListenerResponse response = context.Response;
 
@@ -477,6 +477,27 @@ namespace TeslaLogger
             {
                 ex.ToExceptionless().FirstCarUserID().Submit();
                 Logfile.Log($"WebServer Exception Localpath: {localpath}\r\n" + ex.ToString());
+
+                // make sure the client does not hang forever waiting for a response
+                try
+                {
+                    if (context != null)
+                    {
+                        try
+                        {
+                            context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+                        }
+                        catch (Exception)
+                        {
+                            // headers already sent
+                        }
+                        context.Response.Close();
+                    }
+                }
+                catch (Exception)
+                {
+                    // response already closed
+                }
             }
         }
 
@@ -504,7 +525,7 @@ namespace TeslaLogger
             byte[] buffer = encoding.GetBytes(tokenSeparator);
 
 
-            using (FileStream fs = new FileStream(path, FileMode.Open))
+            using (FileStream fs = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
             {
                 Int64 tokenCount = 0;
                 Int64 endPosition = fs.Length / sizeOfChar;
@@ -595,6 +616,7 @@ namespace TeslaLogger
             {
                 response.StatusCode = (int)HttpStatusCode.Forbidden;
                 WriteString(response, @"Forbidden!");
+                return;
             }
 
             string p = FileManager.GetFilePath(filename);
@@ -654,8 +676,9 @@ namespace TeslaLogger
             var u = request.Url;
             string filename = u.Segments[2].ToString();
 
-            bool allowedFiles = (filename.StartsWith("language-") && filename.EndsWith(".txt"))
-                || allowed_getfiles.Contains(filename);
+            bool allowedFiles = ((filename.StartsWith("language-") && filename.EndsWith(".txt"))
+                || allowed_getfiles.Contains(filename))
+                && !filename.Contains("..") && filename.IndexOfAny(new char[] { '/', '\\' }) < 0;
 
             System.Diagnostics.Debug.WriteLine("Webserver getfile: " + filename);
 
@@ -663,6 +686,7 @@ namespace TeslaLogger
             {
                 response.StatusCode = (int)HttpStatusCode.Forbidden;
                 WriteString(response, @"Forbidden!");
+                return;
             }
 
             string p = FileManager.GetFilePath(filename);
@@ -788,6 +812,7 @@ WHERE
                         {
                             Logfile.Log($"Get_CarValueVIN: state not found: GetState({name})");
                             WriteString(response, $"state {name} not found, was the car {CarID} awake since the last TeslaLogger restart or Car Thread restart?");
+                            return;
                         }
                     }
                     else
@@ -1912,10 +1937,10 @@ DROP TABLE chargingstate_bak";
                         switch (key)
                         {
                             case "lat":
-                                _ = double.TryParse(request.QueryString.GetValues(key)[0], out lat);
+                                _ = double.TryParse(request.QueryString.GetValues(key)[0], System.Globalization.NumberStyles.Float, Tools.ciEnUS, out lat);
                                 break;
                             case "lng":
-                                _ = double.TryParse(request.QueryString.GetValues(key)[0], out lng);
+                                _ = double.TryParse(request.QueryString.GetValues(key)[0], System.Globalization.NumberStyles.Float, Tools.ciEnUS, out lng);
                                 break;
                             case "carID":
                                 _ = int.TryParse(request.QueryString.GetValues(key)[0], out CarID);
@@ -1945,6 +1970,8 @@ DROP TABLE chargingstate_bak";
                     Logfile.Log(ex.ToString());
                 }
             }
+            // finally close response
+            WriteString(response, "");
         }
 
         private static void MQTT_Set(HttpListenerRequest request, HttpListenerResponse response)
@@ -2064,6 +2091,15 @@ DROP TABLE chargingstate_bak";
                 {
                     ex.ToExceptionless().FirstCarUserID().Submit();
                     Logfile.Log(ex.ToString());
+                    try
+                    {
+                        // finally close response
+                        response.Close();
+                    }
+                    catch (Exception)
+                    {
+                        // ignore
+                    }
                 }
             }
             else
@@ -2340,7 +2376,7 @@ DROP TABLE chargingstate_bak";
                                         string alt = "";
                                         if (double.TryParse(dr[3].ToString(), out double altitude))
                                         {
-                                            alt = $"<ele>{altitude}</ele>";
+                                            alt = $"<ele>{altitude.ToString(Tools.ciEnUS)}</ele>";
                                         }
                                         string name = "";
                                         if (dr[4] != null && dr[4] != DBNull.Value)
@@ -2537,6 +2573,7 @@ DROP TABLE chargingstate_bak";
                     {
                         response.StatusCode = (int)HttpStatusCode.NotFound;
                         WriteString(response, "Car not found");
+                        return;
                     }
 
                     c.webhelper.lastUpdateEfficiency = DateTime.Now.AddDays(-1);
@@ -3551,10 +3588,10 @@ FROM
                         switch (key)
                         {
                             case "lat":
-                                _ = double.TryParse(request.QueryString.GetValues(key)[0], out lat);
+                                _ = double.TryParse(request.QueryString.GetValues(key)[0], System.Globalization.NumberStyles.Float, Tools.ciEnUS, out lat);
                                 break;
                             case "lng":
-                                _ = double.TryParse(request.QueryString.GetValues(key)[0], out lng);
+                                _ = double.TryParse(request.QueryString.GetValues(key)[0], System.Globalization.NumberStyles.Float, Tools.ciEnUS, out lng);
                                 break;
                             default:
                                 break;
