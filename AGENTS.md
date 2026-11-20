@@ -21,10 +21,10 @@
 
 ## Tests
 
-- **Project**: `UnitTestsTeslalogger\UnitTestsTeslaloggerNET8.csproj` (MSTest + NUnit + Selenium).
+- **Project**: `UnitTestsTeslalogger\UnitTestsTeslaloggerNET8.csproj` (MSTest + NUnit + Playwright).
 - **Run all**: `dotnet test UnitTestsTeslalogger\UnitTestsTeslaloggerNET8.csproj`
 - **CI filter**: `--filter "UnitTestsGeocode|UnitTestGrafana|UnitTestBase|UnitTestTelemetryParser|UnitTestCO2"` (some tests need DB).
-- **Selenium tests**: `SeleniumTests.cs` — requires Chrome browser.
+- **Playwright UI tests**: `PlaywrightGeofencingTests.cs`, `PlaywrightFatalErrorTests.cs` — require Chrome (`PLAYWRIGHT_HEADLESS=1` for headless) and a running Teslalogger (Admin `http://localhost:8888/admin/`, API `http://localhost:5010/`, override with `TESLALOGGER_ADMIN_URL` / `TESLALOGGER_API_URL`). They report `Inconclusive` when the app is unreachable. Screenshots: `TestResults/PlaywrightScreenshots/`. Admin panel protected by a password: set `TESLALOGGER_ADMIN_USER` / `TESLALOGGER_ADMIN_PASSWORD`.
 - **Caution**: Tests may modify local data. Back up before running.
 
 ## Project Structure

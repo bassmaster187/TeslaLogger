@@ -16,6 +16,7 @@ Feel free to add tests for your contribution or any other. Make sure you have ba
 
 You can start the tests with the Test-Explorer. 
 
-For automated UI tests Selenium and Selenium Chrome Driver is used. You need to install latest Chrome Browser.
-https://www.youtube.com/watch?v=hIYyDMiWXkw
+For automated UI tests Playwright (`Microsoft.Playwright.MSTest`) is used. You need to install latest Chrome Browser.
+The UI tests need a running Teslalogger (Admin panel `http://localhost:8888/admin/`, API `http://localhost:5010/`) and are skipped (Inconclusive) if it is not reachable.
+Use `PLAYWRIGHT_HEADLESS=1` to run them without a visible browser, screenshots are written to `TestResults/PlaywrightScreenshots`.
 

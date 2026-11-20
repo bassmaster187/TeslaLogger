@@ -1,4 +1,4 @@
-﻿# Testfile for Selenium
+# Testfile for Playwright UI tests
 Ladestation Bauhaus Ulm,48.400892,9.970095,20,+charger+ccp+scl:100+esm:DR->P
 Ladestation Norma Ulm, 48.393805, 9.964026,, +esm
 Burger King BC, 48.116966, 9.805445,, +esm

@@ -134,3 +134,4 @@ TeslaLogger/delete-REDIRECTDOCKERTOHOST.cmd
 /UnitTestsTeslalogger/.vs
 /TeslaLogger/bin/Debug/net8.0
 /.playwright-mcp
+/TestResults/PlaywrightScreenshots
