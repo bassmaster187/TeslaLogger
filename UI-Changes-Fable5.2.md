@@ -45,7 +45,7 @@ Inhalt:
 - **Fahrzeuginformationen:** Kilometerstand, Fahrzeug-Version, Software-Update, letztes Update, Teslalogger-Version und die ScanMyTesla-Werte als Liste.
 - **Letzte Fahrt:** Distanz, Dauer, Verbrauch, Ø Verbrauch und Höchstgeschwindigkeit als Kennzahlen, der Startzeitpunkt steht in der Kopfzeile.
 - **Aktuelle Position:** Karte in einer eigenen Karte mit Schalter „Fahrzeug folgen".
-- **Block von teslalogger.de:** steht in einer eigenen Karte, inhaltlich unverändert.
+- **Block von teslalogger.de:** steht in einer eigenen Karte, inhaltlich unverändert. Seine Überschriften, Listen und Tabellen verwenden dieselben Farben wie die anderen Karten: Überschriften wie Kartentitel, Beschriftungen gedämpft, Fettdruck in der Schriftstärke der Werte.
 
 Ab 900 px Breite liegen Fahrzeuginformationen und letzte Fahrt links, die Karte rechts daneben. Darunter stehen alle Karten untereinander in der Reihenfolge Status, Fahrzeuginformationen, letzte Fahrt, Karte.
 

@@ -513,30 +513,108 @@ body {
 	text-transform: none;
 }
 
-/* Remote block from teslalogger.de ---------------------------------------- */
+/* Remote block from teslalogger.de ----------------------------------------
+ *
+ * The block arrives as plain HTML with its own headings, lists and tables.
+ * Without rules of its own the theme styles them: 26px bold headings in full
+ * text colour, which is much brighter and heavier than the card titles above.
+ * Everything in here uses the same tokens as the cards.
+ */
 
 .tl-remote {
+	color: var(--tl-text);
 	display: flow-root;
 	margin-top: var(--tl-gap);
 }
 
+/* same look as .tl-card-title, the first one doubles as the card title */
 .tl-remote h1 {
 	clear: both;
-	font-size: 20px;
-	line-height: 1.3;
-	margin: 24px 0 8px;
+	color: var(--tl-muted);
+	font-size: 13px;
+	font-weight: 600;
+	letter-spacing: 0.06em;
+	line-height: 1.4;
+	margin: 28px 0 10px;
+	text-transform: uppercase;
+}
+
+.tl-remote h2,
+.tl-remote h3 {
+	clear: both;
+	color: var(--tl-muted);
+	font-size: 13px;
+	font-weight: 600;
+	letter-spacing: 0.06em;
+	line-height: 1.4;
+	margin: 20px 0 8px;
+	text-transform: uppercase;
 }
 
 .tl-remote h1:first-child {
 	margin-top: 0;
 }
 
+/* the theme uses 700, the cards use 600 for values */
+.tl-remote b,
+.tl-remote strong {
+	font-weight: 600;
+}
+
+.tl-remote p {
+	margin: 0 0 12px;
+}
+
+.tl-remote p:last-child {
+	margin-bottom: 0;
+}
+
+.tl-remote ul,
+.tl-remote ol {
+	margin: 0 0 12px;
+	padding-left: 22px;
+}
+
+.tl-remote li {
+	margin: 2px 0;
+}
+
 .tl-remote img {
 	max-width: 100%;
+	vertical-align: middle;	/* removes the gap the theme leaves under images */
+}
+
+/* light images on a dark card get an edge so they look intentional */
+.tl-remote img[src*="batteriezertifikat"],
+.tl-remote .battery-cert-image img {
+	border: 1px solid var(--tl-border);
+	border-radius: 8px;
+}
+
+/* the preview is a flex neighbour of the text, it must not touch it */
+.tl-remote .battery-cert-image {
+	margin-left: 20px;
 }
 
 .tl-remote table {
 	max-width: 100%;
+}
+
+.tl-remote td {
+	font-variant-numeric: tabular-nums;
+	padding: 4px 16px 4px 0;
+}
+
+/* the first column is a label, like the dt of the details list */
+.tl-remote td:first-child {
+	color: var(--tl-muted);
+	white-space: nowrap;
+}
+
+.tl-remote td:first-child b,
+.tl-remote td:first-child strong {
+	color: inherit;
+	font-weight: 400;
 }
 
 /* Breakpoints -------------------------------------------------------------- */
