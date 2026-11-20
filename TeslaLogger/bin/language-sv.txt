@@ -532,7 +532,10 @@ Delete=
 Are you sure you want to delete this geofencing location?=
 Error=
 Deleted!=
-Meter=
+Meter=metr
+Center=Centrum
+Active flags=Aktiva flaggor
+Click the map or drag the circle to set the position.=Klicka på kartan eller dra cirkeln för att ställa in positionen.
 
 #adminpanelpassword.php
 Please enter password!=

@@ -547,6 +547,9 @@ Are you sure you want to delete this geofencing location?="Delete this geofencin
 Error=Error
 Deleted!=Deleted!
 Meter=Meter
+Center=Center
+Active flags=Active flags
+Click the map or drag the circle to set the position.=Click the map or drag the circle to set the position.
 
 #adminpanelpassword.php
 Please enter password!=Please enter password!

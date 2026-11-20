@@ -532,6 +532,9 @@ Are you sure you want to delete this geofencing location?="இந்த சி�
 Error="பிழை"
 Deleted!="நீக்கப்பட்டது!"
 Meter="அளவி"
+Center=மையப்புள்ளி
+Active flags=செயலில் உள்ள கொடிகள்
+Click the map or drag the circle to set the position.=நிலையை அமைக்க வரைபடத்தில் சொடுக்கவும் அல்லது வட்டத்தை இழுக்கவும்.
 
 #adminpanelpassword.php
 Please enter password!="கடவுச்சொல்லை உள்ளிடவும்!"

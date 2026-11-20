@@ -463,6 +463,9 @@ Are you sure you want to delete this geofencing location?="Вы уверены, 
 Error=Ошибка
 Deleted!=Удалено!
 Meter=Метр
+Center=Центр
+Active flags=Активные флаги
+Click the map or drag the circle to set the position.=Нажмите на карту или перетащите круг, чтобы задать позицию.
 
 #journeys.php
 Journeys=Путешествия

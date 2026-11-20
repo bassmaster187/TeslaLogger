@@ -237,6 +237,9 @@ Are you sure you want to delete this geofencing location?="Diesen Geofencing-Sta
 Error=Fehler
 Deleted!=Gelöscht!
 Meter=Meter
+Center=Mittelpunkt
+Active flags=Aktive Flags
+Click the map or drag the circle to set the position.=Klicke auf die Karte oder ziehe den Kreis, um die Position zu setzen.
 
 #chargingcost.php
 Charging Costs=Ladekosten

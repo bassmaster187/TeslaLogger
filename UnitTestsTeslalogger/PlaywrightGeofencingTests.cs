@@ -220,8 +220,20 @@ namespace UnitTestsTeslalogger
             Assert.IsTrue(response.Ok, "geoadd_write.php failed with status " + response.Status);
 
             Regex regex = new Regex("Saved|Gespeichert", RegexOptions.IgnoreCase);
-            string alert = await WaitForAlertMessageAsync(regex);
-            Assert.IsNotNull(alert, "no save confirmation");
+            string message = await WaitForConfirmationAsync(regex);
+            Assert.IsNotNull(message, "no save confirmation");
+        }
+
+        private async Task<string> WaitForConfirmationAsync(Regex regex)
+        {
+            // save() confirms with the .tl-geo-toast banner, delete() and the old
+            // versions used a dialog; the toast is removed by the following navigation
+            string toast = await page.EvaluateAsync<string>(
+                "() => { var t = document.querySelector('.tl-geo-toast:not(.inactive)'); return t ? t.textContent : ''; }");
+            if (regex.IsMatch(toast))
+                return toast;
+
+            return await WaitForAlertMessageAsync(regex);
         }
 
         private async Task<string> WaitForAlertMessageAsync(Regex regex)

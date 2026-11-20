@@ -10,7 +10,7 @@ require_once("language.php");
 	<link rel="stylesheet" href="static/jquery/ui/1.12.1/themes/smoothness/jquery-ui.css">
 	<link rel="stylesheet" href="static/teslalogger_style.css?v=5">
 	<link rel="stylesheet" href="static/teslalogger_ui.css?v=17">
-	<link rel="stylesheet" href="static/teslalogger_geofencing.css?v=5">
+	<link rel="stylesheet" href="static/teslalogger_geofencing.css?v=9">
 	<link rel="stylesheet" href="static/leaflet/1.4.0/leaflet.css" />
 	<link rel="stylesheet" href="static/leaflet/1.4.0/MarkerCluster.css" />
    	<link rel="stylesheet" href="static/leaflet/1.4.0/MarkerCluster.Default.css" />

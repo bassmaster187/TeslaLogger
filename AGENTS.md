@@ -27,6 +27,15 @@
 - **Playwright UI tests**: `PlaywrightGeofencingTests.cs`, `PlaywrightFatalErrorTests.cs` — require Chrome (`PLAYWRIGHT_HEADLESS=1` for headless) and a running Teslalogger (Admin `http://localhost:8888/admin/`, API `http://localhost:5010/`, override with `TESLALOGGER_ADMIN_URL` / `TESLALOGGER_API_URL`). They report `Inconclusive` when the app is unreachable. Screenshots: `TestResults/PlaywrightScreenshots/`. Admin panel protected by a password: set `TESLALOGGER_ADMIN_USER` / `TESLALOGGER_ADMIN_PASSWORD`.
 - **Caution**: Tests may modify local data. Back up before running.
 
+## Translations
+
+- **ALWAYS translate a new or changed text into every language.** When a `t("...")` string is added or changed in an admin page, add the key to **all 15 files** `TeslaLogger/bin/language-*.txt` (cn, da, de, en, es, fr, it, nl, no, pl, pt, ru, sv, ta, tr) with a real translation in that language. Never leave the value empty, never reuse the English or German text as a placeholder, and never rely on the English fallback — the fallback only covers keys that genuinely do not exist in a file, not missing translations.
+- The key is always the **English source text** exactly as written in `t("...")`; the part after `=` is the translation. `language-en.txt` repeats the key as its value.
+- Insert the line inside the section comment of the page that uses it (e.g. `#geoadd.php`), keep the file's existing position order, and do not reformat anything else: these files are UTF-8 **with BOM** and CRLF — a whole-file rewrite that drops the BOM or the CRLF shows up as a diff of the complete file.
+- Values containing a leading/trailing space must be quoted (`Key="Value"`), embedded quotes are written as `"_QQ_"`. The parser is `explode("=")` on the first `=`, so keys must not contain `=`.
+- Verify after editing: each language file must return the new key, e.g. `Select-String -Path TeslaLogger\bin\language-*.txt -Pattern '^New key='` — 15 hits expected.
+- The running webserver container serves `/tmp/language-*.txt`, so `docker cp` the changed files into `teslalogger-webserver:/tmp/` to preview them without a rebuild.
+
 ## Project Structure
 
 | Directory | Purpose |

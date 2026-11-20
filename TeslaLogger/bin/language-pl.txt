@@ -504,7 +504,10 @@ Delete=
 Are you sure you want to delete this geofencing location?=
 Error=
 Deleted!=
-Meter=
+Meter=metr
+Center=Środek
+Active flags=Aktywne flagi
+Click the map or drag the circle to set the position.=Kliknij mapę lub przeciągnij okrąg, aby ustawić pozycję.
 
 #adminpanelpassword.php
 Please enter password!=

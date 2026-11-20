@@ -427,6 +427,9 @@ Are you sure you want to delete this geofencing location?="Er du sikker på, at 
 Error=Fejl
 Deleted!=Slettet!
 Meter=Meter
+Center=Centrum
+Active flags=Aktive flags
+Click the map or drag the circle to set the position.=Klik på kortet eller træk cirklen for at indstille positionen.
 
 #journeys.php
 Journeys=Rejser

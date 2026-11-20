@@ -453,6 +453,9 @@ Are you sure you want to delete this geofencing location?="Êtes-vous sûr de vo
 Error=Erreur
 Deleted!=Supprimé !
 Meter=Mètre
+Center=Centre
+Active flags=Drapeaux actifs
+Click the map or drag the circle to set the position.=Cliquez sur la carte ou faites glisser le cercle pour définir la position.
 
 #journeys.php
 Ladezeit [h]=Temps de recharge [h]

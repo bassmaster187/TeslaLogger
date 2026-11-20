@@ -532,6 +532,9 @@ Are you sure you want to delete this geofencing location?="Bu coğrafi sınırla
 Error="Hata"
 Deleted!="Silindi!"
 Meter="Metre"
+Center=Merkez
+Active flags=Etkin bayraklar
+Click the map or drag the circle to set the position.=Konumu ayarlamak için haritaya tıklayın veya çemberi sürükleyin.
 
 #adminpanelpassword.php
 Please enter password!="Lütfen şifreyi girin!"

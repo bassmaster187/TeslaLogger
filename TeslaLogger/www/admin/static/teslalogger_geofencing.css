@@ -1,13 +1,13 @@
 /*
  * teslalogger_geofencing.css
  *
- * Loaded only by geofencing.php (see the <link> tag in the PHP file), after
- * teslalogger_ui.css (tokens and basic components) and after
+ * Loaded by geofencing.php and geoadd.php (see the <link> tag in the PHP
+ * files), after teslalogger_ui.css (tokens and basic components) and after
  * teslalogger_style.css (theme, header and menu).
  *
  * The page follows the browser setting (prefers-color-scheme).
  *
- * Bump the ?v= in the <link> tag of geofencing.php after changes.
+ * Bump the ?v= in the <link> tag of both PHP files after changes.
  */
 
 /* Page layout ----------------------------------------------------------------
@@ -20,8 +20,8 @@
 	gap: var(--tl-gap);
 }
 
-/* Layout: the location list on the left, the map on the right.
-   Stacks on narrow screens. */
+/* The two cards next to each other; the proportions differ per page (see
+   the :has() rules below). Stacks on narrow screens. */
 
 .tl-geo {
 	display: grid;
@@ -29,9 +29,61 @@
 	grid-template-columns: 1fr;
 }
 
-@media (min-width: 760px) {
-	.tl-geo {
+/* geoadd.php: on narrow screens the map comes first, the long form is
+   scrolled after it. Scoped to .tl-geo-form so the list page keeps its
+   markup order (list, then map). */
+.tl-geo:has(.tl-geo-form) > .tl-geo-form {
+	order: 2;
+}
+
+.tl-geo:has(.tl-geo-form) > .tl-geo-map {
+	order: 1;
+}
+
+@media (min-width: 860px) {
+	/* The editor: the map is the working area, the form only carries a few
+	   fields. The 400px keep the form usable on smaller screens; below
+	   860px both cards stack, there is no room for both minimums. */
+	.tl-geo:has(.tl-geo-form) {
+		grid-template-columns: minmax(0, 2fr) minmax(400px, 1fr);
+	}
+
+	/* The list page keeps its original proportions (list, then a wide map) */
+	.tl-geo:has(.tl-geo-list) {
 		grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+	}
+
+	.tl-geo > .tl-geo-form,
+	.tl-geo > .tl-geo-map {
+		order: 0;
+	}
+
+	/* Only the editor places the map explicitly: on the list page the cards
+	   follow the markup order (list left, map right). */
+	.tl-geo:has(.tl-geo-form) > .tl-geo-map {
+		grid-column: 1;
+	}
+
+	.tl-geo:has(.tl-geo-form) > .tl-geo-form {
+		grid-column: 2;
+	}
+
+	/* The form is long: keep the map in view while it is scrolled. Only
+	   geoadd.php sets .tl-geo-sticky, the list page keeps the old behaviour. */
+	.tl-geo-map.tl-geo-sticky {
+		align-self: start;
+		position: sticky;
+		top: var(--tl-gap);
+	}
+}
+
+/* geoadd.php gets a wider page than the other admin pages (1260px in
+   teslalogger_ui.css), so the map can use a big screen. The list page and
+   every other page keep the normal width. */
+
+@media (min-width: 1300px) {
+	.tl-page:has(.tl-geo-form) {
+		max-width: 1560px;
 	}
 }
 
@@ -113,8 +165,32 @@
 	overflow: auto;
 }
 
+/* Description and radius sit side by side as soon as the (now narrow)
+   form card is wide enough: a container query, not a media query, because
+   the card width no longer follows the viewport width. */
+
+.tl-geo-form {
+	container-type: inline-size;
+}
+
+.tl-geo-fields {
+	display: grid;
+	gap: 12px 16px;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+@container (max-width: 560px) {
+	.tl-geo-fields {
+		grid-template-columns: 1fr;
+	}
+}
+
 .tl-geo-field {
 	margin-bottom: 12px;
+}
+
+.tl-geo-fields .tl-geo-field {
+	margin-bottom: 0;
 }
 
 .tl-geo-field label {
@@ -128,63 +204,210 @@
 	width: 100%;
 }
 
+/* Sections inside the form card: one divider, one uppercase title each.
+   The first section keeps the card title without a divider. */
+
 .tl-geo-flag-group {
-	margin-top: 16px;
+	margin: 16px 0 0;
+	padding-top: 16px;
+}
+
+.tl-geo-flag-group + .tl-geo-flag-group {
+	border-top: 1px solid var(--tl-border);
 }
 
 .tl-geo-flag-group-title {
 	color: var(--tl-muted);
 	font-size: 13px;
 	font-weight: 600;
+	letter-spacing: 0.06em;
 	margin: 0 0 8px;
 	text-transform: uppercase;
 }
 
-.tl-geo-checkbox {
-	color: var(--tl-text);
-	cursor: pointer;
-	display: block;
-	font-size: 14px;
-	margin-bottom: 8px;
+/* Place type selector (Home / Work / Charger): icon + text, the selected
+   one is highlighted through :checked. A checkbox, not a radio, because
+   the geofencing code and the existing JavaScript treat them as flags. */
+
+.tl-geo-types {
+	display: grid;
+	gap: 6px;
+	grid-template-columns: repeat(auto-fit, minmax(92px, 1fr));
 }
 
-.tl-geo-checkbox input {
-	float: right;
-	margin: 0;
-}
-
-.tl-geo-row {
+.tl-geo-type {
 	align-items: center;
-	color: var(--tl-text);
+	border: 1px solid var(--tl-border);
+	border-radius: 8px;
+	cursor: pointer;
+	display: flex;
+	font-size: 13px;
+	gap: 6px;
+	justify-content: center;
+	padding: 8px 6px;
+	transition: border-color 120ms ease, background 120ms ease;
+	user-select: none;
+}
+
+.tl-geo-type:hover {
+	border-color: var(--tl-neutral-strong);
+}
+
+.tl-geo-type input {
+	clip-path: inset(50%);
+	height: 1px;
+	pointer-events: none;	/* the label is the click target */
+	margin: 0;
+	overflow: hidden;
+	position: absolute;
+	width: 1px;
+}
+
+.tl-geo-type:has(input:checked) {
+	background: var(--tl-accent-soft);
+	border-color: var(--tl-accent);
+	color: var(--tl-accent-strong);
+	font-weight: 600;
+}
+
+.tl-geo-type input:focus-visible + .tl-geo-type-text {
+	outline: 2px solid var(--tl-accent);
+	outline-offset: 2px;
+}
+
+/* A flag with its sub options: the switch on the first line, the options
+   indented under it so they clearly belong to the flag. */
+
+.tl-geo-flag {
+	margin-bottom: 12px;
+}
+
+.tl-geo-flag:last-child {
+	margin-bottom: 0;
+}
+
+.tl-geo-sub {
+	align-items: center;
+	color: var(--tl-muted);
 	display: flex;
 	flex-wrap: wrap;
 	font-size: 14px;
-	gap: 4px;
-	margin-bottom: 8px;
+	gap: 6px 8px;
+	margin: 6px 0 0 44px; /* the switch track is 36px wide + 8px gap */
 }
 
-.tl-geo-row input {
-	accent-color: var(--tl-accent);
+.tl-geo-sub input {
+	width: 70px;
+	min-width: 0;
+	text-align: right;
 }
 
-/* The action buttons keep the theme colours (green save, red delete) */
+.tl-geo-sub select {
+	min-width: 110px;
+}
+
+/* The raw flag string (saved in column 5 of geofence-private.csv) is not
+   shown as a disabled input but as readable badges. */
+
+#flag {
+	display: none;
+}
+
+.tl-geo-chips {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 6px;
+	min-height: 24px;
+}
+
+.tl-card-title.tl-geo-chips-title {
+	margin: 16px 0 8px;
+}
+
+.tl-geo-chip {
+	background: var(--tl-accent-soft);
+	border: 1px solid var(--tl-accent);
+	border-radius: 999px;
+	color: var(--tl-accent-strong);
+	display: inline-flex;
+	font-size: 12px;
+	font-weight: 600;
+	line-height: 1.4;
+	padding: 2px 10px;
+}
+
+/* Save left, delete at the far end (the theme colours the buttons) */
 
 .tl-geo-actions-btn {
+	align-items: center;
+	display: flex;
+	gap: 12px;
 	margin-top: 16px;
+}
+
+.tl-geo-actions-btn .redbutton {
+	margin-left: auto;
+}
+
+/* Green feedback instead of alert() before the page goes back */
+
+.tl-geo-toast {
+	background: var(--tl-accent-soft);
+	border: 1px solid var(--tl-accent);
+	border-radius: 8px;
+	color: var(--tl-accent-strong);
+	font-weight: 600;
+	left: 50%;
+	padding: 10px 16px;
+	position: fixed;
+	bottom: var(--tl-gap);
+	transform: translateX(-50%);
+	z-index: 1000;
+}
+
+.tl-geo-toast.inactive {
+	display: none;
+}
+
+/* Live readout under the map: centre and radius of the circle */
+
+.tl-geo-readout {
+	align-items: center;
+	border-top: 1px solid var(--tl-border);
+	color: var(--tl-muted);
+	display: flex;
+	flex-wrap: wrap;
+	font-size: 13px;
+	gap: 6px 16px;
+	justify-content: space-between;
+	padding: 10px 16px;
+}
+
+.tl-geo-readout strong {
+	color: var(--tl-text);
+	font-weight: 600;
+}
+
+.tl-geo-hint {
+	color: var(--tl-muted);
+	font-size: 13px;
+	margin: 8px 0 0;
 }
 
 /* Map -----------------------------------------------------------------------
  * The map is inside the card, like the start page "Current Pos" map.
+ * geoadd.php adds the readout bar (.tl-geo-readout) under the map.
  */
 
 /* Two classes so it beats the .tl-card padding (menu.php re-loads ui.css) */
 
 .tl-card.tl-geo-map {
+	overflow: hidden;	/* clips the readout bar to the card corners */
 	padding: 0;
 }
 
 .tl-geo-map #map {
-	border-radius: calc(var(--tl-radius) - 1px);
+	border-radius: calc(var(--tl-radius) - 1px) calc(var(--tl-radius) - 1px) 0 0;
 	height: 400px;
 	min-height: 400px;
 	z-index: 0;
@@ -193,6 +416,16 @@
 @media (min-width: 760px) {
 	.tl-geo-map #map {
 		height: 600px;
+		min-height: 600px;
+	}
+}
+
+/* geoadd.php: the map is the main area now, so it uses nearly the full
+   window height instead of a fixed 600px */
+
+@media (min-width: 900px) {
+	.tl-geo-map.tl-geo-sticky #map {
+		height: min(78vh, 900px);
 		min-height: 600px;
 	}
 }

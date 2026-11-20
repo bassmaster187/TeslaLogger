@@ -426,6 +426,9 @@ Are you sure you want to delete this geofencing location?="要删除这个地理
 Error=误差
 Deleted!="已删除!"
 Meter=公尺
+Center=中心点
+Active flags=活动标志
+Click the map or drag the circle to set the position.=点击地图或拖动圆圈以设置位置。
 
 #journeys.php
 Journeys=旅程

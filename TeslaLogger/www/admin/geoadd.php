@@ -57,7 +57,7 @@ if (isset($_REQUEST["id"]))
 	<link rel="stylesheet" href="static/jquery/ui/1.12.1/themes/smoothness/jquery-ui.css">
 	<link rel="stylesheet" href="static/teslalogger_style.css?v=5">
 	<link rel="stylesheet" href="static/teslalogger_ui.css?v=17">
-	<link rel="stylesheet" href="static/teslalogger_geofencing.css?v=3">
+	<link rel="stylesheet" href="static/teslalogger_geofencing.css?v=9">
 	<link rel="stylesheet" href="static/leaflet/1.4.0/leaflet.css" />
 	<link rel="stylesheet" href="static/leaflet/1.4.0/MarkerCluster.css" />
    	<link rel="stylesheet" href="static/leaflet/1.4.0/MarkerCluster.Default.css" />
@@ -109,13 +109,36 @@ if (isset($_REQUEST["id"]))
 				map.on('mousemove', function (e) {
 					map.dragging.disable();
 					circle.setLatLng(e.latlng);
+					UpdateReadout();
 				});
 			}
 		});
 		map.on('mouseup', function () {
 			map.removeEventListener('mousemove');
 			map.dragging.enable();
+			UpdateReadout();
 		});
+		// A click on the map moves the geofence to that position
+		map.on('click', function (e) {
+			circle.setLatLng(e.latlng);
+			UpdateReadout();
+		});
+		UpdateReadout();
+	}
+
+	// The bar under the map shows the current centre and radius of the circle
+	function UpdateReadout()
+	{
+		if (circle == null)
+			return;
+
+		var p = circle.getLatLng();
+		var coords = "&mdash;";
+		if (isFinite(p.lat) && isFinite(p.lng))
+			coords = p.lat.toFixed(6) + ", " + p.lng.toFixed(6);
+
+		$("#geo-readout-coords").text(coords);
+		$("#geo-readout-radius").text(Math.round(circle.getRadius()) + " m");
 	}
 
 	$(function() {
@@ -125,6 +148,7 @@ if (isset($_REQUEST["id"]))
 		$("#radius").on("change paste keyup", function() {
 			if (circle != null)
 				circle.setRadius($("#radius").val());
+			UpdateReadout();
 		});
 
 		<?PHP
@@ -216,9 +240,8 @@ if (isset($_REQUEST["id"]))
 				else
 					$("#occ_limit").val(e.substring(4));
 			}
-
-			OnSpecialFlagsChanged();
 		});
+		OnSpecialFlagsChanged();
 
 		// New geofence: start at the browser position, otherwise at the stored position.
 		// Create the map immediately at a fallback, then recenter when the location resolves.
@@ -232,6 +255,8 @@ if (isset($_REQUEST["id"]))
 			navigator.geolocation.getCurrentPosition(
 				function(pos) {
 					map.setView([pos.coords.latitude, pos.coords.longitude], 16);
+					circle.setLatLng([pos.coords.latitude, pos.coords.longitude]);
+					UpdateReadout();
 				},
 				function() {
 					// Fallback if the location is denied or unavailable: zoom in
@@ -318,17 +343,44 @@ if (isset($_REQUEST["id"]))
 			f += "+nosleep";
 
 		$("#flag").val(f);
+		UpdateFlagChips(f);
+	}
+
+	// Show the raw flag string as readable badges
+	function UpdateFlagChips(f)
+	{
+		var chips = [];
+		f.split("+").forEach(function(e) {
+			if (e.length == 0)
+				return;
+
+			var name = e.split(":")[0];
+			var text = name.charAt(0).toUpperCase() + name.slice(1);
+
+			var m = e.match(/^scl:(\d+)(:A)?$/);
+			if (m)
+				text = "SOC " + m[1] + "%" + (m[2] ? " \u00b7 A" : "");
+			else if (/^occ:\d+$/.test(e))
+				text = "SOC " + e.substring(4) + "%";
+
+			chips.push(text);
+		});
+
+		var html = "";
+		chips.forEach(function(c) {
+			html += '<span class="tl-geo-chip">' + c + '</span>';
+		});
+		$("#flagchips").html(html);
+	}
+
+	function Toast(message)
+	{
+		$("#geo-toast").text(message).removeClass("inactive");
 	}
 
 	function del()
 	{
 		if (confirm('Are you sure you want to delete this geofencing location?')) {
-			if (!$("#text").val())
-			{
-				alert("<?php t('Error'); ?>");
-				return;
-			}
-
 			$.post("geoadd_write.php",
 			{
 				delete: "yes",
@@ -337,7 +389,7 @@ if (isset($_REQUEST["id"]))
 					echo("id: $id");
 				?>
 			}).always(function() {
-				alert("<?php t('Deleted!'); ?>");
+				Toast("<?php t('Deleted!'); ?>");
 				location.href = document.referrer;
 			});
 		}
@@ -366,7 +418,7 @@ if (isset($_REQUEST["id"]))
 				echo("id: $id");
 			?>
 		}).always(function() {
-			alert("<?php t('Saved!'); ?>");
+			Toast("<?php t('Saved!'); ?>");
 			location.href = document.referrer;
 		});
 	}
@@ -386,97 +438,186 @@ if (isset($_REQUEST["id"]))
 		<a href="<?= $helpUrl ?>" target="_blank"><img src="img/icon-help-24.png" class="tl-help" /></a>
 	</div>
 	<div class="tl-geo">
+		<div class="tl-card tl-geo-map tl-geo-sticky">
+			<div id="map"></div>
+			<div class="tl-geo-readout">
+				<span><?php t("Center"); ?> <strong id="geo-readout-coords">&mdash;</strong></span>
+				<span><?php t("Radius"); ?> <strong id="geo-readout-radius">&mdash;</strong></span>
+			</div>
+		</div>
 		<div class="tl-card tl-geo-form">
 			<h2 class="tl-card-title"><?php t("Name & Position"); ?></h2>
-			<div class="tl-geo-field">
-				<label><?php t("Description"); ?></label>
-				<input id="text" value="<?= htmlspecialchars($poiname) ?>"/>
+			<div class="tl-geo-fields">
+				<div class="tl-geo-field">
+					<label for="text"><?php t("Description"); ?></label>
+					<input id="text" value="<?= htmlspecialchars($poiname) ?>"/>
+				</div>
+				<div class="tl-geo-field">
+					<label for="radius"><?php t("Radius"); ?></label>
+					<input id="radius" value="<?= intval($radius) ?>" type="number" min="5" max="5000" step="5"/>
+				</div>
 			</div>
-			<div class="tl-geo-field">
-				<label><?php t("Radius"); ?></label>
-				<input id="radius" value="<?= intval($radius) ?>" type="number"/>
+			<p class="tl-geo-hint"><?php t("Click the map or drag the circle to set the position."); ?></p>
+
+			<div class="tl-geo-flag-group">
+				<h3 class="tl-geo-flag-group-title"><?php t("Type"); ?></h3>
+				<div class="tl-geo-types">
+					<label class="tl-geo-type">
+						<input id="home" type="checkbox" value="home" />
+						<span class="tl-geo-type-text">&#127968; <?php t("Home"); ?></span>
+					</label>
+					<label class="tl-geo-type">
+						<input id="work" type="checkbox" value="work" />
+						<span class="tl-geo-type-text">&#128188; <?php t("Work"); ?></span>
+					</label>
+					<label class="tl-geo-type">
+						<input id="charger" type="checkbox" value="charger" />
+						<span class="tl-geo-type-text">&#128268; <?php t("Charger"); ?></span>
+					</label>
+				</div>
 			</div>
 
-			<h2 class="tl-card-title"><?php t("Special Flags"); ?></h2>
 			<div class="tl-geo-flag-group">
-				<h4 class="tl-geo-flag-group-title"><?php t("Type"); ?></h4>
-				<label class="tl-geo-checkbox">🏠 <?php t("Home"); ?> <input id="home" type="checkbox" value="home" /></label>
-				<label class="tl-geo-checkbox">💼 <?php t("Work"); ?> <input id="work" type="checkbox" value="work" /></label>
-				<label class="tl-geo-checkbox">🔌 <?php t("Charger"); ?> <input id="charger" type="checkbox" value="charger" name="type" /></label>
+				<h3 class="tl-geo-flag-group-title"><?php t("Charging"); ?></h3>
+				<div class="tl-geo-flag">
+					<label class="tl-switch">
+						<input id="ccp" type="checkbox" value="" />
+						<span class="tl-switch-track"></span>
+						<?php t("Copy Charging Costs"); ?>
+					</label>
+				</div>
+				<div class="tl-geo-flag">
+					<label class="tl-switch">
+						<input id="dnc" type="checkbox" value="" />
+						<span class="tl-switch-track"></span>
+						<?php t("Don't Combine Charging Sessions"); ?>
+					</label>
+				</div>
+				<div class="tl-geo-flag">
+					<label class="tl-switch">
+						<input id="scl" type="checkbox" value="" />
+						<span class="tl-switch-track"></span>
+						<?php t("Set Charge Limit"); ?>
+					</label>
+					<div class="tl-geo-sub">
+						<?php t("SOC"); ?>
+						<input id="scl_limit" placeholder="100" />%
+						<label class="tl-switch">
+							<input id="scl_soa" type="checkbox" value="" />
+							<span class="tl-switch-track"></span>
+							<?php t("Set on arrival"); ?>
+						</label>
+					</div>
+				</div>
+				<div class="tl-geo-flag">
+					<label class="tl-switch">
+						<input id="occ" type="checkbox" value="" />
+						<span class="tl-switch-track"></span>
+						<?php t("Set Charge Limit After Charging"); ?>
+					</label>
+					<div class="tl-geo-sub">
+						<?php t("SOC"); ?>
+						<input id="occ_limit" placeholder="75" />%
+					</div>
+				</div>
+				<div class="tl-geo-flag">
+					<label class="tl-switch">
+						<input id="ocp" type="checkbox" value="" />
+						<span class="tl-switch-track"></span>
+						<?php t("Open Charge Port"); ?>
+					</label>
+					<div class="tl-geo-sub">
+						<?php t("Gear"); ?>
+						<select id="ocp_gear">
+							<option value="DR->P"><?php t("D/R → P"); ?></option>
+							<option value="D->P"><?php t("D → P"); ?></option>
+							<option value="R->P"><?php t("R → P"); ?></option>
+						</select>
+					</div>
+				</div>
+				<div class="tl-geo-flag">
+					<label class="tl-switch">
+						<input id="hfl" type="checkbox" value="" />
+						<span class="tl-switch-track"></span>
+						<?php t("High Frequency Logging"); ?>
+					</label>
+					<div class="tl-geo-sub">
+						<?php t("Duration"); ?>
+						<input id="hfl_minutes" /><?php t("Minutes"); ?>
+						<input id="hfl_count" placeholder="100" /><?php t("Count"); ?>
+					</div>
+				</div>
 			</div>
+
 			<div class="tl-geo-flag-group">
-				<h4 class="tl-geo-flag-group-title"><?php t("Charging"); ?></h4>
-				<label class="tl-geo-checkbox"><?php t("Copy Charging Costs"); ?> <input id="ccp" type="checkbox" value="" name="type" /></label>
-				<label class="tl-geo-checkbox"><?php t("Don't Combine Charging Sessions"); ?> <input id="dnc" type="checkbox" value="" name="type" /></label>
-				<div class="tl-geo-row">
-					<label class="tl-geo-checkbox"><?php t("Set Charge Limit"); ?> <input id="scl" type="checkbox" value=""/></label>
-					<?php t("SOC"); ?> <input size="6" id="scl_limit" placeholder="100"/>%
-					<input id="scl_soa" type="checkbox" value=""/> <?php t("Set on arrival"); ?>
+				<h3 class="tl-geo-flag-group-title"><?php t("Special Features"); ?></h3>
+				<div class="tl-geo-flag">
+					<label class="tl-switch">
+						<input id="esm" type="checkbox" value="" />
+						<span class="tl-switch-track"></span>
+						<?php t("Enable Sentry Mode"); ?>
+					</label>
+					<div class="tl-geo-sub">
+						<?php t("Gear"); ?>
+						<select id="esm_gear">
+							<option value="DR->P"><?php t("D/R → P"); ?></option>
+							<option value="D->P"><?php t("D → P"); ?></option>
+							<option value="R->P"><?php t("R → P"); ?></option>
+						</select>
+					</div>
 				</div>
-				<div class="tl-geo-row">
-					<label class="tl-geo-checkbox"><?php t("Set Charge Limit After Charging"); ?> <input id="occ" type="checkbox" value=""/></label>
-					<?php t("SOC"); ?> <input size="6" id="occ_limit" placeholder="75"/>%
+				<div class="tl-geo-flag">
+					<label class="tl-switch">
+						<input id="dsm" type="checkbox" value="" />
+						<span class="tl-switch-track"></span>
+						<?php t("Disable Sentry Mode"); ?>
+					</label>
+					<div class="tl-geo-sub">
+						<?php t("Gear"); ?>
+						<select id="dsm_gear">
+							<option value="DR->P"><?php t("D/R → P"); ?></option>
+							<option value="D->P"><?php t("D → P"); ?></option>
+							<option value="R->P"><?php t("R → P"); ?></option>
+						</select>
+					</div>
 				</div>
-				<div class="tl-geo-row">
-					<label class="tl-geo-checkbox"><?php t("Open Charge Port"); ?> <input id="ocp" type="checkbox" value=""/></label>
-					<?php t("Gear"); ?>
-					<select id="ocp_gear">
-						<option value="DR->P"><?php t("D/R → P"); ?></option>
-						<option value="D->P"><?php t("D → P"); ?></option>
-						<option value="R->P"><?php t("R → P"); ?></option>
-					</select>
+				<div class="tl-geo-flag">
+					<label class="tl-switch">
+						<input id="cof" type="checkbox" value="" />
+						<span class="tl-switch-track"></span>
+						<?php t("Turn HVAC off"); ?>
+					</label>
+					<div class="tl-geo-sub">
+						<?php t("Gear"); ?>
+						<select id="cof_gear">
+							<option value="DR->P"><?php t("D/R → P"); ?></option>
+							<option value="D->P"><?php t("D → P"); ?></option>
+							<option value="R->P"><?php t("R → P"); ?></option>
+						</select>
+					</div>
 				</div>
-				<div class="tl-geo-row">
-					<label class="tl-geo-checkbox"><?php t("High Frequency Logging"); ?> <input id="hfl" type="checkbox" value=""/></label>
-					<?php t("Duration"); ?> <input size="6" id="hfl_minutes"/><?php t("Minutes"); ?>
-					<input size="6" id="hfl_count" placeholder="100"/><?php t("Count"); ?>
-				</div>
-			</div>
-			<div class="tl-geo-flag-group">
-				<h4 class="tl-geo-flag-group-title"><?php t("Special Features"); ?></h4>
-				<div class="tl-geo-row">
-					<label class="tl-geo-checkbox"><?php t("Enable Sentry Mode"); ?> <input id="esm" type="checkbox" value="" name="type" /></label>
-					<?php t("Gear"); ?>
-					<select id="esm_gear">
-						<option value="DR->P"><?php t("D/R → P"); ?></option>
-						<option value="D->P"><?php t("D → P"); ?></option>
-						<option value="R->P"><?php t("R → P"); ?></option>
-					</select>
-				</div>
-				<div class="tl-geo-row">
-					<label class="tl-geo-checkbox"><?php t("Disable Sentry Mode"); ?> <input id="dsm" type="checkbox" value="" name="type" /></label>
-					<?php t("Gear"); ?>
-					<select id="dsm_gear">
-						<option value="DR->P"><?php t("D/R → P"); ?></option>
-						<option value="D->P"><?php t("D → P"); ?></option>
-						<option value="R->P"><?php t("R → P"); ?></option>
-					</select>
-				</div>
-				<div class="tl-geo-row">
-					<label class="tl-geo-checkbox"><?php t("Turn HVAC off"); ?> <input id="cof" type="checkbox" value="" name="type" /></label>
-					<?php t("Gear"); ?>
-					<select id="cof_gear">
-						<option value="DR->P"><?php t("D/R → P"); ?></option>
-						<option value="D->P"><?php t("D → P"); ?></option>
-						<option value="R->P"><?php t("R → P"); ?></option>
-					</select>
-				</div>
-				<div class="tl-geo-row">
-					<label class="tl-geo-checkbox"><?php t("No sleep"); ?> <input id="nosleep" type="checkbox" value="" name="type" /></label>
+				<div class="tl-geo-flag">
+					<label class="tl-switch">
+						<input id="nosleep" type="checkbox" value="" />
+						<span class="tl-switch-track"></span>
+						<?php t("No sleep"); ?>
+					</label>
 				</div>
 			</div>
-			<input style="width:100%" id="flag" disabled/>
+
+			<h2 class="tl-card-title tl-geo-chips-title"><?php t("Active flags"); ?></h2>
+			<div class="tl-geo-chips" id="flagchips"></div>
+			<input id="flag" disabled/>
+
 			<div class="tl-actions tl-geo-actions-btn">
-				<button id="btn_save" onclick="save();"><?php t("Save"); ?></button>
+				<button id="btn_save" type="button" onclick="save();"><?php t("Save"); ?></button>
 				<?php if (!$isnew): ?>
-				<button id="btn_delete" onclick="del();" class="redbutton"><?php t("Delete"); ?></button>
+				<button id="btn_delete" type="button" onclick="del();" class="redbutton"><?php t("Delete"); ?></button>
 				<?php endif; ?>
 			</div>
 		</div>
-		<div class="tl-card tl-geo-map">
-			<div id="map"></div>
-		</div>
 	</div>
 </div>
+<div class="tl-geo-toast inactive" id="geo-toast"></div>
 </body>
 </html>

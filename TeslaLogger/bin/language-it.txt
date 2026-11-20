@@ -428,6 +428,9 @@ Are you sure you want to delete this geofencing location?="Volete eliminare ques
 Error=Errore
 Deleted!=Soppresso!
 Meter=Metri
+Center=Centro
+Active flags=Flag attivi
+Click the map or drag the circle to set the position.=Clicca sulla mappa o trascina il cerchio per impostare la posizione.
 
 #journeys.php
 Journeys=Viaggi

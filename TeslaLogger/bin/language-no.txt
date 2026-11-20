@@ -366,6 +366,9 @@ Are you sure you want to delete this geofencing location?="Slett denne geofencin
 Error=Feil
 Deleted!="Slettet"
 Meter="Meter"
+Center=Midtpunkt
+Active flags=Aktive flagg
+Click the map or drag the circle to set the position.=Klikk på kartet eller dra sirkelen for å sette posisjonen.
 
 #journeys.php
 Journeys=Reiser
