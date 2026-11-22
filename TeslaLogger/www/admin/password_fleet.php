@@ -246,7 +246,7 @@ $actual_link = str_replace("&", "%26", $actual_link);
 							<td width="25px">1.</td>
 							<td colspan="2"><?php t("PF_LOGOUT"); ?> <a href="https://www.tesla.com/teslaaccount/owner-xp/auth/logout?redirect=true&locale=en_US" target="_blank"><?php t("PF_LINK"); ?></a><br>
 							<?php t("PF_HELP"); ?>: <a href="https://www.youtube.com/watch?v=CjJPFdaAk44" target="_blank"><img src="https://teslalogger.de/youtube.svg" height="18px"></a><br>
-							<?php t("PF_PERMISSION"); ?>: <a href="https://github.com/bassmaster187/TeslaLogger/blob/master/docs/en/tesla-fleet-permission.md" target="_blank"><?php t("PF_LINK"); ?></a>
+							<?php t("PF_PERMISSION"); ?>: <a href="https://github.com/bassmaster187/TeslaLogger/blob/master/docs/en/installation/tesla-fleet-permission.md" target="_blank"><?php t("PF_LINK"); ?></a>
 							</td>
 							<td></td>
 						</tr>	

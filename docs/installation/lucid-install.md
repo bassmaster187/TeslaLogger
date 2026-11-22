@@ -6,6 +6,8 @@ slug: /lucid-install
 
 Der LucidLogger ist in den Teslalogger eingebettet und nutzt viele Komponenten und Funktionen mit. Derzeit ist nur eine Docker-Installation möglich; die Raspberry Images unterstützen den LucidLogger noch nicht.
 
+Unterstützte Modelle: Lucid Air und Lucid Gravity (Gravity seit Teslalogger 1.63.14). Modell und Ausstattungsvariante werden aus der VIN gelesen.
+
 ## Installation
 ```
 mkdir backup
