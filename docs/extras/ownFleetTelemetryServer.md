@@ -1,4 +1,4 @@
-# Run own fleet telemetry server
+# Eigenen Fleet-Telemetry-Server betreiben
 
-Discussion here:
+Diskussion dazu:
 https://github.com/bassmaster187/TeslaLogger/issues/1401

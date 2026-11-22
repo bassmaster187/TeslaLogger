@@ -1,11 +1,14 @@
+---
+sidebar_position: 8
+slug: /tesla-fleet-permission
+---
 # Which permissions are required and why?
 ## Vehicle Information
 This permission is mandatory for Teslalogger. It is used for get vehicle's location, SOC, charging speed etc...
 Teslalogger will not work at all without this authorization.
 
 ## Vehicle Commands
-This permission is optional. If you want to send commands with [geofence](https://github.com/bassmaster187/TeslaLogger/blob/master/TeslaLogger/Geofence.md) feature like turn on sentry mode on a specific address. You need this feature. 
-If you want to send commands to your car by Teslalogger's built in [REST API](https://github.com/bassmaster187/TeslaLogger/blob/master/TeslaLogger/WebServer.md) or Smart Home / MQTT.
+This permission is optional. You need it if you want to send commands to your car: with the [geofence](https://github.com/bassmaster187/TeslaLogger/blob/master/TeslaLogger/Geofence.md) feature (for example turn on sentry mode at a specific address), with Teslalogger's built-in [REST API](https://github.com/bassmaster187/TeslaLogger/blob/master/TeslaLogger/WebServer.md), or with Smart Home / MQTT.
 
 ## Profile Information
 This permission is currently not used at all. But there are feature request that may be using this feature. For instance sending an e-mail if we detect your Teslalogger stops working for any reason. 

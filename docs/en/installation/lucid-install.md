@@ -1,3 +1,7 @@
+---
+sidebar_position: 5
+slug: /lucid-install
+---
 # Lucid install (Beta)
 
 LucidLogger is enbedded into TeslaLogger and reuse many components and features. Right now only a docker installation is supported. Raspberry Images doesn't support the LucidLogger right now.

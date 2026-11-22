@@ -31,14 +31,14 @@ Mit dem Fleet Telemetry Server können wir mehr Daten vom Fahrzeug abrufen, z. B
 
 ![autopilot-stat](https://raw.githubusercontent.com/bassmaster187/TeslaLogger/master/img/autopilot-stat.jpeg)
 
-# Migration von alter API zur Fleet API
+## Migration von alter API zur Fleet API
 - Admin Panel
 - Settings
 - My Tesla Credentials
 - Edit
 - Tesla Fleet API (empfohlen)
 
-# Berechtigungen für Teslalogger widerrufen
+## Berechtigungen für Teslalogger widerrufen
 - Tesla Account öffnen
 - Profile Settings
 - Manage Third Party Apps
@@ -47,5 +47,5 @@ Mit dem Fleet Telemetry Server können wir mehr Daten vom Fahrzeug abrufen, z. B
 
 https://accounts.tesla.com/de_DE/account-settings/security?tab=tpty-apps
 
-# Virtuelle Schlüssel
+## Virtuelle Schlüssel
 Falls du vergessen hast, die virtuellen Schlüssel während der Einrichtung an dein Auto zu senden oder sie widerrufen hast, kannst du sie hier erneut senden: [LINK](https://www.tesla.com/_ak/teslalogger.de)

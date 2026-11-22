@@ -17,6 +17,7 @@ Der Einbau des OBD2-Adapters ist von Fahrzeug zu Fahrzeug leicht unterschiedlich
 
 Wer sich die Installation nicht selber zutraut, sollte unbedingt einen Tesla Bodyshop aufsuchen. Passende Adapter und Bezugsquellen werden auf der Homepage von «Scan My Tesla»  dokumentiert.
 Wie die Daten aus der App dann in die normalen Daten des Teslaloggers einfliessen lässt sich in den Dashboards zur Degradation («Nominal full pack», zu Ladevorgängen (insbesondere an Schnellladern, «Zelltemperatur», «Cell imbalance» etc) sowie in den üblichen «Trips» finden.
+Eigene Abfragen auf die Rohdaten der App (Tabelle `can`) sind unter [ScanMyTesla-Daten in eigenen Dashboards nutzen](/docs/extras/scanmytesla-dashboards) beschrieben.
 
 ## Funktioniert die Übertragung?
 
