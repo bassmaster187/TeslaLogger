@@ -316,7 +316,16 @@ Free for new signals: 100, 209-300, 332-399, 456-999 and 1001 and above. New IDs
 
 ## Signals evaluated by Teslalogger
 
-Only the signals below are handled specially by Teslalogger. All other IDs are only written to `can` and can be used in Grafana dashboards, for example with the queries described in [How to use ScanMyTesla data in own dashboards](../en/Use_ScanMyTesla_data_in_own_dashboards.md).
+Only the signals below are handled specially by Teslalogger. All other IDs are only written to the `can` table (`datum`, `id`, `val`, `CarID`) and can be used in own Grafana dashboards, for example with a query like the one the shipped dashboards use:
+
+```sql
+SELECT $__time(datum), val as 'Cell 1 [V]'
+FROM can
+WHERE $__timeFilter(datum) and carid=$Car and id = 101
+ORDER BY datum ASC
+```
+
+The user side of the integration is described in [ScanMyTesla](../faq/scanmytesla.md).
 
 | ID | Teslalogger field | Used for |
 |----|-------------------|----------|
