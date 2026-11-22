@@ -6,7 +6,7 @@ sidebar_position: 2
 
 ScanMyTesla ist eine Smartphone-App, die es ermöglicht, Daten aus dem Tesla auszulesen, die über die reguläre Tesla-App nicht verfügbar sind und daher auch für Teslalogger normalerweise nicht zugänglich sind.
 Hierfür muss ein sogenannter OBD2-Adapter im Fahrzeug eingebaut werden, der dann via Bluetooth mit der «SMT»-App gekoppelt wird. In einem zweiten Schritt kann nun die App so konfiguriert werden, dass sie die ausgewählten Live-Daten an die Teslalogger-Installation zuhause übermittelt und so die sowieso schon vorhandene Datensammlung mit weiteren Informationen wie beispielsweise der tatsächlich verfügbaren Batteriekapazität, der Batterietemperatur angereichert werden kann.
-Die Kopplung der App mit Teslalogger geschieht ähnlich wie schon vorher bei der Integration mit «A Better Routeplanner» mit einem eindeutigen Token. Das Token für SMT ist im Einstellungsdialog als «Tasker Token» zu finden. Hier muss dann auch der Haken bei «ScanMy Tesla-Integration» gesetzt werden. Der Wert für das Token muss dann in der App unter «Settings» - «Teslalogger» erfasst werden. Das sieht so aus:
+Die Kopplung der App mit Teslalogger geschieht ähnlich wie schon vorher bei der Integration mit «A Better Routeplanner» mit einem eindeutigen Token. Das Token für SMT ist im Einstellungsdialog als «Tasker Token» zu finden. Hier muss dann auch der Haken bei «ScanMyTesla-Integration» gesetzt werden, denn nur dann holt der Teslalogger die Daten vom Server ab. Der Wert für das Token muss dann in der App unter «Settings» - «Teslalogger» erfasst werden. Das sieht so aus:
 
 ![BILD](/img/smt-01.png)
 
@@ -17,3 +17,17 @@ Der Einbau des OBD2-Adapters ist von Fahrzeug zu Fahrzeug leicht unterschiedlich
 
 Wer sich die Installation nicht selber zutraut, sollte unbedingt einen Tesla Bodyshop aufsuchen. Passende Adapter und Bezugsquellen werden auf der Homepage von «Scan My Tesla»  dokumentiert.
 Wie die Daten aus der App dann in die normalen Daten des Teslaloggers einfliessen lässt sich in den Dashboards zur Degradation («Nominal full pack», zu Ladevorgängen (insbesondere an Schnellladern, «Zelltemperatur», «Cell imbalance» etc) sowie in den üblichen «Trips» finden.
+
+## Funktioniert die Übertragung?
+
+Im Einstellungsdialog steht «ScanMyTesla zuletzt empfangen». Steht dort ein sehr langer zurückliegender Wert oder gar nichts, hilft in dieser Reihenfolge die Prüfung:
+
+1. Ist der Haken «ScanMyTesla-Integration» gesetzt?
+2. Ist das in der App eingetragene Token identisch mit dem «Tasker Token»? Auch ein falsch abgeschriebenes Zeichen führt dazu, dass die Daten auf dem Server landen, aber nie abgeholt werden.
+3. Hat der Teslalogger die Fahrzeugliste von Tesla schon einmal erfolgreich abgerufen? Der Abruf der App-Daten startet erst danach.
+
+Die App sendet grundsätzlich nur Werte, die sich seit dem letzten Paket geändert haben. Lücken in den Kurven der Dashboards bedeuten also nicht, dass die Übertragung gestört ist – der zuletzt gemeldete Wert bleibt erhalten und wird in der Kurve fortgeführt.
+
+## Für App-Entwickler
+
+Wer eine eigene App (nicht nur ScanMyTesla) an Teslalogger anbinden möchte: Adresse, Paketformat, Zeitstempel, erlaubte Signal-IDs und die Grenzwerte der Sendefrequenz sind in der [Schnittstelle für App-Daten](../extras/scanmytesla-api.md) beschrieben.
