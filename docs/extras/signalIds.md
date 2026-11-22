@@ -1,158 +1,185 @@
 # Tesla Signal IDs Documentation
 
-This document lists all available Tesla vehicle signals and their corresponding ID numbers used in TeslaLogger. These IDs are used by ScanMyTesla and other external apps. 
+This document lists all available Tesla vehicle signals and their corresponding ID numbers used in TeslaLogger. These IDs are used by ScanMyTesla and other external apps.
+
+Every ID is stored unmodified in the `can` table (`datum`, `id`, `val`, `CarID`) and can be used in Grafana. How the packets are transferred to Teslalogger (endpoint, JSON format, rate limits) is described in [App data interface](scanmytesla-api.md).
 
 ## Table of Contents
+- [Units and conventions](#units-and-conventions)
 - [Battery & Cell Information](#battery--cell-information)
+- [12 V / 400 V Consumers](#12-v--400-v-consumers)
+- [Charging & Energy](#charging--energy)
+- [State of Charge & Range](#state-of-charge--range)
+- [DC-DC Converter](#dc-dc-converter)
 - [Thermal Management](#thermal-management)
 - [HVAC System](#hvac-system)
-- [Range & Energy](#range--energy)
+- [Louvers](#louvers)
 - [Individual Cell Voltages](#individual-cell-voltages)
 - [Individual Cell Temperatures](#individual-cell-temperatures)
 - [Powertrain & Motors](#powertrain--motors)
 - [Calculated Ah Capacity (CAC)](#calculated-ah-capacity-cac)
+- [Reserved ID ranges](#reserved-id-ranges)
+- [Signals evaluated by Teslalogger](#signals-evaluated-by-teslalogger)
+- [Notes](#notes)
 
 ---
 
+## Units and conventions
+
+The **Unit** column is the unit the app has to send. Teslalogger does not convert or scale anything, the value is written to the database exactly as received.
+
+- **Battery current (44) and battery power (43): positive = discharge (driving), negative = charging / recuperation.**
+- **Cell voltages are sent in V, not in mV** (IDs 5-7 and 101-208). The difference of cell voltages exists twice: ID 8 `Cell diff` in **V** and ID 27 `Cell imbalance` in **mV**. Teslalogger uses ID 27 for the cell imbalance shown in the web UI and in the dashboards.
+- **Signals that are not available should be omitted from the packet**, not sent as `0`. Values containing `NaN` or `Infinity` are dropped by Teslalogger. For Speed (442) the value `287.6` is treated as "signal not available".
+- Some signals differ between model lines (see the **Notes** column), for example ID 41/42: temperature in °C on Model S/X, heater power in W on Model 3/Y.
+- IDs that Teslalogger does not know are still stored and can be used in Grafana, but they do not appear in `/currentjson/{id}`, the web UI or the MCP server. See [Signals evaluated by Teslalogger](#signals-evaluated-by-teslalogger).
+
 ## Battery & Cell Information
 
-| Signal Name | ID | Notes |
-|-------------|-----|-------|
-| Cell temp min | 1 | Minimum cell temperature |
-| Cell temp avg | 2 | Average cell temperature |
-| Cell temp mid | 2 | M3 variant |
-| Cell temp max | 3 | Maximum cell temperature |
-| Cell temp diff | 4 | Temperature difference between cells |
-| Cell min | 5 | Minimum cell voltage |
-| Cell volt min | 5 | M3 variant |
-| Cell avg | 6 | Average cell voltage |
-| Cell volt mid | 6 | M3 variant |
-| Cell max | 7 | Maximum cell voltage |
-| Cell volt max | 7 | M3 variant |
-| Cell diff | 8 | Voltage difference between cells |
-| Battery voltage | 30 | Total battery pack voltage |
-| Battery heater temp | 31 | Battery heater temperature |
-| Battery power | 43 | Current battery power (10% diff threshold) |
-| Battery current | 44 | Current battery current (10% diff threshold) |
-| Battery inlet | 64 | Battery coolant inlet temperature |
-| Battery pump 1 | 67 | Battery pump 1 status/speed |
-| Battery pump 2 | 68 | Battery pump 2 status/speed |
-| Cell imbalance | 27 | Cell imbalance indicator |
-| Nominal full pack | 71 | Nominal full pack energy |
-| Nominal remaining | 72 | Nominal remaining energy |
-| Usable full pack | 73 | Usable full pack energy |
-| Expected remaining | 74 | Expected remaining energy |
-| Ideal remaining | 75 | Ideal remaining energy |
-| Usable remaining | 86 | Usable remaining energy |
-| Energy buffer | 87 | Energy buffer |
-| Battery flow | 445 | M3 battery coolant flow (10% diff threshold) |
+| Signal Name | ID | Unit | Notes |
+|-------------|-----|------|-------|
+| Cell temp min | 1 | °C | Minimum cell temperature |
+| Cell temp avg | 2 | °C | Average cell temperature |
+| Cell temp mid | 2 | °C | M3 variant |
+| Cell temp max | 3 | °C | Maximum cell temperature |
+| Cell temp diff | 4 | °C | Temperature difference between cells |
+| Cell min | 5 | V | Minimum cell voltage |
+| Cell volt min | 5 | V | M3 variant |
+| Cell avg | 6 | V | Average cell voltage |
+| Cell volt mid | 6 | V | M3 variant |
+| Cell max | 7 | V | Maximum cell voltage |
+| Cell volt max | 7 | V | M3 variant |
+| Cell diff | 8 | V | Voltage difference between cells (max − min). The same value in mV is ID 27 |
+| Battery voltage | 30 | V | Total battery pack voltage |
+| Battery heater temp | 31 | °C \* | Battery heater temperature |
+| Battery power | 43 | kW | Current battery power (10% diff threshold). Positive = discharge, negative = charge/regen |
+| Battery current | 44 | A | Current battery current (10% diff threshold). Positive = discharge, negative = charge/regen |
+| Battery inlet | 64 | °C | Battery coolant inlet temperature |
+| Battery pump 1 | 67 | % | Battery pump 1 status/speed |
+| Battery pump 2 | 68 | % | Battery pump 2 status/speed |
+| Cell imbalance | 27 | mV | Cell imbalance in mV (max − min), used by the Teslalogger web UI |
+| Nominal full pack | 71 | kWh | Nominal full pack energy |
+| Nominal remaining | 72 | kWh | Nominal remaining energy |
+| Usable full pack | 73 | kWh \* | Usable full pack energy |
+| Expected remaining | 74 | kWh | Expected remaining energy |
+| Ideal remaining | 75 | kWh | Ideal remaining energy |
+| Usable remaining | 86 | kWh | Usable remaining energy |
+| Energy buffer | 87 | kWh | Energy buffer |
+| Battery flow | 445 | l/min | M3 battery coolant flow (10% diff threshold) |
+
+## 12 V / 400 V Consumers
+
+| Signal Name | ID | Unit | Notes |
+|-------------|-----|------|-------|
+| 12v systems | 32 | W | Total 12 V consumer power, Model S/X (10% diff threshold) |
+| 400V systems | 39 | kW | Total 400 V consumer power, Model S/X |
 
 ## Charging & Energy
 
-| Signal Name | ID | Notes |
-|-------------|-----|-------|
-| AC Charge total | 9 | Total AC charging energy |
-| DC Charge total | 11 | Total DC charging energy |
-| Charge total | 13 | Total charging energy (AC + DC) |
-| Regen total | 16 | Total regenerated energy |
-| Discharge total | 20 | Total discharged energy |
-| BMS max charge | 28 | BMS maximum charge power |
-| Max charge power | 28 | M3 variant |
-| BMS max discharge | 29 | BMS maximum discharge power |
-| Max discharge power | 29 | M3 variant |
-| To charge complete | 79 | Energy needed to complete charge |
-| Discharge cycles | 76 | Number of discharge cycles |
-| Charge cycles | 88 | Number of charge cycles |
+| Signal Name | ID | Unit | Notes |
+|-------------|-----|------|-------|
+| AC Charge total | 9 | kWh | Total AC charging energy |
+| DC Charge total | 11 | kWh | Total DC charging energy |
+| Charge total | 13 | kWh | Total charging energy (AC + DC) |
+| Regen total | 16 | kWh | Total regenerated energy |
+| Discharge total | 20 | kWh | Total discharged energy |
+| BMS max charge | 28 | kW | BMS maximum charge power |
+| Max charge power | 28 | kW | M3 variant |
+| BMS max discharge | 29 | kW | BMS maximum discharge power |
+| Max discharge power | 29 | kW | M3 variant |
+| To charge complete | 79 | kWh | Energy needed to complete charge |
+| Discharge cycles | 76 | count | Number of discharge cycles |
+| Charge cycles | 88 | count | Number of charge cycles |
 
 ## State of Charge & Range
 
-| Signal Name | ID | Notes |
-|-------------|-----|-------|
-| SOC | 23 | State of Charge (actual) |
-| SOC UI | 24 | State of Charge (UI display) |
-| SOC Min | 25 | Minimum State of Charge |
-| Typical range | 40 | Typical range estimate |
-| Rated range | 65 | Rated range estimate |
-| Full typical range | 62 | Full typical range at 100% |
-| Full rated range | 63 | Full rated range at 100% |
-| Odometer | 26 | Current odometer reading |
-| Odometer(legacy) | 66 | Legacy odometer reading |
-| Odometer (legacy) | 89 | Alternative legacy odometer |
+| Signal Name | ID | Unit | Notes |
+|-------------|-----|------|-------|
+| SOC | 23 | % | State of Charge of the BMS, calculated as (nominal remaining − buffer) / (nominal full pack − buffer) × 100, with decimals |
+| SOC UI | 24 | % | State of Charge as displayed in the car, 0.1 % steps |
+| SOC Min | 25 | % | Minimum State of Charge |
+| Typical range | 40 | km | Typical range estimate |
+| Rated range | 65 | km | Rated range estimate |
+| Full typical range | 62 | km | Full typical range at 100% |
+| Full rated range | 63 | km | Full rated range at 100% |
+| Odometer | 26 | km | Current odometer reading |
+| Odometer(legacy) | 66 | km | Legacy odometer reading |
+| Odometer (legacy) | 89 | km | Alternative legacy odometer |
 
 ## DC-DC Converter
 
-| Signal Name | ID | Notes |
-|-------------|-----|-------|
-| DC-DC coolant inlet | 33 | DC-DC converter coolant inlet temp |
-| DC-DC current | 34 | DC-DC converter current (10% diff threshold) |
-| DC-DC efficiency | 35 | DC-DC converter efficiency (10% diff threshold) |
-| DC-DC output voltage | 36 | DC-DC output voltage |
-| DC-DC input power | 37 | DC-DC input power (10% diff threshold) |
-| DC-DC output power | 38 | DC-DC output power (10% diff threshold) |
+| Signal Name | ID | Unit | Notes |
+|-------------|-----|------|-------|
+| DC-DC coolant inlet | 33 | °C | DC-DC converter coolant inlet temp |
+| DC-DC current | 34 | A | DC-DC converter current (10% diff threshold) |
+| DC-DC efficiency | 35 | % | DC-DC converter efficiency (10% diff threshold) |
+| DC-DC output voltage | 36 | V | DC-DC output voltage (called "DC-DC voltage" in the app) |
+| DC-DC input power | 37 | W | DC-DC input power (10% diff threshold) |
+| DC-DC output power | 38 | W | DC-DC output power (10% diff threshold) |
 
 ## Thermal Management
 
-| Signal Name | ID | Notes |
-|-------------|-----|-------|
-| Heater L | 41 | Left heater power |
-| Heater left | 41 | M3 variant |
-| Heater R | 42 | Right heater power |
-| Heater right | 42 | M3 variant |
-| Radiator bypass | 69 | Radiator bypass valve position |
-| Refrigerant temp | 70 | Refrigerant temperature |
-| Powertrain pump | 78 | Powertrain pump status/speed |
-| Powertrain pump 2 | 90 | Powertrain pump 2 status/speed |
-| PT inlet | 80 | Powertrain coolant inlet temp |
-| Powertrain inlet | 80 | M3 variant |
-| PTC air heater | 81 | PTC air heater power |
-| Coolant heater | 82 | Coolant heater power |
-| Thermal controller 400V | 83 | MS thermal controller 400V |
-| Thermal controller | 84 | MS thermal controller |
-| Thermal controller 12V | 85 | MS thermal controller 12V |
-| Chiller bypass | 57 | Chiller bypass valve position |
-| Powertrain flow | 444 | M3 powertrain coolant flow (10% diff threshold) |
+| Signal Name | ID | Unit | Notes |
+|-------------|-----|------|-------|
+| Heater L | 41 | °C (S/X) / W (3/Y) | Left heater: outlet temperature on Model S/X, heater power on Model 3/Y |
+| Heater left | 41 | W | M3 variant |
+| Heater R | 42 | °C (S/X) / W (3/Y) | Right heater: outlet temperature on Model S/X, heater power on Model 3/Y |
+| Heater right | 42 | W | M3 variant |
+| Radiator bypass | 69 | % | Radiator bypass valve position |
+| Refrigerant temp | 70 | °C | Refrigerant temperature |
+| Powertrain pump | 78 | % | Powertrain pump status/speed |
+| Powertrain pump 2 | 90 | % | Powertrain pump 2 status/speed |
+| PT inlet | 80 | °C | Powertrain coolant inlet temp |
+| Powertrain inlet | 80 | °C | M3 variant |
+| PTC air heater | 81 | % | PTC air heater power |
+| Coolant heater | 82 | % | Coolant heater power |
+| Thermal controller 400V | 83 | kW | MS thermal controller 400V |
+| Thermal controller | 84 | kW | MS thermal controller |
+| Thermal controller 12V | 85 | kW | MS thermal controller 12V |
+| Chiller bypass | 57 | % | Chiller bypass valve position |
+| Powertrain flow | 444 | l/min | M3 powertrain coolant flow (10% diff threshold) |
 
 ## HVAC System
 
-| Signal Name | ID | Notes |
-|-------------|-----|-------|
-| HVAC on/off | 45 | HVAC system on/off status |
-| HVAC A/C | 46 | A/C compressor status |
-| HVAC fan speed | 47 | HVAC fan speed |
-| HVAC window | 48 | Window defrost status |
-| HVAC temp left | 49 | Left temperature setting |
-| HVAC temp right | 50 | Right temperature setting |
-| HVAC mid | 51 | Mid vent status |
-| HVAC floor | 52 | Floor vent status |
-| Mid vent L | 53 | Mid vent left position |
-| Floor vent L | 54 | Floor vent left position |
-| Mid vent R | 55 | Mid vent right position |
-| Floor vent R | 56 | Floor vent right position |
-| Inside temp | 58 | Interior temperature |
-| Outside temp filtered | 59 | Filtered outside temperature |
-| A/C air temp | 60 | A/C air temperature |
-| Outside temp | 61 | Outside temperature |
+| Signal Name | ID | Unit | Notes |
+|-------------|-----|------|-------|
+| HVAC on/off | 45 | 0 / 1 | HVAC system on/off status |
+| HVAC A/C | 46 | 0 / 1 | A/C compressor status |
+| HVAC fan speed | 47 | level | HVAC fan speed (blower level, not a physical unit) |
+| HVAC window | 48 | 0 / 1 | Window defrost status |
+| HVAC temp left | 49 | °C | Left temperature setting |
+| HVAC temp right | 50 | °C | Right temperature setting |
+| HVAC mid | 51 | 0 / 1 | Mid vent status |
+| HVAC floor | 52 | 0 / 1 | Floor vent status |
+| Mid vent L | 53 | °C | Mid vent left position |
+| Floor vent L | 54 | °C | Floor vent left position |
+| Mid vent R | 55 | °C | Mid vent right position |
+| Floor vent R | 56 | °C | Floor vent right position |
+| Inside temp | 58 | °C | Interior temperature |
+| Outside temp filtered | 59 | °C | Filtered outside temperature |
+| A/C air temp | 60 | °C | A/C air temperature |
+| Outside temp | 61 | °C | Outside temperature |
 
 ## Louvers
 
-| Signal Name | ID | Notes |
-|-------------|-----|-------|
-| Louver 1 | 91 | Louver 1 position |
-| Louver 2 | 92 | Louver 2 position |
-| Louver 3 | 93 | Louver 3 position |
-| Louver 4 | 94 | Louver 4 position |
-| Louver 5 | 95 | Louver 5 position |
-| Louver 6 | 96 | Louver 6 position |
-| Louver 7 | 97 | Louver 7 position |
-| Louver 8 | 98 | Louver 8 position |
+| Signal Name | ID | Unit | Notes |
+|-------------|-----|------|-------|
+| Louver 1 | 91 | % | Louver 1 position |
+| Louver 2 | 92 | % | Louver 2 position |
+| Louver 3 | 93 | % | Louver 3 position |
+| Louver 4 | 94 | % | Louver 4 position |
+| Louver 5 | 95 | % | Louver 5 position |
+| Louver 6 | 96 | % | Louver 6 position |
+| Louver 7 | 97 | % | Louver 7 position |
+| Louver 8 | 98 | % | Louver 8 position |
 
 ## Individual Cell Voltages
 
-Cell voltages are numbered from 1 to 108, with IDs starting at 101.
+Cell voltages are numbered from 1 to 108, with IDs starting at 101. The unit is **V** (not mV).
 
-| Signal Name | ID Range | Notes |
-|-------------|----------|-------|
-| Cell 1-108 voltage | 101-208 | Individual cell voltages (ID = 100 + cell number) |
+| Signal Name | ID Range | Unit | Notes |
+|-------------|----------|------|-------|
+| Cell 1-108 voltage | 101-208 | V | Individual cell voltages (ID = 100 + cell number) |
 
 ### Detailed Cell Voltage IDs
 
@@ -161,13 +188,15 @@ Cell voltages are numbered from 1 to 108, with IDs starting at 101.
 - ...
 - Cell 108 voltage: 208
 
+The cell voltage dashboards shipped with Teslalogger cover cells 1-99 (IDs 101-199). Older app versions only send cells 1-99.
+
 ## Individual Cell Temperatures
 
-Cell temperatures are numbered from 1 to 31, with IDs starting at 301.
+Cell temperatures are numbered from 1 to 31, with IDs starting at 301. The unit is **°C**.
 
-| Signal Name | ID Range | Notes |
-|-------------|----------|-------|
-| Cell 1-31 temp | 301-331 | Individual cell temperatures (ID = 300 + cell number) |
+| Signal Name | ID Range | Unit | Notes |
+|-------------|----------|------|-------|
+| Cell 1-31 temp | 301-331 | °C | Individual cell temperatures (ID = 300 + cell number) |
 
 ### Detailed Cell Temperature IDs
 
@@ -176,115 +205,172 @@ Cell temperatures are numbered from 1 to 31, with IDs starting at 301.
 - ...
 - Cell 31 temp: 331
 
+Older app versions address sensors up to 99 (IDs 301-399); IDs 332-399 are therefore no longer in use for cell temperatures.
+
 ## Powertrain & Motors
 
 ### Front Motor
 
-| Signal Name | ID | Notes |
-|-------------|-----|-------|
-| Fr torque measured | 400 | Front motor measured torque |
-| F torque | 400 | M3 variant |
-| Fr mech power | 405 | Front motor mechanical power |
-| F power | 405 | M3 variant |
-| Fr dissipation | 406 | Front motor power dissipation |
-| Fr input power | 407 | Front motor input power |
-| Fr mech power HP | 408 | Front motor power in HP |
-| Fr stator current | 409 | Front motor stator current |
-| Fr drive power max | 410 | Front motor max drive power |
-| Fr efficiency | 413 | Front motor efficiency |
-| Fr torque estimate | 424 | Front motor estimated torque |
-| Fr motor RPM | 433 | Front motor RPM |
-| F Stator temp | 443 | Front motor stator temperature (10% diff threshold) |
+| Signal Name | ID | Unit | Notes |
+|-------------|-----|------|-------|
+| Fr torque measured | 400 | Nm | Front motor measured torque |
+| F torque | 400 | Nm | M3 variant |
+| Fr mech power | 405 | kW | Front motor mechanical power |
+| F power | 405 | kW | M3 variant |
+| Fr dissipation | 406 | kW | Front motor power dissipation |
+| Fr input power | 407 | kW | Front motor input power |
+| Fr mech power HP | 408 | HP | Front motor power in HP |
+| Fr stator current | 409 | A | Front motor stator current |
+| Fr drive power max | 410 | kW | Front motor max drive power |
+| Fr efficiency | 413 | % | Front motor efficiency |
+| Fr torque estimate | 424 | Nm | Front motor estimated torque |
+| Fr motor RPM | 433 | RPM | Front motor RPM |
+| F Stator temp | 443 | °C | Front motor stator temperature (10% diff threshold) |
 
 ### Rear Motor
 
-| Signal Name | ID | Notes |
-|-------------|-----|-------|
-| Rr torque measured | 403 | Rear motor measured torque |
-| R torque | 403 | M3 variant |
-| Rr inverter 12V | 414 | Rear inverter 12V system |
-| Rr mech power | 415 | Rear motor mechanical power |
-| R power | 415 | M3 variant |
-| Rr dissipation | 416 | Rear motor power dissipation |
-| Rr input power | 417 | Rear motor input power |
-| Rr mech power HP | 419 | Rear motor power in HP |
-| Rr stator current | 420 | Rear motor stator current |
-| Rr regen power max | 421 | Rear motor max regen power |
-| Rr drive power max | 422 | Rear motor max drive power |
-| Rr efficiency | 423 | Rear motor efficiency |
-| Rr torque estimate | 425 | Rear motor estimated torque |
-| Rr coolant inlet | 427 | Rear motor coolant inlet temp |
-| Rr inverter PCB | 428 | Rear inverter PCB temperature |
-| Rr stator | 429 | Rear motor stator temperature |
-| R Stator temp | 429 | M3 variant |
-| Rr DC capacitor | 430 | Rear DC capacitor temperature |
-| Rr heat sink | 431 | Rear heat sink temperature |
-| Rr inverter | 432 | Rear inverter temperature |
-| Rr motor RPM | 434 | Rear motor RPM |
+| Signal Name | ID | Unit | Notes |
+|-------------|-----|------|-------|
+| Rr torque measured | 403 | Nm | Rear motor measured torque |
+| R torque | 403 | Nm | M3 variant |
+| Rr inverter 12V | 414 | V | Rear inverter 12V system |
+| Rr mech power | 415 | kW | Rear motor mechanical power |
+| R power | 415 | kW | M3 variant |
+| Rr dissipation | 416 | kW | Rear motor power dissipation |
+| Rr input power | 417 | kW | Rear motor input power |
+| Rr mech power HP | 419 | HP | Rear motor power in HP |
+| Rr stator current | 420 | A | Rear motor stator current |
+| Rr regen power max | 421 | kW | Rear motor max regen power |
+| Rr drive power max | 422 | kW | Rear motor max drive power |
+| Rr efficiency | 423 | % | Rear motor efficiency |
+| Rr torque estimate | 425 | Nm | Rear motor estimated torque |
+| Rr coolant inlet | 427 | °C | Rear motor coolant inlet temp |
+| Rr inverter PCB | 428 | °C | Rear inverter PCB temperature |
+| Rr stator | 429 | °C | Rear motor stator temperature |
+| R Stator temp | 429 | °C | M3 variant |
+| Rr DC capacitor | 430 | °C | Rear DC capacitor temperature |
+| Rr heat sink | 431 | °C | Rear heat sink temperature |
+| Rr inverter | 432 | °C | Rear inverter temperature |
+| Rr motor RPM | 434 | RPM | Rear motor RPM |
 
 ### Combined & Drive
 
-| Signal Name | ID | Notes |
-|-------------|-----|-------|
-| Rr/Fr torque bias | 401 | Torque distribution bias |
-| Mech power combined | 411 | Combined mechanical power |
-| HP combined | 412 | Combined power in HP |
-| Propulsion | 418 | Total propulsion power |
-| Consumption | 426 | Power consumption |
-| Series/Parallel | 77 | Series/Parallel configuration |
+| Signal Name | ID | Unit | Notes |
+|-------------|-----|------|-------|
+| Rr/Fr torque bias | 401 | % | Torque distribution bias |
+| Mech power combined | 411 | kW | Combined mechanical power |
+| HP combined | 412 | HP | Combined power in HP |
+| Propulsion | 418 | kW | Total propulsion power |
+| Consumption | 426 | Wh/km | Power consumption |
+| Series/Parallel | 77 | % | Series/Parallel configuration (Model S/X) |
 
 ### Driver Inputs & Vehicle Speed
 
-| Signal Name | ID | Notes |
-|-------------|-----|-------|
-| Watt pedal | 404 | Accelerator pedal position |
-| Accelerator Pedal | 404 | M3 variant |
-| Brake pedal | 435 | Brake pedal position |
-| Speed | 442 | Vehicle speed |
+| Signal Name | ID | Unit | Notes |
+|-------------|-----|------|-------|
+| Watt pedal | 404 | % | Accelerator pedal position |
+| Accelerator Pedal | 404 | % | M3 variant |
+| Brake pedal | 435 | % (S/X) / 0-1 (3/Y) | Brake pedal position |
+| Speed | 442 | km/h | Vehicle speed. 287.6 means "signal not available" and is stored as 0 by Teslalogger |
 
 ### Wheels & Drive Ratios
 
-| Signal Name | ID | Notes |
-|-------------|-----|-------|
-| Front left | 436 | Front left wheel speed |
-| Front right | 437 | Front right wheel speed |
-| Front drive ratio | 438 | Front drive ratio |
-| Rear left | 439 | Rear left wheel speed |
-| Rear right | 440 | Rear right wheel speed |
-| Rear drive ratio | 441 | Rear drive ratio |
+| Signal Name | ID | Unit | Notes |
+|-------------|-----|------|-------|
+| Front left | 436 | RPM | Front left wheel speed |
+| Front right | 437 | RPM | Front right wheel speed |
+| Front drive ratio | 438 | :1 | Front drive ratio |
+| Rear left | 439 | RPM | Rear left wheel speed |
+| Rear right | 440 | RPM | Rear right wheel speed |
+| Rear drive ratio | 441 | :1 | Rear drive ratio |
 
 ## Calculated Ah Capacity (CAC)
 
-| Signal Name | ID | Notes |
-|-------------|-----|-------|
-| CAC min | 450 | CAC minimum value |
-| CAC avg | 451 | CAC average value |
-| CAC max | 452 | CAC maximum value |
-| CAC imbalance | 453 | CAC imbalance |
-| CAC min brick id | 454 | CAC minimum brick ID |
-| CAC max brick id | 455 | CAC maximum brick ID |
+| Signal Name | ID | Unit | Notes |
+|-------------|-----|------|-------|
+| CAC min | 450 | Ah | CAC minimum value, 0.1 Ah resolution |
+| CAC avg | 451 | Ah | CAC average value, 0.1 Ah resolution |
+| CAC max | 452 | Ah | CAC maximum value, 0.1 Ah resolution |
+| CAC imbalance | 453 | Ah \* | CAC imbalance |
+| CAC min brick id | 454 | id | CAC minimum brick ID |
+| CAC max brick id | 455 | id | CAC maximum brick ID |
+
+Teslalogger does not evaluate IDs 450-455 yet, they are only stored in `can`. The exact definition of 453 (Ah difference between max and min, or a percentage) has to be agreed with the app author before the first release.
+
+---
+
+## Reserved ID ranges
+
+`can.id` is a signed `mediumint`, so the technical limit is 8 388 607. The following ranges are in use and must not be used for new signals:
+
+| Range | Meaning |
+|-------|---------|
+| 0 | "do not send" marker in the apps, never stored |
+| 1-99 | main signals (see tables above) |
+| 101-208 | cell voltages |
+| 301-331 | cell temperatures |
+| 400-455 | powertrain, wheels, CAC |
+| 1000 | reserved by Teslalogger, used internally for Lucid "Battery Health Level" (SOH) |
+
+Free for new signals: 100, 209-300, 332-399, 456-999 and 1001 and above. New IDs must be coordinated with the Teslalogger project before they are used, so that they do not collide with signals of other apps or of the fleet telemetry integration.
+
+## Signals evaluated by Teslalogger
+
+Only the signals below are handled specially by Teslalogger. All other IDs are only written to `can` and can be used in Grafana dashboards, for example with the queries described in [How to use ScanMyTesla data in own dashboards](../en/Use_ScanMyTesla_data_in_own_dashboards.md).
+
+| ID | Teslalogger field | Used for |
+|----|-------------------|----------|
+| 2 | `SMTCellTempAvg` | /currentjson, web UI |
+| 5 | `SMTCellMinV` | /currentjson |
+| 6 | `SMTCellAvgV` | /currentjson |
+| 7 | `SMTCellMaxV` | /currentjson |
+| 9 | `SMTACChargeTotal` | /currentjson |
+| 11 | `SMTDCChargeTotal` | /currentjson |
+| 27 | `SMTCellImbalance` | /currentjson, web UI ("Cell Imbalance" in mV) |
+| 28 | `SMTBMSmaxCharge` | /currentjson |
+| 29 | `SMTBMSmaxDischarge` | /currentjson |
+| 43 | `SMTBatteryPower` | internal: prevents the car from falling asleep while it is still driving (> 2 kW) |
+| 71 | `SMTNominalFullPack` | /currentjson |
+| 442 | `SMTSpeed` | internal: prevents the car from falling asleep, wakes the car up |
+
+The fields with a `/currentjson` entry are only published while the last packet was received less than 5 minutes ago.
 
 ---
 
 ## Notes
 
 ### Signal Value Changes
-Some signals are marked with a **10% difference threshold** (`diff10percent`). These signals only update when the value changes by more than 10%:
-- DC-DC current (34)
-- DC-DC efficiency (35)
-- DC-DC input power (37)
-- DC-DC output power (38)
-- Battery power (43)
-- Battery current (44)
-- F Stator temp (443)
-- Powertrain flow (444)
-- Battery flow (445)
+
+The change filter is implemented in the sending app, **not** on the Teslalogger server. The server stores every value it receives exactly once, without any threshold.
+
+ScanMyTesla sends a signal only when it differs from the last sent value:
+
+- by more than **1 %** by default,
+- by more than **10 %** for the signals below (`diff10percent`):
+  - 12v systems (32)
+  - DC-DC current (34)
+  - DC-DC efficiency (35)
+  - DC-DC input power (37)
+  - DC-DC output power (38)
+  - Battery power (43)
+  - Battery current (44)
+  - F Stator temp (443)
+  - Powertrain flow (444)
+  - Battery flow (445)
+- by more than a fixed **2 mV** (0.002 V) for the cell voltage IDs 100-200. IDs 201-208 are not covered by that rule in the current app and fall back to 1 %.
+
+A signal that does not change simply does not appear in the next packet, the previous value stays in the database and Grafana interpolates the gap.
+
+Because the primary key of the `can` table is `(datum, id)` with one second resolution, the same ID must not be sent twice in the same second — in that case the whole packet is rejected. See [App data interface](scanmytesla-api.md).
 
 ### Model Variations
 - **M3**: Model 3 specific signal names (often more descriptive)
 - **MS**: Model S specific signals
 - Some signals have multiple names for different Tesla models
 
+### Units marked with \*
+The unit of ID 31 (Battery heater temp), 73 (Usable full pack) and of the CAC block (450-455) could not be taken from the app sources available to us; it follows from the signal name and the neighbouring signals.
+
 ---
 
-*Last updated: December 2025*
+*Last updated: November 2026 — units, missing signals (32, 39), reserved ID ranges and the app-side change filter added.*
