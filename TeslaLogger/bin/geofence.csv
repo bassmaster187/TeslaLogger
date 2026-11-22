@@ -3317,8 +3317,10 @@ Supercharger-V4 IS-Keflavik,63.99698,-22.58424
 Supercharger-V3 IS-Kirkjubæjarklaustur,63.789025,-18.052187
 Supercharger-V4 IS-Laugarvatn Efstidalur II,64.2425,-20.55058
 Supercharger-V4 IS-Mosfellsbær,64.1662,-21.69558
+Supercharger-V4 IS-Snæfellsnes Vegamót,64.84935,-22.73342
 Supercharger-V3 IS-Staðarskáli,65.14233,-21.08518,10
 Supercharger-V3 IS-Staðarskáli,65.14475,-21.084813
+Supercharger-V4 IS-Stykkishólmur,65.07347,-22.72947
 Supercharger-V3 IS-Vatnagardar,64.14496,-21.854711
 Supercharger-V4 IS-Vestmannaeyjabær,63.44277,-20.27188
 Supercharger-V4 IS-Álfabakki,64.1046,-21.8613
@@ -3445,7 +3447,7 @@ Supercharger-V4 IT-Telgate,45.633205,9.852077
 Supercharger-V3 IT-Teramo,42.68275,13.7601
 Supercharger-V3 IT-Torino Grugliasco,45.058738,7.612634
 Supercharger-V3 IT-Torri di Quartesolo,45.50851,11.62614
-Supercharger IT-Trento,46.11166,11.09172
+Supercharger-V4 IT-Trento,46.11166,11.09172
 Supercharger-V4 IT-Udine,46.08703,13.179853
 Supercharger-V3 IT-Vado Ligure,44.265368,8.425217
 Supercharger-V3 IT-Valli di Carnia,46.3681,13.073
@@ -4222,7 +4224,7 @@ Supercharger-V4 SE-Håby,58.489523,11.621991
 Supercharger-V4 SE-Hörby,55.901133,13.730261
 Supercharger-V3 SE-Jokkmokk,66.60571,19.82498,30
 Supercharger SE-Jung,58.327603,13.132209
-Supercharger SE-Jäckvik,66.39067,16.964868
+Supercharger-V4 SE-Jäckvik,66.39067,16.96487
 Supercharger-V3 SE-Jönköping,57.772539,14.199845
 Supercharger-V4 SE-Kalmar,56.67323,16.3214
 Supercharger-V3 SE-Kalmar-Giraffen,56.671493,16.333901
@@ -4457,11 +4459,13 @@ Supercharger US-Oxford AL,33.61043,-85.7832
 Supercharger-V4 US-Pell City AL,33.6111,-86.27933
 Supercharger-V4 US-Prattville AL Hwy 31 N Lakh Enterprises,32.54747,-86.45698
 Supercharger-V3 US-Robertsdale AL,30.6336,-87.6756
+Supercharger-V4 US-Spanish Fort AL,30.66473,-87.85084
 Supercharger US-Steele AL,33.9328,-86.19177
 Supercharger-V4 US-Tuscaloosa AL,33.1939,-87.51906
 Supercharger-V4 US-Vance AL,33.1834,-87.2686
 
 Supercharger-V4 US-Alma AR,35.4845,-94.2241
+Supercharger-V4 US-Benton AR,34.5515,-92.6274
 Supercharger-V3 US-Brinkley AR,34.90497,-91.20002
 Supercharger-V3 US-Hope AR,33.68074,-93.6068
 Supercharger-V3 US-Jonesboro AR,35.79688,-90.73038
@@ -4572,6 +4576,7 @@ Supercharger-V4 US-Baldwin Park CA,34.07923,-117.98892
 Supercharger US-Barstow CA,34.84918,-117.0854
 Supercharger-V3 US-Barstow CA - East Virginia Way,34.88644,-117.0199
 Supercharger-V3 US-Barstow CA - Tanger Way,34.8446,-117.0857
+Supercharger-V4 US-Barstow CA 1540 E Main St,34.8917,-117.0017
 Supercharger-V4 US-Barstow CA East Main Street,34.89358,-117.0027
 Supercharger-V3 US-Beaumont CA,33.92267,-116.95204
 Supercharger-V3 US-Bell CA - 4416 Gage Avenue,33.9778,-118.18888
@@ -4626,6 +4631,7 @@ Supercharger-V4 US-Chula Vista CA N Broadway,32.6506,-117.0949
 Supercharger-V4 US-Chula Vista CA Proctor Valley Rd,32.66044,-116.96948
 Supercharger-V4 US-Citrus Heights CA,38.7092,-121.31373
 Supercharger-V3 US-City of Industry CA - Gale Avenue,33.99457,-117.90036
+Supercharger-V4 US-Cloverdale CA,38.80053,-123.01703
 Supercharger-V3 US-Clovis CA,36.83666,-119.69763
 Supercharger-V3 US-Coalinga CA,36.25412,-120.23762
 Supercharger-V4 US-Cold Springs CA,38.16208,-120.0563
@@ -4677,6 +4683,7 @@ Supercharger-V4 US-El Centro CA N Imperial Ave,32.81408,-115.5681
 Supercharger-V3 US-El Centro CA Wake Avenue,32.77315,-115.55033
 Supercharger US-El Cerrito CA,37.8987,-122.30065
 Supercharger-V3 US-El Dorado Hills CA,38.65638,-121.0708
+Supercharger-V4 US-El Dorado Hills CA Vine St,38.65283,-121.06236
 Supercharger-V4 US-El Monte CA,34.0918,-118.01388
 Supercharger-V3 US-El Portal CA,37.67932,-119.76272
 Supercharger-V3 US-Elk Grove CA - 7119 Elk Grove Blvd,38.40917,-121.41886
@@ -4827,6 +4834,7 @@ Supercharger US-Menifee CA,33.67964,-117.17375
 Supercharger US-Menlo Park CA,37.42394,-122.19852
 Supercharger-V3 US-Merced CA Martin Luther King Junior Way,37.2976,-120.48336
 Supercharger-V4 US-Mill Valley CA,37.8979,-122.51438
+Supercharger-V4 US-Millbrae CA,37.60264,-122.39162
 Supercharger US-Milpitas CA,37.43485,-121.8914
 Supercharger-V4 US-Milpitas CA Barber Ct,37.42158,-121.91706
 Supercharger-V4 US-Milpitas CA Barber Ln,37.4194,-121.91516
@@ -5131,6 +5139,7 @@ Supercharger-V3 US-Vacaville CA - Harbison Drive,38.36225,-121.96325
 Supercharger-V3 US-Vacaville CA Alamo Plaza,38.3472,-121.99913
 Supercharger-V3 US-Vacaville CA Browns Valley Marketplace,38.36553,-121.9682
 Supercharger-V4 US-Vacaville CA E Monte Vista Ave,38.37056,-121.95967
+Supercharger-V4 US-Vacaville CA Peabody Rd,38.353,-121.977
 Supercharger-V3 US-Valencia CA,34.4237,-118.58458
 Supercharger US-Vallejo CA,38.13115,-122.22316
 Supercharger-V4 US-Vallejo CA Plaza Dr,38.13314,-122.21863
@@ -6107,6 +6116,7 @@ Supercharger-V3 US-Columbia MO - West Broadway,38.95473,-92.38294
 Supercharger-V3 US-Columbia MO Clark Lane,38.9647,-92.2864
 Supercharger-V4 US-Columbia MO Interstate 70 Dr SE Little General,38.95723,-92.20157
 Supercharger-V3 US-Concordia MO,38.98976,-93.5666
+Supercharger-V4 US-Des Peres MO,38.6004,-90.4329
 Supercharger-V3 US-Fenton MO,38.54438,-90.4654
 Supercharger-V3 US-Hannibal MO,39.7182,-91.39213
 Supercharger US-Independence MO,39.04082,-94.36928
@@ -6284,6 +6294,7 @@ Supercharger-V3 US-Manchester NH,42.96133,-71.43915
 Supercharger-V4 US-Manchester NH S Willow St,42.9513,-71.4376
 Supercharger-V3 US-Meredith NH,43.6615,-71.49416
 Supercharger-V3 US-North Conway NH,44.0202,-71.11428
+Supercharger-V4 US-North Conway NH White Mountain Hwy,44.02498,-71.11715
 Supercharger-V4 US-Portsmouth NH,43.034,-70.77946
 Supercharger US-Rochester NH,43.31064,-70.99342
 Supercharger US-Seabrook NH,42.89534,-70.8693
@@ -6400,6 +6411,7 @@ Supercharger-V3 US-Saddle Brook NJ,40.8972,-74.09745
 Supercharger-V3 US-South River NJ,40.46148,-74.40114
 Supercharger US-South Toms River NJ,39.94164,-74.2127
 Supercharger-V3 US-Springfield NJ - Cleveland Place,40.71787,-74.3295
+Supercharger-V4 US-Stafford Township NJ,39.6882,-74.25033
 Supercharger-V3 US-Swedesboro NJ,39.7599,-75.36008
 Supercharger-V3 US-Teaneck NJ,40.87104,-74.00522
 Supercharger-V3 US-Tinton Falls NJ,40.22625,-74.09342
@@ -6525,6 +6537,7 @@ Supercharger US-Clinton Corners NY,41.82598,-73.77094
 Supercharger-V4 US-Commack NY,40.80612,-73.2905
 Supercharger-V3 US-Copiague NY,40.68888,-73.40644
 Supercharger-V3 US-Dansville NY,42.5633,-77.7121
+Supercharger-V4 US-Depew NY,42.91984,-78.73677
 Supercharger-V3 US-Dobbs Ferry NY,41.0038,-73.85617
 Supercharger-V3 US-East Hampton NY,40.96552,-72.18978
 Supercharger-V4 US-Elmira NY,42.1589,-76.86333
@@ -6596,6 +6609,7 @@ Supercharger-V4 US-Queens NY Springfield Blvd,40.68,-73.75382
 Supercharger US-Queensbury NY,43.32837,-73.68013
 Supercharger-V3 US-Red Hook NY,41.9792,-73.88294
 Supercharger-V3 US-Riverhead NY - Old Country Road,40.92372,-72.70374
+Supercharger-V4 US-Rochester NY,35.7806,-86.37402
 Supercharger US-Roscoe NY,41.93037,-74.9091
 Supercharger-V3 US-Roslyn Heights NY - Willis Avenue,40.77954,-73.64985
 Supercharger-V3 US-Rotterdam NY,42.79364,-74.00534
@@ -7263,6 +7277,7 @@ Supercharger-V4 US-Bealeton VA James Madison Hwy,38.62065,-77.80138
 Supercharger-V4 US-Bedford VA,37.33734,-79.55053
 Supercharger-V3 US-Bristol VA,36.62855,-82.14896
 Supercharger-V3 US-Bristol VA Euclid Ave,36.6019,-82.19144
+Supercharger-V4 US-Centreville VA,38.8274,-77.44064
 Supercharger US-Chantilly VA,38.9136,-77.48684
 Supercharger US-Charlottesville VA,38.06738,-78.49338
 Supercharger-V3 US-Charlottesville VA - Proffit Road,38.13245,-78.43488
@@ -7436,6 +7451,7 @@ Supercharger US-Seattle WA NW Ballard Way,47.66293,-122.37558
 Supercharger US-Sequim WA,48.07143,-123.07427
 Supercharger-V4 US-Shoreline WA,47.7558,-122.34353
 Supercharger-V4 US-Silverdale WA,47.65895,-122.69364
+Supercharger-V4 US-Snohomish WA Cathcart Crossing,47.8645,-122.11455
 Supercharger-V3 US-Spokane WA,47.59045,-117.56225
 Supercharger-V3 US-Sprague WA,47.20908,-118.2257
 Supercharger-V4 US-Tacoma WA,47.19006,-122.45985
@@ -7528,6 +7544,8 @@ Supercharger US-Rock Springs WY,41.5807,-109.26228
 Supercharger US-Sheridan WY,44.8043,-106.9559
 Supercharger-V4 US-Thermopolis WY,43.65102,-108.211
 Supercharger US-Wheatland WY,42.07245,-104.96308
+
+Supercharger-V4 US-Hamilton ON,43.21674,-79.86314
 
 Urbancharger US-Chicago IL North Broadway,41.93749,-87.64492
 Urbancharger US-Downey CA - Lakewood Boulevard,33.9535,-118.11281
@@ -7629,6 +7647,7 @@ Tesla Service Center SI-Ljubljana,46.06265,14.55886
 Tesla Service Center US-Dublin CA,37.70252,-121.92467
 Tesla Service Center US-Palo Alto,37.39429,-122.1506
 Tesla Service Center US-Raleigh NC,35.86326,-78.71514
+Tesla Service Center US-Saint Petersburg FL,27.81464,-82.67823
 Tesla Service Center US-Tulsa,36.07687,-95.83393
 
 1A-Ladetechnik DE-Friedberg (Hessen) Straßheimer Straße,50.32138,8.7395
@@ -8753,7 +8772,7 @@ Allego DE-Ratekau Rosenstraße,53.94855,10.73396
 Allego DE-Rauenberg Hohenaspen,49.27412,8.6971
 Allego DE-Ravensburg Goethestraße,47.77478,9.60406
 Allego DE-Recklinghausen Dordrechtring,51.60966,7.207
-Allego DE-Regensburg Junkersstraße,48.99544,12.15123,20
+Allego DE-Regensburg Junkersstraße,48.99544,12.15123,25
 Allego DE-Regensburg Nordgaustraße,49.02604,12.1144
 Allego DE-Rheda-Wiedenbrück Hauptstraße,51.83833,8.30082
 Allego DE-Rhede (Ems) Siemensstraße,53.067,7.24257
@@ -10819,6 +10838,7 @@ CircleK SE-Kiruna Industrivägen,67.84812,20.27537
 CircleK SE-Lund Magistratsvägen,55.72023,13.20381
 CircleK SE-Lycksele Umevägen,64.59021,18.69169
 CircleK SE-Nyköping Norrköpingsvägen,58.74967,16.986,15
+CircleK SE-Piteå Håkingevägen,65.41052,21.50684
 CircleK SE-Piteå Ringiusvägen,65.3102,21.4981
 CircleK SE-Sigtuna Cederströms Slinga,59.60648,17.89644
 CircleK SE-Skellefteå Kågevägen,64.75814,20.9659
@@ -20158,7 +20178,7 @@ EWE-GO DE-Forchheim Daimler Straße,49.69974,11.0648
 EWE-GO DE-Frankenberg Ruhrstraße,51.06063,8.7793
 EWE-GO DE-Frankenberg Siegener Straße,51.055,8.78854
 EWE-GO DE-Frankenthal (Pfalz) Wormser Straße,49.54593,8.35281
-EWE-GO DE-Frankfurt am Main Friedberger Landstraße,50.13768,8.69707
+EWE-GO DE-Frankfurt am Main Friedberger Landstraße,50.13735,8.6968
 EWE-GO DE-Fredenbeck Schwingestraße,53.52275,9.39834
 EWE-GO DE-Freiberg Häuersteig,50.89598,13.33225
 EWE-GO DE-Freiburg (Elbe) Bürgermeister-Schild-Platz,53.82493,9.28828
@@ -32584,7 +32604,6 @@ Zunder ES-Área de servicio Quintanilla Norte,42.0224,-5.8536
 
 Ísorka IS-Patreksfjörður Vatnsfirði,65.57604,-23.16874
 Ísorka IS-Reykjahlíð Hlíðarvegur,65.64152,-16.9107
-Ísorka IS-Stykkishólmur Borgarbraut,65.07335,-22.72929
 Ísorka IS-Suðurland Arnberg Sveitarfélagið,63.94378,-21.00855
 
 ÖAMTC AT-Bad Gleichenberg Grazer Straße,46.87896,15.89686
