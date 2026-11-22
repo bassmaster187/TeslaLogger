@@ -46,14 +46,15 @@ The answer is `ok` on success, otherwise an SQL error message. A packet is accep
 }
 ```
 
-- `d` — timestamp of the measurement. Recommended: ISO 8601 including UTC offset (or `Z`), which is what ScanMyTesla sends (the default JSON serialisation of a local `DateTime`). Teslalogger parses the value and converts it to the local time of the installation before writing it to the database, so the time zone of the phone does not have to match the car. Localised formats such as `22.11.2025 12:34` must not be used.
+- `d` — timestamp of the measurement. Recommended: ISO 8601 including UTC offset (or `Z`), which is what ScanMyTesla sends (the default JSON serialisation of a local `DateTime`). Teslalogger parses the value and converts it to the local time of the installation before writing it to the database, so the time zone of the phone does not have to match the car. Without an offset the value is read as if it were already the local time of the Teslalogger installation. Parsing is done with the culture of the installation, so localised formats such as `22.11.2025 12:34` must not be used — they are read wrongly or rejected.
+- `d` is also the value shown as "ScanMyTesla last received" in the settings page, and it is the timestamp written to the database (`can.datum`, resolution one second). The timestamp the queue stores on the server is ignored by Teslalogger.
 - `dict` — signal ID (as a string) → value (double). The IDs and units are listed in [Tesla Signal IDs Documentation](signalIds.md).
 
 Notes on the values:
 
 - Send the units listed in the signal documentation, Teslalogger does not convert anything.
 - Omit signals that are currently unavailable instead of sending `0`. Values containing `NaN` or `Infinity` are discarded by Teslalogger. For Speed (442) the value `287.6` is recognised as "signal not available".
-- Only signals that actually changed have to be sent — see "How often may an app send?" below.
+- Only signals that actually changed have to be sent — see [Change filter](#change-filter) below.
 
 ## Receiving side: queue and rate
 
@@ -66,8 +67,26 @@ select id, datum, message from tesla_scanmytesla where token = ? order by id lim
 - One Teslalogger installation downloads **one packet every 5 seconds**. If the queue was empty and the car is neither driving nor charging, it waits an additional 30 seconds before the next attempt.
 - The practical limit is therefore **1 packet per 5 seconds per token** (about 720 packets per hour). Sending faster builds up a backlog; rows older than one day are deleted by the cleanup job, so packets are lost and the database on the server grows.
 - If the packet is in the queue, it is deleted after the download. Retransmission has to be done by the app if it did not receive `ok`.
-- Under load the server answers with HTTP 503 or with the text `Resource Limit Is Reached`. Both the app and Teslalogger back off for about 25 seconds in that case.
+- Under load the server answers with HTTP 503 or with the text `Resource Limit Is Reached`. Teslalogger backs off for 25 seconds in that case, the app simply retries after 5 seconds.
 - The `message` column is `text`, so a packet should stay below 64 KB. A complete packet with all cell voltages and cell temperatures is about 2 KB.
+
+### Change filter
+
+Teslalogger stores every value exactly once, it does not filter anything, so the app has to reduce the amount of data itself. ScanMyTesla sends a signal only when it differs from the last sent value of the same signal:
+
+| Signals | Difference that triggers a new value |
+|---------|--------------------------------------|
+| all signals (default) | more than 1 % of the last value |
+| 32, 34, 35, 37, 38, 43, 44, 443, 444, 445 | more than 10 % of the last value |
+| 71 (Nominal full pack), 87 (Energy buffer) | fixed 0.1 kWh |
+| 72 (Nominal remaining), 74 (Expected remaining), 75 (Ideal remaining) | fixed 0.2 kWh |
+| 100-208 (cell voltages) | fixed 0.002 V (2 mV) |
+
+A signal that did not change is simply left out of the next packet, the old value stays in the database and the graphs continue from it. Signals that are currently not available are left out as well (`null` in the app), never sent as `0`.
+
+Within one packet each signal ID appears at most once, because the packet is a JSON object keyed by the signal ID.
+
+ScanMyTesla sends a packet about every five seconds while driving, and slows down on its own: up to 25 s longer while the car is charging or recuperating, up to 50 s longer while it is idling (`Battery power` < 0.2 kW and HVAC fan stopped).
 
 ### One value per second per signal
 

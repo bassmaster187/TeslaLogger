@@ -29,7 +29,7 @@ Every ID is stored unmodified in the `can` table (`datum`, `id`, `val`, `CarID`)
 The **Unit** column is the unit the app has to send. Teslalogger does not convert or scale anything, the value is written to the database exactly as received.
 
 - **Battery current (44) and battery power (43): positive = discharge (driving), negative = charging / recuperation.**
-- **Cell voltages are sent in V, not in mV** (IDs 5-7 and 101-208). The difference of cell voltages exists twice: ID 8 `Cell diff` in **V** and ID 27 `Cell imbalance` in **mV**. Teslalogger uses ID 27 for the cell imbalance shown in the web UI and in the dashboards.
+- **Cell voltages are sent in V, not in mV** (IDs 5-7 and 101-208). The difference of cell voltages exists twice: ID 8 `Cell diff` in **V** and ID 27 `Cell imbalance` in **mV**. Teslalogger uses ID 27 for the cell imbalance shown in the web UI and in the dashboards. ScanMyTesla reads the cells with a resolution of 0.1 mV on Model 3/Y (`value * 0.0001` V) and 0.305 mV on Model S/X, so three decimal places in the packet are enough.
 - **Signals that are not available should be omitted from the packet**, not sent as `0`. Values containing `NaN` or `Infinity` are dropped by Teslalogger. For Speed (442) the value `287.6` is treated as "signal not available".
 - Some signals differ between model lines (see the **Notes** column), for example ID 41/42: temperature in °C on Model S/X, heater power in W on Model 3/Y.
 - IDs that Teslalogger does not know are still stored and can be used in Grafana, but they do not appear in `/currentjson/{id}`, the web UI or the MCP server. See [Signals evaluated by Teslalogger](#signals-evaluated-by-teslalogger).
@@ -188,7 +188,7 @@ Cell voltages are numbered from 1 to 108, with IDs starting at 101. The unit is 
 - ...
 - Cell 108 voltage: 208
 
-The cell voltage dashboards shipped with Teslalogger cover cells 1-99 (IDs 101-199). Older app versions only send cells 1-99.
+The current ScanMyTesla (build 206) maps cells 1-108 to IDs 101-208. Only the cells that actually report a value are sent; how many that are depends on the pack, the app parses up to 108 cells on Model 3/Y and up to 96 on Model S/X. The cell voltage dashboards shipped with Teslalogger cover cells 1-99 (IDs 101-199); older app versions only send cells 1-99.
 
 ## Individual Cell Temperatures
 
@@ -196,7 +196,7 @@ Cell temperatures are numbered from 1 to 31, with IDs starting at 301. The unit 
 
 | Signal Name | ID Range | Unit | Notes |
 |-------------|----------|------|-------|
-| Cell 1-31 temp | 301-331 | °C | Individual cell temperatures (ID = 300 + cell number) |
+| Cell 1-31 temp | 301-331 | °C | Individual cell temperatures (ID = 300 + sensor number) |
 
 ### Detailed Cell Temperature IDs
 
@@ -205,7 +205,7 @@ Cell temperatures are numbered from 1 to 31, with IDs starting at 301. The unit 
 - ...
 - Cell 31 temp: 331
 
-Older app versions address sensors up to 99 (IDs 301-399); IDs 332-399 are therefore no longer in use for cell temperatures.
+The current ScanMyTesla reads these probes on Model S/X; on Model 3/Y build 206 only the aggregate values (IDs 1-3) are available, so a second app should not assume that 301-331 exist for every model. IDs 332-399 were addressed by older app versions and are no longer in use.
 
 ## Powertrain & Motors
 
@@ -291,11 +291,11 @@ Older app versions address sensors up to 99 (IDs 301-399); IDs 332-399 are there
 | CAC min | 450 | Ah | CAC minimum value, 0.1 Ah resolution |
 | CAC avg | 451 | Ah | CAC average value, 0.1 Ah resolution |
 | CAC max | 452 | Ah | CAC maximum value, 0.1 Ah resolution |
-| CAC imbalance | 453 | Ah \* | CAC imbalance |
-| CAC min brick id | 454 | id | CAC minimum brick ID |
-| CAC max brick id | 455 | id | CAC maximum brick ID |
+| CAC imbalance | 453 | Ah | CAC max − CAC min |
+| CAC min brick id | 454 | number | Brick number (1-127) with the smallest CAC |
+| CAC max brick id | 455 | number | Brick number (1-127) with the largest CAC |
 
-Teslalogger does not evaluate IDs 450-455 yet, they are only stored in `can`. The exact definition of 453 (Ah difference between max and min, or a percentage) has to be agreed with the app author before the first release.
+Teslalogger does not evaluate IDs 450-455 yet, they are only stored in `can` and can be used in Grafana.
 
 ---
 
@@ -343,7 +343,7 @@ The fields with a `/currentjson` entry are only published while the last packet 
 
 The change filter is implemented in the sending app, **not** on the Teslalogger server. The server stores every value it receives exactly once, without any threshold.
 
-ScanMyTesla sends a signal only when it differs from the last sent value:
+ScanMyTesla (build 206) sends a signal only when it differs from the last sent value of that signal:
 
 - by more than **1 %** by default,
 - by more than **10 %** for the signals below (`diff10percent`):
@@ -357,9 +357,13 @@ ScanMyTesla sends a signal only when it differs from the last sent value:
   - F Stator temp (443)
   - Powertrain flow (444)
   - Battery flow (445)
-- by more than a fixed **2 mV** (0.002 V) for the cell voltage IDs 100-200. IDs 201-208 are not covered by that rule in the current app and fall back to 1 %.
+- by a fixed **0.1 kWh** for Nominal full pack (71) and Energy buffer (87),
+- by a fixed **0.2 kWh** for Nominal remaining (72), Expected remaining (74) and Ideal remaining (75),
+- by a fixed **2 mV** (0.002 V) for the cell voltage IDs 100-208.
 
-A signal that does not change simply does not appear in the next packet, the previous value stays in the database and Grafana interpolates the gap.
+The percentage thresholds are calculated as `last value * percentage`, so a negative last value inverts the range and the signal is sent on every change — worth knowing for signals such as battery current (44) and battery power (43).
+
+A signal that does not change simply does not appear in the next packet, the previous value stays in the database, and the Grafana panels continue the curve from there.
 
 Because the primary key of the `can` table is `(datum, id)` with one second resolution, the same ID must not be sent twice in the same second — in that case the whole packet is rejected. See [App data interface](scanmytesla-api.md).
 
@@ -369,7 +373,12 @@ Because the primary key of the `can` table is `(datum, id)` with one second reso
 - Some signals have multiple names for different Tesla models
 
 ### Units marked with \*
-The unit of ID 31 (Battery heater temp), 73 (Usable full pack) and of the CAC block (450-455) could not be taken from the app sources available to us; it follows from the signal name and the neighbouring signals.
+
+The unit of ID 31 (Battery heater temp) and 73 (Usable full pack) could not be taken from the app sources: both signals are listed in the signal dictionary of ScanMyTesla build 206, but no CAN packet in that build writes a value for them, so no unit is defined there. The unit shown above follows from the signal name and the neighbouring signals.
+
+### Source of this documentation
+
+The ID list and the units match the current ScanMyTesla sources (MAUI, build 206 / 3.2.6, `SignalDictionary.cs`, `Model3Packets.cs`, `ModelSPackets.cs`) signal for signal — all 280 entries of the app dictionary are covered here. The Teslalogger side is described as implemented in `TeslaLogger/ScanMyTesla.cs`.
 
 ---
 
