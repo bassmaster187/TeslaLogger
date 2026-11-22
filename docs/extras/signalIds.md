@@ -1,8 +1,11 @@
+---
+sidebar_position: 3
+---
 # Tesla Signal IDs Documentation
 
 This document lists all available Tesla vehicle signals and their corresponding ID numbers used in TeslaLogger. These IDs are used by ScanMyTesla and other external apps.
 
-Every ID is stored unmodified in the `can` table (`datum`, `id`, `val`, `CarID`) and can be used in Grafana. How the packets are transferred to Teslalogger (endpoint, JSON format, rate limits) is described in [App data interface](/docs/extras/scanmytesla-api).
+Every ID is stored unmodified in the `can` table (`datum`, `id`, `val`, `CarID`) and can be used in Grafana, see [Use ScanMyTesla data in your own dashboards](/docs/extras/scanmytesla-dashboards). How the packets are transferred to Teslalogger (endpoint, JSON format, rate limits) is described in [App data interface](/docs/extras/scanmytesla-api).
 
 ## Table of Contents
 - [Units and conventions](#units-and-conventions)
