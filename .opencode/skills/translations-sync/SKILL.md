@@ -4,12 +4,14 @@ description: "Sync translation keys across all language-*.txt files in TeslaLogg
 license: MIT
 metadata:
   author: TeslaLogger
-  version: "1.0.0"
+  version: "1.1.0"
 ---
 
 # Sync TeslaLogger Translations
 
 When translation keys change in one language file (usually `language-de.txt`), propagate the updates to all other `language-*.txt` files in `TeslaLogger/bin/`.
+
+**Rule: every key gets a real translation in every one of the 15 language files.** Never leave a value empty, never copy the English or German text into another language as a placeholder, and never skip a file because "it falls back to English". See the *Translations* section in `AGENTS.md`.
 
 ## File Location
 
@@ -41,14 +43,15 @@ grep: KEY_NAME (in TeslaLogger/bin/, include: language-*.txt)
 |--------|--------|
 | Key exists with translation | Update the translation to match the new meaning |
 | Key exists but empty (`KEY=`) | Add the translation |
-| Key does not exist | Skip — file will fall back to English automatically |
+| Key does not exist | **Add it** in the right section — do not skip, do not leave it to the English fallback |
 
 ### 5. Update files
 
-For each file that has the key:
-- Read the surrounding lines (context around the match)
-- Update the value, adapting the translation to the new meaning while keeping the same language
+For every file:
+- Read the surrounding lines (context around the match / around the section of the using page, e.g. `#geoadd.php`)
+- Insert or update the value with a proper translation in that file's language
 - Preserve exact formatting: quotes, line breaks, special characters like `"_QQ_"`
+- Keep the file encoding and line endings: these files are UTF-8 **with BOM** and CRLF. If you script the edit, re-add the BOM and the CRLF, otherwise the diff shows the whole file as changed
 
 ### Translation guidelines
 
@@ -58,7 +61,13 @@ For each file that has the key:
 - When the German source changes (e.g. "vor 2021" → "MCU1"), adapt the translation to reflect the new meaning, not the old wording
 - For technical terms like "MCU1", keep them as-is (don't translate "MCU1")
 
-### 6. Report summary
+### 6. Verify and report
+
+Verify that all 15 files now contain the key and that no value is a copy of the English or German text:
+
+```
+grep: ^KEY_NAME= (in TeslaLogger/bin/, include: language-*.txt)   ->  15 hits expected
+```
 
 Return a table showing:
 
@@ -68,7 +77,7 @@ Return a table showing:
 | language-it.txt | Updated | Updated |
 | language-es.txt | Updated | Updated |
 | language-sv.txt | Added (was empty) | Added (was empty) |
-| language-da.txt | Falls back to EN | Falls back to EN |
+| language-da.txt | Added (key was missing) | Added (key was missing) |
 | ... | ... | ... |
 
 ## Example
@@ -85,4 +94,4 @@ BA_ALLCARS="Todos los vehículos excepto Model S/X con MCU1"
 BA_MODELSXOLD="Model S/X con MCU1"
 ```
 
-Skip `language-da.txt` if it has no `BA_ALLCARS` key — it will automatically use the English fallback.
+If `language-da.txt` has no `BA_ALLCARS` key yet, add the Danish translation to it — do not rely on the English fallback.

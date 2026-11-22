@@ -255,6 +255,15 @@ Free SUC=Gratis SUC
 Edit=Rediger
 New car="Ny bil"
 
+#password_fleet.php
+Log out=Log ud
+Pending=Afventende
+Virtual Key=Virtuel nøgle
+PF_VKEYCHECK=Tjek den virtuelle nøgle.
+Check=Tjek
+Select your vehicle=Vælg dit køretøj
+PF_FINISH=Afslut opsætningen og åbn oversigten
+
 #settings.php
 Credentials=Legitimationsoplysninger
 Language=Sprog

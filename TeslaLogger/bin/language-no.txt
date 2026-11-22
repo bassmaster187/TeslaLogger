@@ -510,6 +510,13 @@ PF_HERE="her"
 PF_VKEY="Konfigurer virtuell tredjepartsnøkkel. Ikke nødvendig for Model S/X til modellår 2021"
 PF_LOGIN="Gå til Telsa-identifiseringssiden og tillat at Teslalogger har tilgang til din data"
 PF_OLDSX="Hvis du har en S/X-modell fra før 2021 er du ferdig og kan gå til hovedsiden"
+Log out=Logg ut
+Pending=Avventende
+Virtual Key=Virtuell nøkkel
+PF_VKEYCHECK=Sjekk virtuell nøkkel.
+Check=Sjekk
+Select your vehicle=Velg ditt kjøretøy
+PF_FINISH=Fullfør oppsettet og åpne oversikten
 Zelltemperatur [°C]="Celletemperatur [°C]"
 Zelltemperatur [°F]="Celletemperatur [°F]"
 

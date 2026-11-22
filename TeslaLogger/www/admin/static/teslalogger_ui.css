@@ -113,18 +113,18 @@ body {
 /* The theme link colours are too dark on a dark card. Leaflet and alerts keep their own.
    A jQuery-UI dialog moves its content out of .tl-page into body, so the link rule
    must also cover the dialog. */
-.tl-page a:not(.leaflet-container a):not(.tl-alert a):not(.tl-youtube-logo),
-.tl-cards-wrap a:not(.tl-youtube-logo),
-.tl-pf-steps a:not(.tl-youtube-logo) {
+.tl-page a:not(.leaflet-container a):not(.tl-alert a):not(.tl-youtube-logo):not(.tl-pf-pill),
+.tl-cards-wrap a:not(.tl-youtube-logo):not(.tl-pf-pill),
+.tl-pf-steps a:not(.tl-youtube-logo):not(.tl-pf-pill) {
 	color: var(--tl-link);
 }
 
-.tl-page a:not(.leaflet-container a):not(.tl-alert a):not(.tl-youtube-logo):hover,
-.tl-page a:not(.leaflet-container a):not(.tl-alert a):not(.tl-youtube-logo):active,
-.tl-cards-wrap a:not(.tl-youtube-logo):hover,
-.tl-cards-wrap a:not(.tl-youtube-logo):active,
-.tl-pf-steps a:not(.tl-youtube-logo):hover,
-.tl-pf-steps a:not(.tl-youtube-logo):active {
+.tl-page a:not(.leaflet-container a):not(.tl-alert a):not(.tl-youtube-logo):not(.tl-pf-pill):hover,
+.tl-page a:not(.leaflet-container a):not(.tl-alert a):not(.tl-youtube-logo):not(.tl-pf-pill):active,
+.tl-cards-wrap a:not(.tl-youtube-logo):not(.tl-pf-pill):hover,
+.tl-cards-wrap a:not(.tl-youtube-logo):not(.tl-pf-pill):active,
+.tl-pf-steps a:not(.tl-youtube-logo):not(.tl-pf-pill):hover,
+.tl-pf-steps a:not(.tl-youtube-logo):not(.tl-pf-pill):active {
 	color: var(--tl-link-hover);
 }
 
@@ -716,40 +716,205 @@ body {
 }
 
 /* password_fleet.php -------------------------------------------------------
- * Numbered setup steps. Each step row is a flex row with a label,
- * an optional input/select and an optional check mark (the check marks
- * are written by JavaScript: checkauth, checkAT, checkRT, checkcar,
- * checkfreesuc). Self-contained: does not depend on .tl-small-form. */
+ * Two cards side by side (like geoadd.php): numbered setup steps with link
+ * pills on the left, the vehicle form on the right. Each step and each form
+ * row has a status chip (checkauth, checkAT, checkRT, checkcar,
+ * checkfreesuc): it starts as "Pending" and JavaScript gives it the class
+ * "done". Self-contained: the form part reuses .tl-small-form. */
+
+.tl-pf {
+	align-items: start;
+	display: grid;
+	gap: var(--tl-gap);
+	grid-template-columns: minmax(0, 1fr);
+}
+
+@media (min-width: 980px) {
+	.tl-pf {
+		grid-template-columns: minmax(0, 1fr) minmax(0, 440px);
+	}
+}
 
 .tl-pf-steps {
+	counter-reset: tl-pf-step;
+	list-style: none;
 	margin: 0;
-	padding-left: 20px;
+	padding: 0;
 }
 
-.tl-pf-steps li {
-	margin-bottom: 10px;
+.tl-pf-step {
+	counter-increment: tl-pf-step;
+	display: flex;
+	gap: 14px;
+	margin-bottom: 20px;
 }
 
-.tl-pf-steps li:last-child {
+.tl-pf-step:last-child {
 	margin-bottom: 0;
 }
 
-.tl-pf-field {
+/* The step number badge */
+.tl-pf-step::before {
 	align-items: center;
+	background: var(--tl-accent-soft);
+	border-radius: 50%;
+	color: var(--tl-accent-strong);
+	content: counter(tl-pf-step);
 	display: flex;
-	flex-wrap: wrap;
-	gap: 8px 16px;
+	flex: none;
+	font-size: 13px;
+	font-weight: 700;
+	height: 28px;
+	justify-content: center;
+	line-height: 1;
+	width: 28px;
 }
 
-.tl-pf-field > span {
+.tl-pf-step-body {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	min-width: 0;
+}
+
+/* The vehicle select of step 3 */
+.tl-pf-step-body select {
+	max-width: 380px;
+	width: 100%;
+}
+
+.tl-pf-step-text {
+	font-weight: 500;
+}
+
+.tl-pf-links {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+}
+
+/* Link pill (secondary button that navigates to an external page) */
+.tl-pf-pill {
+	align-items: center;
+	background: var(--tl-neutral-soft);
+	border: 1px solid var(--tl-border);
+	border-radius: 999px;
+	color: var(--tl-text);
+	display: inline-flex;
+	font-size: 13px;
+	font-weight: 600;
+	gap: 6px;
+	padding: 6px 12px;
+	text-decoration: none;
+}
+
+.tl-pf-pill:hover,
+.tl-pf-pill:active {
+	background: var(--tl-track);
+	color: var(--tl-text);
+}
+
+.tl-pf-pill svg {
+	display: block;
+	flex: none;
+}
+
+/* The arrow that marks an external link */
+.tl-pf-pill-ext::after {
+	content: "\2197";
+}
+
+/* The call to action of step 2 */
+.tl-pf-pill-primary {
+	background: var(--tl-accent);
+	border-color: var(--tl-accent);
+	color: #fff;
+}
+
+.tl-pf-pill-primary:hover,
+.tl-pf-pill-primary:active {
+	background: var(--tl-accent-strong);
+	border-color: var(--tl-accent-strong);
+	color: #fff;
+}
+
+/* A real button (action instead of link) styled as a pill */
+button.tl-pf-pill {
+	text-transform: none;
+}
+
+/* Status chip: pending -> done (the done text and class are set by JavaScript) */
+.tl-pf-state {
+	background: var(--tl-neutral-soft);
+	border-radius: 999px;
+	color: var(--tl-muted);
+	flex: none;
+	font-size: 12px;
+	font-weight: 600;
+	padding: 3px 10px;
 	white-space: nowrap;
 }
 
-/* A full-width line inside a pf field, so consecutive text lines stack */
+.tl-pf-state.done {
+	background: var(--tl-accent-soft);
+	color: var(--tl-accent-strong);
+}
 
-.tl-pf-line {
-	width: 100%;
-	white-space: normal;
+.tl-pf-state.done::before {
+	content: "\2713\00a0";
+}
+
+/* Label row of a form item: label left, VIN and status chip right */
+.tl-pf-labelline {
+	align-items: baseline;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 4px 12px;
+	justify-content: space-between;
+}
+
+.tl-pf-labelline label {
+	color: var(--tl-muted);
+	font-size: 14px;
+}
+
+/* The VIN shown instead of the vehicle select when editing */
+.tl-pf-vin {
+	background: var(--tl-neutral-soft);
+	border-radius: 6px;
+	color: var(--tl-muted);
+	font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+	font-size: 12px;
+	padding: 3px 8px;
+}
+
+.tl-pf-vin:empty {
+	display: none;
+}
+
+/* The subscription step only appears after saving a car that needs it.
+   It stays last, the CSS counter of the steps skips hidden list items. */
+.tl-pf-steps .tl-pf-sub {
+	display: none;
+}
+
+/* Generic hide, used for the virtual key check until a car is saved */
+.tl-pf-hidden {
+	display: none;
+}
+
+/* The final "Done" button that jumps to the main page */
+.tl-pf-donebtn::before {
+	content: "\2713\00a0";
+}
+
+/* Disabled form buttons (Save until a vehicle was chosen) */
+.tl-page button:disabled,
+.tl-page button:disabled:hover,
+.tl-page button:disabled:active {
+	background: var(--tl-neutral-soft);
+	color: var(--tl-muted);
+	cursor: default;
 }
 
 /* Inline YouTube logo. The wordmark uses currentColor, so it follows the
@@ -764,16 +929,6 @@ body {
 
 .tl-youtube-logo svg {
 	display: block;
-}
-
-.tl-pf-field input,
-.tl-pf-field select {
-	flex: 1;
-	min-width: 180px;
-}
-
-.tl-pf-check {
-	margin-left: auto;
 }
 
 /* chargingcost.php ------------------------------------------------------------

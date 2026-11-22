@@ -307,6 +307,13 @@ PF_OLDSX=If you have a pre-2021 Tesla Model S/X, you're done and can go back to 
 PF_HERE=here
 PF_VKEY="Set Up Third-Party Virtual Key"
 PF_SUBSCRIPTION="Subscribe to receive data from Tesla"
+Log out=Log out
+Pending=Pending
+Virtual Key=Virtual Key
+PF_VKEYCHECK=Check the virtual key.
+Check=Check
+Select your vehicle=Select your vehicle
+PF_FINISH=Finish the setup and open the overview
 
 #changecarname.php
 CarNameTitle=Change car name

@@ -293,6 +293,13 @@ PF_OLDSX="Eski S/X"
 PF_HERE="Burada"
 PF_VKEY="Üçüncü taraf sanal anahtar ayarlayın. Model S/X için 2021 model yılına kadar gerekli değil"
 PF_SUBSCRIPTION="Abonelik"
+Log out=Çıkış yap
+Pending=Beklemede
+Virtual Key=Sanal anahtar
+PF_VKEYCHECK=Sanal anahtarı kontrol edin.
+Check=Kontrol et
+Select your vehicle=Aracınızı seçin
+PF_FINISH=Kurulumu tamamlayın ve genel bakışı açın
 
 #changecarname.php
 CarNameTitle="Araç Adı Başlığı"

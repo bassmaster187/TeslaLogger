@@ -188,6 +188,13 @@ PF_LINK=LINK
 PF_OLDSX=Wenn Sie ein älteres Tesla Model S/X vor 2021 haben, sind Sie fertig und können zurück zur Startseite
 PF_VKEY="Richten Sie einen virtuellen Schlüssel eines Drittanbieters ein. Für Model S/X bis BJ 2021 nicht notwendig."
 PF_SUBSCRIPTION="Schließen sie ein Abo ab um Daten von Tesla zu bekommen"
+Log out=Abmelden
+Pending=Offen
+Virtual Key=Virtueller Schlüssel
+PF_VKEYCHECK=Virtuellen Schlüssel überprüfen.
+Check=Überprüfen
+Select your vehicle=Fahrzeug auswählen
+PF_FINISH=Einrichtung abschließen und die Übersicht öffnen
 
 #changecarname.php
 CarNameTitle=Name des Autos ändern

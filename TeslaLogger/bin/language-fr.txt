@@ -261,6 +261,15 @@ Free SUC=Gratuité de la CUS
 Edit=Editer
 New car="Voiture neuve"
 
+#password_fleet.php
+Log out=Se déconnecter
+Pending=En attente
+Virtual Key=Clé virtuelle
+PF_VKEYCHECK=Vérifiez la clé virtuelle.
+Check=Vérifier
+Select your vehicle=Sélectionnez votre véhicule
+PF_FINISH=Terminez la configuration et ouvrez la vue d'ensemble
+
 #settings.php
 MyTesla=Voiture Tesla
 Please choose your vehicle=Veuillez sélectionner un véhicule

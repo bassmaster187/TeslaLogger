@@ -253,6 +253,15 @@ Free SUC=Gratis SUC
 Edit=Bewerk
 New car="Nieuwe auto"
 
+#password_fleet.php
+Log out=Uitloggen
+Pending=In afwachting
+Virtual Key=Virtuele sleutel
+PF_VKEYCHECK=Controleer de virtuele sleutel.
+Check=Controleren
+Select your vehicle=Selecteer uw voertuig
+PF_FINISH=Voltooi de installatie en open het overzicht
+
 #settings.php
 Credentials=Inloggegevens
 Language=Taal
