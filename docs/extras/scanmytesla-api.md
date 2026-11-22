@@ -98,7 +98,7 @@ The primary key of the local `can` table is `(datum, id)`, and `datum` has a res
 
 ## Storage inside Teslalogger
 
-Every value is written unmodified into the `can` table (`datum`, `id`, `val`, `CarID`). All Grafana dashboards that show cell voltages, cell imbalance, degradation and so on read from that table — no code change is needed for a new signal ID.
+Every value is written unmodified into the `can` table (`datum`, `id`, `val`, `CarID`). All Grafana dashboards that show cell voltages, cell imbalance, degradation and so on read from that table, see [Use ScanMyTesla data in your own dashboards](/docs/extras/scanmytesla-dashboards) - no code change is needed for a new signal ID.
 
 A small subset of the IDs is additionally mapped to fields of the current car data and is used for the web UI, `/currentjson/{id}`, the MCP server and for the "keep the car awake" logic. That mapping has to be extended by the Teslalogger project for every new signal that should appear outside Grafana, see [Signals evaluated by Teslalogger](/docs/extras/signalIds#signals-evaluated-by-teslalogger).
 

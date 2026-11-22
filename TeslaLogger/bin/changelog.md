@@ -58,7 +58,7 @@
 - EVCC: fix for changed JSON shema since version 0.207
 
 # Version 1.63.7
-- Info about deprecated Docker. Please update to new Teslalogger Image: [LINK](https://github.com/bassmaster187/TeslaLogger/blob/master/docs/en/upgrade-to-net8-docker.md)
+- Info about deprecated Docker. Please update to new Teslalogger Image: [LINK](https://github.com/bassmaster187/TeslaLogger/blob/master/docs/en/installation/upgrade-to-net8-docker.md)
 
 # Version 1.63.2
 - faster logging (positions every 10 seconds)
@@ -233,7 +233,7 @@
 - Bugfix in upgrade zu Debian Buster
 
 # Version 1.54.24
-- Update Grafana to 10.0.1 Note: Grafana 10.0.1 is not compatible with old Raspberry PI3 OS. You have to update it [manually](https://github.com/bassmaster187/TeslaLogger/blob/master/docs/en/os_upgrade.md) 
+- Update Grafana to 10.0.1 Note: Grafana 10.0.1 is not compatible with old Raspberry PI3 OS. You have to update it [manually](https://github.com/bassmaster187/TeslaLogger/blob/master/docs/en/installation/os_upgrade.md) 
 
 # Version 1.54.22
 - Restore chargingstate from backup [Docs](https://github.com/bassmaster187/TeslaLogger/blob/master/docs/en/faq.md#grafana-dashboard-charging-history--ladehistorie-has-wrong-entries-for-total-costs)

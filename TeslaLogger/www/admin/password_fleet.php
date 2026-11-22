@@ -299,7 +299,7 @@ $rt = isset($_GET["RT"]) ? $_GET["RT"] : "";
 	<div class="tl-page">
 		<div class="tl-page-head">
 			<h2 class="tl-page-title"><?php t("Teslalogger Tesla Credentials"); ?></h2>
-			<a href="https://github.com/bassmaster187/TeslaLogger/blob/master/docs/en/tesla-fleet-permission.md" target="_blank"><img src="img/icon-help-24.png" class="tl-help" /></a>
+			<a href="https://github.com/bassmaster187/TeslaLogger/blob/master/docs/en/installation/tesla-fleet-permission.md" target="_blank"><img src="img/icon-help-24.png" class="tl-help" /></a>
 		</div>
 
 		<div class="tl-pf">
@@ -312,7 +312,7 @@ $rt = isset($_GET["RT"]) ? $_GET["RT"] : "";
 							<div class="tl-pf-links">
 								<a class="tl-pf-pill tl-pf-pill-ext" href="https://www.tesla.com/teslaaccount/owner-xp/auth/logout?redirect=true&locale=en_US" target="_blank"><?php t("Log out"); ?></a>
 								<a class="tl-pf-pill" href="https://www.youtube.com/watch?v=CjJPFdaAk44" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="#f00" d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31.4 31.4 0 0 0 0 12a31.4 31.4 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31.4 31.4 0 0 0 24 12a31.4 31.4 0 0 0-.5-5.8z"/><path fill="#fff" d="M9.5 15.5v-7l6.5 3.5z"/></svg><?php t("PF_HELP"); ?></a>
-								<a class="tl-pf-pill tl-pf-pill-ext" href="https://github.com/bassmaster187/TeslaLogger/blob/master/docs/en/tesla-fleet-permission.md" target="_blank"><?php t("PF_PERMISSION"); ?></a>
+								<a class="tl-pf-pill tl-pf-pill-ext" href="https://github.com/bassmaster187/TeslaLogger/blob/master/docs/en/installation/tesla-fleet-permission.md" target="_blank"><?php t("PF_PERMISSION"); ?></a>
 							</div>
 						</div>
 					</li>

@@ -127,7 +127,7 @@ function ShowInfo()
 
 		$(".HeaderT").show();
 		$("#PositiveButton").text("<?php t("OK"); ?>");
-		$("#PositiveButton").click(function(){window.location.href='https://github.com/bassmaster187/TeslaLogger/blob/master/docs/en/upgrade-to-net8-docker.md';});
+		$("#PositiveButton").click(function(){window.location.href='https://github.com/bassmaster187/TeslaLogger/blob/master/docs/en/installation/upgrade-to-net8-docker.md';});
 		$("#NegativeButton").hide();
 	<?php
 	}
