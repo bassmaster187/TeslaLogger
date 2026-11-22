@@ -30,4 +30,4 @@ Die App sendet grundsätzlich nur Werte, die sich seit dem letzten Paket geände
 
 ## Für App-Entwickler
 
-Wer eine eigene App (nicht nur ScanMyTesla) an Teslalogger anbinden möchte: Adresse, Paketformat, Zeitstempel, erlaubte Signal-IDs und die Grenzwerte der Sendefrequenz sind in der [Schnittstelle für App-Daten](../extras/scanmytesla-api.md) beschrieben.
+Wer eine eigene App (nicht nur ScanMyTesla) an Teslalogger anbinden möchte: Adresse, Paketformat, Zeitstempel, erlaubte Signal-IDs und die Grenzwerte der Sendefrequenz sind in der [Schnittstelle für App-Daten](/docs/extras/scanmytesla-api) beschrieben.

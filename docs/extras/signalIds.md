@@ -2,7 +2,7 @@
 
 This document lists all available Tesla vehicle signals and their corresponding ID numbers used in TeslaLogger. These IDs are used by ScanMyTesla and other external apps.
 
-Every ID is stored unmodified in the `can` table (`datum`, `id`, `val`, `CarID`) and can be used in Grafana. How the packets are transferred to Teslalogger (endpoint, JSON format, rate limits) is described in [App data interface](scanmytesla-api.md).
+Every ID is stored unmodified in the `can` table (`datum`, `id`, `val`, `CarID`) and can be used in Grafana. How the packets are transferred to Teslalogger (endpoint, JSON format, rate limits) is described in [App data interface](/docs/extras/scanmytesla-api).
 
 ## Table of Contents
 - [Units and conventions](#units-and-conventions)
@@ -325,7 +325,7 @@ WHERE $__timeFilter(datum) and carid=$Car and id = 101
 ORDER BY datum ASC
 ```
 
-The user side of the integration is described in [ScanMyTesla](../faq/scanmytesla.md).
+The user side of the integration is described in [ScanMyTesla](/docs/faq/scanmytesla).
 
 | ID | Teslalogger field | Used for |
 |----|-------------------|----------|
@@ -374,7 +374,7 @@ The percentage thresholds are calculated as `last value * percentage`, so a nega
 
 A signal that does not change simply does not appear in the next packet, the previous value stays in the database, and the Grafana panels continue the curve from there.
 
-Because the primary key of the `can` table is `(datum, id)` with one second resolution, the same ID must not be sent twice in the same second — in that case the whole packet is rejected. See [App data interface](scanmytesla-api.md).
+Because the primary key of the `can` table is `(datum, id)` with one second resolution, the same ID must not be sent twice in the same second — in that case the whole packet is rejected. See [App data interface](/docs/extras/scanmytesla-api).
 
 ### Model Variations
 - **M3**: Model 3 specific signal names (often more descriptive)
