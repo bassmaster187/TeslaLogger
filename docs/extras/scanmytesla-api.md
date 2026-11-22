@@ -4,7 +4,7 @@ sidebar_position: 3
 
 # App data interface (ScanMyTesla and other apps)
 
-This page describes how an app delivers vehicle signals that Teslalogger cannot read itself (cell voltages, cell temperatures, motor temperatures, …). It is the technical reference for app authors; the user side is described in [ScanMyTesla](../faq/scanmytesla.md) and the signal list in [Tesla Signal IDs Documentation](signalIds.md).
+This page describes how an app delivers vehicle signals that Teslalogger cannot read itself (cell voltages, cell temperatures, motor temperatures, …). It is the technical reference for app authors; the user side is described in [ScanMyTesla](/docs/faq/scanmytesla) and the signal list in [Tesla Signal IDs Documentation](/docs/extras/signalIds).
 
 ```
 app  --HTTPS POST-->  teslalogger.de/insert_scanmytesla.php  -->  queue table tesla_scanmytesla
@@ -48,7 +48,7 @@ The answer is `ok` on success, otherwise an SQL error message. A packet is accep
 
 - `d` — timestamp of the measurement. Recommended: ISO 8601 including UTC offset (or `Z`), which is what ScanMyTesla sends (the default JSON serialisation of a local `DateTime`). Teslalogger parses the value and converts it to the local time of the installation before writing it to the database, so the time zone of the phone does not have to match the car. Without an offset the value is read as if it were already the local time of the Teslalogger installation. Parsing is done with the culture of the installation, so localised formats such as `22.11.2025 12:34` must not be used — they are read wrongly or rejected.
 - `d` is also the value shown as "ScanMyTesla last received" in the settings page, and it is the timestamp written to the database (`can.datum`, resolution one second). The timestamp the queue stores on the server is ignored by Teslalogger.
-- `dict` — signal ID (as a string) → value (double). The IDs and units are listed in [Tesla Signal IDs Documentation](signalIds.md).
+- `dict` — signal ID (as a string) → value (double). The IDs and units are listed in [Tesla Signal IDs Documentation](/docs/extras/signalIds).
 
 Notes on the values:
 
@@ -100,13 +100,13 @@ The primary key of the local `can` table is `(datum, id)`, and `datum` has a res
 
 Every value is written unmodified into the `can` table (`datum`, `id`, `val`, `CarID`). All Grafana dashboards that show cell voltages, cell imbalance, degradation and so on read from that table — no code change is needed for a new signal ID.
 
-A small subset of the IDs is additionally mapped to fields of the current car data and is used for the web UI, `/currentjson/{id}`, the MCP server and for the "keep the car awake" logic. That mapping has to be extended by the Teslalogger project for every new signal that should appear outside Grafana, see [Signals evaluated by Teslalogger](signalIds.md#signals-evaluated-by-teslalogger).
+A small subset of the IDs is additionally mapped to fields of the current car data and is used for the web UI, `/currentjson/{id}`, the MCP server and for the "keep the car awake" logic. That mapping has to be extended by the Teslalogger project for every new signal that should appear outside Grafana, see [Signals evaluated by Teslalogger](/docs/extras/signalIds#signals-evaluated-by-teslalogger).
 
 The date of the last received packet is stored in `cars.lastscanmytesla` and is shown in the settings page as "ScanMyTesla last received".
 
 ## Requesting new signal IDs
 
-`can.id` is a signed `mediumint`. The ranges in use and the ranges that are still free are listed in [Reserved ID ranges](signalIds.md#reserved-id-ranges). Before an app uses new IDs, they have to be coordinated with the Teslalogger project so that no other app or the fleet telemetry integration uses them later. Please send for every signal:
+`can.id` is a signed `mediumint`. The ranges in use and the ranges that are still free are listed in [Reserved ID ranges](/docs/extras/signalIds#reserved-id-ranges). Before an app uses new IDs, they have to be coordinated with the Teslalogger project so that no other app or the fleet telemetry integration uses them later. Please send for every signal:
 
 - signal name, preferred ID,
 - unit and resolution,
