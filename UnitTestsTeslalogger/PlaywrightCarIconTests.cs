@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
+using static Microsoft.Playwright.Assertions;
 
 namespace UnitTestsTeslalogger
 {
@@ -38,6 +39,9 @@ namespace UnitTestsTeslalogger
         private int carId;
         private string theme;
 
+        // current body served for the mocked current_json.php; changed at runtime to toggle the icons off
+        private string mockJson;
+
         // A currentjson payload that turns on every status icon: preconditioning, open windows,
         // open frunk / trunk / doors and unlocked. The remaining fields keep the dashboard rendering
         // normally (battery, map marker, trip) so the icons are shown in their real context.
@@ -56,13 +60,52 @@ namespace UnitTestsTeslalogger
             ""inside_temperature"": 21.0,
             ""outside_temp"": 2.0,
             ""is_preconditioning"": true,
-            ""battery_heater"": false,
+            ""battery_heater"": true,
             ""sentry_mode"": false,
             ""open_windows"": 4,
             ""open_doors"": 1,
             ""frunk"": 1,
             ""trunk"": 1,
             ""locked"": false,
+            ""latitude"": 47.5,
+            ""longitude"": 8.5,
+            ""heading"": 90,
+            ""car_version"": ""2026.44.1 abcdef0123"",
+            ""software_update_status"": """",
+            ""software_update_version"": """",
+            ""ts"": ""2026-11-24T22:33:53"",
+            ""trip_start_dt"": ""2026-11-24T22:00:00"",
+            ""trip_kwh"": 5.2,
+            ""trip_duration_sec"": 1200,
+            ""trip_distance"": 12.3,
+            ""trip_max_speed"": 95,
+            ""trip_avg_kwh"": 165.0,
+            ""TLGeofence"": ""-""
+        }";
+
+        // Same dashboard payload but with every status flag turned off, so all icons must disappear.
+        private const string NoIconsJson = @"{
+            ""online"": true,
+            ""driving"": false,
+            ""charging"": false,
+            ""sleeping"": false,
+            ""falling_asleep"": false,
+            ""plugged_in"": false,
+            ""battery_level"": 73,
+            ""ideal_battery_range_km"": 320.5,
+            ""battery_range_km"": 300.2,
+            ""odometer"": 12345.6,
+            ""charge_limit_soc"": 80,
+            ""inside_temperature"": 21.0,
+            ""outside_temp"": 2.0,
+            ""is_preconditioning"": false,
+            ""battery_heater"": false,
+            ""sentry_mode"": false,
+            ""open_windows"": 0,
+            ""open_doors"": 0,
+            ""frunk"": 0,
+            ""trunk"": 0,
+            ""locked"": true,
             ""latitude"": 47.5,
             ""longitude"": 8.5,
             ""heading"": 90,
@@ -157,6 +200,51 @@ namespace UnitTestsTeslalogger
             // the row so a future icon that is not (yet) covered by the mock still appears.
             await page.WaitForSelectorAsync(".tl-caricons", new PageWaitForSelectorOptions { Timeout = 10000 });
             await page.EvaluateAsync(@"document.querySelectorAll('.caricons').forEach(function(e){ e.style.display = 'inline-block'; });");
+
+            ILocator hero = page.Locator(".tl-hero");
+            await hero.WaitForAsync(new LocatorWaitForOptions { State = WaitForSelectorState.Visible, Timeout = 10000 });
+
+            Directory.CreateDirectory(ScreenshotDirectory);
+            string screenshotPath = Path.Combine(ScreenshotDirectory, $"{TestContext.TestName}_{theme}.png");
+            await hero.ScreenshotAsync(new LocatorScreenshotOptions { Path = screenshotPath });
+            TestContext.WriteLine("Screenshot: " + screenshotPath);
+        }
+
+        [TestMethod]
+        [DataRow("light")]
+        [DataRow("dark")]
+        public async Task CarIcons_ToggleOff_Hidden(string theme)
+        {
+            this.theme = theme;
+
+            await page.EmulateMediaAsync(new PageEmulateMediaOptions
+            {
+                ColorScheme = theme == "dark" ? ColorScheme.Dark : ColorScheme.Light
+            });
+
+            mockJson = AllIconsJson;
+            await page.RouteAsync("**/current_json.php*", route => route.FulfillAsync(new RouteFulfillOptions
+            {
+                Status = 200,
+                ContentType = "application/json",
+                Body = mockJson
+            }));
+
+            await page.GotoAsync(AdminUrl + "index.php?carid=" + carId, new PageGotoOptions { WaitUntil = WaitUntilState.DOMContentLoaded });
+
+            string[] iconIds = { "#preconditioning", "#battery_heater", "#window_open", "#frunk_open", "#trunk_open", "#door_open", "#unlocked" };
+
+            // 1) with all flags on, every icon must be shown by the page's own logic (no forcing here)
+            foreach (string id in iconIds)
+                await Expect(page.Locator(id)).ToBeVisibleAsync();
+
+            // 2) turn every flag off and let the dashboard refresh its data
+            mockJson = NoIconsJson;
+            await page.EvaluateAsync("GetCurrentData()");
+
+            // 3) every icon must disappear again -> proves the hide/turn-off branch works
+            foreach (string id in iconIds)
+                await Expect(page.Locator(id)).ToBeHiddenAsync();
 
             ILocator hero = page.Locator(".tl-hero");
             await hero.WaitForAsync(new LocatorWaitForOptions { State = WaitForSelectorState.Visible, Timeout = 10000 });

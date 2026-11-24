@@ -267,8 +267,9 @@ body {
 	margin: 0;
 }
 
-/* the preconditioning icon uses the Tesla heat orange and must not be inverted in dark mode */
-.tl-caricons #preconditioning {
+/* the heat icons (preconditioning, battery heater) use the Tesla heat orange and must not be inverted in dark mode */
+.tl-caricons #preconditioning,
+.tl-caricons #battery_heater {
 	filter: none;
 }
 
