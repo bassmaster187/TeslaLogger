@@ -37,13 +37,31 @@ jobs:
     - name: Publish for Raspberry Pi (linux-arm64)
       run: dotnet publish TeslaLogger/TeslaLoggerNET8.csproj -c Debug -r linux-arm64 --no-self-contained -o ./TeslaLogger-master/TeslaLogger/bin/Debug/net8.0
 
+    - name: Checkout OVMSLogger (NET8)
+      uses: actions/checkout@v3
+      with:
+        repository: bassmaster187/OVMSLogger
+        ref: NET8
+        path: OVMSLogger
+
+    - name: Restore OVMS dependencies
+      run: dotnet restore OVMSLogger/OVMS.sln
+
+    - name: Build OVMS
+      run: dotnet build --no-restore OVMSLogger/OVMS.sln
+
     - name: Copy additional files
       run: |
         cp -r TeslaLogger/Grafana TeslaLogger-master/TeslaLogger/
         cp -r TeslaLogger/GrafanaConfig TeslaLogger-master/TeslaLogger/
-        cp -r TeslaLogger/GrafanaDebug TeslaLogger-master/TeslaLogger/
+        cp -r TeslaLogger/GrafanaDashboards13 TeslaLogger-master/TeslaLogger/
         cp -r TeslaLogger/GrafanaPlugins TeslaLogger-master/TeslaLogger/
         cp -r TeslaLogger/www TeslaLogger-master/TeslaLogger/
+        cp TeslaLogger/sqlschema.sql TeslaLogger-master/TeslaLogger/
+        mkdir -p TeslaLogger-master/MQTTClient
+        cp MQTTClient/App.config TeslaLogger-master/MQTTClient/
+        mkdir -p TeslaLogger-master/OVMSLogger/bin/Debug
+        cp -r OVMSLogger/bin/Debug/net8.0 TeslaLogger-master/OVMSLogger/bin/Debug/
         find TeslaLogger/bin -maxdepth 1 -type f -exec cp -n {} TeslaLogger-master/TeslaLogger/bin/ \;
 
     - name: Create ZIP
@@ -59,6 +77,10 @@ jobs:
         SSH_PASS: ${{ secrets.FTP_PASSWORD_TESLALOGGER_DE_UPLOADUSER }}
       run: |
         echo "$SSH_PASS" | sshpass scp -o StrictHostKeyChecking=no RPI-NET8.zip uploaduser@teslalogger.de:upload/
+
+    - name: Update RPI Version via HTTP GET
+      run: |
+        curl -v "https://teslalogger.de/set_latest_teslalogger_rpi_version.php?apikey=${{ secrets.APIKEY_DOCKER_VERSION }}&version=${{ env.GIT_TAG }}"
 
     - name: Upload artifact
       uses: actions/upload-artifact@v4

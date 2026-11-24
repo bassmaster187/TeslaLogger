@@ -730,21 +730,15 @@ else
 	if (empty($installed))
 		$installed = GetFromTeslalogger("getversion");
 
-	if (file_exists("/etc/teslalogger/BRANCH"))
-		$branch = file_get_contents("/etc/teslalogger/BRANCH");
-
-	if (!empty($branch))
+	if (isDockerNET8())
+		$onlineversion = file_get_contents("https://teslalogger.de/latest_teslalogger_docker_version.txt");
+	elseif (file_exists("/etc/teslalogger/BETA"))
 	{
-		echo("<font color='red'>$branch</font>/");
-		$onlineversion = getTeslaloggerVersion("https://raw.githubusercontent.com/bassmaster187/TeslaLogger/$branch/TeslaLogger/Properties/AssemblyInfo.cs");
+		echo("<font color='red'>beta</font>/");
+		$onlineversion = file_get_contents("https://teslalogger.de/latest_teslalogger_rpi_beta_version.txt");
 	}
 	else
-	{
-		if (isDockerNET8())
-			$onlineversion = file_get_contents("https://teslalogger.de/latest_teslalogger_docker_version.txt");
-		else
-			$onlineversion = getTeslaloggerVersion("https://raw.githubusercontent.com/bassmaster187/TeslaLogger/master/TeslaLogger/Properties/AssemblyInfo.cs");
-	}
+		$onlineversion = file_get_contents("https://teslalogger.de/latest_teslalogger_rpi_version.txt");
 
 	if ($installed != $onlineversion)
 	{

@@ -85,7 +85,6 @@ namespace TeslaLogger
         private const string INSERVICE = "INSERVICE";
         internal ScanMyTesla scanMyTesla;
         private string _lastShift_State = "P";
-        private static readonly Regex regexAssemblyVersion = new Regex("\n\\[assembly: AssemblyVersion\\(\"([0-9\\.]+)\"", RegexOptions.Compiled);
 
         internal ConcurrentDictionary<string, string> TeslaAPI_Commands = new ConcurrentDictionary<string, string>();
         internal Car car;
@@ -4948,24 +4947,20 @@ WHERE
 
             try
             {
+                string versionURL;
                 if (Tools.IsDockerNET8())
-                {
-                    using (HttpClient httpClient = new HttpClient())
-                    {
-                        contents = httpClient.GetStringAsync("https://teslalogger.de/latest_teslalogger_docker_version.txt").GetAwaiter().GetResult();
-                        return contents;
-                    }
-                }
+                    versionURL = "https://teslalogger.de/latest_teslalogger_docker_version.txt";
+                else if (System.IO.File.Exists("BETA"))
+                    versionURL = "https://teslalogger.de/latest_teslalogger_rpi_beta_version.txt";
+                else
+                    versionURL = "https://teslalogger.de/latest_teslalogger_rpi_version.txt";
 
                 using (HttpClient httpClient = new HttpClient())
                 {
-                    contents = httpClient.GetStringAsync("https://raw.githubusercontent.com/bassmaster187/TeslaLogger/master/TeslaLogger/Properties/AssemblyInfo.cs").GetAwaiter().GetResult();
+                    contents = httpClient.GetStringAsync(versionURL).GetAwaiter().GetResult();
                 }
 
-                Match m = regexAssemblyVersion.Match(contents);
-                string version = m.Groups[1].Value;
-
-                return version;
+                return contents.Trim();
             }
             catch (HttpRequestException wex)
             {
@@ -5363,37 +5358,6 @@ WHERE
             }
 
             return null;
-        }
-
-        internal static bool BranchExists(string branch, out HttpStatusCode statusCode)
-        {
-            try
-            {
-                HttpClient client = new HttpClient();
-                client.DefaultRequestHeaders.ConnectionClose = true;
-                ProductInfoHeaderValue userAgent = new ProductInfoHeaderValue("Teslalogger", Assembly.GetExecutingAssembly().GetName().Version.ToString());
-                client.DefaultRequestHeaders.UserAgent.Add(userAgent);
-                client.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue("(00000000; " + Thread.CurrentThread.ManagedThreadId + ")"));
-
-                var g = client.GetAsync("https://api.github.com/repos/bassmaster187/TeslaLogger/branches/" + branch).Result;
-                statusCode = g.StatusCode;
-                if (g.IsSuccessStatusCode)
-                {
-                    string res = g.Content.ReadAsStringAsync().Result;
-                    return res.Contains("signature");
-                }
-                else if (g.StatusCode == HttpStatusCode.NotFound)
-                {
-                    return false;
-                }
-            }
-            catch (Exception ex)
-            {
-                ex.ToExceptionless().FirstCarUserID().Submit();
-                Logfile.Log(ex.ToString());
-            }
-            statusCode = 0;
-            return false;
         }
 
     }

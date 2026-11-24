@@ -571,22 +571,6 @@ namespace TeslaLogger
             }
             catch (Exception)
             { }
-            try
-            {
-                if (File.Exists("BRANCH"))
-                {
-                    var branch = File.ReadAllText("BRANCH").Trim();
-                    Logfile.Log($"YOU ARE USING BRANCH: " + branch);
-
-                    ExceptionlessClient.Default.Configuration.DefaultData.Add("Branch", branch);
-                    ExceptionlessClient.Default.CreateLog("Program", "BRANCH: " + branch, Exceptionless.Logging.LogLevel.Warn).FirstCarUserID().Submit(); ;
-                }
-            }
-            catch (Exception ex)
-            {
-                Logfile.Log(ex.ToString());
-                ex.ToExceptionless().FirstCarUserID().Submit();
-            }
 
             Logfile.Log("OS: " + Tools.GetOsRelease());
         }

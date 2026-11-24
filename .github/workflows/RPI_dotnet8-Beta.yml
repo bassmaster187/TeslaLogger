@@ -1,0 +1,89 @@
+name: .NET8 RPI Beta (arm64)
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - 'NET8'
+      - 'NET8**'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: 8.0.x
+
+    - name: Get version from AssemblyInfo
+      shell: bash
+      run: |
+        echo "ASM_VERSION=$(grep -oP '^\[assembly: AssemblyVersion\("\K[0-9.]+' TeslaLogger/Properties/AssemblyInfo.cs)" >> $GITHUB_ENV
+
+    - name: Show version
+      run: |
+        echo "ASM_VERSION=${{ env.ASM_VERSION }}"
+
+    - name: Restore dependencies
+      run: dotnet restore TeslaLoggerNET8.sln
+
+    - name: Create output directory
+      run: mkdir -p TeslaLogger-master/TeslaLogger/bin/Debug/net8.0
+
+    - name: Publish for Raspberry Pi (linux-arm64)
+      run: dotnet publish TeslaLogger/TeslaLoggerNET8.csproj -c Debug -r linux-arm64 --no-self-contained -o ./TeslaLogger-master/TeslaLogger/bin/Debug/net8.0
+
+    - name: Checkout OVMSLogger (NET8)
+      uses: actions/checkout@v3
+      with:
+        repository: bassmaster187/OVMSLogger
+        ref: NET8
+        path: OVMSLogger
+
+    - name: Restore OVMS dependencies
+      run: dotnet restore OVMSLogger/OVMS.sln
+
+    - name: Build OVMS
+      run: dotnet build --no-restore OVMSLogger/OVMS.sln
+
+    - name: Copy additional files
+      run: |
+        cp -r TeslaLogger/Grafana TeslaLogger-master/TeslaLogger/
+        cp -r TeslaLogger/GrafanaConfig TeslaLogger-master/TeslaLogger/
+        cp -r TeslaLogger/GrafanaDashboards13 TeslaLogger-master/TeslaLogger/
+        cp -r TeslaLogger/GrafanaPlugins TeslaLogger-master/TeslaLogger/
+        cp -r TeslaLogger/www TeslaLogger-master/TeslaLogger/
+        cp TeslaLogger/sqlschema.sql TeslaLogger-master/TeslaLogger/
+        mkdir -p TeslaLogger-master/MQTTClient
+        cp MQTTClient/App.config TeslaLogger-master/MQTTClient/
+        mkdir -p TeslaLogger-master/OVMSLogger/bin/Debug
+        cp -r OVMSLogger/bin/Debug/net8.0 TeslaLogger-master/OVMSLogger/bin/Debug/
+        find TeslaLogger/bin -maxdepth 1 -type f -exec cp -n {} TeslaLogger-master/TeslaLogger/bin/ \;
+
+    - name: Create ZIP
+      run: |
+        cd TeslaLogger-master
+        zip -r ../Teslalogger_RPi_${{ env.ASM_VERSION }}-beta.zip .
+
+    - name: Rename ZIP
+      run: mv Teslalogger_RPi_${{ env.ASM_VERSION }}-beta.zip RPI-NET8-beta.zip
+
+    - name: Upload via SFTP
+      env:
+        SSH_PASS: ${{ secrets.FTP_PASSWORD_TESLALOGGER_DE_UPLOADUSER }}
+      run: |
+        echo "$SSH_PASS" | sshpass scp -o StrictHostKeyChecking=no RPI-NET8-beta.zip uploaduser@teslalogger.de:upload/
+
+    - name: Update RPI Beta Version via HTTP GET
+      run: |
+        curl -v "https://teslalogger.de/set_latest_teslalogger_rpi_beta_version.php?apikey=${{ secrets.APIKEY_DOCKER_VERSION }}&version=${{ env.ASM_VERSION }}"
+
+    - name: Upload artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: Teslalogger_RPi_Beta
+        path: RPI-NET8-beta.zip

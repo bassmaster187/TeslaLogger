@@ -10,7 +10,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.IO.Compression;
-using System.Net;
 using System.Net.Http;
 using System.Reflection;
 using System.Text;
@@ -1358,38 +1357,24 @@ PRIMARY KEY(id)
 
                 Tools.Housekeeping();
 
-                // download update package from github
-                // download update package from github
+                // download update package from teslalogger.de
                 bool httpDownloadSuccessful = false;
                 bool zipExtractSuccessful = false;
-                string GitHubURL = "https://github.com/bassmaster187/TeslaLogger/archive/master.zip";
-                string master = "master";
-
-                if (File.Exists("BRANCH"))
+                string updateURL = Environment.GetEnvironmentVariable("TESLALOGGER_UPDATE_URL");
+                if (string.IsNullOrEmpty(updateURL))
                 {
-                    var branch = File.ReadAllText("BRANCH").Trim();
-
-                    if (WebHelper.BranchExists(branch, out HttpStatusCode statusCode))
+                    if (File.Exists("BETA"))
                     {
-                        Logfile.Log($"YOU ARE USING BRANCH: " + branch);
-
-                        GitHubURL = "https://github.com/bassmaster187/TeslaLogger/archive/refs/heads/" + branch + ".zip";
-                        master = branch;
+                        Logfile.Log("YOU ARE USING BETA UPDATES");
+                        updateURL = "https://teslalogger.de/upload/RPI-NET8-beta.zip";
                     }
                     else
                     {
-                        Logfile.Log($"BRANCH NOT EXIST: " + branch);
-
-                        if (statusCode == HttpStatusCode.NotFound)
-                        {
-                            File.Delete("BRANCH");
-                            Logfile.Log("BRANCH file deleted!");
-                        }
+                        updateURL = "https://teslalogger.de/upload/RPI-NET8.zip";
                     }
                 }
 
-
-                string updatepackage = "/etc/teslalogger/tmp/master.zip";
+                string updatepackage = "/etc/teslalogger/tmp/update.zip";
                 try
                 {
                     if (!Directory.Exists("/etc/teslalogger/tmp"))
@@ -1402,9 +1387,9 @@ PRIMARY KEY(id)
                     }
                     using (HttpClient httpClient = new HttpClient())
                     {
-                        Logfile.Log($"downloading update package from {GitHubURL}");
+                        Logfile.Log($"downloading update package from {updateURL}");
                         using (CancellationTokenSource cts = new CancellationTokenSource(TimeSpan.FromMinutes(5)))
-                        using (Stream downloadStream = await httpClient.GetStreamAsync(GitHubURL, cts.Token))
+                        using (Stream downloadStream = await httpClient.GetStreamAsync(updateURL, cts.Token))
                         using (FileStream fileStream = new FileStream(updatepackage, FileMode.Create, FileAccess.Write, FileShare.None, 81920, useAsync: true))
                         {
                             await downloadStream.CopyToAsync(fileStream, 81920, cts.Token);
@@ -1418,11 +1403,11 @@ PRIMARY KEY(id)
                 catch (Exception ex)
                 {
                     ex.ToExceptionless().FirstCarUserID().Submit();
-                    Logfile.Log("Exception during download from github: " + ex.ToString());
-                    Logfile.ExceptionWriter(ex, "Exception during download from github");
+                    Logfile.Log("Exception during download from teslalogger.de: " + ex.ToString());
+                    Logfile.ExceptionWriter(ex, "Exception during download from teslalogger.de");
                 }
 
-                // unzip downloaded update package
+                // unzip downloaded update package, the zip contains folder "TeslaLogger" at its root
                 if (httpDownloadSuccessful)
                 {
                     try
@@ -1435,27 +1420,15 @@ PRIMARY KEY(id)
                             }
                             Directory.CreateDirectory("/etc/teslalogger/git");
 
-                            if (Directory.Exists("/etc/teslalogger/tmp/zip"))
-                            {
-                                Directory.Delete("/etc/teslalogger/tmp/zip", true);
-                            }
-                            Logfile.Log($"unzip update package {updatepackage} to /etc/teslalogger/tmp/zip");
-                            ZipFile.ExtractToDirectory(updatepackage, "/etc/teslalogger/tmp/zip");
-                            // GitHub zip contains folder "TeslaLogger-master" so we have to move files around
-                            if (Directory.Exists("/etc/teslalogger/tmp/zip/TeslaLogger-" + master))
-                            {
-                                Logfile.Log($"move update files from /etc/teslalogger/tmp/zip/TeslaLogger-" + master + " to /etc/teslalogger/git");
-                                // Tools.ExecMono("mv", "/etc/teslalogger/tmp/zip/TeslaLogger-" + master + " /etc/teslalogger/git");
-                                Tools.CopyFilesRecursively(new DirectoryInfo("/etc/teslalogger/tmp/zip/TeslaLogger-" + master), new DirectoryInfo("/etc/teslalogger/git"), null, false);
-                                Directory.Delete("/etc/teslalogger/tmp/zip/TeslaLogger-" + master, true);
+                            Logfile.Log($"unzip update package {updatepackage} to /etc/teslalogger/git");
+                            ZipFile.ExtractToDirectory(updatepackage, "/etc/teslalogger/git");
 
-                                if (Directory.Exists("/etc/teslalogger/git/TeslaLogger/GrafanaPlugins"))
-                                {
-                                    Logfile.Log("update package: download and unzip successful");
-                                    zipExtractSuccessful = true;
+                            if (Directory.Exists("/etc/teslalogger/git/TeslaLogger/GrafanaPlugins"))
+                            {
+                                Logfile.Log("update package: download and unzip successful");
+                                zipExtractSuccessful = true;
 
-                                    ExceptionlessClient.Default.CreateLog("Install", "Update Zip Extract Successful").FirstCarUserID().Submit();
-                                }
+                                ExceptionlessClient.Default.CreateLog("Install", "Update Zip Extract Successful").FirstCarUserID().Submit();
                             }
                         }
                     }
@@ -1467,28 +1440,30 @@ PRIMARY KEY(id)
                     }
                 }
 
-                // git clone fallback
-                if (httpDownloadSuccessful == false || zipExtractSuccessful == false)
+                if (zipExtractSuccessful == false)
                 {
-                    for (int x = 1; x < 10; x++)
-                    {
-                        Logfile.Log("git clone: try " + x);
-                        Tools.ExecMono("git", "clone --depth=1 --progress https://github.com/bassmaster187/TeslaLogger /etc/teslalogger/git/", true, true);
-
-                        if (Directory.Exists("/etc/teslalogger/git/TeslaLogger/GrafanaPlugins"))
-                        {
-                            Logfile.Log("git clone success!");
-                            break;
-                        }
-                        Logfile.Log("Git failed. Retry in 30 sec!");
-                        System.Threading.Thread.Sleep(30000);
-                    }
+                    Logfile.Log("update aborted: download or unzip of update package failed");
+                    return;
                 }
 
                 Tools.CopyFilesRecursively(new DirectoryInfo("/etc/teslalogger/git/TeslaLogger/GrafanaPlugins"), new DirectoryInfo("/var/lib/grafana/plugins"));
                 Tools.CopyFilesRecursively(new DirectoryInfo("/etc/teslalogger/git/TeslaLogger/www"), new DirectoryInfo("/var/www/html"));
                 Tools.CopyFile("/etc/teslalogger/git/TeslaLogger/bin/geofence.csv", "/etc/teslalogger/geofence.csv");
                 Tools.CopyFile("/etc/teslalogger/git/TeslaLogger/GrafanaConfig/sample.yaml", "/etc/grafana/provisioning/dashboards/sample.yaml");
+
+                // OVMS and sqlschema like in the Docker image
+                if (Directory.Exists("/etc/teslalogger/git/OVMSLogger/bin/Debug/net8.0"))
+                {
+                    Tools.CopyFilesRecursively(new DirectoryInfo("/etc/teslalogger/git/OVMSLogger/bin/Debug/net8.0"), new DirectoryInfo("/etc/teslalogger/OVMS"));
+                }
+                if (File.Exists("/etc/teslalogger/git/TeslaLogger/sqlschema.sql"))
+                {
+                    if (!Directory.Exists("/etc/teslalogger/sqlschema"))
+                    {
+                        _ = Directory.CreateDirectory("/etc/teslalogger/sqlschema");
+                    }
+                    Tools.CopyFile("/etc/teslalogger/git/TeslaLogger/sqlschema.sql", "/etc/teslalogger/sqlschema/sqlschema.sql");
+                }
 
                 if (!Directory.Exists("/var/lib/grafana/dashboards"))
                 {
