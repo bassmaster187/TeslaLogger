@@ -267,6 +267,11 @@ body {
 	margin: 0;
 }
 
+/* the preconditioning icon uses the Tesla heat orange and must not be inverted in dark mode */
+.tl-caricons #preconditioning {
+	filter: none;
+}
+
 .tl-hero-status {
 	align-items: flex-start;
 	display: flex;

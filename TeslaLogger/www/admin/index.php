@@ -388,6 +388,11 @@ else
 				$("#SoftwareUpdateRow").hide();
 			}
 
+			if (jsonData["is_preconditioning"])
+				$("#preconditioning").show();
+			else
+				$("#preconditioning").hide();
+
 			if (jsonData["open_windows"] > 0)
 				$("#window_open").show();
 			else
@@ -653,6 +658,7 @@ else
 		<div class="tl-hero-head">
 			<h2 class="tl-hero-name"><?= htmlspecialchars($display_name ?? "") ?></h2>
 			<div class="tl-caricons">
+				<img id="preconditioning" class="caricons" src="img/preconditioning.png" alt="Preconditioning" title="Preconditioning">
 				<img id="window_open" class="caricons" src="img/window_open.png" alt="Open Window" title="Open Window">
 				<img id="frunk_open" class="caricons" src="img/frunk_open.png" alt="Frunk Open" title="Frunk Open">
 				<img id="trunk_open" class="caricons" src="img/trunk_open.png" alt="Trunk Open" title="Trunk Open">
