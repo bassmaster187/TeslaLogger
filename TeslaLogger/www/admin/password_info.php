@@ -10,7 +10,7 @@ require_once("tools.php");
     <title>Teslalogger <?php t("Tesla Credentials"); ?></title>
 	<link rel="stylesheet" href="static/jquery/ui/1.12.1/themes/smoothness/jquery-ui.css">
 	<link rel="stylesheet" href="static/teslalogger_style.css?v=5">
-	<link rel="stylesheet" href="static/teslalogger_ui.css?v=28">
+	<link rel="stylesheet" href="static/teslalogger_ui.css?v=30">
 	<script src="static/jquery/jquery-1.12.4.js"></script>
 	<script src="static/jquery/ui/1.12.1/jquery-ui.js"></script>
 	<script src="static/jquery/jquery-migrate-1.4.1.min.js"></script>
@@ -53,8 +53,7 @@ require_once("tools.php");
             $("#info").html(data);
             if (data.includes("Wait for MFA code"))
             {
-                $("#mfapanel").show();           
-                $("#captchapanel").hide();           
+                $("#mfacard").show();           
             }
             
             setTimeout(updateInfo, 1000);
@@ -67,23 +66,8 @@ require_once("tools.php");
 
     function btn_ok_click()
     {
-        var info = $("#info").text();
-        if (info.includes("Everything is OK"))
-            window.location.href='index.php';
-        else
-            window.location.href='password.php';
-    }
-
-    function btn_captcha_click()
-    {
-        $("#captcha" ).prop( "disabled", true );
-        var value = $("#captcha").val();
-        console.log("captcha entered");
-        var url = "captcha/"+dbid+"/"+value;
-        console.log("url: " + url);
-        var jqxhr = $.post("teslaloggerstream.php", {url: url, data: ''}).always(function () {
-            
-        });
+        // Back to the main page with this car
+        window.location.href = 'index.php?carid=' + dbid;
     }
 
 </script>
@@ -98,21 +82,8 @@ menu("Credentials");
 		<h2 class="tl-page-title"><?php t("Credentials Info"); ?></h2>
 	</div>
 
-	<div class="tl-card">
-		<div id="captchapanel">
-			<h2 class="tl-card-title">Captcha</h2>
-			<img src="teslaloggerstream_svg.php?url=captchapic/<?php
-	if (isset($_REQUEST["id"]))
-        echo($_REQUEST["id"]);
-    else
-        echo("-1");
-?>" alt=""/>
-			<div class="tl-cc-row">
-				<input id="captcha" type="text" />
-				<button onclick="btn_captcha_click();"><?php t("OK"); ?></button>
-			</div>
-		</div>
-		<div id="mfapanel" style="display: none;">
+	<div class="tl-card" id="mfacard" style="display: none;">
+		<div id="mfapanel">
 			<h2 class="tl-card-title">MFA</h2>
 			<input id="MFA" type="text" autocomplete="new-password" />
 		</div>

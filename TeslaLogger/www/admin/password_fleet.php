@@ -18,7 +18,7 @@ $rt = isset($_GET["RT"]) ? $_GET["RT"] : "";
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<title><?php t("Teslalogger Tesla Credentials"); ?></title>
 	<link rel="stylesheet" href="static/teslalogger_style.css?v=5">
-	<link rel="stylesheet" href="static/teslalogger_ui.css?v=28">
+	<link rel="stylesheet" href="static/teslalogger_ui.css?v=30">
 	<script src="static/jquery/jquery-1.12.4.js"></script>
 	<script src="static/jquery/jquery-migrate-1.4.1.min.js"></script>
 	<script>
@@ -95,6 +95,8 @@ $rt = isset($_GET["RT"]) ? $_GET["RT"] : "";
 				setState("checkauth");
 				setState("checkAT");
 				setState("checkRT");
+				// Tokens are in the database now: check the virtual key right away
+				checkVirtualKey();
 			<?php } ?>
 		});
 
@@ -201,13 +203,11 @@ $rt = isset($_GET["RT"]) ? $_GET["RT"] : "";
 					data: JSON.stringify(d)
 				})
 				.always(function(data) {
+					// Stay on this page: the virtual key often still needs to be
+					// set up (step 4). Leave via the "Done" button (step 7).
 					if (typeof tokenAvailable === "function" && tokenAvailable()) {
 						alert("Check Logfile!");
 						window.location.href = 'logfile.php';
-					} else if (data && data.includes("ID:")) {
-						window.location.href = 'password_info.php?id=' + data.substr(3);
-					} else {
-						window.location.href = 'password_info.php?id=' + dbid;
 					}
 				});
 
@@ -295,6 +295,8 @@ $rt = isset($_GET["RT"]) ? $_GET["RT"] : "";
 			}
 		}
 	}
+	// When editing, the vin (and with it the vehicle) is already known
+	$cardone = ($dbid > 0 && strlen($vin) >= 17) ? "done" : "";
 	?>
 	<div class="tl-page">
 		<div class="tl-page-head">
@@ -332,7 +334,7 @@ $rt = isset($_GET["RT"]) ? $_GET["RT"] : "";
 							<div class="tl-pf-step-text">
 								<span><?php t("Select your vehicle"); ?></span>
 								<span class="tl-pf-vin" id="vinlabel"></span>
-								<span class="tl-pf-state" id="checkcar"><?php t("Pending"); ?></span>
+								<span class="tl-pf-state<?= $cardone ? " done" : "" ?>" id="checkcar"><?php t($cardone ? "Done" : "Pending"); ?></span>
 							</div>
 							<select id="carid" disabled></select>
 							<div class="tl-pf-links">
