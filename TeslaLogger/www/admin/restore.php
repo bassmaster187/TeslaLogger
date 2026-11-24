@@ -6,7 +6,7 @@ require("language.php");
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Teslalogger Restore Database 1.0</title>
+    <title>Teslalogger <?php t("Restore"); ?></title>
 	<link rel="stylesheet" href="static/jquery/ui/1.12.1/themes/smoothness/jquery-ui.css">
 	<link rel="stylesheet" href="static/teslalogger_style.css?v=5">
 	<link rel="stylesheet" href="static/teslalogger_ui.css?v=28">
@@ -36,7 +36,7 @@ require("language.php");
 	</div>
 
 	<div class="tl-card tl-small-form-card">
-		<h2 class="tl-card-title"><?php t("Restore Database"); ?></h2>
+		<h2 class="tl-card-title"><?php t("Restore"); ?></h2>
 		<form action="restore_upload.php" method="post" enctype="multipart/form-data">
 			<div class="tl-form tl-small-form">
 				<div class="tl-form-item">
