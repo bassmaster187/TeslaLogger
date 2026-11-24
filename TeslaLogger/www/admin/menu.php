@@ -97,7 +97,7 @@ function menu($title, $prefix = "")
 
     $ref = "?token=" . $tasker_token . "&ref=" . full_path()."&car=".$car;
 ?>
-<link rel="stylesheet" href="static/teslalogger_ui.css?v=23">
+<link rel="stylesheet" href="static/teslalogger_ui.css?v=28">
 <link rel="stylesheet" href="static/teslalogger_menu.css?v=2">
 <div id="tl_confirm_dialog" class="tl-dialog" hidden>
 	<div class="tl-dialog-card">
@@ -211,7 +211,7 @@ function menu($title, $prefix = "")
 	</div>
 </header>
 <script>
-function confirmAction($title, $question, $target, $text, $reload)
+function confirmAction($title, $question, $target, $text, $reload, $redirect)
   {
 		var dialog = document.getElementById('tl_confirm_dialog');
 
@@ -230,7 +230,7 @@ function confirmAction($title, $question, $target, $text, $reload)
 		document.getElementById('tl_confirm_ok').onclick = function()
 		{
 			closeConfirmDialog();
-			BackgroudRun($target, $text, $reload);
+			BackgroudRun($target, $text, $reload, $redirect);
 		};
 
 		document.getElementById('tl_confirm_cancel').onclick = closeConfirmDialog;
@@ -250,7 +250,7 @@ document.addEventListener('keydown', function(e)
 		closeConfirmDialog();
 });
 
-function BackgroudRun($target, $text, $reload=false)
+function BackgroudRun($target, $text, $reload=false, $redirect="")
   {
 	  $.ajax($target, {
 		data: {
@@ -261,16 +261,24 @@ function BackgroudRun($target, $text, $reload=false)
 		function success(name) {
 			alert($text);
 
-            if ($reload)
-                location.reload(true);
+			AfterBackgroundRun();
 		},
 		function fail(data, status) {
 			alert($text);
 
-            if ($reload)
-                location.reload(true);
+			AfterBackgroundRun();
 		}
 	);
+
+	// A page can ask for a target page instead of a reload. The restore uses it:
+	// reloading its own page would start the restore again.
+	function AfterBackgroundRun()
+	{
+		if ($redirect != "")
+			location.href = $redirect;
+		else if ($reload)
+			location.reload(true);
+	}
   }
   </script>
 <script type='text/javascript' src='static/functions.js?ver=20150315'></script>

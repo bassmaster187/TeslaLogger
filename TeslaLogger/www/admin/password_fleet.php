@@ -18,7 +18,7 @@ $rt = isset($_GET["RT"]) ? $_GET["RT"] : "";
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<title><?php t("Teslalogger Tesla Credentials"); ?></title>
 	<link rel="stylesheet" href="static/teslalogger_style.css?v=5">
-	<link rel="stylesheet" href="static/teslalogger_ui.css?v=23">
+	<link rel="stylesheet" href="static/teslalogger_ui.css?v=28">
 	<script src="static/jquery/jquery-1.12.4.js"></script>
 	<script src="static/jquery/jquery-migrate-1.4.1.min.js"></script>
 	<script>

@@ -39,6 +39,8 @@
 	--tl-info-strong: #0d4f9e;
 	--tl-info-soft: #e3f0fc;
 	--tl-warn: #e08a00;
+	--tl-warn-strong: #8a5200;
+	--tl-warn-soft: #fdf3e2;
 	--tl-danger: #c62828;
 	--tl-danger-strong: #b3261e;
 	--tl-danger-soft: #fdeaea;
@@ -72,6 +74,8 @@
 		--tl-info-strong: #8ec2ff;
 		--tl-info-soft: #16304f;
 		--tl-warn: #f0a020;
+		--tl-warn-strong: #f7c46b;
+		--tl-warn-soft: #3a2a10;
 		--tl-danger: #e5534b;
 		--tl-danger-strong: #ff938c;
 		--tl-danger-soft: #45201f;
@@ -110,17 +114,19 @@ body {
 	color: var(--tl-muted);
 }
 
-/* The theme link colours are too dark on a dark card. Leaflet and alerts keep their own.
+/* The theme link colours are too dark on a dark card. Leaflet, alerts and the
+   shared menu keep their own colours: menu.php is included inside .tl-page on some
+   pages, and its links must stay the menu colours.
    A jQuery-UI dialog moves its content out of .tl-page into body, so the link rule
    must also cover the dialog. */
-.tl-page a:not(.leaflet-container a):not(.tl-alert a):not(.tl-youtube-logo):not(.tl-pf-pill),
+.tl-page a:not(.leaflet-container a):not(.tl-alert a):not(.tl-youtube-logo):not(.tl-pf-pill):not(.site-navigation a),
 .tl-cards-wrap a:not(.tl-youtube-logo):not(.tl-pf-pill),
 .tl-pf-steps a:not(.tl-youtube-logo):not(.tl-pf-pill) {
 	color: var(--tl-link);
 }
 
-.tl-page a:not(.leaflet-container a):not(.tl-alert a):not(.tl-youtube-logo):not(.tl-pf-pill):hover,
-.tl-page a:not(.leaflet-container a):not(.tl-alert a):not(.tl-youtube-logo):not(.tl-pf-pill):active,
+.tl-page a:not(.leaflet-container a):not(.tl-alert a):not(.tl-youtube-logo):not(.tl-pf-pill):not(.site-navigation a):hover,
+.tl-page a:not(.leaflet-container a):not(.tl-alert a):not(.tl-youtube-logo):not(.tl-pf-pill):not(.site-navigation a):active,
 .tl-cards-wrap a:not(.tl-youtube-logo):not(.tl-pf-pill):hover,
 .tl-cards-wrap a:not(.tl-youtube-logo):not(.tl-pf-pill):active,
 .tl-pf-steps a:not(.tl-youtube-logo):not(.tl-pf-pill):hover,
@@ -201,6 +207,38 @@ body {
 	color: var(--tl-danger-strong);
 }
 
+/* Result of an action that worked (restore_upload.php) */
+
+.tl-alert-success {
+	background: var(--tl-accent-soft);
+	color: var(--tl-accent-strong);
+}
+
+/* Result of an action that is still running (restore_upload.php) */
+
+.tl-alert-info {
+	background: var(--tl-info-soft);
+	color: var(--tl-info-strong);
+}
+
+/* A warning that has to be read before an action (restore.php) */
+
+.tl-alert-warn {
+	background: var(--tl-warn-soft);
+	color: var(--tl-warn-strong);
+}
+
+/* Several lines in one alert (restore.php, restore_upload.php): readable spacing
+   without bullets. */
+
+.tl-alert-list {
+	display: grid;
+	gap: 6px;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
 .tl-alert a {
 	color: inherit;
 	margin-left: 8px;
@@ -228,7 +266,7 @@ body {
 }
 
 @media (prefers-color-scheme: dark) {
-	.tl-page input:not([type="checkbox"]):not([type="radio"]),
+	.tl-page input:not([type="checkbox"]):not([type="radio"]):not([type="submit"]):not([type="button"]):not([type="reset"]),
 	.tl-page select,
 	.tl-page textarea {
 		background-color: var(--tl-card);
@@ -559,6 +597,13 @@ body {
  * full width. Self-contained grid (does not depend on a plain .tl-form rule).
  */
 
+/* A card that only holds a small form (restore, abrp, komoot, ...). Without the
+   limit the card and its single field would stretch over the whole page. */
+
+.tl-small-form-card {
+	max-width: 620px;
+}
+
 .tl-small-form {
 	display: grid;
 	gap: 16px 24px;
@@ -597,6 +642,13 @@ body {
 	justify-content: flex-end;
 	gap: 12px;
 	margin-top: 8px;
+}
+
+/* A short hint below a form field (restore.php) */
+
+.tl-form-note {
+	font-size: 14px;
+	margin: 0;
 }
 
 /* Screenshot in the description (wallbox): a photo, so no icon filter */
@@ -1030,5 +1082,33 @@ button.tl-pf-pill {
 	.tl-cs-label {
 		min-width: 0;
 	}
+}
+
+/* restore_upload.php -------------------------------------------------------
+ * Result page of the restore: the details use the shared .tl-row-list, the raw
+ * output of the mysql command is a scrollable monospace block.
+ */
+
+.tl-restore-actions {
+	align-items: center;
+	display: flex;
+	gap: 12px;
+	justify-content: space-between;
+	margin-top: 16px;
+}
+
+.tl-restore-output {
+	background: var(--tl-neutral-soft);
+	border: 1px solid var(--tl-border);
+	border-radius: 8px;
+	color: var(--tl-text);
+	font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+	font-size: 13px;
+	margin: 0;
+	max-height: 320px;
+	overflow: auto;
+	padding: 10px 12px;
+	white-space: pre-wrap;
+	word-break: break-word;
 }
 
