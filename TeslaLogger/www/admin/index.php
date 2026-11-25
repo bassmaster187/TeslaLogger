@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 require_once("redirect.php");
 require_once("language.php");
 require_once("tools.php");
@@ -44,11 +44,11 @@ else
 	<script src="static/jquery/jquery-1.12.4.js"></script>
 	<script src="static/jquery/ui/1.12.1/jquery-ui.js"></script>
 	<script src="static/jquery/jquery-migrate-1.4.1.min.js"></script>
-	<link rel="stylesheet" href="static/leaflet/1.4.0/leaflet.css" />
+	<link rel="stylesheet" href="static/leaflet/1.9.4/leaflet.css" />
 	<link rel='stylesheet' id='genericons-css'  href='static/genericons.css?ver=3.0.3' type='text/css' media='all' />
    <!-- Make sure you put this AFTER Leaflet's CSS -->
-	<script src="static/leaflet/1.4.0/leaflet.js"></script>
-	<script src="static/leaflet/1.4.0/leaflet.rotatedMarker.js"></script>
+	<script src="static/leaflet/1.9.4/leaflet.js"></script>
+	<script src="static/leaflet/1.9.4/leaflet.rotatedMarker.js"></script>
 	<style>
 		#changelog{height:350px; overflow: auto;}
 	</style>

@@ -54,9 +54,9 @@ if (isset($id))
     <title>Teslalogger Geofencing V1.1</title>
 	<link rel="stylesheet" href="static/jquery/ui/1.12.1/themes/smoothness/jquery-ui.css">
 	<link rel="stylesheet" href="static/teslalogger_style.css?v=4">
-	<link rel="stylesheet" href="static/leaflet/1.4.0/leaflet.css" />
+	<link rel="stylesheet" href="static/leaflet/1.9.4/leaflet.css" />
    <!-- Make sure you put this AFTER Leaflet's CSS -->
-	<script src="static/leaflet/1.4.0/leaflet.js"></script>
+	<script src="static/leaflet/1.9.4/leaflet.js"></script>
 	
 	<script src="static/jquery/jquery-1.12.4.js"></script>
 	<script src="static/jquery/ui/1.12.1/jquery-ui.js"></script>

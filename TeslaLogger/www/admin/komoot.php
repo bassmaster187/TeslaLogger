@@ -16,7 +16,7 @@ global $display_name;
 	<link rel="stylesheet" href="static/teslalogger_style.css">
 	<script src="static/jquery/jquery-1.12.4.js"></script>
 	<script src="static/jquery/ui/1.12.1/jquery-ui.js"></script>
-	<link rel="stylesheet" href="static/leaflet/1.4.0/leaflet.css" />
+	<link rel="stylesheet" href="static/leaflet/1.9.4/leaflet.css" />
 	<link rel='stylesheet' id='genericons-css'  href='static/genericons.css?ver=3.0.3' type='text/css' media='all' />
 </head>
 <body>
