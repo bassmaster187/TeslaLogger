@@ -1,4 +1,4 @@
-name: .NET8 RPI Release (arm64)
+name: .NET8 RPI Release
 
 on:
   workflow_dispatch:
@@ -34,8 +34,15 @@ jobs:
     - name: Create output directory
       run: mkdir -p TeslaLogger-master/TeslaLogger/bin/Debug/net8.0
 
-    - name: Publish for Raspberry Pi (linux-arm64)
-      run: dotnet publish TeslaLogger/TeslaLoggerNET8.csproj -c Debug -r linux-arm64 --no-self-contained -o ./TeslaLogger-master/TeslaLogger/bin/Debug/net8.0
+    - name: Publish for Raspberry Pi (AnyCPU, framework dependent)
+      run: dotnet publish TeslaLogger/TeslaLoggerNET8.csproj -c Debug -o ./TeslaLogger-master/TeslaLogger/bin/Debug/net8.0
+
+    - name: Remove unneeded runtimes (keep linux-arm, linux-arm64, unix)
+      run: |
+        runtimes="TeslaLogger-master/TeslaLogger/bin/Debug/net8.0/runtimes"
+        if [ -d "$runtimes" ]; then
+          find "$runtimes" -mindepth 1 -maxdepth 1 -type d ! -name 'linux-arm' ! -name 'linux-arm64' ! -name 'unix' -exec rm -rf {} +
+        fi
 
     - name: Checkout OVMSLogger (NET8)
       uses: actions/checkout@v3
