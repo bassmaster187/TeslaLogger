@@ -425,13 +425,20 @@ namespace TeslaLoggerNET8.Lucid
             if (databaseCalls && (Math.Abs(max_cell_temp - max_cell_temp_db) > 0.25 || Math.Abs(min_cell_temp - min_cell_temp_db) > 0.25))
                 InsertBatteryTemperatureData();
 
-            // current_is_preconditioning covers cabin climate AND battery pack preconditioning
-            // (same semantics as the Tesla API flag), so combine both Lucid signals.
-            bool preconditioning = hvac_preconditioning || battery_preconditioning;
-            if (preconditioning != car.CurrentJSON.current_is_preconditioning)
+            // Lucid reports cabin climate (hvac.power) and battery pack preconditioning
+            // (battery.preconditioning_status) separately — map each to its own flag, matching
+            // the Tesla API semantics (is_preconditioning vs. battery_heater) so the admin
+            // panel shows the correct icon.
+            if (hvac_preconditioning != car.CurrentJSON.current_is_preconditioning)
             {
-                car.CurrentJSON.current_is_preconditioning = preconditioning;
-                car.Log($"Preconditioning: {preconditioning} (hvac: {hvac_preconditioning}, battery: {battery_preconditioning})");
+                car.CurrentJSON.current_is_preconditioning = hvac_preconditioning;
+                car.Log("Preconditioning: " + hvac_preconditioning);
+            }
+
+            if (battery_preconditioning != car.CurrentJSON.current_battery_heater)
+            {
+                car.CurrentJSON.current_battery_heater = battery_preconditioning;
+                car.Log("Battery heater: " + battery_preconditioning);
             }
 
             car.CurrentJSON.CreateCurrentJSON();

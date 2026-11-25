@@ -59,11 +59,11 @@ namespace UnitTestsTeslalogger
                 "a following HVAC_OFF snapshot must clear the preconditioning flag.");
         }
 
-        // Battery pack preconditioning alone (BATTERY_PRECON_ON, HVAC off) must be detected too.
-        // Live fixture recorded while the Lucid app had battery preconditioning active:
-        // battery.preconditioning_status = BATTERY_PRECON_ON with hvac.power = HVAC_OFF.
+        // Battery pack preconditioning alone (BATTERY_PRECON_ON, HVAC off) must set the battery
+        // heater flag, not the cabin preconditioning flag. Live fixture recorded while the Lucid
+        // app had battery preconditioning active.
         [TestMethod]
-        public void Lucid_BatteryPreconOn_IsDetectedAsPreconditioning()
+        public void Lucid_BatteryPreconOn_SetsBatteryHeaterNotPreconditioning()
         {
             LucidCar c = NewLucidCar();
             LucidWebHelper wh = (LucidWebHelper)c.webhelper;
@@ -71,13 +71,31 @@ namespace UnitTestsTeslalogger
 
             wh.ParseLucidData(LoadRaw("Lucid_Lucy_raw_battery-preconditioning.txt"));
 
-            Assert.IsTrue(c.CurrentJSON.current_is_preconditioning,
-                "battery preconditioning_status = BATTERY_PRECON_ON must be detected as preconditioning.");
+            Assert.IsTrue(c.CurrentJSON.current_battery_heater,
+                "battery preconditioning_status = BATTERY_PRECON_ON must set the battery heater flag.");
+            Assert.IsFalse(c.CurrentJSON.current_is_preconditioning,
+                "battery preconditioning with hvac.power = HVAC_OFF must not set the cabin preconditioning flag.");
         }
 
-        // BATTERY_PRECON_UNAVAILABLE / OFF must not be flagged (as in the recorded fixtures).
+        // HVAC preconditioning must set the cabin flag and leave the battery heater flag alone
+        // (battery was BATTERY_PRECON_OFF in that snapshot).
         [TestMethod]
-        public void Lucid_BatteryPreconOffOrUnavailable_IsNotPreconditioning()
+        public void Lucid_HvacPrecondition_SetsPreconditioningNotBatteryHeater()
+        {
+            LucidCar c = NewLucidCar();
+            LucidWebHelper wh = (LucidWebHelper)c.webhelper;
+            wh.databaseCalls = false;
+
+            wh.ParseLucidData(LoadRaw("Lucid_Lucy_raw_preconditioning.txt"));
+
+            Assert.IsTrue(c.CurrentJSON.current_is_preconditioning);
+            Assert.IsFalse(c.CurrentJSON.current_battery_heater,
+                "hvac preconditioning with BATTERY_PRECON_OFF must not set the battery heater flag.");
+        }
+
+        // BATTERY_PRECON_UNAVAILABLE / OFF / UNKNOWN must not set the battery heater flag.
+        [TestMethod]
+        public void Lucid_BatteryPreconOffOrUnavailable_IsNotBatteryHeater()
         {
             foreach (string state in new[] { "BATTERY_PRECON_OFF", "BATTERY_PRECON_UNAVAILABLE", "BATTERY_PRECON_UNKNOWN" })
             {
@@ -87,8 +105,10 @@ namespace UnitTestsTeslalogger
 
                 wh.ParseLucidData(Snippet(state));
 
+                Assert.IsFalse(c.CurrentJSON.current_battery_heater,
+                    $"{state} must not set the battery heater flag.");
                 Assert.IsFalse(c.CurrentJSON.current_is_preconditioning,
-                    $"{state} must not be flagged as preconditioning.");
+                    $"{state} with HVAC_OFF must not set the preconditioning flag.");
             }
         }
 
