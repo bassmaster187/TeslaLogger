@@ -1274,6 +1274,22 @@ PRIMARY KEY(id)
 
         public static async Task DownloadUpdateAndInstall()
         {
+            try
+            {
+                await DownloadUpdateAndInstallInternal();
+            }
+            catch (Exception ex)
+            {
+                // DownloadUpdateAndInstall() is called fire-and-forget (without await), without this
+                // wrapper exceptions would be unobserved task exceptions and silently lost
+                ex.ToExceptionless().FirstCarUserID().Submit();
+                Logfile.Log("Error in DownloadUpdateAndInstall: " + ex.ToString());
+                Logfile.ExceptionWriter(ex, "Error in DownloadUpdateAndInstall");
+            }
+        }
+
+        private static async Task DownloadUpdateAndInstallInternal()
+        {
             DownloadUpdateAndInstallStarted = true;
             CheckNET8Installed();
 
@@ -1318,14 +1334,17 @@ PRIMARY KEY(id)
 
                 if (!File.Exists("NOBACKUPONUPDATE"))
                 {
-                    Logfile.Log("Create backup");
-                    Tools.ExecMono("/bin/bash", "/etc/teslalogger/backup.sh");
-                }
-
-                if (!Tools.ExecMono("git", "--version", false).Contains("git version"))
-                {
-                    Tools.ExecMono("apt-get", "-y install git");
-                    Tools.ExecMono("git", "--version");
+                    // a failing backup must not abort the update
+                    try
+                    {
+                        Logfile.Log("Create backup");
+                        Tools.ExecMono("/bin/bash", "/etc/teslalogger/backup.sh");
+                    }
+                    catch (Exception ex)
+                    {
+                        ex.ToExceptionless().FirstCarUserID().Submit();
+                        Logfile.Log("Exception creating backup: " + ex.ToString());
+                    }
                 }
 
                 if (!File.Exists("/usr/bin/optipng") || !Tools.ExecMono("optipng", "-version", false).Contains("OptiPNG version"))
@@ -1347,10 +1366,6 @@ PRIMARY KEY(id)
                     }
                 }
 
-                Tools.ExecMono("rm", "-rf /etc/teslalogger/git/*");
-
-                Tools.ExecMono("rm", "-rf /etc/teslalogger/git");
-                Tools.ExecMono("mkdir", "/etc/teslalogger/git");
                 CertUpdate();
 
                 // run housekeeping to make sure there is enough free disk space
@@ -1446,32 +1461,66 @@ PRIMARY KEY(id)
                     return;
                 }
 
-                Tools.CopyFilesRecursively(new DirectoryInfo("/etc/teslalogger/git/TeslaLogger/GrafanaPlugins"), new DirectoryInfo("/var/lib/grafana/plugins"));
-                Tools.CopyFilesRecursively(new DirectoryInfo("/etc/teslalogger/git/TeslaLogger/www"), new DirectoryInfo("/var/www/html"));
-                Tools.CopyFile("/etc/teslalogger/git/TeslaLogger/bin/geofence.csv", "/etc/teslalogger/geofence.csv");
-                Tools.CopyFile("/etc/teslalogger/git/TeslaLogger/GrafanaConfig/sample.yaml", "/etc/grafana/provisioning/dashboards/sample.yaml");
-
-                // OVMS and sqlschema like in the Docker image
-                if (Directory.Exists("/etc/teslalogger/git/OVMSLogger/bin/Debug/net8.0"))
+                // each copy is protected on its own: one failing copy (e.g. locked file, missing
+                // source) must not abort the whole update and prevent TLUpdate.exe from starting
+                try
                 {
-                    Tools.CopyFilesRecursively(new DirectoryInfo("/etc/teslalogger/git/OVMSLogger/bin/Debug/net8.0"), new DirectoryInfo("/etc/teslalogger/OVMS"));
+                    Tools.CopyFilesRecursively(new DirectoryInfo("/etc/teslalogger/git/TeslaLogger/GrafanaPlugins"), new DirectoryInfo("/var/lib/grafana/plugins"));
                 }
-                if (File.Exists("/etc/teslalogger/git/TeslaLogger/sqlschema.sql"))
+                catch (Exception ex)
                 {
-                    if (!Directory.Exists("/etc/teslalogger/sqlschema"))
-                    {
-                        _ = Directory.CreateDirectory("/etc/teslalogger/sqlschema");
-                    }
-                    Tools.CopyFile("/etc/teslalogger/git/TeslaLogger/sqlschema.sql", "/etc/teslalogger/sqlschema/sqlschema.sql");
+                    ex.ToExceptionless().FirstCarUserID().Submit();
+                    Logfile.Log("Exception copying GrafanaPlugins: " + ex.ToString());
                 }
-
-                if (!Directory.Exists("/var/lib/grafana/dashboards"))
+                try
                 {
-                    Directory.CreateDirectory("/var/lib/grafana/dashboards");
+                    Tools.CopyFilesRecursively(new DirectoryInfo("/etc/teslalogger/git/TeslaLogger/www"), new DirectoryInfo("/var/www/html"));
+                }
+                catch (Exception ex)
+                {
+                    ex.ToExceptionless().FirstCarUserID().Submit();
+                    Logfile.Log("Exception copying www: " + ex.ToString());
+                }
+                try
+                {
+                    Tools.CopyFile("/etc/teslalogger/git/TeslaLogger/bin/geofence.csv", "/etc/teslalogger/geofence.csv");
+                    Tools.CopyFile("/etc/teslalogger/git/TeslaLogger/GrafanaConfig/sample.yaml", "/etc/grafana/provisioning/dashboards/sample.yaml");
+                }
+                catch (Exception ex)
+                {
+                    ex.ToExceptionless().FirstCarUserID().Submit();
+                    Logfile.Log("Exception copying geofence.csv / sample.yaml: " + ex.ToString());
                 }
 
                 try
                 {
+                    // OVMS and sqlschema like in the Docker image
+                    if (Directory.Exists("/etc/teslalogger/git/OVMSLogger/bin/Debug/net8.0"))
+                    {
+                        Tools.CopyFilesRecursively(new DirectoryInfo("/etc/teslalogger/git/OVMSLogger/bin/Debug/net8.0"), new DirectoryInfo("/etc/teslalogger/OVMS"));
+                    }
+                    if (File.Exists("/etc/teslalogger/git/TeslaLogger/sqlschema.sql"))
+                    {
+                        if (!Directory.Exists("/etc/teslalogger/sqlschema"))
+                        {
+                            _ = Directory.CreateDirectory("/etc/teslalogger/sqlschema");
+                        }
+                        Tools.CopyFile("/etc/teslalogger/git/TeslaLogger/sqlschema.sql", "/etc/teslalogger/sqlschema/sqlschema.sql");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    ex.ToExceptionless().FirstCarUserID().Submit();
+                    Logfile.Log("Exception copying OVMS / sqlschema: " + ex.ToString());
+                }
+
+                try
+                {
+                    if (!Directory.Exists("/var/lib/grafana/dashboards"))
+                    {
+                        Directory.CreateDirectory("/var/lib/grafana/dashboards");
+                    }
+
                     if (!File.Exists("/etc/teslalogger/MQTTClient.exe.config"))
                     {
                         Logfile.Log("Copy empty MQTTClient.exe.config file");
@@ -1487,14 +1536,25 @@ PRIMARY KEY(id)
                 // running in TeslaLogger.exe, prepare update in separate process
                 if (Process.GetCurrentProcess().ProcessName.Equals("TeslaLogger") || Process.GetCurrentProcess().ProcessName == "dotnet")
                 {
+                    // save current json of all cars to KVS, protected on its own: a car without
+                    // json yet must not prevent TLUpdate.exe from starting
                     try
                     {
-                        Tools.CopyFile("/etc/teslalogger/git/TeslaLogger/bin/TLUpdate.exe", "/etc/teslalogger/TLUpdate.exe");
-                        Chmod("/etc/teslalogger/TLUpdate.exe", 777); // Set executable permissions
                         foreach (Car car in Car.Allcars)
                         {
                             car.CurrentJSON.ToKVS();
                         }
+                    }
+                    catch (Exception ex)
+                    {
+                        ex.ToExceptionless().FirstCarUserID().Submit();
+                        Logfile.Log("Exception in CurrentJSON.ToKVS: " + ex.ToString());
+                    }
+
+                    try
+                    {
+                        Tools.CopyFile("/etc/teslalogger/git/TeslaLogger/bin/TLUpdate.exe", "/etc/teslalogger/TLUpdate.exe");
+                        Chmod("/etc/teslalogger/TLUpdate.exe", 777); // Set executable permissions
                         ExceptionlessClient.Default.CreateLog("Install", "Update finished!").FirstCarUserID().Submit();
                         await ExceptionlessClient.Default.ProcessQueueAsync();
                         using (Process process = new Process

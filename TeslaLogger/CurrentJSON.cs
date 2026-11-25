@@ -349,7 +349,10 @@ namespace TeslaLogger
 
         internal static void ToKVS(int CarInDB)
         {
-            KVS.InsertOrUpdate($"currentJSON_{CarInDB}", jsonStringHolder[CarInDB]);
+            if (jsonStringHolder.TryGetValue(CarInDB, out string jsonString))
+            {
+                KVS.InsertOrUpdate($"currentJSON_{CarInDB}", jsonString);
+            }
         }
 
         internal void FromKVS()

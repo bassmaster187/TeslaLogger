@@ -239,13 +239,14 @@ namespace TeslaLogger
             _syncRoot.Wait();
             try
             {
+                    // CarInDB must be set before FromKVS(), it is the key into jsonStringHolder
+                    this.CarInDB = CarInDB;
                     CurrentJSON = new CurrentJSON(this);
                     CurrentJSON.FromKVS();
                     teslaAPIState = new TeslaAPIState(this);
                     this.TeslaName = TeslaName;
                     this.TeslaPasswort = TeslaPasswort;
                     this.CarInAccount = CarInAccount;
-                    this.CarInDB = CarInDB;
                     this.Tesla_Token = StringCipher.Decrypt(TeslaToken);
                     this.Tesla_Token_Expire = TeslaTokenExpire;
                     this.ModelName = ModelName;
