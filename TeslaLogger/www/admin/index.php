@@ -423,6 +423,14 @@ else
 			else
 				$("#unlocked").show();
 
+			// flat tire / low pressure: show if at least one tire that has a reading is below 2.6 bar
+			var tpms = [jsonData["tpms_pressure_fl"], jsonData["tpms_pressure_fr"], jsonData["tpms_pressure_rl"], jsonData["tpms_pressure_rr"]];
+			var lowPressure = tpms.some(function(p) { return p > 0 && p < 2.6; });
+			if (lowPressure)
+				$("#flat_tire").show();
+			else
+				$("#flat_tire").hide();
+
 				
 
 			var p = L.latLng(parseFloat(jsonData["latitude"]), parseFloat(jsonData["longitude"]));
@@ -670,6 +678,7 @@ else
 				<img id="trunk_open" class="caricons" src="img/trunk_open.png" alt="Trunk Open" title="Trunk Open">
 				<img id="door_open" class="caricons" src="img/door_open.png" alt="Door Open" title="Door Open">
 				<img id="unlocked" class="caricons" src="img/unlocked.png" alt="Unlocked" title="Unlocked">
+				<img id="flat_tire" class="caricons" src="img/flat_tire.png" alt="Low Tire Pressure" title="Low Tire Pressure">
 			</div>
 		</div>
 		<div class="tl-hero-status">

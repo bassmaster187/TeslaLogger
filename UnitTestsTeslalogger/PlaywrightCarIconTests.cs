@@ -67,6 +67,10 @@ namespace UnitTestsTeslalogger
             ""frunk"": 1,
             ""trunk"": 1,
             ""locked"": false,
+            ""tpms_pressure_fl"": 2.4,
+            ""tpms_pressure_fr"": 2.9,
+            ""tpms_pressure_rl"": 2.9,
+            ""tpms_pressure_rr"": 2.9,
             ""latitude"": 47.5,
             ""longitude"": 8.5,
             ""heading"": 90,
@@ -106,6 +110,10 @@ namespace UnitTestsTeslalogger
             ""frunk"": 0,
             ""trunk"": 0,
             ""locked"": true,
+            ""tpms_pressure_fl"": 2.9,
+            ""tpms_pressure_fr"": 2.9,
+            ""tpms_pressure_rl"": 2.9,
+            ""tpms_pressure_rr"": 2.9,
             ""latitude"": 47.5,
             ""longitude"": 8.5,
             ""heading"": 90,
@@ -232,7 +240,7 @@ namespace UnitTestsTeslalogger
 
             await page.GotoAsync(AdminUrl + "index.php?carid=" + carId, new PageGotoOptions { WaitUntil = WaitUntilState.DOMContentLoaded });
 
-            string[] iconIds = { "#preconditioning", "#battery_heater", "#window_open", "#frunk_open", "#trunk_open", "#door_open", "#unlocked" };
+            string[] iconIds = { "#preconditioning", "#battery_heater", "#window_open", "#frunk_open", "#trunk_open", "#door_open", "#unlocked", "#flat_tire" };
 
             // 1) with all flags on, every icon must be shown by the page's own logic (no forcing here)
             foreach (string id in iconIds)
@@ -253,6 +261,47 @@ namespace UnitTestsTeslalogger
             string screenshotPath = Path.Combine(ScreenshotDirectory, $"{TestContext.TestName}_{theme}.png");
             await hero.ScreenshotAsync(new LocatorScreenshotOptions { Path = screenshotPath });
             TestContext.WriteLine("Screenshot: " + screenshotPath);
+        }
+
+        // Builds a minimal currentjson payload with the given tire pressures (bar) and every other status flag off.
+        private static string BuildTpmsJson(double fl, double fr, double rl, double rr)
+        {
+            var c = System.Globalization.CultureInfo.InvariantCulture;
+            return "{" +
+                "\"online\": true, \"driving\": false, \"charging\": false, \"sleeping\": false, \"falling_asleep\": false," +
+                "\"battery_level\": 73, \"ideal_battery_range_km\": 320.5, \"battery_range_km\": 300.2, \"odometer\": 12345.6," +
+                "\"is_preconditioning\": false, \"battery_heater\": false, \"open_windows\": 0, \"open_doors\": 0, \"frunk\": 0, \"trunk\": 0, \"locked\": true," +
+                "\"tpms_pressure_fl\": " + fl.ToString(c) + ", \"tpms_pressure_fr\": " + fr.ToString(c) + ", \"tpms_pressure_rl\": " + rl.ToString(c) + ", \"tpms_pressure_rr\": " + rr.ToString(c) + "," +
+                "\"latitude\": 47.5, \"longitude\": 8.5, \"heading\": 90, \"ts\": \"2026-11-24T22:33:53\", \"trip_start_dt\": \"2026-11-24T22:00:00\", \"trip_kwh\": 5.2, \"trip_duration_sec\": 1200, \"trip_distance\": 12.3, \"trip_max_speed\": 95, \"trip_avg_kwh\": 165.0" +
+                "}";
+        }
+
+        // The flat tire icon must appear as soon as one tire with a reading drops below 2.6 bar,
+        // and must stay hidden when all tires are fine or when the car has no TPMS readings (0).
+        [TestMethod]
+        [DataRow(2.9, 2.9, 2.9, 2.9, false)]
+        [DataRow(2.4, 2.9, 2.9, 2.9, true)]
+        [DataRow(2.9, 2.9, 2.5, 2.9, true)]
+        [DataRow(0.0, 0.0, 0.0, 0.0, false)]
+        public async Task FlatTire_LowPressure_ShowsIcon(double fl, double fr, double rl, double rr, bool expectLow)
+        {
+            this.theme = "light";
+
+            await page.RouteAsync("**/current_json.php*", route => route.FulfillAsync(new RouteFulfillOptions
+            {
+                Status = 200,
+                ContentType = "application/json",
+                Body = BuildTpmsJson(fl, fr, rl, rr)
+            }));
+
+            await page.GotoAsync(AdminUrl + "index.php?carid=" + carId, new PageGotoOptions { WaitUntil = WaitUntilState.DOMContentLoaded });
+            await page.WaitForSelectorAsync("#flat_tire", new PageWaitForSelectorOptions { State = WaitForSelectorState.Attached, Timeout = 10000 });
+
+            ILocator flatTire = page.Locator("#flat_tire");
+            if (expectLow)
+                await Expect(flatTire).ToBeVisibleAsync();
+            else
+                await Expect(flatTire).ToBeHiddenAsync();
         }
     }
 }

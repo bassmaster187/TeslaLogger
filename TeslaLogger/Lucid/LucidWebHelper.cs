@@ -43,10 +43,16 @@ namespace TeslaLoggerNET8.Lucid
         private bool isDoorLocked;
         private DateTime lastCapacity_kwhr = DateTime.MinValue;
         private DateTime lastBatteryHealthLevel = DateTime.MinValue;
+        private bool hvac_preconditioning;
+        private bool battery_preconditioning;
+
+        // When false the parser only updates in-memory state and skips every database and file
+        // side effect. Used by the unit tests that replay recorded raw Lucid data.
+        internal bool databaseCalls = true;
 
         internal LucidWebHelper(LucidCar car) : base(car)
         {
-            car.CurrentJSON.current_car_version = car.DbHelper.GetLastCarVersion();
+            car.CurrentJSON.current_car_version = car.CarInDB > 0 ? car.DbHelper.GetLastCarVersion() : "";
 
             byte[] tempTasker = Encoding.UTF8.GetBytes(car.Vin + car.TeslaName);
 
@@ -144,9 +150,6 @@ namespace TeslaLoggerNET8.Lucid
             if (ts.TotalSeconds < 5)
                 return;
 
-            var last_updated_ms_before = last_updated_ms;
-            var kwhr_before = kwhr;
-
             //lastData = System.IO.File.ReadAllText(@"C:\dev\TeslaLoggerNET8\TeslaLogger\bin\Debug\net8.0\lucid\20250430122944434.txt");
             lastData = PythonLucidAPI(car.TeslaName, car.TeslaPasswort, car.FleetApiAddress, (LucidCar)car, out string error);
             if (!string.IsNullOrEmpty(error))
@@ -158,13 +161,18 @@ namespace TeslaLoggerNET8.Lucid
 
             lastNewData = DateTime.UtcNow;
 
-            // var j = JsonConvert.DeserializeObject(ret);
+            ParseLucidData(lastData);
+        }
 
-            // System.IO.File.WriteAllText("lucid/" + DateTime.Now.ToString("yyyyMMddHHmmssfff") + ".txt", lastData);
+        // Parses the raw Lucid API text output (protobuf text format, one "key: value" per line)
+        // and updates the car state. Extracted from GetNewData so it can be unit tested against
+        // recorded raw data (testdata/Lucid_Lucy_raw_*.txt) without calling the Lucid API or the DB.
+        internal void ParseLucidData(string lastData)
+        {
+            var last_updated_ms_before = last_updated_ms;
+            var kwhr_before = kwhr;
 
-
-
-            string[] lines = lastData.Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
+            string[] lines = lastData.Split(new[] { "\r\n", "\n" }, StringSplitOptions.RemoveEmptyEntries);
 
             string currentVIN = "";
 
@@ -253,13 +261,25 @@ namespace TeslaLoggerNET8.Lucid
                                 handleCarVersion(value);
                                 break;
                             case "power":
-                                if (!value.Contains("HVAC"))
+                                // The raw Lucid output contains two "power:" lines: the top level
+                                // power state (POWER_STATE_*) and the nested hvac power state
+                                // (HVAC_*). The nested hvac state is the climate preconditioning
+                                // signal: HVAC_OFF means idle, anything else (e.g. HVAC_PRECONDITION)
+                                // means the climate / preconditioning is running.
+                                if (value.StartsWith("HVAC_", StringComparison.Ordinal))
+                                    hvac_preconditioning = value != "HVAC_OFF";
+                                else
                                 {
                                     if (power != value)
                                         car.Log("Power: " + value + " Range: " + ideal_battery_range);
 
                                     power = value;
                                 }
+                                break;
+                            case "preconditioning_status":
+                                // Battery pack preconditioning (battery { preconditioning_status: ... }).
+                                // Enum: BATTERY_PRECON_UNKNOWN / OFF / ON / UNAVAILABLE.
+                                battery_preconditioning = value == "BATTERY_PRECON_ON";
                                 break;
                             case "speed":
                                 speed = Tools.KmToMl(double.Parse(value, CultureInfo.InvariantCulture), 1);
@@ -305,10 +325,13 @@ namespace TeslaLoggerNET8.Lucid
                                 {
                                     DateTime d = DateTimeOffset.FromUnixTimeMilliseconds(tire_pressure_last_updated2 * 1000).DateTime;
                                     tire_pressure_last_updated = tire_pressure_last_updated2;
-                                    _ = car.DbHelper.InsertTPMSAsync(1, front_left_tire_pressure_bar, d);
-                                    _ = car.DbHelper.InsertTPMSAsync(2, front_right_tire_pressure_bar, d);
-                                    _ = car.DbHelper.InsertTPMSAsync(3, rear_left_tire_pressure_bar, d);
-                                    _ = car.DbHelper.InsertTPMSAsync(4, rear_right_tire_pressure_bar, d);
+                                    if (databaseCalls)
+                                    {
+                                        _ = car.DbHelper.InsertTPMSAsync(1, front_left_tire_pressure_bar, d);
+                                        _ = car.DbHelper.InsertTPMSAsync(2, front_right_tire_pressure_bar, d);
+                                        _ = car.DbHelper.InsertTPMSAsync(3, rear_left_tire_pressure_bar, d);
+                                        _ = car.DbHelper.InsertTPMSAsync(4, rear_right_tire_pressure_bar, d);
+                                    }
                                 }
                                 break;
 
@@ -344,8 +367,11 @@ namespace TeslaLoggerNET8.Lucid
                                 if (car.DisplayName != tempNickname)
                                 {
                                     car.DisplayName = tempNickname;
-                                    car.WriteSettings();
-                                    car.webhelper.TaskerWakeupfile(true);
+                                    if (databaseCalls)
+                                    {
+                                        car.WriteSettings();
+                                        car.webhelper.TaskerWakeupfile(true);
+                                    }
                                 }
                                 break;
 
@@ -363,7 +389,8 @@ namespace TeslaLoggerNET8.Lucid
                                 {
                                     lastCapacity_kwhr = DateTime.Now;
                                     double capacity_kwhr = double.Parse(value, CultureInfo.InvariantCulture);
-                                    car.DbHelper.InsertCan(71, capacity_kwhr); // Nominal full pack
+                                    if (databaseCalls)
+                                        car.DbHelper.InsertCan(71, capacity_kwhr); // Nominal full pack
                                     car.Log($"Battery Capacity: {capacity_kwhr} kWh");
                                 }
                                 break;
@@ -372,7 +399,8 @@ namespace TeslaLoggerNET8.Lucid
                                 {
                                     lastBatteryHealthLevel = DateTime.Now;
                                     double battery_health_level = double.Parse(value, CultureInfo.InvariantCulture);
-                                    car.DbHelper.InsertCan(1000, battery_health_level); // Battery Health Level / SOH
+                                    if (databaseCalls)
+                                        car.DbHelper.InsertCan(1000, battery_health_level); // Battery Health Level / SOH
                                     car.Log($"Battery Health Level / SOH: {battery_health_level}");
                                 }
                                 break;
@@ -394,8 +422,17 @@ namespace TeslaLoggerNET8.Lucid
             if (last_updated_ms_before != last_updated_ms && last_updated_ms_before > 0)
                 CalculatePower(last_updated_ms_before, kwhr_before);
 
-            if (Math.Abs(max_cell_temp - max_cell_temp_db) > 0.25 || Math.Abs(min_cell_temp - min_cell_temp_db) > 0.25)
+            if (databaseCalls && (Math.Abs(max_cell_temp - max_cell_temp_db) > 0.25 || Math.Abs(min_cell_temp - min_cell_temp_db) > 0.25))
                 InsertBatteryTemperatureData();
+
+            // current_is_preconditioning covers cabin climate AND battery pack preconditioning
+            // (same semantics as the Tesla API flag), so combine both Lucid signals.
+            bool preconditioning = hvac_preconditioning || battery_preconditioning;
+            if (preconditioning != car.CurrentJSON.current_is_preconditioning)
+            {
+                car.CurrentJSON.current_is_preconditioning = preconditioning;
+                car.Log($"Preconditioning: {preconditioning} (hvac: {hvac_preconditioning}, battery: {battery_preconditioning})");
+            }
 
             car.CurrentJSON.CreateCurrentJSON();
         }
@@ -403,8 +440,11 @@ namespace TeslaLoggerNET8.Lucid
         private void UpdateModelName()
         {
             car.ModelName = "Lucid " + car.CarSpecialType + " " + car.TrimBadging;
-            car.WriteSettings();
-            car.webhelper.TaskerWakeupfile(true);
+            if (databaseCalls)
+            {
+                car.WriteSettings();
+                car.webhelper.TaskerWakeupfile(true);
+            }
         }
 
         private void CalculatePower(long last_updated_ms_before, double kwhr_before)
@@ -462,9 +502,12 @@ namespace TeslaLoggerNET8.Lucid
                     car.Log("Car Version: " + car_version);
                     car.CurrentJSON.current_car_version = car_version;
 
-                    car.DbHelper.SetCarVersion(car_version);
+                    if (databaseCalls)
+                    {
+                        car.DbHelper.SetCarVersion(car_version);
 
-                    car.webhelper.TaskerWakeupfile(true);
+                        car.webhelper.TaskerWakeupfile(true);
+                    }
                 }
 
             }

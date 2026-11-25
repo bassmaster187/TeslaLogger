@@ -1,0 +1,197 @@
+[vehicle_id: "000000000000000000000000"
+access_level: ACCESS_LEVEL_PRIMARY_OWNER
+config {
+  vin: "50EA1PFA4PAXXXXXX"
+  model: MODEL_AIR
+  variant: MODEL_VARIANT_PURE
+  nickname: "Lucy"
+  paint_color: PAINT_COLOR_STELLAR_WHITE
+  ema_id: "XXXXXXXXXXXXXXXX"
+  wheels: WHEELS_RANGE
+  ea_subscription {
+  }
+  charging_accounts {
+    ema_id: "XXXXXXXXXXXXXXXX"
+    vehicle_id: "000000000000000000000000"
+    status: 8
+    created_at_epoch_sec: 1714472131
+    expiry_on_epoch_sec: 1746008131
+    vendor_name: CHARGING_VENDOR_BOSCH
+    plan_id: "0"
+  }
+  country_code: "CH"
+  region_code: "EU"
+  edition: EDITION_STANDARD
+  battery: BATTERY_TYPE_01
+  interior: INTERIOR_MOJAVE
+  look: LOOK_PLATINUM
+  exterior_color_code: "L102"
+  interior_color_code: "INT21"
+  frunk_strut: STRUT_TYPE_GAS
+  roof: ROOF_TYPE_METAL
+  front_seats_heating: FRONT_SEATS_HEATING_AVAILABLE
+  front_seats_ventilation: FRONT_SEATS_VENTILATION_UNAVAILABLE
+  second_row_heated_seats: SECOND_ROW_HEATED_SEATS_AVAILABLE
+  rear_seat_config: REAR_SEAT_CONFIG_5_SEAT
+  heated_steering_wheel: HEATED_STEERING_WHEEL_AVAILABLE
+}
+state {
+  battery {
+    remaining_range: 280
+    charge_percent: 44.700000666081905
+    kwhr: 34.089999238029122
+    capacity_kwhr: 84.839998103678226
+    battery_health: WARNING_OFF
+    low_charge_level: WARNING_OFF
+    critical_charge_level: WARNING_OFF
+    unavailable_range: 4.5000000670552254
+    preconditioning_status: BATTERY_PRECON_ON
+    preconditioning_time_remaining: 65535
+    battery_health_level: 96.000001430511475
+    bmu_software_version_major: 4
+    bmu_software_version_minor: 19
+    bmu_software_version_micro: 11
+    battery_cell_type: BATTERY_CELL_TYPE_LG_M48
+    battery_pack_type: BATTERY_PACK_TYPE_AIR_18
+    max_cell_temp: 6.6000015884637833
+    min_cell_temp: 3.7000015452504158
+  }
+  power: POWER_STATE_MONITOR
+  cabin {
+    interior_temp: 13.80000139772892
+    exterior_temp: -0.89999941736459732
+  }
+  body {
+    door_locks: LOCK_STATE_LOCKED
+    front_cargo: DOOR_STATE_CLOSED
+    rear_cargo: DOOR_STATE_CLOSED
+    front_left_door: DOOR_STATE_CLOSED
+    front_right_door: DOOR_STATE_CLOSED
+    rear_left_door: DOOR_STATE_CLOSED
+    rear_right_door: DOOR_STATE_CLOSED
+    charge_port: DOOR_STATE_CLOSED
+    walkaway_lock: WALKAWAY_ACTIVE
+    access_type_status: ACCESS_REQUEST_ACTIVE
+    keyfob_battery_status: KEYFOB_BATTERY_STATUS_SUFFICIENT
+    all_windows_position: ALL_WINDOW_POSITION_CLOSED
+    window_position {
+      left_front: WINDOW_POSITION_STATUS_FULLY_CLOSED
+      left_rear: WINDOW_POSITION_STATUS_FULLY_CLOSED
+      right_front: WINDOW_POSITION_STATUS_FULLY_CLOSED
+      right_rear: WINDOW_POSITION_STATUS_FULLY_CLOSED
+    }
+  }
+  last_updated_ms: 1795597894466
+  chassis {
+    odometer_km: 41586.80061969161
+    front_left_tire_pressure_bar: 3.0250000450760126
+    front_right_tire_pressure_bar: 3.0250000450760126
+    rear_left_tire_pressure_bar: 3.0750000458210707
+    rear_right_tire_pressure_bar: 3.0250000450760126
+    headlights: LIGHT_STATE_UNKNOWN
+    hard_warn_left_front: WARNING_OFF
+    hard_warn_left_rear: WARNING_OFF
+    hard_warn_right_front: WARNING_OFF
+    hard_warn_right_rear: WARNING_OFF
+    soft_warn_left_front: WARNING_OFF
+    soft_warn_left_rear: WARNING_OFF
+    soft_warn_right_front: WARNING_ON
+    soft_warn_right_rear: WARNING_ON
+    software_version: "2.11.0"
+    sensor_defective_left_front: TIRE_PRESSURE_SENSOR_DEFECTIVE_OFF
+    sensor_defective_left_rear: TIRE_PRESSURE_SENSOR_DEFECTIVE_OFF
+    sensor_defective_right_front: TIRE_PRESSURE_SENSOR_DEFECTIVE_OFF
+    sensor_defective_right_rear: TIRE_PRESSURE_SENSOR_DEFECTIVE_OFF
+    tire_pressure_last_updated: 1795594623
+  }
+  charging {
+    charge_state: CHARGE_STATE_NOT_CONNECTED
+    session_minutes_remaining: 65535
+    charge_limit: 26960
+    cable_lock: LOCK_STATE_UNLOCKED
+    charge_limit_percent: 80.0000011920929
+    charge_scheduled_time: 4095
+    scheduled_charge: SCHEDULED_CHARGE_STATE_IDLE
+    scheduled_charge_unavailable: SCHEDULED_CHARGE_UNAVAILABLE_NO_REQUEST
+    port_power: 5.9604644775390625e-06
+    discharge_target_soe: 10
+    active_session_ac_current_limit: 32
+    energy_ac_current_limit: 32
+    ea_pnc_status: EA_PNC_STATUS_DISABLE
+    charging_session_restart_allowed: 
+CHARGING_SESSION_RESTART_ALLOWED_STATUS_NOT_ALLOWED
+  }
+  gps {
+    location {
+      latitude: 48.0
+      longitude: 9.0
+    }
+    elevation: 54922
+    position_time: 1741962558
+    heading_precise: 357.10000532120466
+  }
+  software_update {
+    version_available: "0.0.0"
+    state: UPDATE_SUCCESS_WITH_WARNINGS
+    tcu_download_status: TCU_SOFTWARE_DOWNLOAD_STATUS_DOWNLOAD_COMPLETE
+  }
+  alarm {
+    status: ALARM_STATUS_ARMED
+    mode: ALARM_MODE_SILENT
+  }
+  cloud_connection: CLOUD_CONNECTION_CONNECTED
+  keyless_driving: KEYLESS_DRIVING_OFF
+  hvac {
+    power: HVAC_OFF
+    defrost: DEFROST_OFF
+    precondition_status: HVAC_PRECONDITION_STATUS_NOT_ACTIVE_PRECONDITION
+    keep_climate_status: KEEP_CLIMATE_STATUS_INACTIVE
+    max_ac_status: MAX_AC_STATE_OFF
+    seats {
+      driver_heat_backrest_zone1: SEAT_CLIMATE_MODE_OFF
+      driver_heat_backrest_zone3: SEAT_CLIMATE_MODE_OFF
+      driver_heat_cushion_zone2: SEAT_CLIMATE_MODE_OFF
+      driver_heat_cushion_zone4: SEAT_CLIMATE_MODE_OFF
+      driver_vent_backrest: SEAT_CLIMATE_MODE_OFF
+      driver_vent_cushion: SEAT_CLIMATE_MODE_OFF
+      front_passenger_heat_backrest_zone1: SEAT_CLIMATE_MODE_OFF
+      front_passenger_heat_backrest_zone3: SEAT_CLIMATE_MODE_OFF
+      front_passenger_heat_cushion_zone2: SEAT_CLIMATE_MODE_OFF
+      front_passenger_heat_cushion_zone4: SEAT_CLIMATE_MODE_OFF
+      front_passenger_vent_backrest: SEAT_CLIMATE_MODE_OFF
+      front_passenger_vent_cushion: SEAT_CLIMATE_MODE_OFF
+      rear_passenger_heat_left: SEAT_CLIMATE_MODE_OFF
+      rear_passenger_heat_center: SEAT_CLIMATE_MODE_OFF
+      rear_passenger_heat_right: SEAT_CLIMATE_MODE_OFF
+    }
+    sync_set: SYNC_SET_OFF
+    rear_window_heating_status: REAR_WINDOW_HEATING_STATUS_OFF
+    steering_heater: STEERING_HEATER_STATUS_OFF
+    front_left_set_temperature: 22.500000208616257
+    hvac_limited: HVAC_LIMITED_OFF
+  }
+  drive_mode: DRIVE_MODE_COMFORT
+  privacy_mode: 3
+  gear_position: GEAR_PARK
+  mobile_app_request {
+    frunk_cargo_request: DOOR_STATE_OPEN
+  }
+  tcu: TCU_FULL
+  tcu_internet {
+    lte_type: LTE_TYPE_4G
+    lte_status: INTERNET_CONNECTED
+    wifi_status: INTERNET_DISCONNECTED
+    lte_rssi: 32
+  }
+  fault_state {
+    mpb_fault_status: MPB_FAULT_STATUS_NORMAL
+  }
+  notifications {
+    powertrain_message: POWERTRAIN_MESSAGE_BLANK_NO_MESSAGE
+    powertrain_notify_status: POWERTRAIN_NOTIFY_NONE
+    charging_general_status: GENERAL_CHARGE_DEFAULT
+    battery_charge_status: GENERAL_CHARGE_DEFAULT
+  }
+  low_power_mode_status: LOW_POWER_MODE_STATUS_INACTIVE
+}
+]
