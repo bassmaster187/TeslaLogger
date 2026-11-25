@@ -9,11 +9,11 @@ namespace TeslaLogger
 
         public static TelemetryConnection Instance(Car car)
         {
-            if (ApplicationSettings.Default.TelemetryServerType == "ZMQ")
+            if (TelemetrySettings.TelemetryServerType == "ZMQ")
             {
                 return new TelemetryConnectionZMQ(car);
             }
-            else if (ApplicationSettings.Default.TelemetryServerType == "KAFKA")
+            else if (TelemetrySettings.TelemetryServerType == "KAFKA")
             {
                 return new TelemetryConnectionKafka(car);
             }
