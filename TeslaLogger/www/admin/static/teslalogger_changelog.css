@@ -1,0 +1,98 @@
+/*
+ * teslalogger_changelog.css
+ *
+ * Loaded only by changelog.php (see the <link> tag in the PHP file), after
+ * teslalogger_ui.css (tokens and basic components) and after
+ * teslalogger_style.css (theme, header and menu).
+ *
+ * Styles the rendered markdown (Parsedown) with the design tokens, so the
+ * page follows the browser setting (prefers-color-scheme).
+ *
+ * Bump the ?v= in the <link> tag of changelog.php after changes.
+ */
+
+/* Page layout ----------------------------------------------------------------
+ * The cards stack in a grid with the same gap as the start page uses
+ * (see .tl-grid in teslalogger_index.css).
+ */
+
+.tl-page {
+	display: grid;
+	gap: var(--tl-gap);
+}
+
+/* Markdown content ------------------------------------------------------------ */
+
+.tl-markdown {
+	color: var(--tl-text);
+	overflow-wrap: break-word;
+}
+
+/* The theme sizes every h1 to 26px; the markdown has one h1 per version.
+   Make them a bit smaller, so a version block stays compact. */
+
+.tl-markdown h1 {
+	clear: none;
+	font-size: 20px;
+	line-height: 1.3;
+	margin: 0 0 12px;
+}
+
+/* A version block starts after the first h1, the top border separates the blocks */
+
+.tl-markdown h1:not(:first-of-type) {
+	border-top: 1px solid var(--tl-border);
+	margin-top: 24px;
+	padding-top: 24px;
+}
+
+.tl-markdown ul {
+	margin: 0 0 12px;
+	padding-left: 22px;
+}
+
+.tl-markdown li {
+	margin-bottom: 6px;
+}
+
+.tl-markdown li::marker {
+	color: var(--tl-muted);
+}
+
+.tl-markdown p {
+	margin-bottom: 12px;
+}
+
+/* code / pre */
+
+.tl-markdown code {
+	background: var(--tl-neutral-soft);
+	border-radius: 4px;
+	font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+	font-size: 13px;
+	padding: 2px 5px;
+}
+
+.tl-markdown pre {
+	background: var(--tl-neutral-soft);
+	border: none;
+	border-radius: 8px;
+	margin-bottom: 12px;
+	padding: 12px;
+	white-space: pre-wrap;
+	word-wrap: break-word;
+}
+
+.tl-markdown pre code {
+	background: transparent;
+	padding: 0;
+}
+
+/* hr */
+
+.tl-markdown hr {
+	background-color: var(--tl-border);
+	border: 0;
+	height: 1px;
+	margin-bottom: 16px;
+}

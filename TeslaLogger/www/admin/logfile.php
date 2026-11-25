@@ -33,73 +33,90 @@ if (!isset($_REQUEST["sleep"]) && isset($_REQUEST["lines"]))
     <title>Teslalogger Logfile</title>
 	<link rel="stylesheet" href="static/jquery/ui/1.12.1/themes/smoothness/jquery-ui.css">
 	<link rel="stylesheet" href="static/teslalogger_style.css?v=4">
+	<link rel="stylesheet" href="static/teslalogger_ui.css?v=30">
+	<link rel="stylesheet" href="static/teslalogger_logfile.css?v=3">
 	<script src="static/jquery/jquery-1.12.4.js"></script>
 	<script src="static/jquery/ui/1.12.1/jquery-ui.js"></script>
-	<script src="jquery/jquery-migrate-1.4.1.min.js"></script>
+	<script src="static/jquery/jquery-migrate-1.4.1.min.js"></script>
 	<link rel="stylesheet" href="static/leaflet/1.9.4/leaflet.css" />
 	<link rel='stylesheet' id='genericons-css'  href='static/genericons.css?ver=3.0.3' type='text/css' media='all' />
-   <!-- Make sure you put this AFTER Leaflet's CSS -->
+    <!-- Make sure you put this AFTER Leaflet's CSS -->
 	<script src="static/leaflet/1.9.4/leaflet.js" integrity="sha512-BwHfrr4c9kmRkLw6iXFdzcdWV/PGkVgiIyIWLLlTSXzWQzxuSg4DiQUCpauz/EWjgk5TYQqX/kvn9pG1NpYfqg==" crossorigin=""></script>
-
-	</head>
-  	<body>
-	<script>$( function() {
-		var objDiv = document.getElementById("log");
-		objDiv.scrollTop = objDiv.scrollHeight;
-	});
+	<script>
+	function logScrollToBottom() {
+		var el = document.getElementById("log");
+		if (el) el.scrollTop = el.scrollHeight;
+	}
+	window.addEventListener("load", logScrollToBottom);
 	</script>
-
-	<?php
+  </head>
+  	<body>
+  <?php
     include "menu.php";
     echo(menu("Logfile"));
 
 	$carfilter = $_REQUEST["c"];
-?>
-<a href="log.php"><?php t("Download Logfile"); ?></a>
+ ?>
 
-<form action="logfile.php" style="max-width: 1260px;">
-<table width="100%">
-<tr>
-	<td width="20%" nowrap><?php t("Lines"); ?>: <input type="number" name="lines" value="<?= $lines ?>" min="10" max="25000"></td>
-	<td width="20%" nowrap>car: 
-		<select name="c">
-			<option value="">All</option>
+ <div class="tl-page">
+	<div class="tl-page-head">
+		<h2 class="tl-page-title"><?php t("Logfile"); ?></h2>
+		<a href="log.php" class="tl-download"><?php t("Download Logfile"); ?></a>
+	</div>
+
+	<form action="logfile.php" class="tl-card">
+		<h2 class="tl-card-title"><?php t("Logfile"); ?></h2>
+		<div class="tl-form">
+			<div class="tl-form-item">
+				<label for="f_lines"><?php t("Lines"); ?></label>
+				<input type="number" id="f_lines" name="lines" value="<?= $lines ?>" min="10" max="25000">
+			</div>
+			<div class="tl-form-item">
+				<label for="f_car">car:</label>
+				<select id="f_car" name="c">
+					<option value="">All</option>
 <?php
-			$allcars = file_get_contents(GetTeslaloggerURL("getallcars"),0, stream_context_create(["http"=>["timeout"=>2]]));
-			$jcars = json_decode($allcars);
+					$allcars = file_get_contents(GetTeslaloggerURL("getallcars"),0, stream_context_create(["http"=>["timeout"=>2]]));
+					$jcars = json_decode($allcars);
 
-			foreach($jcars as $k => $v) {
-                                $dn = $v->{"display_name"};
-                                $carid = $v->{"id"};
+					foreach($jcars as $k => $v) {
+                        $dn = $v->{"display_name"};
+                        $carid = $v->{"id"};
 
-								echo(str_repeat("\t",3));
-								echo('<option value="'.$carid.'"');
-								if ($carid == $carfilter)
-									echo(" selected");
+						echo(str_repeat("\t",3));
+						echo('<option value="'.$carid.'"');
+						if ($carid == $carfilter)
+							echo(" selected");
 
-								echo('>'.$dn.'</option>'); 
-								echo("\n");
-                            }
-							?>
-		</select>
-	</td>
-	<td width="20%" nowrap><?php t("Housekeeping"); ?>: <input type="checkbox" name="hk" value="1" <?= $hk ?>> </td>
-	<td width="20%" nowrap><?php t("Update"); ?>: <input type="checkbox" name="update" value="1" <?= $update ?>> </td>
-	<td width="20%" nowrap><?php t("Sleep Attempt"); ?>: <input type="checkbox" name="sleep" value="1" <?= $sleep ?>> </td>
-	<td><input type="submit" value="<?php t("OK"); ?>" style="float: right;"></td>
-</tr>
-</table>
-</form>
+						echo('>'.$dn.'</option>');
+						echo("\n");
+                    }
+					?>
+				</select>
+			</div>
+			<div class="tl-form-item">
+				<label for="f_hk"><?php t("Housekeeping"); ?></label>
+				<input type="checkbox" id="f_hk" class="tl-toggle" name="hk" value="1" <?= $hk ?>>
+			</div>
+			<div class="tl-form-item">
+				<label for="f_update"><?php t("Update"); ?></label>
+				<input type="checkbox" id="f_update" class="tl-toggle" name="update" value="1" <?= $update ?>>
+			</div>
+			<div class="tl-form-item">
+				<label for="f_sleep"><?php t("Sleep Attempt"); ?></label>
+				<input type="checkbox" id="f_sleep" class="tl-toggle" name="sleep" value="1" <?= $sleep ?>>
+			</div>
+			<div class="tl-form-item tl-form-actions">
+				<button type="submit"><?php t("OK"); ?></button>
+			</div>
+		</div>
+	</form>
 
-<div id="log" style="overflow: auto; height: 820px; max-width: 1260px;">
-<?PHP
-/*
-	$output  = shell_exec("tail -n$lines /etc/teslalogger/nohup.out");
-	if ($output === false) {
-        // Handle the error
-		echo "error";
-    } */
-
+	<div class="tl-card tl-logcard">
+		<div class="tl-card-head">
+			<h2 class="tl-card-title"><?php t("Logfile"); ?></h2>
+		</div>
+		<div id="log" class="tl-log"><?PHP
 	$url = GetTeslaloggerURL("taillogfile/$lines");
     $output = @file_get_contents($url);
 
@@ -169,7 +186,7 @@ if (!isset($_REQUEST["sleep"]) && isset($_REQUEST["lines"]))
 		$output = preg_replace('/.*execute: mkdir \/etc\/teslalogger\/git.*/', "", $output);
 		$output = preg_replace('/.*execute: cert-sync.*/', "", $output);
 		$output = preg_replace('/.*Mono Certificate Store Sync.*/', "", $output);
-		$output = preg_replace('/.*Populate Mono certificate store.*/', "", $output);
+		$output = preg_replace('/.*Populate Mono certificate store:.*/', "", $output);
 		$output = preg_replace('/.*Motus Technologies.*/', "", $output);
 		$output = preg_replace('/.*Importing into legacy system store:.*/', "", $output);
 		$output = preg_replace('/.*I already trust (\d+), your new list has (\d+).*/', "", $output);
@@ -201,9 +218,11 @@ if (!isset($_REQUEST["sleep"]) && isset($_REQUEST["lines"]))
 	}
 
 	$output = preg_replace("/[\r\n]{2,}/", "\n", $output); // unnecessary new lines
-
-	echo nl2br($output);
-?>
-</div>
-</div>
-</div>
+	// white-space: pre-wrap renders real line breaks, so nl2br() would double
+	// every line: convert them to <br> without keeping the line break
+	echo str_replace("\r\n", "<br>", str_replace("\n", "<br>", $output));
+?>		</div>
+	</div>
+ </div>
+</body>
+</html>

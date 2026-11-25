@@ -9,17 +9,14 @@ require_once("tools.php");
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title><?php t("Charging Costs"); ?></title>
 	<link rel="stylesheet" href="static/jquery/ui/1.12.1/themes/smoothness/jquery-ui.css">
-	<link rel="stylesheet" href="static/teslalogger_style.css?v=4">
+	<link rel="stylesheet" href="static/teslalogger_style.css?v=5">
+	<link rel="stylesheet" href="static/teslalogger_ui.css?v=30">
 	<script src="static/jquery/jquery-1.12.4.js"></script>
 	<script src="static/jquery/ui/1.12.1/jquery-ui.js"></script>
+	<script src="static/jquery/jquery-migrate-1.4.1.min.js"></script>
 	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
 	<link rel='stylesheet' id='genericons-css'  href='static/genericons.css?ver=3.0.3' type='text/css' media='all' />
 	<script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
-<style>
-.sum {padding-left: 20px; text-align: right;}
-input {width: 100px; padding-right: 10px;}
-input[type=number] {text-align: right;}
-</style>
 
 	<script>
     var minutes;
@@ -54,6 +51,7 @@ input[type=number] {text-align: right;}
         if (errortext != undefined)
         {
             $("#errortext").text(errortext);
+            $("#errortext").closest(".tl-alert").show();
         }
         else
         {
@@ -182,27 +180,74 @@ input[type=number] {text-align: right;}
 include "menu.php";
 echo(menu("Charging Costs"));
 ?>
-<div>
-<h1 style="color: red;"><span id="errortext"></span></h1>
-<form onsubmit="save(event);">
-<table>
-<tr><td><h1><?php t("Charging Costs"); ?></h1></td><td></td></tr>
-<tr><td><?php t("Charger"); ?>:&nbsp;</td><td colspan="4"><span id="address"></span></td></tr>
-<tr><td><?php t("Date"); ?>:&nbsp;</td><td colspan="4"><span id="StartDate"></span></td></tr>
-<tr><td><?php t("Duration"); ?>:&nbsp;</td><td colspan="4"><span id="minutes"></span></td></tr>
-<tr><td><?php t("Charged"); ?>:&nbsp;</td><td colspan="4"><span id="charge_energy_added"></span></td></tr>
-<tr><td><?php t("Efficiency"); ?>:&nbsp;</td><td colspan="4"><span id="charge_efficiency"></span></td></tr>
-<tr><td>&nbsp;</td></tr>
-<tr><td><?php t("Currency"); ?>:&nbsp;</td><td><input id="cost_currency" placeholder="EUR" tabindex="1"></span></td><td></td><td></td></tr>
-<tr><td><?php t("kWh according to meter/invoice"); ?>:&nbsp;</td><td><input id="cost_kwh_meter_invoice" type="number" step="any" inputmode="decimal" tabindex="2"></span></td></tr>
-<tr><td><?php t("Cost per kWh"); ?>:&nbsp;</td><td><input id="cost_per_kwh" type="number" step="any" inputmode="decimal" tabindex="3"></span></td><td> * <span id="kwh_charged"></span>&nbsp;<?php t("kWh"); ?></td><td class="sum"><span id="cost_per_kwh_sum"></span></td></tr>
-<tr><td><?php t("Cost per charge"); ?>:&nbsp;</td><td><input id="cost_per_session" type="number" step="any" inputmode="decimal" tabindex="4"></span></td><td></td><td class="sum"><span id="cost_per_session_sum"></span></td></tr>
-<tr><td><?php t("Cost per minute"); ?>:&nbsp;</td><td><input id="cost_per_minute" type="number" step="any" inputmode="decimal" tabindex="5"></span></td><td> * <span id="minutes_charged"></span>&nbsp;<?php t("Minutes"); ?></td><td class="sum"><span id="cost_per_minute_sum"></span></td></tr>
-<tr><td><?php t("Idle cost per minute"); ?>:&nbsp;</td><td><input id="cost_idle_fee_total" type="number" step="any" inputmode="decimal" tabindex="6"></span></td><td></td><td class="sum"><span id="cost_idle_fee_total_sum"></span></td></tr>
-<tr><td colspan="4"><hr></td></tr>
-<tr><td><b><?php t("Total"); ?>:&nbsp;</b></td><td></td><td></td><td class="sum"><b><span id="cost_total"></span></b></td><td><b><span id="currency"></span></b></td></tr>
-<tr><td></td><td></td><td></td><td>&nbsp;</td></tr>
-<tr><td></td><td></td><td></td><td><button style="float: right;" tabindex="7"><?php t("Save"); ?></button></td></tr>
-</table>
-</form>
+<div class="tl-page">
+	<div class="tl-alert tl-alert-danger" style="display:none;"><span id="errortext"></span></div>
+
+	<form onsubmit="save(event);">
+		<div class="tl-page-head">
+			<h2 class="tl-page-title"><?php t("Charging Costs"); ?></h2>
+		</div>
+
+		<div class="tl-card">
+			<div class="tl-cs-info">
+				<div class="tl-cs-info-row"><span class="tl-cs-label"><?php t("Charger"); ?></span><span id="address"></span></div>
+				<div class="tl-cs-info-row"><span class="tl-cs-label"><?php t("Date"); ?></span><span id="StartDate"></span></div>
+				<div class="tl-cs-info-row"><span class="tl-cs-label"><?php t("Duration"); ?></span><span id="minutes"></span></div>
+				<div class="tl-cs-info-row"><span class="tl-cs-label"><?php t("Charged"); ?></span><span id="charge_energy_added"></span></div>
+				<div class="tl-cs-info-row"><span class="tl-cs-label"><?php t("Efficiency"); ?></span><span id="charge_efficiency"></span></div>
+			</div>
+		</div>
+
+		<div class="tl-card">
+			<h2 class="tl-card-title"><?php t("Calculation"); ?></h2>
+			<div class="tl-cs-calc">
+				<div class="tl-cs-row">
+					<label for="cost_currency"><?php t("Currency"); ?></label>
+					<input id="cost_currency" placeholder="EUR" tabindex="1">
+					<span class="tl-cs-mid"></span>
+					<span class="tl-cs-sum"></span>
+				</div>
+				<div class="tl-cs-row">
+					<label for="cost_kwh_meter_invoice"><?php t("kWh according to meter/invoice"); ?></label>
+					<input id="cost_kwh_meter_invoice" type="number" step="any" inputmode="decimal" tabindex="2">
+					<span class="tl-cs-mid"></span>
+					<span class="tl-cs-sum"></span>
+				</div>
+				<div class="tl-cs-row">
+					<label for="cost_per_kwh"><?php t("Cost per kWh"); ?></label>
+					<input id="cost_per_kwh" type="number" step="any" inputmode="decimal" tabindex="3">
+					<span class="tl-cs-mid"> * <span id="kwh_charged"></span> <?php t("kWh"); ?></span>
+					<span class="tl-cs-sum"><span id="cost_per_kwh_sum"></span></span>
+				</div>
+				<div class="tl-cs-row">
+					<label for="cost_per_session"><?php t("Cost per charge"); ?></label>
+					<input id="cost_per_session" type="number" step="any" inputmode="decimal" tabindex="4">
+					<span class="tl-cs-mid"></span>
+					<span class="tl-cs-sum"><span id="cost_per_session_sum"></span></span>
+				</div>
+				<div class="tl-cs-row">
+					<label for="cost_per_minute"><?php t("Cost per minute"); ?></label>
+					<input id="cost_per_minute" type="number" step="any" inputmode="decimal" tabindex="5">
+					<span class="tl-cs-mid"> * <span id="minutes_charged"></span> <?php t("Minutes"); ?></span>
+					<span class="tl-cs-sum"><span id="cost_per_minute_sum"></span></span>
+				</div>
+				<div class="tl-cs-row">
+					<label for="cost_idle_fee_total"><?php t("Idle cost per minute"); ?></label>
+					<input id="cost_idle_fee_total" type="number" step="any" inputmode="decimal" tabindex="6">
+					<span class="tl-cs-mid"></span>
+					<span class="tl-cs-sum"><span id="cost_idle_fee_total_sum"></span></span>
+				</div>
+			</div>
+
+			<div class="tl-cs-total">
+				<span class="tl-cs-label"><?php t("Total"); ?></span>
+				<span class="tl-cs-total-sum"><span id="cost_total"></span></span>
+				<span class="tl-cs-total-cur"><span id="currency"></span></span>
+			</div>
+
+			<div class="tl-cs-actions">
+				<button type="submit" tabindex="7"><?php t("Save"); ?></button>
+			</div>
+		</div>
+	</form>
 </div>

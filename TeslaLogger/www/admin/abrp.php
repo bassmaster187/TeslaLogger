@@ -23,10 +23,11 @@ else
 	<link rel="apple-touch-icon" href="img/apple-touch-icon.png">
 	<title><?php t("ABRPTitle"); ?></title>
 	<link rel="stylesheet" href="static/jquery/ui/1.12.1/themes/smoothness/jquery-ui.css">
-	<link rel="stylesheet" href="static/teslalogger_style.css?v=4">
+	<link rel="stylesheet" href="static/teslalogger_style.css?v=5">
+	<link rel="stylesheet" href="static/teslalogger_ui.css?v=30">
 	<script src="static/jquery/jquery-1.12.4.js"></script>
 	<script src="static/jquery/ui/1.12.1/jquery-ui.js"></script>
-	<script src="jquery/jquery-migrate-1.4.1.min.js"></script>
+	<script src="static/jquery/jquery-migrate-1.4.1.min.js"></script>
 	<link rel="stylesheet" href="static/leaflet/1.9.4/leaflet.css" />
 	<link rel='stylesheet' id='genericons-css'  href='static/genericons.css?ver=3.0.3' type='text/css' media='all' />
 </head>
@@ -44,9 +45,6 @@ else
     $token = $jabrp->{"token"};
     $mode = $jabrp->{"mode"};
 
-    echo("<!-- Response of abrp/$current_carid/info:\n");
-    var_dump($abrpinfo);
-    echo ("-->\n");
 ?>
 
 <script>
@@ -78,33 +76,47 @@ else
     });
 </script>
 
-<div id="content" style="max-width:1036px;">
-<h1><?php t("ABRPTitle"); ?></h1>
-<?php t("TextABRP"); ?>
+<div class="tl-page">
+	<div class="tl-page-head">
+		<h2 class="tl-page-title"><?php t("ABRPTitle"); ?></h2>
+	</div>
+
+	<div class="tl-card">
+		<p class="tl-muted" style="margin-top:0;"><?php t("TextABRP"); ?></p>
+	</div>
+
+	<div class="tl-card">
+		<h2 class="tl-card-title"><?php t("Setup"); ?></h2>
+		<ol class="tl-suc-steps">
+			<li><?php t("ABRP1"); ?></li>
+			<li><?php t("ABRP2"); ?></li>
+			<li><?php t("ABRP3"); ?></li>
+			<li><?php t("ABRP4"); ?></li>
+			<li><?php t("ABRP5"); ?></li>
+			<li><?php t("ABRP6"); ?></li>
+			<li><?php t("ABRP7"); ?></li>
+			<li><?php t("ABRP8"); ?></li>
+			<li><?php t("ABRP9"); ?></li>
+		</ol>
+		<p class="tl-muted" style="margin-bottom:0;"><?php t("ABRPYT"); ?>: <a href="https://youtu.be/00s7Y8Iv2iw">YouTube</a></p>
+	</div>
+
+	<div class="tl-card tl-small-form-card">
+		<h2 class="tl-card-title"><?php t("Settings"); ?></h2>
+		<div class="tl-form tl-small-form">
+			<div class="tl-form-item">
+				<label for="token"><?php t("ABRPToken"); ?></label>
+				<input class="tl-small-input" id="token" value="<?= $token ?>"/>
+			</div>
+			<div class="tl-form-item">
+				<label for="mode"><?php t("Enabled"); ?></label>
+				<label class="tl-switch"><input type="checkbox" id="mode" <?PHP if ($mode === 1) echo("checked");  ?>><span class="tl-switch-track"></span></label>
+			</div>
+			<div class="tl-form-actions">
+				<button onClick="javascript:Save();"><?php t("Save"); ?></button>
+			</div>
+		</div>
+	</div>
 </div>
-<h1><?php t("Setup"); ?></h1>
-<ul>
-	<li><?php t("ABRP1"); ?></li>
-	<li><?php t("ABRP2"); ?></li>
-	<li><?php t("ABRP3"); ?></li>
-	<li><?php t("ABRP4"); ?></li>
-	<li><?php t("ABRP5"); ?></li>
-	<li><?php t("ABRP6"); ?></li>
-	<li><?php t("ABRP7"); ?></li>
-	<li><?php t("ABRP8"); ?></li>
-	<li><?php t("ABRP9"); ?></li>
-</ul>
-<?php t("ABRPYT"); ?>: <a href="https://youtu.be/00s7Y8Iv2iw">YouTube</a>
-<h1><?php t("Settings"); ?></h1>
-<table>
-<tr>
-	<td><?php t("ABRPToken"); ?>:</td><td><input id="token" size="40" value="<?= $token ?>"/></td>
-</tr>
-<tr>
-	<td><?php t("Enabled"); ?>:</td><td><input id="mode" type="checkbox" <?PHP if ($mode === 1) echo("checked");  ?>/></td>
-</tr>
-<tr>
-	<td></td><td><button onClick="javascript:Save();"><?php t("Save"); ?></button></td>
-</tr>
 </body>
 </html>

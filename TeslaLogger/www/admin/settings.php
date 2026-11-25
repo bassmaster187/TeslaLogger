@@ -1,11 +1,11 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <?php
 require_once("language.php");
 require_once("tools.php");
 
 function CarsCombobox($cars, $selected)
 {
-	echo "\r\n<select id='defaultcar' style='width:100%'>";
+	echo "\r\n<select id='defaultcar' class='tl-defaultcar'>";
 	foreach ($cars as $k => $v) {
 		$displayname = $v->{"display_name"};
 		$id = $v->{"id"};
@@ -15,7 +15,7 @@ function CarsCombobox($cars, $selected)
 
 		echo "\r\n   <option $s value='$id'>$displayname</option>";
 	}
-	echo "\r\n</select>\r\n";
+	echo "\r\n</select>";
 }
 
 ?>
@@ -23,17 +23,17 @@ function CarsCombobox($cars, $selected)
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Teslalogger Settings V1.5</title>
+    <title>Teslalogger Settings V1.6</title>
 	<link rel="stylesheet" href="static/jquery/ui/1.12.1/themes/smoothness/jquery-ui.css">
-	<link rel="stylesheet" href="static/teslalogger_style.css?v=4">
+	<link rel="stylesheet" href="static/teslalogger_style.css?v=5">
+	<link rel="stylesheet" href="static/teslalogger_ui.css?v=30">
+	<link rel="stylesheet" href="static/teslalogger_settings.css?v=13">
 	<script src="static/jquery/jquery-1.12.4.js"></script>
 	<script src="static/jquery/ui/1.12.1/jquery-ui.js"></script>
+	<script src="static/jquery/jquery-migrate-1.4.1.min.js"></script>
 	<link rel="stylesheet" href="static/jquery/timepicker/1.3.5/jquery.timepicker.min.css?v=1.3.5">
 	<link rel='stylesheet' id='genericons-css'  href='static/genericons.css?ver=3.0.3' type='text/css' media='all' />
 	<script src="static/jquery/timepicker/1.3.5/jquery.timepicker.min.js?v=1.3.5"></script>
-	<style>
-	.pointer {cursor: pointer;}
-	</style>
 	<script>
 	
 	$( function() {
@@ -76,6 +76,22 @@ function CarsCombobox($cars, $selected)
 				});
 		});
 
+		// Keep the inline radio group (wide) and the dropdown (mobile) in sync
+		function setUnit(selId, name, value) {
+			$('#' + selId).val(value);
+			$('input[name="' + name + '"]').prop('checked', function(){ return $(this).val() === value; });
+		}
+		$('.tl-select[data-name]').on('change', function() {
+			var name = $(this).attr('data-name');
+			var v = $(this).val();
+			$('input[name="' + name + '"]').prop('checked', function(){ return $(this).val() === v; });
+		});
+		$('input[type="radio"]').on('change', function() {
+			var name = $(this).attr('name');
+			var sel = $(this).closest('.tl-form-item').find('.tl-select[data-name="' + name + '"]');
+			sel.val($(this).val());
+		});
+
 		<?PHP
 		
 		$content = FALSE;
@@ -88,12 +104,12 @@ function CarsCombobox($cars, $selected)
 		if ($content === FALSE)
 		{
 			// Default Values for fresh install
-			echo ("$('#radio_kw').prop('checked', true);\r\n");
-			echo ("$('#radio_celsius').prop('checked', true);\r\n");
-			echo ("$('#radio_km').prop('checked', true);\r\n");
-			echo ("$('#radio_en').prop('checked', true);\r\n");		
-			echo ("$('#radio_all').prop('checked', true);\r\n");
-			echo ("$('#radio_Ideal').prop('checked', true);\r\n");
+			echo ("setUnit('Power','power','kw');\r\n");
+			echo ("setUnit('Temperature','Temperature','celsius');\r\n");
+			echo ("setUnit('Pressure','Pressure','bar');\r\n");
+			echo ("setUnit('Length','Length','km');\r\n");
+			echo ("setUnit('update','update','all');\r\n");
+			echo ("setUnit('Range','Range','IR');\r\n");
 		}
 		else
 		{
@@ -109,6 +125,7 @@ function CarsCombobox($cars, $selected)
 			$power = $j->{"Power"};
 			$Temperature = $j->{"Temperature"};
 			$Length = $j->{"Length"};
+			$Pressure = $j->{"Pressure"};
 			$Language = $j->{"Language"};
 			$URL_Admin = $j->{"URL_Admin"};
 			$URL_Grafana = $j->{"URL_Grafana"};
@@ -141,27 +158,13 @@ function CarsCombobox($cars, $selected)
 			echo ("$('#checkbox100pct')[0].checked = $display100pctEnable;\r\n");
 			echo ("$('#checkboxScanMyTesla')[0].checked = $ScanMyTesla;\r\n");
 			echo ("$('#StreamingPos')[0].checked = $StreamingPos;\r\n");			
-
-			if ($Range == "IR")
-				echo ("$('#radio_Ideal').prop('checked', true);\r\n");
-			else
-				echo ("$('#radio_Rated').prop('checked', true);\r\n");
+	
+			echo ("setUnit('Range','Range','$Range');\r\n");
+			echo ("setUnit('Power','power','$power');\r\n");
+			echo ("setUnit('Temperature','Temperature','$Temperature');\r\n");
+			echo ("setUnit('Length','Length','$Length');\r\n");
+			echo ("setUnit('Pressure','Pressure','$Pressure');\r\n");
 			
-			if ($power == "kw")
-				echo ("$('#radio_kw').prop('checked', true);\r\n");
-			else
-				echo ("$('#radio_hp').prop('checked', true);\r\n");
-				
-			if ($Temperature == "fahrenheit")
-				echo ("$('#radio_fahrenheit').prop('checked', true);\r\n");
-			else
-				echo ("$('#radio_celsius').prop('checked', true);\r\n");
-				
-			if ($Length == "mile")
-				echo ("$('#radio_mile').prop('checked', true);\r\n");
-			else
-				echo ("$('#radio_km').prop('checked', true);\r\n");
-				
 			if(!empty($Language))
 				echo ("$('#Language').val('$Language');\r\n");
 			else			
@@ -184,17 +187,21 @@ function CarsCombobox($cars, $selected)
 			else
 				echo ("$('#checkboxSharedata')[0].checked = false;\r\n");
 
-			if ($update =="none")
-				echo ("$('#radio_none').prop('checked', true);\r\n");
-			else if ($update =="stable")
-				echo ("$('#radio_stable').prop('checked', true);\r\n");
-			else 
-				echo ("$('#radio_all').prop('checked', true);\r\n");
+			echo ("setUnit('update','update','$update');\r\n");
 
 		}
 		?>
 	});
-  
+
+  function unitValue(selId, name)
+  {
+		// Read from the visible control: the inline radio group (wide) or
+		// the dropdown (mobile)
+		if ($('.tl-radio-group input[name="' + name + '"]').is(':visible'))
+			return $('input[name="' + name + '"]:checked').val();
+		return $('#' + selId).find("option:selected").val();
+  }
+
   function save()
   {
 		var jqxhr = $.post("settings_write.php", 
@@ -203,9 +210,10 @@ function CarsCombobox($cars, $selected)
 		SleepTimeSpanEnd: $(".enddate").val(), 
 		SleepTimeSpanEnable: $("#checkboxSleep").is(':checked'),
 		Display100pctEnable: $("#checkbox100pct").is(':checked'),
-		Power: $("input:radio[name ='power']:checked").val(),
-		Temperature: $("input:radio[name ='Temperature']:checked").val(),
-		Length: $("input:radio[name ='Length']:checked").val(),
+		Power: unitValue("Power", "power"),
+		Temperature: unitValue("Temperature", "Temperature"),
+		Length: unitValue("Length", "Length"),
+		Pressure: unitValue("Pressure", "Pressure"),
 		Language: $("#Language").find("option:selected").val(),
 		URL_Admin: $("#URL_Admin").val(),
 		URL_Grafana: $("#URL_Grafana").val(),
@@ -213,8 +221,8 @@ function CarsCombobox($cars, $selected)
 		ZoomLevel: $("#ZoomLevel").val(),
 		ScanMyTesla: $("#checkboxScanMyTesla").is(':checked'),
 		ShareData: $('#checkboxSharedata').is(':checked'),
-		update: $("input:radio[name ='update']:checked").val(),
-		Range: $("input:radio[name ='Range']:checked").val(),
+		update: unitValue("update", "update"),
+		Range: unitValue("Range", "Range"),
 		defaultcar: $("#defaultcar").find("option:selected").text(),
 		defaultcarid: $("#defaultcar").find("option:selected").val(),
 		StreamingPos: $("#StreamingPos").is(':checked')
@@ -231,47 +239,190 @@ function CarsCombobox($cars, $selected)
 include "menu.php";
 echo(menu("Settings"));
 ?>
-<div>
-<table>
-<tr><td><h1 style="margin-top:0px;"><?php t("Credentials"); ?></h1></td><td></td></tr>
-<tr><td><?php t("MyTesla"); ?> / <?php t("MyLucid"); ?></td><td><button onclick="window.location.href='password.php';"><?php t("Credentials"); ?></button></td></tr>
-<tr><td><?php t("Teslalogger Adminpanel"); ?></td><td><button onclick="window.location.href='adminpanelpassword.php';"><?php t("Credentials"); ?></button></td></tr>
-<tr><td><h1><?php t("Settings"); ?></h1></td><td></td></tr>
-	<tr><td valign="top"><b><?php t("Language"); ?>:</b></td><td>
-	<select id="Language" style="width:100%;">
-		<option value="da">Dansk</option>
-		<option value="de">Deutsch</option>
-		<option value="en">English</option>
-		<option value="es">Español</option>
-		<option value="fr">Français</option>
-		<option value="it">Italiano</option>
-		<option value="nl">Nederlands</option>
-		<option value="no">Norsk</option>
-		<option value="pl">Polski</option>
-		<option value="pt">Português</option>
-		<option value="ru">Русский</option>
-		<option value="ta">தமிழ் – Tamil</option>
-		<option value="tr">Türkçe</option>
-		<option value="cn">漢語</option>
-	</select>
-	</td></tr>
-	<tr><td valign="top"><b><?php t("Power"); ?>:</b></td><td class="TT"><input id="radio_hp" type="radio" value="hp" name="power" /> <label for="radio_hp"><?php t("PS"); ?></label><br><input id="radio_kw" type="radio" value="kw" name="power" /> <label for="radio_kw"><?php t("kW"); ?></label></td></tr>
-	<tr><td valign="top"><b><?php t("Temperature"); ?>:</b></td><td class="TT"><input id="radio_celsius" type="radio" value="celsius" name="Temperature"> <label for="radio_celsius"><?php t("Celsius"); ?></label><br><input id="radio_fahrenheit" type="radio" value="fahrenheit" name="Temperature"> <label for="radio_fahrenheit"><?php t("Fahrenheit"); ?></label></td></tr>
-	<tr><td valign="top"><b><?php t("Unit of length"); ?>:</b></td><td class="TT"><input id="radio_km" type="radio" value="km" name="Length"> <label for="radio_km"><?php t("km"); ?></label><br><input id="radio_mile" type="radio" value="mile" name="Length"> <label for="radio_mile"><?php t("mile"); ?></label></td></tr>
-	<tr><td valign="top"><b><?php t("Range"); ?>:</b></td><td class="TT"><input id="radio_Ideal" type="radio" value="IR" name="Range"> <label for="radio_Ideal"><?php t("Ideal"); ?></label><br><input id="radio_Rated" type="radio" value="RR" name="Range"> <label for="radio_Rated"><?php t("Rated"); ?></label></td></tr>
-	<tr><td><b><?php t("Share data anonymously"); ?>:</b></td><td class="TT"><input id="checkboxSharedata" type="checkbox" value="sharedata"> <label for="checkboxSharedata"><?php t("Enable"); ?></label></td><td><img id="ShareDataHelp" src="img/icon-help-24.png" /></td></tr>
-	<tr><td valign="top"><b><?php t("Automatic updates"); ?>:</b></td><td class="TT"><input id="radio_all" type="radio" value="all" name="update"> <label for="radio_all"><?php t("All"); ?></label><br><input id="radio_stable" type="radio" value="stable" name="update"> <label for="radio_stable"><?php t("Stable"); ?></label><br><input id="radio_none" type="radio" value="none" name="update"> <label for="radio_none"><?php t("None"); ?></label></td></tr>
-	<tr><td><b><?php t("Sleep"); ?>:</b></td><td class="TT"><input id="checkboxSleep" type="checkbox" value="sleep"> <label for="checkboxSleep"><?php t("Enable"); ?></label></td></tr>
-	<tr><td></td><td><input class="startdate timepicker text-center"></input> <?php t("to"); ?> <input class="enddate timepicker text-center"></input></td></tr>
-	<tr><td><b><?php t("Show calc. 100% range"); ?>:</b></td><td class="TT"><input id="checkbox100pct" type="checkbox" value="100pct"> <label for="checkbox100pct"><?php t("Enable"); ?></label></td></tr>
-	<tr><td valign="top"><b><?php t("URL Admin Panel"); ?>:</b></td><td><input id="URL_Admin" style="width:100%;" placeholder="http://raspberry/admin/"></td></tr>
-	<tr><td valign="top"><b><?php t("URL Grafana"); ?>:</b></td><td><input id="URL_Grafana" style="width:100%;" placeholder="http://raspberry:3000/"></td></tr>
-	<tr><td valign="top"><b><?php t("Teslalogger HTTP Port"); ?>:</b></td><td><input id="HTTPPort" style="width:100%;" placeholder="5000"></td></tr>
-	<tr><td valign="top"><b><?php t("Zoom Level"); ?>:</b></td><td><input id="ZoomLevel" size="4"></td></tr>
-	<tr><td><b><?php t("ScanMyTesla integration"); ?>:</b></td><td class="TT"><input id="checkboxScanMyTesla" type="checkbox" value="ScanMyTesla"> <label for="checkboxScanMyTesla"><?php t("Enable"); ?></label></td><td><a href="https://teslalogger.de/smt.php" target=”_blank”><img src="img/icon-help-24.png"/></a></td></tr>
-	<tr><td><b><?php t("Position by StreamingAPI"); ?>:</b></td><td class="TT"><input id="StreamingPos" type="checkbox" value="StreamingPos"> <label for="StreamingPos"><?php t("Enable"); ?></label></td><td><img id="StreamingPosHelp" src="img/icon-help-24.png" class="pointer"/></td></tr>
-<?php
+<div class="tl-page">
+	<div class="tl-page-head">
+		<h2 class="tl-page-title"><?php t("Settings"); ?></h2>
+	</div>
 
+	<div class="tl-card">
+		<h2 class="tl-card-title"><?php t("Credentials"); ?></h2>
+		<div class="tl-form">
+			<div class="tl-form-item">
+				<label><?php t("MyTesla"); ?> / <?php t("MyLucid"); ?></label>
+				<button onclick="window.location.href='password.php';"><?php t("Credentials"); ?></button>
+			</div>
+			<div class="tl-form-item">
+				<label><?php t("Teslalogger Adminpanel"); ?></label>
+				<button onclick="window.location.href='adminpanelpassword.php';"><?php t("Credentials"); ?></button>
+			</div>
+		</div>
+	</div>
+
+	<div class="tl-card">
+		<h2 class="tl-card-title"><?php t("Settings"); ?></h2>
+		<div class="tl-form tl-form--settings">
+			<div class="tl-section"><?php t("General"); ?></div>
+			<div class="tl-form-item">
+				<span class="tl-label"><?php t("Language"); ?></span>
+				<select id="Language">
+					<option value="da">Dansk</option>
+					<option value="de">Deutsch</option>
+					<option value="en">English</option>
+					<option value="es">Español</option>
+					<option value="fr">Français</option>
+					<option value="it">Italiano</option>
+					<option value="nl">Nederlands</option>
+					<option value="no">Norsk</option>
+					<option value="pl">Polski</option>
+					<option value="pt">Português</option>
+					<option value="ru">Русский</option>
+					<option value="ta">தமிழ் – Tamil</option>
+					<option value="tr">Türkçe</option>
+					<option value="cn">漢語</option>
+				</select>
+			</div>
+			<div class="tl-section"><?php t("Units"); ?></div>
+			<div class="tl-form-item">
+				<span class="tl-label"><?php t("Power"); ?></span>
+				<div class="tl-radio-group">
+					<input id="radio_kw" type="radio" value="kw" name="power" /> <label for="radio_kw"><?php t("kW"); ?></label>
+					<input id="radio_hp" type="radio" value="hp" name="power" /> <label for="radio_hp"><?php t("PS"); ?></label>
+				</div>
+				<select id="Power" class="tl-select" data-name="power">
+					<option value="kw"><?php t("kW"); ?></option>
+					<option value="hp"><?php t("PS"); ?></option>
+				</select>
+			</div>
+			<div class="tl-form-item">
+				<span class="tl-label"><?php t("Temperature"); ?></span>
+				<div class="tl-radio-group">
+					<input id="radio_celsius" type="radio" value="celsius" name="Temperature"> <label for="radio_celsius"><?php t("Celsius"); ?></label>
+					<input id="radio_fahrenheit" type="radio" value="fahrenheit" name="Temperature"> <label for="radio_fahrenheit"><?php t("Fahrenheit"); ?></label>
+				</div>
+				<select id="Temperature" class="tl-select" data-name="Temperature">
+					<option value="celsius"><?php t("Celsius"); ?></option>
+					<option value="fahrenheit"><?php t("Fahrenheit"); ?></option>
+				</select>
+			</div>
+			<div class="tl-form-item">
+				<span class="tl-label"><?php t("Unit of length"); ?></span>
+				<div class="tl-radio-group">
+					<input id="radio_km" type="radio" value="km" name="Length"> <label for="radio_km"><?php t("km"); ?></label>
+					<input id="radio_mile" type="radio" value="mile" name="Length"> <label for="radio_mile"><?php t("mile"); ?></label>
+				</div>
+				<select id="Length" class="tl-select" data-name="Length">
+					<option value="km"><?php t("km"); ?></option>
+					<option value="mile"><?php t("mile"); ?></option>
+				</select>
+			</div>
+			<div class="tl-form-item">
+				<span class="tl-label"><?php t("Pressure unit"); ?></span>
+				<div class="tl-radio-group">
+					<input id="radio_bar" type="radio" value="bar" name="Pressure"> <label for="radio_bar"><?php t("bar"); ?></label>
+					<input id="radio_psi" type="radio" value="psi" name="Pressure"> <label for="radio_psi"><?php t("psi"); ?></label>
+				</div>
+				<select id="Pressure" class="tl-select" data-name="Pressure">
+					<option value="bar"><?php t("bar"); ?></option>
+					<option value="psi"><?php t("psi"); ?></option>
+				</select>
+			</div>
+			<div class="tl-form-item">
+				<span class="tl-label"><?php t("Range"); ?></span>
+				<div class="tl-radio-group">
+					<input id="radio_Ideal" type="radio" value="IR" name="Range"> <label for="radio_Ideal"><?php t("Ideal"); ?></label>
+					<input id="radio_Rated" type="radio" value="RR" name="Range"> <label for="radio_Rated"><?php t("Rated"); ?></label>
+				</div>
+				<select id="Range" class="tl-select" data-name="Range">
+					<option value="IR"><?php t("Ideal"); ?></option>
+					<option value="RR"><?php t("Rated"); ?></option>
+				</select>
+			</div>
+			<div class="tl-section"><?php t("Data & Updates"); ?></div>
+			<div class="tl-form-item">
+				<span class="tl-label"><?php t("Share data anonymously"); ?> <img id="ShareDataHelp" src="img/icon-help-24.png" class="tl-help" /></span>
+				<div class="tl-checkbox">
+					<label class="tl-switch">
+						<input id="checkboxSharedata" type="checkbox" value="sharedata">
+						<span class="tl-switch-track"></span>
+					</label>
+				</div>
+			</div>
+			<div class="tl-form-item">
+				<span class="tl-label"><?php t("Automatic updates"); ?></span>
+				<div class="tl-radio-group">
+					<input id="radio_all" type="radio" value="all" name="update"> <label for="radio_all"><?php t("All"); ?></label>
+					<input id="radio_stable" type="radio" value="stable" name="update"> <label for="radio_stable"><?php t("Stable"); ?></label>
+					<input id="radio_none" type="radio" value="none" name="update"> <label for="radio_none"><?php t("None"); ?></label>
+				</div>
+				<select id="update" class="tl-select" data-name="update">
+					<option value="all"><?php t("All"); ?></option>
+					<option value="stable"><?php t("Stable"); ?></option>
+					<option value="none"><?php t("None"); ?></option>
+				</select>
+			</div>
+			<div class="tl-section"><?php t("Sleep"); ?></div>
+			<div class="tl-form-item">
+				<span class="tl-label"><?php t("Enable"); ?></span>
+				<div class="tl-checkbox">
+					<label class="tl-switch">
+						<input id="checkboxSleep" type="checkbox" value="sleep">
+						<span class="tl-switch-track"></span>
+					</label>
+				</div>
+			</div>
+			<div class="tl-form-item">
+				<span class="tl-label"><?php t("Time span"); ?></span>
+				<div class="tl-checkbox">
+					<input class="startdate timepicker text-center"></input> <?php t("to"); ?> <input class="enddate timepicker text-center"></input>
+				</div>
+			</div>
+			<div class="tl-section"><?php t("Display"); ?></div>
+			<div class="tl-form-item">
+				<span class="tl-label"><?php t("Show calc. 100% range"); ?></span>
+				<div class="tl-checkbox">
+					<label class="tl-switch">
+						<input id="checkbox100pct" type="checkbox" value="100pct">
+						<span class="tl-switch-track"></span>
+					</label>
+				</div>
+			</div>
+			<div class="tl-section"><?php t("URL"); ?></div>
+			<div class="tl-form-item">
+				<label for="URL_Admin" class="tl-label"><?php t("URL Admin Panel"); ?></label>
+				<input id="URL_Admin" placeholder="http://raspberry/admin/">
+			</div>
+			<div class="tl-form-item">
+				<label for="URL_Grafana" class="tl-label"><?php t("URL Grafana"); ?></label>
+				<input id="URL_Grafana" placeholder="http://raspberry:3000/">
+			</div>
+			<div class="tl-form-item">
+				<label for="HTTPPort" class="tl-label"><?php t("Teslalogger HTTP Port"); ?></label>
+				<input id="HTTPPort" placeholder="5000">
+			</div>
+			<div class="tl-form-item">
+				<label for="ZoomLevel" class="tl-label"><?php t("Zoom Level"); ?></label>
+				<input id="ZoomLevel" size="4">
+			</div>
+			<div class="tl-section"><?php t("Integrations"); ?></div>
+			<div class="tl-form-item">
+				<span class="tl-label"><?php t("ScanMyTesla integration"); ?> <a href="https://teslalogger.de/smt.php" target="_blank"><img src="img/icon-help-24.png" class="tl-help" /></a></span>
+				<div class="tl-checkbox">
+					<label class="tl-switch">
+						<input id="checkboxScanMyTesla" type="checkbox" value="ScanMyTesla">
+						<span class="tl-switch-track"></span>
+					</label>
+				</div>
+			</div>
+			<div class="tl-form-item">
+				<span class="tl-label"><?php t("Position by StreamingAPI"); ?> <img id="StreamingPosHelp" src="img/icon-help-24.png" class="tl-help" /></span>
+				<div class="tl-checkbox">
+					<label class="tl-switch">
+						<input id="StreamingPos" type="checkbox" value="StreamingPos">
+						<span class="tl-switch-track"></span>
+					</label>
+				</div>
+			</div>
+<?php
 	$url = GetTeslaloggerURL("getallcars");
 	$allcars = @file_get_contents($url);
 	if ($allcars === false)
@@ -279,51 +430,61 @@ echo(menu("Settings"));
         $error = error_get_last();
         $error = explode(': ', $error['message']);
         $error = trim($error[2]);
-		echo("<h1>errortext = 'Error: $error - URL: $url'</h1>");
+		echo("<div class=\"tl-alert tl-alert-danger\">Error: $error - URL: $url</div>");
 		return;
     }
-	
 	$jcars = json_decode($allcars);
-
-	//var_dump($jcars);
 ?>
-<tr><td><b><?php t("Main Car"); ?>:</b></td><td><?PHP CarsCombobox($jcars, $defaultcar); ?></td></tr>
+			<div class="tl-section"><?php t("Vehicle"); ?></div>
+			<div class="tl-form-item">
+				<label for="defaultcar" class="tl-label"><?php t("Main Car"); ?></label>
+				<?PHP CarsCombobox($jcars, $defaultcar); ?>
+			</div>
+			<div class="tl-form-actions">
+				<button onclick="save();"><?php t("Save"); ?></button>
+			</div>
+		</div>
+	</div>
+
 <?php
-	
+	if ($jcars && count($jcars) > 0)
+		echo("<div class=\"tl-car-grid\">");
 	foreach ($jcars as $k => $v) {
 		$displayname = $v->{"display_name"};
 		$taskertoken = $v->{"tasker_hash"};    
-		
 		$lastscanmytesla = JSONDatetoString($v->{"lastscanmytesla"});
-	
-	if ($taskertoken == null)
-		continue;
+		if ($taskertoken == null)
+			continue;
 ?>
-
-<tr><td>&nbsp;</td><td></td></tr>
-<tr><td><b><?php t("Car Name"); ?>:</b></td><td><?= $displayname ?></td></tr>
-<tr><td style="padding-left:20px;"><b><?php t("ScanMyTesla last received"); ?>:</b></td><td><?= $lastscanmytesla ?></td></tr>
-<tr><td style="padding-left:20px;"valign="top"><b><?php t("Tasker Token"); ?>:</b></td><td><?= $taskertoken ?></td></tr>
-<tr><td style="padding-left:20px;"valign="top"><b><?php t("Tasker URL"); ?>:</b></td><td>
+	<div class="tl-card">
+		<h2 class="tl-card-title"><?= htmlspecialchars($displayname) ?></h2>
+		<dl class="tl-car-list">
+			<dt><?php t("ScanMyTesla last received"); ?></dt>
+			<dd><?= htmlspecialchars($lastscanmytesla) ?></dd>
+			<dt><?php t("Tasker Token"); ?></dt>
+			<dd><?= htmlspecialchars($taskertoken) ?></dd>
+			<dt><?php t("Tasker URL"); ?></dt>
+			<dd>
 <?php
 if (strlen($taskertoken) > 7)
 	echo "https://teslalogger.de/wakeup.php?t=".$taskertoken;
 ?>
-</td></td><td><a href="https://teslalogger.de/faq-1.php" target=”_blank”><img src="img/icon-help-24.png" /></a></td></tr>
-<tr><td style="padding-left:20px;" valign="top"><b><?php t("Received Tasker Token"); ?>:</b></td><td>
+				<a href="https://teslalogger.de/faq-1.php" target="_blank"><img src="img/icon-help-24.png" class="tl-help" /></a>
+			</dd>
+			<dt><?php t("Received Tasker Token"); ?></dt>
+			<dd>
 <?php
 if (strlen($taskertoken) > 7)
 	echo file_get_contents("http://teslalogger.de/tasker_date.php?t=".$taskertoken, 0, stream_context_create(["http"=>["timeout"=>2]]));
 ?>
-</td></tr>
-
+			</dd>
+		</dl>
+	</div>
 <?php
 }
-
+	if ($jcars && count($jcars) > 0)
+		echo("</div>");
 ?>
-<tr><td></td><td>&nbsp;</td></tr>
-<tr><td></td><td><button onclick="save();" style="float: right;"><?php t("Save"); ?></button></td></tr>
-</table>
 </div>
 
 <div id="dialog-ShareDataHelp" title="Info" style="display:none;">
@@ -332,3 +493,5 @@ if (strlen($taskertoken) > 7)
 <div id="dialog-StreamingPosHelp" title="Info" style="display:none;">
 <?php t("StreamingPosHelp"); ?>
 </div>
+</body>
+</html>

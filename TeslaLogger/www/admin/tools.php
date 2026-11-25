@@ -174,6 +174,21 @@ function DatasourceUpdated()
     return false;
 }
 
+function DockerComposeIsLatest()
+{
+    if (!isDocker())
+        return null;
+
+    $result = GetFromTeslalogger("admin/dockercompose");
+    if ($result == "latest")
+        return true;
+    if ($result == "old")
+        return false;
+
+    // unknown (not in docker / socket unreachable)
+    return null;
+}
+
 function startsWith( $haystack, $needle ) {
     $length = strlen( $needle );
     return substr( $haystack, 0, $length ) === $needle;
@@ -204,6 +219,21 @@ function files_are_equal($a, $b)
         return $result;
     }
     return false;
+}
+
+function GetRequestProtocol()
+{
+    if (isset($_SERVER["HTTP_X_FORWARDED_PROTO"]))
+    {
+        $proto = strtolower(trim(explode(",", $_SERVER["HTTP_X_FORWARDED_PROTO"])[0]));
+        if ($proto == "http" || $proto == "https")
+            return $proto;
+    }
+
+    if (!empty($_SERVER["HTTPS"]) && $_SERVER["HTTPS"] != "off")
+        return "https";
+
+    return "http";
 }
 
 function GetDefaultCarId()

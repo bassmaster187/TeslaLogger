@@ -13,7 +13,8 @@ global $display_name;
     <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
     <title><?php t("KomootSettings"); ?></title>
 	<link rel="stylesheet" href="static/jquery/ui/1.12.1/themes/smoothness/jquery-ui.css">
-	<link rel="stylesheet" href="static/teslalogger_style.css">
+	<link rel="stylesheet" href="static/teslalogger_style.css?v=5">
+	<link rel="stylesheet" href="static/teslalogger_ui.css?v=30">
 	<script src="static/jquery/jquery-1.12.4.js"></script>
 	<script src="static/jquery/ui/1.12.1/jquery-ui.js"></script>
 	<link rel="stylesheet" href="static/leaflet/1.9.4/leaflet.css" />
@@ -94,26 +95,35 @@ global $display_name;
     });
 </script>
 
-<div id="content" style="max-width:1036px;">
-<h1><?php t("KomootSettings"); ?></h1>
-<?php t("KomootSettingsInfo"); ?>
+<div class="tl-page">
+	<div class="tl-page-head">
+		<h2 class="tl-page-title"><?php t("KomootSettings"); ?></h2>
+		<div class="tl-actions">
+			<button onClick="javascript:Save();"><?php t("Save"); ?></button>
+		</div>
+	</div>
+
+	<div class="tl-card">
+		<p class="tl-muted" style="margin-top:0;"><?php t("KomootSettingsInfo"); ?></p>
+	</div>
+
+	<div class="tl-card tl-small-form-card">
+		<div class="tl-form tl-small-form">
+			<div class="tl-form-item">
+				<label for="user"><?php t("Username"); ?></label>
+				<input class="tl-small-input" id="user" value="<?= $komoot_user ?>"/>
+			</div>
+			<div class="tl-form-item">
+				<label for="passwd"><?php t("Password"); ?></label>
+				<input class="tl-small-input" id="passwd" type="password" value="<?= $komoot_passwd ?>"/>
+			</div>
+			<div class="tl-form-item">
+				<label for="bikename"><?php t("DisplayName"); ?></label>
+				<input class="tl-small-input" id="bikename" value="<?= $komoot_displayname ?>"/>
+			</div>
+			<input type="hidden" id="carid" value="<?= $komoot_carid ?>">
+		</div>
+	</div>
 </div>
-<table>
-<tr>
-    <td><?php t("Username"); ?>: </td><td><input id="user" size="40" value="<?= $komoot_user ?>"/></td>
-</tr>
-<tr>
-    <td>
-        <?php t("Password"); ?>: </td><td><input id="passwd" type="password" size="40" value="<?= $komoot_passwd ?>"/>
-        <input type="hidden" id="carid" value="<?= $komoot_carid ?>">
-    </td>
-</tr>
-<tr>
-    <td><?php t("DisplayName"); ?>: </td><td><input id="bikename" size="40" value="<?= $komoot_displayname ?>"/></td>
-</tr>
-<tr>    
-    <td></td><td><button onClick="javascript:Save();"><?php t("Save"); ?></button></td>
-</tr>
-</table>
 </body>
 </html>

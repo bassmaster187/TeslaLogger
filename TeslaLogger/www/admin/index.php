@@ -40,7 +40,8 @@ else
     <title>Teslalogger</title>
 	<link rel="stylesheet" href="static/jquery/ui/1.12.1/themes/smoothness/jquery-ui.css">
 	<link rel="stylesheet" href="static/teslalogger_style.css?v=5">
-	<link rel="stylesheet" href="static/teslalogger_index.css?v=2">
+	<link rel="stylesheet" href="static/teslalogger_ui.css?v=30">
+	<link rel="stylesheet" href="static/teslalogger_index.css?v=4">
 	<script src="static/jquery/jquery-1.12.4.js"></script>
 	<script src="static/jquery/ui/1.12.1/jquery-ui.js"></script>
 	<script src="static/jquery/jquery-migrate-1.4.1.min.js"></script>
@@ -188,7 +189,7 @@ else
 				$('#full_battery_range_km_span').hide();
 			}
 
-			$('#battery_level').text(jsonData["battery_level"]);
+			$('#battery_level').text(Number(jsonData["battery_level"]).toLocaleString(loc,{maximumFractionDigits:1, minimumFractionDigits: 1}));
 			if (jsonData["car_version"]) {
 				var car_version = jsonData["car_version"];
 
@@ -216,6 +217,10 @@ else
 				{
 					errortext = "<?php t("FatalErrorMissingKey"); ?>";
 					errortext = errortext.replace("{LINK}", '<a href="https://www.tesla.com/_ak/teslalogger.de" target="_blank">LINK</a>');
+				}
+				else if (jsonData["FatalError"] == "max_configs")
+				{
+					errortext = "<?php t("FatalErrorMaxConfigs"); ?>";
 				}
 
 				setCarStatus("error", "<?php t("Fatal Error"); ?>", errortext);
@@ -351,6 +356,22 @@ else
 
 			$("#trip_duration_sec").text(min + ":" + sec);
 
+			// Ø speed = distance / duration, derived from the current trip data
+			if (trip_duration_sec > 0 && jsonData["trip_distance"] > 0)
+			{
+				var avg_speed = jsonData["trip_distance"] * 3600 / trip_duration_sec;
+
+				if (LengthUnit == "mile")
+				{
+					avg_speed /= km2mls;
+					$("#lt_kmh_avg").text("mph");
+				}
+
+				$("#trip_avg_speed").text(avg_speed.toFixed(0));
+			}
+			else
+				$("#trip_avg_speed").text("---");
+
 			if (jsonData["software_update_status"] && jsonData["software_update_status"].length > 0)
 			{
 				$("#SoftwareUpdateRow").show();
@@ -367,6 +388,16 @@ else
 			{
 				$("#SoftwareUpdateRow").hide();
 			}
+
+			if (jsonData["is_preconditioning"])
+				$("#preconditioning").show();
+			else
+				$("#preconditioning").hide();
+
+			if (jsonData["battery_heater"])
+				$("#battery_heater").show();
+			else
+				$("#battery_heater").hide();
 
 			if (jsonData["open_windows"] > 0)
 				$("#window_open").show();
@@ -392,6 +423,14 @@ else
 				$("#unlocked").hide();
 			else
 				$("#unlocked").show();
+
+			// flat tire / low pressure: show if at least one tire that has a reading is below 2.6 bar
+			var tpms = [jsonData["tpms_pressure_fl"], jsonData["tpms_pressure_fr"], jsonData["tpms_pressure_rl"], jsonData["tpms_pressure_rr"]];
+			var lowPressure = tpms.some(function(p) { return p > 0 && p < 2.6; });
+			if (lowPressure)
+				$("#flat_tire").show();
+			else
+				$("#flat_tire").hide();
 
 				
 
@@ -633,11 +672,14 @@ else
 		<div class="tl-hero-head">
 			<h2 class="tl-hero-name"><?= htmlspecialchars($display_name ?? "") ?></h2>
 			<div class="tl-caricons">
+				<img id="preconditioning" class="caricons" src="img/preconditioning.png" alt="Preconditioning" title="Preconditioning">
+				<img id="battery_heater" class="caricons" src="img/battery_heater.png" alt="Battery Heater" title="Battery Heater">
 				<img id="window_open" class="caricons" src="img/window_open.png" alt="Open Window" title="Open Window">
 				<img id="frunk_open" class="caricons" src="img/frunk_open.png" alt="Frunk Open" title="Frunk Open">
 				<img id="trunk_open" class="caricons" src="img/trunk_open.png" alt="Trunk Open" title="Trunk Open">
 				<img id="door_open" class="caricons" src="img/door_open.png" alt="Door Open" title="Door Open">
 				<img id="unlocked" class="caricons" src="img/unlocked.png" alt="Unlocked" title="Unlocked">
+				<img id="flat_tire" class="caricons" src="img/flat_tire.png" alt="Low Tire Pressure" title="Low Tire Pressure">
 			</div>
 		</div>
 		<div class="tl-hero-status">
@@ -683,6 +725,7 @@ else
 			<div><span class="tl-stat-value"><span id="trip_kwh">---</span> <span class="tl-stat-unit"><?php t("kWh"); ?></span></span><span class="tl-stat-label"><?php t("Consumption"); ?></span></div>
 			<div><span class="tl-stat-value"><span id="trip_avg_kwh">---</span> <span class="tl-stat-unit" id="lt_whkm"><?php t("Wh/km"); ?></span></span><span class="tl-stat-label"><?php t("Ø Consumption"); ?></span></div>
 			<div><span class="tl-stat-value"><span id="max_speed">---</span> <span class="tl-stat-unit" id='lt_kmh'><?php t("km/h"); ?></span></span><span class="tl-stat-label"><?php t("Max km/h"); ?></span></div>
+			<div><span class="tl-stat-value"><span id="trip_avg_speed">---</span> <span class="tl-stat-unit" id="lt_kmh_avg"><?php t("km/h"); ?></span></span><span class="tl-stat-label"><?php t("Ø Speed"); ?></span></div>
 		</div>
 	</section>
 
@@ -709,21 +752,15 @@ else
 	if (empty($installed))
 		$installed = GetFromTeslalogger("getversion");
 
-	if (file_exists("/etc/teslalogger/BRANCH"))
-		$branch = file_get_contents("/etc/teslalogger/BRANCH");
-
-	if (!empty($branch))
+	if (isDockerNET8())
+		$onlineversion = file_get_contents("https://teslalogger.de/latest_teslalogger_docker_version.txt");
+	elseif (file_exists("/etc/teslalogger/BETA"))
 	{
-		echo("<font color='red'>$branch</font>/");
-		$onlineversion = getTeslaloggerVersion("https://raw.githubusercontent.com/bassmaster187/TeslaLogger/$branch/TeslaLogger/Properties/AssemblyInfo.cs");
+		echo("<font color='red'>beta</font>/");
+		$onlineversion = file_get_contents("https://teslalogger.de/latest_teslalogger_rpi_beta_version.txt");
 	}
 	else
-	{
-		if (isDockerNET8())
-			$onlineversion = file_get_contents("https://teslalogger.de/latest_teslalogger_docker_version.txt");
-		else
-			$onlineversion = getTeslaloggerVersion("https://raw.githubusercontent.com/bassmaster187/TeslaLogger/master/TeslaLogger/Properties/AssemblyInfo.cs");
-	}
+		$onlineversion = file_get_contents("https://teslalogger.de/latest_teslalogger_rpi_version.txt");
 
 	if ($installed != $onlineversion)
 	{

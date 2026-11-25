@@ -9,7 +9,8 @@ require_once("tools.php");
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<title>Teslalogger <?php t("Tesla Credentials"); ?></title>
 	<link rel="stylesheet" href="static/jquery/ui/1.12.1/themes/smoothness/jquery-ui.css">
-	<link rel="stylesheet" href="static/teslalogger_style.css?v=4">
+	<link rel="stylesheet" href="static/teslalogger_style.css?v=5">
+	<link rel="stylesheet" href="static/teslalogger_ui.css?v=30">
 	<script src="static/jquery/jquery-1.12.4.js"></script>
 	<script src="static/jquery/ui/1.12.1/jquery-ui.js"></script>
 	<script src="static/jquery/jquery-migrate-1.4.1.min.js"></script>
@@ -72,12 +73,7 @@ require_once("tools.php");
 
 </script>
 </head>
-<style>
-.redbutton{background-color:#890d24;float: left;}
-.redbutton:hover, .redbutton:focus{background-color:#A62A41;}
-</style>
 <body>
-<div style="max-width: 1260px;">
 <?php
 include "menu.php";
 menu("Credentials");
@@ -128,24 +124,33 @@ menu("Credentials");
 	}
 
 ?>
-<div>
-<h1><?php t("Please enter your dexters-web.de account credentials"); ?>:</h1>
-<table>
-<tr><td><?php t("Dexter Login"); ?>:</td><td><input id="login" type="text" autocomplete="new-password"></td></tr>
-<tr><td><?php t("Dexter Password"); ?>:</td><td><input id="password" type="text" autocomplete="new-password"></td></tr>
-<tr><td><?php t("Car Name"); ?>:</td><td><input id="carname" type="text" autocomplete="new-password"></td></tr>
-<tr><td colspan="2">
-<?PHP
-if ($_REQUEST["id"] > 0)
-	{ ?><button id="deletebutton" onclick="deleteCar();" class="redbutton"><?php t("Delete"); ?></button>
-	<?PHP }
-?>
-<button id="btnSave" onclick="save();" style="float: right;"><?php t("Save"); ?></button></td></tr>
-</table>
+<div class="tl-page">
+	<div class="tl-page-head">
+		<h2 class="tl-page-title"><?php t("Please enter your dexters-web.de account credentials"); ?></h2>
+	</div>
+
+	<div class="tl-card tl-small-form-card">
+		<div class="tl-form tl-small-form">
+			<div class="tl-form-item">
+				<label for="login"><?php t("Dexter Login"); ?></label>
+				<input class="tl-small-input" id="login" type="text" autocomplete="new-password"></div>
+			<div class="tl-form-item">
+				<label for="password"><?php t("Dexter Password"); ?></label>
+				<input class="tl-small-input" id="password" type="text" autocomplete="new-password"></div>
+			<div class="tl-form-item">
+				<label for="carname"><?php t("Car Name"); ?></label>
+				<input class="tl-small-input" id="carname" type="text" autocomplete="new-password"></div>
+			<div class="tl-form-actions">
+				<?PHP if ($_REQUEST["id"] > 0) { ?>
+				<button id="deletebutton" onclick="deleteCar();" class="redbutton" style="margin-right:auto"><?php t("Delete"); ?></button>
+				<?PHP } ?>
+				<button id="btnSave" onclick="save();"><?php t("Save"); ?></button>
+			</div>
+		</div>
+	</div>
 </div>
 <?php
 
 ?>
-</div>
 </body>
 </html>

@@ -84,7 +84,7 @@ Angefordert [A]=Requested [A]
 Pilot [A]=Pilot [A]
 
 #Vampir Drain Monatsstatistik.json
-Vampir Drain Monatsstatistik=Vampir Drain Monthly Statistics
+Vampir Drain Monatsstatistik=Vampire Drain Monthly Statistics
 TR mi Verlust=TR mi Lost
 kWh Verlust=kWh Lost
 Eur Verlust=Eur Lost
@@ -121,13 +121,15 @@ Trip Top Ziele=Trip Top Destinations
 Letzte Fahrt=Last Trip
 Ø Dauer Min=Ø Duration Min
 Ø Verbrauch kWh/100km=Ø Consumption kWh/100km
+Ø Verbrauch Wh/mi=Ø Consumption Wh/mi
 Ø Verbraucht kWh=Ø Consumed kWh
 Anzahl Trips=Trips Count
 Anzahl=Count
 Fahrzeug=Vehicle
+Ziel=Destination
 
 #Vampir Drain.json
-Vampir Drain=Vampir Drain
+Vampir Drain=Vampire Drain
 Standby Stunden=Standby Hours
 Standby=Standby
 TR km Verlust=TR km Lost
@@ -150,6 +152,14 @@ Online=Online
 
 #Verbrauchsstatistik.json
 Verbrauchsstatistik=Consumption Statistics
+Verbrauch Monatsmittel [Wh/mi]=Monthly Avg Consumption [Wh/mi]
+Verbrauch Monatsmittel [kWh]=Monthly Avg Consumption [kWh]
+Außentemperatur Monatsmittel [°C]=Outside Temp Monthly Avg  [°C]
+Außentemperatur Monatsmittel [°F]=Outside Temp Monthly Avg  [°F]
+Verbrauch Tagesmittel [Wh/mi]=Daily Avg Consumption [Wh/mi]
+Verbrauch Tagesmittel [kWh]=Daily Avg Consumption [kWh]
+Außentemperatur Tagesmittel [°C]=Outside Temp Daily Avg [°C]
+Außentemperatur Tagesmittel [°F]=Outside Temp Daily Avg [°F]
 
 #Visited.json
 Visited=Visited
@@ -163,7 +173,7 @@ Car Version=Car Version
 Last Trip=Last Trip
 Duration=Duration
 Distance=Distance
-Max km/h="Max kph"
+Max km/h="Max speed"
 PS=PS
 Current Pos=Current Pos
 Last Update=Last Update
@@ -192,14 +202,23 @@ Cell Imbalance=Cell Imbalance
 Software Update=Software Update
 Consumption=Consumption
 Ø Consumption="Avg Consumption"
+Ø Speed="Avg Speed"
 Please update to latest docker-compose.yml file. Check: {LINK}=Please update to latest docker-compose.yml file. Check: {LINK}
 FatalErrorMissingKey=Virtual Key Missig!<br>Finish Setup at: {LINK}<br>And restart Teslalogger.
+FatalErrorMaxConfigs=Too many third-party apps linked to this vehicle!<br>Remove an app from the vehicle and restart Teslalogger.
 Follow vehicle=Follow vehicle
 No connection to Teslalogger=No connection to Teslalogger
 
 #menu.php
 Logfile=Logfile
 Restart=Restart
+Restart TeslaLogger=Restart TeslaLogger
+Restart confirmation=Restart confirmation
+Do you really want to restart TeslaLogger?=Do you really want to restart TeslaLogger?
+Cancel=Cancel
+Update confirmation=Update confirmation
+Do you really want to update TeslaLogger?=Do you really want to update TeslaLogger?
+Update TeslaLogger=Update TeslaLogger
 Update=Update
 Dashboards=Dashboards
 Fleet Statistic=Fleet Statistic
@@ -288,6 +307,13 @@ PF_OLDSX=If you have a pre-2021 Tesla Model S/X, you're done and can go back to 
 PF_HERE=here
 PF_VKEY="Set Up Third-Party Virtual Key"
 PF_SUBSCRIPTION="Subscribe to receive data from Tesla"
+Log out=Log out
+Pending=Pending
+Virtual Key=Virtual Key
+PF_VKEYCHECK=Check the virtual key.
+Check=Check
+Select your vehicle=Select your vehicle
+PF_FINISH=Finish the setup and open the overview
 
 #changecarname.php
 CarNameTitle=Change car name
@@ -343,9 +369,10 @@ Strecke [km]=Distance [km]
 Strecke [mi]=Distance [mi]
 Verbrauch [kWh]=Consumed kWh
 Ø Verbrauch [kWh]=Avg. Consumption kWh
+Ø Verbrauch [Wh/mi]=Consumption Wh/mi
 Anzahl Trips=Trips Count
 Trip Monatsstatistik=Trip Monthly Statistics
-Trip Jahresstatistik="Trip Anual Statistics"
+Trip Jahresstatistik="Trip Annual Statistics"
 Jahr/Monat=Year/Month
 Zellspannungen 01-20 - ScanMyTesla="Cell Voltages 01–20 — ScanMyTesla"
 Zellspannungen 21-40 - ScanMyTesla="Cell Voltages 21–40 — ScanMyTesla"
@@ -527,6 +554,9 @@ Are you sure you want to delete this geofencing location?="Delete this geofencin
 Error=Error
 Deleted!=Deleted!
 Meter=Meter
+Center=Center
+Active flags=Active flags
+Click the map or drag the circle to set the position.=Click the map or drag the circle to set the position.
 
 #adminpanelpassword.php
 Please enter password!=Please enter password!
@@ -570,6 +600,39 @@ Restore Database=Restore Database
 TextRestore1=Please make sure you backup your Teslalogger before restoring any databases. Move your backup folder from \\RASPBERRY\teslalogger\backup to your hard drive!
 TextRestore2=The restore process may take up to 10 minutes!
 TextRestore3=Don't interrupt the restore process in any way! Don't reload the page! Don't close this page!
+File=File
+Restore completed successfully=Restore completed successfully
+Restore failed=Restore failed
+Restore running=Restore running
+Please restart Teslalogger after the restore.=Please restart Teslalogger after the restore.
+Teslalogger is restarting.=Teslalogger is restarting.
+Select the backup file (.gz) from the backup folder of your Teslalogger.=Select the backup file (.gz) from the backup folder of your Teslalogger.
+You can also restore a geofence backup. A file named geofence-private*.gz replaces geofence-private.csv.=You can also restore a geofence backup. A file named geofence-private*.gz replaces geofence-private.csv.
+Create a backup first=Create a backup first
+Details=Details
+Database output=Database output
+Back to restore=Back to restore
+Compressed size=Compressed size
+Decompressed size=Decompressed size
+No file was uploaded.=No file was uploaded.
+The file upload failed.=The file upload failed.
+The uploaded file is larger than the maximum allowed upload size.=The uploaded file is larger than the maximum allowed upload size.
+The limit is set in php.ini (upload_max_filesize and post_max_size).=The limit is set in php.ini (upload_max_filesize and post_max_size).
+The uploaded file could not be read.=The uploaded file could not be read.
+Not enough free disk space in /tmp.=Not enough free disk space in /tmp.
+Free disk space in /tmp=Free disk space in /tmp
+The file could not be read as a gzip backup. Please use a mysqldump file from the backup folder.=The file could not be read as a gzip backup. Please use a mysqldump file from the backup folder.
+The temporary file /tmp/mybackup.sql could not be written.=The temporary file /tmp/mybackup.sql could not be written.
+The selected file does not look like a Teslalogger database backup.=The selected file does not look like a Teslalogger database backup.
+The geofence file could not be read.=The geofence file could not be read.
+The geofence file could not be written.=The geofence file could not be written.
+Teslalogger did not accept the file.=Teslalogger did not accept the file.
+The geofence file has been restored.=The geofence file has been restored.
+The database server does not support the encrypted connection that the database client requires. Please update the Teslalogger Docker images.=The database server does not support the encrypted connection that the database client requires. Please update the Teslalogger Docker images.
+The database rejected the login (wrong user or password).=The database rejected the login (wrong user or password).
+The database server is not reachable. Please check whether the database container is running.=The database server is not reachable. Please check whether the database container is running.
+The backup contains SQL statements that this database does not accept. It may come from a newer Teslalogger version.=The backup contains SQL statements that this database does not accept. It may come from a newer Teslalogger version.
+The disk of the database is full.=The disk of the database is full.
 
 #dashboard.php
 Sleeping=Sleeping
@@ -580,3 +643,13 @@ startedAt=Start
 endedAt=End
 Häufigkeit=Frequency
 Fehler=Alerts
+
+#Settings.php
+General=General
+Units=Units
+Data & Updates=Data & Updates
+Display=Display
+URL=URL
+Integrations=Integrations
+Vehicle=Vehicle
+Time span=Time span

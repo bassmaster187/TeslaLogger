@@ -13,10 +13,11 @@ global $display_name;
     <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
     <title><?php t("MQTT Settings"); ?></title>
 	<link rel="stylesheet" href="static/jquery/ui/1.12.1/themes/smoothness/jquery-ui.css">
-	<link rel="stylesheet" href="static/teslalogger_style.css">
+	<link rel="stylesheet" href="static/teslalogger_style.css?v=5">
+	<link rel="stylesheet" href="static/teslalogger_ui.css?v=30">
 	<script src="static/jquery/jquery-1.12.4.js"></script>
 	<script src="static/jquery/ui/1.12.1/jquery-ui.js"></script>
-	<script src="jquery/jquery-migrate-1.4.1.min.js"></script>
+	<script src="static/jquery/jquery-migrate-1.4.1.min.js"></script>
 	<link rel="stylesheet" href="static/leaflet/1.9.4/leaflet.css" />
 	<link rel='stylesheet' id='genericons-css'  href='static/genericons.css?ver=3.0.3' type='text/css' media='all' />
 </head>
@@ -81,56 +82,93 @@ global $display_name;
     });
 </script>
 
-<div id="content" style="max-width:1036px;">
-<h1><?php t("MQTTSettings"); ?></h1>
-<?php t("MQTTSettingsInfo"); ?>
-<h2><?php t("TopicStructure"); ?></h2>
-    <li><?php t("MQTT1"); ?></li>
-    <li><?php t("MQTT2"); ?></li>
-    <li><?php t("MQTT3"); ?></li>
-    <li><?php t("MQTT4"); ?></li>
-    <li><?php t("MQTT5"); ?></li>
+<div class="tl-page">
+	<div class="tl-page-head">
+		<h2 class="tl-page-title"><?php t("MQTTSettings"); ?></h2>
+		<?php
+		$helpUrl = ($language == "de") ? "https://teslalogger.de/docs/extras/mqtt/" : "https://teslalogger.de/en/docs/extras/mqtt/";
+		?>
+		<a href="<?= $helpUrl ?>" target="_blank"><img src="img/icon-help-24.png" class="tl-help" /></a>
+		<div class="tl-actions">
+			<button onClick="javascript:Save();"><?php t("Save"); ?></button>
+		</div>
+	</div>
 
-<h3><?php t("ADDescription"); ?></h3>
-    <li><?php t("MQTTAD1"); ?></li>
+	<div class="tl-card tl-mqtt-info-card">
+		<p class="tl-mqtt-info tl-muted"><?php t("MQTTSettingsInfo"); ?></p>
+		<h2 class="tl-mqtt-section"><?php t("TopicStructure"); ?></h2>
+		<ul class="tl-mqtt-list">
+			<li><?php t("MQTT1"); ?></li>
+			<li><?php t("MQTT2"); ?></li>
+			<li><?php t("MQTT3"); ?></li>
+			<li><?php t("MQTT4"); ?></li>
+			<li><?php t("MQTT5"); ?></li>
+		</ul>
+		<h2 class="tl-mqtt-section"><?php t("ADDescription"); ?></h2>
+		<ul class="tl-mqtt-list">
+			<li><?php t("MQTTAD1"); ?></li>
+		</ul>
+		<h2 class="tl-mqtt-section"><?php t("ControlTopic"); ?></h2>
+		<ul class="tl-mqtt-list">
+			<li><?php t("MQTT6"); ?></li>
+			<li><a href="https://github.com/bassmaster187/TeslaLogger/blob/master/TeslaLogger/WebServer.md#send-commands-to-car"><?php t("MQTT7"); ?></a></li>
+		</ul>
+		<p class="tl-mqtt-note"><?php t("RebootAfterSave"); ?></p>
+	</div>
 
-<h2><?php t("ControlTopic"); ?></h2>
-    <li><?php t("MQTT6"); ?></li>
-    <li><a href="https://github.com/bassmaster187/TeslaLogger/blob/master/TeslaLogger/WebServer.md#send-commands-to-car"><?php t("MQTT7"); ?></a></li>
-
-<h5><?php t("RebootAfterSave"); ?><h5>
+	<div class="tl-card tl-mqtt-form-card">
+		<div class="tl-form tl-mqtt-form">
+			<div class="tl-form-item">
+				<label for="host"><?php t("Host"); ?></label>
+				<input class="tl-mqtt-input" id="host" value="<?= $mqtt_host ?>"/>
+			</div>
+			<div class="tl-form-item">
+				<label for="port"><?php t("Port"); ?></label>
+				<input class="tl-mqtt-input" id="port" value="<?= $mqtt_port ?>"/>
+			</div>
+			<div class="tl-form-item">
+				<label for="user"><?php t("Username"); ?></label>
+				<input class="tl-mqtt-input" id="user" value="<?= $mqtt_user ?>"/>
+			</div>
+			<div class="tl-form-item">
+				<label for="passwd"><?php t("Password"); ?></label>
+				<input class="tl-mqtt-input" id="passwd" type="password" value="<?= $mqtt_passwd ?>"/>
+			</div>
+			<div class="tl-form-item">
+				<label for="topic"><?php t("Topic"); ?></label>
+				<input class="tl-mqtt-input" id="topic" value="<?= $mqtt_topic ?>"/>
+			</div>
+			<div class="tl-form-item">
+				<label for="discovertopic"><?php t("AutoDiscoveryTopic"); ?></label>
+				<input class="tl-mqtt-input" id="discovertopic" value="<?= $mqtt_discoverytopic ?>"/>
+			</div>
+			<div class="tl-form-item">
+				<label for="clientid"><?php t("ClientID"); ?></label>
+				<input class="tl-mqtt-input" id="clientid" value="<?= $mqtt_clientid ?>"/>
+			</div>
+			<div class="tl-form-item">
+				<label for="publishjson"><?php t("PublishJson"); ?></label>
+				<label class="tl-switch">
+					<input id="publishjson" type="checkbox" value="1" <?PHP if ($mqtt_publishjson === 1) echo("checked");  ?>/>
+					<span class="tl-switch-track"></span>
+				</label>
+			</div>
+			<div class="tl-form-item">
+				<label for="singletopics"><?php t("Singletopics"); ?></label>
+				<label class="tl-switch">
+					<input id="singletopics" type="checkbox" value="1" <?PHP if ($mqtt_singletopics === 1) echo("checked");  ?>/>
+					<span class="tl-switch-track"></span>
+				</label>
+			</div>
+			<div class="tl-form-item">
+				<label for="discoveryenable"><?php t("AutoDiscovery"); ?></label>
+				<label class="tl-switch">
+					<input id="discoveryenable" type="checkbox" value="1" <?PHP if ($mqtt_discoveryenable === 1) echo("checked");  ?>/>
+					<span class="tl-switch-track"></span>
+				</label>
+			</div>
+		</div>
+	</div>
 </div>
-<table>
-<tr>
-    <td><?php t("Host"); ?>: </td><td><input id="host" size="40" value="<?= $mqtt_host ?>"/></td>
-</tr>
-<tr>
-    <td><?php t("Port"); ?>: </td><td><input id="port" size="40" value="<?= $mqtt_port ?>"/></td>
-</tr>
-<tr>
-    <td><?php t("Username"); ?>: </td><td><input id="user" size="40" value="<?= $mqtt_user ?>"/></td>
-</tr>
-<tr>
-    <td><?php t("Password"); ?>: </td><td><input id="passwd" type="password" size="40" value="<?= $mqtt_passwd ?>"/></td>
-</tr>
-<tr>
-    <td><?php t("Topic"); ?>: </td><td><input id="topic" size="40" value="<?= $mqtt_topic ?>"/></td>
-</tr>
-<tr>
-    <td><?php t("PublishJson"); ?>: </td><td><input id="publishjson" type="checkbox" <?PHP if ($mqtt_publishjson === 1) echo("checked");  ?>/></td>
-</tr>
-<tr>
-    <td><?php t("Singletopics"); ?>: </td><td><input id="singletopics" type="checkbox" <?PHP if ($mqtt_singletopics === 1) echo("checked");  ?>/></td>
-</tr>
-<tr>
-    <td><?php t("AutoDiscovery"); ?>: </td><td><input id="discoveryenable" type="checkbox" <?PHP if ($mqtt_discoveryenable === 1) echo("checked");  ?>/></td>
-</tr>
-<tr>
-    <td><?php t("AutoDiscoveryTopic"); ?>: </td><td><input id="discovertopic" size="100" value="<?= $mqtt_discoverytopic ?>"/></td>
-</tr>
-<tr>
-    <td><?php t("ClientID"); ?>: </td><td><input id="clientid" size="100" value="<?= $mqtt_clientid ?>"/></td>
-</tr>
-<tr>    
-    <td></td><td><button onClick="javascript:Save();"><?php t("Save"); ?></button></td>
-</tr>
+</body>
+</html>

@@ -1,17 +1,19 @@
 <!DOCTYPE html>
 <?php
 require_once("language.php");
-$lat = $_REQUEST["lat"];
-$lng = $_REQUEST["lng"];
+$lat = isset($_REQUEST["lat"]) ? $_REQUEST["lat"] : "";
+$lng = isset($_REQUEST["lng"]) ? $_REQUEST["lng"] : "";
 $radius = 20.0;
 $poiname = "";
-$id = $_REQUEST["id"];
+$id = null;
 $csv = null;
 $sf = null;
 
-
-if (isset($id))
+$isnew = !isset($_REQUEST["id"]);
+if (isset($_REQUEST["id"]))
 {
+	$id = $_REQUEST["id"];
+
 	$n = 0;
 	GetFileFromTeslaloggerAndWriteToTMP("geofence-private.csv");
 	$fp = fopen("/tmp/geofence-private.csv", "r+");
@@ -26,12 +28,12 @@ if (isset($id))
 		// echo("Line : $n : $line <br>");
 		if ($n == $id)
 		{
-			//echo($line);
+			//echo($line)
 			$csv = explode(",", $line);
 			$lat = trim($csv[1]);
 			$lng = trim($csv[2]);
 			$poiname = trim($csv[0]);
-			
+
 			if (isset($csv[3]) && strlen(trim($csv[3])) > 0)
 				$radius = trim($csv[3]);
 
@@ -51,390 +53,572 @@ if (isset($id))
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Teslalogger Geofencing V1.1</title>
+    <title>Teslalogger <?php t("Geofence"); ?></title>
 	<link rel="stylesheet" href="static/jquery/ui/1.12.1/themes/smoothness/jquery-ui.css">
-	<link rel="stylesheet" href="static/teslalogger_style.css?v=4">
+	<link rel="stylesheet" href="static/teslalogger_style.css?v=5">
+	<link rel="stylesheet" href="static/teslalogger_ui.css?v=30">
+	<link rel="stylesheet" href="static/teslalogger_geofencing.css?v=9">
 	<link rel="stylesheet" href="static/leaflet/1.9.4/leaflet.css" />
-   <!-- Make sure you put this AFTER Leaflet's CSS -->
+	<link rel="stylesheet" href="static/leaflet/1.9.4/MarkerCluster.css" />
+   	<link rel="stylesheet" href="static/leaflet/1.9.4/MarkerCluster.Default.css" />
+
+    <!-- Make sure you put this AFTER Leaflet's CSS -->
 	<script src="static/leaflet/1.9.4/leaflet.js"></script>
-	
+	<script src="static/leaflet/1.9.4/leaflet.markercluster.js"></script>
 	<script src="static/jquery/jquery-1.12.4.js"></script>
 	<script src="static/jquery/ui/1.12.1/jquery-ui.js"></script>
-	<script>	
+	<script src="static/jquery/jquery-migrate-1.4.1.min.js"></script>
+	<link rel='stylesheet' id='genericons-css'  href='static/genericons.css?ver=3.0.3' type='text/css' media='all' />
+	<script>
 	var circle = null;
-  $( function() {
-  var map = new L.Map('map', {center: [<?= $lat ?>,<?= $lng ?>], zoom:18});
-  // Define layers and add them to the control widget
-    L.control.layers({
-      'OpenStreetMap': L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-        maxZoom: 19,
-        referrerPolicy: 'strict-origin-when-cross-origin'
-      }).addTo(map), // Add default layer to map
-      'OpenTopoMap': L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
-        attribution: 'Map data: &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, <a href="http://viewfinderpanoramas.org">SRTM</a> | Map style: &copy; <a href="https://opentopomap.org">OpenTopoMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)',
-        maxZoom: 17
-      }),
-      'Satellite': L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
-        attribution: 'Imagery &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community',
-        // This map doesn't have labels so we force a label-only layer on top of it
-        forcedOverlay: L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/toner-labels/{z}/{x}/{y}.png', {
-          attribution: 'Labels by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-          subdomains: 'abcd',
-          maxZoom: 20,
-        })
-      })
-    }).addTo(map);
+	var map = null;
+	var lat = <?= json_encode($lat) ?>;
+	var lng = <?= json_encode($lng) ?>;
+	var radius = <?= json_encode($radius) ?>;
+	var isnew = <?= $isnew ? "true" : "false" ?>;
 
-	$("input").change(function(){OnSpecialFlagsChanged();});
-	$("select").change(function(){OnSpecialFlagsChanged();});
-
-	$("#radius").on("change paste keyup",function()
+	function createMap(centerLat, centerLng, zoom)
 	{
-		circle.setRadius($("#radius").val());
-	});
-	
-	var markerLocation = new L.LatLng(<?= $lat ?>,<?= $lng ?>);
+		map = new L.Map('map', {center: [centerLat, centerLng], zoom: zoom});
+		// Define layers and add them to the control widget
+		L.control.layers({
+			'OpenStreetMap': L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+				attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+				maxZoom: 19,
+				referrerPolicy: 'strict-origin-when-cross-origin'
+			}).addTo(map),
+			'OpenTopoMap': L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
+				attribution: 'Map data: &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, <a href="http://viewfinderpanoramas.org">SRTM</a> | Map style: &copy; <a href="https://opentopomap.org">OpenTopoMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)',
+				maxZoom: 17
+			}),
+			'Satellite': L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+				attribution: 'Imagery &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community',
+				// This map doesn't have labels so we force a label-only layer on top of it
+				forcedOverlay: L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/toner-labels/{z}/{x}/{y}.png', {
+					attribution: 'Labels by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by-3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+					subdomains: 'abcd',
+					maxZoom: 20,
+				})
+			})
+		}).addTo(map);
 
-	circle = new L.circle(markerLocation, {radius: <?= $radius ?>});
-	circle.draggable = true;
-	circle.addTo(map);
-
-	<?PHP
-	if ($sf != null)
-		echo("var sf = ". json_encode($sf).";\n");
-	else 
-		echo('var sf = [""];');
-		echo("\n")
-	?>
-
-	sf.forEach(function(e) {
-		if (e.startsWith("home"))
-			$("#home").attr('checked', 'checked');
-		else if (e.startsWith("work"))
-			$("#work").attr('checked', 'checked');
-		else if (e.startsWith("charger"))
-			$("#charger").attr('checked', 'checked');
-		else if (e.startsWith("ccp"))
-			$("#ccp").attr('checked', 'checked');
-		else if (e.startsWith("scl"))
-		{
-			$("#scl").attr('checked', 'checked');
-			var limit = e.substring(4);
-			var lpos = limit.indexOf(":");
-			if (lpos > 0)
-			{
-				var sclend = limit.substring(lpos);
-				limit = limit.substring(0,lpos);
-
-				if (sclend.startsWith(":A"))
-					$("#scl_soa").attr('checked', 'checked');
+		// Create a circle for the geofence
+		circle = new L.circle([centerLat, centerLng], {radius: radius, fillColor: '#24890d', fillOpacity: 0.15, color: '#24890d', weight: 2});
+		circle.addTo(map);
+		circle.on({
+			mousedown: function () {
+				map.on('mousemove', function (e) {
+					map.dragging.disable();
+					circle.setLatLng(e.latlng);
+					UpdateReadout();
+				});
 			}
-			$("#scl_limit").val(limit);
-		}
-		else if (e.startsWith("ocp"))
-		{
-			$("#ocp").attr('checked', 'checked');
-			if (e.length == 0)
-				$("#ocp_gear").val("DR->P");
-			else
-				$("#ocp_gear").val(e.substring(4));
-		}
-		else if (e.startsWith("hfl"))
-		{
-			$("#hfl").attr('checked', 'checked');
-			if (e.substring(4).includes("m"))
-			{
-				$("#hfl_minutes").val(e.substring(4));
-				$("#hfl_count").prop("disabled", true);		
-			}
-			else
-			{
-				$("#hfl_count").val(e.substring(4));
-				$("#hfl_minutes").prop("disabled", true);
-			}
-		}
-		else if (e.startsWith("esm"))
-		{
-			$("#esm").attr('checked', 'checked');
-			if (e.substring(4).length == 0)
-				$("#esm_gear").val("DR->P");
-			else
-				$("#esm_gear").val(e.substring(4));
-		}
-		else if (e.startsWith("dsm"))
-		{
-			$("#dsm").attr('checked', 'checked');
-			if (e.substring(4).length == 0)
-				$("#dsm_gear").val("DR->P");
-			else
-				$("#dsm_gear").val(e.substring(4));
-		}
-		else if (e.startsWith("cof"))
-		{
-			$("#cof").attr('checked', 'checked');
-			if (e.substring(4).length == 0)
-				$("#cof_gear").val("DR->P");
-			else
-				$("#cof_gear").val(e.substring(4));
-		}
-		else if (e.startsWith("nosleep"))
-			$("#nosleep").attr('checked', 'checked');
-		else if (e.startsWith("dnc"))
-			$("#dnc").attr('checked', 'checked');
-		else if (e.startsWith("occ"))
-		{
-			$("#occ").attr('checked', 'checked');
-			$("#occ_limit").val(e.substring(4));
-		}
-		
-		OnSpecialFlagsChanged();
-	});
-
-
-
-	circle.on({
-	  mousedown: function () {
-		map.on('mousemove', function (e) {
-			map.dragging.disable();
-		  circle.setLatLng(e.latlng);
 		});
-	  }
-	}); 
-	map.on('mouseup',function(e){
-	  map.removeEventListener('mousemove');
-	  map.dragging.enable();
-	}); 
-  });
+		map.on('mouseup', function () {
+			map.removeEventListener('mousemove');
+			map.dragging.enable();
+			UpdateReadout();
+		});
+		// A click on the map moves the geofence to that position
+		map.on('click', function (e) {
+			circle.setLatLng(e.latlng);
+			UpdateReadout();
+		});
+		UpdateReadout();
+	}
 
-  function OnSpecialFlagsChanged()
-  {
-
-	var f = "";
-	if ($("#home").is(':checked'))
-		f += "+home";
-
-	if ($("#work").is(':checked'))
-		f += "+work";
-
-	if ($("#charger").is(':checked'))
-		f += "+charger";
-
-	if ($("#ccp").is(':checked'))
-		f += "+ccp";
-
-	if ($("#dnc").is(':checked'))
-		f += "+dnc";
-
-	if ($("#scl").is(':checked'))
+	// The bar under the map shows the current centre and radius of the circle
+	function UpdateReadout()
 	{
-		f += "+scl:";
-		if ($("#scl_limit").val().length == 0)
-			f += "100";
+		if (circle == null)
+			return;
+
+		var p = circle.getLatLng();
+		var coords = "&mdash;";
+		if (isFinite(p.lat) && isFinite(p.lng))
+			coords = p.lat.toFixed(6) + ", " + p.lng.toFixed(6);
+
+		$("#geo-readout-coords").text(coords);
+		$("#geo-readout-radius").text(Math.round(circle.getRadius()) + " m");
+	}
+
+	$(function() {
+		$("input").change(function(){ OnSpecialFlagsChanged(); });
+		$("select").change(function(){ OnSpecialFlagsChanged(); });
+
+		$("#radius").on("change paste keyup", function() {
+			if (circle != null)
+				circle.setRadius($("#radius").val());
+			UpdateReadout();
+		});
+
+		<?PHP
+		if ($sf != null)
+			echo("var sf = ". json_encode($sf).";\n");
 		else
-			f += $("#scl_limit").val();
+			echo('var sf = [""];');
+		echo("\n")
+		?>
 
-		if ($("#scl_soa").is(':checked'))
-			f += ":A";
-	}
-
-	if ($("#occ").is(':checked'))
-	{
-		f += "+occ:";
-		if ($("#occ_limit").val().length == 0)
-			f += "75";
-		else
-			f += $("#occ_limit").val();
-	}
-
-	if ($("#ocp").is(':checked'))
-	{
-		f += "+ocp:"+$("#ocp_gear").val();
-	}
-
-	if ($("#hfl_minutes").val().length > 0)
-		$("#hfl_count").prop("disabled", true);
-	else if ($("#hfl_count").val().length > 0)
-		$("#hfl_minutes").prop("disabled", true);
-	else
-	{
-		$("#hfl_count").prop("disabled", false);
-		$("#hfl_minutes").prop("disabled", false);
-	}
-
-	if ($("#hfl").is(':checked'))
-	{
-		f += "+hfl:";
-		if ($("#hfl_minutes").val().length > 0)
-			f += $("#hfl_minutes").val() + "m";
-		else if ($("#hfl_count").val().length > 0)
-			f += $("#hfl_count").val().replace("c","") + "c";
-		else
-			f += "100c";
-	}
-
-	if ($("#esm").is(':checked'))
-	{
-		f += "+esm:"+$("#esm_gear").val();
-	}
-
-	if ($("#dsm").is(':checked'))
-	{
-		f += "+dsm:"+$("#dsm_gear").val();
-	}
-	  
-	if ($("#cof").is(':checked'))
-	{
-		f += "+cof:"+$("#cof_gear").val();
-	}	
-	if ($("#nosleep").is(':checked'))
-		f += "+nosleep";
-
-	$("#flag").val(f);
-  }
-  
-	function del()
-  {
-		//alert("Radius: "+ circle.getRadius() + " lat: " + circle.getLatLng().lat + " lng: " + circle.getLatLng().lng);
-		// return;
-		if (confirm('Are you sure you want to delete this geofencing location?')) {
-		  // Save it!
-			if (!$("#text").val())
+		sf.forEach(function(e) {
+			if (e.startsWith("home"))
+				$("#home").attr('checked', 'checked');
+			else if (e.startsWith("work"))
+				$("#work").attr('checked', 'checked');
+			else if (e.startsWith("charger"))
+				$("#charger").attr('checked', 'checked');
+			else if (e.startsWith("ccp"))
+				$("#ccp").attr('checked', 'checked');
+			else if (e.startsWith("scl"))
+			{
+				$("#scl").attr('checked', 'checked');
+				var limit = e.substring(4);
+				var lpos = limit.indexOf(":");
+				if (lpos > 0)
 				{
-					alert("Error");
-					return;
+					var sclend = limit.substring(lpos);
+					limit = limit.substring(0, lpos);
+					if (sclend.startsWith(":A"))
+						$("#scl_soa").attr('checked', 'checked');
 				}
+				$("#scl_limit").val(limit);
+			}
+			else if (e.startsWith("ocp"))
+			{
+				$("#ocp").attr('checked', 'checked');
+				if (e.length == 0)
+					$("#ocp_gear").val("DR->P");
+				else
+					$("#ocp_gear").val(e.substring(4));
+			}
+			else if (e.startsWith("hfl"))
+			{
+				$("#hfl").attr('checked', 'checked');
+				if (e.substring(4).includes("m"))
+				{
+					$("#hfl_minutes").val(e.substring(4));
+					$("#hfl_count").prop("disabled", true);
+				}
+				else
+				{
+					$("#hfl_count").val(e.substring(4));
+					$("#hfl_minutes").prop("disabled", true);
+				}
+			}
+			else if (e.startsWith("esm"))
+			{
+				$("#esm").attr('checked', 'checked');
+				if (e.substring(4).length == 0)
+					$("#esm_gear").val("DR->P");
+				else
+					$("#esm_gear").val(e.substring(4));
+			}
+			else if (e.startsWith("dsm"))
+			{
+				$("#dsm").attr('checked', 'checked');
+				if (e.substring(4).length == 0)
+					$("#dsm_gear").val("DR->P");
+				else
+					$("#dsm_gear").val(e.substring(4));
+			}
+			else if (e.startsWith("cof"))
+			{
+				$("#cof").attr('checked', 'checked');
+				if (e.substring(4).length == 0)
+					$("#cof_gear").val("DR->P");
+				else
+					$("#cof_gear").val(e.substring(4));
+			}
+			else if (e.startsWith("nosleep"))
+				$("#nosleep").attr('checked', 'checked');
+			else if (e.startsWith("dnc"))
+				$("#dnc").attr('checked', 'checked');
+			else if (e.startsWith("occ"))
+			{
+				$("#occ").attr('checked', 'checked');
+				if (e.substring(4).length == 0)
+					$("#occ_limit").val("75");
+				else
+					$("#occ_limit").val(e.substring(4));
+			}
+		});
+		OnSpecialFlagsChanged();
 
-			var jqxhr = $.post("geoadd_write.php",
+		// New geofence: start at the browser position, otherwise at the stored position.
+		// Create the map immediately at a fallback, then recenter when the location resolves.
+		var fallbackLat = lat != "" ? lat : 50;
+		var fallbackLng = lng != "" ? lng : 8;
+		var fallbackZoom = isnew ? 6 : 18;
+		createMap(fallbackLat, fallbackLng, fallbackZoom);
+
+		if (isnew && typeof navigator !== 'undefined' && navigator.geolocation)
+		{
+			navigator.geolocation.getCurrentPosition(
+				function(pos) {
+					map.setView([pos.coords.latitude, pos.coords.longitude], 16);
+					circle.setLatLng([pos.coords.latitude, pos.coords.longitude]);
+					UpdateReadout();
+				},
+				function() {
+					// Fallback if the location is denied or unavailable: zoom in
+					// enough that the 20m circle is visible
+					map.setZoom(16);
+				},
+				{ enableHighAccuracy: true }
+			);
+		}
+	});
+
+	function OnSpecialFlagsChanged()
+	{
+		var f = "";
+		if ($("#home").is(':checked'))
+			f += "+home";
+
+		if ($("#work").is(':checked'))
+			f += "+work";
+
+		if ($("#charger").is(':checked'))
+			f += "+charger";
+
+		if ($("#ccp").is(':checked'))
+			f += "+ccp";
+
+		if ($("#dnc").is(':checked'))
+			f += "+dnc";
+
+		if ($("#scl").is(':checked'))
+		{
+			f += "+scl:";
+			if ($("#scl_limit").val().length == 0)
+				f += "100";
+			else
+				f += $("#scl_limit").val();
+
+			if ($("#scl_soa").is(':checked'))
+				f += ":A";
+		}
+
+		if ($("#occ").is(':checked'))
+		{
+			f += "+occ:";
+			if ($("#occ_limit").val().length == 0)
+				f += "75";
+			else
+				f += $("#occ_limit").val();
+		}
+
+		if ($("#ocp").is(':checked'))
+			f += "+ocp:"+$("#ocp_gear").val();
+
+		if ($("#hfl_minutes").val().length > 0)
+			$("#hfl_count").prop("disabled", true);
+		else if ($("#hfl_count").val().length > 0)
+			$("#hfl_minutes").prop("disabled", true);
+		else
+		{
+			$("#hfl_count").prop("disabled", false);
+			$("#hfl_minutes").prop("disabled", false);
+		}
+
+		if ($("#hfl").is(':checked'))
+		{
+			f += "+hfl:";
+			if ($("#hfl_minutes").val().length > 0)
+				f += $("#hfl_minutes").val() + "m";
+			else if ($("#hfl_count").val().length > 0)
+				f += $("#hfl_count").val().replace("c","") + "c";
+			else
+				f += "100c";
+		}
+
+		if ($("#esm").is(':checked'))
+			f += "+esm:"+$("#esm_gear").val();
+
+		if ($("#dsm").is(':checked'))
+			f += "+dsm:"+$("#dsm_gear").val();
+
+		if ($("#cof").is(':checked'))
+			f += "+cof:"+$("#cof_gear").val();
+		if ($("#nosleep").is(':checked'))
+			f += "+nosleep";
+
+		$("#flag").val(f);
+		UpdateFlagChips(f);
+	}
+
+	// Show the raw flag string as readable badges
+	function UpdateFlagChips(f)
+	{
+		var chips = [];
+		f.split("+").forEach(function(e) {
+			if (e.length == 0)
+				return;
+
+			var name = e.split(":")[0];
+			var text = name.charAt(0).toUpperCase() + name.slice(1);
+
+			var m = e.match(/^scl:(\d+)(:A)?$/);
+			if (m)
+				text = "SOC " + m[1] + "%" + (m[2] ? " \u00b7 A" : "");
+			else if (/^occ:\d+$/.test(e))
+				text = "SOC " + e.substring(4) + "%";
+
+			chips.push(text);
+		});
+
+		var html = "";
+		chips.forEach(function(c) {
+			html += '<span class="tl-geo-chip">' + c + '</span>';
+		});
+		$("#flagchips").html(html);
+	}
+
+	function Toast(message)
+	{
+		$("#geo-toast").text(message).removeClass("inactive");
+	}
+
+	function del()
+	{
+		if (confirm('Are you sure you want to delete this geofencing location?')) {
+			$.post("geoadd_write.php",
 			{
 				delete: "yes",
 			<?PHP
-				if (isset($_REQUEST["id"]))
+				if (isset($id))
 					echo("id: $id");
 				?>
 			}).always(function() {
-			alert("Deleted!");
-			//location.reload();
-			location.href = document.referrer;
+				Toast("<?php t('Deleted!'); ?>");
+				location.href = document.referrer;
 			});
-		} else {
-		  // Do nothing!
-		  return;
-		}
-  }
-		
-  function save()
-  {
-	//alert("Radius: "+ circle.getRadius() + " lat: " + circle.getLatLng().lat + " lng: " + circle.getLatLng().lng);
-	// return;
-	
-	if (!$("#text").val())
-	{
-		alert("Error");
-		return;
-	}
-		
-	var jqxhr = $.post("geoadd_write.php", 
-	{
-		Text: $("#text").val(), 
-		lat: circle.getLatLng().lat, 
-		lng: circle.getLatLng().lng,
-		radius: circle.getRadius(),
-		flag: $("#flag").val(),
-<?PHP 
-		if (isset($_REQUEST["id"]))
-			echo("id: $id");
-		?>     
-	}).always(function() {
-	alert("<?php t('Saved!'); ?>");
-	//location.reload();
-	location.href = document.referrer;
-	});		
-  }
-  
-  </script>
-  <style>
-  	td {padding-right:10px}
-	@media screen and (max-width: 1055px) {
-		#map { 
-			float:left;
-			width: -webkit-fill-available;
-			margin-top: 36px;
 		}
 	}
-  </style>
+
+	function save()
+	{
+		if (!$("#text").val())
+		{
+			alert("<?php t('Error'); ?>");
+			return;
+		}
+
+		if (circle == null)
+			return;
+
+		$.post("geoadd_write.php",
+		{
+			Text: $("#text").val(),
+			lat: circle.getLatLng().lat,
+			lng: circle.getLatLng().lng,
+			radius: circle.getRadius(),
+			flag: $("#flag").val(),
+		<?PHP
+			if (isset($id))
+				echo("id: $id");
+			?>
+		}).always(function() {
+			Toast("<?php t('Saved!'); ?>");
+			location.href = document.referrer;
+		});
+	}
+	</script>
 	</head>
 	<body>
-<?php 
+<?php
     include "menu.php";
     echo(menu("Geofencing"));
 ?>
-<div style="max-width: 1260px;">
-	<div style="float:left;">
-		<div>
-  			<h2 style="margin-top: 0px;"><?php t("Name & Position"); ?></h2>
-			<table>
-				<tr><td><?php t("Description"); ?>:</td><td><input id="text" value="<?= $poiname ?>"/></td></tr>
-				<tr><td><?php t("Radius"); ?>:</td><td><input id="radius" value="<?= intval($radius) ?>" type="number"/></td></tr>
-			</table>
-		</div>
-		<div>
-  			 
-			<table>
-				<tr><td><h2><?php t("Special Flags"); ?></h2></td><td><a href="https://github.com/bassmaster187/TeslaLogger/blob/master/TeslaLogger/Geofence.md#special-flags-for-pois"><img src="img/icon-help-24.png" /></a></td></tr>
-				<tr><td><h4 style="margin-top: 0px;"><?php t("Type"); ?></h4></td></tr>
-				<tr><td>🏠 <?php t("Home"); ?></td><td><input id="home" type="checkbox" value="home" /></td></tr>
-				<tr><td>💼 <?php t("Work"); ?></td><td> <input id="work" type="checkbox" value="work" /></td></tr>
-				<tr><td>🔌 <?php t("Charger"); ?></td><td> <input id="charger" type="checkbox" value="charger" name="type" /></td></tr>
-				<tr><td><h4 style="margin-top: 20px;"><?php t("Charging"); ?></h4></td></tr>
-				<tr><td><?php t("Copy Charging Costs"); ?></td><td> <input id="ccp" type="checkbox" value="" name="type" /></td></tr>
-				<tr><td><?php t("Don't Combine Charging Sessions"); ?></td><td> <input id="dnc" type="checkbox" value="" name="type" /></td></tr>
-				<tr><td><?php t("Set Charge Limit"); ?></td><td> <input id="scl" type="checkbox" value=""/></td><td>&nbsp;</td><td><?php t("SOC"); ?></td><td><input size="6" id="scl_limit" placeholder="100"/>%</td><td><input id="scl_soa" type="checkbox" value=""/> <?php t("Set on arrival"); ?></td></tr>
-				<tr><td><?php t("Set Charge Limit After Charging"); ?></td><td> <input id="occ" type="checkbox" value=""/></td><td>&nbsp;</td><td><?php t("SOC"); ?></td><td><input size="6" id="occ_limit" placeholder="75"/>%</td></tr>
-				<tr><td><?php t("Open Charge Port"); ?></td><td> <input id="ocp" type="checkbox" value=""/></td><td></td><td><?php t("Gear"); ?></td>
-					<td>
-  						<select id="ocp_gear">
-						  <option value="DR->P"><?php t("D/R → P"); ?></option>
-						  <option value="D->P"><?php t("D → P"); ?></option>
-						  <option value="R->P"><?php t("R → P"); ?></option>
-						</select>
-					</td></tr>
-				<tr><td><?php t("High Frequency Logging"); ?></td><td> <input id="hfl" type="checkbox" value=""/></td><td>&nbsp;</td><td><?php t("Duration"); ?></td><td><input size="6" id="hfl_minutes"/><?php t("Minutes"); ?></td></tr>
-				<tr><td></td><td></td><td>&nbsp;</td><td><?php t("Special Count"); ?></td><td><input size="6" id="hfl_count" placeholder="100"/><?php t("Count"); ?></td></tr>
-				<tr><td><h4 style="margin-top: 20px;"><?php t("Special Features"); ?></h4></td></tr>
-				<tr><td><?php t("Enable Sentry Mode"); ?></td><td> <input id="esm" type="checkbox" value="" name="type" /></td><td></td><td><?php t("Gear"); ?></td>
-					<td>
-						<select id="esm_gear">
-						  <option value="DR->P"><?php t("D/R → P"); ?></option>
-						  <option value="D->P"><?php t("D → P"); ?></option>
-						  <option value="R->P"><?php t("R → P"); ?></option>
-						</select>
-					</td></tr>
-				<tr><td><?php t("Disable Sentry Mode"); ?></td><td> <input id="dsm" type="checkbox" value="" name="type" /></td><td></td><td><?php t("Gear"); ?></td>
-					<td>
-						<select id="dsm_gear">
-						  <option value="DR->P"><?php t("D/R → P"); ?></option>
-						  <option value="D->P"><?php t("D → P"); ?></option>
-						  <option value="R->P"><?php t("R → P"); ?></option>
-						</select>
-					</td></tr>
-				<tr><td><?php t("Turn HVAC off"); ?></td><td> <input id="cof" type="checkbox" value="" name="type" /></td><td></td><td><?php t("Gear"); ?></td>
-					<td>
-						<select id="cof_gear">
-						  <option value="DR->P"><?php t("D/R → P"); ?></option>
-						  <option value="D->P"><?php t("D → P"); ?></option>
-						  <option value="R->P"><?php t("R → P"); ?></option>
-						</select>
-					</td></tr>
-				<tr><td><?php t("No sleep"); ?></td><td> <input id="nosleep" type="checkbox" value="" name="type" /></td></tr>
-				<tr><td colspan=5 ><input style="width: 100%" id="flag" disabled/></td></tr>
-			</table>
-		</div>
-		<button id="btn_save" onclick="save();"><?php t("Save"); ?></button>
-		<button id="btn_delete" onclick="del();" class="redbutton"><?php t("Delete"); ?></button>
-
+<div class="tl-page">
+	<div class="tl-page-head">
+		<h2 class="tl-page-title"><?php t($isnew ? "New Geofence" : "Edit Geofence"); ?></h2>
+		<?php
+		$helpUrl = ($language == "de") ? "https://teslalogger.de/docs/extras/geofence/" : "https://teslalogger.de/en/docs/extras/geofence/";
+		?>
+		<a href="<?= $helpUrl ?>" target="_blank"><img src="img/icon-help-24.png" class="tl-help" /></a>
 	</div>
-	<div id="map" style="height:700px; z-index:0;"></div>
+	<div class="tl-geo">
+		<div class="tl-card tl-geo-map tl-geo-sticky">
+			<div id="map"></div>
+			<div class="tl-geo-readout">
+				<span><?php t("Center"); ?> <strong id="geo-readout-coords">&mdash;</strong></span>
+				<span><?php t("Radius"); ?> <strong id="geo-readout-radius">&mdash;</strong></span>
+			</div>
+		</div>
+		<div class="tl-card tl-geo-form">
+			<h2 class="tl-card-title"><?php t("Name & Position"); ?></h2>
+			<div class="tl-geo-fields">
+				<div class="tl-geo-field">
+					<label for="text"><?php t("Description"); ?></label>
+					<input id="text" value="<?= htmlspecialchars($poiname) ?>"/>
+				</div>
+				<div class="tl-geo-field">
+					<label for="radius"><?php t("Radius"); ?></label>
+					<input id="radius" value="<?= intval($radius) ?>" type="number" min="5" max="5000" step="5"/>
+				</div>
+			</div>
+			<p class="tl-geo-hint"><?php t("Click the map or drag the circle to set the position."); ?></p>
+
+			<div class="tl-geo-flag-group">
+				<h3 class="tl-geo-flag-group-title"><?php t("Type"); ?></h3>
+				<div class="tl-geo-types">
+					<label class="tl-geo-type">
+						<input id="home" type="checkbox" value="home" />
+						<span class="tl-geo-type-text">&#127968; <?php t("Home"); ?></span>
+					</label>
+					<label class="tl-geo-type">
+						<input id="work" type="checkbox" value="work" />
+						<span class="tl-geo-type-text">&#128188; <?php t("Work"); ?></span>
+					</label>
+					<label class="tl-geo-type">
+						<input id="charger" type="checkbox" value="charger" />
+						<span class="tl-geo-type-text">&#128268; <?php t("Charger"); ?></span>
+					</label>
+				</div>
+			</div>
+
+			<div class="tl-geo-flag-group">
+				<h3 class="tl-geo-flag-group-title"><?php t("Charging"); ?></h3>
+				<div class="tl-geo-flag">
+					<label class="tl-switch">
+						<input id="ccp" type="checkbox" value="" />
+						<span class="tl-switch-track"></span>
+						<?php t("Copy Charging Costs"); ?>
+					</label>
+				</div>
+				<div class="tl-geo-flag">
+					<label class="tl-switch">
+						<input id="dnc" type="checkbox" value="" />
+						<span class="tl-switch-track"></span>
+						<?php t("Don't Combine Charging Sessions"); ?>
+					</label>
+				</div>
+				<div class="tl-geo-flag">
+					<label class="tl-switch">
+						<input id="scl" type="checkbox" value="" />
+						<span class="tl-switch-track"></span>
+						<?php t("Set Charge Limit"); ?>
+					</label>
+					<div class="tl-geo-sub">
+						<?php t("SOC"); ?>
+						<input id="scl_limit" placeholder="100" />%
+						<label class="tl-switch">
+							<input id="scl_soa" type="checkbox" value="" />
+							<span class="tl-switch-track"></span>
+							<?php t("Set on arrival"); ?>
+						</label>
+					</div>
+				</div>
+				<div class="tl-geo-flag">
+					<label class="tl-switch">
+						<input id="occ" type="checkbox" value="" />
+						<span class="tl-switch-track"></span>
+						<?php t("Set Charge Limit After Charging"); ?>
+					</label>
+					<div class="tl-geo-sub">
+						<?php t("SOC"); ?>
+						<input id="occ_limit" placeholder="75" />%
+					</div>
+				</div>
+				<div class="tl-geo-flag">
+					<label class="tl-switch">
+						<input id="ocp" type="checkbox" value="" />
+						<span class="tl-switch-track"></span>
+						<?php t("Open Charge Port"); ?>
+					</label>
+					<div class="tl-geo-sub">
+						<?php t("Gear"); ?>
+						<select id="ocp_gear">
+							<option value="DR->P"><?php t("D/R → P"); ?></option>
+							<option value="D->P"><?php t("D → P"); ?></option>
+							<option value="R->P"><?php t("R → P"); ?></option>
+						</select>
+					</div>
+				</div>
+				<div class="tl-geo-flag">
+					<label class="tl-switch">
+						<input id="hfl" type="checkbox" value="" />
+						<span class="tl-switch-track"></span>
+						<?php t("High Frequency Logging"); ?>
+					</label>
+					<div class="tl-geo-sub">
+						<?php t("Duration"); ?>
+						<input id="hfl_minutes" /><?php t("Minutes"); ?>
+						<input id="hfl_count" placeholder="100" /><?php t("Count"); ?>
+					</div>
+				</div>
+			</div>
+
+			<div class="tl-geo-flag-group">
+				<h3 class="tl-geo-flag-group-title"><?php t("Special Features"); ?></h3>
+				<div class="tl-geo-flag">
+					<label class="tl-switch">
+						<input id="esm" type="checkbox" value="" />
+						<span class="tl-switch-track"></span>
+						<?php t("Enable Sentry Mode"); ?>
+					</label>
+					<div class="tl-geo-sub">
+						<?php t("Gear"); ?>
+						<select id="esm_gear">
+							<option value="DR->P"><?php t("D/R → P"); ?></option>
+							<option value="D->P"><?php t("D → P"); ?></option>
+							<option value="R->P"><?php t("R → P"); ?></option>
+						</select>
+					</div>
+				</div>
+				<div class="tl-geo-flag">
+					<label class="tl-switch">
+						<input id="dsm" type="checkbox" value="" />
+						<span class="tl-switch-track"></span>
+						<?php t("Disable Sentry Mode"); ?>
+					</label>
+					<div class="tl-geo-sub">
+						<?php t("Gear"); ?>
+						<select id="dsm_gear">
+							<option value="DR->P"><?php t("D/R → P"); ?></option>
+							<option value="D->P"><?php t("D → P"); ?></option>
+							<option value="R->P"><?php t("R → P"); ?></option>
+						</select>
+					</div>
+				</div>
+				<div class="tl-geo-flag">
+					<label class="tl-switch">
+						<input id="cof" type="checkbox" value="" />
+						<span class="tl-switch-track"></span>
+						<?php t("Turn HVAC off"); ?>
+					</label>
+					<div class="tl-geo-sub">
+						<?php t("Gear"); ?>
+						<select id="cof_gear">
+							<option value="DR->P"><?php t("D/R → P"); ?></option>
+							<option value="D->P"><?php t("D → P"); ?></option>
+							<option value="R->P"><?php t("R → P"); ?></option>
+						</select>
+					</div>
+				</div>
+				<div class="tl-geo-flag">
+					<label class="tl-switch">
+						<input id="nosleep" type="checkbox" value="" />
+						<span class="tl-switch-track"></span>
+						<?php t("No sleep"); ?>
+					</label>
+				</div>
+			</div>
+
+			<h2 class="tl-card-title tl-geo-chips-title"><?php t("Active flags"); ?></h2>
+			<div class="tl-geo-chips" id="flagchips"></div>
+			<input id="flag" disabled/>
+
+			<div class="tl-actions tl-geo-actions-btn">
+				<button id="btn_save" type="button" onclick="save();"><?php t("Save"); ?></button>
+				<?php if (!$isnew): ?>
+				<button id="btn_delete" type="button" onclick="del();" class="redbutton"><?php t("Delete"); ?></button>
+				<?php endif; ?>
+			</div>
+		</div>
+	</div>
 </div>
+<div class="tl-geo-toast inactive" id="geo-toast"></div>
 </body>
 </html>

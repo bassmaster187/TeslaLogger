@@ -9,10 +9,11 @@ require_once("tools.php");
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Teslalogger <?php t("Tesla Credentials"); ?></title>
 	<link rel="stylesheet" href="static/jquery/ui/1.12.1/themes/smoothness/jquery-ui.css">
-	<link rel="stylesheet" href="static/teslalogger_style.css?v=4">
+	<link rel="stylesheet" href="static/teslalogger_style.css?v=5">
+	<link rel="stylesheet" href="static/teslalogger_ui.css?v=30">
 	<script src="static/jquery/jquery-1.12.4.js"></script>
 	<script src="static/jquery/ui/1.12.1/jquery-ui.js"></script>
-	<script src="jquery/jquery-migrate-1.4.1.min.js"></script>
+	<script src="static/jquery/jquery-migrate-1.4.1.min.js"></script>
 	<link rel='stylesheet' id='genericons-css'  href='static/genericons.css?ver=3.0.3' type='text/css' media='all' />
 
 	<script>
@@ -52,8 +53,7 @@ require_once("tools.php");
             $("#info").html(data);
             if (data.includes("Wait for MFA code"))
             {
-                $("#mfapanel").show();           
-                $("#captchapanel").hide();           
+                $("#mfacard").show();           
             }
             
             setTimeout(updateInfo, 1000);
@@ -66,54 +66,38 @@ require_once("tools.php");
 
     function btn_ok_click()
     {
-        var info = $("#info").text();
-        if (info.includes("Everything is OK"))
-            window.location.href='index.php';
-        else
-            window.location.href='password.php';
-    }
-
-    function btn_captcha_click()
-    {
-        $("#captcha" ).prop( "disabled", true );
-        var value = $("#captcha").val();
-        console.log("captcha entered");
-        var url = "captcha/"+dbid+"/"+value;
-        console.log("url: " + url);
-        var jqxhr = $.post("teslaloggerstream.php", {url: url, data: ''}).always(function () {
-            
-        });
+        // Back to the main page with this car
+        window.location.href = 'index.php?carid=' + dbid;
     }
 
 </script>
 </head>
 <body>
-<div style="max-width: 1260px;">
 <?php 
 include "menu.php";
 menu("Credentials");
 ?>
-<div>
-<h1><?php t("Credentials Info"); ?>:</h1>
-<div id="captchapanel">
-    <h2>Captcha:<h2> <br>
-    <img src="teslaloggerstream_svg.php?url=captchapic/<?php
-	if (isset($_REQUEST["id"]))
-        echo($_REQUEST["id"]);
-    else
-        echo("-1");
-?>" alt=""/>
-    <input id="captcha" type="text" /> <button onclick="btn_captcha_click();"><?php t("OK"); ?>
+<div class="tl-page">
+	<div class="tl-page-head">
+		<h2 class="tl-page-title"><?php t("Credentials Info"); ?></h2>
+	</div>
+
+	<div class="tl-card" id="mfacard" style="display: none;">
+		<div id="mfapanel">
+			<h2 class="tl-card-title">MFA</h2>
+			<input id="MFA" type="text" autocomplete="new-password" />
+		</div>
+	</div>
+
+		<div class="tl-card">
+		<h2 class="tl-card-title">Info</h2>
+		<div id="info" style="overflow: auto; height: 400px;">
+		</div>
+		<div class="tl-actions" style="display:flex; justify-content:flex-end; margin-top:16px;">
+			<button onclick="btn_ok_click();"><?php t("OK"); ?></button>
+		</div>
+	</div>
 </div>
-<div id="mfapanel" style="display: none;">
-    <h2>MFA:</h2> 
-    <input id="MFA" type="text" autocomplete="new-password" />
-</div>
-</div>
-<h1>Info:</h1>
-<div id="info" style="overflow: auto; height: 400px; max-width: 1260px;">
-</div>
-<button onclick="btn_ok_click();" style="float: right;"><?php t("OK"); ?>
 </body>
 </html>
 

@@ -1,0 +1,138 @@
+/*
+ * teslalogger_logfile.css
+ *
+ * Loaded only by logfile.php (see the <link> tag in the PHP file), after
+ * teslalogger_ui.css (tokens and basic components) and after
+ * teslalogger_style.css (theme, header and menu).
+ *
+ * The restyled parts follow the browser setting (prefers-color-scheme):
+ * page header, form card, log box.
+ *
+ * Bump the ?v= in the <link> tag of logfile.php after changes.
+ */
+
+/* Page layout ----------------------------------------------------------------
+ * The cards stack in a grid with the same gap as the start page uses
+ * (see .tl-grid in teslalogger_index.css).
+ */
+
+.tl-page {
+	display: grid;
+	gap: var(--tl-gap);
+}
+
+/* Filter form ---------------------------------------------------------------- */
+
+.tl-form {
+	display: grid;
+	gap: 16px 24px;
+	grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+}
+
+.tl-form-item {
+	align-items: center;
+	display: flex;
+	gap: 12px;
+	justify-content: space-between;
+	min-width: 0;
+}
+
+.tl-form-item label {
+	color: var(--tl-muted);
+	font-size: 14px;
+	white-space: nowrap;
+}
+
+.tl-form-item input,
+.tl-form-item select {
+	min-width: 0;
+}
+
+/* Checkbox drawn as the same switch as the start page "follow vehicle"
+   (see .tl-switch in teslalogger_index.css). The thumb is part of the
+   background so it can be animated like the switch. */
+
+.tl-toggle {
+	-webkit-appearance: none;
+	appearance: none;
+	width: 36px;
+	height: 20px;
+	border: 0;
+	border-radius: 999px;
+	background-color: var(--tl-switch-off);
+	background-image: radial-gradient(circle at 10px center, #fff 7px, transparent 7.5px);
+	padding: 0;
+	margin: 0;
+	min-width: 0;
+	vertical-align: middle;
+	cursor: pointer;
+	transition: background-color 0.15s ease;
+}
+
+.tl-toggle:checked {
+	background-color: var(--tl-accent);
+	background-image: radial-gradient(circle at 26px center, #fff 7px, transparent 7.5px);
+}
+
+.tl-toggle:focus-visible {
+	outline: 2px solid var(--tl-accent);
+	outline-offset: 2px;
+}
+
+/* The theme draws its own submit button: keep it, but it is the last item
+   of the grid, so it sits in the right edge on its own row segment */
+
+.tl-form-actions {
+	justify-content: end;
+}
+
+/* Log card ------------------------------------------------------------------- */
+
+.tl-logcard {
+	display: flex;
+	flex-direction: column;
+}
+
+.tl-logcard .tl-card-head {
+	margin-bottom: 0;
+}
+
+.tl-log {
+	border: 1px solid var(--tl-border);
+	border-radius: 8px;
+	font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+	font-size: 13px;
+	height: 820px;
+	line-height: 1.6;
+	max-width: 1260px;
+	overflow: auto;
+	padding: 12px;
+	white-space: pre-wrap;
+	word-wrap: break-word;
+}
+
+/* Error highlight (font tag inside the log output) */
+
+.tl-log font[color="red"] {
+	color: var(--tl-danger);
+}
+
+@media (prefers-color-scheme: dark) {
+	.tl-log {
+		background: var(--tl-bg);
+		color-scheme: dark;
+	}
+
+	.tl-log::-webkit-scrollbar {
+		width: 10px;
+		height: 10px;
+	}
+
+	.tl-log::-webkit-scrollbar-track {
+		background: var(--tl-bg);
+	}
+
+	.tl-log::-webkit-scrollbar-thumb {
+		background: var(--tl-track);
+	}
+}

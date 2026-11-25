@@ -59,10 +59,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title><?php t("Teslalogger Tesla Credentials"); ?></title>
 	<link rel="stylesheet" href="static/jquery/ui/1.12.1/themes/smoothness/jquery-ui.css">
-	<link rel="stylesheet" href="static/teslalogger_style.css?v=4">
+	<link rel="stylesheet" href="static/teslalogger_style.css?v=5">
+	<link rel="stylesheet" href="static/teslalogger_ui.css?v=30">
 	<script src="static/jquery/jquery-1.12.4.js"></script>
 	<script src="static/jquery/ui/1.12.1/jquery-ui.js"></script>
-	<script src="jquery/jquery-migrate-1.4.1.min.js"></script>
+	<script src="static/jquery/jquery-migrate-1.4.1.min.js"></script>
 	<link rel='stylesheet' id='genericons-css'  href='static/genericons.css?ver=3.0.3' type='text/css' media='all' />
 </head>
 <script>
@@ -128,33 +129,47 @@ function save() {
 	}
 </script>
 <body>
-<div style="max-width: 1260px;">
 <?php 
 include "menu.php";
 menu("Admin Panel Credentials");
-
+?>
+<div class="tl-page">
+<?php
 if (isDocker())
 {
 	$filename = "/var/tmp/dockerwebserverversion";
 
 	if (!file_exists($filename))
 	{
-		echo("<h1 style='color:red;'>Please update your Docker: <a href='https://github.com/bassmaster187/TeslaLogger/blob/master/docker_setup.md#docker-update--upgrade'>LINK</a></h1>");
+		echo("<div class='tl-alert tl-alert-danger'>Please update your Docker: <a href='https://github.com/bassmaster187/TeslaLogger/blob/master/docker_setup.md#docker-update--upgrade'>LINK</a></div>");
 	}
 }
 
 ?>
-<div>
-<h1><?php t("Set password for Teslalogger's admin panel"); ?>:</h1>
-<table>
-<tr><td><b><?php t("Name"); ?>:</b></td><td>admin</td></tr>
-<tr><td><?php t("Password"); ?>:</td><td><input id="password1" type="password" autocomplete="new-password" /></td></tr>
-<tr><td><?php t("Repeat Password"); ?>:</td><td><input id="password2" type="password" autocomplete="new-password" /></td></tr>
-<tr><td colspan="2">
-<button id="deletebutton" onclick="deletepw();" class="redbutton"><?php t("Delete"); ?></button>
-<button onclick="save();" style="float: right;"><?php t("Save"); ?></button></td></tr>
-</table>
-</div>
+	<div class="tl-page-head">
+		<h2 class="tl-page-title"><?php t("Set password for Teslalogger's admin panel"); ?></h2>
+	</div>
+
+	<div class="tl-card tl-small-form-card">
+		<div class="tl-form tl-small-form">
+			<div class="tl-form-item">
+				<label for="password1"><?php t("Name"); ?></label>
+				<span class="tl-small-input" style="display:block;">admin</span>
+			</div>
+			<div class="tl-form-item">
+				<label for="password1"><?php t("Password"); ?></label>
+				<input class="tl-small-input" id="password1" type="password" autocomplete="new-password" />
+			</div>
+			<div class="tl-form-item">
+				<label for="password2"><?php t("Repeat Password"); ?></label>
+				<input class="tl-small-input" id="password2" type="password" autocomplete="new-password" />
+			</div>
+			<div class="tl-form-actions">
+				<button id="deletebutton" onclick="deletepw();" class="redbutton" style="margin-right:auto"><?php t("Delete"); ?></button>
+				<button onclick="save();"><?php t("Save"); ?></button>
+			</div>
+		</div>
+	</div>
 </div>
 </body>
 </html>

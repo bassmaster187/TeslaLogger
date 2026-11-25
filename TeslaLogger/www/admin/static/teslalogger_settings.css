@@ -1,0 +1,255 @@
+/*
+ * teslalogger_settings.css
+ *
+ * Loaded only by settings.php (see the <link> tag in the PHP file), after
+ * teslalogger_ui.css (tokens and basic components) and after
+ * teslalogger_style.css (theme, header and menu).
+ *
+ * The restyled parts follow the browser setting (prefers-color-scheme):
+ * page header, cards, form, dialogs.
+ *
+ * Bump the ?v= in the <link> tag of settings.php after changes.
+ */
+
+/* Page layout ----------------------------------------------------------------
+ * The cards stack in a grid with the same gap as the start page uses
+ * (see .tl-grid in teslalogger_index.css).
+ */
+
+.tl-page {
+	display: grid;
+	gap: var(--tl-gap);
+}
+
+/* Form -----------------------------------------------------------------------
+ *
+ * Two columns on wide screens: the section label on the left, the setting
+ * on the right. On the left, below the section label, is empty space so
+ * the setting sits in its own column. On narrow screens it falls back to a
+ * single column: the section label is a full-width row, the setting below.
+ *
+ * The setting is an inline radio group on wide screens (compact, only as
+ * wide as its options) and a dropdown on narrow screens, because a long
+ * full-width select looks sparse.
+ */
+
+.tl-form {
+	display: grid;
+	gap: 24px;
+	grid-template-columns: 1fr;
+}
+
+.tl-section {
+	color: var(--tl-muted);
+	font-size: 13px;
+	font-weight: 600;
+	letter-spacing: 0.06em;
+	text-transform: uppercase;
+}
+
+/* Narrow (mobile): the section label is a full-width row with a separator */
+
+@media (max-width: 759px) {
+	.tl-section {
+		border-bottom: 1px solid var(--tl-border);
+		margin-top: 8px;
+		padding-bottom: 8px;
+	}
+}
+
+/* Wide: two columns, label left, setting right. Only the settings card has
+   section labels, so only it gets the 2-column layout. */
+
+@media (min-width: 760px) {
+	.tl-form--settings {
+		grid-template-columns: 180px 1fr;
+		gap: 24px 32px;
+	}
+
+	.tl-form--settings .tl-section {
+		grid-column: 1;
+	}
+
+	.tl-form--settings .tl-form-item {
+		grid-column: 2;
+	}
+}
+
+/* A setting row: label + control */
+
+.tl-form-item {
+	align-items: center;
+	display: flex;
+	gap: 16px;
+	justify-content: space-between;
+	min-width: 0;
+}
+
+.tl-form-item .tl-label {
+	color: var(--tl-muted);
+	font-size: 14px;
+	white-space: nowrap;
+}
+
+.tl-form-item input,
+.tl-form-item select {
+	flex: 1;
+	min-width: 0;
+}
+
+.tl-form-item input[type="checkbox"] {
+	flex: none;
+	min-width: 16px;
+}
+
+.tl-form-item button {
+	white-space: normal;
+}
+
+/* A radio group: styled as a segmented button group. Shown on wide
+   screens, hidden on narrow screens (where the select is used instead). */
+
+.tl-radio-group {
+	align-items: center;
+	background: var(--tl-bg);
+	display: grid;
+	grid-auto-flow: column;
+	grid-auto-columns: 1fr;
+	border: 1px solid var(--tl-border);
+	border-radius: var(--tl-radius);
+	padding: 3px;
+	gap: 2px;
+}
+
+.tl-radio-group input {
+	position: absolute;
+	opacity: 0;
+	width: 1px;
+	height: 1px;
+}
+
+.tl-radio-group label {
+	color: var(--tl-muted);
+	font-size: 13px;
+	font-weight: 600;
+	cursor: pointer;
+	padding: 7px 14px;
+	border-radius: 0;
+	transition: background-color 120ms ease, color 120ms ease;
+}
+
+.tl-radio-group label:first-of-type {
+	border-top-left-radius: calc(var(--tl-radius) - 3px);
+	border-bottom-left-radius: calc(var(--tl-radius) - 3px);
+}
+
+.tl-radio-group label:last-of-type {
+	border-top-right-radius: calc(var(--tl-radius) - 3px);
+	border-bottom-right-radius: calc(var(--tl-radius) - 3px);
+}
+
+.tl-radio-group label:hover {
+	color: var(--tl-text);
+	background: var(--tl-card);
+}
+
+.tl-radio-group input:checked + label {
+	color: #fff;
+	background: var(--tl-accent);
+}
+
+.tl-radio-group input:checked + label:hover {
+	color: #fff;
+	background: var(--tl-accent-strong);
+}
+
+.tl-radio-group input:focus-visible + label {
+	outline: 2px solid var(--tl-accent);
+	outline-offset: 2px;
+}
+
+.tl-select {
+	display: none;
+}
+
+/* Narrow: show the dropdown, hide the radio group */
+
+@media (max-width: 759px) {
+	.tl-radio-group {
+		display: none;
+	}
+
+	.tl-select {
+		display: block;
+	}
+
+	.tl-form-item {
+		flex-wrap: wrap;
+		justify-content: flex-start;
+		gap: 8px 12px;
+	}
+
+	.tl-form-item .tl-label {
+		white-space: normal;
+	}
+}
+
+/* Save button at the bottom right of the settings card, spanning both
+   columns (label column and setting column) */
+
+.tl-form--settings .tl-form-actions {
+	grid-column: 1 / -1;
+	display: flex;
+	justify-content: flex-end;
+}
+
+/* The switch and help icon styles are in teslalogger_ui.css, shared by all
+   restyled pages. */
+
+/* Car cards ------------------------------------------------------------------
+ * The per-car tasker cards are laid out in a grid, two columns when there is
+ * room, one column on narrow screens. Same gap as the page.
+ */
+
+.tl-car-grid {
+	display: grid;
+	gap: var(--tl-gap);
+	grid-template-columns: 1fr;
+}
+
+@media (min-width: 760px) {
+	.tl-car-grid {
+		grid-template-columns: 1fr 1fr;
+	}
+}
+
+/* Car list -------------------------------------------------------------------
+ * The per-car tasker data is a definition list, like the start page "Car Info" */
+
+.tl-car-list {
+	margin: 0;
+}
+
+.tl-car-list dt {
+	color: var(--tl-muted);
+	font-size: 13px;
+	font-weight: 600;
+	letter-spacing: 0.04em;
+	margin-top: 14px;
+}
+
+.tl-car-list dd {
+	margin: 0;
+	overflow-wrap: anywhere;
+}
+
+.tl-car-list dt:first-child {
+	margin-top: 0;
+}
+
+/* The info dialog styles are in teslalogger_ui.css, shared by all restyled
+   pages. The timepicker stays light, like the map tiles */
+
+.ui-time-picker {
+	color-scheme: light;
+}
