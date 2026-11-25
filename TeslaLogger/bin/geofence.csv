@@ -3820,6 +3820,7 @@ Supercharger-V4 NL-Arnhem,52.01587,5.92948
 Supercharger NL-Assen,52.9929,6.52447
 Supercharger-V4 NL-Badhoevedorp,52.3293,4.78487
 Supercharger-V4 NL-Best,51.49095,5.42457
+Supercharger-V4 NL-Biervliet Groen Goud,51.3259,3.6679
 Supercharger NL-Breda,51.5775,4.72997
 Supercharger NL-Breukelen,52.16717,4.98908
 Supercharger-V3 NL-Bunnik,52.06107,5.20533
@@ -4486,6 +4487,7 @@ Supercharger US-Casa Grande AZ,32.87878,-111.68172
 Supercharger-V3 US-Chandler AZ,33.31917,-111.89657
 Supercharger-V4 US-Chandler AZ E Pecos Rd,33.292,-111.82308
 Supercharger-V3 US-Chandler AZ N 54th St,33.3157,-111.96947
+Supercharger-V4 US-Chandler AZ W Frye Rd,33.2969,-111.9001
 Supercharger US-Cordes Lakes AZ,34.3276,-112.11857
 Supercharger-V3 US-Ehrenberg AZ,33.60216,-114.52172
 Supercharger-V4 US-Ehrenberg AZ Frontage Rd N,33.6044,-114.52063
@@ -4511,6 +4513,7 @@ Supercharger US-Phoenix AZ - East Camelback Road,33.51125,-112.0267
 Supercharger-V3 US-Phoenix AZ - East Mayo Boulevard,33.6553,-111.9275
 Supercharger-V3 US-Phoenix AZ - North 19th Avenue,33.52168,-112.09913
 Supercharger-V3 US-Phoenix AZ - West Peoria Avenue,33.58095,-112.1266
+Supercharger-V4 US-Phoenix AZ E Indian School Rd,33.49603,-112.01345
 Supercharger-V4 US-Phoenix AZ W Happy Valley Rd,33.7134,-112.1098
 Supercharger-V4 US-Prescott AZ,34.54777,-112.4073
 Supercharger-V3 US-Quartzsite AZ,33.66083,-114.2422
@@ -5388,9 +5391,11 @@ Supercharger US-Jacksonville FL - Gate Parkway,30.25344,-81.53715
 Supercharger-V3 US-Jacksonville FL - Phillips Hwy,30.26615,-81.61707
 Supercharger-V3 US-Jacksonville FL - Wilson Boulevard,30.27125,-81.7561
 Supercharger-V4 US-Jacksonville FL 9431 Philips Hwy,30.1947,-81.5678
+Supercharger-V4 US-Jacksonville FL Arlington Expy EV Auto,30.32134,-81.5566
 Supercharger-V4 US-Jacksonville FL Beach Blvd,30.2883,-81.46432
 Supercharger-V4 US-Jacksonville FL Blanding Blvd,30.20414,-81.739
 Supercharger-V4 US-Jacksonville FL City Station Dr,30.47942,-81.64275
+Supercharger-V4 US-Jacksonville FL Commonwealth Ave,30.33567,-81.76643
 Supercharger US-Jacksonville FL County Road,30.06028,-81.51404
 Supercharger-V4 US-Jacksonville FL Edgewood Ave N,30.33674,-81.73217
 Supercharger-V4 US-Jacksonville FL Gate Parkway,30.2887,-81.46467
@@ -6845,6 +6850,7 @@ Supercharger-V4 US-Harrisburg PA Brindle Dr,40.30388,-76.84288
 Supercharger-V4 US-Harrisburg PA Grayson Rd,40.26034,-76.7758
 Supercharger-V4 US-Hazleton PA,40.98165,-76.01662
 Supercharger US-Hermitage PA,41.20095,-80.45566
+Supercharger-V4 US-Hummelstown PA,40.27045,-76.68736
 Supercharger-V3 US-Jim Thorpe PA - Northbound,40.97216,-75.63002
 Supercharger-V3 US-Jim Thorpe PA - Southbound,40.9683,-75.63067
 Supercharger-V4 US-Kane PA,41.71007,-78.69408
@@ -7319,6 +7325,7 @@ Supercharger-V3 US-Madison VA,38.34615,-78.28603
 Supercharger-V3 US-Manassas VA,38.79372,-77.51527
 Supercharger-V4 US-Manassas VA Sudley Rd,38.7669,-77.4848
 Supercharger-V3 US-Mechanicsville VA,37.61338,-77.3288
+Supercharger-V4 US-Mount Crawford VA,38.3548,-78.92708
 Supercharger US-Mount Jackson VA,38.76017,-78.63124
 Supercharger US-Newport News VA,37.11458,-76.4962
 Supercharger-V4 US-Newport News VA Hwy 17,37.08105,-76.45943
@@ -7468,6 +7475,7 @@ Supercharger US-Vancouver WA,45.72153,-122.66385
 Supercharger-V3 US-Vancouver WA - NE Vancouver Mall Drive,45.6596,-122.58353
 Supercharger-V3 US-Vancouver WA - Northeast Fourth Plain Boulevard,45.64564,-122.60148
 Supercharger-V4 US-Vancouver WA NE Andresen Rd,45.6382,-122.59894
+Supercharger-V4 US-Veradale WA,47.6645,-117.1934
 Supercharger-V4 US-Walla Walla WA,46.03886,-118.36184
 Supercharger-V4 US-Wenatchee WA,47.44216,-120.3264
 Supercharger-V4 US-Woodinville WA,47.75884,-122.15552
@@ -7795,6 +7803,7 @@ AGRAVIS DE-Münster Industrieweg,51.9607,7.6261
 AGRAVIS DE-Thedinghausen Auf dem Rövekamp,52.96287,9.02349
 AGRAVIS DE-Vettweiß An der Tankstelle,50.73148,6.59627
 
+AgriSnellaad NL-Biezelinge Abdijstraat,51.4734,3.96648
 AgriSnellaad NL-Domburg Roosjesweg,51.56095,3.50002
 AgriSnellaad NL-Goes Hudsonweg,51.48319,3.89467,30
 AgriSnellaad NL-Kruiningen Weihoek,51.46507,4.02955
@@ -8703,6 +8712,7 @@ Allego DE-Markranstädt Siemensstraße,51.3126,12.215
 Allego DE-Marktredwitz Wölsauer Straße,50.00467,12.10236
 Allego DE-Meinerzhagen Oststraße,51.1058,7.65525
 Allego DE-Meißen Großenhainer Straße,51.1756,13.494
+Allego DE-Memmingen Donaustraße,48.00023,10.17572
 Allego DE-Memmingen Donaustraße,48.0023,10.16725
 Allego DE-Merseburg Kollenbeyer Weg,51.36073,12.01943
 Allego DE-Meschede Enster Straße,51.3544,8.25033
@@ -12219,6 +12229,7 @@ e-con DE-Buchloe Neue Mitte,48.03518,10.71952
 e-con DE-Isny Am Bühlberg,47.70359,10.04971
 e-con DE-Memmingen Rudolf-Diesel-Straße,48.00137,10.1692
 e-con DE-Memmingen Zeissweg,47.96655,10.18286
+e-con DE-Murnau am Staffelsee Burggraben,47.67487,11.19984
 e-con DE-Nesselwang Füssener Straße,47.62031,10.5068
 e-con DE-Sonthofen Rudolf-Diesel-Straße,47.52355,10.26885
 e-con DE-Sulzberg Kemptener Straße,47.66286,10.34527
@@ -22405,6 +22416,7 @@ im2 ES-Benitachell Polígono Pp Cds Encinas,38.71743,0.16928
 Inbalance LT-Daugėliškiai A1,55.22744,23.54653
 Inbalance LT-Kaunas Partizanų g.,54.92957,23.97882
 Inbalance LT-Paliūnė A1,55.22306,23.55755
+Inbalance LT-Pikelių A1,55.46157,22.69623
 Inbalance LT-Pikelių A1,55.4646,22.68514
 Inbalance LT-Pūstelninkai A6,55.1271,24.40353
 Inbalance LT-Velžiai Ežero g.,55.7735,23.6653
@@ -25699,6 +25711,7 @@ M-Charge CH-Thalwil Alte Landstrasse,47.29426,8.56414
 M-Charge CH-Thun Weststrasse Panorama-Center,46.7444,7.605
 M-Charge CH-Urtenen-Schönbühl Industriestrasse,47.0171,7.4915
 M-Charge CH-Volketswil Industriestrasse,47.38056,8.67436
+M-Charge CH-Windisch Bachmattstrasse,47.4751,8.21278
 M-Charge CH-Winterthur In der Au,47.48456,8.7047
 M-Charge CH-Worb Richigenstrasse,46.92674,7.56488
 M-Charge CH-Wünnewil-Flamatt Bernstrasse,46.88996,7.3237
@@ -30403,6 +30416,7 @@ SW-Troisdorf DE-Troisdorf Elsenplatz,50.8144,7.17178
 SW-Troisdorf DE-Troisdorf Heinkelstraße,50.81697,7.10835
 SW-Tübingen DE-Tübingen Eugenstraße,48.51376,9.06083
 SW-Uetersen DE-Uetersen Am Markt,53.68357,9.66573
+SW-Unna DE-Unna Kantstraße,51.53902,7.68786
 SW-Velbert DE-Velbert Friedrich-Ebert-Straße,51.34376,7.03301
 SW-Velbert DE-Velbert Friedrichstraße,51.33231,7.05583
 SW-Velbert DE-Velbert Güterstraße,51.34223,7.05142
