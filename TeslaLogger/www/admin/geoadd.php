@@ -58,13 +58,13 @@ if (isset($_REQUEST["id"]))
 	<link rel="stylesheet" href="static/teslalogger_style.css?v=5">
 	<link rel="stylesheet" href="static/teslalogger_ui.css?v=30">
 	<link rel="stylesheet" href="static/teslalogger_geofencing.css?v=9">
-	<link rel="stylesheet" href="static/leaflet/1.4.0/leaflet.css" />
-	<link rel="stylesheet" href="static/leaflet/1.4.0/MarkerCluster.css" />
-   	<link rel="stylesheet" href="static/leaflet/1.4.0/MarkerCluster.Default.css" />
+	<link rel="stylesheet" href="static/leaflet/1.9.4/leaflet.css" />
+	<link rel="stylesheet" href="static/leaflet/1.9.4/MarkerCluster.css" />
+   	<link rel="stylesheet" href="static/leaflet/1.9.4/MarkerCluster.Default.css" />
 
     <!-- Make sure you put this AFTER Leaflet's CSS -->
-	<script src="static/leaflet/1.4.0/leaflet.js"></script>
-	<script src="static/leaflet/1.4.0/leaflet.markercluster.js"></script>
+	<script src="static/leaflet/1.9.4/leaflet.js"></script>
+	<script src="static/leaflet/1.9.4/leaflet.markercluster.js"></script>
 	<script src="static/jquery/jquery-1.12.4.js"></script>
 	<script src="static/jquery/ui/1.12.1/jquery-ui.js"></script>
 	<script src="static/jquery/jquery-migrate-1.4.1.min.js"></script>
