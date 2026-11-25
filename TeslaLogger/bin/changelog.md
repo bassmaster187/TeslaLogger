@@ -1,3 +1,16 @@
+# Version 1.63.25
+- New UI for the whole admin panel
+- Lucid: preconditioning and battery heater support (new icons in the dashboard)
+- Maps: Leaflet updated to 1.9.4, fixed OpenStreetMap "403 Referer required" tile error, scroll wheel zoom is enabled again
+- Docker: database and telemetry settings can be configured with environment variables
+- Refresh the fleet telemetry config automatically if online telemetry is stale
+- Show a fatal error in the admin panel if Tesla rejects the telemetry config (max_configs)
+- NearbySuC: use the new service link, guest availability is not available anymore
+- BF: Fahrenheit conversion in Trip.json
+- BF: Degradation dashboard panels were missing
+- BF: recover from refused MQTT connections (prevented 100% CPU load)
+- BF: switch from Owners API to Fleet API
+
 # Version 1.63.24
 - Please update docker-compose.yml: [LINK](https://github.com/bassmaster187/TeslaLogger/blob/master/docker_setup.md#docker-update--upgrade)
 - Watchtower cleanup: remove old images after update
