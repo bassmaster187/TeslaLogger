@@ -1822,7 +1822,29 @@ PRIMARY KEY(id)
             try
             {
                 // https://github.com/KSP-CKAN/CKAN/wiki/SSL-certificate-errors#removing-expired-lets-encrypt-certificates
-                Tools.ExecMono("sed", "-i 's/^mozilla\\/DST_Root_CA_X3.crt$/!mozilla\\/DST_Root_CA_X3.crt/' /etc/ca-certificates.conf");
+                // disable the expired DST_Root_CA_X3 certificate in /etc/ca-certificates.conf
+                // (done in C#: ExecMono runs without a shell, so a sed one-liner with shell
+                // quoting would pass the quotes to sed literally -> "unknown command: `''")
+                const string caconf = "/etc/ca-certificates.conf";
+                if (File.Exists(caconf))
+                {
+                    string[] lines = File.ReadAllLines(caconf);
+                    bool changed = false;
+                    for (int x = 0; x < lines.Length; x++)
+                    {
+                        if (lines[x] == "mozilla/DST_Root_CA_X3.crt")
+                        {
+                            lines[x] = "!mozilla/DST_Root_CA_X3.crt";
+                            changed = true;
+                        }
+                    }
+                    if (changed)
+                    {
+                        File.WriteAllLines(caconf, lines);
+                        Logfile.Log("CertUpdate: disabled expired DST_Root_CA_X3 certificate");
+                    }
+                }
+
                 Tools.ExecMono("update-ca-certificates", "");
                 Tools.ExecMono("cert-sync", "/etc/ssl/certs/ca-certificates.crt");
             }
