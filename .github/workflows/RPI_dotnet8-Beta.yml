@@ -35,7 +35,10 @@ jobs:
       run: mkdir -p TeslaLogger-master/TeslaLogger/bin/Debug/net8.0
 
     - name: Remove stale build outputs (force full rebuild)
-      run: rm -rf TeslaLogger/bin/Debug TeslaLogger/obj TeslaLogger/bin/x64 TeslaLogger/bin/x86
+      run: rm -rf TeslaLogger/bin/Debug TeslaLogger/obj TeslaLogger/bin/x64 TeslaLogger/bin/x86 TLUpdate/bin TLUpdate/obj
+
+    - name: Build TLUpdate (net48 updater for the RPi)
+      run: dotnet build TLUpdate/TLUpdate.csproj -c Debug
 
     - name: Publish for Raspberry Pi (AnyCPU, framework dependent)
       run: dotnet publish TeslaLogger/TeslaLoggerNET8.csproj -c Debug -o ./TeslaLogger-master/TeslaLogger/bin/Debug/net8.0
@@ -74,7 +77,8 @@ jobs:
         cp -r OVMSLogger/bin/Debug/net8.0 TeslaLogger-master/OVMSLogger/bin/Debug/
         # only the needed top-level bin files - never the stale checked-in binaries
         # (old TeslaLoggerNET8.dll / TeslaLogger.exe from the mono era would end up in /etc/teslalogger)
-        cp TeslaLogger/bin/TLUpdate.exe TeslaLogger-master/TeslaLogger/bin/
+        # freshly built TLUpdate (not the stale checked-in one from TeslaLogger/bin)
+        cp TLUpdate/bin/Debug/TLUpdate.exe TeslaLogger-master/TeslaLogger/bin/
         cp TeslaLogger/bin/geofence.csv TeslaLogger-master/TeslaLogger/bin/
         cp TeslaLogger/bin/language-*.txt TeslaLogger-master/TeslaLogger/bin/
         cp TeslaLogger/bin/backup.sh TeslaLogger-master/TeslaLogger/bin/
