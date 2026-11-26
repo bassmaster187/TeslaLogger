@@ -1365,6 +1365,19 @@ PRIMARY KEY(id)
             }
         }
 
+        // free SD card space for the central update log (early warning for "disk full" update failures)
+        private static string GetFreeSpaceDetail()
+        {
+            try
+            {
+                return "free: " + Tools.FreeDiskSpaceMB() + " MB";
+            }
+            catch (Exception)
+            {
+                return "free: ?";
+            }
+        }
+
         // TLUpdate writes /etc/teslalogger/update_done.txt after its copy step - report and delete it here,
         // because TLUpdate itself has no tasker token and no database connection
         private static void CheckUpdateDoneMarker()
@@ -1428,7 +1441,7 @@ PRIMARY KEY(id)
             catch (Exception) { }
             try
             {
-                startDetail += ", free: " + Tools.FreeDiskSpaceMB() + " MB";
+                startDetail += ", " + GetFreeSpaceDetail();
             }
             catch (Exception) { }
             startDetail += ", to " + WebHelper.GetOnlineTeslaloggerVersion();
@@ -1567,7 +1580,7 @@ PRIMARY KEY(id)
                                 catch (Exception) { }
 
                                 ExceptionlessClient.Default.CreateLog("Install", "Update Zip Extract Successful").FirstCarUserID().Submit();
-                                ReportUpdateStep("unzip", "ok");
+                                ReportUpdateStep("unzip", "ok", GetFreeSpaceDetail());
                             }
                         }
                         else
