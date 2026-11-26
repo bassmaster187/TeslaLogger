@@ -7126,7 +7126,12 @@ FROM
     pos", con))
                         {
                             cmd.CommandTimeout = 6000;
-                            maxPosID = (int)SQLTracer.TraceSc(cmd);
+                            // on a fresh installation the pos table is empty and MAX(id) is NULL
+                            object maxid = SQLTracer.TraceSc(cmd);
+                            if (maxid != null && maxid != DBNull.Value)
+                            {
+                                maxPosID = Convert.ToInt32(maxid);
+                            }
                         }
                     }
                 }
