@@ -1304,14 +1304,19 @@ PRIMARY KEY(id)
                     try
                     {
                         // right after a reboot the local MariaDB may still be starting - the token
-                        // comes from the DB, so give it some time here (this thread blocks nothing)
+                        // comes from the DB, so give it some time here (this thread blocks nothing).
+                        // a fresh installation without cars answers immediately: no point in retrying
                         string token = string.Empty;
                         for (int x = 0; x < 15 && token.Length == 0; x++)
                         {
-                            token = GetUpdateLogToken();
-                            if (token.Length == 0)
+                            token = GetUpdateLogToken(out bool dbAnswered);
+                            if (token.Length == 0 && !dbAnswered)
                             {
                                 Thread.Sleep(2000);
+                            }
+                            else
+                            {
+                                break;
                             }
                         }
 
@@ -1346,15 +1351,16 @@ PRIMARY KEY(id)
             catch (Exception) { }
         }
 
-        private static string GetUpdateLogToken()
+        private static string GetUpdateLogToken(out bool dbAnswered)
         {
             // same identifier as the Exceptionless user identity (Tools.FirstCarUserID)
             try
             {
-                return EventBuilderExtension.GetFirstCarUserID() ?? string.Empty;
+                return EventBuilderExtension.GetFirstCarUserID(out dbAnswered) ?? string.Empty;
             }
             catch (Exception)
             {
+                dbAnswered = false;
                 return string.Empty;
             }
         }
@@ -1407,7 +1413,26 @@ PRIMARY KEY(id)
             File.AppendAllText(FileManager.GetCmdUpdatedTxt(), DateTime.Now.ToLongTimeString());
             Logfile.Log("Start update");
             ExceptionlessClient.Default.CreateLog("Install", "Start update from " + Assembly.GetExecutingAssembly().GetName().Version).Submit();
-            ReportUpdateStep("start", "start", "to " + WebHelper.GetOnlineTeslaloggerVersion());
+
+            // first step of every update: was it triggered by the web gui (update_manual.txt from
+            // update.php) or by the daily version check - plus free SD space as early warning
+            string startDetail = "automatic";
+            try
+            {
+                if (File.Exists("/etc/teslalogger/update_manual.txt"))
+                {
+                    startDetail = "manual";
+                    File.Delete("/etc/teslalogger/update_manual.txt");
+                }
+            }
+            catch (Exception) { }
+            try
+            {
+                startDetail += ", free: " + Tools.FreeDiskSpaceMB() + " MB";
+            }
+            catch (Exception) { }
+            startDetail += ", to " + WebHelper.GetOnlineTeslaloggerVersion();
+            ReportUpdateStep("start", "start", startDetail);
 
            if (Tools.IsDockerNET8())
             {

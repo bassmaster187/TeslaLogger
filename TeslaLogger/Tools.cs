@@ -2503,12 +2503,25 @@ WHERE
         // used for Exceptionless user identity and for the central update log (update_log.php)
         public static string GetFirstCarUserID()
         {
+            return GetFirstCarUserID(out bool _);
+        }
+
+        // dbAnswered: the database replied, even if no car is configured yet - this distinguishes
+        // "database is still starting" (retry makes sense) from "fresh installation without cars" (retry is pointless)
+        public static string GetFirstCarUserID(out bool dbAnswered)
+        {
+            dbAnswered = false;
+
             if (lastFirstCar != null)
+            {
+                dbAnswered = true;
                 return lastFirstCar;
+            }
 
             using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
             {
                 con.Open();
+                dbAnswered = true;
                 using (MySqlCommand cmd = new MySqlCommand("SELECT tasker_hash FROM cars where length(tasker_hash) >= 8 limit 1", con))
                 {
                     object o = cmd.ExecuteScalar()?.ToString();

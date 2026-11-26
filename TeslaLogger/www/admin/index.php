@@ -754,7 +754,7 @@ else
 
 	if (isDockerNET8())
 		$onlineversion = file_get_contents("https://teslalogger.de/latest_teslalogger_docker_version.txt");
-	elseif (file_exists("/etc/teslalogger/BETA"))
+	elseif (file_exists("/etc/teslalogger/Debug/net8.0/BETA") || file_exists("/etc/teslalogger/BETA"))
 	{
 		echo("<font color='red'>beta</font>/");
 		$onlineversion = file_get_contents("https://teslalogger.de/latest_teslalogger_rpi_beta_version.txt");
