@@ -34,6 +34,16 @@ namespace TLUpdate
 
                 Console.WriteLine(" *** End update");
 
+                // central update logging: the Teslalogger client reports this marker to teslalogger.de
+                // on its next start (TLUpdate itself has no tasker token and no database connection)
+                try
+                {
+                    File.WriteAllText("/etc/teslalogger/update_done.txt",
+                        "TLUpdate " + Assembly.GetExecutingAssembly().GetName().Version +
+                        (copySuccessful ? " copies ok" : " COPY ERRORS"));
+                }
+                catch (Exception) { }
+
                 if (Tools.IsDocker())
                 {
                     Console.WriteLine(" *** Restarting ...");

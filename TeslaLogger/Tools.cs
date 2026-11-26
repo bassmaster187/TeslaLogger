@@ -2498,27 +2498,37 @@ WHERE
     public static class EventBuilderExtension
     {
         static String lastFirstCar;
+
+        // identifies this Teslalogger installation: tasker_hash of the first car (cached).
+        // used for Exceptionless user identity and for the central update log (update_log.php)
+        public static string GetFirstCarUserID()
+        {
+            if (lastFirstCar != null)
+                return lastFirstCar;
+
+            using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+            {
+                con.Open();
+                using (MySqlCommand cmd = new MySqlCommand("SELECT tasker_hash FROM cars where length(tasker_hash) >= 8 limit 1", con))
+                {
+                    object o = cmd.ExecuteScalar()?.ToString();
+                    if (o is String && o.ToString().Length >= 8)
+                    {
+                        lastFirstCar = o.ToString();
+                        return lastFirstCar;
+                    }
+                }
+            }
+            return null;
+        }
+
         public static EventBuilder FirstCarUserID(this EventBuilder v)
         {
             try
             {
-                if (lastFirstCar != null)
-                    return v.SetUserIdentity(lastFirstCar);
-
-                using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
-                {
-                    con.Open();
-                    using (MySqlCommand cmd = new MySqlCommand("SELECT tasker_hash FROM cars where length(tasker_hash) >= 8 limit 1", con))
-                    {
-                        object o = cmd.ExecuteScalar()?.ToString();
-                        if (o is String && o.ToString().Length >= 8)
-                        {
-                            lastFirstCar = o.ToString();
-                            return v.SetUserIdentity(o.ToString());
-                        }
-                    }
-                }
-
+                string firstCar = GetFirstCarUserID();
+                if (firstCar != null)
+                    return v.SetUserIdentity(firstCar);
             }
             catch (Exception)
             {

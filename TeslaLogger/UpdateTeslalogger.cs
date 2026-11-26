@@ -1288,10 +1288,98 @@ PRIMARY KEY(id)
             }
         }
 
+        // central update logging: every important update step is reported to teslalogger.de
+        // (MySQL table teslalogger_update_log) so stuck or failing devices can be found with SQL
+        public static void ReportUpdateStep(string step, string status, string detail = "")
+        {
+            try
+            {
+                if (Tools.IsDocker())
+                {
+                    return;
+                }
+
+                Thread t = new Thread(() =>
+                {
+                    try
+                    {
+                        // right after a reboot the local MariaDB may still be starting - the token
+                        // comes from the DB, so give it some time here (this thread blocks nothing)
+                        string token = string.Empty;
+                        for (int x = 0; x < 15 && token.Length == 0; x++)
+                        {
+                            token = GetUpdateLogToken();
+                            if (token.Length == 0)
+                            {
+                                Thread.Sleep(2000);
+                            }
+                        }
+
+                        string version = Assembly.GetExecutingAssembly().GetName().Version.ToString();
+                        string channel = File.Exists("BETA") ? "beta" : "stable";
+                        if (detail != null && detail.Length > 400)
+                        {
+                            detail = detail.Substring(0, 400);
+                        }
+                        string url = "https://teslalogger.de/update_log.php"
+                            + "?token=" + Uri.EscapeDataString(token)
+                            + "&step=" + Uri.EscapeDataString(step)
+                            + "&status=" + Uri.EscapeDataString(status)
+                            + "&version=" + Uri.EscapeDataString(version)
+                            + "&channel=" + Uri.EscapeDataString(channel)
+                            + "&detail=" + Uri.EscapeDataString(detail ?? string.Empty);
+                        using (HttpClient httpClient = new HttpClient())
+                        {
+                            httpClient.Timeout = TimeSpan.FromSeconds(20);
+                            _ = httpClient.GetStringAsync(url).GetAwaiter().GetResult();
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        // central update logging must never break the update itself
+                        Logfile.Log("ReportUpdateStep failed: " + ex.Message);
+                    }
+                });
+                t.IsBackground = true;
+                t.Start();
+            }
+            catch (Exception) { }
+        }
+
+        private static string GetUpdateLogToken()
+        {
+            // same identifier as the Exceptionless user identity (Tools.FirstCarUserID)
+            try
+            {
+                return EventBuilderExtension.GetFirstCarUserID() ?? string.Empty;
+            }
+            catch (Exception)
+            {
+                return string.Empty;
+            }
+        }
+
+        // TLUpdate writes /etc/teslalogger/update_done.txt after its copy step - report and delete it here,
+        // because TLUpdate itself has no tasker token and no database connection
+        private static void CheckUpdateDoneMarker()
+        {
+            try
+            {
+                const string marker = "/etc/teslalogger/update_done.txt";
+                if (File.Exists(marker))
+                {
+                    ReportUpdateStep("update_done", "ok", File.ReadAllText(marker));
+                    File.Delete(marker);
+                }
+            }
+            catch (Exception) { }
+        }
+
         private static async Task DownloadUpdateAndInstallInternal()
         {
             DownloadUpdateAndInstallStarted = true;
             CheckNET8Installed();
+            CheckUpdateDoneMarker();
 
             if (File.Exists(FileManager.GetCmdUpdatedTxt()))
             {
@@ -1319,6 +1407,7 @@ PRIMARY KEY(id)
             File.AppendAllText(FileManager.GetCmdUpdatedTxt(), DateTime.Now.ToLongTimeString());
             Logfile.Log("Start update");
             ExceptionlessClient.Default.CreateLog("Install", "Start update from " + Assembly.GetExecutingAssembly().GetName().Version).Submit();
+            ReportUpdateStep("start", "start", "to " + WebHelper.GetOnlineTeslaloggerVersion());
 
            if (Tools.IsDockerNET8())
             {
@@ -1411,6 +1500,7 @@ PRIMARY KEY(id)
                         }
                         Logfile.Log($"update package downloaded to {updatepackage}");
                         httpDownloadSuccessful = true;
+                        ReportUpdateStep("download", "ok", updateURL);
 
                         ExceptionlessClient.Default.CreateLog("Install", "Update Download successful").Submit();
                     }
@@ -1420,6 +1510,7 @@ PRIMARY KEY(id)
                     ex.ToExceptionless().FirstCarUserID().Submit();
                     Logfile.Log("Exception during download from teslalogger.de: " + ex.ToString());
                     Logfile.ExceptionWriter(ex, "Exception during download from teslalogger.de");
+                    ReportUpdateStep("download", "error", ex.Message);
                 }
 
                 // unzip downloaded update package, the zip contains folder "TeslaLogger" at its root
@@ -1451,11 +1542,13 @@ PRIMARY KEY(id)
                                 catch (Exception) { }
 
                                 ExceptionlessClient.Default.CreateLog("Install", "Update Zip Extract Successful").FirstCarUserID().Submit();
+                                ReportUpdateStep("unzip", "ok");
                             }
                         }
                         else
                         {
                             Logfile.Log("update package missing after download: " + updatepackage);
+                            ReportUpdateStep("unzip", "error", "package missing after download");
                         }
                     }
                     catch (Exception ex)
@@ -1463,12 +1556,14 @@ PRIMARY KEY(id)
                         ex.ToExceptionless().FirstCarUserID().Submit();
                         Logfile.Log("Exception during unzip of downloaded update package: " + ex.ToString());
                         Logfile.ExceptionWriter(ex, "Exception during unzip of downloaded update package");
+                        ReportUpdateStep("unzip", "error", ex.Message);
                     }
                 }
 
                 if (zipExtractSuccessful == false)
                 {
                     Logfile.Log("update aborted: download or unzip of update package failed");
+                    ReportUpdateStep("abort", "error");
 
                     // the update wrote cmd_updated.txt at its start - remove it again, otherwise
                     // every further update attempt would end in "Update skipped!"
@@ -1599,7 +1694,8 @@ PRIMARY KEY(id)
                         {
                             Logfile.Log(" *** starting TLUpdate.exe now (detached, stdout -> /etc/teslalogger/nohup.out) ***");
                             process.Start();
-                            
+                            ReportUpdateStep("tlupdate_started", "ok");
+
                             Thread.Sleep(5*60*1000); // 5 minutes
                         }
                     }
