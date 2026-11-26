@@ -1389,13 +1389,13 @@ PRIMARY KEY(id)
                     }
                 }
 
-                string updatepackage = "/etc/teslalogger/tmp/update.zip";
+                // do NOT put the package into /etc/teslalogger/tmp: UpdateGrafana() runs in parallel
+                // at startup and wipes the whole tmp folder (rm -rf /etc/teslalogger/tmp/*), which
+                // deletes the zip while it is still being written (open file on Linux -> no error,
+                // but File.Exists() is false afterwards and the update silently aborts)
+                string updatepackage = "/etc/teslalogger/update.zip";
                 try
                 {
-                    if (!Directory.Exists("/etc/teslalogger/tmp"))
-                    {
-                        _ = Directory.CreateDirectory("/etc/teslalogger/tmp");
-                    }
                     if (File.Exists(updatepackage))
                     {
                         File.Delete(updatepackage);
@@ -1443,8 +1443,19 @@ PRIMARY KEY(id)
                                 Logfile.Log("update package: download and unzip successful");
                                 zipExtractSuccessful = true;
 
+                                // free the ~60 MB again, the package is extracted now
+                                try
+                                {
+                                    File.Delete(updatepackage);
+                                }
+                                catch (Exception) { }
+
                                 ExceptionlessClient.Default.CreateLog("Install", "Update Zip Extract Successful").FirstCarUserID().Submit();
                             }
+                        }
+                        else
+                        {
+                            Logfile.Log("update package missing after download: " + updatepackage);
                         }
                     }
                     catch (Exception ex)
@@ -1458,6 +1469,22 @@ PRIMARY KEY(id)
                 if (zipExtractSuccessful == false)
                 {
                     Logfile.Log("update aborted: download or unzip of update package failed");
+
+                    // the update wrote cmd_updated.txt at its start - remove it again, otherwise
+                    // every further update attempt would end in "Update skipped!"
+                    try
+                    {
+                        if (File.Exists(FileManager.GetCmdUpdatedTxt()))
+                        {
+                            File.Delete(FileManager.GetCmdUpdatedTxt());
+                            Logfile.Log("deleted " + FileManager.GetCmdUpdatedTxt());
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        ex.ToExceptionless().FirstCarUserID().Submit();
+                        Logfile.Log("Exception deleting cmd_updated.txt: " + ex.ToString());
+                    }
                     return;
                 }
 
