@@ -12,15 +12,19 @@ namespace TLUpdate
         {
         }
 
-        public static void CopyFilesRecursively(DirectoryInfo source, DirectoryInfo target, string excludeFile = null)
+        public static bool CopyFilesRecursively(DirectoryInfo source, DirectoryInfo target, string excludeFile = null)
         {
+            bool success = true;
             if (source != null && target != null)
             {
                 try
                 {
                     foreach (DirectoryInfo dir in source.GetDirectories())
                     {
-                        CopyFilesRecursively(dir, target.CreateSubdirectory(dir.Name));
+                        if (!CopyFilesRecursively(dir, target.CreateSubdirectory(dir.Name)))
+                        {
+                            success = false;
+                        }
                     }
 
                     foreach (FileInfo file in source.GetFiles())
@@ -33,31 +37,46 @@ namespace TLUpdate
                         {
                             string p = Path.Combine(target.FullName, file.Name);
                             Console.WriteLine(" *** Copy '" + file.FullName + "' to '" + p + "'");
-                            File.Copy(file.FullName, p, true);
+                            try
+                            {
+                                File.Copy(file.FullName, p, true);
+                            }
+                            catch (Exception ex)
+                            {
+                                // individual file failure (e.g. no space left on device) must not
+                                // abort the remaining files, but the update is not complete then
+                                Console.WriteLine(" *** CopyFilesRecursively Exception: " + ex.ToString());
+                                success = false;
+                            }
                         }
                     }
                 }
                 catch (Exception ex)
                 {
                     Console.WriteLine(" *** CopyFilesRecursively Exception: " + ex.ToString());
+                    success = false;
                 }
             }
             else
             {
                 Console.WriteLine($" *** CopyFilesRecursively: source or target is null - source:{source} target:{target}");
+                success = false;
             }
+            return success;
         }
 
-        public static void CopyFile(string srcFile, string directory)
+        public static bool CopyFile(string srcFile, string directory)
         {
             try
             {
                 Console.WriteLine(" *** Copy '" + srcFile + "' to '" + directory + "'");
                 File.Copy(srcFile, directory, true);
+                return true;
             }
             catch (Exception ex)
             {
                 Console.WriteLine(" *** CopyFile Exception: " + ex.ToString());
+                return false;
             }
         }
 

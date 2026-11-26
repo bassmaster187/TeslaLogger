@@ -34,6 +34,9 @@ jobs:
     - name: Create output directory
       run: mkdir -p TeslaLogger-master/TeslaLogger/bin/Debug/net8.0
 
+    - name: Remove stale build outputs (force full rebuild)
+      run: rm -rf TeslaLogger/bin/Debug TeslaLogger/obj TeslaLogger/bin/x64 TeslaLogger/bin/x86
+
     - name: Publish for Raspberry Pi (AnyCPU, framework dependent)
       run: dotnet publish TeslaLogger/TeslaLoggerNET8.csproj -c Debug -o ./TeslaLogger-master/TeslaLogger/bin/Debug/net8.0
 
@@ -69,7 +72,18 @@ jobs:
         cp MQTTClient/App.config TeslaLogger-master/MQTTClient/
         mkdir -p TeslaLogger-master/OVMSLogger/bin/Debug
         cp -r OVMSLogger/bin/Debug/net8.0 TeslaLogger-master/OVMSLogger/bin/Debug/
-        find TeslaLogger/bin -maxdepth 1 -type f -exec cp -n {} TeslaLogger-master/TeslaLogger/bin/ \;
+        # only the needed top-level bin files - never the stale checked-in binaries
+        # (old TeslaLoggerNET8.dll / TeslaLogger.exe from the mono era would end up in /etc/teslalogger)
+        cp TeslaLogger/bin/TLUpdate.exe TeslaLogger-master/TeslaLogger/bin/
+        cp TeslaLogger/bin/geofence.csv TeslaLogger-master/TeslaLogger/bin/
+        cp TeslaLogger/bin/language-*.txt TeslaLogger-master/TeslaLogger/bin/
+        cp TeslaLogger/bin/backup.sh TeslaLogger-master/TeslaLogger/bin/
+        cp TeslaLogger/bin/changelog.md TeslaLogger-master/TeslaLogger/bin/
+        cp TeslaLogger/bin/cleanall.sh TeslaLogger-master/TeslaLogger/bin/
+        cp TeslaLogger/bin/multicarfeature.sh TeslaLogger-master/TeslaLogger/bin/
+        cp TeslaLogger/bin/osupdate.sh TeslaLogger-master/TeslaLogger/bin/
+        cp TeslaLogger/bin/startnet8.sh TeslaLogger-master/TeslaLogger/bin/
+        cp TeslaLogger/bin/upgrade2buster.sh TeslaLogger-master/TeslaLogger/bin/
 
     - name: Create ZIP
       run: |
