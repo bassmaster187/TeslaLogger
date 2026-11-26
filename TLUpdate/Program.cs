@@ -12,7 +12,16 @@ namespace TLUpdate
             try
             {
                 bool copySuccessful = Tools.CopyFilesRecursively(new DirectoryInfo("/etc/teslalogger/git/TeslaLogger/bin"), new DirectoryInfo("/etc/teslalogger"), "TeslaLogger.exe");
-                copySuccessful &= Tools.CopyFile("/etc/teslalogger/git/TeslaLogger/bin/TeslaLogger.exe", "/etc/teslalogger/TeslaLogger.exe");
+
+                // legacy mono binary - not contained in the NET8 update packages anymore, only copy if present
+                if (File.Exists("/etc/teslalogger/git/TeslaLogger/bin/TeslaLogger.exe"))
+                {
+                    copySuccessful &= Tools.CopyFile("/etc/teslalogger/git/TeslaLogger/bin/TeslaLogger.exe", "/etc/teslalogger/TeslaLogger.exe");
+                }
+                else
+                {
+                    Console.WriteLine(" *** TeslaLogger.exe not in update package (NET8 package), skipping");
+                }
 
                 if (!copySuccessful)
                 {
