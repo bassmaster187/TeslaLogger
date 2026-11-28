@@ -42,6 +42,7 @@ Falling asleep=Einschlafen
 Info=Information
 Last Trip=Letzte Fahrt
 Last Update=Letztes Update
+Last Vehicle Data=Letzte Fahrzeugdaten
 Max Charge=Max. Ladung
 Max Discharge=Max. Entladung
 Max km/h="Max km/h"

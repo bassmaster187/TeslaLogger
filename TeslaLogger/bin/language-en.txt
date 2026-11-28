@@ -177,6 +177,7 @@ Max km/h="Max speed"
 PS=PS
 Current Pos=Current Pos
 Last Update=Last Update
+Last Vehicle Data=Last Vehicle Data
 Charging=Charging
 Done=Done
 Done at=Done at

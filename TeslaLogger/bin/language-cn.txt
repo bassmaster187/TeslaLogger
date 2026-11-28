@@ -150,6 +150,7 @@ Max km/h="最大速度（公里每小时）"
 PS=PS
 Current Pos=当前位置
 Last Update=上一次更新
+Last Vehicle Data=最后车辆数据
 Charging=充电
 Done=完成
 Done at=完成时间

@@ -167,6 +167,7 @@ Max km/h=
 PS=
 Current Pos=
 Last Update=
+Last Vehicle Data=Senaste fordondata
 Charging=
 Done=Klart
 Done at=

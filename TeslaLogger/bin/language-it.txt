@@ -152,6 +152,7 @@ Max km/h="Max Km/h"
 PS=HP
 Current Pos=Posizione attuale
 Last Update=Ultimo aggiornamento
+Last Vehicle Data=Ultimi dati del veicolo
 Charging=Caricamento in corso
 Done=Fatto
 Done at=Fatto alle

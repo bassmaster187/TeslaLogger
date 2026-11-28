@@ -166,6 +166,7 @@ Max km/h="அதிகபட்ச கே.பி.எச்"
 PS="சோசலிச்ட் கட்சி"
 Current Pos="மின்னோட்ட்ம், ஓட்டம் Pos"
 Last Update="Last புதுப்பிப்பு"
+Last Vehicle Data=கடைசி வாகன தரவு
 Charging="சார்சிங்"
 Done="முடிந்தது"
 Done at="முடிந்தது at"

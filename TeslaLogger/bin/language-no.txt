@@ -158,6 +158,7 @@ Max Charge="Maks. lading"
 Max Discharge="Maks. utlading"
 Cell Imbalance="Celleujevnhet"
 Last Update="Siste oppgradering"
+Last Vehicle Data=Siste kjøretøydata
 Software Update="Programvareoppgradering"
 min=min
 Consumption=Forbruk

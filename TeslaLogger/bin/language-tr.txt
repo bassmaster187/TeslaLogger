@@ -166,6 +166,7 @@ Max km/h="Maks. Km/h"
 PS="Beygir Gücü"
 Current Pos="Konum"
 Last Update="Son güncelleme"
+Last Vehicle Data=Son araç verileri
 Charging="Şarj Ediliyor"
 Done="Bitti"
 Done at="Bitiş Vakti"

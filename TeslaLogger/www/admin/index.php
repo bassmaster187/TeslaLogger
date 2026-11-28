@@ -705,7 +705,7 @@ else
 			<div class="tl-row"><dt><?php t("Odometer"); ?></dt><dd><span id="odometer">---</span></dd></div>
 			<div class="tl-row"><dt><?php t("Car Version"); ?></dt><dd><a href='' id="car_version_link" target="_blank" title="Release Notes"><span id="car_version"></span></a></dd></div>
 			<div class="tl-row" id="SoftwareUpdateRow" style="display: none;"><dt><?php t("Software Update"); ?></dt><dd><span id="software_update"></span></dd></div>
-			<div class="tl-row"><dt><?php t("Last Update"); ?></dt><dd><span id="last_update">---</span> <span id="last_update_age" class="tl-muted"></span></dd></div>
+			<div class="tl-row"><dt><?php t("Last Vehicle Data"); ?></dt><dd><span id="last_update">---</span> <span id="last_update_age" class="tl-muted"></span></dd></div>
 			<div class="tl-row"><dt>Teslalogger</dt><dd><?php checkForUpdates();?></dd></div>
 			<div class="tl-row" id='CellTempRow' style="display: none;"><dt><?php t("Cell Temp"); ?></dt><dd><span id="CellTemp"></span></dd></div>
 			<div class="tl-row" id='BMSMaxChargeRow' style="display: none;"><dt><?php t("Max Charge"); ?></dt><dd><span id="BMSMaxCharge"></span></dd></div>

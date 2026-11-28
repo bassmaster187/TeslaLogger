@@ -19,6 +19,11 @@
 - **DB init slowness**: MariaDB may take 10-30 min on slow hardware. Wait for `running /docker-entrypoint-initdb.d/sqlschema.sql` in logs before the app connects.
 - **Docker rebuilds**: Release CI builds 3 images (`Dockerfile`, `Dockerfile-Webserver`, `Dockerfile-Grafana`) for `linux/amd64,linux/arm64`.
 
+## Update Tracking (teslalogger.de)
+
+- Update steps are reported by the client to `https://teslalogger.de/update_log.php` and land in the `teslalogger_update_log` table on teslalogger.de (schema + analysis queries: `C:\dev\TeslaloggerHomepage\teslalogger_update_log.sql`).
+- Read-only DB access for analysis (LAN tunnel `192.168.1.20:3307`): credentials are in the **global** `~/.config/opencode/AGENTS.md` — never commit them here, this repo is public on GitHub.
+
 ## Tests
 
 - **Project**: `UnitTestsTeslalogger\UnitTestsTeslaloggerNET8.csproj` (MSTest + NUnit + Playwright).

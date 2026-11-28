@@ -150,6 +150,7 @@ Max km/h="Max km/t"
 PS=HK
 Current Pos=Aktuel position
 Last Update=Senest opdateret
+Last Vehicle Data=Seneste køretøjsdata
 Charging=Lader
 Done=Færdig
 Done at=Færdig kl.

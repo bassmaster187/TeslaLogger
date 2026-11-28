@@ -150,6 +150,7 @@ Max km/h="Max km/h"
 PS=PK
 Current Pos=Huidige positie
 Last Update=Laatste update
+Last Vehicle Data=Laatste voertuiggegevens
 Charging=Bezig met laden
 Done=Gedaan
 Done at=Klaar om

@@ -166,6 +166,7 @@ Max Charge=Carga máxima
 Max Discharge=Descarga máxima
 Cell Imbalance=Desequilíbrio celular
 Last Update=Última Actualização
+Last Vehicle Data=Últimos dados do veículo
 Software Update=Actualização de software
 min=min
 Consumption=Consumo

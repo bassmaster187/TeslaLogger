@@ -89,7 +89,7 @@ Die Details daneben sind dieselben wie bisher: Ladeleistung und Restzeit beim La
 
 ### Alter der Daten und Verbindungsfehler
 
-- Hinter „Letztes Update" steht das Alter der Daten, zum Beispiel „(vor 33 Minuten)". Die Formulierung kommt vom Browser und richtet sich nach der Browsersprache, nicht nach der Teslalogger-Spracheinstellung.
+- Hinter „Letzte Fahrzeugdaten" steht das Alter der Daten, zum Beispiel „(vor 33 Minuten)". Die Formulierung kommt vom Browser und richtet sich nach der Browsersprache, nicht nach der Teslalogger-Spracheinstellung.
 - Schlagen die Abfragen von `current_json.php` mindestens 3 Sekunden lang fehl, erscheint oben der Hinweis „Keine Verbindung zum Teslalogger", und alle Karten werden abgeblendet. Die erste erfolgreiche Antwort blendet den Hinweis wieder aus.
 
 ## Technische Details

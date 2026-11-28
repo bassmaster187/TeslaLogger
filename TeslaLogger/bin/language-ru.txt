@@ -189,6 +189,7 @@ km/h=км/ч
 PS=PS
 Current Pos=Текущая позиция
 Last Update=Последнее обновление
+Last Vehicle Data=Последние данные автомобиля
 Charging=Заряжается
 Done=Готово
 Done at=Готово в
